@@ -1,11 +1,11 @@
-import { getAllPosts as getAllPostgresPosts } from 'utils/api-postgresql'; // Import the PostgreSQL posts fetching function
+import { getAllPosts } from 'utils/api-postgresql'; // Import the PostgreSQL posts fetching function
 
 export async function GET() {
   const headers = new Headers();
   headers.set('Content-Type', 'application/xml');
 
   // Fetch all PostgreSQL posts
-  const postgresPosts = await getAllPostgresPosts();
+  const postgresPosts = await getAllPosts();
 
   const getDateString = (date) => {
     try {

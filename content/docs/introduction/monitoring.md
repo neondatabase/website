@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2025-02-05T21:06:28.071Z'
+updatedOn: '2025-07-24T20:03:24.602Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -26,6 +26,10 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 <a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party client tools" icon="wrench">External tools</a>
 
 <a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Export metrics to Datadog</a>
+
+<a href="/docs/guides/grafana-cloud" description="Export Neon metrics and logs to Grafana Cloud with native OTLP integration" icon="trend-up">Export metrics to Grafana Cloud</a>
+
+<a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">Export metrics to OpenTelemetry</a>
 
 </DetailIconCards>
 

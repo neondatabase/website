@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-30T16:54:40.451Z'
+updatedOn: '2025-08-02T10:33:29.226Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -20,7 +20,7 @@ You can check the current status of a compute on the **Branches** page in the Ne
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
-User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+User actions that activate an idle compute include connecting from a client or application, running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="info">
 The Neon API includes [Start endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) and [Suspend endpoint](https://api-docs.neon.tech/reference/startprojectendpoint) APIs for the specific purpose of activating and suspending a compute.
@@ -40,11 +40,28 @@ Given the potential impact on application responsiveness, it's important to have
 
 ### Adjust your scale to zero configuration
 
-Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. Limiting or disabling scale to zero can eliminate or reduce startup times, but it also increases compute usage. For configuration instructions, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+Users on paid plans can configure the length of time that the system remains in an inactive state before Neon scales your compute down to zero. This lets you set the balance between performance (never scaling down) and cost (scaling to zero at reasonable intervals). The scale to zero setting is set to 5 minutes by default. You can set a custom period of up to a maximum of 7 days, or disable scale to zero entirely. To disable scale to zero, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
 
 <Admonition type="important">
 If you disable scale to zero entirely or your compute is never idle long enough to be automatically suspended, you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/endpoints#restart-a-compute). 
 </Admonition>
+
+To configure a custom scale to zero setting, modify `suspend_timeout_seconds` using the [Update compute endpoint API](https://api-docs.neon.tech/reference/updateprojectendpoint) API, as shown below. To use this API, you need to specify your project ID and compute endpoint ID. You can find your project ID in your project's settings. You can find the compute endpoint ID on your branch page.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id} \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "suspend_timeout_seconds": 300
+  }
+}
+'
+```
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
@@ -187,7 +204,7 @@ Here's a comparison of connection times with and without the `sslnegotiation=dir
 **Without sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 16.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -201,7 +218,7 @@ sys     0m0.000s
 **With sslnegotiation=direct:**
 
 ```bash
-$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&sslnegotiation=direct" -c "SELECT version();"
+$ time psql "postgresql://neondb_owner@your-neon-endpoint/neondb?sslmode=require&channel_binding=require&sslnegotiation=direct" -c "SELECT version();"
                                                 version
 ---------------------------------------------------------------------------------------------------------
 PostgreSQL 17.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
@@ -225,7 +242,7 @@ With the right strategies, you can optimize your system to handle connection lat
 ## Related resources
 
 - [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
-- [Neon latency benchmarks dashboard](https://latency-benchmarks-dashboard.vercel.app) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
+- [Neon latency benchmarks dashboard](/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency
 - [Ship faster with Postgres](https://neon.tech/faster) - Explore examples and case studies demonstrating rapid development workflows

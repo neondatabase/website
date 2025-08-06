@@ -4,7 +4,7 @@ subtitle: Create a database branch for every preview deployment with Neon's nati
   Vercel integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-30T16:54:40.480Z'
+updatedOn: '2025-06-23T15:24:08.784Z'
 ---
 
 <InfoBlock>
@@ -60,12 +60,10 @@ To connect your Vercel project to your Neon database:
    ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
 
 4. On the **Connect Project** dialog:
-
    1. Select the Vercel project you want to connect to.
    1. Under **Environments**, choose the Vercel environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
 
    1. Under **Deployments**:
-
       - Enable the **Resource is required to be in an active state before deployment can start** option. This setting ensures that a database branch can be created.
       - Under **Choose actions to enable for this integration**, select the **Preview** option. This setting creates a database branch for **preview deployments** only. Leave the **Production** option unchecked — you don't need to create database branches for your Production environment.
 
@@ -104,7 +102,6 @@ After enabling database branches for preview deployments, a database branch is c
    ```
 
    Pushing the commit triggers the following actions:
-
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration, which you can view on the **Deployments** tab on the Vercel Dashboard.
    - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.

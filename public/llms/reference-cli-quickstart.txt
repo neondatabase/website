@@ -1,0 +1,214 @@
+# Neon CLI Quickstart
+
+> The Neon CLI Quickstart document guides users through the installation and basic usage of the Neon Command Line Interface, enabling efficient management and interaction with Neon databases.
+
+## Source
+
+- [Neon CLI Quickstart HTML](https://neon.com/docs/reference/cli-quickstart): The original HTML version of this documentation
+
+The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
+
+## Install the CLI
+
+Choose your platform and install the Neon CLI:
+
+Tab: macOS
+
+**Install with Homebrew**
+
+```bash
+brew install neonctl
+```
+
+**Install via npm**
+
+```shell
+npm i -g neonctl
+```
+
+**Install with bun**
+
+```bash
+bun install -g neonctl
+```
+
+Tab: Windows
+
+**Install via npm**
+
+```shell
+npm i -g neonctl
+```
+
+**Install with bun**
+
+```bash
+bun install -g neonctl
+```
+
+Tab: Linux
+
+**Install via npm**
+
+```shell
+npm i -g neonctl
+```
+
+**Install with bun**
+
+```bash
+bun install -g neonctl
+```
+
+Verify the installation by checking the CLI version:
+
+```bash
+neon --version
+```
+
+For the latest version, refer to the [Neon CLI GitHub repository](https://github.com/neondatabase/neonctl)
+
+## Authenticate
+
+Authenticate with your Neon account using one of these methods:
+
+**Web Authentication (recommended)**
+
+Run the command below to authenticate through your browser:
+
+```bash
+neon auth
+```
+
+This will open a browser window where you can authorize the CLI to access your Neon account.
+
+**API Key Authentication**
+
+Alternatively, you can use a personal Neon API key. You can create one in the Neon Console. See [Create a personal API key](https://neon.com/docs/manage/api-keys#create-a-personal-api-key).
+
+```bash
+neon projects list --api-key <your-api-key>
+```
+
+To avoid entering your API key with each command, you can set it as an environment variable:
+
+```bash
+export NEON_API_KEY=<your-api-key>
+```
+
+For more about authenticating, see [Neon CLI commands — auth](https://neon.com/docs/reference/cli-auth).
+
+## Set up your context file
+
+Context files allow you to use CLI commands without specifying your project ID or organization ID with each command.
+
+To set the context for your Neon project:
+
+```bash
+neon set-context --project-id <your-project-id>
+```
+
+To set the context for your both your Neon organization and a Neon project:
+
+```bash
+neon set-context --org-id <your-org-id> --project-id <your-project-id>
+```
+
+   **Info**: You can find your organization ID in the Neon Console by selecting your organization and navigating to **Settings**. You can find your Neon project ID by opening your project in the Neon Console and navigating to **Settings** > **General**.
+
+The `set-context` command creates a `.neon` file in your current directory with your project context.
+
+```bash
+$ cat .neon
+
+{
+  "projectId": "broad-surf-52155946",
+  "orgId": "org-solid-base-83603457"
+}%
+```
+
+You can also create named context files for different organization and project contexts:
+
+```bash
+neon set-context --org-id <your-org-id> --project-id <your-project-id> --context-file dev_project
+```
+
+To switch contexts, add the `--context-file` option to any command, specifying your context file:
+
+```bash
+neon branches list --context-file Documents/dev_project
+```
+
+For more about the `set-context` command, see [Neon CLI commands — set-context](https://neon.com/docs/reference/cli-set-context).
+
+## Enable shell completion
+
+Next, you can set up autocompletion to make using the CLI faster:
+
+Tab: Bash
+
+```bash
+neon completion >> ~/.bashrc
+source ~/.bashrc
+```
+
+Tab: Zsh
+
+```bash
+neon completion >> ~/.zshrc
+source ~/.zshrc
+```
+
+Now you can press **Tab** to complete Neon CLI commands and options. For further details, see [Neon CLI commands — completion](https://neon.com/docs/reference/cli-completion).
+
+## Common operations
+
+Here are some common operations you can perform with the Neon CLI:
+
+### List your projects
+
+```bash
+neon projects list
+```
+
+If you want to list projects in your organization, don't forget to set your organization context or specify `--org-id <your-org-id>`. Otherwise, you'll list the projects in your personal Neon account.
+
+For more about the `projects` command, see [Neon CLI commands — projects](https://neon.com/docs/reference/cli-projects).
+
+### Create a branch
+
+```bash
+neon branches create --name <branch-name>
+```
+
+Set your project context or specify `--project-id <your-project-id>` if you have more than one Neon project.
+
+For more about the `branches` command, see [Neon CLI commands — branches](https://neon.com/docs/reference/cli-branches).
+
+### Get a connection string
+
+This will give you the connection string for the default branch in your project:
+
+```bash
+neon connection-string
+```
+
+For a specific branch, specify the branch name:
+
+```bash
+neon connection-string <branch-name>
+```
+
+There's lots more you can do with the `connection-string` command. See [Neon CLI commands — connection-string](https://neon.com/docs/reference/cli-connection-string).
+
+## Next steps
+
+Now that you're set up with the Neon CLI, you can:
+
+- Create more Neon projects with `neon projects create`
+- Manage your branches with various `neon branches` commands such as `reset`, `restore`, `rename`, `schema-diff`, and more
+- Create and manage databases with `neon databases` commands
+- Create and manage roles with `neon roles` commands
+- View the full set of Neon CLI commands available to you with `neon --help`
+
+For more details on all available commands, see the [CLI Reference](https://neon.com/docs/reference/neon-cli).

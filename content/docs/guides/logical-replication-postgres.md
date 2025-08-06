@@ -3,7 +3,7 @@ title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.540Z'
+updatedOn: '2025-08-02T10:33:29.282Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from Neon to external subscribers. This guide shows you how to stream data from a Neon Postgres database to an external Postgres database (a Postgres destination other than Neon). If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
@@ -151,12 +151,12 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on the destination database.
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using the using a `CREATE SUBSCRIPTION` statement.
 
    ```sql
    CREATE SUBSCRIPTION my_subscription
-   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb'
+   CONNECTION 'postgresql://neondb_owner:<password>@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
    PUBLICATION my_publication;
    ```
 

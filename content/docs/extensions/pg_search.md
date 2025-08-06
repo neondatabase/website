@@ -1,9 +1,8 @@
 ---
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
-tag: new
 enableTableOfContents: true
-updatedOn: '2025-06-02T11:29:18.476Z'
+updatedOn: '2025-08-02T10:33:29.239Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -26,7 +25,7 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <TabItem>
 
-Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
@@ -82,7 +81,7 @@ With these basics in mind, let's learn how to create a BM25 index and start perf
 
 To demonstrate how `pg_search` functions, we'll begin by creating a sample table named `mock_items` and populating it with example data. ParadeDB provides a convenient tool to generate a test table with sample data for experimentation.
 
-First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
+First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
 
 ```sql
 CALL paradedb.create_bm25_test_table(
@@ -433,7 +432,6 @@ Most users will not need to adjust these advanced throughput settings.
 Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
 
 - **`paradedb.statement_parallelism`**: Controls indexing threads during `INSERT/UPDATE/COPY`. Default is `0` (auto-detects parallelism).
-
   - Use `1` for single-row atomic inserts/updates to avoid unnecessary threading.
   - Use a higher value for bulk inserts and updates.
 
@@ -442,7 +440,6 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
     ```
 
 - **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
-
   - If set to `0`, `maintenance_work_mem / paradedb.statement_parallelism` is used.
   - For single-row updates, 15 MB prevents excess memory allocation.
   - For bulk inserts/updates, increase as needed.

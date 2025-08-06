@@ -3,7 +3,7 @@ title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-02T15:04:05.567Z'
+updatedOn: '2025-07-03T12:36:49.560Z'
 ---
 
 _This guide was contributed by the Exograph team_
@@ -32,7 +32,7 @@ Next, let's set up the Neon database.
 
 ## Create the schema in Neon
 
-1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname`.
+1. Navigate to the Neon Console, select your project, and copy the connection string, which will look something like this: `postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require`.
 2. Create schema in Neon using Exograph CLI:
 
 ```bash

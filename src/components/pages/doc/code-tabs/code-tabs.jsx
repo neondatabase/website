@@ -2,33 +2,26 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 
-import { ActiveLabelContext } from './CodeTabsContext';
+import { CodeTabsContext } from 'contexts/code-tabs-context';
 
-const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
-  const { activeLabel, setActiveLabel } = useContext(ActiveLabelContext);
+const CodeTabs = ({ labels = [], reverse = false, children }) => {
+  const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const tmp = labels.indexOf(activeLabel);
+    const tmp = labels.indexOf(activeTab);
     if (tmp !== -1) setCurrentIndex(tmp);
-  }, [activeLabel, labels]);
+  }, [activeTab, labels]);
 
-  const displayedLabels = useMemo(
-    () => (reverse ? [...labels].reverse() : labels),
-    [labels, reverse]
-  );
-
-  const displayedChildren = useMemo(
-    () => (reverse ? [...children].reverse() : children),
-    [children, reverse]
-  );
+  const displayedLabels = reverse ? [...labels].reverse() : labels;
+  const displayedChildren = reverse ? [...children].reverse() : children;
 
   const handleTabClick = (index) => {
     const label = labels[index];
     setCurrentIndex(index);
-    setActiveLabel(label);
+    setActiveTab(label);
   };
 
   return (
@@ -61,12 +54,9 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
 };
 
 CodeTabs.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
   labels: PropTypes.arrayOf(PropTypes.string),
   reverse: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
 
 export default CodeTabs;

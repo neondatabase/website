@@ -4,16 +4,6 @@ import LINKS from 'constants/links';
 // 'Neon Docs' - show modal on the introduction page
 const MODALS = [
   {
-    id: 'migrate',
-    pagesToShow: ['Migrate to Neon'],
-    title: 'Migrating to Neon?',
-    description: 'Our team can help minimize downtime.',
-    link: {
-      title: 'Get migration assistance',
-      url: LINKS.migrationAssistance,
-    },
-  },
-  {
     id: 'support',
     pagesToShow: ['Support'],
     title: 'Need help now?',

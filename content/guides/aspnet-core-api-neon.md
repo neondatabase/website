@@ -364,13 +364,11 @@ Download and launch [Postman](https://www.postman.com/downloads/). Create a new 
 Open Postman and create the following requests:
 
 1. `GET`: `/api/products`
-
    - **Description**: Fetches all products.
    - Set to `GET`, enter `https://localhost:5001/api/products`, and click **Send**.
    - You should receive a `200 OK` response with a list of products.
 
 2. `POST`: `/api/products`
-
    - **Description**: Creates a new product.
    - Set to `POST`, enter `https://localhost:5001/api/products`, and go to **Body** → **raw** → **JSON**.
    - Add:
@@ -384,7 +382,6 @@ Open Postman and create the following requests:
    - Click **Send**. Expect a `201 Created` response.
 
 3. `PUT`: `/api/products/{id}`
-
    - **Description**: Updates a product.
    - Set to `PUT`, enter `https://localhost:5001/api/products/1`.
    - Add:

@@ -2,13 +2,16 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-05-30T16:54:40.494Z'
+updatedOn: '2025-08-02T09:01:05.735Z'
 ---
+
+<CopyPrompt src="/prompts/serverless-driver-prompt.md" 
+description= "Pre-built prompt for Neon Serverless + Drizzle (JS/TS)"/>
 
 The [Neon serverless driver](https://github.com/neondatabase/serverless) is a low-latency Postgres driver for JavaScript and TypeScript that allows you to query data from serverless and edge environments over **HTTP** or **WebSockets** in place of TCP. The driver's low-latency capability is due to [message pipelining and other optimizations](/blog/quicker-serverless-postgres).
 
 <Admonition type="important" title="The Neon serverless driver is now generally available (GA)">
-The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](/blogr-ga).
+The GA version of the Neon serverless driver, v1.0.0 and higher, requires Node.js version 19 or higher. It also includes a **breaking change** but only if you're calling the HTTP query template function as a conventional function. For details, please see the [1.0.0 release notes](https://github.com/neondatabase/serverless/pull/149) or read the [blog post](/blog/serverless-driver-ga).
 </Admonition>
 
 When to query over HTTP vs WebSockets:
@@ -428,7 +431,7 @@ Explore the example applications that use the Neon serverless driver.
 
 Neon provides an example application to help you get started with the Neon serverless driver. The application generates a `JSON` listing of the 10 nearest UNESCO World Heritage sites using IP geolocation (data copyright © 1992 – 2022 UNESCO/World Heritage Centre).
 
-![UNESCO World Heritage sites app](/docs/relnotes/unesco_sites.png)
+![UNESCO World Heritage sites app](/docs/changelog/unesco_sites.png)
 
 There are different implementations of the application to choose from.
 
@@ -444,7 +447,7 @@ There are different implementations of the application to choose from.
 
 ### Ping Thing
 
-The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](/blogres-at-the-edge)
+The Ping Thing application pings a Neon Serverless Postgres database using a Vercel Edge Function and shows the journey your request makes. You can read more about this application in the accompanying blog post: [How to use Postgres at the Edge](/blog/how-to-use-postgres-at-the-edge)
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/ping-thing" description="Ping a Neon Serverless Postgres database using a Vercel Edge Function to see the journey your request makes" icon="github">Ping Thing</a>

@@ -20,5 +20,3 @@ const CostFleetsPage = async () => (
 );
 
 export default CostFleetsPage;
-
-export const revalidate = 60;

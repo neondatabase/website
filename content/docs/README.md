@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-05-30T16:54:40.442Z'
+updatedOn: '2025-07-29T15:29:29.872Z'
 ---
 
 # Docs
@@ -85,7 +85,6 @@ In order to add a new page to the root level, add `slug` in the same level with 
        slug: page-2
 + - title: Root page 1
 +   slug: root-page-1
-+   tag: new
 +   items:
 +     - title: Page 1
 +       slug: page-1
@@ -159,7 +158,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
-
   - Single line highlight
 
     ````md
@@ -674,6 +672,40 @@ You can pass props to the shared component:
   {text}
 </Admonition>
 ```
+
+## CopyPrompt
+
+A reusable MDX component that shows a "copy prompt" box and lets users copy curated llm prompts from a file with one click.
+
+**Usage:**
+
+```mdx
+<CopyPrompt
+  src="/prompts/serverless-driver-prompt.md"
+  displayText="Use this pre-built prompt to get started faster."
+  buttonText="Copy prompt"
+/>
+```
+
+`src` prop is mandatory. `displayText` and `buttonText` are optional, if you want to override the defaults.
+
+| Prop          | Type   | Default                                            | Description                                         |
+| ------------- | ------ | -------------------------------------------------- | --------------------------------------------------- |
+| `src`         | string | (required)                                         | Path to the markdown file or prompt content to copy |
+| `displayText` | string | "Use this pre-built prompt to get started faster." | CTA text shown on the left                          |
+| `buttonText`  | string | "Copy prompt"                                      | Button label                                        |
+
+### Where to place prompt files
+
+Prompt markdown files should be placed in the `public/prompts/` directory of your project. This allows them to be fetched at runtime by the `CopyPrompt` component using a path like `/prompts/your-prompt-file.md`.
+
+**Example:**
+
+- Place your prompt file at: `public/prompts/serverless-driver-guardrail-prompt.md`
+- Reference it in your MDX:
+  ```mdx
+  <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
+  ```
 
 ## Contributing
 

@@ -32,7 +32,7 @@ First, let's create a Neon project to store our feature flag configurations.
 After your project is created, you'll receive a connection string that looks like this:
 
 ```
-postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require
+postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 Save this connection string, you'll need it to connect your Go application to the Neon database.
@@ -162,7 +162,7 @@ This structure follows an essential Go project layout:
 Now, let's create a configuration file to store our database connection details. Create a new file named `.env` in the project root:
 
 ```
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require&channel_binding=require
 SERVER_PORT=8080
 ```
 

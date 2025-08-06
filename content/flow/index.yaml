@@ -1,0 +1,45 @@
+- section: The problem
+  id: the-problem
+  items:
+    - title: Traditional database workflows are broken
+      slug: introduction
+    - title: Rethinking the database
+      slug: rethinking-the-database
+- section: Core concepts
+  id: core-concepts
+  items:
+    - title: Projects
+      slug: projects
+    - title: Branches
+      slug: branches
+    - title: Hierarchies
+      slug: hierarchies
+- section: Architectures
+  id: architectures
+  items:
+    - title: Identifying your use case
+      slug: identifying-use-case
+    - title: Production lives on Neon
+      slug: production-on-neon
+    - title: You're using Neon for dev/test
+      slug: neon-for-dev-test
+- section: Workflows
+  id: workflows
+  items:
+    - title: One branch per developer
+      slug: branch-per-developer
+    - title: One branch per preview
+      slug: branch-per-preview
+    - title: One branch per test run
+      slug: branch-per-test-run
+    - title: Ephemeral environments
+      slug: ephemeral-environments
+    - title: Branching for agents
+      slug: branching-for-agents
+- section: Additional resources
+  id: additional-resources
+  items:
+    - title: Tooling and automation
+      slug: tooling-and-automation
+    - title: Resources and next steps
+      slug: resources-and-next-steps

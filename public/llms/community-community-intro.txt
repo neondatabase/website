@@ -1,12 +1,12 @@
 # Neon community
 
-> This guide explains how to get involved in the Neon community, covering contribution opportunities, discussion platforms, and the Neon Creator program for developers.
+> The "Neon community" document outlines the structure and resources available for Neon users to engage with the community, including forums, social media channels, and contribution guidelines.
 
 ## Source
 
 - [Neon community HTML](https://neon.com/docs/community/community-intro): The original HTML version of this documentation
 
-Neon is [open source](https://neon.com/docs/get-started-with-neon/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
+Neon is [open source](https://neon.com/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:
 
 ## Contribute
 

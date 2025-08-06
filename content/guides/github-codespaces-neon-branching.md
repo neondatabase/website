@@ -278,14 +278,12 @@ With everything set up, you can now create a new branch in your project, open a 
 With everything set up, here's how you would use this in your development process:
 
 1. Create a new branch in your project and make your changes:
-
    - Create and switch to a new branch: `git checkout -b feature-branch-name`
    - Make your changes to the code
    - Commit your changes: `git add .` and `git commit -m "Description of changes"`
    - Push your branch to GitHub: `git push -u origin feature-branch-name`
 
 2. Open a pull request with your changes:
-
    - Go to your repository on GitHub
    - Click on "Pull requests" then "New pull request"
    - Select your feature branch as the compare branch
@@ -293,27 +291,23 @@ With everything set up, here's how you would use this in your development proces
    - Fill in the title and description, then click "Create pull request"
 
 3. GitHub Actions will automatically create a new Neon database branch for your pull request:
-
    - This happens automatically when the pull request is opened
    - You can check the "Actions" tab in your GitHub repository to see the progress
    - Once complete, you'll see a new branch in your Neon console named `pr-[number]`
 
 4. Open a Codespace for this pull request:
-
    - On the pull request page, click the "Code" dropdown
    - Select "Open with Codespaces"
    - Click "New codespace"
    - Wait for the Codespace to build and start
 
 5. Test your changes in the isolated environment:
-
    - The Codespace is now connected to your PR-specific database branch
    - Run your application: `php artisan serve`
    - Run tests: `php artisan test`
    - Make additional changes if needed, commit, and push
 
 6. Review and merge the pull request:
-
    - Once you're satisfied with the changes, request a review if required
    - Reviewers can open their own Codespaces to test the changes
    - When ready, merge the pull request on GitHub

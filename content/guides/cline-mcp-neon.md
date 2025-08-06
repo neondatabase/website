@@ -11,6 +11,14 @@ Imagine adjusting your database schema simply by describing the change in plain 
 
 This guide demonstrates how to use [Cline](https://docs.cline.bot/mcp-servers/mcp) and Neon's MCP server to perform database migrations in your Neon project.
 
+<Admonition type="important" title="Neon MCP Server Security Considerations">
+The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+
+The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
+
+For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
+
 ## Key components
 
 Let's break down the key components in this setup:
@@ -49,6 +57,10 @@ This method uses Neon's managed server and OAuth authentication.
 
 ### Installation and configuration
 
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+</Admonition>
+
 1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
 2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
    ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
@@ -61,7 +73,7 @@ This method uses Neon's managed server and OAuth authentication.
      "mcpServers": {
        "Neon": {
          "command": "npx",
-         "args": ["-y", "mcp-remote", "https://mcp.neon.tech/sse"]
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
        }
      }
    }

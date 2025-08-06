@@ -1,0 +1,38 @@
+# Plans and billing
+
+> The "Plans and billing" document outlines Neon's pricing structure, detailing available subscription plans, billing cycles, and payment methods to assist users in managing their account expenses effectively.
+
+## Source
+
+- [Plans and billing HTML](https://neon.com/docs/introduction/about-billing): The original HTML version of this documentation
+
+Find all the information you need about Neon's plans and how to manage your monthly bill.
+
+## Neon plans and pricing
+
+Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill. Plus a sample project showing how to select the right pricing plan in a model scenario.
+
+- [Plans](https://neon.com/docs/introduction/plans): Learn about Neon's pricing plans and what's included
+- [Pricing estimation guide](https://neon.com/docs/introduction/pricing-estimation-guide): Estimate your monthly bill with Neon
+- [Sample project billing](https://neon.com/docs/introduction/billing-sample): See how to select the right pricing plan for a sample project
+
+## Neon for Enterprise
+
+- [Neon for the Enterprise](https://neon.com/enterprise): Find out how Enterprises are maximizing engineering efficiency with Neon
+- [Neon Enterprise Sales Process](https://neon.com/docs/introduction/enterprise-sales-process): Learn about Neon's Enterprise sales process and what to expect
+
+## Understand how billing works
+
+Find out how billing works and learn more about Neon's usage metrics.
+
+- [Extra usage](https://neon.com/docs/introduction/extra-usage): Learn about plan allowances and how extra usage works
+- [Usage metrics](https://neon.com/docs/introduction/usage-metrics): Take a deep dive into the usage metrics behind plan allowances and extra usage
+
+## Manage billing
+
+Find information about invoices, payment methods, changing your plan, monitoring billing and usage, and how you can pay for Neon with your AWS account.
+
+- [Manage billing](https://neon.com/docs/introduction/manage-billing): View and manage your monthly bill and learn how to change your plan
+- [Monitor billing and usage](https://neon.com/docs/introduction/monitor-usage): Learn how to monitor billing and usage metrics in Neon
+- [AWS Marketplace](https://neon.com/docs/introduction/billing-aws-marketplace): Find out how you can pay for Neon with your AWS Billing account
+- [Azure Marketplace](https://neon.com/docs/introduction/billing-azure-marketplace): Neon as an Azure Native Service with billing through Azure Marketplace

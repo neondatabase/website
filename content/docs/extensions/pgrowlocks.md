@@ -2,8 +2,7 @@
 title: The pgrowlocks extension
 subtitle: Display row-level locking information for a specific table in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.755Z'
-tag: new
+updatedOn: '2025-08-02T10:33:29.244Z'
 ---
 
 The `pgrowlocks` extension provides a function to inspect active row-level locks for a specified table within your Postgres database. This is invaluable for diagnosing lock contention issues, understanding which specific rows are currently locked, and identifying the transactions or processes holding these locks. By offering a detailed, real-time view of row locks, `pgrowlocks` helps developers and database administrators troubleshoot performance bottlenecks related to concurrent data access.
@@ -12,7 +11,7 @@ The `pgrowlocks` extension provides a function to inspect active row-level locks
 
 ## Enable the `pgrowlocks` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pgrowlocks;

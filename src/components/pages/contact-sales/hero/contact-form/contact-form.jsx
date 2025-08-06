@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
@@ -57,6 +58,7 @@ const schema = yup
       .required('Email address is a required field')
       .test(checkBlacklistEmails({ validation: { useDefaultBlockList: true } })),
     companySize: yup.string().notOneOf(['hidden'], 'Required field'),
+    reasonForContact: yup.string().notOneOf(['hidden'], 'Required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
@@ -83,6 +85,7 @@ const ContactForm = () => {
     resolver: yupResolver(schema),
     defaultValues: {
       companySize: 'hidden',
+      reasonForContact: 'hidden',
     },
   });
 
@@ -96,7 +99,8 @@ const ContactForm = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const { firstname, lastname, email, companyWebsite, companySize, message } = data;
+    const { firstname, lastname, email, companyWebsite, companySize, reasonForContact, message } =
+      data;
     const loadingAnimationStartedTime = Date.now();
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
@@ -125,6 +129,10 @@ const ContactForm = () => {
           {
             name: 'company_size',
             value: companySize,
+          },
+          {
+            name: 'TICKET.reason_for_contact',
+            value: reasonForContact,
           },
           {
             name: 'TICKET.subject',
@@ -160,16 +168,13 @@ const ContactForm = () => {
 
   return (
     <form
-      className={clsx(
-        'relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5',
-        'bg-[radial-gradient(131.75%_102.44%_at_16.67%_0%,_rgba(20,24,31,.5),_rgba(20,24,31,0.30)_47.96%,_rgba(20,24,31,0))]'
-      )}
+      className="relative z-10 grid gap-y-6 overflow-hidden rounded-xl border border-gray-new-10 bg-[#020203] bg-contact-form-bg p-8 shadow-contact xl:gap-y-5 xl:p-[30px] lg:gap-y-6 sm:p-5"
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Field
         name="firstname"
-        label="First Name *"
+        label="First Name*"
         autoComplete="name"
         placeholder="Marques"
         theme="transparent"
@@ -180,7 +185,7 @@ const ContactForm = () => {
       />
       <Field
         name="lastname"
-        label="Last Name *"
+        label="Last Name*"
         autoComplete="name"
         placeholder="Hansen"
         theme="transparent"
@@ -191,7 +196,7 @@ const ContactForm = () => {
       />
       <Field
         name="email"
-        label="Work Email *"
+        label="Work Email*"
         type="email"
         autoComplete="email"
         placeholder="info@acme.com"
@@ -214,7 +219,7 @@ const ContactForm = () => {
         <Field
           className="grow"
           name="companySize"
-          label="Company Size *"
+          label="Company Size*"
           tag="select"
           theme="transparent"
           labelClassName={labelClassName}
@@ -222,9 +227,7 @@ const ContactForm = () => {
           error={errors.companySize?.message}
           {...register('companySize')}
         >
-          <option value="hidden" disabled hidden>
-            &nbsp;
-          </option>
+          <option value="hidden" disabled hidden />
           <option value="0_1">0-1 employees</option>
           <option value="2_4">2-4 employees</option>
           <option value="5_19">5-19 employees</option>
@@ -234,8 +237,23 @@ const ContactForm = () => {
         </Field>
       </div>
       <Field
+        name="reasonForContact"
+        label="Reason for Contact*"
+        tag="select"
+        theme="transparent"
+        labelClassName={labelClassName}
+        isDisabled={isDisabled}
+        error={errors.reasonForContact?.message}
+        {...register('reasonForContact')}
+      >
+        <option value="hidden" disabled hidden />
+        <option value="Demo/POC">Demo/POC</option>
+        <option value="Enterprise Pricing">Enterprise Pricing</option>
+        <option value="HIPAA">HIPAA</option>
+      </Field>
+      <Field
         name="message"
-        label="Message *"
+        label="Message*"
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}

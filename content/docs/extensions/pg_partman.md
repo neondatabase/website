@@ -2,7 +2,7 @@
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.370Z'
+updatedOn: '2025-08-02T10:33:29.237Z'
 ---
 
 `pg_partman` is a Postgres extension that simplifies the management of partitioned tables. Partitioning refers to splitting a single table into smaller pieces called `partitions`. This is done based on the values in a key column or set of columns. Even though partitions are stored as separate physical tables, the partitioned table can still be queried as a single logical table. This can significantly enhance query performance and also help you manage the data lifecycle of tables that grow very large.
@@ -53,7 +53,7 @@ GRANT CREATE ON DATABASE '{WORKING_DATABASE_NAME}' TO partman_user;
 
 When you create a new `Neon` project, the default database name is `neondb` and the default schema name is `public`. Replace `{WORKING_DATABASE_NAME}` and `{WORKING_SCHEMA_NAME}` with the actual database and schema names you want to manage the partitioned tables in. To find out more about the privileges needed to run `pg_partman`, refer to the [pg_partman documentation](https://github.com/pgpartman/pg_partman).
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 **Version Compatibility:**
 

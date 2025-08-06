@@ -61,7 +61,7 @@ GROUPING SETS (
 
 ```
 
-In general, if the number of columns specified in the `CUBE` is `n`, then you will have 2ncombinations.
+In general, if the number of columns specified in the `CUBE` is `n`, then you will have $2^n$ combinations.
 
 PostgreSQL allows you to perform a partial cube to reduce the number of aggregates calculated. The following shows the syntax:
 

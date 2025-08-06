@@ -2,7 +2,7 @@
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.464Z'
+updatedOn: '2025-08-02T10:33:29.273Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
@@ -29,7 +29,7 @@ This guide demonstrates how to integrate ImageKit.io with Neon. You'll learn how
 
 We need a table in Neon to store metadata about the files uploaded to ImageKit.io. This allows your application to reference the media stored in ImageKit.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS imagekit_files (

@@ -1,0 +1,145 @@
+# Neon CLI commands — roles
+
+> The Neon CLI commands documentation for roles details how to manage user roles within the Neon database environment, including creating, listing, and deleting roles through command-line instructions.
+
+## Source
+
+- [Neon CLI commands — roles HTML](https://neon.com/docs/reference/cli-roles): The original HTML version of this documentation
+
+## Before you begin
+
+- Before running the `roles` command, ensure that you have [installed the Neon CLI](https://neon.com/docs/reference/cli-install).
+- If you have not authenticated with the [neon auth](https://neon.com/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](https://neon.com/docs/reference/neon-cli#connect).
+
+For information about roles in Neon, see [Manage roles](https://neon.com/docs/manage/roles).
+
+## The `roles` command
+
+The `roles` command allows you to list, create, and delete roles in a Neon project.
+
+### Usage
+
+```bash
+neon roles <subcommand> [options]
+```
+
+| Subcommand        | Description   |
+| ----------------- | ------------- |
+| [list](https://neon.com/docs/reference/cli-roles#list)     | List roles    |
+| [create](https://neon.com/docs/reference/cli-roles#create) | Create a role |
+| [delete](https://neon.com/docs/reference/cli-roles#delete) | Delete a role |
+
+### list
+
+This subcommand allows you to list roles.
+
+#### Usage
+
+```bash
+neon roles list [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](https://neon.com/docs/reference/neon-cli#global-options), the `list` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](https://neon.com/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+| `--branch`       | Branch ID or name                                                                             | string |                                                     |
+
+If a branch ID or name is not provided, the command lists roles for the default branch of the project.
+
+#### Examples
+
+```bash
+neon roles list
+┌────────┬──────────────────────┐
+│ Name   │ Created At           │
+├────────┼──────────────────────┤
+│ daniel │ 2023-06-19T18:27:19Z │
+└────────┴──────────────────────┘
+```
+
+List roles with the `--output` format set to `json`:
+
+```bash
+neon roles list --output json
+[
+  {
+    "branch_id": "br-odd-frog-703504",
+    "name": "daniel",
+    "protected": false,
+    "created_at": "2023-06-28T10:17:28Z",
+    "updated_at": "2023-06-28T10:17:28Z"
+  }
+```
+
+### create
+
+This subcommand allows you to create a role.
+
+#### Usage
+
+```bash
+neon roles create [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](https://neon.com/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type    |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------- | :-------------------------------------------------: |
+| `--context-file` | [Context file](https://neon.com/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |                                                     |
+| `--project-id`   | Project ID                                                                                    | string  | Only if your Neon account has more than one project |
+| `--branch`       | Branch ID or name                                                                             | string  |                                                     |
+| `--name`         | The role name. Cannot exceed 63 bytes in length.                                              | string  |                       &check;                       |
+| `--no-login`     | Create a passwordless role that cannot login                                                  | boolean |                                                     |
+
+If a branch ID or name is not provided, the command creates a role in the default branch of the project.
+
+#### Example
+
+```bash
+neon roles create --name sally
+┌───────┬──────────────────────┐
+│ Name  │ Created At           │
+├───────┼──────────────────────┤
+│ sally │ 2023-06-20T00:43:17Z │
+└───────┴──────────────────────┘
+```
+
+### delete
+
+This subcommand allows you to delete a role.
+
+#### Usage
+
+```bash
+neon roles delete <role> [options]
+```
+
+#### Options
+
+In addition to the Neon CLI [global options](https://neon.com/docs/reference/neon-cli#global-options), the `delete` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](https://neon.com/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+| `--branch`       | Branch ID or name                                                                             | string |                                                     |
+
+If a branch ID or name is not provided, the command assumes the role resides in the default branch of the project.
+
+#### Example
+
+```bash
+neon roles delete sally
+┌───────┬──────────────────────┐
+│ Name  │ Created At           │
+├───────┼──────────────────────┤
+│ sally │ 2023-06-20T00:43:17Z │
+└───────┴──────────────────────┘
+```

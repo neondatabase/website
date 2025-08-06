@@ -2,7 +2,7 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.054Z'
+updatedOn: '2025-06-25T02:56:37.086Z'
 ---
 
 [Reflex](https://reflex.dev/) is a Python web framework that allows you to build full-stack applications with Python.
@@ -38,7 +38,7 @@ To create a virtual environment, run the following command in your project direc
     source .venv/bin/activate
     ```
 
-    ```
+    ```shell
     py -3 -m venv .venv
     .venv\Scripts\activate
     ```

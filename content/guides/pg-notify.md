@@ -43,7 +43,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 - `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require` an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
+- `?sslmode=require&channel_binding=require` optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding while connecting to the Postgres instance for better security.
 
 Save this connecting string somewhere safe to be used as the `DATABASE_URL` further in the guide. Proceed further in this guide to create a Node.js application.
 

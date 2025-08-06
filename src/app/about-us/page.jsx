@@ -10,13 +10,13 @@ import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import { getAboutPage } from 'utils/api-pages';
-import { getGithubStars, getGithubContributors } from 'utils/get-github-data';
+import { getGitHubStars, getGitHubContributors } from 'utils/get-github-data';
 import getMetadata from 'utils/get-metadata';
 
 const AboutUsPage = async () => {
   const [gitHubStars, gitHubContributors] = await Promise.all([
-    getGithubStars(),
-    getGithubContributors(),
+    getGitHubStars(),
+    getGitHubContributors(),
   ]);
 
   const statistics = [

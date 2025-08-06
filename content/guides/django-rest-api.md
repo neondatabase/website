@@ -280,25 +280,21 @@ class ModelBenchmarkSerializer(serializers.ModelSerializer):
 Let's break down each serializer to better understand their purpose:
 
 1. `ModelAuthorSerializer`:
-
    - This serializer is used for the `ModelAuthor` model, it basically represents the author details.
    - It includes all fields of the model (`id`, `name`, `bio`, `contact_info`, `rating`).
    - By using `ModelSerializer`, we automatically get create and update functionality that matches the model fields.
 
 2. `AIModelSerializer`:
-
    - This serializer is more complex due to its relationship with `ModelAuthor`.
    - We include a nested `author` field using `ModelAuthorSerializer(read_only=True)`. This means when serializing an `AIModel`, it will include all the author's details, but this field can't be used for writing (creating or updating).
    - We also include an `author_id` field, which is write-only. This allows clients to specify an author when creating or updating an `AIModel` by just providing the author's ID.
    - The `source='author'` in the `author_id` field tells DRF to use this field to set the `author` attribute of the `AIModel`.
 
 3. `ModelPurchaseSerializer`:
-
    - This serializer includes all fields from the `ModelPurchase` model.
    - It will handle the serialization of purchase records, including details like the user, the AI model purchased, purchase date, and license information.
 
 4. `UsageScenarioSerializer`:
-
    - This serializer corresponds to the `UsageScenario` model.
    - It includes all fields, allowing for the representation of different use cases or scenarios for AI models.
 

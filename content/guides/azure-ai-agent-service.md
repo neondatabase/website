@@ -49,7 +49,7 @@ Open the [new Neon Resource page](https://portal.azure.com/#view/Azure_Marketpl
 6. Once the project is created successfully, copy the Neon connection string and note it down. You can find the connection details in the Connection Details widget on the Neon Dashboard.
 
 ```bash
-    postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+    postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 ## Create an AI Foundry Project on Azure

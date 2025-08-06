@@ -40,7 +40,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 To get started with your Postgres database, create a new Neon project using [pg.new](https://pg.new). This project will provide the Postgres instance that Convex will use to store your application data. Within this Neon project, you'll need to create a database named `convex_self_hosted` – this is the specific database Convex is configured to use for storing chat messages. Follow these steps to set up your Neon Postgres database:
 
-- Navigate to the [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
+- Navigate to the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) in your Neon project console to create the `convex_self_hosted` database.
 - Execute the following SQL command to create the database:
 
   ```sql
@@ -71,7 +71,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     This command uses [`npx degit`](https://www.npmjs.com/package/degit) to fetch the `docker-compose.yml` file from the [Convex GitHub repository](https://github.com/get-convex/convex-backend/blob/main/self-hosted/docker/docker-compose.yml).
 
 3.  **Set up Neon connection string:** Add your Neon connection string you copied earlier to a `.env` file to configure Convex.
-
     1.  Create a `.env` file in the same directory as `docker-compose.yml`.
     1.  Add this line:
         ```env
@@ -88,7 +87,7 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
         **Neon default:**
 
         ```bash
-        postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require
+        postgresql://neondb_owner:password@ep-xxxxx.aws.neon.tech/convex_self_hosted?sslmode=require&channel_binding=require
         ```
 
         **For Convex:**
@@ -112,7 +111,6 @@ Now, you'll set up the self-hosted Convex backend using Docker Compose, configur
     ![Convex Dashboard](/docs/guides/convex-dashboard.png)
 
     **Login to the Convex Dashboard:**
-
     - When you access the dashboard for the first time, you will be prompted to log in.
     - For the password, you will use the `CONVEX_SELF_HOSTED_ADMIN_KEY` generated in the next step.
 

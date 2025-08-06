@@ -3,7 +3,7 @@ title: Replicate data from Aurora PostgreSQL
 subtitle: Learn how to replicate data from Aurora PostgreSQL to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-05T21:09:38.751Z'
+updatedOn: '2025-08-02T10:33:29.279Z'
 ---
 
 <MigrationAssistant/>
@@ -53,7 +53,6 @@ This section describes how to prepare your source Aurora Postgres instance (the 
 8. Reboot the **Writer instance** of your Aurora PostgreSQL DB cluster to apply the changes. In the Amazon RDS console, select your Aurora PostgreSQL DB cluster, then select the **Writer instance** of the cluster and choose **Reboot** from the **Actions** menu.
 
 9. Once the instance is available again, you can verify that logical replication is enabled as follows:
-
    - Use `psql` to connect to the writer instance of your Aurora PostreSQL DB cluster.
 
      ```bash
@@ -137,7 +136,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your destination database.
 2. Create the subscription using a `CREATE SUBSCRIPTION` statement.
 
    ```sql shouldWrap

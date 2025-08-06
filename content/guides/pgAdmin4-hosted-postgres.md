@@ -38,7 +38,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 - `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require` an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
+- `?sslmode=require&channel_binding=require` optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding while connecting to the Postgres instance for better security.
 
 You will be using these connecting string components further in the guide. Proceed further in this guide to connect pgAdmin4 to your Postgres.
 
@@ -47,12 +47,10 @@ You will be using these connecting string components further in the guide. Proce
 1. **Open pgAdmin4**: Once pgAdmin4 is running, you will see the dashboard.
 
 2. **Create a New Server Connection**:
-
    - Right-click on "Servers" in the left sidebar and select "Create" > "Server...".
    - In the "Create - Server" dialog, enter a name for your server connection.
 
 3. **Configure Connection Settings**:
-
    - Go to the "Connection" tab.
    - Enter the following details:
      - **Host**: The endpoint of your hosted Postgres database (e.g., `ep-...us-east-2.aws.neon.tech`).

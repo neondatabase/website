@@ -2,7 +2,7 @@
 title: Media storage with Cloudinary
 subtitle: Store files via Cloudinary and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.461Z'
+updatedOn: '2025-08-02T10:33:29.267Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -23,7 +23,6 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 1.  Sign up for a free or paid account at [Cloudinary.com](https://cloudinary.com/users/register/free).
 2.  Once logged in, navigate to your **Account settings**.
 3.  Find your **Product Environment Credentials** which include:
-
     - **Cloud Name**
     - **API Key**
     - **API Secret**
@@ -35,7 +34,7 @@ This guide demonstrates how to integrate Cloudinary with Neon. You'll learn how 
 
 We need a table in Neon to store metadata about the assets uploaded to Cloudinary.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table to store relevant details:
 
     ```sql
     CREATE TABLE IF NOT EXISTS cloudinary_files (

@@ -41,7 +41,6 @@ Let's start by creating a new project directory and setting up a virtual environ
    Creating a virtual environment isolates your project dependencies from other Python installations on your system.
 
 3. Activate the virtual environment:
-
    - On Windows:
      ```bash
      venv\Scripts\activate
@@ -83,7 +82,7 @@ This will create a `requirements.txt` file with all the installed packages in yo
 First, let's set up our database connection. Create a `.env` file in your project root:
 
 ```env
-DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
+DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 Replace the placeholders with your actual Neon database credentials.

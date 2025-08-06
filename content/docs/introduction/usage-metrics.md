@@ -1,7 +1,7 @@
 ---
 title: Usage metrics
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.489Z'
+updatedOn: '2025-07-30T09:58:22.803Z'
 ---
 
 This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
@@ -21,7 +21,6 @@ In Neon, storage consists of your total **data size** and **history**.
   This aspect of Neon storage is unique: "History" is a log of changes (inserts, updates, and deletes) to your data over time in the form of Write-Ahead Log (WAL) records. History enables the instant restore, time travel, and branching features mentioned above.
 
   The size of your history depends on a couple of factors:
-
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
   - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/branching#restore-window), which can be an hour, a day, a week, or even a month. The restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
 
@@ -138,7 +137,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your [peak storage](/docs/reference/glossary#peak-usage). If the table is large, this could push you over your plan's limit, triggering extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
 

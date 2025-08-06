@@ -147,7 +147,7 @@ AWS_SECRET_ACCESS_KEY=".../...+"
 AWS_S3_BUCKET_NAME="...-bucket-0"
 
 # Postgres (powered by Neon) Environment Variable
-DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
 Now, let's move on to creating an API route to obtain a presigned URL to upload objects to.

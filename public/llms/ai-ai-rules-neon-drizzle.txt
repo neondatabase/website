@@ -1,10 +1,44 @@
 # AI Rules: Neon with Drizzle
 
-> This document provides context rules for AI tools to help implement Drizzle ORM with Neon databases, covering dependencies, connection configuration, schema considerations, query optimizations, and best practices for serverless environments.
+> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon platform using Drizzle, detailing the setup and configuration processes for users to implement automated decision-making workflows.
 
 ## Source
 
 - [AI Rules: Neon with Drizzle HTML](https://neon.com/docs/ai/ai-rules-neon-drizzle): The original HTML version of this documentation
+
+Related docs:
+- [Get started with Drizzle and Neon](https://orm.drizzle.team/docs/get-started/neon-new)
+
+Repository:
+- [README](https://github.com/neondatabase-labs/ai-rules)
+- [neon-drizzle.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-drizzle.mdc)
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-drizzle.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon with Drizzle code. You can also reference them explicitly in prompts.
+
+## Rules
+
+````markdown
+---
+description: Use this rules when integrating Neon (serverless Postgres) with Drizzle ORM
+globs: *.ts, *.tsx
+alwaysApply: false
+---
+
+# Neon and Drizzle integration guidelines
 
 ## Overview
 
@@ -242,17 +276,14 @@ export async function getUserSafely(id: number) {
 ## Best Practices for Neon with Drizzle
 
 1. **Connection Management**
-
    - Keep connection times short for serverless functions
    - Use connection pooling for high traffic applications
 
 2. **Neon Features**
-
    - Utilize Neon branching for development and testing
    - Consider Neon's auto-scaling for database design
 
 3. **Query Optimization**
-
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer
@@ -261,3 +292,4 @@ export async function getUserSafely(id: number) {
    - Leverage Postgres-specific features supported by Neon
    - Use appropriate indexes for your query patterns
    - Consider Neon's performance characteristics for large tables
+````

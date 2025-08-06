@@ -22,7 +22,6 @@ Before you begin, make sure you have the following prerequisites:
 - **Python 3.10 or higher:** This guide requires Python 3.10 or a later version. If you don't have it installed, download it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API key:**
-
   - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
   - After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/profile). This API key is needed to authenticate your application with Neon.
 
@@ -47,7 +46,6 @@ AutoGen is a framework designed to simplify the development of applications usin
 ### Key components of AutoGen
 
 - **Agents:** The foundational building blocks in AutoGen. Agents are autonomous entities that can:
-
   - **Receive and process messages:** Accept and understand messages from users or other agents.
   - **Act autonomously:** Perform tasks, utilize tools, or generate responses based on their programmed logic and received messages.
   - **Agent types:** AutoGen offers various agent types, including:
@@ -56,12 +54,10 @@ AutoGen is a framework designed to simplify the development of applications usin
     - **`UserProxyAgent`:** An agent that serves as an interface for human users. It can relay communications between the user and other agents and can be configured to request human input at specific workflow stages.
 
 - **Teams (Group chat):** AutoGen facilitates forming agent teams to tackle complex problems collaboratively. Key team configurations include:
-
   - **`RoundRobinGroupChat`:** A straightforward team setup where agents communicate in turns, following a round-robin approach to ensure balanced contribution from each member.
   - **`SelectorGroupChat`:** A more sophisticated team configuration enabling advanced agent selection mechanisms, including LLM-driven speaker selection for dynamic conversation flow.
 
 - **Tools:** AutoGen agents can leverage tools to interact with external environments or perform specialized functions. Tools can be:
-
   - **Python functions:** Custom Python functions that agents can call to execute specific actions or computations.
   - **External APIs:** Integrations with external services, allowing agents to access a wide range of functionalities like web searching.
 

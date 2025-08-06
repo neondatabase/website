@@ -3,20 +3,20 @@ title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-03T20:41:57.338Z'
+updatedOn: '2025-08-02T10:33:29.289Z'
 ---
 
 _This guide was contributed by Roy Derks from StepZen_
 
 GraphQL has been around for years and is becoming increasingly popular among web developers. It is a query language for APIs and a runtime for fulfilling queries with your existing data. GraphQL allows clients to access data flexibly and efficiently. However, building a GraphQL API often requires writing a lot of code and familiarizing yourself with a new framework. This guide shows how you can generate a GraphQL API for your Neon database in minutes using [StepZen](https://stepzen.com/).
 
-Why use Neon and StepZen together? Neon is serverless Postgres. Neon separates storage and compute to offer modern developer features such as scale-to-zero and database branching. With Neon, you can be up and running with a Postgres database in just a few clicks, and you can easily create and manage your database in the Neon Console and connect to it using [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). What if you want to let clients consume your data through an API in a way that is both flexible and efficient? That's where StepZen comes in. StepZen is a GraphQL API platform that lets you build a GraphQL API for your Neon database in minutes. Just like Neon, it's serverless and offers a generous free plan.
+Why use Neon and StepZen together? Neon is serverless Postgres. Neon separates storage and compute to offer modern developer features such as scale-to-zero and database branching. With Neon, you can be up and running with a Postgres database in just a few clicks, and you can easily create and manage your database in the Neon Console and connect to it using [psql](/docs/connect/query-with-psql-editor) or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor). What if you want to let clients consume your data through an API in a way that is both flexible and efficient? That's where StepZen comes in. StepZen is a GraphQL API platform that lets you build a GraphQL API for your Neon database in minutes. Just like Neon, it's serverless and offers a generous free plan.
 
 ## Set up Neon
 
 Before generating a GraphQL API, you must set up a Neon database, which you can do it in a few steps:
 
-1. Sign in to Neon, or [sign up](/docs/get-started-with-neon/signing-up) if you do not yet have an account.
+1. Sign in to Neon, or [sign up](/docs/get-started/signing-up) if you do not yet have an account.
 2. Select a Neon project. If you do not have one, see [Create a project](/docs/manage/projects#create-a-project).
 3. [Create a database](/docs/manage/databases#create-a-database) or use the ready-to-use `dbname` database.
 
@@ -101,7 +101,7 @@ The `config.yaml` file stores connection details for the Neon database. The Step
 configurationset:
   - configuration:
       name: postgresql_config
-      uri: YOUR_NEON_DSN?user=YOUR_NEON_USERNAME&password=YOUR_NEON_PASSWORD&options=project=YOUR_NEON_PROJECT_ID&sslmode=require
+      uri: YOUR_NEON_DSN?user=YOUR_NEON_USERNAME&password=YOUR_NEON_PASSWORD&options=project=YOUR_NEON_PROJECT_ID&sslmode=require&channel_binding=require
 ```
 
 As shown above, you need to append `&options=project=YOUR_NEON_PROJECT_ID` to the `uri` connection string. This is needed to establish a secure connection to the Neon database. The `project` option is the ID of the project in Neon. You can find the project ID in the Neon Console under **Settings** or in the URL of your project.

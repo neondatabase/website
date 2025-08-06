@@ -324,6 +324,33 @@
       title: "Get PostgreSQL Version"
     - slug: "postgresql-administration/postgresql-uptime"
       title: "Check PostgreSQL Uptime"
+- title: PostgreSQL 18
+  slug: "postgresql-18-new-features"
+  items:
+  - section: Overview & Performance
+    items:
+    - slug: "postgresql-18/asynchronous-io"
+      title: "Asynchronous I/O"
+    - slug: "postgresql-18/skip-scan-btree"
+      title: "B-tree Skip Scan for Better Queries"
+    - slug: "postgresql-18/enhanced-explain"
+      title: "Enhanced EXPLAIN with Automatic Buffers"
+  - section: Developer Features
+    items:
+    - slug: "postgresql-18/virtual-generated-columns"
+      title: "Virtual Generated Columns (Now Default)"
+    - slug: "postgresql-18/uuidv7-support"
+      title: "UUIDv7: Timestamp-Ordered UUIDs"
+    - slug: "postgresql-18/enhanced-returning"
+      title: "Enhanced RETURNING with OLD/NEW Values"
+    - slug: "postgresql-18/temporal-constraints"
+      title: "Temporal Constraints with WITHOUT OVERLAPS"
+  - section: Security & Operations
+    items:
+    - slug: "postgresql-18/oauth-authentication"
+      title: "OAuth 2.0 Authentication Setup"
+    - slug: "postgresql-18/not-null-as-not-valid"
+      title: "NOT NULL Constraints as NOT VALID"
 - section: Advanced
   items:
    - title: PostgreSQL Views

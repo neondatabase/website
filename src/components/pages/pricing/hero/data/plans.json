@@ -144,7 +144,6 @@
     "type": "Business",
     "price": 700,
     "priceFrom": true,
-    "headerLinks": "<a href='/migration-assistance'>Get migration help</a>",
     "description": "For larger workloads, with best compliance and security. ",
     "features": [
       {

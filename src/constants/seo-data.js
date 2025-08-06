@@ -46,13 +46,6 @@ export default {
     imagePath: '/images/social-previews/branching.jpg',
     pathname: LINKS.branching,
   },
-  careers: {
-    title: 'Careers — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    imagePath: '/images/social-previews/careers.jpg',
-    pathname: LINKS.careers,
-  },
   caseStudies: {
     title: 'Case Studies — Neon',
     description: 'Discover how other companies are using Neon.',
@@ -110,6 +103,12 @@ export default {
     pathname: LINKS.migration,
     imagePath: '/images/social-previews/migration.jpg',
   },
+  multiTB: {
+    title: 'Neon for Multi-TB Migrations - Neon',
+    description: 'Migrating a multi-TB workload? We can help.',
+    pathname: LINKS.multiTB,
+    imagePath: '/images/social-previews/multi-tb.jpg',
+  },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
     description:
@@ -161,9 +160,16 @@ export default {
   },
   flow: {
     title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
+    description:
+      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
     imagePath: '/images/social-previews/flow.jpg',
     pathname: LINKS.flow,
+    type: 'article',
+  },
+  platforms: {
+    title: 'Embedded Postgres for Platforms - Neon',
+    description: 'Offer Postgres to your users',
+    pathname: LINKS.platforms,
     type: 'article',
   },
   scalableArchitecture: {
@@ -185,14 +191,20 @@ export default {
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
+  startups: {
+    title: 'Neon Startup Program',
+    description:
+      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
+    pathname: LINKS.startups,
+  },
   generateTicket: {
     title: 'Grab the ticket for Neon Deploy',
     description:
       "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
     pathname: LINKS.generateTicket,
   },
-  ticket({ name, login: githubHandle }) {
-    const userName = name || githubHandle;
+  ticket({ name, login: gitHubHandle }) {
+    const userName = name || gitHubHandle;
 
     return {
       title: `${userName}'s ticket for Neon Deploy - Neon`,

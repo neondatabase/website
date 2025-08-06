@@ -41,14 +41,12 @@ This workflow automates the process of ingesting and preparing your Google Drive
 2.  **Add Google Drive trigger:** Click the `+` button to add the first step. Search for and select "Google Drive".
 3.  **Configure trigger:** In the Google Drive node parameters, select "On changes involving a specific folder" under "Triggers".
 4.  **Connect Google Drive account (OAuth2):**
-
     - Under "Credential to connect with", click "Select Credential" and then "Create new credential".
     - This will open a dialog for "Google Drive account (Google Drive OAuth2 API)". Note the "OAuth Redirect URL" provided by n8n (you will need this in the next steps).
 
     ![Configuring Google Drive Trigger node](/docs/guides/n8n/n8n-add-google-drive-folder-node.gif)
 
 5.  **Create Google Drive OAuth credentials:**
-
     - Open the [Google Cloud console](https://console.cloud.google.com/) and navigate to "APIs & Services" -> "OAuth consent screen".
     - If not configured, click "Get started".
     - **App Information:** Provide an "App name" (e.g., `personal-n8n`), select "User support email", and enter your email address.
@@ -64,14 +62,12 @@ This workflow automates the process of ingesting and preparing your Google Drive
     ![Configuring Google Drive OAuth credentials in GCP](/docs/guides/n8n/n8n-configure-gdrive-oauth.gif)
 
 6.  **Enable Google Drive API in GCP:**
-
     - In the GCP console, search for "Google Drive API".
     - Select "Google Drive API" and click "Enable" if it's not already enabled.
 
     ![Enabling Google Drive API in GCP](/docs/guides/n8n/n8n-enable-gdrive-api.gif)
 
 7.  **Finalize n8n Credential:**
-
     - Back in n8n, paste the "Client ID" and "Client secret" you copied from GCP into the respective fields in the "Google Drive account (OAuth2)" credential dialog.
     - After entering the Client ID and Secret, click "Sign in with Google".
     - Authenticate with the Google account you added as a test user. Grant the necessary permissions.
@@ -83,7 +79,6 @@ This workflow automates the process of ingesting and preparing your Google Drive
     - Back in the Google Drive Trigger node, set the "Folder" to the specific folder you want to monitor for new files. You can enter the folder name or select from the list.
     - Select "File Created" under "Watch For". This will trigger the workflow when a new file is added to the specified folder.
 9.  **Test the Trigger:**
-
     - Upload a sample PDF document to your specified Google Drive folder.
     - In n8n, click "Fetch Test Event" on the Google Drive Trigger node. It should detect the new file and show its details in the output on the right side of the editor. This confirms that the trigger is working correctly.
 

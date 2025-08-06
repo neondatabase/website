@@ -134,8 +134,8 @@ To connect your application to the Neon database, copy the connection URL from t
 
 For more about connecting your application to Neon, see [Connect to Neon](/docs/connect/connect-intro). Neon also provides the following resources to help get you up and running:
 
-- [Neon framework guides](/docs/get-started-with-neon/frameworks)
-- [Neon language guides](/docs/get-started-with-neon/languages)
+- [Neon framework guides](/docs/get-started/frameworks)
+- [Neon language guides](/docs/get-started/languages)
 - [Connection examples repo](https://github.com/neondatabase/examples)
 - [Application templates repo](/templates)
 

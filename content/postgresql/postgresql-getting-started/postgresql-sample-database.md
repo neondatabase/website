@@ -27,9 +27,11 @@ The DVD rental database represents the business processes of a DVD rental store.
 - 1 domain
 - 13 sequences
 
-## DVD Rental ER Model
-
 ## PostgreSQL Sample Database Diagram
+
+The following diagram shows the structure of the DVD rental database:
+
+![DVD Rental Database ER Diagram](/postgresqltutorial/dvd-rental-sample-database-diagram.png)
 
 In the diagram, the asterisk (\*), which appears in front of the field, indicates the [primary key](../postgresql-tutorial/postgresql-primary-key).
 

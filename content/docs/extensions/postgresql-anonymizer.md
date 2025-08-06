@@ -2,8 +2,7 @@
 title: The anon extension
 subtitle: Protecting sensitive data in Postgres databases
 enableTableOfContents: true
-tag: new
-updatedOn: '2025-05-23T22:52:47.855Z'
+updatedOn: '2025-08-02T10:33:29.248Z'
 ---
 
 The `anon` extension ([PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io)) provides data masking and anonymization capabilities to protect sensitive data in Postgres databases. It helps protect personally identifiable information (PII) and other sensitive data, facilitating compliance with regulations such as [GDPR](https://gdpr-info.eu/).
@@ -15,12 +14,12 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 ## Enable the extension
 
 <Admonition type="note">
-The `anon` extension is currently [experimental](/docs/pg-extensions#experimental-extensions) and may change in future releases.
+The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
 </Admonition>
 
 Enable the `anon` extension in your Neon database by following these steps:
 
-1. Connect to your Neon database using either the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor)
+1. Connect to your Neon database using either the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor)
 
 2. Enable experimental extensions:
 

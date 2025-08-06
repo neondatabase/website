@@ -1,0 +1,83 @@
+# The @neondatabase/toolkit
+
+> The @neondatabase/toolkit documentation outlines the tools and commands available for managing and interacting with Neon databases, facilitating efficient database operations and maintenance tasks.
+
+## Source
+
+- [The @neondatabase/toolkit HTML](https://neon.com/docs/reference/neondatabase-toolkit): The original HTML version of this documentation
+
+What you will learn:
+- What is the @neondatabase/toolkit
+- How to get started
+
+Related resources:
+- [TypeScript SDK for the Neon API](https://neon.com/docs/reference/typescript-sdk)
+- [Neon API Reference](https://neon.com/docs/reference/api-reference)
+- [Why we built @neondatabase/toolkit](https://neon.com/blog/why-neondatabase-toolkit)
+
+Source code:
+- [@neondatabase/toolkit](https://github.com/neondatabase/toolkit)
+- [@neon/toolkit (JSR)](https://jsr.io/@neon/toolkit)
+
+## About the toolkit
+
+The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](https://neon.com/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
+
+   **Note**: This is an experimental feature and is subject to change.
+
+## Getting started
+
+With a few lines of code, you can create a Postgres database on Neon, run SQL queries, and tear down the database when you're done. Here's a quick look:
+
+```javascript
+import { NeonToolkit } from "@neondatabase/toolkit";
+
+const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
+const project = await toolkit.createProject();
+
+await toolkit.sql(
+  project,
+  `
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY,
+      name VARCHAR(255) NOT NULL
+    );
+  `,
+);
+
+await toolkit.sql(
+  project,
+  `INSERT INTO users (id, name) VALUES (gen_random_uuid(), 'Sam Smith')`,
+);
+
+console.log(
+  await toolkit.sql(
+    project,
+    `SELECT name FROM users`,
+  ),
+);
+
+await toolkit.deleteProject(project);
+```
+
+To run this:
+
+```bash
+NEON_API_KEY=<YOUR_NEON_API_KEY> node index.js # bun also works
+```
+
+## Accessing the API Client
+
+```javascript
+import { NeonToolkit } from "@neondatabase/toolkit";
+
+const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
+
+const project = await toolkit.createProject();
+
+const apiClient = toolkit.apiClient;
+
+// Now, you have the underlying API client which lets you interact with Neon's API.
+```
+
+As with all of our experimental features, changes are ongoing. If you have any feedback, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

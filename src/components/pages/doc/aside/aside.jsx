@@ -2,50 +2,49 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Actions from 'components/pages/doc/actions';
-import ChatOptions from 'components/pages/doc/chat-options';
 import ChangelogForm from 'components/shared/changelog-form';
 import TableOfContents from 'components/shared/table-of-contents';
 
 const Aside = ({
-  isUseCase,
-  isDocsIndex,
+  isTemplate,
+  isDocsIndex, // eslint-disable-line no-unused-vars
   isChangelog,
   enableTableOfContents,
   tableOfContents,
-  githubPath,
+  gitHubPath,
+  className,
 }) => (
   <div
     className={clsx(
       'relative col-span-2 -ml-12 max-w-64 xl:hidden',
-      isUseCase
+      isTemplate
         ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6'
+        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6',
+      className
     )}
   >
-    <div
-      className={clsx(
-        'sticky flex flex-col pb-5',
-        isUseCase
-          ? 'top-[188px] max-h-[calc(100vh-188px)]'
-          : 'top-[136px] max-h-[calc(100vh-136px)]'
-      )}
-    >
-      {enableTableOfContents && <TableOfContents items={tableOfContents} isUseCase={isUseCase} />}
-      {isDocsIndex && <ChatOptions isSidebar />}
+    <div className="sticky top-[136px] flex max-h-[calc(100vh-136px)] flex-col pb-5">
+      {enableTableOfContents && <TableOfContents items={tableOfContents} isTemplate={isTemplate} />}
       {isChangelog && <ChangelogForm isSidebar />}
-      {!isChangelog && !isUseCase && (
-        <Actions githubPath={githubPath} withBorder={enableTableOfContents} />
+
+      {!isChangelog && (
+        <Actions
+          gitHubPath={gitHubPath}
+          isTemplate={isTemplate}
+          withBorder={enableTableOfContents}
+        />
       )}
     </div>
   </div>
 );
 
 Aside.propTypes = {
-  isUseCase: PropTypes.bool,
+  isTemplate: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
-  githubPath: PropTypes.string,
+  gitHubPath: PropTypes.string,
+  className: PropTypes.string,
 };
 export default Aside;

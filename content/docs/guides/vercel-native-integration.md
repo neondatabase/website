@@ -4,7 +4,7 @@ subtitle: Add Neon Postgres storage to your Vercel project as a first-party nati
   integration
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-02T15:04:05.573Z'
+updatedOn: '2025-06-23T15:24:08.784Z'
 ---
 
 <InfoBlock>
@@ -61,7 +61,6 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
    </Admonition>
 
 8. A **Database** is created in Vercel, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your new Database, including:
-
    - Status
    - Plan
    - Current Period (billing)
@@ -87,23 +86,19 @@ All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "
 As a user of the Neon Postgres Native Integration, you have access to all Neon features. However, some actions normally performed in the Neon Console are either not supported or only available through the Vercel Dashboard:
 
 - **Project/Database Management**:
-
   - **Databases** (a.k.a "Projects" in Neon) can only be created or deleted through the Vercel Dashboard. See [Adding more databases](#adding-more-databases) and [Deleting your database](#deleting-your-database).
   - **Organization Deletion**: Organizations cannot be deleted in the Neon Console; they are deleted if the Neon Postgres Native Integration is uninstalled from Vercel.
 
 - **User & Collaborator Management**:
-
   - [Organization](/docs/manage/organizations) members are managed in Vercel, not manually added through the Neon Dashboard.
   - [Organization deletion](/docs/manage/orgs-manage#delete-an-organization) is not supported for Neon organizations created by the native integration. You can only delete this organization by deleting the associated Database in Vercel.
   - [Project transfer](/docs/manage/orgs-project-transfer) is not supported to or from a Neon organization created by the native integration.
   - [Project collaborators](/docs/guides/project-collaboration-guide) are also managed as Members in Vercel.
 
 - **Compute Settings**:
-
   - Compute settings like size, autoscaling, and scale to zero are managed in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
 
 - **Project Naming**:
-
   - Changing your Neon project name (**Database Name** in Vercel) is done in Vercel. See [Changing your Database configuration](#changing-your-database-configuration).
 
 - **Billing & Payments**:
@@ -119,7 +114,6 @@ To connect your Vercel project to your Neon database:
 2. On your Database page, select **Connect Project**.
 3. Select the Vercel project you want to connect and the environments you want to add database environment variables to (**Development**, **Preview**, **Production**).
 4. Optionally, under **Advanced Options**, you can:
-
    - Specify an **Environment Variables Prefix** for the database environment variables that will be added to your Vercel project. A prefix is not required but may help you track and identify variables later.
      <Admonition type="note">
      Please be aware that database environment variables are already prefixed by `DATABASE`, `PG`, or `POSTGRES` — see [Environment variables set by the integration](#environment-variables-set-by-the-integration). Any prefix you add is applied in addition the existing prefix. If necessary, you can change your prefix later by navigating to **Storage** > **Projects**, and selecting **Update Project Connection** from the project's menu.
@@ -169,7 +163,6 @@ To create another Database / Neon Project:
 
 5. Specify a **Database Name** (this will be the **Project name** in Neon), and click **Create**.
 6. A new **Database** is created in Vercel, and you are directed to the **Storage** tab on the Vercel Dashboard where you can view details about your new Database, including:
-
    - Status
    - Plan
    - Current Period (billing)

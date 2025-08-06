@@ -2,7 +2,7 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.495Z'
+updatedOn: '2025-08-02T10:33:29.305Z'
 ---
 
 ## Overview
@@ -14,19 +14,15 @@ The project transfer functionality enables you to provision fully-configured Pos
 ## Simplified workflow
 
 1. **Create a Neon project** on behalf of your user in your account or organization
-
    - This provides them with a Postgres connection string for their application immediately
 
 2. **Create a transfer request** for the project
-
    - This generates a unique, time-limited transfer request ID
 
 3. **Share a claim URL** with your user
-
    - This URL contains the project ID and transfer request ID
 
 4. **User claims the project**
-
    - When they click the URL, Neon transfers the project to their account
 
 ## Step-by-step guide
@@ -85,7 +81,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
   },
   "connection_uris": [
     {
-      "connection_uri": "postgresql://neondb_owner:{password}@ep-cool-shape-123456.us-east-1.aws.neon.tech/neondb?sslmode=require"
+      "connection_uri": "postgresql://neondb_owner:{password}@ep-cool-shape-123456.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
     }
   ],
   "branch": {},
@@ -96,7 +92,7 @@ Below is an abbreviated example of the response. For brevity, this documentation
 }
 ```
 
-Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started-with-neon/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
+Your user will need the connection string from the response (`connection_uri`) to [connect to the Neon database](/docs/get-started/connect-neon). The `{password}` placeholder represents the actual password generated for the database. You'll also use the project `id` to create a transfer request.
 
 ## Create a transfer request
 

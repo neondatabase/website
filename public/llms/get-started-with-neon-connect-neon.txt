@@ -1,12 +1,10 @@
 # Connecting Neon to your stack
 
-> This guide explains how to integrate Neon into your application stack, covering connection string formats for various languages and frameworks, how to obtain and use connection details, and addressing common connection issues.
+> The document "Connecting Neon to your stack" outlines the steps required to integrate Neon with various development environments, detailing connection configurations and necessary prerequisites for seamless integration into existing workflows.
 
 ## Source
 
-- [Connecting Neon to your stack HTML](https://neon.com/docs/get-started-with-neon/connect-neon): The original HTML version of this documentation
-
-## Overview
+- [Connecting Neon to your stack HTML](https://neon.com/docs/get-started/connect-neon): The original HTML version of this documentation
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it's a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
 
@@ -14,14 +12,14 @@ Using Neon as the serverless database in your tech stack means configuring conne
 
 This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
 
-### psql
+Tab: psql
 
 ```bash
 # psql example connection string
-psql postgresql://username:password@hostname:5432/database?sslmode=require
+psql postgresql://username:password@hostname:5432/database?sslmode=require&channel_binding=require
 ```
 
-### .env
+Tab: .env
 
 ```ini
 # .env example
@@ -32,7 +30,7 @@ PGPASSWORD=password
 PGPORT=5432
 ```
 
-### Next.js
+Tab: Next.js
 
 ```javascript
 // Next.js example
@@ -54,7 +52,7 @@ function selectAll() {
 }
 ```
 
-### Drizzle
+Tab: Drizzle
 
 ```javascript
 // Drizzle example with the Neon serverless driver
@@ -68,7 +66,7 @@ const db = drizzle(sql);
 const result = await db.select().from(...);
 ```
 
-### Prisma
+Tab: Prisma
 
 ```javascript
 // Prisma example with the Neon serverless driver
@@ -83,7 +81,7 @@ const adapter = new PrismaNeonHTTP(sql);
 const prisma = new PrismaClient({ adapter });
 ```
 
-### Python
+Tab: Python
 
 ```python
 # Python example with psycopg2
@@ -104,7 +102,7 @@ with conn.cursor() as cur:
 conn.close()
 ```
 
-### .NET
+Tab: .NET
 
 ```csharp
 # .NET example
@@ -125,7 +123,7 @@ conn.close()
 }
 ```
 
-### Ruby
+Tab: Ruby
 
 ```ruby
 # Ruby example
@@ -149,7 +147,7 @@ end
 conn.close
 ```
 
-### Rust
+Tab: Rust
 
 ```rust
 // Rust example
@@ -179,7 +177,7 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 }
 ```
 
-### Go
+Tab: Go
 
 ```go
 // Go example
@@ -225,19 +223,21 @@ When connecting to Neon from an application or client, you connect to a database
 
 You can obtain the database connection details you require by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
+
+
 Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](https://neon.com/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
              ^    ^         ^                         ^                              ^
        role -|    |         |- hostname               |- pooler option               |- database
                   |
                   |- password
 ```
 
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](https://neon.com/docs/reference/glossary#connection-string).
+   **Note**: The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](https://neon.com/docs/reference/glossary#connection-string).
 
 ## Using connection details
 
@@ -256,16 +256,16 @@ PGPORT=5432
 ### Variable
 
 ```text
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
 ### Command-line
 
 ```bash
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](https://neon.com/docs/connect/connect-securely).
+   **Note**: Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](https://neon.com/docs/connect/connect-securely).
 
 ## FAQs
 

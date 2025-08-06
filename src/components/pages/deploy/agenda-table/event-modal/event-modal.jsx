@@ -3,7 +3,7 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 import CloseIcon from 'icons/close-gradient.inline.svg';
-import GithubIcon from 'icons/github.inline.svg';
+import GitHubIcon from 'icons/github.inline.svg';
 import LinkedinIcon from 'icons/linkedin-logo.inline.svg';
 import XIcon from 'icons/x-logo.inline.svg';
 
@@ -14,7 +14,7 @@ const EventModal = ({
   bio = null,
   xUrl = null,
   linkedinUrl = null,
-  githubUrl = null,
+  gitHubUrl = null,
   event,
   description,
   closeModal,
@@ -48,7 +48,7 @@ const EventModal = ({
     <div className="border-gray-15 text-gray-90 mt-4 border-t pt-4 text-sm font-light leading-tight">
       {bio}
     </div>
-    {(xUrl || linkedinUrl || githubUrl) && (
+    {(xUrl || linkedinUrl || gitHubUrl) && (
       <div className="mt-4 flex gap-x-5 text-white">
         {xUrl && (
           <Link
@@ -70,14 +70,14 @@ const EventModal = ({
             <LinkedinIcon className="h-4 w-4" />
           </Link>
         )}
-        {githubUrl && (
+        {gitHubUrl && (
           <Link
             className="transition-colors duration-200 hover:text-green-45"
-            href={githubUrl}
+            href={gitHubUrl}
             rel="noreferrer noopener"
             target="_blank"
           >
-            <GithubIcon className="h-4 w-4" />
+            <GitHubIcon className="h-4 w-4" />
           </Link>
         )}
       </div>
@@ -100,7 +100,7 @@ EventModal.propTypes = {
   bio: PropTypes.string,
   xUrl: PropTypes.string,
   linkedinUrl: PropTypes.string,
-  githubUrl: PropTypes.string,
+  gitHubUrl: PropTypes.string,
   event: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   closeModal: PropTypes.func.isRequired,

@@ -2,8 +2,7 @@
 title: The pg_uuidv7 extension
 subtitle: Generate and manage time-ordered version 7 UUIDs in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.754Z'
-tag: new
+updatedOn: '2025-08-02T10:33:29.241Z'
 ---
 
 The `pg_uuidv7` extension allows you to generate and work with version 7 Universally Unique Identifiers (UUIDs) in Postgres. UUIDv7 is a newer UUID format designed to be time-ordered and sortable, which offers significant benefits for database performance, especially when used as primary keys or in time-series data.
@@ -14,7 +13,7 @@ Unlike traditional random UUIDs (like Version 4), UUIDv7 embeds a Unix timestamp
 
 ## Enable the `pg_uuidv7` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_uuidv7;

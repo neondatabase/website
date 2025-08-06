@@ -4,20 +4,15 @@ import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH, POSTGRESQL_BASE_PATH } from 'constants/docs';
+import HomeIcon from 'icons/docs/home.inline.svg';
 
 const linkClassName = 'transition-colors duration-200 hover:text-black dark:hover:text-white';
 
 const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
-  <div className="mb-4 flex flex-wrap space-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
-    {isPostgresPost ? (
-      <Link className={linkClassName} to={POSTGRESQL_BASE_PATH}>
-        PostgreSQL Tutorial
-      </Link>
-    ) : (
-      <Link className={linkClassName} to={DOCS_BASE_PATH}>
-        Docs
-      </Link>
-    )}
+  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
+    <Link className={linkClassName} to={isPostgresPost ? POSTGRESQL_BASE_PATH : DOCS_BASE_PATH}>
+      <HomeIcon />
+    </Link>
 
     <span>/</span>
 

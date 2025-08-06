@@ -2,7 +2,7 @@
 title: Media storage with Uploadcare
 subtitle: Store files via Uploadcare and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.480Z'
+updatedOn: '2025-08-02T10:33:29.291Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -30,7 +30,7 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 
 We need to create a table in Neon to store metadata about the files uploaded to Uploadcare. This table will include fields for the file's unique identifier, URL, upload timestamp, and any other relevant metadata you want to track.
 
-1. You can run the create table statement using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
+1. You can run the create table statement using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database. Here is an example SQL statement to create a simple table for file metadata which includes a file ID, URL, user ID, and upload timestamp:
 
    ```sql
    CREATE TABLE IF NOT EXISTS uploadcare_files (

@@ -68,13 +68,11 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwiZXhwIjoxNjgwMDAwMDAwfQ.8Gj_9bJj
 To understand how JWT fits into our Go authentication system, let's walk through the flow of a user logging in and accessing protected routes:
 
 1. When a user successfully authenticates, our Go service:
-
    - Validates credentials against Neon Postgres
    - Creates JWT with appropriate claims and expiration
    - Signs the token with a secret key
 
 2. The client:
-
    - Stores the JWT (typically in `localStorage` or a secure cookie)
    - Includes the token in the `Authorization` header for subsequent requests
 
@@ -83,7 +81,6 @@ To understand how JWT fits into our Go authentication system, let's walk through
    ```
 
 3. Our middleware:
-
    - Extracts the JWT from the request header
    - Validates the signature using our secret key
    - Checks that the token hasn't expired
@@ -106,7 +103,7 @@ First, let's create a Neon project to store our authentication data.
 Once your project is created, you'll receive a connection string that looks like this:
 
 ```
-postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require
+postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require
 ```
 
 Save this connection string, you'll need it to connect your Go application to the Neon database.
@@ -1100,7 +1097,7 @@ Create a `.env` file in the root of your project with the following variables:
 
 ```
 # Database connection
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[dbname]?sslmode=require&channel_binding=require&channel_binding=require
 
 # JWT configuration
 JWT_SECRET=your-very-secure-jwt-secret-key

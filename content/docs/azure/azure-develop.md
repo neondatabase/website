@@ -3,7 +3,7 @@ title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-30T16:54:40.448Z'
+updatedOn: '2025-08-02T10:33:29.221Z'
 ---
 
 <InfoBlock>
@@ -17,7 +17,7 @@ updatedOn: '2025-05-30T16:54:40.448Z'
 
 <DocsList title="Related resources" theme="docs">
   <a href="/docs/manage/azure">Neon on Azure</a>
-  <a href="/docs/manage/azure-deploy">Deploy Neon on Azure</a>
+  <a href="/docs/azure/azure-deploy">Deploy Neon on Azure</a>
 </DocsList>
 
 </InfoBlock>
@@ -45,7 +45,7 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 ## Getting started
 
 - [Get started with Neon Serverless Postgres on Azure](/guides/neon-azure-integration) — A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
-- [Familiarize yourself with Neon](/docs/get-started-with-neon/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
+- [Familiarize yourself with Neon](/docs/get-started/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
 
 ## Migrate data to Neon on Azure
 
@@ -63,9 +63,9 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Azure AI Language with Neon](/guides/azure-ai-language) - Analyze customer feedback using Azure AI Language and store results in Neon
 - [Building an AI chatbot with Neon](/guides/azure-ai-chatbot) - Create AI-powered chatbots with Neon and Azure
 - [Azure AI Search with Neon](/guides/azure-ai-search) - Implement search functionality using Azure AI Search and Neon
-- [AI-powered email assistant in Azure](/blogur-personal-ai-powered-email-assistant-in-azure) - Create a personal AI email assistant in Azure
-- [SQL query assistant with .NET and Azure OpenAI](/blogry-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
-- [Generative feedback loops with Azure OpenAI](/blogack-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
+- [AI-powered email assistant in Azure](/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure) - Create a personal AI email assistant in Azure
+- [SQL query assistant with .NET and Azure OpenAI](/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
+- [Generative feedback loops with Azure OpenAI](/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
 - [Build your first AI agent for Postgres on Azure](/guides/azure-ai-agent-service) — Build an AI agent for Postgres using Azure AI Agent Service
 - [Semantic Kernel](/docs/ai/semantic-kernel) — Build AI RAG and agentic workflows with Semantic Kernel and Neon
 

@@ -69,7 +69,6 @@ Follow these steps to set up your project and virtual environment:
     ```
 
     where each package does the following:
-
     - `FastAPI`: A Web / API framework
     - `AsyncPG`: An asynchronous PostgreSQL client
     - `Uvicorn`: An ASGI server for our app
@@ -168,7 +167,7 @@ SELECT 2 as sensor_id,
 With your schema and sample data in place, you're now ready to connect to your database in the FastAPI application. To do this you must create a `.env` file in the root of the project to hold environment-specific variables, such as the connection string to your Neon PostgreSQL database.
 
 ```bash
-DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require
+DATABASE_URL=postgres://user:password@your-neon-hostname.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
 Make sure to replace the placeholders (user, password, your-neon-hostname, etc.) with your actual Neon database credentials, which are available in the console.

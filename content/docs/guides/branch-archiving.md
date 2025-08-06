@@ -3,7 +3,7 @@ title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
 enableTableOfContents: true
-updatedOn: '2025-04-17T16:06:46.402Z'
+updatedOn: '2025-08-02T10:33:29.266Z'
 ---
 
 <InfoBlock>
@@ -54,7 +54,7 @@ When a branch is unarchived, its parent branches, all the way up to the root bra
 The following actions will automatically unarchive a branch, transferring the branch's data back to regular Neon storage:
 
 - [Connecting to or querying the branch from a client or application](/docs/connect/connect-from-any-app)
-- [Querying the branch from the Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor)
+- [Querying the branch from the Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor)
 - [Viewing the branch on the Tables page in the Neon Console](/docs/guides/tables)
 - [Creating a child branch](/docs/manage/branches#create-a-branch)
 - [Creating a role on a branch](/docs/manage/roles#create-a-role)
@@ -83,6 +83,8 @@ For Neon projects created in AWS regions, inactive branches are archived in Amaz
 ## Is branch archiving configurable?
 
 Branch archiving thresholds are not configurable. Archiving and unarchiving happen automatically according to the thresholds and conditions described above.
+
+If you know when a branch should be deleted, set an expiration date rather than wait for automatic archiving. This guarantees automatic deletion at the specified time and works well for CI/CD pipelines and temporary environments. See [Branch expiration](/docs/guides/branch-expiration) for details.
 
 ## Disabling branch archiving
 
@@ -113,7 +115,7 @@ The Neon CLI [branches list](/docs/reference/cli-branches#list) command shows a 
       ┌───────────────────────────┬──────┬─────────┬───────────────┬──────────────────────┐
       │ Id                        │ Name │ Default │ Current State │ Created At           │
       ├───────────────────────────┼──────┼─────────┼───────────────┼──────────────────────┤
-      │ br-muddy-firefly-a7kzf0d4 │ production │ true    │ ready         │ 2024-10-30T14:59:57Z │
+      │ br-muddy-firefly-a7kzf0d4 │ main │ true    │ ready         │ 2024-10-30T14:59:57Z │
       └───────────────────────────┴──────┴─────────┴───────────────┴──────────────────────┘
       ```
 

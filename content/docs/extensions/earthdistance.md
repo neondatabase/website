@@ -2,8 +2,7 @@
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.750Z'
-tag: new
+updatedOn: '2025-08-02T10:33:29.232Z'
 ---
 
 The `earthdistance` extension for Postgres provides functions to calculate great-circle distances between points on the Earth's surface. This is essential for applications requiring geospatial distance calculations, such as location-based services, mapping applications, logistics, and any system that needs to find nearby points or calculate travel distances.
@@ -18,7 +17,7 @@ You may consider using the [`postgis` extension](/docs/extensions/postgis) if ac
 
 ## Enable the `earthdistance` extension
 
-To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
+To use `earthdistance`, you first need to enable it and its dependency, the [`cube` extension](/docs/extensions/cube). You can do this by running the following `CREATE EXTENSION` statements in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client like [psql](/docs/connect/query-with-psql-editor):
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS cube;
@@ -212,7 +211,6 @@ For applications with many locations that require frequent radius searches or ne
     ```
 
     **Explanation of the indexed query:**
-
     - The `ll_to_earth(latitude, longitude) <@ earth_box(...)` condition uses the GiST index. The `earth_box` function creates a square bounding box. The index quickly finds points whose `earth` representation falls within this box.
     - The second condition, `earth_distance(...) < radius`, is crucial. It performs the precise great-circle distance calculation for the candidate rows selected by the index, filtering them to the exact circular radius. This is because the `earth_box` provides a rough filter, and the `earth_distance` provides the exact filter.
 

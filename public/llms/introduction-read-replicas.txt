@@ -1,0 +1,88 @@
+# Neon Read Replicas
+
+> The "Neon Read Replicas" documentation explains how to set up and manage read replicas in Neon, enabling users to distribute read queries across multiple database instances for improved performance and scalability.
+
+## Source
+
+- [Neon Read Replicas HTML](https://neon.com/docs/introduction/read-replicas): The original HTML version of this documentation
+
+Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
+
+
+
+You can instantly create read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's [Autoscaling](https://neon.com/docs/introduction/autoscaling) and [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
+
+## How are Neon read replicas different?
+
+- **No additional storage is required**: With read replicas reading from the same source as your primary read-write compute, no additional storage is required to create a read replica. Data is neither duplicated nor replicated. Creating a read replica involves spinning up a read-only compute instance, which takes a few seconds.
+- **You can create them almost instantly**: With no data replication required, you can create read replicas almost instantly.
+- **They are cost-efficient**: With no additional storage or transfer of data, costs associated with storage and data transfer are avoided. Neon's read replicas also benefit from Neon's [Autoscaling](https://neon.com/docs/introduction/autoscaling) and [Scale to Zero](https://neon.com/docs/manage/computes#scale-to-zero-configuration) features, which allow you to manage compute usage.
+- **They are instantly available**: You can allow read replicas to scale to zero when not in use without introducing lag. When a read replica starts up in response to a query, it is up to date with your primary read-write compute almost instantly.
+
+## How do you create read replicas?
+
+You can create read replicas using the Neon Console, [Neon CLI](https://neon.com/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), providing the flexibility required to integrate read replicas into your workflow or CI/CD processes.
+
+From the Neon Console, it's a simple **Add Read Replica** action on a branch.
+
+   **Note**: You can add read replicas to a branch as needed to accommodate your workload. The Free Plan is limited to a maximum of 3 read replica computes per project.
+
+
+
+From the CLI or API:
+
+Tab: CLI
+
+```bash
+neon branches add-compute mybranch --type read_only
+```
+
+Tab: API
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/late-bar-27572981/endpoints \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "type": "read_only",
+    "branch_id": "br-young-fire-15282225"
+  }
+}
+' | jq
+```
+
+For more details and how to connect to a read replica, see [Create and manage Read Replicas](https://neon.com/docs/guides/read-replica-guide).
+
+## Read Replica architecture
+
+The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](https://neon.com/docs/introduction/architecture-overview) that is responsible for serving read requests.
+
+
+
+Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the most recent changes to maintain data consistency.
+
+## Cross-region support
+
+Neon only supports creating read replicas **in the same region** as your database. However, a cross-region replica setup can be achieved by creating a Neon project in a different region and replicating data to that project via [logical replication](https://neon.com/docs/guides/logical-replication-guide). For example, you can replicate data from a Neon project in a US region to a Neon project in a European region following our [Neon-to-Neon logical replication guide](https://neon.com/docs/guides/logical-replication-neon-to-neon). Read-only access to the replicated database can be managed at the application level.
+
+## Use cases
+
+Neon's read replicas have a number of applications:
+
+- **Horizontal scaling**: Scale your application by distributing read requests across replicas to improve performance and increase throughput.
+- **Analytics queries**: Offloading resource-intensive analytics and reporting workloads to reduce load on the primary compute.
+- **Read-only access**: Granting read-only access to users or applications that don't require write permissions.
+
+## Get started with read replicas
+
+To get started with read replicas, refer to our guides:
+
+- [Create and manage Read Replicas](https://neon.com/docs/guides/read-replica-guide): Learn how to create, connect to, configure, delete, and monitor read replicas
+- [Scale your app with Read Replicas](https://neon.com/docs/guides/read-replica-integrations): Scale your app with read replicas using built-in framework support
+- [Run analytics queries with Read Replicas](https://neon.com/docs/guides/read-replica-data-analysis): Leverage read replicas for running data-intensive analytics queries
+- [Run ad-hoc queries with Read Replicas](https://neon.com/docs/guides/read-replica-adhoc-queries): Leverage read replicas for running ad-hoc queries
+- [Provide read-only access with Read Replicas](https://neon.com/docs/guides/read-only-access-read-replicas): Leverage read replicas to provide read-only access to your data

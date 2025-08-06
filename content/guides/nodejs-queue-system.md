@@ -116,7 +116,7 @@ These packages provide:
 
 ```
 # Database
-DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require
+DATABASE_URL=postgres://[user]:[password]@[hostname]/[database]?sslmode=require&channel_binding=require
 
 # Redis
 REDIS_URL=redis://localhost:6379

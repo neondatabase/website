@@ -1,0 +1,37 @@
+# Neon CLI commands — auth
+
+> The Neon CLI commands documentation for 'auth' details the authentication processes and commands necessary for managing user access and credentials within the Neon database environment.
+
+## Source
+
+- [Neon CLI commands — auth HTML](https://neon.com/docs/reference/cli-auth): The original HTML version of this documentation
+
+## Before you begin
+
+Before running the `auth` command, ensure that you have [installed the Neon CLI](https://neon.com/docs/reference/cli-install).
+
+## The `auth` command
+
+Authenticates the user or caller to Neon.
+
+### Usage
+
+```bash
+neon auth
+```
+
+The command launches a browser window where you can authorize the Neon CLI to access your Neon account. After granting permissions to the Neon CLI, your credentials are saved locally to a configuration file named `credentials.json`, enabling you manage your account's projects from the command line.
+
+```text
+/home/<home>/.config/neonctl/credentials.json
+```
+
+   **Note**: If you use Neon through the [Vercel-Managed Integration](https://neon.com/docs/guides/vercel-managed-integration), you must authenticate connections from the CLI client using a Neon API key (see below). The `neon auth` command requires an account registered through Neon rather than Vercel.
+
+An alternative to authenticating using `neon auth` is to provide an API key when running a CLI command. You can do this using the global `--api-key` option or by setting the `NEON_API_KEY` variable. See [Global options](https://neon.com/docs/reference/neon-cli#global-options) for instructions.
+
+   **Info**: The authentication flow for the Neon CLI follows this order: - If the `--api-key` option is provided, it takes precedence and is used for authentication. - If the `--api-key` option is not provided, the `NEON_API_KEY` environment variable is used if it is set. - If both `--api-key` option and `NEON_API_KEY` environment variable are not provided or set, the CLI falls back to the `credentials.json` file created by the `neon auth` command. - If the credentials file is not found, the Neon CLI initiates the `neon auth` web authentication process.
+
+#### Options
+
+Only [global options](https://neon.com/docs/reference/neon-cli#global-options) apply.

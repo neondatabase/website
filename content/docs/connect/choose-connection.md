@@ -2,7 +2,7 @@
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.610Z'
+updatedOn: '2025-08-02T10:33:29.224Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -89,8 +89,8 @@ Find details on configuring the Neon Serverless Driver for querying over HTTP or
 
 You can use standard Postgres client libraries or drivers. Neon is fully compatible with Postgres, so any application or utility that works with Postgres should work with Neon. Consult the integration guide for your particular language or framework for the right client for your needs:
 
-- [Framework Quickstarts](/docs/get-started-with-neon/frameworks)
-- [Language Quickstarts](/docs/get-started-with-neon/languages)
+- [Framework Quickstarts](/docs/get-started/frameworks)
+- [Language Quickstarts](/docs/get-started/languages)
 
 ### Configuring the connection
 
@@ -103,7 +103,7 @@ For example, to get a pooled connection string via CLI:
 ```bash shouldWrap
 neon connection-string --pooled true [branch_name]
 
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Notice the `-pooler` in the connection string — that's what differentiates a direct connection string from a pooled one.
@@ -113,7 +113,7 @@ Here's an example of getting a direct connection string from the Neon CLI:
 ```bash shouldWrap
 neon connection-string [branch_name]
 
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 For more details, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
@@ -127,3 +127,5 @@ Here is a table summarizing the options we've walked through on this page:
 | **Use Case**    | Migrations, admin tasks requiring stable connections                                                | High number of concurrent client connections, efficient resource management                                                                                                                                                                                                                                                                       | One-shot queries, short-lived operations | Transactions requiring persistent connections |
 | **Scalability** | Limited by `max_connections` tied to [compute size](/docs/manage/computes#how-to-size-your-compute) | Up to 10,000 application connections (between your application and PgBouncer); however, only [`default_pool_size`](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) backend connections (active transactions between PgBouncer and Postgres) are allowed per user/database pair. This limit can be increased upon request. | Automatically scales                     | Automatically scales                          |
 | **Performance** | Low overhead                                                                                        | Efficient for stable, high-concurrency workloads                                                                                                                                                                                                                                                                                                  | Optimized for serverless                 | Optimized for serverless                      |
+
+<NeedHelp/>

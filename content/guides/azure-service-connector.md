@@ -48,7 +48,6 @@ Follow these steps to create a service connection from your Azure compute servic
 
 3.  **Start connection creation:** Click the **+ Create** button on the Service Connector page.
 4.  **Configure basics:**
-
     - **Service type:** Search for and select `Neon Serverless Postgres`.
 
       ![Select Neon service type](/docs/guides/azure-service-connector/service-type-selection.png)
@@ -60,10 +59,8 @@ Follow these steps to create a service connection from your Azure compute servic
     - Click **Next: Authentication**.
 
 5.  **Configure authentication:**
-
     - The **Connection string** option will be pre-selected, as it's the only supported method for Neon.
     - You now need to provide your Neon **Username** and **Password**. Service Connector offers two ways to handle the _password_:
-
       1.  **Database credentials:**
 
           You can use database credentials for the first time connection to create a new Key Vault secret. For applications that already have a Key Vault secret, you can use the Key Vault option to reference the existing secret.
@@ -101,7 +98,6 @@ Follow these steps to create a service connection from your Azure compute servic
     - Click **Next: Networking**.
 
 6.  **Configure networking:**
-
     - For Neon connections via Service Connector in the portal, you can **skip** this step. Network access controls (like IP allow lists) are managed directly within your Neon project settings, not through Service Connector's network configuration options (Firewall, Service Endpoint, Private Endpoint) which apply primarily to Azure target services.
     - Refer to Neon's [IP Allow](/docs/introduction/ip-allow) documentation to configure network access if needed.
     - Click **Next: Review + Create**.
@@ -167,7 +163,7 @@ Adapt the code to fetch and use the environment variables according to your appl
 | .NET                    | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | Standard Npgsql format. (eg, `Server=ep-still-mud-a12aa123.eastus2.azure.neon.tech;Database=<database-name>;Port=5432;Ssl Mode=Require;User Id=<username>`). |
 | Java (JDBC)             | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | `jdbc:postgresql://...` format.                                                                                                                              |
 | Java (Spring Boot JDBC) | Application Properties          | `spring.datasource.url`, `...username`, `...password`                                                                                                 | Service Connector sets corresponding env vars that Spring Boot picks up.                                                                                     |
-| Python (psycopg2)       | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | Key-value format `dbname=... host=... user=... password=... port=... sslmode=require`                                                                        |
+| Python (psycopg2)       | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | Key-value format `dbname=... host=... user=... password=... port=... sslmode=require&channel_binding=require`                                                |
 | Go (pg)                 | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | Similar key-value format as Python.                                                                                                                          |
 | Node.js (pg)            | Env Vars: Individual Components | `NEON_POSTGRESQL_HOST`, `NEON_POSTGRESQL_USER`, `NEON_POSTGRESQL_PASSWORD`, `NEON_POSTGRESQL_DATABASE`, `NEON_POSTGRESQL_PORT`, `NEON_POSTGRESQL_SSL` | Construct connection object/string from parts.                                                                                                               |
 | PHP                     | Env var: connection string      | `NEON_POSTGRESQL_CONNECTIONSTRING`                                                                                                                    | Key-value format.                                                                                                                                            |

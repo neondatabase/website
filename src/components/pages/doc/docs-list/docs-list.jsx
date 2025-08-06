@@ -5,12 +5,12 @@ import React from 'react';
 import DocsLink from 'components/pages/doc/docs-link';
 
 import CheckIcon from './images/check.inline.svg';
-import GithubIcon from './images/github.inline.svg';
+import GitHubIcon from './images/github.inline.svg';
 import PageIcon from './images/page.inline.svg';
 
 const Icon = ({ theme = 'default', className = null }) => {
   if (theme === 'docs') return <PageIcon className={clsx('top-1', className)} aria-hidden />;
-  if (theme === 'repo') return <GithubIcon className={clsx('top-1', className)} aria-hidden />;
+  if (theme === 'repo') return <GitHubIcon className={clsx('top-1', className)} aria-hidden />;
   return <CheckIcon className={clsx('top-[5px]', className)} aria-hidden />;
 };
 

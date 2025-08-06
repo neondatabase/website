@@ -1,0 +1,144 @@
+# Neon Auth for JavaScript
+
+> The "Neon Auth for JavaScript" documentation outlines the steps to integrate Neon's authentication system into JavaScript applications, detailing setup, configuration, and usage for seamless user authentication.
+
+## Source
+
+- [Neon Auth for JavaScript HTML](https://neon.com/docs/neon-auth/quick-start/javascript): The original HTML version of this documentation
+
+Other frameworks:
+- [Neon Auth for Next.js](https://neon.com/docs/neon-auth/quick-start/nextjs)
+- [Neon Auth for React](https://neon.com/docs/neon-auth/quick-start/react)
+  Sample project:
+- [Vanilla TS Template](https://github.com/neondatabase-labs/neon-auth-ts-template)
+
+**Note** Beta: **Neon Auth** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+Neon Auth lets you add authentication to your app in seconds — user data is synced directly to your Neon Postgres database, so you can query and join it just like any other table.
+
+## Add Neon Auth to a project
+
+Go to [pg.new](https://pg.new) to create a new Neon project.
+
+Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
+
+
+
+## Get your Neon Auth keys
+
+On the **Configuration** tab, select your framework to get the **Environment variables** you need to integrate Neon Auth and connect to your database.
+
+You can use these keys right away to get started, or [skip ahead](https://neon.com/docs/neon-auth/quick-start/javascript#create-users-in-the-console-optional) to try out **user creation** in the Neon Console.
+
+```bash
+# Neon Auth environment variables for JavaScript/Node
+
+STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
+STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
+STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
+
+# Your Neon connection string
+
+DATABASE_URL=YOUR_NEON_CONNECTION_STRING
+
+```
+
+ **Note** Are you a Vercel user?: If you're using the [Vercel-Managed Integration](https://vercel.com/marketplace/neon), the integration automatically sets these environment variables for you in Vercel when you connect a Vercel project to a Neon database. [Learn more](https://neon.com/docs/guides/vercel-managed-integration#environment-variables-set-by-the-integration).
+
+## Set up your app
+
+**Clone our template** for the fastest way to see Neon Auth in action.
+
+```bash
+git clone https://github.com/neondatabase-labs/neon-auth-ts-template.git
+```
+
+Or **add Neon Auth** to an existing project.
+
+#### Install the JavaScript SDK
+
+```bash
+npm install @stackframe/js
+```
+
+#### Use your environment variables
+
+Paste the Neon Auth environment variables from [Step 2](https://neon.com/docs/neon-auth/quick-start/javascript#get-your-neon-auth-keys) into your `.env` or `.env.local` file.
+
+## Configure Neon Auth client
+
+```js
+// stack/server.js
+import { StackServerApp } from '@stackframe/js';
+
+export const stackServerApp = new StackServerApp({
+projectId: process.env.STACK_PROJECT_ID,
+publishableClientKey: process.env.STACK_PUBLISHABLE_CLIENT_KEY,
+secretServerKey: process.env.STACK_SECRET_SERVER_KEY,
+tokenStore: 'memory',
+});
+```
+
+## Test your integration
+
+1. Create a test user in the Console (see [Step 4](https://neon.com/docs/neon-auth/quick-start/javascript#create-users-in-the-console-optional)) and copy its ID.
+
+2. Create `src/test.ts`:
+
+ ```ts
+ import 'dotenv/config';
+ import { stackServerApp } from './stack/server.js';
+
+ async function main() {
+ const user = await stackServerApp.getUser('YOUR_USER_ID_HERE');
+ console.log(user);
+ }
+
+ main().catch(console.error);
+ ```
+
+3. Run your test script however you like:
+
+ ```bash shouldWrap
+
+ # if you have a dev/test script in package.json
+
+ npm run dev
+
+ # or directly:
+
+ npx dotenv -e .env.local -- tsx src/test.ts
+ ```
+
+You should see your test user's record printed in the console.
+
+## Create users in the Console (optional)
+
+You can create test users directly from the Neon Console — no app integration required. This is useful for development or testing.
+
+
+
+Now you can [see your users in the database](https://neon.com/docs/neon-auth/quick-start/javascript#see-your-users-in-the-database).
+
+## See your users in the database
+
+As users sign up or log in — through your app or by creating test users in the Console — their profiles are synced to your Neon database in the `neon_auth.users_sync` table.
+
+Query your users table in the SQL Editor to see your new user:
+
+```sql
+SELECT * FROM neon_auth.users_sync;
+```
+
+| id | name | email | created_at | updated_at | deleted_at | raw_json |
+| ----------- | --------- | --------------- | ------------------- | ------------------- | ---------- | ---------------------------- |
+| 51e491df... | Sam Patel | sam@startup.dev | 2025-02-12 19:43... | 2025-02-12 19:46... | null | `{"id": "51e491df...", ...}` |
+
+## Next Steps
+
+Want to learn more or go deeper?
+
+- [How Neon Auth works](https://neon.com/docs/guides/neon-auth-how-it-works) — See a before and after showing the benefits of having your user data right in your database
+- [Neon Auth tutorial](https://neon.com/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
+- [Best Practices & FAQ](https://neon.com/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting
+- [Neon Auth API Reference](https://neon.com/docs/guides/neon-auth-api) — Automate and manage Neon Auth via the API

@@ -2,7 +2,7 @@
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.459Z'
+updatedOn: '2025-08-02T10:33:29.264Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -54,7 +54,7 @@ Here’s an example CORS configuration allowing `http://localhost:3000` to view 
 
 We need a table in Neon to store metadata about the objects uploaded to B2.
 
-1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
+1.  Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Create a table including the B2 file name (object key), file URL, user ID, and timestamp:
 
     ```sql
     CREATE TABLE IF NOT EXISTS b2_files (
@@ -440,7 +440,6 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - **Accessing the file:**
-
   - If your bucket is **Public**, you can use the `file_url` directly in your application (e.g., `<img>` tags, download links).
   - If your bucket is **Private**, the stored `file_url` is likely irrelevant. You **must** generate a **presigned download URL** (a GET URL) on demand using your backend. This involves a similar process to generating the upload URL but using `GetObjectCommand` (JS) or `generate_presigned_url('get_object', ...)` (Python) with read permissions. This provides secure, temporary read access.
 

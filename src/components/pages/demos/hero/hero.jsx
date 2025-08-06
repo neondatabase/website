@@ -24,7 +24,7 @@ const items = [
     imageHeight: 216,
     title:
       "Tracking the latency between cloud hosting platforms and Neon's Postgres database regions",
-    demoLink: 'https://latency-benchmarks-dashboard.vercel.app/',
+    demoLink: '/demos/regional-latency',
     sourceLink: 'https://github.com/neondatabase-labs/latency-benchmarks',
   },
   {

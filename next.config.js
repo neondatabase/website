@@ -141,6 +141,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/get-started-with-neon/:path*',
+        destination: '/docs/get-started/:path*',
+        permanent: true,
+      },
+      {
         source: '/bm',
         destination: '/?ref=tbm-p',
         permanent: true,
@@ -182,7 +187,12 @@ const defaultConfig = {
       },
       {
         source: '/jobs',
-        destination: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: 'https://www.databricks.com/company/careers',
         permanent: true,
       },
       {
@@ -217,6 +227,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/migration-assistance',
+        destination: '/docs/import/migrate-intro',
+        permanent: true,
+      },
+      {
         source: '/driver',
         destination: '/docs/serverless/serverless-driver',
         permanent: false,
@@ -224,6 +239,16 @@ const defaultConfig = {
       {
         source: '/blog/postgres-autoscaling',
         destination: '/blog/scaling-serverless-postgres',
+        permanent: false,
+      },
+      {
+        source: '/blog/an-apology-and-a-recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
+        permanent: false,
+      },
+      {
+        source: '/blog/recap-on-may-june-stability',
+        destination: '/blog/may-june-recap',
         permanent: false,
       },
       {
@@ -298,6 +323,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/support',
+        destination: '/docs/introduction/support',
+        permanent: true,
+      },
+      {
         source: '/early-access-program',
         destination: '/docs/introduction/roadmap#join-the-neon-early-access-program',
         permanent: true,
@@ -305,6 +335,11 @@ const defaultConfig = {
       {
         source: '/hipaa-compliance-guide',
         destination: '/docs/security/hipaa',
+        permanent: true,
+      },
+      {
+        source: '/hipaa-baa',
+        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
       {
@@ -335,6 +370,16 @@ const defaultConfig = {
       {
         source: '/docs/use-cases/dev-test',
         destination: '/use-cases/dev-test',
+        permanent: true,
+      },
+      {
+        source: '/launchpad',
+        destination: 'https://neon.new',
+        permanent: false,
+      },
+      {
+        source: '/docs/local/neon-local-vscode',
+        destination: '/docs/local/neon-local-connect',
         permanent: true,
       },
       ...docsRedirects,
@@ -377,7 +422,12 @@ const defaultConfig = {
       },
       {
         source: '/demos/regional-latency',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/',
+        destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
+      },
+      {
+        source: '/demos/regional-latency/:path*',
+        destination:
+          'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
       },
       {
         source: '/dev-for-rds',

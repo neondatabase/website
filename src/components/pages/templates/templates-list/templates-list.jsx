@@ -5,8 +5,8 @@ import Link from 'components/shared/link';
 
 const TemplatesList = ({ className, templates }) => (
   <ul className={clsx('divide-y divide-gray-new-80/80 dark:divide-gray-new-15/80', className)}>
-    {templates.map(({ name, description, slug, githubUrl }) => (
-      <li className="pb-6 pt-6 first:pt-0 last:pb-0" key={githubUrl}>
+    {templates.map(({ name, description, slug, gitHubUrl }) => (
+      <li className="pb-6 pt-6 first:pt-0 last:pb-0" key={gitHubUrl}>
         <Link
           className="group flex items-center justify-between md:flex-col md:items-start md:gap-y-3"
           to={`/templates/${slug}`}

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/chat-options/discord.inline.svg';
-import GithubIcon from 'icons/chat-options/github.inline.svg';
+import GitHubIcon from 'icons/chat-options/github.inline.svg';
 import NeonIcon from 'icons/chat-options/neon.inline.svg';
 import VSCodeIcon from 'icons/chat-options/vscode.inline.svg';
 
@@ -16,7 +16,7 @@ const ITEMS = [
   },
   {
     title: 'GitHub Copilot',
-    icon: GithubIcon,
+    icon: GitHubIcon,
     link: LINKS.githubCopilot,
     isExternal: true,
     className: 'xl:order-1',

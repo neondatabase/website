@@ -1,16 +1,15 @@
 ---
 title: Query organization usage metrics with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-12-18T18:37:32.360Z'
+updatedOn: '2025-06-03T12:42:18.757Z'
 ---
 
-You can use the Neon API to retrieve three types of consumption metrics for your organization:
+You can use the Neon API to retrieve two types of consumption history metrics for your organization:
 
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans         |
+| Metric                                                                                           | Description                                                                       | Plan Availability               |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale, Business, and Enterprise |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale, Business, and Enterprise |
 
 ## Finding organizations for consumption queries
 
@@ -31,8 +30,20 @@ The response includes details about each organization, including the `org_id` yo
     {
       "id": "org-morning-bread-81040908",
       "name": "Morning Bread Organization",
-      "created_at": "2022-11-23T17:42:25Z",
-      "updated_at": "2022-12-04T02:39:25Z"
+      "handle": "morning-bread-organization-org-morning-bread-81040908",
+      "plan": "free_v2",
+      "created_at": "2025-04-30T14:43:00Z",
+      "managed_by": "console",
+      "updated_at": "2025-04-30T14:46:22Z"
+    },
+    {
+      "id": "org-super-grass-41324851",
+      "name": "Super Org Inc",
+      "handle": "super-org-inc-org-super-grass-41324851",
+      "plan": "scale_v2",
+      "created_at": "2025-06-02T16:56:18Z",
+      "managed_by": "console",
+      "updated_at": "2025-06-02T16:56:18Z"
     }
   ]
 }
@@ -65,6 +76,8 @@ The response will provide aggregated hourly consumption metrics, including activ
   "periods": [
     {
       "period_id": "random-period-abcdef",
+      "period_plan": "scale",
+      "period_start": "2024-06-01T00:00:00Z",
       "consumption": [
         {
           "timeframe_start": "2024-06-30T15:00:00Z",
@@ -138,6 +151,8 @@ curl --request GET \
       "periods": [
         {
           "period_id": "random-period-abcdef",
+          "period_plan": "scale",
+          "period_start": "2024-06-30T00:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-06-30T00:00:00Z",
@@ -160,6 +175,8 @@ curl --request GET \
         },
         {
           "period_id": "random-period-ghijkl",
+          "period_plan": "scale",
+          "period_start": "2024-07-01T09:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-07-01T09:00:00Z",
@@ -193,4 +210,4 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.

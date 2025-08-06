@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-02T15:04:05.564Z'
+updatedOn: '2025-08-02T10:33:29.222Z'
 ---
 
 <InfoBlock>
@@ -60,7 +60,7 @@ The branch page shows the following information for each branch:
 | **Primary Compute** | The allocated autoscaling range, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu), for the branch's primary compute. |
 | **Data size**       | The [logical size](/docs/reference/glossary#logical-data-size) of the data stored in the branch.                                      |
 
-To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](/docs/get-started-with-neon/workflow-primer).
+To learn about integrating branching into your developer workflow, see our [Database branching workflow primer](/docs/get-started/workflow-primer).
 
 You can also create branches in the Neon Console. See [Create a branch](/docs/manage/branches#create-a-branch) for instructions.
 
@@ -111,9 +111,8 @@ For more about connecting to your Neon database, see [Connect from any app](/doc
 
 You can transfer existing Neon projects to an Azure-created organization, but note these restrictions:
 
-- The Neon project you are transferring must belong to a personal Neon account, not an organization.
 - The Neon project you are transferring must be in an [Azure region](/docs/introduction/regions#azure-regions). Azure-created Neon organizations do not support projects created in [AWS regions](/docs/introduction/regions#aws-regions).
-- The billing plan of the Azure-managed organization must match or exceed the billing plan of the personal Neon account you are transferring projects from. For example, attempting to transfer projects from a Neon paid plan personal account to a Free plan Azure-managed organization will result in an error.
+- The billing plan of the Azure-managed organization must match or exceed the billing plan of the organization you are transferring projects from. For example, attempting to transfer projects from a Neon paid plan organization to a Free plan Azure-managed organization will result in an error.
 
 For detailed transfer steps, see [Transfer projects to an organization](/docs/manage/orgs-project-transfer).
 

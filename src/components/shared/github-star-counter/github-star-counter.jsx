@@ -16,7 +16,7 @@ const formatStars = (starsCount) => {
   return `${fixedThousands}k`;
 };
 
-const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount, tagName }) => (
+const GitHubStarCounter = ({ className = '', isDarkTheme = false, starsCount, tagName }) => (
   <Link
     className={clsx(
       'flex items-center gap-x-1.5 text-sm leading-none tracking-extra-tight transition-colors duration-200',
@@ -29,7 +29,7 @@ const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount, ta
     target="_blank"
     rel="noopener noreferrer"
     tagName={tagName}
-    tagText="Github"
+    tagText="GitHub"
   >
     <GitHubIcon width={18} height={18} />
     <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
@@ -38,9 +38,9 @@ const GithubStarCounter = ({ className = '', isDarkTheme = false, starsCount, ta
   </Link>
 );
 
-export default GithubStarCounter;
+export default GitHubStarCounter;
 
-GithubStarCounter.propTypes = {
+GitHubStarCounter.propTypes = {
   className: PropTypes.string,
   isDarkTheme: PropTypes.bool,
   starsCount: PropTypes.number.isRequired,

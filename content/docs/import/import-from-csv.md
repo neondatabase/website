@@ -1,7 +1,7 @@
 ---
 title: Import data from CSV
 enableTableOfContents: true
-updatedOn: '2025-04-21T13:38:49.804Z'
+updatedOn: '2025-08-02T10:33:29.291Z'
 ---
 
 This topic shows how to import data into a Neon database table from a CSV file using a simple example.
@@ -41,7 +41,7 @@ CREATE TABLE customer (
 ```
 
 <Admonition type="tip">
-You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+You can also create tables using the **SQL Editor** in the Neon Console. See [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 </Admonition>
 
 ## Prepare the CSV file

@@ -110,14 +110,12 @@ Create.xyz instantly switches your app back to that earlier state.
 To make the most of Create and build apps efficiently, consider the following tips:
 
 - **Prompting Best Practices**:
-
   - **Context is key**: Start prompts with clear context. For example describe the app's purpose and main features. For example say, "I want to add a new feature to allow users to download images."
   - **Iterate in small steps**: Break down complex changes. For a whole new page, start by describing the header, then the body, then the footer in separate prompts. This gives you more control.
   - **Show, Don't just tell**: Use images! Paste screenshots or drag and drop images into the chat to show Create exactly what you want the style or layout to be wherever possible.
   - **Pinpoint errors**: Be specific when things go wrong. Instead of saying "it's broken", paste error messages or describe exactly what you expected to happen vs. what did happen.
 
 - **Leverage Create's integrations**:
-
   - **Explore the Integration library**: Create has many integrations ready to use. Type `/` in the chat to see them. Integrations include AI models, UI libraries, and services like Stripe.
   - **Choose the right AI model**: Experiment with different AI models for different tasks. For example, use Stable Diffusion for image generation, OpenAI/Claude for text generation etc.
 

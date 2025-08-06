@@ -3,7 +3,7 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-11T11:32:44.538Z'
+updatedOn: '2025-08-02T10:33:29.281Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -16,7 +16,7 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 
 - A [Materialize account](https://materialize.com/register/).
 - A [Neon account](https://console.neon.tech/).
-- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
+- Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Enable logical replication
@@ -182,7 +182,7 @@ Now that you’ve configured your database network and created an ingestion clus
    You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button. A Neon connection string looks like this:
 
    ```text shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
    - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
