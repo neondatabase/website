@@ -267,5 +267,4 @@ Extra compute usage is billed by the **compute hour** at **$0.16/hour** across a
 
 Since compute usage is measured hourly, **prorated billing does not apply**.
 
-
 <NeedHelp/>
