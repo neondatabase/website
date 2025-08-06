@@ -1,6 +1,6 @@
 ---
 title: Neon plans
-subtitle: Learn about Neon’s pricing plans, including what’s included in each plan, usage-based pricing, and frequently asked 
+subtitle: Learn about Neon’s pricing plans, including what’s included in each plan, usage-based pricing, and frequently asked
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -22,25 +22,25 @@ Get started for free. Pay per usage as you grow.
 
 ## Plan overview
 
-| Plan      | **Free**            | **Launch**                 | **Enterprise**             |
-|-----------|---------------------|----------------------------|----------------------------|
-| **Price** | $0/month            | $5/month minimum           | $5/month minimum           |
-| **Who it's for** | Prototypes and side projects | Startups and growing teams | Production-grade companies |
-| **Projects** | 10                | 100                        | 1,000                      |
-| **Branches included** | 10/project | 10/project | 25/project |
-| **Extra branches** | — | $0.002/branch-hour | $0.002/branch-hour |
-| **Compute** | 50 CU-hours | Pay-as-you-go @ $0.14/CU-hour | Pay-as-you-go @ $0.26/CU-hour |
-| **Autoscaling** | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM) | Up to 56 CU (56 vCPU / 224 GB RAM) |
-| **Scale to zero** | Auto (after 5 min) | Auto (after 5 min, can be disabled) | Configurable (5 seconds -> always on) |
-| **Storage** | 1 GB/project *(root: 0.5 GB, child branch: 0.5 GB)* | Pay-as-you-go @ $0.35 per GB-month | Pay-as-you-go @ $0.35 per GB-month |
-| **Data transfer (egress)** | 5 GB included | 100 GB included, then $0.10/GB | 100 GB included, then $0.10/GB |
-| **Console UI monitoring** | 1 day | 3 days | 14 days |
-| **Metrics/logs export (Datadog, OTel)** | — | — | Included |
-| **Restore window** | 6 hours, up to 1 GB-month | Up to 7 days | Up to 30 days |
-| **Instant restore** | — | $0.20/GB-month | $0.20/GB-month |
-| **Private networking transfer (additional cost)** | — | — | $0.01/GB |
-| **Support** | Community | Billing support | Production support |
-| **Compliance & features** | — | SOC 2 / ISO / GDPR, HIPAA (extra), IP Allow, Private Networking | All included |
+| Plan                                              | **Free**                                            | **Launch**                                                      | **Enterprise**                        |
+| ------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
+| **Price**                                         | $0/month                                            | $5/month minimum                                                | $5/month minimum                      |
+| **Who it's for**                                  | Prototypes and side projects                        | Startups and growing teams                                      | Production-grade companies            |
+| **Projects**                                      | 10                                                  | 100                                                             | 1,000                                 |
+| **Branches included**                             | 10/project                                          | 10/project                                                      | 25/project                            |
+| **Extra branches**                                | —                                                   | $0.002/branch-hour                                              | $0.002/branch-hour                    |
+| **Compute**                                       | 50 CU-hours                                         | Pay-as-you-go @ $0.14/CU-hour                                   | Pay-as-you-go @ $0.26/CU-hour         |
+| **Autoscaling**                                   | Up to 2 CU (2 vCPU / 8 GB RAM)                      | Up to 16 CU (16 vCPU / 64 GB RAM)                               | Up to 56 CU (56 vCPU / 224 GB RAM)    |
+| **Scale to zero**                                 | Auto (after 5 min)                                  | Auto (after 5 min, can be disabled)                             | Configurable (5 seconds -> always on) |
+| **Storage**                                       | 1 GB/project _(root: 0.5 GB, child branch: 0.5 GB)_ | Pay-as-you-go @ $0.35 per GB-month                              | Pay-as-you-go @ $0.35 per GB-month    |
+| **Data transfer (egress)**                        | 5 GB included                                       | 100 GB included, then $0.10/GB                                  | 100 GB included, then $0.10/GB        |
+| **Console UI monitoring**                         | 1 day                                               | 3 days                                                          | 14 days                               |
+| **Metrics/logs export (Datadog, OTel)**           | —                                                   | —                                                               | Included                              |
+| **Restore window**                                | 6 hours, up to 1 GB-month                           | Up to 7 days                                                    | Up to 30 days                         |
+| **Instant restore**                               | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
+| **Private networking transfer (additional cost)** | —                                                   | —                                                               | $0.01/GB                              |
+| **Support**                                       | Community                                           | Billing support                                                 | Production support                    |
+| **Compliance & features**                         | —                                                   | SOC 2 / ISO / GDPR, HIPAA (extra), IP Allow, Private Networking | All included                          |
 
 ## Frequently asked questions
 
@@ -182,7 +182,7 @@ Yes! Early-stage startups that have received venture funding can apply to our **
 
 **Scenario C: Branch-heavy**
 
-- 10 included + 5 extra branches  
+- 10 included + 5 extra branches
 - 5 GB shared storage
 - ~115 CU-hours (≈ 0.25 CU for 1.5 hrs/day per branch, Mon–Fri)
 - **Total: $25/month**
