@@ -39,13 +39,6 @@ export default {
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
   },
-  branching: {
-    title: 'Instant branching for Postgres — Neon',
-    description:
-      'Neon allows you to instantly branch your data the same way that you branch your code.',
-    imagePath: '/images/social-previews/branching.jpg',
-    pathname: LINKS.branching,
-  },
   caseStudies: {
     title: 'Case Studies — Neon',
     description: 'Discover how other companies are using Neon.',
