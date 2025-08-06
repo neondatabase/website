@@ -143,7 +143,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createSnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
 
 ```
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -269,7 +269,7 @@ Use this option if you want to restore the snapshot data immediately without ins
 
 <TabItem>
 
-A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
+A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
@@ -319,7 +319,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 1.  **Restore the snapshot to a new branch**
 
-    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint:
+    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint:
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
@@ -336,7 +336,7 @@ Use this option if you need to inspect the restored data before you switch over 
     - `finalize_restore`: Set to `false` so that you can inspect the new branch before finalizing the restore operation.
 
        <Admonition type="note">
-          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listSnapshots) endpoint.
+          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots) endpoint.
 
              ```bash
              curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
@@ -359,7 +359,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 3.  **Finalize the restore**
 
-    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
+    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
     - Moves your original branch's computes to the new branch and restarts the computes
     - Renames the new branch to original branch's name
     - Renames the original branch to `<branch_name> (old)`.
