@@ -44,7 +44,6 @@ First, create a new Nuxt.js application and push it to a GitHub repository, whic
     ```
 
     When prompted, choose the following options:
-
     - **Package manager:** `npm`
     - **Initialize git repository:** `Yes`
     - **Install official modules:** `No`
@@ -175,7 +174,6 @@ To manage your database schema and migrations, you will use [Drizzle ORM](https:
     ```
 
     The `todos` table has the following fields:
-
     - `id`: A unique identifier for each todo item.
     - `text`: The text of the todo item.
     - `completed`: A boolean indicating whether the todo is completed.
@@ -266,7 +264,6 @@ With the database configured, let's build the Todo application. This will includ
 2.  **Create API endpoints:**
 
     Nuxt automatically scans the `server/api` directory to create your API.
-
     - **GET `/api/todos`:** Create `server/api/todos.get.ts`
 
       ```typescript
@@ -739,7 +736,6 @@ To demonstrate the automated branching workflow, you will add a new feature to y
     ```
 
 7.  **Check the Preview deployment:**
-
     - **Vercel:** Go to your project in Vercel. You will see a new **Preview deployment** being built for the `feature/add-priority` branch.
     - **Neon:** Go to your project in the Neon Console and click on the **Branches** tab. You will see a new branch has been automatically created, named something like `preview/feature/add-priority`. This branch is an instant, copy-on-write clone of your main branch.
 

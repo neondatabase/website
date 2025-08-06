@@ -235,13 +235,11 @@ The GitHub Actions workflow automates database branching and schema management f
 This job runs when a pull request is opened, reopened, or synchronized:
 
 1. **Branch Creation**:
-
    - Uses Neon's `create-branch-action` to create a new database branch
    - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
    - Inherits the schema and data from the parent branch
 
 2. **Migration Handling**:
-
    - Installs project dependencies
    - Generates migration files using Drizzle
    - Applies migrations to the newly created branch
@@ -258,7 +256,6 @@ This job runs when a pull request is opened, reopened, or synchronized:
 This job executes when a pull request is closed (either merged or rejected):
 
 1. **Production Migration**:
-
    - If the PR is merged, applies migrations to the production database
    - Uses the main `DATABASE_URL` stored in repository secrets
    - Ensures production database stays in sync with merged changes
