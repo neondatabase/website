@@ -1,6 +1,8 @@
 ---
 title: Data anonymization
 subtitle: Anonymize data in Neon branches using the PostgreSQL Anonymizer extension
+redirectFrom:
+  - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
 updatedOn: '2025-07-04T12:47:21.311Z'
