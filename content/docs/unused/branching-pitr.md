@@ -48,7 +48,7 @@ You can also create point-in-time branches using the [Neon CLI](/docs/reference/
 neon branches create --name recovery_branch --parent 2023-07-11T10:00:00Z
 ```
 
-The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+The timestamp must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter).
 
 </Admonition>
 
