@@ -111,7 +111,7 @@ At the end of the month:
 
 Total GB-month = Root branch size + deltas from all child branches
 
-[Learn more about Neon’s branching model](#).
+[Learn more about Neon’s branching model](/docs/guides/branching-intro).
 
 ---
 
