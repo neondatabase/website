@@ -18,6 +18,8 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 <a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="cards">Plans</a>
 
+<a href="/docs/introduction/legacy-plans" description="A reference for Neon's legacy billing plans" icon="cli-cursor">Legacy plans</a>
+
 <a href="/docs/introduction/pricing-faq" description="Answers to common questions about Neon’s pricing" icon="cli-cursor">Pricing FAQ</a>
 
 </DetailIconCards>
@@ -34,11 +36,9 @@ Start with an overview of Neon's pricing plans to learn what's included, then us
 
 ## Understand how billing works
 
-Find out how billing works and learn more about Neon's usage metrics.
+Learn more about Neon's usage metrics.
 
 <DetailIconCards>
-
-<a href="/docs/introduction/extra-usage" description="Learn about plan allowances and how extra usage works" icon="wallet">Extra usage</a>
 
 <a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
 

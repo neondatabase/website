@@ -454,11 +454,11 @@
       items:
         - title: Plans
           slug: introduction/plans
-        - title: Pricing FAQ
-          slug: introduction/pricing-faq
+        - title: Legacy plans
+          slug: introduction/legacy-plans
         - title: Usage metrics
           slug: introduction/usage-metrics
-        - title: Monitor billing and usage
+        - title: Monitor billing
           slug: introduction/monitor-usage
         - title: Manage billing
           slug: introduction/manage-billing
