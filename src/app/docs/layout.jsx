@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import MobileNav from 'components/pages/doc/mobile-nav';
-import ModeToggler from 'components/pages/doc/mode-toggler';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
@@ -37,7 +36,6 @@ const NeonDocsLayout = async ({ children }) => {
           className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-20 pt-9 xl:flex xl:max-w-[calc(100vw-302px)] xl:flex-col lg:pt-5 md:pt-4"
           size="1408"
         >
-          <ModeToggler className="mb-7 hidden md:flex" />
           {children}
         </Container>
       </div>
