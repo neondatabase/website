@@ -11,7 +11,7 @@
       },
       {
         "title": "1 GB per project",
-        "info": "Root branch: max 0.5 GB / project<br/><br/>Delta in child branches: max 0.5 GB / project (cumulative)<br/><br/>Only data diff vs root branch count as child branch storage",
+        "info": "<p>Root branch: max 0.5 GB / project</p><p>Delta in child branches: max 0.5 GB / project (cumulative)</p><p>Only data diff vs root branch count as child branch storage</p>",
         "moreLink": { "text": "Read more", "href": "#branches-and-storage" }
       },
       {
@@ -19,7 +19,7 @@
       },
       {
         "title": "50 CU-hour",
-        "info": "CU-hour = CU x active hours (compute usage)<br/>1 CU = 1 vCPU, 4 GB memory",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
       {
@@ -54,7 +54,7 @@
       },
       {
         "title": "Pay-as-you-go compute at $0.14 per CU-hour",
-        "info": "CU-hour = CU x active hours (compute usage)<br/>1 CU = 1 vCPU, 4 GB memory",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
       { "title": "Autoscaling up to 16 CU", "info": "16 vCPU, 64 GB memory" }
@@ -91,7 +91,7 @@
       },
       {
         "title": "Pay-as-you-go compute at $0.26 per CU-hour",
-        "info": "CU-hour = CU x active hours (compute usage)<br/>1 CU = 1 vCPU, 4 GB memory",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
       { "title": "Autoscaling up to 56 CU", "info": "= 56 vCPU, 224 GB memory" }

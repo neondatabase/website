@@ -86,7 +86,7 @@
       },
       "free": {
         "title": "1 GB per project",
-        "info": "Root branch: max 0.5 GB<br/>Delta in child branches:<br/>max 0.5 GB / project (cumulative)"
+        "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:</br>max 0.5 GB / project (cumulative)</p>"
       },
       "launch": {
         "title": "Pay-as-you-go at $0.35/GB-mo"

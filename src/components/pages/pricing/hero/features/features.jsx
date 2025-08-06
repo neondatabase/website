@@ -18,7 +18,7 @@ const variantsAnimation = {
 };
 
 const Feature = ({ title, info, type, highlighted, index, moreLink }) => {
-  const tooltip = `${info}${moreLink ? `<br/><br/><a class="border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45" href=${moreLink.href}>${moreLink.text}</a>` : ''}`;
+  const tooltip = `${info}${moreLink ? `<a class="border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45 mt-2 inline-block" href=${moreLink.href}>${moreLink.text}</a>` : ''}`;
 
   return (
     <li className="flex gap-x-2 font-normal">
