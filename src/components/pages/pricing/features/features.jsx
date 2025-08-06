@@ -64,7 +64,7 @@ const DATA = [
 ];
 
 const Features = () => (
-  <section className="features mt-[192px] scroll-mt-5 px-safe xl:mt-40 lg:mt-36 md:mt-28">
+  <section className="features mt-[200px] scroll-mt-5 px-safe xl:mt-[192px] lg:mt-[184px] md:mt-[102px]">
     <Container size="1152" className="xl:px-16 md:px-5">
       <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
         Features in all Neon databases

@@ -192,8 +192,7 @@ module.exports = {
           'linear-gradient(0deg, #101013, #101013)',
         'blog-subscribe-form':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
+        'pricing-table-featured-column': 'linear-gradient(180deg, rgba(19, 20, 21, 0.80));',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
         'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',

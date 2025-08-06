@@ -2,7 +2,7 @@ import Features from 'components/pages/pricing/features';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
 import CTA from 'components/shared/cta';
-import FaqAccordeon from 'components/shared/faq-accordeon';
+import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import LINKS from 'constants/links';
@@ -92,6 +92,7 @@ const faqItems = [
       </ul>
       <a href="${LINKS.docs}/introduction/branch-restore">Read the docs</a> for more information on Instant Restores.
     `,
+    id: 'instant-restores',
   },
   {
     question: 'Which level of support do I get with Neon?',
@@ -114,10 +115,10 @@ const faqItems = [
 const PricingPage = () => (
   <Layout>
     <Hero />
-    <Logos className="mt-[136px] xl:mt-28 lg:mt-24 lg:pt-0 md:mt-20" logos={logos} />
-    <Plans className="my-[184px] scroll-mt-5 px-safe xl:my-40 lg:mt-32 md:my-20" />
+    <Logos className="lg:mt-30 mt-[136px] xl:mt-[128px] lg:pt-0 md:mt-20" logos={logos} />
+    <Plans className="mt-[184px] scroll-mt-5 px-safe xl:mt-[176px] lg:mt-[168px] md:mt-32" />
     <Features />
-    <FaqAccordeon items={faqItems} className="xl:mt-[192px] md:mt-[104px]" />
+    <Faq items={faqItems} className="mt-[200px] xl:mt-[192px] lg:mt-[184px] md:mt-[104px]" />
     <CTA
       className="pb-[350px] pt-[445px] xl:pb-[200px] xl:pt-[260px] lg:pb-[150px] lg:pt-[220px] sm:pb-[100px] sm:pt-[160px]"
       title="Still have a question?"

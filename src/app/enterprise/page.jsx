@@ -5,7 +5,7 @@ import Hero from 'components/pages/enterprise/hero';
 import HowNeonHelps from 'components/pages/enterprise/how-neon-helps';
 import Usage from 'components/pages/enterprise/usage';
 import CTA from 'components/shared/cta';
-import FaqAccordeon from 'components/shared/faq-accordeon';
+import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import TestimonialNew from 'components/shared/testimonial-new';
@@ -318,7 +318,7 @@ const EnterprisePage = () => (
         avatar: authorRobertChandler,
       }}
     />
-    <FaqAccordeon items={faqItems} />
+    <Faq items={faqItems} />
     <CTA
       className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
       title="The Postgres of tomorrow, <br /> available today"

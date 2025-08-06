@@ -66,7 +66,7 @@ const Hero = () => {
         <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
           Get started for free. Pay per usage as you grow.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 lg:mt-11 md:mt-9">
+        <div className="relative mx-auto mt-16 lg:mt-14 md:mt-10">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] 2xl:gap-x-6 lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {plans.map(
