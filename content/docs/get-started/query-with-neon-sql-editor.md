@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
   - /docs/get-started-with-neon/query-with-neon-sql-editor
-updatedOn: '2025-08-02T10:33:29.257Z'
+updatedOn: '2025-08-07T10:06:24.015Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
