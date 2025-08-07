@@ -263,7 +263,7 @@ Use this option if you want to restore the snapshot data immediately without ins
 3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
-   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it. **However, please note that other snapshots you may have taken are still attached with this branch. If you need to keep those snapshots, do not remove the "old" branch.**
+   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it. **However, please note that any snapshots taken previously remain attached to this branch. If you need to keep them, we recommend retaining this branch.**
 
 </TabItem>
 
