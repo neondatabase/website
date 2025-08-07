@@ -135,7 +135,7 @@ This API key configuration ensures that the API key is kept secure while still p
 
 For temporary environments, create branches with `--expires-at` to set a TTL for automatic deletion instead of manual cleanup:
 
-```bash
+```bash shouldWrap
 # Create a branch that expires at a specific date and time
 neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2025-07-15T18:02:16Z"
 
@@ -148,7 +148,7 @@ neon branches create --project-id <project-id> --name ci-test --parent <parent-b
 
 You can also update or remove expiration from existing branches:
 
-```bash
+```bash shouldWrap
 # Update expiration to a new timestamp
 neon branches set-expiration <branch-id> --expires-at "2025-07-20T12:00:00Z" --project-id <project-id>
 
