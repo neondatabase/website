@@ -41,7 +41,77 @@ Start for free, then pay only for what you use as your needs grow.
 | **Instant restore**                               | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
 | **Private networking transfer (additional cost)** | —                                                   | —                                                               | $0.01/GB                              |
 | **Support**                                       | Community                                           | Billing support                                                 | Production support                    |
-| **Compliance & features**                         | —                                                   | SOC 2 / ISO / GDPR, HIPAA (extra), IP Allow, Private Networking | All included                          |
+| **Compliance & security**                         | —                                                   | SOC 2 / ISO / GDPR, HIPAA (extra), IP Allow, Private Networking | All included                          |
+
+## Free plan
+
+The Free plan is ideal for prototypes, side projects, and quick experiments. It includes:
+
+- **10 projects**, each with:
+  - **10 branches**
+  - **1 GB of storage** (0.5 GB on your root branch, and 0.5 GB on your child branches)
+  - **50 CU-hours of compute**
+- **Autoscaling** up to 2 CU (2 vCPU / 8 GB RAM)
+- **Scale to zero** automatically after 5 minutes of inactivity
+- **5 GB of data transfer (egress) included**
+- **6-hour restore window**, up to 1 GB-month
+- **1 day of monitoring visibility** in the Neon Console
+- **Community support** via [Discord](https://discord.gg/92vNTzKDGp)
+
+This plan is completely free to use, with no credit card required. Great for testing out Neon or building personal projects.
+
+---
+
+## Launch plan
+
+The Launch plan is designed for startups and growing teams that need more capacity and flexibility:
+
+- **100 projects**, with:
+  - **10 branches per project**
+  - Pay-as-you-go **extra branches** at $0.002/branch-hour
+- **Autoscaling** up to 16 CU (16 vCPU / 64 GB RAM)
+- **Scale to zero** after 5 minutes (can be disabled)
+- Pay-as-you-go **compute** at $0.14/CU-hour
+- Pay-as-you-go **storage** at $0.35/GB-month
+- **100 GB of data transfer included**, then $0.10/GB
+- **3 days of monitoring visibility** in the Neon Console
+- **Restore window up to 7 days**
+- **Instant restore** available at $0.20/GB-month
+- **Billing support** included
+- **Compliance features**:
+  - SOC 2, ISO, GDPR
+  - IP Allow
+  - Private Networking
+  - HIPAA (extra)
+
+Requires a minimum monthly spend of $5.
+
+---
+
+## Enterprise plan
+
+The Enterprise plan is built for production workloads and larger teams, offering higher limits, advanced features, and full support:
+
+- **1,000 projects**, each with:
+  - **25 branches**
+  - Pay-as-you-go **extra branches** at $0.002/branch-hour
+- **Autoscaling** up to 56 CU (56 vCPU / 224 GB RAM)
+- **Scale to zero** configurable (5 seconds to always-on)
+- Pay-as-you-go **compute** at $0.26/CU-hour
+- Pay-as-you-go **storage** at $0.35/GB-month
+- **100 GB of data transfer included**, then $0.10/GB
+- **14 days of monitoring visibility** in the Neon Console
+- **Restore window up to 30 days**
+- **Instant restore** at $0.20/GB-month
+- **Private networking transfer**: $0.01/GB
+- **Production support**
+- All **compliance features** included:
+  - SOC 2, ISO, GDPR, HIPAA
+  - IP Allow
+  - Private Networking
+
+Also requires a $5/month minimum, with all usage billed on top.
+
 
 ## Frequently asked questions
 
