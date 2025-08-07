@@ -327,7 +327,7 @@ To remove the GitHub integration:
 
 - [Creating GitHub Actions](https://docs.github.com/en/actions/creating-actions)
 - [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart)
-- [Database Branching Workflows](/flow)
+- [Database Branching Workflows](/branching)
 - [Database branching workflow guide for developers](/blog/database-branching-workflows-a-guide-for-developers)
 
 ## Feedback and future improvements
