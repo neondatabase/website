@@ -112,7 +112,6 @@ The Enterprise plan is built for production workloads and larger teams, offering
 
 Also requires a $5/month minimum, with all usage billed on top.
 
-
 ## Frequently asked questions
 
 Got questions about Neon pricing? You’ll find answers to the most common ones below.  

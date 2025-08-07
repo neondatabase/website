@@ -11,7 +11,7 @@ This page describes the usage metrics for Neon plans. These metrics determine wh
 Your monthly compute usage depends on how long your compute runs and at what size.
 
 Measured in **CU-hours** (Compute Unit hours).  
-One CU represents 1 vCPU and 4 GB of RAM. Compute sizes to 56 CU are supported. 
+One CU represents 1 vCPU and 4 GB of RAM. Compute sizes to 56 CU are supported.
 
 Usage is calculated as:
 
@@ -39,7 +39,7 @@ Instant restore stores historical changes to support point-in-time restores. The
 
 ## Extra branches
 
-Measured in **branch-hours**, which track usage of active branches that exceed the included branch count for your plan.  
+Measured in **branch-hours**, which track usage of active branches that exceed the included branch count for your plan.
 
 You can create and delete unlimited branches, but you'll be billed if the number of **concurrent active branches** exceeds your plan’s allowance.
 
