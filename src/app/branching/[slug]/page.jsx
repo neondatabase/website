@@ -71,7 +71,7 @@ const BranchingPage = ({ params }) => {
         nextLink={nextLink}
         basePath={BRANCHING_BASE_PATH}
       />
-      <DocFooter className="mt-0" updatedOn={updatedOn} slug={`${LINKS.flow}/${slug}`} />
+      <DocFooter className="mt-0" updatedOn={updatedOn} slug={`${LINKS.branching}/${slug}`} />
     </>
   );
 };
