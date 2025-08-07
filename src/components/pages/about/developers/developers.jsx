@@ -38,7 +38,6 @@ const Developers = () => (
       <Heading
         className="max-w-[630px] text-center text-[56px] font-medium leading-none tracking-extra-tight lg:text-5xl md:text-[36px]"
         tag="h2"
-        theme="black"
       >
         Developers are at the center of everything we do
       </Heading>

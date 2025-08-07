@@ -14,7 +14,6 @@ const Hero = () => (
         <Heading
           className="text-6xl font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[36px]"
           tag="h1"
-          theme="black"
         >
           Neon is the
           <br />
@@ -42,17 +41,18 @@ const Hero = () => (
           </Link>
         </div>
       </header>
-      <p className="max-w-sm pt-3 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-[352px] xl:pt-1.5 lg:max-w-[288px] lg:pt-1 lg:text-base md:mt-8 md:max-w-none md:pt-0">
-        <span className="font-thin text-white">Our mission: </span>
-        deliver Postgres as a cloud service designed to help teams build scalable, dependable
-        applications faster than ever.{` `}
-        <span className="mt-6 block">
+      <div className="max-w-sm pt-3 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-[352px] xl:pt-1.5 lg:max-w-[288px] lg:pt-1 lg:text-base md:mt-8 md:max-w-none md:pt-0">
+        <p>
+          <span className="text-white">Our mission:</span> deliver Postgres as a cloud service
+          designed to help teams build scalable, dependable applications faster than ever.
+        </p>
+        <p className="mt-6">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
           the level of performance, reliability, and scale to make Postgres{` `}
-          <span className="font-thin text-white">a foundational building block</span> as universal
-          as S3.
-        </span>
-      </p>
+          <span className="text-white">a foundational building block</span> as&nbsp;universal
+          as&nbsp;S3.
+        </p>
+      </div>
     </Container>
   </section>
 );

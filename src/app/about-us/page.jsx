@@ -1,5 +1,3 @@
-import { notFound } from 'next/navigation';
-
 import Connections from 'components/pages/about/connections';
 import Developers from 'components/pages/about/developers';
 import Hero from 'components/pages/about/hero';
@@ -9,10 +7,12 @@ import WhereHeaded from 'components/pages/about/where-headed';
 import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
-import { getAboutPage } from 'utils/api-pages';
+import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-const AboutUsPage = async () => (
+export const metadata = getMetadata(SEO_DATA.aboutUs);
+
+const AboutUsPage = () => (
   <Layout>
     <Hero />
     <Timeline />
@@ -21,7 +21,7 @@ const AboutUsPage = async () => (
     <Developers />
     <Connections />
     <Cta
-      className="pb-[320px] pt-[285px] xl:pb-[220px] xl:pt-[196px] lg:pb-[156px] lg:pt-[224px] sm:pb-[80px] sm:pt-[180px]"
+      className="pb-[320px] pt-[350px] xl:pb-[220px] xl:pt-[270px] lg:pb-[156px] lg:pt-[200px] sm:pb-[80px] sm:pt-[180px]"
       title="Become a part of our&nbsp;team"
       description="We're looking for people who care deeply about quality to build with us."
       buttonText="View Open Roles"
@@ -30,34 +30,5 @@ const AboutUsPage = async () => (
     />
   </Layout>
 );
-
-export async function generateMetadata() {
-  const page = await getAboutPage();
-
-  if (!page) return notFound();
-
-  const {
-    seo: {
-      title,
-      metaDesc,
-      metaKeywords,
-      metaRobotsNoindex,
-      opengraphTitle,
-      opengraphDescription,
-      twitterImage,
-    },
-  } = page;
-
-  return getMetadata({
-    title: opengraphTitle || title,
-    description: opengraphDescription || metaDesc,
-    keywords: metaKeywords,
-    robotsNoindex: metaRobotsNoindex,
-    pathname: '/about-us',
-    imagePath: twitterImage?.mediaItemUrl,
-  });
-}
-
-export const revalidate = 60;
 
 export default AboutUsPage;

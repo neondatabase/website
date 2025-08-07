@@ -27,6 +27,12 @@ export default {
     imagePath: '/images/social-previews/aws-israel.jpg',
     pathname: LINKS.awsIsrael,
   },
+  aboutUs: {
+    title: 'About Us — Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+    pathname: LINKS.aboutUs,
+  },
   blog: {
     title: 'Our Blog — Neon',
     description:

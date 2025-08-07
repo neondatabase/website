@@ -44,13 +44,13 @@ const ITEMS = [
   {
     date: 'May 14th, 2025',
     title: 'Databricks acquires Neon',
-    link: `${LINKS.blog}/databricks-neon`,
+    link: `https://www.databricks.com/company/newsroom/press-releases/databricks-agrees-acquire-neon-help-developers-deliver-ai-systems`,
   },
   {
     className: '2xl:translate-x-[35px]',
     date: 'June 13th, 2025',
     title: 'Databricks launches Lakebase',
-    link: `${LINKS.blog}/lakebase`,
+    link: `https://www.databricks.com/product/lakebase`,
   },
 ];
 
@@ -104,9 +104,9 @@ Point.propTypes = {
 };
 
 const Timeline = () => (
-  <section className="timeline safe-paddings mt-[136px] overflow-hidden pt-10 xl:mt-[110px] lg:mt-[56px] md:mt-4">
+  <section className="timeline safe-paddings mt-[136px] overflow-hidden pb-1 pt-10 xl:mt-[110px] lg:mt-[56px] md:mt-4">
     <Container className="relative 2xl:max-w-5xl md:max-w-[544px] md:!px-5" size="1344">
-      <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[300px] translate-x-[60px] bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[260px] 2xl:translate-x-[30px] xl:translate-x-[-40px] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[-20%] md:-left-14 md:bottom-[140px] md:top-auto md:h-[120px] md:w-[270px] md:translate-x-0" />
+      <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[300px] translate-x-[60px] bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[260px] 2xl:translate-x-[30px] xl:translate-x-[-40px] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[-35%] md:-left-14 md:bottom-[140px] md:top-auto md:h-[120px] md:w-[270px] md:translate-x-0" />
       <Image
         className="pointer-events-none absolute left-1/2 top-[105px] -translate-x-1/2 2xl:hidden"
         src={line}
@@ -143,7 +143,7 @@ const Timeline = () => (
         {ITEMS.map(({ date, title, className, link }, index) => (
           <li
             className={clsx(
-              'relative flex h-fit w-[148px] max-w-[148px] flex-col gap-y-2 2xl:max-w-[105px] lg:max-w-[76px] lg:gap-y-1 md:translate-x-0 md:pb-0.5 md:pl-3.5',
+              'relative flex h-fit w-[148px] max-w-[148px] flex-col gap-y-2 2xl:max-w-[105px] lg:max-w-[72px] lg:gap-y-1 md:translate-x-0 md:pb-0.5 md:pl-3.5',
               index % 2 === 0
                 ? 'mt-auto pt-7 xl:translate-y-[-3px] md:pt-0'
                 : 'pb-7 xl:translate-y-[3px] md:pb-0',
@@ -160,12 +160,12 @@ const Timeline = () => (
               {date}
             </span>
             {typeof link === 'undefined' ? (
-              <span className="whitespace-nowrap pb-0.5 text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 xl:text-[14px]">
+              <span className="whitespace-nowrap pb-0.5 text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 xl:text-[14px] lg:text-[13px]">
                 {title}
               </span>
             ) : (
               <Link
-                className="w-fit whitespace-nowrap border-b border-white/20 pb-px text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 transition-[border-color,color] duration-300 hover:border-primary-1 2xl:text-[16px] xl:text-[14px]"
+                className="w-fit whitespace-nowrap border-b border-white/20 pb-px text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 transition-[border-color,color] duration-300 hover:border-primary-1 2xl:text-[16px] xl:text-[14px] lg:text-[13px]"
                 to={link}
                 theme="white"
                 aria-label={`read more about ${title}`}
