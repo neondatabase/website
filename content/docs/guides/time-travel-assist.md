@@ -40,7 +40,7 @@ To change your restore window, see [Configure restore window](/docs/manage/proje
 
 Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
 
-![time travel error message](/docs/guides/time_travel_error.png 'no-border')
+![time travel error message](/docs/guides/time_travel_error.png)
 
 ### Time Travel with the SQL Editor
 
@@ -76,9 +76,9 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 <TabItem>
 
 1. In the Neon Console, open the **SQL Editor**.
-1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
+1. Use the **Time Travel** (🕣) icon to enable querying against an earlier point in time.
 
-   ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
+   ![Time Travel toggle](/docs/get-started/time_travel_sql_editor.png)
 
 1. Use the Date & Time selector to choose a point within your restore window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
@@ -90,7 +90,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 1. In the Neon Console, go to **Restore**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
-   ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
+   ![time travel selection](/docs/guides/time_travel_restore_select.png)
 
    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
 
