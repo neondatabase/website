@@ -48,7 +48,7 @@ Open the detailed view for the branch whose schema you want to inspect. In the r
 
 ### From the Restore page
 
-Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or ** From another branch** (from another branch's history).
+Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or **From another branch** (from another branch's history).
 
 Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
 
