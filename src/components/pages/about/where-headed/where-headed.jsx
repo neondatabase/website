@@ -35,6 +35,7 @@ const WhereHeaded = () => (
             className="border-b border-white/20 text-white transition-[border-color,color] duration-300 hover:border-primary-1"
             to="https://www.databricks.com/company/newsroom/press-releases/databricks-agrees-acquire-neon-help-developers-deliver-ai-systems"
             theme="white"
+            target="_blank"
             aria-label="read more about Neon is now part of Databricks"
           >
             Neon is now part of Databricks.
@@ -49,6 +50,7 @@ const WhereHeaded = () => (
             className="border-b border-white/20 text-white transition-[border-color,color] duration-300 hover:border-primary-1"
             to="https://www.databricks.com/blog/announcing-lakebase-public-preview"
             theme="white"
+            target="_blank"
             aria-label="read more about Neon is now part of Databricks"
           >
             The same technology behind Neon powers Lakebase:
