@@ -56,6 +56,7 @@ const Card = ({ icon, title, description, link }) => (
     <Link
       theme="white"
       to={link.href}
+      target="_blank"
       className="text-[13px] font-medium leading-none tracking-extra-tight transition-[color] duration-300 group-hover:text-primary-2"
       aria-label={link.text}
       withArrow
