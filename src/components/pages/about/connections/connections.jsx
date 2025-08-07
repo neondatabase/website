@@ -45,6 +45,7 @@ const Card = ({ icon, title, description, link }) => (
       className="absolute left-0 top-0 h-full w-full"
       href={link.href}
       aria-label={link.text}
+      target="_blank"
     />
     <Image src={icon} alt={title} width={32} height={32} quality={100} className="mb-[14px]" />
     <Heading tag="h3" theme="black" className="mb-2 text-xl tracking-tight">
