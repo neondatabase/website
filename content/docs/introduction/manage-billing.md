@@ -95,8 +95,8 @@ If you find an issue with your invoice, you can request a refund. The request wi
 1. Navigate to the Neon Console.
 1. Select your organization from the breadcrumb menu at the top-left of the console.
 1. Select **Billing** from the menu.
-1. Navigate to the **Invoices** section of the page.
-1. Find the invoice you want to request a refund for, and select **Request refund** from the menu. Enter a problem description explaining the reason for the request.
+1. Click the "View past invoices" button.
+1. Find the invoice you want to request a refund for, and select **Request credit note** from the menu. Enter a problem description explaining the reason for the request.
 
 ## Change your plan
 
