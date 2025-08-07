@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.918Z'
+updatedOn: '2025-08-06T14:09:12.291Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -116,7 +116,7 @@ Using the Neon CLI, you can establish a connection to a specific point in your b
 neon connection-string <branch>@<timestamp|LSN>
 ```
 
-In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
+In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in RFC 3339 format) or Log Sequence Number for the point in time you want to access.
 
 Example:
 

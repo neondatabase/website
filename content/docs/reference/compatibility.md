@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-06-26T10:40:37.522Z'
+updatedOn: '2025-08-06T14:13:25.080Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -34,7 +34,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported.
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints. 
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                                                                                                                           |
@@ -276,5 +276,9 @@ CREATE TABLE my_ru_table (
 ICU also supports creating custom collations. For more information, see [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS).
 
 For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
+
+## track_commit_timestamp parameter
+
+The `track_commit_timestamp` Postgres parameter is currently not supported in Neon due to platform constraints.
 
 <NeedHelp/>
