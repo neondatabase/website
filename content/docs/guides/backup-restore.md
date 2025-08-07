@@ -254,7 +254,7 @@ Use this option if you want to restore the snapshot data immediately without ins
 2. The **One-step restore** modal explains the operation:
    - The restore operation will occur instantly.
    - The current branch will be restored to the snapshot state.
-   - A branch named `<branch_name (old)>` will be created as a backup. Other snapshots you may have taken are attached to this branch.
+   - A branch named `<branch_name (old)>` will be created as a backup. Other snapshots you may have taken previously remain attached to this branch.
 
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
 
