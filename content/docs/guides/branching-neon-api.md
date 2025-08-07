@@ -269,4 +269,56 @@ curl --request POST \
 '
 ```
 
+## Creating a branch with expiration using the API
+
+<ComingSoon />
+
+To create a branch with an automatic expiration timestamp using the Neon API, use the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint with the `expires_at` option. When a branch reaches its expiration time, it is automatically deleted. Required values include:
+
+- Your Neon `project_id`
+- The `parent_id`, which is the branch ID of the branch you want to branch from
+- The `expires_at` timestamp in [RFC 3339](https://tools.ietf.org/html/rfc3339#section-5.6) format including a time zone (Z or offset)
+- The expiration must be in the future and no more than 30 days from now
+
+```bash
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/wispy-salad-58347608/branches \
+     --header 'Accept: application/json' \
+     --header "Authorization: Bearer $NEON_API_KEY" \
+     --header 'Content-Type: application/json' \
+     --data '{
+       "branch": {
+         "name": "feature-test-branch",
+         "parent_id": "br-super-mode-w371g4od",
+         "expires_at": "2024-12-15T18:02:16Z"
+       },
+       "endpoints": [
+         {
+           "type": "read_write"
+         }
+       ]
+     }'
+```
+
+Example response (partial):
+
+```json
+{
+  "branch": {
+    "id": "br-feature-67890",
+    "name": "feature-test-branch",
+    "expires_at": "2024-12-15T18:02:16Z",
+    "ttl_interval_seconds": 604800,
+    "created_at": "2024-12-08T18:02:16Z"
+  }
+}
+```
+
+Key response fields for branch expiration:
+
+- The `expires_at` field shows the scheduled deletion timestamp in RFC 3339 format
+- The `ttl_interval_seconds` field is the original expiration interval, in seconds (read-only)
+
+For more detailed information about branch expiration, including updating and removing expiration timestamps, see [Branch expiration](/docs/guides/branch-expiration).
+
 <NeedHelp/>
