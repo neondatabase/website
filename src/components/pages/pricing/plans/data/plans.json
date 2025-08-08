@@ -2,7 +2,7 @@
   "headings": {
     "feature": "",
     "free": {
-      "label": "Free Plan",
+      "label": "Free",
       "price": "<span>$0/month</span>",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
@@ -58,8 +58,8 @@
         "title": "Compute"
       },
       "free": "50 CU-hours included",
-      "launch": "Pay-as-you-go at $0.14/CU-hr",
-      "enterprise": "Pay-as-you-go at $0.26/CU-hr"
+      "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
+      "enterprise": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
     },
     {
       "rows": "2",
@@ -85,13 +85,12 @@
         "title": "Storage"
       },
       "free": {
-        "title": "1 GB per project",
+        "title": "0.5 GB per project",
         "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:</br>max 0.5 GB / project (cumulative)</p>"
       },
-      "launch": {
-        "title": "Pay-as-you-go at $0.35/GB-mo"
-      },
-      "enterprise": "Pay-as-you-go at $0.35/GB-mo"
+      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+      ,
+      "enterprise": "Pay-as-you-go at<span>$0.35 per GB-month</span>"
     },
     {
       "rows": "2",
@@ -100,8 +99,8 @@
         "subtitle": "Egress"
       },
       "free": "5 GB included",
-      "launch": "100 GB included<br/>then $0.10 per GB",
-      "enterprise": "100 GB included<br/>then $0.10 per GB"
+      "launch": "100 GB included<span>then $0.10 per GB</span>",
+      "enterprise": "100 GB included<span>then $0.10 per GB</span>"
     },
     {
       "rows": "2",
@@ -124,12 +123,12 @@
       "enterprise": "Included"
     },
     {
-      "rows": "2",
+      "rows": "3",
       "feature": {
         "title": "Restore Window",
         "subtitle": "For Instant Restores"
       },
-      "free": "Time travel up to 6h or 1GB",
+      "free": "Time travel up to 6h<span>or 1 GB of data changes</span><span>(whichever comes first)</span>",
       "launch": "Time travel up to 7 days",
       "enterprise": "Time travel up to 30 days"
     },
@@ -140,8 +139,8 @@
         "subtitle": "Pricing (additional)<br/><a href='#instant-restores'>Read more</a>"
       },
       "free": false,
-      "launch": "$0.20/GB-mo <span>based on the volume of data changes during your selected restore window</span>",
-      "enterprise": "$0.20/GB-mo <span>based on the volume of data changes during your selected restore window</span>"
+      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
+      "enterprise": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
     },
     {
       "rows": "2",

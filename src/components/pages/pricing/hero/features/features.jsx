@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
@@ -38,17 +38,19 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => {
         )}
       >
         <span className="with-link-primary">
-          {Array.isArray(title)
-            ? title.map((part, i) =>
-                typeof part === 'string' ? (
-                  part
-                ) : (
-                  <Link key={i} to={part.href} onClick={part.onClick}>
-                    {part.text}
-                  </Link>
-                )
+          {Array.isArray(title) ? (
+            title.map((part, i) =>
+              typeof part === 'string' ? (
+                <Fragment key={i} dangerouslySetInnerHTML={{ __html: part }} />
+              ) : (
+                <Link key={i} to={part.href} onClick={part.onClick}>
+                  {part.text}
+                </Link>
               )
-            : title}
+            )
+          ) : (
+            <span dangerouslySetInnerHTML={{ __html: title }} />
+          )}
         </span>
         {info && (
           <span className="whitespace-nowrap">
