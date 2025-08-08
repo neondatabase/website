@@ -45,14 +45,14 @@ const ITEMS = [
     date: 'May 14th, 2025',
     title: 'Databricks acquires Neon',
     link: `https://www.databricks.com/company/newsroom/press-releases/databricks-agrees-acquire-neon-help-developers-deliver-ai-systems`,
-    target: '_blank',
+    isExternal: true,
   },
   {
     className: '2xl:translate-x-[35px]',
     date: 'June 13th, 2025',
     title: 'Databricks launches Lakebase',
     link: `https://www.databricks.com/product/lakebase`,
-    target: '_blank',
+    isExternal: true,
   },
 ];
 
@@ -142,7 +142,7 @@ const Timeline = () => (
         priority
       />
       <ul className="relative z-10 mx-auto flex h-[180px] pl-[92px] pr-6 pt-8 2xl:pl-16 2xl:pr-0 xl:pl-0 lg:h-[163px] lg:max-w-[704px] lg:pl-0 lg:pt-7 md:h-auto md:max-w-none md:flex-col md:gap-y-8 md:pb-10 md:pl-5 md:pt-9">
-        {ITEMS.map(({ date, title, className, link, target }, index) => (
+        {ITEMS.map(({ date, title, className, link, isExternal }, index) => (
           <li
             className={clsx(
               'relative flex h-fit w-[148px] max-w-[148px] flex-col gap-y-2 2xl:max-w-[105px] lg:max-w-[72px] lg:gap-y-1 md:translate-x-0 md:pb-0.5 md:pl-3.5',
@@ -171,7 +171,7 @@ const Timeline = () => (
                 to={link}
                 theme="white"
                 aria-label={`read more about ${title}`}
-                {...(target && { target })}
+                isExternal={isExternal}
               >
                 {title}
               </Link>

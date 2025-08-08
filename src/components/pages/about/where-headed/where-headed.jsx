@@ -59,7 +59,7 @@ const WhereHeaded = () => (
           AI era.
         </p>
 
-        <ul className="mt-14 flex justify-between lg:mt-10 md:flex-col md:gap-8">
+        <ul className="mt-14 flex gap-x-[74px] lg:mt-10 lg:gap-x-[60px] md:flex-col md:gap-8">
           <StatisticsItem title="40,000" description="Databases created daily" />
           <StatisticsItem title="80%" description="Of databases deployed by agents" />
         </ul>
