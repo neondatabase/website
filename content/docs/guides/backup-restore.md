@@ -21,7 +21,6 @@ Use the **Backup & restore** page in the Neon Console to instantly restore a bra
 - ✅ Instantly restore a branch
 - ✅ Preview data before restoring
 - ✅ Create snapshots manually
-- ✅ Schedule snapshots
 - ✅ Restore from a snapshot
 
 ---
@@ -129,7 +128,7 @@ curl --request POST \
 
 ## Create snapshots manually
 
-Snapshots capture the state of your branch at a point in time. You can create snapshots manually or [schedule](#schedule-snapshots) them.
+Snapshots capture the state of your branch at a point in time. You can create snapshots manually.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -161,72 +160,6 @@ The parameters used in the example above:
 - `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
-
-</TabItem>
-
-</Tabs>
-
-## Schedule snapshots
-
-You can automate snapshot creation by setting a snapshot schedule for a branch.
-
-<Tabs labels={["Console", "API"]}>
-
-<TabItem>
-
-To edit the snapshot schedule for a branch:
-
-1. Click **Edit schedule**.
-2. In the **Edit snapshot schedule** modal, configure:
-   - **Frequency** – Daily, weekly, or monthly snapshots.
-   - **Retention** – How long to retain snapshots before they expire.
-   - **Custom retention rules** – Optionally keep specific daily or weekly snapshots for longer.
-
-   For example, you can configure daily snapshots at 01:00 UTC, keep Monday snapshots for a few weeks, and retain monthly snapshots for several months.
-
-3. Click **Update schedule** to apply your changes.
-
-   Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
-
-   ![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
-
-   <Admonition type="tip">
-   The Neon API provides finer-grained control over snapshot scheduling. Learn more by clicking the **API** tab above.
-   </Admonition>
-
-</TabItem>
-
-<TabItem>
-
-### Set a snapshot schedule
-
-This example sets a snapshot schedule for a Neon branch. It configures a snapshot to be taken on December 31 at 23:00 (11 PM), with a retention period of one hour (3600 seconds). The `frequency` field must be set to a supported value such as `"monthly"`, `"weekly"`, or `"daily"` depending on your use case. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
-
-```bash
-curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branch_id/{branch_id}/snapshot_schedule" \
-  -H "Content-Type: application/json" \
-  -H 'authorization: Bearer $NEON_API_KEY' \
-  -d '{
-    "schedule": [
-      {
-        "frequency": "string",
-        "hour": 23,
-        "day": 31,
-        "month": 12,
-        "retention_seconds": 3600
-      }
-    ]
-  }' |jq
-```
-
-### Retrieve a snapshot schedule
-
-This example shows how to retrieve a snapshot schedule for a branch. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
-
-```bash
-curl -X GET "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot_schedule" \
-  -H 'authorization: Bearer $NEON_API_KEY'
-```
 
 </TabItem>
 
@@ -343,7 +276,6 @@ Use this option if you need to inspect the restored data before you switch over 
              -H "Content-Type: application/json" \
              -H "Authorization: Bearer $NEON_API_KEY" |jq
              ```
-
        </Admonition>
 
 2.  **Inspect the new branch**
