@@ -9,6 +9,12 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  about: {
+    title: 'About Us - Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+    pathname: '',
+  },
   ai: {
     title: 'Postgres for AI — Neon',
     description:

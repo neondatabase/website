@@ -1,5 +1,3 @@
-import { notFound } from 'next/navigation';
-
 import ForDevelopers from 'components/pages/about/for-developers';
 import Hero from 'components/pages/about/hero';
 import Investors from 'components/pages/about/investors';
@@ -9,9 +7,11 @@ import Timeline from 'components/pages/about/timeline';
 import Cta from 'components/shared/cta';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
-import { getAboutPage } from 'utils/api-pages';
+import SEO_DATA from 'constants/seo-data';
 import { getGitHubStars, getGitHubContributors } from 'utils/get-github-data';
 import getMetadata from 'utils/get-metadata';
+
+export const metadata = getMetadata(SEO_DATA.about);
 
 const AboutUsPage = async () => {
   const [gitHubStars, gitHubContributors] = await Promise.all([
@@ -56,33 +56,6 @@ const AboutUsPage = async () => {
     </Layout>
   );
 };
-
-export async function generateMetadata() {
-  const page = await getAboutPage();
-
-  if (!page) return notFound();
-
-  const {
-    seo: {
-      title,
-      metaDesc,
-      metaKeywords,
-      metaRobotsNoindex,
-      opengraphTitle,
-      opengraphDescription,
-      twitterImage,
-    },
-  } = page;
-
-  return getMetadata({
-    title: opengraphTitle || title,
-    description: opengraphDescription || metaDesc,
-    keywords: metaKeywords,
-    robotsNoindex: metaRobotsNoindex,
-    pathname: '/about-us',
-    imagePath: twitterImage?.mediaItemUrl,
-  });
-}
 
 export const revalidate = 60;
 
