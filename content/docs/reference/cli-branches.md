@@ -20,19 +20,19 @@ The `branches` command allows you to list, create, rename, delete, and retrieve 
 neon branches <subcommand> [options]
 ```
 
-| Subcommand                  | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| [list](#list)               | List branches                                |
-| [create](#create)           | Create a branch                              |
-| [reset](#reset)             | Reset data to parent                         |
-| [restore](#restore)         | Restore a branch to a selected point in time |
-| [rename](#rename)           | Rename a branch                              |
-| [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-default](#set-default) | Set a default branch                         |
-| [set-expiration](#set-expiration) | Set expiration date for a branch         |
-| [add-compute](#add-compute) | Add replica to a branch                      |
-| [delete](#delete)           | Delete a branch                              |
-| [get](#get)                 | Get a branch                                 |
+| Subcommand                        | Description                                  |
+| --------------------------------- | -------------------------------------------- |
+| [list](#list)                     | List branches                                |
+| [create](#create)                 | Create a branch                              |
+| [reset](#reset)                   | Reset data to parent                         |
+| [restore](#restore)               | Restore a branch to a selected point in time |
+| [rename](#rename)                 | Rename a branch                              |
+| [schema-diff](#schema-diff)       | Compare schemas                              |
+| [set-default](#set-default)       | Set a default branch                         |
+| [set-expiration](#set-expiration) | Set expiration date for a branch             |
+| [add-compute](#add-compute)       | Add replica to a branch                      |
+| [delete](#delete)                 | Delete a branch                              |
+| [get](#get)                       | Get a branch                                 |
 
 ## list
 
@@ -135,7 +135,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
 | `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                 | boolean |                                                     |
-| `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                       | string  |                                                     |
+| `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                      | string  |                                                     |
 
 <Admonition type="note">
 When creating a branch from a protected parent branch, role passwords on the child branch are changed. For more information about this Protected Branches feature, see [New passwords generated for Postgres roles on child branches](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
