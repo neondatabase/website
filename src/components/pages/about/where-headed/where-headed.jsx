@@ -38,7 +38,7 @@ const WhereHeaded = () => (
             target="_blank"
             aria-label="read more about Neon is now part of Databricks"
           >
-            Neon is now part of Databricks.
+            Neon is a Databricks company.
           </Link>{' '}
           In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native
           development. The mission stays the same: deliver Postgres for developers and AI agents —
