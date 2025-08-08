@@ -6,7 +6,7 @@ import Link from 'components/shared/link';
 
 const StatisticsItem = ({ title, description }) => (
   <li className="flex flex-col gap-[20px] lg:gap-3 md:gap-2">
-    <span className="bg-[linear-gradient(73deg,#7F95EB_1%,#89E0EA_33%,#EFEFEF_81%)] bg-clip-text pr-3 font-title text-7xl font-medium leading-none tracking-tighter text-transparent lg:text-6xl md:text-[56px]">
+    <span className="bg-[linear-gradient(73deg,#7F95EB_1%,#89E0EA_33%,#EFEFEF_81%)] bg-clip-text pr-3 text-7xl font-semibold leading-none tracking-tighter text-transparent lg:text-6xl md:text-[56px]">
       {title}
     </span>
     <span className="text-[15px] font-normal uppercase leading-none tracking-extra-tight text-gray-new-50 lg:text-[14px] md:text-[13px]">

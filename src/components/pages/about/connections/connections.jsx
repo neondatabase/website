@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 
 import Heading from 'components/shared/heading';
@@ -40,17 +39,16 @@ const SOCIALS = [
 ];
 
 const Card = ({ icon, title, description, link }) => (
-  <article className="group relative flex w-[216px] flex-col items-center justify-center rounded-lg border border-gray-new-15 bg-[#0A0A0A] px-5 py-5 lg:w-[200px] md:w-[320px]">
-    <NextLink
+  <article className="group relative flex w-[216px] flex-col items-center justify-center rounded-lg border border-gray-new-15 bg-[#0A0A0A] p-6 lg:w-[200px] md:w-[320px]">
+    <a
       className="absolute left-0 top-0 h-full w-full"
       href={link.href}
       aria-label={link.text}
       target="_blank"
+      rel="noreferrer noopener"
     />
     <Image src={icon} alt={title} width={32} height={32} quality={100} className="mb-[14px]" />
-    <Heading tag="h3" className="mb-2 text-xl tracking-tight">
-      {title}
-    </Heading>
+    <h3 className="mb-2 text-xl leading-snug tracking-tight text-white">{title}</h3>
     <p className="mb-[18px] text-center text-sm font-normal leading-snug tracking-tight text-gray-new-60">
       {description}
     </p>
