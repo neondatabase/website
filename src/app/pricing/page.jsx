@@ -97,10 +97,7 @@ const faqItems = [
   {
     question: 'Which level of support do I get with Neon?',
     answer: `
-      <p>We offer different levels of support, depending on your pricing plan:</p>
-      <ul>
-        <li>TO BE COMPLETED (I’m not sure yet)</li>
-      </ul>
+      <p>We offer different levels of support, depending on your pricing plan.</p>
     `,
   },
   {

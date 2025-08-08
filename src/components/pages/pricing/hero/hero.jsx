@@ -63,10 +63,10 @@ const Hero = () => {
         >
           <span>Neon Pricing</span>
         </Heading>
-        <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
           Get started for free. Pay per usage as you grow.
         </p>
-        <div className="relative mx-auto mt-16 lg:mt-14 md:mt-10">
+        <div className="relative mx-auto mt-16 lg:mt-14 md:mx-0 md:mt-10 md:w-full md:max-w-[524px]">
           <h2 className="sr-only">Neon pricing plans</h2>
           <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[16px] lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {plans.map(
@@ -115,7 +115,7 @@ const Hero = () => {
 
                   <Button
                     className={clsx(
-                      'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      'mt-5 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
                         ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
                         : 'bg-gray-new-20 hover:bg-gray-new-30'
