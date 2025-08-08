@@ -276,6 +276,7 @@ Use this option if you need to inspect the restored data before you switch over 
              -H "Content-Type: application/json" \
              -H "Authorization: Bearer $NEON_API_KEY" |jq
              ```
+
        </Admonition>
 
 2.  **Inspect the new branch**
