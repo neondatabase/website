@@ -48,7 +48,7 @@ const Card = ({ icon, title, description, link }) => (
       target="_blank"
     />
     <Image src={icon} alt={title} width={32} height={32} quality={100} className="mb-[14px]" />
-    <Heading tag="h3" theme="black" className="mb-2 text-xl tracking-tight">
+    <Heading tag="h3" className="mb-2 text-xl tracking-tight">
       {title}
     </Heading>
     <p className="mb-[18px] text-center text-sm font-normal leading-snug tracking-tight text-gray-new-60">
