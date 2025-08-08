@@ -13,8 +13,6 @@ export default {
   demos: '/demos',
   deploy: '/deploy',
   developerDays1: '/developer-days-1',
-  docs: '/docs',
-  enterprise: '/enterprise',
   flow: '/flow',
   faster: '/faster',
   generateTicket: '/generate-ticket',

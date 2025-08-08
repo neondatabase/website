@@ -17,7 +17,7 @@ const Faq = ({ items, className }) => (
       </h2>
       <ul className="-my-4 flex w-full flex-col xl:-my-5 lg:mt-4">
         {items.map((item, index) => (
-          <Item {...item} key={index} index={index} />
+          <Item {...item} key={item.question} index={index} />
         ))}
       </ul>
     </Container>
@@ -31,7 +31,6 @@ Faq.propTypes = {
       answer: PropTypes.string.isRequired,
       id: PropTypes.string,
       initialState: PropTypes.string,
-      index: PropTypes.number.isRequired,
     })
   ).isRequired,
   className: PropTypes.string,

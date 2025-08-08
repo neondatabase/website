@@ -79,8 +79,7 @@
     "description": "For production-grade companies",
     "features": [
       {
-        "title": "1000 projects",
-        "info": "5,000 branches per project"
+        "title": "1000 projects"
       },
       {
         "title": "Pay-as-you-go storage at\u00A0$ 0.35 per\u00A0GB-month"
@@ -113,7 +112,7 @@
       "url": "https://console.neon.tech/app/billing#plans",
       "theme": "primary",
       "event": "Hero Enterprise Panel",
-      "analyticsEvent": "pricing_page_get_started_with_launch_plan_clicked"
+      "analyticsEvent": "pricing_page_get_started_with_enterprise_plan_clicked"
     }
   }
 ]
