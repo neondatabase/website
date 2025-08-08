@@ -6,6 +6,7 @@ updatedOn: '2025-07-31T13:27:49.716Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
+  - /docs/guides/neon-rls-drizzle
 ---
 
 <InfoBlock>
@@ -269,3 +270,5 @@ Check out these sample applications that demonstrate RLS policies with `crudPoli
 Both applications use the same Drizzle RLS patterns, demonstrating how `crudPolicy` works with both Data API and Neon RLS.
 
 <NeedHelp/>
+
+
