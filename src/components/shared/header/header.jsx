@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 
-import ModeToggler from 'components/pages/doc/mode-toggler';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
@@ -54,20 +53,9 @@ const Header = ({
                 {customType?.title || 'Docs'}
               </Link>
             </div>
-            {docPageType !== 'postgres' && (
-              <div className="col-span-7 col-start-2 -ml-6 flex max-w-[832px] gap-3.5 3xl:ml-0 2xl:col-span-7 2xl:col-start-1 xl:max-w-none md:hidden">
-                <ModeToggler isAiChatPage={docPageType === 'aiChat'} />
-              </div>
-            )}
             <div className="col-span-2 col-start-10 -ml-12 h-full 3xl:-ml-20 2xl:col-span-5 2xl:col-start-8 2xl:ml-0 2xl:flex 2xl:justify-end xl:ml-auto lg:hidden">
               <Sidebar isClient={isClient} />
             </div>
-            {/* <div className="col-start-2 col-span-10 flex items-center justify-between 2xl:col-start-1 2xl:col-span-full w-full lg:w-auto">
-              {docPageType !== 'postgres' && (
-                <ModeToggler className="md:hidden" isAiChatPage={docPageType === 'aiChat'} />
-              )}
-              <Sidebar className="lg:hidden" isClient={isClient} />
-            </div> */}
           </Container>
         </div>
       ) : (
