@@ -252,9 +252,9 @@ Use this option if you want to restore the snapshot data immediately without ins
    ![One step restore option](/docs/guides/one_step_restore.png)
 
 2. The **One-step restore** modal explains the operation:
-   - The restore operation will occur instantly
-   - The current branch will be restored to the snapshot state
-   - A branch named `<branch_name (old)>` will be created as a backup
+   - The restore operation will occur instantly.
+   - The current branch will be restored to the snapshot state.
+   - A branch named `<branch_name (old)>` will be created as a backup. Other snapshots you may have taken previously remain attached to this branch.
 
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
 
@@ -263,7 +263,7 @@ Use this option if you want to restore the snapshot data immediately without ins
 3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
-   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it.
+   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it. **However, please note that any snapshots taken previously remain attached to this branch. If you need to keep them, we recommend retaining this branch.**
 
 </TabItem>
 
@@ -360,9 +360,9 @@ Use this option if you need to inspect the restored data before you switch over 
 3.  **Finalize the restore**
 
     If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
-    - Moves your original branch's computes to the new branch and restarts the computes
-    - Renames the new branch to original branch's name
-    - Renames the original branch to `<branch_name> (old)`.
+    - Moves your original branch's computes to the new branch and restarts the computes.
+    - Renames the new branch to original branch's name.
+    - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
