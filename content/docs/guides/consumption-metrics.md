@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2025-04-30T02:26:54.983Z'
+updatedOn: '2025-08-06T14:09:12.290Z'
 ---
 
 Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption.
@@ -140,7 +140,7 @@ You can set `from` and `to` query parameters, plus a level of granularity to def
 
 The response is organized by periods and consumption data within the specified time range.
 
-Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/).
+Here is an example query that returns metrics from June 30th to July 2nd, 2024. Time values must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter).
 
 ```bash shouldWrap
 curl --request GET \

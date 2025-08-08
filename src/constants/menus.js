@@ -79,7 +79,7 @@ export default {
               iconGradient: BranchingGradientIcon,
               title: 'Branching',
               description: 'Modern Postgres workflows',
-              to: LINKS.flow,
+              to: LINKS.branching,
             },
             {
               icon: RestoreIcon,

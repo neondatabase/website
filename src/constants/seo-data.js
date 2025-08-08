@@ -9,6 +9,12 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  about: {
+    title: 'About Us - Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+    pathname: '',
+  },
   ai: {
     title: 'Postgres for AI — Neon',
     description:
@@ -44,13 +50,6 @@ export default {
     title: 'Guides — Neon',
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
-  },
-  branching: {
-    title: 'Instant branching for Postgres — Neon',
-    description:
-      'Neon allows you to instantly branch your data the same way that you branch your code.',
-    imagePath: '/images/social-previews/branching.jpg',
-    pathname: LINKS.branching,
   },
   caseStudies: {
     title: 'Case Studies — Neon',
@@ -164,12 +163,12 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
-  flow: {
+  branching: {
     title: 'Database Branching Workflows - Neon',
     description:
       'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
-    imagePath: '/images/social-previews/flow.jpg',
-    pathname: LINKS.flow,
+    imagePath: '/images/social-previews/branching.jpg',
+    pathname: LINKS.branching,
     type: 'article',
   },
   platforms: {
