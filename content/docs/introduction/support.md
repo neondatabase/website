@@ -70,8 +70,6 @@ Neon AI chat is not an official Neon Support channel.
 
 Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
 
-To access the modal directly, click here: [Open Support Ticket](https://console.neon.tech/app/projects?modal=support). If you are a paying user and cannot access the support ticket modal, you can contact Neon support at `support@neon.tech`.
-
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an [SLA](#slas), you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
 </Admonition>
