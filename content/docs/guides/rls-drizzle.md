@@ -270,5 +270,3 @@ Check out these sample applications that demonstrate RLS policies with `crudPoli
 Both applications use the same Drizzle RLS patterns, demonstrating how `crudPolicy` works with both Data API and Neon RLS.
 
 <NeedHelp/>
-
-

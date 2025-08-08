@@ -34,5 +34,3 @@ Add these files to your project's `.cursor/rules` folder:
     neon-serverless.mdc
     neon-drizzle.mdc
 ```
-
-
