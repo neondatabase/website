@@ -36,6 +36,7 @@ const Hero = () => (
             theme="white"
             aria-label="View Open Positions"
             withArrow
+            isExternal
           >
             View Open Positions
           </Link>
