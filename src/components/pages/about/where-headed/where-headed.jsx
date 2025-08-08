@@ -21,7 +21,7 @@ StatisticsItem.propTypes = {
 };
 
 const WhereHeaded = () => (
-  <section className="whereheaded safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[72px]">
+  <section className="where-headed safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[72px]">
     <Container size={640} className="lg:!max-w-[544px] lg:!px-0 md:!px-5">
       <Heading
         className="max-w-[800px] text-6xl font-medium leading-[0.9] tracking-extra-tight lg:text-5xl md:text-[36px]"
