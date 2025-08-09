@@ -235,7 +235,7 @@ Since compute usage is measured hourly, **prorated billing does not apply**.
 
 ## Legacy plan metrics
 
-This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics for Neon's legacy plans. 
+This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics for Neon's legacy plans.
 
 > For usage metics for Neon's **current pricing plans**, see [Usage metrics](/docs/introduction/usage-metrics).
 
@@ -431,46 +431,46 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-| Compute Unit  | vCPU | RAM    |
-| :------------ | :--- | :----- |
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
-| 9             | 9    | 36 GB  |
-| 10            | 10   | 40 GB  |
-| 11            | 11   | 44 GB  |
-| 12            | 12   | 48 GB  |
-| 13            | 13   | 52 GB  |
-| 14            | 14   | 56 GB  |
-| 15            | 15   | 60 GB  |
-| 16            | 16   | 64 GB  |
-| 18            | 18   | 72 GB  |
-| 20            | 20   | 80 GB  |
-| 22            | 22   | 88 GB  |
-| 24            | 24   | 96 GB  |
-| 26            | 26   | 104 GB |
-| 28            | 28   | 112 GB |
-| 30            | 30   | 120 GB |
-| 32            | 32   | 128 GB |
-| 34            | 34   | 136 GB |
-| 36            | 36   | 144 GB |
-| 38            | 38   | 152 GB |
-| 40            | 40   | 160 GB |
-| 42            | 42   | 168 GB |
-| 44            | 44   | 176 GB |
-| 46            | 46   | 184 GB |
-| 48            | 48   | 192 GB |
-| 50            | 50   | 200 GB |
-| 52            | 52   | 208 GB |
-| 54            | 54   | 216 GB |
-| 56            | 56   | 224 GB |
+| Compute Unit | vCPU | RAM    |
+| :----------- | :--- | :----- |
+| .25          | .25  | 1 GB   |
+| .5           | .5   | 2 GB   |
+| 1            | 1    | 4 GB   |
+| 2            | 2    | 8 GB   |
+| 3            | 3    | 12 GB  |
+| 4            | 4    | 16 GB  |
+| 5            | 5    | 20 GB  |
+| 6            | 6    | 24 GB  |
+| 7            | 7    | 28 GB  |
+| 8            | 8    | 32 GB  |
+| 9            | 9    | 36 GB  |
+| 10           | 10   | 40 GB  |
+| 11           | 11   | 44 GB  |
+| 12           | 12   | 48 GB  |
+| 13           | 13   | 52 GB  |
+| 14           | 14   | 56 GB  |
+| 15           | 15   | 60 GB  |
+| 16           | 16   | 64 GB  |
+| 18           | 18   | 72 GB  |
+| 20           | 20   | 80 GB  |
+| 22           | 22   | 88 GB  |
+| 24           | 24   | 96 GB  |
+| 26           | 26   | 104 GB |
+| 28           | 28   | 112 GB |
+| 30           | 30   | 120 GB |
+| 32           | 32   | 128 GB |
+| 34           | 34   | 136 GB |
+| 36           | 36   | 144 GB |
+| 38           | 38   | 152 GB |
+| 40           | 40   | 160 GB |
+| 42           | 42   | 168 GB |
+| 44           | 44   | 176 GB |
+| 46           | 46   | 184 GB |
+| 48           | 48   | 192 GB |
+| 50           | 50   | 200 GB |
+| 52           | 52   | 208 GB |
+| 54           | 54   | 216 GB |
+| 56           | 56   | 224 GB |
 
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
@@ -645,4 +645,4 @@ The following table outlines project allowances for each Neon plan.
 
 - When you reach your limit on the [Free](/docs/introduction/plans#free-plan) plan or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects.
 - Extra projects are available on the [Enterprise](/docs/introduction/plans#enterprise) plan.
-<NeedHelp/>
+  <NeedHelp/>

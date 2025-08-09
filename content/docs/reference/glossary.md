@@ -240,7 +240,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. 
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point.
 
 For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
 

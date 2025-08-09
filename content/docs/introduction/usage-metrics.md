@@ -57,9 +57,9 @@ On the Free plan, you get 50 CU-hours per month — this lets you run a 0.25 CU 
 
 Autoscaling adjusts the compute size based on demand within the your defined minimum and maximum compute size thresholds. To estimate compute hour usage with autoscaling, the best approach is to estimate an **average compute size** and modify the compute hours formula as follows:
 
-  ```text
-  compute hours = average CU size * number of hours running
-  ```
+```text
+compute hours = average CU size * number of hours running
+```
 
 To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
 
