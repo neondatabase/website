@@ -21,10 +21,9 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
 | ----------------------------------------------- | ------------------------ |
-| [Free Plan](/docs/introduction/plans#free-plan) | Last day (24 hours)      |
-| [Launch](/docs/introduction/plans#launch)       | Last 7 days (168 hours)  |
-| [Scale](/docs/introduction/plans#scale)         | Last 7 days (336 hours)  |
-| [Business](/docs/introduction/plans#business)   | Last 14 days (336 hours) |
+| [Free Plan](/docs/introduction/plans#free-plan) | 6 hours, up to 1 GB      |
+| [Launch](/docs/introduction/plans#launch)       | Last 7 days              |
+| [Enterprise](/docs/introduction/plans#business) | Last 30 days             |
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 

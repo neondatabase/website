@@ -140,7 +140,7 @@ Combine an allowlist with protected branches for enhanced security. This setup e
 - **IP Allow**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
 - **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
-Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
+You can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
 
 ![IP allow setting settings](/docs/get-started/ip_allow_settings.png)
 

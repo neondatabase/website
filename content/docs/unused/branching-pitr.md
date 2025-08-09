@@ -15,7 +15,7 @@ A simpler one-click branch restore operation is now available. Read more about i
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined restore window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
 
-The restore window is configurable.The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+The restore window is configurable. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 

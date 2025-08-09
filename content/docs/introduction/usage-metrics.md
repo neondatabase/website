@@ -4,45 +4,68 @@ enableTableOfContents: true
 updatedOn: '2025-07-30T09:58:22.803Z'
 ---
 
-This page describes the usage metrics for Neon plans. These metrics determine what’s included in your monthly plan allowances and what is billed as extra usage.
+This page describes the usage metrics for Neon plans. These metrics determine what’s included in your monthly plan and what's billed for based on usage.
 
 ## Projects
 
-Each plan includes a maximum number of **projects**. Additional projects cannot currently be added beyond the plan limits.
+Each plan includes a certain number of **projects**.
 
 Projects are containers for your database environments. Each project includes your primary database, its branches, and compute resources. You can think a project as being similar to a GitHub repo - one project, many branches. Learn more about [Neon’s object hierarchy](https://neon.com/docs/manage/overview).
+
+> We often recommend a project per app or a project per customer to isloate data and resources.
 
 ## Compute
 
 Your monthly compute usage depends on how long your compute runs and at what size.
 
-Compute usage is measured in **CU-hours** (Compute Unit hours).  
-One CU represents 1 vCPU and 4 GB of RAM. Compute sizes all the way up to 56 CU are supported. RAM scales with compute size at a 1:4 ratio — for every 1 vCPU in a Compute Unit, you get 4 GB of RAM.
+- Compute usage is measured in **CU-hours** (Compute Unit hours).
+- One CU represents 1 vCPU and 4 GB of RAM.
+- Compute sizes all the way up to 56 CU are supported.
+- RAM scales with compute size at a 1:4 ratio — for every 1 vCPU in a Compute Unit, you get 4 GB of RAM.
 
-| Compute Unit | vCPU | RAM   |
-| :----------- | :--- | :---- |
-| .25          | .25  | 1 GB  |
-| .5           | .5   | 2 GB  |
-| 1            | 1    | 4 GB  |
-| 2            | 2    | 8 GB  |
-| 3            | 3    | 12 GB |
+```
+| Compute Unit | vCPU | RAM    |
+| ------------ | ---- | ------ |
+| .25          | .25  | 1 GB   |
+| .5           | .5   | 2 GB   |
+| 1            | 1    | 4 GB   |
+| 2            | 2    | 8 GB   |
+| 3            | 3    | 12 GB  |
+up to ...
+| 56           | 56   | 224 GB |
+```
 
-...
-| 56 | 56 | 224 GB |
-
-Compute usage is calculated as:
+Your compute usage is calculated as your compute size multipled by how long your compute runs:
 
 ```text
 CU size × number of hours running = CU-hours
 ```
 
-- Example 1: A .25 CU compute running for 4 hours = 1 CU-hour
-- Example 2: A 2 CU compute running for 3 hours = 6 CU-hours
-- Example 3: An 8 CU compute running for 2 hours = 16 CU-hours
+Here are a few examples that illustrate compute-hour usage calculations:
+
+- A .25 CU compute running for 4 hours = 1 CU-hour
+- A 2 CU compute running for 3 hours = 6 CU-hours
+- An 8 CU compute running for 2 hours = 16 CU-hours
+
+> By default, each Neon branch is created with a read-write compute. Creating a read replica adds a read-only compute to a branch. All of the computes across all of your Neon projects count toward your account's compute usage.
 
 <Admonition type="tip" title="Free Plan Compute Hours">
 On the Free plan, you get 50 CU-hours per month — this lets you run a 0.25 CU compute for 200 hours per month. Comsbined with [scale-to-zero](/docs/introduction/scale-to-zero), which helps minimize compute usage, this is sufficient for most prototypes and side-projects. If you need more compute hours, you can upgrade to the Launch plan, starting at $5/month with usage-based pricing.
 </Admonition>
+
+### Compute hour usage with autoscaling
+
+Autoscaling adjusts the compute size based on demand within the your defined minimum and maximum compute size thresholds. To estimate compute hour usage with autoscaling, the best approach is to estimate an **average compute size** and modify the compute hours formula as follows:
+
+  ```text
+  compute hours = average CU size * number of hours running
+  ```
+
+To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on your workload profile for a typical day.
+
+### Compute hour usage with scale to zero
+
+Scale to zero places your compute into an idle state when it's not being used, which helps minimize compute hour usage. When enabled, computes are suspended after 5 minutes of inactivity. On Neon's paid plans, you can disable scale to zero. See [Scale to Zero](/docs/introduction/scale-to-zero).
 
 ## Storage
 
@@ -51,10 +74,12 @@ Storage is metered hourly and summed over the month.
 
 1 GB-month = 1 GB stored for 1 full month
 
-- Example 1: 10 GB of data stored for a full month is 10 GB-months
-- Example 2: 100 GB of data stored for half a month is 50 GB—months
+Here are a couple of examples that illustrate how how storage usage is calculated:
 
-Storage is the [logical data size](https://neon.com/docs/reference/glossary#logical-data-size) in Postgres.
+- 10 GB of data stored for a full month is 10 GB-months
+- 100 GB of data stored for half a month is 50 GB-months
+
+Storage is your [logical data size](/docs/reference/glossary#logical-data-size), which is the size of your databases, including all tables, indexes, views, and stored procedures.
 
 ## Instant restore
 

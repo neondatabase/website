@@ -8,7 +8,7 @@ updatedOn: '2025-07-03T12:36:49.563Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
-Private Networking is available on Neon's [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) plans. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
+Private Networking is available on Neon's [Enterprise](/docs/introduction/plans#enterprise) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.

@@ -14,7 +14,7 @@ We have successfully attained SOC 2 Type 1 and Type 2 compliance. These complian
 
 ## SOC 3
 
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. Neon [Business](/docs/introduction/plans#business) plan users can request this audit report through our [Trust Center](https://trust.neon.tech/).
+The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. If available on your plan, you can request the report through our [Trust Center](https://trust.neon.tech/).
 
 ## ISO 27001
 

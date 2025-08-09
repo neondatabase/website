@@ -7,17 +7,21 @@ redirectFrom:
 updatedOn: '2025-05-30T16:54:40.485Z'
 ---
 
-This page documents Neon’s legacy pricing plans. These plans are no longer available to new users. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
+This page documents Neon’s **legacy plans**. These plans are no longer available to new users. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
 
-<Admonition type="warning">
-Legacy plans are being phased out and will be sunsetted at a future date (to be announced). We encourage you to review our [new pricing plans](/docs/introduction/plans) to explore your options.
-
-Users on the legacy **Free plan** will be automatically migrated to the new Free plan. All other legacy plan users (Launch, Scale, Business, or Enterprise) will remain on their current plan for now unless they choose to change.
+<Admonition type="important">
+We encourage you to review our [new usage-based pricing plans](/docs/introduction/plans) to explore your options.
 </Admonition>
 
 ---
 
-Neon's legacy plans are structured around **allowances** (bundled resources) and **extra usage** (billed per use if you exceed your included limits).
+## How to check if you're on a legacy plan
+
+To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a lagacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
+
+![Legacy plan badge](/docs/introduction/legacy_plan_badge.png)
+
+---
 
 ## Free Plan (Legacy)
 
@@ -198,43 +202,9 @@ To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) 
 
 Neon legacy plans include monthly **allowances** for storage, compute, and projects. If you're on a paid plan and exceed those allowances, you're automatically billed for extra usage—no manual action required. The types of extra usage available vary by plan.
 
-### Launch plan (Legacy)
-
-The Launch plan supports extra **Storage**, **Archive Storage**, and **Compute**. Extra projects are not available on Launch—upgrade to Scale or Business if you need more than 100 projects.
-
-| Resource              | Unit         | Price |
-| :-------------------- | :----------- | :---- |
-| Extra Storage         | GB-month     | $1.75 |
-| Extra Archive Storage | GB-month     | $0.10 |
-| Extra Compute         | Compute hour | $0.16 |
-
-### Scale plan (Legacy)
-
-The Scale plan supports extra **Storage**, **Archive Storage**, **Compute**, and **Projects**.
-
-| Resource              | Unit         | Price  |
-| :-------------------- | :----------- | :----- |
-| Extra Storage         | GB-month     | $1.50  |
-| Extra Archive Storage | GB-month     | $0.10  |
-| Extra Compute         | Compute hour | $0.16  |
-| Extra Projects        | 1000         | $50.00 |
-
-### Business plan (Legacy)
-
-The Business plan supports extra **Storage**, **Archive Storage**, **Compute**, and **Projects**.
-
-| Resource              | Unit         | Price  |
-| :-------------------- | :----------- | :----- |
-| Extra Storage         | GB-month     | $0.50  |
-| Extra Archive Storage | GB-month     | $0.10  |
-| Extra Compute         | Compute hour | $0.16  |
-| Extra Projects        | 5000         | $50.00 |
-
-### How extra usage works
-
 If your usage exceeds a plan allowance and that type of extra usage is supported, it's automatically allocated and billed on your monthly invoice.
 
-#### Storage
+#### Extra storage
 
 For example, the Launch plan includes 10 GB of storage. If you use more than that, you're charged $1.75 per additional GB-month. The same logic applies to Scale and Business, with lower rates at higher plan tiers.
 
@@ -242,7 +212,7 @@ For example, the Launch plan includes 10 GB of storage. If you use more than tha
 In billing, “allocation” refers to a billable increase in your storage allowance—not physical provisioning of space.
 </Admonition>
 
-#### Projects
+#### Extra projects
 
 Extra projects are only available on the Scale and Business plans:
 
@@ -257,7 +227,7 @@ Cost = Units × (Unit Price ÷ Days in Month) × Days Left in Month
 Once a unit is allocated, you're billed for it through the end of the month. If your usage drops back below the limit, the extra charge is removed at the start of the next billing cycle.
 </Admonition>
 
-#### Compute
+#### Extra compute
 
 Extra compute usage is billed by the **compute hour** at **$0.16/hour** across all paid plans. For example, if you're on the Launch plan and use 100 compute hours beyond your 300-hour allowance, you'll be billed an additional **$16**.
 
@@ -265,7 +235,9 @@ Since compute usage is measured hourly, **prorated billing does not apply**.
 
 ## Legacy plan metrics
 
-This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics.
+This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics for Neon's legacy plans. 
+
+> For usage metics for Neon's **current pricing plans**, see [Usage metrics](/docs/introduction/usage-metrics).
 
 ### Storage
 
@@ -459,7 +431,7 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-| Compute Units | vCPU | RAM    |
+| Compute Unit  | vCPU | RAM    |
 | :------------ | :--- | :----- |
 | .25           | .25  | 1 GB   |
 | .5            | .5   | 2 GB   |
@@ -671,7 +643,6 @@ The following table outlines project allowances for each Neon plan.
 | Business   | 5000      |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), or [Business](/docs/introduction/plans#business) plan, which offer allowances of 100, 1000, and 5000 projects, respectively.
-- Extra projects are available on both the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans in units of 1000 and 5000, respectively, for $50 per unit.
-
+- When you reach your limit on the [Free](/docs/introduction/plans#free-plan) plan or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects.
+- Extra projects are available on the [Enterprise](/docs/introduction/plans#enterprise) plan.
 <NeedHelp/>

@@ -240,9 +240,7 @@ The history of data changes for all branches in your Neon project. A history is 
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. A instant restore is performed by creating a branch using the **Time** or **LSN** option.
-
-By default, Neon retains a history of changes for **1 day** across all plans to help avoid unexpected storage costs. You can increase the retention window to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. Keep in mind that this will increase your storage usage and may lead to higher costs, especially if you have many active branches.
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point. 
 
 For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
 
@@ -252,7 +250,7 @@ A Neon feature used to control which IP addresses can access databases in a Neon
 
 ## IP allowlist
 
-An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. In Neon, **IP Allow** is a [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plan feature that can be used to control access to the branch where your database resides. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
+An IP allowlist is a security measure used in network and database management. It specifies a list of IP addresses that are permitted to access a certain resource. Any IP address not on the list is automatically blocked, ensuring that only authorized users or systems can gain access. For more information, see [Configure the IP Allow list](/docs/manage/projects#configure-tip-allow).
 
 ## Kubernetes
 
@@ -276,7 +274,7 @@ Kernel-based Virtual Machine, a virtualization infrastructure built into the Lin
 
 ## Launch plan
 
-A paid plan offered by Neon that provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. See [Neon plans](/docs/introduction/plans).
+A Neon plan that provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. See [Neon plans](/docs/introduction/plans).
 
 ## live migration
 
@@ -324,7 +322,7 @@ A browser-based graphical interface for managing Neon projects and resources.
 
 ## Neon Free Plan
 
-A Neon service plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
+A Neon plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
 
 ## Neon Proxy
 
@@ -451,7 +449,7 @@ A feature in Neon you can use to designate a Neon branch as "protected", which e
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
 The protected branches feature is available on all Neon paid plans. Typically, the protected branch status is given to a branch or branches that hold production data or sensitive data. For information about how to configure a protected branch, refer to our [Protected branches guide](/docs/guides/protected-branches).
@@ -482,7 +480,7 @@ On the publisher database in a logical replication setup, replication slots trac
 
 ## resale
 
-Selling the Neon service as part of another service offering. Neon's Platform Partnership plan offers resale of the Neon service as an option. See [Neon plans](/docs/introduction/plans) for more information.
+Selling the Neon service as part of another service offering.
 
 ## root branch
 
@@ -501,7 +499,7 @@ A Neon architecture component responsible for the durability of database changes
 
 ## Scale plan
 
-A paid plan offered by Neon that provides full platform and support access. It's designed for scaling production workloads. See [Neon plans](/docs/introduction/plans).
+A legacy Neon plan that provides full platform and support access. It's designed for scaling production workloads. See [Neon legacy plans](/docs/introduction/legacy-plans).
 
 ## Scale to Zero
 
