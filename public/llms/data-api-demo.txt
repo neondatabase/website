@@ -68,7 +68,7 @@ Before we dive into the queries, let's first secure our tables. When making dire
 
 RLS is crucial for any real-world app. RLS policies act as a safety net at the database level, so even if your frontend code has bugs, your data stays protected.
 
-Our demo app uses [Drizzle](https://neon.com/docs/guides/neon-rls-drizzle) ORM to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
+Our demo app uses Drizzle ORM to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
 
 ```typescript
 // src/db/schema.ts - RLS policies using Drizzle
@@ -122,7 +122,7 @@ pgPolicy("shared_policy", {
 }),
 ```
 
-   **Info** About auth.user_id(): Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/guides/neon-auth">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access. See our [RLS docs](https://neon.com/docs/guides/neon-rls) and [Neon Auth](https://neon.com/docs/guides/neon-auth) for details.
+   **Info** About auth.user_id(): Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/guides/neon-auth">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access. See our [RLS docs](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security) and [Neon Auth](https://neon.com/docs/guides/neon-auth) for details.
 
 Now that our tables are secure, let's look at how to perform CRUD operations using our note-taking app as an example.
 
@@ -324,4 +324,3 @@ Then, use the name you find (e.g. `paragraphs_note_id_notes_id_fk`) in the `DROP
 - [Neon Auth documentation](https://neon.com/docs/guides/neon-auth)
 - [postgrest-js documentation](https://github.com/supabase/postgrest-js)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
-- [Simplify RLS with Drizzle](https://neon.com/docs/guides/neon-rls-drizzle)

@@ -11,7 +11,7 @@ redirectFrom:
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 

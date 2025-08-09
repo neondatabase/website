@@ -11,7 +11,7 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 ## Available rules
 
 - [Neon Auth](https://neon.com/docs/ai/ai-rules-neon-auth): Stack Auth integration, database syncing, and authentication patterns
-- [Neon Serverless](https://neon.com/docs/ai/ai-rules-neon-serverless): Efficient queries, connection pooling, and serverless best practices
+- [Neon Serverless Driver](https://neon.com/docs/ai/ai-rules-neon-serverless-driver): Efficient queries, connection pooling, and serverless best practices
 - [Neon + Drizzle](https://neon.com/docs/ai/ai-rules-neon-drizzle): ORM setup, schema management, and usage patterns with Drizzle
 
 ## How it works

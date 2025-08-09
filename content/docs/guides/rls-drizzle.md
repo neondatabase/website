@@ -6,6 +6,7 @@ updatedOn: '2025-07-31T13:27:49.716Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
+  - /docs/guides/neon-rls-drizzle
 ---
 
 <InfoBlock>
