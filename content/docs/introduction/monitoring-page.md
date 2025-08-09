@@ -21,7 +21,7 @@ Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
 | ----------------------------------------------- | ------------------------ |
-| [Free Plan](/docs/introduction/plans#free-plan) | 6 hours, up to 1 GB      |
+| [Free Plan](/docs/introduction/plans#free-plan) | 6 hours, up to 1 GB-month|
 | [Launch](/docs/introduction/plans#launch)       | Last 7 days              |
 | [Enterprise](/docs/introduction/plans#business) | Last 30 days             |
 

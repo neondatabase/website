@@ -188,7 +188,7 @@ Total GB-month = Root branch size + deltas from all child branches
 
 Instant restores (also called **Point-in-Time Recovery**, or PITR) are billed based on **how much data changes** in your primary branch—not how often you restore.
 
-- **Free plan**: Includes up to 6 hours of restore history or 1 GB of changes, whichever comes first. Apps with frequent writes may get less than 6 hours.
+- **Free plan**: Includes up to 6 hours, up to 1 GB-month, whichever comes first. Apps with frequent writes may get less than 6 hours.
 - **Launch plan**: Choose any restore window from 0 to 7 days. Billed at **$0.20 per GB-month** based on the amount of changed data. Setting it to 0 disables instant restore and adds no cost.
 - **Enterprise plan**: Supports restore windows up to 30 days. Same $0.20 per GB-month rate applies.
 
