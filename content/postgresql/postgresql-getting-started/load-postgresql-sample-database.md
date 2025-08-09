@@ -14,7 +14,7 @@ nextLink:
   slug: 'postgresql-getting-started/install-postgresql-macos'
 ---
 
-**Summary**: in this tutorial, you will learn how to load the **PostgreSQL sample database** into the PostgreSQL database server**.**
+**Summary**: in this tutorial, you will learn how to load the **PostgreSQL sample database** into the PostgreSQL database server.
 
 Before going forward with this tutorial, you need to have:
 
