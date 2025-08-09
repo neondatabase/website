@@ -12,7 +12,7 @@ description="Manage Neon Postgres databases from your favorite AI tools using si
 
 <DetailIconCards withNumbers>
 
-<a href="/docs/get-started/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Playing with Neon</a>
+<a href="/docs/get-started/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Learn the basics</a>
 
 <a href="/docs/get-started/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
 
