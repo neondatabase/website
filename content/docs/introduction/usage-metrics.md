@@ -19,15 +19,16 @@ Your monthly compute usage depends on how long your compute runs and at what siz
 Compute usage is measured in **CU-hours** (Compute Unit hours).  
 One CU represents 1 vCPU and 4 GB of RAM. Compute sizes all the way up to 56 CU are supported. RAM scales with compute size at a 1:4 ratio — for every 1 vCPU in a Compute Unit, you get 4 GB of RAM.
 
-| Compute Unit  | vCPU | RAM    |
-| :------------ | :--- | :----- |
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
+| Compute Unit | vCPU | RAM   |
+| :----------- | :--- | :---- |
+| .25          | .25  | 1 GB  |
+| .5           | .5   | 2 GB  |
+| 1            | 1    | 4 GB  |
+| 2            | 2    | 8 GB  |
+| 3            | 3    | 12 GB |
+
 ...
-| 56            | 56   | 224 GB |
+| 56 | 56 | 224 GB |
 
 Compute usage is calculated as:
 
@@ -89,7 +90,7 @@ For simplicity, invoices show this as **$1.50 per extra branch per month**, even
 
 ## Private transfer
 
-Measured in **GB transferred** over private networking features such as AWS PrivateLink, which is supported by Neon's [Private Networking](https://neon.com/docs/guides/neon-private-networking) feature. 
+Measured in **GB transferred** over private networking features such as AWS PrivateLink, which is supported by Neon's [Private Networking](https://neon.com/docs/guides/neon-private-networking) feature.
 
 Billed separately from public (egress) data transfer. Available on Enterprise plans.
 
@@ -97,8 +98,6 @@ Billed separately from public (egress) data transfer. Available on Enterprise pl
 
 Also called **egress**, measured in **GB transferred** from Neon to the public internet.  
 Each plan includes a data transfer allowance. Extra usage is billed per GB.
-
-
 
 ---
 
