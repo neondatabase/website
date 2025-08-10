@@ -209,16 +209,16 @@ const Table = () => {
                     cell = item[key] ? (
                       <Image
                         src={checkIcon}
-                        width="24"
-                        height="24"
+                        width={24}
+                        height={24}
                         alt={`${item.feature.title} included`}
                         loading="lazy"
                       />
                     ) : (
                       <Image
                         src={crossIcon}
-                        width="14"
-                        height="14"
+                        width={14}
+                        height={14}
                         alt={`${item.feature.title} not included`}
                         loading="lazy"
                       />

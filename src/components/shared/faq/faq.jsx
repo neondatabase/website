@@ -30,7 +30,7 @@ Faq.propTypes = {
       question: PropTypes.string.isRequired,
       answer: PropTypes.string.isRequired,
       id: PropTypes.string,
-      initialState: PropTypes.string,
+      initialState: PropTypes.oneOf(['open', 'closed']),
     })
   ).isRequired,
   className: PropTypes.string,
