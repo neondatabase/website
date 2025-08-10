@@ -139,7 +139,7 @@ Output:
 (4 rows)
 ```
 
-The `bcolor` column has 3 red values, two NULL, 1 green value, and two blue values. The `DISTINCT` removes two red values, 1 NULL, and one blue.
+The `bcolor` column has three 'red' entries, two `NULL`, one 'green', and two 'blue'. `SELECT DISTINCT` removes two 'red' values, one `NULL`, and one 'blue'.
 
 Note that PostgreSQL treats `NULL`s as duplicates so that it keeps one `NULL` for all `NULL`s when you apply the `SELECT DISTINCT` clause.
 
