@@ -59,7 +59,7 @@ The star or asterisk (`*`) means all columns of the `table_name`.
 
 Let’s [create a new table](postgresql-create-table) to practice the `SELECT DISTINCT` clause.
 
-Note that you will learn how to [create a table](postgresql-create-table) and [insert data into it](postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in psql or use pgAdmin to execute the statements.
+Note that you will learn how to [create a table](postgresql-create-table) and [insert data into it](postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in `psql` or use pgAdmin to execute the statements.
 
 First, create the `colors` table that has three columns: `id`, `bcolor` and `fcolor` using the following [`CREATE TABLE`](postgresql-create-table) statement:
 
