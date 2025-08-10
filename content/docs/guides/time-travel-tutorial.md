@@ -2,7 +2,7 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.290Z'
+updatedOn: '2025-08-07T10:06:24.020Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -64,14 +64,15 @@ This action mirrors enabling a new feature in your production environment, typic
 
 ## Determine exactly when the feature was enabled
 
-Since user complaints started coming in right after the feature was enabled, our first debug step is to confirm the exact moment the `new_checkout_process` feature flag was activated. Assume we've checked the deployment logs or CI/CD pipeline history and found the activation timestamp to be `2023-04-09 at 6:11 PM EST`.
+Since user complaints started coming in right after the feature was enabled, our first debug step is to confirm the exact moment the `new_checkout_process` feature flag was activated. Assume we've checked the deployment logs or CI/CD pipeline history and found the activation timestamp to be `2025-08-06 at 10:52 PM IST`.
 
 For this tutorial, locate the timestamp of the `UPDATE` operation in the **History** tab of the **SQL Editor**:
 
 ![select timestamp](/docs/guides/time_travel_tutorial_activation.png)
 
 <Admonition type="note">
-Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot converts from `2023-04-09 at 6:11:00:00 PM EST` to `2023-04-09 at 10:11:00 PM UTC`.
+Timestamps in the Neon Console are shown in your local timezone. The time in this screenshot 
+converts from `2025-08-06 at 10:52:00:00 PM IST` to `2025-08-06 at 5:22:00 PM UTC`.
 </Admonition>
 
 ## Verifying Feature Flag Pre-Activation Status
@@ -82,7 +83,7 @@ Let's confirm that the feature was indeed disabled just before the feature flag'
 
 1. Enter a time period just before the identified activation timestamp.
 
-   For our purposes, we'll select `2023-04-09 at 18:10 PM EST`, which is one minute before our activation time.
+   For our purposes, we'll select `2025-08-06 at 10:51:00:00 PM IST`, which is one minute before our activation time.
 
    ```sql
    SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';
@@ -98,7 +99,7 @@ With the pre-activation state confirmed, now check the feature flag's status imm
 
 ### Adjust Time Selector to Post-Activation:
 
-Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2023-04-09 at 6:12 PM EST`. Re-execute the query.
+Move to a time just after the feature's activation. For example, one minute after the timestamp copied from Step 2, so `2025-08-06 at 10:53:00:00 PM IST`. Re-execute the query.
 
 ```sql
 SELECT * FROM feature_flags WHERE feature_name = 'new_checkout_process';

@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.569Z'
+updatedOn: '2025-08-06T14:09:12.293Z'
 ---
 
 ## Before you begin
@@ -273,7 +273,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
-  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
+  The timestamp must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
 
 - Create a branch and connect to it with `psql`.
 

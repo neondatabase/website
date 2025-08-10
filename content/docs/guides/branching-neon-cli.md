@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2025-07-31T15:39:07.291Z'
+updatedOn: '2025-08-07T17:19:33.979Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -135,7 +135,7 @@ This API key configuration ensures that the API key is kept secure while still p
 
 For temporary environments, create branches with `--expires-at` to set a TTL for automatic deletion instead of manual cleanup:
 
-```bash
+```bash shouldWrap
 # Create a branch that expires at a specific date and time
 neon branches create --project-id <project-id> --name ci-test --parent <parent-branch> --expires-at "2025-07-15T18:02:16Z"
 
@@ -148,7 +148,7 @@ neon branches create --project-id <project-id> --name ci-test --parent <parent-b
 
 You can also update or remove expiration from existing branches:
 
-```bash
+```bash shouldWrap
 # Update expiration to a new timestamp
 neon branches set-expiration <branch-id> --expires-at "2025-07-20T12:00:00Z" --project-id <project-id>
 
