@@ -17,56 +17,51 @@ const variantsAnimation = {
   },
 };
 
-const Feature = ({ title, info, type, highlighted, index, moreLink }) => {
-  const tooltip = moreLink
-    ? `${info}<a class="border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45 mt-2 inline-block" href="${moreLink.href}">${moreLink.text.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</a>`
-    : info;
-
-  return (
-    <li className="flex gap-x-2 font-normal">
-      <span
-        className={clsx(
-          'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0',
-          highlighted ? 'bg-green-45' : 'bg-gray-new-70'
-        )}
-        aria-hidden
-      />
-      <p
-        className={clsx(
-          'flex items-start gap-x-1 text-[15px] leading-normal tracking-tighter',
-          highlighted ? 'text-white' : 'text-gray-new-80'
-        )}
-      >
-        <span className="with-link-primary">
-          {Array.isArray(title) ? (
-            title.map((part, i) =>
-              typeof part === 'string' ? (
-                <Fragment key={i} dangerouslySetInnerHTML={{ __html: part }} />
-              ) : (
-                <Link key={i} to={part.href} onClick={part.onClick}>
-                  {part.text}
-                </Link>
-              )
+const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
+  <li className="flex gap-x-2 font-normal">
+    <span
+      className={clsx(
+        'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0',
+        highlighted ? 'bg-green-45' : 'bg-gray-new-70'
+      )}
+      aria-hidden
+    />
+    <p
+      className={clsx(
+        'flex items-start gap-x-1 text-[15px] leading-normal tracking-tighter',
+        highlighted ? 'text-white' : 'text-gray-new-80'
+      )}
+    >
+      <span className="with-link-primary">
+        {Array.isArray(title) ? (
+          title.map((part, i) =>
+            typeof part === 'string' ? (
+              <Fragment key={i} dangerouslySetInnerHTML={{ __html: part }} />
+            ) : (
+              <Link key={i} to={part.href} onClick={part.onClick}>
+                {part.text}
+              </Link>
             )
-          ) : (
-            <span dangerouslySetInnerHTML={{ __html: title }} />
-          )}
-        </span>
-        {info && (
-          <span className="whitespace-nowrap">
-            &nbsp;
-            <InfoIcon
-              className="relative top-0.5 ml-0.5 inline-block h-[14px] w-[14px]"
-              tooltip={tooltip}
-              tooltipId={`${type}_tooltip_${index}`}
-              toggleOnClick
-            />
-          </span>
+          )
+        ) : (
+          <span dangerouslySetInnerHTML={{ __html: title }} />
         )}
-      </p>
-    </li>
-  );
-};
+      </span>
+      {info && (
+        <span className="whitespace-nowrap">
+          &nbsp;
+          <InfoIcon
+            className="relative top-0.5 ml-0.5 inline-block h-[14px] w-[14px]"
+            tooltip={info}
+            link={moreLink}
+            tooltipId={`${type}_tooltip_${index}`}
+            toggleOnClick
+          />
+        </span>
+      )}
+    </p>
+  </li>
+);
 
 Feature.propTypes = {
   title: PropTypes.string.isRequired,
@@ -105,7 +100,7 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
           animate={hasToggler && !isOpen ? 'closed' : 'open'}
           variants={variantsAnimation}
           transition={{ duration: 0.5 }}
-          className={clsx('space-y-4 pb-0.5', hasToggler && 'overflow-hidden')}
+          className={clsx('space-y-[14px] pb-0.5', hasToggler && 'overflow-hidden')}
         >
           {features.map((feature, index) => (
             <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
@@ -116,7 +111,7 @@ const Features = ({ title, features, type, highlighted, hasToggler }) => {
         <button
           type="button"
           className={clsx(
-            'border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45',
+            '!mt-1 border-b pb-0.5 transition-colors duration-200 hover:border-green-45/50 hover:text-green-45',
             highlighted ? 'border-white/50' : 'border-gray-new-80/50'
           )}
           onClick={handleOpen}

@@ -66,9 +66,9 @@ const Hero = () => {
         <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
           Get started for free. Pay per usage as you grow.
         </p>
-        <div className="relative mx-auto mt-16 lg:mt-14 md:mx-0 md:mt-10 md:w-full md:max-w-[524px]">
+        <div className="relative mt-16 w-full lg:mt-14 md:mx-0 md:mt-10 md:w-full md:max-w-[524px]">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[16px] lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {plans.map(
               (
                 {
@@ -86,7 +86,7 @@ const Hero = () => {
                 index
               ) => (
                 <li
-                  className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new p-6 pt-5"
+                  className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new px-5 pb-8 pt-5"
                   key={index}
                 >
                   <div className="flex flex-col justify-between gap-10">
@@ -115,7 +115,7 @@ const Hero = () => {
 
                   <Button
                     className={clsx(
-                      'mt-5 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      'mt-5 w-full !py-[14px] !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
                         ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
                         : 'bg-gray-new-20 hover:bg-gray-new-30'

@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
+import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -12,12 +12,12 @@ import Tooltip from 'components/shared/tooltip';
 import checkIcon from 'icons/pricing/check.svg';
 import crossIcon from 'icons/pricing/cross.svg';
 
-import tableDataOriginal from '../data/plans.json';
+import tableData from '../data/plans.json';
 
 // Styles to set fixed height for table cells
 const rowClass = {
   1: 'h-[46px] lg:h-[62px]',
-  2: 'h-[70px] lg:h-[82px]',
+  2: 'h-[68px] lg:h-[82px]',
   3: 'h-[90px] lg:h-[124px] xl:h-[108px]',
 };
 
@@ -37,11 +37,11 @@ const TableHeading = ({
 
   // placeholder for the labels column
   if (isLabelsColumn) {
-    return <div className="invisible h-[132px]" aria-hidden />;
+    return <div className="invisible h-[120px]" aria-hidden />;
   }
 
   return (
-    <div className={clsx('relative z-10 h-[132px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
+    <div className={clsx('relative z-10 h-[120px] w-[240px] xl:w-[200px] lg:w-[180px]', className)}>
       <h3
         className={clsx(
           isFeaturedPlan && 'text-green-45',
@@ -56,7 +56,7 @@ const TableHeading = ({
       />
       <Button
         className={clsx(
-          'mt-5 h-10 w-full !font-medium tracking-tight md:h-8',
+          'mt-5 h-10 w-full !text-[16px] !font-medium tracking-tight xl:!text-[14px] md:h-8',
           !isFeaturedPlan && 'bg-opacity-80'
         )}
         size="xs"
@@ -89,47 +89,10 @@ TableHeading.propTypes = {
 };
 
 const Table = () => {
-  // const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
-
-  const tableData = useMemo(() => {
-    if (isComputePriceRaised) {
-      return {
-        ...tableDataOriginal,
-        cols: tableDataOriginal.cols.map((col) => {
-          if (col.feature.title === 'Compute hours') {
-            const updatedCol = { ...col };
-
-            for (const [key, value] of Object.entries(col)) {
-              if (value.info === 'Additional at $0.16 per compute hour') {
-                updatedCol[key] = {
-                  ...value,
-                  info: 'Additional at $0.24 per compute hour',
-                };
-              }
-            }
-
-            return updatedCol;
-          }
-          return col;
-        }),
-      };
-    }
-
-    return tableDataOriginal;
-  }, [isComputePriceRaised]);
-
   const labelList = tableData.headings;
   const [currentRow, setCurrentRow] = useState('');
-  // const [tableRows, setTableRows] = useState(tableData.cols.slice(0, DEFAULT_ROWS_TO_SHOW));
   const tableRows = tableData.cols; // Show all rows at once
-
-  // useEffect(() => {
-  //   if (window.location.hash === '#plans') {
-  //     setTableRows(tableData.cols);
-  //   }
-  // }, [tableData.cols]);
+  const tableHeadings = Object.keys(tableData.headings);
 
   useEffect(() => {
     const cells = document.querySelectorAll(`[data-row-id]`);
@@ -151,9 +114,6 @@ const Table = () => {
     };
   }, [tableRows]);
 
-  // const isHiddenItems =
-  //   tableData.cols.length > DEFAULT_ROWS_TO_SHOW && tableRows.length <= DEFAULT_ROWS_TO_SHOW;
-
   const rowsWithGroupTitles = useMemo(
     () =>
       tableData.cols.reduce((acc, item, index) => {
@@ -162,25 +122,26 @@ const Table = () => {
         }
         return acc;
       }, []),
-    [tableData.cols]
+    []
   );
 
   return (
-    <div className="mx-auto flex max-w-[1120px] flex-col xl:max-w-none xl:px-8 lg:pr-0 md:pl-5">
+    <div className="mx-auto flex max-w-[1088px] flex-col xl:max-w-none xl:px-8 lg:pr-0 md:pl-5">
       <ul className="no-scrollbars px-4.5 relative flex w-full lg:overflow-x-auto lg:pl-0 lg:pr-8 md:pr-5">
-        {Object.keys(tableData.headings).map((key, i, arr) => {
+        {tableHeadings.map((key, i, arr) => {
           const isHighlightedColumn = key === 'launch';
           const isLabelsColumn = i === 0;
 
           return (
             <li
-              className={clsx('relative pt-5 xl:pt-4', {
-                'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:left-0 lg:top-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)]':
+              className={clsx('relative pt-6 xl:pt-4', {
+                'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:left-0 lg:top-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
                   isLabelsColumn,
-                'basis-[288px] lg:shrink-0 lg:basis-[228px]': !isLabelsColumn,
-                'lg:before:-left-5] basis-[300px] before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[292px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
+                'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
+                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[288px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
                   isHighlightedColumn,
-                'lg:basis-[220px]': i === 1,
+                '!basis-[240px] xl:!basis-[200px] lg:!basis-[240px] md:!basis-[190px]':
+                  i === tableHeadings.length - 1,
               })}
               key={key}
             >
@@ -199,17 +160,15 @@ const Table = () => {
                       <li
                         className={clsx(
                           'relative flex flex-col justify-start transition-colors',
-                          // isHiddenItems &&
-                          //   'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
                           isGroupTitle
-                            ? 'h-[70px] justify-end pb-3.5 lg:h-[66px]'
-                            : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                            ? 'h-[100px] justify-end pb-6 lg:h-[66px]'
+                            : ['pb-[14px] pt-[12px] lg:py-2.5', rowClass[item.rows]],
                           !isGroupTitle && 'border-t border-dashed border-gray-new-15',
                           i === 1 && 'lg:pl-5',
                           currentRow === index.toString() && !isGroupTitle
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
                             : 'before:opacity-0',
-                          'before:absolute before:-inset-y-px before:-left-5 before:z-0 before:w-5 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-left-4 before:z-0 before:w-4 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
                         data-row-id={index}
                         key={index}
@@ -220,7 +179,7 @@ const Table = () => {
                           </span>
                         ) : (
                           <>
-                            <span className="relative w-fit text-base font-light leading-tight tracking-extra-tight">
+                            <span className="relative w-fit text-base font-normal leading-tight tracking-extra-tight">
                               {item[key].title}
                               {!!item.soon && (
                                 <span className="relative -top-0.5 ml-4 inline-block rounded-full bg-yellow-70/10 px-2.5 py-[5px] text-[10px] font-semibold uppercase leading-none tracking-wide text-gray-new-50 xl:ml-2.5 xl:px-1.5 xl:py-1 xl:text-[8px]">
@@ -231,10 +190,10 @@ const Table = () => {
                             {item[key]?.subtitle && (
                               <span
                                 className={clsx(
-                                  'mt-1 text-sm font-extralight leading-snug tracking-tight text-gray-new-50',
-                                  '[&_a]:border-b [&_a]:border-gray-new-70',
+                                  'mt-1 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
+                                  '[&_a]:border-b [&_a]:border-[rgba(175,177,182,0.40)] [&_a]:text-gray-new-70',
                                   '[&_a]:transition-colors [&_a]:duration-200',
-                                  '[&_a:hover]:border-transparent [&_a:hover]:text-green-45'
+                                  '[&_a:hover]:border-primary-1 [&_a:hover]:text-primary-1'
                                 )}
                                 dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                               />
@@ -263,15 +222,11 @@ const Table = () => {
                         alt={`${item.feature.title} not included`}
                         loading="lazy"
                       />
-                      // <span
-                      //   className="inline-block h-px w-4 rounded-full bg-gray-new-30"
-                      //   aria-label={`${item.feature.title} not included`}
-                      // />
                     );
                   } else if (typeof item[key] === 'object') {
                     const { title, info } = item[key];
                     cell = (
-                      <div className="font-extralight leading-snug tracking-extra-tight">
+                      <div className="font-light leading-snug tracking-extra-tight">
                         {title}
                         {info && (
                           <span className="whitespace-nowrap">
@@ -288,7 +243,7 @@ const Table = () => {
                   } else {
                     cell = (
                       <span
-                        className="flex flex-col gap-y-1 font-extralight leading-snug tracking-extra-tight text-gray-new-90 [&_span]:text-sm [&_span]:text-gray-new-50"
+                        className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90 [&_span]:text-sm [&_span]:text-gray-new-50"
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                         dangerouslySetInnerHTML={{ __html: item[key] }}
@@ -300,11 +255,9 @@ const Table = () => {
                     <li
                       className={clsx(
                         'relative flex flex-col justify-start transition-colors',
-                        // isHiddenItems &&
-                        //   'last-of-type:border-b last-of-type:border-dashed last-of-type:border-gray-new-15',
                         rowsWithGroupTitles.includes(index)
-                          ? 'h-[70px] lg:h-[66px]'
-                          : ['py-3 lg:py-2.5', rowClass[item.rows]],
+                          ? 'h-[100px] lg:h-[66px]'
+                          : ['pb-[14px] pt-[12px] lg:py-2.5', rowClass[item.rows]],
                         item[key] !== undefined &&
                           !rowsWithGroupTitles.includes(index) &&
                           'border-t border-dashed border-gray-new-15',
@@ -312,14 +265,14 @@ const Table = () => {
                           !rowsWithGroupTitles.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
                         i === arr.length - 1 &&
-                          'before:absolute before:-inset-y-px before:-right-5 before:z-0 before:w-5 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
+                          'before:absolute before:-inset-y-px before:-right-4 before:z-0 before:w-4 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
                       data-row-id={index}
                       key={index}
                     >
                       <div
                         className={clsx(
-                          'max-w-[240px] xl:max-w-[200px] lg:max-w-[156px]',
+                          'max-w-[240px] xl:max-w-[200px] lg:max-w-[180px]',
                           i === 1 && 'lg:ml-5'
                         )}
                       >
@@ -332,42 +285,10 @@ const Table = () => {
                   );
                 })}
               </ul>
-              {/* {i > 0 && !isHiddenItems && (
-                <Button
-                  className={clsx(
-                    'relative z-20 mt-8 h-10 w-full max-w-[160px] !font-medium tracking-tight 2xl:!text-base xl:mt-6 xl:h-9 lg:max-w-[156px]',
-                    i === 1 && 'lg:ml-5',
-                    !isHighlightedColumn && 'bg-opacity-80'
-                  )}
-                  size="xs"
-                  theme={isHighlightedColumn ? 'primary' : 'gray-15'}
-                  to={labelList[key].buttonUrl}
-                  tagName={`Details Table Bottom > ${labelList[key].label}`}
-                  onClick={() => {
-                    posthog.capture('ui_interaction', {
-                      action: 'pricing_page_get_started_clicked',
-                      plan: key,
-                      place: 'table_footer',
-                    });
-                  }}
-                >
-                  {labelList[key].buttonText}
-                </Button>
-              )} */}
             </li>
           );
         })}
       </ul>
-      {/* {isHiddenItems && (
-        <Button
-          className="mx-auto mt-6 h-[38px] rounded-full px-5 text-[15px] font-medium transition-colors duration-200"
-          theme="gray-10"
-          onClick={() => setTableRows(tableData.cols)}
-        >
-          Show more
-          <ChevronIcon className="ml-2.5 inline-block h-auto w-3" />
-        </Button>
-      )} */}
     </div>
   );
 };

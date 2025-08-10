@@ -32,12 +32,13 @@
       },
       "free": "10",
       "launch": "100",
-      "enterprise": "1000"
+      "enterprise": "1,000"
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "Branches per project"
+        "title": "Branches per project",
+        "subtitle": "Included"
       },
       "free": "10",
       "launch": "10",
@@ -88,9 +89,8 @@
         "title": "0.5 GB per project",
         "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:</br>max 0.5 GB / project (cumulative)</p>"
       },
-      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
-      ,
-      "enterprise": "Pay-as-you-go at<span>$0.35 per GB-month</span>"
+      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
+      "enterprise": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
     },
     {
       "rows": "2",

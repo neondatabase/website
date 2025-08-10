@@ -75,13 +75,6 @@ const faqItems = [
     id: 'branches-and-storage',
   },
   {
-    question: 'How can I control my costs?',
-    answer: `
-      <p>Neon lets you control compute usage by setting a maximum autoscaling limit per branch. This acts as a de-facto cost ceiling - your database won’t scale beyond the limit, even if traffic spikes.</p>
-      <p>For example, if you set a limit of 1 CU, your usage will never exceed 1 CU-hour per hour, regardless of demand. <a href="${LINKS.docs}/introduction/autoscaling#configuring-autoscaling">Learn how to configure autoscaling limits.</a></p>
-    `,
-  },
-  {
     question: 'How are Instant Restores billed?',
     answer: `
       <p>Instant restores (also known as Point-in-Time Recovery, or PITR) are billed based on how much data changes in your primary branch over time, not how many restores you do:</p>
@@ -93,6 +86,24 @@ const faqItems = [
       <a href="${LINKS.docs}/introduction/branch-restore">Read the docs</a> for more information on Instant Restores.
     `,
     id: 'instant-restores',
+  },
+  {
+    question: 'How does billing for additional branches work?',
+    answer: `
+      <p>Each Neon plan includes a number of simultaneous branches per project at no extra cost. For example, the Launch plan includes 10. You can create and delete as many branches as you like throughout the month; you’ll only be billed if the number of active branches at the same time exceeds this included quota.</p>
+      <p>If that happens, we’ll meter the extra usage using a metric called a branch-hour, which is:</p>
+      <code>1 additional branch × 1 hour of lifetime</code>
+      <p>For example: if your plan includes 10 branches and you briefly run 2 extra branches for 5 hours each, that’s 10 branch-hours, billed at $0.002 per branch-hour, or  a total of $0.02 added to your bill.</p>
+    `,
+    id: 'instant-restores',
+  },
+  {
+    question: 'How can I control my costs?',
+    answer: `
+      <p>Neon lets you control compute usage by setting a maximum autoscaling limit per branch. This acts as a de-facto cost ceiling - your database won’t scale beyond the limit, even if traffic spikes.</p>
+      <p>For example, if you set a limit of 1 CU, your usage will never exceed 1 CU-hour per hour, regardless of demand.
+      <a href="${LINKS.docs}/introduction/autoscaling#configuring-autoscaling">Learn how to configure autoscaling limits.</a></p>
+    `,
   },
   {
     question: 'Which level of support do I get with Neon?',

@@ -6,9 +6,27 @@ import Tooltip from 'components/shared/tooltip';
 import tooltipHoveredSvg from 'icons/tooltip-hovered.svg';
 import tooltipSvg from 'icons/tooltip.svg';
 
+function getTooltipHtml(info, link) {
+  if (!link) return info;
+
+  const safeText = link.text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  const linkHTML = `
+    <a
+      class="border-b pb-0.5 tracking-extra-tight leading-none transition-colors duration-200 hover:border-primary-1 hover:text-primary-1 mt-2 inline-block"
+      href="${link.href}"
+    >
+      ${safeText}
+    </a>
+  `;
+
+  return `${info}${linkHTML}`;
+}
+
 const InfoIcon = ({
   className,
   tooltip,
+  link,
   tooltipId,
   tooltipPlace = 'right',
   toggleOnClick = false,
@@ -16,7 +34,7 @@ const InfoIcon = ({
   <span
     className={clsx('group/info relative', toggleOnClick && 'cursor-pointer', className)}
     data-tooltip-id={`info-icon-${tooltipId}`}
-    data-tooltip-html={tooltip}
+    data-tooltip-html={getTooltipHtml(tooltip, link)}
     aria-hidden
   >
     <Image
@@ -50,6 +68,10 @@ const InfoIcon = ({
 InfoIcon.propTypes = {
   className: PropTypes.string,
   tooltip: PropTypes.string.isRequired,
+  link: PropTypes.shape({
+    text: PropTypes.string.isRequired,
+    href: PropTypes.string.isRequired,
+  }),
   tooltipId: PropTypes.string.isRequired,
   tooltipPlace: PropTypes.string,
   toggleOnClick: PropTypes.bool,
