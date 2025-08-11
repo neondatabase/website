@@ -29,26 +29,26 @@ These are Neon's new usage-based pricing plans, released in August, 13, 2025. If
 
 Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 
-| Plan feature                                  | **Free**                                            | **Launch**                                                      | **Enterprise**                        |
-| ----------------------------------------------| --------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
-| [Price](#price)                               | $0/month                                            | $5/month minimum                                                | $5/month minimum                      |
-| [Who it's for](#who-its-for)                  | Prototypes and side projects                        | Startups and growing teams                                      | Production-grade workloads & larger companies |
-| [Projects](#projects)                         | 10                                                  | 100                                                             | 1,000 (may be increased on request)   |
-| [Branches](#branches)                    | 10/project                                          | 10/project                                                      | 25/project                            |
-| [Extra branches](#extra-branches)             | —                                                   | $1.50/branch-month (prorated hourly)                            | $1.50/branch-month (prorated hourly)  |
-| [Compute](#compute)                           | 50 CU-hours                                         | $0.14/CU-hour                                                   | $0.26/CU-hour                         |
-| [Autoscaling](#autoscaling)                   | Up to 2 CU (2 vCPU / 8 GB RAM)                      | Up to 16 CU (16 vCPU / 64 GB RAM)                               | Up to 16 CU (fixed size computes up to 56 vCPU / 224 GB RAM)    |
-| [Scale to zero](#scale-to-zero)               | After 5 min                                         | After 5 min, can be disabled                                    | Configurable (from 5 seconds -> always on) |
-| [Storage](#storage)                           | 0.5 GB per branch                                   | $0.35 per GB-month                                              | $0.35 per GB-month                    |
-| [Public data transfer (egress)](#public-data-transfer-egress) | 5 GB included                 | 100 GB included, then $0.10/GB                                  | 100 GB included, then $0.10/GB        |
-| [Monitoring (Console UI)](#monitoring-console-ui) | 1 day                                           | 3 days                                                          | 14 days                               |
-| [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                         | —                                                               | ✅                              |
-| [Restore window](#restore-window)             | 6 hours, up to 1 GB-month                           | Up to 7 days                                                    | Up to 30 days                         |
-| [Instant restore](#instant-restore)           | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
-| [Private data transfer](#private-ndata-transfer) | —             | —                                                               | $0.01/GB                              |
-| [Support](#support)                           | Community                                           | Billing                                                 | Production                    |
-| [Compliance & security](#compliance--security)| —                                                   |  | SOC 2, ISO, GDPR, HIPAA (extra), IP Allow, Private Networking                          | 
-| [Uptime SLA](#uptime-sla)                     | —                                                   | —                                                               | ✅                                |
+| Plan feature                                                            | **Free**                       | **Launch**                           | **Enterprise**                                                |
+| ----------------------------------------------------------------------- | ------------------------------ | ------------------------------------ | ------------------------------------------------------------- |
+| [Price](#price)                                                         | $0/month                       | $5/month minimum                     | $5/month minimum                                              |
+| [Who it's for](#who-its-for)                                            | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads & larger companies                 |
+| [Projects](#projects)                                                   | 10                             | 100                                  | 1,000 (may be increased on request)                           |
+| [Branches](#branches)                                                   | 10/project                     | 10/project                           | 25/project                                                    |
+| [Extra branches](#extra-branches)                                       | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                          |
+| [Compute](#compute)                                                     | 50 CU-hours                    | $0.14/CU-hour                        | $0.26/CU-hour                                                 |
+| [Autoscaling](#autoscaling)                                             | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed size computes up to 56 vCPU / 224 GB RAM)  |
+| [Scale to zero](#scale-to-zero)                                         | After 5 min                    | After 5 min, can be disabled         | Configurable (from 5 seconds -> always on)                    |
+| [Storage](#storage)                                                     | 0.5 GB per branch              | $0.35 per GB-month                   | $0.35 per GB-month                                            |
+| [Public data transfer (egress)](#public-data-transfer-egress)           | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                |
+| [Monitoring (Console UI)](#monitoring-console-ui)                       | 1 day                          | 3 days                               | 14 days                                                       |
+| [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                              | —                                    | ✅                                                            |
+| [Restore window](#restore-window)                                       | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                 |
+| [Instant restore](#instant-restore)                                     | —                              | $0.20/GB-month                       | $0.20/GB-month                                                |
+| [Private data transfer](#private-ndata-transfer)                        | —                              | —                                    | $0.01/GB                                                      |
+| [Support](#support)                                                     | Community                      | Billing                              | Production                                                    |
+| [Compliance & security](#compliance--security)                          | —                              |                                      | SOC 2, ISO, GDPR, HIPAA (extra), IP Allow, Private Networking |
+| [Uptime SLA](#uptime-sla)                                               | —                              | —                                    | ✅                                                            |
 
 ## Plan features
 
@@ -60,8 +60,8 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 For **Launch** and **Enterprise** plans, there is a $5/month minimum monthly fee. Additional usage for compute, storage, extra branches, and other features, is billed at published rates (see the [Plan overview](#plan-overview) table above).
 
-On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more —  for $0/month.
- 
+On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more — for $0/month.
+
 > If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, if you sign up exactly halfway through the month, your monthly base cost will be $2.50 (half of the $5.00 monthly fee).
 
 ### ☑ Who it's for
@@ -114,7 +114,7 @@ On paid plans, you can create as many branches as you need. Extra branches beyon
 
 The cost on paid plans is **$1.50 per branch-month**. Metered by the hour, this works out to about $0.002 per hour for each extra branch.
 
-**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month.  
+**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month.
 
 > Extra branches are not available on the Free plan. If you need more branches, you can either delete existing branches or upgrade to a paid plan. Your project's root branch counts toward the per-project branch limit.
 
@@ -199,7 +199,7 @@ The **scale-to-zero** feature suspends a compute after a period of inactivity, w
 
 - **Free plan**: Computes scale to zero after 5 minutes of inactivity – **cannot be disabled**
 - **Launch plan**: Computes scale to zero after 5 minutes of inactivity — **can be disabled**
-- **Enterprise**: Fully configurable  — **can be disabled, configurable from 5 seconds to always-on**
+- **Enterprise**: Fully configurable — **can be disabled, configurable from 5 seconds to always-on**
 
 Learn more about our [scale-to-zero](/docs/introduction/scale-to-zero) feature.
 
@@ -213,17 +213,17 @@ Storage is metered hourly and summed over the month.
 
 On the **Launch** and **Enterprise** plans, storage is billed at $0.35/GB-month.
 
-For [root](/docs/reference/glossary#root-branch) branches, it's your actual data size (also referred to as _[logical data size](/docs/reference/glossary#logical-data-size)_) that's metered. 
+For [root](/docs/reference/glossary#root-branch) branches, it's your actual data size (also referred to as _[logical data size](/docs/reference/glossary#logical-data-size)_) that's metered.
 
-For child branches, only the delta from the parent branch is counted. For example, when you first create a branch, it adds no storage–the branch's data is shared with its parent, but once you start performing write operations on the the branch, you've created a delta, which counts toward storage. 
+For child branches, only the delta from the parent branch is counted. For example, when you first create a branch, it adds no storage–the branch's data is shared with its parent, but once you start performing write operations on the the branch, you've created a delta, which counts toward storage.
 
 **Storage on child branches never decreases—the delta only grows with each write operation (insert, update, or delete)**, so it's important to manage your branches and remove them when no longer needed.
 
 > On the **Free** plan, you get 0.5 GB on the root branch and 0.5 GB of storage on child branches at no cost.
- 
+
 ### ☑ Public data transfer (egress)
 
-Public data transfer is the total volume of data transferred out of your database over the public internet during the monthly billing period. 
+Public data transfer is the total volume of data transferred out of your database over the public internet during the monthly billing period.
 
 > Public data transfer also includes data transferred from your database via Postgres logical replication to any destination, including other Neon databases.
 
@@ -310,8 +310,8 @@ For additional information, see [Compliance](/docs/security/compliance).
 
 Advanced security features include:
 
--  [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
--  [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
+- [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 
 ### ☑ Uptime SLAs
 
