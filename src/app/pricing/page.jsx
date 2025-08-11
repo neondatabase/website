@@ -31,10 +31,10 @@ const logos = [
 const faqItems = [
   {
     question: 'What is a project?',
+    initialState: 'open',
     answer: `
       <p>A project in Neon is the top-level container for your database environment. Each project includes your primary database, its branches, and compute resources. You can think of it like a GitHub repo - one project, many branches. <a href="${LINKS.docs}/manage/overview">Learn more about Neon’s object hierarchy.</a></p>
     `,
-    initialState: 'open',
   },
   {
     question: 'What is a CU?',
@@ -44,12 +44,12 @@ const faqItems = [
   },
   {
     question: 'How is compute usage measured in Neon?',
+    id: 'compute-usage',
     answer: `
       <p>Neon is a serverless database: it bills per true monthly usage. Your compute monthly usage is based on how long your compute runs and at what size.<br/>We measure compute usage in CU-hours:</p>
       <code>CU-hours = CU size of your compute × number of hours it runs</code>
       <p>For example: if a 2 CU machine runs for 3 hours, that’s 6 CU-hours of usage.<br/><a href="${LINKS.docs}/introduction/autoscaling">Learn more about Neon’s serverless model.</a></p>
     `,
-    id: 'compute-usage',
   },
   {
     question: 'How is storage usage billed in Neon?',
@@ -61,6 +61,7 @@ const faqItems = [
   },
   {
     question: 'What happens with branches and storage?',
+    id: 'branches-and-storage',
     answer: `
       <p>Each project in Neon starts with a root branch (your main database). You can then create child branches, which are isolated copies of your database state - great for testing, previews, and development.<br/>But Neon uses a copy-on-write model, so:</p>
       <ul>
@@ -72,10 +73,10 @@ const faqItems = [
       <br/>
       <a href="${LINKS.docs}/introduction/branching">Learn more about Neon’s serverless model.</a>
     `,
-    id: 'branches-and-storage',
   },
   {
     question: 'How are Instant Restores billed?',
+    id: 'instant-restores',
     answer: `
       <p>Instant restores (also known as Point-in-Time Recovery, or PITR) are billed based on how much data changes in your primary branch over time, not how many restores you do:</p>
       <ul>
@@ -85,10 +86,10 @@ const faqItems = [
       </ul>
       <a href="${LINKS.docs}/introduction/branch-restore">Read the docs</a> for more information on Instant Restores.
     `,
-    id: 'instant-restores',
   },
   {
     question: 'How does billing for additional branches work?',
+    id: 'additional-branches-billing',
     answer: `
       <p>Each Neon plan includes a number of simultaneous branches per project at no extra cost. For example, the Launch plan includes 10. You can create and delete as many branches as you like throughout the month; you’ll only be billed if the number of active branches at the same time exceeds this included quota.</p>
       <p>If that happens, we’ll meter the extra usage using a metric called a branch-hour, which is:</p>

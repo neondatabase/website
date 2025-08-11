@@ -222,7 +222,7 @@ const Table = () => {
                       />
                     );
                   } else if (typeof item[key] === 'object') {
-                    const { title, info } = item[key];
+                    const { title, info, moreLink } = item[key];
                     cell = (
                       <div className="font-light leading-snug tracking-extra-tight">
                         {title}
@@ -233,6 +233,8 @@ const Table = () => {
                               className="relative top-0.5 ml-0.5 inline-block"
                               tooltip={info}
                               tooltipId={`${key}_tooltip_${index}`}
+                              link={moreLink}
+                              clickable
                             />
                           </span>
                         )}

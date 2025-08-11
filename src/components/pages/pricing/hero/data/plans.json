@@ -47,7 +47,8 @@
       },
       {
         "title": "10 branches per project included<br/>then $0.002 per branch-hour",
-        "info": "Branch-hour = #branches x branch lifetime"
+        "info": "Branch-hour = #branches x branch lifetime",
+        "moreLink": { "text": "Read more", "href": "#additional-branches-billing" }
       },
       {
         "title": "Pay-as-you-go storage<br/>at $0.35 per GB-month"
@@ -83,7 +84,8 @@
       },
       {
         "title": "25 branches per project included<br/>then $0.002 per branch-hour",
-        "info": "Branch-hour = #branches x branch lifetime"
+        "info": "Branch-hour = #branches x branch lifetime",
+        "moreLink": { "text": "Read more", "href": "#additional-branches-billing" }
       },
       {
         "title": "Pay-as-you-go storage<br/>at $0.35 per GB-month"

@@ -9,14 +9,12 @@ import tooltipSvg from 'icons/tooltip.svg';
 function getTooltipHtml(info, link) {
   if (!link) return info;
 
-  const safeText = link.text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
   const linkHTML = `
     <a
-      class="border-b pb-0.5 tracking-extra-tight leading-none transition-colors duration-200 hover:border-primary-1 hover:text-primary-1 mt-2 inline-block"
+      class="mt-2 block w-fit border-b pb-0.5 leading-none tracking-extra-tight transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
       href="${link.href}"
     >
-      ${safeText}
+      ${link.text}
     </a>
   `;
 
@@ -29,11 +27,11 @@ const InfoIcon = ({
   link,
   tooltipId,
   tooltipPlace = 'right',
-  toggleOnClick = false,
+  clickable = false,
 }) => (
   <span
-    {...(toggleOnClick && { tabIndex: 0 })}
-    className={clsx('group/info relative', toggleOnClick && 'cursor-pointer', className)}
+    {...(clickable && { tabIndex: 0 })}
+    className={clsx('group/info relative', clickable && 'cursor-pointer', className)}
     data-tooltip-id={`info-icon-${tooltipId}`}
     data-tooltip-html={getTooltipHtml(tooltip, link)}
     aria-hidden
@@ -55,11 +53,11 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Tooltip
-      className={clsx('w-sm z-20 !bg-gray-new-15', toggleOnClick && '!pointer-events-auto')}
+      className={clsx('w-sm z-20 !bg-gray-new-15')}
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"
-      {...(toggleOnClick && {
+      {...(clickable && {
         clickable: true,
       })}
     />
@@ -75,7 +73,7 @@ InfoIcon.propTypes = {
   }),
   tooltipId: PropTypes.string.isRequired,
   tooltipPlace: PropTypes.string,
-  toggleOnClick: PropTypes.bool,
+  clickable: PropTypes.bool,
 };
 
 export default InfoIcon;

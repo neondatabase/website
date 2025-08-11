@@ -51,11 +51,11 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
         <span className="whitespace-nowrap">
           &nbsp;
           <InfoIcon
-            className="relative top-0.5 ml-0.5 inline-block h-[14px] w-[14px]"
+            className="relative top-0.5 ml-0.5 inline-block"
             tooltip={info}
-            link={moreLink}
             tooltipId={`${type}_tooltip_${index}`}
-            toggleOnClick
+            link={moreLink}
+            clickable
           />
         </span>
       )}
