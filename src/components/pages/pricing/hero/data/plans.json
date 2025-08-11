@@ -98,14 +98,14 @@
     "otherFeatures": {
       "title": "Features",
       "features": [
-        { "title": "Production Support " },
-        { "title": "99.95% SLA" },
-        { "title": "SOC 2 / ISO / GDPR" },
-        { "title": "HIPAA (additional costs)" },
+        { "title": "Production support " },
         { "title": "14-day monitoring retention" },
         { "title": "Metrics export" },
         { "title": "IP allow rules" },
-        { "title": "Private networking" }
+        { "title": "Private networking" },
+        { "title": "99.95% SLA" },
+        { "title": "SOC 2 / ISO / GDPR" },
+        { "title": "HIPAA (additional costs)" }
       ]
     },
     "button": {
