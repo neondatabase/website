@@ -3,7 +3,8 @@
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import useLocation from 'react-use/lib/useLocation';
 
 const variantsAnimation = {
   open: {
@@ -19,11 +20,24 @@ const variantsAnimation = {
 };
 
 const Item = ({ question, answer, id = null, initialState = 'closed', index }) => {
+  const { hash } = useLocation();
   const [isOpen, setIsOpen] = useState(initialState === 'open');
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    let timeout;
+
+    if (hash === `#${id}`) {
+      timeout = setTimeout(() => {
+        setIsOpen(true);
+      }, 700);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [id, hash]);
 
   return (
     <li className="overflow-hidden border-b border-gray-new-15 py-[18px] last:border-0" id={id}>
