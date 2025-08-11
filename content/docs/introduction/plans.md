@@ -29,26 +29,26 @@ These are Neon's new usage-based pricing plans, released in August, 13, 2025. If
 
 Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 
-| Plan feature                                  | **Free**                                            | **Launch**                                                      | **Enterprise**                        |
-| ----------------------------------------------| --------------------------------------------------- | --------------------------------------------------------------- | ------------------------------------- |
-| [Price](#price)                               | $0/month                                            | $5/month minimum                                                | $5/month minimum                      |
-| [Who it's for](#who-its-for)                  | Prototypes and side projects                        | Startups and growing teams                                      | Production-grade workloads & larger companies |
-| [Projects](#projects)                         | 10                                                  | 100                                                             | 1,000 (may be increased on request)   |
-| [Branches](#branches)                    | 10/project                                          | 10/project                                                      | 25/project                            |
-| [Extra branches](#extra-branches)             | —                                                   | $1.50/branch-month (prorated hourly)                            | $1.50/branch-month (prorated hourly)  |
-| [Compute](#compute)                           | 50 CU-hours                                         | $0.14/CU-hour                                                   | $0.26/CU-hour                         |
-| [Autoscaling](#autoscaling)                   | Up to 2 CU (2 vCPU / 8 GB RAM)                      | Up to 16 CU (16 vCPU / 64 GB RAM)                               | Up to 16 CU (fixed size computes up to 56 vCPU / 224 GB RAM)    |
-| [Scale to zero](#scale-to-zero)               | After 5 min                                         | After 5 min, can be disabled                                    | Configurable (from 5 seconds -> always on) |
-| [Storage](#storage)                           | 0.5 GB per branch                                   | $0.35 per GB-month                                              | $0.35 per GB-month                    |
-| [Public data transfer (egress)](#public-data-transfer-egress) | 5 GB included                 | 100 GB included, then $0.10/GB                                  | 100 GB included, then $0.10/GB        |
-| [Monitoring](#monitoring)                     | 1 day                                           | 3 days                                                          | 14 days                               |
-| [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                         | —                                                               | ✅                              |
-| [Restore window](#restore-window)             | 6 hours, up to 1 GB-month                           | Up to 7 days                                                    | Up to 30 days                         |
-| [Instant restore](#instant-restore)           | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
-| [Private data transfer](#private-ndata-transfer) | —             | —                                                               | $0.01/GB                              |
-| [Support](#support)                           | Community                                           | Billing                                                 | Production                    |
-| [Compliance and security](#compliance-and-security)| —                                                   | Protected branches | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking                          | 
-| [Uptime SLA](#uptime-sla)                     | —                                                   | —                                                               | ✅                                |
+| Plan feature                                                            | **Free**                       | **Launch**                           | **Enterprise**                                                                    |
+| ----------------------------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
+| [Price](#price)                                                         | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
+| [Who it's for](#who-its-for)                                            | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads & larger companies                                     |
+| [Projects](#projects)                                                   | 10                             | 100                                  | 1,000 (may be increased on request)                                               |
+| [Branches](#branches)                                                   | 10/project                     | 10/project                           | 25/project                                                                        |
+| [Extra branches](#extra-branches)                                       | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
+| [Compute](#compute)                                                     | 50 CU-hours                    | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
+| [Autoscaling](#autoscaling)                                             | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed size computes up to 56 vCPU / 224 GB RAM)                      |
+| [Scale to zero](#scale-to-zero)                                         | After 5 min                    | After 5 min, can be disabled         | Configurable (from 5 seconds -> always on)                                        |
+| [Storage](#storage)                                                     | 0.5 GB per branch              | $0.35 per GB-month                   | $0.35 per GB-month                                                                |
+| [Public data transfer (egress)](#public-data-transfer-egress)           | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
+| [Monitoring](#monitoring)                                               | 1 day                          | 3 days                               | 14 days                                                                           |
+| [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                              | —                                    | ✅                                                                                |
+| [Restore window](#restore-window)                                       | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
+| [Instant restore](#instant-restore)                                     | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
+| [Private data transfer](#private-ndata-transfer)                        | —                              | —                                    | $0.01/GB                                                                          |
+| [Support](#support)                                                     | Community                      | Billing                              | Production                                                                        |
+| [Compliance and security](#compliance-and-security)                     | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
+| [Uptime SLA](#uptime-sla)                                               | —                              | —                                    | ✅                                                                                |
 
 ## Plan features
 
@@ -306,9 +306,9 @@ Neon supports several key [compliances](/docs/security/compliance), available on
 
 Security features include:
 
--  [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
--  [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
--  [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
+- [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
+- [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 
 ### ☑ Uptime SLAs
 

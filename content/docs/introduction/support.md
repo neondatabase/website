@@ -10,11 +10,11 @@ This page outlines Neon's support plans, available channels, and policies. To le
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan                                      | Support Plan |
-| :----------------------------------------------------- | :----------- |
-| Free plan                                              | Community    |
-| Launch plan                                            | Billing      |
-| Enterprise plan                                        | Production   |
+| Neon Pricing Plan | Support Plan |
+| :---------------- | :----------- |
+| Free plan         | Community    |
+| Launch plan       | Billing      |
+| Enterprise plan   | Production   |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).

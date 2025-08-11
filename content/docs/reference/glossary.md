@@ -274,7 +274,7 @@ Kernel-based Virtual Machine, a virtualization infrastructure built into the Lin
 
 ## Launch plan
 
-A Neon plan designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month.  See [Neon plans](/docs/introduction/plans).
+A Neon plan designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month. See [Neon plans](/docs/introduction/plans).
 
 ## live migration
 
