@@ -2,7 +2,7 @@
 title: Secure your data with Auth0 and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Auth0 and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.467Z'
+updatedOn: '2025-08-11T00:30:08.258Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-auth0
   - /docs/guides/neon-authorize-auth0

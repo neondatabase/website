@@ -2,7 +2,7 @@
 title: Secure your data with Keycloak and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Keycloak and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.471Z'
+updatedOn: '2025-08-11T00:30:08.262Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-keycloak
   - /docs/guides/neon-authorize-keycloak
