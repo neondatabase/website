@@ -29,6 +29,10 @@ To get started, see [Deploying Neon on Azure](/docs/azure/azure-deploy).
 
 Neon pricing plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon Plans](/docs/introduction/plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
+<Admonition type="note">
+Currently, only Neon [legacy plans](/docs/introduction/legacy-plans) are supported on Azure. Neon's latest [pricing plans](/docs/introduction/plans) will be made available in a future release. 
+</Admonition>
+
 ## Enterprise plan support on Azure
 
 Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.

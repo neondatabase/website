@@ -1,50 +1,24 @@
 ---
 title: Plans and billing
 enableTableOfContents: true
-subtitle: Learn about Neon's pricing plans and billing
+subtitle: Learn about Neon's pricing plans and how to manage billing
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
 updatedOn: '2025-05-30T16:54:40.483Z'
 ---
 
-Find all the information you need about Neon's plans and how to manage your monthly bill.
-
-## Neon plans and pricing
-
-Start with an overview of Neon's pricing plans to learn what's included, then use our pricing estimation guide to estimate your monthly bill. Plus a sample project showing how to select the right pricing plan in a model scenario.
+## Neon plans
 
 <DetailIconCards>
 
 <a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="cards">Plans</a>
 
-<a href="/docs/introduction/legacy-plans" description="Neon's legacy pricing plans" icon="cards">Legacy plans</a>
-
-</DetailIconCards>
-
-## Neon for Enterprise
-
-<DetailIconCards>
-
-<a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
-
-<a href="/docs/introduction/enterprise-sales-process" description="Learn about Neon's Enterprise sales process and what to expect" icon="import">Neon Enterprise Sales Process</a>
-
-</DetailIconCards>
-
-## Understand how billing works
-
-Learn more about Neon's usage metrics.
-
-<DetailIconCards>
-
-<a href="/docs/introduction/usage-metrics" description="Take a deep dive into the usage metrics behind plan allowances and extra usage" icon="metrics">Usage metrics</a>
+<a href="/docs/introduction/legacy-plans" description="A reference for users currently on these plans — not available for new signups" icon="cards">Legacy plans</a>
 
 </DetailIconCards>
 
 ## Manage billing
-
-Find information about invoices, payment methods, changing your plan, monitoring billing and usage, and how you can pay for Neon with your AWS account.
 
 <DetailIconCards>
 
@@ -55,5 +29,15 @@ Find information about invoices, payment methods, changing your plan, monitoring
 <a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 
 <a href="/docs/introduction/billing-azure-marketplace" description="Neon as an Azure Native Service with billing through Azure Marketplace" icon="aws">Azure Marketplace</a>
+
+</DetailIconCards>
+
+## Neon for Enterprise
+
+<DetailIconCards>
+
+<a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
+
+<a href="/docs/introduction/enterprise-sales-process" description="Learn about Neon's Enterprise sales process and what to expect" icon="import">Neon Enterprise Sales Process</a>
 
 </DetailIconCards>

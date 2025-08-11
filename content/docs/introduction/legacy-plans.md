@@ -7,10 +7,10 @@ redirectFrom:
 updatedOn: '2025-05-30T16:54:40.485Z'
 ---
 
-This page documents Neon’s **legacy plans**. These plans are no longer available to new users. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
+This page documents Neon’s **legacy plans**. These plans are not available for new signups. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
 
 <Admonition type="important">
-We encourage you to review our [new usage-based pricing plans](/docs/introduction/plans) to explore your options.
+You cannot upgrade or downgrade to a legacy plan. If you're currently on a legacy plan, we encourage you to review our [current usage-based pricing plans](/docs/introduction/plans) to explore your options.
 </Admonition>
 
 ---
