@@ -32,13 +32,18 @@ const InfoIcon = ({
   toggleOnClick = false,
 }) => (
   <span
-    className={clsx('group/info relative', toggleOnClick && 'cursor-pointer', className)}
+    {...(toggleOnClick && { tabIndex: 0 })}
+    className={clsx(
+      'group/info relative outline-none',
+      toggleOnClick && 'cursor-pointer',
+      className
+    )}
     data-tooltip-id={`info-icon-${tooltipId}`}
     data-tooltip-html={getTooltipHtml(tooltip, link)}
     aria-hidden
   >
     <Image
-      className="transition-opacity duration-200 group-hover/info:opacity-0"
+      className="transition-opacity duration-200 group-hover/info:opacity-0 group-focus/info:opacity-0"
       src={tooltipSvg}
       width={14}
       height={14}
@@ -46,7 +51,7 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Image
-      className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover/info:opacity-100"
+      className="absolute inset-0 opacity-0 transition-opacity duration-200 group-hover/info:opacity-100 group-focus/info:opacity-100"
       src={tooltipHoveredSvg}
       width={14}
       height={14}
