@@ -99,6 +99,28 @@ const ContactForm = () => {
     e.preventDefault();
     const { firstname, lastname, email, companyWebsite, investor } = data;
     const loadingAnimationStartedTime = Date.now();
+    const values = [
+      {
+        name: 'firstname',
+        value: firstname,
+      },
+      {
+        name: 'lastname',
+        value: lastname,
+      },
+      {
+        name: 'email',
+        value: email,
+      },
+      {
+        name: 'company_website',
+        value: companyWebsite,
+      },
+      {
+        name: 'accelerator_private_investor',
+        value: investor,
+      },
+    ];
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
@@ -106,31 +128,28 @@ const ContactForm = () => {
       const response = await sendHubspotFormData({
         formId: HUBSPOT_STARTUPS_FORM_ID,
         context,
-        values: [
-          {
-            name: 'firstname',
-            value: firstname,
-          },
-          {
-            name: 'lastname',
-            value: lastname,
-          },
-          {
-            name: 'email',
-            value: email,
-          },
-          {
-            name: 'company_website',
-            value: companyWebsite,
-          },
-          {
-            name: 'accelerator_private_investor',
-            value: investor,
-          },
-        ],
+        values,
       });
 
       if (response.ok) {
+        const eventName = 'Startup Form Submitted';
+        const eventProps = {
+          email,
+          first_name: firstname,
+          last_name: lastname,
+          company_website: companyWebsite,
+          investor,
+        };
+        if (true) {
+          try {
+            if (window.zaraz && email) {
+              sendGtagEvent('identify', { email });
+              sendGtagEvent(eventName, eventProps);
+            }
+          } catch (error) {
+            console.error('Error submitting the form');
+          }
+        }
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           reset();
