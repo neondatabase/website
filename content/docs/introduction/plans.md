@@ -60,8 +60,8 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 For **Launch** and **Enterprise** plans, there is a $5/month minimum monthly fee. Additional usage for compute, storage, extra branches, and other features, is billed at published rates (see the [Plan overview](#plan-overview) table).
 
-On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more —  for $0/month.
- 
+On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more — for $0/month.
+
 > If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, if you sign up exactly halfway through the month, your monthly base cost will be $2.50 (half of the $5.00 monthly fee).
 
 ### ☑ Who it's for
@@ -114,7 +114,7 @@ On paid plans, you can create as many branches as you need. Extra branches beyon
 
 The cost on paid plans is **$1.50 per branch-month**. Metered by the hour, this works out to about $0.002 per hour for each extra branch.
 
-**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month.  
+**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month.
 
 > Extra branches are not available on the Free plan. If you need more branches, you can either delete existing branches or upgrade to a paid plan. Your project's root branch counts toward the per-project branch limit.
 
@@ -199,7 +199,7 @@ The **scale-to-zero** feature suspends a compute after a period of inactivity, w
 
 - **Free plan**: Computes scale to zero after 5 minutes of inactivity – **cannot be disabled**
 - **Launch plan**: Computes scale to zero after 5 minutes of inactivity — **can be disabled**
-- **Enterprise**: Fully configurable  — **can be disabled, configurable from 5 seconds to always-on**
+- **Enterprise**: Fully configurable — **can be disabled, configurable from 5 seconds to always-on**
 
 Learn more about our [scale-to-zero](/docs/introduction/scale-to-zero) feature.
 
@@ -213,17 +213,17 @@ Storage is metered hourly and summed over the month.
 
 On the **Launch** and **Enterprise** plans, storage is billed at $0.35/GB-month.
 
-For [root](/docs/reference/glossary#root-branch) branches, it's your actual data size (also referred to as _[logical data size](/docs/reference/glossary#logical-data-size)_) that's metered. 
+For [root](/docs/reference/glossary#root-branch) branches, it's your actual data size (also referred to as _[logical data size](/docs/reference/glossary#logical-data-size)_) that's metered.
 
-For child branches, only the delta from the parent branch is counted. For example, when you first create a branch, it adds no storage–the branch's data is shared with its parent, but once you start performing write operations on the the branch, you've created a delta, which counts toward storage. 
+For child branches, only the delta from the parent branch is counted. For example, when you first create a branch, it adds no storage–the branch's data is shared with its parent, but once you start performing write operations on the the branch, you've created a delta, which counts toward storage.
 
 **Storage on child branches never decreases—the delta only grows with each write operation (insert, update, or delete)**, so it's important to manage your branches and remove them when no longer needed.
 
 > On the **Free** plan, you get 0.5 GB on the root branch and 0.5 GB of storage on child branches at no cost.
- 
+
 ### ☑ Public data transfer (egress)
 
-Public data transfer is the total volume of data transferred out of your database over the public internet during the monthly billing period. 
+Public data transfer is the total volume of data transferred out of your database over the public internet during the monthly billing period.
 
 > Public data transfer also includes data transferred from your database via Postgres logical replication to any destination, including other Neon databases.
 
