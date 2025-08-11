@@ -575,11 +575,6 @@ You are now ready to run your application.
       ![Neon Auth todo app signup page](/docs/guides/neon-auth-todo-app-signup.png)
 
       > Sign up using one of the available OAuth providers (e.g., Google, GitHub) or with your email address.
-      <Admonition type="warning" title="Production OAuth Credentials Required">
-      The default OAuth providers (e.g., Google, GitHub) use shared, demo credentials. These are strictly for development and testing purposes. **Do not use them in production.**
-
-      For a live application, you must create and configure your own OAuth credentials for each provider. This ensures your application is secure and displays your own branding on the consent screen. See [Neon Auth: Production OAuth setup](/docs/neon-auth/best-practices#production-oauth-setup) below for instructions.
-      </Admonition>
 
     - After signing up, you'll be redirected back to the app, now logged in.
     - Add, complete, and delete a few todos to test the full functionality.
@@ -587,6 +582,48 @@ You are now ready to run your application.
 ![Neon Auth Todo App Demo](/docs/guides/neon-auth-todo-app-demo.png)
 
 </Steps>
+
+## Using Neon Auth in production
+
+Before deploying your application to a live environment, you must complete the following security configurations. These steps are crucial to ensure your application is secure and provides a trusted experience for your users.
+
+### Configure production OAuth credentials
+
+The default OAuth providers (e.g., Google, GitHub) use shared, demo credentials. These are strictly for development and testing purposes. **Do not use them in production.**
+
+For a live application, you must create and configure your own OAuth credentials for each provider. This ensures your application is secure and displays your own branding on the provider's consent screen, creating a trusted experience for your users.
+
+> **For detailed instructions, see: [Neon Auth: Production OAuth setup](/docs/neon-auth/best-practices#production-oauth-setup)**
+
+### Restrict redirect domains
+
+To prevent malicious actors from hijacking your authentication flows, you must explicitly whitelist the domains your application will use for authentication redirects (e.g., your main website, admin panels).
+
+When a user signs in, Neon Auth will only redirect them to a domain on this approved list. Any attempts to redirect to an unlisted domain will be blocked, protecting your users from phishing attacks and other security threats.
+
+> **For detailed steps, see: [Neon Auth best practices: Restricting redirect domains](/docs/neon-auth/best-practices#restricting-redirect-domains)**
+
+### Set up a custom email server
+
+By default, Neon Auth sends transactional emails (like email verification and password resets) from a shared server using the `noreply@stackframe.co` address. For a production application, this can appear unprofessional and may cause emails to be filtered as spam.
+
+To ensure a trusted user experience and improve email deliverability, you should configure Neon Auth to send emails from your own domain using a custom SMTP server.
+
+> **For instructions, see: [Neon Auth best practices: Email server setup](/docs/neon-auth/best-practices#email-server)**
+
+### Claim your project for Advanced configuration
+
+Neon Auth is powered by [Stack Auth](https://stack-auth.com/), providing a managed authentication experience directly within the Neon Console. While most features can be used out of the box, you may need more advanced control for certain production use cases.
+
+For advanced configurations or to add OAuth providers beyond the defaults (Github and Google), you can claim your project. Claiming moves the project's management from Neon to your direct control within the Stack Auth dashboard.
+
+You should consider claiming your project if you need to:
+
+- **Add new OAuth providers** (e.g., Spotify, Discord, Apple etc) and manage their unique client IDs/secrets.
+- **Enable production mode** to enforce stricter security settings required for a live application.
+- **Manage multiple environments** (e.g., development, staging, production) directly within the Stack Auth interface.
+
+> **For more information, see: [Claiming a Neon Auth project](/docs/neon-auth/claim-project)**
 
 ## Advanced features
 
