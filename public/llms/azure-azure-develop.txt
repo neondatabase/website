@@ -80,7 +80,3 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Building a robust JSON API with TypeScript](https://neon.com/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
 - [Azure Static Web Apps with Neon](https://neon.com/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
 - [Azure Logic Apps with Neon](https://neon.com/guides/azure-logic-apps) — Integrate Neon with Azure Logic Apps
-
-## Security & access control
-
-- [Row-level security with Azure AD](https://neon.com/docs/guides/neon-rls-azure-ad) - Implement row-level security with Azure Active Directory

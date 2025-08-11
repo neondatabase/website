@@ -69,7 +69,7 @@ CREATE POLICY "user_can_access_own_data" ON your_table
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-We recommend using [Drizzle](https://neon.com/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies.
+We recommend using [Drizzle](https://neon.com/docs/guides/rls-drizzle) to help simplify writing RLS policies.
 
 ## Using the Data API
 

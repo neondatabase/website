@@ -287,9 +287,4 @@ export async function getUserSafely(id: number) {
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer
-
-4. **Schema Design**
-   - Leverage Postgres-specific features supported by Neon
-   - Use appropriate indexes for your query patterns
-   - Consider Neon's performance characteristics for large tables
 ````
