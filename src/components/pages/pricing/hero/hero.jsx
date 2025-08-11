@@ -89,25 +89,23 @@ const Hero = () => {
                   className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new px-5 pb-8 pt-5"
                   key={index}
                 >
-                  <div className="flex flex-col justify-between gap-10">
+                  <div className="flex flex-col justify-between gap-14 md:gap-12">
                     <h3
                       className={clsx(
-                        'text-base font-medium leading-none tracking-extra-tight',
-                        highlighted ? 'text-green-45' : 'text-gray-new-50'
+                        'text-[18px] font-medium leading-none tracking-extra-tight md:text-base',
+                        highlighted ? 'text-green-45' : 'text-gray-new-80'
                       )}
                     >
                       {type}
                     </h3>
                     <div
                       className={clsx(
-                        'flex flex-col gap-1',
+                        'flex flex-col gap-1 text-[22px] font-medium leading-snug tracking-extra-tight md:text-xl',
                         title === 'Usage-based' ? 'md:flex-col' : 'md:flex-row md:items-center'
                       )}
                     >
-                      <h4 className="text-xl font-medium leading-none tracking-extra-tight">
-                        {title}
-                      </h4>
-                      <p className="relative text-xl font-medium tracking-extra-tight text-gray-new-50">
+                      <h4>{title}</h4>
+                      <p className="relative text-gray-new-50">
                         ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
                       </p>
                     </div>
@@ -115,10 +113,10 @@ const Hero = () => {
 
                   <Button
                     className={clsx(
-                      'mt-5 w-full !py-[14px] !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      'mt-5 w-full !py-[14px] !text-base leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
-                        ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
-                        : 'bg-gray-new-20 hover:bg-gray-new-30'
+                        ? 'bg-green-45 !font-semibold text-black hover:bg-[#00ffaa]'
+                        : 'bg-gray-new-20 !font-medium hover:bg-gray-new-30'
                     )}
                     size="sm"
                     to={button.url}
