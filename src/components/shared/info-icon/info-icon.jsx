@@ -60,7 +60,7 @@ const InfoIcon = ({
       place={tooltipPlace}
       arrowColor="#242628"
       {...(toggleOnClick && {
-        openOnClick: true,
+        clickable: true,
       })}
     />
   </span>

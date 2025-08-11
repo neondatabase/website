@@ -21,15 +21,15 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
   <li className="flex gap-x-2 font-normal">
     <span
       className={clsx(
-        'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0',
-        highlighted ? 'bg-green-45' : 'bg-gray-new-70'
+        'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0 translate-y-[2px]',
+        highlighted ? 'bg-green-45' : 'bg-gray-new-60'
       )}
       aria-hidden
     />
     <p
       className={clsx(
         'flex items-start gap-x-1 text-[15px] leading-normal tracking-tighter',
-        highlighted ? 'text-white' : 'text-gray-new-80'
+        highlighted ? 'text-gray-new-98' : 'text-gray-new-80'
       )}
     >
       <span className="with-link-primary">

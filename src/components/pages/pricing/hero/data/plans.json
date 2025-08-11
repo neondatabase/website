@@ -46,14 +46,14 @@
         "title": "100 projects"
       },
       {
-        "title": "Pay-as-you-go storage</br>at\u00A0$ 0.35 per\u00A0GB-month"
+        "title": "Pay-as-you-go storage<br/>at $0.35 per GB-month"
       },
       {
-        "title": "10 branches per project included</br>then $0.002 per\u00A0branch-hour",
+        "title": "10 branches per project included<br/>then $0.002 per branch-hour",
         "info": "Branch-hour = #branches x branch lifetime"
       },
       {
-        "title": "Pay-as-you-go compute</br>at $0.14 per CU-hour",
+        "title": "Pay-as-you-go compute<br/>at $0.14 per CU-hour",
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
@@ -82,14 +82,14 @@
         "title": "1,000 projects"
       },
       {
-        "title": "Pay-as-you-go storage</br>at\u00A0$ 0.35 per\u00A0GB-month"
+        "title": "Pay-as-you-go storage<br/>at $0.35 per GB-month"
       },
       {
-        "title": "25 branches per project included</br>then $0.002 per\u00A0branch-hour",
+        "title": "25 branches per project included<br/>then $0.002 per branch-hour",
         "info": "Branch-hour = #branches x branch lifetime"
       },
       {
-        "title": "Pay-as-you-go compute</br>at $0.26 per CU-hour",
+        "title": "Pay-as-you-go compute<br/>at $0.26 per CU-hour",
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },

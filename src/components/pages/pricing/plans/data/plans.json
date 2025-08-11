@@ -3,19 +3,19 @@
     "feature": "",
     "free": {
       "label": "Free",
-      "price": "<span>$0/month</span>",
+      "price": "<span>$0</span>/month",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
     "launch": {
       "label": "Launch",
-      "price": "Usage-based<span>, $5/mo min.</span>",
+      "price": "<span>Usage-based</span>, $5/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "enterprise": {
       "label": "Enterprise",
-      "price": "Usage-based<span>, $5/mo min.</span>",
+      "price": "<span>Usage-based</span>, $5/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
@@ -87,7 +87,7 @@
       },
       "free": {
         "title": "0.5 GB per project",
-        "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:</br>max 0.5 GB / project (cumulative)</p>"
+        "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:<br/>max 0.5 GB / project (cumulative)</p>"
       },
       "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
       "enterprise": "Pay-as-you-go<span>at $0.35 per GB-month</span>"

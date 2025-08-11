@@ -51,7 +51,7 @@ const TableHeading = ({
         {label}
       </h3>
       <span
-        className="mt-3 block leading-snug tracking-extra-tight lg:text-[15px] [&_span]:tracking-extra-tight [&_span]:text-gray-new-70"
+        className="mt-3 block leading-snug tracking-extra-tight text-gray-new-60 lg:text-[15px] [&_span]:tracking-extra-tight [&_span]:text-white"
         dangerouslySetInnerHTML={{ __html: price }}
       />
       <Button
@@ -138,7 +138,7 @@ const Table = () => {
                 'z-30 flex-1 bg-black-pure lt:min-w-[200px] lg:sticky lg:left-0 lg:top-0 lg:shadow-[8px_18px_20px_0px_rgba(5,5,5,.8)] md:min-w-[180px]':
                   isLabelsColumn,
                 'basis-[296px] xl:basis-[252px] lg:shrink-0 lg:basis-[240px]': !isLabelsColumn,
-                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[288px] before:rounded-md before:bg-pricing-table-featured-column xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
+                'before:absolute before:inset-y-0 before:-left-6 before:z-0 before:w-[288px] before:rounded-md before:bg-[#0F1011] xl:before:-left-5 xl:before:w-[248px] lg:before:w-[228px]':
                   isHighlightedColumn,
                 '!basis-[240px] xl:!basis-[200px] lg:!basis-[240px] md:!basis-[190px]':
                   i === tableHeadings.length - 1,
@@ -191,9 +191,7 @@ const Table = () => {
                               <span
                                 className={clsx(
                                   'mt-1 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
-                                  '[&_a]:border-b [&_a]:border-[rgba(175,177,182,0.40)] [&_a]:text-gray-new-70',
-                                  '[&_a]:transition-colors [&_a]:duration-200',
-                                  '[&_a:hover]:border-primary-1 [&_a:hover]:text-primary-1'
+                                  'text-with-links'
                                 )}
                                 dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
                               />

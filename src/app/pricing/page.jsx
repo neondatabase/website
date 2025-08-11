@@ -95,7 +95,6 @@ const faqItems = [
       <code>1 additional branch × 1 hour of lifetime</code>
       <p>For example: if your plan includes 10 branches and you briefly run 2 extra branches for 5 hours each, that’s 10 branch-hours, billed at $0.002 per branch-hour, or  a total of $0.02 added to your bill.</p>
     `,
-    id: 'instant-restores',
   },
   {
     question: 'How can I control my costs?',

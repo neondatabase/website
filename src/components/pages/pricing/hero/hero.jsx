@@ -2,15 +2,14 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
-import { useMemo } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 
-import plansOriginal from './data/plans.json';
+import plans from './data/plans.json';
 import Features from './features';
 
 const scaleCardBorderVariants = {
@@ -31,30 +30,9 @@ const scaleCardBorderVariants = {
 
 const Hero = () => {
   const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
-
-  const plans = useMemo(() => {
-    if (isComputePriceRaised) {
-      return plansOriginal.map((plan) => ({
-        ...plan,
-        features: plan.features.map((feature) => {
-          if (feature.id === 'compute_time') {
-            return {
-              ...feature,
-              info: 'Additional at $0.24 per compute hour',
-            };
-          }
-          return feature;
-        }),
-      }));
-    }
-
-    return plansOriginal;
-  }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[135px] lg:pt-[52px] md:pt-10">
+    <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-[136px] lg:pt-[56px] md:pt-12">
       <Container className="flex flex-col items-center" size="960">
         <Heading
           className="text-center text-[72px] font-medium !leading-none tracking-tighter xl:!text-6xl md:!text-5xl"
@@ -100,8 +78,7 @@ const Hero = () => {
                     </h3>
                     <div
                       className={clsx(
-                        'flex flex-col gap-1 text-[22px] font-medium leading-snug tracking-extra-tight lg:text-xl',
-                        title === 'Usage-based' ? 'md:flex-col' : 'md:flex-row md:items-center'
+                        'flex flex-col flex-wrap gap-x-1 whitespace-nowrap text-[22px] font-medium leading-snug tracking-extra-tight lg:text-xl md:flex-row'
                       )}
                     >
                       <h4>{title}</h4>
