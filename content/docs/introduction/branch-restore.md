@@ -19,7 +19,7 @@ updatedOn: '2025-08-06T14:09:12.292Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/manage/projects#configure-restore-window">Configure restore window</a>
+  <a href="/docs/manage/projects#configure-your-restore-window">Configure restore window</a>
 </DocsList>
 </InfoBlock>
 
