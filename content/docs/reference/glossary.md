@@ -84,7 +84,7 @@ A Neon feature that allows you to create an isolated copy of your data for paral
 
 ### Business plan
 
-A paid plan offered by Neon designed for mid-to-large enterprises that require higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans).
+A [legacy paid plan](/docs/introduction/legacy-plans) designed for mid-to-large enterprises that require higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans).
 
 ## check_availability
 
@@ -130,7 +130,7 @@ A unit that measures the processing power or "size" of a Neon compute. A Compute
 
 ## compute hours
 
-A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -184,7 +184,7 @@ A method of storing inactive data that converts plaintext data into a coded form
 
 ## Data transfer
 
-A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. Neon does not charge for data transfer, but Free Plan projects are limited to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
+A usage metric that measures the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. Neon does not charge for data transfer, but Free plan projects are limited to 5 GB per month. See [Data transfer](/docs/introduction/usage-metrics#data-transfer).
 
 ## Database
 
@@ -220,11 +220,11 @@ The data transferred out of the Neon service to an external destination. See [Da
 
 ## Enterprise plan
 
-A custom volume-based paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
+A paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
-## Free Plan
+## Free plan
 
-See [Neon Free Plan](#neon-free-plan).
+See [Neon Free plan](#neon-free-plan).
 
 ## GB-month
 
@@ -274,7 +274,7 @@ Kernel-based Virtual Machine, a virtualization infrastructure built into the Lin
 
 ## Launch plan
 
-A Neon plan that provides all of the resources, features, and support you need to launch your application. It's ideal for startups and growing businesses or applications. See [Neon plans](/docs/introduction/plans).
+A Neon plan designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month.  See [Neon plans](/docs/introduction/plans).
 
 ## live migration
 
@@ -320,9 +320,9 @@ The Neon RESTful Application Programming Interface. Any operation performed in t
 
 A browser-based graphical interface for managing Neon projects and resources.
 
-## Neon Free Plan
+## Neon Free plan
 
-A Neon plan for which there are no usage charges. For information about the Neon Free Plan and associated limits, see [Neon Free Plan](/docs/introduction/plans#free-plan).
+A Neon plan for which there are no usage charges. For information about the Neon Free plan and associated limits, see [Neon plans](/docs/introduction/plans).
 
 ## Neon Proxy
 
@@ -410,7 +410,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
-The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+The default branch has a larger compute hour allowance on the Free plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 

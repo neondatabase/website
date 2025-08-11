@@ -115,7 +115,7 @@ For more information about plan limits, see [Neon plans](/docs/introduction/plan
 
 To keep your Neon computes and Postgres instances up to date, Neon automatically applies scheduled updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart, take only a few seconds, and typically occur weekly.
 
-On the Free Plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
+On the Free plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
 
 To set your project's update schedule or view currently scheduled updates:
 

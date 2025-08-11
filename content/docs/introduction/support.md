@@ -12,9 +12,9 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 
 | Neon Pricing Plan                                      | Support Plan |
 | :----------------------------------------------------- | :----------- |
-| [Free Plan](/docs/introduction/plans#free-plan)        | Community    |
-| [Launch Plan](/docs/introduction/plans#launch)         | Billing      |
-| [Enterprise Plan](/docs/introduction/plans#enterprise) | Production   |
+| Free plan                                              | Community    |
+| Launch plan                                            | Billing      |
+| Enterprise plan                                        | Production   |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
@@ -90,7 +90,7 @@ Video chat is available to Production support plan customers and may be schedule
 
 ### SLAs
 
-Support Level Agreements (SLAs) are available to Production support plan customers. For Business plan, see [Business Plan SLA](/neon-business-sla). If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
+Support Level Agreements (SLAs) are available to Enterprise plan customers. If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
 
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an SLA, you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
@@ -102,7 +102,7 @@ The Dedicated Support Engineer option is available to Production customers. A de
 
 ## General support policy
 
-Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Enterprise. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free Plan](/docs/introduction/plans#free-plan) users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
+Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Enterprise. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
 
 Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
 

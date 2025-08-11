@@ -21,7 +21,7 @@ The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans
 
 | Plan       | Scale to zero after | Can be disabled? |
 | :--------- | :------------------ | :--------------- |
-| Free Plan  | 5 minutes           |                  |
+| Free plan  | 5 minutes           |                  |
 | Launch     | 5 minutes           | &check;          |
 | Scale      | 5 minutes           | &check;          |
 | Business   | 5 minutes           | &check;          |

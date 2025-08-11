@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2025-06-26T15:21:16.807Z'
 ---
 
-Neon offers HIPAA compliance as part of our Business and Enterprise plans, available upon request.
+Neon offers HIPAA compliance as part of our Enterprise plan for an additional cost, available upon request.
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are only available to customers who have signed a Business Associate Agreement (BAA) with Neon. The BAA outlines our responsibilities for protecting Protected Health Information (PHI) and ensuring HIPAA compliance.
 

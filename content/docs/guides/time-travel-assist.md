@@ -30,7 +30,7 @@ The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 v
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window.
 
 You cannot select a time outside your current restore window.
 

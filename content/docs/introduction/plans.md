@@ -17,10 +17,10 @@ updatedOn: '2025-05-30T16:54:40.485Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
-Start for free, then **only pay for what you use** as your needs grow.
+Start for free, then **pay only for what you use** as your needs grow.
 
 <Admonition type="note">
-These are Neon's new usage-based pricing plans, released in August, 13, 2025. If you signed up earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To move to a different plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically migrated to the new Free plan.
+These are Neon's new usage-based pricing plans, released in August, 13, 2025. If you signed up earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To move to a different plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically migrated to the new Free plan described below.
 </Admonition>
 
 ---
@@ -41,24 +41,24 @@ Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 | [Scale to zero](#scale-to-zero)               | After 5 min                                         | After 5 min, can be disabled                                    | Configurable (from 5 seconds -> always on) |
 | [Storage](#storage)                           | 0.5 GB per branch                                   | $0.35 per GB-month                                              | $0.35 per GB-month                    |
 | [Public data transfer (egress)](#public-data-transfer-egress) | 5 GB included                 | 100 GB included, then $0.10/GB                                  | 100 GB included, then $0.10/GB        |
-| [Monitoring (Console UI)](#monitoring-console-ui) | 1 day                                           | 3 days                                                          | 14 days                               |
+| [Monitoring](#monitoring)                     | 1 day                                           | 3 days                                                          | 14 days                               |
 | [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                         | —                                                               | ✅                              |
 | [Restore window](#restore-window)             | 6 hours, up to 1 GB-month                           | Up to 7 days                                                    | Up to 30 days                         |
 | [Instant restore](#instant-restore)           | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
 | [Private data transfer](#private-ndata-transfer) | —             | —                                                               | $0.01/GB                              |
 | [Support](#support)                           | Community                                           | Billing                                                 | Production                    |
-| [Compliance & security](#compliance--security)| —                                                   |  | SOC 2, ISO, GDPR, HIPAA (extra), IP Allow, Private Networking                          | 
+| [Compliance and security](#compliance-and-security)| —                                                   | Protected branches | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking                          | 
 | [Uptime SLA](#uptime-sla)                     | —                                                   | —                                                               | ✅                                |
 
 ## Plan features
 
-This section describes the features listed in the [Plan overview](#plan-overview) table above.
+This section describes the features listed in the [Plan overview](#plan-overview) table.
 
 ### ☑ Price
 
 **Price** is the minimum monthly fee for the plan before usage-based charges are applied.
 
-For **Launch** and **Enterprise** plans, there is a $5/month minimum monthly fee. Additional usage for compute, storage, extra branches, and other features, is billed at published rates (see the [Plan overview](#plan-overview) table above).
+For **Launch** and **Enterprise** plans, there is a $5/month minimum monthly fee. Additional usage for compute, storage, extra branches, and other features, is billed at published rates (see the [Plan overview](#plan-overview) table).
 
 On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more —  for $0/month.
  
@@ -235,7 +235,7 @@ Public data transfer is the total volume of data transferred out of your databas
 Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
 ```
 
-### ☑ Monitoring (Console UI)
+### ☑ Monitoring
 
 Database metrics are retained on the **Monitoring** dashboard in the Neon Console. The retention period differs by plan:
 
@@ -290,11 +290,9 @@ The level of support differs by plan:
 
 Please refer to our [Support](/docs/introduction/support) page for details.
 
-### ☑ Compliance & security
+### ☑ Compliance and security
 
-Compliance and advanced security features are available on the Enterprise plan.
-
-Neon supports several key compliances:
+Neon supports several key [compliances](/docs/security/compliance), available on the **Enterprise** plan:
 
 - SOC 2
 - SOC 3
@@ -306,10 +304,9 @@ Neon supports several key compliances:
 
 > Additional charges apply for [HIPAA](/docs/security/hipaa) support. Contact [Sales](/contact-sales) for details.
 
-For additional information, see [Compliance](/docs/security/compliance).
+Security features include:
 
-Advanced security features include:
-
+-  [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
 -  [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
 -  [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 

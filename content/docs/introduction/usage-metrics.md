@@ -49,8 +49,8 @@ Here are a few examples that illustrate compute-hour usage calculations:
 
 > By default, each Neon branch is created with a read-write compute. Creating a read replica adds a read-only compute to a branch. All of the computes across all of your Neon projects count toward your account's compute usage.
 
-<Admonition type="tip" title="Free Plan Compute Hours">
-On the Free plan, you get 50 CU-hours per month — this lets you run a 0.25 CU compute for 200 hours per month. Comsbined with [scale-to-zero](/docs/introduction/scale-to-zero), which helps minimize compute usage, this is sufficient for most prototypes and side-projects. If you need more compute hours, you can upgrade to the Launch plan, starting at $5/month with usage-based pricing.
+<Admonition type="tip" title="Free plan Compute Hours">
+On the Free plan, you get 50 CU-hours per month — this lets you run a 0.25 CU compute for 200 hours per month. Comsbined with [scale-to-zero](/docs/introduction/scale-to-zero), which helps minimize compute usage, this is sufficient for most prototypes and side-projects. If you need more compute hours, you can upgrade to the **Launch** plan, starting at $5/month with usage-based pricing. See [Neon plans](/docs/introduction/plans).
 </Admonition>
 
 ### Compute hour usage with autoscaling

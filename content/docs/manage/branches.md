@@ -77,7 +77,7 @@ To view the branches in a Neon project:
 
 ## Branch archiving
 
-On the Free Plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
+On the Free plan, Neon automatically archives inactive branches to cost-efficient archive storage after a defined threshold. For more, see [Branch archiving](/docs/guides/branch-archiving).
 
 <Admonition type="note">
 For branches with predictable lifespans, you can set an expiration date when creating branches to automatically delete them at a specified time. This offers an alternative to archiving for temporary development and testing environments, ensuring cleanup happens exactly when needed.
@@ -95,7 +95,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The advantage of the default branch is that it has a larger compute hour allowance on the Free plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 
@@ -227,13 +227,13 @@ The number of root branches allowed in a project depends on your Neon plan.
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
-The default branch has a larger compute hour allowance that non-default branches on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+The default branch has a larger compute hour allowance that non-default branches on the Free plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 ### Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free Plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free Plan 5 hours per month for **non-default branches**.
+- For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
 - For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
 
 ### Protected branch

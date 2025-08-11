@@ -94,7 +94,7 @@ As the Admin for the organization account:
 
 For detailed information on pricing and plans, refer to [Neon plans](/docs/introduction/plans).
 
-### Downgrade to Free Plan
+### Downgrade to Free plan
 
 You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
 

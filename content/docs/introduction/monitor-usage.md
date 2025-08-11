@@ -39,7 +39,7 @@ Usage metrics on the **Billing page** include:
 
   The **Peak usage** value is the highest number of projects used during the current billing period. When you exceed your plan's project allowance, extra project units are automatically allocated and billed based on the number of additional units needed to cover your extra usage, prorated from the date the extra was allocated. Project units and their cost are defined according to your [Neon plan](/docs/introduction/plans). Peak usage resets at the beginning of the next billing period.
 
-- **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free Plan.
+- **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free plan.
 
   <Admonition type="note" title="note: billing metrics for pre-2025 custom contract customers">
   If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: 
@@ -56,7 +56,7 @@ Usage metrics on the **Billing page** include:
 - **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
 
   <Admonition type="note">
-  On the Free Plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
+  On the Free plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
   </Admonition>
 
 - **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [instant restore](/docs/reference/glossary#branch-restore). The Launch plan supports up to a 7-day restore window, the Scale plan allows up to 14 days, and the Business plan offers up to 30 days. The default is 1 day on all plans. Keep in mind that the restore window increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the restore window setting for your project. See [Configure restore window](/docs/manage/projects#configure-restore-window).
@@ -103,7 +103,7 @@ Any user can query usage metrics for a branch or a project, as described below. 
 
 <Admonition type="tip" title="monitoring usage for a large number of projects">
 
-Scale and Business plan users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See:
+Enterprise users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See:
 
 - [Get account-level aggregated metrics](/docs/guides/consumption-metrics#get-account-level-aggregated-metrics)
 - [Get granular project-level metrics for your account](/docs/guides/consumption-metrics#get-granular-project-level-metrics-for-your-account)

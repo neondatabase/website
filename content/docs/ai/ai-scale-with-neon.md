@@ -72,7 +72,7 @@ To learn more about Neon's autoscaling feature and how to enable it, refer to ou
 
 ## Storage
 
-On the Free plan, you get 0.5 GB of storage on the Free plan plus 0.5 GB of storage per branch. Storage on paid plans is usage based.
+On the Free plan, you get 0.5 GB of storage plus 0.5 GB of storage per branch. Storage on paid plans is usage based. See [Neon plans](/docs/introduction/plans) for details.
 
 ## Read replicas
 

@@ -13,14 +13,16 @@ Neon's protected branches feature implements a series of protections:
 - Projects with protected branches cannot be deleted.
 - Computes associated with a protected branch cannot be deleted.
 - New passwords are automatically generated for Postgres roles on branches created from protected branches. [See below](#new-passwords-generated-for-postgres-roles-on-child-branches).
-- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Enterprise](/docs/introduction/plans#enterprise) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
+- With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Enterprise](/docs/introduction/plans) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
-The protected branches feature is available on all Neon paid plans.
+The protected branches feature is available on all Neon [paid plans](/docs/introduction/plans). 
+- The ****Launch** plan supports up to 2 protected branches
+- The **Enterprise** plan supports up to 5 protected branches
 
 ## Set a branch as protected
 
-This example sets a single branch as protected, but you can have up to 2 protected branches on the Launch plan and 5 on the Scale plan.
+This example sets branch as protected.
 
 To set a branch as protected:
 
@@ -64,7 +66,7 @@ Please note that resetting or restoring a child branch from a protected parent b
 
 ## How to apply IP restrictions to protected branches
 
-On Neon's [Business](/docs/introduction/plans#business) plan, you can use the protected branches feature in combination with Neon's [IP Allow](/docs/introduction/ip-allow) feature to apply IP access restrictions to protected branches only. The basic setup steps are:
+On plans that support it, you can use the protected branches feature in combination with Neon's [IP Allow](/docs/introduction/ip-allow) feature to apply IP access restrictions to protected branches only. The basic setup steps are:
 
 1. [Define an IP allowlist for your project](#define-an-ip-allowlist-for-your-project)
 2. [Restrict IP access to protected branches only](#restrict-ip-access-to-protected-branches-only)

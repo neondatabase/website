@@ -15,7 +15,7 @@ Use project collaboration to work with people outside your organization. If you'
 
 ## Set up Neon accounts
 
-You can invite anyone outside your organization to collaborate on your Neon project. To collaborate on a project, the user must have a Neon account, which can be a Neon Free Plan or a paid plan account.
+You can invite anyone outside your organization to collaborate on your Neon project. To collaborate on a project, the user must have a Neon account, which can be a Neon Free plan or a paid plan account.
 
 1. If the user does not have a Neon account, ask them to sign up. You can provide your users with the following instructions: [Sign up](/docs/get-started/signing-up).
 2. Request the email address the user signed up with. If the user signed up using Google or GitHub, request the email address associated with that account.
@@ -46,7 +46,7 @@ If invite emails aren’t received, they may be in spam or quarantined. Recipien
 
 ## Project collaboration limits
 
-When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free Plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For teams working together frequently across multiple projects, [organization](/docs/manage/organizations) membership offers a better collaboration experience.
+When you invite a user to your project, they operate under _your_ project allowances so long as they're using your project. For example, a Neon Free plan user is limited to 10 branches per project, but if they are using your project, there is no such restriction. For teams working together frequently across multiple projects, [organization](/docs/manage/organizations) membership offers a better collaboration experience.
 
 ### Access for collaborators via the Neon API or CLI
 

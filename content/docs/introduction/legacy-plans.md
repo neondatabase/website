@@ -23,7 +23,7 @@ To see if you are on a Neon legacy plan, navigate to your **Billing** page in th
 
 ---
 
-## Free Plan (Legacy)
+## Free plan (Legacy)
 
 The legacy Free plan is best suited for hobby projects, prototypes, and learning Neon. Users on this plan will be automatically migrated to the new Free plan.
 
@@ -325,7 +325,7 @@ Here are some strategies to consider:
 
 Your storage limit varies depending on your Neon plan.
 
-- **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GB-month), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
+- **Free plan**: If you reach your storage limit on the Free plan (0.5 GB-month), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
 - **Launch, Scale, and Business Plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage).
 
 </details>
@@ -370,7 +370,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free plan, this might even cause the operation to fail if you hit the storage limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
 
@@ -522,7 +522,7 @@ To estimate what your compute hour usage might be per month:
 <details>
 <summary>**What is a compute hour?**</summary>
 
-It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -564,7 +564,7 @@ This query displays the IP addresses connected to the database, the number of co
 
 Each of [Neon's plans](/docs/introduction/plans) includes a certain number of compute hours per month:
 
-- **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
+- **Free plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
 - **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
 - **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
 - **Business Plan**: This plan includes 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
@@ -581,7 +581,7 @@ You can monitor compute hour usage for a Neon project on the [Project Dashboard]
 <details>
 <summary>**What happens when I go over my plan's compute hour allowance?**</summary>
 
-On the Free Plan, if you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
+On the Free plan, if you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 
 On our paid plans (Launch, Scale, and Business), you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
 
@@ -590,7 +590,7 @@ On our paid plans (Launch, Scale, and Business), you are billed automatically fo
 <details>
 <summary>**Can I purchase more compute hours?**</summary>
 
-On the Free Plan, no. You'll have to upgrade to a paid plan. On the Launch, Scale, and Business plans, you are billed automatically for any compute hours over your monthly allowance: 300 compute hours on Launch, 750 compute hours on Scale, and 1000 hours on Business. The billing rate is $0.16 per compute hour.
+On the Free plan, no. You'll have to upgrade to a paid plan. On the Launch, Scale, and Business plans, you are billed automatically for any compute hours over your monthly allowance: 300 compute hours on Launch, 750 compute hours on Scale, and 1000 hours on Business. The billing rate is $0.16 per compute hour.
 
 </details>
 
@@ -637,12 +637,12 @@ The following table outlines project allowances for each Neon plan.
 
 | Plan       | Projects  |
 | :--------- | :-------- |
-| Free Plan  | 1         |
+| Free plan  | 1         |
 | Launch     | 100       |
 | Scale      | 1000      |
 | Business   | 5000      |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free](/docs/introduction/plans#free-plan) plan or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects.
-- Extra projects are available on the [Enterprise](/docs/introduction/plans#enterprise) plan.
+- When you reach your limit on the Free plan or Launch plan, you cannot create additional projects.
+- Extra projects are available on the Enterprise plan.
   <NeedHelp/>
