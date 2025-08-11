@@ -306,9 +306,9 @@ Neon supports several key [compliances](/docs/security/compliance), available on
 
 Security features include:
 
--  [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
--  [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
--  [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
+- [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
+- [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
 
 ### ☑ Uptime SLAs
 
