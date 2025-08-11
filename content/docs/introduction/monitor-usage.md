@@ -50,16 +50,16 @@ If you have questions or want to change the billing metrics defined in your cont
 
 You can retrieve a variety of usage metrics using the Neon API.
 
-Any user can query usage metrics for a branch or a project, as described below. See:
-
-- [Get branch details](#get-branch-details)
-- [Get project details](#get-project-details)
-
 <Admonition type="tip" title="monitoring usage for a large number of projects">
 
 Enterprise users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints are recommended when monitoring usage for a large number of projects. See [Querying consumption metrics](/docs/guides/consumption-metrics).
 
 </Admonition>
+
+Any user can query usage metrics for a branch or a project, as described below. See:
+
+- [Get branch details](#get-branch-details)
+- [Get project details](#get-project-details)
 
 ### Get branch details
 
