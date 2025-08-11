@@ -123,7 +123,7 @@ The cost on paid plans is **$1.50 per branch-month**. Metered by the hour, this 
 Your monthly compute usage depends on how long your compute runs and the size of your compute.
 
 - Compute usage is measured in **CU-hours** (Compute Unit hours).
-- A CU defines how much vCPU and memory your database uses at any moment.  
+- A CU defines how much vCPU and memory your database uses at any moment.
 - **1 CU = 1 vCPU + 4 GB RAM**
 - RAM scales with vCPU size at a 1:4 ratio — for every 1 vCPU in a Compute Unit, you get 4 GB of RAM.
 - Compute sizes all the way up to 56 CU are supported, depending on your plan — larger computes provide more processing power, more RAM, and higher connection limits.
@@ -159,9 +159,9 @@ Here are a few examples that illustrate compute usage in CU-hours:
 - **Launch**: $0.14/CU-hour, pay-as-you-go.
 - **Enterprise**: $0.26/CU-hour, pay-as-you-go.
 
-**Why do CU-hours cost more on the Enterprise plan?** — the Enterprise plan offers higher allowances and more features (see the [Plan overview](#plan-overview) table above).  
+**Why do CU-hours cost more on the Enterprise plan?** — the Enterprise plan offers higher allowances and more features (see the [Plan overview](#plan-overview) table above).
 
-> All computes across all of your projects contribute to your compute usage. By default, each branch is created with a read-write compute. Creating a read replica adds a read-only compute to a branch. 
+> All computes across all of your projects contribute to your compute usage. By default, each branch is created with a read-write compute. Creating a read replica adds a read-only compute to a branch.
 
 #### Compute usage with autoscaling
 
@@ -276,7 +276,7 @@ For more information about this feature, see [Instant restore](/docs/introductio
 
 ### ☑ Private data transfer
 
-The **Enterprise** plan supports [Private Networking](/docs/guides/neon-private-networking), which enables connecting to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet. 
+The **Enterprise** plan supports [Private Networking](/docs/guides/neon-private-networking), which enables connecting to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet.
 
 Network data transfer between Neon and private network services is billed at $0.01/GB. Data transferred **to and from Neon** is billed — it's bidirectional.
 
