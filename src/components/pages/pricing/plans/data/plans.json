@@ -50,9 +50,15 @@
         "title": "Extra branches"
       },
       "free": false,
-      "launch": "$0.002 per branch-hour",
-      "enterprise": "$0.002 per branch-hour"
+      "launch": {
+      "title": "$0.002 per branch-hour",
+      "info": "$1.5 per month, pro-rated hourly"
+      },
+      "enterprise": {
+      "title": "$0.002 per branch-hour",
+      "info": "$1.5 per month, pro-rated hourly"
     },
+    }
     {
       "rows": "2",
       "feature": {
