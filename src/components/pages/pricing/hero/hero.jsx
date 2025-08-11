@@ -89,10 +89,10 @@ const Hero = () => {
                   className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new px-5 pb-8 pt-5"
                   key={index}
                 >
-                  <div className="flex flex-col justify-between gap-14 md:gap-12">
+                  <div className="flex flex-col justify-between gap-14 lg:gap-[52px] md:gap-12">
                     <h3
                       className={clsx(
-                        'text-[18px] font-medium leading-none tracking-extra-tight md:text-base',
+                        'text-[18px] font-medium leading-none tracking-extra-tight lg:text-base',
                         highlighted ? 'text-green-45' : 'text-gray-new-80'
                       )}
                     >
@@ -100,7 +100,7 @@ const Hero = () => {
                     </h3>
                     <div
                       className={clsx(
-                        'flex flex-col gap-1 text-[22px] font-medium leading-snug tracking-extra-tight md:text-xl',
+                        'flex flex-col gap-1 text-[22px] font-medium leading-snug tracking-extra-tight lg:text-xl',
                         title === 'Usage-based' ? 'md:flex-col' : 'md:flex-row md:items-center'
                       )}
                     >
