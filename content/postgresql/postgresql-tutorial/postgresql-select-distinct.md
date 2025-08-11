@@ -203,6 +203,12 @@ Output:
 
 The output indicates that there are only three distinct rental rates 0\.99, 2\.99, and 4\.99\.
 
+Note that for executing the query above your current database should be `dvdrental`. To switch the current database to `dvdrental` run:
+
+```
+\c dvdrental
+```
+
 ## Summary
 
 - Use the `SELECT DISTINCT` to remove duplicate rows from a result set of a query.
