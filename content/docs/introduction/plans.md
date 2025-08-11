@@ -42,7 +42,7 @@ Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 | [Storage](#storage)                           | 0.5 GB per branch                                   | $0.35 per GB-month                                              | $0.35 per GB-month                    |
 | [Public data transfer (egress)](#public-data-transfer-egress) | 5 GB included                 | 100 GB included, then $0.10/GB                                  | 100 GB included, then $0.10/GB        |
 | [Monitoring](#monitoring)                     | 1 day                                           | 3 days                                                          | 14 days                               |
-| [Metrics/logs export (Datadog, OTel)](#metricslogs-export-datadog-otel) | —                         | —                                                               | ✅                              |
+| [Metrics/logs export](#metricslogs-export) | —                         | —                                                               | ✅                              |
 | [Restore window](#restore-window)             | 6 hours, up to 1 GB-month                           | Up to 7 days                                                    | Up to 30 days                         |
 | [Instant restore](#instant-restore)           | —                                                   | $0.20/GB-month                                                  | $0.20/GB-month                        |
 | [Private data transfer](#private-ndata-transfer) | —             | —                                                               | $0.01/GB                              |
@@ -245,7 +245,7 @@ Database metrics are retained on the **Monitoring** dashboard in the Neon Consol
 
 For information about database metrics, see [Monitoring dashboard](/docs/introduction/monitoring-page).
 
-### ☑ Metrics/logs export (Datadog, OTel)
+### ☑ Metrics/logs export
 
 Neon supports exporting metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible observability platform](/docs/guides/opentelemetry).
 
