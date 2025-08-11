@@ -94,6 +94,7 @@ const faqItems = [
       <p>If that happens, we’ll meter the extra usage using a metric called a branch-hour, which is:</p>
       <code>1 additional branch × 1 hour of lifetime</code>
       <p>For example: if your plan includes 10 branches and you briefly run 2 extra branches for 5 hours each, that’s 10 branch-hours, billed at $0.002 per branch-hour, or  a total of $0.02 added to your bill.</p>
+      <p>To be exact: we bill extra branches at $1.50/month each, prorated to hours based on the month’s length. The effective hourly rate varies slightly, but rounds to $0.002/hour in most cases — which is what we show for simplicity.</p>
     `,
   },
   {
