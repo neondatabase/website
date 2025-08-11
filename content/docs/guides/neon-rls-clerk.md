@@ -16,7 +16,7 @@ redirectFrom:
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
   <a href="https://clerk.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 

@@ -73,7 +73,7 @@ RLS is crucial for any real-world app. RLS policies act as a safety net at the d
 You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**.
 </Admonition>
 
-Our demo app uses [Drizzle ORM](/docs/guides/neon-rls-drizzle) to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
+Our demo app uses [Drizzle ORM](/docs/guides/rls-drizzle) to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
 
 ```typescript shouldWrap
 // src/db/schema.ts - RLS policies using Drizzle
@@ -338,4 +338,4 @@ Then, use the name you find (e.g. `paragraphs_note_id_notes_id_fk`) in the `DROP
 - [Neon Auth documentation](/docs/guides/neon-auth)
 - [postgrest-js documentation](https://github.com/supabase/postgrest-js)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
-- [Simplify RLS with Drizzle](/docs/guides/neon-rls-drizzle)
+- [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

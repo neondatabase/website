@@ -89,12 +89,12 @@ CREATE POLICY "user_can_access_own_data" ON your_table
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-We recommend using [Drizzle ORM](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies for the Data API.
+We recommend using [Drizzle ORM](/docs/guides/rls-drizzle) to help simplify writing RLS policies for the Data API.
 
 <Admonition type="info" title="About auth.user_id()">
 The `auth.user_id()` function extracts the user's ID from the JSON Web Token (JWT) issued by [Neon Auth](/docs/guides/neon-auth). The Data API validates this token, making the user's ID available to your RLS policies for enforcing per-user access.
 
-For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/neon-rls-drizzle) for a simpler approach.
+For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
 </Admonition>
 
 ## Using the Data API
