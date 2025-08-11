@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2025-08-05T14:22:45.985Z'
+updatedOn: '2025-08-11T13:30:01.885Z'
 ---
 
 <InfoBlock>
@@ -19,7 +19,7 @@ updatedOn: '2025-08-05T14:22:45.985Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/manage/projects#configure-restore-window">Configure restore window</a>
+  <a href="/docs/manage/projects#configure-your-restore-window">Configure restore window</a>
 </DocsList>
 </InfoBlock>
 
@@ -142,7 +142,7 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an ISO 8601-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `development@2023-12-12T12:00:00Z`.
+In the `target id|name` field, specify the ID or name of the branch you want to restore. In the `source id|name timestamp|lsn` field, specify the source branch you want to restore from (mandatory), along with the point-in-time identifier (optional), which can be either an RFC 3339-formatted timestamp or the LSN. If you omit the point-in-time identifier, the operation defaults to the latest data (HEAD) for the source branch. Concatenate the source identifier and time identifier with `@`: for example, `development@2023-12-12T12:00:00Z`.
 
 #### Restore a branch to its own history
 
@@ -190,7 +190,7 @@ This endpoint lets you restore a branch using the following request parameters:
 | ----------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **source_branch_id**    | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                         |
 | **source_lsn**          | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                   |
-| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                              |
+| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use RFC 3339 format for the date-time string.                                                                                                                                                                                                                                                              |
 | **preserve_under_name** | `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID). |
 
 #### Restoring a branch to its own history

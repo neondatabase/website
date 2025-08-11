@@ -13,39 +13,46 @@ import pointerLineLg from 'images/pages/about/timeline/pointer-line-lg.svg';
 
 const ITEMS = [
   {
-    className: 'lg:translate-x-[-34px]',
     date: 'March, 2021',
-    title: 'First Commits',
+    title: 'First Commit',
   },
   {
-    className: 'translate-x-3 lg:-translate-x-9',
     date: 'June 15th, 2022',
     title: 'Technical Preview',
     link: `${LINKS.blog}/hello-world`,
   },
   {
-    className: '-translate-x-3 lg:translate-x-[-72px]',
     date: 'July, 2022',
     title: '$54MM Raised',
     link: `${LINKS.blog}/funding-a1`,
   },
   {
-    className: '-translate-x-3 lg:translate-x-[-85px]',
     date: 'December, 2022',
     title: 'Open Access',
     link: `${LINKS.blog}/neon-serverless-postgres-is-live`,
   },
   {
-    className: 'translate-x-1 lg:translate-x-[-94px]',
     date: 'August, 2023',
     title: '$46MM Raised',
     link: `${LINKS.blog}/series-b-funding`,
   },
   {
-    className: '2xl:-translate-x-1 lg:translate-x-[-115px]',
     date: 'April 15th, 2024',
     title: 'Neon is Generally Available',
     link: `${LINKS.blog}/neon-ga`,
+  },
+  {
+    date: 'May 14th, 2025',
+    title: 'Databricks acquires Neon',
+    link: `https://www.databricks.com/company/newsroom/press-releases/databricks-agrees-acquire-neon-help-developers-deliver-ai-systems`,
+    isExternal: true,
+  },
+  {
+    className: '2xl:translate-x-[35px]',
+    date: 'June 13th, 2025',
+    title: 'Databricks launches Lakebase',
+    link: `https://www.databricks.com/product/lakebase`,
+    isExternal: true,
   },
 ];
 
@@ -99,47 +106,49 @@ Point.propTypes = {
 };
 
 const Timeline = () => (
-  <section className="timeline safe-paddings mt-[136px] overflow-hidden pt-10 xl:mt-[87px] lg:mt-[42px] md:mt-4">
-    <Container className="relative 2xl:max-w-5xl" size="1344">
-      <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[365px] translate-x-1/2 bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[352px] 2xl:translate-x-[27%] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[10%] md:-bottom-2 md:-left-14 md:top-auto md:h-[170px] md:w-[270px] md:translate-x-0" />
+  <section className="timeline safe-paddings mt-[136px] overflow-hidden pb-1 pt-10 xl:mt-[110px] lg:mt-[56px] md:mt-4">
+    <Container className="relative 2xl:max-w-5xl md:max-w-[544px] md:!px-5" size="1344">
+      <span className="pointer-events-none absolute -top-9 left-1/2 h-[230px] w-[300px] translate-x-[60px] bg-[radial-gradient(50%_50%_at_50%_50%,#09212A_0%,#071119_48%,rgba(7,17,25,0)_100%)] 2xl:h-[218px] 2xl:w-[260px] 2xl:translate-x-[30px] xl:translate-x-[-40px] lg:-top-5 lg:h-[170px] lg:w-[272px] lg:translate-x-[-35%] md:-left-14 md:bottom-[140px] md:top-auto md:h-[120px] md:w-[270px] md:translate-x-0" />
       <Image
         className="pointer-events-none absolute left-1/2 top-[105px] -translate-x-1/2 2xl:hidden"
         src={line}
         width={1344}
         height={2}
-        alt=""
+        alt="timeline"
         priority
       />
       <Image
         className="pointer-events-none absolute left-1/2 top-[105px] hidden -translate-x-1/2 2xl:block lg:hidden"
         src={lineXl}
-        width={960}
+        width={1024}
         height={2}
-        alt=""
+        alt="timeline"
         priority
       />
       <Image
         className="pointer-events-none absolute left-1/2 top-[94px] hidden -translate-x-1/2 lg:block md:hidden"
         src={lineLg}
-        width={704}
+        width={768}
         height={2}
-        alt=""
+        alt="timeline"
         priority
       />
       <Image
-        className="pointer-events-none absolute left-[52px] top-0 hidden w-0.5 md:block"
+        className="pointer-events-none absolute left-6 top-0 hidden w-0.5 md:block"
         src={lineMd}
         width={2}
-        height={483}
-        alt=""
+        height={604}
+        alt="timeline"
         priority
       />
-      <ul className="relative z-10 mx-auto flex h-[180px] justify-between px-[92px] pt-8 2xl:pl-16 2xl:pr-0 lg:h-[163px] lg:max-w-[704px] lg:pl-[51px] lg:pt-7 md:h-auto md:max-w-none md:flex-col md:gap-y-8 md:pb-10 md:pt-9">
-        {ITEMS.map(({ date, title, className, link }, index) => (
+      <ul className="relative z-10 mx-auto flex h-[180px] pl-[92px] pr-6 pt-8 2xl:pl-16 2xl:pr-0 xl:pl-0 lg:h-[163px] lg:max-w-[704px] lg:pl-0 lg:pt-7 md:h-auto md:max-w-none md:flex-col md:gap-y-8 md:pb-10 md:pl-5 md:pt-9">
+        {ITEMS.map(({ date, title, className, link, isExternal }, index) => (
           <li
             className={clsx(
-              'relative flex h-fit flex-col gap-y-2 lg:gap-y-1 md:translate-x-0 md:pb-0.5 md:pl-3.5',
-              index % 2 === 0 ? 'mt-auto pt-7 md:pt-0' : 'pb-7 md:pb-0',
+              'relative flex h-fit w-[148px] max-w-[148px] flex-col gap-y-2 2xl:max-w-[105px] lg:max-w-[72px] lg:gap-y-1 md:translate-x-0 md:pb-0.5 md:pl-3.5',
+              index % 2 === 0
+                ? 'mt-auto pt-7 xl:translate-y-[-3px] md:pt-0'
+                : 'pb-7 xl:translate-y-[3px] md:pb-0',
               className
             )}
             key={index}
@@ -153,23 +162,22 @@ const Timeline = () => (
               {date}
             </span>
             {typeof link === 'undefined' ? (
-              <span className="whitespace-nowrap pb-0.5 text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 lg:text-base">
+              <span className="whitespace-nowrap pb-0.5 text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 xl:text-[14px] lg:text-[13px]">
                 {title}
               </span>
             ) : (
               <Link
-                className="w-fit whitespace-nowrap border-b border-white/20 pb-px text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 transition-[border-color,color] duration-300 hover:border-primary-1 lg:text-base"
+                className="w-fit whitespace-nowrap border-b border-white/20 pb-px text-lg font-medium leading-tight tracking-extra-tight text-gray-new-90 transition-[border-color,color] duration-300 hover:border-primary-1 2xl:text-[16px] xl:text-[14px] lg:text-[13px]"
                 to={link}
                 theme="white"
+                aria-label={`read more about ${title}`}
+                isExternal={isExternal}
               >
                 {title}
               </Link>
             )}
 
-            <Point
-              align={index % 2 === 1 ? 'bottom' : 'top'}
-              size={index === ITEMS.length - 1 ? 'lg' : 'md'}
-            />
+            <Point align={index % 2 === 1 ? 'bottom' : 'top'} size="md" />
           </li>
         ))}
       </ul>

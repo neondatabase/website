@@ -2,7 +2,7 @@
 title: Row-Level Security with Neon
 subtitle: How Neon features use Postgres Row-Level Security
 enableTableOfContents: true
-updatedOn: '2025-07-31T13:27:49.718Z'
+updatedOn: '2025-08-11T00:30:08.268Z'
 ---
 
 <InfoBlock>
@@ -13,7 +13,7 @@ updatedOn: '2025-07-31T13:27:49.718Z'
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/data-api/get-started">Data API</a>
   <a href="/docs/guides/neon-rls">Neon RLS (JWT/JWKS Integration)</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
   <a href="/postgresql/postgresql-administration/postgresql-row-level-security">Postgres RLS Tutorial</a>
 </DocsList>
 
@@ -79,7 +79,7 @@ Drizzle makes it simple to write RLS policies that work with both the Data API a
 
 <DetailIconCards>
 
-<a href="/docs/guides/neon-rls-drizzle" description="Learn how to use Drizzle's crudPolicy function to simplify RLS policies" icon="drizzle">Simplify RLS with Drizzle</a>
+<a href="/docs/guides/rls-drizzle" description="Learn how to use Drizzle's crudPolicy function to simplify RLS policies" icon="drizzle">Simplify RLS with Drizzle</a>
 
 </DetailIconCards>
 

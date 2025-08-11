@@ -3,7 +3,7 @@ title: About Neon RLS
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2025-07-31T13:27:49.717Z'
+updatedOn: '2025-08-11T00:30:08.266Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize
   - /docs/guides/neon-authorize
@@ -19,7 +19,7 @@ redirectFrom:
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
   <a href="/docs/guides/row-level-security">Row-Level Security with Neon</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 
 </InfoBlock>

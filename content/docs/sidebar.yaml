@@ -1089,7 +1089,7 @@
         - title: RLS in Neon
           slug: guides/row-level-security
         - title: Simplify RLS with Drizzle
-          slug: guides/neon-rls-drizzle
+          slug: guides/rls-drizzle
         - title: PostgreSQL RLS Tutorial
           slug: https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security
     - title: Neon RLS (JWT/JWKS)

@@ -343,7 +343,7 @@ You can find the complete source code for this example on GitHub.
 ## Resources
 
 - [Neon GitHub Integration Documentation](/docs/guides/neon-github-integration)
-- [Database Branching Workflows](/flow)
+- [Database Branching Workflows](/branching)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 
 <NeedHelp/>

@@ -1,18 +1,6 @@
-import LINKS from 'constants/links';
-
 // pagesToShow - array of page titles and sections where the modal should be shown
 // 'Neon Docs' - show modal on the introduction page
 const MODALS = [
-  {
-    id: 'support',
-    pagesToShow: ['Support'],
-    title: 'Need help now?',
-    description: 'Please reach out to our Support team!',
-    link: {
-      title: 'Get support',
-      url: LINKS.consoleSupport,
-    },
-  },
   {
     id: 'slack',
     pagesToShow: ['Neon Docs'],
