@@ -100,6 +100,10 @@ If you find an issue with your invoice, you can request a refund. The request wi
 
 ## Change your plan
 
+<Admonition type="important">
+You cannot upgrade or downgrade to a [legacy plan](/docs/introduction/legacy-plans). If you're currently on a legacy plan, you can only upgrade or downgrade to one of our [current usage-based pricing plans](/docs/introduction/plans) to explore your options.
+</Admonition>
+
 To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
@@ -111,7 +115,7 @@ Changing your plan to one with lower usage allowances may affect the performance
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
-To downgrade from an [Enterprise](/docs/introduction/plans#enterprise) plan, please contact [Sales](/contact-sales). Cancellation of an Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
+To downgrade from a **legacy Enterprise plan**, please contact [Sales](/contact-sales). Cancellation of a legacy Enterprise plan Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the customer agreement.
 
 ## How to prevent further monthly charges to your account
 
@@ -120,3 +124,5 @@ If you are on any of Neon's paid plans, you need to downgrade to the Free plan t
 ## Delete your account
 
 If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#deleting-your-account).
+
+<NeedHelp/>

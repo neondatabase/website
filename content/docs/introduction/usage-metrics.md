@@ -93,22 +93,22 @@ Two factors affect the size of you instant restore change history:
 
 ## Extra branches
 
-**Extra branch usage is measured in branch-hours**, which count the number of non-root branches that exceed your plan’s hourly allowance.
+**Extra branch usage is measured in branch-months**, prorated to the hour. This counts the number of non-root branches that exceed your plan’s hourly allowance.
 
 On paid plans, you can create and delete branches as needed. You’re only billed when the number of **concurrent branches** in a given hour exceeds your plan’s limit.
 
-Example: The Launch plan includes 10 branches. If you have 12 non-root branches for 5 hours, that’s 2 extra branches × 5 hours = 10 branch-hours.
+Example: The Launch plan includes 10 branches. If you have 12 non-root branches for 5 hours, that’s 2 extra branches × 5 hours = 10 hours of extra branches, billed at the hourly prorated branch-month rate.
 
 **How it's measured:**  
 Each hour, Neon counts the number of non-root branches in your project. A branch is counted for the full hour, even if it exists for only a few minutes.
 
-If this count exceeds your plan’s limit — 10 for Launch, 25 for Enterprise — the extra branches are billed at approximately $0.002 per branch-hour.  
-For simplicity, invoices show this as **$1.50 per extra branch per month**, even though billing is based on actual hourly usage.
+If this count exceeds your plan’s limit — 10 for Launch, 25 for Enterprise — the extra branches are billed at **$1.50 per branch-month**, prorated to the hour.  
+Invoices reflect the monthly rate with prorated hourly usage.
 
 **Example (Launch plan — 10 branch/hour limit):**
 
 - At 14:00, there are 13 non-root branches. That’s 3 over the limit.  
-  → 3 × $0.002 = **$0.006** billed for that hour.
+  → 3 extra branches billed for that hour at the prorated portion of $1.50/branch-month.
 - At 15:00, the count drops to 9.  
   → **No overage** billed for that hour.
 - At the end of the month, all hourly overages are summed and shown on the invoice using the $1.50/branch/month rate.
