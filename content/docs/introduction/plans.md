@@ -20,10 +20,12 @@ Neon offers plans to support you at every stage—from your first prototype to p
 Start for free, then **pay only for what you use** as your needs grow.
 
 <Admonition type="note">
-These are Neon's new usage-based pricing plans, released in August, 13, 2025. If you signed up earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To move to a different plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically migrated to the new Free plan described below.
+The plans on this page are Neon's new usage-based pricing plans, introduced on August 13, 2025. If you joined earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch plans, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below.
 </Admonition>
 
 ---
+
+## Plan overview
 
 ## Plan overview
 
@@ -32,14 +34,14 @@ Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 | Plan feature                                                  | **Free**                       | **Launch**                           | **Enterprise**                                                                    |
 | ------------------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
 | [Price](#price)                                               | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
-| [Who it's for](#who-its-for)                                  | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads & larger companies                                     |
-| [Projects](#projects)                                         | 10                             | 100                                  | 1,000 (may be increased on request)                                               |
+| [Who it's for](#who-its-for)                                  | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                   |
+| [Projects](#projects)                                         | 10                             | 100                                  | 1,000 (can be increased on request)                                               |
 | [Branches](#branches)                                         | 10/project                     | 10/project                           | 25/project                                                                        |
 | [Extra branches](#extra-branches)                             | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
 | [Compute](#compute)                                           | 50 CU-hours                    | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
-| [Autoscaling](#autoscaling)                                   | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed size computes up to 56 vCPU / 224 GB RAM)                      |
-| [Scale to zero](#scale-to-zero)                               | After 5 min                    | After 5 min, can be disabled         | Configurable (from 5 seconds -> always on)                                        |
-| [Storage](#storage)                                           | 0.5 GB per project             | $0.35 per GB-month                   | $0.35 per GB-month                                                                |
+| [Autoscaling](#autoscaling)                                   | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
+| [Scale to zero](#scale-to-zero)                               | After 5 min                    | After 5 min, can be disabled         | Configurable (5 seconds to always on)                                             |
+| [Storage](#storage)                                           | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
 | [Public data transfer](#public-data-transfer)                 | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
 | [Monitoring](#monitoring)                                     | 1 day                          | 3 days                               | 14 days                                                                           |
 | [Metrics/logs export](#metricslogs-export)                    | —                              | —                                    | ✅                                                                                |
@@ -56,239 +58,211 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan before usage-based charges are applied.
+**Price** is the minimum monthly fee for the plan before usage-based charges.
 
-For **Launch** and **Enterprise** plans, there is a $5/month minimum monthly fee. Additional usage for compute, storage, extra branches, and other features, is billed at published rates (see the [Plan overview](#plan-overview) table).
+For **Launch** and **Enterprise**, the minimum monthly fee is $5. Additional usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
-On the **Free** plan, there is no monthly cost, you get free usage allowances for projects, branches, compute, storage, and more — for $0/month.
+On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
-> If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, if you sign up exactly halfway through the month, your monthly base cost will be $2.50 (half of the $5.00 monthly fee).
+> If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, signing up halfway through the month results in a $2.50 base cost (half of $5).
 
 ### ☑ Who it's for
 
-Which plan is right for you?
-
-- The **Free** plan is ideal for prototypes, side projects, and quick experiments. You get 10 projects, 50 CU-hours/month, 0.5 GB of storage per branch, 5 GB of egress, and more. If you require additional resources, consider a paid plan, which offers usage-based pricing.
-- The **Launch** plan is designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month. If you're constrained by the Free plan, start here.
-- The **Enterprise** plan is built for production-grade workloads and larger teams, offering higher limits, advanced features, full support, compliance, additional security options, and SLAs. This plan is also usage-based, starting at $5/month.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 10 projects, 50 CU-hours/month, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
+- **Enterprise** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
 ### ☑ Projects
 
-A project is a container for your database environment. Each project includes your database, database branches, compute resources, and more. Similar to an Git repository that contains an app's code, artifacts, and branches, you can think of a project as a container for all of your database resources. Learn more about [Neon’s object hierarchy](/docs/manage/overview).
+A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon’s object hierarchy](/docs/manage/overview).
 
-> For most use cases, we recommend creating a project for each app or customer to isolate data and manage database resources.
+> For most use cases, create a project for each app or customer to isolate data and manage resources.
 
-Each plan includes a number of projects:
+Included per plan:
 
-- **Free**: 10 projects.
-- **Launch**: 100 projects.
-- **Enterprise**: 1,000 projects, with potential for more upon request. The 1000 project limit on the Enterprise plan is a _soft limit_. We understand that certain use cases may require more projects. If this is you, reach out to our [support team](/docs/introduction/support) to request more.
+- **Free**: 10 projects
+- **Launch**: 100 projects
+- **Enterprise**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
 ### ☑ Branches
 
-Each project is created with a [root branch](/docs/reference/glossary#root-branch). In Git terms, you can think of it as your `main` branch.
+Each project has a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
+Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
 
-Postgres databases, schemas, tables, records, indexes, roles — all of the things that comprise data in a Postgres instance — are created on a branch.
+You can create **child branches** (copies of the root branch) for testing, previews, or development.
 
-You can create **child branches**, which are copies of your root branch — ideal for testing, previews, or development.
+Included per plan:
 
-Each plan includes a number of child branches per project at no additional cost:
+- **Free**: 10 branches/project
+- **Launch**: 10 branches/project
+- **Enterprise**: 25 branches/project
 
-- **Free**: 10 branches per project.
-- **Launch**: 10 branches per project.
-- **Enterprise**: 25 branches per project.
-
-For information about the cost for additional branches, see [Extra branches](#extra-branches). For information about how branch storage is billed, see [Storage](#storage).
+See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) for how branch storage is billed.
 
 ### ☑ Extra branches
 
-On paid plans, you can create as many child branches as you need. Extra child branches beyond your plan's branch limit are billed in **branch-months**, metered by the hour.
+On paid plans, you can create extra child branches. Extra branches beyond your plan's limit are billed in **branch-months**, metered hourly.
 
-```text
-1 additional branch × 1 month = 1 branch-month
-```
+1 extra branch × 1 month = 1 branch-month
 
-The cost for extra child branches is **$1.50 per branch-month**. Metered by the hour, this works out to about $0.002 per hour for each extra branch.
+Cost: **$1.50/branch-month** (~$0.002/hour).
 
-**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra child branches billed at the hourly rate derived from $1.50 per branch-month, which works out to a cost of about $0.20 for the two extra branches.
+Example: Plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.20 total.
 
-> Extra branches are not available on the Free plan. If you need more branches, you can either delete existing branches or upgrade to a paid plan.
+> Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
+
+Branch maximum per plan:
+
+- **Launch**: 25 branch maximum
+- **Enterprise**: 100 branch maximum
 
 ### ☑ Compute
 
-Your monthly compute usage depends on how long your compute runs and the size of your compute.
+Compute usage depends on compute size and runtime.
 
-- Compute usage is measured in **CU-hours** (Compute Unit hours).
-- A CU defines how much vCPU and memory your database uses at any moment.
-- **1 CU = 1 vCPU + 4 GB RAM**
-- RAM scales with vCPU size at a 4:1 ratio — you get 4 GB of RAM for every 1 vCPU.
-- Compute sizes all the way up to 56 CU are supported, depending on your plan.
+- Measured in **CU-hours** (Compute Unit hours)
+- 1 CU = 1 vCPU + 4 GB RAM
+- RAM scales at a 4:1 ratio (4 GB RAM per 1 vCPU)
+- Compute sizes up to 56 CU (plan-dependent)
 
-  ```
-  | Compute Unit | vCPU | RAM    |
-  | ------------ | ---- | ------ |
-  | .25          | .25  | 1 GB   |
-  | .5           | .5   | 2 GB   |
-  | 1            | 1    | 4 GB   |
-  | 2            | 2    | 8 GB   |
-  | 3            | 3    | 12 GB  |
-   up to ...
-  | 56           | 56   | 224 GB |
-  ```
+| Compute Unit | vCPU | RAM    |
+| ------------ | ---- | ------ |
+| .25          | .25  | 1 GB   |
+| .5           | .5   | 2 GB   |
+| 1            | 1    | 4 GB   |
+| 2            | 2    | 8 GB   |
+| 3            | 3    | 12 GB  |
+| ...          | ...  | ...    |
+| 56           | 56   | 224 GB |
 
-Compute usage is calculated by multiplying compute size by how long the compute runs:
+Formula:
 
-```text
-compute size × number of hours running = CU-hours
-```
+compute size × hours running = CU-hours
 
-Here are a few examples that illustrate compute usage in CU-hours:
+Examples:
 
-- A 0.25 CU compute running for 4 hours = 1 CU-hour
-- A 2 CU compute running for 3 hours = 6 CU-hours
-- An 8 CU compute running for 2 hours = 16 CU-hours
+- 0.25 CU for 4 hours = 1 CU-hour
+- 2 CU for 3 hours = 6 CU-hours
+- 8 CU for 2 hours = 16 CU-hours
 
-**On the Free plan, you get 50 CU-hours per month** — this lets you run a 0.25 CU compute for 200 hours per month. Together with [scale-to-zero](#scale-to-zero), this is sufficient for most prototypes and side-projects. If you need more compute hours, consider upgrading to a paid plan.
+**Free**: 50 CU-hours/month (enough for a 0.25 CU compute for 200 hours/month).  
+**Launch**: $0.14/CU-hour  
+**Enterprise**: $0.26/CU-hour
 
-**Paid plan compute cost is usage-based:**
+> All computes across all projects count toward usage. Each branch has a read-write compute by default; read replicas add read-only computes.
 
-- **Launch**: $0.14/CU-hour, pay-as-you-go.
-- **Enterprise**: $0.26/CU-hour, pay-as-you-go.
+#### Compute with autoscaling
 
-**Why do CU-hours cost more on the Enterprise plan?** — the Enterprise plan offers higher allowances and more features (see the [Plan overview](#plan-overview) table above).
+Autoscaling changes compute size between a defined min and max. Estimate usage as:
 
-> All computes across all of your projects contribute to your compute usage. By default, each branch is created with a read-write compute. Creating a [read replica](/docs/reference/glossary#read-replica) adds a read-only compute to a branch.
+average compute size × hours running = CU-hours
 
-#### Compute usage with autoscaling
+#### Compute with scale to zero
 
-Autoscaling adjusts compute size up and down within your defined minimum and maximum compute size settings, based on demand. To estimate compute hour usage with autoscaling, you can estimate an **average compute size** and modify the CU-hours formula as follows:
-
-```text
-average compute size * number of hours running = CU-hours
-```
-
-To estimate an average compute size, start with a minimum compute size that can hold your data or working set (see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute)). Pick a maximum compute size that can handle your peak loads. Try estimating an average compute size between those thresholds based on a workload profile for a typical day.
-
-#### Compute usage with scale to zero
-
-Scale to zero places your compute into an idle state when it's not being used, which helps minimize compute usage. When scale-to-zero is enabled, computes are suspended after 5 minutes of inactivity. On Neon's paid plans, you can configure scale to zero or disable it. See [Scale to Zero](/docs/introduction/scale-to-zero).
+Scale to zero suspends computes after inactivity to reduce costs.
 
 ### ☑ Autoscaling
 
-Autoscaling adjusts compute size up and down within your defined minimum and maximum compute size settings based on demand, optimizing for performance and cost-efficiency.
+Adjusts compute size between defined limits based on demand.
 
-Autoscaling is available on all plans, but the maximum compute size each plan can scale to differs by plan:
+- **Free**: Up to 2 CU (2 vCPU / 8 GB RAM)
+- **Launch**: Up to 16 CU (16 vCPU / 64 GB RAM)
+- **Enterprise**: Up to 16 CU for autoscaling; fixed sizes up to 56 vCPU / 224 GB RAM
 
-- **Free**: Up to 2 CU (2 vCPU / 8 GB RAM).
-- **Launch**: Up to 16 CU (16 vCPU / 64 GB RAM).
-- **Enterprise**: Up to 16 CU for on-demand autoscaling; fixed-size computes available up to 56 vCPU / 224 GB RAM.
-
-> Currently, you can autoscale up to 16 CU on paid plans — this is the maximum setting for autoscaling. The Enterprise plan supports compute sizes larger than 16 CU but only for fixed-size compute configurations.
-
-For information about estimating compute usage when autoscaling is enabled, see [Compute with autoscaling](#compute-usage-with-autoscaling).
-
-To learn more about autoscaling, see [Autoscaling](/docs/introduction/autoscaling).
+> Autoscaling is capped at 16 CU. Enterprise supports fixed computes above 16 CU.
 
 ### ☑ Scale to zero
 
-The **scale-to-zero** feature suspends a compute after a period of inactivity, which minimizes costs for databases that aren’t always active, such as development or test environment databases — and even production databases that aren't used 24/7.
+Suspends computes after inactivity.
 
-- **Free plan**: Computes scale to zero after 5 minutes of inactivity – **cannot be disabled**
-- **Launch plan**: Computes scale to zero after 5 minutes of inactivity — **can be disabled**
-- **Enterprise**: Fully configurable — **can be disabled; configured to scale to zero after after 5 seconds or higher**
-
-Learn more about our [scale-to-zero](/docs/introduction/scale-to-zero) feature.
+- **Free**: 5 min inactivity — cannot disable
+- **Launch**: 5 min inactivity — can disable
+- **Enterprise**: Fully configurable — 5 seconds to always on
 
 ### ☑ Storage
 
-Data storage is billed based on actual usage, not allocated capacity. On paid plans, we measure storage usage in **GB-months**:
+Billed on actual usage in **GB-months**. Measured hourly.
 
-**1 GB-month = 1 GB stored for 1 month**
+- **Launch**/**Enterprise**: $0.35/GB-month
+- **Root branches**: billed on actual data size (_logical data size_)
+- **Child branches**: billed on storage delta from the parent
 
-Storage usage is metered hourly and summed over the month.
+When a branch is created, it shares data with its parent and adds no storage. Once you make writes (insert, update, delete), the delta grows and counts toward storage.  
+Storage on child branches never decreases — it grows as changes accumulate.
 
-On the **Launch** and **Enterprise** plans, storage is billed at $0.35/GB-month.
-
-For [root branches](/docs/reference/glossary#root-branch) branches, it's your actual data size (also referred to as _[logical data size](/docs/reference/glossary#logical-data-size)_) that's metered.
-
-For child branches, only the storage delta from the parent branch is counted. For example, when you first create a branch, it adds no storage – the branch's data is shared with its parent, but once you start performing write operations on the the branch, you've created a delta, which counts toward storage.
-
-**Storage on child branches never decreases — the delta grows with each write operation (insert, update, or delete)**, so it's important to manage your branches and remove them when no longer needed.
-
-> On the **Free** plan, you get 0.5 GB for each of your 10 free projects.
+> **Free**: 0.5 GB per project
 
 ### ☑ Public data transfer
 
-Public data transfer (egress) is the total volume of data transferred out of your database over the public internet during the monthly billing period.
+Public data transfer (egress) is the total volume of data sent from your database over the public internet during the monthly billing period.
 
-> Public data transfer also includes data transferred from your database via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
+> Public data transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
 
-**Launch** and **Enterprise** plans have an allowance of 100 GB of public data transfer per project per month. Thereafter, public data transfer is billed at **$0.10/GB**.
+Allowances per plan:
 
-**Free** plan projects have an allowance of 5 GB of public data transfer per month. If a project exceeds this limit, its compute is suspended and the following error is shown:
-
-```text shouldWrap
-Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
-```
+- **Free**: 5 GB/month  
+  If exceeded, the compute is suspended and you see:  
+  Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
+- **Launch**: 100 GB/month, then $0.10/GB
+- **Enterprise**: 100 GB/month, then $0.10/GB
 
 ### ☑ Monitoring
 
-Database metrics such as RAM, CPU, connections, database size, and more, are available on the **Monitoring** dashboard in the Neon Console. The retention period for database metrics differs by plan:
+View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.  
+Retention differs by plan:
 
 - **Free**: 1 day
 - **Launch**: 3 days
 - **Enterprise**: 14 days
 
-For information about database metrics, see [Monitoring dashboard](/docs/introduction/monitoring-page).
+See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 
 ### ☑ Metrics/logs export
 
-Neon supports exporting metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible observability platform](/docs/guides/opentelemetry).
-
-Metrics and log export is only supported on the **Enterprise** plan.
+Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
+Available only on the **Enterprise** plan.
 
 ### ☑ Restore window
 
-Neon retains a history of changes for all branches in your project, enabling [instant restore](#instant-restore).
+Neon retains a history of changes for all branches, enabling [instant restore](#instant-restore).  
+The maximum restore window per plan:
 
-The maximum time span for instant restore depends on your plan:
+- **Free**: Up to 6 hours, capped at 1 GB-month of changes
+- **Launch**: Up to 7 days
+- **Enterprise**: Up to 30 days
 
-- **Free**: Up to 6 hours, capped at 1 GB-month of changes.
-- **Launch**: Up to 7 days.
-- **Enterprise**: Up to 30 days.
-
-The restore window is configurable. You can extend or reduce it based on your restore requirements. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window). Reducing your restore window can reduce instant restore storage costs but also limits how far back you can restore.
+The restore window is configurable. Shortening it can reduce instant restore costs but limits how far back you can restore.  
+See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
 ### ☑ Instant restore
 
-Neon stores a change history for all branches in your project to support instant restore. The change history is a log of write operations. The cost for storing the history of changes:
+Neon stores a log of write operations (Postgres [Write-Ahead Log](/docs/reference/glossary#write-ahead-logging-wal)) to support instant restore.
 
-- **Free**: No charge, you get 6 hours, capped at 1 GB of change history
-- **Launch** and **Enterprise** plans support [restore windows](#restore-window) up to 7 days and 30 days, respectively, and the stored change history is billed at $0.20/GB-month.
+- **Free**: No charge, 6-hour limit, capped at 1 GB of change history
+- **Launch**: Up to 7 days, billed at $0.20/GB-month
+- **Enterprise**: Up to 30 days, billed at $0.20/GB-month
 
-> Change history is stored as Postgres [Write-Ahead Log (WAL)](/docs/reference/glossary#write-ahead-logging-wal) records.
-
-For more information about this feature, see [Instant restore](/docs/introduction/branch-restore).
+See [Instant restore](/docs/introduction/branch-restore) for details.
 
 ### ☑ Private data transfer
 
-The **Enterprise** plan supports [Private Networking](/docs/guides/neon-private-networking), which enables connecting to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet.
+Available on the **Enterprise** plan with [Private Networking](/docs/guides/neon-private-networking), which uses [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html) to bypass the public internet.
 
-Network data transfer between Neon and private network services is billed at $0.01/GB. Data transferred **to and from Neon** is billed — it's bidirectional.
+Billed at $0.01/GB for data transferred to and from Neon.
 
 ### ☑ Support
 
-The level of support differs by plan:
+Support level by plan:
 
-- **Free**: Community support.
-- **Launch**: Billing support.
-- **Enterprise**: Production support.
+- **Free**: Community support
+- **Launch**: Billing support
+- **Enterprise**: Production support
 
-Please refer to our [Support](/docs/introduction/support) page for details.
+See [Support](/docs/introduction/support) for details.
 
 ### ☑ Compliance and security
 
-Neon supports several key [compliances](/docs/security/compliance), available on the **Enterprise** plan:
+Compliance certifications available on **Enterprise**:
 
 - SOC 2
 - SOC 3
@@ -296,19 +270,20 @@ Neon supports several key [compliances](/docs/security/compliance), available on
 - ISO 27701
 - GDPR
 - CCPA
-- HIPAA (additional charges apply)
+- HIPAA (additional charge)
 
-> Additional charges apply for [HIPAA](/docs/security/hipaa) support. Contact [Sales](/contact-sales) for details.
+> Contact [Sales](/contact-sales) for HIPAA details.
 
-Security features include:
+Security features on Enterprise:
 
-- [Protected branches](/docs/guides/protected-branches) — a series of protections for securing your critical data
-- [IP Allow](/docs/introduction/ip-allow) — for limiting access to trusted IP addresses
-- [Private Networking](/docs/guides/neon-private-networking) — enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html)
+- [Protected branches](/docs/guides/protected-branches) — safeguards for critical data
+- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs
+- [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink
 
 ### ☑ Uptime SLAs
 
-Guaranteed service availability is available on the **Enterprise** plan. Contact [Sales](/contact-sales) for details.
+Guaranteed service availability is offered on the **Enterprise** plan.  
+Contact [Sales](/contact-sales) for details.
 
 ## Usage-based cost examples
 
@@ -453,6 +428,5 @@ Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
 
 </DefinitionList>
-
 
 <NeedHelp/>
