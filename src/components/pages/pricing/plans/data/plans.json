@@ -113,6 +113,15 @@
     {
       "rows": "2",
       "feature": {
+        "title": "Private network transfer"
+      },
+      "free": false,
+      "launch": false,
+      "enterprise": "$0.01 per GB"
+    },
+    {
+      "rows": "2",
+      "feature": {
         "title": "Console UI monitoring",
         "subtitle": "Window for metrics, logs"
       },
@@ -136,7 +145,7 @@
         "title": "Instant Restores",
         "subtitle": "<a href='#instant-restores'>Read more</a>"
       },
-      "free": false,
+      "free": "Default",
       "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
       "enterprise": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
     },
@@ -150,21 +159,6 @@
       "launch": "Time travel up to 7 days",
       "enterprise": "Time travel up to 30 days"
     },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Private network transfer"
-      },
-      "free": false,
-      "launch": false,
-      "enterprise": "$0.01 per GB"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Support",
-        "subtitle": "<a href='#faq'>Read more</a>"
-      },
       "free": {
         "title": "Community"
       },
