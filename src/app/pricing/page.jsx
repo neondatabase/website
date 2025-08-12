@@ -99,9 +99,9 @@ const faqItems = [
     `,
   },
   {
-    question: 'Why is the monthly minimum the same in the Launch plan vs. the Enterprise plan?',
+    question: 'Why is the monthly minimum the same in the Launch plan vs. the Scale plan?',
     answer: `
-      <p> Instead of charging a higher flat monthly fee or requiring an annual contract, we’ve chosen to price the premium features of the Enterprise plan through compute usage - via a higher price per CU-hour.</p>
+      <p> Instead of charging a higher flat monthly fee, we’ve chosen to price the premium features of the Scale plan through compute usage - via a higher price per CU-hour.</p>
       <p>This means you only pay more when you actually use the additional capabilities. You’re choosing to pay more for higher availability and enhanced security, which require operational redundancy on our side, while still keeping costs tied to your usage.
       <a href="https://neon.com/blog/new-usage-based-pricing">Read more.</a></p>
     `,
