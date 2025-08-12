@@ -93,9 +93,7 @@
         "title": "Storage"
       },
       "free": {
-        "title": "0.5 GB per project",
-        "info": "<p>Root branch: max 0.5 GB</p><p>Delta in child branches:<br/>max 0.5 GB / project (cumulative)</p>",
-        "moreLink": { "text": "Read more", "href": "#branches-and-storage" }
+        "title": "0.5 GB per project"
       },
       "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
       "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
