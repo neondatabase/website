@@ -25,7 +25,7 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Step 1: Set up the Next.js project
+## Set up the Next.js project
 
 To get started, create a new Next.js project. Open your terminal and run the following command:
 
@@ -38,7 +38,7 @@ This command sets up a new Next.js project with TypeScript, Tailwind CSS, and ES
 
 Open the project in your favorite code editor (e.g., VSCode, Cursor, Windsurf).
 
-## Step 2: Create a Neon project and enable Neon Auth
+## Create a Neon project and enable Neon Auth
 
 You'll need to create a Neon project and enable Neon Auth.
 
@@ -57,7 +57,7 @@ You'll need to create a Neon project and enable Neon Auth.
 
     ![Neon Console - Neon Auth configuration keys for Next.js](/docs/guides/neon-auth-example-config-keys.png)
 
-## Step 3: Integrate Neon Auth into your app
+## Integrate Neon Auth into your app
 
 Now, you will integrate Neon Auth into your Next.js application.
 
@@ -146,7 +146,7 @@ Now, you will integrate Neon Auth into your Next.js application.
     DATABASE_URL=YOUR_NEON_CONNECTION_STRING
     ```
 
-## Step 4: Set up Drizzle ORM
+## Set up Drizzle ORM
 
 For database interactions, you will use Drizzle ORM.
 
@@ -179,7 +179,7 @@ For database interactions, you will use Drizzle ORM.
 
     This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Neon Auth stores its user data.
 
-## Step 5: Pull Neon Auth schema
+## Pull Neon Auth schema
 
 A key feature of Neon Auth is the automatic creation and maintenance of the `neon_auth.users_sync` table. This table is updated in real-time as users sign up and manage their profiles, providing you with direct SQL access to essential user information like id, name, and email.
 
@@ -213,7 +213,7 @@ This step is crucial because it makes Drizzle aware of the `users_sync` table, a
      └ …
     ```
 
-## Step 6: Define the application schema
+## Define the application schema
 
 Now that Drizzle is aware of the `users_sync` table, you can define your application's `todos` table schema.
 
@@ -300,7 +300,7 @@ This schema defines the `todos` table with the following columns:
 
     ![Neon Auth todos table](/docs/guides/neon-auth-todos-table.png)
 
-## Step 7: Create the database client
+## Create the database client
 
 Create a file at `app/db/index.ts` to instantiate the Drizzle client.
 
@@ -312,7 +312,7 @@ const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle(sql);
 ```
 
-## Step 8: Build the application UI
+## Build the application UI
 
 You will create a simple user interface for your todo app using React components.
 
@@ -507,7 +507,7 @@ You will create a simple user interface for your todo app using React components
     }
     ```
 
-## Step 9: Implement server actions
+## Implement server actions
 
 To manage todos, you need to create server actions that will handle the database operations. These actions will be responsible for adding, retrieving, updating, and deleting todos.
 
