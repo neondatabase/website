@@ -484,7 +484,7 @@ Selling the Neon service as part of another service offering.
 
 ## root branch
 
-Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch. 
+Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
