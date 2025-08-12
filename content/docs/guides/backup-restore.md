@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-08-08T22:20:07.559Z'
+updatedOn: '2025-08-11T10:00:00.000Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
@@ -161,6 +161,8 @@ The parameters used in the example above:
 - `name`: A user-defined name for the snapshot.
 - `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
 
+Related API references: [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)
+
 </TabItem>
 
 </Tabs>
@@ -218,6 +220,13 @@ Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
 - `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation — no need to change the connection details in your application.
+- `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
+
+<Admonition type="note">
+If you plan to apply multiple snapshots in succession, always supply `target_branch_id` to ensure the restore is finalized against the correct branch (typically your current production branch). Without it, a second snapshot may be applied to the previously renamed "(old)" branch.
+</Admonition>
+
+Related API references: [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
 
 </TabItem>
 
@@ -267,6 +276,7 @@ Use this option if you need to inspect the restored data before you switch over 
     Parameters:
     - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
     - `finalize_restore`: Set to `false` so that you can inspect the new branch before finalizing the restore operation.
+    - `target_branch_id`: (Optional but recommended) Specify the branch ID you intend to replace when you later finalize the restore (typically your production branch). Providing this avoids subsequent operations defaulting to the `<branch_name> (old)` branch created by an earlier restore.
 
        <Admonition type="note">
           You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots) endpoint.
@@ -277,6 +287,10 @@ Use this option if you need to inspect the restored data before you switch over 
              -H "Authorization: Bearer $NEON_API_KEY" |jq
              ```
 
+       </Admonition>
+
+       <Admonition type="note">
+          If you will finalize the restore later or plan multiple restores, include `target_branch_id` during the restore call to anchor the operation to the correct target branch.
        </Admonition>
 
 2.  **Inspect the new branch**
@@ -306,6 +320,8 @@ Use this option if you need to inspect the restored data before you switch over 
     Parameters:
     - `project_id`: The Neon project ID.
     - `branch_id`: The branch ID of the branch created by the snapshot restore operation.
+
+Related API references: [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
 
 </TabItem>
 
