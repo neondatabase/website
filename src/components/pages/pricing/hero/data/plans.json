@@ -2,7 +2,8 @@
   {
     "planId": "free",
     "type": "Free",
-    "title": "Start for free",
+    "title": "$0",
+    "subtitle": "No Card Required",
     "price": 0,
     "description": "For prototypes and side projects",
     "features": [
@@ -39,6 +40,7 @@
     "planId": "launch",
     "type": "Launch",
     "title": "Usage-based",
+    "subtitle": "$5/month minimum",
     "highlighted": true,
     "price": 5,
     "priceFrom": true,
@@ -75,6 +77,7 @@
     "planId": "scale",
     "type": "Scale",
     "title": "Usage-based",
+    "subtitle": "$5/month minimum",
     "price": 50,
     "priceFrom": true,
     "description": "For the most demanding workloads",

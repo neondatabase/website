@@ -53,6 +53,7 @@ const Hero = () => {
                   planId,
                   type,
                   title,
+                  subtitle,
                   highlighted = false,
                   price,
                   priceFrom = false,
@@ -79,15 +80,17 @@ const Hero = () => {
                     >
                       {type}
                     </h3>
-                    <div
-                      className={clsx(
-                        'flex flex-col flex-wrap gap-x-1 whitespace-nowrap text-[22px] font-medium leading-snug tracking-extra-tight lg:text-xl md:flex-row'
+                    <div className={clsx('flex flex-col flex-wrap gap-x-1 md:flex-row')}>
+                      <h4 className="whitespace-nowrap text-3xl font-medium leading-snug tracking-extra-tight lg:text-xl">
+                        {title}
+                      </h4>
+                      {subtitle ? (
+                        <p className="relative text-[16px] text-gray-new-50">{subtitle}</p>
+                      ) : (
+                        <p className="relative text-gray-new-50">
+                          ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
+                        </p>
                       )}
-                    >
-                      <h4>{title}</h4>
-                      <p className="relative text-gray-new-50">
-                        ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
-                      </p>
                     </div>
                   </div>
 

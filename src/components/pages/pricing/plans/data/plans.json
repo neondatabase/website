@@ -15,7 +15,7 @@
     },
     "scale": {
       "label": "Scale",
-      "price": "<span>Usage-based</span>, $50/mo min.",
+      "price": "<span>Usage-based</span>, $5/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
