@@ -2,6 +2,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
+import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,6 +17,7 @@ import { FORM_STATES, HUBSPOT_STARTUPS_FORM_ID } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
@@ -86,6 +88,9 @@ const ContactForm = () => {
       ajs_anonymous_id: ajsAnonymousId || 'none',
     },
   });
+  const isFormDataSentToCustomerIo = useFeatureFlagVariantKey(
+    'website_growth_customer_io_integration'
+  );
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -140,14 +145,14 @@ const ContactForm = () => {
           company_website: companyWebsite,
           investor,
         };
-        if (true) {
+        if (isFormDataSentToCustomerIo) {
           try {
             if (window.zaraz && email) {
               sendGtagEvent('identify', { email });
               sendGtagEvent(eventName, eventProps);
             }
           } catch (error) {
-            console.error('Error submitting the form');
+            console.warn('Error submitting the form');
           }
         }
         doNowOrAfterSomeTime(() => {
