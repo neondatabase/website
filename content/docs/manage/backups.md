@@ -2,7 +2,7 @@
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-30T22:35:16.153Z'
+updatedOn: '2025-08-12T11:49:07.419Z'
 ---
 
 <InfoBlock>
@@ -30,7 +30,7 @@ With this strategy, the only required action is setting your desired restore win
 
 ![Restore window](/docs/manage/history_retention.png)
 
-    To get started, see [Instant restore](/docs/introduction/branch-restore).
+To get started, see [Instant restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 

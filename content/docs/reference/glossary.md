@@ -224,7 +224,7 @@ A legacy paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
 ## Free plan
 
-See [Neon Free plan](#neon-free-plan).
+See [Neon plans](/docs/introduction/plans) for details about the Free plan.
 
 ## GB-month
 
