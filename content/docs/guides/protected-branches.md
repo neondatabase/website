@@ -18,7 +18,7 @@ Neon's protected branches feature implements a series of protections:
 
 The protected branches feature is available on all Neon [paid plans](/docs/introduction/plans).
 
-- The \***\*Launch** plan supports up to 2 protected branches
+- The **Launch** plan supports up to 2 protected branches
 - The **Enterprise** plan supports up to 5 protected branches
 
 ## Set a branch as protected

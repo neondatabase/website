@@ -290,7 +290,7 @@ For a Postgres database, it is the size of the database, including all tables, i
 
 ## logical replication
 
-A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. Neon supports logical replication of data to external destinations. See [Logical replication](/docs/guides/logical-replication-guide).
+A method of replicating data between databases or platforms, focusing on replicating transactional changes (like `INSERT`, `UPDATE`, `DELETE`) rather than the entire database, enabling selective replication of specific tables or rows. See [Logical replication](/docs/guides/logical-replication-guide).
 
 ## LSN
 
@@ -468,7 +468,7 @@ Random Access Memory, a type of computer memory used to store data that is being
 
 ## read replica
 
-A read replica in Neon is a compute instance that connects to the same underlying storage as the primary compute but operates in read-only mode. It lets you offload read queries from your primary compute to improve performance and scalability, especially for analytical or reporting workloads. Read replica computes can be added or removed without affecting the primary compute.
+A read replica in Neon is a read-only compute that connects to the same underlying storage as the primary read-write compute but operates in read-only mode. It lets you offload read queries from your primary compute to improve performance and scalability, especially for analytical or reporting workloads. Read replica computes can be added to a branch or removed without affecting the primary compute.
 
 ## region
 
