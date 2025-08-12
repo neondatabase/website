@@ -20,12 +20,10 @@ Neon offers plans to support you at every stage—from your first prototype to p
 Start for free, then **pay only for what you use** as your needs grow.
 
 <Admonition type="note">
-The plans on this page are Neon's new usage-based pricing plans, introduced on August 13, 2025. If you joined earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch plans, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below.
+The plans on this page are Neon's new usage-based pricing plans, introduced on **August 13, 2025**. If you joined earlier on a paid plan, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch plans, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below.
 </Admonition>
 
 ---
-
-## Plan overview
 
 ## Plan overview
 
@@ -111,10 +109,10 @@ Example: Plan includes 10 branches/project. You create 2 extra branches for 5 ho
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 
-Branch maximum per plan:
+Branch maximum:
 
-- **Launch**: 25 branch maximum
-- **Enterprise**: 100 branch maximum
+- **Launch**: 25 branches/project
+- **Enterprise**: 100 branches/project
 
 ### ☑ Compute
 
@@ -137,7 +135,9 @@ Compute usage depends on compute size and runtime.
 
 Formula:
 
+```
 compute size × hours running = CU-hours
+```
 
 Examples:
 
@@ -155,11 +155,13 @@ Examples:
 
 Autoscaling changes compute size between a defined min and max. Estimate usage as:
 
+```
 average compute size × hours running = CU-hours
+```
 
 #### Compute with scale to zero
 
-Scale to zero suspends computes after inactivity to reduce costs.
+Scale to zero suspends computes after inactivity to compute usage and cost.
 
 ### ☑ Autoscaling
 
@@ -167,7 +169,7 @@ Adjusts compute size between defined limits based on demand.
 
 - **Free**: Up to 2 CU (2 vCPU / 8 GB RAM)
 - **Launch**: Up to 16 CU (16 vCPU / 64 GB RAM)
-- **Enterprise**: Up to 16 CU for autoscaling; fixed sizes up to 56 vCPU / 224 GB RAM
+- **Enterprise**: Up to 16 CU for autoscaling; fixed sizes up to 56 CU (vCPU / 224 GB RAM)
 
 > Autoscaling is capped at 16 CU. Enterprise supports fixed computes above 16 CU.
 
@@ -190,7 +192,7 @@ Billed on actual usage in **GB-months**. Measured hourly.
 When a branch is created, it shares data with its parent and adds no storage. Once you make writes (insert, update, delete), the delta grows and counts toward storage.  
 Storage on child branches never decreases — it grows as changes accumulate.
 
-> **Free**: 0.5 GB per project
+> **Free** plan users get 0.5 GB of storage per project
 
 ### ☑ Public data transfer
 
@@ -200,16 +202,15 @@ Public data transfer (egress) is the total volume of data sent from your databas
 
 Allowances per plan:
 
-- **Free**: 5 GB/month  
-  If exceeded, the compute is suspended and you see:  
-  Your project has exceeded the data transfer quota. Upgrade your plan to increase limits.
+- **Free**: 5 GB/month
 - **Launch**: 100 GB/month, then $0.10/GB
 - **Enterprise**: 100 GB/month, then $0.10/GB
 
 ### ☑ Monitoring
 
-View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.  
-Retention differs by plan:
+View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.
+
+Retention of metrics data differs by plan:
 
 - **Free**: 1 day
 - **Launch**: 3 days
@@ -231,8 +232,7 @@ The maximum restore window per plan:
 - **Launch**: Up to 7 days
 - **Enterprise**: Up to 30 days
 
-The restore window is configurable. Shortening it can reduce instant restore costs but limits how far back you can restore.  
-See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+The restore window is configurable. Shortening it can reduce instant restore costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
 ### ☑ Instant restore
 
@@ -274,26 +274,25 @@ Compliance certifications available on **Enterprise**:
 
 > Contact [Sales](/contact-sales) for HIPAA details.
 
-Security features on Enterprise:
+Security features:
 
-- [Protected branches](/docs/guides/protected-branches) — safeguards for critical data
-- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs
-- [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink
+- [Protected branches](/docs/guides/protected-branches) — safeguards for critical data (available on **Launch** and **Enterprise**)
+- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs  (available on **Enterprise**)
+- [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Enterprise**)
 
 ### ☑ Uptime SLAs
 
-Guaranteed service availability is offered on the **Enterprise** plan.  
-Contact [Sales](/contact-sales) for details.
+Guaranteed service availability is offered on the **Enterprise** plan. Contact [Sales](/contact-sales) for details.
 
 ## Usage-based cost examples
 
-The following examples show what your monthly bill might look like on the Launch and Enterprise plans at different levels of usage. Each example includes compute, storage (root and child branches), and instant restore history. Your actual costs will depend on your specific workload, usage patterns, and configuration.
+The following examples show what your monthly bill might look like on the **Launch** and **Enterprise** plans at different levels of usage. Each example includes compute, storage (root and child branches), and instant restore history. Your actual costs will depend on your specific workload, usage patterns, and configuration.
 
-> **Note:** The “billable days” shown below refer to **active compute time** — the total hours your compute is actively running in a month. Computes can scale to zero when idle, so you may accumulate these hours in shorter bursts throughout the month rather than running continuously.
+> **Note:** The “billable days” shown below refer to **active compute time** — the total hours your compute is actively running in a month. Computes can scale to zero when idle, so you may accumulate these hours in shorter periods of usage throughout the month rather than running continuously.
 
 ### Launch plan
 
-1. **Example 1**  
+- **Example 1**  
    - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
      *(120 CU-hours × $0.14/CU-hour)*  
    - Root branch storage: 20 GB — **$7.00**  
@@ -305,7 +304,7 @@ The following examples show what your monthly bill might look like on the Launch
    - Base fee — **$5.00**  
    **Estimated monthly cost:** **$32.55**
 
-2. **Example 2**  
+- **Example 2**  
    - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
      *(250 CU-hours × $0.14/CU-hour)*  
    - Root branch storage: 40 GB — **$14.00**  
@@ -321,7 +320,7 @@ The following examples show what your monthly bill might look like on the Launch
 
 ### Enterprise plan
 
-1. **Example 1**  
+- **Example 1**  
    - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$442.00**  
      *(1,700 CU-hours × $0.26/CU-hour)*  
    - Root branch storage: 100 GB — **$35.00**  
@@ -333,7 +332,7 @@ The following examples show what your monthly bill might look like on the Launch
    - Base fee — **$5.00**  
    **Estimated monthly cost:** **$500.75**
 
-2. **Example 2**  
+- **Example 2**  
    - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
      *(2,600 CU-hours × $0.26/CU-hour)*  
    - Root branch storage: 150 GB — **$52.50**  
@@ -348,10 +347,6 @@ The following examples show what your monthly bill might look like on the Launch
 ## FAQs
 
 <DefinitionList>
-[comment]: <> (required new line)
-
-What is a project?
-: A project in Neon is the top-level container for your database environment. Each project includes your database, its branches, and compute resources. You can think of it like a GitHub repository — one project, many branches. Learn more: [Neon’s object hierarchy](/docs/manage/overview)
 
 What is a CU?
 : A CU (Compute Unit) is Neon's measure of compute size. **1 CU = 1 vCPU + 4 GB RAM**. RAM scales with vCPU size at a 4:1 ratio. For example, a 2 CU compute has 2 vCPU and 8 GB RAM.
@@ -391,8 +386,8 @@ Can I disable scale-to-zero?
 What is autoscaling and how does it work?
 : Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Enterprise Enterprise up to 16 CU. Enterprise supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
 
-Are read replicas billed separately?
-: Yes. Each read replica is its own compute and contributes to CU-hours.
+How are read replicas billed?
+: Each read replica is its own compute and contributes to CU-hours.
 
 Do public data transfer limits reset each month?
 : Yes. Free plan includes 5 GB/month, Launch and Enterprise include 100 GB/month. Beyond that, it’s $0.10/GB.
@@ -401,7 +396,7 @@ How is private data transfer billed?
 : Only available on Enterprise: $0.01/GB, bidirectional, between Neon and private network services.
 
 What happens if I exceed my Free plan limits?
-: Compute will suspend when limits are reached (e.g., CU-hours or public data transfer). To continue, upgrade to a paid plan.
+: On the Free plan, compute will suspend when limits are reached (e.g., CU-hours or public data transfer). To continue, upgrade to a paid plan.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
@@ -409,11 +404,11 @@ Do you charge for idle computes?
 What is the difference between root and child branch storage billing?
 : Root branches are billed for their full logical data size. Child branches are billed only for changes relative to their parent.
 
-Can I get more than the listed project or branch limits?
-: Yes, on Enterprise you can request increases for projects and branches beyond listed limits.
+Can I get more than the listed project limit?
+: Yes, on Enterprise you can request increases for projects beyond the listed limit.
 
 Why is the monthly minimum the same for Launch and Enterprise?
-: Both plans have a $5/month minimum, but Enterprise has a higher CU-hour rate. This keeps fixed costs low while letting usage-based charges reflect the higher availability, security, and operational resources of Enterprise.
+: Both plans have a $5/month minimum, but Enterprise has a higher CU-hour rate. This keeps fixed costs low while letting usage-based charges reflect the higher availability, security, and features of Enterprise.
 
 How is the monthly base fee prorated?
 : If you upgrade partway through a billing cycle, the $5 minimum is prorated based on the remaining days in the month.

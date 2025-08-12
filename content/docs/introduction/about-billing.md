@@ -12,7 +12,7 @@ updatedOn: '2025-05-30T16:54:40.483Z'
 
 <DetailIconCards>
 
-<a href="/docs/introduction/plans" description="Learn about Neon's pricing plans and what's included" icon="cards">Plans</a>
+<a href="/docs/introduction/plans" description="Learn about Neon's usage-based pricing plans and what's included" icon="cards">Plans</a>
 
 <a href="/docs/introduction/legacy-plans" description="A reference for users currently on these plans — not available for new signups" icon="cards">Legacy plans</a>
 
@@ -24,7 +24,7 @@ updatedOn: '2025-05-30T16:54:40.483Z'
 
 <a href="/docs/introduction/manage-billing" description="View and manage your monthly bill and learn how to change your plan" icon="setup">Manage billing</a>
 
-<a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage metrics in Neon" icon="setup">Monitor billing and usage</a>
+<a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
 
 <a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
 

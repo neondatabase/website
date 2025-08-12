@@ -1,7 +1,6 @@
 ---
 title: Monitor billing and usage
-subtitle: Monitor billing and usage metrics for your account and projects from the
-  console or API
+subtitle: Monitor billing and usage for your account and projects
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
@@ -40,7 +39,7 @@ For an explanation of usage metrics, refer to the [Plan feature](/docs/introduct
 
 <Admonition type="note" title="note: billing metrics for pre-2025 custom contract customers">
 If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: 
-- **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month, and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
+- **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month), and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
 - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB).
 
 If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
