@@ -157,7 +157,6 @@ There are certain allowances associated with schema-only branches:
 | :------- | :-------------------------------- | :----------------------------------------------- |
 | Free     | 3                                 | 0.5 GB                                           |
 | Launch   | 5                                 | 3 GB                                             |
-| Scale    | 10                                | 5 GB                                             |
-| Business | 25                                | 20 GB                                            |
+| Scale    | 25                                | 5 GB                                             |
 
 Once you use up your root branch allowance, you will not be able to create additional schema-only branches. You will be required to remove existing root branches first.

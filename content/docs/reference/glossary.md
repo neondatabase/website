@@ -220,7 +220,7 @@ The data transferred out of the Neon service to an external destination. See [Da
 
 ## Enterprise plan
 
-A paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
+A legacy paid plan offered by Neon. See [Neon plans](/docs/introduction/plans).
 
 ## Free plan
 

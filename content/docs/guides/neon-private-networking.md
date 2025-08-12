@@ -8,7 +8,7 @@ updatedOn: '2025-07-03T12:36:49.563Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
-Private Networking is available on Neon's [Enterprise](/docs/introduction/plans#enterprise) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
+Private Networking is available on Neon's [Scale](/docs/introduction/plans#scale) plan. If you're on a different plan, you can request a trial from the **Network Security** page in your project's settings.
 </Admonition>
 
 The **Neon Private Networking** feature enables secure connections to your Neon databases via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html), bypassing the open internet for enhanced security.
@@ -23,7 +23,7 @@ With **Neon Private Networking**, you can connect to your database via AWS Priva
 
 ## Prerequisites
 
-- You must be a Neon [Business](/docs/introduction/plans#business) and [Enterprise](/docs/introduction/plans#enterprise) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
+- You must be a Neon [Business](/docs/introduction/plans#business) and [Scale](/docs/introduction/plans#scale) account user, and your user account must be [Neon organization](/docs/manage/organizations) Admin account. You'll encounter an access error if you attempt the setup from a personal Neon account or on a Neon plan that does not offer Private Networking.
 - **Ensure that your client application is deployed on AWS in the same region as the Neon database you plan to connect to.** The Private Networking feature is available in all [Neon-supported AWS regions](/docs/introduction/regions#aws-regions). Both your private access client application and Neon database must be in one of these regions.
 - The Neon Private Networking feature currently supports [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) addresses. [IPv6](https://en.wikipedia.org/wiki/IPv6) is not supported at this time.
 - Install the Neon CLI. You will use it to add your VPC endpoint ID to your Neon organization. For installation instructions, see [Neon CLI — Install and connect](/docs/reference/cli-install).

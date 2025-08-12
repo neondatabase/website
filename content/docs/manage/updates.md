@@ -70,7 +70,7 @@ In the Neon Console:
 
 You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
 
-> If you're an Enterprise plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
+> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
 
 </TabItem>
 

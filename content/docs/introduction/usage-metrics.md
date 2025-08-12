@@ -102,7 +102,7 @@ Example: The Launch plan includes 10 branches. If you have 12 non-root branches 
 **How it's measured:**  
 Each hour, Neon counts the number of non-root branches in your project. A branch is counted for the full hour, even if it exists for only a few minutes.
 
-If this count exceeds your plan’s limit — 10 for Launch, 25 for Enterprise — the extra branches are billed at **$1.50 per branch-month**, prorated to the hour.  
+If this count exceeds your plan’s limit — 10 for Launch, 25 for Scale — the extra branches are billed at **$1.50 per branch-month**, prorated to the hour.  
 Invoices reflect the monthly rate with prorated hourly usage.
 
 **Example (Launch plan — 10 branch/hour limit):**
@@ -117,7 +117,7 @@ Invoices reflect the monthly rate with prorated hourly usage.
 
 Measured in **GB transferred** over private networking features such as AWS PrivateLink, which is supported by Neon's [Private Networking](https://neon.com/docs/guides/neon-private-networking) feature.
 
-Billed separately from public (egress) data transfer. Available on Enterprise plans.
+Billed separately from public (egress) data transfer. Available on Scale plans.
 
 ## Public transfer
 

@@ -84,7 +84,7 @@ All Members can create new projects from the Organization's **Projects** page; h
 
 ## Manage billing
 
-When you create a new organization, you'll choose a plan (Launch, Scale, or Enterprise) for that organization. Each organization manages its own billing and plan.
+When you create a new organization, you'll choose a plan (Launch, Scale, or Scale) for that organization. Each organization manages its own billing and plan.
 
 As the Admin for the organization account:
 

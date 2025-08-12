@@ -34,7 +34,7 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 ## HIPAA
 
-Neon offers HIPAA compliance as part of our Business and Enterprise plans, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
+Neon offers HIPAA compliance as part of our Scale plan, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
 
 A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.tech/).
 

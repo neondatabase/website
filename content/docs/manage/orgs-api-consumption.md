@@ -8,8 +8,8 @@ You can use the Neon API to retrieve two types of consumption history metrics fo
 
 | Metric                                                                                           | Description                                                                       | Plan Availability               |
 | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ------------------------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale, Business, and Enterprise |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale, Business, and Enterprise |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale |
 
 ## Finding organizations for consumption queries
 
