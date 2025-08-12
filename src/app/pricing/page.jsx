@@ -115,12 +115,6 @@ const faqItems = [
     `,
   },
   {
-    question: 'Which level of support do I get with Neon?',
-    answer: `
-      <p>We offer different levels of support, depending on your pricing plan.</p>
-    `,
-  },
-  {
     question: 'Do you offer credits for startups?',
     answer: `
       <p>Early startups that have received venture funding are eligible to apply to our Startup Program.</p>
