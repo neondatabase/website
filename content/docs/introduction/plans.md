@@ -29,7 +29,7 @@ The plans on this page are Neon's usage-based pricing plans, introduced **August
 
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
-| Plan feature                                        | **Free**                       | **Launch**                           | **Scale**                                                                    |
+| Plan feature                                        | **Free**                       | **Launch**                           | **Scale**                                                                         |
 | --------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
 | [Price](#price)                                     | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
 | [Who it's for](#who-its-for)                        | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                   |
@@ -277,7 +277,7 @@ Compliance certifications available on **Scale**:
 Security features:
 
 - [Protected branches](/docs/guides/protected-branches) — safeguards for critical data (available on **Launch** and **Scale**)
-- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs  (available on **Scale**)
+- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
 
 ### ☑ Uptime SLAs
