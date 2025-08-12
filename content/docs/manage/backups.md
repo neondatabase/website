@@ -2,7 +2,7 @@
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-30T22:35:16.153Z'
+updatedOn: '2025-08-12T11:49:07.419Z'
 ---
 
 <InfoBlock>
