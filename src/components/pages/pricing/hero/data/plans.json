@@ -62,7 +62,7 @@
     ],
     "otherFeatures": {
       "title": "Features",
-      "features": [{ "title": "Billing support" }, { "title": "3-day monitoring retention" }]
+      "features": [{ "title": "7-days time travel" }, { "title": "3-day monitoring retention" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
@@ -100,14 +100,13 @@
     "otherFeatures": {
       "title": "Features",
       "features": [
-        { "title": "Production support " },
+        { "title": "30-days time travel " },
         { "title": "14-day monitoring retention" },
         { "title": "Metrics export" },
         { "title": "IP allow rules" },
         { "title": "Private networking" },
         { "title": "99.95% SLA" },
-        { "title": "SOC 2 / ISO / GDPR" },
-        { "title": "HIPAA (additional costs)" }
+        { "title": "SOC 2 / ISO / GDPR" }
       ]
     },
     "button": {
