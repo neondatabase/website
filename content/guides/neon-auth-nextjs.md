@@ -634,7 +634,6 @@ You've now built a basic application with Neon Auth. This is just the beginning.
 - **[Teams and organizations](/docs/neon-auth/concepts/orgs-and-teams):** Group users into teams to manage access and permissions for B2B applications or collaborative projects.
 - **[App/User RBAC permissions](/docs/neon-auth/concepts/permissions):** Implement fine-grained Role-Based Access Control (RBAC) with both team-specific and global (project-level) permissions.
 - **[Custom user data](/docs/neon-auth/concepts/custom-user-data):** Store additional information on user objects using different metadata fields (`clientMetadata`, `serverMetadata`, `clientReadOnlyMetadata`) to control data visibility and mutability between the client and server.
-- **[Combine with Neon RLS](/docs/neon-auth/best-practices#enabling-row-level-security-rls):** Use Neon Auth with [Neon RLS](/docs/guides/neon-rls) to enforce access control directly in your database, providing an extra layer of security for your app's data.
 
 ## Summary
 
