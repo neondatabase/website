@@ -277,7 +277,7 @@ Compliance certifications available on **Enterprise**:
 Security features:
 
 - [Protected branches](/docs/guides/protected-branches) — safeguards for critical data (available on **Launch** and **Enterprise**)
-- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs  (available on **Enterprise**)
+- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Enterprise**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Enterprise**)
 
 ### ☑ Uptime SLAs
@@ -292,57 +292,57 @@ The following examples show what your monthly bill might look like on the **Laun
 
 ### Launch plan
 
-- **Example 1**  
-   - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
-     _(120 CU-hours × $0.14/CU-hour)_
-   - Root branch storage: 20 GB — **$7.00**  
-     _(20 GB × $0.35/GB-month)_
-   - Child branch storage: 5 GB — **$1.75**  
-     _(5 GB × $0.35/GB-month)_
-   - Instant restore history: 10 GB — **$2.00**  
-     _(10 GB × $0.20/GB-month)_
-   - Base fee — **$5.00**  
-     **Estimated monthly cost:** **$32.55**
+- **Example 1**
+  - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
+    _(120 CU-hours × $0.14/CU-hour)_
+  - Root branch storage: 20 GB — **$7.00**  
+    _(20 GB × $0.35/GB-month)_
+  - Child branch storage: 5 GB — **$1.75**  
+    _(5 GB × $0.35/GB-month)_
+  - Instant restore history: 10 GB — **$2.00**  
+    _(10 GB × $0.20/GB-month)_
+  - Base fee — **$5.00**  
+    **Estimated monthly cost:** **$32.55**
 
-- **Example 2**  
-   - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
-     _(250 CU-hours × $0.14/CU-hour)_
-   - Root branch storage: 40 GB — **$14.00**  
-     _(40 GB × $0.35/GB-month)_
-   - Child branch storage: 10 GB — **$3.50**  
-     _(10 GB × $0.35/GB-month)_
-   - Instant restore history: 20 GB — **$4.00**  
-     _(20 GB × $0.20/GB-month)_
-   - Base fee — **$5.00**  
-     **Estimated monthly cost:** **$61.50**
+- **Example 2**
+  - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
+    _(250 CU-hours × $0.14/CU-hour)_
+  - Root branch storage: 40 GB — **$14.00**  
+    _(40 GB × $0.35/GB-month)_
+  - Child branch storage: 10 GB — **$3.50**  
+    _(10 GB × $0.35/GB-month)_
+  - Instant restore history: 20 GB — **$4.00**  
+    _(20 GB × $0.20/GB-month)_
+  - Base fee — **$5.00**  
+    **Estimated monthly cost:** **$61.50**
 
 ---
 
 ### Enterprise plan
 
-- **Example 1**  
-   - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$442.00**  
-     _(1,700 CU-hours × $0.26/CU-hour)_
-   - Root branch storage: 100 GB — **$35.00**  
-     _(100 GB × $0.35/GB-month)_
-   - Child branch storage: 25 GB — **$8.75**  
-     _(25 GB × $0.35/GB-month)_
-   - Instant restore history: 50 GB — **$10.00**  
-     _(50 GB × $0.20/GB-month)_
-   - Base fee — **$5.00**  
-     **Estimated monthly cost:** **$500.75**
+- **Example 1**
+  - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$442.00**  
+    _(1,700 CU-hours × $0.26/CU-hour)_
+  - Root branch storage: 100 GB — **$35.00**  
+    _(100 GB × $0.35/GB-month)_
+  - Child branch storage: 25 GB — **$8.75**  
+    _(25 GB × $0.35/GB-month)_
+  - Instant restore history: 50 GB — **$10.00**  
+    _(50 GB × $0.20/GB-month)_
+  - Base fee — **$5.00**  
+    **Estimated monthly cost:** **$500.75**
 
-- **Example 2**  
-   - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
-     _(2,600 CU-hours × $0.26/CU-hour)_
-   - Root branch storage: 150 GB — **$52.50**  
-     _(150 GB × $0.35/GB-month)_
-   - Child branch storage: 40 GB — **$14.00**  
-     _(40 GB × $0.35/GB-month)_
-   - Instant restore history: 75 GB — **$15.00**  
-     _(75 GB × $0.20/GB-month)_
-   - Base fee — **$5.00**  
-     **Estimated monthly cost:** **$762.50**
+- **Example 2**
+  - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
+    _(2,600 CU-hours × $0.26/CU-hour)_
+  - Root branch storage: 150 GB — **$52.50**  
+    _(150 GB × $0.35/GB-month)_
+  - Child branch storage: 40 GB — **$14.00**  
+    _(40 GB × $0.35/GB-month)_
+  - Instant restore history: 75 GB — **$15.00**  
+    _(75 GB × $0.20/GB-month)_
+  - Base fee — **$5.00**  
+    **Estimated monthly cost:** **$762.50**
 
 ## FAQs
 
