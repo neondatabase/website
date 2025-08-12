@@ -50,7 +50,7 @@ You'll need to create a Neon project and enable Neon Auth.
 
     ![Neon Console - Enable Neon Auth button](/docs/guides/enable-neon-auth.png)
 
-3.  **Get Environment Variables:**
+3.  **Get environment variables:**
     - After enabling Neon Auth, navigate to the **Configuration** tab on the Auth page.
     - Select **Next.js** as your framework.
     - You will see the required environment variables. Copy the entire block, which includes your Neon Auth keys and the database connection string.
@@ -227,78 +227,80 @@ This schema defines the `todos` table with the following columns:
 - **`isComplete`**: A boolean flag to track the todo's status.
 - **`insertedAt`**: A timestamp automatically set when a todo is created.
 
-1.  **Update `schema.ts`:**
-    Open `app/db/schema.ts` and add the `todos` table definition below the existing `usersSyncInNeonAuth` table. Your final `schema.ts` file should look like this:
+### Update the schema
 
-    ```typescript
-    import {
-      pgTable,
-      pgSchema,
-      index,
-      jsonb,
-      text,
-      timestamp,
-      bigint,
-      boolean,
-    } from 'drizzle-orm/pg-core';
-    import { sql } from 'drizzle-orm';
+Open `app/db/schema.ts` and add the `todos` table definition below the existing `usersSyncInNeonAuth` table. Your final `schema.ts` file should look like this:
 
-    export const neonAuth = pgSchema('neon_auth');
+```typescript
+import {
+  pgTable,
+  pgSchema,
+  index,
+  jsonb,
+  text,
+  timestamp,
+  bigint,
+  boolean,
+} from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
-    export const usersSyncInNeonAuth = neonAuth.table(
-      'users_sync',
-      {
-        rawJson: jsonb('raw_json').notNull(),
-        id: text()
-          .primaryKey()
-          .notNull()
-          .generatedAlwaysAs(sql`(raw_json ->> 'id'::text)`),
-        name: text().generatedAlwaysAs(sql`(raw_json ->> 'display_name'::text)`),
-        email: text().generatedAlwaysAs(sql`(raw_json ->> 'primary_email'::text)`),
-        createdAt: timestamp('created_at', {
-          withTimezone: true,
-          mode: 'string',
-        }).generatedAlwaysAs(
-          sql`to_timestamp((trunc((((raw_json ->> 'signed_up_at_millis'::text))::bigint)::double precision) / (1000)::double precision))`
-        ),
-        updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'string' }),
-        deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'string' }),
-      },
-      (table) => [
-        index('users_sync_deleted_at_idx').using(
-          'btree',
-          table.deletedAt.asc().nullsLast().op('timestamptz_ops')
-        ),
-      ]
-    );
+export const neonAuth = pgSchema('neon_auth');
 
-    export const todos = pgTable('todos', {
-      id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
-      ownerId: text('owner_id')
-        .notNull()
-        .references(() => usersSyncInNeonAuth.id),
-      task: text('task').notNull(),
-      isComplete: boolean('is_complete').notNull().default(false),
-      insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
-    });
-    ```
+export const usersSyncInNeonAuth = neonAuth.table(
+  'users_sync',
+  {
+    rawJson: jsonb('raw_json').notNull(),
+    id: text()
+      .primaryKey()
+      .notNull()
+      .generatedAlwaysAs(sql`(raw_json ->> 'id'::text)`),
+    name: text().generatedAlwaysAs(sql`(raw_json ->> 'display_name'::text)`),
+    email: text().generatedAlwaysAs(sql`(raw_json ->> 'primary_email'::text)`),
+    createdAt: timestamp('created_at', {
+      withTimezone: true,
+      mode: 'string',
+    }).generatedAlwaysAs(
+      sql`to_timestamp((trunc((((raw_json ->> 'signed_up_at_millis'::text))::bigint)::double precision) / (1000)::double precision))`
+    ),
+    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'string' }),
+    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'string' }),
+  },
+  (table) => [
+    index('users_sync_deleted_at_idx').using(
+      'btree',
+      table.deletedAt.asc().nullsLast().op('timestamptz_ops')
+    ),
+  ]
+);
 
-2.  **Generate and apply migrations:**
-    Now, generate the SQL migration file to create the `todos` table.
+export const todos = pgTable('todos', {
+  id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
+  ownerId: text('owner_id')
+    .notNull()
+    .references(() => usersSyncInNeonAuth.id),
+  task: text('task').notNull(),
+  isComplete: boolean('is_complete').notNull().default(false),
+  insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
+});
+```
 
-    ```bash
-    npx drizzle-kit generate
-    ```
+### Generate and apply migrations
 
-    This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
+Now, generate the SQL migration file to create the `todos` table.
 
-    ```bash
-    npx drizzle-kit migrate
-    ```
+```bash
+npx drizzle-kit generate
+```
 
-    Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project console.
+This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
 
-    ![Neon Auth todos table](/docs/guides/neon-auth-todos-table.png)
+```bash
+npx drizzle-kit migrate
+```
+
+Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project console.
+
+![Neon Auth todos table](/docs/guides/neon-auth-todos-table.png)
 
 ## Create the database client
 
@@ -558,7 +560,7 @@ export async function deleteTodo(id: bigint) {
 
 In each action, `stackServerApp.getUser()` retrieves the currently logged-in user. If no user is found, the action either fails or returns an empty state. This ensures that all database operations are securely tied to the authenticated user's ID.
 
-## Step 10: Run and test the application
+## Run and test the application
 
 You are now ready to run your application.
 
