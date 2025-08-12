@@ -13,9 +13,7 @@
         "title": "10 branches per project"
       },
       {
-        "title": "0.5 GB per project",
-        "info": "<p>Root branch: max 0.5 GB / project</p><p>Delta in child branches: max 0.5 GB / project (cumulative)</p><p>Only data diff vs root branch count as child branch storage</p>",
-        "moreLink": { "text": "Read more", "href": "#branches-and-storage" }
+        "title": "0.5 GB per project"
       },
       {
         "title": "50 CU-hour",
@@ -62,7 +60,7 @@
     ],
     "otherFeatures": {
       "title": "Features",
-      "features": [{ "title": "7-days time travel" }, { "title": "3-day monitoring retention" }]
+      "features": [{ "title": "7-day time travel" }, { "title": "3-day monitoring retention" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
@@ -100,7 +98,7 @@
     "otherFeatures": {
       "title": "Features",
       "features": [
-        { "title": "30-days time travel " },
+        { "title": "30-day time travel" },
         { "title": "14-day monitoring retention" },
         { "title": "Metrics export" },
         { "title": "IP allow rules" },
