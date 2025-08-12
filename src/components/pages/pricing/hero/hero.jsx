@@ -64,7 +64,10 @@ const Hero = () => {
                 index
               ) => (
                 <li
-                  className="group relative flex min-h-full flex-col rounded-[10px] bg-black-new px-5 pb-8 pt-5"
+                  className={clsx(
+                    'group relative flex min-h-full flex-col rounded-[10px] px-5 pb-8 pt-5',
+                    highlighted ? '' : 'bg-black-new'
+                  )}
                   key={index}
                 >
                   <div className="flex flex-col justify-between gap-14 lg:gap-[52px] md:gap-12">
