@@ -13,9 +13,9 @@
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
-    "enterprise": {
-      "label": "Enterprise",
-      "price": "<span>Usage-based</span>, $5/mo min.",
+    "scale": {
+      "label": "Scale",
+      "price": "<span>Usage-based</span>, $50/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     }
@@ -32,7 +32,7 @@
       },
       "free": "10",
       "launch": "100",
-      "enterprise": "1,000"
+      "scale": "1,000"
     },
     {
       "rows": "2",
@@ -42,7 +42,7 @@
       },
       "free": "10",
       "launch": "10",
-      "enterprise": "25"
+      "scale": "25"
     },
     {
       "rows": "2",
@@ -55,7 +55,7 @@
         "title": "$0.002 per branch-hour",
         "info": "$1.5 per month, pro-rated hourly"
       },
-      "enterprise": {
+      "scale": {
         "title": "$0.002 per branch-hour",
         "info": "$1.5 per month, pro-rated hourly"
       }
@@ -67,7 +67,7 @@
       },
       "free": "50 CU-hours included",
       "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
-      "enterprise": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
+      "scale": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
     },
     {
       "rows": "2",
@@ -76,7 +76,7 @@
       },
       "free": "Up to 2 CU <span>= 2 vCPU, 8 GB RAM</span>",
       "launch": "Up to 16 CU <span>= 16 vCPU, 64 GB RAM</span>",
-      "enterprise": "Up to 56 CU <span>= 56 vCPU, 224 GB RAM</span>"
+      "scale": "Up to 56 CU <span>= 56 vCPU, 224 GB RAM</span>"
     },
     {
       "rows": "2",
@@ -85,7 +85,7 @@
       },
       "free": "Auto <span>After 5 minutes</span>",
       "launch": "Auto <span>After 5 minutes</span>",
-      "enterprise": "Configurable"
+      "scale": "Configurable"
     },
     {
       "rows": "2",
@@ -98,7 +98,7 @@
         "moreLink": { "text": "Read more", "href": "#branches-and-storage" }
       },
       "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
-      "enterprise": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+      "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
     },
     {
       "rows": "2",
@@ -108,7 +108,7 @@
       },
       "free": "5 GB included",
       "launch": "100 GB included<span>then $0.10 per GB</span>",
-      "enterprise": "100 GB included<span>then $0.10 per GB</span>"
+      "scale": "100 GB included<span>then $0.10 per GB</span>"
     },
     {
       "rows": "2",
@@ -117,7 +117,7 @@
       },
       "free": false,
       "launch": false,
-      "enterprise": "$0.01 per GB"
+      "scale": "$0.01 per GB"
     },
     {
       "rows": "2",
@@ -127,7 +127,7 @@
       },
       "free": "1 day",
       "launch": "3 days",
-      "enterprise": "14 days"
+      "scale": "14 days"
     },
     {
       "rows": "2",
@@ -137,7 +137,7 @@
       },
       "free": false,
       "launch": false,
-      "enterprise": "Included"
+      "scale": "Included"
     },
     {
       "rows": "3",
@@ -147,7 +147,7 @@
       },
       "free": "Default",
       "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
-      "enterprise": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
+      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
     },
     {
       "rows": "3",
@@ -157,7 +157,7 @@
       },
       "free": "Time travel up to 6h<span>or 1 GB of data changes</span><span>(whichever comes first)</span>",
       "launch": "Time travel up to 7 days",
-      "enterprise": "Time travel up to 30 days"
+      "scale": "Time travel up to 30 days"
     }
   ]
 }

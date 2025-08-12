@@ -1,30 +1,34 @@
 [
   {
     "planId": "free",
-    "type": "Free Plan",
+    "type": "Free",
     "title": "Start for free",
     "price": 0,
     "description": "For prototypes and side projects",
     "features": [
       {
+        "icon": "projects",
         "title": "10 projects"
       },
       {
-        "title": "10 branches per project"
-      },
-      {
+        "icon": "storage",
         "title": "0.5 GB per project"
       },
       {
-        "title": "50 CU-hour",
-        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
+        "icon": "clock",
+        "title": "50 CU-hours per Project",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
       {
         "title": "Autoscaling up to 2 CU",
-        "info": "= 2 vCPU, 8 GB memory"
+        "subtitle": "(2 vCPU, 8 GB RAM)"
       }
     ],
+    "otherFeatures": {
+      "title": "",
+      "features": [{ "title": "Read replicas" }, { "title": "Built-in high availability" }]
+    },
     "button": {
       "url": "https://console.neon.tech/signup",
       "event": "Hero Free Tier Panel",
@@ -41,26 +45,24 @@
     "description": "For startups and growing teams",
     "features": [
       {
+        "icon": "projects",
         "title": "100 projects"
       },
       {
-        "title": "10 simultaneous branches per project",
-        "info": "Additional branches: $0.002 per branch-hour",
-        "moreLink": { "text": "Read more", "href": "#additional-branches-billing" }
+        "icon": "storage",
+        "title": "$0.35 per GB-month Storage"
       },
       {
-        "title": "Storage: $0.35 per GB-month"
-      },
-      {
-        "title": "Compute: $0.14 per CU-hour",
-        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
+        "icon": "clock",
+        "title": "$0.14 per CU-hour Compute",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
-      { "title": "Autoscaling up to 16 CU", "info": "16 vCPU, 64 GB memory" }
+      { "title": "Autoscaling up to 16 CU", "subtitle": "(16 vCPU, 64 GB RAM)" }
     ],
     "otherFeatures": {
-      "title": "Features",
-      "features": [{ "title": "7-day time travel" }, { "title": "3-day monitoring retention" }]
+      "title": "Everything in Free, plus...",
+      "features": [{ "title": "7-day time travel/PITR" }, { "title": "3-day monitoring retention" }]
     },
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
@@ -70,39 +72,36 @@
     }
   },
   {
-    "planId": "enterprise",
-    "type": "Enterprise",
+    "planId": "scale",
+    "type": "Scale",
     "title": "Usage-based",
-    "price": 5,
+    "price": 50,
     "priceFrom": true,
-    "description": "For production-grade companies",
+    "description": "For the most demanding workloads",
     "features": [
       {
+        "icon": "projects",
         "title": "1,000 projects"
       },
       {
-        "title": "25 simultaneous branches per project",
-        "info": "Additional branches: $0.002 per branch-hour",
-        "moreLink": { "text": "Read more", "href": "#additional-branches-billing" }
+        "icon": "storage",
+        "title": "$0.35 per GB-month Storage"
       },
       {
-        "title": "Storage: $0.35 per GB-month"
-      },
-      {
-        "title": "Compute: $0.26 per CU-hour",
-        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
+        "icon": "clock",
+        "title": "$0.26 per CU-hour Compute",
+        "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
-      { "title": "Autoscaling up to 16 CU+", "info": "= 56 vCPU, 224 GB memory" }
+      { "title": "Autoscaling up to 16 CU+", "subtitle": "(56 vCPU, 224 GB RAM)" }
     ],
     "otherFeatures": {
       "title": "Features",
       "features": [
         { "title": "30-day time travel" },
         { "title": "14-day monitoring retention" },
-        { "title": "Metrics export" },
-        { "title": "IP allow rules" },
-        { "title": "Private networking" },
+        { "title": "Metrics & Logs export" },
+        { "title": "Private Network/IP Rules" },
         { "title": "99.95% SLA" },
         { "title": "SOC 2 / ISO / GDPR" }
       ]
@@ -110,8 +109,8 @@
     "button": {
       "url": "https://console.neon.tech/app/billing#plans",
       "theme": "primary",
-      "event": "Hero Enterprise Panel",
-      "analyticsEvent": "pricing_page_get_started_with_enterprise_plan_clicked"
+      "event": "Hero Scale Panel",
+      "analyticsEvent": "pricing_page_get_started_with_scale_plan_clicked"
     }
   }
 ]

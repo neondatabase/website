@@ -8,6 +8,13 @@ import { Fragment, useState } from 'react';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 
+const icons = {
+  projects: 'pricing-projects-icon',
+  storage: 'pricing-storage-icon',
+  clock: 'pricing-clock-icon',
+  autoscale: 'pricing-autoscale-icon',
+};
+
 const variantsAnimation = {
   open: {
     height: 'auto',
@@ -17,11 +24,12 @@ const variantsAnimation = {
   },
 };
 
-const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
-  <li className="flex gap-x-2 font-normal">
+const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLink }) => (
+  <li className="flex gap-x-2">
     <span
       className={clsx(
-        'pricing-check-icon mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0 translate-y-[2px]',
+        icon ? icons[icon] : 'pricing-check-icon',
+        'mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0 translate-y-[2px]',
         highlighted ? 'bg-green-45' : 'bg-gray-new-60'
       )}
       aria-hidden
@@ -32,7 +40,7 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
         highlighted ? 'text-gray-new-98' : 'text-gray-new-80'
       )}
     >
-      <span className="with-link-primary">
+      <span className="with-link-primary flex flex-col gap-1">
         {Array.isArray(title) ? (
           title.map((part, i) =>
             typeof part === 'string' ? (
@@ -45,6 +53,13 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
           )
         ) : (
           <span dangerouslySetInnerHTML={{ __html: title }} />
+        )}
+        {subtitle ? (
+          <span className="text-[15px] italic leading-none tracking-extra-tight text-gray-new-50">
+            {subtitle}
+          </span>
+        ) : (
+          ''
         )}
       </span>
       {info && (
@@ -64,8 +79,10 @@ const Feature = ({ title, info, type, highlighted, index, moreLink }) => (
 );
 
 Feature.propTypes = {
+  icon: PropTypes.oneOf(Object.keys(icons)),
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
+  subtitle: PropTypes.string,
   type: PropTypes.string,
   highlighted: PropTypes.bool,
   index: PropTypes.number,
@@ -76,7 +93,7 @@ Feature.propTypes = {
 };
 
 const Features = ({ title, features, type, highlighted, hasToggler }) => {
-  const hasHiddenItems = features.length > 2;
+  const hasHiddenItems = features.length > 10;
   const [isOpen, setIsOpen] = useState(!hasHiddenItems);
 
   const handleOpen = () => {
