@@ -45,7 +45,7 @@ Compare Neon's **Free**, **Launch**, and **Enterprise** plans.
 | [Metrics/logs export](#metricslogs-export)          | —                              | —                                    | ✅                                                                                |
 | [Restore window](#restore-window)                   | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Instant restore](#instant-restore)                 | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
-| [Private data transfer](#private-ndata-transfer)    | —                              | —                                    | $0.01/GB                                                                          |
+| [Private data transfer](#private-data-transfer)     | —                              | —                                    | $0.01/GB                                                                          |
 | [Support](#support)                                 | Community                      | Billing                              | Production                                                                        |
 | [Compliance and security](#compliance-and-security) | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                           | —                              | —                                    | ✅                                                                                |
