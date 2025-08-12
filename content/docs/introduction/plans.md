@@ -68,15 +68,13 @@ On the **Free** plan, there is no monthly cost, you get free usage allowances fo
 
 Which plan is right for you?
 
-- The **Free** plan is ideal for prototypes, side projects, and quick experiments. You get 10 projects, 50 CU-hours/month, 0.5 GB of storage per branch, 5 GB of egress, and more. If you require additioanal resources, consider a paid plan, which offers usage-based pricing.
-- The **Launch** plan is designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month. If you would be constrained by the Free plan, start here.
+- The **Free** plan is ideal for prototypes, side projects, and quick experiments. You get 10 projects, 50 CU-hours/month, 0.5 GB of storage per branch, 5 GB of egress, and more. If you require additional resources, consider a paid plan, which offers usage-based pricing.
+- The **Launch** plan is designed for startups and growing teams that need more resources, features, and flexibility. It offers usage-based pricing, starting at $5/month. If you're constrained by the Free plan, start here.
 - The **Enterprise** plan is built for production-grade workloads and larger teams, offering higher limits, advanced features, full support, compliance, additional security options, and SLAs. This plan is also usage-based, starting at $5/month.
-
-  > Paid plans do not include Free plan compute, storage, and instant restore allowances.
 
 ### ☑ Projects
 
-A project is a container for your database environment. Each project includes your database, database branches, compute resources, and more. Similar to an application's Git repository that contains the app's code, artifacts, and branches, you can think of a project as a container for all of your database resources. Learn more about [Neon’s object hierarchy](/docs/manage/overview).
+A project is a container for your database environment. Each project includes your database, database branches, compute resources, and more. Similar to an Git repository that contains an app's code, artifacts, and branches, you can think of a project as a container for all of your database resources. Learn more about [Neon’s object hierarchy](/docs/manage/overview).
 
 > For most use cases, we recommend creating a project for each app or customer to isolate data and manage database resources.
 
@@ -88,7 +86,7 @@ Each plan includes a number of projects:
 
 ### ☑ Branches
 
-Each project is created with a **root branch**. In Git terms, you can think of it as your `main` branch.
+Each project is created with a [root branch](/docs/reference/glossary#root-branch). In Git terms, you can think of it as your `main` branch.
 
 Postgres databases, schemas, tables, records, indexes, roles — all of the things that comprise data in a Postgres instance — are created on a branch.
 
@@ -112,9 +110,9 @@ On paid plans, you can create as many branches as you need. Extra branches beyon
 1 additional branch × 1 month = 1 branch-month
 ```
 
-The cost on paid plans is **$1.50 per branch-month**. Metered by the hour, this works out to about $0.002 per hour for each extra branch.
+The cost for extra branches is **$1.50 per branch-month**. Metered by the hour, this works out to about $0.002 per hour for each extra branch.
 
-**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month.
+**Example:** If your plan includes 10 branches per-project and you create 2 extra branches in your project (for a total of 12 branches), and those 2 branches exist for 5 hours each, that’s 10 hours of extra branches billed at the hourly rate derived from $1.50 per branch-month, which works out to a cost of about $0.20.
 
 > Extra branches are not available on the Free plan. If you need more branches, you can either delete existing branches or upgrade to a paid plan. Your project's root branch counts toward the per-project branch limit.
 
@@ -125,8 +123,8 @@ Your monthly compute usage depends on how long your compute runs and the size of
 - Compute usage is measured in **CU-hours** (Compute Unit hours).
 - A CU defines how much vCPU and memory your database uses at any moment.
 - **1 CU = 1 vCPU + 4 GB RAM**
-- RAM scales with vCPU size at a 1:4 ratio — for every 1 vCPU in a Compute Unit, you get 4 GB of RAM.
-- Compute sizes all the way up to 56 CU are supported, depending on your plan — larger computes provide more processing power, more RAM, and higher connection limits.
+- RAM scales with vCPU size at a 4:1 ratio — you get 4 GB of RAM for every 1 vCPU.
+- Compute sizes all the way up to 56 CU are supported, depending on your plan.
 
   ```
   | Compute Unit | vCPU | RAM    |
@@ -140,7 +138,7 @@ Your monthly compute usage depends on how long your compute runs and the size of
   | 56           | 56   | 224 GB |
   ```
 
-Compute usage is compute size multiplied by how long your compute runs:
+Compute usage is calculated by multiplying compute size by how long the compute runs:
 
 ```text
 compute size × number of hours running = CU-hours
