@@ -23,7 +23,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
       const iconPath = `${ICONS_PATH}/${icon}.svg`;
       const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
 
-      const basePath = process.env.NODE_ENV === 'development' ? 'public' : '';
+      const basePath = process.env.NODE_ENV === 'production' ? '' : 'public';
       const hasDarkIcon = fs.existsSync(`${basePath}${iconPathDark}`);
 
       const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
