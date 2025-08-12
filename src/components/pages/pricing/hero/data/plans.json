@@ -93,7 +93,7 @@
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB memory</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
-      { "title": "Autoscaling up to 56 CU", "info": "= 56 vCPU, 224 GB memory" }
+      { "title": "Autoscaling up to 16 CU+", "info": "= 56 vCPU, 224 GB memory" }
     ],
     "otherFeatures": {
       "title": "Features",
