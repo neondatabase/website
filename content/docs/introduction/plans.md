@@ -97,7 +97,7 @@ Included per plan:
 
 See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) for how branch storage is billed.
 
-> Projects can have multiple root branches, with limits based on your plan. See [Branch types: Root branch](/docs/manage/branches#root-branch) for details. 
+> Projects can have multiple root branches, with limits based on your plan. See [Branch types: Root branch](/docs/manage/branches#root-branch) for details.
 
 ### ☑ Extra branches
 
