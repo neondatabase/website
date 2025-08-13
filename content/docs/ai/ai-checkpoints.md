@@ -104,9 +104,9 @@ POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 
 **Query Parameters:**
 - `lsn` (string): Target Log Sequence Number. Cannot be used with `timestamp`
-- `timestamp` (string): Target timestamp (ISO 8601). Cannot be used with `lsn`
+- `timestamp` (string): Target timestamp (RFC 3339). Cannot be used with `lsn`
 - `name` (string): Name for the snapshot
-- `expires_at` (string): Auto-deletion time (ISO 8601)
+- `expires_at` (string): Auto-deletion time (RFC 3339)
 
 **Example:**
 ```bash
