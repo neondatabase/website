@@ -1,5 +1,5 @@
 ---
-title: Neon Auth Overview
+title: Neon Auth
 subtitle: Authentication, user management, and real-time Postgres sync
 enableTableOfContents: true
 tag: beta
