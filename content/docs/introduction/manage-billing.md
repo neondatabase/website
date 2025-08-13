@@ -18,9 +18,7 @@ updatedOn: '2025-08-07T23:34:44.601Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/introduction/plans">Neon plans</a>
-<a href="/docs/introduction/extra-usage">How extra usage works</a>
 <a href="/docs/introduction/monitor-usage">Monitoring billing and usage</a>
-<a href="/docs/introduction/usage-metrics">Neon's usage metrics</a>
 </DocsList>
 </InfoBlock>
 

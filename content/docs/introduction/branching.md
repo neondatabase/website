@@ -101,7 +101,7 @@ Your **restore window** determines how far back Neon maintains a history of chan
 
 You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](/docs/manage/projects#configure-your-restore-window).
 
-<Admonition type="note">Increasing your restore window affects **all branches** in your project and increases [project storage](/docs/introduction/usage-metrics#storage). You can reduce it to zero to minimize cost.</Admonition>
+<Admonition type="note">Increasing your restore window affects **all branches** in your project and increases project storage. You can reduce it to zero to minimize cost.</Admonition>
 
 History is retained in the form of Write-Ahead-Log (WAL) records. As WAL records age out of the retention period, they are evicted from storage and no longer count toward project storage.
 

@@ -99,7 +99,7 @@ The connection limit (defined by the Postgres `max_connections` setting) is set 
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png)
 
-The **Database size** graph shows the logical data size (the size of your actual data) for the named database and the total size for all user-created databases (**All Databases**) on the selected branch. Database size differs from the [storage](/docs/introduction/usage-metrics#storage) size of your Neon project, which includes the logical data size plus history. The **All Databases** metric is only shown when there is more than one database on the selected branch.
+The **Database size** graph shows the logical data size (the size of your actual data) for the named database and the total size for all user-created databases (**All Databases**) on the selected branch. The **All Databases** metric is only shown when there is more than one database on the selected branch.
 
 <Admonition type="important">
 Database size metrics are only displayed while your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.

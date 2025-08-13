@@ -237,8 +237,6 @@ Since compute usage is measured hourly, **prorated billing does not apply**.
 
 This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics for Neon's legacy plans.
 
-> For usage metics for Neon's **current pricing plans**, see [Usage metrics](/docs/introduction/usage-metrics).
-
 ### Storage
 
 Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.

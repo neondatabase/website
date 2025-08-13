@@ -34,7 +34,7 @@ There is an additional value that you also might want to track: `logical_size`, 
 
 Neon updates all metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
-To find the current usage level for any of these metrics, see [querying metrics](#querying-metrics-and-quotas). You can read more about these metrics and how they impact billing here: [Usage metrics](/docs/introduction/usage-metrics)
+To find the current usage level for any of these metrics, see [querying metrics](#querying-metrics-and-quotas).
 
 ### Corresponding quotas
 

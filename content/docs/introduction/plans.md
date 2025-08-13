@@ -84,10 +84,10 @@ Included per plan:
 
 ### ☑ Branches
 
-Each project has a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
+Each project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
 Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
 
-You can create **child branches** (copies of the root branch) for testing, previews, or development.
+You can create [child branches](/docs/reference/glossary#child-branch) for testing, previews, or development.
 
 Included per plan:
 
@@ -96,6 +96,8 @@ Included per plan:
 - **Scale**: 25 branches/project
 
 See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) for how branch storage is billed.
+
+> Projects can have multiple root branches, with limits based on your plan. See [Branch types: Root branch](/docs/manage/branches#root-branch) for details. 
 
 ### ☑ Extra branches
 
@@ -149,7 +151,7 @@ Examples:
 **Launch**: $0.14/CU-hour  
 **Scale**: $0.26/CU-hour
 
-> All computes across all projects count toward usage. Each branch has a read-write compute by default; read replicas add read-only computes.
+> All computes across all projects count toward usage. Each branch has a read-write compute by default; [read replicas](/docs/reference/glossary#read-replica) add read-only computes.
 
 #### Compute with autoscaling
 
