@@ -329,7 +329,7 @@ A: With `finalize_restore: true`, Neon moves compute resources to the new state.
 **Q: Why must the active branch be a root branch?**  
 A: Snapshot restores with `finalize_restore: true` currently require root branches. This is a platform requirement.
 
-**Q: What if we need multiple preview environments?** 
+**Q: What if we need multiple preview environments?**
 A: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
 
 **Q: What is the restore window?**  
