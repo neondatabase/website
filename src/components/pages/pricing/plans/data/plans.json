@@ -85,7 +85,7 @@
       },
       "free": "Auto <span>after 5 minutes</span>",
       "launch": "Auto <span>after 5 minutes</span>",
-      "enterprise": "Configurable"
+      "scale": "Configurable"
     },
     {
       "rows": "2",
