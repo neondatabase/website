@@ -20,13 +20,12 @@ Switch branches, and your app keeps using the same connection string.
 
 With the Neon Local Connect extension, you can:
 
-- **Database Visualization**: Browse your database schema with an intuitive tree view showing databases, schemas, tables, columns, and relationships
-- **Built-in SQL Editor**: Write and execute SQL queries directly in your IDE with syntax highlighting, results display, and export capabilities
-- **Table Data Management**: View, edit, insert, and delete table data with a spreadsheet-like interface without leaving your IDE
 - Instantly connect to any Neon branch using a single, static localhost connection string
 - Create, switch, or reset branches directly from the extension panel
 - Automate ephemeral branch creation and cleanup, no scripts required
-- Open the Neon SQL Editor or Table View for your current branch with one click
+- Browse your database schema with an intuitive tree view showing databases, schemas, tables, columns, and relationships
+- Write and execute SQL queries with syntax highlighting, results display, and export capabilities
+- View, edit, insert, and delete table data with a spreadsheet-like interface without leaving your IDE
 - Launch a psql shell in your integrated terminal for direct SQL access
 
 All without leaving your editor.  
@@ -168,14 +167,12 @@ Execute SQL queries directly in your IDE with the integrated SQL Editor:
 
 ### Features:
 
-- **Syntax Highlighting**: Full SQL syntax support with intelligent highlighting
 - **Query Execution**: Run queries with `Ctrl+Enter` or the Execute button
 - **Results Display**: View query results in a tabular format with:
   - Column sorting and filtering
   - Export to CSV/JSON formats
   - Performance statistics (execution time, rows affected, etc.)
   - Error highlighting with detailed messages
-- **Query History**: Access your previous queries
 - **Database Context**: Automatically connects to the selected database
 
 ### How to use:
@@ -255,15 +252,6 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 - **Table Data Editor:** View and edit table data with a spreadsheet-like interface
 - **Context Menus:** Right-click databases, tables, and views for quick actions like querying and data management
 
-## Why this matters
-
-- **Unified Development Experience**: Manage your database schema, run queries, and edit data without leaving your IDE
-- **No Dynamic Connection Strings**: Just use `localhost:5432` everywhere, no matter which branch you're on
-- **Visual Database Management**: See your database structure at a glance and interact with it through intuitive UI
-- **Faster Development Cycles**: Query, test, and modify data instantly without switching between tools
-- **Branch-Aware Workflows**: Switch branches for features, tests, or teammates without touching your app code
-- **Universal Compatibility**: Works with any language or framework that supports Postgres
-- **Powered by Neon Local**: All the power of [Neon Local](/docs/local/neon-local) with an enhanced IDE UI
 
 ## Next steps & resources
 
