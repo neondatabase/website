@@ -66,13 +66,13 @@ The security model consists of two parts:
 
 ### Neon Auth (automatically configured)
 
-Neon Auth manages user authentication, generating JWT tokens for secure API requests.
+[Neon Auth](/docs/neon-auth/overview) manages user authentication, generating JWT tokens for secure API requests.
 
 **What you need to do**:
 
-- Add Neon Auth keys to your app's environment variables.
+- Add Neon Auth keys to your app's environment variables. See [Get your Neon Auth keys](/docs/neon-auth/quick-start/nextjs#add-neon-auth-to-a-project).
 - Include JWT tokens in Data API requests.
-- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up.
+- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up. See [Neon Auth SDKs](/docs/neon-auth/sdk/nextjs/overview). There are SDKs for Next.js and React.
 
 > You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
 
