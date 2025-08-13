@@ -99,7 +99,7 @@ Output:
 
 ### 2\) Using the WHERE clause with the AND operator example
 
-The following example uses a `WHERE` clause with the `AND` logical operator to find customers whose first name and last names are `Jamie` and `rice`:
+The following example uses a `WHERE` clause with the `AND` logical operator to find customers whose first name and last names are `Jamie` and `Rice`:
 
 ```
 SELECT
@@ -123,7 +123,7 @@ Output:
 
 ### 3\) Using the WHERE clause with the OR operator example
 
-The following example uses a WHERE clause with an OR operator to find the customers whose last name is `Rodriguez` or first name is `Adam`:
+The following example uses a `WHERE` clause with an `OR` operator to find the customers whose last name is `Rodriguez` or first name is `Adam`:
 
 ```
 SELECT
@@ -150,7 +150,7 @@ Output:
 
 If you want to find a value in a list of values, you can use the [`IN`](postgresql-in) operator.
 
-The following example uses the WHERE clause with the IN operator to find the customers with first names in the list Ann, Anne, and Annie:
+The following example uses the `WHERE` clause with the `IN` operator to find the customers with first names in the list Ann, Anne, and Annie:
 
 ```
 SELECT
@@ -177,7 +177,7 @@ Output:
 
 To find a string that matches a specified pattern, you use the [`LIKE`](postgresql-like) operator.
 
-The following example uses the LIKE operator in the WHERE clause to find customers whose first names start with the word `Ann`:
+The following example uses the `LIKE` operator in the `WHERE` clause to find customers whose first names start with the word `Ann`:
 
 ```
 SELECT
