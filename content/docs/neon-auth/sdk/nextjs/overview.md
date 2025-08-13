@@ -3,6 +3,7 @@ title: Next.js SDK Overview
 subtitle: Neon Auth Next.js SDK reference
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-08-13T10:33:23.099Z'
 ---
 
 This is the SDK reference for the Neon Auth Next.js SDK.

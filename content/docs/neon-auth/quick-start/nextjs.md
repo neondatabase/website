@@ -6,7 +6,7 @@ enableTableOfContents: true
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth
-updatedOn: '2025-07-22T11:08:24.052Z'
+updatedOn: '2025-08-13T10:33:23.096Z'
 ---
 
 <InfoBlock>
