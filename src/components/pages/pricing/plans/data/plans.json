@@ -48,7 +48,7 @@
       "rows": "2",
       "feature": {
         "title": "Additional branches",
-        "subtitle": "<a href='#additional-branches-billing'>Read more</a>"
+        "subtitle": { "text": "Read more", "href": "#additional-branches-billing" }
       },
       "free": false,
       "launch": {
@@ -141,7 +141,7 @@
       "rows": "3",
       "feature": {
         "title": "Instant Restores",
-        "subtitle": "<a href='#instant-restores'>Read more</a>"
+        "subtitle": { "text": "Read more", "href": "#instant-restores" }
       },
       "free": "Default",
       "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",

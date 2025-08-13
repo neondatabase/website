@@ -29,7 +29,7 @@ const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLi
     <span
       className={clsx(
         icon ? icons[icon] : 'pricing-check-icon',
-        'mt-px size-3.5 h-[14px] w-[14px] flex-shrink-0 translate-y-[2px]',
+        'mt-px size-4 h-[16px] w-[16px] flex-shrink-0 translate-y-px',
         highlighted ? 'bg-green-45' : 'bg-gray-new-60'
       )}
       aria-hidden
