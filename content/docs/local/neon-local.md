@@ -156,7 +156,7 @@ docker run \
 
 | Variable           | Description                                                                       | Required | Default                       |
 | ------------------ | --------------------------------------------------------------------------------- | -------- | ----------------------------- |
-| `NEON_API_KEY`     | Your Neon API key. [Manage API Keys](/docs/manage/api-keys)                      | Yes      | N/A                           |
+| `NEON_API_KEY`     | Your Neon API key. [Manage API Keys](/docs/manage/api-keys)                       | Yes      | N/A                           |
 | `NEON_PROJECT_ID`  | Your Neon project ID. Found under Project Settings → General in the Neon console. | Yes      | N/A                           |
 | `BRANCH_ID`        | Connect to an existing Neon branch. Mutually exclusive with `PARENT_BRANCH_ID`.   | No       | N/A                           |
 | `PARENT_BRANCH_ID` | Create ephemeral branch from parent. Mutually exclusive with `BRANCH_ID`.         | No       | your project's default branch |
