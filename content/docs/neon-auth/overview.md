@@ -1,8 +1,9 @@
 ---
 title: Neon Auth
-subtitle: Authentication, user management, and real-time Postgres sync
+subtitle: 'Authentication, user management, and real-time Postgres sync'
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-08-13T12:15:08.975Z'
 ---
 
 Neon Auth brings authentication and user management natively to your Neon Postgres database.
