@@ -53,7 +53,6 @@ Snapshots solve these problems:
 - **Branch**: An isolated database environment with its own data and schema that you can connect to and modify
 - **Snapshot**: An immutable, point-in-time backup of a branch's schema and data. Read-only until restored - you can query snapshot data but cannot modify it directly
 - **Root Branch**: A branch with no parent (typically named `main` or `production`). Required for snapshot restores with `finalize_restore: true`
-- **Restore Window**: The time period during which you can restore to any point (typically 7-30 days). Snapshots outside this window cannot be accessed
 - **Operations**: Backend operations that return operation IDs you must poll to completion
 
 ### Pattern-specific terminology
@@ -290,7 +289,7 @@ Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 - [ ] Restore with `finalize_restore: true` and `target_branch_id` set
 - [ ] Poll all operation IDs to terminal states before connecting
 - [ ] Set up automatic cleanup with expiration dates
-- [ ] Document your restore window policy
+- [ ] Document your restore window policy, when snapshots are set to expire
 
 ## Best practices
 
@@ -309,11 +308,11 @@ A: With `finalize_restore: true`, Neon moves compute resources to the new state.
 **Q: Why must the active branch be a root branch?**  
 A: Snapshot restores with `finalize_restore: true` currently require root branches. This is a platform requirement.
 
-**Q: What if we need multiple preview environments?**  
-A: Create multiple branches from different snapshots. Each gets its own connection string.
+**Q: What if we need multiple preview environments?** 
+A: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
 
 **Q: What is the restore window?**  
-A: The time period during which you can restore (typically 7-30 days). Snapshots outside this window cannot be restored.
+A: The time period during which you can restore, depending on snapshot expiration time. Snapshots outside this window cannot be restored.
 
 ## Summary
 
