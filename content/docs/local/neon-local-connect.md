@@ -21,7 +21,7 @@ Switch branches, and your app keeps using the same connection string.
 With the Neon Local Connect extension, you can:
 
 - **Database Visualization**: Browse your database schema with an intuitive tree view showing databases, schemas, tables, columns, and relationships
-- **Built-in SQL Editor**: Write and execute SQL queries directly in your IDE with syntax highlighting, results display, and export capabilities  
+- **Built-in SQL Editor**: Write and execute SQL queries directly in your IDE with syntax highlighting, results display, and export capabilities
 - **Table Data Management**: View, edit, insert, and delete table data with a spreadsheet-like interface without leaving your IDE
 - Instantly connect to any Neon branch using a single, static localhost connection string
 - Create, switch, or reset branches directly from the extension panel
@@ -139,14 +139,16 @@ Once connected, the extension provides a comprehensive **Database Schema** view 
 ![Database Schema View](/docs/local/database_schema_view.png)
 
 ### What you can see:
+
 - **Databases**: All available databases in your connected branch
-- **Schemas**: Database schemas organized in a tree structure  
+- **Schemas**: Database schemas organized in a tree structure
 - **Tables & Views**: All tables and views with their column definitions
 - **Data Types**: Column data types, constraints, and relationships
 - **Primary Keys**: Clearly marked primary key columns
 - **Foreign Keys**: Visual indicators for foreign key relationships
 
 ### What you can do:
+
 - **Right-click any table** to access quick actions:
   - **Query Table**: Opens a pre-filled `SELECT *` query in the SQL Editor
   - **View Table Data**: Opens the table data in an editable spreadsheet view
@@ -165,6 +167,7 @@ Execute SQL queries directly in your IDE with the integrated SQL Editor:
 ![SQL Editor in your IDE](/docs/local/sql_editor_view.png)
 
 ### Features:
+
 - **Syntax Highlighting**: Full SQL syntax support with intelligent highlighting
 - **Query Execution**: Run queries with `Ctrl+Enter` or the Execute button
 - **Results Display**: View query results in a tabular format with:
@@ -176,6 +179,7 @@ Execute SQL queries directly in your IDE with the integrated SQL Editor:
 - **Database Context**: Automatically connects to the selected database
 
 ### How to use:
+
 1. **From Schema View**: Right-click any table and select "Query Table" for a pre-filled SELECT query
 2. **From Actions Panel**: Click "Open SQL Editor" to start with a blank query
 3. **From Command Palette**: Use `Ctrl+Shift+P` and search for "Neon: Open SQL Editor"
@@ -189,12 +193,14 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 ![Table Data Editor](/docs/local/table_data_view.png)
 
 ### Viewing Data:
+
 - **Paginated Display**: Navigate through large datasets with page controls
 - **Column Management**: Show/hide columns, sort by any column
 - **Data Types**: Visual indicators for different data types (primary keys, foreign keys, etc.)
 - **Null Handling**: Clear visualization of NULL values
 
 ### Editing Capabilities:
+
 - **Row Editing**: Double-click any row to edit all fields inline (requires primary key)
 - **Insert New Rows**: Add new records with the "Add Row" button
 - **Delete Rows**: Remove records with confirmation dialogs (requires primary key)
@@ -204,6 +210,7 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 > **Note**: Row editing and deletion require tables to have a primary key defined. This ensures data integrity by uniquely identifying rows for safe updates.
 
 ### How to access:
+
 1. **From Schema View**: Right-click any table and select "View Table Data"
 2. The data opens in a new tab with full editing capabilities
 3. Changes are immediately applied to your database
@@ -231,15 +238,18 @@ _All commands below are available under the “Neon Local Connect:” prefix in 
 Once connected, the Neon Local Connect panel provides quick access to common database operations:
 
 ### Branch Management:
+
 - **Reset from Parent Branch:** Instantly reset your branch to match its parent's state  
   [Docs: Branch reset](/docs/guides/reset-from-parent)
 
 ### Database Tools (available in the main panel):
-- **Open SQL Editor:** Launch the Neon SQL Editor in your browser for advanced queries  
-- **Open Table View:** Browse your database schema and data in the Neon Console  
-- **Launch PSQL:** Open a psql shell in the integrated terminal for direct SQL access  
+
+- **Open SQL Editor:** Launch the Neon SQL Editor in your browser for advanced queries
+- **Open Table View:** Browse your database schema and data in the Neon Console
+- **Launch PSQL:** Open a psql shell in the integrated terminal for direct SQL access
 
 ### Built-in Database Tools (new in your IDE):
+
 - **Database Schema View:** Explore your database structure in the sidebar with expandable tree view
 - **Built-in SQL Editor:** Write and execute queries directly in your IDE with results display
 - **Table Data Editor:** View and edit table data with a spreadsheet-like interface
