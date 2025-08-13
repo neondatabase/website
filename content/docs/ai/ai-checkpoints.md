@@ -22,12 +22,14 @@ Use one root branch (main) as your permanent "active" branch with a stable conne
 Neon offers two key primitives that could be used for checkpointing:
 
 **Branches** are designed for:
+
 - Development environments that need isolation
 - Testing features before production
 - Preview deployments with their own connection strings
 - Scenarios where you need a live, modifiable database
 
 **Snapshots** are designed for:
+
 - Point-in-time recovery
 - Creating restore points before risky operations
 - Maintaining a history of database states
@@ -36,11 +38,13 @@ Neon offers two key primitives that could be used for checkpointing:
 ### Why snapshots work better for agent checkpoints
 
 When using branches for checkpoints, you encounter:
+
 - **Dependency chains**: Parent branches cannot be deleted while child branches exist
 - **Connection string changes**: Each new branch has a different connection string
 - **Complex rollback**: Multiple API calls and connection updates required
 
 Snapshots solve these problems:
+
 - **Independent entities**: Any snapshot can be deleted at any time, in any order
 - **Stable connections**: With the active branch pattern, your connection string never changes
 - **Simple restore**: Single API call to restore any checkpoint
@@ -49,6 +53,7 @@ Snapshots solve these problems:
 ## Concepts and terminology
 
 ### Neon core concepts
+
 - **Project**: Neon project that owns branches, computes, and snapshots
 - **Branch**: An isolated database environment with its own data and schema that you can connect to and modify
 - **Snapshot**: An immutable, point-in-time backup of a branch's schema and data. Read-only until restored - you can query snapshot data but cannot modify it directly
@@ -56,6 +61,7 @@ Snapshots solve these problems:
 - **Operations**: Backend operations that return operation IDs you must poll to completion
 
 ### Pattern-specific terminology
+
 - **Active branch**: The single root branch your agent always connects to. Connection string never changes
 - **Preview branch**: Temporary branch created from a snapshot for safe exploration
 - **Meta database**: Separate database/table that stores checkpoint metadata (prompt text, `snapshot_id`, etc.). Keeps audit trail across restores
@@ -65,12 +71,14 @@ Snapshots solve these problems:
 Every agent project maps to one Neon project with a single "active" branch:
 
 **The active branch:**
+
 - Is the only branch the agent ever connects to
 - Maintains a permanent connection string that never changes
 - Gets its data replaced during rollbacks (but keeps the same connection)
 - Must be a root branch (no parent) for snapshot restores to work properly
 
 **The snapshots:**
+
 - Capture point-in-time states of the active branch
 - Store only incremental changes (cost-efficient)
 - Can be deleted in any order (no dependencies)
@@ -83,7 +91,7 @@ Every agent project maps to one Neon project with a single "active" branch:
 One Agent Project = One Neon Project:
 ├── Active Branch (main/root) → postgresql://user@host/db (never changes)
 ├── Snapshot 1 (checkpoint at t1)
-├── Snapshot 2 (checkpoint at t2)  
+├── Snapshot 2 (checkpoint at t2)
 └── Preview Branch (temporary, created from snapshot)
 ```
 
@@ -98,16 +106,19 @@ POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 ```
 
 **Path Parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `branch_id` (string, required): The branch ID
 
 **Query Parameters:**
+
 - `lsn` (string): Target Log Sequence Number. Cannot be used with `timestamp`
 - `timestamp` (string): Target timestamp (RFC 3339). Cannot be used with `lsn`
 - `name` (string): Name for the snapshot
 - `expires_at` (string): Auto-deletion time (RFC 3339)
 
 **Example:**
+
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/snapshot?name=checkpoint-session-1&expires_at=2025-08-13T00:00:00Z' \
@@ -115,6 +126,7 @@ curl --request POST \
 ```
 
 **When to create snapshots:**
+
 - Start of each agent session
 - Before database schema changes
 - After successful operations
@@ -129,10 +141,12 @@ POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
 ```
 
 **Path Parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
 **Body Parameters:**
+
 - `name` (string): A name for the newly restored branch. If omitted, a default name will be generated
 - `target_branch_id` (string): The ID of the branch to restore the snapshot into. If not specified, the branch from which the snapshot was originally created will be used. **Always set to your root branch ID to preserve connection strings**
 - `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move any associated computes to the new branch. Defaults to `false`. **Always set to `true` for the active branch pattern**
@@ -149,30 +163,32 @@ Do not connect to the database until all operations complete. Any connection att
 
 ```json
 {
-  "target_branch_id": "br-active-branch-123456",  // Your root branch ID
-  "finalize_restore": true  // Moves computes and preserves connection string
+  "target_branch_id": "br-active-branch-123456", // Your root branch ID
+  "finalize_restore": true // Moves computes and preserves connection string
 }
 ```
 
 After calling the restore API:
+
 1. Extract operation IDs from the response (may be empty array)
 2. Poll each operation until it reaches a terminal state
 3. **Do not connect yet** - database still points to old state
 4. Only after all operations complete can you connect to the restored snapshot
 
 **Polling operations:**
+
 ```javascript
 // Pseudo-code for polling operations
 function waitForOperation(operationId) {
   while (true) {
     status = getOperationStatus(operationId)  // GET /projects/{project_id}/operations/{operationId}
-    
+
     // Terminal states - safe to proceed
     if (['finished', 'skipped', 'cancelled'].includes(status)) return
-    
-    // Error state - handle appropriately  
+
+    // Error state - handle appropriately
     if (status === 'failed') throw error
-    
+
     sleep(5 seconds)
   }
 }
@@ -194,6 +210,7 @@ See `lib/neon/apply-snapshot.ts` and `lib/neon/operations.ts` in the demonstrati
 </Admonition>
 
 **Common restore errors:**
+
 - **Connection to old state**: Ensure all operations completed
 - **Target branch not found**: Verify branch exists
 - **Operation timeout**: Retry with longer timeout
@@ -205,7 +222,7 @@ Create a temporary branch to preview a checkpoint without affecting the active b
 ```json
 {
   "name": "preview-checkpoint-123",
-  "finalize_restore": false  // Creates new branch for preview without moving computes
+  "finalize_restore": false // Creates new branch for preview without moving computes
 }
 ```
 
@@ -222,6 +239,7 @@ GET /api/v2/projects/{project_id}/snapshots
 ```
 
 **Path Parameters:**
+
 - `project_id` (string, required): The Neon project ID
 
 #### Delete checkpoint
@@ -233,6 +251,7 @@ DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 ```
 
 **Path Parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
@@ -245,10 +264,12 @@ PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 ```
 
 **Path Parameters:**
+
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
 **Body:**
+
 ```json
 {
   "snapshot": {
@@ -269,14 +290,14 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## API quick reference
 
-| Operation | Endpoint |
-|-----------|----------|
-| Create checkpoint | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot` |
+| Operation          | Endpoint                                                             |
+| ------------------ | -------------------------------------------------------------------- |
+| Create checkpoint  | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   |
 | Restore checkpoint | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` |
-| List checkpoints | `GET /api/v2/projects/{project_id}/snapshots` |
-| Delete checkpoint | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}` |
-| Update checkpoint | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}` |
-| Poll operation | `GET /api/v2/projects/{project_id}/operations/{operation_id}` |
+| List checkpoints   | `GET /api/v2/projects/{project_id}/snapshots`                        |
+| Delete checkpoint  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
+| Update checkpoint  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
+| Poll operation     | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        |
 
 Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 
