@@ -252,7 +252,6 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 - **Table Data Editor:** View and edit table data with a spreadsheet-like interface
 - **Context Menus:** Right-click databases, tables, and views for quick actions like querying and data management
 
-
 ## Next steps & resources
 
 - [Neon Local documentation](/docs/local/neon-local)
