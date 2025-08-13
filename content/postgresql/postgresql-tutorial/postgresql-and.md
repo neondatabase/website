@@ -51,13 +51,16 @@ In this syntax, `expression1` and `expression2` are boolean expressions that eva
 
 The `AND` operator returns `true` only if both expressions are `true`. It returns `false` if one of the expressions is `false`. Otherwise, it returns `null`.
 
-The following table shows the results of the `AND` operator when combining `true`, `false`, and `null`.
+The following table shows the results of the `AND` operator when combining `true`, `false`, and `null`. Note that the order of the expressions doesn't matter, for example both `true AND null` and `null AND true` will evaluate to `null`.
 
-| AND       | True  | False | Null  |
-| --------- | ----- | ----- | ----- |
-| **True**  | True  | False | Null  |
-| **False** | False | False | False |
-| **Null**  | Null  | False | Null  |
+|  expression1  | expression2  | expression1 AND expression2 |
+| ------------- | ------------ | --------------------------- |
+| True          | True         | True                        | 
+| True          | False        | False                       |
+| True          | Null         | Null                        |
+| False         | False        | False                       |
+| False         | Null         | False                       |
+| Null          | Null         | Null                        |
 
 In practice, you often use the `AND` operator in a [`WHERE`](postgresql-where) clause to ensure that all specified expressions must be true for a row to be included in the result set.
 
