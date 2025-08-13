@@ -39,7 +39,7 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 #### Run the setup wizard
 
 \`\`\`bash
-npx @stackframe/init-stack@latest
+npx @stackframe/init-stack@latest --no-browser
 \`\`\`
 
 This sets up auth routes, layout wrappers, and handlers automatically for Next.js (App Router).
