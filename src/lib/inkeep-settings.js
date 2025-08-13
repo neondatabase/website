@@ -71,7 +71,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath: 'https://neon.com/ai-chat',
+  shareChatUrlBasePath: 'https://neon.com/docs/introduction#ai-chat',
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',

@@ -437,6 +437,10 @@ const defaultConfig = {
         source: '/dev-for-rds/:path*',
         destination: 'https://dev-for-rds.vercel.app/dev-for-rds/:path*',
       },
+      {
+        source: '/ai-chat',
+        destination: '/docs/introduction#ai-chat',
+      },
     ];
   },
   webpack(config) {
