@@ -11,7 +11,7 @@ function getTooltipHtml(info, link) {
 
   const linkHTML = `
     <a
-      class="mt-2 block w-fit border-b pb-0.5 leading-none tracking-extra-tight transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+      class="mt-1 inline-block w-fit border-b border-[rgba(228,229,231,0.5)] text-sm font-light leading-snug tracking-extra-tight transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
       href="${link.href}"
     >
       ${link.text}
@@ -53,7 +53,7 @@ const InfoIcon = ({
       loading="lazy"
     />
     <Tooltip
-      className={clsx('w-sm z-20 !bg-gray-new-15')}
+      className={clsx('w-sm z-20 !rounded-lg !bg-gray-new-15 !px-4 !pb-[14px] !pt-3')}
       id={`info-icon-${tooltipId}`}
       place={tooltipPlace}
       arrowColor="#242628"

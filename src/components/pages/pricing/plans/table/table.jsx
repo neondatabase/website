@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
+import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 import checkIcon from 'icons/pricing/check.svg';
 import crossIcon from 'icons/pricing/cross.svg';
@@ -187,15 +188,23 @@ const Table = () => {
                                 </span>
                               )}
                             </span>
-                            {item[key]?.subtitle && (
-                              <span
-                                className={clsx(
-                                  'mt-1 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
-                                  'text-with-links'
-                                )}
-                                dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
-                              />
-                            )}
+                            {item[key]?.subtitle &&
+                              (typeof item[key].subtitle === 'string' ? (
+                                <span
+                                  className={clsx(
+                                    'mt-1 text-sm font-light leading-snug tracking-extra-tight text-gray-new-50'
+                                  )}
+                                  dangerouslySetInnerHTML={{ __html: item[key].subtitle }}
+                                />
+                              ) : (
+                                <Link
+                                  tabIndex={0}
+                                  href={item[key].subtitle.href}
+                                  className="mt-1 inline-block w-fit border-b border-[rgba(175,177,182,0.40)] text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+                                >
+                                  {item[key].subtitle.text}
+                                </Link>
+                              ))}
                           </>
                         )}
                       </li>
