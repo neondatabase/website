@@ -6,6 +6,7 @@ import Container from 'components/shared/container/container';
 import AdobeLogo from './images/adobe.inline.svg';
 import AKQALogo from './images/akqa.inline.svg';
 import AlbertsonsLogo from './images/albertsons.inline.svg';
+import AnythingLogo from './images/anything.inline.svg';
 import BasehubLogo from './images/basehub.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
@@ -14,7 +15,6 @@ import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
 import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
-import CreateLogo from './images/create.inline.svg';
 import DatabuttonLogo from './images/databutton.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
@@ -52,7 +52,7 @@ const allLogos = {
   'code-institute': CodeInstituteLogo,
   comigo: ComigoLogo,
   commure: CommureLogo,
-  create: CreateLogo,
+  anything: AnythingLogo,
   databutton: DatabuttonLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
