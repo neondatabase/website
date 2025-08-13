@@ -6,8 +6,6 @@ enableTableOfContents: true
 updatedOn: '2025-08-05T20:34:13.249Z'
 ---
 
-<ComingSoon />
-
 ## Overview
 
 Branch expiration allows you to set automatic deletion timestamps on branches. When a branch reaches its expiration time, it is automatically deleted.
