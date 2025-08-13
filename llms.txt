@@ -171,7 +171,7 @@
 - [Neon Guides - neon-rls-clerk](https://neon.com/llms/guides-neon-rls-clerk.txt): Implement Row-level Security policies in Postgres using Clerk and Neon RLS
 - [Neon Guides - neon-rls-custom-jwt](https://neon.com/llms/guides-neon-rls-custom-jwt.txt): A step-by-step guide for using custom JWTs with Neon RLS
 - [Neon Guides - neon-rls-descope](https://neon.com/llms/guides-neon-rls-descope.txt): Implement Row-level Security policies in Postgres using Descope and Neon RLS
-- [Neon Guides - neon-rls-drizzle](https://neon.com/llms/guides-neon-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
+- [Neon Guides - rls-drizzle](https://neon.com/llms/guides-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
 - [Neon Guides - neon-rls-firebase-gcp](https://neon.com/llms/guides-neon-rls-firebase-gcp.txt): Implement Row-level Security policies in Postgres using Firebase and Neon RLS
 - [Neon Guides - neon-rls-future](https://neon.com/llms/guides-neon-rls-future.txt): Learn about upcoming features and improvements for Neon RLS
 - [Neon Guides - neon-rls-google-identity](https://neon.com/llms/guides-neon-rls-google-identity.txt): Implement Row-Level Security in Postgres using Firebase or GCP Identity

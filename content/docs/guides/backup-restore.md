@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-08-05T15:12:51.914Z'
+updatedOn: '2025-08-11T10:00:00.000Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
@@ -21,7 +21,6 @@ Use the **Backup & restore** page in the Neon Console to instantly restore a bra
 - ✅ Instantly restore a branch
 - ✅ Preview data before restoring
 - ✅ Create snapshots manually
-- ✅ Schedule snapshots
 - ✅ Restore from a snapshot
 
 ---
@@ -101,7 +100,7 @@ This endpoint lets you restore a branch using the following request parameters:
 | ----------------------- | -------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **source_branch_id**    | `string` | Yes      | The ID of the branch you want to restore from.<br /><br />To restore to the latest data (head), omit `source_timestamp` and `source_lsn`.<br /><br />To restore a branch to its own history (`source_branch_id` equals branch's own Id), you must include:<br />- A time period: `source_timestamp` or `source_lsn`<br />- A backup branch: `preserve_under_name`                         |
 | **source_lsn**          | `string` | No       | A Log Sequence Number (LSN) on the source branch. The branch will be restored with data up to this LSN.                                                                                                                                                                                                                                                                                   |
-| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use ISO 8601 format for the date-time string.                                                                                                                                                                                                                                                              |
+| **source_timestamp**    | `string` | No       | A timestamp indicating the point in time on the source branch to restore from. Use RFC 3339 format for the date-time string.                                                                                                                                                                                                                                                              |
 | **preserve_under_name** | `string` | No       | If specified, a backup is created: the latest version of the branch's state is preserved under a new branch using the specified name.<br /><br />**Note:** This field is required if:<br />- The branch has children. All child branches will be moved to the newly created branch.<br />- You are restoring a branch to its own history (`source_branch_id` equals the branch's own ID). |
 
 #### Restoring a branch to its own history
@@ -129,7 +128,7 @@ curl --request POST \
 
 ## Create snapshots manually
 
-Snapshots capture the state of your branch at a point in time. You can create snapshots manually or [schedule](#schedule-snapshots) them.
+Snapshots capture the state of your branch at a point in time. You can create snapshots manually.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -143,7 +142,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createSnapshot) endpoint. A snapshot can be created from a specific timestamp (ISO 8601 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
 
 ```
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -158,75 +157,11 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/bran
 
 The parameters used in the example above:
 
-- `timestamp`: A point in time to create the snapshot from (ISO 8601 format).
+- `timestamp`: A point in time to create the snapshot from (RFC 3339 format).
 - `name`: A user-defined name for the snapshot.
-- `expires_at`: The timestamp when the snapshot will be automatically deleted (ISO 8601 format).
+- `expires_at`: The timestamp when the snapshot will be automatically deleted (RFC 3339 format).
 
-</TabItem>
-
-</Tabs>
-
-## Schedule snapshots
-
-You can automate snapshot creation by setting a snapshot schedule for a branch.
-
-<Tabs labels={["Console", "API"]}>
-
-<TabItem>
-
-To edit the snapshot schedule for a branch:
-
-1. Click **Edit schedule**.
-2. In the **Edit snapshot schedule** modal, configure:
-   - **Frequency** – Daily, weekly, or monthly snapshots.
-   - **Retention** – How long to retain snapshots before they expire.
-   - **Custom retention rules** – Optionally keep specific daily or weekly snapshots for longer.
-
-   For example, you can configure daily snapshots at 01:00 UTC, keep Monday snapshots for a few weeks, and retain monthly snapshots for several months.
-
-3. Click **Update schedule** to apply your changes.
-
-   Snapshots created via the schedule are listed under the Snapshots section, along with manual snapshots.
-
-   ![snapshot schedule dialog](/docs/guides/snapshot_schedule.png)
-
-   <Admonition type="tip">
-   The Neon API provides finer-grained control over snapshot scheduling. Learn more by clicking the **API** tab above.
-   </Admonition>
-
-</TabItem>
-
-<TabItem>
-
-### Set a snapshot schedule
-
-This example sets a snapshot schedule for a Neon branch. It configures a snapshot to be taken on December 31 at 23:00 (11 PM), with a retention period of one hour (3600 seconds). The `frequency` field must be set to a supported value such as `"monthly"`, `"weekly"`, or `"daily"` depending on your use case. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
-
-```bash
-curl -X PUT "https://console.neon.tech/api/v2/projects/{project_id}/branch_id/{branch_id}/snapshot_schedule" \
-  -H "Content-Type: application/json" \
-  -H 'authorization: Bearer $NEON_API_KEY' \
-  -d '{
-    "schedule": [
-      {
-        "frequency": "string",
-        "hour": 23,
-        "day": 31,
-        "month": 12,
-        "retention_seconds": 3600
-      }
-    ]
-  }' |jq
-```
-
-### Retrieve a snapshot schedule
-
-This example shows how to retrieve a snapshot schedule for a branch. Replace `project_id`, `branch_id`, and `$NEON_API_KEY` with your actual project ID, branch ID, and API token.
-
-```bash
-curl -X GET "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot_schedule" \
-  -H 'authorization: Bearer $NEON_API_KEY'
-```
+Related API references: [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)
 
 </TabItem>
 
@@ -252,9 +187,9 @@ Use this option if you want to restore the snapshot data immediately without ins
    ![One step restore option](/docs/guides/one_step_restore.png)
 
 2. The **One-step restore** modal explains the operation:
-   - The restore operation will occur instantly
-   - The current branch will be restored to the snapshot state
-   - A branch named `<branch_name (old)>` will be created as a backup
+   - The restore operation will occur instantly.
+   - The current branch will be restored to the snapshot state.
+   - A branch named `<branch_name (old)>` will be created as a backup. Other snapshots you may have taken previously remain attached to this branch.
 
    ![One step restore confirmation modal](/docs/guides/one_step_restore_modal.png)
 
@@ -263,13 +198,13 @@ Use this option if you want to restore the snapshot data immediately without ins
 3. Your branch is immediately restored to the snapshot state, and the `<branch_name>_old` branch is created, which you'll find on the **Branches** page in the Neon Console, as shown here:
    ![Branches page that shows the backup branch](/docs/guides/one_step_restore_branches_page.png)
 
-   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it.
+   After you verify that the restore operation was successful, you can delete the backup branch if you no longer need it. **However, please note that any snapshots taken previously remain attached to this branch. If you need to keep them, we recommend retaining this branch.**
 
 </TabItem>
 
 <TabItem>
 
-A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
+A one-step restore operation is performed using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint. This operation creates a new branch, restores the snapshot to the new branch, and moves computes from your current branch to the new branch.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore?name=restored_branch" \
@@ -285,6 +220,13 @@ Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
 - `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation — no need to change the connection details in your application.
+- `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
+
+<Admonition type="note">
+If you plan to apply multiple snapshots in succession, always supply `target_branch_id` to ensure the restore is finalized against the correct branch (typically your current production branch). Without it, a second snapshot may be applied to the previously renamed "(old)" branch.
+</Admonition>
+
+Related API references: [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
 
 </TabItem>
 
@@ -319,7 +261,7 @@ Use this option if you need to inspect the restored data before you switch over 
 
 1.  **Restore the snapshot to a new branch**
 
-    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoreSnapshot) endpoint:
+    The first step in a multi-step restore operation is to restore the snapshot to a new branch using the [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot) endpoint:
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/snapshot_id/restore" \
@@ -334,9 +276,10 @@ Use this option if you need to inspect the restored data before you switch over 
     Parameters:
     - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
     - `finalize_restore`: Set to `false` so that you can inspect the new branch before finalizing the restore operation.
+    - `target_branch_id`: (Optional but recommended) Specify the branch ID you intend to replace when you later finalize the restore (typically your production branch). Providing this avoids subsequent operations defaulting to the `<branch_name> (old)` branch created by an earlier restore.
 
        <Admonition type="note">
-          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listSnapshots) endpoint.
+          You can find the `snapshot_id` using the [List project snapshots](https://api-docs.neon.tech/reference/listsnapshots) endpoint.
 
              ```bash
              curl -X GET "https://console.neon.tech/api/v2/projects/project_id/snapshots" \
@@ -344,6 +287,10 @@ Use this option if you need to inspect the restored data before you switch over 
              -H "Authorization: Bearer $NEON_API_KEY" |jq
              ```
 
+       </Admonition>
+
+       <Admonition type="note">
+          If you will finalize the restore later or plan multiple restores, include `target_branch_id` during the restore call to anchor the operation to the correct target branch.
        </Admonition>
 
 2.  **Inspect the new branch**
@@ -359,10 +306,10 @@ Use this option if you need to inspect the restored data before you switch over 
 
 3.  **Finalize the restore**
 
-    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalize_restore) endpoint. This step performs the following actions:
-    - Moves your original branch's computes to the new branch and restarts the computes
-    - Renames the new branch to original branch's name
-    - Renames the original branch to `<branch_name> (old)`.
+    If you're satisfied with the data on the new branch, finalize the restore operation using the [Finalize restore](https://api-docs.neon.tech/reference/finalizerestorebranch) endpoint. This step performs the following actions:
+    - Moves your original branch's computes to the new branch and restarts the computes.
+    - Renames the new branch to original branch's name.
+    - Renames the original branch to `<branch_name> (old)`. Other snapshots you may have taken remain attached to this branch.
 
     ```bash
     curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/finalize_restore" \
@@ -373,6 +320,8 @@ Use this option if you need to inspect the restored data before you switch over 
     Parameters:
     - `project_id`: The Neon project ID.
     - `branch_id`: The branch ID of the branch created by the snapshot restore operation.
+
+Related API references: [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)
 
 </TabItem>
 

@@ -280,7 +280,7 @@
 - [Secure your data with Stytch and Neon RLS](https://neon.com/llms/guides-neon-rls-stytch.txt): Implement Row-level Security policies in Postgres using Stytch and Neon RLS
 - [Secure your data with SuperTokens and Neon RLS](https://neon.com/llms/guides-neon-rls-supertokens.txt): Implement Row-level Security policies in Postgres using SuperTokens and Neon RLS
 - [Secure your data with WorkOS and Neon RLS](https://neon.com/llms/guides-neon-rls-workos.txt): Implement Row-level Security policies in Postgres using WorkOS and Neon RLS
-- [Simplify RLS with Drizzle](https://neon.com/llms/guides-neon-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
+- [Simplify RLS with Drizzle](https://neon.com/llms/guides-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
 - [Stream changes from your Neon database to anywhere](https://neon.com/llms/guides-sequin.txt): Learn how to capture and stream changes and rows from your database to anywhere with Sequin
 - [Stream database changes in real-time with Prisma Pulse](https://neon.com/llms/guides-logical-replication-prisma-pulse.txt): Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database
 - [The Neon Datadog integration](https://neon.com/llms/guides-datadog.txt): Send metrics and logs from Neon Postgres to Datadog
@@ -326,7 +326,7 @@
 - [AI Rules Neon Serverless Driver](https://neon.com/llms/ai-ai-rules-neon-serverless.txt): Context rules for AI tools to help implement the Neon Serverless driver
 - [AI Rules and Prompts](https://neon.com/llms/ai-ai-rules.txt): Enhance your AI development experience with Neon-specific context rules
 - [AI Rules: Neon Auth](https://neon.com/llms/ai-ai-rules-neon-auth.txt): Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
-- [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-neon-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
+- [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
 - [AI Starter Kit](https://neon.com/llms/ai-ai-intro.txt): Resources for building AI applications with Neon Postgres
 - [Azure Data Studio Notebooks](https://neon.com/llms/ai-ai-azure-notebooks.txt): Use Azure Data Studio Notebooks with Neon for vector similarity search
 - [Connect MCP Clients to Neon](https://neon.com/llms/ai-connect-mcp-clients-to-neon.txt): Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, Windsurf and Zed to your Neon Postgres database.

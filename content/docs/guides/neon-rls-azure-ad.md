@@ -3,7 +3,7 @@ title: Secure your data with Azure Active Directory and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Azure Active Directory
   and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.468Z'
+updatedOn: '2025-08-11T00:30:08.260Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-azure-ad
   - /docs/guides/neon-authorize-azure-ad
@@ -16,7 +16,7 @@ redirectFrom:
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 

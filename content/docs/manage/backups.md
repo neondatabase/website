@@ -2,7 +2,7 @@
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
 enableTableOfContents: true
-updatedOn: '2025-07-30T22:35:16.153Z'
+updatedOn: '2025-08-12T11:49:07.419Z'
 ---
 
 <InfoBlock>
@@ -35,11 +35,11 @@ By default, Neon projects retain **1 day** of history. You can increase your res
 | [Scale](/docs/introduction/plans#scale)       | 14 days              |
 | [Business](/docs/introduction/plans#business) | 30 days              |
 
-With this strategy, the only required action is setting your desired restore window. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
+With this strategy, the only required action is setting your desired **restore window** in your project's settings. Please keep in mind that increasing your restore window also increases storage, as changes to your data are retained for a longer period.
 
 ![Restore window](/docs/manage/history_retention.png)
 
-    To get started, see [Instant restore](/docs/introduction/branch-restore).
+To get started, see [Instant restore](/docs/introduction/branch-restore).
 
 ## Backups with `pg_dump`
 

@@ -20,6 +20,7 @@ const styles = {
     960: 'max-w-[960px] md:px-5',
     832: 'max-w-[832px]',
     768: 'max-w-3xl',
+    640: 'max-w-[640px]',
     576: 'max-w-[576px]',
   },
 };

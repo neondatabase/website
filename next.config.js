@@ -382,6 +382,16 @@ const defaultConfig = {
         destination: '/docs/local/neon-local-connect',
         permanent: true,
       },
+      {
+        source: '/flow',
+        destination: '/branching',
+        permanent: true,
+      },
+      {
+        source: '/flow/:path*',
+        destination: '/branching/:path*',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

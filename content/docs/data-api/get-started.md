@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-07-31T13:27:49.715Z'
+updatedOn: '2025-08-13T12:14:29.588Z'
 tag: beta
 ---
 
@@ -66,13 +66,13 @@ The security model consists of two parts:
 
 ### Neon Auth (automatically configured)
 
-Neon Auth manages user authentication, generating JWT tokens for secure API requests.
+[Neon Auth](/docs/neon-auth/overview) manages user authentication, generating JWT tokens for secure API requests.
 
 **What you need to do**:
 
-- Add Neon Auth keys to your app's environment variables.
+- Add Neon Auth keys to your app's environment variables. See [Get your Neon Auth keys](/docs/neon-auth/quick-start/nextjs#add-neon-auth-to-a-project).
 - Include JWT tokens in Data API requests.
-- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up.
+- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up. See [Neon Auth SDKs](/docs/neon-auth/sdk/nextjs/overview). There are SDKs for Next.js and React.
 
 > You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
 
@@ -89,12 +89,12 @@ CREATE POLICY "user_can_access_own_data" ON your_table
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-We recommend using [Drizzle ORM](/docs/guides/neon-rls-drizzle) to help simplify writing RLS policies for the Data API.
+We recommend using [Drizzle ORM](/docs/guides/rls-drizzle) to help simplify writing RLS policies for the Data API.
 
 <Admonition type="info" title="About auth.user_id()">
 The `auth.user_id()` function extracts the user's ID from the JSON Web Token (JWT) issued by [Neon Auth](/docs/guides/neon-auth). The Data API validates this token, making the user's ID available to your RLS policies for enforcing per-user access.
 
-For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/neon-rls-drizzle) for a simpler approach.
+For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
 </Admonition>
 
 ## Using the Data API

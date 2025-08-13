@@ -6,7 +6,7 @@ enableTableOfContents: true
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth
-updatedOn: '2025-07-22T11:08:24.052Z'
+updatedOn: '2025-08-13T10:33:23.096Z'
 ---
 
 <InfoBlock>
@@ -39,7 +39,7 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 #### Run the setup wizard
 
 \`\`\`bash
-npx @stackframe/init-stack@latest
+npx @stackframe/init-stack@latest --no-browser
 \`\`\`
 
 This sets up auth routes, layout wrappers, and handlers automatically for Next.js (App Router).

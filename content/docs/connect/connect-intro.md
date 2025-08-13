@@ -2,12 +2,22 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.226Z'
+updatedOn: '2025-08-05T16:14:59.260Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
 
 For integrating Neon with different frameworks, languages, and platforms, refer to our [Guides](/docs/guides/guides-intro) documentation.
+
+## Choose a connection type
+
+To help understand which driver and connection type you need, see:
+
+<DetailIconCards>
+
+<a href="/docs/connect/choose-connection" description="How to select the right driver and connection type for your application" icon="network">Choose a driver and connection type</a>
+
+</DetailIconCards>
 
 ## Connect from clients and applications
 
@@ -15,9 +25,9 @@ Learn how to establish a connection to Neon from any application.
 
 <DetailIconCards>
 
-<a href="/docs/connect/choose-connection" description="How to select the right driver and connection type for your application" icon="network">Choose a driver and connection type</a>
-
 <a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
+
+<a href="/docs/local/neon-local-connect" description="Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf" icon="code">Connect locally</a>
 
 <a href="/docs/serverless/serverless-driver" description="Connect to Neon from serverless environments over HTTP or WebSockets" icon="audio-jack">Neon serverless driver</a>
 
