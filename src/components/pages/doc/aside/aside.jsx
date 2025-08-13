@@ -7,7 +7,6 @@ import TableOfContents from 'components/shared/table-of-contents';
 
 const Aside = ({
   isTemplate,
-  isDocsIndex, // eslint-disable-line no-unused-vars
   isChangelog,
   enableTableOfContents,
   tableOfContents,
@@ -40,7 +39,6 @@ const Aside = ({
 
 Aside.propTypes = {
   isTemplate: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
