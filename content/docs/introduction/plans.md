@@ -20,7 +20,7 @@ Neon offers plans to support you at every stage—from your first prototype to p
 Start for free, then **pay only for what you use** as your needs grow.
 
 <Admonition type="note">
-The plans on this page are Neon's usage-based pricing plans, introduced **August 13, 2025**. If you joined earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). See [Change your plan](/docs/introduction/manage-billing#change-your-plan) to switch. Free plan users were automatically moved to the new plan described below.
+The plans on this page are Neon's usage-based pricing plans, introduced **August 14, 2025**. If you joined earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). See [Change your plan](/docs/introduction/manage-billing#change-your-plan) to switch. Free plan users were automatically moved to the new plan described below.
 </Admonition>
 
 ---
@@ -33,7 +33,7 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | --------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
 | [Price](#price)                                     | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
 | [Who it's for](#who-its-for)                        | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                   |
-| [Projects](#projects)                               | 10                             | 5,000                                | 5,000 (can be increased on request)                                               |
+| [Projects](#projects)                               | 10                             | 100                                  | 1,000 (can be increased on request)                                               |
 | [Branches](#branches)                               | 10/project                     | 10/project                           | 25/project                                                                        |
 | [Extra branches](#extra-branches)                   | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
 | [Compute](#compute)                                 | 50 CU-hours                    | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
@@ -113,8 +113,8 @@ Example: Plan includes 10 branches/project. You create 2 extra branches for 5 ho
 
 Branch maximum:
 
-- **Launch**: 25 branches/project
-- **Scale**: 100 branches/project
+- **Launch**: 5,000 branches/project
+- **Scale**: 5,000 branches/project
 
 ### ☑ Compute
 
