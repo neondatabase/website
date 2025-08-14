@@ -234,7 +234,7 @@ _All commands below are available under the “Neon Local Connect:” prefix in 
 
 Once connected, the Neon Local Connect panel provides quick access to common database operations:
 
-### Branch Management:
+### Branch management:
 
 - **Reset from Parent Branch:** Instantly reset your branch to match its parent's state  
   [Docs: Branch reset](/docs/guides/reset-from-parent)
