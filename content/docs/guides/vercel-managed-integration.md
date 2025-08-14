@@ -103,6 +103,16 @@ Once enabled, the flow looks like this:
 
    ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
+    To apply schema changes automatically, add migration commands to your Vercel build configuration:
+
+    1. Go to **Vercel Dashboard → Settings → Build and Deployment Settings**
+    1. Enable **Override** and add your build commands, including migrations, for example:
+       
+       ```bash
+       npx prisma migrate deploy && npm run build
+       ```
+This ensures schema changes in your commits are applied to each preview deployment's database branch.
+
 ### Test the setup
 
 To verify preview branching works:
