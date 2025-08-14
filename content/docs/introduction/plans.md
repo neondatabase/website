@@ -36,7 +36,7 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Projects](#projects)                                 | 10                             | 100                                  | 1,000 (can be increased on request)                                               |
 | [Branches](#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                        |
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
-| [Compute](#compute)                                   | 50 CU-hours                    | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
+| [Compute](#compute)                                   | 50 CU-hours/project            | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (5 seconds to always on)                                             |
 | [Storage](#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
@@ -66,7 +66,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### ☑ Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 10 projects, 50 CU-hours/month, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 10 projects, 50 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
@@ -147,11 +147,11 @@ Examples:
 - 2 CU for 3 hours = 6 CU-hours
 - 8 CU for 2 hours = 16 CU-hours
 
-**Free**: 50 CU-hours/month (enough for a 0.25 CU compute for 200 hours/month).  
+**Free**: 50 CU-hours/project/month (enough to a 0.25 CU compute in a project for 200 hours/month).  
 **Launch**: $0.14/CU-hour  
 **Scale**: $0.26/CU-hour
 
-> All computes across all projects count toward usage. Each branch has a read-write compute by default; [read replicas](/docs/reference/glossary#read-replica) add read-only computes.
+> All computes in your project count toward usage. Each branch has a read-write compute by default; [read replicas](/docs/reference/glossary#read-replica) add read-only computes.
 
 #### Compute with autoscaling
 
