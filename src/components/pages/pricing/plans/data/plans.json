@@ -67,7 +67,7 @@
       "feature": {
         "title": "Rates"
       },
-      "free": "50 CU-hours included",
+      "free": "50 CU-hours<span>Per Project</span>",
       "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
       "scale": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
     },
@@ -198,7 +198,15 @@
       "launch": false,
       "scale": "Included"
     },
-
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Support"
+      },
+      "free": "Community",
+      "launch": "Billing",
+      "scale": "Standard"
+    },
     {
       "rows": "2",
       "feature": {
