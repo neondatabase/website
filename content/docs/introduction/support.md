@@ -14,7 +14,7 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 | :---------------- | :----------- |
 | Free plan         | Community    |
 | Launch plan       | Billing      |
-| Scale plan        | Production   |
+| Scale plan        | Standard     |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
@@ -24,16 +24,16 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                              | Community | Billing | Production |
-| :---------------------------------------------------------------------------- | :-------: | :-----: | :--------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check; |  &check;   |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; |  &check;   |
-| [Support tickets](#support-tickets)                                           |     -     | &check; |  &check;   |
-| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    |  &check;   |
-| [Video chat](#video-chat)                                                     |     -     |    -    |     \*     |
-| [Slack channel](#slack-channel)                                               |     -     |    -    |    \*\*    |
-| [SLAs](#slas)                                                                 |     -     |    -    |  &check;   |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |    \*\*    |
+| Support channels                                                              | Community | Billing | Standard |
+| :---------------------------------------------------------------------------- | :-------: | :-----: | :------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check; | &check;  |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; | &check;  |
+| [Support tickets](#support-tickets)                                           |     -     | &check; | &check;  |
+| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    | &check;  |
+| [Video chat](#video-chat)                                                     |     -     |    -    |    \*    |
+| [Slack channel](#slack-channel)                                               |     -     |    -    |   \*\*   |
+| [SLAs](#slas)                                                                 |     -     |    -    | &check;  |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |   \*\*   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
@@ -78,19 +78,19 @@ You can expect an initial response time of 3 business days, Monday through Frida
 
 ### Prioritized support tickets
 
-Support tickets opened by Production support plan customers are given top priority by the Neon Support team. Refer to [Support tickets](#support-tickets) for how to open a support ticket.
+Support tickets opened by Standard support plan customers are given top priority by the Neon Support team. Refer to [Support tickets](#support-tickets) for how to open a support ticket.
 
 ### Video chat
 
-Video chat is available to Production support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
+Video chat is available to Standard support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Production support plan customers. You can request one from our [sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Standard support plan customers. You can request one from our [sales team](/contact-sales).
 
 ### SLAs
 
-Support Level Agreements (SLAs) are available to Scale plan customers. If you are interested in exploring an SLA, [get in touch with our sales team](/contact-sales).
+If you are interested in exploring a Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
 
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an SLA, you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
@@ -98,7 +98,7 @@ To receive support under an SLA, you must submit a ticket through the Neon Conso
 
 ### Dedicated Support Engineer
 
-The Dedicated Support Engineer option is available to Production customers. A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
+TA dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
@@ -122,11 +122,11 @@ Neon aims to respond to all **paid subscription** requests in a timely manner an
 
 #### Target response times
 
-The table below outlines Neon’s guidelines for the various support tiers of our Production support plan.
+The table below outlines Neon’s guidelines for the various support tiers of our Standard support plan.
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-|    Severity Level     | Production Standard                       | Production Gold                          | Production Platinum                      |
+|    Severity Level     | Standard                                  | Gold                                     | Platinum                                 |
 | :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                | \< 1 hour                                |
 |   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 | \< 4 hours                               |

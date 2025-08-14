@@ -48,6 +48,7 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                |
+| [Support](#support)                                   | Community                      | Billing                              | Standard                                                                          |
 
 ## Plan features
 
@@ -274,6 +275,16 @@ Security features:
 ### ☑ Uptime SLA
 
 Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
+
+### ☑ Support
+
+Support level by plan:
+
+- **Free**: Community support
+- **Launch**: Billing support
+- **Scale**: Standard support
+
+See [Support](/docs/introduction/support) for details.
 
 ## Usage-based cost examples
 
