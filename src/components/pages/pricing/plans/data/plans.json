@@ -198,7 +198,15 @@
       "launch": false,
       "scale": "Included"
     },
-
+    {
+      "rows": "1",
+      "feature": {
+        "title": "Support"
+      },
+      "free": "Community",
+      "launch": "Billing",
+      "scale": "Standard"
+    },
     {
       "rows": "2",
       "feature": {
