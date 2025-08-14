@@ -5,113 +5,169 @@ subtitle: Use Docker environments to connect to Neon and manage branches automat
 updatedOn: '2025-06-04T16:43:36.537Z'
 ---
 
-[Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. By default, it automatically creates a new database branch when the container starts and deletes it when the container stops.
+[Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:
+
+1. **Connecting to existing Neon branches** - Connect your app to any existing branch in your Neon project
+2. **Connecting to ephemeral Neon branches** - Connect your app to a new ephemeral database branch that is instantly created when the Neon Local container starts and deleted when the container stops
 
 Your application connects to a local Postgres endpoint, while Neon Local handles routing and authentication to the correct project and branch. This removes the need to update connection strings when working across database branches.
 
-## Docker compose instructions
+## Connect to existing Neon branch
 
-You can add the Neon Local by adding the following to your `docker-compose.yml` file.
+To connect to an existing Neon branch, provide the `BRANCH_ID` environment variable to the container. This allows you to work with a specific branch without creating a new one.
 
-<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
-
-```shell
-  db:
-    image: neondatabase/neon_local:latest
-    ports:
-      - '5432:5432'
-    environment:
-      NEON_API_KEY: ${NEON_API_KEY}
-      NEON_PROJECT_ID: ${NEON_PROJECT_ID}
-      DRIVER: serverless
-```
+### Docker run
 
 ```shell
-  db:
-    image: neondatabase/neon_local:latest
-    ports:
-      - '5432:5432'
-    environment:
-      NEON_API_KEY: ${NEON_API_KEY}
-      NEON_PROJECT_ID: ${NEON_PROJECT_ID}
-      DRIVER: postgres
+docker run \
+  --name db \
+  -p 5432:5432 \
+  -e NEON_API_KEY=<your_neon_api_key> \
+  -e NEON_PROJECT_ID=<your_neon_project_id> \
+  -e BRANCH_ID=<your_branch_id> \
+  neondatabase/neon_local:latest
 ```
 
-</CodeTabs>
+### Docker Compose
+
+```yaml
+db:
+  image: neondatabase/neon_local:latest
+  ports:
+    - '5432:5432'
+  environment:
+    NEON_API_KEY: ${NEON_API_KEY}
+    NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+    BRANCH_ID: ${BRANCH_ID}
+```
+
+## Ephemeral database branches for development and testing
+
+To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database — without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
+
+### Docker run
+
+```shell
+docker run \
+  --name db \
+  -p 5432:5432 \
+  -e NEON_API_KEY=<your_neon_api_key> \
+  -e NEON_PROJECT_ID=<your_neon_project_id> \
+  -e PARENT_BRANCH_ID=<parent_branch_id> \
+  neondatabase/neon_local:latest
+```
+
+### Docker Compose
+
+```yaml
+db:
+  image: neondatabase/neon_local:latest
+  ports:
+    - '5432:5432'
+  environment:
+    NEON_API_KEY: ${NEON_API_KEY}
+    NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+    PARENT_BRANCH_ID: ${PARENT_BRANCH_ID}
+```
 
 ## Docker run instructions
 
-You can also run the Neon Local container with the following Docker run command.
-
-<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+Run the Neon Local container using the following `docker run` command:
 
 ```shell
 docker run \
   --name db \
   -p 5432:5432 \
-  -e NEON_API_KEY= <neon_api_key> \
-  -e NEON_PROJECT_ID=<neon_project_id> \
-  -e DRIVER=serverless \
+  -e NEON_API_KEY=<your_neon_api_key> \
+  -e NEON_PROJECT_ID=<your_neon_project_id> \
   neondatabase/neon_local:latest
 ```
+
+## Docker Compose instructions
+
+Add Neon Local to your `docker-compose.yml`:
+
+```yaml
+db:
+  image: neondatabase/neon_local:latest
+  ports:
+    - '5432:5432'
+  environment:
+    NEON_API_KEY: ${NEON_API_KEY}
+    NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+```
+
+## Multi-driver support
+
+The Neon Local container now supports both the `postgres` and Neon `serverless` drivers simultaneously through a single connection string. You no longer need to specify a driver or configure different connection strings for different drivers.
+
+## Connecting your app (Postgres driver)
+
+Connect to Neon Local using a standard Postgres connection string.
+
+### Docker run
 
 ```shell
-docker run \
-  --name db \
-  -p 5432:5432 \
-  -e NEON_API_KEY= <neon_api_key> \
-  -e NEON_PROJECT_ID=<neon_project_id> \
-  -e DRIVER=postgres \
-  neondatabase/neon_local:latest
+postgres://neon:npg@localhost:5432/<database_name>?sslmode=no-verify
 ```
 
-</CodeTabs>
+### Docker compose
 
-## Connect
+```shell
+postgres://neon:npg@db:5432/<database_name>?sslmode=no-verify
+```
 
-Connect using either the Neon [serverless driver](/docs/serverless/serverless-driver) or any other Postgres client.
+## Connecting your app (Neon serverless driver)
 
-<CodeTabs labels={["Neon serverless driver", "node-postgres"]}>
+Connect using the Neon [serverless driver](/docs/serverless/serverless-driver).
+
+### Docker run
 
 ```javascript
 import { neon, neonConfig } from '@neondatabase/serverless';
-neonConfig.fetchEndpoint = 'http://db:5432/sql';
 
-const sql = neon('postgres://neon:npg@db:5432/neondb');
+neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
+
+const sql = neon('postgres://neon:npg@localhost:5432/<database_name>');
 ```
+
+### Docker compose
 
 ```javascript
-import pg from 'pg';
-const { Pool } = pg;
-const connectionString = 'postgres://neon:npg@db:5432/neondb?sslmode=no-verify';
+import { neon, neonConfig } from '@neondatabase/serverless';
 
-const pool = new Pool({ connectionString });
+neonConfig.fetchEndpoint = 'http://db:5432/sql';
+
+const sql = neon('postgres://neon:npg@db:5432/<database_name>');
 ```
 
-</CodeTabs>
+No additional environment variables are needed - the same Docker configuration works for both drivers:
 
-## Configuration options
+```shell
+docker run \
+  --name db \
+  -p 5432:5432 \
+  -e NEON_API_KEY=<your_neon_api_key> \
+  -e NEON_PROJECT_ID=<your_neon_project_id> \
+  neondatabase/neon_local:latest
+```
 
-| Key                | Configuration                                                                                  | Required | Default               |
-| ------------------ | ---------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| `NEON_API_KEY`     | Generate a Neon API key by following instructions at: [Manage API Keys](/docs/manage/api-keys) | Yes      | n/a                   |
-| `NEON_PROJECT_ID`  | Your project ID, found in the Neon console under **Settings** > **General**                    | Yes      | n/a                   |
-| `DRIVER`           | The type of database driver. Options: `serverless` or `postgres`                               | No       | `postgres`            |
-| `PARENT_BRANCH_ID` | The parent branch to use when creating a local child branch.                                   | No       | `main` / `production` |
-| `DELETE_BRANCH`    | Whether to delete the branch when the container stops. Options: `true` or `false`              | No       | `true`                |
+## Environment variables and configuration options
 
-## Persistent Neon Branch per Git Branch
+| Variable           | Description                                                                       | Required | Default                       |
+| ------------------ | --------------------------------------------------------------------------------- | -------- | ----------------------------- |
+| `NEON_API_KEY`     | Your Neon API key. [Manage API Keys](/docs/manage/api-keys)                       | Yes      | N/A                           |
+| `NEON_PROJECT_ID`  | Your Neon project ID. Found under Project Settings → General in the Neon console. | Yes      | N/A                           |
+| `BRANCH_ID`        | Connect to an existing Neon branch. Mutually exclusive with `PARENT_BRANCH_ID`.   | No       | N/A                           |
+| `PARENT_BRANCH_ID` | Create ephemeral branch from parent. Mutually exclusive with `BRANCH_ID`.         | No       | your project's default branch |
+| `DRIVER`           | **Deprecated** - Both drivers now supported simultaneously.                       | No       | N/A                           |
+| `DELETE_BRANCH`    | Set to `false` to persist branches after container shutdown.                      | No       | `true`                        |
 
-If you want Neon Local to create a branch that matches your Git branch, provide two volume mounts:
+## Persistent Neon branch per Git branch
 
-1. A mount that persists Neon branch metadata within your project
-2. A mount that exposes the current Git branch name
+To persist a branch per Git branch, add the following volume mounts:
 
-<Admonition type="note">
-This will automatically create a `.neon_local` folder in your project to store branch metadata. Be sure to add this folder to your `.gitignore` to avoid committing database connection information to version control.
-</Admonition>
-
-```yml
+```yaml
 db:
   image: neondatabase/neon_local:latest
   ports:
@@ -124,8 +180,12 @@ db:
     - ./.git/HEAD:/tmp/.git/HEAD:ro,consistent
 ```
 
+<Admonition type="note">
+This will create a `.neon_local` directory in your project to store metadata. Be sure to add `.neon_local/` to your `.gitignore` to avoid committing database information.
+</Admonition>
+
 ## Git integration using Docker on Mac
 
-If using Docker Desktop for Mac, make sure that your Virtual Machine is set to use gRPC FUSE, not VirtioFS. This allows Neon Local to detect git branch changes. There is currently a bug with VirtioFS that can prevent containers from being properly updated when local files change while the container is running.
+If using Docker Desktop for Mac, ensure that your VM settings use **gRPC FUSE** instead of **VirtioFS**. There is currently a known bug with VirtioFS that prevents proper branch detection and live updates inside containers.
 
 ![Docker Desktop are set to gRPC FUSE](/docs/local/neon-local-docker-settings.jpg)
