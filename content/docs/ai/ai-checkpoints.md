@@ -9,12 +9,12 @@ updatedOn: '2025-08-12T14:09:12.290Z'
 
 ## Overview
 
-This guide is for platforms building AI agents and code generation tools (like Replit Agent, v0, Lovable, Create.xyz). It explains how to implement database checkpointing using Neon's Snapshot API with the **active branch pattern** - an approach that avoids the complexity of traditional database branching. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
+This guide is for platforms building AI agents and code generation tools (like Replit Agent, v0, Lovable, Anything). It explains how to implement database checkpointing using Neon's Snapshot API an active branch pattern, which maintains a persistent root branch for production while using snapshots for checkpoints and temporary branches for previews. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
 
 This pattern works whether you manage Neon projects for your users (embedded approach like Replit) or users bring their own Neon accounts (BYON approach like v0).
 
 <Admonition type="tip" title="Quick guide">
-Use one root branch (main) as your permanent "active" branch with a stable connection string. Create snapshots for checkpoints, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting.
+Use one root branch as your persistent "active" branch with a stable connection string. Create snapshots for checkpoints. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches.
 </Admonition>
 
 ## Why snapshots for checkpoints
@@ -57,24 +57,24 @@ Snapshots solve these problems:
 - **Project**: Neon project that owns branches, computes, and snapshots
 - **Branch**: An isolated database environment with its own data and schema that you can connect to and modify
 - **Snapshot**: An immutable, point-in-time backup of a branch's schema and data. Read-only until restored - you can query snapshot data but cannot modify it directly
-- **Root Branch**: A branch with no parent (typically named `main` or `production`). Required for snapshot restores with `finalize_restore: true`
+- **Root branch**: A branch with no parent (typically named `main` or `production`). Required for snapshot restores with `finalize_restore: true`
 - **Operations**: Backend operations that return operation IDs you must poll to completion
 
 ### Pattern-specific terminology
 
-- **Active branch**: The single root branch your agent always connects to. Connection string never changes
-- **Preview branch**: Temporary branch created from a snapshot for safe exploration
+- **Active branch**: The persistent root branch that maintains your agent's production state. Connection string never changes even when data is replaced via restore. Preview branches may be created alongside for temporary exploration.
+- **Backup branch**: Automatically created when restoring with `finalize_restore: true`. The previous active branch becomes `branch-name (old)` and can be safely deleted after verifying the restore.
+- **Preview branch**: Temporary branch created from a snapshot for safe exploration, to preview a checkpoint
 - **Meta database**: Separate database/table that stores checkpoint metadata (prompt text, `snapshot_id`, etc.). Keeps audit trail across restores
 
 ## Core concept: The active branch pattern
 
-Every agent project maps to one Neon project with a single "active" branch:
+Every agent project maps to one Neon project with a persistent "active" branch as its production database:
 
 **The active branch:**
 
-- Is the only branch the agent ever connects to
+- Gets its data replaced during rollbacks (but keeps the same connection string)
 - Maintains a permanent connection string that never changes
-- Gets its data replaced during rollbacks (but keeps the same connection)
 - Must be a root branch (no parent) for snapshot restores to work properly
 
 **The snapshots:**
@@ -82,6 +82,7 @@ Every agent project maps to one Neon project with a single "active" branch:
 - Capture point-in-time states of the active branch
 - Store only incremental changes (cost-efficient)
 - Can be deleted in any order (no dependencies)
+- Can be restored from either to the active branch, or a temporary preview branch
 
 <Admonition type="note" title="todo">
 **Visual Diagram: Active Branch Pattern Architecture** - Shows one-to-one project mapping, the active branch with permanent connection string, multiple snapshots on a timeline, and preview branches with temporary connection strings
@@ -90,6 +91,7 @@ Every agent project maps to one Neon project with a single "active" branch:
 ```text
 One Agent Project = One Neon Project:
 ├── Active Branch (main/root) → postgresql://user@host/db (never changes)
+├── main (old) → backup from previous restore [can be deleted]
 ├── Snapshot 1 (checkpoint at t1)
 ├── Snapshot 2 (checkpoint at t2)
 └── Preview Branch (temporary, created from snapshot)
@@ -105,12 +107,12 @@ Create a snapshot to capture the current database state using the [snapshot endp
 POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 ```
 
-**Path Parameters:**
+**Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `branch_id` (string, required): The branch ID
 
-**Query Parameters:**
+**Query parameters:**
 
 - `lsn` (string): Target Log Sequence Number. Cannot be used with `timestamp`
 - `timestamp` (string): Target timestamp (RFC 3339). Cannot be used with `lsn`
@@ -140,16 +142,16 @@ Restore any snapshot to the active branch using the [restore endpoint](https://a
 POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
 ```
 
-**Path Parameters:**
+**Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
 
-**Body Parameters:**
+**Body parameters:**
 
 - `name` (string): A name for the newly restored branch. If omitted, a default name will be generated
-- `target_branch_id` (string): The ID of the branch to restore the snapshot into. If not specified, the branch from which the snapshot was originally created will be used. **Always set to your root branch ID to preserve connection strings**
-- `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move any associated computes to the new branch. Defaults to `false`. **Always set to `true` for the active branch pattern**
+- `target_branch_id` (string): The ID of the branch to restore the snapshot into. If not specified, the branch from which the snapshot was originally created will be used. **Set to your root branch ID for rollbacks to preserve connection strings**
+- `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move any associated computes to the new branch. Defaults to `false`. **Set to `true` when restoring to the active branch for rollbacks, `false` for preview branches**
 
 <Admonition type="warning" title="Connection Warning">
 Do not connect to the database until all operations complete. Any connection attempt before operations finish will connect to the old database state, not your restored snapshot.
@@ -167,6 +169,10 @@ Do not connect to the database until all operations complete. Any connection att
   "finalize_restore": true // Moves computes and preserves connection string
 }
 ```
+
+Note: This shows a rollback to the active branch. For preview environments, you would omit `target_branch_id` and set `finalize_restore: false`.
+
+**Important:** When restoring with `finalize_restore: true`, your previous active branch becomes a backup branch named `production (old)` or similar. This backup branch preserves your pre-restore state but should be deleted during cleanup to avoid unnecessary costs.
 
 After calling the restore API:
 
@@ -214,6 +220,7 @@ See `lib/neon/apply-snapshot.ts` and `lib/neon/operations.ts` in the demonstrati
 - **Connection to old state**: Ensure all operations completed
 - **Target branch not found**: Verify branch exists
 - **Operation timeout**: Retry with longer timeout
+- **Accumulating backup branches**: Delete old backup branches (e.g., `production (old)`) after successful restore verification
 
 #### Preview environments
 
@@ -250,7 +257,7 @@ Remove a snapshot using the [delete endpoint](https://api-docs.neon.tech/referen
 DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 ```
 
-**Path Parameters:**
+**Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
@@ -263,7 +270,7 @@ Rename a snapshot using the [update endpoint](https://api-docs.neon.tech/referen
 PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}
 ```
 
-**Path Parameters:**
+**Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID
@@ -284,6 +291,8 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 - Delete snapshots when no longer reachable by users
 - Unlike branches, snapshots can be deleted in any order without dependency issues
+- Delete backup branches created during restores (named like `production (old)`)
+- These backup branches accumulate with each restore and consume storage
 - Reduces snapshot management fees while shared storage remains
 - Set `expires_at` for automatic cleanup or delete manually as needed
 - Consider removing snapshots after merging features or completing rollback testing
@@ -298,6 +307,7 @@ Proper cleanup reduces costs and keeps your project manageable:
 | Delete checkpoint  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
 | Update checkpoint  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
 | Poll operation     | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        |
+| List branches (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                |
 
 Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 
@@ -307,7 +317,8 @@ Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 - [ ] Designate the root branch (main/production) as the "active" branch
 - [ ] Store the active branch connection string and branch ID
 - [ ] Create snapshots at key points
-- [ ] Restore with `finalize_restore: true` and `target_branch_id` set
+- [ ] For rollbacks: restore with `finalize_restore: true` and `target_branch_id` set to root branch
+- [ ] For previews: restore with `finalize_restore: false` to create temporary branches
 - [ ] Poll all operation IDs to terminal states before connecting
 - [ ] Set up automatic cleanup with expiration dates
 - [ ] Document your restore window policy, when snapshots are set to expire
@@ -315,10 +326,10 @@ Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 ## Best practices
 
 - **Root branch only**: Use the project's root branch as the active branch
-- **Always set target_branch_id**: Prevents accidental restores to backup branches
+- **Set target_branch_id for rollbacks**: When restoring to the active branch, always specify target_branch_id to prevent accidental restores
 - **Poll operations**: Wait for terminal states before connecting to the database
 - **Snapshot naming**: Use conventions like `checkpoint-{feature}-{timestamp}`
-- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches
+- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete backup branches (e.g., `production (old)`) created during restores
 - **Meta database**: Keep checkpoint metadata separate to preserve audit trail
 
 ## Common questions
@@ -329,6 +340,9 @@ A: With `finalize_restore: true`, Neon moves compute resources to the new state.
 **Q: Why must the active branch be a root branch?**  
 A: Snapshot restores with `finalize_restore: true` currently require root branches. This is a platform requirement.
 
+**Q: What happens to my active branch when I restore?**  
+A: When restoring with `finalize_restore: true`, your current active branch becomes a backup branch with "(old)" appended to its name. This preserves your pre-restore state temporarily, but you should delete it after verifying the restore to avoid storage costs.
+
 **Q: What if we need multiple preview environments?**
 A: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
 
@@ -337,6 +351,6 @@ A: The time period during which you can restore, depending on snapshot expiratio
 
 ## Summary
 
-The active branch pattern with Neon snapshots provides a simple, reliable checkpoint solution for AI agent platforms. By using a single root branch as your permanent connection point and snapshots for checkpoints, you get stable connection strings, instant rollbacks, and independent checkpoints that can be deleted in any order. The implementation is straightforward: create snapshots, restore with `finalize_restore: true`, poll operations to completion, then connect. See the [demo repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo) for a complete example.
+The active branch pattern with Neon snapshots provides a simple, reliable checkpoint solution for AI agent platforms. By maintaining a persistent root branch for production operations and using snapshots for checkpoints, you get stable connection strings for your main database, instant rollbacks, and the flexibility to create preview branches when needed. The implementation is straightforward: create snapshots, restore with `finalize_restore: true` to the active branch for rollbacks, or with `finalize_restore: false` for preview branches. Always poll operations to completion before connecting. See the [demo repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo) for a complete example.
 
 <NeedHelp />
