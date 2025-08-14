@@ -96,22 +96,23 @@ To enable:
 
 Once enabled, the flow looks like this:
 
-1. Developer pushes to feature branch → Vercel kicks off Preview Deployment.
-2. Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
-3. Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
-4. (Optional) Run migrations in build step so schema matches code.
+1.  Developer pushes to feature branch → Vercel kicks off Preview Deployment.
+2.  Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
+3.  Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
+4.  (Optional) Run migrations in build step so schema matches code.
 
-   ![Vercel build commands](/docs/guides/vercel_build_command.png)
+    ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
-    To apply schema changes automatically, add migration commands to your Vercel build configuration:
+        To apply schema changes automatically, add migration commands to your Vercel build configuration:
 
-    1. Go to **Vercel Dashboard → Settings → Build and Deployment Settings**
-    1. Enable **Override** and add your build commands, including migrations, for example:
-       
-       ```bash
-       npx prisma migrate deploy && npm run build
-       ```
-This ensures schema changes in your commits are applied to each preview deployment's database branch.
+        1. Go to **Vercel Dashboard → Settings → Build and Deployment Settings**
+        1. Enable **Override** and add your build commands, including migrations, for example:
+
+           ```bash
+           npx prisma migrate deploy && npm run build
+           ```
+
+    This ensures schema changes in your commits are applied to each preview deployment's database branch.
 
 ### Test the setup
 
