@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/sales-table.png'
 updatedOn: '2024-07-01T01:06:31+00:00'
 enableTableOfContents: true
 previousLink:
+  title: 'PostgreSQL GROUPING SETS'
+  slug: 'postgresql-tutorial/postgresql-grouping-sets'
+nextLink:
   title: 'PostgreSQL ROLLUP'
   slug: 'postgresql-tutorial/postgresql-rollup'
-nextLink:
-  title: 'PostgreSQL Subquery'
-  slug: 'postgresql-tutorial/postgresql-subquery'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CUBE` to generate multiple grouping sets.
