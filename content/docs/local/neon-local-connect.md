@@ -245,7 +245,7 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 - **Open Table View:** Browse your database schema and data in the Neon Console
 - **Launch PSQL:** Open a psql shell in the integrated terminal for direct SQL access
 
-### Built-in Database Tools (new in your IDE):
+### Built-in database tools (new in your IDE):
 
 - **Database Schema View:** Explore your database structure in the sidebar with expandable tree view
 - **Built-in SQL Editor:** Write and execute queries directly in your IDE with results display
