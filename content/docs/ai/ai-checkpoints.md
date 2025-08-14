@@ -299,15 +299,15 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## API quick reference
 
-| Operation          | Endpoint                                                             |
-| ------------------ | -------------------------------------------------------------------- |
-| Create checkpoint  | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   |
-| Restore checkpoint | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` |
-| List checkpoints   | `GET /api/v2/projects/{project_id}/snapshots`                        |
-| Delete checkpoint  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
-| Update checkpoint  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
-| Poll operation     | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        |
-| List branches (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                |
+| Operation                   | Endpoint                                                             |
+| --------------------------- | -------------------------------------------------------------------- |
+| Create checkpoint           | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   |
+| Restore checkpoint          | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` |
+| List checkpoints            | `GET /api/v2/projects/{project_id}/snapshots`                        |
+| Delete checkpoint           | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
+| Update checkpoint           | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
+| Poll operation              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        |
+| List branches (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         |
 
 Full documentation: [api-docs.neon.tech](https://api-docs.neon.tech)
 
