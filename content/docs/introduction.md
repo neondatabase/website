@@ -4,7 +4,7 @@ subtitle: Get started with Neon in just a few minutes.
 updatedOn: '2025-08-09T09:50:31.822Z'
 ---
 
-Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [generous free plan](https://console.neon.tech)
+Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
 
 <CTA title="Manage Neon from Cursor, Windsurf, and other AI tools ✨" 
 description="Manage Neon Postgres databases from your favorite AI tools using simple, conversational commands with Neon's MCP Server. <a href='/docs/ai/connect-mcp-clients-to-neon'>Learn how</a> ➡️" isIntro></CTA>

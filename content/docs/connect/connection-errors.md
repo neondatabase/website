@@ -186,7 +186,7 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable scale to zero. For instructions, see [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Neon Free Plan](/docs/introduction/plans#free-plan) users cannot disable scale to zero.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are on a paid plan, you can disable scale to zero. For instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Free plan](/docs/introduction/plans) users cannot disable scale to zero.
 
 ## Unsupported startup parameter
 

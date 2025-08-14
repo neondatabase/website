@@ -95,14 +95,13 @@ If you lose data due to an unintended deletion or some other event, you can rest
 
 Your **restore window** determines how far back Neon maintains a history of changes for each branch. By default, this is set to **1 day** to help you avoid unexpected storage costs. You can increase it up to:
 
-- 24 hours on the [Free plan](/docs/introduction/plans#free-plan)
-- 7 days on [Launch](/docs/introduction/plans#launch)
-- 14 days on [Scale](/docs/introduction/plans#scale)
-- 30 days on [Business](/docs/introduction/plans#business)
+- Up to 6 hours (or 1 GB) on the Free plan
+- Up to 7 days on Launch
+- Up to 30 days on Enterprise
 
 You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](/docs/manage/projects#configure-your-restore-window).
 
-<Admonition type="note">Increasing your restore window affects **all branches** in your project and increases [project storage](/docs/introduction/usage-metrics#storage). You can reduce it to zero to minimize cost.</Admonition>
+<Admonition type="note">Increasing your restore window affects **all branches** in your project and increases project storage. You can reduce it to zero to minimize cost.</Admonition>
 
 History is retained in the form of Write-Ahead-Log (WAL) records. As WAL records age out of the retention period, they are evicted from storage and no longer count toward project storage.
 

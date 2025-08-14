@@ -2,17 +2,14 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useFeatureFlagVariantKey, usePostHog } from 'posthog-js/react';
-import { useMemo } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
-import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
 
-import plansOriginal from './data/plans.json';
+import plans from './data/plans.json';
 import Features from './features';
 
 const scaleCardBorderVariants = {
@@ -33,53 +30,33 @@ const scaleCardBorderVariants = {
 
 const Hero = () => {
   const posthog = usePostHog();
-  const isComputePriceRaised =
-    useFeatureFlagVariantKey('website_growth_compute_price_rising') === 'show_0_24' && false;
-
-  const plans = useMemo(() => {
-    if (isComputePriceRaised) {
-      return plansOriginal.map((plan) => ({
-        ...plan,
-        features: plan.features.map((feature) => {
-          if (feature.id === 'compute_time') {
-            return {
-              ...feature,
-              info: 'Additional at $0.24 per compute hour',
-            };
-          }
-          return feature;
-        }),
-      }));
-    }
-
-    return plansOriginal;
-  }, [isComputePriceRaised]);
 
   return (
-    <section className="hero safe-paddings overflow-hidden pt-36 2xl:pt-[150px] xl:pt-[120px] lg:pt-[52px] md:pt-10">
-      <Container className="flex flex-col items-center" size="1344">
+    <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-[136px] lg:pt-[56px] md:pt-12">
+      <Container className="flex flex-col items-center" size="960">
         <Heading
-          className="text-center font-medium !leading-none tracking-tighter xl:text-6xl lg:text-[56px] md:!text-4xl"
+          className="text-center text-[72px] font-medium !leading-none tracking-tighter xl:!text-6xl md:!text-5xl"
           tag="h1"
           size="lg"
         >
           <span>Neon Pricing</span>
         </Heading>
-        <p className="mx-auto mt-3 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
-          Pricing plans that grow with you. From prototype to Enterprise.
+        <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+          Get started for free. Pay per usage as you grow.
         </p>
-        <div className="relative mx-auto mt-16 xl:mt-14 xl:max-w-[644px] lg:mt-11 md:mt-9">
+        <div className="relative mt-16 w-full lg:mt-14 md:mx-0 md:mt-10 md:w-full md:max-w-[524px]">
           <h2 className="sr-only">Neon pricing plans</h2>
-          <ul className="grid-gap relative z-10 grid grid-cols-4 gap-x-8 2xl:gap-x-6 xl:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
+          <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] lg:grid-cols-2 lg:gap-y-4 md:grid-cols-1 md:gap-y-6">
             {plans.map(
               (
                 {
                   planId,
                   type,
+                  title,
+                  subtitle,
                   highlighted = false,
                   price,
                   priceFrom = false,
-                  headerLinks,
                   description,
                   features,
                   otherFeatures,
@@ -89,50 +66,40 @@ const Hero = () => {
               ) => (
                 <li
                   className={clsx(
-                    'group relative flex min-h-full flex-col rounded-[10px] p-6 pt-5',
-                    !highlighted && 'bg-black-new'
+                    'group relative flex min-h-full flex-col rounded-[10px] px-5 pb-8 pt-5',
+                    highlighted ? '' : 'bg-black-new'
                   )}
                   key={index}
                 >
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col justify-between gap-14 lg:gap-[52px] md:gap-12">
                     <h3
                       className={clsx(
-                        'text-xl font-medium leading-none tracking-extra-tight',
-                        highlighted ? 'text-green-45' : 'text-white'
+                        'text-[18px] font-medium leading-none tracking-extra-tight lg:text-base',
+                        highlighted ? 'text-green-45' : 'text-gray-new-80'
                       )}
                     >
                       {type}
                     </h3>
-                    {headerLinks && (
-                      <p
-                        className={clsx(
-                          'text-sm font-light leading-none text-gray-new-50',
-                          '[&_a]:border-b [&_a]:border-[#85888E]/50 [&_a]:pb-0.5 [&_a]:tracking-tighter',
-                          '[&_a]:transition-colors [&_a]:duration-200 hover:[&_a]:border-transparent hover:[&_a]:text-gray-new-80'
-                        )}
-                        dangerouslySetInnerHTML={{ __html: headerLinks }}
-                      />
-                    )}
+                    <div className={clsx('flex flex-col flex-wrap gap-x-1 md:flex-row')}>
+                      <h4 className="whitespace-nowrap text-3xl font-medium leading-snug tracking-extra-tight lg:text-xl">
+                        {title}
+                      </h4>
+                      {subtitle ? (
+                        <p className="relative text-[16px] text-gray-new-50">{subtitle}</p>
+                      ) : (
+                        <p className="relative text-gray-new-50">
+                          ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <p className="relative mt-16 ">
-                    {priceFrom && (
-                      <em className="absolute -top-5 block text-sm font-light not-italic leading-none tracking-extra-tight text-gray-new-50">
-                        From
-                      </em>
-                    )}
-                    <span className="text-[40px] font-medium leading-none tracking-tighter">
-                      ${price}
-                    </span>{' '}
-                    <span className="text-sm font-light tracking-extra-tight text-gray-new-50">
-                      /month
-                    </span>
-                  </p>
+
                   <Button
                     className={clsx(
-                      'mt-6 w-full !py-4 !text-base !font-medium leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
+                      'mt-5 w-full !py-[14px] !text-base leading-none tracking-tighter transition-colors duration-300 sm:max-w-none',
                       highlighted
-                        ? 'bg-green-45 text-black hover:bg-[#00ffaa]'
-                        : 'bg-gray-new-20 hover:bg-gray-new-30'
+                        ? 'bg-green-45 !font-semibold text-black hover:bg-[#00ffaa]'
+                        : 'bg-gray-new-20 !font-medium hover:bg-gray-new-30'
                     )}
                     size="sm"
                     to={button.url}
@@ -145,7 +112,7 @@ const Hero = () => {
                       });
                     }}
                   >
-                    {button.text}
+                    Get started
                   </Button>
                   <p
                     className={clsx(
@@ -192,15 +159,6 @@ const Hero = () => {
             )}
           </ul>
         </div>
-        <CtaBlock
-          className="max-w-[656px]"
-          title="Custom Plans"
-          description="Connect with our team for HIPAA compliance, annual contracts, higher resource limits, and more."
-          buttonText="Talk to Sales"
-          buttonUrl={LINKS.contactSales}
-          size="sm"
-          hasDecor={false}
-        />
       </Container>
     </section>
   );

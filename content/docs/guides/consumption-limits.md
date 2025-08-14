@@ -34,7 +34,7 @@ There is an additional value that you also might want to track: `logical_size`, 
 
 Neon updates all metrics every 15 minutes but it could take up to 1 hour before they are reportable.
 
-To find the current usage level for any of these metrics, see [querying metrics](#querying-metrics-and-quotas). You can read more about these metrics and how they impact billing here: [Usage metrics](/docs/introduction/usage-metrics)
+To find the current usage level for any of these metrics, see [querying metrics](#querying-metrics-and-quotas).
 
 ### Corresponding quotas
 
@@ -158,10 +158,10 @@ curl --request PATCH \
 
 You can use the Neon API to retrieve consumption metrics for your organization and projects using these endpoints:
 
-| Endpoint                                                                                             | Description                                                                                                              | Plan Availability            | Docs                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale and Business plan only | [Get account-level aggregated metrics](consumption-metrics#get-account-level-aggregated-metrics)                              |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale and Business plan only | [Get granular project-level metrics for the account](consumption-metrics#get-granular-project-level-metrics-for-your-account) |
+| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics#get-account-level-aggregated-metrics)                              |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics for the account](consumption-metrics#get-granular-project-level-metrics-for-your-account) |
 
 ## Resetting a project after suspend
 

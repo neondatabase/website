@@ -1,12 +1,243 @@
 ---
-title: Usage metrics
+title: Neon legacy plans
 enableTableOfContents: true
-updatedOn: '2025-07-30T09:58:22.803Z'
+isDraft: false
+redirectFrom:
+  - /docs/introduction/extra-usage
+updatedOn: '2025-05-30T16:54:40.485Z'
 ---
 
-This topic describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics in detail so that you can better manage your [plan](/docs/introduction/plans) allowances and extra usage.
+This page documents Neon’s **legacy plans**. These plans are not available for new signups. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
 
-## Storage
+<Admonition type="important">
+You cannot upgrade or downgrade to a legacy plan. If you're currently on a legacy plan, we encourage you to review our [current usage-based pricing plans](/docs/introduction/plans) to explore your options.
+</Admonition>
+
+---
+
+## How to check if you're on a legacy plan
+
+To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a lagacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
+
+![Legacy plan badge](/docs/introduction/legacy_plan_badge.png)
+
+---
+
+## Free plan (Legacy)
+
+The legacy Free plan is best suited for hobby projects, prototypes, and learning Neon. Users on this plan will be automatically migrated to the new Free plan.
+
+### Included allowances
+
+| Usage type                 | Plan allowance                                                           |
+| :------------------------- | :----------------------------------------------------------------------- |
+| **Projects**               | 10 Neon projects                                                         |
+| **Branches**               | 10 branches per project                                                  |
+| **Databases**              | 500 per branch                                                           |
+| **Storage**                | 0.5 GB-month (regular and archive storage combined)                      |
+| **Compute**                | 191.9 compute hours/month (enough to run a primary 0.25 CU compute 24/7) |
+| **Data transfer (Egress)** | 5 GB per month                                                           |
+
+<Admonition type="tip" title="What is a compute hour?">
+- A compute hour is one _active hour_ for a compute with 1 vCPU.  
+- For example, a 0.25 vCPU compute uses 1 compute hour every 4 active hours.  
+- Formula: `compute hours = compute size × active hours`.  
+Idle (suspended) time does not count as active time.
+</Admonition>
+
+### Features
+
+- Autoscaling up to 2 vCPU
+- Scale to zero
+- Monitoring (1-day history)
+- All supported regions
+- Project collaboration
+- Read replicas (up to 3 per project)
+- Advanced Postgres features (logical replication, connection pooling, 60+ extensions)
+- Neon features like branching, time travel connections, and **Instant Restore (24-hour window)**
+- [Community support](/docs/introduction/support)
+
+---
+
+## Launch Plan (Legacy)
+
+Ideal for early-stage projects and startups preparing for growth.
+
+### Included allowances
+
+| Usage type          | Plan allowance                    |
+| ------------------- | --------------------------------- |
+| **Projects**        | 100 Neon projects                 |
+| **Branches**        | 5000 per project                  |
+| **Databases**       | 500 per branch                    |
+| **Storage**         | 10 GB-month                       |
+| **Archive Storage** | 50 GB-month                       |
+| **Compute**         | 300 compute hours per month total |
+
+### Extra usage
+
+| Extra usage type          | Cost                   |
+| ------------------------- | ---------------------- |
+| **Extra Storage**         | $1.75 per GB-month     |
+| **Extra Archive Storage** | $0.10 per GB-month     |
+| **Extra Compute**         | $0.16 per compute hour |
+
+### Features
+
+- Autoscaling up to 4 vCPUs / 16 GB RAM
+- Scale to zero
+- Monitoring (7-day history)
+- Branch protection (up to 2 branches)
+- Same advanced Postgres and Neon features as Free
+- Instant Restore (up to 7 days)
+- [Standard support](/docs/introduction/support)
+
+---
+
+## Scale Plan (Legacy)
+
+Designed for teams scaling production workloads and needing higher resource limits.
+
+### Included allowances
+
+| Usage type          | Plan allowance                    |
+| ------------------- | --------------------------------- |
+| **Projects**        | 1000 Neon projects                |
+| **Branches**        | 5000 per project                  |
+| **Databases**       | 500 per branch                    |
+| **Storage**         | 50 GB-month                       |
+| **Archive Storage** | 250 GB-month                      |
+| **Compute**         | 750 compute hours per month total |
+
+### Extra usage
+
+| Extra usage type          | Cost                   |
+| ------------------------- | ---------------------- |
+| **Extra Storage**         | $1.50 per GB-month     |
+| **Extra Archive Storage** | $0.10 per GB-month     |
+| **Extra Compute**         | $0.16 per compute hour |
+| **Extra Projects**        | $50 per 1000 projects  |
+
+### Features
+
+- Autoscaling up to 8 vCPUs / 32 GB RAM
+- Scale to zero
+- Monitoring (14-day history)
+- Branch protection (up to 5 branches)
+- Customer-provided custom extensions (on AWS only)
+- Instant Restore (up to 14 days)
+- [Standard support](/docs/introduction/support)
+
+---
+
+## Business Plan (Legacy)
+
+A high-capacity plan for production teams with security and compliance requirements.
+
+### Included allowances
+
+| Usage type          | Plan allowance                     |
+| ------------------- | ---------------------------------- |
+| **Projects**        | 5000 Neon projects                 |
+| **Branches**        | 5000 per project                   |
+| **Databases**       | 500 per branch                     |
+| **Storage**         | 500 GB-month                       |
+| **Archive Storage** | 2500 GB-month                      |
+| **Compute**         | 1000 compute hours per month total |
+
+### Extra usage
+
+| Extra usage type          | Cost                   |
+| ------------------------- | ---------------------- |
+| **Extra Storage**         | $0.50 per GB-month     |
+| **Extra Archive Storage** | $0.10 per GB-month     |
+| **Extra Compute**         | $0.16 per compute hour |
+| **Extra Projects**        | $50 per 5000 projects  |
+
+### Features
+
+- Autoscaling up to 16 vCPUs / 56 GB RAM
+- Fixed compute sizes up to 56 vCPUs / 224 GB RAM
+- Scale to zero
+- Monitoring (14-day history)
+- SOC 2 compliance
+- HIPAA compliance (add-on)
+- IP allowlists and branch protection
+- Instant Restore (up to 30 days)
+- [Priority support](/docs/introduction/support)
+- [Service SLA – 99.95% uptime](/neon-business-sla)
+
+---
+
+## Enterprise Plan (Legacy)
+
+Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
+
+### Included allowances
+
+| Usage type          | Plan allowance |
+| ------------------- | -------------- |
+| **Projects**        | Custom         |
+| **Branches**        | Custom         |
+| **Databases**       | Custom         |
+| **Storage**         | Custom         |
+| **Archive Storage** | Custom         |
+| **Compute**         | Custom         |
+
+### Enterprise features
+
+- Custom pricing and resource limits
+- 0-downtime migrations
+- Scale to zero
+- HIPAA and SOC 2 compliance (add-ons)
+- Dedicated solution engineer
+- Custom domain proxy
+- Security reviews and compliance questionnaires
+- Invoice billing and annual commitments
+- [Enterprise support](/docs/introduction/support)
+
+To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) or [request a trial](https://neon.tech/enterprise#request-trial).
+
+## Extra usage
+
+Neon legacy plans include monthly **allowances** for storage, compute, and projects. If you're on a paid plan and exceed those allowances, you're automatically billed for extra usage—no manual action required. The types of extra usage available vary by plan.
+
+If your usage exceeds a plan allowance and that type of extra usage is supported, it's automatically allocated and billed on your monthly invoice.
+
+#### Extra storage
+
+For example, the Launch plan includes 10 GB of storage. If you use more than that, you're charged $1.75 per additional GB-month. The same logic applies to Scale and Business, with lower rates at higher plan tiers.
+
+<Admonition type="note">
+In billing, “allocation” refers to a billable increase in your storage allowance—not physical provisioning of space.
+</Admonition>
+
+#### Extra projects
+
+Extra projects are only available on the Scale and Business plans:
+
+- **Scale**: Extra projects are allocated in units of **1000** at **$50 per unit**
+- **Business**: Extra projects are allocated in units of **5000** at **$50 per unit**
+
+If you exceed your project limit, you're billed for the next unit of extra projects, prorated from the date the extra usage began. For example, using 1001 projects on Scale results in one extra unit (1000 projects) billed at a prorated amount.
+
+<Admonition type="note" title="How extra project charges are prorated">
+Cost = Units × (Unit Price ÷ Days in Month) × Days Left in Month
+
+Once a unit is allocated, you're billed for it through the end of the month. If your usage drops back below the limit, the extra charge is removed at the start of the next billing cycle.
+</Admonition>
+
+#### Extra compute
+
+Extra compute usage is billed by the **compute hour** at **$0.16/hour** across all paid plans. For example, if you're on the Launch plan and use 100 compute hours beyond your 300-hour allowance, you'll be billed an additional **$16**.
+
+Since compute usage is measured hourly, **prorated billing does not apply**.
+
+## Legacy plan metrics
+
+This section describes [Storage](#storage), [Archive storage](#archive-storage), [Compute](#compute), [Data transfer](#data-transfer) and [Project](#projects) usage metrics for Neon's legacy plans.
+
+### Storage
 
 Neon's storage engine is designed to support a serverless architecture and enable features such as [instant restore](/docs/introduction/branch-restore), [time travel](/docs/guides/time-travel-assist), and [branching](/docs/guides/branching-intro). For this reason, storage in Neon differs somewhat from other database services.
 
@@ -24,7 +255,7 @@ In Neon, storage consists of your total **data size** and **history**.
   - **The volume of changes to your data** &#8212; the volume of inserts, updates, and deletes. For example, a write-heavy workload will generate more history than a read-heavy workload.
   - **How much history you keep** &#8212; referred to as [restore window](/docs/introduction/branching#restore-window), which can be an hour, a day, a week, or even a month. The restore window is configurable for each Neon project. As you might imagine, 1 day of history would generally require less storage than 30 days of history, but less history limits the features that depend on it. For example, 1 day of history means that your maximum instant restore point is only 1 day in the past.
 
-### How branching affects storage
+#### How branching affects storage
 
 If you use Neon's branching feature, you should be aware that it can also affect storage. Here are some rules of thumb when it comes to branching:
 
@@ -39,7 +270,7 @@ The **Storage** and **Archive storage** amounts you see under **Usage** on the *
 Each Neon plan comes with an allowance of **Storage** and **Archive storage** that's included in your plan's monthly fee. See [Neon plans](/docs/introduction/plans). To learn how extra storage is allocated and billed, see [Extra usage](/docs/introduction/extra-usage).
 </Admonition>
 
-### Storage FAQs
+#### Storage FAQs
 
 <details>
 <summary>**Do branches add to storage?**</summary>
@@ -92,7 +323,7 @@ Here are some strategies to consider:
 
 Your storage limit varies depending on your Neon plan.
 
-- **Free Plan**: If you reach your storage limit on the Free Plan (0.5 GB-month), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
+- **Free plan**: If you reach your storage limit on the Free plan (0.5 GB-month), any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
 - **Launch, Scale, and Business Plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in [extra usage](/docs/introduction/extra-usage).
 
 </details>
@@ -137,7 +368,7 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking** &#8212; `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free Plan, this might even cause the operation to fail if you hit the storage limit.
+- **Temporary storage spike** &#8212;The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free plan, this might even cause the operation to fail if you hit the storage limit.
 
 In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
 
@@ -165,7 +396,7 @@ Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowan
 
 </details>
 
-## Archive storage
+### Archive storage
 
 To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for the past 24 hours**. Both conditions must be true for a branch to be archived.
 
@@ -182,7 +413,7 @@ Each Neon plan comes with an allowance of **Archive storage** that's included in
 
 For more about how Neon automatically archives inactive branches, see [Branch archiving](/docs/guides/branch-archiving). To understand how archive storage is implemented in Neon's architecture, refer to [Archive storage](/docs/introduction/architecture-overview#archive-storage) in our architecture documentation.
 
-## Compute
+### Compute
 
 Compute hour usage is calculated by multiplying compute size by _active hours_.
 
@@ -198,50 +429,50 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
 - **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-| Compute Units | vCPU | RAM    |
-| :------------ | :--- | :----- |
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
-| 9             | 9    | 36 GB  |
-| 10            | 10   | 40 GB  |
-| 11            | 11   | 44 GB  |
-| 12            | 12   | 48 GB  |
-| 13            | 13   | 52 GB  |
-| 14            | 14   | 56 GB  |
-| 15            | 15   | 60 GB  |
-| 16            | 16   | 64 GB  |
-| 18            | 18   | 72 GB  |
-| 20            | 20   | 80 GB  |
-| 22            | 22   | 88 GB  |
-| 24            | 24   | 96 GB  |
-| 26            | 26   | 104 GB |
-| 28            | 28   | 112 GB |
-| 30            | 30   | 120 GB |
-| 32            | 32   | 128 GB |
-| 34            | 34   | 136 GB |
-| 36            | 36   | 144 GB |
-| 38            | 38   | 152 GB |
-| 40            | 40   | 160 GB |
-| 42            | 42   | 168 GB |
-| 44            | 44   | 176 GB |
-| 46            | 46   | 184 GB |
-| 48            | 48   | 192 GB |
-| 50            | 50   | 200 GB |
-| 52            | 52   | 208 GB |
-| 54            | 54   | 216 GB |
-| 56            | 56   | 224 GB |
+| Compute Unit | vCPU | RAM    |
+| :----------- | :--- | :----- |
+| .25          | .25  | 1 GB   |
+| .5           | .5   | 2 GB   |
+| 1            | 1    | 4 GB   |
+| 2            | 2    | 8 GB   |
+| 3            | 3    | 12 GB  |
+| 4            | 4    | 16 GB  |
+| 5            | 5    | 20 GB  |
+| 6            | 6    | 24 GB  |
+| 7            | 7    | 28 GB  |
+| 8            | 8    | 32 GB  |
+| 9            | 9    | 36 GB  |
+| 10           | 10   | 40 GB  |
+| 11           | 11   | 44 GB  |
+| 12           | 12   | 48 GB  |
+| 13           | 13   | 52 GB  |
+| 14           | 14   | 56 GB  |
+| 15           | 15   | 60 GB  |
+| 16           | 16   | 64 GB  |
+| 18           | 18   | 72 GB  |
+| 20           | 20   | 80 GB  |
+| 22           | 22   | 88 GB  |
+| 24           | 24   | 96 GB  |
+| 26           | 26   | 104 GB |
+| 28           | 28   | 112 GB |
+| 30           | 30   | 120 GB |
+| 32           | 32   | 128 GB |
+| 34           | 34   | 136 GB |
+| 36           | 36   | 144 GB |
+| 38           | 38   | 152 GB |
+| 40           | 40   | 160 GB |
+| 42           | 42   | 168 GB |
+| 44           | 44   | 176 GB |
+| 46           | 46   | 184 GB |
+| 48           | 48   | 192 GB |
+| 50           | 50   | 200 GB |
+| 52           | 52   | 208 GB |
+| 54           | 54   | 216 GB |
+| 56           | 56   | 224 GB |
 
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
-### How Neon compute features affect usage
+#### How Neon compute features affect usage
 
 Compute-hour usage in Neon is affected by [scale to zero](/docs/guides/scale-to-zero-guide), [autoscaling](/docs/guides/autoscaling-guide), and your minimum and maximum [compute size](/docs/manage/computes#compute-size-and-autoscaling-configuration) configuration. With these features enabled, you can get a sense of how your compute hour usage might accrue in the following graph.
 
@@ -253,7 +484,7 @@ You can see how compute size scales between your minimum and maximum CPU setting
 Neon uses a small amount of compute time, included in your billed compute hours, to perform periodic checks to ensure that your computes can start and read and write data. See [Availability Checker](/docs/reference/glossary#availability-checker) for more information. Availability checks take a few seconds are typically performed a few days apart. You can monitor these checks, how long they take, and how often they occur, on the **Systems operations** tab on the **Monitoring** page in the Neon Console. 
 </Admonition>
 
-### Estimate your compute hour usage
+#### Estimate your compute hour usage
 
 To estimate what your compute hour usage might be per month:
 
@@ -284,12 +515,12 @@ To estimate what your compute hour usage might be per month:
 
    </Admonition>
 
-### Compute FAQs
+#### Compute FAQs
 
 <details>
 <summary>**What is a compute hour?**</summary>
 
-It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free Plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -331,7 +562,7 @@ This query displays the IP addresses connected to the database, the number of co
 
 Each of [Neon's plans](/docs/introduction/plans) includes a certain number of compute hours per month:
 
-- **Free Plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free Plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
+- **Free plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
 - **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
 - **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
 - **Business Plan**: This plan includes 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
@@ -348,7 +579,7 @@ You can monitor compute hour usage for a Neon project on the [Project Dashboard]
 <details>
 <summary>**What happens when I go over my plan's compute hour allowance?**</summary>
 
-On the Free Plan, if you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
+On the Free plan, if you go over the 191.9 compute hour allowance, all computes are suspended until the beginning of the month.
 
 On our paid plans (Launch, Scale, and Business), you are billed automatically for any compute hours over your monthly allowance, which is 300 compute hours on Launch and 750 compute hours on Scale. The billing rate is $0.16 per compute hour.
 
@@ -357,7 +588,7 @@ On our paid plans (Launch, Scale, and Business), you are billed automatically fo
 <details>
 <summary>**Can I purchase more compute hours?**</summary>
 
-On the Free Plan, no. You'll have to upgrade to a paid plan. On the Launch, Scale, and Business plans, you are billed automatically for any compute hours over your monthly allowance: 300 compute hours on Launch, 750 compute hours on Scale, and 1000 hours on Business. The billing rate is $0.16 per compute hour.
+On the Free plan, no. You'll have to upgrade to a paid plan. On the Launch, Scale, and Business plans, you are billed automatically for any compute hours over your monthly allowance: 300 compute hours on Launch, 750 compute hours on Scale, and 1000 hours on Business. The billing rate is $0.16 per compute hour.
 
 </details>
 
@@ -382,7 +613,7 @@ Scale to zero places your compute into an idle state when it's not being used, w
 
 </details>
 
-## Data Transfer
+### Data Transfer
 
 Data transfer refers to the total volume of data transferred out of Neon (egress) during a billing period. Egress also includes data transferred from Neon via Postgres logical replication to any destination, including Neon itself. While Neon doesn’t charge for egress, Free plan projects are limited to 5 GB of data transfer per month. If a project exceeds this limit, its compute is suspended and the following error is shown:
 
@@ -396,7 +627,7 @@ For paid plans, Neon applies a reasonable usage policy—there’s no fixed limi
 
 You can monitor your data transfer usage on the **Project Dashboard** or **Billing** page.
 
-## Projects
+### Projects
 
 In Neon, everything starts with a project. A project is a container for your branches, databases, roles, and other resources and settings. A project also defines the region your data and resources reside in. We typically recommend creating a project for each application or each client. In addition to organizing objects, projects are a way to track storage and compute usage by application or client.
 
@@ -404,17 +635,12 @@ The following table outlines project allowances for each Neon plan.
 
 | Plan       | Projects  |
 | :--------- | :-------- |
-| Free Plan  | 1         |
+| Free plan  | 1         |
 | Launch     | 100       |
 | Scale      | 1000      |
 | Business   | 5000      |
 | Enterprise | Unlimited |
 
-- When you reach your limit on the [Free Plan](/docs/introduction/plans#free-plan) or [Launch](/docs/introduction/plans#launch) plan, you cannot create additional projects. Instead, you can upgrade to the [Launch](/docs/introduction/plans#launch), [Scale](/docs/introduction/plans#scale), or [Business](/docs/introduction/plans#business) plan, which offer allowances of 100, 1000, and 5000 projects, respectively.
-- Extra projects are available on both the [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans in units of 1000 and 5000, respectively, for $50 per unit.
-
-## Feedback
-
-We’re always looking for ways to improve our pricing model to make it as developer-friendly as possible. If you have feedback for us, let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord. We read and consider every submission.
-
-<NeedHelp/>
+- When you reach your limit on the Free plan or Launch plan, you cannot create additional projects.
+- Extra projects are available on the Enterprise plan.
+  <NeedHelp/>

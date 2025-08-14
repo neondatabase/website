@@ -2,78 +2,28 @@
   "headings": {
     "feature": "",
     "free": {
-      "label": "Free Plan",
-      "price": "<span>$0/month</span>",
+      "label": "Free",
+      "price": "<span>$0</span>/month",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Start for free"
     },
     "launch": {
       "label": "Launch",
-      "price": "<span>From</span> $19<span>/month</span>",
+      "price": "<span>Usage-based</span>, $5/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
     },
     "scale": {
       "label": "Scale",
-      "price": "<span>From</span> $69<span>/month</span>",
+      "price": "<span>Usage-based</span>, $5/mo min.",
       "buttonUrl": "https://console.neon.tech/signup",
       "buttonText": "Get started"
-    },
-    "business": {
-      "label": "Business",
-      "price": "<span>From</span> $700<span>/month</span>",
-      "buttonUrl": "https://console.neon.tech/signup",
-      "buttonText": "Get started",
-      "analyticsEvent": "pricing_page_get_started_with_business_plan_clicked"
     }
   },
   "cols": [
     {
       "rows": "1",
-      "feature": "Included"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Storage (monthly)",
-        "subtitle": "GB-month = 1GB of storage for 1 month"
-      },
-      "free": "0.5 GB-month",
-      "launch": {
-        "title": "10 GB-month",
-        "info": "Additional at $1.75 per GB-month / Archive storage: $0.1 per GB-month"
-      },
-      "scale": {
-        "title": "50 GB-month",
-        "info": "Additional at $1.5 per GB-month / Archive storage: $0.1 per GB-month"
-      },
-      "business": {
-        "title": "500 GB-month",
-        "info": "Additional at $0.5 per GB-month / Archive storage: $0.1 per GB-month"
-      }
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Compute (monthly)",
-        "subtitle": "Compute hours = CU size x active hrs"
-      },
-      "free": {
-        "title": "190 compute hrs",
-        "info": "For main branch. Additional branches limited to 5 compute hours"
-      },
-      "launch": {
-        "title": "300 compute hrs",
-        "info": "Additional at $0.16 per compute hr"
-      },
-      "scale": {
-        "title": "750 compute hrs",
-        "info": "Additional at $0.16 per compute hr"
-      },
-      "business": {
-        "title": "1,000 compute hrs",
-        "info": "Additional at $0.16 per compute hr"
-      }
+      "feature": "Projects and Branches"
     },
     {
       "rows": "1",
@@ -82,157 +32,108 @@
       },
       "free": "10",
       "launch": "100",
-      "scale": {
-        "title": "1,000",
-        "info": "Additional at $50 per 1,000 projects"
-      },
-      "business": {
-        "title": "5,000",
-        "info": "Additional at $50 per 5,000 projects"
-      }
+      "scale": "1,000"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Branches"
+        "title": "Branches per project",
+        "subtitle": "Included"
       },
-      "free": "10 <span>per project</span>",
-      "launch": "5,000 <span>per project</span>",
-      "scale": "5,000 <span>per project</span>",
-      "business": "5,000 <span>per project</span>"
+      "free": "10",
+      "launch": "10",
+      "scale": "25"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Schema-only branches",
-        "subtitle": "<a href='/docs/guides/branching-schema-only'>More info in docs</a>"
+        "title": "Additional branches",
+        "subtitle": { "text": "Read more", "href": "#additional-branches-billing" }
       },
-      "free": "Up to 3 <span>per project</span>",
-      "launch": "Up to 5 <span>per project</span>",
-      "scale": "Up to 10 <span>per project</span>",
-      "business": "Up to 25 <span>per project</span>"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Databases"
-      },
-      "free": "500 per branch",
-      "launch": "500 per branch",
-      "scale": "500 per branch",
-      "business": "500 per branch"
-    },
-    {
-      "feature": "Compute Features"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Max compute size"
-      },
-      "free": {
-        "title": "2 CU",
-        "info": "2 CU = 2 vCPU, 8 GB RAM"
-      },
+      "free": false,
       "launch": {
-        "title": "4 CU",
-        "info": "4 CU = 4 vCPU, 16 GB RAM"
+        "title": "$0.002 per branch-hour"
       },
       "scale": {
-        "title": "8 CU",
-        "info": "8 CU = 8 vCPU, 32 GB RAM"
-      },
-      "business": {
-        "title": "56 CU",
-        "info": "56 CU = 56 vCPU, 224 GB RAM"
+        "title": "$0.002 per branch-hour"
       }
     },
     {
       "rows": "1",
+      "feature": "Compute"
+    },
+    {
+      "rows": "2",
       "feature": {
-        "title": "Read Replicas"
+        "title": "Rates"
       },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
+      "free": "50 CU-hours included",
+      "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
+      "scale": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Sizes"
+      },
+      "free": "Up to 2 vCPU, 8 GB RAM",
+      "launch": "Up to 16 vCPU, 64 GB RAM",
+      "scale": "Up to 56 vCPU, 224 GB RAM"
     },
     {
       "rows": "1",
       "feature": {
         "title": "Autoscaling"
       },
-      "free": "Up to 2 CU",
-      "launch": "Up to 4 CU",
-      "scale": "Up to 8 CU",
-      "business": "Up to 16 CU"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Scale to zero"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Max Concurrent Connections"
-      },
-      "free": "10,000",
-      "launch": "10,000",
-      "scale": "10,000",
-      "business": "10,000"
-    },
-    {
-      "feature": "Advanced Postgres Features"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Connection Pooling"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
+      "free": "✓",
+      "launch": "✓",
+      "scale": "✓"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Standard Extensions",
-        "subtitle": "View <a href='/docs/extensions/extensions-intro'>Supported Extensions</a>"
+        "title": "Scale to zero",
+        "subtitle": "When inactive"
       },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
+      "free": "After 5 minutes <span>when inactive</span>",
+      "launch": "After 5 minutes <span>Can be disabled</span>",
+      "scale": "Configurable"
     },
     {
       "rows": "1",
-      "feature": {
-        "title": "Custom Extensions"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
+      "feature": "Storage"
     },
     {
-      "feature": "Security And Compliance"
+      "rows": "2",
+      "feature": {
+        "title": "Rates"
+      },
+      "free": "Free<span>0.5 GB per Project</span>",
+      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
+      "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Instant Restore (PITR)",
+        "subtitle": { "text": "Read more", "href": "#instant-restores" }
+      },
+      "free": "Free<span>With limited window/size</span>",
+      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
+      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Instant Restore (PITR) Window"
+      },
+      "free": "Up to 6 hours<span>or 1 GB of data changes</span>",
+      "launch": "Up to 7 days",
+      "scale": "Up to 30 days"
     },
     {
       "rows": "1",
-      "feature": {
-        "title": "Private Link"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
+      "feature": "Network"
     },
     {
       "rows": "1",
@@ -241,250 +142,71 @@
       },
       "free": false,
       "launch": false,
-      "scale": true,
-      "business": true
+      "scale": true
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Branch Protection",
-        "subtitle": "Restrict access & actions"
-      },
-      "free": false,
-      "launch": "Up to 2 branches",
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Point-in-time Restore"
-      },
-      "free": "Up to 24 hours",
-      "launch": "Up to 7 days",
-      "scale": "Up to 14 days",
-      "business": "Up to 30 days"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "GDPR"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "SOC 2 Type 2"
+        "title": "Private Networking",
+        "subtitle": "Private Link"
       },
       "free": false,
       "launch": false,
-      "scale": false,
-      "business": true
+      "scale": true
     },
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "ISO (27001, 27701)"
+        "title": "Public network transfer",
+        "subtitle": "Egress"
+      },
+      "free": "5 GB included",
+      "launch": "100 GB included<span>then $0.10 per GB</span>",
+      "scale": "100 GB included<span>then $0.10 per GB</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Private network transfer",
+        "subtitle": "Bidirectional"
       },
       "free": false,
       "launch": false,
-      "scale": false,
-      "business": true
+      "scale": "$0.01 per GB"
     },
     {
       "rows": "1",
+      "feature": "Added Features"
+    },
+    {
+      "rows": "2",
       "feature": {
-        "title": "HIPAA"
+        "title": "Monitoring retention",
+        "subtitle": "Window for metrics, logs"
+      },
+      "free": "1 day",
+      "launch": "3 days",
+      "scale": "14 days"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Metrics and Logs export",
+        "subtitle": "Datadog, OTel"
       },
       "free": false,
       "launch": false,
-      "scale": false,
-      "business": "Contact us"
+      "scale": "Included"
     },
+
     {
-      "rows": "1",
+      "rows": "2",
       "feature": {
-        "title": "SLA"
+        "title": "SOC Compliance"
       },
       "free": false,
       "launch": false,
-      "scale": false,
-      "business": "99.95%"
-    },
-    {
-      "feature": "Plan-Specific"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Data Transfer"
-      },
-      "free": "5 GB /month",
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Organization Accounts"
-      },
-      "free": false,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Monitoring",
-        "subtitle": "In-console"
-      },
-      "free": "Up to 24 hours",
-      "launch": "Up to 7 days",
-      "scale": "Up to 7 days",
-      "business": "Up to 14 days"
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Datadog Integration"
-      },
-      "free": false,
-      "launch": false,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Custom Domain Proxy"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Solutions Architect",
-        "subtitle": "Personalized advice"
-      },
-      "free": false,
-      "launch": false,
-      "scale": false,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Technical Support"
-      },
-      "free": "Community Support",
-      "launch": "Standard Support",
-      "scale": "Standard Support",
-      "business": "Priority Support"
-    },
-    {
-      "feature": "All plans"
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "High Availability",
-        "subtitle": "<a href='/docs/introduction/high-availability'>Our approach</a>"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Neon RLS",
-        "subtitle": "Row-level security"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Neon Auth"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Schema Diff"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Time Travel Connections"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Console UI"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "Neon CLI"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "1",
-      "feature": {
-        "title": "API"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
-    },
-    {
-      "rows": "2",
-      "feature": {
-        "title": "Slack Integration",
-        "subtitle": "<a href='/docs/manage/slack-app'>More info in docs</a>"
-      },
-      "free": true,
-      "launch": true,
-      "scale": true,
-      "business": true
+      "scale": true
     }
   ]
 }

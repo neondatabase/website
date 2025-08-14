@@ -30,7 +30,7 @@ The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 v
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window.
 
 You cannot select a time outside your current restore window.
 
@@ -184,4 +184,4 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
-- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).

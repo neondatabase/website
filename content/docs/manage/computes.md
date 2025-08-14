@@ -22,7 +22,7 @@ Project
                             |---- database
 ```
 
-Your Neon plan determines the resources (vCPUs and RAM) available to a compute. The [Neon Free Plan](/docs/introduction/plans#free-plan) supports computes with up to 2 vCPUs and 8 GB of RAM. Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
+Your Neon plan determines the resources (vCPUs and RAM) available to a compute. The Neon Free plan supports computes with up to 2 vCPUs and 8 GB of RAM. Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
 
 ## View a compute
 

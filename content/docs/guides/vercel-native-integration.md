@@ -78,7 +78,7 @@ To open your Database / Neon Project in the Neon Console:
 3. In the Neon Console, you are directed the your project Dashboard. Your project exists within an "Organization" in Neon, which will be named **Vercel: `<organization_name>`**. If you're a new Neon user, you will have a single Neon Project, and your Organization name in Neon will be the name of your Vercel account. For example, if your Vercel account name is **Alex's projects**, your Neon Organization name will be **Vercel: Alex's projects**.
 
 <Admonition type="note">
-All Neon Plans, including the Free Plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional "Databases/Projects" is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
+All Neon Plans, including the Free plan, support multiple Neon Projects (a.k.a "Databases" in Vercel). Creating additional "Databases/Projects" is performed from the Vercel Dashboard. See [Adding more Databases](#adding-more-databases) for instructions.
 </Admonition>
 
 ### Actions supported only from the Vercel Dashboard
@@ -148,14 +148,14 @@ To change your configuration:
 
 ## Adding more Databases
 
-All Neon Plans, including the Free Plan, support multiple Databases / Neon Projects (remember that **A "Database" in Vercel is a "Project" in Neon**).
+All Neon Plans, including the Free plan, support multiple Databases / Neon Projects (remember that **A "Database" in Vercel is a "Project" in Neon**).
 
 To create another Database / Neon Project:
 
 1. On the Vercel Dashboard, navigate to your **Integrations** tab.
 2. Locate the **Neon Postgres** integration, and click **Manage**.
 3. Find the **More Products** card, and click **Install**.
-4. Make your selections for the region, scale to zero suspend time, and plan on the **Create Database** modal, and click **Continue**. For more about scale to zero, see [Scale to zero](/docs/introduction/scale-to-zero). Only the **Default** suspend setting is supported on the Free Plan.
+4. Make your selections for the region, scale to zero suspend time, and plan on the **Create Database** modal, and click **Continue**. For more about scale to zero, see [Scale to zero](/docs/introduction/scale-to-zero). Only the **Default** suspend setting is supported on the Free plan.
 
    <Admonition type="note">
    Remember, if you're adding another "Database", you're' already on a Neon Plan, which will be identified on the modal by a **Current** tag. Select a different plan will change your Neon Plan for all of your "Databases". So, don't select a different plan unless you actually want to change your plan for all of your "Databases".
