@@ -49,7 +49,7 @@ const Post = ({
 
   return (
     <>
-      <div className="">
+      <div className="pb-32 lg:pb-24 md:pb-20">
         {breadcrumbs.length > 0 && (
           <Breadcrumbs
             breadcrumbs={breadcrumbs}
@@ -86,7 +86,7 @@ const Post = ({
             basePath={navigationLinksPrefix || DOCS_BASE_PATH}
           />
         )}
-        <DocFooter updatedOn={updatedOn} slug={currentSlug} />
+        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
       <Aside

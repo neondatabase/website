@@ -10,7 +10,13 @@ const NeonDocsLayout = async ({ children }) => {
   const sidebar = await getSidebar();
 
   return (
-    <Layout headerClassName="h-28" isDocPage isHeaderSticky headerWithBorder hasThemesSupport>
+    <Layout
+      headerClassName="h-28 lg:h-16"
+      isDocPage
+      isHeaderSticky
+      headerWithBorder
+      hasThemesSupport
+    >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
         <MobileNav
           className="hidden lg:block"
@@ -19,7 +25,7 @@ const NeonDocsLayout = async ({ children }) => {
           basePath={DOCS_BASE_PATH}
         />
         <Container
-          className="grid w-full flex-1 grid-cols-[16rem_auto_16rem] gap-x-24 pb-20 pt-11 xl:pt-9 sm:pt-7"
+          className="grid w-full flex-1 grid-cols-[16rem_auto_16rem] gap-x-24 pt-11 2xl:gap-x-8 xl:grid-cols-[16rem_auto] xl:pt-9 lg:block sm:pt-7"
           size="1600"
         >
           <Sidebar

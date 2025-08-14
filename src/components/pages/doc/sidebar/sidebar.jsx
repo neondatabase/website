@@ -74,7 +74,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
 
   return (
     <aside className={clsx('relative -mt-10', className)}>
-      <div className="sticky top-24 ">
+      <div className="sticky top-28">
         {docPageType}
         <div
           className={clsx(
@@ -84,7 +84,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
           )}
         >
           <nav
-            className="no-scrollbars z-10 h-[calc(100vh-112px)] overflow-y-scroll pb-5 pt-8"
+            className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-5 pt-8"
             ref={menuWrapperRef}
           >
             <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>

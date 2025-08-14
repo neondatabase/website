@@ -14,7 +14,7 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
         'dark:border-gray-new-20 dark:bg-gray-new-8 dark:hover:border-gray-new-30',
         isNotFoundPage
           ? 'h-14 w-full max-w-[488px] rounded-full border-2 bg-[length:20px_20px] bg-[left_1.5rem_center] px-6 pl-6 lg:border-2'
-          : 'h-8 w-[264px] rounded-lg border p-1 pl-2.5 xl:w-40 lg:px-3 lg:py-0'
+          : 'h-8 w-[264px] rounded-lg border p-1 pl-2.5 xl:w-40 lg:w-auto lg:border-none lg:!bg-transparent lg:p-0'
       )}
       type="button"
       onClick={() => handleClick('SEARCH')}

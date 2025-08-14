@@ -32,7 +32,7 @@ const Container = forwardRef(
     return (
       <Tag
         className={clsx(
-          'relative mx-auto lg:max-w-none lg:px-8 md:px-4',
+          'relative mx-auto lg:max-w-none lg:px-8 md:px-5',
           styles.size[size],
           className
         )}

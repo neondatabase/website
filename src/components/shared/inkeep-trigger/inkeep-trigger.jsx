@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -127,18 +126,15 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
   };
 
   return (
-    <>
+    <div className="flex items-center gap-x-2">
       <InkeepSearch
         className={className}
         handleClick={() => handleClick(modalViews.SEARCH)}
         isNotFoundPage={isNotFoundPage}
       />
       <InkeepAIButton className="shrink-0" handleClick={() => handleClick(modalViews.AI_CHAT)} />
-
-      <div className={clsx(defaultModalView === modalViews.AI_CHAT && 'w-full max-w-[640px]')}>
-        <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
-      </div>
-    </>
+      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
+    </div>
   );
 };
 
