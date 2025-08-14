@@ -131,7 +131,7 @@ Your application now connects to `localhost:5432` using the driver you selected 
 
 </Steps>
 
-## Database Schema View
+## Database schema view
 
 Once connected, the extension provides a comprehensive **Database Schema** view in the sidebar that lets you explore your database structure visually:
 
