@@ -189,7 +189,7 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 
 ![Table Data Editor](/docs/local/table_data_view.png)
 
-### Viewing Data:
+### Viewing data:
 
 - **Paginated Display**: Navigate through large datasets with page controls
 - **Column Management**: Show/hide columns, sort by any column
