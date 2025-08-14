@@ -271,7 +271,7 @@ Security features:
 - [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
 
-### ☑ Uptime SLAs
+### ☑ Uptime SLA
 
 Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
 
