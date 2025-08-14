@@ -18,7 +18,7 @@ updatedOn: '2025-08-02T10:33:29.269Z'
 </DocsList>
 </InfoBlock>
 
-Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
+Available for Scale plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
 ## How it works
 

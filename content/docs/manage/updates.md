@@ -38,9 +38,9 @@ If a compute is excluded from an update, Neon will apply the missed update with 
 Please be aware that Neon must occasionally perform essential **platform maintenance** outside the scheduled updates performed on Neon computes. This means that you may experience brief disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
 </Admonition>
 
-## Updates on the Free Plan
+## Updates on the Free plan
 
-On the **Free Plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
+On the **Free plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
 
 To view planned updates:
 
@@ -70,7 +70,7 @@ In the Neon Console:
 
 You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
 
-> If you're a Business or Enterprise plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
+> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
 
 </TabItem>
 
@@ -120,7 +120,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
 {
