@@ -40,12 +40,12 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Autoscaling](#autoscaling)                         | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
 | [Scale to zero](#scale-to-zero)                     | After 5 min                    | After 5 min, can be disabled         | Configurable (5 seconds to always on)                                             |
 | [Storage](#storage)                                 | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
-| [Public data transfer](#public-data-transfer)       | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
+| [Public network transfer](#public-network-transfer)       | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
 | [Monitoring](#monitoring)                           | 1 day                          | 3 days                               | 14 days                                                                           |
 | [Metrics/logs export](#metricslogs-export)          | —                              | —                                    | ✅                                                                                |
 | [Restore window](#restore-window)                   | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Instant restore](#instant-restore)                 | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
-| [Private data transfer](#private-data-transfer)     | —                              | —                                    | $0.01/GB                                                                          |
+| [Private network transfer](#private-network-transfer)     | —                              | —                                    | $0.01/GB                                                                          |
 | [Support](#support)                                 | Community                      | Billing                              | Production                                                                        |
 | [Compliance and security](#compliance-and-security) | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                           | —                              | —                                    | ✅                                                                                |
@@ -79,8 +79,8 @@ A project is a container for your database environment. It includes your databas
 Included per plan:
 
 - **Free**: 10 projects
-- **Launch**: 5,000 projects
-- **Scale**: 5,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
+- **Launch**: 100 projects
+- **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
 ### ☑ Branches
 
@@ -111,7 +111,7 @@ Example: Plan includes 10 branches/project. You create 2 extra branches for 5 ho
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 
-Branch maximum:
+uBranch maximm:
 
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
@@ -196,11 +196,11 @@ Storage on child branches never decreases — it grows as changes accumulate.
 
 > **Free** plan users get 0.5 GB of storage per project
 
-### ☑ Public data transfer
+### ☑ Public network transfer
 
-Public data transfer (egress) is the total volume of data sent from your database over the public internet during the monthly billing period.
+Public network transfer (egress) is the total volume of data sent from your database over the public internet during the monthly billing period.
 
-> Public data transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
+> Public network transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
 
 Allowances per plan:
 
@@ -246,11 +246,11 @@ Neon stores a log of write operations (Postgres [Write-Ahead Log](/docs/referenc
 
 See [Instant restore](/docs/introduction/branch-restore) for details.
 
-### ☑ Private data transfer
+### ☑ Private network transfer
 
 Available on the **Scale** plan with [Private Networking](/docs/guides/neon-private-networking), which uses [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html) to bypass the public internet.
 
-Billed at $0.01/GB for data transferred to and from Neon.
+Billed at $0.01/GB for network transferred to and from Neon.
 
 ### ☑ Support
 
@@ -391,14 +391,14 @@ What is autoscaling and how does it work?
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
 
-Do public data transfer limits reset each month?
+Do public network transfer limits reset each month?
 : Yes. Free plan includes 5 GB/month, Launch and Scale include 100 GB/month. Beyond that, it's $0.10/GB.
 
-How is private data transfer billed?
+How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (e.g., CU-hours or public data transfer). To continue, upgrade to a paid plan.
+: On the Free plan, compute will suspend when limits are reached (e.g., CU-hours or public network transfer). To continue, upgrade to a paid plan.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
