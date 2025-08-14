@@ -23,7 +23,7 @@
   "cols": [
     {
       "rows": "1",
-      "feature": "Features"
+      "feature": "Projects and Branches"
     },
     {
       "rows": "1",
@@ -52,18 +52,20 @@
       },
       "free": false,
       "launch": {
-        "title": "$0.002 per branch-hour",
-        "info": "$1.5 per month, pro-rated hourly"
+        "title": "$0.002 per branch-hour"
       },
       "scale": {
-        "title": "$0.002 per branch-hour",
-        "info": "$1.5 per month, pro-rated hourly"
+        "title": "$0.002 per branch-hour"
       }
+    },
+    {
+      "rows": "1",
+      "feature": "Compute"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Compute"
+        "title": "Rates"
       },
       "free": "50 CU-hours included",
       "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
@@ -72,31 +74,85 @@
     {
       "rows": "2",
       "feature": {
+        "title": "Sizes"
+      },
+      "free": "Up to 2 vCPU, 8 GB RAM",
+      "launch": "Up to 16 vCPU, 64 GB RAM",
+      "scale": "Up to 56 vCPU, 224 GB RAM"
+    },
+    {
+      "rows": "1",
+      "feature": {
         "title": "Autoscaling"
       },
-      "free": "Up to 2 CU <span>= 2 vCPU, 8 GB RAM</span>",
-      "launch": "Up to 16 CU <span>= 16 vCPU, 64 GB RAM</span>",
-      "scale": "Up to 56 CU <span>= 56 vCPU, 224 GB RAM</span>"
+      "free": "✓",
+      "launch": "✓",
+      "scale": "✓"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Scale to zero"
+        "title": "Scale to zero",
+        "subtitle": "When inactive"
       },
-      "free": "Auto <span>after 5 minutes</span>",
-      "launch": "Auto <span>after 5 minutes</span>",
+      "free": "After 5 minutes <span>when inactive</span>",
+      "launch": "After 5 minutes <span>Can be disabled</span>",
       "scale": "Configurable"
     },
     {
+      "rows": "1",
+      "feature": "Storage"
+    },
+    {
       "rows": "2",
       "feature": {
-        "title": "Storage"
+        "title": "Rates"
       },
-      "free": {
-        "title": "0.5 GB per project"
-      },
+      "free": "Free<span>0.5 GB per Project</span>",
       "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
       "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Instant Restore (PITR)",
+        "subtitle": { "text": "Read more", "href": "#instant-restores" }
+      },
+      "free": "Free<span>With limited window/size</span>",
+      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
+      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "Instant Restore (PITR) Window"
+      },
+      "free": "Up to 6 hours<span>or 1 GB of data changes</span>",
+      "launch": "Up to 7 days",
+      "scale": "Up to 30 days"
+    },
+    {
+      "rows": "1",
+      "feature": "Network"
+    },
+    {
+      "rows": "1",
+      "feature": {
+        "title": "IP Allow Rules"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Private Networking",
+        "subtitle": "Private Link"
+      },
+      "free": false,
+      "launch": false,
+      "scale": true
     },
     {
       "rows": "2",
@@ -111,16 +167,21 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Private network transfer"
+        "title": "Private network transfer",
+        "subtitle": "Bidirectional"
       },
       "free": false,
       "launch": false,
       "scale": "$0.01 per GB"
     },
     {
+      "rows": "1",
+      "feature": "Added Features"
+    },
+    {
       "rows": "2",
       "feature": {
-        "title": "Console UI monitoring",
+        "title": "Monitoring retention",
         "subtitle": "Window for metrics, logs"
       },
       "free": "1 day",
@@ -130,32 +191,22 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Metrics/logs export",
+        "title": "Metrics and Logs export",
         "subtitle": "Datadog, OTel"
       },
       "free": false,
       "launch": false,
       "scale": "Included"
     },
+
     {
-      "rows": "3",
+      "rows": "2",
       "feature": {
-        "title": "Instant Restores",
-        "subtitle": { "text": "Read more", "href": "#instant-restores" }
+        "title": "SOC Compliance"
       },
-      "free": "Default",
-      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
-      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
-    },
-    {
-      "rows": "3",
-      "feature": {
-        "title": "Restore Window",
-        "subtitle": "For Instant Restores"
-      },
-      "free": "Time travel up to 6h<span>or 1 GB of data changes</span><span>(whichever comes first)</span>",
-      "launch": "Time travel up to 7 days",
-      "scale": "Time travel up to 30 days"
+      "free": false,
+      "launch": false,
+      "scale": true
     }
   ]
 }
