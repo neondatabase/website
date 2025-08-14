@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
@@ -24,10 +25,15 @@ const tabsOrder = {
   changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'All'],
 };
 
+const modalViews = {
+  SEARCH: 'SEARCH',
+  AI_CHAT: 'AI_CHAT',
+};
+
 const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
-  const [defaultModalView, setDefaultModalView] = useState('SEARCH');
+  const [defaultModalView, setDefaultModalView] = useState(modalViews.SEARCH);
   const pathname = usePathname();
   const [pageType, setPageType] = useState(docPageType);
 
@@ -73,11 +79,27 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         forcedColorMode: themeMode,
       },
       theme: {
-        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css'],
+        stylesheetUrls: ['/inkeep/css/base.css', '/inkeep/css/modal.css', '/inkeep/css/chat.css'],
+        components: {
+          AIChatPageWrapper: {
+            defaultProps: {
+              size: 'expand',
+              variant: 'no-shadow',
+            },
+          },
+        },
+        tokens: {
+          colors: {
+            'grayDark.900': '#000',
+          },
+        },
       },
       optOutFunctionalCookies: true,
       logEventCallback: (event) => {
         const { eventName, properties } = event;
+        if (eventName === 'chat_message_submitted') {
+          sendGtagEvent('AI Chat Message Submitted', { text: properties.content });
+        }
         if (eventName === 'search_query_submitted') {
           sendGtagEvent('Search Query Submitted', { text: properties.query });
         }
@@ -86,31 +108,36 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     modalSettings: {
       defaultView: defaultModalView,
       forceInitialDefaultView: true,
-      isModeSwitchingEnabled: true,
-      askAILabel: 'Ask AI',
+      isModeSwitchingEnabled: false,
     },
     searchSettings: {
       tabSettings: {
         tabOrderByLabel: pageType ? tabsOrder[pageType] : tabsOrder.default,
       },
     },
-    aiChatSettings,
+    aiChatSettings: {
+      ...aiChatSettings,
+      introMessage: "<span class='intro-title'>What do you want to know?</span>",
+    },
   };
 
   const handleClick = (type) => {
     setDefaultModalView(type);
-    setIsOpen(!isOpen);
+    setIsOpen(true);
   };
 
   return (
     <>
       <InkeepSearch
         className={className}
-        handleClick={() => handleClick('SEARCH')}
+        handleClick={() => handleClick(modalViews.SEARCH)}
         isNotFoundPage={isNotFoundPage}
       />
-      <InkeepAIButton handleClick={handleClick} />
-      <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
+      <InkeepAIButton className="shrink-0" handleClick={() => handleClick(modalViews.AI_CHAT)} />
+
+      <div className={clsx(defaultModalView === modalViews.AI_CHAT && 'w-full max-w-[640px]')}>
+        <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
+      </div>
     </>
   );
 };
