@@ -1,16 +1,17 @@
 'use client';
 
-import clsx from 'clsx';
 import dynamic from 'next/dynamic';
 import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useState } from 'react';
 
-import InkeepSearch from 'components/shared/inkeep-search';
 import LINKS from 'constants/links';
-import { baseSettings } from 'lib/inkeep-settings';
+import { baseSettings, aiChatSettings } from 'lib/inkeep-settings';
 import sendGtagEvent from 'utils/send-gtag-event';
+
+import InkeepAIButton from './inkeep-ai-button';
+import InkeepSearch from './inkeep-search';
 
 const InkeepCustomTrigger = dynamic(
   () => import('@inkeep/uikit').then((mod) => mod.InkeepCustomTrigger),
@@ -26,6 +27,7 @@ const tabsOrder = {
 const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
+  const [defaultModalView, setDefaultModalView] = useState('SEARCH');
   const pathname = usePathname();
   const [pageType, setPageType] = useState(docPageType);
 
@@ -82,24 +84,32 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
       },
     },
     modalSettings: {
-      defaultView: 'SEARCH',
+      defaultView: defaultModalView,
       forceInitialDefaultView: true,
-      isModeSwitchingEnabled: false,
+      isModeSwitchingEnabled: true,
+      askAILabel: 'Ask AI',
     },
     searchSettings: {
       tabSettings: {
         tabOrderByLabel: pageType ? tabsOrder[pageType] : tabsOrder.default,
       },
     },
+    aiChatSettings,
+  };
+
+  const handleClick = (type) => {
+    setDefaultModalView(type);
+    setIsOpen(!isOpen);
   };
 
   return (
     <>
       <InkeepSearch
-        className={clsx('lg:w-auto', className)}
-        handleClick={() => setIsOpen(!isOpen)}
+        className={className}
+        handleClick={() => handleClick('SEARCH')}
         isNotFoundPage={isNotFoundPage}
       />
+      <InkeepAIButton handleClick={handleClick} />
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </>
   );

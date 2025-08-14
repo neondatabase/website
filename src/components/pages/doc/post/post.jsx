@@ -49,11 +49,7 @@ const Post = ({
 
   return (
     <>
-      <div
-        className={clsx(
-          'col-span-7 col-start-2 -ml-6 flex max-w-[832px] flex-col 3xl:ml-0 2xl:col-span-8 2xl:col-start-1 lg:ml-0 lg:max-w-full lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8'
-        )}
-      >
+      <div className="">
         {breadcrumbs.length > 0 && (
           <Breadcrumbs
             breadcrumbs={breadcrumbs}
@@ -67,7 +63,7 @@ const Post = ({
           <article>
             <h1
               className={clsx(
-                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight xl:text-3xl',
+                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
                 tag && 'inline'
               )}
             >
@@ -75,11 +71,11 @@ const Post = ({
             </h1>
             {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
             {subtitle && (
-              <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
+              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
                 {subtitle}
               </p>
             )}
-            <Content className="mt-5" content={content} isPostgres={isPostgres} />
+            <Content className="mt-7 md:mt-5" content={content} isPostgres={isPostgres} />
           </article>
         )}
 
