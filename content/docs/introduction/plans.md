@@ -46,7 +46,6 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Instant restore](#instant-restore)                   | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                          |
-| [Support](#support)                                   | Community                      | Billing                              | Production                                                                        |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                |
 
@@ -252,16 +251,6 @@ Available on the **Scale** plan with [Private Networking](/docs/guides/neon-priv
 
 Billed at $0.01/GB for network transferred to and from Neon.
 
-### ☑ Support
-
-Support level by plan:
-
-- **Free**: Community support
-- **Launch**: Billing support
-- **Scale**: Production support
-
-See [Support](/docs/introduction/support) for details.
-
 ### ☑ Compliance and security
 
 Compliance certifications available on **Scale**:
@@ -282,7 +271,7 @@ Security features:
 - [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
 
-### ☑ Uptime SLAs
+### ☑ Uptime SLA
 
 Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
 
