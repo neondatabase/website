@@ -85,7 +85,7 @@ SELECT usename FROM pg_stat_activity WHERE datname = '<database_name>';
 
 </Admonition>
 
-Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Neon Free Plan](/docs/introduction/plans#free-plan), support connection pooling.
+Even with the largest compute size, the `max_connections` limit may not be sufficient for some applications, such as those that use serverless functions. To increase the number of connections that Neon supports, you can use _connection pooling_. All Neon plans, including the [Free plan](/docs/introduction/plans), support connection pooling.
 
 ## Connection pooling
 

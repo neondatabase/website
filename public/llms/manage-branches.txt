@@ -175,7 +175,7 @@ FROM pg_database;
 
 The query value may differ slightly from the **Data size** reported in the Neon Console.
 
-Data size is your logical data size. It does not include the [history](https://neon.com/docs/reference/glossary#history) that Neon retains to support features like instant restore.
+Data size is your logical data size.
 
 ## Branch types
 

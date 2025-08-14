@@ -14,7 +14,7 @@ We have successfully attained SOC 2 Type 1 and Type 2 compliance. These complian
 
 ## SOC 3
 
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. Neon [Business](/docs/introduction/plans#business) plan users can request this audit report through our [Trust Center](https://trust.neon.tech/).
+The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. If available on your plan, you can request the report through our [Trust Center](https://trust.neon.tech/).
 
 ## ISO 27001
 
@@ -34,7 +34,7 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 ## HIPAA
 
-Neon offers HIPAA compliance as part of our Business and Enterprise plans, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
+Neon offers HIPAA compliance as part of our Scale plan, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
 
 A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.tech/).
 
