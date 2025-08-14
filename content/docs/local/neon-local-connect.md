@@ -183,7 +183,7 @@ Execute SQL queries directly in your IDE with the integrated SQL Editor:
 
 The SQL Editor integrates seamlessly with your database connection, so you can query any database in your current branch without additional setup.
 
-## Table Data Management
+## Table data management
 
 View and edit your table data with a powerful, spreadsheet-like interface:
 
