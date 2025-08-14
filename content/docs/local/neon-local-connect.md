@@ -196,7 +196,7 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 - **Data Types**: Visual indicators for different data types (primary keys, foreign keys, etc.)
 - **Null Handling**: Clear visualization of NULL values
 
-### Editing Capabilities:
+### Editing capabilities:
 
 - **Row Editing**: Double-click any row to edit all fields inline (requires primary key)
 - **Insert New Rows**: Add new records with the "Add Row" button
