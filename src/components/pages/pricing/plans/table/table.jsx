@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -10,8 +9,6 @@ import Button from 'components/shared/button';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
-import checkIcon from 'icons/pricing/check.svg';
-import crossIcon from 'icons/pricing/cross.svg';
 
 import tableData from '../data/plans.json';
 
@@ -214,21 +211,9 @@ const Table = () => {
                   let cell;
                   if (typeof item[key] === 'boolean') {
                     cell = item[key] ? (
-                      <Image
-                        src={checkIcon}
-                        width={24}
-                        height={24}
-                        alt={`${item.feature.title} included`}
-                        loading="lazy"
-                      />
+                      <span className="pricing-shield-icon flex size-6 h-6 w-6 bg-green-45" />
                     ) : (
-                      <Image
-                        src={crossIcon}
-                        width={14}
-                        height={14}
-                        alt={`${item.feature.title} not included`}
-                        loading="lazy"
-                      />
+                      <span className="pricing-cross-icon flex size-[14px] h-[14px] w-[14px] bg-gray-new-30" />
                     );
                   } else if (typeof item[key] === 'object') {
                     const { title, info, moreLink } = item[key];

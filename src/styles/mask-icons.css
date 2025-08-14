@@ -42,6 +42,58 @@
     @apply mask-styles pricing-icon-size;
   }
 
+  /* Used in a */
+  /* /src/components/pages/pricing/features/features.jsx */
+  /* /src/components/pages/pricing/plans/table/table.jsx */
+  .pricing-big-icon-size {
+    -webkit-mask-size: 24px 24px;
+  }
+
+  .pricing-shield-icon {
+    -webkit-mask-image: url('/images/pricing/shield.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-cross-icon {
+    -webkit-mask-image: url('/images/cross.svg');
+    @apply mask-styles pricing-icon-size;
+  }
+
+  .pricing-big-autoscale-icon {
+    -webkit-mask-image: url('/images/pricing/autoscale.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-copy-icon {
+    -webkit-mask-image: url('/images/pricing/copy.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-search-icon {
+    -webkit-mask-image: url('/images/pricing/search.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-cable-icon {
+    -webkit-mask-image: url('/images/pricing/cable.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-grid-icon {
+    -webkit-mask-image: url('/images/pricing/grid.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-auth-icon {
+    -webkit-mask-image: url('/images/pricing/auth.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
+  .pricing-compliance-icon {
+    -webkit-mask-image: url('/images/pricing/compliance.svg');
+    @apply mask-styles pricing-big-icon-size;
+  }
+
   /* Used in a /src/components/pages/multi-tb/branching/branching-demo/branching-demo.jsx  */
   .branching-demo-icon-size {
     -webkit-mask-size: 18px 18px;
