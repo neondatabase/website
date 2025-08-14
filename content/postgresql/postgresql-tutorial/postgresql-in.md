@@ -125,6 +125,10 @@ Output:
 
 ### 3\) Using the PostgreSQL IN operator with a list of dates
 
+We’ll use the `payment` table from the [sample database](../postgresql-getting-started/postgresql-sample-database):
+
+![](/postgresqltutorial/payment.png)
+
 The following statement uses the IN operator to find payments whose payment dates are in a list of dates: `2007-02-15` and `2007-02-16`:
 
 ```
