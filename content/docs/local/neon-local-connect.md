@@ -146,7 +146,7 @@ Once connected, the extension provides a comprehensive **Database Schema** view 
 - **Primary Keys**: Clearly marked primary key columns
 - **Foreign Keys**: Visual indicators for foreign key relationships
 
-### What you can do:
+### What you can do (#what-you-can-do-schema-view)
 
 - **Right-click any table** to access quick actions:
   - **Query Table**: Opens a pre-filled `SELECT *` query in the SQL Editor
