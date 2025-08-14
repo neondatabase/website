@@ -147,7 +147,7 @@ Examples:
 - 2 CU for 3 hours = 6 CU-hours
 - 8 CU for 2 hours = 16 CU-hours
 
-**Free**: 50 CU-hours/project/month (enough to a 0.25 CU compute in a project for 200 hours/month).  
+**Free**: 50 CU-hours/project/month (enough to run a 0.25 CU compute in a project for 200 hours/month).  
 **Launch**: $0.14/CU-hour  
 **Scale**: $0.26/CU-hour
 
