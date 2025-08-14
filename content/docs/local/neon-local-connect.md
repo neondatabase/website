@@ -239,7 +239,7 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 - **Reset from Parent Branch:** Instantly reset your branch to match its parent's state  
   [Docs: Branch reset](/docs/guides/reset-from-parent)
 
-### Database Tools (available in the main panel):
+### Database tools (available in the main panel):
 
 - **Open SQL Editor:** Launch the Neon SQL Editor in your browser for advanced queries
 - **Open Table View:** Browse your database schema and data in the Neon Console
