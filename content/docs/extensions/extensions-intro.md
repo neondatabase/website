@@ -1,7 +1,7 @@
 ---
 title: Postgres extensions
 enableTableOfContents: true
-updatedOn: '2025-05-27T19:40:34.751Z'
+updatedOn: '2025-08-15T16:04:35.017Z'
 ---
 
 Explore supported Postgres extensions by category. Also see:
@@ -216,6 +216,8 @@ Explore supported Postgres extensions by category. Also see:
 <a href="https://hypopg.readthedocs.io/en/rel1_stable/" description="Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing" icon="find-replace">hypopg</a>
 
 <a href="https://github.com/ossc-db/pg_hint_plan" description="Allows developers to influence query plans with hints in SQL comments, improving performance and control over query execution" icon="find-replace">pg_hint_plan</a>
+
+<a href="/docs/extensions/online_advisor" description="Recommends indexes, extended statistics, and prepared statements based on your actual query workload" icon="find-replace">online_advisor</a>
 
 </DetailIconCards>
 

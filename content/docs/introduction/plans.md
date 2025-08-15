@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-08-14T18:41:01.100Z'
+updatedOn: '2025-08-15T00:50:25.889Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -111,7 +111,7 @@ Example: Plan includes 10 branches/project. You create 2 extra branches for 5 ho
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 
-uBranch maximm:
+Branch maximum:
 
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
@@ -303,7 +303,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(5 GB × $0.35/GB-month)_
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**  
+  - Base fee — **$5.00**
+    _max($5, total usage)_
     **Estimated monthly cost:** **$32.55**
 
 - **Example 2**
@@ -315,7 +316,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(10 GB × $0.35/GB-month)_
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**  
+  - Base fee — **$5.00**
+    _max($5, total usage)_
     **Estimated monthly cost:** **$61.50**
 
 ---
@@ -331,7 +333,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(25 GB × $0.35/GB-month)_
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**  
+  - Base fee — **$5.00**
+    _max($5, total usage)_
     **Estimated monthly cost:** **$500.75**
 
 - **Example 2**
@@ -343,7 +346,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(40 GB × $0.35/GB-month)_
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**  
+  - Base fee — **$5.00**
+    _max($5, total usage)_
     **Estimated monthly cost:** **$762.50**
 
 ## FAQs
