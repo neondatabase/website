@@ -217,6 +217,8 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="https://github.com/ossc-db/pg_hint_plan" description="Allows developers to influence query plans with hints in SQL comments, improving performance and control over query execution" icon="find-replace">pg_hint_plan</a>
 
+<a href="/docs/extensions/online_advisor" description="Recommends indexes, extended statistics, and prepared statements based on your actual query workload" icon="find-replace">online_advisor</a>
+
 </DetailIconCards>
 
 ## Scientific computing
