@@ -4,10 +4,10 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { POSTGRESQL_BASE_PATH } from 'constants/docs';
-import { getSidebar } from 'utils/api-postgresql';
+import { getNavigation } from 'utils/api-postgresql';
 
 const NeonPostgresLayout = async ({ children }) => {
-  const sidebar = await getSidebar();
+  const navigation = await getNavigation();
 
   const customType = {
     title: 'PostgreSQL Tutorial',
@@ -27,7 +27,7 @@ const NeonPostgresLayout = async ({ children }) => {
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
         <MobileNav
           className="hidden lg:block"
-          sidebar={sidebar}
+          navigation={navigation}
           slug="index"
           basePath={POSTGRESQL_BASE_PATH}
           customName="PostgreSQL Documentation"
@@ -36,7 +36,7 @@ const NeonPostgresLayout = async ({ children }) => {
 
         <Sidebar
           className="-mt-[65px] w-[350px] shrink-0 xl:w-[302px] lg:hidden"
-          sidebar={sidebar}
+          navigation={navigation}
           slug="index"
           basePath={POSTGRESQL_BASE_PATH}
           customType={customType}

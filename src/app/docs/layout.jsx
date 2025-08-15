@@ -4,10 +4,10 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { getSidebar } from 'utils/api-docs';
+import { getNavigation } from 'utils/api-docs';
 
 const NeonDocsLayout = async ({ children }) => {
-  const sidebar = await getSidebar();
+  const navigation = await getNavigation();
 
   return (
     <Layout
@@ -20,7 +20,7 @@ const NeonDocsLayout = async ({ children }) => {
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
         <MobileNav
           className="hidden lg:block"
-          sidebar={sidebar}
+          navigation={navigation}
           slug="introduction"
           basePath={DOCS_BASE_PATH}
         />
@@ -30,7 +30,7 @@ const NeonDocsLayout = async ({ children }) => {
         >
           <Sidebar
             className="lg:hidden"
-            sidebar={sidebar}
+            navigation={navigation}
             slug="introduction"
             basePath={DOCS_BASE_PATH}
           />

@@ -26,8 +26,8 @@ const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
   return isSlugActiveMenu || isSlugInActiveMenu(items);
 };
 
-// NOTE: getActiveItems builds activeMenuList
-export const getActiveItems = (items, currentSlug, result = [], parents = []) => {
+// NOTE: getActiveMenuList builds activeMenuList
+export const getActiveMenuList = (items, currentSlug, result = [], parents = []) => {
   const activeItem = items.find((item) => item.slug === currentSlug);
   if (activeItem) {
     // NOTE: save items expect sections or collapsible items
@@ -41,21 +41,28 @@ export const getActiveItems = (items, currentSlug, result = [], parents = []) =>
   return items.reduce((acc, item) => {
     if (acc.length) return acc;
     if (item.items) {
-      return getActiveItems(item.items, currentSlug, result, [...parents, item]);
+      return getActiveMenuList(item.items, currentSlug, result, [...parents, item]);
     }
     return acc;
   }, result);
 };
 
-const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPageType = null }) => {
+const Sidebar = ({
+  className = null,
+  navigation,
+  slug,
+  basePath,
+  customType,
+  docPageType = null,
+}) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
   // NOTE: build initial activeMenuList on page load
-  // getActiveItems returns active menu items tree for active submenus
+  // getActiveMenuList returns active menu items tree for active submenus
   const [activeMenuList, setActiveMenuList] = useState([
     HOME_MENU_ITEM,
-    ...getActiveItems(sidebar, currentSlug),
+    ...getActiveMenuList(navigation, currentSlug),
   ]);
 
   // NOTE: useEffect for updating activeMenuList on slug change with broswer back/forth button
@@ -63,8 +70,8 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
   // if we surf through menu with clicks on items, it will not update activeMenuList
   // we check it with checkSlugInActiveMenu function
   useEffect(() => {
-    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
-      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, navigation)) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveMenuList(navigation, currentSlug)]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlug]);
@@ -92,7 +99,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
                 depth={0}
                 basePath={basePath}
                 slug={slug}
-                items={sidebar}
+                items={navigation}
                 setMenuHeight={setMenuHeight}
                 menuWrapperRef={menuWrapperRef}
                 activeMenuList={activeMenuList}
@@ -109,7 +116,7 @@ const Sidebar = ({ className = null, sidebar, slug, basePath, customType, docPag
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(PropTypes.shape()),
+  navigation: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   customType: PropTypes.shape({

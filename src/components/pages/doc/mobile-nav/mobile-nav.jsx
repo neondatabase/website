@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import { getActiveItems } from 'components/pages/doc/sidebar/sidebar';
+import { getActiveMenuList } from 'components/pages/doc/sidebar';
 import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -39,7 +39,7 @@ const variants = {
   },
 };
 
-const MobileNav = ({ className = null, sidebar, slug, basePath, customName, customType }) => {
+const MobileNav = ({ className = null, navigation, slug, basePath, customName, customType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [wrapperHeight, setWrapperHeight] = useState(null);
@@ -55,7 +55,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
   const currentSlug = pathname.replace(basePath, '');
   const [activeMenuList, setActiveMenuList] = useState([
     HOME_MENU_ITEM,
-    ...getActiveItems(sidebar, currentSlug),
+    ...getActiveMenuList(navigation, currentSlug),
   ]);
 
   const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
@@ -113,8 +113,8 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
   }, [controls, isOpen]);
 
   useEffect(() => {
-    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, sidebar)) {
-      setActiveMenuList([HOME_MENU_ITEM, ...getActiveItems(sidebar, currentSlug)]);
+    if (!checkSlugInActiveMenu(currentSlug, activeMenuList, navigation)) {
+      setActiveMenuList([HOME_MENU_ITEM, ...getActiveMenuList(navigation, currentSlug)]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlug]);
@@ -158,7 +158,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
               title="Home"
               basePath={basePath}
               slug={slug}
-              items={sidebar}
+              items={navigation}
               closeMobileMenu={closeMenu}
               setMenuHeight={setMenuHeight}
               menuWrapperRef={wrapperRef}
@@ -175,7 +175,7 @@ const MobileNav = ({ className = null, sidebar, slug, basePath, customName, cust
 
 MobileNav.propTypes = {
   className: PropTypes.string,
-  sidebar: PropTypes.arrayOf(PropTypes.shape()),
+  navigation: PropTypes.arrayOf(PropTypes.shape()),
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   customName: PropTypes.string,

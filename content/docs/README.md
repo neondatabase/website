@@ -20,7 +20,7 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `sidebar.yaml` file as well.
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `navigation.yaml` file as well.
 4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
@@ -28,13 +28,13 @@ Right now Markdown files accept the following fields:
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
-## Sidebar
+## Navigation
 
-Sidebar data is stored in the [sidebar.yaml](./sidebar.yaml) file.
+Navigation data is stored in the [navigation.yaml](./navigation.yaml) file.
 
 ### How to add a new category
 
-In order to add a new category to the sidebar, add a new item to the top level array with keys `title` and `items`.
+In order to add a new category to the navigation, add a new item to the top level array with keys `title` and `items`.
 
 For example:
 

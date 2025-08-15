@@ -6,7 +6,7 @@ import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
-import { getAllPosts, getAllChangelogs, getNavigationLinks, getSidebar } from 'utils/api-docs';
+import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }) {
   const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
   const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
@@ -70,14 +70,14 @@ const DocPost = async ({ params }) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const allChangelogPosts = await getAllChangelogs();
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getNavigation());
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 

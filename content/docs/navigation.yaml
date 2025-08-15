@@ -1,4 +1,7 @@
-- section: noname
+- nav: Getting Started
+  slug: introduction
+  title: Neon Docs
+  icon: home
   items:
     - title: Why Neon?
       icon: why-neon
@@ -10,11 +13,11 @@
           slug: get-started/dev-experience
         - title: Production readiness with Neon
           slug: get-started/production-readiness
-    - title: Getting Started
+    - title: Start with Neon
       icon: get-started
       slug: get-started/signing-up
       items:
-        - section: Tutorial
+        - title: Tutorial
           items:
             - title: 1 - Playing with Neon
               slug: get-started/signing-up
@@ -24,7 +27,7 @@
               slug: get-started/workflow-primer
             - title: 4 - Getting ready for production
               slug: get-started/production-checklist
-        - section: Language quickstarts
+        - title: Language quickstarts
           items:
             - title: Quick list
               slug: get-started/languages
@@ -43,7 +46,7 @@
               slug: guides/python
             - title: Rust
               slug: guides/rust
-        - section: Framework quickstarts
+        - title: Framework quickstarts
           items:
             - title: Quick list
               slug: get-started/frameworks
@@ -97,7 +100,7 @@
               slug: guides/symfony
             - title: Vue
               slug: guides/vue
-        - section: File and media storage
+        - title: File and media storage
           items:
             - title: File storage
               slug: guides/file-storage
@@ -151,7 +154,7 @@
       icon: import
       slug: import/migrate-intro
       items:
-        - section: Import utilities
+        - title: Import utilities
           items:
             - title: Import Data Assistant
               slug: import/import-data-assistant
@@ -177,7 +180,7 @@
               slug: import/migrate-from-render
             - title: Supabase
               slug: import/migrate-from-supabase
-        - section: Logical replication
+        - title: Logical replication
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
@@ -195,19 +198,22 @@
               slug: guides/logical-replication-rds-to-neon
             - title: Supabase
               slug: guides/logical-replication-supabase-to-neon
-        - section: Data migration services
+        - title: Data migration services
           items:
             - title: AWS Data Migration Service (DMS)
               slug: import/migrate-aws-dms
-        - section: CSV
+        - title: CSV
           items:
             - title: Import from CSV
               slug: import/import-from-csv
-        - section: Sample data
+        - title: Sample data
           items:
             - title: Sample data
               slug: import/import-sample-data
-- section: Platform
+- nav: Platform
+  slug: manage/platform
+  title: Platform
+  icon: platform
   items:
     - title: Architecture
       icon: architecture
@@ -253,11 +259,11 @@
         - title: Branching
           slug: guides/branching-intro
           items:
-            - section: Get started
+            - title: Get started
               items:
                 - title: Get started with branching
                   slug: guides/branching-intro
-            - section: Concepts
+            - title: Concepts
               items:
                 - title: About branching
                   slug: introduction/branching
@@ -267,13 +273,13 @@
                   slug: guides/branch-archiving
                 - title: Branch expiration
                   slug: guides/branch-expiration
-            - section: Restore and reset
+            - title: Restore and reset
               items:
                 - title: Reset from parent
                   slug: guides/reset-from-parent
                 - title: Instant restore
                   slug: introduction/branch-restore
-            - section: Branching in workflows
+            - title: Branching in workflows
               items:
                 - title: Branching with the CLI
                   slug: guides/branching-neon-cli
@@ -335,7 +341,7 @@
       icon: platform
       slug: manage/platform
       items:
-        - section: Access control
+        - title: Access control
           items:
             - title: Accounts
               slug: manage/accounts
@@ -350,13 +356,13 @@
                   slug: manage/orgs-manage
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
-                - section: Organizations API
+                - title: Organizations API
                   items:
                     - title: Manage organizations via API
                       slug: manage/orgs-api
                     - title: Query organization metrics via API
                       slug: manage/orgs-api-consumption
-                - section: CLI
+                - title: CLI
                   items:
                     - title: CLI actions
                       slug: manage/orgs-cli
@@ -368,7 +374,7 @@
               slug: manage/api-keys
             - title: Account recovery
               slug: manage/account-recovery
-        - section: Projects
+        - title: Projects
           items:
             - title: Object hierarchy
               slug: manage/overview
@@ -386,7 +392,7 @@
               slug: guides/tables
             - title: Integrations
               slug: manage/integrations
-        - section: Monitoring
+        - title: Monitoring
           items:
             - title: Overview
               slug: introduction/monitoring
@@ -398,7 +404,7 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-        - section: External monitoring
+        - title: External monitoring
           items:
             - title: Datadog
               slug: guides/datadog
@@ -410,12 +416,12 @@
               slug: reference/metrics-logs
             - title: Other monitoring tools
               slug: introduction/monitor-external-tools
-        - section: Team Tools
+        - title: Team Tools
           items:
             - title: App for Slack
               slug: manage/slack-app
               tag: beta
-        - section: Backups
+        - title: Backups
           items:
             - title: Overview
               slug: manage/backups
@@ -428,7 +434,7 @@
                   slug: manage/backups-aws-s3-backup-part-1
                 - title: Part 2 - Automate nightly backups
                   slug: manage/backups-aws-s3-backup-part-2
-        - section: Updates
+        - title: Updates
           items:
             - title: Overview
               slug: manage/maintenance-updates-overview
@@ -476,7 +482,7 @@
           slug: azure/azure-manage
         - title: Develop with Neon on Azure
           slug: azure/azure-develop
-- section: AI with Neon
+- nav: AI with Neon
   icon: ai
   items:
     - title: AI for agents
@@ -485,13 +491,13 @@
       items:
         - title: Overview
           slug: ai/ai-agents-tools
-        - section: MCP Integration
+        - title: MCP Integration
           items:
             - title: Neon MCP Server
               slug: ai/neon-mcp-server
             - title: Connect MCP Clients
               slug: ai/connect-mcp-clients-to-neon
-        - section: AI rules & prompts
+        - title: AI rules & prompts
           items:
             - title: AI rules
               slug: ai/ai-rules
@@ -501,7 +507,7 @@
               slug: ai/ai-rules-neon-drizzle
             - title: Neon Serverless
               slug: ai/ai-rules-neon-serverless
-        - section: IDE & Tool Integration
+        - title: IDE & Tool Integration
           items:
             - title: Claude Desktop
               slug: https://neon.com/guides/neon-mcp-server
@@ -513,7 +519,7 @@
               slug: https://neon.com/guides/windsurf-mcp-neon
             - title: Zed
               slug: https://neon.com/guides/zed-mcp-neon
-        - section: Agent Frameworks
+        - title: Agent Frameworks
           items:
             - title: AgentStack
               slug: https://neon.com/guides/agentstack-neon
@@ -529,7 +535,7 @@
       slug: ai/ai-intro
       icon: sparks
       items:
-        - section: Core concepts
+        - title: Core concepts
           items:
             - title: Introduction
               slug: ai/ai-intro
@@ -537,7 +543,7 @@
               slug: ai/ai-concepts
             - title: Pgvector
               slug: extensions/pgvector
-        - section: AI frameworks
+        - title: AI frameworks
           items:
             - title: LangChain
               slug: ai/langchain
@@ -547,13 +553,13 @@
               slug: ai/semantic-kernel
             - title: Inngest
               slug: ai/inngest
-        - section: Optimize & scale
+        - title: Optimize & scale
           items:
             - title: Optimize vector search
               slug: ai/ai-vector-search-optimization
             - title: Scale with Neon
               slug: ai/ai-scale-with-neon
-- section: Dev tools
+- nav: Dev tools
   items:
     - title: CLI Reference
       icon: cli
@@ -595,7 +601,7 @@
     - title: SDKs
       icon: sdk
       items:
-        - section: Neon SDKs
+        - title: Neon SDKs
           items:
             - title: TypeScript SDK
               slug: reference/typescript-sdk
@@ -603,7 +609,7 @@
               slug: reference/python-sdk
             - title: The @neondatabase/toolkit
               slug: reference/neondatabase-toolkit
-        - section: Community SDKs
+        - title: Community SDKs
           items:
             - title: Go SDK
               slug: https://github.com/kislerdm/neon-sdk-go
@@ -634,7 +640,7 @@
         - title: Neon Local Connect
           icon: extension
           slug: local/neon-local-connect
-- section: Frameworks & integrations
+- nav: Frameworks & integrations
   items:
     - title: Frameworks
       slug: get-started/frameworks
@@ -710,7 +716,7 @@
       icon: integrations
       slug: guides/integrations
       items:
-        - section: Monitor
+        - title: Monitor
           items:
             - title: Datadog
               slug: guides/datadog
@@ -718,7 +724,7 @@
               slug: guides/grafana-cloud
             - title: OpenTelemetry
               slug: guides/opentelemetry
-        - section: Deploy
+        - title: Deploy
           items:
             - title: Vercel
               slug: guides/vercel-overview
@@ -752,7 +758,7 @@
               slug: guides/railway
             - title: Render
               slug: guides/render
-        - section: Serverless
+        - title: Serverless
           items:
             - title: Neon serverless driver
               slug: serverless/serverless-driver
@@ -762,7 +768,7 @@
               slug: /guides/query-postgres-azure-functions
             - title: Trigger serverless functions with Inngest
               slug: guides/trigger-serverless-functions
-        - section: Query
+        - title: Query
           items:
             - title: Exograph
               slug: guides/exograph
@@ -782,7 +788,7 @@
               slug: guides/stepzen
             - title: WunderGraph
               slug: guides/wundergraph
-        - section: Develop
+        - title: Develop
           items:
             - title: GitHub integration
               slug: guides/neon-github-integration
@@ -800,7 +806,7 @@
               slug: guides/knex
             - title: Convex
               slug: /guides/convex-neon
-        - section: Replicate from Neon
+        - title: Replicate from Neon
           items:
             - title: Airbyte
               slug: guides/logical-replication-airbyte
@@ -830,7 +836,7 @@
               slug: guides/logical-replication-airbyte-snowflake
             - title: Inngest
               slug: guides/logical-replication-inngest
-        - section: Replicate to Neon
+        - title: Replicate to Neon
           items:
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
@@ -848,7 +854,7 @@
               slug: guides/logical-replication-rds-to-neon
             - title: Replicate from Supabase
               slug: guides/logical-replication-supabase-to-neon
-        - section: Schema Migration
+        - title: Schema Migration
           items:
             - title: Django
               slug: guides/django-migrations
@@ -880,7 +886,7 @@
               slug: guides/sequelize
             - title: SQLAlchemy
               slug: guides/sqlalchemy-migrations
-        - section: Authentication
+        - title: Authentication
           items:
             - title: Auth0
               slug: guides/auth-auth0
@@ -890,13 +896,12 @@
               slug: guides/auth-clerk
             - title: Okta
               slug: guides/auth-okta
-- section: Auth & backend
+- nav: Auth & backend
   items:
     - title: Data API
       icon: api
       tag: new
       slug: data-api/get-started
-      collapsible: true
       items:
         - title: Get started
           slug: data-api/get-started
@@ -909,7 +914,7 @@
       items:
         - title: Overview
           slug: neon-auth/overview
-        - section: Getting Started
+        - title: Getting Started
           items:
             - title: Next.js
               slug: neon-auth/quick-start/nextjs
@@ -919,7 +924,7 @@
               slug: neon-auth/quick-start/javascript
             - title: Demo
               slug: neon-auth/demo
-        - section: About
+        - title: About
           items:
             - title: How Neon Auth Works
               slug: neon-auth/how-it-works
@@ -927,7 +932,6 @@
               slug: neon-auth/tutorial
             - title: Core Concepts
               slug: neon-auth/concepts/stack-app
-              collapsible: true
               items:
                 - title: The StackApp Object
                   slug: neon-auth/concepts/stack-app
@@ -945,7 +949,7 @@
                   slug: neon-auth/concepts/user-onboarding
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
-        - section: Guides
+        - title: Guides
           items:  
             - title: Best practices
               slug: neon-auth/best-practices
@@ -957,16 +961,14 @@
               slug: neon-auth/permissions-roles
             - title: Email configuration
               slug: neon-auth/email-configuration
-        - section: SDKs & API
+        - title: SDKs & API
           items:
             - title: Next.js SDK
               slug: neon-auth/sdk/nextjs/overview
-              collapsible: true
               items:
                 - title: Overview
                   slug: neon-auth/sdk/nextjs/overview
                 - title: Objects
-                  collapsible: true
                   slug: neon-auth/sdk/nextjs/objects/stack-app
                   items:
                     - title: StackClientApp
@@ -974,7 +976,6 @@
                     - title: StackServerApp
                       slug: neon-auth/sdk/nextjs/objects/stack-server-app
                 - title: Types
-                  collapsible: true
                   slug: neon-auth/sdk/nextjs/types/contact-channel
                   items:
                     - title: ContactChannel
@@ -994,7 +995,6 @@
                     - title: User
                       slug: neon-auth/sdk/nextjs/types/user
                 - title: Hooks
-                  collapsible: true
                   slug: neon-auth/sdk/nextjs/hooks/use-stack-app
                   items:
                     - title: useStackApp
@@ -1003,18 +1003,15 @@
                       slug: neon-auth/sdk/nextjs/hooks/use-user
             - title: React SDK
               slug: neon-auth/sdk/react/overview
-              collapsible: true
               items:
                 - title: Overview
                   slug: neon-auth/sdk/react/overview
                 - title: Objects
-                  collapsible: true
                   slug: neon-auth/sdk/react/objects/stack-app
                   items:
                     - title: StackClientApp
                       slug: neon-auth/sdk/react/objects/stack-app
                 - title: Types
-                  collapsible: true
                   slug: neon-auth/sdk/react/types/user
                   items:
                     - title: User
@@ -1024,7 +1021,6 @@
                     - title: Project
                       slug: neon-auth/sdk/react/types/project
                 - title: Hooks
-                  collapsible: true
                   slug: neon-auth/sdk/react/hooks/use-stack-app
                   items:
                     - title: useStackApp
@@ -1033,13 +1029,11 @@
                       slug: neon-auth/sdk/react/hooks/use-user
             - title: Components
               slug: neon-auth/components/components
-              collapsible: true
               items:
                 - title: All Components
                   slug: neon-auth/components/components
                 - title: UI Components
                   slug: neon-auth/components/user-button
-                  collapsible: true
                   items:
                     - title: UserButton
                       slug: neon-auth/components/user-button
@@ -1061,7 +1055,6 @@
                       slug: neon-auth/components/oauth-button-group
                 - title: Utilities
                   slug: neon-auth/components/stack-handler
-                  collapsible: true
                   items:
                     - title: StackHandler
                       slug: neon-auth/components/stack-handler
@@ -1071,7 +1064,7 @@
                       slug: neon-auth/components/stack-theme
             - title: Admin API
               slug: neon-auth/api
-        - section: Customization
+        - title: Customization
           items:
             - title: Colors and Styles
               slug: neon-auth/customization/custom-styles
@@ -1084,7 +1077,6 @@
     - title: Row-Level security
       icon: lock
       slug: guides/row-level-security
-      collapsible: true
       items:
         - title: RLS in Neon
           slug: guides/row-level-security
@@ -1096,7 +1088,7 @@
       icon: lock
       slug: guides/neon-rls
       items:
-        - section: Overview
+        - title: Overview
           items:
             - title: About
               slug: guides/neon-rls
@@ -1106,7 +1098,7 @@
               slug: guides/neon-rls-troubleshooting
             - title: What's next
               slug: guides/neon-rls-future
-        - section: Quickstarts
+        - title: Quickstarts
           items:
             - title: Clerk
               slug: guides/neon-rls-clerk
@@ -1136,7 +1128,7 @@
               slug: guides/neon-rls-workos
             - title: Custom JWT
               slug: guides/neon-rls-custom-jwt
-- section: Workflows
+- nav: Workflows
   items:
     - title: Branching workflows
       slug: get-started-with-neon/workflow-primer
@@ -1155,13 +1147,13 @@
       slug: guides/neon-twin-intro
       icon: neon-twin
       items:
-        - section: pg_dump / pg_restore
+        - title: pg_dump / pg_restore
           items:
             - title: Full Twin
               slug: guides/neon-twin-full-pg-dump-restore
             - title: Partial Twin
               slug: guides/neon-twin-partial-pg-dump-restore
-- section: Postgres
+- nav: Postgres
   items:
     - title: PostgreSQL Tutorial
       slug: /postgresql/tutorial
@@ -1415,7 +1407,7 @@
     - title: Upgrade
       slug: postgresql/postgres-upgrade
       icon: upgrade
-- section: Security
+- nav: Security
   items:
     - title: Overview
       slug: security/security-overview
@@ -1435,7 +1427,7 @@
     - title: AI use in Neon
       slug: security/ai-use-in-neon
       icon: ai
-- section: Resources
+- nav: Resources
   items:
     - title: Platform integration
       slug: guides/platform-integration-intro
@@ -1465,8 +1457,6 @@
     - title: Early access
       slug: introduction/early-access
       icon: award
-- section: noname
-  items:
     - title: Community
       slug: community/community-intro
       icon: community
