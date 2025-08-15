@@ -19,11 +19,7 @@ This experience is immediately apparent during app creation. Neon's instant data
 
 ## Prerequisites
 
-Before you start, ensure you have a **Create Account**. You can sign up for a free account at [createanything.com](https://createanything.com/). The free plan is sufficient to follow this guide.
-
-<Admonition type="important" title="Vibe Coding Ahead 😎">
-Follow this guide only if you're ready to experience the future of app development through AI-powered tools. You'll be amazed at how quickly you can build a full-stack application with Anything and Neon that really works!
-</Admonition>
+Before you start, ensure you have an **Anything Account**. You can sign up for a free account at [createanything.com](https://createanything.com/). The free plan is sufficient to follow this guide.
 
 ## Building an AI Image Generator app
 
@@ -38,27 +34,28 @@ This app will allow users to generate images using Stable Diffusion, view them i
 
 ### Describe your app
 
-In the chat window, describe your app idea. For example, you can say, "Create a Stable Diffusion powered image generator. It should also show the past image generations."
+In the chat window, describe your app idea. For example, you can say, "Create a Stable Diffusion powered image generator. Ensure that image generation history is saved in a database, allowing users to view their past generations."
 
 ![Describe Your App](/docs/guides/create_xyz_describe_app.png)
 
 Anything will immediately begin building your app based on your description. You'll see the AI agent working in real-time within the chat window, assembling all the necessary components and code for your application.
 
-![Creating Your App](/docs/guides/create_xyz_inital_app.png)
+![Creating Your App](/docs/guides/create_xyz_initial_app.png)
 
-You can see that Anything has provisioned a database for storing image URLs needed for your gallery feature. You can examine the database schema directly in the chat window by clicking on the SQL statements to view the structure.
-
-![Database Schema](/docs/guides/create_xyz_database_schema.png)
+You can see that as requested, Anything has created a database for image generation history.
 
 You can verify the app's functionality by generating an image. Simply type your desired image description in the text field and click 'Generate.' You'll see your newly created image appear and automatically be added to the gallery display
 
 ![Testing the App](/docs/guides/create_xyz_test_app_working.png)
 
-Now that you've confirmed your app is functioning correctly, let's enhance it by adding a download counter feature that tracks the popularity of each generated image.
-
 <Admonition type="note">
 If the app doesn't work as expected, provide specific details in the chat window to help Anything understand the issue. For example, you can say, "The image generation is working, but the gallery is not displaying the images."
 </Admonition>
+
+### Database Schema
+You can easily review your app's database schema directly from the Anything Dashboard at any point. Simply navigate to the **"Databases"** tab, then select your project's database to explore its schema, tables, columns, and relationships. This visual overview helps you understand how your app's data is structured.
+
+![Database Schema](/docs/guides/create_xyz_database_schema.png)
 
 ### Continuous Iteration
 
@@ -66,27 +63,31 @@ You may want to add new features or refine existing ones as you iterate on your 
 
 In the chat window, you can say: "Allow users to download images and track the number of downloads for each image". Anything will start adding the necessary components to your app to support this feature.
 
-![Adding a New Feature](/docs/guides/create_xyz_add_new_feature.jpeg)
+![Adding a New Feature](/docs/guides/create_xyz_add_new_feature.png)
 
-You'll see that Anything has added a 'download count' column to your database. You can view the updated schema to see the change.
-
-![Updated Database Schema](/docs/guides/create_xyz_updated_database_schema.png)
+You can view the database schema to understand how the new download count feature is integrated. Anything might have added a new table or column to track downloads.
 
 To test the new feature, download an image. Click the 'Download' button on any image in the gallery. You'll see the download count increase for that image.
 
 ![Final App with Download Feature](/docs/guides/create_xyz_final_app.png)
 
-You've successfully built an AI Image Generator with download tracking! Now, you can customize it further. Enhance the UI, add features like user authentication, or integrate services such as Stripe to charge $1 per generated image. Just say, 'Add Stripe so users pay $1 per image,' to get started.
+You've successfully built an AI Image Generator with download tracking! You can now customize it further by enhancing the UI, adding features like user authentication, or integrating services such as Stripe to charge $1 per generated image. To add user authentication, say something like: 'The app should allow users to sign in and sign up. Image generation should only be available to signed-in users.'
 
-![Adding Stripe Integration](/docs/guides/create_xyz_add_stripe.png)
+Anything will add the necessary components to your app to support user authentication.
 
-<Admonition type="note">
-You will need to connect your Stripe account to Create to enable the Stripe integration. Follow the onboarding steps to connect your Stripe account and complete the integration.
+![Adding User Authentication](/docs/guides/create_xyz_add_user_auth.png)
+
+<Admonition type="note" title="Configuring Authentication Providers for User Accounts">
+User accounts are built-in and fully supported in Anything. If you want to let users sign in with Google, Facebook, or other providers, simply visit your project's **Auth Providers** section in the Project Settings. There, you can enable additional sign-in options with just a few clicks. Learn more in the [Anything Docs: User Accounts](https://www.createanything.com/docs/builder/user-accounts).
+
+![User Accounts](/docs/guides/create_xyz_user_accounts.png)
 </Admonition>
 
-![Final App with Stripe Integration](/docs/guides/create_xyz_final_app_with_stripe.png)
+Your app should now require users to sign in before generating images. You can test this by trying to generate an image without being signed in.
 
-Finally, you can deploy the app by clicking on the "Publish" button.
+![Testing User Authentication](/docs/guides/create_xyz_test_user_auth.png)
+
+Finally, you can deploy the app by clicking on the "Publish" button. You can also publish your app to the Apple iOS Store (mobile app support is currently in beta.) For more details, see the [Anything Docs: Mobile Apps](https://www.createanything.com/docs/builder/mobile).
 
 ![Publishing the App](/docs/guides/create_xyz_publish_app.png)
 
@@ -96,11 +97,11 @@ Anything offers a robust version history. This feature enables instant restorati
 
 To restore a past version:
 
-1. **Browse Chat History:** Find the desired version in your chat conversation.
-2. **One-Click Restore:** Click on that version.
-3. **Publish:** Click 'Publish' to deploy the restored version.
+1. **Browse Version History:** Click on the down arrow next to the "Anything" logo in the top left corner.
 
-![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
+    ![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
+
+2. **Restore:** Click on the desired version from the list to restore it.
 
 Anything instantly switches your app back to that earlier state.
 </Admonition>
