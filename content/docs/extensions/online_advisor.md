@@ -33,7 +33,7 @@ Please refer to the [Supported Postgres extensions](/docs/extensions/pg-extensio
 ## Enable the online_advisor extension
 
 <Admonition type="important">
-Before you can create the `online_advisor` extension, you must enable the `online_advisor` preloaded library. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) for instructions.
+Before you can create the `online_advisor` extension **on Neon Postgres 14-16**, you must enable the `online_advisor` preloaded library. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) for instructions. This step is not required on Postgres 17 projects.
 </Admonition>
 
 After enabling the preloaded library and restarting your compute, you can create the extension in each target database:
