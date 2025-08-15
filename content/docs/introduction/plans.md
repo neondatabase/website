@@ -334,7 +334,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_ 
+    _max($5, total usage)_
     **Estimated monthly cost:** **$500.75**
 
 - **Example 2**
@@ -347,7 +347,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_ 
+    _max($5, total usage)_
     **Estimated monthly cost:** **$762.50**
 
 ## FAQs
