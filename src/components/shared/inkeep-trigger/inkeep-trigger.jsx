@@ -116,8 +116,6 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     },
     aiChatSettings: {
       ...aiChatSettings,
-      introMessage:
-        "<p>Hi!<br>I'm an AI assistant trained on documentation, help articles, and other content.</p><p>Ask me anything about Neon.</p>",
     },
   };
 

@@ -17,19 +17,11 @@
 
 /* wrapper & content */
 .ikp-ai-chat__scrollable-page-wrapper {
-  padding: 16px 16px 12px;
+  padding: 20px 16px 12px;
 }
 
 .ikp-ai-chat__scrollable-page-content__inner {
   justify-content: center;
-}
-
-/* intro text */
-.ikp-content-parser__text {
-  margin-top: 12px;
-}
-.ikp-content-parser__text:first-child {
-  margin-top: 0;
 }
 
 /* quick questions grid */
@@ -138,11 +130,12 @@
 
 /* content */
 .ikp-message__wrapper > div:first-child {
-  padding: 24px 40px;
+  padding: 0 40px;
+  margin: 24px 0;
 }
 @media (max-width: 612px) {
   .ikp-message__wrapper > div:first-child {
-    padding: 24px 0;
+    padding: 0;
   }
 }
 .ikp-message__divider-wrapper {
