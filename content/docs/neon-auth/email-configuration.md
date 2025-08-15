@@ -95,7 +95,7 @@ curl --request PATCH \
      }'
 ```
 
-## Production Best Practices
+## Production best practices
 
 To ensure your transactional emails are reliable, secure, and professional, follow these best practices when configuring your production environment.
 
