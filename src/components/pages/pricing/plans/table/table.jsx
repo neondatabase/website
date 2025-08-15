@@ -211,9 +211,9 @@ const Table = () => {
                   let cell;
                   if (typeof item[key] === 'boolean') {
                     cell = item[key] ? (
-                      <span className="pricing-shield-icon flex size-6 h-6 w-6 bg-green-45" />
+                      <span className="pricing-shield-icon flex size-6 bg-green-45" />
                     ) : (
-                      <span className="pricing-cross-icon flex size-[14px] h-[14px] w-[14px] bg-gray-new-30" />
+                      <span className="pricing-cross-icon flex size-[14px] bg-gray-new-30" />
                     );
                   } else if (typeof item[key] === 'object') {
                     const { title, info, moreLink } = item[key];

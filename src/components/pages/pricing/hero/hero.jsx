@@ -139,7 +139,6 @@ const Hero = () => {
                       features={otherFeatures.features}
                       type={type}
                       highlighted={highlighted}
-                      hasToggler
                     />
                   )}
                   {highlighted && (
