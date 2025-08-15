@@ -62,7 +62,7 @@ const Features = () => (
       <ul className="mx-auto mt-14 grid grid-cols-4 justify-center gap-x-10 gap-y-11 xl:grid-cols-3 lg:mt-12 lg:max-w-[640px] lg:grid-cols-2 lg:gap-10 md:gap-[34px] sm:mt-10 xs:grid-cols-1">
         {DATA.map(({ icon, title, description, link }) => (
           <li className="sm:max-w-[260px]" key={title}>
-            <span className={`flex size-6 h-6 w-6 translate-y-px bg-green-45 ${icon}`} />
+            <span className={`flex size-6 translate-y-px bg-green-45 ${icon}`} />
             <h3 className="mt-2.5 text-xl font-medium leading-snug tracking-extra-tight md:text-lg sm:mt-2">
               {title}
             </h3>
