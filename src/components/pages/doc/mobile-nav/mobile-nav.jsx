@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import { getActiveMenuList } from 'components/pages/doc/sidebar';
 import { HOME_MENU_ITEM } from 'constants/docs';
 import useBodyLockScroll from 'hooks/use-body-lock-scroll';
 import useClickOutside from 'hooks/use-click-outside';
@@ -39,6 +38,44 @@ const variants = {
   },
 };
 
+// NOTE: checkSlugInActiveMenu checks if we have current page in last activeMenu item
+const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
+  const activeMenu = activeMenuList[activeMenuList.length - 1];
+  const isSlugActiveMenu = activeMenu.slug === currentSlug;
+
+  // NOTE: check if current page is in active menu
+  const isSlugInActiveMenu = (items) =>
+    items.some(
+      (item) =>
+        (item.title === activeMenu.title &&
+          item.items?.some((subItem) => subItem.slug === currentSlug)) ||
+        (item.items && isSlugInActiveMenu(item.items))
+    );
+
+  return isSlugActiveMenu || isSlugInActiveMenu(items);
+};
+
+// NOTE: getActiveMenuList builds activeMenuList
+const getActiveMenuList = (items, currentSlug, result = [], parents = []) => {
+  const activeItem = items.find((item) => item.slug === currentSlug);
+  if (activeItem) {
+    // NOTE: save items expect sections or collapsible items
+    result.push(...parents.filter((parent) => !parent.section && !parent.collapsible));
+    if (activeItem.items && !activeItem.section && !activeItem.collapsible) {
+      result.push(activeItem);
+    }
+    return result;
+  }
+
+  return items.reduce((acc, item) => {
+    if (acc.length) return acc;
+    if (item.items) {
+      return getActiveMenuList(item.items, currentSlug, result, [...parents, item]);
+    }
+    return acc;
+  }, result);
+};
+
 const MobileNav = ({ className = null, navigation, slug, basePath, customName, customType }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,21 +104,6 @@ const MobileNav = ({ className = null, navigation, slug, basePath, customName, c
   };
 
   useClickOutside([wrapperRef], onOutsideClick);
-
-  const checkSlugInActiveMenu = (currentSlug, activeMenuList, items) => {
-    const activeMenu = activeMenuList[activeMenuList.length - 1];
-    const isSlugActiveMenu = activeMenu.slug === currentSlug;
-
-    const isSlugInActiveMenu = (items) =>
-      items.some(
-        (item) =>
-          (item.title === activeMenu.title &&
-            item.items?.some((subItem) => subItem.slug === currentSlug)) ||
-          (item.items && isSlugInActiveMenu(item.items))
-      );
-
-    return isSlugActiveMenu || isSlugInActiveMenu(items);
-  };
 
   useEffect(() => {
     const onScroll = () => {
@@ -175,7 +197,7 @@ const MobileNav = ({ className = null, navigation, slug, basePath, customName, c
 
 MobileNav.propTypes = {
   className: PropTypes.string,
-  navigation: PropTypes.arrayOf(PropTypes.shape()),
+  navigation: PropTypes.array.isRequired,
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   customName: PropTypes.string,

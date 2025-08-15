@@ -14,13 +14,11 @@ const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
       <HomeIcon />
     </Link>
 
-    <span>/</span>
-
     {breadcrumbs.map(({ title, slug }, index) => {
       const isLast = index === breadcrumbs.length - 1;
       return (
         <Fragment key={index}>
-          {index > 0 && <span>/</span>}
+          <span>/</span>
           {slug ? (
             <Link
               className={linkClassName}

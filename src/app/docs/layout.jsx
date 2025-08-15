@@ -12,6 +12,7 @@ const NeonDocsLayout = async ({ children }) => {
   return (
     <Layout
       headerClassName="h-28 lg:h-16"
+      docsNavigation={navigation}
       isDocPage
       isHeaderSticky
       headerWithBorder
@@ -25,11 +26,11 @@ const NeonDocsLayout = async ({ children }) => {
           basePath={DOCS_BASE_PATH}
         />
         <Container
-          className="grid w-full flex-1 grid-cols-[16rem_auto_16rem] gap-x-24 pt-11 2xl:gap-x-8 xl:grid-cols-[16rem_auto] xl:pt-9 lg:block sm:pt-7"
+          className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
           size="1600"
         >
           <Sidebar
-            className="lg:hidden"
+            className="w-64 shrink-0 lg:hidden"
             navigation={navigation}
             slug="introduction"
             basePath={DOCS_BASE_PATH}

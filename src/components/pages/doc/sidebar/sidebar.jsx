@@ -91,7 +91,7 @@ const Sidebar = ({
           )}
         >
           <nav
-            className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-5 pt-8"
+            className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-5 pt-11"
             ref={menuWrapperRef}
           >
             <div className="relative w-full overflow-hidden" style={{ height: menuHeight }}>
@@ -116,7 +116,7 @@ const Sidebar = ({
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  navigation: PropTypes.arrayOf(PropTypes.shape()),
+  navigation: PropTypes.array.isRequired,
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   customType: PropTypes.shape({

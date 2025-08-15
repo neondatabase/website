@@ -39,7 +39,7 @@ const Item = ({
 
   const externalSlug = slug?.startsWith('http') ? slug : null;
   const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
-  const docSlug = root ? slug : `${basePath}${slug}/`;
+  const docSlug = root ? slug : `${basePath}${slug}`;
 
   const LinkTag = slug ? Link : 'button';
 

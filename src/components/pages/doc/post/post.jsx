@@ -49,7 +49,7 @@ const Post = ({
 
   return (
     <>
-      <div className="pb-32 lg:pb-24 md:pb-20">
+      <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
         {breadcrumbs.length > 0 && (
           <Breadcrumbs
             breadcrumbs={breadcrumbs}
@@ -90,6 +90,7 @@ const Post = ({
       </div>
 
       <Aside
+        className="w-64 shrink-0 xl:hidden"
         isDocsIndex={isDocsIndex}
         isChangelog={isChangelog}
         enableTableOfContents={enableTableOfContents}

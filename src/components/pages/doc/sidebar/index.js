@@ -1,5 +1,3 @@
-import Sidebar, { getActiveMenuList } from './sidebar';
-
-export { getActiveMenuList };
+import Sidebar from './sidebar';
 
 export default Sidebar;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import DocsHeader from 'components/pages/doc/header';
+import DocsHeader from 'components/pages/doc/docs-header';
 import Container from 'components/shared/container';
 import Logo from 'components/shared/logo';
 
@@ -17,6 +17,7 @@ const Header = ({
   isStickyOverlay = false,
   isDocPage = false,
   docPageType = null,
+  docsNavigation = null,
   withBorder = false,
   customType = null,
   isClient = false,
@@ -30,7 +31,12 @@ const Header = ({
       withBorder={withBorder}
     >
       {isDocPage ? (
-        <DocsHeader customType={customType} docPageType={docPageType} isClient={isClient} />
+        <DocsHeader
+          customType={customType}
+          docPageType={docPageType}
+          isClient={isClient}
+          navigation={docsNavigation}
+        />
       ) : (
         <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
           <div className="flex items-center gap-x-[90px] xl:gap-x-16">
@@ -60,6 +66,7 @@ Header.propTypes = {
   isStickyOverlay: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
+  docsNavigation: PropTypes.array,
   withBorder: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,
