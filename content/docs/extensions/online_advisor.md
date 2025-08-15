@@ -77,16 +77,16 @@ VACUUM (ANALYZE) orders;
 
 You can tune `online_advisor` with these settings:
 
-| Setting                                  | Default | Description                                                               |
-| ---------------------------------------- | ------- | ------------------------------------------------------------------------- |
-| `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                      |
-| `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                 |
-| `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                 |
-| `online_advisor.max_index_proposals`     | `1000`  | Max tracked clauses for index proposals (system-level, read-only on Neon). |
+| Setting                                  | Default | Description                                                                              |
+| ---------------------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                                     |
+| `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                                |
+| `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                                |
+| `online_advisor.max_index_proposals`     | `1000`  | Max tracked clauses for index proposals (system-level, read-only on Neon).               |
 | `online_advisor.max_stat_proposals`      | `1000`  | Max tracked clauses for extended statistics proposals (system-level, read-only on Neon). |
-| `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                   |
-| `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                               |
-| `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements. |
+| `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                                  |
+| `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                                              |
+| `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements.                |
 
 <Admonition type="note">
 On Neon, you can only modify session-level settings using `SET`. System-level settings like `online_advisor.max_index_proposals` and `online_advisor.max_stat_proposals` use default values and cannot be changed. If you need different system-level settings, reach out to Neon Support.
