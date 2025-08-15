@@ -87,16 +87,16 @@ VACUUM (ANALYZE) orders;
 
 You can tune `online_advisor` with these settings:
 
-| Setting | Default | Description |
-| ------- | ------- | ----------- |
-| `online_advisor.filtered_threshold` | `1000` | Minimum filtered rows in a node to suggest an index. |
-| `online_advisor.misestimation_threshold` | `10` | Minimum actual/estimated row ratio to flag misestimation. |
-| `online_advisor.min_rows` | `1000` | Minimum returned rows before misestimation is considered. |
-| `online_advisor.max_index_proposals` | `1000` | Max tracked clauses for index proposals (set before activation). |
-| `online_advisor.max_stat_proposals` | `1000` | Max tracked clauses for extended statistics proposals (set before activation). |
-| `online_advisor.do_instrumentation` | `on` | Toggle data collection. |
-| `online_advisor.log_duration` | `off` | Log planning/execution time for each query. |
-| `online_advisor.prepare_threshold` | `1.0` | Planning/execution time ratio above which to suggest prepared statements. |
+| Setting                                  | Default | Description                                                                    |
+| ---------------------------------------- | ------- | ------------------------------------------------------------------------------ |
+| `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                           |
+| `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                      |
+| `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                      |
+| `online_advisor.max_index_proposals`     | `1000`  | Max tracked clauses for index proposals (set before activation).               |
+| `online_advisor.max_stat_proposals`      | `1000`  | Max tracked clauses for extended statistics proposals (set before activation). |
+| `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                        |
+| `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                                    |
+| `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements.      |
 
 Change a setting for the current session:
 
