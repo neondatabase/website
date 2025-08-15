@@ -38,7 +38,7 @@ Connecting your own SMTP provider is the recommended approach for all production
 
 Connecting your own SMTP server is a straightforward process.
 
-### Choose an SMTP Provider
+### Choose an SMTP provider
 
 First, you need an account with an email service that provides SMTP credentials. If you don't already have one, here are a few popular providers:
 
