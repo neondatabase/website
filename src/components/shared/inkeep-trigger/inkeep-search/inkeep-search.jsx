@@ -32,7 +32,7 @@ const InkeepSearch = ({ className = null, handleClick, isNotFoundPage = false })
             isNotFoundPage ? 'text-xl lg:text-lg md:text-base' : 'text-[13px] lg:hidden'
           )}
         >
-          Search {isNotFoundPage && 'for another page'} ...
+          Search{isNotFoundPage && ' for another page'}...
         </span>
       </span>
       <span className="rounded-sm border border-gray-new-90 p-[3px] dark:border-gray-new-20 lg:hidden">

@@ -3,9 +3,8 @@
   title: Neon Docs
   icon: home
   items:
-    - title: Why Neon?
+    - section: Why Neon?
       icon: why-neon
-      slug: get-started/why-neon
       items:
         - title: Our mission
           slug: get-started/why-neon
@@ -13,9 +12,8 @@
           slug: get-started/dev-experience
         - title: Production readiness with Neon
           slug: get-started/production-readiness
-    - title: Start with Neon
+    - section: Start with Neon
       icon: get-started
-      slug: get-started/signing-up
       items:
         - title: Tutorial
           items:
@@ -118,10 +116,11 @@
               slug: guides/imagekit
             - title: Uploadcare
               slug: guides/uploadcare
-    - title: Connect
-      slug: connect/connect-intro
+    - section: Connect
       icon: connect
       items:
+        - title: Connect to Neon
+          slug: connect/connect-intro
         - title: Drivers and connection types
           slug: connect/choose-connection
         - title: Connect from any app
@@ -150,10 +149,11 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
-    - title: Migrate to Neon
+    - section: Migrate to Neon
       icon: import
-      slug: import/migrate-intro
       items:
+        - title: Overview
+          slug: import/migrate-intro
         - title: Import utilities
           items:
             - title: Import Data Assistant
@@ -215,7 +215,7 @@
   title: Platform
   icon: platform
   items:
-    - title: Architecture
+    - section: Architecture
       icon: architecture
       slug: introduction/architecture-overview
       items:
@@ -227,7 +227,7 @@
           slug: introduction/compute-lifecycle
         - title: High availability
           slug: introduction/high-availability
-    - title: Features
+    - section: Features
       slug: guides/neon-features
       icon: features
       items:
@@ -337,7 +337,7 @@
           slug: guides/protected-branches
         - title: Private Networking
           slug: guides/neon-private-networking
-    - title: Platform
+    - section: Platform
       icon: platform
       slug: manage/platform
       items:
@@ -442,19 +442,27 @@
               slug: manage/platform-maintenance
             - title: Updates
               slug: manage/updates
-    - title: Use cases
-      slug: use-cases/use-cases-overview
+    - section: Use cases
       icon: use-case
-    - title: Regions
-      slug: introduction/regions
+      items:
+        - title: Use cases
+          slug: use-cases/use-cases-overview
+    - section: Regions
       icon: regions
-    - title: Support
-      slug: introduction/support
+      items:
+        - title: Regions
+          slug: introduction/regions
+    - section: Support
       icon: support
-    - title: Status
-      slug: introduction/status
+      items:
+        - title: Support
+          slug: introduction/support
+    - section: Status
       icon: status
-    - title: Plans and billing
+      items:
+        - title: Status
+          slug: introduction/status
+    - section: Plans and billing
       slug: introduction/about-billing
       icon: billing
       items:
@@ -472,7 +480,7 @@
           slug: introduction/billing-azure-marketplace
         - title: Enterprise sales process
           slug: introduction/enterprise-sales-process
-    - title: Neon on Azure
+    - section: Neon on Azure
       slug: manage/azure
       icon: azure
       items:
@@ -483,7 +491,7 @@
         - title: Develop with Neon on Azure
           slug: azure/azure-develop
 - nav: Frameworks & integrations
-  slug: get-started/frameworks
+  title: Frameworks & integrations
   icon: frameworks
   items:
     - title: Frameworks
@@ -822,6 +830,7 @@
           icon: extension
           slug: local/neon-local-connect
 - nav: Backend Tools
+  title: Backend Tools
   subnav:
   - nav: Auth & backend
     items:
@@ -1335,6 +1344,7 @@
         slug: postgresql/postgres-upgrade
         icon: upgrade
 - nav: AI with Neon
+  title: AI with Neon
   icon: ai
   items:
     - title: AI for agents
@@ -1412,7 +1422,7 @@
             - title: Scale with Neon
               slug: ai/ai-scale-with-neon
 - nav: Security
-  slug: security/security-overview
+  title: Security
   icon: security
   items:
     - title: Overview
@@ -1434,6 +1444,7 @@
       slug: security/ai-use-in-neon
       icon: ai
 - nav: Resources
+  title: Resources
   items:
     - title: Platform integration
       slug: guides/platform-integration-intro

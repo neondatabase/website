@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { usePathname } from 'next/navigation';
@@ -9,26 +11,17 @@ import Chevron from 'icons/chevron-right-lg.inline.svg';
 
 import Tag from '../../tag';
 import Icon from '../icon';
-// eslint-disable-next-line import/no-cycle
-import Menu from '../menu';
 
 const Item = ({
   basePath,
   root,
-  depth = 0,
   title,
   slug = null,
   icon = null,
   tag = null,
   ariaLabel = null,
   items = null,
-  activeMenuList,
-  setActiveMenuList,
   closeMobileMenu = null,
-  setMenuHeight = null,
-  menuWrapperRef = null,
-  collapsible = false,
-  onCollapse = null,
 }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -44,23 +37,15 @@ const Item = ({
   const LinkTag = slug ? Link : 'button';
 
   const handleToggle = () => {
-    if (isActiveMenu) {
-      setIsCollapsed((prev) => !prev);
-    } else if (isCollapsed) {
-      setIsCollapsed(false);
-    }
-    if (onCollapse) onCollapse();
+    setIsCollapsed((prev) => !prev);
   };
 
   const handleClick = () => {
-    if (collapsible) {
+    if (items?.length) {
       handleToggle();
       return;
     }
 
-    if (items?.length && !collapsible && !activeMenuList.some((item) => item.title === title)) {
-      setActiveMenuList((prevList) => [...prevList, { title, slug }]);
-    }
     if (slug && closeMobileMenu) closeMobileMenu();
   };
 
@@ -68,9 +53,9 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group flex w-full gap-2 py-1.5 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200 md:py-[7px]',
-          collapsible && 'pr-1',
-          isActive && !collapsible
+          'group flex w-full gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+          items?.length && 'pr-1',
+          isActive && !items?.length
             ? 'font-medium text-black-new dark:text-white'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
         )}
@@ -86,73 +71,30 @@ const Item = ({
           {title}&nbsp;
           {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
         </span>
-        {collapsible && items?.length && (
-          <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && '-rotate-90')} />
+        {items?.length && (
+          <Chevron className={clsx('ml-auto w-1.5', !isCollapsed && 'rotate-90')} />
         )}
       </LinkTag>
-      {items?.length &&
-        (collapsible ? (
-          <LazyMotion features={domAnimation}>
-            <m.div
-              className="overflow-hidden"
-              initial={isActiveMenu ? 'expanded' : 'collapsed'}
-              animate={isCollapsed ? 'collapsed' : 'expanded'}
-              variants={{
-                collapsed: { opacity: 0, height: 0, translateY: 10 },
-                expanded: { opacity: 1, height: 'auto', translateY: 0 },
-              }}
-              transition={{ duration: 0.2 }}
-            >
-              <ul className="mb-2 ml-1 border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
-                {items.map((item, index) => (
-                  <Item
-                    {...item}
-                    key={index}
-                    basePath={basePath}
-                    activeMenuList={activeMenuList}
-                    setActiveMenuList={setActiveMenuList}
-                    closeMobileMenu={closeMobileMenu}
-                    setMenuHeight={setMenuHeight}
-                    menuWrapperRef={menuWrapperRef}
-                    onCollapse={onCollapse}
-                  >
-                    {item.items && (
-                      <Menu
-                        depth={depth + 1}
-                        title={item.title}
-                        slug={item.slug}
-                        icon={item.icon}
-                        items={item.items}
-                        basePath={basePath}
-                        parentMenu={{ title, slug }}
-                        setMenuHeight={setMenuHeight}
-                        menuWrapperRef={menuWrapperRef}
-                        activeMenuList={activeMenuList}
-                        setActiveMenuList={setActiveMenuList}
-                        closeMobileMenu={closeMobileMenu}
-                      />
-                    )}
-                  </Item>
-                ))}
-              </ul>
-            </m.div>
-          </LazyMotion>
-        ) : (
-          <Menu
-            depth={depth + 1}
-            title={title}
-            slug={slug}
-            basePath={basePath}
-            icon={icon}
-            items={items}
-            parentMenu={{ title, slug }}
-            setMenuHeight={setMenuHeight}
-            menuWrapperRef={menuWrapperRef}
-            activeMenuList={activeMenuList}
-            setActiveMenuList={setActiveMenuList}
-            closeMobileMenu={closeMobileMenu}
-          />
-        ))}
+      {items?.length && (
+        <LazyMotion features={domAnimation}>
+          <m.div
+            className="overflow-hidden"
+            initial={isActiveMenu ? 'expanded' : 'collapsed'}
+            animate={isCollapsed ? 'collapsed' : 'expanded'}
+            variants={{
+              collapsed: { opacity: 0, height: 0, translateY: 10 },
+              expanded: { opacity: 1, height: 'auto', translateY: 0 },
+            }}
+            transition={{ duration: 0.2 }}
+          >
+            <ul className="mt-3.5 flex flex-col gap-3.5 border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
+              {items.map((item, index) => (
+                <Item {...item} key={index} basePath={basePath} closeMobileMenu={closeMobileMenu} />
+              ))}
+            </ul>
+          </m.div>
+        </LazyMotion>
+      )}
     </li>
   );
 };
@@ -160,7 +102,6 @@ const Item = ({
 Item.propTypes = {
   basePath: PropTypes.string.isRequired,
   root: PropTypes.bool,
-  depth: PropTypes.number,
   title: PropTypes.string.isRequired,
   slug: PropTypes.string,
   icon: PropTypes.string,
@@ -176,18 +117,9 @@ Item.propTypes = {
       collapsible: PropTypes.bool,
     })
   ),
-  activeMenuList: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string,
-    })
-  ).isRequired,
-  setActiveMenuList: PropTypes.func.isRequired,
   closeMobileMenu: PropTypes.func,
   setMenuHeight: PropTypes.func.isRequired,
   menuWrapperRef: PropTypes.any.isRequired,
-  collapsible: PropTypes.bool,
-  onCollapse: PropTypes.func,
 };
 
 export default Item;

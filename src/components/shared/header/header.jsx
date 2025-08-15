@@ -18,6 +18,7 @@ const Header = ({
   isDocPage = false,
   docPageType = null,
   docsNavigation = null,
+  docsBasePath = null,
   withBorder = false,
   customType = null,
   isClient = false,
@@ -36,6 +37,7 @@ const Header = ({
           docPageType={docPageType}
           isClient={isClient}
           navigation={docsNavigation}
+          basePath={docsBasePath}
         />
       ) : (
         <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
@@ -67,6 +69,7 @@ Header.propTypes = {
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
   docsNavigation: PropTypes.array,
+  docsBasePath: PropTypes.string,
   withBorder: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,

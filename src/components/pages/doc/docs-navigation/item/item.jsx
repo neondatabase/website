@@ -5,15 +5,29 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH } from 'constants/docs';
 
-const Item = ({ nav, slug, items }) => {
+const isActiveItem = (slug, items, currentSlug) => {
+  if (slug === currentSlug) return true;
+
+  const findActiveItem = (itemsList) =>
+    itemsList?.reduce((found, item) => {
+      if (found) return true;
+      if (item.slug === currentSlug) return true;
+      if (item.items) return findActiveItem(item.items);
+      return false;
+    }, false) || false;
+
+  return findActiveItem(items);
+};
+
+const Item = ({ nav, slug, items, basePath }) => {
   const LinkTag = slug ? Link : 'button';
   const pathname = usePathname();
-  const currentSlug = pathname.replace(DOCS_BASE_PATH, '');
+  const currentSlug = pathname.replace(basePath, '');
+  console.log(currentSlug, slug);
 
-  const isActive = slug === currentSlug || items?.some((item) => item.slug === currentSlug);
-  const href = `${DOCS_BASE_PATH}${slug}`;
+  const isActive = isActiveItem(slug, items, currentSlug);
+  const href = `${basePath}${slug}`;
 
   return (
     <LinkTag
@@ -42,6 +56,7 @@ Item.propTypes = {
       slug: PropTypes.string.isRequired,
     })
   ),
+  basePath: PropTypes.string.isRequired,
 };
 
 export default Item;

@@ -9,7 +9,7 @@ import LINKS from 'constants/links';
 
 import DocsNavigation from '../docs-navigation';
 
-const DocsHeader = ({ customType, docPageType, isClient, navigation }) => (
+const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
   <div className="flex h-28 w-full items-center border-b border-gray-new-80 dark:border-gray-new-15 lg:h-16">
     <Container className="z-10 w-full" size="1600">
       <div className="flex h-16 w-full items-center justify-between">
@@ -28,7 +28,7 @@ const DocsHeader = ({ customType, docPageType, isClient, navigation }) => (
         <Sidebar className="lg:hidden" isClient={isClient} simpleMode />
       </div>
       <div className="h-12 w-full border-t border-gray-new-80 dark:border-gray-new-15 lg:hidden">
-        <DocsNavigation navigation={navigation} />
+        <DocsNavigation navigation={navigation} basePath={basePath} />
       </div>
     </Container>
   </div>
@@ -40,6 +40,7 @@ DocsHeader.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
+  basePath: PropTypes.string.isRequired,
   navigation: PropTypes.array.isRequired,
   isClient: PropTypes.bool,
 };
