@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2025-08-06T14:09:12.292Z'
+updatedOn: '2025-08-11T13:30:01.885Z'
 ---
 
 <InfoBlock>
@@ -19,7 +19,7 @@ updatedOn: '2025-08-06T14:09:12.292Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/manage/projects#configure-restore-window">Configure restore window</a>
+  <a href="/docs/manage/projects#configure-your-restore-window">Configure restore window</a>
 </DocsList>
 </InfoBlock>
 

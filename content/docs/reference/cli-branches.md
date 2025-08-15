@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-08-06T14:09:12.293Z'
+updatedOn: '2025-08-08T20:39:05.822Z'
 ---
 
 ## Before you begin
@@ -20,18 +20,19 @@ The `branches` command allows you to list, create, rename, delete, and retrieve 
 neon branches <subcommand> [options]
 ```
 
-| Subcommand                  | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| [list](#list)               | List branches                                |
-| [create](#create)           | Create a branch                              |
-| [reset](#reset)             | Reset data to parent                         |
-| [restore](#restore)         | Restore a branch to a selected point in time |
-| [rename](#rename)           | Rename a branch                              |
-| [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-default](#set-default) | Set a default branch                         |
-| [add-compute](#add-compute) | Add replica to a branch                      |
-| [delete](#delete)           | Delete a branch                              |
-| [get](#get)                 | Get a branch                                 |
+| Subcommand                        | Description                                  |
+| --------------------------------- | -------------------------------------------- |
+| [list](#list)                     | List branches                                |
+| [create](#create)                 | Create a branch                              |
+| [reset](#reset)                   | Reset data to parent                         |
+| [restore](#restore)               | Restore a branch to a selected point in time |
+| [rename](#rename)                 | Rename a branch                              |
+| [schema-diff](#schema-diff)       | Compare schemas                              |
+| [set-default](#set-default)       | Set a default branch                         |
+| [set-expiration](#set-expiration) | Set expiration date for a branch             |
+| [add-compute](#add-compute)       | Add replica to a branch                      |
+| [delete](#delete)                 | Delete a branch                              |
+| [get](#get)                       | Get a branch                                 |
 
 ## list
 
@@ -134,6 +135,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
 | `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                 | boolean |                                                     |
+| `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                      | string  |                                                     |
 
 <Admonition type="note">
 When creating a branch from a protected parent branch, role passwords on the child branch are changed. For more information about this Protected Branches feature, see [New passwords generated for Postgres roles on child branches](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
@@ -597,6 +599,44 @@ neon branches set-default mybranch
 │ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
+
+## set-expiration
+
+This subcommand allows you to set or update the expiration date for a branch. When the expiration time is reached, the branch and its compute endpoints are permanently deleted.
+
+#### Usage
+
+```bash
+neon branches set-expiration <id|name> --expires-at <timestamp> [options]
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+`--expires-at <timestamp>` specifies the expiration timestamp in RFC 3339 format (e.g., `2025-08-15T18:00:00Z`).
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-expiration` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+| `--expires-at`   | Expiration timestamp in RFC 3339 format                                                       | string |                                                     |
+
+#### Examples
+
+- Set an expiration date for a branch:
+
+  ```bash
+  neon branches set-expiration mybranch --expires-at 2025-08-15T18:00:00Z
+  ```
+
+- Remove expiration from a branch (omit the parameter):
+
+  ```bash
+  neon branches set-expiration mybranch
+  ```
 
 ## add-compute
 

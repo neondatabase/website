@@ -11,14 +11,14 @@ Neon is Postgres rearchitected for agent platforms, designed to give your users 
 Use Neon branching to build time travel and versioning features, so users can iterate and jump between versions of their apps. And thanks to Neon’s scale-to-zero, pay only for active databases.
 
 <LogosSection containerClassName='py-3' logos={[
-'create',
+'anything',
 'replit',
 'same',
 'solar',
 'databutton',
 ]} />
 
-<QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Create.xyz" />
+<QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Anything" />
 
 ## The agent experience you can build with Neon
 

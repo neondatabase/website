@@ -1,5 +1,5 @@
 ---
-title: Playing with Neon
+title: Learn the basics
 subtitle: Sign up for free and learn the basics of database branching with Neon
 enableTableOfContents: true
 redirectFrom:
@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
   - /docs/get-started/setting-up-a-project
-updatedOn: '2025-08-02T10:33:29.258Z'
+updatedOn: '2025-08-09T09:50:31.819Z'
 ---
 
 <InfoBlock>
@@ -53,9 +53,8 @@ You can change these sizes at any time, but these are meant to align with typica
 
     Sign up with your email, GitHub, Google, or other partner account.
 
-    For information about what's included with the free plan, see
-    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
-    [Neon Plans](/docs/introduction/plans).
+    For information about what's included with the Free and paid plans, see
+    [Neon plans](/docs/introduction/plans).
 
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>

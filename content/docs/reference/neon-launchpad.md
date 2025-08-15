@@ -16,7 +16,7 @@ Access it now at [neon.new](https://neon.new/).
 The service provides the following capabilities:
 
 - Instant database provisioning with immediate connection string availability
-- Resource limits matching Neon's [free plan](/docs/introduction/plans#free-plan) specifications
+- Resource limits matching Neon's Free plan specifications
 - 72-hour database lifespan if not claimed
 - Option to claim databases with a unique claim ID and Neon account
 - Automatic database seeding with SQL scripts for schema and data initialization (via CLI or Vite plugin)

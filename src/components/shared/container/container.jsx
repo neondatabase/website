@@ -20,6 +20,7 @@ const styles = {
     960: 'max-w-[960px] md:px-5',
     832: 'max-w-[832px]',
     768: 'max-w-3xl',
+    640: 'max-w-[640px]',
     576: 'max-w-[576px]',
   },
 };
@@ -30,7 +31,7 @@ const Container = forwardRef(
     return (
       <Tag
         className={clsx(
-          'relative mx-auto lg:max-w-none lg:px-8 md:px-4',
+          'relative mx-auto lg:max-w-none lg:px-8 md:px-5',
           styles.size[size],
           className
         )}

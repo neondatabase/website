@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2025-08-06T14:09:12.291Z'
+updatedOn: '2025-08-07T10:06:24.019Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -48,7 +48,7 @@ Open the detailed view for the branch whose schema you want to inspect. In the r
 
 ### From the Restore page
 
-Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or ** From another branch** (from another branch's history).
+Just like with [Time Travel Assist](/docs/guides/branch-restore#using-time-travel-assist), your first step is to choose the branch you want to restore, then choose where you want to restore from: **From history** (its own history) or **From another branch** (from another branch's history).
 
 Click the **Schema Diff** button, verify that your selections are correct, then click **Compare**.
 

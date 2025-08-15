@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-08-06T14:09:12.291Z'
+updatedOn: '2025-08-07T10:06:24.020Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -30,7 +30,7 @@ The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 v
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window.
 
 You cannot select a time outside your current restore window.
 
@@ -40,7 +40,7 @@ To change your restore window, see [Configure restore window](/docs/manage/proje
 
 Time Travel only allows non-destructive read-only queries. You cannot alter historical data in any way. If you try to run any query that could alter historical data, you will get an error message like the following:
 
-![time travel error message](/docs/guides/time_travel_error.png 'no-border')
+![time travel error message](/docs/guides/time_travel_error.png)
 
 ### Time Travel with the SQL Editor
 
@@ -76,9 +76,9 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 <TabItem>
 
 1. In the Neon Console, open the **SQL Editor**.
-1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
+1. Use the **Time Travel** (🕣) icon to enable querying against an earlier point in time.
 
-   ![Time Travel toggle](/docs/guides/time_travel_toggle.png)
+   ![Time Travel toggle](/docs/get-started/time_travel_sql_editor.png)
 
 1. Use the Date & Time selector to choose a point within your restore window.
 1. Write your read-only query in the editor, then click **Run**. You don't have to include time parameters in the query; the query is automatically targeted to your selected timestamp.
@@ -90,7 +90,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 1. In the Neon Console, go to **Restore**.
 1. Select the branch you want to query against, then select a timestamp, the same as you would to [Restore a branch](#restore-a-branch-to-an-earlier-state).
 
-   ![time travel selection](/docs/guides/time_travel_restore_select.png 'no-border')
+   ![time travel selection](/docs/guides/time_travel_restore_select.png)
 
    This makes the selection for Time Travel Assist. Notice the updated fields above the SQL Editor show the **branch** and **timestamp** you just selected.
 
@@ -184,4 +184,4 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
-- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute). For more about compute usage and billing, see [Usage metrics — Compute](/docs/introduction/usage-metrics#compute).
+- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).

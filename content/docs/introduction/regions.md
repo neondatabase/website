@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2025-07-07T11:20:02.842Z'
+updatedOn: '2025-08-15T15:54:41.889Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
@@ -59,7 +59,7 @@ If you are unsure of your project's region, you can find this information in the
 | AWS US East (N. Virginia) — aws-us-east-1         | 3.222.32.110, 13.219.161.141, 23.23.0.232, 34.235.208.71, 34.239.66.10, 35.168.244.148, 54.88.155.118, 54.160.39.37, 54.205.208.153 |
 | AWS US East (Ohio) — aws-us-east-2                | 3.16.227.37, 3.128.6.252, 3.129.145.179, 3.139.195.115, 18.217.181.229, 52.15.165.218                                               |
 | AWS US West (Oregon) — aws-us-west-2              | 35.83.202.11, 35.164.221.218, 44.235.241.217, 44.236.56.140, 52.32.22.241, 52.37.48.254, 54.213.57.47                               |
-| AWS Europe (Frankfurt) — aws-eu-central-1         | 3.125.57.42, 3.125.234.79, 18.158.63.175                                                                                            |
+| AWS Europe (Frankfurt) — aws-eu-central-1         | 3.66.63.165, 3.125.57.42, 3.125.234.79, 18.158.63.175, 18.194.181.241, 52.58.17.95                                                  |
 | AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                                                              |
 | AWS Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                                                                           |
 | AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.55.152.144, 13.237.134.148, 54.153.185.87                                                                                        |

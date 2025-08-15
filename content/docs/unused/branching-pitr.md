@@ -15,7 +15,7 @@ A simpler one-click branch restore operation is now available. Read more about i
 
 Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any time within the defined restore window. You can use this capability to recover lost data, which is a form of Instant restore (PITR).
 
-The restore window is configurable.The supported limits are up to 24 hours for [Neon Free Plan](/docs/introduction/plans#free-plan) users, 7 days for [Launch](/docs/introduction/plans#launch), 14 days for [Scale](/docs/introduction/plans#scale), and 30 days for [Business](/docs/introduction/plans#business) plan users. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+The restore window is configurable. For configuration instructions, see [Configure restore window](/docs/manage/projects#configure-restore-window).
 
 This guide shows how to recover your data to a point in time before a data loss occurred using Neon's branching feature.
 
@@ -91,7 +91,7 @@ To make the recovery branch your new default:
 3. Select your `recovery_branch` from the table.
 4. On the branch details page, select **Set as Default**.
 
-The default branch has a larger compute hour allowance on the Free Plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [default branch](/docs/manage/branches#default-branch).
+The default branch has a larger compute hour allowance on the Free plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [default branch](/docs/manage/branches#default-branch).
 
 <Admonition type="note">
 If your previous default branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.

@@ -127,4 +127,4 @@ If it's not a DNS resolution issue, other troubleshooting steps you can try incl
 If the issue persists, please follow these steps to report the error:
 
 1. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a detailed description of what you were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
-2. If you're on the Free Plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).
+2. If you're on the Free plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).

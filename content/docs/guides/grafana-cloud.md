@@ -18,7 +18,7 @@ updatedOn: '2025-08-02T10:33:29.271Z'
 </DocsList>
 </InfoBlock>
 
-The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](https://neon.com/docs/guides/opentelemetry), which is available with Neon's Scale, Business and Enterprise plans.
+The Grafana Cloud integration lets you monitor Neon database performance, resource utilization, and system health directly from Grafana Cloud. The integration requires [OTEL support](https://neon.com/docs/guides/opentelemetry), which is available with Neon's Scale plan.
 
 ## How it works
 

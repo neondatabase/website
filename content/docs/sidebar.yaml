@@ -454,18 +454,12 @@
       items:
         - title: Plans
           slug: introduction/plans
-        - title: Pricing estimation guide
-          slug: introduction/pricing-estimation-guide
-        - title: Extra usage
-          slug: introduction/extra-usage
-        - title: Usage metrics
-          slug: introduction/usage-metrics
-        - title: Sample project billing
-          slug: introduction/billing-sample
-        - title: Monitor billing and usage
-          slug: introduction/monitor-usage
+        - title: Legacy plans
+          slug: introduction/legacy-plans
         - title: Manage billing
           slug: introduction/manage-billing
+        - title: Monitor billing
+          slug: introduction/monitor-usage
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
@@ -1095,7 +1089,7 @@
         - title: RLS in Neon
           slug: guides/row-level-security
         - title: Simplify RLS with Drizzle
-          slug: guides/neon-rls-drizzle
+          slug: guides/rls-drizzle
         - title: PostgreSQL RLS Tutorial
           slug: https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security
     - title: Neon RLS (JWT/JWKS)

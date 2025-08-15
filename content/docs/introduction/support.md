@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-08-02T09:01:05.732Z'
+updatedOn: '2025-08-14T18:07:55.739Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -10,13 +10,11 @@ This page outlines Neon's support plans, available channels, and policies. To le
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan                                      | Support Plan |
-| :----------------------------------------------------- | :----------- |
-| [Free Plan](/docs/introduction/plans#free-plan)        | Community    |
-| [Launch Plan](/docs/introduction/plans#launch)         | Standard     |
-| [Scale Plan](/docs/introduction/plans#scale)           | Standard     |
-| [Business Plan](/docs/introduction/plans#business)     | Priority     |
-| [Enterprise Plan](/docs/introduction/plans#enterprise) | Enterprise   |
+| Neon Pricing Plan | Support Plan |
+| :---------------- | :----------- |
+| Free plan         | Community    |
+| Launch plan       | Billing      |
+| Scale plan        | Standard     |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
@@ -26,16 +24,16 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                              | Community | Standard | Priority | Enterprise |
-| :---------------------------------------------------------------------------- | :-------: | :------: | :------: | :--------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check;  | &check;  |  &check;   |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check;  | &check;  |  &check;   |
-| [Support tickets](#support-tickets)                                           |     -     | &check;  | &check;  |  &check;   |
-| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -     | &check;  |  &check;   |
-| [Video chat](#video-chat)                                                     |     -     |    -     |    -     |     \*     |
-| [Slack channel](#slack-channel)                                               |     -     |    -     |    -     |    \*\*    |
-| [SLAs](#slas)                                                                 |     -     |    -     | &check;  |  &check;   |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -     |    -     |    \*\*    |
+| Support channels                                                              | Community | Billing | Standard |
+| :---------------------------------------------------------------------------- | :-------: | :-----: | :------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check; | &check;  |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; | &check;  |
+| [Support tickets](#support-tickets)                                           |     -     | &check; | &check;  |
+| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    | &check;  |
+| [Video chat](#video-chat)                                                     |     -     |    -    |    \*    |
+| [Slack channel](#slack-channel)                                               |     -     |    -    |   \*\*   |
+| [SLAs](#slas)                                                                 |     -     |    -    | &check;  |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |   \*\*   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
@@ -70,8 +68,6 @@ Neon AI chat is not an official Neon Support channel.
 
 Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
 
-To access the modal directly, click here: [Open Support Ticket](https://console.neon.tech/app/projects?modal=support). If you are a paying user and cannot access the support ticket modal, you can contact Neon support at `support@neon.tech`.
-
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an [SLA](#slas), you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
 </Admonition>
@@ -82,19 +78,19 @@ You can expect an initial response time of 3 business days, Monday through Frida
 
 ### Prioritized support tickets
 
-Support tickets opened by Priority and Enterprise support plan customers are given top priority by the Neon Support team. Refer to [Support tickets](#support-tickets) for how to open a support ticket.
+Support tickets opened by Standard support plan customers are given top priority by the Neon Support team. Refer to [Support tickets](#support-tickets) for how to open a support ticket.
 
 ### Video chat
 
-Video chat is available to Priority and Enterprise support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
+Video chat is available to Standard support plan customers and may be scheduled on a case-by-case basis through the [support ticket](#support-tickets) process.
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Enterprise support plan customers. You can request one from our [sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Standard support plan customers. You can request one from our [sales team](/contact-sales).
 
 ### SLAs
 
-Support Level Agreements (SLAs) are available to Business and Enterprise support plan customers. For Business plan, see [Business Plan SLA](/neon-business-sla). If you are interested in exploring an Enterprise-level SLA, [get in touch with our sales team](/contact-sales).
+If you are interested in exploring a Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
 
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an SLA, you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
@@ -102,11 +98,11 @@ To receive support under an SLA, you must submit a ticket through the Neon Conso
 
 ### Dedicated Support Engineer
 
-The Dedicated Support Engineer option is available to Business and Enterprise customers. A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
+TA dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
 
 ## General support policy
 
-Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale, Business, or Enterprise. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for [Free Plan](/docs/introduction/plans#free-plan) users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
+Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
 
 Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
 
@@ -122,15 +118,15 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 
 ### Response times
 
-Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue. We only commit to responding to Customers with an Enterprise subscription using the target response time guidelines below.
+Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue. We only commit to responding to Customers with an Scale plan using the target response time guidelines below.
 
-#### Enterprise target response times
+#### Target response times
 
-The table below outlines Neon’s guidelines for the various support tiers of our Enterprise support plan.
+The table below outlines Neon’s guidelines for the various support tiers of our Standard support plan.
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-|    Severity Level     | Enterprise Standard                       | Enterprise Gold                          | Enterprise Platinum                      |
+|    Severity Level     | Standard                                  | Gold                                     | Platinum                                 |
 | :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
 | Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                | \< 1 hour                                |
 |   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 | \< 4 hours                               |

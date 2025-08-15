@@ -2,7 +2,7 @@
 title: Secure your data with Clerk and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Clerk and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.469Z'
+updatedOn: '2025-08-11T00:30:08.260Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-clerk
   - /docs/guides/neon-authorize-clerk
@@ -16,7 +16,7 @@ redirectFrom:
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/neon-rls-tutorial">Neon RLS Tutorial</a>
   <a href="https://clerk.com/docs/backend-requests/handling/manual-jwt">Manual JWT verification</a>
-  <a href="/docs/guides/neon-rls-drizzle">Simplify RLS with Drizzle</a>
+  <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
 

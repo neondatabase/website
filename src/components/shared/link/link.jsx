@@ -70,6 +70,7 @@ const Link = forwardRef(
       tagText = null,
       children,
       prefetch = undefined,
+      isExternal = false,
       ...props
     },
     ref
@@ -128,7 +129,14 @@ const Link = forwardRef(
     }
 
     return (
-      <a className={className} href={to} ref={ref} onClick={handleClick} {...props}>
+      <a
+        className={className}
+        href={to}
+        ref={ref}
+        onClick={handleClick}
+        {...(isExternal && { target: '_blank', rel: 'noopener noreferrer' })}
+        {...props}
+      >
         {content}
       </a>
     );
@@ -146,6 +154,7 @@ Link.propTypes = {
   prefetch: PropTypes.bool,
   tagName: PropTypes.string,
   tagText: PropTypes.string,
+  isExternal: PropTypes.bool,
 };
 
 export default Link;
