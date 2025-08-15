@@ -132,7 +132,9 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         handleClick={() => handleClick(modalViews.SEARCH)}
         isNotFoundPage={isNotFoundPage}
       />
-      <InkeepAIButton className="shrink-0" handleClick={() => handleClick(modalViews.AI_CHAT)} />
+      {!isNotFoundPage && (
+        <InkeepAIButton className="shrink-0" handleClick={() => handleClick(modalViews.AI_CHAT)} />
+      )}
       <InkeepCustomTrigger {...inkeepCustomTriggerProps} />
     </div>
   );
