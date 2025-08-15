@@ -23,7 +23,7 @@
   "cols": [
     {
       "rows": "1",
-      "feature": "Projects and Branches"
+      "feature": "Projects"
     },
     {
       "rows": "1",
@@ -37,26 +37,30 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Branches per project",
-        "subtitle": "Included"
+        "title": "Branches"
       },
-      "free": "10",
-      "launch": "10",
-      "scale": "25"
+      "free": "10<span>Maximum per Project</span>",
+      "launch": "10<span>Included per Project</span>",
+      "scale": "25<span>Included per Project</span>"
     },
     {
       "rows": "2",
       "feature": {
-        "title": "Additional branches",
+        "title": "Additional Branches",
         "subtitle": { "text": "Read more", "href": "#additional-branches-billing" }
       },
       "free": false,
-      "launch": {
-        "title": "$0.002 per branch-hour"
+      "launch": "$0.002<span>Per branch-hour</span>",
+      "scale": "$0.002<span>Per branch-hour</span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Postgres Databases"
       },
-      "scale": {
-        "title": "$0.002 per branch-hour"
-      }
+      "free": "500<span>Maximum per Project</span>",
+      "launch": "500<span>Maximum per Project</span>",
+      "scale": "500<span>Maximum per Project</span>"
     },
     {
       "rows": "1",
@@ -67,9 +71,9 @@
       "feature": {
         "title": "Rates"
       },
-      "free": "50 CU-hours<span>Per Project</span>",
-      "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
-      "scale": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
+      "free": "Free<span>50 CU-hours per Project</span>",
+      "launch": "$0.14 per CU-hour",
+      "scale": "$0.26 per CU-hour"
     },
     {
       "rows": "2",
@@ -92,12 +96,11 @@
     {
       "rows": "2",
       "feature": {
-        "title": "Scale to zero",
-        "subtitle": "When inactive"
+        "title": "Scale to zero"
       },
-      "free": "After 5 minutes <span>when inactive</span>",
+      "free": "After 5 minutes <span>When inactive</span>",
       "launch": "After 5 minutes <span>Can be disabled</span>",
-      "scale": "Configurable"
+      "scale": "Configurable  <span>Can be disabled</span>"
     },
     {
       "rows": "1",
@@ -108,9 +111,9 @@
       "feature": {
         "title": "Rates"
       },
-      "free": "Free<span>0.5 GB per Project</span>",
-      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
-      "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+      "free": "Free<span>0.5 GB max per Project</span>",
+      "launch": "$0.35 per GB-month",
+      "scale": "$0.35 per GB-month"
     },
     {
       "rows": "3",
@@ -119,11 +122,11 @@
         "subtitle": { "text": "Read more", "href": "#instant-restores" }
       },
       "free": "Free<span>With limited window/size</span>",
-      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
-      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
+      "launch": "$0.20 per GB-month <span>Based on the volume of data changes during your selected restore window</span>",
+      "scale": "$0.20 per GB-month <span>Based on the volume of data changes during your selected restore window</span>"
     },
     {
-      "rows": "3",
+      "rows": "2",
       "feature": {
         "title": "Instant Restore (PITR) Window"
       },
@@ -158,7 +161,7 @@
       "rows": "2",
       "feature": {
         "title": "Public network transfer",
-        "subtitle": "Egress"
+        "subtitle": "Egress-only"
       },
       "free": "5 GB included",
       "launch": "100 GB included<span>then $0.10 per GB</span>",
