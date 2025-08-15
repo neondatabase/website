@@ -77,14 +77,14 @@ VACUUM (ANALYZE) orders;
 
 You can tune `online_advisor` with these settings for the current session:
 
-| Setting                                  | Default | Description                                                                    |
-| ---------------------------------------- | ------- | ------------------------------------------------------------------------------ |
-| `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                           |
-| `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                      |
-| `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                      |
-| `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                        |
-| `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                                    |
-| `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements.      |
+| Setting                                  | Default | Description                                                               |
+| ---------------------------------------- | ------- | ------------------------------------------------------------------------- |
+| `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                      |
+| `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                 |
+| `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                 |
+| `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                   |
+| `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                               |
+| `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements. |
 
 <Admonition type="note">
 On Neon, you can only modify these settings for the current session using `SET`. System-level settings like `online_advisor.max_index_proposals` and `online_advisor.max_stat_proposals` use default values and cannot be changed.
