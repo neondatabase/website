@@ -2,6 +2,10 @@
 .ikp-ai-chat__header-toolbar {
   padding: 0;
 }
+.ikp-message-header {
+  padding-left: 0;
+  padding-right: 12px;
+}
 
 .ikp-d_flex.ikp-pos_relative.ikp-overflow_visible.ikp-py_4 {
   padding: 0;
@@ -9,47 +13,23 @@
   .ikp-d_flex.ikp-flex_column.ikp-justify_flex-end.ikp-grow_2.ikp-overflow_visible.ikp-pr_3 {
     padding: 0;
   }
-
-  .ikp-content-parser__text {
-    margin: 0;
-  }
-
-  /* header icon */
-  .ikp-message-header {
-    display: none;
-  }
 }
 
 /* wrapper & content */
 .ikp-ai-chat__scrollable-page-wrapper {
-  padding: 20px;
+  padding: 16px 16px 12px;
 }
 
 .ikp-ai-chat__scrollable-page-content__inner {
   justify-content: center;
 }
 
-/* intro title */
-.intro-title {
-  display: block;
-  width: 100%;
-  text-align: center;
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 125%;
-  letter-spacing: -0.02em;
-  margin: 24px 0;
+/* intro text */
+.ikp-content-parser__text {
+  margin-top: 12px;
 }
-@media (max-width: 1023px) {
-  .intro-title {
-    font-size: 32px;
-  }
-}
-@media (max-width: 767px) {
-  .intro-title {
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
+.ikp-content-parser__text:first-child {
+  margin-top: 0;
 }
 
 /* quick questions grid */
@@ -73,7 +53,7 @@
 }
 .ikp-quick-question-button {
   justify-content: flex-start;
-  font-size: 16px;
+  font-size: 15px;
   color: #494B50;
   white-space: nowrap;
 }
@@ -115,9 +95,7 @@
 
 /* message box */
 .ikp-ai-chat__message-box {
-  height: 120px;
   background: #FAFAFA;
-  border: 1px solid #C9CBCF;
   border-radius: 8px;
   box-shadow: none;
 }
@@ -125,8 +103,7 @@
   justify-content: center;
 }
 [data-theme='dark'] .ikp-ai-chat__message-box {
-  background: #131415;
-  border-color: #303236;
+  background: #18191B;
 }
 @media (max-width: 1023px) {
   .ikp-ai-chat__message-box {
@@ -169,12 +146,7 @@
   }
 }
 .ikp-message__divider-wrapper {
-  padding-inline: 40px;
-}
-@media (max-width: 612px) {
-  .ikp-message__divider-wrapper {
-    padding-inline: 0;
-  }
+  display: none;
 }
 .ikp-chat-bubble__message-content-wrapper > .ikp-h_48px {
   height: auto;
@@ -188,13 +160,11 @@
 .ikp-chat-bubble__user-message .ikp-message-header {
   padding: 0;
   margin-right: 12px;
-  height: 24px;
-  overflow: visible;
 }
 .ikp-chat-bubble__bot-message .ikp-message-header {
   position: absolute;
-  left: 0;
-  top: 20px;
+  left: 8px;
+  top: 26px;
   padding: 0;
 }
 @media (max-width: 612px) {
@@ -208,16 +178,11 @@
 .ikp-message-header__avatar-box,
 .ikp-message-header__avatar-user,
 .ikp-bot-avatar__box {
-  width: 28px;
-  height: 28px;
-}
-@media (max-width: 612px) {
-  .ikp-message-header__avatar-box {
-    width: auto;
-  }
+  width: 16px;
+  height: 16px;
 }
 .ikp-message-header__avatar-user {
-  margin-top: -3px;
+  margin-top: 6px;
 }
 [data-theme='dark'] .ikp-message-header__avatar-user {
   background-image: none;

@@ -10,7 +10,7 @@ import LINKS from 'constants/links';
 import DocsNavigation from '../docs-navigation';
 
 const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
-  <div className="flex h-28 w-full items-center border-b border-gray-new-80 dark:border-gray-new-15 lg:h-16">
+  <div className="flex h-28 w-full items-center border-b border-gray-new-90 dark:border-gray-new-15 lg:h-16">
     <Container className="z-10 w-full" size="1600">
       <div className="flex h-16 w-full items-center justify-between">
         <div className="flex items-center gap-x-7">
@@ -27,7 +27,7 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         </div>
         <Sidebar className="lg:hidden" isClient={isClient} simpleMode />
       </div>
-      <div className="h-12 w-full border-t border-gray-new-80 dark:border-gray-new-15 lg:hidden">
+      <div className="h-12 w-full border-t border-gray-new-90 dark:border-gray-new-15 lg:hidden">
         <DocsNavigation navigation={navigation} basePath={basePath} />
       </div>
     </Container>

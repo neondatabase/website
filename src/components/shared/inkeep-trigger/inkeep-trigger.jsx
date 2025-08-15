@@ -89,7 +89,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
         },
         tokens: {
           colors: {
-            'grayDark.900': '#000',
+            'grayDark.900': '#09090B',
           },
         },
       },
@@ -116,7 +116,8 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     },
     aiChatSettings: {
       ...aiChatSettings,
-      introMessage: "<span class='intro-title'>What do you want to know?</span>",
+      introMessage:
+        "<p>Hi!<br>I'm an AI assistant trained on documentation, help articles, and other content.</p><p>Ask me anything about Neon.</p>",
     },
   };
 

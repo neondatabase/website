@@ -24,7 +24,6 @@ const Item = ({ nav, slug, items, basePath }) => {
   const LinkTag = slug ? Link : 'button';
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
-  console.log(currentSlug, slug);
 
   const isActive = isActiveItem(slug, items, currentSlug);
   const href = `${basePath}${slug}`;
@@ -36,7 +35,7 @@ const Item = ({ nav, slug, items, basePath }) => {
         'whitespace-nowrap text-sm font-medium tracking-tight',
         'transition-colors duration-200',
         'text-gray-new-30 hover:text-black-new',
-        'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:w-full after:bg-black-new after:opacity-0 after:transition-opacity after:duration-300',
+        'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
         'dark:text-gray-new-70 dark:after:bg-white dark:hover:text-white',
         isActive && 'text-black-new after:opacity-100 dark:text-white'
       )}
