@@ -46,25 +46,15 @@ For information about using the Neon SQL Editor, see [Query with Neon's SQL Edit
 
 ## Start collecting recommendations
 
-1. (Optional) Before activation, set limits on how many proposals to track:
-
-   ```sql
-   ALTER SYSTEM SET online_advisor.max_index_proposals = 1000;
-   ALTER SYSTEM SET online_advisor.max_stat_proposals = 1000;
-   SELECT pg_reload_conf();
-   ```
-
-   These two settings can only be set before the extension is activated.
-
-2. Activate the extension by calling any function:
+1. Activate the extension by calling any function:
 
    ```sql
    SELECT get_executor_stats();
    ```
 
-3. Run your workload to collect data.
+2. Run your workload to collect data.
 
-4. View recommendations:
+3. View recommendations:
 
    ```sql
    -- Proposed indexes
@@ -85,30 +75,25 @@ VACUUM (ANALYZE) orders;
 
 ## Configure thresholds
 
-You can tune `online_advisor` with these settings:
+You can tune `online_advisor` with these settings for the current session:
 
 | Setting                                  | Default | Description                                                                    |
 | ---------------------------------------- | ------- | ------------------------------------------------------------------------------ |
 | `online_advisor.filtered_threshold`      | `1000`  | Minimum filtered rows in a node to suggest an index.                           |
 | `online_advisor.misestimation_threshold` | `10`    | Minimum actual/estimated row ratio to flag misestimation.                      |
 | `online_advisor.min_rows`                | `1000`  | Minimum returned rows before misestimation is considered.                      |
-| `online_advisor.max_index_proposals`     | `1000`  | Max tracked clauses for index proposals (set before activation).               |
-| `online_advisor.max_stat_proposals`      | `1000`  | Max tracked clauses for extended statistics proposals (set before activation). |
 | `online_advisor.do_instrumentation`      | `on`    | Toggle data collection.                                                        |
 | `online_advisor.log_duration`            | `off`   | Log planning/execution time for each query.                                    |
 | `online_advisor.prepare_threshold`       | `1.0`   | Planning/execution time ratio above which to suggest prepared statements.      |
+
+<Admonition type="note">
+On Neon, you can only modify these settings for the current session using `SET`. System-level settings like `online_advisor.max_index_proposals` and `online_advisor.max_stat_proposals` use default values and cannot be changed.
+</Admonition>
 
 Change a setting for the current session:
 
 ```sql
 SET online_advisor.filtered_threshold = 2000;
-```
-
-Change globally:
-
-```sql
-ALTER SYSTEM SET online_advisor.filtered_threshold = 2000;
-SELECT pg_reload_conf();
 ```
 
 ## Check planning and execution stats
