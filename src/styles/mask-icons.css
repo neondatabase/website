@@ -43,9 +43,9 @@
   }
 
   /* Used in a /src/components/pages/pricing/table/table.jsx */
-  .pricing-shield-icon {
-    -webkit-mask-image: url('/images/pricing/shield.svg');
-    -webkit-mask-size: 24px 24px;
+  .pricing-check-icon {
+    -webkit-mask-image: url('/images/check.svg');
+    -webkit-mask-size: 16px 16px;
   }
 
   .pricing-cross-icon {

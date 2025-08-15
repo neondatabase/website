@@ -211,7 +211,7 @@ const Table = () => {
                   let cell;
                   if (typeof item[key] === 'boolean') {
                     cell = item[key] ? (
-                      <span className="pricing-shield-icon flex size-6 bg-green-45" />
+                      <span className="pricing-check-icon flex size-6 bg-green-45" />
                     ) : (
                       <span className="pricing-cross-icon flex size-[14px] bg-gray-new-30" />
                     );

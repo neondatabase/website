@@ -85,9 +85,9 @@
       "feature": {
         "title": "Autoscaling"
       },
-      "free": "✓",
-      "launch": "✓",
-      "scale": "✓"
+      "free": true,
+      "launch": true,
+      "scale": true
     },
     {
       "rows": "2",
