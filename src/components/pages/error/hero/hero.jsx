@@ -16,7 +16,7 @@ const CTA = ({ isDocsPage = false, reset }) => (
   <>
     {isDocsPage && <InkeepTrigger className="mb-11 w-full sm:mb-6" isNotFoundPage />}
     <div className="flex items-center gap-6 lg:gap-4">
-      <Button size="xs" theme="primary" withArrow onClick={reset}>
+      <Button size="xs" theme="primary" onClick={reset}>
         Try again
       </Button>
       <Link className="whitespace-nowrap" size="sm" theme="green" to="/" withArrow>

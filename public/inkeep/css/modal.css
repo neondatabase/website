@@ -16,7 +16,7 @@
 
 [data-theme='dark'] {
   .ikp-modal__backdrop {
-    background: rgba(12, 13, 13, 0.8);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .ikp-modal-widget__content{

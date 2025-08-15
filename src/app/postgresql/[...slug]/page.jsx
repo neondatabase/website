@@ -5,7 +5,7 @@ import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH } from 'constants/content';
 import { getPostBySlug } from 'utils/api-content';
-import { getSidebar, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
+import { getNavigation, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -61,10 +61,10 @@ const PostgresTutorial = async ({ params }) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getNavigation());
 
   const navigationLinks = getNavigationLinks(currentSlug);
   const gitHubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;

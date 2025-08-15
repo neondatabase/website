@@ -5,16 +5,16 @@ export const preferredRegion = 'auto';
 
 export async function GET(request) {
   const fontTitle = fetch(
-    new URL('../../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
+    new URL('../../../fonts/esbuild/ESBuild-Medium.ttf', import.meta.url)
   ).then((res) => res.arrayBuffer());
-  const fontText = fetch(
-    new URL('../../../../fonts/inter/Inter-Regular.ttf', import.meta.url)
-  ).then((res) => res.arrayBuffer());
-  const logo = fetch(
-    new URL('../../../../../public/images/og-image/logo.png', import.meta.url)
-  ).then((res) => res.arrayBuffer());
+  const fontText = fetch(new URL('../../../fonts/inter/Inter-Regular.ttf', import.meta.url)).then(
+    (res) => res.arrayBuffer()
+  );
+  const logo = fetch(new URL('../../../../public/images/og-image/logo.png', import.meta.url)).then(
+    (res) => res.arrayBuffer()
+  );
   const background = fetch(
-    new URL('../../../../../public/images/og-image/docs-background.jpg', import.meta.url)
+    new URL('../../../../public/images/og-image/docs-background.jpg', import.meta.url)
   ).then((res) => res.arrayBuffer());
 
   const [fontDataTitle, fontDataText, logoData, backgroundData] = await Promise.all([

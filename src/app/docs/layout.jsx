@@ -3,37 +3,28 @@
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
-import { POSTGRESQL_BASE_PATH } from 'constants/docs';
-import { getNavigation } from 'utils/api-postgresql';
+import { DOCS_BASE_PATH } from 'constants/docs';
+import { getNavigation } from 'utils/api-docs';
 
-const NeonPostgresLayout = async ({ children }) => {
+const NeonDocsLayout = async ({ children }) => {
   const navigation = await getNavigation();
-
-  const customType = {
-    title: 'PostgreSQL Tutorial',
-    link: `${POSTGRESQL_BASE_PATH}tutorial`,
-  };
 
   return (
     <Layout
       headerClassName="h-28 lg:h-16"
       docsNavigation={navigation}
-      docsBasePath={POSTGRESQL_BASE_PATH}
-      customType={customType}
-      docPageType="postgres"
+      docsBasePath={DOCS_BASE_PATH}
       isDocPage
       isHeaderSticky
       headerWithBorder
       hasThemesSupport
     >
-      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">
+      <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
         {/* <MobileNav
           className="hidden lg:block"
           navigation={navigation}
-          slug="index"
-          basePath={POSTGRESQL_BASE_PATH}
-          customName="PostgreSQL Documentation"
-          customType={customType}
+          basePath={DOCS_BASE_PATH}
+          slug={slug}
         /> */}
         <Container
           className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
@@ -42,8 +33,7 @@ const NeonPostgresLayout = async ({ children }) => {
           <Sidebar
             className="w-64 shrink-0 lg:hidden"
             navigation={navigation}
-            basePath={POSTGRESQL_BASE_PATH}
-            customType={customType}
+            basePath={DOCS_BASE_PATH}
           />
           {children}
         </Container>
@@ -52,4 +42,4 @@ const NeonPostgresLayout = async ({ children }) => {
   );
 };
 
-export default NeonPostgresLayout;
+export default NeonDocsLayout;

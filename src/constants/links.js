@@ -1,7 +1,6 @@
 export default {
   aboutUs: '/about-us',
   ai: '/ai',
-  aiChat: '/ai-chat',
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
