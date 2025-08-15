@@ -22,7 +22,7 @@ The `online_advisor` extension recommends **indexes**, **extended statistics**, 
 ## Requirements
 
 - PostgreSQL **14–17**
-- `online_advisor` must be in the [`shared_preload_libraries`](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) list. This requires a server restart.
+- For Postgres 14-16 only, online_advisor` must be added to [`shared_preload_libraries`](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) before you can install it via `CREATE EXTENSION`. 
 - Create the extension in every database you want to inspect
 - Activate it by calling any provided function (for example, `get_executor_stats()`)
 
