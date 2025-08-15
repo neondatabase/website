@@ -14,11 +14,11 @@
 
   /* Used in a /src/components/pages/pricing/hero/features/features.jsx  */
   .pricing-icon-size {
-    -webkit-mask-size: 14px 15px;
+    -webkit-mask-size: 14px 14px;
   }
 
   .pricing-check-icon {
-    -webkit-mask-image: url('/images/check.svg');
+    -webkit-mask-image: url('/images/checklist.svg');
     @apply mask-styles pricing-icon-size;
   }
 

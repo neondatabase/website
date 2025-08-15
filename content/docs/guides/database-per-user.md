@@ -90,10 +90,7 @@ As you scale, following a project-per-user design means eventually managing thou
   Empty projects are virtually free thanks to Neon’s [scale-to-zero](/docs/guides/auto-suspend-guide) feature. If, on a given day, you have a few hundred projects that were only active for a few minutes, that’s fine—your bill won’t suffer.
 
 - **Subscription plans**  
-  To support this usage pattern, our pricing plans include a generous number of projects within the monthly subscription fee, allowing you to scale without a big budget:
-  - The Launch plan includes 100 projects for $19/month.
-  - The Scale plan includes 1,000 projects for $69/month.
-  - The Business plan includes 5,000 projects for $700/month.
+  To support this usage pattern, our paid plans include a generous number of projects.
 
 ### Dev/test environments
 

@@ -2,6 +2,7 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
+import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,6 +17,7 @@ import { FORM_STATES, HUBSPOT_STARTUPS_FORM_ID } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
 import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
@@ -86,6 +88,9 @@ const ContactForm = () => {
       ajs_anonymous_id: ajsAnonymousId || 'none',
     },
   });
+  const isFormDataSentToCustomerIo = useFeatureFlagVariantKey(
+    'website_growth_customer_io_integration'
+  );
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -99,6 +104,28 @@ const ContactForm = () => {
     e.preventDefault();
     const { firstname, lastname, email, companyWebsite, investor } = data;
     const loadingAnimationStartedTime = Date.now();
+    const values = [
+      {
+        name: 'firstname',
+        value: firstname,
+      },
+      {
+        name: 'lastname',
+        value: lastname,
+      },
+      {
+        name: 'email',
+        value: email,
+      },
+      {
+        name: 'company_website',
+        value: companyWebsite,
+      },
+      {
+        name: 'accelerator_private_investor',
+        value: investor,
+      },
+    ];
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
@@ -106,31 +133,28 @@ const ContactForm = () => {
       const response = await sendHubspotFormData({
         formId: HUBSPOT_STARTUPS_FORM_ID,
         context,
-        values: [
-          {
-            name: 'firstname',
-            value: firstname,
-          },
-          {
-            name: 'lastname',
-            value: lastname,
-          },
-          {
-            name: 'email',
-            value: email,
-          },
-          {
-            name: 'company_website',
-            value: companyWebsite,
-          },
-          {
-            name: 'accelerator_private_investor',
-            value: investor,
-          },
-        ],
+        values,
       });
 
       if (response.ok) {
+        const eventName = 'Startup Form Submitted';
+        const eventProps = {
+          email,
+          first_name: firstname,
+          last_name: lastname,
+          company_website: companyWebsite,
+          investor,
+        };
+        if (isFormDataSentToCustomerIo) {
+          try {
+            if (window.zaraz && email) {
+              sendGtagEvent('identify', { email });
+              sendGtagEvent(eventName, eventProps);
+            }
+          } catch (error) {
+            console.warn('Error submitting the form');
+          }
+        }
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
           reset();
