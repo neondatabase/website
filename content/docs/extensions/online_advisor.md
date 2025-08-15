@@ -1,8 +1,9 @@
 ---
 title: The online_advisor extension
-subtitle: Get index, statistics, and prepared statement recommendations based on your query workload
+subtitle: Get index, statistics, and prepared statement recommendations based on your
+  query workload
 enableTableOfContents: true
-updatedOn: '2025-08-15T00:26:53.000Z'
+updatedOn: '2025-08-15T16:04:35.020Z'
 ---
 
 The `online_advisor` extension recommends **indexes**, **extended statistics**, and **prepared statements** based on your actual query workload. It uses the same executor hook mechanism as [`auto_explain`](https://www.postgresql.org/docs/current/auto-explain.html) to collect and analyze execution data.
