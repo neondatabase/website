@@ -53,6 +53,7 @@ If the app doesn't work as expected, provide specific details in the chat window
 </Admonition>
 
 ### Database Schema
+
 You can easily review your app's database schema directly from the Anything Dashboard at any point. Simply navigate to the **"Databases"** tab, then select your project's database to explore its schema, tables, columns, and relationships. This visual overview helps you understand how your app's data is structured.
 
 ![Database Schema](/docs/guides/create_xyz_database_schema.png)
@@ -99,7 +100,7 @@ To restore a past version:
 
 1. **Browse Version History:** Click on the down arrow next to the "Anything" logo in the top left corner.
 
-    ![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
+   ![Restore Past Version](/docs/guides/create_xyz_restore_project.png)
 
 2. **Restore:** Click on the desired version from the list to restore it.
 
