@@ -66,7 +66,7 @@ Note that the SQL keywords are case\-insensitive. It means that `SELECT` is equi
 
 Let's explore some examples of using the `SELECT` statement.
 
-We will use the following `customer` table in the `dvdrental` [sampledatabase](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for the demonstration.
+We will use the following `customer` table in the `dvdrental` [sample database](../postgresql-getting-started/postgresql-sample-database 'PostgreSQL Sample Database') for the demonstration.
 
 ![customer table](/postgresqltutorial/customer.png)First, [connect to the PostgreSQL server](../postgresql-getting-started/connect-to-postgresql-database) using the `postgres` user:
 
