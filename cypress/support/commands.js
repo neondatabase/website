@@ -4,7 +4,7 @@ Cypress.Commands.add('formSuccessSubmit', () => {
   cy.intercept(
     {
       method: 'POST',
-      url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
+      url: `/api/hubspot`,
     },
     {
       statusCode: 200,
@@ -19,7 +19,7 @@ Cypress.Commands.add('formErrorSubmit', () => {
   cy.intercept(
     {
       method: 'POST', // or whatever method the form uses
-      url: `https://api.hsforms.com/submissions/v3/integration/submit/**`,
+      url: `/api/hubspot`,
     },
     {
       statusCode: 500,
