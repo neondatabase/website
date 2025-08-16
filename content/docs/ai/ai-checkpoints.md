@@ -21,7 +21,7 @@ Use one root branch as your persistent "active" branch with a stable connection 
 
 The best way to understand this pattern is to see it in action:
 
-1. **Clone the demo**: 
+1. **Clone the demo**:
    - `git clone` https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo
 2. **Key files to examine**:
    - [lib/neon/create-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/create-snapshot.ts) - Snapshot creation implementation
