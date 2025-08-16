@@ -51,15 +51,14 @@ The `OR` operator returns `true` only if any of the expressions is `true`. It re
 
 The following table shows the results of the `OR` operator when combining `true`, `false`, and `null`. Note that the order of the expressions doesn't matter, for example both `false OR null` and `null OR false` will evaluate to `null`.
 
-|  expression1  | expression2  | expression1 OR expression2  |
-| ------------- | ------------ | --------------------------- |
-| True          | True         | True                        | 
-| True          | False        | True                        |
-| True          | Null         | True                        |
-| False         | False        | False                       |
-| False         | Null         | Null                        |
-| Null          | Null         | Null                        |
-
+| expression1 | expression2 | expression1 OR expression2 |
+| ----------- | ----------- | -------------------------- |
+| True        | True        | True                       |
+| True        | False       | True                       |
+| True        | Null        | True                       |
+| False       | False       | False                      |
+| False       | Null        | Null                       |
+| Null        | Null        | Null                       |
 
 In practice, you usually use the `OR` operator in a [`WHERE`](postgresql-where) clause to ensure that either of the specified expressions must be true for a row to be included in the result set.
 

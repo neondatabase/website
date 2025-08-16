@@ -53,14 +53,14 @@ The `AND` operator returns `true` only if both expressions are `true`. It return
 
 The following table shows the results of the `AND` operator when combining `true`, `false`, and `null`. Note that the order of the expressions doesn't matter, for example both `true AND null` and `null AND true` will evaluate to `null`.
 
-|  expression1  | expression2  | expression1 AND expression2 |
-| ------------- | ------------ | --------------------------- |
-| True          | True         | True                        | 
-| True          | False        | False                       |
-| True          | Null         | Null                        |
-| False         | False        | False                       |
-| False         | Null         | False                       |
-| Null          | Null         | Null                        |
+| expression1 | expression2 | expression1 AND expression2 |
+| ----------- | ----------- | --------------------------- |
+| True        | True        | True                        |
+| True        | False       | False                       |
+| True        | Null        | Null                        |
+| False       | False       | False                       |
+| False       | Null        | False                       |
+| Null        | Null        | Null                        |
 
 In practice, you often use the `AND` operator in a [`WHERE`](postgresql-where) clause to ensure that all specified expressions must be true for a row to be included in the result set.
 
