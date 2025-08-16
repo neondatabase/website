@@ -22,7 +22,7 @@ The `online_advisor` extension recommends **indexes**, **extended statistics**, 
 
 ## Requirements
 
-- Supported on PostgreSQL **17**
+- Supported on Postgres **17**
 - Create the extension in every database you want to inspect
 - Activate it by calling any provided function (for example, `get_executor_stats()`)
 
