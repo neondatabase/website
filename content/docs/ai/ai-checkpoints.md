@@ -356,28 +356,30 @@ Snapshots solve these problems:
 ## Best practices
 
 - **Root branch only**: Use the project's root branch as the active branch
-- **Set `target_branch_id` for rollbacks**: When restoring to the active branch, always specify target_branch_id to prevent accidental restores
+- **Set `target_branch_id` for rollbacks**: When restoring to the active branch, always specify `target_branch_id` to prevent accidental restores
 - **Poll operations**: Wait for terminal states before connecting to the database
 - **Snapshot naming**: Use conventions like `checkpoint-{feature}-{timestamp}`
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete backup branches (e.g., `production (old)`) created during restores
 - **Meta database**: Keep checkpoint metadata separate to preserve audit trail
 
-## Frequenty asked questions
+## Frequently asked questions (FAQ)
 
-**Q: Why must I poll operations after restore?**  
-A: With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
+<DefinitionList>
+Why must I poll operations after restore?
+: With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
 
-**Q: Why must the active branch be a root branch?**  
-A: Snapshot restores with `finalize_restore: true` currently require root branches. This is a platform requirement.
+Why must the active branch be a root branch?
+: Snapshot restores with `finalize_restore: true` currently require root branches. This is a platform requirement.
 
-**Q: What happens to my active branch when I restore?**  
-A: When restoring with `finalize_restore: true`, your current active branch becomes a backup branch with "(old)" appended to its name. This preserves your pre-restore state temporarily, but you should delete it after verifying the restore to avoid storage costs.
+What happens to my active branch when I restore?
+: When restoring with `finalize_restore: true`, your current active branch becomes a backup branch with "(old)" appended to its name. This preserves your pre-restore state temporarily, but you should delete it after verifying the restore to avoid storage costs.
 
-**Q: What if we need multiple preview environments?**
-A: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
+What if we need multiple preview environments?
+: Restore different snapshots to new branches using `finalize_restore: false`. Each restore creates a new branch with its own connection string.
 
-**Q: What is the restore window?**  
-A: The time period during which you can restore, depending on snapshot expiration time. Snapshots outside this window cannot be restored.
+What is the restore window?
+: The time period during which you can restore, depending on snapshot expiration time. Snapshots outside this window cannot be restored.
+</DefinitionList>
 
 ## Summary
 
