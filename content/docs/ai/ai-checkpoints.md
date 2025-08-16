@@ -21,17 +21,18 @@ Use one root branch as your persistent "active" branch with a stable connection 
 
 The best way to understand this pattern is to see it in action:
 
-1. **Clone the demo**: `git clone https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo`
+1. **Clone the demo**: 
+   - `git clone` https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo
 2. **Key files to examine**:
-   - `lib/neon/create-snapshot.ts` - Snapshot creation implementation
-   - `lib/neon/apply-snapshot.ts` - Complete restore workflow with operations polling
-   - `lib/neon/operations.ts` - Operation status polling logic
-   - `app/[checkpointId]/page.tsx` - UI integration showing checkpoints and rollbacks
+   - [lib/neon/create-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/create-snapshot.ts) - Snapshot creation implementation
+   - [lib/neon/apply-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/apply-snapshot.ts) - Complete restore workflow with operations polling
+   - [lib/neon/operations.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/operations.ts) - Operation status polling logic
+   - [app/[checkpointId]/page.tsx](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/app/[checkpointId]/page.tsx) - UI integration showing checkpoints and rollbacks
 3. **Run locally** to see checkpoints, rollbacks, and previews in action
 
 The demo implements a contacts application that evolves through agent prompts (v1: basic contacts → v2: add role/company → v3: add tags), demonstrating checkpoint creation and restoration at each stage.
 
-## Core concept: The active branch pattern
+## Core pattern: active branches
 
 Every agent project maps to one Neon project with a persistent "active" branch as its production database:
 
@@ -361,7 +362,7 @@ Snapshots solve these problems:
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete backup branches (e.g., `production (old)`) created during restores
 - **Meta database**: Keep checkpoint metadata separate to preserve audit trail
 
-## Common questions
+## Frequenty asked questions
 
 **Q: Why must I poll operations after restore?**  
 A: With `finalize_restore: true`, Neon moves compute resources to the new state. Until operations complete, connections still point to the old compute.
