@@ -53,9 +53,8 @@ You can change these sizes at any time, but these are meant to align with typica
 
     Sign up with your email, GitHub, Google, or other partner account.
 
-    For information about what's included with the free plan, see
-    [Neon Free Plan](/docs/introduction/plans#free-plan). For information about Neon's paid options, see
-    [Neon Plans](/docs/introduction/plans).
+    For information about what's included with the Free and paid plans, see
+    [Neon plans](/docs/introduction/plans).
 
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>

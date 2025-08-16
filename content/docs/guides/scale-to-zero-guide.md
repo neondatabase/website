@@ -19,13 +19,11 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans), but paid plans permit disabling scale to zero.
 
-| Plan       | Scale to zero after | Can be disabled? |
-| :--------- | :------------------ | :--------------- |
-| Free Plan  | 5 minutes           |                  |
-| Launch     | 5 minutes           | &check;          |
-| Scale      | 5 minutes           | &check;          |
-| Business   | 5 minutes           | &check;          |
-| Enterprise | custom time period  | &check;          |
+| Plan      | Scale to zero after | Can be disabled? |
+| :-------- | :------------------ | :--------------- |
+| Free plan | 5 minutes           |                  |
+| Launch    | 5 minutes           | &check;          |
+| Scale     | 5 seconds           | &check;          |
 
 ## Configure scale to zero for a compute
 

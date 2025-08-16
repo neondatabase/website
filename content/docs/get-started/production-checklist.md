@@ -37,8 +37,8 @@ updatedOn: '2025-08-02T10:33:29.255Z'
 <CheckItem title="9. Ensure your app reconnects after your database restarts" href="#ensure-your-app-reconnects-after-your-database-restarts">
   Verify your application handles compute restarts gracefully.
 </CheckItem>
-<CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-plan-for-priority-support">
-  Get faster support and priority handling for your production database with a Business plan.
+<CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-scale-for-priority-support">
+  Get faster support and priority handling for your production database with a Scale plan.
 </CheckItem>
 <CheckItem title="11. Advanced: Set up cross-region replication" href="#advanced-set-up-cross-region-replication">
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
@@ -140,7 +140,7 @@ Combine an allowlist with protected branches for enhanced security. This setup e
 - **IP Allow**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
 - **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
-Available with the Neon [Scale](/docs/introduction/plans#scale) and [Business](/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
+You can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
 
 ![IP allow setting settings](/docs/get-started/ip_allow_settings.png)
 
@@ -213,13 +213,13 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 For more information, see [Query performance](/docs/postgresql/query-performance) and [Monitoring](/docs/introduction/monitoring).
 
-## Upgrade to a Neon Business plan for priority support
+## Upgrade to a Neon Scale plan for priority support
 
-Support tickets opened by Business and Enterprise support plan customers are given top priority by the Neon Support team.
+Support tickets opened by Scale support plan customers are given top priority by the Neon Support team.
 
 **Recommendation**
 
-Upgrade to a [Business plan](/docs/introduction/plans#business) to get both [Priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](/neon-business-sla).
+Upgrade to a [Scale plan](/docs/introduction/plans) to get both [priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to SLAs.
 
 For more information, see the [Support documentation](/docs/introduction/support).
 

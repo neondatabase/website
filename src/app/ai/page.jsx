@@ -20,7 +20,7 @@ import pgvector from 'icons/ai/features-grid/pgvector.svg';
 import programmable from 'icons/ai/features-grid/programmable.svg';
 import scale from 'icons/ai/features-grid/scale.svg';
 import vectorSearchOptimization from 'icons/ai/features-grid/vector-seo.svg';
-import createIcon from 'icons/companies/create.svg';
+import anythingIcon from 'icons/companies/anything.svg';
 import replitIcon from 'icons/companies/replit.svg';
 import authorDhruvAmin from 'images/authors/dhruv-amin.jpg';
 import authorMarcoDalia from 'images/authors/marco-dalia.jpg';
@@ -130,7 +130,7 @@ const AiPage = () => (
       items={AGENT_FEATURES}
       link={LINKS.useCasesAI}
       linkText="Read more"
-      logos={['create', 'replit', 'same', 'solar', 'databutton']}
+      logos={['anything', 'replit', 'same', 'solar', 'databutton']}
     />
     <TestimonialNew
       className="mt-[200px] xl:mt-[192px] lg:mt-[158px] md:mt-[104px]"
@@ -139,11 +139,11 @@ const AiPage = () => (
       quote="Neon’s speed of provisioning and serverless scale-to-zero is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup."
       author={{
         name: 'Dhruv Amin',
-        position: 'Co-founder at Create.xyz',
+        position: 'Co-founder at Anything',
         avatar: authorDhruvAmin,
       }}
       company={{
-        src: createIcon,
+        src: anythingIcon,
         width: 136,
       }}
     />
