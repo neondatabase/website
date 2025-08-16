@@ -22,8 +22,7 @@ The `online_advisor` extension recommends **indexes**, **extended statistics**, 
 
 ## Requirements
 
-- PostgreSQL **14–17**
-- For Postgres 14-16 only, `online_advisor` must be added to [`shared_preload_libraries`](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) before you can install it via `CREATE EXTENSION`.
+- Supported on PostgreSQL **17**
 - Create the extension in every database you want to inspect
 - Activate it by calling any provided function (for example, `get_executor_stats()`)
 
@@ -32,10 +31,6 @@ The `online_advisor` extension recommends **indexes**, **extended statistics**, 
 Please refer to the [Supported Postgres extensions](/docs/extensions/pg-extensions) page for the latest supported version of `online_advisor` on Neon.
 
 ## Enable the online_advisor extension
-
-<Admonition type="important">
-Before you can create the `online_advisor` extension **on Neon Postgres 14-16**, you must enable the `online_advisor` preloaded library. See [Extensions with preloaded libraries](/docs/extensions/pg-extensions#extensions-with-preloaded-libraries) for instructions. This step is not required on Postgres 17 projects.
-</Admonition>
 
 You can create the extension in each target database using `CREATE EXTENSION`:
 
