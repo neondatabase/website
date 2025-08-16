@@ -180,7 +180,7 @@ if (operationIds.length > 0) {
 ```text
 POLLING SEQUENCE
 ────────────────
-restore_api() 
+restore_api()
     ↓
 [operations?]──No──→ ✓ Connect
     ↓Yes
@@ -330,13 +330,13 @@ Snapshots solve these problems:
 
 ## API quick reference
 
-| Operation                   | Endpoint                                                             |
-| --------------------------- | -------------------------------------------------------------------- |
-| [Create checkpoint](https://api-docs.neon.tech/reference/createsnapshot)           | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   |
-| [Restore checkpoint](https://api-docs.neon.tech/reference/restoresnapshot)          | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` |
-| [List checkpoints](https://api-docs.neon.tech/reference/listsnapshots)            | `GET /api/v2/projects/{project_id}/snapshots`                        |
-| [Delete checkpoint](https://api-docs.neon.tech/reference/deletesnapshot)           | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
-| [Update checkpoint](https://api-docs.neon.tech/reference/updatesnapshot)           | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
+| Operation                                                                               | Endpoint                                                             |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| [Create checkpoint](https://api-docs.neon.tech/reference/createsnapshot)                | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   |
+| [Restore checkpoint](https://api-docs.neon.tech/reference/restoresnapshot)              | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` |
+| [List checkpoints](https://api-docs.neon.tech/reference/listsnapshots)                  | `GET /api/v2/projects/{project_id}/snapshots`                        |
+| [Delete checkpoint](https://api-docs.neon.tech/reference/deletesnapshot)                | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       |
+| [Update checkpoint](https://api-docs.neon.tech/reference/updatesnapshot)                | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        |
 | [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        |
 | [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         |
 
