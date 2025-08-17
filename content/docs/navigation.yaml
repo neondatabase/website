@@ -4,7 +4,7 @@
   icon: home
   items:
     - section: Why Neon?
-      icon: why-neon
+      icon: info
       items:
         - title: Our mission
           slug: get-started/why-neon
@@ -13,7 +13,7 @@
         - title: Production readiness with Neon
           slug: get-started/production-readiness
     - section: Start with Neon
-      icon: get-started
+      icon: start
       items:
         - title: Tutorial
           items:
@@ -213,7 +213,7 @@
 - nav: Platform
   slug: manage/platform
   title: Platform
-  icon: platform
+  icon: settings
   items:
     - section: Architecture
       icon: architecture
@@ -338,7 +338,7 @@
         - title: Private Networking
           slug: guides/neon-private-networking
     - section: Platform
-      icon: platform
+      icon: settings
       slug: manage/platform
       items:
         - title: Access control
@@ -1068,20 +1068,20 @@
     items:
       - title: Branching workflows
         slug: get-started-with-neon/workflow-primer
-        icon: branching-workflows
+        icon: branching
       - title: GitHub integration
         slug: guides/neon-github-integration
-        icon: github-integration
+        icon: github
       - title: Vercel integration
         slug: guides/vercel-overview
-        icon: vercel-integration
+        icon: vercel
       - title: Data anonymization
         slug: workflows/data-anonymization
         icon: anonymize
         tag: new
       - title: Neon Twin
         slug: guides/neon-twin-intro
-        icon: neon-twin
+        icon: twin
         items:
           - title: pg_dump / pg_restore
             items:
@@ -1096,7 +1096,7 @@
         icon: tutorial
       - title: Postgres guides
         slug: postgresql/introduction
-        icon: postgres-guides
+        icon: book
         items:
           - title: Data types
             slug: data-types/introduction
@@ -1448,7 +1448,7 @@
   items:
     - title: Platform integration
       slug: guides/platform-integration-intro
-      icon: platform
+      icon: settings
       items:
         - title: Get started
           slug: guides/platform-integration-get-started
@@ -1460,7 +1460,7 @@
           slug: guides/consumption-metrics
     - title: Multitenancy
       slug: guides/multitenancy
-      icon: platform
+      icon: settings
     - title: Glossary
       slug: reference/glossary
       icon: glossary

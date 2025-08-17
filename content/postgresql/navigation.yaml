@@ -1,12 +1,15 @@
 - nav: Getting Started
   slug: postgresql-getting-started
   title: PostgreSQL Tutorial
+  icon: home
   items:
    - section: Introduction
+     icon: info
      items: 
       - title: PostgreSQL Tutorial
         slug: tutorial
    - section: PostgreSQL Quick Start
+     icon: start
      items:
       - slug: postgresql-getting-started/what-is-postgresql
         title: What is PostgreSQL?
@@ -116,7 +119,6 @@
        title: Upsert
      - slug: postgresql-tutorial/postgresql-merge
        title: MERGE
-  
    - section: Transactions
      items:
      - slug: postgresql-tutorial/postgresql-transaction
@@ -231,7 +233,6 @@
        title: BYTEA
      - slug: postgresql-tutorial/postgresql-composite-types
        title: Composite Types
-
    - section: Conditional Expressions & Operators
      items:
      - slug: postgresql-tutorial/postgresql-case
