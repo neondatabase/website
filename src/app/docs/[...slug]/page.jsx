@@ -16,8 +16,7 @@ const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
   slug.includes('shared-content/') ||
   slug.includes('README') ||
-  slug.includes('GUIDE_TEMPLATE') ||
-  slug.includes('RELEASE_NOTES_TEMPLATE');
+  slug.includes('GUIDE_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
