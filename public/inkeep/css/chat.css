@@ -157,7 +157,7 @@
 .ikp-chat-bubble__bot-message .ikp-message-header {
   position: absolute;
   left: 8px;
-  top: 26px;
+  top: 2px;
   padding: 0;
 }
 @media (max-width: 612px) {
