@@ -53,11 +53,12 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group flex w-full gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+          'group relative flex w-full gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           items?.length && 'pr-1',
           isActive && !items?.length
-            ? 'font-medium text-black-new dark:text-white'
-            : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white'
+            ? 'font-medium text-secondary-8 before:opacity-100 dark:text-primary-1'
+            : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',
+          'before:absolute before:-inset-y-2 before:-left-[13px] before:w-px before:bg-primary-1 before:opacity-0 before:transition-opacity before:duration-200'
         )}
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || websiteSlug || docSlug : undefined}
@@ -87,7 +88,7 @@ const Item = ({
             }}
             transition={{ duration: 0.2 }}
           >
-            <ul className="mt-3.5 flex flex-col gap-3.5 border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
+            <ul className="mt-2 flex flex-col gap-3.5 border-l border-gray-new-80 py-1.5 pl-3 dark:border-gray-new-20">
               {items.map((item, index) => (
                 <Item {...item} key={index} basePath={basePath} closeMobileMenu={closeMobileMenu} />
               ))}
