@@ -9,7 +9,7 @@ import HomeIcon from 'icons/docs/home.inline.svg';
 const linkClassName = 'transition-colors duration-200 hover:text-black dark:hover:text-white';
 
 const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
-  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
+  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60">
     <Link className={linkClassName} to={isPostgresPost ? POSTGRESQL_BASE_PATH : DOCS_BASE_PATH}>
       <HomeIcon />
     </Link>
