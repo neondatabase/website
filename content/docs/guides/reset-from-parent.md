@@ -26,6 +26,14 @@ When you reset a branch to its parent, the data and schema is completely replace
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
 
+### Branch expiration behavior
+
+If the branch has an expiration timestamp set, resetting from the parent recalculates the `expires_at` value using the preserved `ttl_interval_seconds` value, starting from the reset time. The TTL interval itself remains unchanged.
+
+For example, if a branch was created with a 24-hour TTL and is reset 12 hours after creation, the new expiration will be 24 hours from the reset time (which is 36 hours from creation time).
+
+For more details about branch expiration, see [branch expiration](/docs/guides/branch-expiration).
+
 ## How to Reset from parent
 
 You can reset any branch to its parent using any of our tools.
