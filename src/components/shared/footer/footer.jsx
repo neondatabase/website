@@ -106,9 +106,7 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                             {description}
                           </span>
                         )}
-                        {hasSubmenu && (
-                          <ChevronIcon className="ml-1 size-3.5 scale-75 [&_path]:stroke-2" />
-                        )}
+                        {hasSubmenu && <ChevronIcon className="ml-1" />}
                       </Tag>
                       {hasSubmenu && (
                         <div

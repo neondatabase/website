@@ -10,17 +10,15 @@ import Link from 'components/shared/link';
 import Chevron from 'icons/chevron-right-lg.inline.svg';
 
 import Tag from '../../tag';
-import Icon from '../icon';
 
 const Item = ({
   basePath,
-  root,
   title,
   slug = null,
-  icon = null,
   tag = null,
   ariaLabel = null,
   items = null,
+  isSubmenu = false,
   closeMobileMenu = null,
 }) => {
   const pathname = usePathname();
@@ -32,7 +30,7 @@ const Item = ({
 
   const externalSlug = slug?.startsWith('http') ? slug : null;
   const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
-  const docSlug = root ? slug : `${basePath}${slug}`;
+  const docSlug = `${basePath}${slug}`;
 
   const LinkTag = slug ? Link : 'button';
 
@@ -53,12 +51,13 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group relative flex w-full gap-2 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
-          items?.length && 'pr-1',
+          'group relative flex w-full gap-2 py-[7px] pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           isActive && !items?.length
-            ? 'font-medium text-secondary-8 before:opacity-100 dark:text-primary-1'
+            ? 'font-medium text-secondary-8 dark:text-primary-1'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',
-          'before:absolute before:-inset-y-2 before:-left-[13px] before:w-px before:bg-primary-1 before:opacity-0 before:transition-opacity before:duration-200'
+          isSubmenu &&
+            'before:absolute before:inset-y-0 before:-left-[13px] before:w-px before:bg-secondary-8 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-primary-1',
+          isActive && isSubmenu && !items?.length && 'before:opacity-100'
         )}
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || websiteSlug || docSlug : undefined}
@@ -67,7 +66,6 @@ const Item = ({
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
-        {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
         <span className="text-pretty" aria-hidden={!!ariaLabel}>
           {title}&nbsp;
           {tag && <Tag className="relative -top-px ml-1 inline-block" label={tag} size="sm" />}
@@ -88,9 +86,15 @@ const Item = ({
             }}
             transition={{ duration: 0.2 }}
           >
-            <ul className="mt-2 flex flex-col gap-3.5 border-l border-gray-new-80 py-1.5 pl-3 dark:border-gray-new-20">
+            <ul className="border-l border-gray-new-80 pl-3 dark:border-gray-new-20">
               {items.map((item, index) => (
-                <Item {...item} key={index} basePath={basePath} closeMobileMenu={closeMobileMenu} />
+                <Item
+                  {...item}
+                  key={index}
+                  basePath={basePath}
+                  closeMobileMenu={closeMobileMenu}
+                  isSubmenu
+                />
               ))}
             </ul>
           </m.div>
@@ -102,10 +106,8 @@ const Item = ({
 
 Item.propTypes = {
   basePath: PropTypes.string.isRequired,
-  root: PropTypes.bool,
   title: PropTypes.string.isRequired,
   slug: PropTypes.string,
-  icon: PropTypes.string,
   tag: PropTypes.string,
   ariaLabel: PropTypes.string,
   items: PropTypes.arrayOf(
@@ -118,9 +120,8 @@ Item.propTypes = {
       collapsible: PropTypes.bool,
     })
   ),
+  isSubmenu: PropTypes.bool,
   closeMobileMenu: PropTypes.func,
-  setMenuHeight: PropTypes.func.isRequired,
-  menuWrapperRef: PropTypes.any.isRequired,
 };
 
 export default Item;

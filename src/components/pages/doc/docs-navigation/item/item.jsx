@@ -5,6 +5,9 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+import Icon from '../../menu/icon';
 
 const isActiveItem = (slug, items, currentSlug) => {
   if (slug === currentSlug) return true;
@@ -20,7 +23,7 @@ const isActiveItem = (slug, items, currentSlug) => {
   return findActiveItem(items);
 };
 
-const Item = ({ nav, slug, items, basePath }) => {
+const Item = ({ nav: title, slug, subnav, items, basePath }) => {
   const LinkTag = slug ? Link : 'button';
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
@@ -29,20 +32,64 @@ const Item = ({ nav, slug, items, basePath }) => {
   const href = `${basePath}${slug}`;
 
   return (
-    <LinkTag
-      className={clsx(
-        'relative flex h-full items-center',
-        'whitespace-nowrap text-sm font-medium tracking-tight',
-        'transition-colors duration-200',
-        'text-gray-new-30 hover:text-black-new',
-        'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
-        'dark:text-gray-new-70 dark:after:bg-white dark:hover:text-white',
-        isActive && 'text-black-new after:opacity-100 dark:text-white'
+    <li className={clsx('relative [perspective:2000px]', subnav && 'group')}>
+      <LinkTag
+        className={clsx(
+          'relative flex h-full items-center gap-1',
+          'whitespace-nowrap text-sm font-medium tracking-tight',
+          'transition-colors duration-200',
+          'text-gray-new-30 hover:text-black-new group-hover:text-black-new',
+          'after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
+          'dark:text-gray-new-70 dark:after:bg-white dark:hover:text-white dark:group-hover:text-white',
+          isActive && 'text-black-new after:opacity-100 dark:text-white'
+        )}
+        to={href || undefined}
+      >
+        {title}
+        {subnav && (
+          <ChevronIcon className="text-gray-new-50 transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white" />
+        )}
+      </LinkTag>
+      {subnav && (
+        <div
+          className={clsx(
+            'absolute -left-5 top-[90%]',
+            'pointer-events-none opacity-0',
+            'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
+            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+          )}
+        >
+          <ul
+            className={clsx(
+              'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
+              'shadow-[0px_14px_20px_0px_rgba(0,0,0,.1) border-gray-new-94 bg-white',
+              'dark:border-gray-new-15 dark:bg-gray-new-8 dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+            )}
+          >
+            {subnav.map(({ slug, icon, title }, index) => {
+              const externalSlug = slug?.startsWith('http') ? slug : null;
+              const websiteSlug =
+                slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
+              const docSlug = `${basePath}${slug}`;
+
+              return (
+                <li key={index}>
+                  <Link
+                    className="flex items-center gap-2 leading-none text-gray-new-30 transition-colors duration-200 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white"
+                    href={externalSlug || websiteSlug || docSlug}
+                    size="2xs"
+                    isExternal={externalSlug}
+                  >
+                    {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
+                    {title}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
-      to={href || undefined}
-    >
-      {nav}
-    </LinkTag>
+    </li>
   );
 };
 
@@ -50,6 +97,12 @@ Item.propTypes = {
   nav: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+    })
+  ),
+  subnav: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,

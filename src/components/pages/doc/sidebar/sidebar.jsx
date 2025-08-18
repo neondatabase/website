@@ -10,6 +10,21 @@ const getActiveMenu = (navigation, slug) => {
   const containsActiveSlug = (menuList) =>
     menuList?.some((menu) => menu.slug === slug || (menu.items && containsActiveSlug(menu.items)));
 
+  const subnavMenu = navigation?.find((menu) => {
+    if (menu.subnav) {
+      return menu.subnav.some(
+        (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
+      );
+    }
+    return false;
+  });
+
+  if (subnavMenu && subnavMenu.subnav) {
+    return subnavMenu.subnav.find(
+      (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
+    );
+  }
+
   return navigation?.find((menu) => menu.slug === slug || containsActiveSlug(menu.items));
 };
 

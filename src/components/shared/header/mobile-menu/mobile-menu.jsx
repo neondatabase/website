@@ -77,7 +77,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
         {sections && (
           <ChevronIcon
             className={clsx(
-              'ml-auto inline-block h-2.5 w-2.5 transition-transform duration-200 dark:text-white [&_path]:stroke-2',
+              'ml-auto inline-block transition-transform duration-200 dark:text-white',
               isDarkTheme ? 'text-white' : 'text-grayn-new-40',
               isMenuItemOpen && 'rotate-180'
             )}
