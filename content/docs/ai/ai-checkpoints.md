@@ -1,6 +1,6 @@
 ---
-title: Using Snapshots as checkpoints
-subtitle: Implementing AI agent checkpoints with Neon snapshots
+title: Neon snapshots for AI checkpoints
+subtitle: Learn how to manage database state with point-in-time recovery and preview branches.
 enableTableOfContents: true
 updatedOn: '2025-08-12T14:09:12.290Z'
 ---
@@ -50,19 +50,26 @@ Every agent project maps to one Neon project with a persistent "active" branch a
 - Can be restored to the active branch or to a temporary preview branch
 
 ```text
-PROJECT LAYOUT
-──────────────
-PERSISTENT:
-  main (active) ──→ postgresql://stable/db  [never changes]
-
-CHECKPOINTS:
-  📸 snapshot-1  ┐
-  📸 snapshot-2  ├─→ Can restore to main or new branch
-  📸 snapshot-3  ┘
-
-TEMPORARY:
-  preview-*     ──→ postgresql://temp/db    [test branches]
-  main (old)    ──→ postgresql://orphan/db  [cleanup needed]
++------------------------------------------------------------------------+
+| NEON PROJECT                                                           |
+|                                                                        |
+| +------------------------+     +------------------+     +------------+ |
+| |   PERSISTENT BRANCH    |     |    CHECKPOINTS   |     | TEMPORARY  | |
+| |                        |     |                  |     |            | |
+| |  [ Active Branch ] <---+-----+--[ Snapshot A ]  |     | [ Preview ]| |
+| | (Stable Conn String)   |     |                  |     |            | |
+| +------------------------+     |  [ Snapshot B ]  +---->| [ Branch ] | |
+|                                |                  |     |            | |
+|                                |  [ Snapshot C ]  |     +------------+ |
+|                                +------------------+                    |
+|                                                                        |
+|                                                    +-----------------+ |
+|                                                    | FOR CLEANUP     | |
+|                                                    |                 | |
+|                                                    | [ Backup Branch]| |
+|                                                    | (main (old))    | |
+|                                                    +-----------------+ |
++------------------------------------------------------------------------+
 ```
 
 ## Implementation
