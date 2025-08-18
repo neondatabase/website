@@ -28,16 +28,17 @@ The support channels you can access differ according to your [Support Plan](#sup
 | :---------------------------------------------------------------------------- | :-------: | :-----: | :------: |
 | [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check; | &check;  |
 | [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; | &check;  |
-| [Support tickets](#support-tickets)                                           |     -     | &check; | &check;  |
+| [Support tickets](#support-tickets)                                           |     -     |   \*    | &check;  |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    | &check;  |
-| [Video chat](#video-chat)                                                     |     -     |    -    |    \*    |
-| [Slack channel](#slack-channel)                                               |     -     |    -    |   \*\*   |
+| [Video chat](#video-chat)                                                     |     -     |    -    |  \*\*    |
+| [Slack channel](#slack-channel)                                               |     -     |    -    | \*\*\*   |
 | [SLAs](#slas)                                                                 |     -     |    -    | &check;  |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |   \*\*   |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    | \*\*\*   |
 
 <div style={{margin: '-30px 0 30px 0'}}>
-<small><sup>*</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
-<small><sup>**</sup>[Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as a paid addons.</small>
+<small><sup>*</sup>[Support tickets](#support-tickets) are only supported on the Launch plan for billing-related issues.</small><br/>
+<small><sup>**</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
+<small><sup>***</sup>[Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as a paid addons.</small>
 </div>
 
 ### Neon Discord Server
@@ -66,7 +67,11 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-Paying users can contact support by opening a support ticket in the Neon Console. Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
+Paying users can contact support by opening a support ticket in the Neon Console.
+- **Launch** plan users can open support tickets for **billing-related issues only**
+- **Scale** plan users can open a support ticket for any Neon issue
+
+Select **Support** from the **?** menu at the top of the Neon Console. This will open the **Create Support Ticket** modal, where you can describe your issue.
 
 <Admonition type="note" title="Receiving support under an SLA">
 To receive support under an [SLA](#slas), you must submit a ticket through the Neon Console or email `support@neon.tech`. These are the only channels that integrate with Neon's internal escalation system, ensuring your issue is tracked and prioritized appropriately.
