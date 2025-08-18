@@ -59,14 +59,63 @@ These patterns emerged from working with production agent platforms where reliab
 As a blueprint for agent infrastructure, app.build is designed to be forked and modified:
 
 - **Custom templates**: Replace the default web app template with your own
-- **Alternative models**: Swap Anthropic (default) for OpenAI, Llama, or other LLMs
+- **Alternative models**: Use local models via Ollama, LMStudio, or OpenRouter, or swap cloud providers (Anthropic, OpenAI, Gemini)
 - **Different providers**: Change database, hosting, or auth providers
 - **New validations**: Add your own code quality checks
 - **Modified workflows**: Adjust the generation pipeline to your needs
 
 ## Local development
 
-Everything can run locally with your choice of LLM provider:
+Everything can run locally with your choice of LLM provider. app.build now supports local models through Ollama, LMStudio, and OpenRouter, in addition to cloud providers.
+
+### Local Model Configuration
+
+Configure local models using environment variables. Create a `.env.local` file in your project directory:
+
+```bash
+# For Ollama (requires Ollama running locally)
+OLLAMA_HOST=http://localhost:11434
+PREFER_OLLAMA=1
+LLM_BEST_CODING_MODEL=ollama:llama3.3:latest
+LLM_UNIVERSAL_MODEL=ollama:llama3.3:latest
+LLM_ULTRA_FAST_MODEL=ollama:phi4:latest
+
+# For LMStudio (requires LMStudio running locally)
+LLM_BEST_CODING_MODEL=lmstudio:http://localhost:1234
+LLM_UNIVERSAL_MODEL=lmstudio:http://localhost:1234
+
+# For OpenRouter (requires API key)
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+LLM_BEST_CODING_MODEL=openrouter:deepseek/deepseek-coder
+LLM_UNIVERSAL_MODEL=openrouter:anthropic/claude-3.5-sonnet
+
+# Cloud providers (original options)
+# ANTHROPIC_API_KEY=your_anthropic_key_here
+# GEMINI_API_KEY=your_gemini_key_here
+```
+
+### Model Categories
+
+app.build uses different model categories for different tasks:
+
+- **LLM_BEST_CODING_MODEL**: High-quality models for complex code generation (slower but better results)
+- **LLM_UNIVERSAL_MODEL**: Medium-speed models for general tasks and FSM operations
+- **LLM_ULTRA_FAST_MODEL**: Fast models for simple tasks like commit messages
+- **LLM_VISION_MODEL**: Models with vision capabilities for UI analysis
+
+### Provider Setup
+
+**Ollama**: Install and run Ollama locally, then pull your desired models:
+```bash
+ollama pull llama3.3:latest
+ollama pull phi4:latest
+```
+
+**LMStudio**: Download and run LMStudio with a local model server on port 1234.
+
+**OpenRouter**: Sign up at [OpenRouter](https://openrouter.ai/) and get an API key for access to various models.
+
+### Local Development Features
 
 - Use any LLM provider or self-hosted models
 - Skip deployment for local-only development
@@ -96,4 +145,4 @@ The project welcomes contributions at all levels, from fixing typos to exploring
 
 ## Latest information
 
-For the most up-to-date information and announcements, visit [app.build](https://app.build/). Our [blog](https://app.build/blog/) features technical deep-dives into the agent architecture, code generation strategies, and community contributions.
+For the most up-to-date information and announcements, visit [app.build](https://app.build/). Our [blog](https://app.build/blog/) features technical deep-dives into the agent architecture, code generation strategies, and community contributions. See our recent post on [local model support](https://www.app.build/blog/app-build-now-supports-open-source-models) for detailed setup instructions.
