@@ -501,7 +501,7 @@ A Neon architecture component responsible for the durability of database changes
 
 ## Scale plan
 
-A legacy Neon plan that provides full platform and support access. It's designed for scaling production workloads. See [Neon legacy plans](/docs/introduction/legacy-plans).
+A Neon pricing plan designed for scaling production workloads. See [Neon plans](/docs/introduction/plans).
 
 ## Scale to Zero
 
