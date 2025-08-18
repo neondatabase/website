@@ -1344,7 +1344,7 @@
 - nav: AI with Neon
   title: AI with Neon
   icon: ai
-  subnav:
+  items:
     - title: AI for agents
       slug: ai/ai-agents-tools
       icon: ai-agent
@@ -1443,7 +1443,7 @@
       icon: ai
 - nav: Resources
   title: Resources
-  subnav:
+  items:
     - title: Platform integration
       slug: guides/platform-integration-intro
       icon: settings
