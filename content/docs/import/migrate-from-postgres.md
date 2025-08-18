@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2025-06-04T16:43:36.535Z'
+updatedOn: '2025-08-18T12:11:47.177Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
