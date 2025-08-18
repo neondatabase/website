@@ -38,7 +38,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>[Support tickets](#support-tickets) are only supported on the Launch plan for billing-related issues.</small><br/>
 <small><sup>**</sup>[Video chats](#video-chat) may be scheduled on a case-by-case basis.</small><br/>
-<small><sup>***</sup>[Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as a paid addons.</small>
+<small><sup>***</sup>[Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as paid addons.</small>
 </div>
 
 ### Neon Discord Server
