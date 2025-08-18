@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
+import { useState, useEffect } from 'react';
 
 import Link from 'components/shared/link';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
@@ -28,7 +29,18 @@ const Item = ({ nav: title, slug, subnav, items, basePath }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
 
-  const isActive = isActiveItem(slug, items, currentSlug);
+  const [isActive, setIsActive] = useState(false);
+
+  useEffect(() => {
+    let activeState = isActiveItem(slug, items, currentSlug);
+
+    if (!activeState && subnav) {
+      activeState = subnav.some((subItem) => isActiveItem(subItem.slug, items, currentSlug));
+    }
+
+    setIsActive(activeState);
+  }, [slug, items, currentSlug, subnav]);
+
   const href = `${basePath}${slug}`;
 
   return (
@@ -66,22 +78,28 @@ const Item = ({ nav: title, slug, subnav, items, basePath }) => {
               'dark:border-gray-new-15 dark:bg-gray-new-8 dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
           >
-            {subnav.map(({ slug, icon, title }, index) => {
-              const externalSlug = slug?.startsWith('http') ? slug : null;
+            {subnav.map(({ slug: subSlug, icon, title: subTitle }, index) => {
+              const externalSlug = subSlug?.startsWith('http') ? subSlug : null;
               const websiteSlug =
-                slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
-              const docSlug = `${basePath}${slug}`;
+                subSlug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${subSlug}`;
+              const docSlug = `${basePath}${subSlug}`;
+
+              const subIsActive = isActiveItem(subSlug, items, currentSlug);
 
               return (
                 <li key={index}>
                   <Link
-                    className="flex items-center gap-2 leading-none text-gray-new-30 transition-colors duration-200 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white"
-                    href={externalSlug || websiteSlug || docSlug}
+                    className={clsx(
+                      'flex items-center gap-2 leading-none transition-colors duration-200',
+                      'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
+                      subIsActive && 'text-black-new dark:text-white'
+                    )}
+                    to={externalSlug || websiteSlug || docSlug}
                     size="2xs"
                     isExternal={externalSlug}
                   >
                     {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
-                    {title}
+                    {subTitle}
                   </Link>
                 </li>
               );

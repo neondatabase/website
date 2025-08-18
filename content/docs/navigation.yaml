@@ -1154,7 +1154,7 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:  
+          items:
             - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users
@@ -1344,6 +1344,7 @@
 - nav: AI with Neon
   title: AI with Neon
   icon: ai
+  slug: ai/ai-intro
   items:
     - title: AI for agents
       slug: ai/ai-agents-tools
@@ -1422,6 +1423,7 @@
 - nav: Security
   title: Security
   icon: security
+  slug: security/security-overview
   items:
     - title: Overview
       slug: security/security-overview
@@ -1443,6 +1445,7 @@
       icon: ai
 - nav: Resources
   title: Resources
+  slug: guides/platform-integration-intro
   items:
     - title: Platform integration
       slug: guides/platform-integration-intro

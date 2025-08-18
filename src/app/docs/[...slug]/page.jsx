@@ -88,7 +88,7 @@ const DocPost = async ({ params }) => {
       <Post
         data={{}}
         content={{}}
-        breadcrumbs={[]}
+        breadcrumbs={breadcrumbs}
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
