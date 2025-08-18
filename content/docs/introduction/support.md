@@ -29,8 +29,8 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |
 | [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
 | [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |
-| [Slack channel](#slack-channel)                                               |         -         |        -        |      \*\*        |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |      \*\*        |
+| [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |
 | [SLAs](#slas)                                                                 |         -         |        -        |     &check;      |
 
 <div style={{margin: '-30px 0 30px 0'}}>
