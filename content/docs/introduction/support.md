@@ -30,10 +30,10 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; | &check;  |
 | [Support tickets](#support-tickets)                                           |     -     |   \*    | &check;  |
 | [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    | &check;  |
-| [Video chat](#video-chat)                                                     |     -     |    -    |  \*\*    |
-| [Slack channel](#slack-channel)                                               |     -     |    -    | \*\*\*   |
+| [Video chat](#video-chat)                                                     |     -     |    -    |   \*\*   |
+| [Slack channel](#slack-channel)                                               |     -     |    -    |  \*\*\*  |
 | [SLAs](#slas)                                                                 |     -     |    -    | &check;  |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    | \*\*\*   |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |  \*\*\*  |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>*</sup>[Support tickets](#support-tickets) are only supported on the Launch plan for billing-related issues.</small><br/>
@@ -68,6 +68,7 @@ Neon AI chat is not an official Neon Support channel.
 ### Support tickets
 
 Paying users can contact support by opening a support ticket in the Neon Console.
+
 - **Launch** plan users can open support tickets for **billing-related issues only**
 - **Scale** plan users can open a support ticket for any Neon issue
 
