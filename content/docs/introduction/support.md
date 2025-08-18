@@ -73,8 +73,6 @@ Select **Get help** from the **?** menu at the top of the Neon Console to open t
 
 Ask your question or describe your issue. If the assistant is unable to resolve the problem, ask it to create a support ticket.
 
-For support tickets, you can expect an initial response time of 3 business days, Monday through Friday, excluding public holidays. For custom support solutions, please contact [Sales](/contact-sales).
-
 ### Slack channel
 
 [Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Standard support plan customers. You can request one from our [sales team](/contact-sales).
