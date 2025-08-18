@@ -215,7 +215,7 @@ For more information, see [Query performance](/docs/postgresql/query-performance
 
 ## Upgrade to a Neon Scale plan for priority support
 
-Scale support plan customers can open support tickets with the Neon Support team.
+Scale plan customers can open support tickets with the Neon Support team.
 
 **Recommendation**
 
