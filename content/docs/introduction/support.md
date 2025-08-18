@@ -10,11 +10,11 @@ This page outlines Neon's support plans, available channels, and policies. To le
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan | Support Plan |
-| :---------------- | :----------- |
-| Free plan         | Community support    |
-| Launch plan       | Billing support     |
-| Scale plan        | Standard support    |
+| Neon Pricing Plan | Support Plan      |
+| :---------------- | :---------------- |
+| Free plan         | Community support |
+| Launch plan       | Billing support   |
+| Scale plan        | Standard support  |
 
 <Admonition type="note">
 Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
@@ -25,15 +25,15 @@ Upgrading your support plan requires [upgrading your pricing plan](/docs/introdu
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
 | Support channels                                                              | Community support | Billing support | Standard support |
-| :---------------------------------------------------------------------------- | :-------: | :-----: | :------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |  &check;  | &check; | &check;  |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |  &check;  | &check; | &check;  |
-| [Support tickets](#support-tickets)                                           |     -     |   \*    | &check;  |
-| [Prioritized support tickets](#prioritized-support-tickets)                   |     -     |    -    | &check;  |
-| [Video chat](#video-chat)                                                     |     -     |    -    |   \*\*   |
-| [Slack channel](#slack-channel)                                               |     -     |    -    |  \*\*\*  |
-| [SLAs](#slas)                                                                 |     -     |    -    | &check;  |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |     -     |    -    |  \*\*\*  |
+| :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
+| [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |
+| [Prioritized support tickets](#prioritized-support-tickets)                   |         -         |        -        |     &check;      |
+| [Video chat](#video-chat)                                                     |         -         |        -        |       \*\*       |
+| [Slack channel](#slack-channel)                                               |         -         |        -        |      \*\*\*      |
+| [SLAs](#slas)                                                                 |         -         |        -        |     &check;      |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |      \*\*\*      |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> [Support tickets](#support-tickets) are only supported for billing-related issues under this support plan, which means Neon Launch plan users can only create support tickets if the issue is related to billing.</small><br/>
