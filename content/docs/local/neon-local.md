@@ -175,6 +175,7 @@ db:
   environment:
     NEON_API_KEY: ${NEON_API_KEY}
     NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+    DELETE_BRANCH: false
   volumes:
     - ./.neon_local/:/tmp/.neon_local
     - ./.git/HEAD:/tmp/.git/HEAD:ro,consistent
