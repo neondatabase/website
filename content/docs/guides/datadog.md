@@ -682,7 +682,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, which is billed after 100 GB on paid plans
 - Associated costs based on log volume in Datadog
 
 ## Feedback and future improvements
