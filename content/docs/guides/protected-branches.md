@@ -16,7 +16,7 @@ Neon's protected branches feature implements a series of protections:
 - With additional configuration steps, you can apply IP Allow restrictions to protected branches only. The [IP Allow](/docs/introduction/ip-allow) feature is available on the Neon [Scale](/docs/introduction/plans) plan. See [below](#how-to-apply-ip-restrictions-to-protected-branches).
 - Protected branches are not [archived](/docs/guides/branch-archiving) due to inactivity.
 
-The protected branches feature is available on all Neon [paid plans](/docs/introduction/plans).
+The protected branches feature is available on Neon [paid plans](/docs/introduction/plans).
 
 - The **Launch** plan supports up to 2 protected branches
 - The **Scale** plan supports up to 5 protected branches

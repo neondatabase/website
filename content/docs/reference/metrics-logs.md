@@ -87,7 +87,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, billed on paid plans for usage over 100 GB
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">

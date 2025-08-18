@@ -16,7 +16,7 @@ When benchmarking Neon databases, you'll encounter two distinct types of queries
 
 - **Hot queries**: Execute on an already-active database instance, delivering consistent low latency. These represent typical performance in production environments where databases run continuously or remain active most of the time.
 
-Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to configure or disable the auto-suspend timeout, enabling you to customize your testing approach or eliminate cold starts entirely. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/auto-suspend) for more details.
+Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/auto-suspend) for more details.
 
 ## Benchmarking methodology
 

@@ -352,7 +352,7 @@ A feature in Neon that enables teams to collaborate on projects under a shared a
 
 Admins oversee all aspects of the organization, including managing members, permissions, billing, and projects. Members have access to all organizational projects but cannot manage billing or members. Collaborators have limited access to specific projects shared with them and do not have access to the organization dashboard.
 
-Organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
+You get one Org with a Free plan account. Additional organizations are available on paid plans and can be created from scratch or by converting a personal account into an organization. For more, see [Organizations](/docs/manage/organizations).
 
 ## Page
 
@@ -412,7 +412,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
-The default branch has a larger compute hour allowance on the Free plan. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
