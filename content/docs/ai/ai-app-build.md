@@ -106,6 +106,7 @@ app.build uses different model categories for different tasks:
 ### Provider Setup
 
 **Ollama**: Install and run Ollama locally, then pull your desired models:
+
 ```bash
 ollama pull llama3.3:latest
 ollama pull phi4:latest
