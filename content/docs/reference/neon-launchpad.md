@@ -162,6 +162,10 @@ The claim URL is available:
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
 
+### Claim process details
+
+When claiming a project, you'll be asked to choose an organization to claim it into. Note that projects cannot be claimed into Vercel organizations.
+
 ## Use cases
 
 Neon Launchpad is designed for scenarios requiring rapid database provisioning:
