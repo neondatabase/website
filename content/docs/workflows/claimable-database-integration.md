@@ -213,6 +213,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Expiration**: Requests expire after the specified `ttl_seconds` (default: 24 hours). Once expired, you must create a new transfer request
 - **One-time use**: Each transfer request can only be used once
 - **Already claimed**: If a project has already been claimed, subsequent attempts will fail with an error
+- **Vercel orgs not supported**: Transferring a project into a Vercel-managed Neon [organization](/docs/reference/glossary#organization) via the claim flow is not supported, meaning that if you created your Neon account through the [Vercel-managed integration](/docs/guides/vercel-managed-integration), you cannot claim projects into the Neon organizaton created by that integration.
 
 ### Security considerations
 
