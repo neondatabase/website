@@ -146,4 +146,4 @@ The project welcomes contributions at all levels, from fixing typos to exploring
 
 ## Latest information
 
-For the most up-to-date information and announcements, visit [app.build](https://app.build/). Our [blog](https://app.build/blog/) features technical deep-dives into the agent architecture, code generation strategies, and community contributions. See our recent post on [local model support](https://www.app.build/blog/app-build-now-supports-open-source-models) for detailed setup instructions.
+For the most up-to-date information and announcements, visit [app.build](https://app.build/). Our [blog](https://app.build/blog/) features technical deep-dives into the agent architecture, code generation strategies, and community contributions.
