@@ -28,9 +28,9 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Branch expiration behavior
 
-If the branch has an expiration timestamp set, resetting from the parent recalculates the `expires_at` value using the preserved `ttl_interval_seconds` value, starting from the reset time. The TTL interval itself remains unchanged.
+When you reset a branch that has an expiration set, the expiration timer restarts from the reset time using the original duration. 
 
-For example, if a branch was created with a 24-hour TTL and is reset 12 hours after creation, the new expiration will be 24 hours from the reset time (which is 36 hours from creation time).
+For example, if your branch was originally set to expire in 24 hours, resetting gives it another full 24 hours from the reset time. This process recalculates the new `expires_at` value using the preserved `ttl_interval_seconds`, but the TTL interval itself remains unchanged. 
 
 For more details about branch expiration, see [branch expiration](/docs/guides/branch-expiration).
 
