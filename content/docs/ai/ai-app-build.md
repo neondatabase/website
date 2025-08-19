@@ -66,7 +66,7 @@ As a blueprint for agent infrastructure, app.build is designed to be forked and 
 
 ## Local development
 
-Everything can run locally with your choice of LLM provider. app.build now supports local models through Ollama, LMStudio, and OpenRouter, in addition to cloud providers.
+Everything can run locally with your choice of LLM provider. app.build also supports local models through Ollama, LMStudio, and OpenRouter, in addition to cloud providers.
 
 ### Local Model Configuration
 
