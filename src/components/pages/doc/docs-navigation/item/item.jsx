@@ -10,18 +10,34 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import Icon from '../../menu/icon';
 
-const isActiveItem = (slug, items, currentSlug) => {
+const isActiveItem = (slug, items, subnav, currentSlug) => {
   if (slug === currentSlug) return true;
 
-  const findActiveItem = (itemsList) =>
-    itemsList?.reduce((found, item) => {
-      if (found) return true;
-      if (item.slug === currentSlug) return true;
-      if (item.items) return findActiveItem(item.items);
-      return false;
-    }, false) || false;
+  if (items && Array.isArray(items)) {
+    const findActiveInItems = (itemsList) =>
+      itemsList?.reduce((found, item) => {
+        if (found) return true;
+        if (item.slug === currentSlug) return true;
+        if (item.items) return findActiveInItems(item.items);
+        return false;
+      }, false) || false;
 
-  return findActiveItem(items);
+    if (findActiveInItems(items)) return true;
+  }
+
+  if (subnav && Array.isArray(subnav)) {
+    const findActiveInSubnav = (subnavList) =>
+      subnavList?.reduce((found, item) => {
+        if (found) return true;
+        if (item.slug === currentSlug) return true;
+        if (item.items) return findActiveInSubnav(item.items);
+        return false;
+      }, false) || false;
+
+    if (findActiveInSubnav(subnav)) return true;
+  }
+
+  return false;
 };
 
 const Item = ({ nav: title, slug, subnav, items, basePath }) => {
@@ -32,12 +48,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath }) => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    let activeState = isActiveItem(slug, items, currentSlug);
-
-    if (!activeState && subnav) {
-      activeState = subnav.some((subItem) => isActiveItem(subItem.slug, items, currentSlug));
-    }
-
+    const activeState = isActiveItem(slug, items, subnav, currentSlug);
     setIsActive(activeState);
   }, [slug, items, currentSlug, subnav]);
 
@@ -84,15 +95,12 @@ const Item = ({ nav: title, slug, subnav, items, basePath }) => {
                 subSlug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${subSlug}`;
               const docSlug = `${basePath}${subSlug}`;
 
-              const subIsActive = isActiveItem(subSlug, items, currentSlug);
-
               return (
                 <li key={index}>
                   <Link
                     className={clsx(
                       'flex items-center gap-2 leading-none transition-colors duration-200',
-                      'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
-                      subIsActive && 'text-black-new dark:text-white'
+                      'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
                     )}
                     to={externalSlug || websiteSlug || docSlug}
                     size="2xs"
