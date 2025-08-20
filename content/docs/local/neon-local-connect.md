@@ -236,7 +236,7 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 
 ### Branch management:
 
-- **Reset from Parent Branch:** Instantly revert your branch to match the current state of its parent. Learn more about branch reset in [Docs: Branch Reset](/docs/guides/reset-from-parent). To reset a branch, right-click the branch in the **Database Schema** view and select **Reset Branch** from the context menu.
+- **Reset from Parent Branch:** Instantly revert your branch to match the current state of its parent. Learn more about branch reset in [Docs: Branch Reset](/docs/guides/reset-from-parent). To reset a branch, right-click the branch in the **Database Schema** view and select **Reset from Parent Branch** from the context menu.
   ![Reset Branch](/docs/local/reset.png)
 
 ### Database tools (available in the main panel):

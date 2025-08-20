@@ -122,7 +122,7 @@ The Neon Local Connect panel also provides easy branch management:
 
 - **Create a new branch:** Click the "Branch" dropdown, select "Create new branch...", give it a name, and choose a parent.
 - **Switch branches:** Simply select a different branch from the dropdown. Your `localhost` connection will now point to the new branch no code changes needed.
-- **Reset a branch:** Revert a branch to its parent's state to discard changes and get a clean slate. To reset a branch, right click the branch in **Database schema view** and select "Reset Branch".
+- **Reset a branch:** Revert a branch to its parent's state to discard changes and get a clean slate. To reset a branch, right click the branch in **Database schema view** and select "Reset from Parent Branch".
   ![Reset Branch](/docs/local/reset.png)
 
 ### Connect your application
