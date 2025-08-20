@@ -21,7 +21,10 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
       )}
     >
       <Container
-        className="flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 lg:pb-9 sm:py-8"
+        className={clsx(
+          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 sm:pt-8',
+          hasThemesSupport ? 'lg:pb-16' : 'lg:pb-9 sm:pb-8'
+        )}
         size="1344"
       >
         <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">

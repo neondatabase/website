@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-// import MobileNav from 'components/pages/doc/mobile-nav';
+import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
@@ -20,12 +20,6 @@ const NeonDocsLayout = async ({ children }) => {
       hasThemesSupport
     >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">
-        {/* <MobileNav
-          className="hidden lg:block"
-          navigation={navigation}
-          basePath={DOCS_BASE_PATH}
-          slug={slug}
-        /> */}
         <Container
           className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 xl:pt-9 lg:block sm:pt-7"
           size="1600"
@@ -37,6 +31,7 @@ const NeonDocsLayout = async ({ children }) => {
           />
           {children}
         </Container>
+        <MobileNav navigation={navigation} basePath={DOCS_BASE_PATH} />
       </div>
     </Layout>
   );
