@@ -1,5 +1,5 @@
 ---
-title: Getting started with Neon Local and Neon Local Connect for local development
+title: Getting started with Neon Local and Neon Local Connect
 subtitle: Learn how to set up and use Neon Local and Neon Local Connect for seamless local development with Neon
 author: 'dhanush-reddy'
 enableTableOfContents: true
@@ -9,7 +9,7 @@ updatedOn: '2025-08-17T00:00:00.000Z'
 
 One of Neon's most powerful features is database branching, the ability to instantly create isolated, copy-on-write clones of your database for any task. Just as you create a Git branch for every new feature or bug fix, you can create a parallel database branch. This eliminates environment drift, prevents developers from overwriting each other's work on shared staging databases, and ensures every development environment is a perfect, isolated replica of production.
 
-But how do you bring this cloud-native power into your local development workflow seamlessly? Constantly switching connection strings for each branch is tedious and error-prone. This is the problem that **Neon Local** and the **Neon Local Connect** VS Code extension solve. They act as a smart local proxy to your Neon database in the cloud. Your application connects to a single, static `localhost` address, while the tools handle all the complexity of routing and branch management behind the scenes. You get the safety and isolation of cloud-based database branches with the convenience and speed of a local Postgres instance.
+But how do you bring this cloud-native power into your local development workflow seamlessly? Constantly switching connection strings for each branch is tedious and error-prone. This is the problem that **Neon Local** and the **Neon Local Connect** VS Code extension solve. They act as a smart local proxy to your Neon database in the cloud. Your application connects to a single, static `localhost` address, while the tools handle all the complexity of routing and branch management behind the scenes.
 
 This guide will walk you through setting up and using both Neon Local and Neon Local Connect to create a powerful, modern development workflow. You'll learn how to:
 
@@ -84,8 +84,8 @@ Neon Local Connect turns your IDE into a powerful database management tool, elim
 #### Database schema view
 
 Once connected, a **Database Schema** view appears in the sidebar. This tree view lets you explore your entire database structure: databases, schemas, tables, columns, and relationships (PKs, FKs). Right-click any table for quick actions like **Query Table**, **View Table Data**, **Truncate**, or **Drop**.
-  
-  ![Database Schema View](/docs/local/database_schema_view.png)
+
+![Database Schema View](/docs/local/database_schema_view.png)
 
 #### Built-in SQL editor
 
@@ -115,7 +115,7 @@ The Neon Local Connect panel also provides easy branch management:
 - **Create a new branch:** Click the "Branch" dropdown, select "Create new branch...", give it a name, and choose a parent.
 - **Switch branches:** Simply select a different branch from the dropdown. Your `localhost` connection will now point to the new branch no code changes needed.
 - **Reset a branch:** Revert a branch to its parent's state to discard changes and get a clean slate. To reset a branch, right click the branch in **Database schema view** and select "Reset Branch".
-    ![Reset Branch](/docs/local/reset.png)
+  ![Reset Branch](/docs/local/reset.png)
 
 ### Connect your application
 
@@ -174,7 +174,6 @@ services:
 | `PARENT_BRANCH_ID` | Creates an ephemeral branch from a parent. If omitted, uses the project's default branch. | No       | Project's default branch |
 | `DELETE_BRANCH`    | Set to `false` to prevent branches from being deleted when the container stops.           | No       | `true`                   |
 
-
 If you need to use the `docker run` command instead of Docker Compose, you can checkout [Neon Local Docs](/docs/local/neon-local) for more information.
 
 ### Advanced configuration
@@ -216,7 +215,7 @@ Neon's branching is designed to integrate seamlessly with modern, Git-based deve
 
 Here’s a practical look at how to use Neon Local in your daily tasks.
 
-#### The scenario: Starting a new rask
+#### The scenario: Starting a new task
 
 You've just been assigned a ticket to build a new user profile page. The first step is always to create a new Git branch to isolate your code changes.
 
@@ -263,6 +262,7 @@ When using the CLI, you create the branch in the Neon Console and then configure
           - NEON_PROJECT_ID=${NEON_PROJECT_ID}
           - BRANCH_ID=<your_copied_branch_id> # Connect to the specific branch
     ```
+
 6.  Run `docker compose up` to start the proxy connected to your new feature branch.
 
 </TabItem>
@@ -303,127 +303,236 @@ With the CLI, you create an ephemeral branch by specifying a `PARENT_BRANCH_ID` 
           - NEON_PROJECT_ID=${NEON_PROJECT_ID}
           - PARENT_BRANCH_ID=<your_parent_branch_id> # Create ephemeral branch from this parent
     ```
+
 3.  Run `docker compose up`. Neon Local will create a new, temporary branch from this parent.
 4.  When you're finished, run `docker compose down`. The ephemeral branch will be automatically deleted from your Neon project.
 
 </TabItem>
 </Tabs>
 
-
 ## Connecting your application conditionally
 
 Your application code needs to seamlessly switch between connecting to Neon Local for development and your live Neon database for production. The standard way to manage this is by using the `NODE_ENV` environment variable.
 
-The core logic is straightforward: when `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Neon database URL, typically stored in your deployment environment's configuration or secrets.
+The core logic is straightforward: when `process.env.NODE_ENV` is set to `'development'`, your application should use the static `localhost` connection string provided by Neon Local. For any other environment (such as `'production'` on platforms like Vercel, AWS, or other cloud providers), your app should use the actual Neon database URL, typically stored in your deployment environment's configuration or secrets on your cloud provider.
 
 The implementation details vary slightly depending on the database driver or ORM you are using.
 
-<Tabs labels={["@neondatabase/serverless", "Drizzle ORM", "Prisma", "node-postgres (pg)"]}>
+<Tabs labels={["@neondatabase/serverless", "Drizzle ORM", "Prisma", "Other drivers"]}>
 <TabItem>
 
-The Neon serverless driver is designed to communicate with the Neon cloud over HTTP/WebSocket. To redirect this traffic to your local Neon Local proxy, you must override its default behavior in your development environment.
+The Neon serverless driver is designed to communicate with a Neon database over HTTP/WebSocket. To redirect this traffic to your local Neon Local proxy, you must override its default behavior in your development environment.
 
 This is done by reconfiguring `neonConfig` to point to `localhost`.
 
-```typescript
-// lib/db.ts
-import { neon, neonConfig } from '@neondatabase/serverless';
-import ws from 'ws';
+1. Install Dependencies
 
-let connectionString = process.env.DATABASE_URL || "postgres://neon:npg@localhost:5432/<database_name>";
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
-if (process.env.NODE_ENV === 'development') {
-  // Point the serverless driver to the local proxy
-  neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
-}
+   ```bash
+   npm install @neondatabase/serverless ws
+   ```
 
-// Use the WebSocket constructor for Node.js
-neonConfig.webSocketConstructor = ws;
+   ```bash
+   yarn add @neondatabase/serverless ws
+   ```
 
-export const sql = neon(connectionString);
-```
+   ```bash
+   pnpm add @neondatabase/serverless ws
+   ```
+
+   </CodeTabs>
+
+2. **Configure the connection**
+
+   ```typescript
+   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import ws from 'ws';
+
+   let connectionString =
+     process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>';
+
+   if (process.env.NODE_ENV === 'development') {
+     // Point the serverless driver to the local proxy
+     neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
+     neonConfig.poolQueryViaFetch = true;
+   }
+
+   // Use the WebSocket constructor for Node.js
+   neonConfig.webSocketConstructor = ws;
+
+   // Neon supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+
+   // HTTP Client (sql)
+   // - Best for serverless functions and Lambda environments
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   // - Better for applications with sporadic database access
+   export const sql = neon(connectionString);
+
+   // WebSocket Client (pool)
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   export const pool = new Pool({ connectionString });
+   ```
 
 </TabItem>
 <TabItem>
 
-Drizzle ORM's Neon drivers (`drizzle-orm/neon-http` and `drizzle-orm/neon-serverless`) are built on top of `@neondatabase/serverless`. Therefore, the configuration is nearly identical. You reconfigure `neonConfig` in development before initializing Drizzle.
+> If you’re using `drizzle-orm` with the standard Postgres wire protocol (not the Neon serverless adapter), refer to the **Other drivers** section.
 
-```typescript
-// lib/drizzle.ts
-import { neon, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-import ws from 'ws';
-import * as schema from './schema';
+Using Drizzle with Neon’s serverless adapters requires a similar setup to the one used for the Neon serverless driver directly: configure `neonConfig` to point to your local Neon Local proxy.
 
-let connectionString = process.env.DATABASE_URL || "postgres://neon:npg@localhost:5432/<database_name>";
+1. Install Dependencies
 
-if (process.env.NODE_ENV === 'development') {
-  // Point the serverless driver to the local proxy
-  neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
-}
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
-// Use the WebSocket constructor for Node.js
-neonConfig.webSocketConstructor = ws;
+   ```bash
+   npm install drizzle-orm @neondatabase/serverless ws
+   ```
 
-const sql = neon(connectionString);
-export const db = drizzle(sql, { schema });
-```
+   ```bash
+   yarn add drizzle-orm @neondatabase/serverless ws
+   ```
+
+   ```bash
+   pnpm add drizzle-orm @neondatabase/serverless ws
+   ```
+
+   </CodeTabs>
+
+2. **Configure the connection**
+
+   ```typescript
+   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import { drizzle as drizzleWs } from 'drizzle-orm/neon-serverless';
+   import { drizzle as drizzleHttp } from 'drizzle-orm/neon-http';
+   import ws from 'ws';
+
+   let connectionString =
+     process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>';
+
+   if (process.env.NODE_ENV === 'development') {
+     // Point the serverless driver to the local proxy
+     neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
+     neonConfig.poolQueryViaFetch = true;
+   }
+
+   // Use the WebSocket constructor for Node.js
+   neonConfig.webSocketConstructor = ws;
+
+   const sql = neon(connectionString);
+   const pool = new Pool({ connectionString });
+
+   // Drizzle supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+
+   // HTTP Client:
+   // - Best for serverless functions and Lambda environments
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   // - Better for applications with sporadic database access
+   export const drizzleClientHttp = drizzleHttp({ client: sql });
+
+   // WebSocket Client:
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   export const drizzleClientWs = drizzleWs({ client: pool });
+   ```
 
 </TabItem>
 <TabItem>
 
-Prisma uses the `@prisma/adapter-neon` package to connect to Neon databases. You need to configure the Prisma client to use the Neon adapter and set up the connection string based on the environment.
+> If you are using `prisma` with the standard Postgres wire protocol (not the Neon serverless adapter), refer to the **Other drivers** section.
 
-```prisma
-// schema.prisma
-generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["driverAdapters"]
-}
-```
+Using Prisma with Neon’s serverless adapters requires a similar setup to the one used for the Neon serverless driver directly: configure `neonConfig` to point to your local Neon Local proxy.
 
-```typescript
-// lib/prisma.ts
-import { neon, neonConfig } from '@neondatabase/serverless';
-import { PrismaNeon } from '@prisma/adapter-neon';
-import { PrismaClient } from '@prisma/client';
-import ws from 'ws';
+1. Install Dependencies
 
-let prisma;
+   <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
-const connectionString = process.env.DATABASE_URL || "postgres://neon:npg@localhost:5432/<database_name>";
+   ```bash
+   npm install @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
 
-if (process.env.NODE_ENV === 'development') {
-  // Point the serverless driver to the local proxy
-  neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
-}
+   ```bash
+   yarn add @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
 
-// Use the WebSocket constructor for Node.js
-neonConfig.webSocketConstructor = ws;
+   ```bash
+   pnpm add @prisma/client @prisma/adapter-neon @neondatabase/serverless ws
+   ```
 
-const sql = neon(connectionString);
-const adapter = new PrismaNeon(sql);
-prisma = new PrismaClient({ adapter });
+   </CodeTabs>
 
-export { prisma };
-```
+2. **Enable the Preview Flag**
+
+   To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
+
+   ```prisma
+   // schema.prisma
+   generator client {
+     provider        = "prisma-client-js"
+     previewFeatures = ["driverAdapters"]
+   }
+   ```
+
+3. **Configure the connection**
+
+   ```typescript
+   import { neonConfig } from '@neondatabase/serverless';
+   import { PrismaNeon, PrismaNeonHTTP } from '@prisma/adapter-neon';
+   import { PrismaClient } from './generated/prisma/client.js';
+   import ws from 'ws';
+
+   const connectionString =
+     process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>';
+
+   if (process.env.NODE_ENV === 'development') {
+     // Point the serverless driver to the local proxy
+     neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
+     neonConfig.poolQueryViaFetch = true;
+   }
+
+   // Use the WebSocket constructor for Node.js
+   neonConfig.webSocketConstructor = ws;
+
+   // Prisma supports both HTTP and WebSocket clients. Choose the one that fits your needs:
+   // HTTP Client:
+   // - Ideal for stateless operations and quick queries
+   // - Lower overhead for single queries
+   const adapterHttp = new PrismaNeonHTTP(connectionString, {});
+   export const prismaClientHttp = new PrismaClient({ adapter: adapterHttp });
+
+   // WebSocket Client:
+   // - Best for long-running applications (like servers)
+   // - Maintains a persistent connection
+   // - More efficient for multiple sequential queries
+   // - Better for high-frequency database operations
+   const adapterWs = new PrismaNeon({ connectionString });
+   export const prismaClientWs = new PrismaClient({ adapter: adapterWs });
+   ```
+
 </TabItem>
 
 <TabItem>
 
-Standard PostgreSQL drivers like `node-postgres` (`pg`) do not require any special configuration because they communicate over the standard Postgres wire protocol. Neon Local exposes a standard Postgres endpoint on `localhost:5432`.
+Standard PostgreSQL drivers like `node-postgres` (`pg`) do not require major changes because they communicate over the standard Postgres wire protocol. Neon Local exposes a standard Postgres endpoint on `localhost:5432`.
 
 The only change needed is to switch the connection string and adjust the SSL setting. SSL is required for production connections to Neon but is not needed for the local proxy.
 
 ```typescript
-// /lib/db.ts
-import { Pool } from 'pg';
+import { Client, Pool } from 'pg';
 
-const connectionString = process.env.DATABASE_URL || "postgres://neon:npg@localhost:5432/<database_name>";
-let sslConfig = { rejectUnauthorized: false }; // For production
+const connectionString =
+  process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>';
+let sslConfig;
 
 if (process.env.NODE_ENV === 'development') {
-  sslConfig = false;
+  sslConfig = { rejectUnauthorized: false };
 }
 
 const pool = new Pool({
@@ -431,18 +540,62 @@ const pool = new Pool({
   ssl: sslConfig,
 });
 
-export { pool };
+const client = new Client({
+  connectionString,
+  ssl: sslConfig,
+});
+
+export { pool, client };
 ```
+
+For **Drizzle ORM** using the standard Postgres driver is straightforward. You simply configure the connection string and SSL settings based on your environment:
+
+```typescript
+import { drizzle } from 'drizzle-orm/node-postgres';
+
+let connectionString =
+  process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>';
+let sslConfig;
+
+if (process.env.NODE_ENV === 'development') {
+  sslConfig = { rejectUnauthorized: false };
+}
+
+export const drizzleClient = drizzle({
+  connection: {
+    connectionString,
+    ssl: sslConfig,
+  },
+});
+```
+
+For **Prisma** with the standard Postgres driver you again only need to set the database URL appropriately for your environment. Prisma will handle the rest:
+
+```typescript
+import { PrismaClient } from './generated/prisma/client.js';
+
+const prismaClient = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL || 'postgres://neon:npg@localhost:5432/<database_name>',
+    },
+  },
+});
+```
+
+- In any case, use the local Neon Local connection string for development and your production Neon connection string in deployed environments.
+- Conditionally disabling SSL for local development ensures compatibility with the Neon Local proxy, while production connections remain secure.
 
 </TabItem>
 </Tabs>
 
-<Admonition type="note" title="A note for other languages and drivers">
+<Admonition type="note" title="Other languages and drivers">
 The complex `neonConfig` setup is **exclusive to the `@neondatabase/serverless` driver** and its wrappers (Drizzle, Prisma adapter) in Node.js environments.
 
 For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard PostgreSQL drivers, the process is much simpler. It follows the same pattern as the `node-postgres (pg)` example:
+
 1.  Read the database connection string from an environment variable.
-2.  In your local development environment, set this variable to `postgres://user:pass@localhost:5432/dbname`.
+2.  In your local development environment, set this variable to `postgres://neon:npg@localhost:5432/<database_name>`.
 3.  In production, set it to your real Neon connection string.
 4.  You may need to conditionally disable SSL for the local connection.
 
