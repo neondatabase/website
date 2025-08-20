@@ -600,7 +600,7 @@ const prismaClient = new PrismaClient({
 <Admonition type="note" title="Other languages and drivers">
 The complex `neonConfig` setup is **exclusive to the `@neondatabase/serverless` driver** and its wrappers (Drizzle, Prisma adapter) in Node.js environments.
 
-For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard PostgreSQL drivers, the process is much simpler. It follows the same pattern as the `node-postgres (pg)` example:
+For applications written in other languages (like Python, Go, Ruby, Java, etc.) that use standard PostgreSQL drivers, you can follow the same pattern as the `node-postgres (pg)` example:
 
 1.  Read the database connection string from an environment variable.
 2.  In your local development environment, set this variable to `postgres://neon:npg@localhost:5432/<database_name>`.
