@@ -50,11 +50,11 @@ Every agent project maps to one Neon project with a designated root branch that 
 
 **The active branch:**
 
-- Gets its data replaced during rollbacks (but keeps the same connection string)*
+- Gets its data replaced during rollbacks (but keeps the same connection string)\*
 - Maintains a permanent connection string that never changes
 - Must be a root branch for snapshot creation
 
-*Through Neon's restore mechanism - see [How restore works](#how-restore-works) for technical details.
+\*Through Neon's restore mechanism - see [How restore works](#how-restore-works) for technical details.
 
 **The snapshots:**
 
@@ -194,7 +194,7 @@ async function waitForOperation(projectId, operationId) {
   while (true) {
     const response = await fetch(
       `https://console.neon.tech/api/v2/projects/${projectId}/operations/${operationId}`,
-      { headers: { 'Authorization': `Bearer ${NEON_API_KEY}` } }
+      { headers: { Authorization: `Bearer ${NEON_API_KEY}` } }
     );
     const { status } = await response.json();
 
@@ -209,13 +209,13 @@ async function waitForOperation(projectId, operationId) {
     }
 
     // Still running - wait and retry
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise((resolve) => setTimeout(resolve, 5000));
   }
 }
 
 // After restore API call
 const restoreResponse = await restoreSnapshot(projectId, snapshotId);
-const operationIds = restoreResponse.operations.map(op => op.id);
+const operationIds = restoreResponse.operations.map((op) => op.id);
 
 // Wait for all operations to complete
 for (const id of operationIds) {
@@ -346,15 +346,15 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## API quick reference
 
-| Operation                                                                               | Endpoint                                                             | Description |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | ----------- |
-| [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)                | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   | Save current database state as a new version |
-| [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)              | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` | Restore database to a previous version |
-| [List snapshots](https://api-docs.neon.tech/reference/listsnapshots)                  | `GET /api/v2/projects/{project_id}/snapshots`                        | Get all available versions |
-| [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)                | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       | Remove a saved version |
-| [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)                | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version |
-| [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status |
-| [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up |
+| Operation                                                                               | Endpoint                                                             | Description                                  |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------- |
+| [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot)                  | `POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot`   | Save current database state as a new version |
+| [Restore snapshot](https://api-docs.neon.tech/reference/restoresnapshot)                | `POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore` | Restore database to a previous version       |
+| [List snapshots](https://api-docs.neon.tech/reference/listsnapshots)                    | `GET /api/v2/projects/{project_id}/snapshots`                        | Get all available versions                   |
+| [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)                  | `DELETE /api/v2/projects/{project_id}/snapshots/{snapshot_id}`       | Remove a saved version                       |
+| [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)                  | `PATCH /api/v2/projects/{project_id}/snapshots/{snapshot_id}`        | Rename a version                             |
+| [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status                         |
+| [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up           |
 
 ## Quick implementation checklist
 
