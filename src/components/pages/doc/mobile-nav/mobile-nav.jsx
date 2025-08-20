@@ -173,7 +173,7 @@ const RecursiveItem = ({ node, currentPath }) => {
             className={clsx(
               'flex flex-col',
               node.nav && 'mt-[5px]',
-              node.depth > 1 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
+              node.depth > 0 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
             )}
           >
             {node.items.map((child, idx) => (
@@ -228,6 +228,8 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
   );
 
   if (!menu.length) return null;
+
+  console.log(menu);
 
   return (
     <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
