@@ -89,7 +89,7 @@ To configure Neon Private Networking, perform the following steps:
 
 ## Add your VPC Endpoint ID to your Neon organization
 
-    Assign your **VPC Endpoint ID** to your Neon organization. You can do this using the Neon CLI or API.
+    Assign your **VPC Endpoint ID** to your Neon organization. If the region has multiple **Service Names**, please assign all of **VPC Endpoint IDs**. You can do this using the Neon CLI or API.
 
     <Admonition type="note">
      Please note that you must assign the **VPC Endpoint ID**, not the VPC ID.
@@ -215,7 +215,7 @@ You can specify a CLI command similar to the following to restrict project acces
 neon vpc project restrict vpce-1234567890abcdef0 --project-id orange-credit-12345678
 ```
 
-You will need to provide the VPC endpoint ID and your Neon project ID. You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
+You will need to provide the VPC endpoint ID and your Neon project ID. If the region has multiple **Service Names**, all of **VPC Endpoint IDs** must be restricted in the way as above.  You can find your Neon project ID under your project's settings in the Neon Console, or by running this Neon CLI command: `neon projects list`
 
 After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
