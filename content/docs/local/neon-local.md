@@ -126,8 +126,8 @@ The Neon Local container uses an automatically generated self-signed certificate
 ```shell
 ssl: { rejectUnauthorized: false }
 ```
-</Admonition>
 
+</Admonition>
 
 ## Connecting your app (Neon serverless driver)
 
@@ -162,8 +162,6 @@ const sql = neon('postgres://neon:npg@{db}:5432/<database_name>');
 
 // where {db} is the name of the Neon Local service in your compose file
 ```
-
-
 
 No additional environment variables are needed - the same Docker configuration works for both drivers:
 
