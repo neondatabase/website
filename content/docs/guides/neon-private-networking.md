@@ -220,7 +220,7 @@ You will need to provide the VPC endpoint ID and your Neon project ID. You can f
 After adding a restriction, you can check the status of the VPC endpoint to view the restricted project using the [vpc endpoint status command](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand). You will need to provide your VPC endpoint ID, region ID, and Neon organization ID.
 
 ```bash
-neonctl vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
+neon vpc endpoint status vpce-1234567890abcdef0 --region-id=aws-eu-central-1 --org-id=org-nameless-block-72040075
 ┌────────────────────────┬───────┬─────────────────────────┬─────────────────────────────┐
 │ Vpc Endpoint Id        │ State │ Num Restricted Projects │ Example Restricted Projects │
 ├────────────────────────┼───────┼─────────────────────────┼─────────────────────────────┤
