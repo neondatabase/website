@@ -39,7 +39,7 @@ Enable the Data API at the **branch** level for a single database.
 
 To get started, open the **Data API** page from the project sidebar and click **Enable**.
 
-![Data API page with enable button](/docs/data-api/new_data_api.png)
+![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
 By default, we install Neon Auth as your **Authentication provider**. We recommend using Neon Auth for a seamless experience, but you can also select **Other provider** if you manage your own JWTs, or skip this step to configure authentication later.
 
