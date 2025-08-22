@@ -37,13 +37,15 @@ You might notice another feature in Neon called **Neon RLS**. Please be aware th
 
 Enable the Data API at the **branch** level for a single database.
 
-To get started, navigate to the **Data API** tab in the Neon Console for your branch and click **Enable**.
+To get started, open the **Data API** page from the project sidebar and click **Enable**.
 
-![Data API tab with enable button](/docs/data-api/data_api_tab.png)
+![Data API page with enable button](/docs/data-api/new_data_api.png)
 
-Once enabled, you'll see your Data API **Project URL** here — this is your endpoint for API requests.
+By default, we install Neon Auth as your **Authentication provider**. We recommend using Neon Auth for a seamless experience, but you can also select **Other provider** if you manage your own JWTs, or skip this step to configure authentication later.
 
-![Data API enabled view with Project URL](/docs/data-api/data-api-enabled.png)
+Once enabled, you'll see your **REST API Endpoint** — this is your base URL for API requests, with a copy-to-clipboard control.
+
+![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
 _Always secure your data before using the Data API in production._
 
@@ -58,15 +60,15 @@ _Always secure your data before using the Data API in production._
 
 ## Authentication
 
-Once enabled, the **Working with the Data API** section shows your current security status.
+Once enabled, the **Working with the Data API** section shows your current security status and next steps. If you skipped the auth provider selection, you'll also see an option to add an authentication provider.
 
 ![configuration section of Data API](/docs/data-api/data_api_config.png)
 
 The security model consists of two parts:
 
-### Neon Auth (automatically configured)
+### Neon Auth (default)
 
-[Neon Auth](/docs/neon-auth/overview) manages user authentication, generating JWT tokens for secure API requests.
+[Neon Auth](/docs/neon-auth/overview) manages user authentication, generating JWT tokens for secure API requests. If you accepted the default during setup, Neon Auth is already configured and you'll see the JWKS URL in the Authentication providers section.
 
 **What you need to do**:
 
