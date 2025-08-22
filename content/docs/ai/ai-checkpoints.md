@@ -21,7 +21,7 @@ This pattern works whether you manage Neon projects for your users (embedded app
 Target a root branch for production, whose connection string is preserved when a restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
 </Admonition>
 
-## Why this pattern uses snapshots
+## Why use snapshots for versioning
 
 Standard database branching is great for development but less suitable for production versioning. Each new branch gets a new connection string and creates dependency chains that complicate deletion. This pattern solves both problems.
 
@@ -44,7 +44,7 @@ The best way to understand this pattern is to see it in action:
 
 The demo implements a contacts application that evolves through agent prompts (v0: empty app → v1: basic contacts → v2: add role/company → v3: add tags), demonstrating version creation and restoration at each stage.
 
-## Core pattern: active branches
+## The active branch pattern
 
 Every agent project maps to one Neon project with a designated root branch that serves as the production database.
 
@@ -355,7 +355,7 @@ Proper cleanup reduces costs and keeps your project manageable:
 | [Poll operation](https://api-docs.neon.tech/reference/getprojectoperation)              | `GET /api/v2/projects/{project_id}/operations/{operation_id}`        | Check restore status                         |
 | [List branches](https://api-docs.neon.tech/reference/listprojectbranches) (for cleanup) | `GET /api/v2/projects/{project_id}/branches`                         | Find orphaned branches to clean up           |
 
-## Quick implementation checklist
+## Implementation checklist
 
 - [ ] Create one Neon project per agent project
 - [ ] Designate the root branch (main/production) as the "active" branch
@@ -375,7 +375,7 @@ Proper cleanup reduces costs and keeps your project manageable:
 - **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (e.g., `production (old)`) created during restores
 - **Version metadata**: Keep version metadata separate to preserve audit trail across restores
 
-## Frequently asked questions (FAQ)
+## FAQ
 
 <DefinitionList>
 Why must I poll operations after restore?
