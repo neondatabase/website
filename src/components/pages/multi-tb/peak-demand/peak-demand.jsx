@@ -52,7 +52,7 @@ const PeakDemand = () => (
             </li>
           </ul>
           <Link
-            to={LINKS.docsBranching}
+            to={LINKS.autoscaling}
             className="text-[15px] leading-none tracking-extra-tight"
             theme="white"
             withArrow
