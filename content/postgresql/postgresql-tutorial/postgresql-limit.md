@@ -135,7 +135,7 @@ How it works.
 - Second, skip the first three rows using the `OFFSET 3` clause.
 - Second, take the next four rows using the `LIMIT 4` clause.
 
-### 3\) Using LIMIT OFFSET to get top/bottom N rows
+### 3\) Using LIMIT to get top/bottom N rows
 
 Typically, you often use the `LIMIT` clause to select rows with the highest or lowest values from a table.
 
@@ -179,4 +179,4 @@ How it works.
 
 ## Summary
 
-- Use the PostgreSQL `LIMIT OFFSET` clause to retrieve a subset of rows returned by a query.
+- Use the PostgreSQL `LIMIT` and `OFFSET` clauses to retrieve a subset of rows returned by a query.

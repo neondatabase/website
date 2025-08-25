@@ -85,9 +85,9 @@
       "feature": {
         "title": "Autoscaling"
       },
-      "free": "✓",
-      "launch": "✓",
-      "scale": "✓"
+      "free": true,
+      "launch": true,
+      "scale": true
     },
     {
       "rows": "2",
@@ -96,7 +96,7 @@
         "subtitle": "When inactive"
       },
       "free": "After 5 minutes <span>when inactive</span>",
-      "launch": "After 5 minutes <span>Can be disabled</span>",
+      "launch": "After 5 minutes <span>can be disabled</span>",
       "scale": "Configurable"
     },
     {
@@ -118,7 +118,7 @@
         "title": "Instant Restore (PITR)",
         "subtitle": { "text": "Read more", "href": "#instant-restores" }
       },
-      "free": "Free<span>With limited window/size</span>",
+      "free": "Free<span>with limited window/size</span>",
       "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
       "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
     },

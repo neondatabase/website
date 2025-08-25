@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-08-06T17:08:27.313Z'
+updatedOn: '2025-08-21T09:00:11.984Z'
 ---
 
 When working with production data, it's crucial to ensure that sensitive user information remains protected — especially in development or testing environments. With Neon, creating branches is fast, but how do you safely clone a production branch without exposing personal data?
@@ -79,7 +79,7 @@ The output:
 Create a branch from your `production` branch that you'll anonymize, called `anonymized-dev` in this example:
 
 ```bash
-neonctl branch create --project-id <my-project-id> --name anonymized-dev --parent production
+neon branch create --project-id <my-project-id> --name anonymized-dev --parent production
 ```
 
 <Admonition type="important">
@@ -91,7 +91,7 @@ This creates a branch with an exact copy of your production data. The data is no
 Get a connection string for your new branch:
 
 ```bash
-neonctl cs anonymized-dev --project-id <my-project-id>
+neon cs anonymized-dev --project-id <my-project-id>
 ```
 
 Connect to the branch:

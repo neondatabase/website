@@ -42,6 +42,17 @@
     @apply mask-styles pricing-icon-size;
   }
 
+  /* Used in a /src/components/pages/pricing/table/table.jsx */
+  .pricing-check-icon {
+    -webkit-mask-image: url('/images/check.svg');
+    -webkit-mask-size: 16px 16px;
+  }
+
+  .pricing-cross-icon {
+    -webkit-mask-image: url('/images/pricing/cross.svg');
+    -webkit-mask-size: 14px 14px;
+  }
+
   /* Used in a /src/components/pages/multi-tb/branching/branching-demo/branching-demo.jsx  */
   .branching-demo-icon-size {
     -webkit-mask-size: 18px 18px;

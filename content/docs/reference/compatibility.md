@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-08-06T14:13:25.080Z'
+updatedOn: '2025-08-18T12:44:57.602Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -34,7 +34,9 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints. 
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
+
+If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints.
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                                                                                                                           |
@@ -49,6 +51,7 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                                                                                |
 | `log_connections`                     | on            |                                                                                                                                                                                                                                                                                |
 | `log_disconnections`                  | on            |                                                                                                                                                                                                                                                                                |
+| `log_min_error_statement`             | panic         |                                                                                                                                                                                                                                                                                |
 | `log_temp_files`                      | 1048576       |                                                                                                                                                                                                                                                                                |
 | `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |
 | `max_connections`                     | 112           | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |

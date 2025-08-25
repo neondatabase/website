@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-08-11T10:00:00.000Z'
+updatedOn: '2025-08-22T19:04:58.900Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
@@ -128,7 +128,7 @@ curl --request POST \
 
 ## Create snapshots manually
 
-Snapshots capture the state of your branch at a point in time. You can create snapshots manually.
+Snapshots capture the state of your branch at a point in time. You can create snapshots manually (on root branches only). You can restore to these snapshots from any branch in your project.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -169,7 +169,7 @@ Related API references: [Create snapshot](https://api-docs.neon.tech/reference/c
 
 ## Restore from a snapshot
 
-You can restore from a snapshot using one of two methods:
+You can restore from any snapshot in your project using one of two methods:
 
 - **One-step restore** – Instantly restore data from the snapshot into the existing branch. The branch name and connection string remain the same, but the branch ID changes.
 - **Multi-step restore** – Create a new branch from the snapshot. Use this option if you want to inspect or test the data before switching to the new branch.

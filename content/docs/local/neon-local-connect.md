@@ -3,7 +3,7 @@ title: Neon Local Connect Extension
 enableTableOfContents: true
 subtitle: Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and
   other editors
-updatedOn: '2025-08-14T15:49:15.505Z'
+updatedOn: '2025-08-21T20:58:54.185Z'
 ---
 
 The Neon Local Connect extension lets you connect to any Neon branch using a familiar localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, the underlying Neon Local service handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
@@ -198,7 +198,7 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 
 ### Editing capabilities:
 
-- **Row Editing**: Double-click any row to edit all fields inline (requires primary key)
+- **Row Editing**: Click the pen (edit) icon next to any row to edit all fields inline (requires primary key)
 - **Insert New Rows**: Add new records with the "Add Row" button
 - **Delete Rows**: Remove records with confirmation dialogs (requires primary key)
 - **Batch Operations**: Edit multiple fields before saving changes
@@ -236,8 +236,8 @@ Once connected, the Neon Local Connect panel provides quick access to common dat
 
 ### Branch management:
 
-- **Reset from Parent Branch:** Instantly reset your branch to match its parent's state  
-  [Docs: Branch reset](/docs/guides/reset-from-parent)
+- **Reset from Parent Branch:** Instantly revert your branch to match the current state of its parent. Learn more about branch reset in [Docs: Branch Reset](/docs/guides/reset-from-parent). To reset a branch, right-click the branch in the **Database Schema** view and select **Reset from Parent Branch** from the context menu.
+  ![Reset Branch](/docs/local/reset.png)
 
 ### Database tools (available in the main panel):
 

@@ -2,7 +2,7 @@
 title: Platform maintenance
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-04T12:47:21.310Z'
+updatedOn: '2025-08-19T11:11:49.496Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
@@ -29,7 +29,7 @@ If there is ongoing maintenance, you'll see a **Maintenance** indicator at the t
 
 ## Handling disruptions and latency during platform maintenance
 
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions. This means that most applications are able to transparently reconnect to a Neon database following a brief disruption.
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions. This means that most applications automatically reconnect to a Neon database following a brief disruption.
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for connection retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for occasional disruptions. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 

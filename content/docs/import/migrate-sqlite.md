@@ -2,7 +2,7 @@
 title: Migrate from SQLite to Neon Postgres
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.295Z'
+updatedOn: '2025-08-18T12:11:47.179Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
@@ -16,7 +16,7 @@ Before you begin, ensure you have the following:
 - A Neon account and a project. If you don't have one, see [Sign up](/docs/get-started/signing-up).
 - A database created in your Neon project. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
 - The file path to your source SQLite database file. If you don't have one, you can create a sample database in the next step.
-- Neon's Free plan supports 500 MiB of data. If your data size is more than 500 MiB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
+- Neon's Free plan supports 0.5 GB of data. If your data size is more than 0.5 GB, you'll need to upgrade to one of Neon's paid plans. See [Neon plans](/docs/introduction/plans) for more information.
 
 A review of the [pgloader SQLite to Postgres Guide](https://pgloader.readthedocs.io/en/latest/ref/sqlite.html) is also recommended. It provides a comprehensive overview of `pgloader`'s capabilities.
 

@@ -2,7 +2,7 @@
 title: Metrics and logs reference
 subtitle: Complete reference for all metrics and log fields exported by Neon
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.304Z'
+updatedOn: '2025-08-18T12:11:47.183Z'
 ---
 
 This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), and [OpenTelemetry](/docs/guides/opentelemetry).
@@ -87,7 +87,7 @@ During the beta phase, you may see some Neon-specific system logs included. Thes
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, billed on paid plans for usage over 100 GB
 - Associated costs based on log volume in your observability platform
 
 <Admonition type="note">

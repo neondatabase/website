@@ -2,7 +2,7 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 enableTableOfContents: true
-updatedOn: '2025-05-13T21:34:06.759Z'
+updatedOn: '2025-08-19T16:52:00.906Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -25,6 +25,14 @@ When you reset a branch to its parent, the data and schema is completely replace
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
 - Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
+
+### Branch expiration behavior
+
+When you reset a branch that has an expiration set, the expiration timer restarts from the reset time using the original duration.
+
+For example, if your branch was originally set to expire in 24 hours, resetting gives it another full 24 hours from the reset time. This process recalculates the new `expires_at` value using the preserved `ttl_interval_seconds`, but the TTL interval itself remains unchanged.
+
+For more details about branch expiration, see [branch expiration](/docs/guides/branch-expiration).
 
 ## How to Reset from parent
 
