@@ -51,6 +51,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   docsMigration: '/docs/import/import-data-assistant',
+  docsHighAvailability: '/docs/introduction/high-availability',
   manageBilling: '/docs/introduction/manage-billing',
   pgSearch: '/docs/extensions/pg_search',
   docsPgvector: '/docs/extensions/pgvector',
