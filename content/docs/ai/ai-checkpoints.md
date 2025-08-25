@@ -11,21 +11,21 @@ Snapshots are available for members of our Early Access Program. Read more about
 
 ## Overview
 
-Learn how to implement database versioning for AI agent and code generation platforms using Neon. You'll discover how to use snapshots to create point-in-time database versions and perform rollbacks, all while maintaining a stable connection string for your production application. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
+Implement database versioning for AI agent and code generation platforms using Neon snapshots. Create point-in-time database versions, perform instant rollbacks, and maintain stable connection strings for your versioned production application. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
 
-This pattern works whether you manage Neon projects for your users (embedded approach) or users bring their own Neon accounts.
+This pattern works whether you manage Neon projects for your users (embedded approach) or users bring their own connected Neon accounts.
 
-> **Terminology note:** This guide uses "versions" to describe saved database states from the user's perspective, and "snapshots" when referring to Neon's technical implementation. You may also see these called "checkpoints" in some AI agent contexts.
+> **Terminology note:** This guide uses "versions" to describe saved database states from the user's perspective, and "snapshots" when referring to Neon's technical implementation. You may also see these called "checkpoints" or "edits" in some AI agent contexts.
 
 <Admonition type="tip" title="Quick guide">
-Target a root branch for production, whose connection string is preserved when a restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
+Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
 </Admonition>
 
 ## Why use snapshots for versioning
 
-Standard database branching is great for development but less suitable for production versioning. Each new branch gets a new connection string and creates dependency chains that complicate deletion. This pattern solves both problems.
+Standard database branching is great for development but less suitable for versioning. Each new branch gets a new connection string and creates dependency chains that complicate deletion. This pattern solves both problems.
 
-By restoring a Neon snapshot to your active branch with `finalize_restore: true`, you replace its data in-place while preserving the original, stable connection string. This makes the snapshot-restore pattern ideal for production environments where connection stability is critical.
+By restoring a Neon snapshot to your active branch with `finalize_restore: true`, you replace its data in-place while preserving the original, stable connection string. This makes the snapshot-restore pattern ideal for versioned environments where connection stability is needed.
 
 ## Quick start with the demo
 
@@ -52,11 +52,9 @@ Every agent project maps to one Neon project with a designated root branch that 
 
 **The active branch:**
 
-- Gets its data replaced during rollbacks (but keeps the same connection string)\*
-- Maintains a permanent connection string that never changes
+- Gets its data replaced during finalized rollbacks
+- Maintains a permanent connection string through Neon's restore mechanism - see [How restore works](#how-restore-works) for details
 - Must be a root branch for snapshot creation
-
-\*Through Neon's restore mechanism - see [How restore works](#how-restore-works) for technical details.
 
 **The snapshots:**
 
@@ -103,7 +101,7 @@ POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 **Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
-- `branch_id` (string, required): The branch ID (must be a root branch)
+- `branch_id` (string, required): The active branch ID (must be a root branch)
 
 **Query parameters:**
 
@@ -140,11 +138,11 @@ POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
 **Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
-- `snapshot_id` (string, required): The snapshot ID
+- `snapshot_id` (string, required): The snapshot ID being restored
 
 **Body parameters:**
 
-- `name` (string): A name for the newly restored branch. If omitted, a default name will be generated
+- `name` (string): A name for the newly restored branch. If omitted, a default name is generated
 - `target_branch_id` (string): The ID of the branch to restore the snapshot into. If not specified, the branch from which the snapshot was originally created will be used. **Set to your root branch ID for rollbacks to preserve connection strings**
 - `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move any associated computes to the new branch. Defaults to `false`. **Set to `true` when restoring to the active branch for rollbacks, `false` for preview branches**
 
@@ -160,7 +158,7 @@ Understanding the restore mechanism explains why the connection string remains s
 
 2. **Endpoint transfer**: Neon then transfers the compute endpoint (and its associated connection string) from your original active branch to this newly created branch.
 
-3. **Settings migration**: All branch settings, including its name, are copied to the new branch, making it appear identical to the old one. Only the branch ID is different.
+3. **Settings migration**: All branch settings, including its name, are copied to the new active branch, making it appear identical to the old one. Only the branch ID is different.
 
 4. **Branch orphan**: Your original branch becomes "orphaned." It is disconnected from the compute endpoint and renamed by adding a "(old)" suffix (e.g., main (old)) to prevent conflicts.
 
@@ -179,7 +177,7 @@ Restore any snapshot to your active branch, preserving the connection string:
 }
 ```
 
-**Important:** When restoring with `finalize_restore: true`, your previous active branch becomes orphaned and is renamed to `production (old)` or similar. This orphaned branch is no longer connected to any compute endpoint but preserves your pre-restore state. Delete it during cleanup to avoid unnecessary costs.
+**Important:** When restoring with `finalize_restore: true`, your previous active branch becomes orphaned and is renamed with `(old)` appended, such as `production (old)` or similar. This orphaned branch is no longer connected to any compute endpoint but preserves your pre-restore state. Delete it during cleanup to avoid unnecessary costs.
 
 After calling the restore API:
 
@@ -190,7 +188,7 @@ After calling the restore API:
 
 > See the [poll operation status](/docs/manage/operations#poll-operation-status) documentation for related information.
 
-**Polling operations:**
+**Polling operations example:**
 
 ```javascript
 // Poll operation status until complete
@@ -238,12 +236,12 @@ Get Operation IDs
 Loop: Poll Status
        │
        ▼
-States: running|scheduling → WAIT
-        finished|skipped|cancelled → SAFE
-        failed → ERROR
+States: running|scheduling ---------> Wait and poll again
+        finished|skipped|cancelled -> Safe to connect
+        failed ---------------------> Handle error
 ```
 
-**Common restore errors:**
+**Potential restore-related problems:**
 
 - **Connection to old state**: Ensure all operations completed
 - **Target branch not found**: Verify branch exists
@@ -329,19 +327,18 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ### Neon core concepts
 
-- **Project**: Neon project that owns branches, computes, and snapshots
-- **Branch**: An isolated database environment with its own data and schema that you can connect to and modify
-- **Snapshot**: An immutable, point-in-time backup of a branch's schema and data. Read-only until restored
-- **Root branch**: A branch with no parent (typically named `main` or `production`). The only type of branch from which snapshots can be created
-- **Operations**: Backend operations that return operation IDs you must poll to completion
+- [Project](/docs/reference/glossary#project): Neon project that owns branches, computes, and snapshots, and more
+- [Branch](/docs/reference/glossary#branch): An isolated database environment with its own data and schema that you can connect to and modify
+- [Snapshot](/docs/reference/glossary#snapshot): An immutable, point-in-time backup of a branch's schema and data. Read-only until restored
+- [Root branch](/docs/reference/glossary#root-branch): A branch with no parent (typically named `main` or `production`). The only type of branch from which snapshots can be created
+- [Operations](/docs/manage/operations#operations-and-the-neon-api): Backend operations that return operation IDs you must poll to completion
 
 ### Pattern-specific terminology
 
 - **Active branch**: The root branch that serves as your agent's production database (though technically replaced during restores). Connection string never changes even when data is replaced via restore. Preview branches may be created alongside for temporary exploration.
-- **Version**: A saved database state captured as a snapshot. Users create and restore versions through your application interface.
+- **Version**: A saved database state captured as a snapshot, which may also be referred to a checkpoint or edit. Users create and restore versions through your application interface.
 - **Orphaned branch**: Created when restoring with `finalize_restore: true`. The previous active branch becomes orphaned (disconnected from compute) and is renamed to `branch-name (old)`. Can be safely deleted after verifying the restore.
 - **Preview branch**: Temporary branch created from a snapshot for safe exploration, to preview a version
-- **Version metadata**: Separate database/table that stores version information (prompt text, `snapshot_id`, etc.). Keeps audit trail across restores
 
 ## API quick reference
 
@@ -360,12 +357,12 @@ Proper cleanup reduces costs and keeps your project manageable:
 - [ ] Create one Neon project per agent project
 - [ ] Designate the root branch (main/production) as the "active" branch
 - [ ] Store the active branch connection string and branch ID
-- [ ] Create snapshots at key points to save versions
-- [ ] For rollbacks: restore with `finalize_restore: true` and `target_branch_id` set to the root branch ID
+- [ ] Create snapshots at key points to save database versions
+- [ ] For rollbacks: restore with `finalize_restore: true` and set `target_branch_id` to the root branch ID
 - [ ] After a rollback, update your stored active branch ID
 - [ ] For previews: restore with `finalize_restore: false` to create temporary branches
 - [ ] Poll all operation IDs to terminal states before connecting
-- [ ] Implement a cleanup strategy: set expiration dates and delete orphaned branches
+- [ ] Implement a cleanup strategy: set snapshot expiration dates and delete orphaned branches
 
 ## Best practices
 
