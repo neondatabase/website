@@ -32,122 +32,114 @@ Right now Markdown files accept the following fields:
 
 Navigation data is stored in the [navigation.yaml](./navigation.yaml) file.
 
-### How to add a new category
+### Navigation Structure
 
-In order to add a new category to the navigation, add a new item to the top level array with keys `title` and `items`.
+The navigation system is a unified structure where:
 
-For example:
+- **Top-level items** appear in the header navigation
+- **Child items** appear in the left sidebar
 
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
+This creates a seamless navigation experience where users select a main category from the header and see its detailed structure in the sidebar.
+
+### Top Navigation Structure
+
+Each top-level navigation item has the following structure:
+
+```yaml
+- nav: Get started # Navigation label (displayed in header)
+  slug: introduction # URL slug for the section
+  title: Neon Docs # Page title
+  icon: home # Icon identifier
+  subnav: # Sub-navigation items for header dropdowns
+    - title: Neon platform
+      slug: manage/platform
+      icon: settings
+      items: # Sidebar navigation items
+        ...
 ```
 
-### How to add a new subcategory
+**Important**: Top-level items can contain either:
 
-In order to add a new subcategory, add a new item to `items` array with keys `title` and `items` under specific category.
+- **`subnav`**: Sub-navigation items that appear as header dropdowns
+- **`items`**: Navigation items that appear in the sidebar
 
-For example:
+### Sidebar Navigation Structure
+
+The sidebar navigation supports multiple levels:
+
+```yaml
+  ...
+  items: # Sidebar navigation items
+    - section: Features # Section header
+      icon: features
+      slug: guides/neon-features
+      items: # Section items
+        - title: Serverless
+          slug: introduction/serverless
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items: # Section subitems
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+```
+
+### How to add a new top navigation category
+
+To add a new top-level navigation category, add a new item to the top level array with keys `nav`, `slug`, `title`, `icon`, and optionally `items` or `subnav`.
 
 ```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-+    - title: Subcategory 1
-+      items:
-+        - title: Page 3
-+          slug: page-3
++- nav: New Category
++  slug: new-category
++  title: New Category Title
++  icon: new-icon
++  subnav:
++    ...
+```
+
+### How to add a new section
+
+To add a new section within a navigation category, add a new item with keys `section`, `icon`, and `items`.
+
+```diff
+  ...
+  items:
++   - section: Architecture
++     icon: architecture
++     items:
++       ...
 ```
 
 ### How to add a new page
 
-In order to add a new page to the root level, add `slug` in the same level with `title`. You can add `tag` as well if your page is tagged.
+To add a new page, add a new item with keys `title` and `slug` under the appropriate section or navigation level.
 
-```diff yaml
- - title: Root page 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Root page 2
-   items:
-     - title: Page 2
-       slug: page-2
-+ - title: Root page 1
-+   slug: root-page-1
-+   items:
-+     - title: Page 1
-+       slug: page-1
-+       tag: coming soon
-+ - title: Root page 2
-+   slug: root-page-2
-+   items:
-+     - title: Page 2
-+       slug: page-2
-
+```diff
+  ...
+  items:
++   - title: Overview
++     slug: introduction/architecture-overview
 ```
 
-In order to add new page under Category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+### Navigation Properties
 
-For example:
+- `nav`: The label displayed in the top navigation header
+- `slug`: The URL path for the page/section
+- `title`: The display title for the page/section
+- `icon`: Icon identifier for visual representation
+- `section`: Section header for grouping related items
+- `items`: Array of navigation items
+- `subnav`: Sub-navigation items for the sidebar
+- `tag`: Optional tag (e.g., "new", "beta") displayed next to the title
 
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-+   - title: Page 5
-+     slug: page-5
-```
+### Important Notes
 
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-
-### How to add a single page to doc sidebar
-
-To add a single page <https://example.com/changelog> to the docs sidebar, add the boolean `isStandalone` to the first level of the list
-
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-- `isStandalone` - the boolean for the single page in sidebar.
-
-```diff yaml
-+- title: Changelog
-+  slug: changelog
-+  isStandalone: true
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-```
+- `title` in the sidebar may differ from `title` in the Markdown file
+- `slug` should always match the page's slug
+- The navigation supports unlimited nesting levels for complex documentation structures
+- Icons are referenced by name and should match available icon components
+- Tags like "new" or "beta" are automatically displayed with special styling
 
 ## Code blocks
 
@@ -480,235 +472,5 @@ Steps will be splitted by `h2` headings.
 
 ## Step 1: Create the Initial Schema
 
-First, create a new database called `people` on the `main` branch and add some sample data to it.
-
-## Step 2: Create a development branch
-
-Create a new development branch off of `main`. This branch will be an exact, isolated copy of `main`.
-
-</Steps>
+First, create a new database called `people`
 ```
-
-<details>
-<summary>Example</summary>
-
-![Steps example](images/steps-example.jpg)
-
-</details>
-
-## Checklist
-
-To display a checklist, use the `CheckList` component with `CheckItem` items inside.
-
-```md
-<CheckList title="Checklist title">
-
-<CheckItem title="Check item 1" href="#check-item-1">
-  Check item 1 description
-</CheckItem>
-
-<CheckItem title="Check item 2" href="#check-item-2">
-  Check item 2 description
-</CheckItem>
-
-</CheckList>
-```
-
-### Notes
-
-- Checklist options saved in the browser local storage.
-- Checklists with the same `title` will use the same local storage between pages.
-- If you don't pass `title`, the id will be generated from the page `slug`.
-- The best practice is to use `CheckList` with the `Steps` component on the page.
-
-<details>
-<summary>Example</summary>
-
-![Checklist example](images/checklist-example.jpg)
-
-</details>
-
-## Images
-
-The images should be sourced in `public/docs` directory and be used in `.md` with the relative path, that begins with a `/` slash
-
-Example file structure:
-
-```md
-├── public
-│ ├── docs
-│ │ ├── conceptual-guides
-│ │ ├── neon_architecture_2.png // put images in a directory with the same name as the .md file
-├── content
-│ ├── docs
-│ │ ├── conceptual-guides
-│ │ ├── architecture-overview.md
-```
-
-To display images using Markdown syntax, use the following syntax: `![alt text](image url)`. Example content in `architecture-overview.md`:
-
-```md
-![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png)
-```
-
-If you need an image without border to show an annotated piece of UI, use the `"no-border"` attribute as in the example below:
-
-```md
-![Neon architecture diagram](/docs/conceptual-guides/neon_architecture_2.png 'no-border')
-```
-
-With this approach, all images on your doc pages will be displayed both on the production and GitHub preview.
-
-## Definition list
-
-Custom `mdx` component that makes possible using [extended markdown syntax for descriptions lists](https://www.markdownguide.org/extended-syntax/#definition-lists). Fully [WCAG-compliant](https://www.w3.org/TR/WCAG20-TECHS/H40.html). It provides an accessible way to make term lists, and it's a generally good way to add structure to a text when a writer needs more than bullets and less than headings.
-
-The usage is pretty [straightforward](https://github.com/neondatabase/website/pull/231/commits/8f795eaf700c31794a2267fc5978c22bfc649a0c):
-
-```md
-[comment]: <> (other content here)
-
-<DefinitionList>
-[comment]: <> (required new line)
-Scenario executor
-: First definition
-: Second definition
-
-Soak test
-: First and only definition
-
-Smoke test
-Another term for smoke test
-: First definition for both terms
-: Second definition for both terms
-: ...n definition for both terms
-
-[Stress test](/)
-: First and **only** definition for both terms with additional markup <br/> Read more: [link](/)
-
-[comment]: <> (other content here)
-</DefinitionList>
-
-[comment]: <> (other content here)
-```
-
-### Acceptable markup for term
-
-- `*italic*`
-- `[link](/)`
-- `**strong**` - but that doesn't make sense, by default terms appearance is already bold
-- `inlineCode` - but it doesn't alter it's change in this context
-
-### Constraints
-
-- using emojis in `dt` is prohibited, as it potentially can mess up with `id` attribute, and `href` at anchor. We can not be sure which range will be used to display a particular symbol (depends on editor OS) and if it is going to be stripped.
-- if there are multiple terms for a given set of descriptions, only the first one will have an `id` and an `anchor`
-- make absolutely sure your `dt` text content is unique across the page to avoid `id` collisions
-
-### Acceptable markup for description
-
-- everything for term
-- emojis
-- any inline html
-- line breaks `<br/>` (recommended way to separate visually something inside a single description)
-
-<details>
-<summary>Examples</summary>
-
-![Definition list example](images/definition-list-example.jpg)
-
-</details>
-
-## Detail Icon Cards
-
-`DetailIconCards` is a custom MDX component that displays data in a card format. Each card contains icon, title, href and description. This layout is especially useful for presenting grouped information in a visually pleasing and easy-to-understand way.
-
-```md
-<DetailIconCards>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Headless vector search</a>
-
-<a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api" description="Collaborate on open-source projects" icon="github">Open AI completions</a>
-
-</DetailIconCards>
-```
-
-List of available icons in folder: /website/src/components/pages/doc/detail-icon-cards/images
-
-## Shared MDX components
-
-Create a [markdown file](https://github.com/neondatabase/website/blob/main/content/docs/shared-content/need-help.md) in folder `content/docs/shared-content/`, add to `sharedMdxComponents` the name of component and the path to component.
-
-```js
-const sharedMdxComponents = {
-  // ConponentName: 'shared-content/component-filename'
-  NeedHelp: 'shared-content/need-help',
-};
-
-export default sharedMdxComponents;
-```
-
-Insert a shared markdown and render inline.
-
-```md
-## Resources
-
-- [Open AI tiktoken source code on GitHub](https://github.com/openai/tiktoken)
-- [pg_tiktoken source code on GitHub](https://github.com/kelvich/pg_tiktoken)
-
-<NeedHelp/>
-```
-
-You can pass props to the shared component:
-
-```md
-<ComponentWithProps text="The pgvector extension" />
-```
-
-`component-with-props.md`
-
-```md
-<Admonition type="note" title="Test component with props">
-  {text}
-</Admonition>
-```
-
-## CopyPrompt
-
-A reusable MDX component that shows a "copy prompt" box and lets users copy curated llm prompts from a file with one click.
-
-**Usage:**
-
-```mdx
-<CopyPrompt
-  src="/prompts/serverless-driver-prompt.md"
-  displayText="Use this pre-built prompt to get started faster."
-  buttonText="Copy prompt"
-/>
-```
-
-`src` prop is mandatory. `displayText` and `buttonText` are optional, if you want to override the defaults.
-
-| Prop          | Type   | Default                                            | Description                                         |
-| ------------- | ------ | -------------------------------------------------- | --------------------------------------------------- |
-| `src`         | string | (required)                                         | Path to the markdown file or prompt content to copy |
-| `displayText` | string | "Use this pre-built prompt to get started faster." | CTA text shown on the left                          |
-| `buttonText`  | string | "Copy prompt"                                      | Button label                                        |
-
-### Where to place prompt files
-
-Prompt markdown files should be placed in the `public/prompts/` directory of your project. This allows them to be fetched at runtime by the `CopyPrompt` component using a path like `/prompts/your-prompt-file.md`.
-
-**Example:**
-
-- Place your prompt file at: `public/prompts/serverless-driver-guardrail-prompt.md`
-- Reference it in your MDX:
-  ```mdx
-  <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
-  ```
-
-## Contributing
-
-For small changes and spelling fixes, we recommend using the GitHub UI because Markdown files are relatively easy to edit.
-
-For larger contributions, consider [running the project locally](../../README.md#getting-started) to see how changes look like before making a pull request.
