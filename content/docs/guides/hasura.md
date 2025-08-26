@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2025-08-02T10:33:29.272Z'
+updatedOn: '2025-08-18T12:11:47.174Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -98,7 +98,7 @@ In Neon, the maximum number of concurrent connections is defined according to th
 
 ## Scale to zero considerations
 
-Neon suspends a compute after five minutes (300 seconds) of inactivity. This behavior can be disabled on Neon's paid plans. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+Neon suspends a compute after five minutes (300 seconds) of inactivity. This behavior can be adjusted on Neon's paid plans. For more information, refer to [Configuring Scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 If you rely on Neon's scale to zero feature to minimize database usage, note that certain Hasura configuration options can keep your Neon compute in an active state:
 

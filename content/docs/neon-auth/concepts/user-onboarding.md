@@ -3,6 +3,7 @@ title: User Onboarding
 subtitle: How to implement onboarding flows in Neon Auth
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-08-26T15:57:17.420Z'
 ---
 
 > Implementing a user onboarding page and collecting information on sign-up
@@ -26,25 +27,23 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [address, setAddress] = useState('');
 
+  return (
+    <>
+      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
 
-  return <>
-    <input
-      type="text"
-      value={address}
-      onChange={(e) => setAddress(e.target.value)}
-    />
-
-    <button onClick={async () => {
-      await user.update({
-        clientMetadata: {
-          onboarded: true,
-          address,
-        },
-      });
-      router.push('/');
-    }}>
-      Submit
-    </button>
+      <button
+        onClick={async () => {
+          await user.update({
+            clientMetadata: {
+              onboarded: true,
+              address,
+            },
+          });
+          router.push('/');
+        }}
+      >
+        Submit
+      </button>
     </>
   );
 }
@@ -59,79 +58,81 @@ Next, we can create a hook/function to check if the user has completed onboardin
 <Tabs labels={["Client Hook", "Server Function"]}>
 
 <TabItem>
+
 ```jsx shouldWrap title="app/onboarding-hooks.ts"
 'use client';
+
 import { useEffect } from 'react';
 import { useUser } from '@stackframe/stack';
 import { useRouter } from 'next/navigation';
 
-export function useOnboarded() {
-const user = useUser();
-const router = useRouter();
+export function useOnboarding() {
+  const user = useUser();
+  const router = useRouter();
 
-useEffect(() => {
-if (!user.clientMetadata.onboarded) {
-router.push('/onboarding');
+  useEffect(() => {
+    if (user && !user.clientMetadata?.onboarded) {
+      router.push('/onboarding');
+    }
+  }, [user]);
 }
-}, [user]);
-}
+```
 
-````
 </TabItem>
 
 <TabItem>
+
 ```jsx shouldWrap title="app/onboarding-functions.ts"
 import { stackServerApp } from '@/stack';
 import { redirect } from 'next/navigation';
 
 export async function ensureOnboarded() {
   const user = await stackServerApp.getUser();
-  if (!user.serverMetadata.onboarded) {
+  if (user && !user.serverMetadata?.onboarded) {
     redirect('/onboarding');
   }
 }
-````
+```
 
 </TabItem>
 
 </Tabs>
 
-You can then use these functions wherever onboarding is required:
+To add an Onboarding page and guarantee users hit it, create a dedicated `/onboarding` page and gate protected pages with the hook/server function above so users are always redirected there until completion. On that page, validate details on your backend and then set the `onboarded` metadata flag. Follow the guide on [Custom User Data](/docs/neon-auth/concepts/custom-user-data) for implementation details.
+
+Here are examples of how to use the hook and server function in your components:
 
 <Tabs labels={["Client Component", "Server Component"]}>
 
 <TabItem>
+
 ```jsx shouldWrap title="app/page.tsx"
 import { useOnboarding } from '@/app/onboarding-hooks';
 import { useUser } from '@stackframe/stack';
 
 export default function HomePage() {
-useOnboarding();
-const user = useUser();
+  useOnboarding();
+  const user = useUser();
 
-return (
-
-<div>Welcome to the app, {user.displayName}</div>
-);
+  return <div>Welcome to the app, {user.displayName}</div>;
 }
+```
 
-````
 </TabItem>
 
 <TabItem>
+
 ```jsx shouldWrap title="app/page.tsx"
-import { ensureOnboarding } from '@/app/onboarding-functions';
+import { ensureOnboarded } from '@/app/onboarding-functions';
 import { stackServerApp } from '@/stack';
 
 export default async function HomePage() {
-  await ensureOnboarding();
+  await ensureOnboarded();
   const user = await stackServerApp.getUser();
 
-  return (
-    <div>Welcome to the app, {user.displayName}</div>
-  );
+  return <div>Welcome to the app, {user.displayName}</div>;
 }
-````
+```
 
 </TabItem>
 

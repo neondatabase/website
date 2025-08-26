@@ -3,7 +3,7 @@ title: Compliance
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2025-05-30T16:54:40.493Z'
+updatedOn: '2025-08-20T10:56:24.956Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
@@ -14,7 +14,7 @@ We have successfully attained SOC 2 Type 1 and Type 2 compliance. These complian
 
 ## SOC 3
 
-The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. If available on your plan, you can request the report through our [Trust Center](https://trust.neon.tech/).
+The SOC 3 report is a public-facing version of the SOC 2 report, providing assurance to external parties about our system's ability to meet the trust service criteria without disclosing sensitive details. If available on your plan, you can request the report through our [Trust Center](https://trust.neon.com/).
 
 ## ISO 27001
 
@@ -36,7 +36,7 @@ The California Consumer Privacy Act (CCPA) grants California residents new right
 
 Neon offers HIPAA compliance as part of our Scale plan, enabling applications that handle Protected Health Information (PHI) to meet compliance requirements.
 
-A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.tech/).
+A copy of Neon's HIPAA compliance report can be requested through our [Trust Center](https://trust.neon.com/).
 
 To request a draft Business Associate Agreement (BAA), please [contact the Neon Sales team](/contact-sales). Once a BAA is signed, the Neon Sales team can assist you with enabling HIPAA for your Neon account.
 
@@ -46,7 +46,7 @@ For additional information about HIPAA compliance and Neon, please refer to the 
 
 ## Questions?
 
-To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.tech/), where you can also request and download audit reports.
+To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.com/), where you can also request and download audit reports.
 
 - For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
 - For privacy-related questions, reach out to [privacy@neon.tech](mailto:privacy@neon.tech).

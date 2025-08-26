@@ -59,7 +59,7 @@ The star or asterisk (`*`) means all columns of the `table_name`.
 
 Let’s [create a new table](postgresql-create-table) to practice the `SELECT DISTINCT` clause.
 
-Note that you will learn how to [create a table](postgresql-create-table) and [insert data into it](postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in psql or pgAdmin to execute the statements.
+Note that you will learn how to [create a table](postgresql-create-table) and [insert data into it](postgresql-insert) in the subsequent tutorial. In this tutorial, you need to execute the statement in `psql` or use pgAdmin to execute the statements.
 
 First, create the `colors` table that has three columns: `id`, `bcolor` and `fcolor` using the following [`CREATE TABLE`](postgresql-create-table) statement:
 
@@ -139,7 +139,7 @@ Output:
 (4 rows)
 ```
 
-The `bcolor` column has 3 red values, two NULL, 1 green value, and two blue values. The `DISTINCT` removes two red values, 1 NULL, and one blue.
+The `bcolor` column has three 'red' entries, two `NULL`, one 'green', and two 'blue'. `SELECT DISTINCT` removes two 'red' values, one `NULL`, and one 'blue'.
 
 Note that PostgreSQL treats `NULL`s as duplicates so that it keeps one `NULL` for all `NULL`s when you apply the `SELECT DISTINCT` clause.
 
@@ -202,6 +202,12 @@ Output:
 ```
 
 The output indicates that there are only three distinct rental rates 0\.99, 2\.99, and 4\.99\.
+
+Note that for executing the query above your current database should be `dvdrental`. To switch the current database to `dvdrental` run:
+
+```
+\c dvdrental
+```
 
 ## Summary
 

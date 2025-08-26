@@ -80,7 +80,9 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
-    - section: Migrate to Neon
+            - title: Latency benchmarks
+              slug: guides/benchmarking-latency
+    - title: Migrate to Neon
       icon: import
       items:
         - title: Overview
@@ -1298,15 +1300,43 @@
               slug: ai/connect-mcp-clients-to-neon
         - title: AI rules & prompts
           items:
-            - title: AI rules
-              slug: ai/ai-rules
-            - title: Neon Auth
-              slug: ai/ai-rules-neon-auth
-            - title: Drizzle
-              slug: ai/ai-rules-neon-drizzle
-            - title: Neon Serverless
-              slug: ai/ai-rules-neon-serverless
-        - title: IDE & Tool Integration
+            - title: How Neon Auth Works
+              slug: neon-auth/how-it-works
+            - title: Guidance (Deep Dive)
+              slug: neon-auth/tutorial
+            - title: Core Concepts
+              slug: neon-auth/concepts/stack-app
+              collapsible: true
+              items:
+                - title: The StackApp Object
+                  slug: neon-auth/concepts/stack-app
+                - title: OAuth Authentication
+                  slug: neon-auth/concepts/oauth
+                - title: Custom User Data
+                  slug: neon-auth/concepts/custom-user-data
+                - title: App/user permissions
+                  slug: neon-auth/concepts/permissions
+                - title: Organizations and Teams
+                  slug: neon-auth/concepts/orgs-and-teams
+                - title: Selecting a Team
+                  slug: neon-auth/concepts/team-selection
+                - title: User Onboarding
+                  slug: neon-auth/concepts/user-onboarding
+                - title: Backend Integration
+                  slug: neon-auth/concepts/backend-integration
+        - section: Guides
+          items:
+            - title: Best practices
+              slug: neon-auth/best-practices
+            - title: Creating Users
+              slug: neon-auth/create-users
+            - title: Claiming a Project
+              slug: neon-auth/claim-project
+            - title: Permissions
+              slug: neon-auth/permissions-roles
+            - title: Email configuration
+              slug: neon-auth/email-configuration
+        - section: SDKs & API
           items:
             - title: Claude Desktop
               slug: https://neon.com/guides/neon-mcp-server

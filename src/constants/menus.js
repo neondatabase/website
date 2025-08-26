@@ -11,8 +11,6 @@ import AutoscalingIcon from 'icons/header/autoscaling.inline.svg';
 import BlogIcon from 'icons/header/blog.inline.svg';
 import BranchingGradientIcon from 'icons/header/branching-gradient.inline.svg';
 import BranchingIcon from 'icons/header/branching.inline.svg';
-import BuildingGradientIcon from 'icons/header/building-gradient.inline.svg';
-import BuildingIcon from 'icons/header/building.inline.svg';
 import CareerIcon from 'icons/header/career.inline.svg';
 import ChatIcon from 'icons/header/chat.inline.svg';
 import CloudGradientIcon from 'icons/header/cloud-gradient.inline.svg';
@@ -192,13 +190,6 @@ export default {
         {
           title: 'For teams',
           items: [
-            {
-              icon: BuildingIcon,
-              iconGradient: BuildingGradientIcon,
-              title: 'Enterprise',
-              description: 'Scale & grow',
-              to: LINKS.enterprise,
-            },
             {
               icon: RocketIcon,
               iconGradient: RocketGradientIcon,

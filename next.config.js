@@ -268,7 +268,7 @@ const defaultConfig = {
       },
       {
         source: '/trust',
-        destination: 'https://trust.neon.tech',
+        destination: 'https://trust.neon.com',
         permanent: true,
       },
       {

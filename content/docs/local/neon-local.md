@@ -2,7 +2,7 @@
 title: Neon Local
 enableTableOfContents: true
 subtitle: Use Docker environments to connect to Neon and manage branches automatically
-updatedOn: '2025-08-14T15:49:15.509Z'
+updatedOn: '2025-08-21T21:01:25.067Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:
@@ -108,18 +108,34 @@ Connect to Neon Local using a standard Postgres connection string.
 ### Docker run
 
 ```shell
-postgres://neon:npg@localhost:5432/<database_name>?sslmode=no-verify
+postgres://neon:npg@localhost:5432/<database_name>?sslmode=require
 ```
 
 ### Docker compose
 
 ```shell
-postgres://neon:npg@db:5432/<database_name>?sslmode=no-verify
+postgres://neon:npg@${db}$:5432/<database_name>?sslmode=require
+
+# where {db} is the name of the Neon Local service in your compose file
 ```
+
+<Admonition type="note">
+For javascript applications
+The Neon Local container uses an automatically generated self-signed certificate to secure communication between your app and the container. Javascript applications using the `pg`or `postgres` postgres libraries to connect to the Neon Local proxy will also need to add the following configuration to allow your app to connect using the self-signed certificate.
+
+```shell
+ssl: { rejectUnauthorized: false }
+```
+
+</Admonition>
 
 ## Connecting your app (Neon serverless driver)
 
 Connect using the Neon [serverless driver](/docs/serverless/serverless-driver).
+
+<Admonition type="note">
+The Neon Local container only supports HTTP-based communication using the Neon Serverless driver, not websockets. The following configurations will enable your app to communicate using only HTTP traffic with your Neon database.
+</Admonition>
 
 ### Docker run
 
@@ -127,6 +143,8 @@ Connect using the Neon [serverless driver](/docs/serverless/serverless-driver).
 import { neon, neonConfig } from '@neondatabase/serverless';
 
 neonConfig.fetchEndpoint = 'http://localhost:5432/sql';
+neonConfig.useSecureWebSocket = false;
+neonConfig.poolQueryViaFetch = true;
 
 const sql = neon('postgres://neon:npg@localhost:5432/<database_name>');
 ```
@@ -136,9 +154,13 @@ const sql = neon('postgres://neon:npg@localhost:5432/<database_name>');
 ```javascript
 import { neon, neonConfig } from '@neondatabase/serverless';
 
-neonConfig.fetchEndpoint = 'http://db:5432/sql';
+neonConfig.fetchEndpoint = 'http://{db}:5432/sql';
+neonConfig.useSecureWebSocket = false;
+neonConfig.poolQueryViaFetch = true;
 
-const sql = neon('postgres://neon:npg@db:5432/<database_name>');
+const sql = neon('postgres://neon:npg@{db}:5432/<database_name>');
+
+// where {db} is the name of the Neon Local service in your compose file
 ```
 
 No additional environment variables are needed - the same Docker configuration works for both drivers:
@@ -175,6 +197,7 @@ db:
   environment:
     NEON_API_KEY: ${NEON_API_KEY}
     NEON_PROJECT_ID: ${NEON_PROJECT_ID}
+    DELETE_BRANCH: false
   volumes:
     - ./.neon_local/:/tmp/.neon_local
     - ./.git/HEAD:/tmp/.git/HEAD:ro,consistent

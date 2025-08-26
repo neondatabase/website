@@ -2,7 +2,7 @@
 title: Neon Launchpad
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-07-01T14:33:45.947Z'
+updatedOn: '2025-08-19T16:10:28.670Z'
 ---
 
 Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
@@ -161,6 +161,10 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
+
+### Claim process details
+
+When claiming a project, you'll be asked to choose an organization to claim it into. Note that projects cannot be claimed into Vercel organizations.
 
 ## Use cases
 
