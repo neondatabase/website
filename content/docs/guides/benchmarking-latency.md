@@ -114,7 +114,7 @@ For examples of different connection patterns and their implementation, see [Con
 
 Neon provides a [Latency Benchmarks Dashboard](/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions. 
 
-![Latency benchmark app](/docs/guides/latency_benchmark.png)
+![Screenshot of Neon's latency benchmarks dashboard showing regional performance metrics](/docs/guides/latency_benchmark.png)
 
 The benchmark specifically tracks:
 
