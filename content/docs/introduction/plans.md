@@ -290,15 +290,15 @@ See [Support](/docs/introduction/support) for details.
 
 The following metrics may appear on your Neon invoices. Each metric represents a specific type of usage that contributes to your monthly bill. For details, see [plan features](#neon-plans).
 
-| **Metric**                              | **Description**                                                                                                   |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **Compute (CU-hour)**                  | Total compute usage in **compute units per hour**. [Learn more](/docs/introduction/plans#compute).        |
-| **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, prorated for the billing period. [Learn more](/docs/introduction/plans#extra-branches). |
-| **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore). |
-| **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).       |
-| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage). |
-| **Public data transfer (GB)**          | Outbound data transfer to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).       |
-| **Private data transfer (GB)**         | Bi-directional data transfer over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer).
+| **Metric**                             | **Description**                                                                                                                                |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Compute (CU-hour)**                  | Total compute usage in **compute units per hour**. [Learn more](/docs/introduction/plans#compute).                                             |
+| **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, prorated for the billing period. [Learn more](/docs/introduction/plans#extra-branches).   |
+| **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                             |
+| **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                           |
+| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
+| **Public data transfer (GB)**          | Outbound data transfer to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                                 |
+| **Private data transfer (GB)**         | Bi-directional data transfer over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
 
 ## Usage-based cost examples
 
