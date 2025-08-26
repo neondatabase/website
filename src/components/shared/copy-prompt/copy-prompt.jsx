@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 
 import Button from 'components/shared/button';
 import CopyIcon from 'components/shared/code-block-wrapper/images/copy.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const DEFAULT_DISPLAY_TEXT = 'Use this pre-built prompt to get started faster.';
 const DEFAULT_BUTTON_TEXT = 'Copy prompt';
@@ -25,12 +26,13 @@ const CopyPrompt = (props) => {
     await navigator.clipboard.writeText(markdown);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
+    sendGtagEvent('Button Clicked', { text: 'Copy prompt' });
   };
 
   return (
     <figure
       className={clsx(
-        'not-prose my-5 flex items-center gap-x-6 rounded-[10px] px-7 py-4',
+        'not-prose my-5 flex items-center gap-x-6 rounded-[10px] px-7 py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-5',
         'border border-gray-new-90 bg-[linear-gradient(to_right,#FAFAFA_0%,rgba(250,250,250,0)100%)]',
         'dark:border-gray-new-20 dark:bg-[linear-gradient(to_right,#18191B_28.86%,#131415_74.18%)]'
       )}
@@ -39,7 +41,7 @@ const CopyPrompt = (props) => {
         {description}
       </div>
       <Button
-        className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-semibold"
+        className="inline-flex w-[140px] items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium xs:w-full"
         theme="primary"
         aria-label={copied ? 'Copied!' : buttonText}
         onClick={handleCopy}
