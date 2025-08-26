@@ -236,7 +236,7 @@ Neon stores a change history to support instant restore.
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-You can increase or descrease your [restore window](#-restore-window) to control how muh change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
+You can increase or decrease your [restore window](#-restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
