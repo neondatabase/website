@@ -1,6 +1,6 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: Use Neon as the database layer for your
+subtitle: The purpose-built solution for agents that need databases.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
