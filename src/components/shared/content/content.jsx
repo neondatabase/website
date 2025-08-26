@@ -45,6 +45,7 @@ import ImageZoom from 'components/shared/image-zoom';
 import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
+import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import getCodeProps from 'lib/rehype-code-props';
 
@@ -152,6 +153,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   LinkPreview,
   DocsList,
   RequestForm,
+  ProgramForm,
   LatencyCalculator,
   CTA: isTemplate ? CtaBlock : DocCta,
   Testimonial,

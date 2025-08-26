@@ -6,6 +6,7 @@ import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
@@ -167,6 +168,15 @@ const Hero = () => {
             )}
           </ul>
         </div>
+        <CtaBlock
+          className="max-w-2xl"
+          title="Agent Plan"
+          description="Get custom resource limits and credits for your free tier with our plan for Agent Platforms provisioning thousands of databases."
+          buttonText="Apply Here"
+          buttonUrl={LINKS.ai}
+          size="sm"
+          hasDecor={false}
+        />
       </Container>
     </section>
   );
