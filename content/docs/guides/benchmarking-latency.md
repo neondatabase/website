@@ -112,7 +112,11 @@ For examples of different connection patterns and their implementation, see [Con
 
 ## Neon latency benchmarks dashboard
 
-Neon provides a [Latency Benchmarks Dashboard](/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions. The benchmark specifically tracks:
+Neon provides a [Latency Benchmarks Dashboard](/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions. 
+
+![Latency benchmark app](/docs/guides/latency_benchmark.png)
+
+The benchmark specifically tracks:
 
 - Roundtrip time for executing simple SELECT queries
 - Network latency between function and database regions

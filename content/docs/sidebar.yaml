@@ -147,6 +147,8 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
+            - title: Latency benchmarks
+              slug: guides/benchmarking-latency
     - title: Migrate to Neon
       icon: import
       slug: import/migrate-intro
