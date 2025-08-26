@@ -70,7 +70,7 @@ If you are unable to update your billing email, please [contact support](/docs/i
 
 ## Invoices
 
-A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Billing metrics](/docs/introduction/plans#billing-metrics).
+A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 ### Download invoices
 

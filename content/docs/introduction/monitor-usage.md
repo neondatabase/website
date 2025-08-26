@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2025-03-02T15:57:43.215Z'
 ---
 
-Neon exposes usage metrics in the Neon Console and through the Neon API.
+Neon exposes usage metrics in the Neon Console and through the Neon API. For an explanation of Neon's usage metrics, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 ## View usage metrics in the Neon Console
 

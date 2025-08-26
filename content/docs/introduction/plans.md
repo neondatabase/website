@@ -294,7 +294,7 @@ Support level by plan:
 
 See [Support](/docs/introduction/support) for details.
 
-## Billing metrics
+## Usage metrics
 
 The following metrics may appear on your Neon invoice. Each metric represents a specific type of usage that contributes to your monthly bill.
 
