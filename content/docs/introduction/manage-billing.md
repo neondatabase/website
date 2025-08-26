@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2025-08-18T12:11:47.179Z'
+updatedOn: '2025-08-26T13:01:22.803Z'
 ---
 
 <InfoBlock>
@@ -70,7 +70,7 @@ If you are unable to update your billing email, please [contact support](/docs/i
 
 ## Invoices
 
-A Neon invoice includes the the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Plan features](/docs/introduction/plans#plan-features).
+A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 ### Download invoices
 

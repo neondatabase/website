@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-08-15T00:50:25.889Z'
+updatedOn: '2025-08-26T13:01:22.807Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -43,8 +43,8 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Public network transfer](#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
 | [Monitoring](#monitoring)                             | 1 day                          | 3 days                               | 14 days                                                                           |
 | [Metrics/logs export](#metricslogs-export)            | —                              | —                                    | ✅                                                                                |
-| [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Instant restore](#instant-restore)                   | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
+| [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                |
@@ -84,7 +84,7 @@ Included per plan:
 
 ### ☑ Branches
 
-Each project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
+Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
 Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
 
 You can create [child branches](/docs/reference/glossary#child-branch) for testing, previews, or development.
@@ -101,20 +101,22 @@ See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) 
 
 ### ☑ Extra branches
 
-On paid plans, you can create extra child branches. Extra branches beyond your plan's limit are billed in **branch-months**, metered hourly.
+On paid plans, you can create extra child branches. Extra branches beyond your plan's branch allowance (outlined [above](#-branches)) are billed in **branch-months**, metered hourly.
 
 1 extra branch × 1 month = 1 branch-month
 
 Cost: **$1.50/branch-month** (~$0.002/hour).
 
-Example: Plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.20 total.
+Example: The Launch plan includes 10 branches/project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = ~$0.20 total.
 
 > Extra branches are not available on the Free plan. Delete branches or upgrade if you need more.
 
-Branch maximum:
+The maximum number of branches you can have per project:
 
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
+
+If you need more, contact [Sales](/contact-sales).
 
 ### ☑ Compute
 
@@ -185,20 +187,21 @@ Suspends computes after inactivity.
 
 ### ☑ Storage
 
-Billed on actual usage in **GB-months**. Measured hourly.
+Storage is your data size, billed on actual usage in **GB-months**, measured hourly.
 
-- **Launch**/**Scale**: $0.35/GB-month
-- **Root branches**: billed on actual data size (_logical data size_)
-- **Child branches**: billed on storage delta from the parent
+- **Launch**/**Scale plan storage cost**: $0.35/GB-month
+- **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
+- **[Child branches](/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
 
-When a branch is created, it shares data with its parent and adds no storage. Once you make writes (insert, update, delete), the delta grows and counts toward storage.  
+When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+
 Storage on child branches never decreases — it grows as changes accumulate.
 
 > **Free** plan users get 0.5 GB of storage per project
 
 ### ☑ Public network transfer
 
-Public network transfer (egress) is the total volume of data sent from your database over the public internet during the monthly billing period.
+Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
 
 > Public network transfer includes data sent via [logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases.
 
@@ -225,32 +228,37 @@ See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
-### ☑ Restore window
-
-Neon retains a history of changes for all branches, enabling [instant restore](#instant-restore).  
-The maximum restore window per plan:
-
-- **Free**: Up to 6 hours, capped at 1 GB-month of changes
-- **Launch**: Up to 7 days
-- **Scale**: Up to 30 days
-
-The restore window is configurable. Shortening it can reduce instant restore costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
-
 ### ☑ Instant restore
 
-Neon stores a log of write operations (Postgres [Write-Ahead Log](/docs/reference/glossary#write-ahead-logging-wal)) to support instant restore.
+Neon stores a change history to support instant restore.
 
 - **Free**: No charge, 6-hour limit, capped at 1 GB of change history
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-See [Instant restore](/docs/introduction/branch-restore) for details.
+You can increase or decrease your [restore window](#-restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
+
+> The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
+
+### ☑ Restore window
+
+How far back you can restore data.
+
+The maximum restore window per plan:
+
+- **Free**: No charge, 6-hour limit, capped at 1 GB-month of changes
+- **Launch**: Up to 7 days
+- **Scale**: Up to 30 days
+
+The restore window is configurable. Shortening it can reduce [instant restore](#-instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
 ### ☑ Private network transfer
 
-Available on the **Scale** plan with [Private Networking](/docs/guides/neon-private-networking), which uses [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html) to bypass the public internet.
+Bi-directional data transfer to and from your databases over private networking.
 
-Billed at $0.01/GB for network transferred to and from Neon.
+Private networking is available on the **Scale** plan. It uses [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html) to bypass the public internet.
+
+Billed at $0.01/GB for network transferred to and from Neon. You'll only see this on your bill if you enable this feature.
 
 ### ☑ Compliance and security
 
@@ -286,6 +294,21 @@ Support level by plan:
 
 See [Support](/docs/introduction/support) for details.
 
+## Usage metrics
+
+The following metrics may appear on your Neon invoice. Each metric represents a specific type of usage that contributes to your monthly bill.
+
+| **Metric**                             | **Description**                                                                                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Compute (CU-hour)**                  | Total compute usage in **CU-hours** (Compute Unit hours). [Learn more](/docs/introduction/plans#compute).                                                                 |
+| **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                               |
+| **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                        |
+| **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                      |
+| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                             |
+| **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
+| **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
+| **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price).                                                                |
+
 ## Usage-based cost examples
 
 The following examples show what your monthly bill might look like on the **Launch** and **Scale** plans at different levels of usage. Each example includes compute, storage (root and child branches), and instant restore history. Your actual costs will depend on your specific workload, usage patterns, and configuration.
@@ -304,7 +327,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_
+
     **Estimated monthly cost:** **$32.55**
 
 - **Example 2**
@@ -317,7 +340,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_
+
     **Estimated monthly cost:** **$61.50**
 
 ---
@@ -334,7 +357,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_
+
     **Estimated monthly cost:** **$500.75**
 
 - **Example 2**
@@ -347,7 +370,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    _max($5, total usage)_
+
     **Estimated monthly cost:** **$762.50**
 
 ## FAQs
