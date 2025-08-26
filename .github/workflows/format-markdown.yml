@@ -36,11 +36,11 @@ jobs:
     - name: Install Prettier
       run: npm install prettier
 
-    - name: Pull latest changes
-      run: git pull --rebase
-
     - name: Run Prettier
       run: npx prettier --write "content/**/*.md" --ignore-path .prettierignore
+
+    - name: Pull latest changes
+      run: git pull --rebase
 
     - name: Commit changes
       run: |
