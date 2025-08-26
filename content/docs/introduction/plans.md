@@ -116,7 +116,7 @@ The maximum number of branches you can have per project:
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
 
-If you need more, contact [Sales](/contact-sales). 
+If you need more, contact [Sales](/contact-sales).
 
 ### ☑ Compute
 
@@ -193,7 +193,7 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
 - **[Child branches](/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
 
-When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.  
+When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
 Storage on child branches never decreases — it grows as changes accumulate.
 
@@ -298,16 +298,16 @@ See [Support](/docs/introduction/support) for details.
 
 The following metrics may appear on your Neon invoice. Each metric represents a specific type of usage that contributes to your monthly bill.
 
-| **Metric**                             | **Description**                                                                                                                                |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Compute (CU-hour)**                  | Total compute usage in **CU-hours** (Compute Unit hours). [Learn more](/docs/introduction/plans#compute).                                             |
-| **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).   |
-| **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                             |
-| **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                           |
-| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
-| **Public network transfer (GB)**          | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                                 |
-| **Private network transfer (GB)**         | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
-| **Minimum spend**         | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price). |
+| **Metric**                             | **Description**                                                                                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Compute (CU-hour)**                  | Total compute usage in **CU-hours** (Compute Unit hours). [Learn more](/docs/introduction/plans#compute).                                                                 |
+| **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                               |
+| **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                        |
+| **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                      |
+| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                             |
+| **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
+| **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
+| **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price).                                                                |
 
 ## Usage-based cost examples
 
@@ -327,7 +327,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    
+
     **Estimated monthly cost:** **$32.55**
 
 - **Example 2**
@@ -340,7 +340,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-    
+
     **Estimated monthly cost:** **$61.50**
 
 ---
@@ -357,7 +357,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-  
+
     **Estimated monthly cost:** **$500.75**
 
 - **Example 2**
@@ -370,7 +370,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
   - Base fee — **$5.00**
-  
+
     **Estimated monthly cost:** **$762.50**
 
 ## FAQs
