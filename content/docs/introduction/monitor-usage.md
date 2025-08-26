@@ -4,7 +4,7 @@ subtitle: Monitor billing and usage for your account and projects
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2025-03-02T15:57:43.215Z'
+updatedOn: '2025-08-26T13:01:22.806Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. For an explanation of Neon's usage metrics, see [Usage metrics](/docs/introduction/plans#usage-metrics).
