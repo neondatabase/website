@@ -148,8 +148,8 @@ const ContactForm = () => {
         if (isFormDataSentToCustomerIo) {
           try {
             if (window.zaraz && email) {
-              sendGtagEvent('identify', { userId: email, email });
-              sendGtagEvent(eventName, eventProps);
+              await sendGtagEvent('identify', { email });
+              await sendGtagEvent(eventName, eventProps);
             }
           } catch (error) {
             console.warn('Error submitting the form');
