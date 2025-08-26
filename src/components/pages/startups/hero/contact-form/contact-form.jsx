@@ -148,7 +148,7 @@ const ContactForm = () => {
         if (isFormDataSentToCustomerIo) {
           try {
             if (window.zaraz && email) {
-              sendGtagEvent('identify', { email });
+              sendGtagEvent('identify', { userId: email, email });
               sendGtagEvent(eventName, eventProps);
             }
           } catch (error) {
