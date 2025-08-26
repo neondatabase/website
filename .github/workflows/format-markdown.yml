@@ -39,8 +39,14 @@ jobs:
     - name: Run Prettier
       run: npx prettier --write "content/**/*.md" --ignore-path .prettierignore
 
+    - name: Stash Prettier changes
+      run: git stash push -m "Prettier formatting changes"
+
     - name: Pull latest changes
       run: git pull --rebase
+
+    - name: Pop Prettier changes
+      run: git stash pop
 
     - name: Commit changes
       run: |
