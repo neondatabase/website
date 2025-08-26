@@ -245,7 +245,6 @@ With the right strategies, you can optimize your system to handle connection lat
 
 ## Related resources
 
-
 - [Neon latency benchmarks dashboard](/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency

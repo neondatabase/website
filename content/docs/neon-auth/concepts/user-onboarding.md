@@ -26,25 +26,23 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [address, setAddress] = useState('');
 
+  return (
+    <>
+      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
 
-  return <>
-    <input
-      type="text"
-      value={address}
-      onChange={(e) => setAddress(e.target.value)}
-    />
-
-    <button onClick={async () => {
-      await user.update({
-        clientMetadata: {
-          onboarded: true,
-          address,
-        },
-      });
-      router.push('/');
-    }}>
-      Submit
-    </button>
+      <button
+        onClick={async () => {
+          await user.update({
+            clientMetadata: {
+              onboarded: true,
+              address,
+            },
+          });
+          router.push('/');
+        }}
+      >
+        Submit
+      </button>
     </>
   );
 }
