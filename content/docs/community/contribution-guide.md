@@ -81,7 +81,7 @@ The Neon documentation file structure reflects the navigation you see on the web
 
 This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `navigation.yaml`, which you can find at the root of the `/docs` directory.
 
-Refer to the [## Navigation](/docs/README.md#navigation) in the README for more information on how to update the sidebar.
+Refer to the [## Navigation](https://github.com/neondatabase/website/blob/main/content/docs/README.md#navigation) in the README for more information on how to update the sidebar.
 
 ## Markdown frontmatter
 
