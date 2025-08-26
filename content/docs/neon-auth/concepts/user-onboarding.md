@@ -3,6 +3,7 @@ title: User Onboarding
 subtitle: How to implement onboarding flows in Neon Auth
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-08-26T15:57:17.420Z'
 ---
 
 > Implementing a user onboarding page and collecting information on sign-up
@@ -26,25 +27,23 @@ export default function OnboardingPage() {
   const router = useRouter();
   const [address, setAddress] = useState('');
 
+  return (
+    <>
+      <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
 
-  return <>
-    <input
-      type="text"
-      value={address}
-      onChange={(e) => setAddress(e.target.value)}
-    />
-
-    <button onClick={async () => {
-      await user.update({
-        clientMetadata: {
-          onboarded: true,
-          address,
-        },
-      });
-      router.push('/');
-    }}>
-      Submit
-    </button>
+      <button
+        onClick={async () => {
+          await user.update({
+            clientMetadata: {
+              onboarded: true,
+              address,
+            },
+          });
+          router.push('/');
+        }}
+      >
+        Submit
+      </button>
     </>
   );
 }
