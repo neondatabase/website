@@ -258,7 +258,7 @@ Bi-directional data transfer to and from your databases over private networking.
 
 Private networking is available on the **Scale** plan. It uses [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html) to bypass the public internet.
 
-Billed at $0.01/GB for network transferred to and from Neon. You'll only see this on your bill if enable this feature.
+Billed at $0.01/GB for network transferred to and from Neon. You'll only see this on your bill if you enable this feature.
 
 ### ☑ Compliance and security
 
