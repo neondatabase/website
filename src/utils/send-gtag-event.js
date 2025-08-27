@@ -1,5 +1,7 @@
 export default function sendGtagEvent(eventName, properties) {
   if (window.zaraz) {
-    window.zaraz.track(eventName, properties);
+    const result = window.zaraz.track(eventName, properties);
+    return Promise.resolve(result);
   }
+  return Promise.resolve();
 }
