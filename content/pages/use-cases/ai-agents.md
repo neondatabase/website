@@ -34,9 +34,9 @@ From fast-paced prompting to launch, your users want to build and deploy apps, t
 | ------------- | ------------- |
 | Projects      |   **Unlimited**  <br/> _Agents create a new project for each user application._|
 | Branches per Project  | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute | **$0.14 per CU-hour** <br/> _Same as Launch_ |
-| Storage | **$0.35 per GB-month** <br/> _Same as Scale_ |
-| Instant Restore (PITR) | **$0.2 per GB-month** <br/> _Same as Scale_ |
+| Compute | from **$0.14 per CU-hour** <br/> _Same as Launch/Scale_ |
+| Storage | **$0.35 per GB-month** <br/> _Same as Launch/Scale_ |
+| Instant Restore (PITR) | **$0.2 per GB-month** <br/> _Same as Launch/Scale_ |
 | Neon Auth | **Included** <br/> _All-in-one API for handling user signup and management in Neon_  |
 | Management API | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_ |
 | Data API (PostgREST) | **Higher Rate Limits Available** |
