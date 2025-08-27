@@ -88,6 +88,7 @@ This method runs the Neon MCP server locally on your machine, using a Neon API k
 
 1. Open your terminal.
 2. Add the Neon MCP server to Claude Code with the following command, replacing `<YOUR_NEON_API_KEY>` with your actual Neon API key:
+
    ```sh
    claude mcp add neon -- npx -y @neondatabase/mcp-server-neon start "<YOUR_NEON_API_KEY>"
    ```
@@ -106,6 +107,7 @@ You've now configured the Neon MCP Server in Claude Code and can manage your Neo
 Now that you have the Neon MCP server set up either remotely or locally, you can verify the connection and test the available tools.
 
 1. Start Claude Code:
+
    ```sh
    claude
    ```
