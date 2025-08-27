@@ -6,12 +6,12 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit amd V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
+If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
 **Neon Features for Agents:**
 
 - **Instant Provisioning:** your users never wait for infrastructure. 
-- **Efficient Snapshots:** users can toggle between checkpoints of both code and state.
+- **Snapshots:** let users toggle between checkpoints of code and state together.
 - **Low cost-per-Database:**  automatic scale to zero and 350ms cold starts.
 - **Full-Stack, Batteries-Included:** Neon Auth, Data API included at no added charge.
 - **Granular API Controls:** Track and control usage for flexible limits and invoicing.
