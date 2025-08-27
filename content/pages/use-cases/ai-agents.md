@@ -11,7 +11,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 **Neon Features for Agents:**
 
 - **Instant Provisioning:** your users never wait for infrastructure. 
-- **Checkpointing:** toggle between code and database state for users.
+- **Efficient Snapshots:** users can toggle between checkpoints of both code and state.
 - **Low cost-per-Database:**  automatic scale to zero and 350ms cold starts.
 - **Full-Stack, Batteries-Included:** Neon Auth, Data API included at no added charge.
 - **Granular API Controls:** Track and control usage for flexible limits and invoicing.
