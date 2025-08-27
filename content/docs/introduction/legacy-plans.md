@@ -31,7 +31,7 @@ The legacy Free plan is best suited for hobby projects, prototypes, and learning
 
 | Usage type                 | Plan allowance                                                           |
 | :------------------------- | :----------------------------------------------------------------------- |
-| **Projects**               | 10 Neon projects                                                         |
+| **Projects**               | 20 projects                                                              |
 | **Branches**               | 10 branches per project                                                  |
 | **Databases**              | 500 per branch                                                           |
 | **Storage**                | 0.5 GB-month (regular and archive storage combined)                      |
