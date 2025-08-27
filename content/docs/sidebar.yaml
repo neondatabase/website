@@ -507,8 +507,6 @@
           items:
             - title: Claude Desktop
               slug: https://neon.com/guides/neon-mcp-server
-            - title: Claude Code
-              slug: https://neon.com/guides/claude-code-mcp-neon
             - title: Cursor IDE
               slug: https://neon.com/guides/cursor-mcp-neon
             - title: Cline

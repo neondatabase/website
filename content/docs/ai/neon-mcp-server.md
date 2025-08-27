@@ -24,7 +24,7 @@ For more information, see [MCP security guidance →](#mcp-security-guidance).
 
 The [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) standardizes communication between LLMs and external tools. It defines a client-server architecture, enabling LLMs (Hosts) to connect to specialized servers that provide context and tools for interacting with external systems. The key components of the MCP architecture are:
 
-- **Hosts**: These are AI applications, such as Claude Desktop, Claude Code, or IDEs like Cursor, that initiate connections to MCP servers
+- **Hosts**: These are AI applications, such as Claude Desktop or IDEs like Cursor, that initiate connections to MCP servers
 - **Clients**: These reside within the host application and maintain one-to-one connections with individual MCP servers
 - **Server**: These programs, such as Neon's MCP Server, provide context, tools, and prompts to clients, enabling access to external data and functionalities
 
@@ -34,7 +34,7 @@ Traditionally, connecting AI models to different data sources required developer
 
 ### What is Neon MCP server?
 
-**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Claude Code, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
+**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
 
 **Key Benefits of using Neon MCP Server:**
 
@@ -62,7 +62,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 
 #### Prerequisites:
 
-- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed).
+- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Cline, Zed).
 - A Neon account.
 
 <Admonition type="tip" title="Install in a single click for Cursor users">
@@ -184,7 +184,6 @@ height={1080}
 You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
 
 - [Claude Desktop](/guides/neon-mcp-server)
-- [Claude Code](/guides/claude-code-mcp-neon)
 - [Cursor](/guides/cursor-mcp-neon)
 - [Cline](/guides/cline-mcp-neon)
 - [Windsurf (Codium)](/guides/windsurf-mcp-neon)
