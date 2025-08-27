@@ -26,6 +26,34 @@ const isActiveItem = (slug, items, subnav, currentSlug) => {
   return false;
 };
 
+const SubItem = ({ icon, title, slug, basePath }) => {
+  const externalSlug = slug?.startsWith('http') ? slug : null;
+  const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
+  const docSlug = `${basePath}${slug}`;
+
+  return (
+    <Link
+      className={clsx(
+        'flex items-center gap-2 leading-none tracking-tight transition-colors duration-200',
+        'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
+      )}
+      to={externalSlug || websiteSlug || docSlug}
+      size="2xs"
+      isExternal={externalSlug}
+    >
+      {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
+      {title}
+    </Link>
+  );
+};
+
+SubItem.propTypes = {
+  icon: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  basePath: PropTypes.string.isRequired,
+};
+
 const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiveItems }) => {
   const LinkTag = slug ? Link : 'button';
   const pathname = usePathname();
@@ -78,33 +106,30 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
           <ul
             className={clsx(
               'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
-              'shadow-[0px_14px_20px_0px_rgba(0,0,0,.1) border-gray-new-94 bg-white',
+              'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]',
               'dark:border-gray-new-15 dark:bg-gray-new-8 dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
           >
-            {subnav.map(({ slug: subSlug, icon, title: subTitle }, index) => {
-              const externalSlug = subSlug?.startsWith('http') ? subSlug : null;
-              const websiteSlug =
-                subSlug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${subSlug}`;
-              const docSlug = `${basePath}${subSlug}`;
-
-              return (
-                <li key={index}>
-                  <Link
-                    className={clsx(
-                      'flex items-center gap-2 leading-none transition-colors duration-200',
-                      'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
-                    )}
-                    to={externalSlug || websiteSlug || docSlug}
-                    size="2xs"
-                    isExternal={externalSlug}
-                  >
-                    {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
-                    {subTitle}
-                  </Link>
-                </li>
-              );
-            })}
+            {subnav.map((item, index) => (
+              <li className={item.section && 'mt-2 first:mt-0'} key={index}>
+                {item.section ? (
+                  <>
+                    <span className="mb-3.5 block text-xs uppercase leading-none tracking-tight text-gray-new-50">
+                      {item.section}
+                    </span>
+                    <ul className="flex flex-col gap-4">
+                      {item.items.map((item, index) => (
+                        <li key={index}>
+                          <SubItem {...item} basePath={basePath} />
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : (
+                  <SubItem {...item} basePath={basePath} />
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       )}

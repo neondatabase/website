@@ -9,6 +9,7 @@ import Icon from './icon';
 import Item from './item';
 
 const Menu = ({
+  nav,
   title,
   slug,
   icon,
@@ -24,7 +25,7 @@ const Menu = ({
       theme="blue-green"
     >
       {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
-      {title}
+      {title || nav}
     </Link>
 
     <ul className="flex flex-col">
@@ -73,7 +74,8 @@ const Menu = ({
 );
 
 Menu.propTypes = {
-  title: PropTypes.string.isRequired,
+  nav: PropTypes.string.isRequired,
+  title: PropTypes.string,
   slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   icon: PropTypes.string,

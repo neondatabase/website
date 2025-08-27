@@ -143,298 +143,293 @@
           items:
             - title: Sample data
               slug: import/import-sample-data
-- nav: Database
+- nav: Platform
   slug: manage/platform
+  title: Neon platform
+  icon: settings
+  items:
+    - section: Architecture
+      icon: architecture
+      slug: introduction/architecture-overview
+      items:
+        - title: Overview
+          slug: introduction/architecture-overview
+        - title: Autoscaling
+          slug: introduction/autoscaling-architecture
+        - title: Compute lifecycle
+          slug: introduction/compute-lifecycle
+        - title: High availability
+          slug: introduction/high-availability
+    - section: Features
+      slug: guides/neon-features
+      icon: features
+      items:
+        - title: Serverless
+          slug: introduction/serverless
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items:
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+            - title: Enable autoscaling
+              slug: guides/autoscaling-guide
+            - title: How the algorithm works
+              slug: guides/autoscaling-algorithm
+        - title: Scale to zero
+          slug: introduction/scale-to-zero
+          items:
+            - title: Overview
+              slug: introduction/scale-to-zero
+            - title: Scale to zero guide
+              slug: guides/scale-to-zero-guide
+        - title: Instant restore
+          slug: introduction/branch-restore
+        - title: Backup & restore
+          slug: guides/backup-restore
+          tag: new
+        - title: Branching
+          slug: guides/branching-intro
+          items:
+            - title: Get started
+              items:
+                - title: Get started with branching
+                  slug: guides/branching-intro
+            - title: Concepts
+              items:
+                - title: About branching
+                  slug: introduction/branching
+                - title: Schema-only branches
+                  slug: guides/branching-schema-only
+                - title: Branch archiving
+                  slug: guides/branch-archiving
+                - title: Branch expiration
+                  slug: guides/branch-expiration
+            - title: Restore and reset
+              items:
+                - title: Reset from parent
+                  slug: guides/reset-from-parent
+                - title: Instant restore
+                  slug: introduction/branch-restore
+            - title: Branching in workflows
+              items:
+                - title: Branching with the CLI
+                  slug: guides/branching-neon-cli
+                - title: Branching with the API
+                  slug: guides/branching-neon-api
+                - title: Branching with GitHub Actions
+                  slug: guides/branching-github-actions
+                - title: Branching — Testing queries
+                  slug: guides/branching-test-queries
+        - title: Logical replication
+          slug: guides/logical-replication-guide
+          items:
+            - title: Concepts
+              slug: guides/logical-replication-concepts
+            - title: Commands
+              slug: guides/logical-replication-manage
+            - title: Neon specifics
+              slug: guides/logical-replication-neon
+            - title: Schema management
+              slug: guides/logical-replication-schema-changes
+            - title: Logical replication tips
+              slug: guides/logical-replication-tips
+        - title: Read Replicas
+          slug: introduction/read-replicas
+          items:
+            - title: Create and manage Read Replicas
+              slug: guides/read-replica-guide
+            - title: Scale your app with Read Replicas
+              slug: guides/read-replica-integrations
+            - title: Run analytics queries with Read Replicas
+              slug: guides/read-replica-data-analysis
+            - title: Run ad-hoc queries with Read Replicas
+              slug: guides/read-replica-adhoc-queries
+            - title: Provide read-only access with Read Replicas
+              slug: guides/read-only-access-read-replicas
+            - title: Use Read Replicas with Prisma
+              slug: guides/read-replica-prisma
+        - title: Time Travel
+          slug: guides/time-travel-assist
+          items:
+            - title: Overview
+              slug: guides/time-travel-assist
+            - title: Time Travel tutorial
+              slug: guides/time-travel-tutorial
+        - title: Schema diff
+          slug: guides/schema-diff
+          items:
+            - title: Overview
+              slug: guides/schema-diff
+            - title: Schema diff tutorial
+              slug: guides/schema-diff-tutorial
+        - title: IP Allow
+          slug: introduction/ip-allow
+        - title: Protected branches
+          slug: guides/protected-branches
+        - title: Private Networking
+          slug: guides/neon-private-networking
+    - section: Platform
+      icon: settings
+      slug: manage/platform
+      items:
+        - title: Access control
+          items:
+            - title: Accounts
+              slug: manage/accounts
+            - title: User permissions
+              slug: manage/user-permissions
+            - title: Organizations
+              slug: manage/organizations
+              items:
+                - title: Overview
+                  slug: manage/organizations
+                - title: Manage Organizations
+                  slug: manage/orgs-manage
+                - title: Transfer projects
+                  slug: manage/orgs-project-transfer
+                - title: Organizations API
+                  items:
+                    - title: Manage organizations via API
+                      slug: manage/orgs-api
+                    - title: Query organization metrics via API
+                      slug: manage/orgs-api-consumption
+                - title: CLI
+                  items:
+                    - title: CLI actions
+                      slug: manage/orgs-cli
+        - title: Project collaboration
+          slug: guides/project-collaboration-guide
+        - title: Database access
+          slug: manage/database-access
+        - title: API keys
+          slug: manage/api-keys
+        - title: Account recovery
+          slug: manage/account-recovery
+        - title: Projects
+          items:
+            - title: Object hierarchy
+              slug: manage/overview
+            - title: Projects
+              slug: manage/projects
+            - title: Branches
+              slug: manage/branches
+            - title: Computes
+              slug: manage/computes
+            - title: Roles
+              slug: manage/roles
+            - title: Databases
+              slug: manage/databases
+            - title: Tables
+              slug: guides/tables
+            - title: Integrations
+              slug: manage/integrations
+        - title: Monitoring
+          items:
+            - title: Overview
+              slug: introduction/monitoring
+            - title: Monitoring dashboard
+              slug: introduction/monitoring-page
+            - title: System operations
+              slug: manage/operations
+            - title: Active queries
+              slug: introduction/monitor-active-queries
+            - title: Query history
+              slug: introduction/monitor-query-history
+        - title: External monitoring
+          items:
+            - title: Datadog
+              slug: guides/datadog
+            - title: Grafana Cloud
+              slug: guides/grafana-cloud
+            - title: OpenTelemetry
+              slug: guides/opentelemetry
+            - title: Metrics and logs reference
+              slug: reference/metrics-logs
+            - title: Other monitoring tools
+              slug: introduction/monitor-external-tools
+        - title: Team Tools
+          items:
+            - title: App for Slack
+              slug: manage/slack-app
+              tag: beta
+        - title: Backups
+          items:
+            - title: Overview
+              slug: manage/backups
+            - title: Backup with pg_dump
+              slug: manage/backup-pg-dump
+            - title: Automate pg_dump backups
+              slug: manage/backup-pg-dump-automate
+              items:
+                - title: Part 1 - Create an S3 bucket
+                  slug: manage/backups-aws-s3-backup-part-1
+                - title: Part 2 - Automate nightly backups
+                  slug: manage/backups-aws-s3-backup-part-2
+        - title: Updates
+          items:
+            - title: Overview
+              slug: manage/maintenance-updates-overview
+            - title: Platform maintenance
+              slug: manage/platform-maintenance
+            - title: Updates
+              slug: manage/updates
+    - section: Use cases
+      icon: use-case
+      items:
+        - title: Use cases
+          slug: use-cases/use-cases-overview
+    - section: Regions
+      icon: regions
+      items:
+        - title: Regions
+          slug: introduction/regions
+    - section: Support
+      icon: support
+      items:
+        - title: Support
+          slug: introduction/support
+    - section: Status
+      icon: status
+      items:
+        - title: Status
+          slug: introduction/status
+    - section: Plans and billing
+      slug: introduction/about-billing
+      icon: billing
+      items:
+        - title: Plans
+          slug: introduction/plans
+        - title: Legacy plans
+          slug: introduction/legacy-plans
+        - title: Manage billing
+          slug: introduction/manage-billing
+        - title: Monitor billing
+          slug: introduction/monitor-usage
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
+        - title: Azure Marketplace
+          slug: introduction/billing-azure-marketplace
+        - title: Enterprise sales process
+          slug: introduction/enterprise-sales-process
+    - section: Neon on Azure
+      slug: manage/azure
+      icon: azure
+      items:
+        - title: Deploy Neon on Azure
+          slug: azure/azure-deploy
+        - title: Manage Neon on Azure
+          slug: azure/azure-manage
+        - title: Develop with Neon on Azure
+          slug: azure/azure-develop
+- nav: Database
   title: Database
   icon: settings
   subnav:
-    - title: Neon platform
-      slug: manage/platform
-      icon: settings
+    - section: Postgres
       items:
-        - section: Architecture
-          icon: architecture
-          slug: introduction/architecture-overview
-          items:
-            - title: Overview
-              slug: introduction/architecture-overview
-            - title: Autoscaling
-              slug: introduction/autoscaling-architecture
-            - title: Compute lifecycle
-              slug: introduction/compute-lifecycle
-            - title: High availability
-              slug: introduction/high-availability
-        - section: Features
-          slug: guides/neon-features
-          icon: features
-          items:
-            - title: Serverless
-              slug: introduction/serverless
-            - title: Autoscaling
-              slug: introduction/autoscaling
-              items:
-                - title: Introduction
-                  slug: introduction/autoscaling
-                - title: Architecture
-                  slug: introduction/autoscaling-architecture
-                - title: Enable autoscaling
-                  slug: guides/autoscaling-guide
-                - title: How the algorithm works
-                  slug: guides/autoscaling-algorithm
-            - title: Scale to zero
-              slug: introduction/scale-to-zero
-              items:
-                - title: Overview
-                  slug: introduction/scale-to-zero
-                - title: Scale to zero guide
-                  slug: guides/scale-to-zero-guide
-            - title: Instant restore
-              slug: introduction/branch-restore
-            - title: Backup & restore
-              slug: guides/backup-restore
-              tag: new
-            - title: Branching
-              slug: guides/branching-intro
-              items:
-                - title: Get started
-                  items:
-                    - title: Get started with branching
-                      slug: guides/branching-intro
-                - title: Concepts
-                  items:
-                    - title: About branching
-                      slug: introduction/branching
-                    - title: Schema-only branches
-                      slug: guides/branching-schema-only
-                    - title: Branch archiving
-                      slug: guides/branch-archiving
-                    - title: Branch expiration
-                      slug: guides/branch-expiration
-                - title: Restore and reset
-                  items:
-                    - title: Reset from parent
-                      slug: guides/reset-from-parent
-                    - title: Instant restore
-                      slug: introduction/branch-restore
-                - title: Branching in workflows
-                  items:
-                    - title: Branching with the CLI
-                      slug: guides/branching-neon-cli
-                    - title: Branching with the API
-                      slug: guides/branching-neon-api
-                    - title: Branching with GitHub Actions
-                      slug: guides/branching-github-actions
-                    - title: Branching — Testing queries
-                      slug: guides/branching-test-queries
-            - title: Logical replication
-              slug: guides/logical-replication-guide
-              items:
-                - title: Concepts
-                  slug: guides/logical-replication-concepts
-                - title: Commands
-                  slug: guides/logical-replication-manage
-                - title: Neon specifics
-                  slug: guides/logical-replication-neon
-                - title: Schema management
-                  slug: guides/logical-replication-schema-changes
-                - title: Logical replication tips
-                  slug: guides/logical-replication-tips
-            - title: Read Replicas
-              slug: introduction/read-replicas
-              items:
-                - title: Create and manage Read Replicas
-                  slug: guides/read-replica-guide
-                - title: Scale your app with Read Replicas
-                  slug: guides/read-replica-integrations
-                - title: Run analytics queries with Read Replicas
-                  slug: guides/read-replica-data-analysis
-                - title: Run ad-hoc queries with Read Replicas
-                  slug: guides/read-replica-adhoc-queries
-                - title: Provide read-only access with Read Replicas
-                  slug: guides/read-only-access-read-replicas
-                - title: Use Read Replicas with Prisma
-                  slug: guides/read-replica-prisma
-            - title: Time Travel
-              slug: guides/time-travel-assist
-              items:
-                - title: Overview
-                  slug: guides/time-travel-assist
-                - title: Time Travel tutorial
-                  slug: guides/time-travel-tutorial
-            - title: Schema diff
-              slug: guides/schema-diff
-              items:
-                - title: Overview
-                  slug: guides/schema-diff
-                - title: Schema diff tutorial
-                  slug: guides/schema-diff-tutorial
-            - title: IP Allow
-              slug: introduction/ip-allow
-            - title: Protected branches
-              slug: guides/protected-branches
-            - title: Private Networking
-              slug: guides/neon-private-networking
-        - section: Platform
-          icon: settings
-          slug: manage/platform
-          items:
-            - title: Access control
-              items:
-                - title: Accounts
-                  slug: manage/accounts
-                - title: User permissions
-                  slug: manage/user-permissions
-                - title: Organizations
-                  slug: manage/organizations
-                  items:
-                    - title: Overview
-                      slug: manage/organizations
-                    - title: Manage Organizations
-                      slug: manage/orgs-manage
-                    - title: Transfer projects
-                      slug: manage/orgs-project-transfer
-                    - title: Organizations API
-                      items:
-                        - title: Manage organizations via API
-                          slug: manage/orgs-api
-                        - title: Query organization metrics via API
-                          slug: manage/orgs-api-consumption
-                    - title: CLI
-                      items:
-                        - title: CLI actions
-                          slug: manage/orgs-cli
-            - title: Project collaboration
-              slug: guides/project-collaboration-guide
-            - title: Database access
-              slug: manage/database-access
-            - title: API keys
-              slug: manage/api-keys
-            - title: Account recovery
-              slug: manage/account-recovery
-            - title: Projects
-              items:
-                - title: Object hierarchy
-                  slug: manage/overview
-                - title: Projects
-                  slug: manage/projects
-                - title: Branches
-                  slug: manage/branches
-                - title: Computes
-                  slug: manage/computes
-                - title: Roles
-                  slug: manage/roles
-                - title: Databases
-                  slug: manage/databases
-                - title: Tables
-                  slug: guides/tables
-                - title: Integrations
-                  slug: manage/integrations
-            - title: Monitoring
-              items:
-                - title: Overview
-                  slug: introduction/monitoring
-                - title: Monitoring dashboard
-                  slug: introduction/monitoring-page
-                - title: System operations
-                  slug: manage/operations
-                - title: Active queries
-                  slug: introduction/monitor-active-queries
-                - title: Query history
-                  slug: introduction/monitor-query-history
-            - title: External monitoring
-              items:
-                - title: Datadog
-                  slug: guides/datadog
-                - title: Grafana Cloud
-                  slug: guides/grafana-cloud
-                - title: OpenTelemetry
-                  slug: guides/opentelemetry
-                - title: Metrics and logs reference
-                  slug: reference/metrics-logs
-                - title: Other monitoring tools
-                  slug: introduction/monitor-external-tools
-            - title: Team Tools
-              items:
-                - title: App for Slack
-                  slug: manage/slack-app
-                  tag: beta
-            - title: Backups
-              items:
-                - title: Overview
-                  slug: manage/backups
-                - title: Backup with pg_dump
-                  slug: manage/backup-pg-dump
-                - title: Automate pg_dump backups
-                  slug: manage/backup-pg-dump-automate
-                  items:
-                    - title: Part 1 - Create an S3 bucket
-                      slug: manage/backups-aws-s3-backup-part-1
-                    - title: Part 2 - Automate nightly backups
-                      slug: manage/backups-aws-s3-backup-part-2
-            - title: Updates
-              items:
-                - title: Overview
-                  slug: manage/maintenance-updates-overview
-                - title: Platform maintenance
-                  slug: manage/platform-maintenance
-                - title: Updates
-                  slug: manage/updates
-        - section: Use cases
-          icon: use-case
-          items:
-            - title: Use cases
-              slug: use-cases/use-cases-overview
-        - section: Regions
-          icon: regions
-          items:
-            - title: Regions
-              slug: introduction/regions
-        - section: Support
-          icon: support
-          items:
-            - title: Support
-              slug: introduction/support
-        - section: Status
-          icon: status
-          items:
-            - title: Status
-              slug: introduction/status
-        - section: Plans and billing
-          slug: introduction/about-billing
-          icon: billing
-          items:
-            - title: Plans
-              slug: introduction/plans
-            - title: Legacy plans
-              slug: introduction/legacy-plans
-            - title: Manage billing
-              slug: introduction/manage-billing
-            - title: Monitor billing
-              slug: introduction/monitor-usage
-            - title: AWS Marketplace
-              slug: introduction/billing-aws-marketplace
-            - title: Azure Marketplace
-              slug: introduction/billing-azure-marketplace
-            - title: Enterprise sales process
-              slug: introduction/enterprise-sales-process
-        - section: Neon on Azure
-          slug: manage/azure
-          icon: azure
-          items:
-            - title: Deploy Neon on Azure
-              slug: azure/azure-deploy
-            - title: Manage Neon on Azure
-              slug: azure/azure-manage
-            - title: Develop with Neon on Azure
-              slug: azure/azure-develop
-    - title: Postgres basics
-      slug: postgresql/introduction
-      icon: book
-      items:
-        - title: PostgreSQL Tutorial
-          slug: /postgresql/tutorial
-          icon: tutorial
-        - title: Postgres guides
+        - title: Guides
           slug: postgresql/introduction
           icon: book
           items:
@@ -674,7 +669,7 @@
               slug: postgresql/query-reference
             - title: Compatibility
               slug: reference/compatibility
-        - title: Postgres extensions
+        - title: Extensions
           slug: extensions/extensions-intro
           icon: extension
         - title: Version support
@@ -683,9 +678,12 @@
         - title: Upgrade
           slug: postgresql/postgres-upgrade
           icon: upgrade
-    - title: Workflows
-      slug: guides/neon-github-integration
-      icon: branching
+    - section: Learn
+      items:
+        - title: Postgres Tutorial
+          slug: /postgresql/tutorial
+          icon: tutorial
+    - section: Workflows
       items:
         - title: Branching workflows
           slug: get-started-with-neon/workflow-primer
@@ -1281,7 +1279,6 @@
         - title: Neon Local Connect
           icon: extension
           slug: local/neon-local-connect
-
 - nav: AI
   title: AI
   icon: ai
@@ -1389,7 +1386,6 @@
             - title: Scale with Neon
               slug: ai/ai-scale-with-neon
 - nav: Security
-  title: Security
   icon: security
   slug: security/security-overview
   items:

@@ -20,9 +20,17 @@ const getActiveMenu = (navigation, slug) => {
   });
 
   if (subnavMenu && subnavMenu.subnav) {
-    return subnavMenu.subnav.find(
+    const activeItem = subnavMenu.subnav.find(
       (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
     );
+
+    if (activeItem) {
+      return activeItem.slug === slug
+        ? activeItem
+        : activeItem.items?.find(
+            (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
+          );
+    }
   }
 
   return navigation?.find((menu) => menu.slug === slug || containsActiveSlug(menu.items));
@@ -32,6 +40,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const menu = getActiveMenu(navigation, currentSlug);
+  console.log(menu);
 
   return (
     <aside className={clsx('relative -mt-10', className)}>

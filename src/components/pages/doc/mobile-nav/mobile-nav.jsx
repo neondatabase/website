@@ -229,8 +229,6 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
 
   if (!menu.length) return null;
 
-  console.log(menu);
-
   return (
     <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
       <DrawerTrigger className="group fixed bottom-0 left-0 right-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
