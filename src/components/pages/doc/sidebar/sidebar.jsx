@@ -40,7 +40,6 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const menu = getActiveMenu(navigation, currentSlug);
-  console.log(menu);
 
   return (
     <aside className={clsx('relative -mt-10', className)}>
