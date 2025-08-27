@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-05-30T16:54:40.485Z'
+updatedOn: '2025-08-27T11:57:55.857Z'
 ---
 
 This page documents Neon’s **legacy plans**. These plans are not available for new signups. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
