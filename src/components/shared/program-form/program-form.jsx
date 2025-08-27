@@ -101,13 +101,9 @@ const ProgramForm = ({ type }) => {
           )}
 
           <Button
-            className={clsx(
-              'px-6 py-3 font-semibold leading-none md:w-full',
-              !isValid && 'pointer-events-none select-none opacity-70'
-            )}
+            className={clsx('px-6 py-3 font-semibold leading-none md:w-full')}
             type="submit"
             theme="primary"
-            disabled={!isValid}
           >
             {buttonText}
           </Button>
@@ -116,7 +112,7 @@ const ProgramForm = ({ type }) => {
         <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
           <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
           <p className="text-[17px] font-light">
-            Thank you for your interest. We will be in touch soon!
+            We've sent confirmation to {email} and will be in touch soon.
           </p>
         </div>
       )}

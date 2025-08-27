@@ -171,7 +171,7 @@ const Hero = () => {
         <CtaBlock
           className="max-w-2xl"
           title="Agent Plan"
-          description="Get custom resource limits and credits for your free tier with our plan for Agent Platforms provisioning thousands of databases."
+          description="Get custom resource limits and credits for your free tier with our Agent Plan, for platforms provisioning thousands of databases."
           buttonText="Apply Here"
           buttonUrl={LINKS.useCasesAI}
           size="sm"

@@ -6,13 +6,13 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-Industry-leading AI Agent Codegen Platforms like Replit, V0, and Anything use Neon to provision, iterate on, and operate full-stack applications on behalf of their users. 
+From fast-paced prompting to launch, your users want to build and deploy apps, they shouldn't have to think about databases. Industry-leading AI Agent Codegen Platforms like Replit, V0, and many more provision and operate full-stack applications using Neon because it works seamlessly with new usage patterns of AI-generated apps. 
 
 **Neon Features for Agents:**
 
-- **Instant Provisioning** keeps your users building.
-- **Checkpointing:** an easy and instant way to toggle between state for users.
-- **Low cost-per-Database** with scale to zero and auto wake on activity.
+- **Instant Provisioning:** your users never wait for infrastructure. 
+- **Checkpointing:** toggle between code and database state for users.
+- **Low cost-per-Database:**  automatic scale to zero and 350ms cold starts.
 - **Full-Stack, Batteries-Included:** Neon Auth, Data API included at no added charge.
 - **Granular API Controls:** Track and control usage for flexible limits and invoicing.
 
@@ -34,7 +34,7 @@ Industry-leading AI Agent Codegen Platforms like Replit, V0, and Anything use Ne
 | ------------- | ------------- |
 | Projects      |   **Unlimited**  <br/> _Agents create a new project for each user application._|
 | Branches per Project  | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute | **$0.26 per CU-hour** <br/> _Same as Scale_ |
+| Compute | **$0.14 per CU-hour** <br/> _Same as Launch_ |
 | Storage | **$0.35 per GB-month** <br/> _Same as Scale_ |
 | Instant Restore (PITR) | **$0.2 per GB-month** <br/> _Same as Scale_ |
 | Neon Auth | **Included** <br/> _All-in-one API for handling user signup and management in Neon_  |
@@ -42,10 +42,9 @@ Industry-leading AI Agent Codegen Platforms like Replit, V0, and Anything use Ne
 | Data API (PostgREST) | **Higher Rate Limits Available** |
 | Support | **Shared Slack Channel** |
 | <br/>**Agent Incentives** |  |
-| **Your Free Tier is Free** | Up to 30,000 of your monthly free tier customers are subsidized by Neon. |
+| **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier. |
 | **General Use Credits** | Up to $30K in credits for those not eligible for the [Startup Program](/startups). |
-| **Co-Marketing** | Access to co-marketing opportunities with Neon: Blog and Social promotions, hackathons and more. |
-
+| **Co-Marketing** | Blog and Social promotions, hackathons and more. |
 
 ## How It Works
 
