@@ -23,6 +23,7 @@ AI-enhanced database management capabilities within your preferred development e
 
 <DetailIconCards>
 <a href="/guides/neon-mcp-server" description="Use natural language to manage your databases with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop</a>
+<a href="/guides/claude-code-mcp-neon" description="Use natural language to manage your databases with Claude Code CLI and Neon MCP server" icon="openai">Claude Code</a>
 <a href="/guides/cursor-mcp-neon" description="AI-enhanced database management in Cursor IDE" icon="openai">Cursor</a>
 <a href="/guides/cline-mcp-neon" description="AI-enhanced database management with Cline" icon="openai">Cline</a>
 <a href="/guides/windsurf-mcp-neon" description="AI-enhanced database management in Windsurf Editor" icon="openai">Windsurf</a>
