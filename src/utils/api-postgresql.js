@@ -23,8 +23,8 @@ const getAllPosts = async () => {
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${POSTGRESQL_DIR_PATH}/sidebar.yaml`, 'utf8'));
+const getNavigation = () =>
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${POSTGRESQL_DIR_PATH}/navigation.yaml`, 'utf8'));
 
 const getAllPostgresTutorials = async () => {
   const slugs = await getPostSlugs(POSTGRESQL_DIR_PATH);
@@ -59,7 +59,7 @@ const getNavigationLinks = (slug) => {
 
 module.exports = {
   getAllPosts,
-  getSidebar,
+  getNavigation,
   getNavigationLinks,
   getAllPostgresTutorials,
 };

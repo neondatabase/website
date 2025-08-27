@@ -14,7 +14,7 @@ const getBreadcrumbs = (slug, flatSidebar, sidebar) => {
       return current;
     }, sidebar);
 
-    return arr;
+    return arr.slice(1);
   }
 
   return [];

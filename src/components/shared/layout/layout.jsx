@@ -19,6 +19,8 @@ const Layout = ({
   hasThemesSupport = false,
   isDocPage = false,
   docPageType = null,
+  docsNavigation = null,
+  docsBasePath = null,
   customType = null,
   isClient = false,
 }) => (
@@ -35,6 +37,8 @@ const Layout = ({
         hasThemesSupport={hasThemesSupport}
         isDocPage={isDocPage}
         docPageType={docPageType}
+        docsNavigation={docsNavigation}
+        docsBasePath={docsBasePath}
         withBorder={headerWithBorder}
         customType={customType}
         isClient={isClient}
@@ -62,6 +66,8 @@ Layout.propTypes = {
   headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
+  docsNavigation: PropTypes.array,
+  docsBasePath: PropTypes.string,
   hasThemesSupport: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,

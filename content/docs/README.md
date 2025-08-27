@@ -20,7 +20,7 @@ Right now Markdown files accept the following fields:
 
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
-3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `sidebar.yaml` file as well.
+3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `navigation.yaml` file as well.
 4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
@@ -28,126 +28,118 @@ Right now Markdown files accept the following fields:
 
 > ⚠️ Please note that the project won't build if at least one of the Markdown files is missing a required field.
 
-## Sidebar
+## Navigation
 
-Sidebar data is stored in the [sidebar.yaml](./sidebar.yaml) file.
+Navigation data is stored in the [navigation.yaml](./navigation.yaml) file.
 
-### How to add a new category
+### Navigation Structure
 
-In order to add a new category to the sidebar, add a new item to the top level array with keys `title` and `items`.
+The navigation system is a unified structure where:
 
-For example:
+- **Top-level items** appear in the header navigation
+- **Child items** appear in the left sidebar
 
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
+This creates a seamless navigation experience where users select a main category from the header and see its detailed structure in the sidebar.
+
+### Top Navigation Structure
+
+Each top-level navigation item has the following structure:
+
+```yaml
+- nav: Get started # Navigation label (displayed in header)
+  slug: introduction # URL slug for the section
+  title: Neon Docs # Page title
+  icon: home # Icon identifier
+  subnav: # Sub-navigation items for header dropdowns
+    - title: Neon platform
+      slug: manage/platform
+      icon: settings
+      items: # Sidebar navigation items
+        ...
 ```
 
-### How to add a new subcategory
+**Important**: Top-level items can contain either:
 
-In order to add a new subcategory, add a new item to `items` array with keys `title` and `items` under specific category.
+- **`subnav`**: Sub-navigation items that appear as header dropdowns
+- **`items`**: Navigation items that appear in the sidebar
 
-For example:
+### Sidebar Navigation Structure
+
+The sidebar navigation supports multiple levels:
+
+```yaml
+  ...
+  items: # Sidebar navigation items
+    - section: Features # Section header
+      icon: features
+      slug: guides/neon-features
+      items: # Section items
+        - title: Serverless
+          slug: introduction/serverless
+        - title: Autoscaling
+          slug: introduction/autoscaling
+          items: # Section subitems
+            - title: Introduction
+              slug: introduction/autoscaling
+            - title: Architecture
+              slug: introduction/autoscaling-architecture
+```
+
+### How to add a new top navigation category
+
+To add a new top-level navigation category, add a new item to the top level array with keys `nav`, `slug`, `title`, `icon`, and optionally `items` or `subnav`.
 
 ```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-+    - title: Subcategory 1
-+      items:
-+        - title: Page 3
-+          slug: page-3
++- nav: New Category
++  slug: new-category
++  title: New Category Title
++  icon: new-icon
++  subnav:
++    ...
+```
+
+### How to add a new section
+
+To add a new section within a navigation category, add a new item with keys `section`, `icon`, and `items`.
+
+```diff
+  ...
+  items:
++   - section: Architecture
++     icon: architecture
++     items:
++       ...
 ```
 
 ### How to add a new page
 
-In order to add a new page to the root level, add `slug` in the same level with `title`. You can add `tag` as well if your page is tagged.
+To add a new page, add a new item with keys `title` and `slug` under the appropriate section or navigation level.
 
-```diff yaml
- - title: Root page 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Root page 2
-   items:
-     - title: Page 2
-       slug: page-2
-+ - title: Root page 1
-+   slug: root-page-1
-+   items:
-+     - title: Page 1
-+       slug: page-1
-+       tag: coming soon
-+ - title: Root page 2
-+   slug: root-page-2
-+   items:
-+     - title: Page 2
-+       slug: page-2
-
+```diff
+  ...
+  items:
++   - title: Overview
++     slug: introduction/architecture-overview
 ```
 
-In order to add new page under Category, add a new item to `items` array with keys `title` and `slug` under specific category or subcategory:
+### Navigation Properties
 
-For example:
+- `nav`: The label displayed in the top navigation header
+- `slug`: The URL path for the page/section
+- `title`: The display title for the page/section
+- `icon`: Icon identifier for visual representation
+- `section`: Section header for grouping related items
+- `items`: Array of navigation items
+- `subnav`: Sub-navigation items for the sidebar
+- `tag`: Optional tag (e.g., "new", "beta") displayed next to the title
 
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-+   - title: Page 5
-+     slug: page-5
-```
+### Important Notes
 
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-
-### How to add a single page to doc sidebar
-
-To add a single page <https://example.com/changelog> to the docs sidebar, add the boolean `isStandalone` to the first level of the list
-
-- `title` in the sidebar may differ from `title` in Markdown file.
-- `slug` should always match page's slug.
-- `isStandalone` - the boolean for the single page in sidebar.
-
-```diff yaml
-+- title: Changelog
-+  slug: changelog
-+  isStandalone: true
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-```
+- `title` in the sidebar may differ from `title` in the Markdown file
+- `slug` should always match the page's slug
+- The navigation supports unlimited nesting levels for complex documentation structures
+- Icons are referenced by name and should match available icon components
+- Tags like "new" or "beta" are automatically displayed with special styling
 
 ## Code blocks
 

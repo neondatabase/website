@@ -37,6 +37,7 @@
     "@next/bundle-analyzer": "^14.2.2",
     "@octokit/core": "^6.1.2",
     "@prisma/client": "^5.19.1",
+    "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-toast": "^1.2.2",
     "@radix-ui/react-tooltip": "^1.1.4",
@@ -99,6 +100,7 @@
     "tailwindcss-safe-area": "^0.5.1",
     "unique-username-generator": "^1.4.0",
     "unist-util-visit": "^5.0.0",
+    "vaul": "^1.1.2",
     "yup": "^1.4.0"
   },
   "devDependencies": {
