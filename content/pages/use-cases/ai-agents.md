@@ -6,7 +6,7 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-From fast-paced prompting to launch, your users want to build and deploy apps, they shouldn't have to think about databases. Industry-leading AI Agent Codegen Platforms like Replit, V0, and many more provision and operate full-stack applications using Neon because it works seamlessly with new usage patterns of AI-generated apps. 
+If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit amd V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
 **Neon Features for Agents:**
 

@@ -43,7 +43,7 @@ const ProgramForm = ({ type }) => {
         if (!isRecognized && email) {
           sendGtagEvent('identify', { email });
         }
-        sendGtagEvent(eventName, {});
+        sendGtagEvent(eventName, { email, url });
       }
       setIsSent(true);
     }
