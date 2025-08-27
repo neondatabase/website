@@ -69,6 +69,8 @@ This method uses Neon's managed server and OAuth authentication.
    ```
 4. You can also trigger authentication with `/mcp` within Claude Code.
 
+<Admonition type="tip">
+
 If you prefer to authenticate using a Neon API key, provide the `Authorization` header to the `mcp add` command:
 
 ```sh
@@ -76,7 +78,9 @@ claude mcp add --transport http neon https://mcp.neon.tech/mcp \
     --header "Authorization: Bearer <YOUR_NEON_API_KEY>"
 ```
 
-> Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
+Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section.
+
+</Admonition>
 
 <Admonition type="note">
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
