@@ -107,7 +107,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
             className={clsx(
               'relative flex w-max min-w-40 flex-col gap-4 rounded-lg border p-4',
               'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]',
-              'dark:border-gray-new-15 dark:bg-gray-new-8 dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
+              'dark:border-gray-new-15 dark:bg-black-new dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
             )}
           >
             {subnav.map((item, index) => (

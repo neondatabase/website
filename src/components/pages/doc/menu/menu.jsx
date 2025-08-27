@@ -20,7 +20,7 @@ const Menu = ({
 }) => (
   <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
-      className="flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight"
+      className="flex items-center gap-2 text-[15px] font-medium leading-snug tracking-extra-tight"
       to={`${basePath}${slug}`}
       theme="blue-green"
     >
