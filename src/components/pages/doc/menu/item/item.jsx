@@ -51,7 +51,7 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group relative flex w-full gap-2 py-[7px] pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+          'group relative flex w-full gap-2 py-2 pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           isActive && !items?.length
             ? 'font-medium text-secondary-8 dark:text-primary-1'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',

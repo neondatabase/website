@@ -18,7 +18,7 @@ const Menu = ({
   closeMobileMenu = null,
   customType = null,
 }) => (
-  <div className="flex w-full flex-col gap-8 lg:px-8 lg:pt-4 md:px-5">
+  <div className="flex w-full flex-col gap-6 lg:px-8 lg:pt-4 md:px-5">
     <Link
       className="flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight"
       to={`${basePath}${slug}`}
@@ -32,8 +32,8 @@ const Menu = ({
       {items?.map((item, index) => {
         if (item.section) {
           return (
-            <li className="mt-6 first:mt-0" key={index}>
-              <div className="mb-[9px] flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight">
+            <li className="mt-4 first:mt-0" key={index}>
+              <div className="my-2 flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight">
                 {item.icon && <Icon title={item.icon} className="size-4.5 shrink-0" />}
                 {item.section}
               </div>
