@@ -300,7 +300,11 @@ export const todos = pgTable(
 
 This example demonstrates how `pgPolicy` gives you precise, command-level control over your security rules, making it easy to implement complex business logic directly in your database schema.
 
-## Common RLS Patterns
+### Securing database views with RLS
+
+Row-Level Security (RLS) can also be enabled on Postgres views, allowing you to control access to view data at the row level. For details on how to enable RLS on views and apply policies using Drizzle, refer to the [Drizzle documentation](https://orm.drizzle.team/docs/rls#rls-on-views). This approach makes it possible to expose curated or joined subsets of your data while ensuring users only see the rows they are authorized to access.
+
+## Common RLS patterns
 
 Using `crudPolicy` and `pgPolicy`, you can implement a variety of security models. Here are some of the most common ones:
 
