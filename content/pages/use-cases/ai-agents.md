@@ -10,9 +10,9 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 **Neon Features for Agents:**
 
-- **Instant Provisioning:** your users never wait for infrastructure. 
+- **Instant Provisioning:** your users never wait for infrastructure.
 - **Snapshots:** let users toggle between checkpoints of code and state together.
-- **Low cost-per-Database:**  automatic scale to zero and 350ms cold starts.
+- **Low cost-per-Database:** automatic scale to zero and 350ms cold starts.
 - **Full-Stack, Batteries-Included:** Neon Auth, Data API included at no added charge.
 - **Granular API Controls:** Track and control usage for flexible limits and invoicing.
 
@@ -30,21 +30,21 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 ## Agent Plan Pricing
 
-|               | Agent Plan |
-| ------------- | ------------- |
-| Projects      |   **Unlimited**  <br/> _Agents create a new project for each user application._|
-| Branches per Project  | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute | from **$0.14 per CU-hour** <br/> _Same as Launch/Scale_ |
-| Storage | **$0.35 per GB-month** <br/> _Same as Launch/Scale_ |
-| Instant Restore (PITR) | **$0.2 per GB-month** <br/> _Same as Launch/Scale_ |
-| Neon Auth | **Included** <br/> _All-in-one API for handling user signup and management in Neon_  |
-| Management API | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_ |
-| Data API (PostgREST) | **Higher Rate Limits Available** |
-| Support | **Shared Slack Channel** |
-| <br/>**Agent Incentives** |  |
-| **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier. |
-| **General Use Credits** | Up to $30K in credits for those not eligible for the [Startup Program](/startups). |
-| **Co-Marketing** | Blog and Social promotions, hackathons and more. |
+|                            | Agent Plan                                                                                            |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Projects                   | **Unlimited** <br/> _Agents create a new project for each user application._                          |
+| Branches per Project       | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
+| Compute                    | from **$0.14 per CU-hour** <br/> _Same as Launch/Scale_                                               |
+| Storage                    | **$0.35 per GB-month** <br/> _Same as Launch/Scale_                                                   |
+| Instant Restore (PITR)     | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
+| Neon Auth                  | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
+| Management API             | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
+| Data API (PostgREST)       | **Higher Rate Limits Available**                                                                      |
+| Support                    | **Shared Slack Channel**                                                                              |
+| <br/>**Agent Incentives**  |                                                                                                       |
+| **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
+| **General Use Credits**    | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
+| **Co-Marketing**           | Blog and Social promotions, hackathons and more.                                                      |
 
 ## How It Works
 
@@ -56,7 +56,6 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 > **AI Agents are now provisioning 80% of Neon databases (tens of thousands per day)**
 
-
 The scale is massive, and Neon is built to handle it.
 
 The [Neon MCP server](https://mcp.neon.tech/) enables any client to interact with Neon's API using natural language. AI agents can use Neon's MCP server to automate tasks such as creating databases, running SQL queries, and managing database migrations. 
@@ -66,4 +65,5 @@ The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) is a lightw
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
 ## Application Form
+
 <ProgramForm type="agent" />
