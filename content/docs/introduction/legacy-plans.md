@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-05-30T16:54:40.485Z'
+updatedOn: '2025-08-27T11:57:55.857Z'
 ---
 
 This page documents Neon’s **legacy plans**. These plans are not available for new signups. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won’t be able to switch back.
@@ -31,7 +31,7 @@ The legacy Free plan is best suited for hobby projects, prototypes, and learning
 
 | Usage type                 | Plan allowance                                                           |
 | :------------------------- | :----------------------------------------------------------------------- |
-| **Projects**               | 10 Neon projects                                                         |
+| **Projects**               | 20 projects                                                              |
 | **Branches**               | 10 branches per project                                                  |
 | **Databases**              | 500 per branch                                                           |
 | **Storage**                | 0.5 GB-month (regular and archive storage combined)                      |
