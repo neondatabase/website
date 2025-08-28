@@ -1,6 +1,6 @@
 # Get started with Neon on Azure
 
-> The document guides users through the process of setting up and deploying Neon on Microsoft Azure, detailing the necessary steps and configurations specific to integrating Neon with Azure services.
+> The document "Get started with Neon on Azure" guides users through the process of deploying and managing Neon databases on the Azure cloud platform, detailing setup, configuration, and integration steps specific to Azure's environment.
 
 ## Source
 
@@ -25,7 +25,7 @@ After subscribing, you will be directed to the [Create a Neon Resource](https://
    | **Resource Name**          | Enter a name for Neon resource. This name is used only in Azure.                                                                                                                                                                                                                                                                      |
    | **Region**                 | Select a region to deploy your resource. Neon Serverless Postgres will let you choose a region while creating a project.                                                                                                                                                                                                              |
    | **Neon Organization name** | The name you assign to your [Neon Organization](https://neon.com/docs/reference/glossary#organization), such as a team name or company name. The name you specify appears as your [Organization](https://neon.com/docs/reference/glossary#organization) name in the Neon Console.                                                                                     |
-   | **Pricing Plan**           | Select a plan. For information about Neon's plans, please refer to the [Neon Pricing](https://neon.com/pricing) page. Neon offers a Free Plan and paid plans (**Scale** and **Business**) you can choose from.                                                                                                                                        |
+   | **Pricing Plan**           | Select a plan. For information about Neon's plans, please refer to the [Neon Pricing](https://neon.com/pricing) page. Neon offers a Free plan and paid plans you can choose from.                                                                                                                                                                     |
 
        **Note**: The Neon **Launch Plan** is currently not available in the Azure Marketplace.
 

@@ -1,6 +1,6 @@
 # Neon Postgres
 
-> Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [generous free plan](https://console.neon.tech)
+> Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
 
 ## Docs
 
@@ -12,7 +12,6 @@
 - [Azure Marketplace](https://neon.com/llms/introduction-billing-azure-marketplace.txt): Neon as an Azure Native Service offers unified billing through Azure Marketplace
 - [Branching](https://neon.com/llms/introduction-branching.txt): Branch your data the same way you branch your code
 - [Compute lifecycle](https://neon.com/llms/introduction-compute-lifecycle.txt): Compute Lifecycle
-- [Extra usage](https://neon.com/llms/introduction-extra-usage.txt): Learn how extra usage works in Neon's pricing plans
 - [High Availability (HA) in Neon](https://neon.com/llms/introduction-high-availability.txt): Understanding Neon's approach to High Availability
 - [IP Allow](https://neon.com/llms/introduction-ip-allow.txt): Limit database access to trusted IP addresses
 - [Instant restore](https://neon.com/llms/introduction-branch-restore.txt): Learn how to revert changes or recover lost data using Neon's instant restore with Time Travel Assist
@@ -20,7 +19,7 @@
 - [Logical replication](https://neon.com/llms/introduction-logical-replication.txt): Replicate data to and from your Neon Postgres database
 - [Manage billing](https://neon.com/llms/introduction-manage-billing.txt): Invoices, payment methods, changing your plan, and other actions around managing your bill
 - [Monitor active queries](https://neon.com/llms/introduction-monitor-active-queries.txt): View and analyze running queries in your database
-- [Monitor billing and usage](https://neon.com/llms/introduction-monitor-usage.txt): Monitor billing and usage metrics for your account and projects from the console or API
+- [Monitor billing and usage](https://neon.com/llms/introduction-monitor-usage.txt): Monitor billing and usage for your account and projects
 - [Monitor query history](https://neon.com/llms/introduction-monitor-query-history.txt): View and analyze query history for your Neon database
 - [Monitoring Neon with external tools](https://neon.com/llms/introduction-monitor-external-tools.txt): Monitor your Neon Postgres database with external tools such as PgAdmin or PgHero
 - [Monitoring dashboard](https://neon.com/llms/introduction-monitoring-page.txt): Monitoring Page
@@ -28,37 +27,21 @@
 - [Neon Enterprise Sales Process](https://neon.com/llms/introduction-enterprise-sales-process.txt): A guide to Neon's Enterprise sales process
 - [Neon Read Replicas](https://neon.com/llms/introduction-read-replicas.txt): Scale your app, run ad-hoc queries, and provide read-only access without duplicating data
 - [Neon architecture](https://neon.com/llms/introduction-architecture-overview.txt): Architecture Overview
-- [Neon plans](https://neon.com/llms/introduction-plans.txt): Learn about the different plans offered by Neon
+- [Neon legacy plans](https://neon.com/llms/introduction-legacy-plans.txt): Legacy Plans
+- [Neon plans](https://neon.com/llms/introduction-plans.txt): Plans
 - [Neon status](https://neon.com/llms/introduction-status.txt): Stay informed about the performance and availability of Neon
-- [Plans and billing](https://neon.com/llms/introduction-about-billing.txt): Learn about Neon's pricing plans and billing
-- [Pricing estimation guide](https://neon.com/llms/introduction-pricing-estimation-guide.txt): Estimate your monthly bill with Neon
+- [Plans and billing](https://neon.com/llms/introduction-about-billing.txt): Learn about Neon's pricing plans and how to manage billing
 - [Regions](https://neon.com/llms/introduction-regions.txt): Regions
 - [Roadmap](https://neon.com/llms/introduction-roadmap.txt): Roadmap
-- [Sample project billing](https://neon.com/llms/introduction-billing-sample.txt): Practical example of how Neon pricing is calculated
 - [Scale to Zero](https://neon.com/llms/introduction-scale-to-zero.txt): Minimize costs by automatically scaling inactive databases to zero
 - [Serverless](https://neon.com/llms/introduction-serverless.txt): Postgres with instant provisioning, no server management, and pay-per-usage billing
 - [Support](https://neon.com/llms/introduction-support.txt): Support
-- [Usage metrics](https://neon.com/llms/introduction-usage-metrics.txt): Usage Metrics
-
-## Get Started With Neon
-
-- [Connecting Neon to your stack](https://neon.com/llms/get-started-connect-neon.txt): Learn how to integrate Neon into your application
-- [Database branching workflow primer](https://neon.com/llms/get-started-workflow-primer.txt): An introduction to integrating Postgres branching into your development workflow
-- [Developer experience with Neon](https://neon.com/llms/get-started-dev-experience.txt): Enhancing development workflows with Neon
-- [Get started with Neon on Azure](https://neon.com/llms/get-started-azure-get-started.txt): Learn how to deploy Neon as a native service on Azure
-- [Getting ready for production](https://neon.com/llms/get-started-production-checklist.txt): A checklist of recommended settings to optimize performance, security, and reliability
-- [Neon ORM guides](https://neon.com/llms/get-started-orms.txt): Find detailed instructions for connecting to Neon from various ORMs
-- [Neon framework guides](https://neon.com/llms/get-started-frameworks.txt): Find detailed instructions for connecting to Neon from various frameworks
-- [Neon language guides](https://neon.com/llms/get-started-languages.txt): Find detailed instructions for connecting to Neon from various languages
-- [Playing with Neon](https://neon.com/llms/get-started-signing-up.txt): Sign up for free and learn the basics of database branching with Neon
-- [Production readiness with Neon](https://neon.com/llms/get-started-production-readiness.txt): Neon features for real-world workloads
-- [Query with Neon's SQL Editor](https://neon.com/llms/get-started-query-with-neon-sql-editor.txt): Query your database from the Neon Console using the Neon SQL Editor
-- [Why Neon?](https://neon.com/llms/get-started-why-neon.txt): Neon is Serverless Postgres built for the cloud
 
 ## Connect
 
 - [About Connection pooling](https://neon.com/llms/connect-connection-pooling.txt): Learn how connection pooling works in Neon
 - [Choosing your driver and connection type](https://neon.com/llms/connect-choose-connection.txt): How to select the right driver and connection type for your application
+- [Connect Looker Studio to Neon](https://neon.com/llms/connect-connect-looker-studio.txt): Learn how to connect your Neon Postgres database to Looker Studio
 - [Connect a GUI application](https://neon.com/llms/connect-connect-postgres-gui.txt): Learn how to connect a GUI application to Neon
 - [Connect from any application](https://neon.com/llms/connect-connect-from-any-app.txt): Learn how to connect to Neon from any application
 - [Connect to Neon](https://neon.com/llms/connect-connect-intro.txt): Everything you need to know about connecting to Neon
@@ -84,6 +67,7 @@
 - [Migrate from Microsoft SQL Server to Neon Postgres](https://neon.com/llms/import-migrate-mssql.txt): Learn how to migrate a Microsoft SQL Server database to Neon Postgres using pgloader
 - [Migrate from MySQL to Neon Postgres](https://neon.com/llms/import-migrate-mysql.txt): Migrate Mysql
 - [Migrate from Render to Neon Postgres](https://neon.com/llms/import-migrate-from-render.txt): Learn how to migrate your database from Render to Neon Postgres using pg_dump and pg_restore
+- [Migrate from SQLite to Neon Postgres](https://neon.com/llms/import-migrate-sqlite.txt): Migrate Sqlite
 - [Migrate from Supabase to Neon Postgres](https://neon.com/llms/import-migrate-from-supabase.txt): Learn how to migrate your database from Supabase to Neon Postgres using pg_dump and pg_restore
 - [Migrate with AWS Database Migration Service (DMS)](https://neon.com/llms/import-migrate-aws-dms.txt): Migrate Aws Dms
 - [Neon data migration guides](https://neon.com/llms/import-migrate-intro.txt): Learn how to migrate data to Neon Postgres from different database providers and sources
@@ -124,22 +108,21 @@
 
 ## Guides
 
-- [About Neon RLS](https://neon.com/llms/guides-neon-rls.txt): Secure your application at the database level using Postgres's Row-Level Security
 - [Anonymize data with Neosync](https://neon.com/llms/guides-neosync-anonymize.txt): Learn how to anonymize sensitive data in Neon with Neosync
 - [Authenticate Neon Postgres application users with Auth.js](https://neon.com/llms/guides-auth-authjs.txt): Learn how to add passwordless authentication to your Neon Postgres database application using Auth.js and Resend
 - [Authenticate Neon Postgres application users with Auth0](https://neon.com/llms/guides-auth-auth0.txt): Learn how to add authentication to a Neon Postgres database application using Auth0
 - [Authenticate Neon Postgres application users with Clerk](https://neon.com/llms/guides-auth-clerk.txt): Learn how to add authentication to a Neon Postgres database application using Clerk
 - [Authenticate Neon Postgres application users with Okta](https://neon.com/llms/guides-auth-okta.txt): Learn how to add authentication to a Neon Postgres database application with Okta
 - [Automate branching with GitHub Actions](https://neon.com/llms/guides-branching-github-actions.txt): Create and delete branches with GitHub Actions
-- [Backup & Restore](https://neon.com/llms/guides-backup-restore.txt): Restore your branch from a point in time or snapshot
+- [Backup & restore](https://neon.com/llms/guides-backup-restore.txt): Restore your branch from a point in time or snapshot
 - [Benchmarking latency in Neon's serverless Postgres](https://neon.com/llms/guides-benchmarking-latency.txt): Techniques for obtaining meaningful latency data in serverless database environments
 - [Branch archiving](https://neon.com/llms/guides-branch-archiving.txt): Learn how Neon automatically archives inactive branches to cost-effective storage
+- [Branch expiration](https://neon.com/llms/guides-branch-expiration.txt): Learn how to use Neon's branch expiration feature to automatically delete temporary branches
 - [Branching with the Neon API](https://neon.com/llms/guides-branching-neon-api.txt): Learn how to create and delete branches with the Neon API
 - [Branching with the Neon CLI](https://neon.com/llms/guides-branching-neon-cli.txt): Learn how to create and delete branches with the Neon CLI
 - [Branching — Testing queries](https://neon.com/llms/guides-branching-test-queries.txt): Create a Neon branch to test queries before running them in production
 - [Build a Python App with Reflex and Neon](https://neon.com/llms/guides-reflex.txt): Learn how to build a Python Full Stack application with Reflex and Neon
 - [Chat with Neon Postgres with AskYourDatabase](https://neon.com/llms/guides-askyourdatabase.txt): Chat with your Neon Postgres database without writing SQL
-- [Claiming a Neon Auth project](https://neon.com/llms/guides-neon-auth-claim-project.txt): Neon Auth Claim Project
 - [Configure consumption limits](https://neon.com/llms/guides-consumption-limits.txt): Learn how to set consumption limits per project with the Neon API
 - [Configuring Scale to Zero for Neon computes](https://neon.com/llms/guides-scale-to-zero-guide.txt): Learn how to configure Neon's Scale to Zero feature
 - [Connect Astro to Postgres on Neon](https://neon.com/llms/guides-astro.txt): Learn how to make server-side queries to Postgres from .astro files or API routes.
@@ -149,25 +132,26 @@
 - [Connect Quarkus (JDBC) to Neon](https://neon.com/llms/guides-quarkus-jdbc.txt): Learn how to connect to Neon from Quarkus using JDBC
 - [Connect Quarkus (Reactive) to Neon](https://neon.com/llms/guides-quarkus-reactive.txt): Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 - [Connect Vercel and Neon manually](https://neon.com/llms/guides-vercel-manual.txt): Learn how to connect a Vercel project to a Neon database manually
-- [Connect a .NET (C#) application to Neon](https://neon.com/llms/guides-dotnet-npgsql.txt): Set up a Neon project in seconds and connect from a .NET (C#) application
+- [Connect a .NET (C#) application to Neon Postgres](https://neon.com/llms/guides-dotnet-npgsql.txt): Learn how to run SQL queries in Neon from .NET using the Npgsql library
 - [Connect a Bun application to Neon](https://neon.com/llms/guides-bun.txt): Set up a Neon project in seconds and connect from a Bun application
 - [Connect a Django application to Neon](https://neon.com/llms/guides-django.txt): Set up a Neon project in seconds and connect from a Django application
-- [Connect a Go application to Neon](https://neon.com/llms/guides-go.txt): Set up a Neon project in seconds and connect from a Go application
+- [Connect a Go application to Neon Postgres](https://neon.com/llms/guides-go.txt): Learn how to run SQL queries in Neon from Go using the pgx library
 - [Connect a Hono application to Neon](https://neon.com/llms/guides-hono.txt): Set up a Neon project in seconds and connect from a Hono application
-- [Connect a Java application to Neon](https://neon.com/llms/guides-java.txt): Set up a Neon project in seconds and connect with JDBC or Spring Data
-- [Connect a JavaScript application to Neon](https://neon.com/llms/guides-javascript.txt): Set up a Neon project in seconds and connect from a JavaScript application
+- [Connect a Java application to Neon Postgres](https://neon.com/llms/guides-java.txt): Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC driver
+- [Connect a JavaScript/Node.js application to Neon Postgres](https://neon.com/llms/guides-javascript.txt): Learn how to run SQL queries in Neon from JavaScript using pg, postgres.js, or the Neon serverless driver
 - [Connect a NestJS application to Neon](https://neon.com/llms/guides-nestjs.txt): Set up a Neon project in seconds and connect from a NestJS application
 - [Connect a Next.js application to Neon](https://neon.com/llms/guides-nextjs.txt): Set up a Neon project in seconds and connect from a Next.js application
 - [Connect a Node.js application to Neon](https://neon.com/llms/guides-node.txt): Set up a Neon project in seconds and connect from a Node.js application
-- [Connect a Python application to Neon using Psycopg](https://neon.com/llms/guides-python.txt): Set up a Neon project in seconds and connect from a Python application using Psycopg
+- [Connect a Python application to Neon Postgres](https://neon.com/llms/guides-python.txt): Learn how to run SQL queries in Neon from Python using psycopg2 or asyncpg
 - [Connect a React application to Neon](https://neon.com/llms/guides-react.txt): Set up a Neon project in seconds and connect from a React application
 - [Connect a RedwoodSDK application to Neon](https://neon.com/llms/guides-redwoodsdk.txt): Set up a Neon project in seconds and connect from a Redwood application
 - [Connect a Remix application to Neon](https://neon.com/llms/guides-remix.txt): Set up a Neon project in seconds and connect from a Remix application
 - [Connect a Ruby on Rails application to Neon Postgres](https://neon.com/llms/guides-ruby-on-rails.txt): Set up a Neon project in seconds and connect from a Ruby on Rails application
-- [Connect a Rust application to Neon](https://neon.com/llms/guides-rust.txt): Set up a Neon project in seconds and connect from a Rust application
+- [Connect a Rust application to Neon Postgres](https://neon.com/llms/guides-rust.txt): Learn how to run SQL queries in Neon from Rust using the postgres or tokio-postgres crates
 - [Connect a SolidStart application to Neon](https://neon.com/llms/guides-solid-start.txt): Set up a Neon project in seconds and connect from a SolidStart application
 - [Connect a Sveltekit application to Neon](https://neon.com/llms/guides-sveltekit.txt): Set up a Neon project in seconds and connect from a Sveltekit application
 - [Connect a Vue.js application to Neon](https://neon.com/llms/guides-vue.txt): Set up a Neon project in seconds and connect from a Vue.js application
+- [Connect an Elixir application to Neon Postgres](https://neon.com/llms/guides-elixir.txt): Learn how to run SQL queries in Neon from Elixir using Postgrex
 - [Connect an Entity Framework application to Neon](https://neon.com/llms/guides-dotnet-entity-framework.txt): Set up a Neon project in seconds and connect from an Entity Framework application
 - [Connect an Express application to Neon](https://neon.com/llms/guides-express.txt): Set up a Neon project in seconds and connect from an Express application
 - [Connect an SQLAlchemy application to Neon](https://neon.com/llms/guides-sqlalchemy.txt): Set up a Neon project in seconds and connect from an SQLAlchemy application
@@ -181,11 +165,13 @@
 - [Connect from Prisma to Neon](https://neon.com/llms/guides-prisma.txt): Learn how to connect to Neon from Prisma
 - [Connect from Symfony with Doctrine to Neon](https://neon.com/llms/guides-symfony.txt): Set up a Neon project in seconds and connect from Symfony with Doctrine
 - [Connect from TypeORM to Neon](https://neon.com/llms/guides-typeorm.txt): Learn how to connect to Neon from TypeORM
+- [Connecting with the Neon-Managed Integration](https://neon.com/llms/guides-neon-managed-vercel-integration.txt): Link an existing Neon project to Vercel and keep billing in Neon
+- [Connecting with the Vercel-Managed Integration](https://neon.com/llms/guides-vercel-managed-integration.txt): Create and manage Neon databases directly from your Vercel dashboard
 - [Create a Neon Twin](https://neon.com/llms/guides-neon-twin-intro.txt): Learn how to Twin your production database with Neon
 - [Create a REST API from Postgres with PostgREST](https://neon.com/llms/guides-postgrest.txt): Generate a REST API automatically from your Neon Postgres database schema
 - [Create an automatic audit trail with Bemi](https://neon.com/llms/guides-bemi.txt): Learn how to create an automatic audit trail for your Postgres database with Bemi
 - [Create and manage Read Replicas](https://neon.com/llms/guides-read-replica-guide.txt): Learn how to create and manage read replicas in Neon
-- [Creating users with Neon Auth](https://neon.com/llms/guides-neon-auth-create-users.txt): Neon Auth Create Users
+- [Datadog integration](https://neon.com/llms/guides-datadog.txt): Send metrics and logs from Neon Postgres to Datadog
 - [Deploy Your Node.js App with Neon Postgres on Heroku](https://neon.com/llms/guides-heroku.txt): A step-by-step guide to deploying a Node application with a Neon Postgres database on Heroku
 - [Enable Autoscaling in Neon](https://neon.com/llms/guides-autoscaling-guide.txt): Autoscaling Guide
 - [File storage](https://neon.com/llms/guides-file-storage.txt): Store files in external object storage and file management services and track metadata in Neon
@@ -199,15 +185,15 @@
 - [Get started with Liquibase and Neon](https://neon.com/llms/guides-liquibase.txt): Learn how to manage schema changes in Neon with Liquibase
 - [Get started with branching](https://neon.com/llms/guides-branching-intro.txt): Everything you need to get started with Neon's branching feature
 - [Get started with logical replication](https://neon.com/llms/guides-logical-replication-guide.txt): Learn how to replicate data to and from your Neon Postgres database
-- [Get started with your integration](https://neon.com/llms/guides-partner-get-started.txt): Learn the essentials and key steps for integrating with Neon
-- [How Neon Auth works](https://neon.com/llms/guides-neon-auth-how-it-works.txt): Neon Auth How It Works
+- [Get started with your integration](https://neon.com/llms/guides-platform-integration-get-started.txt): Learn the essentials and key steps for integrating with Neon
+- [Grafana Cloud integration](https://neon.com/llms/guides-grafana-cloud.txt): Send metrics and logs from Neon Postgres to Grafana Cloud
 - [Install the Neon Postgres Native Integration on Vercel](https://neon.com/llms/guides-vercel-native-integration.txt): Add Neon Postgres storage to your Vercel project as a first-party native integration
 - [Install the Neon Postgres Previews Integration on Vercel](https://neon.com/llms/guides-vercel-previews-integration.txt): Create a database branch for each preview deployment in Vercel
+- [Integrating Neon with Vercel](https://neon.com/llms/guides-vercel-overview.txt): Choose the right connection path in seconds
 - [Liquibase developer workflow with Neon](https://neon.com/llms/guides-liquibase-workflow.txt): Implement a developer workflow with Liquibase and Neon branching
 - [Logical replication commands](https://neon.com/llms/guides-logical-replication-manage.txt): Commands for managing your logical replication configuration
 - [Logical replication in Neon](https://neon.com/llms/guides-logical-replication-neon.txt): Information about logical replication specific to Neon
 - [Logical replication tips](https://neon.com/llms/guides-logical-replication-tips.txt): Learn how to optimize for logical replication
-- [Manage Neon Auth using the API](https://neon.com/llms/guides-neon-auth-api.txt): Neon Auth Api
 - [Manage database access](https://neon.com/llms/guides-manage-database-access.txt): Learn how to manage user access to databases in your Neon project
 - [Manage multiple database environments](https://neon.com/llms/guides-flyway-multiple-environments.txt): Learn how to manage schemas for multiple database environments with Flyway
 - [Managing schema changes in a logical replication setup](https://neon.com/llms/guides-logical-replication-schema-changes.txt): Learn about managing schema changes in a logical replication setup
@@ -216,21 +202,14 @@
 - [Media storage with ImageKit.io](https://neon.com/llms/guides-imagekit.txt): Store files via ImageKit.io and track metadata in Neon
 - [Media storage with Uploadcare](https://neon.com/llms/guides-uploadcare.txt): Store files via Uploadcare and track metadata in Neon
 - [Multitenancy with Neon](https://neon.com/llms/guides-multitenancy.txt): How to configure Neon for multitenancy - plus a few design tips
-- [Neon Auth](https://neon.com/llms/guides-neon-auth.txt): Add authentication to your project. Access user data directly in your Postgres database.
-- [Neon Auth Demo](https://neon.com/llms/guides-neon-auth-demo.txt): Learn how automatic user profile sync can simplify your auth workflow
-- [Neon Auth best practices & FAQ](https://neon.com/llms/guides-neon-auth-best-practices.txt): Neon Auth Best Practices
-- [Neon Auth concepts](https://neon.com/llms/guides-neon-auth-tutorial.txt): See how Neon Auth eliminates the complexity of manual user data synchronization, making your development faster and your applications more robust.
 - [Neon OAuth integration](https://neon.com/llms/guides-oauth-integration.txt): Oauth Integration
 - [Neon Private Networking](https://neon.com/llms/guides-neon-private-networking.txt): Learn how to connect to your Neon database via AWS PrivateLink
-- [Neon RLS roadmap](https://neon.com/llms/guides-neon-rls-future.txt): Learn about upcoming features and improvements for Neon RLS
-- [Neon RLS tutorial](https://neon.com/llms/guides-neon-rls-tutorial.txt): Learn how Row-level Security (RLS) protects user data
-- [Neon and Vercel overview](https://neon.com/llms/guides-vercel-overview.txt): Learn about different options for integrating Neon with Vercel
 - [Neon feature guides](https://neon.com/llms/guides-neon-features.txt): Explore Neon's capabilities with our feature guides
 - [Neon for Database-per-user](https://neon.com/llms/guides-database-per-user.txt): How to configure Neon for multi-tenancy - plus a few design tips
 - [Neon integration guides](https://neon.com/llms/guides-integrations.txt): Find detailed instructions for integration across various platforms and services.
+- [OpenTelemetry](https://neon.com/llms/guides-opentelemetry.txt): Send Neon metrics and Postgres logs to any OTEL-compatible observability platform
 - [Partial Twin](https://neon.com/llms/guides-neon-twin-partial-pg-dump-restore.txt): Create a partial Twin of your production database
-- [Partner guide](https://neon.com/llms/guides-partner-intro.txt): Learn how to integrate your platform or service with Neon
-- [Permissions & roles in Neon Auth](https://neon.com/llms/guides-neon-auth-permissions-roles.txt): Neon Auth Permissions Roles
+- [Platform integration guide](https://neon.com/llms/guides-platform-integration-intro.txt): Learn how to integrate your platform or service with Neon
 - [Postgres logical replication concepts](https://neon.com/llms/guides-logical-replication-concepts.txt): Learn about PostgreSQL logical replication concepts
 - [Project collaboration](https://neon.com/llms/guides-project-collaboration-guide.txt): Learn how to invite people to collaborate on your Neon project
 - [Protected branches](https://neon.com/llms/guides-protected-branches.txt): Learn how to use Neon's protected branches feature to secure your critical data
@@ -253,6 +232,7 @@
 - [Replicate data with Inngest](https://neon.com/llms/guides-logical-replication-inngest.txt): Learn how to replicate data from Neon with Inngest
 - [Replicate data with Kafka (Confluent) and Debezium](https://neon.com/llms/guides-logical-replication-kafka-confluent.txt): Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
 - [Reset from parent](https://neon.com/llms/guides-reset-from-parent.txt): Learn how to reset a branch from its parent
+- [Row-Level Security with Neon](https://neon.com/llms/guides-row-level-security.txt): How Neon features use Postgres Row-Level Security
 - [Run ad-hoc queries with Read Replicas](https://neon.com/llms/guides-read-replica-adhoc-queries.txt): Leverage read replicas for running ad-hoc queries
 - [Run analytics queries with Read Replicas](https://neon.com/llms/guides-read-replica-data-analysis.txt): Leverage read replicas for running data-intensive analytics queries
 - [Scale your application with Read Replicas](https://neon.com/llms/guides-read-replica-integrations.txt): Scale your app with read replicas using built-in framework support
@@ -267,31 +247,15 @@
 - [Schema migration with Neon Postgres and SQLAlchemy](https://neon.com/llms/guides-sqlalchemy-migrations.txt): Manage database migrations in your Python project with SQLAlchemy and Alembic
 - [Schema migration with Neon Postgres and Sequelize](https://neon.com/llms/guides-sequelize.txt): Set up Neon Postgres and run migrations for your Javascript project using Sequelize ORM
 - [Schema-only branches](https://neon.com/llms/guides-branching-schema-only.txt): Protect sensitive data with schema-only branches
-- [Secure Your Data with Neon RLS and Firebase or GCP Identity Platform](https://neon.com/llms/guides-neon-rls-google-identity.txt): Implement Row-Level Security in Postgres using Firebase or GCP Identity Platform
-- [Secure your data with AWS Cognito and Neon RLS](https://neon.com/llms/guides-neon-rls-aws-cognito.txt): Implement Row-level Security policies in Postgres using AWS Cognito and Neon RLS
-- [Secure your data with Auth0 and Neon RLS](https://neon.com/llms/guides-neon-rls-auth0.txt): Implement Row-level Security policies in Postgres using Auth0 and Neon RLS
-- [Secure your data with Azure Active Directory and Neon RLS](https://neon.com/llms/guides-neon-rls-azure-ad.txt): Implement Row-level Security policies in Postgres using Azure Active Directory and Neon RLS
-- [Secure your data with Clerk and Neon RLS](https://neon.com/llms/guides-neon-rls-clerk.txt): Implement Row-level Security policies in Postgres using Clerk and Neon RLS
-- [Secure your data with Descope and Neon RLS](https://neon.com/llms/guides-neon-rls-descope.txt): Implement Row-level Security policies in Postgres using Descope and Neon RLS
-- [Secure your data with Firebase and Neon RLS](https://neon.com/llms/guides-neon-rls-firebase-gcp.txt): Implement Row-level Security policies in Postgres using Firebase and Neon RLS
-- [Secure your data with Keycloak and Neon RLS](https://neon.com/llms/guides-neon-rls-keycloak.txt): Implement Row-level Security policies in Postgres using Keycloak and Neon RLS
-- [Secure your data with PropelAuth and Neon RLS](https://neon.com/llms/guides-neon-rls-propelauth.txt): Implement Row-level Security policies in Postgres using PropelAuth and Neon RLS
-- [Secure your data with Stack Auth and Neon RLS](https://neon.com/llms/guides-neon-rls-stack-auth.txt): Implement Row-level Security policies in Postgres using Stack Auth and Neon RLS
-- [Secure your data with Stytch and Neon RLS](https://neon.com/llms/guides-neon-rls-stytch.txt): Implement Row-level Security policies in Postgres using Stytch and Neon RLS
-- [Secure your data with SuperTokens and Neon RLS](https://neon.com/llms/guides-neon-rls-supertokens.txt): Implement Row-level Security policies in Postgres using SuperTokens and Neon RLS
-- [Secure your data with WorkOS and Neon RLS](https://neon.com/llms/guides-neon-rls-workos.txt): Implement Row-level Security policies in Postgres using WorkOS and Neon RLS
-- [Simplify RLS with Drizzle](https://neon.com/llms/guides-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security with Neon RLS
+- [Simplify RLS with Drizzle](https://neon.com/llms/guides-rls-drizzle.txt): Use Drizzle crudPolicy to manage Row-Level Security policies
 - [Stream changes from your Neon database to anywhere](https://neon.com/llms/guides-sequin.txt): Learn how to capture and stream changes and rows from your database to anywhere with Sequin
 - [Stream database changes in real-time with Prisma Pulse](https://neon.com/llms/guides-logical-replication-prisma-pulse.txt): Learn how to create event-driven flows on your backend triggered by changes in your Neon Postgres database
-- [The Neon Datadog integration](https://neon.com/llms/guides-datadog.txt): Send metrics and logs from Neon Postgres to Datadog
 - [The Neon GitHub integration](https://neon.com/llms/guides-neon-github-integration.txt): Connect Neon Postgres to a GitHub repository and build GitHub Actions workflows
 - [Time Travel](https://neon.com/llms/guides-time-travel-assist.txt): Learn how to query point-in-time connections against your data's history
 - [Time Travel tutorial](https://neon.com/llms/guides-time-travel-tutorial.txt): Use Time Travel to analyze changes made to your database over time
 - [Trigger serverless functions](https://neon.com/llms/guides-trigger-serverless-functions.txt): Use Inngest to trigger serverless functions from your Neon database changes
-- [Troubleshooting Neon RLS](https://neon.com/llms/guides-neon-rls-troubleshooting.txt): Common issues and solutions when using Neon RLS
 - [Understanding Neon's autoscaling algorithm](https://neon.com/llms/guides-autoscaling-algorithm.txt): How Neon's algorithm scales resources to match your workload
 - [Use Exograph with Neon](https://neon.com/llms/guides-exograph.txt): Build GraphQL backends in minutes with Exograph and Neon
-- [Use FerretDB with Neon](https://neon.com/llms/guides-ferretdb.txt): Add MongoDB compatibility to your Neon database with FerretDB
 - [Use Grafbase Edge Resolvers with Neon](https://neon.com/llms/guides-grafbase.txt): Learn how to build and deploy serverless GraphQL backends with Grafbase and Neon
 - [Use Neon Postgres with Railway](https://neon.com/llms/guides-railway.txt): Connect a Neon Postgres database to your Node application deployed with Railway
 - [Use Neon Postgres with Render](https://neon.com/llms/guides-render.txt): Connect a Neon Postgres database to your Node application deployed with Render
@@ -304,12 +268,12 @@
 - [Use Neon with Netlify Functions](https://neon.com/llms/guides-netlify-functions.txt): Connect a Neon Postgres database to your Netlify Functions application
 - [Use StepZen with Neon](https://neon.com/llms/guides-stepzen.txt): Learn how to use StepZen to build a GraphQL API for your Neon database
 - [Use WunderGraph with Neon](https://neon.com/llms/guides-wundergraph.txt): Leverage the power of Neon and WunderGraph to build fully serverless apps in minutes
-- [Using Custom JWTs with Neon RLS](https://neon.com/llms/guides-neon-rls-custom-jwt.txt): A step-by-step guide for using custom JWTs with Neon RLS
 - [Vercel Native Integration Previews](https://neon.com/llms/guides-vercel-native-integration-previews.txt): Create a database branch for every preview deployment with Neon's native Vercel integration
-- [Vercel Postgres Transition Guide](https://neon.com/llms/guides-vercel-postgres-transition-guide.txt): Everything you need to know about transitioning from Vercel Postgres to Neon
+- [Vercel Postgres Transition Guide](https://neon.com/llms/guides-vercel-postgres-transition-guide.txt): Your complete guide to the transition from Vercel Postgres to Neon
 
 ## Use Cases
 
+- [Neon for AI Agent Platforms](https://neon.com/llms/use-cases-ai-agents.txt): The purpose-built solution for agents that need databases.
 - [Neon use cases](https://neon.com/llms/use-cases-use-cases-overview.txt): Explore popular Neon use cases
 
 ## Serverless
@@ -319,6 +283,7 @@
 ## Local
 
 - [Neon Local](https://neon.com/llms/local-neon-local.txt): Use Docker environments to connect to Neon and manage branches automatically
+- [Neon Local Connect Extension](https://neon.com/llms/local-neon-local-connect.txt): Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and other editors
 
 ## Ai
 
@@ -326,10 +291,10 @@
 - [AI Rules Neon Serverless Driver](https://neon.com/llms/ai-ai-rules-neon-serverless.txt): Context rules for AI tools to help implement the Neon Serverless driver
 - [AI Rules and Prompts](https://neon.com/llms/ai-ai-rules.txt): Enhance your AI development experience with Neon-specific context rules
 - [AI Rules: Neon Auth](https://neon.com/llms/ai-ai-rules-neon-auth.txt): Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
-- [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
+- [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-neon-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
 - [AI Starter Kit](https://neon.com/llms/ai-ai-intro.txt): Resources for building AI applications with Neon Postgres
 - [Azure Data Studio Notebooks](https://neon.com/llms/ai-ai-azure-notebooks.txt): Use Azure Data Studio Notebooks with Neon for vector similarity search
-- [Connect MCP Clients to Neon](https://neon.com/llms/ai-connect-mcp-clients-to-neon.txt): Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, Windsurf and Zed to your Neon Postgres database.
+- [Connect MCP Clients to Neon](https://neon.com/llms/ai-connect-mcp-clients-to-neon.txt): Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, Windsurf, Zed, and VS Code to your Neon Postgres database.
 - [Google Colab](https://neon.com/llms/ai-ai-google-colab.txt): Use Google Colab with Neon for vector similarity search
 - [Inngest](https://neon.com/llms/ai-inngest.txt): Quickly build AI RAG and Agentic workflows that scale with Inngest and Neon
 - [LangChain](https://neon.com/llms/ai-langchain.txt): Build AI applications faster with LangChain and Postgres
@@ -360,6 +325,7 @@
 - [The ltree extension](https://neon.com/llms/extensions-ltree.txt): Store and query hierarchical tree-like structures in Postgres
 - [The neon extension](https://neon.com/llms/extensions-neon.txt): An extension for Neon-specific statistics including the Local File Cache hit ratio
 - [The neon_utils extension](https://neon.com/llms/extensions-neon-utils.txt): Monitor how Neon's Autoscaling feature allocates compute resources
+- [The online_advisor extension](https://neon.com/llms/extensions-online_advisor.txt): Get index, statistics, and prepared statement recommendations based on your query workload
 - [The pg_cron extension](https://neon.com/llms/extensions-pg_cron.txt): Schedule and manage cron jobs directly within your Neon Postgres database
 - [The pg_graphql extension](https://neon.com/llms/extensions-pg_graphql.txt): Instantly create a GraphQL API for your Postgres database
 - [The pg_mooncake extension](https://neon.com/llms/extensions-pg_mooncake.txt): Fast analytics in Postgres with columnstore tables and DuckDB execution
@@ -454,6 +420,7 @@
 ## Data Api
 
 - [Getting started with Neon Data API](https://neon.com/llms/data-api-get-started.txt): Get Started
+- [Neon Data API tutorial](https://neon.com/llms/data-api-demo.txt): Set up our demo note-taking app to learn about postgrest-js queries
 
 ## Azure
 
@@ -464,6 +431,8 @@
 ## Reference
 
 - [Glossary](https://neon.com/llms/reference-glossary.txt): Glossary
+- [Manage Neon with Terraform](https://neon.com/llms/reference-terraform.txt): Use Terraform to provision and manage your Neon projects, branches, endpoints, roles, databases, and other resources as code.
+- [Metrics and logs reference](https://neon.com/llms/reference-metrics-logs.txt): Complete reference for all metrics and log fields exported by Neon
 - [Neon API](https://neon.com/llms/reference-api-reference.txt): Api Reference
 - [Neon CLI](https://neon.com/llms/reference-neon-cli.txt): Use the Neon CLI to manage Neon directly from the terminal
 - [Neon CLI Quickstart](https://neon.com/llms/reference-cli-quickstart.txt): Get set up with the Neon CLI in just a few steps
@@ -484,7 +453,6 @@
 - [Neon Launchpad](https://neon.com/llms/reference-neon-launchpad.txt): Launch an instant Neon Postgres database with zero configuration
 - [Neon RSS feeds](https://neon.com/llms/reference-feeds.txt): Stay updated with the latest news from Neon
 - [Neon SDKs](https://neon.com/llms/reference-sdk.txt): Sdk
-- [Neon Terraform provider](https://neon.com/llms/reference-terraform.txt): Terraform
 - [Postgres compatibility](https://neon.com/llms/reference-compatibility.txt): Learn about Neon as a managed Postgres service
 - [Python SDK for the Neon API](https://neon.com/llms/reference-python-sdk.txt): Python Sdk
 - [The @neondatabase/toolkit](https://neon.com/llms/reference-neondatabase-toolkit.txt): A terse client for AI agents that can spin up Postgres in seconds and run SQL queries
@@ -499,15 +467,83 @@
 - [Security overview](https://neon.com/llms/security-security-overview.txt): Security overview
 - [Security reporting](https://neon.com/llms/security-security-reporting.txt): Security Reporting
 
-## Community
-
-- [Documentation Contribution Guide](https://neon.com/llms/community-contribution-guide.txt): Learn how to contribute to the Neon documentation
-- [Neon community](https://neon.com/llms/community-community-intro.txt): Learn how to get involved in the Neon community
-
 ## General
 
 - [Changelog](https://neon.com/llms/changelog.txt): Changelog
 - [Neon Docs](https://neon.com/llms/introduction.txt): Introduction to Neon
+
+## Get Started
+
+- [Connecting Neon to your stack](https://neon.com/llms/get-started-connect-neon.txt): Learn how to integrate Neon into your application
+- [Database branching workflow primer](https://neon.com/llms/get-started-workflow-primer.txt): An introduction to integrating Postgres branching into your development workflow
+- [Developer experience with Neon](https://neon.com/llms/get-started-dev-experience.txt): Enhancing development workflows with Neon
+- [Get started with Neon on Azure](https://neon.com/llms/get-started-azure-get-started.txt): Learn how to deploy Neon as a native service on Azure
+- [Getting ready for production](https://neon.com/llms/get-started-production-checklist.txt): A checklist of recommended settings to optimize performance, security, and reliability
+- [Learn the basics](https://neon.com/llms/get-started-signing-up.txt): Sign up for free and learn the basics of database branching with Neon
+- [Neon ORM guides](https://neon.com/llms/get-started-orms.txt): Find detailed instructions for connecting to Neon from various ORMs
+- [Neon framework guides](https://neon.com/llms/get-started-frameworks.txt): Find detailed instructions for connecting to Neon from various frameworks
+- [Neon language guides](https://neon.com/llms/get-started-languages.txt): Find detailed instructions for connecting to Neon from various languages
+- [Production readiness with Neon](https://neon.com/llms/get-started-production-readiness.txt): Neon features for real-world workloads
+- [Query with Neon's SQL Editor](https://neon.com/llms/get-started-query-with-neon-sql-editor.txt): Query your database from the Neon Console using the Neon SQL Editor
+- [Why Neon?](https://neon.com/llms/get-started-why-neon.txt): Neon is Serverless Postgres built for the cloud
+
+## Neon Auth
+
+- [Claiming a Neon Auth project](https://neon.com/llms/neon-auth-claim-project.txt): Claim Project
+- [Creating users with Neon Auth](https://neon.com/llms/neon-auth-create-users.txt): Create Users
+- [Email configuration](https://neon.com/llms/neon-auth-email-configuration.txt): Configure email server settings for Neon Auth
+- [How Neon Auth works](https://neon.com/llms/neon-auth-how-it-works.txt): How It Works
+- [Manage Neon Auth using the API](https://neon.com/llms/neon-auth-api.txt): Api
+- [Neon Auth](https://neon.com/llms/neon-auth-overview.txt): Authentication, user management, and real-time Postgres sync
+- [Neon Auth Demo](https://neon.com/llms/neon-auth-demo.txt): Learn how automatic user profile sync can simplify your auth workflow
+- [Neon Auth best practices & FAQ](https://neon.com/llms/neon-auth-best-practices.txt): Best Practices
+- [Neon Auth concepts](https://neon.com/llms/neon-auth-tutorial.txt): See how Neon Auth eliminates the complexity of manual user data synchronization, making your development faster and your applications more robust.
+- [Permissions overview](https://neon.com/llms/neon-auth-permissions-roles.txt): Understanding Neon Auth project vs app user permissions
+
+### Neon Auth Components
+
+- [<AccountSettings />](https://neon.com/llms/neon-auth-components-account-settings.txt): Neon Auth account settings component
+- [<CredentialSignIn />](https://neon.com/llms/neon-auth-components-credential-sign-in.txt): Neon Auth credential sign-in component
+- [<CredentialSignUp />](https://neon.com/llms/neon-auth-components-credential-sign-up.txt): Neon Auth credential sign-up component
+- [<OAuthButton />](https://neon.com/llms/neon-auth-components-oauth-button.txt): Neon Auth OAuth button component
+- [<OAuthButtonGroup />](https://neon.com/llms/neon-auth-components-oauth-button-group.txt): Neon Auth OAuth button group component
+- [<SelectedTeamSwitcher />](https://neon.com/llms/neon-auth-components-selected-team-switcher.txt): Neon Auth team switcher component
+- [<SignIn />](https://neon.com/llms/neon-auth-components-sign-in.txt): Neon Auth sign-in component for your app
+- [<SignUp />](https://neon.com/llms/neon-auth-components-sign-up.txt): Neon Auth sign-up component for your app
+- [<StackHandler />](https://neon.com/llms/neon-auth-components-stack-handler.txt): Neon Auth handler component for authentication routes
+- [<StackProvider />](https://neon.com/llms/neon-auth-components-stack-provider.txt): Neon Auth provider component for React context
+- [<StackTheme />](https://neon.com/llms/neon-auth-components-stack-theme.txt): Neon Auth theme provider component
+- [Neon Auth Components](https://neon.com/llms/neon-auth-components-components.txt): Pre-built Neon Auth components for your Next.js and React apps
+- [UserButton Component](https://neon.com/llms/neon-auth-components-user-button.txt): Neon Auth user button component
+
+### Neon Auth Concepts
+
+- [App/User RBAC Permissions](https://neon.com/llms/neon-auth-concepts-permissions.txt): Managing permissions for your app's end users and teams
+- [Backend Integration](https://neon.com/llms/neon-auth-concepts-backend-integration.txt): Integrate Neon Auth with your own server using the REST APIs
+- [Custom User Data](https://neon.com/llms/neon-auth-concepts-custom-user-data.txt): How to store custom user metadata in Neon Auth
+- [OAuth Authentication](https://neon.com/llms/neon-auth-concepts-oauth.txt): Working with OAuth providers in Neon Auth
+- [Organizations and Teams](https://neon.com/llms/neon-auth-concepts-orgs-and-teams.txt): Managing teams and team members in Neon Auth
+- [Selecting a Team](https://neon.com/llms/neon-auth-concepts-team-selection.txt): Switch between multiple teams of a user
+- [The StackApp Object](https://neon.com/llms/neon-auth-concepts-stack-app.txt): The core object for interacting with Neon Auth in your app
+- [User Onboarding](https://neon.com/llms/neon-auth-concepts-user-onboarding.txt): How to implement onboarding flows in Neon Auth
+
+### Neon Auth Customization
+
+- [Colors and  styles](https://neon.com/llms/neon-auth-customization-custom-styles.txt): How to customize the look and feel of Neon Auth components
+- [Custom Pages](https://neon.com/llms/neon-auth-customization-custom-pages.txt): How to build custom authentication pages with Neon Auth
+- [Dark/light mode](https://neon.com/llms/neon-auth-customization-dark-mode.txt): How to enable and use dark/light modes with Neon Auth
+- [Internationalization](https://neon.com/llms/neon-auth-customization-internationalization.txt): How to localize Neon Auth components
+
+### Neon Auth Get Started
+
+- [Accessing User Data](https://neon.com/llms/neon-auth-get-started-accessing-user-data.txt): How to read, update, and protect user data in your app
+- [Neon Auth Components](https://neon.com/llms/neon-auth-get-started-components-overview.txt): Overview of Neon Auth pre-built components
+
+### Neon Auth Quick Start
+
+- [Neon Auth for JavaScript](https://neon.com/llms/neon-auth-quick-start-javascript.txt): Add authentication to your JavaScript project. Access user data directly in your Postgres database.
+- [Neon Auth for Next.js](https://neon.com/llms/neon-auth-quick-start-nextjs.txt): Add authentication to your Next.js (App Router) project. Access user data directly in your Postgres database.
+- [Neon Auth for React](https://neon.com/llms/neon-auth-quick-start-react.txt): Add authentication to your React project. Access user data directly in your Postgres database.
 
 ## Workflows
 

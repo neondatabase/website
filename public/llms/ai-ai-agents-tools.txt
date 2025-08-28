@@ -21,6 +21,7 @@ These tools leverage the Neon MCP server to provide natural language interfaces 
 AI-enhanced database management capabilities within your preferred development environment.
 
 - [Claude Desktop](https://neon.com/guides/neon-mcp-server): Use natural language to manage your databases with Claude Desktop and Neon MCP server
+- [Claude Code](https://neon.com/guides/claude-code-mcp-neon): Use natural language to manage your databases with Claude Code CLI and Neon MCP server
 - [Cursor](https://neon.com/guides/cursor-mcp-neon): AI-enhanced database management in Cursor IDE
 - [Cline](https://neon.com/guides/cline-mcp-neon): AI-enhanced database management with Cline
 - [Windsurf](https://neon.com/guides/windsurf-mcp-neon): AI-enhanced database management in Windsurf Editor

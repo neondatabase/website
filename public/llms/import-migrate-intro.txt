@@ -8,7 +8,6 @@
 
 Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
 
-
 ## Data migration guides
 
 - [Import Data Assistant](https://neon.com/docs/import/import-data-assistant): Move your existing database to Neon using our guided migration tool

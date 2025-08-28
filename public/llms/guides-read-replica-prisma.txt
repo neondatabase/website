@@ -22,7 +22,7 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 You can create read replicas for any branch in your Neon project.
 
-   **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
+   **Note**: The Free plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica by following these steps:
 

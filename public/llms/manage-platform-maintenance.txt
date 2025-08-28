@@ -28,7 +28,7 @@ If there is ongoing maintenance, you'll see a **Maintenance** indicator at the t
 
 ## Handling disruptions and latency during platform maintenance
 
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions. This means that most applications are able to transparently reconnect to a Neon database following a brief disruption.
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions. This means that most applications automatically reconnect to a Neon database following a brief disruption.
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for connection retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for occasional disruptions. For related information, see [Build connection timeout handling into your application](https://neon.com/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
