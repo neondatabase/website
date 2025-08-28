@@ -201,15 +201,15 @@ Postgres logs can be accessed through the [Datadog](/docs/guides/datadog) or [Op
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+Unlogged tables are tables that do not write to the Postgres write-ahead log (WAL). These tables are stored in Neon compute local storage. These tables are stored in compute local storage and are not persisted across compute restarts or when a compute scales to zero. This is unlike standard Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+
+## Temporary tables
+
+Temporary tables are tied to a session (or optionally a transaction). They exist only for the lifetime of that session/transaction and are automatically dropped when it ends. Like unlogged tables, they are stored on compute local storage and limited by compute local disk space.
 
 ## Memory
 
 SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
-
-## Temporary tables
-
-Temporary tables, which are stored in compute local storage, are limited by compute local storage size.
 
 ## Session context
 
