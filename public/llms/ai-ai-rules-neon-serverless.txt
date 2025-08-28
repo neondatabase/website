@@ -1,6 +1,6 @@
 # AI Rules Neon Serverless Driver
 
-> The document outlines the AI Rules for the Neon Serverless Driver, detailing how AI can be integrated and utilized within Neon's serverless architecture to optimize database operations and management.
+> The document outlines the AI Rules for the Neon Serverless Driver, detailing how AI-driven optimizations are implemented to enhance database performance and efficiency within Neon's serverless architecture.
 
 ## Source
 

@@ -1,24 +1,25 @@
-# OpenTelemetry integration
+# OpenTelemetry
 
 > The OpenTelemetry integration documentation for Neon outlines the steps to implement and configure OpenTelemetry for monitoring and tracing within Neon environments, detailing setup procedures and configuration options specific to Neon's infrastructure.
 
 ## Source
 
-- [OpenTelemetry integration HTML](https://neon.com/docs/guides/opentelemetry): The original HTML version of this documentation
+- [OpenTelemetry HTML](https://neon.com/docs/guides/opentelemetry): The original HTML version of this documentation
 
 **Note** Beta: **OpenTelemetry integration** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 What you will learn:
 - How to configure OpenTelemetry exports from Neon
+- Setup with Grafana OSS and Tempo
+- Integration with Grafana Cloud
 - Example config using New Relic
 
 External docs:
 - [OpenTelemetry Protocol (OTLP) Specification](https://opentelemetry.io/docs/specs/otlp/)
+- [Grafana Labs OpenTelemetry Documentation](https://grafana.com/docs/opentelemetry/)
 - [New Relic OpenTelemetry guide](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/)
 
-Available for Scale and Business Plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
-
-If you don't already have an OTEL-compatible platform set up, we'll walk you through the basic setup in New Relic so you can see how Neon's data export works. The same configuration principles apply to any OTEL-compatible platform.
+Available for Scale plan users, the Neon OpenTelemetry integration lets you export metrics and Postgres logs to any OpenTelemetry Protocol (OTLP) compatible observability platform. This gives you the flexibility to send your Neon data to your preferred monitoring solution, whether that's New Relic, Grafana Cloud, Honeycomb, or any other OTEL-compatible service.
 
 ## How it works
 
@@ -50,7 +51,36 @@ Before getting started, ensure the following:
 
 ## Set up your observability platform
 
-If you don't already have an OpenTelemetry-compatible observability platform, you'll need to sign up for one. For this example, we'll use New Relic:
+Choose your preferred observability platform and follow the setup instructions:
+
+### Grafana OSS with Docker OTEL LGTM
+
+For a cost-effective, open-source monitoring stack, you can set up the complete LGTM stack (Loki for logs, Grafana for visualization, Tempo for traces, and Mimir for metrics) with OpenTelemetry integration.
+
+**Quick setup with Docker:**
+
+1. **Clone and start the stack**:
+   ```bash
+   git clone https://github.com/grafana/docker-otel-lgtm.git
+   cd docker-otel-lgtm
+   docker compose up -d
+   ```
+
+This provides:
+
+- **Grafana** at http://localhost:3000 (admin/admin)
+- **OpenTelemetry Collector** at http://localhost:4318 (HTTP) and localhost:4317 (gRPC)
+- **Prometheus/Mimir**, **Loki**, and **Tempo** for complete observability
+
+For detailed configuration, see the [docker-otel-lgtm documentation](https://github.com/grafana/docker-otel-lgtm).
+
+### Grafana Cloud
+
+For a fully managed solution, see the dedicated [Grafana Cloud integration guide](https://neon.com/docs/guides/grafana-cloud).
+
+### New Relic
+
+If you use New Relic, you'll need to sign up for an account and get your license key.
 
 1. Sign up for a free account at [newrelic.com](https://newrelic.com) if you haven't already.
 2. Once signed in, you'll need your New Relic license key for authentication.
@@ -93,22 +123,39 @@ You can enable either or both options based on your monitoring needs.
 
 ## Configure the connection
 
-1. Select your connection protocol. For most platforms including New Relic, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
+1. **Select your connection protocol**: For most platforms, choose **HTTP** (recommended), which uses HTTP/2 for efficient data transmission. Some environments may require **gRPC** instead.
 
-2. Enter your **Endpoint** URL.
+2. **Enter your Endpoint URL** based on your platform:
 
-   For New Relic, enter:
+   **For Grafana OSS (docker-otel-lgtm)**:
+   - `http://localhost:4318` (if running locally)
+   - `http://your-server-ip:4318` (if running on a remote server)
+
+   **For Grafana Cloud**:
+   - Use your Grafana Cloud OTLP endpoint (typically `https://otlp-gateway-{region}.grafana.net/otlp`)
+   - See the [Grafana Cloud guide](https://neon.com/docs/guides/grafana-cloud) for details
+
+   **For New Relic**:
    - US: `https://otlp.nr-data.net`
    - Europe: `https://otlp.eu01.nr-data.net`
-
-   See [this table](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other options.
+   - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
 3. Configure authentication:
+
+   **For Grafana OSS**:
+   - No authentication required for local docker setup
+
+   **For Grafana Cloud**:
+   - Use **Basic** authentication with Base64 encoded `<opentelemetry-instance-id>:<grafana-cloud-token>`
+   - Get your instance ID and API token from the Grafana Cloud Portal by clicking on the **OpenTelemetry** card
+
+   **For New Relic**:
+   - Use **Bearer** or **API Key** with your New Relic license key
+
+   **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
    - **API Key**: Enter your API key
-
-   For New Relic, you can use either **Bearer** or **API Key** authentication with your New Relic license key (both work the same way).
 
 ## Configure resource attributes
 
@@ -126,19 +173,33 @@ Click **Add** to save your configuration and start the data export.
 
 Your Neon data should start appearing in your observability platform within a few minutes.
 
-**For New Relic users**, use these queries to check if data is flowing:
+### For Grafana (OSS and Cloud) users
+
+1. **Access Grafana Explore**: Visit `http://localhost:3000` (admin/admin) or your Grafana Cloud Instance and navigate to **Explore**
+
+2. **Check metrics**: Select your **Prometheus** data source and use this query to check if data is flowing::
+
+   ```promql
+   neon_connection_counts
+   ```
+
+3. **Create dashboards**: You can visualize using [Grafana Drilldown apps](https://grafana.com/docs/grafana/latest/explore/simplified-exploration/) or use the dashboard JSON from [Grafana Cloud Documentation](https://neon.com/docs/guides/grafana-cloud#create-a-monitoring-dashboard)
+
+### For New Relic users
+
+Use these queries to check if data is flowing:
 
 ```sql
 FROM Metric SELECT * SINCE 1 hour ago
 FROM Log SELECT * SINCE 1 hour ago
 ```
 
-**Success looks like this:**
+**Success looks similar to this:**
 
-Metrics flowing into New Relic
+_Metrics flowing into New Relic_
 
 
-Postgres logs
+_Postgres logs flowing into New Relic_
 
 
 **Find your data under APM & Services**

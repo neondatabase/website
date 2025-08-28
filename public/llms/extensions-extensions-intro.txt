@@ -117,6 +117,7 @@ Explore supported Postgres extensions by category. Also see:
 
 - [hypopg](https://hypopg.readthedocs.io/en/rel1_stable/): Provides the ability to create hypothetical (virtual) indexes in Postgres for performance testing
 - [pg_hint_plan](https://github.com/ossc-db/pg_hint_plan): Allows developers to influence query plans with hints in SQL comments, improving performance and control over query execution
+- [online_advisor](https://neon.com/docs/extensions/online_advisor): Recommends indexes, extended statistics, and prepared statements based on your actual query workload
 
 ## Scientific computing
 

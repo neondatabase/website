@@ -1,6 +1,6 @@
 # Connecting Neon to your stack
 
-> The document "Connecting Neon to your stack" outlines the steps required to integrate Neon with various development environments, detailing connection configurations and necessary prerequisites for seamless integration into existing workflows.
+> The document "Connecting Neon to your stack" offers detailed instructions for integrating Neon with various development environments and tools, facilitating seamless connectivity and interaction with Neon's database services.
 
 ## Source
 

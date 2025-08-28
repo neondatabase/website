@@ -6,7 +6,7 @@
 
 - [AWS Marketplace HTML](https://neon.com/docs/introduction/billing-aws-marketplace): The original HTML version of this documentation
 
-Neon supports billing through the **AWS Marketplace** for [Private Offers](https://aws.amazon.com/marketplace/partners/private-offers/) only, which are typically reserved for custom Enterprise plans. If you are interested in exploring a custom Enterprise plan with Neon, please reach out to our [Sales](https://neon.com/contact-sales) team.
+Neon supports billing through the **AWS Marketplace** for [Private Offers](https://aws.amazon.com/marketplace/partners/private-offers/) only, which are typically reserved for custom plans. If you are interested in exploring a custom plan with Neon, please reach out to our [Sales](https://neon.com/contact-sales) team.
 
 Neon [self-service pricing plans](https://neon.com/pricing) are currently not purchasable through the AWS Marketplace. You can only purchase these plans through Neon.
 

@@ -20,7 +20,7 @@ This topic describes how to manage your Neon resource on Azure. It covers how to
 
 ## Create additional Neon projects
 
-All Neon plans, including the Free plan, support multiple Neon projects. You can add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console.
+You can add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console.
 
 In Azure, navigate to the **Projects** page and select **Create Project**.
 
@@ -113,7 +113,7 @@ For detailed transfer steps, see [Transfer projects to an organization](https://
 
 If the restrictions above prevent you from transferring your project, consider these options:
 
-- Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](https://neon.com/docs/introduction/regions#azure-regions)). If you're on the Neon Free Plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
+- Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](https://neon.com/docs/introduction/regions#azure-regions)). If you're on the Neon Free plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
 - Create a new Neon project in an Azure-managed organization and migrate your database using one of these options:
   - [Neon Import Data Assistant](https://neon.com/docs/import/import-data-assistant)
   - [pg_dump and pg_restore](https://neon.com/docs/import/migrate-from-postgres#run-a-test-migration)

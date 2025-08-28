@@ -1,10 +1,10 @@
-# Playing with Neon
+# Learn the basics
 
-> The document "Playing with Neon" guides users through the process of signing up for Neon, detailing steps to create an account and access the platform's features.
+> This document guides users through the process of signing up for Neon, detailing the steps required to create an account and access Neon's database services.
 
 ## Source
 
-- [Playing with Neon HTML](https://neon.com/docs/get-started/signing-up): The original HTML version of this documentation
+- [Learn the basics HTML](https://neon.com/docs/get-started/signing-up): The original HTML version of this documentation
 
 What you will learn:
 - How to view and modify data in the console
@@ -42,9 +42,8 @@ You can change these sizes at any time, but these are meant to align with typica
 
     Sign up with your email, GitHub, Google, or other partner account.
 
-    For information about what's included with the free plan, see
-    [Neon Free Plan](https://neon.com/docs/introduction/plans#free-plan). For information about Neon's paid options, see
-    [Neon Plans](https://neon.com/docs/introduction/plans).
+    For information about what's included with the Free and paid plans, see
+    [Neon plans](https://neon.com/docs/introduction/plans).
 
   </div>
   <div style={{ flex: '1 1 0', marginTop: '-1.25rem' }}>

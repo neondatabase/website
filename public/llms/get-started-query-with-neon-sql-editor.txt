@@ -1,6 +1,6 @@
 # Query with Neon's SQL Editor
 
-> The document "Query with Neon's SQL Editor" guides users on executing SQL queries using Neon's integrated SQL editor, detailing steps for accessing the editor, writing queries, and managing query results within the Neon platform.
+> The document "Query with Neon's SQL Editor" guides users on executing SQL queries using Neon's integrated SQL Editor, detailing steps for accessing the editor, running queries, and managing query results within the Neon platform.
 
 ## Source
 

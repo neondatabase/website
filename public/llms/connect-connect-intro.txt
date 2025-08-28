@@ -10,12 +10,18 @@ Find detailed information and instructions about connecting to Neon from differe
 
 For integrating Neon with different frameworks, languages, and platforms, refer to our [Guides](https://neon.com/docs/guides/guides-intro) documentation.
 
+## Choose a connection type
+
+To help understand which driver and connection type you need, see:
+
+- [Choose a driver and connection type](https://neon.com/docs/connect/choose-connection): How to select the right driver and connection type for your application
+
 ## Connect from clients and applications
 
 Learn how to establish a connection to Neon from any application.
 
-- [Choose a driver and connection type](https://neon.com/docs/connect/choose-connection): How to select the right driver and connection type for your application
 - [Connect from any app](https://neon.com/docs/connect/connect-from-any-app): Learn about connection strings and how to connect to Neon from any application
+- [Connect locally](https://neon.com/docs/local/neon-local-connect): Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf
 - [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver): Connect to Neon from serverless environments over HTTP or WebSockets
 - [Connect a GUI application](https://neon.com/docs/connect/connect-postgres-gui): Learn how to connect to a Neon database from a GUI application
 - [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor): Connect with psql, the native command-line client for Postgres
@@ -25,8 +31,8 @@ Learn how to establish a connection to Neon from any application.
 
 Learn how to connect to Neon from different frameworks and languages.
 
-- [Connect from various frameworks](https://neon.com/docs/get-started/frameworks): Find detailed instructions for connecting to Neon from various frameworks
-- [Connect from various languages](https://neon.com/docs/get-started/languages): Find detailed instructions for connecting to Neon from various languages
+- [Connect from various frameworks](https://neon.com/docs/get-started/frameworks): Find detailed instructions for connecting to Neon from frameworks
+- [Connect from various languages](https://neon.com/docs/get-started/languages): Find detailed instructions for connecting to Neon from languages
 
 ## Troubleshoot connection issues
 
