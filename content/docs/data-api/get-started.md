@@ -315,7 +315,7 @@ This ensures the Data API reflects your latest schema changes.
 #### Insert example posts
 
 ```sql
-INSERT INTO posts (id, userId, content, published) VALUES
+INSERT INTO posts ("userId", "content", "published") VALUES
   ('user1', 'Hello world!', true),
   ('user2', 'This is a test post.', true);
 ```
