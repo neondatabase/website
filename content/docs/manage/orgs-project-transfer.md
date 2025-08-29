@@ -13,6 +13,7 @@ You can transfer your projects to any organization you are a member of. You can 
 - Requires **Admin** rights in the source org and at least **Member** rights in the destination org.
 - Projects with GitHub or Vercel integrations cannot be transferred.
 - Vercel-managed orgs are not supported.
+- Projects can only be transferred to organizations you belong to, not to personal Neon accounts.
 
 <Steps>
 ## Transfer a single project
