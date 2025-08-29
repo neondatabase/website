@@ -181,7 +181,7 @@ GRANT CREATE ON SCHEMA schema_name
 TO user_name;
 ```
 
-Note that, by default, every user has the `CREATE` and `USAGE` on the `public` schema. (However, starting from PostgreSQL 15, users are granted only USAGE.)
+Note that, by default, every user has the `CREATE` and `USAGE` on the `public` schema. (However, starting from PostgreSQL 15, users are granted only `USAGE`.)
 
 ## PostgreSQL schema operations
 
