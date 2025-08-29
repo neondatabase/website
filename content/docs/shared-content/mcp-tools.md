@@ -8,7 +8,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Project management:**
 
-- `list_projects`: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account. Supports a search paremeter and limiting the number of projects returned (default: 10).
+- `list_projects`: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account. Supports a search parameter and limiting the number of projects returned (default: 10).
 - `list_shared_projects`: Retrieves a list of Neon projects shared with the current user (default: 10). Supports a search parameter and limiting the number of projects returned (default: 10).
 - `describe_project`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
 - `create_project`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
