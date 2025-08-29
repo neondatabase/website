@@ -81,7 +81,7 @@ The security model consists of two parts:
 To make sure your application works correctly with both authenticated and anonymous users, run the following SQL statements to grant the right permissions to the `authenticated` and `anonymous` roles. This setup lets you control what **logged-in** users (authenticated) and **users who are *not logged in** (anonymous) can do.
 
 <Admonition type="important">
-The following `GRANT` statements only assign table privileges to the `authenticated` and `anonymous` roles. You must still define appropriate Row-Level Security (RLS) policies for each table to control what actions these roles can perform, according to your application's requirements.
+These `GRANT` statements only give table privileges to the `authenticated` and `anonymous` roles. You still need to set up Row-Level Security (RLS) policies for each table to control exactly what actions each role can perform. Match these policies to your application's requirements.
 </Admonition>
 
 ```sql
