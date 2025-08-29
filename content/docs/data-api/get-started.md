@@ -149,7 +149,7 @@ The following example demonstrates how to define a `posts` table and enforce Row
 - **Public read access:** Anyone, including anonymous users, can view posts.
 - **Restricted modifications:** Only authenticated users can create, update, or delete posts and only for posts they own.
 
-This approach enables open content discovery while safeguarding write operations, ensuring users can only modify their own data.
+With these policies, users can read all content, but they can only modify their own rows.
 
 > Use Drizzle ORM to streamline the creation of RLS policies. Drizzle helps reduce boilerplate and makes your access control logic easier to maintain as your tables evolve.
 
