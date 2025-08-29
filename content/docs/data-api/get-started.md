@@ -337,8 +337,8 @@ INSERT INTO posts ("userId", "content", "published") VALUES
 
   ```json
   [
-    { "id": 2, "userId": "user2", "content": "This is a test post.", "published": true },
-    { "id": 1, "userId": "user1", "content": "Hello world!", "published": true }
+    {"id":1,"userId":"user1","content":"Hello world!","published":true}, 
+    {"id":2,"userId":"user2","content":"This is a test post.","published":true}
   ]
   ```
 
@@ -363,7 +363,6 @@ INSERT INTO posts ("userId", "content", "published") VALUES
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <jwt>' \
     --data '{
-      "id": 3,
       "userId": "user1",
       "content": "This is a new post.",
       "published": true
@@ -377,7 +376,6 @@ INSERT INTO posts ("userId", "content", "published") VALUES
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer eyJhbGciOiJFUzI1NiIsImtpZCI6IjlkRlBBdzJ5RTlEZiJ9.eyJzdWIiOiJkMTAwM2I2Yi03NTBiLTRhOTAtYTA4Ny0yZTIzOGYxOGNmNmUiLCJicmFuY2hJZCI6Im1haW4iLCJyZWZyZXNoVG9rZW5JZCI6IjI2ZDA3YzEwLThkZTItNDY4OC1hYzc4LTFmMzUyZTQ0ZDE1OCIsInJvbGUiOiJhdXRoZW50aWNhdGVkIiwiaXNzIjoiaHR0cHM6Ly9hcGkuc3RhY2stYXV0aC5jb20vYXBpL3YxL3Byb2plY3RzL2ZhMzQyNTU3LWEzN2QtNDZkNy05OWE3LWZlODM2ODUxNTQ2YSIsImlhdCI6MTc1NjI3OTUzOSwiYXVkIjoiZmEzNDI1NTctYTM3ZC00NmQ3LTk5YTctZmU4MzY4NTE1NDZhIiwiZXhwIjoxNzU2MjgzMTM5fQ.uVRRzrGSoymphH3Q5VHscDYsA1iBigHIo9TLO38IVG0ObD-6s2-NtKQrqlU_UF_5DLJTNgpq3nHHokf0qcCfXg' \
     --data '{
-        "id": 3,
         "userId": "d1003b6b-750b-4a90-a087-2e238f18cf6e",
         "content": "This is a new post.",
         "published": true
