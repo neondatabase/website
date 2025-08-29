@@ -78,7 +78,7 @@ The security model consists of two parts:
 
 > You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
 
-To make sure your application works correctly with both authenticated and anonymous users, run the following SQL statements to grant the right permissions to the `authenticated` and `anonymous` roles. This setup lets you control what **logged-in** users (authenticated) and **users who are *not logged in** (anonymous) can do.
+To make sure your application works correctly with both authenticated and anonymous users, run the following SQL statements to grant the right permissions to the `authenticated` and `anonymous` roles. This setup lets you control what **logged-in** users (authenticated) and **users who are **not logged in** (anonymous) can do.
 
 <Admonition type="important">
 These `GRANT` statements only give table privileges to the `authenticated` and `anonymous` roles. You still need to set up Row-Level Security (RLS) policies for each table to control exactly what actions each role can perform. Match these policies to your application's requirements.
@@ -337,8 +337,8 @@ INSERT INTO posts ("userId", "content", "published") VALUES
 
   ```json
   [
-    {"id":1,"userId":"user1","content":"Hello world!","published":true}, 
-    {"id":2,"userId":"user2","content":"This is a test post.","published":true}
+    { "id": 1, "userId": "user1", "content": "Hello world!", "published": true },
+    { "id": 2, "userId": "user2", "content": "This is a test post.", "published": true }
   ]
   ```
 
