@@ -144,7 +144,7 @@ By default, all tables in your database are accessible via the API with `SELECT`
 
 ### Example of creating a table and querying it via the Data API
 
-The following example demonstrates how to define a `posts` table and enforce Row-Level Security (RLS) policies using either SQL or Drizzle ORM:
+This example shows how to set up RLS policies on a sample `notes` table—using either plain SQL or Drizzle ORM—to control who can read or modify data:
 
 - **Public read access:** Anyone, including anonymous users, can view posts.
 - **Restricted modifications:** Only authenticated users can create, update, or delete posts and only for posts they own.
