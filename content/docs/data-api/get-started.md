@@ -78,7 +78,7 @@ The security model consists of two parts:
 
 > You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
 
-To make sure your application works correctly with both authenticated and anonymous users, run the following SQL statements to grant the necessary permissions to the `authenticated` and `anonymous` roles. This setup lets you control access for both **logged-in** users (authenticated) and users who are **not logged in** (anonymous).
+To make sure your application works correctly with both authenticated and anonymous users, run the following SQL statements to grant the right permissions to the `authenticated` and `anonymous` roles. This setup lets you control what **logged-in** users (authenticated) and **users who are *not logged in** (anonymous) can do.
 
 <Admonition type="important">
 The following `GRANT` statements only assign table privileges to the `authenticated` and `anonymous` roles. You must still define appropriate Row-Level Security (RLS) policies for each table to control what actions these roles can perform, according to your application's requirements.
