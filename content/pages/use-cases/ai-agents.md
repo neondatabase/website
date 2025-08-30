@@ -8,6 +8,8 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 
 If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
+<Admonition type="tip" title="LLM Credits">Qualified startups can get credits towards the latest OpenAI, Llama, Claude models through the Databricks Startup program. (Neon is a Databricks Company.)</Admonition>
+
 **Neon Features for Agents:**
 
 - **Instant Provisioning:** your users never wait for infrastructure.
@@ -42,6 +44,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 | Data API (PostgREST)       | **Higher Rate Limits Available**                                                                      |
 | Support                    | **Shared Slack Channel**                                                                              |
 | <br/>**Agent Incentives**  |                                                                                                       |
+| **LLM Token Credits**      | Access to Databricks Startup Credits for Foundation Model Serving tokens.                              |
 | **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
 | **General Use Credits**    | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
 | **Co-Marketing**           | Blog and Social promotions, hackathons and more.                                                      |
@@ -52,15 +55,9 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
-## Platform Scale
+## Documentation
 
-> **AI Agents are now provisioning 80% of Neon databases (tens of thousands per day)**
-
-The scale is massive, and Neon is built to handle it.
-
-The [Neon MCP server](https://mcp.neon.tech/) enables any client to interact with Neon's API using natural language. AI agents can use Neon's MCP server to automate tasks such as creating databases, running SQL queries, and managing database migrations. 
-
-The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) is a lightweight client designed for AI agents that need to spin up Postgres databases in seconds and run SQL queries. It includes both the Neon TypeScript SDK and the Neon Serverless Driver.
+For documentation on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro).
 
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
