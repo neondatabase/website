@@ -921,6 +921,8 @@
               slug: neon-auth/quick-start/react
             - title: JavaScript
               slug: neon-auth/quick-start/javascript
+            - title: Drizzle
+              slug: neon-auth/quick-start/drizzle
             - title: Demo
               slug: neon-auth/demo
         - section: About
@@ -950,7 +952,7 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:  
+          items:
             - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users
