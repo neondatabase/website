@@ -77,9 +77,22 @@ CREATE EXTENSION IF NOT EXISTS pg_session_jwt;
 
 ### 4. Set up Postgres roles
 
-The integration creates the `authenticated` and `anonymous` roles for you. Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
+Let's define table-level permissions for these roles. To allow both roles to read and write to tables in your public schema, run:
 
 ```sql
+-- Create the authenticated and anonymous roles
+DO $$ BEGIN
+  CREATE ROLE authenticated;
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
+DO $$ BEGIN
+  CREATE ROLE anonymous;
+EXCEPTION
+  WHEN duplicate_object THEN null;
+END $$;
+
 -- For existing tables
 GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
   IN SCHEMA public
