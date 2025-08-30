@@ -1,6 +1,6 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: The purpose-built solution for agents that need databases.
+subtitle: The battle-tested solution for agents that need backends.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
