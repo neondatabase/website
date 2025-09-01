@@ -6,35 +6,27 @@ import PropTypes from 'prop-types';
 
 import Menu from '../menu';
 
-const getActiveMenu = (navigation, slug) => {
-  const containsActiveSlug = (menuList) =>
-    menuList?.some((menu) => menu.slug === slug || (menu.items && containsActiveSlug(menu.items)));
+const containsActiveSlug = (menu, slug) => {
+  if (menu.slug === slug) return true;
 
-  const subnavMenu = navigation?.find((menu) => {
-    if (menu.subnav) {
-      return menu.subnav.some(
-        (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
-      );
-    }
-    return false;
-  });
-
-  if (subnavMenu && subnavMenu.subnav) {
-    const activeItem = subnavMenu.subnav.find(
-      (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
-    );
-
-    if (activeItem) {
-      return activeItem.slug === slug
-        ? activeItem
-        : activeItem.items?.find(
-            (item) => item.slug === slug || (item.items && containsActiveSlug(item.items))
-          );
-    }
-  }
-
-  return navigation?.find((menu) => menu.slug === slug || containsActiveSlug(menu.items));
+  return menu?.items?.some((item) => containsActiveSlug(item, slug));
 };
+
+const getActiveMenu = (navigation, slug) =>
+  navigation
+    ?.flatMap((menu) => {
+      // If menu has subnav, find the matching subnav item
+      if (menu.subnav) {
+        if (menu.subnav.some((subnavItem) => subnavItem.section)) {
+          return menu.subnav.flatMap((subnavItem) => subnavItem.items);
+        }
+
+        return menu.subnav;
+      }
+      // Otherwise, find the matching nav menu
+      return [menu];
+    })
+    .find((item) => containsActiveSlug(item, slug));
 
 const Sidebar = ({ className = null, navigation, basePath, customType }) => {
   const pathname = usePathname();
