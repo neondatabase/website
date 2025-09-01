@@ -26,23 +26,23 @@ Apply for the Agent Plan: https://neon.com/use-cases/ai-agents
 
 |                            | Agent Plan                                                                                            |
 | -------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Projects                   | **Unlimited** 
+| Projects                   | **Custom limits available**
  _Agents create a new project for each user application._                          |
-| Branches per Project       | **Custom limits available** 
+| Branches per Project       | **Custom limits available**
  _Agents use branches to quickly toggle between application states._ |
-| Compute                    | from **$0.14 per CU-hour** 
+| Compute                    | from **$0.14 per CU-hour**
  _Same as Launch/Scale_                                               |
-| Storage                    | **$0.35 per GB-month** 
+| Storage                    | **$0.35 per GB-month**
  _Same as Launch/Scale_                                                   |
-| Instant Restore (PITR)     | **$0.2 per GB-month** 
+| Instant Restore (PITR)     | **$0.2 per GB-month**
  _Same as Launch/Scale_                                                    |
-| Neon Auth                  | **Included** 
+| Neon Auth                  | **Included**
  _All-in-one API for handling user signup and management in Neon_                   |
-| Management API             | **Higher Rate Limits Available** 
+| Management API             | **Higher Rate Limits Available**
  _API for instant provisioning and management of databases_     |
 | Data API (PostgREST)       | **Higher Rate Limits Available**                                                                      |
 | Support                    | **Shared Slack Channel**                                                                              |
-| 
+|
 **Agent Incentives**  |                                                                                                       |
 | **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
 | **General Use Credits**    | Up to $30K in credits for those not eligible for the [Startup Program](https://neon.com/startups).                    |
