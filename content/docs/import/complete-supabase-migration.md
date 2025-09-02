@@ -4,9 +4,7 @@ subtitle: A comprehensive guide to migrating your Postgres database, user accoun
 enableTableOfContents: true
 ---
 
-Migrating from Supabase to Neon requires a careful, ordered process to handle key differences between the platforms, especially regarding user authentication. The primary challenge is that moving users from Supabase Auth to Neon Auth assigns them **new `user_id`s**, which breaks foreign key relationships and existing Row-Level Security (RLS) policies.
-
-This guide provides a complete, step-by-step workflow with all the necessary code to migrate your database, remap user IDs, and re-establish the integrity of your application's data and security policies in Neon.
+This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id`s during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
 
 ### Prerequisites
 
@@ -19,7 +17,7 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Part 1: Data and Authentication Migration
+## Part 1: Data and Authentication migration
 
 This part covers the migration of your user accounts and public schema data, followed by remapping user IDs to restore data integrity.
 
@@ -739,6 +737,49 @@ For a detailed example of the code migration process, refer to this example pull
 
 The repository includes two branches: [supabase](https://github.com/dhanushreddy291/supabase-to-neon-todo-app/tree/supabase) and [neon](https://github.com/dhanushreddy291/supabase-to-neon-todo-app/tree/neon) showcasing the before and after states of a sample todo application. This demonstrates the transition from Supabase Auth, Row-Level Security (RLS), and the Supabase Postgres Data API to Neon Auth, RLS, and the Neon PostgREST Data API.
 
+## Part 4: Upgrading your development workflow with Database Branching
+
+If you used Supabase's branching feature for preview environments, you'll feel right at home with Neon. In fact, you'll be working with the original, more powerful version of the concept: **Neon was the first postgres database provider to introduce instant, serverless copy-on-write database branching.**
+
+While the goal is similar, creating isolated environments for development and testing the implementation and capabilities are fundamentally different. Migrating to Neon offers a significant upgrade to your CI/CD and development workflows.
+
+### The Neon Advantage: True Copy-on-Write Branching
+
+The most significant difference is how branches are created. Supabase branches are **data-less by default**, meaning they create a new, empty database environment that you must then populate using seed scripts.
+
+Neon branches are **instant, copy-on-write clones of your entire database, including the data.**
+
+<Admonition type="info" title="What This Means For Your Workflow">
+With Neon, creating a new branch for a pull request takes milliseconds and gives you a fully-functional, isolated copy of your production database. This completely eliminates the need to write and maintain complex seed scripts for every preview environment. You can test new features and schema migrations against real-world data, safely and instantly.
+</Admonition>
+
+This approach provides several key benefits:
+
+- **Test with production-like data:** Safely test schema changes and queries against a full replica of your production data.
+- **Zero setup time:** Eliminate the time and effort spent hydrating databases for preview deployments.
+- **Cost-efficient:** Because branches are copy-on-write, you only store the changes (the delta) from the parent branch, making it incredibly storage-efficient.
+
+### Branching workflows and tooling
+
+Neon provides a complete toolkit for managing branches, allowing you to integrate this powerful feature into any part of your workflow.
+
+- **Neon Console:** Create, manage, and inspect branches visually through the dashboard. Perfect for quick manual operations or getting started. Learn more: [Manage branches](/docs/manage/branches)
+- **Neon CLI:** Programmatically manage branches from your terminal. Ideal for local development, scripting, and automation. Learn more: [Branching with the Neon CLI](/docs/guides/branching-neon-cli)
+- **Neon API:** The most powerful option for full programmatic control. Integrate branching directly into your custom tools, scripts, and platforms. Learn more: [Branching with the Neon API](/docs/guides/branching-neon-api)
+
+### Automating with CI/CD (Vercel & GitHub Actions)
+
+For most developers the primary use case for branching is creating preview environments for pull requests. Neon excels here with zero-config integrations and powerful, composable actions.
+
+- **Vercel Integration:** The simplest way to get started. The [Neon Vercel Integration](/docs/guides/neon-managed-vercel-integration) automatically creates a new database branch for every preview deployment. It injects the correct connection string as an environment variable, giving you a fully isolated database environment for each PR with no configuration required.
+
+- **GitHub Actions:** For more granular control over your CI/CD pipeline, Neon offers a suite of official GitHub Actions. These allow you to automate your entire branching lifecycle directly from your workflows. You can:
+  - [**Create a branch**](https://github.com/marketplace/actions/neon-create-branch-github-action) when a pull request is opened.
+  - [**Reset a branch**](https://github.com/marketplace/actions/neon-database-reset-branch-action) to the latest state of `main` to refresh it with new data.
+  - [**Perform a schema diff**](https://github.com/marketplace/actions/neon-schema-diff-github-action) and post the results as a comment on the pull request.
+  - [**Delete the branch**](https://github.com/marketplace/actions/neon-database-delete-branch) automatically when the pull request is merged or closed.
+    > Checkout [The Neon GitHub integration](/docs/guides/neon-github-integration) for a detailed walkthrough.
+
 ## Conclusion
 
 Congratulations! You've successfully migrated your Supabase database, users, and Row-Level Security (RLS) policies to Neon. Data integrity is intact, security policies are fully operational, and users can sign in using their original passwords with no resets required.
@@ -758,5 +799,6 @@ If your users were authenticated via OAuth providers like GitHub or Google in Su
 - [Neon RLS](/docs/guides/neon-rls)
 - [Getting started with Neon Auth and Next.js](/guides/neon-auth-nextjs)
 - [A Simple 3-Step Process to Migrate from Supabase Auth to Neon Auth](/blog/supabase-auth-neon-auth)
+- [Ship software faster using Neon branches as ephemeral environments](/branching)
 
 <NeedHelp/>
