@@ -19,8 +19,10 @@ updatedOn: '2025-08-27T11:57:55.860Z'
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-<Admonition type="note">
-The plans on this page are Neon's usage-based pricing plans, introduced **August 14, 2025**. If you joined earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). See [Change your plan](/docs/introduction/manage-billing#change-your-plan) to switch. Free plan users were automatically moved to the new plan described below.
+> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Vercel** or **Azure Marketplace**.
+
+<Admonition type="important">
+If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans. The new usage-based pricing plans will be introduced on these platforms at a later date.
 </Admonition>
 
 ---
