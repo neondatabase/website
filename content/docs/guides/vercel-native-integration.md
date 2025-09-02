@@ -51,7 +51,7 @@ To install the **Neon Postgres Native Integration** from the Vercel Marketplace:
 6. On the **Create Database** modal, select a region, choose a Neon plan, and click **Continue**.
 
    <Admonition type="note">
-   For an overview of what comes with each Neon Plan, please refer to the Neon [Pricing](/pricing) page.
+   For an overview of what comes with each Neon Plan, please see [Neon legacy plans](/docs/introduction/legacy-plans). Currently, only Neon's **legacy plans** are available to users who sign up through Vercel. Neon's new [usage-based plans](https://neon.com/docs/introduction/plans) will be introduced on Vercel at a later date.
    </Admonition>
 
 7. Specify a **Database Name**, and click **Create**.
