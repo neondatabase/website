@@ -1,19 +1,17 @@
-# Permissions & RBAC
+# App/User RBAC Permissions
 
 > The "Permissions & RBAC" document outlines the role-based access control (RBAC) system in Neon, detailing how permissions are assigned and managed to control user access to resources within the platform.
 
 ## Source
 
-- [Permissions & RBAC HTML](https://neon.com/docs/neon-auth/concepts/permissions): The original HTML version of this documentation
+- [App/User RBAC Permissions HTML](https://neon.com/docs/neon-auth/concepts/permissions): The original HTML version of this documentation
 
-> Control what each user can do and access with the permission system
+> If you're looking for information about who can add or manage Neon Auth in your Neon project, see [Permissions overview](https://neon.com/docs/neon-auth/permissions-roles).
 
-## Permission Types
+Neon Auth supports two types of permissions for your application's users:
 
-Neon Auth supports two types of permissions:
-
-1. **Team Permissions**: Control what a user can do within a specific team
-2. **User Permissions**: Control what a user can do globally, across the entire project
+- **Team permissions** control what a user can do within a specific team
+- **User permissions** control what a user can do globally, across the entire project
 
 Both permission types can be managed from the dashboard, and both support arbitrary nesting.
 

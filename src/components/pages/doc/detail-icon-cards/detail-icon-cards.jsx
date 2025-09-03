@@ -75,6 +75,7 @@ import TrendUp from './images/trend-up.inline.svg';
 import Unlock from './images/unlocked.inline.svg';
 import User from './images/user.inline.svg';
 import Vercel from './images/vercel.inline.svg';
+import VSCode from './images/vscode.inline.svg';
 import Wallet from './images/wallet.inline.svg';
 import Warning from './images/warning.inline.svg';
 import Wrench from './images/wrench.inline.svg';
@@ -152,6 +153,7 @@ const icons = {
   unlock: Unlock,
   user: User,
   vercel: Vercel,
+  vscode: VSCode,
   wallet: Wallet,
   warning: Warning,
   wrench: Wrench,

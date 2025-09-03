@@ -30,7 +30,7 @@
       "feature": {
         "title": "Projects"
       },
-      "free": "10",
+      "free": "20",
       "launch": "100",
       "scale": "1,000"
     },
@@ -89,9 +89,9 @@
       "feature": {
         "title": "Autoscaling"
       },
-      "free": "✓",
-      "launch": "✓",
-      "scale": "✓"
+      "free": true,
+      "launch": true,
+      "scale": true
     },
     {
       "rows": "2",

@@ -2,7 +2,7 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.305Z'
+updatedOn: '2025-08-19T16:10:28.673Z'
 ---
 
 ## Overview
@@ -23,7 +23,7 @@ The project transfer functionality enables you to provision fully-configured Pos
    - This URL contains the project ID and transfer request ID
 
 4. **User claims the project**
-   - When they click the URL, Neon transfers the project to their account
+   - When they click the URL, Neon prompts them to transfer the project to their account
 
 ## Step-by-step guide
 
@@ -172,9 +172,7 @@ When your user clicks the claim URL:
 
 1. Neon prompts them to log in or create an account
 2. After authentication, Neon displays a confirmation screen
-3. If they belong to organizations, they can select the destination:
-   - Their personal account
-   - Any organization where they have membership
+3. They select their destination Neon organization
 4. Upon confirmation, Neon transfers the project
 5. The user is then:
    - Redirected to your application if `ru` parameter was provided, allowing you to detect the successful claim and continue your onboarding flow
@@ -213,6 +211,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Expiration**: Requests expire after the specified `ttl_seconds` (default: 24 hours). Once expired, you must create a new transfer request
 - **One-time use**: Each transfer request can only be used once
 - **Already claimed**: If a project has already been claimed, subsequent attempts will fail with an error
+- **Vercel orgs not supported**: Transferring a project into a Vercel-managed Neon [organization](/docs/reference/glossary#organization) via the claim flow is not supported, meaning that if you created your Neon account through the [Vercel-managed integration](/docs/guides/vercel-managed-integration), you cannot claim projects into the Neon organizaton created by that integration.
 
 ### Security considerations
 
@@ -225,6 +224,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Connection persistence**: Database connection strings remain valid after transfer
 - **Organization transfers**: Users must be members of the target organization
 - **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (e.g., `org-cool-breeze-12345678`)
+- **Vercel organization limitation**: Projects cannot be claimed into Vercel organizations
 
 ## Example use cases
 

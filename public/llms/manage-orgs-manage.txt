@@ -78,7 +78,7 @@ All Members can create new projects from the Organization's **Projects** page; h
 
 ## Manage billing
 
-When you create a new organization, you'll choose a plan (Launch, Scale, or Enterprise) for that organization. Each organization manages its own billing and plan.
+When you create a new organization, you'll choose a plan (Launch, Scale, or Scale) for that organization. Each organization manages its own billing and plan.
 
 As the Admin for the organization account:
 
@@ -88,7 +88,7 @@ As the Admin for the organization account:
 
 For detailed information on pricing and plans, refer to [Neon plans](https://neon.com/docs/introduction/plans).
 
-### Downgrade to Free Plan
+### Downgrade to Free plan
 
 You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
 

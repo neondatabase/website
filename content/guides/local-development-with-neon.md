@@ -378,16 +378,16 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
 3. **Configure the connection**
 
    ```typescript
-   import { neon, neonConfig, Pool } from '@neondatabase/serverless';
+   import { neonConfig } from '@neondatabase/serverless';
    import { PrismaNeon, PrismaNeonHTTP } from '@prisma/adapter-neon';
    import { PrismaClient } from '@prisma/client';
    import ws from 'ws';
 
-   let connectionString = process.env.DATABASE_URL;
+   let connectionString =
+     process.env.DATABASE_URL || 'postgres://postgres:postgres@db.localtest.me:5432/main';
 
    // Configuring Neon for local development
    if (process.env.NODE_ENV === 'development') {
-     connectionString = 'postgres://postgres:postgres@db.localtest.me:5432/main';
      neonConfig.fetchEndpoint = (host) => {
        const [protocol, port] = host === 'db.localtest.me' ? ['http', 4444] : ['https', 443];
        return `${protocol}://${host}:${port}/sql`;
@@ -398,15 +398,12 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
    }
    neonConfig.webSocketConstructor = ws;
 
-   const sql = neon(connectionString);
-   const pool = new Pool({ connectionString });
-
    // Prisma supports both HTTP and WebSocket clients. Choose the one that fits your needs:
 
    // HTTP Client:
    // - Ideal for stateless operations and quick queries
    // - Lower overhead for single queries
-   const adapterHttp = new PrismaNeonHTTP(sql);
+   const adapterHttp = new PrismaNeonHTTP(connectionString!, {});
    export const prismaClientHttp = new PrismaClient({ adapter: adapterHttp });
 
    // WebSocket Client:
@@ -414,7 +411,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
    // - Maintains a persistent connection
    // - More efficient for multiple sequential queries
    // - Better for high-frequency database operations
-   const adapterWs = new PrismaNeon(pool);
+   const adapterWs = new PrismaNeon({ connectionString });
    export const prismaClientWs = new PrismaClient({ adapter: adapterWs });
    ```
 

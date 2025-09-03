@@ -1,10 +1,10 @@
-# Neon Auth Overview
+# Neon Auth
 
 > The "Neon Auth Overview" document outlines the authentication mechanisms and configurations available in Neon, detailing how users can securely manage access and permissions within the platform.
 
 ## Source
 
-- [Neon Auth Overview HTML](https://neon.com/docs/neon-auth/overview): The original HTML version of this documentation
+- [Neon Auth HTML](https://neon.com/docs/neon-auth/overview): The original HTML version of this documentation
 
 Neon Auth brings authentication and user management natively to your Neon Postgres database.
 

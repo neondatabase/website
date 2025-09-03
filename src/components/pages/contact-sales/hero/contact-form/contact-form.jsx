@@ -23,7 +23,7 @@ const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
     <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
       <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
-        Oops, looks like there's a technical problem
+        Oops, looks like there&apos;s a technical problem
       </h3>
       <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
         Please reach out to us directly at{' '}

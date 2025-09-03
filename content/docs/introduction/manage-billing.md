@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2025-08-07T23:34:44.601Z'
+updatedOn: '2025-08-26T13:01:22.803Z'
 ---
 
 <InfoBlock>
@@ -70,7 +70,7 @@ If you are unable to update your billing email, please [contact support](/docs/i
 
 ## Invoices
 
-A Neon invoice includes the the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Plan features](/docs/introduction/plans#plan-features).
+A Neon invoice includes the charges and the amount due for the billing period. For an explanation of what you've been billed for, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 ### Download invoices
 
@@ -117,7 +117,7 @@ To downgrade from a **legacy Enterprise plan**, please contact [Sales](/contact-
 
 ## How to prevent further monthly charges to your account
 
-If you a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free.
+If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid further monthly charges. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console. Simply removing all Neon projects will **not** stop the monthly fee associated with your plan. You will continue to be invoiced until you downgrade to Free.
 
 ## Delete your account
 

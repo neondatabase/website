@@ -1,0 +1,33 @@
+# Neon framework guides
+
+> The Neon framework guides document outlines the steps for integrating various frameworks with Neon, enabling users to efficiently connect and manage their applications within the Neon ecosystem.
+
+## Source
+
+- [Neon framework guides HTML](https://neon.com/docs/get-started/frameworks): The original HTML version of this documentation
+
+- [Node.js](https://neon.com/docs/guides/node): Connect a Node.js application to Neon
+- [Next.js](https://neon.com/docs/guides/nextjs): Connect a Next.js application to Neon
+- [NestJS](https://neon.com/docs/guides/nestjs): Connect a NestJS application to Neon
+- [Astro](https://neon.com/docs/guides/astro): Connect an Astro site or app to Neon
+- [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
+- [Entity Framework](https://neon.com/docs/guides/dotnet-entity-framework): Connect a Dotnet Entity Framework application to Neon
+- [Express](https://neon.com/docs/guides/express): Connect an Express application to Neon
+- [Hono](https://neon.com/docs/guides/hono): Connect a Hono application to Neon
+- [Laravel](https://neon.com/docs/guides/laravel): Connect a Laravel application to Neon
+- [Micronaut Kotlin](https://neon.com/docs/guides/micronaut-kotlin): Connect a Micronaut Kotlin application to Neon
+- [Nuxt](https://neon.com/docs/guides/nuxt): Connect a Nuxt application to Neon
+- [OAuth](https://neon.com/docs/guides/oauth-integration): Integrate with Neon using OAuth
+- [Phoenix](https://neon.com/docs/guides/phoenix): Connect a Phoenix site or app to Neon
+- [Quarkus](https://neon.com/docs/guides/quarkus-jdbc): Connect Quarkus (JDBC) to Neon
+- [Quarkus](https://neon.com/docs/guides/quarkus-reactive): Connect Quarkus (Reactive) to Neon
+- [React](https://neon.com/docs/guides/react): Connect a React application to Neon
+- [RedwoodSDK](https://neon.com/docs/guides/redwoodsdk): Connect a RedwoodSDK application to Neon
+- [Reflex](https://neon.com/docs/guides/reflex): Build Python Apps with Reflex and Neon
+- [Remix](https://neon.com/docs/guides/remix): Connect a Remix application to Neon
+- [Ruby on Rails](https://neon.com/docs/guides/ruby-on-rails): Connect a Ruby on Rails application to Neon
+- [Symfony](https://neon.com/docs/guides/symfony): Connect from Symfony with Doctrine to Neon
+- [SolidStart](https://neon.com/docs/guides/solid-start): Connect a SolidStart site or app to Neon
+- [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy): Connect a SQLAlchemy application to Neon
+- [Sveltekit](https://neon.com/docs/guides/sveltekit): Connect a Sveltekit application to Neon
+- [Vue](https://neon.com/docs/guides/vue): Connect a Vue.js application to Neon

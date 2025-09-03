@@ -81,6 +81,15 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    // Disables default export rule for Next.js API routes
+    {
+      files: ['src/app/api/**/*.{js,ts}'],
+      rules: {
+        'import/prefer-default-export': 'off',
+      },
+    },
+  ],
   settings: {
     'import/resolver': {
       node: {

@@ -6,7 +6,7 @@
 
 - [Metrics and logs reference HTML](https://neon.com/docs/reference/metrics-logs): The original HTML version of this documentation
 
-This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](https://neon.com/docs/guides/datadog) and [OpenTelemetry](https://neon.com/docs/guides/opentelemetry).
+This page provides a comprehensive reference for all metrics and log fields that Neon exports to observability platforms through integrations like [Datadog](https://neon.com/docs/guides/datadog), [Grafana Cloud](https://neon.com/docs/guides/grafana-cloud), and [OpenTelemetry](https://neon.com/docs/guides/opentelemetry).
 
 ## Available metrics
 
@@ -94,7 +94,7 @@ Logs include the following labels and metadata for filtering and organization:
 Enabling log export may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, billed on paid plans for usage over 100 GB
 - Associated costs based on log volume in your observability platform
 
    **Note**: Neon computes only send logs and metrics when they are active. If the [Scale to Zero](https://neon.com/docs/introduction/scale-to-zero) feature is enabled and a compute is suspended due to inactivity, no logs or metrics will be sent during the suspension. This may result in gaps in your data. Additionally, if you are setting up an integration for a project with an inactive compute, you'll need to activate the compute before it can send data. To activate it, simply run a query from the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or any connected client.
@@ -108,4 +108,5 @@ Neon processes logs directly on each compute instance using [rsyslogd](https://w
 For platform-specific setup instructions and examples, see:
 
 - [Datadog integration](https://neon.com/docs/guides/datadog) - Setup instructions, dashboard configuration, and Datadog-specific features
+- [Grafana Cloud integration](https://neon.com/docs/guides/grafana-cloud) - Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
 - [OpenTelemetry integration](https://neon.com/docs/guides/opentelemetry) - OTLP configuration for any compatible observability platform

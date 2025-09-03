@@ -18,7 +18,7 @@ const HighAvailability = () => (
           removing the need for full-size standby instances.
         </p>
         <Link
-          to={LINKS.docsBranching}
+          to={LINKS.docsHighAvailability}
           className="mt-6 text-[15px] leading-none tracking-tight text-white lg:mt-5 md:mt-3.5"
           withArrow
         >

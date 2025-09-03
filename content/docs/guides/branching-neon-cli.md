@@ -180,6 +180,10 @@ neon branches reset feature/user-auth --parent
 │ br-twilight-smoke-123456   │ feature/user-auth │ false   │ 2024-04-23T17:01:49Z │ 2024-04-23T17:57:35Z │
 ```
 
+<Admonition type="note">
+**Branch expiration behavior:** When you reset a branch that has an expiration set, the expiration timer restarts from the reset time using the original duration. For example, if your branch was originally set to expire in 24 hours, resetting gives it another full 24 hours from the reset time. This process recalculates the new `expires_at` value using the preserved `ttl_interval_seconds`, but the TTL interval itself remains unchanged. For more details, see [branch expiration](/docs/guides/branch-expiration).
+</Admonition>
+
 If the branch you want to reset has child branches, you need to include the `preserve-under-name` parameter. This will save the current state of your branch under a new name before performing the reset. The child branches will then show this newly named branch as their parent. This step ensures that your original branch can be reset cleanly, as all child branches will have been transferred to the new parent name.
 
 For example, here we are resetting `feature/user-auth` to its parent while preserving its latest state under the branch name `feature/user-auth-backup`:

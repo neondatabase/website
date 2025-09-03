@@ -2,7 +2,7 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.271Z'
+updatedOn: '2025-08-18T12:11:47.174Z'
 ---
 
 <InfoBlock>
@@ -682,7 +682,7 @@ You can export your Postgres logs from your Neon compute to your Grafana Cloud s
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, which is billed after 100 GB on paid plans
 - Associated costs based on log volume in Grafana Cloud
 
 ### Querying logs in Grafana Cloud

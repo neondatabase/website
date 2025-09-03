@@ -32,7 +32,7 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
-   **Note**: Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](https://neon.com/docs/reference/compatibility#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](https://neon.com/docs/introduction/support) to see if the desired setting can be supported.
+   **Note**: Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](https://neon.com/docs/reference/compatibility#configuring-postgres-parameters-for-a-session-database-or-role). If you are a Neon [Scale plan](https://neon.com/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](https://neon.com/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints.
 
 | Parameter                             | Value         | Note                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -46,6 +46,7 @@ The following table shows parameter settings that are set explicitly for your Ne
 | `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                                                                                |
 | `log_connections`                     | on            |                                                                                                                                                                                                                                                                                |
 | `log_disconnections`                  | on            |                                                                                                                                                                                                                                                                                |
+| `log_min_error_statement`             | panic         |                                                                                                                                                                                                                                                                                |
 | `log_temp_files`                      | 1048576       |                                                                                                                                                                                                                                                                                |
 | `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](https://neon.com/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |
 | `max_connections`                     | 112           | The value differs by compute size. See [below](https://neon.com/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |
@@ -189,7 +190,7 @@ ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 
 ## Postgres logs
 
-PostgreSQL logs can be accessed through the [Datadog integration](https://neon.com/docs/guides/datadog) on Scale tier and higher plans. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](https://neon.com/docs/introduction/support).
+Postgres logs can be accessed through the [Datadog](https://neon.com/docs/guides/datadog) or [OpenTelemetry](https://neon.com/docs/guides/opentelemetry) integration on the Scale plan. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](https://neon.com/docs/introduction/support).
 
 ## Unlogged tables
 
@@ -269,3 +270,7 @@ CREATE TABLE my_ru_table (
 ICU also supports creating custom collations. For more information, see [ICU Custom Collations](https://www.postgresql.org/docs/current/collation.html#ICU-CUSTOM-COLLATIONS).
 
 For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
+
+## track_commit_timestamp parameter
+
+The `track_commit_timestamp` Postgres parameter is currently not supported in Neon due to platform constraints.

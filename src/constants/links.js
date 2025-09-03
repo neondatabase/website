@@ -51,6 +51,7 @@ export default {
   connectionPooling: '/docs/connect/connection-pooling',
   docsBranching: '/docs/introduction/branching',
   docsMigration: '/docs/import/import-data-assistant',
+  docsHighAvailability: '/docs/introduction/high-availability',
   manageBilling: '/docs/introduction/manage-billing',
   pgSearch: '/docs/extensions/pg_search',
   docsPgvector: '/docs/extensions/pgvector',
@@ -89,13 +90,13 @@ export default {
   vscodeCopilot:
     'https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N',
   // Compliance
-  trust: 'https://trust.neon.tech',
-  certCCPA: 'https://trust.neon.tech/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',
-  certGDPR: 'https://trust.neon.tech/?itemUid=45220873-6e51-4dbb-b1b1-37d66ee9ef95',
-  certISO27001: 'https://trust.neon.tech/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
-  certISO27701: 'https://trust.neon.tech/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
-  certSOC2: 'https://trust.neon.tech/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
-  certHIPAA: 'https://trust.neon.tech/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
+  trust: 'https://trust.neon.com',
+  certCCPA: 'https://trust.neon.com/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',
+  certGDPR: 'https://trust.neon.com/?itemUid=45220873-6e51-4dbb-b1b1-37d66ee9ef95',
+  certISO27001: 'https://trust.neon.com/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
+  certISO27701: 'https://trust.neon.com/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
+  certSOC2: 'https://trust.neon.com/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
+  certHIPAA: 'https://trust.neon.com/?itemUid=aec41c33-0f3a-4030-ac59-49adfd4a975b',
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',

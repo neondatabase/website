@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import Container from 'components/shared/container/container';
+import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
-import checkIcon from 'icons/pricing/check.svg';
 import authIcon from 'icons/pricing/features/auth.svg';
 import cableIcon from 'icons/pricing/features/cable.svg';
+import checkIcon from 'icons/pricing/features/check.svg';
 import complianceIcon from 'icons/pricing/features/compliance.svg';
 import copyIcon from 'icons/pricing/features/copy.svg';
 import gridIcon from 'icons/pricing/features/grid.svg';

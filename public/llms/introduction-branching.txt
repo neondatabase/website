@@ -55,6 +55,17 @@ Refer to the following guide for instructions.
 
 - [Branching — Testing queries](https://neon.com/docs/guides/branching-test-queries): Instantly create a branch to test queries before running them in production
 
+### Temporary environments
+
+Create branches with TTL by [setting an expiration date](https://neon.com/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
+
+Branches with expiration are particularly useful for:
+
+- CI/CD pipeline testing environments
+- Feature development with known lifespans
+- Automated testing scenarios
+- AI-driven development workflows
+
 ## Restore and recover data
 
 If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
@@ -65,14 +76,13 @@ If you lose data due to an unintended deletion or some other event, you can rest
 
 Your **restore window** determines how far back Neon maintains a history of changes for each branch. By default, this is set to **1 day** to help you avoid unexpected storage costs. You can increase it up to:
 
-- 24 hours on the [Free plan](https://neon.com/docs/introduction/plans#free-plan)
-- 7 days on [Launch](https://neon.com/docs/introduction/plans#launch)
-- 14 days on [Scale](https://neon.com/docs/introduction/plans#scale)
-- 30 days on [Business](https://neon.com/docs/introduction/plans#business)
+- Up to 6 hours (or 1 GB) on the Free plan
+- Up to 7 days on Launch
+- Up to 30 days on Enterprise
 
 You can configure your restore window in the Neon Console under **Settings** > **Storage** > **Instant restore**. See [Configure restore window](https://neon.com/docs/manage/projects#configure-your-restore-window).
 
-   **Note**: Increasing your restore window affects **all branches** in your project and increases [project storage](https://neon.com/docs/introduction/usage-metrics#storage). You can reduce it to zero to minimize cost.
+   **Note**: Increasing your restore window affects **all branches** in your project and increases project storage. You can reduce it to zero to minimize cost.
 
 History is retained in the form of Write-Ahead-Log (WAL) records. As WAL records age out of the retention period, they are evicted from storage and no longer count toward project storage.
 

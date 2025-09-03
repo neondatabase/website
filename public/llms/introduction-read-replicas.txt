@@ -25,7 +25,7 @@ You can create read replicas using the Neon Console, [Neon CLI](https://neon.com
 
 From the Neon Console, it's a simple **Add Read Replica** action on a branch.
 
-   **Note**: You can add read replicas to a branch as needed to accommodate your workload. The Free Plan is limited to a maximum of 3 read replica computes per project.
+   **Note**: You can add read replicas to a branch as needed to accommodate your workload. The Free plan is limited to a maximum of 3 read replica computes per project.
 
 
 

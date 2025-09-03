@@ -4,7 +4,7 @@ subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-create-app
-updatedOn: '2025-06-23T15:24:08.792Z'
+updatedOn: '2025-08-21T09:00:11.983Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
@@ -152,7 +152,7 @@ Commands:
   neon orgs                        Manage organizations                [aliases: org]
   neon projects                    Manage projects                 [aliases: project]
   neon ip-allow                    Manage IP Allow
-  neonctl vpc                      Manage VPC endpoints and project VPC restrictions
+  neon vpc                         Manage VPC endpoints and project VPC restrictions
   neon branches                    Manage branches                   [aliases: branch]
   neon databases                   Manage databases            [aliases: database, db]
   neon roles                       Manage roles                        [aliases: role]

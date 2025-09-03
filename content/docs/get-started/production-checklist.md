@@ -5,7 +5,7 @@ subtitle: A checklist of recommended settings to optimize performance, security,
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2025-08-02T10:33:29.255Z'
+updatedOn: '2025-08-18T18:19:18.015Z'
 ---
 
 <CheckList title="Production checklist">
@@ -38,7 +38,7 @@ updatedOn: '2025-08-02T10:33:29.255Z'
   Verify your application handles compute restarts gracefully.
 </CheckItem>
 <CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-scale-for-priority-support">
-  Get faster support and priority handling for your production database with a Scale plan.
+  Get support for your production database with a Scale plan.
 </CheckItem>
 <CheckItem title="11. Advanced: Set up cross-region replication" href="#advanced-set-up-cross-region-replication">
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
@@ -215,7 +215,7 @@ For more information, see [Query performance](/docs/postgresql/query-performance
 
 ## Upgrade to a Neon Scale plan for priority support
 
-Support tickets opened by Scale support plan customers are given top priority by the Neon Support team.
+Scale plan customers can open support tickets with the Neon Support team.
 
 **Recommendation**
 
