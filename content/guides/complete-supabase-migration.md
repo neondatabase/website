@@ -721,6 +721,12 @@ export default function Page() {
 
 </CodeTabs>
 
+    <Admonition type="info" title="Neon Auth Hooks">
+      The Neon Auth SDK for Next.js offers a comprehensive set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
+
+    To explore the full API, including hooks for more advanced features like handling teams and permissions, refer to the [Neon Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview).
+    </Admonition>
+
 ### Step 5: Clean up deprecated Supabase files
 
 After refactoring, you can safely remove the Supabase-specific helper files and custom authentication routes, as Neon Auth's SDK handles these functionalities automatically.
@@ -794,7 +800,6 @@ If your users were authenticated via OAuth providers like GitHub or Google in Su
 ## Resources
 
 - [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html)
-- [pg_restore](https://www.postgresql.org/docs/current/app-pgrestore.html)
 - [Migrating data to Neon](/docs/import/migrate-from-postgres)
 - [Migrate from Supabase](/docs/import/migrate-from-supabase)
 - [Getting started with Neon Data API](/docs/data-api/get-started)
