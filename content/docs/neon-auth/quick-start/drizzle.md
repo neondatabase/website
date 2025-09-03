@@ -2,6 +2,7 @@
 title: Using Neon Auth with Drizzle ORM
 subtitle: Learn how to integrate Neon Auth with Drizzle ORM
 enableTableOfContents: true
+updatedOn: '2025-09-03T00:13:41.649Z'
 ---
 
 Neon Auth simplifies user management by automatically synchronizing user data into a `neon_auth.users_sync` table within your Neon Postgres database. This powerful feature allows you to treat user profiles as regular database rows, enabling you to create foreign key relationships, perform SQL joins, and apply row-level security (RLS) policies directly against your user data.
