@@ -124,7 +124,7 @@ POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
 
 - `name` (string): A name for the newly restored branch. If omitted, a default name is generated
 - `target_branch_id` (string): The ID of the branch to restore the snapshot into. If not specified, the branch from which the snapshot was originally created will be used. **Set this value to your root branch ID for rollbacks to preserve connection strings**
-- `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move  computes from the current branch to the new branch, which keeps the database connection string the same. Defaults to `false`. **Set to `true` when restoring to the active branch for rollbacks, `false` to create preview branches**
+- `finalize_restore` (boolean): Set to `true` to finalize the restore operation immediately. This will complete the restore and move computes from the current branch to the new branch, which keeps the database connection string the same. Defaults to `false`. **Set to `true` when restoring to the active branch for rollbacks, `false` to create preview branches**
 
 <Admonition type="note" title="Connection warning">
 Do not connect to the database until current API operations are complete. Any connection attempt before operations finish will either fail or connect to the old database state, not your restored version.
