@@ -45,7 +45,8 @@ Create autonomous agents that can manage and interact with your Neon databases p
 <DetailIconCards>
 <a href="https://github.com/neondatabase/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
 
-<a href="/docs/ai/ai-database-versioning" description="Database versioning for AI agents and codegen platforms with Neon's snapshot APIs" icon="openai">Database versioning for AI Agents</a>
+
+<a href="/docs/ai/ai-database-versioning" description="Database versioning for AI agents and codegen platforms with Neon's snapshot APIs" icon="openai">Database versioning for AI agents</a>
 </DetailIconCards>
 
 ## Scale with Agent frameworks

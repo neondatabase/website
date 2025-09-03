@@ -1445,6 +1445,8 @@
           slug: guides/platform-integration-get-started
         - title: OAuth integration
           slug: guides/oauth-integration
+        - title: Database versioning for AI agents
+          slug: guides/ai-database-versioning
         - title: Configure consumption limits
           slug: guides/consumption-limits
         - title: Query consumption metrics

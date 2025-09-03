@@ -40,7 +40,7 @@ Find out how you can integrate with Neon.
 
 <a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
 
-<a href="/docs/ai/ai-database-versioning" description="Implement database versioning for AI agents and codegen platforms with Neon's snapshot APIs" icon="openai">Database versioning for AI Agents</a>
+<a href="/docs/ai/ai-database-versioning" description="Implement database versioning for AI agents and codegen platforms with Neon's snapshot APIs" icon="openai">Database versioning for AI agents</a>
 
 <a href="/docs/workflows/claimable-database-integration" description="Manage Neon projects for users with the database claim API" icon="transactions">Claimable database</a>
 
