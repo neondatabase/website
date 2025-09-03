@@ -49,15 +49,6 @@ Once enabled, you'll see your **REST API Endpoint** — this is your base URL fo
 
 _Always secure your data before using the Data API in production._
 
-### About activation times and schema changes
-
-- After enabling the Data API, it may take a minute for your endpoints to become available. Be aware of that.
-- If you change your database schema, you'll need to tell the Data API to refresh its cache. You can do this by reloading the schema from the SQL Editor:
-
-  ```sql
-  NOTIFY pgrst, 'reload schema'
-  ```
-
 ## Authentication
 
 Once enabled, the **Working with the Data API** section shows your current security status and next steps. If you skipped the auth provider selection, you'll also see an option to add an authentication provider.
@@ -192,6 +183,17 @@ console.table(data);
 ```
 
 > For a complete example of how to configure the Bearer token with Neon Auth, see the [postgrest.ts](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/lib/postgrest.ts) file from our demo app.
+
+## Schema changes and cache refresh
+
+When you modify your database schema (adding tables, columns, or changing structure), the Data API needs to refresh its cache to recognize these changes.
+
+**To refresh the schema cache:**
+
+1. Go to the **Data API** section in your Neon console
+2. Click the **Refresh schema cache** button
+
+![Data API with Refresh Schema Cache button](/docs/data-api/data-api-enabled.png)
 
 ## Try the demo app
 
