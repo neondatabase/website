@@ -54,7 +54,10 @@ By the end of this guide, you'll have a system where database changes are as sea
 
 ## Configure the database schema
 
+This guide demonstrates database schema definition using Drizzle ORM. The underlying principles can be easily adapted to your preferred ORM, such as Prisma, TypeORM, or Sequelize.
+
 1. Create `app/db/schema.ts`:
+   The following code defines the database schema for a simple Todo application:
 
    ```typescript
    import { integer, text, boolean, pgTable } from 'drizzle-orm/pg-core';
@@ -152,9 +155,6 @@ jobs:
 
   create_neon_branch:
     name: Create Neon Branch
-    outputs:
-      db_url: ${{ steps.create_neon_branch_encode.outputs.db_url }}
-      db_url_with_pooler: ${{ steps.create_neon_branch_encode.outputs.db_url_with_pooler }}
     needs: setup
     if: |
       github.event_name == 'pull_request' && (
@@ -224,6 +224,10 @@ To set up GitHub Actions correctly:
 2. **Add Database Connection String**:
    Add a `DATABASE_URL` secret to your repository under **Settings** > **Secrets and variables** > **Actions**, using the connection string for your production database that you noted earlier. While you're here, you should see the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable that have already been set by the Neon GitHub integration.
 
+</Admonition>
+
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
 </Admonition>
 
 ## Understanding the workflow

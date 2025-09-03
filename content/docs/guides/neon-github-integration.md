@@ -152,6 +152,10 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
+</Admonition>
+
 To add the workflow to your repository:
 
 1. In your repository, create a workflow file in the `.github/workflows` directory; for example, create a file named `neon_workflow.yml`.

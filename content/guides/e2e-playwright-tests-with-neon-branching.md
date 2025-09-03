@@ -1,0 +1,367 @@
+---
+title: Automated E2E Testing with Neon Branching and Playwright
+subtitle: Learn how to use GitHub Actions to create isolated database branches for running Playwright tests against your schema changes
+enableTableOfContents: true
+author: dhanush-reddy
+createdAt: '2025-09-03T00:00:00.000Z'
+---
+
+End-to-end (E2E) testing is crucial for ensuring application quality, but it becomes complex when database changes are involved. Running tests that depend on a specific schema against a shared staging environment can lead to flaky results and development bottlenecks.
+
+Database branching solves this problem by creating isolated database environments for each feature branch, perfectly mirroring your code branching strategy. This guide demonstrates how to combine the power of Neon's instant database branching with Playwright and GitHub Actions to create a fully automated E2E testing pipeline.
+
+You will build a Next.js Todo application and configure a workflow that, for every pull request:
+
+- Creates a new, isolated database branch.
+- Applies schema migrations to that branch.
+- Builds and runs the application against the new branch.
+- Executes a full suite of Playwright tests.
+- Posts a schema diff summary directly in the pull request.
+- Cleans up resources and applies migrations to the production database upon merging.
+
+By the end of this guide, you'll have a CI/CD pipeline where database-dependent E2E tests are run safely and reliably for every change, giving you the confidence to ship features faster. This concept can be extended to any E2E testing framework, not just Playwright.
+
+## Prerequisites
+
+- A [Neon account](https://console.neon.tech)
+- A [GitHub account](https://github.com/)
+- Node.js installed on your machine
+
+## Setting up your Neon database
+
+1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
+2.  Navigate to the **Connection Details** page and copy your database connection string. You will need this later.
+
+    Your connection string will look something like this:
+
+    ```text
+    postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
+    ```
+
+## Set up the project
+
+This guide uses Playwright with Next.js, but the concepts can be easily adapted to other frameworks by following the Playwright-specific steps.
+
+Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-playwright-example) repository. You will use this as a starting point for your tests. The repository contains a simple Todo app built with Next.js and TypeScript using Drizzle ORM. It has Playwright tests set up.
+
+1. Run the following commands to clone the repository and install dependencies:
+
+   ```bash
+   git clone https://github.com/dhanushreddy291/neon-playwright-example
+   cd neon-playwright-example
+   npm install
+   cp .env.example .env
+   ```
+
+2. Populate the `.env` file with your Neon database connection details.
+
+3. Apply the necessary migrations to your database:
+
+   ```bash
+   npm run db:migrate
+   ```
+
+4. Check the todo app works by running:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open [localhost:3000](http://localhost:3000) in your browser to see the app. Verify the basic functionality of the todo app.
+
+5. Check that the Playwright tests work by running:
+
+   ```bash
+   npm run test:e2e -- --headed
+   ```
+
+   You should see Chromium, Firefox, and WebKit browsers launching and running your tests.
+
+6. Push your code to a new GitHub repository.
+
+   ```bash
+   sudo rm -r .git
+   git init
+   git add .
+   git commit -m "Initial commit"
+   git branch -M main
+   git remote add origin <YOUR_GITHUB_REPO_URL>
+   git push -u origin main
+   ```
+
+   Now that you have your code pushed to GitHub, you can set up the Neon GitHub integration.
+
+## Set up the Neon GitHub integration
+
+The [Neon GitHub integration](/docs/guides/neon-github-integration) securely connects your Neon project to your repository. It automatically creates a `NEON_API_KEY` secret and a `NEON_PROJECT_ID` variable in your repository, which are required for your GitHub Actions workflow.
+
+1.  In the Neon Console, navigate to the **Integrations** page for your project.
+2.  Locate the **GitHub** card and click **Add**.
+    ![GitHub App card](/docs/guides/github_card.png)
+3.  On the **GitHub** drawer, click **Install GitHub App**.
+4.  If you have more than one GitHub account, select the account where you want to install the GitHub app.
+5.  Select the GitHub repository to connect to your Neon project, and click **Connect**.
+6.  **Add Production Database Secret**:
+    - Navigate to your GitHub repository's **Settings** > **Secrets and variables** > **Actions**.
+    - Create a new repository secret called `DATABASE_URL`.
+    - Paste the connection string for your primary `main` branch (copied from the Neon Console).
+    - Note that the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable should already be available from the GitHub integration setup.
+    - The `DATABASE_URL` will be used exclusively for the production environment to apply migrations upon successful merge of pull requests.
+
+## Understanding the workflow
+
+Open the `.github/workflows/playwright.yml` file in your repository.
+This workflow automates the entire testing lifecycle for each pull request.
+
+```yaml
+name: Playwright Tests
+on:
+  pull_request:
+    branches: [main]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  setup:
+    name: Setup
+    timeout-minutes: 1
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.branch_name.outputs.current_branch }}
+    steps:
+      - name: Get branch name
+        id: branch_name
+        uses: tj-actions/branch-names@v8
+
+  create_neon_branch_and_run_tests:
+    name: Create Neon Branch and Run Tests
+    needs: setup
+    permissions:
+      contents: read
+      pull-requests: write
+    if: |
+      github.event_name == 'pull_request' && (
+      github.event.action == 'synchronize' || github.event.action == 'opened' || github.event.action == 'reopened')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Neon Branch
+        id: create_neon_branch
+        uses: neondatabase/create-branch-action@v6
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+          role: neondb_owner
+
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      - name: Generate drizzle migrations
+        run: npm run db:generate
+
+      - name: Apply drizzle migrations
+        run: npm run db:migrate
+        env:
+          DATABASE_URL: '${{ steps.create_neon_branch.outputs.db_url_pooled }}'
+
+      - name: Build Next.js app
+        run: npm run build
+        env:
+          NODE_ENV: production
+          DATABASE_URL: '${{ steps.create_neon_branch.outputs.db_url_pooled }}'
+
+      - name: Start Next.js app
+        run: npm start &
+        env:
+          NODE_ENV: production
+          DATABASE_URL: '${{ steps.create_neon_branch.outputs.db_url_pooled }}'
+
+      - name: Wait for app to be ready
+        run: |
+          timeout 60 bash -c 'until curl -f http://localhost:3000 > /dev/null 2>&1; do sleep 1; done'
+
+      - name: Run Playwright tests
+        run: npm run test:e2e
+
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      - name: Post Schema Diff Comment to PR
+        uses: neondatabase/schema-diff-action@v1
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+  delete_neon_branch:
+    name: Delete Neon Branch and Apply Migrations on Production branch
+    needs: setup
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete Neon Branch
+        uses: neondatabase/delete-branch-action@v3
+        with:
+          project_id: ${{ vars.NEON_PROJECT_ID }}
+          branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          api_key: ${{ secrets.NEON_API_KEY }}
+
+      - name: Checkout
+        if: github.event.pull_request.merged == true
+        uses: actions/checkout@v4
+
+      - name: Apply migrations to production
+        if: github.event.pull_request.merged == true
+        run: |
+          npm install
+          npm run db:generate
+          npm run db:migrate
+        env:
+          DATABASE_URL: '${{ secrets.DATABASE_URL }}'
+```
+
+<Admonition type="note" title="Note">
+To set up GitHub Actions correctly, go to your repository's GitHub Actions settings, navigate to **Actions** > **General**, and set **Workflow permissions** to **Read and write permissions**.
+</Admonition>
+
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch_and_run_tests`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
+</Admonition>
+
+The workflow consists of three jobs:
+
+- **Setup job**: Retrieves the current branch name for naming the Neon database branch.
+- **Create branch & test job**: Creates a Neon database branch and runs Playwright tests whenever a pull request is opened or updated.
+- **Cleanup job**: Cleans up resources after the pull request is closed.
+
+### Create branch & test job
+
+This job runs whenever a pull request is opened or updated:
+
+1.  **Branch creation**: A new Neon database branch is created instantly using the [`neondatabase/create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action). This branch is a copy-on-write clone, making it fast and cost-effective.
+2.  **Migration**: Schema migrations are applied directly to the new database branch using its unique connection string.
+3.  **E2E testing**: Playwright runs its test suite against the live application, which is now backed by a dedicated, ephemeral database. This ensures tests are reliable and free from outside interference.
+4.  **Reporting**: A test report is uploaded as an artifact for debugging, and a schema diff is posted as a PR comment, giving reviewers immediate insight into database changes.
+
+### Cleanup job
+
+This job runs when a pull request is closed:
+
+1.  **Production migration**: If the PR was merged, the same migrations are applied to the production database, ensuring it stays in sync.
+2.  **Branch deletion**: The temporary preview branch is deleted, keeping your Neon project clean and tidy.
+
+## Test the workflow
+
+You can test the entire pipeline by making a schema change, updating the UI, and adding a new Playwright test to validate it.
+
+1.  Create a new feature branch in your local repository:
+
+    ```bash
+    git checkout -b feature/add-created-at
+    ```
+
+2.  Modify the database schema in `app/db/schema.ts` to include a `created_at` timestamp:
+
+    ```typescript {1,7}
+    import { pgTable, text, bigint, boolean, timestamp } from 'drizzle-orm/pg-core';
+
+    export const todos = pgTable('todos', {
+      id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
+      task: text('task').notNull(),
+      isComplete: boolean('is_complete').notNull().default(false),
+      createdAt: timestamp('created_at').notNull().defaultNow(),
+    });
+    ```
+
+3.  Update the UI component in `app/todos.tsx` to display the new timestamp:
+
+    ```tsx {6,13}
+    // app/todos.tsx
+    type Todo = {
+      id: bigint;
+      task: string;
+      isComplete: boolean;
+      createdAt: Date;
+    };
+
+    // ... inside the TodoList component's map function
+    <li key={todo.id.toString()} className="flex items-center justify-between border-b py-2">
+      <div>
+        <span className={todo.isComplete ? 'text-gray-400 line-through' : ''}>{todo.task}</span>
+        <p className="text-gray-500 text-xs">Created: {todo.createdAt.toLocaleDateString()}</p>
+      </div>
+
+      <div className="flex gap-2">{/* ... forms for toggle and delete */}</div>
+    </li>;
+    ```
+
+4.  Add a new Playwright test in `tests/todos.spec.ts` to verify that the timestamp is displayed:
+
+    ```typescript
+    // tests/todos.spec.ts
+    // ... inside the "Todo App" describe block
+    test('should display created at timestamp for a new todo', async ({ page }) => {
+      const todoText = 'Check the timestamp';
+      await page.locator('input[name="task"]').fill(todoText);
+      await page.locator('button:has-text("Add")').click();
+
+      // Check that the todo text is visible
+      await expect(page.locator(`text=${todoText}`)).toBeVisible();
+
+      // Check that the "Created:" text is visible
+      const expectedDate = new Date().toLocaleDateString();
+      await expect(page.locator(`text=Created: ${expectedDate}`)).toBeVisible();
+    });
+    ```
+
+5.  Commit your changes and push the branch to GitHub:
+
+    ```bash
+    git add .
+    git commit -m "feat: add and display created_at timestamp for todos"
+    git push origin feature/add-created-at
+    ```
+
+6.  Open a pull request on GitHub.
+
+Once the PR is opened, the GitHub Actions workflow will trigger. You can watch as it creates a new database branch, runs migrations, starts your app, and successfully runs the Playwright tests including the new one you just added. The workflow will post a schema diff comment on the PR, and once merged, it will apply the changes to your production database and clean up the preview branch.
+
+## Source code
+
+You can find the complete source code for this example on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/dhanushreddy291/neon-playwright-example" description="Get started with automated E2E testing using Neon, Playwright, and GitHub Actions" icon="github">Neon Playwright Example</a>
+</DetailIconCards>
+
+## Conclusion
+
+You have seen how to create isolated database branches for running Playwright tests, ensuring reliable and consistent E2E testing. This approach can be easily adapted to any other E2E testing framework, such as Cypress or Selenium, by modifying the test execution steps in the GitHub Actions workflow while keeping the Neon branching logic intact.
+
+## Resources
+
+- [Neon Database Branching](/branching)
+- [Neon GitHub Integration](/guides/neon-github-integration)
+- [Playwright Documentation](https://playwright.dev/docs/intro)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
+
+<NeedHelp/>
