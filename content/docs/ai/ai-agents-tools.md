@@ -35,7 +35,7 @@ Accelerate your development with context rules that help AI tools write better c
 <DetailIconCards>
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth Rules</a>
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for efficient serverless database connections" icon="github">Neon Serverless Rules</a>
+<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
 </DetailIconCards>
 
 ## Build AI agents
@@ -44,6 +44,9 @@ Create autonomous agents that can manage and interact with your Neon databases p
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+
+
+<a href="/docs/ai/ai-database-versioning" description="Database versioning for AI agents and codegen platforms with Neon's snapshot APIs" icon="openai">Database versioning for AI Agents</a>
 </DetailIconCards>
 
 ## Scale with Agent frameworks
