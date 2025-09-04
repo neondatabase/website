@@ -32,7 +32,7 @@ Supabase Auth is the authentication system used by Supabase. It manages user acc
 
 #### 1.1: Export users and password hashes from Supabase
 
-Connect to your Supabase project using the SQL Editor in the dashboard and run the following SQL function. This function retrieves all user emails and their encrypted bcrypt password hashes.
+Connect to your Supabase project using the SQL Editor in the dashboard and run the following SQL function. This function retrieves all user emails and their encrypted **bcrypt** password hashes.
 
 ```sql
 CREATE OR REPLACE FUNCTION ufn_get_user_emails_and_passwords()
