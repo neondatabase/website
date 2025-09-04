@@ -1,6 +1,6 @@
 ---
 title: Database versioning with Neon snapshots
-subtitle: Learn how Ai agents and codegen platforms can implement database version control using snapshots and preview branches
+subtitle: How AI agents and codegen platforms implement database version control using snapshots and preview branches
 enableTableOfContents: true
 updatedOn: '2025-08-21T14:09:12.290Z'
 ---
