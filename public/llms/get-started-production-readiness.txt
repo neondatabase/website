@@ -1,6 +1,6 @@
 # Production readiness with Neon
 
-> The "Production readiness with Neon" document outlines the necessary steps and considerations for preparing Neon databases for production environments, including configuration, monitoring, and security practices specific to Neon's infrastructure.
+> The document "Production readiness with Neon" outlines the necessary steps and considerations for preparing Neon databases for production environments, including configuration, monitoring, and scaling practices specific to Neon's infrastructure.
 
 ## Source
 

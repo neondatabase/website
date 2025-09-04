@@ -36,7 +36,7 @@ Vercel transitioned all Vercel Postgres stores to Neon's native integration (Q4 
 
 ### Automatic plan transitions
 
-- **Hobby Plan users** → Neon Free Plan (better limits, more features)
+- **Hobby Plan users** → Neon Free plan (better limits, more features)
 - **Pro Plan users** → Maintained existing limits with option to upgrade to Neon plans
 
 ---
@@ -77,7 +77,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 - **CLI support** - Full [Neon CLI](https://neon.com/docs/reference/neon-cli) (Vercel CLI didn't support Postgres)
 - **Terraform support** - [Neon Terraform provider](https://neon.com/docs/reference/terraform)
 - **Multiple Postgres roles** - No longer limited to single role
-- **Larger computes** - Up to 2 vCPUs on Free Plan (vs 0.25 CPU limit), more on paid plans
+- **Larger computes** - Up to 2 vCPUs on Free plan (vs 0.25 CPU limit), more on paid plans
 - **Multiple Postgres versions** - Upgrade from Postgres 15 to support for Postgres 14, 15, 16, and 17
 - **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)** - Programmatic project and database management
 - **[Organization accounts](https://neon.com/docs/manage/organizations)** - Team and project management

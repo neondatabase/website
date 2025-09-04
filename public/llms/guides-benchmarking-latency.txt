@@ -16,7 +16,7 @@ When benchmarking Neon databases, you'll encounter two distinct types of queries
 
 - **Hot queries**: Execute on an already-active database instance, delivering consistent low latency. These represent typical performance in production environments where databases run continuously or remain active most of the time.
 
-Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to configure or disable the auto-suspend timeout, enabling you to customize your testing approach or eliminate cold starts entirely. See [Compute Lifecycle](https://neon.com/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](https://neon.com/docs/introduction/auto-suspend) for more details.
+Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](https://neon.com/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](https://neon.com/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](https://neon.com/docs/introduction/auto-suspend) for more details.
 
 ## Benchmarking methodology
 
@@ -112,7 +112,11 @@ For examples of different connection patterns and their implementation, see [Con
 
 ## Neon latency benchmarks dashboard
 
-Neon provides a [Latency Benchmarks Dashboard](https://neon.com/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions. The benchmark specifically tracks:
+Neon provides a [Latency Benchmarks Dashboard](https://neon.com/demos/regional-latency) that measures latency between serverless functions and Neon databases across different regions.
+
+
+
+The benchmark specifically tracks:
 
 - Roundtrip time for executing simple SELECT queries
 - Network latency between function and database regions

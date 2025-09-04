@@ -41,7 +41,7 @@ This guide walks you through creating a read replica, connecting to it, running 
 
 Creating a read replica involves adding a read replica compute to a branch.
 
-   **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
+   **Note**: The Free plan is limited to a maximum of 3 read replica computes per project.
 
 You can add a read replica compute- to any branch in your Neon project by following these steps:
 

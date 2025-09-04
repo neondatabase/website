@@ -1,6 +1,6 @@
 # AI Rules: Neon with Drizzle
 
-> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon platform using Drizzle, detailing the setup and configuration processes for users to implement automated decision-making workflows.
+> The document "AI Rules: Neon with Drizzle" outlines the integration of AI-driven rules within the Neon platform using Drizzle, detailing the setup and configuration processes for implementing automated decision-making workflows.
 
 ## Source
 
@@ -287,4 +287,9 @@ export async function getUserSafely(id: number) {
    - Batch operations when possible
    - Use prepared statements for repeated queries
    - Optimize complex joins to minimize data transfer
+
+4. **Schema Design**
+   - Leverage Postgres-specific features supported by Neon
+   - Use appropriate indexes for your query patterns
+   - Consider Neon's performance characteristics for large tables
 ````

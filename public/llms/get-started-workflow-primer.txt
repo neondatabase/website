@@ -1,6 +1,6 @@
 # Database branching workflow primer
 
-> The "Database Branching Workflow Primer" document outlines the process of creating and managing database branches in Neon, enabling users to efficiently handle development, testing, and deployment workflows within the platform.
+> The "Database Branching Workflow Primer" document outlines the process for creating and managing database branches in Neon, enabling users to efficiently handle development and testing environments.
 
 ## Source
 

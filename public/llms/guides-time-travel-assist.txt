@@ -31,7 +31,7 @@ The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 v
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window, which starts at 24 hours for Free Plan users, up to 7 days for Launch, 14 days for Scale, and 30 days for Business plan users.
+You are only able to run Time Travel queries that fall within your restore window.
 
 You cannot select a time outside your current restore window.
 
@@ -75,7 +75,7 @@ Here is how to use Time Travel from both the **SQL Editor** and from the **Resto
 Tab: SQL Editor
 
 1. In the Neon Console, open the **SQL Editor**.
-1. Use the **Time Travel** toggle to enable querying against an earlier point in time.
+1. Use the **Time Travel** (🕣) icon to enable querying against an earlier point in time.
 
    
 
@@ -111,7 +111,7 @@ Using the Neon CLI, you can establish a connection to a specific point in your b
 neon connection-string <branch>@<timestamp|LSN>
 ```
 
-In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in ISO 8601 format) or Log Sequence Number for the point in time you want to access.
+In the `branch` field, specify the name of the branch you want to connect to. Omit the `branch` field to connect to your default branch. Replace the `timestamp|LSN` field with the specific timestamp (in RFC 3339 format) or Log Sequence Number for the point in time you want to access.
 
 Example:
 

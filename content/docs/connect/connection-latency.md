@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-18T12:11:47.168Z'
+updatedOn: '2025-08-26T15:57:17.416Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -235,13 +235,16 @@ As shown in the example above, using `sslnegotiation=direct` reduces the connect
 postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=verify-full&sslnegotiation=direct
 ```
 
+## Latency benchmarking
+
+See [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) to learn how to measure and optimize query latency in your Neon database.
+
 ## Conclusion
 
 With the right strategies, you can optimize your system to handle connection latencies and timeouts, ensuring your application delivers a consistently high level of performance. The best solution often involves a combination of strategies, so experiment and find the right configuration for your specific use case.
 
 ## Related resources
 
-- [Benchmarking latency in Neon's serverless Postgres](/docs/guides/benchmarking-latency) - Learn how to measure and optimize query latency in your Neon database
 - [Neon latency benchmarks dashboard](/demos/regional-latency) - Interactive dashboard showing real-world latency measurements across different regions and workloads ([source code](https://github.com/neondatabase-labs/latency-benchmarks))
 - [Connection pooling guide](/docs/connect/connection-pooling) - Reduce latency with efficient connection management
 - [Regional deployment options](/docs/introduction/regions) - Choose the optimal region for lowest latency

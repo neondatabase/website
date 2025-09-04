@@ -6,7 +6,7 @@
 
 - [IP Allow HTML](https://neon.com/docs/introduction/ip-allow): The original HTML version of this documentation
 
-Neon's IP Allow feature, available with the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](https://neon.com/docs/reference/glossary#cidr-notation).
+Neon's IP Allow feature, available with the Neon [Scale](https://neon.com/docs/introduction/plans) plan, ensures that only trusted IP addresses can connect to the project where your database resides, preventing unauthorized access and helping maintain overall data security. You can limit access to individual IP addresses, IP ranges, or IP addresses and ranges defined with [CIDR notation](https://neon.com/docs/reference/glossary#cidr-notation).
 
 You can configure **IP Allow** in your Neon project's settings. To get started, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow).
 

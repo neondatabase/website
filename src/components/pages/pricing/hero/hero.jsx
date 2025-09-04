@@ -6,8 +6,10 @@ import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import CtaBlock from 'components/shared/cta-block';
 import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
+import LINKS from 'constants/links';
 
 import plans from './data/plans.json';
 import Features from './features';
@@ -74,11 +76,19 @@ const Hero = () => {
                   <div className="flex flex-col justify-between gap-14 lg:gap-[52px] md:gap-12">
                     <h3
                       className={clsx(
-                        'text-[18px] font-medium leading-none tracking-extra-tight lg:text-base',
+                        'flex items-center text-[18px] font-medium leading-none tracking-extra-tight lg:text-base',
                         highlighted ? 'text-green-45' : 'text-gray-new-80'
                       )}
                     >
                       {type}
+                      {type === 'Scale' && (
+                        <Link
+                          className="ml-auto text-[15px] text-gray-new-60 underline decoration-gray-new-60/50 underline-offset-4 md:text-sm"
+                          to={LINKS.contactSales}
+                        >
+                          Contact us
+                        </Link>
+                      )}
                     </h3>
                     <div className={clsx('flex flex-col flex-wrap gap-x-1 md:flex-row')}>
                       <h4 className="whitespace-nowrap text-3xl font-medium leading-snug tracking-extra-tight lg:text-xl">
@@ -158,6 +168,15 @@ const Hero = () => {
             )}
           </ul>
         </div>
+        <CtaBlock
+          className="max-w-2xl"
+          title="Agent Plan"
+          description="Get custom resource limits and credits for your free tier with our Agent Plan, for platforms provisioning thousands of databases."
+          buttonText="Apply Here"
+          buttonUrl={LINKS.useCasesAI}
+          size="sm"
+          hasDecor={false}
+        />
       </Container>
     </section>
   );

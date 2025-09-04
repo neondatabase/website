@@ -220,7 +220,7 @@ The response body lists available libraries and whether the libraries are enable
       "description": "Enables scalable inserts and complex queries for time-series data.",
       "is_default": true,
       "is_experimental": false,
-      "version": "2.13.0"
+      "version": "2.17.1"
     },
     {
       "library_name": "pg_cron",
@@ -244,11 +244,18 @@ The response body lists available libraries and whether the libraries are enable
       "version": "0.0.0"
     },
     {
-      "library_name": "ulid",
+      "library_name": "pgx_ulid",
       "description": "pgx_ulid is a PostgreSQL extension for ULID generation.",
       "is_default": false,
       "is_experimental": false,
-      "version": "0.1.5"
+      "version": "0.2.0"
+    },
+    {
+      "library_name": "pg_mooncake",
+      "description": "Columnstore Table in Postgres",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "0.1.1"
     },
     {
       "library_name": "pg_search",
@@ -256,6 +263,13 @@ The response body lists available libraries and whether the libraries are enable
       "is_default": false,
       "is_experimental": false,
       "version": "0.15.12"
+    },
+    {
+      "library_name": "anon",
+      "description": "Anonymization & Data Masking for PostgreSQL",
+      "is_default": false,
+      "is_experimental": false,
+      "version": "2.1.0"
     }
   ]
 }

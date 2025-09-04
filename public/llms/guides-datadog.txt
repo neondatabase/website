@@ -1,10 +1,10 @@
-# The Neon Datadog integration
+# Datadog integration
 
 > This document details the integration of Neon with Datadog, outlining the steps to configure and monitor Neon's database performance metrics within the Datadog platform.
 
 ## Source
 
-- [The Neon Datadog integration HTML](https://neon.com/docs/guides/datadog): The original HTML version of this documentation
+- [Datadog integration HTML](https://neon.com/docs/guides/datadog): The original HTML version of this documentation
 
 What you will learn:
 - How to set up the integration
@@ -15,7 +15,7 @@ External docs:
 - [Datadog API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/)
 - [Identify Datadog site](https://docs.datadoghq.com/getting_started/site/#access-the-datadog-site/)
 
-Available for Scale and Business Plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
+Available for Scale plan users, the Neon Datadog integration lets you monitor Neon database performance, resource utilization, and system health directly from Datadog's observability platform.
 
 ## How it works
 
@@ -669,7 +669,7 @@ You can export your Postgres logs from your Neon compute to your Datadog account
 Enabling this feature may result in:
 
 - An increase in compute resource usage for log processing
-- Additional network egress for log transmission (Neon does not charge for data transfer on paid plans)
+- Additional network egress for log transmission, which is billed after 100 GB on paid plans
 - Associated costs based on log volume in Datadog
 
 ## Feedback and future improvements

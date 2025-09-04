@@ -147,6 +147,8 @@
               slug: connect/connection-errors
             - title: Latency and timeouts
               slug: connect/connection-latency
+            - title: Latency benchmarks
+              slug: guides/benchmarking-latency
     - title: Migrate to Neon
       icon: import
       slug: import/migrate-intro
@@ -505,6 +507,8 @@
           items:
             - title: Claude Desktop
               slug: https://neon.com/guides/neon-mcp-server
+            - title: Claude Code
+              slug: https://neon.com/guides/claude-code-mcp-neon
             - title: Cursor IDE
               slug: https://neon.com/guides/cursor-mcp-neon
             - title: Cline
@@ -917,6 +921,8 @@
               slug: neon-auth/quick-start/react
             - title: JavaScript
               slug: neon-auth/quick-start/javascript
+            - title: Drizzle
+              slug: neon-auth/quick-start/drizzle
             - title: Demo
               slug: neon-auth/demo
         - section: About
@@ -946,7 +952,7 @@
                 - title: Backend Integration
                   slug: neon-auth/concepts/backend-integration
         - section: Guides
-          items:  
+          items:
             - title: Best practices
               slug: neon-auth/best-practices
             - title: Creating Users

@@ -9,6 +9,7 @@
 ## Monitor
 
 - [Datadog](https://neon.com/docs/guides/datadog): Send metrics and events from Neon Postgres to Datadog
+- [Grafana Cloud](https://neon.com/docs/guides/grafana-cloud): Send metrics and logs from Neon Postgres to Grafana Cloud
 - [OpenTelemetry](https://neon.com/docs/guides/opentelemetry): Send metrics and events from Neon to any OpenTelemetry compatible backend
 
 ## Deploy

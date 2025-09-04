@@ -173,49 +173,14 @@ For database interactions, you will use Drizzle ORM.
       dbCredentials: {
         url: process.env.DATABASE_URL!,
       },
-      schemaFilter: ['public', 'neon_auth'],
     });
     ```
 
-    This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Neon Auth stores its user data.
-
-## Pull Neon Auth schema
-
-A key feature of Neon Auth is the automatic creation and maintenance of the `neon_auth.users_sync` table. This table is updated in real-time as users sign up and manage their profiles, providing you with direct SQL access to essential user information like id, name, and email.
-
-While this provides powerful direct database access, your Drizzle ORM schema is not yet aware of this automatically managed table. To bridge this gap, you will use [Drizzle's introspection](https://orm.drizzle.team/docs/drizzle-kit-pull) feature to "pull" the schema definition from your existing database.
-
-This step is crucial because it makes Drizzle aware of the `users_sync` table, allowing you to define type-safe foreign key relationships between your application's tables and the user data.
-
-1.  **Introspect the database:**
-    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
-
-    ```bash
-    npx drizzle-kit pull
-    ```
-
-    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the `neon_auth.users_sync` table.
-
-2.  **Organize schema files:**
-    Create a new directory `app/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `app/db/schema.ts` and `app/db/relations.ts` respectively.
-
-    ```
-     ├ 📂 drizzle
-     │ ├ 📂 meta
-     │ ├ 📜 migration.sql
-     │ ├ 📜 relations.ts ────────┐
-     │ └ 📜 schema.ts ───────────┤
-     ├ 📂 app                    │
-     │ ├ 📂 db                   │
-     │ │ ├ 📜 relations.ts <─────┤
-     │ │ └ 📜 schema.ts <────────┘
-     │ └ 📜 page.tsx
-     └ …
-    ```
+    This config tells Drizzle Kit where to find your database schema and where to output migration files.
 
 ## Define the application schema
 
-Now that Drizzle is aware of the `users_sync` table, you can define your application's `todos` table schema.
+Drizzle ORM provides a built-in helper function to work with Neon Auth's `users_sync` table. Instead of manually defining the schema or pulling it from the database, you can use the `usersSync` helper from `drizzle-orm/neon`.
 
 The most important part of this schema is creating a direct link between a todo and the user who owns it. You will achieve this by establishing a foreign key relationship from your `todos` table to the `users_sync` table.
 
@@ -227,62 +192,34 @@ This schema defines the `todos` table with the following columns:
 - **`isComplete`**: A boolean flag to track the todo's status.
 - **`insertedAt`**: A timestamp automatically set when a todo is created.
 
-### Update the schema
+### Create the schema file
 
-Open `app/db/schema.ts` and add the `todos` table definition below the existing `usersSyncInNeonAuth` table. Your final `schema.ts` file should look like this:
+Create a `db` directory inside the `app` folder, then add a file named `schema.ts` within it:
+
+```plaintext
+app/
+  db/
+    schema.ts
+```
+
+Add the following code to `app/db/schema.ts`:
 
 ```typescript
-import {
-  pgTable,
-  pgSchema,
-  index,
-  jsonb,
-  text,
-  timestamp,
-  bigint,
-  boolean,
-} from 'drizzle-orm/pg-core';
-import { sql } from 'drizzle-orm';
-
-export const neonAuth = pgSchema('neon_auth');
-
-export const usersSyncInNeonAuth = neonAuth.table(
-  'users_sync',
-  {
-    rawJson: jsonb('raw_json').notNull(),
-    id: text()
-      .primaryKey()
-      .notNull()
-      .generatedAlwaysAs(sql`(raw_json ->> 'id'::text)`),
-    name: text().generatedAlwaysAs(sql`(raw_json ->> 'display_name'::text)`),
-    email: text().generatedAlwaysAs(sql`(raw_json ->> 'primary_email'::text)`),
-    createdAt: timestamp('created_at', {
-      withTimezone: true,
-      mode: 'string',
-    }).generatedAlwaysAs(
-      sql`to_timestamp((trunc((((raw_json ->> 'signed_up_at_millis'::text))::bigint)::double precision) / (1000)::double precision))`
-    ),
-    updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'string' }),
-    deletedAt: timestamp('deleted_at', { withTimezone: true, mode: 'string' }),
-  },
-  (table) => [
-    index('users_sync_deleted_at_idx').using(
-      'btree',
-      table.deletedAt.asc().nullsLast().op('timestamptz_ops')
-    ),
-  ]
-);
+import { pgTable, text, timestamp, bigint, boolean } from 'drizzle-orm/pg-core';
+import { usersSync } from 'drizzle-orm/neon';
 
 export const todos = pgTable('todos', {
   id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
   ownerId: text('owner_id')
     .notNull()
-    .references(() => usersSyncInNeonAuth.id),
+    .references(() => usersSync.id),
   task: text('task').notNull(),
   isComplete: boolean('is_complete').notNull().default(false),
   insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
 });
 ```
+
+The `usersSync` helper from `drizzle-orm/neon` automatically provides the correct schema definition for the `neon_auth.users_sync` table, eliminating the need for manual schema introspection.
 
 ### Generate and apply migrations
 

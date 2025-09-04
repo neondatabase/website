@@ -10,6 +10,7 @@ import ArrowBackToTopIcon from 'icons/arrow-back-to-top.inline.svg';
 import ChatGptIcon from 'icons/docs/chat-gpt.inline.svg';
 import MarkdownIcon from 'icons/docs/markdown.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName }) => {
   const Tag = url ? Link : 'button';
@@ -98,21 +99,32 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   const chatGptLink = `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`;
   const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
-  const buttonsDocs = (
+  const docsActions = (
     <>
       <CopyMarkdownButton rawFileLink={rawFileLink} />
-      <ActionItem icon={GitHubIcon} text="Edit this page on GitHub" url={gitHubLink} />
-      <ActionItem icon={ChatGptIcon} text="Open in ChatGPT" url={chatGptLink} />
+      <ActionItem
+        icon={GitHubIcon}
+        text="Edit this page on GitHub"
+        url={gitHubLink}
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit this page on GitHub' })}
+      />
+      <ActionItem
+        icon={ChatGptIcon}
+        text="Open in ChatGPT"
+        url={chatGptLink}
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Open in ChatGPT' })}
+      />
     </>
   );
 
-  const buttonsTemplate = (
+  const templateActions = (
     <>
       <ActionItem
         icon={GitHubIcon}
         text="Suggest edits"
         url={gitHubLink}
         iconClassName="size-[18px] text-white"
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Suggest edits' })}
       />
       <ActionItem
         icon={ArrowBackToTopIcon}
@@ -130,7 +142,7 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         withBorder ? 'mt-4 border-t border-gray-new-90 pt-4 dark:border-gray-new-15/70' : 'mt-12'
       )}
     >
-      {isTemplate ? buttonsTemplate : buttonsDocs}
+      {isTemplate ? templateActions : docsActions}
     </div>
   );
 };

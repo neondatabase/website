@@ -1,6 +1,6 @@
 # Getting ready for production
 
-> The "Getting ready for production" document outlines a checklist for preparing Neon databases for production environments, detailing steps for configuration, security, performance optimization, and monitoring to ensure reliable and efficient database operations.
+> The "Getting ready for production" document outlines a checklist for Neon users to prepare their databases for production environments, covering essential steps such as configuring backups, monitoring, and security settings.
 
 ## Source
 
@@ -20,14 +20,14 @@
   Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
 - [ ] [6. Restrict database access to trusted IPs](https://neon.com/docs/get-started/production-checklist#restrict-database-access-to-trusted-ips)
   Secure your database by limiting connections to trusted IP addresses.
-- [ ] [7. Set up metrics export to Datadog](https://neon.com/docs/get-started/production-checklist#set-up-metrics-export-to-datadog)
-  Export Neon metrics to Datadog and centralize your database monitoring with your existing observability stack.
+- [ ] [7. Set up metrics export](https://neon.com/docs/get-started/production-checklist#set-up-metrics-export)
+  Export Neon metrics to Datadog or any OTEL-compatible platform like Grafana Cloud or New Relic to centralize database monitoring with your existing observability stack.
 - [ ] [8. Install pg_stat_statements](https://neon.com/docs/get-started/production-checklist#install-pgstatstatements)
   Enable query performance monitoring to track execution times and frequency.
 - [ ] [9. Ensure your app reconnects after your database restarts](https://neon.com/docs/get-started/production-checklist#ensure-your-app-reconnects-after-your-database-restarts)
   Verify your application handles compute restarts gracefully.
-- [ ] [10. Upgrade to get priority support](https://neon.com/docs/get-started/production-checklist#upgrade-to-a-neon-business-plan-for-priority-support)
-  Get faster support and priority handling for your production database with a Business plan.
+- [ ] [10. Upgrade to get priority support](https://neon.com/docs/get-started/production-checklist#upgrade-to-a-neon-business-scale-for-priority-support)
+  Get support for your production database with a Scale plan.
 - [ ] [11. Advanced: Set up cross-region replication](https://neon.com/docs/get-started/production-checklist#advanced-set-up-cross-region-replication)
   For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
 
@@ -123,24 +123,30 @@ Combine an allowlist with protected branches for enhanced security. This setup e
 - **IP Allow**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
 - **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
 
-Available with the Neon [Scale](https://neon.com/docs/introduction/plans#scale) and [Business](https://neon.com/docs/introduction/plans#business) plans, you can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow) and [Protected branches guide](https://neon.com/docs/guides/protected-branches).
+You can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow) and [Protected branches guide](https://neon.com/docs/guides/protected-branches).
 
 
 
-## Set up metrics export to Datadog
+## Set up metrics export
 
-Export Neon metrics to DataDog and centralize your database monitoring with your existing observability stack.
+Export Neon metrics to your preferred observability platform and centralize your database monitoring with your existing stack.
 
 **Recommendation**
 
-Set up Datadog integration to monitor and set alerts for key metrics:
+Set up integration with your observability platform to monitor and set alerts for key metrics:
 
 - Connection counts (active and idle database connections)
 - Database size (total size of all databases)
 - Replication delay (lag in bytes and seconds)
 - Compute metrics (CPU and memory usage)
 
-For more information, see [The Neon Datadog integration](https://neon.com/docs/guides/datadog).
+**Available integrations:**
+
+- **[Grafana Cloud](https://neon.com/docs/guides/grafana-cloud)**: Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
+- **[Datadog](https://neon.com/docs/guides/datadog)**: Direct integration with Datadog's observability platform
+- **[OpenTelemetry](https://neon.com/docs/guides/opentelemetry)**: Export to any OTLP-compatible platform, including self-hosted Grafana and Tempo
+
+Choose the platform that best fits your existing monitoring infrastructure.
 
 ## Ensure your app reconnects after your database restarts
 
@@ -190,13 +196,13 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 For more information, see [Query performance](https://neon.com/docs/postgresql/query-performance) and [Monitoring](https://neon.com/docs/introduction/monitoring).
 
-## Upgrade to a Neon Business plan for priority support
+## Upgrade to a Neon Scale plan for priority support
 
-Support tickets opened by Business and Enterprise support plan customers are given top priority by the Neon Support team.
+Scale plan customers can open support tickets with the Neon Support team.
 
 **Recommendation**
 
-Upgrade to a [Business plan](https://neon.com/docs/introduction/plans#business) to get both [Priority support](https://neon.com/docs/introduction/support#prioritized-support-tickets) and acccess to the [Business SLA](https://neon.com/neon-business-sla).
+Upgrade to a [Scale plan](https://neon.com/docs/introduction/plans) to get both [priority support](https://neon.com/docs/introduction/support#prioritized-support-tickets) and acccess to SLAs.
 
 For more information, see the [Support documentation](https://neon.com/docs/introduction/support).
 
