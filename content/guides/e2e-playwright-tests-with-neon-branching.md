@@ -80,7 +80,7 @@ Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-pl
 6. Push your code to a new GitHub repository.
 
    ```bash
-   sudo rm -r .git
+   rm -rf .git
    git init
    git add .
    git commit -m "Initial commit"
@@ -106,7 +106,10 @@ The [Neon GitHub integration](/docs/guides/neon-github-integration) securely con
     - Create a new repository secret called `DATABASE_URL`.
     - Paste the connection string for your primary `main` branch (copied from the Neon Console).
     - Note that the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable should already be available from the GitHub integration setup.
-    - The `DATABASE_URL` will be used exclusively for the production environment to apply migrations upon successful merge of pull requests.
+
+    <Admonition type="note">
+    It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your primary production database. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+    </Admonition>
 
 ## Understanding the workflow
 
@@ -124,6 +127,7 @@ on:
       - synchronize
       - closed
 
+# Ensures only the latest commit runs, preventing race conditions in concurrent PR updates
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -255,19 +259,43 @@ The workflow consists of three jobs:
 
 ### Create branch & test job
 
-This job runs whenever a pull request is opened or updated:
+This job runs when a pull request is opened, reopened, or synchronized:
 
-1.  **Branch creation**: A new Neon database branch is created instantly using the [`neondatabase/create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action). This branch is a copy-on-write clone, making it fast and cost-effective.
-2.  **Migration**: Schema migrations are applied directly to the new database branch using its unique connection string.
-3.  **E2E testing**: Playwright runs its test suite against the live application, which is now backed by a dedicated, ephemeral database. This ensures tests are reliable and free from outside interference.
-4.  **Reporting**: A test report is uploaded as an artifact for debugging, and a schema diff is posted as a PR comment, giving reviewers immediate insight into database changes.
+1. **Branch creation**:
+   - Uses Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
+   - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
+   - Inherits the schema and data from the parent branch
+
+2. **Migration handling**:
+   - Installs project dependencies
+   - Generates migration files using Drizzle
+   - Applies migrations to the newly created branch
+   - Uses the branch-specific `DATABASE_URL` for migration operations
+
+3. **Application build and start**:
+   - Builds the Next.js application in production mode
+   - Starts the application, connecting it to the new database branch
+
+4. **Playwright test execution**:
+   - Installs Playwright browsers
+   - Runs the full suite of Playwright tests against the live application
+   - Uploads the Playwright report as an artifact for later review
+
+5. **Schema diff generation**:
+   - Uses Neon's [`schema-diff-action`](https://github.com/marketplace/actions/neon-schema-diff-github-action)
+   - Compares the schema of the new branch with the parent branch
+   - Automatically posts the differences as a comment on the pull request
+   - Helps reviewers understand database changes at a glance
 
 ### Cleanup job
 
-This job runs when a pull request is closed:
+1. **Production migration**:
+   - If the PR is merged, applies migrations to the production database
+   - Uses the main `DATABASE_URL` stored in repository secrets
+   - Ensures production database stays in sync with merged changes
 
-1.  **Production migration**: If the PR was merged, the same migrations are applied to the production database, ensuring it stays in sync.
-2.  **Branch deletion**: The temporary preview branch is deleted, keeping your Neon project clean and tidy.
+2. **Cleanup**:
+   - Removes the preview branch using Neon's [`delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)
 
 ## Test the workflow
 
@@ -350,7 +378,7 @@ Once the PR is opened, the GitHub Actions workflow will trigger. You can watch a
 You can find the complete source code for this example on GitHub.
 
 <DetailIconCards>
-<a href="https://github.com/dhanushreddy291/neon-playwright-example" description="Get started with automated E2E testing using Neon, Playwright, and GitHub Actions" icon="github">Neon Playwright Example</a>
+<a href="https://github.com/neondatabase-labs/neon-playwright-example" description="Get started with automated E2E testing using Neon, Playwright, and GitHub Actions" icon="github">Neon Branching with E2E Playwright tests example</a>
 </DetailIconCards>
 
 ## Conclusion

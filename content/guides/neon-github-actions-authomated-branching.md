@@ -136,6 +136,7 @@ on:
       - synchronize
       - closed
 
+# Ensures only the latest commit runs, preventing race conditions in concurrent PR updates
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -230,6 +231,8 @@ To set up GitHub Actions correctly:
 The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
 </Admonition>
 
+It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your primary production database. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+
 ## Understanding the workflow
 
 The GitHub Actions workflow automates database branching and schema management for pull requests. Here's a breakdown of the workflow:
@@ -239,7 +242,7 @@ The GitHub Actions workflow automates database branching and schema management f
 This job runs when a pull request is opened, reopened, or synchronized:
 
 1. **Branch Creation**:
-   - Uses Neon's `create-branch-action` to create a new database branch
+   - Uses Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
    - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
    - Inherits the schema and data from the parent branch
 
@@ -250,7 +253,7 @@ This job runs when a pull request is opened, reopened, or synchronized:
    - Uses the branch-specific `DATABASE_URL` for migration operations
 
 3. **Schema Diff Generation**:
-   - Uses Neon's `schema-diff-action`
+   - Uses Neon's [`schema-diff-action`](https://github.com/marketplace/actions/neon-schema-diff-github-action)
    - Compares the schema of the new branch with the parent branch
    - Automatically posts the differences as a comment on the pull request
    - Helps reviewers understand database changes at a glance
@@ -265,7 +268,7 @@ This job executes when a pull request is closed (either merged or rejected):
    - Ensures production database stays in sync with merged changes
 
 2. **Cleanup**:
-   - Removes the preview branch using Neon's `delete-branch-action`
+   - Removes the preview branch using Neon's [`delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)
 
 ## Flow Summary
 
