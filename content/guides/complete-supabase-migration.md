@@ -7,7 +7,7 @@ createdAt: '2025-09-03T00:00:00.000Z'
 updatedOn: '2025-09-03T00:00:00.000Z'
 ---
 
-This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id`s during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
+This guide walks you through migrating your Postgres database, user accounts, and Row-Level Security (RLS) policies from Supabase to Neon. It addresses key differences between the platforms, including the reassignment of `user_id` values during the auth migration, and provides steps to remap IDs, restore data integrity, and update your application code.
 
 ### Prerequisites
 
