@@ -742,9 +742,9 @@ Delete the following files and directories:
 
 Your application code is now fully migrated to Neon Auth and the Neon Data API.
 
-For a detailed example of the code migration process, refer to this example pull request: [Supabase to Neon Todo App Migration](https://github.com/dhanushreddy291/supabase-to-neon-todo-app/pull/1/files).
+For a detailed example of the code migration process, refer to this example pull request: [Supabase to Neon Todo App Migration](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/pull/3/files).
 
-The repository includes two branches: [supabase](https://github.com/dhanushreddy291/supabase-to-neon-todo-app/tree/supabase) and [neon](https://github.com/dhanushreddy291/supabase-to-neon-todo-app/tree/neon) showcasing the before and after states of a sample todo application. This demonstrates the transition from Supabase Auth, Row-Level Security (RLS), and the Supabase Postgres Data API to Neon Auth, RLS, and the Neon PostgREST Data API.
+The repository includes two branches: [supabase](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/supabase) and [neon](https://github.com/neondatabase-labs/supabase-to-neon-todo-app/tree/neon) showcasing the before and after states of a sample todo application. This demonstrates the transition from Supabase Auth, Row-Level Security (RLS), and the Supabase Postgres Data API to Neon Auth, RLS, and the Neon PostgREST Data API.
 
 ## Part 4: Upgrading your development workflow with Database Branching
 
