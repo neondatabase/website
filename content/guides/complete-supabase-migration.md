@@ -212,7 +212,7 @@ npx ts-node migrate_users.ts
 Upon completion, all your users will be migrated into Neon Auth.
 
 <Admonition type="important" title="User IDs Have Changed">
-It's important to note that this migration process has assigned **new, unique `user_id`s** to all your users within Neon Auth. In the next steps, we will fix the broken references in your database that result from this change.
+It's important to note that this migration process has assigned **new, unique `user_id`** values to all your users within Neon Auth. In the next steps, we will fix the broken references in your database that result from this change.
 </Admonition>
 
 ### Step 2: Export the Supabase Public Schema
