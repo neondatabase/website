@@ -136,6 +136,8 @@ claude mcp add --transport http neon https://mcp.neon.tech/mcp \
 </TabItem>
 </Tabs>
 
+For more, see [Get started with Claude Code and Neon Postgres MCP Server](/guides/claude-code-mcp-neon).
+
 ## Cursor
 
 <Tabs labels={["Remote MCP Server", "Local MCP Server"]}>
