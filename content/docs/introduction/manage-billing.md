@@ -54,7 +54,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ### Failing payments for Indian customers
 
-Neon’s billing system uses Stripe, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. Instead, we send a link to each monthly invoice to the email associated with your account, and payments must be made manually. If you have questions about this process, please [contact our support team](https://neon.com/docs/introduction/support#support-tickets).
+Neon’s billing system uses Stripe, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. Instead, we send a link to each monthly invoice to the email associated with your account, and payments must be made manually. If you have questions about this process, please [contact support](/docs/introduction/support).
 
 ## Update your billing email
 
