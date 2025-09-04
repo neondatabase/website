@@ -11,6 +11,7 @@ const sharedMdxComponents = {
   FeatureBeta: 'shared-content/feature-beta',
   FeatureBetaProps: 'shared-content/feature-beta-props',
   MigrationAssistant: 'shared-content/migration-assistant',
+  NeonRLSDeprecation: 'shared-content/neon-rls-deprecation',
   LinkAPIKey: 'shared-content/manage-api-keys',
   AIRule: 'shared-content/ai-rule-usage',
   NextSteps: 'shared-content/next-steps',

@@ -24,6 +24,8 @@ redirectFrom:
 
 </InfoBlock>
 
+<NeonRLSDeprecation />
+
 **Neon RLS** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, allowing you to query your database directly from client-side applications. It enables direct SQL queries over HTTP by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
 
 > Neon also offers a **Data API** feature, which provides an instant REST interface for your database. We recommend this approach for most use cases. You can learn more in our [Data API guide](/docs/data-api/get-started).

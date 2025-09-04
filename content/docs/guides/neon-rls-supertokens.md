@@ -20,6 +20,8 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
+<NeonRLSDeprecation />
+
 Use SuperTokens with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using SuperTokens for user authentication. It shows you how to integrate SuperTokens with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works

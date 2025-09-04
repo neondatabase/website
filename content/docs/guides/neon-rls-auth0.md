@@ -19,6 +19,8 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
+<NeonRLSDeprecation />
+
 Use Auth0 with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Auth0 for user authentication. It shows you how to integrate Auth0 with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
 ## How it works

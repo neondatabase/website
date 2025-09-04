@@ -20,6 +20,8 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
+<NeonRLSDeprecation />
+
 > **Note for Neon Auth users:**  
 > If you are using [Neon Auth](/docs/neon-auth/overview), you do **not** need to manually set up Stack Auth. Neon Auth provides the JWKS URL for you in the **Configuration** tab of your project. You can start from [Step 3](#3-install-the-pgsessionjwt-extension-in-your-database) below to complete your RLS setup.
 
