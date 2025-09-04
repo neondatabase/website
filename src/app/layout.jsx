@@ -9,8 +9,8 @@ import { TabsProvider } from 'contexts/tabs-context';
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
 import PostHogProvider from './posthog-provider';
-import ThemeProvider from './provider';
 import SessionProvider from './session-provider';
+import ThemeProvider from './theme-provider';
 
 const PostHogPageView = dynamic(() => import('./posthog-pageview'), {
   ssr: false,
@@ -22,7 +22,6 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#000000',
 };
 
 // eslint-disable-next-line react/prop-types
