@@ -198,23 +198,15 @@ The `auth.user_id()` function is provided by the Data API and extracts the user 
 
 With the `posts` table and its RLS policies in place, you can now securely query and modify posts using the Data API.
 
-### Insert example rows
-
-```sql
-INSERT INTO posts ("userId", "content", "published") VALUES
-  ('user1', 'Hello world!', true),
-  ('user2', 'This is a test post.', true);
-```
-
 ## Query from your app
 
-The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example from our demo note-taking app showing how to use it with `postgrest-js`:
+The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example showing how to use it with `postgrest-js`:
 
 ```ts shouldWrap
 import { PostgrestClient } from '@supabase/postgrest-js';
 import { useUser } from '@stackframe/stack';
 
-// Example from our demo app: fetch notes for the current user
+// Example: fetch notes for the current user
 async function fetchUserNotes() {
   const user = useUser(); // [!code highlight]
   if (!user) return null;
@@ -241,7 +233,7 @@ This example shows the key steps:
 3. Create a PostgrestClient with proper authentication headers
 4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
 
-To see a complete, working example of this application built with the Data API, Neon Auth, and RLS, check out our demo note-taking app:
+To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
 
 - [Full tutorial](/docs/data-api/demo) - Step-by-step guide to building the app
 - [GitHub Repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth)
