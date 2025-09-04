@@ -324,6 +324,8 @@ The response body includes information about the branch, the branch's compute, a
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branch": {
@@ -461,6 +463,8 @@ The response body lists the project's default branch and any child branches. The
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branches": [
@@ -549,6 +553,8 @@ The response body shows information about the branch being deleted and the `susp
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

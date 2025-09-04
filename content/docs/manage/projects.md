@@ -423,6 +423,8 @@ The response includes information about the role, the database, the default bran
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
@@ -596,6 +598,8 @@ curl 'https://console.neon.tech/api/v2/projects' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "projects": [
@@ -724,6 +728,8 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
@@ -798,6 +804,8 @@ curl -X 'DELETE' \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
