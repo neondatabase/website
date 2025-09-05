@@ -61,7 +61,11 @@
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
-      { "icon": "autoscale", "title": "Autoscaling up to 16 CU", "subtitle": "(16 vCPU, 64 GB RAM)" }
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 16 CU",
+        "subtitle": "(16 vCPU, 64 GB RAM)"
+      }
     ],
     "otherFeatures": {
       "title": "Everything in Free, plus...",
@@ -97,7 +101,11 @@
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
-      { "icon": "autoscale", "title": "Autoscaling up to 16 CU+", "subtitle": "(56 vCPU, 224 GB RAM)" }
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 16 CU+",
+        "subtitle": "(56 vCPU, 224 GB RAM)"
+      }
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
