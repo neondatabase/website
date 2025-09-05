@@ -10,6 +10,8 @@ redirectFrom:
 
 This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS and your authentication provider.
 
+<NeonRLSDeprecation />
+
 Errors:
 
 - [`NeonDbError: password authentication failed for user 'jwk not found'`](#password-authentication-error)
