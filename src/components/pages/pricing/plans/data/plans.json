@@ -68,8 +68,8 @@
         "title": "Rates"
       },
       "free": "50 CU-hours<span>Per Project</span>",
-      "launch": "Pay-as-you-go <span>at $0.14 per CU-hr</span>",
-      "scale": "Pay-as-you-go<span>at $0.26 per CU-hr</span>"
+      "launch": "$0.14 per CU-hour",
+      "scale": "$0.26 per CU-hour"
     },
     {
       "rows": "2",
@@ -109,8 +109,8 @@
         "title": "Rates"
       },
       "free": "Free<span>0.5 GB per Project</span>",
-      "launch": "Pay-as-you-go<span>at $0.35 per GB-month</span>",
-      "scale": "Pay-as-you-go<span>at $0.35 per GB-month</span>"
+      "launch": "$0.35 per GB-month",
+      "scale": "$0.35 per GB-month"
     },
     {
       "rows": "3",
@@ -119,8 +119,8 @@
         "subtitle": { "text": "Read more", "href": "#instant-restores" }
       },
       "free": "Free<span>with limited window/size</span>",
-      "launch": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>",
-      "scale": "$0.20 per GB-month <span>based on the volume of data changes during your selected restore window</span>"
+      "launch": "$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>",
+      "scale": "$0.20 per GB-month <span>based on volume of data changes during your selected restore window</span>"
     },
     {
       "rows": "3",
@@ -210,7 +210,7 @@
     {
       "rows": "2",
       "feature": {
-        "title": "SOC Compliance"
+        "title": "SOC 2 Report Access"
       },
       "free": false,
       "launch": false,
