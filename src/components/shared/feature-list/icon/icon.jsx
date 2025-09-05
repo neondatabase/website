@@ -25,7 +25,7 @@ const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
   const [isActive, setIsActive] = useState(index === 0);
   const [ref, inView] = useInView({
     threshold: 0,
-    rootMargin: '0px 0px -800px 0px',
+    rootMargin: '0px 0px -500px 0px',
   });
 
   const IconComponent = ICONS[icon];
