@@ -58,7 +58,7 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5. 
+**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5.
 
 > If you sign up for a paid plan part way through the month, the minimum monthly fee amount is proroated from the sign-up date.
 
@@ -328,7 +328,7 @@ The following examples show what your monthly bill might look like on the **Laun
     _(5 GB × $0.35/GB-month)_
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
-  
+
     **Amount due:** **$27.55**
 
 - **Example 2**
@@ -357,7 +357,6 @@ The following examples show what your monthly bill might look like on the **Laun
     **Minimum monthly fee:** **$5.00**  
     **Amount due:** **$5.00**
 
-
 ---
 
 ### Scale plan
@@ -371,7 +370,7 @@ The following examples show what your monthly bill might look like on the **Laun
     _(25 GB × $0.35/GB-month)_
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
-  
+
     **Amount due:** **$495.75**
 
 - **Example 2**
