@@ -423,7 +423,7 @@ The response includes information about the role, the database, the default bran
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -598,7 +598,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List projects](https://api-docs.neon.tech/reference/listprojects) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -728,7 +728,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -805,7 +805,7 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete project](https://api-docs.neon.tech/reference/deleteproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

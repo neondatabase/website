@@ -324,7 +324,7 @@ The response body includes information about the branch, the branch's compute, a
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -463,7 +463,7 @@ The response body lists the project's default branch and any child branches. The
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -554,7 +554,7 @@ The response body shows information about the branch being deleted and the `susp
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [Delete branches](https://api-docs.neon.tech/reference/deleteprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

@@ -212,7 +212,7 @@ The response body lists available libraries and whether the libraries are enable
 <details>
 <summary>Response body</summary>
 
-For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+For attribute definitions, find the [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
