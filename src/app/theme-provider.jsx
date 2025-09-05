@@ -1,8 +1,9 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { ThemeProvider as PreferredProvider } from 'next-themes';
+import { ThemeProvider as PreferredProvider, useTheme } from 'next-themes';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 
 // eslint-disable-next-line react/prop-types
 const whiteThemePages = [
@@ -19,6 +20,27 @@ const whiteThemePages = [
 
 const themesSupportPages = ['/docs', '/guides', '/templates', '/postgresql', '/ai-chat'];
 
+const ThemeColorUpdater = () => {
+  const { theme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    const currentTheme = resolvedTheme || theme;
+    const themeColor = currentTheme === 'light' ? '#FFFFFF' : '#000000';
+
+    let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+    if (!metaThemeColor) {
+      metaThemeColor = document.createElement('meta');
+      metaThemeColor.name = 'theme-color';
+      document.head.appendChild(metaThemeColor);
+    }
+
+    metaThemeColor.content = themeColor;
+  }, [theme, resolvedTheme]);
+
+  return null;
+};
+
 const ThemeProvider = ({ children }) => {
   const pathname = usePathname();
   const isWhiteThemePage = whiteThemePages.some((page) => pathname.startsWith(page));
@@ -32,6 +54,7 @@ const ThemeProvider = ({ children }) => {
       storageKey="neon-theme"
       disableTransitionOnChange
     >
+      <ThemeColorUpdater />
       {children}
     </PreferredProvider>
   );
