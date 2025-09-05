@@ -3,7 +3,7 @@ title: Secure your data with SuperTokens and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using SuperTokens and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.265Z'
+updatedOn: '2025-09-05T14:21:44.230Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-supertokens
   - /docs/guides/neon-authorize-supertokens

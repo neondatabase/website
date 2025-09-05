@@ -2,7 +2,7 @@
 title: Neon RLS tutorial
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2025-03-06T15:24:01.905Z'
+updatedOn: '2025-09-05T14:21:44.231Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
