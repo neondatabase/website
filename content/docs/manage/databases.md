@@ -2,7 +2,7 @@
 title: Manage databases
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.300Z'
+updatedOn: '2025-09-05T12:26:43.313Z'
 ---
 
 A database is a container for SQL objects such as schemas, tables, views, functions, and indexes. In the [Neon object hierarchy](/docs/manage/overview), a database exists within a branch of a project. There is a limit of 500 databases per branch.

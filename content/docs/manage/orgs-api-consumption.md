@@ -1,7 +1,7 @@
 ---
 title: Query organization usage metrics with the Neon API
 enableTableOfContents: true
-updatedOn: '2025-06-03T12:42:18.757Z'
+updatedOn: '2025-09-05T12:26:43.315Z'
 ---
 
 You can use the Neon API to retrieve two types of consumption history metrics for your organization:
