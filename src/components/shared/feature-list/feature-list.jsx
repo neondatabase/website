@@ -76,8 +76,7 @@ const FeatureList = ({ className = '', icons = [], children }) => {
               lastActive={lastActive}
               setLastActive={setLastActive}
             />
-            {/* TODO: reset margins for h2 */}
-            <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:m-0">
+            <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:!m-0">
               {feature}
             </div>
           </li>
