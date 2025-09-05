@@ -299,6 +299,8 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create compute](https://api-docs.neon.tech/reference/createprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
@@ -362,6 +364,8 @@ curl -X 'GET' \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [List computes](https://api-docs.neon.tech/reference/listprojectendpoints) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -446,6 +450,8 @@ curl -X 'PATCH' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
@@ -497,6 +503,8 @@ curl -X 'DELETE' \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Delete compute](https://api-docs.neon.tech/reference/deleteprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

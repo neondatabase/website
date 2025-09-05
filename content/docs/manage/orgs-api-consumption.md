@@ -66,10 +66,12 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-The response will provide aggregated hourly consumption metrics, including active time, compute time, written data, and synthetic storage size, for each hour between June 30 and July 2.
+The response will provide aggregated hourly consumption metrics, including `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes`, for each hour between June 30 and July 2.
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -141,7 +143,9 @@ curl --request GET \
 ```
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json shouldWrap
 {
@@ -211,3 +215,12 @@ curl --request GET \
 ```
 
 See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.
+
+## Metric definitions
+
+- **active_time_seconds** — The number of seconds the project’s computes have been active during the period.
+- **compute_time_seconds** — The number of CPU seconds used by the project's computes, including computes that have been deleted; for example:
+  - A compute that uses 1 CPU for 1 second is equal to `compute_time=1`.
+  - A compute that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
+- **written_data_bytes** — The total amount of data written to all of a project's branches.
+- **synthetic_storage_size_bytes** — The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.

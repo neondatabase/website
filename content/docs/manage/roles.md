@@ -128,6 +128,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 <LinkAPIKey />
+
 ### Create a role with the API
 
 The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
@@ -156,6 +157,8 @@ curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-m
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -205,6 +208,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List roles](https://api-docs.neon.tech/reference/listprojectbranchroles) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "roles": [
@@ -247,6 +252,8 @@ curl -X 'POST' \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Reset role password](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -296,6 +303,8 @@ curl -X 'DELETE' \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Delete role](https://api-docs.neon.tech/reference/deleteprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

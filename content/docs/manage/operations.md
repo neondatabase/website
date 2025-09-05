@@ -107,6 +107,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "operations": [
@@ -167,6 +169,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?li
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "operations": [
@@ -200,6 +204,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cu
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -242,6 +248,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve operation details](https://api-docs.neon.tech/reference/getprojectoperation) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -293,7 +301,7 @@ The response to a Neon API request includes information about the operations tha
   ]
 ```
 
-You can use the [Get operation details](https://api-docs.neon.tech/reference/listprojectoperations) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
+You can use the [Get operation details](https://api-docs.neon.tech/reference/getprojectoperation) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
@@ -303,6 +311,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Get operation details](https://api-docs.neon.tech/reference/getprojectoperation) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

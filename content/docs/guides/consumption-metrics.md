@@ -51,7 +51,7 @@ See [Details on setting a date range](#details-on-setting-a-date-range) for more
 
 You can also get similar daily, hourly, or monthly metrics across a selected time period, but broken out for each individual project that belongs to your organization.
 
-Using the endpoint `GET /consumption_history/projects`, let's use the same start date, end date, and level of granularity as our account-level request: hourly metrics between June 30th and July 2nd, 2024.
+Using the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, let's use the same start date, end date, and level of granularity as our account-level request: hourly metrics between June 30th and July 2nd, 2024.
 
 ```shouldWrap
 curl --request GET \
@@ -62,6 +62,8 @@ curl --request GET \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```shouldWrap
 {
@@ -154,6 +156,8 @@ And here is a sample response:
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Retrieve account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "periods": [
@@ -207,6 +211,15 @@ And here is a sample response:
 ```
 
 </details>
+
+## Metric definitions
+
+- **active_time_seconds** — The number of seconds the project’s computes have been active during the period.
+- **compute_time_seconds** — The number of CPU seconds used by the project's computes, including computes that have been deleted; for example:
+  - A compute that uses 1 CPU for 1 second is equal to `compute_time=1`.
+  - A compute that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
+- **written_data_bytes** — The total amount of data written to all of a project's branches.
+- **synthetic_storage_size_bytes** — The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
 
 ## Details on pagination
 
