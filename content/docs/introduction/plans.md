@@ -58,13 +58,13 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan before usage-based charges.
+**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5. 
 
-For **Launch** and **Scale**, the minimum monthly fee is $5. Additional usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+> If you sign up for a paid plan part way through the month, the minimum monthly fee amount is proroated from the sign-up date.
+
+For **Launch** and **Scale**, the minimum monthly fee is $5. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
-
-> If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, signing up halfway through the month results in a $2.50 base cost (half of $5).
 
 ### ☑ Who it's for
 
@@ -328,9 +328,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(5 GB × $0.35/GB-month)_
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
-
-    **Estimated monthly cost:** **$32.55**
+  
+    **Amount due:** **$27.55**
 
 - **Example 2**
   - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
@@ -341,9 +340,23 @@ The following examples show what your monthly bill might look like on the **Laun
     _(10 GB × $0.35/GB-month)_
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$61.50**
+    **Amount due:** **$56.50**
+
+- **Example 3 (less than $5 usage)**
+  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.40**  
+    _(10 CU-hours × $0.14/CU-hour)_
+  - Root branch storage: 2 GB — **$0.70**  
+    _(2 GB × $0.35/GB-month)_
+  - Child branch storage: 1 GB — **$0.35**  
+    _(1 GB × $0.35/GB-month)_
+  - Instant restore history: 1 GB — **$0.20**  
+    _(1 GB × $0.20/GB-month)_
+
+    **Subtotal:** **$2.65**  
+    **Minimum monthly fee:** **$5.00**  
+    **Amount due:** **$5.00**
+
 
 ---
 
@@ -358,9 +371,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(25 GB × $0.35/GB-month)_
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
-
-    **Estimated monthly cost:** **$500.75**
+  
+    **Amount due:** **$495.75**
 
 - **Example 2**
   - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
@@ -371,9 +383,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(40 GB × $0.35/GB-month)_
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$762.50**
+    **Amount due:** **$757.50**
 
 ## FAQs
 
