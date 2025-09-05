@@ -1,11 +1,14 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import slugify from 'slugify';
 
 import Icon, { ICONS } from './icon';
 
 const FeatureList = ({ className = '', icons, children }) => {
+  const [lastActive, setLastActive] = useState(0);
   // Split content into features by h2/h3 headings
   const features = [];
   let currentFeature = [];
@@ -57,29 +60,29 @@ const FeatureList = ({ className = '', icons, children }) => {
     });
 
   return (
-    <div className="relative mt-8 sm:mt-7">
-      <ul className={clsx('feature-list !m-0 flex flex-col gap-10 !p-0 sm:gap-9', className)}>
-        {features.map((feature, index) => {
-          const title = getFeatureTitle(feature);
-          const id = updateTitleById(title);
+    <ul
+      className={clsx('feature-list !mt-8 flex flex-col gap-10 !p-0 sm:!mt-7 sm:gap-9', className)}
+    >
+      {features.map((feature, index) => {
+        const title = getFeatureTitle(feature);
+        const id = updateTitleById(title);
 
-          return (
-            <li
-              id={id}
-              key={id}
-              className="relative !m-0 flex scroll-mt-[100px] gap-3 before:!content-none"
-            >
-              <Icon index={index} isLast={index === features.length - 1} icon={icons[index]} />
-              <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
-                {feature}
-              </div>
-            </li>
-          );
-        })}
-      </ul>
-      {/* Progress line bg */}
-      <span className="absolute left-[14px] top-0 h-full w-px bg-gray-new-80 dark:bg-gray-new-15" />
-    </div>
+        return (
+          <li className="relative !m-0 flex gap-3 before:!content-none" key={id}>
+            <Icon
+              index={index}
+              isLast={index === features.length - 1}
+              icon={icons[index]}
+              lastActive={lastActive}
+              setLastActive={setLastActive}
+            />
+            <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:m-0">
+              {feature}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
 
