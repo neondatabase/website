@@ -53,7 +53,37 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 ## How It Works
 
-<FeatureList />
+<FeatureList icons={['agent', 'speedometer', 'branching', 'database', 'lock', 'scale', 'api']}>
+
+### Agent creates an app
+
+A vibe coder imagines an app. Your agent builds it, full-stack. Real apps need databases, not just UI scaffolds or code snippets. Neon lets your agent add a fully functional Postgres database to every app it builds. Whether they're prototyping, testing, or deploying, your users get persistence out of the box.
+
+### Gets a working database instantly, with no friction
+
+Neon provisions the database behind the scenes via API, so your user never has to leave your flow or sign up for an external service. Provisioning is instant, invisible, and integrated. Your agent simply requests a project, and Neon returns a live Postgres instance. The result is a seamless experience where databases just show up, and the vibe never breaks.
+
+### Agent adds auth
+
+Neon makes it easy to add secure, production-ready authentication and access control to agent-generated apps using Neon Auth. Your users don't have to wire it up themselves – auth just works, right out of the box. One less thing to worry about, and one more reason their app feels real.
+
+### Infra stays affordable as more apps are created
+
+Imagine spinning up a new RDS instance every few seconds: you'd blow your budget on the first invoice. Most managed databases aren't built to support thousands of isolated instances, especially not cheaply. Neon's serverless architecture solves this. Databases automatically scale to zero when idle and wake up instantly. You don't pay unless the database is active or stores data.
+
+### Branching unlocks time travel + safety
+
+Neon branching makes it easy to build full-version history into your platform. Your agent can snapshot schema and data at any moment, and vibe coders can roll back to a working version of their app, preview earlier states, or safely test changes.
+
+### Stay in control with quotas
+
+The Neon API allows you to track usage per project and branch with detailed endpoints for compute time, storage, and network I/O. You can enforce quotas via the API to match your free or paid plans, giving you full control over how resources are consumed.
+
+### It's all just Postgres
+
+The most-loved database by developers is also the most practical choice for agents. Postgres is flexible, powerful, and battle-tested. Neon is simply Postgres: with all the extensions, full SQL syntax, and everything your agent already understands.
+
+</FeatureList>
 
 ## Documentation
 
