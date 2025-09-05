@@ -63,6 +63,8 @@ curl --request GET \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```shouldWrap
 {
   "projects": [
@@ -153,6 +155,8 @@ And here is a sample response:
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

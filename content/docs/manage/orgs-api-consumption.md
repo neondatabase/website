@@ -69,7 +69,7 @@ curl --request GET \
 The response will provide aggregated hourly consumption metrics, including `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes`, for each hour between June 30 and July 2.
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
 
 For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
@@ -143,7 +143,7 @@ curl --request GET \
 ```
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
 
 For attribute definitions, find the endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
