@@ -126,16 +126,16 @@ const ProgramForm = ({ type, focus = false }) => {
             </label>
             {isRecognized ? (
               <div className="space-y-3">
-                <div className="flex items-center gap-3 rounded bg-green-45/10 p-3 dark:bg-green-45/20">
-                  <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
-                  <span className="text-sm text-gray-new-30 dark:text-gray-new-70">
-                    We have your Neon Account Email
-                  </span>
-                </div>
-                <div className="space-y-2">
+                <div className="flex items-center justify-between gap-3 rounded bg-green-45/10 p-3 dark:bg-green-45/20">
+                  <div className="flex items-center gap-3">
+                    <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
+                    <span className="text-sm text-gray-new-30 dark:text-gray-new-70">
+                      We have your Neon Account Email
+                    </span>
+                  </div>
                   <label
                     htmlFor="override"
-                    className="flex cursor-pointer items-center gap-2 text-sm"
+                    className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-sm"
                   >
                     <input
                       name="override"
@@ -149,23 +149,23 @@ const ProgramForm = ({ type, focus = false }) => {
                       Use a different email address
                     </span>
                   </label>
-                  {useCustomEmail && (
-                    <input
-                      type="email"
-                      name="email"
-                      id="email"
-                      value={email}
-                      className={clsx(
-                        'remove-autocomplete-styles h-12 w-full rounded border-none bg-gray-new-94 px-4 py-3',
-                        'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                        'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
-                      )}
-                      placeholder="Enter your preferred email"
-                      required
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  )}
                 </div>
+                {useCustomEmail && (
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    value={email}
+                    className={clsx(
+                      'remove-autocomplete-styles h-12 w-full rounded border-none bg-gray-new-94 px-4 py-3',
+                      'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
+                      'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
+                    )}
+                    placeholder="Enter your preferred email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                )}
               </div>
             ) : (
               <input
