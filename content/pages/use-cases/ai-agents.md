@@ -28,7 +28,6 @@ If you're building agents that generate apps from prompts, your users want to bu
 'databutton',
 ]} />
 
-
 <QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Anything" />
 
 ## Agent Plan Pricing
