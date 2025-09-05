@@ -7,7 +7,7 @@ import slugify from 'slugify';
 
 import Icon, { ICONS } from './icon';
 
-const FeatureList = ({ className = '', icons, children }) => {
+const FeatureList = ({ className = '', icons = [], children }) => {
   const [lastActive, setLastActive] = useState(0);
   // Split content into features by h2/h3 headings
   const features = [];
@@ -70,12 +70,13 @@ const FeatureList = ({ className = '', icons, children }) => {
         return (
           <li className="relative !m-0 flex gap-3 before:!content-none" key={id}>
             <Icon
+              icon={icons[index] || ''}
               index={index}
               isLast={index === features.length - 1}
-              icon={icons[index]}
               lastActive={lastActive}
               setLastActive={setLastActive}
             />
+            {/* TODO: reset margins for h2 */}
             <div className="flex max-w-[664px] flex-col gap-3 !tracking-tight md:gap-2 [&>*]:m-0">
               {feature}
             </div>
@@ -88,7 +89,7 @@ const FeatureList = ({ className = '', icons, children }) => {
 
 FeatureList.propTypes = {
   className: PropTypes.string,
-  icons: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(ICONS))).isRequired,
+  icons: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(ICONS))),
   children: PropTypes.node,
 };
 

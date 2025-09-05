@@ -21,11 +21,11 @@ export const ICONS = {
   api: ApiIcon,
 };
 
-const Icon = ({ index, isLast, icon, lastActive, setLastActive }) => {
+const Icon = ({ icon, index, isLast, lastActive, setLastActive }) => {
   const [isActive, setIsActive] = useState(index === 0);
   const [ref, inView] = useInView({
     threshold: 0,
-    rootMargin: '0px 0px -500px 0px',
+    rootMargin: '0px 0px -800px 0px',
   });
 
   const IconComponent = ICONS[icon];
@@ -47,8 +47,8 @@ const Icon = ({ index, isLast, icon, lastActive, setLastActive }) => {
       <div className="relative z-20 -m-1 size-9 bg-white p-1 dark:bg-black-pure">
         <div
           className={clsx(
-            'relative flex size-7 items-center justify-center overflow-hidden rounded-full border',
-            isActive ? 'border-transparent' : 'border-gray-new-80 dark:border-gray-new-15'
+            'relative flex size-7 items-center justify-center overflow-hidden rounded-full',
+            !isActive && 'border border-gray-new-80 dark:border-gray-new-15'
           )}
           ref={ref}
         >
@@ -62,14 +62,16 @@ const Icon = ({ index, isLast, icon, lastActive, setLastActive }) => {
             )}
           />
           <span className="absolute inset-0 z-10 rounded-full border border-black/90 mix-blend-overlay dark:border-white/90" />
-          <div
-            className={clsx(
-              'relative z-20 flex size-full items-center justify-center transition-colors duration-300',
-              isActive ? 'text-white' : 'text-gray-new-80 dark:text-gray-new-15'
-            )}
-          >
-            <IconComponent />
-          </div>
+          {IconComponent && (
+            <div
+              className={clsx(
+                'relative z-20 flex size-full items-center justify-center transition-colors duration-300',
+                isActive ? 'text-white' : 'text-gray-new-80 dark:text-gray-new-15'
+              )}
+            >
+              <IconComponent />
+            </div>
+          )}
         </div>
       </div>
       {/* Progress line */}
