@@ -6,6 +6,8 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
+<ProgramForm type="agent" focus={true} />
+
 If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
 <Admonition type="tip" title="LLM Credits">Qualified startups can get credits towards the latest OpenAI, Llama, Claude models through the Databricks Startup program. (Neon is a Databricks Company.)</Admonition>
@@ -25,8 +27,6 @@ If you're building agents that generate apps from prompts, your users want to bu
 'solar',
 'databutton',
 ]} />
-
-<ProgramForm type="agent" />
 
 <QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Anything" />
 
@@ -61,6 +61,4 @@ For documentation on using the Neon API to provision and manage backends on beha
 
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
-## Application Form
-
-<ProgramForm type="agent" />
+To get started with the Agent Plan [fill out the application form at the top of this page](#agent-form).
