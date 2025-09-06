@@ -61,7 +61,7 @@ When determining which table columns will be published, a column list will take 
 When you enable generated column replication, the publisher sends the calculated values to subscribers. The subscriber can then:
 
 - Store them as regular columns (useful for non-PostgreSQL databases)
-- If the subscriber defines the column as `GENERATED`, do not publish that column and let the subscriber compute it locally, or you will get an error
+- If the subscriber also defines the column as `GENERATED`, an error will occur if the publisher sends generated column values, because the subscriber cannot receive published generated column values.
 
 **Important**: When publishing stored generated columns with `publish_generated_columns = stored`, the subscriber must receive them into regular columns. If both the publisher publishes generated columns AND the subscriber column is also defined as GENERATED, the apply process will error.
 

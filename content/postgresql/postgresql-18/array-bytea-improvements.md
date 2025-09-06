@@ -164,7 +164,7 @@ FROM (VALUES
 ) AS ratings(rating);
 ```
 
-This query finds the lowest and highest product ratings based on average score and review count. If you were to try to use `MIN()` or `MAX()` on arrays or composite types in previous versions, you would have to write custom aggregate functions or use complex subqueries. Now, these operations are straightforward and come built-in.
+This query finds the lowest and highest product ratings based on average score and review count. In previous PostgreSQL versions, using `MIN()` or `MAX()` on arrays or composite types required custom aggregate functions or complex subqueries. Now, these operations are straightforward and come built-in.
 
 ## Performance Considerations
 

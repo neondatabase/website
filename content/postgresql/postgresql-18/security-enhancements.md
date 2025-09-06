@@ -55,7 +55,7 @@ The main improvement in protocol version 3.2 is support for enhanced security fe
 
 While PostgreSQL 18 servers support protocol version 3.2, libpq (the standard PostgreSQL client library) continues to use protocol version 3.0 by default. Driver authors can opt into 3.2 using the new min/max protocol settings.
 
-To check the negotiated protocol, call `PQfullProtocolVersion()` from libpq-based clients. There is no SQL command that reports the wire protocol just yet.
+To check the negotiated protocol, call `PQfullProtocolVersion()` from libpq-based clients. Currently, there is no SQL command that reports the wire protocol version.
 
 To use protocol version 3.2 features, both the client and server must support the new protocol version. Driver developers and application maintainers will gradually add support for the enhanced protocol features.
 
