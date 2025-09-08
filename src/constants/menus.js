@@ -182,7 +182,7 @@ export default {
               icon: AiAgentsIcon,
               iconGradient: AiAgentsGradientIcon,
               title: 'Agents',
-              description: 'Deploy Postgres via AI agents',
+              description: 'Build full-stack AI agents',
               to: `${LINKS.useCases}/ai-agents`,
             },
           ],
