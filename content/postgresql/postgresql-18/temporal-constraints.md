@@ -9,8 +9,8 @@ previousLink:
   title: 'PostgreSQL 18 Enhanced Returning'
   slug: 'postgresql-18/enhanced-returning'
 nextLink:
-  title: 'PostgreSQL 18 OAuth Support'
-  slug: 'postgresql-18/oauth-authentication'
+  title: 'PostgreSQL 18 Array and Bytea Function Improvements'
+  slug: 'postgresql-18/array-bytea-improvements'
 ---
 
 **Summary**: Learn how PostgreSQL 18 introduces temporal constraints using the WITHOUT OVERLAPS clause for primary keys and unique constraints, plus the PERIOD clause for foreign keys, enabling robust time-based data integrity at the database level.
