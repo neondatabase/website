@@ -161,21 +161,18 @@ const fetchAllWpPosts = async (first, after) => {
           date
           modifiedGmt
           title(format: RENDERED)
-          content(format: RENDERED)
+          excerpt(format: RENDERED)
           pageBlogPost {
             isFeatured
             largeCover {
               altText
               mediaItemUrl
             }
-            description
             authors {
               author {
                 ... on PostAuthor {
                   title
                   postAuthor {
-                    role
-                    url
                     image {
                       altText
                       mediaItemUrl
@@ -199,6 +196,7 @@ const fetchAllWpPosts = async (first, after) => {
       }
     }
   `;
+
   const data = await fetchGraphQL(graphQLClient).request(allPostsQuery, {
     first,
     after,
