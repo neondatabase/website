@@ -5,6 +5,10 @@ enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.286Z'
 ---
 
+<Admonition type="important">
+Neosync was recently acquired and is no longer available. The instructions in this guide are deprecated and will be removed in a future update.
+</Admonition>
+
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create synthetic data and sync it across all of your Neon database environments.
 
 In this guide, we'll show you how to seed a Neon database with synthetic data for testing and rapid development using Neosync.
