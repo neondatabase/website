@@ -73,6 +73,8 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
+- **Usage-based pricing plans**: Our paid plans now start at just **$5/month**. Pay only for what you use. See [Neon’s New Pricing, Explained: Usage-Based With a $5 Minimum](https://neon.com/blog/new-usage-based-pricing).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
 - **Neon Local Connect** — An extension that makes it easy to work with Neon in your local development environment. Available for VS Code, Cursor, Windsurf, and other compatible editors. See [Neon Local Connect Extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect).
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
@@ -162,23 +164,3 @@ We are as excited as you are to see new features in Neon, but their development,
 As always, we are listening. If you see something you like, something you disagree with, or something you'd love for us to add, let us know in our Discord feedback channel.
 
 <CommunityBanner buttonText="Leave feedback" buttonUrl="https://discord.com/channels/1176467419317940276/1176788564890112042" logo="discord">Share your ideas in&nbsp;Discord</CommunityBanner>
-
-## A brief history of Neon
-
-The Neon **Limited Preview** started in February 2022 and was made available to a small number of select users and friends.
-
-- On June 15th, 2022, the Neon team announced a [Technical Preview](/blog/hello-world), making Neon available to a wider audience. Thousands of users were able to try Neon's [Free plan](/docs/introduction/#free-plan).
-
-- On December 6th, 2022, Neon released its branching feature and dropped the invite gate, welcoming everyone to try Neon's Free plan.
-
-- In the first quarter of 2023, Neon launched [paid plans](/pricing) with new features like [Project Collaboration](/docs/guides/project-collaboration-guide), [Autoscaling](/docs/introduction/autoscaling), and [Scale to Zero](/docs/introduction/scale-to-zero). We also added support for AWS US East (N. Virginia)
-
-- In the second quarter of 2023, we released the [Neon CLI](/docs/reference/neon-cli). Enhancements included a configurable [restore window](/docs/introduction/branch-restore) window, support for Postgres 16, and [SOC 2 Type 1](/blog/soc2-type-1#our-journey-to-soc2) compliance.
-
-- In the third quarter of 2023, we added [IP allowlisting](/docs/introduction/ip-allow), email signup, and [logical replication](/docs/introduction/logical-replication). We also announced [SOC 2 Type 2](/blog/soc2-type2) compliance.
-
-- In the fourth quarter of 2023, we added support for the AWS Asia Pacific (Sydney) region, [Instant restore](/docs/guides/branch-restore) with Time Travel Assist, and new [Pricing](/pricing) plans.
-
-- On April 15th, 2024, Neon announced [General Availability](/blog/neon-ga).
-
-For everything post-GA, please refer to our [Changelog](/docs/changelog) and the [Neon Blog](/blog). You can also stay updated with the latest information and announcements by subscribing to our [RSS feeds](/docs/reference/feeds) or [newsletter](/blog#subscribe-form).
