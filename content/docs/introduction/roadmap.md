@@ -16,7 +16,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. We're continuing to build out our AI platform support capabilities. If you're building an AI agent platform and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner) — and checkout our new [Neon for AI Agents](/use-cases/ai-agents) pricing plan.
-- **Snapshot scheduling**: Neon supports creating snapshots manually — see [Backup & restore](/docs/guides/backup-restore). We're now working on a snapshot sceduling feature with automated snapshot retention management.
+- **Snapshot scheduling**: Neon supports creating snapshots manually — see [Backup & restore](/docs/guides/backup-restore). We're now working on a snapshot scheduling feature with automated snapshot retention management.
 - **Monitoring for billing**: Stay tuned for monitoring enhancements for our new usage-based pricing plans.
 - **Large object storage**: We're working on adding support for large object storage.
 - **Console support for data anonymization**: Neon supports the Postgres `anon` extension for [data anonymization](/docs/workflows/data-anonymization). We're bringing that support to the console.
