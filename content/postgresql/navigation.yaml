@@ -508,283 +508,249 @@
     - title: PostgreSQL Aggregate Functions
       slug: postgresql-aggregate-functions
       items:
-        - slug: postgresql-aggregate-functions/postgresql-avg-function
-          title: AVG
         - slug: postgresql-aggregate-functions/postgresql-array_agg
           title: ARRAY_AGG
+        - slug: postgresql-aggregate-functions/postgresql-avg-function
+          title: AVG
         - slug: postgresql-aggregate-functions/postgresql-bool_and
           title: BOOL_AND
         - slug: postgresql-aggregate-functions/postgresql-bool_or
           title: BOOL_OR
         - slug: postgresql-aggregate-functions/postgresql-count-function
           title: COUNT
-        - slug: postgresql-aggregate-functions/postgresql-string_agg-function
-          title: STRING_AGG
-        - slug: postgresql-aggregate-functions/postgresql-sum-function
-          title: SUM
         - slug: postgresql-aggregate-functions/postgresql-max-function
           title: MAX
         - slug: postgresql-aggregate-functions/postgresql-min-function
           title: MIN
+        - slug: postgresql-aggregate-functions/postgresql-string_agg-function
+          title: STRING_AGG
+        - slug: postgresql-aggregate-functions/postgresql-sum-function
+          title: SUM
     - title: Date Functions
       slug: postgresql-date-functions
       items:
-        - section: Getting Current Date & Time
-          items:
-            - slug: postgresql-date-functions/postgresql-current_date
-              title: CURRENT_DATE
-            - slug: postgresql-date-functions/postgresql-current_time
-              title: CURRENT_TIME
-            - slug: postgresql-date-functions/postgresql-current_timestamp
-              title: CURRENT_TIMESTAMP
-            - slug: postgresql-date-functions/postgresql-clock_timestamp
-              title: CLOCK_TIMESTAMP
-            - slug: postgresql-date-functions/postgresql-statement_timestamp
-              title: STATEMENT_TIMESTAMP
-            - slug: postgresql-date-functions/postgresql-now
-              title: NOW
-            - slug: postgresql-date-functions/postgresql-localtime
-              title: LOCALTIME
-            - slug: postgresql-date-functions/postgresql-localtimestamp
-              title: LOCALTIMESTAMP
-        - section: Extracting Date & Time Parts
-          items:
-            - slug: postgresql-date-functions/postgresql-date_part
-              title: DATE_PART
-            - slug: postgresql-date-functions/postgresql-extract
-              title: EXTRACT
-        - section: Converting to Date & Time
-          items:
-            - slug: postgresql-date-functions/postgresql-to_date
-              title: TO_DATE
-            - slug: postgresql-date-functions/postgresql-to_timestamp
-              title: TO_TIMESTAMP
-            - slug: postgresql-date-functions/postgresql-make_date
-              title: MAKE_DATE
-            - slug: postgresql-date-functions/postgresql-make_time
-              title: MAKE_TIME
-        - section: Handling Intervals
-          items:
-            - slug: postgresql-date-functions/postgresql-age
-              title: AGE
-            - slug: postgresql-date-functions/postgresql-justify_days
-              title: JUSTIFY_DAYS
-            - slug: postgresql-date-functions/postgresql-justify_hours
-              title: JUSTIFY_HOURS
-            - slug: postgresql-date-functions/postgresql-justify_interval
-              title: JUSTIFY_INTERVAL
-            - slug: postgresql-date-functions/postgresql-make_interval
-              title: MAKE_INTERVAL
-        - section: Operators
-          items:
-            - slug: postgresql-date-functions/postgresql-at-time-zone
-              title: AT TIME ZONE Operator
-        - section: Utility Functions
-          items:
-            - slug: postgresql-date-functions/postgresql-date_trunc
-              title: DATE_TRUNC
-            - slug: postgresql-date-functions/postgresql-isfinite
-              title: ISFINITE
-            - slug: postgresql-date-functions/postgresql-timeofday
-              title: TIMEOFDAY
-            - slug: postgresql-date-functions/postgresql-pg_sleep
-              title: PG_SLEEP
+        - slug: postgresql-date-functions/postgresql-age
+          title: AGE
+        - slug: postgresql-date-functions/postgresql-at-time-zone
+          title: AT TIME ZONE Operator
+        - slug: postgresql-date-functions/postgresql-clock_timestamp
+          title: CLOCK_TIMESTAMP
+        - slug: postgresql-date-functions/postgresql-current_date
+          title: CURRENT_DATE
+        - slug: postgresql-date-functions/postgresql-current_time
+          title: CURRENT_TIME
+        - slug: postgresql-date-functions/postgresql-current_timestamp
+          title: CURRENT_TIMESTAMP
+        - slug: postgresql-date-functions/postgresql-date_part
+          title: DATE_PART
+        - slug: postgresql-date-functions/postgresql-date_trunc
+          title: DATE_TRUNC
+        - slug: postgresql-date-functions/postgresql-extract
+          title: EXTRACT
+        - slug: postgresql-date-functions/postgresql-isfinite
+          title: ISFINITE
+        - slug: postgresql-date-functions/postgresql-justify_days
+          title: JUSTIFY_DAYS
+        - slug: postgresql-date-functions/postgresql-justify_hours
+          title: JUSTIFY_HOURS
+        - slug: postgresql-date-functions/postgresql-justify_interval
+          title: JUSTIFY_INTERVAL
+        - slug: postgresql-date-functions/postgresql-localtime
+          title: LOCALTIME
+        - slug: postgresql-date-functions/postgresql-localtimestamp
+          title: LOCALTIMESTAMP
+        - slug: postgresql-date-functions/postgresql-make_date
+          title: MAKE_DATE
+        - slug: postgresql-date-functions/postgresql-make_interval
+          title: MAKE_INTERVAL
+        - slug: postgresql-date-functions/postgresql-make_time
+          title: MAKE_TIME
+        - slug: postgresql-date-functions/postgresql-now
+          title: NOW
+        - slug: postgresql-date-functions/postgresql-pg_sleep
+          title: PG_SLEEP
+        - slug: postgresql-date-functions/postgresql-statement_timestamp
+          title: STATEMENT_TIMESTAMP
+        - slug: postgresql-date-functions/postgresql-timeofday
+          title: TIMEOFDAY
+        - slug: postgresql-date-functions/postgresql-to_date
+          title: TO_DATE
+        - slug: postgresql-date-functions/postgresql-to_timestamp
+          title: TO_TIMESTAMP
     - title: JSON Functions
       slug: postgresql-json-functions
       items:
-        - section: Creating JSON Data
-          items:
-            - slug: postgresql-json-functions/postgresql-to_jsonb
-              title: to_jsonb
-            - slug: postgresql-json-functions/postgresql-jsonb_build_array
-              title: jsonb_build_array
-            - slug: postgresql-json-functions/postgresql-jsonb_build_object
-              title: jsonb_build_object
-            - slug: postgresql-json-functions/postgresql-jsonb_object
-              title: jsonb_object
-            - slug: postgresql-json-functions/postgresql-row_to_json
-              title: row_to_json
-        - section: Searching JSON Data
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_path_query
-              title: jsonb_path_query
-            - slug: postgresql-json-functions/postgresql-jsonb_path_query_array
-              title: jsonb_path_query_array
-            - slug: postgresql-json-functions/postgresql-jsonb_path_query_first
-              title: jsonb_path_query_first
-            - slug: postgresql-json-functions/postgresql-jsonb_path_exists
-              title: jsonb_path_exists
-        - section: Querying JSON Data
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb-operators
-              title: JSONB Operators
-            - slug: postgresql-json-functions/postgresql-json-extract
-              title: Extracting JSON Data
-            - slug: postgresql-json-functions/postgresql-jsonb_extract_path
-              title: jsonb_extract_path
-            - slug: postgresql-json-functions/postgresql-jsonb_extract_path_text
-              title: jsonb_extract_path_text
-        - section: Modifying JSON Data
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_insert
-              title: jsonb_insert
-            - slug: postgresql-json-functions/postgresql-jsonb_set
-              title: jsonb_set
-            - slug: postgresql-json-functions/postgresql-jsonb_strip_nulls
-              title: jsonb_strip_nulls
-        - section: Working with JSON Arrays
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_array_length
-              title: jsonb_array_length
-            - slug: postgresql-json-functions/postgresql-jsonb_array_elements
-              title: jsonb_array_elements
-            - slug: postgresql-json-functions/postgresql-jsonb_array_elements_text
-              title: jsonb_array_elements_text
-        - section: Working with JSON Objects
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_each_text
-              title: jsonb_each_text
-            - slug: postgresql-json-functions/postgresql-jsonb_each
-              title: jsonb_each
-            - slug: postgresql-json-functions/postgresql-jsonb_object_keys
-              title: jsonb_object_keys
-            - slug: postgresql-json-functions/postgresql-jsonb_to_record
-              title: jsonb_to_record
-        - section: Aggregating JSON Data
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_agg
-              title: jsonb_agg
-            - slug: postgresql-json-functions/postgresql-jsonb_object_agg
-              title: jsonb_object_agg
-        - section: JSON Utility Functions
-          items:
-            - slug: postgresql-json-functions/postgresql-jsonb_typeof
-              title: jsonb_typeof
-            - slug: postgresql-json-functions/postgresql-jsonb_pretty
-              title: jsonb_pretty
+        - slug: postgresql-json-functions/postgresql-json-extract
+          title: Extracting JSON Data
+        - slug: postgresql-json-functions/postgresql-jsonb-operators
+          title: JSONB Operators
+        - slug: postgresql-json-functions/postgresql-jsonb_agg
+          title: jsonb_agg
+        - slug: postgresql-json-functions/postgresql-jsonb_array_elements
+          title: jsonb_array_elements
+        - slug: postgresql-json-functions/postgresql-jsonb_array_elements_text
+          title: jsonb_array_elements_text
+        - slug: postgresql-json-functions/postgresql-jsonb_array_length
+          title: jsonb_array_length
+        - slug: postgresql-json-functions/postgresql-jsonb_build_array
+          title: jsonb_build_array
+        - slug: postgresql-json-functions/postgresql-jsonb_build_object
+          title: jsonb_build_object
+        - slug: postgresql-json-functions/postgresql-jsonb_each
+          title: jsonb_each
+        - slug: postgresql-json-functions/postgresql-jsonb_each_text
+          title: jsonb_each_text
+        - slug: postgresql-json-functions/postgresql-jsonb_extract_path
+          title: jsonb_extract_path
+        - slug: postgresql-json-functions/postgresql-jsonb_extract_path_text
+          title: jsonb_extract_path_text
+        - slug: postgresql-json-functions/postgresql-jsonb_insert
+          title: jsonb_insert
+        - slug: postgresql-json-functions/postgresql-jsonb_object
+          title: jsonb_object
+        - slug: postgresql-json-functions/postgresql-jsonb_object_agg
+          title: jsonb_object_agg
+        - slug: postgresql-json-functions/postgresql-jsonb_object_keys
+          title: jsonb_object_keys
+        - slug: postgresql-json-functions/postgresql-jsonb_path_exists
+          title: jsonb_path_exists
+        - slug: postgresql-json-functions/postgresql-jsonb_path_query
+          title: jsonb_path_query
+        - slug: postgresql-json-functions/postgresql-jsonb_path_query_array
+          title: jsonb_path_query_array
+        - slug: postgresql-json-functions/postgresql-jsonb_path_query_first
+          title: jsonb_path_query_first
+        - slug: postgresql-json-functions/postgresql-jsonb_pretty
+          title: jsonb_pretty
+        - slug: postgresql-json-functions/postgresql-jsonb_set
+          title: jsonb_set
+        - slug: postgresql-json-functions/postgresql-jsonb_strip_nulls
+          title: jsonb_strip_nulls
+        - slug: postgresql-json-functions/postgresql-jsonb_to_record
+          title: jsonb_to_record
+        - slug: postgresql-json-functions/postgresql-jsonb_typeof
+          title: jsonb_typeof
+        - slug: postgresql-json-functions/postgresql-row_to_json
+          title: row_to_json
+        - slug: postgresql-json-functions/postgresql-to_jsonb
+          title: to_jsonb
     - title: Math Functions
       slug: postgresql-math-functions
       items:
-        - section: PostgreSQL Math Functions
-          items:
-            - slug: postgresql-math-functions/postgresql-abs
-              title: ABS
-            - slug: postgresql-math-functions/postgresql-ceil
-              title: CEIL
-            - slug: postgresql-math-functions/postgresql-cbrt
-              title: CBRT
-            - slug: postgresql-math-functions/postgresql-degrees
-              title: DEGREES
-            - slug: postgresql-math-functions/postgresql-div
-              title: DIV
-            - slug: postgresql-math-functions/postgresql-exp
-              title: EXP
-            - slug: postgresql-math-functions/postgresql-floor
-              title: FLOOR
-            - slug: postgresql-math-functions/postgresql-mod
-              title: MOD
-            - slug: postgresql-math-functions/postgresql-ln
-              title: LN
-            - slug: postgresql-math-functions/postgresql-power
-              title: POWER
-            - slug: postgresql-math-functions/postgresql-random
-              title: RANDOM
-            - slug: postgresql-math-functions/postgresql-radians
-              title: RADIANS
-            - slug: postgresql-math-functions/postgresql-round
-              title: ROUND
-            - slug: postgresql-math-functions/postgresql-pi-function
-              title: PI
-            - slug: postgresql-math-functions/postgresql-sign
-              title: SIGN
-            - slug: postgresql-math-functions/postgresql-scale
-              title: SCALE
-            - slug: postgresql-math-functions/postgresql-sqrt
-              title: SQRT
-            - slug: postgresql-math-functions/postgresql-trunc
-              title: TRUNC
-            - slug: postgresql-math-functions/postgresql-trim_scale
-              title: TRIM_SCALE
-            - slug: postgresql-math-functions/postgresql-width_bucket
-              title: WIDTH_BUCKET
+        - slug: postgresql-math-functions/postgresql-abs
+          title: ABS
+        - slug: postgresql-math-functions/postgresql-cbrt
+          title: CBRT
+        - slug: postgresql-math-functions/postgresql-ceil
+          title: CEIL
+        - slug: postgresql-math-functions/postgresql-degrees
+          title: DEGREES
+        - slug: postgresql-math-functions/postgresql-div
+          title: DIV
+        - slug: postgresql-math-functions/postgresql-exp
+          title: EXP
+        - slug: postgresql-math-functions/postgresql-floor
+          title: FLOOR
+        - slug: postgresql-math-functions/postgresql-ln
+          title: LN
+        - slug: postgresql-math-functions/postgresql-mod
+          title: MOD
+        - slug: postgresql-math-functions/postgresql-pi-function
+          title: PI
+        - slug: postgresql-math-functions/postgresql-power
+          title: POWER
+        - slug: postgresql-math-functions/postgresql-radians
+          title: RADIANS
+        - slug: postgresql-math-functions/postgresql-random
+          title: RANDOM
+        - slug: postgresql-math-functions/postgresql-round
+          title: ROUND
+        - slug: postgresql-math-functions/postgresql-scale
+          title: SCALE
+        - slug: postgresql-math-functions/postgresql-sign
+          title: SIGN
+        - slug: postgresql-math-functions/postgresql-sqrt
+          title: SQRT
+        - slug: postgresql-math-functions/postgresql-trim_scale
+          title: TRIM_SCALE
+        - slug: postgresql-math-functions/postgresql-trunc
+          title: TRUNC
+        - slug: postgresql-math-functions/postgresql-width_bucket
+          title: WIDTH_BUCKET
     - title: String Functions
       slug: postgresql-string-functions
       items:
-        - section: PostgreSQL String functions
-          items:
-            - slug: postgresql-string-functions/postgresql-ascii
-              title: ASCII
-            - slug: postgresql-string-functions/postgresql-concat-function
-              title: CONCAT
-            - slug: postgresql-string-functions/postgresql-chr
-              title: CHR
-            - slug: postgresql-string-functions/postgresql-format
-              title: FORMAT
-            - slug: postgresql-string-functions/postgresql-left
-              title: LEFT
-            - slug: postgresql-string-functions/postgresql-length-function
-              title: LENGTH
-            - slug: postgresql-string-functions/postgresql-lpad
-              title: LPAD
-            - slug: postgresql-string-functions/postgresql-lower
-              title: LOWER
-            - slug: postgresql-string-functions/postgresql-ltrim
-              title: LTRIM
-            - slug: postgresql-string-functions/postgresql-md5
-              title: MD5
-            - slug: postgresql-string-functions/postgresql-position
-              title: POSITION
-            - slug: postgresql-string-functions/postgresql-regexp_matches
-              title: REGEXP_MATCHES
-            - slug: postgresql-string-functions/regexp_replace
-              title: REGEXP_REPLACE
-            - slug: postgresql-string-functions/postgresql-right
-              title: RIGHT
-            - slug: postgresql-string-functions/postgresql-replace
-              title: REPLACE
-            - slug: postgresql-string-functions/postgresql-rtrim
-              title: RTRIM
-            - slug: postgresql-string-functions/postgresql-split_part
-              title: SPLIT_PART
-            - slug: postgresql-string-functions/postgresql-substring
-              title: SUBSTRING
-            - slug: postgresql-string-functions/postgresql-translate
-              title: TRANSLATE
-            - slug: postgresql-string-functions/postgresql-trim-function
-              title: TRIM
-            - slug: postgresql-string-functions/postgresql-to_char
-              title: TO_CHAR
-            - slug: postgresql-string-functions/postgresql-to_number
-              title: TO_NUMBER
-            - slug: postgresql-string-functions/postgresql-upper
-              title: UPPER
+        - slug: postgresql-string-functions/postgresql-ascii
+          title: ASCII
+        - slug: postgresql-string-functions/postgresql-chr
+          title: CHR
+        - slug: postgresql-string-functions/postgresql-concat-function
+          title: CONCAT
+        - slug: postgresql-string-functions/postgresql-format
+          title: FORMAT
+        - slug: postgresql-string-functions/postgresql-left
+          title: LEFT
+        - slug: postgresql-string-functions/postgresql-length-function
+          title: LENGTH
+        - slug: postgresql-string-functions/postgresql-lower
+          title: LOWER
+        - slug: postgresql-string-functions/postgresql-lpad
+          title: LPAD
+        - slug: postgresql-string-functions/postgresql-ltrim
+          title: LTRIM
+        - slug: postgresql-string-functions/postgresql-md5
+          title: MD5
+        - slug: postgresql-string-functions/postgresql-position
+          title: POSITION
+        - slug: postgresql-string-functions/postgresql-regexp_matches
+          title: REGEXP_MATCHES
+        - slug: postgresql-string-functions/regexp_replace
+          title: REGEXP_REPLACE
+        - slug: postgresql-string-functions/postgresql-replace
+          title: REPLACE
+        - slug: postgresql-string-functions/postgresql-right
+          title: RIGHT
+        - slug: postgresql-string-functions/postgresql-rtrim
+          title: RTRIM
+        - slug: postgresql-string-functions/postgresql-split_part
+          title: SPLIT_PART
+        - slug: postgresql-string-functions/postgresql-substring
+          title: SUBSTRING
+        - slug: postgresql-string-functions/postgresql-to_char
+          title: TO_CHAR
+        - slug: postgresql-string-functions/postgresql-to_number
+          title: TO_NUMBER
+        - slug: postgresql-string-functions/postgresql-translate
+          title: TRANSLATE
+        - slug: postgresql-string-functions/postgresql-trim-function
+          title: TRIM
+        - slug: postgresql-string-functions/postgresql-upper
+          title: UPPER
     - title: Window Functions
       slug: postgresql-window-function
       items:
-        - section: PostgreSQL Window Functions
-          items:
-            - slug: postgresql-window-function/postgresql-cume_dist-function
-              title: CUME_DIST
-            - slug: postgresql-window-function/postgresql-dense_rank-function
-              title: DENSE_RANK
-            - slug: postgresql-window-function/postgresql-first_value-function
-              title: FIRST_VALUE
-            - slug: postgresql-window-function/postgresql-lag-function
-              title: LAG
-            - slug: postgresql-window-function/postgresql-last_value-function
-              title: LAST_VALUE
-            - slug: postgresql-window-function/postgresql-lead-function
-              title: LEAD
-            - slug: postgresql-window-function/postgresql-ntile-function
-              title: NTILE
-            - slug: postgresql-window-function/postgresql-nth_value-function
-              title: NTH_VALUE
-            - slug: postgresql-window-function/postgresql-percent_rank-function
-              title: PERCENT_RANK
-            - slug: postgresql-window-function/postgresql-rank-function
-              title: RANK
-            - slug: postgresql-window-function/postgresql-row_number
-              title: ROW_NUMBER
+        - slug: postgresql-window-function/postgresql-cume_dist-function
+          title: CUME_DIST
+        - slug: postgresql-window-function/postgresql-dense_rank-function
+          title: DENSE_RANK
+        - slug: postgresql-window-function/postgresql-first_value-function
+          title: FIRST_VALUE
+        - slug: postgresql-window-function/postgresql-lag-function
+          title: LAG
+        - slug: postgresql-window-function/postgresql-last_value-function
+          title: LAST_VALUE
+        - slug: postgresql-window-function/postgresql-lead-function
+          title: LEAD
+        - slug: postgresql-window-function/postgresql-nth_value-function
+          title: NTH_VALUE
+        - slug: postgresql-window-function/postgresql-ntile-function
+          title: NTILE
+        - slug: postgresql-window-function/postgresql-percent_rank-function
+          title: PERCENT_RANK
+        - slug: postgresql-window-function/postgresql-rank-function
+          title: RANK
+        - slug: postgresql-window-function/postgresql-row_number
+          title: ROW_NUMBER
 - nav: API
   title: API
   slug: postgresql-api
