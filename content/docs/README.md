@@ -496,6 +496,40 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 
 </details>
 
+## Feature List
+
+To display a list of features, use the `FeatureList` component.
+Features will be splitted by `h2` and `h3` headings.
+
+```md
+<FeatureList>
+
+### Agent creates an app
+
+A vibe coder imagines an app. Your agent builds it, full-stack.
+
+### Gets a working database instantly, with no friction
+
+Neon provisions the database behind the scenes via API.
+
+</FeatureList>
+```
+
+You can pass `icons` prop to the `FeatureList` component to display icons for each feature.
+
+List of available icons (extendable): `src/components/shared/feature-list/icon/icon.jsx`.
+
+```md
+<FeatureList icons={['agent', 'speedometer']}>
+```
+
+<details>
+<summary>Example</summary>
+
+![Feature List example](images/feature-list-example.jpg)
+
+</details>
+
 ## Checklist
 
 To display a checklist, use the `CheckList` component with `CheckItem` items inside.
