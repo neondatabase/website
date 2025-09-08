@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.286Z'
 ---
 
-<Admonition type="important">
+<Admonition type="important"  title="deprecated">
 Neosync was recently acquired and is no longer available. The instructions in this guide are deprecated and will be removed in a future update.
 </Admonition>
 
