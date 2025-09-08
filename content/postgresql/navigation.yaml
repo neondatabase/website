@@ -359,7 +359,7 @@
           title: NOT NULL Constraints as NOT VALID
 - nav: Advanced
   title: Advanced
-  slug: postgresql-views
+  slug: postgresql-advanced
   items:
     - title: PostgreSQL Views
       slug: postgresql-views
@@ -405,60 +405,105 @@
           title: Full Text Search
         - slug: postgresql-indexes/postgresql-json-index
           title: JSON Index
-    - title: PostgreSQL Trigger Basics
+    - title: PostgreSQL Triggers
       slug: postgresql-triggers
       items:
-        - section: noname
-          items:
-            - slug: postgresql-triggers/introduction-postgresql-trigger
-              title: PostgreSQL Triggers
-            - slug: postgresql-triggers/creating-first-trigger-postgresql
-              title: CREATE TRIGGER
-            - slug: postgresql-triggers/postgresql-drop-trigger
-              title: DROP TRIGGER
-            - slug: postgresql-triggers/postgresql-alter-trigger
-              title: ALTER TRIGGER
-        - section: Insert Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-after-insert-trigger
-              title: AFTER INSERT Trigger
-            - slug: postgresql-triggers/postgresql-before-insert-trigger
-              title: BEFORE INSERT Trigger
-        - section: Update Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-before-update-trigger
-              title: BEFORE UPDATE Trigger
-            - slug: postgresql-triggers/postgresql-after-update-trigger
-              title: AFTER UPDATE Trigger
-        - section: Delete Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-before-delete-trigger
-              title: BEFORE DELETE Trigger
-            - slug: postgresql-triggers/postgresql-after-delete-trigger
-              title: AFTER DELETE Trigger
-        - section: Instead Of Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-instead-of-triggers
-              title: INSTEAD OF Triggers
-        - section: Truncate Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-before-truncate-trigger
-              title: BEFORE TRUNCATE Trigger
-        - section: Enable & Disable Triggers
-          items:
-            - slug: postgresql-triggers/managing-postgresql-trigger
-              title: Disable Triggers
-            - slug: postgresql-triggers/enable-triggers
-              title: Enable Triggers
-        - section: Advanced Triggers
-          items:
-            - slug: postgresql-triggers/postgresql-event-trigger
-              title: Event Triggers
-            - slug: postgresql-triggers/postgresql-trigger-when-condition
-              title: Conditional Triggers
+        - slug: postgresql-triggers/introduction-postgresql-trigger
+          title: Introduction
+        - slug: postgresql-triggers/creating-first-trigger-postgresql
+          title: CREATE TRIGGER
+        - slug: postgresql-triggers/postgresql-drop-trigger
+          title: DROP TRIGGER
+        - slug: postgresql-triggers/postgresql-alter-trigger
+          title: ALTER TRIGGER
+        - slug: postgresql-triggers/postgresql-after-insert-trigger
+          title: AFTER INSERT Trigger
+        - slug: postgresql-triggers/postgresql-before-insert-trigger
+          title: BEFORE INSERT Trigger
+        - slug: postgresql-triggers/postgresql-before-update-trigger
+          title: BEFORE UPDATE Trigger
+        - slug: postgresql-triggers/postgresql-after-update-trigger
+          title: AFTER UPDATE Trigger
+        - slug: postgresql-triggers/postgresql-before-delete-trigger
+          title: BEFORE DELETE Trigger
+        - slug: postgresql-triggers/postgresql-after-delete-trigger
+          title: AFTER DELETE Trigger
+        - slug: postgresql-triggers/postgresql-instead-of-triggers
+          title: INSTEAD OF Triggers
+        - slug: postgresql-triggers/postgresql-before-truncate-trigger
+          title: BEFORE TRUNCATE Trigger
+        - slug: postgresql-triggers/managing-postgresql-trigger
+          title: Disable Triggers
+        - slug: postgresql-triggers/enable-triggers
+          title: Enable Triggers
+        - slug: postgresql-triggers/postgresql-event-trigger
+          title: Event Triggers
+        - slug: postgresql-triggers/postgresql-trigger-when-condition
+          title: Conditional Triggers
+    - title: PostgreSQL PL/pgSQL
+      slug: postgresql-plpgsql
+      items:
+        - slug: postgresql-plpgsql/introduction-to-postgresql-stored-procedures
+          title: Introduction
+        - slug: postgresql-plpgsql/plpgsql-block-structure
+          title: Block Structure
+        - slug: postgresql-plpgsql/plpgsql-variables
+          title: Variables
+        - slug: postgresql-plpgsql/plpgsql-constants
+          title: Constants
+        - slug: postgresql-plpgsql/plpgsql-if-else-statements
+          title: IF-ELSE Statements
+        - slug: postgresql-plpgsql/plpgsql-case-statement
+          title: CASE Statement
+        - slug: postgresql-plpgsql/plpgsql-loop-statements
+          title: Loop Statements
+        - slug: postgresql-plpgsql/plpgsql-for-loop
+          title: FOR Loop
+        - slug: postgresql-plpgsql/pl-pgsql-while-loop
+          title: WHILE Loop
+        - slug: postgresql-plpgsql/plpgsql-exit
+          title: EXIT Statement
+        - slug: postgresql-plpgsql/pl-pgsql-continue
+          title: CONTINUE Statement
+        - slug: postgresql-plpgsql/plpgsql-cursor
+          title: Cursor
+        - slug: postgresql-plpgsql/plpgsql-function-parameters
+          title: Function Parameters
+        - slug: postgresql-plpgsql/plpgsql-function-overloading
+          title: Function Overloading
+        - slug: postgresql-plpgsql/plpgsql-function-returns-a-table
+          title: Function Returns Table
+        - slug: postgresql-plpgsql/plpgsql-returns-setof
+          title: Returns SETOF
+        - slug: postgresql-plpgsql/plpgsql-record-types
+          title: Record Types
+        - slug: postgresql-plpgsql/pl-pgsql-row-types
+          title: Row Types
+        - slug: postgresql-plpgsql/plpgsql-errors-messages
+          title: Error Messages
+        - slug: postgresql-plpgsql/postgresql-exception
+          title: Exception Handling
+        - slug: postgresql-plpgsql/postgresql-create-function
+          title: CREATE FUNCTION
+        - slug: postgresql-plpgsql/postgresql-create-procedure
+          title: CREATE PROCEDURE
+        - slug: postgresql-plpgsql/postgresql-drop-function
+          title: DROP FUNCTION
+        - slug: postgresql-plpgsql/postgresql-drop-procedure
+          title: DROP PROCEDURE
+        - slug: postgresql-plpgsql/postgresql-stored-procedure-with-inout-parameters
+          title: Stored Procedure with INOUT Parameters
+        - slug: postgresql-plpgsql/introduction-to-postgresql-stored-procedures
+          title: Introduction to Stored Procedures
+        - slug: postgresql-plpgsql/pl-pgsql-select-into
+          title: SELECT INTO
+        - slug: postgresql-plpgsql/pl-pgsql-assert
+          title: ASSERT Statement
+        - slug: postgresql-plpgsql/dollar-quoted-string-constants
+          title: Dollar-Quoted String Constants
 - nav: Functions
   title: Functions
-  slug: postgresql-aggregate-functions
+  slug: postgresql-functions
   items:
     - title: PostgreSQL Aggregate Functions
       slug: postgresql-aggregate-functions
@@ -742,7 +787,7 @@
               title: ROW_NUMBER
 - nav: API
   title: API
-  slug: postgresql-csharp
+  slug: postgresql-api
   items:
     - title: PostgreSQL C#
       slug: postgresql-csharp
