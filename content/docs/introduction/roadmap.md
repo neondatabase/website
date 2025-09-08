@@ -15,10 +15,12 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 Here's a snapshot of what we're working on now:
 
-- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner). See [Postgres for AI Agents](/use-cases/ai-agents) for more.
-- **Snapshots**: Scheduled snapshots with instant restore.
-- **Console navigation enhancements**: Enhancing navigation for multi-project organizations, branch clarity, and better SQL Editor and Tables page interactions.
-- **Private Networking in Console**: Manage Private Networking directly from the Neon Console.
+- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. We're continuing to build out our AI platform support capabilities. If you're building AI agents and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner), and see [Neon for AI Agents](/use-cases/ai-agents) for our recently introduced **AI Agent pricing plan**.
+- **Snapshot sceduling**: Neon supports creating snapshots manually — see [Backup & restore](/docs/guides/backup-restore). We're now working on a snapshot sceduling feature with automated snapshot retention management.
+- **Monitoring for usage-based pricing plans**: Monitoring enhancements for our new usage-based pricing plans.
+- **Large object storage**: We're working on adding support for large object storage.
+- **Console support for data anonymization**: Neon supports the Postgres `anon` extension for [data anonymization](/docs/workflows/data-anonymization). We're bringing that support to the console.
+- **Postgres 18 support**: Neon plans to add support for PostgreSQL 18 as soon as it’s released, so you can take advantage of the latest features and improvements.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
