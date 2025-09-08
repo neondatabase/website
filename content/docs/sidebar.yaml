@@ -1461,10 +1461,7 @@
     - title: Glossary
       slug: reference/glossary
       icon: glossary
-      items:
-        - title: Neon Glossary
-          slug: reference/glossary
-    - title: Neon roadmap
+    - title: Roadmap
       slug: introduction/roadmap
       icon: roadmap
     - title: Early access
