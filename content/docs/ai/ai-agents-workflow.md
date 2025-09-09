@@ -6,6 +6,7 @@ updatedOn: '2025-09-10T14:09:12.290Z'
 ---
 
 With Neon's API, your agents can:
+
 - Provision PostgreSQL databases in ~500ms
 - Add production-ready authentication
 - Create database snapshots for version control
@@ -16,19 +17,19 @@ Architecture assumption: This guide uses one Neon project per user for better is
 
 ## API Operations
 
-| Action | Description | Endpoint |
-| -------|-------------|----------|
-| **[Create project](#application-provisioning)** | Creates a Postgres database in ~500ms with automatic scale-to-zero | `POST /projects` |
-| **[Configure autoscaling](#autoscaling-configuration)** | Set compute limits (0.25-8 CU) based on user tiers | `PATCH /projects/{project_id}/endpoints/{endpoint_id}` |
-| **[Set resource limits](#resource-management)** | Enforce compute/storage quotas based on user tiers | `PATCH /projects/{project_id}` |
-| **[Add auth](#authentication-setup)** | Setup Neon Auth with user synchronized to the `neon_auth.users_sync` table | `POST /projects/auth/create` |
-| **[Configure OAuth](#configure-oauth-providers)** | Enable social login (GitHub, Google, Microsoft) | `POST /projects/{project_id}/auth/oauth_providers` |
-| **[Create snapshots](#snapshot-versioning)** | Save database versions (only from root branches) | `POST /branches/{branch_id}/snapshot` |
-| **[Restore snapshots](#restore-a-snapshot-rollback)** (production) | `finalize_restore: true` → Preserves connection string, requires polling | `POST /snapshots/{snapshot_id}/restore` |
-| **[Restore snapshots](#restore-a-snapshot-rollback)** (preview) | `finalize_restore: false` → New connection string, no polling needed | `POST /snapshots/{snapshot_id}/restore` |
-| **[Create dev branches](#create-development-branches)** | Create isolated development environments | `POST /projects/{project_id}/branches` |
-| **[Enable Data API](#data-api)** | Transform database tables into REST endpoints | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
-| **[Monitor usage](#get-project-consumption)** | Track resource consumption metrics | `GET /projects/{project_id}/consumption` |
+| Action                                                             | Description                                                                | Endpoint                                                                    |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **[Create project](#application-provisioning)**                    | Creates a Postgres database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
+| **[Configure autoscaling](#autoscaling-configuration)**            | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
+| **[Set resource limits](#resource-management)**                    | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
+| **[Add auth](#authentication-setup)**                              | Setup Neon Auth with user synchronized to the `neon_auth.users_sync` table | `POST /projects/auth/create`                                                |
+| **[Configure OAuth](#configure-oauth-providers)**                  | Enable social login (GitHub, Google, Microsoft)                            | `POST /projects/{project_id}/auth/oauth_providers`                          |
+| **[Create snapshots](#snapshot-versioning)**                       | Save database versions (only from root branches)                           | `POST /branches/{branch_id}/snapshot`                                       |
+| **[Restore snapshots](#restore-a-snapshot-rollback)** (production) | `finalize_restore: true` → Preserves connection string, requires polling   | `POST /snapshots/{snapshot_id}/restore`                                     |
+| **[Restore snapshots](#restore-a-snapshot-rollback)** (preview)    | `finalize_restore: false` → New connection string, no polling needed       | `POST /snapshots/{snapshot_id}/restore`                                     |
+| **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
+| **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
+| **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
 
 ## Quick start with the demo
 
@@ -40,6 +41,7 @@ See the pattern in action with a working snapshot database versioning demo.
 Demo architecture: meta database (users via Neon Auth, `projects`, `checkpoints`) + per-user app database (one Neon project per user session, URL saved in `projects`).
 
 ## Key concepts
+
 - **Root branches** (like `main`): The only branches that can be snapshotted
 - **Connection string stability**: Achieved through a restore with `finalize_restore: true`
 - **Operation polling**: Required after a restore with `finalize_restore: true` to ensure compute endpoint transfer completes
@@ -54,7 +56,7 @@ Your agent provisions databases for each user's applications. The infrastructure
 
 ### Create project with database
 
-The `default_endpoint_settings` in the project creation request automatically configures the compute endpoint with your desired autoscaling and suspension settings. 
+The `default_endpoint_settings` in the project creation request automatically configures the compute endpoint with your desired autoscaling and suspension settings.
 
 #### Neon toolkit example
 
@@ -82,10 +84,10 @@ async function testNeonApi() {
       default_endpoint_settings: {
         autoscaling_limit_min_cu: 0.25,
         autoscaling_limit_max_cu: 1,
-        suspend_timeout_seconds: 300
+        suspend_timeout_seconds: 300,
       },
       pg_version: 17,
-      region_id: 'aws-us-east-2'
+      region_id: 'aws-us-east-2',
     });
 
     const projectId = project.project.id;
@@ -105,10 +107,10 @@ async function testNeonApi() {
           quota: {
             logical_size_bytes: 100 * 1024 * 1024, // 100 MiB in bytes
             active_time_seconds: 633600,
-            compute_time_seconds: 158400
-          }
-        }
-      }
+            compute_time_seconds: 158400,
+          },
+        },
+      },
     });
 
     console.log('Quotas set successfully!');
@@ -120,13 +122,12 @@ async function testNeonApi() {
       branch_id: branchId,
       database_name: 'app_db',
       role_name: 'app_user',
-      pooled: true
+      pooled: true,
     });
 
     console.log('Pooled connection retrieved!');
     console.log(`Pooled Connection URI: ${connectionUri.data.uri}`);
     console.log('Test completed successfully!');
-
   } catch (error) {
     console.error('Error occurred:', error);
     process.exit(1);
@@ -168,9 +169,9 @@ Track usage per project with detailed information about compute time, storage, a
 Define limits based on user tier, for example:
 
 | Tier | Storage (MiB) | Compute Time (s) | Active Time (s) |
-|------|---------------|------------------|-----------------|
-| Free | 100 | 158,400 | 633,600 |
-| Pro | 10000 | 10,368,000 | 2,592,000 |
+| ---- | ------------- | ---------------- | --------------- |
+| Free | 100           | 158,400          | 633,600         |
+| Pro  | 10000         | 10,368,000       | 2,592,000       |
 
 This example sets the free tier limit defined above:
 
@@ -220,7 +221,7 @@ For additional information, see the [querying consumption metrics](/docs/guides/
 When provisioning databases for your users, Neon automatically scales compute based on actual usage. The system monitors three metrics and scales to meet whichever requires the most resources:
 
 - **CPU load** (targeting < 90% utilization)
-- **Memory usage** (targeting < 75% utilization)  
+- **Memory usage** (targeting < 75% utilization)
 - **Local file cache** (targeting < 75% utilization)
 
 This ensures databases get the resources they need without manual intervention.
@@ -357,8 +358,8 @@ Users are automatically synced to your database:
 
 ```sql
 -- Query users directly from your database
-SELECT id, email, name, signed_in_at 
-FROM neon_auth.users_sync 
+SELECT id, email, name, signed_in_at
+FROM neon_auth.users_sync
 WHERE email_verified = true
 ORDER BY created_at DESC;
 ```
@@ -368,6 +369,7 @@ ORDER BY created_at DESC;
 Build full version history into your platform. Your agent can snapshot schema and data at any moment, allowing users to roll back to working versions, preview earlier states, or safely test changes.
 
 **When to use snapshots vs branches:**
+
 - **Snapshots with `finalize_restore: true`**: For production versioning - preserves your connection string during rollback
 - **Snapshots with `finalize_restore: false`**: For preview/testing - creates a new branch with new connection string
 - **Branches**: For development work - always creates new connection string
@@ -443,6 +445,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/snapsh
 ```
 
 **Note:** With `finalize_restore: false`:
+
 - Creates a new branch with its own connection string
 - Production database remains unchanged
 - No operation polling required (production endpoint not affected)
@@ -528,11 +531,13 @@ For high-volume agent platforms, apply for the [Neon Agent Plan](/use-cases/ai-a
 ## Best practices
 
 ### Connection management
+
 - Use pooled connections (`-pooler` suffix) for serverless environments
 - Use direct connections for long-running servers
 - Connection limits vary by compute size, see [connection limits documentation](/docs/connect/connection-pooling#connection-limits-without-connection-pooling)
 
 ### Cost optimization
+
 - Set `autoscaling_limit_min_cu` to 0.25 for scale-to-zero
 - Configure appropriate `suspend_timeout_seconds` (300-900 seconds)
 - Use smaller compute units for development branches
@@ -541,24 +546,24 @@ For high-volume agent platforms, apply for the [Neon Agent Plan](/use-cases/ai-a
 
 ## Troubleshooting common issues
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| **Snapshot creation fails** | Attempting to snapshot a non-root branch | Only snapshot branches with no parent (check `parent_id` is null) |
-| **Connection shows old data after restore** | Connecting before operations complete | Always poll operations to terminal state after a restore with `finalize_restore: true` |
-| **Accumulating storage costs** | Orphaned branches from restores not deleted | Delete branches ending with "(old)" after each restore |
-| **"Branch has children" error** | Other branches depend on this branch | Delete child branches first, or use snapshots instead of branches |
-| **Connection string changed** | Created new branch instead of restoring snapshot | Use a restore with `finalize_restore: true` to preserve connection string |
+| Issue                                       | Cause                                            | Solution                                                                               |
+| ------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| **Snapshot creation fails**                 | Attempting to snapshot a non-root branch         | Only snapshot branches with no parent (check `parent_id` is null)                      |
+| **Connection shows old data after restore** | Connecting before operations complete            | Always poll operations to terminal state after a restore with `finalize_restore: true` |
+| **Accumulating storage costs**              | Orphaned branches from restores not deleted      | Delete branches ending with "(old)" after each restore                                 |
+| **"Branch has children" error**             | Other branches depend on this branch             | Delete child branches first, or use snapshots instead of branches                      |
+| **Connection string changed**               | Created new branch instead of restoring snapshot | Use a restore with `finalize_restore: true` to preserve connection string              |
 
 ## Resources
 
 - Roadmap: See the [AI Agents use case](/use-cases/ai-agents) page for updates on upcoming services such as S3-compatible blob storage, email for auth/workflows, and a unified SDK to orchestrate database, auth, storage, and APIs.
 
--   [Database versioning with Neon snapshots](/docs/ai/ai-database-versioning) - Comprehensive versioning guide with patterns and best practices
--   [Snapshots demo application](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo) - Complete working example with source code
--   [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
--   [Neon Platform Integration Guide](/docs/guides/platform-integration-get-started) - Comprehensive integration best practices
--   [Neon OpenAPI Specification](/api_spec/release/v2.json)
--   [Neon TypeScript SDK](https://github.com/neondatabase/toolkit)
--   [Agent Plan Application](/use-cases/ai-agents)
+- [Database versioning with Neon snapshots](/docs/ai/ai-database-versioning) - Comprehensive versioning guide with patterns and best practices
+- [Snapshots demo application](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo) - Complete working example with source code
+- [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- [Neon Platform Integration Guide](/docs/guides/platform-integration-get-started) - Comprehensive integration best practices
+- [Neon OpenAPI Specification](/api_spec/release/v2.json)
+- [Neon TypeScript SDK](https://github.com/neondatabase/toolkit)
+- [Agent Plan Application](/use-cases/ai-agents)
 
 For custom rate limits and dedicated support for your agent platform, apply for the [Neon Agent Plan](/use-cases/ai-agents).
