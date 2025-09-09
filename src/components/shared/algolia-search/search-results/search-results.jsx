@@ -20,7 +20,8 @@ const SearchResults = ({ posts, indexName, className, children }) => {
       const slug = url.split('/').pop();
       return posts.find((post) => post.slug === slug);
     })
-    .filter((post) => post !== undefined);
+    .filter((post) => post !== undefined)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   if (items.length === 0 || matchedPosts.length === 0) {
     return <div className="w-full text-center text-lg">No search results found</div>;
