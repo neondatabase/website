@@ -118,7 +118,7 @@ Neon's PgBouncer configuration is shown below. The settings are not user-configu
 pool_mode=transaction
 max_client_conn=10000
 default_pool_size=0.9 * max_connections
-max_prepared_statements=0
+max_prepared_statements=1000
 query_wait_timeout=120
 ```
 
