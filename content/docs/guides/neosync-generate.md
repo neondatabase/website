@@ -2,7 +2,7 @@
 title: Generate synthetic data with Neosync
 subtitle: Learn how to generate synthetic data in your Neon database with Neosync
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.286Z'
+updatedOn: '2025-09-09T10:09:25.192Z'
 ---
 
 <Admonition type="important"  title="deprecated">
