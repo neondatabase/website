@@ -15,7 +15,7 @@ Before you begin, ensure you have the following:
 
 - An active Supabase project.
 - A Neon project. For setup instructions, see [Create a project](/docs/manage/projects#create-a-project).
-- The `psql` and `pg_dump` command-line utilities installed locally.
+- The PostgreSQL `psql` and `pg_dump` command-line utilities installed locally.
 - A Node.js environment (for running the user import script).
 
 <Steps>
