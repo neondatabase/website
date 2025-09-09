@@ -1,13 +1,13 @@
 - nav: Getting Started
-  slug: postgresql-getting-started
+  slug: tutorial
   title: PostgreSQL Tutorial
   icon: home
   items:
     - section: Introduction
       icon: info
       items:
-        - title: PostgreSQL Tutorial
-          slug: tutorial
+        - title: Getting Started
+          slug: postgresql-getting-started
     - section: PostgreSQL Quick Start
       icon: start
       items:
