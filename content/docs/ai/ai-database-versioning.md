@@ -6,7 +6,7 @@ updatedOn: '2025-08-21T14:09:12.290Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
-Snapshots are available for members of our Early Access Program. Read more about joining [here](/docs/introduction/early-access).
+Snapshots are available for members of our Early Access Program. Read more about joining [here](/docs/introduction/early-access). **Snapshot limits**: 1 on Free plan, 10 on paid plans.
 </Admonition>
 
 ## Overview
