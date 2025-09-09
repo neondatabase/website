@@ -218,7 +218,9 @@ const getAllWpPosts = cache(async () => {
       const { nodes: posts, pageInfo } = await fetchAllWpPosts(first, afterCursor);
 
       allPosts = allPosts.concat(posts);
-      if (!isProduction || !pageInfo.hasNextPage) break;
+
+      // TODO: add !isProduction || to this if check
+      if (!pageInfo.hasNextPage) break;
       afterCursor = pageInfo.endCursor;
     } catch (error) {
       console.error('Error fetching posts:', error);
