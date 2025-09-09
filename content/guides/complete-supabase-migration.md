@@ -272,7 +272,7 @@ Your tables, data, and RLS policies are now in Neon, but the `user_id` columns s
 
 ### Step 5: Create a User ID mapping table
 
-To fix the user references, we'll create a temporary table in Neon that maps old Supabase `user_id`s to emails. This command dumps the original `auth.users` data from Supabase, retargets the `INSERT`s to a new `public.temp_users` table, and pipes it directly into Neon.
+To fix the user references, we'll create a temporary table in Neon that maps old Supabase `user_id` values to emails. This command dumps the original `auth.users` data from Supabase, retargets the `INSERT` statements to a new `public.temp_users` table, and pipes it directly into Neon.
 
 ```shell shouldWrap
 pg_dump -t auth.users --data-only --column-inserts "SUPABASE_CONNECTION_STRING" \
