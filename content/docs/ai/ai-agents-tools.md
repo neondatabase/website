@@ -16,19 +16,6 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 <a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients to your Neon database" icon="github">Connect MCP Clients</a>
 </DetailIconCards>
 
-## Integrate Neon in your IDE
-
-These tools leverage the Neon MCP server to provide natural language interfaces and
-AI-enhanced database management capabilities within your preferred development environment.
-
-<DetailIconCards>
-<a href="/guides/neon-mcp-server" description="Use natural language to manage your databases with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop</a>
-<a href="/guides/claude-code-mcp-neon" description="Use natural language to manage your databases with Claude Code CLI and Neon MCP server" icon="openai">Claude Code</a>
-<a href="/guides/cursor-mcp-neon" description="AI-enhanced database management in Cursor IDE" icon="openai">Cursor</a>
-<a href="/guides/cline-mcp-neon" description="AI-enhanced database management with Cline" icon="openai">Cline</a>
-<a href="/guides/windsurf-mcp-neon" description="AI-enhanced database management in Windsurf Editor" icon="openai">Windsurf</a>
-</DetailIconCards>
-
 ## Ship faster with AI rules
 
 Accelerate your development with context rules that help AI tools write better code for Neon's features.
@@ -36,7 +23,7 @@ Accelerate your development with context rules that help AI tools write better c
 <DetailIconCards>
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth Rules</a>
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for efficient serverless database connections" icon="github">Neon Serverless Rules</a>
+<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
 </DetailIconCards>
 
 ## Build AI agents
@@ -45,6 +32,8 @@ Create autonomous agents that can manage and interact with your Neon databases p
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 </DetailIconCards>
 
 ## Scale with Agent frameworks
