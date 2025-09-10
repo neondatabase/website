@@ -824,7 +824,7 @@ curl -X 'DELETE' \
 1.  **Action**: Retrieves a ready-to-use connection URI for a specific database within a project.
 2.  **Endpoint**: `GET /projects/{project_id}/connection_uri`
 3.  **Prerequisites**: You must know the `project_id`, `database_name`, and `role_name`.
-4.  **Parameters**:
+4.  **Query Parameters**:
     - `project_id` (path, required): The unique identifier of the project.
     - `database_name` (query, required): The name of the target database.
     - `role_name` (query, required): The role to use for the connection.
@@ -835,7 +835,6 @@ curl -X 'DELETE' \
 **Example request**:
 
 ```bash
-# Get a standard connection URI
 curl 'https://console.neon.tech/api/v2/projects/old-fire-32990194/connection_uri?database_name=neondb&role_name=neondb_owner' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
