@@ -206,7 +206,7 @@
   title: Connect
   icon: connect
   subnav:
-    - title: Connection basics
+    - title: Connect to Neon
       slug: connect/connect-intro
       icon: connect
       items:
@@ -226,18 +226,21 @@
           slug: connect/connect-securely
         - title: Connection pooling
           slug: connect/connection-pooling
+        - title: Latency benchmarks
+          slug: guides/benchmarking-latency
     - title: Clients & tools
-      slug: connect/connect-postgres-gui
+      slug: connect/query-with-psql-editor
       icon: settings
       items:
-        - title: GUI applications
-          slug: connect/connect-postgres-gui
-        - title: Looker Studio
-          slug: connect/connect-looker-studio
         - title: psql
           slug: connect/query-with-psql-editor
         - title: pgcli
           slug: connect/connect-pgcli
+        - title: GUI applications
+          slug: connect/connect-postgres-gui
+        - title: Looker Studio
+          slug: connect/connect-looker-studio
+
     - title: Troubleshooting
       slug: connect/connection-errors
       icon: support
@@ -246,8 +249,6 @@
           slug: connect/connection-errors
         - title: Latency and timeouts
           slug: connect/connection-latency
-        - title: Latency benchmarks
-          slug: guides/benchmarking-latency
 
 - nav: Develop
   title: Develop
@@ -1057,25 +1058,26 @@
                   slug: manage/slack-app
                   tag: beta
 
-        - section: Billing & support
-          icon: billing
-          items:
-            - title: Plans and billing
-              slug: introduction/about-billing
-            - title: Plans
-              slug: introduction/plans
-            - title: Legacy plans
-              slug: introduction/legacy-plans
-            - title: Manage billing
-              slug: introduction/manage-billing
-            - title: Monitor billing
-              slug: introduction/monitor-usage
-            - title: AWS Marketplace
-              slug: introduction/billing-aws-marketplace
-            - title: Azure Marketplace
-              slug: introduction/billing-azure-marketplace
-            - title: Enterprise sales process
-              slug: introduction/enterprise-sales-process
+    - title: Plans and billing
+      slug: introduction/about-billing
+      icon: billing
+      items:
+        - title: Plans and billing
+          slug: introduction/about-billing
+        - title: Plans
+          slug: introduction/plans
+        - title: Legacy plans
+          slug: introduction/legacy-plans
+        - title: Manage billing
+          slug: introduction/manage-billing
+        - title: Monitor billing
+          slug: introduction/monitor-usage
+        - title: AWS Marketplace
+          slug: introduction/billing-aws-marketplace
+        - title: Azure Marketplace
+          slug: introduction/billing-azure-marketplace
+        - title: Enterprise sales process
+          slug: introduction/enterprise-sales-process
 
     - title: Neon on Azure
       icon: azure
@@ -1372,9 +1374,6 @@
     - title: Glossary
       slug: reference/glossary
       icon: glossary
-      items:
-        - title: Neon Glossary
-          slug: reference/glossary
     - title: Community
       slug: community/community-intro
       icon: community
