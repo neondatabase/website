@@ -42,7 +42,6 @@ import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
 import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
-import InkeepEmbedded from 'components/shared/inkeep-embedded';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
 import ProgramForm from 'components/shared/program-form';
@@ -162,7 +161,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   UseCaseContext,
   ComputeCalculator,
   SubscriptionForm,
-  InkeepEmbedded,
   Video,
   Steps,
   LogosSection,

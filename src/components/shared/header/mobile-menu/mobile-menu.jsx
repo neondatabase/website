@@ -77,7 +77,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
         {sections && (
           <ChevronIcon
             className={clsx(
-              'ml-auto inline-block h-2.5 w-2.5 transition-transform duration-200 dark:text-white [&_path]:stroke-2',
+              'ml-auto inline-block transition-transform duration-200 dark:text-white',
               isDarkTheme ? 'text-white' : 'text-grayn-new-40',
               isMenuItemOpen && 'rotate-180'
             )}
@@ -206,7 +206,7 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-8 top-5 z-40 hidden gap-x-3 lg:flex lg:gap-x-4 md:right-4">
+      <div className="absolute right-8 top-4 z-40 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className={clsx(

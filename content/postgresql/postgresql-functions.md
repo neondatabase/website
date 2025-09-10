@@ -1,41 +1,52 @@
 ---
 title: 'PostgreSQL Functions'
 page_title: 'PostgreSQL Functions'
-page_description: 'This section provides you with the most useful PostgreSQL functions including aggregate functions, string functions, and date & time functions.'
+page_description: 'Learn PostgreSQL functions including aggregate functions, string functions, date functions, math functions, window functions, and JSON functions for powerful data manipulation and analysis.'
 prev_url: 'https://www.postgresqltutorial.com/postgresql-functions/'
 ogImage: 'https://www.postgresqltutorial.com//postgresqltutorial/PostgreSQL-Functions.png'
-updatedOn: '2021-08-11T03:08:08+00:00'
+updatedOn: '2025-09-06T10:00:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL pg_terminate_backend() Function'
-  slug: 'postgresql-administration/postgresql-pg_terminate_backend'
+  title: 'PostgreSQL Advanced'
+  slug: 'postgresql-advanced'
 nextLink:
   title: 'PostgreSQL Aggregate Functions'
   slug: 'postgresql-aggregate-functions'
 ---
 
-![](/postgresqltutorial/aggregate-functions-150x150.png?alignleft)
+The **PostgreSQL Functions** section provides comprehensive coverage of PostgreSQL's powerful built-in functions for data manipulation, analysis, and transformation. These functions are essential tools for working with data in PostgreSQL, enabling you to perform complex calculations, format data, and extract meaningful insights from your databases.
 
-### [PostgreSQL Aggregate Functions](postgresql-aggregate-functions)
+PostgreSQL offers hundreds of built-in functions organized into several categories, each designed for specific types of data operations. Whether you're aggregating data, manipulating strings, working with dates, or processing JSON, PostgreSQL provides robust and efficient functions to handle your needs.
 
-This tutorial introduces you to the PostgreSQL aggregate functions and shows you how to apply them to summarize data.
-![](/postgresqltutorial/postgresql-date-functions-150x150.png?alignleft)
+## Section 1. Data Aggregation and Analysis
 
-### [PostgreSQL Date Functions](postgresql-date-functions)
+Learn to summarize and analyze data using PostgreSQL's powerful aggregate and window functions.
 
-This section shows you the most commonly used PostgreSQL date functions that allow you to manipulate date and time values more effectively.
-![](/postgresqltutorial/string-functions-150x150.png?alignleft)
+- [PostgreSQL Aggregate Functions](postgresql-aggregate-functions) – learn PostgreSQL's aggregate functions for summarizing data across multiple rows including COUNT, SUM, AVG, MIN, MAX, STRING_AGG, and advanced aggregation techniques.
+- [PostgreSQL Window Functions](postgresql-window-function) – perform advanced analytical calculations across sets of rows using ranking functions, lead/lag functions, and window frame specifications for sophisticated data analysis.
 
-### [PostgreSQL String Functions](postgresql-string-functions)
+## Section 2. String and Text Processing
 
-This section provides you the most commonly used PostgreSQL string functions that help you manipulate string data effectively.
-![](/postgresqltutorial/math-functions-150x150.png?alignleft)
+Comprehensive string manipulation functions for text processing, formatting, and data cleaning operations.
 
-### [PostgreSQL Math Functions](postgresql-math-functions)
+- [PostgreSQL String Functions](postgresql-string-functions) – learn PostgreSQL's string functions for text manipulation, pattern matching, data formatting, and advanced text processing techniques essential for data cleaning and validation.
 
-Provide the most commonly used PostgreSQL Match functions that help you perform various math operations quickly and effectively.
-![](/postgresqltutorial/window-functions-150x150.png?alignleft)
+## Section 3. Date and Time Operations
 
-### [PostgreSQL Window Functions](postgresql-window-function)
+Powerful date and time functions for temporal data processing, scheduling, and time-based analysis.
 
-In this tutorial, you will learn how to use the PostgreSQL window functions to perform the calculation across the set of rows related to the current row.
+- [PostgreSQL Date Functions](postgresql-date-functions) – work effectively with date and time data using PostgreSQL's comprehensive date functions for temporal data processing, scheduling, and time-based reporting.
+
+## Section 4. Mathematical Operations
+
+Mathematical functions for calculations, statistical analysis, and numerical data processing.
+
+- [PostgreSQL Math Functions](postgresql-math-functions) – perform mathematical calculations and statistical operations using PostgreSQL's math functions essential for financial applications, scientific computing, and data analysis.
+
+## Section 5. JSON Data Processing
+
+Advanced JSON manipulation functions for working with semi-structured data in PostgreSQL.
+
+- [PostgreSQL JSON Functions](postgresql-json-functions) – learn PostgreSQL's JSON functions for working with JSON and JSONB data types, essential for modern applications that handle semi-structured data and API integrations.
+
+Each section provides detailed tutorials with practical examples that demonstrate real-world applications of PostgreSQL functions.

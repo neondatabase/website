@@ -7,7 +7,6 @@ import TableOfContents from 'components/shared/table-of-contents';
 
 const Aside = ({
   isTemplate,
-  isDocsIndex, // eslint-disable-line no-unused-vars
   isChangelog,
   enableTableOfContents,
   tableOfContents,
@@ -18,8 +17,8 @@ const Aside = ({
     className={clsx(
       'relative col-span-2 -ml-12 w-full max-w-64 xl:hidden',
       isTemplate
-        ? 'col-start-11 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
-        : 'col-start-10 3xl:-ml-20 2xl:col-span-4 2xl:col-start-9 2xl:ml-6',
+        ? 'col-span-2 col-start-11 -ml-12 max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+        : '',
       className
     )}
   >
@@ -40,7 +39,6 @@ const Aside = ({
 
 Aside.propTypes = {
   isTemplate: PropTypes.bool,
-  isDocsIndex: PropTypes.bool,
   isChangelog: PropTypes.bool,
   enableTableOfContents: PropTypes.bool,
   tableOfContents: PropTypes.array,
