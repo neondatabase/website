@@ -39,13 +39,12 @@ To construct a full request URL, append the specific endpoint path to this base 
 
 ### Prerequisites
 
-- To create new API keys using the API, you must already possess a valid **Personal** / **Organisation API Key**. The first key must be created from the Neon Console. You can ask the user to create one for you if you do not have one. (Personal accounts are also considered organizations of one and are assigned an organization ID which can be found in the Neon Console settings page.)
+To create new API keys using the API, you must already possess a valid **Personal API Key**. The first key must be created from the Neon Console. You can ask the user to create one for you if you do not have one.
 
 ### List API keys
 
-- **Personal Keys Endpoint**: `GET /api_keys`
-- **Organization Keys Endpoint**: `GET /organizations/{org_id}/api_keys`
-- **Authorization**: Use a Personal or Organization API Key.
+- **Endpoint**: `GET /api_keys`
+- **Authorization**: Use a Personal API Key.
 
 **Example request**:
 
@@ -78,7 +77,6 @@ curl "https://console.neon.tech/api/v2/api_keys" \
 - **Endpoint**: `POST /api_keys`
 - **Authorization**: Use a Personal API Key.
 - **Body**: Must include a `key_name`.
-- **Important**: The `key` value in the response is shown **only once**. It must be captured and stored securely immediately.
 
 **Example request**:
 
@@ -97,35 +95,6 @@ curl https://console.neon.tech/api/v2/api_keys \
   "key": "napi_9tlr13774gizljemrr133j5koy3bmsphj8iu38mh0yjl9q4r1b0jy2wuhhuxouzr",
   "name": "my-new-key",
   "created_at": "2025-09-10T09:47:59Z",
-  "created_by": "487de658-08ba-4363-b387-86d18b9ad1c8"
-}
-```
-
-### Create an Organization API Key
-
-- **Endpoint**: `POST /organizations/{org_id}/api_keys`
-- **Authorization**: Use a Personal API Key that belongs to a user in the specified organization.
-- **Body**:
-  - `key_name` (required): A descriptive name for the API key.
-  - `project_id` (optional): If provided, the key will be scoped to this project only. If omitted, the key will have access to all projects within the organization.
-
-**Example request**:
-
-```bash
-curl https://console.neon.tech/api/v2/organizations/{org_id}/api_keys \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer $PERSONAL_API_KEY" \
-  -d '{"key_name": "org-key"}'
-```
-
-**Example response**:
-
-```json
-{
-  "id": 2291524,
-  "key": "napi_jtbfky010qke294rsjqpe0u8h3sdjp91wayaexbz730y4z7kfpzht896ixbtrqz3",
-  "name": "org-key",
-  "created_at": "2025-09-10T09:51:21Z",
   "created_by": "487de658-08ba-4363-b387-86d18b9ad1c8"
 }
 ```
@@ -155,19 +124,6 @@ curl -X DELETE \
   "last_used_from_addr": "2405:201:c01f:7013:d962:2b4f:2740:9750",
   "revoked": true
 }
-```
-
-### Revoke an Organization API Key
-
-- **Endpoint**: `DELETE /organizations/{org_id}/api_keys/{key_id}`
-- **Authorization**: Use a Personal API Key that belongs to a user in the specified organization.
-
-**Example request**:
-
-```bash
-curl -X DELETE \
-  'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys/{key_id}' \
-  -H "Authorization: Bearer $PERSONAL_API_KEY"
 ```
 
 ---
@@ -281,7 +237,7 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10' \
       - `allowed_ips` (object, optional): Configures the IP Allowlist.
         - `ips` (array of strings, optional): A list of allowed IP addresses or CIDR ranges.
         - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
-      - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`. This action is irreversible and restarts all computes.
+      - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`.
       - `maintenance_window` (object, optional): The time period for scheduled maintenance.
         - `weekdays` (array of integers, **required** if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
         - `start_time` (string, **required** if `maintenance_window` is set): Start time in "HH:MM" UTC format.
@@ -728,7 +684,7 @@ curl -X 'DELETE' \
     - `database_name` (query, required): The name of the target database.
     - `role_name` (query, required): The role to use for the connection.
     - `branch_id` (query, optional): The branch ID. Defaults to the project's primary branch if not specified.
-    - `pooled` (query, optional, boolean): If set to `true`, returns a pooled connection URI.
+    - `pooled` (query, optional, boolean): If set to `false`, returns a direct connection URI instead of a pooled one. Defaults to `true`.
     - `endpoint_id` (query, optional): The specific endpoint ID to connect to. Defaults to the `read-write` endpoint_id associated with the `branch_id` if not specified.
 
 **Example request**:
