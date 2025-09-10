@@ -41,7 +41,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 | Instant Restore (PITR)     | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
 | Neon Auth                  | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
 | Management API             | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
-| Data API (PostgREST)       | **Higher Rate Limits Available**                                                                      |
+| Data API (PostgREST-compatible)       | **Higher Rate Limits Available**                                                                      |
 | Support                    | **Shared Slack Channel**                                                                              |
 | <br/>**Agent Incentives**  |                                                                                                       |
 | **LLM Token Credits**      | Access to Databricks Startup Credits for Foundation Model Serving tokens.                             |
