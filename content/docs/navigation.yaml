@@ -97,14 +97,10 @@
               slug: import/migrate-aws-dms
 
         - title: CSV
-          items:
-            - title: Import from CSV
-              slug: import/import-from-csv
+          slug: import/import-from-csv
 
         - title: Sample data
-          items:
-            - title: Import sample data
-              slug: import/import-sample-data
+          slug: import/import-sample-data
 
 - nav: About
   title: About Neon
