@@ -1,23 +1,27 @@
+// eslint-disable-next-line import/no-import-module-exports
+import { getNormalizedChildren } from './get-flat-sidebar';
+
 const getBreadcrumbs = (slug, flatSidebar, sidebar) => {
-  const path = flatSidebar.find((item) => item.slug === slug)?.path;
-  const arr = [];
-  if (path) {
-    path.reduce((prev, cur, index, array) => {
-      const current =
-        prev[cur] || prev.items?.[cur] || prev.items?.find((item) => item.slug === cur);
-      if (current && !current.section && current.title !== 'Home') {
-        arr.push({
-          title: current.title,
-          ...(index !== array.length - 1 && { slug: current.slug }),
-        });
-      }
-      return current;
-    }, sidebar);
+  const path = flatSidebar.find((i) => i.slug === slug)?.path;
 
-    return arr.slice(1);
-  }
+  if (!path) return [];
 
-  return [];
+  const crumbs = [];
+
+  path.reduce((prev, idx, i, arr) => {
+    const current = Array.isArray(prev) ? prev[idx] : (getNormalizedChildren(prev) || [])[idx];
+
+    if (current && !current.section && current.title !== 'Home') {
+      const isLast = i === arr.length - 1;
+      crumbs.push({
+        title: current.title || current.nav,
+        ...(!isLast && current.slug ? { slug: current.slug } : {}),
+      });
+    }
+    return current;
+  }, sidebar);
+
+  return crumbs.slice(1);
 };
 
 module.exports = {
