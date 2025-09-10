@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-08-18T12:11:47.181Z'
+updatedOn: '2025-09-05T12:26:43.312Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -324,6 +324,8 @@ The response body includes information about the branch, the branch's compute, a
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branch": {
@@ -461,6 +463,8 @@ The response body lists the project's default branch and any child branches. The
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branches": [
@@ -549,6 +553,8 @@ The response body shows information about the branch being deleted and the `susp
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Delete branches](https://api-docs.neon.tech/reference/deleteprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

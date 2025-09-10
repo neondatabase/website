@@ -3,7 +3,7 @@ title: Secure your data with Stack Auth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.264Z'
+updatedOn: '2025-09-05T14:21:44.228Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-stack-auth
   - /docs/guides/neon-authorize-stack-auth
@@ -19,6 +19,8 @@ redirectFrom:
    <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 > **Note for Neon Auth users:**  
 > If you are using [Neon Auth](/docs/neon-auth/overview), you do **not** need to manually set up Stack Auth. Neon Auth provides the JWKS URL for you in the **Configuration** tab of your project. You can start from [Step 3](#3-install-the-pgsessionjwt-extension-in-your-database) below to complete your RLS setup.

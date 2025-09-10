@@ -3,7 +3,7 @@ title: Secure your data with PropelAuth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using PropelAuth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.263Z'
+updatedOn: '2025-09-05T14:21:44.227Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-propelauth
   - /docs/guides/neon-authorize-propelauth
@@ -19,6 +19,8 @@ redirectFrom:
   <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 Use PropelAuth with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using PropelAuth for user authentication. It shows you how to integrate PropelAuth with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 

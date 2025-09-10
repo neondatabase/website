@@ -57,7 +57,7 @@ Output:
 (1 row)
 ```
 
-### 2\) Using jonb_build_object() function with table data example
+### 2\) Using jsonb_build_object() function with table data example
 
 The following example uses the `jsonb_build_object()` function to create a JSON object based on the title and length of films in the `film` table from the [sample database](../postgresql-getting-started/postgresql-sample-database):
 
@@ -81,7 +81,7 @@ Output:
 ...
 ```
 
-### 3\) Using the jonb_build_object() function with an odd number of values
+### 3\) Using the jsonb_build_object() function with an odd number of values
 
 The following example attempts to use the `jsonb_build_object()` function with an odd number of values:
 

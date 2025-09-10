@@ -37,26 +37,24 @@ rules:
       - Each feature description: 1–3 sentences.
       - Include optional image blocks where relevant.
       - Always include a **Fixes & improvements** section as a collapsible `<details>`.
+      - **IMPORTANT**: Use only placeholder content (Lorem ipsum) and generic headings like "## New feature" - DO NOT create fictional features, improvements, or specific content.
 
       ## Markdown template (write exactly this shape, replacing bracketed placeholders)
       ---
       title: [Concise main theme of the release]
       ---
 
-      ## [Primary feature or theme title]
+      ## New feature
 
-      [1–3 sentence description linking to pricing/docs/blog as applicable.]
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
-      <!-- Optional image example -->
-      <!-- ![Alt text](/docs/changelog/[asset].png) -->
+      ## Another feature
 
-      ## [Second feature title]
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
-      [1–3 sentence description with links where helpful.]
+      ## Third feature
 
-      ## [Third feature title]
-
-      [1–3 sentence description with links where helpful.]
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
       <details>
       <summary>**Fixes & improvements**</summary>

@@ -12,7 +12,7 @@ Suppose you need to give a partner read-only access to your sales data so they c
 
 1. **Create a read replica**
 
-      **Note**: The Free Plan is limited to a maximum of 3 read replica computes per project.
+      **Note**: The Free plan is limited to a maximum of 3 read replica computes per project.
 
    Follow these steps to create a read replica for your database branch:
    - In the Neon Console, go to **Branches**.

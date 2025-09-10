@@ -13,14 +13,16 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-08-26T13:01:22.807Z'
+updatedOn: '2025-09-08T10:07:38.931Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-<Admonition type="note">
-The plans on this page are Neon's usage-based pricing plans, introduced **August 14, 2025**. If you joined earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). See [Change your plan](/docs/introduction/manage-billing#change-your-plan) to switch. Free plan users were automatically moved to the new plan described below.
+> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Vercel** or **Azure Marketplace**.
+
+<Admonition type="important">
+If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans. The new usage-based pricing plans will be introduced on these platforms at a later date.
 </Admonition>
 
 ---
@@ -29,11 +31,15 @@ The plans on this page are Neon's usage-based pricing plans, introduced **August
 
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
+<Admonition type="comingSoon" title="Building an agent platform?">
+For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](https://neon.com/use-cases/ai-agents)
+</Admonition>
+
 | Plan feature                                          | **Free**                       | **Launch**                           | **Scale**                                                                         |
 | ----------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
 | [Price](#price)                                       | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
 | [Who it's for](#who-its-for)                          | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                   |
-| [Projects](#projects)                                 | 10                             | 100                                  | 1,000 (can be increased on request)                                               |
+| [Projects](#projects)                                 | 20                             | 100                                  | 1,000 (can be increased on request)                                               |
 | [Branches](#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                        |
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
 | [Compute](#compute)                                   | 50 CU-hours/project            | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
@@ -56,17 +62,17 @@ This section describes the features listed in the [Plan overview](#plan-overview
 
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan before usage-based charges.
+**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5.
 
-For **Launch** and **Scale**, the minimum monthly fee is $5. Additional usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+> If you sign up for a paid plan part way through the month, the minimum monthly fee amount is proroated from the sign-up date.
+
+For **Launch** and **Scale**, the minimum monthly fee is $5. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
-> If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, signing up halfway through the month results in a $2.50 base cost (half of $5).
-
 ### ☑ Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 10 projects, 50 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 20 projects, 50 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
@@ -78,7 +84,7 @@ A project is a container for your database environment. It includes your databas
 
 Included per plan:
 
-- **Free**: 10 projects
+- **Free**: 20 projects
 - **Launch**: 100 projects
 - **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
@@ -317,7 +323,21 @@ The following examples show what your monthly bill might look like on the **Laun
 
 ### Launch plan
 
-- **Example 1**
+- **Example 1 (less than $5 usage)**
+  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.40**  
+    _(10 CU-hours × $0.14/CU-hour)_
+  - Root branch storage: 2 GB — **$0.70**  
+    _(2 GB × $0.35/GB-month)_
+  - Child branch storage: 1 GB — **$0.35**  
+    _(1 GB × $0.35/GB-month)_
+  - Instant restore history: 1 GB — **$0.20**  
+    _(1 GB × $0.20/GB-month)_
+
+    **Subtotal:** **$2.65**  
+    **Minimum monthly fee:** **$5.00**  
+    **Amount due:** **$5.00**
+
+- **Example 2**
   - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
     _(120 CU-hours × $0.14/CU-hour)_
   - Root branch storage: 20 GB — **$7.00**  
@@ -326,11 +346,10 @@ The following examples show what your monthly bill might look like on the **Laun
     _(5 GB × $0.35/GB-month)_
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$32.55**
+    **Amount due:** **$27.55**
 
-- **Example 2**
+- **Example 3**
   - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
     _(250 CU-hours × $0.14/CU-hour)_
   - Root branch storage: 40 GB — **$14.00**  
@@ -339,9 +358,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(10 GB × $0.35/GB-month)_
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$61.50**
+    **Amount due:** **$56.50**
 
 ---
 
@@ -356,9 +374,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(25 GB × $0.35/GB-month)_
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$500.75**
+    **Amount due:** **$495.75**
 
 - **Example 2**
   - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
@@ -369,9 +386,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(40 GB × $0.35/GB-month)_
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$762.50**
+    **Amount due:** **$757.50**
 
 ## FAQs
 

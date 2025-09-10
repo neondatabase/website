@@ -138,7 +138,7 @@ Commands:
   neon orgs                        Manage organizations                [aliases: org]
   neon projects                    Manage projects                 [aliases: project]
   neon ip-allow                    Manage IP Allow
-  neonctl vpc                      Manage VPC endpoints and project VPC restrictions
+  neon vpc                         Manage VPC endpoints and project VPC restrictions
   neon branches                    Manage branches                   [aliases: branch]
   neon databases                   Manage databases            [aliases: database, db]
   neon roles                       Manage roles                        [aliases: role]

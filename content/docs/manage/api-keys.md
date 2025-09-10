@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2025-08-02T10:33:29.298Z'
+updatedOn: '2025-09-05T12:26:43.311Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.
@@ -183,6 +183,8 @@ where:
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Retrieve project details](https://api-docs.neon.tech/reference/getproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "projects": [
@@ -271,6 +273,8 @@ curl -X DELETE \
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Revoke API key](https://api-docs.neon.tech/reference/revokeapikey) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

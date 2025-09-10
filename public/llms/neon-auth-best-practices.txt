@@ -93,6 +93,67 @@ To get started adding RLS to your Neon Auth project:
 
 For a full walkthrough, see [About Neon RLS](https://neon.com/docs/guides/neon-rls) and the [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial).
 
+## Production OAuth setup
+
+To securely use OAuth in production, you must configure your own OAuth credentials for each provider. Shared keys are for development only and will display "Stack Development" on the provider's consent screen, which is not secure or branded for your app.
+
+Follow these steps for each provider you use:
+
+### Create an OAuth app
+
+On the provider's website, create an OAuth app and set the callback URL to the corresponding Neon Auth callback URL. Copy the client ID and client secret.
+
+Tab: Google
+
+[Google OAuth Setup Guide](https://developers.google.com/identity/protocols/oauth2#1.-obtain-oauth-2.0-credentials-from-the-dynamic_data.setvar.console_name-)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/google
+```
+
+Tab: GitHub
+
+[GitHub OAuth Setup Guide](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/github
+```
+
+Tab: Microsoft
+
+[Microsoft Azure OAuth Setup Guide](https://learn.microsoft.com/en-us/entra/identity-platform/quickstart-register-app)
+
+**Callback URL:**
+
+```
+https://api.stack-auth.com/api/v1/auth/oauth/callback/microsoft
+```
+
+### Enter OAuth credentials in Neon Auth
+
+Go to the **OAuth providers** section in the Neon Auth dashboard.
+
+Click **Add OAuth Provider**, choose your provider from the list, and enter the client ID and secret you copied from your provider's developer portal.
+
+
+## Email server
+
+For development, Neon Auth uses a shared email server, which sends emails from `noreply@stackframe.co`. This is not ideal for production as users may not trust emails from an unfamiliar domain. For production, we recommend setting up an email server connected to your own domain.
+
+1. **Setup Email Server**
+
+   Configure your own email server and connect it to your domain (check your email server docs for details).
+
+2. **Configure Neon Auth's Email Settings**
+
+   Navigate to the **Auth** page in the Neon Console, go to the **Configuration** tab, find the **Email server** section, switch from "Shared" to "Custom SMTP server", enter your SMTP configurations, and save.
+
+For detailed configuration instructions, see [Email Configuration](https://neon.com/docs/neon-auth/email-configuration).
+
 ## Limitations
 
    **Important**: Neon Auth is not compatible with Private Link (Neon Private Networking). If you have Private Link enabled for your Neon project, Neon Auth will not work. This is because Neon Auth requires internet access to connect to third-party authentication providers, while Private Link restricts connections to private AWS networks.

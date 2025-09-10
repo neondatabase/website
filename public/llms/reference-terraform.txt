@@ -336,7 +336,7 @@ For more attributes and options on managing JWKS URLs, refer to the [Provider's 
 
 ### Advanced: VPC endpoint management (for Neon private networking)
 
-These resources are used for organizations with Scale or Enterprise plans requiring private networking.
+These resources are used for organizations requiring private networking.
 
 #### Assign VPC endpoint to organization
 

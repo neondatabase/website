@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-08-22T19:04:58.896Z'
+updatedOn: '2025-09-05T14:21:44.217Z'
 tag: beta
 ---
 
@@ -23,17 +23,18 @@ tag: beta
 The Neon Data API, powered by [PostgREST](https://docs.postgrest.org/en/v13/), offers a ready-to-use REST API for your Neon database. You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
 
 ```javascript shouldWrap
-const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
+const { data } = await client.from('posts').select('*');
 ```
 
-> When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
+<Admonition type="info" title="About RLS and Neon RLS">
+When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
 
-<Admonition type="info" title="A note on Neon RLS">
-You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**.
+You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**. We recommend using the Data API for client-side querying as it provides a more secure and controlled way to access your data through predefined REST endpoints.
 </Admonition>
 
 <Steps>
-## Enabling the Data API
+
+## Enable the Data API
 
 Enable the Data API at the **branch** level for a single database.
 
@@ -41,167 +42,208 @@ To get started, open the **Data API** page from the project sidebar and click **
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-By default, we install Neon Auth as your **Authentication provider**. We recommend using Neon Auth for a seamless experience, but you can also select **Other provider** if you manage your own JWTs, or skip this step to configure authentication later.
+Enabling the Data API on your branch gives you:
 
-Once enabled, you'll see your **REST API Endpoint** — this is your base URL for API requests, with a copy-to-clipboard control.
+- A **REST API endpoint** for your branch (your base URL for API requests) with a copy-to-clipboard control
+- **Neon Auth** as your default authentication provider (if you accept the default)
+- Two Postgres roles:
+  - **`authenticated`** – used when a request includes a valid JWT
+  - **`anonymous`** – will be used for unauthenticated requests (coming soon)
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
+You can change the provider to **Other provider** if you want to manage your own JWTs, or skip authentication setup and add it later. But if you accept the default, Neon Auth is ready to use immediately. If you select **Other provider**, you'll need to provide your provider's JWKS (JSON Web Key Set) URL to validate JWT tokens.
+
 _Always secure your data before using the Data API in production._
 
-### About activation times and schema changes
+## Secure your Data API
 
-- After enabling the Data API, it may take a minute for your endpoints to become available. Be aware of that.
-- If you change your database schema, you'll need to tell the Data API to refresh its cache. You can do this by reloading the schema from the SQL Editor:
+To secure your Data API you must configure both of the following:
 
-  ```sql
-  NOTIFY pgrst, 'reload schema'
-  ```
+- **GRANT statements** that define which operations (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) each role can attempt
+- **Row-Level Security (RLS) policies** that control which specific rows each role can see or modify
 
-## Authentication
-
-Once enabled, the **Working with the Data API** section shows your current security status and next steps. If you skipped the auth provider selection, you'll also see an option to add an authentication provider.
-
-![configuration section of Data API](/docs/data-api/data_api_config.png)
-
-The security model consists of two parts:
-
-### Neon Auth (default)
-
-[Neon Auth](/docs/neon-auth/overview) manages user authentication, generating JWT tokens for secure API requests. If you accepted the default during setup, Neon Auth is already configured and you'll see the JWKS URL in the Authentication providers section.
-
-**What you need to do**:
-
-- Add Neon Auth keys to your app's environment variables. See [Get your Neon Auth keys](/docs/neon-auth/quick-start/nextjs#add-neon-auth-to-a-project).
-- Include JWT tokens in Data API requests.
-- **Recommended**: Use the Neon Auth SDK for user sign-in/sign-up. See [Neon Auth SDKs](/docs/neon-auth/sdk/nextjs/overview). There are SDKs for Next.js and React.
-
-> You can start using the Data API immediately without authentication, but make sure you set up auth and RLS before going to production.
-
-### Row-Level Security (RLS)
-
-RLS controls row access in tables. **Neon does not auto-enable RLS**; enable it manually per table.
+### GRANT permissions
 
 ```sql
--- Enable RLS on your table
-ALTER TABLE your_table ENABLE ROW LEVEL SECURITY;
+-- For existing tables
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
+  IN SCHEMA public TO authenticated;
 
--- Create a policy (example: users can only access their own data)
-CREATE POLICY "user_can_access_own_data" ON your_table
-  FOR ALL USING (auth.user_id() = user_id);
+-- For future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
+
+-- For sequences (for identity columns)
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
+
+-- Schema usage
+GRANT USAGE ON SCHEMA public TO authenticated;
 ```
 
-We recommend using [Drizzle ORM](/docs/guides/rls-drizzle) to help simplify writing RLS policies for the Data API.
-
-<Admonition type="info" title="About auth.user_id()">
-The `auth.user_id()` function extracts the user's ID from the JSON Web Token (JWT) issued by [Neon Auth](/docs/guides/neon-auth). The Data API validates this token, making the user's ID available to your RLS policies for enforcing per-user access.
-
-For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
+<Admonition type="warning" title="Authentication required">
+**All requests to the Data API currently require authentication** with a valid JWT token. Anonymous access is not supported yet, but is coming soon. In the near future, we'll provide public/long-lived tokens for anonymous users.
 </Admonition>
 
-## Using the Data API
+### Create a table with RLS
 
-By default, all tables in your database are accessible via the API with `SELECT` permissions granted to **unauthenticated requests**. This lets you directly interact with the API without requiring additional authorization headers.
+Here's a sample `posts` table secured with RLS. The GRANT statements above give authenticated users access to all tables, which allows the Data API to work. RLS policies then control which specific rows each user can see and modify.
 
-> **Warning:** This means your data is **publicly accessible** until you enable Row-Level Security (RLS). Again, enable RLS on _all_ your tables before using the Data API in production.
+For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
 
-### Example of creating a table and querying it via the Data API
-
-First, create a table and enable RLS (as shown in [Secure your tables with RLS](#secure-your-tables-with-rls) above):
+<CodeTabs labels={["SQL", "Drizzle (crudPolicy)", "Drizzle (pgPolicy)"]}>
 
 ```sql shouldWrap
-CREATE TABLE IF NOT EXISTS playing_with_neon(
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  value REAL
+CREATE TABLE "posts" (
+	"id" bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+	"userId" text DEFAULT (auth.user_id()) NOT NULL,
+	"content" text NOT NULL,
+	"published" boolean DEFAULT false NOT NULL
 );
 
--- Enable RLS and create policy (see section 3 for details)
-ALTER TABLE playing_with_neon ENABLE ROW LEVEL SECURITY;
-CREATE POLICY "user_can_access_own_data" ON playing_with_neon
-FOR ALL USING (auth.user_id() = user_id);
+-- Enable RLS and create policies
+ALTER TABLE "posts" ENABLE ROW LEVEL SECURITY;
 
-INSERT INTO playing_with_neon(name, value)
-  SELECT LEFT(md5(i::TEXT), 10), random()
-  FROM generate_series(1, 10) s(i);
+-- When RLS is enabled, all operations are denied by default unless explicitly allowed by policies.
 
-SELECT * FROM playing_with_neon;
+CREATE POLICY "Allow authenticated users to read any post" ON "posts"
+AS PERMISSIVE FOR SELECT TO "authenticated"
+USING (true);
+
+CREATE POLICY "Allow authenticated users to insert their own posts" ON "posts"
+AS PERMISSIVE FOR INSERT TO "authenticated"
+WITH CHECK ((select auth.user_id() = "userId"));
+
+CREATE POLICY "Allow authenticated users to update their own posts" ON "posts"
+AS PERMISSIVE FOR UPDATE TO "authenticated"
+USING ((select auth.user_id() = "userId"))
+WITH CHECK ((select auth.user_id() = "userId"));
+
+CREATE POLICY "Allow authenticated users to delete their own posts" ON "posts"
+AS PERMISSIVE FOR DELETE TO "authenticated"
+USING ((select auth.user_id() = "userId"));
 ```
 
-#### Querying with Curl
+```typescript
+import { sql } from 'drizzle-orm';
+import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
+import { bigint, boolean, pgTable, text } from 'drizzle-orm/pg-core';
 
-- **Without JWT (unauthenticated request):**
-
-  ```bash shouldWrap
-  curl --location --request GET 'https://app-restless-salad-23184734.dpl.myneon.app/playing_with_neon'
-  --header 'Accept: application/json'
-  ```
-
-  **Response:**
-
-  ```json should wrap
-  []
-  ```
-
-  _No data returned because RLS denies access without authentication._
-
-- **With JWT (authenticated request):**
-
-  ```bash shouldWrap
-  curl --location --request GET 'https://app-restless-salad-23184734.dpl.myneon.app/playing_with_neon'
-  --header 'Accept: application/json'
-  --header 'Authorization: Bearer <jwt>'
-  ```
-
-  **Response:**
-
-  ```json
-  HTTP/1.1 200 OK
-  Content-Type: application/json
-
-  [
-    {
-      "id": 1,
-      "name": "c4ca4238a0",
-      "value": 0.36675808
-    },
-    ... (shortened)
-    {
-      "id": 10,
-      "name": "6512bd43d9",
-      "value": 0.72407603
-    }
+export const posts = pgTable(
+  'posts',
+  {
+    id: bigint({ mode: 'number' }).primaryKey(),
+    userId: text()
+      .notNull()
+      .default(sql`(auth.user_id())`),
+    content: text().notNull(),
+    published: boolean().notNull().default(false),
+  },
+  (table) => [
+    // Policy for authenticated users
+    crudPolicy({
+      role: authenticatedRole,
+      read: true, // Can also read all posts
+      modify: authUid(table.userId), // Can only modify their own posts
+    }),
   ]
-  ```
-
-  _You get expected data since the token is included in the request._
-
-As the Data API is built on **PostgREST**, it follows PostgREST query and data manipulation formats. You can use also wrapper libraries like [postgrest-js](https://github.com/supabase/postgrest-js) for a more ORM-like interface.
-
-```javascript shouldWrap
-import { PostgrestClient } from '@supabase/postgrest-js';
-
-// https://github.com/supabase/postgrest-js/blob/master/src/PostgrestClient.ts#L41
-const client = new PostgrestClient('https://app-restless-salad-23184734.dpl.myneon.app', {
-  Authorization: 'Bearer <jwt>',
-});
-
-const { data } = await client.from('playing_with_neon').select('*').gte('value', 0.5);
-
-console.table(data);
+);
 ```
 
-> For a complete example of how to configure the Bearer token with Neon Auth, see the [postgrest.ts](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/lib/postgrest.ts) file from our demo app.
+```typescript
+import { sql } from 'drizzle-orm';
+import { authenticatedRole, authUid } from 'drizzle-orm/neon';
+import { bigint, boolean, pgPolicy, pgTable, text } from 'drizzle-orm/pg-core';
 
-## Try the demo app
+export const posts = pgTable(
+  'posts',
+  {
+    id: bigint({ mode: 'number' }).primaryKey(),
+    userId: text()
+      .notNull()
+      .default(sql`(auth.user_id())`),
+    content: text().notNull(),
+    published: boolean().notNull().default(false),
+  },
+  (table) => [
+    // Authenticated users
+    pgPolicy('Allow authenticated users to read any post', {
+      to: authenticatedRole,
+      for: 'select',
+      using: sql`true`,
+    }),
+    pgPolicy('Allow authenticated users to insert their own posts', {
+      to: authenticatedRole,
+      for: 'insert',
+      withCheck: authUid(table.userId),
+    }),
+    pgPolicy('Allow authenticated users to update their own posts', {
+      to: authenticatedRole,
+      for: 'update',
+      using: authUid(table.userId),
+      withCheck: authUid(table.userId),
+    }),
+    pgPolicy('Allow authenticated users to delete their own posts', {
+      to: authenticatedRole,
+      for: 'delete',
+      using: authUid(table.userId),
+    }),
+  ]
+);
+```
 
-To see a complete, working example of an application built with the Data API, Neon Auth, and RLS, check out our demo note-taking app.
+</CodeTabs>
 
-- **[Live Demo](https://neon-data-api-neon-auth.vercel.app/)**
-- **[GitHub Repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth)**
+The `auth.user_id()` function is provided by the Data API and extracts the user ID from JWT tokens, making it available to your RLS policies for enforcing per-user access control.
+
+With the `posts` table and its RLS policies in place, you can now securely query and modify posts using the Data API.
+
+## Query from your app
+
+The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example showing how to use it with `postgrest-js`:
+
+```ts shouldWrap
+import { PostgrestClient } from '@supabase/postgrest-js';
+import { useUser } from '@stackframe/stack';
+
+// Example: fetch notes for the current user
+async function fetchUserNotes() {
+  const user = useUser(); // [!code highlight]
+  if (!user) return null;
+
+  const { accessToken } = await user.getAuthJson(); // [!code highlight]
+  const pg = new PostgrestClient(import.meta.env.VITE_DATA_API_URL, {
+    headers: { Authorization: `Bearer ${accessToken}` }, // [!code highlight]
+  });
+
+  const { data, error } = await pg
+    .from('notes')
+    .select('id, title, created_at, owner_id, shared')
+    .eq('owner_id', user.id) // [!code highlight]
+    .order('created_at', { ascending: false }); // [!code highlight]
+
+  return { data, error };
+}
+```
+
+This example shows the key steps:
+
+1. Get the current user with `useUser()`
+2. Extract their JWT token with `user.getAuthJson()`
+3. Create a PostgrestClient with proper authentication headers
+4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
+
+To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
+
+- [Full tutorial](/docs/data-api/demo) - Step-by-step guide to building the app
+- [GitHub Repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth)
+- [Live Demo](https://neon-data-api-neon-auth.vercel.app/)
+
+## Refresh schema cache
+
+When you modify your database schema (adding tables, columns, or changing structure), the Data API needs to refresh its cache.
+
+- Console: go to **Data API** section and click **Refresh schema cache**
+- SQL: run `NOTIFY pgrst, 'reload schema';`
 
 </Steps>
-
-## What's Next?
-
-- Faster cold starts (we're working on it)

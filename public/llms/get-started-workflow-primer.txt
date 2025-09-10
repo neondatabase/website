@@ -1,0 +1,164 @@
+# Database branching workflow primer
+
+> The "Database Branching Workflow Primer" document outlines the process for creating and managing database branches in Neon, enabling users to efficiently handle development and testing environments.
+
+## Source
+
+- [Database branching workflow primer HTML](https://neon.com/docs/get-started/workflow-primer): The original HTML version of this documentation
+
+With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](https://neon.com/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.
+
+Neon branches are:
+
+- **Isolated**: changes made to a branch don't affect its parent.
+- **Fast to create**: creating a branch takes ~1 second, regardless of the size of your database.
+- **Cost-effective**: you're only billed for unique data across all branches, and they scale to zero when not in use (you can configure this behavior for every branch).
+- **Ready to use**: branches will have the parent branch's schema and all its data (you can also include data up to a certain point in time). If you're working with sensitive data, Neon also supports a [schema-only branching](https://neon.com/docs/guides/branching-schema-only) option.
+
+Every Neon branch has a unique Postgres connection string, so they're completely isolated from one another.
+
+```bash
+# Branch 1
+postgresql://database_name_owner:AbC123dEf@ep-shiny-cell-a5y2zuu0.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+
+# Branch 2
+postgresql://database_name_owner:AbC123dEf@ep-hidden-hall-a5x58cuv.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
+
+You can create all of your branches from the default branch, or set up a dedicated branch that you use as a base. The first approach is simpler, while the second provides greater data isolation.
+
+
+
+## Create branch methods
+
+You can use either the Neon CLI or GitHub actions to incorporate branching into your workflow.
+
+### Neon CLI
+
+Using the [Neon CLI](https://neon.com/docs/reference/neon-cli), you can create branches without leaving your editor or automate branch creation in your CI/CD pipeline.
+
+And here are the key CLI actions you can use:
+
+```bash
+# Create branch
+neon branches create [options]
+
+# Get Connection string
+neon connection-string [branch] [options]
+
+# Delete branch
+neon branches delete <id|name> [options]
+```
+
+For more information, see:
+
+- [Branching with the Neon CLI](https://neon.com/docs/guides/branching-neon-cli): Learn about branching with the Neon CLI
+- [Neon CLI Reference](https://neon.com/docs/reference/neon-cli): Reference for all commands in the Neon CLI
+
+### GitHub Actions
+
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](https://neon.com/docs/guides/branching-github-actions#create-branch-action), [deleting](https://neon.com/docs/guides/branching-github-actions#delete-branch-action), and [resetting](https://neon.com/docs/guides/branching-github-actions#reset-from-parent-action) branches — and there's also a [schema diff action](https://neon.com/docs/guides/branching-github-actions#schema-diff-action).
+
+Tab: Create branch
+
+Here is an example of what a create branch action might look like:
+
+```yaml
+name: Create Neon Branch with GitHub Actions Demo
+run-name: Create a Neon Branch 🚀
+jobs:
+  Create-Neon-Branch:
+    uses: neondatabase/create-branch-action@v5
+    with:
+      project_id: rapid-haze-373089
+      parent_id: br-long-forest-224191
+      branch_name: from_action_reusable
+      api_key: {{ secrets.NEON_API_KEY }}
+    id: create-branch
+  - run: echo project_id ${{ steps.create-branch.outputs.project_id}}
+  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id}}
+```
+
+Tab: Delete branch
+
+Here is an example of what a delete branch action might look like:
+
+```yaml
+name: Delete Neon Branch with GitHub Actions
+run-name: Delete a Neon Branch 🚀
+on:
+  push:
+    branches:
+      - 'production'
+jobs:
+  delete-neon-branch:
+    uses: neondatabase/delete-branch-action@v3
+    with:
+      project_id: rapid-haze-373089
+      branch: br-long-forest-224191
+      api_key: { { secrets.NEON_API_KEY } }
+```
+
+You can find these GitHub Actions here:
+
+- [Create branch Action](https://github.com/neondatabase/create-branch-action): Create Neon Branch GitHub Action
+- [Delete Branch Action](https://github.com/neondatabase/delete-branch-action): Delete Neon Branch GitHub Action
+- [Reset Branch Action](https://github.com/neondatabase/reset-branch-action): Reset Neon Branch GitHub Action
+- [Schema Diff Action](https://github.com/neondatabase/schema-diff-action): Neon Schema Diff GitHub Action
+
+For more detailed documentation, see [Automate branching with GitHub Actions](https://neon.com/docs/guides/branching-github-actions).
+
+## A branch for every environment
+
+Here's how you can integrate Neon branching into your workflow:
+
+### Development
+
+You can create a Neon branch for every developer on your team. This ensures that every developer has an isolated environment that includes schemas and data. These branches are meant to be long-lived, so each developer can tailor their branch based on their needs. With Neon's [branch reset capability](https://neon.com/docs/manage/branches#reset-a-branch-from-parent), developers can refresh their branch with the latest schemas and data anytime they need.
+
+   **Tip**: To easily identify branches dedicated to development, we recommend prefixing the branch name with `dev/<developer-name>` or `dev/<feature-name>` if multiple developers collaborate on the same development branch.
+
+Examples:
+
+```bash
+dev/alice             dev/new-onboarding
+```
+
+### Preview environments
+
+Whenever you create a pull request, you can create a Neon branch for your preview deployment. This allows you to test your code changes and SQL migrations against production-like data.
+
+   **Tip**: We recommend following this naming convention to identify these branches easily:
+
+```bash
+preview/pr-<pull_request_number>-<git_branch_name>
+```
+
+Example:
+
+```bash
+preview/pr-123-feat/new-login-screen
+```
+
+You can also automate branch creation for every preview. These example applications show how to create Neon branches with GitHub Actions for every preview environment.
+
+- [Preview branches with Fly.io](https://github.com/neondatabase/preview-branches-with-fly): Sample project showing you how to create a branch for every Fly.io preview deployment
+- [Preview branches with Vercel](https://github.com/neondatabase/preview-branches-with-vercel): Sample project showing you how to create a branch for every Vercel preview deployment
+
+### Testing
+
+When running automated tests that require a database, each test run can have its branch with its own compute resources. You can create a branch at the start of a test run and delete it at the end.
+
+   **Tip**: We recommend following this naming convention to identify these branches easily:
+
+```bash
+test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>
+```
+
+The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739). For example:
+
+```bash
+test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530
+```
+
+You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.

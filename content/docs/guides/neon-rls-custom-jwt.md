@@ -2,7 +2,7 @@
 title: Using Custom JWTs with Neon RLS
 subtitle: A step-by-step guide for using custom JWTs with Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.261Z'
+updatedOn: '2025-09-05T14:21:44.224Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-custom-jwt
   - /docs/guides/neon-authorize-custom-jwt
@@ -18,6 +18,8 @@ redirectFrom:
   <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 [Neon RLS](/docs/guides/neon-rls) lets you implement authorization directly within your Postgres database using Row-Level Security (RLS). While it works well with authentication providers like [Auth0](https://auth0.com) and [Clerk](https://clerk.com), you can also use your own custom-generated JSON Web Tokens (JWTs). This gives you fine-grained control over how tokens are created and validated, ideal for specific application needs or when you prefer to manage authentication independently.
 

@@ -2,13 +2,15 @@
 title: Troubleshooting Neon RLS
 subtitle: Common issues and solutions when using Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-03-10T18:26:02.771Z'
+updatedOn: '2025-09-05T14:21:44.230Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-troubleshooting
   - /docs/guides/neon-authorize-troubleshooting
 ---
 
 This page covers common errors you might encounter when implementing Row-Level Security (RLS) policies with Neon RLS and your authentication provider.
+
+<NeonRLSDeprecation />
 
 Errors:
 

@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-08-21T13:20:35.507Z'
+updatedOn: '2025-09-02T11:23:36.224Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -59,6 +59,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
        - **eu-central-1**:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
+         - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
        - **aws-eu-west-2**:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create two entries, one for each of the following:

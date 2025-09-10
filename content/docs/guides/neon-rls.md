@@ -3,7 +3,7 @@ title: About Neon RLS
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.266Z'
+updatedOn: '2025-09-05T14:21:44.232Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize
   - /docs/guides/neon-authorize
@@ -23,6 +23,8 @@ redirectFrom:
 </DocsList>
 
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 **Neon RLS** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, allowing you to query your database directly from client-side applications. It enables direct SQL queries over HTTP by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
 
@@ -204,22 +206,22 @@ RLS can also act as a backstop or final guarantee to prevent data leaks. Even if
 
 Here is a non-exhaustive list of authentication providers. The table shows which providers Neon RLS supports, links out to provider documentation for details, and the discovery URL pattern each provider typically uses.
 
-| Provider                                  | Supported? | JWKS URL                                                                                                     | Documentation                                                                                                                 |
-| ----------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| **Clerk**                                 | ✅         | `https://{yourClerkDomain}/.well-known/jwks.json`                                                            | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
-| **Stack Auth**                            | ✅         | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`                              | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
-| **Auth0\***                               | ✅         | `https://{yourDomain}/.well-known/jwks.json`                                                                 | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
-| **Firebase Auth / GCP Identity Platform** | ✅         | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com`                  | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               |
-| **Stytch**                                | ✅         | `https://{live_or_test}.stytch.com/v1/sessions/jwks/{project-id}`                                            | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
-| **Keycloak**                              | ✅         | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`                      | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
-| **Supabase Auth**                         | ❌         | Not supported until Supabase [supports asymmetric keys](https://github.com/orgs/supabase/discussions/29289). | N/A                                                                                                                           |
-| **Amazon Cognito**                        | ✅         | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`                              | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
-| **Azure AD**                              | ✅         | `https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`                                           | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
-| **Google Identity**                       | ✅         | `https://www.googleapis.com/oauth2/v3/certs`                                                                 | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
-| **Descope Auth**                          | ✅         | `https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`                                    | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
-| **PropelAuth**                            | ✅         | `https://{PROPEL_AUTH_URL}/.well-known/jwks.json`                                                            | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
-| **SuperTokens**                           | ✅         | `https://{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json`                                      | [docs](https://supertokens.com/docs/quickstart/integrations/aws-lambda/session-verification/using-jwt-authorizer)             |
-| **WorkOS**                                | ✅         | `https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}`                                                           | [docs](https://workos.com/docs/reference/user-management/session-tokens/jwks)                                                 |
+| Provider                                  | Supported? | JWKS URL                                                                                    | Documentation                                                                                                                 |
+| ----------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| **Clerk**                                 | ✅         | `https://{yourClerkDomain}/.well-known/jwks.json`                                           | [docs](https://clerk.com/docs/backend-requests/making/jwt-templates#create-a-jwt-template)                                    |
+| **Stack Auth**                            | ✅         | `https://api.stack-auth.com/api/v1/projects/{project_id}/.well-known/jwks.json`             | [docs](https://sage.storia.ai/stack-auth)                                                                                     |
+| **Auth0\***                               | ✅         | `https://{yourDomain}/.well-known/jwks.json`                                                | [docs](https://auth0.com/docs/security/tokens/json-web-tokens/json-web-key-sets)                                              |
+| **Firebase Auth / GCP Identity Platform** | ✅         | `https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com` | [docs](https://cloud.google.com/api-gateway/docs/authenticating-users-firebase)                                               |
+| **Stytch**                                | ✅         | `https://{live_or_test}.stytch.com/v1/sessions/jwks/{project-id}`                           | [docs](https://stytch.com/docs/api/jwks-get)                                                                                  |
+| **Keycloak**                              | ✅         | `https://{your-keycloak-domain}/auth/realms/{realm-name}/protocol/openid-connect/certs`     | [docs](https://documentation.cloud-iam.com/how-to-guides/configure-remote-jkws.html)                                          |
+| **Supabase Auth**                         | ✅         | `https://{project-id}.supabase.co/auth/v1/.well-known/jwks.json`                            | [docs](https://supabase.com/docs/guides/auth/signing-keys)                                                                    |
+| **Amazon Cognito**                        | ✅         | `https://cognito-idp.{region}.amazonaws.com/{userPoolId}/.well-known/jwks.json`             | [docs](https://docs.aws.amazon.com/cognito/latest/developerguide/amazon-cognito-user-pools-using-tokens-verifying-a-jwt.html) |
+| **Azure AD**                              | ✅         | `https://login.microsoftonline.com/{tenantId}/discovery/v2.0/keys`                          | [docs](https://learn.microsoft.com/en-us/entra/identity-platform/access-tokens)                                               |
+| **Google Identity**                       | ✅         | `https://www.googleapis.com/oauth2/v3/certs`                                                | [docs](https://developers.google.com/identity/openid-connect/openid-connect#discovery)                                        |
+| **Descope Auth**                          | ✅         | `https://api.descope.com/{YOUR_DESCOPE_PROJECT_ID}/.well-known/jwks.json`                   | [docs](https://docs.descope.com/project-settings/jwt-templates)                                                               |
+| **PropelAuth**                            | ✅         | `https://{PROPEL_AUTH_URL}/.well-known/jwks.json`                                           | [docs](https://docs.propelauth.com/guides-and-examples/guides/access-tokens)                                                  |
+| **SuperTokens**                           | ✅         | `https://{YOUR_SUPER_TOKENS_CORE_CONNECTION_URI}/.well-known/jwks.json`                     | [docs](https://supertokens.com/docs/quickstart/integrations/aws-lambda/session-verification/using-jwt-authorizer)             |
+| **WorkOS**                                | ✅         | `https://api.workos.com/sso/jwks/{YOUR_CLIENT_ID}`                                          | [docs](https://workos.com/docs/reference/user-management/session-tokens/jwks)                                                 |
 
 <small>\* If you're using an older Auth0 project, you might encounter [this issue](https://community.auth0.com/t/certificate-thumbprint-is-longer-than-20-bytes/7794/9), resulting in a `jwk not found` error when working with Neon RLS. To fix this, go to your Auth0 tenant settings and rotate your signing keys under the **Signing Keys** tab.</small>
 
@@ -251,7 +253,7 @@ You can use these sample ToDo applications to get started using Neon RLS with po
 While this feature is in its early-access phase, there are some limitations to be aware of:
 
 - **Authentication provider requirements**:
-  - Your authentication provider must support **Asymmetric Keys**. For example, **Supabase Auth** will not be compatible until asymetric key support is added. You can track progress on this item [here](https://github.com/orgs/supabase/discussions/29289).
+  - Your authentication provider must support **Asymmetric Keys**.
   - The provider must generate a unique set of public keys for each project and expose those keys via a unique URL for each project.
 - **Connection type**: Your application must use **HTTP** to connect to Neon. At this time, **TCP** and **WebSockets** connections are not supported. This means you need to use the [Neon serverless driver](/docs/serverless/serverless-driver) over HTTP as your Postgres driver.
 - **JWT expiration delay**: After removing an authentication provider from your project, it may take a few minutes for JWTs signed by that provider to stop working.
