@@ -32,22 +32,22 @@ If you're building agents that generate apps from prompts, your users want to bu
 
 ## Agent Plan Pricing
 
-|                            | Agent Plan                                                                                            |
-| -------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Projects                   | **Custom limits available** <br/> _Agents create a new project for each user application._            |
-| Branches per Project       | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute                    | from **$0.14 per CU-hour** <br/> _Same as Launch_                                                     |
-| Storage                    | **$0.35 per GB-month** <br/> _Same as Launch/Scale_                                                   |
-| Instant Restore (PITR)     | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
-| Neon Auth                  | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
-| Management API             | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
-| Data API (PostgREST)       | **Higher Rate Limits Available**                                                                      |
-| Support                    | **Shared Slack Channel**                                                                              |
-| <br/>**Agent Incentives**  |                                                                                                       |
-| **LLM Token Credits**      | Access to Databricks Startup Credits for Foundation Model Serving tokens.                             |
-| **Your Free Tier is Free** | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
-| **General Use Credits**    | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
-| **Co-Marketing**           | Blog and Social promotions, hackathons and more.                                                      |
+|                                 | Agent Plan                                                                                            |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Projects                        | **Custom limits available** <br/> _Agents create a new project for each user application._            |
+| Branches per Project            | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
+| Compute                         | from **$0.14 per CU-hour** <br/> _Same as Launch_                                                     |
+| Storage                         | **$0.35 per GB-month** <br/> _Same as Launch/Scale_                                                   |
+| Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
+| Neon Auth                       | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
+| Management API                  | **Higher Rate Limits Available** <br/> _API for instant provisioning and management of databases_     |
+| Data API (PostgREST-compatible) | **Higher Rate Limits Available**                                                                      |
+| Support                         | **Shared Slack Channel**                                                                              |
+| <br/>**Agent Incentives**       |                                                                                                       |
+| **LLM Token Credits**           | Access to Databricks Startup Credits for Foundation Model Serving tokens.                             |
+| **Your Free Tier is Free**      | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
+| **General Use Credits**         | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
+| **Co-Marketing**                | Blog and Social promotions, hackathons and more.                                                      |
 
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
