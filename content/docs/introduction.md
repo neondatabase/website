@@ -1,6 +1,5 @@
 ---
 title: Neon documentation
-subtitle: Get started with Neon in just a few minutes.
 updatedOn: '2025-08-09T09:50:31.822Z'
 ---
 
