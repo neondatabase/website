@@ -652,13 +652,20 @@
                   slug: ai/ai-scale-with-neon
     - section: Tools & Workflows
       items:
-        - title: Dev tools
-          slug: reference/neon-cli
+        - title: Dev tools (API, CLI, SDKs)
+          slug: reference/api-reference
           icon: cli
           items:
-            - title: CLI Reference
-              slug: reference/neon-cli
+            - section: API
+              icon: api
               items:
+                - title: Neon API
+                  slug: reference/api-reference
+            - section: CLI
+              icon: cli
+              items:
+                - title: Overview
+                  slug: reference/neon-cli
                 - title: Quickstart
                   slug: reference/cli-quickstart
                 - title: Install and connect
@@ -689,11 +696,7 @@
                   slug: reference/cli-set-context
                 - title: completion
                   slug: reference/cli-completion
-            - title: API Reference
-              slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
-              icon: api
-            - title: SDKs
-              slug: reference/typescript-sdk
+            - section: SDKs
               icon: sdk
               items:
                 - title: TypeScript SDK
@@ -702,22 +705,14 @@
                   slug: reference/python-sdk
                 - title: The @neondatabase/toolkit
                   slug: reference/neondatabase-toolkit
-                - title: Community SDKs
-                  items:
-                    - title: Go SDK
-                      slug: https://github.com/kislerdm/neon-sdk-go
-                      tag: community
-                    - title: Node.js / Deno SDK
-                      slug: https://github.com/paambaati/neon-js-sdk
-                      tag: community
-            - title: Templates
-              slug: /templates
-              icon: template
-            - title: Examples repo
-              slug: https://github.com/neondatabase/examples
-              icon: github
+                - title: Go SDK
+                  slug: https://github.com/kislerdm/neon-sdk-go
+                  tag: community
+                - title: Node.js / Deno SDK
+                  slug: https://github.com/paambaati/neon-js-sdk
+                  tag: community
 
-        - title: Integrations
+        - title: Integrations (platform/service)
           icon: integrations
           slug: guides/integrations
           items:
@@ -930,6 +925,13 @@
                   slug: guides/neon-twin-partial-pg-dump-restore
             - title: Data anonymization
               slug: workflows/data-anonymization
+
+        - title: Templates
+          slug: https://neon.com/templates
+          icon: template
+        - title: Examples repo
+          slug: https://github.com/neondatabase/examples
+          icon: github
 
 - nav: Manage
   title: Manage
@@ -1353,7 +1355,7 @@
     - title: Upgrade
       slug: postgresql/postgres-upgrade
       icon: upgrade
-    - title: Postgres tutorial
+    - title: PostgreSQL Tutorial
       slug: https://neon.com/postgresql/tutorial
       icon: book
 

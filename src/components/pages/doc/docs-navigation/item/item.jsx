@@ -40,6 +40,7 @@ const SubItem = ({ icon, title, slug, basePath }) => {
       to={externalSlug || websiteSlug || docSlug}
       size="2xs"
       isExternal={externalSlug}
+      icon={externalSlug && 'external'}
     >
       {icon && <Icon title={icon} className="size-4.5 shrink-0" />}
       {title}
