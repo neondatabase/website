@@ -35,6 +35,33 @@ To construct a full request URL, append the specific endpoint path to this base 
 
 ---
 
+### Understanding API Key Types
+
+When performing actions via the API, you must select the correct type of API key based on the required scope and permissions. There are three types:
+
+**1. Personal API Key**
+
+- **Scope**: Accesses all projects that the user who created the key is a member of.
+- **Permissions**: The key has the same permissions as its owner. If the user's access is revoked from an organization, the key loses access too.
+- **Best For**: Individual use, scripting, and tasks tied to a specific user's permissions.
+- **Created By**: Any user.
+
+**2. Organization API Key**
+
+- **Scope**: Accesses **all** projects and resources within an entire organization.
+- **Permissions**: Has admin-level access across the organization, independent of any single user. It remains valid even if the creator leaves the organization.
+- **Best For**: CI/CD pipelines, organization-wide automation, and service accounts that need broad access.
+- **Created By**: Organization administrators only.
+
+**3. Project-scoped API Key**
+
+- **Scope**: Access is strictly limited to a **single, specified project**.
+- **Permissions**: Cannot perform organization-level actions (like creating new projects) or delete the project it is scoped to. This is the most secure and limited key type.
+- **Best For**: Project-specific integrations, third-party services, or automation that should be isolated to one project.
+- **Created By**: Any organization member.
+
+---
+
 ## Manage API keys
 
 ### Prerequisites
@@ -2541,6 +2568,7 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
 4.  **Body Parameters**:
     - `key_name` (string, **required**): A user-specified name for the API key (max 64 characters).
     - `project_id` (string, optional): If provided, the API key's access will be restricted to only this project.
+5.  **Authorization**: Use a Personal API Key of an organization `admin` to create organization API keys.
 
 **Example: Create a project-scoped API key**
 
@@ -2548,7 +2576,7 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
 curl -X 'POST' \
   'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
   -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Authorization: Bearer $PERSONAL_API_KEY_OF_ADMIN" \
   -H 'Content-Type: application/json' \
   -d '{
   "key_name": "ci-pipeline-key-for-project-x",
