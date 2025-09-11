@@ -252,9 +252,9 @@ Output:
 
 The `RIGHT JOIN` and `RIGHT OUTER JOIN` are the same therefore you can use them interchangeably.
 
-The following diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
+**Right Anti-Join:** The following diagram illustrates the right join that returns rows from the right table that do not have matching rows in the left table:
 
-![PostgreSQL Join - Right Join with Where](/postgresqltutorial/join-right.svg)
+![PostgreSQL Right Anti-Join](/postgresqltutorial/join-right-anti.svg)
 
 ## PostgreSQL full outer join
 
@@ -322,5 +322,5 @@ The following Venn diagram illustrates the full outer join that returns rows fro
 ![PostgreSQL Join - Full Outer Join with Where](/postgresqltutorial/join-full-anti.svg)
 The following picture shows all the PostgreSQL joins that we discussed so far with the detailed syntax:
 
-![PostgreSQL Joins](/postgresqltutorial/PostgreSQL-Joins.png)
+![PostgreSQL Joins](/postgresqltutorial/postgresql-joins-all.jpg)
 In this tutorial, you have learned how to use various kinds of PostgreSQL joins to combine data from multiple related tables.
