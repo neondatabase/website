@@ -7,6 +7,8 @@
     "npm": ">=8.6.0"
   },
   "scripts": {
+    "prebuild": "node src/scripts/generate-docs-icons-config.js",
+    "predev": "node src/scripts/generate-docs-icons-config.js",
     "dev": "next dev",
     "build": "next build",
     "dev:build": "next build",
