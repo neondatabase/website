@@ -1662,3 +1662,174 @@ curl -X 'DELETE' \
   ]
 }
 ```
+
+### Create role
+
+1.  **Action**: Creates a new Postgres role in a specified branch. This action may drop existing connections to the active compute endpoint.
+2.  **Endpoint**: `POST /projects/{project_id}/branches/{branch_id}/roles`
+3.  **Path Parameters**:
+    - `project_id` (string, **required**): The unique identifier of the project.
+    - `branch_id` (string, **required**): The unique identifier of the branch where the role will be created.
+4.  **Body Parameters**:
+    `role` (object, **required**): The container for the new role's properties.
+    - `name` (string, **required**): The name for the new role. Cannot exceed 63 bytes in length.
+    - `no_login` (boolean, optional): If `true`, creates a role that cannot be used to log in. Defaults to `false`.
+
+**Example Request:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "role": {
+    "name": "new_app_user"
+  }
+}'
+```
+
+**Example Response:**
+
+```json
+{
+  "role": {
+    "branch_id": "br-super-wildflower-adniii9u",
+    "name": "new_app_user",
+    "password": "npg_BYgz0val8xuR",
+    "protected": false,
+    "created_at": "2025-09-11T05:50:21Z",
+    "updated_at": "2025-09-11T05:50:21Z"
+  },
+  "operations": [
+    {
+      "id": "65d049fa-b659-4d2b-8c02-ad1ebeb552fc",
+      "project_id": "hidden-river-50598307",
+      "branch_id": "br-super-wildflower-adniii9u",
+      "endpoint_id": "ep-ancient-brook-ad5ea04d",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2025-09-11T05:50:21Z",
+      "updated_at": "2025-09-11T05:50:21Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
+
+### List roles
+
+1.  **Action**: Retrieves a list of all Postgres roles from the specified branch.
+2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/roles`
+3.  **Path Parameters**:
+    - `project_id` (string, **required**): The unique identifier of the project.
+    - `branch_id` (string, **required**): The unique identifier of the branch.
+
+**Example Request:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+**Example Response:**
+
+```json
+{
+  "roles": [
+    {
+      "branch_id": "br-super-wildflower-adniii9u",
+      "name": "neondb_owner",
+      "protected": false,
+      "created_at": "2025-09-10T12:14:58Z",
+      "updated_at": "2025-09-10T12:14:58Z"
+    },
+    {
+      "branch_id": "br-super-wildflower-adniii9u",
+      "name": "new_app_user",
+      "protected": false,
+      "created_at": "2025-09-11T05:50:21Z",
+      "updated_at": "2025-09-11T05:50:21Z"
+    }
+  ]
+}
+```
+
+### Retrieve role details
+
+1.  **Action**: Retrieves detailed information about a specific Postgres role within a branch.
+2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
+3.  **Path Parameters**:
+    - `project_id` (string, **required**): The unique identifier of the project.
+    - `branch_id` (string, **required**): The unique identifier of the branch.
+    - `role_name` (string, **required**): The name of the role.
+
+**Example Request:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles/new_app_user' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+**Example Response:**
+
+```json
+{
+  "role": {
+    "branch_id": "br-super-wildflower-adniii9u",
+    "name": "new_app_user",
+    "protected": false,
+    "created_at": "2025-09-11T05:50:21Z",
+    "updated_at": "2025-09-11T05:50:21Z"
+  }
+}
+```
+
+### Delete role
+
+1.  **Action**: Deletes the specified Postgres role from the branch. This action is permanent.
+2.  **Endpoint**: `DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
+3.  **Path Parameters**:
+    - `project_id` (string, **required**): The unique identifier of the project.
+    - `branch_id` (string, **required**): The unique identifier of the branch.
+    - `role_name` (string, **required**): The name of the role to delete.
+
+**Example Request:**
+
+```bash
+curl -X 'DELETE' \
+  'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles/new_app_user' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY"
+```
+
+**Example Response:**
+
+```json
+{
+  "role": {
+    "branch_id": "br-super-wildflower-adniii9u",
+    "name": "new_app_user",
+    "protected": false,
+    "created_at": "2025-09-11T05:50:21Z",
+    "updated_at": "2025-09-11T05:50:21Z"
+  },
+  "operations": [
+    {
+      "id": "0e910f98-dcd2-445f-aaf4-729476a30492",
+      "project_id": "hidden-river-50598307",
+      "branch_id": "br-super-wildflower-adniii9u",
+      "endpoint_id": "ep-ancient-brook-ad5ea04d",
+      "action": "apply_config",
+      "status": "running",
+      "failures_count": 0,
+      "created_at": "2025-09-11T05:58:00Z",
+      "updated_at": "2025-09-11T05:58:00Z",
+      "total_duration_ms": 0
+    }
+  ]
+}
+```
