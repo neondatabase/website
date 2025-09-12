@@ -1,5 +1,5 @@
 ---
-title: Ship faster with AI tools
+title: AI tools for agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
 updatedOn: '2025-08-27T17:52:09.065Z'

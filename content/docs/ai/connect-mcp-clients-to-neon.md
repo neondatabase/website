@@ -529,38 +529,37 @@ This error is most common when using the remote MCP server option and can occur 
 
 ## ChatGPT
 
-By connecting ChatGPT to Neon’s MCP server, you can bring your database workflows into ChatGPT and interact with them in real time.
-
-Once connected, you'll be able to call the the Neon MCP server from your chat sessions to mange your Neon project, effectively turning ChatGPT into a **command center for your database**.
+By connecting ChatGPT to Neon’s MCP server, you can bring your database workflows into ChatGPT and interact with them in your chat sessions.
 
 To get started:
 
-### 1. Add the Neon MCP Connector
+### Add the Neon MCP Connector
 1. In ChatGPT, go to your Profile, select Settings, and then **Connectors**.  
 2. Click **Create** to add a new connector.  
 3. Enter the server details:  
-   - **URL**: `https://mcp.neon.tech/mcp`  
+   - **MCP Server URL**: `https://mcp.neon.tech/mcp`  
    - **Authentication**: Select **OAuth**.
 
-   ![Add ChatGPT connector](/docs/guides/chatpgt_mcp_add_connector.png)
+    ![Add ChatGPT connector](/docs/guides/chatgpt_mcp_add_connector.png)
 
-4. Click **I trust this application**, then complete the email verification step.  
+4. Click **I trust this application**, click **Create**, and complete the email verification step (if required).  
 
-### 2. Approve Access in Neon
+### Approve Access in Neon
 1. You’ll be redirected to Neon.  
 2. Click **Approve** and then **Authorize** to grant ChatGPT access.  
-3. Once approved, ChatGPT will confirm the connection and show Neon’s MCP tools (e.g., `list projects`, `create branches`, etc.)
+3. Once approved, ChatGPT will confirm the connection and show Neon’s MCP tools (e.g., `list projects`, `list_organizations`, etc.)
 
-  ![ChatGPT Neon MCP Server tools](/docs/guides/chatpgt_mcp_tools.png)
+    ![ChatGPT Neon MCP Server tools](/docs/guides/chatgpt_mcp_tools.png)
 
-### 3. Start Using Neon in ChatGPT
-1. In ChatGPT, click the **+ icon** in the input box and select **Developer Mode**.  
-2. In the **Add sources** dropdown, enable the **Neon MCP Server**.
+### Start Using Neon in ChatGPT
+1. In ChatGPT, click the **+** icon in the input box and select **Developer Mode**.  
 
-  ![ChatGPT Neon MCP Server enable](/docs/guides/chatpgt_mcp_enable.png)
-3. Try it out by asking something like: "List the projects in my Neon organization"
+    ![ChatGPT Neon MCP Server enable](/docs/guides/chatgpt_mcp_enable.png)
 
-  ![ChatGPT Neon MCP Server list projects](/docs/guides/chatpgt_mcp_tools.png)
+2. Add **Add sources** dropdown will appear in the input field. Add the **Neon MCP Server** to enable it.
+3. Try it out by asking something like: "List my Neon projects"
+
+    ![ChatGPT Neon MCP Server list projects](/docs/guides/chatgpt_mcp.png)
 
 ## Resources
 
