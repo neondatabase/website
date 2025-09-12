@@ -220,8 +220,7 @@ The number of root branches allowed in a project depends on your Neon plan.
 | :------- | :-------------------------------- |
 | Free     | 3                                 |
 | Launch   | 5                                 |
-| Scale    | 10                                |
-| Business | 25                                |
+| Scale    | 25                                |
 
 ### Default branch
 
