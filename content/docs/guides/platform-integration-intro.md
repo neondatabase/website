@@ -1,6 +1,6 @@
 ---
-title: Platform integration guide
-subtitle: Learn how to integrate your platform or service with Neon
+title: Build on Neon
+subtitle: Embed Neon Postgres into your SaaS, AI agent, or cloud platform
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
