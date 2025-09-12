@@ -17,6 +17,7 @@ This guide covers the setup for the following MCP Clients:
 - [Cline (VS Code extension)](#cline-vs-code-extension)
 - [Zed](#zed)
 - [VS Code (with GitHub Copilot)](#vs-code-with-github-copilot)
+- [ChatGPT](#chatgpt)
 
 By connecting these tools to the Neon MCP Server, you can manage your Neon projects, databases, and schemas using natural language commands within the MCP client interface.
 
@@ -526,9 +527,40 @@ This typically occurs when there are issues with cached OAuth credentials. To re
 
 This error is most common when using the remote MCP server option and can occur after OAuth configuration changes or when cached credentials become invalid.
 
-## Next steps
+## ChatGPT
 
-Once connected, you can start interacting with your Neon Postgres databases using natural language commands within your chosen MCP client. Explore the [Supported Actions (Tools)](/docs/ai/neon-mcp-server#supported-actions-tools) of the Neon MCP Server to understand the available functionalities.
+By connecting ChatGPT to Neon’s MCP server, you can bring your database workflows into ChatGPT and interact with them in real time.
+
+Once connected, you'll be able to call the the Neon MCP server from your chat sessions to mange your Neon project, effectively turning ChatGPT into a **command center for your database**.
+
+To get started:
+
+### 1. Add the Neon MCP Connector
+1. In ChatGPT, go to your Profile, select Settings, and then **Connectors**.  
+2. Click **Create** to add a new connector.  
+3. Enter the server details:  
+   - **URL**: `https://mcp.neon.tech/mcp`  
+   - **Authentication**: Select **OAuth**.
+
+   ![Add ChatGPT connector](/docs/guides/chatpgt_mcp_add_connector.png)
+
+4. Click **I trust this application**, then complete the email verification step.  
+
+### 2. Approve Access in Neon
+1. You’ll be redirected to Neon.  
+2. Click **Approve** and then **Authorize** to grant ChatGPT access.  
+3. Once approved, ChatGPT will confirm the connection and show Neon’s MCP tools (e.g., `list projects`, `create branches`, etc.)
+
+  ![ChatGPT Neon MCP Server tools](/docs/guides/chatpgt_mcp_tools.png)
+
+### 3. Start Using Neon in ChatGPT
+1. In ChatGPT, click the **+ icon** in the input box and select **Developer Mode**.  
+2. In the **Add sources** dropdown, enable the **Neon MCP Server**.
+
+  ![ChatGPT Neon MCP Server enable](/docs/guides/chatpgt_mcp_enable.png)
+3. Try it out by asking something like: "List the projects in my Neon organization"
+
+  ![ChatGPT Neon MCP Server list projects](/docs/guides/chatpgt_mcp_tools.png)
 
 ## Resources
 
