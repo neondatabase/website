@@ -103,6 +103,41 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
     - You should see a success message, and you can close the browser tab.
 5.  Your MCP client should now be connected to the Neon Remote MCP Server and ready to use.
 
+### ChatGPT
+
+You can connect ChatGPT to the Neon MCP Server using custom MCP connectors. This integration extends ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
+
+![ChatGPT with Neon MCP Server](/docs/changelog/chatgpt_mcp.png)
+
+To connect ChatGPT to the Neon MCP Server, you need to first enable ChatGPT's developer mode, then add the Neon MCP Server as a custom connector. This makes the connector available for your account; you'll need to separately enable both developer mode and Neon as a source for any chat where you want to use Neon.
+
+1. **Add MCP server to ChatGPT**
+
+   In your ChatGPT account settings, go to **Settings** → **Connectors** → **Advanced Settings** and enable **Developer mode**.
+
+   Still on the Connectors tab, you can then **create** a Neon connection from the **Browse connectors** section. Use the following URL:
+
+   ```bash
+   https://mcp.neon.tech/mcp
+   ```
+
+   Make sure you choose **OAuth** for authentication and check "I trust this application", then complete the authorization flow when prompted.
+
+   <div style={{display: 'flex', gap: '0.5rem', margin: '1rem 0'}}>
+     <div style={{flex: 1}}>
+       ![ChatGPT connector configuration](/docs/ai/chatgpt_mcp_add_connector.png)
+     </div>
+     <div style={{flex: 1}}>
+       ![ChatGPT with Neon MCP tools enabled](/docs/ai/chatgpt_mcp_tools.png)
+     </div>
+   </div>
+
+2. **Enable Neon per chat**
+
+   In each chat where you want to use Neon, click the **+** button and enable Developer Mode for that chat. Under **Add sources**, you can then enable the Neon connector you just created.
+
+   Once connected, you can use natural language to manage your Neon databases directly in ChatGPT.
+
 ### Local MCP Server
 
 You can install Neon MCP server locally using `npm`.
