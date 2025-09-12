@@ -216,11 +216,11 @@ Neon also supports two other types of root branches that have no parent but _can
 
 The number of root branches allowed in a project depends on your Neon plan.
 
-| Plan     | Root branch allowance per project |
-| :------- | :-------------------------------- |
-| Free     | 3                                 |
-| Launch   | 5                                 |
-| Scale    | 25                                |
+| Plan   | Root branch allowance per project |
+| :----- | :-------------------------------- |
+| Free   | 3                                 |
+| Launch | 5                                 |
+| Scale  | 25                                |
 
 ### Default branch
 
