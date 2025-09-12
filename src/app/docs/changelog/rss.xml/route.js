@@ -24,10 +24,10 @@ export async function GET() {
 
   allChangelogPosts.forEach((post) => {
     const { slug, date } = post;
-    const { data, content } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
+    const { data, excerpt } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
     const label = getFormattedDate(date);
-    const heading = data.title || content.match(/# (.*)/)?.[1];
-    const description = getExcerpt(content, 160);
+    const heading = data.title || excerpt.match(/# (.*)/)?.[1];
+    const description = getExcerpt(excerpt, 160);
     const url = `${SITE_URL}${CHANGELOG_BASE_PATH}${slug}`;
 
     feed.item({
