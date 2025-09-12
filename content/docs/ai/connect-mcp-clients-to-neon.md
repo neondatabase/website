@@ -534,32 +534,35 @@ By connecting ChatGPT to Neon’s MCP server, you can bring your database workfl
 To get started:
 
 ### Add the Neon MCP Connector
-1. In ChatGPT, go to your Profile, select Settings, and then **Connectors**.  
-2. Click **Create** to add a new connector.  
-3. Enter the server details:  
-   - **MCP Server URL**: `https://mcp.neon.tech/mcp`  
+
+1. In ChatGPT, go to your Profile, select Settings, and then **Connectors**.
+2. Click **Create** to add a new connector.
+3. Enter the server details:
+   - **MCP Server URL**: `https://mcp.neon.tech/mcp`
    - **Authentication**: Select **OAuth**.
 
-    ![Add ChatGPT connector](/docs/guides/chatgpt_mcp_add_connector.png)
+   ![Add ChatGPT connector](/docs/guides/chatgpt_mcp_add_connector.png)
 
-4. Click **I trust this application**, click **Create**, and complete the email verification step (if required).  
+4. Click **I trust this application**, click **Create**, and complete the email verification step (if required).
 
 ### Approve Access in Neon
-1. You’ll be redirected to Neon.  
-2. Click **Approve** and then **Authorize** to grant ChatGPT access.  
+
+1. You’ll be redirected to Neon.
+2. Click **Approve** and then **Authorize** to grant ChatGPT access.
 3. Once approved, ChatGPT will confirm the connection and show Neon’s MCP tools (e.g., `list projects`, `list_organizations`, etc.)
 
-    ![ChatGPT Neon MCP Server tools](/docs/guides/chatgpt_mcp_tools.png)
+   ![ChatGPT Neon MCP Server tools](/docs/guides/chatgpt_mcp_tools.png)
 
 ### Start Using Neon in ChatGPT
-1. In ChatGPT, click the **+** icon in the input box and select **Developer Mode**.  
 
-    ![ChatGPT Neon MCP Server enable](/docs/guides/chatgpt_mcp_enable.png)
+1. In ChatGPT, click the **+** icon in the input box and select **Developer Mode**.
+
+   ![ChatGPT Neon MCP Server enable](/docs/guides/chatgpt_mcp_enable.png)
 
 2. Add **Add sources** dropdown will appear in the input field. Add the **Neon MCP Server** to enable it.
 3. Try it out by asking something like: "List my Neon projects"
 
-    ![ChatGPT Neon MCP Server list projects](/docs/guides/chatgpt_mcp.png)
+   ![ChatGPT Neon MCP Server list projects](/docs/guides/chatgpt_mcp.png)
 
 ## Resources
 
