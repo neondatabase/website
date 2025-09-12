@@ -59,12 +59,12 @@ const AnchorHeading = (Tag) => {
       <Tag
         id={id}
         className={clsx(
-          'group relative w-fit scroll-mt-20 font-semibold tracking-extra-tight lg:scroll-mt-5',
+          'anchor-heading group relative w-fit scroll-mt-20 font-semibold tracking-extra-tight lg:scroll-mt-5',
           className
         )}
       >
         <a
-          className="anchor absolute right-0 top-1/2 flex h-full -translate-y-1/2 translate-x-full items-center justify-center px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
+          className="absolute right-0 top-1/2 flex h-full -translate-y-1/2 translate-x-full items-center justify-center px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
           aria-label={`Link to ${extractText(children)}`}
         >
