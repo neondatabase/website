@@ -5,6 +5,40 @@ enableTableOfContents: true
 updatedOn: '2025-09-10T14:09:12.290Z'
 ---
 
+## Agent plan: how it works
+
+Neon creates two organizations in your account so you can separate your tiers.
+
+- Sponsored organization (free to you): Project-level limits similar to the Neon free tier. Use for development and previews.
+- Paid organization (with credits from Neon): Credits apply to charges until depleted. Use for production workloads, for paying users.
+
+What Neon does
+1. Approves your agent plan application.
+2. Creates both organizations, assigns you as admin, and configures billing (credits on the paid organization; sponsorship on the sponsored organization).
+3. Confirms both organizations are visible to you and default limits are set.
+
+What you do
+- Use the sponsored organization for development and preview environments.
+- Use the paid organization for production workloads as users upgrade.
+- Request limit increases if you approach the defaults.
+
+Limits and increases
+- Default cap: 10,000 projects per organization (adjustable after review).
+- The sponsored organization enforces free-tier-like per-project limits (e.g., storage, active time, compute time).
+- Request an increase if needed; Neon will review and adjust caps when appropriate.
+
+Administration
+- You are an admin in both organizations and can create projects, branches, configure authentication, and set quotas within the configured limits.
+- Neon manages credits and cap changes.
+
+### Upgrade workflow via project transfer
+
+You decide when to move a user's project from the sponsored organization to the paid organization. Neon does not upgrade or migrate projects automatically.
+
+Primary method — API
+- Use the API for automation and scale: `POST /organizations/{source_org_id}/projects/transfer`.
+- Requires a personal API key with access to both organizations
+- Can transfer up to 400 projects per API request
 With Neon's API, your agents can:
 
 - Provision PostgreSQL databases in ~500ms
@@ -30,7 +64,7 @@ Architecture assumption: This guide uses one Neon project per user for better is
 | **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
 | **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
 | **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
-
+|| **Transfer projects (between orgs)**                               | Move projects from sponsored to paid (or reverse)                          | `POST /organizations/{source_org_id}/projects/transfer`                     |
 ## Quick start with the demo
 
 See the pattern in action with a working snapshot database versioning demo.
@@ -53,6 +87,12 @@ Neon's copy-on-write storage enables version-aware backends. Use snapshots, bran
 ## Application provisioning
 
 Your agent provisions databases for each user's applications. The infrastructure is created quickly (under 500ms) and cost-effectively, as databases scale to zero when idle - you only pay when databases are active or storing data.
+
+Choose the target organization before creating a project:
+- Sponsored organization: development/preview projects
+- Paid organization: production projects
+
+To upgrade a user, transfer their project to the paid organization (see Upgrade workflow). Projects are independent across organizations; transfer moves an existing project rather than copying data.
 
 ### Create project with database
 
@@ -99,23 +139,7 @@ async function testNeonApi() {
     console.log(`Endpoint ID: ${endpointId}`);
     console.log(`Branch ID: ${branchId}`);
 
-    // 2) Optional: set quotas (match your free/pro tiers)
-    console.log('Setting quotas...');
-    await toolkit.apiClient.updateProject(projectId, {
-      project: {
-        settings: {
-          quota: {
-            logical_size_bytes: 100 * 1024 * 1024, // 100 MiB in bytes
-            active_time_seconds: 633600,
-            compute_time_seconds: 158400,
-          },
-        },
-      },
-    });
-
-    console.log('Quotas set successfully!');
-
-    // 3) Get the pooled connection string
+    // 2) Get the pooled connection string
     console.log('🔗 Retrieving pooled connection string...');
     const connectionUri = await toolkit.apiClient.getConnectionUri({
       projectId: projectId,
@@ -162,35 +186,13 @@ curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/branch
 
 ## Resource management
 
-Track usage per project with detailed information about compute time, storage, and network I/O. Enforce quotas via the API to match your defined plans, giving you full control over how resources are consumed.
+Track usage per project with detailed information about compute time, storage, and network I/O. Set project-level quotas to match the organization and user tier.
 
 ### Set project resource limits
 
-Define limits based on user tier, for example:
-
-| Tier | Storage (MiB) | Compute Time (s) | Active Time (s) |
-| ---- | ------------- | ---------------- | --------------- |
-| Free | 100           | 158,400          | 633,600         |
-| Pro  | 10000         | 10,368,000       | 2,592,000       |
-
-This example sets the free tier limit defined above:
-
-```bash
-curl -X PATCH "https://console.neon.tech/api/v2/projects/shiny-wind-028834" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "project": {
-      "quota": {
-        "logical_size_mib": 100,
-        "active_time_seconds": 633600,
-        "compute_time_seconds": 158400
-      }
-    }
-  }'
-```
-
-For additional information, see the [configure consumption limits](/docs/guides/consumption-limits) guide.
+Organization defaults
+- Sponsored organization: apply free-tier-like project limits (e.g., storage, active time, compute time).
+- Paid organization: apply higher limits aligned to your paid/pro tiers.
 
 ### Get project consumption
 
@@ -216,6 +218,34 @@ curl -X GET "https://console.neon.tech/api/v2/projects/shiny-wind-028834/consump
 
 For additional information, see the [querying consumption metrics](/docs/guides/consumption-metrics) guide.
 
+### Project transfer (API)
+
+[Transfer projects between organizations](/docs/manage/orgs-project-transfer) for upgrades or reorganizations.
+
+Endpoint
+`POST /organizations/{source_org_id}/projects/transfer`
+
+Example
+```bash
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/organizations/{source_org_id}/projects/transfer' \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+  "project_ids": [
+    "{project-id-1}",
+    "{project-id-2}"
+  ],
+  "destination_org_id": "{destination-org-id}"
+}'
+```
+
+Response
+```json
+{}
+```
+
 ## Autoscaling configuration
 
 When provisioning databases for your users, Neon automatically scales compute based on actual usage. The system monitors three metrics and scales to meet whichever requires the most resources:
@@ -228,11 +258,11 @@ This ensures databases get the resources they need without manual intervention.
 
 ### Configure autoscaling ranges
 
-Set autoscaling min/max CUs to match your plan tiers (e.g., 0.25–0.5 for free, 0.25–4 for pro, higher for enterprise). Adjust over time based on observed CPU, memory, and cache pressure. For additional information, see the [autoscaling documentation](/docs/introduction/autoscaling).
+Optionally set autoscaling min/max CUs to match your planned usage. Adjust over time based on observed CPU, memory, and cache pressure. For additional information, see the [autoscaling documentation](/docs/introduction/autoscaling).
 
 ### Update existing endpoints
 
-Adjust autoscaling limits when users upgrade/downgrade:
+Optionally adjust autoscaling limits for specific endpoints:
 
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID" \
@@ -248,7 +278,7 @@ curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$
 
 ### Disable suspend on critical endpoints
 
-Prevent suspension to avoid cold starts. Disabling suspend keeps compute always on and may increase cost. Note: `suspend_timeout_seconds: 0` uses the default timeout; set to `-1` to disable suspension.
+Optionally prevent suspension to avoid cold starts. Disabling suspend keeps compute always on and may increase cost. Note: `suspend_timeout_seconds: 0` uses the default timeout; set to `-1` to disable suspension.
 
 ```bash
 curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$ENDPOINT_ID" \
@@ -261,7 +291,7 @@ curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$
   }'
 ```
 
-**Cost implications**: Users are billed for actual compute usage within the configured range.
+**Cost implications**: Compute usage is billed.
 
 ## Authentication setup
 
