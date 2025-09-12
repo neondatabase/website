@@ -164,7 +164,7 @@ const AiPage = () => (
       className="mt-[200px] xl:mt-[194px] lg:mt-[160px] md:mt-[104px]"
       title="Neon's AI App Starter Kit"
       titleClassName="md:text-pretty"
-      description="Neon's AI AppStarter Kit offers resources, apps, and examples to kickstart Neon as your vector database."
+      description="Neon's AI App Starter Kit offers resources, apps, and examples to kickstart Neon as your vector database."
       descriptionClassName="max-w-[490px]"
       items={STARTER_KIT_FEATURES}
       link={LINKS.docsAi}
