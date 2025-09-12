@@ -219,8 +219,7 @@ const getAllWpPosts = cache(async () => {
 
       allPosts = allPosts.concat(posts);
 
-      // TODO: add !isProduction || to this if check
-      if (!pageInfo.hasNextPage) break;
+      if (!isProduction || !pageInfo.hasNextPage) break;
       afterCursor = pageInfo.endCursor;
     } catch (error) {
       console.error('Error fetching posts:', error);
