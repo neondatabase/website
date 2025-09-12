@@ -39,7 +39,7 @@ const getAllGuides = async () => {
       const slugWithoutFirstSlash = slug.slice(1);
       const {
         data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, author },
-        excerpt,
+        content,
       } = data;
 
       const authorData = getAuthor(author);
@@ -54,7 +54,7 @@ const getAllGuides = async () => {
         createdAt,
         updatedOn,
         date: createdAt,
-        excerpt,
+        content,
         isDraft,
         redirectFrom,
       };

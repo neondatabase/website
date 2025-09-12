@@ -19,7 +19,7 @@ export async function GET() {
   });
 
   guides.forEach((post) => {
-    const { slug, title, subtitle, author, createdAt, excerpt } = post;
+    const { slug, title, subtitle, author, createdAt, content } = post;
     const url = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${GUIDES_BASE_PATH}${slug}`;
 
     feed.item({
@@ -29,7 +29,7 @@ export async function GET() {
       url,
       date: new Date(createdAt),
       author,
-      custom_elements: [{ 'content:encoded': excerpt }],
+      custom_elements: [{ 'content:encoded': content }],
     });
   });
 
