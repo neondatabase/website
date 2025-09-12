@@ -49,6 +49,7 @@ const getAllChangelogs = async () => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
         data: { title, isDraft, redirectFrom },
+        content,
         excerpt,
       } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const slugWithoutFirstSlash = slug.slice(1);
@@ -60,12 +61,14 @@ const getAllChangelogs = async () => {
         slug: slugWithoutFirstSlash,
         category: 'changelog',
         date,
+        content,
         excerpt,
         isDraft,
         redirectFrom,
       };
     })
-    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
+    .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
 module.exports = {

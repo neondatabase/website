@@ -31,6 +31,7 @@ const ChangelogPost = (post) => {
         <Content
           className="mt-5 prose-h3:mt-[18px] prose-h3:text-lg"
           content={content}
+          asHTML={false}
           withoutAnchorHeading
           isReleaseNote
         />
