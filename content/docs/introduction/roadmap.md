@@ -1,12 +1,11 @@
 ---
 title: Roadmap
 enableTableOfContents: true
-tag: updated
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-09-08T12:06:35.281Z'
+updatedOn: '2025-09-08T16:49:43.855Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.

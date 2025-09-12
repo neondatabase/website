@@ -292,7 +292,7 @@
 - [AI Rules and Prompts](https://neon.com/llms/ai-ai-rules.txt): Enhance your AI development experience with Neon-specific context rules
 - [AI Rules: Neon Auth](https://neon.com/llms/ai-ai-rules-neon-auth.txt): Context rules for AI tools to help implement authentication with Stack Auth and Neon databases
 - [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-neon-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
-- [AI Starter Kit](https://neon.com/llms/ai-ai-intro.txt): Resources for building AI applications with Neon Postgres
+- [AI App Starter Kit](https://neon.com/llms/ai-ai-intro.txt): Resources for building AI applications with Neon Postgres
 - [Azure Data Studio Notebooks](https://neon.com/llms/ai-ai-azure-notebooks.txt): Use Azure Data Studio Notebooks with Neon for vector similarity search
 - [Connect MCP Clients to Neon](https://neon.com/llms/ai-connect-mcp-clients-to-neon.txt): Learn how to connect MCP clients such as Cursor, Claude Desktop, Cline, Windsurf, Zed, and VS Code to your Neon Postgres database.
 - [Google Colab](https://neon.com/llms/ai-ai-google-colab.txt): Use Google Colab with Neon for vector similarity search

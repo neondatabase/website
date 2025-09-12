@@ -58,14 +58,14 @@ PostgreSQL represents user accounts as roles. Roles that can log in are called l
 - [Superuser](postgresql-administration/create-superuser-postgresql) – learn about a special role called superuser in PostgreSQL.
 - [Row\-level Security](postgresql-administration/postgresql-row-level-security) – show you how to use row\-level security (RLS) to restrict rows returned by a query based on a condition.
 
-## Section 5\. Backup \& Restore Databases
+## Section 5\. Backup \& Restore
 
 This section shows you how to use various PostgreSQL backup and restore tools including `pg_dump`, `pg_dumpall`, `psql`,  `pg_restore` and  `pgAdmin` to backup and restore databases.
 
 - [Backup](postgresql-administration/postgresql-backup-database 'PostgreSQL Backup') – introduce you to practical ways to perform a logical backup of a database or all databases in a PostgreSQL cluster using the `pg_dump` and `pg_dumpall` tools.
 - [Restore](postgresql-administration/postgresql-restore-database 'PostgreSQL Restore Database') –  show how to restore a PostgreSQL database from an archive file using the `pg_restore` tool.
 
-## Section 6\. PostgreSQL Tips
+## Section 6\. Administration Tips
 
 - [Reset Password](postgresql-administration/postgresql-reset-password) – show you how to reset the forgotten password of the postgres user.
 - [psql Commands](postgresql-administration/psql-commands) – give you the most common psql command to help you query data from PostgreSQL faster and more effectively.

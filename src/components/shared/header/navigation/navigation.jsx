@@ -33,7 +33,7 @@ const Navigation = ({ isDarkTheme }) => (
               {hasSubmenu && (
                 <ChevronIcon
                   className={clsx(
-                    'w-2.5 opacity-60 [&_path]:stroke-2',
+                    'opacity-60',
                     isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
                   )}
                 />

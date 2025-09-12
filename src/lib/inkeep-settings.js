@@ -52,14 +52,11 @@ const baseSettings = {
   ],
 };
 
-const searchSettings = {
-  searchMode: 'KEYWORD',
-  placeholder: 'Search',
-};
-
 const aiChatSettings = {
   botName: 'Neon AI',
-  placeholder: 'Ask anything...',
+  placeholder: 'How do I get started?',
+  introMessage:
+    "<p>Hi!<br>I'm an AI assistant trained on documentation, help articles, and other content.</p><p>Ask me anything about Neon.</p>",
   quickQuestions: [
     'What’s Neon?',
     'How do I sign up for Neon?',
@@ -71,7 +68,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath: 'https://neon.com/ai-chat',
+  shareChatUrlBasePath: 'https://neon.com/docs/introduction#ai-chat',
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',
@@ -88,4 +85,4 @@ const aiChatSettings = {
   ],
 };
 
-export { baseSettings, searchSettings, aiChatSettings };
+export { baseSettings, aiChatSettings };

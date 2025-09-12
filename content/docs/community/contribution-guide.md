@@ -79,48 +79,9 @@ The Neon documentation file structure reflects the navigation you see on the web
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `sidebar.yaml`, which you can find at the root of the `/docs` directory.
+This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `navigation.yaml`, which you can find at the root of the `/docs` directory.
 
-### Add a new category
-
-To add a new category to the sidebar, add a new item to the top-level array with `title` and `items` key values, as shown below:
-
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
-```
-
-### Add a new page
-
-To add new page, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
-
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-    - title: Page 5
-      slug: page-5
-```
-
-- The `title` in the sidebar may differ from `title` in the Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file. This lets you write longer, more informative page titles while keeping the sidebar titles short, readable, and easy to scan. These titles should remain logically related. For example, in our docs we reduce the page title "Use Grafbase Edge Resolvers with Neon" to just "Grafbase" in the sidebar.
-- `slug` should always exactly match the page's slug (the last part of the URL after the final backslash "/", in our case the name of the Markdown file).
+Refer to the [## Navigation](https://github.com/neondatabase/website/blob/main/content/docs/README.md#navigation) in the docs README for more information on how to update the sidebar.
 
 ## Markdown frontmatter
 

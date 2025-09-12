@@ -73,7 +73,7 @@ const TopbarClient = ({ text, link, isDarkTheme }) => (
     />
     <ChevronIcon
       className={clsx(
-        'relative z-50 w-[9px] shrink-0 origin-center -rotate-90 opacity-60 dark:text-white',
+        'hrink-0 relative z-50 origin-center -rotate-90 opacity-60 dark:text-white',
         isDarkTheme ? 'text-white' : 'text-black-new'
       )}
     />
