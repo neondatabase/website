@@ -105,7 +105,7 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 
 ### ChatGPT
 
-You can connect ChatGPT to the Neon MCP Server using custom Model Context Protocol (MCP) connectors. This integration lets you extend ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
+You can connect the Neon MCP Server to your ChatGPT account using using ChatGPT's custom MCP connectors. This integration extends ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
 
 ![ChatGPT with Neon MCP Server](/docs/changelog/chatgpt_mcp.png)
 
