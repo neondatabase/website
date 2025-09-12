@@ -2,7 +2,7 @@
 title: Connect Outerbase to Neon
 subtitle: Connect Outerbase to your Neon project with the Neon Outerbase integration
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.287Z'
+updatedOn: '2025-09-12T16:00:09.706Z'
 ---
 
 <Admonition type="important"  title="deprecated">
