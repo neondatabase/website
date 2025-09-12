@@ -559,7 +559,7 @@ To get started:
 
    ![ChatGPT Neon MCP Server enable](/docs/guides/chatgpt_mcp_enable.png)
 
-2. Add **Add sources** dropdown will appear in the input field. Add the **Neon MCP Server** to enable it.
+2. An **Add sources** dropdown will appear in the input field. Select the **Neon MCP Server** to enable it.
 3. Try it out by asking something like: "List my Neon projects"
 
    ![ChatGPT Neon MCP Server list projects](/docs/guides/chatgpt_mcp.png)
