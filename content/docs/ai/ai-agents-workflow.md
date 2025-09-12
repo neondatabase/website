@@ -57,7 +57,7 @@ Architecture assumption: This guide uses one Neon project per user for better is
 ## API Operations
 
 | Action                                                             | Description                                                                | Endpoint                                                                    |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | **[Create project](#application-provisioning)**                    | Creates a Postgres database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
 | **[Configure autoscaling](#autoscaling-configuration)**            | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
 | **[Set resource limits](#resource-management)**                    | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
@@ -69,7 +69,7 @@ Architecture assumption: This guide uses one Neon project per user for better is
 | **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
 | **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
 | **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
-|                                                                    | **Transfer projects (between orgs)**                                       | Move projects from sponsored to paid (or reverse)                           | `POST /organizations/{source_org_id}/projects/transfer` |
+| **[Transfer projects (between orgs)](#project-transfer-api)**      | Move projects from sponsored to paid (or reverse)                          | `POST /organizations/{source_org_id}/projects/transfer`                     |
 
 ## Quick start with the demo
 
