@@ -2,8 +2,12 @@
 title: Connect Outerbase to Neon
 subtitle: Connect Outerbase to your Neon project with the Neon Outerbase integration
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.287Z'
+updatedOn: '2025-09-12T16:00:09.706Z'
 ---
+
+<Admonition type="important"  title="deprecated">
+Outerbase was [acquired by Cloudflare](https://blog.cloudflare.com/cloudflare-acquires-outerbase-database-dx/) and will shut down on October 15, 2025. This guide is deprecated and will be removed in a future update.
+</Admonition>
 
 Outerbase is an AI-powered interface for your database that allows you and your team to view, query, visualize, and edit your data using the power of AI. Outserbase supports both SQL and natural language. To learn more, see [What is Outerbase?](https://docs.outerbase.com/introduction/what-is-outerbase)
 

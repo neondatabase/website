@@ -14,6 +14,7 @@ This guide will walk you through setting up the integration between Neon and Bet
 - Create and configure an OpenTelemetry source in Better Stack.
 - Set up the OpenTelemetry integration in your Neon project.
 - Verify that your Neon metrics and logs are successfully flowing into Better Stack.
+- Build an example dashboard in Better Stack to visualize your Neon metrics.
 
 By the end, you'll have a complete observability pipeline from your Neon database to your Better Stack dashboard.
 

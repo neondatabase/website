@@ -49,18 +49,18 @@ const getAllChangelogs = async () => {
       if (!getPostBySlug(slug, CHANGELOG_DIR_PATH)) return;
       const {
         data: { title, isDraft, redirectFrom },
-        content,
+        excerpt,
       } = getPostBySlug(slug, CHANGELOG_DIR_PATH);
       const slugWithoutFirstSlash = slug.slice(1);
       const date = slugWithoutFirstSlash;
 
       // eslint-disable-next-line consistent-return
       return {
-        title: title || content.match(/# (.*)/)?.[1],
+        title: title || excerpt.match(/# (.*)/)?.[1],
         slug: slugWithoutFirstSlash,
         category: 'changelog',
         date,
-        content,
+        excerpt,
         isDraft,
         redirectFrom,
       };

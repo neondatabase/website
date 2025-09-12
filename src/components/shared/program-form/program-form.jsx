@@ -59,7 +59,7 @@ const ProgramForm = ({ type, focus = false }) => {
     setIsValid(!!url && emailValid);
   }, [url, email, isRecognized, useCustomEmail]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (isValid) {
@@ -70,9 +70,9 @@ const ProgramForm = ({ type, focus = false }) => {
         const emailToSend = isRecognized && !useCustomEmail ? null : email;
 
         if (emailToSend) {
-          sendGtagEvent('identify', { email: emailToSend });
+          await sendGtagEvent('identify', { email: emailToSend });
         }
-        sendGtagEvent(eventName, { email: emailToSend, url });
+        await sendGtagEvent(eventName, { email: emailToSend, url });
       }
       setIsSent(true);
     }

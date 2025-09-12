@@ -451,6 +451,10 @@ const defaultConfig = {
         source: '/ai-chat',
         destination: '/docs/introduction#ai-chat',
       },
+      {
+        source: '/agents',
+        destination: '/use-cases/ai-agents',
+      },
     ];
   },
   webpack(config) {
