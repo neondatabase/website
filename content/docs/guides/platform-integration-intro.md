@@ -1,11 +1,11 @@
 ---
 title: Build on Neon
-subtitle: Embed Neon Postgres into your SaaS, AI agent, or cloud platform
+subtitle: 'Embed Neon Postgres into your SaaS, AI agent, or cloud platform'
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
-updatedOn: '2025-07-04T19:52:24.552Z'
+updatedOn: '2025-09-12T13:01:43.246Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
