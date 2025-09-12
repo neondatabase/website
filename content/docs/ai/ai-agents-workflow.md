@@ -13,21 +13,25 @@ Neon creates two organizations in your account so you can separate your tiers.
 - Paid organization (with credits from Neon): Credits apply to charges until depleted. Use for production workloads, for paying users.
 
 What Neon does
+
 1. Approves your agent plan application.
 2. Creates both organizations, assigns you as admin, and configures billing (credits on the paid organization; sponsorship on the sponsored organization).
 3. Confirms both organizations are visible to you and default limits are set.
 
 What you do
+
 - Use the sponsored organization for development and preview environments.
 - Use the paid organization for production workloads as users upgrade.
 - Request limit increases if you approach the defaults.
 
 Limits and increases
+
 - Default cap: 10,000 projects per organization (adjustable after review).
 - The sponsored organization enforces free-tier-like per-project limits (e.g., storage, active time, compute time).
 - Request an increase if needed; Neon will review and adjust caps when appropriate.
 
 Administration
+
 - You are an admin in both organizations and can create projects, branches, configure authentication, and set quotas within the configured limits.
 - Neon manages credits and cap changes.
 
@@ -36,10 +40,11 @@ Administration
 You decide when to move a user's project from the sponsored organization to the paid organization. Neon does not upgrade or migrate projects automatically.
 
 Primary method — API
+
 - Use the API for automation and scale: `POST /organizations/{source_org_id}/projects/transfer`.
 - Requires a personal API key with access to both organizations
 - Can transfer up to 400 projects per API request
-With Neon's API, your agents can:
+  With Neon's API, your agents can:
 
 - Provision PostgreSQL databases in ~500ms
 - Add production-ready authentication
@@ -52,7 +57,7 @@ Architecture assumption: This guide uses one Neon project per user for better is
 ## API Operations
 
 | Action                                                             | Description                                                                | Endpoint                                                                    |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------- |
 | **[Create project](#application-provisioning)**                    | Creates a Postgres database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
 | **[Configure autoscaling](#autoscaling-configuration)**            | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
 | **[Set resource limits](#resource-management)**                    | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
@@ -64,7 +69,8 @@ Architecture assumption: This guide uses one Neon project per user for better is
 | **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
 | **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
 | **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
-|| **Transfer projects (between orgs)**                               | Move projects from sponsored to paid (or reverse)                          | `POST /organizations/{source_org_id}/projects/transfer`                     |
+|                                                                    | **Transfer projects (between orgs)**                                       | Move projects from sponsored to paid (or reverse)                           | `POST /organizations/{source_org_id}/projects/transfer` |
+
 ## Quick start with the demo
 
 See the pattern in action with a working snapshot database versioning demo.
@@ -89,6 +95,7 @@ Neon's copy-on-write storage enables version-aware backends. Use snapshots, bran
 Your agent provisions databases for each user's applications. The infrastructure is created quickly (under 500ms) and cost-effectively, as databases scale to zero when idle - you only pay when databases are active or storing data.
 
 Choose the target organization before creating a project:
+
 - Sponsored organization: development/preview projects
 - Paid organization: production projects
 
@@ -191,6 +198,7 @@ Track usage per project with detailed information about compute time, storage, a
 ### Set project resource limits
 
 Organization defaults
+
 - Sponsored organization: apply free-tier-like project limits (e.g., storage, active time, compute time).
 - Paid organization: apply higher limits aligned to your paid/pro tiers.
 
@@ -226,6 +234,7 @@ Endpoint
 `POST /organizations/{source_org_id}/projects/transfer`
 
 Example
+
 ```bash
 curl --request POST \
      --url 'https://console.neon.tech/api/v2/organizations/{source_org_id}/projects/transfer' \
@@ -242,6 +251,7 @@ curl --request POST \
 ```
 
 Response
+
 ```json
 {}
 ```
