@@ -105,13 +105,13 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 
 ### ChatGPT
 
-You can connect the Neon MCP Server to your ChatGPT account using using ChatGPT's custom MCP connectors. This integration extends ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
+You can connect ChatGPT to the Neon MCP Server using custom MCP connectors. This integration extends ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
 
 ![ChatGPT with Neon MCP Server](/docs/changelog/chatgpt_mcp.png)
 
 To connect ChatGPT to the Neon MCP Server, you need to first enable ChatGPT's developer mode, then add the Neon MCP Server as a custom connector. This makes the connector available for your account; you'll need to separately enable both developer mode and Neon as a source for any chat where you want to use Neon.
 
-1. **Enabling Neon MCP Server for your account**
+1. **Enable Neon MCP Server for your account**
 
    In your ChatGPT account settings, go to the **Advanced settings** section on the **Connectors** tab and enable **Developer mode**.
 
@@ -123,7 +123,7 @@ To connect ChatGPT to the Neon MCP Server, you need to first enable ChatGPT's de
 
    Configure the connector with OAuth authentication and complete the authorization flow when prompted.
 
-2. **Enabling Neon per chat**
+2. **Enable Neon per chat**
 
    In each chat where you want to use Neon, click the **+** button and enable Developer Mode for that chat. Under **Add sources**, you can then enable the Neon connector you just created.
 
