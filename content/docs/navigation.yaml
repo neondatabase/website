@@ -590,7 +590,7 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
-            - section: Agent Frameworks
+            - section: Agent frameworks
               icon: frameworks
               items:
                 - title: AgentStack
