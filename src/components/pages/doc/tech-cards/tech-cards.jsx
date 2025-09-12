@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { ICONS_CONFIG } from 'config/docs-icons-config';
+import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import TechCardsWrapper from './tech-cards-wrapper';
