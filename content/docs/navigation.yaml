@@ -566,7 +566,7 @@
 
     - section: AI
       items:
-        - title: AI for agents
+        - title: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
           items:
@@ -619,7 +619,7 @@
                 - title: LangGraph
                   slug: https://neon.com/guides/langgraph-neon
 
-        - title: AI Starter Kit
+        - title: AI App Starter Kit
           icon: sparks
           slug: ai/ai-intro
           items:
@@ -712,7 +712,7 @@
                   slug: https://github.com/paambaati/neon-js-sdk
                   tag: community
 
-        - title: Integrations (platform/service)
+        - title: Integrations (3rd party)
           icon: integrations
           slug: guides/integrations
           items:
@@ -932,6 +932,23 @@
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
           icon: github
+
+    - section: Platform integration
+      items:
+        - title: Build on Neon
+          slug: guides/platform-integration-intro
+          icon: integrations
+          items:
+            - title: Get started
+              slug: guides/platform-integration-get-started
+            - title: OAuth integration
+              slug: guides/oauth-integration
+            - title: Configure consumption limits
+              slug: guides/consumption-limits
+            - title: Query consumption metrics
+              slug: guides/consumption-metrics
+            - title: Multitenancy
+              slug: guides/multitenancy
 
 - nav: Manage
   title: Manage
@@ -1362,16 +1379,22 @@
 - nav: Resources
   title: Resources
   subnav:
+    - title: Status
+      slug: introduction/status
+      icon: status
+    - title: Support
+      slug: introduction/support
+      icon: support
+    - title: Changelog
+      slug: changelog
+      icon: changelog
     - title: Roadmap
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-    - title: Changelog
-      slug: changelog
-      icon: changelog
-    - title: Glossary
-      slug: reference/glossary
-      icon: glossary
+    - title: Early access
+      slug: introduction/early-access
+      icon: sparks
     - title: Community
       slug: community/community-intro
       icon: community
@@ -1388,29 +1411,9 @@
           slug: community/component-icon-guide
         - title: Component Architecture
           slug: community/component-architecture
-    - title: Early access
-      slug: introduction/early-access
-      icon: sparks
-    - title: Status
-      slug: introduction/status
-      icon: status
-    - title: Support
-      slug: introduction/support
-      icon: support
+    - title: Glossary
+      slug: reference/glossary
+      icon: glossary
     - title: RSS feeds
       slug: reference/feeds
       icon: feeds
-    - title: Platform integration
-      icon: integrations
-      slug: guides/platform-integration-get-started
-      items:
-        - title: Get started
-          slug: guides/platform-integration-get-started
-        - title: OAuth integration
-          slug: guides/oauth-integration
-        - title: Configure consumption limits
-          slug: guides/consumption-limits
-        - title: Query consumption metrics
-          slug: guides/consumption-metrics
-        - title: Multitenancy
-          slug: guides/multitenancy
