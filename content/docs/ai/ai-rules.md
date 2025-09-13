@@ -1,5 +1,5 @@
 ---
-title: AI Rules and Prompts
+title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 enableTableOfContents: true
 updatedOn: '2025-08-05T10:02:15.486Z'

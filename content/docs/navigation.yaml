@@ -572,12 +572,12 @@
           items:
             - title: Overview
               slug: ai/ai-agents-tools
-            - section: MCP Integration
+            - section: MCP integration
               icon: api
               items:
-                - title: Neon MCP Server
+                - title: Overview
                   slug: ai/neon-mcp-server
-                - title: Connect MCP Clients
+                - title: Connect MCP clients
                   slug: ai/connect-mcp-clients-to-neon
             - section: AI rules & prompts
               icon: docs
@@ -590,7 +590,7 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
-            - section: Agent Frameworks
+            - section: Agent frameworks
               icon: frameworks
               items:
                 - title: AgentStack
@@ -939,8 +939,8 @@
   title: Manage
   icon: settings
   subnav:
-    - title: Manage platform
-      slug: manage/accounts
+    - title: Neon platform
+      slug: manage/platform
       icon: settings
       items:
         - section: Access & collaboration

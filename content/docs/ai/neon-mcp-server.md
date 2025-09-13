@@ -1,14 +1,13 @@
 ---
-title: Neon MCP Server
-subtitle: Manage your Neon Postgres databases using natural language commands with the
-  Neon MCP Server.
+title: Neon MCP Server overview
+subtitle: Learn about managing your Neon projects using natural language with Neon MCP Server
 enableTableOfContents: true
 updatedOn: '2025-09-12T21:11:05.111Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-> **Quick install for Cursor:** Click the button below. When prompted, click **Install within Cursor**.
+> To get started connecting an MCP Client like **Cursor**, **Claude Code**, **VS Code**, **Windsurf**, **ChatGPT**, and others, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon). If you're using **Cursor**, you can click the button below for a quick install. When prompted, click **Install within Cursor**.
 
 <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
 
@@ -38,7 +37,7 @@ Traditionally, connecting AI models to different data sources required developer
 
 ### What is Neon MCP server?
 
-**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Claude Code, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
+**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP clients (like Claude Desktop, Claude Code, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
 
 **Key Benefits of using Neon MCP Server:**
 
@@ -66,7 +65,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 
 #### Prerequisites:
 
-- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed).
+- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed, ChatGPT).
 - A Neon account.
 
 <Admonition type="tip" title="Install in a single click for Cursor users">
@@ -102,41 +101,6 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
     - Review the requested permissions and click **Authorize**.
     - You should see a success message, and you can close the browser tab.
 5.  Your MCP client should now be connected to the Neon Remote MCP Server and ready to use.
-
-### ChatGPT
-
-You can connect ChatGPT to the Neon MCP Server using custom MCP connectors. This integration extends ChatGPT with Neon's database capabilities so you can query, manage, and interact with your Neon projects directly within ChatGPT.
-
-![ChatGPT with Neon MCP Server](/docs/changelog/chatgpt_mcp.png)
-
-To connect ChatGPT to the Neon MCP Server, you need to first enable ChatGPT's developer mode, then add the Neon MCP Server as a custom connector. This makes the connector available for your account; you'll need to separately enable both developer mode and Neon as a source for any chat where you want to use Neon.
-
-1. **Add MCP server to ChatGPT**
-
-   In your ChatGPT account settings, go to **Settings** → **Connectors** → **Advanced Settings** and enable **Developer mode**.
-
-   Still on the Connectors tab, you can then **create** a Neon connection from the **Browse connectors** section. Use the following URL:
-
-   ```bash
-   https://mcp.neon.tech/mcp
-   ```
-
-   Make sure you choose **OAuth** for authentication and check "I trust this application", then complete the authorization flow when prompted.
-
-   <div style={{display: 'flex', gap: '0.5rem', margin: '1rem 0'}}>
-     <div style={{flex: 1}}>
-       ![ChatGPT connector configuration](/docs/ai/chatgpt_mcp_add_connector.png)
-     </div>
-     <div style={{flex: 1}}>
-       ![ChatGPT with Neon MCP tools enabled](/docs/ai/chatgpt_mcp_tools.png)
-     </div>
-   </div>
-
-2. **Enable Neon per chat**
-
-   In each chat where you want to use Neon, click the **+** button and enable Developer Mode for that chat. Under **Add sources**, you can then enable the Neon connector you just created.
-
-   Once connected, you can use natural language to manage your Neon databases directly in ChatGPT.
 
 ### Local MCP Server
 
@@ -219,15 +183,6 @@ sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
 width={960}
 height={1080}
 />
-
-You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
-
-- [Claude Desktop](/guides/neon-mcp-server)
-- [Claude Code](/guides/claude-code-mcp-neon)
-- [Cursor](/guides/cursor-mcp-neon)
-- [Cline](/guides/cline-mcp-neon)
-- [Windsurf (Codium)](/guides/windsurf-mcp-neon)
-- [Zed](/guides/zed-mcp-neon)
 
 ## API key-based authentication
 
