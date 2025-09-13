@@ -90,7 +90,7 @@ const Post = ({
       </div>
 
       <Aside
-        className="w-64 shrink-0 xl:hidden"
+        className="!ml-0 w-64 shrink-0 xl:hidden"
         isDocsIndex={isDocsIndex}
         isChangelog={isChangelog}
         enableTableOfContents={enableTableOfContents}
