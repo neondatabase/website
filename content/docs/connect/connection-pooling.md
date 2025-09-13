@@ -1,5 +1,5 @@
 ---
-title: About Connection pooling
+title: Connection pooling
 subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
