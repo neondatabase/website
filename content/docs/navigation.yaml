@@ -594,30 +594,30 @@
               icon: cli
               items:
                 - title: Claude Desktop
-                  slug: https://neon.com/guides/neon-mcp-server
+                  slug: /guides/neon-mcp-server
                 - title: Claude Code
-                  slug: https://neon.com/guides/claude-code-mcp-neon
+                  slug: /guides/claude-code-mcp-neon
                 - title: Cursor IDE
-                  slug: https://neon.com/guides/cursor-mcp-neon
+                  slug: /guides/cursor-mcp-neon
                 - title: Cline
-                  slug: https://neon.com/guides/cline-mcp-neon
+                  slug: /guides/cline-mcp-neon
                 - title: Windsurf
-                  slug: https://neon.com/guides/windsurf-mcp-neon
+                  slug: /guides/windsurf-mcp-neon
                 - title: Zed
-                  slug: https://neon.com/guides/zed-mcp-neon
+                  slug: /guides/zed-mcp-neon
             - section: Agent Frameworks
               icon: frameworks
               items:
                 - title: AgentStack
-                  slug: https://neon.com/guides/agentstack-neon
+                  slug: /guides/agentstack-neon
                 - title: AutoGen
-                  slug: https://neon.com/guides/autogen-neon
+                  slug: /guides/autogen-neon
                 - title: Azure AI Agent Service
-                  slug: https://neon.com/guides/azure-ai-agent-service
+                  slug: /guides/azure-ai-agent-service
                 - title: Composio + CrewAI
-                  slug: https://neon.com/guides/composio-crewai-neon
+                  slug: /guides/composio-crewai-neon
                 - title: LangGraph
-                  slug: https://neon.com/guides/langgraph-neon
+                  slug: /guides/langgraph-neon
 
         - title: AI Starter Kit
           icon: sparks
@@ -711,7 +711,7 @@
                       slug: https://github.com/paambaati/neon-js-sdk
                       tag: community
             - title: Templates
-              slug: /templates
+              slug: templates
               icon: template
             - title: Examples repo
               slug: https://github.com/neondatabase/examples
@@ -1354,7 +1354,7 @@
       slug: postgresql/postgres-upgrade
       icon: upgrade
     - title: Postgres tutorial
-      slug: https://neon.com/postgresql/tutorial
+      slug: /postgresql/tutorial
       icon: book
 
 - nav: Resources

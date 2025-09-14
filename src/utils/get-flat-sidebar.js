@@ -5,8 +5,14 @@ const getNormalizedChildren = (node) => {
 
   const subnavItems = Array.isArray(node.subnav)
     ? node.subnav
-        .filter((group) => group && typeof group === 'object' && Array.isArray(group.items))
-        .flatMap((group) => group.items)
+        .filter((group) => group && typeof group === 'object')
+        .flatMap((group) => {
+          // Include the subnav group itself if it has a slug
+          const groupWithSlug = group.slug ? [group] : [];
+          // Include its items if they exist
+          const groupItems = Array.isArray(group.items) ? group.items : [];
+          return [...groupWithSlug, ...groupItems];
+        })
     : [];
 
   const allItems = [...items, ...subnavItems];

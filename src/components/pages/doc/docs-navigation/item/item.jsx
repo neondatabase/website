@@ -27,9 +27,9 @@ const isActiveItem = (slug, items, subnav, currentSlug) => {
 };
 
 const SubItem = ({ icon, title, slug, basePath }) => {
-  const externalSlug = slug?.startsWith('http') ? slug : null;
-  const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
   const docSlug = `${basePath}${slug}`;
+  const websiteSlug = slug?.startsWith('/') ? slug : null;
+  const externalSlug = slug?.startsWith('http') ? slug : null;
 
   return (
     <Link
@@ -70,7 +70,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = `${basePath}${slug}`;
+  const href = slug?.startsWith('/') ? slug : `${basePath}${slug}`;
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;
