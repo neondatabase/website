@@ -342,6 +342,8 @@
               slug: data-api/get-started
             - title: Building a note-taking app
               slug: data-api/demo
+            - title: SQL to PostgREST Converter
+              slug: data-api/sql-to-rest
 
         - title: Neon Auth
           icon: auth
