@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 
 import Menu from '../menu';
 
@@ -32,6 +33,13 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const menu = getActiveMenu(navigation, currentSlug);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.scrollTop = 0;
+    }
+  }, [menu]);
 
   return (
     <aside className={clsx('relative -mt-10', className)}>
@@ -43,7 +51,10 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
             'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
           )}
         >
-          <nav className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-16 pt-11">
+          <nav
+            className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-16 pt-11"
+            ref={navRef}
+          >
             <Menu basePath={basePath} {...menu} customType={customType} />
           </nav>
         </div>
