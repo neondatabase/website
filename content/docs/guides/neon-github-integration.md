@@ -5,7 +5,7 @@ subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2025-08-07T07:19:10.378Z'
+updatedOn: '2025-09-04T13:53:03.415Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
@@ -151,6 +151,10 @@ jobs:
           branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
+
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
+</Admonition>
 
 To add the workflow to your repository:
 

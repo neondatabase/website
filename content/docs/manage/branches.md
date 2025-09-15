@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-08-18T12:11:47.181Z'
+updatedOn: '2025-09-12T16:34:42.456Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -216,12 +216,11 @@ Neon also supports two other types of root branches that have no parent but _can
 
 The number of root branches allowed in a project depends on your Neon plan.
 
-| Plan     | Root branch allowance per project |
-| :------- | :-------------------------------- |
-| Free     | 3                                 |
-| Launch   | 5                                 |
-| Scale    | 10                                |
-| Business | 25                                |
+| Plan   | Root branch allowance per project |
+| :----- | :-------------------------------- |
+| Free   | 3                                 |
+| Launch | 5                                 |
+| Scale  | 25                                |
 
 ### Default branch
 
@@ -323,6 +322,8 @@ The response body includes information about the branch, the branch's compute, a
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -461,6 +462,8 @@ The response body lists the project's default branch and any child branches. The
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branches": [
@@ -549,6 +552,8 @@ The response body shows information about the branch being deleted and the `susp
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Delete branches](https://api-docs.neon.tech/reference/deleteprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

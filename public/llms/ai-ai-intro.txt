@@ -1,10 +1,10 @@
-# AI Starter Kit
+# AI App Starter Kit
 
-> The AI Starter Kit documentation introduces Neon users to integrating AI capabilities with their databases, detailing setup instructions, configuration options, and example use cases to enhance data management and analysis.
+> The AI App Starter Kit documentation introduces Neon users to integrating AI capabilities with their databases, detailing setup instructions, configuration options, and example use cases to enhance data management and analysis.
 
 ## Source
 
-- [AI Starter Kit HTML](https://neon.com/docs/ai/ai-intro): The original HTML version of this documentation
+- [AI App Starter Kit HTML](https://neon.com/docs/ai/ai-intro): The original HTML version of this documentation
 
 This guide collects resources for building AI applications with Neon Postgres. You'll find core concepts, starter applications, framework integrations, and deployment guides. Use these resources to build applications like RAG chatbots, semantic search engines, or custom AI tools.
 

@@ -1,35 +1,22 @@
 ---
-title: Ship faster with AI tools
+title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-08-27T17:52:09.065Z'
+updatedOn: '2025-09-13T09:38:53.462Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
 
-## Manage databases with natural language
+## MCP integration
 
 The Model Context Protocol (MCP) is a standardized way for AI tools to interact with Neon databases using natural language, providing secure and contextual access to your data and infrastructure.
 
 <DetailIconCards>
-<a href="/docs/ai/neon-mcp-server" description="A Model Context Protocol (MCP) server that enables AI tools to interact with and manage Neon databases" icon="github">Neon MCP Server</a>
-<a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients to your Neon database" icon="github">Connect MCP Clients</a>
+<a href="/docs/ai/neon-mcp-server" description="Learn about managing your Neon projects using natural language with Neon MCP Server" icon="github">Neon MCP Server</a>
+<a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients like Cursor, Claude Code, and ChatGPT to your Neon database" icon="github">Connect MCP clients</a>
 </DetailIconCards>
 
-## Integrate Neon in your IDE
-
-These tools leverage the Neon MCP server to provide natural language interfaces and
-AI-enhanced database management capabilities within your preferred development environment.
-
-<DetailIconCards>
-<a href="/guides/neon-mcp-server" description="Use natural language to manage your databases with Claude Desktop and Neon MCP server" icon="openai">Claude Desktop</a>
-<a href="/guides/claude-code-mcp-neon" description="Use natural language to manage your databases with Claude Code CLI and Neon MCP server" icon="openai">Claude Code</a>
-<a href="/guides/cursor-mcp-neon" description="AI-enhanced database management in Cursor IDE" icon="openai">Cursor</a>
-<a href="/guides/cline-mcp-neon" description="AI-enhanced database management with Cline" icon="openai">Cline</a>
-<a href="/guides/windsurf-mcp-neon" description="AI-enhanced database management in Windsurf Editor" icon="openai">Windsurf</a>
-</DetailIconCards>
-
-## Ship faster with AI rules
+## AI rules
 
 Accelerate your development with context rules that help AI tools write better code for Neon's features.
 
@@ -41,18 +28,26 @@ Accelerate your development with context rules that help AI tools write better c
 
 ## Build AI agents
 
-Create autonomous agents that can manage and interact with your Neon databases programmatically.
+Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with our terse JavaScript client or the Neon API.
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/toolkit" description="A terse client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
+
+<a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
+
 </DetailIconCards>
 
-## Scale with Agent frameworks
+## Agent frameworks
 
 Build AI agents using popular frameworks that integrate with Neon.
 
 <DetailIconCards>
 <a href="/guides/agentstack-neon" description="Build and deploy AI agents with AgentStack's CLI and Neon integration" icon="openai">AgentStack Integration</a>
+<a href="/guides/autogen-neon" description="Create collaborative AI agents with Microsoft AutoGen and Neon" icon="openai">AutoGen Integration</a>
+<a href="/guides/azure-ai-agent-service" description="Build enterprise AI agents with Azure AI Agent Service and Neon" icon="openai">Azure AI Agent Service</a>
 <a href="/guides/composio-crewai-neon" description="Create multi-agent systems with CrewAI and Neon" icon="openai">Composio + CrewAI</a>
 <a href="/guides/langgraph-neon" description="Build stateful, multi-actor applications with LangGraph and Neon" icon="openai">LangGraph Integration</a>
 </DetailIconCards>

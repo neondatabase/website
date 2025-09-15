@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2025-09-04T10:51:44.462Z'
+updatedOn: '2025-09-09T14:03:52.641Z'
 ---
 
 <InfoBlock>
@@ -54,7 +54,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ### Failing payments for Indian customers
 
-Neon’s billing system uses Stripe, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
+Neon’s billing system uses **Stripe Checkout**, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
 
 ## Update your billing email
 

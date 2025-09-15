@@ -3,7 +3,7 @@ title: About Neon RLS
 subtitle: Secure your application at the database level using Postgres's Row-Level
   Security
 enableTableOfContents: true
-updatedOn: '2025-09-03T00:20:43.017Z'
+updatedOn: '2025-09-05T14:21:44.232Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize
   - /docs/guides/neon-authorize
@@ -23,6 +23,8 @@ redirectFrom:
 </DocsList>
 
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 **Neon RLS** integrates with third-party **JWT-based authentication providers** like Auth0 and Clerk, allowing you to query your database directly from client-side applications. It enables direct SQL queries over HTTP by leveraging [Row-Level Security (RLS)](https://www.postgresql.org/docs/current/ddl-rowsecurity.html) at the database level.
 

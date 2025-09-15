@@ -1,10 +1,10 @@
 ---
-updatedOn: '2025-08-29T17:29:01.382Z'
+updatedOn: '2025-09-13T09:38:53.468Z'
 ---
 
 ## Supported actions (tools)
 
-The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP Clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
+The Neon MCP Server provides the following actions, which are exposed as "tools" to MCP clients. You can use these tools to interact with your Neon projects and databases using natural language commands.
 
 **Project management:**
 
@@ -21,6 +21,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `delete_branch`: Deletes an existing branch from a Neon project.
 - `describe_branch`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
 - `list_branch_computes`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, and autoscaling information.
+- `reset_from_parent`: Resets the current branch to its parent's state, discarding local changes. Automatically preserves to backup if branch has children, or optionally on request.
 
 **SQL query execution:**
 

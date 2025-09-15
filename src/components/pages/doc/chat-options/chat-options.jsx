@@ -5,21 +5,14 @@ import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/chat-options/discord.inline.svg';
 import GitHubIcon from 'icons/chat-options/github.inline.svg';
-import NeonIcon from 'icons/chat-options/neon.inline.svg';
 import VSCodeIcon from 'icons/chat-options/vscode.inline.svg';
 
 const ITEMS = [
-  {
-    title: 'Docs',
-    icon: NeonIcon,
-    link: LINKS.aiChat,
-  },
   {
     title: 'GitHub Copilot',
     icon: GitHubIcon,
     link: LINKS.githubCopilot,
     isExternal: true,
-    className: 'xl:order-1',
   },
   {
     title: 'VS Code',

@@ -3,7 +3,7 @@ title: Supported Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2025-08-16T11:54:01.151Z'
+updatedOn: '2025-09-05T12:26:43.308Z'
 ---
 
 Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
@@ -210,7 +210,9 @@ The response body lists available libraries and whether the libraries are enable
 - `version` — the extension version
 
 <details>
-<summary>Response body example</summary>
+<summary>Response body</summary>
+
+For attribute definitions, find the [List preloaded libraries](https://api-docs.neon.tech/reference/getavailablepreloadlibraries) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

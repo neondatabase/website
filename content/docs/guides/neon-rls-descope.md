@@ -2,7 +2,7 @@
 title: Secure your data with Descope and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Descope and Neon RLS
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.262Z'
+updatedOn: '2025-09-05T14:21:44.225Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-descope
   - /docs/guides/neon-authorize-descope
@@ -14,6 +14,8 @@ redirectFrom:
   <a href="/docs/guides/rls-drizzle">Simplify RLS with Drizzle</a>
 </DocsList>
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 Use Descope with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Descope for user authentication. It shows you how to integrate Descope with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 

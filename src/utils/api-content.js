@@ -7,13 +7,7 @@ const getExcerpt = require('./get-excerpt');
 
 const getPostSlugs = async (pathname) => {
   const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: [
-      '**/RELEASE_NOTES_TEMPLATE.md',
-      '**/README.md',
-      '**/unused/**',
-      '**/shared-content/**',
-      '**/GUIDE_TEMPLATE.md',
-    ],
+    ignore: ['**/README.md', '**/unused/**', '**/shared-content/**', '**/GUIDE_TEMPLATE.md'],
   });
   return files.map((file) => file.replace(pathname, '').replace('.md', ''));
 };

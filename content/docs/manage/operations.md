@@ -2,7 +2,7 @@
 title: System operations
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T09:01:05.733Z'
+updatedOn: '2025-09-05T12:26:43.314Z'
 ---
 
 An operation is an action performed by the Neon Control Plane on a Neon object or resource. Operations are typically initiated by user actions, such as creating a branch or deleting a database. Other operations may be initiated by the Neon Control Plane, such as suspending a [compute](/docs/reference/glossary#compute) after a period of inactivity or checking its availability. You can monitor operations to keep an eye on the overall health of your Neon project or to check the status of specific operations. When working with the Neon API, you can poll the status of operations to ensure that an API request is completed before issuing the next API request. For more information, see [Poll operation status](#poll-operation-status).
@@ -107,6 +107,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "operations": [
@@ -167,6 +169,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?li
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "operations": [
@@ -200,6 +204,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations?cu
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [List operations](https://api-docs.neon.tech/reference/listprojectoperations) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -242,6 +248,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/97
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve operation details](https://api-docs.neon.tech/reference/getprojectoperation) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -293,7 +301,7 @@ The response to a Neon API request includes information about the operations tha
   ]
 ```
 
-You can use the [Get operation details](https://api-docs.neon.tech/reference/listprojectoperations) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
+You can use the [Get operation details](https://api-docs.neon.tech/reference/getprojectoperation) method to poll the status of an operation by the operation ID. You might do this at intervals of 5 seconds until the `status` of the operation changes to `finished` before issuing the next request. For example, this request polls the `start_compute` operation shown above:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/055b17e6-ffe3-47ab-b545-cfd7db6fd8b8' \
@@ -303,6 +311,8 @@ curl 'https://console.neon.tech/api/v2/projects/autumn-disk-484331/operations/05
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [Get operation details](https://api-docs.neon.tech/reference/getprojectoperation) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {

@@ -3,7 +3,7 @@ title: Secure Your Data with Neon RLS and Firebase or GCP Identity Platform
 subtitle: Implement Row-Level Security in Postgres using Firebase or GCP Identity
   Platform
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.471Z'
+updatedOn: '2025-09-05T14:21:44.226Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-google-identity
   - /docs/guides/neon-authorize-google-identity
@@ -21,6 +21,8 @@ redirectFrom:
   <a href="https://developers.google.com/identity/openid-connect/openid-connect">Google Identity Quickstart</a>
 </DocsList>
 </InfoBlock>
+
+<NeonRLSDeprecation />
 
 Use Google Identity with Neon RLS to add secure, database-level authorization to your application. This guide assumes you already have an application using Google Identity for user authentication. It shows you how to integrate Google Identity with Neon RLS, then provides sample Row-level Security (RLS) policies to help you model your own application schema.
 
