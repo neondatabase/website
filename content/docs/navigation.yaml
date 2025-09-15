@@ -566,18 +566,18 @@
 
     - section: AI
       items:
-        - title: AI for agents
+        - title: AI for Agents
           icon: ai-agent
           slug: ai/ai-agents-tools
           items:
             - title: Overview
               slug: ai/ai-agents-tools
-            - section: MCP Integration
+            - section: MCP integration
               icon: api
               items:
-                - title: Neon MCP Server
+                - title: Overview
                   slug: ai/neon-mcp-server
-                - title: Connect MCP Clients
+                - title: Connect MCP clients
                   slug: ai/connect-mcp-clients-to-neon
             - section: AI rules & prompts
               icon: docs
@@ -590,36 +590,21 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
-            - section: IDE & Tool Integration
-              icon: cli
-              items:
-                - title: Claude Desktop
-                  slug: /guides/neon-mcp-server
-                - title: Claude Code
-                  slug: /guides/claude-code-mcp-neon
-                - title: Cursor IDE
-                  slug: /guides/cursor-mcp-neon
-                - title: Cline
-                  slug: /guides/cline-mcp-neon
-                - title: Windsurf
-                  slug: /guides/windsurf-mcp-neon
-                - title: Zed
-                  slug: /guides/zed-mcp-neon
-            - section: Agent Frameworks
+            - section: Agent frameworks
               icon: frameworks
               items:
                 - title: AgentStack
-                  slug: /guides/agentstack-neon
+                  slug: guides/agentstack-neon
                 - title: AutoGen
-                  slug: /guides/autogen-neon
+                  slug: guides/autogen-neon
                 - title: Azure AI Agent Service
-                  slug: /guides/azure-ai-agent-service
+                  slug: guides/azure-ai-agent-service
                 - title: Composio + CrewAI
-                  slug: /guides/composio-crewai-neon
+                  slug: guides/composio-crewai-neon
                 - title: LangGraph
-                  slug: /guides/langgraph-neon
+                  slug: guides/langgraph-neon
 
-        - title: AI Starter Kit
+        - title: AI App Starter Kit
           icon: sparks
           slug: ai/ai-intro
           items:
@@ -652,13 +637,20 @@
                   slug: ai/ai-scale-with-neon
     - section: Tools & Workflows
       items:
-        - title: Dev tools
-          slug: reference/neon-cli
+        - title: Dev tools (API, CLI, SDKs)
+          slug: reference/api-reference
           icon: cli
           items:
-            - title: CLI Reference
-              slug: reference/neon-cli
+            - section: API
+              icon: api
               items:
+                - title: Neon API
+                  slug: reference/api-reference
+            - section: CLI
+              icon: cli
+              items:
+                - title: Overview
+                  slug: reference/neon-cli
                 - title: Quickstart
                   slug: reference/cli-quickstart
                 - title: Install and connect
@@ -689,11 +681,7 @@
                   slug: reference/cli-set-context
                 - title: completion
                   slug: reference/cli-completion
-            - title: API Reference
-              slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
-              icon: api
-            - title: SDKs
-              slug: reference/typescript-sdk
+            - section: SDKs
               icon: sdk
               items:
                 - title: TypeScript SDK
@@ -702,22 +690,14 @@
                   slug: reference/python-sdk
                 - title: The @neondatabase/toolkit
                   slug: reference/neondatabase-toolkit
-                - title: Community SDKs
-                  items:
-                    - title: Go SDK
-                      slug: https://github.com/kislerdm/neon-sdk-go
-                      tag: community
-                    - title: Node.js / Deno SDK
-                      slug: https://github.com/paambaati/neon-js-sdk
-                      tag: community
-            - title: Templates
-              slug: templates
-              icon: template
-            - title: Examples repo
-              slug: https://github.com/neondatabase/examples
-              icon: github
+                - title: Go SDK
+                  slug: https://github.com/kislerdm/neon-sdk-go
+                  tag: community
+                - title: Node.js / Deno SDK
+                  slug: https://github.com/paambaati/neon-js-sdk
+                  tag: community
 
-        - title: Integrations
+        - title: Integrations (3rd party)
           icon: integrations
           slug: guides/integrations
           items:
@@ -931,12 +911,36 @@
             - title: Data anonymization
               slug: workflows/data-anonymization
 
+        - title: Templates
+          slug: templates
+          icon: template
+        - title: Examples repo
+          slug: https://github.com/neondatabase/examples
+          icon: github
+
+    - section: Platform integration
+      items:
+        - title: Build on Neon
+          slug: guides/platform-integration-intro
+          icon: integrations
+          items:
+            - title: Get started
+              slug: guides/platform-integration-get-started
+            - title: OAuth integration
+              slug: guides/oauth-integration
+            - title: Configure consumption limits
+              slug: guides/consumption-limits
+            - title: Query consumption metrics
+              slug: guides/consumption-metrics
+            - title: Multitenancy
+              slug: guides/multitenancy
+
 - nav: Manage
   title: Manage
   icon: settings
   subnav:
-    - title: Manage platform
-      slug: manage/accounts
+    - title: Neon platform
+      slug: manage/platform
       icon: settings
       items:
         - section: Access & collaboration
@@ -1353,23 +1357,29 @@
     - title: Upgrade
       slug: postgresql/postgres-upgrade
       icon: upgrade
-    - title: Postgres tutorial
-      slug: /postgresql/tutorial
+    - title: PostgreSQL Tutorial
+      slug: postgresql/tutorial
       icon: book
 
 - nav: Resources
   title: Resources
   subnav:
+    - title: Status
+      slug: introduction/status
+      icon: status
+    - title: Support
+      slug: introduction/support
+      icon: support
+    - title: Changelog
+      slug: changelog
+      icon: changelog
     - title: Roadmap
       slug: introduction/roadmap
       icon: roadmap
       tag: updated
-    - title: Changelog
-      slug: changelog
-      icon: changelog
-    - title: Glossary
-      slug: reference/glossary
-      icon: glossary
+    - title: Early access
+      slug: introduction/early-access
+      icon: sparks
     - title: Community
       slug: community/community-intro
       icon: community
@@ -1386,29 +1396,9 @@
           slug: community/component-icon-guide
         - title: Component Architecture
           slug: community/component-architecture
-    - title: Early access
-      slug: introduction/early-access
-      icon: sparks
-    - title: Status
-      slug: introduction/status
-      icon: status
-    - title: Support
-      slug: introduction/support
-      icon: support
+    - title: Glossary
+      slug: reference/glossary
+      icon: glossary
     - title: RSS feeds
       slug: reference/feeds
       icon: feeds
-    - title: Platform integration
-      icon: integrations
-      slug: guides/platform-integration-get-started
-      items:
-        - title: Get started
-          slug: guides/platform-integration-get-started
-        - title: OAuth integration
-          slug: guides/oauth-integration
-        - title: Configure consumption limits
-          slug: guides/consumption-limits
-        - title: Query consumption metrics
-          slug: guides/consumption-metrics
-        - title: Multitenancy
-          slug: guides/multitenancy
