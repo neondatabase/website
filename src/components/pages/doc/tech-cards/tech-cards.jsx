@@ -1,16 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import fileExists from 'utils/file-exists';
 
 import TechCardsWrapper from './tech-cards-wrapper';
-
-const ICONS_PATH = '/images/technology-logos';
 
 const TechCards = ({ children = null, withToggler = false }) => (
   <TechCardsWrapper withToggler={withToggler}>
@@ -19,9 +16,8 @@ const TechCards = ({ children = null, withToggler = false }) => (
 
       const { href, title, description, icon } = child.props;
 
-      const iconPath = `${ICONS_PATH}/${icon}.svg`;
-      const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
-      const hasDarkIcon = fileExists(`public${iconPathDark}`);
+      const iconConfig = ICONS_CONFIG[icon];
+      const { lightIconPath, darkIconPath } = iconConfig;
 
       const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
 
@@ -41,17 +37,17 @@ const TechCards = ({ children = null, withToggler = false }) => (
           >
             <div className="relative z-10">
               <img
-                className={clsx('h-9 w-auto shrink-0', hasDarkIcon && 'dark:hidden')}
-                src={iconPath}
+                className={clsx('h-9 w-auto shrink-0', darkIconPath && 'dark:hidden')}
+                src={lightIconPath}
                 width={36}
                 height={36}
                 alt={`${icon} logo`}
                 loading={index > 3 ? 'lazy' : 'eager'}
               />
-              {hasDarkIcon && (
+              {darkIconPath && (
                 <img
                   className="hidden dark:block"
-                  src={iconPathDark}
+                  src={darkIconPath}
                   width={36}
                   height={36}
                   alt={`${icon} logo`}

@@ -63,7 +63,7 @@ const PostgresTutorial = async ({ params }) => {
   const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getNavigation());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
 
   const navigationLinks = getNavigationLinks(currentSlug);
   const gitHubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;

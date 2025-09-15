@@ -157,16 +157,7 @@ The `sharedMdxComponents` object is passed to the MDX processor, making all regi
 
 ### TechCards icon loading
 
-TechCards icons are loaded dynamically from the public directory:
-
-```js
-// TechCards component implementation
-const ICONS_PATH = '/images/technology-logos';
-const iconPath = `${ICONS_PATH}/${icon}.svg`;
-const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
-
-// If the file exists, it will render. If not, the image will be broken/missing.
-```
+TechCards icons are loaded dynamically from the public directory. If the file exists, it will be rendered. Otherwise, the image will be broken or missing.
 
 **File Requirements:**
 

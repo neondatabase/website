@@ -594,15 +594,15 @@
               icon: frameworks
               items:
                 - title: AgentStack
-                  slug: https://neon.com/guides/agentstack-neon
+                  slug: /guides/agentstack-neon
                 - title: AutoGen
-                  slug: https://neon.com/guides/autogen-neon
+                  slug: /guides/autogen-neon
                 - title: Azure AI Agent Service
-                  slug: https://neon.com/guides/azure-ai-agent-service
+                  slug: /guides/azure-ai-agent-service
                 - title: Composio + CrewAI
-                  slug: https://neon.com/guides/composio-crewai-neon
+                  slug: /guides/composio-crewai-neon
                 - title: LangGraph
-                  slug: https://neon.com/guides/langgraph-neon
+                  slug: /guides/langgraph-neon
 
         - title: AI App Starter Kit
           icon: sparks
@@ -912,7 +912,7 @@
               slug: workflows/data-anonymization
 
         - title: Templates
-          slug: https://neon.com/templates
+          slug: /templates
           icon: template
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
@@ -1358,7 +1358,7 @@
       slug: postgresql/postgres-upgrade
       icon: upgrade
     - title: PostgreSQL Tutorial
-      slug: https://neon.com/postgresql/tutorial
+      slug: /postgresql/tutorial
       icon: book
 
 - nav: Resources
