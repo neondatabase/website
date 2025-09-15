@@ -1,13 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 
-import fs from 'fs';
-
 import clsx from 'clsx';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import { DOCS_BASE_PATH } from 'constants/docs';
+import fileExists from 'utils/file-exists';
 
 import TechCardsWrapper from './tech-cards-wrapper';
 
@@ -22,7 +21,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
 
       const iconPath = `${ICONS_PATH}/${icon}.svg`;
       const iconPathDark = `${ICONS_PATH}/${icon}-dark.svg`;
-      const hasDarkIcon = fs.existsSync(`public${iconPathDark}`);
+      const hasDarkIcon = fileExists(`public${iconPathDark}`);
 
       const isExternal = href.startsWith('http') || !href.includes(DOCS_BASE_PATH);
 
