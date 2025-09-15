@@ -41,7 +41,8 @@
 
     /* ticket back flare */
     .not(.ticket-blank)::before {
-      background-image: radial-gradient(transparent 0%, theme(colors.black.pure) 72%),
+      background-image:
+        radial-gradient(transparent 0%, theme(colors.black.pure) 72%),
         linear-gradient(225deg, #00d1ff 0%, rgba(51, 255, 187, 0.2) 100%);
     }
 
