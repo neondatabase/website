@@ -21,7 +21,7 @@ If you signed up through **Vercel** or **Azure Marketplace**, you remain on a [l
 
 ## How to check if you're on a legacy plan
 
-To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a lagacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
+To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a legacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
 
 ![Legacy plan badge](/docs/introduction/legacy_plan_badge.png)
 
