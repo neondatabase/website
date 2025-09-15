@@ -6,7 +6,7 @@ updatedOn: '2025-08-21T14:09:12.290Z'
 ---
 
 <Admonition type="note" title="Beta">
-Snapshots are available for members of our Early Access Program. Read more about joining [here](/docs/introduction/early-access). **Snapshot limits**: 1 on Free plan, 10 on paid plans.
+Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://t.co/kORvEuCUpJ).
 </Admonition>
 
 ## Overview
