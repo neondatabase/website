@@ -5,6 +5,15 @@ enableTableOfContents: false
 updatedOn: '2025-09-13T17:20:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Data API" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/data-api/get-started">Getting started with Neon Data API</a>
+    <a href="/docs/data-api/demo">Building a note-taking app</a>
+  </DocsList>
+</InfoBlock>
+
 Enter your SQL query below and see the equivalent PostgREST API calls in real-time.
 This tool supports common SELECT statements with filtering, sorting, pagination, joins, and aggregations.
 
