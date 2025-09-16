@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-09-13T09:38:53.462Z'
+updatedOn: '2025-09-16T17:39:40.070Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
