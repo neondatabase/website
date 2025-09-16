@@ -16,7 +16,7 @@ This guide describes how you can implement database versioning for AI agent and 
 > **Terminology note:** This guide uses "versions" to describe saved database states from the user's perspective, and "snapshots" when referring to Neon's technical implementation. You may also see these called "checkpoints" or "edits" in some AI agent contexts.
 
 <Admonition type="tip" title="Synopsis">
-Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
+Use the project's root branch for production, whose database connection string stays the same when a snapshot restore is finalized. Create snapshots to save database versions. For rollbacks, restore snapshots with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own database connection strings.
 </Admonition>
 
 ## Why use snapshots for versioning
