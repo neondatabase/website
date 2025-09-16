@@ -590,6 +590,8 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+                - title: Neon TypeScript SDK
+                  slug: ai/ai-rules-neon-typescript-sdk
             - section: Agent frameworks
               icon: frameworks
               items:

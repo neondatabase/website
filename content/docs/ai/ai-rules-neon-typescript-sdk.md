@@ -7,11 +7,13 @@ updatedOn: '2025-09-16T00:00:00.000Z'
 
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
-  <a href="https://neon.com/docs/reference/typescript-sdk">Get started with Neon Typescript SDK</a>
+  <a href="/docs/reference/typescript-sdk">Get started with Neon Typescript SDK</a>
+  <a href="/docs/reference/api-reference">Neon API Reference</a>
 </DocsList>
 
-<DocsList title="npm" theme="repo">
-  <a href="https://www.npmjs.com/package/@neondatabase/api-client">npm</a>
+<DocsList title="Repository" theme="repo">
+  <a href="https://www.npmjs.com/package/@neondatabase/api-client">`@neondatabase/api-client` on npm</a>
+  <a href="https://github.com/neondatabase-labs/ai-rules/blob/main/neon-typescript-sdk.mdc">neon-typescript-sdk.mdc</a>
 </DocsList>
 </InfoBlock>
 
