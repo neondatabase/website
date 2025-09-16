@@ -590,6 +590,17 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+            - section: Build AI agents
+              icon: openai
+              items:
+                - title: Neon for Agent platforms
+                  slug: https://neon.com/use-cases/ai-agents
+                - title: Neon Toolkit
+                  slug: https://github.com/neondatabase/toolkit
+                - title: Database versioning
+                  slug: ai/ai-database-versioning
+                - title: Neon API
+                  slug: reference/api-reference
             - section: Agent frameworks
               icon: frameworks
               items:

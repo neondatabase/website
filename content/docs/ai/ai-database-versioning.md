@@ -11,14 +11,12 @@ Snapshots are available in Beta. Please give us [Feedback](https://console.neon.
 
 ## Overview
 
-Implement database versioning for AI agent and code generation platforms using Neon's snapshot APIs. Create point-in-time database versions, perform instant rollbacks, and maintain stable database connection strings for your applications. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
-
-This pattern works whether you manage Neon projects for your users (embedded approach) or users bring their own connected Neon accounts.
+This guide describes how you can implement database versioning for AI agent and code generation platforms using Neon's snapshot APIs. With snapshots, you can create point-in-time database versions, perform instant rollbacks, and maintain stable database connection strings for your applications. See a working implementation in the [demonstration repository](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo).
 
 > **Terminology note:** This guide uses "versions" to describe saved database states from the user's perspective, and "snapshots" when referring to Neon's technical implementation. You may also see these called "checkpoints" or "edits" in some AI agent contexts.
-> <Admonition type="tip" title="Quick guide">
-> Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
-> </Admonition>
+<Admonition type="tip" title="Synopsis">
+Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
+</Admonition>
 
 ## Why use snapshots for versioning
 
@@ -48,8 +46,9 @@ The best way to understand this pattern is to see it in action:
 
 Every agent project maps to one Neon project with a designated [root branch](/docs/reference/glossary#root-branch) that serves as the production database.
 
-> **Important:** Snapshots can only be created from root branches in Neon. A root branch is a branch with no parent (typically named `main` or `production`).
-> **The active branch:**
+**Important:** Snapshots can only be created from root branches in Neon. A root branch is a branch with no parent (typically named `main` or `production`).
+
+**The active branch:**
 
 - Gets its data replaced during finalized rollbacks
 - Maintains a consistent database connection string through Neon's restore mechanism — see [How restore works](#how-restore-works) for details
