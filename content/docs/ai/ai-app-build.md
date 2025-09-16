@@ -22,7 +22,6 @@ Simply go to https://www.app.build/ and authenticate, start chatting ti build!
 
 **Note:** the CLI is now deprecated. `npx @app.build/cli` will give you an error.
 
-
 ## What it generates
 
 - Backend: Fastify server with Drizzle ORM
