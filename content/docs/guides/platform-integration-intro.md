@@ -20,6 +20,8 @@ Learn about the benefits of integrating with Neon and how to set up your platfor
 
 <a href="/platforms" description="Read about the benefits of integrating with Neon" icon="handshake">Platform integration page</a>
 
+<a href="/use-cases/ai-agents" description="Learn how agents and codegen platforms integrate Neon as their database backend" icon="handshake">Postgres for AI agent platforms</a>
+
 <a href="/contact-sales" description="Request a meeting with our team to learn more" icon="todo">Meet with our team</a>
 
 </DetailIconCards>
@@ -38,10 +40,18 @@ Find out how you can integrate with Neon.
 
 <a href="https://github.com/neondatabase/neon-branches-visualizer" description="Check out a sample OAuth application" icon="lock-landscape">Sample OAuth app</a>
 
-<a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
-
 <a href="/docs/workflows/claimable-database-integration" description="Manage Neon projects for users with the database claim API" icon="transactions">Claimable database</a>
 
+</DetailIconCards>
+
+## AI agent and codegen platforms
+
+Create autonomous agents that can manage and interact with your Neon databases programmatically.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
+
+<a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 </DetailIconCards>
 
 ## Billing
