@@ -12,25 +12,25 @@ Neon creates two organizations in your account so you can separate your tiers.
 - Sponsored organization (free to you): Project-level limits similar to the Neon free tier. Use for development and previews.
 - Paid organization (with credits from Neon): Credits apply to charges until depleted. Use for production workloads, for paying users.
 
-What Neon does
+### What Neon does
 
 1. Approves your agent plan application.
 2. Creates both organizations, assigns you as admin, and configures billing (credits on the paid organization; sponsorship on the sponsored organization).
 3. Confirms both organizations are visible to you and default limits are set.
 
-What you do
+### What you do
 
 - Use the sponsored organization for development and preview environments.
 - Use the paid organization for production workloads as users upgrade.
 - Request limit increases if you approach the defaults.
 
-Limits and increases
+### Limits and increases
 
 - Default cap: 10,000 projects per organization (adjustable after review).
 - The sponsored organization enforces free-tier-like per-project limits (e.g., storage, active time, compute time).
 - Request an increase if needed; Neon will review and adjust caps when appropriate.
 
-Administration
+### Administration
 
 - You are an admin in both organizations and can create projects, branches, configure authentication, and set quotas within the configured limits.
 - Neon manages credits and cap changes.
@@ -44,7 +44,8 @@ Primary method — API
 - Use the API for automation and scale: `POST /organizations/{source_org_id}/projects/transfer`.
 - Requires a personal API key with access to both organizations
 - Can transfer up to 400 projects per API request
-  With Neon's API, your agents can:
+
+With Neon's API, your agents can:
 
 - Provision PostgreSQL databases in ~500ms
 - Add production-ready authentication
@@ -119,6 +120,7 @@ async function testNeonApi() {
   try {
     const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
     const tenantId = 'example-tenant';
+    const orgId = process.env.ORG_TARGET === 'prod' ? process.env.NEON_ORG_ID_PROD : process.env.NEON_ORG_ID_DEV;
 
     console.log('Starting Neon API test...');
     console.log(`Tenant ID: ${tenantId}`);
@@ -127,6 +129,7 @@ async function testNeonApi() {
     console.log('Creating project...');
     const project = await toolkit.createProject({
       name: `agent-${tenantId}-prod`,
+      org_id: orgId,
       branch: { name: 'main', role_name: 'app_user', database_name: 'app_db' },
       default_endpoint_settings: {
         autoscaling_limit_min_cu: 0.25,
