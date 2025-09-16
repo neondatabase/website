@@ -1,7 +1,7 @@
 ---
 title: Manage Neon Auth using the API
 enableTableOfContents: true
-updatedOn: '2025-07-25T16:57:32.345Z'
+updatedOn: '2025-09-16T16:49:40.619Z'
 tag: beta
 redirectFrom:
   - /docs/guides/neon-auth-api
