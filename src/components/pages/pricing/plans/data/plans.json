@@ -67,7 +67,7 @@
       "feature": {
         "title": "Rates"
       },
-      "free": "50 CU-hours<span>Per Project</span>",
+      "free": "100 CU-hours<span>Per Project</span>",
       "launch": "$0.14 per CU-hour",
       "scale": "$0.26 per CU-hour"
     },
