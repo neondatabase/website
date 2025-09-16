@@ -120,7 +120,10 @@ async function testNeonApi() {
   try {
     const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
     const tenantId = 'example-tenant';
-    const orgId = process.env.ORG_TARGET === 'prod' ? process.env.NEON_ORG_ID_PROD : process.env.NEON_ORG_ID_DEV;
+    const orgId =
+      process.env.ORG_TARGET === 'prod'
+        ? process.env.NEON_ORG_ID_PROD
+        : process.env.NEON_ORG_ID_DEV;
 
     console.log('Starting Neon API test...');
     console.log(`Tenant ID: ${tenantId}`);
