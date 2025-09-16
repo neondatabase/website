@@ -44,7 +44,6 @@ Find out how you can integrate with Neon.
 
 </DetailIconCards>
 
-
 ## AI agent and codegen platforms
 
 Create autonomous agents that can manage and interact with your Neon databases programmatically.

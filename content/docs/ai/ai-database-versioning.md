@@ -16,9 +16,9 @@ Implement database versioning for AI agent and code generation platforms using N
 This pattern works whether you manage Neon projects for your users (embedded approach) or users bring their own connected Neon accounts.
 
 > **Terminology note:** This guide uses "versions" to describe saved database states from the user's perspective, and "snapshots" when referring to Neon's technical implementation. You may also see these called "checkpoints" or "edits" in some AI agent contexts.
-<Admonition type="tip" title="Quick guide">
-Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
-</Admonition>
+> <Admonition type="tip" title="Quick guide">
+> Target a root branch for production, whose connection string is preserved when a snapshot restore is finalized. Create snapshots to save versions. For rollbacks, restore them with `finalize_restore: true` and `target_branch_id` set to your root branch ID, then poll operations until complete before connecting. For previews, use `finalize_restore: false` to create temporary branches with their own connection strings.
+> </Admonition>
 
 ## Why use snapshots for versioning
 
@@ -40,7 +40,7 @@ The best way to understand this pattern is to see it in action:
 3. Run locally or use the [public demo](https://snapshots-as-checkpoints-demo.vercel.app/) to see version creation, rollbacks, and previews in action
 
 > **Note:** The demo repository uses "checkpoint" terminology which maps to "version" in this guide.
-The demo implements a contacts application that evolves through agent prompts, demonstrating version creation and restoration at each stage:
+> The demo implements a contacts application that evolves through agent prompts, demonstrating version creation and restoration at each stage:
 
 **v0: empty app** → **v1: basic contacts** → **v2: add role/company** → **v3: add tags**
 
@@ -49,7 +49,7 @@ The demo implements a contacts application that evolves through agent prompts, d
 Every agent project maps to one Neon project with a designated [root branch](/docs/reference/glossary#root-branch) that serves as the production database.
 
 > **Important:** Snapshots can only be created from root branches in Neon. A root branch is a branch with no parent (typically named `main` or `production`).
-**The active branch:**
+> **The active branch:**
 
 - Gets its data replaced during finalized rollbacks
 - Maintains a consistent database connection string through Neon's restore mechanism — see [How restore works](#how-restore-works) for details
@@ -74,7 +74,7 @@ POST /api/v2/projects/{project_id}/branches/{branch_id}/snapshot
 ```
 
 > **Demo implementation:** See [lib/neon/create-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/create-snapshot.ts) for an example with error handling and operation polling.
-**Path parameters:**
+> **Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `branch_id` (string, required): The active branch ID (must be a root branch)
@@ -110,7 +110,7 @@ POST /api/v2/projects/{project_id}/snapshots/{snapshot_id}/restore
 ```
 
 > **Demo implementation:** See [lib/neon/apply-snapshot.ts](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo/blob/main/lib/neon/apply-snapshot.ts) for the complete restore workflow including operation polling and error handling.
-**Path parameters:**
+> **Path parameters:**
 
 - `project_id` (string, required): The Neon project ID
 - `snapshot_id` (string, required): The snapshot ID being restored
@@ -153,7 +153,7 @@ Restore any snapshot to your active branch, preserving the connection string:
 ```
 
 > **Important:** When restoring with `finalize_restore: true`, your previous active branch becomes orphaned and is renamed with `(old)` appended, such as `production (old)` or similar. This orphaned branch is no longer connected to any compute endpoint but preserves your pre-restore state. Delete it during cleanup to avoid unnecessary costs.
-After calling the restore API:
+> After calling the restore API:
 
 1. Extract the array of operation IDs from the API response.
 2. For each operation ID, poll the operations endpoint until its status reaches a terminal state (finished, failed, cancelled, or skipped).
@@ -161,7 +161,7 @@ After calling the restore API:
 4. After verifying a successful restore, delete the orphaned branch (e.g., `main (old)`) to avoid incurring storage costs.
 
 > See the [poll operation status](/docs/manage/operations#poll-operation-status) documentation for related information.
-**Polling operations example:**
+> **Polling operations example:**
 
 ```javascript
 // Poll operation status until complete
