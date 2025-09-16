@@ -149,7 +149,7 @@ Example response:
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthprovidersdkkeys)
 
-## Create users
+## Create user
 
 Creates a new user in your auth provider's system.
 
@@ -195,6 +195,25 @@ SELECT id, email, name, created_at FROM neon_auth.users_sync;
 ```
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/createneonauthnewuser)
+
+## Delete user
+
+Deletes an existing user from Neon Auth.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+- `auth_user_id`: The user ID to delete
+
+```bash shouldWrap
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/users/{auth_user_id}' \
+     --header 'authorization: Bearer $NEON_API_KEY'
+```
+
+A successful DELETE returns no response body (`204 No Content`).
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthuser)
 
 ## Transfer to your auth provider
 
@@ -369,6 +388,97 @@ A successful DELETE returns no response body (`204 No Content`).
 You can use the GET endpoint to confirm the provider has been removed.
 
 [Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthoauthprovider)
+
+## Manage redirect URI whitelist
+
+You can programmatically manage the redirect URI whitelist for your Neon Auth project using the Neon API. The following endpoints allow you to list, add, and delete domains from the redirect URI whitelist.
+
+### List domains in redirect URI whitelist
+
+Lists the domains in the redirect URI whitelist for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+
+```bash shouldWrap
+curl --request GET \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/domains' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+Example response:
+
+```json shouldWrap
+{
+  "domains": [
+    {
+      "domain": "https://example.com",
+      "auth_provider": "stack"
+    },
+    {
+      "domain": "https://app.example.com",
+      "auth_provider": "stack"
+    }
+  ]
+}
+```
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/listneonauthredirecturiwhitelistdomains)
+
+### Add domain to redirect URI whitelist
+
+Adds a domain to the redirect URI whitelist for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+- `domain`: The domain to add to the whitelist
+- `auth_provider`: The authentication provider (currently `"stack"`)
+
+```bash shouldWrap
+curl --request POST \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/domains' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "domain": "https://example.com",
+       "auth_provider": "stack"
+     }' | jq
+```
+
+A successful POST returns no response body (`201 Created`).
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/addneonauthdomaintoredirecturiwhitelist)
+
+### Delete domain from redirect URI whitelist
+
+Deletes a domain from the redirect URI whitelist for the specified project.
+
+Required parameters:
+
+- `project_id`: Your Neon project ID
+- `auth_provider`: The authentication provider (currently `"stack"`)
+- `domains`: Array of domain objects to remove from the whitelist
+
+```bash shouldWrap
+curl --request DELETE \
+     --url 'https://console.neon.tech/api/v2/projects/{project_id}/auth/domains' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '{
+       "auth_provider": "stack",
+       "domains": [
+         {
+           "domain": "https://example.com"
+         }
+       ]
+     }' | jq
+```
+
+A successful DELETE returns no response body.
+
+[Try in API Reference ↗](https://api-docs.neon.tech/reference/deleteneonauthdomainfromredirecturiwhitelist)
 
 ## Get email server configuration
 
