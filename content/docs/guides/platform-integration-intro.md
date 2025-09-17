@@ -46,7 +46,7 @@ Find out how you can integrate with Neon.
 
 ## AI agent and codegen platforms
 
-Create autonomous agents that can manage and interact with your Neon databases programmatically.
+Create autonomous agents that can manage and interact with your Neon databases programmatically. For more on this use case, see [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
 
 <DetailIconCards>
 <a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
