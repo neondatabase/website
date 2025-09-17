@@ -5,6 +5,19 @@ enableTableOfContents: true
 updatedOn: '2025-09-10T14:09:12.290Z'
 ---
 
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How the agent plan is organized</p>
+<p>How to use the Neon API to manage users</p>
+<p>Tools that Neon offers to manage your codegen platform</p>
+</DocsList>
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/reference/neondatabase-toolkit">Neon toolkit</a>
+<a href="/docs/guides/platform-integration-intro">Built on Neon</a>
+<a href="/docs/ai/ai-database-versioning">Neon database versioning</a>
+</DocsList>
+</InfoBlock>
+
 ## Agent plan: how it works
 
 Neon creates two organizations in your account so you can separate your tiers.
@@ -26,7 +39,7 @@ Neon creates two organizations in your account so you can separate your tiers.
 
 ### Limits and increases
 
-- Default cap: 10,000 projects per organization (adjustable after review).
+- Default cap: 30,000 projects per organization (adjustable after review).
 - The sponsored organization enforces free-tier-like per-project limits (e.g., storage, active time, compute time).
 - Request an increase if needed; Neon will review and adjust caps when appropriate.
 
@@ -35,38 +48,23 @@ Neon creates two organizations in your account so you can separate your tiers.
 - You are an admin in both organizations and can create projects, branches, configure authentication, and set quotas within the configured limits.
 - Neon manages credits and cap changes.
 
-### Upgrade workflow via project transfer
-
-You decide when to move a user's project from the sponsored organization to the paid organization. Neon does not upgrade or migrate projects automatically.
-
-Primary method — API
-
-- Use the API for automation and scale: `POST /organizations/{source_org_id}/projects/transfer`.
-- Requires a personal API key with access to both organizations
-- Can transfer up to 400 projects per API request
-
-With Neon's API, your agents can:
-
-- Provision PostgreSQL databases in ~500ms
-- Add production-ready authentication
-- Create database snapshots for version control
-- Implement per-user resource limits and usage tracking
-- Scale databases to zero when idle (no compute charges when idle; storage is still billed)
-
-Architecture assumption: This guide uses one Neon project per user for better isolation and security. For detailed architecture patterns and billing models, see the [platform integration getting started guide](/docs/guides/platform-integration-get-started).
+<CTA
+  title="Neon Agent Plan"
+  description="For custom rate limits and dedicated support for your agent platform, apply now."
+  buttonText="Sign Up"
+  buttonUrl="/use-cases/ai-agents"
+/>
 
 ## API Operations
 
 | Action                                                             | Description                                                                | Endpoint                                                                    |
 | ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| **[Create project](#application-provisioning)**                    | Creates a Postgres database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
+| **[Create project](#application-provisioning)**                    | Creates a PostgreSQL database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
 | **[Configure autoscaling](#autoscaling-configuration)**            | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
 | **[Set resource limits](#resource-management)**                    | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
 | **[Add auth](#authentication-setup)**                              | Setup Neon Auth with user synchronized to the `neon_auth.users_sync` table | `POST /projects/auth/create`                                                |
 | **[Configure OAuth](#configure-oauth-providers)**                  | Enable social login (GitHub, Google, Microsoft)                            | `POST /projects/{project_id}/auth/oauth_providers`                          |
-| **[Create snapshots](#snapshot-versioning)**                       | Save database versions (only from root branches)                           | `POST /branches/{branch_id}/snapshot`                                       |
-| **[Restore snapshots](#restore-a-snapshot-rollback)** (production) | `finalize_restore: true` → Preserves connection string, requires polling   | `POST /snapshots/{snapshot_id}/restore`                                     |
-| **[Restore snapshots](#restore-a-snapshot-rollback)** (preview)    | `finalize_restore: false` → New connection string, no polling needed       | `POST /snapshots/{snapshot_id}/restore`                                     |
+| **[Database versioning](#database-versioning)**                    | Save database versions with snapshots (only from root branches)            | `POST /projects/{project_id}/branches/{branch_id}/snapshot`                                       |
 | **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
 | **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
 | **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
@@ -81,6 +79,8 @@ See the pattern in action with a working snapshot database versioning demo.
 
 Demo architecture: meta database (users via Neon Auth, `projects`, `checkpoints`) + per-user app database (one Neon project per user session, URL saved in `projects`).
 
+---
+
 ## Key concepts
 
 - **Root branches** (like `main`): The only branches that can be snapshotted
@@ -91,6 +91,8 @@ Demo architecture: meta database (users via Neon Auth, `projects`, `checkpoints`
 
 Neon's copy-on-write storage enables version-aware backends. Use snapshots, branching, and point-in-time recovery to support undo, checkpoints, and safe experimentation.
 
+---
+
 ## Application provisioning
 
 Your agent provisions databases for each user's applications. The infrastructure is created quickly (under 500ms) and cost-effectively, as databases scale to zero when idle - you only pay when databases are active or storing data.
@@ -100,15 +102,34 @@ Choose the target organization before creating a project:
 - Sponsored organization: development/preview projects
 - Paid organization: production projects
 
-To upgrade a user, transfer their project to the paid organization (see Upgrade workflow). Projects are independent across organizations; transfer moves an existing project rather than copying data.
+To upgrade a user, transfer their project to the paid organization (see [Project transfer details](#project-transfer-details)). Projects are independent across organizations; transfer moves an existing project rather than copying data.
 
 ### Create project with database
 
 The `default_endpoint_settings` in the project creation request automatically configures the compute endpoint with your desired autoscaling and suspension settings.
 
-#### Neon toolkit example
-
-This example uses the neon [@neondatabase/toolkit](/docs/reference/neondatabase-toolkit), while other examples use generic cURL commands. Use the driver of your choice.
+<CodeTabs labels={["API", "Neon Toolkit"]}>
+```bash
+curl -X POST "https://console.neon.tech/api/v2/projects" \
+  -H "Authorization: Bearer $NEON_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "agent-example-prod",
+    "org_id": "org_id_here",
+    "branch": {
+      "name": "main",
+      "role_name": "app_user",
+      "database_name": "app_db"
+    },
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 1,
+      "suspend_timeout_seconds": 300
+    },
+    "pg_version": 17,
+    "region_id": "aws-us-east-2"
+  }'
+```
 
 ```ts
 import { NeonToolkit } from '@neondatabase/toolkit';
@@ -173,6 +194,7 @@ async function testNeonApi() {
 
 testNeonApi();
 ```
+</CodeTabs>
 
 #### Create development branches
 
@@ -195,7 +217,9 @@ curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/branch
   }'
 ```
 
-> Each branch gets a new connection string. Use snapshots for production versioning to preserve connection strings during a restore with `finalize_restore: true`.
+> Each branch gets a new connection string. Use snapshots for [database versioning](#database-versioning) to preserve connection strings during a restore with `finalize_restore: true`.
+
+---
 
 ## Resource management
 
@@ -205,36 +229,31 @@ Track usage per project with detailed information about compute time, storage, a
 
 Organization defaults
 
-- Sponsored organization: apply free-tier-like project limits (e.g., storage, active time, compute time).
+- Sponsored organization: apply free-tier-equivalent project limits (e.g., storage, active time, compute time).
 - Paid organization: apply higher limits aligned to your paid/pro tiers.
 
-### Get project consumption
+For implementation details, see the [querying consumption metrics](/docs/guides/consumption-metrics) guide.
 
-```bash
-curl -X GET "https://console.neon.tech/api/v2/projects/shiny-wind-028834/consumption" \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
+### Project transfer details
 
-**Example response:**
+You decide when to move a user's project from the sponsored organization to the paid organization. Neon does not upgrade or migrate projects automatically.
 
-```json
-{
-  "project_id": "shiny-wind-028834",
-  "period_start": "2024-01-01T00:00:00Z",
-  "period_end": "2024-01-31T23:59:59Z",
-  "compute_time_seconds": 158400,
-  "active_time_seconds": 633600,
-  "data_storage_bytes_hour": 1073741824,
-  "data_transfer_bytes": 5368709120,
-  "written_data_bytes": 2147483648
-}
-```
+Primary method — API
 
-For additional information, see the [querying consumption metrics](/docs/guides/consumption-metrics) guide.
+- Use the API for automation and scale: `POST /organizations/{source_org_id}/projects/transfer`.
+- Requires a personal API key with access to both organizations
+- Can transfer up to 400 projects per API request
+- See the [transfer projects between organizations](/docs/manage/orgs-project-transfer) documentation
 
-### Project transfer (API)
+With Neon's API, your agents can:
 
-[Transfer projects between organizations](/docs/manage/orgs-project-transfer) for upgrades or reorganizations.
+- Provision PostgreSQL databases in ~500ms
+- Add production-ready authentication
+- Create database snapshots for version control
+- Implement per-user resource limits and usage tracking
+- Scale databases to zero when idle (no compute charges when idle; storage is still billed)
+
+Architecture assumption: This guide uses one Neon project per user for better isolation and security. For detailed architecture patterns and billing models, see the [platform integration getting started guide](/docs/guides/platform-integration-get-started).
 
 Endpoint
 `POST /organizations/{source_org_id}/projects/transfer`
@@ -262,6 +281,8 @@ Response
 {}
 ```
 
+---
+
 ## Autoscaling configuration
 
 When provisioning databases for your users, Neon automatically scales compute based on actual usage. The system monitors three metrics and scales to meet whichever requires the most resources:
@@ -274,7 +295,7 @@ This ensures databases get the resources they need without manual intervention.
 
 ### Configure autoscaling ranges
 
-Optionally set autoscaling min/max CUs to match your planned usage. Adjust over time based on observed CPU, memory, and cache pressure. For additional information, see the [autoscaling documentation](/docs/introduction/autoscaling).
+Optionally reconfigure autoscaling min/max CUs to match your planned usage. Adjust over time based on observed CPU, memory, and cache pressure. For additional information, see the [autoscaling documentation](/docs/introduction/autoscaling).
 
 ### Update existing endpoints
 
@@ -308,6 +329,8 @@ curl -X PATCH "https://console.neon.tech/api/v2/projects/$PROJECT_ID/endpoints/$
 ```
 
 **Cost implications**: Compute usage is billed.
+
+---
 
 ## Authentication setup
 
@@ -410,127 +433,13 @@ WHERE email_verified = true
 ORDER BY created_at DESC;
 ```
 
-## Snapshot versioning
+---
+
+## Database versioning
 
 Build full version history into your platform. Your agent can snapshot schema and data at any moment, allowing users to roll back to working versions, preview earlier states, or safely test changes.
 
-**When to use snapshots vs branches:**
-
-- **Snapshots with `finalize_restore: true`**: For production versioning - preserves your connection string during rollback
-- **Snapshots with `finalize_restore: false`**: For preview/testing - creates a new branch with new connection string
-- **Branches**: For development work - always creates new connection string
-
-**Note:** Snapshots can only be created from root branches (branches with no parent, typically named `main` or `production`).
-
-### Create a snapshot (checkpoint)
-
-Use the snapshots API to create a point-in-time database version. Snapshot creation happens asynchronously in the background:
-
-```bash
-curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/branches/br-aged-salad-637688/snapshot?name=version-1.0&expires_at=2025-12-31T23:59:59Z" \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-**Example response:**
-
-```json
-{
-  "snapshot": {
-    "id": "snap-123456",
-    "parent_id": "br-aged-salad-637688",
-    "parent_lsn": "0/1DE2850",
-    "parent_timestamp": "2025-11-15T10:30:00Z",
-    "name": "version-1.0",
-    "created_at": "2025-11-15T10:30:00Z",
-    "expires_at": "2025-12-31T23:59:59Z"
-  },
-  "operations": [
-    {
-      "id": "op-123456",
-      "status": "running",
-      "action": "create_snapshot"
-    }
-  ]
-}
-```
-
-The snapshot is created asynchronously. The database remains fully accessible during creation - no polling required.
-
-### Restore a snapshot (rollback)
-
-Restore to your main branch to rollback while preserving the connection string:
-
-```bash
-curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/snapshots/snap-123456/restore" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "target_branch_id": "br-aged-salad-637688",
-    "finalize_restore": true
-  }'
-```
-
-**Important steps for a restore with `finalize_restore: true`:**
-
-1. Poll operations until complete (the compute endpoint is transferred during restore). Connecting early may return old data.
-2. Delete the orphaned "(old)" branch created as a backup to avoid storage costs.
-3. Then reconnect using the same connection string; it now points to the restored state.
-
-### Create preview from snapshot
-
-Create a temporary preview branch from a snapshot without affecting production:
-
-```bash
-curl -X POST "https://console.neon.tech/api/v2/projects/shiny-wind-028834/snapshots/snap-123456/restore" \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "preview-version-1.0",
-    "finalize_restore": false
-  }'
-```
-
-**Note:** With `finalize_restore: false`:
-
-- Creates a new branch with its own connection string
-- Production database remains unchanged
-- No operation polling required (production endpoint not affected)
-- Remember to delete preview branches after use to avoid costs
-
-### List snapshots (version history)
-
-```bash
-curl -X GET "https://console.neon.tech/api/v2/projects/shiny-wind-028834/snapshots" \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
-
-**Example response:**
-
-```json
-{
-  "snapshots": [
-    {
-      "id": "snap-123456",
-      "parent_id": "br-aged-salad-637688",
-      "name": "preview-version-1.0",
-      "created_at": "2024-01-15T10:30:00Z"
-    },
-    {
-      "id": "snap-789012",
-      "parent_id": "br-aged-salad-637688",
-      "name": "preview-version-2.0",
-      "created_at": "2024-01-16T14:20:00Z"
-    }
-  ]
-}
-```
-
-### Delete snapshot
-
-```bash
-curl -X DELETE "https://console.neon.tech/api/v2/projects/shiny-wind-028834/snapshots/snap-123456" \
-  -H "Authorization: Bearer $NEON_API_KEY"
-```
+For a full guide on this topic, see the [database versioning with snapshots](/docs/ai/ai-database-versioning) guide.
 
 ## Point-in-time recovery (PITR)
 
@@ -550,6 +459,8 @@ curl -X POST "https://console.neon.tech/api/v2/projects/$PROJECT_ID/branches" \
   }'
 ```
 
+---
+
 ## Data API
 
 Transform your database into REST endpoints automatically. The Data API provides instant HTTP access to your database without writing backend code, powered by PostgREST.
@@ -568,11 +479,7 @@ The response includes your unique Data API endpoint URL. Once enabled, you can q
 
 See the [Data API guide](/docs/data-api/get-started) for complete setup, query examples, RLS configuration, and supported client libraries.
 
-## Rate limiting
-
-Neon enforces 700 requests/minute (40 req/sec burst) rate limit by default, as described in the [API reference](https://api-docs.neon.tech/reference/api-rate-limiting).
-
-For high-volume agent platforms, apply for the [Neon Agent Plan](/use-cases/ai-agents) to get custom rate limits.
+---
 
 ## Best practices
 
@@ -602,14 +509,18 @@ For high-volume agent platforms, apply for the [Neon Agent Plan](/use-cases/ai-a
 
 ## Resources
 
-- Roadmap: See the [AI Agents use case](/use-cases/ai-agents) page for updates on upcoming services such as S3-compatible blob storage, email for auth/workflows, and a unified SDK to orchestrate database, auth, storage, and APIs.
-
+- The [AI Agents use case](/use-cases/ai-agents) page contains roadmap updates on upcoming services such as S3-compatible blob storage, email for auth/workflows, and a unified SDK to orchestrate database, auth, storage, and APIs.
 - [Database versioning with Neon snapshots](/docs/ai/ai-database-versioning) - Comprehensive versioning guide with patterns and best practices
 - [Snapshots demo application](https://github.com/neondatabase-labs/snapshots-as-checkpoints-demo) - Complete working example with source code
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 - [Neon Platform Integration Guide](/docs/guides/platform-integration-get-started) - Comprehensive integration best practices
 - [Neon OpenAPI Specification](/api_spec/release/v2.json)
 - [Neon TypeScript SDK](https://github.com/neondatabase/toolkit)
-- [Agent Plan Application](/use-cases/ai-agents)
 
-For custom rate limits and dedicated support for your agent platform, apply for the [Neon Agent Plan](/use-cases/ai-agents).
+<CTA
+  title="Neon Agent Plan"
+  description="For custom rate limits and dedicated support for your agent platform, apply now."
+  buttonText="Sign Up"
+  buttonUrl="/use-cases/ai-agents"
+/>
+
