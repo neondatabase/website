@@ -1030,10 +1030,16 @@
                   slug: guides/grafana-cloud
                 - title: OpenTelemetry
                   slug: guides/opentelemetry
+                - title: Better Stack
+                  slug: guides/betterstack-otel-neon
+                - title: New Relic
+                  slug: guides/newrelic-otel-neon
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
-                - title: Other monitoring tools
-                  slug: introduction/monitor-external-tools
+                - title: pgAdmin
+                  slug: introduction/monitor-pgadmin
+                - title: PgHero
+                  slug: introduction/monitor-pghero
 
         - section: Operations & maintenance
           icon: settings
