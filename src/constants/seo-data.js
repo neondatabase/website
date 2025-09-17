@@ -22,11 +22,6 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
-  aiChat: {
-    title: 'Neon AI Chat',
-    description: 'AI assistant trained on documentation, help articles, and other content',
-    pathname: LINKS.aiChat,
-  },
   awsIsrael: {
     title: 'AWS Launches in Israel — Neon',
     description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',

@@ -1,13 +1,14 @@
 ---
 title: Neon Data API tutorial
-subtitle: Set up our demo note-taking app to learn about postgrest-js queries
+subtitle: Set up our demo note-taking app to learn about Data API queries with
+  postgrest-js
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.254Z'
+updatedOn: '2025-09-10T16:17:30.444Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
-In this tutorial, we'll walk through our note-taking app to show how you can use Neon's Data API and `postgrest-js` to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure.
+In this tutorial, we'll walk through our note-taking app to show how you can use Neon's Data API with the `postgrest-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 
 ## About the sample application
 

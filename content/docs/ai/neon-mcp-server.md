@@ -1,14 +1,14 @@
 ---
-title: Neon MCP Server
-subtitle: Manage your Neon Postgres databases using natural language commands with the
-  Neon MCP Server.
+title: Neon MCP Server overview
+subtitle: Learn about managing your Neon projects using natural language with Neon MCP
+  Server
 enableTableOfContents: true
-updatedOn: '2025-08-29T17:29:01.378Z'
+updatedOn: '2025-09-13T09:38:53.466Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-> **Quick install for Cursor:** Click the button below. When prompted, click **Install within Cursor**.
+> To get started connecting an MCP Client like **Cursor**, **Claude Code**, **VS Code**, **Windsurf**, **ChatGPT**, and others, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon). If you're using **Cursor**, you can click the button below for a quick install. When prompted, click **Install within Cursor**.
 
 <a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
 
@@ -38,7 +38,7 @@ Traditionally, connecting AI models to different data sources required developer
 
 ### What is Neon MCP server?
 
-**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP Clients (like Claude Desktop, Claude Code, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
+**Neon MCP Server** acts as the **Server** in the MCP architecture, specifically designed for Neon. It provides a set of **tools** that MCP clients (like Claude Desktop, Claude Code, Cursor) can utilize to manage Neon resources. This includes actions for project management, branch management, executing SQL queries, and handling database migrations, all driven by natural language requests.
 
 **Key Benefits of using Neon MCP Server:**
 
@@ -66,7 +66,7 @@ The remote hosted MCP server is currently in its preview phase. As the [OAuth sp
 
 #### Prerequisites:
 
-- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed).
+- An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed, ChatGPT).
 - A Neon account.
 
 <Admonition type="tip" title="Install in a single click for Cursor users">
@@ -184,15 +184,6 @@ sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
 width={960}
 height={1080}
 />
-
-You can also refer to our individual guides for detailed examples on using the Neon MCP Server with specific MCP clients:
-
-- [Claude Desktop](/guides/neon-mcp-server)
-- [Claude Code](/guides/claude-code-mcp-neon)
-- [Cursor](/guides/cursor-mcp-neon)
-- [Cline](/guides/cline-mcp-neon)
-- [Windsurf (Codium)](/guides/windsurf-mcp-neon)
-- [Zed](/guides/zed-mcp-neon)
 
 ## API key-based authentication
 

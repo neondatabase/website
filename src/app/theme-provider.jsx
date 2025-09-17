@@ -18,7 +18,7 @@ const whiteThemePages = [
   '/business-info',
 ];
 
-const themesSupportPages = ['/docs', '/guides', '/templates', '/postgresql', '/ai-chat'];
+const themesSupportPages = ['/docs', '/guides', '/templates', '/postgresql'];
 
 const ThemeColorUpdater = () => {
   const { theme, resolvedTheme } = useTheme();

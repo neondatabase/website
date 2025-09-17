@@ -1,5 +1,6 @@
-.ikp-ai-chat-footer__footer {
-  align-items: center;
+.ikp-modal__content {
+  min-width: 0 !important;
+  max-width: 640px;
 }
 
 .ikp-tagline {
