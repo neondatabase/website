@@ -57,18 +57,18 @@ Neon creates two organizations in your account so you can separate your tiers.
 
 ## API Operations
 
-| Action                                                             | Description                                                                | Endpoint                                                                    |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| **[Create project](#application-provisioning)**                    | Creates a PostgreSQL database in ~500ms with automatic scale-to-zero         | `POST /projects`                                                            |
-| **[Configure autoscaling](#autoscaling-configuration)**            | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
-| **[Set resource limits](#resource-management)**                    | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
-| **[Add auth](#authentication-setup)**                              | Setup Neon Auth with user synchronized to the `neon_auth.users_sync` table | `POST /projects/auth/create`                                                |
-| **[Configure OAuth](#configure-oauth-providers)**                  | Enable social login (GitHub, Google, Microsoft)                            | `POST /projects/{project_id}/auth/oauth_providers`                          |
-| **[Database versioning](#database-versioning)**                    | Save database versions with snapshots (only from root branches)            | `POST /projects/{project_id}/branches/{branch_id}/snapshot`                                       |
-| **[Create dev branches](#create-development-branches)**            | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
-| **[Enable Data API](#data-api)**                                   | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
-| **[Monitor usage](#get-project-consumption)**                      | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
-| **[Transfer projects (between orgs)](#project-transfer-api)**      | Move projects from sponsored to paid (or reverse)                          | `POST /organizations/{source_org_id}/projects/transfer`                     |
+| Action                                                        | Description                                                                | Endpoint                                                                    |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **[Create project](#application-provisioning)**               | Creates a PostgreSQL database in ~500ms with automatic scale-to-zero       | `POST /projects`                                                            |
+| **[Configure autoscaling](#autoscaling-configuration)**       | Set compute limits (0.25-8 CU) based on user tiers                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
+| **[Set resource limits](#resource-management)**               | Enforce compute/storage quotas based on user tiers                         | `PATCH /projects/{project_id}`                                              |
+| **[Add auth](#authentication-setup)**                         | Setup Neon Auth with user synchronized to the `neon_auth.users_sync` table | `POST /projects/auth/create`                                                |
+| **[Configure OAuth](#configure-oauth-providers)**             | Enable social login (GitHub, Google, Microsoft)                            | `POST /projects/{project_id}/auth/oauth_providers`                          |
+| **[Database versioning](#database-versioning)**               | Save database versions with snapshots (only from root branches)            | `POST /projects/{project_id}/branches/{branch_id}/snapshot`                 |
+| **[Create dev branches](#create-development-branches)**       | Create isolated development environments                                   | `POST /projects/{project_id}/branches`                                      |
+| **[Enable Data API](#data-api)**                              | Transform database tables into REST endpoints                              | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
+| **[Monitor usage](#get-project-consumption)**                 | Track resource consumption metrics                                         | `GET /projects/{project_id}/consumption`                                    |
+| **[Transfer projects (between orgs)](#project-transfer-api)** | Move projects from sponsored to paid (or reverse)                          | `POST /organizations/{source_org_id}/projects/transfer`                     |
 
 ## Quick start with the demo
 
@@ -109,6 +109,7 @@ To upgrade a user, transfer their project to the paid organization (see [Project
 The `default_endpoint_settings` in the project creation request automatically configures the compute endpoint with your desired autoscaling and suspension settings.
 
 <CodeTabs labels={["API", "Neon Toolkit"]}>
+
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects" \
   -H "Authorization: Bearer $NEON_API_KEY" \
@@ -194,6 +195,7 @@ async function testNeonApi() {
 
 testNeonApi();
 ```
+
 </CodeTabs>
 
 #### Create development branches
@@ -523,4 +525,3 @@ See the [Data API guide](/docs/data-api/get-started) for complete setup, query e
   buttonText="Sign Up"
   buttonUrl="/use-cases/ai-agents"
 />
-
