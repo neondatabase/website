@@ -1,8 +1,46 @@
 ---
 title: 'AI Rules: Neon API'
-subtitle: Context rules for AI tools to programmatically manage Neon projects, branches, databases, and other resources using the Neon API.
+subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon projects, branches, databases, and other resources.
 enableTableOfContents: true
-updatedOn: '2025-09-09T00:00:00.000Z'
+updatedOn: '2025-09-17T00:00:00.000Z'
+---
+
+<InfoBlock>
+<DocsList title="Related docs" theme="docs">
+  <a href="/docs/reference/api-reference">Neon API</a>
+</DocsList>
+
+<DocsList title="Repository" theme="repo">
+  <a href="https://api-docs.neon.tech/reference/getting-started-with-neon-api">Neon API Reference Docs</a>
+</DocsList>
+</InfoBlock>
+
+## How to use
+
+You can use the following Neon API rules in two ways:
+
+<Steps>
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/file_name.mdc` and they'll be automatically applied when working with matching files.
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon API. You can also reference them explicitly in prompts.
+</Steps>
+
+## Neon API rules: General guidelines
+
+Save the following content to a file named `neon-api-guidelines.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
+---
+description: Use these rules to understand how to interact with the Neon API, including authentication, rate limiting, and best practices.
+alwaysApply: false
 ---
 
 ## Overview
@@ -33,54 +71,78 @@ To construct a full request URL, append the specific endpoint path to this base 
 - If the rate limit is exceeded, the API will respond with an `HTTP 429 Too Many Requests` error.
 - Your application logic must handle `429` errors and implement a retry strategy with appropriate backoff.
 
----
+### Neon Core Concepts
+
+To effectively use the Neon Python SDK, it's essential to understand the hierarchy and purpose of its core resources. The following table provides a high-level overview of each concept.
+
+| Concept          | Description                                                                                                                        | Analogy/Purpose                                                                                                 | Key Relationship                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Organization     | The highest-level container, managing billing, users, and multiple projects.                                                       | A GitHub Organization or a company's cloud account.                                                             | Contains one or more Projects.                                                                        |
+| Project          | The primary container that contains all related database resources for a single application or service.                            | A Git repository or a top-level folder for an application.                                                      | Lives within an Organization (or a personal account). Contains Branches.                              |
+| Branch           | A lightweight, copy-on-write clone of a database's state at a specific point in time.                                              | A `git branch`. Used for isolated development, testing, staging, or previews without duplicating storage costs. | Belongs to a Project. Contains its own set of Databases and Roles, cloned from its parent.            |
+| Compute Endpoint | The actual running PostgreSQL instance that you connect to. It provides the CPU and RAM for processing queries.                    | The "server" or "engine" for your database. It can be started, suspended (scaled to zero), and resized.         | Is attached to a single Branch. Your connection string points to a Compute Endpoint's hostname.       |
+| Database         | A logical container for your data (tables, schemas, views) within a branch. It follows standard PostgreSQL conventions.            | A single database within a PostgreSQL server instance.                                                          | Exists within a Branch. A branch can have multiple databases.                                         |
+| Role             | A PostgreSQL role used for authentication (logging in) and authorization (permissions to access data).                             | A database user account with a username and password.                                                           | Belongs to a Branch. Roles from a parent branch are copied to child branches upon creation.           |
+| API Key          | A secret token used to authenticate requests to the Neon API. Keys have different scopes (Personal, Organization, Project-scoped). | A password for programmatic access, allowing you to manage all other Neon resources.                            | Authenticates actions on Organizations, Projects, Branches, etc.                                      |
+| Operation        | An asynchronous action performed by the Neon control plane, such as creating a branch or starting a compute.                       | A background job or task. Its status can be polled to know when an action is complete.                          | Associated with a Project and often a specific Branch or Endpoint. Essential for scripting API calls. |
 
 ### Understanding API key types
 
 When performing actions via the API, you must select the correct type of API key based on the required scope and permissions. There are three types:
 
-**1. Personal API Key**
+1. Personal API Key
 
-- **Scope**: Accesses all projects that the user who created the key is a member of.
-- **Permissions**: The key has the same permissions as its owner. If the user's access is revoked from an organization, the key loses access too.
-- **Best For**: Individual use, scripting, and tasks tied to a specific user's permissions.
-- **Created By**: Any user.
+- Scope: Accesses all projects that the user who created the key is a member of.
+- Permissions: The key has the same permissions as its owner. If the user's access is revoked from an organization, the key loses access too.
+- Best For: Individual use, scripting, and tasks tied to a specific user's permissions.
+- Created By: Any user.
 
-**2. Organization API Key**
+2. Organization API Key
 
-- **Scope**: Accesses **all** projects and resources within an entire organization.
-- **Permissions**: Has admin-level access across the organization, independent of any single user. It remains valid even if the creator leaves the organization.
-- **Best For**: CI/CD pipelines, organization-wide automation, and service accounts that need broad access.
-- **Created By**: Organization administrators only.
+- Scope: Accesses all projects and resources within an entire organization.
+- Permissions: Has admin-level access across the organization, independent of any single user. It remains valid even if the creator leaves the organization.
+- Best For: CI/CD pipelines, organization-wide automation, and service accounts that need broad access.
+- Created By: Organization administrators only.
 
-**3. Project-scoped API Key**
+3. Project-scoped API Key
 
-- **Scope**: Access is strictly limited to a **single, specified project**.
-- **Permissions**: Cannot perform organization-level actions (like creating new projects) or delete the project it is scoped to. This is the most secure and limited key type.
-- **Best For**: Project-specific integrations, third-party services, or automation that should be isolated to one project.
-- **Created By**: Any organization member.
+- Scope: Access is strictly limited to a single, specified project.
+- Permissions: Cannot perform organization-level actions (like creating new projects) or delete the project it is scoped to. This is the most secure and limited key type.
+- Best For: Project-specific integrations, third-party services, or automation that should be isolated to one project.
+- Created By: Any organization member.
+````
 
+## Neon API rules: Manage API keys
+
+Save the following content to a file named `neon-api-keys.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
+---
+description: Use these rules to manage Neon API keys programmatically, including creating, listing, and revoking keys.
+alwaysApply: false
 ---
 
-## Manage API keys
+## Overview
 
-### Prerequisites
+This document outlines the rules for managing Neon API keys programmatically. It covers listing existing keys, creating new keys, and revoking keys.
 
-To create new API keys using the API, you must already possess a valid **Personal API Key**. The first key must be created from the Neon Console. You can ask the user to create one for you if you do not have one.
+### Important note on creating API keys
+
+To create new API keys using the API, you must already possess a valid Personal API Key. The first key must be created from the Neon Console. You can ask the user to create one for you if you do not have one.
 
 ### List API keys
 
-- **Endpoint**: `GET /api_keys`
-- **Authorization**: Use a Personal API Key.
+- Endpoint: `GET /api_keys`
+- Authorization: Use a Personal API Key.
 
-**Example request**:
+Example request:
 
 ```bash
 curl "https://console.neon.tech/api/v2/api_keys" \
   -H "Authorization: Bearer $PERSONAL_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 [
@@ -101,11 +163,11 @@ curl "https://console.neon.tech/api/v2/api_keys" \
 
 ### Create an API key
 
-- **Endpoint**: `POST /api_keys`
-- **Authorization**: Use a Personal API Key.
-- **Body**: Must include a `key_name`.
+- Endpoint: `POST /api_keys`
+- Authorization: Use a Personal API Key.
+- Body: Must include a `key_name`.
 
-**Example request**:
+Example request:
 
 ```bash
 curl https://console.neon.tech/api/v2/api_keys \
@@ -114,7 +176,7 @@ curl https://console.neon.tech/api/v2/api_keys \
   -d '{"key_name": "my-new-key"}'
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -128,10 +190,10 @@ curl https://console.neon.tech/api/v2/api_keys \
 
 ### Revoke an API key
 
-- **Endpoint**: `DELETE /api_keys/{key_id}`
-- **Authorization**: Use a Personal API Key.
+- Endpoint: `DELETE /api_keys/{key_id}`
+- Authorization: Use a Personal API Key.
 
-**Example request**:
+Example request:
 
 ```bash
 curl -X DELETE \
@@ -139,7 +201,7 @@ curl -X DELETE \
   -H "Authorization: Bearer $PERSONAL_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -152,8 +214,21 @@ curl -X DELETE \
   "revoked": true
 }
 ```
+````
 
+## Neon API rules: Manage operations
+
+Save the following content to a file named `neon-api-operations.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
 ---
+description: Use these rules to manage and monitor long-running operations in Neon, such as branch creation and compute management.
+alwaysApply: false
+---
+
+## Overview
+
+This document outlines the rules for managing and monitoring long-running operations in Neon, including branch creation and compute management.
 
 ## Operations
 
@@ -161,19 +236,19 @@ An operation is an action performed by the Neon Control Plane (e.g., `create_bra
 
 ### List operations
 
-1.  **Action**: Retrieves a list of operations for the specified Neon project. The number of operations can be large, so pagination is recommended.
-2.  **Endpoint**: `GET /projects/{project_id}/operations`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project whose operations you want to list.
-4.  **Query Parameters**:
+1.  Action: Retrieves a list of operations for the specified Neon project. The number of operations can be large, so pagination is recommended.
+2.  Endpoint: `GET /projects/{project_id}/operations`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project whose operations you want to list.
+4.  Query Parameters:
     - `limit` (integer, optional): The number of operations to return in the response. Must be between 1 and 1000.
     - `cursor` (string, optional): The cursor value from a previous response to fetch the next page of operations.
-5.  **Procedure**:
+5.  Procedure:
     - Make an initial request with a `limit` to get the first page of results.
     - The response will contain a `pagination.cursor` value.
     - To get the next page, make a subsequent request including both the `limit` and the `cursor` from the previous response.
 
-**Example request**
+Example request
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations' \
@@ -181,7 +256,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -265,13 +340,13 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations
 
 ### Retrieve operation details
 
-1.  **Action**: Retrieves the details and status of a single, specified operation. The `operation_id` is found in the response body of the initial API call that initiated it, or by listing operations.
-2.  **Endpoint**: `GET /projects/{project_id}/operations/{operation_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project where the operation occurred.
-    - `operation_id` (UUID, **required**): The unique identifier of the operation. This ID is returned in the response body of the API call that initiated the operation.
+1.  Action: Retrieves the details and status of a single, specified operation. The `operation_id` is found in the response body of the initial API call that initiated it, or by listing operations.
+2.  Endpoint: `GET /projects/{project_id}/operations/{operation_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project where the operation occurred.
+    - `operation_id` (UUID, required): The unique identifier of the operation. This ID is returned in the response body of the API call that initiated the operation.
 
-**Example request:**
+Example request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations/274e240f-e2fb-4719-b796-c1ab7c4ae91c' \
@@ -279,7 +354,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -297,25 +372,36 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/operations
   }
 }
 ```
+````
 
+## Neon API rules: Manage projects
+
+Save the following content to a file named `neon-api-projects.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
 ---
+description: Use these rules to manage Neon projects programmatically, including creating, listing, updating, and deleting projects.
+alwaysApply: false
+---
+
+## Overview
+
+This document outlines the rules for managing Neon projects programmatically. It covers creation, retrieval, updates, and deletion.
 
 ## Manage projects
 
-This section provides detailed rules for managing Neon projects, including creation, retrieval, updates, and deletion.
-
 ### List projects
 
-1.  **Action**: Retrieves a list of all projects accessible to the account associated with the API key. This is the primary method for obtaining `project_id` values required for other API calls.
-2.  **Endpoint**: `GET /projects`
-3.  **Query Parameters**:
+1.  Action: Retrieves a list of all projects accessible to the account associated with the API key. This is the primary method for obtaining `project_id` values required for other API calls.
+2.  Endpoint: `GET /projects`
+3.  Query Parameters:
     - `limit` (optional, integer, default: 10): Specifies the number of projects to return, from 1 to 400.
     - `cursor` (optional, string): Used for pagination. Provide the `cursor` value from a previous response to fetch the next set of projects.
     - `search` (optional, string): Filters projects by a partial match on the project `name` or `id`.
     - `org_id` (optional, string): Filters projects by a specific organization ID.
 4.  When iterating through all projects, use a combination of the `limit` and `cursor` parameters to handle pagination correctly.
 
-**Example request**:
+Example request:
 
 ```bash
 # Retrieve the first 10 projects
@@ -324,7 +410,7 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -383,11 +469,11 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10' \
 
 ### Create project
 
-1.  **Action**: Creates a new Neon project. You can specify a wide range of settings at creation time, including the region, Postgres version, default branch and compute configurations, and security settings.
-2.  **Endpoint**: `POST /projects`
-3.  **Body Parameters**: The request body must contain a top-level `project` object with the following nested attributes:
+1.  Action: Creates a new Neon project. You can specify a wide range of settings at creation time, including the region, Postgres version, default branch and compute configurations, and security settings.
+2.  Endpoint: `POST /projects`
+3.  Body Parameters: The request body must contain a top-level `project` object with the following nested attributes:
 
-    `project` (object, **required**): The main container for all project settings.
+    `project` (object, required): The main container for all project settings.
     - `name` (string, optional): A descriptive name for the project (1-256 characters). If omitted, the project name will be identical to its generated ID.
     - `pg_version` (integer, optional): The major Postgres version. Defaults to `17`. Supported versions: 14, 15, 16, 17, 18.
     - `region_id` (string, optional): The identifier for the region where the project will be created (e.g., `aws-us-east-1`).
@@ -411,15 +497,15 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10' \
         - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
       - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`.
       - `maintenance_window` (object, optional): The time period for scheduled maintenance.
-        - `weekdays` (array of integers, **required** if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
-        - `start_time` (string, **required** if `maintenance_window` is set): Start time in "HH:MM" UTC format.
-        - `end_time` (string, **required** if `maintenance_window` is set): End time in "HH:MM" UTC format.
+        - `weekdays` (array of integers, required if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
+        - `start_time` (string, required if `maintenance_window` is set): Start time in "HH:MM" UTC format.
+        - `end_time` (string, required if `maintenance_window` is set): End time in "HH:MM" UTC format.
     - `branch` (object, optional): Configuration for the project's default branch.
       - `name` (string, optional): The name for the default branch. Defaults to `main`.
       - `role_name` (string, optional): The name for the default role. Defaults to `{database_name}_owner`.
       - `database_name` (string, optional): The name for the default database. Defaults to `neondb`.
 
-**Example request**
+Example request
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects' \
@@ -434,7 +520,7 @@ curl -X POST 'https://console.neon.tech/api/v2/projects' \
 }'
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -591,13 +677,13 @@ curl -X POST 'https://console.neon.tech/api/v2/projects' \
 
 ### Retrieve project details
 
-1.  **Action**: Retrieves detailed information about a single, specific project.
-2.  **Endpoint**: `GET /projects/{project_id}`
-3.  **Prerequisite**: You must have the `project_id` of the project you wish to retrieve.
-4.  **Path Parameters**:
+1.  Action: Retrieves detailed information about a single, specific project.
+2.  Endpoint: `GET /projects/{project_id}`
+3.  Prerequisite: You must have the `project_id` of the project you wish to retrieve.
+4.  Path Parameters:
     - `project_id` (required, string): The unique identifier of the project.
 
-**Example request**:
+Example request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
@@ -605,7 +691,7 @@ curl 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -668,13 +754,13 @@ curl 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
 
 ### Update a project
 
-1.  **Action**: Updates the settings of a specified project. This endpoint is used to modify a wide range of project attributes after creation, such as its name, default compute settings, security policies, and maintenance schedules.
-2.  **Endpoint**: `PATCH /projects/{project_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project to update.
-4.  **Body Parameters**: The request body must contain a top-level `project` object with the attributes to be updated.
+1.  Action: Updates the settings of a specified project. This endpoint is used to modify a wide range of project attributes after creation, such as its name, default compute settings, security policies, and maintenance schedules.
+2.  Endpoint: `PATCH /projects/{project_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project to update.
+4.  Body Parameters: The request body must contain a top-level `project` object with the attributes to be updated.
 
-    `project` (object, **required**): The main container for the settings you want to modify.
+    `project` (object, required): The main container for the settings you want to modify.
     - `name` (string, optional): A new descriptive name for the project.
     - `history_retention_seconds` (integer, optional): The duration in seconds (0 to 2,592,000) to retain project history.
     - `default_endpoint_settings` (object, optional): New default settings for compute endpoints created in this project.
@@ -693,9 +779,9 @@ curl 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
         - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
       - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`. This is irreversible.
       - `maintenance_window` (object, optional): The time period for scheduled maintenance.
-        - `weekdays` (array of integers, **required** if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
-        - `start_time` (string, **required** if `maintenance_window` is set): Start time in "HH:MM" UTC format.
-        - `end_time` (string, **required** if `maintenance_window` is set): End time in "HH:MM" UTC format.
+        - `weekdays` (array of integers, required if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
+        - `start_time` (string, required if `maintenance_window` is set): Start time in "HH:MM" UTC format.
+        - `end_time` (string, required if `maintenance_window` is set): End time in "HH:MM" UTC format.
       - `block_public_connections` (boolean, optional): If `true`, disallows connections from the public internet.
       - `block_vpc_connections` (boolean, optional): If `true`, disallows connections from VPC endpoints.
       - `audit_log_level` (string, optional): Sets the audit log level. Allowed values: `base`, `extended`, `full`.
@@ -704,7 +790,7 @@ curl 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
         - `use_defaults` (boolean, optional): Toggles the use of default libraries.
         - `enabled_libraries` (array of strings, optional): A list of specific libraries to enable.
 
-**Example request**
+Example request
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322' \
@@ -718,7 +804,7 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322
 }'
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -775,14 +861,14 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/sparkling-hill-99143322
 
 ### Delete project
 
-1.  **Action**: Permanently deletes a project and all of its associated resources, including all branches, computes, databases, and roles.
-2.  **Endpoint**: `DELETE /projects/{project_id}`
-3.  **Prerequisite**: You must have the `project_id` of the project you wish to delete.
-4.  **Warning**: This is a destructive action that cannot be undone. It deletes all data, databases, and resources in the project. Proceed with extreme caution and confirm with the user before executing this operation.
-5.  **Path Parameters**:
+1.  Action: Permanently deletes a project and all of its associated resources, including all branches, computes, databases, and roles.
+2.  Endpoint: `DELETE /projects/{project_id}`
+3.  Prerequisite: You must have the `project_id` of the project you wish to delete.
+4.  Warning: This is a destructive action that cannot be undone. It deletes all data, databases, and resources in the project. Proceed with extreme caution and confirm with the user before executing this operation.
+5.  Path Parameters:
     - `project_id` (required, string): The unique identifier of the project to be deleted.
 
-**Example request**:
+Example request:
 
 ```bash
 curl -X 'DELETE' \
@@ -791,7 +877,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -848,10 +934,10 @@ curl -X 'DELETE' \
 
 ### Retrieve connection URI
 
-1.  **Action**: Retrieves a ready-to-use connection URI for a specific database within a project.
-2.  **Endpoint**: `GET /projects/{project_id}/connection_uri`
-3.  **Prerequisites**: You must know the `project_id`, `database_name`, and `role_name`.
-4.  **Query Parameters**:
+1.  Action: Retrieves a ready-to-use connection URI for a specific database within a project.
+2.  Endpoint: `GET /projects/{project_id}/connection_uri`
+3.  Prerequisites: You must know the `project_id`, `database_name`, and `role_name`.
+4.  Query Parameters:
     - `project_id` (path, required): The unique identifier of the project.
     - `database_name` (query, required): The name of the target database.
     - `role_name` (query, required): The role to use for the connection.
@@ -859,7 +945,7 @@ curl -X 'DELETE' \
     - `pooled` (query, optional, boolean): If set to `false`, returns a direct connection URI instead of a pooled one. Defaults to `true`.
     - `endpoint_id` (query, optional): The specific endpoint ID to connect to. Defaults to the `read-write` endpoint_id associated with the `branch_id` if not specified.
 
-**Example request**:
+Example request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/old-fire-32990194/connection_uri?database_name=neondb&role_name=neondb_owner' \
@@ -867,30 +953,41 @@ curl 'https://console.neon.tech/api/v2/projects/old-fire-32990194/connection_uri
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
   "uri": "postgresql://neondb_owner:npg_IDNnorOST71P@ep-shiny-morning-a1bfdvjs-pooler.ap-southeast-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require"
 }
 ```
+````
 
+## Neon API Rules: Manage Branches
+
+Save the following content to a file named `neon-api-branches.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
 ---
+description: This section provides detailed rules for managing branches within a Neon project.
+alwaysApply: false
+---
+
+## Overview
+
+This document outlines the rules for managing branches in a Neon project using the Neon API.
 
 ## Manage branches
 
-This section provides detailed rules for managing branches within a Neon project.
-
 ### Create branch
 
-1.  **Action**: Creates a new branch within a specified project. By default, a branch is created from the project's default branch, but you can specify a parent branch, a point-in-time (LSN or timestamp), and attach compute endpoints.
-2.  **Endpoint**: `POST /projects/{project_id}/branches`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project where the branch will be created.
-4.  **Body Parameters**: The request body is optional. If provided, it can contain `endpoints` and/or `branch` objects.
+1.  Action: Creates a new branch within a specified project. By default, a branch is created from the project's default branch, but you can specify a parent branch, a point-in-time (LSN or timestamp), and attach compute endpoints.
+2.  Endpoint: `POST /projects/{project_id}/branches`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project where the branch will be created.
+4.  Body Parameters: The request body is optional. If provided, it can contain `endpoints` and/or `branch` objects.
 
     `endpoints` (array of objects, optional): A list of compute endpoints to create and attach to the new branch.
-    - `type` (string, **required**): The endpoint type. Allowed values: `read_write`, `read_only`.
+    - `type` (string, required): The endpoint type. Allowed values: `read_write`, `read_only`.
     - `autoscaling_limit_min_cu` (number, optional): The minimum number of Compute Units (CU). Minimum value is `0.25`.
     - `autoscaling_limit_max_cu` (number, optional): The maximum number of Compute Units (CU). Minimum value is `0.25`.
     - `provisioner` (string, optional): The compute provisioner. Specify `k8s-neonvm` to enable Autoscaling. Allowed values: `k8s-pod`, `k8s-neonvm`.
@@ -905,7 +1002,7 @@ This section provides detailed rules for managing branches within a Neon project
     - `init_source` (string, optional): The source for branch initialization. `parent-data` (default) copies schema and data. `schema-only` creates a new root branch with only the schema from the specified parent.
     - `expires_at` (string, optional): An RFC 3339 timestamp for when the branch should be automatically deleted (e.g., `2025-06-09T18:02:16Z`).
 
-**Example: Create a branch from a specific parent with a read-write compute**
+Example: Create a branch from a specific parent with a read-write compute
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches' \
@@ -925,7 +1022,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches' 
 }'
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -1041,18 +1138,18 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches' 
 
 ### List branches
 
-1.  **Action**: Retrieves a list of branches for the specified project. Supports filtering, sorting, and pagination.
-2.  **Endpoint**: `GET /projects/{project_id}/branches`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-4.  **Query Parameters**:
+1.  Action: Retrieves a list of branches for the specified project. Supports filtering, sorting, and pagination.
+2.  Endpoint: `GET /projects/{project_id}/branches`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+4.  Query Parameters:
     - `search` (string, optional): Filters branches by a partial match on name or ID.
     - `sort_by` (string, optional): The field to sort by. Allowed values: `name`, `created_at`, `updated_at`. Defaults to `updated_at`.
     - `sort_order` (string, optional): The sort order. Allowed values: `asc`, `desc`. Defaults to `desc`.
     - `limit` (integer, optional): The number of branches to return (1 to 10000).
     - `cursor` (string, optional): The cursor from a previous response for pagination.
 
-**Example: List all branches sorted by creation date**
+Example: List all branches sorted by creation date
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches?sort_by=created_at&sort_order=asc' \
@@ -1060,7 +1157,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches?s
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example response**
+Example response
 
 ```json
 {
@@ -1176,13 +1273,13 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches?s
 
 ### Retrieve branch details
 
-1.  **Action**: Retrieves detailed information about a specific branch, including its parent, creation timestamp, and state.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
+1.  Action: Retrieves detailed information about a specific branch, including its parent, creation timestamp, and state.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u' \
@@ -1190,7 +1287,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1237,18 +1334,18 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Update branch
 
-1.  **Action**: Updates the properties of a specified branch, such as its name, protection status, or expiration time.
-2.  **Endpoint**: `PATCH /projects/{project_id}/branches/{branch_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch to update.
-4.  **Body Parameters**:
-    `branch` (object, **required**): The container for the branch attributes to update.
+1.  Action: Updates the properties of a specified branch, such as its name, protection status, or expiration time.
+2.  Endpoint: `PATCH /projects/{project_id}/branches/{branch_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch to update.
+4.  Body Parameters:
+    `branch` (object, required): The container for the branch attributes to update.
     - `name` (string, optional): A new name for the branch (max 256 characters).
     - `protected` (boolean, optional): Set to `true` to protect the branch or `false` to unprotect it.
     - `expires_at` (string or null, optional): Set a new RFC 3339 expiration timestamp or `null` to remove the expiration.
 
-**Example: Change branch name**:
+Example: Change branch name:
 
 ```bash
 curl -X 'PATCH' \
@@ -1263,7 +1360,7 @@ curl -X 'PATCH' \
 }'
 ```
 
-**Example response**:
+Example response:
 
 ```json
 {
@@ -1300,16 +1397,16 @@ curl -X 'PATCH' \
 
 ### Delete branch
 
-1.  **Action**: Deletes the specified branch from a project. This action will also place all associated compute endpoints into an idle state, breaking any active client connections.
-2.  **Endpoint**: `DELETE /projects/{project_id}/branches/{branch_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch to delete.
-4.  **Constraints**:
+1.  Action: Deletes the specified branch from a project. This action will also place all associated compute endpoints into an idle state, breaking any active client connections.
+2.  Endpoint: `DELETE /projects/{project_id}/branches/{branch_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch to delete.
+4.  Constraints:
     - You cannot delete a project's root or default branch.
     - You cannot delete a branch that has child branches. You must delete all child branches first.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -1318,7 +1415,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1380,14 +1477,14 @@ curl -X 'DELETE' \
 
 ### List branch endpoints
 
-1.  **Action**: Retrieves a list of all compute endpoints that are associated with a specific branch.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/endpoints`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch whose endpoints you want to list.
+1.  Action: Retrieves a list of all compute endpoints that are associated with a specific branch.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}/endpoints`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch whose endpoints you want to list.
 4.  A branch can have one `read_write` compute endpoint and multiple `read_only` endpoints. This method returns an array of all endpoints currently attached to the specified branch.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/endpoints' \
@@ -1395,7 +1492,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1459,17 +1556,17 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Create database
 
-1.  **Action**: Creates a new database within a specified branch. A branch can contain multiple databases.
-2.  **Endpoint**: `POST /projects/{project_id}/branches/{branch_id}/databases`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch where the database will be created.
-4.  **Body Parameters**:
-    `database` (object, **required**): The container for the new database's properties.
-    - `name` (string, **required**): The name for the new database.
-    - `owner_name` (string, **required**): The name of an existing role that will own the database.
+1.  Action: Creates a new database within a specified branch. A branch can contain multiple databases.
+2.  Endpoint: `POST /projects/{project_id}/branches/{branch_id}/databases`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch where the database will be created.
+4.  Body Parameters:
+    `database` (object, required): The container for the new database's properties.
+    - `name` (string, required): The name for the new database.
+    - `owner_name` (string, required): The name of an existing role that will own the database.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/databases' \
@@ -1484,7 +1581,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 }'
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1515,13 +1612,13 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### List databases
 
-1.  **Action**: Retrieves a list of all databases within a specified branch.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/databases`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
+1.  Action: Retrieves a list of all databases within a specified branch.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}/databases`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/databases' \
@@ -1529,7 +1626,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1556,14 +1653,14 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Retrieve database details
 
-1.  **Action**: Retrieves detailed information about a specific database within a branch.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
-    - `database_name` (string, **required**): The name of the database.
+1.  Action: Retrieves detailed information about a specific database within a branch.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
+    - `database_name` (string, required): The name of the database.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/databases/my_new_app_db' \
@@ -1571,7 +1668,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1588,18 +1685,18 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Update database
 
-1.  **Action**: Updates the properties of a specified database, such as its name or owner.
-2.  **Endpoint**: `PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
-    - `database_name` (string, **required**): The current name of the database to update.
-4.  **Body Parameters**:
-    `database` (object, **required**): The container for the database attributes to update.
+1.  Action: Updates the properties of a specified database, such as its name or owner.
+2.  Endpoint: `PATCH /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
+    - `database_name` (string, required): The current name of the database to update.
+4.  Body Parameters:
+    `database` (object, required): The container for the database attributes to update.
     - `name` (string, optional): A new name for the database.
     - `owner_name` (string, optional): The name of a different existing role to become the new owner.
 
-**Example: Change the owner of a database**
+Example: Change the owner of a database
 
 ```bash
 curl -X 'PATCH' \
@@ -1614,7 +1711,7 @@ curl -X 'PATCH' \
 }'
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1645,14 +1742,14 @@ curl -X 'PATCH' \
 
 ### Delete database
 
-1.  **Action**: Deletes the specified database from a branch. This action is permanent and cannot be undone.
-2.  **Endpoint**: `DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
-    - `database_name` (string, **required**): The name of the database to delete.
+1.  Action: Deletes the specified database from a branch. This action is permanent and cannot be undone.
+2.  Endpoint: `DELETE /projects/{project_id}/branches/{branch_id}/databases/{database_name}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
+    - `database_name` (string, required): The name of the database to delete.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -1661,7 +1758,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1692,17 +1789,17 @@ curl -X 'DELETE' \
 
 ### Create role
 
-1.  **Action**: Creates a new Postgres role in a specified branch. This action may drop existing connections to the active compute endpoint.
-2.  **Endpoint**: `POST /projects/{project_id}/branches/{branch_id}/roles`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch where the role will be created.
-4.  **Body Parameters**:
-    `role` (object, **required**): The container for the new role's properties.
-    - `name` (string, **required**): The name for the new role. Cannot exceed 63 bytes in length.
+1.  Action: Creates a new Postgres role in a specified branch. This action may drop existing connections to the active compute endpoint.
+2.  Endpoint: `POST /projects/{project_id}/branches/{branch_id}/roles`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch where the role will be created.
+4.  Body Parameters:
+    `role` (object, required): The container for the new role's properties.
+    - `name` (string, required): The name for the new role. Cannot exceed 63 bytes in length.
     - `no_login` (boolean, optional): If `true`, creates a role that cannot be used to log in. Defaults to `false`.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles' \
@@ -1716,7 +1813,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 }'
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1747,13 +1844,13 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### List roles
 
-1.  **Action**: Retrieves a list of all Postgres roles from the specified branch.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/roles`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
+1.  Action: Retrieves a list of all Postgres roles from the specified branch.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}/roles`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles' \
@@ -1761,7 +1858,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1786,14 +1883,14 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Retrieve role details
 
-1.  **Action**: Retrieves detailed information about a specific Postgres role within a branch.
-2.  **Endpoint**: `GET /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
-    - `role_name` (string, **required**): The name of the role.
+1.  Action: Retrieves detailed information about a specific Postgres role within a branch.
+2.  Endpoint: `GET /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
+    - `role_name` (string, required): The name of the role.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/br-super-wildflower-adniii9u/roles/new_app_user' \
@@ -1801,7 +1898,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1817,14 +1914,14 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/branches/b
 
 ### Delete role
 
-1.  **Action**: Deletes the specified Postgres role from the branch. This action is permanent.
-2.  **Endpoint**: `DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `branch_id` (string, **required**): The unique identifier of the branch.
-    - `role_name` (string, **required**): The name of the role to delete.
+1.  Action: Deletes the specified Postgres role from the branch. This action is permanent.
+2.  Endpoint: `DELETE /projects/{project_id}/branches/{branch_id}/roles/{role_name}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `branch_id` (string, required): The unique identifier of the branch.
+    - `role_name` (string, required): The name of the role to delete.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -1833,7 +1930,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1860,21 +1957,34 @@ curl -X 'DELETE' \
   ]
 }
 ```
+````
+
+## Neon API Rules: Manage Compute Endpoints
+
+Save the following content to a file named `neon-api-endpoints.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
+---
+description: Use these rules to manage compute endpoints associated with branches in a project.
+alwaysApply: false
+---
+
+## Overview
+
+This section provides rules for managing compute endpoints associated with branches in a project. Compute endpoints are Neon compute instances that allow you to connect to and interact with your databases.
 
 ## Manage compute endpoints
 
-This section provides rules for managing compute endpoints associated with branches in a project.
-
 ### Create compute endpoint
 
-1.  **Action**: Creates a new compute endpoint (a Neon compute instance) and associates it with a specified branch.
-2.  **Endpoint**: `POST /projects/{project_id}/endpoints`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-4.  **Body Parameters**:
-    `endpoint` (object, **required**): The container for the new endpoint's properties.
-    - `branch_id` (string, **required**): The ID of the branch to associate the endpoint with.
-    - `type` (string, **required**): The endpoint type. A branch can have only one `read_write` endpoint but multiple `read_only` endpoints. Allowed values: `read_write`, `read_only`.
+1.  Action: Creates a new compute endpoint (a Neon compute instance) and associates it with a specified branch.
+2.  Endpoint: `POST /projects/{project_id}/endpoints`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+4.  Body Parameters:
+    `endpoint` (object, required): The container for the new endpoint's properties.
+    - `branch_id` (string, required): The ID of the branch to associate the endpoint with.
+    - `type` (string, required): The endpoint type. A branch can have only one `read_write` endpoint but multiple `read_only` endpoints. Allowed values: `read_write`, `read_only`.
     - `region_id` (string, optional): The region where the endpoint will be created. Must match the project's region.
     - `autoscaling_limit_min_cu` (number, optional): The minimum number of Compute Units (CU). Minimum `0.25`.
     - `autoscaling_limit_max_cu` (number, optional): The maximum number of Compute Units (CU). Minimum `0.25`.
@@ -1882,7 +1992,7 @@ This section provides rules for managing compute endpoints associated with branc
     - `suspend_timeout_seconds` (integer, optional): Duration of inactivity in seconds before suspending the compute. Ranges from -1 (never suspend) to 604800 (1 week).
     - `disabled` (boolean, optional): If `true`, restricts connections to the endpoint.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints' \
@@ -1897,7 +2007,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints'
 }'
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -1943,12 +2053,12 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints'
 
 ### List compute endpoints
 
-1.  **Action**: Retrieves a list of all compute endpoints for the specified project.
-2.  **Endpoint**: `GET /projects/{project_id}/endpoints`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
+1.  Action: Retrieves a list of all compute endpoints for the specified project.
+2.  Endpoint: `GET /projects/{project_id}/endpoints`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints' \
@@ -1956,7 +2066,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints'
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2047,13 +2157,13 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints'
 
 ### Retrieve compute endpoint details
 
-1.  **Action**: Retrieves detailed information about a specific compute endpoint, including its configuration (e.g., autoscaling limits), current state (`active` or `idle`), and associated branch ID.
-2.  **Endpoint**: `GET /projects/{project_id}/endpoints/{endpoint_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint).
+1.  Action: Retrieves detailed information about a specific compute endpoint, including its configuration (e.g., autoscaling limits), current state (`active` or `idle`), and associated branch ID.
+2.  Endpoint: `GET /projects/{project_id}/endpoints/{endpoint_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint).
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints/ep-proud-mud-adwmnxz4' \
@@ -2061,7 +2171,7 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints/
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2096,20 +2206,20 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-river-50598307/endpoints/
 
 ### Update compute endpoint
 
-1.  **Action**: Updates the configuration of a specified compute endpoint.
-2.  **Endpoint**: `PATCH /projects/{project_id}/endpoints/{endpoint_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint.
-4.  **Body Parameters**:
-    `endpoint` (object, **required**): The container for the endpoint attributes to update.
+1.  Action: Updates the configuration of a specified compute endpoint.
+2.  Endpoint: `PATCH /projects/{project_id}/endpoints/{endpoint_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint.
+4.  Body Parameters:
+    `endpoint` (object, required): The container for the endpoint attributes to update.
     - `autoscaling_limit_min_cu` (number, optional): A new minimum number of Compute Units (CU).
     - `autoscaling_limit_max_cu` (number, optional): A new maximum number of Compute Units (CU).
     - `suspend_timeout_seconds` (integer, optional): A new inactivity period in seconds before suspension.
     - `disabled` (boolean, optional): Set to `true` to disable connections or `false` to enable them.
     - `provisioner` (string, optional): Change the compute provisioner.
 
-**Example: Update autoscaling limits**
+Example: Update autoscaling limits
 
 ```bash
 curl -X 'PATCH' \
@@ -2125,7 +2235,7 @@ curl -X 'PATCH' \
 }'
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2161,13 +2271,13 @@ curl -X 'PATCH' \
 
 ### Delete compute endpoint
 
-1.  **Action**: Deletes the specified compute endpoint. This action drops any existing network connections to the endpoint.
-2.  **Endpoint**: `DELETE /projects/{project_id}/endpoints/{endpoint_id}`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint to delete.
+1.  Action: Deletes the specified compute endpoint. This action drops any existing network connections to the endpoint.
+2.  Endpoint: `DELETE /projects/{project_id}/endpoints/{endpoint_id}`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint to delete.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -2176,7 +2286,7 @@ curl -X 'DELETE' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2212,13 +2322,13 @@ curl -X 'DELETE' \
 
 ### Start compute endpoint
 
-1.  **Action**: Manually starts a compute endpoint that is currently in an `idle` state. The endpoint is ready for connections once the start operation completes successfully.
-2.  **Endpoint**: `POST /projects/{project_id}/endpoints/{endpoint_id}/start`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint.
+1.  Action: Manually starts a compute endpoint that is currently in an `idle` state. The endpoint is ready for connections once the start operation completes successfully.
+2.  Endpoint: `POST /projects/{project_id}/endpoints/{endpoint_id}/start`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'POST' \
@@ -2227,7 +2337,7 @@ curl -X 'POST' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2277,13 +2387,13 @@ curl -X 'POST' \
 
 ### Suspend compute endpoint
 
-1.  **Action**: Manually suspends an `active` compute endpoint, forcing it into an `idle` state. This will immediately drop any active connections to the endpoint.
-2.  **Endpoint**: `POST /projects/{project_id}/endpoints/{endpoint_id}/suspend`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint.
+1.  Action: Manually suspends an `active` compute endpoint, forcing it into an `idle` state. This will immediately drop any active connections to the endpoint.
+2.  Endpoint: `POST /projects/{project_id}/endpoints/{endpoint_id}/suspend`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'POST' \
@@ -2292,7 +2402,7 @@ curl -X 'POST' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2342,13 +2452,13 @@ curl -X 'POST' \
 
 ### Restart compute endpoint
 
-1.  **Action**: Restarts the specified compute endpoint. This involves an immediate suspend operation followed by a start operation. This is useful for applying configuration changes or refreshing the compute instance. All active connections will be dropped.
-2.  **Endpoint**: `POST /projects/{project_id}/endpoints/{endpoint_id}/restart`
-3.  **Path Parameters**:
-    - `project_id` (string, **required**): The unique identifier of the project.
-    - `endpoint_id` (string, **required**): The unique identifier of the compute endpoint.
+1.  Action: Restarts the specified compute endpoint. This involves an immediate suspend operation followed by a start operation. This is useful for applying configuration changes or refreshing the compute instance. All active connections will be dropped.
+2.  Endpoint: `POST /projects/{project_id}/endpoints/{endpoint_id}/restart`
+3.  Path Parameters:
+    - `project_id` (string, required): The unique identifier of the project.
+    - `endpoint_id` (string, required): The unique identifier of the compute endpoint.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'POST' \
@@ -2357,7 +2467,7 @@ curl -X 'POST' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
 
-**Example Response:**
+Example Response:
 
 ```json
 {
@@ -2416,21 +2526,32 @@ curl -X 'POST' \
   ]
 }
 ```
+````
 
+## Neon API Rules: Manage Organizations
+
+Save the following content to a file named `neon-api-organizations.mdc` in your AI tool's rules directory.
+
+````markdown shouldWrap
 ---
+title: Use these rules to manage organizations, their members, invitations, and organization API keys.
+alwaysApply: false
+---
+
+## Overview
+
+This section provides rules for managing organizations, their members, invitations, and organization API keys. Organizations allow multiple users to collaborate on projects and share resources within Neon.
 
 ## Manage organizations
 
-This section provides rules for managing organizations, their members, invitations and organization API keys.
-
 ### Retrieve organization details
 
-1.  **Action**: Retrieves detailed information about a specific organization.
-2.  **Endpoint**: `GET /organizations/{org_id}`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
+1.  Action: Retrieves detailed information about a specific organization.
+2.  Endpoint: `GET /organizations/{org_id}`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/organizations/{org_id}' \
@@ -2440,12 +2561,12 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}' \
 
 ### List organization members
 
-1.  **Action**: Retrieves a list of all members belonging to the specified organization.
-2.  **Endpoint**: `GET /organizations/{org_id}/members`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
+1.  Action: Retrieves a list of all members belonging to the specified organization.
+2.  Endpoint: `GET /organizations/{org_id}/members`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/organizations/{org_id}/members' \
@@ -2455,13 +2576,13 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/members' \
 
 ### Retrieve organization member details
 
-1.  **Action**: Retrieves information about a specific member of an organization.
-2.  **Endpoint**: `GET /organizations/{org_id}/members/{member_id}`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-    - `member_id` (UUID, **required**): The unique identifier of the organization member.
+1.  Action: Retrieves information about a specific member of an organization.
+2.  Endpoint: `GET /organizations/{org_id}/members/{member_id}`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+    - `member_id` (UUID, required): The unique identifier of the organization member.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id}' \
@@ -2471,16 +2592,16 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/members/{member_id
 
 ### Update role for organization member
 
-1.  **Action**: Updates the role of a specified member within an organization.
-2.  **Prerequisite**: This action can only be performed by an organization `admin`.
-3.  **Endpoint**: `PATCH /organizations/{org_id}/members/{member_id}`
-4.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-    - `member_id` (UUID, **required**): The unique identifier of the organization member.
-5.  **Body Parameters**:
-    - `role` (string, **required**): The new role for the member. Allowed values: `admin`, `member`.
+1.  Action: Updates the role of a specified member within an organization.
+2.  Prerequisite: This action can only be performed by an organization `admin`.
+3.  Endpoint: `PATCH /organizations/{org_id}/members/{member_id}`
+4.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+    - `member_id` (UUID, required): The unique identifier of the organization member.
+5.  Body Parameters:
+    - `role` (string, required): The new role for the member. Allowed values: `admin`, `member`.
 
-**Example: Change a member's role to admin**
+Example: Change a member's role to admin
 
 ```bash
 curl -X 'PATCH' \
@@ -2493,16 +2614,16 @@ curl -X 'PATCH' \
 
 ### Remove member from organization
 
-1.  **Action**: Removes a specified member from an organization.
-2.  **Prerequisites**:
+1.  Action: Removes a specified member from an organization.
+2.  Prerequisites:
     - This action can only be performed by an organization `admin`.
     - An admin cannot be removed if they are the only admin left in the organization.
-3.  **Endpoint**: `DELETE /organizations/{org_id}/members/{member_id}`
-4.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-    - `member_id` (UUID, **required**): The unique identifier of the organization member to remove.
+3.  Endpoint: `DELETE /organizations/{org_id}/members/{member_id}`
+4.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+    - `member_id` (UUID, required): The unique identifier of the organization member to remove.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -2513,16 +2634,16 @@ curl -X 'DELETE' \
 
 ### Create organization invitations
 
-1.  **Action**: Creates and sends one or more email invitations for users to join a specific organization.
-2.  **Endpoint**: `POST /organizations/{org_id}/invitations`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-4.  **Body Parameters**:
-    `invitations` (array of objects, **required**): A list of invitations to create.
-    - `email` (string, **required**): The email address of the user to invite.
-    - `role` (string, **required**): The role the invited user will have. Allowed values: `admin`, `member`.
+1.  Action: Creates and sends one or more email invitations for users to join a specific organization.
+2.  Endpoint: `POST /organizations/{org_id}/invitations`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+4.  Body Parameters:
+    `invitations` (array of objects, required): A list of invitations to create.
+    - `email` (string, required): The email address of the user to invite.
+    - `role` (string, required): The role the invited user will have. Allowed values: `admin`, `member`.
 
-**Example: Invite two users with different roles**
+Example: Invite two users with different roles
 
 ```bash
 curl -X 'POST' \
@@ -2546,12 +2667,12 @@ curl -X 'POST' \
 
 ### List organization invitations
 
-1.  **Action**: Retrieves information about outstanding invitations for the specified organization.
-2.  **Endpoint**: `GET /organizations/{org_id}/invitations`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
+1.  Action: Retrieves information about outstanding invitations for the specified organization.
+2.  Endpoint: `GET /organizations/{org_id}/invitations`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
@@ -2561,16 +2682,16 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/invitations' \
 
 ### Create organization API key
 
-1.  **Action**: Creates a new API key for the specified organization. The key can be scoped to the entire organization or limited to a single project within it.
-2.  **Endpoint**: `POST /organizations/{org_id}/api_keys`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-4.  **Body Parameters**:
-    - `key_name` (string, **required**): A user-specified name for the API key (max 64 characters).
+1.  Action: Creates a new API key for the specified organization. The key can be scoped to the entire organization or limited to a single project within it.
+2.  Endpoint: `POST /organizations/{org_id}/api_keys`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+4.  Body Parameters:
+    - `key_name` (string, required): A user-specified name for the API key (max 64 characters).
     - `project_id` (string, optional): If provided, the API key's access will be restricted to only this project.
-5.  **Authorization**: Use a Personal API Key of an organization `admin` to create organization API keys.
+5.  Authorization: Use a Personal API Key of an organization `admin` to create organization API keys.
 
-**Example: Create a project-scoped API key**
+Example: Create a project-scoped API key
 
 ```bash
 curl -X 'POST' \
@@ -2586,13 +2707,13 @@ curl -X 'POST' \
 
 ### List organization API keys
 
-1.  **Action**: Retrieves a list of all API keys created for the specified organization.
-2.  **Endpoint**: `GET /organizations/{org_id}/api_keys`
-3.  **Note**: The response includes metadata about the keys (like `id` and `name`) but does **not** include the secret key tokens themselves. Tokens are only visible upon creation.
-4.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
+1.  Action: Retrieves a list of all API keys created for the specified organization.
+2.  Endpoint: `GET /organizations/{org_id}/api_keys`
+3.  Note: The response includes metadata about the keys (like `id` and `name`) but does not include the secret key tokens themselves. Tokens are only visible upon creation.
+4.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
@@ -2602,13 +2723,13 @@ curl 'https://console.neon.tech/api/v2/organizations/{org_id}/api_keys' \
 
 ### Revoke organization API key
 
-1.  **Action**: Permanently revokes the specified organization API key.
-2.  **Endpoint**: `DELETE /organizations/{org_id}/api_keys/{key_id}`
-3.  **Path Parameters**:
-    - `org_id` (string, **required**): The unique identifier of the organization.
-    - `key_id` (integer, **required**): The unique identifier of the API key to revoke. You can obtain this ID by listing the organization's API keys.
+1.  Action: Permanently revokes the specified organization API key.
+2.  Endpoint: `DELETE /organizations/{org_id}/api_keys/{key_id}`
+3.  Path Parameters:
+    - `org_id` (string, required): The unique identifier of the organization.
+    - `key_id` (integer, required): The unique identifier of the API key to revoke. You can obtain this ID by listing the organization's API keys.
 
-**Example Request:**
+Example Request:
 
 ```bash
 curl -X 'DELETE' \
@@ -2616,5 +2737,4 @@ curl -X 'DELETE' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY"
 ```
-
----
+````
