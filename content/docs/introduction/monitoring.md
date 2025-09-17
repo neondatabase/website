@@ -25,11 +25,11 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 </DetailIconCards>
 
-## External monitoring
+## OpenTelemetry
 
 <DetailIconCards>
 
-<a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">OpenTelemetry</a>
+<a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">OTel integration</a>
 
 <a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Datadog</a>
 
@@ -38,6 +38,14 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 <a href="https://neon.com/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
 
 <a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
+
+<a href="/docs/reference/metrics-logs" description="Metrics and logs reference for monitoring" icon="research">Metrics and logs reference</a>
+
+</DetailIconCards>
+
+## Other monitoring tools
+
+<DetailIconCards>
 
 <a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
 
