@@ -2,7 +2,6 @@
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
-import { useFeatureFlagVariantKey } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -88,9 +87,6 @@ const ContactForm = () => {
       ajs_anonymous_id: ajsAnonymousId || 'none',
     },
   });
-  const isFormDataSentToCustomerIo = useFeatureFlagVariantKey(
-    'website_growth_customer_io_integration'
-  );
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
@@ -145,15 +141,13 @@ const ContactForm = () => {
           company_website: companyWebsite,
           investor,
         };
-        if (isFormDataSentToCustomerIo) {
-          try {
-            if (window.zaraz && email) {
-              await sendGtagEvent('identify', { email });
-              await sendGtagEvent(eventName, eventProps);
-            }
-          } catch (error) {
-            console.warn('Error submitting the form');
+        try {
+          if (window.zaraz && email) {
+            await sendGtagEvent('identify', { email });
+            await sendGtagEvent(eventName, eventProps);
           }
+        } catch (error) {
+          console.warn('Error submitting the form');
         }
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
