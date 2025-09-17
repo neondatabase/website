@@ -26,7 +26,7 @@ To construct a full request URL, append the specific endpoint path to this base 
 - The header should be formatted as: `Authorization: Bearer $NEON_API_KEY`, where `$NEON_API_KEY` is a valid Neon API key.
 - A request without a valid `Authorization` header will fail with a `401 Unauthorized` status code.
 
-### API Rate Limiting
+### API rate limiting
 
 - Neon limits API requests to 700 requests per minute (approximately 11 per second).
 - Bursts of up to 40 requests per second per route are permitted.
@@ -126,7 +126,7 @@ curl https://console.neon.tech/api/v2/api_keys \
 }
 ```
 
-### Revoke an API Key
+### Revoke an API key
 
 - **Endpoint**: `DELETE /api_keys/{key_id}`
 - **Authorization**: Use a Personal API Key.
@@ -877,7 +877,7 @@ curl 'https://console.neon.tech/api/v2/projects/old-fire-32990194/connection_uri
 
 ---
 
-## Manage Branches
+## Manage branches
 
 This section provides detailed rules for managing branches within a Neon project.
 
@@ -1861,7 +1861,7 @@ curl -X 'DELETE' \
 }
 ```
 
-## Manage Compute Endpoints
+## Manage compute endpoints
 
 This section provides rules for managing compute endpoints associated with branches in a project.
 
@@ -2419,7 +2419,7 @@ curl -X 'POST' \
 
 ---
 
-## Manage Organizations
+## Manage organizations
 
 This section provides rules for managing organizations, their members, invitations and organization API keys.
 
