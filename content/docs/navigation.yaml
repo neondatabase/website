@@ -592,6 +592,19 @@
                   slug: ai/ai-rules-neon-serverless
                 - title: Neon TypeScript SDK
                   slug: ai/ai-rules-neon-typescript-sdk
+                - title: Neon Python SDK
+                  slug: ai/ai-rules-neon-python-sdk
+            - section: Build AI agents
+              icon: openai
+              items:
+                - title: Neon for Agent platforms
+                  slug: https://neon.com/use-cases/ai-agents
+                - title: Database versioning
+                  slug: ai/ai-database-versioning
+                - title: Neon Toolkit
+                  slug: https://github.com/neondatabase/toolkit
+                - title: Neon API
+                  slug: reference/api-reference
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -1013,18 +1026,26 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: External monitoring
+            - title: OpenTelemetry
               items:
+                - title: OTel integration
+                  slug: guides/opentelemetry
                 - title: Datadog
                   slug: guides/datadog
                 - title: Grafana Cloud
                   slug: guides/grafana-cloud
-                - title: OpenTelemetry
-                  slug: guides/opentelemetry
+                - title: Better Stack
+                  slug: https://neon.com/guides/betterstack-otel-neon
+                - title: New Relic
+                  slug: https://neon.com/guides/newrelic-otel-neon
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
-                - title: Other monitoring tools
-                  slug: introduction/monitor-external-tools
+            - title: Other monitoring tools
+              items:
+                - title: pgAdmin
+                  slug: introduction/monitor-pgadmin
+                - title: PgHero
+                  slug: introduction/monitor-pghero
 
         - section: Operations & maintenance
           icon: settings

@@ -2,7 +2,7 @@
 title: app.build
 subtitle: Open-source AI agent for full-stack application generation
 enableTableOfContents: true
-updatedOn: '2025-08-20T10:09:29.575Z'
+updatedOn: '2025-09-16T15:47:41.912Z'
 ---
 
 [app.build](https://www.app.build/) is our exploration of what AI agents can do with a complete backend stack. We built it after working with partners like Replit and other agent-driven platforms, learning what it takes to automate not just code generation, but the entire development workflow. This open-source project creates and deploys full-stack applications from scratch. It handles everything: database provisioning, authentication, testing, CI/CD, and deployment. The agent breaks down app creation into discrete tasks, validates each piece, and assembles them into working applications. Think of it as a blueprint you can use, fork, or extend to build your own agent infrastructure.
@@ -18,11 +18,9 @@ updatedOn: '2025-08-20T10:09:29.575Z'
 
 ## Getting started
 
-```bash
-npx @app.build/cli
-```
+Simply go to https://www.app.build/ and authenticate, start chatting ti build!
 
-This command launches the CLI, which will ask you to sign in with GitHub (required for code storage and deployment). Each generated application gets its own repository in your account and is deployed with a real backend and database. The CLI supports both creating new apps and iterating on existing ones (adding features or making changes).
+**Note:** the CLI is now deprecated. `npx @app.build/cli` will give you an error.
 
 ## What it generates
 

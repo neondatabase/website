@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-09-13T09:38:53.462Z'
+updatedOn: '2025-09-16T17:39:40.070Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -23,7 +23,7 @@ Accelerate your development with context rules that help AI tools write better c
 <DetailIconCards>
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth Rules</a>
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for efficient serverless database connections" icon="github">Neon Serverless Rules</a>
+<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
 <a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="github">Neon TypeScript SDK Rules</a>
 <a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK Rules</a>
 </DetailIconCards>
@@ -37,6 +37,8 @@ Create autonomous agents that can manage and interact with your Neon databases p
 <a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
+
+<a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 
 <a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 

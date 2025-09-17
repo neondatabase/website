@@ -383,6 +383,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/docs/introduction/monitor-external-tools',
+        destination: '/docs/introduction/monitoring',
+        permanent: true,
+      },
+      {
         source: '/flow',
         destination: '/branching',
         permanent: true,

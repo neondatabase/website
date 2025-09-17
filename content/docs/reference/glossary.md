@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-08-18T18:19:18.020Z'
+updatedOn: '2025-09-16T17:39:40.076Z'
 ---
 
 ## access token
@@ -526,6 +526,10 @@ A cloud-based development model that enables developing and running applications
 ## shared buffers
 
 A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75 % of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+
+## Snapshot
+
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
 
 ## SNI
 
