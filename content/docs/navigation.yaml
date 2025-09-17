@@ -1031,7 +1031,7 @@
                 - title: OpenTelemetry
                   slug: guides/opentelemetry
                 - title: Better Stack
-                  slug: guides/betterstack-otel-neon
+                  slug: https://neon.com/guides/betterstack-otel-neon
                 - title: New Relic
                   slug: https://neon.com/guides/newrelic-otel-neon
                 - title: Metrics and logs reference
