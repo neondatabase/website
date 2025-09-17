@@ -37,7 +37,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
 
-<a href="/docs/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
+<a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
 
 <a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
 
