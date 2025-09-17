@@ -1033,7 +1033,7 @@
                 - title: Better Stack
                   slug: guides/betterstack-otel-neon
                 - title: New Relic
-                  slug: guides/newrelic-otel-neon
+                  slug: https://neon.com/guides/newrelic-otel-neon
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
                 - title: pgAdmin
