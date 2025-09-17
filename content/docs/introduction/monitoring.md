@@ -35,7 +35,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/guides/grafana-cloud" description="Export Neon metrics and logs to Grafana Cloud with native OTLP integration" icon="trend-up">Grafana Cloud</a>
 
-<a href="/docs/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
+<a href="[/docs/guides](https://neon.com/guides)/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
 
 <a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
 
