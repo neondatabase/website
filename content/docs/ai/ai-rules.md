@@ -19,6 +19,8 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 
 <a href="/docs/ai/ai-rules-neon-typescript-sdk" description="Neon TypeScript SDK usage" icon="code">Neon TypeScript SDK</a>
 
+<a href="/docs/ai/ai-rules-neon-python-sdk" description="Neon Python SDK usage" icon="code">Neon Python SDK</a>
+
 </DetailIconCards>
 
 ## How it works

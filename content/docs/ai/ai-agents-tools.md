@@ -25,6 +25,7 @@ Accelerate your development with context rules that help AI tools write better c
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
 <a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for efficient serverless database connections" icon="github">Neon Serverless Rules</a>
 <a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="github">Neon TypeScript SDK Rules</a>
+<a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK Rules</a>
 </DetailIconCards>
 
 ## Build AI agents
