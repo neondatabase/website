@@ -35,7 +35,7 @@ To construct a full request URL, append the specific endpoint path to this base 
 
 ---
 
-### Understanding API Key Types
+### Understanding API key types
 
 When performing actions via the API, you must select the correct type of API key based on the required scope and permissions. There are three types:
 
