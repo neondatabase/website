@@ -59,7 +59,7 @@ As a managed service, Neon strives to manage all minor version updates automatic
 
 In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequently &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
-### Major versions
+### Supported major versions
 
 Neon currently supports Postgres 14, 15, 16, and 17. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
 
