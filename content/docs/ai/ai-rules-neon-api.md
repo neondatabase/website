@@ -9,7 +9,7 @@ updatedOn: '2025-09-09T00:00:00.000Z'
 
 This document provides a comprehensive set of rules and guidelines for an AI agent to interact with the Neon API. The Neon API is a RESTful service that allows for programmatic management of all Neon resources. Adherence to these rules ensures correct, efficient, and safe API usage.
 
-### General API Guidelines
+### General API guidelines
 
 All Neon API requests must be made to the following base URL:
 
