@@ -19,33 +19,63 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans), but paid plans permit disabling scale to zero.
 
-| Plan      | Scale to zero after                   | Can be disabled? |
-| :-------- | :------------------------------------ | :--------------- |
-| Free plan | 5 minutes                             |                  |
-| Launch    | 5 minutes                             | &check;          |
-| Scale     | Configurable (5 seconds to always on) | &check;          |
+| Plan      | Scale to zero after                  | Can be disabled? |
+| :-------- | :----------------------------------- | :--------------- |
+| Free plan | 5 minutes                            |                  |
+| Launch    | 5 minutes                            | &check;          |
+| Scale     | Configurable (1 minute to always on) | &check;          |
 
 ## Configure scale to zero for a compute
 
-To configure the scale to zero setting for an individual compute:
+To disable the scale to zero setting on plans that support it:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. On the **Computes** tab, click **Edit**.
-1. Specify your scale to zero setting.
-1. Click **Save**.
+1. Enable or disable the scale to zero setting, and save you selection.
+
+### Configuring the scale to zero time
+
+On the Scale plan, you can configure "Scale to zero after" time to increase or decrease the amount of time after which a compute scales to zero. For example, decreasing the time to 1 minute means that your compute will scale to zero faster (after the compute is inactive for 1 minute), or increasing the value to an hour means that your compute will only scale to zero after an hour of inactive compute time.
+
+Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) API call.
+
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/{project-id}/endpoints/{endpoint-id} \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "endpoint": {
+    "suspend_timeout_seconds": 60
+  }
+}
+'
+```
+
+- The `suspend_timeout_seconds` setting is defined in seconds
+- The default setting is 300 seconds (5 minutes)
+- The minimum setting is 60 seconds
+- The maximum setting is 604800 seconds (1 week)
+- You must supply an [API key](/docs/manage/api-keys), your [project ID](/docs/reference/glossary#project-id), and the [endpoint ID](/docs/reference/glossary#endpoint-id)
+
+After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the Neon Console — setting a non-default value makes the control visible on the **Edit compute** modal in the console:
+
+![Scale to zero control on the Edit compute page](/docs/guides/scale_to_zero_setting.png)
 
 ### Configure the scale to zero default
 
-Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. Existing compute scale to zero settings are unaffected. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more info about compute defaults.
+Configuring the scale to zero setting in your project's settings sets the project's default, which is applied to all computes created from that point forward. The scale to zero settings for existing computes are unaffected. See [Change your project's default compute settings](/docs/manage/projects#change-your-projects-default-compute-settings) for more info about compute defaults.
 
 To configure the scale to zero default for an existing project:
 
 1. Select a project in the Neon Console.
-1. On the Neon **Dashboard**, select **Settings**.
-1. Select **Compute** and click **Change**.
-1. Specify your scale to zero setting.
-1. Click **Save**.
+1. On the **Dashboard**, select **Settings**.
+1. Navigate to the **Compute defaults** section.
+1. Select **Modify dedefaults**.
+1. Enable or disable the scale to zero setting, and save you selection.
 
 ## Monitor scale to zero
 
