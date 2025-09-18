@@ -7,7 +7,7 @@ enableTableOfContents: true
 updatedOn: '2025-08-27T11:29:20.755Z'
 ---
 
-Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active.
+Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active. On the Scale plan, you can configure the scale to zero threshold.
 
 <Admonition type="important">
 If you disable scale to zero entirely, your compute will remain active, and you will have to manually restart your compute to pick up the latest updates to Neon's compute images. Neon typically releases compute-related updates weekly. Not all releases contain critical updates, but a weekly compute restart is recommended to ensure that you do not miss anything important. For how to restart a compute, see [Restart a compute](/docs/manage/computes#restart-a-compute). 
@@ -17,7 +17,7 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 ### Scale to zero limits
 
-The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans), but paid plans permit disabling scale to zero.
+Paid plans permit disabling scale to zero. On the Scale plan, you can cofigure the scale to zero threshold.
 
 | Plan      | Scale to zero after                  | Can be disabled? |
 | :-------- | :----------------------------------- | :--------------- |
@@ -38,13 +38,15 @@ To enable or disable scale to zero:
 
 ### Configuring the scale to zero time
 
-On the Scale plan, you can configure "Scale to zero after" time to increase or decrease the amount of time after which a compute scales to zero. For example, decreasing the time to 1 minute means that your compute will scale to zero faster (after the compute is inactive for 1 minute), or increasing the value to an hour means that your compute will only scale to zero after an hour of inactive compute time.
+On the Scale plan, you can configure "Scale to zero after" time to increase or decrease the amount of time after which a compute scales to zero. For example, decreasing the time to 1 minute means that your compute will scale to zero faster (after the compute is inactive for 1 minute), or increasing the value to an hour means that your compute will only scale to zero after being inactive for an hour.
 
 Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) or [Update project](https://api-docs.neon.tech/reference/updateproject#/) API call. Use the `Update compute endpoint` API to change the setting for an existing compute. The `Update project` API sets a default for all compute endpoints created in the future — it does not change the configuration of existing computes.
 
 <CodeTabs labels={["Update compute endpoint", "Update project"]}>
 
 ```bash
+# change the setting for an existing compute
+
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project-id}/endpoints/{endpoint-id} \
      --header 'accept: application/json' \
@@ -60,6 +62,8 @@ curl --request PATCH \
 ```
 
 ```bash
+# Change the default setting for computes created in the future
+
 curl --request PATCH \
      --url https://console.neon.tech/api/v2/projects/{project-id} \
      --header 'accept: application/json' \
@@ -86,7 +90,7 @@ curl --request PATCH \
 - The maximum setting is 604800 seconds (1 week)
 - You must supply an [API key](/docs/manage/api-keys), your [project ID](/docs/reference/glossary#project-id), and the [endpoint ID](/docs/reference/glossary#endpoint-id)
 
-After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the Neon Console — setting a non-default value makes the control visible in the console.
+After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the console. Setting a non-default value makes the time selector control visible on the **Edit compute** modal.
 
 ![Scale to zero control on the Edit compute page](/docs/guides/scale_to_zero_setting.png)
 
