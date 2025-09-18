@@ -38,7 +38,9 @@ To disable the scale to zero setting on plans that support it:
 
 On the Scale plan, you can configure "Scale to zero after" time to increase or decrease the amount of time after which a compute scales to zero. For example, decreasing the time to 1 minute means that your compute will scale to zero faster (after the compute is inactive for 1 minute), or increasing the value to an hour means that your compute will only scale to zero after an hour of inactive compute time.
 
-Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) API call.
+Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) or [Update project](https://api-docs.neon.tech/reference/updateproject#/) API call. Use the `Update compute endpoint` API to change the setting for an existing compute. The `Update project` API sets a default for all compute endpoints created in the future — it does not change the configuration of existing computes.
+
+<CodeTabs labels={["Update compute endpoint", "Update project"]}>
 
 ```bash
 curl --request PATCH \
@@ -55,13 +57,34 @@ curl --request PATCH \
 '
 ```
 
+```bash
+curl --request PATCH \
+     --url https://console.neon.tech/api/v2/projects/{project-id} \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "project": {
+    "default_endpoint_settings": {
+      "suspend_timeout_seconds": 60
+    }
+  }
+}
+'
+```
+
+</CodeTabs>
+
+**API parameters:**
+
 - The `suspend_timeout_seconds` setting is defined in seconds
 - The default setting is 300 seconds (5 minutes)
 - The minimum setting is 60 seconds
 - The maximum setting is 604800 seconds (1 week)
 - You must supply an [API key](/docs/manage/api-keys), your [project ID](/docs/reference/glossary#project-id), and the [endpoint ID](/docs/reference/glossary#endpoint-id)
 
-After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the Neon Console — setting a non-default value makes the control visible on the **Edit compute** modal in the console:
+After configuring a non-default value via the Neon API, you'll be able to adjust the setting via the Neon Console — setting a non-default value makes the control visible in the console.
 
 ![Scale to zero control on the Edit compute page](/docs/guides/scale_to_zero_setting.png)
 
