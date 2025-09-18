@@ -98,7 +98,7 @@ To configure the scale to zero default for an existing project:
 1. On the **Dashboard**, select **Settings**.
 1. Navigate to the **Compute defaults** section.
 1. Select **Modify defaults**.
-1. Enable or disable the scale to zero setting, and save you selection.
+1. Enable or disable the scale to zero setting, and save your selection.
 
 ## Monitor scale to zero
 
