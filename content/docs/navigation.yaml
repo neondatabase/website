@@ -590,6 +590,8 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+                - title: Neon Toolkit
+                  slug: ai/ai-rules-neon-toolkit
             - section: Build AI agents
               icon: openai
               items:
