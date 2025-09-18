@@ -25,14 +25,16 @@ The scale to zero limit is the same on each [Neon plan](/docs/introduction/plans
 | Launch    | 5 minutes                            | &check;          |
 | Scale     | Configurable (1 minute to always on) | &check;          |
 
-## Configure scale to zero for a compute
+## Enable or disable scale to zero
 
-To disable the scale to zero setting on plans that support it:
+To enable or disable scale to zero:
 
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. On the **Computes** tab, click **Edit**.
 1. Enable or disable the scale to zero setting, and save your selection.
+
+> Disabling scale to zero is only supported on paid plans.
 
 ### Configuring the scale to zero time
 
