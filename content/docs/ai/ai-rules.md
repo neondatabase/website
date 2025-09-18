@@ -17,6 +17,8 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 
 <a href="/docs/ai/ai-rules-neon-drizzle" description="ORM setup, schema management, and usage patterns with Drizzle" icon="drizzle">Neon + Drizzle</a>
 
+<a href="/docs/ai/ai-rules-neon-api" description="Use the Neon API to programmatically manage your resources" icon="code">Neon API</a>
+
 </DetailIconCards>
 
 ## How it works
