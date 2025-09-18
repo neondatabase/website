@@ -7,7 +7,7 @@ updatedOn: '2025-09-16T17:39:40.073Z'
 ---
 
 <Admonition type="note" title="Beta">
-Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://t.co/kORvEuCUpJ).
+Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://t.co/kORvEuCUpJ). There is no charge for snapshots while the feature is in Beta. There is a limit of 1 snapshot on Free plans and 10 on paid plans. If you need higher limits, please reach out [Neon support](/docs/introduction/support).
 </Admonition>
 
 ## Overview
