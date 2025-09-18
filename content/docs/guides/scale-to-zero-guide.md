@@ -32,7 +32,7 @@ To disable the scale to zero setting on plans that support it:
 1. In the Neon Console, select **Branches**.
 1. Select a branch.
 1. On the **Computes** tab, click **Edit**.
-1. Enable or disable the scale to zero setting, and save you selection.
+1. Enable or disable the scale to zero setting, and save your selection.
 
 ### Configuring the scale to zero time
 
