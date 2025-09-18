@@ -17,7 +17,7 @@ This guide demonstrates how to configure the scale to zero setting for a new pro
 
 ### Scale to zero limits
 
-Paid plans permit disabling scale to zero. On the Scale plan, you can cofigure the scale to zero threshold.
+Paid plans permit disabling scale to zero. On the Scale plan, you can configure the scale to zero threshold.
 
 | Plan      | Scale to zero after                  | Can be disabled? |
 | :-------- | :----------------------------------- | :--------------- |
