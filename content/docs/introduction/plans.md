@@ -44,7 +44,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
 | [Compute](#compute)                                   | 100 CU-hours/project           | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
-| [Scale to zero](#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (5 seconds to always on)                                             |
+| [Scale to zero](#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
 | [Public network transfer](#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
 | [Monitoring](#monitoring)                             | 1 day                          | 3 days                               | 14 days                                                                           |
@@ -189,7 +189,7 @@ Suspends computes after inactivity.
 
 - **Free**: 5 min inactivity — cannot disable
 - **Launch**: 5 min inactivity — can disable
-- **Scale**: Fully configurable — 5 seconds to always on
+- **Scale**: Fully configurable — 1 minute to always on
 
 ### ☑ Storage
 
@@ -426,7 +426,7 @@ How are instant restores billed?
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
  Launch: Yes, you can disable it.  
- Scale: Yes, fully configurable (5 seconds to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
+ Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
 : Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)
