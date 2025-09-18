@@ -3,7 +3,7 @@ title: Database versioning with snapshots
 subtitle: How AI agents and codegen platforms implement database version control using
   snapshots and preview branches
 enableTableOfContents: true
-updatedOn: '2025-09-16T17:39:40.073Z'
+updatedOn: '2025-09-18T20:40:09.252Z'
 ---
 
 <Admonition type="note" title="Beta">
