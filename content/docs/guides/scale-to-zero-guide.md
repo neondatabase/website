@@ -97,7 +97,7 @@ To configure the scale to zero default for an existing project:
 1. Select a project in the Neon Console.
 1. On the **Dashboard**, select **Settings**.
 1. Navigate to the **Compute defaults** section.
-1. Select **Modify dedefaults**.
+1. Select **Modify defaults**.
 1. Enable or disable the scale to zero setting, and save you selection.
 
 ## Monitor scale to zero
