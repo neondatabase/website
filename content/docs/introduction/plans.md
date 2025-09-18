@@ -189,7 +189,7 @@ Suspends computes after inactivity.
 
 - **Free**: 5 min inactivity — cannot disable
 - **Launch**: 5 min inactivity — can disable
-- **Scale**: Fully configurable — 5 seconds to always on
+- **Scale**: Fully configurable — 1 minute to always on
 
 ### ☑ Storage
 
@@ -426,7 +426,7 @@ How are instant restores billed?
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
  Launch: Yes, you can disable it.  
- Scale: Yes, fully configurable (5 seconds to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
+ Scale: Yes, fully configurable (1 minute to always-on). Learn more: [Scale to zero](/docs/introduction/scale-to-zero)
 
 What is autoscaling and how does it work?
 : Autoscaling adjusts compute size based on load, between your set min/max limits. All plans support it, but maximum CU differs: Free up to 2 CU, Launch and Scale Scale up to 16 CU. Scale supports up to 56 CU for fixed-size computes. Learn more: [Autoscaling](/docs/introduction/autoscaling)

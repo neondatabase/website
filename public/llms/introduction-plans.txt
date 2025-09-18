@@ -26,7 +26,7 @@ Compare Neon's **Free**, **Launch**, and **Scale** plans.
 | [Extra branches](https://neon.com/docs/introduction/plans#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
 | [Compute](https://neon.com/docs/introduction/plans#compute)                                   | 50 CU-hours/project            | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
 | [Autoscaling](https://neon.com/docs/introduction/plans#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
-| [Scale to zero](https://neon.com/docs/introduction/plans#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (5 seconds to always on)                                             |
+| [Scale to zero](https://neon.com/docs/introduction/plans#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                             |
 | [Storage](https://neon.com/docs/introduction/plans#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
 | [Public network transfer](https://neon.com/docs/introduction/plans#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
 | [Monitoring](https://neon.com/docs/introduction/plans#monitoring)                             | 1 day                          | 3 days                               | 14 days                                                                           |
@@ -171,7 +171,7 @@ Suspends computes after inactivity.
 
 - **Free**: 5 min inactivity — cannot disable
 - **Launch**: 5 min inactivity — can disable
-- **Scale**: Fully configurable — 5 seconds to always on
+- **Scale**: Fully configurable — 1 minute to always on
 
 ### ☑ Storage
 
