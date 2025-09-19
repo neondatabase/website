@@ -7,7 +7,7 @@ updatedOn: '2025-08-16T14:20:00+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements'
-  slug: 'postgresql-18/security-enhancements'
+  slug: 'postgresql-18/security-improvements'
 nextLink:
   title: 'PostgreSQL 18 psql Improvements'
   slug: 'postgresql-18/psql-improvements'
