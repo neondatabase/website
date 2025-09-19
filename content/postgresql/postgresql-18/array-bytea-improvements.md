@@ -51,6 +51,7 @@ SELECT array_reverse(ARRAY['first', 'second', 'third']);
 ```
 
 For multi-dimensional arrays, these functions operate only on the first dimension, so `array_reverse(ARRAY[ARRAY[1,2], ARRAY[3,4]])` becomes `{{3,4},{1,2}}`.
+
 ### Array Function Performance
 
 Array functions work efficiently on reasonably sized arrays but may impact performance with very large arrays containing thousands of elements. The `array_sort()` and `array_reverse()` functions operate in memory, so consider the size of your arrays when using them in large datasets.
@@ -133,7 +134,7 @@ SELECT
     MAX(monthly_sales) AS max_sales_pattern
 FROM sales_data;
 
- min_sales_pattern | max_sales_pattern 
+ min_sales_pattern | max_sales_pattern
 -------------------+-------------------
  {23,28,15}        | {67,71,58}
 (1 row)
@@ -162,7 +163,7 @@ FROM (VALUES
     (ROW(4.8, 156)::product_rating)
 ) AS ratings(rating);
 
- lowest_rating | highest_rating 
+ lowest_rating | highest_rating
 ---------------+----------------
  (4.20,89)     | (4.80,156)
 ```
@@ -177,3 +178,4 @@ The MIN/MAX aggregates on arrays and composite types currently require sequentia
 -- This will scan all rows to find MIN/MAX arrays
 SELECT MIN(monthly_sales), MAX(monthly_sales) FROM sales_data;
 
+```

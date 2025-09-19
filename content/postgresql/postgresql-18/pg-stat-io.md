@@ -262,4 +262,3 @@ SELECT pg_stat_reset_backend_stats(12345);
 ```
 
 This is useful after making configuration changes or when establishing new performance baselines.
-

@@ -261,4 +261,3 @@ PostgreSQL 18 also adds support for displaying the connection service name in pr
 ```
 
 This allows you to easily identify which connection service you're using, especially in environments with multiple database configurations.
-

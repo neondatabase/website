@@ -223,4 +223,3 @@ All security improvements maintain backward compatibility:
 - Protocol version 3.0 remains fully supported and version 3.2 is optional for drivers
 - Legacy cipher configurations continue to function
 - Non-FIPS environments are unaffected by FIPS features
-

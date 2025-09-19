@@ -173,4 +173,3 @@ There are a few things to keep in mind:
 - Column lists in publications take precedence over the generated column setting
 - On subscribers older than 18, initial table synchronization won't copy generated columns; for full support use PG 18 on the subscriber
 - `track_commit_timestamp = on` is needed on the subscriber to detect `*_origin_differs` conflicts
-
