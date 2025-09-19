@@ -1,7 +1,7 @@
 ---
-title: 'PostgreSQL 18 pg_stat_io Guide: Enhanced I/O Monitoring'
-page_title: 'PostgreSQL 18 pg_stat_io Guide: Enhanced I/O Monitoring'
-page_description: 'Learn about PostgreSQL 18 enhanced pg_stat_io view with byte-level statistics, WAL I/O tracking, per-backend functions, and comprehensive I/O monitoring capabilities.'
+title: 'PostgreSQL 18 pg_stat_io Guide: Better I/O Monitoring'
+page_title: 'PostgreSQL 18 pg_stat_io Guide: Better I/O Monitoring'
+page_description: 'Learn about PostgreSQL 18 better pg_stat_io view with byte-level statistics, WAL I/O tracking, per-backend functions, and comprehensive I/O monitoring capabilities.'
 ogImage: ''
 updatedOn: '2025-08-16T14:20:00+00:00'
 enableTableOfContents: true
@@ -13,7 +13,7 @@ nextLink:
   slug: 'postgresql-18/psql-improvements'
 ---
 
-**Summary**: In this tutorial, you will learn about PostgreSQL 18's enhanced [`pg_stat_io` view](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW), including new byte-level I/O statistics, WAL tracking, per-backend monitoring functions, and comprehensive buffer analysis for better database performance tuning.
+**Summary**: In this tutorial, you will learn about PostgreSQL 18's better [`pg_stat_io` view](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW), including new byte-level I/O statistics, WAL tracking, per-backend monitoring functions, and comprehensive buffer analysis for better database performance tuning.
 
 ## Introduction to pg_stat_io
 
@@ -23,7 +23,7 @@ This view is great for understanding database performance because it breaks down
 
 ## What's New in PostgreSQL 18
 
-PostgreSQL 18 introduces several major enhancements to I/O monitoring that make the `pg_stat_io` view more powerful and comprehensive.
+PostgreSQL 18 introduces several major improvements to I/O monitoring that make the `pg_stat_io` view more powerful and comprehensive.
 
 ### Byte-Level Statistics
 
@@ -263,14 +263,3 @@ SELECT pg_stat_reset_backend_stats(12345);
 
 This is useful after making configuration changes or when establishing new performance baselines.
 
-## Summary
-
-PostgreSQL 18's enhanced `pg_stat_io` view provides great visibility into database I/O patterns. The addition of byte-level statistics, WAL tracking, and per-backend monitoring functions makes it an essential tool for database performance analysis.
-
-To get the most out of `pg_stat_io`, consider the following:
-
-- Use `pg_test_timing` to measure overhead before turning on `track_io_timing` or `track_wal_io_timing` in production.
-- Clear stats after config changes or workload shifts, and track trends over time instead of relying on snapshots.
-- Use `pg_stat_io` alongside `pg_stat_database`, `pg_stat_activity`, and `pg_stat_statements` for a complete performance picture.
-
-This is particularly useful when troubleshooting slow queries, optimizing buffer cache settings, or planning capacity upgrades as `pg_stat_io` gives you the detailed metrics needed to make informed decisions. The per-backend functions are particularly valuable for identifying specific problematic sessions in real-time.

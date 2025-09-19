@@ -19,11 +19,11 @@ nextLink:
 
 PostgreSQL 18 introduces several useful enhancements for working with arrays and binary data (bytea). These improvements address common developer needs that previously required custom functions or complex workarounds.
 
-The key additions include native array sorting and reversing, bytea manipulation functions, simplified integer-to-bytea conversions, and expanded aggregate support. These enhancements make PostgreSQL more developer-friendly by providing built-in solutions for data manipulation tasks that were previously complex to implement.
+The key additions include native array sorting and reversing, bytea manipulation functions, simplified integer-to-bytea conversions, and expanded aggregate support.
 
 ## New Array Functions
 
-PostgreSQL 18 adds two important array manipulation functions that developers have long requested. These functions operate on the first dimension of arrays, making them suitable for both single-dimensional and multi-dimensional array operations.
+PostgreSQL 18 adds two important array manipulation functions that developers have long requested.
 
 ### array_sort() Function
 
@@ -38,15 +38,6 @@ SELECT array_sort(ARRAY['zebra', 'apple', 'banana']);
 -- Result: {apple,banana,zebra}
 ```
 
-The function also supports collation specifications for text arrays, allowing you to control sorting behavior:
-
-```sql
--- Case-insensitive sorting with collation
-SELECT array_sort(ARRAY['Apple', 'banana', 'Cherry'] COLLATE "en_US");
-```
-
-Note that the specified collation must be available on your system (either ICU or libc collations).
-
 ### array_reverse() Function
 
 The `array_reverse()` function reverses the order of elements in the first dimension:
@@ -60,6 +51,9 @@ SELECT array_reverse(ARRAY['first', 'second', 'third']);
 ```
 
 For multi-dimensional arrays, these functions operate only on the first dimension, so `array_reverse(ARRAY[ARRAY[1,2], ARRAY[3,4]])` becomes `{{3,4},{1,2}}`.
+### Array Function Performance
+
+Array functions work efficiently on reasonably sized arrays but may impact performance with very large arrays containing thousands of elements. The `array_sort()` and `array_reverse()` functions operate in memory, so consider the size of your arrays when using them in large datasets.
 
 ## Binary Data (Bytea) Improvements
 
@@ -74,11 +68,11 @@ SELECT reverse('\x12345678'::bytea);
 -- Result: \x78563412
 ```
 
-This is particularly useful for endianness conversion between big-endian and little-endian formats, cryptographic operations that require byte reversal, and data format transformations.
+This can be used to convert between big-endian and little-endian formats, cryptographic operations that require byte reversal, and data format transformations.
 
 ## Integer-to-Bytea Casting
 
-PostgreSQL 18 introduces direct casting between integer types and bytea, representing integers as two's complement binary values with the most significant byte first (big-endian format).
+PostgreSQL 18 introduces casting between integer types and bytea. The bytea value has the most significant byte first (big-endian format).
 
 ### Basic Integer Casting
 
@@ -138,9 +132,14 @@ SELECT
     MIN(monthly_sales) AS min_sales_pattern,
     MAX(monthly_sales) AS max_sales_pattern
 FROM sales_data;
+
+ min_sales_pattern | max_sales_pattern 
+-------------------+-------------------
+ {23,28,15}        | {67,71,58}
+(1 row)
 ```
 
-This query returns the lexicographically smallest and largest sales patterns across products based on the first element of each array.
+This query returns the `Keyboard` monthly_sales value for min and the `Mouse` value for max because it is evaluating based on the first element of each array.
 
 ### Composite Type Aggregates
 
@@ -162,21 +161,13 @@ FROM (VALUES
     (ROW(4.2, 89)::product_rating),
     (ROW(4.8, 156)::product_rating)
 ) AS ratings(rating);
+
+ lowest_rating | highest_rating 
+---------------+----------------
+ (4.20,89)     | (4.80,156)
 ```
 
 This query finds the lowest and highest product ratings based on average score and review count. In previous PostgreSQL versions, using `MIN()` or `MAX()` on arrays or composite types required custom aggregate functions or complex subqueries. Now, these operations are straightforward and come built-in.
-
-## Performance Considerations
-
-When using these new functions, consider their performance characteristics and limitations.
-
-### Array Function Performance
-
-Array functions work efficiently on reasonably sized arrays but may impact performance with very large arrays containing thousands of elements. The `array_sort()` and `array_reverse()` functions operate in memory, so consider the size of your arrays when using them in large datasets.
-
-### Bytea Operations
-
-The reverse function is efficient for typical data sizes. When working with large binary data (over several kilobytes), consider the memory implications during processing.
 
 ### Aggregate Performance
 
@@ -185,12 +176,4 @@ The MIN/MAX aggregates on arrays and composite types currently require sequentia
 ```sql
 -- This will scan all rows to find MIN/MAX arrays
 SELECT MIN(monthly_sales), MAX(monthly_sales) FROM sales_data;
-```
 
-For better performance with large datasets, consider filtering your data first or using appropriate `WHERE` clauses to limit the number of rows being aggregated.
-
-## Summary
-
-PostgreSQL 18's array and bytea function enhancements provide developers with powerful, built-in tools for data manipulation. The new `array_sort()` and `array_reverse()` functions eliminate the need for custom sorting implementations, while the bytea `reverse()` function and integer-to-bytea casting simplify binary data operations.
-
-The extension of MIN/MAX aggregates to arrays and composite types opens up new possibilities for data analysis and reporting. These enhancements reflect PostgreSQL's ongoing commitment to developer productivity while maintaining performance and reliability.

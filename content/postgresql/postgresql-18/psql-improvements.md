@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
 page_title: 'PostgreSQL 18 psql Improvements: Pipeline Queries and Prepared Statements'
-page_description: 'Learn about PostgreSQL 18 psql improvements including pipeline query commands, prepared statement support, enhanced prompt options, and improved workflow capabilities that make database development more efficient.'
+page_description: 'Learn about PostgreSQL 18 psql improvements including pipeline query commands, prepared statement support, improved prompt options, and improved workflow capabilities that make database development more efficient.'
 ogImage: ''
 updatedOn: '2025-08-02T10:30:00+00:00'
 enableTableOfContents: true
@@ -13,7 +13,7 @@ nextLink:
   slug: 'postgresql-18/autovacuum-maintenance-configuration'
 ---
 
-**Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, enhanced prompt options, and workflow features that make database development and debugging more efficient.
+**Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.
 
 ## Introduction to psql Improvements
 
@@ -189,9 +189,9 @@ UPDATE users SET last_login = $1 WHERE id = $2 \parse clear_field
 
 This flexibility allows you to test various scenarios directly from `psql`, making it a powerful tool for application development and debugging.
 
-## Enhanced Prompt Options
+## Better Prompt Options
 
-PostgreSQL 18 enhances psql's prompt system with pipeline status indicators and new state variables that help you track what's happening during complex operations.
+PostgreSQL 18 improves psql's prompt system with pipeline status indicators and new state variables that help you track what's happening during complex operations.
 
 ### Pipeline Status in Prompt
 
@@ -262,10 +262,3 @@ PostgreSQL 18 also adds support for displaying the connection service name in pr
 
 This allows you to easily identify which connection service you're using, especially in environments with multiple database configurations.
 
-## Summary
-
-PostgreSQL 18's `psql` improvements bring significant new capabilities to the command-line interface. The pipeline query commands allow you to achieve better performance through reduced network overhead, while the prepared statement support makes debugging and development much easier.
-
-The improved prompt options and state variables give you better visibility into what `psql` is doing, making it easier to understand and optimize your database workflows.
-
-As PostgreSQL continues to evolve, tools like `psql` evolve with it, making sure that the command-line interface remains a powerful and efficient way to work with PostgreSQL databases.

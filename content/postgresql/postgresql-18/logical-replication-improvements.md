@@ -1,7 +1,7 @@
 ---
 title: 'PostgreSQL 18 Logical Replication of Generated Columns'
 page_title: 'PostgreSQL 18 Logical Replication of Generated Columns'
-page_description: 'Learn about PostgreSQL 18 logical replication enhancements including support for replicating stored generated columns, enhanced conflict logging with pg_stat_subscription_stats, and improved streaming configuration options.'
+page_description: 'Learn about PostgreSQL 18 logical replication improvements including support for replicating stored generated columns, improved conflict logging with pg_stat_subscription_stats, and improved streaming configuration options.'
 ogImage: ''
 updatedOn: '2025-08-09T08:00:00+00:00'
 enableTableOfContents: true
@@ -13,9 +13,9 @@ nextLink:
   slug: 'postgresql-18/oauth-authentication'
 ---
 
-**Summary**: In this tutorial, you will learn about PostgreSQL 18's logical replication improvements, including the ability to replicate stored generated columns, better conflict monitoring, and enhanced streaming defaults that make replication more reliable for production use.
+**Summary**: In this tutorial, you will learn about PostgreSQL 18's logical replication improvements, including the ability to replicate stored generated columns, better conflict monitoring, and improved streaming defaults that make replication more reliable for production use.
 
-## Introduction to Logical Replication Enhancements
+## Introduction to Logical Replication Improvements
 
 PostgreSQL 18 introduces three major improvements to logical replication that address common production challenges:
 
@@ -67,7 +67,7 @@ When you enable generated column replication, the publisher sends the calculated
 
 This is particularly helpful when migrating between different database systems that handle calculations differently.
 
-## Enhanced Conflict Monitoring
+## Improved Conflict Monitoring
 
 PostgreSQL 18 significantly improves how you monitor and troubleshoot logical replication conflicts through better logging and a new statistics view.
 
@@ -153,7 +153,7 @@ The parallel streaming default provides several advantages:
 
 If you need the old behavior for compatibility, you can still set `streaming = off` when creating subscriptions.
 
-### Enhanced Two-Phase Commit Support
+### Better Two-Phase Commit Support
 
 PostgreSQL 18 also allows you to change two-phase commit settings on existing subscriptions without recreating them:
 
@@ -174,8 +174,3 @@ There are a few things to keep in mind:
 - On subscribers older than 18, initial table synchronization won't copy generated columns; for full support use PG 18 on the subscriber
 - `track_commit_timestamp = on` is needed on the subscriber to detect `*_origin_differs` conflicts
 
-## Summary
-
-PostgreSQL 18's logical replication improvements make it easier to manage in production. The ability to replicate generated columns opens up new possibilities for cross-database scenarios, while better monitoring and default settings make replication more reliable overall.
-
-These improvements position PostgreSQL's logical replication as a stronger solution for data distribution, migration projects, and building robust data architectures that span multiple systems.

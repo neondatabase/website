@@ -1,6 +1,6 @@
 ---
-title: 'PostgreSQL 18 Security Enhancements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
-page_title: 'PostgreSQL 18 Security Enhancements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
+title: 'PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
+page_title: 'PostgreSQL 18 Security Improvements: Wire Protocol 3.2, Advanced TLS and FIPS Validation'
 page_description: 'Learn about PostgreSQL 18 security improvements including wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration, and FIPS mode validation features for better database security.'
 ogImage: ''
 updatedOn: '2025-08-03T14:20:00+00:00'
@@ -13,18 +13,18 @@ nextLink:
   slug: 'postgresql-18/pg-stat-io'
 ---
 
-**Summary**: Learn about PostgreSQL 18's security improvements including the new wire protocol version 3.2, enhanced 256-bit cancel request keys, TLS 1.3 cipher configuration options, and FIPS mode validation features that strengthen database security.
+**Summary**: Learn about PostgreSQL 18's security improvements including the new wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration options, and FIPS mode validation features that strengthen database security.
 
-## Introduction to Security Enhancements
+## Introduction to Security Improvements
 
-PostgreSQL 18 introduces several important security improvements that strengthen database security at multiple levels. These enhancements focus on network protocol security, transport layer protection, and cryptographic compliance validation.
+PostgreSQL 18 introduces several important security improvements that strengthen database security at multiple levels. These focus on network protocol security, transport layer protection, and cryptographic compliance validation.
 
 > **Note**: PostgreSQL 18 is currently in beta. While these security features are stable for testing, we recommend thorough testing in development environments before production deployment.
 
 The security improvements in PostgreSQL 18 address real-world security needs:
 
 - **Wire protocol modernization**: The first protocol update in over 20 years
-- **Enhanced query cancellation security**: Protection against brute-force attacks
+- **Better query cancellation security**: Protection against brute-force attacks
 - **Modern TLS support**: Fine-grained control over TLS 1.3 cipher suites
 - **FIPS compliance validation**: Tools to verify cryptographic compliance
 
@@ -38,17 +38,17 @@ PostgreSQL 18 introduces wire protocol version 3.2, the first new protocol versi
 
 The wire protocol defines how PostgreSQL clients and servers communicate over the network. It handles everything from authentication to query execution and result delivery. The protocol has remained stable for over 20 years, which shows PostgreSQL's commitment to backward compatibility.
 
-Protocol version 3.2 maintains full backward compatibility. Existing clients continue to work unchanged, while new clients can take advantage of enhanced features when both client and server support the newer protocol version.
+Protocol version 3.2 maintains full backward compatibility. Existing clients continue to work unchanged, while new clients can take advantage of features when both client and server support the newer protocol version.
 
 ### What's New in Protocol 3.2
 
-The main improvement in protocol version 3.2 is support for enhanced security features, particularly the new 256-bit cancel request keys. The protocol now supports variable-length cancel keys, which provides better security and flexibility for future enhancements.
+The main improvement in protocol version 3.2 is support for stronger security features, particularly the new 256-bit cancel request keys. The protocol now supports variable-length cancel keys, which provides better security and flexibility for future improvements.
 
 **Key changes in protocol 3.2:**
 
 - Support for longer cancellation keys (up to 256 bits)
 - Variable-length key support for future extensibility
-- Enhanced protocol negotiation capabilities
+- Improved protocol negotiation capabilities
 - Foundation for future security improvements
 
 ### Current Implementation Status
@@ -57,18 +57,18 @@ While PostgreSQL 18 servers support protocol version 3.2, libpq (the standard Po
 
 To check the negotiated protocol, call `PQfullProtocolVersion()` from libpq-based clients. Currently, there is no SQL command that reports the wire protocol version.
 
-To use protocol version 3.2 features, both the client and server must support the new protocol version. Driver developers and application maintainers will gradually add support for the enhanced protocol features.
+To use protocol version 3.2 features, both the client and server must support the new protocol version. Driver developers and application maintainers will gradually add support for the improved protocol features.
 
 ### Impact on Applications
 
 For most applications, the protocol upgrade is transparent. Existing applications continue to work without modification. The new protocol features primarily benefit:
 
-- **Database drivers**: Can implement enhanced security features
+- **Database drivers**: Can implement improved security features
 - **Connection poolers**: Can take advantage of improved cancellation key management
 - **Monitoring tools**: Better access to protocol-level information
-- **Security-focused applications**: Enhanced protection against network-level attacks
+- **Security-focused applications**: Better protection against network-level attacks
 
-## Enhanced Cancel Request Keys
+## Cancel Request Keys
 
 One of the most significant security improvements in PostgreSQL 18 when using protocol version 3.2 is the upgrade from 32-bit to 256-bit cancel request keys. This change dramatically improves security for query cancellation operations.
 
@@ -91,7 +91,7 @@ This makes brute-force attacks against cancel requests practically impossible, e
 
 ### How the Upgrade Works
 
-The enhancement is automatic when both client and server support protocol version 3.2:
+The upgrade is automatic when both client and server support protocol version 3.2:
 
 1. **Client connects** using protocol version 3.2
 2. **Server generates** a 256-bit cancellation key
@@ -107,7 +107,7 @@ The longer cancel keys provide several benefits:
 - Protection against brute-force cancellation attacks
 - Better security in environments with network access
 - Stronger isolation between different database users
-- Foundation for additional security enhancements
+- Foundation for additional security improvements
 
 ## TLS 1.3 Cipher Configuration
 
@@ -217,17 +217,10 @@ This allows administrators to make sure that only FIPS-approved algorithms are u
 
 ## Backward Compatibility
 
-All security enhancements maintain backward compatibility:
+All security improvements maintain backward compatibility:
 
 - Existing clients continue to work unchanged
 - Protocol version 3.0 remains fully supported and version 3.2 is optional for drivers
 - Legacy cipher configurations continue to function
 - Non-FIPS environments are unaffected by FIPS features
 
-## Summary
-
-PostgreSQL 18's security enhancements provide a solid foundation for modern database security. The new wire protocol version 3.2 brings the communication layer into the modern era, while 256-bit cancel request keys eliminate a potential security vulnerability.
-
-The addition of TLS 1.3 cipher configuration gives administrators fine-grained control over transport security, and the new FIPS validation features make compliance verification much easier.
-
-Together, these improvements position PostgreSQL 18 as a more secure database platform, particularly valuable for organizations with strict security requirements or compliance obligations. The backward-compatible design ensures that these enhancements can be adopted gradually without disrupting existing operations.
