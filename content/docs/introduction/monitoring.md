@@ -25,13 +25,19 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 </DetailIconCards>
 
+## Datadog integration
+
+<DetailIconCards>
+
+<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Datadog</a>
+
+</DetailIconCards>
+
 ## OpenTelemetry
 
 <DetailIconCards>
 
 <a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">OTel integration</a>
-
-<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Datadog</a>
 
 <a href="/docs/guides/grafana-cloud" description="Export Neon metrics and logs to Grafana Cloud with native OTLP integration" icon="trend-up">Grafana Cloud</a>
 
