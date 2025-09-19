@@ -599,8 +599,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon Toolkit
                   slug: https://github.com/neondatabase/toolkit
-                - title: Neon API
-                  slug: reference/api-reference
+                - title: Neon API reference
+                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -655,8 +655,10 @@
             - section: API
               icon: api
               items:
-                - title: Neon API
+                - title: Overview
                   slug: reference/api-reference
+                - title: Reference
+                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: CLI
               icon: cli
               items:
