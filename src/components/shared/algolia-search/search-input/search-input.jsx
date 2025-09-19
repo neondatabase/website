@@ -39,19 +39,11 @@ const SearchInput = ({ className, asPlaceholder }) => {
           />
         </div>
       ) : (
-        <SearchBox placeholder="Search..." />
+        <SearchBox className="w-96 [&_.ais-SearchBox-reset]:right-32" placeholder="Search..." />
       )}
-      <span
-        className={clsx(
-          'pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center px-1.5',
-          'rounded-[3px] border border-gray-new-90 bg-white text-xs font-medium text-black-pure',
-          'dark:border-gray-new-20 dark:bg-black-pure dark:text-white',
-          'md:hidden'
-        )}
-      >
-        ⌘K
-        <span className="sr-only">Press ⌘K to focus on the search input</span>
-      </span>
+      <div className="pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center gap-2 px-1.5 text-xs font-medium italic text-black-pure dark:text-gray-new-50">
+        Powered by Algolia
+      </div>
     </div>
   );
 };
