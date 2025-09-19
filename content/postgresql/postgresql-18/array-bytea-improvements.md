@@ -57,7 +57,7 @@ Array functions work efficiently on reasonably sized arrays but may impact perfo
 
 ## Binary Data (Bytea) Improvements
 
-PostgreSQL 18 introduces several improvements for working with binary data, including a new reverse function and enhanced casting capabilities.
+PostgreSQL 18 introduces several improvements for working with binary data, including a new reverse function and better casting capabilities.
 
 ### New reverse() Function for Bytea
 
