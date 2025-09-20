@@ -276,9 +276,7 @@ Compliance certifications available on **Scale**:
 - ISO 27701
 - GDPR
 - CCPA
-- HIPAA (additional charge)
-
-> Contact [Sales](/contact-sales) for HIPAA details.
+- HIPAA ([additional charge](/docs/security/hipaa))
 
 Security features:
 
