@@ -18,20 +18,45 @@ import CodeTabs from 'components/pages/doc/code-tabs';
 
 const CodeBlock = dynamic(() => import('components/shared/code-block'), { ssr: false });
 
+const neonImportLibrary = `
+import { PostgrestClient } from "@supabase/postgrest-js";
+
+// Example with Neon Auth and Anonymous Login
+// Visit the Neon Auth configuration page to get all the required variables
+const response = await fetch("https://api.stack-auth.com/api/v1/auth/anonymous/sign-up", {
+    method: "POST",
+    headers:   {
+        "x-stack-access-type": "client",
+        "x-stack-project-id": "STACK_PROJECT_ID",
+        "x-stack-publishable-client-key": "NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY",
+    }
+});
+
+const { access_token } = await response.json();
+
+const postgRESTClient = new PostgrestClient('DATA-API-URL', {
+    headers: {
+        'Authorization': \`Bearer \${access_token}\`,
+    }
+});
+
+const { data, error } = await postgRESTClient`;
+
 const SqlToRestConverter = () => {
   const [sqlQuery, setSqlQuery] = useState(`select
-  title,
-  description
+  name,
+  age
 from
-  books
+  users
 where
-  description ilike '%cheese%'
+  name ilike '%john%'
 order by
-  title desc
+  name desc
 limit
   5
 offset
   10`);
+
   const [curlOutput, setCurlOutput] = useState('');
   const [httpOutput, setHttpOutput] = useState('');
   const [jsOutput, setJsOutput] = useState('');
@@ -49,7 +74,9 @@ offset
 
       const rawHttp = formatHttp(baseUrl, httpRequest);
 
-      const { code: jsCode } = await renderSupabaseJs(statement);
+      let { code: jsCode } = await renderSupabaseJs(statement);
+
+      jsCode = jsCode.replace('const { data, error } = await supabase', neonImportLibrary);
 
       setCurlOutput(curlCommand);
       setHttpOutput(rawHttp);
