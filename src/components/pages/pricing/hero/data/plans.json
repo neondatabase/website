@@ -104,6 +104,7 @@
       "features": [
         { "title": "30-day time travel/PITR" },
         { "title": "14-day monitoring retention" },
+        { "title": "Self-serve HIPAA" },
         { "title": "Metrics / logs export" },
         { "title": "Private Network / IP Rules" },
         { "title": "99.95% SLA" },
