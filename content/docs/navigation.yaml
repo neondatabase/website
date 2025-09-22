@@ -395,7 +395,7 @@
                   slug: neon-auth/create-users
                 - title: Claiming a Project
                   slug: neon-auth/claim-project
-                - title: Permsissions
+                - title: Permissions
                   slug: neon-auth/permissions-roles
                 - title: Email configuration
                   slug: neon-auth/email-configuration
