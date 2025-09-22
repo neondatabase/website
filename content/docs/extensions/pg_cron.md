@@ -61,7 +61,7 @@ You can then install the `pg_cron` extension by running the following `CREATE EX
 CREATE EXTENSION IF NOT EXISTS pg_cron;
 ```
 
-If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://t.co/kORvEuCUpJ).
+If you have trouble with this setup, please reach out to [Neon Support](https://console.neon.tech/app/projects?modal=support) or find us on [Discord](https://discord.gg/92vNTzKDGp).
 
 ## `pg_cron` version availability
 
