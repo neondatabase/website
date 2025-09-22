@@ -14,7 +14,7 @@ import 'styles/hubspot-form.css';
 import 'styles/calendly-widget.css';
 import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL = 'https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering';
+const calendlyURL = 'https://calendar.app.google/i3Ve6FRc56Ja7Qsf9';
 const hubspotFormID = '26f1ff16-e3ab-4adf-b09f-910f130637b0';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
