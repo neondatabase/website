@@ -21,7 +21,16 @@ Neon also provides a passwordless auth feature that uses `psql`. For more inform
 
 If you don't have `psql` installed already, follow these steps to get set up:
 
-<Tabs labels={["Mac", "Linux", "Windows"]}>
+<Tabs labels={["Mac (Intel x64)", "Mac (Apple Silicon)", "Linux", "Windows"]}>
+
+<TabItem>
+```bash
+brew install libpq
+echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+</TabItem>
 
 <TabItem>
 ```bash
