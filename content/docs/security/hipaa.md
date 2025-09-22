@@ -4,7 +4,7 @@ enableTableOfContents: true
 updatedOn: '2025-09-16T21:43:43.771Z'
 ---
 
-Neon offers HIPAA compliance as a self-serve feature available to customers on supported plans.
+Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan (and on [legacy Business and Enterprise plans](/docs/introduction/legacy-plans)).
 
 <Admonition type="note">
 HIPAA support is currently available at no additional cost. Once billing is finalized, HIPAA support will add a 15% surcharge to your monthly invoice. We’ll notify you in advance before this change takes effect.
