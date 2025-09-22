@@ -8,7 +8,7 @@ enableTableOfContents: true
 
 ## Permission denied to create extension "pg_session_jwt"
 
-```bash
+```bash shouldWrap
 ERROR: permission denied to create extension "pg_session_jwt" (SQLSTATE 42501)
 ```
 
@@ -34,7 +34,7 @@ For future databases, create them using the Console UI or Neon API instead of di
 
 **Example**
 
-```bash
+```bash shouldWrap
 curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${branchId}/databases" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $NEON_API_KEY" \
