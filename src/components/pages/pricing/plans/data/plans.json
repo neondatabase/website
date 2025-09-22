@@ -201,11 +201,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Support"
+        "title": "HIPAA"
       },
-      "free": "Community",
-      "launch": "Billing",
-      "scale": "Standard"
+      "free": false,
+      "launch": false,
+      "scale": true
     },
     {
       "rows": "2",
