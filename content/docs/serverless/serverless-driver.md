@@ -298,6 +298,50 @@ Note that options **cannot** be supplied for individual queries within a transac
 
 For additional details, see [transaction(...) function](https://github.com/neondatabase/serverless/blob/main/CONFIG.md#transaction-function).
 
+### Using transactions with JWT self-verification
+
+When using Row-Level Security (RLS) to secure backend SQL with the Neon serverless driver, you may need to set JWT claims within a transaction context. This is particularly useful for custom JWT verification flows in backend APIs, where you want to ensure user-specific access to rows according to RLS policies.
+
+Here's an example of how to use the `transaction()` function with self-verified JWT claims:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+
+// Example JWT verification function, typically in a separate auth utilitiy file (implement according to your auth provider)
+async function verifyJWT(jwtToken, jwksURL) {
+  // Your JWT verification logic here
+  // This should return the decoded payload
+  return { payload: { sub: 'user123', email: 'user@example.com' } };
+}
+
+const sql = neon(process.env.DATABASE_URL);
+
+// Get JWT token from request headers or context
+const jwtToken = req.headers.authorization?.replace('Bearer ', '');
+const jwksURL = process.env.JWKS_URL; // Your JWKS endpoint
+
+// Verify the JWT and extract claims
+const { payload } = await verifyJWT(jwtToken, jwksURL);
+const claims = JSON.stringify(payload);
+
+// Use transaction to set JWT claims and query data
+const [, my_table] = await sql.transaction([
+  sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
+  sql`SELECT * FROM my_table`,
+]);
+```
+
+<Admonition type="important">
+When using JWT self-verification with RLS, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role in your connection string, as it bypasses Row-Level Security policies.
+</Admonition>
+
+This pattern allows you to:
+
+- Verify JWTs using your own authentication logic
+- Set the JWT claims in the database session context
+- Access JWT claims in your RLS policies
+- Execute multiple queries within a single transaction while maintaining the auth context
+
 ## Use the driver over WebSockets
 
 The Neon serverless driver supports the [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) constructors for querying over WebSockets.

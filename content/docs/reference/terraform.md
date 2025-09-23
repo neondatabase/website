@@ -323,24 +323,6 @@ resource "neon_project_permission" "share_with_colleague" {
 }
 ```
 
-### Advanced: JWKS URL for RLS
-
-Configure JWKS URL for Row Level Security authorization.
-
-```terraform
-resource "neon_jwks_url" "auth_provider_jwks" {
-  project_id    = neon_project.my_app_project.id
-  # Use the default role from the project, or specify custom roles
-  role_names    = [neon_project.my_app_project.database_user]
-  provider_name = "YourAuthProviderName" # e.g., "clerk"
-  jwks_url      = "<https://<YOUR_AUTH_PROVIDER_JWKS_URL>" # Replace with your actual JWKS URL
-}
-```
-
-> For a list of supported providers, see [Neon RLS: Supported Providers](/docs/guides/neon-rls#supported-providers).
-
-For more attributes and options on managing JWKS URLs, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/jwks_url.md)
-
 ### Advanced: VPC endpoint management (for Neon private networking)
 
 These resources are used for organizations requiring private networking.
