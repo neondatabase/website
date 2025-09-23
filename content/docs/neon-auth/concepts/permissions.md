@@ -56,7 +56,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function CheckUserPermission() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -106,7 +106,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function DisplayUserPermissions() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -178,7 +178,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function CheckGlobalPermission() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -226,7 +226,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function DisplayGlobalPermissions() {
   const user = await stackServerApp.getUser({ or: 'redirect' });

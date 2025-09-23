@@ -239,7 +239,7 @@ With RLS policies in place, you can now query the database using JWTs from Stack
 'use server';
 
 import { neon } from '@neondatabase/serverless';
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export async function TodoList() {
   const user = await stackServerApp.getUser();
