@@ -61,7 +61,7 @@ In such cases, your action may occasionally be required. When this occurs &#8212
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, 17, and 18*. Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
+Neon currently supports Postgres 14, 15, 16, 17, and 18\*. Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
 
 ### Postgres 18 support
 
