@@ -70,7 +70,7 @@ Postgres 18 is available on Neon as a preview release. While fully functional, w
 #### Current limitations
 
 - **Stability**: Expect minor issues as we complete testing and integration with Postgres 18's significant architectural changes.
-- **Performance**: Neon currently runs Postgres 18 with `io_method = 'sync'` to use the traditional synchronous I/O behavior found in PostgreSQL 17 and earlier versions. We're working to integrate with Postgres 18's new async I/O system.
+- **Performance**: Neon currently runs Postgres 18 with `io_method = 'sync'` to use the traditional synchronous I/O behavior found in Postgres 17 and earlier versions. We're working to integrate with Postgres 18's new async I/O system.
 - **Extensions**: Not all extensions are available at launch, [check extension compatibility](/docs/extensions/pg-extensions) before upgrading.
 
 We'll remove the preview designation once these limitations are addressed.
