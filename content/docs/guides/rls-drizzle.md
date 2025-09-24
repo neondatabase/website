@@ -32,24 +32,14 @@ Drizzle ORM provides a declarative way to manage these policies directly within 
 
 ## Understanding Neon's auth functions
 
-The Neon [Data API](/docs/data-api/get-started) provides the `auth.user_id()` function that automatically extracts user information from JWT claims and makes it available in your RLS policies. It works like this:
+The Neon [Data API](/docs/data-api/get-started) provides the `auth.user_id()` function that automatically extracts user information from JWT claims and makes it available in your RLS policies:
 
 ```typescript
 // In your RLS policy
 using: sql`(select auth.user_id() = ${table.userId})`,
 ```
 
-If you want to use your own JWT validation, you can use something like:
-
-```javascript
-// Set JWT claims and query data in a transaction
-const [, my_table] = await sql.transaction([
-  sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
-  sql`SELECT * FROM my_table`,
-]);
-```
-
-All code samples on this page assume you are using the Data API. If using your own JWT validation, make sure you modify your code accordingly.
+All code samples on this page assume you are using the Data API.
 
 ### Granting Permissions to Postgres Roles
 
@@ -765,6 +755,5 @@ This pattern uses a reusable `fetchWithDrizzle` helper to ensure authentication 
 To see these concepts in action, check out these sample applications:
 
 - **[Data API Demo](https://github.com/neondatabase-labs/neon-data-api-neon-auth)**: A note-taking app demonstrating `crudPolicy` with Neon's Data API.
-- **[Social Wall Demo](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls)**: A social media app using `crudPolicy` with Neon RLS (JWT/JWKS integration).
 
 <NeedHelp/>
