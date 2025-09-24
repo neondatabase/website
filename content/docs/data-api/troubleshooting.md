@@ -8,14 +8,8 @@ enableTableOfContents: true
 
 ## Permission denied to create extension "pg_session_jwt"
 
-```bash shouldWrap
-ERROR: permission denied to create extension "pg_session_jwt" (SQLSTATE 42501)
-```
-
-You might also see this generic error instead:
-
 ```bash
-Request failed: unknown internal server error
+Request failed: database CREATE permission is required for neon_superuser
 ```
 
 ### Why this happens
