@@ -10,7 +10,7 @@ nextLink:
   slug: 'postgresql-18/asynchronous-io'
 ---
 
-**Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O with as much as 2-3x I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that will impact developers and DBAs.
+**Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O providing significant I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that will impact developers and DBAs.
 
 <CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
 
