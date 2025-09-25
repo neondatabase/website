@@ -61,7 +61,11 @@
         "icon": "storage",
         "title": "$0.35 per GB-month storage"
       },
-      { "icon": "autoscale", "title": "Autoscaling up to 16 CU", "subtitle": "(16 vCPU, 64 GB RAM)" }
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 16 CU",
+        "subtitle": "(16 vCPU, 64 GB RAM)"
+      }
     ],
     "otherFeatures": {
       "title": "Everything in Free, plus...",
@@ -97,7 +101,11 @@
         "icon": "storage",
         "title": "$0.35 per GB-month storage"
       },
-      { "icon": "autoscale", "title": "Autoscaling up to 16 CU+", "subtitle": "(56 vCPU, 224 GB RAM)" }
+      {
+        "icon": "autoscale",
+        "title": "Autoscaling up to 16 CU+",
+        "subtitle": "(56 vCPU, 224 GB RAM)"
+      }
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
