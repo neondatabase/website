@@ -15,8 +15,6 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.
 
-
-
 ## Introduction to psql Improvements
 
 PostgreSQL 18 introduces significant improvements to `psql`, the command-line interface that developers and database administrators use daily. These improvements focus on three main areas: pipeline query support, prepared statement management, and better workflow integration.

@@ -15,8 +15,6 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new UUIDv7 support to generate timestamp-ordered UUIDs that improve B-tree index performance while maintaining global uniqueness.
 
-
-
 ## Introduction to UUIDv7
 
 PostgreSQL 18 introduces native support for UUIDv7, a new UUID format specified in RFC 9562. UUIDv7 addresses performance limitations that have made developers hesitant to use UUIDs as primary keys in database applications.

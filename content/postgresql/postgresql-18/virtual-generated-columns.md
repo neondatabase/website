@@ -15,8 +15,6 @@ nextLink:
 
 **Summary**: Learn how PostgreSQL 18 makes virtual generated columns the default, enabling compute-on-demand columns that save storage space while providing automatic calculations without the overhead of stored values.
 
-
-
 ## Introduction to Virtual Generated Columns
 
 PostgreSQL 18 introduces a fundamental change to how generated columns work by making **virtual generated columns** the default option. This represents a significant shift from previous versions where generated columns were required to be stored (STORED) and took up disk space like regular columns.

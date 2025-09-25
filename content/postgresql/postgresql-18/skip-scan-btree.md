@@ -15,8 +15,6 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn how PostgreSQL 18's new B-tree skip scan feature enables efficient queries on multicolumn indexes even when you omit equality conditions on prefix columns, dramatically improving performance for analytics and reporting workloads.
 
-
-
 ## Introduction to B-tree Skip Scan
 
 PostgreSQL 18 introduces an improvement to B-tree index scanning called "skip scan." This feature addresses a long-standing limitation where multicolumn B-tree indexes could only be used efficiently when queries included equality conditions on the leading (leftmost) columns of the index.
