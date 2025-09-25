@@ -15,8 +15,6 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn how to configure and use PostgreSQL 18's new asynchronous I/O features to improve database performance for read-heavy workloads.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
-
 <Admonition type="important">
  Postgres 18 on Neon will still be running with `io_method = 'sync'` for a while longer, and parts of our sequential scan and prefetch code aren’t yet optimized for Postgres 18. We’re actively working on an improved I/O backend that integrates with the new asynchronous I/O system in Postgres 18, but that will take more time to land.
 </Admonition>
