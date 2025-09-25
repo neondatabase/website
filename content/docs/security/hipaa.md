@@ -40,6 +40,10 @@ Once HIPAA is enabled for your organization, you can proceed to enable HIPAA com
 Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling HIPAA will also restart all computes, temporarily interrupting database connections.
 </Admonition>
 
+<Admonition type="comingSoon">
+HIPAA support for Postgres 18 is coming soon.
+</Admonition>
+
 <Tabs labels={["New project", "Existing project", "API", "CLI"]}>
 
 <TabItem>
