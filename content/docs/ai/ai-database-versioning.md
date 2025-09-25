@@ -7,7 +7,7 @@ updatedOn: '2025-09-22T14:00:22.485Z'
 ---
 
 <Admonition type="note" title="Beta">
-Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://t.co/kORvEuCUpJ). There is no charge for snapshots while the feature is in Beta. There is a limit of 1 snapshot on the Free plan and 10 on paid plans. The same limits apply to the Neon [Agent plan](https://neon.com/use-cases/ai-agents). If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp). There is no charge for snapshots while the feature is in Beta. There is a limit of 1 snapshot on the Free plan and 10 on paid plans. The same limits apply to the Neon [Agent plan](https://neon.com/use-cases/ai-agents). If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
 
 ## Overview

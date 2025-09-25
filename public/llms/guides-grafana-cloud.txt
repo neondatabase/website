@@ -34,7 +34,7 @@ The integration exports [a comprehensive set of metrics](https://neon.com/docs/g
 
 ### Postgres logs
 
-**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 With the the Grafana Cloud integration, you can forward Postgres logs to your Grafana Cloud stack. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Grafana Cloud](https://neon.com/docs/guides/grafana-cloud#export-postgres-logs-to-grafana-cloud) for details.
 
