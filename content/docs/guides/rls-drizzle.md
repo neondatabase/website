@@ -16,12 +16,11 @@ redirectFrom:
 <p>Common RLS patterns with Drizzle</p>
 <p>How to use custom Postgres roles with your policies</p>
 <p>How to set up Drizzle clients for both authenticated user queries and admin tasks</p>
-<p>Using RLS with Data API and Neon RLS</p>
+<p>Using RLS with Data API</p>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/guides/row-level-security">Row-Level Security with Neon</a>
-  <a href="/docs/guides/neon-rls">Neon RLS (JWT/JWKS Integration)</a>
   <a href="/docs/data-api/get-started">Data API</a>
   <a href="https://orm.drizzle.team/docs/rls">RLS in Drizzle</a>
 </DocsList>
@@ -31,18 +30,27 @@ Row-Level Security (RLS) is an important last line of defense for protecting you
 
 Drizzle ORM provides a declarative way to manage these policies directly within your database schema, making your security rules easier to write, review, and maintain.
 
-<Admonition type="note" title="A note on auth.user_id()">
-You can use the same Drizzle policies with both the [Data API](/docs/data-api/get-started) and [Neon RLS](/docs/guides/neon-rls) because they both provide an `auth.user_id()` function to identify the current user.
+## Understanding Neon's auth functions
 
-It's important to know that while the function is the same, the underlying features work differently and **are not compatible**. In general, we recommend the Data API: make sure Neon RLS is disabled for your project if you want to use Data API on a given branch.
-</Admonition>
+The Neon [Data API](/docs/data-api/get-started) provides the `auth.user_id()` function that automatically extracts user information from JWT claims and makes it available in your RLS policies:
+
+```typescript
+// In your RLS policy
+using: sql`(select auth.user_id() = ${table.userId})`,
+```
+
+All code samples on this page assume you are using the Data API.
 
 ### Granting Permissions to Postgres Roles
 
-To ensure your application functions correctly for both authenticated and anonymous users, you must explicitly grant the necessary permissions to the `authenticated` and `anonymous` roles. This configuration enables you to manage access for logged-in users (authenticated) and users who are not logged in (anonymous).
+When you enable the Data API, it creates two special roles for you: `authenticated` and `anonymous`. These roles enable you to manage access for logged-in users (authenticated) and users who are not logged in (anonymous).
+
+By default, the Data API grants the necessary permissions to these roles, but you can customize them as needed.
 
 <Admonition type="important">
 The following `GRANT` statements only assign table privileges to the `authenticated` and `anonymous` roles. You must still define appropriate Row-Level Security (RLS) policies for each table to control what actions these roles can perform, according to your application's requirements.
+
+When using RLS, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role in your connection string, as it bypasses Row-Level Security policies.
 </Admonition>
 
 The following SQL statements grant **all privileges** (SELECT, UPDATE, INSERT, DELETE) on all existing and future tables in the `public` schema to both the `authenticated` and `anonymous` roles. You may adjust these statements to fit your specific role and permission requirements.
@@ -747,6 +755,5 @@ This pattern uses a reusable `fetchWithDrizzle` helper to ensure authentication 
 To see these concepts in action, check out these sample applications:
 
 - **[Data API Demo](https://github.com/neondatabase-labs/neon-data-api-neon-auth)**: A note-taking app demonstrating `crudPolicy` with Neon's Data API.
-- **[Social Wall Demo](https://github.com/neondatabase-labs/social-wall-drizzle-neon-rls)**: A social media app using `crudPolicy` with Neon RLS (JWT/JWKS integration).
 
 <NeedHelp/>
