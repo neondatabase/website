@@ -4,7 +4,7 @@ subtitle: Use Terraform to provision and manage your Neon projects, branches, en
   roles, databases, and other resources as code.
 enableTableOfContents: true
 tag: community
-updatedOn: '2025-07-07T19:22:23.743Z'
+updatedOn: '2025-09-25T14:36:08.176Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
@@ -141,7 +141,7 @@ This configuration creates a new Neon project.
 **Key `neon_project` attributes:**
 
 - `name`: (Optional) Name of the project.
-- `pg_version`: (Optional) PostgreSQL version (e.g., 14, 15, 16, 17).
+- `pg_version`: (Optional) The major supported PostgreSQL version, such as 17.
 - `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
   > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
 - `branch {}`: (Optional) Block to configure the default primary branch.
@@ -322,24 +322,6 @@ resource "neon_project_permission" "share_with_colleague" {
   grantee    = "colleague@example.com"
 }
 ```
-
-### Advanced: JWKS URL for RLS
-
-Configure JWKS URL for Row Level Security authorization.
-
-```terraform
-resource "neon_jwks_url" "auth_provider_jwks" {
-  project_id    = neon_project.my_app_project.id
-  # Use the default role from the project, or specify custom roles
-  role_names    = [neon_project.my_app_project.database_user]
-  provider_name = "YourAuthProviderName" # e.g., "clerk"
-  jwks_url      = "<https://<YOUR_AUTH_PROVIDER_JWKS_URL>" # Replace with your actual JWKS URL
-}
-```
-
-> For a list of supported providers, see [Neon RLS: Supported Providers](/docs/guides/neon-rls#supported-providers).
-
-For more attributes and options on managing JWKS URLs, refer to the [Provider's documentation](https://github.com/kislerdm/terraform-provider-neon/blob/master/docs/resources/jwks_url.md)
 
 ### Advanced: VPC endpoint management (for Neon private networking)
 

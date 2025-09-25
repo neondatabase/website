@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-06-23T15:24:08.761Z'
 ---
 
-The `JSON_QUERY()` function in PostgreSQL 17 provides a powerful way to extract and transform `JSON` values using `SQL/JSON` path expressions. This function offers fine-grained control over how `JSON` values are extracted and formatted in the results.
+The `JSON_QUERY()` function introduced in PostgreSQL 17 provides a powerful way to extract and transform `JSON` values using `SQL/JSON` path expressions. This function offers fine-grained control over how `JSON` values are extracted and formatted in the results.
 
 Use `JSON_QUERY()` when you need to:
 

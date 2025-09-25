@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2025-09-05T12:26:43.316Z'
+updatedOn: '2025-09-25T14:36:08.174Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -335,9 +335,11 @@ curl -X PATCH \
 
 </Tabs>
 
-### Enable Row-Level Security (RLS)
+### Enable the Data API
 
-Neon RLS lets you integrate a JWT-based auth provider (such as Clerk, Auth0, or Azure AD) so Postgres can validate user identity and enforce row-level access with database policies. Configure your provider’s JWKS URL in the project’s Settings > RLS page, optionally set an expected audience (aud) when required, and use the `authenticated@` connection for client or server access. For setup steps and examples, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
+The Data API turns your database tables into a REST API, making it easy to query your data from client applications. When you enable the Data API, it automatically creates `authenticated` and `anonymous` roles and sets up the necessary permissions for secure client-side access.
+
+For setup instructions and examples, see the [Data API documentation](/docs/data-api/get-started).
 
 ### Enable logical replication
 

@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-03-05T21:09:38.749Z'
 ---
 
-The `json_scalar()` function in PostgreSQL 17 provides a straightforward way to convert `SQL` scalar values into their `JSON` equivalents. This function is particularly useful when you need to ensure proper type conversion and formatting of individual values for `JSON` output.
+The `json_scalar()` function introduced in PostgreSQL 17 provides a straightforward way to convert `SQL` scalar values into their `JSON` equivalents. This function is particularly useful when you need to ensure proper type conversion and formatting of individual values for `JSON` output.
 
 Use `json_scalar()` when you need to:
 
