@@ -15,6 +15,8 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL constraints with NOT VALID to add constraints to large tables without lengthy table scans or extended downtime.
 
+<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 ## Introduction to NOT NULL Constraints as NOT VALID
 
 PostgreSQL 18 introduces a new feature for database administrators and developers: the ability to add NOT NULL constraints with the `NOT VALID` attribute. This feature addresses one of the most common pain points in production database management: adding NOT NULL constraints to large tables without causing extended downtime.

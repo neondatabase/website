@@ -15,6 +15,8 @@ nextLink:
 
 **Summary**: Learn how PostgreSQL 18 enhances the RETURNING clause to access both old and new values in DML operations, providing capabilities for audit trails, change tracking, and application logic.
 
+<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 ## Introduction to Enhanced RETURNING Clause
 
 PostgreSQL 18 introduces a significant improvement to the RETURNING clause that fundamentally changes how you can capture data during DML operations. Prior to this release, the RETURNING clause had a limitation: it could only return one set of values depending on the operation type.

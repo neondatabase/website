@@ -15,6 +15,8 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's enhanced EXPLAIN command that automatically includes buffer information, shows index lookup counts, and provides comprehensive CPU and WAL statistics, making query optimization more accessible and detailed than ever before.
 
+<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 ## Introduction to Enhanced EXPLAIN
 
 PostgreSQL 18 introduces significant improvements to the EXPLAIN command that address a long-standing request from the PostgreSQL community. The most notable change is that EXPLAIN ANALYZE now automatically shows how many buffers (the fundamental unit of data storage) are accessed when executing EXPLAIN ANALYZE.
