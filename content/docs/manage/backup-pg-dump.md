@@ -14,7 +14,7 @@ Avoid using `pg_dump` over a [pooled connection string](/docs/reference/glossary
 ## Prerequisites
 
 - Make sure `pg_dump` and `pg_restore` are installed. You can verify by running `pg_dump -V`.
-- We recommend using the latest versions of `pg_dump` and `pg_restore`, and ensuring that the client version matches your Neon project's Postgres version (14–17).
+- We recommend using the latest versions of `pg_dump` and `pg_restore`, and ensuring that the client version matches your Neon project's Postgres version.
 
 ## Install `pg_dump` and `pg_restore`
 

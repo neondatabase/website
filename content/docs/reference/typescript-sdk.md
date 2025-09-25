@@ -191,7 +191,7 @@ createNeonProject('test-project').catch((error) => {
 #### Key points:
 
 - The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](/docs/introduction/regions).
-- The `pg_version` parameter specifies the major version of Postgres to use in the project. The currently supported versions are `14`, `15`, `16`, and `17`.
+- The `pg_version` parameter specifies the major supported version of Postgres to use in the project.
 
 ### Create a Branch
 
