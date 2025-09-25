@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: Learn how PostgreSQL 18 makes virtual generated columns the default, enabling compute-on-demand columns that save storage space while providing automatic calculations without the overhead of stored values.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Virtual Generated Columns
 

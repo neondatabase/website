@@ -12,8 +12,6 @@ nextLink:
 
 **Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O providing significant I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that will impact developers and DBAs.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
-
 ## Introduction
 
 PostgreSQL 18 Beta 1 was released on May 8, 2025, marking one of the most significant releases in recent years. This version introduces fundamental changes to how PostgreSQL handles I/O operations, along with numerous developer-friendly features and security enhancements.

@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's logical replication improvements, including the ability to replicate stored generated columns, better conflict monitoring, and improved streaming defaults that make replication more reliable for production use.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Logical Replication Improvements
 

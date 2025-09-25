@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's better [`pg_stat_io` view](https://www.postgresql.org/docs/18/monitoring-stats.html#MONITORING-PG-STAT-IO-VIEW), including new byte-level I/O statistics, WAL tracking, per-backend monitoring functions, and comprehensive buffer analysis for better database performance tuning.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to pg_stat_io
 

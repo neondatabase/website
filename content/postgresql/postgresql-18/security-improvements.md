@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: Learn about PostgreSQL 18's security improvements including the new wire protocol version 3.2, 256-bit cancel request keys, TLS 1.3 cipher configuration options, and FIPS mode validation features that strengthen database security.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Security Improvements
 

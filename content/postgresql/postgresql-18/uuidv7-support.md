@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new UUIDv7 support to generate timestamp-ordered UUIDs that improve B-tree index performance while maintaining global uniqueness.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to UUIDv7
 

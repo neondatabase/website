@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's `psql` improvements, including new pipeline query commands, prepared statement support, improved prompt options, and workflow features that make database development and debugging more efficient.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to psql Improvements
 

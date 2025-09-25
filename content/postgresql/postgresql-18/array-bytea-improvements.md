@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: In this tutorial, you will learn about PostgreSQL 18's new array and bytea function improvements including `array_sort()`, `array_reverse()`, `reverse()` for bytea, integer-to-bytea casting capabilities, and `MIN`/`MAX` aggregate support for arrays and composite types.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Array and Bytea Improvements
 

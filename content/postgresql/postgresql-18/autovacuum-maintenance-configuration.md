@@ -12,7 +12,7 @@ previousLink:
 
 **Summary**: PostgreSQL 18 improves autovacuum with runtime worker adjustments, caps on dead tuple buildup, detailed performance tracking, and safer process control. These features make database maintenance more efficient and easier to manage in production environments.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Autovacuum Improvements
 

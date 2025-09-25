@@ -15,7 +15,7 @@ nextLink:
 
 **Summary**: Learn how PostgreSQL 18 introduces temporal constraints using the WITHOUT OVERLAPS clause for primary keys and unique constraints, plus the PERIOD clause for foreign keys, enabling robust time-based data integrity at the database level.
 
-<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
+
 
 ## Introduction to Temporal Constraints
 
