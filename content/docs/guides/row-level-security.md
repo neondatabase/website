@@ -2,7 +2,7 @@
 title: Row-Level Security with Neon
 subtitle: How Neon features use Postgres Row-Level Security
 enableTableOfContents: true
-updatedOn: '2025-08-11T00:30:08.268Z'
+updatedOn: '2025-09-25T14:36:08.173Z'
 ---
 
 <InfoBlock>
