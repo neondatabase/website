@@ -1,11 +1,11 @@
 ---
 title: Connect a Python application to Neon Postgres
-subtitle: Learn how to run SQL queries in Neon from Python using psycopg2 or asyncpg
+subtitle: Learn how to run SQL queries in Neon from Python using psycopg, psycopg2, or asyncpg
 enableTableOfContents: true
 updatedOn: '2025-07-29T10:34:33.840Z'
 ---
 
-This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers like [Psycopg (psycopg2)](https://pypi.org/project/psycopg2-binary/), a synchronous database adapter, and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
+This guide describes how to create a Neon project and connect to it from a Python application using popular Postgres drivers. We'll cover [Psycopg 3](https://www.psycopg.org/psycopg3/docs/), the latest generation of the popular synchronous adapter, its predecessor [Psycopg 2 (psycopg2)](https://pypi.org/project/psycopg2-binary/), and [asyncpg](https://pypi.org/project/asyncpg/), an asynchronous adapter for use with `asyncio`.
 
 You'll learn how to connect to your Neon database from a Python application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
@@ -62,15 +62,16 @@ For your Python project, create a project directory, set up a virtual environmen
     </CodeTabs>
 
 3.  Install the required libraries using `pip`.
-    - `psycopg2-binary`: The synchronous database adapter for connecting to Postgres.
+    - `psycopg`: The modern, synchronous database adapter for connecting to Postgres (Psycopg 3).
+    - `psycopg2-binary`: An older, widely-used synchronous database adapter.
     - `asyncpg`: The asynchronous database adapter for connecting to Postgres.
     - `python-dotenv`: A helper library to manage environment variables.
 
     ```bash
-    pip install psycopg2-binary asyncpg python-dotenv
+    pip install "psycopg[binary]" psycopg2-binary asyncpg python-dotenv
     ```
 
-    > Install either `psycopg2-binary` or `asyncpg`, depending on whether you want to use synchronous or asynchronous code.
+    > Install the library that best fits your project needs. This guide provides examples for all three.
 
 ## Store your Neon connection string
 
@@ -94,7 +95,69 @@ This section provides example Python scripts that demonstrate how to connect to 
 
 In your project directory, create a file named `create_table.py` and add the code for your preferred library. This script connects to your Neon database, creates a table named `books`, and inserts some sample data into it.
 
-<CodeTabs labels={["psycopg2", "asyncpg"]}>
+<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
+
+```python title="create_table.py"
+import os
+
+import psycopg
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Get the connection string from the environment variable
+conn_string = os.getenv("DATABASE_URL")
+
+try:
+    with psycopg.connect(conn_string) as conn:
+        print("Connection established")
+
+        # Open a cursor to perform database operations
+        with conn.cursor() as cur:
+            # Drop the table if it already exists
+            cur.execute("DROP TABLE IF EXISTS books;")
+            print("Finished dropping table (if it existed).")
+
+            # Create a new table
+            cur.execute("""
+                CREATE TABLE books (
+                    id SERIAL PRIMARY KEY,
+                    title VARCHAR(255) NOT NULL,
+                    author VARCHAR(255),
+                    publication_year INT,
+                    in_stock BOOLEAN DEFAULT TRUE
+                );
+            """)
+            print("Finished creating table.")
+
+            # Insert a single book record
+            cur.execute(
+                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
+                ("The Catcher in the Rye", "J.D. Salinger", 1951, True),
+            )
+            print("Inserted a single book.")
+
+            # Data to be inserted
+            books_to_insert = [
+                ("The Hobbit", "J.R.R. Tolkien", 1937, True),
+                ("1984", "George Orwell", 1949, True),
+                ("Dune", "Frank Herbert", 1965, False),
+            ]
+
+            # Insert multiple books at once
+            cur.executemany(
+                "INSERT INTO books (title, author, publication_year, in_stock) VALUES (%s, %s, %s, %s);",
+                books_to_insert,
+            )
+
+            print("Inserted 3 rows of data.")
+            # The transaction is committed automatically when the 'with' block exits in psycopg (v3)
+
+except Exception as e:
+    print("Connection failed.")
+    print(e)
+```
 
 ```python title="create_table.py"
 import os
@@ -241,7 +304,7 @@ The above code does the following:
 - Create a table named `books` with columns for `id`, `title`, `author`, `publication_year`, and `in_stock`.
 - Insert a single book record.
 - Insert multiple book records.
-- Commit the changes to the database.
+- Commit the changes to the database (in `psycopg`, this happens automatically on exiting the `with` block).
 
 Run the script using the following command:
 
@@ -263,7 +326,37 @@ Inserted 3 rows of data.
 
 In your project directory, create a file named `read_data.py`. This script connects to your Neon database and retrieves all rows from the `books` table.
 
-<CodeTabs labels={["psycopg2", "asyncpg"]}>
+<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
+
+```python title="read_data.py"
+import os
+
+import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
+
+conn_string = os.getenv("DATABASE_URL")
+
+try:
+    with psycopg.connect(conn_string) as conn:
+        print("Connection established")
+        with conn.cursor() as cur:
+            # Fetch all rows from the books table
+            cur.execute("SELECT * FROM books ORDER BY publication_year;")
+            rows = cur.fetchall()
+
+            print("\n--- Book Library ---")
+            for row in rows:
+                print(
+                    f"ID: {row[0]}, Title: {row[1]}, Author: {row[2]}, Year: {row[3]}, In Stock: {row[4]}"
+                )
+            print("--------------------\n")
+
+except Exception as e:
+    print("Connection failed.")
+    print(e)
+```
 
 ```python title="read_data.py"
 import os
@@ -366,7 +459,31 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: False
 
 In your project directory, create a file named `update_data.py`. This script connects to your Neon database and updates the stock status of the book 'Dune' to `True`.
 
-<CodeTabs labels={["psycopg2", "asyncpg"]}>
+<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
+
+```python title="update_data.py"
+import os
+
+import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
+conn_string = os.getenv("DATABASE_URL")
+
+try:
+    with psycopg.connect(conn_string) as conn:
+        print("Connection established")
+        with conn.cursor() as cur:
+            # Update a data row in the table
+            cur.execute(
+                "UPDATE books SET in_stock = %s WHERE title = %s;", (True, "Dune")
+            )
+            print("Updated stock status for 'Dune'.")
+
+except Exception as e:
+    print("Connection failed.")
+    print(e)
+```
 
 ```python title="update_data.py"
 import os
@@ -468,7 +585,29 @@ ID: 4, Title: Dune, Author: Frank Herbert, Year: 1965, In Stock: True
 
 In your project directory, create a file named `delete_data.py`. This script connects to your Neon database and deletes the book '1984' from the `books` table.
 
-<CodeTabs labels={["psycopg2", "asyncpg"]}>
+<CodeTabs labels={["psycopg (v3)", "psycopg2", "asyncpg"]}>
+
+```python title="delete_data.py"
+import os
+
+import psycopg
+from dotenv import load_dotenv
+
+load_dotenv()
+conn_string = os.getenv("DATABASE_URL")
+
+try:
+    with psycopg.connect(conn_string) as conn:
+        print("Connection established")
+        with conn.cursor() as cur:
+            # Delete a data row from the table
+            cur.execute("DELETE FROM books WHERE title = %s;", ("1984",))
+            print("Deleted the book '1984' from the table.")
+
+except Exception as e:
+    print("Connection failed.")
+    print(e)
+```
 
 ```python title="delete_data.py"
 import os
@@ -578,6 +717,8 @@ You can find the source code for the applications described in this guide on Git
 
 <DetailIconCards>
 
+<a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg" description="Get started with Python and Neon using psycopg (v3)" icon="github">Get started with Python and Neon using psycopg (v3)</a>
+
 <a href="https://github.com/neondatabase/examples/tree/main/with-python-psycopg2" description="Get started with Python and Neon using psycopg2" icon="github">Get started with Python and Neon using psycopg2</a>
 
 <a href="https://github.com/neondatabase/examples/tree/main/with-python-asyncpg" description="Get started with Python and Neon using asyncpg" icon="github">Get started with Python and Neon using asyncpg</a>
@@ -586,7 +727,8 @@ You can find the source code for the applications described in this guide on Git
 
 ## Resources
 
-- [Psycopg2 documentation](https://www.psycopg.org/docs/)
+- [Psycopg 3 documentation](https://www.psycopg.org/psycopg3/docs/)
+- [Psycopg 2 documentation](https://www.psycopg.org/docs/)
 - [Asyncpg documentation](https://magicstack.github.io/asyncpg/current/)
 - [Building an API with Django, Django REST Framework, and Neon Postgres](/guides/django-rest-api)
 
