@@ -276,5 +276,4 @@ This will give you a PostgreSQL 18 instance running locally for testing purposes
 
 PostgreSQL 18 represents a major release that modernizes the database for cloud-native workloads but also maintaining backward compatibility. The asynchronous I/O system alone makes this a compelling upgrade.
 
-
 Neon will remove the preview designation once the current limitations are addressed, just as we did with PostgreSQL 17.
