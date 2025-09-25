@@ -10,7 +10,7 @@ redirectFrom:
 
 <InfoBlock>
 <DocsList title="Sample project" theme="repo">
-  <a href="https://github.com/neondatabase-labs/clerk-nextjs-neon-rls">Clerk + Neon RLS</a>
+  <a href="https://github.com/neondatabase-labs/neon-data-api-neon-auth">Neon Data API + Neon Auth</a>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -21,25 +21,25 @@ redirectFrom:
 
 <NeonRLSDeprecation />
 
-In this tutorial, you'll set up a sample `todos` application to learn how Postgres Row-Level Security (RLS) policies can protect user data, adding an extra layer of security beyond application logic.
+In this tutorial, you'll create a notes app with **React.js** to demonstrate how PostgreSQL Row-Level Security (RLS) provides an additional security layer beyond application logic. The app will integrate with a Neon database via the Neon Data API.
 
-## About the sample application
+For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This powerful setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Neon Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
 
-This `todos` app is built with Next.js and Drizzle ORM, using Clerk for user authentication and session management. Clerk handles logins and issues a unique `userId` in a JSON Web Token (JWT) for each authenticated user. This `userId` is then passed to Postgres, where RLS policies enforce access control directly in the database. This setup ensures that each user can only interact with their own todos, even if application-side logic fails or is misconfigured.
 
 ## Prerequisites
 
 To get started, you'll need:
 
 - **Neon account**: Sign up at [Neon](https://neon.tech) and create your first project in **AWS** (note: [Azure](/docs/guides/neon-rls#current-limitations) regions are not currently supported).
-- **Clerk account**: Sign up for a [Clerk](https://clerk.com/) account and application. Clerk provides a free plan to get you started.
-- **Neon RLS + Clerk example application**: Clone the sample [Clerk + Neon RLS repository](https://github.com/neondatabase-labs/clerk-nextjs-neon-rls):
+- **Neon Data API + Neon Auth example application**: Clone the sample [Neon Data API + Neon Auth repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth):
 
   ```bash
-  git clone https://github.com/neondatabase-labs/clerk-nextjs-neon-rls.git
+  git clone https://github.com/neondatabase-labs/neon-data-api-neon-auth.git
   ```
 
-  Follow the instructions in the readme to set up Clerk, configure environment variables, and start the application. You can also find more info in our [Clerk and Neon RLS Quickstart](/docs/guides/neon-rls-clerk).
+  Follow the instructions in the README to set up Neon Data API with Neon Auth, configure environment variables, and run database migrations.
+
+  > When enabling Neon Data API, ensure you select **Neon Auth** with Neon Data API.
 
 <Steps>
 
@@ -51,175 +51,184 @@ Start the sample application:
 npm run dev
 ```
 
-Open the app in your browser using `localhost:3000`.
+Open the app in your browser using [`localhost:5173`](http://localhost:5173).
 
-Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and email logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
+Now, let's create the two users we'll use to show how RLS policies can prevent data leaks between users, and what can go wrong if you don't. The sample app supports Google and Github logins, so let's create one of each. For this guide, we'll call our two users Alice and Bob.
 
-Create your `Alice` user using Google. Then, using a private browser session, try the email sign-up to create `Bob`. You'll receive a verification email from `MyApp`, probably in your spam folder.
+Create your `Alice` user using Google. Then, using a private browser session, create your `Bob` user account using Github or other Google account.
 
 Side by side, here's the empty state for both users:
 
-![empty state two users in clerk demo](/docs/guides/authorize_tutorial_empty_state.png)
+![empty state two users in data api demo](/docs/guides/data_api_demo_empty_state.png)
 
-When each user creates a todo, it's securely linked to their `userId` in the database schema. Here's the structure of the `todos` table:
+When each user creates a note, it's securely linked to their `ownerId` in the database schema. Here's the structure of the `notes` table:
 
 ```typescript
 {
-    id: bigint("id", { mode: "bigint" })
-      .primaryKey()
-      .generatedByDefaultAsIdentity(),
-    userId: text("user_id")
+    id: uuid("id").defaultRandom().primaryKey(),
+    ownerId: text("owner_id")
       .notNull()
-      .default(sql`(auth.user_id())`), // [!code highlight]
-    task: text("task").notNull(),
-    isComplete: boolean("is_complete").notNull().default(false),
-    insertedAt: timestamp("inserted_at", { withTimezone: true })
-      .defaultNow()
-      .notNull(),
+      .default(sql`auth.user_id()`),  // [!code highlight]
+    title: text("title").notNull().default("untitled note"),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
+    shared: boolean("shared").default(false),
 }
 ```
 
-The `userId` column is populated directly from the authenticated `(auth.user_id())` in the Clerk JWT, linking each todo to the correct user.
+The `ownerId` column is populated directly from the authenticated `(auth.user_id())` in the JWT, ensuring that each note is tied to the correct user.
 
-## Create todos
+## Create notes
 
-Let's create some sample Todos for both Alice and Bob.
+Let's create some sample notes for both Alice and Bob.
 
-![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated note lists](/docs/guides/data_api_demo_isolated_notes.png)
 
-### Todos are isolated
+The paragraphs in the notes are:
 
-In this sample app, isolation of Todos to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
+![paragraphs in notes](/docs/guides/data_api_demo_paragraphs_in_notes.png)
 
-Let's take a look at the `getTodos` function in the `actions.tsx` file:
+> The notes act as a top level container for paragraphs. Each paragraph is stored in `paragraphs` table, linked to the parent note by `noteId`.
+
+### Notes are isolated
+
+In this sample app, isolation of Notes to each user is handled both in the application logic and using Row-level Security (RLS) policies defined in our application's schema file.
+
+Let's take a look at the `useNotes` function in the `src/routes/index.tsx` file:
 
 ```typescript shouldWrap
-export async function getTodos(): Promise<Array<Todo>> {
-  const { getToken } = auth();
-  const authToken = await getToken();
-  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
+function useNotes() {
+  const postgrest = usePostgrest();
+  const user = useUser({ or: "redirect" });
+  return useQuery({
+    queryKey: ["notes"],
+    queryFn: async (): Promise<Array<Note>> => {
+      // `eq` filter is optional because of RLS. But we send it anyway for
+      // performance reasons.
+      const { data, error } = await postgrest
+        .from("notes")
+        .select("id, title, created_at, owner_id, shared")
+        .eq("owner_id", user.id)
+        .order("created_at", { ascending: false });
 
-  // WHERE filter is optional because of RLS. But we send it anyway for
-  // performance reasons.
-  return db
-    .$withAuth(authToken)
-    .select()
-    .from(schema.todos)
-    .where(eq(schema.todos.userId, sql`auth.user_id()`))
-    .orderBy(asc(schema.todos.insertedAt));
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    },
+  });
 }
 ```
 
-The `WHERE` clause is technically enough to make sure data is properly isolated. Neon gets `auth.user_id` from the Clerk JWT and matches that to the `userId` column in the `todos` tables, so each user can only see their own Todos.
+The `eq` clause is technically enough to make sure data is properly isolated. Neon gets `user.id` from the Neon Auth JWT and matches that to the `owner_id` column in the `notes` tables, so each user can only see their own notes.
 
 Even though isolation is backed by our RLS policies, we include it here for performance reasons: it helps Postgres build a better query plan and use indexes where possible.
 
-### RLS policy for viewing todos
+### RLS policy for viewing notes
 
 In the application's `schema.ts` file, you can find the RLS policies written in Drizzle that provide access control at the database level. Here is a look at one of those policies:
 
 ```typescript shouldWrap
-pgPolicy('view todos', {
-  for: 'select',
-  to: 'authenticated',
-  using: sql`(select auth.user_id() = user_id)`,
-});
+crudPolicy({
+  role: authenticatedRole,
+  read: authUid(table.ownerId),
+  modify: authUid(table.ownerId),
+})
 ```
 
-This policy ensures that each `SELECT` query only returns rows where the `user_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own Todos. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
+`authUid` is a helper function that evaluates to 
+```
+sql`(select auth.user_id() = owner_id)`
+```
+
+which is a SQL expression that checks if the `owner_id` of a row matches the `auth.user_id()` from the JWT.
+
+This policy ensures that read (`SELECT`) queries only returns rows where the `owner_id` matches the `auth.user_id()` derived from the authenticated user’s JWT. This means that users can only access their own notes. By enforcing this rule at the database level, the RLS policy provides an extra layer of security beyond the application layer.
 
 ## Remove access control from application code
 
 Now, let's test what happens when we remove access control from the application layer to rely solely on RLS at the database level.
 
-In the `getTodos` function in `actions.tsx`, comment out the `WHERE` clause that filters todos by `userId`:
+In the `src/routes/index.tsx` file, modify the `useNotes` function to remove the `eq` clause that filters notes by `owner_id`:
 
 ```typescript shouldWrap
-export async function getTodos(): Promise<Array<Todo>> {
-  return fetchWithDrizzle(async (db, { userId }) => {
-    // WHERE filter is optional because of RLS. But we send it anyway for
-    // performance reasons.
-    return (
-      db
-        .select()
-        .from(schema.todos)
-        // .where(eq(schema.todos.userId, sql`auth.user_id()`)) // [!code highlight]
-        .orderBy(asc(schema.todos.insertedAt))
-    );
+function useNotes() {
+  const postgrest = usePostgrest();
+  const user = useUser({ or: "redirect" });
+  return useQuery({
+    queryKey: ["notes"],
+    queryFn: async (): Promise<Array<Note>> => {
+      const { data, error } = await postgrest
+        .from("notes")
+        .select("id, title, created_at, owner_id, shared")
+        // .eq("owner_id", user.id) // [!code --]
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    },
   });
 }
 ```
 
-Check your two open Todo users, reload the page, and see what happens:
+Check your two open Notes users, reload the page, and see what happens:
 
-![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated notes](/docs/guides/data_api_demo_isolated_notes.png)
 
 Nothing happens. RLS is still in place, and isolation is maintained: no data leaks. 💪
 
 ## Disable RLS
 
-Let's see what happens when we disable RLS on our todos table. Go to your Clerk project in the Neon Console and in the SQL Editor run:
+Let's see what happens when we disable RLS on our notes and paragraphs tables. Go to your project in the Neon Console and in the SQL Editor run:
 
 ```sql shouldWrap
-ALTER TABLE public.todos DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.notes DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.paragraphs DISABLE ROW LEVEL SECURITY;
 ```
 
-![data leak](/docs/guides/authorize_tutorial_data_leak.png)
+![data leak](/docs/guides/data_api_demo_data_leak.png)
 
-Bob sees all of Alice's todos, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `view todos` policy on `SELECT` queries that helped enforce data isolation. Birthday surprise is _ruined_.
-
-## RLS as a safety net
-
-Another scenario, imagine a team member writes the `getTodos` function like this, thinking it's filtering todos by the current user:
-
-```typescript shouldWrap
-export async function getTodos(): Promise<Array<Todo>> {
-  const { getToken } = auth();
-  const authToken = await getToken();
-  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
-
-  const todos = await db
-    .$withAuth(authToken)
-    .select()
-    .from(schema.todos)
-    .where(eq(schema.todos.userId, schema.todos.userId)) // Woops // [!code highlight]
-    .orderBy(asc(schema.todos.insertedAt));
-
-  return todos;
-}
-```
-
-The `where` clause here might look like a valid comparison, and in a busy review, it might even go unnoticed. The developer likely intended to compare `schema.todos.userId` to an authenticated `userId`, like `schema.session.userId`. But `userId = userId` is a tautology, and will always evaluate to true.
-
-Go ahead and replace the `getTodos` in `actions.tsx` with this incorrect version. Referesh your open Todo pages and you'll see all todos still showing for both user sessions, as expected.
+Bob can see all of Alice's notes and paragraphs within them, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `crudPolicy` on `read` queries that helped enforce data isolation. Birthday surprise is _ruined_.
 
 ### Re-enable RLS
 
 Now, let's re-enable RLS from Neon:
 
 ```bash
-ALTER TABLE public.todos ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.notes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.paragraphs ENABLE ROW LEVEL SECURITY;
 ```
 
-![isolated todo lists](/docs/guides/authorize_tutorial_isolated_todos.png)
+![isolated notes restored](/docs/guides/data_api_demo_isolated_notes.png)
 
-With RLS back on, there are no more data leaks, despite the incorrect check on the application side. In this case, RLS acts as a backstop, preventing unintended data exposure due to application-side mistakes.
+With RLS back on, there are no more data leaks, despite the lack of access control in the application code. In this case, RLS acts as a backstop, preventing unintended data exposure due to application-side mistakes.
 
 Order is restored, thanks to RLS. Now go fix your app before you forget:
 
 ```typescript shouldWrap
-export async function getTodos(): Promise<Array<Todo>> {
-  const { getToken } = auth();
-  const authToken = await getToken();
-  const db = drizzle(process.env.DATABASE_AUTHENTICATED_URL!, { schema });
-  // WHERE filter is optional because of RLS. But we send it anyway for
-  // performance reasons.
-  return db
-    .$withAuth(authToken)
-    .select()
-    .from(schema.todos)
-    .where(eq(schema.todos.userId, sql`auth.user_id()`))
-    .orderBy(asc(schema.todos.insertedAt));
+function useNotes() {
+  const postgrest = usePostgrest();
+  const user = useUser({ or: "redirect" });
+  return useQuery({
+    queryKey: ["notes"],
+    queryFn: async (): Promise<Array<Note>> => {
+      const { data, error } = await postgrest
+        .from("notes")
+        .select("id, title, created_at, owner_id, shared")
+        .eq("owner_id", user.id) // [!code highlight]
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        throw error;
+      }
+
+      return data;
+    },
+  });
 }
 ```
 
@@ -227,80 +236,87 @@ export async function getTodos(): Promise<Array<Todo>> {
 
 ## Appendix: Understanding RLS policies in Drizzle
 
-In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the `todos` application, found in the `schema.ts` file.
+In this section, we provide an overview of the Row-Level Security (RLS) policies implemented in the Notes application, found in the `schema.ts` file.
 
 These policies are written in Drizzle, which now supports defining RLS policies alongside your schema in code. Writing RLS policies can be complex, so we worked with Drizzle to develop the `crudPolicy` function – a wrapper that works with Neon’s predefined roles (`authenticated` and `anonymous`), letting you consolidate all policies that apply to a given role into a single function. See [Row-level Security](https://orm.drizzle.team/docs/rls) in the Drizzle docs for details.
 
-The examples here use `pgPolicy` for custom control over each action.
-
-### create todos
+For the `notes` table, the `crudPolicy` function defines RLS policies for the `authenticated` role, which is assigned to users who have successfully logged in. The `read` and `modify` parameters use the `authUid` helper function to ensure that users can only read or modify rows where the `ownerId` matches their own `auth.user_id()` from the JWT.
 
 ```typescript
-p1: pgPolicy("create todos", {
-  for: "insert",
-  to: "authenticated",
-  withCheck: sql`(select auth.user_id() = user_id)`,
-}),
+// for `notes` table
+crudPolicy({
+  role: authenticatedRole,
+  read: authUid(table.ownerId),
+  modify: authUid(table.ownerId),
+})
 ```
 
-This policy allows authenticated users to perform `INSERT` operations only if the `user_id` matches the `auth.user_id()` from the JWT. This ensures that when a new todo is created, it is linked to the correct user.
-
-### view todos
+For the `paragraphs` table, the `crudPolicy` function also applies to the `authenticated` role. However, since paragraphs are linked to notes via the `noteId`, the `read` and `modify` parameters use a SQL subquery to check that the `owner_id` of the associated note matches the `auth.user_id()` from the JWT. This ensures that users can only read or modify paragraphs that belong to notes they own.
 
 ```typescript
-p2: pgPolicy("view todos", {
+// for `paragraphs` table
+crudPolicy({
+  role: authenticatedRole,
+  read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+  modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+})
+```
+
+These policies together enforce strict access control at the database level, ensuring that users can only interact with their own notes and paragraphs, regardless of any application-side logic.
+
+### Implementing Share Notes functionality
+
+In the `schema.ts` file, you can find additional RLS policies than defined above, which support the "Share Notes" functionality in the application. This feature allows users to share specific notes with others by setting the `shared` column to `true`. The RLS policies for the `notes` table include a condition that permits read access to notes marked as shared, regardless of ownership. The final RLS policy for the `notes` and `paragraphs` tables looks like this:
+
+```typescript
+// for `notes` table
+crudPolicy({
+  role: authenticatedRole,
+  read: authUid(table.ownerId),
+  modify: authUid(table.ownerId),
+}),
+pgPolicy("shared_policy", {
   for: "select",
-  to: "authenticated",
-  using: sql`(select auth.user_id() = user_id)`,
+  to: authenticatedRole,
+  using: sql`${table.shared} = true`,
+})
+
+// for `paragraphs` table
+crudPolicy({
+  role: authenticatedRole,
+  read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+  modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
 }),
+pgPolicy("shared_policy", {
+  for: "select",
+  to: authenticatedRole,
+  using: sql`(select notes.shared from notes where notes.id = ${table.noteId})`,
+})
 ```
 
-This policy allows authenticated users to perform `SELECT` operations where the `user_id` matches the `auth.user_id()` from the JWT, ensuring they only see their own todos.
+The `shared_policy` enables any authenticated user to read notes marked as shared (`shared = true`), allowing others to view shared notes even if they are not the owner. This policy applies similarly to paragraphs, checking if the linked note is shared.
 
-### update todos
-
-```typescript
-p3: pgPolicy("update todos", {
-  for: "update",
-  to: "authenticated",
-  using: sql`(select auth.user_id() = user_id)`,
-}),
-```
-
-This policy permits authenticated users to perform `UPDATE` operations on todos only if the `user_id` matches their authenticated `user_id`. This protects against unauthorized modifications.
-
-### delete todos
-
-```typescript
-p4: pgPolicy("delete todos", {
-  for: "delete",
-  to: "authenticated",
-  using: sql`(select auth.user_id() = user_id)`,
-}),
-```
-
-This policy enables authenticated users to perform `DELETE` operations on their todos only if the `user_id` corresponds to their `auth.user_id()`. This ensures that users can only remove their own entries.
-
-These policies are designed to enforce that only the authenticated user can create, view, update, or delete their own todos, thereby maintaining secure data access within the application.
+Although RLS permits read access to shared notes for all authenticated users, the shared notes are not directly visible in other users' UI. Instead, sharing occurs via the "Share" button, which copies the note's URL to the clipboard. This URL includes the note's ID, enabling authenticated users to access the shared note and its paragraphs with-in in a read-only mode.
 
 ### RLS policies table
 
-To check out the RLS policies defined for the `todos` table in Postgres, run this query:
+To check out the RLS policies defined for the `notes` table in Postgres, run this query:
 
 ```sql
-   SELECT * FROM pg_policies WHERE tablename = 'todos';
+   SELECT * FROM pg_policies WHERE tablename = 'notes';
 ```
 
 Here is the output, showing columns `policyname, cmd, qual, with_check` only:
 
 ```sql
-  policyname  |  cmd   |                    qual                    |                 with_check
---------------+--------+--------------------------------------------+--------------------------------------------
- create todos | INSERT |                                            | ( SELECT (auth.user_id() = todos.user_id))
- update todos | UPDATE | ( SELECT (auth.user_id() = todos.user_id)) |
- delete todos | DELETE | ( SELECT (auth.user_id() = todos.user_id)) |
- view todos   | SELECT | ( SELECT (auth.user_id() = todos.user_id)) |
-(4 rows)
+policyname                      | cmd    | qual                                        | with_check
+--------------------------------+--------+---------------------------------------------+---------------------------------------
+crud-authenticated-policy-select | SELECT | (SELECT (auth.user_id() = notes.owner_id)) |
+crud-authenticated-policy-insert | INSERT |                                            | (SELECT (auth.user_id() = notes.owner_id))
+crud-authenticated-policy-update | UPDATE | (SELECT (auth.user_id() = notes.owner_id)) | (SELECT (auth.user_id() = notes.owner_id))
+crud-authenticated-policy-delete | DELETE | (SELECT (auth.user_id() = notes.owner_id)) |
+shared_policy                    | SELECT | (shared = true)                            |
+(5 rows)
 ```
 
 To get an understanding of `auth.user_id()` and the role it plays in these policies, see this [explanation](/docs/guides/neon-rls#how-neon-rls-gets-authuserid-from-the-jwt).
