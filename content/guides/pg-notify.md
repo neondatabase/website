@@ -30,7 +30,7 @@ To get started, go to the [Neon console](https://console.neon.tech/app/projects)
 
 You will then be presented with a dialog that provides a connecting string of your database. Make sure to **uncheck** the **Pooled connection checkbox** on the top right of the dialog and the connecting string automatically updates in the box below it.
 
-![](/guides/images/pg-notify/index.png)
+![Neon Connection String without pooling](/docs/connect/connection_details_without_connection_pooling.png)
 
 All Neon connection strings have the following format:
 
