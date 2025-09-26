@@ -17,6 +17,8 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 
 <a href="/docs/ai/ai-rules-neon-drizzle" description="ORM setup, schema management, and usage patterns with Drizzle" icon="drizzle">Neon + Drizzle</a>
 
+<a href="/docs/ai/ai-rules-neon-toolkit" description="Quickly spin up Postgres databases and run SQL queries with @neondatabase/toolkit" icon="database">Neon Toolkit</a>
+
 </DetailIconCards>
 
 ## How it works
