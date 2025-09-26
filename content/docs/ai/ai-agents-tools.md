@@ -24,6 +24,7 @@ Accelerate your development with context rules that help AI tools write better c
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth Rules</a>
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
 <a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
+<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API Rules</a>
 </DetailIconCards>
 
 ## Build AI agents
