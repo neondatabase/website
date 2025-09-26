@@ -83,7 +83,7 @@ export function useOnboarding() {
 <TabItem>
 
 ```jsx shouldWrap title="app/onboarding-functions.ts"
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 import { redirect } from 'next/navigation';
 
 export async function ensureOnboarded() {
@@ -124,7 +124,7 @@ export default function HomePage() {
 
 ```jsx shouldWrap title="app/page.tsx"
 import { ensureOnboarded } from '@/app/onboarding-functions';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function HomePage() {
   await ensureOnboarded();

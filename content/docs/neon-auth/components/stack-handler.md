@@ -20,7 +20,7 @@ For detailed usage instructions, see the manual section of the [setup guide](/do
 
 ```tsx title="app/handler/[...stack].tsx"
 import { StackHandler } from '@stackframe/stack';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default function Handler(props: { params: any; searchParams: any }) {
   return (

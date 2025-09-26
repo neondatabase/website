@@ -30,7 +30,7 @@ You can also use `useUser({ or: "redirect" })` to automatically redirect to the 
 Since `useUser()` is a stateful hook, you can't use it on server components. Instead, import `stackServerApp` and call `getUser()`:
 
 ```tsx shouldWrap
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function MyServerComponent() {
   const user = await stackServerApp.getUser();
@@ -61,7 +61,7 @@ export default function MyProtectedClientComponent() {
 **Server Component:**
 
 ```tsx shouldWrap
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function MyProtectedServerComponent() {
   await stackServerApp.getUser({ or: 'redirect' });
