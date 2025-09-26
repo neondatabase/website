@@ -1,8 +1,9 @@
 ---
 title: 'AI Rules: Neon API'
-subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon projects, branches, databases, and other resources.
+subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon
+  projects, branches, databases, and other resources.
 enableTableOfContents: true
-updatedOn: '2025-09-17T00:00:00.000Z'
+updatedOn: '2025-09-26T12:18:57.147Z'
 ---
 
 <InfoBlock>
