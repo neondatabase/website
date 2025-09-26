@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2025-09-17T16:18:18.384Z'
+updatedOn: '2025-09-26T11:49:34.214Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
