@@ -27,7 +27,7 @@ This is a mandatory first step.
   ```
 - **Crucially, all subsequent `pip` commands must be run within the context of an activated virtual environment.** Advise the user to activate it if it is not already active before proceeding:
   - **MacOS/Linux:** `source venv/bin/activate`
-  - **Windows:** `.\\venv\\Scripts\\activate`
+  - **Windows:** `.\venv\Scripts\activate`
 
 ---
 
