@@ -724,6 +724,8 @@
           title: REPLACE
         - slug: postgresql-string-functions/postgresql-right
           title: RIGHT
+        - slug: postgresql-string-functions/postgresql-rpad
+          title: RPAD
         - slug: postgresql-string-functions/postgresql-rtrim
           title: RTRIM
         - slug: postgresql-string-functions/postgresql-split_part
