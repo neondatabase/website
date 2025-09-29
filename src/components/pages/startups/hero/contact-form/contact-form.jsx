@@ -95,7 +95,7 @@ const ContactForm = () => {
       else setFormState(FORM_STATES.DEFAULT);
     }
   }, [errors, isValid, formState]);
-
+  //
   const onSubmit = async (data, e) => {
     e.preventDefault();
     const { firstname, lastname, email, companyWebsite, investor } = data;
