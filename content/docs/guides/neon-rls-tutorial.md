@@ -25,7 +25,6 @@ In this tutorial, you'll clone and modify up a sample React.js note-taking app t
 
 For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Neon Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
 
-
 ## Prerequisites
 
 To get started, you'll need:
@@ -99,17 +98,17 @@ Let's take a look at the `useNotes` function in the `src/routes/index.tsx` file:
 ```typescript shouldWrap
 function useNotes() {
   const postgrest = usePostgrest();
-  const user = useUser({ or: "redirect" });
+  const user = useUser({ or: 'redirect' });
   return useQuery({
-    queryKey: ["notes"],
+    queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
       // `eq` filter is optional because of RLS. But we send it anyway for
       // performance reasons.
       const { data, error } = await postgrest
-        .from("notes")
-        .select("id, title, created_at, owner_id, shared")
-        .eq("owner_id", user.id)
-        .order("created_at", { ascending: false });
+        .from('notes')
+        .select('id, title, created_at, owner_id, shared')
+        .eq('owner_id', user.id)
+        .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
@@ -134,10 +133,11 @@ crudPolicy({
   role: authenticatedRole,
   read: authUid(table.ownerId),
   modify: authUid(table.ownerId),
-})
+});
 ```
 
-`authUid` is a helper function that evaluates to 
+`authUid` is a helper function that evaluates to
+
 ```
 sql`(select auth.user_id() = owner_id)`
 ```
@@ -155,15 +155,15 @@ In the `src/routes/index.tsx` file, modify the `useNotes` function to remove the
 ```typescript shouldWrap
 function useNotes() {
   const postgrest = usePostgrest();
-  const user = useUser({ or: "redirect" });
+  const user = useUser({ or: 'redirect' });
   return useQuery({
-    queryKey: ["notes"],
+    queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
       const { data, error } = await postgrest
-        .from("notes")
-        .select("id, title, created_at, owner_id, shared")
+        .from('notes')
+        .select('id, title, created_at, owner_id, shared')
         // .eq("owner_id", user.id) // [!code --]
-        .order("created_at", { ascending: false });
+        .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
@@ -212,15 +212,15 @@ Order is restored, thanks to RLS. Now go fix your app before you forget:
 ```typescript shouldWrap
 function useNotes() {
   const postgrest = usePostgrest();
-  const user = useUser({ or: "redirect" });
+  const user = useUser({ or: 'redirect' });
   return useQuery({
-    queryKey: ["notes"],
+    queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
       const { data, error } = await postgrest
-        .from("notes")
-        .select("id, title, created_at, owner_id, shared")
-        .eq("owner_id", user.id) // [!code highlight]
-        .order("created_at", { ascending: false });
+        .from('notes')
+        .select('id, title, created_at, owner_id, shared')
+        .eq('owner_id', user.id) // [!code highlight]
+        .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
@@ -248,7 +248,7 @@ crudPolicy({
   role: authenticatedRole,
   read: authUid(table.ownerId),
   modify: authUid(table.ownerId),
-})
+});
 ```
 
 For the `paragraphs` table, the `crudPolicy` function also applies to the `authenticated` role. However, since paragraphs are linked to notes via the `noteId`, the `read` and `modify` parameters use a SQL subquery to check that the `owner_id` of the associated note matches the `auth.user_id()` from the JWT. This ensures that users can only read or modify paragraphs that belong to notes they own.
@@ -259,7 +259,7 @@ crudPolicy({
   role: authenticatedRole,
   read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
   modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
-})
+});
 ```
 
 These policies together enforce strict access control at the database level, ensuring that users can only interact with their own notes and paragraphs, regardless of any application-side logic.
@@ -269,29 +269,33 @@ These policies together enforce strict access control at the database level, ens
 In the `schema.ts` file, you can find additional RLS policies than defined above, which support the "Share Notes" functionality in the application. This feature allows users to share specific notes with others by setting the `shared` column to `true`. The RLS policies for the `notes` table include a condition that permits read access to notes marked as shared, regardless of ownership. The final RLS policy for the `notes` and `paragraphs` tables looks like this:
 
 ```typescript shouldWrap
+...schema definitions...
+
 // for `notes` table
 crudPolicy({
-  role: authenticatedRole,
-  read: authUid(table.ownerId),
-  modify: authUid(table.ownerId),
+    role: authenticatedRole,
+    read: authUid(table.ownerId),
+    modify: authUid(table.ownerId),
 }),
-pgPolicy("shared_policy", {
-  for: "select",
-  to: authenticatedRole,
-  using: sql`${table.shared} = true`,
+
+pgPolicy('shared_policy', {
+    for: 'select',
+    to: authenticatedRole,
+    using: sql`${table.shared} = true`,
 })
 
 // for `paragraphs` table
 crudPolicy({
-  role: authenticatedRole,
-  read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
-  modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+    role: authenticatedRole,
+    read: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
+    modify: sql`(select notes.owner_id = auth.user_id() from notes where notes.id = ${table.noteId})`,
 }),
-pgPolicy("shared_policy", {
-  for: "select",
-  to: authenticatedRole,
-  using: sql`(select notes.shared from notes where notes.id = ${table.noteId})`,
-})
+
+pgPolicy('shared_policy', {
+    for: 'select',
+    to: authenticatedRole,
+    using: sql`(select notes.shared from notes where notes.id = ${table.noteId})`,
+});
 ```
 
 The `shared_policy` enables any authenticated user to read notes marked as shared (`shared = true`), allowing others to view shared notes even if they are not the owner. This policy applies similarly to paragraphs, checking if the linked note is shared.
