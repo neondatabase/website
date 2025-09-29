@@ -192,7 +192,7 @@ ALTER TABLE public.paragraphs DISABLE ROW LEVEL SECURITY;
 
 ![data leak](/docs/guides/data_api_demo_data_leak.png)
 
-Bob can see all of Alice's notes and paragraphs within them, and Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `crudPolicy` on `read` queries that helped enforce data isolation. Birthday surprise is _ruined_.
+Bob can see all of Alice's notes and paragraphs within them, including the 'inquisitive cyan' note where her birthday party is planned. Alice now knows about her birthday party. Disabling RLS removed all RLS policies, including the `crudPolicy` on `read` queries that helped enforce data isolation. Birthday surprise is _ruined_.
 
 ### Re-enable RLS
 
