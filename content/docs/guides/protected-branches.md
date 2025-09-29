@@ -96,7 +96,7 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ Protected Only │
+│ Id                  │ Name                │ IP Addresses │ Protected Only      │
 ├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
