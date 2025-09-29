@@ -1,11 +1,12 @@
 ---
-title: Neon RLS tutorial
+title: Secure your app with RLS
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
 updatedOn: '2025-09-05T14:21:44.231Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial
+  - /docs/guides/neon-rls-tutorial
 ---
 
 <InfoBlock>
