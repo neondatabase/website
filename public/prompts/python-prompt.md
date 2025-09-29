@@ -170,5 +170,3 @@ Before suggesting code or making edits, ensure:
 - **Do not install any packages globally or outside of an active Python virtual environment.**
 - Do not hardcode credentials in the source code.
 - Do not output the contents of the `.env` file or the user's connection string in any response.
-
----
