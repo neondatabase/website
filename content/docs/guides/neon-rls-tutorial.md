@@ -23,7 +23,7 @@ redirectFrom:
 
 In this tutorial, you'll clone and modify up a sample React.js note-taking app to demonstrate how Postgres Row-Level Security (RLS) provides an additional security layer beyond application logic. The app integrates with a Neon database via the Neon Data API.
 
-For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This powerful setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Neon Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
+For authentication, **Neon Auth** issues a unique `userId` in a JSON Web Token (JWT) for each user. This `userId` is passed to Postgres, where RLS policies enforce access control directly at the database level. This setup ensures each user can only interact with their own **notes**, even if application-side logic fails. While this example uses Neon Auth, any JWT-issuing provider like Auth0 or Clerk can be used.
 
 
 ## Prerequisites
