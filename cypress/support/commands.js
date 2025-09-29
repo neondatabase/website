@@ -32,7 +32,7 @@ Cypress.Commands.add('formErrorSubmit', () => {
 
 Cypress.on('uncaught:exception', (err) => {
   // expect the error message to include 'analytics.user is not a function'
-  if (err.message.includes('analytics.user is not a function')) {
+  if (err.message.includes('analytics.user is not a functio')) {
     // returning false here prevents Cypress from failing the test
     return false;
   }
