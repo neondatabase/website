@@ -117,10 +117,6 @@ const ContactForm = () => {
         name: 'company_website',
         value: companyWebsite,
       },
-      {
-        name: 'accelerator_private_investor',
-        value: investor,
-      },
     ];
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
