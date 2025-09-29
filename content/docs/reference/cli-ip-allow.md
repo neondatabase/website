@@ -2,7 +2,7 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-07-12T11:16:39.830Z'
+updatedOn: '2025-09-29T19:49:33.018Z'
 ---
 
 ## Before you begin
