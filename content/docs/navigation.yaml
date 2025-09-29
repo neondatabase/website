@@ -526,6 +526,8 @@
               slug: guides/row-level-security
             - title: Simplify RLS with Drizzle
               slug: guides/rls-drizzle
+            - title: Neon RLS tutorial
+              slug: guides/neon-rls-tutorial
 
         - title: Neon RLS (JWT/JWKS)
           icon: lock
