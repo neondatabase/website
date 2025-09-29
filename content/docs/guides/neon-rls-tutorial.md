@@ -268,7 +268,7 @@ These policies together enforce strict access control at the database level, ens
 
 In the `schema.ts` file, you can find additional RLS policies than defined above, which support the "Share Notes" functionality in the application. This feature allows users to share specific notes with others by setting the `shared` column to `true`. The RLS policies for the `notes` table include a condition that permits read access to notes marked as shared, regardless of ownership. The final RLS policy for the `notes` and `paragraphs` tables looks like this:
 
-```typescript
+```typescript shouldWrap
 // for `notes` table
 crudPolicy({
   role: authenticatedRole,
