@@ -342,6 +342,8 @@
               slug: data-api/get-started
             - title: Building a note-taking app
               slug: data-api/demo
+            - title: Secure your app with RLS
+              slug: guides/rls-tutorial
 
         - title: Neon Auth
           icon: auth
@@ -526,8 +528,6 @@
               slug: guides/row-level-security
             - title: Simplify RLS with Drizzle
               slug: guides/rls-drizzle
-            - title: Neon RLS tutorial
-              slug: guides/neon-rls-tutorial
 
         - title: Neon RLS (JWT/JWKS)
           icon: lock
