@@ -195,6 +195,12 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
+## Tablespaces
+
+Neon does not support PostgreSQL [tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html). Attempting to create a tablespace with the `CREATE TABLESPACE` command will result in an error. This is due to Neon's managed cloud architecture, which does not permit direct file system access for custom storage locations.
+
+If you have existing applications or scripts that use tablespaces for organizing database objects across different storage devices, you'll need to remove or modify these references when migrating to Neon.
+
 ## Postgres logs
 
 Postgres logs can be accessed through the [Datadog](/docs/guides/datadog) or [OpenTelemetry](/docs/guides/opentelemetry) integration on the Scale plan. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
