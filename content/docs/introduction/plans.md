@@ -52,7 +52,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Instant restore](#instant-restore)                   | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                          |
-| [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
+| [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                |
 | [Support](#support)                                   | Community                      | Billing                              | Standard                                                                          |
 

@@ -201,11 +201,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "HIPAA"
+        "title": "HIPAA Compliance"
       },
       "free": false,
       "launch": false,
-      "scale": true
+      "scale": "<a class='text-primary-2' href='/docs/security/hipaa'>Available</a>"
     },
     {
       "rows": "2",
@@ -214,7 +214,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": true
+      "scale": "<a class='text-primary-2' href='https://neon.com/docs/security/compliance#soc-2'>Available</a>"
     }
   ]
 }
