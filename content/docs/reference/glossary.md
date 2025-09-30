@@ -414,8 +414,8 @@ A designation that is given to a [branch](#branch) in a Neon project. Each Neon 
 
 The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [simultaneously active compute limit](#simultaneously-active-compute-limit), ensuring that it is always available.
-- The Vercel integration creates preview deployment branches from your Neon project's default branch.
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
@@ -522,7 +522,7 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 A Neon feature that lets you compare database schemas between different branches for better debugging, code review, and team collobration. See [Schema Diff](/docs/guides/schema-diff).
 
-## Simultaneously active compute limit
+## Concurrently active compute limit
 
 This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit.
 
