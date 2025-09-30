@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2025-09-05T12:26:43.316Z'
+updatedOn: '2025-09-29T19:49:33.017Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -150,7 +150,7 @@ For additional information, refer to our [Project collaboration guide](/docs/gui
 
 The IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
-Optionally, you can allow unrestricted access to your project's [non-default branches](/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+Optionally, you can allow unrestricted access to your project's non-protected branches. For instance, you might want to restrict access to protected branches to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
@@ -181,14 +181,14 @@ The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow 
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ default branch Only │
+│ Id                  │ Name                │ IP Addresses │ Protected Only      │
 ├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the default branch only, use the you can `--protected-only` option:
+To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
 
 ```bash
 neon ip-allow add 203.0.113.1 --protected-only
@@ -204,7 +204,7 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -335,9 +335,11 @@ curl -X PATCH \
 
 </Tabs>
 
-### Enable Row-Level Security (RLS)
+### Enable the Data API
 
-Neon RLS lets you integrate a JWT-based auth provider (such as Clerk, Auth0, or Azure AD) so Postgres can validate user identity and enforce row-level access with database policies. Configure your provider’s JWKS URL in the project’s Settings > RLS page, optionally set an expected audience (aud) when required, and use the `authenticated@` connection for client or server access. For setup steps and examples, see [About Neon RLS](/docs/guides/neon-rls) and the [Neon RLS Tutorial](/docs/guides/neon-rls-tutorial).
+The Data API turns your database tables into a REST API, making it easy to query your data from client applications. When you enable the Data API, it automatically creates `authenticated` and `anonymous` roles and sets up the necessary permissions for secure client-side access.
+
+For setup instructions and examples, see the [Data API documentation](/docs/data-api/get-started).
 
 ### Enable logical replication
 

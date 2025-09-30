@@ -6,8 +6,8 @@ ogImage: ''
 updatedOn: '2025-06-28T01:40:00+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL 18 Temporal Constraints'
-  slug: 'postgresql-18/temporal-constraints'
+  title: 'PostgreSQL 18 Logical Replication Improvements'
+  slug: 'postgresql-18/logical-replication-improvements'
 nextLink:
   title: 'PostgreSQL 18 NOT NULL as NOT VALID'
   slug: 'postgresql-18/not-null-as-not-valid'

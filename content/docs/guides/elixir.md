@@ -2,8 +2,11 @@
 title: Connect an Elixir application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Elixir using Postgrex
 enableTableOfContents: true
-updatedOn: '2025-07-29T10:34:33.838Z'
+updatedOn: '2025-09-30T00:26:10.493Z'
 ---
+
+<CopyPrompt src="/prompts/elixir-prompt.md" 
+description="Pre-built prompt for connecting Elixir applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a high-performance, concurrent, and robust PostgreSQL driver for Elixir.
 

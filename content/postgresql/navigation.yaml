@@ -351,12 +351,26 @@
           title: Enhanced RETURNING with OLD/NEW Values
         - slug: postgresql-18/temporal-constraints
           title: Temporal Constraints with WITHOUT OVERLAPS
+        - slug: "postgresql-18/array-bytea-improvements"
+          title: "Array and Bytea Function Improvements"
+        - slug: "postgresql-18/logical-replication-improvements"
+          title: "Logical Replication Improvements"
     - section: Security & Operations
       items:
         - slug: postgresql-18/oauth-authentication
           title: OAuth 2.0 Authentication Setup
         - slug: postgresql-18/not-null-as-not-valid
           title: NOT NULL Constraints as NOT VALID
+        - slug: "postgresql-18/security-improvements"
+          title: "Wire Protocol 3.2 and Advanced TLS"
+        - slug: 'postgresql-18/pg-stat-io'
+          title: 'pg_stat_io: Enhanced I/O Monitoring'
+    - section: Tools & Workflow
+      items:
+      - slug: "postgresql-18/psql-improvements"
+        title: "psql Improvements: Pipeline Queries and Prepared Statements"
+      - slug: "postgresql-18/autovacuum-maintenance-configuration"
+        title: "Autovacuum and Maintenance Configuration"
 - nav: Advanced
   title: Advanced
   slug: postgresql-advanced
@@ -710,6 +724,8 @@
           title: REPLACE
         - slug: postgresql-string-functions/postgresql-right
           title: RIGHT
+        - slug: postgresql-string-functions/postgresql-rpad
+          title: RPAD
         - slug: postgresql-string-functions/postgresql-rtrim
           title: RTRIM
         - slug: postgresql-string-functions/postgresql-split_part

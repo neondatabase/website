@@ -6,8 +6,11 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2025-07-29T10:34:33.839Z'
+updatedOn: '2025-09-30T00:26:10.495Z'
 ---
+
+<CopyPrompt src="/prompts/java-prompt.md" 
+description="Pre-built prompt for connecting Java applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Java application using **Java Database Connectivity (JDBC)**, the standard API for interacting with relational databases in Java.
 
@@ -98,7 +101,7 @@ Create a file named `.env` in your project's root directory. This file will secu
 5.  Create a file named `.env` in your project's root directory and add the connection string to it as shown below:
 
     ```text title=".env"
-    DATABASE_URL="jdbc:postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channelBinding=require"
+    DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[user]&password=[password]&sslmode=require&channelBinding=require"
     ```
 
     > Replace `[user]`, `[password]`, `[neon_hostname]`, and `[dbname]` with your actual database credentials.

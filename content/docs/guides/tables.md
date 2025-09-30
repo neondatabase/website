@@ -2,7 +2,7 @@
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 enableTableOfContents: true
-updatedOn: '2025-08-02T09:01:05.730Z'
+updatedOn: '2025-09-25T14:36:08.174Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
@@ -90,7 +90,7 @@ For more advanced privilege assignments, click the **Add privilege** link when c
 
 ## Define RLS policies
 
-Define your own Postgres RLS policies or use a RLS policy template. The "based on `user_id`" templates can be used with our [Neon RLS](/docs/guides/neon-rls) feature, which integrates third-party JWT-based authentication providers like Auth0 and Clerk.
+Create Postgres RLS policies using the templates provided. Templates like "based on user_id" restrict each user to their own rows. When using the Data API, access is matched to the `auth.user_id()` function.
 
 ![Set RLS policies on the tables page](/docs/changelog/tables_page_rls_policies.png)
 

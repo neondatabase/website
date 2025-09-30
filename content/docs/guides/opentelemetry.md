@@ -3,7 +3,7 @@ title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.287Z'
+updatedOn: '2025-09-22T19:22:14.582Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -153,6 +153,33 @@ You can enable either or both options based on your monitoring needs.
    - Europe: `https://otlp.eu01.nr-data.net`
    - See [New Relic's endpoint documentation](https://docs.newrelic.com/docs/opentelemetry/best-practices/opentelemetry-otlp/#configure-endpoint-port-protocol) for other regions
 
+   <Admonition type="note">
+   When you configure an OTLP endpoint URL in Neon, you should provide only the **base URL** of your collector or observability platform. The OpenTelemetry Collector automatically appends the correct signal-specific paths:
+   - `/v1/metrics` for metrics
+   - `/v1/logs` for logs
+   - `/v1/traces` for traces
+
+   For example, if you enter:
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp
+   ```
+
+   the Collector will send requests to:
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/metrics
+   ```
+
+   and
+
+   ```
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/logs
+   ```
+
+   Make sure your observability platform is configured to receive data at these appended paths. If your platform expects data directly at the base URL without suffixes, you may need to adjust the configuration on that side.
+   </Admonition>
+
 3. Configure authentication:
 
    **For Grafana OSS**:
@@ -235,12 +262,30 @@ Additionally, if you are setting up the OpenTelemetry integration for a project 
 
 ## Troubleshooting
 
-If your data isn't appearing in your observability platform:
+- **Data isn't appearing in your observability platform**
+  1. **Verify your endpoint URL** - Ensure the OTLP endpoint URL is correct for your platform.
+  2. **Check authentication** - Verify that your API key, bearer token, or credentials are valid and have the necessary permissions.
+  3. **Confirm compute activity** - Make sure your Neon compute is active and running queries.
+  4. **Review platform-specific requirements** - Some platforms may have specific configuration requirements for OTLP data ingestion.
 
-1. **Verify your endpoint URL** - Ensure the OTLP endpoint URL is correct for your platform.
-2. **Check authentication** - Verify that your API key, bearer token, or credentials are valid and have the necessary permissions.
-3. **Confirm compute activity** - Make sure your Neon compute is active and running queries.
-4. **Review platform-specific requirements** - Some platforms may have specific configuration requirements for OTLP data ingestion.
+- **404 errors on OTLP endpoint**
+
+  If you see errors like the following in your logs:
+
+  ```bash shouldWrap
+  Exporting failed. Dropping data. {"error": "not retryable error: Permanent error: rpc error: code = Unimplemented desc = error exporting items, request to https://example.com/otlp/v1/metrics responded with HTTP Status Code 404"}
+  ```
+
+  This usually means your observability platform is not accepting data on the signal-specific paths automatically appended by the OpenTelemetry Collector.
+
+  The Collector appends these suffixes to the base URL you configure:
+  - `/v1/metrics` for metrics
+  - `/v1/logs` for logs
+  - `/v1/traces` for traces
+
+  **How to fix:**
+  - Double-check that your platform supports OTLP ingestion on these paths.
+  - If your platform expects data directly at the base URL without suffixes, you may need to change its configuration or use a compatible OTLP gateway.
 
 ## Available metrics
 

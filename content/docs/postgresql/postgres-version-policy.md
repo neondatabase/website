@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2025-09-17T16:18:18.384Z'
+updatedOn: '2025-09-26T11:49:34.214Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -61,7 +61,20 @@ In such cases, your action may occasionally be required. When this occurs &#8212
 
 ### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, and 17. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
+Neon currently supports Postgres 14, 15, 16, 17, and 18 (preview). Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
+
+### Postgres 18 support
+
+Postgres 18 is available on Neon as a preview release. While fully functional, we recommend waiting until it exits preview status before upgrading production databases.
+
+#### Current limitations
+
+- **Stability**: Expect minor issues as we complete testing and integration.
+- **Performance**: Neon currently runs Postgres 18 with `io_method = 'sync'` to use the traditional synchronous I/O behavior found in Postgres 17 and earlier versions. We're working to integrate with Postgres 18's new async I/O system.
+- **Extensions**: Limited extension support at launch, [check extension compatibility](/docs/extensions/pg-extensions) before upgrading.
+- **HIPAA**: Not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
+
+We'll remove the preview designation once these limitations are addressed.
 
 ### Major version upgrades
 

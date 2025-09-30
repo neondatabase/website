@@ -140,4 +140,4 @@ Output:
 ## Summary
 
 - A tablespace is a location on the storage device where PostgreSQL stores data files.
-- Use the `CREATE TABLESAPCE` statement to create a new tablespace.
+- Use the `CREATE TABLESPACE` statement to create a new tablespace.

@@ -10,11 +10,13 @@ nextLink:
   slug: 'postgresql-18/asynchronous-io'
 ---
 
-**Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O with 2-3x performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that will impact developers and DBAs.
+**Summary**: PostgreSQL 18 introduces many new features including asynchronous I/O providing significant I/O performance improvements, virtual generated columns, UUIDv7 support, temporal constraints, and enhanced security. This overview covers the major features that impact developers and DBAs.
+
+<CTA title="Postgres 18 is available on Neon [Preview]" description="" buttonText="Deploy it for free" buttonUrl="https://console.neon.tech/app/projects" />
 
 ## Introduction
 
-PostgreSQL 18 Beta 1 was released on May 8, 2025, marking one of the most significant releases in recent years. This version introduces fundamental changes to how PostgreSQL handles I/O operations, along with numerous developer-friendly features and security enhancements.
+PostgreSQL 18 was officially released on September 25, 2025, marking one of the most significant releases in recent years. This version introduces fundamental changes to how PostgreSQL handles I/O operations, along with numerous developer-friendly features and security enhancements.
 
 The release focuses on three core areas:
 
@@ -26,7 +28,11 @@ Let's explore what makes PostgreSQL 18 a landmark release.
 
 ## Major Performance Improvements
 
-With PostgreSQL 18, we see a major shift in how the database handles I/O operations, particularly for read-heavy workloads. The introduction of asynchronous I/O (AIO) which gives up to 2-3x performance improvements in many scenarios.
+With PostgreSQL 18, we see a major shift in how the database handles I/O operations, particularly for read-heavy workloads. The introduction of asynchronous I/O (AIO) provides up to 2-3x performance improvements in many scenarios.
+
+<Admonition type="comingSoon" title="Support coming soon">
+On Neon, PostgreSQL 18 currently runs with `io_method = 'sync'` for stability during the preview period. Full async I/O support is coming soon.
+</Admonition>
 
 ### [Asynchronous I/O](/postgresql/postgresql-18/asynchronous-io)
 
@@ -246,20 +252,22 @@ PostgreSQL 18 introduces wire protocol version 3.2 - the first update since Post
 
 ## Getting Started with PostgreSQL 18
 
-PostgreSQL 18 Beta 1 is available for testing. While not recommended for production, it's an excellent time to:
+PostgreSQL 18 is now officially available for preview on Neon. It's an excellent time to:
 
 - Test your applications for compatibility
 - Benchmark the new asynchronous I/O features
 - Experiment with UUIDv7 and virtual generated columns
 - Validate upgrade procedures
 
-Neon will support PostgreSQL 18 shortly after the official release, just like with previous versions. But if you want to try it out locally right now, you can spin up a PostgreSQL 18 container using Docker:
+Neon supports PostgreSQL 18 as a preview release. While fully functional, we recommend waiting until it exits preview status before upgrading production databases. For current limitations and preview status details, see our [PostgreSQL Version Support Policy](/docs/postgresql/postgres-version-policy#postgres-18-support).
+
+If you want to try it out locally right now, you can spin up a PostgreSQL 18 container using Docker:
 
 ```bash
 docker run --name pg18 \
   -e POSTGRES_PASSWORD=postgres \
   -p 5432:5432 \
-  postgres:18beta1
+  postgres:18
 ```
 
 This will give you a PostgreSQL 18 instance running locally for testing purposes. You can then connect using your favorite PostgreSQL client or `psql`.
@@ -268,8 +276,4 @@ This will give you a PostgreSQL 18 instance running locally for testing purposes
 
 PostgreSQL 18 represents a major release that modernizes the database for cloud-native workloads but also maintaining backward compatibility. The asynchronous I/O system alone makes this a compelling upgrade.
 
-The beta testing period is crucial for ensuring a stable release. We encourage testing your applications against PostgreSQL 18 Beta 1 to help identify any compatibility issues before the final release.
-
-**Expected timeline**: PostgreSQL 18 final release is anticipated for September/October 2025.
-
-As always, Neon will have PostgreSQL 18 support ready shortly after the official release, just as we did with PostgreSQL 17.
+Neon will remove the preview designation once the current limitations are addressed, just as we did with PostgreSQL 17.

@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2025-09-09T14:03:52.641Z'
+updatedOn: '2025-09-19T19:35:19.395Z'
 ---
 
 <InfoBlock>
@@ -121,6 +121,6 @@ If you're on a Neon paid plan, you need to downgrade to the Free plan to avoid f
 
 ## Delete your account
 
-If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#deleting-your-account).
+If you would like to delete your Neon account entirely, please refer to the steps described here: [Deleting your account](/docs/manage/accounts#delete-account).
 
 <NeedHelp/>
