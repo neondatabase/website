@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2025-07-29T10:34:33.841Z'
+updatedOn: '2025-09-30T00:26:10.497Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
