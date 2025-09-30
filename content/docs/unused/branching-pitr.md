@@ -91,7 +91,7 @@ To make the recovery branch your new default:
 3. Select your `recovery_branch` from the table.
 4. On the branch details page, select **Set as Default**.
 
-For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [default branch](/docs/manage/branches#default-branch).
+For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available. For more information, see [default branch](/docs/manage/branches#default-branch).
 
 <Admonition type="note">
 If your previous default branch was your project's root branch (the initial branch created with your project), it cannot be deleted. Deleting a root branch is not yet supported. In the meantime, you can rename a root branch (perhaps adding an `OLD` or `DO_NOT_USE` prefix to its name) and remove data from it to ensure that it's not used accidentally or consuming storage space.
