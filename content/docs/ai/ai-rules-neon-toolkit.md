@@ -229,7 +229,7 @@ Use this when the user asks for an operation that the toolkit does not directly 
 ```typescript
 const apiClient = toolkit.apiClient;
 
-// Now you can use the full power of the Neon API
+// Now you can use the apiClient for advanced operations.
 // Example: List all projects in the user's account
 const { data } = await apiClient.listProjects({});
 console.log(

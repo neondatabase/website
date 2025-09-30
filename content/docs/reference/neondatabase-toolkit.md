@@ -85,7 +85,7 @@ export NEON_API_KEY="YOUR_API_KEY_FROM_NEON_CONSOLE"
 
 > Feel free to skip to the [Complete Example](#complete-example) section if you want to see everything in action.
 
-The toolkit exposes a minimal but powerful set of methods to manage the lifecycle of an ephemeral database.
+The toolkit offers a compact, useful API for handling the lifecycle of an ephemeral database.
 
 ### `new NeonToolkit(apiKey)`
 
