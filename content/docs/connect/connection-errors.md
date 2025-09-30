@@ -206,7 +206,7 @@ The error occurs when using a pooled Neon connection string with startup options
 
 This error can also appear as: `active endpoints limit exceeded`.
 
-Neon has a default limit of 20 concurrently active computes to protect your account from unintended usage. The compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available. When you exceed the limit, any compute exceeding the limit and associated with a non-default branch will remain suspended and you will see this error when attempting to connect to it. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+Neon has a default limit of 20 concurrently active computes to prevent resource exhaustion. The compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available. When you exceed the limit, any compute exceeding the limit and associated with a non-default branch will remain suspended and you will see this error when attempting to connect to it. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 
 ## Remaining connection slots are reserved for roles with the SUPERUSER attribute
 
