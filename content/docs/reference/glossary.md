@@ -524,7 +524,9 @@ A Neon feature that lets you compare database schemas between different branches
 
 ## Concurrently active compute limit
 
-This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit.
+This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit. The default limit is 20 concurrently active computes.
+
+When you exceed the limit, any compute exceeding the limit and associated with a non-default branch will remain suspended and you will see an error when attempting to connect to it. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 
 ## serverless
 
