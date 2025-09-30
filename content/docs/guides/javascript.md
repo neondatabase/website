@@ -6,6 +6,9 @@ enableTableOfContents: true
 updatedOn: '2025-07-29T10:34:33.840Z'
 ---
 
+<CopyPrompt src="/prompts/javascript-prompt.md" 
+description="Pre-built prompt for connecting JavaScript applications to Neon"/>
+
 This guide describes how to create a Neon project and connect to it from a Node.js application using popular Postgres clients:
 
 - **[node-postgres (pg)](https://www.npmjs.com/package/pg)**: The most widely-used and robust driver for Node.js.

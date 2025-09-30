@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-07-29T10:34:33.837Z'
 ---
 
+<CopyPrompt src="/prompts/dotnet-prompt.md" 
+description="Pre-built prompt for connecting .NET applications to Neon"/>
+
 This guide describes how to create a Neon project and connect to it from a .NET (C#) application using [Npgsql](https://www.npgsql.org/), a .NET data provider for PostgreSQL.
 
 You'll build a console application that demonstrates how to connect to your Neon database and perform basic Create, Read, Update, and Delete (CRUD) operations.

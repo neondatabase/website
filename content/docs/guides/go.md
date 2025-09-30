@@ -8,6 +8,9 @@ redirectFrom:
 updatedOn: '2025-07-29T10:34:33.838Z'
 ---
 
+<CopyPrompt src="/prompts/golang-prompt.md" 
+description="Pre-built prompt for connecting Go applications to Neon"/>
+
 This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
 
 You'll learn how to connect to your Neon database from a Go application, and perform basic Create, Read, Update, and Delete (CRUD) operations.
