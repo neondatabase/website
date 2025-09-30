@@ -241,7 +241,7 @@ The default branch serves two key purposes:
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
 - For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, additional computes will remain suspended.
 
 ### Protected branch
 
