@@ -20,7 +20,6 @@ redirectFrom:
 </DocsList>
 </InfoBlock>
 
-<NeonRLSDeprecation />
 
 In this tutorial, you'll clone and modify up a sample React.js note-taking app to demonstrate how Postgres Row-Level Security (RLS) provides an additional security layer beyond application logic. The app integrates with a Neon database via the Neon Data API.
 
