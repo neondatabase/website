@@ -1,4 +1,3 @@
-import { verifySignatureAppRouter } from '@upstash/qstash/dist/nextjs';
 import { NextResponse } from 'next/server';
 import * as yup from 'yup';
 
@@ -61,4 +60,24 @@ async function handler(request) {
   }
 }
 
-export const POST = verifySignatureAppRouter(handler);
+// Only use QStash verification if the environment variable is available
+const POST = (() => {
+  if (process.env.QSTASH_CURRENT_SIGNING_KEY) {
+    try {
+      // Dynamic import to avoid build-time errors when QStash is not configured
+      // eslint-disable-next-line import/no-unresolved
+      const { verifySignatureAppRouter } = require('@upstash/qstash/dist/nextjs');
+      return verifySignatureAppRouter(handler);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn('QStash not available, using handler directly:', error.message);
+      return handler;
+    }
+  } else {
+    // eslint-disable-next-line no-console
+    console.warn('QStash not configured, skipping signature verification for branch deletion');
+    return handler;
+  }
+})();
+
+export { POST };

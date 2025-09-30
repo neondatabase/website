@@ -33,6 +33,12 @@ export const handleInsertBranchConnection = async (branchId, host) => {
 };
 
 export const scheduleBranchDeletion = async (branchId) => {
+  // Skip QStash scheduling if environment variables are not available
+  if (!process.env.NEON_BRANCHING_DEMO_QSTASH_TOKEN || !process.env.QSTASH_CURRENT_SIGNING_KEY) {
+    console.warn('QStash not configured, skipping branch deletion scheduling');
+    return;
+  }
+
   const qstash = new Client({
     token: process.env.NEON_BRANCHING_DEMO_QSTASH_TOKEN,
   });
