@@ -15,7 +15,6 @@ redirectFrom:
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/guides/neon-rls">About Neon RLS</a>
   <a href="https://orm.drizzle.team/docs/rls">Row-Level security in Drizzle</a>
 </DocsList>
 </InfoBlock>
