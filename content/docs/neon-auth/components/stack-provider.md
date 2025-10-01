@@ -20,7 +20,7 @@ For detailed usage instructions, see the manual section of the [setup guide](/do
 
 ```tsx title="layout.tsx"
 import { StackProvider } from '@stackframe/stack';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 function App() {
   return (
