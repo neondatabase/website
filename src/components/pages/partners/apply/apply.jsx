@@ -4,17 +4,16 @@ import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import { InlineWidget } from 'react-calendly';
 
 import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
 import 'styles/hubspot-form.css';
-import 'styles/calendly-widget.css';
 import CloseIcon from './images/close.inline.svg';
 
-const calendlyURL = 'https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering';
+const googleCalendarURL =
+  'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KghFQvaD_N5KsldQvhmrFcoh3zxNStwWIHq7fBnMiRxTj0FYg9AlTFECZjT86rYvpqdnGrFDp?gv=true';
 const hubspotFormID = '26f1ff16-e3ab-4adf-b09f-910f130637b0';
 
 const Testimonial = ({ className = null, ariaHidden = false }) => (
@@ -40,22 +39,11 @@ Testimonial.propTypes = {
 };
 
 const Apply = () => {
-  const [userData, setUserData] = useState({
-    email: '',
-    name: '',
-  });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useHubspotForm('hubspot-form', {
-    onFormSubmitted: (form, data) => {
-      const { submissionValues } = data;
-      const name = `${submissionValues.firstname || ''} ${submissionValues.lastname || ''}`.trim();
-
+    onFormSubmitted: () => {
       setIsModalOpen(true);
-      setUserData({
-        email: submissionValues.email || '',
-        name,
-      });
     },
   });
 
@@ -93,23 +81,19 @@ const Apply = () => {
       <Dialog.Root open={isModalOpen} onOpenChange={handleOpenChange}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 z-[150] bg-[rgba(12,13,13,0.2)] data-[state=closed]:animate-fade-out-overlay data-[state=open]:animate-fade-in-overlay dark:bg-black/80" />
-          <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto max-h-[85vh] w-full max-w-[756px] -translate-x-1/2 -translate-y-1/2 lg:h-full lg:max-h-full lg:max-w-full">
-            <div className="relative flex h-full max-h-[85vh] flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 text-white shadow-[4px_4px_10px_rgba(0,0,0,0.5)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show lg:h-full lg:max-h-screen lg:rounded-none">
-              <div className="mt-6 flex h-full max-h-[calc(100vh_-_62px)] flex-col overflow-y-auto pb-12 md:mt-12">
-                <div className="calendly-spinner">
-                  <div className="calendly-bounce1" />
-                  <div className="calendly-bounce2" />
-                  <div className="calendly-bounce3" />
-                </div>
-                <InlineWidget
-                  url={calendlyURL}
-                  pageSettings={{
-                    backgroundColor: '131415',
-                    primaryColor: '00e599',
-                    textColor: 'ffffff',
-                    hideGdprBanner: true,
-                  }}
-                  prefill={userData}
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-[150] mx-auto h-[600px] w-[90vw] max-w-[1200px] -translate-x-1/2 -translate-y-1/2 lg:h-[90vh] lg:w-full lg:max-w-full">
+            <div className="relative flex h-full flex-col rounded-[10px] border border-gray-new-20 bg-gray-new-8 pt-4 text-white shadow-[4px_4px_10px_rgba(0,0,0,0.5)] data-[state=closed]:animate-dialog-hide data-[state=open]:animate-dialog-show lg:rounded-none">
+              <div className="px-6 pb-4 pt-2">
+                <p className="text-center text-base leading-snug">
+                  Thank you for your interest. We've saved your information. Please book a meeting
+                  with our team as a next step.
+                </p>
+              </div>
+              <div className="flex h-full flex-col overflow-hidden px-4 pb-4">
+                <iframe
+                  src={googleCalendarURL}
+                  className="h-full w-full border-0"
+                  title="Schedule a meeting"
                 />
               </div>
               <Dialog.Close asChild>
