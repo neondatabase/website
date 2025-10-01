@@ -1,1 +1,7 @@
-export { default } from './sql-to-rest-converter';
+import dynamic from 'next/dynamic';
+
+const DynamicComponentWithNoSSR = dynamic(() => import('./sql-to-rest-converter'), {
+  ssr: false,
+});
+
+export default DynamicComponentWithNoSSR;
