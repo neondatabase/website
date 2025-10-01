@@ -3,7 +3,7 @@ title: Neon Data API tutorial
 subtitle: Set up our demo note-taking app to learn about Data API queries with
   postgrest-js
 enableTableOfContents: true
-updatedOn: '2025-09-10T16:17:30.444Z'
+updatedOn: '2025-09-25T14:36:08.166Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -69,10 +69,6 @@ Each note belongs to a user (via `ownerId`), and paragraphs are linked to notes 
 Before we dive into the queries, let's first secure our tables. When making direct database queries from the frontend, **Row-Level Security (RLS) policies** are essential. They make sure that users can access **only their own data**.
 
 RLS is crucial for any real-world app. RLS policies act as a safety net at the database level, so even if your frontend code has bugs, your data stays protected.
-
-<Admonition type="info" title="A note on Neon RLS">
-You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**.
-</Admonition>
 
 Our demo app uses [Drizzle ORM](/docs/guides/rls-drizzle) to define RLS policies, which we highly recommend as a simpler, more maintainable way of writing RLS policies:
 

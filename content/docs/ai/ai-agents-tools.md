@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-09-16T17:39:40.070Z'
+updatedOn: '2025-10-01T10:10:07.451Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -26,6 +26,8 @@ Accelerate your development with context rules that help AI tools write better c
 <a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
 <a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="github">Neon TypeScript SDK Rules</a>
 <a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK Rules</a>
+<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API Rules</a>
+<a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the @neondatabase/toolkit to quickly spin up Postgres databases and run SQL queries" icon="github">Neon Toolkit Rules</a>
 </DetailIconCards>
 
 ## Build AI agents

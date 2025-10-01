@@ -342,6 +342,8 @@
               slug: data-api/get-started
             - title: Building a note-taking app
               slug: data-api/demo
+            - title: Secure your app with RLS
+              slug: guides/rls-tutorial
 
         - title: Neon Auth
           icon: auth
@@ -395,7 +397,7 @@
                   slug: neon-auth/create-users
                 - title: Claiming a Project
                   slug: neon-auth/claim-project
-                - title: Permsissions
+                - title: Permissions
                   slug: neon-auth/permissions-roles
                 - title: Email configuration
                   slug: neon-auth/email-configuration
@@ -594,6 +596,10 @@
                   slug: ai/ai-rules-neon-typescript-sdk
                 - title: Neon Python SDK
                   slug: ai/ai-rules-neon-python-sdk
+                - title: Neon API
+                  slug: ai/ai-rules-neon-api
+                - title: Neon Toolkit
+                  slug: ai/ai-rules-neon-toolkit
             - section: Build AI agents
               icon: openai
               items:
@@ -603,8 +609,8 @@
                   slug: ai/ai-database-versioning
                 - title: Neon Toolkit
                   slug: https://github.com/neondatabase/toolkit
-                - title: Neon API
-                  slug: reference/api-reference
+                - title: Neon API reference
+                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: Agent frameworks
               icon: frameworks
               items:
@@ -659,8 +665,10 @@
             - section: API
               icon: api
               items:
-                - title: Neon API
+                - title: Overview
                   slug: reference/api-reference
+                - title: Reference
+                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: CLI
               icon: cli
               items:
@@ -1026,12 +1034,12 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
+            - title: Datadog
+              slug: guides/datadog
             - title: OpenTelemetry
               items:
                 - title: OTel integration
                   slug: guides/opentelemetry
-                - title: Datadog
-                  slug: guides/datadog
                 - title: Grafana Cloud
                   slug: guides/grafana-cloud
                 - title: Better Stack

@@ -13,8 +13,18 @@ describe('Startups Contact Form', () => {
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
 
-    cy.wait('@formSuccessSubmit');
     cy.get('button').should('contain', 'Applied!');
+
+    cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
+      email: 'john.doe@startup.com',
+    });
+    cy.get('@zarazTrackSpy').should('have.been.calledWith', 'Startup Form Submitted', {
+      email: 'john.doe@startup.com',
+      first_name: 'John',
+      last_name: 'Doe',
+      company_website: 'startup.example.com',
+      investor: 'Y Combinator',
+    });
   });
 
   it('displays validation errors when required fields are missing', () => {
@@ -46,7 +56,10 @@ describe('Startups Contact Form', () => {
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
 
-    cy.wait('@formErrorSubmit');
     cy.getByData('error-message').should('exist');
+
+    cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
+      email: 'john.doe@startup.com',
+    });
   });
 });

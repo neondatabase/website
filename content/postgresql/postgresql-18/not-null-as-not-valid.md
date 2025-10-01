@@ -8,6 +8,9 @@ enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL 18 OAuth Support'
   slug: 'postgresql-18/oauth-authentication'
+nextLink:
+  title: 'PostgreSQL 18 Wire Protocol 3.2 and TLS Improvements'
+  slug: 'postgresql-18/security-improvements'
 ---
 
 **Summary**: In this tutorial, you will learn how to use PostgreSQL 18's new NOT NULL constraints with NOT VALID to add constraints to large tables without lengthy table scans or extended downtime.

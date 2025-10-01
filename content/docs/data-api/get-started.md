@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-09-10T16:17:30.448Z'
+updatedOn: '2025-09-25T14:36:08.170Z'
 tag: beta
 ---
 
@@ -26,10 +26,8 @@ The Neon Data API offers a ready-to-use REST API for your Neon database that's c
 const { data } = await client.from('posts').select('*');
 ```
 
-<Admonition type="info" title="About RLS and Neon RLS">
+<Admonition type="info" title="About RLS">
 When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
-
-You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**. We recommend using the Data API for client-side querying as it provides a more secure and controlled way to access your data through predefined REST endpoints.
 </Admonition>
 
 <Steps>
@@ -42,28 +40,27 @@ To get started, open the **Data API** page from the project sidebar and click **
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-Enabling the Data API on your branch gives you:
+Once enabled, you'll get:
 
-- A **REST API endpoint** for your branch (your base URL for API requests) with a copy-to-clipboard control
-- **Neon Auth** as your default authentication provider (if you accept the default)
-- Two Postgres roles:
-  - **`authenticated`** – used when a request includes a valid JWT
-  - **`anonymous`** – will be used for unauthenticated requests (coming soon)
+- A **REST API endpoint** for your branch
+- Neon Auth as your auth provider
+- Two Postgres roles: `authenticated` and `anonymous` (coming soon)
+- GRANT permissions applied to the authenticated role
+
+> You can customize the auth provider and GRANTs later, or choose your own auth provider during setup.
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
-You can change the provider to **Other provider** if you want to manage your own JWTs, or skip authentication setup and add it later. But if you accept the default, Neon Auth is ready to use immediately. If you select **Other provider**, you'll need to provide your provider's JWKS (JSON Web Key Set) URL to validate JWT tokens.
-
-_Always secure your data before using the Data API in production._
-
 ## Secure your Data API
 
-To secure your Data API you must configure both of the following:
+The Data API requires two layers of security:
 
-- **GRANT statements** that define which operations (`SELECT`, `INSERT`, `UPDATE`, `DELETE`) each role can attempt
-- **Row-Level Security (RLS) policies** that control which specific rows each role can see or modify
+1. Database permissions (GRANT statements, already configured if you accepted the defaults)
+2. Row-Level Security (RLS) policies
 
-### GRANT permissions
+### Database permissions
+
+If you accepted the defaults during setup, Neon automatically applied the necessary GRANT statements. If you skipped that step, you'll need to run these SQL statements manually:
 
 ```sql
 -- For existing tables
