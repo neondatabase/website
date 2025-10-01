@@ -62,7 +62,7 @@ To comment out a single line, you can use `--` at the beginning of the line.
 
 ## Load the schema
 
-After making any necessary modifications, load the dumped schema using `pg_restore`:
+After making any necessary modifications, load the dumped schema using `psql`:
 
 ```sql
 psql \
