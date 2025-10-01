@@ -10,13 +10,13 @@ import {
 } from '@supabase/sql-to-rest';
 import { githubDark, githubLight } from '@uiw/codemirror-theme-github';
 import CodeMirror from '@uiw/react-codemirror';
-import dynamic from 'next/dynamic';
+import parse from 'html-react-parser';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
 import CodeTabs from 'components/pages/doc/code-tabs';
-
-const CodeBlock = dynamic(() => import('components/shared/code-block'), { ssr: false });
+import CodeBlockWrapper from 'components/shared/code-block-wrapper';
+import highlight from 'lib/shiki';
 
 const neonImportLibrary = `
 import { PostgrestClient } from "@supabase/postgrest-js";
@@ -50,6 +50,9 @@ offset
   const [curlOutput, setCurlOutput] = useState('');
   const [httpOutput, setHttpOutput] = useState('');
   const [jsOutput, setJsOutput] = useState('');
+  const [highlightedJs, setHighlightedJs] = useState('');
+  const [highlightedCurl, setHighlightedCurl] = useState('');
+  const [highlightedHttp, setHighlightedHttp] = useState('');
   const [error, setError] = useState('');
   const { resolvedTheme } = useTheme();
 
@@ -85,6 +88,24 @@ offset
     convertSql(sqlQuery);
   }, [sqlQuery]);
 
+  useEffect(() => {
+    const highlightAll = async () => {
+      try {
+        const [jsHtml, curlHtml, httpHtml] = await Promise.all([
+          highlight(jsOutput || '', 'javascript'),
+          highlight(curlOutput || '', 'bash'),
+          highlight(httpOutput || '', 'text'),
+        ]);
+        setHighlightedJs(jsHtml);
+        setHighlightedCurl(curlHtml);
+        setHighlightedHttp(httpHtml);
+      } catch (e) {
+        // silently ignore highlight errors
+      }
+    };
+    highlightAll();
+  }, [jsOutput, curlOutput, httpOutput]);
+
   return (
     <div className="sql-to-rest-converter">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -112,17 +133,11 @@ offset
 
           {!error && (
             <CodeTabs labels={['JavaScript', 'cURL', 'HTTP']}>
-              <CodeBlock>
-                <code className="language-javascript">{jsOutput}</code>
-              </CodeBlock>
+              <CodeBlockWrapper>{parse(highlightedJs || '')}</CodeBlockWrapper>
 
-              <CodeBlock>
-                <code className="language-shell">{curlOutput}</code>
-              </CodeBlock>
+              <CodeBlockWrapper>{parse(highlightedCurl || '')}</CodeBlockWrapper>
 
-              <CodeBlock>
-                <code className="language-http">{httpOutput}</code>
-              </CodeBlock>
+              <CodeBlockWrapper>{parse(highlightedHttp || '')}</CodeBlockWrapper>
             </CodeTabs>
           )}
         </div>
