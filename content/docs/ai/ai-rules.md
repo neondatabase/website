@@ -19,6 +19,8 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 
 <a href="/docs/ai/ai-rules-neon-api" description="Use the Neon API to programmatically manage your resources" icon="code">Neon API</a>
 
+<a href="/docs/ai/ai-rules-neon-toolkit" description="Quickly spin up Postgres databases and run SQL queries with @neondatabase/toolkit" icon="database">Neon Toolkit</a>
+
 </DetailIconCards>
 
 ## How it works
