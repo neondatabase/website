@@ -109,7 +109,7 @@ To configure the restore window for a project:
 4. Use the slider to select the restore window.
 5. Click **Save**.
 
-For more information about plan limits, see [Neon plans](/docs/introduction/plans).
+For information about restore window limits and default settings, see [Neon plans](/docs/introduction/plans).
 
 ### Schedule updates for your project
 
