@@ -2,7 +2,7 @@
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 enableTableOfContents: true
-updatedOn: '2025-09-26T12:18:57.148Z'
+updatedOn: '2025-10-01T10:10:07.455Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI tools like [Cursor](https://www.cursor.so/) understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
