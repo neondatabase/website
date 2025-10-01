@@ -3,7 +3,7 @@ title: Compliance
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2025-08-20T10:56:24.956Z'
+updatedOn: '2025-10-01T09:57:28.495Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.
