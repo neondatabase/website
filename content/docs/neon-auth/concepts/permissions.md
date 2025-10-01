@@ -3,7 +3,7 @@ title: App/User RBAC Permissions
 subtitle: Managing permissions for your app's end users and teams
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-07-23T17:00:18.143Z'
+updatedOn: '2025-10-01T12:46:01.213Z'
 ---
 
 > If you're looking for information about who can add or manage Neon Auth in your Neon project, see [Permissions overview](/docs/neon-auth/permissions-roles).
@@ -56,7 +56,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function CheckUserPermission() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -106,7 +106,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function DisplayUserPermissions() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -178,7 +178,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function CheckGlobalPermission() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
@@ -226,7 +226,7 @@ return (
 
 <TabItem>
 ```tsx shouldWrap
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function DisplayGlobalPermissions() {
   const user = await stackServerApp.getUser({ or: 'redirect' });
