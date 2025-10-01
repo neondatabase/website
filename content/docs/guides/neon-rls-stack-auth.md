@@ -3,7 +3,7 @@ title: Secure your data with Stack Auth and Neon RLS
 subtitle: Implement Row-level Security policies in Postgres using Stack Auth and Neon
   RLS
 enableTableOfContents: true
-updatedOn: '2025-09-05T14:21:44.228Z'
+updatedOn: '2025-10-01T12:46:01.208Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-stack-auth
   - /docs/guides/neon-authorize-stack-auth

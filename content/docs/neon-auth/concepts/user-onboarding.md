@@ -3,7 +3,7 @@ title: User Onboarding
 subtitle: How to implement onboarding flows in Neon Auth
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-08-26T15:57:17.420Z'
+updatedOn: '2025-10-01T12:46:01.214Z'
 ---
 
 > Implementing a user onboarding page and collecting information on sign-up

@@ -1,8 +1,9 @@
 ---
-title: '<StackHandler />'
+title: <StackHandler />
 subtitle: Neon Auth handler component for authentication routes
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-10-01T12:46:01.212Z'
 ---
 
 Renders the appropriate authentication or account-related component based on the current route.

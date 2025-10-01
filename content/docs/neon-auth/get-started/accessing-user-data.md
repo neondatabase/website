@@ -1,8 +1,9 @@
 ---
 title: Accessing User Data
-subtitle: How to read, update, and protect user data in your app
+subtitle: 'How to read, update, and protect user data in your app'
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-10-01T12:46:01.214Z'
 ---
 
 > Reading and writing user information, and protecting pages
