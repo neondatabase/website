@@ -65,13 +65,14 @@ deno run -A neondb
 
 **CLI options:**
 
-| Option           | Alias | Description                           | Default        |
-| ---------------- | ----- | ------------------------------------- | -------------- |
-| `--yes`          | `-y`  | Skip prompts and use defaults         |                |
-| `--env <path>`   | `-e`  | Path to the .env file                 | `./.env`       |
-| `--key <string>` | `-k`  | Env var for connection string         | `DATABASE_URL` |
-| `--seed <path>`  | `-s`  | Path to SQL file to seed the database | not set        |
-| `--help`         | `-h`  | Show help message                     |                |
+| Option              | Alias | Description                           | Default        |
+| ------------------- | ----- | ------------------------------------- | -------------- |
+| `--yes`             | `-y`  | Skip prompts and use defaults         |                |
+| `--env <path>`      | `-e`  | Path to the .env file                 | `./.env`       |
+| `--key <string>`    | `-k`  | Env var for connection string         | `DATABASE_URL` |
+| `--prefix <string>` | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
+| `--seed <path>`     | `-s`  | Path to SQL file to seed the database | not set        |
+| `--help`            | `-h`  | Show help message                     |                |
 
 **Examples:**
 
@@ -87,9 +88,22 @@ npx neondb --env ./my.env --key MY_DB_URL
 
 # Skip all prompts and use defaults
 npx neondb --yes
+
+# Opens the claim URL in browser
+npx neondb claim
 ```
 
-The CLI writes the connection string(s), claim URL, and expiration to the specified `.env` file and outputs them in the terminal. For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb).
+The CLI writes the connection string, claim URL, and expiration to the specified `.env` file and outputs them in the terminal. For example:
+
+```txt
+# Claimable DB expires at: Sun, 05 Oct 2025 23:11:33 GMT
+# Claim it now to your account: https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
+DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL_POOLER=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+PUBLIC_NEON_LAUNCHPAD_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
+```
+
+For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb).
 
 ### Integration with development tools
 
@@ -99,11 +113,12 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 
 **Configuration options:**
 
-| Option   | Type   | Description                      | Default        |
-| -------- | ------ | -------------------------------- | -------------- |
-| `env`    | string | Path to the .env file            | `.env`         |
-| `envKey` | string | Name of the environment variable | `DATABASE_URL` |
-| `seed`   | object | Seeding config (optional)        | not set        |
+| Option      | Type   | Description                      | Default        |
+| ----------- | ------ | -------------------------------- | -------------- |
+| `env`       | string | Path to the .env file            | `.env`         |
+| `envKey`    | string | Name of the environment variable | `DATABASE_URL` |
+| `envPrefix` | string | Prefix used for public vars      | `PUBLIC_`      |
+| `seed`      | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
 
@@ -143,7 +158,7 @@ export default defineConfig({
    - Adds two connection strings to your environment file:
      - `DATABASE_URL` - Standard connection string
      - `DATABASE_URL_POOLER` - Connection pooler string
-   - Includes the claimable URL as a comment in the environment file
+   - Includes the claimable URL as a comment and public variable in the environment file
 
 The plugin is inactive during production builds (`vite build`) to prevent changes to environment files and database provisioning in production environments. If `seed` is configured, the specified SQL script is executed after database creation. If an error occurs (such as a missing or invalid SQL file), an error message will be displayed.
 
@@ -160,7 +175,8 @@ To persist a database beyond the 72-hour expiration period:
 The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
-- As a comment in environment files (e.g., `.env`) when using the CLI
+- As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
+- The public claim variable is used when executing `npx neondb claim` to claim the database
 
 ### Claim process details
 
