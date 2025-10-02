@@ -38,16 +38,16 @@ Each user application gets its own isolated PostgreSQL database that provisions 
 
 ## API operations
 
-| Action | Description | Endpoint |
-|--------|-------------|----------|
-| **[Create project](#application-provisioning)** | Provision PostgreSQL in ~500ms with auto scale-to-zero | `POST /projects` |
-| **[Configure autoscaling](#autoscaling-configuration)** | Set compute limits (0.25-8 CU) | `PATCH /projects/{project_id}/endpoints/{endpoint_id}` |
-| **[Add auth](#authentication-setup)** | Setup Neon Auth with OAuth | `POST /projects/auth/create` |
-| **[Database versioning](#database-versioning)** | Snapshot schema and data | `POST /projects/{project_id}/branches/{branch_id}/snapshot` |
-| **[Create dev branches](#create-development-branches)** | Isolated dev environments | `POST /projects/{project_id}/branches` |
-| **[Enable Data API](#data-api)** | REST endpoints from tables | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
-| **[Monitor usage](#get-project-consumption)** | Track resource consumption | `GET /projects/{project_id}/consumption` |
-| **[Transfer projects](#project-transfer-between-organizations)** | Move between orgs | `POST /organizations/{source_org_id}/projects/transfer` |
+| Action                                                           | Description                                            | Endpoint                                                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------- |
+| **[Create project](#application-provisioning)**                  | Provision PostgreSQL in ~500ms with auto scale-to-zero | `POST /projects`                                                            |
+| **[Configure autoscaling](#autoscaling-configuration)**          | Set compute limits (0.25-8 CU)                         | `PATCH /projects/{project_id}/endpoints/{endpoint_id}`                      |
+| **[Add auth](#authentication-setup)**                            | Setup Neon Auth with OAuth                             | `POST /projects/auth/create`                                                |
+| **[Database versioning](#database-versioning)**                  | Snapshot schema and data                               | `POST /projects/{project_id}/branches/{branch_id}/snapshot`                 |
+| **[Create dev branches](#create-development-branches)**          | Isolated dev environments                              | `POST /projects/{project_id}/branches`                                      |
+| **[Enable Data API](#data-api)**                                 | REST endpoints from tables                             | `POST /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` |
+| **[Monitor usage](#get-project-consumption)**                    | Track resource consumption                             | `GET /projects/{project_id}/consumption`                                    |
+| **[Transfer projects](#project-transfer-between-organizations)** | Move between orgs                                      | `POST /organizations/{source_org_id}/projects/transfer`                     |
 
 ## Working demo
 
@@ -62,6 +62,7 @@ Architecture: Meta DB (users, projects, checkpoints) + per-user app DB (one Neon
 ## Application provisioning
 
 Choose org based on your user's tier:
+
 - Sponsored org → free users
 - Paid org → paying users
 
@@ -97,17 +98,16 @@ import { NeonToolkit } from '@neondatabase/toolkit';
 const toolkit = new NeonToolkit(process.env.NEON_API_KEY!);
 
 // Choose org based on user tier (free vs paid)
-const orgId = userTier === 'paid' 
-  ? process.env.NEON_ORG_ID_PAID 
-  : process.env.NEON_ORG_ID_SPONSORED;
+const orgId =
+  userTier === 'paid' ? process.env.NEON_ORG_ID_PAID : process.env.NEON_ORG_ID_SPONSORED;
 
 const project = await toolkit.createProject({
   name: `user123-app`,
   org_id: orgId,
-  branch: { 
-    name: 'main', 
-    role_name: 'app_user', 
-    database_name: 'app_db' 
+  branch: {
+    name: 'main',
+    role_name: 'app_user',
+    database_name: 'app_db',
   },
   default_endpoint_settings: {
     autoscaling_limit_min_cu: 0.25,
