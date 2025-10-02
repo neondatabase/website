@@ -3,8 +3,11 @@ title: Connect a JavaScript/Node.js application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from JavaScript using pg, postgres.js, or
   the Neon serverless driver
 enableTableOfContents: true
-updatedOn: '2025-07-29T10:34:33.840Z'
+updatedOn: '2025-09-30T00:26:10.496Z'
 ---
+
+<CopyPrompt src="/prompts/javascript-prompt.md" 
+description="Pre-built prompt for connecting JavaScript applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Node.js application using popular Postgres clients:
 

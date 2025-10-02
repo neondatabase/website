@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-09-12T16:34:42.456Z'
+updatedOn: '2025-09-30T11:29:44.954Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -241,7 +241,7 @@ The default branch serves two key purposes:
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
 - For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, additional computes will remain suspended.
 
 ### Protected branch
 
