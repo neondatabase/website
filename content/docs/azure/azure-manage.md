@@ -118,7 +118,7 @@ For detailed transfer steps, see [Transfer projects to an organization](/docs/ma
 
 If the restrictions above prevent you from transferring your project, consider these options:
 
-- Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](/docs/introduction/regions#azure-regions)). If you're on the Neon Free plan and can't open a support ticket, you can email Neon support at `support@neon.tech`.
+- Open a [support ticket](https://console.neon.tech/app/projects?modal=support) for assistance with transferring your Neon project (supported only for projects that reside in [Azure regions](/docs/introduction/regions#azure-regions)). If you're on the Neon Free plan and can't open a support ticket, you can email Neon support at `help@databricks.com`.
 - Create a new Neon project in an Azure-managed organization and migrate your database using one of these options:
   - [Neon Import Data Assistant](/docs/import/import-data-assistant)
   - [pg_dump and pg_restore](/docs/import/migrate-from-postgres#run-a-test-migration)
