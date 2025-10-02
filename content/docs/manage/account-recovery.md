@@ -1,5 +1,5 @@
 ---
-title: Account Recovery
+title: Account recovery
 subtitle: How to recvoer a lost account
 enableTableOfContents: true
 updatedOn: '2025-06-05T19:57:28.187Z'
