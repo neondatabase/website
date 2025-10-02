@@ -158,7 +158,7 @@ Each branch gets a new connection string. For versioning that preserves connecti
 
 ## Autoscaling configuration
 
-Neon autoscales based on CPU (&lt;90%), memory (&lt;75%), and cache (&lt;75%). Set min/max CU ranges per endpoint.
+Neon autoscales based on CPU (`<90%`), memory (`<75%`), and cache (`<75%`). Set min/max CU ranges per endpoint.
 
 For additional information, see the [autoscaling documentation](/docs/introduction/autoscaling).
 
