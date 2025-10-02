@@ -83,7 +83,7 @@ A dedicated engineer can develop in-depth knowledge of your systems, leading to 
 
 ### SLAs
 
-If you are interested in exploring a Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
+If you are interested in exploring an uptime Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
 
 ## General support policy
 
@@ -103,13 +103,40 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 
 ### Response times
 
-Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue. We only commit to responding to Customers with an Scale plan using the target response time guidelines below.
+Neon aims to respond to all **support ticket** requests in a timely manner and as soon as practically possible. Support tickets can be opened by customers on our **Billing** and **Standard** support plans. Requests are prioritized based on the **Support Tier** and the [Severity](#severity-levels) of the issue.
 
-#### Target response times
+| Support Tier                                                                                                | Business              | Enhanced       | Production            | Mission Critical      |
+| :---------------------------------------------------------------------------------------------------------- | :-------------------- | :------------- | :-------------------- | :-------------------- |
+| **Mission Critical Severity**                                                                               | —                     | —              | —                     | Within 15 minutes     |
+| A mission-critical production system is down or severely impacted such that routine operation is impossible |                       |                |                       |                       |
+| **Standard Support Severity 1**                                                                             | Within 1 business day | Within 4 hours | Within 1 hour         | Within 1 hour         |
+| Production system is down or severely impacted such that routine operation is impossible                    |                       |                |                       |                       |
+| **Standard Support Severity 2**                                                                             | Within 1 business day |                | Within 4 hours        | Within 2 hours        |
+| Production issue where the system is functioning but in degraded or restricted capacity                     |                       |                |                       |                       |
+| **Standard Support Severity 3**                                                                             | Within 1 business day |                | Within 1 business day | Within 4 hours        |
+| Issue where minor functionality is impacted or a development issue occurs                                   |                       |                |                       |                       |
+| **Standard Support Severity 4**                                                                             | Within 1 business day |                |                       | Within 1 business day |
+| Request for information or feature request with no impact on business operations                            |                       |                |                       |                       |
 
-The table below outlines Neon’s guidelines for the various support tiers of our Standard support plan.
+**Support business hours:**
 
-These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
+| Support Tier     | Business Hours                                                                              |
+| :--------------- | :------------------------------------------------------------------------------------------ |
+| Business         | 9 AM–6 PM, business days                                                                    |
+| Enhanced         | 9 AM–6 PM, business days                                                                    |
+| Production       | Severity 1 and 2: 24x7x365<br/>Severity 3 and 4: 9 AM–6 PM, business days                   |
+| Mission Critical | Mission Critical, Severity 1 and 2: 24x7x365<br/>Severity 3 and 4: 9 AM–6 PM, business days |
+
+Live support is provided during customer's designated support time zone.
+
+#### Legacy Enterprise plan response times
+
+The following response times apply to customers on [legacy Enterprise plans](/docs/introduction/legacy-plans#enterprise-plan-legacy) who were on Enterprise plans before the introduction of current usage-based plans.
+
+<details>
+<summary>**View legacy Enterprise response times**</summary>
+
+The table below outlines response time guidelines for legacy Enterprise plan customers.
 
 |    Severity Level     | Standard                                  | Gold                                     | Platinum                                 |
 | :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
@@ -118,78 +145,17 @@ These times relate to the time it takes Neon to respond to the Customer’s init
 |  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 |   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
 
-### Severity levels
+**Severity Level Descriptions:**
 
-When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **Critical and High-priority levels should not be used for low-impact issues or general questions\!**
+- **Severity 1 (Critical)**: Production system down or severely impacted; routine operation impossible. Examples: complete outages, security breaches, data corruption.
 
-A detailed explanation of each severity level, including several examples, is provided below.
+- **Severity 2 (High)**: Production system functioning but degraded. Examples: partial outages with key features unusable, issues requiring significant customer workarounds.
 
-#### Severity 1 (Critical)
+- **Severity 3 (Normal)**: Minor functionality impacted or development issues. Examples: sporadic connection issues, minor performance problems, billing questions.
 
-- Catastrophic problems in the Customer’s production system leading to loss of service or impact on the Customer’s business
-- Unavailability of the service
-- Security breaches that compromise the confidentiality, integrity, or availability of the database or its data.
+- **Severity 4 (Low)**: Information requests or feature requests with no business impact. Examples: general questions, feature requests, documentation clarifications.
 
-<Admonition type="note">
-If Critical is selected during the case creation, the customer will be asked to provide in-depth details on the business impact the issue has caused.
-</Admonition>
-
-Examples:
-
-1. A complete outage of the service provided by Neon
-2. Security breaches
-3. Error impacting the project as a whole (all endpoints/db affected)
-4. Error impacting multiple projects
-5. EP/Branch/DB unreachable
-6. Data corruption/Data loss
-
-#### Severity 2 (High)
-
-Means a high-impact problem in a customer’s production systems. Essential operations are seriously disrupted, but a workaround exists that allows for continued essential operations.
-
-- Non-essential modifications to configuration, like adjusting database parameters or table schema
-- Minor performance concerns that have minimal impact on database usability
-- Minor issues related to application integrations, such as minor API connectivity problems
-- Small-scale challenges with data import/export, data transformation, or data loading processes
-
-Examples:
-
-1. Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
-   - Cannot create a new branch
-   - Cannot execute a branch [restore](/docs/guides/branch-restore)
-   - Cannot perform point-in-time recovery (PITR)
-   - Etc.
-2. Any use case that would require a high load of manual work on the customer side to mitigate an issue on our end
-3. Any use case which massively and negatively affects the customer's business
-
-#### Severity 3 (Normal)
-
-A medium-impact problem on a production or non-production system that involves:
-
-- Partial or limited loss of non-critical functionality
-- A usage problem that involves no loss in functionality
-
-Customers can continue essential operations. Normal problems also include issues with non-production systems, such as test and development systems.
-
-Examples:
-
-1. RCA for past outages or incidents (no disruption of the service at the moment)
-2. Sporadic connection failure/timeouts/retries
-3. Cannot connect with random third-party framework or tool (but can connect generally speaking)
-4. Any use case which has a minor impact on the customer's business
-5. Poor performing queries/ingestion
-6. Billing issues
-
-#### Severity 4 (Low)
-
-- A general usage question; here is no impact on the product's quality, performance, or functionality in a production or non-production system
-- Any request for information, enhancement, or documentation clarification regarding the platform
-
-Examples:
-
-1. Feature requests/feature enablement
-2. General questions (“active time,” “how to backup a DB,” “how to ingest data”) and feedback
-3. Any use case that has no impact on the customer's business at all
+</details>
 
 ### Etiquette
 
