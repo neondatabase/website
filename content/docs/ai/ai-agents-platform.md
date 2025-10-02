@@ -27,7 +27,7 @@ Neon creates two organizations in your account to separate user tiers:
 
 Default cap: 30,000 projects per org (adjustable on request). You're admin on both orgs. Request limit increases when needed.
 
-Each user application gets its own isolated PostgreSQL database that provisions in ~500ms, scales to zero when idle, and supports full version history through snapshots.
+Each user application gets its own isolated PostgreSQL database that provisions in ~500ms, scales to zero when idle, and supports full version history through snapshots. For additional details, see the [agent plan's pricing page](/use-cases/ai-agents).
 
 <CTA
   title="Neon Agent Plan"

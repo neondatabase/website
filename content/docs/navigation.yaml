@@ -602,7 +602,7 @@
               icon: openai
               items:
                 - title: Neon for Agent platforms
-                  slug: https://neon.com/use-cases/ai-agents
+                  slug: ai/ai-agents-platform
                 - title: Database versioning
                   slug: ai/ai-database-versioning
                 - title: Neon Toolkit
