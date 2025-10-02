@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-07-01T01:04:57+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CUBE'
-  slug: 'postgresql-tutorial/postgresql-cube'
+  title: 'PostgreSQL ROLLUP'
+  slug: 'postgresql-tutorial/postgresql-rollup'
 nextLink:
   title: 'PostgreSQL Correlated Subquery'
   slug: 'postgresql-tutorial/postgresql-correlated-subquery'
