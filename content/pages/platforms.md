@@ -1,7 +1,6 @@
 ---
 title: 'Embedded Postgres for Platforms'
 subtitle: Provision dedicated Postgres databases for your users — instantly, affordably, and at scale
-enableTableOfContents: true
 updatedOn: '2025-06-17T09:00:00.000Z'
 ---
 
