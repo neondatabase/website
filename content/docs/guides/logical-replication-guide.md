@@ -12,7 +12,7 @@ updatedOn: '2025-02-24T15:53:13.359Z'
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:
 
 - Stream data from your Neon database to external destinations, enabling Change Data Capture (CDC) and real-time analytics. External sources might include data warehouses, analytical database services, real-time stream processing systems, messaging and event-streaming platforms, and external Postgres databases, among others. See [Replicate data from Neon](#replicate-data-from-neon).
-- Perform live migrations to Neon from external sources such as AWS RDS, Aurora, and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
+- Perform live migrations to Neon from external sources such as AWS RDS and Google Cloud SQL &#8212; or any platform that runs Postgres. See [Replicate data to Neon](#replicate-data-to-neon).
 - Replicate data from one Neon project to another for Neon project, account, Postgres version, or region migration. See [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 ![Neon logical replication subscribers image](/docs/guides/logical_replication_publishers_subscribers.jpg)
@@ -78,8 +78,6 @@ To get started, jump into one of our step-by-step logical replication guides.
 <TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
-
-<a href="/docs/guides/logical-replication-aurora-to-neon" title="Aurora" description="Replicate data from Aurora to Neon" icon="aws-rds"></a>
 
 <a href="/docs/import/migrate-from-azure-postgres" title="Azure PostgreSQL" description="Replicate data from Azure PostgreSQL to Neon" icon="azure"></a>
 

@@ -218,7 +218,6 @@
 - [Replicate Data with Estuary Flow](https://neon.com/llms/guides-logical-replication-estuary-flow.txt): Learn how to replicate data from Neon with Estuary Flow
 - [Replicate data from AlloyDB](https://neon.com/llms/guides-logical-replication-alloydb.txt): Learn how to replicate data from AlloyDB to Neon
 - [Replicate data from Amazon RDS Postgres](https://neon.com/llms/guides-logical-replication-rds-to-neon.txt): Learn how to replicate data from Amazon RDS Postgres to Neon
-- [Replicate data from Aurora PostgreSQL](https://neon.com/llms/guides-logical-replication-aurora-to-neon.txt): Learn how to replicate data from Aurora PostgreSQL to Neon
 - [Replicate data from Cloud SQL Postgres](https://neon.com/llms/guides-logical-replication-cloud-sql.txt): Learn how to replicate data from Google Cloud SQL Postgres to Neon
 - [Replicate data from Postgres to Neon](https://neon.com/llms/guides-logical-replication-postgres-to-neon.txt): Learn how to replicate data from a local Postgres instance or another Postgres provider to Neon
 - [Replicate data from Supabase](https://neon.com/llms/guides-logical-replication-supabase-to-neon.txt): Learn how to replicate data from Supabase to Neon
