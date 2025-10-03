@@ -2,6 +2,7 @@
 
 import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
+import { useFeatureFlagEnabled } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { InlineWidget } from 'react-calendly';
@@ -10,9 +11,11 @@ import Container from 'components/shared/container';
 import GradientLabel from 'components/shared/gradient-label';
 import useHubspotForm from 'hooks/use-hubspot-form';
 
+import CloseIcon from './images/close.inline.svg';
+import PartnerForm from './partner-form';
+
 import 'styles/hubspot-form.css';
 import 'styles/calendly-widget.css';
-import CloseIcon from './images/close.inline.svg';
 
 const calendlyURL = 'https://calendly.com/d/ckxx-b4h-69y/neon-solutions-engineering';
 const hubspotFormID = '26f1ff16-e3ab-4adf-b09f-910f130637b0';
@@ -46,6 +49,8 @@ const Apply = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const isCustomerIoFormEnabled = useFeatureFlagEnabled('growth_partner_form_customer_io');
+
   useHubspotForm('hubspot-form', {
     onFormSubmitted: (form, data) => {
       const { submissionValues } = data;
@@ -61,6 +66,11 @@ const Apply = () => {
 
   const handleOpenChange = () => {
     setIsModalOpen(false);
+  };
+
+  const handlePartnerFormSuccess = (userData) => {
+    setIsModalOpen(true);
+    setUserData(userData);
   };
 
   return (
@@ -81,11 +91,20 @@ const Apply = () => {
             </p>
             <Testimonial className="lg:hidden" />
           </div>
-          <div className="hubspot-form-wrapper col-span-5 xl:col-span-7 lg:col-span-full lg:mt-10 md:mt-6">
-            <div
-              className="hubspot-form not-prose with-link-primary"
-              data-form-id={hubspotFormID}
-            />
+          <div
+            className={clsx(
+              'col-span-5 xl:col-span-7 lg:col-span-full lg:mt-10 md:mt-6',
+              !isCustomerIoFormEnabled && 'hubspot-form-wrapper'
+            )}
+          >
+            {isCustomerIoFormEnabled ? (
+              <PartnerForm onSuccess={handlePartnerFormSuccess} />
+            ) : (
+              <div
+                className="hubspot-form not-prose with-link-primary"
+                data-form-id={hubspotFormID}
+              />
+            )}
           </div>
           <Testimonial className="col-span-full hidden lg:mt-10 lg:block md:mt-8" ariaHidden />
         </div>
