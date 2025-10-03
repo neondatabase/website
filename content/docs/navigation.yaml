@@ -47,8 +47,6 @@
               slug: guides/logical-replication-rds-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: Azure
               slug: import/migrate-from-azure-postgres
             - title: Cloud SQL
@@ -82,8 +80,6 @@
               slug: guides/logical-replication-supabase-to-neon
             - title: RDS
               slug: guides/logical-replication-rds-to-neon
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Azure
@@ -822,8 +818,6 @@
               items:
                 - title: AlloyDB
                   slug: guides/logical-replication-alloydb
-                - title: Aurora
-                  slug: guides/logical-replication-aurora-to-neon
                 - title: Replicate from Azure
                   slug: import/migrate-from-azure-postgres
                 - title: Cloud SQL

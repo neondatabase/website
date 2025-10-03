@@ -72,7 +72,6 @@
 ## Replicate data to Neon
 
 - [AlloyDB](https://neon.com/docs/guides/logical-replication-alloydb): Replicate data from AlloyDB to Neon
-- [Aurora](https://neon.com/docs/guides/logical-replication-aurora-to-neon): Replicate data from Aurora to Neon
 - [Cloud SQL](https://neon.com/docs/guides/logical-replication-cloud-sql): Replicate data from Cloud SQL to Neon
 - [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon): Replicate data from Neon to Neon
 - [PostgreSQL to Neon](https://neon.com/docs/guides/logical-replication-postgres-to-neon): Replicate data from PostgreSQL to Neon

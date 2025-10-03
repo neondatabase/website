@@ -32,7 +32,7 @@ author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+url="/blog/how-dispatch-speeds-up-development-with-neon"
 />
 
 <Testimonial
@@ -86,7 +86,7 @@ author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+url="/blog/how-dispatch-speeds-up-development-with-neon"
 />
 
 </TestimonialsWrapper>
@@ -214,7 +214,7 @@ Yes. Overprovisioning is a big problem—we see this daily while talking to cust
 <TestimonialsWrapper>
   
 <Testimonial
-text="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora Serverless v2. On top of that, Neon costs us 1/6 of what we were paying with AWS."
+text="Neon worked out of the box, handling hundreds of Lambdas without any connection issues. On top of that, Neon costs us 1/6 of what we were paying with AWS."
 author={{
   name: 'Cody Jenkins',
   company: 'Head of Engineering at Invenco',
@@ -222,12 +222,12 @@ author={{
 />
 
 <Testimonial
-text="We had to overprovision Aurora to handle our spiky traffic, and even then, the writer database would get overwhelmed. We provision 10x more than we need on average to keep things running smoothly."
+text="We had to overprovision our database to handle our spiky traffic, and even then, the writer database would get overwhelmed. We provision 10x more than we need on average to keep things running smoothly."
 author={{
   name: 'Jonathan Reyes',
   company: 'Principal Engineer at Dispatch',
 }}
-url="/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora"
+url="/blog/how-dispatch-speeds-up-development-with-neon"
 />
 
 </TestimonialsWrapper>
