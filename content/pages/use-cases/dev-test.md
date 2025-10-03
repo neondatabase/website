@@ -57,7 +57,7 @@ url="/blog/how-opusflow-achieves-tenant-isolation-in-postgres-without-managing-s
 
 **Provisioning instances is slow. Once they're live, you have to babysit them**. New instances have to be configured, they take a while to be available, and once running, they need constant oversight to ensure they are appropriately sized and ready.
 
-**You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in RDS/Aurora, unless you manually pause them, you’ll keep paying even if they're not running.
+**You pay for non-prod instances 24/7 even if you only use them for a few hours**. Production databases stay on 24/7, but this is not the case for dev/test instances. But in other serverless databases, unless you manually pause them, you'll keep paying even if they're not running.
 
 **It's hard to keep data in sync across environments**. Syncing data across many instances requires repetitive, manual work. This leads to discrepancies that compromise test reliability and slow down deployments.
 
@@ -115,7 +115,7 @@ Here's how you'll go about it:
 3. **Creating ephemeral environments as child branches**. To instantly create ephemeral environments, derive child branches from the production branch. These branches are fully isolated resource-wise and provide you a full copy of the testing dataset. They can then be synced with the production branch with just one click, ensuring they always have the latest data while saving you the work of loading testing datasets to every single environment.
 4. **Automatic branch cleanup and scale to zero**. After development or testing is complete, ephemeral branches can be deleted automatically via the API. Neon's scale to zero automatically pauses these environments when unused, so you don't have to worry too much about them.
 
-### How much cost savings have you seen vs RDS/Aurora?
+### How much cost savings have you seen vs other serverless databases?
 
 By leveraging Neon's shared storage and compute autoscaling, it’s not rare to see **customers lowering their non-production database costs by 75% or more**. You only pay for the compute you actually use—no more bloating in your bill. The same goes for data redundancies—they’re also avoided.
 

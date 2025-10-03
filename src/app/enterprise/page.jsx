@@ -157,7 +157,7 @@ const caseStudies = [
   },
   {
     title: '10x less capacity',
-    description: 'vs Aurora Global.',
+    description: 'vs other serverless databases.',
     logo: {
       src: dispatchLogo,
       width: 104,
