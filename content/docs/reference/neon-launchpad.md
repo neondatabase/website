@@ -65,13 +65,13 @@ deno run -A neondb
 
 **CLI options:**
 
-| Option           | Alias | Description                               | Default        |
-| ---------------- | ----- | ----------------------------------------- | -------------- |
-| `--yes`          | `-y`  | Skip prompts and run entirely in terminal |                |
-| `--env <path>`   | `-e`  | Path to the .env file                     | `./.env`       |
-| `--key <string>` | `-k`  | Env var for connection string             | `DATABASE_URL` |
-| `--seed <path>`  | `-s`  | Path to SQL file to seed the database     | not set        |
-| `--help`         | `-h`  | Show help message                         |                |
+| Option           | Alias | Description                           | Default        |
+| ---------------- | ----- | ------------------------------------- | -------------- |
+| `--yes`          | `-y`  | Skip prompts and use defaults         |                |
+| `--env <path>`   | `-e`  | Path to the .env file                 | `./.env`       |
+| `--key <string>` | `-k`  | Env var for connection string         | `DATABASE_URL` |
+| `--seed <path>`  | `-s`  | Path to SQL file to seed the database | not set        |
+| `--help`         | `-h`  | Show help message                     |                |
 
 **Examples:**
 
@@ -85,28 +85,11 @@ npx neondb --seed ./init.sql
 # Use a custom .env file and environment variable key
 npx neondb --env ./my.env --key MY_DB_URL
 
-# Skip all prompts and run entirely in terminal (no browser interaction)
+# Skip all prompts and use defaults
 npx neondb --yes
-
-# Claim an existing database using the claim URL from your environment
-npx neondb claim
 ```
 
-The CLI writes the connection string(s), claim URL, and expiration to the specified `.env` file and outputs them in the terminal. The `--yes` flag now runs entirely in your terminal with no browser interaction or CAPTCHA required.
-
-**Claiming databases via CLI:**
-
-Use the `neondb claim` command to claim databases directly from the command line. This command looks for a `PUBLIC_LAUNCHPAD_CLAIM_URL` by default:
-
-```bash
-# Automatically detects PUBLIC_LAUNCHPAD_CLAIM_URL from your environment
-npx neondb claim
-
-# Or specify a custom environment variable
-PUBLIC_LAUNCHPAD_CLAIM_URL=your_claim_url npx neondb claim
-```
-
-For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb).
+The CLI writes the connection string(s), claim URL, and expiration to the specified `.env` file and outputs them in the terminal. For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb).
 
 ### Integration with development tools
 
@@ -116,12 +99,11 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 
 **Configuration options:**
 
-| Option      | Type   | Description                                     | Default        |
-| ----------- | ------ | ----------------------------------------------- | -------------- |
-| `env`       | string | Path to the .env file                           | `.env`         |
-| `envKey`    | string | Name of the environment variable                | `DATABASE_URL` |
-| `envPrefix` | string | Prefix for public environment variable prefixes | not set        |
-| `seed`      | object | Seeding config (optional)                       | not set        |
+| Option   | Type   | Description                      | Default        |
+| -------- | ------ | -------------------------------- | -------------- |
+| `env`    | string | Path to the .env file            | `.env`         |
+| `envKey` | string | Name of the environment variable | `DATABASE_URL` |
+| `seed`   | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
 
@@ -133,7 +115,7 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 **Example config:**
 
 ```js
-import { postgresPlugin } from '@neondatabase/vite-plugin-postgres';
+import postgresPlugin from '@neondatabase/vite-plugin-postgres';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -142,7 +124,6 @@ export default defineConfig({
     postgresPlugin({
       env: '.env.local', // Custom .env file (default: '.env')
       envKey: 'DATABASE_URL', // Env variable for connection string (default: 'DATABASE_URL')
-      envPrefix: 'PUBLIC_', // Prefix for public environment variables
       seed: {
         type: 'sql-script',
         path: './schema.sql', // SQL file to run after DB creation
@@ -152,8 +133,6 @@ export default defineConfig({
   ],
 });
 ```
-
-> **Note**: The plugin now outputs a named export (like `postgresPlugin`) instead of a default export, improving auto-completion in your IDE.
 
 **How the plugin works:**
 
@@ -172,18 +151,7 @@ For more details, see the [Vite Plugin package on GitHub](https://github.com/neo
 
 ## Claiming a database
 
-To persist a database beyond the 72-hour expiration period, you can claim it using either the CLI or web interface:
-
-### Via CLI (recommended)
-
-Use the `neondb claim` command for a streamlined claiming experience. This command looks for a `PUBLIC_LAUNCHPAD_CLAIM_URL` by default:
-
-```bash
-# Automatically detects PUBLIC_LAUNCHPAD_CLAIM_URL from your environment
-npx neondb claim
-```
-
-### Via web interface
+To persist a database beyond the 72-hour expiration period:
 
 1. Access the claim URL provided during database creation
 2. Sign in to an existing Neon account or create a new one
@@ -193,7 +161,6 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string was displayed
 - As a comment in environment files (e.g., `.env`) when using the CLI
-- As `PUBLIC_LAUNCHPAD_CLAIM_URL` in your environment for CLI claiming
 
 ### Claim process details
 
