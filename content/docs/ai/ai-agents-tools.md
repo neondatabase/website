@@ -34,11 +34,11 @@ Create autonomous agents that can manage and interact with your Neon databases p
 
 <DetailIconCards>
 
-<a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
+<a href="/docs/ai/ai-agents-platform" description="Read about Neon as a solution for agents that need backends." icon="sparkle">Neon for AI agent platforms</a>
 
 <a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
 
-<a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
+<a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="split-branch">Database versioning</a>
 
 <a href="/docs/reference/api-reference" description="Integrate using the Neon API" icon="transactions">Neon API</a>
 
