@@ -83,7 +83,7 @@ A dedicated engineer can develop in-depth knowledge of your systems, leading to 
 
 ### SLAs
 
-Response time SLAs are available only to existing customers on our legacy Enterprise plans. If you are interested in exploring a Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
+Response time SLAs are available only to existing customers on our legacy Enterprise plans. If you are interested in exploring a Support Level Agreement (SLAs) on one of Neon's other paid plans, [get in touch with our sales team](/contact-sales).
 
 ## General support policy
 
