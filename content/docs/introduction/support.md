@@ -118,7 +118,7 @@ These times relate to the time it takes Neon to respond to the Customer’s init
 
 ### Severity levels
 
-When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **Critical and High-priority levels should not be used for low-impact issues or general questions\!**
+When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **High severity levels should not be used for low-impact issues or general questions\!**
 
 An explanation of each severity level is provided below.
 
