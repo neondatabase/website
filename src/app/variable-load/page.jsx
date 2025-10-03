@@ -19,7 +19,7 @@ export const metadata = getMetadata(SEO_DATA.variable);
 const titles = [
   'Fixed Compute = Manual Resizes, Extra Costs',
   'Neon Autoscaling Fixes This Problem',
-  'Neon vs Aurora Serverless v2',
+  'Neon vs other serverless databases',
 ];
 
 const VariableLoadPage = async () => {
