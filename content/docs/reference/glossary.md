@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-08-18T18:19:18.020Z'
+updatedOn: '2025-09-30T11:29:44.955Z'
 ---
 
 ## access token
@@ -412,7 +412,10 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
 
-For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+The default branch serves two key purposes:
+
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
@@ -519,6 +522,12 @@ See [Schema-only branches](/docs/guides/branching-schema-only).
 
 A Neon feature that lets you compare database schemas between different branches for better debugging, code review, and team collobration. See [Schema Diff](/docs/guides/schema-diff).
 
+## Concurrently active compute limit
+
+This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit. The default limit is 20 concurrently active computes.
+
+When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+
 ## serverless
 
 A cloud-based development model that enables developing and running applications without having to manage servers.
@@ -526,6 +535,10 @@ A cloud-based development model that enables developing and running applications
 ## shared buffers
 
 A memory area in Postgres for caching blocks of data from storage (disk on standalone Postgres or Pageservers in Neon). This cache enhances the performance of database operations by reducing the need to access the slower storage for frequently accessed data. Neon uses a [Local File Cache (LFC)](#local-file-cache), which acts as an add-on or extension of shared buffers. In Neon the `shared_buffers` parameter [scales with compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size). The LFC extends cache memory up to 75 % of your compute's RAM. For additional information about shared buffers in Postgres, see [Resource Consumption](https://www.postgresql.org/docs/current/runtime-config-resource.html), in the Postgres documentation.
+
+## Snapshot
+
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
 
 ## SNI
 

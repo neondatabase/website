@@ -49,7 +49,7 @@ export async function generateMetadata({ params }) {
 
   const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
   const encodedCategory = category && Buffer.from(category).toString('base64');
 
@@ -76,7 +76,7 @@ const DocPost = async ({ params }) => {
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const allChangelogPosts = await getAllChangelogs();
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getNavigation());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
   const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 

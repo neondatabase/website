@@ -2,7 +2,7 @@
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 enableTableOfContents: true
-updatedOn: '2025-09-13T09:38:53.464Z'
+updatedOn: '2025-10-01T10:10:07.455Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI tools like [Cursor](https://www.cursor.so/) understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
@@ -16,6 +16,10 @@ Boost your productivity with AI context rules for Neon. These rules help AI tool
 <a href="/docs/ai/ai-rules-neon-serverless" description="Efficient queries, connection pooling, and serverless best practices" icon="network">Neon Serverless Driver</a>
 
 <a href="/docs/ai/ai-rules-neon-drizzle" description="ORM setup, schema management, and usage patterns with Drizzle" icon="drizzle">Neon + Drizzle</a>
+
+<a href="/docs/ai/ai-rules-neon-api" description="Use the Neon API to programmatically manage your resources" icon="code">Neon API</a>
+
+<a href="/docs/ai/ai-rules-neon-toolkit" description="Quickly spin up Postgres databases and run SQL queries with @neondatabase/toolkit" icon="database">Neon Toolkit</a>
 
 </DetailIconCards>
 

@@ -67,7 +67,7 @@
       "feature": {
         "title": "Rates"
       },
-      "free": "50 CU-hours<span>Per Project</span>",
+      "free": "100 CU-hours<span>Per Project</span>",
       "launch": "$0.14 per CU-hour",
       "scale": "$0.26 per CU-hour"
     },
@@ -201,11 +201,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Support"
+        "title": "HIPAA Compliance"
       },
-      "free": "Community",
-      "launch": "Billing",
-      "scale": "Standard"
+      "free": false,
+      "launch": false,
+      "scale": "<a class='text-primary-2' href='/docs/security/hipaa'>Available</a>"
     },
     {
       "rows": "2",
@@ -214,7 +214,7 @@
       },
       "free": false,
       "launch": false,
-      "scale": true
+      "scale": "<a class='text-primary-2' href='https://neon.com/docs/security/compliance#soc-2'>Available</a>"
     }
   ]
 }

@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2025-07-24T20:03:24.602Z'
+updatedOn: '2025-09-19T11:07:44.075Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -23,13 +23,39 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with pg_stat_statements" icon="metrics">pg_stat_statements</a>
 
-<a href="/docs/introduction/monitor-external-tools" description="Monitor database activity and statistics with third-party client tools" icon="wrench">External tools</a>
+</DetailIconCards>
 
-<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Export metrics to Datadog</a>
+## Datadog integration
 
-<a href="/docs/guides/grafana-cloud" description="Export Neon metrics and logs to Grafana Cloud with native OTLP integration" icon="trend-up">Export metrics to Grafana Cloud</a>
+<DetailIconCards>
 
-<a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">Export metrics to OpenTelemetry</a>
+<a href="/docs/guides/datadog" description="Export Neon Metrics to Datadog with the Neon Datadog Integration" icon="trend-up">Datadog</a>
+
+</DetailIconCards>
+
+## OpenTelemetry
+
+<DetailIconCards>
+
+<a href="/docs/guides/opentelemetry" description="Export Neon metrics to any OpenTelemetry-compatible observability platform" icon="trend-up">OTel integration</a>
+
+<a href="/docs/guides/grafana-cloud" description="Export Neon metrics and logs to Grafana Cloud with native OTLP integration" icon="trend-up">Grafana Cloud</a>
+
+<a href="https://neon.com/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="trend-up">Better Stack</a>
+
+<a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="trend-up">New Relic</a>
+
+<a href="/docs/reference/metrics-logs" description="Metrics and logs reference for monitoring" icon="research">Metrics and logs reference</a>
+
+</DetailIconCards>
+
+## Other monitoring tools
+
+<DetailIconCards>
+
+<a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
+
+<a href="/docs/introduction/monitor-pghero" description="Monitor your Neon Postgres database with PgHero" icon="wrench">PgHero</a>
 
 </DetailIconCards>
 

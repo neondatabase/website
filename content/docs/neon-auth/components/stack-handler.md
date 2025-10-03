@@ -1,8 +1,9 @@
 ---
-title: '<StackHandler />'
+title: <StackHandler />
 subtitle: Neon Auth handler component for authentication routes
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-10-01T12:46:01.212Z'
 ---
 
 Renders the appropriate authentication or account-related component based on the current route.
@@ -20,7 +21,7 @@ For detailed usage instructions, see the manual section of the [setup guide](/do
 
 ```tsx title="app/handler/[...stack].tsx"
 import { StackHandler } from '@stackframe/stack';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default function Handler(props: { params: any; searchParams: any }) {
   return (

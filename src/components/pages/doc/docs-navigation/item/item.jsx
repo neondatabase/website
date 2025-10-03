@@ -27,9 +27,9 @@ const isActiveItem = (slug, items, subnav, currentSlug) => {
 };
 
 const SubItem = ({ icon, title, slug, basePath }) => {
-  const externalSlug = slug?.startsWith('http') ? slug : null;
-  const websiteSlug = slug?.startsWith('/') && `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${slug}`;
   const docSlug = `${basePath}${slug}`;
+  const websiteSlug = slug?.startsWith('/') ? slug : null;
+  const externalSlug = slug?.startsWith('http') ? slug : null;
 
   return (
     <Link
@@ -71,7 +71,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
     }
   }, [slug, items, currentSlug, subnav, setActiveItems]);
 
-  const href = `${basePath}${slug}`;
+  const href = slug?.startsWith('/') ? slug : `${basePath}${slug}`;
 
   // Highlight only the last found active item
   const isLastActive = isActive && activeItems.at(-1) === slug;
@@ -83,16 +83,23 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
           'relative flex h-full items-center gap-1',
           'whitespace-nowrap text-sm font-medium tracking-tight',
           'transition-colors duration-200',
-          'text-gray-new-30 hover:text-black-new group-hover:text-black-new',
+          'hover:text-black-new group-hover:text-black-new',
           'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
-          'dark:text-gray-new-70 dark:after:bg-white dark:hover:text-white dark:group-hover:text-white',
-          isLastActive && 'text-black-new after:opacity-100 dark:text-white'
+          'dark:after:bg-white dark:hover:text-white dark:group-hover:text-white',
+          isLastActive
+            ? 'text-black-new after:opacity-100 dark:text-white'
+            : 'text-gray-new-30 dark:text-gray-new-70'
         )}
         to={href || undefined}
       >
         {title}
         {subnav && (
-          <ChevronIcon className="text-gray-new-50 transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white" />
+          <ChevronIcon
+            className={clsx(
+              'transition-transform duration-200 group-hover:-rotate-180 group-hover:text-black-new dark:group-hover:text-white',
+              isLastActive ? 'text-black-new dark:text-white' : 'text-gray-new-50'
+            )}
+          />
         )}
       </LinkTag>
       {subnav && (

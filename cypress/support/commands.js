@@ -1,33 +1,29 @@
 Cypress.Commands.add('getByData', (selector) => cy.get(`[data-test=${selector}]`));
 
 Cypress.Commands.add('formSuccessSubmit', () => {
-  cy.intercept(
-    {
-      method: 'POST',
-      url: `/api/hubspot`,
-    },
-    {
-      statusCode: 200,
-      body: {
-        status: 'success',
-      },
-    }
-  ).as('formSuccessSubmit');
+  cy.window()
+    .then((win) => {
+      // Mock zaraz for successful gtag events
+      Object.assign(win, {
+        zaraz: {
+          track: cy.stub().resolves().as('zarazTrackSpy'),
+        },
+      });
+    })
+    .as('formSuccessSubmit');
 });
 
 Cypress.Commands.add('formErrorSubmit', () => {
-  cy.intercept(
-    {
-      method: 'POST', // or whatever method the form uses
-      url: `/api/hubspot`,
-    },
-    {
-      statusCode: 500,
-      body: {
-        error: 'Internal server error',
-      },
-    }
-  ).as('formErrorSubmit');
+  cy.window()
+    .then((win) => {
+      // Mock zaraz for failed gtag events
+      Object.assign(win, {
+        zaraz: {
+          track: cy.stub().rejects(new Error('Network error')).as('zarazTrackSpy'),
+        },
+      });
+    })
+    .as('formErrorSubmit');
 });
 
 Cypress.on('uncaught:exception', (err) => {

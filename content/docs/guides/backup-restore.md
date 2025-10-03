@@ -3,11 +3,11 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-08-22T19:04:58.900Z'
+updatedOn: '2025-09-18T20:51:11.708Z'
 ---
 
 <Admonition type="comingSoon" title="Snapshots in Early Access">
-The new **Backup & restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/early-access).
+The new **Backup & restore** page in the Neon Console, which introduces the new **snapshots** feature, is available for members of our Early Access Program. Read more about joining up [here](/docs/introduction/early-access). There is no charge for snapshots while the feature is in early access. There is a limit of 1 snapshot on the Free plan and 10 on paid plans. If you need higher limits, please reach out [Neon support](/docs/introduction/support).
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.

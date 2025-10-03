@@ -31,6 +31,7 @@ const logos = [
 const faqItems = [
   {
     question: 'What is a project?',
+    id: 'what-is-a-project',
     initialState: 'open',
     answer: `
       <p>A project in Neon is the top-level container for your database environment. Each project includes your primary database, its branches, and compute resources. You can think of it like a GitHub repo - one project, many branches. <a href="${LINKS.docs}/manage/overview">Learn more about Neon’s object hierarchy.</a></p>

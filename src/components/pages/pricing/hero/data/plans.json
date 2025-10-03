@@ -9,11 +9,13 @@
     "features": [
       {
         "icon": "projects",
-        "title": "20 projects"
+        "title": "20 projects",
+        "info": "<p>A project is a top-level container<br/> for your database environment.</p>",
+        "moreLink": { "text": "Read more", "href": "#what-is-a-project" }
       },
       {
         "icon": "clock",
-        "title": "50 CU-hours per project",
+        "title": "100 CU-hours per project",
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
@@ -23,13 +25,17 @@
       },
       {
         "icon": "autoscale",
-        "title": "Autoscaling up to 2 CU",
+        "title": "Sizes to 2 CU",
         "subtitle": "(2 vCPU, 8 GB RAM)"
       }
     ],
     "otherFeatures": {
       "title": "",
-      "features": [{ "title": "Read replicas" }, { "title": "Built-in high availability" }]
+      "features": [
+        { "title": "Autoscaling" },
+        { "title": "Read replicas" },
+        { "title": "Built-in high availability" }
+      ]
     },
     "button": {
       "url": "https://console.neon.tech/signup",
@@ -49,7 +55,9 @@
     "features": [
       {
         "icon": "projects",
-        "title": "100 projects"
+        "title": "100 projects",
+        "info": "<p>A project is a top-level container<br/> for your database environment.</p>",
+        "moreLink": { "text": "Read more", "href": "#what-is-a-project" }
       },
       {
         "icon": "clock",
@@ -61,11 +69,7 @@
         "icon": "storage",
         "title": "$0.35 per GB-month storage"
       },
-      {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 16 CU",
-        "subtitle": "(16 vCPU, 64 GB RAM)"
-      }
+      { "icon": "autoscale", "title": "Sizes up to 16 CU", "subtitle": "(16 vCPU, 64 GB RAM)" }
     ],
     "otherFeatures": {
       "title": "Everything in Free, plus...",
@@ -89,7 +93,9 @@
     "features": [
       {
         "icon": "projects",
-        "title": "1,000 projects"
+        "title": "1,000+ projects",
+        "info": "<p>Accounts needing more than 1k projects<br/> can contact support for a limit increase.</p>",
+        "moreLink": { "text": "Read more", "href": "#what-is-a-project" }
       },
       {
         "icon": "clock",
@@ -101,11 +107,7 @@
         "icon": "storage",
         "title": "$0.35 per GB-month storage"
       },
-      {
-        "icon": "autoscale",
-        "title": "Autoscaling up to 16 CU+",
-        "subtitle": "(56 vCPU, 224 GB RAM)"
-      }
+      { "icon": "autoscale", "title": "Sizes up to 56 CU", "subtitle": "(56 vCPU, 224 GB RAM)" }
     ],
     "otherFeatures": {
       "title": "Everything in Launch, plus...",
@@ -115,7 +117,7 @@
         { "title": "Metrics / logs export" },
         { "title": "Private Network / IP Rules" },
         { "title": "99.95% SLA" },
-        { "title": "SOC 2 Report" }
+        { "title": "SOC 2 Report, HIPAA Available" }
       ]
     },
     "button": {

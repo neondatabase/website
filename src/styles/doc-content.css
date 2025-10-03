@@ -21,11 +21,11 @@
   }
 
   .table-wrapper {
-    @apply md:-mx-4 md:overflow-x-auto md:px-4;
+    @apply 2xl:-mx-4 2xl:overflow-x-auto 2xl:px-4;
   }
 
   .table {
-    @apply my-10 w-full leading-normal md:min-w-[500px];
+    @apply my-10 w-full leading-normal 2xl:min-w-[500px];
 
     .func_table_entry,
     .catalog_table_entry {
@@ -91,6 +91,10 @@
       @apply mb-3 mt-10;
     }
 
+    .anchor-heading {
+      @apply scroll-mt-32 lg:scroll-mt-5;
+    }
+
     p > img {
       @apply rounded border border-gray-new-94 dark:border-gray-new-20;
 
@@ -150,11 +154,11 @@
     }
 
     .table-wrapper {
-      @apply md:-mx-4 md:overflow-x-auto md:px-4;
+      @apply 2xl:-mx-4 2xl:overflow-x-auto 2xl:px-4;
     }
 
     table {
-      @apply my-10 w-full leading-normal md:min-w-[500px];
+      @apply my-10 w-full leading-normal 2xl:min-w-[500px];
 
       th {
         @apply p-2.5 pt-0 text-left align-top;

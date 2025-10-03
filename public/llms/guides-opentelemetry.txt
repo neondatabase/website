@@ -6,7 +6,7 @@
 
 - [OpenTelemetry HTML](https://neon.com/docs/guides/opentelemetry): The original HTML version of this documentation
 
-**Note** Beta: **OpenTelemetry integration** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: **OpenTelemetry integration** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 What you will learn:
 - How to configure OpenTelemetry exports from Neon
@@ -38,7 +38,7 @@ The integration exports a comprehensive set of metrics including:
 
 ### Postgres logs
 
-**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 The Neon OpenTelemetry integration can forward Postgres logs to your destination platform. These logs provide visibility into database activity, errors, and performance.
 

@@ -4,14 +4,14 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-08-28T08:43:28.497Z'
+updatedOn: '2025-09-29T17:33:12.365Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, and 18 (preview), as per the [Neon version support policy](/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 ## Postgres extensions
 
@@ -194,6 +194,12 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ```sql
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
+
+## Tablespaces
+
+Neon does not support PostgreSQL [tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html). Attempting to create a tablespace with the `CREATE TABLESPACE` command will result in an error. This is due to Neon's managed cloud architecture, which does not permit direct file system access for custom storage locations.
+
+If you have existing applications or scripts that use tablespaces for organizing database objects across different storage devices, you'll need to remove or modify these references when migrating to Neon.
 
 ## Postgres logs
 

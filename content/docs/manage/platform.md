@@ -76,7 +76,13 @@ Monitor your Neon projects to track system health and performance.
 
 <a href="/docs/reference/metrics-logs" description="Metrics and logs reference for monitoring" icon="research">Metrics and logs reference</a>
 
-<a href="/docs/introduction/monitor-external-tools" description="Monitor your database with other external tools" icon="import">Other monitoring tools</a>
+<a href="https://neon.com/guides/betterstack-otel-neon" description="Monitor Neon with Better Stack using OpenTelemetry integration" icon="import">Better Stack</a>
+
+<a href="https://neon.com/guides/newrelic-otel-neon" description="Monitor Neon with New Relic using OpenTelemetry integration" icon="import">New Relic</a>
+
+<a href="/docs/introduction/monitor-pgadmin" description="Monitor your Neon Postgres database with pgAdmin" icon="wrench">pgAdmin</a>
+
+<a href="/docs/introduction/monitor-pghero" description="Monitor your Neon Postgres database with PgHero" icon="wrench">PgHero</a>
 
 </DetailIconCards>
 
