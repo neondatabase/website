@@ -10,6 +10,7 @@ import * as yup from 'yup';
 
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
+import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import { FORM_STATES } from 'constants/forms';
 import LINKS from 'constants/links';
@@ -21,9 +22,13 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
     <div className="relative z-10 flex max-w-sm flex-col items-center text-center">
-      <h3 className="font-title text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]">
+      <Heading
+        tag="h3"
+        theme="white"
+        className="text-[32px] font-medium leading-none tracking-extra-tight sm:text-[28px]"
+      >
         Oops, looks like there&apos;s a technical problem
-      </h3>
+      </Heading>
       <p className="mt-3.5 max-w-[236px] leading-tight tracking-extra-tight text-gray-new-70">
         Please reach out to us directly at{' '}
         <Link
@@ -37,10 +42,15 @@ const ErrorMessage = ({ onClose }) => (
         </Link>
       </p>
     </div>
-    <button className="absolute right-4 top-4 z-20" type="button" onClick={onClose}>
-      <CloseIcon className="size-4 text-white opacity-50 transition-opacity duration-300 hover:opacity-100" />
+    <Button
+      className="absolute right-4 top-4 z-20 p-2 text-white opacity-50 transition-opacity duration-300 hover:opacity-100"
+      type="button"
+      handleClick={onClose}
+      aria-label="Close error message"
+    >
+      <CloseIcon className="size-4" />
       <span className="sr-only">Close error message</span>
-    </button>
+    </Button>
     <span className="absolute inset-0 bg-[#0E0E11]/40 backdrop-blur-md" />
   </div>
 );
