@@ -1,8 +1,6 @@
 ---
 title: Faster is what we help you ship
 subtitle: This page is dedicated to teams shipping faster experiences faster on Neon.
-enableTableOfContents: true
-createdAt: '2025-02-12T00:00:00.000Z'
 updatedOn: '2025-02-12T00:00:00.000Z'
 ---
 
