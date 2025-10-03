@@ -23,7 +23,8 @@ const Hero = () => (
         Integrate Neon Into Your Platform
       </h1>
       <p className="mt-5 max-w-4xl text-xl font-light leading-snug xl:max-w-3xl xl:text-lg lg:mt-4 md:mt-2.5 md:text-base">
-        Bring isolated Postgres databases to your end-users through a Neon integration. Follow the lead of Vercel, Replit, Retool, and many others. Ideal for developers and AI agents. 
+        Bring isolated Postgres databases to your end-users through a Neon integration. Follow the
+        lead of Vercel, Replit, Retool, and many others. Ideal for developers and AI agents.
       </p>
       <AnimatedButton
         className="relative mt-9 px-[34px] py-[17px] text-lg font-semibold tracking-extra-tight lg:mt-7 md:mt-6"

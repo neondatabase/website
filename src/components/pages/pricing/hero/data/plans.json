@@ -31,7 +31,11 @@
     ],
     "otherFeatures": {
       "title": "",
-      "features": [{ "title": "Autoscaling" }, { "title": "Read replicas" }, { "title": "Built-in high availability" }]
+      "features": [
+        { "title": "Autoscaling" },
+        { "title": "Read replicas" },
+        { "title": "Built-in high availability" }
+      ]
     },
     "button": {
       "url": "https://console.neon.tech/signup",
@@ -52,7 +56,7 @@
       {
         "icon": "projects",
         "title": "100 projects",
-         "info": "<p>A project is a top-level container<br/> for your database environment.</p>",
+        "info": "<p>A project is a top-level container<br/> for your database environment.</p>",
         "moreLink": { "text": "Read more", "href": "#what-is-a-project" }
       },
       {
