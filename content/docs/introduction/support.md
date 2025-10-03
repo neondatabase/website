@@ -74,7 +74,7 @@ Ask your question or describe your issue. If the assistant is unable to resolve 
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard, Business, and Production support plan customers.. To learn more, [contact our sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
 
 ### Dedicated Support Engineer
 
