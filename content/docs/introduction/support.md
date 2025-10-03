@@ -16,7 +16,7 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 | Launch plan       | Standard support (billing support only)                                                              |
 | Scale plan        | • Standard support<br/>• Business support (additional fee)<br/>• Production support (additional fee) |
 
-Scale plan customers can upgrade to **Business** or **Production** support plans for an additional cost. In addition to all Standard support plan options, These paid support plans offer [response time SLAs](#slas).
+Scale plan customers can upgrade to **Business** or **Production** support plans for an additional fee. In addition to all Standard support plan options, these plans offer a [response time SLA](#response-time-sla).
 
 ## Support channels
 
@@ -29,7 +29,7 @@ The support channels you can access differ according to your [Support Plan](#sup
 | [Support tickets](#support-tickets)                                           |         -         |                   \*                    |     &check;      |     &check;      |      &check;       |
 | [Slack channel](#slack-channel)                                               |         -         |                    -                    |       \*\*       |       \*\*       |        \*\*        |
 | [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |                    -                    |       \*\*       |       \*\*       |        \*\*        |
-| [SLAs](#slas)                                                                 |         -         |                    -                    |        -         |     &check;      |      &check;       |
+| [SLA](#response-time-sla)                                                     |         -         |                    -                    |        -         |     &check;      |      &check;       |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> [Support tickets](#support-tickets) are only supported for billing-related issues under this support plan, which means Neon Launch plan users can only create support tickets if the issue is related to billing.</small><br/>
@@ -80,9 +80,9 @@ Ask your question or describe your issue. If the assistant is unable to resolve 
 
 A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service is available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
 
-### SLAs
+### Response time SLA
 
-Response time SLAs are available to Neon [Scale plan](/docs/introduction/plans) customers who have purchased a **Business** or **Production** support plan. If you are interested in purchasing one of these plans, [please reach out to our sales team](/contact-sales).
+A response time SLA is available to Neon [Scale plan](/docs/introduction/plans) customers who have purchased a **Business** or **Production** support plan. If you are interested in purchasing one of these plans, [please reach out to our sales team](/contact-sales).
 
 #### Response times
 
@@ -92,15 +92,15 @@ The table below outlines Neon's response time guidelines for Business and Produc
 
 These times relate to the time it takes Neon to respond to the Customer's initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-| Severity Level | Business              | Production            |
-| -------------- | --------------------- | --------------------- |
-| Severity 1     | Within 4 hours        | Within 1 hour         |
-| Severity 2     | Within 1 business day | Within 4 hours        |
-| Severity 3     | Within 1 business day | Within 1 business day |
-| Severity 4     | Within 1 business day | Within 1 business day |
+| Severity Level | Business support plan | Production support plan |
+| -------------- | --------------------- | ----------------------- |
+| Severity 1     | Within 4 hours        | Within 1 hour           |
+| Severity 2     | Within 1 business day | Within 4 hours          |
+| Severity 3     | Within 1 business day | Within 1 business day   |
+| Severity 4     | Within 1 business day | Within 1 business day   |
 
 <Admonition type="note">
-[Legacy Enterprise plan](/docs/introduction/legacy-plans#enterprise-plan-legacy) customers should refer to their individual SLA for response times.
+[Legacy Enterprise standard and gold plan](/docs/introduction/legacy-plans#enterprise-plan-legacy) customers should refer to their individual SLA for response times.
 </Admonition>
 
 #### Severity levels
