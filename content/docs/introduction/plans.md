@@ -54,7 +54,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                                |
-| [Support](#support)                                   | Community                      | Standard (billing issues only)       | Standard, Business, or Production (additional fee)                                                |
+| [Support](#support)                                   | Community                      | Standard (billing issues only)       | Standard, Business, or Production                                                |
 
 ## Plan features
 
