@@ -86,10 +86,11 @@ npx neondb --seed ./init.sql
 # Use a custom .env file and environment variable key
 npx neondb --env ./my.env --key MY_DB_URL
 
-# Skip all prompts and use defaults
+# Skip prompts and use defaults
 npx neondb --yes
 
-# Opens the claim URL in browser
+# Detects PUBLIC_NEON_LAUNCHPAD_CLAIM_URL (default) from your environment,
+# and opens the defined claim URL in your browser
 npx neondb claim
 ```
 
@@ -117,7 +118,7 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 | ----------- | ------ | -------------------------------- | -------------- |
 | `env`       | string | Path to the .env file            | `.env`         |
 | `envKey`    | string | Name of the environment variable | `DATABASE_URL` |
-| `envPrefix` | string | Prefix used for public vars      | `PUBLIC_`      |
+| `envPrefix` | string | Prefix for public env vars       | `PUBLIC_`      |
 | `seed`      | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
@@ -130,15 +131,16 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 **Example config:**
 
 ```js
-import postgresPlugin from '@neondatabase/vite-plugin-postgres';
+import { postgres } from '@neondatabase/vite-plugin-postgres';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
-    postgresPlugin({
+    postgres({
       env: '.env.local', // Custom .env file (default: '.env')
       envKey: 'DATABASE_URL', // Env variable for connection string (default: 'DATABASE_URL')
+      envPrefix: 'PUBLIC_', // Prefix for public environment variables
       seed: {
         type: 'sql-script',
         path: './schema.sql', // SQL file to run after DB creation
@@ -148,6 +150,8 @@ export default defineConfig({
   ],
 });
 ```
+
+> **Note**: The plugin exports a named export (postgres) instead of relying on the default export to improve auto-completion.
 
 **How the plugin works:**
 
@@ -174,9 +178,9 @@ To persist a database beyond the 72-hour expiration period:
 
 The claim URL is available:
 
-- On the Neon Launchpad interface where the connection string was displayed
+- On the Neon Launchpad interface where the connection string is displayed
 - As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
-- The public claim variable is used when executing `npx neondb claim` to claim the database
+- The public claim variable is used when executing `npx neondb claim` to claim the database, which launches the browser window
 
 ### Claim process details
 
