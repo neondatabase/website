@@ -109,32 +109,32 @@ The table below outlines Neon’s guidelines for the support tiers of our legacy
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-|       Severity Level        | Business              | Production            |
-| :-------------------------: | --------------------- | --------------------- |
-| Standard Support Severity 1 | Within 4 hours        | Within 1 hour         |
-| Standard Support Severity 2 | Within 1 business day | Within 4 hours        |
-| Standard Support Severity 3 | Within 1 business day | Within 1 business day |
-| Standard Support Severity 4 | Within 1 business day | Within 1 business day |
+| Severity Level | Business              | Production            |
+| -------------- | --------------------- | --------------------- |
+| Severity 1     | Within 4 hours        | Within 1 hour         |
+| Severity 2     | Within 1 business day | Within 4 hours        |
+| Severity 3     | Within 1 business day | Within 1 business day |
+| Severity 4     | Within 1 business day | Within 1 business day |
 
 ### Severity levels
 
 When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **Critical and High-priority levels should not be used for low-impact issues or general questions\!**
 
-A detailed explanation of each severity level is provided below.
+An explanation of each severity level is provided below.
 
-#### Standard Support Severity 1
+#### Severity 1
 
 Production system is down or severely impacted such that routine operation is impossible
 
-#### Standard Support Severity 2
+#### Severity 2
 
 Production issue where the system is functioning but in degraded or restricted capacity
 
-#### Standard Support Severity 3
+#### Severity 3
 
 Issue where minor functionality is impacted or a development issue occurs
 
-#### Standard Support Severity 4
+#### Severity 4
 
 Request for information or feature request with no impact on business operations
 
