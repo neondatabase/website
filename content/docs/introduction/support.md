@@ -103,13 +103,13 @@ If you, the Customer, believe that your invoice or billing receipt is incorrect,
 
 ### Response times
 
-Neon aims to respond to all Enterprise plan support requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue.
+Neon aims to respond to all [legacy Enterprise plan](https://neon.com/docs/introduction/legacy-plans#enterprise-plan-legacy) support requests in a timely manner and as soon as practically possible. Customers are prioritized based on their support plan tier and the [Severity](#severity-levels) of their issue.
 
-The table below outlines Neon’s guidelines for the support tiers of our legacy Enterprise support plan.
+The table below outlines Neon’s guidelines for the support tiers of our Enterprise support plan.
 
 These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
 
-| Severity Level | Business              | Production            |
+| Severity Level | Standard tier         | Gold tier             |
 | -------------- | --------------------- | --------------------- |
 | Severity 1     | Within 4 hours        | Within 1 hour         |
 | Severity 2     | Within 1 business day | Within 4 hours        |
