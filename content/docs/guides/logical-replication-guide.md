@@ -6,6 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
+  - /docs/guides/logical-replication-aurora-to-neon
 updatedOn: '2025-02-24T15:53:13.359Z'
 ---
 
