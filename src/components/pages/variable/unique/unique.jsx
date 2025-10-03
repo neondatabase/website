@@ -31,8 +31,7 @@ const Unique = ({ title }) => (
   <Section className="unique" title={title}>
     <div className="prose-variable">
       <p>
-        The Neon architecture is inspired by other serverless databases, but with some key
-        differences:
+        The Neon architecture is unique in the following ways:
       </p>
       <List items={items} />
     </div>
