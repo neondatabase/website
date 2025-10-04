@@ -130,7 +130,7 @@ SELECT
 FROM
   customer
 GROUP BY
-  store_id
+  store_id;
 ```
 
 Output:
