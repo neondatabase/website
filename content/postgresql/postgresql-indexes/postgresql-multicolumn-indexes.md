@@ -159,7 +159,7 @@ Output:
 
 The output indicates that the query optimizer uses the `idx_people_names` index for the `last_name = 'Adams'` query.
 
-Sixth, find the person whose first name is `Lou` (without specifying the last name):
+Sixth, find the person whose first name is `Lou` and last name is `Adams`:
 
 ```sql
 EXPLAIN SELECT
