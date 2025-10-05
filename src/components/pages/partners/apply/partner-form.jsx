@@ -131,10 +131,7 @@ const PartnerForm = ({ onSuccess }) => {
         setIsBroken(false);
         // Call the onSuccess callback with user data for Calendly
         if (onSuccess) {
-          onSuccess({
-            email,
-            name: `${firstname || ''} ${lastname || ''}`.trim(),
-          });
+          onSuccess();
         }
       }, loadingAnimationStartedTime);
     } catch (error) {
