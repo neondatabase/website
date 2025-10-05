@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-08-18T16:55:29.348Z'
+updatedOn: '2025-10-03T14:22:48.065Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -10,32 +10,30 @@ This page outlines Neon's support plans, available channels, and policies. To le
 
 Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans), as outlined in the following table.
 
-| Neon Pricing Plan | Support Plan      |
-| :---------------- | :---------------- |
-| Free plan         | Community support |
-| Launch plan       | Billing support   |
-| Scale plan        | Standard support  |
+| Neon pricing plan | Support plan options                                                                                 |
+| :---------------- | :--------------------------------------------------------------------------------------------------- |
+| Free plan         | Community support                                                                                    |
+| Launch plan       | Standard support (billing issues only)                                                               |
+| Scale plan        | • Standard support<br/>• Business support (additional fee)<br/>• Production support (additional fee) |
 
-<Admonition type="note">
-Upgrading your support plan requires [upgrading your pricing plan](/docs/introduction/manage-billing#change-your-plan).
-</Admonition>
+Scale plan customers can upgrade to **Business** or **Production** support plans for an additional fee. In addition to all Standard support plan options, these plans offer a [response time SLA](#response-time-sla).
 
 ## Support channels
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                              | Community support | Billing support | Standard support |
-| :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |
-| [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |
-| [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |
-| [SLAs](#slas)                                                                 |         -         |        -        |     &check;      |
+| Support channels                                                              | Community support | Standard support (billing issues only) | Standard support | Business support | Production support |
+| :---------------------------------------------------------------------------- | :---------------: | :------------------------------------: | :--------------: | :--------------: | :----------------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |                &check;                 |     &check;      |     &check;      |      &check;       |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |                &check;                 |     &check;      |     &check;      |      &check;       |
+| [Support tickets](#support-tickets)                                           |         -         |                   \*                   |     &check;      |     &check;      |      &check;       |
+| [Slack channel](#slack-channel)                                               |         -         |                   -                    |       \*\*       |       \*\*       |        \*\*        |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |                   -                    |       \*\*       |       \*\*       |        \*\*        |
+| [SLA](#response-time-sla)                                                     |         -         |                   -                    |        -         |     &check;      |      &check;       |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> [Support tickets](#support-tickets) are only supported for billing-related issues under this support plan, which means Neon Launch plan users can only create support tickets if the issue is related to billing.</small><br/>
-<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available as a paid addons.</small>
+<small><sup>\*\*</sup> [Slack channels](#slack-channel) and [Dedicated Support Engineers](#dedicated-support-engineer) are available for an additional fee for Standard, Business, and Production support plans.</small>
 </div>
 
 ### Neon Discord Server
@@ -66,6 +64,7 @@ Paying users can raise a support ticket in the Neon Console, via the Neon AI cha
 
 - **Launch** plan users can open support tickets for **billing-related issues only**
 - **Scale** plan users can open a support ticket for any Neon issue
+- **Business** and **Production** plan users can open a support ticket for any Neon issue with SLA response times
 
 Select **Get help** from the **?** menu at the top of the Neon Console to open the AI chat assistant.
 
@@ -75,15 +74,48 @@ Ask your question or describe your issue. If the assistant is unable to resolve 
 
 ### Slack channel
 
-[Slack connect](https://slack.com/intl/en-ie/connect) channels are available to Standard support plan customers. You can request one from our [sales team](/contact-sales).
+[Slack connect](https://slack.com/intl/en-ie/connect) channels are available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
 
 ### Dedicated Support Engineer
 
-A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. To learn more, [contact our sales team](/contact-sales).
+A dedicated engineer can develop in-depth knowledge of your systems, leading to more efficient issue resolution. This service is available for an additional fee for Standard, Business, and Production support plan customers. To learn more, [contact our sales team](/contact-sales).
 
-### SLAs
+### Response time SLA
 
-If you are interested in exploring a Support Level Agreement (SLAs), [get in touch with our sales team](/contact-sales).
+A response time SLA is available to Neon [Scale plan](/docs/introduction/plans) customers who have purchased a **Business** or **Production** support plan. If you are interested in purchasing one of these plans, [please reach out to our sales team](/contact-sales).
+
+#### Response times
+
+Neon aims to respond to all **Business** and **Production** support plan requests in a timely manner and as soon as practically possible. Customers are prioritized based on their support plan and the [Severity](#severity-levels) of their issue.
+
+The table below outlines Neon's response time guidelines for Business and Production support plans.
+
+These times relate to the time it takes Neon to respond to the Customer's initial request. This guideline only applies when submitting a support ticket through the Neon Console.
+
+| Severity Level | Business support plan | Production support plan |
+| -------------- | --------------------- | ----------------------- |
+| Severity 1     | Within 4 hours        | Within 1 hour           |
+| Severity 2     | Within 1 business day | Within 4 hours          |
+| Severity 3     | Within 1 business day | Within 1 business day   |
+| Severity 4     | Within 1 business day | Within 1 business day   |
+
+<Admonition type="note">
+[Legacy Enterprise standard and gold plan](/docs/introduction/legacy-plans#enterprise-plan-legacy) customers should refer to their individual SLA for response times.
+</Admonition>
+
+#### Severity levels
+
+When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **High severity levels should not be used for low-impact issues or general questions\!**
+
+An explanation of each severity level is provided below.
+
+• **Severity 1** - Production system is down or severely impacted such that routine operation is impossible
+
+• **Severity 2** - Production issue where the system is functioning but in degraded or restricted capacity
+
+• **Severity 3** - Issue where minor functionality is impacted or a development issue occurs
+
+• **Severity 4** - Request for information or feature request with no impact on business operations
 
 ## General support policy
 
@@ -100,96 +132,6 @@ Neon will make commercially reasonable efforts to resolve any Issues submitted b
 ### Billing issues
 
 If you, the Customer, believe that your invoice or billing receipt is incorrect, we strongly encourage you to contact our Support team rather than filing a dispute with your card provider. Should a payment dispute be filed before getting in touch with us, we are limited in terms of the action we can take to resolve the matter. Once a dispute has been made with the card provider, the account associated with it and all deployments under it may be suspended until it has been resolved.
-
-### Response times
-
-Neon aims to respond to all **paid subscription** requests in a timely manner and as soon as practically possible. Customers are prioritized based on their plan and [Severity](#severity-levels) of their issue. We only commit to responding to Customers with an Scale plan using the target response time guidelines below.
-
-#### Target response times
-
-The table below outlines Neon’s guidelines for the various support tiers of our Standard support plan.
-
-These times relate to the time it takes Neon to respond to the Customer’s initial request. This guideline only applies when submitting a support ticket through the Neon Console.
-
-|    Severity Level     | Standard                                  | Gold                                     | Platinum                                 |
-| :-------------------: | ----------------------------------------- | ---------------------------------------- | ---------------------------------------- |
-| Severity 1 (Critical) | \< 2 hours (during Normal Business Hours) | \< 1 hour                                | \< 1 hour                                |
-|   Severity 2 (High)   | \< 2 days (during Normal Business Hours)  | \< 1 day                                 | \< 4 hours                               |
-|  Severity 3 (Normal)  | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
-|   Severity 4 (Low)    | \< 3 days (during Normal Business Hours)  | \< 3 days (during Normal Business Hours) | \< 3 days (during Normal Business Hours) |
-
-### Severity levels
-
-When the Customer submits an issue (with or without specifying a starting severity), Neon will reasonably assess its severity according to the appropriate severity levels defined below. Neon reserves the right to set, upgrade and downgrade severities of support tickets, on a case-by-case basis, considering any available mitigations, workarounds, and timely cooperation from Customers. Neon will explain the reasoning to the Customer and will resolve any disagreement regarding the severity as soon as is reasonably practicable. **Critical and High-priority levels should not be used for low-impact issues or general questions\!**
-
-A detailed explanation of each severity level, including several examples, is provided below.
-
-#### Severity 1 (Critical)
-
-- Catastrophic problems in the Customer’s production system leading to loss of service or impact on the Customer’s business
-- Unavailability of the service
-- Security breaches that compromise the confidentiality, integrity, or availability of the database or its data.
-
-<Admonition type="note">
-If Critical is selected during the case creation, the customer will be asked to provide in-depth details on the business impact the issue has caused.
-</Admonition>
-
-Examples:
-
-1. A complete outage of the service provided by Neon
-2. Security breaches
-3. Error impacting the project as a whole (all endpoints/db affected)
-4. Error impacting multiple projects
-5. EP/Branch/DB unreachable
-6. Data corruption/Data loss
-
-#### Severity 2 (High)
-
-Means a high-impact problem in a customer’s production systems. Essential operations are seriously disrupted, but a workaround exists that allows for continued essential operations.
-
-- Non-essential modifications to configuration, like adjusting database parameters or table schema
-- Minor performance concerns that have minimal impact on database usability
-- Minor issues related to application integrations, such as minor API connectivity problems
-- Small-scale challenges with data import/export, data transformation, or data loading processes
-
-Examples:
-
-1. Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
-   - Cannot create a new branch
-   - Cannot execute a branch [restore](/docs/guides/branch-restore)
-   - Cannot perform point-in-time recovery (PITR)
-   - Etc.
-2. Any use case that would require a high load of manual work on the customer side to mitigate an issue on our end
-3. Any use case which massively and negatively affects the customer's business
-
-#### Severity 3 (Normal)
-
-A medium-impact problem on a production or non-production system that involves:
-
-- Partial or limited loss of non-critical functionality
-- A usage problem that involves no loss in functionality
-
-Customers can continue essential operations. Normal problems also include issues with non-production systems, such as test and development systems.
-
-Examples:
-
-1. RCA for past outages or incidents (no disruption of the service at the moment)
-2. Sporadic connection failure/timeouts/retries
-3. Cannot connect with random third-party framework or tool (but can connect generally speaking)
-4. Any use case which has a minor impact on the customer's business
-5. Poor performing queries/ingestion
-6. Billing issues
-
-#### Severity 4 (Low)
-
-- A general usage question; here is no impact on the product's quality, performance, or functionality in a production or non-production system
-- Any request for information, enhancement, or documentation clarification regarding the platform
-
-Examples:
-
-1. Feature requests/feature enablement
-2. General questions (“active time,” “how to backup a DB,” “how to ingest data”) and feedback
-3. Any use case that has no impact on the customer's business at all
 
 ### Etiquette
 

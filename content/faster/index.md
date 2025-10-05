@@ -26,7 +26,7 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Retool](https://retool.com)** – Manages 300K+ Postgres DBs with one engineer via Neon’s API. [Details](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 - **[Replit](https://replit.com)** – SOTA Text to App Agent helping creators "build an app for that" in minutes, DB included. [Details](/blog/neon-replit-integration)
 - **[White Widget](https://whitewidget.com)** – Scales up to 50M+ users in seconds with autoscaling. [Details](/blog/white-widgets-secret-to-scalable-postgres-neon)
-- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon)
+- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-to-neon)
 - **[Branch Insurance](https://ourbranch.com)** – Builds on Serverless Postgres to deliver faster experience out-of-the-box. [Details](/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature)
 - **[Magic Circle](https://magiccircle.io)** – Handles 2M+ game sessions on Neon. [Details](/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon)
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
