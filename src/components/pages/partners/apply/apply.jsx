@@ -14,7 +14,6 @@ import CloseIcon from './images/close.inline.svg';
 import PartnerForm from './partner-form';
 
 import 'styles/hubspot-form.css';
-import 'styles/calendly-widget.css';
 
 const googleCalendarURL =
   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1KghFQvaD_N5KsldQvhmrFcoh3zxNStwWIHq7fBnMiRxTj0FYg9AlTFECZjT86rYvpqdnGrFDp?gv=true';
