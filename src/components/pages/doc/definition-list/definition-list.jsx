@@ -81,10 +81,7 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
         return (
           <Fragment key={idx}>
             {terms.map((term, termIdx) => (
-              <dt
-                className="group relative mt-4 flex items-start font-bold first:mt-0"
-                key={termIdx}
-              >
+              <dt className="relative mt-4 flex items-start font-bold first:mt-0" key={termIdx}>
                 <span className="mr-2.5">
                   {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
                 </span>
