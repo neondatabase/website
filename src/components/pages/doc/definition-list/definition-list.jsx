@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import slugify from 'slugify';
+
+import AnchorHeading from 'components/shared/anchor-heading';
 
 // local constants
 const termDelimiterRegEx = /\n/;
@@ -79,27 +80,17 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
 
         return (
           <Fragment key={idx}>
-            {terms.map((term, termIdx) => {
-              const termString = Array.isArray(term) ? term[0] : term;
-              const termId = slugify(termString, {
-                lower: true,
-                strict: true,
-                remove: /[*+~.()'"!:@#[\]{}<>/\\|`^=]/g,
-              });
-
-              return (
-                <dt
-                  className="group relative mt-4 flex items-start font-bold first:mt-0"
-                  id={termId}
-                  key={termIdx}
-                >
-                  <span className="mr-2.5">
-                    {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
-                  </span>
-                  {term}
-                </dt>
-              );
-            })}
+            {terms.map((term, termIdx) => (
+              <dt
+                className="group relative mt-4 flex items-start font-bold first:mt-0"
+                key={termIdx}
+              >
+                <span className="mr-2.5">
+                  {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
+                </span>
+                {React.createElement(AnchorHeading('span'), { className: 'font-bold' }, term)}
+              </dt>
+            ))}
             {descriptions.map((description, index) => (
               <dd className="pl-6 first:mt-1" key={index}>
                 {description}
