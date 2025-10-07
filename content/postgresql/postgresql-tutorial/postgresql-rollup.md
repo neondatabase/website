@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL CUBE'
   slug: 'postgresql-tutorial/postgresql-cube'
 nextLink:
-  title: 'PostgreSQL Subquery'
-  slug: 'postgresql-tutorial/postgresql-subquery'
+  title: 'PostgreSQL UNION'
+  slug: 'postgresql-tutorial/postgresql-union'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `ROLLUP` to generate multiple grouping sets.
