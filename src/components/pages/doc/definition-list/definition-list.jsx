@@ -60,6 +60,8 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
   if (!Array.isArray(children)) {
     content = [children];
   }
+  const AnchorSpan = AnchorHeading('span');
+
   return (
     <dl>
       {content.map(({ props: { children } }, idx) => {
@@ -85,7 +87,7 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
                 <span className="mr-2.5">
                   {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
                 </span>
-                {React.createElement(AnchorHeading('span'), { className: 'font-bold' }, term)}
+                <AnchorSpan className="font-bold">{term}</AnchorSpan>
               </dt>
             ))}
             {descriptions.map((description, index) => (
