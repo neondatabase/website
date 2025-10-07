@@ -2,7 +2,7 @@
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
 enableTableOfContents: true
-updatedOn: '2025-04-20T15:44:26.055Z'
+updatedOn: '2025-10-07T09:03:30.004Z'
 ---
 
 <CopyPrompt src="/prompts/ruby-on-rails.md" 
