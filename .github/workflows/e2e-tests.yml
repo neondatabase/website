@@ -16,6 +16,9 @@ permissions:
 jobs:
   install:
     runs-on: ubuntu-latest
+    env:
+      QSTASH_CURRENT_SIGNING_KEY: ${{ secrets.QSTASH_CURRENT_SIGNING_KEY }}
+      QSTASH_NEXT_SIGNING_KEY: ${{ secrets.QSTASH_NEXT_SIGNING_KEY }}
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -40,5 +43,3 @@ jobs:
           NEXT_PUBLIC_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_PATH }}
           NEXT_PUBLIC_GITHUB_RAW_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_ROW_PATH }}
           NEXT_PUBLIC_SEGMENT_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_SEGMENT_WRITE_KEY }}
-          QSTASH_CURRENT_SIGNING_KEY: ${{ secrets.QSTASH_CURRENT_SIGNING_KEY }}
-          QSTASH_NEXT_SIGNING_KEY: ${{ secrets.QSTASH_NEXT_SIGNING_KEY }}
