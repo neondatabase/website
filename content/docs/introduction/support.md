@@ -141,7 +141,7 @@ To ensure efficient resolution of issues, customers are expected to (1) provide 
 
 ## Legacy enterprise support
 
-Customers on our legacy enterprise plans can view support plan details in the following dropdown.
+Customers on a legacy [Enterprise plan](/docs/introduction/legacy-plans#enterprise-plan-legacy) can view support plan details in the following dropdown.
 
 <details>
 <summary>**Enterprise support (legacy)**</summary>
