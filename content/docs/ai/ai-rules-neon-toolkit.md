@@ -3,7 +3,7 @@ title: 'AI Rules: The @neondatabase/toolkit'
 subtitle: Context rules for AI tools to use the @neondatabase/toolkit for ephemeral
   Postgres databases
 enableTableOfContents: true
-updatedOn: '2025-10-01T10:10:07.453Z'
+updatedOn: '2025-10-08T14:55:26.724Z'
 ---
 
 <InfoBlock>

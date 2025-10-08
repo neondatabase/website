@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-10-03T14:22:48.065Z'
+updatedOn: '2025-10-08T14:55:26.726Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-09-15T13:43:18.947Z'
+updatedOn: '2025-10-08T14:55:26.725Z'
 ---
 
 This page describes Neon’s **legacy plans**. These plans are no longer offered to new signups, except through Vercel and Azure Marketplace.
