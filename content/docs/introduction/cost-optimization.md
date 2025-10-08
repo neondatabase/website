@@ -66,4 +66,4 @@ Public network transfer (egress) is the data sent from your databases over the p
   - Data sent to client applications
   - [Logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases
 
-- **Review your bill** — If you see unexpectedly high public data transfer charges, [contact support](/docs/introduction/support) for assistance in identifying the source. Neon does not currently expose detailed data transfer metrics in the Console.
+- **Review your bill** — If you see unexpectedly high public data transfer charges, [contact support](/docs/introduction/support) for assistance. Neon does not currently expose detailed data transfer metrics in the Console.
