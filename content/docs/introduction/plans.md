@@ -213,7 +213,7 @@ Because data changes on child branches accumulate over time and never decrease, 
 
 - Set a [time to live](/docs/guides/branch-ttl) on development and preview branches
 - Delete child branches when they're no longer needed
-- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on actual data size.
+- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on logical data size.
 
 </Admonition>
 
