@@ -158,3 +158,7 @@ curl --request GET \
   }
 }
 ```
+
+<Admonition type="tip" title="Optimize your costs">
+For strategies to reduce your Neon costs across compute, storage, branches, and data transfer, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
+</Admonition>

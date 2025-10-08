@@ -60,6 +60,10 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 
 This section describes the features listed in the [Plan overview](#plan-overview) table.
 
+<Admonition type="tip" title="Optimize your costs">
+Learn how to manage your Neon costs effectively with our [cost optimization guide](/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
+</Admonition>
+
 ### ☑ Price
 
 **Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5.
@@ -201,7 +205,17 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 
 When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-Storage on child branches never decreases — it grows as changes accumulate.
+**Storage on child branches never decreases — it grows as changes accumulate.**
+
+<Admonition type="important" title="Manage child branches to control storage costs">
+
+Because all writes (inserts, updates, and deletes) accumulate storage on child branches, unmanaged branches can lead to high storage usage and unexpected bills. To keep costs under control:
+
+- Set a [time to live](/docs/guides/branch-ttl) on development and preview branches
+- Delete branches when they're no longer needed
+- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead
+
+</Admonition>
 
 > **Free** plan users get 0.5 GB of storage per project
 

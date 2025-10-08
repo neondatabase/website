@@ -1085,6 +1085,8 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Cost optimization
+          slug: introduction/cost-optimization
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
