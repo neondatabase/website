@@ -137,6 +137,10 @@ Regardless of the method or location through which Neon provides Support, commun
 
 To ensure efficient resolution of issues, customers are expected to (1) provide detailed information about the issue, (2) cooperate with the Support team during troubleshooting, and (3) utilize available self-service resources for basic inquiries.
 
+### Changes to the support policy
+
+We reserve the right to modify, amend, or update this Support Policy, including the types of support offered, support hours, response times, and support plans, at any time and at our sole discretion. Any changes to the Support Policy will be effective immediately upon posting a revised version of this Support Policy. Continued use of our services after such modifications will constitute acknowledgment and acceptance of the changes.
+
 <a id="enterprise-support"></a>
 
 ## Legacy enterprise support
@@ -254,7 +258,3 @@ Examples:
 - Any use case that has no impact on the customer's business at all
 
 </details>
-
-### Changes to the support policy
-
-We reserve the right to modify, amend, or update this Support Policy, including the types of support offered, support hours, response times, and support plans, at any time and at our sole discretion. Any changes to the Support Policy will be effective immediately upon posting a revised version of this Support Policy. Continued use of our services after such modifications will constitute acknowledgment and acceptance of the changes.
