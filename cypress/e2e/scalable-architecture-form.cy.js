@@ -8,7 +8,7 @@ describe('Scalable Architecture Contact Us Form', () => {
 
     cy.get('#scalable-architecture-form').within(() => {
       cy.get("input[name='name']").type('John Doe');
-      cy.get("input[name='email']").type('+skipform@hubspot.com');
+      cy.get("input[name='email']").type('test+skipform@hubspot.com');
       cy.get("select[name='companySize']").select('1_4');
       cy.get("textarea[name='message']").type('This is a test message for scalable architecture.');
       cy.root().submit();
@@ -44,7 +44,8 @@ describe('Scalable Architecture Contact Us Form', () => {
 
     cy.get('#scalable-architecture-form').within(() => {
       cy.get("input[name='name']").type('John Doe');
-      cy.get("input[name='email']").type('+skipform@hubspot.com');
+      cy.get("input[name='email']").type('test+skipform@hubspot.com');
+      cy.get("input[name='email']").type('test+skipform@hubspot.com');
       cy.get("select[name='companySize']").select('1_4');
       cy.get("textarea[name='message']").type('This is a test message for scalable architecture.');
       cy.root().submit();
