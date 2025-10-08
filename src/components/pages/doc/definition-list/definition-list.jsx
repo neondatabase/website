@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 
+import AnchorHeading from 'components/shared/anchor-heading';
+
 // local constants
 const termDelimiterRegEx = /\n/;
 const listDelimiterRegEx = /\n:/;
@@ -58,6 +60,8 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
   if (!Array.isArray(children)) {
     content = [children];
   }
+  const AnchorSpan = AnchorHeading('span');
+
   return (
     <dl>
       {content.map(({ props: { children } }, idx) => {
@@ -79,14 +83,11 @@ const DefinitionList = ({ bulletType = 'dash', children }) => {
         return (
           <Fragment key={idx}>
             {terms.map((term, termIdx) => (
-              <dt
-                className="group relative mt-4 flex items-start font-bold first:mt-0"
-                key={termIdx}
-              >
+              <dt className="relative mt-4 flex items-start font-bold first:mt-0" key={termIdx}>
                 <span className="mr-2.5">
                   {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
                 </span>
-                {term}
+                <AnchorSpan className="font-bold">{term}</AnchorSpan>
               </dt>
             ))}
             {descriptions.map((description, index) => (

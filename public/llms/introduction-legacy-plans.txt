@@ -186,7 +186,7 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 - Custom domain proxy
 - Security reviews and compliance questionnaires
 - Invoice billing and annual commitments
-- [Enterprise support](https://neon.com/docs/introduction/support)
+- [Enterprise support](/docs/introduction/support#enterprise-support)
 
 To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) or [request a trial](https://neon.tech/enterprise#request-trial).
 

@@ -4,7 +4,7 @@ subtitle: Monitor billing and usage for your account and projects
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2025-08-26T13:01:22.806Z'
+updatedOn: '2025-10-08T19:31:56.544Z'
 ---
 
 Neon exposes usage metrics in the Neon Console and through the Neon API. For an explanation of Neon's usage metrics, see [Usage metrics](/docs/introduction/plans#usage-metrics).
@@ -158,3 +158,7 @@ curl --request GET \
   }
 }
 ```
+
+<Admonition type="tip" title="Optimize your costs">
+For strategies to reduce your Neon costs across compute, storage, branches, and data transfer, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
+</Admonition>
