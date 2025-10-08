@@ -211,7 +211,7 @@ When a child branch is created, it adds no storage initially. Once you make writ
 
 Because data changes on child branches accumulate over time and never decrease, unmanaged child branches can lead to high storage usage and unexpected bills. To keep costs under control:
 
-- Set a [time to live](/docs/guides/branch-ttl) on development and preview branches
+- Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
 - Delete child branches when they're no longer needed
 - Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on your actual data size, not data changes over time.
 
