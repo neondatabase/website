@@ -29,10 +29,10 @@ Storage costs are based on actual data size for root branches and the storage de
 
 **Optimization strategies:**
 
-- **Manage child branch storage** — Storage on child branches is based on bytes written and never decreases—it grows as all data changes (inserts, updates, and deletes) accumulate. To control costs:
+- **Manage child branch storage** — Storage on child branches never decreases—it grows as data changes (inserts, updates, and deletes) accumulate over time. To control costs:
   - Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
   - Delete child branches when they're no longer needed
-  - Never use child branches as your primary production branch—use a [root branch](/docs/manage/branches#root-branch) instead
+  - Never use child branches as your primary production branch—use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on actual data size.
 
 - **Implement branch lifecycle management** — Review your branches regularly and delete any that are no longer needed. Keeping your branch count under control reduces both storage costs and potential [extra branch charges](/docs/introduction/plans#extra-branches).
 

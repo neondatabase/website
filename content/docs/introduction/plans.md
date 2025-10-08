@@ -205,15 +205,15 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 
 When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-**Storage on child branches is based on bytes written and never decreases — it grows as data changes accumulate over time.**
+**Storage on child branches never decreases — it grows as data changes accumulate over time.**
 
 <Admonition type="important" title="Manage child branches to control storage costs">
 
-Because all data changes on child branches accumulate as bytes written, unmanaged child branches can lead to high storage usage and unexpected bills. To keep costs under control:
+Because data changes on child branches accumulate over time and never decrease, unmanaged child branches can lead to high storage usage and unexpected bills. To keep costs under control:
 
 - Set a [time to live](/docs/guides/branch-ttl) on development and preview branches
 - Delete child branches when they're no longer needed
-- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead
+- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on actual data size.
 
 </Admonition>
 
