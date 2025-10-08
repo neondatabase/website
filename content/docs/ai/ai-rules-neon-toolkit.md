@@ -24,7 +24,7 @@ updatedOn: '2025-10-01T10:10:07.453Z'
 
 ## Rules
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to programmatically create, query, and destroy ephemeral Neon Postgres databases. Ideal for quick prototyping, testing, and temporary workflows.
 globs: *.ts, *.tsx
