@@ -8,7 +8,7 @@ describe('Startups Contact Form', () => {
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
-    cy.get("input[name='email']").type('+skipform@hubspot.com');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
     cy.get("input[name='companyWebsite']").type('startup.example.com');
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
@@ -51,7 +51,7 @@ describe('Startups Contact Form', () => {
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
-    cy.get("input[name='email']").type('+skipform@hubspot.com');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
     cy.get("input[name='companyWebsite']").type('startup.example.com');
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
@@ -59,7 +59,7 @@ describe('Startups Contact Form', () => {
     cy.getByData('error-message').should('exist');
 
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
-      email: '+skipform@hubspot.com',
+      email: 'test+skipform@hubspot.com',
     });
   });
 });
