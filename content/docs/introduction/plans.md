@@ -476,7 +476,8 @@ How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  
  • Enable scale-to-zero for idle databases.  
  • Delete unused branches to reduce storage costs.  
- • Shorten your restore window to reduce instant restore storage.
+ • Shorten your restore window to reduce instant restore storage.  
+ For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
 
 Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
