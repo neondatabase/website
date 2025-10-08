@@ -144,7 +144,7 @@ To ensure efficient resolution of issues, customers are expected to (1) provide 
 Customers on our legacy enterprise plans can view support plan details in the following dropdown.
 
 <details>
-<summary>**Enterprise support**</summary>
+<summary>**Enterprise support (legacy)**</summary>
 
 ### General support policy
 
