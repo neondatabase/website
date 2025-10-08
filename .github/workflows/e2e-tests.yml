@@ -2,9 +2,6 @@ name: E2E on Chrome
 
 on:
   push:
-    branches: 
-      - main
-      - upd-cypress-tests
     paths:
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
