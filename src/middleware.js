@@ -21,11 +21,6 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
-    // Disable API routes during build for E2E tests
-    if (process.env.DISABLE_API_ROUTES && pathname.startsWith('/api/')) {
-      return new Response('API routes disabled for build', { status: 503 });
-    }
-
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
@@ -91,5 +86,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*', '/api/:path*'],
+  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*'],
 };
