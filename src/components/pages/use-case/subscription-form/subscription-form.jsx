@@ -114,7 +114,7 @@ const SubscriptionForm = ({ title, description }) => {
         <p className="mt-1.5 max-w-[636px] tracking-extra-tight text-gray-new-70 lg:max-w-[800px]">
           {description}
         </p>
-        <form className="relative mt-[18px] w-full" onSubmit={handleSubmit}>
+        <form className="relative mt-[18px] w-full" id="content-form" onSubmit={handleSubmit}>
           <input
             className={clsx(
               'remove-autocomplete-styles-apply-form h-12 w-full rounded-full',

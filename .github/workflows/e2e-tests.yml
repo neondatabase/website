@@ -3,14 +3,13 @@ name: E2E on Chrome
 on:
   push:
     paths:
-      - 'src/components/pages/contact-sales/hero/**'
-      - 'src/components/pages/partners/apply/**'
-      - 'src/components/pages/blog-post/subscribe-form/**'
-      - 'src/components/shared/subscribe/**'
-      - 'src/components/shared/subscription-form/**'
       - 'src/utils/forms.js'
       - 'src/constants/forms.js'
       - 'cypress/**'
+      - 'src/components/shared/changelog-form/**'
+      - 'src/components/pages/contact-sales/hero/**'
+      - 'src/components/pages/startups/hero/**'
+      - 'src/components/pages/scalable-architecture/contact-us/**'
 permissions:
   contents: read
 
