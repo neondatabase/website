@@ -631,6 +631,7 @@ For all language-specific example code and API references, visit [Pulumi: Neon P
 ## Resources
 
 - [Pulumi Documentation](https://www.pulumi.com/docs/)
+- [Pulumi Neon Provider](https://www.pulumi.com/registry/packages/neon/)
 - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon)
 - [Manage Neon with Terraform](/docs/reference/terraform)
 
