@@ -42,14 +42,13 @@ describe('Scalable Architecture Contact Us Form', () => {
   it('displays an error message when there is server error', () => {
     cy.formErrorSubmit();
 
-    cy.get('#scalable-architecture-form').within(() => {
-      cy.get("input[name='name']").type('John Doe');
-      cy.get("input[name='email']").type('test+skipform@hubspot.com');
-      cy.get("input[name='email']").type('test+skipform@hubspot.com');
-      cy.get("select[name='companySize']").select('1_4');
-      cy.get("textarea[name='message']").type('This is a test message for scalable architecture.');
-      cy.root().submit();
-    });
+    cy.get("#scalable-architecture-form input[name='name']").type('John Doe');
+    cy.get("#scalable-architecture-form input[name='email']").type('test+skipform@hubspot.com');
+    cy.get("#scalable-architecture-form select[name='companySize']").select('1_4');
+    cy.get("#scalable-architecture-form textarea[name='message']").type(
+      'This is a test message for scalable architecture.'
+    );
+    cy.get('#scalable-architecture-form').submit();
 
     cy.wait('@formErrorSubmit');
     cy.getByData('error-message')

@@ -16,10 +16,10 @@ describe('Startups Contact Form', () => {
     cy.get('button').should('contain', 'Applied!');
 
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
-      email: '+skipform@hubspot.com',
+      email: 'test+skipform@hubspot.com',
     });
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'Startup Form Submitted', {
-      email: '+skipform@hubspot.com',
+      email: 'test+skipform@hubspot.com',
       first_name: 'John',
       last_name: 'Doe',
       company_website: 'startup.example.com',

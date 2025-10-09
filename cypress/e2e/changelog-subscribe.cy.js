@@ -22,6 +22,7 @@ describe('Changelog Subscribe Form', () => {
     cy.get('#changelog-form')
       .eq(0)
       .within(() => {
+        cy.get('input[name="email"]').type(' ', { force: true });
         cy.get('form').submit();
       });
 
