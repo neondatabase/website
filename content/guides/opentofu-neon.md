@@ -56,8 +56,8 @@ Before you begin, ensure you have the following:
 2.  **Create a `main.tf` file:**
     This file will contain your OpenTofu configuration. Start by declaring the required Neon provider. OpenTofu can use providers from the tofu registry.
 
-    ```tofu
-    tofu {
+    ```terraform
+    terraform {
       required_providers {
         neon = {
           source  = "kislerdm/neon"
@@ -81,7 +81,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
 1.  **Directly in the provider block (Less secure):**
     For quick testing, you can **hardcode your API key** directly within `provider "neon"` block. However, this method isn't recommended for production environments or shared configurations. A more secure alternative is to retrieve the API key from a secrets management service like [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) or [HashiCorp Vault](https://developer.hashicorp.com/vault), and then update your provider block to reflect this.
 
-    ```tofu
+    ```terraform
     provider "neon" {
       api_key = "<YOUR_NEON_API_KEY>"
     }
@@ -96,7 +96,7 @@ The Neon provider needs your Neon API key to manage resources. You can configure
 
     If the environment variable is set, you can leave the `provider "neon"` block empty:
 
-    ```tofu
+    ```terraform
     provider "neon" {}
     ```
 
@@ -110,13 +110,24 @@ This section provides examples of how to manage Neon resources using OpenTofu. Y
 
 ### Managing projects
 
+<Admonition type="warning">
+Always set the `org_id` attribute when creating a `neon_project`. You can find your Organization ID in the Neon Console under Account Settings → Organization settings.
+
+![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
+
+Omitting `orgId` can cause resources to be created in the wrong organization or produce duplicate projects, and subsequent `tofu plan` / `tofu apply` runs may attempt destructive changes (including deletions). To avoid this, explicitly provide `orgId` when defining your project as shown in the example below.
+</Admonition>
+
 A Neon project is the top-level container for your Postgres databases, branches, and endpoints.
 
-```tofu
+```terraform
 resource "neon_project" "my_app_project" {
   name       = "my-application-project"
   pg_version = 16
+  org_id     = "your-organization-id" # Replace with your actual Org ID
   region_id  = "aws-us-east-1"
+  # free accounts have maximum retention window of 6 hours (21600 seconds)
+  history_retention_seconds = 21600
 
   # Configure default branch settings (optional)
   branch {
@@ -142,12 +153,14 @@ This configuration creates a new Neon project.
 - `pg_version`: (Optional) PostgreSQL version (e.g., 14, 15, 16, 17).
 - `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
   > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
+- `org_id`: The Organization ID under which to create the project.
+- `history_retention_seconds`: (Optional) Duration in seconds to retain historical data for point-in-time recovery. Free plans have a maximum of 21600 seconds (6 hours). Default is 86400 seconds (24 hours) for paid plans.
 - `branch {}`: (Optional) Block to configure the default primary branch.
 
 **Output project details:**
 You can output computed values like the project ID or connection URI:
 
-```tofu
+```terraform
 output "project_id" {
   value = neon_project.my_app_project.id
 }
@@ -173,7 +186,7 @@ For more attributes and options on managing projects, refer to the [Provider's d
 
 You can create branches from the primary branch or any other existing branch.
 
-```tofu
+```terraform
 resource "neon_branch" "dev_branch" {
   project_id = neon_project.my_app_project.id
   name       = "feature-x-development"
@@ -207,7 +220,7 @@ Endpoints provide connection strings to access your branches. Each branch can ha
 
 Before creating an endpoint, you must first create a **branch** for it to connect to. Here's how to create a read-write endpoint for your `dev_branch`:
 
-```tofu
+```terraform
 resource "neon_endpoint" "dev_endpoint" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -245,7 +258,7 @@ For more attributes and options on managing endpoints, refer to the [Provider's 
 
 Roles (users) are managed per branch. Before creating a role, ensure you have a branch created. Follow the [Managing Branches](#managing-branches) section for details.
 
-```tofu
+```terraform
 resource "neon_role" "app_user" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -271,7 +284,7 @@ For more attributes and options on managing roles, refer to the [Provider's docu
 
 Databases are also managed per branch. Follow the [Managing Branches](#managing-branches) section for details on creating a branch.
 
-```tofu
+```terraform
 resource "neon_database" "service_db" {
   project_id = neon_project.my_app_project.id
   branch_id  = neon_branch.dev_branch.id
@@ -293,7 +306,7 @@ For more attributes and options on managing databases, refer to the [Provider's 
 
 You can manage Neon API keys themselves using OpenTofu.
 
-```tofu
+```terraform
 resource "neon_api_key" "ci_cd_key" {
   name = "automation-key-for-ci"
 }
@@ -314,7 +327,7 @@ output "ci_cd_api_key_value" {
 
 Share project access with other users.
 
-```tofu
+```terraform
 resource "neon_project_permission" "share_with_colleague" {
   project_id = neon_project.my_app_project.id
   grantee    = "colleague@example.com"
@@ -325,7 +338,7 @@ resource "neon_project_permission" "share_with_colleague" {
 
 Configure JWKS URL for Row Level Security authorization.
 
-```tofu
+```terraform
 resource "neon_jwks_url" "auth_provider_jwks" {
   project_id    = neon_project.my_app_project.id
   # Use the default role from the project, or specify custom roles
@@ -345,7 +358,7 @@ These resources are used for organizations with Scale or Enterprise plans requir
 
 #### Assign VPC endpoint to organization
 
-```tofu
+```terraform
 resource "neon_vpc_endpoint_assignment" "org_vpc_endpoint" {
   org_id          = "your-neon-organization-id" # Replace with your actual Org ID
   region_id       = "aws-us-east-1"             # Neon region ID
@@ -358,7 +371,7 @@ For more attributes and options on managing VPC endpoints, refer to the [Provide
 
 #### Restrict project to VPC endpoint
 
-```tofu
+```terraform
 resource "neon_vpc_endpoint_restriction" "project_to_vpc" {
   project_id      = neon_project.my_app_project.id
   vpc_endpoint_id = neon_vpc_endpoint_assignment.org_vpc_endpoint.vpc_endpoint_id
@@ -447,7 +460,7 @@ In your `main.tf` file, define the resource blocks for the existing resources. Y
 
 For required attributes (like `project_id` for a branch), you'll either need to hardcode the known ID or reference a resource that will also be imported.
 
-```tofu
+```terraform
 tofu {
   required_providers {
     neon = {
@@ -692,7 +705,7 @@ Let's say we have the following existing Neon resources and their IDs:
 
 You would add the following to your `main.tf`:
 
-```tofu
+```terraform
 tofu {
   required_providers {
     neon = {
@@ -820,6 +833,6 @@ OpenTofu will ask for confirmation.
 - [GitHub repository](https://github.com/kislerdm/terraform-provider-neon)
 - [Terraform Registry](https://registry.terraform.io/providers/kislerdm/neon)
 - [OpenTofu Registry](https://search.opentofu.org/provider/kislerdm/neon/latest)
-- [Manage Neon with tofu](/docs/reference/tofu)
+- [Manage Neon with Terraform](/docs/reference/terraform)
 
 <NeedHelp/>
