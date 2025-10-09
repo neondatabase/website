@@ -1,6 +1,6 @@
 ---
 title: Account recovery
-subtitle: How to recvoer a lost account
+subtitle: Learn how to recover a lost Neon account
 enableTableOfContents: true
 updatedOn: '2025-10-02T10:19:29.271Z'
 ---
