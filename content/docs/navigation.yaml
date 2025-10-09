@@ -328,6 +328,8 @@
               slug: guides/ruby-on-rails
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: TypeORM
+              slug: guides/typeorm
     - section: Backend
       items:
         - title: Data API
