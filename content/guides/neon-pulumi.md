@@ -87,11 +87,26 @@ Before you begin, ensure you have the following:
     pulumi package add terraform-provider kislerdm/neon
     ```
 
+## Import the Neon provider
+
+When you install and import the Neon provider, you gain access to all the components needed to manage your Neon infrastructure.
+
+```typescript
+import * as neon from '@pulumi/neon';
+```
+
+This `neon` object contains two main types of components:
+
+- **Resources**: These are classes that map directly to objects you can create, update, and delete in your Neon account. The main resources you will use are `neon.Project`, `neon.Branch`, `neon.Endpoint`, `neon.Database`, and `neon.Role`.
+- **Functions**: These are used to read or query data about existing resources without managing them. For example, you can use the `getBranchEndpoints` function to fetch a list of endpoints for a specific branch.
+
+This guide focuses on creating and managing **Resources**. To explore data-sourcing **Functions**, please refer to the [Pulumi Neon Provider API Docs](https://www.pulumi.com/registry/packages/neon/api-docs/).
+
 ## Configure authentication
 
 The Neon provider needs your Neon API key to manage resources. The recommended way is using an environment variable.
 
-**Using environment variables (recommended):**
+**Using environment variable (recommended):**
 The provider will automatically use the `NEON_API_KEY` environment variable if it is set.
 
 ```shell
@@ -383,12 +398,10 @@ Outputs:
   + projectConnectionUri  : [secret]
 ```
 
-This is a critical security feature. Pulumi automatically detects sensitive data like database passwords and connection strings and encrypts them before storing them in your state file. This prevents credentials from being accidentally exposed in logs, CI/CD output, or version control.
-
-In your code, wrapping an output in `pulumi.secret()` explicitly marks it as a secret, ensuring it's always handled with encryption.
+This is a critical security feature that prevents credentials from being accidentally exposed in logs, CI/CD output, or version control. In your code, wrapping an output in `pulumi.secret()` marks it as a secret, ensuring it's handled with encryption.
 
 ```typescript
-// Explicitly marking outputs as secrets
+// Marking outputs as secrets
 export const projectConnectionUri = pulumi.secret(myAppProject.connectionUri);
 export const appUserPassword = pulumi.secret(appUser.password);
 ```
