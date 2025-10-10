@@ -592,6 +592,10 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+                - title: Neon TypeScript SDK
+                  slug: ai/ai-rules-neon-typescript-sdk
+                - title: Neon Python SDK
+                  slug: ai/ai-rules-neon-python-sdk
                 - title: Neon API
                   slug: ai/ai-rules-neon-api
                 - title: Neon Toolkit

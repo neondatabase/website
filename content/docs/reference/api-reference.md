@@ -13,6 +13,10 @@ Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-s
 
 The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
 
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for the Neon API](/docs/ai/ai-rules-neon-api) to help your AI assistant understand authentication, rate limiting, and best practices when working with the Neon API.
+</Admonition>
+
 ## Authentication
 
 The Neon API uses API keys to authenticate requests. You can view and manage API keys for your account in the Neon Console. For instructions, refer to [Manage API keys](/docs/manage/api-keys).

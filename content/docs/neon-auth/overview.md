@@ -10,6 +10,10 @@ Neon Auth brings authentication and user management natively to your Neon Postgr
 
 <FeatureBetaProps feature_name="Neon Auth" />
 
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for Neon Auth](/docs/ai/ai-rules-neon-auth) to help your AI assistant generate better code for implementing authentication with Neon.
+</Admonition>
+
 ## Why Neon Auth?
 
 Neon Auth helps you move faster by handling the auth stack for you:

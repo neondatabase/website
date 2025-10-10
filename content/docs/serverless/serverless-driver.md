@@ -19,6 +19,10 @@ When to query over HTTP vs WebSockets:
 - **HTTP**: Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](#use-the-driver-over-http).
 - **WebSockets**: If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](#use-the-driver-over-websockets).
 
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for the Neon Serverless Driver](/docs/ai/ai-rules-neon-serverless) to help your AI assistant generate better code for serverless database connections.
+</Admonition>
+
 ## Install the Neon serverless driver
 
 You can install the driver with your preferred JavaScript package manager. For example:
