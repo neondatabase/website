@@ -1,8 +1,9 @@
 ---
 title: Accessing User Data
-subtitle: How to read, update, and protect user data in your app
+subtitle: 'How to read, update, and protect user data in your app'
 enableTableOfContents: true
 tag: beta
+updatedOn: '2025-10-01T12:46:01.214Z'
 ---
 
 > Reading and writing user information, and protecting pages
@@ -30,7 +31,7 @@ You can also use `useUser({ or: "redirect" })` to automatically redirect to the 
 Since `useUser()` is a stateful hook, you can't use it on server components. Instead, import `stackServerApp` and call `getUser()`:
 
 ```tsx shouldWrap
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function MyServerComponent() {
   const user = await stackServerApp.getUser();
@@ -61,7 +62,7 @@ export default function MyProtectedClientComponent() {
 **Server Component:**
 
 ```tsx shouldWrap
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function MyProtectedServerComponent() {
   await stackServerApp.getUser({ or: 'redirect' });

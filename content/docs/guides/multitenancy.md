@@ -25,7 +25,7 @@ To better situate our use case, let's briefly outline the differences between th
 
 ![Database-per-user](/docs/use-cases/database_per_user.png)
 
-In a database-per-user design, each user's data is fully isolated in its own database, eliminating any risk of data overlap. This setup is straightforward to design and highly secure. However, implementing this in managed Postgres databases has traditionally been challenging. For users of AWS RDS, Amazon Aurora, or similar services, two primary options have existed for achieving a database-per-user design:
+In a database-per-user design, each user's data is fully isolated in its own database, eliminating any risk of data overlap. This setup is straightforward to design and highly secure. However, implementing this in managed Postgres databases has traditionally been challenging. For users of AWS RDS or similar services, two primary options have existed for achieving a database-per-user design:
 
 1. **Using one large instance to host multiple user databases.** This option can be tempting due to the reduced number of instances to manage and (probably) lower infrastructure costs. But the trade-off is a higher demand for DBA expertise—this is a design that requires careful planning, especially at scale. Hosting all users on shared resources can impact performance, particularly if users have varying workload patterns, and if the instance fails, all customers are affected. Migrations and upgrades also become complex.
 
@@ -96,7 +96,7 @@ As you scale, following a project-per-user design means eventually managing thou
 
 In Neon, [database branching](/docs/introduction/branching) is a powerful feature that enables you to create fast, isolated copies of your data for development and testing. You can use child branches as ephemeral environments that mirror your main testing database but operate independently, without adding to storage costs. This feature is a game-changer for dev/test workflows, as it reduces the complexity of managing multiple test databases while lowering non-prod costs significantly.
 
-To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS/Aurora.
+To handle [dev/test](/use-cases/dev-test) in a project-per-user design, consider creating a dedicated Neon project as your non-prod environment. This Neon project can serve as a substitute for the numerous non-prod instances you might maintain in RDS.
 
 The methodology:
 

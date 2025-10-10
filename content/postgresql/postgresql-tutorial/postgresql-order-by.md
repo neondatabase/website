@@ -145,7 +145,7 @@ When you sort rows that contain `NULL`, you can specify the order of `NULL` with
 ORDER BY sort_expresssion [ASC | DESC] [NULLS FIRST | NULLS LAST]
 ```
 
-The `NULLS FIRST` option places `NULL` before other non\-null values and the `NULL LAST` option places `NULL` after other non\-null values.
+The `NULLS FIRST` option places `NULL` before other non\-null values and the `NULLS LAST` option places `NULL` after other non\-null values.
 
 Let’s [create a table](postgresql-create-table) for the demonstration.
 

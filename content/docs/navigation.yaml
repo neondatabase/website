@@ -47,8 +47,6 @@
               slug: guides/logical-replication-rds-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: Azure
               slug: import/migrate-from-azure-postgres
             - title: Cloud SQL
@@ -82,8 +80,6 @@
               slug: guides/logical-replication-supabase-to-neon
             - title: RDS
               slug: guides/logical-replication-rds-to-neon
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Azure
@@ -332,6 +328,8 @@
               slug: guides/ruby-on-rails
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: TypeORM
+              slug: guides/typeorm
     - section: Backend
       items:
         - title: Data API
@@ -344,6 +342,8 @@
               slug: data-api/demo
             - title: Secure your app with RLS
               slug: guides/rls-tutorial
+            - title: SQL to PostgREST Converter
+              slug: data-api/sql-to-rest
 
         - title: Neon Auth
           icon: auth
@@ -397,7 +397,7 @@
                   slug: neon-auth/create-users
                 - title: Claiming a Project
                   slug: neon-auth/claim-project
-                - title: Permissions
+                - title: Permsissions
                   slug: neon-auth/permissions-roles
                 - title: Email configuration
                   slug: neon-auth/email-configuration
@@ -615,15 +615,15 @@
               icon: frameworks
               items:
                 - title: AgentStack
-                  slug: /guides/agentstack-neon
+                  slug: https://neon.com/guides/agentstack-neon
                 - title: AutoGen
-                  slug: /guides/autogen-neon
+                  slug: https://neon.com/guides/autogen-neon
                 - title: Azure AI Agent Service
-                  slug: /guides/azure-ai-agent-service
+                  slug: https://neon.com/guides/azure-ai-agent-service
                 - title: Composio + CrewAI
-                  slug: /guides/composio-crewai-neon
+                  slug: https://neon.com/guides/composio-crewai-neon
                 - title: LangGraph
-                  slug: /guides/langgraph-neon
+                  slug: https://neon.com/guides/langgraph-neon
 
         - title: AI App Starter Kit
           icon: sparks
@@ -665,10 +665,8 @@
             - section: API
               icon: api
               items:
-                - title: Overview
+                - title: Neon API
                   slug: reference/api-reference
-                - title: Reference
-                  slug: https://api-docs.neon.tech/reference/getting-started-with-neon-api
             - section: CLI
               icon: cli
               items:
@@ -826,8 +824,6 @@
               items:
                 - title: AlloyDB
                   slug: guides/logical-replication-alloydb
-                - title: Aurora
-                  slug: guides/logical-replication-aurora-to-neon
                 - title: Replicate from Azure
                   slug: import/migrate-from-azure-postgres
                 - title: Cloud SQL
@@ -935,7 +931,7 @@
               slug: workflows/data-anonymization
 
         - title: Templates
-          slug: /templates
+          slug: https://neon.com/templates
           icon: template
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
@@ -1034,26 +1030,18 @@
               slug: introduction/monitor-active-queries
             - title: Query history
               slug: introduction/monitor-query-history
-            - title: Datadog
-              slug: guides/datadog
-            - title: OpenTelemetry
+            - title: External monitoring
               items:
-                - title: OTel integration
-                  slug: guides/opentelemetry
+                - title: Datadog
+                  slug: guides/datadog
                 - title: Grafana Cloud
                   slug: guides/grafana-cloud
-                - title: Better Stack
-                  slug: https://neon.com/guides/betterstack-otel-neon
-                - title: New Relic
-                  slug: https://neon.com/guides/newrelic-otel-neon
+                - title: OpenTelemetry
+                  slug: guides/opentelemetry
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
-            - title: Other monitoring tools
-              items:
-                - title: pgAdmin
-                  slug: introduction/monitor-pgadmin
-                - title: PgHero
-                  slug: introduction/monitor-pghero
+                - title: Other monitoring tools
+                  slug: introduction/monitor-external-tools
 
         - section: Operations & maintenance
           icon: settings
@@ -1103,6 +1091,8 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Cost optimization
+          slug: introduction/cost-optimization
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
@@ -1389,7 +1379,7 @@
       slug: postgresql/postgres-upgrade
       icon: upgrade
     - title: PostgreSQL Tutorial
-      slug: /postgresql/tutorial
+      slug: https://neon.com/postgresql/tutorial
       icon: book
 
 - nav: Resources

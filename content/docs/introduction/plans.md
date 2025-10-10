@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-09-30T15:57:36.068Z'
+updatedOn: '2025-10-08T21:15:17.490Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -54,11 +54,15 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                                |
-| [Support](#support)                                   | Community                      | Billing                              | Standard                                                                                          |
+| [Support](#support)                                   | Community                      | Standard (billing issues only)       | Standard, Business, or Production                                                                 |
 
 ## Plan features
 
 This section describes the features listed in the [Plan overview](#plan-overview) table.
+
+<Admonition type="tip" title="Optimize your costs">
+Learn how to manage your Neon costs effectively with our [cost optimization guide](/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
+</Admonition>
 
 ### ☑ Price
 
@@ -199,9 +203,19 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
 - **[Child branches](/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
 
-When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-Storage on child branches never decreases — it grows as changes accumulate.
+**Storage on child branches never decreases — it grows as data changes accumulate over time.**
+
+<Admonition type="important" title="Manage child branches to control storage costs">
+
+Because data changes on child branches accumulate over time and never decrease, unmanaged child branches can lead to high storage usage and unexpected bills. To keep costs under control:
+
+- Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
+- Delete child branches when they're no longer needed
+- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on your actual data size, not data changes over time.
+
+</Admonition>
 
 > **Free** plan users get 0.5 GB of storage per project
 
@@ -242,7 +256,7 @@ Neon stores a change history to support instant restore.
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-You can increase or decrease your [restore window](#-restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
+You can change your [restore window](#restore-window) to control how much change history you retain. See [Instant restore](/docs/introduction/branch-restore) for details.
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
@@ -256,7 +270,9 @@ The maximum restore window per plan:
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-The restore window is configurable. Shortening it can reduce [instant restore](#-instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+> The restore window is set to the maximum value by default.
+
+The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
 ### ☑ Private network transfer
 
@@ -293,8 +309,8 @@ Guaranteed service availability is offered on the **Scale** plan. Contact [Sales
 Support level by plan:
 
 - **Free**: Community support
-- **Launch**: Billing support
-- **Scale**: Standard support
+- **Launch**: Standard support (billing issues only)
+- **Scale**: Standard support, with Business or Production support plans available for an additional fee
 
 See [Support](/docs/introduction/support) for details.
 
@@ -460,7 +476,8 @@ How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  
  • Enable scale-to-zero for idle databases.  
  • Delete unused branches to reduce storage costs.  
- • Shorten your restore window to reduce instant restore storage.
+ • Shorten your restore window to reduce instant restore storage.  
+ For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
 
 Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)

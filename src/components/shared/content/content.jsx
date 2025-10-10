@@ -46,6 +46,7 @@ import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
+import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -171,6 +172,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  SqlToRestConverter,
   ...sharedComponents,
 });
 

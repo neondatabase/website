@@ -454,7 +454,7 @@ const ICONS_CONFIG = {
   typeorm: {
     name: 'typeorm',
     lightIconPath: '/images/technology-logos/typeorm.svg',
-    darkIconPath: '/images/technology-logos/typeorm-dark.svg',
+    darkIconPath: null,
   },
   uploadcare: {
     name: 'uploadcare',

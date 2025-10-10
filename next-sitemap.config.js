@@ -17,7 +17,6 @@ module.exports = {
     '/fireship',
     '/radio',
     '/thank-you',
-    '/docs/postgres*',
     '/blog-sitemap.xml',
     '/blog/*',
     '/guides/rss.xml',

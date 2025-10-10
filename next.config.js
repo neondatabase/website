@@ -424,14 +424,6 @@ const defaultConfig = {
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
       },
       {
-        source: '/demos/instant-postgres',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
-      },
-      {
-        source: '/demos/instant-postgres/:path*',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
-      },
-      {
         source: '/developer-days/:path*',
         destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
       },
@@ -513,6 +505,25 @@ const defaultConfig = {
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
+
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      module: false,
+      path: false,
+      crypto: false,
+      stream: false,
+      assert: false,
+      http: false,
+      https: false,
+      os: false,
+      url: false,
+    };
+
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true,
+    };
 
     return config;
   },

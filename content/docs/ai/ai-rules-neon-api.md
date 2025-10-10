@@ -3,7 +3,7 @@ title: 'AI Rules: Neon API'
 subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon
   projects, branches, databases, and other resources.
 enableTableOfContents: true
-updatedOn: '2025-09-26T12:18:57.147Z'
+updatedOn: '2025-10-08T14:55:26.721Z'
 ---
 
 <InfoBlock>
@@ -38,7 +38,7 @@ Once added to your project, AI tools will automatically use these rules when wor
 
 Save the following content to a file named `neon-api-guidelines.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to understand how to interact with the Neon API, including authentication, rate limiting, and best practices.
 alwaysApply: false
@@ -117,7 +117,7 @@ When performing actions via the API, you must select the correct type of API key
 
 Save the following content to a file named `neon-api-keys.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to manage Neon API keys programmatically, including creating, listing, and revoking keys.
 alwaysApply: false
@@ -221,7 +221,7 @@ Example response:
 
 Save the following content to a file named `neon-api-operations.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to manage and monitor long-running operations in Neon, such as branch creation and compute management.
 alwaysApply: false
@@ -379,7 +379,7 @@ Example response:
 
 Save the following content to a file named `neon-api-projects.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to manage Neon projects programmatically, including creating, listing, updating, and deleting projects.
 alwaysApply: false
@@ -967,7 +967,7 @@ Example response:
 
 Save the following content to a file named `neon-api-branches.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: This section provides detailed rules for managing branches within a Neon project.
 alwaysApply: false
@@ -1964,7 +1964,7 @@ Example Response:
 
 Save the following content to a file named `neon-api-endpoints.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 description: Use these rules to manage compute endpoints associated with branches in a project.
 alwaysApply: false
@@ -2533,7 +2533,7 @@ Example Response:
 
 Save the following content to a file named `neon-api-organizations.mdc` in your AI tool's rules directory.
 
-````markdown shouldWrap
+````markdown
 ---
 title: Use these rules to manage organizations, their members, invitations, and organization API keys.
 alwaysApply: false
