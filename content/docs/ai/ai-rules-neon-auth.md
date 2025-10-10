@@ -3,7 +3,7 @@ title: 'AI Rules: Neon Auth'
 subtitle: Context rules for AI tools to help implement authentication with Stack Auth
   and Neon databases
 enableTableOfContents: true
-updatedOn: '2025-04-23T16:22:55.904Z'
+updatedOn: '2025-10-10T13:19:39.261Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

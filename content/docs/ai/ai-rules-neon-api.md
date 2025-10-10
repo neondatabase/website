@@ -3,7 +3,7 @@ title: 'AI Rules: Neon API'
 subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon
   projects, branches, databases, and other resources.
 enableTableOfContents: true
-updatedOn: '2025-10-08T14:55:26.721Z'
+updatedOn: '2025-10-10T13:19:39.260Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

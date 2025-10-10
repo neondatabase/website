@@ -2,7 +2,7 @@
 title: AI Rules Neon Serverless Driver
 subtitle: Context rules for AI tools to help implement the Neon Serverless driver
 enableTableOfContents: true
-updatedOn: '2025-09-30T10:20:37.337Z'
+updatedOn: '2025-10-10T13:19:39.263Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

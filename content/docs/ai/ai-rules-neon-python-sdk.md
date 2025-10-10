@@ -2,7 +2,7 @@
 title: 'AI Rules: Neon Python SDK'
 subtitle: Context rules for AI tools to use the Neon Python SDK
 enableTableOfContents: true
-updatedOn: '2025-09-17T00:00:00.000Z'
+updatedOn: '2025-10-10T13:19:39.262Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

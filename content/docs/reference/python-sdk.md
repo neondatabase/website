@@ -1,7 +1,7 @@
 ---
 title: Python SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.079Z'
+updatedOn: '2025-10-10T13:19:39.267Z'
 ---
 
 <InfoBlock>
