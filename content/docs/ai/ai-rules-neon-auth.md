@@ -6,6 +6,10 @@ enableTableOfContents: true
 updatedOn: '2025-04-23T16:22:55.904Z'
 ---
 
+<Admonition type="note" title="AI Rules are in Beta">
+AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
+</Admonition>
+
 <InfoBlock>
 
 <DocsList title="Related docs" theme="docs">
@@ -25,5 +29,4 @@ updatedOn: '2025-04-23T16:22:55.904Z'
 <ExternalCode
   url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
   language="md"
-  shouldWrap
 />
