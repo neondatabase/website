@@ -6,30 +6,49 @@ describe('Contact Form', () => {
   it('allows users to contact sales', () => {
     cy.formSuccessSubmit();
 
-    cy.get("input[name='name']").type('Autotest');
-    cy.get("input[name='email']").type('info@example.com');
+    cy.get("input[name='firstname']").type('John');
+    cy.get("input[name='lastname']").type('Doe');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
+    cy.get("select[name='companySize']").select('0_1');
+    cy.get("select[name='reasonForContact']").select('Demo/POC');
     cy.get("textarea[name='message']").type('This is a test message');
     cy.get('form').submit();
 
-    cy.wait('@formSuccessSubmit');
-    cy.getByData('success-message').should('exist');
+    cy.get('button').should('contain', 'Sent!');
   });
 
-  it('displays an error message when the form is submitted with no required fields filled in', () => {
-    cy.get("input[name='name']").type('Autotest');
+  it('displays validation errors when form is submitted empty', () => {
+    cy.get("input[name='firstname']").type('John');
     cy.get('form').submit();
+
+    cy.getByData('error-field-message').should('have.length', 5);
     cy.getByData('error-field-message').should('exist').contains('a required field');
+  });
+
+  it('displays validation error for invalid email format', () => {
+    cy.get("input[name='firstname']").type('John');
+    cy.get("input[name='lastname']").type('Doe');
+    cy.get("input[name='email']").type('invalid-email');
+    cy.get("select[name='companySize']").select('0_1');
+    cy.get("select[name='reasonForContact']").select('Demo/POC');
+    cy.get("textarea[name='message']").type('This is a test message');
+    cy.get('form').submit();
+
+    cy.getByData('error-field-message').should('contain', 'Please enter a valid email');
   });
 
   it('displays an error message when there is server error', () => {
     cy.formErrorSubmit();
 
-    cy.get("input[name='name']").type('Autotest');
-    cy.get("input[name='email']").type('info@example.com');
+    cy.get("input[name='firstname']").type('John');
+    cy.get("input[name='lastname']").type('Doe');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
+    cy.get("select[name='companySize']").select('0_1');
+    cy.get("select[name='reasonForContact']").select('Demo/POC');
     cy.get("textarea[name='message']").type('This is a test message');
     cy.get('form').submit();
 
     cy.wait('@formErrorSubmit');
-    cy.getByData('error-message').should('exist').contains('Something went wrong');
+    cy.getByData('error-message').should('exist').contains('technical problem');
   });
 });
