@@ -220,7 +220,7 @@ It is sometimes necessary to restart a compute. Reasons for restarting a compute
 
 - Activating new limits after upgrading to a paid plan
 - Getting the latest compute-related updates, which Neon typically releases weekly
-- Accessing up a recently released Postgres extension or extension version
+- Accessing a recently released Postgres extension or extension version
 - Resolving performance issues or unexpected behavior
 
 Restarting ensures your compute is running with the latest configurations and improvements.
