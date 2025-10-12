@@ -55,7 +55,7 @@ venv/bin/pip install "psycopg[binary]" python-dotenv
     PGPORT=5432
     ```
 
-3.  Direct the user to find these values in the **Neon Console → Project → Connection Details**.
+3.  Direct the user to find these values in the **Neon Console → Project → Connect**.
 
 ---
 

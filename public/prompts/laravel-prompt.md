@@ -41,7 +41,7 @@ When this prompt is triggered, automatically configure the open Laravel project 
     DB_PASSWORD="your_neon_password"
     ```
 
-3.  Direct the user to find these values in the **Neon Console → Project → Connection Details**.
+3.  Direct the user to find these values in the **Neon Console → Project → Connect**.
 
 ---
 
