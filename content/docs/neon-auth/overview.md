@@ -3,12 +3,16 @@ title: Neon Auth
 subtitle: 'Authentication, user management, and real-time Postgres sync'
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-08-13T12:15:08.975Z'
+updatedOn: '2025-10-10T13:19:39.265Z'
 ---
 
 Neon Auth brings authentication and user management natively to your Neon Postgres database.
 
 <FeatureBetaProps feature_name="Neon Auth" />
+
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for Neon Auth](/docs/ai/ai-rules-neon-auth) to help your AI assistant generate better code for implementing authentication with Neon.
+</Admonition>
 
 ## Why Neon Auth?
 

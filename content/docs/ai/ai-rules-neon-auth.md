@@ -3,8 +3,12 @@ title: 'AI Rules: Neon Auth'
 subtitle: Context rules for AI tools to help implement authentication with Stack Auth
   and Neon databases
 enableTableOfContents: true
-updatedOn: '2025-04-23T16:22:55.904Z'
+updatedOn: '2025-10-10T13:19:39.261Z'
 ---
+
+<Admonition type="note" title="AI Rules are in Beta">
+AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
+</Admonition>
 
 <InfoBlock>
 
@@ -25,5 +29,4 @@ updatedOn: '2025-04-23T16:22:55.904Z'
 <ExternalCode
   url="https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/neon-auth.mdc"
   language="md"
-  shouldWrap
 />

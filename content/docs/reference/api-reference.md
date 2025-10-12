@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2025-07-31T00:01:54.390Z'
+updatedOn: '2025-10-10T13:19:39.266Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
@@ -12,6 +12,10 @@ The Neon API allows you to manage your Neon projects programmatically.
 Refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for supported methods.
 
 The Neon API is a REST API. It provides resource-oriented URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and supports standard HTTP response codes, authentication, and verbs.
+
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for the Neon API](/docs/ai/ai-rules-neon-api) to help your AI assistant understand authentication, rate limiting, and best practices when working with the Neon API.
+</Admonition>
 
 ## Authentication
 

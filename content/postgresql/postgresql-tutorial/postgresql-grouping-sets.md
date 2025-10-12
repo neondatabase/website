@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/PostgreSQL-Grouping-Sets-GROUPING-function-1.png'
 updatedOn: '2024-07-01T01:00:43+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXCEPT'
-  slug: 'postgresql-tutorial/postgresql-except'
+  title: 'PostgreSQL HAVING'
+  slug: 'postgresql-tutorial/postgresql-having'
 nextLink:
-  title: 'PostgreSQL ROLLUP'
-  slug: 'postgresql-tutorial/postgresql-rollup'
+  title: 'PostgreSQL CUBE'
+  slug: 'postgresql-tutorial/postgresql-cube'
 ---
 
 **Summary**: in this tutorial, you will learn about grouping sets and how to use the PostgreSQL `GROUPING SETS` clause to generate multiple grouping sets in a query.

@@ -2,7 +2,7 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.898Z'
+updatedOn: '2025-10-10T13:19:39.264Z'
 ---
 
 <InfoBlock>
@@ -26,6 +26,10 @@ Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way 
 
 - [Connect to Neon from Drizzle](#connect-to-neon-from-drizzle)
 - [Use the Neon serverless driver with Drizzle](#use-the-neon-serverless-driver-with-drizzle)
+
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for Drizzle ORM with Neon](/docs/ai/ai-rules-neon-drizzle) to help your AI assistant generate better code when using Drizzle with your Neon database.
+</Admonition>
 
 ## Connect to Neon from Drizzle
 

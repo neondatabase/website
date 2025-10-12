@@ -328,6 +328,8 @@
               slug: guides/ruby-on-rails
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: TypeORM
+              slug: guides/typeorm
     - section: Backend
       items:
         - title: Data API
@@ -590,6 +592,10 @@
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+                - title: Neon TypeScript SDK
+                  slug: ai/ai-rules-neon-typescript-sdk
+                - title: Neon Python SDK
+                  slug: ai/ai-rules-neon-python-sdk
                 - title: Neon API
                   slug: ai/ai-rules-neon-api
                 - title: Neon Toolkit
@@ -1085,6 +1091,8 @@
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Cost optimization
+          slug: introduction/cost-optimization
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace

@@ -4,7 +4,7 @@ subtitle: Use Terraform to provision and manage your Neon projects, branches, en
   roles, databases, and other resources as code.
 enableTableOfContents: true
 tag: community
-updatedOn: '2025-09-25T14:36:08.176Z'
+updatedOn: '2025-10-10T14:59:54.132Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
@@ -112,6 +112,14 @@ Now you can start defining Neon resources in your `main.tf` file.
 
 ### Managing projects
 
+<Admonition type="warning">
+Always set the `org_id` attribute when creating a `neon_project`. You can find your Organization ID in the Neon Console under Account Settings → Organization settings.
+
+![finding your organization ID from the settings page](/docs/manage/orgs_id.png)
+
+Omitting `orgId` can cause resources to be created in the wrong organization or produce duplicate projects, and subsequent `terraform plan` / `terraform apply` runs may attempt destructive changes (including deletions). To avoid this, explicitly provide `orgId` when defining your project as shown in the example below.
+</Admonition>
+
 A Neon project is the top-level container for your Postgres databases, branches, and endpoints.
 
 ```terraform
@@ -119,6 +127,9 @@ resource "neon_project" "my_app_project" {
   name       = "my-application-project"
   pg_version = 16
   region_id  = "aws-us-east-1"
+  org_id     = "your-neon-organization-id" # Replace with your actual Org ID
+  # free accounts have maximum retention window of 6 hours (21600 seconds)
+  history_retention_seconds = 21600
 
   # Configure default branch settings (optional)
   branch {
@@ -144,6 +155,8 @@ This configuration creates a new Neon project.
 - `pg_version`: (Optional) The major supported PostgreSQL version, such as 17.
 - `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
   > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
+- `org_id`: The Organization ID under which to create the project.
+- `history_retention_seconds`: (Optional) Duration in seconds to retain historical data for point-in-time recovery. Free plans have a maximum of 21600 seconds (6 hours). Default is 86400 seconds (24 hours) for paid plans.
 - `branch {}`: (Optional) Block to configure the default primary branch.
 
 **Output project details:**
