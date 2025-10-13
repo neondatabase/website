@@ -256,6 +256,9 @@ module.exports = {
           'linear-gradient(293deg, rgba(1, 119, 99, 0.00) 58.47%, rgba(1, 119, 99, 0.15) 118.39%),' +
           'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 47.96%, rgba(20, 24, 31, 0.00) 100%),' +
           'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'program-form-bg':
+          'radial-gradient(279.25% 154.72% at 23.51% -33.18%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 100%),' +
+          'linear-gradient(0deg, #020203, #020203)',
         // for deploy page
         'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
         'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',
