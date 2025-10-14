@@ -6,7 +6,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/data-recovery
   - /docs/guides/branching-data-recovery
-updatedOn: '2025-09-30T11:29:44.956Z'
+updatedOn: '2025-10-14T22:23:34.357Z'
 ---
 
 <Admonition type="comingSoon" title="New feature: Branch restore">
