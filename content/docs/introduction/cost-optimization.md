@@ -2,7 +2,7 @@
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
 enableTableOfContents: true
-updatedOn: '2025-10-08T19:31:56.543Z'
+updatedOn: '2025-10-15T20:49:51.711Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
