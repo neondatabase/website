@@ -6,7 +6,7 @@ updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
-<ProgramForm type="agent" focus={true} />
+<ProgramForm type="agent" />
 
 If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
