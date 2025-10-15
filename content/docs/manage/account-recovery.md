@@ -1,8 +1,8 @@
 ---
-title: Account Recovery
-subtitle: How to recvoer a lost account
+title: Account recovery
+subtitle: Learn how to recover a lost Neon account
 enableTableOfContents: true
-updatedOn: '2025-06-05T19:57:28.187Z'
+updatedOn: '2025-10-09T18:29:43.721Z'
 ---
 
 If a former employee owned a Neon account and didn’t shut it down or transfer access before leaving, you can follow the steps outlined below to recover the account.

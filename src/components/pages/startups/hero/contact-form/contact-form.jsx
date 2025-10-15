@@ -6,16 +6,15 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
-import useLocation from 'react-use/lib/useLocation';
 import * as yup from 'yup';
 
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { FORM_STATES, HUBSPOT_STARTUPS_FORM_ID } from 'constants/forms';
+import { FORM_STATES } from 'constants/forms';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
-import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
+import { doNowOrAfterSomeTime } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const ErrorMessage = ({ onClose }) => (
@@ -67,14 +66,7 @@ const labelClassName = 'text-sm text-gray-new-90';
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
-  const [hubspotutk] = useCookie('hubspotutk');
   const [ajsAnonymousId] = useCookie('ajs_anonymous_id');
-  const { href } = useLocation();
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
-  };
 
   const {
     register,
@@ -100,63 +92,27 @@ const ContactForm = () => {
     e.preventDefault();
     const { firstname, lastname, email, companyWebsite, investor } = data;
     const loadingAnimationStartedTime = Date.now();
-    const values = [
-      {
-        name: 'firstname',
-        value: firstname,
-      },
-      {
-        name: 'lastname',
-        value: lastname,
-      },
-      {
-        name: 'email',
-        value: email,
-      },
-      {
-        name: 'company_website',
-        value: companyWebsite,
-      },
-      {
-        name: 'accelerator_private_investor',
-        value: investor,
-      },
-    ];
     setIsBroken(false);
     setFormState(FORM_STATES.LOADING);
 
     try {
-      const response = await sendHubspotFormData({
-        formId: HUBSPOT_STARTUPS_FORM_ID,
-        context,
-        values,
-      });
-
-      if (response.ok) {
-        const eventName = 'Startup Form Submitted';
-        const eventProps = {
-          email,
-          first_name: firstname,
-          last_name: lastname,
-          company_website: companyWebsite,
-          investor,
-        };
-        try {
-          if (window.zaraz && email) {
-            await sendGtagEvent('identify', { email });
-            await sendGtagEvent(eventName, eventProps);
-          }
-        } catch (error) {
-          console.warn('Error submitting the form');
-        }
-        doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.SUCCESS);
-          reset();
-          setIsBroken(false);
-        }, loadingAnimationStartedTime);
-      } else {
-        throw new Error('Something went wrong. Please reload the page and try again.');
+      const eventName = 'Startup Form Submitted';
+      const eventProps = {
+        email,
+        first_name: firstname,
+        last_name: lastname,
+        company_website: companyWebsite,
+        investor,
+      };
+      if (window.zaraz && email) {
+        await sendGtagEvent('identify', { email });
+        await sendGtagEvent(eventName, eventProps);
       }
+      doNowOrAfterSomeTime(() => {
+        setFormState(FORM_STATES.SUCCESS);
+        reset();
+        setIsBroken(false);
+      }, loadingAnimationStartedTime);
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {

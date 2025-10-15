@@ -99,9 +99,9 @@ Now, you will integrate Neon Auth into your Next.js application.
 
     npm warn ERESOLVE overriding peer dependency
 
-    added 194 packages, and audited 531 packages in 60s
+    added 272 packages, and audited 604 packages in 9s
 
-    166 packages are looking for funding
+    164 packages are looking for funding
       run `npm fund` for details
 
     2 low severity vulnerabilities
@@ -124,7 +124,8 @@ Now, you will integrate Neon Auth into your Next.js application.
     Files written:
       app/layout.tsx
       .env.local
-      stack.tsx
+      stack/client.tsx
+      stack/server.tsx
       app/handler/[...stack]/page.tsx
       app/loading.tsx
 
@@ -328,7 +329,7 @@ You will create a simple user interface for your todo app using React components
 
     ```tsx
     import { addTodo, toggleTodo, deleteTodo } from '@/app/actions/todoActions';
-    import { stackServerApp } from '@/stack';
+    import { stackServerApp } from '@/stack/server';
     import { revalidatePath } from 'next/cache';
 
     type Todo = {
@@ -428,7 +429,7 @@ You will create a simple user interface for your todo app using React components
 
     ```tsx
     import { getTodos } from '@/app/actions/todoActions';
-    import { stackServerApp } from '@/stack';
+    import { stackServerApp } from '@/stack/server';
     import { Header } from './header';
     import { TodoForm, TodoList } from './todos';
 
@@ -457,7 +458,7 @@ Create a new file `app/actions/todoActions.ts`:
 
 import { db } from '@/app/db';
 import { todos } from '@/app/db/schema';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 import { eq, desc, and } from 'drizzle-orm';
 
 export async function addTodo(task: string) {

@@ -23,4 +23,6 @@ updatedOn: '2025-08-02T10:33:29.255Z'
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
+<a href="/docs/guides/typeorm" title="TypeORM" description="Connect a TypeORM application to Neon" icon="typeorm"></a>
+
 </TechCards>

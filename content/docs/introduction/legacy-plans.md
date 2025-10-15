@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-09-15T13:43:18.947Z'
+updatedOn: '2025-10-08T14:55:26.725Z'
 ---
 
 This page describes Neon’s **legacy plans**. These plans are no longer offered to new signups, except through Vercel and Azure Marketplace.
@@ -198,7 +198,7 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 - Custom domain proxy
 - Security reviews and compliance questionnaires
 - Invoice billing and annual commitments
-- [Enterprise support](/docs/introduction/support)
+- [Enterprise support](/docs/introduction/support#enterprise-support)
 
 To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) or [request a trial](https://neon.tech/enterprise#request-trial).
 

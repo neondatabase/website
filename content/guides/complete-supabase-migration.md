@@ -576,7 +576,7 @@ export default async function PrivatePage() {
 // File: app/protected/page.tsx (Neon Auth)
 
 import { redirect } from 'next/navigation'
-import { stackServerApp } from "@/stack";
+import { stackServerApp } from '@/stack/server';
 
 export default async function PrivatePage() {
     const user = await stackServerApp.getUser();

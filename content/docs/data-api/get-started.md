@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-09-19T19:36:07.674Z'
+updatedOn: '2025-09-25T14:36:08.170Z'
 tag: beta
 ---
 
@@ -26,10 +26,8 @@ The Neon Data API offers a ready-to-use REST API for your Neon database that's c
 const { data } = await client.from('posts').select('*');
 ```
 
-<Admonition type="info" title="About RLS and Neon RLS">
+<Admonition type="info" title="About RLS">
 When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
-
-You might notice another feature in Neon called **Neon RLS**. Please be aware that it's a different method for client-side querying and **is not compatible with the Data API**. We recommend using the Data API for client-side querying as it provides a more secure and controlled way to access your data through predefined REST endpoints.
 </Admonition>
 
 <Steps>

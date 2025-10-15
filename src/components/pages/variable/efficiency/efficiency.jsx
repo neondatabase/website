@@ -21,7 +21,7 @@ const items = [
   },
   {
     icon: resizeIcon,
-    text: 'Autoscaling is nearly instantaneous, without downtime. Read about <a href="/docs/guides/autoscaling-algorithm">our autoscaling algorithm</a> and <a href="/blog/postgres-autoscaling-aurora-serverless-v2-vs-neon">how it compares to Aurora’s</a>.',
+    text: 'Autoscaling is nearly instantaneous, without downtime. Read about <a href="/docs/guides/autoscaling-algorithm">our autoscaling algorithm</a> and how it compares to other serverless databases.',
   },
 ];
 
