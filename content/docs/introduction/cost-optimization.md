@@ -42,7 +42,7 @@ Instant restore storage is based on the amount of change history (WAL records) r
 
 **Optimization strategies:**
 
-- **Adjust your restore window** — By default, Neon retains history up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need this much recovery capability, reduce your restore window to lower costs. Find the right balance between restore capability and cost. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+- **Adjust your restore window** — By default, Neon retains history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, you can reduce your restore window to lower costs. Find the right balance between restore capability and cost. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
 - **Understand the trade-offs** — Reducing your restore window decreases instant restore storage costs but limits how far back you can restore data. Consider your actual recovery requirements and set the window accordingly.
 

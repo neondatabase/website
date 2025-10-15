@@ -270,7 +270,7 @@ The maximum restore window per plan:
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-> The restore window is set to the maximum value by default.
+> The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
 The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
