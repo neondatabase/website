@@ -17,7 +17,8 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 ]} />
 
 ## A Backend That Aligns With How Agents Work
-### Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users. 80% of Neon databases are deployed by agents. 
+
+### Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users. 80% of Neon databases are deployed by agents.
 
 **Serverless Postgres at the core.**
 Neon’s backend is powered by a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
@@ -38,6 +39,7 @@ Neon’s copy-on-write storage makes time travel effortless. Branching, snapshot
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
 ## With a Pricing Plan Designed For Agent Platforms
+
 ### We’ve supported codegen platforms since the beginning and we know what it takes to scale them. The Agent Plan gives you everything you need, from early launch to millions of active databases.
 
 |                                 | Agent Plan                                                                                            |
@@ -60,6 +62,7 @@ Neon’s copy-on-write storage makes time travel effortless. Branching, snapshot
 <ProgramForm type="agent" />
 
 ## The Neon Stack For Agents: What You Get
+
 - **Serverless Postgres with separated storage and compute.** The foundation of Neon: production-grade Postgres that’s scalable, reliable, and cloud-native.
 - **Instant autoscaling for truly no-management databases.** Neon adjusts compute automatically so agents never run out of capacity.
 - **Scale to zero for built-in cost control.** Idle projects cost nothing, making it sustainable to support large fleets.
@@ -69,7 +72,7 @@ Neon’s copy-on-write storage makes time travel effortless. Branching, snapshot
 - **Auth with RLS compatibility and simple, secure defaults.** Authentication built in, with support for row-level security and common auth flows.
 - **Data API to expose queries directly per environment.** Every branch and project comes with its own RESTful endpoint.
 - **Usage-based pricing plans specific for agents.** Pay only for what you use, with generous limits that scale with your platform’s growth.
-  
+
 ## How It Looks Like in Practice: The Experience
 
 <FeatureList icons={['agent', 'speedometer', 'branching', 'database', 'lock', 'scale', 'api']}>
@@ -104,9 +107,9 @@ The most-loved database by developers is also the most practical choice for agen
 
 </FeatureList>
 
-## Make it Happen: Documentation & Case Studies to Get Started 
+## Make it Happen: Documentation & Case Studies to Get Started
 
-To get inspired, explore how others are building and scaling their agents on top of Neon: 
+To get inspired, explore how others are building and scaling their agents on top of Neon:
 [Replit](https://neon.com/blog/replit-app-history-powered-by-neon-branches)
 [Retool](https://neon.com/blog/retool-becomes-the-platform-for-enterprise-appgen)
 [Anything](https://neon.com/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
@@ -114,7 +117,6 @@ To get inspired, explore how others are building and scaling their agents on top
 [Vapi](https://neon.com/blog/vapi-voice-agents-neon)
 [Dyad](https://neon.com/blog/dyad-brings-postgres-to-local-ai-app-building-powered-by-neon)
 [xpander.ai](https://neon.com/blog/xpander-ai-agents-slack-neon-backend)
-
 
 For instructions on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro). Don't hesitate to [contact us](https://neon.com/contact-sales) as well.
 
