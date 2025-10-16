@@ -110,6 +110,7 @@ The most-loved database by developers is also the most practical choice for agen
 ## Make it Happen: Documentation & Case Studies to Get Started
 
 To get inspired, explore how others are building and scaling their agents on top of Neon:
+
 - [Replit](https://neon.com/blog/replit-app-history-powered-by-neon-branches)
 - [Retool](https://neon.com/blog/retool-becomes-the-platform-for-enterprise-appgen)
 - [Anything](https://neon.com/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
