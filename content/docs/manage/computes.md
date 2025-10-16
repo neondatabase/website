@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-09-05T12:26:43.313Z'
+updatedOn: '2025-10-11T10:04:53.623Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -218,9 +218,9 @@ If you disable scale to zero, you may need to restart your compute manually to g
 
 It is sometimes necessary to restart a compute. Reasons for restarting a compute might include:
 
-- Applying upgraded limits after upgrading to a paid plan
-- Picking up the latest compute-related updates, which Neon typically releases weekly
-- Picking up a new Postgres extension or extension version released by Neon
+- Activating new limits after upgrading to a paid plan
+- Getting the latest compute-related updates, which Neon typically releases weekly
+- Accessing a recently released Postgres extension or extension version
 - Resolving performance issues or unexpected behavior
 
 Restarting ensures your compute is running with the latest configurations and improvements.
@@ -229,8 +229,10 @@ Restarting ensures your compute is running with the latest configurations and im
 Restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 </Admonition>
 
-You can restart a compute using one of the following methods:
+You can restart a compute using these methods:
 
+- Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
+  ![Restart a compute in the console](/docs/manage/restart_compute.png)
 - Issue a [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](/docs/reference/glossary#project-id), compute [endpoint ID](/docs/reference/glossary#endpoint-id), and an [API key](/docs/manage/api-keys#create-an-api-key).
 
   ```bash

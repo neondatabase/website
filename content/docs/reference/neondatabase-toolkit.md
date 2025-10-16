@@ -3,7 +3,7 @@ title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
 enableTableOfContents: true
-updatedOn: '2025-10-01T10:10:07.455Z'
+updatedOn: '2025-10-10T13:19:39.266Z'
 ---
 
 <InfoBlock>
@@ -39,6 +39,10 @@ The primary goal of the toolkit is to abstract away the multi-step process of cr
 
 <Admonition type="note">
 This is an experimental feature and is subject to change.
+</Admonition>
+
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for the @neondatabase/toolkit](/docs/ai/ai-rules-neon-toolkit) to help your AI assistant create, query, and destroy ephemeral Neon Postgres databases.
 </Admonition>
 
 ## Getting started

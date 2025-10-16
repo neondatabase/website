@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-10-01T10:10:07.451Z'
+updatedOn: '2025-10-10T13:19:39.257Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -21,11 +21,13 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 Accelerate your development with context rules that help AI tools write better code for Neon's features.
 
 <DetailIconCards>
-<a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth Rules</a>
-<a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle Rules</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Rules</a>
-<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API Rules</a>
-<a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the @neondatabase/toolkit to quickly spin up Postgres databases and run SQL queries" icon="github">Neon Toolkit Rules</a>
+<a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth</a>
+<a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle</a>
+<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Driver</a>
+<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="github">Neon TypeScript SDK</a>
+<a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK</a>
+<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API</a>
+<a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the Neon Toolkit" icon="github">Neon Toolkit</a>
 </DetailIconCards>
 
 ## Build AI agents
