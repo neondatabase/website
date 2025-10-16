@@ -43,8 +43,6 @@ const fieldProps = {
 
 const ProgramForm = ({ type }) => {
   const { title, description, placeholder, buttonText } = DATA[type];
-
-  // TEST: Temporarily set to true to test recognized user flow
   const isRecognized = !!getCookie('ajs_user_id');
   const [useCustomEmail, setUseCustomEmail] = useState(false);
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
@@ -175,7 +173,10 @@ const ProgramForm = ({ type }) => {
           </Button>
         </form>
       ) : (
-        <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
+        <div
+          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start"
+          data-test="success-message"
+        >
           <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
           <p className="text-[17px] font-light">
             We&apos;ve received your application and will be in touch soon.
