@@ -107,7 +107,7 @@ The most-loved database by developers is also the most practical choice for agen
 
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
-## Make it Happen: Documentation & Case Studies to Get Started
+## Documentation & Case Studies to Get Started
 
 To get inspired, explore how others are building and scaling their agents on top of Neon:
 
