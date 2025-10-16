@@ -1,12 +1,14 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: The battle-tested solution for codegen platforms that need backends.
+subtitle: The battle-tested solution for agents that need backends.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
 <ProgramForm type="agent" />
+
+<MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users." url="https://neon.com/case-studies" />
 
 <LogosSection containerClassName='py-3' logos={[
 'anything',
@@ -17,8 +19,6 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 ]} />
 
 ## A Backend That Aligns With How Agents Work
-
-### Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users. 80% of Neon databases are deployed by agents.
 
 **Serverless Postgres at the core.**
 Neon’s backend is powered by a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
@@ -40,7 +40,7 @@ Neon’s copy-on-write storage makes time travel effortless. Branching, snapshot
 
 ## With a Pricing Plan Designed For Agent Platforms
 
-### We’ve supported codegen platforms since the beginning and we know what it takes to scale them. The Agent Plan gives you everything you need, from early launch to millions of active databases.
+**We’ve supported codegen platforms since the beginning and we know what it takes to scale them.** The Agent Plan gives you everything you need, from early launch to millions of active databases.
 
 |                                 | Agent Plan                                                                                            |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
