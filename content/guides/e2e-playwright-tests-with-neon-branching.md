@@ -47,7 +47,7 @@ Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-pl
 1. Run the following commands to clone the repository and install dependencies:
 
    ```bash
-   git clone https://github.com/dhanushreddy291/neon-playwright-example
+   git clone https://github.com/neondatabase-labs/neon-playwright-example
    cd neon-playwright-example
    npm install
    cp .env.example .env
