@@ -1,24 +1,12 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: The battle-tested solution for agents that need backends.
+subtitle: The battle-tested solution for codegen platforms that need backends.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
 
 <ProgramForm type="agent" />
-
-If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
-
-<Admonition type="tip" title="LLM Credits">Qualified startups can get credits towards the latest OpenAI, Llama, Claude models through the Databricks Startup program. (Neon is a Databricks Company.)</Admonition>
-
-**Neon Features for Agents:**
-
-- **Instant Provisioning:** your users never wait for infrastructure.
-- **Snapshots:** let users toggle between checkpoints of code and state together.
-- **Low cost-per-Database:** automatic scale to zero and 350ms cold starts.
-- **Full-Stack, Batteries-Included:** Neon Auth, Data API included at no added charge.
-- **Granular API Controls:** Track and control usage for flexible limits and invoicing.
 
 <LogosSection containerClassName='py-3' logos={[
 'anything',
@@ -28,9 +16,29 @@ If you're building agents that generate apps from prompts, your users want to bu
 'databutton',
 ]} />
 
+## A Backend That Aligns With How Agents Work
+### Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users. 80% of Neon databases are deployed by agents. 
+
+**Serverless Postgres at the core.**
+Neon’s backend is powered by a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
+
+**Integrated services for full-stack backends.**
+Around that core, Neon includes Auth and a PostgREST-compatible Data API, so agents and developers can assemble complete, production-ready backends without stitching multiple services together.
+
+**API-first and programmable.**
+Every capability - provisioning, quotas, branching, and fleet management - is exposed through the Neon API, giving developers and agents precise control over their environments and usage at scale.
+
+**Version-aware by design.**
+Neon’s copy-on-write storage makes time travel effortless. Branching, snapshots, and point-in-time recovery enable undo, checkpoints, and safe experimentation across millions of databases.
+
+<QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
+
 <QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us. We can serve users iterating on quick ideas efficiently while also supporting them as they scale, without making them think about database setup." author="dhruv-amin" role="Co-founder at Anything" />
 
-## Agent Plan Pricing
+<QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
+
+## With a Pricing Plan Designed For Agent Platforms
+### We’ve supported codegen platforms since the beginning and we know what it takes to scale them. The Agent Plan gives you everything you need, from early launch to millions of active databases.
 
 |                                 | Agent Plan                                                                                            |
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -49,9 +57,20 @@ If you're building agents that generate apps from prompts, your users want to bu
 | **General Use Credits**         | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
 | **Co-Marketing**                | Blog and Social promotions, hackathons and more.                                                      |
 
-<QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
+<ProgramForm type="agent" />
 
-## How It Works
+## The Neon Stack For Agents: What You Get
+- **Serverless Postgres with separated storage and compute.** The foundation of Neon: production-grade Postgres that’s scalable, reliable, and cloud-native.
+- **Instant autoscaling for truly no-management databases.** Neon adjusts compute automatically so agents never run out of capacity.
+- **Scale to zero for built-in cost control.** Idle projects cost nothing, making it sustainable to support large fleets.
+- **Snapshots API to back checkpoints and versioning features.** Create lightweight checkpoints to let agents experiment and roll back safely.
+- **Instant point-in-time recovery.** Revert to any moment instantly, so mistakes never become blockers.
+- **Quota and fleet control APIs to manage apps programmatically.** Provision, monitor, and cap usage across large fleets with simple API calls.
+- **Auth with RLS compatibility and simple, secure defaults.** Authentication built in, with support for row-level security and common auth flows.
+- **Data API to expose queries directly per environment.** Every branch and project comes with its own RESTful endpoint.
+- **Usage-based pricing plans specific for agents.** Pay only for what you use, with generous limits that scale with your platform’s growth.
+  
+## How It Looks Like in Practice: The Experience
 
 <FeatureList icons={['agent', 'speedometer', 'branching', 'database', 'lock', 'scale', 'api']}>
 
@@ -85,10 +104,18 @@ The most-loved database by developers is also the most practical choice for agen
 
 </FeatureList>
 
-## Documentation
+## Make it Happen: Documentation & Case Studies to Get Started 
 
-For documentation on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro).
+To get inspired, explore how others are building and scaling their agents on top of Neon: 
+[Replit](https://neon.com/blog/replit-app-history-powered-by-neon-branches)
+[Retool](https://neon.com/blog/retool-becomes-the-platform-for-enterprise-appgen)
+[Anything](https://neon.com/blog/from-idea-to-full-stack-app-in-one-conversation-with-create)
+[Databutton](https://neon.com/blog/databutton-neon-integration)
+[Vapi](https://neon.com/blog/vapi-voice-agents-neon)
+[Dyad](https://neon.com/blog/dyad-brings-postgres-to-local-ai-app-building-powered-by-neon)
+[xpander.ai](https://neon.com/blog/xpander-ai-agents-slack-neon-backend)
 
-<QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
+
+For instructions on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro). Don't hesitate to [contact us](https://neon.com/contact-sales) as well.
 
 To get started with the Agent Plan [fill out the application form at the top of this page](#agent-form).
