@@ -3,13 +3,13 @@ name: E2E on Chrome
 on:
   push:
     paths:
-      - 'src/utils/forms.js'
-      - 'src/constants/forms.js'
-      - 'cypress/**'
-      - 'src/components/shared/changelog-form/**'
-      - 'src/components/pages/contact-sales/hero/**'
-      - 'src/components/pages/startups/hero/**'
-      - 'src/components/pages/scalable-architecture/contact-us/**'
+      - "src/utils/forms.js"
+      - "src/constants/forms.js"
+      - "cypress/**"
+      - "src/components/shared/changelog-form/**"
+      - "src/components/pages/contact-sales/hero/contact-form/**"
+      - "src/components/pages/startups/hero/contact-form/**"
+      - "src/components/pages/scalable-architecture/contact-us/contact-form/**"
 permissions:
   contents: read
 
@@ -35,7 +35,7 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run start
-          wait-on: 'http://localhost:3000'
+          wait-on: "http://localhost:3000"
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
           WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
