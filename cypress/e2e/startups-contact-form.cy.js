@@ -8,7 +8,7 @@ describe('Startups Contact Form', () => {
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
-    cy.get("input[name='email']").type('john.doe@startup.com');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
     cy.get("input[name='companyWebsite']").type('startup.example.com');
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
@@ -16,10 +16,10 @@ describe('Startups Contact Form', () => {
     cy.get('button').should('contain', 'Applied!');
 
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
-      email: 'john.doe@startup.com',
+      email: 'test+skipform@hubspot.com',
     });
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'Startup Form Submitted', {
-      email: 'john.doe@startup.com',
+      email: 'test+skipform@hubspot.com',
       first_name: 'John',
       last_name: 'Doe',
       company_website: 'startup.example.com',
@@ -51,7 +51,7 @@ describe('Startups Contact Form', () => {
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
-    cy.get("input[name='email']").type('john.doe@startup.com');
+    cy.get("input[name='email']").type('test+skipform@hubspot.com');
     cy.get("input[name='companyWebsite']").type('startup.example.com');
     cy.get("input[name='investor']").type('Y Combinator');
     cy.get('form').submit();
@@ -59,7 +59,7 @@ describe('Startups Contact Form', () => {
     cy.getByData('error-message').should('exist');
 
     cy.get('@zarazTrackSpy').should('have.been.calledWith', 'identify', {
-      email: 'john.doe@startup.com',
+      email: 'test+skipform@hubspot.com',
     });
   });
 });

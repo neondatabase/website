@@ -3,7 +3,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useCookie from 'react-use/lib/useCookie';
 import useLocation from 'react-use/lib/useLocation';
@@ -25,30 +25,42 @@ const schema = yup
       .required('Email address is a required field'),
     companySize: yup
       .string()
-      .notOneOf(['hidden'], 'Please select a company size')
+      .notOneOf(['hidden'], 'Required field')
       .required('Company size is a required field'),
     message: yup.string().required('Message is a required field'),
   })
   .required();
 
-const ContactUsForm = ({ className = null }) => {
+const ContactForm = ({ className = null }) => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
+  const [formError, setFormError] = useState('');
   const [hubspotutk] = useCookie('hubspotutk');
   const { href } = useLocation();
-  const [formError, setFormError] = useState('');
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  });
 
   const context = {
     hutk: hubspotutk,
     pageUri: href,
   };
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { isValid, errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      companySize: 'hidden',
+    },
+  });
+
+  useEffect(() => {
+    const hasErrors = Object.keys(errors).length > 0;
+    if (formState !== FORM_STATES.LOADING && formState !== FORM_STATES.SUCCESS) {
+      if (hasErrors) setFormState(FORM_STATES.ERROR);
+      else setFormState(FORM_STATES.DEFAULT);
+    }
+  }, [errors, isValid, formState]);
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
@@ -92,6 +104,7 @@ const ContactUsForm = ({ className = null }) => {
       if (response.ok) {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.SUCCESS);
+          reset();
           setFormError('');
         }, loadingAnimationStartedTime);
       } else {
@@ -107,12 +120,15 @@ const ContactUsForm = ({ className = null }) => {
     }
   };
 
+  const isDisabled = formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS;
+
   return (
     <form
       className={clsx(
         'relative z-10 grid gap-x-5 gap-y-6 rounded-xl border border-gray-new-10 bg-[radial-gradient(128.16%_100%_at_38.89%_0%,#18191B80_0%,#18191B4D_47.96%,#18191B00_100%)] p-9 xl:p-6 xs:p-5',
         className
       )}
+      id="scalable-architecture-form"
       method="POST"
       onSubmit={handleSubmit(onSubmit)}
     >
@@ -123,8 +139,7 @@ const ContactUsForm = ({ className = null }) => {
         label="Your name *"
         autoComplete="name"
         error={errors.name?.message}
-        errorClassName="left-0"
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         {...register('name')}
       />
       <Field
@@ -134,9 +149,8 @@ const ContactUsForm = ({ className = null }) => {
         label="Email address *"
         type="email"
         autoComplete="email"
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         error={errors.email?.message}
-        errorClassName="left-0"
         {...register('email')}
       />
       <div className="flex space-x-6 sm:grid sm:gap-y-5 sm:space-x-0">
@@ -146,7 +160,7 @@ const ContactUsForm = ({ className = null }) => {
           theme="transparent"
           name="companyWebsite"
           label="Company website"
-          isDisabled={formState === FORM_STATES.LOADING}
+          isDisabled={isDisabled}
           {...register('companyWebsite')}
         />
         <Field
@@ -157,9 +171,8 @@ const ContactUsForm = ({ className = null }) => {
           label="Company size *"
           tag="select"
           defaultValue="hidden"
-          isDisabled={formState === FORM_STATES.LOADING}
+          isDisabled={isDisabled}
           error={errors.companySize?.message}
-          errorClassName="left-0"
           {...register('companySize')}
         >
           <option value="hidden" disabled hidden>
@@ -179,21 +192,23 @@ const ContactUsForm = ({ className = null }) => {
         name="message"
         label="Message *"
         tag="textarea"
-        isDisabled={formState === FORM_STATES.LOADING}
+        isDisabled={isDisabled}
         error={errors.message?.message}
-        errorClassName="left-0"
         {...register('message')}
       />
       <div className="relative mt-2.5 flex items-center justify-between gap-5 xl:-mt-1.5 lg:-mt-1.5 sm:flex-col">
         <p className="text-left text-sm font-light leading-snug text-gray-new-70">
           By submitting, you agree to{' '}
           <Link className="pb-1" to={LINKS.privacyPolicy} theme="white-underlined" size="2xs">
-            Neon’s&nbsp;Privacy&nbsp;Policy
+            Neon&apos;s&nbsp;Privacy&nbsp;Policy
           </Link>
           .
         </p>
         <Button
-          className="w-[168px] shrink-0  md:order-1 sm:mt-6 sm:w-full"
+          className={clsx(
+            'w-[168px] shrink-0  md:order-1 sm:mt-6 sm:w-full',
+            formState === FORM_STATES.ERROR && 'pointer-events-none !bg-secondary-1/50'
+          )}
           type="submit"
           theme="primary"
           size="md-new"
@@ -203,10 +218,11 @@ const ContactUsForm = ({ className = null }) => {
         </Button>
         {formError && (
           <span
-            className="absolute left-1/2 top-[calc(100%+0.5rem)] -translate-x-1/2 text-sm leading-none text-secondary-1"
+            className="absolute -inset-x-5 top-full mt-12 truncate text-center text-sm leading-tight text-secondary-1 xl:mt-10 sm:mt-8"
             data-test="error-message"
           >
             {formError}
+            Something went wrong. Please reload the page and try again.
           </span>
         )}
       </div>
@@ -214,8 +230,8 @@ const ContactUsForm = ({ className = null }) => {
   );
 };
 
-ContactUsForm.propTypes = {
+ContactForm.propTypes = {
   className: PropTypes.string,
 };
 
-export default ContactUsForm;
+export default ContactForm;

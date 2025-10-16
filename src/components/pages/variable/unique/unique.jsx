@@ -30,9 +30,7 @@ const items = [
 const Unique = ({ title }) => (
   <Section className="unique" title={title}>
     <div className="prose-variable">
-      <p>
-        The Neon architecture is unique in the following ways:
-      </p>
+      <p>The Neon architecture is unique in the following ways:</p>
       <List items={items} />
     </div>
     <Testimonial

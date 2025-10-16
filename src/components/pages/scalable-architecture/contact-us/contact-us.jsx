@@ -2,7 +2,7 @@ import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
 import Logos from 'components/shared/logos';
 
-import ContactUsForm from './contact-us-form';
+import ContactForm from './contact-form';
 import Testimonial from './testimonial';
 
 const logos = [
@@ -46,14 +46,14 @@ const ContactUs = () => (
         database-per-user architecture.
       </p>
       <Testimonial
-        className="col-span-5 col-start-1 mt-16 max-w-[464px] lg:order-4 lg:col-span-12 lg:mx-auto lg:mt-[46px] lg:max-w-[512px] md:max-w-full xs:mt-6"
+        className="col-span-5 col-start-1 mt-16 max-w-[464px] lg:order-4 lg:col-span-12 lg:mx-auto lg:mt-[46px] lg:max-w-[512px] md:max-w-full sm:mt-10"
         {...testimonial}
       />
       <Logos
         className="col-span-5 col-start-1 mt-14 lg:order-5 lg:col-span-12 lg:mt-11 xs:mt-10 [&.logos-content]:gap-x-10 lg:[&.logos-content]:gap-x-20"
         logos={logos}
       />
-      <ContactUsForm className="col-span-7 col-start-6 row-span-5 -mt-1 ml-auto max-w-[576px] xl:mt-px lg:order-3 lg:col-span-12 lg:col-start-1 lg:mr-auto lg:mt-8 lg:max-w-[512px] md:w-full md:max-w-full xs:mt-6" />
+      <ContactForm className="col-span-7 col-start-6 row-span-5 -mt-1 ml-auto max-w-[576px] xl:mt-px lg:order-3 lg:col-span-12 lg:col-start-1 lg:mr-auto lg:mt-8 lg:max-w-[512px] md:w-full md:max-w-full xs:mt-6" />
     </Container>
   </section>
 );
