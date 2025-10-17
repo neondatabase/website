@@ -20,18 +20,18 @@ The Neon Azure Native Integration is being deprecated and will reach end of life
 
 ## Locate your new Neon-managed organization
 
-1. Sign in to the [Neon Console](https://console.neon.tech)
-2. Open the organization dropdown and confirm that a new organization named `neon-managed-[org-name]` is listed
-3. If desired, [rename this organization](/docs/manage/orgs-manage#rename-an-organization) to a custom name
+1. Sign in to the [Neon Console](https://console.neon.tech).
+2. Open the organization dropdown and confirm that a new organization named `neon-managed-[org-name]` is listed.
+3. If desired, [rename this organization](/docs/manage/orgs-manage#rename-an-organization) to a custom name.
 
 ## Transfer your projects
 
 You can transfer all projects at once or individually. From your Azure-managed organization in the Neon Console:
 
-1. Go to **Organization** -> **Settings** -> **Transfer projects**
-2. Click **Select all** and click **Next**
-3. Choose your new Neon-managed organization as the destination
-4. Confirm the transfer
+1. Go to **Organization** -> **Settings** -> **Transfer projects**.
+2. Click **Select all**, then click **Next**.
+3. Choose your new Neon-managed organization as the destination.
+4. Confirm the transfer.
 
 Projects will appear in your new organization once the transfer is complete. For more details about project transfers, see [Transfer projects](/docs/manage/orgs-project-transfer).
 
@@ -49,13 +49,13 @@ After the transfer:
 Only delete your Azure resource after confirming all projects have been transferred. Deleting the Azure resource before transferring projects will permanently delete all projects and data in your Azure-managed organization.
 </Admonition>
 
-1. Sign in to the [Azure Portal](https://portal.azure.com)
-2. Select your Neon resource created through the Azure Marketplace
-3. Confirm that no projects remain in your Azure-managed organization
-4. On the **Overview** page, select **Delete**
-5. Confirm the deletion by entering the resource's name
-6. Choose the reason for deleting the resource
-7. Select **Delete** to finalize
+1. Sign in to the [Azure Portal](https://portal.azure.com).
+2. Select your Neon resource created through the Azure Marketplace.
+3. Confirm that no projects remain in your Azure-managed organization.
+4. On the **Overview** page, select **Delete**.
+5. Confirm the deletion by entering the resource's name.
+6. Choose the reason for deleting the resource.
+7. Select **Delete** to finalize.
 
 Deleting the resource stops all Azure Marketplace billing and completes your transition to a Neon-managed organization.
 
