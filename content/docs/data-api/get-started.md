@@ -20,7 +20,7 @@ tag: beta
   </DocsList>
 </InfoBlock>
 
-The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
+The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js), [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
 
 ```javascript shouldWrap
 const { data } = await client.from('posts').select('*');
