@@ -23,6 +23,7 @@ export default {
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   platforms: '/platforms',
+  programs: '/programs',
   report: '/restores-survey',
   scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
