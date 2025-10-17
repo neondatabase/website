@@ -18,7 +18,7 @@ The Neon Open Source Program provides financial support, promotional opportuniti
 
 ### Neon Credits
 
-Neon will grant eligible open-source software up to $5,000 in platform credits yearly. 
+Neon will grant eligible open-source software up to $5,000 in platform credits yearly.
 
 ### Cash Payments
 
