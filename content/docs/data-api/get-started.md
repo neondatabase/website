@@ -36,6 +36,10 @@ When using the Data API, it is essential to set up RLS policies so that you can 
 
 Enable the Data API at the **branch** level for a single database.
 
+<Admonition type="important">
+Data API and [IP Allow](/docs/manage/projects#configure-ip-allow) cannot be used together. To enable Data API, you must first disable IP Allow on your project.
+</Admonition>
+
 To get started, open the **Data API** page from the project sidebar and click **Enable**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
