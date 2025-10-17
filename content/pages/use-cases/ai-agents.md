@@ -23,6 +23,7 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
 ## The Neon Stack For Agents
+
 The Neon architecture aligns with how agents work:
 
 **Serverless Postgres at the core.**
