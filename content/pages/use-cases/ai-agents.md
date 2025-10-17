@@ -1,14 +1,10 @@
 ---
 title: 'Neon for AI Agent Platforms'
-subtitle: Build full-stack agents on a serverless Postgres backend.
+subtitle: Build full-stack agents on a serverless Postgres backend
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'
 ---
-
-<ProgramForm type="agent" />
-
-**[Learn more about the Neon Agent Plan](https://neon.com/programs/agents#agent-plan-pricing) >**
 
 <MegaLink tag="80% of Neon databases are deployed by agents." title="Platforms like Replit Agent run their backend on Neon because it fits how agents operate: a serverless Postgres data layer that’s instant, branchable, and invisible to end users." url="https://neon.com/case-studies" />
 
@@ -20,35 +16,36 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 'databutton',
 ]} />
 
+<ProgramForm type="agent" />
+
+**[Learn more about the Neon Agent Plan](https://neon.com/programs/agents#agent-plan-pricing) >**
+
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 
-## A Backend That Aligns With How Agents Work
+## The Neon Stack For Agents
+The Neon architecture aligns with how agents work:
 
 **Serverless Postgres at the core.**
 Neon’s backend is powered by a serverless Postgres engine built on separated compute and storage. It provisions instantly, scales automatically, and idles to zero when not in use - perfect for the bursty, on-demand workloads that agents create.
 
-**Integrated services for full-stack backends.**
+**With integrated services for full-stack backends.**
 Around that core, Neon includes Auth and a PostgREST-compatible Data API, so agents and developers can assemble complete, production-ready backends without stitching multiple services together.
 
-**API-first and programmable.**
+**All API-first and programmable.**
 Every capability - provisioning, quotas, branching, and fleet management - is exposed through the Neon API, giving developers and agents precise control over their environments and usage at scale.
 
-**Version-aware by design.**
+**And version-aware by design.**
 Neon’s copy-on-write storage makes time travel effortless. Branching, snapshots, and point-in-time recovery enable undo, checkpoints, and safe experimentation across millions of databases.
 
-## The Neon Stack For Agents
-
-Building AI agents that can deploy real, working software demands a backend that’s dynamic, scalable, and efficient.
-
-### Serverless Postgres, API-first
+## Serverless Postgres, API-first
 
 At the core of Neon is a serverless Postgres architecture that [separates compute from storage](https://neon.com/blog/architecture-decisions-in-neon). Each database runs on ephemeral computes while the data itself lives on durable, high-performance storage.
 
 **This architecture makes it possible for agents to provision databases instantly on demand, operate them at massive scale, and still keep costs under control.** Tens of thousands of projects can spin up and idle as users create apps, all programmatically, without intervention from you.
 
-<MegaLink tag="Tested at scale" title="Not only Agents are deploying thousands of new databases a day on Neon: a developer platforms once managed 300k+ postgres instances on Neon with only one engineer. That’s how simple and efficient it is. " url="https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
+<MegaLink tag="Tested at scale" title="A popular developer platform managed over 300k Postgres instances on Neon with only a single engineer. That’s how simple and efficient it is. " url="https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases" />
 
-### Instant Autoscaling and Scale-to-Zero
+## Instant Autoscaling and Scale-to-Zero
 
 Traditional database management falls apart when every agent action can trigger new infrastructure. Neon serverless model handles this complexity automatically:
 
@@ -59,7 +56,7 @@ This combination gives agent builders a sustainable model for large fleets: **yo
 
 <QuoteBlock quote="The speed of provisioning and serverless scale-to-zero of Neon is critical for us" author="dhruv-amin" role="Co-founder at Anything" />
 
-### Auth That Speaks Postgres
+## Auth That Speaks Postgres
 
 Every app needs authentication, and agents shouldn’t have to reinvent it. **[Neon Auth](https://neon.com/docs/neon-auth/overview) lets you build secure, multi-tenant systems [without extra glue code](https://neon.com/blog/databutton-neon-integration)**.
 
@@ -67,13 +64,13 @@ It issues JWTs that your agent or front-end can use directly in database queries
 
 <QuoteBlock quote="Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
 
-### A PostgREST-Compatible Data API, Built In
+## A PostgREST-Compatible Data API, Built In
 
 Giving your agents direct access to the database is simple with the [Neon Data API](https://neon.com/docs/data-api/get-started). It exposes each database (and every branch) as a REST endpoint you can query over HTTPS. Fully PostgREST-compatible.
 
 Under the hood, Neon’s Data API is a [Rust-based re-implementation of PostgREST that runs natively in our proxy fleet](https://neon.com/blog/a-postgrest-compatible-data-api-now-on-neon). It’s lean, multi-tenant, and designed to scale across thousands of databases efficiently. Every Neon branch has its own API endpoint, perfect for preview environments, checkpoints, or dev branches.
 
-### Building Checkpoints with Snapshots and Branching
+## Building Checkpoints with Snapshots and Branching
 
 **Vibe coders experiment constantly, going back and forward between versions - and sometimes breaking things. Neon’s [branching](https://neon.com/docs/introduction/branching) and [snapshots API](https://neon.com/docs/ai/ai-database-versioning) turn this into a feature, not a risk.**
 
@@ -81,13 +78,13 @@ Branching, built on our copy-on-write storage, enables [instant point-in-time re
 
 The Snapshots API builds on this foundation to create [agent-friendly, restorable checkpoints](https://neon.com/blog/checkpoints-for-agents-with-neon-snapshots). Agents can capture a moment-in-time version of the database (schema and data) and later roll back or compare states.
 
-### Quotas, Fleet Control, and Dedicated Pricing
+## Quotas, Fleet Control, and Dedicated Pricing
 
 **We’ve been backing agent platforms since the start, and our API has evolved to support the needs of large fleets operated by small engineering teams.** [The Neon API lets you manage not only infra but also setting quotas, tracking compute/storage usage per project, billing limits, and much more](https://neon.com/blog/provision-postgres-neon-api).
 
 Combined with usage-based pricing and agent-specific plans, it gives platform builders fine-grained control over cost, scale, and growth.
 
-<MegaLink tag="Pricing designed for agent platforms" title="We’ve supported codegen platforms since the beginning and we know what it takes to scale them. The Agent Plan gives you everything you need, from early launch to millions of active databases." url="https://neon.com/programs/agents" />
+<MegaLink tag="Pricing designed for agent platforms" title="We know what it takes to scale agent platforms. The Agent Plan gives you everything you need, from early launch to millions of active databases." url="https://neon.com/programs/agents" />
 
 ## Documentation & Case Studies to Get Started
 
