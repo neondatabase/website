@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-10-16T00:00:00.000Z'
 ---
 
-The Neon Azure Native Integration is being deprecated and will reach end of life on **January 31, 2026**. To continue using Neon, you must move your projects from your Azure-managed organization to your new Neon-managed organization.
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. Migrate your projects to a Neon-managed organization before this date to continue using Neon.
 
 ## Before you begin
 
