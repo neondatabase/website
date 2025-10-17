@@ -17,7 +17,7 @@ You will build a Next.js Todo application and configure a workflow that, for eve
 - Builds and runs the application against the new branch.
 - Executes a full suite of Playwright tests.
 - Posts a schema diff summary directly in the pull request.
-- Cleans up resources and applies migrations to the production database upon merging.
+- Applies migrations to the main (production) branch and deletes the temporary database branch.
 
 By the end of this guide, you'll have a CI/CD pipeline where database-dependent E2E tests are run safely and reliably for every change, giving you the confidence to ship features faster. This concept can be extended to any E2E testing framework, not just Playwright.
 
@@ -30,7 +30,9 @@ By the end of this guide, you'll have a CI/CD pipeline where database-dependent 
 ## Setting up your Neon database
 
 1.  Create a new Neon project from the [Neon Console](https://console.neon.tech). For instructions, see [Create a project](/docs/manage/projects#create-a-project).
-2.  Navigate to the **Connection Details** page and copy your database connection string. You will need this later.
+2.  Navigate to your project dashboard page and copy your database connection string by clicking the **Connect** button.
+
+    ![Connection modal](/docs/connect/connection_details.png)
 
     Your connection string will look something like this:
 
@@ -79,6 +81,8 @@ Clone the [Neon Playwright Example](https://github.com/neondatabase-labs/neon-pl
 
 6. Push your code to a new GitHub repository.
 
+   > For instructions on creating a new repository on GitHub, see [Creating a new repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository).
+
    ```bash
    rm -rf .git
    git init
@@ -104,11 +108,11 @@ The [Neon GitHub integration](/docs/guides/neon-github-integration) securely con
 6.  **Add Production Database Secret**:
     - Navigate to your GitHub repository's **Settings** > **Secrets and variables** > **Actions**.
     - Create a new repository secret called `DATABASE_URL`.
-    - Paste the connection string for your primary `main` branch (copied from the Neon Console).
+    - Paste the connection string for your `production` branch (copied from the Neon Console).
     - Note that the `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable should already be available from the GitHub integration setup.
 
     <Admonition type="note">
-    It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your primary production database. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+    It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your production database branch. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
     </Admonition>
 
 ## Understanding the workflow
@@ -373,6 +377,9 @@ You can test the entire pipeline by making a schema change, updating the UI, and
 
 Once the PR is opened, the GitHub Actions workflow will trigger. You can watch as it creates a new database branch, runs migrations, starts your app, and successfully runs the Playwright tests including the new one you just added. The workflow will post a schema diff comment on the PR, and once merged, it will apply the changes to your production database and clean up the preview branch.
 
+The pull request should now show a comment summarizing the schema changes:
+![Schema Diff Comment](/docs/guides/e2e-tests-schema-diff-comment-github-actions.png)
+
 ## Source code
 
 You can find the complete source code for this example on GitHub.
@@ -388,8 +395,9 @@ You have seen how to create isolated database branches for running Playwright te
 ## Resources
 
 - [Neon Database Branching](/branching)
-- [Neon GitHub Integration](/guides/neon-github-integration)
+- [Neon GitHub Integration](/docs/guides/neon-github-integration)
 - [Playwright Documentation](https://playwright.dev/docs/intro)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
+- [Automated E2E Testing with Neon Branching and Cypress](/guides/e2e-cypress-tests-with-neon-branching)
 
 <NeedHelp/>
