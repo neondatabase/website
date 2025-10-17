@@ -11,7 +11,7 @@ updatedOn: '2025-08-13T18:03:53.013Z'
 Branch expiration allows you to set automatic deletion timestamps on branches. When a branch reaches its expiration time, it is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
-**Console:** Check "Expire branch on" and choose a preset (1 hour, 1 day, or 7 days)
+**Console:** When creating a branch, check **Expire branch on** and choose a preset (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
 
 **CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
 
@@ -21,7 +21,7 @@ Branch expiration allows you to set automatic deletion timestamps on branches. W
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>When and why to use branch expiration</p>
-<p>How to set expiration timestamps via API, CLI, and Console</p>
+<p>How to set expiration timestamps via Console, CLI, and API</p>
 <p>How expiration timestamps and TTL intervals work</p>
 <p>Restrictions and best practices</p>
 </DocsList>
@@ -71,7 +71,7 @@ Branch deletion is permanent and cannot be recovered. All associated data and co
 
 You can set, update, or remove expiration timestamps through three interfaces:
 
-- **Console** - Check "Expire branch on" and choose a preset option (1 hour, 1 day, or 7 days)
+- **Console** - When creating a branch, check **Expire branch on** and choose a preset option (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
 - **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
 - **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
 
@@ -131,14 +131,14 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 
 <TabItem>
 
-1. Navigate to the Branches page in the Console
-2. Click "New branch"
+1. Navigate to the **Branches** page in the Console
+2. Click **New branch**
 3. Enter branch name and select parent branch
-4. Check "Expire branch on" and choose a preset option (1 hour, 1 day, or 7 days)
+4. Check **Expire branch on** and choose a preset option (1 hour, 1 day, or 7 days)
 
 ![Set branch expiration](/docs/changelog/branch_expiration_presets.png)
 
-5. Click "Create"
+5. Click **Create**
 
 </TabItem>
 
@@ -204,14 +204,14 @@ curl --request POST \
 
 <TabItem>
 
-1. Navigate to the Branches page in the Console
-2. Choose the "Update expiration" option for your branch
+1. Navigate to the **Branches** page in the Console
+2. Choose the **Update expiration** option for your branch
 
 ![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
 
-3. To update: Choose a new preset option (1 hour, 1 day, or 7 days)
-4. To remove: Uncheck "Expire branch on"
-5. Click "Save"
+3. To update: Select a new date and time
+4. To remove: Uncheck **Expire branch on**
+5. Click **Save**
 
 </TabItem>
 
@@ -281,8 +281,8 @@ Check expiration status of your branches:
 
 <TabItem>
 
-1. Navigate to the Branches page in the Console
-2. Click on the desired branch to open the "Branch Overview"
+1. Navigate to the **Branches** page in the Console
+2. Click on the desired branch to open the **Branch Overview**
 3. See information similar to the following if branch expiration is set:
 
 ![View branch expiration](/docs/guides/branch-view-expiration.png)
