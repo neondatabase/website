@@ -321,6 +321,11 @@
 
   .prose-template {
     @apply text-lg md:text-base;
+    @apply dark:prose-strong:text-white;
+
+    .anchor-heading {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
 
     > h2 {
       @apply mt-[72px] text-[30px] lg:mt-[62px] md:mt-[50px] md:text-2xl;
@@ -335,15 +340,15 @@
     }
 
     > p {
-      @apply my-6 !text-gray-new-98 lg:my-5;
+      @apply my-6 text-gray-new-98 lg:my-5;
     }
 
     > ul,
     > ol {
-      @apply my-6 !text-gray-new-98;
+      @apply my-6 text-gray-new-98;
 
       > li {
-        @apply !text-gray-new-98;
+        @apply text-gray-new-98;
       }
     }
   }
