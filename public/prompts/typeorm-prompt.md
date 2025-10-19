@@ -59,7 +59,7 @@ When this prompt is triggered, automatically configure the open project as follo
 
   ```
   # Get your connection string from the Neon Console
-  # Project -> Dashboard -> Connection Details
+  # Project -> Dashboard -> Connect
   DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech/<dbname>?sslmode=require"
   ```
 

@@ -35,7 +35,7 @@ npm install @neondatabase/serverless
   ```
 
 - **Do not hardcode** credentials directly in the code.
-- Prompt the user to get their connection string from the **Neon Console → Project → Connect → Connection details.**
+- Prompt the user to get their connection string from the **Neon Console → Project → Connect → Connect.**
 
 ---
 

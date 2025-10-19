@@ -56,7 +56,7 @@ First, ask the user to choose their preferred Node.js Postgres driver and procee
   ```
   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
   ```
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connection Details**.
+- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
 ---
 
