@@ -6,7 +6,10 @@ import { getToken } from 'next-auth/jwt';
 import { checkCookie, getReferer } from 'app/actions';
 import LINKS from 'constants/links';
 
-import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import {
+  // isAIAgentRequest,
+  getMarkdownPath,
+} from './utils/ai-agent-detection';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -24,16 +27,17 @@ export async function middleware(req) {
     const { pathname } = req.nextUrl;
 
     // Handle AI agent requests - serve markdown instead of HTML
-    if (isAIAgentRequest(req)) {
-      const markdownPath = getMarkdownPath(pathname);
+    // TODO: Uncomment before release to production
+    // if (isAIAgentRequest(req)) {
+    const markdownPath = getMarkdownPath(pathname);
 
-      if (markdownPath) {
-        // Redirect to GitHub raw markdown file
-        const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
-        const markdownUrl = `${githubRawBase}${markdownPath}`;
-        return NextResponse.redirect(markdownUrl);
-      }
+    if (markdownPath) {
+      // Redirect to GitHub raw markdown file
+      const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+      const markdownUrl = `${githubRawBase}${markdownPath}`;
+      return NextResponse.redirect(markdownUrl);
     }
+    // }
 
     // Check if the user is logged in
     try {
