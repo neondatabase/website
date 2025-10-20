@@ -252,6 +252,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/blog/migrate-your-data-from-aws-rds-aurora-to-neon',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
         source: '/api-reference',
         destination: 'https://api-docs.neon.tech',
         permanent: true,
@@ -397,6 +402,11 @@ const defaultConfig = {
         destination: '/branching/:path*',
         permanent: true,
       },
+      {
+        source: '/scalable-architecture',
+        destination: '/',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -422,14 +432,6 @@ const defaultConfig = {
       {
         source: '/demos/playground/:path*',
         destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
-      },
-      {
-        source: '/demos/instant-postgres',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres',
-      },
-      {
-        source: '/demos/instant-postgres/:path*',
-        destination: 'https://instant-postgres.mahmoudw.com/demos/instant-postgres/:path*',
       },
       {
         source: '/developer-days/:path*',
@@ -513,6 +515,25 @@ const defaultConfig = {
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
+
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
+      module: false,
+      path: false,
+      crypto: false,
+      stream: false,
+      assert: false,
+      http: false,
+      https: false,
+      os: false,
+      url: false,
+    };
+
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true,
+    };
 
     return config;
   },

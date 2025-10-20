@@ -6,7 +6,7 @@
 
 - [Neon Data API tutorial HTML](https://neon.com/docs/data-api/demo): The original HTML version of this documentation
 
-**Note** Beta: **Neon Data API** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://t.co/kORvEuCUpJ) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: **Neon Data API** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 In this tutorial, we'll walk through our note-taking app to show how you can use Neon's Data API and `postgrest-js` to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure.
 

@@ -81,16 +81,8 @@ const Hero = () => {
                       )}
                     >
                       {type}
-                      {type === 'Scale' && (
-                        <Link
-                          className="ml-auto text-[15px] text-gray-new-60 underline decoration-gray-new-60/50 underline-offset-4 md:text-sm"
-                          to={LINKS.contactSales}
-                        >
-                          Contact us
-                        </Link>
-                      )}
                     </h3>
-                    <div className={clsx('flex flex-col flex-wrap gap-x-1 md:flex-row')}>
+                    <div className="flex flex-col flex-wrap gap-x-1">
                       <h4 className="whitespace-nowrap text-3xl font-medium leading-snug tracking-extra-tight lg:text-xl">
                         {title}
                       </h4>
@@ -150,6 +142,18 @@ const Hero = () => {
                       type={type}
                       highlighted={highlighted}
                     />
+                  )}
+                  {type === 'Scale' && (
+                    <div className="mt-5 flex flex-col border-t border-dashed border-gray-new-20 pt-5">
+                      <span className="text-lg font-medium">Enterprise Plans</span>
+                      <Link
+                        className="w-fit text-[15px] decoration-1 underline-offset-4"
+                        to={LINKS.contactSales}
+                        theme="green-underlined"
+                      >
+                        Contact us
+                      </Link>
+                    </div>
                   )}
                   {highlighted && (
                     <LazyMotion features={domAnimation}>

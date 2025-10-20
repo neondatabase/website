@@ -5,8 +5,11 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2025-07-29T10:34:33.838Z'
+updatedOn: '2025-09-30T00:26:10.494Z'
 ---
+
+<CopyPrompt src="/prompts/golang-prompt.md" 
+description="Pre-built prompt for connecting Go applications to Neon"/>
 
 This guide describes how to create a Neon project and connect to it from a Go (Golang) application using [pgx](https://github.com/jackc/pgx), a high-performance and feature-rich PostgreSQL driver for Go.
 

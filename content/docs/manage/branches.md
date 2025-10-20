@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-09-12T16:34:42.456Z'
+updatedOn: '2025-10-14T22:23:34.354Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -95,7 +95,12 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](#default-branch).
+Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The default branch serves two key purposes:
+
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
+
+For more information, see [Default branch](#default-branch).
 
 To set a branch as the default branch:
 
@@ -226,14 +231,17 @@ The number of root branches allowed in a project depends on your Neon plan.
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
-For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+The default branch serves two key purposes:
+
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 ### Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
 - For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, additional computes will remain suspended.
 
 ### Protected branch
 

@@ -6,8 +6,8 @@ const CasesLayout = async ({ children }) => (
   <Layout headerWithBorder isHeaderSticky>
     <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
       <Container
-        className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-10 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
-        size="1344"
+        className="flex w-full flex-1 gap-x-24 pt-11 2xl:gap-x-8 xl:max-w-3xl xl:px-8 xl:pt-9 lg:block sm:pt-7"
+        size="1152"
       >
         {children}
       </Container>

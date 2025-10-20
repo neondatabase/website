@@ -201,11 +201,11 @@
     {
       "rows": "1",
       "feature": {
-        "title": "Support"
+        "title": "HIPAA Compliance"
       },
-      "free": "Community",
-      "launch": "Billing",
-      "scale": "Standard"
+      "free": false,
+      "launch": false,
+      "scale": "<a class='text-primary-2' href='/docs/security/hipaa'>Available</a>"
     },
     {
       "rows": "2",
@@ -214,7 +214,16 @@
       },
       "free": false,
       "launch": false,
-      "scale": true
+      "scale": "<a class='text-primary-2' href='https://neon.com/docs/security/compliance#soc-2'>Available</a>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "Support Plans"
+      },
+      "free": "Community (Discord)",
+      "launch": "Standard (Billing issues)",
+      "scale": "<a class='text-primary-2' href='https://neon.com/docs/introduction/support'>Multiple options</a>"
     }
   ]
 }

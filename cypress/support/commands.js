@@ -1,33 +1,37 @@
 Cypress.Commands.add('getByData', (selector) => cy.get(`[data-test=${selector}]`));
 
 Cypress.Commands.add('formSuccessSubmit', () => {
-  cy.intercept(
-    {
-      method: 'POST',
-      url: `/api/hubspot`,
-    },
-    {
-      statusCode: 200,
-      body: {
-        status: 'success',
+  // Intercept HubSpot form submission and simulate success
+  cy.intercept('POST', '/api/hubspot', {
+    statusCode: 200,
+    body: {},
+  }).as('formSuccessSubmit');
+
+  // Mock zaraz for successful gtag events
+  cy.window().then((win) => {
+    Object.assign(win, {
+      zaraz: {
+        track: cy.stub().resolves().as('zarazTrackSpy'),
       },
-    }
-  ).as('formSuccessSubmit');
+    });
+  });
 });
 
 Cypress.Commands.add('formErrorSubmit', () => {
-  cy.intercept(
-    {
-      method: 'POST', // or whatever method the form uses
-      url: `/api/hubspot`,
-    },
-    {
-      statusCode: 500,
-      body: {
-        error: 'Internal server error',
+  // Intercept HubSpot form submission and simulate server error
+  cy.intercept('POST', '/api/hubspot', {
+    statusCode: 500,
+    body: { message: 'Server error' },
+  }).as('formErrorSubmit');
+
+  // Mock zaraz for failed gtag events
+  cy.window().then((win) => {
+    Object.assign(win, {
+      zaraz: {
+        track: cy.stub().rejects(new Error('Network error')).as('zarazTrackSpy'),
       },
-    }
-  ).as('formErrorSubmit');
+    });
+  });
 });
 
 Cypress.on('uncaught:exception', (err) => {

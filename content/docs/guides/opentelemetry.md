@@ -3,7 +3,7 @@ title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.287Z'
+updatedOn: '2025-09-22T19:22:14.582Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -162,19 +162,19 @@ You can enable either or both options based on your monitoring needs.
    For example, if you enter:
 
    ```
-   https://dev-thanos-receive.dunetech.io/api/v1/otlp
+   https://dev-thanos-receive.example.com/api/v1/otlp
    ```
 
    the Collector will send requests to:
 
    ```
-   https://dev-thanos-receive.dunetech.io/api/v1/otlp/v1/metrics
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/metrics
    ```
 
    and
 
    ```
-   https://dev-thanos-receive.dunetech.io/api/v1/otlp/v1/logs
+   https://dev-thanos-receive.example.com/api/v1/otlp/v1/logs
    ```
 
    Make sure your observability platform is configured to receive data at these appended paths. If your platform expects data directly at the base URL without suffixes, you may need to adjust the configuration on that side.

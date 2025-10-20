@@ -1,10 +1,10 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2025-09-16T21:43:43.771Z'
+updatedOn: '2025-09-22T16:39:50.528Z'
 ---
 
-Neon offers HIPAA compliance as a self-serve feature available to customers on supported plans.
+Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
 
 <Admonition type="note">
 HIPAA support is currently available at no additional cost. Once billing is finalized, HIPAA support will add a 15% surcharge to your monthly invoice. We’ll notify you in advance before this change takes effect.
@@ -38,6 +38,10 @@ Once HIPAA is enabled for your organization, you can proceed to enable HIPAA com
 
 <Admonition type="important">
 Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling HIPAA will also restart all computes, temporarily interrupting database connections.
+</Admonition>
+
+<Admonition type="note">
+HIPAA is not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
 </Admonition>
 
 <Tabs labels={["New project", "Existing project", "API", "CLI"]}>
