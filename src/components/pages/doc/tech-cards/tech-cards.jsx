@@ -25,7 +25,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
         <li className="!m-0 before:hidden">
           <NextLink
             className={clsx(
-              'flex h-full flex-col justify-between overflow-hidden rounded-[10px] border border-gray-new-90 px-6 py-5 transition-colors duration-200',
+              'relative flex h-full flex-col justify-between overflow-hidden rounded-[10px] border border-gray-new-90 px-6 py-5 transition-colors duration-200',
               'before:absolute before:inset-px before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA_0%,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
               'hover:border-gray-new-80 hover:before:opacity-100',
               'dark:border-gray-new-15 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8)_0%,rgba(36,38,40,0)_100%)] dark:hover:border-gray-new-30 xl:p-5'
