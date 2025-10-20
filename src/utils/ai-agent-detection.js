@@ -7,8 +7,12 @@ export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
   const accept = request.headers.get('accept') || '';
 
-  // Primary detection: Accept header doesn't include text/html
-  const acceptsHtml = accept.includes('text/html');
+  // Primary detection: Accept header prefers non-HTML formats
+  const prefersNonHtml =
+    accept.includes('application/json') ||
+    accept.includes('text/plain') ||
+    accept.includes('application/xml') ||
+    (accept.includes('*/*') && !accept.includes('text/html'));
 
   // Secondary detection: User-Agent patterns for known AI agents
   const aiAgentPatterns = [
@@ -24,14 +28,14 @@ export function isAIAgentRequest(request) {
     'ai-agent',
     'llm-agent',
     'bot',
-    'axios', // Common HTTP client used by AI agents
+    'axios',
   ];
 
   const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
     userAgent.toLowerCase().includes(pattern)
   );
 
-  return !acceptsHtml || hasAIAgentUserAgent;
+  return prefersNonHtml || hasAIAgentUserAgent;
 }
 
 // Convert URL path to markdown file path
