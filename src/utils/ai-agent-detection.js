@@ -5,8 +5,12 @@ import { CONTENT_PAGES } from 'constants/content';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
+  const accept = request.headers.get('accept') || '';
 
-  // Common AI agent patterns
+  // Primary detection: Accept header doesn't include text/html
+  const acceptsHtml = accept.includes('text/html');
+
+  // Secondary detection: User-Agent patterns for known AI agents
   const aiAgentPatterns = [
     'chatgpt',
     'openai',
@@ -20,10 +24,14 @@ export function isAIAgentRequest(request) {
     'ai-agent',
     'llm-agent',
     'bot',
+    'axios', // Common HTTP client used by AI agents
   ];
 
-  // Check if User-Agent contains AI agent patterns
-  return aiAgentPatterns.some((pattern) => userAgent.toLowerCase().includes(pattern));
+  const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
+    userAgent.toLowerCase().includes(pattern)
+  );
+
+  return !acceptsHtml || hasAIAgentUserAgent;
 }
 
 // Convert URL path to markdown file path
