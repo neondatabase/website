@@ -344,6 +344,8 @@
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
               slug: data-api/sql-to-rest
+            - title: Troubleshooting
+              slug: data-api/troubleshooting
 
         - title: Neon Auth
           icon: auth

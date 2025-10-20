@@ -55,6 +55,10 @@ Once enabled, you'll get:
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
+<Admonition type="info" title="Having trouble enabling the Data API?">
+If you encounter a "permission denied to create extension" error when enabling the Data API, this usually means your database was created via direct SQL rather than the Console API. See our [troubleshooting guide](/docs/data-api/troubleshooting) for solutions.
+</Admonition>
+
 ## Secure your Data API
 
 The Data API requires two layers of security:
