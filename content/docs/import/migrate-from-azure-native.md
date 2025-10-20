@@ -5,16 +5,24 @@ enableTableOfContents: true
 updatedOn: '2025-10-16T00:00:00.000Z'
 ---
 
-The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. Migrate your projects to a Neon-managed organization before this date to continue using Neon.
+<Admonition type="important">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. 
+</Admonition>
 
-## Before you begin
+This guide describes how to migrate your projects to a Neon-managed organization to continue using Neon.
+
+## Getting started
+
+Before you begin your migration, be aware of the following:
 
 - A new Neon-managed organization has already been created for you in the Neon Console.
 - You can find it in the organization dropdown named `neon-managed-[org-name]` where `[org-name]` is the original organization name.
 - You can [rename this organization](/docs/manage/orgs-manage#rename-an-organization) at any time.
-- Admins from your existing organization have been added to the new one.
-- Members and project collaborators need to be re-added after migration.
+- Only admins are migrated to the new organization. Members and project collaborators must be re-added manually after migration.
+- If you are on a paid Azure plan, your new Neon-managed organization has been created on the Free plan. You must upgrade to a paid plan (Scale recommended for Azure Scale and Business customers) to maintain your current features and avoid service limitations.
 - Application connection strings remain the same after transfer because the project structure does not change.
+
+To migrate your projects to a Neon-managed organization:
 
 <Steps>
 
@@ -22,7 +30,18 @@ The Neon Azure Native Integration is deprecated and reaches end of life on **Jan
 
 1. Sign in to the [Neon Console](https://console.neon.tech).
 2. Open the organization dropdown and confirm that a new organization named `neon-managed-[org-name]` is listed.
-3. If desired, [rename this organization](/docs/manage/orgs-manage#rename-an-organization) to a custom name.
+3. Optionally [rename this organization](/docs/manage/orgs-manage#rename-an-organization) to a custom name.
+
+## Upgrade your plan (paid users only)
+
+If you are on a paid Azure plan, upgrade your new Neon-managed organization before transferring projects:
+
+1. Switch to your `neon-managed-[org-name]` organization.
+2. Go to **Billing** and select **Change plan**.
+3. Select **Scale** (recommended for Azure Scale and Business customers) or **Launch**.
+4. Complete the upgrade process.
+
+This ensures your projects retain all paid features after transfer.
 
 ## Transfer your projects
 
@@ -33,15 +52,15 @@ You can transfer all projects at once or individually. From your Azure-managed o
 3. Choose your new Neon-managed organization as the destination.
 4. Confirm the transfer.
 
-Projects will appear in your new organization once the transfer is complete. For more details about project transfers, see [Transfer projects](/docs/manage/orgs-project-transfer).
+Projects appear in your new organization immediately after the transfer completes. For more details about project transfers, see [Transfer projects](/docs/manage/orgs-project-transfer).
 
 ## Update your organization configuration
 
 After the transfer:
 
-- Re-add any members or project collaborators who need access.
-- Update any organization [API keys](/docs/manage/api-keys) if you were using them.
+- Re-add any members or project collaborators who need access. See [Manage organization members](/docs/manage/orgs-manage#add-a-user-to-an-organization) for instructions.
 - Verify that all projects appear in your new Neon-managed organization.
+- If you use [API keys](/docs/manage/api-keys), note that existing keys are tied to your Azure-managed organization. Create new keys in your Neon-managed organization and update them in your applications, scripts, and integrations.
 
 ## Delete your Azure-managed resource
 
