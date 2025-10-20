@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-09-30T11:29:44.954Z'
+updatedOn: '2025-10-14T22:23:34.354Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -97,7 +97,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available.
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 For more information, see [Default branch](#default-branch).
@@ -233,7 +233,7 @@ Each Neon project has a default branch. In the Neon Console, your default branch
 
 The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available.
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 ### Non-default branch
