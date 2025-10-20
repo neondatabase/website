@@ -9,7 +9,16 @@ const TEMPLATE_PAGES_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
 const USE_CASES_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/use-cases`;
 const PROGRAMS_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/programs`;
 
+const CONTENT_PAGES = {
+  docs: DOCS_DIR_PATH,
+  postgresql: POSTGRESQL_DIR_PATH,
+  guides: GUIDES_DIR_PATH,
+  branching: BRANCHING_DIR_PATH,
+  programs: PROGRAMS_DIR_PATH,
+};
+
 module.exports = {
+  CONTENT_PAGES,
   DOCS_DIR_PATH,
   BRANCHING_DIR_PATH,
   GUIDES_DIR_PATH,

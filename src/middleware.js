@@ -6,6 +6,8 @@ import { getToken } from 'next-auth/jwt';
 import { checkCookie, getReferer } from 'app/actions';
 import LINKS from 'constants/links';
 
+import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
@@ -21,6 +23,19 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
+    // Handle AI agent requests - serve markdown instead of HTML
+    if (isAIAgentRequest(req)) {
+      const markdownPath = getMarkdownPath(pathname);
+
+      if (markdownPath) {
+        // Redirect to GitHub raw markdown file
+        const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+        const markdownUrl = `${githubRawBase}${markdownPath}`;
+        return NextResponse.redirect(markdownUrl);
+      }
+    }
+
+    // Check if the user is logged in
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
@@ -86,5 +101,15 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*'],
+  matcher: [
+    '/',
+    '/home',
+    '/generate-ticket/:path*',
+    '/tickets/:path*',
+    '/docs/:path*',
+    '/postgresql/:path*',
+    '/guides/:path*',
+    '/branching/:path*',
+    '/programs/:path*',
+  ],
 };
