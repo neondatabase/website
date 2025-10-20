@@ -9,7 +9,6 @@ on:
       - "src/components/shared/changelog-form/**"
       - "src/components/pages/contact-sales/hero/contact-form/**"
       - "src/components/pages/startups/hero/contact-form/**"
-      - "src/components/pages/scalable-architecture/contact-us/contact-form/**"
 permissions:
   contents: read
 
