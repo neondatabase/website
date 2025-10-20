@@ -402,6 +402,11 @@ const defaultConfig = {
         destination: '/branching/:path*',
         permanent: true,
       },
+      {
+        source: '/scalable-architecture',
+        destination: '/',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];

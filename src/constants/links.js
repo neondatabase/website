@@ -25,7 +25,6 @@ export default {
   platforms: '/platforms',
   programs: '/programs',
   report: '/restores-survey',
-  scalableArchitecture: '/scalable-architecture',
   scaleTrial: '/scale-trial',
   security: '/security',
   stage: '/stage',
