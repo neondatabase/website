@@ -23,24 +23,6 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
-    // Handle AI agent requests - serve markdown instead of HTML
-    const userAgent = req.headers.get('user-agent') || '';
-    const accept = req.headers.get('accept') || '';
-
-    // Temporary logging for debugging
-    if (
-      pathname.startsWith('/docs') ||
-      pathname.startsWith('/guides') ||
-      pathname.startsWith('/postgresql')
-    ) {
-      console.log('[AI Agent Detection]', {
-        pathname,
-        userAgent: userAgent.substring(0, 100),
-        accept: accept.substring(0, 100),
-        isAIAgent: isAIAgentRequest(req),
-      });
-    }
-
     if (isAIAgentRequest(req)) {
       const markdownPath = getMarkdownPath(pathname);
 
@@ -129,5 +111,6 @@ export const config = {
     '/guides/:path*',
     '/branching/:path*',
     '/programs/:path*',
+    '/use-cases/:path*',
   ],
 };

@@ -1,7 +1,7 @@
 // AI Agent Detection Utility
 // Detects if a request is coming from an AI agent based on User-Agent header
 
-import { CONTENT_PAGES } from 'constants/content';
+import { CONTENT_ROUTES, EXCLUDED_ROUTES, EXCLUDED_FILES } from 'constants/content';
 
 export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
@@ -40,13 +40,20 @@ export function isAIAgentRequest(request) {
 // Convert URL path to markdown file path
 // Example: /docs/introduction -> content/docs/introduction.md
 export function getMarkdownPath(pathname) {
-  const [, section, ...rest] = pathname.split('/');
-  const slug = rest.join('/');
-  const contentFolder = CONTENT_PAGES[section];
+  const path = pathname.slice(1);
 
-  if (contentFolder && slug) {
-    return `${contentFolder}/${slug}.md`;
-  }
+  // Early return for excluded routes and files
+  const isExcluded =
+    EXCLUDED_ROUTES.some((route) => path === route) ||
+    EXCLUDED_FILES.some((file) => pathname.endsWith(file));
 
-  return null;
+  if (isExcluded) return null;
+
+  // Find the matching route and extract slug
+  const matchedRoute = Object.keys(CONTENT_ROUTES).find((route) => path.startsWith(`${route}/`));
+
+  if (!matchedRoute) return null;
+
+  const slug = path.replace(`${matchedRoute}/`, '');
+  return `${CONTENT_ROUTES[matchedRoute]}/${slug}.md`;
 }
