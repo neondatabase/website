@@ -78,8 +78,6 @@ To provide a clear way to verify the setup, modify the main application file to 
 2.  **Replace the default "Hello Hono!" route** with a new root route that connects to the database.
 3.  **Use the code block that corresponds to the driver selected in Step 1.**
 
-    <hr/>
-
     #### Option A: Using `@neondatabase/serverless`
 
     ```typescript title="src/index.ts"
@@ -107,8 +105,6 @@ To provide a clear way to verify the setup, modify the main application file to 
     // export hono app or serve it depending on chosen runtime and existing code
     ```
 
-    <hr/>
-
     #### Option B: Using `postgres` (postgres.js)
 
     ```typescript title="src/index.ts"
@@ -135,8 +131,6 @@ To provide a clear way to verify the setup, modify the main application file to 
 
     // export hono app or serve it depending on chosen runtime and existing code
     ```
-
-    <hr/>
 
     #### Option C: Using `pg` (node-postgres)
 

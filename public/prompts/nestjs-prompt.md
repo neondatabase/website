@@ -161,8 +161,6 @@ Modify the main application files to use the new `DatabaseModule` and create a t
 
 2.  **Update the service:** Open `src/app.service.ts` and replace its contents to inject the database connection and query the PostgreSQL version. **Use the code block that corresponds to the driver selected in Step 1.**
 
-    <hr/>
-
     #### Option A & B: For `@neondatabase/serverless` or `postgres`
 
     ```typescript title="src/app.service.ts"
@@ -187,8 +185,6 @@ Modify the main application files to use the new `DatabaseModule` and create a t
       }
     }
     ```
-
-    <hr/>
 
     #### Option C: For `pg` (node-postgres)
 
