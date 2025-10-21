@@ -7,12 +7,11 @@ export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
   const accept = request.headers.get('accept') || '';
 
-  // Primary detection: Accept header prefers non-HTML formats
+  // Primary detection: Accept header explicitly requests non-HTML formats
   const prefersNonHtml =
     accept.includes('application/json') ||
     accept.includes('text/plain') ||
-    accept.includes('application/xml') ||
-    (accept.includes('*/*') && !accept.includes('text/html'));
+    accept.includes('application/xml');
 
   // Secondary detection: User-Agent patterns for known AI agents
   const aiAgentPatterns = [
@@ -27,8 +26,6 @@ export function isAIAgentRequest(request) {
     'copilot',
     'ai-agent',
     'llm-agent',
-    'bot',
-    'axios',
   ];
 
   const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
