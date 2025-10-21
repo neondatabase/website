@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.901Z'
 ---
 
+<CopyPrompt src="/prompts/hono-prompt.md"
+description="Pre-built prompt for connecting Hono applications to Neon Postgres"/>
+
 [Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
 
 To create a Neon project and access it from a Hono application:
