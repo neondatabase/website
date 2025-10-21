@@ -8,10 +8,12 @@ export function isAIAgentRequest(request) {
   const accept = request.headers.get('accept') || '';
 
   // Primary detection: Accept header explicitly requests non-HTML formats
+  const hasHtml = accept.includes('text/html');
   const prefersNonHtml =
-    accept.includes('application/json') ||
-    accept.includes('text/plain') ||
-    accept.includes('application/xml');
+    !hasHtml &&
+    (accept.includes('application/json') ||
+      accept.includes('text/plain') ||
+      accept.includes('application/xml'));
 
   // Secondary detection: User-Agent patterns for known AI agents
   const aiAgentPatterns = [
