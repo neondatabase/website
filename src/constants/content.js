@@ -25,7 +25,6 @@ const EXCLUDED_ROUTES = [
   'branching',
   'use-cases/multi-tb',
   'use-cases/serverless-apps',
-  'use-cases/variable-load',
 ];
 
 const EXCLUDED_FILES = ['rss.xml'];
