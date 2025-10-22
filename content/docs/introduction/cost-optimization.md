@@ -25,14 +25,14 @@ Compute is typically the largest component of your Neon bill. You're charged bas
 
 ## ☑ Storage (root and child branches)
 
-Storage costs are based on actual data size for root branches and the storage delta for child branches, billed in GB-months.
+Storage costs are based on actual data size for root branches and the minimum of accumulated changes or logical data size for child branches, billed in GB-months.
 
 **Optimization strategies:**
 
-- **Manage child branch storage** — Storage on child branches never decreases—it grows as data changes (inserts, updates, and deletes) accumulate over time. To control costs:
+- **Manage child branch storage** — Child branches are billed for the minimum of accumulated data changes or your logical data size—capped at your actual data size. While this prevents charges from exceeding your data size, managing branches effectively still helps minimize costs:
   - Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
   - Delete child branches when they're no longer needed
-  - Never use child branches as your primary production branch—use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on your actual data size, not data changes over time.
+  - For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead—root branches are billed on your actual data size.
 
 - **Implement branch lifecycle management** — Review your branches regularly and delete any that are no longer needed. Keeping your branch count under control reduces both storage costs and potential [extra branch charges](/docs/introduction/plans#extra-branches).
 
