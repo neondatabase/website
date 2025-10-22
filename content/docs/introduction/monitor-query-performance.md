@@ -2,7 +2,7 @@
 title: Monitor query performance
 subtitle: View and analyze query performance for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.296Z'
+updatedOn: '2025-10-22T15:44:06.425Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---
