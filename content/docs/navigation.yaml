@@ -993,8 +993,8 @@
               slug: manage/operations
             - title: Active queries
               slug: introduction/monitor-active-queries
-            - title: Query history
-              slug: introduction/monitor-query-history
+            - title: Query performance
+              slug: introduction/monitor-query-performance
             - title: External monitoring
               items:
                 - title: Datadog
