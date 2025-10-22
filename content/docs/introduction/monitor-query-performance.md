@@ -15,7 +15,7 @@ You can monitor query history for your Neon project from the **Monitoring** page
 
 The **Query performance** view shows the top 100 previously run queries for the selected **Branch**, **Compute**, and **Database**. Queries are grouped by their normalized form, with identical queries shown as a single row with a **Frequency** column indicating the number of times that query has been executed. Queries can be sorted by **Frequency** or **Average time**. Use the **Refresh** button to load the latest queries.
 
-![Neon query history tab](/docs/introduction/query_performance.png)
+![Neon query performance tab](/docs/introduction/query_performance.png)
 
 The **Query performance** view is powered by the `pg_stat_statements` Postgres extension, installed on a system managed database in your Postgres instance. Query history includes all queries run against your database, regardless of where they were issued from (Neon SQL Editor, external clients, or applications).
 
