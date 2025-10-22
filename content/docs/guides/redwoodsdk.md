@@ -21,11 +21,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Create a RedwoodSDK project and add dependencies
 
-1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Minimal Starter](https://github.com/redwoodjs/sdk/tree/main/starters/minimal). To create a new project, run the following command:
-
-    ```bash
-    npx degit redwoodjs/sdk/starters/minimal my-redwood-app
-    ```
+1.  Create a RedwoodSDK project if you do not have one. For instructions, see [RedwoodSDK Quickstart](https://docs.rwsdk.com/getting-started/quick-start/).
 
 2.  Navigate into your new project directory and install the RedwoodSDK dependencies:
 
@@ -34,7 +30,7 @@ If you do not have one already, create a Neon project. Save your connection deta
     npm install
     ```
 
-3.  Add project dependencies using one of the following commands:
+3.  Add project dependencies depending on the PostgreSQL driver you wish to use (`postgres.js` or `@neondatabase/serverless`):
 
     <CodeTabs reverse={true} labels={["postgres.js", "Neon serverless driver"]}>
 
@@ -102,16 +98,22 @@ export async function Home({ ctx }: RequestInfo) {
 
 ## Run your RedwoodSDK application
 
+Generate the required Wrangler types for RedwoodSDK to detect environment variables:
+
+```bash
+npx wrangler types
+```
+
 Start the development server:
 
 ```bash
-npm dev
+npm run dev
 ```
 
-Navigate to your application's URL ([localhost:5173](http://localhost:5173)) in your browser. You should see the output of your database query.
+Navigate to ([localhost:5173](http://localhost:5173)) in your browser. You should see a response similar to the following, indicating a successful connection to your Neon database:
 
 ```text
-PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
+PostgreSQL 17.5 (6bc9ef8) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
 > The specific version may vary depending on the PostgreSQL version of your Neon project.
