@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.914Z'
 ---
 
+<CopyPrompt src="/prompts/redwood-sdk-prompt.md"
+description="Pre-built prompt for connecting RedwoodSDK applications to Neon Postgres"/>
+
 [RedwoodSDK](https://rwsdk.com/) is a framework for building full-stack applications on Cloudflare. This guide describes how to create a Neon project and access it from a RedwoodSDK application.
 
 To create a Neon project and access it from a RedwoodSDK application:

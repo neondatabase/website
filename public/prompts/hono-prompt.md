@@ -37,7 +37,7 @@ When this prompt is triggered, automatically configure the open Hono project as 
     *   ** `postgres` (postgres.js):** A fast, full-featured client, great for Node.js environments.
     *   ** `pg` (node-postgres):** The classic, widely-used driver for Node.js.
 
-   Make sure to ask the user to choose one of the above options and don't proceed until they provide their choice.
+   Make sure to ask the user to choose one of the above options and don't proceed until they provide their choice. Clearly explain the pros of each option to help them decide.
 
 2.  Based on the user's selection, run the corresponding installation command:
 
