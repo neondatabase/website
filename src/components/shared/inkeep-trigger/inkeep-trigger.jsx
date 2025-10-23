@@ -36,6 +36,17 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
   const pathname = usePathname();
   const [pageType, setPageType] = useState(docPageType);
 
+  // Check if URL contains chatId parameter and open AI chat modal automatically on doc pages
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const chatId = urlParams.get('chatId');
+
+    if (chatId) {
+      setDefaultModalView(modalViews.AI_CHAT);
+      setIsOpen(true);
+    }
+  }, []);
+
   useEffect(() => {
     if (pathname === LINKS.changelog) {
       setPageType('changelog');
