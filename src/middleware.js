@@ -27,11 +27,39 @@ export async function middleware(req) {
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
-        // Redirect to GitHub raw markdown file
-        const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
-        const markdownUrl = `${githubRawBase}${markdownPath}`;
-        console.log('[AI Agent Redirect]', { pathname, markdownUrl });
-        return NextResponse.redirect(markdownUrl);
+        try {
+          // Fetch markdown content from GitHub and serve it directly
+          const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+          const markdownUrl = `${githubRawBase}${markdownPath}`;
+          console.log('[AI Agent] Serving markdown', { pathname, markdownUrl });
+
+          const response = await fetch(markdownUrl);
+
+          if (!response.ok) {
+            console.error('[AI Agent] Failed to fetch markdown', {
+              pathname,
+              markdownUrl,
+              status: response.status,
+            });
+            return NextResponse.next();
+          }
+
+          const markdown = await response.text();
+
+          // Return markdown content directly with appropriate headers
+          return new NextResponse(markdown, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/plain; charset=utf-8',
+              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              'X-Content-Source': 'markdown',
+              'X-Robots-Tag': 'noindex',
+            },
+          });
+        } catch (error) {
+          console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
+          return NextResponse.next();
+        }
       }
     }
 
