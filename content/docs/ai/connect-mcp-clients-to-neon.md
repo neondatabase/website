@@ -158,8 +158,8 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
     {
       "mcpServers": {
         "Neon": {
-          "command": "npx",
-          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+          "url": "https://mcp.neon.tech/mcp",
+          "headers": {}
         }
       }
     }
