@@ -35,6 +35,19 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
   const [defaultModalView, setDefaultModalView] = useState(modalViews.SEARCH);
   const pathname = usePathname();
   const [pageType, setPageType] = useState(docPageType);
+  const [sharedChatId, setSharedChatId] = useState(null);
+
+  // Check if URL contains chatId parameter and open AI chat modal automatically on doc pages
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const chatId = urlParams.get('chatId');
+
+    if (chatId) {
+      setSharedChatId(chatId);
+      setDefaultModalView(modalViews.AI_CHAT);
+      setIsOpen(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (pathname === LINKS.changelog) {
@@ -116,6 +129,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     },
     aiChatSettings: {
       ...aiChatSettings,
+      ...(sharedChatId && { chatId: sharedChatId }),
     },
   };
 

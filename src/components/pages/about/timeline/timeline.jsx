@@ -23,7 +23,7 @@ const ITEMS = [
   },
   {
     date: 'July, 2022',
-    title: '$54MM Raised',
+    title: '$54M Raised',
     link: `${LINKS.blog}/funding-a1`,
   },
   {
@@ -33,7 +33,7 @@ const ITEMS = [
   },
   {
     date: 'August, 2023',
-    title: '$46MM Raised',
+    title: '$46M Raised',
     link: `${LINKS.blog}/series-b-funding`,
   },
   {
