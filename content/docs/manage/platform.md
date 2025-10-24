@@ -124,6 +124,4 @@ Learn how Neon secures your projects and data, and explore the security features
 
 <a href="/docs/introduction/regions" description="Learn about Neon regions and availability" icon="globe">Regions</a>
 
-<a href="/docs/manage/slack-app" description="Integrate Neon with Slack for team notifications" icon="handshake">App for Slack</a>
-
 </DetailIconCards>
