@@ -2,7 +2,7 @@
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.914Z'
+updatedOn: '2025-10-24T12:48:41.463Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"

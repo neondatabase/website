@@ -2,7 +2,7 @@
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.901Z'
+updatedOn: '2025-10-24T12:48:41.460Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"

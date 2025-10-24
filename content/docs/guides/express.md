@@ -2,7 +2,7 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.899Z'
+updatedOn: '2025-10-24T12:48:41.458Z'
 ---
 
 <CopyPrompt src="/prompts/express-prompt.md"

@@ -2,7 +2,7 @@
 title: Connect Quarkus (JDBC) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using JDBC
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.912Z'
+updatedOn: '2025-10-24T12:48:41.462Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"

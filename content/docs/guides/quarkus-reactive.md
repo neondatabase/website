@@ -2,7 +2,7 @@
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.912Z'
+updatedOn: '2025-10-24T12:48:41.462Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-reactive-prompt.md"
