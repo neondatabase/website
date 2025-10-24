@@ -48,6 +48,7 @@ Neon creates two organizations in your account:
 The sponsored organization hosts databases for your free-tier users at no cost to you. This organization includes the Scale plan features, but individual projects have resource limits similar to Neon's standard free tier.
 
 You are not charged for usage in this organization. Use this for users who haven't upgraded to your platform's paid plans.
+For an overview of Free plan limits and Scale plan features, see [Neon plans](/docs/introduction/plans).
 
 ### Paid organization
 
