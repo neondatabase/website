@@ -131,7 +131,7 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 **Example config:**
 
 ```js
-import { postgres } from 'vite-plugin-db'
+import { postgres } from 'vite-plugin-db';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
