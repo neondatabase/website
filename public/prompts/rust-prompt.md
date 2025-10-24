@@ -48,7 +48,7 @@ Based on the user's selection, run the appropriate `cargo add` command. **The `p
   ```
   DATABASE_URL="postgresql://<user>:<password>@<hostname>.neon.tech:<port>/<dbname>?sslmode=require"
   ```
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connection Details**.
+- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
 ---
 

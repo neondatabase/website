@@ -51,7 +51,7 @@ When this prompt is triggered, automatically configure the open Ruby on Rails pr
     ```
     DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/"
     ```
-3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connection Details**.
+3.  Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 4.  Inform the user that the database role provided requires `CREATEDB` privileges, which is standard for roles created via the Neon Console.
 
 ---

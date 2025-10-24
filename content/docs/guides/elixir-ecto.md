@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-07-03T12:36:49.560Z'
 ---
 
+<CopyPrompt src="/prompts/elixir-ecto-prompt.md" 
+description="Pre-built prompt for connecting Elixir applications to Neon with Ecto"/>
+
 This guide describes how to connect from an Elixir application with Ecto, which is a database wrapper and query generator for Elixir. Ecto provides an API and abstractions for interacting databases, enabling Elixir developers to query any database using similar constructs.
 
 The instructions in this guide follow the steps outlined in the [Ecto Getting Started](https://hexdocs.pm/ecto/getting-started.html#content) guide, modified to demonstrate connecting to a Neon Serverless Postgres database. It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
