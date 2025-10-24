@@ -38,27 +38,27 @@ Execute with your preferred package manager:
 
 <TabItem>
 ```bash
-npx neondb
+npx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-yarn dlx neondb
+yarn dlx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-pnpm dlx neondb
+pnpm dlx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-bunx neondb
+bunx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-deno run -A neondb
+deno run -A get-db
 ```
 </TabItem>
 </Tabs>
@@ -78,20 +78,20 @@ deno run -A neondb
 
 ```bash
 # Basic usage: creates a new Neon database and writes credentials to .env
-npx neondb
+npx get-db
 
 # Seed the database with a SQL file after creation
-npx neondb --seed ./init.sql
+npx get-db --seed ./init.sql
 
 # Use a custom .env file and environment variable key
-npx neondb --env ./my.env --key MY_DB_URL
+npx get-db --env ./my.env --key MY_DB_URL
 
 # Skip prompts and use defaults
-npx neondb --yes
+npx get-db --yes
 
 # Detects PUBLIC_NEON_LAUNCHPAD_CLAIM_URL (default) from your environment,
 # and opens the defined claim URL in your browser
-npx neondb claim
+npx get-db claim
 ```
 
 The CLI writes the connection string, claim URL, and expiration to the specified `.env` file and outputs them in the terminal. For example:
@@ -131,7 +131,7 @@ Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postg
 **Example config:**
 
 ```js
-import { postgres } from '@neondatabase/vite-plugin-postgres';
+import { postgres } from 'vite-plugin-db'
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
@@ -180,7 +180,7 @@ The claim URL is available:
 
 - On the Neon Launchpad interface where the connection string is displayed
 - As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
-- The public claim variable is used when executing `npx neondb claim` to claim the database, which launches the browser window
+- The public claim variable is used when executing `npx get-db claim` to claim the database, which launches the browser window
 
 ### Claim process details
 
