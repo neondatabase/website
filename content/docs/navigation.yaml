@@ -1052,6 +1052,8 @@
           slug: introduction/about-billing
         - title: Plans
           slug: introduction/plans
+        - title: Agent plan
+          slug: introduction/agent-plan
         - title: Legacy plans
           slug: introduction/legacy-plans
         - title: Manage billing

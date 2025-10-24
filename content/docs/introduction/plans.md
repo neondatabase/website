@@ -32,7 +32,7 @@ If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are 
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
 <Admonition type="comingSoon" title="Building an agent platform?">
-For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](https://neon.com/use-cases/ai-agents)
+For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](/docs/introduction/agent-plan)
 </Admonition>
 
 | Plan feature                                          | **Free**                       | **Launch**                           | **Scale**                                                                                         |
