@@ -11,7 +11,7 @@ updatedOn: '2025-10-17T18:20:37.596Z'
 Branch expiration allows you to set automatic deletion timestamps on branches. When a branch reaches its expiration time, it is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
-**Console:** When creating a branch, check **Expire branch on** and choose a preset (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
+**Console:** When creating a branch, check **Expire branch after** and choose a preset (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
 
 **CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
 
@@ -71,7 +71,7 @@ Branch deletion is permanent and cannot be recovered. All associated data and co
 
 You can set, update, or remove expiration timestamps through three interfaces:
 
-- **Console** - When creating a branch, check **Expire branch on** and choose a preset option (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
+- **Console** - When creating a branch, check **Expire branch after** and choose a preset option (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
 - **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
 - **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
 
@@ -134,7 +134,7 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 1. Navigate to the **Branches** page in the Console
 2. Click **New branch**
 3. Enter branch name and select parent branch
-4. Check **Expire branch on** and choose a preset option (1 hour, 1 day, or 7 days)
+4. Check **Expire branch after** and choose a preset option (1 hour, 1 day, or 7 days)
 
 ![Set branch expiration](/docs/changelog/branch_expiration_presets.png)
 
@@ -210,7 +210,7 @@ curl --request POST \
 ![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
 
 3. To update: Select a new date and time
-4. To remove: Uncheck **Expire branch on**
+4. To remove: Uncheck **Expire branch after**
 5. Click **Save**
 
 </TabItem>
