@@ -17,6 +17,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Branch management:**
 
+- `compare_database_schema`: Shows a schema diff between a child branch and its parent.
 - `create_branch`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](/docs/introduction/branching) feature for development, testing, or migrations.
 - `delete_branch`: Deletes an existing branch from a Neon project.
 - `describe_branch`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
