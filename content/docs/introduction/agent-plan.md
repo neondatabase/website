@@ -14,6 +14,7 @@ updatedOn: '2025-10-24T14:09:12.290Z'
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/guides/platform-integration-intro">Neon platform integration</a>
 <a href="/docs/ai/ai-database-versioning">Neon database versioning</a>
+<a href="/programs/agents">Neon agent program</a>
 </DocsList>
 </InfoBlock>
 
@@ -116,5 +117,3 @@ Once enrolled in the agent plan:
 4. Monitor usage and billing through the API
 
 For detailed API integration instructions, see [Neon for platforms documentation](https://neon.com/docs/guides/platform-integration-intro).
-
-For pricing details and plan applications, see the [agent plan pricing page](https://neon.com/programs/agents#agent-plan-pricing).
