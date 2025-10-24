@@ -2,7 +2,7 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.464Z'
+updatedOn: '2025-10-24T12:53:27.788Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 

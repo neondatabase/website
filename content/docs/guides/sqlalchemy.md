@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2025-07-03T12:36:49.564Z'
+updatedOn: '2025-10-24T12:53:27.790Z'
 ---
 
 <CopyPrompt src="/prompts/sqlalchemy-prompt.md" 

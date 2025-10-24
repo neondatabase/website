@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-06-23T15:24:08.767Z'
+updatedOn: '2025-10-24T12:53:27.785Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 
