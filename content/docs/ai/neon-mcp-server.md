@@ -178,6 +178,7 @@ After setting up either the remote or local server and connecting your MCP clien
 - **List tables in a database:** `"What tables are in the database 'my-database' in project 'my-project'?"`
 - **Add a column to a table:** `"Add a column 'email' of type VARCHAR to the 'users' table in database 'main' of project 'my-project'"`
 - **Run a query:** `"Show me the first 10 rows from the 'users' table in database 'my-database'"`
+- **Generate a schema diff:** `"Generate a schema diff for branch 'br-feature-auth' in project 'my-project'"`
 
 <Video  
 sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}
