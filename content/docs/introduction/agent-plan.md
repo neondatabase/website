@@ -102,7 +102,6 @@ The agent plan includes additional benefits for participating platforms:
 
 | Benefit                    | Description                                                                           |
 | -------------------------- | ------------------------------------------------------------------------------------- |
-| **LLM token credits**      | Access to Databricks Startup Credits for Foundation Model Serving tokens.             |
 | **Your Free Tier is free** | Neon sponsors up to 30,000 projects per month used in your sponsored tier.            |
 | **General use credits**    | Up to $30,000 in credits for those not eligible for the [Startup Program](/startups). |
 | **Co-Marketing**           | Blog and social promotions, hackathons and more.                                      |
