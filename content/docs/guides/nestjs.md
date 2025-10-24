@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.908Z'
 ---
 
+<CopyPrompt src="/prompts/nestjs-prompt.md"
+description="Pre-built prompt for connecting NestJS applications to Neon Postgres"/>
+
 NestJS is a framework for building efficient, scalable Node.js server-side applications<sup><a target="_blank" href="https://docs.nestjs.com/">1</a></sup>. This guide explains how to connect NestJS with Neon using a secure server-side request.
 
 To create a Neon project and access it from a NestJS application:
