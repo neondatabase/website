@@ -69,7 +69,7 @@ This enables fleet management at scale without manual intervention. Request limi
 
 ### Project transfers between organizations
 
-Move user projects between organizations when they upgrade or downgrade tiers. Transfers require a personal API key with access to both organizations and support up to 400 projects per request.
+With the sponsored and paid organization structure of the agent plan, you can move user projects between organizations when they upgrade or downgrade tiers. Transferring projects between organizations requires a personal API key with access to both organizations. You can transfer up to 400 projects per request.
 
 See [transfer projects between organizations](/docs/manage/orgs-project-transfer) for details.
 
