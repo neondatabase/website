@@ -65,7 +65,7 @@ After initial enrollment, you have full control over both organizations as admin
 - Monitor usage across all projects
 - Manage billing limits
 
-This enables fleet management at scale without manual intervention. Request limit increases through your Neon contact when you approach capacity.
+This enables fleet management at scale without manual intervention. You can request limit increases through your Neon contact when you approach capacity.
 
 ### Project transfers between organizations
 
