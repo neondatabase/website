@@ -100,7 +100,7 @@ Track compute time, storage, and network I/O per project to monitor usage and bu
 
 ## Program benefits
 
-The agent plan includes additional benefits for participating platforms:
+The agent plan includes these benefits for participating platforms:
 
 | Benefit                    | Description                                                                           |
 | -------------------------- | ------------------------------------------------------------------------------------- |
