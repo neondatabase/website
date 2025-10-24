@@ -5,9 +5,6 @@ on:
     # Runs every Monday at 9:00 AM UTC
     - cron: '0 9 * * 1'
   workflow_dispatch: # Allows manual trigger from GitHub UI
-  pull_request: # TEMPORARY: for testing workflow
-    paths:
-      - '.github/workflows/unit-tests.yml'
 
 permissions:
   contents: read
