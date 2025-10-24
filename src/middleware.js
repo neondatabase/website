@@ -24,6 +24,13 @@ export async function middleware(req) {
     const { pathname } = req.nextUrl;
 
     if (isAIAgentRequest(req)) {
+      console.log('[AI Agent] Request detected', {
+        pathname,
+        userAgent: req.headers.get('user-agent'),
+        accept: req.headers.get('accept'),
+        allHeaders: Object.fromEntries(req.headers.entries()),
+      });
+
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
