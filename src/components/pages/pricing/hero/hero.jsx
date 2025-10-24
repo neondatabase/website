@@ -177,7 +177,7 @@ const Hero = () => {
           title="Agent Plan"
           description="Get custom resource limits and credits for your free tier with our Agent Plan, for platforms provisioning thousands of databases."
           buttonText="Apply Here"
-          buttonUrl={LINKS.useCasesAI}
+          buttonUrl={LINKS.programsAgents}
           size="sm"
           hasDecor={false}
         />

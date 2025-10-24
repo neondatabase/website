@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-10-15T20:49:51.714Z'
+updatedOn: '2025-10-22T23:30:25.036Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -201,19 +201,19 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 
 - **Launch**/**Scale plan storage cost**: $0.35/GB-month
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
-- **[Child branches](/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
+- **[Child branches](/docs/reference/glossary#child-branch)**: billed on the minimum of the data changes since creation or the logical data size
 
 When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-**Storage on child branches never decreases — it grows as data changes accumulate over time.**
+**Child branch storage is capped at your actual data size** — you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
 
 <Admonition type="important" title="Manage child branches to control storage costs">
 
-Because data changes on child branches accumulate over time and never decrease, unmanaged child branches can lead to high storage usage and unexpected bills. To keep costs under control:
+Even though child branch storage is capped at your logical data size, it's still important to manage branches effectively to minimize storage costs:
 
 - Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
 - Delete child branches when they're no longer needed
-- Never use child branches as your primary production branch — use a [root branch](/docs/manage/branches#root-branch) instead. Root branches are billed on your actual data size, not data changes over time.
+- For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead — root branches are billed on your actual data size with no delta tracking overhead.
 
 </Admonition>
 
@@ -324,7 +324,7 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 | **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                               |
 | **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                        |
 | **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                      |
-| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                             |
+| **Storage (child branches, GB-month)** | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
 | **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
 | **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
 | **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price).                                                                |
@@ -421,10 +421,10 @@ How is compute usage measured in Neon?
 How is storage usage billed in Neon?
 : Storage is billed based on actual usage, measured in **GB-months**:  
  1 GB-month = 1 GB stored for 1 month  
- Storage usage is metered hourly and summed over the month. For child branches, only the storage **delta** (changes from the parent branch) is billed. On the Free plan, you get 0.5 GB per project.
+ Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size — capped at your actual data size. On the Free plan, you get 0.5 GB per project.
 
 How do branches affect storage?
-: Your root branch contains your main data. Child branches share data with the root until changes are made. Only the changed data (delta) is billed for child branches. Delta storage never decreases, so delete unused branches to control storage costs.
+: Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size — you never pay more than your actual data size. Delete unused branches to control storage costs.
 
 How is extra branch usage billed?
 : Paid plans include a set number of branches per project. Additional branches are billed at **$1.50/branch-month**, prorated hourly (about $0.002/hour).  
@@ -461,7 +461,7 @@ Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
 
 What is the difference between root and child branch storage billing?
-: Root branches are billed for their full logical data size. Child branches are billed only for changes relative to their parent.
+: Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size — ensuring you never pay more than your actual data size.
 
 Can I get more than the listed project limit?
 : Yes, on Scale you can request increases for projects beyond the listed limit.

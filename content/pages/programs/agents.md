@@ -10,8 +10,6 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 
 If you're building agents that generate apps from prompts, your users want to build apps, not manage databases. Industry-leading platforms like Replit and V0 create databases on Neon because it aligns with how agents work: Instant, branchable, serverless Postgres data layer, invisible to users.
 
-<Admonition type="tip" title="LLM Credits">Qualified startups can get credits towards the latest OpenAI, Llama, Claude models through the Databricks Startup program. (Neon is a Databricks Company.)</Admonition>
-
 **Neon Features for Agents:**
 
 - **Instant Provisioning:** your users never wait for infrastructure.
@@ -44,7 +42,6 @@ If you're building agents that generate apps from prompts, your users want to bu
 | Data API (PostgREST-compatible) | **Higher Rate Limits Available**                                                                      |
 | Support                         | **Shared Slack Channel**                                                                              |
 | <br/>**Agent Incentives**       |                                                                                                       |
-| **LLM Token Credits**           | Access to Databricks Startup Credits for Foundation Model Serving tokens.                             |
 | **Your Free Tier is Free**      | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
 | **General Use Credits**         | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
 | **Co-Marketing**                | Blog and Social promotions, hackathons and more.                                                      |

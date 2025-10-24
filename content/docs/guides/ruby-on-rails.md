@@ -2,10 +2,10 @@
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
 enableTableOfContents: true
-updatedOn: '2025-10-07T09:03:30.004Z'
+updatedOn: '2025-10-24T12:53:27.790Z'
 ---
 
-<CopyPrompt src="/prompts/ruby-on-rails.md" 
+<CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
 description="Pre-built prompt for connecting Ruby on Rails to Neon Postgres"/>
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.

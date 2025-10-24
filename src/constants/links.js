@@ -24,6 +24,7 @@ export default {
   pricing: '/pricing',
   platforms: '/platforms',
   programs: '/programs',
+  programsAgents: '/programs/agents',
   report: '/restores-survey',
   scaleTrial: '/scale-trial',
   security: '/security',

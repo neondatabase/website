@@ -2,8 +2,11 @@
 title: Connect an Express application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Express application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.899Z'
+updatedOn: '2025-10-24T12:48:41.458Z'
 ---
+
+<CopyPrompt src="/prompts/express-prompt.md"
+description="Pre-built prompt for connecting ExpressJS applications to Neon Postgres"/>
 
 This guide describes how to create a Neon project and connect to it from an Express application. Examples are provided for using the [Neon serverless driver](https://npmjs.com/package/@neondatabase/serverless), [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 

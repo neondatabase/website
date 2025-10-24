@@ -6,8 +6,11 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-06-23T15:24:08.767Z'
+updatedOn: '2025-10-24T12:53:27.785Z'
 ---
+
+<CopyPrompt src="/prompts/django-prompt.md" 
+description="Pre-built prompt for connecting Django applications to Neon"/>
 
 To connect to Neon from a Django application:
 
@@ -37,6 +40,8 @@ In your Django project, navigate to the `DATABASES` section of your `settings.py
 # Add these at the top of your settings.py
 from os import getenv
 from dotenv import load_dotenv
+
+load_dotenv()
 
 # Replace the DATABASES section of your settings.py with this
 DATABASES = {

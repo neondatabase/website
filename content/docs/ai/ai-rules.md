@@ -2,14 +2,30 @@
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.264Z'
+updatedOn: '2025-10-24T11:19:19.274Z'
 ---
 
-Boost your productivity with AI context rules for Neon. These rules help AI tools like [Cursor](https://www.cursor.so/) understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
+Boost your productivity with AI context rules for Neon. These rules help AI assistants understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
+
+If you're using **Claude Code**, install the comprehensive Neon plugin that bundles Skills, MCP integration, and all context rules in one package. For other AI tools like **Cursor**, use the individual `.mdc` context rule files.
 
 <Admonition type="note" title="AI Rules are in Beta">
 AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
 </Admonition>
+
+## For Claude Code
+
+If you're using Claude Code, install the Neon plugin to get Skills, MCP integration, and all the context rules in one package:
+
+<DetailIconCards>
+
+<a href="/docs/ai/ai-claude-code-plugin" description="Install the Neon Claude Code plugin to give Claude access to Neon's APIs, Postgres workflows, and built-in Skills" icon="github">Claude Code plugin for Neon</a>
+
+</DetailIconCards>
+
+## Individual AI rules
+
+For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 
@@ -45,7 +61,7 @@ The AI confirms that using `stackServerApp.getUser({ or: "redirect" })` is the c
 
 ## Add rules to your project
 
-Add these files to your project's `.cursor/rules` folder:
+All `.mdc` files are available in the [Neon AI Rules toolkit repository](https://github.com/neondatabase-labs/ai-rules). Copy the files you need to your project's `.cursor/rules` folder (or your AI tool's equivalent):
 
 ```text
 .cursor/
@@ -53,6 +69,16 @@ Add these files to your project's `.cursor/rules` folder:
     neon-auth.mdc
     neon-serverless.mdc
     neon-drizzle.mdc
+    neon-toolkit.mdc
+    neon-typescript-sdk.mdc
+    neon-python-sdk.mdc
+    neon-api-guidelines.mdc
+    neon-api-projects.mdc
+    neon-api-branches.mdc
+    neon-api-endpoints.mdc
+    neon-api-organizations.mdc
+    neon-api-keys.mdc
+    neon-api-operations.mdc
 ```
 
 Most AI tools will automatically apply these rules when you're working with Neon-related code. You can also reference them explicitly in prompts for more targeted assistance.

@@ -40,7 +40,7 @@ dotnet add package Microsoft.Extensions.Configuration.Binder
   }
   ```
 - **Do not hardcode** credentials directly in the code.
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connection Details**, making sure to select **.NET** from the dropdown.
+- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**, making sure to select **.NET** from the dropdown.
 
 ---
 

@@ -2,8 +2,11 @@
 title: Connect Quarkus (JDBC) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using JDBC
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.912Z'
+updatedOn: '2025-10-24T12:48:41.462Z'
 ---
+
+<CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"
+description="Pre-built prompt for connecting Quarkus applications to Neon using JDBC"/>
 
 [Quarkus](https://quarkus.io/) is a Java framework optimized for cloud environments. This guide shows how to connect to Neon from a Quarkus project using the PostgreSQL JDBC driver.
 
@@ -40,8 +43,7 @@ Create a `.env` file in the root of your Quarkus project directory. Configure a 
 QUARKUS_DATASOURCE_DB_KIND=postgresql
 QUARKUS_DATASOURCE_USERNAME=[user]
 QUARKUS_DATASOURCE_PASSWORD=[password]
-# Note that "jdbc" is prepended, and that "?sslmode=require&channel_binding=require" is appended to the connection string
-QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
+QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://[neon_hostname]/[dbname]?sslmode=require&channelBinding=require
 ```
 
 <Admonition type="note">
@@ -104,7 +106,7 @@ quarkus dev
 Visit [localhost:8080/postgres/version](http://localhost:8080/postgres/version) in your web browser. Your Neon database's Postgres version will be returned. For example:
 
 ```
-PostgreSQL 15.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+PostgreSQL 17.5 (6bc9ef8) on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
 </Steps>

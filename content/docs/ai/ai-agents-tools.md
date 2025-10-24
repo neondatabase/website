@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.257Z'
+updatedOn: '2025-10-24T11:19:19.270Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -16,9 +16,17 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 <a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients like Cursor, Claude Code, and ChatGPT to your Neon database" icon="github">Connect MCP clients</a>
 </DetailIconCards>
 
+## Claude Code plugin
+
+If you're using Claude Code, install the Neon plugin to get Skills, MCP integration, and all the context rules in one package.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
+</DetailIconCards>
+
 ## AI rules
 
-Accelerate your development with context rules that help AI tools write better code for Neon's features.
+For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth</a>

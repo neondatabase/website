@@ -2,8 +2,11 @@
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.919Z'
+updatedOn: '2025-10-24T12:53:27.791Z'
 ---
+
+<CopyPrompt src="/prompts/typeorm-prompt.md" 
+description="Pre-built prompt for connecting Node.js applications to Neon using TypeORM."/>
 
 TypeORM is an open-source ORM that lets you to manage and interact with your database. This guide covers the following topics:
 

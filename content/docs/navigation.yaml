@@ -551,6 +551,8 @@
               items:
                 - title: AI rules
                   slug: ai/ai-rules
+                - title: Claude Code plugin
+                  slug: ai/ai-claude-code-plugin
                 - title: Neon Auth
                   slug: ai/ai-rules-neon-auth
                 - title: Drizzle
