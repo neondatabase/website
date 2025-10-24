@@ -31,7 +31,6 @@ export async function middleware(req) {
           // Fetch markdown content from GitHub and serve it directly
           const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
           const markdownUrl = `${githubRawBase}${markdownPath}`;
-          console.log('[AI Agent] Serving markdown', { pathname, markdownUrl });
 
           const response = await fetch(markdownUrl);
 
