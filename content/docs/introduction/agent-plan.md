@@ -30,7 +30,7 @@ To join the agent plan:
 - Your application requires approval from the Neon team
 - The Neon team handles all organization setup and configuration
 
-Initial enrollment is not self-service. Once approved, the Neon team configures both organizations and grants you admin access. After setup, you manage all projects and configurations independently via the API.
+Initial enrollment is not self-service. Once approved, the Neon team configures both organizations and grants you admin access. After setup, you manage all projects and configurations independently via the [Neon API](/docs/reference/api-reference).
 
 <CTA
   title="Neon agent plan"
