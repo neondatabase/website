@@ -24,6 +24,10 @@
     "check:broken-links": "linkinator --config linkinator.config.json",
     "prepare": "husky install",
     "test": "npx cypress open",
+    "test:unit": "vitest",
+    "test:unit:ui": "vitest --ui",
+    "test:unit:run": "vitest run",
+    "test:unit:coverage": "vitest run --coverage",
     "migrate": "npx prisma migrate dev",
     "studio": "npx prisma studio",
     "postinstall": "prisma generate"
@@ -115,6 +119,7 @@
     "@next/eslint-plugin-next": "^14.2.2",
     "@shikijs/transformers": "^1.3.0",
     "@svgr/webpack": "^8.1.0",
+    "@vitest/ui": "^4.0.2",
     "autoprefixer": "^10.4.19",
     "cypress": "^13.8.0",
     "encoding": "^0.1.13",
@@ -126,6 +131,7 @@
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "happy-dom": "^20.0.8",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.38",
@@ -136,6 +142,7 @@
     "shiki": "^1.1.1",
     "svgo-loader": "^4.0.0",
     "tailwindcss": "^3.4.3",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "vitest": "^4.0.2"
   }
 }
