@@ -1038,11 +1038,6 @@
                   slug: manage/updates
             - title: Regions
               slug: introduction/regions
-            - title: Team Tools
-              items:
-                - title: App for Slack
-                  slug: manage/slack-app
-                  tag: beta
 
     - title: Plans and billing
       slug: introduction/about-billing
