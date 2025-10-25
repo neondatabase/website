@@ -14,7 +14,15 @@ The following instructions require a working installation of [psql](https://www.
 
 If you don't have `psql` installed already, follow these steps to get set up:
 
-Tab: Mac
+Tab: Mac (Intel x64)
+
+```bash
+brew install libpq
+echo 'export PATH="/usr/local/opt/libpq/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+Tab: Mac (Apple Silicon)
 
 ```bash
 brew install libpq

@@ -7,11 +7,10 @@
 - [Row-Level Security with Neon HTML](https://neon.com/docs/guides/row-level-security): The original HTML version of this documentation
 
 What you will learn:
-- How the Data API and Neon RLS use Row-Level Security
+- How the Data API uses Row-Level Security
 
 Related docs:
 - [Data API](https://neon.com/docs/data-api/get-started)
-- [Neon RLS (JWT/JWKS Integration)](https://neon.com/docs/guides/neon-rls)
 - [Simplify RLS with Drizzle](https://neon.com/docs/guides/rls-drizzle)
 - [Postgres RLS Tutorial](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security)
 
@@ -26,12 +25,7 @@ CREATE POLICY "users_can_only_access_own_notes" ON notes
   FOR ALL USING (auth.user_id() = user_id);
 ```
 
-Neon provides two ways to apply RLS for client-side querying:
-
-- [Data API](https://neon.com/docs/guides/row-level-security#data-api-with-rls) (recommended)
-- [Neon RLS (JWT/JWKS Integration)](https://neon.com/docs/guides/row-level-security#neon-rls-jwtjwks-integration)
-
-> Note, the Data API and Neon RLS **are not compatible**. If you are using the Data API on a given branch, make sure Neon RLS is disabled for your project.
+When using the Data API for client-side querying, RLS policies are required to secure your data.
 
 ## Data API with RLS
 
@@ -46,22 +40,9 @@ The **Data API** turns your database tables on a given branch into a REST API, a
 - [Get started](https://neon.com/docs/data-api/get-started): Learn how to enable and use the Data API with RLS policies
 - [Building a note-taking app](https://neon.com/docs/data-api/demo): See a complete example of the Data API with RLS in action
 
-## Neon RLS (JWT/JWKS Integration)
-
-**Neon RLS** provides JWT/JWKS integration at the database level, exposing a single endpoint that accepts direct SQL queries over HTTP.
-
-### How it works
-
-- The `pg_session_jwt` extension provides the `auth.user_id()` function.
-- Your RLS policies use `auth.user_id()` to control access.
-- It works with the Neon HTTP driver for direct database queries.
-
-- [About Neon RLS](https://neon.com/docs/guides/neon-rls): Learn how Neon RLS works and when to use it
-- [Tutorial](https://neon.com/docs/guides/neon-rls-tutorial): A step-by-step guide to setting up Neon RLS
-
 ## RLS with Drizzle ORM
 
-Drizzle makes it simple to write RLS policies that work with both the Data API and Neon RLS. We highly recommend using its `crudPolicy` helper to simplify common RLS patterns.
+Drizzle makes it simple to write RLS policies that work with the Data API. We highly recommend using its `crudPolicy` helper to simplify common RLS patterns.
 
 - [Simplify RLS with Drizzle](https://neon.com/docs/guides/rls-drizzle): Learn how to use Drizzle's crudPolicy function to simplify RLS policies
 

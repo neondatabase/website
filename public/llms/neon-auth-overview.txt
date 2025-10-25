@@ -10,6 +10,8 @@ Neon Auth brings authentication and user management natively to your Neon Postgr
 
 **Note** Beta: **Neon Auth** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
+   **Tip** AI Rules available: Working with AI coding assistants? Check out our [AI rules for Neon Auth](https://neon.com/docs/ai/ai-rules-neon-auth) to help your AI assistant generate better code for implementing authentication with Neon.
+
 ## Why Neon Auth?
 
 Neon Auth helps you move faster by handling the auth stack for you:
