@@ -6,6 +6,8 @@ import { getToken } from 'next-auth/jwt';
 import { checkCookie, getReferer } from 'app/actions';
 import LINKS from 'constants/links';
 
+import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
@@ -21,6 +23,53 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
+    if (isAIAgentRequest(req)) {
+      console.log('[AI Agent] Request detected', {
+        pathname,
+        userAgent: req.headers.get('user-agent'),
+        accept: req.headers.get('accept'),
+        allHeaders: Object.fromEntries(req.headers.entries()),
+      });
+
+      const markdownPath = getMarkdownPath(pathname);
+
+      if (markdownPath) {
+        try {
+          // Fetch markdown content from GitHub and serve it directly
+          const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
+          const markdownUrl = `${githubRawBase}${markdownPath}`;
+
+          const response = await fetch(markdownUrl);
+
+          if (!response.ok) {
+            console.error('[AI Agent] Failed to fetch markdown', {
+              pathname,
+              markdownUrl,
+              status: response.status,
+            });
+            return NextResponse.next();
+          }
+
+          const markdown = await response.text();
+
+          // Return markdown content directly with appropriate headers
+          return new NextResponse(markdown, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/plain; charset=utf-8',
+              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              'X-Content-Source': 'markdown',
+              'X-Robots-Tag': 'noindex',
+            },
+          });
+        } catch (error) {
+          console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
+          return NextResponse.next();
+        }
+      }
+    }
+
+    // Check if the user is logged in
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
@@ -86,5 +135,16 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*'],
+  matcher: [
+    '/',
+    '/home',
+    '/generate-ticket/:path*',
+    '/tickets/:path*',
+    '/docs/:path*',
+    '/postgresql/:path*',
+    '/guides/:path*',
+    '/branching/:path*',
+    '/programs/:path*',
+    '/use-cases/:path*',
+  ],
 };
