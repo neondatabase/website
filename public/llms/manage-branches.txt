@@ -27,7 +27,7 @@ To create a branch:
 
    **Note**: When creating a branch with past data, you can only specify a date and time that falls within your [restore window](https://neon.com/docs/manage/projects#configure-restore-window).
 
-6. Optionally set an **Expire branch on** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](https://neon.com/docs/guides/branch-expiration) for details.
+6. Optionally set an **Expire branch after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](https://neon.com/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
@@ -86,7 +86,12 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available. For more information, see [Default branch](https://neon.com/docs/manage/branches#default-branch).
+Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The default branch serves two key purposes:
+
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
+
+For more information, see [Default branch](https://neon.com/docs/manage/branches#default-branch).
 
 To set a branch as the default branch:
 
@@ -118,7 +123,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
-5. Set a new expiration date and time, or toggle off "Expire branch on" to remove expiration.
+5. Set a new expiration date and time, or toggle off "Expire branch after" to remove expiration.
 6. Click **Save**.
 
 For details and configuration instructions, refer to our [Branch expiration guide](https://neon.com/docs/guides/branch-expiration).
@@ -201,25 +206,27 @@ Neon also supports two other types of root branches that have no parent but _can
 
 The number of root branches allowed in a project depends on your Neon plan.
 
-| Plan     | Root branch allowance per project |
-| :------- | :-------------------------------- |
-| Free     | 3                                 |
-| Launch   | 5                                 |
-| Scale    | 10                                |
-| Business | 25                                |
+| Plan   | Root branch allowance per project |
+| :----- | :-------------------------------- |
+| Free   | 3                                 |
+| Launch | 5                                 |
+| Scale  | 25                                |
 
 ### Default branch
 
 Each Neon project has a default branch. In the Neon Console, your default branch is identified by a `DEFAULT` tag. You can designate any branch as the default branch for your project.
 
-For users on paid plans, the compute associated with the default branch is exempt from the limit on simultaneously active computes, ensuring that it is always available.
+The default branch serves two key purposes:
+
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The [Neon-Managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 ### Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
 - For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, a compute associated with a non-default branch remains suspended.
+- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, additional computes will remain suspended.
 
 ### Protected branch
 
@@ -303,6 +310,8 @@ curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches' \
 The response body includes information about the branch, the branch's compute, and the `create_branch` and `start_compute` operations that were initiated.
 
 Details: Response body
+For attribute definitions, find the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branch": {
@@ -436,6 +445,8 @@ The `project_id` for a Neon project is found on the **Settings** page in the Neo
 The response body lists the project's default branch and any child branches. The name of the default branch in this example is `main`.
 
 Details: Response body
+For attribute definitions, find the [List branches](https://api-docs.neon.tech/reference/listprojectbranches) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branches": [
@@ -521,6 +532,8 @@ curl -X 'DELETE' \
 The response body shows information about the branch being deleted and the `suspend_compute` and `delete_timeline` operations that were initiated.
 
 Details: Response body
+For attribute definitions, find the [Delete branches](https://api-docs.neon.tech/reference/deleteprojectbranch) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "branch": {

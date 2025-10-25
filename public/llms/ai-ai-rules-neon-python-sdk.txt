@@ -1,0 +1,1133 @@
+# AI Rules: Neon Python SDK
+
+> The document details the AI Rules for the Neon Python SDK, outlining how to implement and manage AI-driven functionalities within Neon applications using Python.
+
+## Source
+
+- [AI Rules: Neon Python SDK HTML](https://neon.com/docs/ai/ai-rules-neon-python-sdk): The original HTML version of this documentation
+
+**Note** AI Rules are in Beta: AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
+
+Related docs:
+- [Get started with Neon Python SDK](https://neon.com/docs/reference/python-sdk)
+- [Neon API Reference](https://neon.com/docs/reference/api-reference)
+
+Repository:
+- [Github Repo](https://github.com/neondatabase/neon-api-python)
+- [Python SDK Docs](https://neon-api-python.readthedocs.io/en/latest/)
+- [neon-python-sdk.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-python-sdk.mdc)
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-python-sdk.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon Python SDK code. You can also reference them explicitly in prompts.
+
+## Rules
+
+````md
+---
+description: Use these rules to manage your Neon projects, branches, databases, and other resources programmatically using the Neon Python SDK.
+globs: *.py
+alwaysApply: false
+---
+
+This file provides comprehensive rules and best practices for interacting with the Neon API using the `neon-api` Python SDK. Following these guidelines will enable an AI agent like you to build robust, efficient, and error-tolerant integrations with Neon.
+
+The SDK is a Pythonic wrapper around the Neon REST API and provides methods for managing all Neon resources, including projects, branches, endpoints, roles, and databases.
+
+### Neon Core Concepts
+
+To effectively use the Neon Python SDK, it's essential to understand the hierarchy and purpose of its core resources. The following table provides a high-level overview of each concept.
+
+| Concept          | Description                                                                                                                        | Analogy/Purpose                                                                                                 | Key Relationship                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Organization     | The highest-level container, managing billing, users, and multiple projects.                                                       | A GitHub Organization or a company's cloud account.                                                             | Contains one or more Projects.                                                                        |
+| Project          | The primary container that contains all related database resources for a single application or service.                            | A Git repository or a top-level folder for an application.                                                      | Lives within an Organization (or a personal account). Contains Branches.                              |
+| Branch           | A lightweight, copy-on-write clone of a database's state at a specific point in time.                                              | A `git branch`. Used for isolated development, testing, staging, or previews without duplicating storage costs. | Belongs to a Project. Contains its own set of Databases and Roles, cloned from its parent.            |
+| Compute Endpoint | The actual running PostgreSQL instance that you connect to. It provides the CPU and RAM for processing queries.                    | The "server" or "engine" for your database. It can be started, suspended (scaled to zero), and resized.         | Is attached to a single Branch. Your connection string points to a Compute Endpoint's hostname.       |
+| Database         | A logical container for your data (tables, schemas, views) within a branch. It follows standard PostgreSQL conventions.            | A single database within a PostgreSQL server instance.                                                          | Exists within a Branch. A branch can have multiple databases.                                         |
+| Role             | A PostgreSQL role used for authentication (logging in) and authorization (permissions to access data).                             | A database user account with a username and password.                                                           | Belongs to a Branch. Roles from a parent branch are copied to child branches upon creation.           |
+| API Key          | A secret token used to authenticate requests to the Neon API. Keys have different scopes (Personal, Organization, Project-scoped). | A password for programmatic access, allowing you to manage all other Neon resources.                            | Authenticates actions on Organizations, Projects, Branches, etc.                                      |
+| Operation        | An asynchronous action performed by the Neon control plane, such as creating a branch or starting a compute.                       | A background job or task. Its status can be polled to know when an action is complete.                          | Associated with a Project and often a specific Branch or Endpoint. Essential for scripting API calls. |
+
+### Installation
+
+To begin, install the SDK package into your project using pip:
+
+```bash
+pip install neon-api
+```
+
+### Authentication and Client Initialization
+
+All interactions with the Neon API require an API key. Store your key securely as an environment variable (e.g., `NEON_API_KEY`).
+
+Initialize the API client in your code. The SDK recommends using the `from_environ()` class method for security.
+
+```python
+import os
+from neon_api import NeonAPI
+
+# Best practice: Load API key from environment variables
+api_key = os.getenv("NEON_API_KEY")
+if not api_key:
+    raise ValueError("NEON_API_KEY environment variable is not set.")
+
+neon = NeonAPI(api_key=api_key)
+```
+
+## API Keys
+
+Manage programmatic access to the Neon API.
+
+### List API keys
+
+Description: Retrieves a list of all API keys associated with your Neon account. The response includes metadata about each key but does not include the secret key token itself.
+
+Method Signature:
+`neon.api_keys()`
+
+Parameters: None.
+
+Example Usage:
+
+```python
+api_keys = neon.api_keys()
+print(f"API Keys: {api_keys}")
+# Example output: [ApiKeysListResponseItem(id=1234, name='api-key-name', created_at='xx', created_by=ApiKeyCreatorData(id='xx', name='user_name', image=''), last_used_from_addr='', last_used_at=None), ... other API keys]
+```
+
+Key Points & Best Practices:
+
+- Use this method to get the API Key Id required for revoking a key.
+
+### Create API key
+
+Description: Creates a new API key with a specified name. The response includes the `id` and the secret `key` token.
+
+Method Signature:
+`neon.api_key_create(json)`
+
+Parameters:
+
+- `key_name` (string, required, passed as keyword argument): A descriptive name for the API key.
+
+Example Usage:
+
+```python
+new_key_info = neon.api_key_create(key_name='my-python-script-key')
+print(f"ID: {new_key_info.id}") # Can be used for revoking the key later
+print(f"Key (store securely!): {new_key_info.key}") # Example: "napi_xxxx"
+```
+
+Key Points & Best Practices:
+
+- Store the Key Securely: The `key` token is only returned once upon creation. Store it immediately in a secure location.
+- Use descriptive names for keys to easily identify their purpose.
+
+### Revoke API key
+
+Description: Revokes an existing API key, permanently disabling it. This action cannot be undone.
+
+Method Signature:
+`neon.api_key_revoke(api_key_id: str)`
+
+Parameters:
+
+- `api_key_id` (string, required): The unique identifier of the API key to revoke.
+
+Example Usage:
+
+```python
+revoked_key_info = neon.api_key_revoke(1234)
+```
+
+Key Points & Best Practices:
+
+- You must know the `api_key_id` to revoke a key. Use `api_keys()` if you don't have it.
+
+## Operations
+
+An operation is an action performed by the Neon Control Plane. It is crucial to monitor the status of long-running operations.
+
+### List operations
+
+Description: Retrieves a list of operations for a specified project.
+
+Method Signature:
+`neon.operations(project_id: str, *, cursor: str = None, limit: int = None)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `limit` (int, optional): The number of operations to return.
+- `cursor` (string, optional): The pagination cursor.
+
+Example Usage:
+
+```python
+project_ops = neon.operations(project_id='your-project-id')
+```
+
+The response is an `OperationsResponse` object with the following schema:
+
+```python
+class OperationsResponse:
+    operations: list[Operation]
+
+class Operation:
+    id: str
+    project_id: str
+    action: OperationAction
+    status: OperationStatus
+    failures_count: int
+    created_at: str
+    updated_at: str
+    total_duration_ms: int
+    branch_id: Optional[str] = None
+    endpoint_id: Optional[str] = None
+    error: Optional[str] = None
+    retry_at: Optional[str] = None
+
+class OperationAction(Enum):
+    create_compute = 'create_compute'
+    create_timeline = 'create_timeline'
+    start_compute = 'start_compute'
+    suspend_compute = 'suspend_compute'
+    apply_config = 'apply_config'
+    check_availability = 'check_availability'
+    delete_timeline = 'delete_timeline'
+    create_branch = 'create_branch'
+    tenant_ignore = 'tenant_ignore'
+    tenant_attach = 'tenant_attach'
+    tenant_detach = 'tenant_detach'
+    tenant_reattach = 'tenant_reattach'
+    replace_safekeeper = 'replace_safekeeper'
+    disable_maintenance = 'disable_maintenance'
+    apply_storage_config = 'apply_storage_config'
+    prepare_secondary_pageserver = 'prepare_secondary_pageserver'
+    switch_pageserver = 'switch_pageserver'
+    detach_parent_branch = 'detach_parent_branch'
+    timeline_archive = 'timeline_archive'
+    timeline_unarchive = 'timeline_unarchive'
+    start_reserved_compute = 'start_reserved_compute'
+    sync_dbs_and_roles_from_compute = 'sync_dbs_and_roles_from_compute'
+
+class OperationStatus(Enum):
+    scheduling = 'scheduling'
+    running = 'running'
+    finished = 'finished'
+    failed = 'failed'
+    error = 'error'
+    cancelling = 'cancelling'
+    cancelled = 'cancelled'
+    skipped = 'skipped'
+
+```
+
+### Retrieve operation details
+
+Description: Retrieves the status and details of a single operation by its ID.
+
+Method Signature:
+`neon.operation(project_id: str, operation_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `operation_id` (string, required): The ID of the operation.
+
+Example Usage:
+
+```python
+op_details = neon.operation(project_id='your-project-id', operation_id='op-id-123')
+```
+
+The response is an `OperationResponse` object with the following schema:
+
+```python
+class OperationResponse:
+    operation: Operation
+```
+
+## Projects
+
+Manage your Neon projects.
+
+### List projects
+
+Description: Retrieves a list of all projects for your account or organization.
+
+Method Signature:
+`neon.projects(*, shared: bool = False, cursor: str = None, limit: int = None)`
+
+Parameters:
+
+- `shared` (bool, optional): If `True`, retrieves projects shared with you. Defaults to `False`.
+- `limit` (int, optional): The number of projects to return.
+- `cursor` (string, optional): The pagination cursor.
+
+Example Usage:
+
+```python
+all_projects = neon.projects()
+```
+
+The response is an `ProjectsResponse` object with the following schema:
+
+```python
+class ProjectsResponse:
+    projects: list[ProjectListItem]
+    unavailable_project_ids: Optional[list[str]] = None
+
+class ProjectListItem:
+    id: str
+    platform_id: str
+    region_id: str
+    name: str
+    provisioner: str
+    pg_version: int
+    proxy_host: str
+    branch_logical_size_limit: int
+    branch_logical_size_limit_bytes: int
+    store_passwords: bool
+    active_time: int
+    cpu_used_sec: int
+    creation_source: str
+    created_at: str
+    updated_at: str
+    owner_id: str
+    default_endpoint_settings: Optional[DefaultEndpointSettings] = None
+    settings: Optional[ProjectSettingsData] = None
+    maintenance_starts_at: Optional[str] = None
+    synthetic_storage_size: Optional[int] = None
+    quota_reset_at: Optional[str] = None
+    compute_last_active_at: Optional[str] = None
+    org_id: Optional[str] = None
+
+class DefaultEndpointSettings:
+    pg_settings: Optional[dict[str, str]] = None
+    pgbouncer_settings: Optional[dict[str, str]] = None
+    autoscaling_limit_min_cu: Optional[float] = None
+    autoscaling_limit_max_cu: Optional[float] = None
+    suspend_timeout_seconds: Optional[int] = None
+
+class ProjectSettingsData:
+    quota: Optional[ProjectQuota] = None
+    allowed_ips: Optional[AllowedIps] = None
+    enable_logical_replication: Optional[bool] = None
+    maintenance_window: Optional[MaintenanceWindow] = None
+    block_public_connections: Optional[bool] = None
+    block_vpc_connections: Optional[bool] = None
+
+class ProjectQuota:
+    active_time_seconds: Optional[int] = None
+    compute_time_seconds: Optional[int] = None
+    written_data_bytes: Optional[int] = None
+    data_transfer_bytes: Optional[int] = None
+    logical_size_bytes: Optional[int] = None
+
+class AllowedIps:
+    ips: Optional[list[str]] = None
+    protected_branches_only: Optional[bool] = None
+
+class MaintenanceWindow:
+    weekdays: list[int]
+    start_time: str
+    end_time: str
+```
+
+### Create project
+
+Description: Creates a new Neon project.
+
+Method Signature:
+`neon.project_create(json)`
+
+Parameters:
+
+- `project` (dict, required): A dictionary containing project settings.
+  - `name` (string, optional): A name for the project.
+  - `pg_version` (int, optional): Postgres version (e.g., 17).
+  - `region_id` (string, optional): Region ID (e.g., `aws-us-east-1`).
+  - Additional nested parameters shown in `ProjectCreateRequest` below.
+
+```python
+class ProjectCreateRequest:
+    project: Project1
+
+class Project1:
+    settings: Optional[ProjectSettingsData] = None
+    name: Optional[str] = None
+    branch: Optional[Branch] = None
+    autoscaling_limit_min_cu: Optional[float] = None
+    autoscaling_limit_max_cu: Optional[float] = None
+    provisioner: Optional[str] = None
+    region_id: Optional[str] = None
+    default_endpoint_settings: Optional[DefaultEndpointSettings] = None
+    pg_version: Optional[int] = None
+    store_passwords: Optional[bool] = None
+    history_retention_seconds: Optional[int] = None
+    org_id: Optional[str] = None
+
+# the subclasses schema remain same as defined ealier
+```
+
+Example Usage:
+
+```python
+new_project_response = neon.project_create(
+    project={
+        'name': 'my-new-python-project',
+        'pg_version': 17
+    }
+)
+```
+
+The `new_project_response` object is an `ProjectResponse` object with the following schema:
+
+```python
+class ProjectResponse:
+    project: Project
+
+class Project:
+    data_storage_bytes_hour: int
+    data_transfer_bytes: int
+    written_data_bytes: int
+    compute_time_seconds: int
+    active_time_seconds: int
+    cpu_used_sec: int
+    id: str
+    platform_id: str
+    region_id: str
+    name: str
+    provisioner: str
+    pg_version: int
+    proxy_host: str
+    branch_logical_size_limit: int
+    branch_logical_size_limit_bytes: int
+    store_passwords: bool
+    creation_source: str
+    history_retention_seconds: int
+    created_at: str
+    updated_at: str
+    consumption_period_start: str
+    consumption_period_end: str
+    owner_id: str
+    default_endpoint_settings: Optional[DefaultEndpointSettings] = None
+    settings: Optional[ProjectSettingsData] = None
+    maintenance_starts_at: Optional[str] = None
+    synthetic_storage_size: Optional[int] = None
+    quota_reset_at: Optional[str] = None
+    owner: Optional[ProjectOwnerData] = None
+    compute_last_active_at: Optional[str] = None
+    org_id: Optional[str] = None
+```
+
+### Retrieve project details
+
+Description: Fetches detailed information for a single project by its ID.
+
+Method Signature:
+`neon.project(project_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+
+Example Usage:
+
+```python
+project_details = neon.project(project_id='your-project-id')
+print(f"Project Details: {project_details}")
+```
+
+### Update project
+
+Description: Updates the settings of an existing project.
+
+Method Signature:
+`neon.project_update(project_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- `project` (dict, required): A dictionary containing the settings to update (e.g., `{'name': 'new-name'}`).
+
+All available parameters for the dictionary `project` are as follows:
+
+- `project`:
+  - `name` (string, optional): A new descriptive name for the project.
+  - `history_retention_seconds` (integer, optional): The duration in seconds (0 to 2,592,000) to retain project history.
+  - `default_endpoint_settings` (object, optional): New default settings for compute endpoints created in this project.
+    - `autoscaling_limit_min_cu` (number, optional): The minimum number of Compute Units (CU). Minimum `0.25`.
+    - `autoscaling_limit_max_cu` (number, optional): The maximum number of Compute Units (CU). Minimum `0.25`.
+    - `suspend_timeout_seconds` (integer, optional): Duration of inactivity in seconds before a compute is suspended. Ranges from -1 (never suspend) to 604800 (1 week). A value of `0` uses the default of 300 seconds (5 minutes).
+  - `settings` (object, optional): Project-wide settings to update.
+    - `quota` (object, optional): Per-project consumption quotas.
+      - `active_time_seconds` (integer, optional): Wall-clock time allowance for active computes.
+      - `compute_time_seconds` (integer, optional): CPU seconds allowance.
+      - `written_data_bytes` (integer, optional): Data written allowance.
+      - `data_transfer_bytes` (integer, optional): Data transferred allowance.
+      - `logical_size_bytes` (integer, optional): Logical data size limit per branch.
+    - `allowed_ips` (object, optional): Modifies the IP Allowlist.
+      - `ips` (array of strings, optional): The new list of allowed IP addresses or CIDR ranges.
+      - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
+    - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`. This is irreversible.
+    - `maintenance_window` (object, optional): The time period for scheduled maintenance.
+      - `weekdays` (array of integers, required if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
+      - `start_time` (string, required if `maintenance_window` is set): Start time in "HH:MM" UTC format.
+      - `end_time` (string, required if `maintenance_window` is set): End time in "HH:MM" UTC format.
+    - `block_public_connections` (boolean, optional): If `true`, disallows connections from the public internet.
+    - `block_vpc_connections` (boolean, optional): If `true`, disallows connections from VPC endpoints.
+    - `audit_log_level` (string, optional): Sets the audit log level. Allowed values: `base`, `extended`, `full`.
+    - `hipaa` (boolean, optional): Toggles HIPAA compliance settings.
+    - `preload_libraries` (object, optional): Libraries to preload into compute instances.
+      - `use_defaults` (boolean, optional): Toggles the use of default libraries.
+      - `enabled_libraries` (array of strings, optional): A list of specific libraries to enable.
+
+Example Usage:
+
+```python
+neon.project_update(
+    project_id='your-project-id',
+    project={
+        'name': 'my-renamed-python-project',
+        'default_endpoint_settings': {
+            'autoscaling_limit_min_cu': 1,
+            'autoscaling_limit_max_cu': 1,
+        }
+    }
+)
+```
+
+### Delete project
+
+Description: Permanently deletes a project and all its resources. This action is irreversible.
+
+Method Signature:
+`neon.project_delete(project_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+
+Example Usage:
+
+```python
+neon.project_delete(project_id='project-to-delete')
+```
+
+### Retrieve connection URI
+
+Description: Gets a connection string for a specific database and role.
+
+Method Signature:
+`neon.connection_uri(project_id: str, database_name: str, role_name: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `database_name` (string, required): The name of the database.
+- `role_name` (string, required): The name of the role.
+
+Example Usage:
+
+```python
+uri_info = neon.connection_uri(
+    project_id='your-project-id',
+    database_name='neondb',
+    role_name='neondb_owner'
+)
+print(f"Connection URI: {uri_info.uri}")
+```
+
+## Branches
+
+Manage branches within a project.
+
+### Create branch
+
+Description: Creates a new branch.
+
+Method Signature:
+`neon.branch_create(project_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- Other optional fields include:
+  - `branch` (object, optional): Specifies the properties of the new branch.
+    - `name` (string, optional): A name for the branch (max 256 characters). If omitted, a name is auto-generated.
+    - `parent_id` (string, optional): The ID of the parent branch. If omitted, the project's default branch is used.
+    - `parent_lsn` (string, optional): A Log Sequence Number (LSN) from the parent branch to create the new branch from a specific point-in-time.
+    - `parent_timestamp` (string, optional): An ISO 8601 timestamp (e.g., `2025-08-26T12:00:00Z`) to create the branch from a specific point-in-time.
+    - `protected` (boolean, optional): If `true`, the branch is created as a protected branch.
+    - `init_source` (string, optional): `parent-data` (default) copies schema and data. `schema-only` creates a root branch with only the schema from the specified parent.
+    - `expires_at` (string, optional): An RFC 3339 timestamp for when the branch should be automatically deleted (e.g., `2025-06-09T18:02:16Z`).
+  - `endpoints` (array of objects, optional): A list of compute endpoints to create and attach to the new branch.
+    - `type` (string, required): The endpoint type. Allowed values: `read_write`, `read_only`.
+    - `autoscaling_limit_min_cu` (number, optional): Minimum Compute Units (CU). Minimum `0.25`.
+    - `autoscaling_limit_max_cu` (number, optional): Maximum Compute Units (CU). Minimum `0.25`.
+    - `provisioner` (string, optional): Specify `k8s-neonvm` to enable Autoscaling. Allowed values: `k8s-pod`, `k8s-neonvm`.
+    - `suspend_timeout_seconds` (integer, optional): Inactivity period in seconds before suspension. Ranges from -1 (never) to 604800 (1 week).
+
+Example Usage:
+
+```python
+new_branch_response = neon.branch_create(
+    project_id='your-project-id',
+    branch={'name': 'py-feature-branch'},
+    endpoints=[
+        {'type': 'read_write', 'autoscaling_limit_max_cu': 1}
+    ]
+)
+```
+
+The response if a `Branch1` object:
+
+```python
+class Branch1:
+    id: str
+    project_id: str
+    name: str
+    current_state: str
+    state_changed_at: str
+    creation_source: str
+    default: bool
+    protected: bool
+    cpu_used_sec: int
+    compute_time_seconds: int
+    active_time_seconds: int
+    written_data_bytes: int
+    data_transfer_bytes: int
+    created_at: str
+    updated_at: str
+    parent_id: Optional[str] = None
+    parent_lsn: Optional[str] = None
+    parent_timestamp: Optional[str] = None
+    pending_state: Optional[str] = None
+    logical_size: Optional[int] = None
+    primary: Optional[bool] = None
+    last_reset_at: Optional[str] = None
+    created_by: Optional[CreatedBy] = None
+
+class CreatedBy:
+    name: Optional[str] = None
+    image: Optional[str] = None
+```
+
+### List branches
+
+Description: Retrieves a list of branches for a project.
+
+Method Signature:
+`neon.branches(project_id: str, *, cursor: str = None, limit: int = None)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `cursor` (string, optional): Pagination cursor.
+- `limit` (int, optional): Number of branches to return.
+
+Example Usage:
+
+```python
+project_branches = neon.branches(project_id='your-project-id')
+```
+
+The response is a list of `Branch1` objects:`BranchesResponse`
+
+```python
+class BranchesResponse:
+    branches: list[Branch1]
+```
+
+### Retrieve branch details
+
+Description: Fetches detailed information for a single branch.
+
+Method Signature:
+`neon.branch(project_id: str, branch_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+
+Example Usage:
+
+```python
+branch_details = neon.branch(project_id='your-project-id', branch_id='br-your-branch-id')
+```
+
+The response is a `BranchResponse` object:
+
+```python
+class BranchResponse:
+    branch: Branch1
+```
+
+### Update branch
+
+Description: Updates the properties of a specified branch.
+
+Method Signature:
+`neon.branch_update(project_id: str, branch_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `branch` (dict, required): A dictionary with properties to update (e.g., `{'name': 'new-name'}`).
+
+Example Usage:
+
+```python
+updated_branch = neon.branch_update(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    branch={'name': 'updated-py-branch'}
+)
+print(f"Updated Branch: {updated_branch}")
+```
+
+### Delete branch
+
+Description: Permanently deletes a branch.
+
+Method Signature:
+`neon.branch_delete(project_id: str, branch_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch to delete.
+
+Example Usage:
+
+```python
+neon.branch_delete(project_id='your-project-id', branch_id='br-branch-to-delete')
+```
+
+### List branch endpoints
+
+Description: Retrieves a list of all compute endpoints associated with a specific branch.
+
+Method: `neon.endpoints(project_id: str)`
+
+The response is an `EndpointsResponse` object:
+
+```python
+class EndpointsResponse:
+    endpoints: list[Endpoint]
+
+class Endpoint:
+    host: str
+    id: str
+    project_id: str
+    branch_id: str
+    autoscaling_limit_min_cu: float
+    autoscaling_limit_max_cu: float
+    region_id: str
+    type: EndpointType
+    current_state: EndpointState
+    settings: EndpointSettingsData
+    pooler_enabled: bool
+    pooler_mode: EndpointPoolerMode
+    disabled: bool
+    passwordless_access: bool
+    creation_source: str
+    created_at: str
+    updated_at: str
+    proxy_host: str
+    suspend_timeout_seconds: int
+    provisioner: str
+    pending_state: Optional[EndpointState] = None
+    last_active: Optional[str] = None
+    compute_release_version: Optional[str] = None
+
+class EndpointType(Enum):
+    read_only = 'read_only'
+    read_write = 'read_write'
+
+class EndpointState(Enum):
+    init = 'init'
+    active = 'active'
+    idle = 'idle'
+
+class EndpointSettingsData:
+    pg_settings: Optional[dict[str, str]] = None
+    pgbouncer_settings: Optional[dict[str, str]] = None
+
+class EndpointPoolerMode(Enum):
+    transaction = 'transaction'
+```
+
+You can filter the result by `branch_id` in your code.
+
+### Create database
+
+Description: Creates a new database within a branch.
+
+Method Signature:
+`neon.database_create(project_id: str, branch_id: str, json)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `database` (dict, required): A dictionary with `{'name': 'db-name', 'owner_name': 'role-name'}`.
+
+Example Usage:
+
+```python
+new_db_info = neon.database_create(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    database={'name': 'my-app-db', 'owner_name': 'neondb_owner'}
+)
+```
+
+The response is a `DatabaseResponse` object:
+
+```python
+class DatabaseResponse:
+    database: Database
+
+class Database:
+    id: int
+    branch_id: str
+    name: str
+    owner_name: str
+    created_at: str
+    updated_at: str
+```
+
+### List databases
+
+Description: Retrieves a list of all databases within a branch.
+
+Method Signature:
+`neon.databases(project_id: str, branch_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+
+Example Usage:
+
+```python
+branch_databases = neon.databases(project_id='your-project-id', branch_id='br-your-branch-id')
+```
+
+The response is a `DatabasesResponse` object with the following schema:
+
+```python
+class DatabasesResponse:
+    databases: list[Database]
+```
+
+### Retrieve database details
+
+Description: Retrieves details for a specific database. _Note: The Python SDK uses `database_id`, but you should provide the `database_name`._
+
+Method Signature:
+`neon.database(project_id: str, branch_id: str, database_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `database_id` (string, required): The name of the database.
+
+Example Usage:
+
+```python
+db_details = neon.database(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    database_id='my-app-db' # Use the database name here
+)
+print(f"Database Details: {db_details}")
+```
+
+The response is a `DatabaseResponse` object.
+
+### Update database
+
+Description: Updates the properties of a database.
+
+Method Signature:
+`neon.database_update(project_id: str, branch_id: str, database_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `database_id` (string, required): The current name of the database.
+- `database` (dict, required): A dictionary with properties to update (e.g., `{'name': 'new-name'}`).
+
+Example Usage:
+
+```python
+updated_db = neon.database_update(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    database_id='my-app-db', # Current database name
+    database={'name': 'my-renamed-db'}
+)
+print(f"Updated Database: {updated_db}")
+```
+
+### Delete database
+
+Description: Deletes a database from a branch.
+
+Method Signature:
+`neon.database_delete(project_id: str, branch_id: str, database_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `database_id` (string, required): The name of the database to delete.
+
+Example Usage:
+
+```python
+neon.database_delete(project_id='your-project-id', branch_id='br-your-branch-id', database_id='my-renamed-db')
+```
+
+### List roles
+
+Description: Retrieves a list of all Postgres roles from a branch.
+
+Method Signature:
+`neon.roles(project_id: str, branch_id: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+
+Example Usage:
+
+```python
+branch_roles = neon.roles(project_id='your-project-id', branch_id='br-your-branch-id')
+```
+
+The response if a `RolesResponse` object:
+
+```python
+class RolesResponse:
+    roles: list[Role]
+
+class Role:
+    branch_id: str
+    name: str
+    created_at: str
+    updated_at: str
+    password: Optional[str] = None
+    protected: Optional[bool] = None
+```
+
+### Create role
+
+Description: Creates a new Postgres role.
+
+Method Signature:
+`neon.role_create(project_id: str, branch_id: str, role_name: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `role_name` (string, required): The name of the role to create.
+
+Example Usage:
+
+```python
+new_role_info = neon.role_create(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    role_name='py_app_user'
+)
+print(f"Role created: {new_role_info.role}")
+```
+
+### Retrieve role details
+
+Description: Retrieves details for a specific role.
+
+Method Signature:
+`neon.role(project_id: str, branch_id: str, role_name: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `role_name` (string, required): The name of the role to create.
+
+Example Usage:
+
+```python
+role_details = neon.role(
+    project_id='your-project-id',
+    branch_id='br-your-branch-id',
+    role_name='py_app_user'
+)
+# Example response: RoleResponse(role=Role(branch_id='br-your-branch-id', name='py_app_user', created_at='xx', updated_at='xx', password=None, protected=False))
+```
+
+### Delete role
+
+Description: Deletes a Postgres role.
+
+Method Signature:
+`neon.role_delete(project_id: str, branch_id: str, role_name: str)`
+
+Parameters:
+
+- `project_id` (string, required): The ID of the project.
+- `branch_id` (string, required): The ID of the branch.
+- `role_name` (string, required): The name of the role to create.
+
+Example Usage:
+
+```python
+neon.role_delete(project_id='your-project-id', branch_id='br-your-branch-id', role_name='py_app_user')
+```
+
+## Endpoints
+
+Manage compute endpoints.
+
+### Create compute endpoint
+
+Description: Creates a new compute endpoint.
+
+Method Signature:
+`neon.endpoint_create(project_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- `endpoint` (dict required):
+  - `branch_id` (string, required): The ID of the branch to associate the endpoint with.
+  - `type` (string, required): `read_write` or `read_only`.
+  - `autoscaling_limit_min_cu?` (number): Minimum Compute Units.
+  - `autoscaling_limit_max_cu?` (number): Maximum Compute Units.
+  - `suspend_timeout_seconds?` (integer): Inactivity seconds before suspension.
+
+Example Usage:
+
+```python
+new_endpoint_info = neon.endpoint_create(
+    project_id='your-project-id',
+    endpoint={
+        'branch_id': 'br-your-branch-id',
+        'type': 'read_only'
+    }
+)
+```
+
+### Retrieve compute endpoint details
+
+Description: Fetches details for a single compute endpoint.
+
+Method Signature:
+`neon.endpoint(project_id: str, endpoint_id: str)`
+
+Example Usage:
+
+```python
+endpoint_details = neon.endpoint(project_id='your-project-id', endpoint_id='ep-your-endpoint-id')
+```
+
+The response is an `EndpointResponse` object:
+
+```python
+class EndpointResponse:
+    endpoint: Endpoint
+```
+
+### Update compute endpoint
+
+Description: Updates the configuration of an endpoint.
+
+Method Signature:
+`neon.endpoint_update(project_id: str, endpoint_id: str, json)`
+
+Parameters (passed as keyword arguments):
+
+- `project_id` (string, required): The ID of the project.
+- `endpoint_id`(string, required): The ID of the endpoint.
+- `endpoint` (dict, required):
+  - `autoscaling_limit_min_cu?` (number): New minimum Compute Units.
+  - `autoscaling_limit_max_cu?` (number): New maximum Compute Units.
+  - `suspend_timeout_seconds?` (integer): New suspension timeout.
+  - `disabled?` (boolean): Set to `true` to disable connections or `false` to enable them.
+
+Example Usage:
+
+```python
+updated_endpoint = neon.endpoint_update(
+    project_id='your-project-id',
+    endpoint_id='ep-your-endpoint-id',
+    endpoint={'autoscaling_limit_max_cu': 2}
+)
+print(f"Updated endpoint: {updated_endpoint}")
+```
+
+### Delete compute endpoint
+
+Description: Deletes a compute endpoint.
+
+Method Signature:
+`neon.endpoint_delete(project_id: str, endpoint_id: str)`
+
+Example Usage:
+
+```python
+neon.endpoint_delete(project_id='your-project-id', endpoint_id='ep-to-delete')
+```
+
+### Start compute endpoint
+
+Description: Manually starts an `idle` compute endpoint.
+
+Method Signature:
+`neon.endpoint_start(project_id: str, endpoint_id: str)`
+
+Example Usage:
+
+```python
+neon.endpoint_start(project_id='your-project-id', endpoint_id='ep-your-endpoint-id')
+```
+
+### Suspend compute endpoint
+
+Description: Manually suspends an `active` compute endpoint.
+
+Method Signature:
+`neon.endpoint_suspend(project_id: str, endpoint_id: str)`
+
+Example Usage:
+
+```python
+neon.endpoint_suspend(project_id='your-project-id', endpoint_id='ep-your-endpoint-id')
+```
+````

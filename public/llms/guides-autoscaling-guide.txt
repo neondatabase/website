@@ -60,6 +60,7 @@ The following table outlines the initial default autoscaling settings for newly 
 | Free          | 0.25                     | 2                        |
 | Launch        | 1                        | 4                        |
 | Scale         | 1                        | 8                        |
+| Business      | 1                        | 8                        |
 
 ## Monitor autoscaling
 
