@@ -6,7 +6,7 @@
 
 - [Postgres json() Function HTML](https://neon.com/docs/functions/json): The original HTML version of this documentation
 
-The `json()` function in PostgreSQL 17 provides a robust way to convert text or binary data into `JSON` values. This new function offers enhanced control over `JSON` parsing, including options for handling duplicate keys and encoding specifications.
+The `json()` function provides a robust way to convert text or binary data into `JSON` values. This new function offers enhanced control over `JSON` parsing, including options for handling duplicate keys and encoding specifications.
 
 Use `json()` when you need to:
 

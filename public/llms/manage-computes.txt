@@ -211,17 +211,19 @@ For more information, refer to [Configuring scale to zero for Neon computes](htt
 
 It is sometimes necessary to restart a compute. Reasons for restarting a compute might include:
 
-- Applying upgraded limits after upgrading to a paid plan
-- Picking up the latest compute-related updates, which Neon typically releases weekly
-- Picking up a new Postgres extension or extension version released by Neon
+- Activating new limits after upgrading to a paid plan
+- Getting the latest compute-related updates, which Neon typically releases weekly
+- Accessing a recently released Postgres extension or extension version
 - Resolving performance issues or unexpected behavior
 
 Restarting ensures your compute is running with the latest configurations and improvements.
 
    **Important**: Restarting a compute interrupts any connections currently using the compute. To avoid prolonged interruptions resulting from compute restarts, we recommend configuring your clients and applications to reconnect automatically in case of a dropped connection.
 
-You can restart a compute using one of the following methods:
+You can restart a compute using these methods:
 
+- Use the **Restart compute** option in the Neon console. Navigate to the **Branches** page from your project dashboard, and select a branch. On the Computes tab, select **Restart compute** from the menu.
+  
 - Issue a [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) call using the Neon API. You can do this directly from the Neon API Reference using the **Try It!** feature or via the command line with a cURL command similar to the one shown below. You'll need your [project ID](https://neon.com/docs/reference/glossary#project-id), compute [endpoint ID](https://neon.com/docs/reference/glossary#endpoint-id), and an [API key](https://neon.com/docs/manage/api-keys#create-an-api-key).
 
   ```bash
@@ -284,6 +286,8 @@ curl -X 'POST' \
 ```
 
 Details: Response body
+For attribute definitions, find the [Create compute](https://api-docs.neon.tech/reference/createprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
@@ -344,6 +348,8 @@ curl -X 'GET' \
 ```
 
 Details: Response body
+For attribute definitions, find the [List computes](https://api-docs.neon.tech/reference/listprojectendpoints) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoints": [
@@ -423,6 +429,8 @@ curl -X 'PATCH' \
 ```
 
 Details: Response body
+For attribute definitions, find the [Update compute](https://api-docs.neon.tech/reference/updateprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {
@@ -471,6 +479,8 @@ curl -X 'DELETE' \
 ```
 
 Details: Response body
+For attribute definitions, find the [Delete compute](https://api-docs.neon.tech/reference/deleteprojectendpoint) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "endpoint": {

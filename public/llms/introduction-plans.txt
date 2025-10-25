@@ -9,7 +9,9 @@
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-   **Note**: The plans on this page are Neon's usage-based pricing plans, introduced **August 14, 2025**. If you joined earlier, you may still be on a [legacy plan](https://neon.com/docs/introduction/legacy-plans). See [Change your plan](https://neon.com/docs/introduction/manage-billing#change-your-plan) to switch. Free plan users were automatically moved to the new plan described below.
+> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](https://neon.com/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](https://neon.com/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Vercel** or **Azure Marketplace**.
+
+   **Important**: If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are still on a [Neon legacy plan](https://neon.com/docs/introduction/legacy-plans) — this applies to both Free and paid plans. The new usage-based pricing plans will be introduced on these platforms at a later date.
 
 ---
 
@@ -17,44 +19,48 @@ Start for free, then **pay only for what you use** as your needs grow.
 
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
-| Plan feature                                          | **Free**                       | **Launch**                           | **Scale**                                                                         |
-| ----------------------------------------------------- | ------------------------------ | ------------------------------------ | --------------------------------------------------------------------------------- |
-| [Price](https://neon.com/docs/introduction/plans#price)                                       | $0/month                       | $5/month minimum                     | $5/month minimum                                                                  |
-| [Who it's for](https://neon.com/docs/introduction/plans#who-its-for)                          | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                   |
-| [Projects](https://neon.com/docs/introduction/plans#projects)                                 | 20                             | 100                                  | 1,000 (can be increased on request)                                               |
-| [Branches](https://neon.com/docs/introduction/plans#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                        |
-| [Extra branches](https://neon.com/docs/introduction/plans#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                              |
-| [Compute](https://neon.com/docs/introduction/plans#compute)                                   | 50 CU-hours/project            | $0.14/CU-hour                        | $0.26/CU-hour                                                                     |
-| [Autoscaling](https://neon.com/docs/introduction/plans#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                           |
-| [Scale to zero](https://neon.com/docs/introduction/plans#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                             |
-| [Storage](https://neon.com/docs/introduction/plans#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                    |
-| [Public network transfer](https://neon.com/docs/introduction/plans#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                    |
-| [Monitoring](https://neon.com/docs/introduction/plans#monitoring)                             | 1 day                          | 3 days                               | 14 days                                                                           |
-| [Metrics/logs export](https://neon.com/docs/introduction/plans#metricslogs-export)            | —                              | —                                    | ✅                                                                                |
-| [Instant restore](https://neon.com/docs/introduction/plans#instant-restore)                   | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                    |
-| [Restore window](https://neon.com/docs/introduction/plans#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                     |
-| [Private network transfer](https://neon.com/docs/introduction/plans#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                          |
-| [Compliance and security](https://neon.com/docs/introduction/plans#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, HIPAA (extra), Protected branches, IP Allow, Private Networking |
-| [Uptime SLA](https://neon.com/docs/introduction/plans#uptime-sla)                             | —                              | —                                    | ✅                                                                                |
-| [Support](https://neon.com/docs/introduction/plans#support)                                   | Community                      | Billing                              | Standard                                                                          |
+   **Comingsoon** Building an agent platform?: For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](https://neon.com/docs/introduction/agent-plan)
+
+| Plan feature                                          | **Free**                       | **Launch**                           | **Scale**                                                                                         |
+| ----------------------------------------------------- | ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| [Price](https://neon.com/docs/introduction/plans#price)                                       | $0/month                       | $5/month minimum                     | $5/month minimum                                                                                  |
+| [Who it's for](https://neon.com/docs/introduction/plans#who-its-for)                          | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
+| [Projects](https://neon.com/docs/introduction/plans#projects)                                 | 20                             | 100                                  | 1,000 (can be increased on request)                                                               |
+| [Branches](https://neon.com/docs/introduction/plans#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                                        |
+| [Extra branches](https://neon.com/docs/introduction/plans#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
+| [Compute](https://neon.com/docs/introduction/plans#compute)                                   | 100 CU-hours/project           | $0.14/CU-hour                        | $0.26/CU-hour                                                                                     |
+| [Autoscaling](https://neon.com/docs/introduction/plans#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                                           |
+| [Scale to zero](https://neon.com/docs/introduction/plans#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
+| [Storage](https://neon.com/docs/introduction/plans#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
+| [Public network transfer](https://neon.com/docs/introduction/plans#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
+| [Monitoring](https://neon.com/docs/introduction/plans#monitoring)                             | 1 day                          | 3 days                               | 14 days                                                                                           |
+| [Metrics/logs export](https://neon.com/docs/introduction/plans#metricslogs-export)            | —                              | —                                    | ✅                                                                                                |
+| [Instant restore](https://neon.com/docs/introduction/plans#instant-restore)                   | —                              | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
+| [Restore window](https://neon.com/docs/introduction/plans#restore-window)                     | 6 hours, up to 1 GB-month      | Up to 7 days                         | Up to 30 days                                                                                     |
+| [Private network transfer](https://neon.com/docs/introduction/plans#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                                          |
+| [Compliance and security](https://neon.com/docs/introduction/plans#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](https://neon.com/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
+| [Uptime SLA](https://neon.com/docs/introduction/plans#uptime-sla)                             | —                              | —                                    | ✅                                                                                                |
+| [Support](https://neon.com/docs/introduction/plans#support)                                   | Community                      | Standard (billing issues only)       | Standard, Business, or Production                                                                 |
 
 ## Plan features
 
 This section describes the features listed in the [Plan overview](https://neon.com/docs/introduction/plans#plan-overview) table.
 
+   **Tip** Optimize your costs: Learn how to manage your Neon costs effectively with our [cost optimization guide](https://neon.com/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
+
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan before usage-based charges.
+**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5.
 
-For **Launch** and **Scale**, the minimum monthly fee is $5. Additional usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](https://neon.com/docs/introduction/plans#plan-overview) table).
+> If you sign up for a paid plan part way through the month, the minimum monthly fee amount is proroated from the sign-up date.
+
+For **Launch** and **Scale**, the minimum monthly fee is $5. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](https://neon.com/docs/introduction/plans#plan-overview) table).
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
-> If you sign up for a paid plan part way through the monthly billing period, the minimum monthly fee is prorated. For example, signing up halfway through the month results in a $2.50 base cost (half of $5).
-
 ### ☑ Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 20 projects, 50 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 20 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
@@ -137,7 +143,7 @@ Examples:
 - 2 CU for 3 hours = 6 CU-hours
 - 8 CU for 2 hours = 16 CU-hours
 
-**Free**: 50 CU-hours/project/month (enough to run a 0.25 CU compute in a project for 200 hours/month).  
+**Free**: 100 CU-hours/project/month (enough to run a 0.25 CU compute in a project for 400 hours/month).  
 **Launch**: $0.14/CU-hour  
 **Scale**: $0.26/CU-hour
 
@@ -179,11 +185,13 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 
 - **Launch**/**Scale plan storage cost**: $0.35/GB-month
 - **[Root branches](https://neon.com/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
-- **[Child branches](https://neon.com/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
+- **[Child branches](https://neon.com/docs/reference/glossary#child-branch)**: billed on the minimum of the data changes since creation or the logical data size
 
-When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-Storage on child branches never decreases — it grows as changes accumulate.
+**Child branch storage is capped at your actual data size** — you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
+
+   **Important** Manage child branches to control storage costs: Even though child branch storage is capped at your logical data size, it's still important to manage branches effectively to minimize storage costs: - Set a [time to live](https://neon.com/docs/guides/branch-expiration) on development and preview branches - Delete child branches when they're no longer needed - For production workloads, use a [root branch](https://neon.com/docs/manage/branches#root-branch) instead — root branches are billed on your actual data size with no delta tracking overhead.
 
 > **Free** plan users get 0.5 GB of storage per project
 
@@ -224,7 +232,7 @@ Neon stores a change history to support instant restore.
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
 - **Scale**: Up to 30 days, billed at $0.20/GB-month
 
-You can increase or decrease your [restore window](https://neon.com/docs/introduction/plans#-restore-window) to control how much change history you retain. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for details.
+You can change your [restore window](https://neon.com/docs/introduction/plans#restore-window) to control how much change history you retain. See [Instant restore](https://neon.com/docs/introduction/branch-restore) for details.
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](https://neon.com/docs/reference/glossary#write-ahead-logging-wal).
 
@@ -238,7 +246,9 @@ The maximum restore window per plan:
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-The restore window is configurable. Shortening it can reduce [instant restore](https://neon.com/docs/introduction/plans#-instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](https://neon.com/docs/manage/projects#configure-your-restore-window).
+> The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
+
+The restore window is configurable. Shortening it can reduce [instant restore](https://neon.com/docs/introduction/plans#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](https://neon.com/docs/manage/projects#configure-your-restore-window).
 
 ### ☑ Private network transfer
 
@@ -258,9 +268,7 @@ Compliance certifications available on **Scale**:
 - ISO 27701
 - GDPR
 - CCPA
-- HIPAA (additional charge)
-
-> Contact [Sales](https://neon.com/contact-sales) for HIPAA details.
+- HIPAA ([additional charge](https://neon.com/docs/security/hipaa))
 
 Security features:
 
@@ -277,8 +285,8 @@ Guaranteed service availability is offered on the **Scale** plan. Contact [Sales
 Support level by plan:
 
 - **Free**: Community support
-- **Launch**: Billing support
-- **Scale**: Standard support
+- **Launch**: Standard support (billing issues only)
+- **Scale**: Standard support, with Business or Production support plans available for an additional fee
 
 See [Support](https://neon.com/docs/introduction/support) for details.
 
@@ -292,7 +300,7 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 | **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](https://neon.com/docs/introduction/plans#extra-branches).                                               |
 | **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](https://neon.com/docs/introduction/plans#instant-restore).                                                        |
 | **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](https://neon.com/docs/introduction/plans#storage).                                                                      |
-| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](https://neon.com/docs/introduction/plans#storage).                                                             |
+| **Storage (child branches, GB-month)** | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](https://neon.com/docs/introduction/plans#storage).                                  |
 | **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](https://neon.com/docs/introduction/plans#public-network-transfer).                               |
 | **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](https://neon.com/docs/introduction/plans#private-network-transfer). |
 | **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](https://neon.com/docs/introduction/plans#price).                                                                |
@@ -305,7 +313,21 @@ The following examples show what your monthly bill might look like on the **Laun
 
 ### Launch plan
 
-- **Example 1**
+- **Example 1 (less than $5 usage)**
+  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.40**  
+    _(10 CU-hours × $0.14/CU-hour)_
+  - Root branch storage: 2 GB — **$0.70**  
+    _(2 GB × $0.35/GB-month)_
+  - Child branch storage: 1 GB — **$0.35**  
+    _(1 GB × $0.35/GB-month)_
+  - Instant restore history: 1 GB — **$0.20**  
+    _(1 GB × $0.20/GB-month)_
+
+    **Subtotal:** **$2.65**  
+    **Minimum monthly fee:** **$5.00**  
+    **Amount due:** **$5.00**
+
+- **Example 2**
   - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
     _(120 CU-hours × $0.14/CU-hour)_
   - Root branch storage: 20 GB — **$7.00**  
@@ -314,11 +336,10 @@ The following examples show what your monthly bill might look like on the **Laun
     _(5 GB × $0.35/GB-month)_
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$32.55**
+    **Amount due:** **$27.55**
 
-- **Example 2**
+- **Example 3**
   - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
     _(250 CU-hours × $0.14/CU-hour)_
   - Root branch storage: 40 GB — **$14.00**  
@@ -327,9 +348,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(10 GB × $0.35/GB-month)_
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$61.50**
+    **Amount due:** **$56.50**
 
 ---
 
@@ -344,9 +364,8 @@ The following examples show what your monthly bill might look like on the **Laun
     _(25 GB × $0.35/GB-month)_
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$500.75**
+    **Amount due:** **$495.75**
 
 - **Example 2**
   - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
@@ -357,8 +376,7 @@ The following examples show what your monthly bill might look like on the **Laun
     _(40 GB × $0.35/GB-month)_
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
-  - Base fee — **$5.00**
 
-    **Estimated monthly cost:** **$762.50**
+    **Amount due:** **$757.50**
 
 ## FAQs

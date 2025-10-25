@@ -22,6 +22,8 @@ Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way 
 - [Connect to Neon from Drizzle](https://neon.com/docs/guides/drizzle#connect-to-neon-from-drizzle)
 - [Use the Neon serverless driver with Drizzle](https://neon.com/docs/guides/drizzle#use-the-neon-serverless-driver-with-drizzle)
 
+   **Tip** AI Rules available: Working with AI coding assistants? Check out our [AI rules for Drizzle ORM with Neon](https://neon.com/docs/ai/ai-rules-neon-drizzle) to help your AI assistant generate better code when using Drizzle with your Neon database.
+
 ## Connect to Neon from Drizzle
 
 To establish a basic connection from Drizzle to Neon, perform the following steps:

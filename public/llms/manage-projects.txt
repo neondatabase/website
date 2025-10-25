@@ -103,7 +103,7 @@ To configure the restore window for a project:
 4. Use the slider to select the restore window.
 5. Click **Save**.
 
-For more information about plan limits, see [Neon plans](https://neon.com/docs/introduction/plans).
+For information about restore window limits and default settings, see [Neon plans](https://neon.com/docs/introduction/plans).
 
 ### Schedule updates for your project
 
@@ -142,7 +142,7 @@ For additional information, refer to our [Project collaboration guide](https://n
 
 The IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
-Optionally, you can allow unrestricted access to your project's [non-default branches](https://neon.com/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+Optionally, you can allow unrestricted access to your project's non-protected branches. For instance, you might want to restrict access to protected branches to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
@@ -167,14 +167,14 @@ The [Neon CLI ip-allow command](https://neon.com/docs/reference/cli-ip-allow) su
 ```bash
 neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ default branch Only │
+│ Id                  │ Name                │ IP Addresses │ Protected Only      │
 ├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the default branch only, use the you can `--protected-only` option:
+To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
 
 ```bash
 neon ip-allow add 203.0.113.1 --protected-only
@@ -188,7 +188,7 @@ neon ip-allow add 203.0.113.1 --protected-only false
 
 Tab: API
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -303,9 +303,11 @@ curl -X PATCH \
 '
 ```
 
-### Enable Row-Level Security (RLS)
+### Enable the Data API
 
-Neon RLS lets you integrate a JWT-based auth provider (such as Clerk, Auth0, or Azure AD) so Postgres can validate user identity and enforce row-level access with database policies. Configure your provider's JWKS URL in the project's Settings > RLS page, optionally set an expected audience (aud) when required, and use the `authenticated@` connection for client or server access. For setup steps and examples, see [About Neon RLS](https://neon.com/docs/guides/neon-rls) and the [Neon RLS Tutorial](https://neon.com/docs/guides/neon-rls-tutorial).
+The Data API turns your database tables into a REST API, making it easy to query your data from client applications. When you enable the Data API, it automatically creates `authenticated` and `anonymous` roles and sets up the necessary permissions for secure client-side access.
+
+For setup instructions and examples, see the [Data API documentation](https://neon.com/docs/data-api/get-started).
 
 ### Enable logical replication
 
@@ -383,6 +385,8 @@ curl 'https://console.neon.tech/api/v2/projects' \
 The response includes information about the role, the database, the default branch, and the primary read-write compute that is created with the project.
 
 Details: Response body
+For attribute definitions, find the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
@@ -552,6 +556,8 @@ curl 'https://console.neon.tech/api/v2/projects' \
 ```
 
 Details: Response body
+For attribute definitions, find the [List projects](https://api-docs.neon.tech/reference/listprojects) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "projects": [
@@ -676,6 +682,8 @@ curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456
 ```
 
 Details: Response body
+For attribute definitions, find the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
@@ -747,6 +755,8 @@ curl -X 'DELETE' \
 ```
 
 Details: Response body
+For attribute definitions, find the [Delete project](https://api-docs.neon.tech/reference/deleteproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {

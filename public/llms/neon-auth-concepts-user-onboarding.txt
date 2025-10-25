@@ -77,7 +77,7 @@ export function useOnboarding() {
 Tab: Server Function
 
 ```jsx
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 import { redirect } from 'next/navigation';
 
 export async function ensureOnboarded() {
@@ -110,7 +110,7 @@ Tab: Server Component
 
 ```jsx
 import { ensureOnboarded } from '@/app/onboarding-functions';
-import { stackServerApp } from '@/stack';
+import { stackServerApp } from '@/stack/server';
 
 export default async function HomePage() {
   await ensureOnboarded();

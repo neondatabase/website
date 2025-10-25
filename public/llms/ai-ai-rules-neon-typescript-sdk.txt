@@ -1,0 +1,1098 @@
+# AI Rules: Neon TypeScript SDK
+
+> The document outlines the AI Rules for the Neon TypeScript SDK, detailing how to implement and manage AI-driven functionalities within Neon's database environment using TypeScript.
+
+## Source
+
+- [AI Rules: Neon TypeScript SDK HTML](https://neon.com/docs/ai/ai-rules-neon-typescript-sdk): The original HTML version of this documentation
+
+**Note** AI Rules are in Beta: AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
+
+Related docs:
+- [Get started with Neon Typescript SDK](https://neon.com/docs/reference/typescript-sdk)
+- [Neon API Reference](https://neon.com/docs/reference/api-reference)
+
+Repository:
+- [`@neondatabase/api-client` on npm](https://www.npmjs.com/package/@neondatabase/api-client)
+- [neon-typescript-sdk.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-typescript-sdk.mdc)
+
+## How to use
+
+You can use these rules in two ways:
+
+## Option 1: Copy from this page
+
+With Cursor, save the [rules](https://docs.cursor.com/context/rules-for-ai#project-rules-recommended) to `.cursor/rules/neon-typescript-sdk.mdc` and they'll be automatically applied when working with matching files (`*.ts`, `*.tsx`).
+
+For other AI tools, you can include these rules as context when chatting with your AI assistant - check your tool's documentation for the specific method (like using "Include file" or context commands).
+
+## Option 2: Clone from repository
+
+If you prefer, you can clone or download the rules directly from our [AI Rules repository](https://github.com/neondatabase-labs/ai-rules).
+
+Once added to your project, AI tools will automatically use these rules when working with Neon TypeScript SDK code. You can also reference them explicitly in prompts.
+
+## Rules
+
+````md
+---
+description: Use these rules to manage your Neon projects, branches, databases, and other resources programmatically using the Neon TypeScript SDK.
+globs: *.ts, *.tsx
+alwaysApply: false
+---
+
+## Neon TypeScript SDK integration guidelines
+
+This file provides comprehensive rules and best practices for interacting with the Neon API using the `@neondatabase/api-client` TypeScript SDK. Following these guidelines will enable an AI Agent like you to build robust, efficient, and error-tolerant integrations with Neon.
+
+The SDK is a wrapper around the Neon REST API and provides typed methods for managing all Neon resources, including projects, branches, endpoints, roles, and databases.
+
+### Neon Core Concepts
+
+To effectively use the Neon Typescript SDK, it's essential to understand the hierarchy and purpose of its core resources. The following table provides a high-level overview of each concept.
+
+| Concept             | Description                                                                                                                              | Analogy/Purpose                                                                                                           | Key Relationship                                                                                              |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Organization    | The highest-level container, managing billing, users, and multiple projects.                                                             | A GitHub Organization or a company's cloud account.                                                                       | Contains one or more Projects.                                                                            |
+| Project         | The primary container that contains all related database resources for a single application or service.                                  | A Git repository or a top-level folder for an application.                                                                | Lives within an Organization (or a personal account). Contains Branches.                              |
+| Branch          | A lightweight, copy-on-write clone of a database's state at a specific point in time.                                                    | A `git branch`. Used for isolated development, testing, staging, or previews without duplicating storage costs.          | Belongs to a Project. Contains its own set of Databases and Roles, cloned from its parent.        |
+| Compute Endpoint| The actual running PostgreSQL instance that you connect to. It provides the CPU and RAM for processing queries.                          | The "server" or "engine" for your database. It can be started, suspended (scaled to zero), and resized.                 | Is attached to a single Branch. Your connection string points to a Compute Endpoint's hostname.           |
+| Database        | A logical container for your data (tables, schemas, views) within a branch. It follows standard PostgreSQL conventions.                    | A single database within a PostgreSQL server instance.                                                                    | Exists within a Branch. A branch can have multiple databases.                                             |
+| Role            | A PostgreSQL role used for authentication (logging in) and authorization (permissions to access data).                                   | A database user account with a username and password.                                                                     | Belongs to a Branch. Roles from a parent branch are copied to child branches upon creation.               |
+| API Key         | A secret token used to authenticate requests to the Neon API. Keys have different scopes (Personal, Organization, Project-scoped).         | A password for programmatic access, allowing you to manage all other Neon resources.                                      | Authenticates actions on Organizations, Projects, Branches, etc.                                  |
+| Operation       | An asynchronous action performed by the Neon control plane, such as creating a branch or starting a compute.                             | A background job or task. Its status can be polled to know when an action is complete.                                     | Associated with a Project and often a specific Branch or Endpoint. Essential for scripting API calls. |
+
+### Installation
+
+To begin, install the SDK package into your project:
+
+```bash
+npm install @neondatabase/api-client
+```
+
+### Understanding API Key Types
+
+When performing actions via the API, you must select the correct type of API key based on the required scope and permissions. There are three types:
+
+1. Personal API Key
+	- Scope: Accesses all projects that the user who created the key is a member of.
+	- Permissions: The key has the same permissions as its owner. If the user's access is revoked from an organization, the key loses access too.
+	- Best For: Individual use, scripting, and tasks tied to a specific user's permissions.
+	- Created By: Any user.
+
+2. Organization API Key
+	- Scope: Accesses all projects and resources within an entire organization.
+	- Permissions: Has admin-level access across the organization, independent of any single user. It remains valid even if the creator leaves the organization.
+	- Best For: CI/CD pipelines, organization-wide automation, and service accounts that need broad access.
+	- Created By: Organization administrators only.
+
+3. Project-scoped API Key
+	- Scope: Access is strictly limited to a single, specified project.
+	- Permissions: Cannot perform organization-level actions (like creating new projects) or delete the project it is scoped to. This is the most secure and limited key type.
+	- Best For: Project-specific integrations, third-party services, or automation that should be isolated to one project.
+	- Created By: Any organization member.
+
+### Authentication and Client Initialization
+
+All interactions with the Neon API require an API key. Store your key securely as an environment variable (e.g., `NEON_API_KEY`).
+
+Initialize the API client in your code. This client instance will be used for all subsequent API calls.
+
+```typescript
+import { createApiClient } from '@neondatabase/api-client';
+
+// Best practice: Load API key from environment variables
+const apiKey = process.env.NEON_API_KEY;
+
+if (!apiKey) {
+  throw new Error('NEON_API_KEY environment variable is not set.');
+}
+
+const apiClient = createApiClient({ apiKey });
+```
+
+## API Keys
+
+Manage programmatic access to the Neon API.
+
+### List API keys
+
+Description: Retrieves a list of all API keys associated with your Neon account. The response includes metadata about each key but does not include the secret key token itself for security reasons.
+
+Method Signature:
+`apiClient.listApiKeys()`
+
+Parameters: None.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.listApiKeys();
+console.log('API Keys:', response.data);
+// Example output: [{id: 1234, name: "my-api-key", created_at: "xx", created_by: { id: "xx", name: "USER_NAME"},last_used_at: "xx",last_used_from_addr: "IP_ADDRESS"}]
+```
+
+Key Points & Best Practices:
+- Use this method to get the `key_id` required for revoking a key.
+
+### Create API key
+
+Description: Creates a new API key with a specified name. The response includes the `id` and the secret `key` token.
+
+Method Signature:
+`apiClient.createApiKey(data: ApiKeyCreateRequest)`
+
+Parameters:
+- `data` (`ApiKeyCreateRequest`):
+  - `key_name` (string, required): A descriptive name for the API key.
+
+Example Usage:
+
+```typescript
+const  response  =  await  apiClient.createApiKey({ key_name: 'my-automation-script-key' });
+console.log('ID:', response.data.id); // can be used for revoking the key later
+console.log('Key (store securely!):', response.data.key); // Example: "napi_xxxx"
+```
+
+Key Points & Best Practices:
+
+- Store the Key Securely: The `key` token is only returned once upon creation. Store it immediately in a secure location like a secret manager or an `.env` file. You cannot retrieve it later.
+- Use descriptive names for keys to easily identify their purpose.
+
+### Revoke API key
+
+Description: Revokes an existing API key, permanently disabling it. This action cannot be undone.
+
+Method Signature:
+`apiClient.revokeApiKey(keyId: number)`
+
+Parameters:
+- `keyId` (number, required): The unique identifier of the API key to revoke.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.revokeApiKey(1234);
+console.log(`API key with ID ${response.data.id} has been revoked.`);
+```
+
+Key Points & Best Practices:
+- Revoke keys that are no longer in use or may have been compromised.
+- You must know the `keyId` to revoke a key. Use `listApiKeys` if you don't have it.
+
+## Operations
+
+An operation is an action performed by the Neon Control Plane (e.g., `create_branch`, `start_compute`). When using the SDK programmatically, it is crucial to monitor the status of long-running operations to ensure one has completed before starting another that depends on it. Operations older than 6 months may be deleted from Neon's systems.
+
+### List operations
+
+Description: Retrieves a list of operations for a specified project.
+
+Method Signature:
+`apiClient.listProjectOperations(params: ListProjectOperationsParams)`
+
+Parameters:
+- `params` (`ListProjectOperationsParams`):
+  - `projectId` (string, required): The ID of the project.
+  - `limit?` (number): The number of operations to return.
+  - `cursor?` (string): The pagination cursor.
+
+Example Usage:
+
+```typescript
+const  response  =  await apiClient.listProjectOperations({ projectId: 'your-project-id' });
+console.log(`Operations for project ${projectId}:`, response.data.operations);
+	// Example output: [{ id: "xx", project_id: "your-project-id", branch_id: "xxx", endpoint_id: "xxx", action: "start_compute", status: "finished", failures_count: 0, created_at: "xxx", updated_at: "2025-09-15T02:15:35Z", total_duration_ms: 239,}, ...]
+```
+
+### Retrieve operation details
+
+Description: Retrieves the status and details of a single operation by its ID.
+
+Method Signature:
+`apiClient.getProjectOperation(projectId: string, operationId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `operationId` (string, required): The ID of the operation.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.getProjectOperation('your-project-id', 'your-operation-id');
+```
+
+## Projects
+
+Manage your Neon projects.
+
+### List projects
+
+Description: Retrieves a list of all projects for your account or organization.
+
+Method Signature:
+`apiClient.listProjects(query: ListProjectsParams)`
+
+Parameters:
+- `limit?` (integer): Specifies the number of projects to return. (Min: 1, Max: 400, Default: 10)
+- `cursor?`  (string): Used for pagination. Provide the  `cursor`  value from a previous response to fetch the next set of projects.
+- `search?`  (string): Filters projects by a partial match on the project  `name`  or  `id`.
+- `org_id?`  (string): Filters projects by a specific organization ID.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.listProjects({});
+console.log('Projects:', response.data.projects);
+// Example response: [{ id: "your-project-id", platform_id: "aws", region_id: "aws-us-east-2", name: "project-name", provisioner: "k8s-neonvm", default_endpoint_settings: { autoscaling_limit_min_cu: 0.25, autoscaling_limit_max_cu: 2, suspend_timeout_seconds: 0 }, settings: { allowed_ips: { ips: [], protected_branches_only: false }, enable_logical_replication: false, maintenance_window: { weekdays: [ 3 ], start_time: "06:00", end_time: "07:00" }, block_public_connections: false, block_vpc_connections: false, hipaa: false }, pg_version: 17, proxy_host: "us-east-2.aws.neon.tech", branch_logical_size_limit: 512, branch_logical_size_limit_bytes: 536870912, store_passwords: true, active_time: 0, cpu_used_sec: 0, creation_source: "console", created_at: "xx", updated_at: "xx", synthetic_storage_size: 31277056, quota_reset_at: "xx", owner_id: "owner-id", compute_last_active_at: "2025-08-20T06:50:15Z", org_id: "org-id", history_retention_seconds: 86400 }, ...]
+```
+
+### Create project
+
+Description: Creates a new Neon project with a specified name, Postgres version, and region.
+
+Method Signature:
+`apiClient.createProject(data: ProjectCreateRequest)`
+
+Parameters:
+- `data` (`ProjectCreateRequest`):
+  - `project` (object, required): The main container for all project settings.
+    - `name` (string, optional): A descriptive name for the project (1-256 characters). If omitted, the project name will be identical to its generated ID.
+    - `pg_version` (integer, optional): The major Postgres version. Defaults to `17`. Supported versions: 14, 15, 16, 17, 18.
+    - `region_id` (string, optional): The identifier for the region where the project will be created (e.g., `aws-us-east-1`).
+    - `org_id` (string, optional): The ID of an organization to which the project will belong. Required if using an Organization API key.
+    - `store_passwords` (boolean, optional): Whether to store role passwords in Neon. Storing passwords is required for features like the SQL Editor and integrations.
+    - `history_retention_seconds` (integer, optional): The duration in seconds (0 to 2,592,000) to retain project history for features like Point-in-Time Restore. Defaults to 86400 (1 day).
+    - `provisioner` (string, optional): The compute provisioner. Specify `k8s-neonvm` to enable Autoscaling. Allowed values: `k8s-pod`, `k8s-neonvm`.
+    - `default_endpoint_settings` (object, optional): Default settings for new compute endpoints created in this project.
+      - `autoscaling_limit_min_cu` (number, optional): The minimum number of Compute Units (CU). Minimum value is `0.25`.
+      - `autoscaling_limit_max_cu` (number, optional): The maximum number of Compute Units (CU). Minimum value is `0.25`.
+      - `suspend_timeout_seconds` (integer, optional): Duration of inactivity in seconds before a compute is suspended. Ranges from -1 (never suspend) to 604800 (1 week). A value of `0` uses the default of 300 seconds (5 minutes).
+    - `settings` (object, optional): Project-wide settings.
+      - `quota` (object, optional): Per-project consumption quotas. A zero or empty value means "unlimited".
+        - `active_time_seconds` (integer, optional): Wall-clock time allowance for active computes.
+        - `compute_time_seconds` (integer, optional): CPU seconds allowance.
+        - `written_data_bytes` (integer, optional): Data written allowance.
+        - `data_transfer_bytes` (integer, optional): Data transferred allowance.
+        - `logical_size_bytes` (integer, optional): Logical data size limit per branch.
+      - `allowed_ips` (object, optional): Configures the IP Allowlist.
+        - `ips` (array of strings, optional): A list of allowed IP addresses or CIDR ranges.
+        - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
+      - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`.
+      - `maintenance_window` (object, optional): The time period for scheduled maintenance.
+        - `weekdays` (array of integers, required if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
+        - `start_time` (string, required if `maintenance_window` is set): Start time in "HH:MM" UTC format.
+        - `end_time` (string, required if `maintenance_window` is set): End time in "HH:MM" UTC format.
+    - `branch` (object, optional): Configuration for the project's default branch.
+      - `name` (string, optional): The name for the default branch. Defaults to `main`.
+      - `role_name` (string, optional): The name for the default role. Defaults to `{database_name}_owner`.
+      - `database_name` (string, optional): The name for the default database. Defaults to `neondb`.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.createProject({
+	project: { name: name, pg_version: 17, region_id: 'aws-us-east-2'},
+});
+console.log('Project created:', response.data.project);
+console.log('Connection URI:', response.data.connection_uris[0]?.connection_uri); // Example: "postgresql://neondb_owner:xxxx@ep-muddy-brook-aevd5iky.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require"
+```
+
+### Retrieve project details
+
+Description: Fetches detailed information for a single project by its ID.
+
+Method Signature:
+`apiClient.getProject(projectId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+
+Example Usage:
+
+```typescript
+const response = await apiClient.getProject('your-project-id');
+console.log('Project Details:', response.data.project);
+// Example response: { data_storage_bytes_hour: 6706234656, data_transfer_bytes: 1482607, written_data_bytes: 38603544, compute_time_seconds: 9567, active_time_seconds: 35236, cpu_used_sec: 9567, id: "your-project-id", platform_id: "azure", region_id: "azure-westus3", name: "your-project-name", provisioner: "k8s-neonvm", default_endpoint_settings: { autoscaling_limit_min_cu: 0.25, autoscaling_limit_max_cu: 2, suspend_timeout_seconds: 0 }, settings: { allowed_ips: { ips: [], protected_branches_only: false }, enable_logical_replication: false, maintenance_window: { weekdays: [ 4 ], start_time: "06:00", end_time: "07:00" }, block_public_connections: false, block_vpc_connections: false, hipaa: false }, pg_version: 17, proxy_host: "westus3.azure.neon.tech", branch_logical_size_limit: 512, branch_logical_size_limit_bytes: 536870912, store_passwords: true, creation_source: "console", history_retention_seconds: 86400, created_at: "xx", updated_at: "xx", synthetic_storage_size: 34690488, consumption_period_start: "xx", consumption_period_end: "xx", owner_id: "owner-id", owner: { email: "owner@email.com", name: "owner_name", branches_limit: 20, subscription_type: "free_v3"}, compute_last_active_at: "2025-09-16T03:40:57Z", org_id: "org-id" }
+```
+
+### Update project
+
+Description: Updates the settings of an existing project, such as its name.
+
+Method Signature:
+`apiClient.updateProject(projectId: string, data: ProjectUpdateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `data` (`ProjectCreateRequest`):
+  - `name` (string, optional): A new descriptive name for the project.
+  - `history_retention_seconds` (integer, optional): The duration in seconds (0 to 2,592,000) to retain project history.
+  - `default_endpoint_settings` (object, optional): New default settings for compute endpoints created in this project.
+    - `autoscaling_limit_min_cu` (number, optional): The minimum number of Compute Units (CU). Minimum `0.25`.
+    - `autoscaling_limit_max_cu` (number, optional): The maximum number of Compute Units (CU). Minimum `0.25`.
+    - `suspend_timeout_seconds` (integer, optional): Duration of inactivity in seconds before a compute is suspended. Ranges from -1 (never suspend) to 604800 (1 week). A value of `0` uses the default of 300 seconds (5 minutes).
+  - `settings` (object, optional): Project-wide settings to update.
+    - `quota` (object, optional): Per-project consumption quotas.
+      - `active_time_seconds` (integer, optional): Wall-clock time allowance for active computes.
+      - `compute_time_seconds` (integer, optional): CPU seconds allowance.
+      - `written_data_bytes` (integer, optional): Data written allowance.
+      - `data_transfer_bytes` (integer, optional): Data transferred allowance.
+      - `logical_size_bytes` (integer, optional): Logical data size limit per branch.
+    - `allowed_ips` (object, optional): Modifies the IP Allowlist.
+      - `ips` (array of strings, optional): The new list of allowed IP addresses or CIDR ranges.
+      - `protected_branches_only` (boolean, optional): If `true`, the IP allowlist applies only to protected branches.
+    - `enable_logical_replication` (boolean, optional): Sets `wal_level=logical`. This is irreversible.
+    - `maintenance_window` (object, optional): The time period for scheduled maintenance.
+      - `weekdays` (array of integers, required if `maintenance_window` is set): Days of the week (1=Monday, 7=Sunday).
+      - `start_time` (string, required if `maintenance_window` is set): Start time in "HH:MM" UTC format.
+      - `end_time` (string, required if `maintenance_window` is set): End time in "HH:MM" UTC format.
+    - `block_public_connections` (boolean, optional): If `true`, disallows connections from the public internet.
+    - `block_vpc_connections` (boolean, optional): If `true`, disallows connections from VPC endpoints.
+    - `audit_log_level` (string, optional): Sets the audit log level. Allowed values: `base`, `extended`, `full`.
+    - `hipaa` (boolean, optional): Toggles HIPAA compliance settings.
+    - `preload_libraries` (object, optional): Libraries to preload into compute instances.
+      - `use_defaults` (boolean, optional): Toggles the use of default libraries.
+      - `enabled_libraries` (array of strings, optional): A list of specific libraries to enable.
+
+Example Usage:
+
+```typescript
+// Example: Update a project's name
+await apiClient.updateProject(projectId, { project: { name: 'newNameForProject' }});
+```
+
+### Delete project
+
+Description: Permanently deletes a project and all its associated resources (branches, databases, roles). This action is irreversible.
+
+Method Signature:
+`apiClient.deleteProject(projectId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+
+Example Usage:
+
+```typescript
+await apiClient.deleteProject('projectid-to-delete');
+```
+
+### Retrieve connection URI
+
+Description: Gets a complete connection string for a specific database and role within a branch in a project.
+
+Method Signature:
+`apiClient.getConnectionUri(params: GetConnectionUriParams)`
+
+Parameters:
+- `params` (`GetConnectionUriParams`):
+    - `projectId` (string, required)
+    - `branch_id?` (string): Defaults to the project's primary branch.
+    - `database_name` (string, required)
+    - `role_name` (string, required)
+    - `pooled?` (boolean): If `true`, returns the pooled connection string.
+
+Example Usage:
+```typescript
+const response = await apiClient.getConnectionUri({ 
+	projectId: 'your-project-id', database_name: 'dbName', role_name: 'roleName', pooled: true 
+});
+console.log('Pooled Connection URI:', response.data.uri);
+// Example: "postgresql://neondb_owner:xxx@ep-xx-pooler.westus3.azure.neon.tech/neondb?channel_binding=require&sslmode=require"
+```
+
+## Branches
+
+Manage branches within a project. Branches in Neon are copy-on-write clones, allowing for isolated development, testing, and production environments without duplicating data.
+
+### Create branch
+
+Description: Creates a new branch from a parent branch. You can optionally create a compute endpoint at the same time and specify a point-in-time from the parent's history to branch from.
+
+Method Signature:
+`apiClient.createProjectBranch(projectId: string, data?: BranchCreateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project where the branch will be created.
+- `data` (`BranchCreateRequest`, optional):
+  - `branch` (object, optional): Specifies the properties of the new branch.
+    - `name` (string, optional): A name for the branch (max 256 characters). If omitted, a name is auto-generated.
+    - `parent_id` (string, optional): The ID of the parent branch. If omitted, the project's default branch is used.
+    - `parent_lsn` (string, optional): A Log Sequence Number (LSN) from the parent branch to create the new branch from a specific point-in-time.
+    - `parent_timestamp` (string, optional): An ISO 8601 timestamp (e.g., `2025-08-26T12:00:00Z`) to create the branch from a specific point-in-time.
+    - `protected` (boolean, optional): If `true`, the branch is created as a protected branch.
+    - `init_source` (string, optional): `parent-data` (default) copies schema and data. `schema-only` creates a root branch with only the schema from the specified parent.
+    - `expires_at` (string, optional): An RFC 3339 timestamp for when the branch should be automatically deleted (e.g., `2025-06-09T18:02:16Z`).
+  - `endpoints` (array of objects, optional): A list of compute endpoints to create and attach to the new branch.
+    - `type` (string, required): The endpoint type. Allowed values: `read_write`, `read_only`.
+    - `autoscaling_limit_min_cu` (number, optional): Minimum Compute Units (CU). Minimum `0.25`.
+    - `autoscaling_limit_max_cu` (number, optional): Maximum Compute Units (CU). Minimum `0.25`.
+    - `provisioner` (string, optional): Specify `k8s-neonvm` to enable Autoscaling. Allowed values: `k8s-pod`, `k8s-neonvm`.
+    - `suspend_timeout_seconds` (integer, optional): Inactivity period in seconds before suspension. Ranges from -1 (never) to 604800 (1 week).
+
+Example Usage:
+```typescript
+import { EndpointType } from '@neondatabase/api-client';
+
+const response = await apiClient.createProjectBranch('your-project-id', {
+  branch: { name: 'feature-branch-x' },
+  endpoints: [{ type: EndpointType.ReadWrite, autoscaling_limit_max_cu: 1 }],
+});
+console.log('Branch created:', response.data.branch);
+// Example response: {"id":"your-branch-id","project_id":"your-project-id","parent_id":"parent-branch-id","parent_lsn":"0/1BB6D40","name":"feature-branch-x","current_state":"init","pending_state":"ready","state_changed_at":"xx","creation_source":"console","primary":false,"default":false,"protected":false,"cpu_used_sec":0,"compute_time_seconds":0,"active_time_seconds":0,"written_data_bytes":0,"data_transfer_bytes":0,"created_at":"xx","updated_at":"xx","created_by":{"name":"user_name","image":""},"init_source":"parent-data"}
+console.log('Endpoint created:', response.data.endpoints[0]);
+// Example response: {"host":"ep-xxx.ap-southeast-1.aws.neon.tech","id":"ep-xxx","project_id":"your-project-id","branch_id":"your-branch-id","autoscaling_limit_min_cu":0.25,"autoscaling_limit_max_cu":1,"region_id":"aws-ap-southeast-1","type":"read_write","current_state":"init","pending_state":"active","settings":{},"pooler_enabled":false,"pooler_mode":"transaction","disabled":false,"passwordless_access":true,"creation_source":"console","created_at":"xx","updated_at":"xx","proxy_host":"ap-southeast-1.aws.neon.tech","suspend_timeout_seconds":0,"provisioner":"k8s-neonvm"}
+// The `response.data` object also contains `operations`, `roles`, `databases` and `connection_uris`
+```
+
+### List branches
+
+Description: Retrieves a list of branches for the specified project. Supports filtering, sorting, and pagination.
+
+Method Signature:
+`apiClient.listProjectBranches(params: ListProjectBranchesParams)`
+
+Parameters:
+- `params` (`ListProjectBranchesParams`):
+    - `projectId` (string, required): The ID of the project.
+    - `search?` (string): Filters branches by a partial match on name or ID.
+    - `sort_by?` (string): Field to sort by. Allowed: `name`, `created_at`, `updated_at`. Default: `updated_at`.
+    - `sort_order?` (string): Sort order. Allowed: `asc`, `desc`. Default: `desc`.
+    - `limit?` (integer): Number of branches to return (1-10000).
+    - `cursor?` (string): Pagination cursor from a previous response.
+
+Example Usage:
+```typescript
+const response = await apiClient.listProjectBranches({ projectId: 'your-project-id' });
+// Example response: {"branches":[{"id":"branch-id","project_id":"project-id","parent_id":"parent-branch-id","parent_lsn":"0/1BB6D40","parent_timestamp":"xx","name":"feature-branch-x","current_state":"ready","state_changed_at":"xx","logical_size":30842880,"creation_source":"console","primary":false,"default":false,"protected":false,"cpu_used_sec":0,"compute_time_seconds":0,"active_time_seconds":0,"written_data_bytes":0,"data_transfer_bytes":0,"created_at":"xx","updated_at":"xx","created_by":{"name":"user_name","image":""},"init_source":"parent-data"}, ...other branches details]}
+```
+
+### Retrieve branch details
+
+Description: Fetches detailed information for a single branch by its ID.
+
+Method Signature:
+`apiClient.getProjectBranch(projectId: string, branchId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+
+Example Usage:
+```typescript
+const response = await apiClient.getProjectBranch('your-project-id', 'br-your-branch-id');
+// Example response: { branch: { ... branch details } }
+```
+
+### Update branch
+
+Description: Updates the properties of a specified branch, such as its name or protection status.
+
+Method Signature:
+`apiClient.updateProjectBranch(projectId: string, branchId: string, data: BranchUpdateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch to update.
+- `data` (`BranchUpdateRequest`):
+  - `branch` (object, required):
+    - `name?` (string): A new name for the branch.
+    - `protected?` (boolean): `true` to protect the branch, `false` to unprotect.
+    - `expires_at?` (string | null): Branch new expiration timestamp or `null` to remove expiration.
+
+Example Usage:
+```typescript
+const response = await apiClient.updateProjectBranch('your-project-id', 'br-your-branch-id', {
+  branch: { name: 'updated-feature-branch' },
+});
+```
+
+### Delete branch
+
+Description: Permanently deletes a branch. This action will idle any associated compute endpoints.
+
+Method Signature:
+`apiClient.deleteProjectBranch(projectId: string, branchId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch to delete.
+
+Key Points & Best Practices:
+- You cannot delete a project's default branch.
+- You cannot delete a branch that has child branches. Delete children first.
+
+Example Usage:
+```typescript
+await apiClient.deleteProjectBranch('your-project-id', 'br-branch-to-delete');
+```
+
+### List branch endpoints
+
+Description: Retrieves a list of all compute endpoints associated with a specific branch.
+
+Method Signature:
+`apiClient.listProjectBranchEndpoints(projectId: string, branchId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+
+Example Usage:
+```typescript
+const response = await apiClient.listProjectBranchEndpoints('your-project-id', 'br-your-branch-id');
+// Example response: { endpoints: [... endpoints details] }
+```
+
+### List databases
+
+Description: Retrieves a list of all databases within a specified branch.
+
+Method Signature:
+`apiClient.listProjectBranchDatabases(projectId: string, branchId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+
+Example Usage:
+```typescript
+const response = await apiClient.listProjectBranchDatabases('your-project-id', 'br-your-branch-id');
+// Example response: { databases: [{ id: 39700786, branch_id: "br-your-branch-id", name: "neondb", owner_name: "neondb_owner", created_at: "xx", updated_at: "xx" }, ...other databases if they exist] }
+```
+
+### Create database
+
+Description: Creates a new database within a specified branch.
+
+Method Signature:
+`apiClient.createProjectBranchDatabase(projectId: string, branchId: string, data: DatabaseCreateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `data` (`DatabaseCreateRequest`):
+  - `database` (object, required):
+    - `name` (string, required): The name for the new database.
+    - `owner_name` (string, required): The name of an existing role that will own the database.
+
+Example Usage:
+```typescript
+await apiClient.createProjectBranchDatabase('your-project-id', 'br-your-branch-id', {
+  database: { name: 'my-app-db', owner_name: 'neondb_owner' },
+});
+```
+
+### Retrieve database details
+
+Description: Retrieves detailed information about a specific database within a branch.
+
+Method Signature:
+`apiClient.getProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `databaseName` (string, required): The name of the database.
+
+Example Usage:
+```typescript
+const response = await apiClient.getProjectBranchDatabase('your-project-id', 'br-your-branch-id', 'my-app-db');
+```
+
+### Update database
+
+Description: Updates the properties of a specified database, such as its name or owner.
+
+Method Signature:
+`apiClient.updateProjectBranchDatabase(projectId: string, branchId: string, databaseName: string, data: DatabaseUpdateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `databaseName` (string, required): The current name of the database to update.
+- `data` (`DatabaseUpdateRequest`):
+  - `database` (object, required):
+    - `name?` (string): A new name for the database.
+    - `owner_name?` (string): The name of a different existing role to become the new owner.
+
+Example Usage:
+```typescript
+const response = await apiClient.updateProjectBranchDatabase('your-project-id', 'br-your-branch-id', 'my-app-db', {
+  database: { name: 'my-renamed-app-db' },
+});
+```
+
+### Delete database
+
+Description: Deletes the specified database from a branch. This action is permanent.
+
+Method Signature:
+`apiClient.deleteProjectBranchDatabase(projectId: string, branchId: string, databaseName: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `databaseName` (string, required): The name of the database.
+
+Example Usage:
+```typescript
+await apiClient.deleteProjectBranchDatabase('your-project-id', 'br-your-branch-id', 'my-renamed-app-db');
+```
+
+### List roles
+
+Description: Retrieves a list of all Postgres roles from the specified branch.
+
+Method Signature:
+`apiClient.listProjectBranchRoles(projectId: string, branchId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+
+Example Usage:
+```typescript
+const response = await apiClient.listProjectBranchRoles('your-project-id', 'br-your-branch-id');
+// Example response: { roles: [{ branch_id: "br-your-branch-id", name: "neondb_owner", protected: false, created_at: "xx", updated_at: "xx"}, ... other roles if they exist] }
+```
+
+### Create role
+
+Description: Creates a new Postgres role in a specified branch. The response includes the role's generated password.
+
+Method Signature:
+`apiClient.createProjectBranchRole(projectId: string, branchId: string, data: RoleCreateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `data` (`RoleCreateRequest`):
+  - `role` (object, required):
+    - `name` (string, required): The name for the new role (max 63 bytes).
+    - `no_login?` (boolean): If `true`, creates a role that cannot log in.
+
+Example Usage:
+```typescript
+const response = await apiClient.createProjectBranchRole('your-project-id', 'br-your-branch-id', {
+  role: { name: 'demo_user' },
+});
+console.log('Role created:', response.data.role.name);
+console.log('Password (store securely!):', response.data.role.password);
+```
+
+### Retrieve role details
+
+Description: Retrieves detailed information about a specific Postgres role.
+
+Method Signature:
+`apiClient.getProjectBranchRole(projectId: string, branchId: string, roleName: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `roleName` (string, required): The role name to retrieve details
+
+Example Usage:
+```typescript
+const response = await apiClient.getProjectBranchRole('your-project-id', 'br-your-branch-id', 'demo_user');
+// Example response: { branch_id: "br-your-branch-id", name: "demo_user", protected: false, created_at: "xx", updated_at: "xx" }
+```
+
+### Delete role
+
+Description: Deletes the specified Postgres role from the branch.
+
+Method Signature:
+`apiClient.deleteProjectBranchRole(projectId: string, branchId: string, roleName: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `branchId` (string, required): The ID of the branch.
+- `roleName` (string, required): The role name to delete
+
+Example Usage:
+```typescript
+await apiClient.deleteProjectBranchRole('your-project-id', 'br-your-branch-id', 'demo_user');
+```
+
+## Endpoints
+
+Manage compute endpoints, which are the Postgres instances that connect to your branches.
+
+### Create compute endpoint
+
+Description: Creates a new compute endpoint and associates it with a branch.
+
+Method Signature:
+`apiClient.createProjectEndpoint(projectId: string, data: EndpointCreateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `data` (`EndpointCreateRequest`):
+  - `endpoint` (object, required):
+    - `branch_id` (string, required): The ID of the branch to associate the endpoint with.
+    - `type` (string, required): `read_write` or `read_only`.
+    - `autoscaling_limit_min_cu?` (number): Minimum Compute Units.
+    - `autoscaling_limit_max_cu?` (number): Maximum Compute Units.
+    - `suspend_timeout_seconds?` (integer): Inactivity seconds before suspension.
+
+Example Usage:
+```typescript
+import { EndpointType } from  '@neondatabase/api-client';
+
+const  response  =  await  apiClient.createProjectEndpoint('your-project-id', {
+	endpoint: { branch_id: 'br-your-branch-id', type: EndpointType.ReadOnly },
+});
+// Example response: {"endpoint":{"host":"ep-xxx.neon.tech","id":"ep-endpoint-id","project_id":"your-project-id","branch_id":"br-your-branch-id","autoscaling_limit_min_cu":0.25,"autoscaling_limit_max_cu":2,"region_id":"aws-ap-southeast-1","type":"read_only","current_state":"init","pending_state":"active","settings":{},"pooler_enabled":false,"pooler_mode":"transaction","disabled":false,"passwordless_access":true,"creation_source":"console","created_at":"xx","updated_at":"xx","proxy_host":"ap-southeast-1.aws.neon.tech","suspend_timeout_seconds":0,"provisioner":"k8s-neonvm"}}
+```
+
+### List compute endpoints
+
+Description: Retrieves a list of all compute endpoints for a project (includes endpoints of all branches)
+
+Method Signature:
+`apiClient.listProjectEndpoints(projectId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+
+Example Usage:
+```typescript
+const response = await apiClient.listProjectEndpoints('your-project-id');
+// Example response: {"endpoints": [... all endpoint details]}
+```
+
+### Retrieve compute endpoint details
+
+Description: Fetches detailed information for a single compute endpoint.
+
+Method Signature:
+`apiClient.getProjectEndpoint(projectId: string, endpointId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the specific compute endpoint to retrieve the details.
+
+Example Usage:
+```typescript
+const response = await apiClient.getProjectEndpoint('your-project-id', 'ep-your-endpoint-id');
+```
+
+### Update compute endpoint
+
+Description: Updates the configuration of a specified compute endpoint.
+
+Method Signature:
+`apiClient.updateProjectEndpoint(projectId: string, endpointId: string, data: EndpointUpdateRequest)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the endpoint to update.
+- `data` (`EndpointUpdateRequest`):
+  - `endpoint` (object, required):
+    - `autoscaling_limit_min_cu?` (number): New minimum Compute Units.
+    - `autoscaling_limit_max_cu?` (number): New maximum Compute Units.
+    - `suspend_timeout_seconds?` (integer): New suspension timeout.
+    - `disabled?` (boolean): Set to `true` to disable connections or `false` to enable them.
+
+Example Usage:
+```typescript
+const response = await apiClient.updateProjectEndpoint('your-project-id', 'ep-your-endpoint-id', {
+  endpoint: { autoscaling_limit_max_cu: 2 },
+});
+```
+
+### Delete compute endpoint
+
+Description: Deletes a compute endpoint. This will drop all active connections.
+
+Method Signature:
+`apiClient.deleteProjectEndpoint(projectId: string, endpointId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the endpoint to delete.
+
+Example Usage:
+```typescript
+await apiClient.deleteProjectEndpoint('your-project-id', 'ep-endpoint-to-delete');
+```
+
+### Start compute endpoint
+
+Description: Manually starts an `idle` compute endpoint.
+
+Method Signature:
+`apiClient.startProjectEndpoint(projectId: string, endpointId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the endpoint to start.
+
+Example Usage:
+```typescript
+const response = await apiClient.startProjectEndpoint('your-project-id', 'ep-your-endpoint-id');
+```
+
+### Suspend compute endpoint
+
+Description: Manually suspends an `active` compute endpoint.
+
+Method Signature:
+`apiClient.suspendProjectEndpoint(projectId: string, endpointId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the endpoint to suspend.
+
+Example Usage:
+```typescript
+await apiClient.suspendProjectEndpoint('your-project-id', 'ep-your-endpoint-id');
+```
+
+### Restart compute endpoint
+
+Description: Restarts a compute endpoint by suspending and then starting it. Throws error if endpoint is not active (already suspended)
+
+Method Signature:
+`apiClient.restartProjectEndpoint(projectId: string, endpointId: string)`
+
+Parameters:
+- `projectId` (string, required): The ID of the project.
+- `endpointId` (string, required): The ID of the endpoint to restart.
+
+Example Usage:
+```typescript
+await apiClient.restartProjectEndpoint('your-project-id', 'ep-your-endpoint-id');
+```
+
+## Organizations
+
+Manage organizations, members, and organization-scoped API keys.
+
+### Retrieve organization details
+
+Description: Retrieves detailed information about a specific organization.
+
+Method Signature:
+`apiClient.getOrganization(orgId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+
+Example Usage:
+```typescript
+const response = await apiClient.getOrganization('org-your-org-id');
+```
+
+### List organization API keys
+
+Description: Retrieves a list of all API keys for a specified organization.
+
+Method Signature:
+`apiClient.listOrgApiKeys(orgId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+
+Example Usage:
+```typescript
+const response = await apiClient.listOrgApiKeys('org-your-org-id');
+```
+
+### Create organization API key
+
+Description: Creates a new API key for an organization. Can be scoped to the entire org or a single project.
+
+Method Signature:
+`apiClient.createOrgApiKey(orgId: string, data: OrgApiKeyCreateRequest)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `data` (`OrgApiKeyCreateRequest`):
+  - `key_name` (string, required): A name for the key.
+  - `project_id?` (string): If provided, restricts the key's access to this project.
+
+Example Usage:
+```typescript
+const response = await apiClient.createOrgApiKey('org-your-org-id', {
+  key_name: 'ci-key-for-project-abc',
+  project_id: 'project-abc-id',
+});
+```
+
+### Revoke organization API key
+
+Description: Permanently revokes an organization API key.
+
+Method Signature:
+`apiClient.revokeOrgApiKey(orgId: string, keyId: number)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `keyId` (number, required): The key id of the api key to revoke
+
+Example Usage:
+```typescript
+await apiClient.revokeOrgApiKey('org-your-org-id', 12345);
+```
+
+### Retrieve organization members details
+
+Description: Retrieves a list of all members in an organization.
+
+Method Signature:
+`apiClient.getOrganizationMembers(orgId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+
+Example Usage:
+```typescript
+const response = await apiClient.getOrganizationMembers('org-your-org-id');
+```
+
+### Retrieve organization member details
+
+Description: Retrieves information about a single member of an organization.
+
+Method Signature:
+`apiClient.getOrganizationMember(orgId: string, memberId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `memberId` (string, required): The member ID to retrieve the details
+
+Example Usage:
+```typescript
+const response = await apiClient.getOrganizationMember('org-your-org-id', 'member-uuid');
+```
+
+### Update role for organization member
+
+Description: Updates the role of a member within an organization. Only admins can perform this action.
+
+Method Signature:
+`apiClient.updateOrganizationMember(orgId: string, memberId: string, data: OrganizationMemberUpdateRequest)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `memberId` (string, required): The member ID to update.
+- `data` (`OrganizationMemberUpdateRequest`):
+  - `role` (string, required): The new role. Allowed: `admin`, `member`.
+
+Example Usage:
+```typescript
+import { MemberRole } from  '@neondatabase/api-client';
+
+await apiClient.updateOrganizationMember('org-your-org-id', 'member-uuid', { role: MemberRole.Admin });
+```
+
+### Remove member from organization
+
+Description: Removes a member from an organization. Only admins can perform this action.
+
+Method Signature:
+`apiClient.removeOrganizationMember(orgId: string, memberId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `memberId` (string, required): The member ID to remove.
+
+Example Usage:
+```typescript
+await apiClient.removeOrganizationMember('org-your-org-id', 'member-uuid-to-remove');
+```
+
+### Retrieve organization invitation details
+
+Description: Retrieves a list of outstanding invitations for an organization.
+
+Method Signature:
+`apiClient.getOrganizationInvitations(orgId: string)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+
+Example Usage:
+```typescript
+const response = await apiClient.getOrganizationInvitations('org-your-org-id');
+```
+
+### Create organization invitations
+
+Description: Creates and sends email invitations for users to join an organization.
+
+Method Signature:
+`apiClient.createOrganizationInvitations(orgId: string, data: OrganizationInvitesCreateRequest)`
+
+Parameters:
+- `orgId` (string, required): The organization ID
+- `data` (`OrganizationInvitesCreateRequest`):
+  - `invitations` (array of objects, required):
+    - `email` (string, required): The email address to invite.
+    - `role` (string, required): The role for the invited user. Allowed: `admin`, `member`.
+
+Example Usage:
+```typescript
+import { MemberRole } from  '@neondatabase/api-client';
+
+await apiClient.createOrganizationInvitations('org-your-org-id', {
+  invitations: [{ email: 'new.dev@example.com', role: MemberRole.Member }],
+});
+```
+
+## Error Handling
+
+The SDK uses `axios` under the hood and throws `AxiosError` for API failures. Always wrap API calls in `try...catch` blocks to handle potential errors gracefully.
+
+Error Structure:
+
+- `error.response.status`: The HTTP status code (e.g., `401`, `404`, `429`).
+- `error.response.data`: The error payload from the Neon API, usually containing a `code` and `message`.
+
+Example Error Handling:
+
+```typescript
+async function safeApiOperation(projectId: string) {
+  try {
+    const response = await apiClient.getProject(projectId);
+    return response.data;
+  } catch (error: any) {
+    if (error.isAxiosError) {
+      const status = error.response?.status;
+      const data = error.response?.data;
+      console.error(`API Error: Status ${status}`);
+      console.error(`Message: ${data?.message}`);
+
+      switch (status) {
+        case 401:
+          console.error("Authentication error: Check your NEON_API_KEY.");
+          break;
+        case 404:
+          console.error(`Resource not found for project ID: ${projectId}`);
+          break;
+        case 429:
+          console.error("Rate limit exceeded. Please wait before retrying.");
+          break;
+        default:
+          console.error("An unexpected API error occurred.");
+      }
+    } else {
+      console.error("A non-API error occurred:", error.message);
+    }
+    return null;
+  }
+}
+```
+
+Common Status Codes:
+- `401 Unauthorized`: Your API key is invalid or missing.
+- `403 Forbidden`: Your API key does not have permission for this action.
+- `404 Not Found`: The requested resource (project, branch, etc.) does not exist.
+- `422 Unprocessable Entity`: The request body is invalid. Check your parameters.
+- `429 Too Many Requests`: You have exceeded the API rate limit.
+- `500 Internal Server Error`: An error occurred on Neon's side.
+````

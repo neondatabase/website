@@ -6,6 +6,8 @@
 
 - [AI Rules: Neon Auth HTML](https://neon.com/docs/ai/ai-rules-neon-auth): The original HTML version of this documentation
 
+**Note** AI Rules are in Beta: AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
+
 Related docs:
 - [Neon Auth](https://neon.com/docs/guides/neon-auth)
 
@@ -39,20 +41,33 @@ alwaysApply: false
 ---
 # Neon Auth guidelines
 
-## Overview
+## The Problem Neon Auth Solves
 
-This document provides comprehensive guidelines for implementing authentication in your application using both Stack Auth (frontend authentication system) and Neon Auth (database integration for user data). These systems work together to provide a complete authentication solution:
+Neon Auth integrates user authentication directly with your Neon Postgres database. Its primary purpose is to **eliminate the complexity of synchronizing user data** between your authentication provider and your application's database.
 
-- **Stack Auth**: Handles user interface components, authentication flows, and client/server interactions
-- **Neon Auth**: Manages how user data is stored and accessed in your database
+-   **Before Neon Auth:** Developers need to build and maintain custom sync logic, webhooks, and separate user tables to handle user creation, updates, and deletions. This is error-prone and adds overhead.
+-   **With Neon Auth:** User data is automatically populated and updated in near real-time within a dedicated `neon_auth.users_sync` table in your database. This allows you to treat user profiles as regular database rows, ready for immediate use in SQL joins and application logic.
+
+
+## The Two Halves of Neon Auth
+
+Think of Neon Auth as a unified system with two main components:
+
+1.  **The Authentication Layer (SDK):** This is for managing user sessions, sign-ins, sign-ups, and accessing user information in your application code (client and server components). It is powered by the Stack Auth SDK (`@stackframe/stack`).
+2.  **The Database Layer (Data Sync):** This is the `neon_auth.users_sync` table within your Neon database. It serves as a near real-time, read-only replica of your user data, ready to be joined with your application's tables.
 
 ## Stack Auth Setup Guidelines
 
 ### Initial Setup
 
+Ask the human developer to do the following steps:
+- Enable Neon Auth: In the Neon project console, navigate to the Auth page and click Enable Neon Auth.
+- Get Credentials: Go to the Configuration tab and copy the environment variables.
+
+Steps which you can do after that:
 - Run the installation wizard with:  
-  `npx @stackframe/init-stack@latest`
-- Update your API keys in your `.env.local` file:  
+  `npx @stackframe/init-stack@latest --agent-mode --no-browser`
+- Update the API keys in your `.env.local` file with the values from the Neon console:  
   - `NEXT_PUBLIC_STACK_PROJECT_ID`  
   - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
   - `STACK_SECRET_SERVER_KEY`
@@ -60,7 +75,8 @@ This document provides comprehensive guidelines for implementing authentication 
   - `app/handler/[...stack]/page.tsx` (default auth pages)  
   - `app/layout.tsx` (wrapped with StackProvider and StackTheme)  
   - `app/loading.tsx` (provides a Suspense fallback)  
-  - `stack.ts` (initializes your Stack server app)
+  - `stack/server.tsx` (initializes your Stack server app)
+  - `stack/client.tsx` (initializes your Stack client app)
 
 ### UI Components
 
@@ -79,7 +95,6 @@ This document provides comprehensive guidelines for implementing authentication 
 
 - In Client Components, use the `useUser()` hook to retrieve the current user (it returns `null` when not signed in).
 - Update user details using `user.update({...})` and sign out via `user.signOut()`.
-- For pages that require a user, call `useUser({ or: "redirect" })` so unauthorized visitors are automatically redirected.
 
 ### Client Component Integration
 
@@ -97,11 +112,11 @@ This document provides comprehensive guidelines for implementing authentication 
 
 ### Server Component Integration
 
-- For Server Components, use `stackServerApp.getUser()` from your `stack.ts` file.
+- For Server Components, use `stackServerApp.getUser()` from `stack/server.tsx` file.
 - Example:
   
   ```tsx
-  import { stackServerApp } from "@/stack";
+  import { stackServerApp } from "@/stack/server";
   export default async function ServerComponent() {
     const user = await stackServerApp.getUser();
     return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
@@ -110,7 +125,7 @@ This document provides comprehensive guidelines for implementing authentication 
 
 ### Page Protection
 
-- Protect pages by:
+- Protect pages by redirecting to Sign in page:
   - Using `useUser({ or: "redirect" })` in Client Components.
   - Using `await stackServerApp.getUser({ or: "redirect" })` in Server Components.
   - Implementing middleware that checks for a user and redirects to `/handler/sign-in` if not found.
@@ -126,73 +141,6 @@ This document provides comprehensive guidelines for implementing authentication 
   }
   export const config = { matcher: '/protected/:path*' };
   ```
-
-## Neon Auth Database Integration
-
-### Database Schema
-
-Neon Auth creates and manages a schema in your database that stores user information:
-
-- **Schema Name**: `neon_auth`
-- **Primary Table**: `users_sync`
-- **Table Structure**:
-  - `raw_json` (JSONB, NOT NULL): Complete user data in JSON format
-  - `id` (TEXT, NOT NULL, PRIMARY KEY): Unique user identifier
-  - `name` (TEXT, NULLABLE): User's display name
-  - `email` (TEXT, NULLABLE): User's email address
-  - `created_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was created
-  - `deleted_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was deleted (if applicable)
-- **Indexes**:
-  - `users_sync_deleted_at_idx` on `deleted_at`: For quickly identifying deleted users
-
-### Schema Creation SQL
-
-```sql
--- Create schema if it doesn't exist
-CREATE SCHEMA IF NOT EXISTS neon_auth;
--- Create the users_sync table
-CREATE TABLE neon_auth.users_sync (
-    raw_json JSONB NOT NULL,
-    id TEXT NOT NULL,
-    name TEXT,
-    email TEXT,
-    created_at TIMESTAMP WITH TIME ZONE,
-    deleted_at TIMESTAMP WITH TIME ZONE,
-    PRIMARY KEY (id)
-);
--- Create index on deleted_at
-CREATE INDEX users_sync_deleted_at_idx ON neon_auth.users_sync (deleted_at);
-```
-
-### Database Usage
-
-#### Querying Users
-
-To fetch active users from Neon Auth:
-
-```sql
-SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
-```
-
-#### Relating User Data with Application Tables
-
-To join user data with your application tables:
-
-```sql
-SELECT 
-  t.*,
-  u.id AS user_id,
-  u.name AS user_name,
-  u.email AS user_email
-FROM 
-  public.todos t
-LEFT JOIN 
-  neon_auth.users_sync u ON t.owner = u.id
-WHERE 
-  u.deleted_at IS NULL
-ORDER BY 
-  t.id;
-```
 
 ## Stack Auth SDK Reference
 
@@ -262,24 +210,62 @@ type CurrentUser = {
 };
 ```
 
-## Best Practices for Integration
-
-### Stack Auth Best Practices
+## Stack Auth Best Practices
 - Use the appropriate methods based on component type:
   - Use hook-based methods (`useXyz`) in Client Components
   - Use promise-based methods (`getXyz`) in Server Components
 - Always protect sensitive routes using the provided mechanisms
 - Use pre-built UI components whenever possible to ensure proper auth flow handling
 
-### Neon Auth Best Practices
-- Always use `LEFT JOIN` when relating with `neon_auth.users_sync`
-  - Ensures queries work even if user records are missing
-- Always filter out users with `deleted_at IS NOT NULL`
-  - Prevents deleted user accounts from appearing in queries
-- Never create Foreign Key constraints pointing to `neon_auth.users_sync`
-  - User management happens externally and could break referential integrity
-- Never insert users directly into the `neon_auth.users_sync` table
-  - User creation and management must happen through the Stack Auth system
+## Neon Auth Database Integration
+
+### Database Schema
+
+Neon Auth creates and manages a schema in your database that stores user information:
+
+- **Schema Name**: `neon_auth`
+- **Primary Table**: `users_sync`
+- **Table Structure**:
+  - `raw_json` (JSONB, NOT NULL): Complete user data in JSON format
+  - `id` (TEXT, NOT NULL, PRIMARY KEY): Unique user identifier
+  - `name` (TEXT, NULLABLE): User's display name
+  - `email` (TEXT, NULLABLE): User's email address
+  - `created_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was created
+  - `updated_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was last updated
+  - `deleted_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was deleted (if applicable)
+- **Indexes**:
+  - `users_sync_deleted_at_idx` on `deleted_at`: For quickly identifying deleted users
+
+> NOTE: The table is automatically created and managed by Neon Auth. Do not manually create or modify it. This is provided for your reference only.
+
+### Database Usage
+
+#### Querying Active Users
+The `deleted_at` column is used for soft deletes. Always include `WHERE deleted_at IS NULL` in your queries to ensure you only work with active user accounts.
+
+```sql
+SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
+```
+
+#### Relating User Data with Application Tables
+
+To join user data with your application tables:
+
+```sql
+SELECT 
+  t.*,
+  u.id AS user_id,
+  u.name AS user_name,
+  u.email AS user_email
+FROM 
+  public.todos t
+LEFT JOIN 
+  neon_auth.users_sync u ON t.owner = u.id
+WHERE 
+  u.deleted_at IS NULL
+ORDER BY 
+  t.id;
+```
 
 ## Integration Flow
 
@@ -287,7 +273,25 @@ type CurrentUser = {
 2. User data is automatically synced to the `neon_auth.users_sync` table
 3. Your application code accesses user information either through:
    - Stack Auth hooks/methods (in React components)
-   - SQL queries to the `neon_auth.users_sync` table (for data operations)
+   - SQL queries to the `neon_auth.users_sync` table (for read only data operations)
+
+## Best Practices for Integration
+
+- **The `users_sync` Table is a Read-Only Replica**: User data is managed by the Neon Auth service. **NEVER** `INSERT`, `UPDATE`, or `DELETE` rows directly in the `neon_auth.users_sync` table. All user modifications must happen through the Authentication Layer SDK (e.g., `user.update({...})`, `user.delete()`). Direct database modifications will be overwritten and can break the sync process.
+
+- **Use Foreign Keys Correctly**: You **SHOULD** create foreign key constraints from your application tables *to* the `neon_auth.users_sync(id)` column. This maintains referential integrity. Do **NOT** attempt to add foreign keys *from* the `users_sync` table to your own tables.
+
+  ```sql
+  -- CORRECT: Your table references the Neon Auth table.
+  CREATE TABLE posts (
+      id SERIAL PRIMARY KEY,
+      content TEXT,
+      author_id TEXT NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE
+  );
+
+  -- INCORRECT: Do not try to alter the Neon Auth table. Will break entire Neon Auth system.
+  -- ALTER TABLE neon_auth.users_sync ADD CONSTRAINT ...
+  ```
 
 ## Example: Custom Profile Page with Database Integration
 

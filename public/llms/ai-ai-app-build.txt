@@ -19,11 +19,9 @@
 
 ## Getting started
 
-```bash
-npx @app.build/cli
-```
+Simply go to https://www.app.build/ and authenticate, start chatting ti build!
 
-This command launches the CLI, which will ask you to sign in with GitHub (required for code storage and deployment). Each generated application gets its own repository in your account and is deployed with a real backend and database. The CLI supports both creating new apps and iterating on existing ones (adding features or making changes).
+**Note:** the CLI is now deprecated. `npx @app.build/cli` will give you an error.
 
 ## What it generates
 

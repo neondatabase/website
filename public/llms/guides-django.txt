@@ -31,6 +31,8 @@ In your Django project, navigate to the `DATABASES` section of your `settings.py
 from os import getenv
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Replace the DATABASES section of your settings.py with this
 DATABASES = {
   'default': {

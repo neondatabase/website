@@ -10,7 +10,7 @@
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](https://neon.com/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, and 18 (preview), as per the [Neon version support policy](https://neon.com/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](https://neon.com/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 ## Postgres extensions
 
@@ -188,21 +188,27 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
+## Tablespaces
+
+Neon does not support PostgreSQL [tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html). Attempting to create a tablespace with the `CREATE TABLESPACE` command will result in an error. This is due to Neon's managed cloud architecture, which does not permit direct file system access for custom storage locations.
+
+If you have existing applications or scripts that use tablespaces for organizing database objects across different storage devices, you'll need to remove or modify these references when migrating to Neon.
+
 ## Postgres logs
 
 Postgres logs can be accessed through the [Datadog](https://neon.com/docs/guides/datadog) or [OpenTelemetry](https://neon.com/docs/guides/opentelemetry) integration on the Scale plan. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](https://neon.com/docs/introduction/support).
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+Unlogged tables are tables that do not write to the Postgres write-ahead log (WAL). In Noen, these tables are stored on compute local storage and are not persisted across compute restarts or when a compute scales to zero. This is unlike standard Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+
+## Temporary tables
+
+Temporary tables are tied to a session (or optionally a transaction). They exist only for the lifetime of the session or transaction and are automatically dropped when it ends. Like unlogged tables, they are stored on compute local storage and limited by compute local disk space.
 
 ## Memory
 
 SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](https://neon.com/docs/manage/endpoints#how-to-size-your-compute).
-
-## Temporary tables
-
-Temporary tables, which are stored in compute local storage, are limited by compute local storage size.
 
 ## Session context
 

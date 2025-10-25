@@ -13,3 +13,4 @@
 - [Prisma](https://neon.com/docs/guides/prisma): Learn how to connect from Prisma ORM to your Neon Postgres database
 - [Rails](https://neon.com/docs/guides/ruby-on-rails): Connect a Rails application to Neon
 - [SQLAlchemy](https://neon.com/docs/guides/sqlalchemy): Connect a SQLAlchemy application to Neon
+- [TypeORM](https://neon.com/docs/guides/typeorm): Connect a TypeORM application to Neon
