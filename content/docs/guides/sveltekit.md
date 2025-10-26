@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.918Z'
 ---
 
+<CopyPrompt src="/prompts/sveltekit-prompt.md"
+description="Pre-built prompt for connecting SvelteKit applications to Neon."/>
+
 Sveltekit is a modern JavaScript framework that compiles your code to tiny, framework-less vanilla JS. This guide explains how to connect Sveltekit with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Sveltekit application:
