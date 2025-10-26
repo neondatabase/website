@@ -39,6 +39,8 @@ You will need the connection string details later in the setup.
 1. [Create a Phoenix project](https://hexdocs.pm/phoenix/installation.html#phoenix) if you do not have one, with the following command:
 
    ```bash
+   # install phx.new if you haven't already
+   # mix archive.install hex phx_new 
    mix phx.new hello
    ```
 

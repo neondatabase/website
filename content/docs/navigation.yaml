@@ -254,6 +254,8 @@
           items:
             - title: Astro
               slug: guides/astro
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Micronaut Kotlin
