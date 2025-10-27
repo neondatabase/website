@@ -22,7 +22,7 @@ Neon will grant eligible open-source software up to $5,000 in platform credits y
 
 ### Cash Payments
 
-Every time a developer discovers Neon through your work and becomes a customer, we'll give you $10 via GitHub Sponsorships.
+Every time a developer discovers Neon through your work and becomes a customer, we'll give you $20 via GitHub Sponsorships.
 
 ### Promotion Support
 
