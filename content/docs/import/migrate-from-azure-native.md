@@ -31,7 +31,7 @@ To migrate your projects to a Neon-managed organization:
 2. Open the organization dropdown to view your available organizations.
 3. Determine which organization is Azure-managed and which is Neon-managed.
    - The Azure-managed organization will have the same name as the resource shown in the Azure Portal.
-   - In Organization Settings → Delete, the Azure-managed organization includes a note that says: "This organization is managed by Azure and can be deleted only from the Azure Portal." A Neon-managed organization will not have this note.
+   - In **Organization Settings** → **Delete**, the Azure-managed organization includes a note that says: "This organization is managed by Azure and can be deleted only from the Azure Portal." A Neon-managed organization will not have this note.
 
 > From the Neon Console, you'll be migrating from the Azure-managed organization to the Neon-managed organization.
 
@@ -39,8 +39,8 @@ To migrate your projects to a Neon-managed organization:
 
 If you have multiple admins, coordinate to decide which Neon-managed organization will be your shared destination:
 
-- **Free plan** users must use their existing Neon-managed organization (creating a new organization requires a paid plan).
-- **Paid plan** users can upgrade their existing Neon-managed organization or create a new paid organization.
+- **Free plan** users can use their existing Neon-managed organization, or upgrade to a paid plan to create an additional organization (you can only have one free organization).
+- **Paid plan** users can upgrade their existing Neon-managed organization, or create a new paid organization.
 
 ## Upgrade your Neon plan (paid users only)
 
@@ -78,7 +78,7 @@ After the transfer:
 
 - Re-add any additional admins, members, or project collaborators who need access. See [Manage organization members](/docs/manage/orgs-manage#add-a-user-to-an-organization) for instructions.
 - Verify that all projects appear in your Neon-managed organization.
-- If you use [API keys](/docs/manage/api-keys), note that existing keys are tied to your Azure-managed organization. Create new keys in your Neon-managed organization and update them in your applications, scripts, and integrations.
+- For [API keys](/docs/manage/api-keys), project-scoped and personal API keys remain the same after transfer. Organization API keys are tied to your Azure-managed organization, so if you use organization API keys, create new keys in your Neon-managed organization and update them in your applications, scripts, and integrations.
 - Update any integrations or tooling that rely on organization-level identifiers.
 
 ## Delete your Azure-managed resource
