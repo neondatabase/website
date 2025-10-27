@@ -40,7 +40,7 @@ You will need the connection string details later in the setup.
 
    ```bash
    # install phx.new if you haven't already
-   # mix archive.install hex phx_new 
+   # mix archive.install hex phx_new
    mix phx.new hello
    ```
 
