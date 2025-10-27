@@ -43,7 +43,10 @@ For this guide, we will use the Micronaut CLI.
 Run the following command in your terminal. This command creates a new application and includes features for PostgreSQL connectivity, JDBC connection pooling (Hikari), database migrations (Flyway), data access, and YAML configuration.
 
 ```bash
-mn create-app with-micronaut-kotlin --lang=kotlin --jdk=21 --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
+mn create-app with-micronaut-kotlin \
+  --lang=kotlin \
+  --jdk=21 \
+  --features=postgres,jdbc-hikari,flyway,data-jdbc,yaml
 ```
 
 After creating the project, open the `build.gradle.kts` file and add the following configuration inside the `kotlin` block to ensure compatibility with JDK 21 and prevent potential build errors:
