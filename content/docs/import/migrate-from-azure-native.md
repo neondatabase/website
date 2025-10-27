@@ -39,9 +39,8 @@ To migrate your projects to a Neon-managed organization:
 
 If you have multiple admins, coordinate to decide which Neon-managed organization will be your shared destination:
 
-- Free plan users must use their existing Neon-managed organization (creating a new organization requires a paid plan).
-- Paid plan users can upgrade their existing Neon-managed organization or create a new paid organization.
-- You can rename the destination organization at any time in **Organization Settings**.
+- **Free plan** users must use their existing Neon-managed organization (creating a new organization requires a paid plan).
+- **Paid plan** users can upgrade their existing Neon-managed organization or create a new paid organization.
 
 ## Upgrade your Neon plan (**paid users only**)
 
