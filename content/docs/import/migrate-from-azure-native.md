@@ -65,7 +65,7 @@ This ensures your projects retain all paid features after transfer.
 
 You can transfer all projects at once or individually. From your Azure-managed organization in the Neon Console:
 
-1. Go to **Organization** -> **Settings** -> **Transfer projects**.
+1. Go to **Organization** → **Settings** → **Transfer projects**.
 2. Click **Select all**, then click **Next**.
 3. Choose your Neon-managed organization as the destination.
 4. Confirm the transfer.
