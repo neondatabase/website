@@ -42,7 +42,7 @@ If you have multiple admins, coordinate to decide which Neon-managed organizatio
 - **Free plan** users must use their existing Neon-managed organization (creating a new organization requires a paid plan).
 - **Paid plan** users can upgrade their existing Neon-managed organization or create a new paid organization.
 
-## Upgrade your Neon plan (**paid users only**)
+## Upgrade your Neon plan (paid users only)
 
 If you are on a paid Azure plan, you can either upgrade your existing Neon-managed organization or create a new paid organization:
 
