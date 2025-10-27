@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.907Z'
 ---
 
+<CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
+description="Pre-built prompt for connecting Micronaut Kotlin applications to Neon Postgres"/>
+
 [Micronaut](https://micronaut.io/) is a modern, JVM-based, full-stack framework for building modular, easily testable microservice and serverless applications. This guide describes how to create a Neon Postgres database and connect to it from a Micronaut Kotlin application.
 
 The final application will expose REST endpoints to perform CRUD (Create, Read, Update, Delete) operations on a `book` table in your Neon database.
@@ -142,9 +145,7 @@ import io.micronaut.data.model.query.builder.sql.Dialect
 import io.micronaut.data.repository.CrudRepository
 
 @JdbcRepository(dialect = Dialect.POSTGRES)
-interface BookRepository : CrudRepository<Book, Long> {
-    fun findByTitleContains(title: String): List<Book>
-}
+interface BookRepository : CrudRepository<Book, Long>
 ```
 
 ### 4. Create the controller
@@ -167,21 +168,15 @@ class BookController(private val bookRepository: BookRepository) {
 
     @Get
     @ExecuteOn(TaskExecutors.IO)
-    fun getAll(): List<Book> {
-        return bookRepository.findAll().toList()
-    }
+    fun getAll(): List<Book> = bookRepository.findAll().toList()
 
     @Get("/{id}")
     @ExecuteOn(TaskExecutors.IO)
-    fun getById(id: Long): Book? {
-        return bookRepository.findById(id).orElse(null)
-    }
+    fun getById(id: Long): Book? = bookRepository.findById(id).orElse(null)
 
     @Post
     @ExecuteOn(TaskExecutors.IO)
-    fun save(@Body book: Book): Book {
-        return bookRepository.save(book)
-    }
+    fun save(@Body book: Book): Book = bookRepository.save(book)
 }
 ```
 
