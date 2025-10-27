@@ -9,37 +9,56 @@ updatedOn: '2025-10-16T00:00:00.000Z'
 The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. 
 </Admonition>
 
-This guide describes how to migrate your projects to a Neon-managed organization to continue using Neon.
+This guide describes how to migrate your projects to your Neon-managed organization to continue using Neon.
 
 ## Getting started
 
 Before you begin your migration, be aware of the following:
 
-- A new Neon-managed organization has already been created for you in the Neon Console.
-- You can find it in the organization dropdown named `neon-managed-[org-name]` where `[org-name]` is the original organization name.
-- You can [rename this organization](/docs/manage/orgs-manage#rename-an-organization) at any time.
-- Only admins are migrated to the new organization. Members and project collaborators must be re-added manually after migration.
-- If you are on a paid Azure plan, your new Neon-managed organization has been created on the Free plan. You must upgrade to a paid plan (Scale recommended for Azure Scale and Business customers) to maintain your current features and avoid service limitations.
+- You may have more than one organization in the Neon Console. [Review your organizations](#identify-your-organizations) to identify which one is Azure-managed and which is Neon-managed.
+- Admins from your Azure-managed organization are automatically added to the Neon-managed organization. Members and project collaborators must be re-added manually after migration.
+- If you are on a paid Azure plan, your Neon-managed organization is on the Free plan. You must upgrade to a paid plan (Scale recommended for Azure Scale and Business customers) or create a new paid organization to maintain your current features and avoid service limitations.
 - Application connection strings remain the same after transfer because the project structure does not change.
+- You can [rename an organization](/docs/manage/orgs-manage#rename-an-organization) at any time.
 
 To migrate your projects to a Neon-managed organization:
 
 <Steps>
 
-## Locate your new Neon-managed organization
+## Identify your organizations
 
 1. Sign in to the [Neon Console](https://console.neon.tech).
-2. Open the organization dropdown and confirm that a new organization named `neon-managed-[org-name]` is listed.
-3. Optionally [rename this organization](/docs/manage/orgs-manage#rename-an-organization) to a custom name.
+2. Open the organization dropdown to view your available organizations.
+3. Determine which organization is Azure-managed and which is Neon-managed.
+   - The Azure-managed organization will have the same name as the resource shown in the Azure Portal.
+   - In Organization Settings → Delete, the Azure-managed organization includes a note that says: "This organization is managed by Azure and can be deleted only from the Azure Portal." A Neon-managed organization will not have this note.
 
-## Upgrade your plan (paid users only)
+> From the Neon Console, you'll be migrating from the Azure-managed organization to the Neon-managed organization.
 
-If you are on a paid Azure plan, upgrade your new Neon-managed organization before transferring projects:
+## Choose your destination organization
 
-1. Switch to your `neon-managed-[org-name]` organization.
+If you have multiple admins, coordinate to decide which Neon-managed organization will be your shared destination:
+
+- Free plan users must use their existing Neon-managed organization (creating a new organization requires a paid plan).
+- Paid plan users can upgrade their existing Neon-managed organization or create a new paid organization.
+- You can rename the destination organization at any time in **Organization Settings**.
+
+## Upgrade your Neon plan (**paid users only**)
+
+If you are on a paid Azure plan, you can either upgrade your existing Neon-managed organization or create a new paid organization:
+
+**To upgrade your existing Neon-managed organization:**
+
+1. Switch to your Neon-managed organization.
 2. Go to **Billing** and select **Change plan**.
 3. Select **Scale** (recommended for Azure Scale and Business customers) or **Launch**.
 4. Complete the upgrade process.
+
+**To create a new paid organization:**
+
+1. From the organization menu, select **Create new organization**.
+2. Select **Scale** or **Launch** as your plan.
+3. Complete the organization setup.
 
 This ensures your projects retain all paid features after transfer.
 
@@ -49,18 +68,19 @@ You can transfer all projects at once or individually. From your Azure-managed o
 
 1. Go to **Organization** -> **Settings** -> **Transfer projects**.
 2. Click **Select all**, then click **Next**.
-3. Choose your new Neon-managed organization as the destination.
+3. Choose your Neon-managed organization as the destination.
 4. Confirm the transfer.
 
-Projects appear in your new organization immediately after the transfer completes. For more details about project transfers, see [Transfer projects](/docs/manage/orgs-project-transfer).
+Projects appear in your destination organization immediately after the transfer completes. For more details about project transfers, see [Transfer projects](/docs/manage/orgs-project-transfer).
 
 ## Update your organization configuration
 
 After the transfer:
 
-- Re-add any members or project collaborators who need access. See [Manage organization members](/docs/manage/orgs-manage#add-a-user-to-an-organization) for instructions.
-- Verify that all projects appear in your new Neon-managed organization.
+- Re-add any additional admins, members, or project collaborators who need access. See [Manage organization members](/docs/manage/orgs-manage#add-a-user-to-an-organization) for instructions.
+- Verify that all projects appear in your Neon-managed organization.
 - If you use [API keys](/docs/manage/api-keys), note that existing keys are tied to your Azure-managed organization. Create new keys in your Neon-managed organization and update them in your applications, scripts, and integrations.
+- Update any integrations or tooling that rely on organization-level identifiers.
 
 ## Delete your Azure-managed resource
 
