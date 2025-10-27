@@ -35,6 +35,8 @@ You can create a new Micronaut project using either the Micronaut CLI or the [Mi
 
 For this guide, we will use the Micronaut CLI.
 
+> Install the Micronaut CLI by following the instructions in the [Micronaut documentation](https://micronaut.io/download/). You also need to have JDK 21 installed on your machine.
+
 Run the following command in your terminal. This command creates a new application and includes features for PostgreSQL connectivity, JDBC connection pooling (Hikari), database migrations (Flyway), data access, and YAML configuration.
 
 ```bash
@@ -261,5 +263,14 @@ You can find the source code for the application described in this guide on GitH
 <a href="https://github.com/neondatabase/examples/tree/main/with-micronaut-kotlin" description="Get started with Micronaut Kotlin and Neon" icon="github">Get started with Micronaut Kotlin and Neon</a>
 </DetailIconCards>
 </Steps>
+
+## Resources
+
+- [Micronaut Documentation](https://docs.micronaut.io/)
+- [Micronaut API Reference](https://docs.micronaut.io/4.10.7/api/)
+- [Micronaut Schema Migration with Flyway](https://guides.micronaut.io/latest/micronaut-flyway-maven-java.html)
+- [Micronaut Data JDBC documentation](https://micronaut-projects.github.io/micronaut-data/latest/guide/index.html#jdbc)
+- [Micronaut Hikari JDBC Connection Pool documentation](https://micronaut-projects.github.io/micronaut-sql/latest/guide/index.html#jdbc)
+- [Flyway](https://www.red-gate.com/products/flyway/community/)
 
 <NeedHelp/>
