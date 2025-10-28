@@ -2,7 +2,7 @@
 title: Neon Launchpad
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-10-24T17:31:37.627Z'
+updatedOn: '2025-10-28T22:10:17.076Z'
 ---
 
 Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
@@ -108,7 +108,7 @@ For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://githu
 
 ### Integration with development tools
 
-Add Postgres support to Vite projects using the [@neondatabase/vite-plugin-postgres](https://www.npmjs.com/package/@neondatabase/vite-plugin-postgres) plugin. The plugin provisions a database and injects credentials into your environment file if needed.
+Add Postgres support to Vite projects using the [vite-plugin-db](https://www.npmjs.com/package/vite-plugin-db) plugin. The plugin provisions a database and injects credentials into your environment file if needed.
 
 > The example below includes React, but you can use the Neon plugin with any Vite-compatible framework.
 
@@ -166,7 +166,7 @@ export default defineConfig({
 
 The plugin is inactive during production builds (`vite build`) to prevent changes to environment files and database provisioning in production environments. If `seed` is configured, the specified SQL script is executed after database creation. If an error occurs (such as a missing or invalid SQL file), an error message will be displayed.
 
-For more details, see the [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-postgres).
+For more details, see the [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db).
 
 ## Claiming a database
 
@@ -214,5 +214,5 @@ The Neon Launchpad service is built on Neon's [claimable database integration](/
 ## Resources
 
 - [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb)
-- [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-postgres)
+- [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
 - Blog post: [Neon Launchpad: A Tool For Instant Postgres, No Login Needed](https://neon.com/blog/neon-launchpad)
