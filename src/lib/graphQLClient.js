@@ -8,6 +8,7 @@ export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
   method: 'GET', // Use GET for regular queries
   headers: {
     'Content-Type': 'application/json',
+    'User-Agent': 'Neon-Next.js/1.0 (Vercel)',
   },
 });
 
@@ -17,6 +18,7 @@ export const graphQLClientAdmin = (authToken) =>
     method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`,
+      'User-Agent': 'Neon-Next.js/1.0 (Vercel Admin)',
     },
   });
 
