@@ -41,10 +41,10 @@ export async function middleware(req) {
 
           const response = await fetch(markdownUrl, {
             headers: process.env.GITHUB_API_TOKEN
-              ? { Authorization: `token ${process.env.GITHUB_API_TOKEN}` }
+              ? { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` }
               : {},
-            // Cache GitHub response on Vercel Edge
-            next: { revalidate: 3600 }, // 1 hour cache
+            // Use standard Web API caching (GitHub provides 5min cache via Cache-Control)
+            cache: 'force-cache',
           });
 
           if (!response.ok) {
