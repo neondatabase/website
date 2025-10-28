@@ -8,6 +8,7 @@ export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
   method: 'GET', // Use GET for regular queries
   headers: {
     'Content-Type': 'application/json',
+    'User-Agent': 'Neon-Next.js/1.0 (Vercel)',
   },
 });
 
@@ -17,16 +18,17 @@ export const graphQLClientAdmin = (authToken) =>
     method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`,
+      'User-Agent': 'Neon-Next.js/1.0 (Vercel Admin)',
     },
   });
 
 // Add caching to the fetch function
-export const fetchGraphQL = (client, retries = 3) => {
+export const fetchGraphQL = (client, retries = 1) => {
   const request = async (query, variables = {}) =>
     retry(async () => await client.request(query, variables), {
       retries,
       factor: 2,
-      minTimeout: 1000,
+      minTimeout: 2000,
       onRetry: (error, attempt) => {
         console.log(`Attempt ${attempt} failed. Retrying...`);
       },
