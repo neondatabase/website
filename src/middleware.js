@@ -39,14 +39,27 @@ export async function middleware(req) {
           const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
           const markdownUrl = `${githubRawBase}${markdownPath}`;
 
-          const response = await fetch(markdownUrl);
+          const response = await fetch(markdownUrl, {
+            headers: process.env.GITHUB_API_TOKEN
+              ? { Authorization: `token ${process.env.GITHUB_API_TOKEN}` }
+              : {},
+            // Cache GitHub response on Vercel Edge
+            next: { revalidate: 3600 }, // 1 hour cache
+          });
 
           if (!response.ok) {
             console.error('[AI Agent] Failed to fetch markdown', {
               pathname,
               markdownUrl,
               status: response.status,
+              statusText: response.statusText,
             });
+
+            // If GitHub rate limit exceeded, fall back to regular HTML
+            if (response.status === 429) {
+              console.warn('[AI Agent] GitHub rate limit exceeded, serving HTML fallback');
+            }
+
             return NextResponse.next();
           }
 

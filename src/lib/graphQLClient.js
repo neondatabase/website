@@ -25,12 +25,12 @@ export const graphQLClientAdmin = (authToken) =>
   });
 
 // Add caching to the fetch function
-export const fetchGraphQL = (client, retries = 1) => {
+export const fetchGraphQL = (client, retries = 3) => {
   const request = async (query, variables = {}) =>
     retry(async () => await client.request(query, variables), {
       retries,
       factor: 2,
-      minTimeout: 2000,
+      minTimeout: 1000,
       onRetry: (error, attempt) => {
         console.log(`Attempt ${attempt} failed. Retrying...`);
       },
