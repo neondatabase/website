@@ -35,12 +35,16 @@ export async function middleware(req) {
           const response = await fetch(markdownUrl);
 
           if (!response.ok) {
-            console.error('[AI Agent] Failed to fetch markdown', {
-              pathname,
-              localPath: markdownPath,
-              status: response.status,
-            });
-            return NextResponse.next();
+            // Only log unexpected errors (500, network issues, etc.)
+            if (response.status !== 404) {
+              console.error('[AI Agent] Failed to fetch markdown', {
+                pathname,
+                localPath: markdownPath,
+                status: response.status,
+              });
+            }
+
+            return NextResponse.next(); // Serve HTML page instead
           }
 
           const markdown = await response.text();
