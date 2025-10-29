@@ -27,10 +27,11 @@ const copyMarkdownFiles = async (src, dest) => {
 };
 
 (async () => {
-  console.log('Copying docs markdown...');
+  console.log('Copying all Markdown files...');
   try {
-    await copyMarkdownFiles('content/docs', 'public/md/docs');
-    console.log('Done copying Markdown files.');
+    // Copy all content directories to public/md
+    await copyMarkdownFiles('content', 'public/md');
+    console.log('Done copying all Markdown files.');
   } catch (err) {
     console.error('Error occurred while copying Markdown files:', err);
   }

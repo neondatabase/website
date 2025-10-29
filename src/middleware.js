@@ -35,31 +35,18 @@ export async function middleware(req) {
 
       if (markdownPath) {
         try {
-          // Fetch markdown content from GitHub and serve it directly
-          const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
-          const markdownUrl = `${githubRawBase}${markdownPath}`;
+          // Serve markdown from local public/md directory
+          // Files are copied during build by copy-docs-md.js script
+          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
 
-          const response = await fetch(markdownUrl, {
-            headers: process.env.GITHUB_API_TOKEN
-              ? { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` }
-              : {},
-            // Use standard Web API caching (GitHub provides 5min cache via Cache-Control)
-            cache: 'force-cache',
-          });
+          const response = await fetch(markdownUrl);
 
           if (!response.ok) {
             console.error('[AI Agent] Failed to fetch markdown', {
               pathname,
-              markdownUrl,
+              localPath: markdownPath,
               status: response.status,
-              statusText: response.statusText,
             });
-
-            // If GitHub rate limit exceeded, fall back to regular HTML
-            if (response.status === 429) {
-              console.warn('[AI Agent] GitHub rate limit exceeded, serving HTML fallback');
-            }
-
             return NextResponse.next();
           }
 

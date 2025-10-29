@@ -36,9 +36,6 @@ build/Release
 node_modules/
 jspm_packages/
 
-# Typescript v1 declaration files
-typings/
-
 # Optional npm cache directory
 .npm
 
@@ -68,6 +65,9 @@ public/sitemap-postgres.xml
 public/sitemap-postgres-0.xml
 public/robots.txt
 
+# ignore local markdown files
+public/md
+
 # Mac files
 .DS_Store
 
@@ -80,8 +80,6 @@ yarn-error.log
 
 .idea/
 .vscode/
-content/docs/shared-content/NewPricing
-public/md
 .history/
 
 content/docs/guides/time_travel_tutorial_before-1.png

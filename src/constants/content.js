@@ -9,15 +9,7 @@ const TEMPLATE_PAGES_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
 const USE_CASES_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/use-cases`;
 const PROGRAMS_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/programs`;
 
-const CONTENT_ROUTES = {
-  'docs/changelog': CHANGELOG_DIR_PATH,
-  docs: DOCS_DIR_PATH,
-  postgresql: POSTGRESQL_DIR_PATH,
-  'use-cases': USE_CASES_DIR_PATH,
-  guides: GUIDES_DIR_PATH,
-  branching: BRANCHING_DIR_PATH,
-  programs: PROGRAMS_DIR_PATH,
-};
+const CONTENT_ROUTES = ['docs', 'postgresql', 'use-cases', 'guides', 'branching', 'programs'];
 
 const EXCLUDED_ROUTES = [
   'docs/changelog',
