@@ -5,6 +5,8 @@
 const fs = require('fs').promises;
 const path = require('path');
 
+const { CONTENT_ROUTES } = require('../constants/content');
+
 const copyMarkdownFiles = async (src, dest) => {
   // Create destination directory if it doesn't exist
   await fs.mkdir(dest, { recursive: true });
@@ -27,12 +29,17 @@ const copyMarkdownFiles = async (src, dest) => {
 };
 
 (async () => {
-  console.log('Copying all Markdown files...');
+  console.log('Copying markdown content...');
   try {
-    // Copy all content directories to public/md
-    await copyMarkdownFiles('content', 'public/md');
-    console.log('Done copying all Markdown files.');
+    const copyTasks = Object.entries(CONTENT_ROUTES).map(([route, srcPath]) => {
+      const destPath = `public/md/${route}`;
+      return copyMarkdownFiles(srcPath, destPath);
+    });
+
+    await Promise.all(copyTasks);
+
+    console.log('Done copying markdown content.');
   } catch (err) {
-    console.error('Error occurred while copying Markdown files:', err);
+    console.error('Error occurred while copying markdown files:', err);
   }
 })();

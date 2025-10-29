@@ -24,19 +24,12 @@ export async function middleware(req) {
     const { pathname } = req.nextUrl;
 
     if (isAIAgentRequest(req)) {
-      console.log('[AI Agent] Request detected', {
-        pathname,
-        userAgent: req.headers.get('user-agent'),
-        accept: req.headers.get('accept'),
-        allHeaders: Object.fromEntries(req.headers.entries()),
-      });
-
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
         try {
           // Serve markdown from local public/md directory
-          // Files are copied during build by copy-docs-md.js script
+          // Files are copied during build by copy-md-content.js script
           const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
 
           const response = await fetch(markdownUrl);
@@ -136,15 +129,10 @@ export async function middleware(req) {
 
 export const config = {
   matcher: [
-    '/',
-    '/home',
-    '/generate-ticket/:path*',
-    '/tickets/:path*',
-    '/docs/:path*',
-    '/postgresql/:path*',
-    '/guides/:path*',
-    '/branching/:path*',
-    '/programs/:path*',
-    '/use-cases/:path*',
+    '/', // Check if the user is logged in
+    '/home', // Check if the user is logged in
+    '/generate-ticket/:path*', // Tickets protected routes
+    '/tickets/:path*', // Tickets protected routes
+    '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
   ],
 };

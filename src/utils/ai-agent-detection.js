@@ -50,7 +50,7 @@ export function getMarkdownPath(pathname) {
   if (isExcluded) return null;
 
   // Find the matching route
-  const matchedRoute = CONTENT_ROUTES.find(
+  const matchedRoute = Object.keys(CONTENT_ROUTES).find(
     (route) => path === route || path.startsWith(`${route}/`)
   );
 
@@ -58,5 +58,6 @@ export function getMarkdownPath(pathname) {
 
   // Extract slug after the matched route
   const slug = path === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
+
   return `/md/${matchedRoute}/${slug}.md`;
 }
