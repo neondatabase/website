@@ -3,7 +3,7 @@ title: Deploy Neon on Azure
 subtitle: Learn how to deploy Neon as a Native ISV Service on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.220Z'
+updatedOn: '2025-10-29T19:08:44.074Z'
 ---
 
 <Admonition type="important" title="deprecated">
