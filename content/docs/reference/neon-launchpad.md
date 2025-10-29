@@ -104,7 +104,7 @@ DATABASE_URL_POOLER=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgm
 PUBLIC_NEON_LAUNCHPAD_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
 ```
 
-For advanced SDK/API usage, see the [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb).
+For advanced SDK/API usage, see the [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db).
 
 ### Integration with development tools
 
@@ -118,7 +118,7 @@ Add Postgres support to Vite projects using the [vite-plugin-db](https://www.npm
 | ----------- | ------ | -------------------------------- | -------------- |
 | `env`       | string | Path to the .env file            | `.env`         |
 | `envKey`    | string | Name of the environment variable | `DATABASE_URL` |
-| `envPrefix` | string | Prefix for public env vars       | `PUBLIC_`      |
+| `envPrefix` | string | Prefix for public env vars       | `VITE_`      |
 | `seed`      | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
@@ -140,7 +140,7 @@ export default defineConfig({
     postgres({
       env: '.env.local', // Custom .env file (default: '.env')
       envKey: 'DATABASE_URL', // Env variable for connection string (default: 'DATABASE_URL')
-      envPrefix: 'PUBLIC_', // Prefix for public environment variables
+      envPrefix: 'VITE_', // Prefix for public environment variables
       seed: {
         type: 'sql-script',
         path: './schema.sql', // SQL file to run after DB creation
@@ -213,6 +213,6 @@ The Neon Launchpad service is built on Neon's [claimable database integration](/
 
 ## Resources
 
-- [Neondb CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neondb)
+- [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db)
 - [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
 - Blog post: [Neon Launchpad: A Tool For Instant Postgres, No Login Needed](https://neon.com/blog/neon-launchpad)
