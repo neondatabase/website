@@ -24,43 +24,27 @@ export async function middleware(req) {
     const { pathname } = req.nextUrl;
 
     if (isAIAgentRequest(req)) {
-      console.log('[AI Agent] Request detected', {
-        pathname,
-        userAgent: req.headers.get('user-agent'),
-        accept: req.headers.get('accept'),
-        allHeaders: Object.fromEntries(req.headers.entries()),
-      });
-
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
         try {
-          // Fetch markdown content from GitHub and serve it directly
-          const githubRawBase = process.env.NEXT_PUBLIC_GITHUB_RAW_PATH;
-          const markdownUrl = `${githubRawBase}${markdownPath}`;
+          // Serve markdown from local public/md directory
+          // Files are copied during build by copy-md-content.js script
+          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
 
-          const response = await fetch(markdownUrl, {
-            headers: process.env.GITHUB_API_TOKEN
-              ? { Authorization: `Bearer ${process.env.GITHUB_API_TOKEN}` }
-              : {},
-            // Use standard Web API caching (GitHub provides 5min cache via Cache-Control)
-            cache: 'force-cache',
-          });
+          const response = await fetch(markdownUrl);
 
           if (!response.ok) {
-            console.error('[AI Agent] Failed to fetch markdown', {
-              pathname,
-              markdownUrl,
-              status: response.status,
-              statusText: response.statusText,
-            });
-
-            // If GitHub rate limit exceeded, fall back to regular HTML
-            if (response.status === 429) {
-              console.warn('[AI Agent] GitHub rate limit exceeded, serving HTML fallback');
+            // Only log unexpected errors (500, network issues, etc.)
+            if (response.status !== 404) {
+              console.error('[AI Agent] Failed to fetch markdown', {
+                pathname,
+                localPath: markdownPath,
+                status: response.status,
+              });
             }
 
-            return NextResponse.next();
+            return NextResponse.next(); // Serve HTML page instead
           }
 
           const markdown = await response.text();
@@ -149,15 +133,10 @@ export async function middleware(req) {
 
 export const config = {
   matcher: [
-    '/',
-    '/home',
-    '/generate-ticket/:path*',
-    '/tickets/:path*',
-    '/docs/:path*',
-    '/postgresql/:path*',
-    '/guides/:path*',
-    '/branching/:path*',
-    '/programs/:path*',
-    '/use-cases/:path*',
+    '/', // Check if the user is logged in
+    '/home', // Check if the user is logged in
+    '/generate-ticket/:path*', // Tickets protected routes
+    '/tickets/:path*', // Tickets protected routes
+    '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
   ],
 };

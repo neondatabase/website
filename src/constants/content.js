@@ -10,8 +10,8 @@ const USE_CASES_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/use-cases`;
 const PROGRAMS_DIR_PATH = `${TEMPLATE_PAGES_DIR_PATH}/programs`;
 
 const CONTENT_ROUTES = {
-  'docs/changelog': CHANGELOG_DIR_PATH,
   docs: DOCS_DIR_PATH,
+  'docs/changelog': CHANGELOG_DIR_PATH,
   postgresql: POSTGRESQL_DIR_PATH,
   'use-cases': USE_CASES_DIR_PATH,
   guides: GUIDES_DIR_PATH,
