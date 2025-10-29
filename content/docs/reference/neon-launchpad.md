@@ -118,7 +118,7 @@ Add Postgres support to Vite projects using the [vite-plugin-db](https://www.npm
 | ----------- | ------ | -------------------------------- | -------------- |
 | `env`       | string | Path to the .env file            | `.env`         |
 | `envKey`    | string | Name of the environment variable | `DATABASE_URL` |
-| `envPrefix` | string | Prefix for public env vars       | `VITE_`      |
+| `envPrefix` | string | Prefix for public env vars       | `VITE_`        |
 | `seed`      | object | Seeding config (optional)        | not set        |
 
 **`seed` object:**
