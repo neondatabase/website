@@ -1,8 +1,9 @@
 ---
 title: Connect a Micronaut Kotlin application to Neon Postgres
-subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin application
+subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin
+  application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.907Z'
+updatedOn: '2025-10-29T16:57:58.906Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"
