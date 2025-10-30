@@ -28,20 +28,20 @@ If you do not have one already, create a Neon project. Save your connection deta
    cd with-react-router
    ```
 
-2. Add project dependencies using one of the following commands. We'll also add `dotenv` to manage environment variables.
+2. Add project dependencies using one of the following commands.
 
    <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
    ```shell
-   npm install pg dotenv
+   npm install pg
    ```
 
    ```shell
-   npm install postgres dotenv
+   npm install postgres
    ```
 
    ```shell
-   npm install @neondatabase/serverless dotenv
+   npm install @neondatabase/serverless
    ```
 
    </CodeTabs>
@@ -78,7 +78,6 @@ Create a new file at `app/routes/version.tsx`. This file will contain both the s
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```tsx filename=app/routes/version.tsx
-import 'dotenv/config';
 import { Pool } from 'pg';
 import type { Route } from './+types/version';
 
@@ -107,7 +106,6 @@ export default function Version({ loaderData }: Route.ComponentProps) {
 ```
 
 ```tsx filename=app/routes/version.tsx
-import 'dotenv/config';
 import postgres from 'postgres';
 import type { Route } from './+types/version';
 
@@ -130,7 +128,6 @@ export default function Version({ loaderData }: Route.ComponentProps) {
 ```
 
 ```tsx filename=app/routes/version.tsx
-import 'dotenv/config';
 import { neon } from '@neondatabase/serverless';
 import type { Route } from './+types/version';
 
