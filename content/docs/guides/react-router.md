@@ -71,7 +71,7 @@ export default [
 ] satisfies RouteConfig;
 ```
 
-### 2. Create the Route Module
+### 2. Create the route module
 
 Create a new file at `app/routes/version.tsx`. This file will contain both the server-side data loader and the client-side React component. The `loader` function will connect to Neon, query the database version, and pass the result to the `Component` via the `loaderData` prop.
 
