@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-10-27T22:21:56.852Z'
+updatedOn: '2025-10-30T22:51:14.853Z'
 ---
 
 <InfoBlock>
