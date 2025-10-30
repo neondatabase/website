@@ -276,6 +276,8 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
+            - title: React Router
+              slug: guides/react-router
             - title: Reflex
               slug: guides/reflex
             - title: Remix
