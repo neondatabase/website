@@ -1,10 +1,11 @@
 ---
 title: Migrate from Neon Azure Native Integration
-subtitle: Learn how to transfer projects and transition from Azure-managed to Neon-managed organizations.
+subtitle: Learn how to transfer projects and transition from Azure-managed to
+  Neon-managed organizations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/transfer-from-azure-native
-updatedOn: '2025-10-29T19:08:44.077Z'
+updatedOn: '2025-10-30T16:15:01.780Z'
 ---
 
 <Admonition type="important" title="deprecated">

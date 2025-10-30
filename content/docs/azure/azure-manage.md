@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-10-02T10:26:34.122Z'
+updatedOn: '2025-10-30T16:15:01.779Z'
 ---
 
 <Admonition type="important" title="deprecated">
