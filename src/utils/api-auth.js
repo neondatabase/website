@@ -14,6 +14,7 @@ const getAuthToken = async () => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'User-Agent': process.env.WP_GRAPHQL_USER_AGENT,
     },
   });
 
