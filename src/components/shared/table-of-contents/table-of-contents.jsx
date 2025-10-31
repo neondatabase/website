@@ -6,7 +6,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import Item from './item';
 
-const CURRENT_ANCHOR_GAP_PX = 100;
+const ANCHOR_SCROLL_MARGIN = 130;
 
 const TableOfContents = ({ items, isTemplate }) => {
   const titles = useRef([]);
@@ -41,7 +41,7 @@ const TableOfContents = ({ items, isTemplate }) => {
         return false;
       }
 
-      return top - CURRENT_ANCHOR_GAP_PX >= 0;
+      return top - ANCHOR_SCROLL_MARGIN >= 0;
     });
 
     const idx =

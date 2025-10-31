@@ -42,7 +42,7 @@ When this prompt is triggered, automatically configure the open Elixir project a
       database: "[dbname]",
       ssl: [cacerts: :public_key.cacerts_get()]
     ```
-4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connection Details**, using the **Parameters only** view.
+4.  Prompt the user to get their connection parameters from the **Neon Console → Project → Dashboard → Connect**, using the **Parameters only** view.
 
 ---
 

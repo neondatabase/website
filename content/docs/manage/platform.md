@@ -3,7 +3,7 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2025-09-13T09:38:53.467Z'
+updatedOn: '2025-10-25T09:51:37.871Z'
 ---
 
 ## Access & collaboration
@@ -66,7 +66,7 @@ Monitor your Neon projects to track system health and performance.
 
 <a href="/docs/introduction/monitor-active-queries" description="View and analyze running queries in your database" icon="import">Active queries</a>
 
-<a href="/docs/introduction/monitor-query-history" description="View and analyze query history for your Neon database" icon="research">Query history</a>
+<a href="/docs/introduction/monitor-query-performance" description="View and analyze query performance for your Neon database" icon="research">Query performance</a>
 
 <a href="/docs/guides/datadog" description="Monitor your database with Datadog" icon="import">Datadog</a>
 
@@ -123,7 +123,5 @@ Learn how Neon secures your projects and data, and explore the security features
 <a href="/docs/manage/updates" description="Learn about updates for Neon computes and Postgres" icon="import">Updates</a>
 
 <a href="/docs/introduction/regions" description="Learn about Neon regions and availability" icon="globe">Regions</a>
-
-<a href="/docs/manage/slack-app" description="Integrate Neon with Slack for team notifications" icon="handshake">App for Slack</a>
 
 </DetailIconCards>

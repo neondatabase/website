@@ -3,7 +3,7 @@ title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
 enableTableOfContents: true
-updatedOn: '2025-09-13T09:38:53.466Z'
+updatedOn: '2025-10-24T19:29:04.736Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -178,6 +178,7 @@ After setting up either the remote or local server and connecting your MCP clien
 - **List tables in a database:** `"What tables are in the database 'my-database' in project 'my-project'?"`
 - **Add a column to a table:** `"Add a column 'email' of type VARCHAR to the 'users' table in database 'main' of project 'my-project'"`
 - **Run a query:** `"Show me the first 10 rows from the 'users' table in database 'my-database'"`
+- **Generate a schema diff:** `"Generate a schema diff for branch 'br-feature-auth' in project 'my-project'"`
 
 <Video  
 sources={[{src: "/videos/pages/doc/neon-mcp.mp4",type: "video/mp4",}]}

@@ -252,6 +252,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/blog/migrate-your-data-from-aws-rds-aurora-to-neon',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
         source: '/api-reference',
         destination: 'https://api-docs.neon.tech',
         permanent: true,
@@ -395,6 +400,11 @@ const defaultConfig = {
       {
         source: '/flow/:path*',
         destination: '/branching/:path*',
+        permanent: true,
+      },
+      {
+        source: '/scalable-architecture',
+        destination: '/',
         permanent: true,
       },
       ...docsRedirects,

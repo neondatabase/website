@@ -165,12 +165,6 @@ export default {
     pathname: LINKS.platforms,
     type: 'article',
   },
-  scalableArchitecture: {
-    title: 'Neon Scalable Architecture — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    pathname: LINKS.scalableArchitecture,
-  },
   stage: {
     title: 'Neon Deploy Stage — Neon',
     description:

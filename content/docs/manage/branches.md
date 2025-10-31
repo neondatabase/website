@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-09-30T11:29:44.954Z'
+updatedOn: '2025-10-24T21:38:50.621Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -32,7 +32,7 @@ To create a branch:
 When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-6. Optionally set an **Expire branch on** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+6. Optionally set an **Expire branch after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
@@ -97,7 +97,7 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available.
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 For more information, see [Default branch](#default-branch).
@@ -132,7 +132,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
-5. Set a new expiration date and time, or toggle off "Expire branch on" to remove expiration.
+5. Set a new expiration date and time, or toggle off "Expire branch after" to remove expiration.
 6. Click **Save**.
 
 For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
@@ -233,7 +233,7 @@ Each Neon project has a default branch. In the Neon Console, your default branch
 
 The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#simultaneously-active-compute-limit), ensuring that it is always available.
+- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 ### Non-default branch

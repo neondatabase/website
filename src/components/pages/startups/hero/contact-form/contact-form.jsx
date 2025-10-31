@@ -133,7 +133,7 @@ const ContactForm = () => {
         'xl:p-6 lg:gap-y-5 md:gap-y-6'
       )}
       method="POST"
-      id="contact-form"
+      id="startups-form"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="grid grid-cols-2 gap-6 lg:gap-5 md:contents md:flex-col md:gap-6">

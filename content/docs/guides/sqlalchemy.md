@@ -5,8 +5,11 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/sqlalchemy
   - /docs/integrations/sqlalchemy
-updatedOn: '2025-07-03T12:36:49.564Z'
+updatedOn: '2025-10-24T12:53:27.790Z'
 ---
+
+<CopyPrompt src="/prompts/sqlalchemy-prompt.md" 
+description="Pre-built prompt for connecting SQLAlchemy to Neon Postgres"/>
 
 SQLAlchemy is a Python SQL toolkit and Object Relational Mapper (ORM) that provides application developers with the full power and flexibility of SQL. This guide describes how to create a Neon project and connect to it from SQLAlchemy.
 

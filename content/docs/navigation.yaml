@@ -47,8 +47,6 @@
               slug: guides/logical-replication-rds-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: Azure
               slug: import/migrate-from-azure-postgres
             - title: Cloud SQL
@@ -82,8 +80,6 @@
               slug: guides/logical-replication-supabase-to-neon
             - title: RDS
               slug: guides/logical-replication-rds-to-neon
-            - title: Aurora
-              slug: guides/logical-replication-aurora-to-neon
             - title: AlloyDB
               slug: guides/logical-replication-alloydb
             - title: Azure
@@ -258,6 +254,8 @@
           items:
             - title: Astro
               slug: guides/astro
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Micronaut Kotlin
@@ -278,6 +276,8 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
+            - title: React Router
+              slug: guides/react-router
             - title: Reflex
               slug: guides/reflex
             - title: Remix
@@ -332,6 +332,8 @@
               slug: guides/ruby-on-rails
             - title: SQLAlchemy
               slug: guides/sqlalchemy
+            - title: TypeORM
+              slug: guides/typeorm
     - section: Backend
       items:
         - title: Data API
@@ -346,6 +348,8 @@
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
               slug: data-api/sql-to-rest
+            - title: Troubleshooting
+              slug: data-api/troubleshooting
 
         - title: Neon Auth
           icon: auth
@@ -399,7 +403,7 @@
                   slug: neon-auth/create-users
                 - title: Claiming a Project
                   slug: neon-auth/claim-project
-                - title: Permsissions
+                - title: Permissions
                   slug: neon-auth/permissions-roles
                 - title: Email configuration
                   slug: neon-auth/email-configuration
@@ -531,43 +535,6 @@
             - title: Simplify RLS with Drizzle
               slug: guides/rls-drizzle
 
-        - title: Neon RLS (JWT/JWKS)
-          icon: lock
-          slug: guides/neon-rls
-          items:
-            - title: Neon RLS (JWT/JWKS)
-              slug: guides/neon-rls
-            - title: Provider quickstarts
-              items:
-                - title: Clerk
-                  slug: guides/neon-rls-clerk
-                - title: Stack Auth
-                  slug: guides/neon-rls-stack-auth
-                - title: Auth0
-                  slug: guides/neon-rls-auth0
-                - title: Stytch
-                  slug: guides/neon-rls-stytch
-                - title: Keycloak
-                  slug: guides/neon-rls-keycloak
-                - title: AWS Cognito
-                  slug: guides/neon-rls-aws-cognito
-                - title: Azure Active Directory
-                  slug: guides/neon-rls-azure-ad
-                - title: Descope
-                  slug: guides/neon-rls-descope
-                - title: Firebase / GCP Identity Platform
-                  slug: guides/neon-rls-firebase-gcp
-                - title: Google Identity
-                  slug: guides/neon-rls-google-identity
-                - title: PropelAuth
-                  slug: guides/neon-rls-propelauth
-                - title: SuperTokens
-                  slug: guides/neon-rls-supertokens
-                - title: WorkOS
-                  slug: guides/neon-rls-workos
-                - title: Custom JWT
-                  slug: guides/neon-rls-custom-jwt
-
     - section: AI
       items:
         - title: AI for Agents
@@ -588,12 +555,18 @@
               items:
                 - title: AI rules
                   slug: ai/ai-rules
+                - title: Claude Code plugin
+                  slug: ai/ai-claude-code-plugin
                 - title: Neon Auth
                   slug: ai/ai-rules-neon-auth
                 - title: Drizzle
                   slug: ai/ai-rules-neon-drizzle
                 - title: Neon Serverless
                   slug: ai/ai-rules-neon-serverless
+                - title: Neon TypeScript SDK
+                  slug: ai/ai-rules-neon-typescript-sdk
+                - title: Neon Python SDK
+                  slug: ai/ai-rules-neon-python-sdk
                 - title: Neon API
                   slug: ai/ai-rules-neon-api
                 - title: Neon Toolkit
@@ -822,8 +795,6 @@
               items:
                 - title: AlloyDB
                   slug: guides/logical-replication-alloydb
-                - title: Aurora
-                  slug: guides/logical-replication-aurora-to-neon
                 - title: Replicate from Azure
                   slug: import/migrate-from-azure-postgres
                 - title: Cloud SQL
@@ -1028,8 +999,8 @@
               slug: manage/operations
             - title: Active queries
               slug: introduction/monitor-active-queries
-            - title: Query history
-              slug: introduction/monitor-query-history
+            - title: Query performance
+              slug: introduction/monitor-query-performance
             - title: External monitoring
               items:
                 - title: Datadog
@@ -1071,11 +1042,6 @@
                   slug: manage/updates
             - title: Regions
               slug: introduction/regions
-            - title: Team Tools
-              items:
-                - title: App for Slack
-                  slug: manage/slack-app
-                  tag: beta
 
     - title: Plans and billing
       slug: introduction/about-billing
@@ -1085,12 +1051,16 @@
           slug: introduction/about-billing
         - title: Plans
           slug: introduction/plans
+        - title: Agent plan
+          slug: introduction/agent-plan
         - title: Legacy plans
           slug: introduction/legacy-plans
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Monitor billing
           slug: introduction/monitor-usage
+        - title: Cost optimization
+          slug: introduction/cost-optimization
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
@@ -1102,6 +1072,8 @@
       icon: azure
       slug: manage/azure
       items:
+        - title: Migrate from Neon on Azure
+          slug: import/migrate-from-azure-native
         - title: Deploy Neon on Azure
           slug: azure/azure-deploy
         - title: Manage Neon on Azure

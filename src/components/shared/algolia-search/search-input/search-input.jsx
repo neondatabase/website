@@ -39,11 +39,11 @@ const SearchInput = ({ className, asPlaceholder }) => {
           />
         </div>
       ) : (
-        <SearchBox className="w-96 [&_.ais-SearchBox-reset]:right-32" placeholder="Search..." />
+        <SearchBox placeholder="Search..." />
       )}
-      <div className="pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center gap-2 px-1.5 text-xs font-medium italic text-black-pure dark:text-gray-new-50">
+      <span className="pointer-events-none absolute right-1.5 top-1/2 z-10 flex h-5 -translate-y-1/2 items-center gap-2 px-1.5 text-xs font-medium italic text-gray-new-50">
         Powered by Algolia
-      </div>
+      </span>
     </div>
   );
 };

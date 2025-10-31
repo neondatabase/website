@@ -30,7 +30,7 @@
       }
     ],
     "otherFeatures": {
-      "title": "",
+      "title": "Features",
       "features": [
         { "title": "Autoscaling" },
         { "title": "Read replicas" },
@@ -72,7 +72,7 @@
       { "icon": "autoscale", "title": "Sizes up to 16 CU", "subtitle": "(16 vCPU, 64 GB RAM)" }
     ],
     "otherFeatures": {
-      "title": "Everything in Free, plus...",
+      "title": "All features in Free, plus",
       "features": [{ "title": "7-day time travel/PITR" }, { "title": "3-day monitoring retention" }]
     },
     "button": {
@@ -110,7 +110,7 @@
       { "icon": "autoscale", "title": "Sizes up to 56 CU", "subtitle": "(56 vCPU, 224 GB RAM)" }
     ],
     "otherFeatures": {
-      "title": "Everything in Launch, plus...",
+      "title": "All features in Launch, plus",
       "features": [
         { "title": "30-day time travel/PITR" },
         { "title": "14-day monitoring retention" },

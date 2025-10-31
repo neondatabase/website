@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-09-25T14:36:08.170Z'
+updatedOn: '2025-10-20T20:08:46.384Z'
 tag: beta
 ---
 
@@ -20,7 +20,7 @@ tag: beta
   </DocsList>
 </InfoBlock>
 
-The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/postgrest-js), [`postgrest-py`](https://github.com/supabase-community/postgrest-py), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
+The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js), [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
 
 ```javascript shouldWrap
 const { data } = await client.from('posts').select('*');
@@ -36,6 +36,10 @@ When using the Data API, it is essential to set up RLS policies so that you can 
 
 Enable the Data API at the **branch** level for a single database.
 
+<Admonition type="important">
+Data API and [IP Allow](/docs/manage/projects#configure-ip-allow) cannot be used together. To enable Data API, you must first disable IP Allow on your project.
+</Admonition>
+
 To get started, open the **Data API** page from the project sidebar and click **Enable**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
@@ -50,6 +54,10 @@ Once enabled, you'll get:
 > You can customize the auth provider and GRANTs later, or choose your own auth provider during setup.
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
+
+<Admonition type="info" title="Having trouble enabling the Data API?">
+If you encounter a "permission denied to create extension" error when enabling the Data API, this usually means your database was created via direct SQL rather than the Console API. See our [troubleshooting guide](/docs/data-api/troubleshooting) for solutions.
+</Admonition>
 
 ## Secure your Data API
 

@@ -2,8 +2,11 @@
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.917Z'
+updatedOn: '2025-10-31T11:07:57.608Z'
 ---
+
+<CopyPrompt src="/prompts/solidstart-prompt.md"
+description="Pre-built prompt for connecting SolidStart applications to Neon"/>
 
 SolidStart is an open-source meta-framework designed to integrate the components that make up a web application.<sup><a target="_blank" href="https://docs.solidjs.com/solid-start#overview">1</a></sup>. This guide explains how to connect SolidStart with Neon using a secure server-side request.
 

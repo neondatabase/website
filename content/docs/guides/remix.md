@@ -2,8 +2,14 @@
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.914Z'
+updatedOn: '2025-10-31T11:07:57.608Z'
 ---
+
+<Admonition type="note">
+Remix is now React Router v7. The features of the Remix framework have been merged into React Router v7. If you are starting a new project, we recommend using React Router. Follow our [React Router guide](/docs/guides/react-router) to connect to Neon.
+
+For more information, see the [Remix announcement](https://remix.run/blog/merging-remix-and-react-router).
+</Admonition>
 
 Remix is an open-source full stack JavaScript framework that lets you focus on building out the user interface using familiar web standards. This guide explains how to connect Remix with Neon using a secure server-side request.
 

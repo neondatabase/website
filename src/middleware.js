@@ -6,6 +6,8 @@ import { getToken } from 'next-auth/jwt';
 import { checkCookie, getReferer } from 'app/actions';
 import LINKS from 'constants/links';
 
+import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
@@ -21,6 +23,50 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
+    if (isAIAgentRequest(req)) {
+      const markdownPath = getMarkdownPath(pathname);
+
+      if (markdownPath) {
+        try {
+          // Serve markdown from local public/md directory
+          // Files are copied during build by copy-md-content.js script
+          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+
+          const response = await fetch(markdownUrl);
+
+          if (!response.ok) {
+            // Only log unexpected errors (500, network issues, etc.)
+            if (response.status !== 404) {
+              console.error('[AI Agent] Failed to fetch markdown', {
+                pathname,
+                localPath: markdownPath,
+                status: response.status,
+              });
+            }
+
+            return NextResponse.next(); // Serve HTML page instead
+          }
+
+          const markdown = await response.text();
+
+          // Return markdown content directly with appropriate headers
+          return new NextResponse(markdown, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/plain; charset=utf-8',
+              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              'X-Content-Source': 'markdown',
+              'X-Robots-Tag': 'noindex',
+            },
+          });
+        } catch (error) {
+          console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
+          return NextResponse.next();
+        }
+      }
+    }
+
+    // Check if the user is logged in
     try {
       const isLoggedIn = await checkCookie('neon_login_indicator');
       if (pathname === '/' && isLoggedIn) {
@@ -86,5 +132,11 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: ['/', '/home', '/generate-ticket/:path*', '/tickets/:path*'],
+  matcher: [
+    '/', // Check if the user is logged in
+    '/home', // Check if the user is logged in
+    '/generate-ticket/:path*', // Tickets protected routes
+    '/tickets/:path*', // Tickets protected routes
+    '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
+  ],
 };

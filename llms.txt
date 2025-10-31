@@ -138,7 +138,6 @@
 - [Neon Guides - logical-replication-airbyte-snowflake](https://neon.com/llms/guides-logical-replication-airbyte-snowflake.txt): Learn how to replicate data from Neon to Snowflake with Airbyte
 - [Neon Guides - logical-replication-airbyte](https://neon.com/llms/guides-logical-replication-airbyte.txt): Learn how to replicate data from Neon with Airbyte
 - [Neon Guides - logical-replication-alloydb](https://neon.com/llms/guides-logical-replication-alloydb.txt): Learn how to replicate data from AlloyDB to Neon
-- [Neon Guides - logical-replication-aurora-to-neon](https://neon.com/llms/guides-logical-replication-aurora-to-neon.txt): Learn how to replicate data from Aurora PostgreSQL to Neon
 - [Neon Guides - logical-replication-cloud-sql](https://neon.com/llms/guides-logical-replication-cloud-sql.txt): Learn how to replicate data from Google Cloud SQL Postgres to Neon
 - [Neon Guides - logical-replication-concepts](https://neon.com/llms/guides-logical-replication-concepts.txt): Learn about PostgreSQL logical replication concepts
 - [Neon Guides - logical-replication-decodable](https://neon.com/llms/guides-logical-replication-decodable.txt): Learn how to replicate data from Neon with Decodable

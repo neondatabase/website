@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-09-19T13:15:14.115Z'
+updatedOn: '2025-10-23T14:56:50.641Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -49,18 +49,19 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying two service names, and service names vary by region:
+    1. Under **Service settings**, specify the **Service name**. Some regions require specifying two or three service names, and service names vary by region:
 
-       - **us-east-1**: Create two entries, one for each of the following:
+       - **us-east-1**: Create three entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
+         - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
        - **us-east-2**: Create two entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
-       - **eu-central-1**:
+       - **eu-central-1**: Create two entries, one for each of the following:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
-       - **aws-eu-west-2**:
+       - **eu-west-2**:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
        - **us-west-2**: Create two entries, one for each of the following:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
@@ -69,7 +70,7 @@ To configure Neon Private Networking, perform the following steps:
          - `com.amazonaws.vpce.ap-southeast-1.vpce-svc-07c68d307f9f05687`
        - **ap-southeast-2**:
          - `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031161490f5647f32`
-       - **aws-sa-east-1**:
+       - **sa-east-1**:
          - `com.amazonaws.vpce.sa-east-1.vpce-svc-061204a851dbd1a47`
 
     1. Click **Verify service**. If successful, you should see a `Service name verified` message.
@@ -100,7 +101,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    In the following example, the VCP endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
+    In the following example, the VPC endpoint ID is assigned to a Neon organization in the specified AWS region using the [neon vpc endpoint](/docs/reference/cli-vpc#the-vpc-endpoint-subcommand) command.
 
     ```bash shouldWrap
     neon vpc endpoint assign vpce-1234567890abcdef0 --org-id org-bold-bonus-12345678 --region-id aws-us-east-2
@@ -112,7 +113,7 @@ To configure Neon Private Networking, perform the following steps:
 
     <TabItem>
 
-    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VCP endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, Neon project ID, and a [Neon API key](/docs/manage/api-keys).
+    You can use the [Assign or update a VPC endpoint](https://api-docs.neon.tech/reference/assignorganizationvpcendpoint) API to assign a VPC endpoint ID to a Neon organization. You will need to provide your Neon organization ID, region ID, VPC endpoint ID, and a [Neon API key](/docs/manage/api-keys).
 
     ```bash
     curl --request POST \

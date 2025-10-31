@@ -1,16 +1,16 @@
 .ais-SearchBox {
   &-input {
-    @apply flex h-8 w-full max-w-full shrink-0 grow cursor-pointer items-center rounded pb-px pl-[30px] pr-[60px] search-cancel:appearance-none;
+    @apply flex h-8 w-96 shrink-0 grow cursor-text items-center rounded pb-px pl-[30px] pr-36 search-cancel:appearance-none;
     @apply border border-gray-new-90 bg-white bg-[url('/images/icons/search-light.svg')] bg-[left_10px_center] bg-no-repeat outline-none;
     @apply text-left text-sm leading-none tracking-extra-tight;
     @apply transition-colors duration-200 hover:border-gray-new-70 hover:shadow-none focus:border-gray-new-70;
     @apply dark:border-gray-new-20 dark:bg-black-new dark:bg-[url('/images/icons/search-dark.svg')];
     @apply dark:hover:border-gray-new-30 dark:focus:border-gray-new-30;
-    @apply md:pr-6 md:text-base;
+    @apply md:w-full md:text-base;
   }
 
   &-reset {
-    @apply absolute right-12 top-1/2 z-10 -translate-y-1/2 dark:fill-white md:right-3;
+    @apply absolute right-32 top-1/2 z-10 -translate-y-1/2 dark:fill-white;
   }
 
   &-submit,

@@ -42,7 +42,7 @@ When this prompt is triggered, automatically configure the open Java project as 
   ```
   DATABASE_URL="jdbc:postgresql://[neon_hostname]/[dbname]?user=[username]&password=[password]&sslmode=require&channelBinding=require"
   ```
-- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connection Details**, making sure to select **Java** from the dropdown.
+- Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**, making sure to select **Java** from the dropdown.
 
 ---
 

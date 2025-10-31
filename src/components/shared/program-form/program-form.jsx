@@ -1,33 +1,19 @@
 'use client';
 
-import clsx from 'clsx';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { yupResolver } from '@hookform/resolvers/yup';
 import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import { boolean } from 'yup';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 import Button from 'components/shared/button';
+import Field from 'components/shared/field';
+import { FORM_STATES } from 'constants/forms';
 import CheckIcon from 'icons/check.inline.svg';
-import { emailRegexp } from 'utils/forms';
+import { doNowOrAfterSomeTime } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
-
-const scaleCardBorderVariants = {
-  from: {
-    opacity: 0,
-  },
-  to: {
-    opacity: [0, 0.4, 0.2, 1, 0.5, 1],
-    transition: {
-      ease: 'easeInOut',
-      duration: 1,
-    },
-  },
-  exit: {
-    opacity: 0,
-  },
-};
 
 function getCookie(name) {
   if (typeof document === 'undefined') return null;
@@ -37,32 +23,47 @@ function getCookie(name) {
   return null;
 }
 
-const ProgramForm = ({ type, focus = false }) => {
+// Schema for validation
+const createSchema = (isRecognized, useCustomEmail) =>
+  yup.object({
+    url: yup.string().required('This field is required').url('Please enter a valid URL'),
+    email: yup.string().when([], {
+      is: () => !isRecognized || useCustomEmail,
+      then: (schema) =>
+        schema.email('Please enter a valid email address').required('This field is required'),
+      otherwise: (schema) => schema,
+    }),
+  });
+
+const fieldProps = {
+  theme: 'transparent',
+  inputClassName: 'h-12 mt-2.5',
+  labelClassName: 'text-base',
+};
+
+const ProgramForm = ({ type }) => {
   const { title, description, placeholder, buttonText } = DATA[type];
-
   const isRecognized = !!getCookie('ajs_user_id');
-  const [url, setUrl] = useState('');
-  const [email, setEmail] = useState('');
   const [useCustomEmail, setUseCustomEmail] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [isSent, setIsSent] = useState(false);
+  const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
-  useEffect(() => {
-    // Form is valid if URL is provided and either:
-    // - user is recognized and not using custom email, OR
-    // - user is recognized, using custom email, and provided valid email, OR
-    // - user is not recognized and provided valid email
-    const emailValid = isRecognized
-      ? !useCustomEmail || emailRegexp.test(email)
-      : emailRegexp.test(email);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(createSchema(isRecognized, useCustomEmail)),
+    mode: 'onSubmit',
+  });
 
-    setIsValid(!!url && emailValid);
-  }, [url, email, isRecognized, useCustomEmail]);
-
-  const handleSubmit = async (e) => {
+  const onSubmit = async (data, e) => {
     e.preventDefault();
+    const { url, email } = data;
+    const loadingAnimationStartedTime = Date.now();
 
-    if (isValid) {
+    setFormState(FORM_STATES.LOADING);
+
+    try {
       if (window.zaraz) {
         const { eventName } = DATA[type];
 
@@ -74,59 +75,44 @@ const ProgramForm = ({ type, focus = false }) => {
         }
         await sendGtagEvent(eventName, { email: emailToSend, url });
       }
-      setIsSent(true);
+
+      doNowOrAfterSomeTime(() => {
+        setFormState(FORM_STATES.SUCCESS);
+      }, loadingAnimationStartedTime);
+    } catch (error) {
+      if (error.name !== 'AbortError') {
+        doNowOrAfterSomeTime(() => {
+          setFormState(FORM_STATES.ERROR);
+        }, loadingAnimationStartedTime);
+      }
     }
   };
 
   return (
     <figure
-      className={clsx(
-        'doc-cta not-prose relative my-5 rounded-[10px] border border-gray-new-94 bg-gray-new-98 px-7 py-6 sm:p-6',
-        'dark:border-gray-new-15 dark:bg-gray-new-10'
-      )}
+      className="doc-cta not-prose relative my-5 scroll-mt-20 rounded-[10px] border border-gray-new-94 bg-gray-new-98 p-8 dark:border-gray-new-15 dark:bg-program-form-bg dark:shadow-contact lg:scroll-mt-5 sm:p-6"
+      id={`${type}-form`}
     >
-      <a name={`${type}-form`} className="absolute -top-24" />
-      <h2 className="!my-0 font-title text-2xl font-medium leading-dense tracking-extra-tight">
-        {title}
-      </h2>
-      <p className="mt-2.5 font-light leading-tight text-gray-new-30 dark:text-gray-new-70">
+      <h2 className="!my-0 text-2xl font-semibold leading-none tracking-extra-tight">{title}</h2>
+      <p className="mt-3.5 max-w-[356px] tracking-tight text-gray-new-30 dark:text-[#A1A1AA]">
         {description}
       </p>
-      {!isSent ? (
-        <form className="mt-6 space-y-4" onSubmit={handleSubmit}>
-          <div>
-            <label
-              htmlFor="url"
-              className="mb-2 block text-sm font-medium text-gray-new-40 dark:text-gray-new-60"
-            >
-              Project URL *
-            </label>
-            <input
-              type="text"
-              id="url"
+      {formState !== FORM_STATES.SUCCESS ? (
+        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-7">
+            <Field
+              {...fieldProps}
               name="url"
-              value={url}
-              className={clsx(
-                'remove-autocomplete-styles h-12 w-full rounded border-none bg-gray-new-94 px-4 py-3',
-                'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
-              )}
+              label="Project URL *"
               placeholder={placeholder}
-              required
-              onChange={(e) => setUrl(e.target.value)}
+              error={errors.url?.message}
+              isDisabled={formState === FORM_STATES.LOADING}
+              {...register('url')}
             />
-          </div>
 
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-gray-new-40 dark:text-gray-new-60"
-            >
-              Contact Email {!isRecognized && '*'}
-            </label>
             {isRecognized ? (
               <div className="space-y-3">
-                <div className="flex items-center justify-between gap-3 rounded bg-green-45/10 p-3 dark:bg-green-45/20">
+                <div className="flex items-center justify-between gap-3 rounded bg-green-45/10 p-3 dark:bg-green-45/20 sm:flex-col sm:items-start">
                   <div className="flex items-center gap-3">
                     <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
                     <span className="text-sm text-gray-new-30 dark:text-gray-new-70">
@@ -151,72 +137,51 @@ const ProgramForm = ({ type, focus = false }) => {
                   </label>
                 </div>
                 {useCustomEmail && (
-                  <input
-                    type="email"
+                  <Field
+                    {...fieldProps}
                     name="email"
-                    id="email"
-                    value={email}
-                    className={clsx(
-                      'remove-autocomplete-styles h-12 w-full rounded border-none bg-gray-new-94 px-4 py-3',
-                      'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                      'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
-                    )}
+                    label="Contact Email *"
+                    type="email"
                     placeholder="Enter your preferred email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
+                    error={errors.email?.message}
+                    isDisabled={formState === FORM_STATES.LOADING}
+                    {...register('email')}
                   />
                 )}
               </div>
             ) : (
-              <input
-                type="email"
+              <Field
+                {...fieldProps}
                 name="email"
-                value={email}
-                className={clsx(
-                  'remove-autocomplete-styles h-12 w-full rounded border-none bg-gray-new-94 px-4 py-3',
-                  'focus:outline focus:-outline-offset-1 focus:outline-gray-new-70',
-                  'dark:bg-gray-new-15 dark:focus:outline-gray-new-30'
-                )}
+                label="Contact Email *"
+                type="email"
                 placeholder="Enter your email address"
-                required
-                onChange={(e) => setEmail(e.target.value)}
+                error={errors.email?.message}
+                isDisabled={formState === FORM_STATES.LOADING}
+                {...register('email')}
               />
             )}
           </div>
 
           <Button
-            className={clsx('h-12 w-full px-6 font-semibold leading-none')}
+            className="mt-8 h-12 w-full px-6 font-semibold leading-none"
             type="submit"
             theme="primary"
+            disabled={formState === FORM_STATES.LOADING}
           >
-            {buttonText}
+            {formState === FORM_STATES.LOADING ? 'Submitting...' : buttonText}
           </Button>
         </form>
       ) : (
-        <div className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start">
+        <div
+          className="mt-6 flex min-h-10 items-center gap-2 sm:min-h-0 sm:items-start"
+          data-test="success-message"
+        >
           <CheckIcon className="-mt-1 size-4 shrink-0 text-green-45 sm:mt-1" aria-hidden />
           <p className="text-[17px] font-light">
-            We've received your application and will be in touch soon
-            {isRecognized && !useCustomEmail
-              ? ' using your Neon account email'
-              : email
-                ? ` at ${email}`
-                : ''}
-            .
+            We&apos;ve received your application and will be in touch soon.
           </p>
         </div>
-      )}
-      {focus && (
-        <LazyMotion features={domAnimation}>
-          <m.span
-            className="pointer-events-none absolute left-0 top-0 z-20 h-full w-full rounded-[10px] border border-green-45/70 md:!opacity-100"
-            initial="from"
-            exit="exit"
-            variants={scaleCardBorderVariants}
-            animate="to"
-            aria-hidden
-          />
-        </LazyMotion>
       )}
     </figure>
   );
@@ -224,7 +189,6 @@ const ProgramForm = ({ type, focus = false }) => {
 
 ProgramForm.propTypes = {
   type: PropTypes.oneOf(Object.keys(DATA)).isRequired,
-  focus: boolean,
 };
 
 export default ProgramForm;

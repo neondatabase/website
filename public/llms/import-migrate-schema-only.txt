@@ -55,7 +55,7 @@ If you are replicating a large dataset, also consider removing any `CREATE INDEX
 
 ## Load the schema
 
-After making any necessary modifications, load the dumped schema using `pg_restore`:
+After making any necessary modifications, load the dumped schema using `psql`:
 
 ```sql
 psql \

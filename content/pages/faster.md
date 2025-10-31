@@ -24,7 +24,7 @@ Some of the incredible businesses delivering better experiences for their custom
 - **[Retool](https://retool.com)** – Manages 300K+ Postgres DBs with one engineer via Neon’s API. [Details](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases)
 - **[Replit](https://replit.com)** – SOTA Text to App Agent helping creators "build an app for that" in minutes, DB included. [Details](/blog/neon-replit-integration)
 - **[White Widget](https://whitewidget.com)** – Scales up to 50M+ users in seconds with autoscaling. [Details](/blog/white-widgets-secret-to-scalable-postgres-neon)
-- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-from-aurora-serverless-v2-to-neon)
+- **[Invenco](https://invenco.net)** – Handles high-traffic e-commerce spikes without needing to thinking about databases. [Details](/blog/why-invenco-migrated-to-neon)
 - **[Branch Insurance](https://ourbranch.com)** – Builds on Serverless Postgres to deliver faster experience out-of-the-box. [Details](/blog/branch-chose-neon-for-its-true-postgres-and-serverless-nature)
 - **[Magic Circle](https://magiccircle.io)** – Handles 2M+ game sessions on Neon. [Details](/blog/how-magic-circle-scaled-up-to-2m-games-with-cloudfare-and-neon)
 - **[Cedalio](https://cedalio.com)** – One-database-per-client model with auto-suspend. [Details](/blog/how-cedalio-uses-neon-for-an-efficient-development-workflow)
@@ -126,9 +126,9 @@ Client-database proximity plays a major role in real-world database latency. Her
 As your business (and database) grows, connection and network transit latency remain static and database processing time becomes the most important factor to optimize. Here are some pointers:
 
 1. **Use connection pooling and autoscaling** – Use the built-in connection pooler to handle many client connections efficiently, and enable Neon’s autoscaling so the database can allocate sufficient RAM/CPU on demand.
-2. **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query History View](/docs/introduction/monitor-query-history) in Neon.
-   ![Neon query history tab](/docs/introduction/query_history.png)
-   _The Query History tab shows total calls, avg time, and total time of each query._
+2. **Profile slow queries** – Identify which SQL statements are slow or resource-intensive by starting with the [Query performance View](/docs/introduction/monitor-query-performance) in Neon.
+   ![Neon query performance tab](/docs/introduction/query_performance.png)
+   _The Query performance tab shows total calls, avg time, and total time of each query._
    You can dig deeper with [pg_stat_statements](/docs/extensions/pg_stat_statements)
 3. **Add indexes on high-impact columns** – Create indexes on columns that are frequently used in `WHERE` filters, `JOIN` conditions, or `ORDER BY` clauses to avoid full table scans. An index lets Postgres perform an index scan instead of a slower sequential scan, dramatically reducing query execution time.
 4. **Reduce table and index bloat** – Reclaim wasted space and improve performance by eliminating bloat (accumulated dead rows) in tables and indexes. Schedule regular maintenance like `VACUUM` to remove dead tuples and use `REINDEX` on bloated indexes. You can also fine-tune autovacuum settings to keep bloat in check over time.

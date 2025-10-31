@@ -2,8 +2,11 @@
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.464Z'
+updatedOn: '2025-10-24T12:53:27.788Z'
 ---
+
+<CopyPrompt src="/prompts/laravel-prompt.md" 
+description="Pre-built prompt for connecting Laravel to Neon Postgres"/>
 
 Laravel is a web application framework with expressive, elegant syntax. Connecting to Neon from Laravel is the same as connecting to a standalone Postgres installation from Laravel. Only the connection details differ.
 

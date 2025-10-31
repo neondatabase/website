@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2025-09-19T11:07:44.075Z'
+updatedOn: '2025-10-22T15:44:06.426Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -19,7 +19,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitor-active-queries" description="View and analyze running queries in your database" icon="import">Active Queries</a>
 
-<a href="/docs/introduction/monitor-query-history" description="View and analyze query history for your Neon database" icon="research">Query History</a>
+<a href="/docs/introduction/monitor-query-performance" description="View and analyze query performance for your Neon database" icon="research">Query performance</a>
 
 <a href="/docs/extensions/pg_stat_statements" description="Monitor query performance and statistics in Postgres with pg_stat_statements" icon="metrics">pg_stat_statements</a>
 

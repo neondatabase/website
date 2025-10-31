@@ -6,15 +6,17 @@
 
 - [Neon legacy plans HTML](https://neon.com/docs/introduction/legacy-plans): The original HTML version of this documentation
 
-This page documents Neon's **legacy plans**. These plans are not available for new signups. If you're on a legacy plan, you can stay on it — but if you switch to a new plan, you won't be able to switch back.
+This page describes Neon's **legacy plans**. These plans are no longer offered to new signups, except through Vercel and Azure Marketplace.
 
-   **Important**: You cannot upgrade or downgrade to a legacy plan. If you're currently on a legacy plan, we encourage you to review our [current usage-based pricing plans](https://neon.com/docs/introduction/plans) to explore your options.
+If you're on a legacy paid plan, you can stay on it, but once you [switch to a new plan](https://neon.com/docs/introduction/manage-billing#change-your-plan), you cannot switch back.
+
+   **Important**: You cannot upgrade or downgrade to a legacy plan. See our [current usage-based plans](https://neon.com/docs/introduction/plans) for options. If you signed up through **Vercel** or **Azure Marketplace**, you remain on a [legacy plan](https://neon.com/docs/introduction/legacy-plans) — for both Free and paid. Usage-based plans will be introduced on these platforms later.
 
 ---
 
 ## How to check if you're on a legacy plan
 
-To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a lagacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
+To see if you are on a Neon legacy plan, navigate to your **Billing** page in the Neon Console and click **Change Plan**. If you're on a legacy plan, you'll see a **Legacy Plan** badge next to the name of your current plan.
 
 
 
@@ -186,7 +188,7 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 - Custom domain proxy
 - Security reviews and compliance questionnaires
 - Invoice billing and annual commitments
-- [Enterprise support](https://neon.com/docs/introduction/support)
+- [Enterprise support](https://neon.com/docs/introduction/support#enterprise-support)
 
 To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) or [request a trial](https://neon.tech/enterprise#request-trial).
 

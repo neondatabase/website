@@ -3,11 +3,14 @@ import { GraphQLClient } from 'graphql-request';
 
 export { gql } from 'graphql-request';
 
+const NEON_USER_AGENT = 'Neon-Vercel/1.0';
+
 // Create a base client for regular queries using GET
 export const graphQLClient = new GraphQLClient(process.env.WP_GRAPHQL_URL, {
   method: 'GET', // Use GET for regular queries
   headers: {
     'Content-Type': 'application/json',
+    'User-Agent': NEON_USER_AGENT,
   },
 });
 
@@ -17,6 +20,7 @@ export const graphQLClientAdmin = (authToken) =>
     method: 'POST',
     headers: {
       Authorization: `Bearer ${authToken}`,
+      'User-Agent': NEON_USER_AGENT,
     },
   });
 

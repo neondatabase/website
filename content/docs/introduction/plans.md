@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-09-30T15:57:36.068Z'
+updatedOn: '2025-10-24T18:34:47.878Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -32,7 +32,7 @@ If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are 
 Compare Neon's **Free**, **Launch**, and **Scale** plans.
 
 <Admonition type="comingSoon" title="Building an agent platform?">
-For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](https://neon.com/use-cases/ai-agents)
+For AI agent platforms that provision thousands of databases, Neon offers an **Agent Plan** with custom resource limits and credits for **your** free tier. [Learn more](/docs/introduction/agent-plan)
 </Admonition>
 
 | Plan feature                                          | **Free**                       | **Launch**                           | **Scale**                                                                                         |
@@ -54,11 +54,15 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Private network transfer](#private-network-transfer) | —                              | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                              | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                              | —                                    | ✅                                                                                                |
-| [Support](#support)                                   | Community                      | Billing                              | Standard                                                                                          |
+| [Support](#support)                                   | Community                      | Standard (billing issues only)       | Standard, Business, or Production                                                                 |
 
 ## Plan features
 
 This section describes the features listed in the [Plan overview](#plan-overview) table.
+
+<Admonition type="tip" title="Optimize your costs">
+Learn how to manage your Neon costs effectively with our [cost optimization guide](/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
+</Admonition>
 
 ### ☑ Price
 
@@ -197,11 +201,21 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 
 - **Launch**/**Scale plan storage cost**: $0.35/GB-month
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
-- **[Child branches](/docs/reference/glossary#child-branch)**: billed on the storage delta from the parent
+- **[Child branches](/docs/reference/glossary#child-branch)**: billed on the minimum of the data changes since creation or the logical data size
 
-When a child branch is created, it shares data with its parent and adds no storage. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
 
-Storage on child branches never decreases — it grows as changes accumulate.
+**Child branch storage is capped at your actual data size** — you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
+
+<Admonition type="important" title="Manage child branches to control storage costs">
+
+Even though child branch storage is capped at your logical data size, it's still important to manage branches effectively to minimize storage costs:
+
+- Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
+- Delete child branches when they're no longer needed
+- For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead — root branches are billed on your actual data size with no delta tracking overhead.
+
+</Admonition>
 
 > **Free** plan users get 0.5 GB of storage per project
 
@@ -256,7 +270,7 @@ The maximum restore window per plan:
 - **Launch**: Up to 7 days
 - **Scale**: Up to 30 days
 
-> The restore window is set to the maximum value by default.
+> The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
 The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
 
@@ -295,8 +309,8 @@ Guaranteed service availability is offered on the **Scale** plan. Contact [Sales
 Support level by plan:
 
 - **Free**: Community support
-- **Launch**: Billing support
-- **Scale**: Standard support
+- **Launch**: Standard support (billing issues only)
+- **Scale**: Standard support, with Business or Production support plans available for an additional fee
 
 See [Support](/docs/introduction/support) for details.
 
@@ -310,7 +324,7 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 | **Extra branches (branch-month)**      | Number of extra branches beyond your plan allowance, metered hourly. [Learn more](/docs/introduction/plans#extra-branches).                                               |
 | **Instant restore storage (GB-month)** | Storage used for **instant restore**, billed per GB-month. [Learn more](/docs/introduction/plans#instant-restore).                                                        |
 | **Storage (root branches, GB-month)**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                      |
-| **Storage (child branches, GB-month)** | Data storage for child branches (delta), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                             |
+| **Storage (child branches, GB-month)** | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
 | **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
 | **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
 | **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price).                                                                |
@@ -407,10 +421,10 @@ How is compute usage measured in Neon?
 How is storage usage billed in Neon?
 : Storage is billed based on actual usage, measured in **GB-months**:  
  1 GB-month = 1 GB stored for 1 month  
- Storage usage is metered hourly and summed over the month. For child branches, only the storage **delta** (changes from the parent branch) is billed. On the Free plan, you get 0.5 GB per project.
+ Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size — capped at your actual data size. On the Free plan, you get 0.5 GB per project.
 
 How do branches affect storage?
-: Your root branch contains your main data. Child branches share data with the root until changes are made. Only the changed data (delta) is billed for child branches. Delta storage never decreases, so delete unused branches to control storage costs.
+: Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size — you never pay more than your actual data size. Delete unused branches to control storage costs.
 
 How is extra branch usage billed?
 : Paid plans include a set number of branches per project. Additional branches are billed at **$1.50/branch-month**, prorated hourly (about $0.002/hour).  
@@ -447,7 +461,7 @@ Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
 
 What is the difference between root and child branch storage billing?
-: Root branches are billed for their full logical data size. Child branches are billed only for changes relative to their parent.
+: Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size — ensuring you never pay more than your actual data size.
 
 Can I get more than the listed project limit?
 : Yes, on Scale you can request increases for projects beyond the listed limit.
@@ -462,7 +476,8 @@ How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  
  • Enable scale-to-zero for idle databases.  
  • Delete unused branches to reduce storage costs.  
- • Shorten your restore window to reduce instant restore storage.
+ • Shorten your restore window to reduce instant restore storage.  
+ For more detailed strategies, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
 
 Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)

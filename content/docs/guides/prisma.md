@@ -7,8 +7,11 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2025-06-30T11:30:21.911Z'
+updatedOn: '2025-10-24T12:53:27.789Z'
 ---
+
+<CopyPrompt src="/prompts/prisma-prompt.md" 
+description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Prisma ORM."/>
 
 Prisma is an open-source, next-generation ORM that lets you to manage and interact with your database. This guide covers the following topics:
 
