@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-10-27T22:21:56.852Z'
+updatedOn: '2025-10-30T22:51:14.853Z'
 ---
 
 <InfoBlock>
@@ -229,15 +229,5 @@ This occurs due to how Vercel's JWT tokens map roles to the integration. Accordi
 - **USER role in JWT**: Only granted to users with read-only Vercel roles (Billing or Viewer)
 
 As a result, most active Vercel team members receive Admin access in the Neon organization. This is expected behavior and ensures team members can fully manage database resources.
-
-### Why do removed Vercel team members still appear in my Neon organization?
-
-User removal isn't automatically synchronized from Vercel to Neon. When you remove a team member from Vercel:
-
-1. **No automatic webhook** notifies Neon about the removal
-2. **Synchronization only occurs** when the removed user attempts to log into Neon again
-3. **Active sessions persist** until the user logs out and attempts to re-authenticate
-
-This is a known limitation of the current integration architecture where synchronization is triggered by user actions rather than system webhooks.
 
 <NeedHelp/>

@@ -3,8 +3,12 @@ title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service offers unified billing through Azure
   Marketplace
-updatedOn: '2025-09-02T17:07:50.339Z'
+updatedOn: '2025-10-30T22:50:07.253Z'
 ---
+
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
 
 <InfoBlock>
 
@@ -20,8 +24,6 @@ updatedOn: '2025-09-02T17:07:50.339Z'
 </DocsList>
 
 </InfoBlock>
-
-[Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when setting up the integration.
 
 To get started, see [Deploying Neon on Azure](/docs/azure/azure-deploy).
 

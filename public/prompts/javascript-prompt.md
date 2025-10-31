@@ -16,6 +16,8 @@
 
 When this prompt is triggered, automatically configure the open Node.js project as follows:
 
+Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it exclusively for all subsequent dependency and script commands. While the examples below use `npm`, substitute the appropriate commands for your project's manager.
+
 ### 1. Select a Database Driver
 
 First, ask the user to choose their preferred Node.js Postgres driver and proceed based on their selection:
@@ -53,9 +55,11 @@ First, ask the user to choose their preferred Node.js Postgres driver and procee
 - Check for the presence of a `.env` file at the root of the project.
 - If it doesn't exist, create one and advise the user to add their Neon database connection string.
 - Provide the following format and instruct the user to replace the placeholders:
-  ```
+  
+  ```dotenv title=".env"
   DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require"
   ```
+
 - Prompt the user to get their connection string from the **Neon Console → Project → Dashboard → Connect**.
 
 ---
@@ -266,8 +270,8 @@ main();
 
 Once the setup is complete:
 
-1.  Advise the user to ensure their connection string is correctly set in the `.env` file.
-2.  Instruct them to run the application from their terminal:
+1.  Verify that the user has correctly set their `DATABASE_URL` in the `.env` file. Do not proceed if placeholder values are still present.
+2.  Run the application:
     ```bash
     node index.js
     ```

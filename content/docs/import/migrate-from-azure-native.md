@@ -3,14 +3,16 @@ title: Migrate from Neon Azure Native Integration
 subtitle: Learn how to transfer projects and transition from Azure-managed to
   Neon-managed organizations.
 enableTableOfContents: true
-updatedOn: '2025-10-29T19:08:44.077Z'
+redirectFrom:
+  - /docs/import/transfer-from-azure-native
+updatedOn: '2025-10-30T16:15:01.780Z'
 ---
 
 <Admonition type="important" title="deprecated">
-The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Migrate your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
 </Admonition>
 
-This guide describes how to migrate your projects to your Neon-managed organization to continue using Neon.
+This guide describes how to transfer your projects to your Neon-managed organization to continue using Neon.
 
 ## Getting started
 
@@ -22,7 +24,7 @@ Before you begin your migration, be aware of the following:
 - Application connection strings remain the same after transfer because the project structure does not change.
 - You can [rename an organization](/docs/manage/orgs-manage#rename-an-organization) at any time.
 
-To migrate your projects to a Neon-managed organization:
+To transfer your projects to a Neon-managed organization:
 
 <Steps>
 

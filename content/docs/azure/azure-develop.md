@@ -3,11 +3,11 @@ title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.221Z'
+updatedOn: '2025-10-30T16:15:01.778Z'
 ---
 
 <Admonition type="important" title="deprecated">
-The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Migrate your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
 </Admonition>
 
 <InfoBlock>

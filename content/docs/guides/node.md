@@ -5,8 +5,11 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2025-06-30T11:30:21.909Z'
+updatedOn: '2025-10-31T11:07:57.605Z'
 ---
+
+<CopyPrompt src="/prompts/javascript-prompt.md" 
+description="Pre-built prompt for connecting Node.js applications to Neon."/>
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 

@@ -3,11 +3,11 @@ title: Deploy Neon on Azure
 subtitle: Learn how to deploy Neon as a Native ISV Service on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-10-29T19:08:44.074Z'
+updatedOn: '2025-10-30T16:15:01.776Z'
 ---
 
 <Admonition type="important" title="deprecated">
-The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Migrate your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
 </Admonition>
 
 <InfoBlock>

@@ -254,6 +254,8 @@
           items:
             - title: Astro
               slug: guides/astro
+            - title: Entity Framework
+              slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
             - title: Micronaut Kotlin
@@ -274,6 +276,8 @@
               slug: guides/quarkus-reactive
             - title: React
               slug: guides/react
+            - title: React Router
+              slug: guides/react-router
             - title: Reflex
               slug: guides/reflex
             - title: Remix
