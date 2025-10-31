@@ -671,6 +671,8 @@
                   slug: reference/cli-connection-string
                 - title: set-context
                   slug: reference/cli-set-context
+                - title: init
+                  slug: reference/cli-init
                 - title: completion
                   slug: reference/cli-completion
             - section: SDKs

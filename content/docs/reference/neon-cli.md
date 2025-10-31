@@ -159,6 +159,7 @@ Commands:
   neon operations                  Manage operations               [aliases: operation]
   neon connection-string [branch]  Get connection string                  [aliases: cs]
   neon set-context                 Set the current context
+  neon init                        Initialize a new Neon project using your AI coding assistant
   neon completion                  generate completion script
 
 Global options:
@@ -191,6 +192,7 @@ Options:
 | [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                 |
 | [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                             |
 | [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                           |
+| [init](/docs/reference/cli-init)                           |                                                                                                              | Initialize a Neon project with AI assistant       |
 | [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                      |
 
 ## Global options

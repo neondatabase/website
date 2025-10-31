@@ -15,11 +15,9 @@ Our development teams are focused on helping you ship faster with Postgres. This
 Here's a snapshot of what we're working on now:
 
 - **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. We're continuing to build out our AI platform support capabilities. If you're building an AI agent platform and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner) — and checkout our new [Neon for AI Agents](/use-cases/ai-agents) pricing plan.
-- **Snapshot scheduling**: Neon supports creating snapshots manually — see [Backup & restore](/docs/guides/backup-restore). We're now working on a snapshot scheduling feature with automated snapshot retention management.
 - **Monitoring for billing**: Stay tuned for monitoring enhancements for our new usage-based pricing plans.
 - **Large object storage**: We're working on adding support for large object storage.
 - **Console support for data anonymization**: Neon supports the Postgres `anon` extension for [data anonymization](/docs/workflows/data-anonymization). We're bringing that support to the console.
-- **Postgres 18 support**: Neon plans to add support for PostgreSQL 18 as soon as it’s released.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -74,8 +72,10 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Snapshot scheduling**: Automate snapshots with daily, weekly, or monthly schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
+- **Postgres 18 support (Preview)**: Postgres 18 is now available in preview. Create a new project and select Postgres 18 as your version. [Read the announcement](/blog/postgres-18).
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
-- **Usage-based pricing plans**: Our paid plans now start at just **$5/month**. Pay only for what you use. See [Neon’s New Pricing, Explained: Usage-Based With a $5 Minimum](https://neon.com/blog/new-usage-based-pricing).
+- **Usage-based pricing plans**: Our paid plans now start at just **$5/month**. Pay only for what you use. See [Neon's New Pricing, Explained: Usage-Based With a $5 Minimum](https://neon.com/blog/new-usage-based-pricing).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
 - **Neon Local Connect** — An extension that makes it easy to work with Neon in your local development environment. Available for VS Code, Cursor, Windsurf, and other compatible editors. See [Neon Local Connect Extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect).
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
@@ -86,7 +86,7 @@ And here's an overview of what we're looking at next:
 - **Import Data Assistant**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
 - **Data anonymization**: We've added support for the PostgreSQL Anonymizer extension (`anon`). [Learn more](/docs/guides/neon-auth).
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
-- **Neon Snapshots (Early Access)**: Create and manage point-in-time copies of your database with our new unified Backup & Restore experience.
+- **Neon Snapshots (Beta)**: Create and manage point-in-time snapshots of your database with our new unified Backup & Restore experience.
 - **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
 - **Postgres logs in Datadog (Beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability.
 - **Support for [pg_search](/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres on version 17. [Read the announcement](/blog/pgsearch-on-neon).
