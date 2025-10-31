@@ -12,12 +12,20 @@ updatedOn: '2025-10-31T00:00:00.000Z'
 
 ## The `init` command
 
-The `init` command sets up your project to work seamlessly with AI coding assistants like Cursor, VS Code with Copilot, or Claude Code. It configures the Neon MCP (Model Context Protocol) server and creates context files that give your AI assistant full knowledge about your Neon project and best practices.
+The `init` command helps you quickly connect your app to Neon and enable the Neon integration in your Cursor chat. The command walks you through an interactive setup, configuring the Neon MCP (Model Context Protocol) server and creating context files that give your AI assistant full knowledge about your Neon project and best practices.
 
 ### Usage
 
+Run this command in the root directory of your application:
+
 ```bash
 neon init
+```
+
+Or use `npx` without installing the CLI globally:
+
+```bash
+npx neonctl init
 ```
 
 ### What it does
@@ -26,9 +34,9 @@ When you run `neon init`, the command performs the following setup steps:
 
 1. **Configures the Neon MCP Server** — Sets up the connection between your AI coding assistant and Neon, enabling the assistant to interact with your databases, branches, and projects
 2. **Creates `neon.md`** — Generates a file with detailed guidelines and best practices for working with Neon in your project
-3. **Creates `AGENTS.md`** (for Cursor) — Sets up Cursor-specific configuration to enable seamless integration with Neon
+3. **Creates `AGENTS.md`** (for Cursor) — Sets up Cursor-specific configuration to enable integration with Neon
 
-After running `init`, you can ask your AI assistant questions like "Get started with Neon" or "Create a new database branch," and the assistant will have full context about your project setup and Neon's capabilities.
+After setup, you can ask your Cursor chat to "Get started with Neon" and it will have full context about your project and Neon best practices.
 
 ### Options
 
@@ -36,10 +44,18 @@ This command supports [global options](/docs/reference/neon-cli#global-options) 
 
 ## Example
 
-Initialize a Neon project in your current directory:
+Navigate to the root directory of your application and initialize Neon:
 
 ```bash
+cd /path/to/your/app
 neon init
+```
+
+Or use `npx`:
+
+```bash
+cd /path/to/your/app
+npx neonctl init
 ```
 
 The command will output progress as it completes each step:
@@ -54,11 +70,7 @@ Step 3/3: Creating AGENTS.md for Cursor...
 
 ## AI Assistant Support
 
-The `init` command is currently optimized for:
-
-- **Cursor** (full support)
-- **VS Code** (coming soon)
-- **Claude Code** (coming soon)
+This feature is currently in beta for Cursor, with VS Code and Claude Code support coming soon.
 
 <Admonition type="note">
 The files created by `neon init` are safe to commit to your repository. They contain documentation and configuration but no sensitive credentials.

@@ -86,7 +86,7 @@ And here's an overview of what we're looking at next:
 - **Import Data Assistant**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
 - **Data anonymization**: We've added support for the PostgreSQL Anonymizer extension (`anon`). [Learn more](/docs/guides/neon-auth).
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
-- **Neon Snapshots (Early Access)**: Create and manage point-in-time copies of your database with our new unified Backup & Restore experience.
+- **Neon Snapshots (Beta)**: Create and manage point-in-time snapshots of your database with our new unified Backup & Restore experience.
 - **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
 - **Postgres logs in Datadog (Beta)**: Stream and analyze your Postgres logs directly in your Datadog dashboard for better observability.
 - **Support for [pg_search](/docs/extensions/pg_search)**: We partnered with [ParadeDB](https://www.paradedb.com/) to bring `pg_search` to Neon, delivering up to 1,000x faster full-text search inside Postgres on version 17. [Read the announcement](/blog/pgsearch-on-neon).
