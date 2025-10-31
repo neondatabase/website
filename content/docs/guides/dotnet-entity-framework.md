@@ -6,6 +6,9 @@ enableTableOfContents: true
 updatedOn: '2025-02-23T11:08:58.898Z'
 ---
 
+<CopyPrompt src="/prompts/dotnet-ef-prompt.md"
+description="Pre-built prompt for connecting .NET Entity Framework projects to Neon Postgres."/>
+
 This guide describes how to create a Neon project and connect to it from an Entity Framework Core application. The example demonstrates how to set up a basic ASP.NET Core Web API project with Entity Framework Core using Npgsql as the database provider.
 
 <Admonition type="note">

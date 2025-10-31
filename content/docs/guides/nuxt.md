@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.910Z'
 ---
 
+<CopyPrompt src="/prompts/nuxt-neon-prompt.md"
+description="Pre-built prompt for connecting Nuxt applications to Neon."/>
+
 [Nuxt](https://nuxt.com/) is an open-source full-stack meta framework that enables Vue-based web applications. This topic describes how to connect a Nuxt application to a Postgres database on Neon.
 
 To create a Neon project and access it from a Nuxt.js application:

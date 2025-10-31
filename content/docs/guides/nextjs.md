@@ -8,6 +8,9 @@ redirectFrom:
 updatedOn: '2025-06-30T11:30:21.909Z'
 ---
 
+<CopyPrompt src="/prompts/nextjs-prompt.md"
+description="Pre-built prompt for connecting Next.js applications to Neon"/>
+
 Next.js by Vercel is an open-source web development framework that enables React-based web applications. This topic describes how to create a Neon project and access it from a Next.js application.
 
 To create a Neon project and access it from a Next.js application:
