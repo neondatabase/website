@@ -150,11 +150,14 @@ description: 'Content Planning Specialist: Creates actionable writing specificat
 
 #### Best Practices for Navigation Elements
 
-**"What you will learn" - Use Sparingly:**
-- ONLY for tutorials and complex guides
+**"What you will learn" - Use VERY Sparingly:**
+- ONLY for complex multi-concept tutorials
+- NOT for single-workflow tutorials (use Prerequisites instead)
+- NOT for reference or how-to guides
+- NOT for integration guides (these are self-explanatory)
 - List 3-5 key concepts (as `<p>` tags, not links)
 - Keep items concise (1 line each)
-- DO NOT overuse - skip if content is self-explanatory
+- **When in doubt, leave it out** - the page title + subtitle should explain scope
 
 **"Related docs" - Keep Tight:**
 - 2-5 highly relevant links maximum
@@ -193,24 +196,34 @@ To follow this guide, you need:
 - Integration guides with specific tools
 - Skip for reference pages or simple guides
 
-### Sidebar Navigation Analysis
+### Navigation Placement Analysis
+
+**IMPORTANT**: Use `/navigation-principles` to understand the dual navigation system and current patterns.
+
+**Navigation System**: `content/docs/navigation.yaml` controls:
+- Sidebar (`items`) - Hierarchical document tree
+- Top navbar dropdowns (`subnav`) - Quick access to major functional areas
 
 **Navigation Structure Review**:
 
-**CRITICAL**: Always examine content/docs/navigation.yaml for:
+Always examine current content/docs/navigation.yaml for:
 
+- **Pattern analysis**: Where is similar content currently placed?
 - **Hierarchical Context**: Where does this content fit in the overall navigation?
 - **Related Sections**: What existing content areas are relevant?
 - **Content Gaps**: Are there missing pieces in the current structure?
 - **Navigation Flow**: How will users discover and navigate to this content?
+- **Subnav consideration**: Should this be in top navbar dropdown or sidebar-only?
 
-**TOC Structure Assessment**:
+**Placement Assessment**:
 
 ```
 Parent Section → Proposed Content Location → Related Sections
                                          → Sibling Content
                                          → Child Content (if applicable)
 ```
+
+**Remember**: Navigation is IA judgment. Analyze patterns, recommend with reasoning, get human confirmation.
 
 ## Documentation planning workflow
 

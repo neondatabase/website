@@ -51,6 +51,43 @@ Helpful suggestion or best practice
 - `type="warning"` - Important warnings
 - `type="important"` - Critical information
 
+### Feature Status Components
+
+**FeatureBetaProps - Beta Feature Indicator:**
+
+```mdx
+<FeatureBetaProps feature_name="Neon Data API" />
+```
+
+**Usage:**
+- Must appear near top of page, typically right after frontmatter
+- Used to indicate beta/preview features
+- Displays banner alerting users the feature is in beta
+
+**When to use:**
+- Beta features in active development
+- Preview features requiring opt-in
+- Features with potential breaking changes
+
+### Helper Components
+
+**NeedHelp - Support Callout:**
+
+```mdx
+<NeedHelp/>
+```
+
+**Usage:**
+- Typically appears at the end of guides/tutorials
+- Self-closing component (note the `/`)
+- Provides contact/support information to users
+- Standard across all documentation
+
+**When to use:**
+- End of tutorials and guides
+- After complex setup instructions
+- Reference pages where users may need assistance
+
 ### Code Components
 
 **CodeTabs for multi-language examples:**
@@ -125,16 +162,26 @@ client := NewClient()
 ```mdx
 <Steps>
 
-### Step 1: Do something
+## Secure your tables with RLS
 
-Instructions for step 1
+Instructions for securing tables...
 
-### Step 2: Do something else
+## INSERT
 
-Instructions for step 2
+Instructions for inserting data...
+
+## UPDATE
+
+Instructions for updating data...
 
 </Steps>
 ```
+
+**Important:**
+- Use H2 (##) for step headings, not H3
+- Do NOT include "Step 1:", "Step 2:" in the heading text
+- The Steps component automatically numbers the steps
+- Use descriptive headings that describe the action
 
 **Tabs for content sections:**
 
@@ -206,6 +253,33 @@ const x = 1;
 const x = 1;
 \`\`\`
 ```
+
+### Code Block Syntax Highlighting
+
+**Shiki Highlighting Markers:**
+
+Neon docs support Shiki code highlighting markers for emphasizing specific lines:
+
+```typescript
+const result = await client.query(); // [!code highlight]
+const data = result.rows;
+```
+
+**shouldWrap Flag:**
+
+For code blocks with long lines that need wrapping:
+
+```mdx
+\`\`\`typescript shouldWrap
+const connectionString = 'postgresql://user:password@very-long-hostname.neon.tech:5432/database?sslmode=require';
+\`\`\`
+```
+
+**Usage:**
+- Use `// [!code highlight]` to highlight specific important lines
+- Use `shouldWrap` flag when code contains long lines (URLs, connection strings)
+- Highlighting markers work with any language tag
+- Can combine shouldWrap with highlighting markers
 
 ### Link Format Errors
 
@@ -280,6 +354,53 @@ updatedOn: '2024-01-15T00:00:00.000Z'
 - Don't skip heading levels (H1 → H2 → H3)
 - Avoid H4 and deeper (suggests content reorganization needed)
 - H2 and H3 are sufficient for most content
+
+### Component-Specific Heading Rules
+
+**Steps Component:**
+
+```mdx
+<Steps>
+
+## Set up the project
+
+Instructions here...
+
+## Configure the database
+
+More instructions...
+
+</Steps>
+```
+
+- Use **H2 (##)** for step headings inside `<Steps>`
+- Do NOT include "Step 1:", "Step 2:" text - the component auto-numbers
+- Each H2 becomes a numbered step
+- Use descriptive, action-oriented headings
+
+**DetailIconCards:**
+
+```mdx
+<DetailIconCards>
+<a href="/docs/path" description="Description text" icon="icon-name">Card Title</a>
+</DetailIconCards>
+```
+
+- No headings inside cards (use description attribute)
+- Card titles specified in link text
+- Used for hub/overview page navigation
+
+**Admonition:**
+
+```mdx
+<Admonition type="note">
+Content with **markdown** formatting
+</Admonition>
+```
+
+- Can contain markdown but avoid headings
+- Keep content concise
+- Use markdown formatting (bold, italic, links)
 
 ## Next.js/MDX specific validation
 

@@ -62,7 +62,8 @@ This command provides agents comprehensive knowledge of the Neon documentation p
 
 **File naming patterns:**
 
-- Use hyphens, not underscores: `connection-pooling.md` (not `connection_pooling.md`)
+- **Markdown files**: Use hyphens, not underscores: `connection-pooling.md` (not `connection_pooling.md`)
+- **Images**: Use underscores instead of dashes: `my_image.png` (not `my-image.png`)
 - Descriptive names: `autoscaling-guide.md` (not `scaling.md` or `auto.md`)
 - Match URL structure: `/content/docs/guides/nextjs.md` → neon.tech/docs/guides/nextjs
 
@@ -142,23 +143,38 @@ To load the golden corpus, use the `/golden-corpus` slash command.
 
 ## MDX and Components
 
-Neon docs use MDX (Markdown + JSX) with custom components:
+Neon docs use MDX (Markdown + JSX) with custom components.
 
-**Common Components:**
-- `<Admonition>` - Notes, tips, warnings, important callouts
+**IMPORTANT**: For comprehensive component documentation, refer to the community guides:
+- **`content/docs/community/component-guide.md`** - Most commonly used components with examples
+- **`content/docs/community/component-specialized.md`** - Advanced/specialized components
+- **`content/docs/community/component-icon-guide.md`** - Icon usage and available icons
+- **`content/docs/community/component-architecture.md`** - Component architecture and technical details
+- **`content/docs/community/contribution-guide.md`** - Style guidelines and markdown syntax
+
+**Common Components** (see component-guide.md for full details):
+- `<Admonition>` - Notes, tips, warnings, important callouts (6 types)
+- `<Steps>` - Numbered step-by-step instructions (use H2 headings)
 - `<CodeTabs>` - Multi-language/framework code examples
 - `<CodeBlock>` - Syntax-highlighted code with copy button
 - `<DetailIconCards>` - Visual navigation cards for hub pages
 - `<InfoBlock>` - Related resources and navigation
 - `<DocsList>` - Lists of related documentation
-- `<Steps>` - Numbered step-by-step instructions
 - `<Tabs>` and `<TabItem>` - Tabbed content sections
+- `<FeatureBetaProps>` - Beta feature indicators
+- `<NeedHelp/>` - Support callout (typically at end of guides)
 
 **MDX Syntax:**
 - Import components: `import { Component } from '@/components'`
 - Use JSX syntax for components
 - Markdown for content
 - Frontmatter for metadata (title, subtitle, enableTableOfContents, etc.)
+
+**When working with components**, always consult the community guides for:
+- Proper syntax and prop usage
+- Live examples and previews
+- Best practices and when to use each component
+- Icon names and usage patterns
 
 ## Content Style and Tone
 

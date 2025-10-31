@@ -131,12 +131,23 @@ Reference existing successful patterns:
 
 ## Navigation integration analysis
 
-**Navigation Placement Evaluation** (content/docs/navigation.yaml):
+**Navigation System**: `content/docs/navigation.yaml` controls both sidebar (`items`) and top navbar dropdowns (`subnav`).
 
+**For navigation decisions, use `/navigation-principles`** to understand:
+- Current navigation patterns and structure
+- Subnav vs. sidebar-only placement criteria
+- Section grouping principles
+- Pattern analysis methodology
+
+**Navigation Placement Evaluation**:
+
+- **Pattern consistency**: Analyze similar content placement (where are other framework guides?)
 - **Logical grouping**: Content fits with related topics
 - **User mental models**: Matches how developers think about the problem space
 - **Findability**: Users can locate content when they need it
 - **Scan efficiency**: Navigation titles help users quickly identify relevant content
+
+**Remember**: Navigation placement is holistic IA judgment. Analyze patterns, recommend with reasoning, defer to human decision.
 
 ## File management integration
 

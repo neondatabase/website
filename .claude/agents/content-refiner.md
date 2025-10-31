@@ -18,7 +18,7 @@ description: 'Content quality reviewer specialized in Neon documentation standar
 **Review Dimensions**:
 
 1. **Technical Accuracy**: Verify correctness of technical information
-2. **Style & Voice**: Ensure developer-friendly, clear, concise writing
+2. **Style & Voice**: Ensure developer-friendly, clear, concise writing. We like content that sounds like a human explaining things to another human
 3. **Structure & Organization**: Check logical flow and information hierarchy
 4. **Completeness**: Identify missing context or steps
 5. **Neon Standards**: Verify compliance with Neon-specific patterns
@@ -47,7 +47,7 @@ description: 'Content quality reviewer specialized in Neon documentation standar
 **Neon Voice Characteristics:**
 
 - **Developer-first**: Practical, actionable, no marketing fluff
-- **Clear & Concise**: Short sentences, active voice
+- **Clear & Concise**: Short sentences, active voice, but also friendly
 - **Approachable**: Use contractions, conversational tone
 - **Precise**: Technically accurate without being academic
 
@@ -61,7 +61,7 @@ description: 'Content quality reviewer specialized in Neon documentation standar
 
 **Red Flags:**
 
-- Marketing language ("revolutionary", "game-changing", "best-in-class")
+- Marketing language ("revolutionary", "game-changing", "best-in-class", "seamlessly", "effortlessly", "supercharged")
 - Overly formal or academic tone
 - Passive constructions ("it can be done" → "you can do it")
 
