@@ -3,8 +3,12 @@ title: Deploy Neon on Azure
 subtitle: Learn how to deploy Neon as a Native ISV Service on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.220Z'
+updatedOn: '2025-10-30T16:15:01.776Z'
 ---
+
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
 
 <InfoBlock>
 
@@ -19,8 +23,6 @@ updatedOn: '2025-08-02T10:33:29.220Z'
 </DocsList>
 
 </InfoBlock>
-
-[Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft.
 
 This guide steps you through deploying Neon as an Azure native service.
 

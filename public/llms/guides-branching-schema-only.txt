@@ -6,7 +6,7 @@
 
 - [Schema-only branches HTML](https://neon.com/docs/guides/branching-schema-only): The original HTML version of this documentation
 
-**Early Access**: This feature is available for members of our Early Access Program. [Sign up](https://neon.tech/docs/introduction/early-access) and help shape the future of Neon.
+**Note** Beta: This feature is in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
 
 Neon supports creating schema-only branches, letting you create branches that replicate only the database schema from a source branch — without copying any of the actual data. This feature is ideal for working with confidential information. Instead of duplicating this sensitive data, you can now create a branch with just the database structure and populate it with randomized or anonymized data instead. This provides your team with a secure and compliant environment for developing and testing using Neon branches.
 

@@ -6,6 +6,8 @@
 
 - [Anonymize data with Neosync HTML](https://neon.com/docs/guides/neosync-anonymize): The original HTML version of this documentation
 
+**Important** deprecated: Neosync was recently acquired and is no longer available. The instructions in this guide are deprecated and will be removed in a future update.
+
 [Neosync](https://www.neosync.dev/) is an open-source synthetic data orchestration platform that can create anonymized data and sync it across all of your database environments for better security, privacy, and development.
 
 In this guide, we'll show you how to anonymize sensitive data in a Neon database branch for testing and rapid development using Neosync.

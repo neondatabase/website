@@ -3,10 +3,12 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-29T14:30:43.778Z'
+updatedOn: '2025-10-29T19:08:44.078Z'
 ---
 
-[Neon is available on the Azure Marketplace](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview) as an [Azure Native ISV Service](https://learn.microsoft.com/en-us/azure/partner-solutions/partners), allowing you to work with Neon the same way you work with other native solutions from Microsoft. Billing is handled directly through Azure, and you can choose from Neon pricing plans when deploying the service.
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Migrate your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
 
 ## Key benefits
 
