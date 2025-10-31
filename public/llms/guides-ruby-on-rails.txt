@@ -10,7 +10,7 @@
 
 To connect to Neon from a Ruby on Rails application:
 
-   **Note**: This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
+   **Note**: This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
 
 ## Create a Neon Project
 
@@ -82,7 +82,7 @@ Replace the contents of the view file at `app/views/home/index.html.erb` with:
 Replace the contents of `config/routes.rb` with the following code to serve your home view as the root page of the application:
 
 ```ruby
-Rails.application.routes.draw do.
+Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
