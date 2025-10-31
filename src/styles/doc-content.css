@@ -339,6 +339,10 @@
       @apply text-xl;
     }
 
+    .anchor-heading {
+      @apply scroll-mt-20 lg:scroll-mt-5;
+    }
+
     > p {
       @apply my-6 text-gray-new-98 lg:my-5;
     }
