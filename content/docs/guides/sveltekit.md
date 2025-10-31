@@ -2,7 +2,7 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.918Z'
+updatedOn: '2025-10-31T11:07:57.609Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"

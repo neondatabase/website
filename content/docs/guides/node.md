@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2025-06-30T11:30:21.909Z'
+updatedOn: '2025-10-31T11:07:57.605Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

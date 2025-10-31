@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony
   - /docs/integrations/symfony
-updatedOn: '2025-07-03T12:36:49.565Z'
+updatedOn: '2025-10-31T11:07:57.609Z'
 ---
 
 <CopyPrompt src="/prompts/symfony-prompt.md" 

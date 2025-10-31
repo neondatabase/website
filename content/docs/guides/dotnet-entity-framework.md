@@ -3,7 +3,7 @@ title: Connect an Entity Framework application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Entity Framework
   application
 enableTableOfContents: true
-updatedOn: '2025-02-23T11:08:58.898Z'
+updatedOn: '2025-10-31T11:07:57.601Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-ef-prompt.md"

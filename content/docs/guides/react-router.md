@@ -2,7 +2,7 @@
 title: Connect a React Router application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React Router application
 enableTableOfContents: true
-updatedOn: '2025-10-30T00:00:00.000Z'
+updatedOn: '2025-10-31T11:07:57.607Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.

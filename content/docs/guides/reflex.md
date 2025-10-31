@@ -2,7 +2,7 @@
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
 enableTableOfContents: true
-updatedOn: '2025-06-25T02:56:37.086Z'
+updatedOn: '2025-10-31T11:07:57.607Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"
