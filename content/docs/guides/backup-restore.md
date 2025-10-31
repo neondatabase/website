@@ -6,11 +6,13 @@ enableTableOfContents: true
 updatedOn: '2025-09-18T20:51:11.708Z'
 ---
 
-<Admonition type="comingSoon" title="Backup & restore in Early Access, Snapshots in Beta">
-The **Backup & restore** page in the Neon Console is available in Early Access. The **snapshots** feature within this page is now in Beta. There is a limit of 1 snapshot on the Free plan and 10 on paid plans. Automated snapshot schedules are available exclusively on Launch and Scale plans. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+<Admonition type="note" title="Snapshots in Beta">
+The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated snapshot schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
+
+The **Enhanced view** toggle in the Neon Console lets you access the Backup & Restore page with snapshot capabilities. When enabled, you can create and manage snapshots alongside instant point-in-time restore. Toggle it off to return to the original Restore page if needed.
 
 ![Backup and restore UI](/docs/guides/backup_restore_ui.png)
 
