@@ -126,61 +126,62 @@ The Neon SQL Editor also supports meta-commands. See [Meta commands in the Neon 
 
 ```bash
 Informational
-  (options: S = show system objects, + = additional detail)
-  \d[S+]                 list tables, views, and sequences
-  \d[S+]  NAME           describe table, view, sequence, or index
-  \da[S]  [PATTERN]      list aggregates
-  \dA[+]  [PATTERN]      list access methods
-  \dAc[+] [AMPTRN [TYPEPTRN]]  list operator classes
-  \dAf[+] [AMPTRN [TYPEPTRN]]  list operator families
-  \dAo[+] [AMPTRN [OPFPTRN]]   list operators of operator families
-  \dAp[+] [AMPTRN [OPFPTRN]]   list support functions of operator families
-  \db[+]  [PATTERN]      list tablespaces
-  \dc[S+] [PATTERN]      list conversions
-  \dconfig[+] [PATTERN]  list configuration parameters
-  \dC[+]  [PATTERN]      list casts
-  \dd[S]  [PATTERN]      show object descriptions not displayed elsewhere
-  \dD[S+] [PATTERN]      list domains
-  \ddp    [PATTERN]      list default privileges
-  \dE[S+] [PATTERN]      list foreign tables
-  \des[+] [PATTERN]      list foreign servers
-  \det[+] [PATTERN]      list foreign tables
-  \deu[+] [PATTERN]      list user mappings
-  \dew[+] [PATTERN]      list foreign-data wrappers
-  \df[anptw][S+] [FUNCPTRN [TYPEPTRN ...]]
-                         list [only agg/normal/procedure/trigger/window] functions
-  \dF[+]  [PATTERN]      list text search configurations
-  \dFd[+] [PATTERN]      list text search dictionaries
-  \dFp[+] [PATTERN]      list text search parsers
-  \dFt[+] [PATTERN]      list text search templates
-  \dg[S+] [PATTERN]      list roles
-  \di[S+] [PATTERN]      list indexes
-  \dl[+]                 list large objects, same as \lo_list
-  \dL[S+] [PATTERN]      list procedural languages
-  \dm[S+] [PATTERN]      list materialized views
-  \dn[S+] [PATTERN]      list schemas
-  \do[S+] [OPPTRN [TYPEPTRN [TYPEPTRN]]]
+  (options: S = show system objects, x = expanded mode, + = additional detail)
+  \d[Sx+]                list tables, views, and sequences
+  \d[S+]   NAME          describe table, view, sequence, or index
+  \da[Sx]  [PATTERN]     list aggregates
+  \dA[x+]  [PATTERN]     list access methods
+  \dAc[x+] [AMPTRN [TYPEPTRN]]  list operator classes
+  \dAf[x+] [AMPTRN [TYPEPTRN]]  list operator families
+  \dAo[x+] [AMPTRN [OPFPTRN]]   list operators of operator families
+  \dAp[x+] [AMPTRN [OPFPTRN]]   list support functions of operator families
+  \db[x+]  [PATTERN]     list tablespaces
+  \dc[Sx+] [PATTERN]     list conversions
+  \dconfig[x+] [PATTERN] list configuration parameters
+  \dC[x+]  [PATTERN]     list casts
+  \dd[Sx]  [PATTERN]     show object descriptions not displayed elsewhere
+  \dD[Sx+] [PATTERN]     list domains
+  \ddp[x]  [PATTERN]     list default privileges
+  \dE[Sx+] [PATTERN]     list foreign tables
+  \des[x+] [PATTERN]     list foreign servers
+  \det[x+] [PATTERN]     list foreign tables
+  \deu[x+] [PATTERN]     list user mappings
+  \dew[x+] [PATTERN]     list foreign-data wrappers
+  \df[anptw][Sx+] [FUNCPTRN [TYPEPTRN ...]]
+                       list [only agg/normal/procedure/trigger/window] functions
+  \dF[x+]  [PATTERN]     list text search configurations
+  \dFd[x+] [PATTERN]     list text search dictionaries
+  \dFp[x+] [PATTERN]     list text search parsers
+  \dFt[x+] [PATTERN]     list text search templates
+  \dg[Sx+] [PATTERN]     list roles
+  \di[Sx+] [PATTERN]     list indexes
+  \dl[x+]                list large objects, same as \lo_list
+  \dL[Sx+] [PATTERN]     list procedural languages
+  \dm[Sx+] [PATTERN]     list materialized views
+  \dn[Sx+] [PATTERN]     list schemas
+  \do[Sx+] [OPPTRN [TYPEPTRN [TYPEPTRN]]]
                          list operators
-  \dO[S+] [PATTERN]      list collations
-  \dp[S]  [PATTERN]      list table, view, and sequence access privileges
-  \dP[itn+] [PATTERN]    list [only index/table] partitioned relations [n=nested]
-  \drds [ROLEPTRN [DBPTRN]] list per-database role settings
-  \drg[S] [PATTERN]      list role grants
-  \dRp[+] [PATTERN]      list replication publications
-  \dRs[+] [PATTERN]      list replication subscriptions
-  \ds[S+] [PATTERN]      list sequences
-  \dt[S+] [PATTERN]      list tables
-  \dT[S+] [PATTERN]      list data types
-  \du[S+] [PATTERN]      list roles
-  \dv[S+] [PATTERN]      list views
-  \dx[+]  [PATTERN]      list extensions
-  \dX     [PATTERN]      list extended statistics
-  \dy[+]  [PATTERN]      list event triggers
-  \l[+]   [PATTERN]      list databases
-  \lo_list[+]            list large objects
-  \sf[+]  FUNCNAME       show a function's definition
-  \sv[+]  VIEWNAME       show a view's definition
-  \z[S]   [PATTERN]      same as \dp
+  \dO[Sx+] [PATTERN]     list collations
+  \dp[Sx]  [PATTERN]     list table, view, and sequence access privileges
+  \dP[itnx+] [PATTERN]   list [only index/table] partitioned relations [n=nested]
+  \drds[x] [ROLEPTRN [DBPTRN]]
+                       list per-database role settings
+  \drg[Sx] [PATTERN]     list role grants
+  \dRp[x+] [PATTERN]     list replication publications
+  \dRs[x+] [PATTERN]     list replication subscriptions
+  \ds[Sx+] [PATTERN]     list sequences
+  \dt[Sx+] [PATTERN]     list tables
+  \dT[Sx+] [PATTERN]     list data types
+  \du[Sx+] [PATTERN]     list roles
+  \dv[Sx+] [PATTERN]     list views
+  \dx[x+]  [PATTERN]     list extensions
+  \dX[x]   [PATTERN]     list extended statistics
+  \dy[x+]  [PATTERN]     list event triggers
+  \l[x+]   [PATTERN]     list databases
+  \sf[+]   FUNCNAME      show a function's definition
+  \sv[+]   VIEWNAME      show a view's definition
+  \z[Sx]   [PATTERN]     same as \dp
+
 ```
 
 For more information about meta-commands, see [psql Meta-Commands](https://www.postgresql.org/docs/current/app-psql.html#APP-PSQL-META-COMMANDS).
