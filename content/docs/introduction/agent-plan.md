@@ -2,7 +2,7 @@
 title: Agent plan structure and pricing
 subtitle: Two-organization setup for managing databases across free and paid user tiers
 enableTableOfContents: true
-updatedOn: '2025-10-24T14:09:12.290Z'
+updatedOn: '2025-11-03T17:05:16.902Z'
 ---
 
 <InfoBlock>

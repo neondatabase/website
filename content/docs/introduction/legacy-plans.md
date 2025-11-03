@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-10-08T14:55:26.725Z'
+updatedOn: '2025-11-03T17:05:16.903Z'
 ---
 
 This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.
