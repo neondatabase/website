@@ -40,10 +40,6 @@ Once HIPAA is enabled for your organization, you can proceed to enable HIPAA com
 Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling HIPAA will also restart all computes, temporarily interrupting database connections.
 </Admonition>
 
-<Admonition type="note">
-HIPAA is not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
-</Admonition>
-
 <Tabs labels={["New project", "Existing project", "API", "CLI"]}>
 
 <TabItem>
