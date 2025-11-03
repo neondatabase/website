@@ -41,7 +41,7 @@ export default {
   docsHome: '/docs/introduction',
   docsAi: '/docs/ai/ai-intro',
   api: '/docs/reference/api-reference',
-  auth: '/docs/guides/neon-auth',
+  auth: '/docs/neon-auth/overview',
   autoscaling: '/docs/introduction/autoscaling',
   billing: '/docs/introduction/about-billing',
   branchRestore: '/docs/introduction/branch-restore',
@@ -60,6 +60,8 @@ export default {
   support: '/docs/introduction/support',
   variableTraffic: '/use-cases/serverless-apps',
   whyNeon: '/docs/get-started/why-neon',
+  migrationIntro: '/docs/import/migrate-intro',
+  dataApi: '/docs/data-api/get-started',
   // Legal
   dpa: '/dpa',
   terms: '/terms-of-service',

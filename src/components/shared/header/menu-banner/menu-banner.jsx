@@ -29,7 +29,7 @@ const MenuBanner = ({ title, description, to }) => (
         <h3 className="text-sm leading-none tracking-snug text-white">{title}</h3>
         <p
           className={clsx(
-            'mt-1.5 text-xs font-light leading-none tracking-extra-tight text-gray-new-50',
+            'mt-1.5 max-w-[126px] text-xs font-light leading-none tracking-extra-tight text-gray-new-50',
             'transition-colors duration-200 group-hover/banner:text-white'
           )}
         >
