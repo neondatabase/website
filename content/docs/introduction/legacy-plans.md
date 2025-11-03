@@ -7,14 +7,14 @@ redirectFrom:
 updatedOn: '2025-10-08T14:55:26.725Z'
 ---
 
-This page describes Neon’s **legacy plans**. These plans are no longer offered to new signups, except through Vercel and Azure Marketplace.
+This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.
 
 If you're on a legacy paid plan, you can stay on it, but once you [switch to a new plan](/docs/introduction/manage-billing#change-your-plan), you cannot switch back.
 
 <Admonition type="important">
 You cannot upgrade or downgrade to a legacy plan. See our [current usage-based plans](/docs/introduction/plans) for options.
 
-If you signed up through **Vercel** or **Azure Marketplace**, you remain on a [legacy plan](/docs/introduction/legacy-plans) — for both Free and paid. Usage-based plans will be introduced on these platforms later.
+If you signed up through **Azure Marketplace**, you remain on a [legacy plan](/docs/introduction/legacy-plans) — for both Free and paid.
 </Admonition>
 
 ---
