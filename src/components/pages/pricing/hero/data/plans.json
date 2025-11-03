@@ -61,7 +61,7 @@
       },
       {
         "icon": "clock",
-        "title": "$0.14 per CU-hour compute",
+        "title": "$0.106 per CU-hour compute",
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
@@ -99,7 +99,7 @@
       },
       {
         "icon": "clock",
-        "title": "$0.26 per CU-hour compute",
+        "title": "$0.222 per CU-hour compute",
         "info": "<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU = 1 vCPU, 4 GB RAM</p>",
         "moreLink": { "text": "Read more", "href": "#compute-usage" }
       },
