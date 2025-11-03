@@ -2,6 +2,7 @@ import clsx from 'clsx';
 
 import Container from 'components/shared/container';
 import bcgIcon from 'icons/home/logos/bcg.svg';
+import meta from 'icons/home/logos/meta.svg';
 import outfrontIcon from 'icons/home/logos/outfront7.svg';
 import pepsiIcon from 'icons/home/logos/pepsi.svg';
 import replitIcon from 'icons/home/logos/replit.svg';
@@ -26,6 +27,13 @@ const logos = [
     alt: 'Retool',
     width: 100,
     height: 20,
+    className: 'lg:h-[14px]',
+  },
+  {
+    logo: meta,
+    alt: 'Meta',
+    height: 20,
+    width: 100,
     className: 'lg:h-[14px]',
   },
   {
@@ -54,7 +62,7 @@ const Logos = () => (
       <h2 className="max-w-[400px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:text-[32px] lg:max-w-xs lg:text-[26px] md:max-w-full sm:text-[22px]">
         Trusted in production by&nbsp;thousands of&nbsp;teams.
       </h2>
-      <ul className="flex max-w-[452px] shrink flex-wrap items-center gap-x-14 gap-y-12 xl:gap-x-12 xl:gap-y-9 lg:max-w-xs lg:gap-x-8 lg:gap-y-7 md:max-w-full sm:max-w-xs sm:gap-x-7 sm:gap-y-5">
+      <ul className="max-w-[550px] flex shrink flex-wrap items-center gap-x-14 gap-y-12 xl:gap-x-12 xl:gap-y-9 lg:max-w-xs lg:gap-x-8 lg:gap-y-7 md:max-w-full sm:max-w-xs sm:gap-x-7 sm:gap-y-5">
         {logos.map(({ logo, width, height, alt, className }, index) => (
           <li className={clsx('flex', index !== 0 && index !== 3 && 'justify-center')} key={index}>
             <img
