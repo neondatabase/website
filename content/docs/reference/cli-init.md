@@ -25,7 +25,7 @@ neon init
 Or use `npx` without installing the CLI globally:
 
 ```bash
-npx neonctl init
+npx neonctl@latest init
 ```
 
 ### What it does
@@ -55,10 +55,10 @@ Or use `npx`:
 
 ```bash
 cd /path/to/your/app
-npx neonctl init
+npx neonctl@latest init
 ```
 
-The command will output progress as it completes each step:
+The command outputs progress as it completes each step:
 
 ```bash
 🚀 Neon Project Initialization
