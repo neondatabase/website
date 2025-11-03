@@ -19,10 +19,10 @@ updatedOn: '2025-10-24T18:34:47.878Z'
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Vercel** or **Azure Marketplace**.
+> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Azure Marketplace**.
 
 <Admonition type="important">
-If you signed up with Neon through **Vercel** or **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans. The new usage-based pricing plans will be introduced on these platforms at a later date.
+If you signed up with Neon through **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans.
 </Admonition>
 
 ---
@@ -42,7 +42,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Projects](#projects)                                 | 20                             | 100                                  | 1,000 (can be increased on request)                                                               |
 | [Branches](#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
-| [Compute](#compute)                                   | 100 CU-hours/project           | $0.14/CU-hour                        | $0.26/CU-hour                                                                                     |
+| [Compute](#compute)                                   | 100 CU-hours/project           | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
 | [Autoscaling](#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                                           |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
@@ -160,8 +160,8 @@ Examples:
 - 8 CU for 2 hours = 16 CU-hours
 
 **Free**: 100 CU-hours/project/month (enough to run a 0.25 CU compute in a project for 400 hours/month).  
-**Launch**: $0.14/CU-hour  
-**Scale**: $0.26/CU-hour
+**Launch**: $0.106/CU-hour  
+**Scale**: $0.222/CU-hour
 
 > All computes in your project count toward usage. Each branch has a read-write compute by default; [read replicas](/docs/reference/glossary#read-replica) add read-only computes.
 
@@ -338,8 +338,8 @@ The following examples show what your monthly bill might look like on the **Laun
 ### Launch plan
 
 - **Example 1 (less than $5 usage)**
-  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.40**  
-    _(10 CU-hours × $0.14/CU-hour)_
+  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.06**  
+    _(10 CU-hours × $0.106/CU-hour)_
   - Root branch storage: 2 GB — **$0.70**  
     _(2 GB × $0.35/GB-month)_
   - Child branch storage: 1 GB — **$0.35**  
@@ -347,13 +347,13 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 1 GB — **$0.20**  
     _(1 GB × $0.20/GB-month)_
 
-    **Subtotal:** **$2.65**  
+    **Subtotal:** **$2.31**  
     **Minimum monthly fee:** **$5.00**  
     **Amount due:** **$5.00**
 
 - **Example 2**
-  - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$16.80**  
-    _(120 CU-hours × $0.14/CU-hour)_
+  - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$12.72**  
+    _(120 CU-hours × $0.106/CU-hour)_
   - Root branch storage: 20 GB — **$7.00**  
     _(20 GB × $0.35/GB-month)_
   - Child branch storage: 5 GB — **$1.75**  
@@ -361,11 +361,11 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 10 GB — **$2.00**  
     _(10 GB × $0.20/GB-month)_
 
-    **Amount due:** **$27.55**
+    **Amount due:** **$23.47**
 
 - **Example 3**
-  - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$35.00**  
-    _(250 CU-hours × $0.14/CU-hour)_
+  - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$26.50**  
+    _(250 CU-hours × $0.106/CU-hour)_
   - Root branch storage: 40 GB — **$14.00**  
     _(40 GB × $0.35/GB-month)_
   - Child branch storage: 10 GB — **$3.50**  
@@ -373,15 +373,15 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 20 GB — **$4.00**  
     _(20 GB × $0.20/GB-month)_
 
-    **Amount due:** **$56.50**
+    **Amount due:** **$48.00**
 
 ---
 
 ### Scale plan
 
 - **Example 1**
-  - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$442.00**  
-    _(1,700 CU-hours × $0.26/CU-hour)_
+  - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$377.40**  
+    _(1,700 CU-hours × $0.222/CU-hour)_
   - Root branch storage: 100 GB — **$35.00**  
     _(100 GB × $0.35/GB-month)_
   - Child branch storage: 25 GB — **$8.75**  
@@ -389,11 +389,11 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 50 GB — **$10.00**  
     _(50 GB × $0.20/GB-month)_
 
-    **Amount due:** **$495.75**
+    **Amount due:** **$431.15**
 
 - **Example 2**
-  - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$676.00**  
-    _(2,600 CU-hours × $0.26/CU-hour)_
+  - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$577.20**  
+    _(2,600 CU-hours × $0.222/CU-hour)_
   - Root branch storage: 150 GB — **$52.50**  
     _(150 GB × $0.35/GB-month)_
   - Child branch storage: 40 GB — **$14.00**  
@@ -401,7 +401,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 75 GB — **$15.00**  
     _(75 GB × $0.20/GB-month)_
 
-    **Amount due:** **$757.50**
+    **Amount due:** **$658.70**
 
 ## FAQs
 
