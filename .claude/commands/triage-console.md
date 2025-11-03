@@ -39,9 +39,10 @@ if [ -z "$NEON_CLOUD_REPO" ] || [ ! -d "$NEON_CLOUD_REPO" ]; then
   read NEON_CLOUD_REPO
 fi
 
-# Create output directory if it doesn't exist
-OUTPUT_DIR="../changelog_work"
-mkdir -p "$OUTPUT_DIR"
+# Create output directory if it doesn't exist and get absolute path
+mkdir -p ../changelog_work
+OUTPUT_DIR="$(cd ../changelog_work && pwd)"
+echo "Output directory: $OUTPUT_DIR"
 ```
 
 **Important:** This command assumes you're running it from the website repository root directory.
@@ -300,11 +301,13 @@ Create a detailed triage report showing ALL decisions:
 
 This report is for verification and collaboration with other writers. The Lakebase section helps writers identify PRs that should go in a separate Lakebase changelog.
 
-## Step 6: Generate Changelog Draft
+## Step 6: Generate Changelog File
 
-Create the final changelog file ready for publication.
+Create or update the changelog file with Console content.
 
 **File:** `content/changelog/YYYY-MM-DD.md` (use NEXT_FRIDAY date)
+
+**IMPORTANT:** Console typically runs FIRST, so create the file fresh. If the file already exists (from a previous run), overwrite it.
 
 **Voice Guidelines:**
 - **Primary:** Humans writing for other humans
@@ -331,33 +334,33 @@ Create the final changelog file ready for publication.
 
 ```markdown
 ---
-title: [Create title from 2-3 main themes - concise, user-focused]
+title: [Leave as TBD - writer will update after seeing all content]
 ---
 
-## [User-friendly feature title]
+## [Console H2 feature if any]
 
 [2-3 sentences in natural language. Start with "We've added..." or "You can now..."
 Explain what changed and why it matters. Include examples if helpful.]
 
-![Descriptive alt text](/docs/changelog/feature-slug-oct-2025.png)
+![Descriptive alt text](/docs/changelog/feature-slug-nov-2025.png)
 
 For more information, see [Documentation](/docs/path).
-
-## [Another feature]
-
-[Description...]
 
 <details>
 <summary>**Fixes & improvements**</summary>
 
-- Fixed [specific issue users experienced]. [Brief benefit statement.]
-- Improved [area] to [benefit].
-- [More bullets - keep concise]
+- Fixed [specific Console issue]. [Brief benefit statement.]
+- Improved [Console area] to [benefit].
+- [More Console bullets - keep concise]
 
 </details>
 ```
 
-**Important:** Follow the exact structure from existing changelog files. See `/content/changelog/2025-10-24.md` for a reference example.
+**Notes:**
+- If Console has no major H2 features, start directly with `<details>`
+- Leave title as TBD - will be updated after all repos contribute
+- Other repos (MCP, CLI, etc) will insert their H2s before `<details>` section
+- Follow structure from existing changelog files like `content/changelog/2025-10-24.md`
 
 ## When to Skip PRs
 
@@ -401,16 +404,18 @@ At the end, provide a summary:
    - Customer-facing: [count]
    - Excluded: [count]
 
-✅ Changelog draft created
+✅ Changelog file created
    File: content/changelog/YYYY-MM-DD.md (next Friday)
    - Main features: [count]
    - Fixes & improvements: [count]
 
 Next steps:
-1. Review triage report for accuracy
-2. Edit changelog draft for polish
-3. Add screenshots to /public/docs/changelog/
-4. Commit and publish on Friday
+1. Review triage report for Console accuracy
+2. Run other triage commands (/triage-mcp, /triage-cli, etc) - they will add to the same file
+3. Update changelog title after all repos added
+4. Add screenshots to /public/docs/changelog/
+5. Review and edit final changelog
+6. Commit and publish on Friday
 ```
 
 ## What Makes This Accurate
