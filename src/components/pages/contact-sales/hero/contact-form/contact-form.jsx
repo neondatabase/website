@@ -6,18 +6,17 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import useCookie from 'react-use/lib/useCookie';
-import useLocation from 'react-use/lib/useLocation';
 import * as yup from 'yup';
 
 import Button from 'components/shared/button';
 import Field from 'components/shared/field';
 import Link from 'components/shared/link';
-import { FORM_STATES, HUBSPOT_CONTACT_SALES_FORM_ID } from 'constants/forms';
+import { FORM_STATES } from 'constants/forms';
 import LINKS from 'constants/links';
 import CloseIcon from 'icons/close.inline.svg';
 import { checkBlacklistEmails } from 'utils/check-blacklist-emails';
-import { doNowOrAfterSomeTime, sendHubspotFormData } from 'utils/forms';
+import { doNowOrAfterSomeTime } from 'utils/forms';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const ErrorMessage = ({ onClose }) => (
   <div className="absolute inset-0 flex items-center justify-center p-5" data-test="error-message">
@@ -68,13 +67,6 @@ const labelClassName = 'text-sm text-gray-new-90';
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
-  };
 
   const {
     register,
@@ -106,54 +98,27 @@ const ContactForm = () => {
     setFormState(FORM_STATES.LOADING);
 
     try {
-      const response = await sendHubspotFormData({
-        formId: HUBSPOT_CONTACT_SALES_FORM_ID,
-        context,
-        values: [
-          {
-            name: 'firstname',
-            value: firstname,
-          },
-          {
-            name: 'lastname',
-            value: lastname,
-          },
-          {
-            name: 'email',
-            value: email,
-          },
-          {
-            name: 'company_website',
-            value: companyWebsite,
-          },
-          {
-            name: 'company_size',
-            value: companySize,
-          },
-          {
-            name: 'TICKET.reason_for_contact',
-            value: reasonForContact,
-          },
-          {
-            name: 'TICKET.subject',
-            value: 'Contact sales',
-          },
-          {
-            name: 'TICKET.content',
-            value: message,
-          },
-        ],
-      });
+      const eventName = 'Contact Sales Form Submitted';
+      const eventProps = {
+        email,
+        first_name: firstname,
+        last_name: lastname,
+        company_website: companyWebsite,
+        company_size: companySize,
+        reason_for_contact: reasonForContact,
+        message,
+      };
 
-      if (response.ok) {
-        doNowOrAfterSomeTime(() => {
-          setFormState(FORM_STATES.SUCCESS);
-          reset();
-          setIsBroken(false);
-        }, loadingAnimationStartedTime);
-      } else {
-        throw new Error('Something went wrong. Please reload the page and try again.');
+      if (window.zaraz && email) {
+        await sendGtagEvent('identify', { email });
+        await sendGtagEvent(eventName, eventProps);
       }
+
+      doNowOrAfterSomeTime(() => {
+        setFormState(FORM_STATES.SUCCESS);
+        reset();
+        setIsBroken(false);
+      }, loadingAnimationStartedTime);
     } catch (error) {
       if (error.name !== 'AbortError') {
         doNowOrAfterSomeTime(() => {
