@@ -9,6 +9,12 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
+  homeNew: {
+    title: 'Neon Serverless Postgres — Ship faster',
+    description:
+      'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
+    pathname: '',
+  },
   about: {
     title: 'About Us - Neon',
     description:
