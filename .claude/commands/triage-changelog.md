@@ -1,10 +1,22 @@
 ---
-description: 'Generate changelog from all repos or selected repos'
+description: 'Generate changelog from all repos using parallel extraction agents'
 ---
 
-# Changelog Triage Command
+# Changelog Triage Command (Agent-Based)
 
-You are the Neon Changelog Triage Agent. Your job is to analyze PRs from Neon repositories and generate a publication-ready changelog in Neon's voice.
+You are the Neon Changelog Orchestrator. Your job is to coordinate extraction agents, compile their analysis, and generate a publication-ready changelog.
+
+## Architecture
+
+**Phase 1: Extraction & Analysis (Parallel Agents)**
+- Launch repo-specific agents in parallel
+- Each agent extracts PRs and analyzes them autonomously
+- Agents return structured summaries with triage decisions
+
+**Phase 2: Compilation & Drafting (Main Claude)**
+- Compile agent summaries into triage report
+- Generate changelog draft using golden examples
+- Present to user for review
 
 ## Usage
 
@@ -15,17 +27,6 @@ You are the Neon Changelog Triage Agent. Your job is to analyze PRs from Neon re
 /triage-changelog console,mcp  # Multiple repos
 ```
 
-**Note:** The command prompt may not support parameters yet. If parameters don't work, ask the user which repos to process, or default to all.
-
-## Overview
-
-This command will:
-1. Determine which repositories to process
-2. Calculate the date range (last Friday to today, publish next Friday)
-3. Extract and analyze PRs from each enabled repository
-4. Generate a combined triage report with all decisions
-5. Generate a publication-ready changelog file
-
 ## Step 1: Determine Repositories to Process
 
 Check if user provided repo selection, otherwise default to all.
@@ -34,77 +35,21 @@ Check if user provided repo selection, otherwise default to all.
 - `console` - Neon Console (neon-cloud repo)
 - `mcp` - MCP Server (mcp-server-neon repo)
 - `cli` - Neon CLI (neonctl repo)
+- `storage` - Storage (hadron repo, release-storage branch)
+- `compute` - Compute (hadron repo, release-compute branch)
 
-**Future repositories:**
-- `serverless` - Serverless Driver
-- `storage` - Storage (hadron repo)
-- `control-plane` - Control Plane (neon-cloud repo, different branch)
-- `compute` - Compute (hadron repo)
-- `proxy` - Proxy (hadron repo)
-- `drizzle` - Drizzle Studio
+**Default:** Process all repositories
 
-**Default:** Process Console + MCP + CLI
+If no parameter provided, ask user: "Which repositories would you like to process? (console, mcp, cli, storage, compute, or all - default: all)"
 
-Ask user: "Which repositories would you like to process? (console, mcp, cli, or all - default: all)"
+Parse user response and set flags:
+- `PROCESS_CONSOLE=true/false`
+- `PROCESS_MCP=true/false`
+- `PROCESS_CLI=true/false`
+- `PROCESS_STORAGE=true/false`
+- `PROCESS_COMPUTE=true/false`
 
-## Step 2: Setup Paths
-
-Detect or prompt for repository locations:
-
-```bash
-# Current directory should be the website repo
-WEBSITE_REPO=$(pwd)
-
-# Get absolute path to output directory (should already exist)
-OUTPUT_DIR="$(cd ../changelog_work && pwd 2>/dev/null || (mkdir -p ../changelog_work && cd ../changelog_work && pwd))"
-
-# Auto-detect neon-cloud repo (Console)
-if [ -d "../neon-cloud" ]; then
-  NEON_CLOUD_REPO="../neon-cloud"
-elif [ -d "~/Documents/GitHub/neon-cloud" ]; then
-  NEON_CLOUD_REPO=~/Documents/GitHub/neon-cloud
-elif [ -d "../../neon-cloud" ]; then
-  NEON_CLOUD_REPO="../../neon-cloud"
-fi
-
-if [ -z "$NEON_CLOUD_REPO" ] || [ ! -d "$NEON_CLOUD_REPO" ]; then
-  echo "Could not auto-detect neon-cloud repository."
-  echo "Please provide the path to neon-cloud repo:"
-  read NEON_CLOUD_REPO
-fi
-
-# Auto-detect mcp-server-neon repo (MCP)
-if [ -d "../mcp-server-neon" ]; then
-  MCP_REPO="../mcp-server-neon"
-elif [ -d "~/Documents/GitHub/mcp-server-neon" ]; then
-  MCP_REPO=~/Documents/GitHub/mcp-server-neon
-elif [ -d "../../mcp-server-neon" ]; then
-  MCP_REPO="../../mcp-server-neon"
-fi
-
-if [ -z "$MCP_REPO" ] || [ ! -d "$MCP_REPO" ]; then
-  echo "Could not auto-detect mcp-server-neon repository."
-  echo "Please provide the path to mcp-server-neon repo:"
-  read MCP_REPO
-fi
-
-# Auto-detect neonctl repo (CLI)
-if [ -d "../neonctl" ]; then
-  CLI_REPO="../neonctl"
-elif [ -d "~/Documents/GitHub/neonctl" ]; then
-  CLI_REPO=~/Documents/GitHub/neonctl
-elif [ -d "../../neonctl" ]; then
-  CLI_REPO="../../neonctl"
-fi
-
-if [ -z "$CLI_REPO" ] || [ ! -d "$CLI_REPO" ]; then
-  echo "Could not auto-detect neonctl repository."
-  echo "Please provide the path to neonctl repo:"
-  read CLI_REPO
-fi
-```
-
-## Step 3: Calculate Date Range
+## Step 2: Calculate Date Range
 
 Calculate once for all repositories:
 
@@ -134,340 +79,141 @@ fi
 echo "=== CHANGELOG GENERATION ==="
 echo "PR Date Range: $LAST_FRIDAY to $TODAY"
 echo "Publication Date: $NEXT_FRIDAY"
-echo "Repositories: [list enabled repos]"
 echo "============================"
 ```
 
-## Step 4: Process Console (if enabled)
+## Step 3: Setup Repository Paths
 
-Extract and analyze Console PRs:
-
-```bash
-# Create extraction script
-cat > /tmp/extract_console_prs.sh << 'SCRIPT_EOF'
-#!/bin/bash
-
-REPO_DIR="$1"
-OUTPUT_FILE="$2"
-SINCE_DATE="$3"
-UNTIL_DATE="$4"
-
-cd "$REPO_DIR" || exit 1
-
-echo "Fetching latest from remote..." >&2
-git fetch origin
-
-echo "Querying git for Console PRs from $SINCE_DATE to $UNTIL_DATE..." >&2
-
-# Console PRs are merged to origin/release-console
-PR_NUMBERS=$(git log origin/release-console --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
-  grep "\[console" | \
-  grep -oE "#[0-9]+" | \
-  sort -u | \
-  tr -d '#')
-
-TOTAL=$(echo "$PR_NUMBERS" | wc -l | tr -d ' ')
-
-echo "Found $TOTAL Console PRs" >&2
-echo "Extracting data..." >&2
-
-> "$OUTPUT_FILE"
-
-echo "===========================================" >> "$OUTPUT_FILE"
-echo "CONSOLE PRs FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
-echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
-echo "Total PRs: $TOTAL" >> "$OUTPUT_FILE"
-echo "===========================================" >> "$OUTPUT_FILE"
-
-COUNT=0
-for PR_NUM in $PR_NUMBERS; do
-    COUNT=$((COUNT + 1))
-    echo -ne "\rProcessing $COUNT/$TOTAL..." >&2
-
-    COMMIT_HASH=$(git log --all --oneline --grep="#$PR_NUM" | head -1 | awk '{print $1}')
-
-    if [ -z "$COMMIT_HASH" ]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-        echo "Status: COMMIT NOT FOUND" >> "$OUTPUT_FILE"
-        echo "=====================================" >> "$OUTPUT_FILE"
-        continue
-    fi
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
-
-    git show "$COMMIT_HASH" --no-patch --format="Commit: %H%nAuthor: %an%nDate: %ad%nSubject: %s%n%nBody:%b" >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Files Changed ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --stat --format="" | head -15 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Diff Sample (first 80 lines) ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --format="" | head -80 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "=====================================" >> "$OUTPUT_FILE"
-done
-
-echo -e "\n\nDone! Extracted data for $COUNT PRs" >&2
-echo "File: $OUTPUT_FILE" >&2
-ls -lh "$OUTPUT_FILE" >&2
-SCRIPT_EOF
-
-chmod +x /tmp/extract_console_prs.sh
-
-# Run extraction
-PR_DATA_FILE="$OUTPUT_DIR/pr_data_console_${TODAY}.txt"
-/tmp/extract_console_prs.sh "$NEON_CLOUD_REPO" "$PR_DATA_FILE" "$LAST_FRIDAY" "$TODAY"
-```
-
-**Analyze Console PRs:**
-
-Read the PR data file in chunks and analyze directly. Do NOT create Python scripts or permanent analysis files.
-
-Read the file systematically:
-
-**For each PR, evaluate:**
-1. **Is it customer-facing?**
-   - YES: New UI features, visible changes, bug fixes users notice, public API changes
-   - NO: Internal refactoring, admin endpoints, infrastructure, CI/CD, ops scripts, billing jobs
-
-2. **Is it behind a feature flag?**
-   - Look for: `__IS_NEON_VARIANT__`, `isFeatureEnabled`, feature flag checks
-   - **TODO:** Future enhancement - query PostHog API to check feature flag status
-   - For now: Note in triage report if behind flag, may not be fully released
-
-3. **Is it Lakebase-specific?**
-   - Look for: "Lakebase", "lakebase", Databricks-specific features, `__IS_NEON_VARIANT__`
-   - Track separately for Lakebase changelog
-
-4. **What's the user impact and scope?**
-   - Read the diff to understand what changed
-   - Consider: What can users now do? Why does it matter?
-
-5. **Is it H2-worthy or Fixes-worthy?**
-   - **H2 (Main feature):**
-     - Substantial new capability or major enhancement
-     - Multiple related PRs working together on same feature area
-     - Significant UX improvements (e.g., 3-5 data masking PRs = feature enhancement)
-     - New pages, major workflows, important integrations
-   - **Fixes & improvements:**
-     - Single bug fixes
-     - Small UI tweaks
-     - Minor improvements
-     - Papercuts and polish
-   - **When in doubt:** If you can write a compelling 2-3 sentence narrative about "what users can now do", it's probably H2-worthy
-
-**Store Console findings** for triage report and changelog generation.
-
-## Step 5: Process MCP Server (if enabled)
-
-Extract and analyze MCP Server PRs:
+Detect repository locations (these will be passed to agents):
 
 ```bash
-# Create MCP extraction script
-cat > /tmp/extract_mcp_prs.sh << 'SCRIPT_EOF'
-#!/bin/bash
+WEBSITE_REPO=$(pwd)
+OUTPUT_DIR="/Users/$(whoami)/changelog_work"
 
-REPO_DIR="$1"
-OUTPUT_FILE="$2"
-SINCE_DATE="$3"
-UNTIL_DATE="$4"
+# Ensure output directory exists
+mkdir -p "$OUTPUT_DIR"
 
-cd "$REPO_DIR" || exit 1
+# Auto-detect repositories
+NEON_CLOUD_REPO="$HOME/Documents/GitHub/neon-cloud"
+MCP_REPO="$HOME/Documents/GitHub/mcp-server-neon"
+CLI_REPO="$HOME/Documents/GitHub/neonctl"
+HADRON_REPO="$HOME/Documents/GitHub/hadron"
 
-echo "Fetching latest from remote..." >&2
-git fetch origin
-
-echo "Querying git for MCP Server PRs from $SINCE_DATE to $UNTIL_DATE..." >&2
-
-# MCP PRs are merged to origin/main
-PR_NUMBERS=$(git log origin/main --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
-  grep -oE "#[0-9]+" | \
-  sort -u | \
-  tr -d '#')
-
-TOTAL=$(echo "$PR_NUMBERS" | wc -l | tr -d ' ')
-
-echo "Found $TOTAL MCP Server PRs" >&2
-echo "Extracting data..." >&2
-
-> "$OUTPUT_FILE"
-
-echo "===========================================" >> "$OUTPUT_FILE"
-echo "MCP SERVER PRs FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
-echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
-echo "Total PRs: $TOTAL" >> "$OUTPUT_FILE"
-echo "===========================================" >> "$OUTPUT_FILE"
-
-COUNT=0
-for PR_NUM in $PR_NUMBERS; do
-    COUNT=$((COUNT + 1))
-    echo -ne "\rProcessing $COUNT/$TOTAL..." >&2
-
-    COMMIT_HASH=$(git log --all --oneline --grep="#$PR_NUM" | head -1 | awk '{print $1}')
-
-    if [ -z "$COMMIT_HASH" ]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-        echo "Status: COMMIT NOT FOUND" >> "$OUTPUT_FILE"
-        echo "=====================================" >> "$OUTPUT_FILE"
-        continue
-    fi
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
-
-    git show "$COMMIT_HASH" --no-patch --format="Commit: %H%nAuthor: %an%nDate: %ad%nSubject: %s%n%nBody:%b" >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Files Changed ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --stat --format="" | head -15 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Diff Sample (first 80 lines) ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --format="" | head -80 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "=====================================" >> "$OUTPUT_FILE"
-done
-
-echo -e "\n\nDone! Extracted data for $COUNT PRs" >&2
-echo "File: $OUTPUT_FILE" >&2
-ls -lh "$OUTPUT_FILE" >&2
-SCRIPT_EOF
-
-chmod +x /tmp/extract_mcp_prs.sh
-
-# Run extraction
-PR_DATA_FILE="$OUTPUT_DIR/pr_data_mcp_${TODAY}.txt"
-/tmp/extract_mcp_prs.sh "$MCP_REPO" "$PR_DATA_FILE" "$LAST_FRIDAY" "$TODAY"
+# Check if repos exist and warn if not
+if [ "$PROCESS_CONSOLE" = "true" ] && [ ! -d "$NEON_CLOUD_REPO" ]; then
+  echo "⚠️  Console repo not found at $NEON_CLOUD_REPO"
+fi
+if [ "$PROCESS_MCP" = "true" ] && [ ! -d "$MCP_REPO" ]; then
+  echo "⚠️  MCP repo not found at $MCP_REPO"
+fi
+if [ "$PROCESS_CLI" = "true" ] && [ ! -d "$CLI_REPO" ]; then
+  echo "⚠️  CLI repo not found at $CLI_REPO"
+fi
+if [ "$PROCESS_STORAGE" = "true" ] || [ "$PROCESS_COMPUTE" = "true" ]; then
+  if [ ! -d "$HADRON_REPO" ]; then
+    echo "⚠️  Hadron repo not found at $HADRON_REPO"
+  fi
+fi
 ```
 
-**Analyze MCP PRs:**
+## Step 4: Launch Extraction & Analysis Agents
 
-Read the PR data file in chunks and analyze directly. Do NOT create Python scripts or permanent analysis files.
+**IMPORTANT:** Launch ALL enabled agents in parallel using a single message with multiple Task tool calls.
 
-**For each PR, evaluate:**
-1. **Is it customer-facing?**
-   - YES: New MCP tools, new features, bug fixes users notice, important docs
-   - NO: Dependency updates (unless security), internal refactoring, tests, CI/CD
+For each enabled repository, prepare the agent prompt with environment variables:
 
-2. **What type of change?**
-   - **feat:** New tools/capabilities → Usually customer-facing
-   - **docs:** Documentation → May be customer-facing if substantial
-   - **fix:** Bug fixes → Customer-facing if user-impacting
-   - **refactor/chore:** Internal → Usually skip
+### Agent Launch Template
 
-**Store MCP findings** for triage report and changelog generation.
+For each agent, create a prompt like this:
 
-## Step 6: Process CLI (if enabled)
+```
+You are running the [REPO] extraction and analysis agent.
 
-Extract and analyze CLI PRs:
+Environment variables:
+- REPO_PATH: [path to repo]
+- OUTPUT_DIR: [/Users/user/changelog_work]
+- LAST_FRIDAY: [YYYY-MM-DD]
+- TODAY: [YYYY-MM-DD]
 
-```bash
-# Create CLI extraction script
-cat > /tmp/extract_cli_prs.sh << 'SCRIPT_EOF'
-#!/bin/bash
+Follow the instructions in your agent file to:
+1. Extract PRs
+2. Analyze them
+3. Return a structured summary
 
-REPO_DIR="$1"
-OUTPUT_FILE="$2"
-SINCE_DATE="$3"
-UNTIL_DATE="$4"
-
-cd "$REPO_DIR" || exit 1
-
-echo "Fetching latest from remote..." >&2
-git fetch origin
-
-echo "Querying git for CLI PRs from $SINCE_DATE to $UNTIL_DATE..." >&2
-
-# CLI uses conventional commits, not PR numbers
-# Exclude release commits (chore(release))
-COMMITS=$(git log origin/main --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
-  grep -v "chore(release)" | \
-  awk '{print $1}')
-
-TOTAL=$(echo "$COMMITS" | wc -l | tr -d ' ')
-
-echo "Found $TOTAL CLI commits (excluding releases)" >&2
-echo "Extracting data..." >&2
-
-> "$OUTPUT_FILE"
-
-echo "===========================================" >> "$OUTPUT_FILE"
-echo "CLI COMMITS FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
-echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
-echo "Total Commits: $TOTAL" >> "$OUTPUT_FILE"
-echo "===========================================" >> "$OUTPUT_FILE"
-
-COUNT=0
-for COMMIT_HASH in $COMMITS; do
-    COUNT=$((COUNT + 1))
-    echo -ne "\rProcessing $COUNT/$TOTAL..." >&2
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "========== COMMIT $COMMIT_HASH ==========" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
-
-    git show "$COMMIT_HASH" --no-patch --format="Commit: %H%nAuthor: %an%nDate: %ad%nSubject: %s%n%nBody:%b" >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Files Changed ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --stat --format="" | head -15 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "--- Diff Sample (first 80 lines) ---" >> "$OUTPUT_FILE"
-    git show "$COMMIT_HASH" --format="" | head -80 >> "$OUTPUT_FILE"
-
-    echo "" >> "$OUTPUT_FILE"
-    echo "=====================================" >> "$OUTPUT_FILE"
-done
-
-echo -e "\n\nDone! Extracted data for $COUNT PRs" >&2
-echo "File: $OUTPUT_FILE" >&2
-ls -lh "$OUTPUT_FILE" >&2
-SCRIPT_EOF
-
-chmod +x /tmp/extract_cli_prs.sh
-
-# Run extraction
-PR_DATA_FILE="$OUTPUT_DIR/pr_data_cli_${TODAY}.txt"
-/tmp/extract_cli_prs.sh "$CLI_REPO" "$PR_DATA_FILE" "$LAST_FRIDAY" "$TODAY"
+Your agent file is: .claude/agents/extract-analyze-[repo].md
+Read that file and execute its instructions.
 ```
 
-**Analyze CLI PRs:**
+### Launch Agents in Parallel
 
-Read the PR data file in chunks and analyze directly. Do NOT create Python scripts or permanent analysis files.
+Use a single message with multiple Task tool calls:
 
-**For each PR, evaluate:**
-1. **Is it customer-facing?**
-   - YES: New commands, command enhancements, bug fixes users notice, output improvements
-   - NO: Internal refactoring, dependency updates (unless security), tests, CI/CD, build config
+**If PROCESS_CONSOLE:**
+```
+Task: extract-analyze-console
+Description: Extract and analyze Console PRs
+Prompt: [formatted prompt with env vars as above]
+Subagent: general-purpose
+```
 
-2. **What type of change?**
-   - **feat:** New commands or command features → Usually customer-facing
-   - **fix:** Bug fixes → Customer-facing if user-impacting
-   - **docs:** Documentation → May be customer-facing
-   - **refactor/chore:** Internal → Usually skip
+**If PROCESS_MCP:**
+```
+Task: extract-analyze-mcp
+Description: Extract and analyze MCP PRs
+Prompt: [formatted prompt with env vars]
+Subagent: general-purpose
+```
 
-3. **Is it H2-worthy or Fixes-worthy?**
-   - **H2:** New commands, major command enhancements, breaking changes
-   - **Fixes:** Bug fixes, minor improvements, flag additions, output tweaks
+**If PROCESS_CLI:**
+```
+Task: extract-analyze-cli
+Description: Extract and analyze CLI commits
+Prompt: [formatted prompt with env vars]
+Subagent: general-purpose
+```
 
-**Store CLI findings** for triage report and changelog generation.
+**If PROCESS_STORAGE:**
+```
+Task: extract-analyze-storage
+Description: Extract and analyze Storage PRs
+Prompt: [formatted prompt with env vars]
+Subagent: general-purpose
+```
 
-## Step 7: Generate Combined Triage Report
+**If PROCESS_COMPUTE:**
+```
+Task: extract-analyze-compute
+Description: Extract and analyze Compute PRs (exploratory)
+Prompt: [formatted prompt with env vars]
+Subagent: general-purpose
+```
 
-Create a single triage report with sections for each processed repo:
+**Example of launching 3 agents in parallel:**
+```
+I'm launching 3 extraction agents in parallel: Console, MCP, and CLI.
+
+[Three Task tool calls in a single message]
+```
+
+## Step 5: Collect Agent Results
+
+Each agent will return a structured summary. Save their outputs:
+
+- Console: `CONSOLE_SUMMARY`
+- MCP: `MCP_SUMMARY`
+- CLI: `CLI_SUMMARY`
+- Storage: `STORAGE_SUMMARY`
+- Compute: `COMPUTE_SUMMARY`
+
+Check for failures. If any agent failed, note it and continue with successful agents.
+
+## Step 6: Generate Combined Triage Report
+
+Compile all agent summaries into a single triage report file.
 
 **File:** `$OUTPUT_DIR/triage_report_${NEXT_FRIDAY}.md`
 
-**Format:**
+**Structure:**
 
 ```markdown
 # Changelog Triage Report
@@ -479,130 +225,131 @@ Create a single triage report with sections for each processed repo:
 
 ---
 
-## CONSOLE ([X] PRs)
-
-### INCLUDE - Customer-Facing Features ([count] PRs)
-
-[Console items with clickable GitHub links]
-
-### EXCLUDE - Internal/Infrastructure ([count] PRs)
-
-[Console excluded items]
-
-### LAKEBASE-SPECIFIC FEATURES ([count] PRs)
-
-[Lakebase items]
+[Insert CONSOLE_SUMMARY if processed]
 
 ---
 
-## MCP SERVER ([X] PRs)
-
-### INCLUDE - Customer-Facing ([count] PRs)
-
-[MCP items with clickable GitHub links]
-
-### EXCLUDE - Internal/Maintenance ([count] PRs)
-
-[MCP excluded items]
+[Insert MCP_SUMMARY if processed]
 
 ---
 
-## CLI ([X] PRs)
+[Insert CLI_SUMMARY if processed]
 
-### INCLUDE - Customer-Facing ([count] PRs)
+---
 
-[CLI items with clickable GitHub links]
+[Insert STORAGE_SUMMARY if processed]
 
-### EXCLUDE - Internal/Maintenance ([count] PRs)
+---
 
-[CLI excluded items]
+[Insert COMPUTE_SUMMARY if processed]
 
 ---
 
 ## COMBINED SUMMARY
 
-**Total PRs Analyzed:** [count across all repos]
-**Customer-Facing:** [count]
-**Excluded:** [count]
-**Lakebase-Specific:** [count]
+**Total PRs Analyzed:** [sum across all repos]
+**Customer-Facing:** [sum]
+**Excluded:** [sum]
+**Lakebase-Specific:** [from Console only]
 
 **Breakdown by Repository:**
 - Console: [X] PRs ([Y] customer-facing)
 - MCP Server: [X] PRs ([Y] customer-facing)
 - CLI: [X] PRs ([Y] customer-facing)
+- Storage: [X] PRs ([Y] customer-facing)
+- Compute: [X] PRs ([Y] customer-facing)
+
+**Key Themes This Week:**
+[Identify 3-5 major themes across all repos]
 ```
 
-## Step 7: Generate Changelog File
+## Step 7: Generate Changelog Draft
 
-Create the publication-ready changelog:
+Read the golden examples file: `.claude/golden_changelog_examples.md`
+
+Using the agent summaries and golden examples, draft the changelog.
 
 **File:** `content/changelog/${NEXT_FRIDAY}.md`
 
-**Structure:**
+### Drafting Guidelines
+
+1. **Read golden examples** to understand:
+   - Voice and tone
+   - Structure patterns (what → how → why)
+   - Length guidelines (2-3 sentences + benefit)
+   - H2 vs Fixes decisions
+
+2. **Process agent recommendations:**
+   - Agents suggest H2 or Fixes for each item
+   - Use your judgment + golden examples to refine
+   - Group related items across repos when appropriate
+   - Write in natural, conversational language
+
+3. **Structure:**
 
 ```markdown
 ---
-title: [Leave as TBD - writer will update]
+title: TBD
 ---
 
-[Console H2 features if any]
+[H2 entries from all repos - order by impact/importance]
 
-[MCP H2 features if any]
+## [Feature title from Console/MCP/CLI/Storage/Compute]
 
-[Other repo H2 features]
+[2-3 sentences explaining what changed and why it matters. Follow golden examples.]
+
+[Optional: Screenshot reference]
+[Optional: Code example]
+
+For more information, see [relevant docs](/docs/path).
+
+## [Another feature]
+
+[Same pattern]
 
 <details>
 <summary>**Fixes & improvements**</summary>
 
-[Console fixes]
-[MCP fixes]
-[Other repo fixes]
+[Bullets from all repos, grouped by area if it makes sense]
+- **[Repo/Area]:** [Brief description of fix/improvement]
+- [More items]
 
 </details>
 ```
 
-**Voice Guidelines:**
-- Humans writing for other humans
-- Straightforward, clear, natural language
-- NO marketing speak, NO trendy dev lingo
-- Be factual and practical
+4. **Voice reminders:**
+   - Start with "We've added..." or "You can now..."
+   - Include specific examples (branch names, numbers, etc.)
+   - Focus on user benefit, not implementation
+   - Natural language, no marketing speak
+   - 2-3 sentences for H2 descriptions
 
-**Ordering:**
-- H2 sections: Major features first, ordered by impact/size
-- Console feature enhancements (multiple related PRs) should be H2, not buried in Fixes
-- Fixes: Ordered by impact/importance, not by repo
-- Natural grouping in Fixes (e.g., "## Neon Console", "## Postgres extensions") is good for organizing related small items
-
-**Examples from real changelogs:**
-- "We've doubled our default storage quota from 8TB to 16TB"
-- "## MCP Server: Schema diff and migration generation"
-- "Fixed VPC endpoints to properly show 'new' state endpoints"
+5. **Cross-repo grouping:**
+   - If MCP and CLI both relate to same feature, mention both in one H2
+   - Example: "MCP Server onboarding" can mention CLI's related change
 
 ## Step 8: Generate Summary
+
+Output a final summary for the user:
 
 ```
 === CHANGELOG GENERATION COMPLETE ===
 
 📊 Repositories Processed:
-- Console: X PRs ([Y] customer-facing)
-- MCP Server: X PRs ([Y] customer-facing)
-- CLI: X PRs ([Y] customer-facing)
+[List with PR counts and customer-facing counts]
 
 📁 Files Generated:
-- Triage report: ../changelog_work/triage_report_YYYY-MM-DD.md
-- Changelog: content/changelog/YYYY-MM-DD.md
-- PR data files:
-  - ../changelog_work/pr_data_console_YYYY-MM-DD.txt
-  - ../changelog_work/pr_data_mcp_YYYY-MM-DD.txt
-  - ../changelog_work/pr_data_cli_YYYY-MM-DD.txt
+- Triage report: [path]
+- Changelog: [path]
+- PR data files: [list paths]
 
 📝 Changelog Summary:
-- Main features (H2): X
-- Fixes & improvements: Y
+- Main features (H2): [count]
+- Fixes & improvements: [count]
 
 📋 Next Steps:
 1. Review triage report for accuracy
-2. Review and edit changelog
+2. Review and edit changelog draft
 3. Update title after reviewing content
 4. Add screenshots to /public/docs/changelog/
 5. Run through Grammarly
@@ -611,24 +358,19 @@ title: [Leave as TBD - writer will update]
 8. Merge and publish on Friday
 ```
 
-## Tips for Analysis
+## Error Handling
 
-**Console:**
-- Skip: Admin tools, Vercel integration, billing internals, CI/CD
-- Include: UI changes, bug fixes users notice, new features
-- Watch for: Lakebase-specific PRs (`__IS_NEON_VARIANT__`)
+If any agent fails:
+- Note the failure in summary
+- Continue with successful agents
+- Generate triage report and changelog with available data
+- Warn user about missing repo data
 
-**MCP:**
-- Skip: Dependency updates, refactoring, tests
-- Include: New tools, bug fixes, important docs
-- Most features are customer-facing (small focused product)
+## Notes
 
-**CLI:**
-- Skip: Dependency updates, refactoring, tests, build config
-- Include: New commands, command enhancements, bug fixes, output improvements
-- Most features are customer-facing (developer tool)
-
-**General:**
-- Read actual diffs, don't just rely on PR titles
-- Consider user impact: What can they now do?
-- When in doubt, include (writers review anyway)
+- Agents run autonomously - you won't see their intermediate steps
+- Each agent returns a final summary with all its decisions
+- Your job is to compile summaries and draft the changelog
+- Use golden examples extensively when drafting
+- Be concise in narration - let the agents do the work
+- The triage report shows all agent reasoning for transparency
