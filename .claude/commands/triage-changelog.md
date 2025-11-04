@@ -33,9 +33,9 @@ Check if user provided repo selection, otherwise default to all.
 **Available repositories:**
 - `console` - Neon Console (neon-cloud repo)
 - `mcp` - MCP Server (mcp-server-neon repo)
+- `cli` - Neon CLI (neonctl repo)
 
 **Future repositories:**
-- `cli` - Neon CLI (neonctl repo)
 - `serverless` - Serverless Driver
 - `storage` - Storage (hadron repo)
 - `control-plane` - Control Plane (neon-cloud repo, different branch)
@@ -43,9 +43,9 @@ Check if user provided repo selection, otherwise default to all.
 - `proxy` - Proxy (hadron repo)
 - `drizzle` - Drizzle Studio
 
-**Default:** Process Console + MCP
+**Default:** Process Console + MCP + CLI
 
-Ask user: "Which repositories would you like to process? (console, mcp, or all - default: all)"
+Ask user: "Which repositories would you like to process? (console, mcp, cli, or all - default: all)"
 
 ## Step 2: Setup Paths
 
@@ -86,6 +86,21 @@ if [ -z "$MCP_REPO" ] || [ ! -d "$MCP_REPO" ]; then
   echo "Could not auto-detect mcp-server-neon repository."
   echo "Please provide the path to mcp-server-neon repo:"
   read MCP_REPO
+fi
+
+# Auto-detect neonctl repo (CLI)
+if [ -d "../neonctl" ]; then
+  CLI_REPO="../neonctl"
+elif [ -d "~/Documents/GitHub/neonctl" ]; then
+  CLI_REPO=~/Documents/GitHub/neonctl
+elif [ -d "../../neonctl" ]; then
+  CLI_REPO="../../neonctl"
+fi
+
+if [ -z "$CLI_REPO" ] || [ ! -d "$CLI_REPO" ]; then
+  echo "Could not auto-detect neonctl repository."
+  echo "Please provide the path to neonctl repo:"
+  read CLI_REPO
 fi
 ```
 
@@ -350,7 +365,103 @@ Read the PR data file in chunks and analyze directly. Do NOT create Python scrip
 
 **Store MCP findings** for triage report and changelog generation.
 
-## Step 6: Generate Combined Triage Report
+## Step 6: Process CLI (if enabled)
+
+Extract and analyze CLI PRs:
+
+```bash
+# Create CLI extraction script
+cat > /tmp/extract_cli_prs.sh << 'SCRIPT_EOF'
+#!/bin/bash
+
+REPO_DIR="$1"
+OUTPUT_FILE="$2"
+SINCE_DATE="$3"
+UNTIL_DATE="$4"
+
+cd "$REPO_DIR" || exit 1
+
+echo "Fetching latest from remote..." >&2
+git fetch origin
+
+echo "Querying git for CLI PRs from $SINCE_DATE to $UNTIL_DATE..." >&2
+
+# CLI uses conventional commits, not PR numbers
+# Exclude release commits (chore(release))
+COMMITS=$(git log origin/main --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
+  grep -v "chore(release)" | \
+  awk '{print $1}')
+
+TOTAL=$(echo "$COMMITS" | wc -l | tr -d ' ')
+
+echo "Found $TOTAL CLI commits (excluding releases)" >&2
+echo "Extracting data..." >&2
+
+> "$OUTPUT_FILE"
+
+echo "===========================================" >> "$OUTPUT_FILE"
+echo "CLI COMMITS FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
+echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
+echo "Total Commits: $TOTAL" >> "$OUTPUT_FILE"
+echo "===========================================" >> "$OUTPUT_FILE"
+
+COUNT=0
+for COMMIT_HASH in $COMMITS; do
+    COUNT=$((COUNT + 1))
+    echo -ne "\rProcessing $COUNT/$TOTAL..." >&2
+
+    echo "" >> "$OUTPUT_FILE"
+    echo "========== COMMIT $COMMIT_HASH ==========" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+
+    git show "$COMMIT_HASH" --no-patch --format="Commit: %H%nAuthor: %an%nDate: %ad%nSubject: %s%n%nBody:%b" >> "$OUTPUT_FILE"
+
+    echo "" >> "$OUTPUT_FILE"
+    echo "--- Files Changed ---" >> "$OUTPUT_FILE"
+    git show "$COMMIT_HASH" --stat --format="" | head -15 >> "$OUTPUT_FILE"
+
+    echo "" >> "$OUTPUT_FILE"
+    echo "--- Diff Sample (first 80 lines) ---" >> "$OUTPUT_FILE"
+    git show "$COMMIT_HASH" --format="" | head -80 >> "$OUTPUT_FILE"
+
+    echo "" >> "$OUTPUT_FILE"
+    echo "=====================================" >> "$OUTPUT_FILE"
+done
+
+echo -e "\n\nDone! Extracted data for $COUNT PRs" >&2
+echo "File: $OUTPUT_FILE" >&2
+ls -lh "$OUTPUT_FILE" >&2
+SCRIPT_EOF
+
+chmod +x /tmp/extract_cli_prs.sh
+
+# Run extraction
+PR_DATA_FILE="$OUTPUT_DIR/pr_data_cli_${TODAY}.txt"
+/tmp/extract_cli_prs.sh "$CLI_REPO" "$PR_DATA_FILE" "$LAST_FRIDAY" "$TODAY"
+```
+
+**Analyze CLI PRs:**
+
+Read the PR data file in chunks and analyze directly. Do NOT create Python scripts or permanent analysis files.
+
+**For each PR, evaluate:**
+1. **Is it customer-facing?**
+   - YES: New commands, command enhancements, bug fixes users notice, output improvements
+   - NO: Internal refactoring, dependency updates (unless security), tests, CI/CD, build config
+
+2. **What type of change?**
+   - **feat:** New commands or command features → Usually customer-facing
+   - **fix:** Bug fixes → Customer-facing if user-impacting
+   - **docs:** Documentation → May be customer-facing
+   - **refactor/chore:** Internal → Usually skip
+
+3. **Is it H2-worthy or Fixes-worthy?**
+   - **H2:** New commands, major command enhancements, breaking changes
+   - **Fixes:** Bug fixes, minor improvements, flag additions, output tweaks
+
+**Store CLI findings** for triage report and changelog generation.
+
+## Step 7: Generate Combined Triage Report
 
 Create a single triage report with sections for each processed repo:
 
@@ -396,6 +507,18 @@ Create a single triage report with sections for each processed repo:
 
 ---
 
+## CLI ([X] PRs)
+
+### INCLUDE - Customer-Facing ([count] PRs)
+
+[CLI items with clickable GitHub links]
+
+### EXCLUDE - Internal/Maintenance ([count] PRs)
+
+[CLI excluded items]
+
+---
+
 ## COMBINED SUMMARY
 
 **Total PRs Analyzed:** [count across all repos]
@@ -406,6 +529,7 @@ Create a single triage report with sections for each processed repo:
 **Breakdown by Repository:**
 - Console: [X] PRs ([Y] customer-facing)
 - MCP Server: [X] PRs ([Y] customer-facing)
+- CLI: [X] PRs ([Y] customer-facing)
 ```
 
 ## Step 7: Generate Changelog File
@@ -462,6 +586,7 @@ title: [Leave as TBD - writer will update]
 📊 Repositories Processed:
 - Console: X PRs ([Y] customer-facing)
 - MCP Server: X PRs ([Y] customer-facing)
+- CLI: X PRs ([Y] customer-facing)
 
 📁 Files Generated:
 - Triage report: ../changelog_work/triage_report_YYYY-MM-DD.md
@@ -469,6 +594,7 @@ title: [Leave as TBD - writer will update]
 - PR data files:
   - ../changelog_work/pr_data_console_YYYY-MM-DD.txt
   - ../changelog_work/pr_data_mcp_YYYY-MM-DD.txt
+  - ../changelog_work/pr_data_cli_YYYY-MM-DD.txt
 
 📝 Changelog Summary:
 - Main features (H2): X
@@ -496,6 +622,11 @@ title: [Leave as TBD - writer will update]
 - Skip: Dependency updates, refactoring, tests
 - Include: New tools, bug fixes, important docs
 - Most features are customer-facing (small focused product)
+
+**CLI:**
+- Skip: Dependency updates, refactoring, tests, build config
+- Include: New commands, command enhancements, bug fixes, output improvements
+- Most features are customer-facing (developer tool)
 
 **General:**
 - Read actual diffs, don't just rely on PR titles
