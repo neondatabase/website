@@ -1,27 +1,35 @@
 module.exports = {
   siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com',
   exclude: [
-    '/blog/wp-draft-post-preview-page',
-    '/blog/rss.xml',
-    '/docs/changelog/rss.xml',
-    '/last-week-in-aws',
-    '/ping-thing',
+    // API routes
+    '/api/*',
+
+    // RSS feeds
+    '**/rss.xml',
+
+    // Blog pages (handled by blog-sitemap.xml)
+    '/blog/*',
+
+    // PostgreSQL Tutorial (handled by sitemap-postgres.xml)
+    '/postgresql/*',
+
+    // Home page variants
+    '/home',
     '/all-things-open-2023',
-    '/stackoverflow',
     '/cfe',
     '/devs',
-    '/github',
-    '/youtube',
     '/education',
-    '/pgt',
     '/fireship',
+    '/github',
+    '/last-week-in-aws',
+    '/ping-thing',
+    '/pgt',
     '/radio',
+    '/stackoverflow',
+    '/youtube',
+
+    // Other pages
     '/thank-you',
-    '/blog-sitemap.xml',
-    '/blog/*',
-    '/guides/rss.xml',
-    '/postgresql/rss.xml',
-    '/enterprise',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -30,29 +38,29 @@ module.exports = {
       {
         userAgent: '*',
         disallow: [
-          '/blog/wp-draft-post-preview-page$',
-          '/last-week-in-aws$',
-          '/ping-thing$',
+          // Home page variants
+          '/home$',
           '/all-things-open-2023$',
-          '/stackoverflow$',
-          '/github$',
-          '/youtube$',
-          '/education$',
-          '/pgt$',
-          '/fireship$',
-          '/radio$',
-          '/docs/postgres*',
-          '/thank-you$',
           '/cfe$',
           '/devs$',
-          '/home$',
-          '/enterprise$',
+          '/education$',
+          '/fireship$',
+          '/github$',
+          '/last-week-in-aws$',
+          '/ping-thing$',
+          '/pgt$',
+          '/radio$',
+          '/stackoverflow$',
+          '/youtube$',
+
+          // Other pages
+          '/thank-you$',
         ],
       },
     ],
     additionalSitemaps: [
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`,
-      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/sitemap-postgres.xml`,
     ],
   },
 };
