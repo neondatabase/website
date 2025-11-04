@@ -4,8 +4,8 @@ module.exports = {
     // API routes
     '/api/*',
 
-    // RSS feeds
-    '**/rss.xml',
+    // XML routes (RSS feeds and sitemaps)
+    '**/*.xml',
 
     // Blog pages (handled by blog-sitemap.xml)
     '/blog/*',
