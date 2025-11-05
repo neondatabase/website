@@ -6,7 +6,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Link from 'components/shared/link';
 
-import { SECTIONS } from '../data/sections';
+const SECTIONS = [
+  { id: 'ai', title: 'AI' },
+  { id: 'autoscaling', title: 'Advanced Autoscaling' },
+  { id: 'instant-branching', title: 'Instant Branching' },
+  { id: 'real-world-performance', title: 'Real-World Performance' },
+  { id: 'production-grade-features', title: 'Production-Grade Features' },
+];
 
 const THROTTLE_DELAY = 100;
 const HEADER_OFFSET = 64;
