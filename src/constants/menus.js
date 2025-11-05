@@ -116,7 +116,8 @@ export default {
               iconGradient: RocketGradientIcon,
               title: 'Launchpad',
               description: 'No-signup flow',
-              to: LINKS.ai,
+              to: LINKS.launchpad,
+              isExternal: true,
             },
             {
               icon: MigrationIcon,
