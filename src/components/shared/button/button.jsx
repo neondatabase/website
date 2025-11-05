@@ -27,6 +27,7 @@ const styles = {
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
     'black-outline': 'bg-transparent text-white border border-[#2E3038] hover:border-primary-2',
     'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
+    'gray-40-outline': 'bg-white/0.02 border border-gray-new-40 text-white hover:border-white',
     'gray-outline':
       'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
     'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',
@@ -36,6 +37,7 @@ const styles = {
       'bg-[#0D0D0D] text-white border transition-shadow duration-500 border-green-45 hover:shadow-[0px_8px_30px_0px_rgba(0,229,153,.16)]',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
+    'green-filled': 'bg-green-52 text-black hover:bg-primary-1',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
     'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
