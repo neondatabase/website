@@ -12,27 +12,25 @@ updatedOn: '2025-11-04T14:08:21.560Z'
 
 ## The `init` command
 
-The `init` command helps you quickly connect your app to Neon and enable the Neon integration in your Cursor chat. The command configures the Neon MCP (Model Context Protocol) Server and creating context files that give your AI assistant full knowledge about your Neon project and best practices.
+The `init` command installs the Neon MCP (Model Context Protocol) Server and authenticates it to Neon using a Neon API key.
 
 ### Usage
 
-Run this command in the root directory of your application:
+From the CLI:
 
 ```bash
 neon init
 ```
 
-Or use `npx` without installing the CLI globally:
+npx:
+
+You can also run the `init` command in the root directory of your app with `npx` instead of installing the Neon CLI locally:
 
 ```bash
 npx neonctl@latest init
 ```
 
-### What it does
-
-When you run `neon init`, the command **Configures the Neon MCP Server**, enabling you to interact with your databases, branches, and projects.
-
-After setup, you can ask your Cursor chat to "Get started with Neon using MCP Resource".
+After runnign the command, you can ask your Cursor chat to "Get started with Neon using MCP Resource", as shown in the example below. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, icluding configuring a database connection from your app.
 
 ### Options
 
