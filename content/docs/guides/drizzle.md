@@ -2,7 +2,7 @@
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.264Z'
+updatedOn: '2025-11-05T08:57:51.482Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
