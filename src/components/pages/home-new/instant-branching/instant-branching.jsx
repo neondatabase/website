@@ -5,7 +5,7 @@ const InstantBranching = () => (
     className="instant-branching safe-paddings relative h-screen bg-black-pure"
     id="instant-branching"
   >
-    <Container className="relative flex h-full flex-col items-center justify-center" size="1344">
+    <Container className="relative flex h-full flex-col items-center justify-center" size="1600">
       Instant Branching section
     </Container>
   </section>
