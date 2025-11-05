@@ -62,6 +62,7 @@ export default {
   whyNeon: '/docs/get-started/why-neon',
   migrationIntro: '/docs/import/migrate-intro',
   dataApi: '/docs/data-api/get-started',
+
   // Legal
   dpa: '/dpa',
   terms: '/terms-of-service',
@@ -74,23 +75,27 @@ export default {
   sensitiveDataTerms: '/sensitive-data-terms',
   hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
+
   // Console
   console: 'https://console.neon.tech',
   login: 'https://console.neon.tech/login',
   signup: 'https://console.neon.tech/signup',
   signupCredits: 'https://fyi.neon.tech/credits',
   consoleSupport: 'https://console.neon.tech/app/projects?modal=support',
+
   // Socials
   discord: 'https://discord.gg/92vNTzKDGp',
   github: 'https://github.com/neondatabase/neon',
   linkedin: 'https://www.linkedin.com/company/neon-inc/',
   twitter: 'https://twitter.com/neondatabase/',
   youtube: 'https://www.youtube.com/channel/UCoMzQTJSIr7-RU1QbomQI2w',
+
   // Copilot
   githubCopilot: 'https://github.com/marketplace/neon-database',
   discordCopilot: 'https://discord.com/channels/1176467419317940276/1222626436502782013',
   vscodeCopilot:
     'https://marketplace.visualstudio.com/items?itemName=buildwithlayer.neon-integration-expert-15j6N',
+
   // Compliance
   trust: 'https://trust.neon.com',
   certCCPA: 'https://trust.neon.com/?itemUid=4064ac33-7b48-407b-aed7-ce02971d1ec1',
@@ -99,8 +104,10 @@ export default {
   certISO27701: 'https://trust.neon.com/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
   certSOC2: 'https://trust.neon.com/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
   certHIPAA: 'https://neon.com/docs/security/hipaa',
+
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
+  launchpad: 'https://neon.new/',
 };
