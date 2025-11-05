@@ -11,14 +11,14 @@ import SpeedAndScale from 'components/pages/home-new/speed-and-scale';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.homeNew);
+export const metadata = getMetadata(SEO_DATA.index);
 
 getMetadata({
-  ...SEO_DATA.homeNew,
+  ...SEO_DATA.index,
   robotsNoindex: 'noindex',
 });
 
-const NewHomepage = () => (
+const Homepage = () => (
   <>
     <Hero />
     <SectionsWithToc>
@@ -34,6 +34,6 @@ const NewHomepage = () => (
   </>
 );
 
-export default NewHomepage;
+export default Homepage;
 
 export const revalidate = false;
