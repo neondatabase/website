@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-10-10T13:19:39.264Z'
 ---
 
+<CopyPrompt src="/prompts/drizzle-prompt.md" 
+description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Drizzle ORM."/>
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to connect from Drizzle</p>
