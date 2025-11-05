@@ -182,10 +182,18 @@ The response object includes an `access_token` value, required for making reques
 
 </Steps>
 
-## Example OAuth applications
+## Example OAuth application
 
-For an example application that leverages the Neon OAuth integration, see the [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application. You can find the application code on GitHub.
+For a complete working example of a Neon OAuth integration, check out the **Neon Branches Visualizer** application. This app demonstrates how to:
+
+- Implement the OAuth flow with Neon
+- Handle user authorization and token exchange
+- Make authenticated API requests to manage Neon resources
+- Build a user-friendly interface for Neon account management
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app showcasing how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
+<a href="https://neon-experimental.vercel.app" description="Try the live demo application" icon="openai">View live demo</a>
+<a href="https://github.com/neondatabase/neon-branches-visualizer" description="Explore the source code and implementation" icon="github">View on GitHub</a>
 </DetailIconCards>
+
+The source code provides a practical reference for implementing OAuth with Neon in your own applications.

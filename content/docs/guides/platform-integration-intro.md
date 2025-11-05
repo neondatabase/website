@@ -5,7 +5,8 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
-updatedOn: '2025-09-16T17:39:40.074Z'
+redirectTo: /docs/guides/platform-integration-overview
+updatedOn: '2025-11-05T00:00:00.000Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
