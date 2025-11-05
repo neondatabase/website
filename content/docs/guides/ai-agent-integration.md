@@ -8,8 +8,6 @@ updatedOn: '2025-11-05T00:00:00.000Z'
 
 Neon is purpose-built for AI agent platforms and code generation services that need to provision, version, and manage Postgres databases at scale. With instant provisioning, database branching, and a two-organization structure that includes sponsored free-tier projects, Neon makes it easy to offer Postgres to your users from day one.
 
-<CTA title="Join the Neon Agent Program" description="Get sponsored free-tier projects, $30k in credits, agent-specific pricing, and dedicated support for your agent platform." buttonText="Apply now" buttonUrl="/use-cases/ai-agents"></CTA>
-
 ## Why Neon for AI agents?
 
 AI agent platforms have unique requirements that traditional Postgres hosting can't easily meet:
@@ -30,6 +28,7 @@ Unlike standard embedded Postgres integrations, AI agent platforms typically nee
 Your **sponsored organization** hosts databases for your free-tier users at no cost to you. Neon subsidizes these projects so you can offer a generous free tier without infrastructure costs.
 
 **Key details:**
+
 - Includes Scale plan features
 - Individual projects have Free plan resource limits
 - Supports up to 30,000 projects by default
@@ -43,6 +42,7 @@ Use this organization for users who haven't upgraded to your platform's paid pla
 Your **paid organization** hosts databases for your paying users with agent-specific pricing and flexible resource limits.
 
 **Key details:**
+
 - Scale plan features with agent pricing
 - $30,000 in initial credits
 - Compute billed at $0.106/hour (lower than standard Scale pricing)
@@ -205,7 +205,7 @@ For more details, see [Database versioning for AI agents](/docs/ai/ai-database-v
 
 ## Isolated development environments
 
-A killer feature for agent platforms: give each user completely isolated development environments alongside their production database.
+Agent platforms can give each user completely isolated development environments alongside their production database.
 
 ### The development workflow
 
@@ -215,6 +215,7 @@ For each user project, you can create:
 2. **Development branches** — Isolated copies for testing, development, and experimentation
 
 Development branches are:
+
 - **Instant to create** — Copy-on-write means instant branch creation
 - **Fully isolated** — Separate compute, no impact on production
 - **Cost-efficient** — Only pay for storage differences and actual compute usage
@@ -262,6 +263,7 @@ npm install @neondatabase/toolkit
 ```
 
 The toolkit includes:
+
 - Neon API client for project management
 - Neon serverless driver for querying databases
 - Purpose-built for AI agent workflows
@@ -269,6 +271,7 @@ The toolkit includes:
 ### Rate limits
 
 Agent platforms receive higher rate limits on:
+
 - Management API (project creation, branch operations)
 - Data API (PostgREST-compatible data access)
 
@@ -288,6 +291,7 @@ curl --request GET \
 ```
 
 Available metrics:
+
 - `active_time_seconds` — Compute active time
 - `compute_time_seconds` — CPU seconds consumed
 - `written_data_bytes` — Data written
@@ -326,25 +330,25 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 
 The agent plan uses usage-based pricing with agent-specific rates:
 
-| Resource | Agent Plan |
-|----------|------------|
-| **Projects** | Custom limits (30k default) |
-| **Branches per project** | Custom limits available |
-| **Compute** | $0.106 per CU-hour |
-| **Storage** | $0.35 per GB-month |
-| **Instant Restore (PITR)** | $0.2 per GB-month |
-| **Management API** | Higher rate limits |
-| **Data API** | Higher rate limits |
-| **Support** | Shared Slack channel |
+| Resource                   | Agent Plan                  |
+| -------------------------- | --------------------------- |
+| **Projects**               | Custom limits (30k default) |
+| **Branches per project**   | Custom limits available     |
+| **Compute**                | $0.106 per CU-hour          |
+| **Storage**                | $0.35 per GB-month          |
+| **Instant Restore (PITR)** | $0.2 per GB-month           |
+| **Management API**         | Higher rate limits          |
+| **Data API**               | Higher rate limits          |
+| **Support**                | Shared Slack channel        |
 
 ### Program benefits
 
-| Benefit | Description |
-|---------|-------------|
+| Benefit                 | Description                                         |
+| ----------------------- | --------------------------------------------------- |
 | **Free tier sponsored** | Neon sponsors up to 30,000 free-tier projects/month |
-| **Usage credits** | $30,000 in initial credits for paid organization |
-| **Co-marketing** | Blog posts, social promotion, hackathons |
-| **Dedicated support** | Shared Slack channel with Neon team |
+| **Usage credits**       | $30,000 in initial credits for paid organization    |
+| **Co-marketing**        | Blog posts, social promotion, hackathons            |
+| **Dedicated support**   | Shared Slack channel with Neon team                 |
 
 For complete details, see [Agent plan structure and pricing](/docs/introduction/agent-plan).
 
@@ -352,25 +356,26 @@ For complete details, see [Agent plan structure and pricing](/docs/introduction/
 
 <Steps>
 
-### Apply to the agent program
+## Apply to the agent program
 
 Visit [neon.com/use-cases/ai-agents](/use-cases/ai-agents) and apply with details about your platform.
 
-### Wait for approval
+## Wait for approval
 
 The Neon team reviews applications and sets up qualified platforms.
 
-### Receive org access
+## Receive org access
 
 Once approved, Neon creates both organizations and grants you admin access plus API keys.
 
-### Start building
+## Start building
 
 Begin creating projects in the appropriate organization based on user tier:
+
 - Free users → Sponsored organization
 - Paid users → Paid organization
 
-### Implement key features
+## Implement key features
 
 - Set up project creation workflows
 - Implement database versioning with PITR and snapshots
@@ -384,15 +389,21 @@ Begin creating projects in the appropriate organization based on user tier:
 ## Additional resources
 
 <DetailIconCards>
-<a href="/docs/introduction/agent-plan" description="Understand pricing and organization structure" icon="billing">Agent plan details</a>
+
+<a href="/docs/introduction/agent-plan" description="Understand pricing and organization structure" icon="database">Agent plan details</a>
+
 <a href="/docs/ai/ai-database-versioning" description="Learn about versioning strategies" icon="branching">Database versioning</a>
+
 <a href="https://github.com/neondatabase/toolkit" description="npm package for AI agents" icon="github">Neon Toolkit</a>
+
 <a href="/docs/reference/api-reference" description="Full API documentation" icon="transactions">Neon API</a>
+
 <a href="/use-cases/ai-agents" description="Learn about Neon for agent platforms" icon="handshake">Neon for AI Agents</a>
+
 <a href="/contact-sales" description="Talk to our team" icon="todo">Contact us</a>
+
 </DetailIconCards>
 
 <Admonition type="info">
 Agent program participants have access to a dedicated Slack channel for support and can contact their Neon representative directly.
 </Admonition>
-
