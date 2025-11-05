@@ -15,6 +15,7 @@ Need to test against production data without exposing sensitive information? Ano
 Neon uses [Postgres Anonymizer](https://postgresql-anonymizer.readthedocs.io/) for static data masking, and applies masking rules when you create or update the branch. This approach gives you realistic test data while protecting user privacy and supporting compliance requirements like GDPR.
 
 **Key characteristics:**
+
 - **Static masking**: Data is masked once during branch creation or when you rerun anonymization
 - **Postgres Anonymizer integration**: Uses the [Postgres Anonymizer extension's](/docs/extensions/postgresql-anonymizer) masking functions
 - **Branch-specific rules**: Define different masking rules for each anonymized branch
@@ -109,6 +110,7 @@ From the **Data Masking** page:
 <TabItem>
 
 **Get masking rules**
+
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
@@ -116,6 +118,7 @@ GET /projects/{project_id}/branches/{branch_id}/masking_rules
 Retrieves all masking rules defined for the branch.
 
 **Update masking rules**
+
 ```bash
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
@@ -123,6 +126,7 @@ PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
 Updates masking rules for the branch. After updating rules, use the start anonymization endpoint to apply the changes.
 
 **Start anonymization**
+
 ```bash
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
@@ -130,6 +134,7 @@ POST /projects/{project_id}/branches/{branch_id}/anonymize
 Starts or restarts the anonymization process for branches in `initialized`, `error`, or `anonymized` state.
 
 **Get anonymization status**
+
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
