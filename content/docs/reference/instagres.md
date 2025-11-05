@@ -1,11 +1,13 @@
 ---
-title: Neon Launchpad
+title: Instagres
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
+redirectFrom:
+  - /docs/reference/neon-launchpad
 updatedOn: '2025-10-29T16:30:41.104Z'
 ---
 
-Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
+Instagres enables instant provisioning of a Postgres database without configuration or account creation.
 
 Built on Neon's serverless Postgres platform, it provides immediate database access for development and testing.
 
@@ -178,7 +180,7 @@ To persist a database beyond the 72-hour expiration period:
 
 The claim URL is available:
 
-- On the Neon Launchpad interface where the connection string is displayed
+- On the Instagres interface where the connection string is displayed
 - As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
 - The public claim variable is used when executing `npx get-db claim` to claim the database, which launches the browser window
 
@@ -188,7 +190,7 @@ When claiming a project, you'll be asked to choose an organization to claim it i
 
 ## Use cases
 
-Neon Launchpad is designed for scenarios requiring rapid database provisioning:
+Instagres is designed for scenarios requiring rapid database provisioning:
 
 - Development and testing environments
 - Evaluation of Neon's capabilities before committing to an account
@@ -209,7 +211,7 @@ The service uses the following default settings:
 
 ## Technical implementation
 
-The Neon Launchpad service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences in your own application using the [claimable database APIs](/docs/workflows/claimable-database-integration).
+The Instagres service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences in your own application using the [claimable database APIs](/docs/workflows/claimable-database-integration).
 
 ## Resources
 
