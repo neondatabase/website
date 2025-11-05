@@ -13,11 +13,6 @@ import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.index);
 
-getMetadata({
-  ...SEO_DATA.index,
-  robotsNoindex: 'noindex',
-});
-
 const Homepage = () => (
   <>
     <Hero />
