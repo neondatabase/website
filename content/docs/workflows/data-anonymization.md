@@ -38,7 +38,7 @@ Select **Anonymized data** as the data option when creating a new branch.
 4. In the **Create new branch** dialog:
    - Select your **Parent branch** (typically `production` or `main`)
    - (Optional) Enter a **Branch name**
-   - (Optional) Set **Expire branch after** if you want automatic cleanup
+   - (Optional) Set **Expire branch after** if you want to delete the branch automatically after a specified number of days
    - Under data options, select **Anonymized data**
 5. Click **Create**
 
