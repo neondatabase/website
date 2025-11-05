@@ -22,7 +22,7 @@ From the CLI:
 neon init
 ```
 
-npx:
+#### npx
 
 You can also run the `init` command in the root directory of your app with `npx` instead of installing the Neon CLI locally:
 
