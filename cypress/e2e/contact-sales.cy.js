@@ -4,7 +4,14 @@ describe('Contact Form', () => {
   });
 
   it('allows users to contact sales', () => {
-    cy.formSuccessSubmit();
+    // Mock zaraz for successful gtag events
+    cy.window().then((win) => {
+      Object.assign(win, {
+        zaraz: {
+          track: cy.stub().resolves().as('zarazTrackSpy'),
+        },
+      });
+    });
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
@@ -38,7 +45,14 @@ describe('Contact Form', () => {
   });
 
   it('displays an error message when there is server error', () => {
-    cy.formErrorSubmit();
+    // Mock zaraz for failed gtag events
+    cy.window().then((win) => {
+      Object.assign(win, {
+        zaraz: {
+          track: cy.stub().rejects(new Error('Network error')).as('zarazTrackSpy'),
+        },
+      });
+    });
 
     cy.get("input[name='firstname']").type('John');
     cy.get("input[name='lastname']").type('Doe');
@@ -48,7 +62,6 @@ describe('Contact Form', () => {
     cy.get("textarea[name='message']").type('This is a test message');
     cy.get('form').submit();
 
-    cy.wait('@formErrorSubmit');
     cy.getByData('error-message').should('exist').contains('technical problem');
   });
 });
