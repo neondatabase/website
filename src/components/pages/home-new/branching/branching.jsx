@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-const InstantBranching = () => (
+const Branching = () => (
   <section
     className="instant-branching safe-paddings relative h-screen scroll-mt-16 lg:scroll-mt-0"
     id="instant-branching"
@@ -11,4 +11,4 @@ const InstantBranching = () => (
   </section>
 );
 
-export default InstantBranching;
+export default Branching;

@@ -1,13 +1,13 @@
 import AI from 'components/pages/home-new/ai';
-import AutoScaling from 'components/pages/home-new/auto-scaling';
-import BackedByGiants from 'components/pages/home-new/backed-by-giants';
-import Cta from 'components/pages/home-new/cta';
+import Autoscaling from 'components/pages/home-new/autoscaling';
+import BackedBy from 'components/pages/home-new/backed-by';
+import Branching from 'components/pages/home-new/branching';
+import CTA from 'components/pages/home-new/cta';
+import Features from 'components/pages/home-new/features';
 import Hero from 'components/pages/home-new/hero';
-import InstantBranching from 'components/pages/home-new/instant-branching';
-import ProductionGradeFeatures from 'components/pages/home-new/production-grade-features';
-import RealWorldPerfomance from 'components/pages/home-new/real-world-perfomance';
-import SectionsWithToc from 'components/pages/home-new/sections-with-toc/sections-with-toc';
-import SpeedAndScale from 'components/pages/home-new/speed-and-scale';
+import Performance from 'components/pages/home-new/performance';
+import SpeedScale from 'components/pages/home-new/speed-scale';
+import TocWrapper from 'components/pages/home-new/toc-wrapper/toc-wrapper';
 import JsonLd from 'components/shared/json-ld';
 import SEO_DATA from 'constants/seo-data';
 import { generateOrganizationSchema } from 'lib/schema';
@@ -22,16 +22,16 @@ const Homepage = () => {
     <>
       <JsonLd data={organizationSchema} />
       <Hero />
-      <SectionsWithToc>
+      <TocWrapper>
         <AI />
-        <AutoScaling />
-        <InstantBranching />
-        <RealWorldPerfomance />
-        <ProductionGradeFeatures />
-      </SectionsWithToc>
-      <SpeedAndScale />
-      <BackedByGiants />
-      <Cta />
+        <Autoscaling />
+        <Branching />
+        <Performance />
+        <Features />
+      </TocWrapper>
+      <SpeedScale />
+      <BackedBy />
+      <CTA />
     </>
   );
 };

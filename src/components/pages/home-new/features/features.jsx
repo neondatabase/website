@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-const ProductionGradeFeatures = () => (
+const Features = () => (
   <section
     className="production-grade-features safe-paddings relative h-screen scroll-mt-16 lg:scroll-mt-0"
     id="production-grade-features"
@@ -11,4 +11,4 @@ const ProductionGradeFeatures = () => (
   </section>
 );
 
-export default ProductionGradeFeatures;
+export default Features;

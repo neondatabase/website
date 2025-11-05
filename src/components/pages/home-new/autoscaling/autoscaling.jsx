@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-const AutoScaling = () => (
+const Autoscaling = () => (
   <section
     className="autoscaling safe-paddings relative h-screen scroll-mt-16 bg-[#E4F1EB] lg:scroll-mt-0"
     id="autoscaling"
@@ -14,4 +14,4 @@ const AutoScaling = () => (
   </section>
 );
 
-export default AutoScaling;
+export default Autoscaling;

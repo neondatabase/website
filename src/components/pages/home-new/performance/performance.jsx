@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-const RealWorldPerfomance = () => (
+const Performance = () => (
   <section
     className="real-word-perfomance safe-paddings relative h-screen scroll-mt-16 lg:scroll-mt-0"
     id="real-world-performance"
@@ -11,4 +11,4 @@ const RealWorldPerfomance = () => (
   </section>
 );
 
-export default RealWorldPerfomance;
+export default Performance;
