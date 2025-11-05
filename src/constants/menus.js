@@ -117,6 +117,7 @@ export default {
               title: 'Launchpad',
               description: 'No-signup flow',
               to: LINKS.launchpad,
+              isExternal: true,
             },
             {
               icon: MigrationIcon,
