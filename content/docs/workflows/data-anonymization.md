@@ -1,6 +1,6 @@
 ---
 title: Data anonymization
-subtitle: Mask sensitive data in development branches using Postgres Anonymizer
+subtitle: Mask sensitive data in development branches using PostgreSQL Anonymizer
 redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
@@ -12,13 +12,13 @@ updatedOn: '2025-10-21T09:00:11.984Z'
 
 Need to test against production data without exposing sensitive information? Anonymized branches let you create development copies with masked PII, emails, phone numbers, and other sensitive data.
 
-Neon uses [Postgres Anonymizer](https://postgresql-anonymizer.readthedocs.io/) for static data masking, and applies masking rules when you create or update the branch. This approach gives you realistic test data while protecting user privacy and supporting compliance requirements like GDPR.
+Neon uses [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/) for static data masking, and applies masking rules when you create or update the branch. This approach gives you realistic test data while protecting user privacy and supporting compliance requirements like GDPR.
 
 **Key characteristics:**
 
 - **Static masking**: Data is masked once during branch creation or when you rerun anonymization
-- **Postgres Anonymizer integration**: Uses the [Postgres Anonymizer extension's](/docs/extensions/postgresql-anonymizer) masking functions
-- **Branch-specific rules**: Define different masking rules for each anonymized branch
+- **PostgreSQL Anonymizer integration**: Uses the [PostgreSQL Anonymizer extension's](/docs/extensions/postgresql-anonymizer) masking functions
+- **Branch-specific rules**: You can define different masking rules for each anonymized Neon branch
 
 <Admonition type="info" title="Static versus dynamic masking">
 This feature uses **static masking**, which permanently transforms data in the branch when anonymization runs. Unlike dynamic masking (which masks data during queries), static masking creates an actual masked copy of the data. To get fresh data from the parent, create a new anonymized branch.
@@ -79,10 +79,10 @@ curl -X POST \
   - `schema_name`: Target schema (typically `public`)
   - `table_name`: Table containing sensitive data
   - `column_name`: Column to mask
-  - `masking_function`: Postgres Anonymizer function to apply
+  - `masking_function`: PostgreSQL Anonymizer function to apply
 - `start_anonymization` (optional): Set to `true` to automatically start anonymization after branch creation
 
-The API supports all Postgres Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
+The API supports all PostgreSQL Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
 
 </TabItem>
 
@@ -96,8 +96,8 @@ The API supports all Postgres Anonymizer masking functions, providing more optio
 
 From the **Data Masking** page:
 
-1. Select the Schema, Table, and Column you wish to mask.
-2. Choose a Masking function from the dropdown list (e.g., "Dummy Free Email" to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of Postgres Anonymizer functions, you must use the API.
+1. Select the schema, table, and column you want to mask.
+2. Choose a masking function from the dropdown list (e.g., "Dummy Free Email" to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API.
 3. Repeat for all sensitive columns.
 4. When you are ready, click `Apply Masking Rules` to start the anonymization job. You can monitor its progress on this page.
 
@@ -161,7 +161,7 @@ When you create a branch with anonymized data:
 2. You define masking rules for tables and columns containing sensitive data:
    - **Console**: The Data Masking page opens automatically after branch creation.
    - **API**: Include masking rules in the creation request or add them later via the masking rules endpoint.
-3. You apply the masking rules (in Console, click **Apply Masking Rules**), and the Postgres Anonymizer extension masks the branch data.
+3. You apply the masking rules (in Console, click **Apply Masking Rules**), and the PostgreSQL Anonymizer extension masks the branch data.
 4. You can update rules and rerun anonymization on the branch as needed.
 
 The parent branch data remains unchanged. Rerunning anonymization applies rules to the branch's current (already masked) data, not fresh data from the parent.
@@ -176,11 +176,11 @@ The branch is unavailable for connections while anonymization is in progress.
 - Rerunning anonymization works on already-masked data. Create a new branch for fresh parent data.
 - Branch is unavailable during anonymization.
 - Masking does not enforce database constraints (e.g., primary keys can be masked as NULL).
-- The Console provides a curated subset of masking functions, use the API for all [Postgres Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
+- The Console provides a curated subset of masking functions, use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
 ## Related resources
 
-- [Postgres Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/)
+- [PostgreSQL Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/)
 - [Neon branching overview](/docs/introduction/branching)
 - [Neon API reference](https://api-docs.neon.tech/reference/)
 
@@ -189,7 +189,7 @@ The branch is unavailable for connections while anonymization is in progress.
 ## Automate data anonymization with GitHub Actions
 
 <Admonition type="important">
-The GitHub Actions workflow below uses manual SQL commands with Postgres Anonymizer. For automation using the new Console/API approach documented above, wait for upcoming post-beta improvements to better support automated anonymization.
+The GitHub Actions workflow below uses manual SQL commands with PostgreSQL Anonymizer. For automation using the new Console/API approach documented above, wait for upcoming post-beta improvements to better support automated anonymization.
 </Admonition>
 
 As an interim solution, you can automate anonymized branch creation using direct SQL commands as outlined below.
