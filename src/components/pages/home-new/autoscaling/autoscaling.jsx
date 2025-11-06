@@ -37,7 +37,7 @@ const data = [
   },
 ];
 
-const AutoScaling = () => {
+const Autoscaling = () => {
   const [activeItem, setActiveItem] = useState(0);
 
   return (
@@ -58,20 +58,20 @@ const AutoScaling = () => {
 
           <div className="mt-16">
             {data.map((item, index) => (
-                <button
-                  className={clsx(
-                    'relative h-11 min-w-[134px] px-4 py-3.5 transition-colors duration-200',
-                    'text-base font-medium leading-none tracking-tight',
-                    'border border-gray-new-10 even:border-l-0',
-                    index === activeItem ? 'bg-white text-gray-new-10' : 'text-gray-new-10/80'
-                  )}
-                  key={index}
-                  type="button"
-                  onClick={() => setActiveItem(index)}
-                >
-                  {item.tab}
-                </button>
-              ))}
+              <button
+                className={clsx(
+                  'relative h-11 min-w-[134px] px-4 py-3.5 transition-colors duration-200',
+                  'text-base font-medium leading-none tracking-tight',
+                  'border border-gray-new-10 even:border-l-0',
+                  index === activeItem ? 'bg-white text-gray-new-10' : 'text-gray-new-10/80'
+                )}
+                key={index}
+                type="button"
+                onClick={() => setActiveItem(index)}
+              >
+                {item.tab}
+              </button>
+            ))}
           </div>
 
           <div className="mt-6 w-max">
@@ -120,4 +120,4 @@ const AutoScaling = () => {
   );
 };
 
-export default AutoScaling;
+export default Autoscaling;

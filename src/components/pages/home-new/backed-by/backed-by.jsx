@@ -1,6 +1,6 @@
 import Container from 'components/shared/container';
 
-const BackedByGiants = () => (
+const BackedBy = () => (
   <section className="backed-by-giants safe-paddings relative h-screen bg-[#E4F1EB]">
     <Container
       className="relative flex h-full flex-col items-center justify-center text-black"
@@ -11,4 +11,4 @@ const BackedByGiants = () => (
   </section>
 );
 
-export default BackedByGiants;
+export default BackedBy;
