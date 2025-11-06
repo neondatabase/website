@@ -109,5 +109,5 @@ export default {
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  launchpad: 'https://neon.new/',
+  instagres: 'https://neon.new/',
 };
