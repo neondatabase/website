@@ -152,7 +152,7 @@ Returns the current state (`created`, `initialized`, `initialization_error`, `an
 1. Create an anonymized branch from your production branch.
 2. Define masking rules for sensitive columns (emails, names, addresses, etc.).
 3. Apply the masking rules.
-4. Connect your development environment to the anonymized branch.
+4. [Connect](/docs/connect/connect-from-any-app) your development environment to the anonymized branch.
 5. When you need fresh data, create a new anonymized branch.
 
 ## How anonymization works
