@@ -5,7 +5,10 @@ const Features = () => (
     className="production-grade-features safe-paddings relative h-screen scroll-mt-16 lg:scroll-mt-0"
     id="production-grade-features"
   >
-    <Container className="relative flex h-full flex-col items-center justify-center" size="1600">
+    <Container
+      className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block"
+      size="1600"
+    >
       Production Grade Features section
     </Container>
   </section>

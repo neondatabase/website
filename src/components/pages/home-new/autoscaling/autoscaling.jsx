@@ -6,7 +6,7 @@ const Autoscaling = () => (
     id="autoscaling"
   >
     <Container
-      className="relative flex h-full flex-col items-center justify-center text-black"
+      className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 text-black before:block"
       size="1600"
     >
       Auto Scaling section
