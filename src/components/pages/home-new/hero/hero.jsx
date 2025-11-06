@@ -4,7 +4,7 @@ import Container from 'components/shared/container';
 import CopyIcon from 'icons/home-new/copy.inline.svg';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative h-screen bg-black-pure">
+  <section className="hero safe-paddings relative h-screen">
     <Container className="relative flex h-full flex-col items-center justify-center" size="1600">
       <HeadingLabel className="-ml-80">Ship faster with Postgres</HeadingLabel>
       <div className="mt-20 flex gap-x-5">

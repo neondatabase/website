@@ -46,10 +46,10 @@ const Autoscaling = () => {
       id="autoscaling"
     >
       <Container
-        className="relative grid grid-cols-[224px_1fr] gap-x-32 text-black before:block"
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 text-black before:block"
         size="1600"
       >
-        <div className="">
+        <div>
           <Heading
             className="max-w-[960px]"
             icon="autoscaling"

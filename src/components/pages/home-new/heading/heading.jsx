@@ -14,14 +14,18 @@ const ICONS = {
   perfomance: perfomanceIcon,
 };
 
-const Heading = ({ className = '', icon, title }) => {
+const Heading = ({ className = '', theme, icon, title }) => {
   const iconSrc = ICONS[icon];
 
   return (
     <div className={clsx('flex flex-col gap-y-14', className)}>
       {iconSrc && <Image src={iconSrc} width={56} height={56} alt="" />}
       <h2
-        className="indent-24 text-[48px] font-normal leading-dense tracking-tighter text-gray-new-40 [&>strong]:font-normal [&>strong]:text-black-pure "
+        className={clsx(
+          'indent-24 text-[48px] font-normal leading-dense tracking-tighter [&>strong]:font-normal',
+          theme === 'dark' && 'text-gray-new-50 [&>strong]:text-white',
+          theme === 'light' && 'text-gray-new-40 [&>strong]:text-black-pure'
+        )}
         dangerouslySetInnerHTML={{ __html: title }}
       />
     </div>
@@ -30,6 +34,7 @@ const Heading = ({ className = '', icon, title }) => {
 
 Heading.propTypes = {
   className: PropTypes.string,
+  theme: PropTypes.oneOf(['light', 'dark']).isRequired,
   icon: PropTypes.oneOf(ICONS.keys).isRequired,
   title: PropTypes.string.isRequired,
 };
