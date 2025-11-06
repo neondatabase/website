@@ -110,7 +110,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
                       </h3>
                     )}
                     <ul className="flex flex-col gap-4">
-                      {items.map(({ icon: Icon, title, description, to }) => (
+                      {items.map(({ icon: Icon, title, description, to, isExternal }) => (
                         <li key={title}>
                           <Link
                             className={clsx(
@@ -118,6 +118,7 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
                               'before:absolute before:-inset-2 before:rounded-lg before:opacity-0'
                             )}
                             to={to}
+                            isExternal={isExternal}
                             tagName="MobileMenu"
                           >
                             {Icon && (
