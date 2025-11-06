@@ -7,7 +7,7 @@ import triangleIcon from 'icons/home-new/triangle.svg';
 const HeadingLabel = ({ className = '', children }) => (
   <span
     className={clsx(
-      'inline-flex items-center gap-x-2 font-mono text-[12px] font-medium uppercase leading-none text-gray-new-80',
+      'flex w-fit items-center gap-x-2 font-mono text-[12px] font-medium uppercase leading-none text-gray-new-80',
       className
     )}
   >
