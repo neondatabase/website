@@ -16,7 +16,9 @@ The `init` command installs the Neon MCP (Model Context Protocol) Server and aut
 
 ### Usage
 
-From the CLI:
+#### From the CLI:
+
+You can run it from the Neon CLI to install the Neon MCP (Model Context Protocol) Server and authenticate.
 
 ```bash
 neon init
@@ -30,7 +32,7 @@ You can also run the `init` command in the root directory of your app with `npx`
 npx neonctl@latest init
 ```
 
-After running the command, you can ask your Cursor chat to "Get started with Neon using MCP Resource", as shown in the example below. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, including configuring a database connection from your app.
+After running the command, you can ask your Cursor chat to "Get started with Neon using MCP Resource", as shown in the example below. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, including helping you configure a database connection.
 
 ### Options
 
