@@ -38,7 +38,7 @@ const QUOTES = [
 
 const Hero = () => (
   <section className="hero pt-[192px] xl:pt-[166px] lg:pt-16 md:pt-12">
-    <Container className="xl:max-w-5xl md:px-5" size="1216">
+    <Container className="xl:max-w-5xl" size="1280">
       <div className="relative flex justify-between gap-16 xl:gap-12 lg:mx-auto lg:max-w-lg lg:flex-col lg:gap-10">
         <div className="flex max-w-xl flex-1 flex-col gap-10 xl:max-w-[460px] lg:max-w-full md:gap-8">
           <div className="flex flex-col lg:max-w-[448px]">

@@ -105,7 +105,7 @@ const RelevantArticles = async () => {
 
   return (
     <section className="viewed-articles mt-[72px] xl:mt-16 lg:mt-14 md:mt-11">
-      <Container size="1220" className="md:px-5">
+      <Container size="1280">
         <Slider articles={allArticles} />
       </Container>
     </section>
