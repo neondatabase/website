@@ -1,36 +1,41 @@
-import AutoScaling from 'components/pages/home-new/auto-scaling';
-import BackedByGiants from 'components/pages/home-new/backed-by-giants';
-import Cta from 'components/pages/home-new/cta';
-import GetPostgres from 'components/pages/home-new/get-postgres';
+import AI from 'components/pages/home-new/ai';
+import Autoscaling from 'components/pages/home-new/autoscaling';
+import BackedBy from 'components/pages/home-new/backed-by';
+import Branching from 'components/pages/home-new/branching';
+import CTA from 'components/pages/home-new/cta';
+import Features from 'components/pages/home-new/features';
 import Hero from 'components/pages/home-new/hero';
-import InstantBranching from 'components/pages/home-new/instant-branching';
-import ProductionGradeFeatures from 'components/pages/home-new/production-grade-features';
-import RealWordPerfomance from 'components/pages/home-new/real-word-perfomance';
-import SpeedAndScale from 'components/pages/home-new/speed-and-scale';
+import Performance from 'components/pages/home-new/performance';
+import SpeedScale from 'components/pages/home-new/speed-scale';
+import TocWrapper from 'components/pages/home-new/toc-wrapper/toc-wrapper';
+import JsonLd from 'components/shared/json-ld';
 import SEO_DATA from 'constants/seo-data';
+import { generateOrganizationSchema } from 'lib/schema';
 import getMetadata from 'utils/get-metadata';
 
-export const metadata = getMetadata(SEO_DATA.homeNew);
+export const metadata = getMetadata(SEO_DATA.index);
 
-getMetadata({
-  ...SEO_DATA.homeNew,
-  robotsNoindex: 'noindex',
-});
+const Homepage = () => {
+  const organizationSchema = generateOrganizationSchema();
 
-const NewHomepage = () => (
-  <>
-    <Hero />
-    <GetPostgres />
-    <AutoScaling />
-    <InstantBranching />
-    <RealWordPerfomance />
-    <ProductionGradeFeatures />
-    <SpeedAndScale />
-    <BackedByGiants />
-    <Cta />
-  </>
-);
+  return (
+    <>
+      <JsonLd data={organizationSchema} />
+      <Hero />
+      <TocWrapper>
+        <AI />
+        <Autoscaling />
+        <Branching />
+        <Performance />
+        <Features />
+      </TocWrapper>
+      <SpeedScale />
+      <BackedBy />
+      <CTA />
+    </>
+  );
+};
 
-export default NewHomepage;
+export default Homepage;
 
 export const revalidate = false;
