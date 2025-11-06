@@ -103,7 +103,7 @@ From the **Data Masking** page:
 ![Neon Console 'data masking' dialog with example masking functions configured](/docs/workflows/anon-data-masking.png)
 
 > Important: Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
-</TabItem>
+> </TabItem>
 
 <TabItem>
 
