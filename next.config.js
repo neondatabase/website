@@ -383,6 +383,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/instagres',
+        destination: 'https://neon.new',
+        permanent: false,
+      },
+      {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',
         permanent: true,
