@@ -42,10 +42,9 @@ Select **Anonymized data** as the data option when creating a new branch.
    - Under data options, select **Anonymized data**
 5. Click **Create**
 
-After creation, the Console loads the **Data Masking** page where you define and execute anonymization rules for your branch.
-
 ![Neon Console 'Create new branch' dialog with 'Anonymized data' selected](/docs/workflows/anon-create-a-new-branch.png)
 
+After creation, the Console loads the [Data Masking](#manage-masking-rules) page where you define and execute anonymization rules for your branch.
 </TabItem>
 
 <TabItem>
@@ -99,12 +98,11 @@ From the **Data Masking** page:
 1. Select the schema, table, and column you want to mask.
 2. Choose a masking function from the dropdown list (e.g., "Dummy Free Email" to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API.
 3. Repeat for all sensitive columns.
-4. When you are ready, click `Apply Masking Rules` to start the anonymization job. You can monitor its progress on this page.
-
-> Important: Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
+4. When you are ready, click `Apply Masking Rules` to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
 
 ![Neon Console 'data masking' dialog with example masking functions configured](/docs/workflows/anon-data-masking.png)
 
+> Important: Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
 </TabItem>
 
 <TabItem>
