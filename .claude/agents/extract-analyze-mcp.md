@@ -131,7 +131,55 @@ For each PR:
 3. Look at files changed - new tools? Bug fixes? Just deps?
 4. Determine impact and H2 vs Fixes
 
-## Step 3: Return Structured Summary
+## Step 3: Draft H2 Descriptions
+
+For each customer-facing item you recommend as H2-worthy, draft a description while you have full PR context.
+
+**Read the golden examples first:** `.claude/golden_changelog_examples.md`
+
+### Drafting Guidelines
+
+1. **Structure (from golden examples):**
+   - Opening sentence: What changed (15-25 words)
+   - Body: How it works, specific examples (40-80 words, 2-3 sentences)
+   - Optional benefit statement if not obvious
+   - Total: 60-120 words typical
+
+2. **Voice (from golden examples):**
+   - Start with: "We've added...", "We've introduced...", "You can now...", "Our MCP server now..."
+   - Use active voice throughout
+   - Developer-to-developer tone
+   - No marketing speak
+
+3. **Include specifics from the PR:**
+   - Tool names: "list_projects", "schema_diff", "create_migration"
+   - Usage examples: Show actual prompts users would type
+   - Workflow descriptions: What happens when the tool is called
+   - Integration mentions: "in Claude Desktop", "with ChatGPT", etc.
+
+4. **Apply the formula:**
+   ```
+   Our MCP server now [what changed]. [How to use it with example]. [What it enables/why it matters].
+
+   For more information, see [Neon MCP Server](/docs/ai/neon-mcp-server).
+   ```
+
+5. **Check against golden examples checklist:**
+   - [ ] Title is benefit-focused or action-oriented
+   - [ ] Opening states what changed
+   - [ ] 2-3 sentences with specific details
+   - [ ] Includes concrete examples (tool names, prompts)
+   - [ ] Uses active voice
+   - [ ] 60-120 words
+
+### For Multiple Related PRs
+
+If you see 2-3 related MCP PRs, consider grouping them:
+- "MCP Server enhancements" as umbrella title
+- Use bullet points for each enhancement
+- Focus on combined user value
+
+## Step 4: Return Structured Summary
 
 ### Required Sections
 
@@ -148,7 +196,8 @@ For each PR:
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH/MEDIUM/LOW with explanation
    - **Reasoning:** What it does, why it matters to users
-   - **Draft Description (for H2 items):** 2-3 sentences describing the feature in user-friendly language
+   - **Suggested Title:** (for H2-worthy items only) Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
 
 3. **EXCLUDE section:**
    - List PR numbers with brief descriptions
@@ -172,7 +221,27 @@ For each PR:
 
 ## INCLUDE - Customer-Facing ([count] PRs)
 
-[For each PR, provide all details listed above]
+### [PR #XXX](link) - [PR Title]
+
+- **Type:** feat
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - [explanation]
+- **Reasoning:** [What it does, why it matters]
+- **Suggested Title:** [Benefit-focused title]
+- **Draft H2 Description:**
+
+  Our MCP server now [what changed]. [How to use it with example]. [What it enables].
+
+  For more information, see [Neon MCP Server](/docs/ai/neon-mcp-server).
+
+### [PR #YYY](link) - [PR Title]
+
+- **Type:** fix
+- **Recommendation:** Fixes section
+- **Impact:** LOW - [explanation]
+- **Reasoning:** [What was fixed]
+
+[Continue for all customer-facing PRs]
 
 ---
 
@@ -195,5 +264,7 @@ For each PR:
 - File is usually small, easy to read in one pass
 - Most MCP changes ARE customer-facing
 - Be generous with inclusion - this is a developer tool
-- Provide draft descriptions for H2-worthy items to help with changelog writing
+- **CRITICAL:** Read `.claude/golden_changelog_examples.md` before drafting H2 descriptions
+- Include specific tool names, prompts, and usage examples in drafts
+- Draft while you have full PR context - main Claude won't have the diffs
 - Link format: `https://github.com/neondatabase/mcp-server-neon/pull/NUMBER`

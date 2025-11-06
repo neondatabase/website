@@ -116,12 +116,18 @@ PR_DATA_FILE="$OUTPUT_DIR/pr_data_compute_${TODAY}.txt"
    - Similar to Storage - extensions are customer-facing
    - Note version changes
 
-3. **Compute base image changes:**
+3. **HIPAA/Compliance-related:**
+   - **pgauditlogtofile** extension = audit logging for HIPAA
+   - Search for: "HIPAA", "audit", "compliance", "pgauditlogtofile"
+   - Audit logging improvements are customer-facing for compliance users
+   - **Watch for:** Audit logging + Postgres version = likely part of "HIPAA support for PG[X]" announcement
+
+4. **Compute base image changes:**
    - Search for: "image", "ubuntu", "debian", "base"
    - May include Postgres updates
    - Check what's in the update
 
-4. **Performance improvements:**
+5. **Performance improvements:**
    - Search for: "performance", "optimization", "faster"
    - User-visible performance = customer-facing
    - Internal optimization = exclude
@@ -144,7 +150,54 @@ For EACH PR:
 5. **Document why** you made each decision
 6. **Note patterns** you observe
 
-## Step 3: Return Structured Summary
+## Step 3: Draft H2 Descriptions (When Confident)
+
+For customer-facing PRs where you have HIGH confidence, draft a description while you have full PR context.
+
+**Read the golden examples first:** `.claude/golden_changelog_examples.md`
+
+### Drafting Guidelines
+
+**Note:** Since Compute is in exploratory mode, only draft H2 descriptions for PRs where you're confident they're customer-facing (HIGH confidence).
+
+1. **Structure (from golden examples):**
+   - Opening sentence: What changed (15-25 words)
+   - Body: Specific version numbers or details (40-80 words, 2-3 sentences)
+   - Optional benefit statement if not obvious
+   - Total: 60-120 words typical
+
+2. **Voice (from golden examples):**
+   - Start with: "Neon now supports...", "We've updated...", "Postgres [X] is now available..."
+   - Use active voice throughout
+   - Developer-to-developer tone
+
+3. **Include specifics from the PR:**
+   - **For Postgres version updates:** Version number, how to use it
+   - **For extension updates:** Extension name, old version → new version
+   - **For performance improvements:** Measurable impact if available
+   - What users can now do
+
+4. **Apply the formula for Postgres version updates:**
+   ```
+   Neon now supports **Postgres [X]** [in preview]. To try it out, [instructions].
+
+   [Optional: Screenshot reference]
+
+   [Optional: Preview limitations link]
+
+   To learn more about the new features:
+   - [Blog post link if available]
+   - [Official Postgres release notes]
+   ```
+
+5. **Apply the formula for extension updates:**
+   ```
+   The [extension name] extension has been updated to version [X.X]. [Brief description]. [Link to docs].
+   ```
+
+**Only draft if confidence is HIGH.** For MEDIUM/LOW confidence or UNCERTAIN items, skip drafting - the main Claude will handle those after review.
+
+## Step 4: Return Structured Summary
 
 ### Required Sections
 
@@ -163,6 +216,8 @@ For EACH PR:
    - **Confidence:** HIGH/MEDIUM/LOW (be honest!)
    - **Reasoning:** Why you think it's customer-facing
    - **Impact:** HIGH/MEDIUM/LOW
+   - **Suggested Title:** (for HIGH confidence H2-worthy items only) Benefit-focused title
+   - **Draft H2 Description:** (for HIGH confidence H2-worthy items only) Full draft following golden examples
 
 3. **UNCERTAIN section** (unique to Compute):
    PRs where you're not sure:
@@ -243,7 +298,17 @@ For EACH PR:
 - Be honest about confidence levels
 - Document your reasoning clearly
 - The "Uncertain" section is valuable - don't hide PRs you're unsure about
+- **Only draft H2 descriptions for HIGH confidence items** - skip drafting for MEDIUM/LOW/UNCERTAIN
+- **If drafting:** Read `.claude/golden_changelog_examples.md` and follow the Postgres version update pattern
+- Draft while you have full PR context - main Claude won't have the diffs
+- Include specific version numbers in drafts
 - Pattern observations will help refine criteria for future weeks
 - Link format: `https://github.com/databricks-eng/hadron/pull/NUMBER`
 - When in doubt, put in "Uncertain" rather than guessing
 - After 3-4 weeks, we'll establish clear criteria like Storage has
+
+**⚠️ Watch for HIPAA Announcements:**
+If you see audit logging improvements for a specific Postgres version (e.g., pgauditlogtofile + PG18), this might be part of a larger "HIPAA support for Postgres X" announcement. Flag this in your summary:
+```
+**POTENTIAL LARGER STORY:** Audit logging improvements for Postgres 18 may indicate HIPAA compliance availability announcement. Check with team for full context.
+```

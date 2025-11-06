@@ -101,6 +101,15 @@ PR_DATA_FILE="$OUTPUT_DIR/pr_data_cli_${TODAY}.txt"
 - Output improvements (better formatting, clearer messages)
 - Command behavior changes
 
+**🔥 SPECIAL ATTENTION - Flagship Commands:**
+- **`neon init`** - This is Neon's primary onboarding command
+  - ANY changes to `neon init` are likely H2-worthy
+  - Don't dismiss as "dependency update" - check what functionality changed
+  - If it enables new workflows or improves onboarding = H2
+  - Example: "use mcp resource instead of agent rules" = major onboarding improvement
+- **New commands** - Always H2-worthy
+- **Major command redesigns** - Usually H2-worthy
+
 **ALWAYS EXCLUDE:**
 - **chore:** Dependency updates (unless security), build config
 - **refactor:** Internal code changes without user impact
@@ -121,7 +130,48 @@ For each commit:
 3. Look at files - new commands? Flag changes? Just tests?
 4. Determine if customer-facing and H2 vs Fixes
 
-## Step 3: Return Structured Summary
+## Step 3: Draft H2 Descriptions
+
+For each customer-facing commit you recommend as H2-worthy, draft a description while you have full commit context.
+
+**Read the golden examples first:** `.claude/golden_changelog_examples.md`
+
+### Drafting Guidelines
+
+1. **Structure (from golden examples):**
+   - Opening sentence: What changed (15-25 words)
+   - Body: How it works, specific examples (40-80 words, 2-3 sentences)
+   - Optional benefit statement if not obvious
+   - Total: 60-120 words typical
+
+2. **Voice (from golden examples):**
+   - Start with: "We've added...", "You can now...", "The CLI now..."
+   - Use active voice throughout
+   - Developer-to-developer tone
+   - No marketing speak
+
+3. **Include specifics from the commit:**
+   - Command names: `neon init`, `neon branches`, `neon projects`
+   - Flag names: `--output json`, `--api-key`, `--format`
+   - Usage examples showing actual commands
+   - What users can now do with the new capability
+
+4. **Apply the formula:**
+   ```
+   We've [what changed]. [How to use it with example command]. [Why it matters/what it enables].
+
+   For more information, see [Neon CLI](/docs/reference/cli).
+   ```
+
+5. **Check against golden examples checklist:**
+   - [ ] Title is benefit-focused or action-oriented
+   - [ ] Opening states what changed
+   - [ ] 2-3 sentences with specific details
+   - [ ] Includes concrete examples (commands, flags)
+   - [ ] Uses active voice
+   - [ ] 60-120 words
+
+## Step 4: Return Structured Summary
 
 ### Required Sections
 
@@ -138,6 +188,8 @@ For each commit:
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH/MEDIUM/LOW with explanation
    - **Reasoning:** What users can now do or what was fixed
+   - **Suggested Title:** (for H2-worthy items only) Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
 
 3. **EXCLUDE section:**
    - List commit hashes with subjects
@@ -184,5 +236,8 @@ For each commit:
 - File is usually very small
 - Use conventional commit type to guide analysis
 - Most CLI changes ARE customer-facing
+- **CRITICAL:** Read `.claude/golden_changelog_examples.md` before drafting H2 descriptions
+- Draft while you have full commit context - main Claude won't have the diffs
+- Include specific command names, flags, and usage examples in drafts
 - Link format: `https://github.com/neondatabase/neonctl/commit/FULL_HASH`
 - Reference commit by short hash in text but link to full hash

@@ -207,7 +207,32 @@ Each agent will return a structured summary. Save their outputs:
 
 Check for failures. If any agent failed, note it and continue with successful agents.
 
-## Step 6: Generate Combined Triage Report
+## Step 6: Check for Non-PR Announcements
+
+Before compiling the triage report, check for major announcements that might not appear in PRs:
+
+```bash
+# Check recent blog posts (if available)
+echo "Checking for recent blog posts or announcements..."
+
+# Look for pricing/quota config changes in website repo
+echo "Checking for pricing or quota changes in docs..."
+git log --since="$LAST_FRIDAY" --until="$TODAY" --oneline -- content/docs | head -20 || true
+
+# Check changelog drafts that might exist
+ls -la content/changelog/*.md 2>/dev/null | tail -5 || true
+```
+
+**Look for evidence of:**
+- Pricing changes (compute rates, storage rates)
+- Quota/limit increases (projects, storage, branches)
+- Plan changes (new tiers, feature availability)
+- Compliance announcements (HIPAA, SOC 2, etc.)
+- Partnership announcements (integrations, marketplace)
+
+**If you find any of these**, add a note to the triage report under "NON-PR ANNOUNCEMENTS" section for human review.
+
+## Step 7: Generate Combined Triage Report
 
 Compile all agent summaries into a single triage report file.
 
@@ -263,72 +288,81 @@ Compile all agent summaries into a single triage report file.
 [Identify 3-5 major themes across all repos]
 ```
 
-## Step 7: Generate Changelog Draft
+## Step 8: Generate Changelog Draft
 
 Read the golden examples file: `.claude/golden_changelog_examples.md`
 
-Using the agent summaries and golden examples, draft the changelog.
-
 **File:** `content/changelog/${NEXT_FRIDAY}.md`
 
-### Drafting Guidelines
+### Drafting Process
 
-1. **Read golden examples** to understand:
-   - Voice and tone
-   - Structure patterns (what → how → why)
-   - Length guidelines (2-3 sentences + benefit)
-   - H2 vs Fixes decisions
+1. **Read golden examples** to understand voice and structure patterns
 
-2. **Process agent recommendations:**
-   - Agents suggest H2 or Fixes for each item
-   - Use your judgment + golden examples to refine
-   - Group related items across repos when appropriate
-   - Write in natural, conversational language
+2. **Trust agent recommendations:**
+   - If an agent recommends H2, include it as H2 (do not demote to Fixes)
+   - If an agent recommends Fixes, include it in Fixes
+   - Agents analyzed full PR context you don't have - respect their judgment
 
-3. **Structure:**
+3. **Use agent drafts directly:**
+   - For H2-worthy items, agents provide "Draft H2 Description" and "Suggested Title"
+   - Use the agent's suggested title (edit only for minor wording, not content changes)
+   - Use the agent's draft description (edit only for polish and consistency, not restructuring)
+   - Do not rewrite agent drafts from scratch - they contain specific details from PRs
+
+4. **Cross-repo coordination:**
+   - If multiple agents have related H2 items (e.g., MCP + CLI), combine into one H2
+   - Merge the agent drafts together, preserving details from both
+   - Example: MCP onboarding + CLI init command = one "Get started" H2
+
+5. **For Fixes items:**
+   - Write concise bullets (10-30 words each)
+   - Group by repo or feature area
+   - Use agent reasoning as the base for your bullet text
+
+6. **Quality check before writing:**
+   - Count how many H2-worthy items agents recommended
+   - Verify your changelog includes all of them (unless combining related items)
+   - Do not skip H2 items without explicit reason
+   - Extension updates and capacity changes are always H2-worthy
+
+7. **Changelog structure:**
 
 ```markdown
 ---
 title: TBD
 ---
 
-[H2 entries from all repos - order by impact/importance]
+[Include ALL H2-worthy items from agents - order by impact]
 
-## [Feature title from Console/MCP/CLI/Storage/Compute]
+## [Agent's suggested title - use verbatim or minor edits only]
 
-[2-3 sentences explaining what changed and why it matters. Follow golden examples.]
+[Agent's draft description - copy directly, edit only for polish]
 
-[Optional: Screenshot reference]
-[Optional: Code example]
+[Optional: Screenshot reference if mentioned in triage report]
+[Optional: Code example if in agent draft]
 
-For more information, see [relevant docs](/docs/path).
+For more information, see [link from agent draft or relevant docs].
 
-## [Another feature]
+## [Next H2 from agents]
 
-[Same pattern]
+[Agent's draft - preserve specifics and examples from PRs]
 
 <details>
 <summary>**Fixes & improvements**</summary>
 
-[Bullets from all repos, grouped by area if it makes sense]
-- **[Repo/Area]:** [Brief description of fix/improvement]
-- [More items]
+[Group fixes from all repos by area]
+- **[Repo/Area]:** [Use agent's reasoning as base for bullet]
+- [Include all Fixes-recommended items]
 
 </details>
 ```
 
-4. **Voice reminders:**
-   - Start with "We've added..." or "You can now..."
-   - Include specific examples (branch names, numbers, etc.)
-   - Focus on user benefit, not implementation
-   - Natural language, no marketing speak
-   - 2-3 sentences for H2 descriptions
+**Example of using agent drafts correctly:**
+- Agent says: "Suggested Title: Data masking improvements" → Use that title
+- Agent provides draft with specific UI pages → Keep those specifics
+- Agent recommends H2 → Include as H2, don't demote to Fixes
 
-5. **Cross-repo grouping:**
-   - If MCP and CLI both relate to same feature, mention both in one H2
-   - Example: "MCP Server onboarding" can mention CLI's related change
-
-## Step 8: Generate Summary
+## Step 9: Generate Summary
 
 Output a final summary for the user:
 

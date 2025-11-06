@@ -107,9 +107,11 @@ Read the pr_data file in chunks (it may be large) and analyze each PR.
 ### Console-Specific Analysis Criteria
 
 **ALWAYS EXCLUDE:**
-- Admin UI features (admin-only tools, read-only admin, permissions)
-- Vercel integration backend (webhooks, marketplace, member sync, billing)
-- Billing internals (forecasting, consumption history, backend jobs)
+- **Admin Console/UI** (internal tools for Neon staff to manage customer projects - NOT customer-facing)
+  - Admin-only pages, read-only admin permissions, admin operations
+  - Any PR mentioning "admin" in context of internal management tools
+  - Users, organizations, tenants, nodes, pageservers, safekeepers management UIs
+- Neon Auth backend (internal auth service)
 - Infrastructure/Operations (CI/CD, ops scripts, metrics, deployment)
 - Backend configuration (secrets rotation, database migrations)
 - Test-only changes
@@ -122,6 +124,35 @@ Read the pr_data file in chunks (it may be large) and analyze each PR.
 - UX enhancements
 - Public API additions
 - Important announcements (deprecations, breaking changes)
+
+**🔥 HIGH PRIORITY - Always Check These:**
+
+1. **Vercel Integration Changes:**
+   - ANY PR mentioning "Vercel" + "marketplace", "plan", "integration", "pricing"
+   - Don't assume Vercel = backend; check if it affects Vercel users
+   - Examples: Plan availability, marketplace features, integration UI
+   - Vercel webhooks affecting user experience = customer-facing
+   - Vercel backend plumbing only = exclude
+
+2. **Pricing & Billing Changes:**
+   - Compute rate changes (e.g., $0.14 → $0.106 per CU-hour)
+   - Plan pricing updates
+   - Cost display changes that show users different numbers
+   - Look for: dollar amounts, "per CU", "pricing", rate calculations
+   - Backend billing logic = exclude; user-visible price changes = include
+
+3. **Quota & Limit Changes:**
+   - Project limits (e.g., 20 → 30 projects on Free plan)
+   - Storage limits (e.g., 8TB → 16TB)
+   - Branch limits, compute limits, any user-facing constraints
+   - Look for: numbers changing in user-facing contexts
+   - These are ALWAYS H2-worthy if they affect users
+
+4. **Plan & Feature Availability:**
+   - New plans becoming available (e.g., V3 plans for Vercel users)
+   - Features enabled/disabled for plan tiers
+   - Plan migrations (legacy → current)
+   - Look for: "V2", "V3", "plan", "tier", "migration"
 
 **LAKEBASE DETECTION (Cast Wide Net):**
 Flag as Lakebase-specific if you see ANY of:
@@ -157,7 +188,67 @@ For each PR:
    - Is it H2-worthy or Fixes-worthy?
    - Should it be grouped with other PRs?
 
-## Step 3: Return Structured Summary
+## Step 3: Draft H2 Descriptions
+
+For each customer-facing item you recommend as H2-worthy, draft a description while you have full PR context.
+
+**Read the golden examples first:** `.claude/golden_changelog_examples.md`
+
+### Drafting Guidelines
+
+1. **Structure (from golden examples):**
+   - Opening sentence: What changed (15-25 words)
+   - Body: How it works, specific examples (40-80 words, 2-3 sentences)
+   - Optional benefit statement if not obvious
+   - Total: 60-120 words typical
+
+2. **Voice (from golden examples):**
+   - Start with: "We've added...", "We've improved...", "You can now...", "[Feature] is now available..."
+   - Use active voice throughout
+   - Developer-to-developer tone
+   - No marketing speak
+
+3. **Include specifics from the PR:**
+   - UI locations: "in the Console", "on the Branch page", "in the Settings tab"
+   - Feature names: "Query Editor", "Drizzle Studio", "Backup & restore"
+   - Branch names or examples from PRs
+   - Numbers: Quota changes, limit increases, version numbers
+   - Field names or labels users will see
+
+4. **Apply the formula:**
+   ```
+   We've [what changed]. [How it works with specific example]. [Why it matters to users].
+
+   For more information, see [relevant docs](/docs/path).
+   ```
+
+5. **Check against golden examples checklist:**
+   - [ ] Title is benefit-focused or action-oriented
+   - [ ] Opening states what changed
+   - [ ] 2-3 sentences with specific details
+   - [ ] Includes concrete examples
+   - [ ] Uses active voice
+   - [ ] 60-120 words
+
+### For Grouped Features
+
+If you're grouping 3-5 related PRs, draft a single H2 description that:
+- Introduces the feature area
+- Uses bullet points or narrative to cover each PR's contribution
+- Focuses on the complete user benefit
+
+**Example structure:**
+```markdown
+We've made several improvements to [feature area]. [Overview sentence].
+
+- [Specific improvement 1 from PR #X]
+- [Specific improvement 2 from PR #Y]
+- [Specific improvement 3 from PR #Z]
+
+For more information, see [docs link].
+```
+
+## Step 4: Return Structured Summary
 
 Your final report must follow this structure:
 
@@ -176,7 +267,9 @@ Your final report must follow this structure:
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH/MEDIUM/LOW with brief explanation
    - **Reasoning:** Why you included it, what users can now do
-   - For grouped features: List all related PR numbers, provide collective recommendation
+   - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
+   - **Suggested Title:** (for H2-worthy items only) Benefit-focused title following golden examples patterns
+   - For grouped features: List all related PR numbers, provide collective recommendation and draft
 
 3. **LAKEBASE-SPECIFIC section:**
    For each Lakebase PR:
@@ -217,7 +310,25 @@ When you identify 3-5 related PRs in the same area:
 
 ## INCLUDE - Customer-Facing ([count] PRs)
 
-[For each PR or group, provide the details listed above]
+### [PR #XXXX](link) - [PR Title]
+
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - [explanation]
+- **Reasoning:** [Why included, what users can do]
+- **Suggested Title:** [Benefit-focused title]
+- **Draft H2 Description:**
+
+  We've [what changed]. [How it works with specific example from PR]. [Why it matters].
+
+  For more information, see [relevant docs](/docs/path).
+
+### [PR #YYYY](link) - [PR Title]
+
+- **Recommendation:** Fixes section
+- **Impact:** LOW - [explanation]
+- **Reasoning:** [Why included]
+
+[Continue for all customer-facing PRs]
 
 ---
 
@@ -245,8 +356,19 @@ When you identify 3-5 related PRs in the same area:
 
 - Read the pr_data file in chunks if needed (it can be 200KB+)
 - Use absolute paths for all file operations
-- Be concise but thorough in your analysis
+- **CRITICAL:** Read `.claude/golden_changelog_examples.md` before drafting H2 descriptions
+- Draft while you have full PR context - main Claude won't have the diffs
+- Include specific UI locations, feature names, and examples from PRs in drafts
 - Group related PRs when you see patterns
 - When uncertain about Lakebase, flag it rather than skip it
 - Provide clear reasoning for each decision
 - This summary will be used to generate the final triage report and changelog
+
+**⚠️ Watch for Missing Context:**
+Some major announcements might not be fully visible in PRs:
+- **Pricing changes** - PRs might show billing backend work but miss the user announcement
+- **Quota increases** - PRs might update configs but not explain the change
+- **Compliance** - HIPAA/SOC2 availability might be announced separately
+- **Vercel plans** - Plan availability changes might look like backend work
+
+**If you see evidence of these (partial PRs, config changes, billing updates), flag them as "NEEDS CLARIFICATION" and note what you found.**

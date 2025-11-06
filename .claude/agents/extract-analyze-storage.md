@@ -145,7 +145,60 @@ For each PR:
 - Extensions: `pg_`, `pgvector`, `postgis`, `extension`, version numbers like `0.7.0`
 - Capacity: `quota`, `limit`, `TB`, `GB`, `storage`, `capacity`, `max_size`
 
-## Step 3: Return Structured Summary
+## Step 3: Draft H2 Descriptions
+
+For each customer-facing PR you recommend as H2-worthy, draft a description while you have full PR context.
+
+**Read the golden examples first:** `.claude/golden_changelog_examples.md`
+
+### Drafting Guidelines
+
+1. **Structure (from golden examples):**
+   - Opening sentence: What changed (15-25 words)
+   - Body: Specific version numbers or details (40-80 words, 2-3 sentences)
+   - Optional benefit statement if not obvious
+   - Total: 60-120 words typical
+
+2. **Voice (from golden examples):**
+   - Start with: "We've updated...", "We've added...", "[Extension] has been updated to..."
+   - Use active voice throughout
+   - Developer-to-developer tone
+   - No marketing speak
+
+3. **Include specifics from the PR:**
+   - **For extension updates:** Extension name, old version → new version
+   - **For capacity changes:** Old limit → new limit with specific numbers
+   - What the extension/feature does (brief, 1 sentence)
+   - Link to docs or extension page
+
+4. **Apply the formula for extension updates:**
+   ```
+   The [extension name] extension has been updated to version [X.X]. [Brief description of what the extension does]. [Link to extension docs or release notes].
+   ```
+
+5. **Apply the formula for capacity changes:**
+   ```
+   We've [doubled/increased] [what] from [old value] to [new value]. [Benefit statement]. [Edge case handling if needed].
+   ```
+
+6. **Check against golden examples checklist:**
+   - [ ] Title is benefit-focused or action-oriented
+   - [ ] Opening states what changed
+   - [ ] Includes specific version numbers or values
+   - [ ] Uses active voice
+   - [ ] 60-120 words
+
+### Extension Updates Pattern
+
+Storage PRs are often Postgres extension updates. Follow this pattern (from golden examples):
+
+```markdown
+## Postgres extensions
+
+- **The [extension name] extension has been updated to version [X.X].** [One sentence about what it does]. For more information, see [link].
+```
+
+## Step 4: Return Structured Summary
 
 ### Required Sections
 
@@ -163,6 +216,8 @@ For each PR:
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH (extensions/capacity) / MEDIUM / LOW
    - **Reasoning:** Why it's customer-facing, what users get
+   - **Suggested Title:** (for H2-worthy items) Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** (for H2-worthy items) Full draft following golden examples guidelines, especially the extension update pattern
 
 3. **EXCLUDE section:**
    Group by category:
@@ -215,6 +270,9 @@ For each PR:
 - Most PRs (90%+) will be excluded
 - Extension updates are ALWAYS customer-facing - don't miss these
 - Storage capacity changes are ALWAYS customer-facing - don't miss these
-- Be very specific about version numbers when reporting extensions
+- **CRITICAL:** Read `.claude/golden_changelog_examples.md` before drafting H2 descriptions
+- Draft while you have full PR context - main Claude won't have the diffs
+- **Be very specific about version numbers** when reporting extensions (old version → new version)
+- Use the extension update pattern from golden examples
 - Link format: `https://github.com/databricks-eng/hadron/pull/NUMBER`
 - High bar for inclusion - when in doubt, exclude
