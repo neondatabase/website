@@ -10,7 +10,7 @@ updatedOn: '2025-10-21T09:00:11.984Z'
 
 <FeatureBeta />
 
-Need to test against production data without exposing sensitive information? Anonymized branches let you create development copies with masked PII, emails, phone numbers, and other sensitive data.
+Need to test against production data without exposing sensitive information? Anonymized branches let you create development copies with masked personally identifiable information (PII) - such as emails, phone numbers, and other sensitive data.
 
 Neon uses [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io/) for static data masking, and applies masking rules when you create or update the branch. This approach gives you realistic test data while protecting user privacy and supporting compliance requirements like GDPR.
 
@@ -98,12 +98,12 @@ From the **Data Masking** page:
 1. Select the schema, table, and column you want to mask.
 2. Choose a masking function from the dropdown list (e.g., "Dummy Free Email" to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API.
 3. Repeat for all sensitive columns.
-4. When you are ready, click `Apply Masking Rules` to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
+4. When you are ready, click `Apply masking rules` to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
 
 ![Neon Console 'data masking' dialog with example masking functions configured](/docs/workflows/anon-data-masking.png)
 
 > Important: Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
-> </TabItem>
+</TabItem>
 
 <TabItem>
 
@@ -157,11 +157,11 @@ Returns the current state (`created`, `initialized`, `initialization_error`, `an
 
 When you create a branch with anonymized data:
 
-1. Neon creates a new branch by copying schema and data from the parent branch.
+1. Neon creates a new branch with the schema and data from the parent branch.
 2. You define masking rules for tables and columns containing sensitive data:
    - **Console**: The Data Masking page opens automatically after branch creation.
    - **API**: Include masking rules in the creation request or add them later via the masking rules endpoint.
-3. You apply the masking rules (in Console, click **Apply Masking Rules**), and the PostgreSQL Anonymizer extension masks the branch data.
+3. You apply the masking rules (in Console, click **Apply masking rules**), and the PostgreSQL Anonymizer extension masks the branch data.
 4. You can update rules and rerun anonymization on the branch as needed.
 
 The parent branch data remains unchanged. Rerunning anonymization applies rules to the branch's current (already masked) data, not fresh data from the parent.
@@ -172,11 +172,11 @@ The branch is unavailable for connections while anonymization is in progress.
 
 ## Limitations
 
-- Cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
+- Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
 - Rerunning anonymization works on already-masked data. Create a new branch for fresh parent data.
 - Branch is unavailable during anonymization.
 - Masking does not enforce database constraints (e.g., primary keys can be masked as NULL).
-- The Console provides a curated subset of masking functions, use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
+- The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
 ## API reference
 
@@ -561,7 +561,7 @@ Before setting up the GitHub Action:
 The Neon GitHub integration can configure these secrets automatically. See [Neon GitHub integration](/docs/guides/neon-github-integration).
 </Admonition>
 
-## Set up the GitHub Action workflow
+## Set up the GitHub Actions workflow
 
 Create a file at `.github/workflows/create-anon-branch.yml` (or similar) with the following content. It implements the same masking rules we used in the manual approach:
 
