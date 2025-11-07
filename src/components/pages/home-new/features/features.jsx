@@ -6,7 +6,7 @@ const Features = () => (
     id="production-grade-features"
   >
     <Container
-      className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block"
+      className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:block"
       size="1600"
     >
       Production Grade Features section
