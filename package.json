@@ -82,7 +82,7 @@
     "lottie-web": "^5.12.2",
     "markdownlint-cli": "^0.39.0",
     "next": "^14.2.26",
-    "next-auth": "^4.24.7",
+    "next-auth": "^4.24.12",
     "next-mdx-remote": "^4.4.1",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
