@@ -186,7 +186,10 @@ Task: extract-analyze-compute
 Description: Extract and analyze Compute PRs (exploratory)
 Prompt: [formatted prompt with env vars]
 Subagent: general-purpose
+Model: haiku
 ```
+
+**Note:** Compute uses Haiku model for faster, more efficient analysis with lower token usage.
 
 **Example of launching 3 agents in parallel:**
 ```
