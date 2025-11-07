@@ -15,18 +15,26 @@ import autoscalingImage from 'icons/home-new/autoscaling/save-costs-illustration
 import Heading from '../heading';
 
 const SaveCostsComponent = () => (
-  <div className="pointer-events-none">
-    <Image src={autoscalingImage} width={1376} height={451} alt="" />
-  </div>
+  <Image
+    className="max-w-none xl:w-[1100px] lg:w-[920px] md:w-[852px]"
+    src={autoscalingImage}
+    width={1376}
+    height={451}
+    alt=""
+  />
 );
 
 const AvoidOutagesComponent = () => (
-  <div className="pointer-events-none">
-    <Image src={avoidImage} width={1376} height={518} alt="" />
-  </div>
+  <Image
+    className="max-w-none xl:w-[1100px] lg:w-[920px] md:w-[852px]"
+    src={avoidImage}
+    width={1376}
+    height={518}
+    alt=""
+  />
 );
 
-const data = [
+const tabs = [
   {
     tab: 'Save Costs',
     renderComponent: () => <SaveCostsComponent />,
@@ -37,31 +45,48 @@ const data = [
   },
 ];
 
+const legend = [
+  {
+    icon: autoscalingLegendIcon,
+    text: 'Neon autoscaling',
+  },
+  {
+    icon: dbLoadLegendIcon,
+    text: 'Database load',
+  },
+  {
+    icon: resourceLegendIcon,
+    text: 'Fixed-resource provisioned',
+  },
+];
+
 const Autoscaling = () => {
   const [activeItem, setActiveItem] = useState(0);
 
   return (
     <section
-      className="autoscaling safe-paddings relative bg-[#E4F1EB] pb-20 pt-[88px]"
+      className="autoscaling safe-paddings relative bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:py-14 md:pt-9"
       id="autoscaling"
     >
       <Container
-        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 text-black before:block"
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 pr-0 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16"
         size="1600"
       >
-        <div>
+        <div className="min-w-0">
           <Heading
-            className="max-w-[960px]"
+            className="max-w-[960px] xl:pr-10 lg:pr-0 md:pr-4"
             icon="autoscaling"
+            theme="light"
             title="<strong>Advanced autoscaling.</strong> Scale further without worrying about the database. Never overpay for resources you don’t use."
           />
 
-          <div className="mt-16">
-            {data.map((item, index) => (
+          <div className="mt-16 xl:mt-14 lg:mt-12 md:mt-11">
+            {tabs.map((item, index) => (
               <button
                 className={clsx(
-                  'relative h-11 min-w-[134px] px-4 py-3.5 transition-colors duration-200',
-                  'text-base font-medium leading-none tracking-tight',
+                  'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
+                  'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5',
+                  'text-[15px] font-medium leading-none tracking-tight',
                   'border border-gray-new-10 even:border-l-0',
                   index === activeItem ? 'bg-white text-gray-new-10' : 'text-gray-new-10/80'
                 )}
@@ -74,13 +99,14 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="mt-6 w-max">
+          <div className="no-scrollbars relative mt-6 w-max max-w-none overflow-x-auto xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
-                {data.map(
+                {tabs.map(
                   (item, index) =>
                     index === activeItem && (
                       <m.div
+                        className="pointer-events-none flex justify-center"
                         key={index}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -94,22 +120,16 @@ const Autoscaling = () => {
             </LazyMotion>
           </div>
 
-          <div className="mt-[22px] grid grid-cols-2 items-start gap-x-8">
-            <ul className="flex items-center gap-x-6 text-[15px] leading-snug tracking-tight text-black-pure">
-              <li className="flex items-center gap-x-2.5">
-                <Image src={autoscalingLegendIcon} width={16} height={16} alt="" />
-                <p>Neon autoscaling</p>
-              </li>
-              <li className="flex items-center gap-x-2.5">
-                <Image src={dbLoadLegendIcon} width={16} height={16} alt="" />
-                <p>Database load</p>
-              </li>
-              <li className="flex items-center gap-x-2.5">
-                <Image src={resourceLegendIcon} width={16} height={16} alt="" />
-                <p>Fixed-resource provisioned</p>
-              </li>
+          <div className="mt-[22px] grid grid-cols-2 items-start gap-x-8 text-black-pure xl:mt-6 xl:grid-cols-[1fr_352px] xl:gap-x-4 lg:mt-5 lg:grid-cols-1">
+            <ul className="flex items-center gap-x-6 text-[15px] leading-snug tracking-tight lg:gap-x-7 md:flex-col md:items-start md:gap-y-2.5 md:text-[14px]">
+              {legend.map((item, index) => (
+                <li className="flex items-center gap-x-2.5 xl:gap-x-2" key={index}>
+                  <Image src={item.icon} width={16} height={16} alt="" />
+                  <p>{item.text}</p>
+                </li>
+              ))}
             </ul>
-            <p className="max-w-[480px] text-[18px] leading-snug tracking-tight">
+            <p className="max-w-[480px] text-[18px] leading-normal tracking-tight xl:-mr-5 xl:ml-8 lg:mx-0 lg:mt-10 md:mt-8 md:text-[15px]">
               Neon monitors your database load ten times a second and autoscales CPU and Memory to
               exactly fit your workload.
             </p>
