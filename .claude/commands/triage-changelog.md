@@ -57,9 +57,9 @@ Calculate once for all repositories:
 TODAY=$(date '+%Y-%m-%d')
 DOW=$(date '+%u')
 
-# Calculate last Friday
+# Calculate last Friday (7 days ago if today is Friday, otherwise previous Friday)
 if [ "$DOW" -eq 5 ]; then
-  LAST_FRIDAY="$TODAY"
+  LAST_FRIDAY=$(date -v-7d '+%Y-%m-%d')
 elif [ "$DOW" -gt 5 ]; then
   DAYS_BACK=$((DOW - 5))
   LAST_FRIDAY=$(date -v-"${DAYS_BACK}"d '+%Y-%m-%d')
