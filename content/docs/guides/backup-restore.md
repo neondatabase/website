@@ -229,9 +229,23 @@ Retrieves the current backup schedule configuration for a branch using the [View
 GET /projects/{project_id}/branches/{branch_id}/backup_schedule
 ```
 
-```bash
+```bash shouldWrap
 curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
   -H 'Authorization: Bearer $NEON_API_KEY' | jq
+```
+
+**Example response:**
+
+```json
+{
+  "schedule": [
+    {
+      "frequency": "daily",
+      "hour": 23,
+      "retention_seconds": 1209600
+    }
+  ]
+}
 ```
 
 **Update backup schedule**
@@ -242,18 +256,18 @@ Updates the backup schedule configuration for a branch using the [Update backup 
 PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
 ```
 
-```bash
+```bash shouldWrap
 curl -X PUT 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-    "schedule": {
-      "frequency": "daily",
-      "time": "02:00"
-    },
-    "retention": {
-      "days": 14
-    }
+    "schedule": [
+      {
+        "frequency": "daily",
+        "hour": 23,
+        "retention_seconds": 604800
+      }
+    ]
   }' | jq
 ```
 
