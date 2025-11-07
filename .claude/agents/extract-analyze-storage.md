@@ -221,9 +221,9 @@ Storage PRs are often Postgres extension updates. Follow this pattern (from gold
 
 3. **EXCLUDE section:**
 
-   **Format as collapsed/expandable details for easy validation:**
+   **CRITICAL: You MUST list every excluded PR with a clickable link in a collapsed section.**
 
-   First, provide a summary:
+   **Step 1:** Summary at the top:
    ```markdown
    ### EXCLUDE - Internal/Infrastructure ([total count] PRs)
 
@@ -233,8 +233,9 @@ Storage PRs are often Postgres extension updates. Follow this pattern (from gold
    - Refactoring: [count] PRs
    - Tests: [count] PRs
    - Infrastructure: [count] PRs
+   ```
 
-   Then, provide full details in collapsed section:
+   **Step 2:** IMMEDIATELY after, add collapsed section with ALL excluded PRs:
    ```markdown
    <details>
    <summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
@@ -242,21 +243,20 @@ Storage PRs are often Postgres extension updates. Follow this pattern (from gold
    #### Internal Optimizations ([count] PRs)
    - [PR #XXXX](https://github.com/databricks-eng/hadron/pull/XXXX) - Brief title
    - [PR #YYYY](https://github.com/databricks-eng/hadron/pull/YYYY) - Brief title
+   ... [list ALL PRs in this category]
 
    **Reasoning:** Pageserver/safekeeper internals without user-visible impact
 
    #### [Next Category] ([count] PRs)
    - [PR #ZZZZ](link) - Brief title
+   ... [list ALL PRs in this category]
 
    **Reasoning:** [Category-level explanation]
 
    </details>
    ```
 
-   This makes it easy for humans to:
-   - See category breakdown at a glance
-   - Click to validate specific exclusions
-   - Open any PR link directly in browser
+   **DO NOT skip this section.** List all excluded PRs with clickable links for human validation.
 
 4. **Extraction Details:**
    - Output file path

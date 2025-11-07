@@ -293,9 +293,11 @@ Your final report must follow this structure:
 
 4. **EXCLUDE section:**
 
-   **Format as collapsed/expandable details for easy validation:**
+   **CRITICAL: You MUST list every excluded PR with a clickable link in a collapsed section.**
 
-   First, provide a summary:
+   Format as collapsed/expandable details:
+
+   **Step 1:** Provide a summary at the top:
    ```markdown
    ### EXCLUDE - Internal/Infrastructure ([total count] PRs)
 
@@ -307,7 +309,7 @@ Your final report must follow this structure:
    - [Other categories]: [count] PRs
    ```
 
-   Then, provide full details in collapsed section:
+   **Step 2:** IMMEDIATELY after the summary, add the collapsed section with ALL PRs listed:
    ```markdown
    <details>
    <summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
@@ -315,21 +317,26 @@ Your final report must follow this structure:
    #### Admin Console/UI ([count] PRs)
    - [PR #XXXX](https://github.com/databricks-eng/neon-cloud/pull/XXXX) - Brief title
    - [PR #YYYY](https://github.com/databricks-eng/neon-cloud/pull/YYYY) - Brief title
+   - [PR #ZZZZ](https://github.com/databricks-eng/neon-cloud/pull/ZZZZ) - Brief title
+   ... [list ALL PRs in this category]
 
    **Reasoning:** Internal tools for Neon staff to manage customer projects
 
-   #### [Next Category] ([count] PRs)
-   - [PR #ZZZZ](link) - Brief title
+   #### Vercel Integration ([count] PRs)
+   - [PR #AAAA](https://github.com/databricks-eng/neon-cloud/pull/AAAA) - Brief title
+   - [PR #BBBB](https://github.com/databricks-eng/neon-cloud/pull/BBBB) - Brief title
+   ... [list ALL PRs in this category]
 
-   **Reasoning:** [Category-level explanation]
+   **Reasoning:** Backend integration infrastructure
+
+   [Continue for EVERY category until all excluded PRs are listed]
 
    </details>
    ```
 
-   This makes it easy for humans to:
-   - See category breakdown at a glance
-   - Click to validate specific exclusions
-   - Open any PR link directly in browser
+   **DO NOT skip this section.** Even if there are 100+ excluded PRs, list them all with clickable links.
+
+   This is essential for human validation - they need to click through excluded PRs to verify your decisions.
 
 5. **Extraction Details:**
    - Output file path

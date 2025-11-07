@@ -193,9 +193,9 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
 
 3. **EXCLUDE section:**
 
-   **Format as collapsed/expandable details for easy validation:**
+   **CRITICAL: You MUST list every excluded commit with a clickable link in a collapsed section.**
 
-   First, provide a summary:
+   **Step 1:** Summary at the top:
    ```markdown
    ### EXCLUDE - Internal/Maintenance ([total count] Commits)
 
@@ -203,8 +203,9 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
    - Dependency updates (chore): [count] commits
    - Internal refactoring: [count] commits
    - CI/CD: [count] commits
+   ```
 
-   Then, provide full details in collapsed section:
+   **Step 2:** IMMEDIATELY after, add collapsed section with ALL excluded commits:
    ```markdown
    <details>
    <summary><b>📋 View all excluded commits by category (click to expand)</b></summary>
@@ -212,21 +213,20 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
    #### Dependency Updates ([count] Commits)
    - Commit [abc1234](https://github.com/neondatabase/neonctl/commit/abc1234...) - Brief subject
    - Commit [def5678](https://github.com/neondatabase/neonctl/commit/def5678...) - Brief subject
+   ... [list ALL commits in this category]
 
    **Reasoning:** Routine dependency maintenance without user-facing changes
 
    #### [Next Category] ([count] Commits)
    - Commit [xyz9012](link) - Brief subject
+   ... [list ALL commits in this category]
 
    **Reasoning:** [Category-level explanation]
 
    </details>
    ```
 
-   This makes it easy for humans to:
-   - See category breakdown at a glance
-   - Click to validate specific exclusions
-   - Open any commit link directly in browser
+   **DO NOT skip this section.** List all excluded commits with clickable links for human validation.
 
 4. **Extraction Details:**
    - Output file path
