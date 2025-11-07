@@ -192,8 +192,41 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
    - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
 
 3. **EXCLUDE section:**
-   - List commit hashes with subjects
-   - Brief reasoning (dependency update, internal refactor, etc.)
+
+   **Format as collapsed/expandable details for easy validation:**
+
+   First, provide a summary:
+   ```markdown
+   ### EXCLUDE - Internal/Maintenance ([total count] Commits)
+
+   **Summary by Category:**
+   - Dependency updates (chore): [count] commits
+   - Internal refactoring: [count] commits
+   - CI/CD: [count] commits
+
+   Then, provide full details in collapsed section:
+   ```markdown
+   <details>
+   <summary><b>📋 View all excluded commits by category (click to expand)</b></summary>
+
+   #### Dependency Updates ([count] Commits)
+   - Commit [abc1234](https://github.com/neondatabase/neonctl/commit/abc1234...) - Brief subject
+   - Commit [def5678](https://github.com/neondatabase/neonctl/commit/def5678...) - Brief subject
+
+   **Reasoning:** Routine dependency maintenance without user-facing changes
+
+   #### [Next Category] ([count] Commits)
+   - Commit [xyz9012](link) - Brief subject
+
+   **Reasoning:** [Category-level explanation]
+
+   </details>
+   ```
+
+   This makes it easy for humans to:
+   - See category breakdown at a glance
+   - Click to validate specific exclusions
+   - Open any commit link directly in browser
 
 4. **Extraction Details:**
    - Output file path
@@ -219,7 +252,26 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
 
 ## EXCLUDE - Internal/Maintenance ([count] Commits)
 
-[List excluded commits with brief reasoning]
+**Summary by Category:**
+- Dependency updates (chore): [count] commits
+- Internal refactoring: [count] commits
+- CI/CD: [count] commits
+
+<details>
+<summary><b>📋 View all excluded commits by category (click to expand)</b></summary>
+
+#### Dependency Updates ([count] Commits)
+- Commit [abc1234](https://github.com/neondatabase/neonctl/commit/abc1234...) - Brief subject
+- Commit [def5678](https://github.com/neondatabase/neonctl/commit/def5678...) - Brief subject
+
+**Reasoning:** Routine dependency maintenance without user-facing changes
+
+#### [Next Category] ([count] Commits)
+- Commit [xyz9012](link) - Brief subject
+
+**Reasoning:** [Category-level explanation]
+
+</details>
 
 ---
 

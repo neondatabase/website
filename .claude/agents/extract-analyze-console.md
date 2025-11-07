@@ -102,7 +102,19 @@ PR_DATA_FILE="$OUTPUT_DIR/pr_data_console_${TODAY}.txt"
 
 ## Step 2: Analyze PRs
 
-Read the pr_data file in chunks (it may be large) and analyze each PR.
+**CRITICAL: You MUST analyze EVERY PR individually.**
+
+The pr_data file may be large (200KB+). Read it in chunks if needed, but:
+- **Analyze each PR thoroughly** - don't skip PRs at the end
+- **Don't bulk-categorize** as "internal" without reading descriptions
+- **Each PR deserves individual analysis** against customer-facing criteria
+- **Keep track** of your progress through the file
+
+**For large files:**
+1. Read in multiple chunks (e.g., 50 PRs at a time)
+2. Fully analyze each chunk before moving to next
+3. Don't assume remaining PRs are internal just because you've found customer-facing items
+4. Verify you've reached the end of the file and analyzed all PRs
 
 ### Console-Specific Analysis Criteria
 
@@ -154,15 +166,16 @@ Read the pr_data file in chunks (it may be large) and analyze each PR.
    - Plan migrations (legacy → current)
    - Look for: "V2", "V3", "plan", "tier", "migration"
 
-**LAKEBASE DETECTION (Cast Wide Net):**
-Flag as Lakebase-specific if you see ANY of:
-- Explicit "Lakebase" or "lakebase" in commit message
-- `__IS_NEON_VARIANT__` checks in code
-- Databricks-specific features (help@databricks.com, etc.)
-- File paths with "lakebase" in them
-- PR description mentions Lakebase
+**LAKEBASE DETECTION (Conservative - Only Exclude When Certain):**
 
-**When in doubt about Lakebase:** Include in Lakebase section rather than main changelog. Humans will review.
+**ONLY exclude as Lakebase-specific if you are CERTAIN the feature is for Lakebase/Databricks only:**
+- PR explicitly says "Lakebase only" or "Databricks only"
+- Changes ONLY to help@databricks.com or Databricks-specific integrations
+- Clear variant-specific logic that doesn't affect Neon
+
+**When in doubt:** Include in customer-facing section. Better to include something that gets removed later than to miss a real Neon feature in the changelog.
+
+**CRITICAL:** "Lakebase" in file paths or repo name does NOT mean Lakebase-only. Most changes are for both Neon and Lakebase.
 
 **FEATURE GROUPING:**
 If you find 3-5 related PRs in the same feature area:
@@ -273,15 +286,50 @@ Your final report must follow this structure:
 
 3. **LAKEBASE-SPECIFIC section:**
    For each Lakebase PR:
-   - PR number with link and description
-   - **Indicators:** What made you flag this as Lakebase (e.g., "Lakebase in title", "__IS_NEON_VARIANT__ check", "Databricks email")
-   - **Reasoning:** Why it's Lakebase-specific
+   - **ALWAYS include PR link:** `[PR #XXXX](https://github.com/databricks-eng/neon-cloud/pull/XXXX)`
+   - Brief PR title/description
+   - **Indicators:** What made you flag this as Lakebase (e.g., "Explicitly says 'Lakebase only'", "Databricks-only integration")
+   - **Reasoning:** Why you're certain it's Lakebase-specific and not Neon public
 
 4. **EXCLUDE section:**
-   Group excluded PRs by category (Admin UI, Vercel Integration, Backend Fixes, etc.):
-   - List PR numbers with links under category headings
-   - Brief category-level reasoning (not per-PR)
-   - You can list just PR numbers if the category explains itself
+
+   **Format as collapsed/expandable details for easy validation:**
+
+   First, provide a summary:
+   ```markdown
+   ### EXCLUDE - Internal/Infrastructure ([total count] PRs)
+
+   **Summary by Category:**
+   - Admin Console/UI: [count] PRs
+   - Vercel Integration: [count] PRs
+   - Backend/Infrastructure: [count] PRs
+   - CI/CD: [count] PRs
+   - [Other categories]: [count] PRs
+   ```
+
+   Then, provide full details in collapsed section:
+   ```markdown
+   <details>
+   <summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+   #### Admin Console/UI ([count] PRs)
+   - [PR #XXXX](https://github.com/databricks-eng/neon-cloud/pull/XXXX) - Brief title
+   - [PR #YYYY](https://github.com/databricks-eng/neon-cloud/pull/YYYY) - Brief title
+
+   **Reasoning:** Internal tools for Neon staff to manage customer projects
+
+   #### [Next Category] ([count] PRs)
+   - [PR #ZZZZ](link) - Brief title
+
+   **Reasoning:** [Category-level explanation]
+
+   </details>
+   ```
+
+   This makes it easy for humans to:
+   - See category breakdown at a glance
+   - Click to validate specific exclusions
+   - Open any PR link directly in browser
 
 5. **Extraction Details:**
    - Output file path
@@ -334,14 +382,39 @@ When you identify 3-5 related PRs in the same area:
 
 ## LAKEBASE-SPECIFIC ([count] PRs)
 
-[For each Lakebase PR, provide the details listed above]
+### [PR #XXXX](https://github.com/databricks-eng/neon-cloud/pull/XXXX) - [Brief title]
+- **Indicators:** Explicitly marked "Lakebase only"
+- **Reasoning:** Only affects Databricks variant
+
+[Continue for each Lakebase PR with links]
 
 ---
 
 ## EXCLUDE - Internal/Infrastructure ([count] PRs)
 
-### [Category Name]
-[List of PR numbers with brief category reasoning]
+**Summary by Category:**
+- Admin Console/UI: [count] PRs
+- Vercel Integration: [count] PRs
+- Backend/Infrastructure: [count] PRs
+- CI/CD: [count] PRs
+
+<details>
+<summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+#### Admin Console/UI ([count] PRs)
+- [PR #XXXX](https://github.com/databricks-eng/neon-cloud/pull/XXXX) - Read-only admin permissions
+- [PR #YYYY](https://github.com/databricks-eng/neon-cloud/pull/YYYY) - Admin user management
+- [PR #ZZZZ](https://github.com/databricks-eng/neon-cloud/pull/ZZZZ) - Internal operations dashboard
+
+**Reasoning:** Internal tools for Neon staff to manage customer projects, not customer-facing
+
+#### Vercel Integration ([count] PRs)
+- [PR #AAAA](https://github.com/databricks-eng/neon-cloud/pull/AAAA) - Webhook handling
+- [PR #BBBB](https://github.com/databricks-eng/neon-cloud/pull/BBBB) - Marketplace sync
+
+**Reasoning:** Backend integration infrastructure
+
+</details>
 
 ---
 

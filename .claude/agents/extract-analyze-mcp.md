@@ -200,8 +200,41 @@ If you see 2-3 related MCP PRs, consider grouping them:
    - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
 
 3. **EXCLUDE section:**
-   - List PR numbers with brief descriptions
-   - Explain why excluded (dependency update, internal refactor, etc.)
+
+   **Format as collapsed/expandable details for easy validation:**
+
+   First, provide a summary:
+   ```markdown
+   ### EXCLUDE - Internal/Maintenance ([total count] PRs)
+
+   **Summary by Category:**
+   - Dependency updates: [count] PRs
+   - Internal refactoring: [count] PRs
+   - CI/CD: [count] PRs
+
+   Then, provide full details in collapsed section:
+   ```markdown
+   <details>
+   <summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+   #### Dependency Updates ([count] PRs)
+   - [PR #XXX](https://github.com/neondatabase/mcp-server-neon/pull/XXX) - Brief title
+   - [PR #YYY](https://github.com/neondatabase/mcp-server-neon/pull/YYY) - Brief title
+
+   **Reasoning:** Routine dependency maintenance without user-facing changes
+
+   #### [Next Category] ([count] PRs)
+   - [PR #ZZZ](link) - Brief title
+
+   **Reasoning:** [Category-level explanation]
+
+   </details>
+   ```
+
+   This makes it easy for humans to:
+   - See category breakdown at a glance
+   - Click to validate specific exclusions
+   - Open any PR link directly in browser
 
 4. **Extraction Details:**
    - Output file path
@@ -247,7 +280,26 @@ If you see 2-3 related MCP PRs, consider grouping them:
 
 ## EXCLUDE - Internal/Maintenance ([count] PRs)
 
-[List excluded PRs with brief reasoning]
+**Summary by Category:**
+- Dependency updates: [count] PRs
+- Internal refactoring: [count] PRs
+- CI/CD: [count] PRs
+
+<details>
+<summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+#### Dependency Updates ([count] PRs)
+- [PR #XXX](https://github.com/neondatabase/mcp-server-neon/pull/XXX) - Brief title
+- [PR #YYY](https://github.com/neondatabase/mcp-server-neon/pull/YYY) - Brief title
+
+**Reasoning:** Routine dependency maintenance without user-facing changes
+
+#### [Next Category] ([count] PRs)
+- [PR #ZZZ](link) - Brief title
+
+**Reasoning:** [Category-level explanation]
+
+</details>
 
 ---
 

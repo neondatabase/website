@@ -226,7 +226,43 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
    - **Could be customer-facing if:** What would make this relevant?
 
 4. **EXCLUDE section:**
-   Group by category with brief reasoning
+
+   **Format as collapsed/expandable details for easy validation:**
+
+   First, provide a summary:
+   ```markdown
+   ### EXCLUDE - Internal/Infrastructure ([total count] PRs)
+
+   **Summary by Category:**
+   - Internal optimizations: [count] PRs
+   - CI/CD: [count] PRs
+   - Refactoring: [count] PRs
+   - Tests: [count] PRs
+   - Infrastructure: [count] PRs
+
+   Then, provide full details in collapsed section:
+   ```markdown
+   <details>
+   <summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+   #### [Category Name] ([count] PRs)
+   - [PR #XXXX](https://github.com/databricks-eng/hadron/pull/XXXX) - Brief title
+   - [PR #YYYY](https://github.com/databricks-eng/hadron/pull/YYYY) - Brief title
+
+   **Reasoning:** [Category-level explanation]
+
+   #### [Next Category] ([count] PRs)
+   - [PR #ZZZZ](link) - Brief title
+
+   **Reasoning:** [Category-level explanation]
+
+   </details>
+   ```
+
+   This makes it easy for humans to:
+   - See category breakdown at a glance
+   - Click to validate specific exclusions
+   - Open any PR link directly in browser
 
 5. **PATTERN OBSERVATIONS** (unique to Compute):
    Document what you learned:
@@ -267,8 +303,28 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 
 ## EXCLUDE - Internal/Infrastructure ([count] PRs)
 
-### [Category]
-[List with reasoning]
+**Summary by Category:**
+- Internal optimizations: [count] PRs
+- CI/CD: [count] PRs
+- Refactoring: [count] PRs
+- Tests: [count] PRs
+- Infrastructure: [count] PRs
+
+<details>
+<summary><b>📋 View all excluded PRs by category (click to expand)</b></summary>
+
+#### [Category Name] ([count] PRs)
+- [PR #XXXX](https://github.com/databricks-eng/hadron/pull/XXXX) - Brief title
+- [PR #YYYY](https://github.com/databricks-eng/hadron/pull/YYYY) - Brief title
+
+**Reasoning:** [Category-level explanation]
+
+#### [Next Category] ([count] PRs)
+- [PR #ZZZZ](link) - Brief title
+
+**Reasoning:** [Category-level explanation]
+
+</details>
 
 ---
 
