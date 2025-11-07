@@ -6,7 +6,7 @@ import Container from 'components/shared/container';
 const LinesPattern = ({ size, className }) => (
   <span
     className={cn(
-      "h-3 bg-[url('/images/pages/home-new/line.svg')] bg-repeat-x xl:h-2.5 lg:h-[7px]",
+      "h-3 bg-[url('/images/pages/home-new/speed-scale/status-line/line.svg')] bg-repeat-x xl:h-2.5 lg:h-[7px]",
       className
     )}
     style={{ backgroundSize: `${size}px 100%` }}
@@ -26,7 +26,7 @@ const StatusLine = ({ className }) => (
   >
     <div
       className={cn(
-        'flex items-center justify-between pl-40',
+        'relative flex items-center justify-between pl-40',
         'font-mono text-sm leading-dense -tracking-[0.05em] text-gray-new-60',
         '2xl:pl-0 xl:text-xs lg:text-[9px]',
         className
@@ -52,6 +52,10 @@ const StatusLine = ({ className }) => (
       <span className="ml-[34px] shrink-0 xl:ml-0 lg:ml-[22px] xs:hidden">
         [ CONNECTION: STABLE ]
       </span>
+      <span
+        className="pointer-events-none absolute z-10 size-full bg-[url('/images/pages/home-new/speed-scale/status-line/noise.svg')]"
+        aria-hidden
+      />
     </div>
   </Container>
 );
