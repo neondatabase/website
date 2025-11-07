@@ -205,7 +205,6 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
    - Total PRs analyzed
    - Customer-facing count
    - Excluded count
-   - **Uncertain count** (new for exploratory mode)
 
 2. **INCLUDE - Customer-Facing section:**
    For each PR:
@@ -219,13 +218,7 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
    - **Suggested Title:** (for HIGH confidence H2-worthy items only) Benefit-focused title
    - **Draft H2 Description:** (for HIGH confidence H2-worthy items only) Full draft following golden examples
 
-3. **UNCERTAIN section** (unique to Compute):
-   PRs where you're not sure:
-   - List PR with description
-   - **Why uncertain:** What makes this hard to categorize?
-   - **Could be customer-facing if:** What would make this relevant?
-
-4. **EXCLUDE section:**
+3. **EXCLUDE section:**
 
    **CRITICAL: You MUST list every excluded PR with a clickable link in a collapsed section.**
 
@@ -264,15 +257,7 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 
    **DO NOT skip this section.** List all excluded PRs with clickable links for human validation.
 
-5. **PATTERN OBSERVATIONS** (unique to Compute):
-   Document what you learned:
-   - What types of PRs appeared this week?
-   - Which were clearly customer-facing?
-   - Which were clearly internal?
-   - What patterns should we look for in future weeks?
-   - Suggestions for refining criteria
-
-6. **Extraction Details:**
+4. **Extraction Details:**
    - Output file path
    - File size
    - Status
@@ -280,11 +265,10 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 ### Format Example Structure
 
 ```markdown
-# Compute Analysis Complete (Exploratory Mode)
+# Compute Analysis Complete
 
 **Total PRs:** [count]
 **Customer-Facing:** [count]
-**Uncertain:** [count]
 **Excluded:** [count]
 
 ---
@@ -292,12 +276,6 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 ## INCLUDE - Customer-Facing ([count] PRs)
 
 [For each PR, include confidence level and detailed reasoning]
-
----
-
-## UNCERTAIN ([count] PRs)
-
-[List PRs you're unsure about with explanation]
 
 ---
 
@@ -328,19 +306,6 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 
 ---
 
-## PATTERN OBSERVATIONS
-
-**This Week's Patterns:**
-- [Observations about PR types]
-- [What was clearly customer-facing]
-- [What was clearly internal]
-
-**Recommendations for Future:**
-- [Suggest criteria refinements]
-- [Note patterns to watch for]
-
----
-
 ## Extraction Details
 
 - **Output File:** [path]
@@ -353,15 +318,13 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 - **This is exploratory** - we're learning together
 - Be honest about confidence levels
 - Document your reasoning clearly
-- The "Uncertain" section is valuable - don't hide PRs you're unsure about
-- **Only draft H2 descriptions for HIGH confidence items** - skip drafting for MEDIUM/LOW/UNCERTAIN
+- **Only draft H2 descriptions for HIGH confidence items** - skip drafting for MEDIUM/LOW
 - **If drafting:** Read `.claude/golden_changelog_examples.md` and follow the Postgres version update pattern
 - Draft while you have full PR context - main Claude won't have the diffs
 - Include specific version numbers in drafts
-- Pattern observations will help refine criteria for future weeks
 - Link format: `https://github.com/databricks-eng/hadron/pull/NUMBER`
-- When in doubt, put in "Uncertain" rather than guessing
-- After 3-4 weeks, we'll establish clear criteria like Storage has
+- When uncertain about a PR, make your best judgment and note low confidence
+- Focus on clear, concise analysis to stay within token limits
 
 **⚠️ Watch for HIPAA Announcements:**
 If you see audit logging improvements for a specific Postgres version (e.g., pgauditlogtofile + PG18), this might be part of a larger "HIPAA support for Postgres X" announcement. Flag this in your summary:
