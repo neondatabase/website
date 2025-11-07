@@ -168,7 +168,13 @@ To set up a Postgres CDC source connector for Confluent Cloud:
    Click **Continue**.
 
 5. On the **Add Postgres CDC Source connector** page:
-   - Add the connection details for your Neon database. You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Your connection string will look something like this:
+   - Add the connection details for your Neon database. You can find your admin Neon database connection credentials by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+
+   <Admonition type="important">
+   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
+   </Admonition>
+
+   Your connection string will look something like this:
 
      ```text
      postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require

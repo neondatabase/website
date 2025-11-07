@@ -163,9 +163,17 @@ Similar issues can occur when attempting to use `pg_dump` over a pooled connecti
 
 For the official list of limitations, refer to the "_SQL feature map for pooling modes_" section in the [pgbouncer.org Features](https://www.pgbouncer.org/features.html) documentation.
 
-## Connection pooling with schema migration tools
+## When to use direct connections
 
-We recommend using a direct (non-pooled) connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
+While connection pooling is beneficial for most applications, certain operations require a direct (non-pooled) connection to Postgres:
+
+### Schema migrations
+
+We recommend using a direct connection string when performing migrations using Object Relational Mappers (ORMs) and similar schema migration tools. With the exception of recent versions of [Prisma ORM, which support using a pooled connection string with Neon](/docs/guides/prisma#using-a-pooled-connection-with-prisma-migrate), using a pooled connection string for migrations is likely not supported or prone to errors. Before attempting to perform migrations over a pooled connection string, please refer to your tool's documentation to determine if pooled connections are supported.
+
+### Logical replication
+
+Logical replication typically requires a persistent connection and is not compatible with connection poolers like PgBouncer. When configuring logical replication subscribers (such as Fivetran, Airbyte, or other CDC tools), always use a direct connection string. Make sure your connection string does not include `-pooler` in the hostname. For more information, see [Logical replication](/docs/guides/logical-replication-neon).
 
 ## Optimize queries with PgBouncer and prepared statements
 
