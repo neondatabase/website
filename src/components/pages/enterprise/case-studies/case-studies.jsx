@@ -41,7 +41,7 @@ const CaseStudies = ({ items }) => (
         Explore all case studies
       </Link>
     </Container>
-    <Container className="relative mt-11 xl:mt-12 xl:!px-0 md:mt-10 md:!px-0" size="1216">
+    <Container className="relative mt-11 xl:mt-12 xl:!px-0 md:mt-10" size="1280">
       <ul className="grid w-full grid-cols-3 px-6 xl:px-0 md:grid-cols-2">
         {items.map(({ title, description, logo, link }, index) => (
           <li key={index}>

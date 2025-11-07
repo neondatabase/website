@@ -78,6 +78,7 @@ const Navigation = ({ isDarkTheme }) => (
                               title,
                               description,
                               to,
+                              isExternal,
                             }) => (
                               <li key={title}>
                                 <Link
@@ -92,6 +93,7 @@ const Navigation = ({ isDarkTheme }) => (
                                       : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
                                   )}
                                   to={to}
+                                  isExternal={isExternal}
                                   tagName="Navigation"
                                   tagText={title}
                                 >
