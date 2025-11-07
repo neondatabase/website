@@ -219,7 +219,43 @@ Snapshots are automatically deleted after their retention period expires. You ca
 
 <TabItem>
 
-API support for managing snapshot schedules is not currently available. Use the Neon Console to create and manage snapshot schedules.
+You can view and update backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+
+**View backup schedule**
+
+Retrieves the current backup schedule configuration for a branch using the [View backup schedule](https://api-docs.neon.tech/reference/getsnapshotschedule) endpoint.
+
+```bash
+GET /projects/{project_id}/branches/{branch_id}/backup_schedule
+```
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+```
+
+**Update backup schedule**
+
+Updates the backup schedule configuration for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint. You can set daily, weekly, or monthly schedules with custom retention periods.
+
+```bash
+PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
+```
+
+```bash
+curl -X PUT 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "schedule": {
+      "frequency": "daily",
+      "time": "02:00"
+    },
+    "retention": {
+      "days": 14
+    }
+  }' | jq
+```
 
 </TabItem>
 
