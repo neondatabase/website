@@ -5,13 +5,13 @@ import CopyIcon from 'icons/home-new/copy.inline.svg';
 
 const Hero = () => (
   <section className="hero safe-paddings relative h-screen">
-    <Container className="relative flex h-full flex-col items-center justify-center" size="1600">
-      <HeadingLabel className="-ml-80">Ship faster with Postgres</HeadingLabel>
-      <div className="mt-20 flex gap-x-5">
-        <Button className="!font-medium" theme="white-filled" size="xs">
+    <Container className="relative flex h-full flex-col justify-center" size="1600">
+      <HeadingLabel>Ship faster with Postgres</HeadingLabel>
+      <div className="mt-20 flex gap-5 md:flex-col">
+        <Button theme="white-filled" size="new">
           Get started
         </Button>
-        <Button className="!font-normal" theme="gray-15-outline" size="xs">
+        <Button theme="gray-40-outline" size="new">
           Read the docs
         </Button>
         <Button

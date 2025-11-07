@@ -35,10 +35,7 @@ const FEATURES = [
 
 const Features = () => (
   <section className="features mb-60 mt-[200px] xl:mb-[200px] xl:mt-[184px] lg:mb-40 lg:mt-36 md:mb-32 md:mt-24">
-    <Container
-      className="flex flex-col items-center gap-14 lg:gap-12 md:gap-10 md:px-5"
-      size="1216"
-    >
+    <Container className="flex flex-col items-center gap-14 lg:gap-12 md:gap-10" size="1280">
       <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:max-w-[540px] xl:text-5xl lg:text-[40px] md:text-[32px]">
         Serverless Postgres, built for&nbsp;developers
       </h2>
