@@ -68,17 +68,17 @@ else
   LAST_FRIDAY=$(date -v-"${DAYS_BACK}"d '+%Y-%m-%d')
 fi
 
-# Calculate next Friday (publication date)
-DAYS_UNTIL_FRIDAY=$(( (5 - DOW + 7) % 7 ))
-if [ "$DAYS_UNTIL_FRIDAY" -eq 0 ]; then
-  NEXT_FRIDAY=$(date -v+7d '+%Y-%m-%d')
+# Calculate publication date (today if Friday, otherwise next Friday)
+if [ "$DOW" -eq 5 ]; then
+  PUBLICATION_DATE="$TODAY"
 else
-  NEXT_FRIDAY=$(date -v+"${DAYS_UNTIL_FRIDAY}"d '+%Y-%m-%d')
+  DAYS_UNTIL_FRIDAY=$(( (5 - DOW + 7) % 7 ))
+  PUBLICATION_DATE=$(date -v+"${DAYS_UNTIL_FRIDAY}"d '+%Y-%m-%d')
 fi
 
 echo "=== CHANGELOG GENERATION ==="
 echo "PR Date Range: $LAST_FRIDAY to $TODAY"
-echo "Publication Date: $NEXT_FRIDAY"
+echo "Publication Date: $PUBLICATION_DATE"
 echo "============================"
 ```
 
@@ -236,7 +236,7 @@ ls -la content/changelog/*.md 2>/dev/null | tail -5 || true
 
 Compile all agent summaries into a single triage report file.
 
-**File:** `$OUTPUT_DIR/triage_report_${NEXT_FRIDAY}.md`
+**File:** `$OUTPUT_DIR/triage_report_${PUBLICATION_DATE}.md`
 
 **Structure:**
 
@@ -290,18 +290,18 @@ Compile all agent summaries into a single triage report file.
 
 ## Step 8: Generate Changelog Draft
 
-**File:** `content/changelog/${NEXT_FRIDAY}.md`
+**File:** `content/changelog/${PUBLICATION_DATE}.md`
 
 ### Check for Existing Changelog
 
 First, check if the changelog file already exists:
 
 ```bash
-if [ -f "content/changelog/${NEXT_FRIDAY}.md" ]; then
-  echo "📝 Existing changelog found: content/changelog/${NEXT_FRIDAY}.md"
+if [ -f "content/changelog/${PUBLICATION_DATE}.md" ]; then
+  echo "📝 Existing changelog found: content/changelog/${PUBLICATION_DATE}.md"
   echo "This file will be updated with new agent findings."
 else
-  echo "📝 Creating new changelog: content/changelog/${NEXT_FRIDAY}.md"
+  echo "📝 Creating new changelog: content/changelog/${PUBLICATION_DATE}.md"
 fi
 ```
 
