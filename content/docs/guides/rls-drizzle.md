@@ -603,6 +603,7 @@ If you're building a frontend application, the [Data API](/docs/data-api/get-sta
 Your RLS policies (defined with Drizzle) automatically enforce security at the database level when queries come through the Data API.
 
 For complete examples of using Drizzle RLS with the Data API, see:
+
 - [Data API tutorial](/docs/data-api/demo) - Full note-taking app example
 - [Data API getting started](/docs/data-api/get-started) - Setup and basic queries
 
@@ -648,6 +649,7 @@ async function getTodosForUser(jwtToken: string) {
 ```
 
 **Pattern breakdown:**
+
 1. **Verify the JWT** using your authentication provider's method
 2. **Set the claims** in the database session using `set_config()` within a transaction
 3. **Execute Drizzle queries** in the same transaction - RLS policies use `auth.user_id()` to enforce access
