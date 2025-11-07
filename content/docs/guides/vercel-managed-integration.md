@@ -130,6 +130,7 @@ To verify preview branching works:
 Preview branches are automatically deleted when their corresponding Vercel deployments are deleted. This keeps your Neon project organized and reduces storage usage.
 
 **How it works:**
+
 - Each Git branch can have multiple Vercel deployments, all using the same Neon branch
 - When the last deployment for a Git branch is deleted (manually or via Vercel's deployment retention policy), Neon automatically deletes the corresponding database branch
 - Cleanup happens when deployments are deleted, which you can automate using [Vercel's retention policy settings](https://vercel.com/docs/deployment-retention)
