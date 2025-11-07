@@ -7,9 +7,11 @@ updatedOn: '2025-08-02T10:33:29.248Z'
 
 The `anon` extension ([PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io)) provides data masking and anonymization capabilities to protect sensitive data in Postgres databases. It helps protect personally identifiable information (PII) and other sensitive data, facilitating compliance with regulations such as [GDPR](https://gdpr-info.eu/).
 
-This guide introduces the `anon` extension and demonstrates how to implement masking rules for static data anonymization, which is currently the only supported masking method.
+This reference guide introduces the `anon` extension's capabilities and masking functions.
 
-<CTA />
+<Admonition type="tip" title="Looking for a practical guide?">
+For complete step-by-step workflows on anonymizing data in Neon branches, including manual procedures and GitHub Actions automation, see [data anonymization](/docs/workflows/data-anonymization).
+</Admonition>
 
 ## Enable the extension
 
@@ -17,7 +19,11 @@ This guide introduces the `anon` extension and demonstrates how to implement mas
 The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
 </Admonition>
 
-Enable the `anon` extension in your Neon database by following these steps:
+When using the Neon Console or API for anonymization workflows, the extension is enabled automatically. It can also be enabled manually using SQL commands.
+
+### Enable via SQL
+
+When working with SQL-based workflows (such as using `psql` or other SQL clients), enable the `anon` extension in your Neon database by following these steps:
 
 1. Connect to your Neon database using either the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor)
 
@@ -32,6 +38,10 @@ Enable the `anon` extension in your Neon database by following these steps:
    ```sql
    CREATE EXTENSION IF NOT EXISTS anon;
    ```
+
+<Admonition type="tip">
+When using the Neon Console or API to create branches, the extension is enabled automatically. See the [data anonymization workflow guide](/docs/workflows/data-anonymization) for details.
+</Admonition>
 
 ## Masking rules
 
@@ -68,82 +78,14 @@ When using Neon's branch features with static masking:
 - Resetting a branch from the parent replaces all branch data with the parent's current state
 - In both cases, any previous anonymization is lost and must be reapplied
 
-## Implementation example
+## Practical examples
 
-<Steps>
+For complete implementation examples showing how to apply these masking functions in real workflows, see the [data anonymization guide](/docs/workflows/data-anonymization), which covers:
 
-## Create a sample table
-
-Create a sample `users` table with sensitive information:
-
-```sql
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE,
-    email VARCHAR(255),
-    phone_number VARCHAR(20),
-    city VARCHAR(100)
-);
-
-INSERT INTO users (username, email, phone_number, city) VALUES
-    ('john_doe', 'john.doe@example.com', '555-123-4567', 'New York'),
-    ('jane_smith', 'jane.smith@example.com', '555-987-6543', 'Los Angeles'),
-    ('peter_jones', 'peter.jones@example.com', '555-555-1111', 'Chicago');
-```
-
-## Define masking rules
-
-Apply masking rules to specific columns using `SECURITY LABEL`:
-
-```sql
--- Mask email addresses with realistic-looking but fake emails
-SECURITY LABEL FOR anon ON COLUMN users.email
-IS 'MASKED WITH FUNCTION anon.dummy_safe_email()';
-
--- Partially mask phone numbers, preserving the first digit and last two digits
-SECURITY LABEL FOR anon ON COLUMN users.phone_number
-IS 'MASKED WITH FUNCTION anon.partial(phone_number, 1, ''XXX-XXX-'', 2)';
-```
-
-## Initialize and apply masking
-
-The `anon.init()` function initializes the `anon` extension by loading default fake data sets and setting up the masking environment. This required step prepares the database for anonymization operations and must be executed before applying any masking functions.
-
-```sql
-SELECT anon.init();
-```
-
-Then apply the masking rules to permanently transform the data:
-
-<Admonition type="warning">
-Static masking irreversibly modifies your data. The original values cannot be recovered after anonymization.
-</Admonition>
-
-```sql
-SELECT anon.anonymize_table('users');
-```
-
-## Verify results
-
-After applying the masking, your data will be anonymized according to the defined rules:
-
-```sql
-SELECT * FROM users;
-```
-
-| id  | username    | email                     | phone_number | city        |
-| --- | ----------- | ------------------------- | ------------ | ----------- |
-| 1   | john_doe    | mcknightjulie@example.org | 5XXX-XXX-67  | New York    |
-| 2   | jane_smith  | davidhanson@example.org   | 5XXX-XXX-43  | Los Angeles |
-| 3   | peter_jones | michael33@example.org     | 5XXX-XXX-11  | Chicago     |
-
-Note how:
-
-- Email addresses were replaced with fictional but valid looking addresses
-- Phone numbers only show the first digit and last two digits
-- The `username` and `city` columns remain unchanged as no masking rules were defined for them
-
-</Steps>
+- Creating and anonymizing development branches
+- Applying different masking strategies to protect sensitive data
+- Automating anonymization with GitHub Actions
+- Best practices and safety tips
 
 ## Limitations
 
@@ -158,6 +100,7 @@ By defining appropriate masking rules, you can create anonymized datasets that m
 
 ## Reference
 
+- [Data anonymization workflow guide](/docs/workflows/data-anonymization) - Practical guide for anonymizing data in Neon branches
 - [PostgreSQL Anonymizer Repository](https://gitlab.com/dalibo/postgresql_anonymizer)
 - [Official Documentation](https://postgresql-anonymizer.readthedocs.io/en/latest/)
 - [Masking Functions Reference](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/)
