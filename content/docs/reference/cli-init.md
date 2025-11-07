@@ -2,7 +2,7 @@
 title: Neon CLI commands — init
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-10-31T19:17:38.911Z'
+updatedOn: '2025-11-06T20:54:36.048Z'
 ---
 
 ## Before you begin
@@ -12,31 +12,27 @@ updatedOn: '2025-10-31T19:17:38.911Z'
 
 ## The `init` command
 
-The `init` command helps you quickly connect your app to Neon and enable the Neon integration in your Cursor chat. The command walks you through an interactive setup, configuring the Neon MCP (Model Context Protocol) server and creating context files that give your AI assistant full knowledge about your Neon project and best practices.
+The `init` command installs the Neon MCP (Model Context Protocol) Server and authenticates it to Neon using a Neon API key.
 
 ### Usage
 
-Run this command in the root directory of your application:
+#### From the CLI:
+
+You can run it from the Neon CLI to install the Neon MCP (Model Context Protocol) Server and authenticate.
 
 ```bash
 neon init
 ```
 
-Or use `npx` without installing the CLI globally:
+#### npx
+
+You can also run the `init` command in the root directory of your app with `npx` instead of installing the Neon CLI locally:
 
 ```bash
-npx neonctl init
+npx neonctl@latest init
 ```
 
-### What it does
-
-When you run `neon init`, the command performs the following setup steps:
-
-1. **Configures the Neon MCP Server** — Sets up the connection between your AI coding assistant and Neon, enabling the assistant to interact with your databases, branches, and projects
-2. **Creates `neon.md`** — Generates a file with detailed guidelines and best practices for working with Neon in your project
-3. **Creates `AGENTS.md`** (for Cursor) — Sets up Cursor-specific configuration to enable integration with Neon
-
-After setup, you can ask your Cursor chat to "Get started with Neon" and it will have full context about your project and Neon best practices.
+After running the command, you can ask your Cursor chat to "Get started with Neon using MCP Resource", as shown in the example below. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, including helping you configure a database connection.
 
 ### Options
 
@@ -44,36 +40,43 @@ This command supports [global options](/docs/reference/neon-cli#global-options) 
 
 ## Example
 
-Navigate to the root directory of your application and initialize Neon:
+Navigate to the root directory of your application and run the `neonctl@latest init` command:
 
 ```bash
 cd /path/to/your/app
-neon init
+npx neonctl@latest init
 ```
 
-Or use `npx`:
+The command outputs progress as it completes each step:
 
 ```bash
-cd /path/to/your/app
-npx neonctl init
-```
-
-The command will output progress as it completes each step:
-
-```bash
-🚀 Neon Project Initialization
-Step 1/3: Configuring Neon MCP Server...
-Step 2/3: Creating neon.md with detailed guidelines...
-Step 3/3: Creating AGENTS.md for Cursor...
-✓ Success! Neon project initialized.
+npx neonctl@latest init
+┌  Adding Neon to your project
+│
+◒  Authenticating.
+┌────────┬──────────────────┬────────┬────────────────┐
+│ Login  │ Email            │ Name   │ Projects Limit │
+├────────┼──────────────────┼────────┼────────────────┤
+│ alex   │ alex@domain.com  │ Alex   │ 20             │
+└────────┴──────────────────┴────────┴────────────────┘
+◇  Authentication successful ✓
+│
+◇  Installed Neon MCP server
+│
+◇  Success! Neon is now ready to use with Cursor.
+│
+│
+◇  What's next? ────────────────────────────────────────────────────────────────────────────╮
+│                                                                                           │
+│  Restart Cursor and ask Cursor to "Get started with Neon using MCP Resource" in the chat  │
+│                                                                                           │
+├───────────────────────────────────────────────────────────────────────────────────────────╯
+│
+└  Have feedback? Email us at feedback@neon.tech
 ```
 
 ## AI Assistant Support
 
 This feature is currently in beta for Cursor, with VS Code and Claude Code support coming soon.
-
-<Admonition type="note">
-The files created by `neon init` are safe to commit to your repository. They contain documentation and configuration but no sensitive credentials.
-</Admonition>
 
 <NeedHelp/>

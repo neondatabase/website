@@ -34,7 +34,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 | ------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | Projects                        | **Custom limits available** <br/> _Agents create a new project for each user application._            |
 | Branches per Project            | **Custom limits available** <br/> _Agents use branches to quickly toggle between application states._ |
-| Compute                         | from **$0.14 per CU-hour** <br/> _Same as Launch_                                                     |
+| Compute                         | from **$0.106 per CU-hour** <br/> _Same as Launch_                                                    |
 | Storage                         | **$0.35 per GB-month** <br/> _Same as Launch/Scale_                                                   |
 | Instant Restore (PITR)          | **$0.2 per GB-month** <br/> _Same as Launch/Scale_                                                    |
 | Neon Auth                       | **Included** <br/> _All-in-one API for handling user signup and management in Neon_                   |
