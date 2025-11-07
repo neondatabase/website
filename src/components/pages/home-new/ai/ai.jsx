@@ -6,7 +6,7 @@ const AI = () => (
       className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:block"
       size="1600"
     >
-      Get Postgres (AI) section
+      <div className="flex size-full items-center justify-center">AI section</div>
     </Container>
   </section>
 );

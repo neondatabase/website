@@ -9,7 +9,9 @@ const Features = () => (
       className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:block"
       size="1600"
     >
-      Production Grade Features section
+      <div className="flex size-full items-center justify-center">
+        Production Grade Features section
+      </div>
     </Container>
   </section>
 );
