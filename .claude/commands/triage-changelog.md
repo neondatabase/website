@@ -290,11 +290,34 @@ Compile all agent summaries into a single triage report file.
 
 ## Step 8: Generate Changelog Draft
 
-Read the golden examples file: `.claude/golden_changelog_examples.md`
-
 **File:** `content/changelog/${NEXT_FRIDAY}.md`
 
+### Check for Existing Changelog
+
+First, check if the changelog file already exists:
+
+```bash
+if [ -f "content/changelog/${NEXT_FRIDAY}.md" ]; then
+  echo "📝 Existing changelog found: content/changelog/${NEXT_FRIDAY}.md"
+  echo "This file will be updated with new agent findings."
+else
+  echo "📝 Creating new changelog: content/changelog/${NEXT_FRIDAY}.md"
+fi
+```
+
+**If changelog exists:**
+- Read the existing content first
+- Identify what's already documented
+- Add new items from agent analysis that aren't already covered
+- Preserve existing content that agents didn't find (pricing changes, quota updates, etc.)
+- Improve/polish existing descriptions using agent drafts where applicable
+
+**If creating new:**
+- Generate fresh changelog from agent recommendations
+
 ### Drafting Process
+
+Read the golden examples file: `.claude/golden_changelog_examples.md`
 
 1. **Read golden examples** to understand voice and structure patterns
 
