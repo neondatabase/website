@@ -39,7 +39,7 @@ The Neon [Data API](/docs/data-api/get-started) provides the `auth.user_id()` fu
 using: sql`(select auth.user_id() = ${table.userId})`,
 ```
 
-All code samples on this page assume you are using the Data API.
+Many code samples on this page use the `auth.user_id()` function provided by the Data API, which is designed for querying your database from the frontend. When exposing your database this way, RLS policies are essential to keep your data secure. We recommend using Drizzle to write RLS policies because they're easier to maintain than raw SQL—and these policies work with any query method: the Data API, the serverless driver, or direct database connections all enforce the same security rules.
 
 ### Granting Permissions to Postgres Roles
 
@@ -156,6 +156,10 @@ export const todos = pgTable(
   ]
 );
 ```
+
+<Admonition type="note">
+**About Drizzle's role:** Drizzle is used here to **declare your RLS policies** in TypeScript. When you run migrations, these policies are created in your Postgres database. After that, the policies are enforced regardless of how you query your data—via the Data API, the serverless driver, or any other connection method.
+</Admonition>
 
 ### Configuration parameters
 
@@ -590,165 +594,93 @@ This approach lets you easily combine multiple roles with different permissions 
 
 ## Client side integration
 
-Defining policies is only half the story. You also need to configure your Drizzle client to send authenticated requests from your application.
+After defining RLS policies in your Drizzle schema and running migrations, you need to execute queries with proper authentication. There are two main approaches:
 
-### Handling multiple connection strings
+### Using the Data API
 
-A typical secure setup uses two or more database connection strings:
+If you're building a frontend application, the [Data API](/docs/data-api/get-started) provides a REST API for querying your database. In this case, Drizzle is used only to **declare your RLS policies**—you won't use Drizzle's query builder for executing queries. Instead, you'll use a PostgREST-compatible client like `postgrest-js`.
 
-1.  **Admin/Direct URL**: Used for running migrations and performing admin tasks from a secure backend. This connection has broad permissions.
-2.  **RLS/Authenticated URL**: Used for client-facing queries. This is the special Neon connection string that enforces JWT validation and RLS.
+Your RLS policies (defined with Drizzle) automatically enforce security at the database level when queries come through the Data API.
 
-It's best practice to initialize two separate Drizzle clients.
+For complete examples of using Drizzle RLS with the Data API, see:
+- [Data API tutorial](/docs/data-api/demo) - Full note-taking app example
+- [Data API getting started](/docs/data-api/get-started) - Setup and basic queries
 
-```typescript
-// src/db/admin.ts
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+### Using Drizzle with the serverless driver
 
-// Use for migrations and backend administrative tasks
-const sql = neon(process.env.DATABASE_URL_ADMIN!);
-export const dbAdmin = drizzle(sql);
-
-// src/db/user.ts
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-
-// Use for all user-facing queries that need RLS
-const sql = neon(process.env.DATABASE_URL_AUTHENTICATED!);
-export const dbUser = drizzle(sql);
-
-// src/db/anonymous.ts
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
-
-// Use for all anonymous user queries
-const sql = neon(process.env.DATABASE_URL_ANONYMOUS!);
-export const dbAnonymous = drizzle(sql);
-```
-
-> You can find and copy the connection strings for each database role in your Neon Project dashboard.
-
-### Additional drizzle clients for custom roles
-
-If your application uses custom roles: such as `editor`, `moderator`, or `admin`, you should create similar Drizzle clients for each role. This allows you to use different connection strings or authentication tokens, ensuring that each client enforces the correct permissions and Row-Level Security (RLS) policies.
-
-For example, to add an `editor` client:
+For backend APIs where you want to use Drizzle's query builder with RLS, you can use the `drizzle-orm/neon-serverless` driver with JWT verification in transactions:
 
 ```typescript
-// src/db/editor.ts
-import { neon } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-http';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { Pool } from '@neondatabase/serverless';
+import { todos } from './schema'; // Your Drizzle schema
+import { sql } from 'drizzle-orm';
 
-// Use for editor-specific operations
-const sql = neon(process.env.DATABASE_URL_EDITOR!);
-export const dbEditor = drizzle(sql);
-```
-
-You can then use `dbEditor` for queries that require editor privileges, while continuing to use `dbUser` and `dbAdmin` for their respective roles. This approach keeps your access control clear and ensures that each part of your application interacts with the database using the appropriate permissions.
-
-### Authenticating queries with `.$withAuth()`
-
-When using the `drizzle-orm/neon-http` driver with your RLS connection string, you must provide a valid JWT for every query. Drizzle enables this with the `.$withAuth()` method.
-
-Here is a simple example of fetching todos for the currently logged-in user:
-
-```typescript
-import { dbUser } from '@/db/user';
-import { todos } from '@/db/schema';
-
-async function getTodosForUser(authToken: string) {
-  // The .$withAuth() call injects the JWT into the request header.
-  // Neon's proxy validates the token and makes auth.user_id() available to your RLS policies.
-  const userTodos = await dbUser.$withAuth(authToken).select().from(todos);
-
-  return userTodos;
+// Example JWT verification (implement based on your auth provider)
+async function verifyJWT(token: string, jwksUrl: string) {
+  // Your verification logic here
+  return { sub: 'user-id', email: 'user@example.com' };
 }
-```
 
-> Replace `authToken` with your actual JWT token. Refer to your authentication provider’s documentation for instructions on obtaining this token, look for terms like "session token," "JWT," or "auth token".
+async function getTodosForUser(jwtToken: string) {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+  const db = drizzle(pool);
 
-If your queries use the anonymous role, you don't need to call `.$withAuth()`—authentication is only required for roles that enforce user-specific access. In those cases use the `dbAnonymous` client.
+  try {
+    // Verify JWT
+    const { payload } = await verifyJWT(jwtToken, process.env.JWKS_URL!);
+    const claims = JSON.stringify(payload);
 
-### Creating a reusable RLS client helper
+    // Use Drizzle transaction to set auth and query
+    const result = await db.transaction(async (tx) => {
+      // Set JWT claims in the session
+      await tx.execute(sql`SELECT set_config('request.jwt.claims', ${claims}, true)`);
 
-Instead of calling `.$withAuth(await getToken())` for every query, you can streamline your workflow with a reusable helper. The following function integrates authentication and user context, making it easy to run queries with Row-Level Security (RLS) enforced.
-
-The following example code uses Clerk for authentication. You must adapt it to your authentication provider to retrieve the user's JWT.
-
-```typescript
-import * as schema from '@/app/schema';
-import { auth } from '@clerk/nextjs/server';
-import { neon, NeonQueryFunction } from '@neondatabase/serverless';
-import { drizzle, NeonHttpDatabase } from 'drizzle-orm/neon-http';
-
-export async function fetchWithDrizzle<T>(
-  callback: (
-    db: Omit<
-      NeonHttpDatabase<typeof schema> & {
-        $client: NeonQueryFunction<false, false>;
-      },
-      '_' | 'transaction' | '$withAuth' | 'batch' | '$with' | '$client'
-    >,
-    { userId, authToken }: { userId: string; authToken: string }
-  ) => Promise<T>
-) {
-  const { getToken, userId } = auth();
-  const authToken = await getToken();
-
-  if (!authToken) {
-    // Optionally, you can fall back to using `DATABASE_ANONYMOUS_URL` if your application's access policies allow anonymous queries.
-    throw new Error('No authentication token found.');
-  }
-
-  if (!userId) {
-    throw new Error('No userId');
-  }
-
-  const db = drizzle(neon(process.env.DATABASE_AUTHENTICATED_URL!), {
-    schema,
-  });
-  const dbWithAuth = db.$withAuth(authToken);
-  return callback(dbWithAuth, { userId, authToken });
-}
-```
-
-This helper ensures that every query is executed with the correct authentication context, reducing boilerplate and centralizing your RLS logic.
-
-**Example usage in a Server Action (e.g., Next.js):**
-
-```typescript
-'use server';
-
-import { fetchWithDrizzle } from '@/app/db';
-import * as schema from '@/app/schema';
-import { asc, eq, sql } from 'drizzle-orm';
-import { revalidatePath } from 'next/cache';
-
-// Insert a new todo for the current user
-export async function insertTodo({ newTodo }: { newTodo: string }) {
-  await fetchWithDrizzle(async (db) => {
-    return db.insert(schema.todos).values({
-      task: newTodo,
-      isComplete: false,
+      // Now execute your Drizzle query - RLS policies will enforce access
+      return await tx.select().from(todos);
     });
-  });
-}
 
-// Fetch todos for the current user, ordered by creation time
-export async function getTodos() {
-  return fetchWithDrizzle(async (db) => {
-    // WHERE filter is optional due to RLS, but included for performance
-    return db
-      .select()
-      .from(schema.todos)
-      .where(eq(schema.todos.userId, sql`auth.user_id()`))
-      .orderBy(asc(schema.todos.insertedAt));
-  });
+    return result;
+  } finally {
+    await pool.end();
+  }
 }
 ```
 
-This pattern uses a reusable `fetchWithDrizzle` helper to ensure authentication and Row-Level Security (RLS) are consistently applied to all database operations, keeping your server actions clean and secure.
+**Pattern breakdown:**
+1. **Verify the JWT** using your authentication provider's method
+2. **Set the claims** in the database session using `set_config()` within a transaction
+3. **Execute Drizzle queries** in the same transaction - RLS policies use `auth.user_id()` to enforce access
+
+<Admonition type="important">
+When using this pattern, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role, as it bypasses Row-Level Security policies.
+</Admonition>
+
+### Using raw SQL with the serverless driver
+
+If you prefer not to use Drizzle's query builder and want to write raw SQL queries, you can use the Neon serverless driver's HTTP interface:
+
+```typescript
+import { neon } from '@neondatabase/serverless';
+
+async function getTodosForUser(jwtToken: string) {
+  const sql = neon(process.env.DATABASE_URL!);
+
+  // Verify JWT
+  const { payload } = await verifyJWT(jwtToken, process.env.JWKS_URL!);
+  const claims = JSON.stringify(payload);
+
+  // Set JWT claims and execute query in a transaction
+  const [, todos] = await sql.transaction([
+    sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
+    sql`SELECT * FROM todos`,
+  ]);
+
+  return todos;
+}
+```
+
+For more details on this pattern, see [Using transactions with JWT self-verification](/docs/serverless/serverless-driver#using-transactions-with-jwt-self-verification) in the serverless driver documentation.
 
 ## Example applications
 
