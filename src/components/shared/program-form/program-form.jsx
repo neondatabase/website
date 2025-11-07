@@ -15,24 +15,14 @@ import sendGtagEvent from 'utils/send-gtag-event';
 
 import DATA from './data';
 
-function getCookie(name) {
-  if (typeof document === 'undefined') return null;
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
 // Schema for validation
-const createSchema = (isRecognized, useCustomEmail) =>
+const createSchema = () =>
   yup.object({
-    url: yup.string().required('This field is required').url('Please enter a valid URL'),
-    email: yup.string().when([], {
-      is: () => !isRecognized || useCustomEmail,
-      then: (schema) =>
-        schema.email('Please enter a valid email address').required('This field is required'),
-      otherwise: (schema) => schema,
-    }),
+    url: yup.string().required('This field is required'),
+    email: yup
+      .string()
+      .email('Please enter a valid email address')
+      .required('This field is required'),
   });
 
 const fieldProps = {
@@ -43,8 +33,6 @@ const fieldProps = {
 
 const ProgramForm = ({ type }) => {
   const { title, description, placeholder, buttonText } = DATA[type];
-  const isRecognized = !!getCookie('ajs_user_id');
-  const [useCustomEmail, setUseCustomEmail] = useState(false);
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
 
   const {
@@ -52,7 +40,7 @@ const ProgramForm = ({ type }) => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createSchema(isRecognized, useCustomEmail)),
+    resolver: yupResolver(createSchema()),
     mode: 'onSubmit',
   });
 
@@ -67,13 +55,9 @@ const ProgramForm = ({ type }) => {
       if (window.zaraz) {
         const { eventName } = DATA[type];
 
-        // Send identify event if user provided email (either not recognized or using custom email)
-        const emailToSend = isRecognized && !useCustomEmail ? null : email;
-
-        if (emailToSend) {
-          await sendGtagEvent('identify', { email: emailToSend });
-        }
-        await sendGtagEvent(eventName, { email: emailToSend, url });
+        // Send identify event with user provided email
+        await sendGtagEvent('identify', { email });
+        await sendGtagEvent(eventName, { email, url });
       }
 
       doNowOrAfterSomeTime(() => {
@@ -110,57 +94,16 @@ const ProgramForm = ({ type }) => {
               {...register('url')}
             />
 
-            {isRecognized ? (
-              <div className="space-y-3">
-                <div className="flex items-center justify-between gap-3 rounded bg-green-45/10 p-3 dark:bg-green-45/20 sm:flex-col sm:items-start">
-                  <div className="flex items-center gap-3">
-                    <CheckIcon className="size-4 shrink-0 text-green-45" aria-hidden />
-                    <span className="text-sm text-gray-new-30 dark:text-gray-new-70">
-                      We have your Neon Account Email
-                    </span>
-                  </div>
-                  <label
-                    htmlFor="override"
-                    className="flex cursor-pointer items-center gap-2 whitespace-nowrap text-sm"
-                  >
-                    <input
-                      name="override"
-                      id="override"
-                      type="checkbox"
-                      checked={useCustomEmail}
-                      className="rounded border-gray-new-70 text-green-45 focus:ring-green-45"
-                      onChange={(e) => setUseCustomEmail(e.target.checked)}
-                    />
-                    <span className="text-gray-new-40 dark:text-gray-new-60">
-                      Use a different email address
-                    </span>
-                  </label>
-                </div>
-                {useCustomEmail && (
-                  <Field
-                    {...fieldProps}
-                    name="email"
-                    label="Contact Email *"
-                    type="email"
-                    placeholder="Enter your preferred email"
-                    error={errors.email?.message}
-                    isDisabled={formState === FORM_STATES.LOADING}
-                    {...register('email')}
-                  />
-                )}
-              </div>
-            ) : (
-              <Field
-                {...fieldProps}
-                name="email"
-                label="Contact Email *"
-                type="email"
-                placeholder="Enter your email address"
-                error={errors.email?.message}
-                isDisabled={formState === FORM_STATES.LOADING}
-                {...register('email')}
-              />
-            )}
+            <Field
+              {...fieldProps}
+              name="email"
+              label="Contact Email *"
+              type="email"
+              placeholder="Enter your email address"
+              error={errors.email?.message}
+              isDisabled={formState === FORM_STATES.LOADING}
+              {...register('email')}
+            />
           </div>
 
           <Button
