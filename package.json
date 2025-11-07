@@ -37,7 +37,7 @@
     "@headlessui/react": "^2.1.2",
     "@headlessui/tailwindcss": "^0.2.0",
     "@hookform/resolvers": "^3.3.4",
-    "@inkeep/uikit": "^0.3.8",
+    "@inkeep/uikit": "^0.3.20",
     "@neondatabase/api-client": "^1.12.0",
     "@neondatabase/serverless": "^0.10.4",
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -144,5 +144,8 @@
     "tailwindcss": "^3.4.3",
     "url-loader": "^4.1.1",
     "vitest": "^4.0.2"
+  },
+  "overrides": {
+    "@zag-js/core": ">=0.82.2"
   }
 }
