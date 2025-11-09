@@ -666,7 +666,6 @@ async function getTodosForUser(jwtToken: string) {
 When using this pattern, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role, as it bypasses Row-Level Security policies.
 </Admonition>
 
-
 ## Example applications
 
 To see these concepts in action, check out these sample applications:
