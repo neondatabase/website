@@ -43,7 +43,8 @@ using: sql`(select auth.user_id() = ${table.userId})`,
 Many code samples on this page use the `auth.user_id()` function provided by the [Data API](/docs/data-api/get-started). We recommend using Drizzle to **declare your RLS policies** because they're easier to maintain than raw SQL. Once you define policies in your Drizzle schema and run migrations, they're created in your Postgres database and enforced for all queries.
 =======
 Many code samples on this page use the `auth.user_id()` function provided by the Data API, which is designed for querying your database from the frontend. When exposing your database this way, RLS policies are essential to keep your data secure. We recommend using Drizzle to write RLS policies because they're easier to maintain than raw SQL—and these policies work with any query method: the Data API, the serverless driver, or direct database connections all enforce the same security rules.
->>>>>>> 65bde15a5f797d7309d28e3f75f00e94c18a93bd
+
+> > > > > > > 65bde15a5f797d7309d28e3f75f00e94c18a93bd
 
 ### Granting Permissions to Postgres Roles
 
@@ -619,8 +620,8 @@ If you're building a frontend application, the [Data API](/docs/data-api/get-sta
 
 Your RLS policies (defined with Drizzle) automatically enforce security at the database level when queries come through the Data API.
 
->>>>>>> 65bde15a5f797d7309d28e3f75f00e94c18a93bd
-For complete examples of using Drizzle RLS with the Data API, see:
+> > > > > > > 65bde15a5f797d7309d28e3f75f00e94c18a93bd
+> > > > > > > For complete examples of using Drizzle RLS with the Data API, see:
 
 - [Data API tutorial](/docs/data-api/demo) - Full note-taking app example
 - [Data API getting started](/docs/data-api/get-started) - Setup and basic queries
