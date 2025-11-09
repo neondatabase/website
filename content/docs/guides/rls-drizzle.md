@@ -41,53 +41,6 @@ using: sql`(select auth.user_id() = ${table.userId})`,
 
 When exposing your database directly to clients (such as through the Data API), RLS policies are essential to keep your data secure. We recommend using Drizzle to **declare your RLS policies** because they're easier to maintain than raw SQL. Once you define policies in your Drizzle schema and run migrations, they're created in your Postgres database and enforced for all queries.
 
-### Granting Permissions to Postgres Roles
-
-When you enable the Data API, it creates two special roles for you: `authenticated` and `anonymous`. These roles enable you to manage access for logged-in users (authenticated) and users who are not logged in (anonymous).
-
-By default, the Data API grants the necessary permissions to these roles, but you can customize them as needed.
-
-<Admonition type="important">
-The following `GRANT` statements only assign table privileges to the `authenticated` and `anonymous` roles. You must still define appropriate Row-Level Security (RLS) policies for each table to control what actions these roles can perform, according to your application's requirements.
-
-When using RLS, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role in your connection string, as it bypasses Row-Level Security policies.
-</Admonition>
-
-The following SQL statements grant **all privileges** (SELECT, UPDATE, INSERT, DELETE) on all existing and future tables in the `public` schema to both the `authenticated` and `anonymous` roles. You may adjust these statements to fit your specific role and permission requirements.
-
-> For more details on managing database access and roles, see [Managing Database Access](/docs/manage/database-access).
-
-```sql
--- Grant permissions on all existing tables
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
-  IN SCHEMA public
-  TO authenticated;
-
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
-  IN SCHEMA public
-  TO anonymous;
-
--- Set default privileges for future tables
-ALTER DEFAULT PRIVILEGES
-  IN SCHEMA public
-  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
-  TO authenticated;
-
-ALTER DEFAULT PRIVILEGES
-  IN SCHEMA public
-  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES
-  TO anonymous;
-
--- Grant USAGE on the "public" schema
-GRANT USAGE ON SCHEMA public TO authenticated;
-GRANT USAGE ON SCHEMA public TO anonymous;
-```
-
-- **Authenticated role**: Used for logged-in users. Your application should provide an authorization token when connecting with this role.
-- **Anonymous role**: Used for users who are not logged in. This role should have restricted access, typically limited to reading public data, and should not be permitted to perform sensitive operations.
-
-By setting these permissions, you establish a clear separation of access between authenticated and anonymous users, ensuring your security policies are enforced at the database level.
-
 ## Example schema
 
 Below is a sample schema for a basic todo application. This example demonstrates how you would define the table structure and manually create Row-Level Security (RLS) policies for each CRUD operation using plain SQL.
