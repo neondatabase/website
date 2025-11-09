@@ -32,7 +32,7 @@ Drizzle ORM provides a declarative way to manage these policies directly within 
 
 ## Understanding Neon's auth functions
 
-Many code samples on this page use the `auth.user_id()` function provided by the [Data API](/docs/data-api/get-started). This function automatically extracts user information from JWT claims and makes it available in your RLS policies:
+The code samples on this page use the `auth.user_id()` function provided by the [Data API](/docs/data-api/get-started). This function automatically extracts user information from JWT claims and makes it available in your RLS policies:
 
 ```typescript
 // In your RLS policy
@@ -615,7 +615,7 @@ For complete examples of using Drizzle RLS with the Data API, see:
 For backend APIs where you want to use Drizzle's query builder with RLS, you can use the `drizzle-orm/neon-serverless` driver with JWT verification in transactions.
 
 <Admonition type="note">
-The RLS policies in this example use `auth.user_id()`, which requires the Data API to be enabled. This is a hybrid approach—frontend queries use the Data API while backend operations use the serverless driver, both enforcing the same RLS policies.
+The RLS policies in this example use `auth.user_id()`, which requires the Data API to be enabled. This is a hybrid approach: frontend queries use the Data API while backend operations use the serverless driver, both enforcing the same RLS policies.
 </Admonition>
 
 ```typescript
@@ -665,7 +665,6 @@ async function getTodosForUser(jwtToken: string) {
 <Admonition type="important">
 When using this pattern, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role, as it bypasses Row-Level Security policies.
 </Admonition>
-
 
 ## Example applications
 
