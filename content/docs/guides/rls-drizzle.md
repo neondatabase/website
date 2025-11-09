@@ -15,8 +15,8 @@ redirectFrom:
 <p>How to simplify Row-Level Security using `crudPolicy`</p>
 <p>Common RLS patterns with Drizzle</p>
 <p>How to use custom Postgres roles with your policies</p>
-<p>How to set up Drizzle clients for both authenticated user queries and admin tasks</p>
-<p>Using RLS with Data API</p>
+<p>How to use Drizzle RLS with the Data API</p>
+<p>How to use Drizzle RLS with the serverless driver</p>
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
@@ -39,7 +39,7 @@ The Neon [Data API](/docs/data-api/get-started) provides the `auth.user_id()` fu
 using: sql`(select auth.user_id() = ${table.userId})`,
 ```
 
-Many code samples on this page use the `auth.user_id()` function provided by the Data API, which is designed for querying your database from the frontend. When exposing your database this way, RLS policies are essential to keep your data secure. We recommend using Drizzle to write RLS policies because they're easier to maintain than raw SQL—and these policies work with any query method: the Data API, the serverless driver, or direct database connections all enforce the same security rules.
+Many code samples on this page use the `auth.user_id()` function provided by the [Data API](/docs/data-api/get-started). We recommend using Drizzle to **declare your RLS policies** because they're easier to maintain than raw SQL. Once you define policies in your Drizzle schema and run migrations, they're created in your Postgres database and enforced for all queries.
 
 ### Granting Permissions to Postgres Roles
 
@@ -592,9 +592,12 @@ It's important to note that while Drizzle RLS policies define row-level access, 
 
 This approach lets you easily combine multiple roles with different permissions in your schema, keeping your access logic clear and maintainable.
 
-## Client side integration
+## Executing authenticated queries
 
-After defining RLS policies in your Drizzle schema and running migrations, you need to execute queries with proper authentication. There are two main approaches:
+After defining RLS policies in your Drizzle schema and running migrations, you need to execute queries with proper authentication. Choose your approach based on where your queries run:
+
+- **Data API** - For frontend applications that need to query directly from the browser (uses REST API with RLS).
+- **Serverless driver** - For backend APIs and serverless functions where you want to use Drizzle's query builder or raw SQL.
 
 ### Using the Data API
 

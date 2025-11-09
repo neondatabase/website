@@ -342,14 +342,14 @@
           items:
             - title: Get started
               slug: data-api/get-started
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
             - title: Building a note-taking app
               slug: data-api/demo
             - title: Secure your app with RLS
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
               slug: data-api/sql-to-rest
+            - title: Custom authentication providers
+              slug: data-api/custom-authentication-providers
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
