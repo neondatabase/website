@@ -1,7 +1,6 @@
 ---
 title: Custom Authentication Providers
 subtitle: Configure custom authentication providers with the Data API
-description: Learn how to use your own authentication provider with the Neon Data API
 enableTableOfContents: true
 updatedOn: '2025-10-15T00:00:00.000Z'
 tag: beta
