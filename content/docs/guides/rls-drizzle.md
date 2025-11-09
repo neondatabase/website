@@ -612,7 +612,11 @@ For complete examples of using Drizzle RLS with the Data API, see:
 
 ### Using Drizzle with the serverless driver
 
-For backend APIs where you want to use Drizzle's query builder with RLS, you can use the `drizzle-orm/neon-serverless` driver with JWT verification in transactions:
+For backend APIs where you want to use Drizzle's query builder with RLS, you can use the `drizzle-orm/neon-serverless` driver with JWT verification in transactions.
+
+<Admonition type="note">
+The RLS policies in this example use `auth.user_id()`, which requires the Data API to be enabled. This is a hybrid approach—frontend queries use the Data API while backend operations use the serverless driver, both enforcing the same RLS policies.
+</Admonition>
 
 ```typescript
 import { drizzle } from 'drizzle-orm/neon-serverless';
@@ -662,32 +666,6 @@ async function getTodosForUser(jwtToken: string) {
 When using this pattern, ensure your database connection string uses a role that does **not** have the `BYPASSRLS` attribute. Avoid using the `neondb_owner` role, as it bypasses Row-Level Security policies.
 </Admonition>
 
-### Using raw SQL with the serverless driver
-
-If you prefer not to use Drizzle's query builder and want to write raw SQL queries, you can use the Neon serverless driver's HTTP interface:
-
-```typescript
-import { neon } from '@neondatabase/serverless';
-
-// Using the verifyJWT function defined in the previous example
-async function getTodosForUser(jwtToken: string) {
-  const sql = neon(process.env.DATABASE_URL!);
-
-  // Verify JWT
-  const { payload } = await verifyJWT(jwtToken, process.env.JWKS_URL!);
-  const claims = JSON.stringify(payload);
-
-  // Set JWT claims and execute query in a transaction
-  const [, todos] = await sql.transaction([
-    sql`SELECT set_config('request.jwt.claims', ${claims}, true)`,
-    sql`SELECT * FROM todos`,
-  ]);
-
-  return todos;
-}
-```
-
-For more details on this pattern, see [Using transactions with JWT self-verification](/docs/serverless/serverless-driver#using-transactions-with-jwt-self-verification) in the serverless driver documentation.
 
 ## Example applications
 
