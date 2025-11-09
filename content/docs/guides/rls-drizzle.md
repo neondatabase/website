@@ -547,10 +547,7 @@ This approach lets you easily combine multiple roles with different permissions 
 
 ## Executing authenticated queries
 
-After defining RLS policies in your Drizzle schema and running migrations, you need to execute queries with proper authentication. Choose your approach based on where your queries run:
-
-- **Data API** - For frontend applications that need to query directly from the browser (uses REST API with RLS).
-- **Serverless driver** - For backend APIs and serverless functions where you want to use Drizzle's query builder or raw SQL.
+After defining RLS policies in your Drizzle schema and running migrations, you need to execute queries with proper authentication.
 
 ### Using the Data API
 
