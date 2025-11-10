@@ -95,7 +95,7 @@ const faqItems = [
       <p>Each paid Neon plan includes a number of branches per project at no extra cost. For example, the Launch plan includes 10 branches.</p>
       <p>You can create and delete branches freely within that allowance. If you create more total branches than your plan includes, the extras are billed as branch-months, metered hourly. The pricing: </p>
       <code>$1.50 per extra branch-month (≈ $0.002 per hour) billed only for branches that exceed your included quota</code>
-      <p>For example: The Launch plan includes 10 branches per project.You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = $0.02 total.</p>    
+      <p>For example: The Launch plan includes 10 branches per project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = $0.02 total.</p>    
       `,
   },
   {
