@@ -1,9 +1,7 @@
 ---
 title: Self-Host Medusa with Neon
 subtitle: Learn how to self-host Medusa using Neon Postgres as your database.
-author: dhanush-reddy
 enableTableOfContents: true
-createdAt: '2025-11-09T00:00:00.000Z'
 updatedOn: '2025-11-09T00:00:00.000Z'
 ---
 
@@ -41,7 +39,7 @@ You'll first need to create a Neon database. Follow these steps:
 
     Your connection string will look similar to this:
 
-    ```text
+    ```text shouldWrap
     postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
     ```
 
@@ -53,7 +51,7 @@ The Medusa CLI tool, `create-medusa-app`, simplifies the process of setting up a
 
 Execute the following command in your terminal. Replace the example string with the exact connection string you copied from the Neon Console.
 
-```bash
+```bash shouldWrap
 npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 ```
 
@@ -71,7 +69,7 @@ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 
 You should see output similar to the following once the setup is complete:
 
-```bash
+```bash shouldWrap
 $ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 ? What's the name of your project? my-medusa-store
 ? Would you like to install the Next.js Starter Storefront? You can also install it later. Yes
