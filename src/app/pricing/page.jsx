@@ -92,12 +92,11 @@ const faqItems = [
     question: 'How does billing for additional branches work?',
     id: 'additional-branches-billing',
     answer: `
-      <p>Each Neon plan includes a number of simultaneous branches per project at no extra cost. For example, the Launch plan includes 10. You can create and delete as many branches as you like throughout the month; you’ll only be billed if the number of active branches at the same time exceeds this included quota.</p>
-      <p>If that happens, we’ll meter the extra usage using a metric called a branch-hour, which is:</p>
-      <code>1 additional branch × 1 hour of lifetime</code>
-      <p>For example: if your plan includes 10 branches and you briefly run 2 extra branches for 5 hours each, that’s 10 branch-hours, billed at $0.002 per branch-hour, or  a total of $0.02 added to your bill.</p>
-      <p>To be exact: we bill extra branches at $1.50/month each, prorated to hours based on the month’s length. The effective hourly rate varies slightly, but rounds to $0.002/hour in most cases — which is what we show for simplicity.</p>
-    `,
+      <p>Each paid Neon plan includes a number of branches per project at no extra cost. For example, the Launch plan includes 10 branches.</p>
+      <p>You can create and delete branches freely within that allowance. If you create more total branches than your plan includes, the extras are billed as branch-months, metered hourly. The pricing: </p>
+      <code>$1.50 per extra branch-month (≈ $0.002 per hour) billed only for branches that exceed your included quota</code>
+      <p>For example: The Launch plan includes 10 branches per project.You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = $0.02 total.</p>    
+      `,
   },
   {
     question: 'Why is the monthly minimum the same in the Launch plan vs. the Scale plan?',
