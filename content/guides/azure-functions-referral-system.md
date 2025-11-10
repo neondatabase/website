@@ -7,6 +7,10 @@ createdAt: '2024-11-24T00:00:00.000Z'
 updatedOn: '2024-11-24T00:00:00.000Z'
 ---
 
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
+
 Serverless computing makes it easier for developers to build and run apps without worrying about managing and scaling servers. By combining Azure Functions with Neon's serverless Postgres, you can create scalable and cost-effective applications that handle high volumes of traffic with ease.
 
 In this guide, we'll explore how to create a serverless referral system using Azure Serverless Functions and Neon Postgres. We'll build a simple serverless referral system that allows users to create referral codes, track successful referrals, and award points to referrers.
