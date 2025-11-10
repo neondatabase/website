@@ -1,0 +1,97 @@
+---
+title: Connecting to Neon from Vercel
+subtitle: Learn how Vercel Fluid Compute optimizes database connections and why standard TCP is the recommended method.
+enableTableOfContents: true
+updatedOn: '2025-11-10T14:15:32.000Z'
+---
+
+<InfoBlock>
+<DocsList title="What you will learn:" >
+<a href="#the-core-change-connection-pooling">What connection pooling is and why it mattered for serverless</a>
+<a href="#the-two-scenarios-classic-serverless-versus-fluid-compute">The difference between "Classic Serverless" and Vercel's "Fluid Compute"</a>
+<a href="#comparison-of-connection-methods">How TCP, HTTP, and WebSocket connections compare on latency</a>
+<a href="#our-recommendation">Our recommendation for connecting from Vercel</a>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/vercel-managed-integration">Vercel-Managed Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration">Neon-Managed Integration</a>
+<a href="/docs/guides/benchmarking-latency">Benchmarking latency</a>
+</DocsList>
+</InfoBlock>
+
+---
+
+## Connecting to Neon from Vercel: Understanding Fluid Compute
+
+Vercel's **Fluid** compute model fundamentally changes the performance trade-offs for connecting to your Neon database.
+
+**The short answer:** With Vercel Fluid, we recommend you use a **standard Postgres TCP connection** (e.g., with the `node-postgres` package) and a connection pool. This is the new fastest and most robust method.
+
+This guide explains why this is a change, the difference between connection methods, and what you should use.
+
+---
+
+## The core change: Connection pooling
+
+The most important concept to understand is **connection pooling**.
+
+* **Database connection:** Establishing a connection to a Postgres database is an expensive, multi-step process (called a "handshake") that takes time.
+* **Connection pooling:** A connection pool is a "cache" of active database connections. When your function needs to talk to the database, it quickly grabs a connection from the pool, uses it, and then returns it (also quickly).
+
+The key problem with "classic" serverless was that you couldn't safely maintain a connection pool. Functions would be suspended while holding idle connections, leading to "leaks" that could exhaust your database's connection limit.
+
+---
+
+## The two scenarios: Classic serverless versus Fluid Compute
+
+How you connect depends entirely on your compute environment.
+
+### Classic serverless (the "old way")
+
+In a traditional serverless environment, each request spins up a new, isolated function instance. That instance runs its code and then shuts down.
+
+* **The problem:** Because connection pools weren't safe (as noted above), you had to establish a *new* database connection on *every single request*.
+* **The latency hit:** A standard TCP connection (the default for Postgres) takes the most "roundtrips" (~8) to establish. This adds significant latency to *every API call*.
+* **The solution (HTTP/WebSocket):** To solve this, Neon provides the `@neondatabase/serverless` driver, which connects over HTTP or WebSockets. These protocols have *fewer setup roundtrips* (~3-4), making them much faster *for the first query*.
+
+### Vercel Fluid Compute (the "new way")
+
+Vercel's Fluid model allows function runs to *reuse warm compute instances* and share resources.
+
+* **The opportunity:** This reuse is the key. It makes **connection pooling possible and safe** in a serverless environment.
+* **How Fluid makes pooling safe:** Vercel Fluid solves the "leaked connection" problem. It keeps a function alive *just long enough* to safely close idle connections *before* the function is suspended, making pooling reliable.
+* **The new "fastest" method:** You can now establish a TCP connection *once* and place it in a pool. Subsequent function calls reuse that "warm" connection, skipping the ~8 roundtrip setup cost entirely.
+* **The result:** Once the connection is established, a direct Postgres TCP connection is the lowest-latency and most performant way to query your database.
+
+---
+
+## Comparison of connection methods
+
+This table breaks down the trade-offs, which are all about setup cost versus query speed.
+
+| Connection Method | Protocol | Setup Cost (Roundtrips) | Best For... |
+| :--- | :--- | :--- | :--- |
+| **Postgres (TCP)** | `postgres://` | High (~8) | **Fluid Compute / Long-running servers.** (Render, Railway). Once established, it's the fastest. |
+| **HTTP** | `http://` | Lowest (~3) | **Classic Serverless.** Fastest for a *single query* where you can't pool connections. |
+| **WebSocket** | `ws://` | Low (~4) | **Classic Serverless.** A good alternative to HTTP, especially in environments that don't support it. |
+
+*Note: Roundtrip counts are estimates and can vary based on authentication and configuration.*
+
+---
+
+## Our recommendation
+
+### If you are using Vercel's Fluid compute:
+
+We recommend using a standard Postgres TCP driver (like `node-postgres`) and implementing a connection pool. This will give you the best performance by paying the connection cost once and reusing the connection for subsequent queries. See Vercel's [Connection pooling with Vercel Functions](https://vercel.com/guides/connection-pooling-with-functions) guide for implementation details.
+
+<Admonition type="note" title="A note on benchmarking">
+Before migrating, we recommend you benchmark both connection methods on your own app. While TCP with pooling is the new default, some applications with a very high number of cold starts might, in edge cases, still see an advantage from the low initial connection time of the HTTP driver.
+</Admonition>
+
+### If you are on a "classic" serverless platform (without connection pooling):
+
+Continue using the `@neondatabase/serverless` driver. Its HTTP-based connection is optimized for low-latency "first queries," which is the most important metric in that environment.
+
+You can see a live latency comparison of these three methods here: [Function latency comparison](https://function-database-latency-sigma.vercel.app)
