@@ -9,9 +9,9 @@ import Link from 'components/shared/link';
 const SECTIONS = [
   { id: 'ai', title: 'AI', theme: 'dark' },
   { id: 'autoscaling', title: 'Advanced Autoscaling', theme: 'light' },
-  { id: 'instant-branching', title: 'Instant Branching', theme: 'dark' },
-  { id: 'real-world-performance', title: 'Real-World Performance', theme: 'dark' },
-  { id: 'production-grade-features', title: 'Production-Grade Features', theme: 'dark' },
+  { id: 'branching', title: 'Instant Branching', theme: 'dark' },
+  { id: 'performance', title: 'Real-World Performance', theme: 'dark' },
+  { id: 'features', title: 'Production-Grade Features', theme: 'dark' },
 ];
 
 const THROTTLE_DELAY = 100;
