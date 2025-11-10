@@ -32,7 +32,7 @@ const ITEMS = [
 const Branching = () => (
   <section
     className="branching safe-paddings relative scroll-mt-16 pt-[160px] xl:pt-[100px] lg:scroll-mt-0 lg:pt-11 md:pt-[30px]"
-    id="instant-branching"
+    id="branching"
   >
     <Container
       className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16"
