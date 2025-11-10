@@ -248,7 +248,6 @@ To see a complete, working example of an application built with the Data API, Ne
 
 When you modify your database schema (adding tables, columns, or changing structure), the Data API needs to refresh its cache.
 
-- Console: go to **Data API** section and click **Refresh schema cache**
-- SQL: run `NOTIFY pgrst, 'reload schema';`
+After making any schema changes, go to the **Data API** section in the Console and click **Refresh schema cache**; the API will now reflect your latest schema.
 
 </Steps>
