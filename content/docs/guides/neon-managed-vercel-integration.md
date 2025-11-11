@@ -4,7 +4,7 @@ subtitle: Link an existing Neon project to Vercel and keep billing in Neon
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2025-07-29T19:19:33.699Z'
+updatedOn: '2025-11-11T17:38:12.163Z'
 ---
 
 <InfoBlock>
