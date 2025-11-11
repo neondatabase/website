@@ -31,61 +31,96 @@ cd "$REPO_DIR" || exit 1
 echo "Fetching latest from remote..." >&2
 git fetch origin
 
-echo "Querying git for Storage PRs from $SINCE_DATE to $UNTIL_DATE..." >&2
+echo "Looking for Storage releases from $SINCE_DATE to $UNTIL_DATE..." >&2
 
-# Storage PRs are merged to origin/release-storage
-PR_NUMBERS=$(git log origin/release-storage --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
-  grep -oE "#[0-9]+" | \
-  sort -u | \
-  tr -d '#')
+# Find release commits merged to release-storage in the date range
+# Release commits have titles like "Storage release YYYY-MM-DD HH:MM UTC" (no PR number)
+RELEASE_COMMITS=$(git log origin/release-storage --since="$SINCE_DATE 00:00:00" --until="$UNTIL_DATE 23:59:59" --oneline | \
+  grep -i "^[a-f0-9]* Storage release" | \
+  awk '{print $1}')
 
-TOTAL=$(echo "$PR_NUMBERS" | wc -l | tr -d ' ')
+if [ -z "$RELEASE_COMMITS" ]; then
+  echo "No Storage releases found in date range" >&2
+  echo "===========================================" > "$OUTPUT_FILE"
+  echo "STORAGE RELEASES FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
+  echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
+  echo "No releases found" >> "$OUTPUT_FILE"
+  echo "===========================================" >> "$OUTPUT_FILE"
+  exit 0
+fi
 
-echo "Found $TOTAL Storage PRs" >&2
-echo "Extracting data..." >&2
+TOTAL_RELEASES=$(echo "$RELEASE_COMMITS" | wc -l | tr -d ' ')
+echo "Found $TOTAL_RELEASES Storage release(s)" >&2
 
 > "$OUTPUT_FILE"
 
 echo "===========================================" >> "$OUTPUT_FILE"
-echo "STORAGE PRs FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
+echo "STORAGE RELEASES FOR CHANGELOG TRIAGE" >> "$OUTPUT_FILE"
 echo "Date Range: $SINCE_DATE to $UNTIL_DATE" >> "$OUTPUT_FILE"
-echo "Total PRs: $TOTAL" >> "$OUTPUT_FILE"
+echo "Total Releases: $TOTAL_RELEASES" >> "$OUTPUT_FILE"
 echo "===========================================" >> "$OUTPUT_FILE"
 
-COUNT=0
-for PR_NUM in $PR_NUMBERS; do
-    COUNT=$((COUNT + 1))
-    echo -ne "\rProcessing $COUNT/$TOTAL..." >&2
+# For each release commit, extract all commits from that release
+for RELEASE_COMMIT in $RELEASE_COMMITS; do
+  echo "" >> "$OUTPUT_FILE"
+  echo "=========================================" >> "$OUTPUT_FILE"
 
+  # Get the release commit details
+  RELEASE_SUBJECT=$(git show "$RELEASE_COMMIT" --no-patch --format="%s")
+  RELEASE_DATE=$(git show "$RELEASE_COMMIT" --no-patch --format="%ad")
+  echo "RELEASE: $RELEASE_SUBJECT" >> "$OUTPUT_FILE"
+  echo "=========================================" >> "$OUTPUT_FILE"
+  echo "" >> "$OUTPUT_FILE"
+  echo "Merge Commit: $RELEASE_COMMIT" >> "$OUTPUT_FILE"
+  echo "Date: $RELEASE_DATE" >> "$OUTPUT_FILE"
+  echo "Subject: $RELEASE_SUBJECT" >> "$OUTPUT_FILE"
+
+  # Get the second parent (previous release)
+  SECOND_PARENT=$(git show "$RELEASE_COMMIT" --no-patch --format="%P" | awk '{print $2}')
+
+  # Get the first parent (current release-storage tip at time of merge)
+  FIRST_PARENT=$(git show "$RELEASE_COMMIT" --no-patch --format="%P" | awk '{print $1}')
+
+  if [ -z "$SECOND_PARENT" ]; then
+    echo "" >> "$OUTPUT_FILE"
+    echo "Warning: Not a merge commit, cannot extract PRs" >> "$OUTPUT_FILE"
+    continue
+  fi
+
+  # Extract all PR numbers from commits between previous release and current tip
+  # This gives us the NEW commits in this release
+  PR_NUMBERS=$(git log "$SECOND_PARENT..$FIRST_PARENT" --oneline 2>/dev/null | \
+    grep -oE "#[0-9]+" | \
+    sort -u | \
+    tr -d '#')
+
+  RELEASE_PR_COUNT=$(echo "$PR_NUMBERS" | grep -c . || echo "0")
+  echo "" >> "$OUTPUT_FILE"
+  echo "PRs in this release: $RELEASE_PR_COUNT" >> "$OUTPUT_FILE"
+  echo "" >> "$OUTPUT_FILE"
+
+  # Extract details for each PR in the release
+  for PR_NUM in $PR_NUMBERS; do
     COMMIT_HASH=$(git log --all --oneline --grep="#$PR_NUM" | head -1 | awk '{print $1}')
 
     if [ -z "$COMMIT_HASH" ]; then
-        echo "" >> "$OUTPUT_FILE"
-        echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-        echo "Status: COMMIT NOT FOUND" >> "$OUTPUT_FILE"
-        echo "=====================================" >> "$OUTPUT_FILE"
-        continue
+      echo "--- PR #$PR_NUM: NOT FOUND ---" >> "$OUTPUT_FILE"
+      continue
     fi
 
-    echo "" >> "$OUTPUT_FILE"
-    echo "========== PR #$PR_NUM ==========" >> "$OUTPUT_FILE"
-    echo "" >> "$OUTPUT_FILE"
-
+    echo "--- PR #$PR_NUM ---" >> "$OUTPUT_FILE"
     git show "$COMMIT_HASH" --no-patch --format="Commit: %H%nAuthor: %an%nDate: %ad%nSubject: %s%n%nBody:%b" >> "$OUTPUT_FILE"
-
     echo "" >> "$OUTPUT_FILE"
-    echo "--- Files Changed ---" >> "$OUTPUT_FILE"
+    echo "Files Changed:" >> "$OUTPUT_FILE"
     git show "$COMMIT_HASH" --stat --format="" | head -15 >> "$OUTPUT_FILE"
-
     echo "" >> "$OUTPUT_FILE"
-    echo "--- Diff Sample (first 80 lines) ---" >> "$OUTPUT_FILE"
+    echo "Diff Sample (first 80 lines):" >> "$OUTPUT_FILE"
     git show "$COMMIT_HASH" --format="" | head -80 >> "$OUTPUT_FILE"
-
     echo "" >> "$OUTPUT_FILE"
-    echo "=====================================" >> "$OUTPUT_FILE"
+  done
 done
 
-echo -e "\n\nDone! Extracted data for $COUNT PRs" >&2
+echo -e "\nDone! Extracted $TOTAL_RELEASES release(s)" >&2
 echo "File: $OUTPUT_FILE" >&2
 ls -lh "$OUTPUT_FILE" >&2
 SCRIPT_EOF
@@ -267,6 +302,10 @@ Storage PRs are often Postgres extension updates. Follow this pattern (from gold
 
 ```markdown
 # Storage Analysis Complete
+
+**Releases found:** [count]
+- Storage release YYYY-MM-DD HH:MM UTC ([X] commits)
+[If multiple releases, list each one]
 
 **Total PRs:** [count]
 **Customer-Facing:** [count]

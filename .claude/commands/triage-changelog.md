@@ -241,6 +241,13 @@ Compile all agent summaries into a single triage report file.
 
 **File:** `$OUTPUT_DIR/triage_report_${PUBLICATION_DATE}.md`
 
+**CRITICAL INSTRUCTIONS FOR ASSEMBLY:**
+
+1. **Copy agent summaries VERBATIM** - Do NOT summarize or rewrite them
+2. **Include ALL sections from each agent** - Especially the EXCLUDE sections with collapsed `<details>` containing PR links
+3. **Preserve formatting** - Keep the `<details>` tags, markdown formatting, and structure exactly as agents provided
+4. **Do NOT create shortened versions** - If an agent provided a collapsed section with 100 PRs, include all 100 PRs
+
 **Structure:**
 
 ```markdown
@@ -253,23 +260,33 @@ Compile all agent summaries into a single triage report file.
 
 ---
 
-[Insert CONSOLE_SUMMARY if processed]
+# Console Analysis
+
+[Copy CONSOLE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
 
 ---
 
-[Insert MCP_SUMMARY if processed]
+# MCP Server Analysis
+
+[Copy MCP_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
 
 ---
 
-[Insert CLI_SUMMARY if processed]
+# CLI Analysis
+
+[Copy CLI_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
 
 ---
 
-[Insert STORAGE_SUMMARY if processed]
+# Storage Analysis
+
+[Copy STORAGE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
 
 ---
 
-[Insert COMPUTE_SUMMARY if processed]
+# Compute Analysis
+
+[Copy COMPUTE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
 
 ---
 
@@ -290,6 +307,8 @@ Compile all agent summaries into a single triage report file.
 **Key Themes This Week:**
 [Identify 3-5 major themes across all repos]
 ```
+
+**Important:** Each agent provides a complete analysis with EXCLUDE sections containing collapsed `<details>` with clickable PR links. You MUST include these complete sections in the triage report so humans can validate your decisions by clicking through to PRs.
 
 ## Step 8: Generate Changelog Draft
 
