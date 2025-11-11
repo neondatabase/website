@@ -51,7 +51,7 @@ How you connect depends entirely on your compute environment.
 
 In a traditional serverless environment, each request spins up a new, isolated function instance. That instance runs its code and then shuts down.
 
-- **The problem:** Because connection pools weren't safe (as noted above), you had to establish a _new_ database connection on _every single request_.
+- **The problem:** Because connection pools were not safe (as noted above), you had to establish a _new_ database connection on _every single request_.
 - **The latency hit:** A standard TCP connection (the default for Postgres) takes the most "roundtrips" (~8) to establish. This adds significant latency to _every API call_.
 - **The solution (HTTP/WebSocket):** To solve this, Neon provides the [@neondatabase/serverless](/docs/serverless/serverless-driver) driver, which connects over HTTP or WebSockets. These protocols have _fewer setup roundtrips_ (~3-4), making them much faster _for the first query_.
 
