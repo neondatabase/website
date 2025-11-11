@@ -75,9 +75,9 @@ const Logos = () => (
     <Container
       className={clsx(
         'z-20 flex items-center gap-x-[109px] gap-y-6',
-        'xl:gap-x-[42px] xl:px-8 lg:max-w-[960px]',
-        'lg:justify-center lg:gap-x-6',
-        'md:max-w-[620px] md:flex-col md:items-start'
+        'xl:max-w-5xl xl:gap-x-[42px] xl:px-8',
+        'lg:!max-w-3xl lg:justify-center lg:gap-x-6',
+        'md:!max-w-[620px] md:flex-col md:items-start'
       )}
       size="1100"
     >
