@@ -39,7 +39,7 @@ The most important concept to understand is **connection pooling**.
 - **Database connection:** Establishing a connection to a Postgres database is an expensive, multi-step process (called a "handshake") that takes time.
 - **Connection pooling:** A connection pool is a "cache" of active database connections. When your function needs to talk to the database, it quickly grabs a connection from the pool, uses it, and then returns it (also quickly).
 
-The key problem with "classic" serverless was that you couldn't safely maintain a connection pool. Functions would be suspended while holding idle connections, leading to "leaks" that could exhaust your database's connection limit.
+The key problem with "classic" serverless was that you could not safely maintain a connection pool. Functions would be suspended while holding idle connections, leading to "leaks" that could exhaust your database's connection limit.
 
 ---
 
