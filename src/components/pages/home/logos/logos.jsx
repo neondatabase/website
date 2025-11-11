@@ -40,7 +40,6 @@ const logos = [
     logo: bcgIcon,
     alt: 'Boston Consulting Group',
     width: 101,
-    className: 'lg:h-[14px]',
   },
   {
     logo: zimmerBiometIcon,
@@ -67,10 +66,10 @@ const logos = [
 const Logos = () => (
   <section className="safe-paddings mt-[176px] xl:mt-24 lg:mt-20 sm:mt-24">
     <Container
-      className="z-20 flex items-center gap-x-[109px] gap-y-6 xl:gap-x-20 xl:px-8 lg:max-w-[960px] lg:justify-center lg:gap-x-[42px] md:flex-col sm:items-start"
+      className="z-20 flex items-center gap-x-[109px] gap-y-6 xl:gap-x-[42px] xl:px-8 lg:max-w-[960px] lg:justify-center lg:gap-x-6 md:flex-col sm:items-start"
       size="1100"
     >
-      <h2 className="w-full max-w-[400px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:max-w-[360px] xl:text-[32px] md:w-full md:max-w-full md:text-center md:text-[26px] sm:text-[22px]">
+      <h2 className="w-full max-w-[400px] text-[36px] font-medium leading-dense tracking-extra-tight text-white xl:max-w-[350px] xl:text-[32px] lg:max-w-[286px] lg:text-[26px] md:w-full md:max-w-full md:text-center sm:text-[22px]">
         Trusted in production <br /> by thousands of teams.
       </h2>
       <ul className="flex shrink flex-wrap items-center gap-11 xl:gap-x-10 xl:gap-y-9 lg:justify-normal lg:gap-x-6 lg:gap-y-7 md:justify-center sm:gap-x-7 sm:gap-y-5">
