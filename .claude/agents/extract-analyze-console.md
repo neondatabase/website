@@ -295,11 +295,76 @@ We've made several improvements to [feature area]. [Overview sentence].
 For more information, see [docs link].
 ```
 
-## Step 4: Return Structured Summary
+## Step 4: Write Detailed Analysis Report
 
-Your final report must follow this structure:
+**IMPORTANT:** Write your complete analysis to a file for human validation.
 
-### Required Sections
+**File:** `$OUTPUT_DIR/console_analysis_report.md`
+
+Use the Write tool to create this file with your full analysis including:
+- Header with release counts and PR totals
+- Complete INCLUDE section with ALL customer-facing PRs (with clickable links)
+- Complete LAKEBASE-SPECIFIC section (if any)
+- Complete EXCLUDE section with collapsed `<details>` containing ALL excluded PRs (with clickable links)
+- Extraction details
+
+Follow the structure in "Required Sections" below.
+
+## Step 5: Return Brief Summary
+
+After writing the detailed analysis file, return a brief summary to the orchestrator (NOT the full draft descriptions - those are in the file).
+
+Your brief summary should contain:
+1. **Counts** (total PRs, customer-facing, excluded, releases)
+2. **ALL customer-facing PRs** with PR links, titles, and H2/Fixes recommendation (no lengthy drafts)
+3. **Confirmation** that detailed analysis was written
+
+Example summary format:
+```markdown
+# Console Analysis Complete
+
+**Releases found:** 6
+- Console release 2025-11-10 10:05 UTC (15 commits)
+- Console release 2025-11-09 16:08 UTC (12 commits)
+[... list all releases]
+
+**Total PRs:** 59
+**Customer-Facing:** 7
+**Excluded:** 52
+
+## Customer-Facing PRs
+
+### [PR #1627](https://github.com/databricks-eng/neon-cloud/pull/1627) - Custom email provider for Neon Auth
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - Enterprises can bring their own SMTP provider
+
+### [PR #1616](https://github.com/databricks-eng/neon-cloud/pull/1616) - Branch anonymization status indicator
+- **Recommendation:** H2 entry or Fixes
+- **Impact:** MEDIUM - Visual UI improvement for data masking
+
+### [PR #1596](https://github.com/databricks-eng/neon-cloud/pull/1596) - Slug reuse after resource deletion
+- **Recommendation:** Fixes section
+- **Impact:** MEDIUM - Deleted resource slugs can be reused immediately
+
+[... list ALL 7 customer-facing PRs with links, titles, recommendation, impact]
+
+---
+
+**Detailed analysis written to:** `console_analysis_report.md`
+
+The detailed file includes:
+- Full draft H2 descriptions for all H2-worthy items
+- Complete reasoning for all decisions
+- Complete EXCLUDE section with all 52 PRs categorized and linked
+```
+
+---
+
+## Detailed Analysis File Structure
+
+The detailed analysis file (`console_analysis_report.md`) must follow this structure:
+
+### Required Sections in Detailed File
 
 1. **Header with counts:**
    - Total PRs analyzed

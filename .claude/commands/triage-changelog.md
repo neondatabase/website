@@ -82,16 +82,20 @@ echo "Publication Date: $PUBLICATION_DATE"
 echo "============================"
 ```
 
-## Step 3: Setup Repository Paths
+## Step 3: Setup Repository Paths and Output Directory
 
-Detect repository locations (these will be passed to agents):
+Detect repository locations and create dated output folder:
 
 ```bash
 WEBSITE_REPO=$(pwd)
-OUTPUT_DIR="/Users/$(whoami)/changelog_work"
+BASE_OUTPUT_DIR="/Users/$(whoami)/changelog_work"
 
-# Ensure output directory exists
+# Create dated subfolder for this triage run
+# This keeps all files for one release together and enables historical analysis
+OUTPUT_DIR="$BASE_OUTPUT_DIR/$PUBLICATION_DATE"
 mkdir -p "$OUTPUT_DIR"
+
+echo "📁 Output directory: $OUTPUT_DIR"
 
 # Auto-detect repositories
 NEON_CLOUD_REPO="$HOME/Documents/GitHub/neon-cloud"
@@ -131,14 +135,20 @@ You are running the [REPO] extraction and analysis agent.
 
 Environment variables:
 - REPO_PATH: [path to repo]
-- OUTPUT_DIR: [/Users/user/changelog_work]
+- OUTPUT_DIR: [/Users/user/changelog_work/YYYY-MM-DD]
 - LAST_FRIDAY: [YYYY-MM-DD]
 - TODAY: [YYYY-MM-DD]
 
 Follow the instructions in your agent file to:
-1. Extract PRs
-2. Analyze them
-3. Return a structured summary
+1. Extract PRs to pr_data_[repo]_[date].txt
+2. Analyze them for customer-facing impact
+3. Create a detailed analysis report: [repo]_analysis_report.md
+4. Return a brief summary for the triage report
+
+IMPORTANT:
+- Write your detailed analysis to: $OUTPUT_DIR/[repo]_analysis_report.md
+- Include ALL PRs with clickable links in the detailed report
+- Return only a brief summary (not the full detailed analysis) in your final message
 
 Your agent file is: .claude/agents/extract-analyze-[repo].md
 Read that file and execute its instructions.
@@ -235,18 +245,13 @@ ls -la content/changelog/*.md 2>/dev/null | tail -5 || true
 
 **If you find any of these**, add a note to the triage report under "NON-PR ANNOUNCEMENTS" section for human review.
 
-## Step 7: Generate Combined Triage Report
+## Step 7: Generate Triage Report (Executive Summary)
 
-Compile all agent summaries into a single triage report file.
+Create a high-level triage report that summarizes findings and links to detailed analysis files.
 
-**File:** `$OUTPUT_DIR/triage_report_${PUBLICATION_DATE}.md`
+**Note:** Agents have already written detailed analysis files (`console_analysis_report.md`, etc.) with ALL PRs, links, and reasoning. The triage report is an executive summary that links to those files.
 
-**CRITICAL INSTRUCTIONS FOR ASSEMBLY:**
-
-1. **Copy agent summaries VERBATIM** - Do NOT summarize or rewrite them
-2. **Include ALL sections from each agent** - Especially the EXCLUDE sections with collapsed `<details>` containing PR links
-3. **Preserve formatting** - Keep the `<details>` tags, markdown formatting, and structure exactly as agents provided
-4. **Do NOT create shortened versions** - If an agent provided a collapsed section with 100 PRs, include all 100 PRs
+**File:** `$OUTPUT_DIR/triage_report.md`
 
 **Structure:**
 
@@ -255,60 +260,90 @@ Compile all agent summaries into a single triage report file.
 ## [Date Range]
 
 **Date Range:** YYYY-MM-DD to YYYY-MM-DD
-**Publication Date:** YYYY-MM-DD (next Friday)
-**Repositories Processed:** [list]
+**Publication Date:** YYYY-MM-DD (Friday)
+**Output Directory:** `/Users/[user]/changelog_work/YYYY-MM-DD/`
 
 ---
 
-# Console Analysis
+## Summary by Repository
 
-[Copy CONSOLE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
+### Console
+- **Total PRs:** [X] ([Y] releases)
+- **Customer-Facing:** [Z]
+- **Top Recommendations:** [List 2-3 H2-worthy items with brief titles]
+- 📋 **[Detailed Analysis](./console_analysis_report.md)** - Full PR list with clickable links
+
+### MCP Server
+- **Total PRs:** [X]
+- **Customer-Facing:** [Z]
+- **Top Recommendations:** [List H2-worthy items]
+- 📋 **[Detailed Analysis](./mcp_analysis_report.md)** - Full PR list with clickable links
+
+### CLI
+- **Total Commits:** [X]
+- **Customer-Facing:** [Z]
+- **Summary:** [Brief note or "No activity this week"]
+- 📋 **[Detailed Analysis](./cli_analysis_report.md)** - Full commit details
+
+### Storage
+- **Total PRs:** [X] ([Y] releases)
+- **Customer-Facing:** [Z]
+- **Top Recommendations:** [List any extension updates or capacity changes]
+- 📋 **[Detailed Analysis](./storage_analysis_report.md)** - Full PR list with clickable links
+
+### Compute
+- **Total PRs:** [X] ([Y] releases)
+- **Customer-Facing:** [Z]
+- **Top Recommendations:** [List any Postgres updates or user-facing changes]
+- 📋 **[Detailed Analysis](./compute_analysis_report.md)** - Full PR list with clickable links
 
 ---
 
-# MCP Server Analysis
+## Key Themes This Week
 
-[Copy MCP_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
-
----
-
-# CLI Analysis
-
-[Copy CLI_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
+1. **[Theme 1]** - [Brief description of pattern across repos]
+2. **[Theme 2]** - [Brief description]
+3. **[Theme 3]** - [Brief description]
 
 ---
 
-# Storage Analysis
+## Recommended Changelog Sections
 
-[Copy STORAGE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
+### H2 Entries ([count] items):
+1. **[Title]** - [One sentence description] (from [Repo] PR #[X])
+2. **[Title]** - [One sentence description] (from [Repo] PR #[X])
+[... list all H2-worthy items]
+
+### Fixes Section ([count] items):
+- **[Repo]:** [Brief fix] (PR #[X])
+- **[Repo]:** [Brief fix] (PR #[X])
+[... list all Fixes-worthy items]
 
 ---
 
-# Compute Analysis
+## Files Generated
 
-[Copy COMPUTE_SUMMARY verbatim - including full INCLUDE section, full EXCLUDE section with <details> and all PR links, and Extraction Details]
+This directory contains:
+- `triage_report.md` (this file) - Executive summary
+- `console_analysis_report.md` - Detailed Console analysis with all 59 PRs
+- `mcp_analysis_report.md` - Detailed MCP analysis with all PRs
+- `cli_analysis_report.md` - Detailed CLI analysis
+- `storage_analysis_report.md` - Detailed Storage analysis with all PRs
+- `compute_analysis_report.md` - Detailed Compute analysis with all PRs
+- `pr_data_console_YYYY-MM-DD.txt` - Raw Console extraction
+- `pr_data_storage_YYYY-MM-DD.txt` - Raw Storage extraction
+- `pr_data_compute_YYYY-MM-DD.txt` - Raw Compute extraction
+- [Additional pr_data files as needed]
 
 ---
 
-## COMBINED SUMMARY
+## Validation Workflow
 
-**Total PRs Analyzed:** [sum across all repos]
-**Customer-Facing:** [sum]
-**Excluded:** [sum]
-**Lakebase-Specific:** [from Console only]
-
-**Breakdown by Repository:**
-- Console: [X] PRs ([Y] customer-facing)
-- MCP Server: [X] PRs ([Y] customer-facing)
-- CLI: [X] PRs ([Y] customer-facing)
-- Storage: [X] PRs ([Y] customer-facing)
-- Compute: [X] PRs ([Y] customer-facing)
-
-**Key Themes This Week:**
-[Identify 3-5 major themes across all repos]
+1. **Start here** - Review this summary for overall themes and H2/Fixes recommendations
+2. **Click detailed analysis links** - Spot-check decisions in individual repo reports
+3. **Use clickable PR links** - Validate specific PRs by viewing on GitHub
+4. **Review EXCLUDE sections** - Each detailed report has collapsed sections with ALL excluded PRs
 ```
-
-**Important:** Each agent provides a complete analysis with EXCLUDE sections containing collapsed `<details>` with clickable PR links. You MUST include these complete sections in the triage report so humans can validate your decisions by clicking through to PRs.
 
 ## Step 8: Generate Changelog Draft
 
