@@ -12,35 +12,46 @@ import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
 import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.svg';
 import avoidImage from 'images/pages/home-new/autoscaling/avoid-illustration.svg';
+import saveCostsImageMd from 'images/pages/home-new/autoscaling/save-costs-md.svg';
 
 import Heading from '../heading';
 
 const SaveCostsComponent = () => (
-  <RiveAnimation
-    className="-ml-16 -mt-8 w-[1680px] max-w-none 2xl:-mt-10 2xl:w-[1600px] xl:-ml-72 xl:-mt-6 xl:w-[1360px] xl:translate-x-60 lg:w-[1180px] md:-mt-4 md:w-[960px] xs:-ml-96"
-    src="/animations/pages/home-new/autoscaling-graph.riv"
-    intersectionRootMargin="0px 0px"
-    artboard="main"
-    stateMachines="SM"
-    autoplay={false}
-    autoBind
-  />
+  <>
+    {/* xl:-ml-72 xl:w-[1360px] */}
+    <RiveAnimation
+      className="relative -ml-16 -mt-8 w-[1680px] max-w-none 2xl:-mt-10 2xl:w-[1600px] xl:left-1/2 xl:-ml-[50vw] xl:-mt-6 xl:-translate-x-14 lg:w-[1248px] lg:-translate-x-11 md:hidden"
+      src="/animations/pages/home-new/autoscaling-graph.riv"
+      intersectionRootMargin="0px 0px"
+      artboard="main"
+      stateMachines="SM"
+      autoplay={false}
+      autoBind
+    />
+    <Image
+      className="mx-auto -mt-4 hidden max-w-none md:block"
+      src={saveCostsImageMd}
+      width={768}
+      height={280}
+      alt=""
+    />
+  </>
 );
 
 const AvoidOutagesComponent = () => (
   <>
     <Image
-      className="mx-auto max-w-none 2xl:w-[1150px] lg:w-[960px] md:w-[852px] xs:hidden"
+      className="mx-auto max-w-none 2xl:w-[1150px] xl:w-[1260px] lg:h-fit lg:w-screen lg:max-w-full md:hidden"
       src={avoidImage}
       width={1376}
       height={518}
       alt=""
     />
     <Image
-      className="mx-auto hidden max-w-none xs:block"
+      className="mx-auto hidden max-w-none md:block"
       src={avoidImageMd}
-      width={360}
-      height={562}
+      width={768}
+      height={560}
       alt=""
     />
   </>
@@ -74,28 +85,6 @@ const legend = [
 
 const Autoscaling = () => {
   const [activeItem, setActiveItem] = useState(0);
-  // const [sectionRef, isSectionInView] = useInView({ rootMargin: '0px 0px', triggerOnce: true });
-
-  // const { rive, RiveComponent } = useRive({
-  //   src: '/animations/pages/home-new/autoscaling-graph.riv',
-  //   autoplay: false,
-  //   stateMachines: 'SM',
-  //   artboard: 'main',
-  //   autoBind: true,
-  //   layout: new Layout({
-  //     fit: Fit.FitWidth,
-  //     alignment: Alignment.Center,
-  //   }),
-  //   onLoad: () => {
-  //     rive?.resizeDrawingSurfaceToCanvas();
-  //   },
-  // });
-
-  // useEffect(() => {
-  //   if (rive && isSectionInView) {
-  //     rive.play();
-  //   }
-  // }, [rive, isSectionInView]);
 
   return (
     <section
@@ -133,16 +122,16 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="no-scrollbars relative mt-6 w-max max-w-none overflow-x-auto overflow-y-hidden xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
+          <div className="relative mt-6 w-max max-w-none overflow-hidden xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
                 {tabs.map(
                   (item, index) =>
                     index === activeItem && (
                       <m.div
-                        className="flex h-[518px] 2xl:h-[480px] xl:h-[414px] lg:h-[322px] xs:h-auto xs:min-h-[360px]"
+                        className="flex h-[518px] 2xl:h-[480px] xl:h-[480px] lg:h-[400px] md:pointer-events-none md:h-auto md:min-h-[280px] md:justify-center"
                         key={index}
-                        initial={{ opacity: 0, y: -20 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2 }}
                       >
