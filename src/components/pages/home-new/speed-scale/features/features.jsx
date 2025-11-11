@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import Link from 'components/shared/link';
-import LINKS from 'constants/links';
+// import LINKS from 'constants/links';
 import ArrowIcon from 'icons/home-new/link-arrow.inline.svg';
 import deploy from 'images/pages/home-new/speed-scale/deploy.svg';
 import manage from 'images/pages/home-new/speed-scale/manage.jpg';
@@ -16,7 +16,7 @@ const DATA = [
     title: 'Deploy thousands of databases that turn off when idle.',
     description:
       'Inactive databases pause on their own, keeping your fleet efficient and cost-effective.',
-    link: LINKS.index,
+    link: '#',
     image: {
       className: '2xl:w-[720px] xl:w-[604px]',
       src: deploy,
@@ -29,7 +29,7 @@ const DATA = [
     title: 'Manage your fleet via API.',
     description:
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
-    link: LINKS.index,
+    link: '#',
     image: {
       className: '2xl:w-[640px] xl:w-[512px]',
       src: manage,
@@ -44,7 +44,10 @@ const Features = () => (
     {DATA.map(({ className, contentClassName, title, description, link, image }) => (
       <li
         key={title}
-        className={clsx('flex lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]', className)}
+        className={clsx(
+          'flex xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
+          className
+        )}
       >
         <div
           className={clsx(

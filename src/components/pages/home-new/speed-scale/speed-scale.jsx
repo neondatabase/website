@@ -25,7 +25,7 @@ const SpeedScale = () => (
     <span
       className={clsx(
         'pointer-events-none absolute -top-[130px] left-1/2 -z-10 aspect-[1.3] w-[70%] -translate-x-[30%] rounded-[100%] lg:hidden',
-        'bg-[url("/images/pages/home-new/noise.png")] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_50%,transparent)]'
+        'bg-[url("/images/pages/home-new/speed-scale/noise.png")] [mask-image:radial-gradient(50%_50%_at_50%_50%,white_50%,transparent)]'
       )}
       aria-hidden
     />
