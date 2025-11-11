@@ -6,38 +6,50 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Container from 'components/shared/container';
-import avoidImage from 'icons/home-new/autoscaling/avoid-illustration.svg';
+import RiveAnimation from 'components/shared/rive-animation';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
-import autoscalingImage from 'icons/home-new/autoscaling/save-costs-illustration.svg';
+import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.svg';
+import avoidImage from 'images/pages/home-new/autoscaling/avoid-illustration.svg';
 
 import Heading from '../heading';
 
 const SaveCostsComponent = () => (
-  <Image
-    className="max-w-none xl:w-[1100px] lg:w-[920px] md:w-[852px]"
-    src={autoscalingImage}
-    width={1376}
-    height={451}
-    alt=""
+  <RiveAnimation
+    className="-ml-16 -mt-8 w-[1680px] max-w-none 2xl:-mt-10 2xl:w-[1600px] xl:-ml-72 xl:-mt-6 xl:w-[1360px] xl:translate-x-60 lg:w-[1180px] md:-mt-4 md:w-[960px] xs:-ml-96"
+    src="/animations/pages/home-new/autoscaling-graph.riv"
+    intersectionRootMargin="0px 0px"
+    artboard="main"
+    stateMachines="SM"
+    autoplay={false}
+    autoBind
   />
 );
 
 const AvoidOutagesComponent = () => (
-  <Image
-    className="max-w-none xl:w-[1100px] lg:w-[920px] md:w-[852px]"
-    src={avoidImage}
-    width={1376}
-    height={518}
-    alt=""
-  />
+  <>
+    <Image
+      className="mx-auto max-w-none 2xl:w-[1150px] lg:w-[960px] md:w-[852px] xs:hidden"
+      src={avoidImage}
+      width={1376}
+      height={518}
+      alt=""
+    />
+    <Image
+      className="mx-auto hidden max-w-none xs:block"
+      src={avoidImageMd}
+      width={360}
+      height={562}
+      alt=""
+    />
+  </>
 );
 
 const tabs = [
   {
     tab: 'Save Costs',
-    renderComponent: () => <SaveCostsComponent />,
+    renderComponent: (props) => <SaveCostsComponent {...props} />,
   },
   {
     tab: 'Avoid Outages',
@@ -62,6 +74,28 @@ const legend = [
 
 const Autoscaling = () => {
   const [activeItem, setActiveItem] = useState(0);
+  // const [sectionRef, isSectionInView] = useInView({ rootMargin: '0px 0px', triggerOnce: true });
+
+  // const { rive, RiveComponent } = useRive({
+  //   src: '/animations/pages/home-new/autoscaling-graph.riv',
+  //   autoplay: false,
+  //   stateMachines: 'SM',
+  //   artboard: 'main',
+  //   autoBind: true,
+  //   layout: new Layout({
+  //     fit: Fit.FitWidth,
+  //     alignment: Alignment.Center,
+  //   }),
+  //   onLoad: () => {
+  //     rive?.resizeDrawingSurfaceToCanvas();
+  //   },
+  // });
+
+  // useEffect(() => {
+  //   if (rive && isSectionInView) {
+  //     rive.play();
+  //   }
+  // }, [rive, isSectionInView]);
 
   return (
     <section
@@ -99,17 +133,17 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="no-scrollbars relative mt-6 w-max max-w-none overflow-x-auto xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
+          <div className="no-scrollbars relative mt-6 w-max max-w-none overflow-x-auto overflow-y-hidden xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
                 {tabs.map(
                   (item, index) =>
                     index === activeItem && (
                       <m.div
-                        className="pointer-events-none flex justify-center"
+                        className="flex h-[518px] 2xl:h-[480px] xl:h-[414px] lg:h-[322px] xs:h-auto xs:min-h-[360px]"
                         key={index}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.2 }}
                       >
                         {item.renderComponent()}
@@ -121,9 +155,12 @@ const Autoscaling = () => {
           </div>
 
           <div className="mt-[22px] grid grid-cols-2 items-start gap-x-8 text-black-pure xl:mt-6 xl:grid-cols-[1fr_352px] xl:gap-x-4 lg:mt-5 lg:grid-cols-1">
-            <ul className="flex items-center gap-x-6 text-[15px] leading-snug tracking-tight lg:gap-x-7 md:flex-col md:items-start md:gap-y-2.5 md:text-[14px]">
+            <ul className="flex flex-wrap gap-x-6 gap-y-2.5 lg:gap-x-7 xs:flex-col">
               {legend.map((item, index) => (
-                <li className="flex items-center gap-x-2.5 xl:gap-x-2" key={index}>
+                <li
+                  className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-tight xl:gap-x-2 md:text-[14px]"
+                  key={index}
+                >
                   <Image src={item.icon} width={16} height={16} alt="" />
                   <p>{item.text}</p>
                 </li>
