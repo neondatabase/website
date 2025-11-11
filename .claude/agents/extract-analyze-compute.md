@@ -234,9 +234,73 @@ For customer-facing PRs where you have HIGH confidence, draft a description whil
 
 **Only draft if confidence is HIGH.** For MEDIUM/LOW confidence or UNCERTAIN items, skip drafting - the main Claude will handle those after review.
 
-## Step 4: Return Structured Summary
+## Step 4: Write Detailed Analysis Report
 
-### Required Sections
+**IMPORTANT:** Write your complete analysis to a file for human validation.
+
+**File:** `$OUTPUT_DIR/compute_analysis_report.md`
+
+Use the Write tool to create this file with your full analysis including:
+- Header with release counts and PR totals
+- Complete INCLUDE section with ALL customer-facing PRs (with clickable links and confidence levels)
+- Complete EXCLUDE section with collapsed `<details>` containing ALL excluded PRs (with clickable links)
+- Extraction details
+
+Follow the structure in "Required Sections" below.
+
+## Step 5: Return Brief Summary
+
+After writing the detailed analysis file, return a brief summary to the orchestrator (NOT the full draft descriptions - those are in the file).
+
+Your brief summary should contain:
+1. **Counts** (total PRs, customer-facing, excluded, releases)
+2. **ALL customer-facing PRs** with PR links, titles, confidence level, and H2/Fixes recommendation (no lengthy drafts)
+3. **Confirmation** that detailed analysis was written
+
+Example summary format:
+```markdown
+# Compute Analysis Complete
+
+**Releases found:** 1
+- Compute release 2025-11-07 07:05 UTC (65 commits)
+
+**Total PRs:** 65
+**Customer-Facing:** 3 (HIGH confidence)
+**Excluded:** 62
+
+## Customer-Facing PRs
+
+### [PR #3061](https://github.com/databricks-eng/hadron/pull/3061) - Send ping messages every 45s over WS
+- **Type:** Reliability improvement
+- **Confidence:** HIGH
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - Prevents WebSocket connection timeouts
+
+### [PR #3053](https://github.com/databricks-eng/hadron/pull/3053) - Add keepalive for TCP for WS path
+- **Type:** Reliability improvement
+- **Confidence:** MEDIUM
+- **Recommendation:** Combine with #3061 or list in Fixes
+- **Impact:** MEDIUM - Complementary to ping messages
+
+[... list ALL customer-facing PRs with confidence levels]
+
+---
+
+**Detailed analysis written to:** `compute_analysis_report.md`
+
+The detailed file includes:
+- Full draft H2 descriptions for HIGH confidence items
+- Complete reasoning for all decisions including confidence levels
+- Complete EXCLUDE section with all 62 PRs categorized and linked
+```
+
+---
+
+## Detailed Analysis File Structure
+
+The detailed analysis file (`compute_analysis_report.md`) must follow this structure:
+
+### Required Sections in Detailed File
 
 1. **Header with counts:**
    - Total PRs analyzed

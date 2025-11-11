@@ -233,9 +233,71 @@ Storage PRs are often Postgres extension updates. Follow this pattern (from gold
 - **The [extension name] extension has been updated to version [X.X].** [One sentence about what it does]. For more information, see [link].
 ```
 
-## Step 4: Return Structured Summary
+## Step 4: Write Detailed Analysis Report
 
-### Required Sections
+**IMPORTANT:** Write your complete analysis to a file for human validation.
+
+**File:** `$OUTPUT_DIR/storage_analysis_report.md`
+
+Use the Write tool to create this file with your full analysis including:
+- Header with release counts and PR totals
+- Complete INCLUDE section with ALL customer-facing PRs (with clickable links)
+- Complete EXCLUDE section with collapsed `<details>` containing ALL excluded PRs (with clickable links)
+- Extraction details
+
+Follow the structure in "Required Sections" below.
+
+## Step 5: Return Brief Summary
+
+After writing the detailed analysis file, return a brief summary to the orchestrator (NOT the full draft descriptions - those are in the file).
+
+Your brief summary should contain:
+1. **Counts** (total PRs, customer-facing, excluded, releases)
+2. **ALL customer-facing PRs** with PR links, titles, and H2/Fixes recommendation (no lengthy drafts)
+3. **Confirmation** that detailed analysis was written
+
+Example summary format:
+```markdown
+# Storage Analysis Complete
+
+**Releases found:** 1
+- Storage release 2025-11-07 06:09 UTC (84 commits)
+
+**Total PRs:** 84
+**Customer-Facing:** 2
+**Excluded:** 82
+
+## Customer-Facing PRs
+
+### [PR #2969](https://github.com/databricks-eng/hadron/pull/2969) - Inherit data checksums status from ancestor timeline
+- **Type:** Bug fix
+- **Recommendation:** Fixes section
+- **Impact:** MEDIUM - Checksums now properly inherited by child branches
+
+### [PR #XXXX](https://github.com/databricks-eng/hadron/pull/XXXX) - Extension update title
+- **Type:** Extension update
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - pgvector updated to 0.8.0
+
+[... list ALL customer-facing PRs]
+
+---
+
+**Detailed analysis written to:** `storage_analysis_report.md`
+
+The detailed file includes:
+- Full draft H2 descriptions for all H2-worthy items (especially extension updates)
+- Complete reasoning for all decisions
+- Complete EXCLUDE section with all 82 PRs categorized and linked
+```
+
+---
+
+## Detailed Analysis File Structure
+
+The detailed analysis file (`storage_analysis_report.md`) must follow this structure:
+
+### Required Sections in Detailed File
 
 1. **Header with counts:**
    - Total PRs analyzed

@@ -179,9 +179,66 @@ If you see 2-3 related MCP PRs, consider grouping them:
 - Use bullet points for each enhancement
 - Focus on combined user value
 
-## Step 4: Return Structured Summary
+## Step 4: Write Detailed Analysis Report
 
-### Required Sections
+**IMPORTANT:** Write your complete analysis to a file for human validation.
+
+**File:** `$OUTPUT_DIR/mcp_analysis_report.md`
+
+Use the Write tool to create this file with your full analysis including:
+- Header with PR totals
+- Complete INCLUDE section with ALL customer-facing PRs (with clickable links)
+- Complete EXCLUDE section with collapsed `<details>` containing ALL excluded PRs (with clickable links)
+- Extraction details
+
+Follow the structure in "Required Sections" below.
+
+## Step 5: Return Brief Summary
+
+After writing the detailed analysis file, return a brief summary to the orchestrator (NOT the full draft descriptions - those are in the file).
+
+Your brief summary should contain:
+1. **Counts** (total PRs, customer-facing, excluded)
+2. **ALL customer-facing PRs** with PR links, titles, and H2/Fixes recommendation (no lengthy drafts)
+3. **Confirmation** that detailed analysis was written
+
+Example summary format:
+```markdown
+# MCP Server Analysis Complete
+
+**Total PRs:** 3
+**Customer-Facing:** 2
+**Excluded:** 1
+
+## Customer-Facing PRs
+
+### [PR #42](https://github.com/neondatabase/mcp-server-neon/pull/42) - Add list_projects tool
+- **Type:** feat
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - New tool for listing all Neon projects
+
+### [PR #43](https://github.com/neondatabase/mcp-server-neon/pull/43) - Fix connection timeout error
+- **Type:** fix
+- **Recommendation:** Fixes section
+- **Impact:** MEDIUM - Improves reliability
+
+---
+
+**Detailed analysis written to:** `mcp_analysis_report.md`
+
+The detailed file includes:
+- Full draft H2 descriptions for H2-worthy items
+- Complete reasoning for all decisions
+- Complete EXCLUDE section with all excluded PRs categorized and linked
+```
+
+---
+
+## Detailed Analysis File Structure
+
+The detailed analysis file (`mcp_analysis_report.md`) must follow this structure:
+
+### Required Sections in Detailed File
 
 1. **Header with counts:**
    - Total PRs analyzed
@@ -190,7 +247,7 @@ If you see 2-3 related MCP PRs, consider grouping them:
 
 2. **INCLUDE - Customer-Facing section:**
    For each PR:
-   - PR number with clickable link (format: `[PR #XXX](https://github.com/neondatabase/mcp-server-neon/pull/XXX)`)
+   - PR number with link (format: `[PR #XXX](https://github.com/neondatabase/mcp-server-neon/pull/XXX)`)
    - PR title/description
    - **Type:** feat/fix/docs/etc
    - **Recommendation:** H2 entry or Fixes section

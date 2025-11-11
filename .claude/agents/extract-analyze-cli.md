@@ -171,9 +171,61 @@ For each customer-facing commit you recommend as H2-worthy, draft a description 
    - [ ] Uses active voice
    - [ ] 60-120 words
 
-## Step 4: Return Structured Summary
+## Step 4: Write Detailed Analysis Report
 
-### Required Sections
+**IMPORTANT:** Write your complete analysis to a file for human validation.
+
+**File:** `$OUTPUT_DIR/cli_analysis_report.md`
+
+Use the Write tool to create this file with your full analysis including:
+- Header with commit totals
+- Complete INCLUDE section with ALL customer-facing commits (with clickable links)
+- Complete EXCLUDE section with collapsed `<details>` containing ALL excluded commits (with clickable links)
+- Extraction details
+
+Follow the structure in "Required Sections" below.
+
+## Step 5: Return Brief Summary
+
+After writing the detailed analysis file, return a brief summary to the orchestrator (NOT the full draft descriptions - those are in the file).
+
+Your brief summary should contain:
+1. **Counts** (total commits, customer-facing, excluded)
+2. **ALL customer-facing commits** with commit links, subjects, and H2/Fixes recommendation (no lengthy drafts)
+3. **Confirmation** that detailed analysis was written
+
+Example summary format:
+```markdown
+# CLI Analysis Complete
+
+**Total Commits:** 2
+**Customer-Facing:** 1
+**Excluded:** 1
+
+## Customer-Facing Commits
+
+### Commit [a1b2c3d](https://github.com/neondatabase/neonctl/commit/a1b2c3d...) - feat: add init command with MCP integration
+- **Type:** feat
+- **Recommendation:** H2 entry
+- **Impact:** HIGH - Major onboarding improvement with neon init command
+
+---
+
+**Detailed analysis written to:** `cli_analysis_report.md`
+
+The detailed file includes:
+- Full draft H2 descriptions for H2-worthy items
+- Complete reasoning for all decisions
+- Complete EXCLUDE section with all excluded commits categorized and linked
+```
+
+---
+
+## Detailed Analysis File Structure
+
+The detailed analysis file (`cli_analysis_report.md`) must follow this structure:
+
+### Required Sections in Detailed File
 
 1. **Header with counts:**
    - Total commits analyzed
