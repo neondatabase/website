@@ -9,7 +9,7 @@ updatedOn: '2025-10-30T22:51:14.853Z'
 ---
 
 <InfoBlock>
-<DocsList title="What you will learn:" >
+<DocsList title="What you will learn:">
 <a href="#about-this-integration">What the Vercel-Managed Integration is</a>
 <a href="#installation-walkthrough">How to install it from the Vercel Marketplace</a>
 <a href="#enable-automated-preview-branching-recommended">How (and why) to enable automated Preview Branching</a>
@@ -125,9 +125,27 @@ To verify preview branching works:
 
 ---
 
+## Automatic branch cleanup
+
+Preview branches are automatically deleted when their corresponding Vercel deployments are deleted. This keeps your Neon project organized and reduces storage usage.
+
+**How it works:**
+
+- Each Git branch can have multiple Vercel deployments, all using the same Neon branch.
+- When the last deployment for a Git branch is deleted (manually or via Vercel's deployment retention policy), Neon automatically deletes the corresponding database branch.
+- Cleanup happens when deployments are deleted, which you can configure using [Vercel's retention policy settings](https://vercel.com/docs/deployment-retention). By default, Pre-Production Deployments (preview environments) are retained for 180 days:
+
+  ![Vercel retention policy defaults](/docs/guides/vercel_retention_policy_defaults.png)
+
+<Admonition type="note">
+This deployment-based cleanup differs from the [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration), which deletes branches when Git branches are deleted.
+</Admonition>
+
+---
+
 ## Managing & billing
 
-Because your database is managed by Vercel, you can only perform these action **in the Vercel dashboard**:
+Because your database is managed by Vercel, you can only perform these actions **in the Vercel dashboard**:
 
 - Change plan, billing tier, or scale settings (compute size, autoscaling, scale-to-zero)
 - View or modify database configuration via **Storage → Settings → Change Configuration**
@@ -139,6 +157,25 @@ Because your database is managed by Vercel, you can only perform these action **
 - Update connection-string environment variables (prefix changes, etc.)
 
 Everything else (querying data, branching, monitoring usage) works exactly the same in the Neon Console.
+
+### Team member synchronization
+
+Team membership changes in Vercel automatically sync to your Neon organization:
+
+- **Role changes**: When a team member's role changes in Vercel, their Neon role updates based on Vercel's JWT token mapping (see [FAQ](#why-do-vercel-team-members-with-member-role-have-the-admin-role-in-neon) for details). Most Vercel roles (Owner, Admin, Member) map to 'Admin' in Neon, while read-only roles (Viewer, Billing) map to 'Member' in Neon.
+- **Removals**: When a user is removed from your Vercel team, they're automatically removed from the associated Neon organization.
+
+This ensures both platforms stay aligned for security and access control.
+
+### Project transfers between teams
+
+When you transfer a Vercel project to another team, the linked Neon project automatically moves to the new team's Neon organization:
+
+- The linked Neon project moves from the old organization to the new one.
+- Environment variables and settings transfer with it.
+- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time restore window, etc.), you'll be prompted to upgrade.
+
+This eliminates the need to manually reconfigure integrations when reorganizing projects.
 
 ---
 
@@ -178,7 +215,7 @@ This removes database environment variables from your Vercel project but keeps t
 
 ### Manage branches created by the integration
 
-Preview deployments create database branches that accumulate over time. Delete unused branches to avoid hitting storage limits and branch quotas. Delete branches via:
+Preview branches are automatically deleted when their deployments expire, but you can also manually delete branches via:
 
 - [Neon Console](/docs/manage/branches#delete-a-branch) - Individual or bulk deletion
 - [Neon CLI](/docs/reference/cli-branches#delete) - Command line management
@@ -209,7 +246,6 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 - You cannot use this integration with the **Neon-Managed integration** in the same Vercel project
 - **Neon CLI access**: Requires API key authentication (the `neon auth` command won't work since the account is Vercel-managed)
 - Cannot install if you currently use Vercel Postgres (deprecated) - contact Vercel about transitioning
-- Manual branch deletion required (unlike the **Neon-Managed Integration** which offers automatic cleanup)
 - **Preview deployment environment variables**: Branch-specific connection variables cannot be accessed or viewed in your Vercel project's environment variable settings (they're injected at deployment time only and not stored to avoid manual cleanup when branches are deleted)
 
 ## Frequently Asked Questions (FAQ)
@@ -225,8 +261,8 @@ Users added to your Vercel team aren't automatically visible in the Neon organiz
 
 This occurs due to how Vercel's JWT tokens map roles to the integration. According to [Vercel's documentation](https://vercel.com/docs/integrations/create-integration/marketplace-api#user-authentication), the JWT token's `user_role` claim doesn't directly map Vercel team roles:
 
-- **ADMIN role in JWT**: Granted to users capable of installing integrations (includes both Vercel Admins and Members)
-- **USER role in JWT**: Only granted to users with read-only Vercel roles (Billing or Viewer)
+- **ADMIN role in JWT**: Granted to users capable of installing integrations (includes Vercel Owner, Admin, and Member roles) → maps to Admin in Neon.
+- **USER role in JWT**: Only granted to users with read-only Vercel roles (includes Billing and Viewer roles) → maps to Member in Neon.
 
 As a result, most active Vercel team members receive Admin access in the Neon organization. This is expected behavior and ensures team members can fully manage database resources.
 
