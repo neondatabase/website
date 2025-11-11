@@ -3,7 +3,7 @@ title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.279Z'
+updatedOn: '2025-11-07T12:28:56.609Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -135,6 +135,11 @@ For information about configuring allowed IPs in Neon, see [Configure IP Allow](
 1. In the Decodable web UI, select **Connections** from the left navigation bar and click **New Connection**.
 2. In the connector catalog, choose **Postgres CDC** and click **Connect**.
 3. Enter the connection details for your Neon database. You can find your Neon database connection details by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
+
+   <Admonition type="important">
+   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
+   </Admonition>
+
    Your connection string will look like this:
 
    ```bash shouldWrap

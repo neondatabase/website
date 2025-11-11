@@ -7,6 +7,10 @@ createdAt: '2024-12-14T00:00:00.000Z'
 updatedOn: '2024-12-14T00:00:00.000Z'
 ---
 
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
+
 If you’re looking for a modern way to deploy web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be just what you need. It’s a service optimized for hosting static assets with global distribution, but its real strength lies in its integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
 
 One of the most compelling features of Azure Static Web Apps is its built-in CI/CD pipeline powered by [GitHub Actions](https://github.com/features/actions). When you connect your repository, Azure configures the required GitHub workflows automatically. You only need to push your code, and GitHub Actions will build, optimize, and deploy your entire application across a global network.
