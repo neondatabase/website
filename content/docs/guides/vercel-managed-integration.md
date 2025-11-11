@@ -131,9 +131,11 @@ Preview branches are automatically deleted when their corresponding Vercel deplo
 
 **How it works:**
 
-- Each Git branch can have multiple Vercel deployments, all using the same Neon branch
-- When the last deployment for a Git branch is deleted (manually or via Vercel's deployment retention policy), Neon automatically deletes the corresponding database branch
-- Cleanup happens when deployments are deleted, which you can automate using [Vercel's retention policy settings](https://vercel.com/docs/deployment-retention)
+- Each Git branch can have multiple Vercel deployments, all using the same Neon branch.
+- When the last deployment for a Git branch is deleted (manually or via Vercel's deployment retention policy), Neon automatically deletes the corresponding database branch.
+- Cleanup happens when deployments are deleted, which you can configure using [Vercel's retention policy settings](https://vercel.com/docs/deployment-retention). By default, Pre-Production Deployments (preview environments) are retained for 180 days:
+
+  ![Vercel retention policy defaults](/docs/guides/vercel_retention_policy_defaults.png)
 
 <Admonition type="note">
 This deployment-based cleanup differs from the [Neon-Managed Integration](/docs/guides/neon-managed-vercel-integration), which deletes branches when Git branches are deleted.
@@ -143,7 +145,7 @@ This deployment-based cleanup differs from the [Neon-Managed Integration](/docs/
 
 ## Managing & billing
 
-Because your database is managed by Vercel, you can only perform these action **in the Vercel dashboard**:
+Because your database is managed by Vercel, you can only perform these actions **in the Vercel dashboard**:
 
 - Change plan, billing tier, or scale settings (compute size, autoscaling, scale-to-zero)
 - View or modify database configuration via **Storage → Settings → Change Configuration**
@@ -171,6 +173,7 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 
 - The linked Neon project moves from the old organization to the new one.
 - Environment variables and settings transfer with it.
+- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time restore window, etc.), you'll be prompted to upgrade.
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
 
