@@ -10,13 +10,13 @@ import Timeline from './timeline';
 const SpeedScale = () => (
   <section
     className={clsx(
-      'speed-scale safe-paddings relative border-t border-gray-new-40 pb-[120px]',
+      'speed-scale safe-paddings relative overflow-hidden border-t border-gray-new-40 pb-[120px]',
       'xl:pb-[136px] lg:pb-20 md:pb-[52px]'
     )}
   >
     <StatusLine className="mt-2.5" />
     <div className="overflow-hidden">
-      <Container className="max-w-[1344px] !px-16 xl:max-w-5xl md:!px-5">
+      <Container className="xl:max-w-5xl xl:px-16 lg:px-16 md:px-5" size="1280">
         <Header />
         <Features />
       </Container>

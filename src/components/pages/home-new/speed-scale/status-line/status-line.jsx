@@ -21,7 +21,7 @@ LinesPattern.propTypes = {
 
 const StatusLine = ({ className }) => (
   <Container
-    className="2xl:max-w-[1344px] 2xl:pl-16 xl:max-w-5xl lg:pl-16 md:pl-5 md:pr-3"
+    className="2xl:max-w-[1280px] xl:max-w-5xl xl:pl-16 lg:pl-16 md:pl-5 md:pr-3"
     size="1600"
   >
     <div
