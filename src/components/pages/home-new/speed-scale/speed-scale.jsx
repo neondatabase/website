@@ -16,7 +16,7 @@ const SpeedScale = () => (
   >
     <StatusLine className="mt-2.5" />
     <div className="overflow-hidden">
-      <Container className="xl:max-w-5xl xl:px-16 lg:px-16 md:px-5" size="1280">
+      <Container className="xl:max-w-5xl xl:px-16 lg:!px-16 md:!px-5" size="1280">
         <Header />
         <Features />
       </Container>
