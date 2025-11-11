@@ -129,8 +129,11 @@ SCRIPT_EOF
 
 chmod +x /tmp/extract_console_prs.sh
 
+# Create raw_data subdirectory
+mkdir -p "$OUTPUT_DIR/raw_data"
+
 # Run extraction
-PR_DATA_FILE="$OUTPUT_DIR/pr_data_console_${TODAY}.txt"
+PR_DATA_FILE="$OUTPUT_DIR/raw_data/pr_data_console_${TODAY}.txt"
 /tmp/extract_console_prs.sh "$NEON_CLOUD_REPO" "$PR_DATA_FILE" "$LAST_FRIDAY" "$TODAY"
 ```
 
