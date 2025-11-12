@@ -108,6 +108,7 @@ module.exports = {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         title: ['var(--font-esbuild)', ...defaultTheme.fontFamily.sans],
         mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
+        'mono-new': ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         xs: [defaultTheme.fontSize.xs[0]],
