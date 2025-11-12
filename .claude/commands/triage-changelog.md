@@ -394,18 +394,36 @@ Read the golden examples file: `.claude/golden_changelog_examples.md`
    - Merge the agent drafts together, preserving details from both
    - Example: MCP onboarding + CLI init command = one "Get started" H2
 
-5. **For Fixes items:**
+5. **Consolidate same-component items:**
+   - **CRITICAL:** If multiple H2-worthy items are from the same component/product, consolidate into one H2
+   - Example: 3 separate MCP Server features → One "MCP Server enhancements" H2 with bullet points
+   - Example: Multiple Console UI improvements → One "Console improvements" H2
+   - Each bullet should be concise (1-2 sentences) highlighting the specific feature
+   - Only create separate H2s if the items are major launches or significantly different in scope
+
+6. **Verify all documentation links exist:**
+   - **CRITICAL:** Never include links to documentation that doesn't exist
+   - Before adding any link like `[Text](/docs/path)`, verify the file exists in `content/docs/`
+   - Use Glob tool to check: `content/docs/guides/data-masking.md`, `content/docs/reference/cli.md`, etc.
+   - If doc doesn't exist, either:
+     - Omit the link entirely (preferred)
+     - Link to a parent page that exists (e.g., `/docs/reference` instead of `/docs/reference/nonexistent`)
+   - Common valid paths: `/docs/guides/`, `/docs/reference/`, `/docs/introduction/`, `/docs/ai/`
+   - Agent drafts may suggest links - you must validate them
+
+7. **For Fixes items:**
    - Write concise bullets (10-30 words each)
    - Group by repo or feature area
    - Use agent reasoning as the base for your bullet text
 
-6. **Quality check before writing:**
+8. **Quality check before writing:**
    - Count how many H2-worthy items agents recommended
    - Verify your changelog includes all of them (unless combining related items)
    - Do not skip H2 items without explicit reason
    - Extension updates and capacity changes are always H2-worthy
+   - All links have been verified to exist
 
-7. **Changelog structure:**
+9. **Changelog structure:**
 
 ```markdown
 ---
