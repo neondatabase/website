@@ -45,7 +45,7 @@ const ITEMS = [
 
 const Features = () => (
   <section
-    className="features safe-paddings relative scroll-mt-16 pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32"
+    className="features safe-paddings relative scroll-mt-16 pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
     id="features"
   >
     <Container
@@ -54,26 +54,32 @@ const Features = () => (
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-[35px] lg:pt-7">
         <Heading
-          className="max-w-[960px] xl:max-w-[800px] lg:max-w-[600px] md:max-w-full md:pr-4"
+          className="max-w-[960px] xl:max-w-[800px] lg:max-w-[600px] md:max-w-full"
           icon="features"
           theme="dark"
           title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
         />
-        <div className="relative mt-20 xl:mt-16 lg:mt-14 lg:max-w-[800px]">
-          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-0 lg:gap-y-11">
+        <div className="relative mt-20 xl:mt-16 lg:mt-14 lg:max-w-[800px] md:mt-16">
+          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-0 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
             {ITEMS.map(({ icon, title, description }, index) => (
-              <li className="flex flex-col gap-y-[18px] lg:gap-y-4" key={index}>
-                <Image className="lg:size-5" src={icon} width={24} height={24} alt="" />
-                <p className="w-[320px] text-[18px] leading-normal tracking-tight text-gray-new-50 xl:w-[256px] lg:w-[288px] lg:text-base lg:leading-snug">
+              <li className="flex flex-col gap-y-[18px] lg:gap-y-4 md:gap-y-3" key={index}>
+                <Image
+                  className="pointer-events-none lg:size-5 md:size-4"
+                  src={icon}
+                  width={24}
+                  height={24}
+                  alt=""
+                />
+                <p className="max-w-[320px] text-[18px] leading-normal tracking-tight text-gray-new-50 xl:w-[256px] lg:w-[288px] lg:text-base lg:leading-snug md:w-[320px] md:text-[15px]">
                   <span className="mr-1 text-white">{title}</span>
                   {description}
                 </p>
               </li>
             ))}
           </ul>
-          <span className="absolute -left-[2.666%] bottom-0 top-0 w-px bg-gray-new-20" />
-          <span className="absolute bottom-0 left-[32.333%] top-0 w-px bg-gray-new-20 lg:left-[47.333%]" />
-          <span className="absolute bottom-0 left-[67.444%] top-0 w-px bg-gray-new-20 lg:hidden" />
+          <span className="absolute -bottom-1 -left-8 -top-2 w-px bg-gray-new-20 xl:-left-6 xl:top-0 lg:-left-5 md:hidden" />
+          <span className="absolute -bottom-1 -top-2 left-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:left-[calc((100%-128px)/3+38px)] xl:top-0 lg:left-[calc(100%/2-20px)] md:hidden" />
+          <span className="absolute -bottom-1 -top-2 right-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:right-[calc((100%-128px)/3+24px)] xl:top-0 lg:hidden" />
         </div>
       </div>
     </Container>
