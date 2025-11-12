@@ -11,7 +11,7 @@ import Heading from '../heading';
 
 const DATA = [
   {
-    className: 'gap-48 items-end 2xl:gap-20',
+    className: 'items-end',
     contentClassName: 'pb-[72px] 2xl:pb-6 lg:p-0',
     title: 'Deploy thousands of databases that turn off when idle.',
     description:
@@ -25,7 +25,7 @@ const DATA = [
     },
   },
   {
-    className: 'gap-40 flex-row-reverse items-center 2xl:gap-16',
+    className: 'flex-row-reverse items-center',
     title: 'Manage your fleet via API.',
     description:
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
@@ -45,7 +45,7 @@ const Features = () => (
       <li
         key={title}
         className={clsx(
-          'flex xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
+          'flex gap-48 2xl:gap-20 xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
           className
         )}
       >
