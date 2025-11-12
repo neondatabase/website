@@ -7,7 +7,9 @@ updatedOn: '2025-11-07T02:45:10.110Z'
 
 The `anon` extension ([PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io)) provides data masking and anonymization capabilities to protect sensitive data in Postgres databases. It helps protect personally identifiable information (PII) and other sensitive data, facilitating compliance with regulations such as [GDPR](https://gdpr-info.eu/).
 
-This reference guide introduces the `anon` extension's capabilities and masking functions.
+<Admonition type="note">
+This extension comes from the [PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io) open source project (`postgresql_anonymizer`). This is distinct from other tools such as `pg_anon`. The extension is installed using `CREATE EXTENSION anon`.
+</Admonition>
 
 <Admonition type="tip" title="Looking for a practical guide?">
 For complete step-by-step workflows on anonymizing data in Neon branches, including manual procedures and GitHub Actions automation, see [data anonymization](/docs/workflows/data-anonymization).
@@ -16,7 +18,7 @@ For complete step-by-step workflows on anonymizing data in Neon branches, includ
 ## Enable the extension
 
 <Admonition type="note">
-The `anon` extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
+This extension is currently [experimental](/docs/extensions/pg-extensions#experimental-extensions) and may change in future releases.
 </Admonition>
 
 When using the Neon Console or API for anonymization workflows, the extension is enabled automatically. It can also be enabled manually using SQL commands.
@@ -49,7 +51,7 @@ Masking rules define which data to mask and how to mask it using SQL syntax. The
 
 ## Masking functions
 
-The `anon` extension provides [built-in functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) for different anonymization requirements, including but not limited to:
+PostgreSQL Anonymizer provides [built-in functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) for different anonymization requirements, including but not limited to:
 
 | Function Type      | Description                                           | Example                                                                                         |
 | ------------------ | ----------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
@@ -89,13 +91,13 @@ For complete implementation examples showing how to apply these masking function
 
 ## Limitations
 
-- Neon currently only supports static masking with the `anon` extension
+- Neon currently only supports static masking with this extension
 - With static masking, branch reset operations restore original data, requiring anonymization to be run again
 - Additional `pg_catalog` functions cannot be declared as `TRUSTED` in Neon's implementation
 
 ## Conclusion
 
-The `anon` extension provides a toolkit for protecting sensitive data in Postgres databases.
+This extension provides a toolkit for protecting sensitive data in Postgres databases.
 By defining appropriate masking rules, you can create anonymized datasets that maintain usability while protecting individual privacy.
 
 ## Reference
