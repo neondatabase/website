@@ -18,7 +18,6 @@ import Heading from '../heading';
 
 const SaveCostsComponent = () => (
   <>
-    {/* xl:-ml-72 xl:w-[1360px] */}
     <RiveAnimation
       className="relative -ml-16 -mt-8 w-[1680px] max-w-none 2xl:-mt-10 2xl:w-[1600px] xl:left-1/2 xl:-ml-[50vw] xl:-mt-6 xl:-translate-x-14 lg:w-[1248px] lg:-translate-x-11 md:hidden"
       src="/animations/pages/home-new/autoscaling-graph.riv"
@@ -29,7 +28,7 @@ const SaveCostsComponent = () => (
       autoBind
     />
     <Image
-      className="mx-auto -mt-4 hidden max-w-none md:block"
+      className="mx-auto hidden max-w-none md:block"
       src={saveCostsImageMd}
       width={768}
       height={280}
@@ -122,7 +121,7 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="relative mt-6 w-max max-w-none overflow-hidden xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
+          <div className="relative mt-6 w-max max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
                 {tabs.map(
