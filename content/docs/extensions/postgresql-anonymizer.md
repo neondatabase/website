@@ -2,6 +2,8 @@
 title: The anon extension
 subtitle: Protecting sensitive data in Postgres databases
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/anon
 updatedOn: '2025-11-07T02:45:10.110Z'
 ---
 
