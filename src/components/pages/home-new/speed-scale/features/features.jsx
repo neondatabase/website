@@ -5,9 +5,10 @@ import Link from 'components/shared/link';
 // import LINKS from 'constants/links';
 import ArrowIcon from 'icons/home-new/link-arrow.inline.svg';
 import deploy from 'images/pages/home-new/speed-scale/deploy.svg';
-import manage from 'images/pages/home-new/speed-scale/manage.jpg';
 
 import Heading from '../heading';
+
+import ManageAnimation from './manage-animation';
 
 const DATA = [
   {
@@ -17,12 +18,15 @@ const DATA = [
     description:
       'Inactive databases pause on their own, keeping your fleet efficient and cost-effective.',
     link: '#',
-    image: {
-      className: '2xl:w-[720px] xl:w-[604px]',
-      src: deploy,
-      width: 832,
-      height: 460,
-    },
+    animation: (
+      <Image
+        className="max-w-none 2xl:w-[720px] xl:w-[604px] lg:w-full"
+        src={deploy}
+        width={832}
+        height={460}
+        alt="Deploy"
+      />
+    ),
   },
   {
     className: 'flex-row-reverse items-center',
@@ -30,18 +34,13 @@ const DATA = [
     description:
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
     link: '#',
-    image: {
-      className: '2xl:w-[640px] xl:w-[512px]',
-      src: manage,
-      width: 736,
-      height: 464,
-    },
+    animation: <ManageAnimation />,
   },
 ];
 
 const Features = () => (
   <ul className="mt-[168px] flex flex-col gap-[200px] xl:mt-[120px] xl:gap-44 lg:gap-[132px] md:mt-[84px] md:gap-[104px]">
-    {DATA.map(({ className, contentClassName, title, description, link, image }) => (
+    {DATA.map(({ className, contentClassName, title, description, link, animation }) => (
       <li
         key={title}
         className={clsx(
@@ -70,15 +69,7 @@ const Features = () => (
             <ArrowIcon className="sm:size-3" />
           </Link>
         </div>
-        <div className="flex-1">
-          <Image
-            className={clsx('max-w-none lg:w-full', image.className)}
-            src={image.src}
-            width={image.width}
-            height={image.height}
-            alt={title}
-          />
-        </div>
+        <div className="flex-1">{animation}</div>
       </li>
     ))}
   </ul>
