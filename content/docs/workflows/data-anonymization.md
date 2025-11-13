@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T02:07:59.221Z'
+updatedOn: '2025-11-13T15:22:07.940Z'
 ---
 
 <FeatureBeta />
