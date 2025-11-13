@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-11-10T22:45:12.695Z'
+updatedOn: '2025-11-13T20:54:35.552Z'
 tag: beta
 ---
 

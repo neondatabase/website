@@ -2,7 +2,7 @@
 title: Custom Authentication Providers
 subtitle: Configure custom authentication providers with the Data API
 enableTableOfContents: true
-updatedOn: '2025-10-15T00:00:00.000Z'
+updatedOn: '2025-11-13T20:54:35.549Z'
 tag: beta
 ---
 
