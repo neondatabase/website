@@ -51,7 +51,9 @@ Once enabled, you'll get:
 - Two Postgres roles: `authenticated` and `anonymous` (coming soon)
 - GRANT permissions applied to the authenticated role
 
-> You can customize the auth provider and GRANTs later, or choose your own auth provider during setup.
+<Admonition type="info" title="Custom authentication providers">
+We recommend Neon Auth with the Data API, but you can bring your own authentication provider (Auth0, Clerk, AWS Cognito, etc.) if you want. See [Custom Authentication Providers](/docs/data-api/custom-authentication-providers) for details.
+</Admonition>
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
