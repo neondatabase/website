@@ -41,7 +41,7 @@ Integrate branching into your CI/CD pipelines and workflows with the Neon API, C
 
 ## Preview deployments
 
-Create a branch for each preview deployment with the Neon Postgres Previews Integration.
+Create a branch for each preview deployment with the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration).
 
 <DetailIconCards>
 
