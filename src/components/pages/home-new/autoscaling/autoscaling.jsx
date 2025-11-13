@@ -87,7 +87,7 @@ const Autoscaling = () => {
 
   return (
     <section
-      className="autoscaling safe-paddings relative bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:py-14 md:pt-9"
+      className="autoscaling safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:py-14 md:pt-9"
       id="autoscaling"
     >
       <Container
@@ -110,7 +110,9 @@ const Autoscaling = () => {
                   'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5',
                   'text-[15px] font-medium leading-none tracking-tight',
                   'border border-gray-new-10 even:border-l-0',
-                  index === activeItem ? 'bg-white text-gray-new-10' : 'text-gray-new-10/80'
+                  index === activeItem
+                    ? 'bg-white text-gray-new-10'
+                    : 'bg-[#E4F1EB] text-gray-new-10/80'
                 )}
                 key={index}
                 type="button"
