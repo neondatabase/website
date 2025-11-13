@@ -49,7 +49,7 @@ const Features = () => (
     id="features"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16"
+      className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
       size="1600"
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-[35px] lg:pt-7">
@@ -60,7 +60,7 @@ const Features = () => (
           title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
         />
         <div className="relative mt-20 xl:mt-16 lg:mt-14 lg:max-w-[800px] md:mt-16">
-          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-0 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
+          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
             {ITEMS.map(({ icon, title, description }, index) => (
               <li className="flex flex-col gap-y-[18px] lg:gap-y-4 md:gap-y-3" key={index}>
                 <Image
@@ -78,7 +78,7 @@ const Features = () => (
             ))}
           </ul>
           <span className="absolute -bottom-1 -left-8 -top-2 w-px bg-gray-new-20 xl:-left-6 xl:top-0 lg:-left-5 md:hidden" />
-          <span className="absolute -bottom-1 -top-2 left-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:left-[calc((100%-128px)/3+38px)] xl:top-0 lg:left-[calc(100%/2-20px)] md:hidden" />
+          <span className="absolute -bottom-1 -top-2 left-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:left-[calc((100%-128px)/3+38px)] xl:top-0 lg:left-[calc(100%/2+12px)] md:hidden" />
           <span className="absolute -bottom-1 -top-2 right-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:right-[calc((100%-128px)/3+24px)] xl:top-0 lg:hidden" />
         </div>
       </div>
