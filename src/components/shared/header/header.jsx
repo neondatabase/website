@@ -41,22 +41,15 @@ const Header = ({
         />
       ) : (
         <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
-          <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-            <Logo
-              className="h-7"
-              isDarkTheme={isDarkTheme}
-              width={102}
-              height={28}
-              priority
-              isHeader
-            />
-            <Navigation isDarkTheme={isDarkTheme} />
+          <div className="flex items-center gap-x-[92px] xl:gap-x-10">
+            <Logo width={102} height={28} priority isHeader />
+            <Navigation />
           </div>
           <Sidebar isDarkTheme={isDarkTheme} isClient={isClient} />
         </Container>
       )}
     </HeaderWrapper>
-    <MobileMenu isDarkTheme={isDarkTheme} isDocPage={isDocPage} docPageType={docPageType} />
+    <MobileMenu isDocPage={isDocPage} docPageType={docPageType} />
   </>
 );
 

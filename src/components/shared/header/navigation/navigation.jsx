@@ -1,177 +1,126 @@
+'use client';
+
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
+import { useContext } from 'react';
 
 import Button from 'components/shared/button';
+import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
+import { TopbarContext } from 'contexts/topbar-context';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import MenuBanner from '../menu-banner';
+const Navigation = () => {
+  const { hasTopbar } = useContext(TopbarContext);
 
-const Navigation = ({ isDarkTheme }) => (
-  <nav>
-    <ul className="flex items-center gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
-      {MENUS.header.map(({ to, text, sections }, index) => {
-        const Tag = to ? Link : Button;
-        const hasSubmenu = sections?.length > 0;
-        const gridSubmenu = sections?.length > 1;
-        const theme = to ? { theme: isDarkTheme ? 'white' : 'black' } : {};
+  return (
+    <nav className="lg:hidden">
+      <ul className="flex items-center gap-x-7 xl:gap-x-5">
+        {MENUS.header.map(({ to, text, sections }, index) => {
+          const Tag = to ? Link : Button;
+          const hasSubmenu = sections?.length > 0;
 
-        return (
-          <li className={clsx('relative [perspective:2000px]', hasSubmenu && 'group')} key={index}>
-            <Tag
-              className={clsx(
-                'flex items-center gap-x-1 whitespace-pre text-sm font-normal',
-                isDarkTheme ? 'text-white' : 'text-black dark:text-white'
-              )}
-              to={to}
-              {...theme}
-              tagName="Navigation"
-              analyticsOnHover={!to || undefined}
+          return (
+            <li
+              className={clsx('group/main-nav relative', {
+                'before:absolute before:h-full before:w-3.5 xl:before:w-2.5':
+                  index === 0 || index === 1,
+                'before:left-full': index === 0,
+                'before:right-full': index === 1,
+              })}
+              key={index}
             >
-              {text}
-              {hasSubmenu && (
-                <ChevronIcon
-                  className={clsx(
-                    'opacity-60',
-                    isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
-                  )}
-                />
-              )}
-            </Tag>
-            {/* submenu */}
-            {hasSubmenu && (
-              <div
-                className={clsx(
-                  'absolute -left-7 top-full pt-5',
-                  'pointer-events-none opacity-0',
-                  'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-                  'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
-                )}
+              <Tag
+                className="flex items-center gap-x-1 whitespace-pre text-[15px] font-normal tracking-snug !text-gray-new-50 group-hover/main-nav:!text-white"
+                to={to}
+                theme="black"
+                tagName="Navigation"
+                analyticsOnHover={!to || undefined}
               >
-                <ul
-                  className={clsx(
-                    'relative w-max rounded-[14px] border',
-                    gridSubmenu ? 'flex gap-x-10 px-7 py-6' : 'p-4',
-                    isDarkTheme
-                      ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                      : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                  )}
-                >
-                  {sections.map(({ title, items, banner }, index) => {
-                    if (banner) {
-                      return <MenuBanner {...banner} key={index} />;
-                    }
+                {text}
+                {hasSubmenu && (
+                  <ChevronIcon className="text-gray-new-50 opacity-60 group-hover/main-nav:text-white" />
+                )}
+              </Tag>
+              {/* submenu */}
+              {hasSubmenu && (
+                <>
+                  {/* Semi-transparent black overlay */}
+                  <div
+                    className={clsx(
+                      'fixed inset-0 top-16 -z-10',
+                      'pointer-events-none opacity-0 transition-opacity delay-150 duration-200',
+                      'group-hover/main-nav:pointer-events-none group-hover/main-nav:opacity-100 group-hover/main-nav:delay-0',
+                      'bg-black/80',
+                      { 'top-[100px]': hasTopbar }
+                    )}
+                  />
 
-                    return (
-                      <li className={clsx(gridSubmenu ? 'min-w-48' : 'min-w-[94px]')} key={index}>
-                        {title && (
-                          <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
-                            {title}
-                          </span>
+                  <div
+                    className={clsx(
+                      '!fixed left-0 top-16 z-50 w-screen border-b border-gray-new-20 bg-black-pure',
+                      'pointer-events-none opacity-0 transition-[opacity] delay-150 duration-200',
+                      'group-hover/main-nav:pointer-events-auto group-hover/main-nav:visible group-hover/main-nav:opacity-100 group-hover/main-nav:delay-0',
+                      { 'top-[100px]': hasTopbar }
+                    )}
+                  >
+                    <Container size="1344">
+                      <ul
+                        className={clsx(
+                          'flex gap-x-[136px] pb-16 pl-[calc(102px+92px)] pt-8 xl:pl-[calc(102px+40px)]',
+                          'translate-x-4 opacity-0',
+                          'transition-[transform,opacity] duration-300 ease-out',
+                          'group-hover/main-nav:translate-x-0 group-hover/main-nav:opacity-100',
+                          'before:absolute before:-top-6 before:left-0 before:h-10 before:w-full'
                         )}
-                        <ul className={clsx('flex flex-col', gridSubmenu ? 'gap-5' : 'gap-[18px]')}>
-                          {items.map(
-                            ({
-                              icon: Icon,
-                              iconGradient: IconGradient,
-                              title,
-                              description,
-                              to,
-                              isExternal,
-                            }) => (
-                              <li key={title}>
-                                <Link
-                                  className={clsx(
-                                    'relative flex items-center',
-                                    gridSubmenu
-                                      ? 'gap-3 before:rounded-[14px]'
-                                      : 'gap-2.5 before:rounded-[10px]',
-                                    'before:pointer-events-none before:absolute before:-inset-2.5 before:transform-gpu before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
-                                    isDarkTheme
-                                      ? 'before:bg-[#16181D]'
-                                      : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
-                                  )}
-                                  to={to}
-                                  isExternal={isExternal}
-                                  tagName="Navigation"
-                                  tagText={title}
-                                >
-                                  {gridSubmenu && IconGradient && (
-                                    <div
+                      >
+                        {sections.map(({ title, items }, index) => {
+                          if (!items || items.length === 0) return null;
+                          const isFirstColumn = index === 0;
+
+                          return (
+                            <li className="" key={title}>
+                              {title && (
+                                <span className="mb-6 block text-[10px] font-medium uppercase leading-none tracking-snug text-gray-new-50">
+                                  {title}
+                                </span>
+                              )}
+                              <ul
+                                className={clsx('flex flex-col gap-y-4', {
+                                  'gap-y-5': isFirstColumn,
+                                })}
+                              >
+                                {items.map(({ title, to, isExternal }) => (
+                                  <li key={title}>
+                                    <Link
                                       className={clsx(
-                                        'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-lg border',
-                                        isDarkTheme
-                                          ? 'border-[#2E3038] bg-[#16181D]'
-                                          : 'border-gray-new-90 bg-[#F5F5F5] dark:border-[#2E3038] dark:bg-[#16181D]'
+                                        'block text-sm leading-none tracking-snug text-gray-new-80 transition-colors duration-200 hover:text-white',
+                                        { '!text-2xl': isFirstColumn }
                                       )}
-                                    >
-                                      <IconGradient
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-white'
-                                            : 'text-gray-new-20 dark:text-white dark:[&_stop:not([stop-opacity])]:gradient-stop-opacity-40 dark:[&_stop[stop-opacity="0.6"]]:gradient-stop-opacity-100'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  {!gridSubmenu && Icon && (
-                                    <div className="relative z-10 shrink-0">
-                                      <Icon
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-gray-new-80'
-                                            : 'text-gray-new-30 dark:text-gray-new-80'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  <div className="relative z-10">
-                                    <span
-                                      className={clsx(
-                                        'block text-sm leading-none tracking-snug transition-colors duration-200',
-                                        isDarkTheme
-                                          ? 'text-white'
-                                          : 'text-black-new dark:text-white'
-                                      )}
+                                      to={to}
+                                      isExternal={isExternal}
+                                      tagName="Navigation"
+                                      tagText={title}
                                     >
                                       {title}
-                                    </span>
-                                    {description && (
-                                      <span
-                                        className={clsx(
-                                          'mt-1.5 block text-xs font-light leading-none tracking-extra-tight',
-                                          isDarkTheme
-                                            ? 'text-gray-new-50'
-                                            : 'text-gray-new-40 dark:text-gray-new-50'
-                                        )}
-                                      >
-                                        {description}
-                                      </span>
-                                    )}
-                                  </div>
-                                </Link>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
-);
-
-Navigation.propTypes = {
-  isDarkTheme: PropTypes.bool,
+                                    </Link>
+                                  </li>
+                                ))}
+                              </ul>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </Container>
+                  </div>
+                </>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
 };
 
 export default Navigation;

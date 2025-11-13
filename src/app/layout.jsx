@@ -5,6 +5,7 @@ import Script from 'next/script';
 
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
+import { TopbarProvider } from 'contexts/topbar-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
@@ -39,9 +40,11 @@ const RootLayout = ({ children }) => (
           <PostHogPageView />
           <ThemeProvider>
             <HomepageVisitProvider>
-              <TabsProvider>
-                <CodeTabsProvider>{children}</CodeTabsProvider>
-              </TabsProvider>
+              <TopbarProvider>
+                <TabsProvider>
+                  <CodeTabsProvider>{children}</CodeTabsProvider>
+                </TabsProvider>
+              </TopbarProvider>
             </HomepageVisitProvider>
           </ThemeProvider>
         </PostHogProvider>

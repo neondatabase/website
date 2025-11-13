@@ -6,6 +6,10 @@
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
+
+    &:has(.group\/main-nav:hover) {
+      overflow: hidden;
+    }
   }
 
   input[type='number']::-webkit-outer-spin-button,
