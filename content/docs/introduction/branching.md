@@ -44,7 +44,7 @@ The following video demonstrates creating a branch in the Neon Console. For step
   <source type="video/mp4" src="/docs/introduction/create_branch.mp4"/>
 </video>
 
-You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the Neon [Postgres Previews Integration](/docs/guides/vercel-previews-integration) to create a branch for each preview deployment.
+You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration) to create a branch for each preview deployment.
 
 Refer to the following guides for instructions:
 
