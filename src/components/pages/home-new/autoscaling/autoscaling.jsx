@@ -19,7 +19,7 @@ import Heading from '../heading';
 const SaveCostsComponent = () => (
   <>
     <RiveAnimation
-      className="relative -ml-16 -mt-8 w-[1680px] max-w-none 2xl:-mt-10 2xl:w-[1600px] xl:left-1/2 xl:-ml-[50vw] xl:-mt-6 xl:-translate-x-14 lg:w-[1248px] lg:-translate-x-11 md:hidden"
+      className="relative -left-[60px] -top-[102px] w-[1680px] max-w-none 2xl:-left-[56px] 2xl:-top-[95px] 2xl:w-[1600px] xl:left-1/2 xl:-ml-[50vw] xl:-translate-x-14 lg:-top-[75px] lg:w-[1248px] lg:-translate-x-11 md:hidden"
       src="/animations/pages/home-new/autoscaling-graph.riv"
       intersectionRootMargin="0px 0px"
       artboard="main"
@@ -40,7 +40,7 @@ const SaveCostsComponent = () => (
 const AvoidOutagesComponent = () => (
   <>
     <Image
-      className="mx-auto max-w-none 2xl:w-[1150px] xl:w-[1260px] lg:h-fit lg:w-screen lg:max-w-full md:hidden"
+      className="pointer-events-none relative -top-[70px] mx-auto max-w-none 2xl:-top-[62px] 2xl:w-[1216px] xl:w-[1280px] lg:-top-[38px] lg:h-fit lg:w-screen lg:max-w-full md:hidden"
       src={avoidImage}
       width={1376}
       height={518}
@@ -102,7 +102,7 @@ const Autoscaling = () => {
             title="<strong>Advanced autoscaling.</strong> Scale further without worrying about the database. Never overpay for resources you don’t use."
           />
 
-          <div className="mt-16 xl:mt-14 lg:mt-12 md:mt-11">
+          <div className="relative z-20 mt-16 xl:mt-14 lg:mt-12 md:mt-11">
             {tabs.map((item, index) => (
               <button
                 className={clsx(
@@ -121,14 +121,14 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="relative mt-6 w-max max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
+          <div className="relative z-10 mt-6 w-max max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
             <LazyMotion features={domAnimation}>
               <AnimatePresence initial={false} mode="wait">
                 {tabs.map(
                   (item, index) =>
                     index === activeItem && (
                       <m.div
-                        className="flex h-[518px] 2xl:h-[480px] xl:h-[480px] lg:h-[400px] md:pointer-events-none md:h-auto md:min-h-[280px] md:justify-center"
+                        className="h-[448px] lg:h-[333px] md:pointer-events-none md:flex md:h-auto md:min-h-[280px] md:justify-center"
                         key={index}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -142,8 +142,8 @@ const Autoscaling = () => {
             </LazyMotion>
           </div>
 
-          <div className="mt-[22px] grid grid-cols-2 items-start gap-x-8 text-black-pure xl:mt-6 xl:grid-cols-[1fr_352px] xl:gap-x-4 lg:mt-5 lg:grid-cols-1">
-            <ul className="flex flex-wrap gap-x-6 gap-y-2.5 lg:gap-x-7 xs:flex-col">
+          <div className="relative z-20 mt-[22px] grid grid-cols-2 items-start text-black-pure xl:mt-2 xl:grid-cols-[1fr_352px] lg:mt-5 lg:grid-cols-1">
+            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 lg:gap-x-7 xs:flex-col">
               {legend.map((item, index) => (
                 <li
                   className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-tight xl:gap-x-2 md:text-[14px]"
@@ -154,7 +154,7 @@ const Autoscaling = () => {
                 </li>
               ))}
             </ul>
-            <p className="max-w-[480px] text-[18px] leading-normal tracking-tight xl:-mr-5 xl:ml-8 lg:mx-0 lg:mt-10 md:mt-8 md:text-[15px]">
+            <p className="ml-24 max-w-[480px] pr-1 text-[18px] leading-normal tracking-tight xl:-mr-4 xl:ml-8 lg:mx-0 lg:mt-10 md:mt-8 md:text-[15px]">
               Neon monitors your database load ten times a second and autoscales CPU and Memory to
               exactly fit your workload.
             </p>
