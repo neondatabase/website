@@ -32,7 +32,7 @@ To create a branch:
 When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-6. Optionally set an **Expire branch after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
@@ -132,7 +132,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
-5. Set a new expiration date and time, or toggle off "Expire branch after" to remove expiration.
+5. Set a new expiration date and time, or toggle off "Automatically delete branch after" to remove expiration.
 6. Click **Save**.
 
 For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).
