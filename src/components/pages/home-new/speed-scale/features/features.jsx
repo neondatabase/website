@@ -69,7 +69,7 @@ const Features = () => (
             <ArrowIcon className="sm:size-3" />
           </Link>
         </div>
-        <div className="flex-1">{animation}</div>
+        <div className="flex-1 2xl:min-w-0 2xl:max-w-full">{animation}</div>
       </li>
     ))}
   </ul>

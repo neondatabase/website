@@ -9,7 +9,7 @@ import PlayIcon from 'icons/home-new/play.inline.svg';
 
 const Step = ({ index, title, isActive, children }) => (
   <m.li
-    className="relative pl-16 opacity-30"
+    className="relative pl-16 opacity-30 2xl:pl-12 xl:pl-11 lg:pl-10 md:pl-14 sm:pl-12 xs:pl-7"
     initial={{ opacity: index === 0 ? '100%' : 0 }}
     animate={{ opacity: isActive ? 1 : 0.3 }}
     transition={{ duration: 0.3, ease: [0.33, 0, 0, 1.01] }}
@@ -18,7 +18,7 @@ const Step = ({ index, title, isActive, children }) => (
       <span
         className={clsx(
           'absolute left-0 top-0 z-10 flex w-full justify-center bg-black-pure py-2.5',
-          'font-mono leading-none text-gray-new-60',
+          'font-mono-new leading-none text-gray-new-60',
           index === 0 ? 'h-9' : 'h-full'
         )}
         aria-label={`Step ${index}`}
@@ -39,10 +39,12 @@ const Step = ({ index, title, isActive, children }) => (
     <h4
       className={clsx(
         'mb-6 text-xl leading-none tracking-extra-tight',
-        '[&>span]:font-mono [&>span]:text-gray-new-70'
+        '2xl:text-lg xl:text-lg md:text-base sm:text-sm xs:text-[10px]',
+        '[&>span]:font-mono-new [&>span]:text-gray-new-70'
       )}
       dangerouslySetInnerHTML={{ __html: title }}
     />
+
     {children}
   </m.li>
 );
@@ -54,6 +56,8 @@ Step.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+const codeClassName = 'tracking-extra-tight block whitespace-nowrap font-mono-new 2xl:text-sm';
+
 const ManageAnimation = () => {
   const [activeStep, setActiveStep] = useState(0);
 
@@ -64,7 +68,7 @@ const ManageAnimation = () => {
   }, []);
 
   return (
-    <ol className="flex w-[736px] flex-col gap-12 2xl:w-full">
+    <ol className="flex w-[736px] flex-col gap-12 2xl:w-auto xl:-ml-8 lg:ml-0">
       <LazyMotion features={domAnimation}>
         <Step
           index={0}
@@ -79,12 +83,13 @@ const ManageAnimation = () => {
           >
             <div
               className={clsx(
-                'relative bg-black-pure/80 py-5 pl-10 backdrop-blur-[15px]',
+                'relative overflow-hidden bg-black-pure/80 py-5 pl-10 backdrop-blur-[15px]',
+                '2xl:text-[13px]',
                 'before:absolute before:left-5 before:top-1/2 before:size-2 before:-translate-y-1/2',
                 'before:rounded-full before:bg-green-52'
               )}
             >
-              <code className="font-mono-new block leading-none tracking-extra-tight">
+              <code className={clsx(codeClassName, 'leading-none')}>
                 curl -X POST https://api.neon.tech/v2/projects/:id/databases
               </code>
             </div>
@@ -97,7 +102,7 @@ const ManageAnimation = () => {
         <Step index={1} title="Test and deploy <span>>></span>" isActive={activeStep === 1}>
           <div className="relative flex flex-col gap-12 overflow-hidden border border-gray-new-40 bg-black-pure p-5">
             <m.code
-              className="font-mono-new block whitespace-nowrap leading-[1.65] tracking-extra-tight"
+              className={clsx(codeClassName, 'leading-[1.65]')}
               initial={{ opacity: 0 }}
               animate={{ opacity: activeStep === 1 ? 1 : 0 }}
               transition={{ duration: 0.3, ease: [0.4, 0.08, 0, 0.85] }}
