@@ -878,7 +878,7 @@
 
         - title: Workflows & CI/CD
           icon: branching
-          slug: reference/neon-launchpad
+          slug: reference/instagres
           items:
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
@@ -886,8 +886,8 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Neon Launchpad
-              slug: reference/neon-launchpad
+            - title: Instagres
+              slug: reference/instagres
             - title: Neon Local
               slug: local/neon-local
               items:
