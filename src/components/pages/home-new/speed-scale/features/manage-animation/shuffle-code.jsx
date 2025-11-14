@@ -1,0 +1,83 @@
+import PropTypes from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
+
+const DICTIONARY = '0123456789abcdefghijklmnopqrstuvwxyz!?></\\~+*=@#$%'.split('');
+
+const getRandomIndex = () => Math.floor(Math.random() * DICTIONARY.length);
+
+const generateRandomString = (length) => {
+  let result = '';
+  for (let i = 0; i < length; i += 1) {
+    result += DICTIONARY[getRandomIndex()];
+  }
+  return result;
+};
+
+const ShuffleCode = ({ targetText, isActive, duration, className }) => {
+  const [textParts, setTextParts] = useState({ revealed: targetText, random: '' });
+  const frameRef = useRef();
+  const startTimeRef = useRef(0);
+
+  useEffect(() => {
+    if (!isActive) {
+      setTextParts({ revealed: targetText, random: '' });
+      return undefined;
+    }
+
+    startTimeRef.current = performance.now();
+    const stringLength = targetText.length;
+    const durationMs = duration * 1000;
+    const shufflePhase = durationMs * 0.1; // 10% of time for shuffle
+    const revealPhase = durationMs * 0.9; // 90% of time for reveal
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTimeRef.current;
+
+      if (elapsed < shufflePhase) {
+        // Show random characters
+        setTextParts({ revealed: '', random: generateRandomString(stringLength) });
+      } else if (elapsed < durationMs) {
+        // Gradually reveal target text
+        const revealProgress = (elapsed - shufflePhase) / revealPhase;
+        const revealedLength = Math.floor(stringLength * revealProgress);
+        const revealedPart = targetText.slice(0, revealedLength);
+        const randomPart = generateRandomString(stringLength - revealedPart.length);
+        setTextParts({ revealed: revealedPart, random: randomPart });
+      } else {
+        // Animation complete
+        setTextParts({ revealed: targetText, random: '' });
+        return;
+      }
+
+      frameRef.current = requestAnimationFrame(animate);
+    };
+
+    frameRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [targetText, isActive, duration]);
+
+  return (
+    <span className={className}>
+      <span className="text-white">{textParts.revealed}</span>
+      <span className="text-[#6b6d73]">{textParts.random}</span>
+    </span>
+  );
+};
+
+ShuffleCode.propTypes = {
+  targetText: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  duration: PropTypes.number.isRequired,
+  className: PropTypes.string,
+};
+
+ShuffleCode.defaultProps = {
+  className: '',
+};
+
+export default ShuffleCode;
