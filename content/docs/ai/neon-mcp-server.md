@@ -173,6 +173,7 @@ After setting up either the remote or local server and connecting your MCP clien
 
 **Example interactions**
 
+- **Search resources:** `"Can you search for 'production' across my Neon resources?"`
 - **List projects:** `"List my Neon projects"`
 - **Create a new project:** `"Create a Neon project named 'my-test-project'"`
 - **List tables in a database:** `"What tables are in the database 'my-database' in project 'my-project'?"`
@@ -219,6 +220,49 @@ The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Ev
   }
 }
 ```
+
+## Search across resources
+
+The Neon MCP Server includes a `search` tool that lets you find resources across all your Neon organizations, projects, and branches with a single query. Ask your AI assistant:
+
+```
+Can you search for "production" across my Neon resources?
+```
+
+The assistant will search through all accessible resources and return structured results with direct links to the Neon Console. Results include the resource name, type (organization, project, or branch), and Console URL for easy navigation.
+
+A companion `fetch` tool lets you retrieve detailed information about any resource using the ID returned by the search.
+
+This is particularly useful when working with multiple organizations or large numbers of projects, making it easier to discover and navigate your Neon resources.
+
+## Read-only mode
+
+The Neon MCP Server supports read-only mode for safe operation in cloud and production environments. Enable it by adding the `x-read-only: true` header to your MCP configuration:
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "x-read-only": "true"
+      }
+    }
+  }
+}
+```
+
+When enabled, the server restricts all operations to read-only tools. Only list and describe tools are available, and SQL queries automatically run in read-only transactions. This provides a safe method for querying and analyzing production databases without any risk of accidental modifications.
+
+## Guided onboarding
+
+The Neon MCP Server includes a `load_resource` tool that provides comprehensive getting-started guidance directly through your AI assistant. Ask your assistant:
+
+```
+Get started with Neon
+```
+
+The assistant will load detailed step-by-step instructions covering organization setup, project configuration, connection strings, schema creation, and migrations. This works in IDEs that don't fully support MCP resources and ensures onboarding guidance is explicitly loaded when you need it.
 
 ## MCP security guidance
 
