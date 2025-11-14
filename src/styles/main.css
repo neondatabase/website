@@ -6,10 +6,6 @@
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
-
-    &:has(.group\/main-nav:hover) {
-      overflow: hidden;
-    }
   }
 
   input[type='number']::-webkit-outer-spin-button,
@@ -117,4 +113,9 @@
     @apply whitespace-nowrap border-b border-gray-new-70/40 text-gray-new-80;
     @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
   }
+}
+
+.header:has(.group\/main-nav:hover) + .navigation-overlay {
+  opacity: 1;
+  transition-delay: 0s;
 }
