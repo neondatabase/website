@@ -14,7 +14,8 @@ In this guide, you'll learn how to set up and self-host Medusa using [Neon](http
 Before you begin, ensure you have the following:
 
 1.  **Neon Account:** You'll need a Neon account. If you don't have one, sign up [here](https://console.neon.tech/signup).
-2.  **Node.js & npm/yarn:** This guide requires Node.js (version 20 or later) and a package manager (`npm` or `yarn`).
+2.  **Node.js & package manager:** A Node-compatible runtime (Node.js v20+, Bun, or Deno) and a package manager (`npm`, `yarn`, `pnpm`, or `bun`).
+    > This guide uses Node.js with `npm`, but you can adapt the commands to your preferred runtime and package manager.
 
 <Steps>
 
