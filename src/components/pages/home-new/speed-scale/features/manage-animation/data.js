@@ -1,40 +1,34 @@
 export const ANIMATION_CONFIG = {
-  INITIAL: {
-    start: 0,
-  },
   API_CALL_CODE: {
     start: 1.13,
     duration: 0.2,
     ease: 'linear',
   },
   CONNECTION_STRING: {
-    start: 1.42,
+    start: 1.33,
     duration: 1.47,
     ease: 'linear',
   },
+  STEP_2: {
+    start: 3.1,
+    duration: 1.0,
+  },
   LINE_GROWTH: {
     start: 3.1,
-    duration: 0.1,
-    ease: [0.65, 0, 0.83, 0.83],
+    duration: 0.3,
   },
-  SQL_SHOW: {
-    start: 3.1,
-    duration: 1.0,
-    ease: [0.33, 0, 0, 1.01],
-  },
-  SQL_TYPING: {
-    start: 3.1,
-    duration: 1.0,
-    ease: [0.33, 0, 0, 1.01],
+  SQL_CODE: {
+    start: 3.3,
+    duration: 1.2,
   },
   LOOP: {
-    start: 4.5,
+    start: 7,
     duration: 0.5,
     ease: [0.33, -0, 0.67, 1],
   },
 };
 
-export const ANIMATION_DURATION = 5;
+export const ANIMATION_DURATION = 7.5;
 
 export const API_CALL_CODE = 'curl -X POST https://api.neon.tech/v2/projects/:id/database';
 export const CONNECTION_STRING = 'postgresql://example@ep-812.eu-west-1.aws.neon.tech/primary';

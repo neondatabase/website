@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+const customEase = (t) => t * t * (3 - 2 * t);
+
 const DICTIONARY = '0123456789abcdefghijklmnopqrstuvwxyz!?></\\~+*=@#$%'.split('');
 
 const getRandomIndex = () => Math.floor(Math.random() * DICTIONARY.length);
@@ -37,8 +39,9 @@ const ShuffleCode = ({ targetText, isActive, duration, className }) => {
         // Show random characters
         setTextParts({ revealed: '', random: generateRandomString(stringLength) });
       } else if (elapsed < durationMs) {
-        // Gradually reveal target text
-        const revealProgress = (elapsed - shufflePhase) / revealPhase;
+        // Gradually reveal target text with easing
+        const linearProgress = (elapsed - shufflePhase) / revealPhase;
+        const revealProgress = customEase(linearProgress);
         const revealedLength = Math.floor(stringLength * revealProgress);
         const revealedPart = targetText.slice(0, revealedLength);
         const randomPart = generateRandomString(stringLength - revealedPart.length);
