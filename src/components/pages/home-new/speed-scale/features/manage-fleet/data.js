@@ -1,26 +1,26 @@
 export const ANIMATION_CONFIG = {
   API_CALL_CODE: {
-    start: 1.13,
+    start: 1.1,
     duration: 0.2,
     ease: 'linear',
   },
   CONNECTION_STRING: {
-    start: 1.33,
-    duration: 1.47,
+    start: 1.3,
+    duration: 0.8,
     ease: [0.32, 0.07, 0.5, 1],
   },
   LINE_GROWTH: {
-    start: 3.1,
+    start: 2.1,
     duration: 0.3,
     ease: 'easeInOut',
   },
   STEP_2: {
-    start: 3.1,
+    start: 2.1,
     duration: 1.0,
     ease: 'easeInOut',
   },
   SQL_CODE: {
-    start: 3.3,
+    start: 2.4,
     duration: 1.3,
   },
   LOOP: {
