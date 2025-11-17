@@ -127,7 +127,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :-------------------------------------------------: |
 | `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                         | string  |                                                     |
 | `--project-id`      | Project ID                                                                                                                                                                                                                                                            | string  | Only if your Neon account has more than one project |
-| `--name`            | The branch name                                                                                                                                                                                                                                                       | string  |                                                     |
+| `--name`            | The branch name. Optional: if not specified, defaults to the branch ID. If provided, must be unique within the project and can be up to 256 characters. Cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements). | string  |                                                     |
 | `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                             | string  |                                                     |
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
@@ -450,6 +450,8 @@ neon branches rename <id|name> <new-name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+`<new-name>` is the new name for the branch. It must be unique within the project and can be up to 256 characters. It cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for full details.
 
 #### Options
 

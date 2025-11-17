@@ -239,6 +239,7 @@ createNeonBranch('your-project-id', 'dev-1').catch((error) => {
 
 #### Key points:
 
+- `name` (optional): The branch name. If not provided, defaults to the branch ID. If specified, must be unique within the project and can be up to 256 characters. Cannot be empty or consist only of whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for details.
 - `parent_id` (optional): Specifies the branch to branch from. If omitted, the project's default branch is used.
 - `EndpointType`: Enum to define endpoint type (`ReadWrite` or `ReadOnly`).
 - Compute Unit (CU) customization (optional): Control compute size using `autoscaling_limit_min_cu` and `autoscaling_limit_max_cu`. Refer to [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration) for available options.
