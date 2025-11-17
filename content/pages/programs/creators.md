@@ -15,15 +15,15 @@ The Neon Creator program is for any developer creating content to help educate o
 
 Creator Program Benefits:
 
--   Get a Free Scale Account\
-    Get full access to all of Neon's greatest features with a fully sponsored Scale account. 
--   Exclusive Perks\
-    Get access to new features before they launch, feedback sessions and more. 
--   Growth Opportunities\
-    Explore opportunities to collaborate with Neon on video, written, or talk content.
--   Join the Community\
-    Creators are invited to join our exclusive Discord channel for other members of the program.\
-How can I apply?
+- Get a Free Scale Account\
+  Get full access to all of Neon's greatest features with a fully sponsored Scale account. 
+- Exclusive Perks\
+  Get access to new features before they launch, feedback sessions and more. 
+- Growth Opportunities\
+  Explore opportunities to collaborate with Neon on video, written, or talk content.
+- Join the Community\
+   Creators are invited to join our exclusive Discord channel for other members of the program.\
+  How can I apply?
 
 We wanted to keep this simple. There's a short-two field form you can fill out [here](http://neon.tech/creators)!
 
