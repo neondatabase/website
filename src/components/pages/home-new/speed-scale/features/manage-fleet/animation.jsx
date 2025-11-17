@@ -12,7 +12,7 @@ import dotsPattern from 'images/pages/home-new/speed-scale/dots-pattern.jpg';
 import ShuffleCodeAnimation from './components/shuffle-code-animation';
 import Step from './components/step';
 import TypewriterCodeAnimation from './components/typewriter-code-animation';
-import { ANIMATION_CONFIG, API_CALL_CODE, CONNECTION_STRING } from './data';
+import { ANIMATION_CONFIG, CONNECTION_STRING } from './data';
 import useAnimationTimeline from './use-animation-timeline';
 
 export const codeWrapperClassName = clsx(
@@ -30,7 +30,7 @@ const LOOP_TRANSITION = {
   ease: ANIMATION_CONFIG.LOOP.ease,
 };
 
-const Animation = ({ code }) => {
+const Animation = ({ apiCode, sqlCode }) => {
   const { ref, inView } = useInView({ threshold: 0.75 });
   const { isFrameActive } = useAnimationTimeline(inView);
 
@@ -84,22 +84,19 @@ const Animation = ({ code }) => {
                   >
                     {!isFrameActive('CONNECTION_STRING') ? (
                       <m.span
-                        key="api-call"
-                        className={codeClassName}
+                        className={clsx(codeClassName, '[&_span]:text-green-52')}
                         animate={{
-                          color: isFrameActive('API_CALL_CODE') ? '#6b6d73' : '#ffffff',
+                          opacity: isFrameActive('API_CALL_CODE') ? 0.4 : 1,
                         }}
-                        exit={{ opacity: 0 }}
                         transition={{
                           duration: ANIMATION_CONFIG.API_CALL_CODE.duration,
                           ease: ANIMATION_CONFIG.API_CALL_CODE.ease,
                         }}
                       >
-                        {API_CALL_CODE}
+                        {apiCode}
                       </m.span>
                     ) : (
                       <ShuffleCodeAnimation
-                        key="connection-string"
                         targetText={CONNECTION_STRING}
                         isActive={isFrameActive('CONNECTION_STRING')}
                         duration={ANIMATION_CONFIG.CONNECTION_STRING.duration}
@@ -152,7 +149,7 @@ const Animation = ({ code }) => {
                   transition={LOOP_TRANSITION}
                 >
                   <TypewriterCodeAnimation
-                    targetText={code}
+                    targetText={sqlCode}
                     codeClassName={clsx(codeClassName, 'leading-[1.65]')}
                     isActive={isFrameActive('SQL_CODE')}
                     duration={ANIMATION_CONFIG.SQL_CODE.duration}
@@ -181,7 +178,8 @@ const Animation = ({ code }) => {
 };
 
 Animation.propTypes = {
-  code: PropTypes.node.isRequired,
+  apiCode: PropTypes.node.isRequired,
+  sqlCode: PropTypes.node.isRequired,
 };
 
 export default Animation;

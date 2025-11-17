@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import { useMemo } from 'react';
 
 const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration }) => {
-  // Parse React element structure from Shiki
   const parsedContent = useMemo(() => {
-    // targetText is <pre> element from Shiki
     const preElement = targetText;
     const codeElement = preElement.props.children;
 
@@ -79,7 +77,15 @@ const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration
 
   return (
     <pre {...parsedContent.preProps}>
-      <code {...parsedContent.codeProps}>
+      <code
+        {...parsedContent.codeProps}
+        style={{
+          '--shiki-token-keyword': 'white',
+          '--shiki-token-function': 'white',
+          '--shiki-foreground': '#34D59A',
+          '--shiki-token-constant': '#FFA574',
+        }}
+      >
         {parsedContent.lines.map((line, lineIndex) => (
           <span key={`line-${line.dataLine || lineIndex}`} data-line={line.dataLine}>
             {line.tokens.map((token, tokenIndex) => (

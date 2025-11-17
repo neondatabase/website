@@ -3,12 +3,12 @@ import parse from 'html-react-parser';
 import highlight from 'lib/shiki';
 
 import Animation from './animation';
-import { SQL_CODE } from './data';
+import { API_CALL_CODE, SQL_CODE } from './data';
 
 const ManageFleet = async () => {
-  const highlightedCode = await highlight(SQL_CODE, 'sql');
+  const highlightedSqlCode = await highlight(SQL_CODE, 'sql');
 
-  return <Animation code={parse(highlightedCode)} />;
+  return <Animation apiCode={parse(API_CALL_CODE)} sqlCode={parse(highlightedSqlCode)} />;
 };
 
 export default ManageFleet;

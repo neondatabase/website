@@ -32,7 +32,8 @@ export const ANIMATION_CONFIG = {
 
 export const ANIMATION_DURATION = 14;
 
-export const API_CALL_CODE = 'curl -X POST https://api.neon.tech/v2/projects/:id/database';
+export const API_CALL_CODE =
+  'curl -X <span>POST</span> https://api.neon.tech/v2/projects/:id/database';
 export const CONNECTION_STRING = 'postgresql://example@ep-812.eu-west-1.aws.neon.tech/primary';
 
 export const SQL_CODE = `CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);

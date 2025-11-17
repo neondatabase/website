@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+const SPEED = 30; // Update characters every 30ms
+
 const customEase = (t) => t * t * (3 - 2 * t);
 
 const DICTIONARY = '0123456789abcdefghijklmnopqrstuvwxyz!?></\\~+*=@#$%'.split('');
@@ -16,9 +18,13 @@ const generateRandomString = (length) => {
 };
 
 const ShuffleCodeAnimation = ({ targetText, isActive, duration, className }) => {
-  const [textParts, setTextParts] = useState({ revealed: targetText, random: '' });
+  const [textParts, setTextParts] = useState({
+    revealed: '',
+    random: generateRandomString(targetText.length),
+  });
   const frameRef = useRef();
   const startTimeRef = useRef(0);
+  const lastUpdateRef = useRef(0);
 
   useEffect(() => {
     if (!isActive) {
@@ -27,6 +33,7 @@ const ShuffleCodeAnimation = ({ targetText, isActive, duration, className }) => 
     }
 
     startTimeRef.current = performance.now();
+    lastUpdateRef.current = 0;
     const stringLength = targetText.length;
     const durationMs = duration * 1000;
     const shufflePhase = durationMs * 0.1; // 10% of time for shuffle
@@ -36,16 +43,22 @@ const ShuffleCodeAnimation = ({ targetText, isActive, duration, className }) => 
       const elapsed = currentTime - startTimeRef.current;
 
       if (elapsed < shufflePhase) {
-        // Show random characters
-        setTextParts({ revealed: '', random: generateRandomString(stringLength) });
+        // Show random characters with throttling
+        if (elapsed - lastUpdateRef.current >= SPEED) {
+          setTextParts({ revealed: '', random: generateRandomString(stringLength) });
+          lastUpdateRef.current = elapsed;
+        }
       } else if (elapsed < durationMs) {
-        // Gradually reveal target text with easing
-        const linearProgress = (elapsed - shufflePhase) / revealPhase;
-        const revealProgress = customEase(linearProgress);
-        const revealedLength = Math.floor(stringLength * revealProgress);
-        const revealedPart = targetText.slice(0, revealedLength);
-        const randomPart = generateRandomString(stringLength - revealedPart.length);
-        setTextParts({ revealed: revealedPart, random: randomPart });
+        // Gradually reveal target text with throttling
+        if (elapsed - lastUpdateRef.current >= SPEED) {
+          const linearProgress = (elapsed - shufflePhase) / revealPhase;
+          const revealProgress = customEase(linearProgress);
+          const revealedLength = Math.floor(stringLength * revealProgress);
+          const revealedPart = targetText.slice(0, revealedLength);
+          const randomPart = generateRandomString(stringLength - revealedPart.length);
+          setTextParts({ revealed: revealedPart, random: randomPart });
+          lastUpdateRef.current = elapsed;
+        }
       } else {
         // Animation complete
         setTextParts({ revealed: targetText, random: '' });
