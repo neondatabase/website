@@ -2,7 +2,7 @@
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
 enableTableOfContents: true
-updatedOn: '2025-08-19T16:10:28.673Z'
+updatedOn: '2025-11-17T20:56:53.511Z'
 ---
 
 ## Overview
