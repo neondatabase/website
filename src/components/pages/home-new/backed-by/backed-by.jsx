@@ -69,7 +69,7 @@ const BackedBy = () => (
           <HeadingLabel className="md:mb-4" theme="black">
             Trusted by the best
           </HeadingLabel>
-          <blockquote className="mt-auto font-mono text-xl leading-snug tracking-extra-tight text-black xl:text-lg lg:text-[15px]">
+          <blockquote className="mt-auto font-mono-new text-xl leading-snug tracking-extra-tight text-black xl:text-lg lg:text-[15px]">
             Neon's serverless philosophy is{' '}
             <span className="-mx-1 bg-[#39A57D]/60 px-1">aligned with our vision:</span> no
             infrastructure to manage, no servers to provision, no database cluster to maintain.

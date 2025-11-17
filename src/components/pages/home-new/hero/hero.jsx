@@ -15,7 +15,7 @@ const Hero = () => (
           Read the docs
         </Button>
         <Button
-          className="inline-flex items-center gap-x-3 font-mono !font-medium"
+          className="inline-flex items-center gap-x-3 font-mono-new !font-medium"
           theme="green-filled"
           size="xs"
         >

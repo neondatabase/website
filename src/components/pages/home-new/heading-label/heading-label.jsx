@@ -12,7 +12,8 @@ const themeClassName = {
 const HeadingLabel = ({ className, theme = 'white', children }) => (
   <span
     className={clsx(
-      'flex w-fit items-center gap-x-2 font-mono text-xs font-medium uppercase leading-none sm:text-[10px]',
+      'flex w-fit items-center gap-2 font-mono-new text-xs font-medium uppercase leading-none text-gray-new-80',
+      'sm:gap-1.5 sm:text-[10px]',
       themeClassName[theme],
       className
     )}
