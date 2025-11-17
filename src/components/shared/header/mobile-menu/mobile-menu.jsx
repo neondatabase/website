@@ -53,11 +53,14 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
   return (
     <li
       className={clsx('shrink-0 overflow-hidden border-b border-gray-new-20 last:border-b-0', {
-        'pb-14 sm:pb-10': isMenuItemOpen,
+        'pb-14 sm:pb-7': isMenuItemOpen,
       })}
     >
       <Tag
-        className="relative flex w-full items-center py-7 text-[28px] font-medium leading-none tracking-snug transition-colors duration-200 sm:py-6 sm:text-2xl"
+        className={clsx(
+          'relative flex w-full items-center py-7 text-[28px] font-medium leading-none tracking-snug transition-colors duration-200 sm:py-5 sm:text-xl',
+          { 'sm:pb-3': isMenuItemOpen }
+        )}
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
