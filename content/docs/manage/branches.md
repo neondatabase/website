@@ -18,6 +18,17 @@ You can create and manage branches using the Neon Console, [Neon CLI](/docs/refe
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/branching#restore-window).
 </Admonition>
 
+## Branch naming requirements
+
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (e.g., `br-curly-wave-af4i4oeu`).
+
+If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
+
+- **Maximum length**: 256 characters (API limit). Note that the Neon Console enforces a more restrictive limit of 128 characters.
+- **Uniqueness**: Branch names must be unique within a project. You cannot have two branches with the same name in the same project.
+- **Non-empty**: Branch names cannot be empty or consist only of whitespace characters.
+- **Character flexibility**: Unlike some other Neon resources (such as databases or roles), branch names have no special character restrictions. You can use any characters as long as they meet the requirements above.
+
 ## Create a branch
 
 To create a branch:
