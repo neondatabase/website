@@ -8,7 +8,7 @@ import deploy from 'images/pages/home-new/speed-scale/deploy.svg';
 
 import Heading from '../heading';
 
-import ManageAnimation from './manage-animation';
+import ManageFleet from './manage-fleet';
 
 const DATA = [
   {
@@ -34,7 +34,7 @@ const DATA = [
     description:
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
     link: '#',
-    animation: <ManageAnimation />,
+    animation: <ManageFleet />,
   },
 ];
 

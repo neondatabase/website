@@ -3,15 +3,16 @@
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Image from 'next/image';
+import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
 
 import PlayIcon from 'icons/home-new/play.inline.svg';
 import dotsPattern from 'images/pages/home-new/speed-scale/dots-pattern.jpg';
 
-import { ANIMATION_CONFIG, API_CALL_CODE, CONNECTION_STRING, SQL_CODE } from './data';
-import ShuffleCode from './shuffle-code';
-import Step from './step';
-import TypewriterCode from './typewriter-code';
+import ShuffleCodeAnimation from './components/shuffle-code-animation';
+import Step from './components/step';
+import TypewriterCodeAnimation from './components/typewriter-code-animation';
+import { ANIMATION_CONFIG, API_CALL_CODE, CONNECTION_STRING } from './data';
 import useAnimationTimeline from './use-animation-timeline';
 
 export const codeWrapperClassName = clsx(
@@ -29,7 +30,7 @@ const LOOP_TRANSITION = {
   ease: ANIMATION_CONFIG.LOOP.ease,
 };
 
-const ManageAnimation = () => {
+const Animation = ({ code }) => {
   const { ref, inView } = useInView({ threshold: 0.75 });
   const { isFrameActive } = useAnimationTimeline(inView);
 
@@ -97,7 +98,7 @@ const ManageAnimation = () => {
                         {API_CALL_CODE}
                       </m.span>
                     ) : (
-                      <ShuffleCode
+                      <ShuffleCodeAnimation
                         key="connection-string"
                         targetText={CONNECTION_STRING}
                         isActive={isFrameActive('CONNECTION_STRING')}
@@ -143,21 +144,20 @@ const ManageAnimation = () => {
                   codeWrapperClassName
                 )}
               >
-                <m.code
-                  className={clsx(codeClassName, 'leading-[1.65]')}
+                <m.div
                   initial={{ opacity: 1 }}
                   animate={{
                     opacity: isFrameActive('LOOP') ? 0 : 1,
                   }}
                   transition={LOOP_TRANSITION}
                 >
-                  <TypewriterCode
-                    targetText={SQL_CODE}
+                  <TypewriterCodeAnimation
+                    targetText={code}
+                    codeClassName={clsx(codeClassName, 'leading-[1.65]')}
                     isActive={isFrameActive('SQL_CODE')}
                     duration={ANIMATION_CONFIG.SQL_CODE.duration}
-                    className={codeClassName}
                   />
-                </m.code>
+                </m.div>
                 <button
                   className={clsx(
                     'flex w-fit items-center gap-1.5 border border-gray-new-40 bg-black-pure py-2 pl-2.5 pr-3',
@@ -180,4 +180,8 @@ const ManageAnimation = () => {
   );
 };
 
-export default ManageAnimation;
+Animation.propTypes = {
+  code: PropTypes.node.isRequired,
+};
+
+export default Animation;

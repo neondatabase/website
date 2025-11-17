@@ -15,7 +15,7 @@ const generateRandomString = (length) => {
   return result;
 };
 
-const ShuffleCode = ({ targetText, isActive, duration, className }) => {
+const ShuffleCodeAnimation = ({ targetText, isActive, duration, className }) => {
   const [textParts, setTextParts] = useState({ revealed: targetText, random: '' });
   const frameRef = useRef();
   const startTimeRef = useRef(0);
@@ -72,15 +72,11 @@ const ShuffleCode = ({ targetText, isActive, duration, className }) => {
   );
 };
 
-ShuffleCode.propTypes = {
+ShuffleCodeAnimation.propTypes = {
   targetText: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
   duration: PropTypes.number.isRequired,
   className: PropTypes.string,
 };
 
-ShuffleCode.defaultProps = {
-  className: '',
-};
-
-export default ShuffleCode;
+export default ShuffleCodeAnimation;
