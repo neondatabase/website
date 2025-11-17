@@ -464,6 +464,7 @@
 - [Neon CLI commands — vpc](https://neon.com/llms/reference-cli-vpc.txt): Use the Neon CLI to manage Neon directly from the terminal
 - [Neon CLI — Install and connect](https://neon.com/llms/reference-cli-install.txt): Use the Neon CLI to manage Neon directly from the terminal
 - [Neon Launchpad](https://neon.com/llms/reference-neon-launchpad.txt): Launch an instant Neon Postgres database with zero configuration
+- [Neon Instagres](https://neon.com/llms/reference-neon-instagres.txt): Launch an instant Neon Postgres database with zero configuration
 - [Neon RSS feeds](https://neon.com/llms/reference-feeds.txt): Stay updated with the latest news from Neon
 - [Neon SDKs](https://neon.com/llms/reference-sdk.txt): Sdk
 - [Postgres compatibility](https://neon.com/llms/reference-compatibility.txt): Learn about Neon as a managed Postgres service
