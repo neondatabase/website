@@ -91,7 +91,7 @@ npx get-db --env ./my.env --key MY_DB_URL
 # Skip prompts and use defaults
 npx get-db --yes
 
-# Detects PUBLIC_NEON_INSTAGRES_CLAIM_URL (default) from your environment,
+# Detects PUBLIC_INSTAGRES_CLAIM_URL (default) from your environment,
 # and opens the defined claim URL in your browser
 npx get-db claim
 ```
@@ -103,7 +103,7 @@ The CLI writes the connection string, claim URL, and expiration to the specified
 # Claim it now to your account: https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
 DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
 DATABASE_URL_POOLER=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-PUBLIC_NEON_INSTAGRES_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
+PUBLIC_INSTAGRES_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
 ```
 
 For advanced SDK/API usage, see the [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db).
