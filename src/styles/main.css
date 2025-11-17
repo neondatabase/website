@@ -115,7 +115,8 @@
   }
 }
 
-.header:has(.group\/main-nav:hover) + .navigation-overlay {
+.header:has(.group\/main-nav:hover) + .navigation-overlay,
+.header:has(.main-navigation-submenu:hover) + .navigation-overlay {
   opacity: 1;
   transition-delay: 0s;
 }
