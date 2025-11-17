@@ -78,9 +78,10 @@ const Navigation = () => {
             >
               <Tag
                 className={clsx(
-                  'relative flex items-center gap-x-1 whitespace-pre text-[15px] font-normal tracking-snug !text-gray-new-50 transition-colors duration-200 hover:!text-white',
+                  'relative flex items-center gap-x-1 whitespace-pre text-[15px] font-normal tracking-snug  transition-colors duration-200 hover:!text-white',
                   {
-                    '!text-white': isActive,
+                    '!text-white': activeMenuIndex === null || isActive,
+                    '!text-gray-new-50': activeMenuIndex !== null && !isActive,
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
                 )}
@@ -148,7 +149,7 @@ const Navigation = () => {
                           )}
                           <ul
                             className={clsx(
-                              'flex flex-col',
+                              'group flex flex-col',
                               sectionIndex === 0 ? 'gap-y-5' : 'gap-y-4'
                             )}
                           >
@@ -156,7 +157,7 @@ const Navigation = () => {
                               <li key={title}>
                                 <Link
                                   className={clsx(
-                                    'block leading-none tracking-snug text-gray-new-80 transition-colors duration-200 hover:text-white',
+                                    'main-navigation-submenu-link block leading-none tracking-snug text-white transition-colors duration-200 hover:!text-white group-hover:text-gray-new-80',
                                     sectionIndex === 0 ? 'text-2xl' : 'text-sm'
                                   )}
                                   to={to}

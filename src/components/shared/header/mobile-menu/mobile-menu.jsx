@@ -57,14 +57,14 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
       })}
     >
       <Tag
-        className='relative flex w-full items-center py-7 text-[28px] font-medium leading-none tracking-snug transition-colors duration-200 sm:py-6 sm:text-2xl'
+        className="relative flex w-full items-center py-7 text-[28px] font-medium leading-none tracking-snug transition-colors duration-200 sm:py-6 sm:text-2xl"
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
         {...otherProps}
       >
         {text}
-        {sections && <ChevronIcon width={24} height={24} className='ml-auto text-white' />}
+        {sections && <ChevronIcon width={24} height={24} className="ml-auto text-white" />}
       </Tag>
       {hasSubmenu && (
         <AnimatePresence>
@@ -74,7 +74,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
               animate={{ height: 'auto', opacity: 1, paddingTop: 12 }}
               exit={{ height: 0, opacity: 0, paddingTop: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
-              className='grid grid-cols-2 gap-x-[104px] gap-y-9 pt-3 sm:grid-cols-1'
+              className="grid grid-cols-2 gap-x-[104px] gap-y-9 pt-3 sm:grid-cols-1"
             >
               {sections.map(({ title, items }, index) => (
                 <li className="min-w-[216px]" key={index}>
@@ -87,7 +87,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
                     {items.map(({ title, to, isExternal }) => (
                       <li key={title}>
                         <Link
-                          className='block text-lg leading-none tracking-snug text-white sm:text-base'
+                          className="block text-lg leading-none tracking-snug text-white sm:text-base"
                           to={to}
                           isExternal={isExternal}
                           tagName="MobileMenu"
@@ -139,10 +139,10 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-7 top-3 z-40 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
+      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
-          className='relative flex text-white'
+          className="relative flex text-white"
           isToggled={isMobileMenuOpen}
           isNewDesign
           onClick={toggleMobileMenu}
@@ -152,23 +152,25 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.nav
-              className='safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-black-pure lg:flex'
+              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-black-pure lg:flex"
               initial="from"
               animate="to"
               exit="from"
               variants={variants}
             >
-              <div className={clsx("relative h-full pb-[108px] pt-[60px] sm:pb-[158px]", { 'pt-[96px]': hasTopbar })}>
+              <div
+                className={clsx('relative h-full pb-[108px] pt-[60px] sm:pb-[158px]', {
+                  'pt-[96px]': hasTopbar,
+                })}
+              >
                 <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
                   {mobileMenuItems.map((item, index) => (
                     <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-                <div
-                  className='absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7'
-                >
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7">
                   <Button
-                    className='items-center justify-center !border-gray-new-40 text-base leading-none !tracking-tight'
+                    className="items-center justify-center !border-gray-new-40 text-base leading-none !tracking-tight"
                     to={LINKS.login}
                     theme="gray-15-outline"
                     tagName="MobileMenu"
