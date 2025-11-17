@@ -24,13 +24,13 @@ export const ANIMATION_CONFIG = {
     duration: 1.3,
   },
   LOOP: {
-    start: 13.5,
+    start: 29.5,
     duration: 0.5,
     ease: [0.33, 0, 0.67, 1],
   },
 };
 
-export const ANIMATION_DURATION = 14;
+export const ANIMATION_DURATION = 30;
 
 export const API_CALL_CODE =
   'curl -X <span>POST</span> https://api.neon.tech/v2/projects/:id/database';
