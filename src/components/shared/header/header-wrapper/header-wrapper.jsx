@@ -29,12 +29,11 @@ const HeaderWrapper = ({
     <>
       <header
         className={clsx(
-          'header left-0 right-0 top-0 z-50 flex h-16 w-full items-center bg-white dark:bg-black-pure lg:relative lg:h-14',
+          'header relative left-0 right-0 top-0 z-50 flex h-16 w-full items-center bg-white dark:bg-black-pure lg:relative lg:h-14',
           isSticky ? 'sticky transition-[padding,background-color] duration-200' : 'absolute',
           isStickyOverlay && '-mb-16',
           withBorder &&
             clsx(
-              'relative',
               'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px',
               'after:bg-gray-new-94 after:dark:bg-gray-new-10',
               'after:transition-opacity after:duration-200',
@@ -50,10 +49,7 @@ const HeaderWrapper = ({
       <div
         className={clsx(
           'navigation-overlay',
-          'fixed inset-0 z-40',
-          'pointer-events-none opacity-0 transition-opacity delay-150 duration-200',
-          '[nav:has(.group/main-nav:hover)_&]:opacity-100 [nav:has(.group/main-nav:hover)_&]:delay-0',
-          'bg-black/80'
+          'pointer-events-none fixed inset-0 z-40 bg-black/80 opacity-0 transition-opacity delay-150 duration-200'
         )}
       />
     </>
