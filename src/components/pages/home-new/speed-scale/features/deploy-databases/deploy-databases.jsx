@@ -3,6 +3,7 @@
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
+import CountingNumber from './counting-number';
 import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS } from './data';
 
 const DeployDatabases = () => {
@@ -13,9 +14,11 @@ const DeployDatabases = () => {
       ref={ref}
       className="relative max-w-none font-mono-new leading-none tracking-extra-tight xl:text-xs sm:text-[7px]"
     >
-      <div className="w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
+      <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
         Databases deployed:
-        <span className="ml-7 text-gray-new-50 xl:ml-6 sm:ml-3 ">{TOTAL_DATABASES}</span>
+        <span className="ml-7 min-w-14 text-gray-new-80 xl:ml-6 xl:min-w-11 sm:ml-3 sm:min-w-6">
+          <CountingNumber number={TOTAL_DATABASES} inView={inView} />
+        </span>
       </div>
       <div className="border-b border-l border-gray-new-50 pb-[18px] pl-[18px] pt-8 xl:pb-3.5 xl:pl-3.5 xl:pt-[26px] sm:pb-2 sm:pl-2 sm:pt-4">
         <ul className="flex flex-col gap-9 xl:gap-[26px] sm:gap-4">
@@ -27,13 +30,17 @@ const DeployDatabases = () => {
                     {day}
                   </span>
                   <div className="flex gap-5 xl:gap-4 sm:gap-3">
-                    <div className="flex w-[132px] gap-2 xl:w-[102px] xl:gap-1.5 sm:w-[60px] sm:gap-1">
+                    <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Active:
-                      <span className="text-green-45">{activeCount}</span>
+                      <span className="min-w-14 text-green-45 xl:min-w-11 sm:min-w-6">
+                        <CountingNumber number={activeCount} inView={inView} />
+                      </span>
                     </div>
                     <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Idle:
-                      <span className="text-gray-new-80">{idleCount}</span>
+                      <span className="min-w-14 text-gray-new-80 xl:min-w-11 sm:min-w-6">
+                        <CountingNumber number={idleCount} inView={inView} />
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -58,7 +65,7 @@ const DeployDatabases = () => {
                                   : ACTIVITY_COLORS[0],
                                 scale: inView && value !== '0' ? 1 : 0.33,
                               }}
-                              transition={{ duration: inView ? 0.5 : 0 }}
+                              transition={{ duration: 1.2 }}
                             />
                           </div>
                         ))}
