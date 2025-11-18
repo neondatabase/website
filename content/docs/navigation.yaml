@@ -351,7 +351,67 @@
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
-        - title: Neon Auth
+        - title: Neon Auth v2
+          icon: auth
+          slug: auth/overview
+          tag: new
+          items:
+            - title: Overview
+              slug: auth/overview
+
+            - section: Quickstarts
+              items:
+                - title: React
+                  slug: auth/quick-start/react
+                - title: Next.js
+                  slug: auth/quick-start/nextjs
+
+            - section: Core Concepts
+              items:
+                - title: How Neon Auth Works
+                  slug: auth/concepts/how-it-works
+                - title: Branching Authentication
+                  slug: auth/concepts/branching-authentication
+                - title: Database Schema
+                  slug: auth/concepts/database-schema
+
+            - section: Guides
+              items:
+                - title: Protecting Routes
+                  slug: auth/guides/protecting-routes
+                - title: User Management
+                  slug: auth/guides/user-management
+                - title: Social OAuth
+                  slug: auth/guides/social-oauth
+                - title: Row Level Security
+                  slug: auth/guides/row-level-security
+                - title: Preview Environments
+                  slug: auth/guides/preview-environments
+
+            - section: SDK Reference
+              items:
+                - title: JavaScript SDK
+                  slug: reference/javascript-sdk
+
+            - section: Migration Guides
+              items:
+                - title: Migrate v1 to v2
+                  slug: auth/migrate/v1-to-v2
+                - title: Eject v1 to Stack Auth
+                  slug: auth/migrate/v1-eject-to-stack-auth
+                - title: From Supabase
+                  slug: auth/migrate/from-supabase
+
+            - section: Advanced
+              items:
+                - title: Server-Side Auth
+                  slug: auth/advanced/server-side-auth
+                - title: Security Best Practices
+                  slug: auth/advanced/security-best-practices
+                - title: Troubleshooting
+                  slug: auth/advanced/troubleshooting
+
+        - title: Neon Auth (v1)
           icon: auth
           slug: neon-auth/overview
           items:
