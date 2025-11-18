@@ -258,6 +258,8 @@
               slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
+            - title: Medusa.js
+              slug: guides/medusajs
             - title: Micronaut Kotlin
               slug: guides/micronaut-kotlin
             - title: NestJS
