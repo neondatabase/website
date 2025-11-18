@@ -45,36 +45,48 @@ const DeployDatabases = () => {
                   </div>
                 </div>
                 <ul className="flex gap-2 xl:gap-1.5">
-                  {activity.map((activity, index) => (
+                  {activity.map((activity, hour) => (
                     <li
                       className="flex shrink-0 flex-col items-center gap-3 xl:gap-2 sm:gap-1.5"
-                      key={index}
+                      key={hour}
                     >
                       <div className="grid grid-flow-col grid-cols-6 grid-rows-10 gap-[3px] xl:gap-0.5 sm:gap-px">
-                        {activity.split('').map((value, index) => (
-                          <div
-                            key={index}
-                            className="flex size-1.5 items-center justify-center xl:size-[5px] sm:size-[3px]"
-                          >
-                            <m.span
-                              className="block size-full scale-[0.33]"
-                              initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
-                              animate={{
-                                backgroundColor: inView
-                                  ? ACTIVITY_COLORS[value]
-                                  : ACTIVITY_COLORS[0],
-                                scale: inView && value !== '0' ? 1 : 0.33,
-                              }}
-                              transition={{ duration: 1.2 }}
-                            />
-                          </div>
-                        ))}
+                        {activity.split('').map((value, minute) => {
+                          const delay = hour * 0.1 + Math.random() * 0.2;
+
+                          return (
+                            <div
+                              key={minute}
+                              className="flex size-1.5 items-center justify-center xl:size-[5px] sm:size-[3px]"
+                            >
+                              <m.span
+                                className="block size-full scale-[0.33]"
+                                initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
+                                animate={{
+                                  backgroundColor: inView
+                                    ? ACTIVITY_COLORS[value]
+                                    : ACTIVITY_COLORS[0],
+                                  scale: inView && value !== '0' ? 1 : 0.33,
+                                }}
+                                transition={{
+                                  type: inView ? 'spring' : 'tween',
+                                  duration: inView ? undefined : 0.5,
+                                  delay: inView ? delay : 0,
+                                  ease: inView ? undefined : [0.4, 0, 0.67, 1],
+                                  bounce: inView ? 0.2 : undefined,
+                                  stiffness: inView ? 400 : undefined,
+                                  damping: inView ? 15 : undefined,
+                                }}
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                       <time
                         className="text-xs text-gray-new-50 xl:text-[9px] sm:text-[5px]"
-                        dateTime={`${index + 9}:00`}
+                        dateTime={`${hour + 9}:00`}
                       >
-                        {String(index + 9).padStart(2, '0')}:00
+                        {String(hour + 9).padStart(2, '0')}:00
                       </time>
                     </li>
                   ))}

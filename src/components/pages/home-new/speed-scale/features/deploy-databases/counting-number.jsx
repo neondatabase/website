@@ -7,7 +7,7 @@ const CountingNumber = ({
   fromNumber = 0,
   inView = false,
   thousandsSeparator = ',',
-  transition = { stiffness: 280, damping: 40 },
+  transition = { stiffness: 280, damping: 50 },
   delay = 0,
   ...props
 }) => {
