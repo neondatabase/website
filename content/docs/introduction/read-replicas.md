@@ -63,7 +63,7 @@ For more details and how to connect to a read replica, see [Create and manage Re
 
 The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
 
-![read replica computes](/docs/introduction/read_replicas.jpg)
+![read replica computes](/docs/introduction/read_replicas.png)
 
 Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the most recent changes to maintain data consistency.
 
