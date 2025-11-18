@@ -266,6 +266,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/materialize.svg',
     darkIconPath: '/images/technology-logos/materialize-dark.svg',
   },
+  medusajs: {
+    name: 'medusajs',
+    lightIconPath: '/images/technology-logos/medusajs.svg',
+    darkIconPath: '/images/technology-logos/medusajs-dark.svg',
+  },
   micronaut: {
     name: 'micronaut',
     lightIconPath: '/images/technology-logos/micronaut.svg',
