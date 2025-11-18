@@ -171,23 +171,11 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                     <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 bg-black-pure p-8 md:px-5 sm:grid-cols-1 sm:py-7">
-                  <Button
-                    className="items-center justify-center !border-gray-new-40 text-base leading-none !tracking-tight"
-                    to={LINKS.login}
-                    theme="gray-15-outline"
-                    tagName="MobileMenu"
-                    size="new"
-                  >
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-black-pure p-8 md:p-5 sm:grid-cols-1">
+                  <Button to={LINKS.login} theme="gray-40-outline" tagName="MobileMenu" size="lg">
                     Log In
                   </Button>
-                  <Button
-                    className="items-center text-base font-medium !tracking-tight"
-                    to={LINKS.signup}
-                    theme="white-filled"
-                    tagName="MobileMenu"
-                    size="new"
-                  >
+                  <Button to={LINKS.signup} theme="white-filled" tagName="MobileMenu" size="lg">
                     Sign Up
                   </Button>
                 </div>

@@ -24,7 +24,7 @@ const styles = {
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
     tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
     quaternary: 'bg-white text-black border border-black hover:border-primary-2',
-    'white-filled': 'bg-white text-black hover:bg-gray-6',
+    'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
     'black-outline': 'bg-transparent text-white border border-[#2E3038] hover:border-primary-2',
     'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
@@ -49,6 +49,7 @@ const styles = {
     'with-icon':
       'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
     'red-filled': 'bg-[#F18484] text-black hover:bg-[#FBA8A8]',
+    transparent: 'bg-transparent hover:bg-gray-new-10 text-white',
   },
 };
 

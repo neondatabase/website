@@ -10,22 +10,16 @@ import DiscordIcon from 'icons/discord.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 import { getGitHubStars } from 'utils/get-github-data';
 
-const themePropTypes = {
-  isDarkTheme: PropTypes.bool,
-};
-
-const GitHubStars = async ({ isDarkTheme }) => {
+const GitHubStars = async () => {
   const starsCount = await getGitHubStars();
   return (
     <Suspense>
-      <GitHubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} tagName="Header" />
+      <GitHubStarCounter starsCount={starsCount} tagName="Header" />
     </Suspense>
   );
 };
 
-GitHubStars.propTypes = themePropTypes;
-
-const Sidebar = ({ isDarkTheme, isClient, simpleMode, className }) => (
+const Sidebar = ({ isClient, simpleMode, className }) => (
   <div
     className={clsx('flex items-center lg:hidden', simpleMode ? 'gap-x-2.5' : 'gap-x-6', className)}
   >
@@ -62,54 +56,46 @@ const Sidebar = ({ isDarkTheme, isClient, simpleMode, className }) => (
     ) : (
       <>
         <Link
-          className={clsx(
-            'flex items-center gap-1.5 transition-colors duration-200',
-            isDarkTheme
-              ? 'text-gray-new-90 hover:text-green-45'
-              : 'text-gray-new-8 hover:text-green-45 dark:text-gray-new-90 dark:hover:text-green-45'
-          )}
+          className="group flex items-center gap-1.5 text-white transition-colors duration-200 hover:text-gray-new-70"
           to={LINKS.discord}
           target="_blank"
           rel="noopener noreferrer"
           tagName="Header"
         >
-          <DiscordIcon width={18} height={18} />
+          <DiscordIcon
+            width={18}
+            height={18}
+            className="text-gray-new-90 transition-colors group-hover:text-gray-new-80"
+          />
           <span className="text-sm leading-none tracking-extra-tight">Discord</span>
         </Link>
-        {!isClient && <GitHubStars isDarkTheme={isDarkTheme} />}
+        {!isClient && <GitHubStars />}
       </>
     )}
     <div className="flex gap-2.5 lg:hidden">
       <Button
-        className={clsx(
-          'px-4.5 whitespace-nowrap border font-semibold',
-          isDarkTheme
-            ? 'border-gray-new-30 text-white hover:border-gray-new-40'
-            : 'border-gray-new-70 hover:border-gray-new-50 dark:border-gray-new-30 dark:hover:border-gray-new-40'
-        )}
-        to={LINKS.login}
-        size="xxs"
-        tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
-      >
-        Log In
-      </Button>
-      <Button
-        className="px-4.5 whitespace-nowrap font-semibold"
         to={LINKS.signup}
-        theme="primary"
+        theme="white-filled"
         size="xxs"
         tagName="Header"
         analyticsEvent="header_sign_up_clicked"
       >
         Sign Up
       </Button>
+      <Button
+        to={LINKS.login}
+        theme="transparent"
+        size="xxs"
+        tagName="Header"
+        analyticsEvent="header_sign_up_clicked"
+      >
+        Log In
+      </Button>
     </div>
   </div>
 );
 
 Sidebar.propTypes = {
-  ...themePropTypes,
   isClient: PropTypes.bool,
   simpleMode: PropTypes.bool,
   className: PropTypes.string,

@@ -12,7 +12,6 @@ import Sidebar from './sidebar';
 const Header = ({
   className = null,
   theme = null,
-  isDarkTheme = false,
   isSticky = false,
   isStickyOverlay = false,
   isDocPage = false,
@@ -48,7 +47,7 @@ const Header = ({
             <Logo width={102} height={28} priority isHeader />
             <Navigation />
           </div>
-          <Sidebar isDarkTheme={isDarkTheme} isClient={isClient} />
+          <Sidebar isClient={isClient} />
         </Container>
       )}
     </HeaderWrapper>
@@ -59,7 +58,6 @@ const Header = ({
 Header.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
-  isDarkTheme: PropTypes.bool,
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
   isDocPage: PropTypes.bool,
