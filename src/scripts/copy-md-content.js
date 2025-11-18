@@ -5,6 +5,8 @@
 const fs = require('fs').promises;
 const path = require('path');
 
+const jsYaml = require('js-yaml');
+
 const { CONTENT_ROUTES } = require('../constants/content');
 
 const copyMarkdownFiles = async (src, dest) => {
@@ -37,6 +39,29 @@ const copyMarkdownFiles = async (src, dest) => {
     });
 
     await Promise.all(copyTasks);
+
+    // Convert SDK navigation YAML files to JSON and copy to public
+    console.log('Converting SDK navigation YAML to JSON...');
+    await fs.mkdir('public/docs/reference', { recursive: true });
+
+    // List of SDK navigation files to process
+    const SDK_NAV_FILES = ['javascript-sdk'];
+    // Add future SDK nav files here (e.g., 'python-sdk')
+
+    for (const sdkName of SDK_NAV_FILES) {
+      const yamlPath = `content/docs/${sdkName}-nav.yaml`;
+      try {
+        const yamlContent = await fs.readFile(yamlPath, 'utf8');
+        const sdkNav = jsYaml.load(yamlContent);
+        await fs.writeFile(
+          `public/docs/reference/${sdkName}-nav.json`,
+          JSON.stringify(sdkNav, null, 2)
+        );
+        console.log(`  ✓ Converted ${sdkName}-nav.yaml to JSON`);
+      } catch (err) {
+        console.warn(`  ⚠ Could not process ${sdkName}-nav.yaml:`, err.message);
+      }
+    }
 
     console.log('Done copying markdown content.');
   } catch (err) {

@@ -68,6 +68,9 @@ public/robots.txt
 # ignore local markdown files
 public/md
 
+# ignore generated SDK navigation JSON files
+public/docs/reference/*-nav.json
+
 # Mac files
 .DS_Store
 

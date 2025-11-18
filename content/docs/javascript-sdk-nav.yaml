@@ -1,0 +1,56 @@
+title: JavaScript SDK
+
+sections:
+- section: Getting Started
+  items:
+    - title: Installation
+      id: installation
+    - title: Initializing
+      id: initializing
+
+- section: Auth
+  items:
+    - title: auth.signUp()
+      id: authsignup
+    - title: auth.signInWithPassword()
+      id: authsigninwithpassword
+    - title: auth.signInWithOAuth()
+      id: authsigninwithoauth
+    - title: auth.signOut()
+      id: authsignout
+    - title: auth.getSession()
+      id: authgetsession
+    - title: auth.getUser()
+      id: authgetuser
+    - title: auth.updateUser()
+      id: authupdateuser
+    - title: auth.onAuthStateChange()
+      id: authonauthstatechange
+    - title: auth.resetPasswordForEmail()
+      id: authresetpasswordforemail
+
+- section: Database
+  items:
+    - title: from().select()
+      id: fromselect
+    - title: from().insert()
+      id: frominsert
+    - title: from().update()
+      id: fromupdate
+    - title: from().delete()
+      id: fromdelete
+
+- section: Filters
+  items:
+    - title: .eq()
+      id: eq
+    - title: .neq()
+      id: neq
+    - title: .gt()
+      id: gt
+    - title: .lt()
+      id: lt
+    - title: .order()
+      id: order
+    - title: .limit()
+      id: limit
