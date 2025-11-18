@@ -97,7 +97,7 @@ Use `/neon disconnect` to remove your Neon account connection and unsubscribe fr
 
 ## Data deletion
 
-Neon respects your right to request deletion of your personal data at any time. To do so, email us at `privacy@neon.tech` or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](/privacy-policy).
+Neon respects your right to request deletion of your personal data at any time. To do so, email us at `privacy@databricks.com` or submit a support ticket via the Neon Console. Once we verify your identity, we will delete your data within 30 days, unless a legal or contractual obligation requires us to retain it. For more details, see our [Privacy Policy](/privacy-policy).
 
 ## Support
 
