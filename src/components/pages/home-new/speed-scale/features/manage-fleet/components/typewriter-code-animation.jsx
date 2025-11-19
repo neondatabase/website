@@ -80,10 +80,10 @@ const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration
       <code
         {...parsedContent.codeProps}
         style={{
-          '--shiki-token-keyword': '#C9CBCF',
-          '--shiki-token-function': '#C9CBCF',
-          '--shiki-foreground': '#34D59A',
-          '--shiki-token-constant': '#FFA574',
+          '--shiki-token-keyword': '#34D59A',
+          '--shiki-token-function': '#F7B983',
+          '--shiki-foreground': '#C9CBCF',
+          '--shiki-token-constant': '#94B5F7',
         }}
       >
         {parsedContent.lines.map((line, lineIndex) => (

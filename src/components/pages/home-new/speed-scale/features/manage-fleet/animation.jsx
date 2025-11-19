@@ -86,7 +86,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                       <m.span
                         className={clsx(codeClassName, '[&_span]:text-green-52')}
                         animate={{
-                          opacity: isFrameActive('API_CALL_CODE') ? 0.4 : 1,
+                          opacity: isFrameActive('API_CALL_CODE') ? 0.5 : 1,
                         }}
                         transition={{
                           duration: ANIMATION_CONFIG.API_CALL_CODE.duration,
