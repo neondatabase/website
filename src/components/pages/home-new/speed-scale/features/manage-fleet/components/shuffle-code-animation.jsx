@@ -79,7 +79,7 @@ const ShuffleCodeAnimation = ({ targetText, isActive, duration, className }) => 
 
   return (
     <span className={className}>
-      <span className="text-white">{textParts.revealed}</span>
+      <span className="text-gray-new-80">{textParts.revealed}</span>
       <span className="text-[#6b6d73]">{textParts.random}</span>
     </span>
   );

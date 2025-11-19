@@ -80,8 +80,8 @@ const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration
       <code
         {...parsedContent.codeProps}
         style={{
-          '--shiki-token-keyword': 'white',
-          '--shiki-token-function': 'white',
+          '--shiki-token-keyword': '#C9CBCF',
+          '--shiki-token-function': '#C9CBCF',
           '--shiki-foreground': '#34D59A',
           '--shiki-token-constant': '#FFA574',
         }}
