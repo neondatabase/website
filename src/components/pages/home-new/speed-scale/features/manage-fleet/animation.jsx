@@ -76,7 +76,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                     aria-hidden
                   />
                   <m.code
-                    className={clsx(codeClassName, 'leading-none')}
+                    className={clsx(codeClassName, 'whitespace-pre leading-none')}
                     animate={{
                       opacity: isFrameActive('LOOP') ? 0 : 1,
                     }}
