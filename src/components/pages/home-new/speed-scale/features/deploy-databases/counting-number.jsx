@@ -29,11 +29,10 @@ const CountingNumber = ({
       }, delay * 1000);
 
       return () => clearTimeout(timeoutId);
-    } 
-      // Reset instantly without delay when out of view
-      springVal.jump(fromNumber);
-      motionVal.jump(fromNumber);
-    
+    }
+    // Reset instantly without delay when out of view
+    springVal.jump(fromNumber);
+    motionVal.jump(fromNumber);
   }, [inView, number, motionVal, springVal, delay, fromNumber]);
 
   useEffect(() => {

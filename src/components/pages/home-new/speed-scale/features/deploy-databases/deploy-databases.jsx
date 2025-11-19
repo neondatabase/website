@@ -1,6 +1,8 @@
 'use client';
 
+import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
@@ -10,7 +12,11 @@ import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS, START_DELAY } from './
 const DeployDatabases = () => {
   const { ref, inView } = useInView();
   const { width: windowWidth } = useWindowSize();
-  const isMobile = windowWidth <= 1024;
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(windowWidth <= 1024);
+  }, [windowWidth]);
 
   return (
     <div
@@ -78,26 +84,35 @@ const DeployDatabases = () => {
                               key={minute}
                               className="flex size-1.5 items-center justify-center xl:size-[5px] sm:size-[3px]"
                             >
-                              <m.span
-                                className="block size-full scale-[0.33]"
-                                initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
-                                animate={{
-                                  backgroundColor: inView
-                                    ? ACTIVITY_COLORS[value]
-                                    : ACTIVITY_COLORS[0],
-                                  scale: inView && value !== '0' ? 1 : 0.33,
-                                }}
-                                transition={
-                                  inView &&
-                                  !isMobile && {
-                                    type: 'spring',
-                                    delay,
-                                    bounce: 0.2,
-                                    stiffness: 400,
-                                    damping: 15,
+                              {isMobile ? (
+                                <span
+                                  className={clsx(
+                                    'block size-full',
+                                    value === '0' && 'scale-[0.33]'
+                                  )}
+                                  style={{ backgroundColor: ACTIVITY_COLORS[value] }}
+                                />
+                              ) : (
+                                <m.span
+                                  className="block size-full scale-[0.33]"
+                                  initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
+                                  animate={{
+                                    backgroundColor: inView
+                                      ? ACTIVITY_COLORS[value]
+                                      : ACTIVITY_COLORS[0],
+                                    scale: inView && value !== '0' ? 1 : 0.33,
+                                  }}
+                                  transition={
+                                    inView && {
+                                      type: 'spring',
+                                      delay,
+                                      bounce: 0.2,
+                                      stiffness: 400,
+                                      damping: 15,
+                                    }
                                   }
-                                }
-                              />
+                                />
+                              )}
                             </div>
                           );
                         })}
