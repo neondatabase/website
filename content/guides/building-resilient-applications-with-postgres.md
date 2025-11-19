@@ -91,7 +91,7 @@ The pattern works as follows:
 
 2.  **Add a unique constraint**: In your database schema, add a column to your target table to store this idempotency key. This column must have a `UNIQUE` constraint.
 
-    ```sql
+    ```sql shouldWrap
     CREATE TABLE orders (
         id SERIAL PRIMARY KEY,
         idempotency_key UUID UNIQUE, -- Ensures each operation runs only once
@@ -103,7 +103,7 @@ The pattern works as follows:
 
 3.  **Include the key in your transaction**: When your application performs the `INSERT` operation, it includes the generated idempotency key.
 
-    ```sql
+    ```sql shouldWrap
     -- In your application code
     idempotency_key = "f47ac10b-58cc-4372-a567-0e02b2c3d479"; -- Generated once per operation
     product = 123;
@@ -133,13 +133,13 @@ The following code examples demonstrate implementing connection pooling, configu
 
 You can use the popular `pg` library (node-postgres) along with `async-retry` for implementing retry logic. Install the required packages:
 
-```bash
+```bash shouldWrap
 npm install pg async-retry dotenv
 ```
 
 The following example demonstrates these concepts:
 
-```javascript
+```javascript shouldWrap
 require('dotenv').config();
 const { Pool } = require('pg');
 const retry = require('async-retry');
@@ -239,11 +239,11 @@ In the above code:
 
 You can also use the `postgres.js` library with `async-retry` for retry logic. Install the required packages:
 
-```bash
+```bash shouldWrap
 npm install postgres async-retry dotenv
 ```
 
-```javascript
+```javascript shouldWrap
 require('dotenv').config();
 const postgres = require('postgres');
 const retry = require('async-retry');
@@ -338,11 +338,11 @@ The [Neon Serverless Driver](/docs/serverless/serverless-driver) communicates ov
 
 The following example demonstrates using the Neon Serverless Driver over HTTP with `async-retry` for retry logic. Install the required packages:
 
-```bash
+```bash shouldWrap
 npm install @neondatabase/serverless async-retry dotenv
 ```
 
-```javascript
+```javascript shouldWrap
 import { neon } from '@neondatabase/serverless';
 import retry from 'async-retry';
 import 'dotenv/config';
@@ -390,11 +390,11 @@ In this example:
 
 The following example uses the `psycopg` library (v3) with its built-in connection pool and the `tenacity` library for retry logic. Install the required packages:
 
-```bash
+```bash shouldWrap
 pip install "psycopg[pool]" "psycopg[binary]" tenacity python-dotenv
 ```
 
-```python
+```python shouldWrap
 import os
 
 from dotenv import load_dotenv
@@ -456,6 +456,114 @@ In the above code:
 - The `run_query` function is decorated with `tenacity`'s `@retry` to implement retry logic that retries on `OperationalError` (which indicates connection issues) with exponential backoff and jitter.
 - The complete example demonstrates querying Postgres with retry logic. It retries up to 5 times on connection errors, using exponential backoff with delays starting at 1 second and increasing to a maximum of 16 seconds, plus jitter.
 
+### .NET (C#)
+
+The following example uses the `Npgsql` library with its built-in connection pooling and the `Polly` library for retry logic. Install the required packages via NuGet:
+
+```bash shouldWrap
+dotnet add package Npgsql
+dotnet add package Polly
+dotnet add package Microsoft.Extensions.Configuration
+dotnet add package Microsoft.Extensions.Configuration.Json
+```
+
+```csharp shouldWrap
+using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using Polly;
+
+class Program
+{
+    static async Task Main(string[] args)
+    {
+        // 1. Load configuration from appsettings.json
+        var config = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
+
+        string? connectionString = config.GetConnectionString("DefaultConnection");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            Console.WriteLine("Error: Connection string 'DefaultConnection' was not found in appsettings.json.");
+            return;
+        }
+
+        // 2. Setup Pooling
+        using var dataSource = NpgsqlDataSource.Create(connectionString);
+
+        // 3. Define the Retry Policy
+        var retryPolicy = Policy
+            .Handle<NpgsqlException>(ex =>
+            {
+                if (ex.IsTransient) return true;
+
+                var msg = ex.Message;
+                if (msg.Contains("Couldn't connect to compute node") ||
+                    msg.Contains("Connection terminated unexpectedly") ||
+                    msg.Contains("terminating connection due to administrator command") ||
+                    msg.Contains("Client has encountered a connection error") ||
+                    msg.Contains("network issue") ||
+                    msg.Contains("early eof"))
+                {
+                    return true;
+                }
+
+                return false;
+            })
+            .WaitAndRetryAsync(
+                retryCount: 5,
+                sleepDurationProvider: retryAttempt =>
+                {
+                    var delay = TimeSpan.FromSeconds(Math.Pow(2, retryAttempt - 1));
+                    var jitter = TimeSpan.FromMilliseconds(new Random().Next(0, 1000));
+                    return delay + jitter;
+                },
+                onRetry: (exception, timeSpan, retryCount, context) =>
+                {
+                    Console.WriteLine($"Retrying... Attempt {retryCount}. Error: {exception.Message}");
+                }
+            );
+
+        // 4. Execute the logic
+        try
+        {
+            await QueryWithRetry(dataSource, retryPolicy, "SELECT version()");
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Failed after multiple retries: {ex.Message}");
+        }
+    }
+
+    static async Task QueryWithRetry(NpgsqlDataSource dataSource, AsyncPolicy policy, string query)
+    {
+        await policy.ExecuteAsync(async () =>
+        {
+            Console.WriteLine("Attempting to execute query...");
+
+            using var conn = await dataSource.OpenConnectionAsync();
+            using var cmd = new NpgsqlCommand(query, conn);
+
+            var result = await cmd.ExecuteScalarAsync();
+
+            Console.WriteLine("Query successful!");
+            Console.WriteLine($"PostgreSQL version: {result}");
+        });
+    }
+}
+```
+
+In the above code:
+
+- A connection pool is created using `NpgsqlDataSource` with appropriate connection timeouts.
+- The retry policy is defined using `Polly`, which retries on transient `NpgsqlExceptions` and specific error messages, implementing exponential backoff with jitter.
+- The `QueryWithRetry` method executes the query within the retry policy.
+- The complete example demonstrates querying Postgres with retry logic. It retries up to 5 times on transient errors, using exponential backoff with delays starting at 1 second and increasing to a maximum of 16 seconds, plus jitter.
+
 ## How to test your application's resilience
 
 After implementing connection pooling and retry logic, you must test it to ensure your application can gracefully recover from a sudden disconnection. The most effective way to do this is to manually restart your Neon compute while your application is in the middle of a database operation.
@@ -468,7 +576,7 @@ Your application needs to be running and performing a transaction that takes sev
 
 The Node.js example below, which uses `node-postgres`, is a perfect template for this test. It begins a transaction, performs a query, and then waits for 10 seconds before committing. This 10-second window is when you will restart the compute. You can adapt this pattern to your preferred programming language.
 
-```javascript
+```javascript shouldWrap
 // A test-ready application snippet (full code in previous section)
 // ... (pool setup and isTransientError function) ...
 
@@ -556,7 +664,7 @@ To use the Neon API, retrieve your Neon API key from the [API Keys](/docs/manage
 
 Use the [Restart compute endpoint](/docs/reference/api-reference#/operations/restartProjectEndpoint) API. This is ideal for automated testing.
 
-```bash
+```bash shouldWrap
 curl --request POST \
      --url https://console.neon.tech/api/v2/projects/your-project-id/endpoints/your-endpoint-id/restart \
      --header "Authorization: Bearer $NEON_API_KEY" \
@@ -573,7 +681,7 @@ For more details on using the Neon API, see [Neon API Reference](/docs/reference
 
 If your resilience logic is working correctly, your application will **not crash**. Instead, you should see a sequence of events in your logs demonstrating the failure and successful recovery.
 
-```text title="Example Log Output"
+```text title="Example Log Output" shouldWrap
 $ node main.js
 Attempting to execute query...
 Simulating a 10-second transaction
