@@ -7,7 +7,7 @@ import CountingNumber from './counting-number';
 import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS } from './data';
 
 const DeployDatabases = () => {
-  const { ref, inView } = useInView({ threshold: 0.75 });
+  const { ref, inView } = useInView();
 
   return (
     <div

@@ -23,12 +23,16 @@ const CountingNumber = ({
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (inView) motionVal.set(number);
-      else motionVal.set(fromNumber);
+      if (inView) {
+        motionVal.set(number);
+      } else {
+        springVal.jump(fromNumber);
+        motionVal.jump(fromNumber);
+      }
     }, delay);
 
     return () => clearTimeout(timeoutId);
-  }, [inView, number, motionVal, delay, fromNumber]);
+  }, [inView, number, motionVal, springVal, delay, fromNumber]);
 
   useEffect(() => {
     const unsubscribe = springVal.on('change', (latest) => {
