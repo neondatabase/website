@@ -119,8 +119,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### Each component includes
 
-1. Main JavaScript File
-2. Index File
+1. Main JavaScript file
+2. Index file
 
 ### Each component optionally may include
 
