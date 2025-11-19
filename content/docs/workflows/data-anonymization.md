@@ -111,12 +111,9 @@ From the **Data Masking** page:
 For complete API documentation with request/response examples, see the [API reference](#api-reference) section below.
 
 **Get masking rules**
-
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
-
-Retrieves all masking rules defined for the branch.
 
 **Update masking rules**
 
@@ -124,23 +121,17 @@ Retrieves all masking rules defined for the branch.
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
 
-Updates masking rules for the branch. After updating rules, use the start anonymization endpoint to apply the changes.
-
 **Start anonymization**
 
 ```bash
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
 
-Starts or restarts the anonymization process for branches in `initialized`, `error`, or `anonymized` state.
-
 **Get anonymization status**
 
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
-
-Returns the current state (`created`, `initialized`, `initialization_error`, `anonymizing`, `anonymized`, or `error`) and progress information.
 
 </TabItem>
 
@@ -184,6 +175,8 @@ The branch is unavailable for connections while anonymization is in progress.
 The Neon API provides comprehensive control over anonymized branches, including access to all PostgreSQL Anonymizer masking functions and the ability to export/import masking rules for management outside of Neon.
 
 ### Create anonymized branch
+
+[→ API Reference](https://api-docs.neon.tech/reference/createprojectbranchanonymized)
 
 ```
 POST /projects/{project_id}/branch_anonymized
@@ -357,6 +350,8 @@ Returns the created branch object with `restricted_actions` indicating operation
 
 ### Get anonymization status
 
+[→ API Reference](https://api-docs.neon.tech/reference/getanonymizedbranchstatus)
+
 ```
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
@@ -392,6 +387,8 @@ curl -X GET \
 
 ### Start anonymization
 
+[→ API Reference](https://api-docs.neon.tech/reference/startanonymization)
+
 ```
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
@@ -424,6 +421,8 @@ curl -X POST \
 </details>
 
 ### Get masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/getmaskingrules)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
@@ -473,6 +472,8 @@ SELECT * FROM anon.pg_masking_rules;
 ```
 
 ### Update masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/updatemaskingrules)
 
 ```
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
