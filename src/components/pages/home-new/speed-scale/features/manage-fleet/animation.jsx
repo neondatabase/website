@@ -112,6 +112,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                   width={763}
                   height={100}
                   sizes="100vw"
+                  quality={100}
                 />
                 <span
                   className="pointer-events-none absolute inset-0 z-10 border border-white/10"
