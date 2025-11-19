@@ -1,13 +1,34 @@
 'use client';
 
+
 import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import useWindowSize from 'react-use/lib/useWindowSize';
 
 import CountingNumber from './counting-number';
-import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS } from './data';
+import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS, START_DELAY } from './data';
+
+const desktopTransition = (delay) => ({
+  type: 'spring',
+  delay,
+  bounce: 0.2,
+  stiffness: 400,
+  damping: 15,
+});
+
+const mobileTransition = (delay) => ({
+  type: 'tween',
+  delay,
+  duration: 0.1,
+  ease: [0.4, 0, 0.67, 1],
+});
 
 const DeployDatabases = () => {
   const { ref, inView } = useInView();
+  const { width: windowWidth } = useWindowSize();
+  const isMobile = windowWidth <= 768;
+
+  const getTransition = (delay) => (isMobile ? mobileTransition(delay) : desktopTransition(delay));
 
   return (
     <div
@@ -17,7 +38,7 @@ const DeployDatabases = () => {
       <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
         Databases deployed:
         <span className="ml-7 min-w-14 text-gray-new-80 xl:ml-6 xl:min-w-11 sm:ml-3 sm:min-w-6">
-          <CountingNumber number={TOTAL_DATABASES} inView={inView} />
+          <CountingNumber number={TOTAL_DATABASES} inView={inView} delay={START_DELAY} />
         </span>
       </div>
       <div className="border-b border-l border-gray-new-50 pb-[18px] pl-[18px] pt-8 xl:pb-3.5 xl:pl-3.5 xl:pt-[26px] sm:pb-2 sm:pl-2 sm:pt-4">
@@ -33,13 +54,13 @@ const DeployDatabases = () => {
                     <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Active:
                       <span className="min-w-14 text-green-45 xl:min-w-11 sm:min-w-6">
-                        <CountingNumber number={activeCount} inView={inView} />
+                        <CountingNumber number={activeCount} inView={inView} delay={START_DELAY} />
                       </span>
                     </div>
                     <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Idle:
                       <span className="min-w-14 text-gray-new-80 xl:min-w-11 sm:min-w-6">
-                        <CountingNumber number={idleCount} inView={inView} />
+                        <CountingNumber number={idleCount} inView={inView} delay={START_DELAY} />
                       </span>
                     </div>
                   </div>
@@ -52,7 +73,7 @@ const DeployDatabases = () => {
                     >
                       <div className="grid grid-flow-col grid-cols-6 grid-rows-10 gap-[3px] xl:gap-0.5 sm:gap-px">
                         {activity.split('').map((value, minute) => {
-                          const delay = hour * 0.1 + Math.random() * 0.2;
+                          const delay = START_DELAY - 0.3 + hour * 0.1 + Math.random() * 0.2;
 
                           return (
                             <div
@@ -68,15 +89,7 @@ const DeployDatabases = () => {
                                     : ACTIVITY_COLORS[0],
                                   scale: inView && value !== '0' ? 1 : 0.33,
                                 }}
-                                transition={{
-                                  type: inView ? 'spring' : 'tween',
-                                  duration: inView ? undefined : 0.5,
-                                  delay: inView ? delay : 0,
-                                  ease: inView ? undefined : [0.4, 0, 0.67, 1],
-                                  bounce: inView ? 0.2 : undefined,
-                                  stiffness: inView ? 400 : undefined,
-                                  damping: inView ? 15 : undefined,
-                                }}
+                                transition={inView && getTransition(delay)}
                               />
                             </div>
                           );

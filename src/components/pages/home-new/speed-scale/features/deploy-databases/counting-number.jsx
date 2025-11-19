@@ -22,16 +22,18 @@ const CountingNumber = ({
   const springVal = useSpring(motionVal, transition);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      if (inView) {
+    if (inView) {
+      // Apply delay only when starting animation (convert seconds to milliseconds)
+      const timeoutId = setTimeout(() => {
         motionVal.set(number);
-      } else {
-        springVal.jump(fromNumber);
-        motionVal.jump(fromNumber);
-      }
-    }, delay);
+      }, delay * 1000);
 
-    return () => clearTimeout(timeoutId);
+      return () => clearTimeout(timeoutId);
+    } 
+      // Reset instantly without delay when out of view
+      springVal.jump(fromNumber);
+      motionVal.jump(fromNumber);
+    
   }, [inView, number, motionVal, springVal, delay, fromNumber]);
 
   useEffect(() => {

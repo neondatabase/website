@@ -57,3 +57,5 @@ export const ACTIVITY_COLORS = {
   3: '#38DC95',
   4: '#6DF8BF',
 };
+
+export const START_DELAY = 0.5;
