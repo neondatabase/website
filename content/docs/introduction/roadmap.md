@@ -72,7 +72,7 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
-- **Snapshot scheduling**: Automate snapshots with daily, weekly, or monthly schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
+- **Backup scheduling**: Automate snapshots with daily, weekly, or monthly backup schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
 - **Postgres 18 support (Preview)**: Postgres 18 is now available in preview. Create a new project and select Postgres 18 as your version. [Read the announcement](/blog/postgres-18).
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
 - **Usage-based pricing plans**: Our paid plans now start at just **$5/month**. Pay only for what you use. See [Neon's New Pricing, Explained: Usage-Based With a $5 Minimum](https://neon.com/blog/new-usage-based-pricing).
