@@ -279,7 +279,7 @@ Running `pg_repack` can temporarily **increase** your Neon project's storage siz
 
 **Recommendations:**
 
-- Monitor your project storage before and after running `pg_repack` to understand the impact, but be aware that the increase in storage may not show up immediately due to repoting delays of up to one hour.
+- Monitor your project storage before and after running `pg_repack` to understand the impact, but be aware that the increase in storage may not show up immediately due to reporting delays of up to one hour.
 - Consider your [restore window duration](/docs/manage/projects#configure-your-restore-window) when planning repack operations, especially if running them frequently. Different [Neon plans](/docs/introduction/plans#restore-window) support different restore window limits.
 - For daily or weekly repack schedules on large tables, factor in the cumulative storage costs during your restore window period.
 - If minimizing storage costs is critical, consider adjusting your restore window settings or scheduling repack operations less frequently.
