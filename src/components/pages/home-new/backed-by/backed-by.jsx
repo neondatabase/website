@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Container from 'components/shared/container';
 import databaseIcon from 'icons/home-new/database.svg';
 import databricksIcon from 'icons/home-new/databricks.svg';
+import bgNoise from 'images/pages/home-new/backed-by/bg-noise.jpg';
 
 import HeadingLabel from '../heading-label';
 
@@ -24,7 +25,7 @@ const ITEMS = [
 
 const BackedBy = () => (
   <section className="backed-by safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[168px] pt-40 xl:py-[136px] lg:py-[88px] md:py-14">
-    <Container size="1344">
+    <Container className="z-10" size="1344">
       <div className="relative z-10 flex gap-16 xl:gap-[108px] xl:pl-2 lg:gap-8 lg:pl-3.5 md:gap-5 md:p-0 sm:flex-col sm:gap-20">
         <div className="flex-1 border-l border-gray-new-50 px-8 xl:pl-6 xl:pr-0 lg:pl-[18px] sm:border-none sm:pl-0">
           <HeadingLabel className="mb-5 md:mb-4" theme="black">
@@ -46,9 +47,9 @@ const BackedBy = () => (
                 <Image
                   className="mb-5 xl:mb-4 lg:mb-3.5 lg:size-7 md:size-6 sm:size-5"
                   src={icon}
-                  alt={title}
                   width={32}
                   height={32}
+                  alt=""
                 />
                 <h3 className="text-4xl leading-dense tracking-tighter text-black xl:text-[36px] lg:text-[28px] md:text-[24px]">
                   {title}
@@ -74,23 +75,29 @@ const BackedBy = () => (
             <span className="-mx-1 bg-[#39A57D]/60 px-1">aligned with our vision:</span> no
             infrastructure to manage, no servers to provision, no database cluster to maintain.
             <cite className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm">
-              Edouard Bonlieu – Co-founder at Koyeb
+              <span className="font-medium">Edouard Bonlieu</span> – Co-founder at Koyeb
             </cite>
           </blockquote>
         </div>
       </div>
       <span
         className={clsx(
-          'pointer-events-none absolute right-0 top-0 aspect-[1.4] w-[1360px]',
-          '-translate-y-1/2 translate-x-1/2 -rotate-45 rounded-[100%]',
-          'bg-[url("/images/pages/home-new/noise-light.png")] bg-[length:380px]',
-          '[mask-image:radial-gradient(50%_50%_at_50%_50%,white,transparent)]',
-          'xl:w-[1000px] xl:-translate-y-[80%] xl:translate-x-[60%]',
-          'lg:w-[900px] md:w-[800px] sm:w-[700px]'
+          'pointer-events-none absolute -bottom-[300px] -right-[100px] aspect-[0.64] w-[460px]',
+          'rotate-[75deg] rounded-[100%] opacity-30  blur-[105px]',
+          'bg-[#39A57D]/10 bg-[linear-gradient(0deg,rgba(57,165,125,0.10),rgba(57,165,125,0.10)),radial-gradient(70.97%_70.97%_at_50%_29.03%,#61756C_21.28%,rgba(97,117,108,0.00)_100%)]',
+          'xl:-bottom-[400px] xl:-right-[220px] xl:w-[350px] xl:rotate-[30deg]'
         )}
         aria-hidden
       />
     </Container>
+    <Image
+      className="absolute right-0 top-0 xl:-right-[20%] xl:h-full sm:-right-1/2"
+      src={bgNoise}
+      alt=""
+      width={550}
+      height={900}
+      quality={100}
+    />
   </section>
 );
 
