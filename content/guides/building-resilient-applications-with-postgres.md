@@ -892,6 +892,13 @@ This successful test run proves that your application can withstand a sudden com
 
 </Steps>
 
+## Pre-built AI prompt
+
+Use the following pre-built prompt to help AI agents update your codebase with connection resilience best practices.
+
+<CopyPrompt src="/prompts/connection-issues-prompt.md"
+description="A pre-built prompt to help AI agents add connection resilience best practices to your codebase." />
+
 ## Resources
 
 - [Neon Platform Updates](/docs/manage/updates)
