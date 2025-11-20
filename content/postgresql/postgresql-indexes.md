@@ -18,58 +18,63 @@ nextLink:
 
 ## Introduction to PostgreSQL indexes
 
-In PostgreSQL, an index is a data structure that increases the data retrieval speed by providing a rapid way to locate rows within a table.
+In PostgreSQL, an **index** is a special data structure that speeds up data retrieval. It gives PostgreSQL a quick way to locate rows inside a table without scanning the entire table.
 
-An index in PostgreSQL works like an index in a book, providing a quick reference to the page where specific content can be found.
+You can think of an index like the **index pages of a book**.
+Instead of reading every page to find a topic, you simply check the index, which points you directly to the page you need. PostgreSQL uses indexes in the same way to find data quickly.
 
 Suppose you have a table called `contacts` with the following structure:
 
 ```sql
 CREATE TABLE contacts (
     id INT PRIMARY KEY,
-    name VACHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     phone VARCHAR(10) NOT NULL
 );
 ```
 
-And you issue the following query to find contacts by name:
+And you issue the following query to find a contact by name:
 
 ```sql
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```
 
-PostgreSQL must scan the entire `contacts` table to find the matching rows. If the `contacts` table contains many rows, the method of locating relevant rows is inefficient.
+Without an index, PostgreSQL must scan the entire `contacts` table to find `"John Doe"`.
+If the table contains many rows, this becomes slow — just like reading a whole book to find a single line.
 
-However, with an index on the `name` column, PostgreSQL can use a more efficient method to find the relevant rows.
+However, with an index on the `name` column, PostgreSQL can locate the matching rows much faster.
 
-To create an index, you use the [CREATE INDEX](postgresql-indexes/postgresql-create-index) statement:
+To create an index, you use the [`CREATE INDEX`](postgresql-indexes/postgresql-create-index) statement:
 
 ```sql
 CREATE INDEX contacts_name
 ON contacts(name);
 ```
 
-This statement creates an index named `contacts_name` on the `name` column of the `contacts` table.
+This creates an index named `contacts_name` on the `name` column of the `contacts` table.
 
-After creating an index on the `name` column, PostgreSQL extracts data from the `name` column of the `contacts` table and insert it into the index data structure.
+After creating the index, PostgreSQL extracts all values from the `name` column and stores them in the index data structure.
+This process may take some time if the table contains many rows — similar to how building a book’s index takes longer for a thicker book.
 
-This process may take time, depending on the number of rows in the `contacts` table.
+By default, PostgreSQL allows **SELECT** operations while creating the index, but it blocks
+[`INSERT`](postgresql-tutorial/postgresql-insert),
+[`UPDATE`](postgresql-tutorial/postgresql-update), and
+[`DELETE`](postgresql-tutorial/postgresql-delete)
+operations during that time for safety.
 
-By default, PostgreSQL allows data selection from a table during index creation but blocks [insert](postgresql-tutorial/postgresql-insert), [update](postgresql-tutorial/postgresql-update), and [delete](postgresql-tutorial/postgresql-delete) operations.
-
-When executing the following `SELECT` statement, PostgreSQL can utilize the `contacts_name` index to quickly find the relevant rows in the `contacts` table:
+When you execute the following `SELECT` statement, PostgreSQL can use the `contacts_name` index to quickly find the matching rows:
 
 ```sql
 SELECT * FROM contacts
 WHERE name = 'John Doe';
 ```
 
-After creating an index, PostgreSQL must keep it synchronized with the table.
+After the index is created, PostgreSQL must keep it synchronized with the table.
 
-For example, when inserting, updating, or deleting data from the `contacts` table, PostgreSQL updates the index to reflect the changes accordingly.
+For example, when inserting, updating, or deleting rows in the `contacts` table, PostgreSQL also updates the index so that it remains accurate.
 
-As a result, an index adds write overhead to the data manipulation operations (inserts, updates, deletes).
+Because of this, indexes **improve read speed** but add a bit of overhead to write operations (inserts, updates, deletes) — similar to how updating a book’s content also requires updating its index.
 
 ## Types of PostgreSQL indexes
 
