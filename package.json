@@ -66,6 +66,7 @@
     "dotenv": "^16.4.5",
     "file-loader": "^6.2.0",
     "framer-motion": "^11.1.7",
+    "geist": "^1.5.1",
     "glob": "^10.3.12",
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
