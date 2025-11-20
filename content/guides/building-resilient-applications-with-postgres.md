@@ -564,6 +564,186 @@ In the above code:
 - The `QueryWithRetry` method executes the query within the retry policy.
 - The complete example demonstrates querying Postgres with retry logic. It retries up to 5 times on transient errors, using exponential backoff with delays starting at 1 second and increasing to a maximum of 16 seconds, plus jitter.
 
+### Java
+
+The following example uses the `HikariCP` library for connection pooling and the `Failsafe` library for retry logic. Install the required dependencies via Maven:
+
+```xml shouldWrap
+<dependency>
+  <groupId>org.postgresql</groupId>
+  <artifactId>postgresql</artifactId>
+  <version>42.7.2</version>
+</dependency>
+<dependency>
+  <groupId>com.zaxxer</groupId>
+  <artifactId>HikariCP</artifactId>
+  <version>5.1.0</version>
+</dependency>
+<dependency>
+  <groupId>dev.failsafe</groupId>
+  <artifactId>failsafe</artifactId>
+  <version>3.3.2</version>
+</dependency>
+<dependency>
+  <groupId>io.github.cdimascio</groupId>
+  <artifactId>dotenv-java</artifactId>
+  <version>3.0.0</version>
+</dependency>
+<dependency>
+  <groupId>org.slf4j</groupId>
+  <artifactId>slf4j-simple</artifactId>
+  <version>1.7.36</version>
+</dependency>
+```
+
+```java shouldWrap
+package com.example;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import dev.failsafe.Failsafe;
+import dev.failsafe.RetryPolicy;
+import io.github.cdimascio.dotenv.Dotenv;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+
+public class App {
+
+    private static final HikariDataSource pool;
+
+    static {
+        Dotenv dotenv = Dotenv.load();
+        HikariConfig config = new HikariConfig();
+
+        config.setJdbcUrl(dotenv.get("DATABASE_URL"));
+        config.setConnectionTimeout(15000); // 15s
+        config.setIdleTimeout(60000);  // 60s
+        config.setMaximumPoolSize(20);
+        config.setAutoCommit(true);
+
+        pool = new HikariDataSource(config);
+    }
+
+    public static void main(String[] args) {
+        try {
+            String version = queryWithRetry("SELECT version()");
+            System.out.println("Transaction Finished. PostgreSQL version: " + version);
+        } catch (Exception e) {
+            System.err.println("Failed to execute transaction after multiple retries: " + e.getMessage());
+        } finally {
+            pool.close();
+        }
+    }
+
+    public static String queryWithRetry(String sql) {
+        RetryPolicy<String> retryPolicy = RetryPolicy.<String>builder()
+                .handle(SQLException.class)
+                .withMaxRetries(5)
+                .withBackoff(Duration.ofMillis(1000), Duration.ofMillis(16000), 2.0)
+                .withJitter(0.5)
+                .abortOn(e -> !isTransientError((SQLException) e))
+                .onRetry(e -> System.out.println("Retrying... Attempt " + e.getAttemptCount() + ". Error: " + e.getLastException().getMessage()))
+                .build();
+
+        return Failsafe.with(retryPolicy).get(() -> {
+            System.out.println("Attempting to execute transaction...");
+
+            // Get connection
+            try (Connection client = pool.getConnection()) {
+
+                // Begin transaction
+                client.setAutoCommit(false);
+
+                try {
+                    String resultVersion = null;
+
+                    try (PreparedStatement stmt = client.prepareStatement(sql)) {
+                        try (ResultSet rs = stmt.executeQuery()) {
+                            System.out.println("Query 1 successful!");
+                            if (rs.next()) {
+                                resultVersion = rs.getString(1);
+                            }
+                        }
+                    }
+
+                    if (resultVersion == null) {
+                        client.rollback();
+                        return null;
+                    }
+
+                    // Perform async work or new query
+                    try (PreparedStatement stmt2 = client.prepareStatement("SELECT NOW()")) {
+                         try (ResultSet rs2 = stmt2.executeQuery()) {
+                             if (rs2.next()) {
+                                 System.out.println("Time: " + rs2.getString(1));
+                             }
+                         }
+                    }
+
+                    // Commit the transaction
+                    client.commit();
+                    System.out.println("Transaction Committed.");
+                    return resultVersion;
+
+                } catch (Exception e) {
+                    // Rollback on failure
+                    try {
+                        System.out.println("Rolling back transaction due to: " + e.getMessage());
+                        client.rollback();
+                    } catch (SQLException rollbackEx) {
+                        System.err.println("Rollback failed (connection likely lost): " + rollbackEx.getMessage());
+                    }
+
+                    // Re-throw so Failsafe knows to retry
+                    throw e;
+                }
+            } catch (SQLException e) {
+                System.out.println("Connection level error: " + e.getMessage());
+                if (!isTransientError(e)) {
+                    System.err.println("Non-retriable error encountered.");
+                }
+                throw e;
+            }
+        });
+    }
+
+    private static boolean isTransientError(SQLException err) {
+        List<String> transientErrorCodes = Arrays.asList("57P01", "08006", "08003");
+        List<String> transientErrorMessages = Arrays.asList(
+                "Connection terminated unexpectedly",
+                "terminating connection due to administrator command",
+                "Client has encountered a connection error",
+                "network issue",
+                "early eof",
+                "Couldn't connect to compute node",
+                "This connection has been closed",
+                "An I/O error occurred while sending to the backend"
+        );
+
+        String sqlState = err.getSQLState();
+        String message = err.getMessage();
+
+        boolean isCodeMatch = sqlState != null && transientErrorCodes.contains(sqlState);
+        boolean isMessageMatch = message != null && transientErrorMessages.stream().anyMatch(message::contains);
+
+        return isCodeMatch || isMessageMatch;
+    }
+}
+```
+
+The above code:
+
+- Initializes a HikariCP connection pool with appropriate connection timeouts.
+- Defines a retry policy using Failsafe that retries on `SQLException` with specific transient error codes and messages, implementing exponential backoff with jitter.
+- The `queryWithRetry` method executes the query within the retry policy.
+- The complete example demonstrates querying Postgres with retry logic. It retries up to 5 times on transient errors, using exponential backoff with delays starting at 1 second and increasing to a maximum of 16 seconds, plus jitter.
+
 ## How to test your application's resilience
 
 After implementing connection pooling and retry logic, you must test it to ensure your application can gracefully recover from a sudden disconnection. The most effective way to do this is to manually restart your Neon compute while your application is in the middle of a database operation.
