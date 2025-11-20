@@ -892,4 +892,13 @@ This successful test run proves that your application can withstand a sudden com
 
 </Steps>
 
+## Resources
+
+- [Neon Platform Updates](/docs/manage/updates)
+- [Neon Platform maintenance](/docs/manage/platform-maintenance)
+- [Connection latency and timeouts](/docs/connect/connection-latency)
+- [Neon serverless driver](/docs/serverless/serverless-driver)
+- [Restart a compute](/docs/manage/computes#restart-a-compute)
+- [NpgsqlException: IsTransient](https://www.npgsql.org/doc/api/Npgsql.NpgsqlException.html#Npgsql_NpgsqlException_IsTransient)
+
 <NeedHelp/>
