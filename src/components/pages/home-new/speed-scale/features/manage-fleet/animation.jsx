@@ -17,12 +17,12 @@ import useAnimationTimeline from './use-animation-timeline';
 
 export const codeWrapperClassName = clsx(
   'block overflow-hidden p-5',
-  'xl:p-[14px] lg:p-[18px] sm:p-2'
+  'xl:p-[14px] lg:p-[18px] md:p-5 sm:p-2'
 );
 
 export const codeClassName = clsx(
   'font-mono-new tracking-extra-tight text-gray-new-80',
-  '2xl:text-sm xl:text-[11px] lg:text-[14px] sm:text-[7px]'
+  '2xl:text-sm xl:text-[11px] lg:text-sm md:text-xs sm:text-[7px]'
 );
 
 const LOOP_TRANSITION = {
@@ -165,6 +165,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                     'sm:gap-1 sm:p-[3px] sm:pr-1 sm:text-[6px]'
                   )}
                   type="button"
+                  disabled
                 >
                   <PlayIcon className="size-3 xl:size-[9px] lg:size-3 sm:size-1.5" />
                   Run Query

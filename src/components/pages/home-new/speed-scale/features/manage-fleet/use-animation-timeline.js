@@ -1,16 +1,19 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { ANIMATION_CONFIG, ANIMATION_DURATION } from './data';
 
 const useAnimationTimeline = (inView = false) => {
   const [currentFrame, setCurrentFrame] = useState('INITIAL');
   const [animationKey, setAnimationKey] = useState(0);
+  const startTimeRef = useRef(null);
+  const rafIdRef = useRef(null);
 
   // Reset frame when component goes out of view
   useEffect(() => {
     if (!inView) {
       setCurrentFrame('INITIAL');
       setAnimationKey((previousKey) => previousKey + 1);
+      startTimeRef.current = null;
     }
   }, [inView]);
 
@@ -19,25 +22,41 @@ const useAnimationTimeline = (inView = false) => {
       return undefined;
     }
 
-    const timers = [];
+    startTimeRef.current = Date.now();
 
-    Object.entries(ANIMATION_CONFIG).forEach(([frameKey, config]) => {
-      const timer = setTimeout(() => {
-        setCurrentFrame(frameKey);
-      }, config.start * 1000);
+    const updateFrame = () => {
+      if (!inView || startTimeRef.current === null) {
+        return;
+      }
 
-      timers.push(timer);
-    });
+      const elapsedTime = (Date.now() - startTimeRef.current) / 1000;
 
-    // Loop animation
-    const loopTimer = setTimeout(() => {
-      setAnimationKey((previousKey) => previousKey + 1);
-      setCurrentFrame('INITIAL');
-    }, ANIMATION_DURATION * 1000);
-    timers.push(loopTimer);
+      // Find current frame based on elapsed time
+      let newFrame = 'INITIAL';
+      Object.entries(ANIMATION_CONFIG).forEach(([frameKey, config]) => {
+        if (elapsedTime >= config.start) {
+          newFrame = frameKey;
+        }
+      });
+      setCurrentFrame(newFrame);
+
+      // Loop animation
+      if (elapsedTime >= ANIMATION_DURATION) {
+        setAnimationKey((previousKey) => previousKey + 1);
+        setCurrentFrame('INITIAL');
+        startTimeRef.current = Date.now();
+      } else {
+        rafIdRef.current = requestAnimationFrame(updateFrame);
+      }
+    };
+
+    rafIdRef.current = requestAnimationFrame(updateFrame);
 
     return () => {
-      timers.forEach(clearTimeout);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
     };
   }, [animationKey, inView]);
 
