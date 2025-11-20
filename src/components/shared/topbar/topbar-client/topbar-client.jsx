@@ -56,10 +56,12 @@ const TopbarClient = ({ text, link }) => {
         sendGtagEvent('click_announcement_banner');
       }}
     >
-      <span className="-mb-px flex gap-x-1.5 truncate text-sm font-medium leading-none tracking-extra-tight text-white transition-colors duration-200 group-hover:text-gray-new-80">
-        {text}
-        <ChevronIcon className="shrink-0 origin-center -rotate-90 text-white opacity-60" />
-      </span>
+      <div className="-mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
+        <span className="  truncate text-sm font-medium leading-none tracking-extra-tight text-white transition-colors duration-200 group-hover:text-gray-new-80">
+          {text}
+        </span>
+        <ChevronIcon className="origin-center -rotate-90 text-white opacity-60" />
+      </div>
 
       <Image className="xl:hidden" src={leftImageXL} width={500} />
       <Image className="xl:hidden" src={rightImageXL} width={500} isRight />

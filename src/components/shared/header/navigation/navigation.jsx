@@ -227,9 +227,9 @@ const Navigation = () => {
                 data-submenu-panel
               >
                 {sections.length > 0 && (
-                  <Container size="1344" className="w-full overflow-hidden">
+                  <Container size="1600" className="w-full overflow-hidden">
                     <ul
-                      className="flex gap-x-[136px] pb-16 pl-[calc(102px+92px)] pt-8 xl:pl-[calc(102px+40px)]"
+                      className="flex gap-x-[136px] pb-16 pl-[calc(102px+92px+2px)] pt-8 xl:pl-[calc(102px+40px)]"
                       role="menu"
                     >
                       {sections.map(({ title, items }, sectionIndex) => (
