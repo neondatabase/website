@@ -30,7 +30,7 @@ const Navigation = () => {
       timeoutRef.current = null;
     }
 
-    if (hasSubmenu === null) {
+    if (!hasSubmenu) {
       setActiveMenuIndex(null);
       return;
     }
@@ -64,6 +64,18 @@ const Navigation = () => {
   };
 
   const handleMenuKeyDown = (e, hasSubmenu, index) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIndex = (index + 1) % MENUS.header.length;
+      menuButtonRefs.current[nextIndex].focus();
+    }
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIndex = (index - 1 + MENUS.header.length) % MENUS.header.length;
+      menuButtonRefs.current[prevIndex].focus();
+    }
+
     if (!hasSubmenu) return;
 
     if (e.key === 'Enter' || e.key === ' ') {
@@ -77,11 +89,23 @@ const Navigation = () => {
         setIsKeyboardOpen(true);
       }
     }
+
+    if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
+      if (activeMenuIndex === index && submenuContainerRef.current) {
+        e.preventDefault();
+        submenuContainerRef.current
+          .querySelector(`#submenu-${index}`)
+          .querySelector('.main-navigation-submenu-link')
+          .focus();
+      }
+    }
   };
 
-  const handleMenuClick = useCallback(
-    (e, hasSubmenu, index) => {
-      if (hasSubmenu) {
+  const makeHandleMenuClick = useCallback(
+    (hasSubmenu, index) => (e) => {
+      if (!hasSubmenu) return;
+
+      if (isTouchDevice) {
         e.preventDefault();
         if (activeMenuIndex === index) {
           setActiveMenuIndex(null);
@@ -91,8 +115,13 @@ const Navigation = () => {
           setIsKeyboardOpen(true);
         }
       }
+
+      if (!isTouchDevice) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
     },
-    [activeMenuIndex]
+    [activeMenuIndex, isTouchDevice]
   );
 
   const handleEscapeKey = useCallback(
@@ -110,18 +139,65 @@ const Navigation = () => {
     [activeMenuIndex]
   );
 
-  useClickOutside([submenuContainerRef, ...menuButtonRefs.current.filter(Boolean)], () => {
+  const makeHandleSubmenuNavigation = useCallback((containerIndex) => {
+    let links;
+
+    if (submenuContainerRef.current) {
+      links = submenuContainerRef.current
+        .querySelector(`#submenu-${containerIndex}`)
+        .querySelectorAll('.main-navigation-submenu-link');
+    }
+
+    if (!links || links.length === 0) return () => {};
+    if (!menuButtonRefs.current[containerIndex]) return () => {};
+
+    let linkIndex = -1;
+    return (e) => {
+      const menuTrigger = menuButtonRefs.current[containerIndex];
+
+      if (linkIndex === -1) {
+        links.forEach((link, idx) => {
+          if (link === e.target) {
+            linkIndex = idx;
+          }
+        });
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length) return;
+        links[nextIndex].focus();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = linkIndex - 1;
+
+        if (linkIndex === 0) {
+          menuTrigger.focus();
+        } else {
+          links[prevIndex].focus();
+        }
+      }
+
+      if (e.key === 'Tab') {
+        if (linkIndex === 0 && e.shiftKey) {
+          e.preventDefault();
+          menuTrigger.focus();
+        }
+      }
+    };
+  }, []);
+
+  useClickOutside([submenuContainerRef, ...menuButtonRefs.current.filter(Boolean)], (e) => {
+    if (e.target === menuButtonRefs.current[activeMenuIndex]) return;
+
     if (activeMenuIndex !== null) {
       setActiveMenuIndex(null);
       setIsKeyboardOpen(false);
     }
   });
-
-  useEffect(() => {
-    if (activeMenuIndex !== null && !isKeyboardOpen) {
-      setIsKeyboardOpen(false);
-    }
-  }, [activeMenuIndex, isKeyboardOpen]);
 
   useEffect(() => {
     if (activeMenuIndex !== null) {
@@ -156,9 +232,7 @@ const Navigation = () => {
             >
               <Button
                 ref={(el) => {
-                  if (hasSubmenu) {
-                    menuButtonRefs.current[index] = el;
-                  }
+                  menuButtonRefs.current[index] = el;
                 }}
                 className={clsx(
                   'relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200  hover:!text-white focus-visible:outline-[revert] xl:px-2.5',
@@ -177,7 +251,7 @@ const Navigation = () => {
                 theme="black"
                 tagName="Navigation"
                 onKeyDown={(e) => handleMenuKeyDown(e, hasSubmenu, index)}
-                onClick={isTouchDevice ? (e) => handleMenuClick(e, hasSubmenu, index) : undefined}
+                onClick={makeHandleMenuClick(hasSubmenu, index)}
               >
                 {text}
                 {hasSubmenu && (
@@ -198,7 +272,7 @@ const Navigation = () => {
       {/* Shared submenu container */}
       <div
         className={clsx(
-          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-screen overflow-hidden bg-black-pure',
+          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
           'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
           {
             'pointer-events-none': activeMenuIndex === null,
@@ -218,7 +292,8 @@ const Navigation = () => {
               <div
                 key={index}
                 id={`submenu-${index}`}
-                role="region"
+                role="navigation"
+                aria-label={menu.text}
                 className={clsx(
                   'absolute left-0 top-0 w-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
                   isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
@@ -267,6 +342,7 @@ const Navigation = () => {
                                   tagText={title}
                                   role="menuitem"
                                   tabIndex={isActive ? 0 : -1}
+                                  onKeyDown={makeHandleSubmenuNavigation(index)}
                                 >
                                   {title}
                                 </Link>

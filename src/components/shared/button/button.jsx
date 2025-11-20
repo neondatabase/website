@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 import Link from 'components/shared/link';
 import getNodeText from 'utils/get-node-text';
@@ -53,56 +54,67 @@ const styles = {
   },
 };
 
-const Button = ({
-  className: additionalClassName = null,
-  to = null,
-  size = null,
-  theme = null,
-  tagName = null,
-  analyticsEvent = null,
-  analyticsOnHover = false,
-  handleClick = null,
-  withArrow = false,
-  children,
-  ...otherProps
-}) => {
-  const posthog = usePostHog();
-  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+const Button = forwardRef(
+  (
+    {
+      className: additionalClassName = null,
+      to = null,
+      size = null,
+      theme = null,
+      tagName = null,
+      analyticsEvent = null,
+      analyticsOnHover = false,
+      handleClick = null,
+      withArrow = false,
+      children,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const posthog = usePostHog();
+    const className = clsx(
+      styles.base,
+      styles.size[size],
+      styles.theme[theme],
+      additionalClassName
+    );
 
-  const Tag = to || withArrow ? Link : 'button';
+    const Tag = to || withArrow ? Link : 'button';
 
-  const handleAnalytics = (eventType = 'clicked') => {
-    if (!tagName) return;
+    const handleAnalytics = (eventType = 'clicked') => {
+      if (!tagName) return;
 
-    sendGtagEvent(`Button ${eventType}`, {
-      style: theme,
-      text: getNodeText(children),
-      tag_name: tagName,
-    });
-
-    if (analyticsEvent) {
-      posthog.capture('ui_interaction', {
-        action: analyticsEvent,
+      sendGtagEvent(`Button ${eventType}`, {
+        style: theme,
+        text: getNodeText(children),
+        tag_name: tagName,
       });
-    }
-  };
 
-  return (
-    <Tag
-      className={className}
-      to={to}
-      {...(withArrow ? { withArrow } : {})}
-      onClick={() => {
-        if (handleClick) handleClick();
-        handleAnalytics('clicked');
-      }}
-      onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}
-      {...otherProps}
-    >
-      {children}
-    </Tag>
-  );
-};
+      if (analyticsEvent) {
+        posthog.capture('ui_interaction', {
+          action: analyticsEvent,
+        });
+      }
+    };
+
+    return (
+      <Tag
+        ref={ref}
+        className={className}
+        to={to}
+        {...(withArrow ? { withArrow } : {})}
+        onClick={() => {
+          if (handleClick) handleClick();
+          handleAnalytics('clicked');
+        }}
+        onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}
+        {...otherProps}
+      >
+        {children}
+      </Tag>
+    );
+  }
+);
 
 Button.propTypes = {
   className: PropTypes.string,

@@ -20,11 +20,16 @@ import rightImageXL from './images/right-pattern-xl.png';
 
 const Image = ({ src, width, isRight, className }) => (
   <ImageComponent
-    className={clsx('absolute top-0 z-0', isRight ? 'right-0' : 'left-0', className)}
+    className={clsx(
+      'pointer-events-none absolute top-0 z-0',
+      isRight ? 'right-0' : 'left-0',
+      className
+    )}
     src={src}
     width={width}
     height={36}
     quality={100}
+    alt=""
     priority
   />
 );

@@ -120,6 +120,7 @@ MobileMenuItem.propTypes = {
         PropTypes.shape({
           text: PropTypes.string,
           to: PropTypes.string,
+          isExternal: PropTypes.bool,
         })
       ),
     })
@@ -142,7 +143,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
+      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-white"
@@ -166,12 +167,12 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                   'pt-[96px]': hasTopbar,
                 })}
               >
-                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
+                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
                   {mobileMenuItems.map((item, index) => (
                     <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-black-pure p-8 md:p-5 sm:grid-cols-1">
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-black-pure p-8 sm:grid-cols-1 sm:p-5">
                   <Button to={LINKS.login} theme="gray-40-outline" tagName="MobileMenu" size="lg">
                     Log In
                   </Button>

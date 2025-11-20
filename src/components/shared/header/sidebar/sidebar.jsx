@@ -87,7 +87,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
         theme="transparent"
         size="xxs"
         tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
+        analyticsEvent="header_log_in_clicked"
       >
         Log In
       </Button>
