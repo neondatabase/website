@@ -23,34 +23,22 @@ const styles = {
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
-    tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
-    quaternary: 'bg-white text-black border border-black hover:border-primary-2',
     'white-filled': 'bg-white text-black hover:bg-gray-new-80',
-    'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
-    'black-outline': 'bg-transparent text-white border border-[#2E3038] hover:border-primary-2',
-    'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
+    'white-filled-multi':
+      'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     'gray-40-outline': 'bg-white/0.02 border border-gray-new-40 text-white hover:border-white',
-    'gray-outline':
-      'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
-    'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',
-    'gray-dark-outline-black':
-      'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
-    'green-outline':
-      'bg-[#0D0D0D] text-white border transition-shadow duration-500 border-green-45 hover:shadow-[0px_8px_30px_0px_rgba(0,229,153,.16)]',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     'green-filled': 'bg-green-52 text-black hover:bg-primary-1',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
-    'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
     'gray-20': 'bg-gray-new-20 text-white hover:bg-gray-new-40',
     'gray-94-filled': 'bg-gray-new-94 text-black hover:bg-gray-6',
-    'gray-15-outline':
-      'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
     'with-icon':
       'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
     'red-filled': 'bg-[#F18484] text-black hover:bg-[#FBA8A8]',
-    transparent: 'bg-transparent hover:bg-gray-new-10 text-white',
+    transparent:
+      'bg-transparent text-black-pure hover:bg-gray-new-90 hover:dark:bg-gray-new-10 dark:text-white',
   },
 };
 

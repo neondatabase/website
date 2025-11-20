@@ -29,7 +29,7 @@ const HeaderWrapper = ({
     <>
       <header
         className={clsx(
-          'header left-0 right-0 top-0 z-50 flex h-16 w-full items-center bg-black-pure lg:relative lg:h-14',
+          'header left-0 right-0 top-0 z-50 flex h-16 w-full items-center bg-white dark:bg-black-pure lg:relative lg:h-14',
           isSticky ? 'sticky' : 'absolute',
           isStickyOverlay && '-mb-16',
           withBorder &&

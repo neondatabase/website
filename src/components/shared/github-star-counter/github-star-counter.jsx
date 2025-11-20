@@ -19,7 +19,8 @@ const formatStars = (starsCount) => {
 const GitHubStarCounter = ({ className = '', starsCount, tagName }) => (
   <Link
     className={clsx(
-      'group flex items-center gap-x-1.5 text-sm leading-none tracking-extra-tight text-white transition-colors duration-200 hover:text-gray-new-70',
+      'group flex items-center gap-x-1.5 text-sm leading-none tracking-extra-tight',
+      'text-black-pure transition-colors duration-200 hover:text-gray-new-20 dark:text-white hover:dark:text-gray-new-70',
       className
     )}
     to={LINKS.github}
@@ -31,7 +32,7 @@ const GitHubStarCounter = ({ className = '', starsCount, tagName }) => (
     <GitHubIcon
       width={18}
       height={18}
-      className="text-gray-new-90 transition-colors group-hover:text-gray-new-80"
+      className="text-gray-new-10 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 group-hover:dark:text-gray-new-80"
     />
     <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
       {formatStars(starsCount)}

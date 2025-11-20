@@ -25,9 +25,9 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         <div className="absolute left-1/2 flex -translate-x-1/2 gap-2.5 xl:relative xl:left-0 xl:translate-x-0 lg:hidden">
           <InkeepTrigger docPageType={docPageType} />
         </div>
-        <Sidebar className="lg:hidden" isClient={isClient} simpleMode />
+        <Sidebar className="lg:hidden" isClient={isClient} />
       </div>
-      <div className="h-12 w-full border-t border-gray-new-90 dark:border-gray-new-15 lg:hidden">
+      <div className="-mx-8 h-12 border-t border-gray-new-90 px-8 dark:border-gray-new-15 lg:hidden">
         <DocsNavigation navigation={navigation} basePath={basePath} />
       </div>
     </Container>
