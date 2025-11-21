@@ -8,7 +8,7 @@ export default {
   caseStudies: '/case-studies',
   cli: '/cli',
   contactSales: '/contact-sales',
-  creators: '/creators',
+  creators: '/programs/creators',
   demos: '/demos',
   deploy: '/deploy',
   developerDays1: '/developer-days-1',

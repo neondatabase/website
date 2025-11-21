@@ -35,4 +35,4 @@ Are you a developer using Postgres to teach, build, or create content for others
 - Collaborate on videos, blog posts, or talks.
 - Join an exclusive Discord channel for Creators.
 
-[Apply to become a Neon Creator](/creators)
+[Apply to become a Neon Creator](/programs/creators)
