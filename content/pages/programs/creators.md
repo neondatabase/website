@@ -9,7 +9,7 @@ image: '/images/social-previews/programs/creators.jpg'
 <ProgramForm type="creator" />
 
 What is the Neon Developer Creator Program?\
-The [Neon Creator Program](https://neon.tech/creators) as just one small to help support developers who are making incredible content. Members will receive a host of benefitis including a free Neon Scale account, early access to new features, and sponsored speaking opportunities.
+The [Neon Creator Program](https://neon.tech/creators) is here to support developers who are making incredible content. Members will receive a host of benefits including a sponsored Neon Scale plan, early access to new features, and more.
 
 The Neon Creator program is for any developer creating content to help educate other developers. Whether you are contributing to open source projects, writing blogs, creating videos, or hold the status of an AWS Hero or Microsoft MVP, if you're a developer using Postgres to teach, build, and create content, Neon would love to support you through the [Neon Creator Program](https://neon.tech/creators)!
 
