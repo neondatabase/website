@@ -20,7 +20,10 @@ const Heading = ({ className = '', theme, icon, title }) => {
   return (
     <div
       className={clsx(
-        'flex max-w-[960px] flex-col gap-y-14 xl:max-w-[800px] lg:max-w-xl md:max-w-full',
+        'flex max-w-[960px] flex-col gap-y-14',
+        'xl:max-w-[800px] xl:gap-y-12',
+        'lg:max-w-xl lg:gap-y-7',
+        'md:max-w-full',
         className
       )}
     >
