@@ -9,7 +9,7 @@ updatedOn: '2025-09-05T17:14:39.189Z'
 ---
 
 <Admonition type="note">
-These consumption metrics apply to Neon's [legacy pricing plans](/docs/introduction/legacy-plans). Metrics for Neon's current [usage-based pricing plans](https://neon.com/docs/introduction/about-billing) will be added in a future update.
+These consumption metrics apply to Scale plan accounts and to [Neon's legacy Scale, Business, and Enterprise accounts](/docs/introduction/legacy-plans). APIs do not retrive all metrics for Neon's current [usage-based Scale plan](https://neon.com/docs/introduction/about-billing).
 </Admonition>
 
 Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption.
