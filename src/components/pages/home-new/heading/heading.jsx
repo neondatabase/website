@@ -18,7 +18,15 @@ const Heading = ({ className = '', theme, icon, title }) => {
   const iconSrc = ICONS[icon];
 
   return (
-    <div className={clsx('flex flex-col gap-y-14 xl:gap-y-12 lg:gap-y-7', className)}>
+    <div
+      className={clsx(
+        'flex max-w-[960px] flex-col gap-y-14',
+        'xl:max-w-[800px] xl:gap-y-12',
+        'lg:max-w-xl lg:gap-y-7',
+        'md:max-w-full',
+        className
+      )}
+    >
       {iconSrc && (
         <Image
           className="pointer-events-none xl:size-12 lg:size-10 md:size-9"
