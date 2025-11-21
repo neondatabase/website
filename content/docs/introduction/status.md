@@ -31,6 +31,6 @@ Neon performs occasional platform maintenance and applies regular updates to you
 
 To receive status notifications, click **Subscribe** on the Neon status page and choose your preferred method: webhook, RSS, Microsoft Teams, or Slack.
 
-![Neon status page](/docs/introduction/neon_status_subscribe.png)
+![Neon status page](/docs/introduction/status_subscribe.png)
 
 <NeedHelp/>
