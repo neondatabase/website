@@ -63,6 +63,8 @@ By default, PostgreSQL allows **SELECT** operations while creating the index, bu
 [`DELETE`](postgresql-tutorial/postgresql-delete)
 operations during that time for safety.
 
+As an alternative, if you cannot block INSERT, UPDATE, or DELETE operations during index creation, you can use the syntax `CREATE INDEX CONCURRENTLY` to create the index without blocking, but at a much slower rate.
+
 When you execute the following `SELECT` statement, PostgreSQL can use the `contacts_name` index to quickly find the matching rows:
 
 ```sql
