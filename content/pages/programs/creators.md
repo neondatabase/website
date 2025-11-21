@@ -21,8 +21,6 @@ Creator Program Benefits:
   Get access to new features before they launch, feedback sessions and more. 
 - Growth Opportunities\
   Explore opportunities to collaborate with Neon on video, written, or talk content.
-- Join the Community\
-   Creators are invited to join our exclusive Discord channel for other members of the program.\
   How can I apply?
 
 We wanted to keep this simple. There's a short-two field form you can fill out [here](http://neon.tech/creators)!
