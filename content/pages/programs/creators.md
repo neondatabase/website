@@ -23,6 +23,6 @@ The Neon Creator program is for any developer creating content to help educate o
 
 ## FAQ
 
-### I know someone who qualifies for this program, can I nominate them?
+**I know someone who qualifies for this program, can I nominate them?**
 
 Mostly yes! There isn't an official way to nominate someone for the Neon Creator Program, but if you know someone who'd be interested, feel free to share [this link](http://neon.tech/programs/creators) with them.
