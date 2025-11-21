@@ -18,7 +18,7 @@ nextLink:
 
 ## Introduction to PostgreSQL indexes
 
-In PostgreSQL, an **index** is a special data structure that speeds up data retrieval. It gives PostgreSQL a quick way to locate rows inside a table without scanning the entire table.
+In PostgreSQL, an **index** is a data structure that speeds up data retrieval. It gives PostgreSQL a quick way to locate rows inside a table without scanning the entire table.
 
 You can think of an index like the **index pages of a book**.
 Instead of reading every page to find a topic, you simply check the index, which points you directly to the page you need. PostgreSQL uses indexes in the same way to find data quickly.
