@@ -54,7 +54,6 @@ const Features = () => (
     >
       <div className="min-w-0 border-t border-gray-new-20 pt-[35px] lg:pt-7">
         <Heading
-          className="max-w-[960px] xl:max-w-[800px] lg:max-w-[600px] md:max-w-full"
           icon="features"
           theme="dark"
           title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
