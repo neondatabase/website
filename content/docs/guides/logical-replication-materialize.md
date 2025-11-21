@@ -3,7 +3,7 @@ title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.281Z'
+updatedOn: '2025-11-07T12:28:56.612Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -179,7 +179,13 @@ Now that you’ve configured your database network and created an ingestion clus
    );
    ```
 
-   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button. A Neon connection string looks like this:
+   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button.
+
+   <Admonition type="important">
+   Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
+   </Admonition>
+
+   A Neon connection string looks like this:
 
    ```text shouldWrap
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
