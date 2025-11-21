@@ -96,7 +96,6 @@ const Autoscaling = () => {
       >
         <div className="min-w-0">
           <Heading
-            className="max-w-[960px] xl:pr-10 lg:pr-0 md:pr-4"
             icon="autoscaling"
             theme="light"
             title="<strong>Advanced autoscaling.</strong> Scale further without worrying about the database. Never overpay for resources you don’t use."
