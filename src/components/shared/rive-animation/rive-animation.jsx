@@ -19,6 +19,7 @@ const RiveAnimation = ({
   alignment = 'TopCenter',
   intersectionRootMargin = '500px 0px',
   animationRootMargin = '300px 0px',
+  autoBind = false,
   onLoad,
 }) => {
   const isTouch = useIsTouchDevice();
@@ -33,6 +34,7 @@ const RiveAnimation = ({
     artboard,
     autoplay,
     stateMachines,
+    autoBind,
     layout: new Layout({
       fit: Fit[fit],
       alignment: Alignment[alignment],
@@ -84,6 +86,7 @@ RiveAnimation.propTypes = {
   artboard: PropTypes.string.isRequired,
   stateMachines: PropTypes.string,
   autoplay: PropTypes.bool,
+  autoBind: PropTypes.bool,
   fit: PropTypes.oneOf(Object.keys(Fit)),
   alignment: PropTypes.oneOf(Object.keys(Alignment)),
   onLoad: PropTypes.func,
