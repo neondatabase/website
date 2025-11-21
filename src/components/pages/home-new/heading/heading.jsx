@@ -27,10 +27,19 @@ const Heading = ({ className = '', theme, icon, title }) => {
         className
       )}
     >
-      {iconSrc && <Image src={iconSrc} width={56} height={56} alt="" />}
+      {iconSrc && (
+        <Image
+          className="pointer-events-none xl:size-12 lg:size-10 md:size-9"
+          src={iconSrc}
+          width={56}
+          height={56}
+          alt=""
+        />
+      )}
       <h2
         className={clsx(
           'indent-24 text-[48px] font-normal leading-dense tracking-tighter [&>strong]:font-normal',
+          'xl:text-[40px] lg:indent-16 lg:text-[28px] md:indent-0 md:text-[24px]',
           theme === 'dark' && 'text-gray-new-50 [&>strong]:text-white',
           theme === 'light' && 'text-gray-new-40 [&>strong]:text-black-pure'
         )}
