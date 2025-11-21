@@ -5,12 +5,11 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
-updatedOn: '2025-09-16T17:39:40.074Z'
+redirectTo: /docs/guides/platform-integration-overview
+updatedOn: '2025-11-05T00:00:00.000Z'
 ---
 
 Learn how you can offer instant, managed Postgres databases to your users with Neon. This guide covers how to integrate your platform or service with Neon, set usage limits for your users, and more.
-
-<CTA title="Explore our platform integration success stories" description="Discover how platforms like <a href='/blog/neon-postgres-on-vercel'>Vercel</a>, <a href='https://www.linkedin.com/posts/nikitashamgunov_heres-the-story-on-how-we-accidentally-created-activity-7242909460304699393-6mr2/'>Replit</a>, <a href='/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool</a>, and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb</a> have integrated Neon into their platforms." isIntro></CTA>
 
 ## Platform integration with Neon
 
@@ -49,9 +48,11 @@ Find out how you can integrate with Neon.
 Create autonomous agents that can manage and interact with your Neon databases programmatically. For more on this use case, see [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
 
 <DetailIconCards>
+
 <a href="https://github.com/neondatabase/toolkit" description="Spin up a Postgres database in seconds" icon="openai">Toolkit for AI Agents</a>
 
 <a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
+
 </DetailIconCards>
 
 ## Billing

@@ -122,8 +122,6 @@ You must choose from these predefined scopes when requesting access; custom scop
 
 Let's now go through the full flow, step by step:
 
-<Steps>
-
 ## Initiating the OAuth flow
 
 To initiate the OAuth flow, you need to generate an authorization URL. You can do that by directing your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
@@ -180,12 +178,21 @@ You can now exchange the authorization code returned from the previous step for 
 
 The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
-</Steps>
+## Example OAuth application
 
-## Example OAuth applications
+For a complete working example of a Neon OAuth integration, check out the **Neon Branches Visualizer** application. This app demonstrates how to:
 
-For an example application that leverages the Neon OAuth integration, see the [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application. You can find the application code on GitHub.
+- Implement the OAuth flow with Neon
+- Handle user authorization and token exchange
+- Make authenticated API requests to manage Neon resources
+- Build a user-friendly interface for Neon account management
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon-branches-visualizer" description="A Neon branching visualizer app showcasing how to build an OAuth integration with Neon" icon="github">Neon Branches Visualizer</a>
+
+<a href="https://neon-experimental.vercel.app" description="Try the live demo application" icon="openai">View live demo</a>
+
+<a href="https://github.com/neondatabase/neon-branches-visualizer" description="Explore the source code and implementation" icon="github">View on GitHub</a>
+
 </DetailIconCards>
+
+The source code provides a practical reference for implementing OAuth with Neon in your own applications.
