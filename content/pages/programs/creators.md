@@ -13,12 +13,9 @@ The Neon Creator program is for any developer creating content to help educate o
 
 ## Benefits
 
-- **Free Neon Usage**
-  Get full access to all of Neon's greatest features with a fully sponsored Scale account.
-- **Exclusive Perks**
-  Get access to new features before they launch, feedback sessions and more. 
-- **Growth Opportunities**
-  Explore opportunities to collaborate with Neon on video, written, or talk content.
+- **Free Neon Usage** - Get full access to all of Neon's greatest features with a fully sponsored Scale account.
+- **Exclusive Perks** - Get access to new features before they launch, feedback sessions and more. 
+- **Growth Opportunities** - Explore opportunities to collaborate with Neon on video, written, or talk content.
 
 ## Apply
 
