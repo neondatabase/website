@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-10-16T09:00:00.000Z'
 image: '/images/social-previews/programs/creators.jpg'
 ---
-
+![Neon Creator Program](/images/social-previews/programs/creators.jpg)
 ## About
 The Neon Creator Program is here to support developers who are making incredible content. Members will receive a host of benefits including a sponsored Neon Scale plan, early access to new features, and more.
 
