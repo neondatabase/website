@@ -18,7 +18,12 @@ const Heading = ({ className = '', theme, icon, title }) => {
   const iconSrc = ICONS[icon];
 
   return (
-    <div className={clsx('flex flex-col gap-y-14', className)}>
+    <div
+      className={clsx(
+        'flex max-w-[960px] flex-col gap-y-14 xl:max-w-[800px] lg:max-w-xl md:max-w-full',
+        className
+      )}
+    >
       {iconSrc && <Image src={iconSrc} width={56} height={56} alt="" />}
       <h2
         className={clsx(
