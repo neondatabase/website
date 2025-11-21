@@ -108,9 +108,10 @@ From the **Data Masking** page:
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [API reference](#api-reference) section below.
+For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below.
 
 **Get masking rules**
+
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
@@ -170,7 +171,7 @@ The branch is unavailable for connections while anonymization is in progress.
 - Masking does not enforce database constraints (e.g., primary keys can be masked as NULL).
 - The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
-## API reference
+## Data anonymization APIs
 
 The Neon API provides comprehensive control over anonymized branches, including access to all PostgreSQL Anonymizer masking functions and the ability to export/import masking rules for management outside of Neon.
 
