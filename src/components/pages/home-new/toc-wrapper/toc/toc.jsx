@@ -61,7 +61,7 @@ const Toc = () => {
   }, [updateActiveSection]);
 
   return (
-    <div className="sticky top-24 z-10" ref={tocRef}>
+    <div className="sticky top-0 z-10 pb-60 pt-40" ref={tocRef}>
       <ul className="flex w-[224px] flex-col gap-y-1.5">
         {SECTIONS.map((section) => {
           const isActive = activeSection === section.id;
