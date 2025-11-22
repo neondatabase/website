@@ -41,7 +41,6 @@ const Branching = () => (
       <div className="min-w-0 border-t border-gray-new-20 pt-[35px] xl:border-none">
         <Heading
           icon="branching"
-          theme="dark"
           title="<strong>Instant branching.</strong> Develop and test new features and migrations with data & schema branches to eliminate surprises in production deploys."
         />
 
