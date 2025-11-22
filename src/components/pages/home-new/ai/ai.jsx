@@ -13,7 +13,7 @@ const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode
 
 const AI = () => (
   <section
-    className="ai safe-paddings relative scroll-mt-16 py-40 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
+    className="ai safe-paddings relative xl:pb-[120px] xl:pt-[150px] lg:pb-[104px] lg:pt-[120px] md:py-24"
     id="ai"
   >
     <Container
@@ -22,7 +22,7 @@ const AI = () => (
     >
       <div className="min-w-0">
         <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
-        <div className="relative mt-24 w-full pl-32 xl:mt-[72px] xl:pl-4 lg:-mx-8 lg:mt-14 lg:pl-0 md:mx-0 md:mt-9">
+        <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="relative w-full md:hidden">
             <Animation src="/animations/pages/home-new/ide.riv" />
             <Image
@@ -45,8 +45,8 @@ const AI = () => (
             quality={100}
           />
         </div>
-        <div className="mt-[184px] flex items-center gap-11 xl:mt-[120px] xl:gap-[14px] lg:mt-[88px] md:mt-14 md:flex-col md:items-start md:gap-7">
-          <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32">
+        <div className="mt-[184px] flex items-center gap-11 xl:mt-[120px] xl:gap-[14px] lg:mt-[88px] md:mt-14 sm:flex-col sm:items-start sm:gap-7">
+          <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full">
             Connect MCP clients to Neon:
           </p>
           <Logos className="min-w-0 max-w-full" logos={logos} size="sm" />
