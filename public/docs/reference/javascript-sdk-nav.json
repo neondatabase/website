@@ -1,0 +1,100 @@
+{
+  "title": "Neon JavaScript SDK",
+  "sections": [
+    {
+      "section": "Getting Started",
+      "items": [
+        {
+          "title": "Initializing",
+          "id": "initializing"
+        }
+      ]
+    },
+    {
+      "section": "Auth",
+      "items": [
+        {
+          "title": "auth.signUp()",
+          "id": "auth-signup"
+        },
+        {
+          "title": "auth.signInWithPassword()",
+          "id": "auth-signinwithpassword"
+        },
+        {
+          "title": "auth.signInWithOAuth()",
+          "id": "auth-signinwithoauth"
+        },
+        {
+          "title": "auth.signOut()",
+          "id": "auth-signout"
+        },
+        {
+          "title": "auth.getSession()",
+          "id": "auth-getsession"
+        },
+        {
+          "title": "auth.getUser()",
+          "id": "auth-getuser"
+        },
+        {
+          "title": "auth.updateUser()",
+          "id": "auth-updateuser"
+        },
+        {
+          "title": "auth.onAuthStateChange()",
+          "id": "auth-onauthstatechange"
+        },
+        {
+          "title": "auth.resetPasswordForEmail()",
+          "id": "auth-resetpasswordforemail"
+        }
+      ]
+    },
+    {
+      "section": "Database",
+      "items": [
+        {
+          "title": "from().select()",
+          "id": "select"
+        },
+        {
+          "title": "from().insert()",
+          "id": "insert"
+        },
+        {
+          "title": "from().update()",
+          "id": "update"
+        },
+        {
+          "title": "from().delete()",
+          "id": "delete"
+        },
+        {
+          "title": ".eq()",
+          "id": "eq"
+        },
+        {
+          "title": ".neq()",
+          "id": "neq"
+        },
+        {
+          "title": ".gt()",
+          "id": "gt"
+        },
+        {
+          "title": ".lt()",
+          "id": "lt"
+        },
+        {
+          "title": ".order()",
+          "id": "order"
+        },
+        {
+          "title": ".limit()",
+          "id": "limit"
+        }
+      ]
+    }
+  ]
+}
