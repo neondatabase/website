@@ -1,65 +1,37 @@
 'use client';
 
 import clsx from 'clsx';
-import { AnimatePresence, domAnimation, LazyMotion, m } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 
 import Container from 'components/shared/container';
-import RiveAnimation from 'components/shared/rive-animation';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
-import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.svg';
-import avoidImage from 'images/pages/home-new/autoscaling/avoid-illustration.svg';
-import saveCostsImageMd from 'images/pages/home-new/autoscaling/save-costs-md.svg';
 
 import Heading from '../heading';
 
+import Animation from './animation';
+
 const SaveCostsComponent = () => (
-  <>
-    <RiveAnimation
-      className="relative -left-[60px] -top-[102px] w-[1680px] max-w-none 2xl:-left-[56px] 2xl:-top-[95px] 2xl:w-[1600px] xl:left-1/2 xl:-ml-[50vw] xl:-translate-x-14 lg:-top-[75px] lg:w-[1248px] lg:-translate-x-11 md:hidden"
-      src="/animations/pages/home-new/autoscaling-graph.riv"
-      intersectionRootMargin="0px 0px"
-      artboard="main"
-      stateMachines="SM"
-      autoplay={false}
-      autoBind
-    />
-    <Image
-      className="mx-auto hidden max-w-none md:block"
-      src={saveCostsImageMd}
-      width={768}
-      height={280}
-      alt=""
-    />
-  </>
+  <Animation
+    className="relative w-[1378px] max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-[1300px] lg:w-[1023px] md:left-0 md:ml-0 md:aspect-[767/599] md:w-screen"
+    src="/animations/pages/home-new/autoscaling-save-costs.riv"
+    autoBind
+  />
 );
 
 const AvoidOutagesComponent = () => (
-  <>
-    <Image
-      className="pointer-events-none relative -top-[70px] mx-auto max-w-none 2xl:-top-[62px] 2xl:w-[1216px] xl:w-[1280px] lg:-top-[38px] lg:h-fit lg:w-screen lg:max-w-full md:hidden"
-      src={avoidImage}
-      width={1376}
-      height={518}
-      alt=""
-    />
-    <Image
-      className="mx-auto hidden max-w-none md:block"
-      src={avoidImageMd}
-      width={768}
-      height={560}
-      alt=""
-    />
-  </>
+  <Animation
+    className="relative w-[1378px] max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-[1300px] lg:w-[1023px] md:left-0 md:ml-0 md:aspect-[767/1193] md:w-screen"
+    src="/animations/pages/home-new/autoscaling-avoid-outages.riv"
+  />
 );
 
 const tabs = [
   {
     tab: 'Save Costs',
-    renderComponent: (props) => <SaveCostsComponent {...props} />,
+    renderComponent: () => <SaveCostsComponent />,
   },
   {
     tab: 'Avoid Outages',
@@ -122,25 +94,13 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="relative z-10 mt-6 w-max max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
-            <LazyMotion features={domAnimation}>
-              <AnimatePresence initial={false} mode="wait">
-                {tabs.map(
-                  (item, index) =>
-                    index === activeItem && (
-                      <m.div
-                        className="h-[448px] lg:h-[333px] md:pointer-events-none md:flex md:h-auto md:min-h-[280px] md:justify-center"
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        {item.renderComponent()}
-                      </m.div>
-                    )
-                )}
-              </AnimatePresence>
-            </LazyMotion>
+          <div className="no-scrollbars relative z-10 mt-6 w-max max-w-none overflow-hidden overflow-x-auto 2xl:w-auto xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
+            <div className="h-[448px] xl:h-[408px] lg:h-[338px] md:h-auto">
+              {tabs.map(
+                (item, index) =>
+                  index === activeItem && <div key={index}>{item.renderComponent()}</div>
+              )}
+            </div>
           </div>
 
           <div className="relative z-20 mt-[22px] grid grid-cols-2 items-start text-black-pure xl:mt-2 xl:grid-cols-[1fr_352px] lg:mt-5 lg:grid-cols-1">
