@@ -356,60 +356,63 @@
           slug: auth/overview
           tag: new
           items:
-            - title: Overview
-              slug: auth/overview
+            - section: Introduction
+              items:
+                - title: Overview
+                  slug: auth/overview
+                  tag: wip
+                - title: Branching
+                  slug: auth/concepts/branching-authentication
 
             - section: Quickstarts
               items:
                 - title: React
                   slug: auth/quick-start/react
-                - title: Next.js
-                  slug: auth/quick-start/nextjs
+                - title: React Router
+                  slug: auth/quick-start/react-router
+                - title: React Router with UI
+                  slug: auth/quick-start/react-router-components
+                  tag: wip
 
             - section: Core Concepts
               items:
-                - title: How Neon Auth Works
-                  slug: auth/concepts/how-it-works
-                - title: Branching Authentication
-                  slug: auth/concepts/branching-authentication
-                - title: Database Schema
-                  slug: auth/concepts/database-schema
+                - title: Authentication Flow
+                  slug: auth/concepts/authentication-flow
+                - title: Session Management
+                  slug: auth/concepts/session-management
+                - title: Email Verification
+                  slug: auth/concepts/email-verification
+                  tag: wip
+                - title: OAuth
+                  slug: auth/concepts/oauth
+                  tag: wip
 
             - section: Guides
               items:
-                - title: Protecting Routes
-                  slug: auth/guides/protecting-routes
-                - title: User Management
-                  slug: auth/guides/user-management
-                - title: Social OAuth
-                  slug: auth/guides/social-oauth
-                - title: Row Level Security
-                  slug: auth/guides/row-level-security
-                - title: Preview Environments
-                  slug: auth/guides/preview-environments
+                - title: Email Verification
+                  slug: auth/guides/email-verification
+                - title: Set up OAuth with Google
+                  slug: auth/guides/setup-oauth-google
+                  tag: wip
 
-            - section: SDK Reference
+            - section: Reference
               items:
                 - title: JavaScript SDK
                   slug: reference/javascript-sdk
+                - title: SDK CLI
+                  slug: auth/reference/sdk-cli
+                  tag: wip
 
             - section: Migration Guides
               items:
-                - title: Migrate v1 to v2
-                  slug: auth/migrate/v1-to-v2
-                - title: Eject v1 to Stack Auth
-                  slug: auth/migrate/v1-eject-to-stack-auth
+                - title: From v1 to v2
+                  slug: auth/migrate/from-v1
+                  tag: wip
+                - title: From v1 Ejected to Stack Auth
+                  slug: auth/migrate/from-v1-ejected
+                  tag: wip
                 - title: From Supabase
                   slug: auth/migrate/from-supabase
-
-            - section: Advanced
-              items:
-                - title: Server-Side Auth
-                  slug: auth/advanced/server-side-auth
-                - title: Security Best Practices
-                  slug: auth/advanced/security-best-practices
-                - title: Troubleshooting
-                  slug: auth/advanced/troubleshooting
 
         - title: Neon Auth (v1)
           icon: auth

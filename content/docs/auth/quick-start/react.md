@@ -100,7 +100,7 @@ export const neon = createClient({
 
 Neon JS uses a programmatic approach for managing auth state. You'll use React hooks like `useEffect` to check the session and handle auth changes.
 
-Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/auth/sdk/auth-methods#signup), [sign-in](/docs/auth/sdk/auth-methods#signin), and [sign-out](/docs/auth/sdk/auth-methods#signout):
+Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#authsignup), [sign-in](/docs/reference/javascript-sdk#authsigninwithpassword), and [sign-out](/docs/reference/javascript-sdk#authsignout):
 
   </LeftContent>
   <RightCode label="src/App.jsx">
@@ -215,4 +215,4 @@ SELECT * FROM neon_auth.user;
 
 - [Learn about Neon Auth concepts](/docs/auth/overview)
 - [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
-- [View complete SDK reference](/docs/auth/sdk/auth-methods)
+- [View complete SDK reference](/docs/reference/javascript-sdk)
