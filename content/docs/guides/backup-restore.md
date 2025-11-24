@@ -3,11 +3,11 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-10-31T19:17:38.907Z'
+updatedOn: '2025-11-07T20:24:25.880Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated snapshot schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -175,15 +175,15 @@ The parameters used in the example above:
 
 </Tabs>
 
-## Create snapshot schedules
+## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Snapshot schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
-To create or modify a snapshot schedule:
+To create or modify a backup schedule:
 
 1. **Open the schedule editor**
 
@@ -205,7 +205,7 @@ To create or modify a snapshot schedule:
 
    Depending on your selected frequency, configure how often you want to create snapshots and how long to keep them.
 
-Once configured, snapshots created by the schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
+Once configured, snapshots created by the backup schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
 
 ### Snapshot retention
 
@@ -213,13 +213,63 @@ Snapshots are automatically deleted after their retention period expires. You ca
 
 - Shorter retention periods help manage snapshot limits on your plan
 - Deleted snapshots cannot be recovered
-- Manual snapshots are not affected by schedule retention settings
+- Manual snapshots are not affected by backup schedule retention settings
 
 </TabItem>
 
 <TabItem>
 
-API support for managing snapshot schedules is not currently available. Use the Neon Console to create and manage snapshot schedules.
+You can view and update backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+
+**View backup schedule**
+
+Retrieves the current backup schedule configuration for a branch using the [View backup schedule](https://api-docs.neon.tech/reference/getsnapshotschedule) endpoint.
+
+```bash
+GET /projects/{project_id}/branches/{branch_id}/backup_schedule
+```
+
+```bash shouldWrap
+curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
+  -H 'Authorization: Bearer $NEON_API_KEY' | jq
+```
+
+**Example response:**
+
+```json
+{
+  "schedule": [
+    {
+      "frequency": "daily",
+      "hour": 23,
+      "retention_seconds": 1209600
+    }
+  ]
+}
+```
+
+**Update backup schedule**
+
+Updates the backup schedule configuration for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint. You can set daily, weekly, or monthly schedules with custom retention periods.
+
+```bash
+PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
+```
+
+```bash shouldWrap
+curl -X PUT 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "schedule": [
+      {
+        "frequency": "daily",
+        "hour": 23,
+        "retention_seconds": 604800
+      }
+    ]
+  }' | jq
+```
 
 </TabItem>
 

@@ -1,7 +1,5 @@
 import AiAgentsGradientIcon from 'icons/header/ai-agent-gradient.inline.svg';
 import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
-import AiGradientIcon from 'icons/header/ai-gradient.inline.svg';
-import AiIcon from 'icons/header/ai.inline.svg';
 import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
 import ApiIcon from 'icons/header/api.inline.svg';
 import AuthGradientIcon from 'icons/header/auth-gradient.inline.svg';
@@ -34,12 +32,12 @@ import RestoreGradientIcon from 'icons/header/restore-gradient.inline.svg';
 import RestoreIcon from 'icons/header/restore.inline.svg';
 import RocketGradientIcon from 'icons/header/rocket-gradient.inline.svg';
 import RocketIcon from 'icons/header/rocket.inline.svg';
-import SearchGradientIcon from 'icons/header/search-gradient.inline.svg';
-import SearchIcon from 'icons/header/search.inline.svg';
 import SecurityGradientIcon from 'icons/header/security-gradient.inline.svg';
 import SecurityIcon from 'icons/header/security.inline.svg';
 import ServerlessGradientIcon from 'icons/header/serverless-gradient.inline.svg';
 import ServerlessIcon from 'icons/header/serverless.inline.svg';
+import SettingsGradientIcon from 'icons/header/settings-gradient.inline.svg';
+import SettingsIcon from 'icons/header/settings.inline.svg';
 
 import LINKS from './links';
 
@@ -59,11 +57,11 @@ export default {
               to: LINKS.autoscaling,
             },
             {
-              icon: ConnectionIcon,
-              iconGradient: ConnectionGradientIcon,
-              title: 'Connection pooler',
-              description: 'Thousands of connections',
-              to: LINKS.connectionPooling,
+              icon: BranchingIcon,
+              iconGradient: BranchingGradientIcon,
+              title: 'Branching',
+              description: 'Faster Postgres workflows',
+              to: LINKS.branching,
             },
             {
               icon: CloudIcon,
@@ -73,18 +71,18 @@ export default {
               to: LINKS.storage,
             },
             {
-              icon: BranchingIcon,
-              iconGradient: BranchingGradientIcon,
-              title: 'Branching',
-              description: 'Modern Postgres workflows',
-              to: LINKS.branching,
-            },
-            {
               icon: RestoreIcon,
               iconGradient: RestoreGradientIcon,
               title: 'Instant restores',
               description: 'Recover TBs in seconds',
               to: LINKS.branchRestore,
+            },
+            {
+              icon: ConnectionIcon,
+              iconGradient: ConnectionGradientIcon,
+              title: 'Connection pooler',
+              description: 'Built-in with pgBouncer',
+              to: LINKS.connectionPooling,
             },
           ],
         },
@@ -92,46 +90,48 @@ export default {
           title: 'Ecosystem',
           items: [
             {
+              icon: SettingsIcon,
+              iconGradient: SettingsGradientIcon,
+              title: 'Neon API',
+              description: 'Manage infra, billing, quotas',
+              to: LINKS.api,
+            },
+            {
               icon: AuthIcon,
               iconGradient: AuthGradientIcon,
               title: 'Auth',
-              description: 'Authenticate your users',
+              description: 'Add authentication',
               to: LINKS.auth,
-            },
-            {
-              icon: SearchIcon,
-              iconGradient: SearchGradientIcon,
-              title: 'Search',
-              description: 'Faster with pg_search',
-              to: LINKS.pgSearch,
             },
             {
               icon: ApiIcon,
               iconGradient: ApiGradientIcon,
-              title: 'API',
-              description: 'Manage Neon at scale',
-              to: LINKS.api,
+              title: 'Data API',
+              description: 'PostgREST-compatible',
+              to: LINKS.dataApi,
             },
+
             {
-              icon: AiIcon,
-              iconGradient: AiGradientIcon,
-              title: 'AI',
-              description: 'Embeddings & agents',
-              to: LINKS.ai,
+              icon: RocketIcon,
+              iconGradient: RocketGradientIcon,
+              title: 'Instagres',
+              description: 'No-signup flow',
+              to: LINKS.instagres,
+              isExternal: true,
             },
             {
               icon: MigrationIcon,
               iconGradient: MigrationGradientIcon,
-              title: 'Migrations',
-              description: 'Minimize downtime',
-              to: LINKS.migration,
+              title: 'Migration guides',
+              description: 'Step-by-step',
+              to: LINKS.migrationIntro,
             },
           ],
         },
         {
           banner: {
             title: 'What is Neon?',
-            description: 'Serverless Postgres',
+            description: 'Serverless Postgres, by Databricks',
             to: LINKS.whyNeon,
           },
         },

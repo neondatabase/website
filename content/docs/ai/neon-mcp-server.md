@@ -3,7 +3,7 @@ title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
 enableTableOfContents: true
-updatedOn: '2025-10-24T19:29:04.736Z'
+updatedOn: '2025-11-14T19:50:51.302Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
@@ -79,22 +79,9 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 #### Setup steps:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
-2.  Register a new MCP Server. Add a configuration block for "Neon" under 'mcpServers' key. The configuration should look like this:
+2.  Register a new MCP Server. When prompted for the configuration, name the server "Neon" and enter `https://mcp.neon.tech/mcp` as the Remote MCP Server URL.
 
-    ```json
-    {
-      "mcpServers": {
-        "Neon": {
-          "command": "npx",
-          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
-        }
-      }
-    }
-    ```
-
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/mcp`).
-
-    MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
+    > MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
@@ -173,6 +160,7 @@ After setting up either the remote or local server and connecting your MCP clien
 
 **Example interactions**
 
+- **Search resources:** `"Can you search for 'production' across my Neon resources?"`
 - **List projects:** `"List my Neon projects"`
 - **Create a new project:** `"Create a Neon project named 'my-test-project'"`
 - **List tables in a database:** `"What tables are in the database 'my-database' in project 'my-project'?"`
@@ -205,20 +193,48 @@ The Neon MCP Server supports API key-based authentication for remote access, in 
 
 > Currently, only [streamable HTTP](#streamable-http-support) responses are supported with API-key based authentication. Server-Sent Events (SSE) responses are not yet supported for this authentication method.
 
-## Streamable HTTP support
+## Search across resources
 
-The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Events (SSE) for streaming responses. This makes it easier to consume streamed data in environments where SSE is not ideal — such as CLI tools, backend services, or AI agents. To use streamable HTTP, make sure to use the latest remote MCP server, and specify the `https://mcp.neon.tech/mcp` endpoint, as shown in the following configuration example:
+The Neon MCP Server includes a `search` tool that lets you find resources across all your Neon organizations, projects, and branches with a single query. Ask your AI assistant:
+
+```
+Can you search for "production" across my Neon resources?
+```
+
+The assistant will search through all accessible resources and return structured results with direct links to the Neon Console. Results include the resource name, type (organization, project, or branch), and Console URL for easy navigation.
+
+A companion `fetch` tool lets you retrieve detailed information about any resource using the ID returned by the search.
+
+This is particularly useful when working with multiple organizations or large numbers of projects, making it easier to discover and navigate your Neon resources.
+
+## Read-only mode
+
+The Neon MCP Server supports read-only mode for safe operation in cloud and production environments. Enable it by adding the `x-read-only: true` header to your MCP configuration:
 
 ```json
 {
   "mcpServers": {
-    "neon": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "x-read-only": "true"
+      }
     }
   }
 }
 ```
+
+When enabled, the server restricts all operations to read-only tools. Only list and describe tools are available, and SQL queries automatically run in read-only transactions. This provides a safe method for querying and analyzing production databases without any risk of accidental modifications.
+
+## Guided onboarding
+
+The Neon MCP Server includes a `load_resource` tool that provides comprehensive getting-started guidance directly through your AI assistant. Ask your assistant:
+
+```
+Get started with Neon
+```
+
+The assistant will load detailed step-by-step instructions covering organization setup, project configuration, connection strings, schema creation, and migrations. This works in IDEs that don't fully support MCP resources and ensures onboarding guidance is explicitly loaded when you need it.
 
 ## MCP security guidance
 

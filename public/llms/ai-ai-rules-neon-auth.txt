@@ -66,7 +66,7 @@ Ask the human developer to do the following steps:
 
 Steps which you can do after that:
 - Run the installation wizard with:  
-  `npx @stackframe/init-stack@latest --agent-mode --no-browser`
+  `npx @stackframe/init-stack@latest --no-browser`
 - Update the API keys in your `.env.local` file with the values from the Neon console:  
   - `NEXT_PUBLIC_STACK_PROJECT_ID`  
   - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
@@ -328,4 +328,5 @@ WHERE
 ORDER BY 
   t.created_at DESC;
 ```
+
 ````

@@ -258,6 +258,8 @@
               slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
+            - title: Medusa.js
+              slug: guides/medusajs
             - title: Micronaut Kotlin
               slug: guides/micronaut-kotlin
             - title: NestJS
@@ -348,6 +350,8 @@
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
               slug: data-api/sql-to-rest
+            - title: Custom authentication providers
+              slug: data-api/custom-authentication-providers
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
@@ -708,6 +712,8 @@
                       slug: guides/neon-managed-vercel-integration
                     - title: Manual Setup
                       slug: guides/vercel-manual
+                    - title: Connecting to Neon from Vercel
+                      slug: guides/vercel-connection-methods
                     - title: Migrating from Vercel Postgres
                       slug: guides/vercel-postgres-transition-guide
                 - title: Cloudflare
@@ -874,7 +880,7 @@
 
         - title: Workflows & CI/CD
           icon: branching
-          slug: reference/neon-launchpad
+          slug: reference/instagres
           items:
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
@@ -882,8 +888,8 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Neon Launchpad
-              slug: reference/neon-launchpad
+            - title: Instagres
+              slug: reference/instagres
             - title: Neon Local
               slug: local/neon-local
               items:

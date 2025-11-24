@@ -4,7 +4,7 @@ description: >-
   Learn how to use the Neon Data API, a ready-to-use REST API built on top of
   your Neon database
 enableTableOfContents: true
-updatedOn: '2025-10-20T20:08:46.384Z'
+updatedOn: '2025-11-13T20:54:35.552Z'
 tag: beta
 ---
 
@@ -51,7 +51,9 @@ Once enabled, you'll get:
 - Two Postgres roles: `authenticated` and `anonymous` (coming soon)
 - GRANT permissions applied to the authenticated role
 
-> You can customize the auth provider and GRANTs later, or choose your own auth provider during setup.
+<Admonition type="info" title="Custom authentication providers">
+We recommend Neon Auth with the Data API, but you can bring your own authentication provider (Auth0, Clerk, AWS Cognito, etc.) if you want. See [Custom Authentication Providers](/docs/data-api/custom-authentication-providers) for details.
+</Admonition>
 
 ![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
 
@@ -248,7 +250,6 @@ To see a complete, working example of an application built with the Data API, Ne
 
 When you modify your database schema (adding tables, columns, or changing structure), the Data API needs to refresh its cache.
 
-- Console: go to **Data API** section and click **Refresh schema cache**
-- SQL: run `NOTIFY pgrst, 'reload schema';`
+After making any schema changes, go to the **Data API** section in the Console and click **Refresh schema cache**; the API will now reflect your latest schema.
 
 </Steps>

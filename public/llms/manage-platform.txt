@@ -69,4 +69,3 @@ Learn how Neon secures your projects and data, and explore the security features
 - [Platform maintenance](https://neon.com/docs/manage/platform-maintenance): Find out how Neon manages essential platform maintenance and critical security updates
 - [Updates](https://neon.com/docs/manage/updates): Learn about updates for Neon computes and Postgres
 - [Regions](https://neon.com/docs/introduction/regions): Learn about Neon regions and availability
-- [App for Slack](https://neon.com/docs/manage/slack-app): Integrate Neon with Slack for team notifications

@@ -46,7 +46,7 @@ For an overview of Free plan limits and Scale plan features, see [Neon plans](ht
 
 The paid organization hosts databases for your paying users. This organization includes Scale plan features but with agent-specific pricing. Neon provides $30,000 in initial credits to cover usage charges.
 
-Compute is billed at $0.14 per hour (lower than standard Scale pricing). You can create your own internal tier structure within this organization, configuring different resource quotas for different user segments. Use this organization for users on your paid plans that need resource flexibility.
+Compute is billed at $0.106 per hour (lower than standard Scale pricing). You can create your own internal tier structure within this organization, configuring different resource quotas for different user segments. Use this organization for users on your paid plans that need resource flexibility.
 
 ## Managing projects
 
@@ -75,8 +75,8 @@ The agent plan uses usage-based pricing with higher rate limits and dedicated su
  _Agents create a new project for each user application._            |
 | Branches per Project            | **Custom limits available** 
  _Agents use branches to quickly toggle between application states._ |
-| Compute                         | **$0.14 per CU-hour** 
- _Same as Launch_                                                          |
+| Compute                         | **$0.106 per CU-hour** 
+ _Same as Launch_                                                         |
 | Storage                         | **$0.35 per GB-month** 
  _Same as Launch/Scale_                                                   |
 | Instant Restore (PITR)          | **$0.2 per GB-month** 
@@ -88,7 +88,7 @@ The agent plan uses usage-based pricing with higher rate limits and dedicated su
 
 ## Billing model
 
-The paid organization receives $30,000 in initial credits that cover compute ($0.14/hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
+The paid organization receives $30,000 in initial credits that cover compute ($0.106/hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
 
 The sponsored (free) organization has no billing charges.
 
