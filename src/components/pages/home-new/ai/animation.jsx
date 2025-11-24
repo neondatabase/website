@@ -23,6 +23,9 @@ const Animation = ({ src }) => {
   const { rive, RiveComponent } = useRive({
     src,
     artboard: 'main',
+    stateMachines: 'SM',
+    autoplay: false,
+    autoBind: true,
     layout: new Layout({
       fit: Fit.Contain,
       alignment: Alignment.Center,
@@ -61,14 +64,14 @@ const Animation = ({ src }) => {
   }, [rive]);
 
   useEffect(() => {
-    if (riveInstance) {
+    if (riveInstance && isLoaded) {
       if (isVisible) {
         riveInstance.play();
       } else {
         riveInstance.pause();
       }
     }
-  }, [riveInstance, isVisible]);
+  }, [riveInstance, isVisible, isLoaded]);
 
   useEffect(() => {
     if (isLoaded) {
