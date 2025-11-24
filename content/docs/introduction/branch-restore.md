@@ -55,7 +55,7 @@ You can use this backup to rollback the restore operation if necessary. The back
 The backup becomes the parent of your original branch.
 
 <Admonition type="note">
-Backup branches created when restoring from a branch's own history can be deleted when no longer needed. However, backup branches created when restoring from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
+Backup branches created when restoring root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
 </Admonition>
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
@@ -136,7 +136,7 @@ First, select the **Branch to restore**. This is the target branch for the resto
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
 
 <Admonition type="note">
-Backup branches created when restoring from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
+Backup branches created when restoring a root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
 </Admonition>
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
@@ -262,7 +262,10 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 ## Deleting backup branches
 
-You can delete a backup branch created when you restore a branch from its own history (using the **From history** option in the Console). However, you cannot delete a backup branch created when you restore a branch from a different branch's history (using the **From another branch** option).
+Backup branches are deletable except in two cases:
+
+- When a root branch is restored from another branch, the backup branch, which is the original root, cannot be deleted.
+- A backup branch cannot be deleted if it has child branches.
 
 To delete a backup branch:
 
@@ -275,7 +278,7 @@ To delete a backup branch:
 
 3. Select **Delete** from the menu.
 
-If you cannot delete a backup branch because it was created by restoring from another branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+If you cannot delete a backup branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
 To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 
@@ -285,10 +288,3 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 
 - **Instant restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
-
-## Limitations
-
-- Deleting backup branches is only supported for backups created by restore operations on root branches. See [Deleting backup branches](#deleting-backup-branches) for details.
-- [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) restores from the parent branch, which may be a backup branch if you performed a restore operation on the parent branch.
-
-  For example, let's say you have a `production` branch with a child development branch `development`. You are working on `development` and decide to restore to an earlier point in time to fix something during development. At this point, `development`'s parent switches from `production` to the backup `development_old_timestamp`. A day later, you want to refresh `development` with the latest data from `production`. You can't use **Reset from parent**, since the backup is now the parent. Instead, use **Instant restore** and select the original parent `production` as the source.
