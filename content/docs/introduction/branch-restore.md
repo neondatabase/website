@@ -52,7 +52,11 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-The backup becomes the parent of your original branch, which makes rolling back the restore operation simple: [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent).
+The backup becomes the parent of your original branch.
+
+<Admonition type="note">
+Backup branches created when restoring from a branch's own history can be deleted when no longer needed. However, backup branches created when restoring from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
+</Admonition>
 
 ![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
 
@@ -130,6 +134,10 @@ First, select the **Branch to restore**. This is the target branch for the resto
 1.  Click **Next**, confirm the details of the operation, then click **Restore** to complete.
 
 All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
+
+<Admonition type="note">
+Backup branches created when restoring from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
+</Admonition>
 
 ![branch restore backup branch](/docs/guides/branch_restore_backup_file.png)
 
@@ -254,12 +262,12 @@ If you do need to revert your changes, you can [Reset from parent](/docs/manage/
 
 ## Deleting backup branches
 
-You can delete a backup branch created by a restore operation on your project's root branch. Your project's root branch is typically named `production` unless you've renamed it. However, removing a backup branch created by a restore operation on a non-root branch (a child branch of `production`) is not yet supported.
+You can delete a backup branch created when you restore a branch from its own history (using the **From history** option in the Console). However, you cannot delete a backup branch created when you restore a branch from a different branch's history (using the **From another branch** option).
 
 To delete a backup branch:
 
 1. Navigate to the **Branches** page.
-2. Find the backup branch you want to delete. It will have a name with the following format, where `branch_name` is typically `production`.
+2. Find the backup branch you want to delete. It will have a name with the following format:
 
    ```
    {branch_name}_old_{head_timestamp}
@@ -267,7 +275,7 @@ To delete a backup branch:
 
 3. Select **Delete** from the menu.
 
-If you cannot delete a backup branch because the backup branch was created by a restore operation on a non-root branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
+If you cannot delete a backup branch because it was created by restoring from another branch, you can still free up its storage space. If you're certain you no longer need the data in a backup branch, connect to the branch and drop its databases or tables. **Be sure to connect to the correct branch when doing this**. You can connect to a backup branch just like any other branch via the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor).
 
 To keep your **Branches** page organized, consider renaming backup branches that you plan to keep. For example, you can prefix their names with a `z` to move them to the bottom of the list. See [Rename a branch](/docs/manage/branches#rename-a-branch) for details.
 
