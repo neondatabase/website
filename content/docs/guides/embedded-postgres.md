@@ -6,7 +6,7 @@ isDraft: false
 updatedOn: '2025-11-05T00:00:00.000Z'
 ---
 
-Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero—so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
+Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
 
 <CTA title="Learn how platforms embed Neon" description="Learn how <a href='https://neon.com/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases'>Retool manages 300k+ Postgres databases</a> and <a href='https://www.koyeb.com/blog/serverless-postgres-public-preview'>Koyeb offers serverless Postgres</a> using Neon." isIntro></CTA>
 
@@ -15,11 +15,11 @@ Neon makes it easy to embed Postgres into your platform with one-second provisio
 Neon is uniquely built to scale Postgres fleets efficiently:
 
 - **Instant provisioning** — Create a new Postgres database in under 1 second via API
-- **Scale to zero** — Inactive databases consume virtually no resources, making them nearly free
+- **Scale to zero** — Inactive databases scale to zero to save on compute cost
 - **True isolation** — Each user gets their own dedicated Neon project with complete data separation
 - **Autoscaling** — Databases scale compute resources automatically based on demand
-- **Built-in quotas** — Set consumption limits per user to control costs
-- **Usage-based billing** — Track compute time, storage, and data transfer per project
+- **Set quotas** — Set consumption limits per project to manage usage and costs
+- **Track usage** — Track compute time, storage, and other metrics per project
 
 ## The project-per-user model
 
@@ -33,7 +33,7 @@ In Neon, resources such as branches, databases, roles, and computes are organize
 
 - **Data isolation** — Each user's data is completely separate, ensuring the highest level of security and privacy. This also helps with compliance standards like GDPR.
 
-- **Resource isolation** — One user's usage patterns or actions don't impact others. Each user has dedicated compute resources, so heavy loads don't affect your other users.
+- **Resource isolation** — One user's usage patterns or actions don't impact others. Each user has dedicated compute resources.
 
 - **Easier limits and billing** — Neon's APIs for setting consumption limits and tracking usage work at the project level, making it straightforward to implement usage-based billing.
 
@@ -155,7 +155,7 @@ When a quota is reached, the project's computes are automatically suspended unti
 
 For detailed information about configuring limits, see [Configure consumption limits](/docs/guides/consumption-limits).
 
-Here's a fictional exmaple of how you might structure your own pricing tiers using Neon's consumption quotas:
+Here's a fictional example of how you might structure your own pricing tiers using Neon's consumption quotas:
 
 | Resource          | Free Tier        | Pro Tier        | Enterprise |
 | ----------------- | ---------------- | --------------- | ---------- |
@@ -231,7 +231,7 @@ Each user can:
 - Reset branches to production state
 - Delete branches when done
 
-This is particularly valuable for platforms where users need to test schema changes or experiment with data safely. Branching is fully supported by the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). For exmaples, see [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
+This is particularly valuable for platforms where users need to test schema changes or experiment with data safely. Branching is fully supported by the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). For examples, see [Branching with the Neon API](/docs/manage/branches#branching-with-the-neon-api).
 
 ### Schema migrations
 

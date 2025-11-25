@@ -65,8 +65,6 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 <a href="/docs/reference/api-reference" description="Explore the Neon API" icon="transactions">Neon API reference</a>
 
-<a href="/platforms" description="Learn more about embedding Postgres" icon="handshake">Neon for Platforms</a>
-
 </DetailIconCards>
 
 ---
@@ -95,11 +93,9 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 <DetailIconCards>
 
+<a href="/docs/introduction/agent-plan" description="Learn about the Neon Agent plan and how to enroll" icon="database">Agent plan</a>
+
 <a href="/docs/guides/ai-agent-integration" description="Learn about the agent-specific integration" icon="openai">AI Agent integration guide</a>
-
-<a href="/docs/introduction/agent-plan" description="Understand the agent plan structure" icon="database">Agent plan details</a>
-
-<a href="/use-cases/ai-agents" description="See how agents use Neon" icon="handshake">Neon for AI Agents</a>
 
 <a href="/docs/ai/ai-database-versioning" description="Learn about database versioning for agents" icon="branching">Database versioning</a>
 

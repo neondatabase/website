@@ -1415,7 +1415,7 @@
     - section: Neon for AI Agents
       icon: ai-agent
       items:
-        - title: Neon for AI Agents
-          slug: guides/ai-agent-integration
         - title: Agent plan
           slug: introduction/agent-plan
+        - title: AI Agent integration
+          slug: guides/ai-agent-integration
