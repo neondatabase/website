@@ -338,17 +338,8 @@ The consumption APIs do not provide the following metrics that appear on usage-b
 - **Public network transfer** — Data egress over the public internet
 - **Private network transfer** — Data transfer over AWS PrivateLink
 
-### What these APIs are best for
-
-Even if you're on the current usage-based Scale plan, the consumption APIs remain useful for:
-
-- Monitoring compute usage trends (`active_time_seconds`, `compute_time_seconds`)
-- Tracking data writes (`written_data_bytes`)
-- Getting aggregate storage consumption (`synthetic_storage_size_bytes`)
-- Legacy Scale, Business, and Enterprise plan billing reconciliation
-
 <Admonition type="note">
-We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based Scale plan billing structure.
+We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based billing structure.
 </Admonition>
 
 ## Error responses
