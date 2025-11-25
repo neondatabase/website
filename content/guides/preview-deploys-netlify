@@ -413,6 +413,21 @@ jobs:
 
 This workflow automatically deletes the preview Neon database branch when a pull request is closed to prevent leftover resources.
 
+## Testing This Flow
+
+To see this workflow in action, you can simply open a pull request that edits any file (even just a markdown file) in your repository. The GitHub Actions workflow will automatically:
+
+- Create a new Neon database branch for your PR
+- Deploy your app to a Netlify preview URL, connected to the new database branch
+- Post a comment on the PR with links to both the preview deployment and the Neon branch
+
+For a real-world example, see this sample PR and its corresponding workflow run:
+
+- **Sample PR**: [rishi-raj-jain/preview-branches-with-netlify#31](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/31)
+- **Automated Comment** (with preview and Neon links): [View the GitHub Comment](https://github.com/rishi-raj-jain/preview-branches-with-netlify/pull/31#issuecomment-3575353881)
+
+All that was needed for this sample was a simple file edit in the PR. The workflow then generated a dedicated database branch, deployed a preview on Netlify, and posted the preview/comment automatically.
+
 ## Conclusion
 
 You've successfully set up an automated preview deployment workflow that creates isolated database environments for every pull request.
