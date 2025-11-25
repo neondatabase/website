@@ -319,19 +319,21 @@ These consumption APIs were designed for Neon's legacy billing plans and do not 
 
 **Legacy billing model:**
 
-- Uses `synthetic_storage_size_bytes`, which combines logical data size and Write-Ahead Log (WAL) data for all branches into a single metric
+Neon's legacy plans use `synthetic_storage_size_bytes`, which combines logical data size and Write-Ahead Log (WAL) data for all branches into a single metric
 
 **Current usage-based pricing:**
+
+The current usage based pricing plans use these billable storage metrics:
 
 - **Storage (root branches)** — Billed based on logical data size only
 - **Storage (child branches)** — Billed based on the delta (changes made) up to the logical data size limit
 - **Instant restore storage** — Change history (WAL data) billed separately
 
-The APIs return aggregate storage metrics that don't map directly to these separate billing line items on usage-based Scale plan invoices.
+The consumption APIs return the legacy storage metric that doesn't map directly to these separate billing line items on current usage-based plan invoices.
 
 ### Missing billable metrics
 
-The consumption APIs do not provide the following metrics that appear on usage-based Scale plan invoices:
+The consumption APIs do not provide the following metrics that appear on usage-based plan invoices:
 
 - **Extra branches** — Branches beyond your plan's included allowance
 - **Instant restore storage** — Separately billed change history for point-in-time restore
@@ -339,7 +341,7 @@ The consumption APIs do not provide the following metrics that appear on usage-b
 - **Private network transfer** — Data transfer over AWS PrivateLink
 
 <Admonition type="note">
-We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based billing structure.
+We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based billing plan structure.
 </Admonition>
 
 ## Error responses
