@@ -47,7 +47,7 @@ This endpoint accepts the following query parameters:
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity. For example, `2024-03-15T15:30:00Z` for daily granularity will be rounded to `2024-03-15T00:00:00Z`.
+- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
 
 - **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
 
@@ -283,11 +283,7 @@ When setting the `from` and `to` parameters, keep these limits in mind based on 
 | `daily`     | Last 60 days            | Rounds to the start of the day   |
 | `monthly`   | Last year               | Rounds to the start of the month |
 
-**Important notes:**
-
-- Time values must be provided in RFC 3339 format (e.g., `2024-06-30T15:30:00Z`)
-- Consumption history is available starting from March 1, 2024, at 00:00:00 UTC. You cannot query data before this date.
-- Date-time values are automatically rounded according to granularity. For example, `2024-03-15T15:30:00Z` with daily granularity becomes `2024-03-15T00:00:00Z`
+Date-time values are automatically rounded according to the specified granularity. For example, `2024-03-15T15:30:00Z` with daily granularity becomes `2024-03-15T00:00:00Z`.
 
 ## Consumption polling FAQ
 
