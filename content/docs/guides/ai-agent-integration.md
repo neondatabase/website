@@ -457,28 +457,25 @@ This workflow prevents common issues like development data contaminating product
 
 ### Track usage per project
 
-Query consumption metrics to understand usage and implement billing using the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) API:
+You can use the Neon API to retrieve consumption metrics for your organizations and projects using these endpoints:
 
-```bash
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?org_id={org_id}&limit=100' \
-     --header 'accept: application/json' \
-     --header "authorization: Bearer $NEON_API_KEY"
-```
+| Endpoint                                                                                                         | Description                                                                                                           |
+| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                |
+| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) |
 
 Available metrics:
 
 - `active_time_seconds` — Compute active time
 - `compute_time_seconds` — CPU seconds consumed
-- `written_data_bytes` — Data written
-- `data_transfer_bytes` — Data transferred out
-- `synthetic_storage_size_bytes` — Total storage
+- `written_data_bytes` — Data written to all branches
+- `synthetic_storage_size_bytes` — Total storage used
 
-See [Query consumption metrics](/docs/guides/consumption-metrics) for details.
+For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
 ### Configure consumption limits
 
-Set limits per project to control costs using the [Update project](https://api-docs.neon.tech/reference/updateproject) API:
+Set consumption limits per project to control costs. You can configure these limits during [project creation](#provisioning-projects) (as shown in the examples above) or update them later using the [Update project](https://api-docs.neon.tech/reference/updateproject) API:
 
 ```bash
 curl --request PATCH \
@@ -506,250 +503,28 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 
 ## Best practices
 
-### Project naming conventions
+- **Project naming** — Use consistent naming to track ownership and tier (e.g., `myapp-username-free-tier-timestamp`, `myapp-username-paid-tier-timestamp`).
+- **Monitor quotas** — Alert users at 80% and 95% of consumption limits. See [Query consumption metrics](/docs/guides/consumption-metrics).
+- **Retry logic** — Implement exponential backoff for API calls to handle rate limits and transient failures.
+- **Project deletion** — Delete immediately when users request it; warn before removing inactive projects; offer final snapshots.
+- **Connection pooling** — Provide [pooled database connection strings](/docs/connect/connection-pooling) by default for bursty workloads.
+- **Reserved names** — Avoid [reserved role names](/docs/manage/roles#reserved-role-names) and [database names](/docs/manage/databases#reserved-database-names).
 
-Use consistent naming when creating projects to identify project ownership and tier:
+## API and SDKs
 
-```bash
-# Format: platform-username-tier-timestamp
-"myapp-johndoe-free-1698765432"
-"myapp-janedoe-pro-1698765433"
-```
+All platform integrations use the Neon API. You can call it directly or use language-specific SDKs:
 
-This makes it easier to track projects in your database and in the Neon console.
-
-### Handle quota exhaustion
-
-Monitor projects approaching their consumption limits and notify users before they hit quotas using the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) API:
-
-```bash
-# Get consumption for a project
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?project_ids={project_id}' \
-     --header 'accept: application/json' \
-     --header "authorization: Bearer $NEON_API_KEY"
-```
-
-Compare current usage against configured quotas and alert users at 80% and 95% thresholds. For detailed information on querying and interpreting consumption metrics, see [Query consumption metrics](/docs/guides/consumption-metrics).
-
-### Error handling for provisioning
-
-Project creation can fail for various reasons (rate limits, quota exhaustion). Implement retry logic with exponential backoff. Here's a JavaScript example:
-
-```javascript
-async function createProjectWithRetry(orgApiKey, projectConfig, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      const response = await fetch('https://console.neon.tech/api/v2/projects', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${orgApiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(projectConfig),
-      });
-
-      if (response.ok) return await response.json();
-      if (response.status === 429) {
-        // Rate limited, wait and retry
-        await new Promise((r) => setTimeout(r, Math.pow(2, i) * 1000));
-        continue;
-      }
-      throw new Error(`Project creation failed: ${response.status}`);
-    } catch (error) {
-      if (i === maxRetries - 1) throw error;
-    }
-  }
-}
-```
-
-### Cleanup and project deletion
-
-Delete projects when users explicitly request deletion or when cleaning up inactive projects using the [Delete project](https://api-docs.neon.tech/reference/deleteproject) API:
-
-```bash
-curl --request DELETE \
-     --url https://console.neon.tech/api/v2/projects/{project_id} \
-     --header "Authorization: Bearer $NEON_API_KEY"
-```
-
-**Best practices for project deletion:**
-
-- **User-initiated deletion** — Delete projects immediately when users request it through your platform
-- **Inactive project cleanup** — Consider automatically deleting projects that haven't been accessed in a specific timeframe (e.g., 30, 60, or 90 days)
-- **Notify before deletion** — Warn users before deleting inactive projects and give them time to respond
-- **Offer data archival** — Before deletion, offer to create a final snapshot branch that users can claim if needed later
-
-### Connection limits and pooling
-
-Be aware of the [connection limits](/docs/connect/connection-pooling#connection-limits-without-connection-pooling) associated with each compute size. Connection pooling allows for significantly more concurrent connections.
-
-**Default connection limits without pooling:**
-
-- 0.25 CU: 112 connections
-- 0.5 CU: 225 connections
-- 1 CU: 450 connections
-- 2 CU: 900 connections
-- 4+ CU: 1800+ connections
-
-If your users' applications require many concurrent connections, use pooled connection strings. To learn more, see [Connection pooling](/docs/connect/connection-pooling).
-
-<Admonition type="tip">
-**For agent platforms:** Consider providing pooled connection strings by default to handle bursty connection patterns from autonomous agents and serverless functions.
-</Admonition>
-
-### Reserved names
-
-Neon reserves certain names for system use. When creating databases or roles programmatically, avoid these reserved names:
-
-- **Reserved role names** — See [Reserved role names](/docs/manage/roles#reserved-role-names)
-- **Reserved database names** — See [Reserved database names](/docs/manage/databases#reserved-database-names)
-
-Using reserved names will result in API errors during project creation.
-
-## Platform tooling
-
-### API-first implementation
-
-Integrating Neon into your agent platform is fundamentally about using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Every operation in this guide—creating projects, managing branches, provisioning services, tracking usage—is performed through API calls.
-
-**The Neon platform is API-first:** Almost anything you can do in the Neon Console is available through the Neon API. This means you can fully automate database provisioning, management, and monitoring for your users without manual intervention.
-
-All code examples in this guide use direct API requests via `curl` to illustrate the underlying API structure. This approach helps you understand exactly what's happening and makes it easier to implement in any programming language.
-
-**Key points:**
-
-- **Everything is API-driven** — All Neon features are accessible programmatically
-- **Language-agnostic** — Use any HTTP client or language that can make REST API calls
-- **Full control** — Direct API access gives you complete flexibility in how you integrate Neon
-- **Console parity** — Nearly all Console operations have corresponding API endpoints
-
-For complete API documentation, authentication details, and all available endpoints, see the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
-
-### SDKs and client libraries
-
-While you can call the Neon API directly (as shown in this guide), Neon also provides SDK wrappers for popular languages that simplify authentication, request formatting, and error handling.
-
-#### Neon Toolkit (TypeScript)
-
-For TypeScript/JavaScript platforms and autonomous agents, the [Neon Toolkit](/docs/reference/neondatabase-toolkit) is a comprehensive SDK that bundles two key components:
-
-**1. Neon API client** — Wraps the Neon API for platform management
-
-- All API endpoints for projects, branches, databases, roles, and operations
-- Type-safe methods with TypeScript support
-- Simplified authentication and error handling
-
-**2. Neon serverless driver** — Low-latency SQL queries
-
-- Query Postgres over HTTP or WebSockets
-- Optimized for serverless and edge runtimes
-- Works with ORMs like Drizzle, Prisma, and Kysely
-
-Installation:
-
-```bash
-npm install @neondatabase/toolkit
-```
-
-Example usage combining both components:
-
-```typescript
-import { createApiClient } from '@neondatabase/api-client';
-import { neon } from '@neondatabase/serverless';
-
-// Manage projects via API client
-const apiClient = createApiClient({ apiKey: process.env.NEON_API_KEY });
-const project = await apiClient.createProject({ project: { name: 'user-db' } });
-
-// Query the database via serverless driver
-const sql = neon(project.connection_uris[0].connection_uri);
-const users = await sql`SELECT * FROM users`;
-```
-
-#### Other language SDKs
-
-Neon provides official and community-maintained SDKs for other languages. All SDKs are wrappers around the Neon API:
-
-- **[Python SDK](/docs/reference/python-sdk)** — Official Neon-supported Python wrapper
-- **[Go SDK](https://github.com/kislerdm/neon-sdk-go)** — Community-maintained
-- **[Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk)** — Community-maintained
-
-For a complete list of available SDKs and their documentation, see [Neon SDKs](/docs/reference/sdk).
-
-**Recommendation:** Use SDKs when available for your language to reduce boilerplate code. Otherwise, direct API calls work perfectly—all capabilities are identical.
-
-### Higher rate limits for agent platforms
-
-As an agent plan participant, you receive custom rate limits optimized for high-volume operations:
-
-- **Management API** — Project creation, branch operations, and compute management
-
-Rate limits are customized based on your expected usage patterns. If you need adjustments as your platform scales, contact your Neon representative to discuss your requirements.
+- **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)** — All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
+- **[Neon Toolkit](/docs/reference/neondatabase-toolkit)** (TypeScript) — API client for management + serverless driver for queries; optimized for edge/serverless runtimes.
+- **Other SDKs** — [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
 
 ## Cost management
 
-Managing costs across hundreds or thousands of databases requires clear visibility and control. Here's how to implement cost management for your agent platform.
-
-### Understanding your cost structure
-
-The agent plan's two-organization model provides different cost implications:
-
-- **Free organization (sponsored by Neon)** — No charges to you for up to 30,000 projects. Neon sponsors all infrastructure costs (compute, storage, data transfer).
-- **Paid organization** — Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. You're billed for actual consumption across all paid projects.
-
-### Implementing usage monitoring
-
-Query consumption metrics to track usage across your fleet and implement billing:
-
-```bash
-curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?org_id={org_id}&limit=100&from=2024-11-01T00:00:00Z&to=2024-11-30T23:59:59Z&granularity=daily' \
-     --header 'accept: application/json' \
-     --header "authorization: Bearer $NEON_API_KEY"
-```
-
-**Key metrics to track:**
-
-- **Compute time** — Billable compute hours consumed (active time × compute units)
-- **Storage** — Total storage used across all databases and branches
-- **Data transfer** — Outbound data transfer (egress)
-
-**Polling considerations:**
-
-- Consumption data updates approximately every 15 minutes
-- Minimum recommended polling interval: 15 minutes
-- Rate limit: ~30 requests per minute per account
-- Polling does NOT wake suspended computes
-
-For complete details on querying and interpreting metrics, see [Query consumption metrics](/docs/guides/consumption-metrics).
-
-### Setting quotas per tier
-
-Control costs by setting consumption limits that match your pricing tiers. Quotas can be configured during project creation or updated anytime.
-
-Example quotas for different tiers:
-
-| Resource      | Free Tier       | Pro Tier        | Enterprise    |
-| ------------- | --------------- | --------------- | ------------- |
-| Active time   | 100 hours/month | 750 hours/month | Unlimited     |
-| Compute range | 0.25 / 2 vCPU   | 0.25 / 2 vCPU   | 0.25 / 4 vCPU |
-| Storage       | 512 MB          | 10 GB           | 100 GB+       |
-| Data transfer | 5 GB            | 50 GB           | Custom        |
-
-When a quota is reached, the project's computes automatically suspend until you adjust the limits or the next billing period.
-
-For detailed information and API examples, see [Configure consumption limits](/docs/guides/consumption-limits) and the [Monitoring and billing](#monitoring-and-billing) section above.
-
-### Cost optimization strategies
-
-- **Aggressive autosuspend** — Set shorter `suspend_timeout_seconds` for free tier projects (5 minutes) to minimize idle compute time
-- **Autoscaling limits** — Cap `autoscaling_limit_max_cu` appropriately for each tier to prevent unexpected spikes
-- **Branch cleanup** — Implement automatic deletion of old development branches and unused snapshots to control storage
-- **Usage alerts** — Warn users at 80% and 95% of their quota to prevent unexpected suspensions
-- **Right-size compute** — Match compute ranges to actual workload requirements per tier
-
-For complete pricing details and credit information, see [Agent plan pricing](/docs/introduction/agent-plan#pricing).
+- **Free organization** — No charges to you for up to 30,000 free tier projects (Neon-sponsored).
+- **Paid organization** — Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. See [Agent plan pricing](/docs/introduction/agent-plan#pricing).
+- **Monitor usage** — Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
+- **Set quotas** — Configure usage limits during [project creation](#provisioning-projects) or update later. See [Configure consumption limits](/docs/guides/consumption-limits).
+- **Optimize costs** — Set shorter `suspend_timeout_seconds` (5 min) for free tier computes; cap `autoscaling_limit_max_cu` per tier to limit compute size scaling; cleanup old branches/snapshots to save on storage; alert your users at 80%/95% usage thresholds; right-size compute size ranges when creating projects for your users.
 
 ## Troubleshooting common issues
 
