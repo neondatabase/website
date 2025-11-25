@@ -79,9 +79,9 @@ This endpoint accepts the following query parameters:
 
 ```bash shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=org-ocean-art-12345678' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+  --url 'https://console.neon.tech/api/v2/consumption_history/account?from=2024-06-30T00:00:00Z&to=2024-07-02T00:00:00Z&granularity=daily&org_id=org-ocean-art-12345678' \
+  --header 'accept: application/json' \
+  --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
 <details>
@@ -182,9 +182,9 @@ This endpoint accepts the following query parameters:
 
 ```shouldWrap
 curl --request GET \
-     --url 'https://console.neon.tech/api/v2/consumption_history/projects?from=2024-06-30T00%3A00%3A00Z&to=2024-07-02T00%3A00%3A00Z&granularity=daily&org_id=org-ocean-art-12345678&limit=10' \
-     --header 'accept: application/json' \
-     --header 'authorization: Bearer $NEON_API_KEY'
+  --url 'https://console.neon.tech/api/v2/consumption_history/projects?from=2024-06-30T00:00:00Z&to=2024-07-02T00:00:00Z&granularity=daily&org_id=org-ocean-art-12345678&limit=10' \
+  --header 'accept: application/json' \
+  --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
 <details>
