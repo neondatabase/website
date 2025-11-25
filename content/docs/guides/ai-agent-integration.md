@@ -1,5 +1,5 @@
 ---
-title: Agent plan integration guide
+title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 enableTableOfContents: true
 isDraft: false
@@ -8,7 +8,7 @@ updatedOn: '2025-11-05T00:00:00.000Z'
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
 
-<CTA title="Learn from agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon." isIntro></CTA>
+<CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon." isIntro></CTA>
 
 <Admonition type="note">
 **Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan) with admin access to both your Free (sponsored) and paid organizations. If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
@@ -22,8 +22,7 @@ This integration guide walks through:
 2. **Handling user upgrades** — Transferring projects between organizations when users change tiers
 3. **Implementing database versioning** — Using PITR and snapshots for undo/redo functionality
 4. **Creating development environments** — Setting up isolated branches for safe testing
-5. **Integrating Neon Auth and Data API** — Optional full-stack features for complete backends
-6. **Setting up monitoring and billing** — Tracking consumption metrics and configuring limits
+5. **Monitoring and billing** — Tracking consumption metrics and configuring limits
 
 ## Before you begin
 
@@ -34,11 +33,11 @@ After enrolling in the agent plan, you should have:
 - **Personal API key** — For transferring projects between organizations
 - **Admin access** — Full control over both organizations via the Neon API
 
-Keep these credentials secure. You'll use them for all API operations in this guide. If you do not have API keys, see [Manage API keys](/docs/manage/api-keys).
+Keep these credentials secure. You'll use them for all API operations in this guide. If you do not have the API keys, see [Manage API keys](/docs/manage/api-keys) for how to retrieve them.
 
 ### Project-per-tenant architecture
 
-This guide uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward at the project level, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
+This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward at the project level, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, see [Agent plan overview](/docs/introduction/agent-plan).
@@ -64,15 +63,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                    | Free Organization | Paid Organization | Notes                                                      |
-| ------------------------ | ----------------- | ----------------- | ---------------------------------------------------------- |
-| **Max branches**         | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
-| **Max snapshots**        | 1 per project     | 10 per project    | Critical for versioning workflows                          |
-| **Compute range**        | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (vCPU + 4GB RAM per CU)                 |
-| **History retention**    | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
-| **Min autosuspend**      | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
-| **Max active endpoints** | 20 per project    | 20 per project    | Concurrent compute endpoints                               |
-| **Read-only endpoints**  | 3 per project     | 3 per project     | Read replicas                                              |
+| Limit                 | Free Organization | Paid Organization | Notes                                                      |
+| --------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
+| **Max branches**      | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
+| **Max snapshots**     | 1 per project     | 10 per project    | Critical for versioning workflows                          |
+| **Compute range**     | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (vCPU + 4GB RAM per CU)                 |
+| **History retention** | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
+| **Min autosuspend**   | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
 
 **Key constraints to consider:**
 
@@ -456,104 +453,7 @@ For development branches, a 5-minute timeout (300 seconds) balances cost efficie
 
 This workflow prevents common issues like development data contaminating production databases, while giving users a safe space to experiment without risk.
 
-## Integrating Neon Auth and Data API (optional)
-
-Beyond database provisioning, Neon provides integrated authentication and REST API services that enable agent platforms to build complete, production-ready backends without managing separate infrastructure.
-
-### Neon Auth: Built-in authentication
-
-[Neon Auth](/docs/neon-auth/overview) provides authentication and user management that syncs directly with your Postgres database, eliminating the need for separate auth services like Auth0, Clerk, or Firebase Auth.
-
-**Why agent platforms use Neon Auth:**
-
-- **Unified backend** — Authentication, user management, and database in one service
-- **No separate infrastructure** — No need to deploy or manage auth servers
-- **Real-time sync** — User data automatically syncs to a `users` table in Postgres
-- **Multi-tenant ready** — Each user database can have its own auth configuration
-- **JWT-based** — Issues tokens that work with the Data API and your applications
-
-**Enabling Neon Auth programmatically:**
-
-Create an auth integration for a branch using the Neon API:
-
-```bash
-curl --request POST \
-     --url https://console.neon.tech/api/v2/auth \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" \
-     --header 'Content-Type: application/json' \
-     --data '{
-  "project_id": "{project_id}",
-  "branch_id": "{branch_id}"
-}'
-```
-
-The response includes:
-
-- `client_key` — Public key for your frontend application
-- `secret_key` — Private key for backend operations
-- Auth provider configuration details
-
-Your agents or users can then implement authentication using the returned credentials with standard OAuth flows.
-
-For complete details, see:
-
-- [Neon Auth documentation](/docs/neon-auth/overview)
-- [Create Neon Auth integration API](https://api-docs.neon.tech/reference/createneonauthintegration)
-
-### Neon Data API: REST access to Postgres
-
-The [Neon Data API](/docs/data-api/get-started) exposes your Postgres databases as REST endpoints, allowing agents and applications to query data over HTTPS without traditional database drivers.
-
-**Why agent platforms use the Data API:**
-
-- **No connection pooling needed** — Query over HTTP instead of managing TCP connections
-- **Serverless-friendly** — Works in edge environments and serverless functions
-- **PostgREST-compatible** — Standard REST interface for CRUD operations
-- **Branch-aware** — Every branch gets its own API endpoint
-- **JWT authentication** — Works seamlessly with Neon Auth tokens
-
-**Enabling the Data API programmatically:**
-
-Create a Data API integration for a branch:
-
-```bash
-curl --request POST \
-     --url 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data_api' \
-     --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" \
-     --header 'Content-Type: application/json' \
-     --data '{
-  "enabled": true
-}'
-```
-
-The response includes the Data API base URL for the branch. Your agents or users can then query the database over HTTPS:
-
-```bash
-curl --request POST \
-     --url 'https://data-api.neon.tech/v1/projects/{project_id}/branches/{branch_id}/tables/{table_name}/query' \
-     --header 'Content-Type: application/json' \
-     --header "Authorization: Bearer {jwt_token}" \
-     --data '{
-  "query": "SELECT * FROM users WHERE email = $1",
-  "params": ["user@example.com"]
-}'
-```
-
-**Common use cases:**
-
-- **Agent queries** — Let AI agents query databases directly via REST without SQL drivers
-- **Edge functions** — Access Postgres from serverless edge environments
-- **Preview branches** — Each development branch has its own isolated API endpoint
-- **Public APIs** — Expose database endpoints to end users with JWT-based auth
-
-For complete details, see:
-
-- [Data API documentation](/docs/data-api/get-started)
-- [Create Data API integration API](https://api-docs.neon.tech/reference/createprojectbranchdataapi)
-
-## Setting up monitoring and billing
+## Monitoring and billing
 
 ### Track usage per project
 
@@ -783,8 +683,7 @@ For a complete list of available SDKs and their documentation, see [Neon SDKs](/
 
 As an agent plan participant, you receive custom rate limits optimized for high-volume operations:
 
-- **Management API** — Project creation, branch operations, compute management, auth and Data API provisioning
-- **Data API** — REST queries to Postgres databases (when enabled)
+- **Management API** — Project creation, branch operations, and compute management
 
 Rate limits are customized based on your expected usage patterns. If you need adjustments as your platform scales, contact your Neon representative to discuss your requirements.
 
@@ -840,7 +739,7 @@ Example quotas for different tiers:
 
 When a quota is reached, the project's computes automatically suspend until you adjust the limits or the next billing period.
 
-For detailed information and API examples, see [Configure consumption limits](/docs/guides/consumption-limits) and the [Setting up monitoring and billing](#setting-up-monitoring-and-billing) section above.
+For detailed information and API examples, see [Configure consumption limits](/docs/guides/consumption-limits) and the [Monitoring and billing](#monitoring-and-billing) section above.
 
 ### Cost optimization strategies
 

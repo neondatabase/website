@@ -83,7 +83,7 @@ The API-first approach means you can provision and manage thousands of databases
 
 ### Project transfers between organizations
 
-With the sponsored (free) and paid organization structure of the agent plan, you can move user projects between organizations when they upgrade or downgrade tiers. Transferring projects between organizations requires a [personal API key](/docs/manage/api-keys#types-of-api-keys) with access to both organizations. You can transfer up to 400 projects per request.
+With the sponsored free and paid organization structure of the agent plan, you can move user projects between organizations when they upgrade or downgrade tiers. Transferring projects between organizations requires a [personal API key](/docs/manage/api-keys#types-of-api-keys) with access to both organizations. You can transfer up to 400 projects per request.
 
 See [transfer projects between organizations](/docs/manage/orgs-project-transfer) for details.
 
@@ -108,7 +108,7 @@ The agent plan uses usage-based, agent-specific pricing with custom limits and d
 
 The paid organization receives up to $30,000 in initial credits that cover compute ($0.106 per compute unit hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
 
-The sponsored (free) organization has no billing charges — Neon sponsors the infrastructure for your free tier users.
+The sponsored free organization has no billing charges — Neon sponsors the infrastructure for your free tier users.
 
 ### Consumption metrics
 
@@ -135,4 +135,4 @@ Once enrolled in the agent plan:
 3. Configure resource quotas per project as needed
 4. Monitor usage and billing using the Neon API
 
-For step-by-step implementation instructions, see the [Agent plan integration guide](/docs/guides/ai-agent-integration).
+For step-by-step implementation instructions, see the [AI Agent integration guide](/docs/guides/ai-agent-integration).

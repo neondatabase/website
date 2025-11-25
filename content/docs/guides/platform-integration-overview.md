@@ -8,7 +8,7 @@ updatedOn: '2025-11-05T00:00:00.000Z'
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
 
-## OAuth integration
+## ☑ OAuth integration
 
 **Best for:** Tools and applications that need to interact with existing Neon user accounts
 
@@ -37,7 +37,7 @@ Use OAuth when you're building a tool or service that connects to existing Neon 
 
 ---
 
-## Embedded Postgres
+## ☑ Embedded Postgres integration
 
 **Best for:** SaaS platforms and services that offer Postgres databases to their users
 
@@ -69,9 +69,9 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 ---
 
-## Neon for AI Agents
+## ☑ AI Agents integration
 
-**Best for:** AI agent platforms and codegen services that need database versioning and isolated environments
+**Best for:** AI agent and codegen platforms that need database versioning and isolated environments
 
 Use this approach if you're building an AI agent platform or code generation service where agents create and manage databases programmatically. This integration includes everything from the embedded Postgres approach, plus specific features for agent workflows.
 
@@ -97,7 +97,7 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 <a href="/docs/guides/ai-agent-integration" description="Learn about the agent-specific integration" icon="openai">AI Agent integration guide</a>
 
-<a href="/docs/ai/ai-database-versioning" description="Learn about database versioning for agents" icon="branching">Database versioning</a>
+<a href="/docs/ai/ai-database-versioning" description="Learn about database versioning for AI agents" icon="branching">Database versioning</a>
 
 </DetailIconCards>
 
