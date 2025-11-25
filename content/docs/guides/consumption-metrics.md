@@ -9,19 +9,19 @@ updatedOn: '2025-09-05T17:14:39.189Z'
 ---
 
 <Admonition type="note">
-These consumption metrics apply to Scale plan accounts and to [Neon's legacy Scale, Business, and Enterprise accounts](/docs/introduction/legacy-plans). Consumption history is available starting from March 1, 2024, at 00:00:00 UTC.
+Consumption metrics apply to Scale and Enterprise plan accounts, and to [Neon's legacy Scale, Business, and Enterprise accounts](/docs/introduction/legacy-plans).
 
-**Important:** These APIs do not retrieve all billable metrics for Neon's current [usage-based Scale plan](https://neon.com/docs/introduction/about-billing). See [Usage-based pricing limitations](#usage-based-pricing-limitations) for details.
+**Important:** The consumption APIs do not retrieve all billable metrics for Neon's current [usage-based Scale plan](https://neon.com/docs/introduction/about-billing). See [Usage-based pricing limitations](#usage-based-pricing-limitations) for details.
 </Admonition>
 
-Using the Neon API, you can query a range of account and project metrics to help gauge your resource consumption. Issuing calls to these APIs does not wake a project's compute endpoints.
+Using the Neon API, you can query a range of account-level and project-level metrics to help you track your resource consumption. Issuing calls to these APIs does not wake a project's compute endpoints.
 
 Here are the different ways to retrieve these metrics:
 
-| Endpoint                                                                                                         | Description                                                                                                           | Plan availability                                  |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                | Scale and legacy Scale, Business, Enterprise plans |
-| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) | Scale and legacy Scale, Business, Enterprise plans |
+| Endpoint                                                                                                         | Description                                                                                                           | Plan availability                                              |
+| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
+| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
 
 ## Get account-level aggregated metrics
 
@@ -33,11 +33,15 @@ API endpoint:
 GET https://console.neon.tech/api/v2/consumption_history/account
 ```
 
+<Admonition type="tip">
+You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)—just fill in the required parameters and add your API key to see live results.
+</Admonition>
+
 This endpoint accepts the following query parameters:
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. For example, `2024-03-15T15:30:00Z` for daily granularity will be rounded to `2024-03-15T00:00:00Z`.
+- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity. For example, `2024-03-15T15:30:00Z` for daily granularity will be rounded to `2024-03-15T00:00:00Z`.
 
 - **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
 
@@ -128,11 +132,15 @@ API endpoint:
 GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
+<Admonition type="tip">
+You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)—just fill in the required parameters and add your API key to see live results.
+</Admonition>
+
 This endpoint accepts the following query parameters:
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
+- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
 
 - **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
 
@@ -304,13 +312,13 @@ For detailed information about these limitations and what the APIs are best used
 
 ## Usage-based pricing limitations
 
-These consumption APIs were designed for Neon's legacy billing model and do not fully align with the current [usage-based Scale plan pricing](/docs/introduction/plans) structure introduced in August 2025.
+These consumption APIs were designed for Neon's legacy billing plans and do not fully align with the current [usage-based plan](/docs/introduction/plans) structure introduced in August 2025.
 
 ### Storage metrics differences
 
 **Legacy billing model:**
 
-- Used `synthetic_storage_size_bytes`, which combined logical data size and Write-Ahead Log (WAL) data for all branches into a single metric
+- Uses `synthetic_storage_size_bytes`, which combines logical data size and Write-Ahead Log (WAL) data for all branches into a single metric
 
 **Current usage-based pricing:**
 
@@ -338,17 +346,15 @@ Even if you're on the current usage-based Scale plan, the consumption APIs remai
 - Getting aggregate storage consumption (`synthetic_storage_size_bytes`)
 - Legacy Scale, Business, and Enterprise plan billing reconciliation
 
-For detailed billing information on the current usage-based Scale plan, refer to your invoice in the Neon Console or contact [support](/docs/introduction/support).
-
 <Admonition type="note">
-We plan to enhance these APIs in future releases to provide metrics that align with the current usage-based Scale plan billing structure.
+We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based Scale plan billing structure.
 </Admonition>
 
 ## Error responses
 
 Common error responses you may encounter:
 
-- **403 Forbidden** — This endpoint is only available for Scale, Business, and Enterprise plan accounts.
+- **403 Forbidden** — This endpoint is only available for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts.
 - **404 Not Found** — Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable** — The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different granularity.
 - **429 Too Many Requests** — You've exceeded the rate limit. Wait before retrying.
