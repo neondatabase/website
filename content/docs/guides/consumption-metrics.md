@@ -1,6 +1,6 @@
 ---
 title: Querying consumption metrics
-subtitle: Learn how to get a variety of consumption metrics using the Neon API
+subtitle: Learn how to query project and account consumption metrics using the Neon API
 redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
