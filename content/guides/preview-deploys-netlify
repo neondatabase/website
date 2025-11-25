@@ -303,8 +303,7 @@ Create `.github/workflows/deploy-preview.yml`:
 ```yml
 name: Deploy Preview
 
-on:
-  pull_request:
+on: [pull_request]
 
 env:
   NEON_API_KEY: ${{ secrets.NEON_API_KEY }}
