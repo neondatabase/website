@@ -74,6 +74,7 @@ deno run -A get-db
 | `--key <string>`    | `-k`  | Env var for connection string         | `DATABASE_URL` |
 | `--prefix <string>` | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
 | `--seed <path>`     | `-s`  | Path to SQL file to seed the database | not set        |
+| `--ref <string>`    | `-r`  | Referrer ID for affiliates program    | not set        |
 | `--help`            | `-h`  | Show help message                     |                |
 
 **Examples:**
@@ -101,8 +102,8 @@ The CLI writes the connection string, claim URL, and expiration to the specified
 ```txt
 # Claimable DB expires at: Sun, 05 Oct 2025 23:11:33 GMT
 # Claim it now to your account: https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
-DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-DATABASE_URL_POOLER=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
 PUBLIC_INSTAGRES_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
 ```
 
@@ -162,8 +163,8 @@ export default defineConfig({
 3. If the environment variable is missing, the plugin:
    - Automatically creates a new Neon claimable database
    - Adds two connection strings to your environment file:
-     - `DATABASE_URL` - Standard connection string
-     - `DATABASE_URL_POOLER` - Connection pooler string
+     - `DATABASE_URL` - Connection pooler string (default)
+     - `DATABASE_URL_DIRECT` - Direct connection string
    - Includes the claimable URL as a comment and public variable in the environment file
 
 The plugin is inactive during production builds (`vite build`) to prevent changes to environment files and database provisioning in production environments. If `seed` is configured, the specified SQL script is executed after database creation. If an error occurs (such as a missing or invalid SQL file), an error message will be displayed.
