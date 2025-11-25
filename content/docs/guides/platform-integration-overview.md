@@ -105,7 +105,7 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 If you're uncertain which path is right for you, here's a quick decision tree:
 
-1. **Are you building an application or serice that will manage/monitor/interact wiith existing Neon accounts?**  
+1. **Are you building an application or service that will manage/monitor/interact with existing Neon accounts?**  
    → Use [OAuth integration](/docs/guides/oauth-integration)
 
 2. **Are you offering Postgres databases as part of your SaaS platform?**  
