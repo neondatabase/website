@@ -2,6 +2,9 @@
 
 Learn how to set up automated preview deployments with isolated database branches for every pull request using GitHub Actions, Netlify, and Neon Postgres.
 
+> **Sample Starter**:  
+> You can try out (or fork) this complete starter: [rishi-raj-jain/preview-branches-with-netlify](https://github.com/rishi-raj-jain/preview-branches-with-netlify)
+
 ## Introduction
 
 When building modern web applications, it's crucial to test changes in an environment that closely mirrors production before merging them. This guide shows you how to create an automated workflow that:
