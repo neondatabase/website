@@ -23,6 +23,12 @@ Here are the different ways to retrieve these metrics:
 | [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
 | [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
 
+<Admonition type="info">
+**Date format:** Both endpoints require timestamps in RFC 3339 format, which looks like `2024-06-30T15:30:00Z`. This format includes the date, time, and timezone (the `Z` indicates UTC). You can use this [timestamp converter](https://it-tools.tech/date-converter) to generate RFC 3339 formatted timestamps.
+
+**Important:** Consumption history is available starting from March 1, 2024, at 00:00:00 UTC. You cannot query consumption data before this date.
+</Admonition>
+
 ## Get account-level aggregated metrics
 
 Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
@@ -280,9 +286,8 @@ When setting the `from` and `to` parameters, keep these limits in mind based on 
 **Important notes:**
 
 - Time values must be provided in RFC 3339 format (e.g., `2024-06-30T15:30:00Z`)
-- Consumption history is available starting from March 1, 2024, at 00:00:00 UTC
+- Consumption history is available starting from March 1, 2024, at 00:00:00 UTC. You cannot query data before this date.
 - Date-time values are automatically rounded according to granularity. For example, `2024-03-15T15:30:00Z` with daily granularity becomes `2024-03-15T00:00:00Z`
-- You can use this [timestamp converter](https://it-tools.tech/date-converter) to generate RFC 3339 formatted timestamps
 
 ## Consumption polling FAQ
 
