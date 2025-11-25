@@ -26,21 +26,21 @@ This integration guide walks through:
 
 ## Before you begin
 
-After enrolling in the agent plan, you should have:
+After enrolling in the [Neon Agent Plan](/docs/introduction/agent-plan), you should have:
 
 - **Two Neon organization IDs** — One for Free (sponsored) projects, one for paid projects
 - **Organization API keys** — For creating and managing projects in each organization
 - **Personal API key** — For transferring projects between organizations
-- **Admin access** — Full control over both organizations via the Neon API
+- **Admin access** — Full control over both organizations via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 
-Keep these credentials secure. You'll use them for all API operations in this guide. If you do not have the API keys, see [Manage API keys](/docs/manage/api-keys) for how to retrieve them.
+Keep your API keys secure. You'll use them for all API operations in this guide. If you do not have the API keys, see [Manage API keys](/docs/manage/api-keys) for how to retrieve them.
 
 ### Project-per-tenant architecture
 
 This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward at the project level, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
-For details about **Agent plan** structure, pricing, and benefits, see [Agent plan overview](/docs/introduction/agent-plan).
+For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
 </Admonition>
 
 <Steps>
@@ -186,7 +186,7 @@ For the best user experience:
 
 ### Getting connection strings
 
-After creating a project, retrieve the connection string to give to your users using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) API:
+After creating a project, retrieve the database connection string to give to your users using the [Retrieve connection URI](https://api-docs.neon.tech/reference/getconnectionuri) API:
 
 ```bash
 curl --request GET \
