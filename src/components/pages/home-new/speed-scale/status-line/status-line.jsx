@@ -27,7 +27,7 @@ const StatusLine = ({ className }) => (
     <div
       className={cn(
         'relative flex items-center justify-between pl-40',
-        'font-mono text-sm leading-dense -tracking-[0.05em] text-gray-new-60',
+        'font-mono-new text-sm leading-dense -tracking-[0.05em] text-gray-new-60',
         '2xl:pl-0 xl:text-xs lg:text-[9px]',
         className
       )}
