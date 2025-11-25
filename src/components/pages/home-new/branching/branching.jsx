@@ -1,12 +1,12 @@
-import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import anonymIcon from 'icons/home-new/branching/anonym-icon.svg';
 import squareIcon from 'icons/home-new/branching/square-icon.svg';
-import branching from 'images/pages/home-new/branching/branching-illustration.png';
 
 import Heading from '../heading';
+
+import Animation from './animation';
 
 const ITEMS = [
   {
@@ -43,20 +43,7 @@ const Branching = () => (
           icon="branching"
           title="<strong>Instant branching.</strong> Develop and test new features and migrations with data & schema branches to eliminate surprises in production deploys."
         />
-
-        {/* TODO: replace image with animation */}
-        <Image
-          className={clsx(
-            'pointer-events-none relative -ml-[34px] mt-14 max-w-none',
-            'xl:mt-12 xl:w-[94vw] lg:-ml-4 lg:w-[96vw] md:left-1/2 md:-ml-[50vw] md:w-screen'
-          )}
-          src={branching}
-          width={1184}
-          height={500}
-          quality={100}
-          alt=""
-        />
-
+        <Animation />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
           {ITEMS.map(({ icon, title, description }, index) => (
             <li key={index}>
