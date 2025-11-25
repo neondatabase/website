@@ -9,13 +9,12 @@ updatedOn: '2025-11-03T17:05:16.902Z'
 <DocsList title="What you will learn:">
 <p>How the agent plan is organized</p>
 <p>How the agent plan works</p>
-<p>How to use the Neon API to manage the plan</p>
+<p>How to get started</p>
 </DocsList>
 <DocsList title="Related topics" theme="docs">
-<a href="/docs/guides/ai-agent-integration">Agent plan integration guide</a>
-<a href="/docs/guides/platform-integration-intro">Neon platform integration</a>
-<a href="/docs/ai/ai-database-versioning">Neon database versioning</a>
-<a href="/programs/agents">Neon agent program</a>
+<a href="/docs/guides/ai-agent-integration">AI agent integration guide</a>
+<a href="/docs/guides/platform-integration-overview">Integrating with Neon</a>
+<a href="/docs/ai/ai-database-versioning">Database versioning with snapshots</a>
 </DocsList>
 </InfoBlock>
 

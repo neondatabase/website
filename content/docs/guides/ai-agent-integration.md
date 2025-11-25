@@ -11,7 +11,7 @@ This guide covers the technical implementation of the Neon agent plan for your p
 <CTA title="Learn from other agent platform builders" description="See how <a href='https://neon.com/blog/the-hidden-ops-layer-of-agent-platforms'>Anything manages per-agent isolation at scale</a>, <a href='https://neon.com/blog/databutton-neon-integration'>Databutton built full-stack AI agents with Postgres and Auth</a>, and <a href='https://neon.com/blog/building-versioning-for-ai-generated-apps'>Dyad implemented database versioning for AI-generated apps</a> using Neon." isIntro></CTA>
 
 <Admonition type="note">
-**Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan) with admin access to both your Free (sponsored) and paid organizations. If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
+**Prerequisites:** You must be enrolled in the [Neon Agent Plan](/docs/introduction/agent-plan). If you haven't applied yet, visit [Neon for AI Agent Platforms](https://neon.com/use-cases/ai-agents).
 </Admonition>
 
 ## What you'll learn
@@ -22,7 +22,7 @@ This integration guide walks through:
 2. **Handling user upgrades** — Transferring projects between organizations when users change tiers
 3. **Implementing database versioning** — Using PITR and snapshots for undo/redo functionality
 4. **Creating development environments** — Setting up isolated branches for safe testing
-5. **Monitoring and billing** — Tracking consumption metrics and configuring limits
+5. **Monitoring and billing** — Tracking usage and configuring limits
 
 ## Before you begin
 
@@ -37,7 +37,7 @@ Keep your API keys secure. You'll use them for all API operations in this guide.
 
 ### Project-per-tenant architecture
 
-This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward at the project level, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
+This integration uses a **project-per-tenant model**, where each tenant (user, app, or agent) gets its own dedicated Neon [project](/docs/manage/overview) (containing branches, databases, roles, and computes). This provides complete data and resource isolation, makes consumption limits and billing straightforward, and aligns with how the Neon API is designed. For more on this database-per-tenant approach, see [Data Isolation at Scale](https://neon.com/use-cases/database-per-tenant).
 
 <Admonition type="tip">
 For details about **Agent plan** structure, pricing, and benefits, refer to the [Neon Agent Plan](/docs/introduction/agent-plan) docs.
@@ -536,27 +536,9 @@ All platform integrations use the Neon API. You can call it directly or use lang
 
 - **Storage grows larger than expected** — Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
 
-## Additional resources
-
-<DetailIconCards>
-
-<a href="/docs/introduction/agent-plan" description="Learn about plan structure, pricing, and program benefits" icon="database">Neon Agent Plan</a>
-
-<a href="/docs/ai/ai-database-versioning" description="Implement versioning with branches, snapshots, and point-in-time recovery" icon="branching">Database versioning for AI agents</a>
-
-<a href="/docs/manage/orgs-project-transfer" description="Move projects between organizations when users upgrade or downgrade" icon="import">Transfer projects</a>
-
-<a href="/docs/guides/consumption-metrics" description="Query usage metrics for billing and monitoring" icon="transactions">Query consumption metrics</a>
-
-<a href="/docs/reference/api-reference" description="Complete reference for all Neon API endpoints" icon="transactions">Neon API Reference</a>
-
-<a href="https://github.com/neondatabase/toolkit" description="TypeScript SDK with API client and serverless driver" icon="github">Neon Toolkit</a>
-
-</DetailIconCards>
-
 ## Support
 
-As an agent plan participant, you have access to:
+As an Neon Agent Plan participant, you have access to:
 
 - **Dedicated Slack channel** — Direct access to the Neon team for technical questions
 - **Your Neon representative** — Contact them for rate limit adjustments, limit increases, or custom needs
