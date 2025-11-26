@@ -105,6 +105,20 @@ The `max_connections` setting still applies for direct Postgres connections.
 You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
+### Pool lifecycle and compute restarts
+
+Connection pools, when combined with proper health-checks and lifecycle management, significantly reduce user-facing disruptions during compute restarts (such as during maintenance or updates). Here's how pools help maintain a smooth user experience:
+
+- **Automatic reconnection**: Most production connection pools automatically detect stale connections and replace them with new ones. When a compute restart occurs, the pool discards dead connections and establishes fresh ones transparently.
+
+- **Health-checks and validation**: Connection pools can be configured with health-check queries (like `pool_pre_ping` in SQLAlchemy, validation queries in HikariCP, or connection checks in other poolers) that test connections before handing them to your application. This ensures your application never receives a broken connection.
+
+- **Connection lifecycle tuning**: Configuring settings like `maxLifetime` (in HikariCP) or `idleTimeoutMillis` (in `node-postgres`) ensures that connections are periodically refreshed. This prevents long-lived connections from becoming stale and reduces the likelihood of connection errors.
+
+- **Retry logic integration**: When combined with [retry logic and exponential backoff](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application), connection pools provide a robust foundation for handling brief interruptions. The pool handles connection-level failures while your retry logic handles query-level transient errors.
+
+For complete guidance on building resilient applications with connection pooling, retry logic, and transient error handling, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+
 ## PgBouncer
 
 PgBouncer is an open-source connection pooler for Postgres. When an application needs to connect to a database, PgBouncer provides a connection from the pool. Connections in the pool are routed to a smaller number of actual Postgres connections. When a connection is no longer required, it is returned to the pool and is available to be used again. Maintaining a pool of available connections improves performance by reducing the number of connections that need to be created and torn down to service incoming requests. Connection pooling also helps avoid rejected connections. When all connections in the pool are being used, PgBouncer queues a new request until a connection from the pool becomes available.

@@ -471,6 +471,31 @@ The Neon serverless driver enables you to query data over **HTTP** or **WebSocke
 
 For a step-by-step guide to setting up a local environment, refer to this community guide: [Local Development with Neon](/guides/local-development-with-neon). The guide demonstrates how to use a [community-developed Docker Compose file](https://github.com/TimoWilhelm/local-neon-http-proxy) to configure a local Postgres database and a Neon proxy service. This setup allows connections over both WebSockets and HTTP.
 
+## Handling transient connection drops
+
+Like any cloud database service, Neon may occasionally experience brief connection drops during maintenance, updates, or network interruptions. When using the Neon serverless driver, especially over HTTP, you should implement retry logic to handle these transient errors gracefully.
+
+Here's a minimal retry example using the `async-retry` library with the HTTP driver:
+
+```javascript
+import { neon } from '@neondatabase/serverless';
+import retry from 'async-retry';
+
+const sql = neon(process.env.DATABASE_URL);
+
+const result = await retry(
+  async () => {
+    return await sql`SELECT * FROM users WHERE id = ${userId}`;
+  },
+  {
+    retries: 5,
+    factor: 2,
+    minTimeout: 1000,
+    randomize: true,
+  }
+);
+```
+
 ## Example applications
 
 Explore the example applications that use the Neon serverless driver.

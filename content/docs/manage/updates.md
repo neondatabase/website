@@ -9,6 +9,10 @@ To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres inst
 
 Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
+<Admonition type="important">
+Brief connection drops are expected during compute updates. Verify that your application has a retry policy configured to handle these brief interruptions. For guidance on implementing retry logic, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+</Admonition>
+
 ## What updates are included?
 
 Updates to Neon computes may include some or all of the following:
@@ -162,5 +166,10 @@ Most Postgres connection drivers include built-in retry mechanisms that automati
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
 If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+
+## See also
+
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres) — Best practices for handling connection drops with retry logic, connection pooling, and idempotency
+- [Connection latency and timeouts](/docs/connect/connection-latency) — Strategies for managing connection latencies and timeouts
 
 <NeedHelp/>

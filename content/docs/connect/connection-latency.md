@@ -184,8 +184,11 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
+For complete examples with connection pooling, transaction handling, and idempotency patterns for write operations, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+
 #### Connection retry references
 
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres)
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's scale to zero](/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 
