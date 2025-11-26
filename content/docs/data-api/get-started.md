@@ -220,24 +220,25 @@ npm install @neondatabase/neon-js
 
 ### Use the SDK
 
-The Neon SDK provides a unified client that combines authentication and database querying. Here's an example:
+The Neon SDK provides a unified client that combines authentication and database querying. For example:
 
 ```ts shouldWrap
 import { createClient, BetterAuthVanillaAdapter } from '@neondatabase/neon-js';
+import type { Database } from './types/database.types';
+
+// Create and export the client for reuse across your app
+export const client = createClient<Database>({ // [!code highlight]
+  auth: { // [!code highlight]
+    adapter: BetterAuthVanillaAdapter, // [!code highlight]
+    url: import.meta.env.VITE_NEON_AUTH_URL, // [!code highlight]
+  }, // [!code highlight]
+  dataApi: { // [!code highlight]
+    url: import.meta.env.VITE_NEON_DATA_API_URL, // [!code highlight]
+  }, // [!code highlight]
+}); // [!code highlight]
 
 // Example: fetch notes for the current user
-async function fetchUserNotes() {
-  // Create client with auth integration // [!code highlight]
-  const client = createClient({ // [!code highlight]
-    auth: { // [!code highlight]
-      adapter: BetterAuthVanillaAdapter, // [!code highlight]
-      url: import.meta.env.VITE_NEON_AUTH_URL, // [!code highlight]
-    }, // [!code highlight]
-    dataApi: { // [!code highlight]
-      url: import.meta.env.VITE_NEON_DATA_API_URL, // [!code highlight]
-    }, // [!code highlight]
-  }); // [!code highlight]
-  
+export async function fetchUserNotes() {
   // Get current session // [!code highlight]
   const session = await client.auth.getSession(); // [!code highlight]
   if (!session) return null;
@@ -262,9 +263,10 @@ This example uses `BetterAuthVanillaAdapter` for direct Better Auth API access. 
 This example shows the key steps:
 
 1. Create a unified client with `createClient()` that handles both authentication and database access
-2. Get the current session with `client.auth.getSession()`
-3. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
-4. JWT tokens are automatically injected into all database requests
+2. Export the client for reuse throughout your application
+3. Get the current session with `client.auth.getSession()`
+4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
+5. JWT tokens are automatically injected into all database requests
 
 To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
 
