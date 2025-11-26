@@ -19,16 +19,19 @@ import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
 import CursorLogo from './images/cursor.inline.svg';
 import DatabuttonLogo from './images/databutton.inline.svg';
+import DoorDashLogo from './images/door-dash.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
 import Fl0Logo from './images/fl0.inline.svg';
 import GenomicsLogo from './images/genomics.inline.svg';
 import HasuraLogo from './images/hasura.inline.svg';
 import IllaLogo from './images/illa.inline.svg';
+import MetaLogo from './images/meta.inline.svg';
 import OctolisLogo from './images/octolis.inline.svg';
 import OpenAILogo from './images/openai.inline.svg';
 import OpusLogo from './images/opus.inline.svg';
 import OutfrontLogo from './images/outfront7.inline.svg';
+import PepsiLogo from './images/pepsi.inline.svg';
 import ReplitLogo from './images/replit.inline.svg';
 import RetoolLogo from './images/retool.inline.svg';
 import RubricLogo from './images/rubric.inline.svg';
@@ -63,6 +66,7 @@ const allLogos = {
   commure: CommureLogo,
   cursor: CursorLogo,
   databutton: DatabuttonLogo,
+  doordash: DoorDashLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
   'fabric-io': FabricIoLogo,
@@ -89,17 +93,34 @@ const allLogos = {
   wundergraph: WundergraphLogo,
   zed: ZedLogo,
   zimmer: ZimmerBioLogo,
+  meta: MetaLogo,
+  pepsi: PepsiLogo,
 };
 
 const sizes = {
   sm: 'h-6 lg:h-[22px] md:h-5',
+  md: 'h-7 xl:h-6 lg:h-[22px] md:h-5',
   lg: 'h-10 md:h-8',
 };
 
-const LogosWall = ({ className, logoClassName, logos, size = 'lg' }) => (
-  <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', className)}>
+const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop }) => (
+  <div
+    className={clsx(
+      'logos flex w-full overflow-hidden',
+      staticDesktop ? 'xl:logos-animated' : 'logos-animated',
+      className
+    )}
+  >
     {Array.from({ length: 2 }).map((_, index) => (
-      <ul key={index} className="logos-content !m-0 !p-0" aria-hidden={index > 0 && 'true'}>
+      <ul
+        key={index}
+        className={clsx(
+          'logos-content !m-0 flex !p-0',
+          staticDesktop && 'w-full justify-between xl:justify-normal',
+          staticDesktop && index === 1 && 'hidden xl:flex'
+        )}
+        aria-hidden={index > 0 && 'true'}
+      >
         {logos.map((logo, index) => {
           const Logo = allLogos[logo];
           if (!Logo) return null;
@@ -119,18 +140,25 @@ LogosWall.propTypes = {
   logoClassName: PropTypes.string,
   logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
   size: PropTypes.oneOf(Object.keys(sizes)),
+  staticDesktop: PropTypes.bool,
 };
 
-const Logos = ({ className, logoClassName, withGreenFade, logos, size }) => (
+const Logos = ({ className, logoClassName, withGreenFade, logos, size, staticDesktop }) => (
   <Container size="medium" className={clsx('w-full', className)}>
     <div className="relative select-none">
-      <LogosWall logos={logos} size={size} logoClassName={logoClassName} />
+      <LogosWall
+        logos={logos}
+        size={size}
+        logoClassName={logoClassName}
+        staticDesktop={staticDesktop}
+      />
       {withGreenFade && (
         <LogosWall
           className="logos-central-mask absolute inset-0"
           logos={logos}
           logoClassName={clsx('fill-green-45', logoClassName)}
           size={size}
+          staticDesktop={staticDesktop}
         />
       )}
     </div>
@@ -143,7 +171,9 @@ Logos.propTypes = {
   withGreenFade: PropTypes.bool,
   logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
   size: PropTypes.oneOf(Object.keys(sizes)),
+  staticDesktop: PropTypes.bool,
 };
 
-export { LogosWall };
+export { LogosWall, allLogos };
+
 export default Logos;

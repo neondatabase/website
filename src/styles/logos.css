@@ -27,11 +27,14 @@
     gap: var(--gap);
   }
 
-  .logos-content {
-    @apply flex will-change-transform;
+  .logos-animated {
+    @apply relative before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-[100px] before:bg-gradient-to-r before:from-black-pure before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-[100px] after:bg-gradient-to-l after:from-black-pure after:to-transparent;
 
-    gap: var(--gap);
-    animation: infinityScroll 60s linear infinite;
+    .logos-content {
+      @apply will-change-transform;
+      gap: var(--gap);
+      animation: infinityScroll 60s linear infinite;
+    }
   }
 
   .logos-central-mask {
@@ -40,9 +43,5 @@
     @screen md {
       mask-image: radial-gradient(200px at 50% -100px, black 25%, transparent 100%);
     }
-  }
-
-  .logos-sides-fade {
-    @apply relative before:absolute before:bottom-0 before:left-0 before:top-0 before:z-10 before:w-[100px] before:bg-gradient-to-r before:from-black-pure before:to-transparent after:absolute after:bottom-0 after:right-0 after:top-0 after:z-10 after:w-[100px] after:bg-gradient-to-l after:from-black-pure after:to-transparent;
   }
 }
