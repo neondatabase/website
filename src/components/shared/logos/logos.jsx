@@ -11,10 +11,13 @@ import BasehubLogo from './images/basehub.inline.svg';
 import BCGLogo from './images/bcg.inline.svg';
 import BranchLogo from './images/branch.inline.svg';
 import BunnyshellLogo from './images/bunnyshell.inline.svg';
+import ClaudeLogo from './images/claude.inline.svg';
+import ClineLogo from './images/cline.inline.svg';
 import CloudflareLogo from './images/cloudflare.inline.svg';
 import CodeInstituteLogo from './images/code-institute.inline.svg';
 import ComigoLogo from './images/comigo.inline.svg';
 import CommureLogo from './images/commure.inline.svg';
+import CursorLogo from './images/cursor.inline.svg';
 import DatabuttonLogo from './images/databutton.inline.svg';
 import EncoreLogo from './images/encore.inline.svg';
 import EqtLogo from './images/eqt.inline.svg';
@@ -36,23 +39,29 @@ import SolarLogo from './images/solar.inline.svg';
 import SupergoodLogo from './images/supergood.inline.svg';
 import FabricIoLogo from './images/the-fabric-io.inline.svg';
 import VercelLogo from './images/vercel.inline.svg';
+import VscodeLogo from './images/vscode.inline.svg';
+import WindsurfLogo from './images/windsurf.inline.svg';
 import WordwareLogo from './images/wordware.inline.svg';
 import WundergraphLogo from './images/wundergraph.inline.svg';
+import ZedLogo from './images/zed.inline.svg';
 import ZimmerBioLogo from './images/zimmer-biomet.inline.svg';
 
 const allLogos = {
   adobe: AdobeLogo,
   akqa: AKQALogo,
   albertsons: AlbertsonsLogo,
+  anything: AnythingLogo,
   basehub: BasehubLogo,
   bcg: BCGLogo,
   branch: BranchLogo,
   bunnyshell: BunnyshellLogo,
+  claude: ClaudeLogo,
+  cline: ClineLogo,
   cloudflare: CloudflareLogo,
   'code-institute': CodeInstituteLogo,
   comigo: ComigoLogo,
   commure: CommureLogo,
-  anything: AnythingLogo,
+  cursor: CursorLogo,
   databutton: DatabuttonLogo,
   encore: EncoreLogo,
   eqt: EqtLogo,
@@ -69,29 +78,28 @@ const allLogos = {
   retool: RetoolLogo,
   rubric: RubricLogo,
   same: SameLogo,
-  solar: SolarLogo,
   shakudo: ShakudoLogo,
   snaplet: SnapletLogo,
+  solar: SolarLogo,
   supergood: SupergoodLogo,
   vercel: VercelLogo,
+  vscode: VscodeLogo,
+  windsurf: WindsurfLogo,
   wordware: WordwareLogo,
   wundergraph: WundergraphLogo,
+  zed: ZedLogo,
   zimmer: ZimmerBioLogo,
 };
 
 const sizes = {
-  sm: 'h-6',
+  sm: 'h-6 lg:h-[22px] md:h-5',
   lg: 'h-10 md:h-8',
 };
 
-const LogosWall = ({ className, logoClassName, logos, size = 'lg', gap }) => (
-  <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', gap, className)}>
+const LogosWall = ({ className, logoClassName, logos, size = 'lg' }) => (
+  <div className={clsx('logos logos-sides-fade flex w-full overflow-hidden', className)}>
     {Array.from({ length: 2 }).map((_, index) => (
-      <ul
-        key={index}
-        className={clsx('logos-content !m-0 !p-0', gap)}
-        aria-hidden={index > 0 && 'true'}
-      >
+      <ul key={index} className="logos-content !m-0 !p-0" aria-hidden={index > 0 && 'true'}>
         {logos.map((logo, index) => {
           const Logo = allLogos[logo];
           if (!Logo) return null;
@@ -111,18 +119,17 @@ LogosWall.propTypes = {
   logoClassName: PropTypes.string,
   logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
   size: PropTypes.oneOf(Object.keys(sizes)),
-  gap: PropTypes.string,
 };
 
-const Logos = ({ className = '', withGreenFade = false, logos, size }) => (
+const Logos = ({ className, logoClassName, withGreenFade, logos, size }) => (
   <Container size="medium" className={clsx('w-full', className)}>
     <div className="relative select-none">
-      <LogosWall logos={logos} size={size} />
+      <LogosWall logos={logos} size={size} logoClassName={logoClassName} />
       {withGreenFade && (
         <LogosWall
           className="logos-central-mask absolute inset-0"
           logos={logos}
-          logoClassName="fill-green-45"
+          logoClassName={clsx('fill-green-45', logoClassName)}
           size={size}
         />
       )}
@@ -132,6 +139,7 @@ const Logos = ({ className = '', withGreenFade = false, logos, size }) => (
 
 Logos.propTypes = {
   className: PropTypes.string,
+  logoClassName: PropTypes.string,
   withGreenFade: PropTypes.bool,
   logos: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(allLogos))).isRequired,
   size: PropTypes.oneOf(Object.keys(sizes)),

@@ -21,6 +21,7 @@ const RiveAnimation = ({
   animationRootMargin = '300px 0px',
   autoBind = false,
   onLoad,
+  ...riveProps
 }) => {
   const isTouch = useIsTouchDevice();
   const [containerRef, isIntersecting] = useInView({
@@ -43,6 +44,7 @@ const RiveAnimation = ({
       rive?.resizeDrawingSurfaceToCanvas();
       onLoad?.();
     },
+    ...riveProps,
   });
 
   useEffect(() => {
@@ -66,11 +68,11 @@ const RiveAnimation = ({
       />
       <div
         className={clsx(
-          className,
+          'size-full [&_canvas]:!h-auto [&_canvas]:!w-full',
           {
             'pointer-events-none': isTouch,
           },
-          '[&_canvas]:!h-auto [&_canvas]:!w-full'
+          className
         )}
         ref={animationRef}
         aria-hidden

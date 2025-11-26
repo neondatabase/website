@@ -10,18 +10,18 @@
   }
 
   .logos {
-    --gap: theme(spacing.24);
+    --gap: theme(spacing.20);
 
-    @screen 2xl {
-      --gap: theme(spacing.20);
+    @screen xl {
+      --gap: theme(spacing.16);
     }
 
-    @screen md {
+    @screen lg {
       --gap: theme(spacing.14);
     }
 
-    &-sm {
-      --gap: theme(spacing.9);
+    @screen md {
+      --gap: theme(spacing.10);
     }
 
     gap: var(--gap);
