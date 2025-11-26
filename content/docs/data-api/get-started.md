@@ -212,6 +212,8 @@ With the `posts` table and its RLS policies in place, you can now securely query
 
 ### Install the SDK
 
+Install the [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) package:
+
 ```bash
 npm install @neondatabase/neon-js
 ```
@@ -221,21 +223,26 @@ npm install @neondatabase/neon-js
 The Neon SDK provides a unified client that combines authentication and database querying. Here's an example:
 
 ```ts shouldWrap
-import { createClient } from '@neondatabase/neon-js';
+import { createClient, BetterAuthVanillaAdapter } from '@neondatabase/neon-js';
 
 // Example: fetch notes for the current user
 async function fetchUserNotes() {
   // Create client with auth integration // [!code highlight]
   const client = createClient({ // [!code highlight]
-    dataApiUrl: import.meta.env.VITE_DATA_API_URL, // [!code highlight]
-    authUrl: import.meta.env.VITE_AUTH_URL // [!code highlight]
+    auth: { // [!code highlight]
+      adapter: BetterAuthVanillaAdapter, // [!code highlight]
+      url: import.meta.env.VITE_NEON_AUTH_URL, // [!code highlight]
+    }, // [!code highlight]
+    dataApi: { // [!code highlight]
+      url: import.meta.env.VITE_NEON_DATA_API_URL, // [!code highlight]
+    }, // [!code highlight]
   }); // [!code highlight]
   
   // Get current session // [!code highlight]
-  const { data: sessionData } = await client.auth.getSession(); // [!code highlight]
-  if (!sessionData.session) return null;
+  const session = await client.auth.getSession(); // [!code highlight]
+  if (!session) return null;
   
-  const user = sessionData.session.user;
+  const user = session.user;
   
   // Query database - token automatically injected! // [!code highlight]
   const { data, error } = await client
@@ -247,6 +254,10 @@ async function fetchUserNotes() {
   return { data, error };
 }
 ```
+
+<Admonition type="tip" title="Other authentication adapters">
+This example uses `BetterAuthVanillaAdapter` for direct Better Auth API access. If you prefer a Supabase-compatible API, use `SupabaseAuthAdapter` instead, which provides familiar methods like `signInWithPassword()`. See the [Neon Auth documentation](/docs/guides/neon-auth) for all available adapters and their APIs.
+</Admonition>
 
 This example shows the key steps:
 
