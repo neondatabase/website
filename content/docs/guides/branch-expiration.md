@@ -3,7 +3,7 @@ title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete
   temporary branches
 enableTableOfContents: true
-updatedOn: '2025-10-24T21:38:50.618Z'
+updatedOn: '2025-11-13T15:22:07.936Z'
 ---
 
 ## Overview
@@ -11,11 +11,11 @@ updatedOn: '2025-10-24T21:38:50.618Z'
 Branch expiration allows you to set automatic deletion timestamps on branches. When a branch reaches its expiration time, it is automatically deleted.
 
 <Admonition type="tip" title="Quick guide">
-**Console:** When creating a branch, check **Expire branch after** and choose a preset (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
+**Console:** When creating a branch, **Automatically delete branch after** is checked by default with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. When updating an existing branch, you can select a custom date and time.
 
-**CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
+**CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
 
-**API:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`)
+**API:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
 </Admonition>
 
 <InfoBlock>
@@ -71,9 +71,9 @@ Branch deletion is permanent and cannot be recovered. All associated data and co
 
 You can set, update, or remove expiration timestamps through three interfaces:
 
-- **Console** - When creating a branch, check **Expire branch after** and choose a preset option (1 hour, 1 day, or 7 days). When updating, select a custom date and time.
-- **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format
-- **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format
+- **Console** - When creating a branch, **Automatically delete branch after** is checked by default with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. When updating an existing branch, you can select a custom date and time.
+- **CLI** - Use the `--expires-at` flag when creating or updating a branch with [RFC 3339](#timestamp-format-requirements) format. Note: Expiration must be explicitly set; there is no default.
+- **API** - Use the `expires_at` parameter with [RFC 3339](#timestamp-format-requirements) format. Note: Expiration must be explicitly set; there is no default.
 
 See the [Examples](#examples) section below for detailed usage of each method.
 
@@ -134,7 +134,7 @@ When a branch expires and is deleted, all associated compute endpoints are also 
 1. Navigate to the **Branches** page in the Console
 2. Click **New branch**
 3. Enter branch name and select parent branch
-4. Check **Expire branch after** and choose a preset option (1 hour, 1 day, or 7 days)
+4. By default, **Automatically delete branch after** is checked with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable.
 
 ![Set branch expiration](/docs/changelog/branch_expiration_presets.png)
 
@@ -210,7 +210,7 @@ curl --request POST \
 ![Update branch expiration](/docs/guides/branch-update-set-expiration.png)
 
 3. To update: Select a new date and time
-4. To remove: Uncheck **Expire branch after**
+4. To remove: Uncheck **Automatically delete branch after**
 5. Click **Save**
 
 </TabItem>

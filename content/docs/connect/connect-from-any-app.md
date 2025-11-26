@@ -23,6 +23,10 @@ updatedOn: '2025-08-05T16:14:59.258Z'
 
 You can connect to your Neon database from any application. The standard method is to copy your [connection string](#get-a-connection-string-from-the-neon-console) from the Neon console and use it in your app or client. For local development, you can also use the [Neon Local Connect extension](#connect-with-the-neon-local-connect-extension), which lets you connect using a simple localhost connection string.
 
+<Admonition type="important">
+You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
+</Admonition>
+
 ## Get a connection string from the Neon console
 
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.

@@ -4,7 +4,7 @@ subtitle: Link an existing Neon project to Vercel and keep billing in Neon
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2025-07-29T19:19:33.699Z'
+updatedOn: '2025-11-11T17:38:12.163Z'
 ---
 
 <InfoBlock>
@@ -183,7 +183,12 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 ### Branch cleanup
 
 **Automatic cleanup (recommended):**
-Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding git branch is deleted.
+Enable **Automatically delete obsolete Neon branches** during setup to remove preview branches automatically when the corresponding Git branch is deleted.
+
+<Admonition type="note">
+This Git-branch-based cleanup differs from the [Vercel-Managed Integration](/docs/guides/vercel-managed-integration), which deletes branches when deployments are deleted (either manually or automatically via Vercel's retention policies).
+
+</Admonition>
 
 **Manual cleanup:**
 If needed, you can delete branches manually:

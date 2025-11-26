@@ -9,7 +9,7 @@
     "features": [
       {
         "icon": "projects",
-        "title": "30 projects",
+        "title": "60 projects",
         "info": "<p>A project is a top-level container<br/> for your database environment.</p>",
         "moreLink": { "text": "Read more", "href": "#what-is-a-project" }
       },

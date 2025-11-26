@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T02:07:59.221Z'
+updatedOn: '2025-11-13T15:22:07.940Z'
 ---
 
 <FeatureBeta />
@@ -38,7 +38,7 @@ Select **Anonymized data** as the data option when creating a new branch.
 4. In the **Create new branch** dialog:
    - Select your **Parent branch** (typically `production` or `main`)
    - (Optional) Enter a **Branch name**
-   - (Optional) Set **Expire branch after** if you want to delete the branch automatically after a specified number of days
+   - (Optional) **Automatically delete branch after** is checked by default with 1 day selected. You can change it, uncheck it, or leave it as is to automatically delete the branch after the specified time.
    - Under data options, select **Anonymized data**
 5. Click **Create**
 
@@ -108,7 +108,7 @@ From the **Data Masking** page:
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [API reference](#api-reference) section below.
+For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below.
 
 **Get masking rules**
 
@@ -116,15 +116,11 @@ For complete API documentation with request/response examples, see the [API refe
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
 
-Retrieves all masking rules defined for the branch.
-
 **Update masking rules**
 
 ```bash
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
-
-Updates masking rules for the branch. After updating rules, use the start anonymization endpoint to apply the changes.
 
 **Start anonymization**
 
@@ -132,15 +128,11 @@ Updates masking rules for the branch. After updating rules, use the start anonym
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
 
-Starts or restarts the anonymization process for branches in `initialized`, `error`, or `anonymized` state.
-
 **Get anonymization status**
 
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
-
-Returns the current state (`created`, `initialized`, `initialization_error`, `anonymizing`, `anonymized`, or `error`) and progress information.
 
 </TabItem>
 
@@ -179,11 +171,13 @@ The branch is unavailable for connections while anonymization is in progress.
 - Masking does not enforce database constraints (e.g., primary keys can be masked as NULL).
 - The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
-## API reference
+## Data anonymization APIs
 
 The Neon API provides comprehensive control over anonymized branches, including access to all PostgreSQL Anonymizer masking functions and the ability to export/import masking rules for management outside of Neon.
 
 ### Create anonymized branch
+
+[→ API Reference](https://api-docs.neon.tech/reference/createprojectbranchanonymized)
 
 ```
 POST /projects/{project_id}/branch_anonymized
@@ -357,6 +351,8 @@ Returns the created branch object with `restricted_actions` indicating operation
 
 ### Get anonymization status
 
+[→ API Reference](https://api-docs.neon.tech/reference/getanonymizedbranchstatus)
+
 ```
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
@@ -392,6 +388,8 @@ curl -X GET \
 
 ### Start anonymization
 
+[→ API Reference](https://api-docs.neon.tech/reference/startanonymization)
+
 ```
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
@@ -424,6 +422,8 @@ curl -X POST \
 </details>
 
 ### Get masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/getmaskingrules)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
@@ -473,6 +473,8 @@ SELECT * FROM anon.pg_masking_rules;
 ```
 
 ### Update masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/updatemaskingrules)
 
 ```
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules

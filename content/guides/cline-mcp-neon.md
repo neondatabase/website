@@ -61,31 +61,22 @@ This method uses Neon's managed server and OAuth authentication.
 By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 </Admonition>
 
-1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
-2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
-   ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
-3. This will open the `cline_mcp_settings.json` file.
-4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
-5. Paste the following JSON configuration into it:
+1. Open Cline by clicking the **Cline** icon in the VS Code sidebar.
+2. In the Cline navigation bar, select the **MCP Servers** icon.
+   ![Cline MCP Servers Icon](/docs/guides/cline-mcp-servers-icon.png)
+3. Click **Remote Servers** to add a new remote MCP server.
+4. Fill out the form with the following details:
+   - **Name:** `Neon`
+   - **URL:** `https://mcp.neon.tech/mcp`
+   - **Transport Type:** Streamable HTTP
 
-   ```json
-   {
-     "mcpServers": {
-       "Neon": {
-         "command": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/sse"]
-       }
-     }
-   }
-   ```
+   ![Cline Add Remote MCP Server](/docs/guides/cline-add-remote-mcp-server.png)
 
-   If you have other MCP servers configured, you can copy just the `Neon` part.
-
-6. **Save** the `cline_mcp_settings.json` file.
-7. You should see a notification in VS Code that says: "MCP servers updated".
-   ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-8. An OAuth window will open in your browser. Follow the prompts to authorize Cline to access your Neon account. Once authorized, Cline will be connected to Neon's remote MCP server.
+5. Click **Add Server** to register the Neon MCP server.
+6. Cline will prompt you to authenticate with Neon via OAuth. Click **Authenticate**.
+7. A browser window will open asking you to sign in to your Neon account and authorize Cline to access your Neon projects.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
+8. Once authentication is complete, Cline will display a confirmation message, and **Neon** will appear under your list of available MCP servers.
 
 <Admonition type="note">
   The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
@@ -95,54 +86,62 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 
 This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
 
-1. Open Cline by clicking on the Cline icon in the VS Code sidebar.
-2. To configure MCP Servers in Cline, you need to modify the `cline_mcp_settings.json` file.
-   ![Cline Add MCP Tool](/docs/guides/cline-add-mcp.gif)
-3. This will open the `cline_mcp_settings.json` file.
-4. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
-5. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
+1. Open Cline by clicking the **Cline** icon in the VS Code sidebar.
+2. In the Cline navigation bar, select the **MCP Servers** icon.
+   ![Cline MCP Servers Icon](/docs/guides/cline-mcp-servers-icon.png)
+3. Click **Configure** to open the MCP server settings.
+   ![Cline MCP Server Configure](/docs/guides/cline-mcp-server-configure.png)
+4. This will open the `cline_mcp_settings.json` file.
+5. In the `cline_mcp_settings.json` file, you need to specify a list of MCP servers.
+6. Paste the following JSON configuration into it. Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained from the [prerequisites](#prerequisites) section:
+   <CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
 
-<CodeTabs labels={["MacOS/Linux", "Windows", "Windows (WSL)"]}>
+   ```json
+   {
+     "mcpServers": {
+       "neon": {
+         "command": "npx",
+         "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
+   }
+   ```
 
-```json
-{
-  "mcpServers": {
-    "neon": {
-      "command": "npx",
-      "args": ["-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-    }
-  }
-}
-```
+   ```json
+   {
+     "mcpServers": {
+       "neon": {
+         "command": "cmd",
+         "args": [
+           "/c",
+           "npx",
+           "-y",
+           "@neondatabase/mcp-server-neon",
+           "start",
+           "<YOUR_NEON_API_KEY>"
+         ]
+       }
+     }
+   }
+   ```
 
-```json
-{
-  "mcpServers": {
-    "neon": {
-      "command": "cmd",
-      "args": ["/c", "npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-    }
-  }
-}
-```
+   ```json
+   {
+     "mcpServers": {
+       "neon": {
+         "command": "wsl",
+         "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
+       }
+     }
+   }
+   ```
 
-```json
-{
-  "mcpServers": {
-    "neon": {
-      "command": "wsl",
-      "args": ["npx", "-y", "@neondatabase/mcp-server-neon", "start", "<YOUR_NEON_API_KEY>"]
-    }
-  }
-}
-```
+   </CodeTabs>
 
-</CodeTabs>
-
-5. **Save** the `cline_mcp_settings.json` file.
-6. You should see a notification in VS Code that says: "MCP servers updated".
+7. **Save** the `cline_mcp_settings.json` file.
+8. You should see a notification in VS Code that says: "MCP servers updated".
    ![Cline MCP Server Updated](/docs/guides/cline-mcp-config-update.png)
-7. Cline is now connected to Neon's remote MCP server.
+9. Cline is now configured to use the local Neon MCP server. You should see **neon** listed under available MCP servers.
 
 ### Verifying the Integration
 

@@ -4,7 +4,7 @@ subtitle: Use Terraform to provision and manage your Neon projects, branches, en
   roles, databases, and other resources as code.
 enableTableOfContents: true
 tag: community
-updatedOn: '2025-10-10T14:59:54.132Z'
+updatedOn: '2025-11-17T19:26:53.695Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.
@@ -206,7 +206,7 @@ resource "neon_branch" "dev_branch" {
 **Key `neon_branch` attributes:**
 
 - `project_id`: (Required) ID of the parent project.
-- `name`: (Optional) Name for the new branch.
+- `name`: (Optional) Name for the new branch. If not specified, defaults to the branch ID. If provided, must be unique within the project and can be up to 256 characters. Cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements).
 - `parent_id`: (Optional) ID of the parent branch. If not specified, defaults to the project's primary branch.
 - `protected`: (Optional, String: "yes" or "no") Set to protect the branch.
 - `parent_lsn`: (Optional) LSN of the parent branch to create from.

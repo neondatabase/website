@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-11-03T17:05:16.904Z'
+updatedOn: '2025-11-18T03:41:10.523Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -39,7 +39,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | ----------------------------------------------------- | ------------------------------ | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | [Price](#price)                                       | $0/month                       | $5/month minimum                     | $5/month minimum                                                                                  |
 | [Who it's for](#who-its-for)                          | Prototypes and side projects   | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
-| [Projects](#projects)                                 | 20                             | 100                                  | 1,000 (can be increased on request)                                                               |
+| [Projects](#projects)                                 | 60                             | 100                                  | 1,000 (can be increased on request)                                                               |
 | [Branches](#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
 | [Compute](#compute)                                   | 100 CU-hours/project           | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
@@ -76,7 +76,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### ☑ Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 20 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 60 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
@@ -88,7 +88,7 @@ A project is a container for your database environment. It includes your databas
 
 Included per plan:
 
-- **Free**: 20 projects
+- **Free**: 60 projects
 - **Launch**: 100 projects
 - **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 

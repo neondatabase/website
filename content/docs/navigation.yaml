@@ -258,6 +258,8 @@
               slug: guides/dotnet-entity-framework
             - title: Express
               slug: guides/express
+            - title: Medusa.js
+              slug: guides/medusajs
             - title: Micronaut Kotlin
               slug: guides/micronaut-kotlin
             - title: NestJS
@@ -348,6 +350,8 @@
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
               slug: data-api/sql-to-rest
+            - title: Custom authentication providers
+              slug: data-api/custom-authentication-providers
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
@@ -876,7 +880,7 @@
 
         - title: Workflows & CI/CD
           icon: branching
-          slug: reference/neon-launchpad
+          slug: reference/instagres
           items:
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
@@ -884,8 +888,8 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Neon Launchpad
-              slug: reference/neon-launchpad
+            - title: Instagres
+              slug: reference/instagres
             - title: Neon Local
               slug: local/neon-local
               items:
@@ -911,23 +915,6 @@
         - title: Examples repo
           slug: https://github.com/neondatabase/examples
           icon: github
-
-    - section: Platform integration
-      items:
-        - title: Build on Neon
-          slug: guides/platform-integration-intro
-          icon: integrations
-          items:
-            - title: Get started
-              slug: guides/platform-integration-get-started
-            - title: OAuth integration
-              slug: guides/oauth-integration
-            - title: Configure consumption limits
-              slug: guides/consumption-limits
-            - title: Query consumption metrics
-              slug: guides/consumption-metrics
-            - title: Multitenancy
-              slug: guides/multitenancy
 
 - nav: Manage
   title: Manage
@@ -1397,3 +1384,38 @@
     - title: RSS feeds
       slug: reference/feeds
       icon: feeds
+
+- nav: Platform integration
+  title: Platform integration
+  slug: guides/platform-integration-overview
+  icon: integrations
+  items:
+    - section: Overview
+      icon: info
+      items:
+        - title: Integrating with Neon
+          slug: guides/platform-integration-overview
+
+    - section: OAuth integration
+      icon: lock
+      items:
+        - title: OAuth integration
+          slug: guides/oauth-integration
+
+    - section: Embedded Postgres
+      icon: import
+      items:
+        - title: Embedded Postgres
+          slug: guides/embedded-postgres
+        - title: Configure consumption limits
+          slug: guides/consumption-limits
+        - title: Query consumption metrics
+          slug: guides/consumption-metrics
+
+    - section: Neon for AI Agents
+      icon: ai-agent
+      items:
+        - title: Agent plan
+          slug: introduction/agent-plan
+        - title: AI Agent integration
+          slug: guides/ai-agent-integration

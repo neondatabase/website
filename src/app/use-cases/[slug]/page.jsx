@@ -4,8 +4,15 @@ import { notFound } from 'next/navigation';
 import TemplatePage from 'app/[slug]/pages/template-page';
 import { USE_CASES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import { getPostBySlug } from 'utils/api-content';
+import { getPostBySlug, getPostSlugs } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
+
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs(USE_CASES_DIR_PATH);
+  return slugs.map((slug) => ({
+    slug: slug.slice(1),
+  }));
+}
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
