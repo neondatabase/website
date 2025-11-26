@@ -1419,3 +1419,7 @@
           slug: introduction/agent-plan
         - title: AI Agent integration
           slug: guides/ai-agent-integration
+        - title: Database versioning
+          slug: ai/ai-database-versioning
+        - title: Snapshot-based promotion workflow
+          slug: guides/snapshot-based-promotion-workflow
