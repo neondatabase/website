@@ -32,7 +32,6 @@ export default {
   startups: '/startups',
   storage: '/storage',
   templates: '/templates',
-  thankYou: '/thank-you',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
 
