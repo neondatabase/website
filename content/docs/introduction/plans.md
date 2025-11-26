@@ -88,7 +88,7 @@ A project is a container for your database environment. It includes your databas
 
 Included per plan:
 
-- **Free**: 50 projects
+- **Free**: 60 projects
 - **Launch**: 100 projects
 - **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
