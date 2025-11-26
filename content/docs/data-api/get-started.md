@@ -20,9 +20,12 @@ tag: beta
   </DocsList>
 </InfoBlock>
 
-The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js), [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
+The Neon Data API lets you query your Neon database directly from your application using a PostgREST-compatible REST API. No backend server required, just secure authenticated API calls from your frontend.
+
+Use the [Neon SDK (`@neondatabase/neon-js`)](#query-from-your-app) for JavaScript/TypeScript applications, which provides integrated authentication and type-safe database queries. For other languages, use PostgREST compatible client libraries like [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest) (Python) or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) (Go).
 
 ```javascript shouldWrap
+// Using the Neon SDK
 const { data } = await client.from('posts').select('*');
 ```
 
@@ -207,38 +210,50 @@ With the `posts` table and its RLS policies in place, you can now securely query
 
 ## Query from your app
 
-The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example showing how to use it with `postgrest-js`:
+### Install the SDK
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+### Use the SDK
+
+The Neon SDK provides a unified client that combines authentication and database querying. Here's an example:
 
 ```ts shouldWrap
-import { PostgrestClient } from '@supabase/postgrest-js';
-import { useUser } from '@stackframe/stack';
+import { createClient } from '@neondatabase/neon-js';
 
 // Example: fetch notes for the current user
 async function fetchUserNotes() {
-  const user = useUser(); // [!code highlight]
-  if (!user) return null;
-
-  const { accessToken } = await user.getAuthJson(); // [!code highlight]
-  const pg = new PostgrestClient(import.meta.env.VITE_DATA_API_URL, {
-    headers: { Authorization: `Bearer ${accessToken}` }, // [!code highlight]
-  });
-
-  const { data, error } = await pg
+  // Create client with auth integration // [!code highlight]
+  const client = createClient({ // [!code highlight]
+    dataApiUrl: import.meta.env.VITE_DATA_API_URL, // [!code highlight]
+    authUrl: import.meta.env.VITE_AUTH_URL // [!code highlight]
+  }); // [!code highlight]
+  
+  // Get current session // [!code highlight]
+  const { data: sessionData } = await client.auth.getSession(); // [!code highlight]
+  if (!sessionData.session) return null;
+  
+  const user = sessionData.session.user;
+  
+  // Query database - token automatically injected! // [!code highlight]
+  const { data, error } = await client
     .from('notes')
     .select('id, title, created_at, owner_id, shared')
     .eq('owner_id', user.id) // [!code highlight]
     .order('created_at', { ascending: false }); // [!code highlight]
-
+    
   return { data, error };
 }
 ```
 
 This example shows the key steps:
 
-1. Get the current user with `useUser()`
-2. Extract their JWT token with `user.getAuthJson()`
-3. Create a PostgrestClient with proper authentication headers
-4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
+1. Create a unified client with `createClient()` that handles both authentication and database access
+2. Get the current session with `client.auth.getSession()`
+3. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
+4. JWT tokens are automatically injected into all database requests
 
 To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
 
