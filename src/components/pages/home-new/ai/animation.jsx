@@ -2,11 +2,10 @@
 
 import { Alignment, Fit, Layout, decodeFont, useRive } from '@rive-app/react-canvas';
 import { clsx } from 'clsx';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const Animation = ({ src }) => {
+const Animation = () => {
   const [isReady, setIsReady] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [riveInstance, setRiveInstance] = useState(null);
@@ -21,7 +20,7 @@ const Animation = ({ src }) => {
   });
 
   const { rive, RiveComponent } = useRive({
-    src,
+    src: '/animations/pages/home-new/ide.riv',
     artboard: 'main',
     stateMachines: 'SM',
     autoplay: false,
@@ -88,19 +87,14 @@ const Animation = ({ src }) => {
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
       <span ref={wrapperRef} className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
-      <div className={clsx('aspect-[1056/807] w-full')} ref={animationRef}>
-        {isIntersecting ? (
-          <div className="size-full [&_canvas]:!h-full [&_canvas]:!w-full">
-            <RiveComponent />
-          </div>
-        ) : null}
+      <div
+        className="aspect-[1056/807] size-full w-full [&_canvas]:!h-full [&_canvas]:!w-full"
+        ref={animationRef}
+      >
+        {isIntersecting && <RiveComponent />}
       </div>
     </div>
   );
-};
-
-Animation.propTypes = {
-  src: PropTypes.string.isRequired,
 };
 
 export default Animation;

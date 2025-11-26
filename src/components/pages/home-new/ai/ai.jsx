@@ -24,7 +24,7 @@ const AI = () => (
         <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="relative w-full md:hidden">
-            <Animation src="/animations/pages/home-new/ide.riv" />
+            <Animation />
             <Image
               className="pointer-events-none absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2"
               src={bg}
@@ -32,7 +32,6 @@ const AI = () => (
               width={1056}
               height={628}
               quality={100}
-              aria-hidden
             />
           </div>
           <Image
