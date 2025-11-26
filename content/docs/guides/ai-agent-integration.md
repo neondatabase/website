@@ -375,6 +375,10 @@ curl --request POST \
 }'
 ```
 
+<Admonition type="tip">
+Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](https://neon.com/blog/promoting-postgres-changes-safely-production).
+</Admonition>
+
 ### When to use each approach
 
 | Use Case                        | Recommended Method   | Why                                                                   |
