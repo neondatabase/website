@@ -14,7 +14,9 @@ jobs:
   format-markdown:
     permissions:
       contents: write # for Git to git push
-    runs-on: ubuntu-latest
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
 
     steps:
       - name: Harden the runner (Audit all outbound calls)
