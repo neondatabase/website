@@ -195,18 +195,16 @@ export default async function Home() {
   const elements = await prisma.element.findMany();
   return (
     <main className="min-h-screen p-8">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-8">Periodic Table Elements</h1>
+      <div className="mx-auto max-w-4xl">
+        <h1 className="mb-8 text-4xl font-bold">Periodic Table Elements</h1>
         <div className="grid gap-4">
           {elements.map((element) => (
             <div
               key={element.id}
-              className="border rounded-lg p-4 hover:shadow-lg transition-shadow"
+              className="rounded-lg border p-4 transition-shadow hover:shadow-lg"
             >
               <div className="flex items-center gap-4">
-                <div className="text-3xl font-bold text-blue-600">
-                  {element.symbol}
-                </div>
+                <div className="text-blue-600 text-3xl font-bold">{element.symbol}</div>
                 <div>
                   <h2 className="text-xl font-semibold">{element.elementName}</h2>
                   <p className="text-gray-600">Atomic Number: {element.atomicNumber}</p>
@@ -263,7 +261,7 @@ You'll need the following secrets for [GitHub Actions](https://docs.github.com/e
 
 ### Of Neon
 
-1. **NEON_API_KEY**: 
+1. **NEON_API_KEY**:
    - Go to [Neon Account Settings](https://console.neon.tech/app/settings/api-keys)
    - Click **Generate new API key**
    - Copy the key and save it securely
@@ -273,7 +271,7 @@ You'll need the following secrets for [GitHub Actions](https://docs.github.com/e
    - Click **Settings** → **General**
    - Copy the **Project ID**
 
-3. **NEON_DATABASE_NAME**: 
+3. **NEON_DATABASE_NAME**:
    - Usually `neondb` (the default database name)
    - You can find it in your connection string or in the Neon Console
 
@@ -362,14 +360,14 @@ jobs:
         run: |
           # Pull down the environment variables for the deploy-preview context
           netlify env:list --context deploy-preview --plain >> .env
-          
+
           # Add the database connection URLs to the .env file
           echo DIRECT_URL="${{ steps.create-branch.outputs.db_url }}" >> .env
           echo DATABASE_URL="${{ steps.create-branch.outputs.db_url_with_pooler }}" >> .env
-          
+
           # Deploy the preview to Netlify
           netlify deploy --alias="pr-${{ github.event.number }}" --context=deploy-preview --json > netlify-deploy.json
-          
+
           # Get the deploy URL from the netlify-deploy.json file
           DEPLOY_URL=$(cat netlify-deploy.json | jq -r '.deploy_url')
 
@@ -408,7 +406,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: oven-sh/setup-bun@v2
-      
+
       - name: Delete Neon Branch
         run: bunx neonctl branches delete preview/pr-${{ github.event.number }}-${{ github.event.pull_request.head.ref }} --project-id ${{ vars.NEON_PROJECT_ID }}
         env:
