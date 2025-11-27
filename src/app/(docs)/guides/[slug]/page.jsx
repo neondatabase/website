@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/guides/post';
-import Container from 'components/shared/container';
-import Layout from 'components/shared/layout';
+import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
@@ -55,8 +53,8 @@ const GuidePost = async ({ params }) => {
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
   const { data, content } = postBySlug;
-  const authorID = data.author;
-  const author = getAuthor(authorID);
+  // const authorID = data.author;
+  // const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -67,31 +65,24 @@ const GuidePost = async ({ params }) => {
       name: 'Neon',
     },
   };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      <Layout isHeaderSticky hasThemesSupport>
-        <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
-          <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"
-            size="1344"
-          >
-            <Post
-              data={data}
-              author={author}
-              content={content}
-              navigationLinks={navigationLinks}
-              slug={slug}
-              gitHubPath={gitHubPath}
-              tableOfContents={tableOfContents}
-            />
-          </Container>
-        </div>
-      </Layout>
+      {/* TODO: pass the author to the Post */}
+      <Post
+        content={content}
+        data={data}
+        navigationLinks={navigationLinks}
+        currentSlug={slug}
+        gitHubPath={gitHubPath}
+        tableOfContents={tableOfContents}
+        breadcrumbs={[]}
+        // author={author}
+      />
     </>
   );
 };

@@ -15,7 +15,7 @@ const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
     <article className="border-b border-gray-new-15/20 pb-5 pt-6 first:pt-0 last:border-none last:pb-0 dark:border-gray-new-15/80">
       <Link className="group" to={`${LINKS.guides}/${slug}`}>
         <div className="flex flex-col gap-y-[18px] sm:gap-y-4">
-          <div className="max-w-[640px]">
+          <div className="max-w-[832px]">
             <h1 className="line-clamp-2 text-[20px] font-semibold leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
               {title}
             </h1>

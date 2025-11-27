@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 
+import BlogHeader from 'components/pages/blog/blog-header';
 import GuideCard from 'components/pages/guides/guide-card';
-import AlgoliaSearch from 'components/shared/algolia-search';
 import { GUIDES_BASE_PATH } from 'constants/guides';
 import SEO_DATA from 'constants/seo-data';
 import { getAllGuides } from 'utils/api-guides';
@@ -18,17 +18,14 @@ const GuidesPage = async () => {
   if (!posts) return notFound();
 
   return (
-    <AlgoliaSearch
-      indexName={process.env.NEXT_PUBLIC_ALGOLIA_GUIDES_INDEX_NAME}
-      posts={posts}
-      searchInputClassName="lg:top-0 md:relative md:mb-8"
-    >
+    <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
+      <BlogHeader title="Guides" basePath={GUIDES_BASE_PATH} />
       <div className="guides">
         {posts.map((post) => (
           <GuideCard key={post.slug} {...post} />
         ))}
       </div>
-    </AlgoliaSearch>
+    </div>
   );
 };
 
