@@ -71,6 +71,10 @@ Support options available based on your plan:
 - **Scale** plan users can open a support ticket for any Neon issue
 - **Business** and **Production** plan users can open a support ticket for any Neon issue with SLA response times
 
+<Admonition type="tip">
+To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
+</Admonition>
+
 ![Resources menu in Neon Console](/docs/introduction/get_help.png)
 
 ### Slack channel

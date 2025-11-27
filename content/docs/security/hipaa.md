@@ -41,7 +41,7 @@ Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling H
 </Admonition>
 
 <Admonition type="note">
-HIPAA is not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
+HIPAA support for Postgres 18 is currently available in AWS regions only. You cannot create a Postgres 18 HIPAA-compliant project in Azure regions.
 </Admonition>
 
 <Tabs labels={["New project", "Existing project", "API", "CLI"]}>
@@ -82,7 +82,7 @@ curl --request POST \
     "settings": {
       "hipaa": true
     },
-    "pg_version": 17
+    "pg_version": 18
   }
 }
 '
