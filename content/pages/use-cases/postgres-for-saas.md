@@ -152,16 +152,13 @@ Private Link, IP Allow
 
 </DefinitionList>
 
-### Billing
+### Pricing
 
 ---
 
 <DefinitionList bulletType="check">
-Subscription plans
-: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](/pricing).
-
-Pay via AWS/Azure Marketplace
-: You can subscribe to Neon via the marketplaces to consolidate billing. Click [here](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for AWS, and [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice) for Azure.
+Usage-based pricing
+: Start for free, then pay only for what you use. Paid plans start at $5/month minimum. [Review our pricing plans](/pricing).
 
 </DefinitionList>
 
