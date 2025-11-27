@@ -23,10 +23,10 @@ const AI = () => (
       <div className="min-w-0">
         <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
-          <div className="relative w-full md:hidden">
+          <div className="pointer-events-none relative w-full md:hidden">
             <Animation />
             <Image
-              className="pointer-events-none absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2"
+              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2"
               src={bg}
               alt=""
               width={1056}
