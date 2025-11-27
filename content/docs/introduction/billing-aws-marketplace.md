@@ -2,7 +2,7 @@
 title: AWS Marketplace
 enableTableOfContents: true
 subtitle: Paying for Neon via your AWS Billing account
-updatedOn: '2025-08-18T18:19:18.018Z'
+updatedOn: '2025-11-27T14:20:46.135Z'
 isDraft: false
 ---
 

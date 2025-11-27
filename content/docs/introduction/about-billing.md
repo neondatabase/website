@@ -5,7 +5,7 @@ subtitle: Learn about Neon's pricing plans and how to manage billing
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2025-10-08T19:31:56.540Z'
+updatedOn: '2025-11-27T14:20:46.132Z'
 ---
 
 ## Neon plans
