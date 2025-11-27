@@ -12,7 +12,7 @@ updatedOn: '2025-11-06T20:54:36.048Z'
 
 ## The `init` command
 
-The `init` command installs the Neon MCP (Model Context Protocol) Server and authenticates it to Neon using a Neon API key.
+The `init` command initializes your app project with Neon using your AI coding assistant. It installs the Neon MCP (Model Context Protocol) Server, which enables your AI assistant to help set up your Neon integration, and authenticates it to Neon using a Neon API key.
 
 ### Usage
 
