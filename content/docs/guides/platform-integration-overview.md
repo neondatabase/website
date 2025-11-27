@@ -97,7 +97,9 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 <a href="/docs/guides/ai-agent-integration" description="Learn about the agent-specific integration" icon="openai">AI Agent integration guide</a>
 
-<a href="/docs/ai/ai-database-versioning" description="Learn about database versioning for AI agents" icon="branching">Database versioning</a>
+<a href="/docs/ai/ai-database-versioning" description="Implement database versioning using snapshots and instant rollbacks" icon="branching">Database versioning</a>
+
+<a href="/docs/guides/snapshot-based-promotion-workflow" description="Example workflow: Promoting changes from dev to production using snapshots" icon="branching">Snapshot-based promotion workflow</a>
 
 </DetailIconCards>
 
