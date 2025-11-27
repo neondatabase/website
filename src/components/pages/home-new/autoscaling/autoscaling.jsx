@@ -1,17 +1,133 @@
-import Container from 'components/shared/container';
+'use client';
 
-const Autoscaling = () => (
-  <section
-    className="autoscaling safe-paddings relative h-screen scroll-mt-16 bg-[#E4F1EB] lg:scroll-mt-0"
-    id="autoscaling"
-  >
-    <Container
-      className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 text-black before:block xl:block"
-      size="1600"
+import clsx from 'clsx';
+import Image from 'next/image';
+import { useState } from 'react';
+
+import Container from 'components/shared/container';
+import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
+import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
+import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
+
+import Heading from '../heading';
+
+import Animation from './animation';
+
+const tabs = [
+  {
+    tab: 'Save Costs',
+    animation: {
+      className: 'md:aspect-[767/599]',
+      src: '/animations/pages/home-new/autoscaling-save-costs.riv',
+      autoBind: true,
+    },
+  },
+  {
+    tab: 'Avoid Outages',
+    animation: {
+      className: 'md:aspect-[767/1193]',
+      src: '/animations/pages/home-new/autoscaling-avoid-outages.riv',
+    },
+  },
+];
+
+const legend = [
+  {
+    icon: autoscalingLegendIcon,
+    text: 'Neon autoscaling',
+  },
+  {
+    icon: dbLoadLegendIcon,
+    text: 'Database load',
+  },
+  {
+    icon: resourceLegendIcon,
+    text: 'Fixed-resource provisioned',
+  },
+];
+
+const Autoscaling = () => {
+  const [activeItem, setActiveItem] = useState(0);
+
+  return (
+    <section
+      className="autoscaling safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:py-14 md:pt-9"
+      id="autoscaling"
     >
-      <div className="flex size-full items-center justify-center">Autoscaling section</div>
-    </Container>
-  </section>
-);
+      <Container
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
+        size="1600"
+      >
+        <div className="min-w-0">
+          <Heading
+            icon="autoscaling"
+            theme="light"
+            title="<strong>Advanced autoscaling.</strong> Scale further without worrying about the database. Never overpay for resources you don’t use."
+          />
+
+          <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
+            {tabs.map((item, index) => (
+              <button
+                className={clsx(
+                  'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
+                  'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5',
+                  'text-[15px] font-medium leading-none tracking-tight',
+                  'border border-gray-new-10 even:border-l-0',
+                  index === activeItem
+                    ? 'bg-white text-gray-new-10'
+                    : 'bg-[#E4F1EB] text-gray-new-10/80 hover:bg-white/70 hover:text-gray-new-10'
+                )}
+                key={index}
+                type="button"
+                onClick={() => setActiveItem(index)}
+              >
+                {item.tab}
+              </button>
+            ))}
+          </div>
+
+          <div
+            className={clsx(
+              'relative z-10 mt-6 w-max max-w-none overflow-hidden',
+              '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
+              'xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 lg:mt-5'
+            )}
+          >
+            {tabs.map(
+              ({ animation }, index) =>
+                index === activeItem && (
+                  <div key={index}>
+                    <Animation
+                      className={animation.className}
+                      src={animation.src}
+                      autoBind={animation.autoBind}
+                    />
+                  </div>
+                )
+            )}
+          </div>
+
+          <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
+            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
+              {legend.map((item, index) => (
+                <li
+                  className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-extra-tight xl:gap-x-2 md:text-[14px]"
+                  key={index}
+                >
+                  <Image src={item.icon} width={16} height={16} alt="" />
+                  <p>{item.text}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="relative max-w-[480px] shrink-0 text-[18px] leading-normal tracking-extra-tight xl:-right-8 xl:max-w-[352px] lg:right-0 lg:max-w-[480px] md:text-[15px]">
+              Neon monitors your database load ten times a second and autoscales CPU and memory to
+              exactly fit your workload.
+            </p>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+};
 
 export default Autoscaling;
