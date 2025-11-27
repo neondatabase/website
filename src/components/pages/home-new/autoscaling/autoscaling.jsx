@@ -13,29 +13,21 @@ import Heading from '../heading';
 
 import Animation from './animation';
 
-const SaveCostsComponent = () => (
-  <Animation
-    className="relative w-[1378px] max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-[1300px] lg:w-[1023px] md:left-0 md:ml-0 md:aspect-[767/599] md:w-screen"
-    src="/animations/pages/home-new/autoscaling-save-costs.riv"
-    autoBind
-  />
-);
-
-const AvoidOutagesComponent = () => (
-  <Animation
-    className="relative w-[1378px] max-w-none xl:left-1/2 xl:-ml-[50vw] xl:w-[1300px] lg:w-[1023px] md:left-0 md:ml-0 md:aspect-[767/1193] md:w-screen"
-    src="/animations/pages/home-new/autoscaling-avoid-outages.riv"
-  />
-);
-
 const tabs = [
   {
     tab: 'Save Costs',
-    renderComponent: () => <SaveCostsComponent />,
+    animation: {
+      className: 'md:aspect-[767/599]',
+      src: '/animations/pages/home-new/autoscaling-save-costs.riv',
+      autoBind: true,
+    },
   },
   {
     tab: 'Avoid Outages',
-    renderComponent: () => <AvoidOutagesComponent />,
+    animation: {
+      className: 'md:aspect-[767/1193]',
+      src: '/animations/pages/home-new/autoscaling-avoid-outages.riv',
+    },
   },
 ];
 
@@ -63,7 +55,7 @@ const Autoscaling = () => {
       id="autoscaling"
     >
       <Container
-        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 pr-0 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16"
+        className="relative grid h-full grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
         size="1600"
       >
         <div className="min-w-0">
@@ -73,7 +65,7 @@ const Autoscaling = () => {
             title="<strong>Advanced autoscaling.</strong> Scale further without worrying about the database. Never overpay for resources you don’t use."
           />
 
-          <div className="relative z-20 mt-16 xl:mt-14 lg:mt-12 md:mt-11">
+          <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
             {tabs.map((item, index) => (
               <button
                 className={clsx(
@@ -83,7 +75,7 @@ const Autoscaling = () => {
                   'border border-gray-new-10 even:border-l-0',
                   index === activeItem
                     ? 'bg-white text-gray-new-10'
-                    : 'bg-[#E4F1EB] text-gray-new-10/80'
+                    : 'bg-[#E4F1EB] text-gray-new-10/80 hover:bg-white/70 hover:text-gray-new-10'
                 )}
                 key={index}
                 type="button"
@@ -94,20 +86,32 @@ const Autoscaling = () => {
             ))}
           </div>
 
-          <div className="no-scrollbars relative z-10 mt-6 w-max max-w-none overflow-hidden overflow-x-auto 2xl:w-auto xl:left-1/2 xl:-ml-[50vw] xl:w-screen lg:mt-5">
-            <div className="h-[448px] xl:h-[408px] lg:h-[338px] md:h-auto">
-              {tabs.map(
-                (item, index) =>
-                  index === activeItem && <div key={index}>{item.renderComponent()}</div>
-              )}
-            </div>
+          <div
+            className={clsx(
+              'relative z-10 mt-6 w-max max-w-none overflow-hidden',
+              '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
+              'xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 lg:mt-5'
+            )}
+          >
+            {tabs.map(
+              ({ animation }, index) =>
+                index === activeItem && (
+                  <div key={index}>
+                    <Animation
+                      className={animation.className}
+                      src={animation.src}
+                      autoBind={animation.autoBind}
+                    />
+                  </div>
+                )
+            )}
           </div>
 
-          <div className="relative z-20 mt-[22px] grid grid-cols-2 items-start text-black-pure xl:mt-2 xl:grid-cols-[1fr_352px] lg:mt-5 lg:grid-cols-1">
-            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 lg:gap-x-7 xs:flex-col">
+          <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
+            <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
               {legend.map((item, index) => (
                 <li
-                  className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-tight xl:gap-x-2 md:text-[14px]"
+                  className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-extra-tight xl:gap-x-2 md:text-[14px]"
                   key={index}
                 >
                   <Image src={item.icon} width={16} height={16} alt="" />
@@ -115,8 +119,8 @@ const Autoscaling = () => {
                 </li>
               ))}
             </ul>
-            <p className="ml-24 max-w-[480px] pr-1 text-[18px] leading-normal tracking-tight xl:-mr-4 xl:ml-8 lg:mx-0 lg:mt-10 md:mt-8 md:text-[15px]">
-              Neon monitors your database load ten times a second and autoscales CPU and Memory to
+            <p className="relative max-w-[480px] shrink-0 text-[18px] leading-normal tracking-extra-tight xl:-right-8 xl:max-w-[352px] lg:right-0 lg:max-w-[480px] md:text-[15px]">
+              Neon monitors your database load ten times a second and autoscales CPU and memory to
               exactly fit your workload.
             </p>
           </div>

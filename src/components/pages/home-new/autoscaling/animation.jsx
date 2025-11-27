@@ -39,7 +39,7 @@ const Animation = ({ className, src, autoBind = false }) => {
     autoplay: false,
     autoBind,
     layout: new Layout({
-      fit: Fit.FitWidth,
+      fit: Fit.Cover,
       alignment: Alignment.TopCenter,
     }),
     onLoad: () => {
@@ -86,7 +86,15 @@ const Animation = ({ className, src, autoBind = false }) => {
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
-      <div className={clsx('[&_canvas]:!h-full [&_canvas]:!w-full', className)} ref={animationRef}>
+      <div
+        className={clsx(
+          'relative aspect-[1378/448] w-[1378px] max-w-none',
+          '3xl:max-w-full 2xl:aspect-[896/320] xl:aspect-[1024/360] lg:aspect-[768/280]',
+          '[&_canvas]:!h-full [&_canvas]:!w-full',
+          className
+        )}
+        ref={animationRef}
+      >
         {isIntersecting ? <RiveComponent /> : null}
       </div>
     </div>
