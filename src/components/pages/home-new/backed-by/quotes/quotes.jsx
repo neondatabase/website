@@ -5,7 +5,7 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import { useRef, useState, useEffect, Fragment } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const SECTION_COLOR = 'rgba(57, 165, 125, 0.6)';
+const HIGHLIGHT_COLOR = 'rgba(57, 165, 125, 0.6)';
 
 const QUOTES = [
   {
@@ -85,13 +85,14 @@ const Quotes = () => {
             <m.figure
               className={clsx(
                 'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
-                'font-mono-new tracking-extra-tight'
+                'font-mono-new tracking-extra-tight',
+                !isActive && 'pointer-events-none'
               )}
               initial={index !== 0 && { y: 5, opacity: 0 }}
               animate={{
                 y: isActive ? 0 : 5,
                 opacity: isActive ? 1 : 0,
-                transition: { duration: 0.3, ease: 'easeInOut', delay: 0.15 },
+                transition: { duration: 0.3, delay: 0.15, ease: [0.19, 0.44, 0, 1] },
               }}
             >
               <blockquote
@@ -108,7 +109,7 @@ const Quotes = () => {
                       <m.span
                         className="relative -mx-1 px-1"
                         animate={{
-                          backgroundImage: `linear-gradient(to right, ${SECTION_COLOR}, ${SECTION_COLOR} ${isActive ? '100%' : '0%'}, transparent ${isActive ? '100%' : '0%'})`,
+                          backgroundImage: `linear-gradient(to right, ${HIGHLIGHT_COLOR}, ${HIGHLIGHT_COLOR} ${isActive ? '100%' : '0%'}, transparent ${isActive ? '100%' : '0%'})`,
                           transition: { duration: 0.67, ease: [0.17, 0.17, 0.1, 1], delay: 0.35 },
                         }}
                       >
@@ -124,7 +125,7 @@ const Quotes = () => {
               <m.span
                 className={clsx(
                   'pointer-events-none absolute inset-0 h-[150%] bg-gradient-to-t from-transparent to-[#E4F1EB] to-30%',
-                  'transition-all duration-300 ease-out',
+                  'transition-all duration-300 ease-[cubic-bezier(.19,.44,0,1)]',
                   isActive ? '-translate-y-full delay-150' : 'translate-y-0'
                 )}
                 aria-hidden
