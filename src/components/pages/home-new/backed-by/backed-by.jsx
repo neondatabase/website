@@ -77,7 +77,7 @@ const BackedBy = () => (
       </div>
     </Container>
     <Image
-      className="pointer-events-none absolute right-0 top-0 xl:-right-[20%] xl:h-full sm:-right-1/2"
+      className="pointer-events-none absolute -right-[10%] top-0 h-full 2xl:-right-[20%] sm:-right-1/2"
       src={bgNoise}
       alt=""
       width={1175}
