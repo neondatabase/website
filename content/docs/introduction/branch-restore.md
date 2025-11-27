@@ -52,13 +52,15 @@ In case you need to rollback a restore, Neon preserves the branch's final state 
 
 You can use this backup to rollback the restore operation if necessary. The backup branches are listed on the **Branches** page in the Neon Console among your other branches.
 
-The backup becomes the parent of your original branch.
+When restoring a root branch (like `production`), both the restored branch and the backup branch become separate root branches with no parent-child relationship.
+
+When restoring a non-root branch (like a `development` branch that has a parent), the backup branch becomes the parent of the restored branch. Keep this in mind if you later want to reset the branch from its original parent.
 
 <Admonition type="note">
 Backup branches created when restoring root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
 </Admonition>
 
-![Backup branch as parent to original](/docs/guides/branch_restore_backup.png)
+![Backup branch created after restore](/docs/guides/branch_restore_backup.png)
 
 #### Overwrite, not a merge
 
@@ -86,7 +88,7 @@ Similar to the manual restore operation using the Neon Console and API described
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
 1. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
 1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note that the initial branch was the parent for your new branch, and this is reflected when you look at your branch details.
+1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note: When restoring a root branch, both the new branch and the backup branch become root branches with no parent. When restoring a non-root branch, the initial branch (now the backup) becomes the parent of the new branch.
 
 </details>
 
@@ -258,7 +260,11 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 </Tabs>
 
 To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
-If you do need to revert your changes, you can [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) since that is your branch's relationship to the restore point backup.
+
+If you need to revert your changes:
+
+- **For root branches:** Use [Instant restore](/docs/introduction/branch-restore) again and select the backup branch as the source, since the backup is not a parent branch.
+- **For non-root branches:** You can use [Reset from parent](/docs/manage/branches#reset-a-branch-from-parent) to revert to the backup, since the backup becomes the parent after restore. Note that this resets to the backup, not to your original parent branch.
 
 ## Deleting backup branches
 
@@ -288,3 +294,11 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 
 - **Instant restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
+
+## Limitations
+
+- Instant restore is typically performed on root branches (like `production`). When you restore a root branch, both the restored branch and backup branch become separate root branches with no parent-child relationship.
+- Deleting backup branches is only supported in certain cases. See [Deleting backup branches](#deleting-backup-branches) for details.
+- When you restore a non-root branch to an earlier point in time, the backup branch becomes the parent of the restored branch. This means subsequent "Reset from parent" operations will reset to the backup, not to your original parent branch.
+
+  For example, let's say you have a `production` branch with a child development branch `development`. You restore `development` to an earlier point in time. At this point, `development`'s parent changes from `production` to the backup `development_old_timestamp`. Later, if you want to refresh `development` with the latest data from `production`, you cannot use **Reset from parent** since the backup is now the parent. Instead, use **Instant restore** and select `production` as the source.
