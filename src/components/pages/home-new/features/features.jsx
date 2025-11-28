@@ -55,7 +55,7 @@ const Features = () => (
       className="relative grid grid-cols-[224px_1fr] items-center gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
       size="1600"
     >
-      <div className="min-w-0 border-t border-gray-new-20 pt-[35px] lg:pt-7">
+      <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
         <Heading
           icon="features"
           title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
