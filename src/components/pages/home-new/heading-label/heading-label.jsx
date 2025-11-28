@@ -4,11 +4,17 @@ import PropTypes from 'prop-types';
 
 import triangleIcon from 'icons/home-new/triangle.svg';
 
-const HeadingLabel = ({ className = '', children }) => (
+const themeClassName = {
+  white: 'text-gray-new-80',
+  black: 'text-gray-new-20',
+};
+
+const HeadingLabel = ({ className, theme = 'white', children }) => (
   <span
     className={clsx(
-      'flex w-fit items-center gap-x-2 font-mono-new text-xs font-medium uppercase leading-none text-gray-new-80',
+      'flex w-fit items-center gap-2 font-mono-new text-xs font-medium uppercase leading-none',
       'sm:gap-1.5 sm:text-[10px]',
+      themeClassName[theme],
       className
     )}
   >
@@ -19,6 +25,7 @@ const HeadingLabel = ({ className = '', children }) => (
 
 HeadingLabel.propTypes = {
   className: PropTypes.string,
+  theme: PropTypes.oneOf(Object.keys(themeClassName)),
   children: PropTypes.node.isRequired,
 };
 
