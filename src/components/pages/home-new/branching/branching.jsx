@@ -32,7 +32,7 @@ const FEATURES = [
 
 const Branching = () => (
   <section
-    className="branching safe-paddings relative scroll-mt-16 pt-[160px] xl:pt-[136px] lg:scroll-mt-0 lg:pt-20 md:pt-16"
+    className="branching safe-paddings relative scroll-mt-16 pb-60 pt-40 xl:py-[136px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-20 md:pb-20 md:pt-16"
     id="branching"
   >
     <Container
