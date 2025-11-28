@@ -25,7 +25,7 @@ const tabs = [
   {
     tab: 'Avoid Outages',
     animation: {
-      className: 'md:aspect-[767/1193]',
+      className: 'md:aspect-[767/1193] pointer-events-none',
       src: '/animations/pages/home-new/autoscaling-avoid-outages.riv',
     },
   },

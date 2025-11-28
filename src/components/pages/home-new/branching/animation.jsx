@@ -1,27 +1,14 @@
 'use client';
 
-import {
-  Alignment,
-  Fit,
-  Layout,
-  useRive,
-  useViewModel,
-  useViewModelInstance,
-  useViewModelInstanceBoolean,
-} from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, decodeFont, useRive } from '@rive-app/react-canvas';
 import { clsx } from 'clsx';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import useWindowSize from 'react-use/lib/useWindowSize';
 
-const Animation = ({ className, src, autoBind = false }) => {
+const Animation = () => {
   const [isReady, setIsReady] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [riveInstance, setRiveInstance] = useState(null);
-
-  const { width } = useWindowSize();
-  const isMobile = width ? width < 768 : false;
 
   const [wrapperRef, isIntersecting] = useInView({
     triggerOnce: true,
@@ -33,27 +20,36 @@ const Animation = ({ className, src, autoBind = false }) => {
   });
 
   const { rive, RiveComponent } = useRive({
-    src,
+    src: '/animations/pages/home-new/branching.riv',
     artboard: 'main',
     stateMachines: 'SM',
     autoplay: false,
-    autoBind,
     layout: new Layout({
-      fit: Fit.Cover,
+      fit: Fit.Contain,
       alignment: Alignment.TopCenter,
     }),
+    assetLoader: (asset, bytes) => {
+      if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
+        return false;
+      }
+
+      if (asset?.isFont) {
+        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
+          const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
+          asset.setFont(font);
+          font.unref();
+        });
+
+        return true;
+      }
+
+      return false;
+    },
     onLoad: () => {
       rive?.resizeDrawingSurfaceToCanvas();
       setIsLoaded(true);
     },
   });
-
-  const viewModel = useViewModel(rive);
-  const viewModelInstance = useViewModelInstance(viewModel, { rive });
-  const { setValue: setIsMobileInstance } = useViewModelInstanceBoolean(
-    'mobile',
-    viewModelInstance
-  );
 
   useEffect(() => {
     setRiveInstance(rive);
@@ -81,18 +77,20 @@ const Animation = ({ className, src, autoBind = false }) => {
     return undefined;
   }, [isLoaded]);
 
-  useEffect(() => setIsMobileInstance(isMobile), [isMobile, setIsMobileInstance]);
-
   return (
-    <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+    <div
+      className={clsx(
+        'relative mt-14 w-full transition-opacity',
+        'xl:-mx-8 xl:mt-12 xl:w-[calc(100%+64px)] xl:max-w-none',
+        'sm:-mx-5 sm:w-[calc(100%+40px)]',
+        isReady ? 'opacity-100' : 'opacity-0'
+      )}
+    >
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
-          'relative aspect-[1378/448] w-[1378px] max-w-none',
-          '3xl:max-w-full 2xl:aspect-[896/320] xl:aspect-[1024/360] lg:aspect-[768/280]',
-          'xl:pointer-events-none',
-          '[&_canvas]:!h-full [&_canvas]:!w-full',
-          className
+          'pointer-events-none relative aspect-[1184/500] w-full',
+          '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
         ref={animationRef}
       >
@@ -100,12 +98,6 @@ const Animation = ({ className, src, autoBind = false }) => {
       </div>
     </div>
   );
-};
-
-Animation.propTypes = {
-  className: PropTypes.string,
-  src: PropTypes.string.isRequired,
-  autoBind: PropTypes.bool,
 };
 
 export default Animation;
