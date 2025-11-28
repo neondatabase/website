@@ -17,7 +17,7 @@ const styles = {
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8 font-semibold',
     xs: 't-base py-[14px] px-[26px] font-medium',
     xxs: 'h-8 px-4 text-sm tracking-extra-tight font-medium',
-    new: 'h-11 px-7 tracking-extra-tight font-medium xl:text-sm xl:h-9 xl:px-[18px]',
+    new: 'h-11 px-7 tracking-extra-tight font-medium xl:h-9 xl:text-sm xl:px-[18px]',
   },
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
