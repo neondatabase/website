@@ -20,11 +20,10 @@ const Animation = () => {
   });
 
   const { rive, RiveComponent } = useRive({
-    src: '/animations/pages/branching/branching.riv',
+    src: '/animations/pages/home-new/branching.riv',
     artboard: 'main',
     stateMachines: 'SM',
     autoplay: false,
-    loop: false,
     layout: new Layout({
       fit: Fit.FitWidth,
       alignment: Alignment.TopCenter,
@@ -35,13 +34,7 @@ const Animation = () => {
       }
 
       if (asset?.isFont) {
-        const assetName = asset.name || '';
-        const fontUrl =
-          assetName === 'Geist Mono'
-            ? '/fonts/geist-mono/GeistMono-Regular.ttf'
-            : 'https://cdn.rive.app/runtime/flutter/inter.ttf';
-
-        fetch(fontUrl).then(async (res) => {
+        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
           const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
           asset.setFont(font);
           font.unref();
@@ -85,13 +78,19 @@ const Animation = () => {
   }, [isLoaded]);
 
   return (
-    <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+    <div
+      className={clsx(
+        'relative mt-14 aspect-[1184/550] w-max max-w-none overflow-hidden transition-opacity',
+        '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
+        'xl:left-1/2 xl:mt-12 xl:w-screen xl:max-w-none xl:-translate-x-1/2',
+        isReady ? 'opacity-100' : 'opacity-0'
+      )}
+    >
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
           '[&_canvas]:!h-full [&_canvas]:!w-full',
-          'pointer-events-none relative -ml-[34px] mt-14 w-[1184px] max-w-none',
-          'xl:mt-12 xl:w-[94vw] lg:-ml-4 lg:w-[96vw] md:left-1/2 md:-ml-[50vw] md:w-screen'
+          'pointer-events-none relative -ml-[34px] w-[1184px] max-w-none 3xl:-ml-8'
         )}
         ref={animationRef}
       >

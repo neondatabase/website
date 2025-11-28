@@ -2,15 +2,16 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import anonymIcon from 'icons/home-new/branching/anonym-icon.svg';
-import squareIcon from 'icons/home-new/branching/square-icon.svg';
+import copyIcon from 'icons/home-new/branching/copy-icon.svg';
+import ephemeralityIcon from 'icons/home-new/branching/ephemerality-icon.svg';
 
 import Heading from '../heading';
 
 import Animation from './animation';
 
-const ITEMS = [
+const FEATURES = [
   {
-    icon: squareIcon,
+    icon: copyIcon,
     title: 'Copy-on-write',
     description:
       'Create lightweight database branches instantly by duplicating metadata, saving space and time.',
@@ -22,7 +23,7 @@ const ITEMS = [
       'Mask sensitive data with realistic fake values, enabling safe testing and sharing of datasets.',
   },
   {
-    icon: squareIcon,
+    icon: ephemeralityIcon,
     title: 'Ephemerality',
     description:
       'Temporary computes shut down automatically when idle, lowering costs and overhead.',
@@ -35,20 +36,20 @@ const Branching = () => (
     id="branching"
   >
     <Container
-      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:px-16"
+      className="relative grid grid-cols-[224px_1fr] gap-x-32 before:block xl:grid-cols-1 xl:px-16 xl:before:hidden lg:!px-16 md:!px-5"
       size="1600"
     >
-      <div className="min-w-0 border-t border-gray-new-20 pt-[35px] xl:border-none">
+      <div className="min-w-0">
         <Heading
           icon="branching"
           title="<strong>Instant branching.</strong> Develop and test new features and migrations with data & schema branches to eliminate surprises in production deploys."
         />
         <Animation />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
-          {ITEMS.map(({ icon, title, description }, index) => (
+          {FEATURES.map(({ icon, title, description }, index) => (
             <li key={index}>
               <div className="flex items-center gap-x-2.5">
-                <Image className="" src={icon} width={16} height={16} alt="" />
+                <Image className="lg:size-[14px]" src={icon} width={16} height={16} alt="" />
                 <h3 className="text-base font-medium tracking-tight text-white lg:text-[14px]">
                   {title}
                 </h3>
