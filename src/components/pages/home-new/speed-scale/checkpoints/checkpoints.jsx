@@ -13,7 +13,9 @@ const Checkpoints = () => (
         something goes wrong.
       </Heading>
     </Container>
-    <Animation />
+    <div className="border-b border-t border-gray-new-20">
+      <Animation />
+    </div>
   </div>
 );
 
