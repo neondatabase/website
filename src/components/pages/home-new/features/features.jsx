@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
@@ -38,10 +39,12 @@ const ITEMS = [
   },
   {
     icon: keyIcon,
-    title: 'Single sign-on. ',
+    title: 'Single sign-on.',
     description: 'Centralize your team access with SSO to manage logins securely.',
   },
 ];
+
+const BORDER_CLASSNAME = 'absolute -bottom-1 -top-2 w-px bg-gray-new-20 xl:top-0 md:hidden';
 
 const Features = () => (
   <section
@@ -58,7 +61,7 @@ const Features = () => (
           title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
         />
         <div className="relative mt-20 xl:mt-16 lg:mt-14 lg:max-w-[800px] md:mt-16">
-          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
+          <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] xl:gap-y-10 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
             {ITEMS.map(({ icon, title, description }, index) => (
               <li className="flex flex-col gap-y-[18px] lg:gap-y-4 md:gap-y-3" key={index}>
                 <Image
@@ -68,16 +71,30 @@ const Features = () => (
                   height={24}
                   alt=""
                 />
-                <p className="max-w-[320px] text-[18px] leading-normal tracking-tight text-gray-new-50 xl:w-[256px] lg:w-[288px] lg:text-base lg:leading-snug md:w-[320px] md:text-[15px]">
-                  <span className="mr-1 text-white">{title}</span>
-                  {description}
+                <p
+                  className={clsx(
+                    'max-w-[320px] text-pretty text-[18px] leading-normal tracking-extra-tight text-gray-new-50',
+                    'xl:w-[256px] lg:w-[288px] lg:text-base lg:leading-snug md:w-full md:max-w-full md:text-[15px]'
+                  )}
+                >
+                  <span className="text-white">{title}</span> {description}
                 </p>
               </li>
             ))}
           </ul>
-          <span className="absolute -bottom-1 -left-8 -top-2 w-px bg-gray-new-20 xl:-left-6 xl:top-0 lg:-left-5 md:hidden" />
-          <span className="absolute -bottom-1 -top-2 left-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:left-[calc((100%-128px)/3+38px)] xl:top-0 lg:left-[calc(100%/2+12px)] md:hidden" />
-          <span className="absolute -bottom-1 -top-2 right-[calc((100%-128px)/3+32px)] w-px bg-gray-new-20 xl:right-[calc((100%-128px)/3+24px)] xl:top-0 lg:hidden" />
+          <span className={clsx(BORDER_CLASSNAME, '-left-8 xl:-left-6 lg:-left-5 md:hidden')} />
+          <span
+            className={clsx(
+              BORDER_CLASSNAME,
+              'left-[calc((100%-128px)/3+32px)] xl:left-[calc((100%-128px)/3+38px)] lg:left-[calc(100%/2+12px)] md:hidden'
+            )}
+          />
+          <span
+            className={clsx(
+              BORDER_CLASSNAME,
+              'right-[calc((100%-128px)/3+32px)] xl:right-[calc((100%-128px)/3+24px)] lg:hidden'
+            )}
+          />
         </div>
       </div>
     </Container>
