@@ -25,7 +25,7 @@ const Animation = () => {
     stateMachines: 'SM',
     autoplay: false,
     layout: new Layout({
-      fit: Fit.FitWidth,
+      fit: Fit.Contain,
       alignment: Alignment.TopCenter,
     }),
     assetLoader: (asset, bytes) => {
@@ -80,17 +80,17 @@ const Animation = () => {
   return (
     <div
       className={clsx(
-        'relative mt-14 aspect-[1184/550] w-max max-w-none overflow-hidden transition-opacity',
-        '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
-        'xl:left-1/2 xl:mt-12 xl:w-screen xl:max-w-none xl:-translate-x-1/2',
+        'relative mt-14 w-full transition-opacity',
+        'xl:-mx-8 xl:mt-12 xl:w-[calc(100%+64px)] xl:max-w-none',
+        'sm:-mx-5 sm:w-[calc(100%+40px)]',
         isReady ? 'opacity-100' : 'opacity-0'
       )}
     >
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
-          '[&_canvas]:!h-full [&_canvas]:!w-full',
-          'pointer-events-none relative -ml-[34px] w-[1184px] max-w-none 3xl:-ml-8'
+          'pointer-events-none relative aspect-[1184/500] w-full',
+          '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
         ref={animationRef}
       >
