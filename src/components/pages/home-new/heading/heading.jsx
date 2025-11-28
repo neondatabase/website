@@ -35,8 +35,8 @@ const Heading = ({ className = '', theme = 'dark', icon, title }) => (
     )}
     <h2
       className={clsx(
-        'indent-24 text-[48px] font-normal leading-dense tracking-tighter [&>strong]:font-normal',
-        'xl:text-[40px] lg:indent-16 lg:text-[28px] md:indent-0 md:text-[24px]',
+        'text-pretty indent-24 text-[48px] font-normal leading-dense tracking-tighter [&>strong]:font-normal',
+        'xl:text-[40px] lg:text-wrap lg:indent-16 lg:text-[28px] md:indent-0 md:text-[24px]',
         theme === 'dark' && 'text-gray-new-50 [&>strong]:text-white',
         theme === 'light' && 'text-gray-new-40 [&>strong]:text-black-pure'
       )}
