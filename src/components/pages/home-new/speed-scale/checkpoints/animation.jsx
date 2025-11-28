@@ -16,18 +16,18 @@ const Animation = () => {
   });
 
   const [animationRef, isVisible] = useInView({
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   const { rive, RiveComponent } = useRive({
-    src: '/animations/pages/home-new/speed-scale-ide.riv',
+    src: '/animations/pages/home-new/speed-scale-checkpoints.riv',
     artboard: 'main',
     stateMachines: 'SM',
     autoplay: false,
     autoBind: true,
     layout: new Layout({
-      fit: Fit.Contain,
-      alignment: Alignment.Center,
+      fit: Fit.FitHeight,
+      alignment: Alignment.TopCenter,
     }),
     assetLoader: (asset, bytes) => {
       if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
@@ -35,13 +35,7 @@ const Animation = () => {
       }
 
       if (asset?.isFont) {
-        const assetName = asset.name || '';
-        const fontUrl =
-          assetName === 'Geist Mono'
-            ? '/fonts/geist-mono/GeistMono-Regular.ttf'
-            : 'https://cdn.rive.app/runtime/flutter/inter.ttf';
-
-        fetch(fontUrl).then(async (res) => {
+        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
           const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
           asset.setFont(font);
           font.unref();
@@ -85,13 +79,17 @@ const Animation = () => {
   }, [isLoaded]);
 
   return (
-    <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span ref={wrapperRef} className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
+    <div className={clsx('relative transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
-        className="aspect-[1056/807] size-full w-full [&_canvas]:!h-full [&_canvas]:!w-full"
+        className={clsx(
+          'pointer-events-none relative left-1/2 h-[500px] w-[1920px] max-w-none -translate-x-1/2',
+          'xl:aspect-[1024/356] xl:h-auto xl:w-full lg:aspect-[768/280]',
+          '[&_canvas]:!h-full [&_canvas]:!w-full'
+        )}
         ref={animationRef}
       >
-        {isIntersecting && <RiveComponent />}
+        {isIntersecting ? <RiveComponent /> : null}
       </div>
     </div>
   );

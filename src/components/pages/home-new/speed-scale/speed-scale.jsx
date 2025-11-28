@@ -2,10 +2,10 @@ import clsx from 'clsx';
 
 import Container from 'components/shared/container';
 
+import Checkpoints from './checkpoints';
 import Features from './features';
 import Header from './header';
 import StatusLine from './status-line';
-import Timeline from './timeline';
 
 const SpeedScale = () => (
   <section
@@ -20,7 +20,7 @@ const SpeedScale = () => (
         <Header />
         <Features />
       </Container>
-      <Timeline />
+      <Checkpoints />
     </div>
     <span
       className={clsx(
