@@ -159,7 +159,7 @@ Commands:
   neon operations                  Manage operations               [aliases: operation]
   neon connection-string [branch]  Get connection string                  [aliases: cs]
   neon set-context                 Set the current context
-  neon init                        Initialize a new Neon project using your AI coding assistant
+  neon init                        Initialize a project with Neon using your AI coding assistant
   neon completion                  generate completion script
 
 Global options:
@@ -178,22 +178,22 @@ Options:
 
 ## Commands
 
-| Command                                                    | Subcommands                                                                                                  | Description                                       |
-| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
-| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                                      |
-| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user                                 |
-| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations                              |
-| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                                   |
-| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                                   |
-| [vpc](/docs/reference/cli-vpc)                             | `endpoint`, `project`                                                                                        | Manage VPC endpoints and project VPC restrictions |
-| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                                   |
-| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                                  |
-| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                      |
-| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                 |
-| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                             |
-| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                           |
-| [init](/docs/reference/cli-init)                           |                                                                                                              | Initialize a Neon project with AI assistant       |
-| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                      |
+| Command                                                    | Subcommands                                                                                                  | Description                                                   |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| [auth](/docs/reference/cli-auth)                           |                                                                                                              | Authenticate                                                  |
+| [me](/docs/reference/cli-me)                               |                                                                                                              | Show current user                                             |
+| [orgs](/docs/reference/cli-orgs)                           | `list`                                                                                                       | Manage organizations                                          |
+| [projects](/docs/reference/cli-projects)                   | `list`, `create`, `update`, `delete`, `get`                                                                  | Manage projects                                               |
+| [ip-allow](/docs/reference/cli-ip-allow)                   | `list`, `add`, `remove`, `reset`                                                                             | Manage IP Allow                                               |
+| [vpc](/docs/reference/cli-vpc)                             | `endpoint`, `project`                                                                                        | Manage VPC endpoints and project VPC restrictions             |
+| [branches](/docs/reference/cli-branches)                   | `list`, `create`, `reset`, `restore`, `rename`, `schema-diff`, `set-default`, `add-compute`, `delete`, `get` | Manage branches                                               |
+| [databases](/docs/reference/cli-databases)                 | `list`, `create`, `delete`                                                                                   | Manage databases                                              |
+| [roles](/docs/reference/cli-roles)                         | `list`, `create`, `delete`                                                                                   | Manage roles                                                  |
+| [operations](/docs/reference/cli-operations)               | `list`                                                                                                       | Manage operations                                             |
+| [connection-string](/docs/reference/cli-connection-string) |                                                                                                              | Get connection string                                         |
+| [set-context](/docs/reference/cli-set-context)             |                                                                                                              | Set context for session                                       |
+| [init](/docs/reference/cli-init)                           |                                                                                                              | Initialize a project with Neon using your AI coding assistant |
+| [completion](/docs/reference/cli-completion)               |                                                                                                              | Generate a completion script                                  |
 
 ## Global options
 
