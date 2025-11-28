@@ -1,6 +1,6 @@
 'use client';
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit, Layout, decodeFont, useRive } from '@rive-app/react-canvas';
 import { clsx } from 'clsx';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
@@ -29,6 +29,23 @@ const Animation = () => {
       fit: Fit.FitHeight,
       alignment: Alignment.TopCenter,
     }),
+    assetLoader: (asset, bytes) => {
+      if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
+        return false;
+      }
+
+      if (asset?.isFont) {
+        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
+          const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
+          asset.setFont(font);
+          font.unref();
+        });
+
+        return true;
+      }
+
+      return false;
+    },
     onLoad: () => {
       rive?.resizeDrawingSurfaceToCanvas();
       setIsLoaded(true);
@@ -62,16 +79,11 @@ const Animation = () => {
   }, [isLoaded]);
 
   return (
-    <div
-      className={clsx(
-        'pointer-events-none relative transition-opacity',
-        isReady ? 'opacity-100' : 'opacity-0'
-      )}
-    >
+    <div className={clsx('relative transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
-          'relative left-1/2 h-[500px] w-[1920px] max-w-none -translate-x-1/2',
+          'pointer-events-none relative left-1/2 h-[500px] w-[1920px] max-w-none -translate-x-1/2',
           'xl:aspect-[1024/356] xl:h-auto xl:w-full lg:aspect-[768/280]',
           '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
