@@ -62,7 +62,12 @@ const Animation = () => {
   }, [isLoaded]);
 
   return (
-    <div className={clsx('relative transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
+    <div
+      className={clsx(
+        'pointer-events-none relative transition-opacity',
+        isReady ? 'opacity-100' : 'opacity-0'
+      )}
+    >
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
