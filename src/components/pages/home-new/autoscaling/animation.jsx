@@ -90,6 +90,7 @@ const Animation = ({ className, src, autoBind = false }) => {
         className={clsx(
           'relative aspect-[1378/448] w-[1378px] max-w-none',
           '3xl:max-w-full 2xl:aspect-[896/320] xl:aspect-[1024/360] lg:aspect-[768/280]',
+          'xl:pointer-events-none',
           '[&_canvas]:!h-full [&_canvas]:!w-full',
           className
         )}
