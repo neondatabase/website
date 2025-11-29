@@ -355,7 +355,70 @@
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
-        - title: Neon Auth
+        - title: Neon Auth v2
+          icon: auth
+          slug: auth/overview
+          tag: new
+          items:
+            - section: Introduction
+              items:
+                - title: Overview
+                  slug: auth/overview
+                  tag: wip
+                - title: Branching
+                  slug: auth/concepts/branching-authentication
+
+            - section: Quickstarts
+              items:
+                - title: React
+                  slug: auth/quick-start/react
+                - title: React Router
+                  slug: auth/quick-start/react-router
+                - title: React Router with UI
+                  slug: auth/quick-start/react-router-components
+                  tag: wip
+
+            - section: Core Concepts
+              items:
+                - title: Authentication Flow
+                  slug: auth/concepts/authentication-flow
+                - title: Session Management
+                  slug: auth/concepts/session-management
+                - title: Email Verification
+                  slug: auth/concepts/email-verification
+                  tag: wip
+                - title: OAuth
+                  slug: auth/concepts/oauth
+                  tag: wip
+
+            - section: Guides
+              items:
+                - title: Email Verification
+                  slug: auth/guides/email-verification
+                - title: Set up OAuth with Google
+                  slug: auth/guides/setup-oauth-google
+                  tag: wip
+
+            - section: Reference
+              items:
+                - title: JavaScript SDK
+                  slug: reference/javascript-sdk
+                - title: SDK CLI
+                  slug: auth/reference/sdk-cli
+                  tag: wip
+
+            - section: Migration Guides
+              items:
+                - title: From v1 to v2
+                  slug: auth/migrate/from-v1
+                  tag: wip
+                - title: From v1 Ejected to Stack Auth
+                  slug: auth/migrate/from-v1-ejected
+                  tag: wip
+                - title: From Supabase
+                  slug: auth/migrate/from-supabase
+
+        - title: Neon Auth (v1)
           icon: auth
           slug: neon-auth/overview
           items:

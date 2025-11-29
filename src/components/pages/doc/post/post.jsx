@@ -28,7 +28,15 @@ Changelog.propTypes = {
 };
 
 const Post = ({
-  data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
+  data: {
+    title,
+    subtitle,
+    enableTableOfContents = false,
+    tag = null,
+    updatedOn = null,
+    layout = null,
+    contentLayout = null,
+  },
   content,
   breadcrumbs,
   navigationLinks: { previousLink, nextLink },
@@ -47,9 +55,15 @@ const Post = ({
       (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
   );
 
+  // Check if wide layout is enabled (hides right sidebar/TOC)
+  const isWideLayout = layout === 'wide';
+
+  // Check if split content layout is enabled (2-column grid for SDK reference style)
+  const isSplitLayout = contentLayout === 'split';
+
   return (
     <>
-      <div className="min-w-0 pb-32 lg:pb-24 md:pb-20">
+      <div className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none')}>
         {breadcrumbs.length > 0 && (
           <Breadcrumbs
             breadcrumbs={breadcrumbs}
@@ -75,7 +89,11 @@ const Post = ({
                 {subtitle}
               </p>
             )}
-            <Content className="mt-7 md:mt-5" content={content} isPostgres={isPostgres} />
+            <Content
+              className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
+              content={content}
+              isPostgres={isPostgres}
+            />
           </article>
         )}
 
@@ -89,14 +107,17 @@ const Post = ({
         {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
-      <Aside
-        className="!ml-0 w-64 shrink-0 xl:hidden"
-        isDocsIndex={isDocsIndex}
-        isChangelog={isChangelog}
-        enableTableOfContents={enableTableOfContents}
-        tableOfContents={tableOfContents}
-        gitHubPath={gitHubPath}
-      />
+      {/* Regular pages: Show standard right sidebar */}
+      {!isWideLayout && (
+        <Aside
+          className="!ml-0 w-64 shrink-0 xl:hidden"
+          isDocsIndex={isDocsIndex}
+          isChangelog={isChangelog}
+          enableTableOfContents={enableTableOfContents}
+          tableOfContents={tableOfContents}
+          gitHubPath={gitHubPath}
+        />
+      )}
       {modal && <Modal {...modal} />}
     </>
   );
@@ -109,6 +130,8 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
     updatedOn: PropTypes.string,
+    layout: PropTypes.oneOf(['wide', null]),
+    contentLayout: PropTypes.oneOf(['split', null]),
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
