@@ -25,6 +25,7 @@ import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechCards from 'components/pages/doc/tech-cards';
 import TwoColumnLayout, {
   TwoColumnStep,
+  TwoColumnItem,
   LeftContent,
   RightCode,
   RightImage,
@@ -174,6 +175,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Steps,
   TwoColumnLayout,
   TwoColumnStep,
+  TwoColumnItem,
   LeftContent,
   RightCode,
   RightImage,

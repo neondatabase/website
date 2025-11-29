@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import HashIcon from 'components/shared/anchor-heading/images/hash.inline.svg';
+
 const TwoColumnLayout = ({ children }) => (
   <ol
     className="two-column-layout !mt-0 inline-flex w-full flex-col !pl-0"
@@ -33,6 +35,46 @@ const TwoColumnStep = ({ title, children }) => (
         <h3 className="col-span-2 !mb-3 !mt-0 text-xl font-semibold leading-tight tracking-extra-tight">
           {title}
         </h3>
+      )}
+      {children}
+    </div>
+  </li>
+);
+
+const TwoColumnItem = ({ title, method, id, isFirstInGroup, children }) => (
+  <li
+    className={clsx(
+      'two-column-item relative !mb-0 flex gap-4 !pl-0',
+      isFirstInGroup ? '!mt-20' : '!mt-12'
+    )}
+  >
+    {/* Content grid - no step number badge */}
+    <div className="grid flex-1 grid-cols-2 gap-x-6 xl:grid-cols-1 xl:gap-x-0">
+      {title && (
+        <>
+          <h2
+            id={id}
+            className="anchor-heading group relative col-span-2 !mb-1 !mt-0 w-fit scroll-mt-20 text-2xl font-semibold leading-tight tracking-extra-tight lg:scroll-mt-5"
+          >
+            <span>{title}</span>
+            {id && (
+              <a
+                className="px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
+                href={`#${id}`}
+                aria-label={`Link to ${title}`}
+              >
+                <HashIcon className="inline w-3.5 text-green-45" />
+              </a>
+            )}
+          </h2>
+          {method && (
+            <div className="col-span-2 mb-4 mt-2">
+              <span className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs font-medium leading-normal text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60">
+                {method}
+              </span>
+            </div>
+          )}
+        </>
       )}
       {children}
     </div>
@@ -82,6 +124,14 @@ TwoColumnStep.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
+TwoColumnItem.propTypes = {
+  title: PropTypes.string,
+  method: PropTypes.string,
+  id: PropTypes.string,
+  isFirstInGroup: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+};
+
 LeftContent.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -98,9 +148,10 @@ RightImage.propTypes = {
 
 // Attach sub-components
 TwoColumnLayout.Step = TwoColumnStep;
+TwoColumnLayout.Item = TwoColumnItem;
 TwoColumnLayout.LeftContent = LeftContent;
 TwoColumnLayout.RightCode = RightCode;
 TwoColumnLayout.RightImage = RightImage;
 
 export default TwoColumnLayout;
-export { TwoColumnStep, LeftContent, RightCode, RightImage };
+export { TwoColumnStep, TwoColumnItem, LeftContent, RightCode, RightImage };

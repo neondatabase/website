@@ -1,47 +1,105 @@
 ---
 title: Neon JavaScript SDK
-subtitle: A unified TypeScript SDK for Neon, providing authentication and PostgreSQL database queries
+subtitle: Reference documentation for the Neon JavaScript SDK
 enableTableOfContents: true
 layout: wide
-contentLayout: split
 ---
 
-## Installation
+The Neon JavaScript SDK provides authentication and database operations for your applications.
 
-Install the Neon JavaScript SDK in your project:
+Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
+- **BetterAuthVanillaAdapter** (default) — Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
+- **BetterAuthReactAdapter** — Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
+- **SupabaseAuthAdapter** — Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+
+Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
+
+<TwoColumnLayout>
+
+<TwoColumnItem title="Installation" id="installation">
+<LeftContent>
+
+Install the Neon JavaScript SDK in your project using npm, yarn, pnpm, or bun.
+
+</LeftContent>
+<RightCode>
 ```bash
 npm install @neondatabase/neon-js
 ```
+</RightCode>
+</TwoColumnItem>
 
-## Initializing
+</TwoColumnLayout>
 
-Create a new Neon client for use in your application. The SDK automatically configures both authentication and database access from this single URL.
+<TwoColumnLayout>
 
-<CodeTabs labels={["Create a client","Create a client with TypeScript types"]}>
+<TwoColumnItem title="Initialize the client" method="createClient()" id="initializing">
+<LeftContent>
 
-```typescript showLineNumbers
-import { createClient } from '@neondatabase/neon-js';
+Create a client instance with your authentication and data API URLs. The client handles:
 
-const client = createClient(import.meta.env.VITE_NEON_URL);
+- Authentication token management
+- Database query routing
+- Type-safe database operations
+
+To use a different adapter, import it and pass it in the `auth.adapter` option (see third tab).
+
+</LeftContent>
+<RightCode>
+<CodeTabs labels={["Basic setup","With TypeScript types","With a different adapter"]}>
+
+```typescript
+import { createClient } from "@neondatabase/neon-js";
+
+const client = createClient({
+  auth: {
+    url: import.meta.env.VITE_NEON_AUTH_URL,
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL,
+  },
+});
 ```
 
-```typescript showLineNumbers
-import { createClient } from '@neondatabase/neon-js';
-import type { Database } from './types/database.types';
+```typescript
+import { createClient } from "@neondatabase/neon-js";
+import type { Database } from "./types/database.types";
 
-const client = createClient<Database>(import.meta.env.VITE_NEON_URL);
+const client = createClient<Database>({
+  auth: {
+    url: import.meta.env.VITE_NEON_AUTH_URL,
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL,
+  },
+});
+```
+
+```typescript
+import { createClient, BetterAuthReactAdapter } from "@neondatabase/neon-js";
+
+const client = createClient({
+  auth: {
+    adapter: BetterAuthReactAdapter(),
+    url: import.meta.env.VITE_NEON_AUTH_URL,
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL,
+  },
+});
 ```
 
 </CodeTabs>
+</RightCode>
+</TwoColumnItem>
 
-The client automatically handles authentication token management, database query routing, and type-safe database operations.
+</TwoColumnLayout>
 
-For TypeScript projects, generate types from your database schema: `npx @neondatabase/neon-js gen-types --db-url "postgresql://..."`
+<TwoColumnLayout>
 
-## auth.signUp()
-
-Creates a new user account with email and password.
+<TwoColumnItem title="Create a new user account" method="auth.signUp.email()" id="auth-signup" isFirstInGroup={true}>
+<LeftContent>
 
 - Returns user and session data on success
 - User data is stored in your database
@@ -49,28 +107,40 @@ Creates a new user account with email and password.
 
 ### Parameters
 
-- **email**: `string` (required)
+<details>
+<summary>View parameters</summary>
 
-- **password**: `string` (required)
+| Parameter            | Type                        | Required |
+| -------------------- | --------------------------- | -------- |
+| <tt>email</tt>       | string                      | ✓        |
+| <tt>name</tt>        | string                      | ✓        |
+| <tt>password</tt>    | string                      | ✓        |
+| <tt>image</tt>       | string \| undefined         |          |
+| <tt>phoneNumber</tt> | string \| null \| undefined |          |
+| <tt>callbackURL</tt> | string \| undefined         |          |
 
-- **options**: `{ emailRedirectTo?: string | undefined; data?: object | undefined; captchaToken?: string | undefined; channel?: "sms" | "whatsapp" | undefined; } | undefined` (optional)
+</details>
 
-```typescript showLineNumbers
-const { data, error } = await client.auth.signUp({
+</LeftContent>
+<RightCode>
+```typescript
+const result = await client.auth.signUp.email({
   email: 'user@example.com',
   password: 'password123',
-});
+  name: 'John Doe'
+})
 
-if (error) {
-  console.error('Sign up error:', error.message);
+if (result.error) {
+  console.error('Sign up error:', result.error.message)
 } else {
-  console.log('User created:', data.user);
+  console.log('User created:', result.data.user)
 }
 ```
+</RightCode>
+</TwoColumnItem>
 
-## auth.signInWithPassword()
-
-Sign in an existing user with email and password.
+<TwoColumnItem title="Sign in with email and password" method="auth.signIn.email()" id="auth-signinwithpassword">
+<LeftContent>
 
 - Returns user and session on success
 - Session tokens are cached automatically
@@ -78,26 +148,37 @@ Sign in an existing user with email and password.
 
 ### Parameters
 
-- **email**: `string` (required)
+<details>
+<summary>View parameters</summary>
 
-- **password**: `string` (required)
+| Parameter            | Type                 | Required |
+| -------------------- | -------------------- | -------- |
+| <tt>email</tt>       | string               | ✓        |
+| <tt>password</tt>    | string               | ✓        |
+| <tt>rememberMe</tt>  | boolean \| undefined |          |
+| <tt>callbackURL</tt> | string \| undefined  |          |
 
-- **options**: `{ captchaToken?: string | undefined; } | undefined` (optional)
+</details>
 
-```typescript showLineNumbers
-const { data, error } = await client.auth.signInWithPassword({
+</LeftContent>
+<RightCode>
+```typescript
+const result = await client.auth.signIn.email({
   email: 'user@example.com',
-  password: 'password123',
-});
+  password: 'password123'
+})
 
-if (error) {
-  console.error('Sign in error:', error.message);
+if (result.error) {
+  console.error('Sign in error:', result.error.message)
 } else {
-  console.log('Signed in:', data.user.email);
+  console.log('Signed in:', result.data.user.email)
 }
 ```
+</RightCode>
+</TwoColumnItem>
 
-## auth.signInWithOAuth()
+<TwoColumnItem title="Sign in with OAuth provider" method="auth.signIn.social()" id="auth-signinwithoauth">
+<LeftContent>
 
 Sign in with an OAuth provider like Google, GitHub, etc.
 
@@ -107,313 +188,754 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 
 ### Parameters
 
-- **provider**: `Provider` (required)
+<details>
+<summary>View parameters</summary>
 
-- **options**: `{ redirectTo?: string | undefined; scopes?: string | undefined; queryParams?: { [key: string]: string; } | undefined; skipBrowserRedirect?: boolean | undefined; } | undefined` (optional)
+| Parameter                   | Type                  | Required |
+| --------------------------- | --------------------- | -------- |
+| <tt>provider</tt>           | object                | ✓        |
+| <tt>callbackURL</tt>        | string \| undefined   |          |
+| <tt>newUserCallbackURL</tt> | string \| undefined   |          |
+| <tt>errorCallbackURL</tt>   | string \| undefined   |          |
+| <tt>disableRedirect</tt>    | boolean \| undefined  |          |
+| <tt>idToken</tt>            | object                |          |
+| <tt>scopes</tt>             | string[] \| undefined |          |
+| <tt>requestSignUp</tt>      | boolean \| undefined  |          |
+| <tt>loginHint</tt>          | string \| undefined   |          |
+| <tt>additionalData</tt>     | object                |          |
 
+</details>
+
+</LeftContent>
+<RightCode>
 <CodeTabs labels={["Sign in with GitHub","Sign in with custom redirect"]}>
 
-```typescript showLineNumbers
-const { data, error } = await client.auth.signInWithOAuth({
-  provider: 'github',
+```typescript
+await client.auth.signIn.social({
+  provider: "github",
+  callbackURL: "https://yourapp.com/auth/callback",
 });
 ```
 
-```typescript showLineNumbers
-const { data, error } = await client.auth.signInWithOAuth({
-  provider: 'google',
-  options: {
-    redirectTo: 'https://yourapp.com/auth/callback',
-  },
+```typescript
+await client.auth.signIn.social({
+  provider: "google",
+  callbackURL: "https://yourapp.com/auth/callback",
 });
 ```
 
 </CodeTabs>
+</RightCode>
+</TwoColumnItem>
 
-## auth.signOut()
-
-Signs out the current user and clears the session.
+<TwoColumnItem title="Sign out" method="auth.signOut()" id="auth-signout">
+<LeftContent>
 
 - Clears local session cache
 - Notifies other browser tabs (cross-tab sync)
 - Removes authentication tokens
 
-### Parameters
-
-- **scope**: `"global" | "local" | "others" | undefined` (optional)
-
-```typescript showLineNumbers
-const { error } = await client.auth.signOut();
+</LeftContent>
+<RightCode>
+```typescript
+const { error } = await client.auth.signOut()
 
 if (error) {
-  console.error('Sign out error:', error.message);
+  console.error('Sign out error:', error.message)
 }
 ```
+</RightCode>
+</TwoColumnItem>
 
-## auth.getSession()
-
-Retrieves the current session.
+<TwoColumnItem title="Get current session" method="auth.getSession()" id="auth-getsession">
+<LeftContent>
 
 - Returns cached session if available (fast)
 - Automatically refreshes expired tokens
 - Returns null if no active session
 
-<CodeTabs labels={["Get current session","Check session in React"]}>
-
-```typescript showLineNumbers
-const { data, error } = await client.auth.getSession();
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.auth.getSession()
 
 if (data.session) {
-  console.log('User is logged in:', data.session.user.email);
+  console.log('User is logged in:', data.session.user.email)
 } else {
-  console.log('No active session');
+  console.log('No active session')
 }
 ```
+</RightCode>
+</TwoColumnItem>
 
-```typescript showLineNumbers
-import { useState, useEffect } from 'react'
-
-function App() {
-  const [session, setSession] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    client.auth.getSession().then(({ data }) => {
-      setSession(data.session)
-      setLoading(false)
-    })
-  }, [])
-
-  if (loading) return <div>Loading...</div>
-  if (!session) return <div>Please sign in</div>
-
-  return <div>Welcome, {session.user.email}</div>
-}
-```
-
-</CodeTabs>
-
-## auth.getUser()
-
-Retrieves the current user from the session.
-
-```typescript showLineNumbers
-const { data, error } = await client.auth.getUser();
-
-if (data.user) {
-  console.log('User ID:', data.user.id);
-  console.log('Email:', data.user.email);
-}
-```
-
-## auth.updateUser()
-
-Updates user profile information.
+<TwoColumnItem title="Update user profile" method="auth.updateUser()" id="auth-updateuser">
+<LeftContent>
 
 Note: Password updates require password reset flow for security.
 
 ### Parameters
 
-- **email**: `string | undefined` (optional)
+<details>
+<summary>View parameters</summary>
 
-- **phone**: `string | undefined` (optional)
+| Parameter            | Type                        | Required |
+| -------------------- | --------------------------- | -------- |
+| <tt>name</tt>        | string \| undefined         |          |
+| <tt>image</tt>       | string \| null \| undefined |          |
+| <tt>phoneNumber</tt> | string \| null \| undefined |          |
 
-- **password**: `string | undefined` (optional)
+</details>
 
-- **nonce**: `string | undefined` (optional)
-
-- **data**: `object | undefined` (optional)
-
-```typescript showLineNumbers
+</LeftContent>
+<RightCode>
+```typescript
 const { data, error } = await client.auth.updateUser({
-  email: 'newemail@example.com',
-});
+  email: 'newemail@example.com'
+})
 ```
+</RightCode>
+</TwoColumnItem>
 
-## auth.onAuthStateChange()
+<TwoColumnItem title="Send verification OTP code" method="auth.emailOtp.sendVerificationOtp()" id="auth-sendverificationotp">
+<LeftContent>
 
-Subscribe to authentication state changes.
+Sends an OTP (one-time password) code to the user's email for sign-in.
+The user must then call `signIn.emailOtp()` with the received code.
 
-- Fires on sign in, sign out, token refresh, and user updates
-- Syncs automatically across browser tabs
-- Returns subscription with unsubscribe() method
+### Parameters
 
-```typescript showLineNumbers
-import { useState, useEffect } from 'react'
+<details>
+<summary>View parameters</summary>
 
-function App() {
-  const [session, setSession] = useState(null)
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>type</tt>  | object | ✓        |
 
-  useEffect(() => {
-    // Get initial session
-    client.auth.getSession().then(({ data }) => {
-      setSession(data.session)
-    })
+</details>
 
-    // Listen for changes
-    const { data: { subscription } } = client.auth.onAuthStateChange(
-      (_event, session) => {
-        setSession(session)
-      }
-    )
+</LeftContent>
+<RightCode>
+```typescript
+const { error } = await client.auth.emailOtp.sendVerificationOtp({
+  email: 'user@example.com',
+  type: 'sign-in'
+})
 
-    // Cleanup
-    return () => subscription.unsubscribe()
-  }, [])
-
-  return <div>{session ? 'Logged in' : 'Logged out'}</div>
+if (error) {
+  console.error('Failed to send OTP:', error.message)
 }
 ```
+</RightCode>
+</TwoColumnItem>
 
-## auth.resetPasswordForEmail()
+<TwoColumnItem title="Sign in with OTP code" method="auth.signIn.emailOtp()" id="auth-signinwithotp">
+<LeftContent>
 
-Sends a password reset email to the user.
+Signs in a user using an OTP code received via email.
+First call `emailOtp.sendVerificationOtp()` to send the code.
 
-```typescript showLineNumbers
-const { data, error } = await client.auth.resetPasswordForEmail('user@example.com');
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.auth.signIn.emailOtp({
+  email: 'user@example.com',
+  otp: '123456'
+})
+
+if (error) {
+  console.error('OTP verification failed:', error.message)
+} else {
+  console.log('Signed in:', data.user.email)
+}
 ```
+</RightCode>
+</TwoColumnItem>
 
-## from().select()
+<TwoColumnItem title="Verify email with OTP" method="auth.emailOtp.verifyEmail()" id="auth-verifyemailotp">
+<LeftContent>
 
-Perform a SELECT query on a table.
+Verifies a user's email address using an OTP code sent during signup.
+This is typically used after `signUp.email()` when email verification is required.
 
-- Authentication token is included automatically
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.auth.emailOtp.verifyEmail({
+  email: 'user@example.com',
+  otp: '123456'
+})
+
+if (error) {
+  console.error('Email verification failed:', error.message)
+} else {
+  console.log('Email verified successfully')
+}
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Check verification OTP code" method="auth.emailOtp.checkVerificationOtp()" id="auth-checkverificationotp">
+<LeftContent>
+
+Checks if an OTP code is valid without completing the verification flow.
+Useful for password reset flows where you need to verify the code before allowing password change.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>type</tt>  | object | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.auth.emailOtp.checkVerificationOtp({
+  email: 'user@example.com',
+  otp: '123456',
+  type: 'forget-password'
+})
+
+if (error || !data.success) {
+  console.error('Invalid OTP code')
+}
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Send verification email" method="auth.sendVerificationEmail()" id="auth-sendverificationemail">
+<LeftContent>
+
+Sends a verification email to the user. Used for email verification after signup or email change.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter            | Type                | Required |
+| -------------------- | ------------------- | -------- |
+| <tt>email</tt>       | string              | ✓        |
+| <tt>callbackURL</tt> | string \| undefined |          |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { error } = await client.auth.sendVerificationEmail({
+  email: 'user@example.com',
+  callbackURL: 'https://yourapp.com/verify-email'
+})
+
+if (error) {
+  console.error('Failed to send verification email:', error.message)
+}
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Verify email address" method="auth.verifyEmail()" id="auth-verifyemail">
+<LeftContent>
+
+Verifies an email address using a token from a verification email link.
+Used for email change verification.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>query</tt> | object | ✓        |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.auth.verifyEmail({
+  query: {
+    token: 'verification-token-from-email',
+    callbackURL: 'https://yourapp.com/email-verified'
+  }
+})
+
+if (error) {
+  console.error('Email verification failed:', error.message)
+}
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Request password reset" method="auth.requestPasswordReset()" id="auth-requestpasswordreset">
+<LeftContent>
+
+Sends a password reset email to the user. The email contains a link to reset the password.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter           | Type                | Required |
+| ------------------- | ------------------- | -------- |
+| <tt>email</tt>      | string              | ✓        |
+| <tt>redirectTo</tt> | string \| undefined |          |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { error } = await client.auth.requestPasswordReset({
+  email: 'user@example.com',
+  redirectTo: 'https://yourapp.com/reset-password'
+})
+
+if (error) {
+  console.error('Failed to send password reset email:', error.message)
+}
+```
+</RightCode>
+</TwoColumnItem>
+
+</TwoColumnLayout>
+
+<TwoColumnLayout>
+
+<TwoColumnItem title="Fetch data from a table" method="from().select()" id="select" isFirstInGroup={true}>
+<LeftContent>
+
+- Authentication token is included automatically if user is signed in
 - Returns typed data based on your database schema
-- Requires active session (throws AuthRequiredError if not signed in)
+- Row-level security policies determine what data is returned
 
+</LeftContent>
+<RightCode>
 <CodeTabs labels={["Select all rows","Select specific columns","Select with filter","Select with related tables"]}>
 
-```typescript showLineNumbers
+```typescript
 const { data, error } = await client.from('todos').select('*');
 ```
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('id, title, completed');
+```typescript
+const { data, error } = await client
+  .from("todos")
+  .select("id, title, completed");
 ```
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').eq('completed', false);
+```typescript
+const { data, error } = await client
+  .from("todos")
+  .select("*")
+  .eq("completed", false);
 ```
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*, owner:users(*)');
+```typescript
+const { data, error } = await client.from("todos").select("*, owner:users(*)");
 ```
 
 </CodeTabs>
+</RightCode>
+</TwoColumnItem>
 
-## from().insert()
-
-Insert new rows into a table.
+<TwoColumnItem title="Insert data into a table" method="from().insert()" id="insert">
+<LeftContent>
 
 - Authentication token is included automatically
 - Can insert single or multiple rows
 - Returns inserted data by default
 
+</LeftContent>
+<RightCode>
 <CodeTabs labels={["Insert a single row","Insert multiple rows"]}>
 
-```typescript showLineNumbers
+```typescript
 const { data, error } = await client
-  .from('todos')
-  .insert({ title: 'Buy groceries', completed: false })
+  .from("todos")
+  .insert({ title: "Buy groceries", completed: false })
   .select();
 ```
 
-```typescript showLineNumbers
+```typescript
 const { data, error } = await client
-  .from('todos')
+  .from("todos")
   .insert([
-    { title: 'Task 1', completed: false },
-    { title: 'Task 2', completed: false },
+    { title: "Task 1", completed: false },
+    { title: "Task 2", completed: false },
   ])
   .select();
 ```
 
 </CodeTabs>
+</RightCode>
+</TwoColumnItem>
 
-## from().update()
-
-Update existing rows in a table.
+<TwoColumnItem title="Update existing rows" method="from().update()" id="update">
+<LeftContent>
 
 - Requires filter to specify which rows to update
 - Authentication token is included automatically
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').update({ completed: true }).eq('id', 1).select();
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .update({ completed: true })
+  .eq('id', 1)
+  .select()
 ```
+</RightCode>
+</TwoColumnItem>
 
-## from().delete()
-
-Delete rows from a table.
+<TwoColumnItem title="Delete rows from a table" method="from().delete()" id="delete">
+<LeftContent>
 
 - Requires filter to specify which rows to delete
 - Authentication token is included automatically
 
 ### Parameters
 
-- **count**: `"exact" | "planned" | "estimated" | undefined` (optional)
+<details>
+<summary>View parameters</summary>
 
-```typescript showLineNumbers
-const { error } = await client.from('todos').delete().eq('id', 1);
+| Parameter      | Type                                             | Required |
+| -------------- | ------------------------------------------------ | -------- |
+| <tt>count</tt> | "exact" \| "planned" \| "estimated" \| undefined |          |
+
+</details>
+
+</LeftContent>
+<RightCode>
+```typescript
+const { error } = await client
+  .from('todos')
+  .delete()
+  .eq('id', 1)
 ```
+</RightCode>
+</TwoColumnItem>
 
-## .eq()
+<TwoColumnItem title="Call a stored procedure" method=".rpc()" id="rpc">
+<LeftContent>
 
-Filter rows where column equals value.
+- Authentication token is included automatically
+- Pass parameters as object
+- Returns function result
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').eq('completed', true);
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client.rpc('get_user_stats', {
+  user_id: 123,
+  start_date: '2024-01-01'
+})
+
+if (error) {
+  console.error('RPC error:', error.message)
+} else {
+  console.log('Stats:', data)
+}
 ```
+</RightCode>
+</TwoColumnItem>
 
-## .neq()
+<TwoColumnItem title="Column is equal to a value" method=".eq(column, value)" id="eq">
+<LeftContent>
 
-Filter rows where column does not equal value.
+Filters rows where the specified column equals the given value.
+Can be chained with other filters to create complex queries.
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').neq('status', 'archived');
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .eq('completed', true)
 ```
+</RightCode>
+</TwoColumnItem>
 
-## .gt()
+<TwoColumnItem title="Column is not equal to a value" method=".neq(column, value)" id="neq">
+<LeftContent>
 
-Filter rows where column is greater than value.
+Filters rows where the specified column does not equal the given value.
+Useful for excluding specific values from results.
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').gt('priority', 5);
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .neq('status', 'archived')
 ```
+</RightCode>
+</TwoColumnItem>
 
-## .lt()
+<TwoColumnItem title="Column is greater than a value" method=".gt(column, value)" id="gt">
+<LeftContent>
 
-Filter rows where column is less than value.
+Filters rows where the specified column is greater than the given value.
+Works with numeric values, dates, and other comparable types.
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').lt('priority', 10);
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .gt('priority', 5)
 ```
+</RightCode>
+</TwoColumnItem>
 
-## .order()
+<TwoColumnItem title="Column is less than a value" method=".lt(column, value)" id="lt">
+<LeftContent>
 
-Order query results by column.
+Filters rows where the specified column is less than the given value.
+Works with numeric values, dates, and other comparable types.
 
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .lt('priority', 10)
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Order results by column" method=".order(column, options)" id="order">
+<LeftContent>
+
+Sorts query results by the specified column.
+Use `{ ascending: true }` for ascending order or `{ ascending: false }` for descending order.
+
+</LeftContent>
+<RightCode>
 <CodeTabs labels={["Order ascending","Order descending"]}>
 
-```typescript showLineNumbers
+```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .order('created_at', { ascending: true });
+  .order('created_at', { ascending: true })
 ```
 
-```typescript showLineNumbers
+```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .order('created_at', { ascending: false });
+  .order('created_at', { ascending: false })
 ```
 
 </CodeTabs>
+</RightCode>
+</TwoColumnItem>
 
-## .limit()
+</TwoColumnLayout>
 
-Limit the number of rows returned.
+<TwoColumnLayout>
 
-```typescript showLineNumbers
-const { data, error } = await client.from('todos').select('*').limit(10);
+<TwoColumnItem title="Limit number of results" method=".limit(count)" id="limit" isFirstInGroup={true}>
+<LeftContent>
+
+Limits the number of rows returned by the query.
+Useful for pagination and preventing large result sets.
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .limit(10)
 ```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column is greater than or equal to a value" method=".gte(column, value)" id="gte">
+<LeftContent>
+
+Filters rows where the specified column is greater than or equal to the given value.
+The comparison is inclusive (includes rows where column equals the value).
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .gte('priority', 5)
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column is less than or equal to a value" method=".lte(column, value)" id="lte">
+<LeftContent>
+
+Filters rows where the specified column is less than or equal to the given value.
+The comparison is inclusive (includes rows where column equals the value).
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .lte('priority', 10)
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column matches a pattern" method=".like(column, pattern)" id="like">
+<LeftContent>
+
+Filter rows where column matches pattern (case-sensitive).
+
+Use % as wildcard: '%pattern%' matches any string containing 'pattern'
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .like('title', '%groceries%')
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column matches a pattern (case-insensitive)" method=".ilike(column, pattern)" id="ilike">
+<LeftContent>
+
+Use % as wildcard: '%pattern%' matches any string containing 'pattern'
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .ilike('title', '%groceries%')
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column is null or not null" method=".is(column, value)" id="is">
+<LeftContent>
+
+Filters rows based on whether a column is null or not null.
+Use `null` to find rows where the column is null, or `'not.null'` to find rows where it's not null.
+
+</LeftContent>
+<RightCode>
+<CodeTabs labels={["Is null","Is not null"]}>
+
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .is('deleted_at', null)
+```
+
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .is('completed_at', 'not.null')
+```
+
+</CodeTabs>
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column value is in an array" method=".in(column, array)" id="in">
+<LeftContent>
+
+Filters rows where the column value matches any value in the provided array.
+Useful for filtering by multiple possible values (e.g., status in ['pending', 'active']).
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .in('status', ['pending', 'in-progress'])
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Array or JSONB column contains value" method=".contains(column, value)" id="contains">
+<LeftContent>
+
+Filters rows where an array or JSONB column contains the specified value.
+For arrays, checks if the value exists in the array. For JSONB, checks if the value is contained in the JSON object.
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .contains('tags', ['urgent'])
+```
+</RightCode>
+</TwoColumnItem>
+
+<TwoColumnItem title="Column value is between two values" method=".range(column, start, end)" id="range">
+<LeftContent>
+
+Range is inclusive (includes both start and end values).
+
+</LeftContent>
+<RightCode>
+```typescript
+const { data, error } = await client
+  .from('todos')
+  .select('*')
+  .range('priority', 5, 10)
+```
+</RightCode>
+</TwoColumnItem>
+
+</TwoColumnLayout>
+

@@ -87,6 +87,7 @@ const SDKTableOfContents = ({ sections, title = 'SDK Reference' }) => {
                     currentAnchor={currentAnchor}
                     isUserScrolling={isUserScrolling}
                     setIsUserScrolling={setIsUserScrolling}
+                    level={1}
                     {...item}
                   />
                 </li>
