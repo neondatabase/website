@@ -20,9 +20,12 @@ tag: beta
   </DocsList>
 </InfoBlock>
 
-The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js), [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
+The Neon Data API lets you query your Neon database directly from your application using a PostgREST-compatible REST API. No backend server required, just secure authenticated API calls from your frontend.
+
+Use the [Neon SDK (`@neondatabase/neon-js`)](#query-from-your-app) for JavaScript/TypeScript applications, which provides integrated authentication and type-safe database queries. For other languages, use PostgREST compatible client libraries like [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest) (Python) or [`postgrest-go`](https://github.com/supabase-community/postgrest-go) (Go).
 
 ```javascript shouldWrap
+// Using the Neon SDK
 const { data } = await client.from('posts').select('*');
 ```
 
@@ -207,38 +210,63 @@ With the `posts` table and its RLS policies in place, you can now securely query
 
 ## Query from your app
 
-The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example showing how to use it with `postgrest-js`:
+### Install the SDK
+
+Install the [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) package:
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+### Use the SDK
+
+The Neon SDK provides a unified client that combines authentication and database querying. For example:
 
 ```ts shouldWrap
-import { PostgrestClient } from '@supabase/postgrest-js';
-import { useUser } from '@stackframe/stack';
+import { createClient, BetterAuthVanillaAdapter } from '@neondatabase/neon-js';
+import type { Database } from './types/database.types';
+
+// Create and export the client for reuse across your app
+export const client = createClient<Database>({ // [!code highlight]
+  auth: { // [!code highlight]
+    adapter: BetterAuthVanillaAdapter, // [!code highlight]
+    url: import.meta.env.VITE_NEON_AUTH_URL, // [!code highlight]
+  }, // [!code highlight]
+  dataApi: { // [!code highlight]
+    url: import.meta.env.VITE_NEON_DATA_API_URL, // [!code highlight]
+  }, // [!code highlight]
+}); // [!code highlight]
 
 // Example: fetch notes for the current user
-async function fetchUserNotes() {
-  const user = useUser(); // [!code highlight]
-  if (!user) return null;
-
-  const { accessToken } = await user.getAuthJson(); // [!code highlight]
-  const pg = new PostgrestClient(import.meta.env.VITE_DATA_API_URL, {
-    headers: { Authorization: `Bearer ${accessToken}` }, // [!code highlight]
-  });
-
-  const { data, error } = await pg
+export async function fetchUserNotes() {
+  // Get current session // [!code highlight]
+  const session = await client.auth.getSession(); // [!code highlight]
+  if (!session) return null;
+  
+  const user = session.user;
+  
+  // Query database - token automatically injected! // [!code highlight]
+  const { data, error } = await client
     .from('notes')
     .select('id, title, created_at, owner_id, shared')
     .eq('owner_id', user.id) // [!code highlight]
     .order('created_at', { ascending: false }); // [!code highlight]
-
+    
   return { data, error };
 }
 ```
 
+<Admonition type="tip" title="Other authentication adapters">
+This example uses `BetterAuthVanillaAdapter` for direct Better Auth API access. If you prefer a Supabase-compatible API, use `SupabaseAuthAdapter` instead, which provides familiar methods like `signInWithPassword()`. See the [Neon Auth documentation](/docs/guides/neon-auth) for all available adapters and their APIs.
+</Admonition>
+
 This example shows the key steps:
 
-1. Get the current user with `useUser()`
-2. Extract their JWT token with `user.getAuthJson()`
-3. Create a PostgrestClient with proper authentication headers
+1. Create a unified client with `createClient()` that handles both authentication and database access
+2. Export the client for reuse throughout your application
+3. Get the current session with `client.auth.getSession()`
 4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
+5. JWT tokens are automatically injected into all database requests
 
 To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
 

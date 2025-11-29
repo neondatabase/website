@@ -16,6 +16,10 @@ tag: beta
 
 The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Neon Auth](/docs/guides/neon-auth) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
 
+<Admonition type="tip" title="Using Neon Auth?">
+If you're using Neon Auth as your authentication provider, we recommend the [Neon SDK (@neondatabase/neon-js)](/docs/data-api/get-started#query-from-your-app) which provides a unified client for authentication and database access. The SDK automatically handles JWT token management so you don't need to manually configure authentication headers.
+</Admonition>
+
 ## How it works
 
 When you bring your own authentication provider, the JWT validation flow works as follows:
