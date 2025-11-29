@@ -1,5 +1,5 @@
 import 'styles/globals.css';
-
+import { GeistMono } from 'geist/font/mono';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
@@ -26,7 +26,7 @@ export const viewport = {
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
