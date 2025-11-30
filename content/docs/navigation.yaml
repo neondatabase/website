@@ -340,10 +340,14 @@
       items:
         - title: Data API
           icon: api
-          slug: data-api/get-started
+          slug: data-api/overview
           items:
+            - title: Overview
+              slug: data-api/overview
             - title: Get started
               slug: data-api/get-started
+            - title: Access control & security
+              slug: data-api/access-control
             - title: Building a note-taking app
               slug: data-api/demo
             - title: Secure your app with RLS
@@ -352,6 +356,10 @@
               slug: data-api/sql-to-rest
             - title: Custom authentication providers
               slug: data-api/custom-authentication-providers
+            - title: Generate Typescript types
+              slug: data-api/generate-types
+            - title: Manage Data API
+              slug: data-api/manage
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
