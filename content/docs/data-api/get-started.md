@@ -1,156 +1,117 @@
 ---
 title: Getting started with Neon Data API
-description: >-
-  Learn how to use the Neon Data API, a ready-to-use REST API built on top of
-  your Neon database
+subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-11-13T20:54:35.552Z'
+updatedOn: '2025-11-30T00:00:00.000Z'
 tag: beta
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
-<InfoBlock>
-  <DocsList title="Related docs" theme="docs">
-    <a href="/docs/guides/neon-auth">Neon Auth</a>
-    <a href="/docs/data-api/demo">Building a note-taking app</a>
-  </DocsList>
-  <DocsList title="Demo app" theme="repo">
-    <a href="https://github.com/neondatabase-labs/neon-data-api-neon-auth">Neon Data API demo note-taking app</a>
-  </DocsList>
-</InfoBlock>
-
-The Neon Data API offers a ready-to-use REST API for your Neon database that's compatible with [PostgREST](https://docs.postgrest.org/en/v13/). You can interact with any table, view, or function using standard HTTP verbs (`GET`, `POST`, `PATCH`, `DELETE`). To simplify querying, use client libraries like [`postgrest-js`](https://github.com/supabase/supabase-js/tree/master/packages/core/postgrest-js), [`postgrest-py`](https://github.com/supabase/supabase-py/tree/main/src/postgrest), or [`postgrest-go`](https://github.com/supabase-community/postgrest-go):
-
-```javascript shouldWrap
-const { data } = await client.from('posts').select('*');
-```
-
-<Admonition type="info" title="About RLS">
-When using the Data API, it is essential to set up RLS policies so that you can safely expose your databases to clients such as web apps. Make sure that all of your tables have RLS policies, and that you have carefully reviewed each policy.
-</Admonition>
+In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
 
 <Steps>
 
 ## Enable the Data API
 
-Enable the Data API at the **branch** level for a single database.
-
-<Admonition type="important">
-Data API and [IP Allow](/docs/manage/projects#configure-ip-allow) cannot be used together. To enable Data API, you must first disable IP Allow on your project.
+<Admonition type="important" title="Data API is branch-specific">
+The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the appropriate branch before enabling the API.
 </Admonition>
 
-To get started, open the **Data API** page from the project sidebar and click **Enable**.
+To enable the Neon Data API, navigate to the **Data API** section in the Neon Console sidebar and click **Enable**.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-Once enabled, you'll get:
+Select an authentication method:
 
-- A **REST API endpoint** for your branch
-- Neon Auth as your auth provider
-- Two Postgres roles: `authenticated` and `anonymous` (coming soon)
-- GRANT permissions applied to the authenticated role
-
-<Admonition type="info" title="Custom authentication providers">
-We recommend Neon Auth with the Data API, but you can bring your own authentication provider (Auth0, Clerk, AWS Cognito, etc.) if you want. See [Custom Authentication Providers](/docs/data-api/custom-authentication-providers) for details.
-</Admonition>
-
-![Data API enabled view with REST API Endpoint](/docs/data-api/data-api-enabled.png)
-
-<Admonition type="info" title="Having trouble enabling the Data API?">
-If you encounter a "permission denied to create extension" error when enabling the Data API, this usually means your database was created via direct SQL rather than the Console API. See our [troubleshooting guide](/docs/data-api/troubleshooting) for solutions.
-</Admonition>
-
-## Secure your Data API
-
-The Data API requires two layers of security:
-
-1. Database permissions (GRANT statements, already configured if you accepted the defaults)
-2. Row-Level Security (RLS) policies
-
-### Database permissions
-
-If you accepted the defaults during setup, Neon automatically applied the necessary GRANT statements. If you skipped that step, you'll need to run these SQL statements manually:
-
-```sql
--- For existing tables
-GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES
-  IN SCHEMA public TO authenticated;
-
--- For future tables
-ALTER DEFAULT PRIVILEGES IN SCHEMA public
-  GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
-
--- For sequences (for identity columns)
-GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
-
--- Schema usage
-GRANT USAGE ON SCHEMA public TO authenticated;
-```
+- **Neon Auth** (recommended): Integrates with Neon Auth for seamless user and token management. Ideal for applications requiring user authentication.
+- **Bring Your Own Auth**: Use your own authentication system by providing the JWKS URL for your auth provider.
+- **No Auth**: No authentication integration. Suitable for server-side scripts or backends where you manage tokens manually or authentication isn't required. _(under development)_
 
 <Admonition type="warning" title="Authentication required">
 **All requests to the Data API currently require authentication** with a valid JWT token. Anonymous access is not supported yet, but is coming soon. In the near future, we'll provide public/long-lived tokens for anonymous users.
 </Admonition>
 
-### Create a table with RLS
+![Data API enabled view](/docs/data-api/data-api-enabled.png)
 
-Here's a sample `posts` table secured with RLS. The GRANT statements above give authenticated users access to all tables, which allows the Data API to work. RLS policies then control which specific rows each user can see and modify.
+<Admonition type="note">
+Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Please ensure IP Allow is disabled before proceeding.
+</Admonition>
+
+Once enabled, Neon provisions:
+
+1.  A dedicated **REST API endpoint** (e.g., `https://.../rest/v1`).
+2.  **Neon Auth** integration for managing users and tokens (if selected).
+
+## Create a table with RLS
+
+The Data API interacts directly with your Postgres schema. Because the API is accessible over the internet, it's crucial to enforce security at the database level using PostgreSQL's **Row-Level Security (RLS)** features.
 
 For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
 
+In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. Run the following SQL in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) to create a `posts` table with RLS policies:
+
 <CodeTabs labels={["SQL", "Drizzle (crudPolicy)", "Drizzle (pgPolicy)"]}>
 
-```sql shouldWrap
-CREATE TABLE "posts" (
-	"id" bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
-	"userId" text DEFAULT (auth.user_id()) NOT NULL,
-	"content" text NOT NULL,
-	"published" boolean DEFAULT false NOT NULL
+```sql
+-- 1. Create the table
+CREATE TABLE posts (
+  id bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  user_id text DEFAULT (auth.user_id()) NOT NULL,
+  content text NOT NULL,
+  is_published boolean DEFAULT false,
+  "created_at" timestamp with time zone DEFAULT now() NOT NULL
 );
 
--- Enable RLS and create policies
-ALTER TABLE "posts" ENABLE ROW LEVEL SECURITY;
+-- 2. Enable RLS
+ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 
--- When RLS is enabled, all operations are denied by default unless explicitly allowed by policies.
+-- 3. Create Policy: Users can see all published posts and their own posts
+CREATE POLICY "Public read access" ON posts
+  AS PERMISSIVE
+  FOR SELECT TO authenticated
+  USING (is_published OR (select auth.user_id() = "posts"."user_id"));
 
-CREATE POLICY "Allow authenticated users to read any post" ON "posts"
-AS PERMISSIVE FOR SELECT TO "authenticated"
-USING (true);
+-- 4. Create Policy: Users can insert their own posts
+CREATE POLICY "Users can insert their own posts" ON posts
+  AS PERMISSIVE
+  FOR INSERT TO "authenticated"
+  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
 
-CREATE POLICY "Allow authenticated users to insert their own posts" ON "posts"
-AS PERMISSIVE FOR INSERT TO "authenticated"
-WITH CHECK ((select auth.user_id() = "userId"));
+-- 5. Create Policy: Users can update their own posts
+CREATE POLICY "Users can update their own posts" ON posts
+  AS PERMISSIVE
+  FOR UPDATE TO "authenticated"
+  USING ((select auth.user_id() = "posts"."user_id"))
+  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
 
-CREATE POLICY "Allow authenticated users to update their own posts" ON "posts"
-AS PERMISSIVE FOR UPDATE TO "authenticated"
-USING ((select auth.user_id() = "userId"))
-WITH CHECK ((select auth.user_id() = "userId"));
-
-CREATE POLICY "Allow authenticated users to delete their own posts" ON "posts"
-AS PERMISSIVE FOR DELETE TO "authenticated"
-USING ((select auth.user_id() = "userId"));
+CREATE POLICY "Users can delete their own posts" ON posts
+  AS PERMISSIVE
+  FOR DELETE TO "authenticated"
+  USING ((select auth.user_id() = "posts"."user_id"));
 ```
 
 ```typescript
 import { sql } from 'drizzle-orm';
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
-import { bigint, boolean, pgTable, text } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const posts = pgTable(
   'posts',
   {
     id: bigint({ mode: 'number' }).primaryKey(),
-    userId: text()
+    userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     content: text().notNull(),
-    published: boolean().notNull().default(false),
+    isPublished: boolean('is_published').notNull().default(false),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     // Policy for authenticated users
     crudPolicy({
       role: authenticatedRole,
-      read: true, // Can also read all posts
+      read: sql`is_published OR (select auth.user_id() = ${table.userId})`, // Can read published posts or their own posts
       modify: authUid(table.userId), // Can only modify their own posts
     }),
   ]
@@ -160,24 +121,25 @@ export const posts = pgTable(
 ```typescript
 import { sql } from 'drizzle-orm';
 import { authenticatedRole, authUid } from 'drizzle-orm/neon';
-import { bigint, boolean, pgPolicy, pgTable, text } from 'drizzle-orm/pg-core';
+import { bigint, boolean, pgPolicy, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const posts = pgTable(
   'posts',
   {
     id: bigint({ mode: 'number' }).primaryKey(),
-    userId: text()
+    userId: text('user_id')
       .notNull()
       .default(sql`(auth.user_id())`),
     content: text().notNull(),
-    published: boolean().notNull().default(false),
+    isPublished: boolean('is_published').notNull().default(false),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
     // Authenticated users
-    pgPolicy('Allow authenticated users to read any post', {
+    pgPolicy('Allow authenticated users to read published posts and their own posts', {
       to: authenticatedRole,
       for: 'select',
-      using: sql`true`,
+      using: sql`is_published OR (select auth.user_id() = ${table.userId})`,
     }),
     pgPolicy('Allow authenticated users to insert their own posts', {
       to: authenticatedRole,
@@ -201,50 +163,9 @@ export const posts = pgTable(
 
 </CodeTabs>
 
-The `auth.user_id()` function is provided by the Data API and extracts the user ID from JWT tokens, making it available to your RLS policies for enforcing per-user access control.
-
-With the `posts` table and its RLS policies in place, you can now securely query and modify posts using the Data API.
-
-## Query from your app
-
-The Neon Auth SDK (Stack Auth) manages JWT tokens automatically. Here's an example showing how to use it with `postgrest-js`:
-
-```ts shouldWrap
-import { PostgrestClient } from '@supabase/postgrest-js';
-import { useUser } from '@stackframe/stack';
-
-// Example: fetch notes for the current user
-async function fetchUserNotes() {
-  const user = useUser(); // [!code highlight]
-  if (!user) return null;
-
-  const { accessToken } = await user.getAuthJson(); // [!code highlight]
-  const pg = new PostgrestClient(import.meta.env.VITE_DATA_API_URL, {
-    headers: { Authorization: `Bearer ${accessToken}` }, // [!code highlight]
-  });
-
-  const { data, error } = await pg
-    .from('notes')
-    .select('id, title, created_at, owner_id, shared')
-    .eq('owner_id', user.id) // [!code highlight]
-    .order('created_at', { ascending: false }); // [!code highlight]
-
-  return { data, error };
-}
-```
-
-This example shows the key steps:
-
-1. Get the current user with `useUser()`
-2. Extract their JWT token with `user.getAuthJson()`
-3. Create a PostgrestClient with proper authentication headers
-4. Query the Data API with filtering (`.eq('owner_id', user.id)`) and ordering (`.order('created_at', { ascending: false })`)
-
-To see a complete, working example of an application built with the Data API, Neon Auth, and Postgres RLS, check out our demo note-taking app:
-
-- [Full tutorial](/docs/data-api/demo) - Step-by-step guide to building the app
-- [GitHub Repository](https://github.com/neondatabase-labs/neon-data-api-neon-auth)
-- [Live Demo](https://neon-data-api-neon-auth.vercel.app/)
+<Admonition type="info" title="What is auth.user_id() and authUid()?">
+`auth.user_id()` is a Data API helper that extracts the User ID from the JWT token for secure database permission enforcement. `authUid()` is a Drizzle ORM helper that simplifies using `auth.user_id()` in policies.
+</Admonition>
 
 ## Refresh schema cache
 
@@ -252,4 +173,120 @@ When you modify your database schema (adding tables, columns, or changing struct
 
 After making any schema changes, go to the **Data API** section in the Console and click **Refresh schema cache**; the API will now reflect your latest schema.
 
+![Data API refresh schema cache button](/docs/changelog/data_api_schema_refresh.png)
+
+## Connect and Query
+
+Dependending on your preference, you can connect to the Neon Data API using either the Neon SDKs or direct HTTP requests.
+
+### Option 1: Using Neon SDK's
+
+Install the client library and run your first query. Choose the option that fits your use case:
+
+<Tabs labels={["With Neon Auth", "With Your Own Auth"]}>
+
+<TabItem>
+
+Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) when connecting from a frontend or application using Neon Auth for user management.
+
+**1. Install**
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+**2. Usage**
+
+```typescript shouldWrap
+import { createClient } from '@neondatabase/neon-js';
+
+// Initialize with Auth integration
+const client = createClient({
+  auth: {
+    url: process.env.NEON_AUTH_URL, // e.g. https://.../neondb/auth: Your Neon Auth endpoint from the Console
+  },
+  dataApi: {
+    url: process.env.NEON_DATA_API_URL, // e.g. https://.../rest/v1: Your Neon Data API endpoint from the Console
+  },
+});
+
+// Query (Token is automatically injected if user is logged in. Refer `client.auth.signIn` methods in Neon Auth docs for login flows)
+const { data, error } = await client
+  .from('posts')
+  .select('*')
+  .eq('is_published', true)
+  .order('created_at', { ascending: false });
+
+console.log(data);
+```
+
+</TabItem>
+
+<TabItem>
+
+Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) when using your own authentication system (like [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), [Firebase Auth](https://firebase.google.com/products/auth), etc.) to provide JWT tokens for the Data API.
+
+**1. Install**
+
+```bash
+npm install @neondatabase/postgrest-js
+```
+
+**2. Usage**
+
+You need to provide a function that retrieves the JWT token from your authentication system. This token will be included in each request to the Data API to enforce RLS policies.
+
+```typescript shouldWrap
+import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
+
+const getTokenFromAuthSystem = async (): Promise<string> => {
+  // Implement jwt token retrieval logic from your auth system using sessions, cookies, env vars, etc.
+  return 'your-jwt-token';
+};
+
+// Initialize the lightweight client
+const client = new NeonPostgrestClient({
+  dataApiUrl: process.env.NEON_DATA_API_URL!, // e.g. https://.../rest/v1: Your Neon Data API endpoint from the Console
+  options: {
+    global: {
+      fetch: fetchWithToken(getTokenFromAuthSystem),
+    },
+  },
+});
+
+// Query
+const { data, error } = await client
+  .from('posts')
+  .select('*')
+  .eq('is_published', true)
+  .order('created_at', { ascending: false });
+
+console.log(data);
+```
+
+</TabItem>
+
+</Tabs>
+
+> For detailed guidance on performing `INSERT`, `UPDATE`, `DELETE`, and advanced queries (filters, joins, stored procedures, etc.) in either case, refer to the [Neon Javascript SDK documentation](/docs/reference/javascript-sdk#insert).
+
+### Option 2: Direct HTTP Requests
+
+You can also interact with the Neon Data API directly using standard HTTP requests. Ensure you include the `Authorization` header with a valid JWT token for authentication. The JWT token must include the `sub` claim for RLS policies to work correctly.
+
+```bash shouldWrap
+curl -X GET 'https://your-neon-data-api-endpoint/rest/v1/posts?is_published=eq.true&order=created_at.desc' \
+  -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
+  -H 'Content-Type: application/json'
+```
+
+> For more details on constructing requests and handling responses, refer to the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
+
 </Steps>
+
+## Next steps
+
+- **RLS**: Learn more about Row-Level Security in Neon
+  - [Row-Level Security with Neon](/docs/guides/row-level-security)
+  - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)
+- **[Generate TypeScript Types](/docs/data-api/generate-types)**: Introspect your database to get full autocomplete for your table names and columns.

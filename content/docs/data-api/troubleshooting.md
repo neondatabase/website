@@ -39,3 +39,23 @@ curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${
     }
   }'
 ```
+
+## JWT token missing `sub` claim
+
+The JWT token must include the `sub` claim, which identifies the user, to enable Row-Level Security (RLS) policies. Ensure your authentication system includes this claim when generating JWT tokens for the Neon Data API. An example JWT payload with the `sub` claim is shown below:
+
+```json
+{
+  "iat": 1764502220,
+  "createdAt": "2025-11-28T15:01:13.821Z",
+  "updatedAt": "2025-11-28T15:01:13.821Z",
+  "role": "authenticated",
+  "id": "41a5f680-89d2-474d-ae59-e27bfbbbd293",
+  "sub": "41a5f680-89d2-474d-ae59-e27bfbbbd293", // [!code ++]
+  "exp": 1764503120,
+  "iss": "https://ep-spring-silence-ad3hu80n.neonauth.c-2.us-east-1.aws.neon.tech",
+  "aud": "https://ep-spring-silence-ad3hu80n.neonauth.c-2.us-east-1.aws.neon.tech"
+}
+```
+
+The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represents the unique identifier for the authenticated user. This claim is used by your RLS policies to determine which data the user is allowed to access.
