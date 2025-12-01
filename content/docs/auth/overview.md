@@ -11,7 +11,7 @@ This page is a placeholder. Content coming soon.
 
 ## What is Neon Auth?
 
-Neon Auth is a managed authentication service that stores all auth data directly in your Neon database. When you branch your database, your authentication data branches with it automatically.
+Neon Auth is a managed authentication service built on Better Auth that stores all auth data directly in your Neon database. When you branch your database, your authentication data branches with it automatically.
 
 ## Quick Start
 

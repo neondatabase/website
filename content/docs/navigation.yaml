@@ -344,6 +344,9 @@
               slug: data-api/get-started
             - title: Building a note-taking app
               slug: data-api/demo
+            - title: Generate TypeScript types
+              slug: data-api/gen-types
+              tag: wip
             - title: Secure your app with RLS
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
@@ -361,47 +364,35 @@
                 - title: Overview
                   slug: auth/overview
                   tag: wip
-                - title: Branching
-                  slug: auth/concepts/branching-authentication
+                - title: Authentication Flow
+                  slug: auth/authentication-flow
+                - title: Branching Authentication
+                  slug: auth/branching-authentication
 
             - section: Quickstarts
               items:
                 - title: React
                   slug: auth/quick-start/react
-                - title: React Router
-                  slug: auth/quick-start/react-router
                 - title: React Router with UI
                   slug: auth/quick-start/react-router-components
-                  tag: wip
-
-            - section: Core Concepts
-              items:
-                - title: Authentication Flow
-                  slug: auth/concepts/authentication-flow
-                - title: Session Management
-                  slug: auth/concepts/session-management
-                - title: Email Verification
-                  slug: auth/concepts/email-verification
-                  tag: wip
-                - title: OAuth
-                  slug: auth/concepts/oauth
-                  tag: wip
 
             - section: Guides
               items:
                 - title: Email Verification
                   slug: auth/guides/email-verification
-                - title: Set up OAuth with Google
-                  slug: auth/guides/setup-oauth-google
+                - title: Set up OAuth
+                  slug: auth/guides/setup-oauth
+                - title: Password Reset
+                  slug: auth/guides/password-reset
+                  tag: wip
+                - title: User Management
+                  slug: auth/guides/user-management
                   tag: wip
 
             - section: Reference
               items:
                 - title: JavaScript SDK
                   slug: reference/javascript-sdk
-                - title: SDK CLI
-                  slug: auth/reference/sdk-cli
-                  tag: wip
 
             - section: Migration Guides
               items:
