@@ -76,7 +76,7 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### ☑ Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 60 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 70 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
 
