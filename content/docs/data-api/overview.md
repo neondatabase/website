@@ -18,6 +18,10 @@ The Neon Data API provides a secure, stateless HTTP interface to your database. 
 - **Secure by default**
   The API is designed to expose your database safely. It integrates with Neon Auth and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see.
 
+## PostgREST compatibility
+
+The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using our specialized client libraries, [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) and [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js).
+
 ## Quickstart
 
 <DetailIconCards>
