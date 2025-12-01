@@ -422,6 +422,16 @@ const defaultConfig = {
         destination: '/programs/creators',
         permanent: true,
       },
+      {
+        source: '/open-source',
+        destination: '/programs/open-source',
+        permanent: true,
+      },
+      {
+        source: '/agents',
+        destination: '/programs/agents',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -472,10 +482,6 @@ const defaultConfig = {
       {
         source: '/ai-chat',
         destination: '/docs/introduction#ai-chat',
-      },
-      {
-        source: '/agents',
-        destination: '/use-cases/ai-agents',
       },
     ];
   },
