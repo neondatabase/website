@@ -227,14 +227,17 @@ curl --request POST \
 In this example, we are restoring a development branch `dev/alex` (branch ID `br-twilight-river-31791249`) to the latest data (head) of its parent branch `br-jolly-star-07007859`. Note that we don't include any time identifier or backup branch name; this is a straight reset of the branch to the head of its parent.
 
 ```bash shouldWrap
-curl --request POST \ // [!code word:br-twilight-river-31791249]
+curl --request POST \
+     # [!code word:br-twilight-river-31791249]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
-     --header 'Content-Type: application/json' \ // [!code word:br-jolly-star-07007859]
+     --header 'Content-Type: application/json' \
      --data '
 {
-  "source_branch_id": "br-jolly-star-07007859"}
+  # [!code word:br-jolly-star-07007859]
+  "source_branch_id": "br-jolly-star-07007859"
+}
 ' | jq
 ```
 
@@ -243,13 +246,15 @@ curl --request POST \ // [!code word:br-twilight-river-31791249]
 In this example, we are restoring branch `dev/jordan` (branch ID `br-damp-smoke-91135977`) to branch `dev/alex` (branch ID `br-twilight-river-31791249`) at the point in time of `Feb 26, 2024 12:00:00.000 AM`.
 
 ```bash shouldWrap
-curl --request POST \ // [!code word:br-damp-smoke-91135977]
+curl --request POST \
+     # [!code word:br-damp-smoke-91135977]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
      --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" \ //  [!code word:br-jolly-star-07007859]
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
+  # [!code word:br-jolly-star-07007859]
   "source_branch_id": "br-jolly-star-07007859",
   "source_timestamp": "2024-02-26T12:00:00Z"
 }

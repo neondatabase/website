@@ -38,10 +38,9 @@ To create a branch:
 3. Click **New branch** to open the branch creation dialog.
 4. Specify a branch name.
 5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
-
-<Admonition type="note">
-When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
-</Admonition>
+   <Admonition type="note">
+   When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
+   </Admonition>
 
 6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
