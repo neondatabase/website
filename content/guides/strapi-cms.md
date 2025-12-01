@@ -36,7 +36,7 @@ To get started, go to the [Neon console](https://console.neon.tech/app/projects)
 
 You will then be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
 
-![Neon Connection Details](/guides/images/strapi-cms/20b94d5f-aff4-4594-b60b-3a65d4fc884c.png)
+![Neon Connection Details](/docs/connect/connection_details.png)
 
 All Neon connection strings have the following format:
 
@@ -320,9 +320,11 @@ npm run build && npm run preview
 
 ## Scale-to-zero with Postgres (powered by Neon)
 
-Interestingly, during the entire process of building this application, you have used Neon's **Scale-to-zero** feature which places your Postgres compute endpoint into an idle state after 5 minutes of inactivity. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+Interestingly, during the entire process of building this application, you have used Neon's **Scale-to-zero** feature which places your Postgres compute endpoint into an idle state after 5 minutes of inactivity.
 
-![Neon Monitoring page](/guides/images/strapi-cms/ee753f7d-3da8-4a4c-84c5-be7b6cdce486.png)
+Click on the **Monitoring** button in the Neon Console sidebar, then open **System operations** to see when the compute was started and automatically suspended to reduce usage.
+
+![Neon Monitoring page](/docs/changelog/operations_monitoring.png)
 
 ## Summary
 

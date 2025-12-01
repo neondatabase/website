@@ -31,14 +31,13 @@ You can view system operations via the Neon Console, [Neon CLI](/docs/reference/
 
 <TabItem>
 
-You can view system operations via the **Monitoring** page in the Neon Console.
+To view system operations for a specific branch, open the **Monitoring** page in the Neon Console. Select the desired branch from the left-hand sidebar, and the console will display the corresponding system operations.
 
 ![System operations](/docs/changelog/operations_monitoring.png)
 
 Operation details include:
 
 - **Operation**: The action performed by the operation.
-- **Branch**: The branch on which the operation was performed.
 - **Compute**: The compute on which the operation occurred.
 - **Operation status**: The status of the operation.
 - **Duration**: The duration of the operation.
