@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-11-18T03:41:10.523Z'
+updatedOn: '2025-12-01T14:10:56.555Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
