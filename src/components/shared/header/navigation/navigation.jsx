@@ -287,7 +287,7 @@ const Navigation = () => {
       {/* Shared submenu container */}
       <div
         className={clsx(
-          'main-navigation-submenu absolute left-0 top-full z-40 w-full overflow-hidden bg-black-pure',
+          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
           'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
           {
             'pointer-events-none': activeMenuIndex === null,

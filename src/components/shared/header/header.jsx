@@ -18,7 +18,6 @@ const Header = ({
   docPageType = null,
   docsNavigation = null,
   docsBasePath = null,
-  withBorder = false,
   customType = null,
   isClient = false,
 }) => (
@@ -28,7 +27,6 @@ const Header = ({
       isSticky={isSticky}
       isStickyOverlay={isStickyOverlay}
       theme={theme}
-      withBorder={withBorder}
     >
       {isDocPage ? (
         <DocsHeader
@@ -64,7 +62,6 @@ Header.propTypes = {
   docPageType: PropTypes.string,
   docsNavigation: PropTypes.array,
   docsBasePath: PropTypes.string,
-  withBorder: PropTypes.bool,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,

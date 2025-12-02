@@ -5,7 +5,7 @@ import { GUIDES_BASE_PATH } from 'constants/guides';
 
 // eslint-disable-next-line react/prop-types
 const GuidesPageLayout = async ({ children }) => (
-  <Layout headerWithBorder burgerWithoutBorder isHeaderSticky hasThemesSupport>
+  <Layout burgerWithoutBorder isHeaderSticky hasThemesSupport>
     <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
       <Container
         className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-16 xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-12 md:pt-10 sm:pt-10"

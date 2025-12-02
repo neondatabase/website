@@ -34,7 +34,6 @@ HeaderWrapper.propTypes = {
   className: PropTypes.string,
   isSticky: PropTypes.bool,
   isStickyOverlay: PropTypes.bool,
-  withBorder: PropTypes.bool,
 };
 
 export default HeaderWrapper;

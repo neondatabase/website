@@ -16,7 +16,6 @@ const NeonDocsLayout = async ({ children }) => {
       docsBasePath={DOCS_BASE_PATH}
       isDocPage
       isHeaderSticky
-      headerWithBorder
       hasThemesSupport
     >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:flex-col">

@@ -11,7 +11,6 @@ const Layout = ({
   headerClassName = null,
   withOverflowHidden = false,
   children,
-  headerWithBorder = false,
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
@@ -39,7 +38,6 @@ const Layout = ({
         docPageType={docPageType}
         docsNavigation={docsNavigation}
         docsBasePath={docsBasePath}
-        withBorder={headerWithBorder}
         customType={customType}
         isClient={isClient}
       />
@@ -61,7 +59,6 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
-  headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
   docsNavigation: PropTypes.array,
