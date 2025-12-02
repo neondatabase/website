@@ -88,7 +88,9 @@ Similar to the manual restore operation using the Neon Console and API described
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
 2. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
 3. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-4. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note: When restoring a root branch, both the new branch and the backup branch become root branches with no parent. When restoring a non-root branch, the initial branch (now the backup) becomes the parent of the new branch.
+4. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. 
+
+> When restoring a root branch, both the new branch and the backup branch become root branches with no parent. When restoring a non-root branch, the initial branch (now the backup) becomes the parent of the new branch.
 
 </details>
 
