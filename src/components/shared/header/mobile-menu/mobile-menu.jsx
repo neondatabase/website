@@ -207,7 +207,7 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-8 top-4 z-40 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
+      <div className="absolute right-8 top-4 z-50 hidden items-center gap-5 lg:flex lg:gap-x-4 md:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className={clsx(
