@@ -11,10 +11,10 @@ updatedOn: '2025-01-XXT00:00:00.000Z'
 
 This guide will cover the following SDK methods:
 
-- `auth.updateUser({ name?, image?, phoneNumber?, email? })` - Update user profile information
-- `auth.changePassword({ newPassword, currentPassword, revokeOtherSessions? })` - Change password while logged in
-- `auth.changeEmail({ newEmail, callbackURL? })` - Change user email address
-- `auth.deleteUser({ callbackURL?, password?, token? })` - Delete user account
+- `auth.updateUser({ name?, image?, phoneNumber?, email? })` - Update user profile information ✅
+- `auth.changePassword({ newPassword, currentPassword, revokeOtherSessions? })` - Change password while logged in ⚠️ Not yet exposed
+- `auth.changeEmail({ newEmail, callbackURL? })` - Change user email address ⚠️ Not yet exposed
+- `auth.deleteUser({ callbackURL?, password?, token? })` - Delete user account ⚠️ Not yet exposed
 
 ## Topics covered
 
