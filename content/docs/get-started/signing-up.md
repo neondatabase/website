@@ -176,6 +176,8 @@ Your project comes with a `development` branch that's an isolated copy of your `
 
    This command shows your existing branches, including the `production` and `development` branches.
 
+   > NOTE: You might get error like this: `ERROR: org_id is required, you can find it on your organization settings page` - you'll need to set your project-id, the message is misleading `neon set-context --project-id <projectID>` 
+
 ## Make some sample schema changes
 
 First, let's make sure our development branch is in sync with production. This ensures we're starting from the same baseline:
