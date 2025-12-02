@@ -233,7 +233,7 @@ const Navigation = () => {
   }, [activeMenuIndex]);
 
   return (
-    <nav className="main-navigation lg:hidden">
+    <nav className="group/main-nav lg:hidden">
       <ul className="flex items-center">
         {MENUS.header.map(({ to, text, sections }, index) => {
           const hasSubmenu = sections?.length > 0;
@@ -250,11 +250,11 @@ const Navigation = () => {
                   menuButtonRefs.current[index] = el;
                 }}
                 className={clsx(
-                  'relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200  hover:!text-white focus-visible:outline-[revert] xl:px-2.5',
+                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white focus-visible:outline-[revert] group-hover/main-nav:text-gray-new-70 xl:px-2.5',
                   {
                     '-ml-3.5  xl:-ml-2.5 ': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
-                    '!text-white': activeMenuIndex === null || isActive,
+                    '!text-white': isActive,
                     '!text-gray-new-70': activeMenuIndex !== null && !isActive,
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
@@ -271,10 +271,10 @@ const Navigation = () => {
                 {text}
                 {hasSubmenu && (
                   <ChevronIcon
-                    className={clsx('transition-all duration-200', {
-                      'text-white opacity-100': isActive,
-                      'text-gray-new-70 opacity-60 group-hover/main-nav:text-white': !isActive,
-                    })}
+                    className={clsx(
+                      'text-gray-new-70 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-white',
+                      { 'text-white': isActive }
+                    )}
                     aria-hidden="true"
                   />
                 )}
@@ -287,7 +287,7 @@ const Navigation = () => {
       {/* Shared submenu container */}
       <div
         className={clsx(
-          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
+          'main-navigation-submenu absolute left-0 top-full z-40 w-full overflow-hidden bg-black-pure',
           'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
           {
             'pointer-events-none': activeMenuIndex === null,
@@ -360,7 +360,7 @@ const Navigation = () => {
                                     <ArrowTopRightIcon
                                       width={12}
                                       height={12}
-                                      className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[transform,opacity] duration-300 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white"
+                                      className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white"
                                     />
                                   </span>
                                   {description}

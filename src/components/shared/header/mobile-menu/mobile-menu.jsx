@@ -56,9 +56,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
     <li
       className={clsx(
         'shrink-0 overflow-hidden border-b border-gray-new-94 last:border-b-0 dark:border-gray-new-20',
-        {
-          'pb-14 sm:pb-10': isMenuItemOpen,
-        }
+        { 'pb-14 sm:pb-10': isMenuItemOpen }
       )}
     >
       <Tag
@@ -154,12 +152,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div
-        className={clsx(
-          'absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4',
-          { 'right-8 top-4': isDocPage }
-        )}
-      >
+      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
           className="relative flex text-black dark:text-white"
@@ -179,8 +172,9 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
               variants={variants}
             >
               <div
-                className={clsx('relative h-full pb-[144px] pt-[60px] sm:pb-[188px]', {
+                className={clsx('relative h-full pb-[101px] pt-14 sm:pb-[125px]', {
                   'pt-[96px]': hasTopbar,
+                  'pb-[148px] sm:pb-[172px]': isDocPage,
                 })}
               >
                 <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
@@ -188,11 +182,30 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                     <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-white p-8 pb-[68px] dark:bg-black-pure sm:grid-cols-1 sm:p-5 sm:pb-[68px]">
-                  <Button to={LINKS.login} theme="gray-40-outline" tagName="MobileMenu" size="lg">
+                <div
+                  className={clsx(
+                    'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
+                    { 'pb-20 sm:pb-[68px]': isDocPage }
+                  )}
+                >
+                  <Button
+                    className="h-9 border border-gray-new-40 px-[18px]"
+                    to={LINKS.login}
+                    theme="transparent"
+                    size="xxs"
+                    tagName="MobileMenu"
+                    analyticsEvent="header_log_in_clicked"
+                  >
                     Log In
                   </Button>
-                  <Button to={LINKS.signup} theme="white-filled" tagName="MobileMenu" size="lg">
+                  <Button
+                    className="h-9 px-[18px]"
+                    to={LINKS.signup}
+                    theme="white-filled-multi"
+                    size="xxs"
+                    tagName="MobileMenu"
+                    analyticsEvent="header_sign_up_clicked"
+                  >
                     Sign Up
                   </Button>
                 </div>

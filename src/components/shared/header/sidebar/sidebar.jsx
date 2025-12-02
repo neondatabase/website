@@ -39,6 +39,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
     {!isClient && <GitHubStars />}
     <div className="flex gap-2.5 lg:hidden">
       <Button
+        className="h-9 px-[18px]"
         to={LINKS.signup}
         theme="white-filled-multi"
         size="xxs"
@@ -48,6 +49,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
         Sign Up
       </Button>
       <Button
+        className="h-9 px-[18px]"
         to={LINKS.login}
         theme="transparent"
         size="xxs"

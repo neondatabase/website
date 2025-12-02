@@ -11,7 +11,7 @@ const NeonDocsLayout = async ({ children }) => {
 
   return (
     <Layout
-      headerClassName="h-28 lg:h-16"
+      headerClassName="h-28"
       docsNavigation={navigation}
       docsBasePath={DOCS_BASE_PATH}
       isDocPage

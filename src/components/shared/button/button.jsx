@@ -23,8 +23,7 @@ const styles = {
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
-    'white-filled':
-      'text-white bg-black-pure hover:bg-gray-new-20 dark:bg-white dark:text-black hover:dark:bg-gray-new-80',
+    'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     'gray-40-outline':
