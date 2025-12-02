@@ -11,22 +11,27 @@ export default {
             {
               title: 'Autoscaling',
               to: LINKS.autoscaling,
+              description: 'Automatic instance sizing',
             },
             {
               title: 'Branching',
               to: LINKS.branching,
+              description: 'Faster Postgres workflows',
             },
             {
               title: 'Bottomless storage',
               to: LINKS.storage,
+              description: 'With copy-on-write',
             },
             {
               title: 'Instant restores',
               to: LINKS.branchRestore,
+              description: 'Recover TBs in seconds',
             },
             {
               title: 'Connection pooler',
               to: LINKS.connectionPooling,
+              description: 'Built-in with pgBouncer',
             },
           ],
         },
@@ -36,24 +41,29 @@ export default {
             {
               title: 'Neon API',
               to: LINKS.api,
+              description: 'Manage infra, billing, quotas',
             },
             {
               title: 'Auth',
               to: LINKS.auth,
+              description: 'Add authentication',
             },
             {
               title: 'Data API',
               to: LINKS.dataApi,
+              description: 'PostgREST-compatible',
             },
 
             {
               title: 'Instagres',
               to: LINKS.instagres,
+              description: 'No-signup flow',
               isExternal: true,
             },
             {
               title: 'Migration guides',
               to: LINKS.migrationIntro,
+              description: 'Step-by-step',
             },
           ],
         },
@@ -68,26 +78,32 @@ export default {
             {
               title: 'Serverless apps',
               to: `${LINKS.useCases}/serverless-apps`,
+              description: 'Autoscale with traffic',
             },
             {
               title: 'Multi-TB',
               to: `${LINKS.useCases}/multi-tb`,
+              description: 'Scale & restore instantly',
             },
             {
               title: 'Database per tenant',
               to: `${LINKS.useCases}/database-per-tenant`,
+              description: 'Data isolation without overhead',
             },
             {
               title: 'Platforms',
               to: LINKS.platforms,
+              description: 'Offer Postgres to your users',
             },
             {
-              title: 'Development and testing',
+              title: 'Dev/Test',
               to: `${LINKS.useCases}/dev-test`,
+              description: 'Production-like environments',
             },
             {
-              title: 'AI Agent Platforms',
+              title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
+              description: 'Build full-stack AI agents',
             },
           ],
         },
@@ -97,14 +113,17 @@ export default {
             {
               title: 'Startups',
               to: LINKS.startups,
+              description: 'Build with Neon',
             },
             {
               title: 'Security',
               to: LINKS.security,
+              description: 'Compliance & privacy',
             },
             {
               title: 'Case studies',
               to: LINKS.caseStudies,
+              description: 'Explore customer stories',
             },
           ],
         },
@@ -127,18 +146,22 @@ export default {
             {
               title: 'Blog',
               to: LINKS.blog,
+              description: 'Autoscale with traffic',
             },
             {
               title: 'About us',
               to: LINKS.aboutUs,
+              description: 'Scale & restore instantly',
             },
             {
               title: 'Careers',
               to: LINKS.careers,
+              description: 'Data isolation without overhead',
             },
             {
               title: 'Contact',
               to: LINKS.contactSales,
+              description: 'Offer Postgres to your users',
             },
           ],
         },
@@ -148,18 +171,22 @@ export default {
             {
               title: 'Support',
               to: LINKS.support,
+              description: 'Build with Neon',
             },
             {
               title: 'Community guides',
               to: LINKS.guides,
+              description: 'Compliance & privacy',
             },
             {
               title: 'Changelog',
               to: LINKS.changelog,
+              description: 'Explore customer stories',
             },
             {
               title: 'Creators',
               to: LINKS.creators,
+              description: 'Explore customer stories',
             },
           ],
         },

@@ -62,7 +62,7 @@ const TopbarClient = ({ text, link }) => {
       }}
     >
       <div className="-mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
-        <span className="truncate text-sm font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40 dark:text-white group-hover:dark:text-gray-new-80">
+        <span className="truncate text-sm font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white group-hover:dark:text-gray-new-80">
           {text}
         </span>
         <ChevronIcon className="origin-center -rotate-90 text-black-pure opacity-40 dark:text-white dark:opacity-60" />

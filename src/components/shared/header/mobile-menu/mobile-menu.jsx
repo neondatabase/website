@@ -15,6 +15,7 @@ import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import Burger from '../burger';
+import MenuBanner from '../menu-banner';
 
 const ANIMATION_DURATION = 0.2;
 
@@ -43,6 +44,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = sections ? Button : Link;
   const hasSubmenu = sections?.length > 0;
+  const isProduct = text === 'Product';
 
   const handleMenuItemClick = () => {
     if (sections) {
@@ -52,57 +54,66 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
 
   return (
     <li
-      className={clsx('shrink-0 overflow-hidden border-b border-gray-new-20 last:border-b-0', {
-        'pb-14 sm:pb-7': isMenuItemOpen,
-      })}
+      className={clsx(
+        'shrink-0 overflow-hidden border-b border-gray-new-94 last:border-b-0 dark:border-gray-new-20',
+        {
+          'pb-14 sm:pb-10': isMenuItemOpen,
+        }
+      )}
     >
       <Tag
-        className={clsx(
-          'relative flex w-full items-center py-7 text-[28px] font-medium leading-none tracking-snug transition-colors duration-200 sm:py-5 sm:text-xl',
-          { 'sm:pb-3': isMenuItemOpen }
-        )}
+        className="relative flex w-full items-center py-7 text-2xl font-medium leading-none tracking-extra-tight sm:py-6 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
         {...otherProps}
       >
         {text}
-        {sections && <ChevronIcon width={24} height={24} className="ml-auto text-white" />}
+        {sections && (
+          <ChevronIcon width={24} height={24} className="ml-auto text-black-pure dark:text-white" />
+        )}
       </Tag>
       {hasSubmenu && (
         <AnimatePresence>
           {isMenuItemOpen && (
-            <m.ul
-              initial={{ height: 0, opacity: 0, paddingTop: 0 }}
-              animate={{ height: 'auto', opacity: 1, paddingTop: 12 }}
-              exit={{ height: 0, opacity: 0, paddingTop: 0 }}
+            <m.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
-              className="grid grid-cols-2 gap-x-[104px] gap-y-9 pt-3 sm:grid-cols-1"
+              className="flex gap-x-3.5 md:flex-col md:gap-y-9"
             >
-              {sections.map(({ title, items }, index) => (
-                <li className="min-w-[216px]" key={index}>
-                  {title && (
-                    <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
-                      {title}
-                    </h3>
-                  )}
-                  <ul className="flex flex-col gap-5">
-                    {items.map(({ title, to, isExternal }) => (
-                      <li key={title}>
-                        <Link
-                          className="block text-lg leading-none tracking-snug text-white sm:text-base"
-                          to={to}
-                          isExternal={isExternal}
-                          tagName="MobileMenu"
-                        >
-                          {title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </m.ul>
+              <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
+                {sections.map(({ title, items }, index) => (
+                  <li key={index}>
+                    {title && (
+                      <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
+                        {title}
+                      </h3>
+                    )}
+                    <ul className="flex flex-col gap-5">
+                      {items.map(({ title, description, to, isExternal }) => (
+                        <li key={title}>
+                          <Link
+                            className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
+                            to={to}
+                            isExternal={isExternal}
+                            tagName="MobileMenu"
+                          >
+                            <span className="text-lg font-medium leading-none tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                              {title}
+                            </span>
+
+                            {description}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
+              </ul>
+              {isProduct && <MenuBanner />}
+            </m.div>
           )}
         </AnimatePresence>
       )}
@@ -143,10 +154,15 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
 
   return (
     <>
-      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
+      <div
+        className={clsx(
+          'absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4',
+          { 'right-8 top-4': isDocPage }
+        )}
+      >
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
-          className="relative flex text-white"
+          className="relative flex text-black dark:text-white"
           isToggled={isMobileMenuOpen}
           isNewDesign
           onClick={toggleMobileMenu}
@@ -156,14 +172,14 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.nav
-              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-black-pure lg:flex"
+              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-white dark:bg-black-pure lg:flex"
               initial="from"
               animate="to"
               exit="from"
               variants={variants}
             >
               <div
-                className={clsx('relative h-full pb-[108px] pt-[60px] sm:pb-[158px]', {
+                className={clsx('relative h-full pb-[144px] pt-[60px] sm:pb-[188px]', {
                   'pt-[96px]': hasTopbar,
                 })}
               >
@@ -172,7 +188,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                     <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
-                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-black-pure p-8 sm:grid-cols-1 sm:p-5">
+                <div className="absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 bg-white p-8 pb-[68px] dark:bg-black-pure sm:grid-cols-1 sm:p-5 sm:pb-[68px]">
                   <Button to={LINKS.login} theme="gray-40-outline" tagName="MobileMenu" size="lg">
                     Log In
                   </Button>

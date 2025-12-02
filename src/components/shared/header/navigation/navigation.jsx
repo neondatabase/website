@@ -9,7 +9,12 @@ import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
+import ArrowTopRightIcon from 'icons/arrow-top-right.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
+
+import MenuBanner from '../menu-banner';
+
+const SUBMENU_SELECTOR_NAME = 'main-navigation-submenu-link';
 
 const Navigation = () => {
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
@@ -95,7 +100,7 @@ const Navigation = () => {
         e.preventDefault();
         submenuContainerRef.current
           .querySelector(`#submenu-${index}`)
-          .querySelector('.main-navigation-submenu-link')
+          .querySelector(`.${SUBMENU_SELECTOR_NAME}`)
           .focus();
       }
     }
@@ -131,6 +136,10 @@ const Navigation = () => {
         setActiveMenuIndex(null);
         setIsKeyboardOpen(false);
 
+        const currentlyFocused = document.activeElement;
+        const submenuPanel = document.getElementById(`submenu-${activeMenuIndex}`);
+
+        if (!submenuPanel || !submenuPanel.contains(currentlyFocused)) return;
         if (menuButtonRefs.current[activeMenuIndex]) {
           menuButtonRefs.current[activeMenuIndex].focus();
         }
@@ -154,6 +163,7 @@ const Navigation = () => {
     let linkIndex = -1;
     return (e) => {
       const menuTrigger = menuButtonRefs.current[containerIndex];
+      const nextMenuTrigger = menuButtonRefs.current[containerIndex + 1] || null;
 
       if (linkIndex === -1) {
         links.forEach((link, idx) => {
@@ -185,6 +195,11 @@ const Navigation = () => {
         if (linkIndex === 0 && e.shiftKey) {
           e.preventDefault();
           menuTrigger.focus();
+        }
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length && nextMenuTrigger) {
+          e.preventDefault();
+          nextMenuTrigger.focus();
         }
       }
     };
@@ -287,6 +302,7 @@ const Navigation = () => {
           {MENUS.header.map((menu, index) => {
             const isActive = activeMenuIndex === index;
             const sections = menu.sections || [];
+            const isProduct = menu.text === 'Product';
 
             return (
               <div
@@ -302,9 +318,12 @@ const Navigation = () => {
                 data-submenu-panel
               >
                 {sections.length > 0 && (
-                  <Container size="1600" className="w-full overflow-hidden">
+                  <Container
+                    size="1600"
+                    className="flex w-full gap-x-[160px] overflow-hidden pb-12 pt-7 xl:gap-x-8"
+                  >
                     <ul
-                      className="flex gap-x-[136px] pb-16 pl-[calc(102px+92px+2px)] pt-8 xl:pl-[calc(102px+40px)]"
+                      className="flex gap-x-[128px] pl-[calc(102px+92px+2px)] pt-1 xl:gap-x-5 xl:pl-[calc(102px+40px)]"
                       role="menu"
                     >
                       {sections.map(({ title, items }, sectionIndex) => (
@@ -318,24 +337,16 @@ const Navigation = () => {
                             </span>
                           )}
                           <ul
-                            className={clsx(
-                              'group flex flex-col',
-                              sectionIndex === 0 ? 'gap-y-5' : 'gap-y-4'
-                            )}
+                            className="flex flex-col gap-y-6"
                             role="group"
                             aria-labelledby={
                               title ? `submenu-${index}-section-${sectionIndex}` : undefined
                             }
                           >
-                            {items?.map(({ title, to, isExternal }) => (
+                            {items?.map(({ title, description, to, isExternal }) => (
                               <li key={title} role="none">
                                 <Link
-                                  className={clsx(
-                                    'main-navigation-submenu-link flex leading-none tracking-snug  transition-colors duration-200 hover:!text-white group-hover:text-gray-new-70',
-                                    sectionIndex === 0
-                                      ? '-my-2.5 py-2.5 text-2xl text-white'
-                                      : '-my-2 py-2 text-sm text-gray-new-70'
-                                  )}
+                                  className={`group ${SUBMENU_SELECTOR_NAME} -mx-1 -my-3 grid min-w-[224px] gap-y-2 px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
                                   to={to}
                                   isExternal={isExternal}
                                   tagName="Navigation"
@@ -344,7 +355,15 @@ const Navigation = () => {
                                   tabIndex={isActive ? 0 : -1}
                                   onKeyDown={makeHandleSubmenuNavigation(index)}
                                 >
-                                  {title}
+                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white">
+                                    {title}
+                                    <ArrowTopRightIcon
+                                      width={12}
+                                      height={12}
+                                      className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[transform,opacity] duration-300 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white"
+                                    />
+                                  </span>
+                                  {description}
                                 </Link>
                               </li>
                             ))}
@@ -352,6 +371,16 @@ const Navigation = () => {
                         </li>
                       ))}
                     </ul>
+                    {isProduct && (
+                      <MenuBanner
+                        linkProps={{
+                          className: SUBMENU_SELECTOR_NAME,
+                          role: 'menuitem',
+                          tabIndex: isActive ? 0 : -1,
+                          onKeyDown: makeHandleSubmenuNavigation(index),
+                        }}
+                      />
+                    )}
                   </Container>
                 )}
               </div>

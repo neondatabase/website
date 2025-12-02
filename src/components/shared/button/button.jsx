@@ -23,10 +23,12 @@ const styles = {
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
-    'white-filled': 'bg-white text-black hover:bg-gray-new-80',
+    'white-filled':
+      'text-white bg-black-pure hover:bg-gray-new-20 dark:bg-white dark:text-black hover:dark:bg-gray-new-80',
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
-    'gray-40-outline': 'bg-white/0.02 border border-gray-new-40 text-white hover:border-white',
+    'gray-40-outline':
+      ' bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     'green-filled': 'bg-green-52 text-black hover:bg-primary-1',

@@ -35,7 +35,7 @@ const HeaderWrapper = ({
           withBorder &&
             clsx(
               'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px',
-              'after:bg-gray-new-10 after:transition-opacity after:duration-200',
+              'after:transition-opacity after:duration-200 after:dark:bg-gray-new-10',
               isStickied ? 'after:opacity-100' : 'after:opacity-0'
             ),
           className
