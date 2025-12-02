@@ -23,39 +23,41 @@ const Header = ({
   customType = null,
   isClient = false,
 }) => (
-  <HeaderWrapper
-    className={className}
-    isSticky={isSticky}
-    isStickyOverlay={isStickyOverlay}
-    theme={theme}
-    withBorder={withBorder}
-  >
-    {isDocPage ? (
-      <DocsHeader
-        customType={customType}
-        docPageType={docPageType}
-        isClient={isClient}
-        navigation={docsNavigation}
-        basePath={docsBasePath}
-      />
-    ) : (
-      <Container className="z-[38] flex w-full items-center justify-between md:!px-5" size="1344">
-        <div className="flex items-center gap-x-[90px] xl:gap-x-16">
-          <Logo
-            className="h-7"
-            isDarkTheme={isDarkTheme}
-            width={102}
-            height={28}
-            priority
-            isHeader
-          />
-          <Navigation isDarkTheme={isDarkTheme} />
-        </div>
-        <Sidebar isDarkTheme={isDarkTheme} isClient={isClient} />
-      </Container>
-    )}
+  <>
+    <HeaderWrapper
+      className={className}
+      isSticky={isSticky}
+      isStickyOverlay={isStickyOverlay}
+      theme={theme}
+      withBorder={withBorder}
+    >
+      {isDocPage ? (
+        <DocsHeader
+          customType={customType}
+          docPageType={docPageType}
+          isClient={isClient}
+          navigation={docsNavigation}
+          basePath={docsBasePath}
+        />
+      ) : (
+        <Container className="z-10 flex w-full items-center justify-between md:!px-5" size="1344">
+          <div className="flex items-center gap-x-[90px] xl:gap-x-16">
+            <Logo
+              className="h-7"
+              isDarkTheme={isDarkTheme}
+              width={102}
+              height={28}
+              priority
+              isHeader
+            />
+            <Navigation isDarkTheme={isDarkTheme} />
+          </div>
+          <Sidebar isDarkTheme={isDarkTheme} isClient={isClient} />
+        </Container>
+      )}
+    </HeaderWrapper>
     <MobileMenu isDarkTheme={isDarkTheme} isDocPage={isDocPage} docPageType={docPageType} />
-  </HeaderWrapper>
+  </>
 );
 
 Header.propTypes = {

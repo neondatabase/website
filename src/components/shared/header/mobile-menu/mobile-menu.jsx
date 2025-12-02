@@ -30,7 +30,7 @@ const variants = {
     },
   },
   to: {
-    zIndex: 35,
+    zIndex: 39,
     opacity: 1,
     translateY: 0,
     transition: {
