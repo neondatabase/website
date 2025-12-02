@@ -121,7 +121,7 @@ First select the branch you want to restore from the left-hand branch list, then
 1. Make sure the **Enhanced view** toggle is enabled.
    ![Branch Restore from Production Branch](/docs/guides/branch_restore_from_production_branch.png)
 2. Select the branch you want to restore in the sidebar.
-3. Select the point in time you want to restore to using the timestamp selector. If you'd like to verify the data from that moment, click **Preview data**. This opens a Data Preview window where you can view the state of your **Production** branch at the chosen timestamp.
+3. Select the point in time you want to restore to using the timestamp selector. If you'd like to verify the data from that moment, click **Preview data**. This opens a *Preview historic data** window where you can browse, query, or compare the schema of your branch at the chosen timestamp.
 4. Click **Restore to point in time** once you've selected the desired timestamp.
 
    A confirmation window opens giving you details about the restore operation. Review these details to make sure you've made the correct selections.
