@@ -34,23 +34,31 @@ npm install @neondatabase/neon-js
 
 <TwoColumnLayout>
 
-<TwoColumnItem title="Initialize the client" method="createClient()" id="initializing">
+<TwoColumnItem title="Initialize the client" method="createClient(), createAuthClient()" id="initializing">
 <LeftContent>
 
-Create a client instance with your authentication and data API URLs. The client handles:
+**Full client (`createClient`)**
 
-- Authentication token management
-- Database query routing
-- Type-safe database operations
+Use this when you need both authentication and database queries. You get:
 
-To use a different adapter, import it and pass it in the `auth.adapter` option (see third tab).
+- Auth methods like `client.auth.signIn.email()` and `client.auth.signUp.email()`.
+- Database queries like `client.from('todos').select()` and `client.from('users').insert()`.
+
+**Auth-only client (`createAuthClient`)**
+
+Use this when you only need authentication (no database queries). You get:
+
+- Auth methods like `auth.signIn.email()` and `auth.signUp.email()`
+- No database query methods
+
+The auth methods are identical—only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
 </LeftContent>
 <RightCode>
-<CodeTabs labels={["Basic setup","With TypeScript types","With a different adapter"]}>
+<CodeTabs labels={["Full client","Auth-only","With TypeScript types","With a different adapter"]}>
 
 ```typescript
-import { createClient } from "@neondatabase/neon-js";
+import { createClient } from '@neondatabase/neon-js';
 
 const client = createClient({
   auth: {
@@ -63,8 +71,14 @@ const client = createClient({
 ```
 
 ```typescript
-import { createClient } from "@neondatabase/neon-js";
-import type { Database } from "./types/database.types";
+import { createAuthClient } from '@neondatabase/neon-js';
+
+const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+```
+
+```typescript
+import { createClient } from '@neondatabase/neon-js';
+import type { Database } from './types/database.types';
 
 const client = createClient<Database>({
   auth: {
@@ -77,7 +91,7 @@ const client = createClient<Database>({
 ```
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from "@neondatabase/neon-js";
+import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
 
 const client = createClient({
   auth: {
@@ -131,11 +145,12 @@ const result = await client.auth.signUp.email({
 })
 
 if (result.error) {
-  console.error('Sign up error:', result.error.message)
+console.error('Sign up error:', result.error.message)
 } else {
-  console.log('User created:', result.data.user)
+console.log('User created:', result.data.user)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -173,7 +188,8 @@ if (result.error) {
 } else {
   console.log('Signed in:', result.data.user.email)
 }
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -212,15 +228,15 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 
 ```typescript
 await client.auth.signIn.social({
-  provider: "github",
-  callbackURL: "https://yourapp.com/auth/callback",
+  provider: 'github',
+  callbackURL: 'https://yourapp.com/auth/callback',
 });
 ```
 
 ```typescript
 await client.auth.signIn.social({
-  provider: "google",
-  callbackURL: "https://yourapp.com/auth/callback",
+  provider: 'google',
+  callbackURL: 'https://yourapp.com/auth/callback',
 });
 ```
 
@@ -241,9 +257,10 @@ await client.auth.signIn.social({
 const { error } = await client.auth.signOut()
 
 if (error) {
-  console.error('Sign out error:', error.message)
+console.error('Sign out error:', error.message)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -264,7 +281,8 @@ if (data.session) {
 } else {
   console.log('No active session')
 }
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -323,9 +341,10 @@ const { error } = await client.auth.emailOtp.sendVerificationOtp({
 })
 
 if (error) {
-  console.error('Failed to send OTP:', error.message)
+console.error('Failed to send OTP:', error.message)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -360,7 +379,8 @@ if (error) {
 } else {
   console.log('Signed in:', data.user.email)
 }
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -391,11 +411,12 @@ const { data, error } = await client.auth.emailOtp.verifyEmail({
 })
 
 if (error) {
-  console.error('Email verification failed:', error.message)
+console.error('Email verification failed:', error.message)
 } else {
-  console.log('Email verified successfully')
+console.log('Email verified successfully')
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -430,7 +451,8 @@ const { data, error } = await client.auth.emailOtp.checkVerificationOtp({
 if (error || !data.success) {
   console.error('Invalid OTP code')
 }
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -460,9 +482,10 @@ const { error } = await client.auth.sendVerificationEmail({
 })
 
 if (error) {
-  console.error('Failed to send verification email:', error.message)
+console.error('Failed to send verification email:', error.message)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -496,7 +519,8 @@ const { data, error } = await client.auth.verifyEmail({
 if (error) {
   console.error('Email verification failed:', error.message)
 }
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -526,9 +550,10 @@ const { error } = await client.auth.requestPasswordReset({
 })
 
 if (error) {
-  console.error('Failed to send password reset email:', error.message)
+console.error('Failed to send password reset email:', error.message)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -549,23 +574,18 @@ if (error) {
 
 ```typescript
 const { data, error } = await client.from('todos').select('*');
+````
+
+```typescript
+const { data, error } = await client.from('todos').select('id, title, completed');
 ```
 
 ```typescript
-const { data, error } = await client
-  .from("todos")
-  .select("id, title, completed");
+const { data, error } = await client.from('todos').select('*').eq('completed', false);
 ```
 
 ```typescript
-const { data, error } = await client
-  .from("todos")
-  .select("*")
-  .eq("completed", false);
-```
-
-```typescript
-const { data, error } = await client.from("todos").select("*, owner:users(*)");
+const { data, error } = await client.from('todos').select('*, owner:users(*)');
 ```
 
 </CodeTabs>
@@ -585,17 +605,17 @@ const { data, error } = await client.from("todos").select("*, owner:users(*)");
 
 ```typescript
 const { data, error } = await client
-  .from("todos")
-  .insert({ title: "Buy groceries", completed: false })
+  .from('todos')
+  .insert({ title: 'Buy groceries', completed: false })
   .select();
 ```
 
 ```typescript
 const { data, error } = await client
-  .from("todos")
+  .from('todos')
   .insert([
-    { title: "Task 1", completed: false },
-    { title: "Task 2", completed: false },
+    { title: 'Task 1', completed: false },
+    { title: 'Task 2', completed: false },
   ])
   .select();
 ```
@@ -666,11 +686,12 @@ const { data, error } = await client.rpc('get_user_stats', {
 })
 
 if (error) {
-  console.error('RPC error:', error.message)
+console.error('RPC error:', error.message)
 } else {
-  console.log('Stats:', data)
+console.log('Stats:', data)
 }
-```
+
+````
 </RightCode>
 </TwoColumnItem>
 
@@ -687,7 +708,8 @@ const { data, error } = await client
   .from('todos')
   .select('*')
   .eq('completed', true)
-```
+````
+
 </RightCode>
 </TwoColumnItem>
 
@@ -756,14 +778,14 @@ Use `{ ascending: true }` for ascending order or `{ ascending: false }` for desc
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .order('created_at', { ascending: true })
+  .order('created_at', { ascending: true });
 ```
 
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
-  .order('created_at', { ascending: false })
+  .order('created_at', { ascending: false });
 ```
 
 </CodeTabs>
@@ -870,17 +892,11 @@ Use `null` to find rows where the column is null, or `'not.null'` to find rows w
 <CodeTabs labels={["Is null","Is not null"]}>
 
 ```typescript
-const { data, error } = await client
-  .from('todos')
-  .select('*')
-  .is('deleted_at', null)
+const { data, error } = await client.from('todos').select('*').is('deleted_at', null);
 ```
 
 ```typescript
-const { data, error } = await client
-  .from('todos')
-  .select('*')
-  .is('completed_at', 'not.null')
+const { data, error } = await client.from('todos').select('*').is('completed_at', 'not.null');
 ```
 
 </CodeTabs>
@@ -938,4 +954,3 @@ const { data, error } = await client
 </TwoColumnItem>
 
 </TwoColumnLayout>
-

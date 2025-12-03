@@ -68,10 +68,15 @@ const TwoColumnItem = ({ title, method, id, isFirstInGroup, children }) => (
             )}
           </h2>
           {method && (
-            <div className="col-span-2 mb-4 mt-2">
-              <span className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs font-medium leading-normal text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60">
-                {method}
-              </span>
+            <div className="col-span-2 mb-4 mt-2 flex flex-wrap gap-2">
+              {method.split(',').map((m, index) => (
+                <span
+                  key={index}
+                  className="inline-block rounded border border-gray-new-70 bg-gray-new-94 px-2.5 py-1 font-mono text-xs font-medium leading-normal text-gray-new-30 dark:border-gray-new-30 dark:bg-gray-new-15 dark:text-gray-new-60"
+                >
+                  {m.trim()}
+                </span>
+              ))}
             </div>
           )}
         </>

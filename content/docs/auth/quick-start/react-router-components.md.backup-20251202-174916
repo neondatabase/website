@@ -28,13 +28,13 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
 <TwoColumnStep title="Create your React app">
   <LeftContent>
 
-Create a React app using Vite with TypeScript.
+Create a React app using Vite.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npm create vite@latest my-app -- --template react-ts
+npm create vite@latest my-app -- --template react
 ```
 
   </RightCode>
@@ -43,14 +43,14 @@ npm create vite@latest my-app -- --template react-ts
 <TwoColumnStep title="Install packages">
   <LeftContent>
 
-Install the Neon SDK, UI components, and React Router:
+Install the Neon SDK and UI components.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
 cd my-app
-npm install @neondatabase/neon-js @neondatabase/neon-auth-ui react-router-dom
+npm install @neondatabase/neon-js @neondatabase/neon-auth-ui
 ```
 
   </RightCode>
@@ -78,12 +78,12 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 <TwoColumnStep title="Set up authentication">
   <LeftContent>
 
-Create a `src/auth.ts` file to configure your auth client:
+Create a `src/auth.js` file to configure your auth client:
 
   </LeftContent>
-  <RightCode label="src/auth.ts">
+  <RightCode label="src/auth.js">
 
-```typescript
+```javascript
 import { createAuthClient } from '@neondatabase/neon-js';
 
 export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
@@ -92,32 +92,81 @@ export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
   </RightCode>
 </TwoColumnStep>
 
+<TwoColumnStep title="Set up Tailwind CSS">
+  <LeftContent>
+
+Install the PostCSS plugin and create configuration files. Tailwind CSS v4 is bundled with `@neondatabase/neon-auth-ui`, so you only need the PostCSS plugin.
+
+  </LeftContent>
+  <RightCode label="Terminal">
+
+```bash
+npm install -D @tailwindcss/postcss
+```
+
+  </RightCode>
+  <RightCode label="tailwind.config.js">
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    './index.html',
+    './src/**/*.{js,jsx}',
+    './node_modules/@neondatabase/neon-auth-ui/**/*.js',
+  ],
+};
+```
+
+  </RightCode>
+  <RightCode label="postcss.config.js">
+
+```javascript
+import tailwindcssPostcss from '@tailwindcss/postcss';
+
+export default {
+  plugins: [tailwindcssPostcss],
+};
+```
+
+  </RightCode>
+</TwoColumnStep>
+
 <TwoColumnStep title="Wrap your app with the provider">
   <LeftContent>
 
-Replace the contents of `src/main.tsx` to wrap your app with React Router and the auth provider. Import the Neon Auth UI CSS - no additional setup needed:
+Replace the contents of `src/main.jsx` to wrap your app with the auth provider, and replace the contents of `src/index.css` with Tailwind directives:
 
   </LeftContent>
-  <RightCode label="src/main.tsx">
+  <RightCode label="src/main.jsx">
 
-```tsx
+```jsx
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import '@neondatabase/neon-auth-ui/css';
-import App from './App';
+import './index.css';
+import App from './App.jsx';
 import { auth } from './auth';
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <NeonAuthUIProvider authClient={auth}>
-        <App />
-      </NeonAuthUIProvider>
-    </BrowserRouter>
+    <NeonAuthUIProvider authClient={auth}>
+      <App />
+    </NeonAuthUIProvider>
   </StrictMode>
 );
+```
+
+  </RightCode>
+  <RightCode label="src/index.css">
+
+Replace the entire contents of `src/index.css` with:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 ```
 
   </RightCode>
@@ -126,63 +175,37 @@ createRoot(document.getElementById('root')!).render(
 <TwoColumnStep title="Build your authentication UI">
   <LeftContent>
 
-Replace the contents of `src/App.tsx` with routes for authentication. The `<AuthView>` component handles navigation between sign-in and sign-up views automatically:
+Replace the contents of `src/App.jsx` with the authentication component:
+
+The `<AuthView>` component provides a complete authentication UI with sign-up and sign-in forms, including validation and error handling.
 
   </LeftContent>
-  <RightCode label="src/App.tsx">
+  <RightCode label="src/App.jsx">
 
-```tsx
-import { Routes, Route, useParams } from 'react-router-dom';
-import { AuthView, SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+```jsx
+import { AuthView, SignedIn, UserButton } from '@neondatabase/neon-auth-ui';
 
-function Home() {
-  return (
-    <>
-      <SignedIn>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            minHeight: '100vh',
-            gap: '2rem',
-          }}
-        >
-          <div style={{ textAlign: 'center' }}>
-            <h1>Welcome!</h1>
-            <p>You're successfully authenticated.</p>
-            <UserButton />
-          </div>
-        </div>
-      </SignedIn>
-      <RedirectToSignIn />
-    </>
-  );
-}
-
-function Auth() {
-  const { pathname } = useParams();
+export default function App() {
   return (
     <div
       style={{
         display: 'flex',
+        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
+        gap: '2rem',
       }}
     >
-      <AuthView pathname={pathname} />
+      <SignedIn>
+        <div style={{ textAlign: 'center' }}>
+          <h1>Welcome!</h1>
+          <p>You're successfully authenticated.</p>
+          <UserButton />
+        </div>
+      </SignedIn>
+      <AuthView />
     </div>
-  );
-}
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/auth/:pathname" element={<Auth />} />
-    </Routes>
   );
 }
 ```
@@ -193,14 +216,11 @@ export default function App() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server and open [http://localhost:5173](http://localhost:5173):
+Start the development server and open `http://localhost:5173`:
 
-<ul>
-<li>The app redirects to the sign-in page.</li>
-<li>Sign up or sign in with a test email and password.</li>
-<li>After authenticating, you return to the home page with a welcome message and user button.</li>
-<li>Click the user button to access account settings or sign out.</li>
-</ul>
+1. Sign up with a test email and password
+2. After signing up, you'll see the welcome message with your user button
+3. Use the user button to sign out
 
   </LeftContent>
   <RightCode label="Terminal">

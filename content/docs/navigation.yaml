@@ -373,7 +373,7 @@
               items:
                 - title: React
                   slug: auth/quick-start/react
-                - title: React Router with UI
+                - title: React with Neon Auth UI
                   slug: auth/quick-start/react-router-components
 
             - section: Guides
@@ -388,6 +388,10 @@
                 - title: User Management
                   slug: auth/guides/user-management
                   tag: wip
+                - title: Configure Domains
+                  slug: auth/guides/configure-domains
+                - title: Production Checklist
+                  slug: auth/production-checklist
 
             - section: Reference
               items:
