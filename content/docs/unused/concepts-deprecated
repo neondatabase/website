@@ -61,7 +61,7 @@ Neon gives you no cost access to the Postgres databases within the Technical Pre
 | ----------------------------------------------------- | ------ |
 | Max Projects per Neon User                            | 3      |
 | Max size of a Project                                 | 10 GiB  |
-| Max Number of processor cores for Compute per Project | 1vCPU  |
+| Max Number of processor cores for Compute per Project | 1 CU   |
 | Max RAM per Compute in Project                        | 256 MB |
 
 See detailed explanation in chapters below.
@@ -116,7 +116,7 @@ Technical Preview Free plan users can only create three Projects in Neon. Projec
 
 - Data size in the Project is limited to 10 GB;
 - PITR time window is limited to 7 days of _reasonable usage_;
-- Compute node can use up to 1vCPU/256 MB.
+- Compute node can use up to 1 CU/256 MB.
 
 _Note: Technical Preview Free plan limits are subject to change over the course of [Technical Preview](/docs/roadmap)._
 

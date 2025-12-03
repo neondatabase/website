@@ -52,7 +52,7 @@ As your application grows, the Scale Plan offers substantial increases in resour
 - 50 GB-month storage + 250 GB-month archive storage
 - 750 compute hours
 - 1,000 projects
-- Autoscaling up to 8 vCPUs
+- Autoscaling up to 8 CU (32 GB RAM)
 - Point-in-time restore (PITR) up to 14 days
 - IP Allow Rules for enhanced security
 - [Datadog integration](/docs/guides/datadog) for advanced monitoring
@@ -64,8 +64,8 @@ For organizations requiring enterprise-grade features, the Business Plan provide
 - 500 GB storage + 2500 GB-month archive storage
 - 1000 compute hours
 - 5,000 projects
-- Autoscaling up to 16 vCPUs
-- Larger fixed compute sizes up to 56 vCPU
+- Autoscaling up to 16 CU (64 GB RAM)
+- Larger fixed compute sizes up to 56 CU (224 GB RAM)
 - Point-in-time restore (PITR) up to 30 days
 - Enhanced compliance with SOC 2 and ISO certifications
 - Guaranteed 99.95% SLA for mission-critical applications

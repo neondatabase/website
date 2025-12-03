@@ -50,7 +50,7 @@ updatedOn: '2025-08-18T18:19:18.015Z'
 
 ## Set a compute size that can handle production traffic
 
-Before your application goes to production, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Before your application goes to production, make sure your database has enough compute resources to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 **Recommendation**
 
@@ -61,7 +61,7 @@ We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 **About compute size**
 
-A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. One CU includes 1 vCPU and 4 GB of RAM. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
+A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
 
 ## Enable autoscaling to handle usage spikes
 

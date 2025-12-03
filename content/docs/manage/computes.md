@@ -22,7 +22,7 @@ Project
                             |---- database
 ```
 
-Your Neon plan determines the resources (vCPUs and RAM) available to a compute. The Neon Free plan supports computes with up to 2 vCPUs and 8 GB of RAM. Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
+Your Neon plan determines the resources available to a compute. The Neon Free plan supports computes with up to 2 CU (8 GB of RAM). Paid plans offer larger compute sizes. Larger computes consume more compute hours over the same period of active time than smaller computes.
 
 ## View a compute
 
@@ -33,7 +33,7 @@ Compute details shown on the **Computes** tab include:
 - The type of compute, which can be **Primary** (read-write) or **Read Replica** (read-only).
 - The compute status, typically **Active** or **Idle**.
 - **Endpoint ID**: The compute endpoints ID, which always starts with an `ep-` prefix; for example: `ep-quiet-butterfly-w2qres1h`
-- **Size**: The size of the compute. Shows autoscaling minimum and maximum vCPU values if autoscaling is enabled.
+- **Size**: The size of the compute. Shows autoscaling minimum and maximum CU values if autoscaling is enabled.
 - **Last active**: The date and time the compute was last active.
 
 **Edit**, **Monitor**, and **Connect** actions for a compute can be accessed from the **Computes** tab.
@@ -83,48 +83,48 @@ To avoid prolonged interruptions resulting from compute restarts, we recommend c
 
 You can change compute size settings when [editing a compute](#edit-a-compute).
 
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. One CU has 1 vCPU and 4 GB of RAM, 2 CUs have 2 vCPUs and 8 GB of RAM, and so on. The amount of RAM in GB is always 4 times the vCPUs, as shown in the table below.
+_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute. The number of CUs determines the processing capacity of the compute. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly, as shown in the table below.
 
-| Compute Units | vCPU | RAM    |
-| :------------ | :--- | :----- |
-| .25           | .25  | 1 GB   |
-| .5            | .5   | 2 GB   |
-| 1             | 1    | 4 GB   |
-| 2             | 2    | 8 GB   |
-| 3             | 3    | 12 GB  |
-| 4             | 4    | 16 GB  |
-| 5             | 5    | 20 GB  |
-| 6             | 6    | 24 GB  |
-| 7             | 7    | 28 GB  |
-| 8             | 8    | 32 GB  |
-| 9             | 9    | 36 GB  |
-| 10            | 10   | 40 GB  |
-| 11            | 11   | 44 GB  |
-| 12            | 12   | 48 GB  |
-| 13            | 13   | 52 GB  |
-| 14            | 14   | 56 GB  |
-| 15            | 15   | 60 GB  |
-| 16            | 16   | 64 GB  |
-| 18            | 18   | 72 GB  |
-| 20            | 20   | 80 GB  |
-| 22            | 22   | 88 GB  |
-| 24            | 24   | 96 GB  |
-| 26            | 26   | 104 GB |
-| 28            | 28   | 112 GB |
-| 30            | 30   | 120 GB |
-| 32            | 32   | 128 GB |
-| 34            | 34   | 136 GB |
-| 36            | 36   | 144 GB |
-| 38            | 38   | 152 GB |
-| 40            | 40   | 160 GB |
-| 42            | 42   | 168 GB |
-| 44            | 44   | 176 GB |
-| 46            | 46   | 184 GB |
-| 48            | 48   | 192 GB |
-| 50            | 50   | 200 GB |
-| 52            | 52   | 208 GB |
-| 54            | 54   | 216 GB |
-| 56            | 56   | 224 GB |
+| Compute Units | RAM    |
+| :------------ | :----- |
+| .25           | 1 GB   |
+| .5            | 2 GB   |
+| 1             | 4 GB   |
+| 2             | 8 GB   |
+| 3             | 12 GB  |
+| 4             | 16 GB  |
+| 5             | 20 GB  |
+| 6             | 24 GB  |
+| 7             | 28 GB  |
+| 8             | 32 GB  |
+| 9             | 36 GB  |
+| 10            | 40 GB  |
+| 11            | 44 GB  |
+| 12            | 48 GB  |
+| 13            | 52 GB  |
+| 14            | 56 GB  |
+| 15            | 60 GB  |
+| 16            | 64 GB  |
+| 18            | 72 GB  |
+| 20            | 80 GB  |
+| 22            | 88 GB  |
+| 24            | 96 GB  |
+| 26            | 104 GB |
+| 28            | 112 GB |
+| 30            | 120 GB |
+| 32            | 128 GB |
+| 34            | 136 GB |
+| 36            | 144 GB |
+| 38            | 152 GB |
+| 40            | 160 GB |
+| 42            | 168 GB |
+| 44            | 176 GB |
+| 46            | 184 GB |
+| 48            | 192 GB |
+| 50            | 200 GB |
+| 52            | 208 GB |
+| 54            | 216 GB |
+| 56            | 224 GB |
 
 Neon supports fixed-size and autoscaling compute configurations.
 
@@ -143,43 +143,43 @@ In Postgres, the `shared_buffers` setting defines the amount of data that can be
 
 The Postgres `max_connections` setting defines your compute's maximum simultaneous connection limit and is set according to your compute size configuration.
 
-The following table outlines the vCPU, RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+The following table outlines the RAM, LFC size (75% of RAM), and the `max_connections` limit for each compute size that Neon supports. To understand how `max_connections` is determined for an autoscaling configuration, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscaling is supported up to 16 CU. Neon supports fixed compute sizes (no autoscaling) for computes sizes larger than 16 CU.
 </Admonition>
 
-| Compute Size (CU) | vCPU | RAM (GB) | LFC size (GB) | max_connections |
-| :---------------- | :--- | :------- | :------------ | :-------------- |
-| 0.25              | 0.25 | 1        | 0.75          | 112             |
-| 0.50              | 0.50 | 2        | 1.5           | 225             |
-| 1                 | 1    | 4        | 3             | 450             |
-| 2                 | 2    | 8        | 6             | 901             |
-| 3                 | 3    | 12       | 9             | 1351            |
-| 4                 | 4    | 16       | 12            | 1802            |
-| 5                 | 5    | 20       | 15            | 2253            |
-| 6                 | 6    | 24       | 18            | 2703            |
-| 7                 | 7    | 28       | 21            | 3154            |
-| 8                 | 8    | 32       | 24            | 3604            |
-| 9                 | 9    | 36       | 27            | 4000            |
-| 10                | 10   | 40       | 30            | 4000            |
-| 11                | 11   | 44       | 33            | 4000            |
-| 12                | 12   | 48       | 36            | 4000            |
-| 13                | 13   | 52       | 39            | 4000            |
-| 14                | 14   | 56       | 42            | 4000            |
-| 15                | 15   | 60       | 45            | 4000            |
-| 16                | 16   | 64       | 48            | 4000            |
-| 18                | 18   | 72       | 54            | 4000            |
-| 20                | 20   | 80       | 60            | 4000            |
-| 22                | 22   | 88       | 66            | 4000            |
-| 24                | 24   | 96       | 72            | 4000            |
-| 26                | 26   | 104      | 78            | 4000            |
-| 28                | 28   | 112      | 84            | 4000            |
-| 30                | 30   | 120      | 90            | 4000            |
-| 32                | 32   | 128      | 96            | 4000            |
-| 34                | 34   | 136      | 102           | 4000            |
-| 36                | 36   | 144      | 108           | 4000            |
-| 38                | 38   | 152      | 114           | 4000            |
+| Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
+| :---------------- | :------- | :------------ | :-------------- |
+| 0.25              | 1        | 0.75          | 112             |
+| 0.50              | 2        | 1.5           | 225             |
+| 1                 | 4        | 3             | 450             |
+| 2                 | 8        | 6             | 901             |
+| 3                 | 12       | 9             | 1351            |
+| 4                 | 16       | 12            | 1802            |
+| 5                 | 20       | 15            | 2253            |
+| 6                 | 24       | 18            | 2703            |
+| 7                 | 28       | 21            | 3154            |
+| 8                 | 32       | 24            | 3604            |
+| 9                 | 36       | 27            | 4000            |
+| 10                | 40       | 30            | 4000            |
+| 11                | 44       | 33            | 4000            |
+| 12                | 48       | 36            | 4000            |
+| 13                | 52       | 39            | 4000            |
+| 14                | 56       | 42            | 4000            |
+| 15                | 60       | 45            | 4000            |
+| 16                | 64       | 48            | 4000            |
+| 18                | 72       | 54            | 4000            |
+| 20                | 80       | 60            | 4000            |
+| 22                | 88       | 66            | 4000            |
+| 24                | 96       | 72            | 4000            |
+| 26                | 104      | 78            | 4000            |
+| 28                | 112      | 84            | 4000            |
+| 30                | 120      | 90            | 4000            |
+| 32                | 128      | 96            | 4000            |
+| 34                | 136      | 102           | 4000            |
+| 36                | 144      | 108           | 4000            |
+| 38                | 152      | 114           | 4000            |
 
 When selecting a compute size, ideally, you want to keep as much of your dataset in memory as possible. This improves performance by reducing the amount of reads from storage. If your dataset is not too large, select a compute size that will hold the entire dataset in memory. For larger datasets that cannot be fully held in memory, select a compute size that can hold your [working set](/docs/reference/glossary#working-set). Selecting a compute size for a working set involves advanced steps, which are outlined below. See [Sizing your compute based on the working set](#sizing-your-compute-based-on-the-working-set).
 

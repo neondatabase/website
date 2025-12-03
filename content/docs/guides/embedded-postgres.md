@@ -96,11 +96,11 @@ You can customize the default database and role names when creating a project. S
 
 Configure how computes scale and when they suspend due to inactivity:
 
-- `autoscaling_limit_min_cu` — Minimum compute size (default: 0.25 vCPU)
+- `autoscaling_limit_min_cu` — Minimum compute size (default: 0.25 CU)
 - `autoscaling_limit_max_cu` — Maximum compute size for autoscaling
 - `suspend_timeout_seconds` — Inactivity period before compute suspends
 
-Example setting a compute to scale between 1 and 4 vCPU with a 10-minute suspend timeout:
+Example setting a compute to scale between 1 and 4 CU with a 10-minute suspend timeout:
 
 ```bash
 curl --request POST \
@@ -157,12 +157,12 @@ For detailed information about configuring limits, see [Configure consumption li
 
 Here's a fictional example of how you might structure your own pricing tiers using Neon's consumption quotas:
 
-| Resource          | Free Tier        | Pro Tier        | Enterprise |
-| ----------------- | ---------------- | --------------- | ---------- |
-| Compute (min/max) | 0.25 / 0.25 vCPU | 0.25 / 2 vCPU   | 1 / 8 vCPU |
-| Active time       | 100 hours/month  | 750 hours/month | Unlimited  |
-| Storage           | 512 MB           | 10 GB           | 100 GB+    |
-| Data transfer     | 5 GB             | 50 GB           | Custom     |
+| Resource          | Free Tier       | Pro Tier        | Enterprise |
+| ----------------- | --------------- | --------------- | ---------- |
+| Compute (min/max) | 0.25 / 0.25 CU  | 0.25 / 2 CU     | 1 / 8 CU   |
+| Active time       | 100 hours/month | 750 hours/month | Unlimited  |
+| Storage           | 512 MB          | 10 GB           | 100 GB+    |
+| Data transfer     | 5 GB            | 50 GB           | Custom     |
 
 For real-world examples, see how [Koyeb defines their database instance types and pricing](https://www.koyeb.com/docs/databases#database-instance-types-and-pricing).
 

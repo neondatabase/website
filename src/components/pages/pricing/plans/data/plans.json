@@ -76,9 +76,9 @@
       "feature": {
         "title": "Sizes"
       },
-      "free": "Up to 2 vCPU, 8 GB RAM",
-      "launch": "Up to 16 vCPU, 64 GB RAM",
-      "scale": "Up to 56 vCPU, 224 GB RAM"
+      "free": "Up to 2 CU (8 GB RAM)",
+      "launch": "Up to 16 CU (64 GB RAM)",
+      "scale": "Up to 56 CU (224 GB RAM)"
     },
     {
       "rows": "1",
