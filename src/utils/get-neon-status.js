@@ -4,13 +4,17 @@ export const NEON_STATUS = {
   UNDERMAINTENANCE: 'UNDERMAINTENANCE',
 };
 
-function mapStatusCodeToNeonStatus(statusCode) {
-  if (statusCode === 100) return NEON_STATUS.UP;
-  if (statusCode === 200) return NEON_STATUS.UNDERMAINTENANCE;
-  if (statusCode === 300 || statusCode === 400 || statusCode === 500 || statusCode === 600)
-    return NEON_STATUS.HASISSUES;
+const STATUS_CODE_MAP = {
+  100: NEON_STATUS.UP,
+  200: NEON_STATUS.UNDERMAINTENANCE,
+  300: NEON_STATUS.HASISSUES,
+  400: NEON_STATUS.HASISSUES,
+  500: NEON_STATUS.HASISSUES,
+  600: NEON_STATUS.HASISSUES,
+};
 
-  return NEON_STATUS.UP;
+function mapStatusCodeToNeonStatus(statusCode) {
+  return STATUS_CODE_MAP[statusCode] ?? NEON_STATUS.UP;
 }
 
 export async function getNeonStatus() {
