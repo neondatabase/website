@@ -157,12 +157,12 @@ For detailed information about configuring limits, see [Configure consumption li
 
 Here's a fictional example of how you might structure your own pricing tiers using Neon's consumption quotas:
 
-| Resource          | Free Tier        | Pro Tier        | Enterprise |
-| ----------------- | ---------------- | --------------- | ---------- |
-| Compute (min/max) | 0.25 / 0.25 CU   | 0.25 / 2 CU     | 1 / 8 CU   |
-| Active time       | 100 hours/month  | 750 hours/month | Unlimited  |
-| Storage           | 512 MB           | 10 GB           | 100 GB+    |
-| Data transfer     | 5 GB             | 50 GB           | Custom     |
+| Resource          | Free Tier       | Pro Tier        | Enterprise |
+| ----------------- | --------------- | --------------- | ---------- |
+| Compute (min/max) | 0.25 / 0.25 CU  | 0.25 / 2 CU     | 1 / 8 CU   |
+| Active time       | 100 hours/month | 750 hours/month | Unlimited  |
+| Storage           | 512 MB          | 10 GB           | 100 GB+    |
+| Data transfer     | 5 GB            | 50 GB           | Custom     |
 
 For real-world examples, see how [Koyeb defines their database instance types and pricing](https://www.koyeb.com/docs/databases#database-instance-types-and-pricing).
 

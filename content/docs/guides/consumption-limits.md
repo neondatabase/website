@@ -44,10 +44,10 @@ The `quota` object includes an array of parameters used to set threshold limits.
 
 - `active_time_seconds` &#8212; Sets the maximum amount of time your project's computes are allowed to be active during the current billing period. It excludes time when computes are in an idle state due to [scale to zero](/docs/reference/glossary#scale-to-zero).
 - `compute_time_seconds` &#8212; Sets the maximum amount of CPU seconds allowed in total across all of a project's computes. This includes any computes deleted during the current billing period. Note that the larger the compute size per endpoint, the faster the project consumes `compute_time_seconds`. For example, 1 second at .25 CU costs .25 compute seconds, while 1 second at 4 CU costs 4 compute seconds.
-  | CU   | active_time_seconds | compute_time_seconds |
+  | CU | active_time_seconds | compute_time_seconds |
   |:-----|:----------------------|:-----------------------|
   | 0.25 | 1 | 0.25 |
-  | 4    | 1 | 4 |
+  | 4 | 1 | 4 |
 - `written_data_bytes` &#8212; Sets the maximum amount of data in total, measured in bytes, that can be written across all of a project's branches for the month.
 - `data_transfer_bytes` &#8212; Sets the maximum amount of egress data, measured in bytes, that can be transferred out of Neon from across all of a project's branches using the proxy.
 
@@ -57,12 +57,12 @@ There is one additional `quota` parameter, `logical_size_bytes`, which applies t
 
 Let's say you want to set limits for an application with two tiers, Trial and Pro, you might set limits like the following:
 
-| Parameter (project)  | Trial (.25 CU)                   | Pro (max 4 CU)                               |
-| -------------------- | -------------------------------- | -------------------------------------------- |
-| active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                          |
+| Parameter (project)  | Trial (.25 CU)                   | Pro (max 4 CU)                                 |
+| -------------------- | -------------------------------- | ---------------------------------------------- |
+| active_time_seconds  | 633,600 (business month 22 days) | 2,592,000 (30 days)                            |
 | compute_time_seconds | 158,400 (approx 44 hours)        | 10,368,000 (4 times the active hours for 4 CU) |
-| written_data_bytes   | 1,000,000,000 (approx. 1 GB)     | 50,000,000,000 (approx. 50 GB)               |
-| data_transfer_bytes  | 500,000,000 (approx. 500 MB)     | 10,000,000,000 (approx. 10 GB)               |
+| written_data_bytes   | 1,000,000,000 (approx. 1 GB)     | 50,000,000,000 (approx. 50 GB)                 |
+| data_transfer_bytes  | 500,000,000 (approx. 500 MB)     | 10,000,000,000 (approx. 10 GB)                 |
 
 | Parameter (branch) | Trial                         | Pro                            |
 | ------------------ | ----------------------------- | ------------------------------ |
