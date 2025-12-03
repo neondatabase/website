@@ -2,12 +2,14 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
+import authIcon from 'icons/home-new/auth.svg';
 import autoscalingIcon from 'icons/home-new/autoscaling.svg';
 import branchingIcon from 'icons/home-new/branching.svg';
 import featuresIcon from 'icons/home-new/features.svg';
 import performanceIcon from 'icons/home-new/performance.svg';
 
 const ICONS = {
+  auth: authIcon,
   autoscaling: autoscalingIcon,
   branching: branchingIcon,
   features: featuresIcon,

@@ -1,4 +1,5 @@
 import AI from 'components/pages/home-new/ai';
+import Auth from 'components/pages/home-new/auth';
 import Autoscaling from 'components/pages/home-new/autoscaling';
 import BackedBy from 'components/pages/home-new/backed-by';
 import Branching from 'components/pages/home-new/branching';
@@ -25,6 +26,7 @@ const Homepage = () => {
         <AI />
         <Autoscaling />
         <Branching />
+        <Auth />
         <Features />
       </TocWrapper>
       <SpeedScale />
