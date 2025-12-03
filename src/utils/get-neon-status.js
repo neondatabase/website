@@ -4,8 +4,6 @@ export const NEON_STATUS = {
   UNDERMAINTENANCE: 'UNDERMAINTENANCE',
 };
 
-const STATUS_API = 'https://7687492087503394.hostedstatus.com/1.0/status/6878fc85709daa75be6c7e3c';
-
 function mapStatusCodeToNeonStatus(statusCode) {
   if (statusCode === 100) return NEON_STATUS.UP;
   if (statusCode === 200) return NEON_STATUS.UNDERMAINTENANCE;
@@ -17,7 +15,7 @@ function mapStatusCodeToNeonStatus(statusCode) {
 
 export async function getNeonStatus() {
   try {
-    const response = await fetch(STATUS_API, { cache: 'no-store' });
+    const response = await fetch(process.env.NEXT_PUBLIC_NEON_STATUS_API, { cache: 'no-store' });
     const json = await response.json();
     const statusCode = json?.result?.status_overall?.status_code;
     const status = mapStatusCodeToNeonStatus(statusCode);
