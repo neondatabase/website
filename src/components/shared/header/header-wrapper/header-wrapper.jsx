@@ -11,7 +11,7 @@ const HeaderWrapper = ({
     <header
       className={clsx(
         'header left-0 right-0 top-0 z-50 flex h-16 w-full items-center bg-white dark:bg-black-pure lg:relative lg:h-14',
-        'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:dark:bg-gray-new-20',
+        'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-80 after:dark:bg-gray-new-20',
         isSticky ? 'sticky' : 'absolute',
         isStickyOverlay && '-mb-16',
         className

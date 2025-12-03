@@ -18,8 +18,8 @@ const SUBMENU_SELECTOR_NAME = 'main-navigation-submenu-link';
 
 const Navigation = () => {
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
-  const [containerHeight, setContainerHeight] = useState(0);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
 
   const submenuContainerRef = useRef(null);
   const timeoutRef = useRef(null);
