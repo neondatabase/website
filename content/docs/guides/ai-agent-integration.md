@@ -67,7 +67,7 @@ Each organization has different limits that apply to all projects created within
 | --------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
 | **Max branches**      | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
 | **Max snapshots**     | 1 per project     | 10 per project    | Critical for versioning workflows                          |
-| **Compute range**     | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (vCPU + 4GB RAM per CU)                 |
+| **Compute range**     | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                       |
 | **History retention** | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
 | **Min autosuspend**   | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
 
@@ -85,7 +85,7 @@ For free-tier users, create projects in your Free organization (sponsored by Neo
 
 | Resource          | Free Tier Quota    | Description                             |
 | ----------------- | ------------------ | --------------------------------------- |
-| **Compute**       | 0.25 / 2 vCPU      | Autoscales from 0.25 to 2 compute units |
+| **Compute**       | 0.25 / 2 CU        | Autoscales from 0.25 to 2 compute units |
 | **Active time**   | `360000` seconds   | 100 hours of compute activity per month |
 | **Storage**       | `536870912` bytes  | 512 MB total storage limit              |
 | **Data transfer** | `5368709120` bytes | 5 GB data transfer per month            |
@@ -126,7 +126,7 @@ For paid users, create projects in your paid organization with higher resource q
 
 | Resource          | Pro Tier Quota      | Description                             |
 | ----------------- | ------------------- | --------------------------------------- |
-| **Compute**       | 0.25 / 2 vCPU       | Autoscales from 0.25 to 2 compute units |
+| **Compute**       | 0.25 / 2 CU         | Autoscales from 0.25 to 2 compute units |
 | **Active time**   | `2700000` seconds   | 750 hours of compute activity per month |
 | **Storage**       | `10737418240` bytes | 10 GB storage limit                     |
 | **Data transfer** | `53687091200` bytes | 50 GB data transfer per month           |

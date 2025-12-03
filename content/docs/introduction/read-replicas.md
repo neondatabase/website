@@ -10,7 +10,7 @@ Neon read replicas are independent computes designed to perform read operations 
 
 ![read replica simple](/docs/introduction/read_replica_simple.png)
 
-You can instantly create read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
+You can instantly create read replicas for any branch in your Neon project and configure the compute size allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
 
 ## How are Neon read replicas different?
 

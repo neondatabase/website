@@ -47,7 +47,7 @@ A control mechanism in the Neon autoscaling system that collects metrics from VM
 
 ## Autoscaling
 
-A feature that automatically adjusts the allocation of vCPU and RAM for compute within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+A feature that automatically adjusts the allocation of compute resources within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ## Availability Checker
 
@@ -112,7 +112,7 @@ A role in Neon with limited access to specific projects shared with them. Shared
 
 ## Compute
 
-A service that provides virtualized computing resources, equipped with an operating system, a specified number of virtual CPUs (vCPUs), and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
+A service that provides virtualized computing resources, equipped with an operating system and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
 
 A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
 
@@ -130,11 +130,11 @@ The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can 
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+A unit that measures the processing power or "size" of a Neon compute. Each Compute Unit (CU) allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 
-A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 CU. If you have a compute with .25 CU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 CU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -340,7 +340,7 @@ A named organization entity in Neon that groups multiple Neon users under a shar
 
 ## NeonVM
 
-A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
+A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of compute resources. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
 
 ## non-default branch
 
@@ -611,10 +611,6 @@ See [Neon user](#neon-user) and [Postgres role](#postgresql-role).
 ## vm-monitor
 
 A program that runs inside the VM alongside Postgres, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
-
-## vCPU
-
-Virtual CPU, a unit of processing power allocated to a virtual machine or compute.
 
 ## WAL
 

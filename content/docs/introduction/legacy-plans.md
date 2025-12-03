@@ -43,15 +43,15 @@ The legacy Free plan is best suited for hobby projects, prototypes, and learning
 | **Data transfer (Egress)** | 5 GB per month                                                           |
 
 <Admonition type="tip" title="What is a compute hour?">
-- A compute hour is one _active hour_ for a compute with 1 vCPU.  
-- For example, a 0.25 vCPU compute uses 1 compute hour every 4 active hours.  
+- A compute hour is one _active hour_ for a compute with 1 CU.  
+- For example, a 0.25 CU compute uses 1 compute hour every 4 active hours.  
 - Formula: `compute hours = compute size × active hours`.  
 Idle (suspended) time does not count as active time.
 </Admonition>
 
 ### Features
 
-- Autoscaling up to 2 vCPU
+- Autoscaling up to 2 CU (8 GB RAM)
 - Scale to zero
 - Monitoring (1-day history)
 - All supported regions
@@ -88,7 +88,7 @@ Ideal for early-stage projects and startups preparing for growth.
 
 ### Features
 
-- Autoscaling up to 4 vCPUs / 16 GB RAM
+- Autoscaling up to 4 CU (16 GB RAM)
 - Scale to zero
 - Monitoring (7-day history)
 - Branch protection (up to 2 branches)
@@ -124,7 +124,7 @@ Designed for teams scaling production workloads and needing higher resource limi
 
 ### Features
 
-- Autoscaling up to 8 vCPUs / 32 GB RAM
+- Autoscaling up to 8 CU (32 GB RAM)
 - Scale to zero
 - Monitoring (14-day history)
 - Branch protection (up to 5 branches)
@@ -160,8 +160,8 @@ A high-capacity plan for production teams with security and compliance requireme
 
 ### Features
 
-- Autoscaling up to 16 vCPUs / 56 GB RAM
-- Fixed compute sizes up to 56 vCPUs / 224 GB RAM
+- Autoscaling up to 16 CU (64 GB RAM)
+- Fixed compute sizes up to 56 CU (224 GB RAM)
 - Scale to zero
 - Monitoring (14-day history)
 - SOC 2 compliance
@@ -429,50 +429,50 @@ Compute hour usage is calculated by multiplying compute size by _active hours_.
 
 </Admonition>
 
-- A single **compute hour** is one _active hour_ for a compute with 1 vCPU. For a compute with .25 vCPU, it would take 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it would only take 15 minutes to use 1 compute hour.
+- A single **compute hour** is one _active hour_ for a compute with 1 CU. For a compute with .25 CU, it would take 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 CU, it would only take 15 minutes to use 1 compute hour.
 - An **active hour** is a measure of the amount of time a compute is active. The time your compute is idle when suspended due to inactivity is not counted.
-- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. One CU has 1 vCPU and 4 GB of RAM. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
+- **Compute size** is measured at regular intervals and averaged to calculate compute hour usage. Compute size in Neon is measured in _Compute Units (CUs)_. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. A Neon compute can have anywhere from .25 to 56 CUs, as outlined below:
 
-| Compute Unit | vCPU | RAM    |
-| :----------- | :--- | :----- |
-| .25          | .25  | 1 GB   |
-| .5           | .5   | 2 GB   |
-| 1            | 1    | 4 GB   |
-| 2            | 2    | 8 GB   |
-| 3            | 3    | 12 GB  |
-| 4            | 4    | 16 GB  |
-| 5            | 5    | 20 GB  |
-| 6            | 6    | 24 GB  |
-| 7            | 7    | 28 GB  |
-| 8            | 8    | 32 GB  |
-| 9            | 9    | 36 GB  |
-| 10           | 10   | 40 GB  |
-| 11           | 11   | 44 GB  |
-| 12           | 12   | 48 GB  |
-| 13           | 13   | 52 GB  |
-| 14           | 14   | 56 GB  |
-| 15           | 15   | 60 GB  |
-| 16           | 16   | 64 GB  |
-| 18           | 18   | 72 GB  |
-| 20           | 20   | 80 GB  |
-| 22           | 22   | 88 GB  |
-| 24           | 24   | 96 GB  |
-| 26           | 26   | 104 GB |
-| 28           | 28   | 112 GB |
-| 30           | 30   | 120 GB |
-| 32           | 32   | 128 GB |
-| 34           | 34   | 136 GB |
-| 36           | 36   | 144 GB |
-| 38           | 38   | 152 GB |
-| 40           | 40   | 160 GB |
-| 42           | 42   | 168 GB |
-| 44           | 44   | 176 GB |
-| 46           | 46   | 184 GB |
-| 48           | 48   | 192 GB |
-| 50           | 50   | 200 GB |
-| 52           | 52   | 208 GB |
-| 54           | 54   | 216 GB |
-| 56           | 56   | 224 GB |
+| Compute Unit | RAM    |
+| :----------- | :----- |
+| .25          | 1 GB   |
+| .5           | 2 GB   |
+| 1            | 4 GB   |
+| 2            | 8 GB   |
+| 3            | 12 GB  |
+| 4            | 16 GB  |
+| 5            | 20 GB  |
+| 6            | 24 GB  |
+| 7            | 28 GB  |
+| 8            | 32 GB  |
+| 9            | 36 GB  |
+| 10           | 40 GB  |
+| 11           | 44 GB  |
+| 12           | 48 GB  |
+| 13           | 52 GB  |
+| 14           | 56 GB  |
+| 15           | 60 GB  |
+| 16           | 64 GB  |
+| 18           | 72 GB  |
+| 20           | 80 GB  |
+| 22           | 88 GB  |
+| 24           | 96 GB  |
+| 26           | 104 GB |
+| 28           | 112 GB |
+| 30           | 120 GB |
+| 32           | 128 GB |
+| 34           | 136 GB |
+| 36           | 144 GB |
+| 38           | 152 GB |
+| 40           | 160 GB |
+| 42           | 168 GB |
+| 44           | 176 GB |
+| 46           | 184 GB |
+| 48           | 192 GB |
+| 50           | 200 GB |
+| 52           | 208 GB |
+| 54           | 216 GB |
+| 56           | 224 GB |
 
 - A connection from a client or application activates a compute. Activity on the connection keeps the compute in an `Active` state. A defined period of inactivity (5 minutes by default) places the compute into an idle state.
 
@@ -500,7 +500,7 @@ To estimate what your compute hour usage might be per month:
    compute hours = compute size * active hours
    ```
 
-   For example, this is a calculation for a 2 vCPU compute that is active for all hours in a month (approx. 730 hours):
+   For example, this is a calculation for a 2 CU compute that is active for all hours in a month (approx. 730 hours):
 
    ```text
    2 * 730 = 1460 compute hours
@@ -524,7 +524,7 @@ To estimate what your compute hour usage might be per month:
 <details>
 <summary>**What is a compute hour?**</summary>
 
-It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+It's a metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 CU. If you have a compute with .25 CU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 CU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -539,7 +539,7 @@ compute hours = compute size * active hours
 
 If you're noticing an unexpectedly high number of compute hours, consider the following steps:
 
-- **Check your compute size:** Compute sizes range from 0.25 CU to 56 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less vCPU and RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
+- **Check your compute size:** Compute sizes range from 0.25 CU to 56 CUs. Larger compute sizes will consume more compute hours for the same active period. The formula for compute hour usage is: `compute hours = compute size * active hours`. If your application can operate effectively with a smaller compute size (less RAM), you can reduce compute hours by configuring a smaller compute. See [Edit a compute](/docs/manage/endpoints#edit-a-compute) for instructions.
 - **Check for active applications or clients**: Some applications or clients might be polling or querying to your compute regularly, preventing it from scaling to zero. For instance, if you're replicating data from Neon to another service, that service may poll your compute endpoint at regular intervals to detect changes for replication. This behavior is often configurable.
 
   To investigate database activity, you can run the following query to check connections:
@@ -566,10 +566,10 @@ This query displays the IP addresses connected to the database, the number of co
 
 Each of [Neon's plans](/docs/introduction/plans) includes a certain number of compute hours per month:
 
-- **Free plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 vCPU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 vCPU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 vCPU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free plan to allow your compute to scale up to 2 vCPU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
-- **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
-- **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 vCPU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
-- **Business Plan**: This plan includes 1000 compute hours (4000 active hours on a 0.24 vCPU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
+- **Free plan**: This plan includes 191.9 compute hours per month, and you can use up to 5 of those compute hours with non-default branches, in case you want to use Neon's branching feature. Why 191.9? This is enough compute hours to provide 24/7 availability on a 0.25 CU compute (our smallest compute size) on your default branch. The math works like this: An average month has about 770 hours. A 0.25 CU compute uses 1/4 compute hours per hour, which works out to 180 compute hours per month if you run the 0.25 CU compute 24/7. The 11.9 additional compute hours per month are a little extra that we've added on top for good measure. You can enable autoscaling on the Free plan to allow your compute to scale up to 2 CU, but please be careful not to use up all of your 191.5 compute hours before the end of the month.
+- **Launch Plan**: This plan includes 300 compute hours (1,200 active hours on a 0.25 CU compute) total per month for all computes in all projects. Beyond 300 compute hours, you are billed for compute hours at $0.16 per hour.
+- **Scale Plan**: This plan includes 750 compute hours (3000 active hours on a 0.25 CU compute) total per month for all computes in all projects. Beyond 750 compute hours, you are billed an extra $0.16 per additional hour.
+- **Business Plan**: This plan includes 1000 compute hours (4000 active hours on a 0.25 CU compute) total per month for all computes in all projects. Beyond 1000 compute hours, you are billed an extra $0.16 per additional hour.
 
 </details>
 
@@ -606,7 +606,7 @@ The formula for compute hour usage is: `compute hours = compute size * active ho
 <details>
 <summary>**How does compute size affect my compute hour usage?**</summary>
 
-The formula for compute hour usage is: `compute hours = compute size * active hours`. If you increase your compute size for more vCPU and RAM to improve performance, you will use more compute hours.
+The formula for compute hour usage is: `compute hours = compute size * active hours`. If you increase your compute size for more RAM to improve performance, you will use more compute hours.
 
 </details>
 

@@ -78,7 +78,7 @@ You can change your project's default compute settings on the **Compute** page. 
 Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
 </Admonition>
 
-A Compute Unit (CU) represents 1 vCPU with 4 GB of RAM. New branches inherit compute settings from your first branch, but you can change these defaults to:
+A Compute Unit (CU) represents approximately 4 GB of RAM, along with associated CPU and local SSD resources. New branches inherit compute settings from your first branch, but you can change these defaults to:
 
 - Set smaller compute sizes for preview deployments and development branches
 - Standardize settings across read replicas

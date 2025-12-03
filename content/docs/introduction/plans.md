@@ -43,7 +43,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Branches](#branches)                                 | 10/project                     | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                              | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
 | [Compute](#compute)                                   | 100 CU-hours/project           | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
-| [Autoscaling](#autoscaling)                           | Up to 2 CU (2 vCPU / 8 GB RAM) | Up to 16 CU (16 vCPU / 64 GB RAM)    | Up to 16 CU (fixed computes up to 56 vCPU / 224 GB RAM)                                           |
+| [Autoscaling](#autoscaling)                           | Up to 2 CU (8 GB RAM)          | Up to 16 CU (64 GB RAM)              | Up to 16 CU (fixed computes up to 56 CU / 224 GB RAM)                                             |
 | [Scale to zero](#scale-to-zero)                       | After 5 min                    | After 5 min, can be disabled         | Configurable (1 minute to always on)                                                              |
 | [Storage](#storage)                                   | 0.5 GB/project                 | $0.35/GB-month                       | $0.35/GB-month                                                                                    |
 | [Public network transfer](#public-network-transfer)   | 5 GB included                  | 100 GB included, then $0.10/GB       | 100 GB included, then $0.10/GB                                                                    |
@@ -133,19 +133,18 @@ If you need more, contact [Sales](/contact-sales).
 Compute usage depends on compute size and runtime.
 
 - Measured in **CU-hours** (Compute Unit hours)
-- 1 CU = 1 vCPU + 4 GB RAM
-- RAM scales at a 4:1 ratio (4 GB RAM per 1 vCPU)
+- Each Compute Unit (CU) allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources
 - Compute sizes up to 56 CU (plan-dependent)
 
-| Compute Unit | vCPU | RAM    |
-| ------------ | ---- | ------ |
-| .25          | .25  | 1 GB   |
-| .5           | .5   | 2 GB   |
-| 1            | 1    | 4 GB   |
-| 2            | 2    | 8 GB   |
-| 3            | 3    | 12 GB  |
-| ...          | ...  | ...    |
-| 56           | 56   | 224 GB |
+| Compute Unit | RAM    |
+| ------------ | ------ |
+| .25          | 1 GB   |
+| .5           | 2 GB   |
+| 1            | 4 GB   |
+| 2            | 8 GB   |
+| 3            | 12 GB  |
+| ...          | ...    |
+| 56           | 224 GB |
 
 Formula:
 
@@ -181,9 +180,9 @@ Scale to zero suspends computes after inactivity to compute usage and cost.
 
 Adjusts compute size between defined limits based on demand.
 
-- **Free**: Up to 2 CU (2 vCPU / 8 GB RAM)
-- **Launch**: Up to 16 CU (16 vCPU / 64 GB RAM)
-- **Scale**: Up to 16 CU for autoscaling; fixed sizes up to 56 CU (vCPU / 224 GB RAM)
+- **Free**: Up to 2 CU (8 GB RAM)
+- **Launch**: Up to 16 CU (64 GB RAM)
+- **Scale**: Up to 16 CU for autoscaling; fixed sizes up to 56 CU (224 GB RAM)
 
 > Autoscaling is capped at 16 CU. Scale supports fixed computes above 16 CU.
 
@@ -408,7 +407,7 @@ The following examples show what your monthly bill might look like on the **Laun
 <DefinitionList>
 
 What is a CU?
-: A CU (Compute Unit) is Neon's measure of compute size. **1 CU = 1 vCPU + 4 GB RAM**. RAM scales with vCPU size at a 4:1 ratio. For example, a 2 CU compute has 2 vCPU and 8 GB RAM.
+: A CU (Compute Unit) is Neon's measure of compute size. Each CU allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly. For example, a 2 CU compute has 8 GB RAM.
 
 How is compute usage measured in Neon?
 : Compute usage is measured in **CU-hours**:  

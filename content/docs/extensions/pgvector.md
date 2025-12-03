@@ -306,7 +306,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
@@ -434,7 +434,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 

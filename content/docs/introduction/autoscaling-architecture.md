@@ -22,7 +22,7 @@ A Neon project can have one or more computes, each representing an individual Po
 
 ![High-level architecture diagram](/docs/introduction/autoscale-high-level-architecture.jpg)
 
-Looking more closely, you can see that each Postgres instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating [vCPU](/docs/reference/glossary#vcpu) and [RAM](/docs/reference/glossary#ram) to each VM.
+Looking more closely, you can see that each Postgres instance operates within its own virtual machine inside a [Kubernetes cluster](/docs/reference/glossary#kubernetes-cluster), with multiple VMs hosted on each node of the cluster. Autoscaling is implemented by allocating and deallocating compute resources ([RAM](/docs/reference/glossary#ram)) to each VM.
 
 ![Autoscaling diagram](/docs/introduction/autoscale-architecture.jpg)
 
