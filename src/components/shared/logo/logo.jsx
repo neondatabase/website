@@ -46,14 +46,7 @@ const data = [
   },
 ];
 
-const Logo = ({
-  className = null,
-  isDarkTheme,
-  width,
-  height,
-  priority = undefined,
-  isHeader = false,
-}) => {
+const Logo = ({ className = null, width, height, priority = undefined, isHeader = false }) => {
   const { clicked, setClicked } = useContextMenu();
   const [open, setOpen] = useState(false);
 
@@ -71,38 +64,24 @@ const Logo = ({
     <div className="relative shrink-0">
       <Link to="/" onContextMenu={isHeader ? handleContextMenu : undefined}>
         <span className="sr-only">Neon</span>
-        {isDarkTheme ? (
-          <Image
-            className={clsx(className)}
-            src={logoWhite}
-            alt=""
-            width={width}
-            height={height}
-            priority={priority}
-            aria-hidden
-          />
-        ) : (
-          <>
-            <Image
-              className={clsx('dark:hidden', className)}
-              src={logoBlack}
-              alt=""
-              width={width}
-              height={height}
-              priority={priority}
-              aria-hidden
-            />
-            <Image
-              className={clsx('hidden dark:block', className)}
-              src={logoWhite}
-              alt=""
-              width={width}
-              height={height}
-              priority={priority}
-              aria-hidden
-            />
-          </>
-        )}
+        <Image
+          className={clsx('dark:hidden', className)}
+          src={logoBlack}
+          alt=""
+          width={width}
+          height={height}
+          priority={priority}
+          aria-hidden
+        />
+        <Image
+          className={clsx('hidden dark:block', className)}
+          src={logoWhite}
+          alt=""
+          width={width}
+          height={height}
+          priority={priority}
+          aria-hidden
+        />
       </Link>
       {isHeader && clicked && (
         <div
@@ -144,7 +123,6 @@ const Logo = ({
 
 Logo.propTypes = {
   className: PropTypes.string,
-  isDarkTheme: PropTypes.bool.isRequired,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   priority: PropTypes.bool,

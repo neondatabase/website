@@ -10,7 +10,6 @@ const Layout = ({
   className = null,
   headerClassName = null,
   headerTheme = null,
-  footerTheme = null,
   withOverflowHidden = false,
   children,
   headerWithBorder = false,
@@ -48,7 +47,7 @@ const Layout = ({
       >
         {children}
       </main>
-      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
+      <Footer isDocsPage={isDocPage} hasThemesSupport={hasThemesSupport} />
       <CookieConsent />
     </div>
   </>
@@ -58,7 +57,6 @@ Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
   headerTheme: PropTypes.oneOf(['light', 'dark']),
-  footerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,

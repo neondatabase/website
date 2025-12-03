@@ -350,7 +350,7 @@ export default {
       ],
     },
     {
-      heading: 'Social',
+      heading: 'Community',
       items: [
         {
           text: 'Discord',
@@ -363,7 +363,7 @@ export default {
           icon: 'github-icon',
         },
         {
-          text: 'x.com',
+          text: 'X.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -385,37 +385,31 @@ export default {
         {
           text: 'CCPA',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certCCPA,
         },
         {
           text: 'GDPR',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certGDPR,
         },
         {
           text: 'ISO 27001',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certISO27001,
         },
         {
           text: 'ISO 27701',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certISO27701,
         },
         {
           text: 'SOC 2',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certSOC2,
         },
         {
           text: 'HIPAA',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certHIPAA,
           links: [
             {
