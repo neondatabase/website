@@ -5,7 +5,7 @@ subtitle: Learn about Neon's pricing plans and how to manage billing
 redirectFrom:
   - /docs/introduction/billing-overview
   - /docs/introduction/how-billing-works
-updatedOn: '2025-10-08T19:31:56.540Z'
+updatedOn: '2025-11-27T14:20:46.132Z'
 ---
 
 ## Neon plans
@@ -27,10 +27,6 @@ updatedOn: '2025-10-08T19:31:56.540Z'
 <a href="/docs/introduction/monitor-usage" description="Learn how to monitor billing and usage in Neon" icon="setup">Monitor billing and usage</a>
 
 <a href="/docs/introduction/cost-optimization" description="Strategies to manage and reduce your Neon costs across compute, storage, and data transfer" icon="setup">Cost optimization</a>
-
-<a href="/docs/introduction/billing-aws-marketplace" description="Find out how you can pay for Neon with your AWS Billing account" icon="aws">AWS Marketplace</a>
-
-<a href="/docs/introduction/billing-azure-marketplace" description="Neon as an Azure Native Service with billing through Azure Marketplace" icon="aws">Azure Marketplace</a>
 
 </DetailIconCards>
 

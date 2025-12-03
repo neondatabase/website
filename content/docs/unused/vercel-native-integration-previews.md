@@ -1,42 +1,53 @@
-# Vercel Native Integration Previews
+---
+title: Vercel Native Integration Previews
+subtitle: Create a database branch for every preview deployment with Neon's native
+  Vercel integration
+enableTableOfContents: true
+isDraft: false
+updatedOn: '2025-11-13T02:12:26.599Z'
+---
 
-> The document outlines the process for using Vercel's native integration with Neon to create preview deployments, detailing configuration steps and integration settings specific to Neon's environment.
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>How to create a database branch for each preview deployment</p>
+<p>The benefits of a branch for every preview deployment</p>
+</DocsList>
 
-## Source
-
-- [Vercel Native Integration Previews HTML](https://neon.com/docs/guides/vercel-native-integration-previews): The original HTML version of this documentation
-
-What you will learn:
-- How to create a database branch for each preview deployment
-- The benefits of a branch for every preview deployment
-
-Related topics:
-- [Neon Postgres Native Integration](https://neon.com/docs/guides/vercel-native-integration)
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/guides/vercel-native-integration">Neon Postgres Native Integration</a>
+</DocsList>
+</InfoBlock>
 
 The [Neon Postgres Native Integration](https://vercel.com/marketplace/neon), available on the Vercel Marketplace, allows you to add a Postgres database to your Vercel project. You can optionally configure the integration to create a database branch for each Vercel preview deployment. This guide explains how to set up that configuration.
 
-   **Note**: The database branching preview feature is only supported for users on a Neon plan. If you are on a Vercel Postgres legacy plan, you will need to [change your plan](https://neon.com/docs/guides/vercel-native-integration#changing-your-plan).
+<Admonition type="note">
+The database branching preview feature requires a paid Neon plan (Launch or Scale). If you are on the Vercel Postgres legacy plan, you will need to [change your plan](/docs/guides/vercel-native-integration#changing-your-plan) to use this feature.
+</Admonition>
 
-Details: Why create a database branch with each preview deployment?
+<details>
+<summary>Why create a database branch with each preview deployment?</summary>
+
 - **Each preview deployment gets its own database**: Every Vercel preview deployment has its own dedicated database branch, keeping environments isolated.
 
 - **No more shared database problems**: Using a single shared database can lead to issues across all preview deployments if something goes wrong. With branches, each preview has its own independent database.
 
-- **Easier debugging and testing**: Database branches let you preview schema changes and migrations in isolation, so issues don't spill over into other environments.
+- **Easier debugging and testing**: Database branches let you preview schema changes and migrations in isolation, so issues don’t spill over into other environments.
 
 - **No need to set up preview databases manually**: Neon branches are created instantly as copies of the parent database, saving you the hassle of seeding data or setting up databases from scratch.
 
 - **Works automatically with Vercel**: The integration connects Neon database branches to Vercel preview deployments and sets the environment variables for you.
 
-- **Great for teams**: Isolated branches let team members test their changes independently without stepping on each other's toes.
+- **Great for teams**: Isolated branches let team members test their changes independently without stepping on each other’s toes.
 
 - **Automatic schema migrations**: You can add database migration commands to your Vercel deployment setup to apply schema changes to your database branch automatically with each preview deployment.
 
+</details>
+
 ## Prerequisites
 
-- You're a Vercel user and you've installed Neon's [Native Vercel Integration](https://vercel.com/marketplace/neon) from the Vercel Marketplace. For instructions, see [Install the Neon Postgres Native Integration on Vercel](https://neon.com/docs/guides/vercel-native-integration).
-- You have an existing Neon Database in Vercel, accessible from the **Storage** tab on the Vercel Dashboard. If not, see [Adding Databases](https://neon.com/docs/guides/vercel-native-integration#adding-more-databases).
-- Your Vercel project is **not** yet connected to a Neon Database in Vercel. If your database is already connected, you will need to disconnect before performing the setup. See [Disconnecting a database](https://neon.com/docs/guides/vercel-native-integration-previews#disconnecting-a-database).
+- You're a Vercel user and you've installed Neon's [Native Vercel Integration](https://vercel.com/marketplace/neon) from the Vercel Marketplace. For instructions, see [Install the Neon Postgres Native Integration on Vercel](/docs/guides/vercel-native-integration).
+- You have an existing Neon Database in Vercel, accessible from the **Storage** tab on the Vercel Dashboard. If not, see [Adding Databases](/docs/guides/vercel-native-integration#adding-more-databases).
+- Your Vercel project is **not** yet connected to a Neon Database in Vercel. If your database is already connected, you will need to disconnect before performing the setup. See [Disconnecting a database](#disconnecting-a-database).
 
 ## Connect your Vercel project to a Neon database
 
@@ -46,23 +57,25 @@ To connect your Vercel project to your Neon database:
 2. Navigate to the **Storage** tab and select your Database (or create a Database if you do not have one).
 3. Find the Database you want to connect to, and click **Connect**.
 
-   
+   ![Connect a Vercel Project](/docs/guides/vercel_native_connect_project.png)
 
 4. On the **Connect Project** dialog:
    1. Select the Vercel project you want to connect to.
-   1. Under **Environments**, choose the Vercel environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](https://neon.com/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
+   1. Under **Environments**, choose the Vercel environments you want to make your database available to (**Development**, **Preview**, **Production**). This will add a set of database [environment variables](/docs/guides/vercel-native-integration#environment-variables-set-by-the-integration) to the selected environments in your Vercel project.
 
    1. Under **Deployments**:
       - Enable the **Resource is required to be in an active state before deployment can start** option. This setting ensures that a database branch can be created.
       - Under **Choose actions to enable for this integration**, select the **Preview** option. This setting creates a database branch for **preview deployments** only. Leave the **Production** option unchecked — you don't need to create database branches for your Production environment.
 
-      
+      ![Vercel deployment configuration](/docs/guides/vercel_native_deployments_configuration.png)
 
 5. Click **Connect** to finish the setup.
 
    Now, with each commit to a branch in your application's GitHub repository, preview deployments will be created with their own isolated database branch. You can follow the steps in the next section to test the setup.
 
-      **Tip**: To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](https://neon.com/docs/guides/vercel-native-integration-previews#applying-schema-changes-to-database-branches).
+   <Admonition type="tip">
+   To learn how you can apply schema changes to database branches automatically, see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches). 
+   </Admonition>
 
 ## Testing the database branching setup
 
@@ -75,7 +88,7 @@ After enabling database branches for preview deployments, a database branch is c
    git checkout -b patch-1
    ```
 
-2. Make changes to your application code on the local branch. This could be any change to your application or database schema, assuming your database schema is managed in code (see [Applying schema changes to database branches](https://neon.com/docs/guides/vercel-native-integration-previews#applying-schema-changes-to-database-branches).
+2. Make changes to your application code on the local branch. This could be any change to your application or database schema, assuming your database schema is managed in code (see [Applying schema changes to database branches](#applying-schema-changes-to-database-branches).
 3. Commit the changes. For example:
 
    ```bash
@@ -92,7 +105,9 @@ After enabling database branches for preview deployments, a database branch is c
    - The commit triggers a preview deployment in Vercel, as would occur without the Neon integration, which you can view on the **Deployments** tab on the Vercel Dashboard.
    - The integration creates a branch in Neon. This branch is an isolated copy of your default branch, with its own dedicated compute. The branch is created with the same name as your `git` branch but includes a `preview/` prefix. You can view branches in the Neon Console, on your Neon project's **Branches** page.
    - The integration automatically passes environment variables for your database branch to connect the preview deployment to the database branch.
-        **Info** How are database variables set for preview deployments?: Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The environment variables visible in Vercel remain unchanged.
+     <Admonition type="info" title="How are database variables set for preview deployments?">
+     Vercel calls a webhook before the preview deployment build stage. During this call, environment variables for the new database branch are created. These variables override the existing preview environment variables in Vercel but apply only to the specific preview deployment they were created for. The environment variables visible in Vercel remain unchanged.
+     </Admonition>
 
 ## Applying schema changes to database branches
 
@@ -111,7 +126,7 @@ To add build commands to your Vercel project previews:
 
    As shown below:
 
-   
+   ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
    This setup applies any schema changes in your commits to the database branch created for your preview deployment.
 
@@ -128,6 +143,10 @@ This will disconnect the database from your Vercel project by removing all of th
 
 ## Manage branches created by the integration
 
-The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](https://neon.com/docs/manage/branches#delete-a-branch), [CLI](https://neon.com/docs/reference/cli-branches#delete), or [API](https://neon.com/docs/manage/branches#delete-a-branch-with-the-api).
+The integration creates a database branch for each preview deployment. To avoid using up your storage allowances or hitting branch limits, you should delete database branches that are no longer required. Branches can be deleted via the [Neon Console](/docs/manage/branches#delete-a-branch), [CLI](/docs/reference/cli-branches#delete), or [API](/docs/manage/branches#delete-a-branch-with-the-api).
 
-   **Note** What happens to branches if you don't remove them?: Unused branches are eventually archived, consuming space in archive storage. For more information, see [Branch archiving](https://neon.com/docs/guides/branch-archiving).
+<Admonition type="note" title="What happens to branches if you don't remove them?">
+Unused branches are eventually archived, consuming space in archive storage. For more information, see [Branch archiving](/docs/guides/branch-archiving).
+</Admonition>
+
+<NeedHelp/>

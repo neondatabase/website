@@ -92,7 +92,7 @@ This method uses Neon's managed server and OAuth authentication.
 5. An OAuth window will open in your browser. Follow the prompts to authorize Cursor to access your Neon account.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 
-6. You can verify that the connection is successful by checking the **MCP Servers** section in Cursor settings.
+6. You can verify that the connection is successful by checking the **Tools & MCP** section in Cursor settings.
    ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 7. Cursor is now connected to Neon's remote MCP server.
@@ -193,9 +193,8 @@ You can also set up a global MCP server in Cursor. This allows you to use the sa
 
 1. Open Cursor.
 2. Go to the **Settings**.
-3. In the **MCP Servers** section, click on **+ Add new Global MCP Server**.
-   ![Cursor add new global MCP server](/docs/guides/cursor-global-mcp-server.png)
-4. Paste the same JSON configuration either for the **Remote Hosted** or **Local MCP Server** as mentioned above.
+3. In the **Tools & MCP** section, click on **+ Add Custom MCP**.
+4. Paste the same JSON configuration either for the **Remote Hosted** or **Local MCP Server** (as shown in the previous sections) into the configuration field.
 5. Save the configuration.
 6. Restart Cursor or reload the window (`Developer: Reload Window` from the Command Palette).
 7. You now have Neon MCP Server set up globally in Cursor. You can use it in any project without needing to configure it again for each project.

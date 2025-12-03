@@ -33,43 +33,11 @@ https://neon.com/guides/rss.xml
 
 ## Status
 
-Monitor the operational status of Neon across different regions by subscribing to the appropriate [Neon Status](https://neonstatus.com/) RSS feed.
+Monitor the operational status of Neon across different regions by subscribing to the [Neon Status](https://neonstatus.com/) RSS feed.
 
-- **AWS US East (N. Virginia)**
+You can find the Neon Status RSS URL by navigating to the [Neon Status](https://neonstatus.com/) page, clicking subscribe, and choosing the RSS option.
 
-  ```bash
-  https://neonstatus.com/aws-us-east-n-virginia/feed.rss
-  ```
-
-- **AWS US East (Ohio)**
-
-  ```bash
-  https://neonstatus.com/aws-us-east-ohio/feed.rss
-  ```
-
-- **AWS US West (Oregon)**
-
-  ```bash
-  https://neonstatus.com/aws-us-west-oregon/feed.rss
-  ```
-
-- **AWS Europe (Frankfurt)**
-
-  ```bash
-  https://neonstatus.com/aws-europe-frankfurt/feed.rss
-  ```
-
-- **AWS Asia Pacific (Singapore)**
-
-  ```bash
-  https://neonstatus.com/aws-asia-pacific-singapore/feed.rss
-  ```
-
-- **AWS Asia Pacific (Sydney)**
-
-  ```bash
-  https://neonstatus.com/aws-asia-pacific-sydney/feed.rss
-  ```
+![Neon Status RSS Subscribe button](/docs/introduction/status_subscribe.png)
 
 ## Subscribe to feeds in Slack
 

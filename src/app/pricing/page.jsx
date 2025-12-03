@@ -40,7 +40,7 @@ const faqItems = [
   {
     question: 'What is a CU?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing instance size. It defines how much CPU and memory your database is using at any moment. At Neon, 1 CU = 1 vCPU + 4 GB RAM.</p>
+      <p>A CU (short for Compute Unit) is Neon's way of representing instance size. It defines how much CPU and memory your database is using at any moment. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources.</p>
     `,
   },
   {

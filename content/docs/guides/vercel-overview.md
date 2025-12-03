@@ -4,7 +4,7 @@ subtitle: Choose the right connection path in seconds
 redirectFrom:
   - /docs/guides/vercel-postgres
 enableTableOfContents: true
-updatedOn: '2025-07-07T22:27:57.420Z'
+updatedOn: '2025-11-11T17:38:12.167Z'
 ---
 
 ## Overview
@@ -26,7 +26,7 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Billing**             | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
 | **Preview Branching**   | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
-| **Branch cleanup**      | Manual deletion required                                                                              | Automatic deletion available                                                                                 | N/A                                             |
+| **Branch cleanup**      | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 
 ---

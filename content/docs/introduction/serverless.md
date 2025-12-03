@@ -12,7 +12,7 @@ Enabling serverless Postgres begins with Neon's [native decoupling of storage an
 
 This serverless character also makes Neon databases highly agile and well-suited for use cases that require automatic creation, management, and deletion of a high number of Postgres databases, like [database-per-user architectures with thousands of tenants](/use-cases/database-per-tenant), as well as [database branching workflows](/branching) that accelerate development by enabling the management of dev/testing databases via CI/CD.
 
-![Multi-tenant storage](/docs/introduction/multi_tenant_storage.png)
+![Multi-tenant storage](/docs/introduction/neon_architecture_5.jpg)
 
 Read our [Architecture](/docs/introduction/architecture-overview) section for more information on how Neon is built.
 

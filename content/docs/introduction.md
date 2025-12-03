@@ -1,12 +1,12 @@
 ---
 title: Neon documentation
-updatedOn: '2025-10-24T11:19:19.275Z'
+updatedOn: '2025-11-28T18:21:08.470Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
 
-<CTA title="Set up your AI code editor ✨" 
-description="Enhance your development workflow with AI tools optimized for Neon. Configure Claude Code, Cursor, and other tools with MCP integration, Skills, and context rules. <a href='/docs/ai/ai-agents-tools'>Get started →</a>" isIntro></CTA>
+<CTA title="Set up Neon in one command ✨" 
+description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. Your assistant walks you through Neon setup and configuration — tailored to your codebase. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
 
 ## Get started
 

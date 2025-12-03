@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2025-09-26T11:49:34.214Z'
+updatedOn: '2025-11-28T18:21:08.471Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -72,7 +72,7 @@ Postgres 18 is available on Neon as a preview release. While fully functional, w
 - **Stability**: Expect minor issues as we complete testing and integration.
 - **Performance**: Neon currently runs Postgres 18 with `io_method = 'sync'` to use the traditional synchronous I/O behavior found in Postgres 17 and earlier versions. We're working to integrate with Postgres 18's new async I/O system.
 - **Extensions**: Limited extension support at launch, [check extension compatibility](/docs/extensions/pg-extensions) before upgrading.
-- **HIPAA**: Not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
+- **HIPAA**: HIPAA support for Postgres 18 is only available in AWS regions. You cannot create a Postgres 18 HIPAA-compliant project in Azure regions.
 
 We'll remove the preview designation once these limitations are addressed.
 

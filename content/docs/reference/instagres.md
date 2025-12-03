@@ -1,11 +1,13 @@
 ---
-title: Neon Launchpad
+title: Instagres
 subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
-updatedOn: '2025-10-29T16:30:41.104Z'
+redirectFrom:
+  - /docs/reference/neon-launchpad
+updatedOn: '2025-11-17T20:56:53.510Z'
 ---
 
-Neon Launchpad enables instant provisioning of a Postgres database without configuration or account creation.
+Instagres enables instant provisioning of a Postgres database without configuration or account creation.
 
 Built on Neon's serverless Postgres platform, it provides immediate database access for development and testing.
 
@@ -72,6 +74,7 @@ deno run -A get-db
 | `--key <string>`    | `-k`  | Env var for connection string         | `DATABASE_URL` |
 | `--prefix <string>` | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
 | `--seed <path>`     | `-s`  | Path to SQL file to seed the database | not set        |
+| `--ref <string>`    | `-r`  | Referrer ID for affiliates program    | not set        |
 | `--help`            | `-h`  | Show help message                     |                |
 
 **Examples:**
@@ -89,7 +92,7 @@ npx get-db --env ./my.env --key MY_DB_URL
 # Skip prompts and use defaults
 npx get-db --yes
 
-# Detects PUBLIC_NEON_LAUNCHPAD_CLAIM_URL (default) from your environment,
+# Detects PUBLIC_INSTAGRES_CLAIM_URL (default) from your environment,
 # and opens the defined claim URL in your browser
 npx get-db claim
 ```
@@ -99,9 +102,9 @@ The CLI writes the connection string, claim URL, and expiration to the specified
 ```txt
 # Claimable DB expires at: Sun, 05 Oct 2025 23:11:33 GMT
 # Claim it now to your account: https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
-DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-DATABASE_URL_POOLER=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-PUBLIC_NEON_LAUNCHPAD_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
+DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+PUBLIC_INSTAGRES_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
 ```
 
 For advanced SDK/API usage, see the [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db).
@@ -160,8 +163,8 @@ export default defineConfig({
 3. If the environment variable is missing, the plugin:
    - Automatically creates a new Neon claimable database
    - Adds two connection strings to your environment file:
-     - `DATABASE_URL` - Standard connection string
-     - `DATABASE_URL_POOLER` - Connection pooler string
+     - `DATABASE_URL` - Connection pooler string (default)
+     - `DATABASE_URL_DIRECT` - Direct connection string
    - Includes the claimable URL as a comment and public variable in the environment file
 
 The plugin is inactive during production builds (`vite build`) to prevent changes to environment files and database provisioning in production environments. If `seed` is configured, the specified SQL script is executed after database creation. If an error occurs (such as a missing or invalid SQL file), an error message will be displayed.
@@ -178,7 +181,7 @@ To persist a database beyond the 72-hour expiration period:
 
 The claim URL is available:
 
-- On the Neon Launchpad interface where the connection string is displayed
+- On the Instagres interface where the connection string is displayed
 - As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
 - The public claim variable is used when executing `npx get-db claim` to claim the database, which launches the browser window
 
@@ -188,7 +191,7 @@ When claiming a project, you'll be asked to choose an organization to claim it i
 
 ## Use cases
 
-Neon Launchpad is designed for scenarios requiring rapid database provisioning:
+Instagres is designed for scenarios requiring rapid database provisioning:
 
 - Development and testing environments
 - Evaluation of Neon's capabilities before committing to an account
@@ -209,7 +212,7 @@ The service uses the following default settings:
 
 ## Technical implementation
 
-The Neon Launchpad service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences in your own application using the [claimable database APIs](/docs/workflows/claimable-database-integration).
+The Instagres service is built on Neon's [claimable database integration](/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences in your own application using the [claimable database APIs](/docs/workflows/claimable-database-integration).
 
 ## Resources
 

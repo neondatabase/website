@@ -384,6 +384,11 @@ const defaultConfig = {
         permanent: false,
       },
       {
+        source: '/instagres',
+        destination: 'https://neon.new',
+        permanent: false,
+      },
+      {
         source: '/docs/local/neon-local-vscode',
         destination: '/docs/local/neon-local-connect',
         permanent: true,
@@ -406,6 +411,26 @@ const defaultConfig = {
       {
         source: '/scalable-architecture',
         destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/creators',
+        destination: '/programs/creators',
+        permanent: true,
+      },
+      {
+        source: '/blog/join-the-neon-creator-program',
+        destination: '/programs/creators',
+        permanent: true,
+      },
+      {
+        source: '/open-source',
+        destination: '/programs/open-source',
+        permanent: true,
+      },
+      {
+        source: '/agents',
+        destination: '/programs/agents',
         permanent: true,
       },
       ...docsRedirects,
@@ -458,10 +483,6 @@ const defaultConfig = {
       {
         source: '/ai-chat',
         destination: '/docs/introduction#ai-chat',
-      },
-      {
-        source: '/agents',
-        destination: '/use-cases/ai-agents',
       },
     ];
   },

@@ -59,6 +59,10 @@ Personal API keys let you securely interact with the [Neon API](https://api-docs
 
 Delete your Neon account after leaving or deleting all orgs and projects.
 
+<Admonition type="important">
+You are solely responsible for exporting your Projects and Content from the Neon Platform before the deactivation/deletion of your Account for any reason.
+</Admonition>
+
 **Leaving an org**
 
 If you're the only admin, promote another member to admin first. You can then leave the org.

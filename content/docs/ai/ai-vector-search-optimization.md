@@ -3,7 +3,7 @@ title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
 enableTableOfContents: true
-updatedOn: '2025-06-23T15:24:08.752Z'
+updatedOn: '2025-12-03T13:07:33.019Z'
 ---
 
 This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:
@@ -40,7 +40,7 @@ Execution Time: 39.527 ms
 
 You can see in the plan that the query performs a sequential scan (`Seq Scan`) on the `items` table, which means that the query compares the query vector against all vectors in the `items` table. In other words, the query does not use an index.
 
-To understand how queries perform at scale, we tested sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 vCPUs and 16 GB of RAM.
+To understand how queries perform at scale, we tested sequential scan vector searches with `pgvector` on subsets of the [GIST-960 dataset](http://corpus-texmex.irisa.fr/) with 10k, 50k, 100k, 500k, and 1M rows using a Neon database instance with 4 CU (16 GB of RAM).
 
 The sequential scan search performed reasonably well for tables with 10k rows (~36ms). However, sequential scans start to become costly at 50k rows.
 
