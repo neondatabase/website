@@ -2,7 +2,7 @@
 title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
 enableTableOfContents: true
-updatedOn: '2024-08-19T14:50:59.585Z'
+updatedOn: '2025-12-03T13:07:33.034Z'
 ---
 
 <InfoBlock>

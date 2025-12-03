@@ -2,7 +2,7 @@
 title: Scale your AI application with Neon
 subtitle: Scale your AI application with Neon's Autoscaling and Read Replica features
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.607Z'
+updatedOn: '2025-12-03T13:07:33.016Z'
 ---
 
 You can scale your AI application built on Postgres with `pgvector` in the same way you would any Postgres app: Vertically with added CPU, RAM, and storage, or horizontally with read replicas.

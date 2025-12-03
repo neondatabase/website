@@ -5,7 +5,7 @@ subtitle: A checklist of recommended settings to optimize performance, security,
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2025-08-18T18:19:18.015Z'
+updatedOn: '2025-12-03T13:07:33.025Z'
 ---
 
 <CheckList title="Production checklist">
