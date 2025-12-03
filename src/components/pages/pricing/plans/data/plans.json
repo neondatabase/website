@@ -133,6 +133,30 @@
     },
     {
       "rows": "1",
+      "feature": "Auth"
+    },
+    {
+      "rows": "3",
+      "feature": {
+        "title": "MAU",
+        "subtitle": "Monthly Active Users"
+      },
+      "free": "Up to 60k",
+      "launch": "Up to 1M <span>If you're planning to go<br/> beyond that, <a href='/contact-sales'>contact us</a></span>",
+      "scale": "Up to 1M <span>If you're planning to go<br/> beyond that, <a href='/contact-sales'>contact us</a></span>"
+    },
+    {
+      "rows": "2",
+      "feature": {
+        "title": "MFA",
+        "subtitle": "Multi-Factor Authentication"
+      },
+      "free": false,
+      "launch": "Coming soon",
+      "scale": "Coming soon"
+    },
+    {
+      "rows": "1",
       "feature": "Network"
     },
     {
