@@ -18,7 +18,7 @@ const statusData = {
     text: 'Experiencing issues',
   },
   [NEON_STATUS.UNDERMAINTENANCE]: {
-    color: 'bg-yellow-70',
+    color: 'bg-[red]',
     text: 'Active maintenance',
   },
 };
@@ -63,7 +63,7 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
           isDarkTheme ? 'text-white' : 'text-black-new'
         )}
       >
-        {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
+        {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>
   );
