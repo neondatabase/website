@@ -299,6 +299,6 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 
 - Instant restore is typically performed on root branches (like `production`). When you restore a root branch, both the restored branch and backup branch become separate root branches with no parent-child relationship.
 - Deleting backup branches is only supported in certain cases. See [Deleting backup branches](#deleting-backup-branches) for details.
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 - When you restore a non-root branch to an earlier point in time, the backup branch becomes the parent of the restored branch. This means subsequent "Reset from parent" operations will reset to the backup, not to your original parent branch.
-
   For example, let's say you have a `production` branch with a child development branch `development`. You restore `development` to an earlier point in time. At this point, `development`'s parent changes from `production` to the backup `development_old_timestamp`. Later, if you want to refresh `development` with the latest data from `production`, you cannot use **Reset from parent** since the backup is now the parent. Instead, use **Instant restore** and select `production` as the source.

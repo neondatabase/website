@@ -436,4 +436,8 @@ Use this option if you need to inspect the restored data before you switch over 
 
 </Tabs>
 
+## Limitations
+
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
+
 <NeedHelp/>
