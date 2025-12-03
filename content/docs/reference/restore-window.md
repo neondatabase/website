@@ -9,11 +9,11 @@ The **restore window** (also called **history retention** or **retention window*
 
 ## Defaults and plan limits
 
-| Plan | Default | Maximum |
-|------|---------|---------|
-| Free | 6 hours | 6 hours (capped at 1 GB of history) |
-| Launch | 1 day | 7 days |
-| Scale | 1 day | 30 days |
+| Plan   | Default | Maximum                             |
+| ------ | ------- | ----------------------------------- |
+| Free   | 6 hours | 6 hours (capped at 1 GB of history) |
+| Launch | 1 day   | 7 days                              |
+| Scale  | 1 day   | 30 days                             |
 
 A longer restore window means:
 
@@ -32,11 +32,11 @@ WAL records that exceed your restore window are automatically removed and stop c
 
 The restore window directly affects your instant restore storage costs. Neon retains WAL records for the duration of your restore window. The more history you retain, the more storage you use, and the higher your instant restore storage charges.
 
-| Plan | Cost |
-|------|------|
-| Free | No charge (capped at 1 GB) |
-| Launch | $0.20/GB-month |
-| Scale | $0.20/GB-month |
+| Plan   | Cost                       |
+| ------ | -------------------------- |
+| Free   | No charge (capped at 1 GB) |
+| Launch | $0.20/GB-month             |
+| Scale  | $0.20/GB-month             |
 
 This is separate from your regular storage charges for branch data. You're billed for:
 
