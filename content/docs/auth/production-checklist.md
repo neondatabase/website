@@ -7,6 +7,10 @@ updatedOn: '2025-11-30T00:00:00.000Z'
 
 Complete these steps before taking your application to production with Neon Auth.
 
+<Admonition type="note">
+By default, anyone can sign up for your application. Review email verification settings and ensure your application properly controls user access before launching.
+</Admonition>
+
 <CheckList title="Auth production checklist">
 
 <CheckItem title="1. Configure trusted domains" href="/docs/auth/guides/configure-domains">
@@ -22,7 +26,7 @@ Complete these steps before taking your application to production with Neon Auth
 </CheckItem>
 
 <CheckItem title="4. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">
-  Require email verification for sign-ups to prevent fake accounts. See [Email verification guide](/docs/auth/guides/email-verification).
+  Email verification is not enabled by default. We recommend enabling it to ensure users own their email address and reduce fake accounts. See [Email verification guide](/docs/auth/guides/email-verification).
 </CheckItem>
 
 </CheckList>

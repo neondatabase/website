@@ -122,6 +122,10 @@ const { data, error } = await client.auth.signUp.email({
 
 The SDK posts to `{NEON_AUTH_URL}/auth/sign-up/email`. The Auth service creates a new row in `neon_auth.user`, stores hashed credentials in `neon_auth.account`, and returns user data. If email verification is required, it creates a verification token in `neon_auth.verification` and may delay session creation until verification.
 
+<Admonition type="note">
+By default, anyone can sign up for your application. To add an additional verification layer, enable email verification (see [Email Verification](/docs/auth/guides/email-verification)). Built-in signup restrictions are coming soon.
+</Admonition>
+
 ## OAuth flow
 
 OAuth authentication (Google, GitHub, etc.):
@@ -152,7 +156,15 @@ ORDER BY "createdAt" DESC;
 
 ## Data API integration
 
-When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. The user ID is available via the `auth.user_id()` function, enabling Row-Level Security policies to grant data access based on the authenticated user.
+When you enable the [Data API](/docs/data-api/get-started), JWT tokens from Neon Auth are validated automatically. The user ID is available via the `auth.uid()` function, enabling Row-Level Security policies to grant data access based on the authenticated user.
+
+**Example RLS policy:**
+
+```sql
+CREATE POLICY "Users can view own posts"
+ON posts FOR SELECT TO authenticated
+USING (user_id = auth.uid());
+```
 
 **Learn more about securing your data:**
 
