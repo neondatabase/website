@@ -171,7 +171,7 @@ Update `app/layout.tsx` to use the `AuthProvider`:
 ```tsx
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { AuthProvider } from "@/app/provider"; // [!code ++]
+import { AuthProvider } from '@/app/provider'; // [!code ++]
 import './globals.css';
 
 const geistSans = Geist({
@@ -268,7 +268,7 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 <TwoColumnStep title="Protect your routes">
   <LeftContent>
 
-Use the `SignedIn` and `RedirectToSignIn` components to protect your pages. Update `app/page.tsx`:
+Use the `SignedIn` and `RedirectToSignIn` components to protect your pages. Update `app/page.tsx` with the following code:
 
   </LeftContent>
   <RightCode label="app/page.tsx">
@@ -277,18 +277,43 @@ Use the `SignedIn` and `RedirectToSignIn` components to protect your pages. Upda
 'use client';
 
 import { SignedIn, RedirectToSignIn, UserButton } from '@neondatabase/neon-auth-ui';
+import { authClient } from '@/lib/auth/client';
 
 export default function Home() {
+  const { data: session } = authClient.useSession();
+
   return (
     <div className="bg-zinc-50 flex min-h-screen items-center justify-center font-sans dark:bg-black">
       <SignedIn>
         <main className="flex flex-col items-center justify-center gap-8 text-center">
           <h1 className="dark:text-zinc-50 text-3xl font-semibold tracking-tight text-black">
-            Welcome!
+            Welcome{session?.user?.name ? `, ${session.user.name}` : ''}!
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 text-lg">
-            You're successfully authenticated.
+            You&apos;re successfully authenticated.
           </p>
+
+          {session?.user && (
+            <div className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 rounded-lg border bg-white p-6 shadow-sm">
+              <div className="space-y-3 text-left">
+                <div>
+                  <p className="text-zinc-500 dark:text-zinc-400 text-sm">Email</p>
+                  <p className="text-zinc-900 dark:text-zinc-50 mt-1 font-medium">
+                    {session.user.email}
+                  </p>
+                </div>
+                {session.user.name && (
+                  <div>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm">Name</p>
+                    <p className="text-zinc-900 dark:text-zinc-50 mt-1 font-medium">
+                      {session.user.name}
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           <UserButton />
         </main>
       </SignedIn>
