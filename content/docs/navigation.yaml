@@ -397,6 +397,9 @@
               items:
                 - title: JavaScript SDK
                   slug: reference/javascript-sdk
+                - title: UI Components
+                  slug: auth/reference/ui-components
+                  tag: wip
 
             - section: Migration Guides
               items:
