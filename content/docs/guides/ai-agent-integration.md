@@ -63,13 +63,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                 | Free Organization | Paid Organization | Notes                                                      |
-| --------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
-| **Max branches**      | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
-| **Max snapshots**     | 1 per project     | 10 per project    | Critical for versioning workflows                          |
-| **Compute range**     | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                       |
-| **Restore window** | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
-| **Min autosuspend**   | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
+| Limit               | Free Organization | Paid Organization | Notes                                                      |
+| ------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
+| **Max branches**    | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
+| **Max snapshots**   | 1 per project     | 10 per project    | Critical for versioning workflows                          |
+| **Compute range**   | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                       |
+| **Restore window**  | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
+| **Min autosuspend** | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
 
 **Key constraints to consider:**
 
