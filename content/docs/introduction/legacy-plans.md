@@ -314,7 +314,7 @@ Here are some strategies to consider:
 
 - **Consider the impact of deletions**
 
-  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your retention window. For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
+  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your [restore window](/docs/introduction/restore-window). For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
 
 - **Delete or reset branches before they age out**
 
@@ -340,7 +340,7 @@ These factors could be contributing to your high storage consumption:
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
 - **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
 
-To mitigate this issue, consider adjusting your [restore window](/docs/introduction/branching#restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
+To mitigate this issue, consider adjusting your [restore window](/docs/introduction/restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
 

@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-12-02T22:54:22.675Z'
 ---
 
-The **restore window** (also called **history retention** or **retention window**) determines how far back Neon retains a history of changes for your branches. This history powers several Neon features: instant restore (point-in-time recovery), Time Travel queries, branching from past states, and snapshots.
+The **restore window** determines how far back Neon retains a history of changes for your branches. This history retention period powers several Neon features: instant restore (point-in-time recovery), Time Travel queries, branching from past states, and snapshots.
 
 ## Defaults and plan limits
 
@@ -57,7 +57,10 @@ Changing the restore window affects **all branches** in your project.
 
 1. Select your project.
 2. Go to **Settings** > **Instant restore**.
-3. Use the slider to select your desired restore window.
+   
+   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
+
+3. Use the slider to select your desired **restore window**.
 4. Click **Save**.
 
 </TabItem>
