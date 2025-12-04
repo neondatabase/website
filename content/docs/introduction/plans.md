@@ -271,7 +271,7 @@ The maximum restore window per plan:
 
 > The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
-The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
 
 ### ☑ Private network transfer
 

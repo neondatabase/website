@@ -30,11 +30,9 @@ The ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). An
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window.
+Time Travel queries are limited to your project's restore window. You cannot select a time outside your current restore window.
 
-You cannot select a time outside your current restore window.
-
-To change your restore window, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+To learn more about the restore window, including how to configure it and plan limits, see [Restore window](/docs/introduction/restore-window).
 
 ### Data integrity
 
@@ -48,7 +46,7 @@ Time Travel in the SQL Editor offers a non-destructive way to explore your datab
 
 You can use this feature to help with scenarios like:
 
-- Investigating anomolies
+- Investigating anomalies
 - Assessing the impact of new features
 - Troubleshooting
 - Compliance auditing
