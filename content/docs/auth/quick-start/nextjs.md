@@ -268,10 +268,21 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 <TwoColumnStep title="Protect your routes">
   <LeftContent>
 
-Use the `SignedIn` and `RedirectToSignIn` components to protect your pages. Update `app/page.tsx` with the following code:
+There are two approaches to protect your routes:
+
+1. **Component-level protection**: Use `SignedIn` and `RedirectToSignIn` components directly in your page components
+2. **Middleware-based protection**: Use Next.js middleware with a route matcher to protect entire route segments
+
+Choose the approach that best fits your use case - middleware is ideal for protecting entire route segments, while component-level checks offer more granular control within pages.
 
   </LeftContent>
-  <RightCode label="app/page.tsx">
+  <RightCode label="Choose your approach">
+
+<Tabs labels={["Component-level (app/page.tsx)", "Middleware (proxy.ts)"]}>
+
+<TabItem>
+
+Use `SignedIn` and `RedirectToSignIn` components to protect pages at the component level. This performs authentication checks directly within the page component.
 
 ```tsx
 'use client';
@@ -322,6 +333,69 @@ export default function Home() {
   );
 }
 ```
+
+</TabItem>
+
+<TabItem>
+
+Use Next.js middleware to protect routes at the edge before they reach your page components. Create a `proxy.ts` file in your project root:
+
+```typescript
+import { neonAuthMiddleware } from '@neondatabase/neon-auth-next';
+
+export default neonAuthMiddleware({
+  loginUrl: '/auth/sign-in',
+});
+
+export const config = {
+  matcher: [
+    '/only-for-authenticated-users/:path*',
+    // Add more protected routes here
+  ],
+};
+```
+
+Then create a page at `app/only-for-authenticated-users/page.tsx`. Since the middleware handles authentication, this page doesn't need `SignedIn` or `RedirectToSignIn` components - unauthenticated users are redirected before reaching the page.
+
+```tsx
+'use client';
+
+import { authClient } from '@/lib/auth/client';
+import Link from 'next/link';
+
+export default function ProtectedPage() {
+  const { data: session } = authClient.useSession();
+
+  return (
+    <div className="bg-zinc-50 flex min-h-screen items-center justify-center font-sans dark:bg-black">
+      <main className="flex flex-col items-center justify-center gap-8 text-center">
+        <h1 className="dark:text-zinc-50 text-3xl font-semibold tracking-tight text-black">
+          Protected by Middleware
+        </h1>
+        <p className="text-zinc-600 dark:text-zinc-400 text-lg">
+          This page is protected using Next.js middleware.
+        </p>
+        <p className="text-zinc-600 dark:text-zinc-400">
+          If you&apos;re seeing this, you&apos;re authenticated as{' '}
+          <span className="dark:text-zinc-50 text-zinc-900 font-medium">
+            {session?.user?.email}
+          </span>
+        </p>
+        <Link
+          href="/"
+          className="bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 rounded-lg px-4 py-2 text-white"
+        >
+          Back to Home
+        </Link>
+      </main>
+    </div>
+  );
+}
+```
+
+</TabItem>
+
+</Tabs>
 
   </RightCode>
 </TwoColumnStep>
