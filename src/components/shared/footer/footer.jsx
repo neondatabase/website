@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -10,7 +8,7 @@ import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import StatusBadge from './status-badge/status-badge';
+import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
   <footer className="safe-paddings relative z-50 mt-auto border-t border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
