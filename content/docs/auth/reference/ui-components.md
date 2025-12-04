@@ -40,19 +40,7 @@ npm install @neondatabase/neon-auth-ui
 | Component              | Purpose                    | Docs                                                                                   |
 | ---------------------- | -------------------------- | -------------------------------------------------------------------------------------- |
 | Account settings cards | Account management UI      | [account-settings-cards](https://better-auth-ui.com/components/account-settings-cards) |
-| Sessions management    | Active sessions list       | [sessions-card](https://better-auth-ui.com/components/sessions-card)                   |
-| API keys               | API key management         | [api-keys-card](https://better-auth-ui.com/components/api-keys-card)                   |
 | OAuth providers        | Linked accounts management | [accounts-card](https://better-auth-ui.com/components/accounts-card)                   |
-
-### Organization Components
-
-| Component                | Purpose                              | Key Props                    | Docs                                                                                         |
-| ------------------------ | ------------------------------------ | ---------------------------- | -------------------------------------------------------------------------------------------- |
-| `<OrganizationSwitcher>` | Switch between orgs/personal account | `onSelect`                   | [organization-switcher](https://better-auth-ui.com/components/organization-switcher)         |
-| `<OrganizationsCard>`    | List user's organizations            | `onSelect`                   | [organizations-card](https://better-auth-ui.com/components/organizations-card)               |
-| `<OrganizationView>`     | Organization details and settings    | `organizationId`             | [organization-view](https://better-auth-ui.com/components/organization-view)                 |
-| Member management        | Organization member list with roles  | `organizationId`, `onUpdate` | [organization-members-card](https://better-auth-ui.com/components/organization-members-card) |
-| Invitations              | Organization invitation management   | `organizationId`             | [accept-invitation-card](https://better-auth-ui.com/components/accept-invitation-card)       |
 
 ## Styling
 
