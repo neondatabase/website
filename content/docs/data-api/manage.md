@@ -58,7 +58,7 @@ When you enable the Data API with Neon Auth, your project's unique JWKS URL is a
 
 You can add, replace, or remove authentication providers. Note that only one provider can be configured at a time.
 
-- **Add a provider:** If no provider is currently configured, click **Set up authentication provider** and enter the JWKS URL supplied by your auth service (e.g., Auth0, Clerk, or Firebase).
+- **Add a provider:** If no provider is currently configured, click **Set up authentication provider** and enter the JWKS URL supplied by your auth service (e.g., Auth0, Clerk, or Firebase). Some providers also require a [JWT Audience](/docs/data-api/custom-authentication-providers#what-is-jwt-audience) value.
 - **Replace a provider:** To switch to a different provider, remove the current one first, then add the new one.
 - **Remove a provider:** Click the optional menu (**...**) on the provider card and select **Remove provider**.
 

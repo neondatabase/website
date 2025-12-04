@@ -40,6 +40,18 @@ curl -X POST "https://console.neon.tech/api/v2/projects/${projectId}/branches/${
   }'
 ```
 
+## JWT Audience validation failed
+
+If you've configured a **JWT Audience** value in the Data API but your tokens are being rejected, the `aud` claim in your JWT may not match the configured value.
+
+### Fix
+
+1. Decode your JWT token at [jwt.io](https://jwt.io) to inspect the `aud` claim
+2. Ensure the `aud` value in your token exactly matches what you've configured in the Data API
+3. If your provider doesn't include an `aud` claim, remove the JWT Audience value from your Data API configuration
+
+For more information, see [What is JWT Audience?](/docs/data-api/custom-authentication-providers#what-is-jwt-audience)
+
 ## JWT token missing `sub` claim
 
 The JWT token must include the `sub` claim, which identifies the user, to enable Row-Level Security (RLS) policies. Ensure your authentication system includes this claim when generating JWT tokens for the Neon Data API. An example JWT payload with the `sub` claim is shown below:

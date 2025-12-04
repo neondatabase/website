@@ -18,38 +18,77 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the appropriate branch before enabling the API.
 </Admonition>
 
-To enable the Neon Data API, navigate to the **Data API** section in the Neon Console sidebar and click **Enable**.
+<Admonition type="note">
+Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
+</Admonition>
+
+### 1. Navigate to the Data API page
+
+In the Neon Console, select your project and go to the **Data API** page in the sidebar.
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-Select an authentication method:
+### 2. Select an authentication provider
 
-- **Neon Auth** (recommended): Integrates with Neon Auth for seamless user and token management. Ideal for applications requiring user authentication.
-- **Bring Your Own Auth**: Use your own authentication system by providing the JWKS URL for your auth provider.
-- **No Auth**: No authentication integration. Suitable for server-side scripts or backends where you manage tokens manually or authentication isn't required. _(under development)_
+Choose how you want to authenticate requests to the Data API:
+
+- **Neon Auth**: Use [Neon Auth](/docs/neon-auth/overview) as your authentication provider (the default).
+- **Other provider**: Use a different authentication provider by entering the JWKS URL. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for a list of supported providers.
+- **Skip (set up later)**: Configure an authentication provider later. See [Add your authentication provider](/docs/data-api/custom-authentication-providers#add-your-authentication-provider).
 
 <Admonition type="warning" title="Authentication required">
-**All requests to the Data API currently require authentication** with a valid JWT token. Anonymous access is not supported yet, but is coming soon. In the near future, we'll provide public/long-lived tokens for anonymous users.
+All requests to the Data API require authentication with a valid JWT token.
 </Admonition>
+
+### 3. Configure schema access
+
+The **Grant public schema access to authenticated users** toggle (enabled by default) automatically applies database permissions so the `authenticated` role can read and write to tables in the `public` schema.
+
+<details>
+<summary>View the GRANT statements applied</summary>
+
+```sql
+-- Schema usage
+GRANT USAGE ON SCHEMA public TO authenticated;
+
+-- For existing tables
+GRANT SELECT, UPDATE, INSERT, DELETE ON ALL TABLES IN SCHEMA public TO authenticated;
+
+-- For future tables
+ALTER DEFAULT PRIVILEGES IN SCHEMA public
+GRANT SELECT, UPDATE, INSERT, DELETE ON TABLES TO authenticated;
+
+-- For sequences (for identity columns)
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
+```
+
+</details>
+
+Leave this toggle enabled unless you need to manage permissions manually. If you disable it, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
+
+### 4. Click Enable
+
+Click **Enable** to activate the Data API. Once enabled, you'll see your REST API endpoint and configuration options:
 
 ![Data API enabled view](/docs/data-api/data-api-enabled.png)
 
-<Admonition type="note">
-Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Please ensure IP Allow is disabled before proceeding.
-</Admonition>
+At this point:
 
-Once enabled, Neon provisions:
-
-1.  A dedicated **REST API endpoint** (e.g., `https://.../rest/v1`).
-2.  **Neon Auth** integration for managing users and tokens (if selected).
+- Your **REST API endpoint** is ready to use.
+- **Neon Auth** is configured as your authentication provider (if selected).
+- Next, you'll need to add **Row-Level Security (RLS)** policies to define which rows users can access. We'll show you how in the next step.
 
 ## Create a table with RLS
 
 The Data API interacts directly with your Postgres schema. Because the API is accessible over the internet, it's crucial to enforce security at the database level using PostgreSQL's **Row-Level Security (RLS)** features.
 
-For guidance on writing RLS policies, see our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for the basics, or our recommended [Drizzle RLS guide](/docs/guides/rls-drizzle) for a simpler approach.
+In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. Choose the approach that matches how you manage your database schema:
 
-In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. Run the following SQL in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) to create a `posts` table with RLS policies:
+- **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
+- **Drizzle (crudPolicy)**: A high-level helper that generates all four CRUD policies (select, insert, update, delete) in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
+- **Drizzle (pgPolicy)**: Define individual policies for each operation. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
+
+For more on Drizzle RLS, see our [Drizzle RLS guide](/docs/guides/rls-drizzle).
 
 <CodeTabs labels={["SQL", "Drizzle (crudPolicy)", "Drizzle (pgPolicy)"]}>
 
@@ -169,25 +208,25 @@ export const posts = pgTable(
 
 ## Refresh schema cache
 
-When you modify your database schema (adding tables, columns, or changing structure), the Data API needs to refresh its cache.
+The Data API caches your database schema for performance. When you modify your schema (adding tables, columns, or changing structure), you need to refresh this cache for the changes to take effect.
 
-After making any schema changes, go to the **Data API** section in the Console and click **Refresh schema cache**; the API will now reflect your latest schema.
+To refresh the cache, go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
 
 ![Data API refresh schema cache button](/docs/changelog/data_api_schema_refresh.png)
 
 ## Connect and Query
 
-Dependending on your preference, you can connect to the Neon Data API using either the Neon SDKs or direct HTTP requests.
+You can connect to the Data API using a client library or direct HTTP requests.
 
-### Option 1: Using Neon SDK's
+### Option 1: Using a client library
 
-Install the client library and run your first query. Choose the option that fits your use case:
+Install a client library and run your first query. Choose the option that matches your authentication provider:
 
-<Tabs labels={["With Neon Auth", "With Your Own Auth"]}>
+<Tabs labels={["Neon Auth", "Other authentication provider"]}>
 
 <TabItem>
 
-Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) when connecting from a frontend or application using Neon Auth for user management.
+Use [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) if you're using Neon Auth. This library handles token management automatically.
 
 **1. Install**
 
@@ -200,17 +239,17 @@ npm install @neondatabase/neon-js
 ```typescript shouldWrap
 import { createClient } from '@neondatabase/neon-js';
 
-// Initialize with Auth integration
+// Initialize with Neon Auth
 const client = createClient({
   auth: {
-    url: process.env.NEON_AUTH_URL, // e.g. https://.../neondb/auth: Your Neon Auth endpoint from the Console
+    url: process.env.NEON_AUTH_URL, // Your Neon Auth endpoint (from the Neon Console)
   },
   dataApi: {
-    url: process.env.NEON_DATA_API_URL, // e.g. https://.../rest/v1: Your Neon Data API endpoint from the Console
+    url: process.env.NEON_DATA_API_URL, // Your Data API endpoint (from the Neon Console)
   },
 });
 
-// Query (Token is automatically injected if user is logged in. Refer `client.auth.signIn` methods in Neon Auth docs for login flows)
+// Query - the JWT token is injected automatically when the user is signed in
 const { data, error } = await client
   .from('posts')
   .select('*')
@@ -224,7 +263,7 @@ console.log(data);
 
 <TabItem>
 
-Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) when using your own authentication system (like [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), [Firebase Auth](https://firebase.google.com/products/auth), etc.) to provide JWT tokens for the Data API.
+Use [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) if you're using another authentication provider like [Auth0](https://auth0.com/), [Clerk](https://clerk.com/), or [Firebase Auth](https://firebase.google.com/products/auth).
 
 **1. Install**
 
@@ -234,19 +273,19 @@ npm install @neondatabase/postgrest-js
 
 **2. Usage**
 
-You need to provide a function that retrieves the JWT token from your authentication system. This token will be included in each request to the Data API to enforce RLS policies.
+Provide a function that retrieves the JWT token from your authentication system. This token is included in each request to enforce RLS policies.
 
 ```typescript shouldWrap
 import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
 
 const getTokenFromAuthSystem = async (): Promise<string> => {
-  // Implement jwt token retrieval logic from your auth system using sessions, cookies, env vars, etc.
+  // Retrieve the JWT token from your auth system
   return 'your-jwt-token';
 };
 
-// Initialize the lightweight client
+// Initialize the client
 const client = new NeonPostgrestClient({
-  dataApiUrl: process.env.NEON_DATA_API_URL!, // e.g. https://.../rest/v1: Your Neon Data API endpoint from the Console
+  dataApiUrl: process.env.NEON_DATA_API_URL!, // Your Data API endpoint (from the Neon Console)
   options: {
     global: {
       fetch: fetchWithToken(getTokenFromAuthSystem),
@@ -270,17 +309,30 @@ console.log(data);
 
 > For detailed guidance on performing `INSERT`, `UPDATE`, `DELETE`, and advanced queries (filters, joins, stored procedures, etc.) in either case, refer to the [Neon Javascript SDK documentation](/docs/reference/javascript-sdk#insert).
 
-### Option 2: Direct HTTP Requests
+### Option 2: Direct HTTP requests
 
-You can also interact with the Neon Data API directly using standard HTTP requests. Ensure you include the `Authorization` header with a valid JWT token for authentication. The JWT token must include the `sub` claim for RLS policies to work correctly.
+You can also query the Data API directly using standard HTTP requests. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
+
+**Where to get the JWT token:**
+
+- **Neon Auth**: After a user signs in, retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Neon Auth](/docs/neon-auth/overview) for details.
+- **Other providers**: Retrieve the token from your auth provider's SDK (e.g., `getAccessToken()` in Auth0, `getToken()` in Clerk).
+
+**About the `sub` claim:**
+
+RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
+
+**Example request:**
+
+This request queries the `posts` table for all published posts, ordered by most recent first:
 
 ```bash shouldWrap
-curl -X GET 'https://your-neon-data-api-endpoint/rest/v1/posts?is_published=eq.true&order=created_at.desc' \
+curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&order=created_at.desc' \
   -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
   -H 'Content-Type: application/json'
 ```
 
-> For more details on constructing requests and handling responses, refer to the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
+> For more details on constructing requests and handling responses, see the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
 
 </Steps>
 

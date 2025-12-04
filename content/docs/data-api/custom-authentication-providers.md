@@ -1,5 +1,5 @@
 ---
-title: Custom Authentication Providers
+title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 enableTableOfContents: true
 updatedOn: '2025-11-13T20:54:35.549Z'
@@ -63,7 +63,26 @@ The key steps:
 You can configure your authentication provider when you first enable the Data API, or add it later from the **Configuration** tab. Select **Other Provider** from the dropdown and enter:
 
 - Your provider's **JWKS URL** (see provider-specific instructions below).
-- Your **JWT Audience** value, if required by your provider.
+- Your **JWT Audience** value, if required by your provider (see [What is JWT Audience?](#what-is-jwt-audience) below).
+
+### What is JWT Audience?
+
+The **JWT Audience** (the `aud` claim in a JWT) identifies the intended recipient of a token. It's a security measure that ensures tokens issued for one application can't be reused with another.
+
+When you configure a JWT Audience value in the Data API:
+
+- The Data API verifies that incoming JWTs contain a matching `aud` claim
+- Tokens without a matching audience are rejected
+- This prevents tokens meant for other services from being accepted by your API
+
+**When is it required?**
+
+- **Firebase/GCP**: Required — use your Firebase Project ID
+- **Google Identity**: Required — use your OAuth 2.0 Client ID
+- **Azure AD, Keycloak**: May be required depending on your configuration
+- **Most other providers**: Optional — only configure if your provider includes an `aud` claim in tokens
+
+If you're unsure whether your provider requires it, you can decode a sample JWT from your provider at [jwt.io](https://jwt.io) and check if it includes an `aud` claim.
 
 ## Find your JWKS URL
 
