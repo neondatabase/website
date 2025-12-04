@@ -23,7 +23,7 @@ const HeaderWrapper = ({
     <div
       className={clsx(
         'navigation-overlay',
-        'pointer-events-none fixed inset-0 z-40 bg-black-pure/80 opacity-0 transition-opacity delay-150 duration-200'
+        'pointer-events-none fixed inset-0 z-40 bg-gray-new-8/80 opacity-0 transition-opacity delay-150 duration-200'
       )}
     />
   </>
