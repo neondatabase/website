@@ -57,7 +57,7 @@ Changing the restore window affects **all branches** in your project.
 
 1. Select your project.
 2. Go to **Settings** > **Instant restore**.
-   
+
    ![Restore window configuration](/docs/manage/instant_restore_setting.png)
 
 3. Use the slider to select your desired **restore window**.
