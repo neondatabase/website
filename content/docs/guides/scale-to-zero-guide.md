@@ -25,6 +25,10 @@ Paid plans permit disabling scale to zero. On the Scale plan, you can configure 
 | Launch    | 5 minutes                            | &check;          |
 | Scale     | Configurable (1 minute to always on) | &check;          |
 
+<Admonition type="note">
+Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
+</Admonition>
+
 ## Enable or disable scale to zero
 
 To enable or disable scale to zero:

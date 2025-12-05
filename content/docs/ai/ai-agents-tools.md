@@ -24,6 +24,14 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 <a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
 </DetailIconCards>
 
+## GitHub Copilot agents
+
+Custom agents for GitHub Copilot that bring Neon's branching workflow directly into VS Code for safe migrations and query optimization.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-github-copilot-agents" description="Safe database migrations and query optimization using Neon branching" icon="github">Neon agents for GitHub Copilot</a>
+</DetailIconCards>
+
 ## AI rules
 
 For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
