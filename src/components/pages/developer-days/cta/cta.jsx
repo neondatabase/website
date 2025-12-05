@@ -1,6 +1,7 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
+import LINKS from 'constants/links';
 import StraightLineSvg from 'images/pages/developer-days/straight-line.inline.svg';
 
 import LineSvg from './images/line.inline.svg';
@@ -17,7 +18,7 @@ const CTA = () => (
         className="relative mt-8 px-9 py-6 !text-lg xl:!text-base"
         theme="primary"
         size="sm"
-        to="https://console.neon.tech/sign_in"
+        to={LINKS.login}
       >
         <span
           className="pointer-events-none absolute inset-x-0 top-0 h-[232px] w-full rounded-[32px] opacity-40 blur-[30px] lg:h-[146px] sm:h-[92px]"

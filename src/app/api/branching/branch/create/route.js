@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+import LINKS from 'constants/links';
+
 import { handleInsertBranchConnection, scheduleBranchDeletion } from '../../utils';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -7,7 +9,7 @@ export async function POST() {
   try {
     const start = performance.now();
     const response = await fetch(
-      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches`,
+      `${LINKS.console}/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches`,
       {
         method: 'POST',
         headers: {
