@@ -208,6 +208,10 @@ As mentioned above, your `max_connections` setting is based on both your minimum
 
 Neon's _Scale to Zero_ feature automatically transitions a compute into an idle state after 5 minutes of inactivity. You can disable scale to zero to maintain an "always-active" compute. An "always-active" configuration eliminates the few hundred milliseconds seconds of latency required to reactivate a compute but is likely to increase your compute time usage on systems where the database is not always active.
 
+<Admonition type="note">
+Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
+</Admonition>
+
 For more information, refer to [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
 
 <Admonition type="important">
