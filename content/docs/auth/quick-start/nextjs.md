@@ -131,10 +131,10 @@ export const { GET, POST } = toNextJsHandler(process.env.NEON_AUTH_BASE_URL!);
 <TwoColumnStep title="Create the Auth Provider">
   <LeftContent>
 
-Create a provider component to wrap your application with authentication context. Create `app/provider.tsx`:
+Create a provider component to wrap your application with authentication context. Create `app/providers.tsx`:
 
   </LeftContent>
-  <RightCode label="app/provider.tsx">
+  <RightCode label="app/providers.tsx">
 
 ```tsx
 'use client';
@@ -180,7 +180,7 @@ Update `app/layout.tsx` to use the `AuthProvider`:
 ```tsx
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { AuthProvider } from '@/app/provider'; // [!code ++]
+import { AuthProvider } from '@/app/providers'; // [!code ++]
 import './globals.css';
 
 const geistSans = Geist({
