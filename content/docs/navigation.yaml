@@ -344,6 +344,8 @@
           items:
             - title: Get started
               slug: data-api/get-started
+            - title: Manage Data API
+              slug: data-api/manage
             - title: Building a note-taking app
               slug: data-api/demo
             - title: Secure your app with RLS
