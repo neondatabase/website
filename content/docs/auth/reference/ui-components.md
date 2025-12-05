@@ -13,16 +13,135 @@ Quick reference for `@neondatabase/neon-auth-ui` components. These components ar
 npm install @neondatabase/neon-auth-ui
 ```
 
+## Provider Setup
+
+Wrap your app with `NeonAuthUIProvider` to enable the UI components. The provider accepts configuration props that control which features are available.
+
+### Basic Setup
+
+```tsx
+import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import '@neondatabase/neon-auth-ui/css';
+import { auth } from './auth'; // Your auth client from @neondatabase/neon-js
+
+function App() {
+  return (
+    <NeonAuthUIProvider authClient={auth}>
+      {/* Your app components */}
+    </NeonAuthUIProvider>
+  );
+}
+```
+
+### Common Props
+
+| Prop | Type | Description | Example |
+|------|------|-------------|---------|
+| `authClient` | `NeonAuthPublicApi` | **Required.** Your Neon Auth client instance | `authClient={auth}` |
+| `social.providers` | `SocialProvider[]` | Array of OAuth providers to enable (e.g., Google, GitHub) | `social={{ providers: ['google', 'github'] }}` |
+| `navigate` | `(href: string) => void` | Navigation function for React Router | `navigate={navigate}` |
+| `Link` | `ComponentType` | Custom Link component for routing | `Link={RouterLink}` |
+| `localization` | `AuthLocalization` | Customize text labels throughout the UI | See example below |
+| `avatar` | `AvatarOptions` | Avatar upload and display configuration | `avatar={{ size: 256, extension: 'webp' }}` |
+| `additionalFields` | `AdditionalFields` | Custom fields for sign-up and account settings | See example below |
+| `credentials.forgotPassword` | `boolean` | Enable forgot password flow | `credentials={{ forgotPassword: true }}` |
+
+### Enable OAuth Providers
+
+To enable Google sign-in (or other OAuth providers), add the `social` prop to the provider:
+
+```tsx
+import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { auth } from './auth';
+
+function App() {
+  return (
+    <NeonAuthUIProvider
+      authClient={auth}
+      social={{
+        providers: ['google', 'github'], // Enable Google and GitHub sign-in
+      }}
+    >
+      {/* Your app */}
+    </NeonAuthUIProvider>
+  );
+}
+```
+
+**Note:** Google and GitHub OAuth providers are enabled by default with shared credentials for development. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure your own OAuth credentials in the Neon Console (Settings → Auth). See the [OAuth setup guide](/docs/auth/guides/setup-oauth) for details.
+
+### React Router Integration
+
+If using React Router, pass the `navigate` function and a custom `Link` component:
+
+```tsx
+import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
+import { auth } from './auth';
+
+function App() {
+  const navigate = useNavigate();
+  
+  return (
+    <NeonAuthUIProvider
+      authClient={auth}
+      navigate={navigate}
+      Link={RouterLink}
+      social={{
+        providers: ['google', 'github'],
+      }}
+    >
+      {/* Your app */}
+    </NeonAuthUIProvider>
+  );
+}
+```
+
+### Customization Examples
+
+**Custom localization:**
+```tsx
+<NeonAuthUIProvider
+  authClient={auth}
+  localization={{
+    SIGN_IN: 'Welcome Back',
+    SIGN_UP: 'Create Account',
+    FORGOT_PASSWORD: 'Forgot Password?',
+  }}
+>
+```
+
+**Custom sign-up fields:**
+```tsx
+<NeonAuthUIProvider
+  authClient={auth}
+  additionalFields={{
+    company: {
+      label: 'Company',
+      placeholder: 'Your company name',
+      type: 'string',
+      required: false,
+    },
+  }}
+  signUp={{
+    fields: ['name', 'company'],
+  }}
+>
+```
+
+For complete prop documentation, see the TypeScript types exported from `@neondatabase/neon-auth-ui`.
+
 ## Core Components
 
 ### Authentication Components
 
 | Component          | Purpose                                                            | Key Props               | Docs                                                                   |
 | ------------------ | ------------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------- |
-| `<AuthView>`       | All-in-one auth UI with tab navigation between sign-in and sign-up | `pathname`              | [auth-view](https://better-auth-ui.com/components/auth-view)           |
-| `<ProviderButton>` | Social OAuth buttons                                               | `provider`, `onSuccess` | [providers-card](https://better-auth-ui.com/components/providers-card) |
+| `<AuthView>`       | All-in-one auth UI with sign-in and sign-up forms                 | `pathname`              | [auth-view](https://better-auth-ui.com/components/auth-view)           |
 
-**Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality internally with tab navigation. Use the form components separately if you need more control over layout.
+**Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
+
+**OAuth Provider Buttons:** OAuth provider buttons (Google, GitHub, etc.) appear automatically in `<AuthView>` when configured via the `social.providers` prop. OAuth buttons do not appear in standalone `<SignInForm>` or `<SignUpForm>` components.
 
 ### User Management Components
 
@@ -34,13 +153,6 @@ npm install @neondatabase/neon-auth-ui
 | `<SignedOut>`        | Conditional rendering when signed out | `children`, `fallback` | [signed-out](https://better-auth-ui.com/components/signed-out)                   |
 | `<RedirectToSignIn>` | Redirect helper to sign-in page       | `redirectTo`           | [redirect-to-sign-in](https://better-auth-ui.com/components/redirect-to-sign-in) |
 | `<RedirectToSignUp>` | Redirect helper to sign-up page       | `redirectTo`           | [redirect-to-sign-up](https://better-auth-ui.com/components/redirect-to-sign-up) |
-
-### Settings Components
-
-| Component              | Purpose                    | Docs                                                                                   |
-| ---------------------- | -------------------------- | -------------------------------------------------------------------------------------- |
-| Account settings cards | Account management UI      | [account-settings-cards](https://better-auth-ui.com/components/account-settings-cards) |
-| OAuth providers        | Linked accounts management | [accounts-card](https://better-auth-ui.com/components/accounts-card)                   |
 
 ## Styling
 
@@ -73,11 +185,13 @@ import { UserButton } from '@neondatabase/neon-auth-ui';
 function Header() {
   return (
     <header>
-      <UserButton />
+      <UserButton size="icon" />
     </header>
   );
 }
 ```
+
+**Note:** The `size` prop defaults to `'icon'` but should be explicitly set to suppress deprecation warnings.
 
 ### Protected Route
 
