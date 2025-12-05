@@ -375,6 +375,8 @@
                   slug: auth/quick-start/react
                 - title: React with Neon Auth UI
                   slug: auth/quick-start/react-router-components
+                - title: Next.js
+                  slug: auth/quick-start/nextjs
 
             - section: Guides
               items:
