@@ -57,9 +57,7 @@ const TopbarClient = ({ text, link }) => {
       className="safe-paddings group relative z-50 flex h-9 w-full items-center justify-center overflow-hidden border-b border-gray-new-80 bg-[#E4F1EB] px-4 py-2.5 dark:border-gray-new-20 dark:bg-black-pure"
       to={link.url}
       target={link.target || undefined}
-      onClick={() => {
-        sendGtagEvent('click_announcement_banner');
-      }}
+      onClick={() => sendGtagEvent('click_announcement_banner')}
     >
       <div className="-mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
         <span className="truncate text-sm font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white group-hover:dark:text-gray-new-80">
@@ -72,9 +70,9 @@ const TopbarClient = ({ text, link }) => {
       <Image className="xl:hidden" src={rightImageXL} width={500} isRight />
       <Image className="hidden xl:block lg:hidden" src={leftImageLG} width={320} />
       <Image className="hidden xl:block lg:hidden" src={rightImageLG} width={275} isRight />
-      <Image className="hidden lg:block sm:hidden" src={leftImageSM} width={250} />
-      <Image className="hidden lg:block sm:hidden" src={rightImageSM} width={180} isRight />
-      <Image className="hidden sm:block" src={leftImageXS} width={150} />
+      <Image className="hidden lg:block md:hidden" src={leftImageSM} width={250} />
+      <Image className="hidden lg:block md:hidden" src={rightImageSM} width={180} isRight />
+      <Image className="hidden md:block" src={leftImageXS} width={150} />
     </Link>
   );
 };

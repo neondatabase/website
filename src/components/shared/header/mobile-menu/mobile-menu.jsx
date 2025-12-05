@@ -60,7 +60,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
       )}
     >
       <Tag
-        className="relative flex w-full items-center py-7 text-2xl font-medium leading-none tracking-extra-tight sm:py-6 sm:text-xl"
+        className="relative flex w-full items-center py-7 text-2xl font-medium leading-none tracking-extra-tight sm:py-5 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
