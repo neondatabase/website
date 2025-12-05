@@ -5,7 +5,7 @@ import Heading from '../heading';
 
 const Auth = () => (
   <section
-    className="auth safe-paddings relative scroll-mt-16 pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
+    className="auth safe-paddings relative scroll-mt-[60px] pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
     id="auth"
   >
     <Container
@@ -28,6 +28,7 @@ const Auth = () => (
           width={1184}
           height={580}
           poster="/videos/pages/home-new/auth/poster.jpg"
+          loop={false}
         >
           <source src="/videos/pages/home-new/auth/auth.mp4" type="video/mp4" />
           <source src="/videos/pages/home-new/auth/auth.webm" type="video/webm" />

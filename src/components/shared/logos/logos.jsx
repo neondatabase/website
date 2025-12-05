@@ -116,7 +116,7 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
         key={index}
         className={clsx(
           'logos-content !m-0 flex !p-0',
-          staticDesktop && 'w-full justify-between xl:justify-normal',
+          staticDesktop && 'w-full justify-between xl:w-auto xl:justify-normal',
           staticDesktop && index === 1 && 'hidden xl:flex'
         )}
         aria-hidden={index > 0 && 'true'}

@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import Container from 'components/shared/container';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
@@ -15,17 +16,17 @@ import Animation from './animation';
 
 const tabs = [
   {
-    tab: 'Save Costs',
+    tab: 'Save costs',
     animation: {
-      className: 'md:aspect-[767/599]',
+      className: 'aspect-[1378/488] w-[1378px] 3xl:max-w-full md:aspect-[767/599]',
       src: '/animations/pages/home-new/autoscaling-save-costs.riv',
       autoBind: true,
     },
   },
   {
-    tab: 'Avoid Outages',
+    tab: 'Avoid outages',
     animation: {
-      className: 'md:aspect-[767/1193] pointer-events-none',
+      className: 'aspect-[1378/488] w-[1378px] 3xl:max-w-full md:aspect-[767/1193]',
       src: '/animations/pages/home-new/autoscaling-avoid-outages.riv',
     },
   },
@@ -47,11 +48,15 @@ const legend = [
 ];
 
 const Autoscaling = () => {
+  const [animationWrapperRef, isAnimationIntersecting] = useInView({
+    triggerOnce: true,
+    rootMargin: '500px 0px',
+  });
   const [activeItem, setActiveItem] = useState(0);
 
   return (
     <section
-      className="autoscaling safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:py-14 md:pt-9"
+      className="autoscaling safe-paddings relative scroll-mt-16 overflow-hidden bg-[#E4F1EB] pb-[105px] pt-[88px] xl:pb-20 xl:pt-16 lg:scroll-mt-0 lg:py-14 md:pt-9"
       id="autoscaling"
     >
       <Container
@@ -70,11 +75,11 @@ const Autoscaling = () => {
               <button
                 className={clsx(
                   'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
-                  'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5',
                   'text-[15px] font-medium leading-none tracking-tight',
                   'border border-gray-new-10 even:border-l-0',
+                  'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 md:text-[14px]',
                   index === activeItem
-                    ? 'bg-white text-gray-new-10'
+                    ? 'pointer-events-none bg-white text-gray-new-10'
                     : 'bg-[#E4F1EB] text-gray-new-10/80 hover:bg-white/70 hover:text-gray-new-10'
                 )}
                 key={index}
@@ -92,19 +97,28 @@ const Autoscaling = () => {
               '3xl:max-w-[calc(50vw+408px)] 2xl:max-w-[calc(100%+32px)]',
               'xl:left-1/2 xl:w-screen xl:max-w-none xl:-translate-x-1/2 lg:mt-5'
             )}
+            ref={animationWrapperRef}
           >
-            {tabs.map(
-              ({ animation }, index) =>
-                index === activeItem && (
-                  <div key={index}>
-                    <Animation
-                      className={animation.className}
-                      src={animation.src}
-                      autoBind={animation.autoBind}
-                    />
-                  </div>
-                )
-            )}
+            {tabs.map(({ animation }, index) => (
+              <div
+                className={clsx(
+                  index === activeItem
+                    ? 'relative block'
+                    : 'pointer-events-none absolute inset-0 hidden',
+                  animation.className
+                )}
+                key={index}
+                aria-hidden={index !== activeItem}
+              >
+                {isAnimationIntersecting && (
+                  <Animation
+                    className={animation.className}
+                    src={animation.src}
+                    autoBind={animation.autoBind}
+                  />
+                )}
+              </div>
+            ))}
           </div>
 
           <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
@@ -114,7 +128,7 @@ const Autoscaling = () => {
                   className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-extra-tight xl:gap-x-2 md:text-[14px]"
                   key={index}
                 >
-                  <Image src={item.icon} width={16} height={16} alt="" />
+                  <Image src={item.icon} width={16} height={16} loading="lazy" alt="" />
                   <p>{item.text}</p>
                 </li>
               ))}

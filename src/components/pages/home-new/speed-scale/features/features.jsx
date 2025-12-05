@@ -28,7 +28,7 @@ const DATA = [
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
     link: '#',
     animation: <ManageFleet />,
-    animationClassName: 'flex-1 2xl:min-w-0 2xl:max-w-full',
+    animationClassName: 'flex-1 2xl:min-w-0 2xl:max-w-full sm:w-full',
   },
 ];
 
@@ -63,7 +63,8 @@ const Features = () => (
             <Link
               className={clsx(
                 'medium mt-7 flex w-fit items-center gap-2 text-lg font-medium leading-none tracking-extra-tight',
-                'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]'
+                'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]',
+                'hover:!text-gray-new-50'
               )}
               theme="white"
               to={link}

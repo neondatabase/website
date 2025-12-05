@@ -6,6 +6,16 @@
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
+
+    ::selection {
+      background-color: #39a57d;
+      color: white;
+    }
+
+    ::-moz-selection {
+      background-color: #39a57d;
+      color: white;
+    }
   }
 
   input[type='number']::-webkit-outer-spin-button,

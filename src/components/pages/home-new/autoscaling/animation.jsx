@@ -4,6 +4,7 @@ import {
   Alignment,
   Fit,
   Layout,
+  decodeFont,
   useRive,
   useViewModel,
   useViewModelInstance,
@@ -23,13 +24,8 @@ const Animation = ({ className, src, autoBind = false }) => {
   const { width } = useWindowSize();
   const isMobile = width ? width < 768 : false;
 
-  const [wrapperRef, isIntersecting] = useInView({
-    triggerOnce: true,
-    rootMargin: '500px 0px',
-  });
-
   const [animationRef, isVisible] = useInView({
-    threshold: 0.3,
+    threshold: 0.4,
   });
 
   const { rive, RiveComponent } = useRive({
@@ -42,6 +38,23 @@ const Animation = ({ className, src, autoBind = false }) => {
       fit: Fit.Cover,
       alignment: Alignment.TopCenter,
     }),
+    assetLoader: (asset, bytes) => {
+      if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
+        return false;
+      }
+
+      if (asset?.isFont) {
+        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
+          const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
+          asset.setFont(font);
+          font.unref();
+        });
+
+        return true;
+      }
+
+      return false;
+    },
     onLoad: () => {
       rive?.resizeDrawingSurfaceToCanvas();
       setIsLoaded(true);
@@ -54,6 +67,7 @@ const Animation = ({ className, src, autoBind = false }) => {
     'mobile',
     viewModelInstance
   );
+  const { setValue: setIsIntroInstance } = useViewModelInstanceBoolean('intro', viewModelInstance);
 
   useEffect(() => {
     setRiveInstance(rive);
@@ -62,12 +76,13 @@ const Animation = ({ className, src, autoBind = false }) => {
   useEffect(() => {
     if (riveInstance && isLoaded) {
       if (isVisible) {
+        setIsIntroInstance(true);
         riveInstance.play();
       } else {
-        riveInstance.pause();
+        setIsIntroInstance(false);
       }
     }
-  }, [riveInstance, isVisible, isLoaded]);
+  }, [isVisible, isLoaded, riveInstance, setIsIntroInstance]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -85,18 +100,16 @@ const Animation = ({ className, src, autoBind = false }) => {
 
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
+      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
       <div
         className={clsx(
-          'relative aspect-[1378/448] w-[1378px] max-w-none',
-          '3xl:max-w-full 2xl:aspect-[896/320] xl:aspect-[1024/360] lg:aspect-[768/280]',
-          'xl:pointer-events-none',
+          'relative max-w-none xl:pointer-events-none',
           '[&_canvas]:!h-full [&_canvas]:!w-full',
           className
         )}
         ref={animationRef}
       >
-        {isIntersecting ? <RiveComponent /> : null}
+        <RiveComponent />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode
 
 const AI = () => (
   <section
-    className="ai safe-paddings relative scroll-mt-16 py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
+    className="ai safe-paddings relative scroll-mt-[60px] py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
     id="ai"
   >
     <Container
@@ -44,8 +44,8 @@ const AI = () => (
             quality={100}
           />
         </div>
-        <div className="mt-[184px] flex items-center gap-11 xl:mt-[120px] xl:gap-[14px] lg:mt-[88px] md:mt-14 sm:flex-col sm:items-start sm:gap-7">
-          <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full">
+        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:flex-col sm:items-start sm:gap-7">
+          <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full sm:text-center">
             Connect MCP clients to Neon:
           </p>
           <Logos className="min-w-0 max-w-full" logos={logos} size="sm" />

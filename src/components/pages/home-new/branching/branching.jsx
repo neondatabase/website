@@ -32,7 +32,7 @@ const FEATURES = [
 
 const Branching = () => (
   <section
-    className="branching safe-paddings relative scroll-mt-16 pb-60 pt-40 xl:py-[136px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-20 md:pb-20 md:pt-16"
+    className="branching safe-paddings relative scroll-mt-[60px] pb-60 pt-40 xl:py-[136px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-20 md:pb-20 md:pt-16"
     id="branching"
   >
     <Container
@@ -49,7 +49,14 @@ const Branching = () => (
           {FEATURES.map(({ icon, title, description }, index) => (
             <li key={index}>
               <div className="flex items-center gap-x-2.5">
-                <Image className="lg:size-[14px]" src={icon} width={16} height={16} alt="" />
+                <Image
+                  className="lg:size-[14px]"
+                  src={icon}
+                  width={16}
+                  height={16}
+                  loading="lazy"
+                  alt=""
+                />
                 <h3 className="text-base font-medium tracking-tight text-white lg:text-[14px]">
                   {title}
                 </h3>

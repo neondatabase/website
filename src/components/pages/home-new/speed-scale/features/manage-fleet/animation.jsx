@@ -31,7 +31,7 @@ const LOOP_TRANSITION = {
 };
 
 const Animation = ({ apiCode, sqlCode }) => {
-  const { ref, inView } = useInView({ threshold: 0.75 });
+  const { ref, inView } = useInView();
   const { isFrameActive } = useAnimationTimeline(inView);
 
   return (
@@ -40,7 +40,7 @@ const Animation = ({ apiCode, sqlCode }) => {
         className={clsx(
           'flex w-[736px] flex-col gap-12',
           '2xl:w-auto xl:-ml-8 xl:gap-[30px] lg:ml-0 lg:max-w-[712px] lg:gap-11 lg:pt-1.5',
-          'sm:max-w-[386px] sm:gap-[26px] sm:pt-1 xs:max-w-xs'
+          'sm:max-w-full sm:gap-[26px] sm:pt-1'
         )}
       >
         <LazyMotion features={domAnimation}>
@@ -106,7 +106,7 @@ const Animation = ({ apiCode, sqlCode }) => {
                   </m.code>
                 </div>
                 <Image
-                  className="pointer-events-none absolute left-0 top-0 h-full w-auto max-w-none"
+                  className="pointer-events-none absolute left-0 top-0 h-full w-auto max-w-none sm:h-fit sm:w-full"
                   src={dotsPattern}
                   alt="Dots pattern"
                   width={763}

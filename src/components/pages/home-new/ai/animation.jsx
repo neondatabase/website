@@ -16,7 +16,7 @@ const Animation = () => {
   });
 
   const [animationRef, isVisible] = useInView({
-    threshold: 0.1,
+    threshold: 0.3,
   });
 
   const { rive, RiveComponent } = useRive({

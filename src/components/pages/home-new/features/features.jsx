@@ -48,7 +48,7 @@ const BORDER_CLASSNAME = 'absolute -bottom-1 -top-2 w-px bg-gray-new-20 xl:top-0
 
 const Features = () => (
   <section
-    className="features safe-paddings relative scroll-mt-16 pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
+    className="features safe-paddings relative scroll-mt-[60px] pb-60 xl:pb-40 lg:scroll-mt-0 lg:pb-32 md:pb-24"
     id="features"
   >
     <Container
@@ -69,6 +69,7 @@ const Features = () => (
                   src={icon}
                   width={24}
                   height={24}
+                  loading="lazy"
                   alt=""
                 />
                 <p
