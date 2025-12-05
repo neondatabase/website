@@ -10,9 +10,9 @@ import LINKS from 'constants/links';
 import DocsNavigation from '../docs-navigation';
 
 const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient }) => (
-  <div className="flex h-28 w-full items-center border-b border-gray-new-90 dark:border-gray-new-15 lg:h-16">
+  <div className="flex h-28 w-full items-center after:absolute after:left-0 after:right-0 after:top-16 after:h-px after:bg-gray-new-80 after:dark:bg-gray-new-20 lg:h-14 lg:after:hidden">
     <Container className="z-10 w-full" size="1600">
-      <div className="flex h-16 w-full items-center justify-between lg:pr-20">
+      <div className="flex h-16 w-full items-center justify-between lg:h-14 lg:pr-20">
         <div className="flex items-center gap-x-7">
           <Logo className="h-7" width={102} height={28} priority isHeader />
           <Link
@@ -27,7 +27,7 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         </div>
         <Sidebar className="lg:hidden" isClient={isClient} simpleMode />
       </div>
-      <div className="h-12 w-full border-t border-gray-new-90 dark:border-gray-new-15 lg:hidden">
+      <div className="h-12 lg:hidden">
         <DocsNavigation navigation={navigation} basePath={basePath} />
       </div>
     </Container>

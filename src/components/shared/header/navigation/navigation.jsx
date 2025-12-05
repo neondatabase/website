@@ -1,177 +1,395 @@
+'use client';
+
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 import Button from 'components/shared/button';
+import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
+import useClickOutside from 'hooks/use-click-outside';
+import useIsTouchDevice from 'hooks/use-is-touch-device';
+import ArrowTopRightIcon from 'icons/arrow-top-right.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import MenuBanner from '../menu-banner';
 
-const Navigation = ({ isDarkTheme }) => (
-  <nav>
-    <ul className="flex items-center gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
-      {MENUS.header.map(({ to, text, sections }, index) => {
-        const Tag = to ? Link : Button;
-        const hasSubmenu = sections?.length > 0;
-        const gridSubmenu = sections?.length > 1;
-        const theme = to ? { theme: isDarkTheme ? 'white' : 'black' } : {};
+const SUBMENU_SELECTOR_NAME = 'main-navigation-submenu-link';
 
-        return (
-          <li className={clsx('relative [perspective:2000px]', hasSubmenu && 'group')} key={index}>
-            <Tag
-              className={clsx(
-                'flex items-center gap-x-1 whitespace-pre text-sm font-normal',
-                isDarkTheme ? 'text-white' : 'text-black dark:text-white'
-              )}
-              to={to}
-              {...theme}
-              tagName="Navigation"
-              analyticsOnHover={!to || undefined}
+const Navigation = () => {
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  const submenuContainerRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const menuButtonRefs = useRef([]);
+
+  const isTouchDevice = useIsTouchDevice();
+
+  const handleMenuEnter = (hasSubmenu, index) => {
+    if (isKeyboardOpen || isTouchDevice) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    if (!hasSubmenu) {
+      setActiveMenuIndex(null);
+      return;
+    }
+
+    setActiveMenuIndex(index);
+  };
+
+  const handleMenuLeave = (hasSubmenu) => {
+    if (isKeyboardOpen) return;
+
+    if (hasSubmenu || activeMenuIndex !== null) {
+      timeoutRef.current = setTimeout(() => {
+        setActiveMenuIndex(null);
+      }, 100);
+    }
+  };
+
+  const handleSubmenuEnter = () => {
+    if (isKeyboardOpen) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
+  const handleSubmenuLeave = () => {
+    if (isKeyboardOpen) return;
+
+    setActiveMenuIndex(null);
+  };
+
+  const handleMenuKeyDown = (e, hasSubmenu, index) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIndex = (index + 1) % MENUS.header.length;
+      menuButtonRefs.current[nextIndex].focus();
+    }
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIndex = (index - 1 + MENUS.header.length) % MENUS.header.length;
+      menuButtonRefs.current[prevIndex].focus();
+    }
+
+    if (!hasSubmenu) return;
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+
+      if (activeMenuIndex === index) {
+        setActiveMenuIndex(null);
+        setIsKeyboardOpen(false);
+      } else {
+        setActiveMenuIndex(index);
+        setIsKeyboardOpen(true);
+      }
+    }
+
+    if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
+      if (activeMenuIndex === index && submenuContainerRef.current) {
+        e.preventDefault();
+        submenuContainerRef.current
+          .querySelector(`#submenu-${index}`)
+          .querySelector(`.${SUBMENU_SELECTOR_NAME}`)
+          .focus();
+      }
+    }
+  };
+
+  const makeHandleMenuClick = useCallback(
+    (hasSubmenu, index) => (e) => {
+      if (!hasSubmenu) return;
+
+      if (isTouchDevice) {
+        e.preventDefault();
+        if (activeMenuIndex === index) {
+          setActiveMenuIndex(null);
+          setIsKeyboardOpen(false);
+        } else {
+          setActiveMenuIndex(index);
+          setIsKeyboardOpen(true);
+        }
+      }
+
+      if (!isTouchDevice) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    [activeMenuIndex, isTouchDevice]
+  );
+
+  const handleEscapeKey = useCallback(
+    (e) => {
+      if (e.key === 'Escape' && activeMenuIndex !== null) {
+        e.preventDefault();
+        setActiveMenuIndex(null);
+        setIsKeyboardOpen(false);
+
+        const currentlyFocused = document.activeElement;
+        const submenuPanel = document.getElementById(`submenu-${activeMenuIndex}`);
+
+        if (!submenuPanel || !submenuPanel.contains(currentlyFocused)) return;
+        if (menuButtonRefs.current[activeMenuIndex]) {
+          menuButtonRefs.current[activeMenuIndex].focus();
+        }
+      }
+    },
+    [activeMenuIndex]
+  );
+
+  const makeHandleSubmenuNavigation = useCallback((containerIndex) => {
+    let links;
+
+    if (submenuContainerRef.current) {
+      links = submenuContainerRef.current
+        .querySelector(`#submenu-${containerIndex}`)
+        .querySelectorAll('.main-navigation-submenu-link');
+    }
+
+    if (!links || links.length === 0) return () => {};
+    if (!menuButtonRefs.current[containerIndex]) return () => {};
+
+    let linkIndex = -1;
+    return (e) => {
+      const menuTrigger = menuButtonRefs.current[containerIndex];
+      const nextMenuTrigger = menuButtonRefs.current[containerIndex + 1] || null;
+
+      if (linkIndex === -1) {
+        links.forEach((link, idx) => {
+          if (link === e.target) {
+            linkIndex = idx;
+          }
+        });
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length) return;
+        links[nextIndex].focus();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = linkIndex - 1;
+
+        if (linkIndex === 0) {
+          menuTrigger.focus();
+        } else {
+          links[prevIndex].focus();
+        }
+      }
+
+      if (e.key === 'Tab') {
+        if (linkIndex === 0 && e.shiftKey) {
+          e.preventDefault();
+          menuTrigger.focus();
+        }
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length && nextMenuTrigger) {
+          e.preventDefault();
+          nextMenuTrigger.focus();
+        }
+      }
+    };
+  }, []);
+
+  useClickOutside([submenuContainerRef, ...menuButtonRefs.current.filter(Boolean)], (e) => {
+    if (e.target === menuButtonRefs.current[activeMenuIndex]) return;
+
+    if (activeMenuIndex !== null) {
+      setActiveMenuIndex(null);
+      setIsKeyboardOpen(false);
+    }
+  });
+
+  useEffect(() => {
+    if (activeMenuIndex !== null) {
+      document.addEventListener('keydown', handleEscapeKey);
+
+      return () => {
+        document.removeEventListener('keydown', handleEscapeKey);
+      };
+    }
+  }, [activeMenuIndex, handleEscapeKey]);
+
+  useEffect(() => {
+    if (submenuContainerRef.current) {
+      const activePanel = submenuContainerRef.current.querySelector('[data-submenu-panel].active');
+      const newHeight = activePanel ? activePanel.scrollHeight : 0;
+      setContainerHeight(newHeight);
+    }
+  }, [activeMenuIndex]);
+
+  return (
+    <nav className="group/main-nav lg:hidden">
+      <ul className="flex items-center">
+        {MENUS.header.map(({ to, text, sections }, index) => {
+          const hasSubmenu = sections?.length > 0;
+          const isActive = activeMenuIndex === index;
+
+          return (
+            <li
+              key={text}
+              onMouseEnter={() => handleMenuEnter(hasSubmenu, index)}
+              onMouseLeave={() => handleMenuLeave(hasSubmenu)}
             >
-              {text}
-              {hasSubmenu && (
-                <ChevronIcon
-                  className={clsx(
-                    'opacity-60',
-                    isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
-                  )}
-                />
-              )}
-            </Tag>
-            {/* submenu */}
-            {hasSubmenu && (
-              <div
+              <Button
+                ref={(el) => {
+                  menuButtonRefs.current[index] = el;
+                }}
                 className={clsx(
-                  'absolute -left-7 top-full pt-5',
-                  'pointer-events-none opacity-0',
-                  'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-                  'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white focus-visible:outline-[revert] group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                  {
+                    '-ml-3.5  xl:-ml-2.5 ': index === 0,
+                    '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
+                    '!text-white': isActive,
+                    '!text-gray-new-70': activeMenuIndex !== null && !isActive,
+                    'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
+                  }
                 )}
+                aria-haspopup={hasSubmenu ? 'menu' : undefined}
+                aria-expanded={hasSubmenu ? isActive : undefined}
+                aria-controls={hasSubmenu ? `submenu-${index}` : undefined}
+                to={to}
+                theme="black"
+                tagName="Navigation"
+                onKeyDown={(e) => handleMenuKeyDown(e, hasSubmenu, index)}
+                onClick={makeHandleMenuClick(hasSubmenu, index)}
               >
-                <ul
-                  className={clsx(
-                    'relative w-max rounded-[14px] border',
-                    gridSubmenu ? 'flex gap-x-10 px-7 py-6' : 'p-4',
-                    isDarkTheme
-                      ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                      : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                  )}
-                >
-                  {sections.map(({ title, items, banner }, index) => {
-                    if (banner) {
-                      return <MenuBanner {...banner} key={index} />;
-                    }
+                {text}
+                {hasSubmenu && (
+                  <ChevronIcon
+                    className={clsx(
+                      'text-gray-new-70 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-white',
+                      { 'text-white': isActive }
+                    )}
+                    aria-hidden="true"
+                  />
+                )}
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
 
-                    return (
-                      <li className={clsx(gridSubmenu ? 'min-w-48' : 'min-w-[94px]')} key={index}>
-                        {title && (
-                          <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
-                            {title}
-                          </span>
-                        )}
-                        <ul className={clsx('flex flex-col', gridSubmenu ? 'gap-5' : 'gap-[18px]')}>
-                          {items.map(
-                            ({
-                              icon: Icon,
-                              iconGradient: IconGradient,
-                              title,
-                              description,
-                              to,
-                              isExternal,
-                            }) => (
-                              <li key={title}>
+      {/* Shared submenu container */}
+      <div
+        className={clsx(
+          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
+          'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
+          {
+            'pointer-events-none': activeMenuIndex === null,
+            '!pointer-events-auto': activeMenuIndex !== null,
+          }
+        )}
+        style={{ height: `${containerHeight}px` }}
+        onMouseEnter={handleSubmenuEnter}
+        onMouseLeave={handleSubmenuLeave}
+      >
+        <div ref={submenuContainerRef} className="relative w-full">
+          {MENUS.header.map((menu, index) => {
+            const isActive = activeMenuIndex === index;
+            const sections = menu.sections || [];
+            const isProduct = menu.text === 'Product';
+
+            return (
+              <div
+                key={index}
+                id={`submenu-${index}`}
+                role="navigation"
+                aria-label={menu.text}
+                className={clsx(
+                  'absolute left-0 top-0 w-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
+                  isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
+                )}
+                aria-hidden={!isActive}
+                data-submenu-panel
+              >
+                {sections.length > 0 && (
+                  <Container
+                    size="1600"
+                    className="flex w-full gap-x-[160px] overflow-hidden pb-12 pt-7 xl:gap-x-8"
+                  >
+                    <ul
+                      className="flex gap-x-[128px] pl-[calc(102px+92px+2px)] pt-1 xl:gap-x-5 xl:pl-[calc(102px+40px)]"
+                      role="menu"
+                    >
+                      {sections.map(({ title, items }, sectionIndex) => (
+                        <li key={sectionIndex} role="none">
+                          {title && (
+                            <span
+                              className="mb-6 block text-[10px] font-medium uppercase leading-none tracking-snug text-gray-new-50"
+                              id={`submenu-${index}-section-${sectionIndex}`}
+                            >
+                              {title}
+                            </span>
+                          )}
+                          <ul
+                            className="flex flex-col gap-y-6"
+                            role="group"
+                            aria-labelledby={
+                              title ? `submenu-${index}-section-${sectionIndex}` : undefined
+                            }
+                          >
+                            {items?.map(({ title, description, to, isExternal }) => (
+                              <li key={title} role="none">
                                 <Link
-                                  className={clsx(
-                                    'relative flex items-center',
-                                    gridSubmenu
-                                      ? 'gap-3 before:rounded-[14px]'
-                                      : 'gap-2.5 before:rounded-[10px]',
-                                    'before:pointer-events-none before:absolute before:-inset-2.5 before:transform-gpu before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
-                                    isDarkTheme
-                                      ? 'before:bg-[#16181D]'
-                                      : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
-                                  )}
+                                  className={`group ${SUBMENU_SELECTOR_NAME} -mx-1 -my-3 grid min-w-[224px] gap-y-2 px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
                                   to={to}
                                   isExternal={isExternal}
                                   tagName="Navigation"
                                   tagText={title}
+                                  role="menuitem"
+                                  tabIndex={isActive ? 0 : -1}
+                                  onKeyDown={makeHandleSubmenuNavigation(index)}
                                 >
-                                  {gridSubmenu && IconGradient && (
-                                    <div
-                                      className={clsx(
-                                        'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-lg border',
-                                        isDarkTheme
-                                          ? 'border-[#2E3038] bg-[#16181D]'
-                                          : 'border-gray-new-90 bg-[#F5F5F5] dark:border-[#2E3038] dark:bg-[#16181D]'
-                                      )}
-                                    >
-                                      <IconGradient
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-white'
-                                            : 'text-gray-new-20 dark:text-white dark:[&_stop:not([stop-opacity])]:gradient-stop-opacity-40 dark:[&_stop[stop-opacity="0.6"]]:gradient-stop-opacity-100'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  {!gridSubmenu && Icon && (
-                                    <div className="relative z-10 shrink-0">
-                                      <Icon
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-gray-new-80'
-                                            : 'text-gray-new-30 dark:text-gray-new-80'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  <div className="relative z-10">
-                                    <span
-                                      className={clsx(
-                                        'block text-sm leading-none tracking-snug transition-colors duration-200',
-                                        isDarkTheme
-                                          ? 'text-white'
-                                          : 'text-black-new dark:text-white'
-                                      )}
-                                    >
-                                      {title}
-                                    </span>
-                                    {description && (
-                                      <span
-                                        className={clsx(
-                                          'mt-1.5 block text-xs font-light leading-none tracking-extra-tight',
-                                          isDarkTheme
-                                            ? 'text-gray-new-50'
-                                            : 'text-gray-new-40 dark:text-gray-new-50'
-                                        )}
-                                      >
-                                        {description}
-                                      </span>
-                                    )}
-                                  </div>
+                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white">
+                                    {title}
+                                    <ArrowTopRightIcon
+                                      width={12}
+                                      height={12}
+                                      className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white"
+                                    />
+                                  </span>
+                                  {description}
                                 </Link>
                               </li>
-                            )
-                          )}
-                        </ul>
-                      </li>
-                    );
-                  })}
-                </ul>
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                    {isProduct && (
+                      <MenuBanner
+                        linkProps={{
+                          className: SUBMENU_SELECTOR_NAME,
+                          role: 'menuitem',
+                          tabIndex: isActive ? 0 : -1,
+                          onKeyDown: makeHandleSubmenuNavigation(index),
+                        }}
+                      />
+                    )}
+                  </Container>
+                )}
               </div>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
-);
-
-Navigation.propTypes = {
-  isDarkTheme: PropTypes.bool,
+            );
+          })}
+        </div>
+      </div>
+    </nav>
+  );
 };
 
 export default Navigation;

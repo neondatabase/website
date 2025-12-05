@@ -124,3 +124,8 @@
     @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
   }
 }
+
+.header:has([aria-haspopup='menu'][aria-expanded='true']) + .navigation-overlay {
+  opacity: 1;
+  transition-delay: 0s;
+}

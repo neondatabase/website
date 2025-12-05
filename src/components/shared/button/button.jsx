@@ -3,6 +3,7 @@
 import clsx from 'clsx';
 import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 import Link from 'components/shared/link';
 import getNodeText from 'utils/get-node-text';
@@ -22,86 +23,87 @@ const styles = {
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
-    tertiary: 'bg-transparent text-white border border-white hover:border-primary-2',
-    quaternary: 'bg-white text-black border border-black hover:border-primary-2',
-    'white-filled': 'bg-white text-black hover:bg-gray-6',
-    'white-outline': 'bg-transparent text-white border border-white hover:border-primary-2',
-    'black-outline': 'bg-transparent text-white border border-[#2E3038] hover:border-primary-2',
-    'gray-2-outline': 'bg-gray-2 border border-gray-3 text-white hover:border-white',
-    'gray-40-outline': 'bg-white/0.02 border border-gray-new-40 text-white hover:border-white',
-    'gray-outline':
-      'text-black border-gray-new-90 bg-gray-new-98 dark:bg-transparent dark:text-white border dark:border-gray-new-30 dark:hover:border-white hover:border-gray-new-70',
-    'gray-dark-outline': 'bg-gray-new-10 text-white border border-[#37393D] hover:border-white',
-    'gray-dark-outline-black':
-      'text-black border border-gray-new-90 bg-gray-new-98 hover:border-gray-new-70 dark:text-white dark:bg-gray-new-10 dark:border-[#37393D] dark:hover:border-white',
-    'green-outline':
-      'bg-[#0D0D0D] text-white border transition-shadow duration-500 border-green-45 hover:shadow-[0px_8px_30px_0px_rgba(0,229,153,.16)]',
+    'white-filled': 'bg-white text-black hover:bg-gray-new-80',
+    'white-filled-multi':
+      'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
+    'gray-40-outline':
+      ' bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     'green-filled': 'bg-green-52 text-black hover:bg-primary-1',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
-    'gray-15': 'bg-gray-new-15 text-white hover:bg-gray-new-20',
     'gray-20': 'bg-gray-new-20 text-white hover:bg-gray-new-40',
     'gray-94-filled': 'bg-gray-new-94 text-black hover:bg-gray-6',
-    'gray-15-outline':
-      'border bg-transparent border-gray-new-15 text-white hover:border-gray-new-30',
     'with-icon':
       'pl-[4.1rem] xl:pl-[4.25rem] lg:pl-[4.25rem] bg-green-45 text-black hover:bg-[#00e5bf]',
     'red-filled': 'bg-[#F18484] text-black hover:bg-[#FBA8A8]',
+    transparent:
+      'bg-transparent text-black-pure hover:bg-gray-new-90 hover:dark:bg-gray-new-10 dark:text-white',
   },
 };
 
-const Button = ({
-  className: additionalClassName = null,
-  to = null,
-  size = null,
-  theme = null,
-  tagName = null,
-  analyticsEvent = null,
-  analyticsOnHover = false,
-  handleClick = null,
-  withArrow = false,
-  children,
-  ...otherProps
-}) => {
-  const posthog = usePostHog();
-  const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
+const Button = forwardRef(
+  (
+    {
+      className: additionalClassName = null,
+      to = null,
+      size = null,
+      theme = null,
+      tagName = null,
+      analyticsEvent = null,
+      analyticsOnHover = false,
+      handleClick = null,
+      withArrow = false,
+      children,
+      ...otherProps
+    },
+    ref
+  ) => {
+    const posthog = usePostHog();
+    const className = clsx(
+      styles.base,
+      styles.size[size],
+      styles.theme[theme],
+      additionalClassName
+    );
 
-  const Tag = to || withArrow ? Link : 'button';
+    const Tag = to || withArrow ? Link : 'button';
 
-  const handleAnalytics = (eventType = 'clicked') => {
-    if (!tagName) return;
+    const handleAnalytics = (eventType = 'clicked') => {
+      if (!tagName) return;
 
-    sendGtagEvent(`Button ${eventType}`, {
-      style: theme,
-      text: getNodeText(children),
-      tag_name: tagName,
-    });
-
-    if (analyticsEvent) {
-      posthog.capture('ui_interaction', {
-        action: analyticsEvent,
+      sendGtagEvent(`Button ${eventType}`, {
+        style: theme,
+        text: getNodeText(children),
+        tag_name: tagName,
       });
-    }
-  };
 
-  return (
-    <Tag
-      className={className}
-      to={to}
-      {...(withArrow ? { withArrow } : {})}
-      onClick={() => {
-        if (handleClick) handleClick();
-        handleAnalytics('clicked');
-      }}
-      onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}
-      {...otherProps}
-    >
-      {children}
-    </Tag>
-  );
-};
+      if (analyticsEvent) {
+        posthog.capture('ui_interaction', {
+          action: analyticsEvent,
+        });
+      }
+    };
+
+    return (
+      <Tag
+        ref={ref}
+        className={className}
+        to={to}
+        {...(withArrow ? { withArrow } : {})}
+        onClick={() => {
+          if (handleClick) handleClick();
+          handleAnalytics('clicked');
+        }}
+        onMouseEnter={analyticsOnHover ? () => handleAnalytics('hovered') : undefined}
+        {...otherProps}
+      >
+        {children}
+      </Tag>
+    );
+  }
+);
 
 Button.propTypes = {
   className: PropTypes.string,

@@ -1,51 +1,52 @@
 import clsx from 'clsx';
 import Image from 'next/image';
-import PropTypes from 'prop-types';
 
-import GradientBorder from 'components/shared/gradient-border';
 import Link from 'components/shared/link';
+import links from 'constants/links';
+import ArrowTopRightIcon from 'icons/arrow-top-right.inline.svg';
 
-import bannerDesktop from './images/banner-desktop.jpg';
-import bannerMobile from './images/banner-mobile.jpg';
+import bannerImage from './image/banner-pattern.svg';
+import noiseBackground from './image/noise-background.svg';
 
-const MenuBanner = ({ title, description, to }) => (
-  <li className="mt-1 lg:-order-1 lg:mt-0">
+const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
+  <article className="relative h-[340px] w-[320px] overflow-hidden border border-gray-new-10 bg-black-pure lg:w-auto md:h-[240px] md:w-[320px]">
     <Link
-      className="group/banner relative block w-fit rounded-lg lg:h-20 xs:h-auto xs:min-h-[70px] xs:w-full"
-      to={to}
+      className={clsx('group flex h-full w-full !items-end p-6 -outline-offset-2', className)}
+      to={links.whyNeon}
       tagName="Menu Banner"
-      tagText={title}
+      tagText="What is Neon"
+      {...linkProps}
     >
-      <Image className="rounded-xl lg:hidden" src={bannerDesktop} width={180} height={271} alt="" />
       <Image
-        className="hidden w-full rounded-lg object-cover lg:block"
-        src={bannerMobile}
-        width={320}
-        height={80}
+        className="pointer-events-none absolute -bottom-4 left-[-11px] z-0 max-w-none md:-bottom-0.5"
+        src={noiseBackground}
+        width={383}
+        height={365}
+        alt=""
+      />
+      <Image
+        className="pointer-events-none absolute -bottom-4 left-[-11px] z-[1] max-w-none md:-bottom-0.5"
+        src={bannerImage}
+        width={383}
+        height={365}
         alt=""
       />
 
-      <div className="absolute inset-0 z-10 flex flex-col justify-end p-4 lg:justify-center xs:p-4">
-        <h3 className="text-sm leading-none tracking-snug text-white">{title}</h3>
-        <p
-          className={clsx(
-            'mt-1.5 max-w-[126px] text-xs font-light leading-snug tracking-extra-tight text-gray-new-50',
-            'transition-colors duration-200 group-hover/banner:text-white'
-          )}
-        >
-          {description}
+      <div className="flex flex-col gap-y-2">
+        <h3 className="flex items-baseline gap-x-2.5 whitespace-nowrap text-2xl font-medium leading-none tracking-tighter text-white lg:text-lg md:text-base">
+          What is Neon
+          <ArrowTopRightIcon className="-translate-x-2 scale-75 text-white opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100" />
+        </h3>
+        <p className="text-[15px] leading-tight tracking-extra-tight text-gray-new-60 lg:text-[13px]">
+          Serverless Postgres, by Databricks
         </p>
       </div>
-
-      <GradientBorder className="!rounded-[11px]" withBlend />
     </Link>
-  </li>
+  </article>
 );
 
 MenuBanner.propTypes = {
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  to: PropTypes.string.isRequired,
+  linkProps: Link.propTypes,
 };
 
 export default MenuBanner;

@@ -3,13 +3,14 @@
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Button from 'components/shared/button';
 import InkeepTrigger from 'components/shared/inkeep-trigger';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
+import { TopbarContext } from 'contexts/topbar-context';
 import useMobileMenu from 'hooks/use-mobile-menu';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
@@ -39,10 +40,11 @@ const variants = {
   },
 };
 
-const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
+const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = sections ? Button : Link;
   const hasSubmenu = sections?.length > 0;
+  const isProduct = text === 'Product';
 
   const handleMenuItemClick = () => {
     if (sections) {
@@ -53,115 +55,63 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
   return (
     <li
       className={clsx(
-        'block shrink-0 overflow-hidden border-b leading-none dark:border-gray-new-10',
-        isDarkTheme ? 'border-gray-new-10' : 'border-gray-new-94'
+        'shrink-0 overflow-hidden border-b border-gray-new-94 last:border-b-0 dark:border-gray-new-20',
+        { 'pb-14 sm:pb-10': isMenuItemOpen }
       )}
     >
       <Tag
-        className={clsx(
-          'relative flex w-full items-center py-4 font-normal leading-none tracking-snug transition-colors duration-200',
-          isMenuItemOpen && 'font-medium',
-          {
-            'text-white': isMenuItemOpen && isDarkTheme,
-            'text-gray-new-80': !isMenuItemOpen && isDarkTheme,
-            'text-black-new dark:text-white': isMenuItemOpen && !isDarkTheme,
-            'text-gray-new-20 dark:text-gray-new-80': !isMenuItemOpen && !isDarkTheme,
-          }
-        )}
+        className="relative flex w-full items-center py-7 text-2xl font-medium leading-none tracking-extra-tight sm:py-5 sm:text-xl"
         to={to}
         tagName="Mobile Menu"
         handleClick={handleMenuItemClick}
         {...otherProps}
       >
-        <span>{text}</span>
+        {text}
         {sections && (
-          <ChevronIcon
-            className={clsx(
-              'ml-auto inline-block transition-transform duration-200 dark:text-white',
-              isDarkTheme ? 'text-white' : 'text-grayn-new-40',
-              isMenuItemOpen && 'rotate-180'
-            )}
-          />
+          <ChevronIcon width={24} height={24} className="ml-auto text-black-pure dark:text-white" />
         )}
       </Tag>
       {hasSubmenu && (
         <AnimatePresence>
           {isMenuItemOpen && (
-            <m.ul
+            <m.div
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: ANIMATION_DURATION }}
-              className={clsx(
-                'flex flex-col gap-y-5 border-t py-4 dark:border-gray-new-10',
-                isDarkTheme ? 'border-gray-new-10' : 'border-gray-new-94'
-              )}
+              className="flex gap-x-3.5 md:flex-col md:gap-y-9"
             >
-              {sections.map(({ title, items, banner }, index) => {
-                if (banner) {
-                  return <MenuBanner {...banner} key={index} />;
-                }
-
-                return (
-                  <li className="w-full" key={index}>
+              <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
+                {sections.map(({ title, items }, index) => (
+                  <li key={index}>
                     {title && (
-                      <h3 className="mb-4 text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
+                      <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
                         {title}
                       </h3>
                     )}
-                    <ul className="flex flex-col gap-4">
-                      {items.map(({ icon: Icon, title, description, to, isExternal }) => (
+                    <ul className="flex flex-col gap-5">
+                      {items.map(({ title, description, to, isExternal }) => (
                         <li key={title}>
                           <Link
-                            className={clsx(
-                              'relative flex gap-2',
-                              'before:absolute before:-inset-2 before:rounded-lg before:opacity-0'
-                            )}
+                            className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
                             to={to}
                             isExternal={isExternal}
                             tagName="MobileMenu"
                           >
-                            {Icon && (
-                              <Icon
-                                className={clsx(
-                                  'relative z-10 size-4 shrink-0',
-                                  isDarkTheme
-                                    ? 'text-gray-new-80'
-                                    : 'text-gray-new-30 dark:text-gray-new-80'
-                                )}
-                              />
-                            )}
-                            <div className="relative z-10">
-                              <span
-                                className={clsx(
-                                  'block text-sm tracking-snug transition-colors duration-200',
-                                  description ? 'leading-none' : 'leading-dense',
-                                  isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
-                                )}
-                              >
-                                {title}
-                              </span>
-                              {description && (
-                                <span
-                                  className={clsx(
-                                    'mt-1.5 block text-xs font-light leading-none tracking-extra-tight',
-                                    isDarkTheme
-                                      ? 'text-gray-new-50'
-                                      : 'text-gray-new-40 dark:text-gray-new-50'
-                                  )}
-                                >
-                                  {description}
-                                </span>
-                              )}
-                            </div>
+                            <span className="text-lg font-medium leading-none tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                              {title}
+                            </span>
+
+                            {description}
                           </Link>
                         </li>
                       ))}
                     </ul>
                   </li>
-                );
-              })}
-            </m.ul>
+                ))}
+              </ul>
+              {isProduct && <MenuBanner />}
+            </m.div>
           )}
         </AnimatePresence>
       )}
@@ -172,20 +122,14 @@ const MobileMenuItem = ({ text, to, sections, isDarkTheme, ...otherProps }) => {
 MobileMenuItem.propTypes = {
   text: PropTypes.string.isRequired,
   to: PropTypes.string,
-  isDarkTheme: PropTypes.bool,
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      theme: PropTypes.string,
       items: PropTypes.arrayOf(
         PropTypes.shape({
-          icon: PropTypes.shape({
-            light: PropTypes.string,
-            dark: PropTypes.string,
-          }),
           text: PropTypes.string,
-          description: PropTypes.string,
           to: PropTypes.string,
+          isExternal: PropTypes.bool,
         })
       ),
     })
@@ -202,18 +146,16 @@ const mobileMenuItems = [
   },
 ];
 
-const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
+const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
   const { isMobileMenuOpen, toggleMobileMenu } = useMobileMenu();
+  const { hasTopbar } = useContext(TopbarContext);
 
   return (
     <>
-      <div className="absolute right-8 top-4 z-40 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 md:right-4">
+      <div className="absolute right-7 top-3 z-50 hidden gap-5 lg:flex lg:items-center lg:gap-x-4 sm:right-4">
         {isDocPage && <InkeepTrigger className="mobile-search" docPageType={docPageType} />}
         <Burger
-          className={clsx(
-            'relative flex',
-            isDarkTheme ? 'text-white' : 'text-black dark:text-white'
-          )}
+          className="relative flex text-black dark:text-white"
           isToggled={isMobileMenuOpen}
           isNewDesign
           onClick={toggleMobileMenu}
@@ -223,43 +165,46 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <m.nav
-              className={clsx(
-                'safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between dark:bg-black-pure lg:flex',
-                isDarkTheme ? 'bg-black-pure' : 'bg-white'
-              )}
+              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-white dark:bg-black-pure lg:flex"
               initial="from"
               animate="to"
               exit="from"
               variants={variants}
             >
-              <div className="relative h-full pb-[108px] pt-[102px] sm:pb-[158px]">
-                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 md:px-5">
+              <div
+                className={clsx('relative h-full pb-[101px] pt-14 sm:pb-[125px]', {
+                  'pt-[96px]': hasTopbar,
+                  'pb-[148px] sm:pb-[172px]': isDocPage,
+                })}
+              >
+                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
                   {mobileMenuItems.map((item, index) => (
-                    <MobileMenuItem key={index} {...item} isDarkTheme={isDarkTheme} />
+                    <MobileMenuItem key={index} {...item} />
                   ))}
                 </ul>
                 <div
                   className={clsx(
-                    'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-5 gap-y-3.5 p-8 dark:bg-black-pure md:px-5 sm:grid-cols-1 sm:py-7',
-                    isDarkTheme ? 'bg-black-pure' : 'bg-white'
+                    'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
+                    { 'pb-20 sm:pb-[68px]': isDocPage }
                   )}
                 >
                   <Button
-                    className={clsx(
-                      'h-11 items-center justify-center text-[15px] !font-semibold tracking-tight dark:!border-gray-new-15 dark:!text-white',
-                      !isDarkTheme && '!border-gray-new-90 !text-black-new'
-                    )}
+                    className="h-9 border border-gray-new-40 px-[18px]"
                     to={LINKS.login}
-                    theme="gray-15-outline"
+                    theme="transparent"
+                    size="xxs"
                     tagName="MobileMenu"
+                    analyticsEvent="header_log_in_clicked"
                   >
                     Log In
                   </Button>
                   <Button
-                    className="h-11 items-center text-[15px] !font-semibold tracking-tight"
+                    className="h-9 px-[18px]"
                     to={LINKS.signup}
-                    theme="primary"
+                    theme="white-filled-multi"
+                    size="xxs"
                     tagName="MobileMenu"
+                    analyticsEvent="header_sign_up_clicked"
                   >
                     Sign Up
                   </Button>
@@ -274,7 +219,6 @@ const MobileMenu = ({ isDarkTheme, isDocPage = false, docPageType = null }) => {
 };
 
 MobileMenu.propTypes = {
-  isDarkTheme: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
 };

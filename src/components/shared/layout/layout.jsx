@@ -9,10 +9,8 @@ import Topbar from 'components/shared/topbar';
 const Layout = ({
   className = null,
   headerClassName = null,
-  headerTheme = null,
   withOverflowHidden = false,
   children,
-  headerWithBorder = false,
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
   hasThemesSupport = false,
@@ -24,7 +22,7 @@ const Layout = ({
   isClient = false,
 }) => (
   <>
-    {!isClient && <Topbar isDarkTheme={headerTheme === 'dark'} />}
+    {!isClient && <Topbar />}
     {/* 36px is the height of the topbar */}
     <div
       className={clsx('relative flex min-h-[calc(100vh-36px)] flex-col pt-safe', {
@@ -33,8 +31,6 @@ const Layout = ({
     >
       <Header
         className={headerClassName}
-        theme={headerTheme}
-        isDarkTheme={headerTheme === 'dark'}
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
         hasThemesSupport={hasThemesSupport}
@@ -42,7 +38,6 @@ const Layout = ({
         docPageType={docPageType}
         docsNavigation={docsNavigation}
         docsBasePath={docsBasePath}
-        withBorder={headerWithBorder}
         customType={customType}
         isClient={isClient}
       />
@@ -60,12 +55,10 @@ const Layout = ({
 Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
-  headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
   docPageType: PropTypes.string,
   docsNavigation: PropTypes.array,
