@@ -118,8 +118,14 @@ const ClockAnimation = ({
   let timeoutIds = [];
 
   const resetAnimation = (resetTime) => {
-    if (!resetCountDownInput) return;
-    resetCountDownInput.fire();
+    if (!resetCountDownInput && !!resetCountDownInput.runtimeInput) return;
+
+    try {
+      resetCountDownInput.fire();
+    } catch (error) {
+      console.error('Error firing resetCountDownInput:', error);
+    }
+
     if (animationFrameId) {
       cancelAnimationFrame(animationFrameId);
     }

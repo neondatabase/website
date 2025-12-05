@@ -10,7 +10,6 @@ const Layout = ({
   className = null,
   headerClassName = null,
   headerTheme = null,
-  footerTheme = null,
   withOverflowHidden = false,
   children,
   headerWithBorder = false,
@@ -27,7 +26,11 @@ const Layout = ({
   <>
     {!isClient && <Topbar isDarkTheme={headerTheme === 'dark'} />}
     {/* 36px is the height of the topbar */}
-    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
+    <div
+      className={clsx('relative flex min-h-[calc(100vh-36px)] flex-col pt-safe', {
+        '!pb-12': isDocPage,
+      })}
+    >
       <Header
         className={headerClassName}
         theme={headerTheme}
@@ -48,7 +51,7 @@ const Layout = ({
       >
         {children}
       </main>
-      <Footer hasThemesSupport={hasThemesSupport} theme={footerTheme} />
+      <Footer hasThemesSupport={hasThemesSupport} />
       <CookieConsent />
     </div>
   </>
@@ -58,7 +61,6 @@ Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
   headerTheme: PropTypes.oneOf(['light', 'dark']),
-  footerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
