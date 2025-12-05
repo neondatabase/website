@@ -11,7 +11,7 @@ This guide shows you the code differences between legacy Neon Auth (Stack Auth) 
 If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'll keep supporting it for existing users. But we encourage you to try Neon with Better Auth instead.
 </Admonition>
 
-## Why move to Neon Auth with Better Auth
+## Why Neon Auth with Better Auth?
 
 - **Native Branching Support**
 
