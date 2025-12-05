@@ -141,14 +141,23 @@ Create a provider component to wrap your application with authentication context
 
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import { authClient } from '@/lib/auth/client';
+import { useRouter } from 'next/navigation';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   return (
     <NeonAuthUIProvider
       authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={() => {
+        router.refresh();
+      }}
+      emailOTP
       redirectTo="/"
       social={{
-        providers: ['google'],
+        providers: ['google', 'github'],
       }}
     >
       {children}
@@ -345,12 +354,14 @@ import { neonAuthMiddleware } from '@neondatabase/neon-auth-next';
 
 export default neonAuthMiddleware({
   loginUrl: '/auth/sign-in',
+  authBaseUrl: process.env.NEON_AUTH_BASE_URL!,
 });
 
 export const config = {
   matcher: [
     '/only-for-authenticated-users/:path*',
     // Add more protected routes here
+    '/((?!_next/static|_next/image|favicon.ico|).*)', // Exclude static files from middleware
   ],
 };
 ```
@@ -405,7 +416,9 @@ export default function ProtectedPage() {
 
 Start the development server:
 
-Open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
+If you're using **component-level protection**, open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
+
+If you're using **middleware protection**, go to `http://localhost:3000/only-for-authenticated-users` to test the protected route. You should be redirected to the sign-in page there as well.
 
   </LeftContent>
   <RightCode label="Terminal">
