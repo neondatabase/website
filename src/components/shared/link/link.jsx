@@ -38,15 +38,15 @@ const styles = {
     'blue-green':
       'text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-green-45 dark:hover:text-[#00FFAA]',
     'green-underlined':
-      'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
+      'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-200',
     'gray-30': 'text-gray-new-30 transition-colors duration-200 hover:text-green-45',
     'white-underlined':
-      'underline decoration-white/40 hover:decoration-white/100 text-white transition-colors duration-500',
+      'underline decoration-white/40 hover:decoration-white/100 text-white transition-colors duration-200',
     'gray-50': 'text-gray-new-50 transition-colors duration-200 hover:text-green-45',
     'gray-70':
       'text-gray-new-70 dark:text-gray-new-70 transition-colors duration-200 hover:text-green-45',
     'grey-70-underlined':
-      'underline underline-offset-4 decoration-gray-new-70/40 hover:decoration-gray-new-70/100 text-gray-new-70 transition-colors duration-500',
+      'underline underline-offset-4 decoration-gray-new-70/40 hover:decoration-gray-new-70/100 text-gray-new-70 transition-colors duration-200',
     'gray-80': 'text-gray-new-80 transition-colors duration-200 hover:text-green-45',
     'gray-90': 'text-gray-new-90 transition-colors duration-200 hover:text-green-45',
   },
