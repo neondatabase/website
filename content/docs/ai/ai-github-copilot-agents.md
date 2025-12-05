@@ -2,7 +2,7 @@
 title: Neon agents for GitHub Copilot
 subtitle: Custom agents for safe database migrations and query optimization in VS Code
 enableTableOfContents: true
-updatedOn: '2025-12-05T00:00:00.000Z'
+updatedOn: '2025-12-05T20:12:42.051Z'
 ---
 
 GitHub Copilot now supports custom agents, and we've built two specialized agents that bring Neon's branching workflow directly into your IDE. These agents help you run safe database migrations and identify slow queries — all without leaving VS Code.

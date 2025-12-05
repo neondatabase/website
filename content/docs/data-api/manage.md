@@ -1,8 +1,8 @@
 ---
 title: Manage Data API
-subtitle: Configure schemas, manage authentication providers, and control API access.
+subtitle: 'Configure schemas, manage authentication providers, and control API access.'
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2025-12-05T20:12:42.052Z'
 ---
 
 Once the Data API is enabled, you can customize its behavior, manage how it authenticates users, or disable it entirely if it is no longer needed.
