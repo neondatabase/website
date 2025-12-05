@@ -403,11 +403,8 @@
 
             - section: Migration Guides
               items:
-                - title: From v1 to v2
-                  slug: auth/migrate/from-v1
-                  tag: wip
-                - title: From v1 Ejected to Stack Auth
-                  slug: auth/migrate/from-v1-ejected
+                - title: From Stack Auth (legacy)
+                  slug: auth/migrate/from-stack-auth
                   tag: wip
                 - title: From Supabase
                   slug: auth/migrate/from-supabase
