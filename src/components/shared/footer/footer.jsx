@@ -10,14 +10,9 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import StatusBadge from './status-badge';
 
-const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
-  <footer className="safe-paddings relative z-50 mt-auto border-t border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
-    <Container
-      className={clsx('flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5', {
-        '!pb-20': isDocsPage,
-      })}
-      size="1600"
-    >
+const Footer = ({ hasThemesSupport = false }) => (
+  <footer className="safe-paddings mt-auto border-t border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+    <Container className="flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5" size="1600">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
           <Logo className="sm:h-6" width={102} height={28} />
@@ -50,12 +45,12 @@ const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
                   <li
                     key={index}
                     className={clsx(
-                      'flex min-w-[148px]',
+                      '-my-px flex min-w-[148px] py-px',
                       hasSubmenu && 'group relative [perspective:2000px]'
                     )}
                   >
                     <Tag
-                      className="group/link relative flex items-center whitespace-nowrap text-[15px] leading-none tracking-extra-tight text-gray-new-40 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-60 hover:dark:text-white"
+                      className="group/link relative -my-px flex items-center whitespace-nowrap py-px text-[15px] leading-none tracking-extra-tight text-gray-new-40 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-60 hover:dark:text-white"
                       to={to}
                       rel={isExternalUrl ? 'noopener noreferrer' : null}
                       target={isExternalUrl ? '_blank' : null}
@@ -72,7 +67,7 @@ const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
                       {description && (
                         <span
                           className={clsx(
-                            'ml-1.5 text-gray-new-70 dark:text-gray-new-40',
+                            'ml-1.5 py-px text-gray-new-70 dark:text-gray-new-40',
                             to &&
                               'transition-colors duration-200 group-hover/link:text-gray-new-10 group-hover/link:dark:text-gray-new-90'
                           )}
@@ -88,7 +83,8 @@ const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
                           'absolute bottom-full right-0 min-w-[230px] pb-2.5',
                           'pointer-events-none opacity-0',
                           'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
-                          'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                          'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
+                          'group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:[transform:none]'
                         )}
                       >
                         <ul className="flex w-full flex-col gap-y-1 border border-gray-new-80 bg-gray-new-98 p-2 shadow-[0px_10px_20px_0px_rgba(0,0,0,.06)] dark:border-gray-new-20 dark:bg-[#0A0A0B] dark:shadow-[0px_8px_20px_0px_rgba(0,0,0,.4)]">
@@ -118,7 +114,6 @@ const Footer = ({ hasThemesSupport = false, isDocsPage = false }) => (
 
 Footer.propTypes = {
   hasThemesSupport: PropTypes.bool,
-  isDocsPage: PropTypes.bool,
 };
 
 export default Footer;

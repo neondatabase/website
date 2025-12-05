@@ -26,7 +26,11 @@ const Layout = ({
   <>
     {!isClient && <Topbar isDarkTheme={headerTheme === 'dark'} />}
     {/* 36px is the height of the topbar */}
-    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
+    <div
+      className={clsx('relative flex min-h-[calc(100vh-36px)] flex-col pt-safe', {
+        '!pb-12': isDocPage,
+      })}
+    >
       <Header
         className={headerClassName}
         theme={headerTheme}
@@ -47,7 +51,7 @@ const Layout = ({
       >
         {children}
       </main>
-      <Footer isDocsPage={isDocPage} hasThemesSupport={hasThemesSupport} />
+      <Footer hasThemesSupport={hasThemesSupport} />
       <CookieConsent />
     </div>
   </>
