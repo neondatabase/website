@@ -23,11 +23,12 @@ const Layout = ({
 }) => (
   <>
     {!isClient && <Topbar />}
-    {/* 36px is the height of the topbar */}
     <div
-      className={clsx('relative flex min-h-[calc(100vh-36px)] flex-col pt-safe', {
-        '!pb-12': isDocPage,
-      })}
+      className={clsx(
+        'relative flex flex-col pt-safe',
+        isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
+        isDocPage && '!pb-12'
+      )}
     >
       <Header
         className={headerClassName}
