@@ -44,6 +44,23 @@ Controls which web domains are permitted to fetch data from your API via the bro
 - **Empty:** Allows `*` (any domain). Useful for development.
 - **Production:** List your specific domains (e.g., `https://myapp.com`) to prevent unauthorized websites from querying your API.
 
+### OpenAPI schema
+
+**Default:** Enabled
+
+When enabled, an auto-generated OpenAPI 3 schema is available at `/openapi.json`. This schema describes your tables, columns, and REST endpoints. You can use it to:
+
+- Generate API documentation (Swagger UI, Redoc)
+- Build typed client libraries (TypeScript, Python, Go)
+- Import your API into Postman
+- Integrate with API gateways and other OpenAPI-based tools
+
+### Server timing headers
+
+**Default:** Disabled
+
+When enabled, the Data API includes `Server-Timing` headers in each response. These headers show how long different parts of the request took to process (for example, database execution time and internal processing time). You can use this information to debug slow queries, measure performance, and troubleshoot latency issues in your application.
+
 ## Authentication providers
 
 The Data API uses **JSON Web Key Sets (JWKS)** to validate the JWT tokens sent by your clients. You can manage trusted providers in the **Authentication providers** section.
