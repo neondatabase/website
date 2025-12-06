@@ -410,67 +410,15 @@
                 - title: From Supabase
                   slug: auth/migrate/from-supabase
 
-            - section: Legacy Stack Auth
+            - section: Legacy (archive)
               items:
-                - title: Docs
-                  slug: neon-auth/overview
+                - title: Stack Auth
+                  slug: auth/legacy/overview
                   items:
-                    - title: Overview
-                      slug: neon-auth/overview
-                    - title: Demo
-                      slug: neon-auth/demo
-                    - title: Next.js Quickstart
-                      slug: neon-auth/quick-start/nextjs
-                    - title: React Quickstart
-                      slug: neon-auth/quick-start/react
-                    - title: JavaScript Quickstart
-                      slug: neon-auth/quick-start/javascript
-                    - title: How it Works
-                      slug: neon-auth/how-it-works
-                    - title: Guidance (Deep Dive)
-                      slug: neon-auth/tutorial
-                    - title: StackApp Object
-                      slug: neon-auth/concepts/stack-app
-                    - title: OAuth
-                      slug: neon-auth/concepts/oauth
-                    - title: Custom User Data
-                      slug: neon-auth/concepts/custom-user-data
-                    - title: Permissions
-                      slug: neon-auth/concepts/permissions
-                    - title: Organizations and Teams
-                      slug: neon-auth/concepts/orgs-and-teams
-                    - title: Team Selection
-                      slug: neon-auth/concepts/team-selection
-                    - title: User Onboarding
-                      slug: neon-auth/concepts/user-onboarding
-                    - title: Backend Integration
-                      slug: neon-auth/concepts/backend-integration
-                    - title: Best Practices
-                      slug: neon-auth/best-practices
-                    - title: Creating Users
-                      slug: neon-auth/create-users
-                    - title: Claiming a Project
-                      slug: neon-auth/claim-project
-                    - title: Permissions & Roles
-                      slug: neon-auth/permissions-roles
-                    - title: Email Configuration
-                      slug: neon-auth/email-configuration
-                    - title: Next.js SDK
-                      slug: neon-auth/sdk/nextjs/overview
-                    - title: React SDK
-                      slug: neon-auth/sdk/react/overview
-                    - title: Components
-                      slug: neon-auth/components/components
-                    - title: Admin API
-                      slug: neon-auth/api
-                    - title: Colors and Styles
-                      slug: neon-auth/customization/custom-styles
-                    - title: Dark/Light Mode
-                      slug: neon-auth/customization/dark-mode
-                    - title: Internationalization
-                      slug: neon-auth/customization/internationalization
-                    - title: Custom Pages
-                      slug: neon-auth/customization/custom-pages
+                    - title: Introduction
+                      slug: auth/legacy/overview
+                    - title: Database integration
+                      slug: auth/legacy/database-integration
 
         - title: Postgres RLS
           icon: lock

@@ -3,6 +3,15 @@ title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 enableTableOfContents: true
 updatedOn: '2025-12-03T00:00:00.000Z'
+redirectFrom:
+  - /docs/neon-auth/quick-start/nextjs
+  - /docs/neon-auth/quick-start/react
+  - /docs/neon-auth/quick-start/javascript
+  - /docs/neon-auth/quick-start/drizzle
+  - /docs/neon-auth/tutorial
+  - /docs/neon-auth/demo
+  - /docs/guides/neon-auth
+  - /docs/guides/neon-auth-demo
 ---
 
 This guide shows you the code differences between legacy Neon Auth (Stack Auth) and Neon Auth with Better Auth. Use it as a reference to understand what changes if you decide to upgrade.
