@@ -14,7 +14,7 @@ nextLink:
   slug: 'postgresql-json-functions/../postgresql-php'
 ---
 
-**Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_popuplate_recordset()` function to populate the fields of a record type from a JSON array of objects.
+**Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_populate_recordset()` function to populate the fields of a record type from a JSON array of objects.
 
 ## Introduction to the PostgreSQL jsonb_popuplate_recordset() function
 
