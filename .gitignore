@@ -86,3 +86,6 @@ content/docs/guides/time_travel_tutorial_before-1.png
 yarn.lock
 package-lock.json
 .vercel
+
+# Evals directory (test validation for documentation)
+.evals/

@@ -1,0 +1,237 @@
+---
+title: React with Neon Auth UI
+subtitle: Build authentication with pre-built UI components
+enableTableOfContents: true
+updatedOn: '2025-11-29T00:00:00.000Z'
+layout: wide
+---
+
+<TwoColumnLayout>
+
+<TwoColumnStep title="Enable Auth in your Neon project">
+  <LeftContent>
+
+If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
+
+Go to the **Auth** page in your project dashboard and click **Enable Auth**.
+
+You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
+
+  </LeftContent>
+  <RightImage label="Console">
+
+![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+
+  </RightImage>
+</TwoColumnStep>
+
+<TwoColumnStep title="Create your React app">
+  <LeftContent>
+
+Create a React app using Vite with TypeScript.
+
+  </LeftContent>
+  <RightCode label="Terminal">
+
+```bash
+npm create vite@latest my-app -- --template react-ts
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Install packages">
+  <LeftContent>
+
+Install the Neon SDK, UI components, and React Router:
+
+  </LeftContent>
+  <RightCode label="Terminal">
+
+```bash
+cd my-app
+npm install @neondatabase/neon-js @neondatabase/neon-auth-ui react-router-dom
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Add your Auth URL">
+  <LeftContent>
+
+Create a `.env` file in your project root and add your Auth URL:
+
+<Admonition type="note">
+Replace the URL with your actual Auth URL from the Neon Console.
+</Admonition>
+
+  </LeftContent>
+  <RightCode label=".env">
+
+```bash
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Set up authentication">
+  <LeftContent>
+
+Create a `src/auth.ts` file to configure your auth client:
+
+  </LeftContent>
+  <RightCode label="src/auth.ts">
+
+```typescript
+import { createAuthClient } from '@neondatabase/neon-js';
+
+export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Wrap your app with the provider">
+  <LeftContent>
+
+Replace the contents of `src/main.tsx` to wrap your app with React Router and the auth provider. Import the Neon Auth UI CSS - no additional setup needed:
+
+  </LeftContent>
+  <RightCode label="src/main.tsx">
+
+```tsx
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import '@neondatabase/neon-auth-ui/css';
+import App from './App';
+import { auth } from './auth';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <BrowserRouter>
+      <NeonAuthUIProvider authClient={auth}>
+        <App />
+      </NeonAuthUIProvider>
+    </BrowserRouter>
+  </StrictMode>
+);
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Build your authentication UI">
+  <LeftContent>
+
+Replace the contents of `src/App.tsx` with routes for authentication. The `<AuthView>` component handles navigation between sign-in and sign-up views automatically:
+
+  </LeftContent>
+  <RightCode label="src/App.tsx">
+
+```tsx
+import { Routes, Route, useParams } from 'react-router-dom';
+import { AuthView, SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+
+function Home() {
+  return (
+    <>
+      <SignedIn>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            gap: '2rem',
+          }}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <h1>Welcome!</h1>
+            <p>You're successfully authenticated.</p>
+            <UserButton />
+          </div>
+        </div>
+      </SignedIn>
+      <RedirectToSignIn />
+    </>
+  );
+}
+
+function Auth() {
+  const { pathname } = useParams();
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <AuthView pathname={pathname} />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth/:pathname" element={<Auth />} />
+    </Routes>
+  );
+}
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Start your app">
+  <LeftContent>
+
+Start the development server and open [http://localhost:5173](http://localhost:5173):
+
+<ul>
+<li>The app redirects to the sign-in page.</li>
+<li>Sign up or sign in with a test email and password.</li>
+<li>After authenticating, you return to the home page with a welcome message and user button.</li>
+<li>Click the user button to access account settings or sign out.</li>
+</ul>
+
+  </LeftContent>
+  <RightCode label="Terminal">
+
+```bash
+npm run dev
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="See your users in the database">
+  <LeftContent>
+
+As users sign up, their profiles are synced to your Neon database in the `neon_auth.user` table.
+
+Query your users table in the SQL Editor to see your new users:
+
+  </LeftContent>
+  <RightCode label="SQL Editor">
+
+```sql
+SELECT * FROM neon_auth.user;
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+</TwoColumnLayout>
+
+## Next steps
+
+- [Add email verification](/docs/auth/guides/email-verification) to ensure users own their email addresses
+- [View complete SDK reference](/docs/reference/javascript-sdk)

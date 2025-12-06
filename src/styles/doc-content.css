@@ -183,7 +183,7 @@
 
     .code-tab {
       > pre {
-        @apply my-0 py-5;
+        @apply my-0 py-7;
       }
     }
 
@@ -192,14 +192,14 @@
         @apply px-0;
 
         > code {
-          @apply inline-block w-full px-4 !leading-relaxed;
+          @apply inline-block w-full px-6 py-1.5 !leading-relaxed;
         }
       }
 
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !text-black-new dark:!text-white dark:![text-shadow:unset];
+        @apply !font-mono text-sm !leading-[1.75] !text-black-new dark:!text-white dark:![text-shadow:unset];
       }
     }
 
@@ -369,6 +369,40 @@
       > li {
         @apply my-4;
       }
+    }
+  }
+
+  /* Split layout for SDK reference pages (2-column grid) */
+  .split-layout {
+    @apply grid grid-cols-2 gap-x-10 xl:grid-cols-1 xl:gap-x-0;
+
+    > h2,
+    > h3,
+    > h4,
+    > p,
+    > ul,
+    > ol,
+    > blockquote {
+      @apply col-start-1;
+    }
+
+    > figure,
+    > pre,
+    > .code-block,
+    > [class*='code-tabs'] {
+      @apply col-start-2 self-start xl:col-start-1 xl:mt-6;
+    }
+
+    /* Group consecutive description elements together */
+    > h2 {
+      @apply col-span-2 xl:col-span-1;
+    }
+
+    /* Code blocks should stick to the right column */
+    > figure + figure,
+    > pre + pre,
+    > .code-block + .code-block {
+      @apply mt-6;
     }
   }
 }

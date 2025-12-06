@@ -1,0 +1,190 @@
+{
+  "title": "Neon JavaScript SDK",
+  "sections": [
+    {
+      "section": "Getting Started",
+      "items": [
+        {
+          "title": "Initialize the client",
+          "id": "initializing",
+          "method": "createClient()"
+        }
+      ]
+    },
+    {
+      "section": "Auth",
+      "items": [
+        {
+          "title": "Create a new user account",
+          "id": "auth-signup",
+          "method": "auth.signUp.email()"
+        },
+        {
+          "title": "Sign in with email and password",
+          "id": "auth-signinwithpassword",
+          "method": "auth.signIn.email()"
+        },
+        {
+          "title": "Sign in with OAuth provider",
+          "id": "auth-signinwithoauth",
+          "method": "auth.signIn.social()"
+        },
+        {
+          "title": "Sign out",
+          "id": "auth-signout",
+          "method": "auth.signOut()"
+        },
+        {
+          "title": "Get current session",
+          "id": "auth-getsession",
+          "method": "auth.getSession()"
+        },
+        {
+          "title": "Update user profile",
+          "id": "auth-updateuser",
+          "method": "auth.updateUser()"
+        },
+        {
+          "title": "Send verification OTP code",
+          "id": "auth-sendverificationotp",
+          "method": "auth.emailOtp.sendVerificationOtp()"
+        },
+        {
+          "title": "Sign in with OTP code",
+          "id": "auth-signinwithotp",
+          "method": "auth.signIn.emailOtp()"
+        },
+        {
+          "title": "Verify email with OTP",
+          "id": "auth-verifyemailotp",
+          "method": "auth.emailOtp.verifyEmail()"
+        },
+        {
+          "title": "Check verification OTP code",
+          "id": "auth-checkverificationotp",
+          "method": "auth.emailOtp.checkVerificationOtp()"
+        },
+        {
+          "title": "Send verification email",
+          "id": "auth-sendverificationemail",
+          "method": "auth.sendVerificationEmail()"
+        },
+        {
+          "title": "Verify email address",
+          "id": "auth-verifyemail",
+          "method": "auth.verifyEmail()"
+        },
+        {
+          "title": "Request password reset",
+          "id": "auth-requestpasswordreset",
+          "method": "auth.requestPasswordReset()"
+        }
+      ]
+    },
+    {
+      "section": "Database",
+      "items": [
+        {
+          "title": "Fetch data from a table",
+          "id": "select",
+          "method": "from().select()"
+        },
+        {
+          "title": "Insert data into a table",
+          "id": "insert",
+          "method": "from().insert()"
+        },
+        {
+          "title": "Update existing rows",
+          "id": "update",
+          "method": "from().update()"
+        },
+        {
+          "title": "Delete rows from a table",
+          "id": "delete",
+          "method": "from().delete()"
+        },
+        {
+          "title": "Call a stored procedure",
+          "id": "rpc",
+          "method": ".rpc()"
+        },
+        {
+          "title": "Column is equal to a value",
+          "id": "eq",
+          "method": ".eq(column, value)"
+        },
+        {
+          "title": "Column is not equal to a value",
+          "id": "neq",
+          "method": ".neq(column, value)"
+        },
+        {
+          "title": "Column is greater than a value",
+          "id": "gt",
+          "method": ".gt(column, value)"
+        },
+        {
+          "title": "Column is less than a value",
+          "id": "lt",
+          "method": ".lt(column, value)"
+        },
+        {
+          "title": "Order results by column",
+          "id": "order",
+          "method": ".order(column, options)"
+        }
+      ]
+    },
+    {
+      "section": "Filters",
+      "items": [
+        {
+          "title": "Limit number of results",
+          "id": "limit",
+          "method": ".limit(count)"
+        },
+        {
+          "title": "Column is greater than or equal to a value",
+          "id": "gte",
+          "method": ".gte(column, value)"
+        },
+        {
+          "title": "Column is less than or equal to a value",
+          "id": "lte",
+          "method": ".lte(column, value)"
+        },
+        {
+          "title": "Column matches a pattern",
+          "id": "like",
+          "method": ".like(column, pattern)"
+        },
+        {
+          "title": "Column matches a pattern (case-insensitive)",
+          "id": "ilike",
+          "method": ".ilike(column, pattern)"
+        },
+        {
+          "title": "Column is null or not null",
+          "id": "is",
+          "method": ".is(column, value)"
+        },
+        {
+          "title": "Column value is in an array",
+          "id": "in",
+          "method": ".in(column, array)"
+        },
+        {
+          "title": "Array or JSONB column contains value",
+          "id": "contains",
+          "method": ".contains(column, value)"
+        },
+        {
+          "title": "Column value is between two values",
+          "id": "range",
+          "method": ".range(column, start, end)"
+        }
+      ]
+    }
+  ]
+}

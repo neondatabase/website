@@ -20,7 +20,7 @@ const CodeBlock = async ({
   return (
     <CodeBlockWrapper
       className={clsx(
-        '[&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
+        'rounded-lg border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
         className,
         { 'code-wrap': meta?.includes('shouldWrap') }
       )}
