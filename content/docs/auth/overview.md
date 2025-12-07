@@ -27,6 +27,10 @@ Choose a framework to get started:
 
 <a href="/docs/auth/quick-start/react-router" description="Multi-page React application with routing" icon="atom">React Router</a>
 
+<a href="/docs/auth/quick-start/tanstack-router" description="Multi-page React application with routing" icon="atom">TanStack Router</a>
+
+<a href="/docs/auth/quick-start/nextjs" description="Next.js app with authentication" icon="atom">Next.js</a>
+
 </DetailIconCards>
 
 <NeedHelp/>

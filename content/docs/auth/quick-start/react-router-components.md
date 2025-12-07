@@ -126,14 +126,25 @@ createRoot(document.getElementById('root')!).render(
 <TwoColumnStep title="Build your authentication UI">
   <LeftContent>
 
-Replace the contents of `src/App.tsx` with routes for authentication. The `<AuthView>` component handles navigation between sign-in and sign-up views automatically:
+Replace the contents of `src/App.tsx` with routes for authentication and account management:
+
+<ul>
+<li>The `<AuthView>` component handles navigation between sign-in and sign-up views.</li>
+<li>The `<AccountView>` component provides account-management features such as password resets and session management.</li>
+</ul>
 
   </LeftContent>
   <RightCode label="src/App.tsx">
 
 ```tsx
 import { Routes, Route, useParams } from 'react-router-dom';
-import { AuthView, SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import {
+  AuthView,
+  AccountView,
+  SignedIn,
+  UserButton,
+  RedirectToSignIn,
+} from '@neondatabase/neon-auth-ui';
 
 function Home() {
   return (
@@ -177,11 +188,28 @@ function Auth() {
   );
 }
 
+function Account() {
+  const { pathname } = useParams();
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <AccountView pathname={pathname} />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/auth/:pathname" element={<Auth />} />
+      <Route path="/account/:pathname" element={<Account />} />
     </Routes>
   );
 }
