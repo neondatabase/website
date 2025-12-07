@@ -117,34 +117,29 @@ Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. 
   </LeftContent>
   <RightCode label="src/routes/__root.tsx">
 
-```tsx
+```tsx {4-5,9,22}
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui'; // [!code ++]
-import { auth } from '../auth'; // [!code ++]
+import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { auth } from '../auth';
 
 export const Route = createRootRoute({
   component: () => (
-    <>
-      <NeonAuthUIProvider authClient={auth}>
-        {' '}
-        // [!code ++]
-        <Outlet />
-        <TanStackDevtools
-          config={{
-            position: 'bottom-right',
-          }}
-          plugins={[
-            {
-              name: 'Tanstack Router',
-              render: <TanStackRouterDevtoolsPanel />,
-            },
-          ]}
-        />
-      </NeonAuthUIProvider>{' '}
-      // [!code ++]
-    </>
+    <NeonAuthUIProvider authClient={auth}>
+      <Outlet />
+      <TanStackDevtools
+        config={{
+          position: 'bottom-right',
+        }}
+        plugins={[
+          {
+            name: 'Tanstack Router',
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+        ]}
+      />
+    </NeonAuthUIProvider>
   ),
 });
 ```
