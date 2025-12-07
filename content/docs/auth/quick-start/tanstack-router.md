@@ -112,7 +112,7 @@ export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 <TwoColumnStep title="Create the Auth Provider">
   <LeftContent>
 
-Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. This provides the authentication context to your app.
+Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. This makes the auth state available to the UI components used throughout your app.
 
   </LeftContent>
   <RightCode label="src/routes/__root.tsx">
