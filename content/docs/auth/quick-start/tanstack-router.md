@@ -84,13 +84,9 @@ Import the Neon Auth UI styles in your `src/styles.css` file. Add this line at t
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-auth-ui/css';
+@import '@neondatabase/neon-auth-ui/css'; // [!code ++]
 
-// [!code ++]
-
-body {
-  /* Your existing styles... */
-}
+// Your existing styles...
 ```
 
   </RightCode>
