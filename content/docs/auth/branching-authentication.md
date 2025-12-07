@@ -5,15 +5,11 @@ enableTableOfContents: true
 updatedOn: '2025-11-23T00:00:00.000Z'
 ---
 
-One of Neon Auth's unique features is native support for database branching. When you create a database branch, that branch gets its own isolated authentication instance with separate users, sessions, and configuration.
+One of Neon Auth's unique features is native support for database branching. When you create a database branch, your authentication data branches with it, giving each branch its own isolated authentication environment.
 
-## What happens when you branch
+## How it works
 
-When you create a [database branch](/docs/introduction/branching), your authentication data branches with it automatically. Because auth data lives in your database's `neon_auth` schema, it's part of your database. Each branch then operates as an independent authentication environment.
-
-**What gets copied at branch time:**
-
-Along with the copy of your application data, your new branch also includes an exact copy of all authentication data from the parent branch:
+Because auth data lives in your database's `neon_auth` schema, it's part of your database. When you create a [database branch](/docs/introduction/branching), you get an exact copy of all authentication data from the parent branch at that point in time:
 
 ```
 Production (main)                Preview Branch (preview-pr-123)
@@ -25,9 +21,7 @@ Production (main)                Preview Branch (preview-pr-123)
 └── Organizations           →    └── Organizations (copied)
 ```
 
-**What remains isolated after branching:**
-
-Changes in each branch stay separate and don't affect other branches:
+After branching, each branch operates independently. Changes in one branch don't affect others:
 
 ```
 Production Branch              Preview Branch
@@ -38,15 +32,17 @@ Production Branch              Preview Branch
     (production endpoint)          (preview endpoint)
 ```
 
-This isolation means you can test authentication changes, try new OAuth providers, or experiment with settings without affecting your production environment.
+Each branch gets its own authentication endpoint (matching that branch's default read-write endpoint), so you can test authentication changes without affecting production users.
 
-## Branch-specific auth URLs
+<Admonition type="note">
+Neon Auth works with your branch's **default** database (typically `neondb`) and read-write endpoint only. You cannot use Neon Auth with other databases in the same branch. This aligns with our recommended pattern of one database per branch.
+</Admonition>
 
-Each database branch has its own authentication endpoint. This solves common auth testing pain points: trying new OAuth providers, testing email verification changes, or experimenting with auth configuration, without risking your production users.
+This branch isolation enables several testing patterns:
 
-### Test auth changes safely
+## Testing auth changes safely
 
-Create a branch from production to test auth changes locally:
+Say you want to add Google OAuth to your production app, but you're not sure if your configuration will work. Instead of testing directly in production, create a branch:
 
 <CodeWithLabel label="Terminal">
 
@@ -60,24 +56,19 @@ neon branches create --name test-google-oauth
 <CodeWithLabel label=".env.local">
 
 ```env
-# Point to test branch
-VITE_NEON_BASE_URL=https://ep-test-google-oauth.region.domain/neondb/
+# Point your local app to the test branch's Auth URL
+VITE_NEON_AUTH_URL=https://ep-test-google-oauth.neonauth.region.aws.neon.tech/neondb/auth
 ```
 
 </CodeWithLabel>
 
-Now you can test your auth changes. For example, configure Google OAuth in the test branch's Console and verify the sign-in flow works. Your production users are unaffected. If everything works you know you can apply the same settings to production; if not, you can just delete the brnach.
+Now configure Google OAuth in the test branch's Console and verify the sign-in flow works locally. Your production app and users are completely unaffected. Once you confirm it works, apply the same OAuth settings to your production branch.
 
-The same approach works for testing any auth changes:
+The same approach works for any auth changes: password reset flows, email verification settings, or testing with anonymized production data.
 
-- Password reset flows (without spamming real users with reset emails)
-- Email verification methods (code vs. link)
-- "Require email verification" settings
-- Testing with anonymized user data (branch from production, anonymize PII, test with realistic patterns)
+## Developer isolation
 
-### Developer isolation
-
-Each developer can work with their own auth instance:
+You can also use branches to give each developer their own auth instance to test with:
 
 <CodeWithLabel label="Terminal">
 
@@ -90,7 +81,7 @@ neon branches create --name dev-alice
 
 Alice can test auth flows, create test users, and experiment without affecting other developers or shared staging environments.
 
-## OAuth provider configuration
+## OAuth and sessions
 
 OAuth works across all branches automatically when using Neon's shared credentials (development mode).
 

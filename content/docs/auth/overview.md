@@ -13,6 +13,10 @@ This page is a placeholder. Content coming soon.
 
 Neon Auth is a managed authentication service built on Better Auth that stores all auth data directly in your Neon database. When you branch your database, your authentication data branches with it automatically.
 
+## Availability
+
+Neon Auth is currently available in AWS regions only.
+
 ## Quick Start
 
 Choose a framework to get started:

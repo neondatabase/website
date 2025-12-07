@@ -7,8 +7,12 @@ updatedOn: '2025-11-19T00:00:00.000Z'
 
 Email verification ensures users own the email addresses they register with. Neon Auth supports two verification methods:
 
-- **verification links** (users click a link in their email)
-- **verification codes** (users enter a numeric code from their email).
+- **Verification codes** (users enter a numeric code from their email) - works with shared or custom email providers
+- **Verification links** (users click a link in their email) - requires a custom email provider
+
+<Admonition type="note">
+Verification links require a [custom email provider](/docs/auth/guides/configure-email-provider). If you're using the shared email provider, use verification codes instead.
+</Admonition>
 
 ## Enable email verification
 
@@ -16,11 +20,9 @@ In your project's **Settings** → **Auth** page, enable **Sign-up with Email** 
 
 ![Email verification settings in Neon Console](/docs/auth/email-verification-settings.png)
 
-<Admonition>
-You can switch between verification methods at any time in the Console.
-</Admonition>
-
 ## Verification links
+
+Verification links require a custom email provider. See [Configure email provider](/docs/auth/guides/configure-email-provider) to set this up.
 
 When a user clicks the verification link in their email, the Neon Auth server handles verification and redirects them back to your application. Your app checks for the new session and shows the appropriate UI.
 

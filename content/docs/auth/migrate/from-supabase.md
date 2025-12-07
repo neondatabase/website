@@ -1,11 +1,11 @@
 ---
-title: Migrate from Supabase Auth to Neon Auth
-subtitle: Update your authentication from Supabase to Neon in a few steps
+title: Migrate from Supabase to Neon
+subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 enableTableOfContents: true
 updatedOn: '2025-11-21T00:00:00.000Z'
 ---
 
-Neon Auth provides a Supabase-compatible API. This guide shows how to switch your authentication provider from Supabase Auth to Neon Auth.
+Neon Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
 
 <Admonition type="About user migration">
 Existing password-based users cannot migrate due to different hashing algorithms. They'll need to create new accounts or re-authenticate via OAuth. This guide works best for new projects, early development, or rebuilding your app.
@@ -13,8 +13,11 @@ Existing password-based users cannot migrate due to different hashing algorithms
 
 ## Prerequisites
 
-- A Neon project with Auth enabled ([enable it here](https://console.neon.tech))
-- Your Neon base URL (get it from Console after enabling Auth)
+- A Neon project ([create one here](https://console.neon.tech))
+- Data API enabled (Neon Auth is enabled by default when you enable Data API):
+  - Go to **Data API** in the Neon Console and enable it
+  - In **Data API → Configuration**, verify it's configured with **Neon Auth**
+  - Copy your Data API base URL and Auth URL from the Console - you'll need both
 
 <Steps>
 
@@ -33,7 +36,7 @@ npm install @neondatabase/neon-js
 
 ## Update environment variables
 
-Replace your Supabase credentials with your Neon base URL:
+Replace your Supabase credentials with your Neon Auth and Data API URLs:
 
 <CodeWithLabel label=".env">
 
@@ -42,13 +45,17 @@ Replace your Supabase credentials with your Neon base URL:
 # VITE_SUPABASE_URL=https://your-project.supabase.co
 # VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
-# Add this:
-VITE_NEON_BASE_URL=https://ep-xxx.region.domain/neondb/
+# Add these:
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+VITE_NEON_DATA_API_URL=https://ep-xxx.us-east-2.aws.neon.build/neondb/rest/v1
 ```
 
 </CodeWithLabel>
 
-Get your base URL from the Neon Console after enabling Auth.
+**Get your URLs:**
+
+1. **Auth URL**: Go to **Auth → Configuration** in the Neon Console
+2. **Data API URL**: Go to **Data API** in the Neon Console
 
 <Admonition type="note">
 The `VITE_` prefix is for Vite. Use `NEXT_PUBLIC_` for Next.js, or no prefix for Node.js.
@@ -73,14 +80,22 @@ export const supabase = createClient(
 
 </CodeWithLabel>
 
-**After (Neon Auth):**
+**After (Neon):**
 
 <CodeWithLabel label="src/auth.ts">
 
 ```typescript
-import { createClient } from '@neondatabase/neon-js';
+import { createClient, SupabaseAuthAdapter } from '@neondatabase/neon-js';
 
-export const client = createClient(import.meta.env.VITE_NEON_BASE_URL);
+export const client = createClient({
+  auth: {
+    url: import.meta.env.VITE_NEON_AUTH_URL,
+    adapter: SupabaseAuthAdapter(),
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL,
+  },
+});
 ```
 
 </CodeWithLabel>
@@ -133,18 +148,15 @@ await client.auth.signOut();
 
 </CodeWithLabel>
 
-## Enable Data API for database queries (optional)
+## Your database queries stay the same
 
-If you were using Supabase's `client.from()` queries, enable Neon's Data API to get the same experience.
+Your existing `client.from()` queries work without any code changes:
 
-In your Neon Console:
-
-1. Go to **Data API** and enable it
-2. Go to **Data API → Configuration**
-3. Select **Other Provider**
-4. Paste your Neon Auth JWKS URL (found in **Auth → Configuration**)
-
-Your existing `client.from()` queries will work the same as with Supabase.
+```typescript
+// Same as Supabase - no changes needed
+const { data: posts } = await client.from('posts').select('*');
+const { data: user } = await client.from('users').select('*').eq('id', userId).single();
+```
 
 <Admonition type="note">
 For production apps, use Row Level Security (RLS) to secure your data. See our [RLS with Drizzle guide](/docs/guides/rls-drizzle) for the recommended setup.
@@ -178,9 +190,9 @@ Go to **Auth → Users** in the Neon Console to see your newly created users, or
 <CodeWithLabel label="SQL Editor">
 
 ```sql
-SELECT id, email, createdAt
+SELECT id, email, "createdAt"
 FROM neon_auth.user
-ORDER BY createdAt DESC;
+ORDER BY "createdAt" DESC;
 ```
 
 </CodeWithLabel>
@@ -189,12 +201,12 @@ ORDER BY createdAt DESC;
 
 ## What changed?
 
-| Feature                   | Supabase                            | Neon Auth               |
-| ------------------------- | ----------------------------------- | ----------------------- |
-| **User ID type**          | `UUID`                              | `TEXT` (~21 characters) |
-| **Client config**         | URL + anon key                      | Single base URL         |
-| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_BASE_URL`         |
-| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js` |
+| Feature                   | Supabase                            | Neon                                 |
+| ------------------------- | ----------------------------------- | ------------------------------------ |
+| **User ID type**          | `UUID`                              | `UUID`                               |
+| **Client config**         | URL + anon key                      | Auth URL + Data API URL              |
+| **Environment variables** | `SUPABASE_URL`, `SUPABASE_ANON_KEY` | `NEON_AUTH_URL`, `NEON_DATA_API_URL` |
+| **SDK package**           | `@supabase/supabase-js`             | `@neondatabase/neon-js`              |
 
 ## API compatibility
 
@@ -202,12 +214,11 @@ Neon Auth supports most Supabase Auth methods including sign up, sign in (passwo
 
 **Not supported:**
 
-| Method                | Details                             |
-| --------------------- | ----------------------------------- |
-| `signInWithPhone()`   | Phone authentication (SMS/WhatsApp) |
-| `signInAnonymously()` | Anonymous sign-in                   |
-| SAML SSO methods      | Enterprise SAML authentication      |
-| Web3 authentication   | Blockchain wallet sign-in           |
+| Method              | Details                             |
+| ------------------- | ----------------------------------- |
+| `signInWithPhone()` | Phone authentication (SMS/WhatsApp) |
+| SAML SSO methods    | Enterprise SAML authentication      |
+| Web3 authentication | Blockchain wallet sign-in           |
 
 **Different behavior:**
 

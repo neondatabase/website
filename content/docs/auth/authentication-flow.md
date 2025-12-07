@@ -7,6 +7,10 @@ updatedOn: '2025-11-23T00:00:00.000Z'
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
 
+<Admonition type="note">
+Anyone can sign up for your application by default. Support for restricted signups is coming soon. Until then, consider adding a verification step by enabling [email verification](/docs/auth/guides/email-verification) via link or code.
+</Admonition>
+
 ## Architecture overview
 
 Neon Auth is a managed REST API service built on Better Auth that connects directly to your Neon database. You use the SDK in your application and configure settings in the Console—no servers to manage.

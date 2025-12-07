@@ -7,10 +7,6 @@ updatedOn: '2025-11-30T00:00:00.000Z'
 
 Complete these steps before taking your application to production with Neon Auth.
 
-<Admonition type="note">
-By default, anyone can sign up for your application. Review email verification settings and ensure your application properly controls user access before launching.
-</Admonition>
-
 <CheckList title="Auth production checklist">
 
 <CheckItem title="1. Configure trusted domains" href="/docs/auth/guides/configure-domains">
@@ -18,7 +14,7 @@ By default, anyone can sign up for your application. Review email verification s
 </CheckItem>
 
 <CheckItem title="2. Set up custom email provider" href="/docs/auth/guides/configure-email-provider">
-  Replace shared SMTP (`auth@mail.myneon.app`) with your own email service for reliable delivery and higher limits. See [Configure email provider](/docs/auth/guides/configure-email-provider).
+  Replace shared SMTP (`auth@mail.myneon.app`) with your own email service for reliable delivery and higher limits. A custom email provider is also required if you want to use verification links instead of verification codes. See [Configure email provider](/docs/auth/guides/configure-email-provider).
 </CheckItem>
 
 <CheckItem title="3. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
@@ -26,7 +22,7 @@ By default, anyone can sign up for your application. Review email verification s
 </CheckItem>
 
 <CheckItem title="4. Enable email verification (recommended)" href="/docs/auth/guides/email-verification">
-  Email verification is not enabled by default. We recommend enabling it to ensure users own their email address and reduce fake accounts. See [Email verification guide](/docs/auth/guides/email-verification).
+  **Email verification is not enabled by default.** Since anyone can sign up for your application, enabling email verification adds an important verification step to ensure users own their email address. See [Email verification guide](/docs/auth/guides/email-verification).
 </CheckItem>
 
 </CheckList>

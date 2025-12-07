@@ -1,10 +1,12 @@
 ---
 title: Use Neon Auth with Next.js
-subtitle: Learn how to set up Neon Auth in Next.js
+subtitle: Learn how to set up Neon Auth in Next.js (App Router)
 enableTableOfContents: true
 updatedOn: '2025-12-04T00:00:00.000Z'
 layout: wide
 ---
+
+> This guide is for Next.js **App Router**. _Pages Router_ setup differs mainly in API routes and auth handling.
 
 <TwoColumnLayout>
 
