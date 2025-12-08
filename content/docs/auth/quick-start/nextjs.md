@@ -133,24 +133,33 @@ export const { GET, POST } = toNextJsHandler(process.env.NEON_AUTH_BASE_URL!);
 <TwoColumnStep title="Create the Auth Provider">
   <LeftContent>
 
-Create a provider component to wrap your application with authentication context. Create `app/provider.tsx`:
+Create a provider component to wrap your application with authentication context. Create `app/providers.tsx`:
 
   </LeftContent>
-  <RightCode label="app/provider.tsx">
+  <RightCode label="app/providers.tsx">
 
 ```tsx
 'use client';
 
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import { authClient } from '@/lib/auth/client';
+import { useRouter } from 'next/navigation';
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   return (
     <NeonAuthUIProvider
       authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={() => {
+        router.refresh();
+      }}
+      emailOTP
       redirectTo="/"
       social={{
-        providers: ['google'],
+        providers: ['google', 'github'],
       }}
     >
       {children}
@@ -173,7 +182,7 @@ Update `app/layout.tsx` to use the `AuthProvider`:
 ```tsx
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { AuthProvider } from '@/app/provider'; // [!code ++]
+import { AuthProvider } from '@/app/providers'; // [!code ++]
 import './globals.css';
 
 const geistSans = Geist({
@@ -226,7 +235,7 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
   const { path } = await params;
 
   return (
-    <main className="container flex grow flex-col items-center justify-center self-center p-4 md:p-6">
+    <main className="container mx-auto flex grow flex-col items-center justify-center gap-3 self-center p-4 md:p-6">
       <AuthView path={path} />
     </main>
   );
@@ -347,12 +356,14 @@ import { neonAuthMiddleware } from '@neondatabase/neon-auth-next';
 
 export default neonAuthMiddleware({
   loginUrl: '/auth/sign-in',
+  authBaseUrl: process.env.NEON_AUTH_BASE_URL!,
 });
 
 export const config = {
   matcher: [
     '/only-for-authenticated-users/:path*',
     // Add more protected routes here
+    '/((?!_next/static|_next/image|favicon.ico|).*)', // Exclude static files from middleware
   ],
 };
 ```
@@ -407,7 +418,9 @@ export default function ProtectedPage() {
 
 Start the development server:
 
-Open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
+If you're using **component-level protection**, open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
+
+If you're using **middleware protection**, go to `http://localhost:3000/only-for-authenticated-users` to test the protected route. You should be redirected to the sign-in page there as well.
 
   </LeftContent>
   <RightCode label="Terminal">
