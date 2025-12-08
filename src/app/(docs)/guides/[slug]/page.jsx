@@ -53,8 +53,8 @@ const GuidePost = async ({ params }) => {
   const postBySlug = getPostBySlug(slug, GUIDES_DIR_PATH);
   if (!postBySlug) return notFound();
   const { data, content } = postBySlug;
-  // const authorID = data.author;
-  // const author = getAuthor(authorID);
+  const authorID = data.author;
+  const author = getAuthor(authorID);
   const tableOfContents = getTableOfContents(content);
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -72,7 +72,6 @@ const GuidePost = async ({ params }) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      {/* TODO: pass the author to the Post */}
       <Post
         content={content}
         data={data}
@@ -80,8 +79,13 @@ const GuidePost = async ({ params }) => {
         currentSlug={slug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
-        breadcrumbs={[]}
-        // author={author}
+        breadcrumbs={[
+          {
+            title: data.title,
+          },
+        ]}
+        breadcrumbsBaseUrl={LINKS.guides}
+        author={author}
       />
     </>
   );

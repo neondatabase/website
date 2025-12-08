@@ -31,6 +31,7 @@ const Post = ({
   data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
   content,
   breadcrumbs,
+  breadcrumbsBaseUrl,
   navigationLinks: { previousLink, nextLink },
   navigationLinksPrefix,
   isChangelog = false,
@@ -40,6 +41,7 @@ const Post = ({
   currentSlug,
   gitHubPath,
   tableOfContents,
+  author,
 }) => {
   const modal = MODALS.find(
     (modal) =>
@@ -55,8 +57,10 @@ const Post = ({
             breadcrumbs={breadcrumbs}
             currentSlug={currentSlug}
             isPostgresPost={isPostgres}
+            baseUrl={breadcrumbsBaseUrl}
           />
         )}
+
         {isChangelog ? (
           <Changelog currentSlug={currentSlug} posts={changelogPosts} />
         ) : (
@@ -86,6 +90,7 @@ const Post = ({
             basePath={navigationLinksPrefix || DOCS_BASE_PATH}
           />
         )}
+
         {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
@@ -96,13 +101,16 @@ const Post = ({
         enableTableOfContents={enableTableOfContents}
         tableOfContents={tableOfContents}
         gitHubPath={gitHubPath}
+        author={author}
       />
+
       {modal && <Modal {...modal} />}
     </>
   );
 };
 
 Post.propTypes = {
+  breadcrumbsBaseUrl: PropTypes.string.isRequired,
   data: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,
@@ -129,6 +137,16 @@ Post.propTypes = {
   currentSlug: PropTypes.string.isRequired,
   gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string,
+    bio: PropTypes.string,
+    link: PropTypes.shape({
+      url: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    photo: PropTypes.string,
+  }),
 };
 
 export default Post;

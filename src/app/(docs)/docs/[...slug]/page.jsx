@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
+import { DOCS_BASE_PATH, CHANGELOG_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
@@ -89,6 +90,7 @@ const DocPost = async ({ params }) => {
         data={{}}
         content={{}}
         breadcrumbs={breadcrumbs}
+        breadcrumbsBaseUrl={CHANGELOG_BASE_PATH}
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
@@ -122,6 +124,7 @@ const DocPost = async ({ params }) => {
         content={content}
         data={data}
         breadcrumbs={breadcrumbs}
+        breadcrumbsBaseUrl={DOCS_BASE_PATH}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
