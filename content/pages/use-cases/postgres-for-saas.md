@@ -56,7 +56,7 @@ Onboard Faster, Keep Collaboration in Sync
 One Branch per PR
 : Use automation to give each git branch or Pull Request a corresponding database branch. This can be done with automation tools like GitHub Actions, or more easily as part of an integration:
 : - [Neon GitHub integration](/docs/guides/neon-github-integration) - An easier way to create a branch for every PR.
-: - [Neon Vercel Integration](/docs/guides/vercel) - Create and integrate a branch into every Vercel Preview deployment.
+: - [Neon Vercel Integration](/docs/guides/vercel-overview) - Create and integrate a branch into every Vercel Preview deployment.
 
 Ephemeral Environments for Dev/Test
 : Deploy confidently by using branches to run your test suite on an exact copy of your production database. No handling of seed data, no manual work keeping environments in sync.

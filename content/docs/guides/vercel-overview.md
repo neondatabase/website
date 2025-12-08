@@ -3,6 +3,7 @@ title: Integrating Neon with Vercel
 subtitle: Choose the right connection path in seconds
 redirectFrom:
   - /docs/guides/vercel-postgres
+  - /docs/guides/vercel
 enableTableOfContents: true
 updatedOn: '2025-11-11T17:38:12.167Z'
 ---
