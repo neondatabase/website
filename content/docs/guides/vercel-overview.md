@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2025-11-11T17:38:12.167Z'
+updatedOn: '2025-12-08T20:23:43.016Z'
 ---
 
 ## Overview
