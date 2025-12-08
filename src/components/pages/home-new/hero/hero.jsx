@@ -46,7 +46,7 @@ const Hero = () => (
       {/*
         Video optimization parameters:
           mp4: ffmpeg -i hero-origin.mp4 -c:v libx265 -crf 26 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
-          webm: ffmpeg -i hero-origin.mp4 -c:v libvpx-vp9 -crf 40 -vf scale=3840:-2 -deadline best -an hero.webm
+          webm: ffmpeg -i hero-origin.mp4 -c:v libvpx-vp9 -crf 35 -vf scale=3840:-2 -deadline best -an hero.webm
       */}
       <PauseableVideo
         className={clsx(
@@ -66,7 +66,6 @@ const Hero = () => (
         width={752}
         height={326}
         quality={100}
-        sizes="100vw"
         alt=""
         priority
       />
