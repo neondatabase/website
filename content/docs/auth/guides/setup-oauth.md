@@ -22,9 +22,11 @@ Call `signIn.social()` with your provider (`"google"` or `"github"`). The SDK re
 <CodeTabs labels={["Google","GitHub"]}>
 
 ```jsx{6}
+import { authClient } from './auth';
+
 const handleGoogleSignIn = async () => {
   try {
-    await auth.signIn.social({
+    await authClient.signIn.social({
       provider: "google",
       callbackURL: window.location.origin,
     });
@@ -35,9 +37,11 @@ const handleGoogleSignIn = async () => {
 ```
 
 ```jsx{6}
+import { authClient } from './auth';
+
 const handleGitHubSignIn = async () => {
   try {
-    await auth.signIn.social({
+    await authClient.signIn.social({
       provider: "github",
       callbackURL: window.location.origin,
     });
@@ -58,8 +62,10 @@ After the provider redirects back to your app, check for a session:
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx{9}
+import { authClient } from './auth';
+
 useEffect(() => {
-  auth.getSession().then(({ data }) => {
+  authClient.getSession().then(({ data }) => {
     if (data?.session) {
       setUser(data.session.user);
     }
@@ -77,7 +83,7 @@ Specify different URLs for new users or errors:
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx{3-5}
-await auth.signIn.social({
+await authClient.signIn.social({
   provider: "google", // or "github"
   callbackURL: "/dashboard",
   newUserCallbackURL: "/welcome",

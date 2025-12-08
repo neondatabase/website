@@ -34,14 +34,14 @@ Add a session check when your component mounts to detect when a user returns fro
 
 ```jsx{9}
 import { useEffect, useState } from 'react';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    auth.getSession().then(({ data }) => {
+    authClient.getSession().then(({ data }) => {
       if (data?.session) {
         setUser(data.session.user);
       }
@@ -65,7 +65,7 @@ const handleSignUp = async (e) => {
   setMessage('');
 
   try {
-    const { data, error } = await auth.signUp.email({
+    const { data, error } = await authClient.signUp.email({
       email,
       password,
       name: name || email.split('@')[0] || 'User',
@@ -94,7 +94,7 @@ Access the `emailVerified` field from the user object:
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx{1}
-const { data } = await auth.getSession();
+const { data } = await authClient.getSession();
 
 if (data?.session?.user && !data.session.user.emailVerified) {
   // Show verification prompt or restrict features
@@ -133,7 +133,7 @@ const handleVerify = async (e) => {
   setMessage('');
 
   try {
-    const { data, error } = await auth.emailOtp.verifyEmail({
+    const { data, error } = await authClient.emailOtp.verifyEmail({
       email,
       otp: code,
     });
@@ -212,7 +212,7 @@ Both verification links and codes expire after **15 minutes**. Allow users to re
 ```jsx{3}
 const handleResend = async () => {
   try {
-    const { error } = await auth.sendVerificationEmail({
+    const { error } = await authClient.sendVerificationEmail({
       email,
       callbackURL: window.location.origin + '/',
     });

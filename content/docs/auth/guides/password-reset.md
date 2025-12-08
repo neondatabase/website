@@ -11,8 +11,8 @@ updatedOn: '2025-01-XXT00:00:00.000Z'
 
 This guide will cover the following SDK methods:
 
-- `auth.requestPasswordReset({ email, redirectTo? })` - Send password reset email ✅
-- `auth.resetPassword({ newPassword, token? })` - Complete password reset with token ⚠️ Not yet exposed
+- `authClient.requestPasswordReset({ email, redirectTo? })` - Send password reset email ✅
+- `authClient.resetPassword({ newPassword, token? })` - Complete password reset with token ⚠️ Not yet exposed
 
 ## Flow overview
 

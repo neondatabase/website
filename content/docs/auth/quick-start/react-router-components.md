@@ -50,7 +50,7 @@ Install the Neon SDK, UI components, and React Router:
 
 ```bash
 cd my-app
-npm install @neondatabase/neon-js @neondatabase/neon-auth-ui react-router-dom
+npm install @neondatabase/neon-js react-router-dom
 ```
 
   </RightCode>
@@ -84,9 +84,9 @@ Create a `src/auth.ts` file to configure your auth client:
   <RightCode label="src/auth.ts">
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
-export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
   </RightCode>
@@ -104,15 +104,15 @@ Replace the contents of `src/main.tsx` to wrap your app with React Router and th
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import '@neondatabase/neon-js/ui/css';
 import App from './App';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <NeonAuthUIProvider authClient={auth}>
+      <NeonAuthUIProvider authClient={authClient}>
         <App />
       </NeonAuthUIProvider>
     </BrowserRouter>
@@ -133,7 +133,7 @@ Replace the contents of `src/App.tsx` with routes for authentication. The `<Auth
 
 ```tsx
 import { Routes, Route, useParams } from 'react-router-dom';
-import { AuthView, SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import { AuthView, SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
 
 function Home() {
   return (

@@ -22,11 +22,11 @@ Wrap your app with `NeonAuthUIProvider` to enable the UI components. The provide
 ```tsx
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import '@neondatabase/neon-auth-ui/css';
-import { auth } from './auth'; // Your auth client from @neondatabase/neon-js
+import { authClient } from './auth'; // Your auth client from @neondatabase/neon-js
 
 function App() {
   return (
-    <NeonAuthUIProvider authClient={auth}>
+    <NeonAuthUIProvider authClient={authClient}>
       {/* Your app components */}
     </NeonAuthUIProvider>
   );
@@ -37,7 +37,7 @@ function App() {
 
 | Prop | Type | Description | Example |
 |------|------|-------------|---------|
-| `authClient` | `NeonAuthPublicApi` | **Required.** Your Neon Auth client instance | `authClient={auth}` |
+| `authClient` | `NeonAuthPublicApi` | **Required.** Your Neon Auth client instance | `authClient={authClient}` |
 | `social.providers` | `SocialProvider[]` | Array of OAuth providers to enable (e.g., Google, GitHub) | `social={{ providers: ['google', 'github'] }}` |
 | `navigate` | `(href: string) => void` | Navigation function for React Router | `navigate={navigate}` |
 | `Link` | `ComponentType` | Custom Link component for routing | `Link={RouterLink}` |
@@ -52,12 +52,12 @@ To enable Google sign-in (or other OAuth providers), add the `social` prop to th
 
 ```tsx
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 function App() {
   return (
     <NeonAuthUIProvider
-      authClient={auth}
+      authClient={authClient}
       social={{
         providers: ['google', 'github'], // Enable Google and GitHub sign-in
       }}
@@ -77,14 +77,14 @@ If using React Router, pass the `navigate` function and a custom `Link` componen
 ```tsx
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 function App() {
   const navigate = useNavigate();
   
   return (
     <NeonAuthUIProvider
-      authClient={auth}
+      authClient={authClient}
       navigate={navigate}
       Link={RouterLink}
       social={{
@@ -102,7 +102,7 @@ function App() {
 **Custom localization:**
 ```tsx
 <NeonAuthUIProvider
-  authClient={auth}
+  authClient={authClient}
   localization={{
     SIGN_IN: 'Welcome Back',
     SIGN_UP: 'Create Account',
@@ -114,7 +114,7 @@ function App() {
 **Custom sign-up fields:**
 ```tsx
 <NeonAuthUIProvider
-  authClient={auth}
+  authClient={authClient}
   additionalFields={{
     company: {
       label: 'Company',

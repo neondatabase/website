@@ -19,19 +19,21 @@ Update user profile fields like name, image, or phone number using `updateUser()
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx
+import { authClient } from './auth';
+
 const handleUpdateProfile = async (e) => {
   e.preventDefault();
   setMessage('');
 
   try {
-    const { data, error } = await auth.updateUser({
+    const { data, error } = await authClient.updateUser({
       name: 'New Name',
     });
 
     if (error) throw error;
 
     // Refresh session to get updated user data
-    const sessionResult = await auth.getSession();
+    const sessionResult = await authClient.getSession();
     if (sessionResult.data?.session) {
       setUser(sessionResult.data.session.user);
       setMessage('Profile updated successfully!');
@@ -61,12 +63,14 @@ Change a user's password while they are logged in using `changePassword()`. This
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx
+import { authClient } from './auth';
+
 const handleChangePassword = async (e) => {
   e.preventDefault();
   setMessage('');
 
   try {
-    const { data, error } = await auth.changePassword({
+    const { data, error } = await authClient.changePassword({
       newPassword: 'new-secure-password',
       currentPassword: 'current-password',
     });
@@ -88,7 +92,7 @@ Optionally sign out from all other devices when changing the password:
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx
-const { data, error } = await auth.changePassword({
+const { data, error } = await authClient.changePassword({
   newPassword: 'new-secure-password',
   currentPassword: 'current-password',
   revokeOtherSessions: true, // Signs out all other devices
@@ -108,8 +112,10 @@ After updating profile information, refresh the session to get the latest user d
 <CodeWithLabel label="src/App.jsx">
 
 ```jsx
+import { authClient } from './auth';
+
 const refreshUser = async () => {
-  const { data } = await auth.getSession();
+  const { data } = await authClient.getSession();
   if (data?.session) {
     setUser(data.session.user);
   }

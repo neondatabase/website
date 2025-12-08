@@ -83,9 +83,9 @@ Create a `src/auth.js` file:
   <RightCode label="src/auth.js">
 
 ```javascript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
-export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
   </RightCode>
@@ -101,7 +101,7 @@ Replace the contents of `src/App.jsx` with the following code to implement sign-
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 export default function App() {
   const [session, setSession] = useState(null);
@@ -112,7 +112,7 @@ export default function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    auth.getSession().then((result) => {
+    authClient.getSession().then((result) => {
       if (result.data?.session && result.data?.user) {
         setSession(result.data.session);
         setUser(result.data.user);
@@ -124,15 +124,15 @@ export default function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = isSignUp
-      ? await auth.signUp.email({ name: email.split('@')[0] || 'User', email, password })
-      : await auth.signIn.email({ email, password });
+      ? await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password })
+      : await authClient.signIn.email({ email, password });
     
     if (result.error) {
       alert(result.error.message);
       return;
     }
     
-    const sessionResult = await auth.getSession();
+    const sessionResult = await authClient.getSession();
     if (sessionResult.data?.session && sessionResult.data?.user) {
       setSession(sessionResult.data.session);
       setUser(sessionResult.data.user);
@@ -140,7 +140,7 @@ export default function App() {
   };
 
   const handleSignOut = async () => {
-    await auth.signOut();
+    await authClient.signOut();
     setSession(null);
     setUser(null);
   };

@@ -402,15 +402,15 @@ export const stackClientApp = new StackClientApp({
 
 ```tsx
 // src/auth.ts
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
-export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
 </CodeTabs>
 
 **What changed**  
-You replace the Stack Auth client app with a Better Auth `auth` client wired to your Neon Auth URL.
+You replace the Stack Auth client app with a Better Auth `authClient` wired to your Neon Auth URL.
 
 ### Replace components (#react-replace-components)
 
@@ -434,13 +434,13 @@ export function MyComponent() {
 
 ```tsx
 import { useState, useEffect } from 'react';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 export function MyComponent() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    auth.getSession().then(({ data }) => {
+    authClient.getSession().then(({ data }) => {
       if (data?.session?.user) {
         setUser(data.session.user);
       }
@@ -454,7 +454,7 @@ export function MyComponent() {
 </CodeTabs>
 
 **What changed**  
-Instead of a React hook from Stack Auth, you call `auth.getSession()` and manage the session in your own component state.
+Instead of a React hook from Stack Auth, you call `authClient.getSession()` and manage the session in your own component state.
 
 ### Update provider setup (#react-update-provider)
 
@@ -476,10 +476,10 @@ function App() {
 ```tsx
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import '@neondatabase/neon-auth-ui/css';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 function App() {
-  return <NeonAuthUIProvider authClient={auth}>{/* Your app */}</NeonAuthUIProvider>;
+  return <NeonAuthUIProvider authClient={authClient}>{/* Your app */}</NeonAuthUIProvider>;
 }
 ```
 
@@ -516,13 +516,13 @@ If you're using React Router, pass navigation helpers to the provider.
 ```tsx
 import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
 import { useNavigate, Link } from 'react-router-dom';
-import { auth } from './auth';
+import { authClient } from './auth';
 
 function App() {
   const navigate = useNavigate();
 
   return (
-    <NeonAuthUIProvider authClient={auth} navigate={navigate} Link={Link}>
+    <NeonAuthUIProvider authClient={authClient} navigate={navigate} Link={Link}>
       {/* Your app */}
     </NeonAuthUIProvider>
   );
