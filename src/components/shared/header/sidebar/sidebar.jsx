@@ -62,7 +62,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
     {!isClient && (
       <Link
         className={clsx(
-          'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200 ',
+          'group flex items-center gap-1.5 text-[14px] tracking-extra-tight transition-colors duration-200',
           simpleMode
             ? 'hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
             : 'text-black-pure hover:text-gray-new-20 dark:text-white hover:dark:text-gray-new-70',
