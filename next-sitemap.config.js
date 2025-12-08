@@ -8,7 +8,6 @@ module.exports = {
     '**/*.xml',
 
     // Blog pages (handled by blog-sitemap.xml)
-    '/blog-sitemap.xml',
     '/blog/*',
 
     // PostgreSQL Tutorial (handled by sitemap-postgres.xml)
@@ -28,11 +27,6 @@ module.exports = {
     '/radio',
     '/stackoverflow',
     '/youtube',
-
-    // Other pages
-    '/guides/rss.xml',
-    '/postgresql/rss.xml',
-    '/enterprise',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -55,13 +49,6 @@ module.exports = {
           '/radio$',
           '/stackoverflow$',
           '/youtube$',
-
-          // Other pages
-          '/docs/postgres*',
-          '/cfe$',
-          '/devs$',
-          '/home$',
-          '/enterprise$',
         ],
       },
     ],
