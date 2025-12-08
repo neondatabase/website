@@ -27,8 +27,6 @@ When a client sends a valid Bearer token, the API switches to the `authenticated
 - The JWT token identifies _who_ the user is (via the `sub` claim).
 - The `authenticated` role defines _what_ the application is allowed to touch.
 
-> The `anonymous` role is currently under development and is not available in the current release.
-
 ### 2. The `anonymous` role
 
 **Used for:** Requests without a token.
@@ -36,6 +34,7 @@ If a request arrives with no `Authorization` header, the API switches to the `an
 
 - By default, this role has **no permissions**.
 - You can explicitly `GRANT` SELECT permissions to this role if you want to expose public data (e.g., a list of products or public blog posts) without requiring users to log in.
+- The `GRANT` statements would be similar to the grants for the `authenticated` role. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for an example.
 
 ### 3. Custom roles
 
@@ -49,13 +48,13 @@ Before RLS can even apply, the database role must have permission to perform the
 
 ### Automatic configuration
 
-When you enable the Data API via the Console, Neon automatically applies default `GRANT` statements to the `authenticated` role for the `public` schema.
+When you enable the Data API via the Console, Neon automatically applies default `GRANT` statements to the `authenticated` role for the `public` schema. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for the statements that are applied.
 
 ### Manual configuration
 
-If you create new tables manually via SQL, or if you skipped the default setup, you may need to grant permissions explicitly.
+If you skipped the default Data API setup or you are adding custom roles or working with schemas other than `public`, you may need to grant permissions explicitly.
 
-The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (e.g., `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (e.g., `admin`), ensuring the role exists in your database.
+The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (e.g., `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (e.g., `admin`), but you must ensure that the role exists in your database.
 
 Run these commands in the [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) to ensure your API users can access your tables:
 

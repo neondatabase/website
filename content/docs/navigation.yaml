@@ -346,10 +346,10 @@
               slug: data-api/overview
             - title: Get started
               slug: data-api/get-started
-            - title: Access control & security
-              slug: data-api/access-control
             - title: Building a note-taking app
               slug: data-api/demo
+            - title: Access control & security
+              slug: data-api/access-control
             - title: Secure your app with RLS
               slug: guides/rls-tutorial
             - title: SQL to PostgREST Converter
