@@ -43,7 +43,8 @@ const CTA = () => (
             webm: ffmpeg -i cta-origin.mp4 -c:v libvpx-vp9 -crf 36 -vf scale=3840:-2 -deadline best -an cta.webm
         */}
       <PauseableVideo
-        className="left-1/2 w-fit -translate-x-1/2 lg:w-[1024px]"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px]"
+        videoClassName="size-full object-cover"
         width={1920}
         height={944}
         poster="/videos/pages/home-new/cta/poster.jpg"
