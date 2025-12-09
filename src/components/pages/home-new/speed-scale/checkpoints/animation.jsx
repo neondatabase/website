@@ -83,8 +83,8 @@ const Animation = () => {
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div
         className={clsx(
-          'pointer-events-none relative left-1/2 mx-auto aspect-[1920/500] w-full max-w-[1920px] -translate-x-1/2',
-          'xl:aspect-[1024/356] xl:h-auto xl:w-full lg:aspect-[768/280] md:aspect-[320/170] sm:w-[640px]',
+          'pointer-events-none relative mx-auto aspect-[1920/500] w-full max-w-[1920px]',
+          'xl:aspect-[1024/356] xl:h-auto xl:w-full lg:aspect-[768/280] md:aspect-[320/170] sm:left-1/2 sm:w-[640px] sm:-translate-x-1/2',
           '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
         ref={animationRef}

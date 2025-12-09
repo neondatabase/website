@@ -26,7 +26,7 @@ const AI = () => (
           <div className="pointer-events-none relative w-full md:hidden">
             <Animation />
             <Image
-              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-gray-new-30"
+              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-1 outline-gray-new-30"
               src={bg}
               alt=""
               width={1056}
