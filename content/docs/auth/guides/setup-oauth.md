@@ -2,16 +2,20 @@
 title: Set up OAuth
 subtitle: Add Google or GitHub sign-in to your application
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
 OAuth lets users sign in with their Google or GitHub account. Neon Auth handles the OAuth flow and creates a session after authorization.
 
 ## Development mode
 
-OAuth providers (Google and GitHub) are enabled by default with shared credentials. This means you can start using OAuth in your app immediately. When you call `signIn.social()` with `"google"` or `"github"`, it works right away using Neon's shared keys.
+Google OAuth is enabled by default with shared credentials for development and testing. You can start using Google sign-in immediately without any configuration.
 
-These shared credentials are intended for development and testing only. For [production](#production-setup), configure your own OAuth app credentials.
+<Admonition type="note">
+GitHub OAuth requires custom credentials and is not available with shared credentials. See [Production setup](#production-setup) to configure GitHub OAuth.
+</Admonition>
+
+For production, configure your own OAuth app credentials for both providers. See [Production setup](#production-setup) below.
 
 ## Sign in with OAuth
 
@@ -55,6 +59,10 @@ const handleGitHubSignIn = async () => {
 
 </CodeWithLabel>
 
+<Admonition type="note">
+GitHub OAuth requires custom credentials to be configured. Google OAuth works with shared credentials for development.
+</Admonition>
+
 ## Handle the callback
 
 After the provider redirects back to your app, check for a session:
@@ -95,14 +103,14 @@ await authClient.signIn.social({
 
 ## Production setup
 
-OAuth providers are enabled by default with shared keys. For production, configure your own OAuth app credentials:
+For production, configure your own OAuth app credentials. GitHub OAuth requires custom credentials (shared credentials are not available), and Google OAuth should use custom credentials for production.
 
 1. Create OAuth apps with your providers:
    - [Google OAuth setup](https://developers.google.com/identity/protocols/oauth2/web-server)
    - [GitHub OAuth setup](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-an-oauth-app)
 2. In your project's **Settings** → **Auth** page, configure your Client ID and Client Secret for each provider
 
-Your app will automatically use your configured credentials instead of the shared keys.
+Your app will automatically use your configured credentials. For Google, custom credentials replace the shared keys. For GitHub, custom credentials are required.
 
 <DetailIconCards>
 

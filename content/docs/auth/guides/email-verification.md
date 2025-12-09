@@ -8,10 +8,10 @@ updatedOn: '2025-11-19T00:00:00.000Z'
 Email verification ensures users own the email addresses they register with. Neon Auth supports two verification methods:
 
 - **Verification codes** (users enter a numeric code from their email) - works with shared or custom email providers
-- **Verification links** (users click a link in their email) - requires a custom email provider
+- **Magic links** (users click a link in their email) - requires a custom email provider
 
 <Admonition type="note">
-Verification links require a [custom email provider](/docs/auth/guides/configure-email-provider). If you're using the shared email provider, use verification codes instead.
+Magic links require a [custom email provider](/docs/auth/production-checklist#email-provider). If you're using the shared email provider, use verification codes instead.
 </Admonition>
 
 ## Enable email verification
@@ -20,15 +20,15 @@ In your project's **Settings** → **Auth** page, enable **Sign-up with Email** 
 
 ![Email verification settings in Neon Console](/docs/auth/email-verification-settings.png)
 
-## Verification links
+## Magic links
 
-Verification links require a custom email provider. See [Configure email provider](/docs/auth/guides/configure-email-provider) to set this up.
+Magic links require a custom email provider. See [Email provider configuration](/docs/auth/production-checklist#email-provider) to set this up.
 
-When a user clicks the verification link in their email, the Neon Auth server handles verification and redirects them back to your application. Your app checks for the new session and shows the appropriate UI.
+When a user clicks the magic link in their email, the Neon Auth server handles verification and redirects them back to your application. Your app checks for the new session and shows the appropriate UI.
 
 ### 1. Check session on mount (#check-session-on-mount)
 
-Add a session check when your component mounts to detect when a user returns from clicking the verification link:
+Add a session check when your component mounts to detect when a user returns from clicking the magic link:
 
 <CodeWithLabel label="src/App.jsx">
 
@@ -75,7 +75,7 @@ const handleSignUp = async (e) => {
 
     // Check if email verification is required
     if (data?.user && !data.user.emailVerified) {
-      setMessage('Check your email for a verification link!');
+      setMessage('Check your email for a magic link!');
     } else {
       setMessage('Account created! Please sign in.');
     }
@@ -205,7 +205,7 @@ if (data?.user && !data.user.emailVerified) {
 
 ## Resending verification emails
 
-Both verification links and codes expire after **15 minutes**. Allow users to request a new one:
+Both magic links and verification codes expire after **15 minutes**. Allow users to request a new one:
 
 <CodeWithLabel label="src/App.jsx">
 
@@ -227,7 +227,7 @@ const handleResend = async () => {
 
 </CodeWithLabel>
 
-The server sends whichever type (link or code) you configured in the Console.
+The server sends whichever type (magic link or verification code) you configured in the Console.
 
 ## Required vs optional verification
 

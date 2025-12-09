@@ -1,16 +1,16 @@
 ---
 title: UI Components Reference
-subtitle: Quick reference for @neondatabase/neon-auth-ui components
+subtitle: Quick reference for Neon Auth UI components
 enableTableOfContents: true
-updatedOn: '2025-12-03T00:00:00.000Z'
+updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
-Quick reference for `@neondatabase/neon-auth-ui` components. These components are built with [Better Auth UI](https://better-auth-ui.com/) and work with any Neon Auth adapter (Supabase, Better Auth, etc.).
+Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These components are built with [Better Auth UI](https://better-auth-ui.com/) and work with Neon Auth.
 
 ## Installation
 
 ```bash
-npm install @neondatabase/neon-auth-ui
+npm install @neondatabase/neon-js
 ```
 
 ## Provider Setup
@@ -20,9 +20,9 @@ Wrap your app with `NeonAuthUIProvider` to enable the UI components. The provide
 ### Basic Setup
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
-import { authClient } from './auth'; // Your auth client from @neondatabase/neon-js
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import '@neondatabase/neon-js/ui/css';
+import { authClient } from './auth';
 
 function App() {
   return (
@@ -51,7 +51,7 @@ function App() {
 To enable Google sign-in (or other OAuth providers), add the `social` prop to the provider:
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
 import { authClient } from './auth';
 
 function App() {
@@ -68,14 +68,14 @@ function App() {
 }
 ```
 
-**Note:** Google and GitHub OAuth providers are enabled by default with shared credentials for development. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure your own OAuth credentials in the Neon Console (Settings → Auth). See the [OAuth setup guide](/docs/auth/guides/setup-oauth) for details.
+**Note:** Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials. The `social.providers` prop controls which provider buttons are displayed in the UI. For production, configure your own OAuth credentials in the Neon Console (Settings → Auth). See the [OAuth setup guide](/docs/auth/guides/setup-oauth) for details.
 
 ### React Router Integration
 
 If using React Router, pass the `navigate` function and a custom `Link` component:
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { authClient } from './auth';
 
@@ -129,7 +129,7 @@ function App() {
 >
 ```
 
-For complete prop documentation, see the TypeScript types exported from `@neondatabase/neon-auth-ui`.
+For complete prop documentation, see the TypeScript types exported from `@neondatabase/neon-js/auth/react`.
 
 ## Core Components
 
@@ -159,7 +159,7 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 Components use Tailwind CSS v4. Import the stylesheet:
 
 ```tsx
-import '@neondatabase/neon-auth-ui/css';
+import '@neondatabase/neon-js/ui/css';
 ```
 
 For customization options, see **Styling** details within each Better Auth UI component docs page. Example: [Auth View styling](https://better-auth-ui.com/components/auth-view#styling).
@@ -169,34 +169,34 @@ For customization options, see **Styling** details within each Better Auth UI co
 ### Basic Auth Flow
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
+import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import '@neondatabase/neon-js/ui/css';
 
 function App() {
-  return <AuthView />;
+  return <AuthView pathname="sign-in" />;
 }
 ```
 
 ### User Menu
 
 ```tsx
-import { UserButton } from '@neondatabase/neon-auth-ui';
+import { UserButton } from '@neondatabase/neon-js/auth/react/ui';
+import { authClient } from './auth';
 
 function Header() {
   return (
     <header>
-      <UserButton size="icon" />
+      <UserButton authClient={authClient} />
     </header>
   );
 }
 ```
 
-**Note:** The `size` prop defaults to `'icon'` but should be explicitly set to suppress deprecation warnings.
 
 ### Protected Route
 
 ```tsx
-import { SignedIn, SignedOut, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import { SignedIn, SignedOut, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
 
 function Dashboard() {
   return (

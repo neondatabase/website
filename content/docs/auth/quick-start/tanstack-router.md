@@ -303,6 +303,5 @@ SELECT * FROM neon_auth.user;
 
 ## Next steps
 
-- [Learn about Neon Auth concepts](/docs/auth/overview)
-- [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
-- [View complete SDK reference](/docs/reference/javascript-sdk)
+- [Add email verification](/docs/auth/guides/email-verification)
+- [Learn how to branch your auth](/docs/auth/branching-authentication)

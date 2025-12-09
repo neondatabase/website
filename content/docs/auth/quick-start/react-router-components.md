@@ -254,5 +254,5 @@ SELECT * FROM neon_auth.user;
 
 ## Next steps
 
-- [Add email verification](/docs/auth/guides/email-verification) to ensure users own their email addresses
-- [View complete SDK reference](/docs/reference/javascript-sdk)
+- [Add email verification](/docs/auth/guides/email-verification)
+- [Learn how to branch your auth](/docs/auth/branching-authentication)
