@@ -13,7 +13,7 @@ const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode
 
 const AI = () => (
   <section
-    className="ai safe-paddings relative scroll-mt-[60px] py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
+    className="ai safe-paddings relative scroll-mt-[60px] overflow-hidden py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
     id="ai"
   >
     <Container
