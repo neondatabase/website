@@ -43,13 +43,28 @@ const CTA = () => (
             webm: ffmpeg -i cta-origin.mp4 -c:v libvpx-vp9 -crf 36 -vf scale=3840:-2 -deadline best -an cta.webm
         */}
       <PauseableVideo
-        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px]"
+        className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
         videoClassName="size-full object-cover"
         width={1920}
         height={944}
       >
         <source src="/videos/pages/home-new/cta/cta.mp4" type="video/mp4" />
         <source src="/videos/pages/home-new/cta/cta.webm" type="video/webm" />
+      </PauseableVideo>
+
+      {/*
+          Mobile video optimization parameters:
+            mp4: ffmpeg -i footer-crop.mov -c:v libx265 -crf 26 -vf scale=1888:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
+            webm: ffmpeg -i footer-crop.mov -c:v libvpx-vp9 -crf 35 -vf scale=1888:-2 -deadline best -an cta.webm
+        */}
+      <PauseableVideo
+        className="hidden aspect-square w-screen min-w-[510px] md:block"
+        videoClassName="size-full object-cover"
+        width={944}
+        height={944}
+      >
+        <source src="/videos/pages/home-new/cta/cta-md.mp4" type="video/mp4" />
+        <source src="/videos/pages/home-new/cta/cta-md.webm" type="video/webm" />
       </PauseableVideo>
     </div>
   </section>
