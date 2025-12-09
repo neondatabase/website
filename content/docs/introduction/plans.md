@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-12-08T15:42:48.688Z'
+updatedOn: '2025-12-09T15:31:41.488Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -37,7 +37,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 
 | Plan feature                                          | **Free**                     | **Launch**                           | **Scale**                                                                                         |
 | ----------------------------------------------------- | ---------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
-| [Price](#price)                                       | $0/month                     | $5/month minimum                     | $5/month minimum                                                                                  |
+| [Price](#price)                                       | $0/month                     | Pay for what you use                 | Pay for what you use                                                                              |
 | [Who it's for](#who-its-for)                          | Prototypes and side projects | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
 | [Projects](#projects)                                 | 80                           | 100                                  | 1,000 (can be increased on request)                                                               |
 | [Branches](#branches)                                 | 10/project                   | 10/project                           | 25/project                                                                                        |
@@ -66,19 +66,19 @@ Learn how to manage your Neon costs effectively with our [cost optimization guid
 
 ### ☑ Price
 
-**Price** is the minimum monthly fee for the plan. This is the minimum amount you'll be billed if your usage is less than $5.
+On **Launch** and **Scale** plans, you pay only for what you use — there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
-> If you sign up for a paid plan part way through the month, the minimum monthly fee amount is proroated from the sign-up date.
-
-For **Launch** and **Scale**, the minimum monthly fee is $5. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+<Admonition type="note">
+Invoices under $0.50 are not collected.
+</Admonition>
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
 ### ☑ Who it's for
 
 - **Free** — Prototypes, side projects, and quick experiments. Includes 80 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
-- **Launch** — Startups and growing teams needing more resources, features, and flexibility. Usage-based pricing starts at $5/month.
-- **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Usage-based pricing starts at $5/month.
+- **Launch** — Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
+- **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
 ### ☑ Projects
 
@@ -326,7 +326,6 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 | **Storage (child branches, GB-month)** | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
 | **Public network transfer (GB)**       | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
 | **Private network transfer (GB)**      | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
-| **Minimum spend**                      | Minimum monthly fee for the plan before usage-based charges. [Learn more](/docs/introduction/plans#price).                                                                |
 
 ## Usage-based cost examples
 
@@ -336,7 +335,7 @@ The following examples show what your monthly bill might look like on the **Laun
 
 ### Launch plan
 
-- **Example 1 (less than $5 usage)**
+- **Example 1 (light usage)**
   - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.06**  
     _(10 CU-hours × $0.106/CU-hour)_
   - Root branch storage: 2 GB — **$0.70**  
@@ -346,9 +345,7 @@ The following examples show what your monthly bill might look like on the **Laun
   - Instant restore history: 1 GB — **$0.20**  
     _(1 GB × $0.20/GB-month)_
 
-    **Subtotal:** **$2.31**  
-    **Minimum monthly fee:** **$5.00**  
-    **Amount due:** **$5.00**
+    **Amount due:** **$2.31**
 
 - **Example 2**
   - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$12.72**  
@@ -465,11 +462,8 @@ What is the difference between root and child branch storage billing?
 Can I get more than the listed project limit?
 : Yes, on Scale you can request increases for projects beyond the listed limit.
 
-Why is the monthly minimum the same for Launch and Scale?
-: Both plans have a $5/month minimum, but Scale has a higher CU-hour rate. This keeps fixed costs low while letting usage-based charges reflect the higher availability, security, and features of Scale.
-
-How is the monthly base fee prorated?
-: If you upgrade partway through a billing cycle, the $5 minimum is prorated based on the remaining days in the month.
+Why is the compute rate higher on Scale than Launch?
+: Scale includes higher availability, advanced security features, compliance certifications, and SLAs. The higher CU-hour rate reflects these additional capabilities.
 
 How can I control my costs?
 : • Set a maximum autoscaling limit to cap compute size.  

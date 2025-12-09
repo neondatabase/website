@@ -11,13 +11,13 @@ export default {
     },
     launch: {
       label: 'Launch',
-      price: '<span>Usage-based</span>, $5/mo min.',
+      price: '<span>Usage-based</span>',
       buttonUrl: LINKS.signup,
       buttonText: 'Get started',
     },
     scale: {
       label: 'Scale',
-      price: '<span>Usage-based</span>, $5/mo min.',
+      price: '<span>Usage-based</span>',
       buttonUrl: LINKS.signup,
       buttonText: 'Get started',
     },
