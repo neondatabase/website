@@ -30,13 +30,13 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
 <TwoColumnStep title="Create a Next.js app">
   <LeftContent>
 
-Create a Next.js app.
+Create a Next.js app. Replace `my-app` with your preferred project name:
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npx create-next-app@latest neon-auth-nextjs --yes
+npx create-next-app@latest my-app --yes
 ```
 
   </RightCode>
@@ -51,7 +51,7 @@ Install the Neon Auth SDK and UI library:
   <RightCode label="Terminal">
 
 ```bash
-cd neon-auth-nextjs && npm install @neondatabase/neon-auth-next @neondatabase/neon-auth-ui
+cd my-app && npm install @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -70,7 +70,7 @@ Replace the URL with your actual Auth URL from the Neon Console.
   <RightCode label=".env">
 
 ```bash
-NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
   </RightCode>
@@ -86,7 +86,7 @@ Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at 
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-auth-ui/tailwind'; // [!code ++]
+@import '@neondatabase/neon-js/ui/css'; // [!code ++]
 
 // Your existing styles...
 ```
@@ -105,7 +105,7 @@ Create a `lib/auth/client.ts` file to initialize the auth client:
 ```typescript
 'use client';
 
-import { createAuthClient } from '@neondatabase/neon-auth-next';
+import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 
 export const authClient = createAuthClient();
 ```
@@ -122,9 +122,9 @@ Create an API route to handle authentication requests. Create `app/api/auth/[...
   <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { toNextJsHandler } from '@neondatabase/neon-auth-next';
+import { authApiHandler } from '@neondatabase/neon-js/auth/next';
 
-export const { GET, POST } = toNextJsHandler(process.env.NEON_AUTH_BASE_URL!);
+export const { GET, POST } = authApiHandler();
 ```
 
   </RightCode>
@@ -141,7 +141,7 @@ Create a provider component to wrap your application with authentication context
 ```tsx
 'use client';
 
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
 
@@ -227,7 +227,7 @@ Create a page to handle authentication views (sign in, sign up, etc.). Create `a
   <RightCode label="app/auth/[path]/page.tsx">
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
 
 export const dynamicParams = false;
 
@@ -254,7 +254,8 @@ Create a page for user account management. Create `app/account/[path]/page.tsx`:
   <RightCode label="app/account/[path]/page.tsx">
 
 ```tsx
-import { AccountView, accountViewPaths } from '@neondatabase/neon-auth-ui';
+import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+import { accountViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
 
 export const dynamicParams = false;
 
@@ -298,7 +299,7 @@ Use `SignedIn` and `RedirectToSignIn` components to protect pages at the compone
 ```tsx
 'use client';
 
-import { SignedIn, RedirectToSignIn, UserButton } from '@neondatabase/neon-auth-ui';
+import { SignedIn, RedirectToSignIn, UserButton } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from '@/lib/auth/client';
 
 export default function Home() {
@@ -352,7 +353,7 @@ export default function Home() {
 Use Next.js middleware to protect routes at the edge before they reach your page components. Create a `proxy.ts` file in your project root:
 
 ```typescript
-import { neonAuthMiddleware } from '@neondatabase/neon-auth-next';
+import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
 
 export default neonAuthMiddleware({
   loginUrl: '/auth/sign-in',
@@ -416,11 +417,9 @@ export default function ProtectedPage() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server:
+Start the development server, then open `http://localhost:3000`.
 
-If you're using **component-level protection**, open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
-
-If you're using **middleware protection**, go to `http://localhost:3000/only-for-authenticated-users` to test the protected route. You should be redirected to the sign-in page there as well.
+If you're using middleware protection, you can test the protected route at `http://localhost:3000/only-for-authenticated-users`.
 
   </LeftContent>
   <RightCode label="Terminal">

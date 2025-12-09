@@ -25,7 +25,7 @@ Choose a framework to get started:
 
 <a href="/docs/auth/quick-start/react" description="Single-page app with sign-up and sign-in" icon="atom">React</a>
 
-<a href="/docs/auth/quick-start/react-router" description="Multi-page React application with routing" icon="atom">React Router</a>
+<a href="/docs/auth/quick-start/react-router-components" description="Multi-page React application with routing" icon="atom">React Router</a>
 
 <a href="/docs/auth/quick-start/tanstack-router" description="Multi-page React application with routing" icon="atom">TanStack Router</a>
 

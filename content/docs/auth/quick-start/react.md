@@ -34,7 +34,7 @@ Create a React app using Vite.
   <RightCode label="Terminal">
 
 ```bash
-npm create vite@latest my-app -- --template react
+bunx create-vite my-app --template react
 ```
 
   </RightCode>
@@ -49,7 +49,7 @@ Install the Neon SDK:
   <RightCode label="Terminal">
 
 ```bash
-cd my-app && npm install @neondatabase/neon-js
+cd my-app && bun add @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -68,7 +68,7 @@ Replace the URL with your actual Auth URL from the Neon Console.
   <RightCode label=".env">
 
 ```bash
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
   </RightCode>
@@ -191,15 +191,13 @@ export default function App() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server:
-
-Open your browser to `http://localhost:5173` and create a test user.
+Start the development server, then open [http://localhost:5173](http://localhost:5173) to create a test user.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npm run dev
+bun run dev
 ```
 
   </RightCode>

@@ -34,7 +34,7 @@ Create a React app using Vite with TypeScript.
   <RightCode label="Terminal">
 
 ```bash
-npm create vite@latest my-app -- --template react-ts
+bunx create-vite my-app --template react-ts
 ```
 
   </RightCode>
@@ -50,7 +50,7 @@ Install the Neon SDK, UI components, and React Router:
 
 ```bash
 cd my-app
-npm install @neondatabase/neon-js react-router-dom
+bun add @neondatabase/neon-js react-router-dom
 ```
 
   </RightCode>
@@ -69,7 +69,7 @@ Replace the URL with your actual Auth URL from the Neon Console.
   <RightCode label=".env">
 
 ```bash
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
   </RightCode>
@@ -111,11 +111,11 @@ import { authClient } from './auth';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <NeonAuthUIProvider authClient={authClient}>
+    <NeonAuthUIProvider authClient={authClient}>
+      <BrowserRouter>
         <App />
-      </NeonAuthUIProvider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </NeonAuthUIProvider>
   </StrictMode>
 );
 ```
@@ -144,7 +144,7 @@ import {
   SignedIn,
   UserButton,
   RedirectToSignIn,
-} from '@neondatabase/neon-auth-ui';
+} from '@neondatabase/neon-js/auth/react/ui';
 
 function Home() {
   return (
@@ -221,20 +221,13 @@ export default function App() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server and open [http://localhost:5173](http://localhost:5173):
-
-<ul>
-<li>The app redirects to the sign-in page.</li>
-<li>Sign up or sign in with a test email and password.</li>
-<li>After authenticating, you return to the home page with a welcome message and user button.</li>
-<li>Click the user button to access account settings or sign out.</li>
-</ul>
+Start the development server, then open [http://localhost:5173](http://localhost:5173). You'll be redirected to the sign-in page where you can sign up or sign in.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npm run dev
+bun run dev
 ```
 
   </RightCode>

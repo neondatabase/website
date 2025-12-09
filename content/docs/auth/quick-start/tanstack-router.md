@@ -34,7 +34,7 @@ Create a new TanStack Router app using the file-router template.
   <RightCode label="Terminal">
 
 ```bash
-npx create-tsrouter-app@latest my-app --template file-router --tailwind
+bunx create-tsrouter-app@latest my-app --template file-router --tailwind
 ```
 
   </RightCode>
@@ -49,7 +49,7 @@ Install the Neon Auth SDK and UI library:
   <RightCode label="Terminal">
 
 ```bash
-cd my-app && npm install @neondatabase/neon-auth-ui @neondatabase/neon-js
+cd my-app && bun add @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -68,7 +68,7 @@ Replace the URL with your actual Auth URL from the Neon Console.
   <RightCode label=".env">
 
 ```bash
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
   </RightCode>
@@ -84,7 +84,7 @@ Import the Neon Auth UI styles in your `src/styles.css` file. Add this line at t
 
 ```css
 @import 'tailwindcss';
-@import '@neondatabase/neon-auth-ui/css'; // [!code ++]
+@import '@neondatabase/neon-js/ui/css'; // [!code ++]
 
 // Your existing styles...
 ```
@@ -101,9 +101,9 @@ Create a `src/auth.ts` file to initialize the auth client:
   <RightCode label="src/auth.ts">
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
-export const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
   </RightCode>
@@ -121,12 +121,12 @@ Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. 
 import { Outlet, createRootRoute } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import { TanStackDevtools } from '@tanstack/react-devtools';
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import { auth } from '../auth';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import { authClient } from '../auth';
 
 export const Route = createRootRoute({
   component: () => (
-    <NeonAuthUIProvider authClient={auth}>
+    <NeonAuthUIProvider authClient={authClient}>
       <Outlet />
       <TanStackDevtools
         config={{
@@ -157,7 +157,7 @@ Create a route to handle authentication views (sign in, sign up, etc.). Create `
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
 
 export const Route = createFileRoute('/auth/$pathname')({
   component: Auth,
@@ -193,7 +193,7 @@ Create a route to handle account management views. Create `src/routes/account.$p
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
-import { AccountView } from '@neondatabase/neon-auth-ui';
+import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
 
 export const Route = createFileRoute('/account/$pathname')({
   component: Account,
@@ -231,7 +231,7 @@ Update `src/routes/index.tsx` to protect the home page:
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
-import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
 
 export const Route = createFileRoute('/')({
   component: Home,
@@ -270,15 +270,13 @@ function Home() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server:
-
-Open your browser to `http://localhost:3000`. You should be redirected to the sign-in page.
+Start the development server, then open [http://localhost:3000](http://localhost:3000). You'll be redirected to the sign-in page.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npm run dev
+bun run dev
 ```
 
   </RightCode>
