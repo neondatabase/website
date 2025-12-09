@@ -99,6 +99,14 @@ const faqItems = [
       `,
   },
   {
+    question: 'Why is the monthly minimum the same in the Launch plan vs. the Scale plan?',
+    answer: `
+      <p> Instead of charging a higher flat monthly fee, we’ve chosen to price the premium features of the Scale plan through compute usage - via a higher price per CU-hour.</p>
+      <p>This means you only pay more when you actually use the additional capabilities. You’re choosing to pay more for higher availability and enhanced security, which require operational redundancy on our side, while still keeping costs tied to your usage.
+      <a href="/blog/new-usage-based-pricing">Read more.</a></p>
+    `,
+  },
+  {
     question: 'How can I control my costs?',
     answer: `
       <p>Neon lets you control compute usage by setting a maximum autoscaling limit per branch. This acts as a de-facto cost ceiling - your database won’t scale beyond the limit, even if traffic spikes.</p>
