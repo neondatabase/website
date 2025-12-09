@@ -1,11 +1,13 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { useRef, useState, useEffect, Fragment } from 'react';
+import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-const HIGHLIGHT_COLOR = 'rgba(57, 165, 125, 0.6)';
+import AnimatedText from './animated-text';
+
+const FADE_DURATION = 0.3; // Duration for fade in/out animations in seconds
 
 const QUOTES = [
   {
@@ -36,9 +38,16 @@ const QUOTES = [
 
 const Quotes = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFirstShow, setIsFirstShow] = useState(true);
   const startTimeRef = useRef(Date.now());
   const pausedTimeRef = useRef(0);
   const frameRef = useRef(null);
+
+  useEffect(() => {
+    if (isFirstShow) {
+      setIsFirstShow(false);
+    }
+  }, [isFirstShow]);
 
   const [ref, isVisible] = useInView({
     threshold: 0.1,
@@ -80,57 +89,59 @@ const Quotes = () => {
       {QUOTES.map(({ text, highlight, author, post }, index) => {
         const isActive = index === currentIndex;
 
+        const highlightStart = text.indexOf(highlight);
+        const highlightEnd = highlightStart + highlight.length;
+
         return (
           <LazyMotion features={domAnimation} key={index}>
-            <m.figure
-              className={clsx(
-                'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
-                'font-mono-new tracking-extra-tight',
-                !isActive && 'pointer-events-none'
+            <AnimatePresence>
+              {isActive && (
+                <m.figure
+                  className={clsx(
+                    'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
+                    'font-mono-new tracking-extra-tight',
+                    !isActive && 'pointer-events-none'
+                  )}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                    transition: { delay: FADE_DURATION, duration: 0 },
+                  }}
+                  exit={{
+                    opacity: 0,
+                    transition: { duration: FADE_DURATION, ease: [0.17, 0.17, 0.83, 0.83] },
+                  }}
+                >
+                  <blockquote className="text-pretty text-xl leading-snug xl:text-lg lg:text-[15px]">
+                    <AnimatedText
+                      text={text}
+                      startDelay={0}
+                      highlightStart={highlightStart}
+                      highlightEnd={highlightEnd}
+                      skipAnimation={isFirstShow}
+                      fadeDelay={FADE_DURATION}
+                      isHighlighted
+                    />
+                  </blockquote>
+                  <figcaption className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm md:text-[13px]">
+                    <span className="block font-medium">
+                      <AnimatedText
+                        text={author}
+                        startDelay={text.length}
+                        skipAnimation={isFirstShow}
+                        fadeDelay={FADE_DURATION}
+                      />
+                    </span>
+                    <AnimatedText
+                      text={post}
+                      startDelay={text.length + author.length}
+                      skipAnimation={isFirstShow}
+                      fadeDelay={FADE_DURATION}
+                    />
+                  </figcaption>
+                </m.figure>
               )}
-              initial={index !== 0 && { y: 5, opacity: 0 }}
-              animate={{
-                y: isActive ? 0 : 5,
-                opacity: isActive ? 1 : 0,
-                transition: { duration: 0.3, delay: 0.15, ease: [0.19, 0.44, 0, 1] },
-              }}
-            >
-              <blockquote
-                className={clsx(
-                  'text-xl xl:text-lg lg:text-[15px]',
-                  'transition-[line-height] duration-300 ease-out',
-                  isActive ? 'leading-snug delay-150' : 'leading-dense'
-                )}
-              >
-                {text.split(highlight).map((part, partIndex, parts) => (
-                  <Fragment key={partIndex}>
-                    {part}
-                    {partIndex < parts.length - 1 && (
-                      <m.span
-                        className="relative -mx-1 px-1"
-                        animate={{
-                          backgroundImage: `linear-gradient(to right, ${HIGHLIGHT_COLOR}, ${HIGHLIGHT_COLOR} ${isActive ? '100%' : '0%'}, transparent ${isActive ? '100%' : '0%'})`,
-                          transition: { duration: 0.67, ease: [0.17, 0.17, 0.1, 1], delay: 0.35 },
-                        }}
-                      >
-                        {highlight}
-                      </m.span>
-                    )}
-                  </Fragment>
-                ))}
-              </blockquote>
-              <figcaption className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm md:text-[13px]">
-                <span className="font-medium">{author}</span> – {post}
-              </figcaption>
-              <m.span
-                className={clsx(
-                  'pointer-events-none absolute inset-0 h-[150%] bg-gradient-to-t from-transparent to-[#E4F1EB] to-30%',
-                  'transition-all duration-300 ease-[cubic-bezier(.19,.44,0,1)]',
-                  isActive ? '-translate-y-full delay-150' : 'translate-y-0'
-                )}
-                aria-hidden
-              />
-            </m.figure>
+            </AnimatePresence>
           </LazyMotion>
         );
       })}
