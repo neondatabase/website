@@ -54,7 +54,7 @@ const Hero = () => (
           'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
         )}
         width={1920}
-        height={832}
+        height={792}
         poster="/videos/pages/home-new/hero/poster.jpg"
       >
         <source src="/videos/pages/home-new/hero/hero.mp4" type="video/mp4" />
