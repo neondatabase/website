@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
-import bg from 'images/pages/home-new/ai/bg.jpg';
+import bg from 'images/pages/home-new/ai/bg.webp';
 import ideMobile from 'images/pages/home-new/ai/ide-mobile.jpg';
 
 import Heading from '../heading';
@@ -26,7 +26,7 @@ const AI = () => (
           <div className="pointer-events-none relative w-full md:hidden">
             <Animation />
             <Image
-              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2"
+              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 border border-gray-new-30"
               src={bg}
               alt=""
               width={1056}
@@ -38,8 +38,8 @@ const AI = () => (
             className="hidden md:block"
             src={ideMobile}
             alt="Neon in IDE"
-            width={727}
-            height={507}
+            width={640}
+            height={446}
             sizes="100vw"
             quality={100}
           />
