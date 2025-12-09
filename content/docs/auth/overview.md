@@ -3,9 +3,11 @@ title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
+redirectFrom:
+  - /docs/neon-auth/quick-start/nextjs
 ---
 
-Neon Auth is a managed authentication service that stores users, sessions, and OAuth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This enables isolated testing of real authentication workflows in preview environments.
+Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test test real authentication workflows in preview environments.
 
 ## Why Neon Auth?
 
@@ -20,9 +22,9 @@ Neon Auth is a managed authentication service that stores users, sessions, and O
 
 ## Built on Better Auth
 
-Neon Auth is powered by Better Auth, which means you get familiar APIs and can use Better Auth UI components.
+Neon Auth is powered by Better Auth, which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly for a headless setup with your own UI.
 
-## Quick example
+## Basic usage
 
 Enable Auth in your Neon project, then add authentication to your app:
 
@@ -69,21 +71,23 @@ export default function App() {
 
 See [Branching authentication](/docs/auth/branching-authentication) for details on how auth branches with your database.
 
-## Get started
+## Quick start guides
 
 Choose your framework to get started:
 
-<DetailIconCards>
+<TechCards>
 
-<a href="/docs/auth/quick-start/nextjs" description="Next.js app with authentication" icon="code">Next.js</a>
+<a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With pre-built UI components" icon="next-js"></a>
 
-<a href="/docs/auth/quick-start/react-router-components" description="Multi-page React application with routing" icon="code">React Router</a>
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js (headless)" description="Build your own auth UI" icon="next-js"></a>
 
-<a href="/docs/auth/quick-start/tanstack-router" description="Multi-page React application with routing" icon="code">TanStack Router</a>
+<a href="/docs/auth/quick-start/react" title="React" description="Build your own auth UI" icon="react"></a>
 
-<a href="/docs/auth/quick-start/react" description="Single-page app with sign-up and sign-in" icon="code">React</a>
+<a href="/docs/auth/quick-start/react-router-components" title="React Router" description="Multi-page app with UI components" icon="react"></a>
 
-</DetailIconCards>
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Multi-page app with UI components" icon="tanstack"></a>
+
+</TechCards>
 
 ## Availability
 

@@ -377,6 +377,9 @@
                   slug: auth/quick-start/tanstack-router
                 - title: Next.js
                   slug: auth/quick-start/nextjs
+                - title: Next.js (API-only)
+                  slug: auth/quick-start/nextjs-api-only
+                  tag: wip
 
             - section: Guides
               items:
