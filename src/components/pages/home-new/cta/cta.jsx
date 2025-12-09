@@ -47,7 +47,6 @@ const CTA = () => (
         videoClassName="size-full object-cover"
         width={1920}
         height={944}
-        poster="/videos/pages/home-new/cta/poster.jpg"
       >
         <source src="/videos/pages/home-new/cta/cta.mp4" type="video/mp4" />
         <source src="/videos/pages/home-new/cta/cta.webm" type="video/webm" />
