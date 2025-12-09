@@ -45,7 +45,7 @@ const Hero = () => (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
       {/*
         Video optimization parameters:
-          mp4: ffmpeg -i hero-origin.mp4 -c:v libx265 -crf 26 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
+          mp4: ffmpeg -i hero-origin.mp4 -c:v libx265 -crf 25 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
           webm: ffmpeg -i hero-origin.mp4 -c:v libvpx-vp9 -crf 35 -vf scale=3840:-2 -deadline best -an hero.webm
       */}
       <PauseableVideo
@@ -57,6 +57,10 @@ const Hero = () => (
         height={832}
         poster="/videos/pages/home-new/hero/poster.jpg"
       >
+        <source
+          src="/videos/pages/home-new/hero/hero-aom.mp4"
+          type="video/mp4; codecs=av01.0.05M.08,opus"
+        />
         <source src="/videos/pages/home-new/hero/hero.mp4" type="video/mp4" />
         <source src="/videos/pages/home-new/hero/hero.webm" type="video/webm" />
       </PauseableVideo>
