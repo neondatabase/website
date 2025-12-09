@@ -26,7 +26,7 @@ const AI = () => (
           <div className="pointer-events-none relative w-full md:hidden">
             <Animation />
             <Image
-              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 border border-gray-new-30"
+              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-gray-new-30"
               src={bg}
               alt=""
               width={1056}
@@ -44,7 +44,7 @@ const AI = () => (
             quality={100}
           />
         </div>
-        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:flex-col sm:items-start sm:gap-7">
+        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:-mx-6 sm:flex-col sm:items-start sm:gap-7">
           <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full sm:text-center">
             Connect MCP clients to Neon:
           </p>
