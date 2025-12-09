@@ -8,6 +8,7 @@ import {
   useRive,
   useViewModel,
   useViewModelInstance,
+  useViewModelInstanceNumber,
   useViewModelInstanceBoolean,
 } from '@rive-app/react-canvas';
 import { clsx } from 'clsx';
@@ -16,7 +17,7 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-const Animation = ({ className, src, autoBind = false }) => {
+const Animation = ({ className, state = 0 }) => {
   const [isReady, setIsReady] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [riveInstance, setRiveInstance] = useState(null);
@@ -29,11 +30,11 @@ const Animation = ({ className, src, autoBind = false }) => {
   });
 
   const { rive, RiveComponent } = useRive({
-    src,
+    src: '/animations/pages/home-new/autoscaling.riv',
     artboard: 'main',
     stateMachines: 'SM',
     autoplay: false,
-    autoBind,
+    autoBind: true,
     layout: new Layout({
       fit: Fit.Cover,
       alignment: Alignment.TopCenter,
@@ -68,6 +69,7 @@ const Animation = ({ className, src, autoBind = false }) => {
     viewModelInstance
   );
   const { setValue: setIsIntroInstance } = useViewModelInstanceBoolean('intro', viewModelInstance);
+  const { setValue: setStateInstance } = useViewModelInstanceNumber('state', viewModelInstance);
 
   useEffect(() => {
     setRiveInstance(rive);
@@ -98,6 +100,12 @@ const Animation = ({ className, src, autoBind = false }) => {
 
   useEffect(() => setIsMobileInstance(isMobile), [isMobile, setIsMobileInstance]);
 
+  useEffect(() => {
+    if (isLoaded) {
+      setStateInstance(state);
+    }
+  }, [state, isLoaded, setStateInstance]);
+
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
       <span className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
@@ -117,8 +125,7 @@ const Animation = ({ className, src, autoBind = false }) => {
 
 Animation.propTypes = {
   className: PropTypes.string,
-  src: PropTypes.string.isRequired,
-  autoBind: PropTypes.bool,
+  state: PropTypes.number,
 };
 
 export default Animation;
