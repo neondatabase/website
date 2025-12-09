@@ -5,7 +5,7 @@ import links from 'constants/links';
 import CopyCodeButton from './copy-code-button';
 
 const CTA = () => (
-  <section className="cta safe-paddings relative border-b border-gray-new-20">
+  <section className="cta safe-paddings relative">
     <div className="absolute inset-0 z-30 mx-auto flex max-w-[1920px] flex-col px-16 pb-9 pt-14 text-white xl:px-8 xl:pb-5 xl:pt-12 lg:pt-9 md:px-5 md:pb-6 md:pt-[52px]">
       <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
         Features of tomorrow. <br /> Available today.
