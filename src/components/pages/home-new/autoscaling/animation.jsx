@@ -19,7 +19,7 @@ const Animation = ({ className, state = 0 }) => {
   const isMobile = width ? width < 768 : false;
 
   const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
-    src: '/animations/pages/home-new/autoscaling.riv?20251210-1',
+    src: '/animations/pages/home-new/autoscaling.riv?20251210',
     autoBind: true,
     fit: Fit.Cover,
     triggerOnce: false,
