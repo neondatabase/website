@@ -456,6 +456,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/symfony.svg',
     darkIconPath: '/images/technology-logos/symfony-dark.svg',
   },
+  tanstack: {
+    name: 'tanstack',
+    lightIconPath: '/images/technology-logos/tanstack.svg',
+    darkIconPath: '/images/technology-logos/tanstack-dark.svg',
+  },
   typeorm: {
     name: 'typeorm',
     lightIconPath: '/images/technology-logos/typeorm.svg',
