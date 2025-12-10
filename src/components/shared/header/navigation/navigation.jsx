@@ -9,7 +9,6 @@ import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
-import ArrowTopRightIcon from 'icons/arrow-top-right.inline.svg';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 import MenuBanner from '../menu-banner';
@@ -246,9 +245,6 @@ const Navigation = () => {
               onMouseLeave={() => handleMenuLeave(hasSubmenu)}
             >
               <Button
-                ref={(el) => {
-                  menuButtonRefs.current[index] = el;
-                }}
                 className={clsx(
                   'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white focus-visible:outline-[revert] group-hover/main-nav:text-gray-new-70 xl:px-2.5',
                   {
@@ -259,6 +255,9 @@ const Navigation = () => {
                     'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
                   }
                 )}
+                ref={(el) => {
+                  menuButtonRefs.current[index] = el;
+                }}
                 aria-haspopup={hasSubmenu ? 'menu' : undefined}
                 aria-expanded={hasSubmenu ? isActive : undefined}
                 aria-controls={hasSubmenu ? `submenu-${index}` : undefined}
@@ -298,7 +297,7 @@ const Navigation = () => {
         onMouseEnter={handleSubmenuEnter}
         onMouseLeave={handleSubmenuLeave}
       >
-        <div ref={submenuContainerRef} className="relative w-full">
+        <div className="relative w-full" ref={submenuContainerRef}>
           {MENUS.header.map((menu, index) => {
             const isActive = activeMenuIndex === index;
             const sections = menu.sections || [];
@@ -306,21 +305,21 @@ const Navigation = () => {
 
             return (
               <div
-                key={index}
-                id={`submenu-${index}`}
-                role="navigation"
-                aria-label={menu.text}
                 className={clsx(
                   'absolute left-0 top-0 w-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
                   isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
                 )}
+                key={index}
+                id={`submenu-${index}`}
+                role="navigation"
+                aria-label={menu.text}
                 aria-hidden={!isActive}
                 data-submenu-panel
               >
                 {sections.length > 0 && (
                   <Container
+                    className="flex w-full gap-x-[160px] overflow-hidden pb-20 pt-7 xl:gap-x-8"
                     size="1600"
-                    className="flex w-full gap-x-[160px] overflow-hidden pb-12 pt-7 xl:gap-x-8"
                   >
                     <ul
                       className="flex gap-x-[128px] pl-[calc(102px+92px+2px)] pt-1 xl:gap-x-5 xl:pl-[calc(102px+40px)]"
@@ -355,13 +354,8 @@ const Navigation = () => {
                                   tabIndex={isActive ? 0 : -1}
                                   onKeyDown={makeHandleSubmenuNavigation(index)}
                                 >
-                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white">
+                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white transition-colors duration-200 group-hover:text-gray-new-80">
                                     {title}
-                                    <ArrowTopRightIcon
-                                      width={12}
-                                      height={12}
-                                      className="-translate-x-2 scale-75 text-black-pure opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100 dark:text-white"
-                                    />
                                   </span>
                                   {description}
                                 </Link>

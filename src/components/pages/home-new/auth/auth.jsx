@@ -1,5 +1,5 @@
 import Container from 'components/shared/container';
-import PauseableVideo from 'components/shared/pauseable-video';
+import RiveAnimation from 'components/shared/rive-animation';
 
 import Heading from '../heading';
 
@@ -17,22 +17,13 @@ const Auth = () => (
           icon="auth"
           title="<strong>Better Auth, included free.</strong> Fully-featured auth that lives in your database and branches for full-stack preview environments."
         />
-
-        {/*
-          Video optimization parameters:
-            mp4: ffmpeg -i auth-origin.mov -c:v libx265 -crf 26 -vf scale=2368:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an auth.mp4
-            webm: ffmpeg -i auth-origin.mov -c:v libvpx-vp9 -crf 40 -vf scale=2368:-2 -deadline best -an auth.webm
-          */}
-        <PauseableVideo
-          className="relative mt-16 w-full xl:mt-12 lg:mt-10"
-          width={1184}
-          height={580}
-          poster="/videos/pages/home-new/auth/poster.jpg"
-          loop={false}
-        >
-          <source src="/videos/pages/home-new/auth/auth.mp4" type="video/mp4" />
-          <source src="/videos/pages/home-new/auth/auth.webm" type="video/webm" />
-        </PauseableVideo>
+        <RiveAnimation
+          className="aspect-[1184/580] w-full"
+          wrapperClassName="mt-16 xl:mt-12 lg:mt-10"
+          src="/animations/pages/home-new/auth.riv?20251210"
+          threshold={0.2}
+          triggerOnce={false}
+        />
       </div>
     </Container>
   </section>

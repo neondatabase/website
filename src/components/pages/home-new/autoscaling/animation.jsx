@@ -1,65 +1,29 @@
 'use client';
 
 import {
-  Alignment,
   Fit,
-  Layout,
-  decodeFont,
-  useRive,
   useViewModel,
   useViewModelInstance,
   useViewModelInstanceNumber,
   useViewModelInstanceBoolean,
 } from '@rive-app/react-canvas';
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { useEffect } from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-const Animation = ({ className, state = 0 }) => {
-  const [isReady, setIsReady] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [riveInstance, setRiveInstance] = useState(null);
+import useRiveAnimation from 'hooks/use-rive-animation';
 
+const Animation = ({ className, state = 0 }) => {
   const { width } = useWindowSize();
   const isMobile = width ? width < 768 : false;
 
-  const [animationRef, isVisible] = useInView({
-    threshold: 0.4,
-  });
-
-  const { rive, RiveComponent } = useRive({
-    src: '/animations/pages/home-new/autoscaling.riv',
-    artboard: 'main',
-    stateMachines: 'SM',
-    autoplay: false,
+  const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
+    src: '/animations/pages/home-new/autoscaling.riv?20251210',
     autoBind: true,
-    layout: new Layout({
-      fit: Fit.Cover,
-      alignment: Alignment.TopCenter,
-    }),
-    assetLoader: (asset, bytes) => {
-      if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
-        return false;
-      }
-
-      if (asset?.isFont) {
-        fetch('/fonts/geist-mono/GeistMono-Regular.ttf').then(async (res) => {
-          const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
-          asset.setFont(font);
-          font.unref();
-        });
-
-        return true;
-      }
-
-      return false;
-    },
-    onLoad: () => {
-      rive?.resizeDrawingSurfaceToCanvas();
-      setIsLoaded(true);
-    },
+    fit: Fit.Cover,
+    triggerOnce: false,
+    pauseOnHide: false,
   });
 
   const viewModel = useViewModel(rive);
@@ -71,40 +35,27 @@ const Animation = ({ className, state = 0 }) => {
   const { setValue: setIsIntroInstance } = useViewModelInstanceBoolean('intro', viewModelInstance);
   const { setValue: setStateInstance } = useViewModelInstanceNumber('state', viewModelInstance);
 
+  // Handle visibility and intro state
   useEffect(() => {
-    setRiveInstance(rive);
-  }, [rive]);
-
-  useEffect(() => {
-    if (riveInstance && isLoaded) {
+    if (rive) {
       if (isVisible) {
         setIsIntroInstance(true);
-        riveInstance.play();
+        rive.play();
       } else {
         setIsIntroInstance(false);
       }
     }
-  }, [isVisible, isLoaded, riveInstance, setIsIntroInstance]);
+  }, [isVisible, rive, setIsIntroInstance]);
 
+  // Handle mobile state
   useEffect(() => {
-    if (isLoaded) {
-      const timer = setTimeout(() => {
-        setIsReady(true);
-      }, 100);
+    setIsMobileInstance(isMobile);
+  }, [isMobile, setIsMobileInstance]);
 
-      return () => clearTimeout(timer);
-    }
-
-    return undefined;
-  }, [isLoaded]);
-
-  useEffect(() => setIsMobileInstance(isMobile), [isMobile, setIsMobileInstance]);
-
+  // Handle state changes
   useEffect(() => {
-    if (isLoaded) {
-      setStateInstance(state);
-    }
-  }, [state, isLoaded, setStateInstance]);
+    setStateInstance(state);
+  }, [state, setStateInstance]);
 
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>

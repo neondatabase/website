@@ -1,14 +1,14 @@
 ---
 title: Acceptable Use Policy
 enableTableOfContents: true
-updatedOn: '2024-08-06T15:23:10.959Z'
+updatedOn: '2025-12-08T15:34:39.156Z'
 ---
 
 **Last Updated:** 23 January 2024
 
 ## Overview
 
-Neon ("Neon," "we," "us," or "our") is committed to providing a secure and productive computing environment. This Acceptable Use Policy (“AUP”) outlines the acceptable use of our Platform and Services. By accessing and using Neon's Platform and Services, you agree to comply with this policy. Unless otherwise provided herein, capitalized terms will have the meaning specified in the applicable Terms of Service, Master Service Agreement, or any other agreed terms (“Agreement”).
+Neon ("Neon," "we," "us," or "our") is committed to providing a secure and productive computing environment. This Acceptable Use Policy (“AUP”) outlines the acceptable use of our Platform and Services. By accessing and using Neon's Platform and Services, you agree to comply with this policy. Unless otherwise provided herein, capitalized terms will have the meaning specified in the applicable Neon Platform Services Product Specific Schedule, Master Service Agreement, or any other agreed terms ("Agreement").
 
 ## Acceptable Use
 
