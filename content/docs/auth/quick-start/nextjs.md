@@ -1,23 +1,21 @@
 ---
-title: Use Neon Auth with Next.js
-subtitle: Learn how to set up Neon Auth in Next.js (App Router)
+title: Use Neon Auth with Next.js (UI Components)
+subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
 updatedOn: '2025-12-04T00:00:00.000Z'
 layout: wide
 ---
 
-> This guide is for Next.js **App Router**. _Pages Router_ setup differs mainly in API routes and auth handling.
+This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using pre-built UI components. If you want to build your own UI, see the [API methods guide](/docs/auth/quick-start/nextjs-api-only).
 
 <TwoColumnLayout>
 
-<TwoColumnStep title="Create a Neon project with Auth enabled">
+<TwoColumnStep title="Enable Auth in your Neon project">
   <LeftContent>
 
-If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
+Enable Auth in your [Neon project](https://console.neon.tech) and copy your Auth URL from Configuration.
 
-Go to the **Auth** page in your project dashboard and click **Enable Auth**.
-
-You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
+**Console path:** Project → Branch → Auth → Configuration
 
   </LeftContent>
   <RightImage label="Console">
@@ -27,31 +25,23 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
   </RightImage>
 </TwoColumnStep>
 
-<TwoColumnStep title="Create a Next.js app">
-  <LeftContent>
-
-Create a Next.js app. Replace `my-app` with your preferred project name:
-
-  </LeftContent>
-  <RightCode label="Terminal">
-
-```bash
-npx create-next-app@latest my-app --yes
-```
-
-  </RightCode>
-</TwoColumnStep>
-
 <TwoColumnStep title="Install the Neon Auth SDK">
   <LeftContent>
 
-Install the Neon Auth SDK and UI library:
+Install the Neon SDK into your Next.js app.
 
+<details>
+<summary>_If you don't have a Next.js project_</summary>
+```bash
+npx create-next-app@latest my-app --yes
+cd my-app
+```
+</details>
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-cd my-app && npm install @neondatabase/neon-js
+npm install @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -85,10 +75,33 @@ Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at 
   <RightCode label="app/globals.css">
 
 ```css
-@import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/css'; // [!code ++]
+@import "tailwindcss";
+@import "@neondatabase/neon-js/ui/css"; // [!code ++]
 
-// Your existing styles...
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
 ```
 
   </RightCode>
@@ -103,8 +116,6 @@ Create a `lib/auth/client.ts` file to initialize the auth client:
   <RightCode label="lib/auth/client.ts">
 
 ```typescript
-'use client';
-
 import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 
 export const authClient = createAuthClient();

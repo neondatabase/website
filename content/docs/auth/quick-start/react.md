@@ -1,6 +1,6 @@
 ---
-title: Use Neon Auth with React
-subtitle: Learn how to set up Neon Auth in React.js
+title: Use Neon Auth with React (API methods)
+subtitle: Build your own auth UI
 enableTableOfContents: true
 updatedOn: '2025-11-12T00:00:00.000Z'
 layout: wide
@@ -15,7 +15,7 @@ If you don't have a Neon project yet, create one at [console.neon.tech](https://
 
 Go to the **Auth** page in your project dashboard and click **Enable Auth**.
 
-You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
+You can then find your Auth **Base URL** on the Configuration tab. Copy this URL - you'll need it in the next step.
 
   </LeftContent>
   <RightImage label="Console">
@@ -34,7 +34,7 @@ Create a React app using Vite.
   <RightCode label="Terminal">
 
 ```bash
-bunx create-vite my-app --template react
+npm create vite@latest my-app -- --template react
 ```
 
   </RightCode>
@@ -43,13 +43,14 @@ bunx create-vite my-app --template react
 <TwoColumnStep title="Install the Neon SDK">
   <LeftContent>
 
-Install the Neon SDK:
+The Neon SDK provides authentication methods like `signUp()`, `getSession()`, and `signOut()` for your React app.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-cd my-app && bun add @neondatabase/neon-js
+cd my-app &&
+
 ```
 
   </RightCode>
@@ -58,34 +59,34 @@ cd my-app && bun add @neondatabase/neon-js
 <TwoColumnStep title="Set up environment variables">
   <LeftContent>
 
-Create a `.env` file in your project root and add your Auth URL:
+Create a `.env` file in your project root and add your Auth Base URL:
 
 <Admonition type="note">
-Replace the URL with your actual Auth URL from the Neon Console.
+Replace the URL with your actual Auth Base URL from the Neon Console.
 </Admonition>
 
   </LeftContent>
   <RightCode label=".env">
 
 ```bash
-VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 ```
 
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Configure the auth client">
+<TwoColumnStep title="Configure the Neon client">
   <LeftContent>
 
-Create a `src/auth.js` file:
+Create a `src/neon.js` file to configure your auth client:
 
   </LeftContent>
-  <RightCode label="src/auth.js">
+  <RightCode label="src/neon.js">
 
 ```javascript
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neondatabase/neon-js';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const neon = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
   </RightCode>
@@ -94,70 +95,61 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 <TwoColumnStep title="Build your authentication UI">
   <LeftContent>
 
-Replace the contents of `src/App.jsx` with the following code to implement sign-up, sign-in, and sign-out:
+Neon JS uses a programmatic approach for managing auth state. You'll use React hooks like `useEffect` to check the session and handle auth changes.
+
+Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#authsignup), [sign-in](/docs/reference/javascript-sdk#authsigninwithpassword), and [sign-out](/docs/reference/javascript-sdk#authsignout):
 
   </LeftContent>
   <RightCode label="src/App.jsx">
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { authClient } from './auth';
+import { neon } from './neon';
+import './App.css';
 
 export default function App() {
   const [session, setSession] = useState(null);
-  const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSignUp, setIsSignUp] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    authClient.getSession().then((result) => {
-      if (result.data?.session && result.data?.user) {
-        setSession(result.data.session);
-        setUser(result.data.user);
-      }
+    neon.auth.getSession().then(({ data }) => {
+      setSession(data.session);
       setLoading(false);
     });
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-    const result = isSignUp
-      ? await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password })
-      : await authClient.signIn.email({ email, password });
-    
-    if (result.error) {
-      alert(result.error.message);
+    const { error } = await neon.auth.signUp({ email, password });
+    if (error) {
+      alert(error.message);
       return;
     }
-    
-    const sessionResult = await authClient.getSession();
-    if (sessionResult.data?.session && sessionResult.data?.user) {
-      setSession(sessionResult.data.session);
-      setUser(sessionResult.data.user);
-    }
+    const { data } = await neon.auth.getSession();
+    setSession(data.session);
   };
 
   const handleSignOut = async () => {
-    await authClient.signOut();
+    await neon.auth.signOut();
     setSession(null);
-    setUser(null);
   };
 
   if (loading) return <div>Loading...</div>;
-  if (session && user) {
+
+  if (session) {
     return (
       <div>
-        <h1>Logged in as {user.email}</h1>
+        <h1>Logged in as {session.user.email}</h1>
         <button onClick={handleSignOut}>Sign Out</button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
+    <form onSubmit={handleSignUp}>
+      <h1>Sign Up</h1>
       <input
         type="email"
         placeholder="Email"
@@ -172,14 +164,7 @@ export default function App() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
-      <p>
-        {isSignUp ? (
-          <>Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(false); }}>Sign in</a></>
-        ) : (
-          <>Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(true); }}>Sign up</a></>
-        )}
-      </p>
+      <button type="submit">Sign Up</button>
     </form>
   );
 }
@@ -191,13 +176,15 @@ export default function App() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server, then open [http://localhost:5173](http://localhost:5173) to create a test user.
+Start the development server:
+
+Open your browser to `http://localhost:5173` and create a test user.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-bun run dev
+npm run dev
 ```
 
   </RightCode>
@@ -206,7 +193,7 @@ bun run dev
 <TwoColumnStep title="See your users in the database">
   <LeftContent>
 
-As users sign up, their profiles are stored in your Neon database in the `neon_auth.user` table.
+As users sign up, their profiles are synced to your Neon database in the `neon_auth.user` table.
 
 Query your users table in the SQL Editor to see your new users:
 
@@ -224,5 +211,6 @@ SELECT * FROM neon_auth.user;
 
 ## Next steps
 
-- [Add email verification](/docs/auth/guides/email-verification)
-- [Learn how to branch your auth](/docs/auth/branching-authentication)
+- [Learn about Neon Auth concepts](/docs/auth/overview)
+- [Explore the Neon Data API](/docs/data-api/get-started) to build a REST API for your data
+- [View complete SDK reference](/docs/reference/javascript-sdk)

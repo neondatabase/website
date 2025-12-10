@@ -22,7 +22,7 @@ Neon Auth is a managed authentication service that stores users, sessions, and a
 
 ## Built on Better Auth
 
-Neon Auth is powered by Better Auth, which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly for a headless setup with your own UI.
+Neon Auth is powered by Better Auth, which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
 ## Basic usage
 
@@ -77,15 +77,15 @@ Choose your framework to get started:
 
 <TechCards>
 
-<a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With pre-built UI components" icon="next-js"></a>
+<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js (API methods)" description="Build your own auth UI" icon="next-js"></a>
 
-<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js (headless)" description="Build your own auth UI" icon="next-js"></a>
+<a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With UI components" icon="next-js"></a>
 
-<a href="/docs/auth/quick-start/react" title="React" description="Build your own auth UI" icon="react"></a>
+<a href="/docs/auth/quick-start/react" title="React (API methods)" description="Build your own auth UI" icon="react"></a>
 
-<a href="/docs/auth/quick-start/react-router-components" title="React Router" description="Multi-page app with UI components" icon="react"></a>
+<a href="/docs/auth/quick-start/react-router-components" title="React" description="With UI components" icon="react"></a>
 
-<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="Multi-page app with UI components" icon="tanstack"></a>
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
 
 </TechCards>
 

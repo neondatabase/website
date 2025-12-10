@@ -1,6 +1,6 @@
 ---
 title: Use Neon Auth with TanStack Router
-subtitle: Learn how to set up Neon Auth in a TanStack Router app
+subtitle: Set up authentication using pre-built UI components
 enableTableOfContents: true
 updatedOn: '2025-12-07T00:00:00.000Z'
 layout: wide
@@ -34,7 +34,7 @@ Create a new TanStack Router app using the file-router template.
   <RightCode label="Terminal">
 
 ```bash
-bunx create-tsrouter-app@latest my-app --template file-router --tailwind
+npx create-tsrouter-app@latest my-app --template file-router --tailwind
 ```
 
   </RightCode>
@@ -49,7 +49,7 @@ Install the Neon Auth SDK and UI library:
   <RightCode label="Terminal">
 
 ```bash
-cd my-app && bun add @neondatabase/neon-js
+cd my-app && npm install @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -276,7 +276,7 @@ Start the development server, then open [http://localhost:3000](http://localhost
   <RightCode label="Terminal">
 
 ```bash
-bun run dev
+npm run dev
 ```
 
   </RightCode>

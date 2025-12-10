@@ -369,17 +369,23 @@
 
             - section: Quickstarts
               items:
-                - title: React
-                  slug: auth/quick-start/react
-                - title: React with Neon Auth UI
-                  slug: auth/quick-start/react-router-components
-                - title: Tanstack Router
-                  slug: auth/quick-start/tanstack-router
                 - title: Next.js
                   slug: auth/quick-start/nextjs
-                - title: Next.js (API-only)
-                  slug: auth/quick-start/nextjs-api-only
-                  tag: wip
+                  items:
+                    - title: UI components
+                      slug: auth/quick-start/nextjs
+                    - title: API methods
+                      slug: auth/quick-start/nextjs-api-only
+                      tag: WIP
+                - title: React
+                  slug: auth/quick-start/react
+                  items:
+                    - title: UI components
+                      slug: auth/quick-start/react-router-components
+                    - title: API methods
+                      slug: auth/quick-start/react
+                - title: TanStack Router
+                  slug: auth/quick-start/tanstack-router
 
             - section: Guides
               items:

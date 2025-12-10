@@ -1,5 +1,5 @@
 ---
-title: React with Neon Auth UI
+title: React with Neon Auth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
 enableTableOfContents: true
 updatedOn: '2025-11-29T00:00:00.000Z'
@@ -34,7 +34,7 @@ Create a React app using Vite with TypeScript.
   <RightCode label="Terminal">
 
 ```bash
-bunx create-vite my-app --template react-ts
+npm create vite@latest my-app -- --template react-ts
 ```
 
   </RightCode>
@@ -50,7 +50,7 @@ Install the Neon SDK, UI components, and React Router:
 
 ```bash
 cd my-app
-bun add @neondatabase/neon-js react-router-dom
+npm install @neondatabase/neon-js react-router-dom
 ```
 
   </RightCode>
@@ -227,7 +227,7 @@ Start the development server, then open [http://localhost:5173](http://localhost
   <RightCode label="Terminal">
 
 ```bash
-bun run dev
+npm run dev
 ```
 
   </RightCode>

@@ -32,7 +32,7 @@ Add a session check when your component mounts to detect when a user returns fro
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx{9}
+```jsx {9-14}
 import { useEffect, useState } from 'react';
 import { authClient } from './auth';
 
@@ -59,7 +59,7 @@ After calling `signUp.email()`, check if verification is required and show a mes
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx{6}
+```jsx {16-18}
 const handleSignUp = async (e) => {
   e.preventDefault();
   setMessage('');
@@ -93,7 +93,7 @@ Access the `emailVerified` field from the user object:
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx{1}
+```jsx {3}
 const { data } = await authClient.getSession();
 
 if (data?.session?.user && !data.session.user.emailVerified) {
@@ -127,7 +127,7 @@ Create a handler for code verification:
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx{6}
+```jsx {6-9}
 const handleVerify = async (e) => {
   e.preventDefault();
   setMessage('');
@@ -194,7 +194,7 @@ After calling `signUp.email()`, switch to the verification step:
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx
+```jsx {3}
 if (data?.user && !data.user.emailVerified) {
   setMessage('Check your email for a verification code');
   setStep('verify'); // Switch to verification form
@@ -209,7 +209,7 @@ Both magic links and verification codes expire after **15 minutes**. Allow users
 
 <CodeWithLabel label="src/App.jsx">
 
-```jsx{3}
+```jsx {3-6}
 const handleResend = async () => {
   try {
     const { error } = await authClient.sendVerificationEmail({
