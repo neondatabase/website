@@ -1,13 +1,14 @@
+import { Alignment, Fit } from '@rive-app/react-canvas';
+import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
+import RiveAnimation from 'components/shared/rive-animation';
 import anonymIcon from 'icons/home-new/branching/anonym-icon.svg';
 import copyIcon from 'icons/home-new/branching/copy-icon.svg';
 import ephemeralityIcon from 'icons/home-new/branching/ephemerality-icon.svg';
 
 import Heading from '../heading';
-
-import Animation from './animation';
 
 const FEATURES = [
   {
@@ -44,7 +45,20 @@ const Branching = () => (
           icon="branching"
           title="<strong>Instant branching.</strong> Develop and test new features and migrations with data & schema branches to eliminate surprises in production deploys."
         />
-        <Animation />
+        <RiveAnimation
+          className="pointer-events-none aspect-[1184/500] w-full"
+          wrapperClassName={clsx(
+            'relative mt-14 w-full',
+            'xl:-mx-8 xl:mt-12 xl:w-[calc(100%+64px)] xl:max-w-none',
+            'sm:-mx-5 sm:w-[calc(100%+40px)]'
+          )}
+          src="/animations/pages/home-new/branching.riv"
+          artboard="main"
+          stateMachines="SM"
+          fit={Fit.Contain}
+          alignment={Alignment.TopCenter}
+          threshold={0.4}
+        />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
           {FEATURES.map(({ icon, title, description }, index) => (
             <li key={index}>

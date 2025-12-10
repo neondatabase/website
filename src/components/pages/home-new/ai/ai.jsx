@@ -1,13 +1,13 @@
+import { Alignment, Fit } from '@rive-app/react-canvas';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
+import RiveAnimation from 'components/shared/rive-animation';
 import bg from 'images/pages/home-new/ai/bg.webp';
 import ideMobile from 'images/pages/home-new/ai/ide-mobile.jpg';
 
 import Heading from '../heading';
-
-import Animation from './animation';
 
 const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode'];
 
@@ -24,7 +24,15 @@ const AI = () => (
         <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="pointer-events-none relative w-full md:hidden">
-            <Animation />
+            <RiveAnimation
+              className="aspect-[1056/807] size-full w-full"
+              src="/animations/pages/home-new/speed-scale-ide.riv"
+              artboard="main"
+              stateMachines="SM"
+              fit={Fit.Contain}
+              alignment={Alignment.Center}
+              threshold={0.2}
+            />
             <Image
               className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-1 outline-gray-new-30"
               src={bg}
