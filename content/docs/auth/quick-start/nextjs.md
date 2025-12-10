@@ -141,7 +141,7 @@ export const authClient = createAuthClient();
 <TwoColumnStep title="Wrap app layout with auth provider">
   <LeftContent>
 
-The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app wit `NeonAuthUIProvider`.
+The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app with `NeonAuthUIProvider`.
 
 Copy and pase the following code into your `app/layout.tsx` file.
 
