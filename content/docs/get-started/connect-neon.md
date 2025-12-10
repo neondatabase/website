@@ -7,7 +7,7 @@ redirectFrom:
 updatedOn: '2025-08-02T10:33:29.253Z'
 ---
 
-Using Neon as the serverless database in your tech stack means configuring connections. Whether it's a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
+Using Neon as the serverless database in your tech stack means configuring connections. Whether it's a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs, or configuring deployment settings for CI/CD workflows, it starts with the connection.
 
 ## Ways to query Neon
 
@@ -26,7 +26,7 @@ That said, you don't need the Data API to query Neon. Neon works with all major 
 
 ## Connecting with a connection string
 
-The examples below show how to connect using a standard Postgres connection string with various frameworks, languages, and ORMs.
+The examples below show how to connect using a standard Postgres connection string with various frameworks, languages, and ORMs. For more examples, see our [Frameworks](/docs/get-started/frameworks) and [Languages](/docs/get-started/languages) guides.
 
 <CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", ".NET", "Ruby", "Rust", "Go"]}>
 
