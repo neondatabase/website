@@ -91,7 +91,7 @@ Choose your framework to get started:
 
 ## Availability
 
-Neon Auth is currently available for AWS regisions only. Azure support is not yet available.
+Neon Auth is currently available for AWS regions only. Azure support is not yet available.
 
 ## Migration from Stack Auth
 
