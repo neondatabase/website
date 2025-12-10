@@ -247,7 +247,7 @@ Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at 
 
 
 <Admonition type="note">
-Now that the Auth provider and styles set setup, as a last step lets build some actual pages so you can signup and signin. 
+Now that the Auth provider and styles are set up, let’s build the pages for signing up and signing in
 </Admonition>
 
 <TwoColumnStep title="Create the Auth & Account pages">
