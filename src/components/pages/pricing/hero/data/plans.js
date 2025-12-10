@@ -34,6 +34,7 @@ export default [
     otherFeatures: {
       title: 'Features',
       features: [
+        { title: 'Auth', tag: 'new' },
         { title: 'Autoscaling' },
         { title: 'Read replicas' },
         { title: 'Built-in high availability' },
