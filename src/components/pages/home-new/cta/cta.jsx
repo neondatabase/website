@@ -39,8 +39,8 @@ const CTA = () => (
     <div className="pointer-events-none relative z-10 overflow-hidden">
       {/*
           Video optimization parameters:
-            mp4: ffmpeg -i cta-origin.mp4 -c:v libx265 -crf 26 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
-            webm: ffmpeg -i cta-origin.mp4 -c:v libvpx-vp9 -crf 36 -vf scale=3840:-2 -deadline best -an cta.webm
+            mp4: ffmpeg -i cta-origin.mov -c:v libx265 -crf 26 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
+            webm: ffmpeg -i cta-origin.mov -c:v libvpx-vp9 -crf 36 -vf scale=3840:-2 -deadline best -an cta.webm
         */}
       <PauseableVideo
         className="aspect-[1920/944] max-h-[944px] w-full lg:w-[1024px] md:hidden"
@@ -54,8 +54,8 @@ const CTA = () => (
 
       {/*
           Mobile video optimization parameters:
-            mp4: ffmpeg -i footer-crop.mov -c:v libx265 -crf 26 -vf scale=1888:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta.mp4
-            webm: ffmpeg -i footer-crop.mov -c:v libvpx-vp9 -crf 35 -vf scale=1888:-2 -deadline best -an cta.webm
+            mp4: ffmpeg -i cta-md-origin.mov -c:v libx265 -crf 26 -vf scale=1888:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta-md.mp4
+            webm: ffmpeg -i cta-md-origin.mov -c:v libvpx-vp9 -crf 35 -vf scale=1888:-2 -deadline best -an cta-md.webm
         */}
       <PauseableVideo
         className="hidden aspect-square w-screen min-w-[510px] md:block"
