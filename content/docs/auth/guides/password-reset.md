@@ -1,5 +1,5 @@
 ---
-title: Password Reset
+title: Password reset
 subtitle: Allow users to reset forgotten passwords
 enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
