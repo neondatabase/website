@@ -114,8 +114,8 @@ const computeStaggerDelays = (duration, easingFunction, amountOfElements) => {
   return delays;
 };
 
-const AnimatedText = ({ text, highlight }) => {
-  const textString = text.join('');
+const AnimatedPosition = ({ author, position }) => {
+  const textString = [author, position].join('');
 
   const { groupIndices, numGroups } = getGroupIndices(
     textString,
@@ -128,12 +128,10 @@ const AnimatedText = ({ text, highlight }) => {
     numGroups
   );
 
-  const highlightedPartIndex = text.findIndex((part) => part === highlight);
-
   let currentIndex = 0;
 
-  const result = text.map((part, index) => {
-    if (index === highlightedPartIndex) {
+  const result = [author, position].map((part, index) => {
+    if (index === 0) {
       return (
         <m.span
           className="-mx-1 bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-no-repeat px-1"
@@ -195,9 +193,9 @@ const AnimatedText = ({ text, highlight }) => {
   return result;
 };
 
-AnimatedText.propTypes = {
-  text: PropTypes.arrayOf(PropTypes.string).isRequired,
-  highlight: PropTypes.string.isRequired,
+AnimatedPosition.propTypes = {
+  author: PropTypes.string.isRequired,
+  position: PropTypes.string.isRequired,
 };
 
-export default AnimatedText;
+export default AnimatedPosition;

@@ -16,36 +16,35 @@ const QUOTES = [
       'aligned with our vision:',
       ' no infrastructure to manage, no servers to provision, no database cluster to maintain.',
     ],
+    highlight: 'aligned with our vision:',
     author: ['Edouard Bonlieu'],
     post: ['Co-founder at Koyeb'],
   },
   {
-    text: [
-      "Neon's serverless philosophy is ",
-      'aligned with our vision:',
-      ' no infrastructure to manage, no servers to provision, no database cluster to maintain.',
-    ],
-    author: ['Edouard Bonlieu'],
-    post: ['Co-founder at Koyeb'],
+    text: ['Neon allows us to develop much ', "faster than we've even been", ' used to.'],
+    highlight: "faster than we've even been",
+    author: ['Alex Klarfeld'],
+    post: ['CEO and co-founder of Supergood.ai'],
   },
-  // {
-  //   text: "Neon allows us to develop much faster than we've even been used to.",
-  //   highlight: "faster than we've even been",
-  //   author: 'Alex Klarfeld',
-  //   post: 'CEO and co-founder of Supergood.ai',
-  // },
-  // {
-  //   text: 'The killer feature that convinced us to use Neon was branching: it keeps our engineering velocity high.',
-  //   highlight: 'The killer feature',
-  //   author: 'Léonard Henriquez',
-  //   post: 'Co-founder and CTO, Topo.io',
-  // },
-  // {
-  //   text: "We've been able to automate virtually all database tasks via the Neon API, saving us a tremendous amount of time and engineering effort.",
-  //   highlight: 'automate virtually all database tasks',
-  //   author: 'Himanshu Bhandoh',
-  //   post: 'Software Engineer at Retool',
-  // },
+  {
+    text: [
+      'The killer feature',
+      ' that convinced us to use Neon was branching: it keeps our engineering velocity high.',
+    ],
+    highlight: 'The killer feature',
+    author: ['Léonard Henriquez'],
+    post: ['Co-founder and CTO, Topo.io'],
+  },
+  {
+    text: [
+      "We've been able to ",
+      'automate virtually all database tasks',
+      ' via the Neon API, saving us a tremendous amount of time and engineering effort.',
+    ],
+    highlight: 'automate virtually all database tasks',
+    author: ['Himanshu Bhandoh'],
+    post: ['Software Engineer at Retool'],
+  },
 ];
 
 const Quotes = () => {
@@ -98,7 +97,7 @@ const Quotes = () => {
 
   return (
     <div ref={ref} className="relative w-full md:h-40">
-      {QUOTES.map(({ text, author, post }, index) => {
+      {QUOTES.map(({ text, highlight, author, post }, index) => {
         const isActive = index === currentIndex;
 
         return (
@@ -122,12 +121,7 @@ const Quotes = () => {
                   }}
                 >
                   <blockquote className="text-pretty text-xl leading-snug xl:text-lg lg:text-[15px]">
-                    <AnimatedText
-                      text={text}
-                      startDelay={0}
-                      skipAnimation={isFirstShow}
-                      fadeDelay={FADE_DURATION}
-                    />
+                    <AnimatedText text={text} highlight={highlight} />
                   </blockquote>
                   <figcaption className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm md:text-[13px]">
                     <span className="block font-medium">
