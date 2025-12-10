@@ -20,7 +20,7 @@ const Auth = () => (
         <RiveAnimation
           className="aspect-[1184/580] w-full"
           wrapperClassName="mt-16 xl:mt-12 lg:mt-10"
-          src="/animations/pages/home-new/auth.riv"
+          src="/animations/pages/home-new/auth.riv?20251210"
           threshold={0.2}
           triggerOnce={false}
         />

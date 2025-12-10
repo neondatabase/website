@@ -52,7 +52,7 @@ const Branching = () => (
             'xl:-mx-8 xl:mt-12 xl:w-[calc(100%+64px)] xl:max-w-none',
             'sm:-mx-5 sm:w-[calc(100%+40px)]'
           )}
-          src="/animations/pages/home-new/branching.riv"
+          src="/animations/pages/home-new/branching.riv?20251210"
           fit={Fit.Contain}
         />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">

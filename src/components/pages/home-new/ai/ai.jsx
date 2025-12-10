@@ -26,7 +26,7 @@ const AI = () => (
           <div className="pointer-events-none relative w-full md:hidden">
             <RiveAnimation
               className="aspect-[1056/807] w-full"
-              src="/animations/pages/home-new/speed-scale-ide.riv"
+              src="/animations/pages/home-new/speed-scale-ide.riv?20251210"
               fit={Fit.Contain}
               alignment={Alignment.Center}
               threshold={0.2}
