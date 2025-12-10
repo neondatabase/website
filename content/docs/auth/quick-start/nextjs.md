@@ -67,7 +67,7 @@ NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 </TwoColumnStep>
 
 
-<TwoColumnStep title="Set up an auth API routes">
+<TwoColumnStep title="Set up your auth API routes">
   <LeftContent>
 
 We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
