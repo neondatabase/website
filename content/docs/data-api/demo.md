@@ -1,14 +1,13 @@
 ---
 title: Neon Data API tutorial
-subtitle: Set up our demo note-taking app to learn about Data API queries with
-  postgrest-js
+subtitle: Set up our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-09-25T14:36:08.166Z'
+updatedOn: '2025-12-10T00:00:00.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
-In this tutorial, we'll walk through our note-taking app to show how you can use Neon's Data API with the `postgrest-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
+In this tutorial, we'll walk through our note-taking app to show how you can use Neon's Data API with the ` @neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 
 ## About the sample application
 
@@ -23,14 +22,41 @@ This note-taking app is built with React and Vite. It uses Neon Auth for authent
 
 To follow this tutorial, you'll need to:
 
-1. [Create a Neon project](https://pg.new) and [enable the Data API](/docs/data-api/get-started#enabling-the-data-api), noting the **Data API URL**.
+1. [Create a Neon project](https://pg.new) and [enable the Data API](/docs/data-api/get-started#enabling-the-data-api), using Neon Auth for authentication. Note your **Data API URL** and **Neon Auth URL** you'll need them later.
 2. Clone and set up the [demo](https://github.com/neondatabase-labs/neon-data-api-neon-auth):
 
    ```bash
    git clone https://github.com/neondatabase-labs/neon-data-api-neon-auth
    ```
 
-   Follow the README, adding your **Data API URL** to the `.env` file.
+   Follow the README, adding your **Data API URL** and **Neon Auth URL** to the `.env` file.
+
+## Initialize the client
+
+The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Neon Auth. Here's how the client is configured:
+
+```typescript
+// src/lib/auth.ts
+import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import type { Database } from '../types/database';
+
+export const client = createClient<Database>({
+  auth: {
+    adapter: BetterAuthReactAdapter(),
+    url: import.meta.env.VITE_NEON_AUTH_URL, // Your Neon Auth endpoint
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL, // Your Data API endpoint
+  },
+});
+```
+
+This single client provides:
+
+- **Authentication methods** via `client.auth` (sign up, sign in, sign out, get session)
+- **Database query methods** via `client.from()` (select, insert, update, delete)
+
+The client automatically handles JWT token management — when a user is signed in, the token is included in all Data API requests, enabling RLS policies to work correctly.
 
 ## Database Schema
 
@@ -125,7 +151,7 @@ pgPolicy("shared_policy", {
 ```
 
 <Admonition type="info" title="About auth.user_id()">
-Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/guides/neon-auth">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
+Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/auth/overview">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
 
 For more details on RLS with Data API, see our [Row-Level Security with Neon guide](/docs/guides/row-level-security).
 </Admonition>
@@ -137,7 +163,7 @@ Now that our tables are secure, let's look at how to perform CRUD operations usi
 Let's start with creating new notes. The demo app does it like this:
 
 ```typescript
-const { data, error } = await postgrest
+const { data, error } = await client
   .from('notes')
   .insert({ title: generateNameNote() }) // [!code highlight]
   .select('id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)')
@@ -157,14 +183,14 @@ See [src/routes/note.tsx](https://github.com/neondatabase-labs/neon-data-api-neo
 To display all notes for the current user, ordered by creation date, the app uses:
 
 ```typescript
-const { data, error } = await postgrest
+const { data, error } = await client
   .from('notes')
   .select('id, title, created_at, owner_id, shared') // [!code highlight]
   .eq('owner_id', user.id) // [!code highlight]
   .order('created_at', { ascending: false });
 ```
 
-> `.eq('owner_id', user.id)` is a `postgrest-js` method that filters results, much like a SQL `WHERE` clause, to only include notes belonging to the current user.
+> The `.eq('owner_id', user.id)` method in PostgREST (JS client) filters results, similar to a SQL `WHERE` clause, ensuring only notes belonging to the current user are returned.
 
 Here's what your notes list will look like after fetching all notes from the database.
 
@@ -181,13 +207,13 @@ You can rename any note by editing its title directly in the app (for example, c
 Here's how the app updates a note's title using the UPDATE operation:
 
 ```typescript
-const { error } = await postgrest
+const { error } = await client
   .from('notes')
   .update({ title: 'Updated Title' }) // [!code highlight]
   .eq('id', noteId);
 ```
 
-> Tip: With postgrest-js, you can chain methods like `.from()`, `.update()`, and `.eq()` to build queries, like in the example above.
+> Tip: You can chain methods like `.from()`, `.update()`, and `.eq()` to build queries, like in the example above. For more complex queries refer to the [Neon Javascript SDK documentation](/docs/reference/javascript-sdk#insert).
 
 Here's how a note looks after you update its title to something more meaningful in the UI:
 
@@ -195,16 +221,16 @@ Here's how a note looks after you update its title to something more meaningful 
 
 See [src/components/app/note-title.tsx](https://github.com/neondatabase-labs/neon-data-api-neon-auth/blob/main/src/components/app/note-title.tsx)
 
-Now let's look at a more advanced pattern you can use with postgrest-js.
+Now let's look at a more advanced pattern you can use with `INSERT`.
 
 ## INSERT and fetch related data
 
-You may have noticed that our earlier `INSERT` example included `.select("*")`, chained after `.insert()`. This lets you insert a record and immediately fetch it back in a single query. This is a useful pattern provided by postgrest-js's chainable API (as mentioned above). And you can take it further: you can also fetch **related data** (from other tables linked by foreign keys) at the same time.
+You may have noticed that our earlier `INSERT` example included `.select("*")`, chained after `.insert()`. This lets you insert a record and immediately fetch it back in a single query. This is a useful pattern provided by the Neon SDK's PostgREST client's chainable API (as mentioned above). And you can take it further: you can also fetch **related data** (from other tables linked by foreign keys) at the same time.
 
 For example, in our INSERT example from earlier, we immediately fetch the new note **and** any related paragraphs (if they exist):
 
 ```typescript
-const { data, error } = await postgrest
+const { data, error } = await client
   .from('notes')
   .insert({ title: generateNameNote() }) // [!code highlight]
   .select('id, title, shared, owner_id, paragraphs (id, content, created_at, note_id)') // [!code highlight]
@@ -223,7 +249,7 @@ See [src/routes/note.tsx](https://github.com/neondatabase-labs/neon-data-api-neo
 
 If you've played with the app at all, you may also have noticed — there's no way to delete a note.
 
-This is the hands-on part of the tutorial. Let's go ahead and add delete functionality to your local version of the app. You'll see how to implement a complete DELETE operation with postgrest-js.
+This is the hands-on part of the tutorial. Let's go ahead and add delete functionality to your local version of the app. You'll see how to implement a complete DELETE operation.
 
 ### Step 1: Add a delete button to your note card component
 
@@ -266,36 +292,64 @@ export default function NoteCard({
 }
 ```
 
-> **Note:** Make sure to import the trash can icon: `import { Trash2Icon } from "lucide-react";`
-
 ### Step 2: Add the delete handler to your notes list
 
-Next, add the delete handler to your `NotesList` component:
+Next, add the delete handler to your `NotesList` component and pass it down to each `NoteCard`:
 
-```typescript
+```typescript {6,19-24,44}
 // src/components/app/notes-list.tsx
-import { usePostgrest } from '@/lib/postgrest'; // [!code highlight]
+import NoteCard from "@/components/app/note-card";
+import type { Note } from "@/lib/api";
+import { useRouter } from "@tanstack/react-router";
+import { PlusCircleIcon } from "lucide-react";
+import { client } from "@/lib/auth";
 
-const handleDelete = async (id: string) => {
-  // [!code highlight]
-  const { error } = await postgrest.from('notes').delete().eq('id', id); // [!code highlight]
-  if (!error) {
-    window.location.reload(); // [!code highlight]
-  }
-};
-```
+export default function NotesList({ notes }: { notes: Note[] }) {
+  const router = useRouter();
 
-> Make sure to import `usePostgrest` to get the postgrest client
+  const addNote = async () => {
+    router.navigate({
+      to: "/note",
+      search: { id: "new-note" },
+      replace: true,
+    });
+  };
 
-Then pass the delete handler to each `NoteCard`:
+  const handleDelete = async (id: string) => {
+    const { error } = await client.from('notes').delete().eq('id', id);
+    if (!error) {
+      window.location.reload();
+    }
+  };
 
-```typescript
-<NoteCard
-  id={note.id}
-  title={note.title}
-  createdAt={note.created_at}
-  onDelete={() => handleDelete(note.id)} // [!code highlight]
-/>
+  return (
+    <div className="flex flex-col gap-4">
+      <header className="flex items-center justify-between">
+        <h3>My notes</h3>
+        <button
+          type="button"
+          className="cursor-pointer border-none bg-none hover:bg-none flex items-center gap-1.5"
+          onClick={addNote}
+        >
+          <PlusCircleIcon className="w-4 h-4" />
+        </button>
+      </header>
+      <main className="flex flex-col gap-1.5 ">
+        {notes?.map((note) => (
+          <NoteCard
+            id={note.id}
+            title={note.title}
+            createdAt={note.created_at}
+            onDelete={() => handleDelete(note.id)}
+          />
+        ))}
+        {notes.length === 0 && (
+          <div className="text-sm text-foreground/50">No notes yet</div>
+        )}
+      </main>
+    </div>
+  );
+}
 ```
 
 Your app now includes a delete trash can next to each note. Go ahead and delete a couple notes to try it out:
@@ -327,12 +381,14 @@ SELECT conname FROM pg_constraint WHERE conrelid = 'paragraphs'::regclass;
 
 Then, use the name you find (e.g. `paragraphs_note_id_notes_id_fk`) in the `DROP CONSTRAINT` and `ADD CONSTRAINT` commands above.
 
+Finally test deleting a note that has paragraphs — both the note and its paragraphs should be removed from the database.
+
 </Steps>
 
 ## Learn more
 
 - [Getting started with Data API](/docs/data-api/get-started)
-- [Neon Auth documentation](/docs/guides/neon-auth)
-- [postgrest-js documentation](https://github.com/supabase/postgrest-js)
+- [Neon Auth documentation](/docs/auth/overview)
+- [Neon JavaScript SDK reference](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

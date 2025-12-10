@@ -95,30 +95,32 @@ Let's take a look at the `useNotes` function in the `src/routes/index.tsx` file:
 
 ```typescript shouldWrap
 function useNotes() {
-  const postgrest = usePostgrest();
-  const user = useUser({ or: 'redirect' });
+  const session = client.auth.useSession();
   return useQuery({
     queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
+      if (!session.data) {
+        throw new Error('User is not authenticated');
+      }
       // `eq` filter is optional because of RLS. But we send it anyway for
       // performance reasons.
-      const { data, error } = await postgrest
+      const { data, error } = await client
         .from('notes')
         .select('id, title, created_at, owner_id, shared')
-        .eq('owner_id', user.id)
+        .eq('owner_id', session.data.user.id)
         .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
       }
 
-      return data;
+      return data as Array<Note>;
     },
   });
 }
 ```
 
-The `eq` clause is technically enough to make sure data is properly isolated. Neon gets `user.id` from the Neon Auth JWT and matches that to the `owner_id` column in the `notes` tables, so each user can only see their own notes.
+The `eq` clause is technically enough to make sure data is properly isolated. Neon gets the user id from the Neon Auth JWT (`session.data.user.id`) and matches that to the `owner_id` column in the `notes` tables, so each user can only see their own notes.
 
 Even though isolation is backed by our RLS policies, we include it here for performance reasons: it helps Postgres build a better query plan and use indexes where possible.
 
@@ -152,22 +154,24 @@ In the `src/routes/index.tsx` file, modify the `useNotes` function to remove the
 
 ```typescript shouldWrap
 function useNotes() {
-  const postgrest = usePostgrest();
-  const user = useUser({ or: 'redirect' });
+  const session = client.auth.useSession();
   return useQuery({
     queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
-      const { data, error } = await postgrest
+      if (!session.data) {
+        throw new Error('User is not authenticated');
+      }
+      const { data, error } = await client
         .from('notes')
         .select('id, title, created_at, owner_id, shared')
-        // .eq("owner_id", user.id) // [!code --]
+        // .eq("owner_id", session.data.user.id) // [!code --]
         .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
       }
 
-      return data;
+      return data as Array<Note>;
     },
   });
 }
@@ -209,22 +213,24 @@ Order is restored, thanks to RLS. Now go fix your app before you forget:
 
 ```typescript shouldWrap
 function useNotes() {
-  const postgrest = usePostgrest();
-  const user = useUser({ or: 'redirect' });
+  const session = client.auth.useSession();
   return useQuery({
     queryKey: ['notes'],
     queryFn: async (): Promise<Array<Note>> => {
-      const { data, error } = await postgrest
+      if (!session.data) {
+        throw new Error('User is not authenticated');
+      }
+      const { data, error } = await client
         .from('notes')
         .select('id, title, created_at, owner_id, shared')
-        .eq('owner_id', user.id) // [!code highlight]
+        .eq('owner_id', session.data.user.id) // [!code ++]
         .order('created_at', { ascending: false });
 
       if (error) {
         throw error;
       }
 
-      return data;
+      return data as Array<Note>;
     },
   });
 }
