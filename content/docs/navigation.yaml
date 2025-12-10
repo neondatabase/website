@@ -380,9 +380,6 @@
                   items:
                     - title: UI components
                       slug: auth/quick-start/nextjs
-                    - title: API methods
-                      slug: auth/quick-start/nextjs-api-only
-                      tag: WIP
                 - title: React
                   slug: auth/quick-start/react
                   items:
