@@ -1,5 +1,5 @@
 ---
-title: Email Verification
+title: Email verification
 subtitle: Verify user email addresses during sign-up or account creation
 enableTableOfContents: true
 updatedOn: '2025-11-19T00:00:00.000Z'
