@@ -25,10 +25,8 @@ const AI = () => (
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="pointer-events-none relative w-full md:hidden">
             <RiveAnimation
-              className="aspect-[1056/807] size-full w-full"
+              className="aspect-[1056/807] w-full"
               src="/animations/pages/home-new/speed-scale-ide.riv"
-              artboard="main"
-              stateMachines="SM"
               fit={Fit.Contain}
               alignment={Alignment.Center}
               threshold={0.2}

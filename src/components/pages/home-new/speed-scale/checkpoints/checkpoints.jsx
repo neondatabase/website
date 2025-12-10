@@ -23,9 +23,6 @@ const Checkpoints = () => (
         )}
         wrapperClassName="relative"
         src="/animations/pages/home-new/checkpoints.riv"
-        artboard="main"
-        stateMachines="SM"
-        threshold={0.4}
       />
     </div>
   </div>

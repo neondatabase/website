@@ -1,4 +1,4 @@
-import { Alignment, Fit } from '@rive-app/react-canvas';
+import { Fit } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -53,11 +53,7 @@ const Branching = () => (
             'sm:-mx-5 sm:w-[calc(100%+40px)]'
           )}
           src="/animations/pages/home-new/branching.riv"
-          artboard="main"
-          stateMachines="SM"
           fit={Fit.Contain}
-          alignment={Alignment.TopCenter}
-          threshold={0.4}
         />
         <ul className="mt-11 grid grid-cols-3 gap-x-16 xl:mt-9 lg:mt-12 lg:gap-x-8 lg:px-8 md:mt-10 md:grid-cols-1 md:gap-y-7 md:px-0">
           {FEATURES.map(({ icon, title, description }, index) => (
