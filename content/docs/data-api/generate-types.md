@@ -1,8 +1,9 @@
 ---
 title: Generate TypeScript types from your database schema
-subtitle: Automatically generate TypeScript types from your database schema for type-safe Data API interactions.
+subtitle: Automatically generate TypeScript types from your database schema for
+  type-safe Data API interactions.
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2025-12-10T22:18:02.769Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

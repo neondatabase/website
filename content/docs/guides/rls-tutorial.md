@@ -2,7 +2,7 @@
 title: Secure your app with RLS
 subtitle: Learn how Row-level Security (RLS) protects user data
 enableTableOfContents: true
-updatedOn: '2025-09-30T13:01:57.138Z'
+updatedOn: '2025-12-10T22:18:02.771Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-tutorial
   - /docs/guides/neon-authorize-tutorial

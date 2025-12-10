@@ -2,7 +2,7 @@
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2025-12-10T22:18:02.770Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
