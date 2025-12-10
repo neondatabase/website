@@ -17,8 +17,8 @@ const Checkpoints = () => (
     <div className="border-b border-t border-gray-new-20">
       <RiveAnimation
         className={clsx(
-          'pointer-events-none relative mx-auto aspect-[1920/500] w-full max-w-[1920px] 3xl:left-1/2 3xl:-translate-x-1/2',
-          'xl:aspect-[1024/356] xl:h-auto xl:w-full lg:aspect-[768/280] md:aspect-[320/170] sm:w-[640px]',
+          'pointer-events-none relative mx-auto aspect-[1920/500] w-full max-w-[1920px]',
+          'lg:left-1/2 lg:w-[140vw] lg:-translate-x-1/2 md:w-[204vw]',
           '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
         wrapperClassName="relative"
