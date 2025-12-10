@@ -87,7 +87,7 @@ export const { GET, POST } = authApiHandler();
 <TwoColumnStep title="Add neonAuthMiddleware()">
   <LeftContent>
 
-The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches the page component or API routes. Create `proxy.ts` file in your project root:
+The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
 
   </LeftContent>
   <RightCode label="proxy.ts">
