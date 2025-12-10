@@ -37,10 +37,12 @@ The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Ne
 
 ```typescript
 // src/lib/auth.ts
-import { createClient } from '@neondatabase/neon-js';
+import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import type { Database } from '../types/database';
 
-export const client = createClient({
+export const client = createClient<Database>({
   auth: {
+    adapter: BetterAuthReactAdapter(),
     url: import.meta.env.VITE_NEON_AUTH_URL, // Your Neon Auth endpoint
   },
   dataApi: {
@@ -50,6 +52,7 @@ export const client = createClient({
 ```
 
 This single client provides:
+
 - **Authentication methods** via `client.auth` (sign up, sign in, sign out, get session)
 - **Database query methods** via `client.from()` (select, insert, update, delete)
 
