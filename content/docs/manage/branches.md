@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-10-24T21:38:50.621Z'
+updatedOn: '2025-11-17T19:26:53.691Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -17,6 +17,17 @@ You can create and manage branches using the Neon Console, [Neon CLI](/docs/refe
 <Admonition type="important">
 When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/branching#restore-window).
 </Admonition>
+
+## Branch naming requirements
+
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (e.g., `br-curly-wave-af4i4oeu`).
+
+If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
+
+- **Maximum length**: 256 characters (API limit). Note that the Neon Console enforces a more restrictive limit of 128 characters.
+- **Uniqueness**: Branch names must be unique within a project. You cannot have two branches with the same name in the same project.
+- **Non-empty**: Branch names cannot be empty or consist only of whitespace characters.
+- **Character flexibility**: Unlike some other Neon resources (such as databases or roles), branch names have no special character restrictions. You can use any characters as long as they meet the requirements above.
 
 ## Create a branch
 
@@ -32,7 +43,7 @@ To create a branch:
 When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
 </Admonition>
 
-6. Optionally set an **Expire branch after** expiration date and time for temporary branches. This automatically deletes the branch at the specified time, useful for CI/CD pipelines and short-lived development environments. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
+6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
 
 You are presented with the connection details for your new branch and directed to the **Branch** overview page where you are shown the details for your new branch.
@@ -132,7 +143,7 @@ To set or update a branch's expiration (auto-deletion TTL):
 2. Select **Branches** to view the branches for the project.
 3. Select a branch from the table.
 4. On the branch overview page, click the **Actions** drop-down menu and select **Edit expiration**.
-5. Set a new expiration date and time, or toggle off "Expire branch after" to remove expiration.
+5. Set a new expiration date and time, or toggle off "Automatically delete branch after" to remove expiration.
 6. Click **Save**.
 
 For details and configuration instructions, refer to our [Branch expiration guide](/docs/guides/branch-expiration).

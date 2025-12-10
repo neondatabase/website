@@ -83,8 +83,28 @@ You have two options for connecting Claude to the Neon MCP Server:
 ### Option 1: Setting up the remote hosted Neon MCP Server
 
 <Admonition type="note">
-By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication). Claude connectors currently do not support API key authentication.
 </Admonition>
+
+Choose one of the following methods to set up the Remote Neon MCP server in Claude Desktop:
+
+<Tabs labels={['Using Claude Connectors', 'By modifying config file']}>
+
+<TabItem label="Using Claude Connectors">
+
+1. Launch Claude Desktop and open the **Search & Tools** panel, and select **Add Connector**.
+   ![Claude search and tools button](/guides/images/claude_mcp/claude_add_connector.png)
+2. Click on **Add a custom one** to open the custom connector modal.
+   ![Claude custom connector button](/guides/images/claude_mcp/claude_custom_connector.png)
+3. Enter **Neon** in the **Name** field and `https://mcp.neon.tech/mcp` in the **Remote MCP server URL** field, then click **Add**.
+   ![Claude custom connector modal](/guides/images/claude_mcp/claude_custom_connector_modal.png)
+4. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
+5. After authorization, you can start using the Neon MCP server with Claude.
+
+</TabItem>
+
+<TabItem label="By modifying config file">
 
 1. Open Claude desktop and navigate to **Settings**.
    ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
@@ -108,6 +128,9 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 6. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 7. After authorization, you can start using the Neon MCP server with Claude.
+
+</TabItem>
+</Tabs>
 
 <Admonition type="note">
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.

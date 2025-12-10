@@ -226,6 +226,10 @@ postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.
 The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
+<Admonition type="important">
+You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
+</Admonition>
+
 ## Using connection details
 
 You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.

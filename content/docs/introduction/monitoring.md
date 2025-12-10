@@ -2,7 +2,7 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
-updatedOn: '2025-10-22T15:44:06.426Z'
+updatedOn: '2025-12-03T13:07:33.036Z'
 ---
 
 To find out what's going on with your Neon projects and databases, Neon offers several ways to track metrics and monitor usage.
@@ -13,7 +13,7 @@ To find out what's going on with your Neon projects and databases, Neon offers s
 
 <a href="/docs/introduction/monitor-usage" description="Monitor billing and usage metrics for your Neon account and projects" icon="chart-bar">Monitor billing and usage</a>
 
-<a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling vCPU and RAM usage" icon="autoscaling">Autoscaling</a>
+<a href="/docs/guides/autoscaling-guide#monitor-autoscaling" description="Monitor Autoscaling RAM usage" icon="autoscaling">Autoscaling</a>
 
 <a href="/docs/manage/operations" description="Monitor Neon project operations from the Neon Console, API, or CLI" icon="transactions">Neon system operations</a>
 

@@ -3,11 +3,11 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T20:24:25.880Z'
+updatedOn: '2025-12-03T15:06:05.464Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated snapshot schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -175,15 +175,15 @@ The parameters used in the example above:
 
 </Tabs>
 
-## Create snapshot schedules
+## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Snapshot schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
-To create or modify a snapshot schedule:
+To create or modify a backup schedule:
 
 1. **Open the schedule editor**
 
@@ -205,7 +205,7 @@ To create or modify a snapshot schedule:
 
    Depending on your selected frequency, configure how often you want to create snapshots and how long to keep them.
 
-Once configured, snapshots created by the schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
+Once configured, snapshots created by the backup schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
 
 ### Snapshot retention
 
@@ -213,7 +213,7 @@ Snapshots are automatically deleted after their retention period expires. You ca
 
 - Shorter retention periods help manage snapshot limits on your plan
 - Deleted snapshots cannot be recovered
-- Manual snapshots are not affected by schedule retention settings
+- Manual snapshots are not affected by backup schedule retention settings
 
 </TabItem>
 
@@ -435,5 +435,9 @@ Use this option if you need to inspect the restored data before you switch over 
 </TabItem>
 
 </Tabs>
+
+## Limitations
+
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 
 <NeedHelp/>

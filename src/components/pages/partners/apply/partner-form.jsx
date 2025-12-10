@@ -77,7 +77,7 @@ const schema = yup
 
 const labelClassName = 'text-sm text-gray-new-90';
 
-const PartnerForm = ({ onSuccess }) => {
+const PartnerForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
   const [ajsAnonymousId] = useCookie('ajs_anonymous_id');
@@ -129,10 +129,6 @@ const PartnerForm = ({ onSuccess }) => {
         setFormState(FORM_STATES.SUCCESS);
         reset();
         setIsBroken(false);
-        // Call the onSuccess callback with user data for Calendly
-        if (onSuccess) {
-          onSuccess();
-        }
       }, loadingAnimationStartedTime);
     } catch (error) {
       if (error.name !== 'AbortError') {
@@ -273,10 +269,6 @@ const PartnerForm = ({ onSuccess }) => {
       {isBroken && <ErrorMessage onClose={() => setIsBroken(false)} />}
     </form>
   );
-};
-
-PartnerForm.propTypes = {
-  onSuccess: PropTypes.func,
 };
 
 export default PartnerForm;

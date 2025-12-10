@@ -1,7 +1,7 @@
 ---
 title: Python SDK for the Neon API
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.267Z'
+updatedOn: '2025-11-17T19:26:53.694Z'
 ---
 
 <InfoBlock>
@@ -79,7 +79,7 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 
 - `branches(project_id)`: Returns a list of branches for a given project.
 - `branch(project_id, branch_id)`: Returns a specific branch.
-- `branch_create(project_id, **json)`: Creates a new branch.
+- `branch_create(project_id, **json)`: Creates a new branch. Branch names are optional (defaults to branch ID if not specified). If provided, names must be unique within the project, can be up to 256 characters, and cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements).
 - `branch_update(project_id, branch_id, **json)`: Updates a given branch.
 - `branch_delete(project_id, branch_id)`: Deletes a given branch.
 - `branch_set_as_primary(project_id, branch_id)`: Sets a given branch as primary.

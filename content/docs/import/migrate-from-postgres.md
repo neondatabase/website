@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/tutorials
   - /docs/how-to-guides/import-an-existing-database
   - /docs/import/import-from-postgres
-updatedOn: '2025-08-18T12:11:47.177Z'
+updatedOn: '2025-12-03T13:07:33.033Z'
 ---
 
 This topic describes migrating data from one Postgres database to another using the `pg_dump` and `pg_restore`.
@@ -139,7 +139,7 @@ The `pg_dump` and `pg_restore` commands provide numerous advanced options, some 
 ### pg_restore options
 
 - `-c --if-exists`: Drop database objects before creating them if they already exist. If you had a failed migration, you can use these options to drop objects created by the previous migration to avoid errors when retrying the migration.
-- `-j <njobs>`: Consider this option for large databases to run the restore process in parallel. Set `<njobs>` to the number of available vCPUs. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information.
+- `-j <njobs>`: Consider this option for large databases to run the restore process in parallel. Set `<njobs>` to the number of available CPU cores based on your compute size. Refer to the [pg_dump](https://www.postgresql.org/docs/current/app-pgdump.html) documentation for more information.
 - `--single-transaction`: Forces the operation to run as an atomic transaction, which ensures that no data is left behind when a restore operation fails. Retrying an import operation after a failed attempt that leaves data behind may result in "duplicate key value" errors.
 - `--no-tablespaces`: Do not output commands to select tablespaces. See [Data migration notes](#data-migration-notes).
 - `-t <table_name>`: Allows you to restore individual tables from a custom-format database dump. Individual tables can also be imported from a CSV file. See [Import from CSV](/docs/import/import-from-csv).

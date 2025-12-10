@@ -123,7 +123,7 @@ By leveraging Neon's shared storage and compute autoscaling, it’s not rare to 
 
 **Non-prod deployment in AWS RDS (us-east-1):**
 
-- 10 development and test instances (db.m5.large: 2 vCPUs, 8 GB RAM) with 50 GB storage allocated in each instance
+- 10 development and test instances (db.m5.large: 8 GB RAM) with 50 GB storage allocated in each instance
 - They’re active 4 hours/day on average
 - RDS monthly costs: $1,356.90
   - Compute costs: $0.178/hour \* 730 hours \* 10 instances = $1,299.40 /month

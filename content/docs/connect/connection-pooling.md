@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2025-11-07T12:28:56.606Z'
+updatedOn: '2025-12-03T13:07:33.021Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -29,46 +29,46 @@ The `-pooler` option routes the connection to a connection pooling port at the N
 
 Each Postgres connection creates a new process in the operating system, which consumes resources. Postgres limits the number of open connections for this reason. The Postgres connection limit is defined by the Postgres `max_connections` parameter. In Neon, `max_connections` is set according to your compute size or autoscaling configuration — you can find the formula here: [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
-| Compute size | vCPU | RAM    | max_connections |
-| :----------- | :--- | :----- | :-------------- |
-| 0.25         | 0.25 | 1 GB   | 112             |
-| 0.50         | 0.50 | 2 GB   | 225             |
-| 1            | 1    | 4 GB   | 450             |
-| 2            | 2    | 8 GB   | 901             |
-| 3            | 3    | 12 GB  | 1351            |
-| 4            | 4    | 16 GB  | 1802            |
-| 5            | 5    | 20 GB  | 2253            |
-| 6            | 6    | 24 GB  | 2703            |
-| 7            | 7    | 28 GB  | 3154            |
-| 8            | 8    | 32 GB  | 3604            |
-| 9            | 9    | 36 GB  | 4000            |
-| 10           | 10   | 40 GB  | 4000            |
-| 11           | 11   | 44 GB  | 4000            |
-| 12           | 12   | 48 GB  | 4000            |
-| 13           | 13   | 52 GB  | 4000            |
-| 14           | 14   | 56 GB  | 4000            |
-| 15           | 15   | 60 GB  | 4000            |
-| 16           | 16   | 64 GB  | 4000            |
-| 18           | 18   | 72 GB  | 4000            |
-| 20           | 20   | 80 GB  | 4000            |
-| 22           | 22   | 88 GB  | 4000            |
-| 24           | 24   | 96 GB  | 4000            |
-| 26           | 26   | 104 GB | 4000            |
-| 28           | 28   | 112 GB | 4000            |
-| 30           | 30   | 120 GB | 4000            |
-| 32           | 32   | 128 GB | 4000            |
-| 34           | 34   | 136 GB | 4000            |
-| 36           | 36   | 144 GB | 4000            |
-| 38           | 38   | 152 GB | 4000            |
-| 40           | 40   | 160 GB | 4000            |
-| 42           | 42   | 168 GB | 4000            |
-| 44           | 44   | 176 GB | 4000            |
-| 46           | 46   | 184 GB | 4000            |
-| 48           | 48   | 192 GB | 4000            |
-| 50           | 50   | 200 GB | 4000            |
-| 52           | 52   | 208 GB | 4000            |
-| 54           | 54   | 216 GB | 4000            |
-| 56           | 56   | 224 GB | 4000            |
+| Compute size (CU) | RAM    | max_connections |
+| :---------------- | :----- | :-------------- |
+| 0.25              | 1 GB   | 112             |
+| 0.50              | 2 GB   | 225             |
+| 1                 | 4 GB   | 450             |
+| 2                 | 8 GB   | 901             |
+| 3                 | 12 GB  | 1351            |
+| 4                 | 16 GB  | 1802            |
+| 5                 | 20 GB  | 2253            |
+| 6                 | 24 GB  | 2703            |
+| 7                 | 28 GB  | 3154            |
+| 8                 | 32 GB  | 3604            |
+| 9                 | 36 GB  | 4000            |
+| 10                | 40 GB  | 4000            |
+| 11                | 44 GB  | 4000            |
+| 12                | 48 GB  | 4000            |
+| 13                | 52 GB  | 4000            |
+| 14                | 56 GB  | 4000            |
+| 15                | 60 GB  | 4000            |
+| 16                | 64 GB  | 4000            |
+| 18                | 72 GB  | 4000            |
+| 20                | 80 GB  | 4000            |
+| 22                | 88 GB  | 4000            |
+| 24                | 96 GB  | 4000            |
+| 26                | 104 GB | 4000            |
+| 28                | 112 GB | 4000            |
+| 30                | 120 GB | 4000            |
+| 32                | 128 GB | 4000            |
+| 34                | 136 GB | 4000            |
+| 36                | 144 GB | 4000            |
+| 38                | 152 GB | 4000            |
+| 40                | 160 GB | 4000            |
+| 42                | 168 GB | 4000            |
+| 44                | 176 GB | 4000            |
+| 46                | 184 GB | 4000            |
+| 48                | 192 GB | 4000            |
+| 50                | 200 GB | 4000            |
+| 52                | 208 GB | 4000            |
+| 54                | 216 GB | 4000            |
+| 56                | 224 GB | 4000            |
 
 You can check the `max_connections` limit for your compute by running the following query from the Neon SQL Editor or a client connected to Neon:
 
@@ -104,6 +104,20 @@ The `max_connections` setting still applies for direct Postgres connections.
 <Admonition type="important">
 You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
+
+### Pool lifecycle and compute restarts
+
+Connection pools, when combined with proper health-checks and lifecycle management, significantly reduce user-facing disruptions during compute restarts (such as during maintenance or updates). Here's how pools help maintain a smooth user experience:
+
+- **Automatic reconnection**: Most production connection pools automatically detect stale connections and replace them with new ones. When a compute restart occurs, the pool discards dead connections and establishes fresh ones transparently.
+
+- **Health-checks and validation**: Connection pools can be configured with health-check queries (like `pool_pre_ping` in SQLAlchemy, validation queries in HikariCP, or connection checks in other poolers) that test connections before handing them to your application. This ensures your application never receives a broken connection.
+
+- **Connection lifecycle tuning**: Configuring settings like `maxLifetime` (in HikariCP) or `idleTimeoutMillis` (in `node-postgres`) ensures that connections are periodically refreshed. This prevents long-lived connections from becoming stale and reduces the likelihood of connection errors.
+
+- **Retry logic integration**: When combined with [retry logic and exponential backoff](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application), connection pools provide a robust foundation for handling brief interruptions. The pool handles connection-level failures while your retry logic handles query-level transient errors.
+
+For complete guidance on building resilient applications with connection pooling, retry logic, and transient error handling, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
 
 ## PgBouncer
 

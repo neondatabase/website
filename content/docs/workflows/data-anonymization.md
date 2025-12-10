@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T02:07:59.221Z'
+updatedOn: '2025-12-02T22:54:22.675Z'
 ---
 
 <FeatureBeta />
@@ -38,7 +38,7 @@ Select **Anonymized data** as the data option when creating a new branch.
 4. In the **Create new branch** dialog:
    - Select your **Parent branch** (typically `production` or `main`)
    - (Optional) Enter a **Branch name**
-   - (Optional) Set **Expire branch after** if you want to delete the branch automatically after a specified number of days
+   - (Optional) **Automatically delete branch after** is checked by default with 1 day selected. You can change it, uncheck it, or leave it as is to automatically delete the branch after the specified time.
    - Under data options, select **Anonymized data**
 5. Click **Create**
 
@@ -71,17 +71,7 @@ curl -X POST \
   }'
 ```
 
-**Request parameters:**
-
-- `masking_rules` (optional): Array of masking rules to apply to the branch. Each rule specifies:
-  - `database_name`: Target database
-  - `schema_name`: Target schema (typically `public`)
-  - `table_name`: Table containing sensitive data
-  - `column_name`: Column to mask
-  - `masking_function`: PostgreSQL Anonymizer function to apply
-- `start_anonymization` (optional): Set to `true` to automatically start anonymization after branch creation
-
-The API supports all PostgreSQL Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
+For complete parameter documentation and additional examples, see [Create anonymized branch](#create-anonymized-branch) in the API reference below. The API supports all PostgreSQL Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
 
 </TabItem>
 
@@ -96,19 +86,26 @@ The API supports all PostgreSQL Anonymizer masking functions, providing more opt
 From the **Data Masking** page:
 
 1. Select the schema, table, and column you want to mask.
-2. Choose a masking function from the dropdown list (e.g., "Dummy Free Email" to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API.
+2. Choose a masking function from the dropdown list (e.g., **Dummy Free Email** to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API.
+
+<Admonition type="tip">
+For email columns with unique constraints, use **Random Unique Email**, which generates UUID-based emails that maintain uniqueness while preserving the email format.
+</Admonition>
+
 3. Repeat for all sensitive columns.
-4. When you are ready, click `Apply masking rules` to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
+4. When you are ready, click **Apply masking rules** to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
 
 ![Neon Console 'data masking' dialog with example masking functions configured](/docs/workflows/anon-data-masking.png)
 
-> Important: Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
+<Admonition type="important">
+Rerunning the anonymization process on the anonymized branch applies rules to previously anonymized data, not fresh data from the parent branch. To start from the parent's original data, create a new anonymized branch.
+</Admonition>
 
 </TabItem>
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [API reference](#api-reference) section below.
+For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below. Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
 
 **Get masking rules**
 
@@ -116,15 +113,11 @@ For complete API documentation with request/response examples, see the [API refe
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
 
-Retrieves all masking rules defined for the branch.
-
 **Update masking rules**
 
 ```bash
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
 ```
-
-Updates masking rules for the branch. After updating rules, use the start anonymization endpoint to apply the changes.
 
 **Start anonymization**
 
@@ -132,15 +125,11 @@ Updates masking rules for the branch. After updating rules, use the start anonym
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
 
-Starts or restarts the anonymization process for branches in `initialized`, `error`, or `anonymized` state.
-
 **Get anonymization status**
 
 ```bash
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
 ```
-
-Returns the current state (`created`, `initialized`, `initialization_error`, `anonymizing`, `anonymized`, or `error`) and progress information.
 
 </TabItem>
 
@@ -174,16 +163,17 @@ The branch is unavailable for connections while anonymization is in progress.
 ## Limitations
 
 - Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
-- Rerunning anonymization works on already-masked data. Create a new branch for fresh parent data.
 - Branch is unavailable during anonymization.
-- Masking does not enforce database constraints (e.g., primary keys can be masked as NULL).
+- Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
 - The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
-## API reference
+## Data anonymization APIs
 
 The Neon API provides comprehensive control over anonymized branches, including access to all PostgreSQL Anonymizer masking functions and the ability to export/import masking rules for management outside of Neon.
 
 ### Create anonymized branch
+
+[→ API Reference](https://api-docs.neon.tech/reference/createprojectbranchanonymized)
 
 ```
 POST /projects/{project_id}/branch_anonymized
@@ -193,7 +183,13 @@ Creates a new branch with anonymized data using PostgreSQL Anonymizer for static
 
 **Request body parameters:**
 
-- `masking_rules` (optional): Array of masking rules to apply to the branch
+- `masking_rules` (optional): Array of masking rules to apply to the branch. Each rule specifies:
+  - `database_name`: Target database
+  - `schema_name`: Target schema (typically `public`)
+  - `table_name`: Table containing sensitive data
+  - `column_name`: Column to mask
+  - `masking_function` (optional): Dynamic PostgreSQL expression (e.g., `anon.fake_email()` or `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`). Use for realistic test data. You can combine `pg_catalog.*` functions with PostgreSQL Anonymizer functions for custom expressions. Mutually exclusive with `masking_value`.
+  - `masking_value` (optional): Static literal value (e.g., `'REDACTED'`, `0`, `NULL`). Use for simple redaction. Mutually exclusive with `masking_function`.
 - `start_anonymization` (optional): Set to `true` to automatically start anonymization after creation
 
 **Example request:**
@@ -211,7 +207,7 @@ curl -X POST \
         "schema_name": "public",
         "table_name": "users",
         "column_name": "email",
-        "masking_function": "anon.dummy_free_email()"
+        "masking_function": "pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')"
       },
       {
         "database_name": "neondb",
@@ -340,10 +336,10 @@ Returns the created branch object with `restricted_actions` indicating operation
   ],
   "connection_uris": [
     {
-      "connection_uri": "postgresql://neondb_owner:[REDACTED]@ep-fragrant-breeze-a1b2c3d4.us-east-1.aws.neon.tech/neondb?sslmode=require",
+      "connection_uri": "postgresql://neondb_owner:somepass@ep-fragrant-breeze-a1b2c3d4.us-east-1.aws.neon.tech/neondb?sslmode=require",
       "connection_parameters": {
         "database": "neondb",
-        "password": "[REDACTED]",
+        "password": "somepass",
         "role": "neondb_owner",
         "host": "ep-fragrant-breeze-a1b2c3d4.us-east-1.aws.neon.tech",
         "pooler_host": "ep-fragrant-breeze-a1b2c3d4-pooler.us-east-1.aws.neon.tech"
@@ -356,6 +352,8 @@ Returns the created branch object with `restricted_actions` indicating operation
 </details>
 
 ### Get anonymization status
+
+[→ API Reference](https://api-docs.neon.tech/reference/getanonymizedbranchstatus)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/anonymized_status
@@ -392,6 +390,8 @@ curl -X GET \
 
 ### Start anonymization
 
+[→ API Reference](https://api-docs.neon.tech/reference/startanonymization)
+
 ```
 POST /projects/{project_id}/branches/{branch_id}/anonymize
 ```
@@ -424,6 +424,8 @@ curl -X POST \
 </details>
 
 ### Get masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/getmaskingrules)
 
 ```
 GET /projects/{project_id}/branches/{branch_id}/masking_rules
@@ -473,6 +475,8 @@ SELECT * FROM anon.pg_masking_rules;
 ```
 
 ### Update masking rules
+
+[→ API Reference](https://api-docs.neon.tech/reference/updatemaskingrules)
 
 ```
 PATCH /projects/{project_id}/branches/{branch_id}/masking_rules
@@ -549,7 +553,7 @@ Creating anonymized database copies for development, testing, or preview environ
 
 <Steps>
 
-## Requirements
+### Requirements
 
 Before setting up the GitHub Action:
 
@@ -562,7 +566,7 @@ Before setting up the GitHub Action:
 The Neon GitHub integration can configure these secrets automatically. See [Neon GitHub integration](/docs/guides/neon-github-integration).
 </Admonition>
 
-## Set up the GitHub Actions workflow
+### Set up the GitHub Actions workflow
 
 Create a file at `.github/workflows/create-anon-branch.yml` (or similar) with the following content. It implements the same masking rules we used in the manual approach:
 
@@ -628,7 +632,7 @@ jobs:
           echo "Database anonymization completed successfully."
 ```
 
-## Testing the workflow
+### Testing the workflow
 
 To test this automation workflow:
 
@@ -641,18 +645,12 @@ To test this automation workflow:
    - Connecting to the new branch and confirm that the original values were replaced
    - Checking the data in the Neon Console's **Tables** view
 
-## Cleaning up
+### Cleaning up
 
 Remember to clean up anonymized branches when they're no longer needed. You can delete them manually or automate cleanup with the [delete-branch-action](https://github.com/neondatabase/delete-branch-action) GitHub Action when PRs are closed.
 
 </Steps>
 
-## Conclusion
+### Conclusion
 
-The PostgreSQL Anonymizer extension with Neon's branching functionality provides a solution for protecting sensitive data in development workflows. By using static masking with Neon branches, you can:
-
-- Create realistic test environments without exposing sensitive information
-- Obfuscate sensitive information such as names, addresses, emails, and other personally identifiable details (PII)
-- Automate anonymization processes as part of your CI/CD pipeline
-
-While only static masking is currently supported in Neon, this approach offers a robust solution for most development and testing use cases.
+Combining PostgreSQL Anonymizer with Neon branching lets you create realistic test environments without exposing sensitive data.

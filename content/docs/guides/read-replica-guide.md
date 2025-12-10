@@ -2,7 +2,7 @@
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.914Z'
+updatedOn: '2025-12-03T13:07:33.031Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.
@@ -13,7 +13,7 @@ The general purpose of read replicas is to segregate read-only work from your pr
 - **Analytics queries**: Offloading resource-intensive analytics and reporting workloads to reduce load on the primary compute
 - **Read-only access**: Granting read-only access to users or applications that don't require write permissions
 
-Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the vCPU and memory allocated to each. Neon's _Autoscaling_ and _Scale to Zero_ features are also supported, providing you with control over read replica compute usage.
+Regardless of the application, the steps for creating, configuring, and connecting to a read replica are the same. You can create one or more read replicas for any branch in your Neon project and configure the compute size allocated to each. Neon's _Autoscaling_ and _Scale to Zero_ features are also supported, providing you with control over read replica compute usage.
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ To create a read replica from the Neon Console:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings**. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your compute is automatically suspended. The default setting is 5 minutes.
+5. Specify the **Compute size settings**. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
    The compute size configuration determines the processing power of your database.
    </Admonition>
