@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-11-17T20:56:53.507Z'
+updatedOn: '2025-12-09T15:31:41.491Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -75,7 +75,7 @@ And here's an overview of what we're looking at next:
 - **Backup scheduling**: Automate snapshots with daily, weekly, or monthly backup schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
 - **Postgres 18 support (Preview)**: Postgres 18 is now available in preview. Create a new project and select Postgres 18 as your version. [Read the announcement](/blog/postgres-18).
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
-- **Usage-based pricing plans**: Our paid plans now start at just **$5/month**. Pay only for what you use. See [Neon's New Pricing, Explained: Usage-Based With a $5 Minimum](https://neon.com/blog/new-usage-based-pricing).
+- **Usage-based pricing plans**: Our paid plans are fully usage-based — pay only for what you use. See [Neon plans](/docs/introduction/plans).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
 - **Neon Local Connect** — An extension that makes it easy to work with Neon in your local development environment. Available for VS Code, Cursor, Windsurf, and other compatible editors. See [Neon Local Connect Extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect).
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
@@ -120,7 +120,7 @@ And here's an overview of what we're looking at next:
 <details>
 <summary>Shipped in 2024</summary>
 
-- **Larger computes**: Autoscaling now supports up to 16 vCPUs, and fixed compute sizes up to 56 vCPUs are available in Beta.
+- **Larger computes**: Autoscaling now supports up to 16 CU, and fixed compute sizes up to 56 CU are available.
 - **A Model Context Protocol (MCP) server for Neon**: We released an open-source MCP server, enabling AI agents to interact with Neon's API using natural language for tasks like database creation, SQL queries, and migrations. Read the blog post: [Let Claude Manage Your Neon Databases: Our MCP Server is Here](/blog/let-claude-manage-your-neon-databases-our-mcp-server-is-here).
 - **Neon in the Azure Marketplace**: Neon is now available as an [Azure Native Integration](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=Overview), enabling developers to deploy Neon Postgres databases directly from the Azure portal. [Read the announcement](/blog/neon-is-now-available-as-an-azure-native-integration).
 - **Archive storage**: To minimize storage costs, we now support automatic archiving of inactive branches (snapshots of your data) in cost-efficient object storage. For more about this feature, see [Branch archiving](/docs/guides/branch-archiving).

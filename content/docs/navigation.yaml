@@ -362,7 +362,6 @@
               slug: data-api/manage
             - title: Troubleshooting
               slug: data-api/troubleshooting
-
         - title: Neon Auth
           icon: auth
           slug: neon-auth/overview
@@ -569,6 +568,8 @@
                   slug: ai/ai-rules
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
+                - title: GitHub Copilot agents
+                  slug: ai/ai-github-copilot-agents
                 - title: Neon Auth
                   slug: ai/ai-rules-neon-auth
                 - title: Drizzle

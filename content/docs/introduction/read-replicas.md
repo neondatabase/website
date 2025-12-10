@@ -3,14 +3,14 @@ title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
 enableTableOfContents: true
-updatedOn: '2025-05-11T11:23:50.622Z'
+updatedOn: '2025-12-03T13:07:33.038Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
 
 ![read replica simple](/docs/introduction/read_replica_simple.png)
 
-You can instantly create read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
+You can instantly create read replicas for any branch in your Neon project and configure the compute size allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
 
 ## How are Neon read replicas different?
 

@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T20:24:25.880Z'
+updatedOn: '2025-12-03T15:06:05.464Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -435,5 +435,9 @@ Use this option if you need to inspect the restored data before you switch over 
 </TabItem>
 
 </Tabs>
+
+## Limitations
+
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 
 <NeedHelp/>

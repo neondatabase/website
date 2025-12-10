@@ -2,7 +2,9 @@
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 enableTableOfContents: true
-updatedOn: '2025-11-13T20:54:35.549Z'
+updatedOn: '2025-12-02T22:18:46.694Z'
+redirectFrom:
+  - /docs/guides/neon-authorize
 tag: beta
 ---
 

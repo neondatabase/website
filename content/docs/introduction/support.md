@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-11-28T18:21:08.471Z'
+updatedOn: '2025-12-08T15:34:39.154Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -122,7 +122,7 @@ An explanation of each severity level is provided below.
 
 Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
@@ -159,7 +159,7 @@ Customers on a legacy [Enterprise plan](/docs/introduction/legacy-plans#enterpri
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. For more information, see [legacy plans](/docs/introduction/legacy-plans#enterprise-plan-legacy). "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
