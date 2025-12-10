@@ -49,8 +49,9 @@ const Branching = () => (
           className="pointer-events-none aspect-[1184/500] w-full"
           wrapperClassName={clsx(
             'relative mt-14 w-full',
-            'xl:-mx-8 xl:mt-12 xl:w-[calc(100%+64px)] xl:max-w-none',
-            'sm:-mx-5 sm:w-[calc(100%+40px)]'
+            'xl:-mr-16 xl:-ml-7 xl:mt-12 xl:w-[calc(100%+92px)] xl:max-w-none',
+            'lg:-ml-5 xl:w-[calc(100%+84px)]',
+            'sm:-mr-5 sm:-ml-2.5 sm:w-[calc(100%+30px)]'
           )}
           src="/animations/pages/home-new/branching.riv?20251210"
           fit={Fit.Contain}
