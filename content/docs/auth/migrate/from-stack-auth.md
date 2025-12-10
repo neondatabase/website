@@ -324,15 +324,22 @@ You switch from hook-based redirects to declarative UI helpers that show content
 
 #### Middleware-based protection
 
-<CodeWithLabel label="middleware.ts (new)">
+<CodeWithLabel label="proxy.ts (new)">
 
 ```tsx
-import { neonAuthMiddleware } from '@neondatabase/neon-auth-next';
-import { authClient } from './auth';
+import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
 
-export default neonAuthMiddleware(authClient, {
-  protectedPaths: ['/dashboard', '/settings'],
+export default neonAuthMiddleware({
+  // Redirects unauthenticated users to sign-in page
+  loginUrl: '/auth/sign-in',
 });
+
+export const config = {
+  matcher: [
+    // Protected routes requiring authentication
+    '/account/:path*',
+  ],
+};
 ```
 
 </CodeWithLabel>
