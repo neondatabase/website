@@ -10,7 +10,7 @@ import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 
-import tableData from '../data/plans.json';
+import tableData from '../data/plans';
 
 // Styles to set fixed height for table cells
 const rowClass = {

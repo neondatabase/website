@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import LINKS from 'constants/links';
 import { getHighlightedCodeArray } from 'lib/shiki';
 
 import CodeTabsNavigation from './code-tabs-navigation';
@@ -14,7 +15,7 @@ const codeSnippets = [
 require 'net/http'
 require 'openssl'
     
-url = URI("https://console.neon.tech/api/v2/projects/project_id/branches")
+url = URI("${LINKS.console}/api/v2/projects/project_id/branches")
     
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
@@ -35,7 +36,7 @@ require_once('vendor/autoload.php');
 
 $client = new \GuzzleHttp\Client();
 
-$response = $client->request('POST', 'https://console.neon.tech/api/v2/projects/project_id/branches', [
+$response = $client->request('POST', '${LINKS.console}/api/v2/projects/project_id/branches', [
   'headers' => [
     'accept' => 'application/json',
     'content-type' => 'application/json',
@@ -59,7 +60,7 @@ sdk.createProjectBranch({project_id: 'project_id'})
     iconName: 'bash',
     language: 'bash',
     code: `curl --request POST
---url https://console.neon.tech/api/v2/projects/project_id/branches
+--url ${LINKS.console}/api/v2/projects/project_id/branches
 --header 'accept: application/json'
 --header 'content-type: application/json'`,
   },
