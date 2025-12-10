@@ -14,7 +14,7 @@ Complete these steps before taking your application to production with Neon Auth
 </CheckItem>
 
 <CheckItem title="2. Set up custom email provider" href="/docs/auth/production-checklist#email-provider">
-  Replace shared SMTP (`auth@mail.myneon.app`) with your own email service for reliable delivery and higher limits. A custom email provider is also required if you want to use magic links instead of verification codes. See [Email provider configuration](#email-provider) below.
+  Replace shared SMTP (`auth@mail.myneon.app`) with your own email service for reliable delivery and higher limits. A custom email provider is also required if you want to use verification links instead of verification codes. See [Email provider configuration](#email-provider) below.
 </CheckItem>
 
 <CheckItem title="3. Configure OAuth credentials (if using OAuth)" href="/docs/auth/guides/setup-oauth#production-setup">
@@ -51,7 +51,7 @@ In your project's **Settings** → **Auth** page, configure your email provider:
 
 ### Email provider requirements
 
-- **Magic links**: Require a custom email provider
+- **Verification links**: Require a custom email provider
 - **Verification codes**: Work with shared or custom email providers
 - **Password reset**: Works with shared or custom email providers
 

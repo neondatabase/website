@@ -49,8 +49,8 @@ The Neon SDK provides authentication methods like `signUp()`, `getSession()`, an
   <RightCode label="Terminal">
 
 ```bash
-cd my-app &&
-
+cd my-app
+npm install @neondatabase/neon-js
 ```
 
   </RightCode>
@@ -78,15 +78,15 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 <TwoColumnStep title="Configure the Neon client">
   <LeftContent>
 
-Create a `src/neon.js` file to configure your auth client:
+Create a `src/auth.js` file to configure your auth client:
 
   </LeftContent>
-  <RightCode label="src/neon.js">
+  <RightCode label="src/auth.js">
 
 ```javascript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
-export const neon = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
   </RightCode>
@@ -97,59 +97,72 @@ export const neon = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 
 Neon JS uses a programmatic approach for managing auth state. You'll use React hooks like `useEffect` to check the session and handle auth changes.
 
-Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#authsignup), [sign-in](/docs/reference/javascript-sdk#authsigninwithpassword), and [sign-out](/docs/reference/javascript-sdk#authsignout):
+Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#auth-signup), [sign-in](/docs/reference/javascript-sdk#auth-signinwithpassword), and [sign-out](/docs/reference/javascript-sdk#auth-signout):
 
   </LeftContent>
   <RightCode label="src/App.jsx">
 
 ```jsx
 import { useState, useEffect } from 'react';
-import { neon } from './neon';
+import { authClient } from './auth';
 import './App.css';
 
 export default function App() {
   const [session, setSession] = useState(null);
+  const [user, setUser] = useState(null);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    neon.auth.getSession().then(({ data }) => {
-      setSession(data.session);
+    authClient.getSession().then((result) => {
+      if (result.data?.session && result.data?.user) {
+        setSession(result.data.session);
+        setUser(result.data.user);
+      }
       setLoading(false);
     });
   }, []);
 
-  const handleSignUp = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const { error } = await neon.auth.signUp({ email, password });
-    if (error) {
-      alert(error.message);
+    const result = isSignUp
+      ? await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password })
+      : await authClient.signIn.email({ email, password });
+    
+    if (result.error) {
+      alert(result.error.message);
       return;
     }
-    const { data } = await neon.auth.getSession();
-    setSession(data.session);
+    
+    const sessionResult = await authClient.getSession();
+    if (sessionResult.data?.session && sessionResult.data?.user) {
+      setSession(sessionResult.data.session);
+      setUser(sessionResult.data.user);
+    }
   };
 
   const handleSignOut = async () => {
-    await neon.auth.signOut();
+    await authClient.signOut();
     setSession(null);
+    setUser(null);
   };
 
   if (loading) return <div>Loading...</div>;
 
-  if (session) {
+  if (session && user) {
     return (
       <div>
-        <h1>Logged in as {session.user.email}</h1>
+        <h1>Logged in as {user.email}</h1>
         <button onClick={handleSignOut}>Sign Out</button>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSignUp}>
-      <h1>Sign Up</h1>
+    <form onSubmit={handleSubmit}>
+      <h1>{isSignUp ? 'Sign Up' : 'Sign In'}</h1>
       <input
         type="email"
         placeholder="Email"
@@ -164,7 +177,14 @@ export default function App() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      <button type="submit">Sign Up</button>
+      <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
+      <p>
+        {isSignUp ? (
+          <>Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(false); }}>Sign in</a></>
+        ) : (
+          <>Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(true); }}>Sign up</a></>
+        )}
+      </p>
     </form>
   );
 }

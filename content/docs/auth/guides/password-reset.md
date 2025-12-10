@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
-Password reset allows users to securely reset forgotten passwords. Neon Auth supports password reset via magic links sent to the user's email address.
+Password reset allows users to securely reset forgotten passwords. Neon Auth supports password reset via verification links sent to the user's email address.
 
 ## Enable password reset
 
@@ -94,7 +94,7 @@ SDK methods for password reset (`resetPasswordForEmail`) are not fully supported
 The complete password reset flow works as follows:
 
 1. **User requests reset**: User enters their email and clicks "Send reset link"
-2. **Email sent**: User receives a magic link with a reset token
+2. **Email sent**: User receives a verification link with a reset token
 3. **User clicks link**: User is redirected to your app's reset password page
 4. **User enters new password**: User submits the new password
 5. **Password reset**: Password is updated and user is signed in (if auto-sign-in is enabled)

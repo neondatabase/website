@@ -11,7 +11,7 @@ Add your application domains to Neon Auth's allowlist to enable OAuth and email 
 
 Neon Auth only redirects to domains in your allowlist. This prevents phishing attacks and unauthorized redirects by ensuring users are only sent to your legitimate application URLs.
 
-Without adding your production domain, OAuth sign-in and magic links will fail when users try to access your application.
+Without adding your production domain, OAuth sign-in and verification links will fail when users try to access your application.
 
 ## Add a domain
 
@@ -53,10 +53,10 @@ Add each subdomain explicitly. Wildcards like `*.myapp.com` are not supported.
 - Ensure you included `https://` (not `http://` for production)
 - Check spelling matches exactly (including www vs non-www)
 
-**Magic link doesn't redirect:**
+**Verification link doesn't redirect:**
 
-- Magic links use the same domain allowlist
-- Add the domain where users should land after clicking the magic link
+- Verification links use the same domain allowlist
+- Add the domain where users should land after clicking the verification link
 
 ## Next steps
 

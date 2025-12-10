@@ -145,20 +145,29 @@ Check authentication in Server Components:
   <RightCode label="app/page.tsx">
 
 ```typescript
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+
+async function getBaseUrl() {
+  const headersList = await headers();
+  const host = headersList.get('host') || 'localhost:3000';
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  return `${protocol}://${host}`;
+}
 
 async function signOut() {
   'use server';
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
+  const baseUrl = await getBaseUrl();
 
-  await fetch(`http://localhost:3000/api/auth/sign-out`, {
+  await fetch(`${baseUrl}/api/auth/sign-out`, {
     method: 'POST',
     headers: {
       cookie: cookieHeader,
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify({}),
   });
 
   redirect('/sign-in');
@@ -167,8 +176,9 @@ async function signOut() {
 export default async function HomePage() {
   const cookieStore = await cookies();
   const cookieHeader = cookieStore.toString();
+  const baseUrl = await getBaseUrl();
 
-  const response = await fetch(`http://localhost:3000/api/auth/get-session`, {
+  const response = await fetch(`${baseUrl}/api/auth/get-session`, {
     headers: { cookie: cookieHeader },
   });
 
@@ -202,10 +212,10 @@ export default async function HomePage() {
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Client Component example">
+<TwoColumnStep title="Sign-in page">
   <LeftContent>
 
-Use SDK methods for sign-up, sign-in, and OAuth:
+Create a sign-in page using SDK methods:
 
   </LeftContent>
   <RightCode label="app/sign-in/page.tsx">
@@ -242,13 +252,6 @@ export default function SignInPage() {
     router.push('/');
   };
 
-  const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
-      provider: 'google',
-      callbackURL: `${window.location.origin}/auth/callback`,
-    });
-  };
-
   return (
     <div>
       <h1>Sign In</h1>
@@ -271,9 +274,9 @@ export default function SignInPage() {
           {loading ? 'Signing in...' : 'Sign In'}
         </button>
       </form>
-      <button onClick={handleGoogleSignIn} className="secondary">
-        Sign in with Google
-      </button>
+      <p>
+        <a href="/sign-up">Don't have an account? Sign up</a>
+      </p>
     </div>
   );
 }
@@ -324,13 +327,6 @@ export default function SignUpPage() {
     router.push('/');
   };
 
-  const handleGoogleSignUp = async () => {
-    await authClient.signIn.social({
-      provider: 'google',
-      callbackURL: `${window.location.origin}/auth/callback`,
-    });
-  };
-
   return (
     <div>
       <h1>Sign Up</h1>
@@ -360,9 +356,6 @@ export default function SignUpPage() {
           {loading ? 'Signing up...' : 'Sign Up'}
         </button>
       </form>
-      <button onClick={handleGoogleSignUp} className="secondary">
-        Sign up with Google
-      </button>
       <p>
         <a href="/sign-in">Already have an account? Sign in</a>
       </p>
@@ -374,40 +367,6 @@ export default function SignUpPage() {
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Handle OAuth callback">
-  <LeftContent>
-
-Create a callback page to handle OAuth redirects:
-
-  </LeftContent>
-  <RightCode label="app/auth/callback/page.tsx">
-
-```tsx
-'use client';
-
-import { useEffect } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-
-export default function AuthCallback() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    // OAuth callback is handled by the API route
-    // Just redirect to home after a brief delay
-    const timer = setTimeout(() => {
-      router.push('/');
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [router]);
-
-  return <div>Completing sign-in...</div>;
-}
-```
-
-  </RightCode>
-</TwoColumnStep>
 
 <TwoColumnStep title="Add basic styling (optional)">
   <LeftContent>
@@ -539,7 +498,6 @@ npm run dev
 
 - [`authClient.signUp.email()`](/docs/reference/javascript-sdk#auth-signup) - Create a new user account
 - [`authClient.signIn.email()`](/docs/reference/javascript-sdk#auth-signinwithpassword) - Sign in with email and password
-- [`authClient.signIn.social()`](/docs/reference/javascript-sdk#auth-signinwithoauth) - Sign in with OAuth (Google, GitHub)
 - [`authClient.signOut()`](/docs/reference/javascript-sdk#auth-signout) - Sign out the current user
 - [`authClient.getSession()`](/docs/reference/javascript-sdk#auth-getsession) - Get the current session
 - `/api/auth/get-session` - Get session via API route (for Server Components)
@@ -551,9 +509,7 @@ The response from `/api/auth/get-session` returns `{ user, session }` directly (
 
 ## Next steps
 
-- [Learn about Neon Auth concepts](/docs/auth/overview)
-- [Use UI components instead](/docs/auth/quick-start/nextjs) if you want pre-built forms
-- [Add email verification](/docs/auth/guides/email-verification) to verify user emails
-- [Set up OAuth providers](/docs/auth/guides/setup-oauth) for Google and GitHub sign-in
+- [Add email verification](/docs/auth/guides/email-verification)
+- [Branching authentication](/docs/auth/branching-authentication)
 
 <NeedHelp/>

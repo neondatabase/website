@@ -97,6 +97,24 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 
 Replace the contents of `src/main.tsx` to wrap your app with React Router and the auth provider. Import the Neon Auth UI CSS - no additional setup needed:
 
+Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
+
+<details>
+<summary>Example: Adding optional props</summary>
+
+```tsx
+<NeonAuthUIProvider
+  authClient={authClient}
+  social={{ providers: ['google', 'github'] }}
+  navigate={navigate}
+  credentials={{ forgotPassword: true }}
+>
+  {children}
+</NeonAuthUIProvider>
+```
+
+</details>
+
   </LeftContent>
   <RightCode label="src/main.tsx">
 
@@ -181,6 +199,7 @@ function Auth() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
+        padding: '2rem 1rem',
       }}
     >
       <AuthView pathname={pathname} />
@@ -197,6 +216,7 @@ function Account() {
         justifyContent: 'center',
         alignItems: 'center',
         minHeight: '100vh',
+        padding: '2rem 1rem',
       }}
     >
       <AccountView pathname={pathname} />

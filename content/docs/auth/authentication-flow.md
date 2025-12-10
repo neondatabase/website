@@ -8,7 +8,7 @@ updatedOn: '2025-11-23T00:00:00.000Z'
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
 
 <Admonition type="note">
-Anyone can sign up for your application by default. Support for restricted signups is coming soon. Until then, consider adding a verification step by enabling [email verification](/docs/auth/guides/email-verification) via magic link or verification code.
+Anyone can sign up for your application by default. Support for restricted signups is coming soon. Until then, consider adding a verification step by enabling [email verification](/docs/auth/guides/email-verification) via verification link or verification code.
 </Admonition>
 
 ## Architecture overview

@@ -146,6 +146,24 @@ export const { GET, POST } = authApiHandler();
 
 Create a provider component to wrap your application with authentication context. Create `app/providers.tsx`:
 
+Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
+
+<details>
+<summary>Example: Adding optional props</summary>
+
+```tsx
+<NeonAuthUIProvider
+  authClient={authClient}
+  social={{ providers: ['google', 'github'] }}
+  navigate={router.push}
+  credentials={{ forgotPassword: true }}
+>
+  {children}
+</NeonAuthUIProvider>
+```
+
+</details>
+
   </LeftContent>
   <RightCode label="app/providers.tsx">
 

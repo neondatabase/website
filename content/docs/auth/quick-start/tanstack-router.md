@@ -114,6 +114,24 @@ export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 
 Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. This makes the auth state available to the UI components used throughout your app.
 
+Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
+
+<details>
+<summary>Example: Adding optional props</summary>
+
+```tsx
+<NeonAuthUIProvider
+  authClient={authClient}
+  social={{ providers: ['google', 'github'] }}
+  navigate={navigate}
+  credentials={{ forgotPassword: true }}
+>
+  {children}
+</NeonAuthUIProvider>
+```
+
+</details>
+
   </LeftContent>
   <RightCode label="src/routes/__root.tsx">
 
