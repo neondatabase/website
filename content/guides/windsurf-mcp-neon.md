@@ -67,18 +67,16 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 
 1. Open Windsurf.
 2. Open Cascade by using `⌘L` on MacOS or `Ctrl+L` on Windows/Linux.
-3. Click on the hammer icon (🔨), then click the **"Configure"** button.
+3. Click on the plug icon (🔌), then click the **"Configure"** button.
    ![Windsurf Configure MCP](/docs/guides/windsurf-configure-mcp.png)
-4. This will open up the "Manage MCPs" file in Windsurf.
-5. Click on "View raw config" to open the Windsurf's MCP configuration file.
-6. Add the "Neon" server entry within the `mcpServers` object:
+4. This will open up the MCP configuration file in Windsurf.
+5. Add the "Neon" server entry within the `mcpServers` object:
 
    ```json
    {
      "mcpServers": {
        "Neon": {
-         "command": "npx",
-         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+         "url": "https://mcp.neon.tech/mcp"
        }
      }
    }
@@ -86,15 +84,14 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 
    If you have other MCP servers configured, you can copy just the Neon part.
 
-7. **Save** the MCP configuration file.
-8. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade.
-9. An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
+6. **Save** the MCP configuration file.
+7. An OAuth window will open in your browser. Follow the prompts to authorize Windsurf to access your Neon account.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
-10. You can verify that the connection is successful by checking the available MCP servers in Cascade. The toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
+8. You can verify that the connection is successful by checking the available MCP servers. The toolbar should indicate that you have Neon MCP server available.
 
-    ![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
+   ![Windsurf MCP Toolbar](/docs/guides/windsurf-mcp-server-available.png)
 
-11. Windsurf is now connected to the Neon MCP server.
+9. Windsurf is now connected to the Neon MCP server.
 
 <Admonition type="note">
 The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
@@ -119,7 +116,7 @@ key for authentication.
 2. Open Cascade by using `⌘L` on MacOS or `Ctrl+L` on Windows/Linux.
 3. Click on the hammer icon (🔨), then click the **"Configure"** button.
    ![Windsurf Configure MCP](/docs/guides/windsurf-configure-mcp.png)
-4. This will open up the "Manage MCPs" file in Windsurf.
+4. This will open up the MCP configuration file in Windsurf.
 5. Click on "View raw config" to open the Windsurf's MCP configuration file.
 6. Add the "Neon" server entry within the `mcpServers` object:
 
@@ -172,8 +169,7 @@ key for authentication.
    If you have other MCP servers configured, you can copy just the `Neon` part.
 
 7. **Save** the MCP configuration file.
-8. Click **"Refresh"** (🔄) in the MCP toolbar in Windsurf Cascade to refresh the configuration.
-9. You can verify that the connection is successful by checking the available MCP servers in Cascade. The toolbar should indicate that you have MCP servers available, and you should see "1 available MCP server" (or more if you configured additional servers).
+8. You can verify that the connection is successful by checking the available MCP servers. The toolbar should indicate that you have Neon MCP server available.
    ![Windsurf MCP Toolbar with Server Available](/docs/guides/windsurf-mcp-server-available.png)
 
    You've now configured Neon MCP Server in Windsurf and can manage your Neon Postgres databases using AI.
@@ -286,7 +282,8 @@ Windsurf with Neon MCP Server lets you use natural language to interact with you
 ## Resources
 
 - [MCP Protocol](https://modelcontextprotocol.org)
-- [Codeium Windsurf Documentation](https://docs.codeium.com/windsurf/getting-started)
+- [Windsurf Documentation](https://docs.windsurf.com/windsurf/getting-started)
+- [Windsurf MCP](https://docs.windsurf.com/windsurf/cascade/mcp)
 - [Neon Docs](/docs)
 - [Neon API Keys](/docs/manage/api-keys#creating-api-keys)
 - [Neon MCP server GitHub](https://github.com/neondatabase/mcp-server-neon)

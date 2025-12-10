@@ -28,25 +28,23 @@ import { authClient } from './auth';
 
 function App() {
   return (
-    <NeonAuthUIProvider authClient={authClient}>
-      {/* Your app components */}
-    </NeonAuthUIProvider>
+    <NeonAuthUIProvider authClient={authClient}>{/* Your app components */}</NeonAuthUIProvider>
   );
 }
 ```
 
 ### Common Props
 
-| Prop | Type | Description | Example |
-|------|------|-------------|---------|
-| `authClient` | `NeonAuthPublicApi` | **Required.** Your Neon Auth client instance | `authClient={authClient}` |
-| `social.providers` | `SocialProvider[]` | Array of OAuth providers to enable (e.g., Google, GitHub) | `social={{ providers: ['google', 'github'] }}` |
-| `navigate` | `(href: string) => void` | Navigation function for React Router | `navigate={navigate}` |
-| `Link` | `ComponentType` | Custom Link component for routing | `Link={RouterLink}` |
-| `localization` | `AuthLocalization` | Customize text labels throughout the UI | See example below |
-| `avatar` | `AvatarOptions` | Avatar upload and display configuration | `avatar={{ size: 256, extension: 'webp' }}` |
-| `additionalFields` | `AdditionalFields` | Custom fields for sign-up and account settings | See example below |
-| `credentials.forgotPassword` | `boolean` | Enable forgot password flow | `credentials={{ forgotPassword: true }}` |
+| Prop                         | Type                     | Description                                               | Example                                        |
+| ---------------------------- | ------------------------ | --------------------------------------------------------- | ---------------------------------------------- |
+| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance              | `authClient={authClient}`                      |
+| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (e.g., Google, GitHub) | `social={{ providers: ['google', 'github'] }}` |
+| `navigate`                   | `(href: string) => void` | Navigation function for React Router                      | `navigate={navigate}`                          |
+| `Link`                       | `ComponentType`          | Custom Link component for routing                         | `Link={RouterLink}`                            |
+| `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                   | See example below                              |
+| `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                   | `avatar={{ size: 256, extension: 'webp' }}`    |
+| `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings            | See example below                              |
+| `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                               | `credentials={{ forgotPassword: true }}`       |
 
 ### Enable OAuth Providers
 
@@ -83,7 +81,7 @@ import { authClient } from './auth';
 
 function App() {
   const navigate = useNavigate();
-  
+
   return (
     <NeonAuthUIProvider
       authClient={authClient}
@@ -102,6 +100,7 @@ function App() {
 ### Customization Examples
 
 **Custom localization:**
+
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
@@ -114,6 +113,7 @@ function App() {
 ```
 
 **Custom sign-up fields:**
+
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
@@ -137,9 +137,9 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 ### Authentication Components
 
-| Component          | Purpose                                                            | Key Props               | Docs                                                                   |
-| ------------------ | ------------------------------------------------------------------ | ----------------------- | ---------------------------------------------------------------------- |
-| `<AuthView>`       | All-in-one auth UI with sign-in and sign-up forms                 | `pathname`              | [auth-view](https://better-auth-ui.com/components/auth-view)           |
+| Component    | Purpose                                           | Key Props  | Docs                                                         |
+| ------------ | ------------------------------------------------- | ---------- | ------------------------------------------------------------ |
+| `<AuthView>` | All-in-one auth UI with sign-in and sign-up forms | `pathname` | [auth-view](https://better-auth-ui.com/components/auth-view) |
 
 **Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
 
@@ -193,7 +193,6 @@ function Header() {
   );
 }
 ```
-
 
 ### Protected Route
 

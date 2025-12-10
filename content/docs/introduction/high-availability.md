@@ -7,7 +7,7 @@ updatedOn: '2025-03-13T12:56:34.386Z'
 
 At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
 
-![Neon architecture diagram](/docs/introduction/neon_architecture_4.jpg)
+![Neon architecture diagram](/docs/introduction/neon_architecture_5.jpg)
 
 Based on this separation, we can break our approach into two main parts:
 

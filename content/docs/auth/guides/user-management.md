@@ -1,5 +1,5 @@
 ---
-title: User Management
+title: User management
 subtitle: Update profiles, change passwords, and manage account settings
 enableTableOfContents: true
 updatedOn: '2025-12-02T00:00:00.000Z'

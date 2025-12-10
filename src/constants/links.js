@@ -8,7 +8,7 @@ export default {
   caseStudies: '/case-studies',
   cli: '/cli',
   contactSales: '/contact-sales',
-  creators: '/creators',
+  creators: '/programs/creators',
   demos: '/demos',
   deploy: '/deploy',
   developerDays1: '/developer-days-1',
@@ -103,11 +103,11 @@ export default {
   certISO27001: 'https://trust.neon.com/?itemUid=1fed9faa-4a87-427c-9a95-96b4d6bf66b7',
   certISO27701: 'https://trust.neon.com/?itemUid=dc79cbc7-c99d-4eb9-891e-f5dc44b943d7',
   certSOC2: 'https://trust.neon.com/?itemUid=7bfa66da-33ab-49de-8391-e329738a1ae9',
-  certHIPAA: 'https://neon.com/docs/security/hipaa',
+  certHIPAA: '/docs/security/hipaa',
 
   // Other
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  launchpad: 'https://neon.new/',
+  instagres: 'https://neon.new/',
 };

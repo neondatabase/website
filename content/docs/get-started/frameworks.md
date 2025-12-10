@@ -27,6 +27,8 @@ updatedOn: '2025-08-02T10:33:29.254Z'
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
+<a href="/docs/guides/medusajs" title="Medusa.js" description="Use Medusa.js with Neon" icon="medusajs"></a>
+
 <a href="/docs/guides/micronaut-kotlin" title="Micronaut Kotlin" description="Connect a Micronaut Kotlin application to Neon" icon="micronaut"></a>
 
 <a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>

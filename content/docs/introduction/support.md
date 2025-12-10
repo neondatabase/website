@@ -1,7 +1,7 @@
 ---
 title: Support
 enableTableOfContents: true
-updatedOn: '2025-10-08T14:55:26.726Z'
+updatedOn: '2025-12-08T15:34:39.154Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -48,7 +48,7 @@ The [Neon Discord Server](https://discord.gg/92vNTzKDGp) is not an official Neon
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Select the **Get help** option from the help menu (`?`) in the Neon Console.
+- **Neon Console**: Select **Ask AI assistant** from the Resources menu (`?`) in the Neon Console.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
@@ -60,17 +60,22 @@ Neon AI chat is not an official Neon Support channel.
 
 ### Support tickets
 
-Paying users can raise a support ticket in the Neon Console, via the Neon AI chat assistant, by asking it to create a support ticket.
+Paying users can raise a support ticket in the Neon Console. You can access support in two ways:
+
+1. **Direct access**: Select **Request Support** from the Resources menu (`?`) at the top of the Neon Console
+2. **Via AI assistant**: Select **Ask AI assistant** from the Resources menu, ask your question, and if the assistant is unable to resolve the problem, ask it to create a support ticket
+
+Support options available based on your plan:
 
 - **Launch** plan users can open support tickets for **billing-related issues only**
 - **Scale** plan users can open a support ticket for any Neon issue
 - **Business** and **Production** plan users can open a support ticket for any Neon issue with SLA response times
 
-Select **Get help** from the **?** menu at the top of the Neon Console to open the AI chat assistant.
+<Admonition type="tip">
+To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
+</Admonition>
 
-![Get help option in Neon Console](/docs/introduction/support_get_help.png)
-
-Ask your question or describe your issue. If the assistant is unable to resolve the problem, ask it to create a support ticket.
+![Resources menu in Neon Console](/docs/introduction/get_help.png)
 
 ### Slack channel
 
@@ -117,7 +122,7 @@ An explanation of each severity level is provided below.
 
 Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale. For more information, see [plans](/docs/introduction/plans). “Support” means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](/discord). See Neon [plans](/docs/introduction/plans) and [pricing](/pricing) for more information about our plans.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
@@ -154,7 +159,7 @@ Customers on a legacy [Enterprise plan](/docs/introduction/legacy-plans#enterpri
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. For more information, see [legacy plans](/docs/introduction/legacy-plans#enterprise-plan-legacy). "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 

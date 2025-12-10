@@ -1,5 +1,5 @@
 ---
-title: Password Reset
+title: Password reset
 subtitle: Allow users to reset forgotten passwords
 enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
@@ -31,10 +31,7 @@ import { authClient } from './auth';
 export default function App() {
   return (
     <NeonAuthUIProvider authClient={authClient}>
-      <AuthView 
-        pathname="sign-in"
-        credentials={{ forgotPassword: true }}
-      />
+      <AuthView pathname="sign-in" credentials={{ forgotPassword: true }} />
     </NeonAuthUIProvider>
   );
 }

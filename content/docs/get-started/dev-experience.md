@@ -4,7 +4,7 @@ subtitle: Enhancing development workflows with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2025-08-07T07:19:10.374Z'
+updatedOn: '2025-11-13T02:12:26.594Z'
 ---
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.
@@ -33,7 +33,7 @@ neon branches reset feature/user-auth --parent
 
 No more time-consuming restore operations when you need a fresh database copy.
 
-You can use branching with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own branching workflow, you can use the [Neon Postgres Previews Integration](https://vercel.com/integrations/neon) to set one up in just a few clicks.
+You can use branching with deployment platforms such as Vercel to create a database branch for each preview deployment. If you'd rather not build your own branching workflow, you can use the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration) to set one up in just a few clicks.
 
 To learn more, read [Database Branching Workflows](/branching), and the [Database branching workflow guide for developers](/blog/database-branching-workflows-a-guide-for-developers).
 

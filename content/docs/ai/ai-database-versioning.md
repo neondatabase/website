@@ -102,6 +102,10 @@ curl --request POST \
 - After successful operations
 - User-initiated save points
 
+<Admonition type="tip">
+Learn how our Developer Advocate approaches snapshot-based workflows in [Promoting Postgres changes safely to production](https://neon.com/blog/promoting-postgres-changes-safely-production).
+</Admonition>
+
 ### Rolling back to (restoring) a snapshot
 
 Restore any snapshot to recover a previous version using the [restore endpoint](https://api-docs.neon.tech/reference/restoresnapshot):
@@ -327,11 +331,15 @@ Proper cleanup reduces costs and keeps your project manageable:
 
 ## Best practices
 
-- **Set `target_branch_id` for rollbacks**: When restoring to the active branch, always specify `target_branch_id` to prevent accidental restores
-- **Poll operations**: Wait for terminal states before connecting to the database
-- **Snapshot naming**: Use conventions like `snapshot-{GIT_SHA}-{TIMESTAMP}` or maintain sequential version numbers
-- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (e.g., `production (old)`) created during restores
-- **Version metadata**: Keep version metadata separate to preserve audit trail across restores
+- **Set `target_branch_id` for rollbacks**: When restoring to the active branch, always specify `target_branch_id` to prevent accidental restores.
+- **Poll operations**: Wait for terminal states before connecting to the database.
+- **Snapshot naming conventions**: Use descriptive conventions like `prod_snap_2025-01-17_pre-promotion`, `dev_snap_2025-01-17_candidate_v2`, `prod_snap_2025-01-17_after-promotion` to make automation easier.
+- **Snapshot production before promotion**: Take a snapshot of your production branch before promoting changes to provide a rollback point if needed.
+- **Differential retention**: Keep production snapshots longer for potential rollback, and development snapshots briefly (hours max) for promotion cycles only.
+- **Implement connection retry logic**: Design application code to retry queries automatically, as restore operations briefly drop active connections (typically milliseconds, occasionally up to a second).
+- **Keep backup branches briefly**: After restore, keep the automatically-created backup branch (e.g., `prod (old)`) for sanity checks before deletion, or assign a [time to live](/docs/guides/branch-expiration) for automatic cleanup.
+- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (e.g., `production (old)`) created during restores.
+- **Version metadata**: Keep version metadata separate to preserve audit trail across restores.
 
 ## FAQ
 

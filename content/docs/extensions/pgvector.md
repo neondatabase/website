@@ -4,7 +4,7 @@ subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2025-08-02T10:33:29.245Z'
+updatedOn: '2025-12-03T13:07:33.024Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -306,7 +306,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
@@ -434,7 +434,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 

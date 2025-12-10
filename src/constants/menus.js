@@ -114,9 +114,9 @@ export default {
             {
               icon: RocketIcon,
               iconGradient: RocketGradientIcon,
-              title: 'Launchpad',
+              title: 'Instagres',
               description: 'No-signup flow',
-              to: LINKS.launchpad,
+              to: LINKS.instagres,
               isExternal: true,
             },
             {

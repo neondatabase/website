@@ -1,7 +1,7 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2025-08-18T18:19:18.019Z'
+updatedOn: '2025-12-03T13:07:33.036Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
@@ -47,7 +47,7 @@ This graph shows allocated RAM and usage over time for the selected compute.
 
 **ALLOCATED**: The amount of allocated RAM.
 
-RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated RAM is always 1 (GB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
+RAM is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (1 GB RAM), your allocated RAM is always 1 (GB). With autoscaling, allocated RAM increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated RAM drops to 0.
 
 **Used**: The amount of RAM used.
 
@@ -63,7 +63,7 @@ This graph shows the amount of allocated CPU and usage over time for the selecte
 
 **ALLOCATED**: The amount of allocated CPU.
 
-CPU is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (.25 vCPU with 1 GB RAM), your allocated CPU is always 0.25. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
+CPU is allocated according to the size of your compute or your [autoscaling](/docs/guides/autoscaling-guide) configuration, if applicable. For example, if your compute size is .25 CU (1 GB RAM), your allocated CPU scales proportionally. With autoscaling, allocated CPU increases and decreases as your compute size scales up and down in response to load. If [scale to zero](/docs/guides/scale-to-zero-guide) is enabled and your compute transitions to an idle state after a period of inactivity, allocated CPU drops to 0.
 
 **Used**: The amount of CPU used, in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu).
 

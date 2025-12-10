@@ -11,7 +11,7 @@ import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
-import plans from './data/plans.json';
+import plans from './data/plans';
 import Features from './features';
 
 const scaleCardBorderVariants = {

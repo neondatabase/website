@@ -56,7 +56,7 @@ Onboard Faster, Keep Collaboration in Sync
 One Branch per PR
 : Use automation to give each git branch or Pull Request a corresponding database branch. This can be done with automation tools like GitHub Actions, or more easily as part of an integration:
 : - [Neon GitHub integration](/docs/guides/neon-github-integration) - An easier way to create a branch for every PR.
-: - [Neon Vercel Integration](/docs/guides/vercel) - Create and integrate a branch into every Vercel Preview deployment.
+: - [Neon Vercel Integration](/docs/guides/vercel-overview) - Create and integrate a branch into every Vercel Preview deployment.
 
 Ephemeral Environments for Dev/Test
 : Deploy confidently by using branches to run your test suite on an exact copy of your production database. No handling of seed data, no manual work keeping environments in sync.
@@ -152,16 +152,13 @@ Private Link, IP Allow
 
 </DefinitionList>
 
-### Billing
+### Pricing
 
 ---
 
 <DefinitionList bulletType="check">
-Subscription plans
-: Paid plans start at $19, with compute and storage resources already included. [Review our pricing plans](/pricing).
-
-Pay via AWS/Azure Marketplace
-: You can subscribe to Neon via the marketplaces to consolidate billing. Click [here](https://aws.amazon.com/marketplace/pp/prodview-fgeh3a7yeuzh6?sr=0-1&ref_=beagle&applicationId=AWSMPContessa) for AWS, and [here](https://azuremarketplace.microsoft.com/en-us/marketplace/apps/neon1722366567200.neon_serverless_postgres_azure_prod?tab=PlansAndPrice) for Azure.
+Usage-based pricing
+: Start for free, then pay only for what you use. Paid plans start at $5/month minimum. [Review our pricing plans](/pricing).
 
 </DefinitionList>
 

@@ -68,68 +68,11 @@ NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Add Neon Auth styles">
+
+<TwoColumnStep title="Set up your auth API routes">
   <LeftContent>
 
-Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
-
-  </LeftContent>
-  <RightCode label="app/globals.css">
-
-```css
-@import "tailwindcss";
-@import "@neondatabase/neon-js/ui/css"; // [!code ++]
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Configure the auth client">
-  <LeftContent>
-
-Create a `lib/auth/client.ts` file to initialize the auth client:
-
-  </LeftContent>
-  <RightCode label="lib/auth/client.ts">
-
-```typescript
-import { createAuthClient } from '@neondatabase/neon-js/auth/next';
-
-export const authClient = createAuthClient();
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Set up the API route">
-  <LeftContent>
-
-Create an API route to handle authentication requests. Create `app/api/auth/[...path]/route.ts`:
+We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
 
   </LeftContent>
   <RightCode label="app/api/auth/[...path]/route.ts">
@@ -143,12 +86,72 @@ export const { GET, POST } = authApiHandler();
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Create the Auth Provider">
+<TwoColumnStep title="Add neonAuthMiddleware()">
   <LeftContent>
 
-Create a provider component to wrap your application with authentication context. Create `app/providers.tsx`:
+The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
 
-Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
+  </LeftContent>
+  <RightCode label="proxy.ts">
+
+```typescript
+import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
+
+export default neonAuthMiddleware({
+  // Redirects unauthenticated users to sign-in page
+  loginUrl: "/auth/sign-in"
+})
+
+export const config = {
+  matcher: [
+    // Run the middleware for all paths, except the static resources
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ]
+}
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+
+
+<Admonition type="note">
+Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
+</Admonition>
+
+
+<TwoColumnStep title="Configure the auth client">
+  <LeftContent>
+
+The Auth UI components need access to auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
+
+  </LeftContent>
+  <RightCode label="lib/auth/client.ts">
+
+```tsx
+'use client';
+
+import { createAuthClient } from '@neondatabase/neon-js/auth/next';
+
+export const authClient = createAuthClient();
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+
+<TwoColumnStep title="Wrap app layout with auth provider">
+  <LeftContent>
+
+The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app with `NeonAuthUIProvider`.
+
+Copy and pase the following code into your `app/layout.tsx` file.
+
+The `NeonAuthUIProvider` can be fully customized with settings you have configured in Neon Console. For example:
+
+  - Add social providers like Google, Github, and Vercel on sign-in page
+  - Allow your users to create and manage organizations in `/account/organizations` 
+  - Localization support
 
 <details>
 <summary>Example: Adding optional props</summary>
@@ -156,83 +159,44 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
-  social={{ providers: ['google', 'github'] }}
-  navigate={router.push}
-  credentials={{ forgotPassword: true }}
+  redirectTo="/account/settings"
+  emailOTP
+
+  social={{  // [!code ++]
+    providers: ['google', 'github', 'vercel']  // [!code ++]
+  }} // [!code ++]
+  credentials={{ forgotPassword: true }} // [!code ++]
+  organization // [!code ++]
 >
   {children}
 </NeonAuthUIProvider>
 ```
-
 </details>
 
-  </LeftContent>
-  <RightCode label="app/providers.tsx">
-
-```tsx
-'use client';
-
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
-import { authClient } from '@/lib/auth/client';
-import { useRouter } from 'next/navigation';
-
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const router = useRouter();
-
-  return (
-    <NeonAuthUIProvider
-      authClient={authClient}
-      navigate={router.push}
-      replace={router.replace}
-      onSessionChange={() => {
-        router.refresh();
-      }}
-      emailOTP
-      redirectTo="/"
-      social={{
-        providers: ['google', 'github'],
-      }}
-    >
-      {children}
-    </NeonAuthUIProvider>
-  );
-}
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<Admonition type="note">
-Google OAuth works with shared credentials for development. GitHub OAuth requires custom credentials to be configured. See [Set up OAuth](/docs/auth/guides/setup-oauth) for details.
-</Admonition>
-
-<TwoColumnStep title="Wrap your app with the provider">
-  <LeftContent>
-
-Update `app/layout.tsx` to use the `AuthProvider`:
 
   </LeftContent>
   <RightCode label="app/layout.tsx">
 
 ```tsx
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { AuthProvider } from '@/app/providers'; // [!code ++]
-import './globals.css';
+import { authClient } from '@/lib/auth/client';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/neon-js/auth/react/ui'; // [!code ++]
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
 
 const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: 'Create Next App',
-  description: 'Generated by create next app',
+  title: 'My Neon App', // [!code ++]
+  description: 'A Next.js application with Neon Auth', // [!code ++]
 };
 
 export default function RootLayout({
@@ -241,9 +205,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <AuthProvider> {children} </AuthProvider> // [!code ++]
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <NeonAuthUIProvider  // [!code ++]
+          authClient={authClient} // [!code ++]
+          redirectTo="/account/settings" // [!code ++]
+          emailOTP // [!code ++]
+        > // [!code ++]
+          <header className='flex justify-end items-center p-4 gap-4 h-16'> // [!code ++]
+            <UserButton size="icon" /> // [!code ++]
+          </header> // [!code ++]
+
+          {children} // [!code ++]
+        </NeonAuthUIProvider> // [!code ++]
       </body>
     </html>
   );
@@ -253,13 +229,51 @@ export default function RootLayout({
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Create the Auth page">
+
+<TwoColumnStep title="Add Neon Auth styles">
   <LeftContent>
 
-Create a page to handle authentication views (sign in, sign up, etc.). Create `app/auth/[path]/page.tsx`:
+Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
 
   </LeftContent>
-  <RightCode label="app/auth/[path]/page.tsx">
+  <RightCode label="app/globals.css">
+
+```css
+@import "tailwindcss";
+@import "@neondatabase/neon-js/ui/css"; // [!code ++]
+
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+
+<Admonition type="note">
+Now that the Auth provider and styles are set up, let’s build the pages for signing up and signing in
+</Admonition>
+
+<TwoColumnStep title="Create the Auth & Account pages">
+  <LeftContent>
+
+Create a dynamic route segment for authentication and account views in `app/auth/[path]/page.tsx` and `app/account/[path]/page.tsx` respectively.
+
+  - `AuthView` - with dynamic route segment covers the following paths:
+    - `/auth/sign-in` - Sign in with email/password and social providers
+    - `/auth/sign-up` New account registration
+    - `/auth/sign-out` Sign the user out of the applications
+  - `AccountView` - with dynamic route segment covers the following paths:
+    - `/account/settings` - User can manage their profile details
+    - `/account/security` - Change password and list active session
+
+
+  </LeftContent>
+  <RightCode label="create app & account page">
+
+<Tabs labels={["Auth Page", "Account Page"]}>
+
+<TabItem>
+
+Create a new page in `app/auth/[path]/page.tsx` and copy-paste following code:
 
 ```tsx
 import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
@@ -276,17 +290,11 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
   );
 }
 ```
+</TabItem>
 
-  </RightCode>
-</TwoColumnStep>
+<TabItem>
 
-<TwoColumnStep title="Create the Account page">
-  <LeftContent>
-
-Create a page for user account management. Create `app/account/[path]/page.tsx`:
-
-  </LeftContent>
-  <RightCode label="app/account/[path]/page.tsx">
+Create a new page in `app/account/[path]/page.tsx` and copy-paste following code:
 
 ```tsx
 import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
@@ -309,175 +317,24 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 }
 ```
 
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Protect your routes">
-  <LeftContent>
-
-There are two approaches to protect your routes:
-
-1. **Component-level protection**: Use `SignedIn` and `RedirectToSignIn` components directly in your page components
-2. **Middleware-based protection**: Use Next.js middleware with a route matcher to protect entire route segments
-
-Choose the approach that best fits your use case - middleware is ideal for protecting entire route segments, while component-level checks offer more granular control within pages.
-
-  </LeftContent>
-  <RightCode label="Choose your approach">
-
-<Tabs labels={["Component-level (app/page.tsx)", "Middleware (proxy.ts)"]}>
-
-<TabItem>
-
-Use `SignedIn` and `RedirectToSignIn` components to protect pages at the component level. This performs authentication checks directly within the page component.
-
-```tsx
-'use client';
-
-import { SignedIn, RedirectToSignIn, UserButton } from '@neondatabase/neon-js/auth/react/ui';
-import { authClient } from '@/lib/auth/client';
-
-export default function Home() {
-  const { data: session } = authClient.useSession();
-
-  return (
-    <div className="bg-zinc-50 flex min-h-screen items-center justify-center font-sans dark:bg-black">
-      <SignedIn>
-        <main className="flex flex-col items-center justify-center gap-8 text-center">
-          <h1 className="dark:text-zinc-50 text-3xl font-semibold tracking-tight text-black">
-            Welcome{session?.user?.name ? `, ${session.user.name}` : ''}!
-          </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg">
-            You&apos;re successfully authenticated.
-          </p>
-
-          {session?.user && (
-            <div className="border-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 rounded-lg border bg-white p-6 shadow-sm">
-              <div className="space-y-3 text-left">
-                <div>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm">Email</p>
-                  <p className="text-zinc-900 dark:text-zinc-50 mt-1 font-medium">
-                    {session.user.email}
-                  </p>
-                </div>
-                {session.user.name && (
-                  <div>
-                    <p className="text-zinc-500 dark:text-zinc-400 text-sm">Name</p>
-                    <p className="text-zinc-900 dark:text-zinc-50 mt-1 font-medium">
-                      {session.user.name}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-          <UserButton />
-        </main>
-      </SignedIn>
-      <RedirectToSignIn />
-    </div>
-  );
-}
-```
-
 </TabItem>
-
-<TabItem>
-
-Use Next.js middleware to protect routes at the edge before they reach your page components. Create a `proxy.ts` file in your project root:
-
-```typescript
-import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
-
-export default neonAuthMiddleware({
-  loginUrl: '/auth/sign-in',
-  authBaseUrl: process.env.NEON_AUTH_BASE_URL!,
-});
-
-export const config = {
-  matcher: [
-    '/only-for-authenticated-users/:path*',
-    // Add more protected routes here
-    '/((?!_next/static|_next/image|favicon.ico|).*)', // Exclude static files from middleware
-  ],
-};
-```
-
-Then create a page at `app/only-for-authenticated-users/page.tsx`. Since the middleware handles authentication, this page doesn't need `SignedIn` or `RedirectToSignIn` components - unauthenticated users are redirected before reaching the page.
-
-```tsx
-'use client';
-
-import { authClient } from '@/lib/auth/client';
-import Link from 'next/link';
-
-export default function ProtectedPage() {
-  const { data: session } = authClient.useSession();
-
-  return (
-    <div className="bg-zinc-50 flex min-h-screen items-center justify-center font-sans dark:bg-black">
-      <main className="flex flex-col items-center justify-center gap-8 text-center">
-        <h1 className="dark:text-zinc-50 text-3xl font-semibold tracking-tight text-black">
-          Protected by Middleware
-        </h1>
-        <p className="text-zinc-600 dark:text-zinc-400 text-lg">
-          This page is protected using Next.js middleware.
-        </p>
-        <p className="text-zinc-600 dark:text-zinc-400">
-          If you&apos;re seeing this, you&apos;re authenticated as{' '}
-          <span className="dark:text-zinc-50 text-zinc-900 font-medium">
-            {session?.user?.email}
-          </span>
-        </p>
-        <Link
-          href="/"
-          className="bg-zinc-900 hover:bg-zinc-800 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 rounded-lg px-4 py-2 text-white"
-        >
-          Back to Home
-        </Link>
-      </main>
-    </div>
-  );
-}
-```
-
-</TabItem>
-
 </Tabs>
 
   </RightCode>
 </TwoColumnStep>
 
+
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server, then open `http://localhost:3000`.
+Start the development server, and then open http://localhost:3000
 
-If you're using middleware protection, you can test the protected route at `http://localhost:3000/only-for-authenticated-users`.
 
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
 npm run dev
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="See your users in the database">
-  <LeftContent>
-
-As users sign up, their profiles are stored in your Neon database in the `neon_auth.user` table.
-
-Query your users table in the SQL Editor to see your new users:
-
-  </LeftContent>
-  <RightCode label="SQL Editor">
-
-```sql
-SELECT * FROM neon_auth.user;
 ```
 
   </RightCode>
