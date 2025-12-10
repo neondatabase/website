@@ -130,12 +130,12 @@ export default function App() {
     const result = isSignUp
       ? await authClient.signUp.email({ name: email.split('@')[0] || 'User', email, password })
       : await authClient.signIn.email({ email, password });
-    
+
     if (result.error) {
       alert(result.error.message);
       return;
     }
-    
+
     const sessionResult = await authClient.getSession();
     if (sessionResult.data?.session && sessionResult.data?.user) {
       setSession(sessionResult.data.session);
@@ -180,9 +180,31 @@ export default function App() {
       <button type="submit">{isSignUp ? 'Sign Up' : 'Sign In'}</button>
       <p>
         {isSignUp ? (
-          <>Already have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(false); }}>Sign in</a></>
+          <>
+            Already have an account?{' '}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsSignUp(false);
+              }}
+            >
+              Sign in
+            </a>
+          </>
         ) : (
-          <>Don't have an account? <a href="#" onClick={(e) => { e.preventDefault(); setIsSignUp(true); }}>Sign up</a></>
+          <>
+            Don't have an account?{' '}
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setIsSignUp(true);
+              }}
+            >
+              Sign up
+            </a>
+          </>
         )}
       </p>
     </form>

@@ -29,10 +29,7 @@ import { authClient } from './auth';
 export default function App() {
   return (
     <NeonAuthUIProvider authClient={authClient}>
-      <AuthView 
-        pathname="sign-in"
-        credentials={{ forgotPassword: true }}
-      />
+      <AuthView pathname="sign-in" credentials={{ forgotPassword: true }} />
     </NeonAuthUIProvider>
   );
 }

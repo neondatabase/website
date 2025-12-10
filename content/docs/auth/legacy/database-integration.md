@@ -41,6 +41,7 @@ updated_at TIMESTAMPTZ
 ```
 
 **Key columns:**
+
 - `id` - Unique user identifier from Stack Auth
 - `email` - User's email address
 - `name` - User's display name
@@ -144,6 +145,7 @@ To get started adding RLS to your Neon Auth project:
    - Add RLS policies to your tables.
 
 For complete RLS implementation guides, see:
+
 - [Secure your app with RLS](/docs/guides/rls-tutorial) - Tutorial walkthrough
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) - Using Drizzle ORM with RLS
 
@@ -271,6 +273,7 @@ print('User is not authenticated', response.status_code, response.text)
 ### Stack Auth documentation
 
 For SDK components, hooks, and OAuth configuration:
+
 - [Stack Auth Official Docs](https://docs.stack-auth.com)
 
 ### Neon resources

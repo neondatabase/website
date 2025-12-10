@@ -250,12 +250,15 @@ export default function App() {
       return;
     }
     // [!code ++]
-    if (data?.user && !data.user.emailVerified) { // [!code ++]
+    if (data?.user && !data.user.emailVerified) {
+      // [!code ++]
       setMessage('Check your email for a verification code'); // [!code ++]
       setStep('verify'); // Switch to verification form // [!code ++]
-    } else { // [!code ++]
+    } else {
+      // [!code ++]
       const sessionResult = await authClient.getSession(); // [!code ++]
-      if (sessionResult.data?.session && sessionResult.data?.user) { // [!code ++]
+      if (sessionResult.data?.session && sessionResult.data?.user) {
+        // [!code ++]
         setSession(sessionResult.data.session); // [!code ++]
         setUser(sessionResult.data.user); // [!code ++]
       } // [!code ++]
@@ -277,29 +280,35 @@ export default function App() {
   };
 
   // [!code ++]
-  const handleVerify = async (e) => { // [!code ++]
+  const handleVerify = async (e) => {
+    // [!code ++]
     e.preventDefault(); // [!code ++]
     setMessage(''); // [!code ++]
     // [!code ++]
-    try { // [!code ++]
-      const { data, error } = await authClient.emailOtp.verifyEmail({ // [!code ++]
+    try {
+      // [!code ++]
+      const { data, error } = await authClient.emailOtp.verifyEmail({
+        // [!code ++]
         email, // [!code ++]
         otp: code, // [!code ++]
       }); // [!code ++]
       // [!code ++]
       if (error) throw error; // [!code ++]
       // [!code ++]
-      if (data?.session) { // [!code ++]
+      if (data?.session) {
+        // [!code ++]
         setSession(data.session); // [!code ++]
         setUser(data.session.user); // [!code ++]
         setStep('auth'); // [!code ++]
-      } else { // [!code ++]
+      } else {
+        // [!code ++]
         setMessage('Email verified! You can now sign in.'); // [!code ++]
         setStep('auth'); // [!code ++]
         setIsSignUp(false); // [!code ++]
         setCode(''); // [!code ++]
       } // [!code ++]
-    } catch (error) { // [!code ++]
+    } catch (error) {
+      // [!code ++]
       setMessage(error?.message || 'An error occurred'); // [!code ++]
     } // [!code ++]
   }; // [!code ++]
@@ -322,21 +331,29 @@ export default function App() {
   }
 
   // [!code ++]
-  if (step === 'verify') { // [!code ++]
-    return ( // [!code ++]
-      <div> // [!code ++]
+  if (step === 'verify') {
+    // [!code ++]
+    return (
+      // [!code ++]
+      <div>
+        {' '}
+        // [!code ++]
         <h1>Verify Your Email</h1> // [!code ++]
         <p>Enter the code sent to {email}</p> // [!code ++]
-        <form onSubmit={handleVerify}> // [!code ++]
+        <form onSubmit={handleVerify}>
+          {' '}
+          // [!code ++]
           <input // [!code ++]
             type="text" // [!code ++]
             placeholder="Verification code" // [!code ++]
             value={code} // [!code ++]
             onChange={(e) => setCode(e.target.value)} // [!code ++]
             required // [!code ++]
-          /> // [!code ++]
+          />{' '}
+          // [!code ++]
           <button type="submit">Verify</button> // [!code ++]
-        </form> // [!code ++]
+        </form>{' '}
+        // [!code ++]
         {message && <p>{message}</p>} // [!code ++]
       </div> // [!code ++]
     ); // [!code ++]

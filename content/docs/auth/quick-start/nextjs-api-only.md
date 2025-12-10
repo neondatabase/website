@@ -367,7 +367,6 @@ export default function SignUpPage() {
   </RightCode>
 </TwoColumnStep>
 
-
 <TwoColumnStep title="Add basic styling (optional)">
   <LeftContent>
 
