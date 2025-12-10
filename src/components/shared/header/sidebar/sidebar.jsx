@@ -91,16 +91,6 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
     <div className="flex gap-2.5 lg:hidden">
       <Button
         className="h-9 px-[18px]"
-        to={LINKS.signup}
-        theme="white-filled-multi"
-        size="xxs"
-        tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
-      >
-        Sign Up
-      </Button>
-      <Button
-        className="h-9 px-[18px]"
         to={LINKS.login}
         theme="transparent"
         size="xxs"
@@ -108,6 +98,16 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
         analyticsEvent="header_log_in_clicked"
       >
         Log In
+      </Button>
+      <Button
+        className="h-9 px-[18px]"
+        to={LINKS.signup}
+        theme="white-filled-multi"
+        size="xxs"
+        tagName="Header"
+        analyticsEvent="header_sign_up_clicked"
+      >
+        Sign Up
       </Button>
     </div>
   </div>
