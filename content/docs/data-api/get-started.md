@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2025-12-10T00:00:00.000Z'
 tag: beta
 ---
 
@@ -32,7 +32,7 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 Choose how you want to authenticate requests to the Data API:
 
-- **Neon Auth**: Use [Neon Auth](/docs/neon-auth/overview) as your authentication provider (the default).
+- **Neon Auth**: Use [Neon Auth](/docs/auth/overview) as your authentication provider (the default).
 - **Other provider**: Use a different authentication provider by entering the JWKS URL. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for a list of supported providers.
 - **Skip (set up later)**: Configure an authentication provider later. See [Add your authentication provider](/docs/data-api/custom-authentication-providers#add-your-authentication-provider).
 

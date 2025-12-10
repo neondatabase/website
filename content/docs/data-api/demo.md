@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Set up our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-09-25T14:36:08.166Z'
+updatedOn: '2025-12-10T00:00:00.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -30,6 +30,30 @@ To follow this tutorial, you'll need to:
    ```
 
    Follow the README, adding your **Data API URL** and **Neon Auth URL** to the `.env` file.
+
+## Initialize the client
+
+The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Neon Auth. Here's how the client is configured:
+
+```typescript
+// src/lib/auth.ts
+import { createClient } from '@neondatabase/neon-js';
+
+export const client = createClient({
+  auth: {
+    url: import.meta.env.VITE_NEON_AUTH_URL, // Your Neon Auth endpoint
+  },
+  dataApi: {
+    url: import.meta.env.VITE_NEON_DATA_API_URL, // Your Data API endpoint
+  },
+});
+```
+
+This single client provides:
+- **Authentication methods** via `client.auth` (sign up, sign in, sign out, get session)
+- **Database query methods** via `client.from()` (select, insert, update, delete)
+
+The client automatically handles JWT token management — when a user is signed in, the token is included in all Data API requests, enabling RLS policies to work correctly.
 
 ## Database Schema
 
@@ -124,7 +148,7 @@ pgPolicy("shared_policy", {
 ```
 
 <Admonition type="info" title="About auth.user_id()">
-Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/guides/neon-auth">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
+Neon's RLS policies use the <code>auth.user_id()</code> function, which extracts the user's ID from the JWT (JSON Web Token) provided by your authentication provider. In this demo, <a href="/docs/auth/overview">Neon Auth</a> issues the JWTs, and Neon's Data API passes them to Postgres, so RLS can enforce per-user access.
 
 For more details on RLS with Data API, see our [Row-Level Security with Neon guide](/docs/guides/row-level-security).
 </Admonition>
@@ -361,8 +385,7 @@ Finally test deleting a note that has paragraphs — both the note and its parag
 ## Learn more
 
 - [Getting started with Data API](/docs/data-api/get-started)
-- [Neon Auth documentation](/docs/guides/neon-auth)
-- [Neon Javascript SDK reference](https://www.npmjs.com/package/@neondatabase/neon-js)
-- [Neon postgrest-js](https://www.npmjs.com/package/@neondatabase/postgrest-js)
+- [Neon Auth documentation](/docs/auth/overview)
+- [Neon JavaScript SDK reference](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)
