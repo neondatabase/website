@@ -2,7 +2,7 @@
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
 enableTableOfContents: true
-updatedOn: '2025-10-24T11:19:19.270Z'
+updatedOn: '2025-12-05T20:12:42.044Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -22,6 +22,14 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 
 <DetailIconCards>
 <a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
+</DetailIconCards>
+
+## GitHub Copilot agents
+
+Custom agents for GitHub Copilot that bring Neon's branching workflow directly into VS Code for safe migrations and query optimization.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-github-copilot-agents" description="Safe database migrations and query optimization using Neon branching" icon="github">Neon agents for GitHub Copilot</a>
 </DetailIconCards>
 
 ## AI rules
