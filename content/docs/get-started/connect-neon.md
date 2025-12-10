@@ -7,11 +7,26 @@ redirectFrom:
 updatedOn: '2025-08-02T10:33:29.253Z'
 ---
 
-Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
+Using Neon as the serverless database in your tech stack means configuring connections. Whether it's a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
 
-## Connecting to your application
+## Ways to query Neon
 
-This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
+There are several ways to connect to and query your Neon database:
+
+| Approach                   | Best for                                                                                                      | Learn more                                                   |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| **Data API**               | Frontend apps, edge functions, and environments where you want REST-based access without managing connections | [Get started with Data API](/docs/data-api/get-started)      |
+| **Neon serverless driver** | Edge and serverless environments without native TCP support (also available as Drizzle and Prisma adapters)   | [Neon serverless driver](/docs/serverless/serverless-driver) |
+| **ORMs**                   | Type-safe queries and schema management with Drizzle, Prisma, or other ORMs                                   | [ORMs](/docs/get-started/orms)                               |
+| **Postgres clients**       | Direct SQL access with node-postgres, postgres.js, psycopg2, or any standard Postgres client                  | [Languages](/docs/get-started/languages)                     |
+
+The [Neon Data API](/docs/data-api/get-started) is a PostgREST-compatible REST service for your Neon database. The [`@neondatabase/neon-js`](/docs/reference/javascript-sdk) client exposes REST-based query functions to leverage the Data API, or you can use it directly via HTTP requests.
+
+That said, you don't need the Data API to query Neon. Neon works with all major ORMs and standard Postgres clients — choose the approach that fits your stack.
+
+## Connecting with a connection string
+
+The examples below show how to connect using a standard Postgres connection string with various frameworks, languages, and ORMs.
 
 <CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", ".NET", "Ruby", "Rust", "Go"]}>
 
@@ -273,8 +288,6 @@ Neon uses the default Postgres port, `5432`.
 ## Network protocol support
 
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure currently only support IPv4.
-
-Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 
 ## Connection notes
 
