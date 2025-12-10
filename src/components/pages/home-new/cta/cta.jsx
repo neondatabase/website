@@ -59,17 +59,22 @@ const CTA = () => (
 
       {/*
         Mobile video optimization parameters:
-          mp4: ffmpeg -i cta-md-origin.mov -c:v libx265 -crf 26 -vf scale=1000:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta-md.mp4
-          webm: ffmpeg -i cta-md-origin.mov -c:v libvpx-vp9 -crf 35 -vf scale=1000:-2 -deadline best -an cta-md.webm
+          mp4 av1: ffmpeg -i cta-mob-origin.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=1000:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an cta-mob-av1.mp4
+          mp4: ffmpeg -i cta-mob-origin.mov -c:v libx265 -crf 26 -vf scale=1000:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an cta-mob.mp4
+          webm: ffmpeg -i cta-mob-origin.mov -c:v libvpx-vp9 -crf 35 -vf scale=1000:-2 -deadline best -an cta-mob.webm
       */}
       <PauseableVideo
-        className="hidden h-[510px] w-full md:block"
+        className="hidden h-[500px] w-full md:block"
         videoClassName="size-full object-cover"
         width={767}
         height={767}
       >
-        <source src="/videos/pages/home-new/cta/cta-md.mp4" type="video/mp4" />
-        <source src="/videos/pages/home-new/cta/cta-md.webm" type="video/webm" />
+        <source
+          src="/videos/pages/home-new/cta/cta-mob-av1.mp4"
+          type="video/mp4; codecs=av01.0.05M.08,opus"
+        />
+        <source src="/videos/pages/home-new/cta/cta-mob.mp4" type="video/mp4" />
+        <source src="/videos/pages/home-new/cta/cta-mob.webm" type="video/webm" />
       </PauseableVideo>
     </div>
   </section>
