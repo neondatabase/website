@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These components are built with [Better Auth UI](https://better-auth-ui.com/) and work with Neon Auth.
 
 ## Installation

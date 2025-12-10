@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-11-23T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 One of Neon Auth's unique features is native support for database branching. When you create a database branch, your authentication data branches with it, giving each branch its own isolated authentication environment.
 
 ## How it works

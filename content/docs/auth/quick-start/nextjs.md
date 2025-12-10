@@ -6,6 +6,8 @@ updatedOn: '2025-12-04T00:00:00.000Z'
 layout: wide
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using pre-built UI components. If you want to build your own UI, see the [API methods guide](/docs/auth/quick-start/nextjs-api-only).
 
 <TwoColumnLayout>

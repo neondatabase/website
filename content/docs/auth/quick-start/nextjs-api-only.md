@@ -6,6 +6,8 @@ updatedOn: '2025-12-08T00:00:00.000Z'
 layout: wide
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. To use our pre-built UI components instead, see the [UI components guide](/docs/auth/quick-start/nextjs).
 
 <TwoColumnLayout>
@@ -366,7 +368,6 @@ export default function SignUpPage() {
 
   </RightCode>
 </TwoColumnStep>
-
 
 <TwoColumnStep title="Add basic styling (optional)">
   <LeftContent>

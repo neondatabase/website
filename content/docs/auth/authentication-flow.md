@@ -1,9 +1,11 @@
 ---
-title: Authentication Flow
+title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
 enableTableOfContents: true
 updatedOn: '2025-11-23T00:00:00.000Z'
 ---
+
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
 This guide explains the authentication flow: how sign-in works from SDK call to session creation.
 

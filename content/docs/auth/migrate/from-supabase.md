@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-11-21T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Neon Auth provides a Supabase-compatible API, and Neon Data API provides PostgreSQL database access. This guide shows how to migrate from Supabase to Neon.
 
 <Admonition type="About user migration">

@@ -6,6 +6,8 @@ updatedOn: '2025-11-29T00:00:00.000Z'
 layout: wide
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 <TwoColumnLayout>
 
 <TwoColumnStep title="Enable Auth in your Neon project">

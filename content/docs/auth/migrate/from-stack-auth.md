@@ -14,6 +14,8 @@ redirectFrom:
   - /docs/guides/neon-auth-demo
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 This guide shows you the code differences between legacy Neon Auth (Stack Auth) and Neon Auth with Better Auth. Use it as a reference to understand what changes if you decide to upgrade.
 
 <Admonition type="important" title="Legacy Neon Auth (Stack Auth) is no longer accepting new users">

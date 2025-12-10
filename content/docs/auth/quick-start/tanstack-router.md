@@ -6,6 +6,8 @@ updatedOn: '2025-12-07T00:00:00.000Z'
 layout: wide
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 <TwoColumnLayout>
 
 <TwoColumnStep title="Create a Neon project with Auth enabled">
@@ -77,16 +79,13 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 <TwoColumnStep title="Add Neon Auth styles">
   <LeftContent>
 
-Import the Neon Auth UI styles in your `src/styles.css` file. Add this line at the top of the file:
+Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
 
   </LeftContent>
-  <RightCode label="src/styles.css">
+  <RightCode label="Add to src/styles.css">
 
 ```css
-@import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/css'; // [!code ++]
-
-// Your existing styles...
+@import '@neondatabase/neon-js/ui/css';
 ```
 
   </RightCode>

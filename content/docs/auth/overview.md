@@ -7,18 +7,20 @@ redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test test real authentication workflows in preview environments.
 
 ## Why Neon Auth?
-
-- **Auth that branches with your data**  
-  Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 - **Identity lives in your database**  
   All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
 
 - **Zero server management**  
   Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [SDK](/docs/reference/javascript-sdk) in your app. No infrastructure to maintain.
+
+- **Auth that branches with your data**  
+  Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
 
 ## Built on Better Auth
 
@@ -56,6 +58,9 @@ export default function App() {
 </CodeWithLabel>
 
 ## Use cases
+
+- **Production authentication**  
+  Use Neon Auth as the identity system for your app. Store users, sessions, and OAuth configuration directly in Postgres, and pair with RLS for secure, database-centric access control.
 
 - **Preview environments**  
   Test full authentication flows in Vercel previews with real users and sessions

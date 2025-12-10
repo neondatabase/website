@@ -389,17 +389,17 @@
 
             - section: Guides
               items:
-                - title: Email Verification
+                - title: Email verification
                   slug: auth/guides/email-verification
                 - title: Set up OAuth
                   slug: auth/guides/setup-oauth
-                - title: Password Reset
+                - title: Password reset
                   slug: auth/guides/password-reset
-                - title: User Management
+                - title: User management
                   slug: auth/guides/user-management
-                - title: Configure Domains
+                - title: Configure domains
                   slug: auth/guides/configure-domains
-                - title: Production Checklist
+                - title: Production checklist
                   slug: auth/production-checklist
 
             - section: Reference

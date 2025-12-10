@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-11-19T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Email verification ensures users own the email addresses they register with. Neon Auth supports two verification methods:
 
 - **Verification codes** (users enter a numeric code from their email) - works with shared or custom email providers

@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-12-02T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Manage user profiles and account settings after users sign in. This guide covers:
 
 - Updating profile information (name, image, phone number)

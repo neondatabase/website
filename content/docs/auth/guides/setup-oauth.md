@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 OAuth lets users sign in with their Google or GitHub account. Neon Auth handles the OAuth flow and creates a session after authorization.
 
 ## Development mode

@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-11-30T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Complete these steps before taking your application to production with Neon Auth.
 
 <CheckList title="Auth production checklist">

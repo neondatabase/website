@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-11-30T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Add your application domains to Neon Auth's allowlist to enable OAuth and email verification redirects in production.
 
 ## Why domains are required

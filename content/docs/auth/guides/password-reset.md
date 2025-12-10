@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-12-08T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Password reset allows users to securely reset forgotten passwords. Neon Auth supports password reset via verification links sent to the user's email address.
 
 ## Enable password reset
