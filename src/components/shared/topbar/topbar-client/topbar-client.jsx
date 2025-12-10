@@ -54,13 +54,13 @@ const TopbarClient = ({ text, link }) => {
 
   return (
     <Link
-      className="safe-paddings group relative z-50 flex h-9 w-full items-center justify-center overflow-hidden border-b border-gray-new-80 bg-[#E4F1EB] px-4 py-2.5 dark:border-gray-new-20 dark:bg-black-pure"
+      className="safe-paddings group relative z-50 flex h-9 w-full items-center justify-center overflow-hidden border-b border-gray-new-90 bg-[#F5FAF8] px-4 py-2.5 dark:border-gray-new-20 dark:bg-black-pure"
       to={link.url}
       target={link.target || undefined}
       onClick={() => sendGtagEvent('click_announcement_banner')}
     >
       <div className="-mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
-        <span className="truncate text-sm font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white group-hover:dark:text-gray-new-80">
+        <span className="truncate text-sm leading-none tracking-extra-tight text-black-pure transition-colors duration-200 group-hover:text-gray-new-40 dark:text-white group-hover:dark:text-gray-new-80">
           {text}
         </span>
         <ChevronIcon className="origin-center -rotate-90 text-black-pure opacity-40 dark:text-white dark:opacity-60" />

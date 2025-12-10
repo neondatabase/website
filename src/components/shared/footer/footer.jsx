@@ -11,7 +11,7 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
-  <footer className="safe-paddings mt-auto border-t border-gray-new-80 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+  <footer className="safe-paddings mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
     <Container className="flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5" size="1600">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
