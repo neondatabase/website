@@ -5,6 +5,7 @@ import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import AnimatedPosition from './animated-position';
 import AnimatedText from './animated-text';
 
 const FADE_DURATION = 0.3; // Duration for fade in/out animations in seconds
@@ -17,14 +18,14 @@ const QUOTES = [
       ' no infrastructure to manage, no servers to provision, no database cluster to maintain.',
     ],
     highlight: 'aligned with our vision:',
-    author: ['Edouard Bonlieu'],
-    post: ['Co-founder at Koyeb'],
+    author: 'Edouard Bonlieu',
+    post: 'Co-founder at Koyeb',
   },
   {
     text: ['Neon allows us to develop much ', "faster than we've even been", ' used to.'],
     highlight: "faster than we've even been",
-    author: ['Alex Klarfeld'],
-    post: ['CEO and co-founder of Supergood.ai'],
+    author: 'Alex Klarfeld',
+    post: 'CEO and co-founder of Supergood.ai',
   },
   {
     text: [
@@ -32,8 +33,8 @@ const QUOTES = [
       ' that convinced us to use Neon was branching: it keeps our engineering velocity high.',
     ],
     highlight: 'The killer feature',
-    author: ['Léonard Henriquez'],
-    post: ['Co-founder and CTO, Topo.io'],
+    author: 'Léonard Henriquez',
+    post: 'Co-founder and CTO, Topo.io',
   },
   {
     text: [
@@ -42,8 +43,8 @@ const QUOTES = [
       ' via the Neon API, saving us a tremendous amount of time and engineering effort.',
     ],
     highlight: 'automate virtually all database tasks',
-    author: ['Himanshu Bhandoh'],
-    post: ['Software Engineer at Retool'],
+    author: 'Himanshu Bhandoh',
+    post: 'Software Engineer at Retool',
   },
 ];
 
@@ -124,20 +125,7 @@ const Quotes = () => {
                     <AnimatedText text={text} highlight={highlight} />
                   </blockquote>
                   <figcaption className="mt-5 block text-base not-italic leading-normal text-gray-new-15 xl:text-sm md:text-[13px]">
-                    <span className="block font-medium">
-                      <AnimatedText
-                        text={author}
-                        startDelay={text.length}
-                        skipAnimation={isFirstShow}
-                        fadeDelay={FADE_DURATION}
-                      />
-                    </span>
-                    <AnimatedText
-                      text={post}
-                      startDelay={text.length + author.length}
-                      skipAnimation={isFirstShow}
-                      fadeDelay={FADE_DURATION}
-                    />
+                    <AnimatedPosition author={author} position={post} />
                   </figcaption>
                 </m.figure>
               )}

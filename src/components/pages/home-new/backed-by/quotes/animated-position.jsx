@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import cubicBezierEasing from 'utils/cubic-bezier-easing';
 
-const DURATION = 1.1;
-const START_DELAY = 0.3;
+const DURATION = 0.3;
+const START_DELAY = 1.45;
 
 /**
  * Creates an array mapping each character index to its group index.
@@ -133,18 +133,7 @@ const AnimatedPosition = ({ author, position }) => {
   const result = [author, position].map((part, index) => {
     if (index === 0) {
       return (
-        <m.span
-          className="-mx-1 bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-no-repeat px-1"
-          initial={{ backgroundPositionX: '100%', backgroundPositionY: '0' }}
-          animate={{
-            backgroundPositionX: '0%',
-          }}
-          transition={{
-            duration: 0.6,
-            delay: START_DELAY + staggeredDelays[groupIndices[currentIndex]] + 0.2,
-            ease: [0.17, 0.17, 0.1, 1],
-          }}
-        >
+        <span className="block font-medium">
           {part.split('').map((char) => {
             const charIndex = currentIndex;
             currentIndex += 1;
@@ -164,7 +153,7 @@ const AnimatedPosition = ({ author, position }) => {
               </m.span>
             );
           })}
-        </m.span>
+        </span>
       );
     }
 
