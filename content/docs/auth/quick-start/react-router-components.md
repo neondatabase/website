@@ -13,7 +13,7 @@ layout: wide
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
-Go to the **Auth** page in your project dashboard and click **Enable Auth**.
+Go to the **Auth** page in your project dashboard and click **Enable Neon Auth**.
 
 You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
 
