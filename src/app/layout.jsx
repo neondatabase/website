@@ -3,6 +3,7 @@ import { GeistMono } from 'geist/font/mono';
 import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
+import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
 import { TopbarProvider } from 'contexts/topbar-context';
@@ -32,7 +33,7 @@ const RootLayout = ({ children }) => (
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
-      <link rel="preconnect" href="https://console.neon.tech" />
+      <link rel="preconnect" href={LINKS.console} />
     </head>
     <body>
       <SessionProvider>

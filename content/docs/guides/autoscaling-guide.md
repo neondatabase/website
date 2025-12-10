@@ -1,7 +1,7 @@
 ---
 title: Enable Autoscaling in Neon
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.027Z'
+updatedOn: '2025-12-05T20:12:42.053Z'
 ---
 
 <InfoBlock>
@@ -66,9 +66,8 @@ The following table outlines the initial default autoscaling settings for newly 
 | **Neon plan** | **Minimum compute size** | **Maximum compute size** |
 | ------------- | ------------------------ | ------------------------ |
 | Free          | 0.25                     | 2                        |
-| Launch        | 1                        | 4                        |
-| Scale         | 1                        | 8                        |
-| Business      | 1                        | 8                        |
+| Launch        | 0.25                     | 8                        |
+| Scale         | 0.25                     | 8                        |
 
 ## Monitor autoscaling
 
