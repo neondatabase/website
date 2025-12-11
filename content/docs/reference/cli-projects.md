@@ -22,14 +22,14 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 neon projects <subcommand> [options]
 ```
 
-| Subcommand        | Description          |
-| ----------------- | -------------------- |
-| [list](#list)     | List projects        |
-| [create](#create) | Create a project     |
-| [update](#update) | Update a project     |
-| [delete](#delete) | Delete a project     |
-| [recover](#recover) | Recover a project  |
-| [get](#get)       | Get a project        |
+| Subcommand          | Description       |
+| ------------------- | ----------------- |
+| [list](#list)       | List projects     |
+| [create](#create)   | Create a project  |
+| [update](#update)   | Update a project  |
+| [delete](#delete)   | Delete a project  |
+| [recover](#recover) | Recover a project |
+| [get](#get)         | Get a project     |
 
 ### list
 
@@ -45,11 +45,11 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--org-id`       | List all projects belonging to the specified organization.                                    | string |          |
-| `--recoverable-only` | List only projects that can be recovered (deleted within the deletion recovery period).   | boolean |         |
+| Option               | Description                                                                                   | Type    | Required |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`     | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
+| `--org-id`           | List all projects belonging to the specified organization.                                    | string  |          |
+| `--recoverable-only` | List only projects that can be recovered (deleted within the deletion recovery period).       | boolean |          |
 
 #### Examples
 
