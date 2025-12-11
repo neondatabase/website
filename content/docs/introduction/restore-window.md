@@ -2,7 +2,7 @@
 title: Restore window
 subtitle: Configure how far back you can restore your data and run Time Travel queries
 enableTableOfContents: true
-updatedOn: '2025-12-02T22:54:22.675Z'
+updatedOn: '2025-12-11T15:40:49.869Z'
 ---
 
 The **restore window** determines how far back Neon retains a history of changes for your branches. This history retention period powers several Neon features: instant restore (point-in-time recovery), Time Travel queries, branching from past states, and snapshots.

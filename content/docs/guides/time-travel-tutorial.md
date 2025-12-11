@@ -2,7 +2,7 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
-updatedOn: '2025-08-07T10:06:24.020Z'
+updatedOn: '2025-12-11T15:40:49.863Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.

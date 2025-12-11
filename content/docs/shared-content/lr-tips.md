@@ -1,5 +1,5 @@
 ---
-updatedOn: '2024-09-04T18:53:01.156Z'
+updatedOn: '2025-12-11T15:40:49.875Z'
 ---
 
 ## Logical replication tips

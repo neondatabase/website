@@ -3,7 +3,7 @@ title: Logical replication tips
 subtitle: Learn how to optimize for logical replication
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-11-30T11:53:56.061Z'
+updatedOn: '2025-12-11T15:40:49.862Z'
 ---
 
 The following tips are based on actual customer data migrations to Neon using logical replication:
