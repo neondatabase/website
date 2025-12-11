@@ -16,7 +16,7 @@ const DATA = [
     title: 'Deploy thousands of databases that turn off when idle.',
     description:
       'Inactive databases pause on their own, keeping your fleet efficient and cost-effective.',
-    link: '#',
+    link: '/docs/guides/scale-to-zero-guide',
     animation: <DeployDatabases />,
     animationClassName:
       'w-fit max-w-[calc(50vw-64px)] shrink-0 overflow-hidden 2xl:max-w-[calc(50vw+48px)] xl:max-w-[calc(50vw+32px)] lg:max-w-full',
@@ -26,7 +26,7 @@ const DATA = [
     title: 'Manage your fleet via API.',
     description:
       'Neon databases spin up in milliseconds, with APIs for quota controls and fleet scaling.',
-    link: '#',
+    link: '/docs/reference/api-reference',
     animation: <ManageFleet />,
     animationClassName: 'flex-1 2xl:min-w-0 2xl:max-w-full sm:w-full',
   },

@@ -1,19 +1,19 @@
+import { Alignment, Fit } from '@rive-app/react-canvas';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
-import bg from 'images/pages/home-new/ai/bg.jpg';
+import RiveAnimation from 'components/shared/rive-animation';
+import bg from 'images/pages/home-new/ai/bg.webp';
 import ideMobile from 'images/pages/home-new/ai/ide-mobile.jpg';
 
 import Heading from '../heading';
-
-import Animation from './animation';
 
 const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode'];
 
 const AI = () => (
   <section
-    className="ai safe-paddings relative scroll-mt-[60px] py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
+    className="ai safe-paddings relative scroll-mt-[60px] overflow-hidden py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
     id="ai"
   >
     <Container
@@ -21,12 +21,18 @@ const AI = () => (
       size="1600"
     >
       <div className="min-w-0">
-        <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
+        <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and have Cursor do the hard work." />
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="pointer-events-none relative w-full md:hidden">
-            <Animation />
+            <RiveAnimation
+              className="aspect-[1056/807] w-full"
+              src="/animations/pages/home-new/speed-scale-ide.riv?20251210"
+              fit={Fit.Contain}
+              alignment={Alignment.Center}
+              threshold={0.2}
+            />
             <Image
-              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2"
+              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-1 outline-gray-new-30"
               src={bg}
               alt=""
               width={1056}
@@ -38,13 +44,13 @@ const AI = () => (
             className="hidden md:block"
             src={ideMobile}
             alt="Neon in IDE"
-            width={727}
-            height={507}
+            width={640}
+            height={446}
             sizes="100vw"
             quality={100}
           />
         </div>
-        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:flex-col sm:items-start sm:gap-7">
+        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:-mx-6 sm:flex-col sm:items-start sm:gap-7">
           <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full sm:text-center">
             Connect MCP clients to Neon:
           </p>

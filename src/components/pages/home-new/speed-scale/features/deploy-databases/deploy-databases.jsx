@@ -73,15 +73,15 @@ const DeployDatabases = () => {
                   {activity.map((activity, hour) => (
                     <li
                       className="flex shrink-0 flex-col items-center gap-3 xl:gap-2 sm:gap-1.5"
-                      key={hour}
+                      key={`${day}-${hour}`}
                     >
                       <div className="grid grid-flow-col grid-cols-6 grid-rows-10 gap-[3px] xl:gap-0.5 sm:gap-px">
                         {activity.split('').map((value, minute) => {
                           const delay = START_DELAY - 0.3 + hour * 0.1 + Math.random() * 0.2;
 
                           return (
-                            <div
-                              key={minute}
+                            <span
+                              key={`${day}-${hour}-${minute}`}
                               className="flex size-1.5 items-center justify-center xl:size-[5px] sm:size-[3px]"
                             >
                               {isMobile ? (
@@ -90,15 +90,15 @@ const DeployDatabases = () => {
                                     'block size-full',
                                     value === '0' && 'scale-[0.33]'
                                   )}
-                                  style={{ backgroundColor: ACTIVITY_COLORS[value] }}
+                                  style={{ backgroundColor: ACTIVITY_COLORS[Number(value)] }}
                                 />
                               ) : (
                                 <m.span
-                                  className="block size-full scale-[0.33]"
+                                  className="block size-full scale-[0.33] bg-[#2C6D4C]"
                                   initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
                                   animate={{
                                     backgroundColor: inView
-                                      ? ACTIVITY_COLORS[value]
+                                      ? ACTIVITY_COLORS[Number(value)]
                                       : ACTIVITY_COLORS[0],
                                     scale: inView && value !== '0' ? 1 : 0.33,
                                   }}
@@ -113,7 +113,7 @@ const DeployDatabases = () => {
                                   }
                                 />
                               )}
-                            </div>
+                            </span>
                           );
                         })}
                       </div>

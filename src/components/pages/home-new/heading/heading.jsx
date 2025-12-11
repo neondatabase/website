@@ -50,7 +50,7 @@ const Heading = ({ className = '', theme = 'dark', icon, title }) => (
 Heading.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(['light', 'dark']),
-  icon: PropTypes.oneOf(ICONS.keys),
+  icon: PropTypes.oneOf(Object.keys(ICONS)),
   title: PropTypes.string.isRequired,
 };
 

@@ -14,23 +14,7 @@ import Heading from '../heading';
 
 import Animation from './animation';
 
-const tabs = [
-  {
-    tab: 'Save costs',
-    animation: {
-      className: 'aspect-[1378/488] w-[1378px] 3xl:max-w-full md:aspect-[767/599]',
-      src: '/animations/pages/home-new/autoscaling-save-costs.riv',
-      autoBind: true,
-    },
-  },
-  {
-    tab: 'Avoid outages',
-    animation: {
-      className: 'aspect-[1378/488] w-[1378px] 3xl:max-w-full md:aspect-[767/1193]',
-      src: '/animations/pages/home-new/autoscaling-avoid-outages.riv',
-    },
-  },
-];
+const tabs = ['Save costs', 'Avoid outages'];
 
 const legend = [
   {
@@ -53,6 +37,7 @@ const Autoscaling = () => {
     rootMargin: '500px 0px',
   });
   const [activeItem, setActiveItem] = useState(0);
+  const animationMdAspect = activeItem === 0 ? 'md:aspect-[767/599]' : 'md:aspect-[767/1193]';
 
   return (
     <section
@@ -86,7 +71,7 @@ const Autoscaling = () => {
                 type="button"
                 onClick={() => setActiveItem(index)}
               >
-                {item.tab}
+                {item}
               </button>
             ))}
           </div>
@@ -99,26 +84,14 @@ const Autoscaling = () => {
             )}
             ref={animationWrapperRef}
           >
-            {tabs.map(({ animation }, index) => (
-              <div
-                className={clsx(
-                  index === activeItem
-                    ? 'relative block'
-                    : 'pointer-events-none absolute inset-0 hidden',
-                  animation.className
-                )}
-                key={index}
-                aria-hidden={index !== activeItem}
-              >
-                {isAnimationIntersecting && (
-                  <Animation
-                    className={animation.className}
-                    src={animation.src}
-                    autoBind={animation.autoBind}
-                  />
-                )}
-              </div>
-            ))}
+            <div className={clsx('aspect-[1378/480] w-[1378px] 3xl:max-w-full', animationMdAspect)}>
+              {isAnimationIntersecting && (
+                <Animation
+                  className={clsx('aspect-[1378/480] w-[1378px] 3xl:max-w-full', animationMdAspect)}
+                  state={activeItem}
+                />
+              )}
+            </div>
           </div>
 
           <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">

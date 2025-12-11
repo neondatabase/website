@@ -10,7 +10,7 @@ const SECTIONS = [
   { id: 'ai', title: 'AI', theme: 'dark' },
   { id: 'autoscaling', title: 'Advanced Autoscaling', theme: 'light' },
   { id: 'branching', title: 'Instant Branching', theme: 'dark' },
-  { id: 'auth', title: 'Better Auth included', theme: 'dark' },
+  { id: 'auth', title: 'Auth Included', theme: 'dark' },
   { id: 'features', title: 'Production-Grade Features', theme: 'dark' },
 ];
 

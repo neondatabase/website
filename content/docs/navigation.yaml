@@ -352,6 +352,8 @@
               slug: data-api/sql-to-rest
             - title: Custom authentication providers
               slug: data-api/custom-authentication-providers
+            - title: Manage Data API
+              slug: data-api/manage
             - title: Troubleshooting
               slug: data-api/troubleshooting
 
@@ -561,6 +563,8 @@
                   slug: ai/ai-rules
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
+                - title: GitHub Copilot agents
+                  slug: ai/ai-github-copilot-agents
                 - title: Neon Auth
                   slug: ai/ai-rules-neon-auth
                 - title: Drizzle

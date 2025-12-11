@@ -45,8 +45,9 @@ const Hero = () => (
     <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
       {/*
         Video optimization parameters:
-          mp4: ffmpeg -i hero-origin.mp4 -c:v libx265 -crf 26 -vf scale=3840:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
-          webm: ffmpeg -i hero-origin.mp4 -c:v libvpx-vp9 -crf 40 -vf scale=3840:-2 -deadline best -an hero.webm
+          mp4 av1: ffmpeg -i hero.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an hero-av1.mp4
+          mp4: ffmpeg -i hero.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
+          webm: ffmpeg -i hero.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an hero.webm
       */}
       <PauseableVideo
         className={clsx(
@@ -57,6 +58,10 @@ const Hero = () => (
         height={832}
         poster="/videos/pages/home-new/hero/poster.jpg"
       >
+        <source
+          src="/videos/pages/home-new/hero/hero-av1.mp4"
+          type="video/mp4; codecs=av01.0.05M.08,opus"
+        />
         <source src="/videos/pages/home-new/hero/hero.mp4" type="video/mp4" />
         <source src="/videos/pages/home-new/hero/hero.webm" type="video/webm" />
       </PauseableVideo>
@@ -66,7 +71,6 @@ const Hero = () => (
         width={752}
         height={326}
         quality={100}
-        sizes="100vw"
         alt=""
         priority
       />

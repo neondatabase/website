@@ -62,7 +62,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
     {!isClient && (
       <Link
         className={clsx(
-          'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200 ',
+          'group flex items-center gap-1.5 text-[14px] tracking-extra-tight transition-colors duration-200',
           simpleMode
             ? 'hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
             : 'text-black-pure hover:text-gray-new-20 dark:text-white hover:dark:text-gray-new-70',
@@ -91,16 +91,6 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
     <div className="flex gap-2.5 lg:hidden">
       <Button
         className="h-9 px-[18px]"
-        to={LINKS.signup}
-        theme="white-filled-multi"
-        size="xxs"
-        tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
-      >
-        Sign Up
-      </Button>
-      <Button
-        className="h-9 px-[18px]"
         to={LINKS.login}
         theme="transparent"
         size="xxs"
@@ -108,6 +98,16 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
         analyticsEvent="header_log_in_clicked"
       >
         Log In
+      </Button>
+      <Button
+        className="h-9 px-[18px]"
+        to={LINKS.signup}
+        theme="white-filled-multi"
+        size="xxs"
+        tagName="Header"
+        analyticsEvent="header_sign_up_clicked"
+      >
+        Sign Up
       </Button>
     </div>
   </div>

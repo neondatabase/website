@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import * as yup from 'yup';
 
+import LINKS from 'constants/links';
+
 const requestSchema = yup.object({
   branchId: yup.string().required('Branch ID is required'),
 });
@@ -13,7 +15,7 @@ export async function POST(request) {
 
     const start = performance.now();
     const response = await fetch(
-      `https://console.neon.tech/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches/${branchId}/restore`,
+      `${LINKS.console}/api/v2/projects/${process.env.NEON_BRANCHING_DEMO_PROJECT_ID}/branches/${branchId}/restore`,
       {
         method: 'POST',
         headers: {
