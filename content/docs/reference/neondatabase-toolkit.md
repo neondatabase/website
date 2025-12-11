@@ -14,7 +14,7 @@ updatedOn: '2025-10-10T13:19:39.266Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/typescript-sdk">TypeScript SDK for the Neon API</a>
+  <a href="/docs/reference/typescript-sdk">TypeScript SDK (Neon API)</a>
   <a href="/docs/reference/api-reference">Neon API Reference</a>
   <a href="/docs/serverless/serverless-driver">Neon Serverless Driver</a>
   <a href="/blog/why-neondatabase-toolkit">Why we built @neondatabase/toolkit</a>
@@ -248,6 +248,6 @@ const { data } = await apiClient.listProjects({});
 console.log("All projects in your account:", data.projects);
 ```
 
-With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [TypeScript SDK for the Neon API](/docs/reference/typescript-sdk) documentation.
+With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [TypeScript SDK (Neon API)](/docs/reference/typescript-sdk) documentation.
 
 As with all of our experimental features, changes are ongoing. If you have any feedback, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

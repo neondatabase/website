@@ -1,5 +1,6 @@
 ---
-title: Python SDK for the Neon API
+title: Python SDK (Neon API)
+subtitle: Programmatically manage Neon projects, branches, databases, and other platform resources
 enableTableOfContents: true
 updatedOn: '2025-11-17T19:26:53.694Z'
 ---

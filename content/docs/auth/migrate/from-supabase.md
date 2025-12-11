@@ -212,7 +212,7 @@ ORDER BY "createdAt" DESC;
 
 ## API compatibility
 
-Neon Auth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [JavaScript SDK reference](/docs/reference/javascript-sdk) for the complete API.
+Neon Auth supports most Supabase Auth methods including sign up, sign in (password and OAuth), session management, user updates, and email verification. See the [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk) for the complete API.
 
 **Not supported:**
 
