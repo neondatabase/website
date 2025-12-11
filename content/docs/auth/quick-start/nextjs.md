@@ -93,19 +93,19 @@ The `neonAuthMiddleware()` ensures that user is authenticated before the request
   <RightCode label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
+import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next";
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
-  loginUrl: "/auth/sign-in"
-})
+  loginUrl: "/auth/sign-in",
+});
 
 export const config = {
   matcher: [
-    // Run the middleware for all paths, except the static resources
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ]
-}
+    // Protected routes requiring authentication
+    "/account/:path*",
+  ],
+};
 ```
 
   </RightCode>
@@ -176,7 +176,7 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
   <RightCode label="app/layout.tsx">
 
 ```tsx
-import { authClient } from '@/lib/auth/client';
+import { authClient } from '@/lib/auth/client'; // [!code ++]
 import { NeonAuthUIProvider, UserButton } from '@neondatabase/neon-js/auth/react/ui'; // [!code ++]
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -193,8 +193,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'My Neon App', // [!code ++]
-  description: 'A Next.js application with Neon Auth', // [!code ++]
+  title: 'My Neon App',
+  description: 'A Next.js application with Neon Auth',
 };
 
 export default function RootLayout({
