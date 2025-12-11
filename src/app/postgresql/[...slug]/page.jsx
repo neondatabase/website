@@ -97,7 +97,7 @@ const PostgresTutorial = async ({ params }) => {
         breadcrumbs={breadcrumbs}
         breadcrumbsBaseUrl={POSTGRESQL_BASE_PATH}
         navigationLinks={navigationLinks}
-        navigationLinksPrefix="/postgresql/"
+        navigationLinksBasePath="/postgresql/"
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}

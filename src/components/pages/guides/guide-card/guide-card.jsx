@@ -4,9 +4,8 @@ import { PropTypes } from 'prop-types';
 
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
+import ArrowIcon from 'icons/arrow-right.inline.svg';
 import getFormattedDate from 'utils/get-formatted-date';
-
-import ArrowIcon from './images/arrow.inline.svg';
 
 const GuideCard = ({ title, subtitle, author, createdAt, slug }) => {
   const formattedDate = getFormattedDate(createdAt);

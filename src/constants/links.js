@@ -47,6 +47,7 @@ export default {
   cliInstall: '/docs/reference/cli-install',
   cliReference: '/docs/reference/neon-cli',
   connectionPooling: '/docs/connect/connection-pooling',
+  communityIntro: '/docs/community/community-intro',
   dataApi: '/docs/data-api/get-started',
   docsAi: '/docs/ai/ai-intro',
   docsBranching: '/docs/introduction/branching',

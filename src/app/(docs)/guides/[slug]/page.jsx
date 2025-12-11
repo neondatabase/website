@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
+import { GUIDES_BASE_PATH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAuthor, getAllGuides, getNavigationLinks } from 'utils/api-guides';
@@ -75,17 +76,23 @@ const GuidePost = async ({ params }) => {
       <Post
         content={content}
         data={data}
+        breadcrumbs={[
+          {
+            title: 'Community',
+            slug: 'community/community-intro',
+          },
+          {
+            title: 'Guides',
+            slug: 'guides',
+          },
+        ]}
         navigationLinks={navigationLinks}
+        navigationLinksBasePath={GUIDES_BASE_PATH}
         currentSlug={slug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
-        breadcrumbs={[
-          {
-            title: data.title,
-          },
-        ]}
-        breadcrumbsBaseUrl={LINKS.guides}
         author={author}
+        isGuide
       />
     </>
   );
