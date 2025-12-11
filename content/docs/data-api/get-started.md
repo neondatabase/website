@@ -348,9 +348,49 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&o
 
 </Steps>
 
+## Query patterns
+
+The Data API supports full CRUD operations and advanced queries. Here's a quick reference of the most common methods available in the [JavaScript SDK](/docs/reference/javascript-sdk):
+
+### CRUD operations
+
+| Operation | Method | Example | SDK Reference |
+|-----------|--------|---------|---------------|
+| **Select** | `.select()` | `client.from('posts').select('*')` | [select](/docs/reference/javascript-sdk#select) |
+| **Insert** | `.insert()` | `client.from('posts').insert({ title: 'New post' })` | [insert](/docs/reference/javascript-sdk#insert) |
+| **Update** | `.update()` | `client.from('posts').update({ title: 'Updated' }).eq('id', 1)` | [update](/docs/reference/javascript-sdk#update) |
+| **Delete** | `.delete()` | `client.from('posts').delete().eq('id', 1)` | [delete](/docs/reference/javascript-sdk#delete) |
+| **RPC** | `.rpc()` | `client.rpc('function_name', { param: 'value' })` | [rpc](/docs/reference/javascript-sdk#rpc) |
+
+### Filters
+
+| Filter | Description | Example |
+|--------|-------------|---------|
+| `.eq()` | Equals | `.eq('status', 'published')` |
+| `.neq()` | Not equals | `.neq('status', 'draft')` |
+| `.gt()` | Greater than | `.gt('price', 100)` |
+| `.lt()` | Less than | `.lt('price', 50)` |
+| `.gte()` | Greater than or equal | `.gte('quantity', 1)` |
+| `.lte()` | Less than or equal | `.lte('quantity', 10)` |
+| `.like()` | Pattern match (case-sensitive) | `.like('title', '%hello%')` |
+| `.ilike()` | Pattern match (case-insensitive) | `.ilike('title', '%hello%')` |
+| `.is()` | Is null / not null | `.is('deleted_at', null)` |
+| `.in()` | Value in array | `.in('status', ['active', 'pending'])` |
+
+### Modifiers
+
+| Modifier | Description | Example |
+|----------|-------------|---------|
+| `.order()` | Sort results | `.order('created_at', { ascending: false })` |
+| `.limit()` | Limit rows returned | `.limit(10)` |
+| `.single()` | Return single row | `.select('*').eq('id', 1).single()` |
+
+For the complete list of methods and detailed examples, see the [JavaScript SDK reference](/docs/reference/javascript-sdk).
+
 ## Next steps
 
-- **RLS**: Learn more about Row-Level Security in Neon
-  - [Row-Level Security with Neon](/docs/guides/row-level-security)
-  - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)
-- **[Generate TypeScript Types](/docs/data-api/generate-types)**: Introspect your database to get full autocomplete for your table names and columns.
+- [Build a note-taking app](/docs/data-api/demo) — Hands-on tutorial with Data API queries
+- [JavaScript SDK reference](/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
+- [Generate TypeScript types](/docs/data-api/generate-types) — Get autocomplete for table names and columns
+- [SQL to REST Converter](/docs/data-api/sql-to-rest) — Convert SQL queries to API calls
+- [Row-Level Security with Neon](/docs/guides/row-level-security) — Secure your data at the database level

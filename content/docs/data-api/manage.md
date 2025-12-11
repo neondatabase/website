@@ -5,6 +5,8 @@ enableTableOfContents: true
 updatedOn: '2025-12-05T20:12:42.052Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Data API" />
+
 Once the Data API is enabled, you can customize its behavior, manage how it authenticates users, or disable it entirely if it is no longer needed.
 
 ## Advanced settings
