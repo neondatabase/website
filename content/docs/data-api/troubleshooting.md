@@ -2,7 +2,7 @@
 title: Data API troubleshooting
 subtitle: Common issues and solutions when using the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-12-10T22:18:02.771Z'
+updatedOn: '2025-12-11T14:24:43.415Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-12-11T13:18:05.701Z'
+updatedOn: '2025-12-11T14:24:43.411Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

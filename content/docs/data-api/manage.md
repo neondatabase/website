@@ -2,7 +2,7 @@
 title: Manage Data API
 subtitle: 'Configure schemas, manage authentication providers, and control API access.'
 enableTableOfContents: true
-updatedOn: '2025-12-05T20:12:42.052Z'
+updatedOn: '2025-12-11T14:24:43.414Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
