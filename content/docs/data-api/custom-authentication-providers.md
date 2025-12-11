@@ -2,7 +2,7 @@
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 enableTableOfContents: true
-updatedOn: '2025-12-10T22:18:02.767Z'
+updatedOn: '2025-12-11T14:24:43.410Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 tag: beta
@@ -13,6 +13,8 @@ tag: beta
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/access-control">Access control & security</a>
+    <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
   </DocsList>
 </InfoBlock>
 

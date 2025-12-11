@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-12-11T13:18:05.701Z'
+updatedOn: '2025-12-11T14:24:43.411Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -419,6 +419,8 @@ Now test deleting a note that has paragraphs — both the note and its paragraph
 ## Learn more
 
 - [Getting started with Data API](/docs/data-api/get-started)
+- [Generate TypeScript types](/docs/data-api/generate-types)
+- [SQL to REST Converter](/docs/data-api/sql-to-rest)
 - [Neon Auth documentation](/docs/auth/overview)
 - [Neon JavaScript SDK reference](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)

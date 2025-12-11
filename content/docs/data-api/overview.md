@@ -2,7 +2,7 @@
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-12-10T22:18:02.770Z'
+updatedOn: '2025-12-11T14:24:43.414Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -36,6 +36,8 @@ The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/
 <a href="/docs/reference/javascript-sdk" description="Complete reference for authentication and database query methods." icon="code">JavaScript SDK</a>
 
 <a href="/docs/data-api/sql-to-rest" description="Convert SQL queries into RESTful HTTP requests." icon="sql">SQL to REST Converter</a>
+
+<a href="/docs/data-api/generate-types" description="Generate TypeScript types from your database schema for type-safe queries." icon="code">Generate Types</a>
 
 </DetailIconCards>
 

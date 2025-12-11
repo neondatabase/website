@@ -3,10 +3,18 @@ title: Access control & security
 subtitle: Understand how the Data API authenticates requests and enforces database
   permissions.
 enableTableOfContents: true
-updatedOn: '2025-12-10T22:18:02.763Z'
+updatedOn: '2025-12-11T14:24:43.405Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/custom-authentication-providers">Custom authentication providers</a>
+    <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
+  </DocsList>
+</InfoBlock>
 
 The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system — it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
 
