@@ -5,6 +5,16 @@ enableTableOfContents: true
 updatedOn: '2025-12-05T20:12:42.052Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Data API" />
+
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/access-control">Access control & security</a>
+    <a href="/docs/data-api/troubleshooting">Troubleshooting</a>
+  </DocsList>
+</InfoBlock>
+
 Once the Data API is enabled, you can customize its behavior, manage how it authenticates users, or disable it entirely if it is no longer needed.
 
 ## Advanced settings

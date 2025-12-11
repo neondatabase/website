@@ -8,6 +8,14 @@ updatedOn: '2025-12-10T22:18:02.769Z'
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/demo">Building a note-taking app</a>
+    <a href="/docs/data-api/sql-to-rest">SQL to REST API Translator</a>
+  </DocsList>
+</InfoBlock>
+
 The Neon SDK offers a CLI tool that introspects your database schema to generate a TypeScript definition file. This promotes type safety and enhances the developer experience when interacting with your database via the Data API, particularly with PostgREST clients like [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js) and [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Key benefits include:
 
 - **Autocomplete** for table names and columns.

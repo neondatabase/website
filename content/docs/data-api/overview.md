@@ -31,7 +31,11 @@ The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/
 
 <a href="/docs/data-api/get-started" description="Learn how to enable and use the Neon Data API with step-by-step instructions." icon="todo">Get Started</a>
 
+<a href="/docs/data-api/demo" description="Explore our demo note-taking app to learn Data API queries with RLS." icon="audio-jack">Tutorial</a>
+
 <a href="/docs/data-api/sql-to-rest" description="Convert SQL queries into RESTful HTTP requests using the Neon Data API." icon="code">SQL to REST Converter</a>
+
+<a href="/docs/data-api/generate-types" description="Generate TypeScript types from your database schema for type-safe queries." icon="code">Generate Types</a>
 
 </DetailIconCards>
 
