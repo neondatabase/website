@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import useTextStaggeredAnimation from 'hooks/use-text-staggered-animation';
 
 const DURATION = 1.1;
-const START_DELAY = 0.3;
+const START_DELAY = 0.2;
 
 const AnimatedText = ({ text, highlight }) => {
   const textString = text.join('');

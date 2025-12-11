@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import AnimatedPosition from './animated-position';
 import AnimatedText from './animated-text';
 
-const FADE_DURATION = 0.3; // Duration for fade in/out animations in seconds
+const FADE_DURATION = 0.2; // Duration for fade in/out animations in seconds
 
 const QUOTES = [
   {
