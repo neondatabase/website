@@ -19,7 +19,7 @@ const AnimatedPosition = ({ author, position }) => {
   const result = [author, position].map((part, index) => {
     if (index === 0) {
       return (
-        <span className="block font-medium">
+        <span className="block font-medium" key={`author-part-${currentIndex}`}>
           {part.split('').map((char) => {
             const charIndex = currentIndex;
             currentIndex += 1;

@@ -23,6 +23,7 @@ const AnimatedText = ({ text, highlight }) => {
       return (
         <m.span
           className="-mx-1 bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-no-repeat px-1"
+          key={`highlighted-part-${currentIndex}`}
           initial={{ backgroundPositionX: '100%', backgroundPositionY: '0' }}
           animate={{
             backgroundPositionX: '0%',
