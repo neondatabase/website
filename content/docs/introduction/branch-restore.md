@@ -19,11 +19,11 @@ updatedOn: '2025-12-03T15:06:05.467Z'
 </DocsList>
 
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/manage/projects#configure-your-restore-window">Configure restore window</a>
+  <a href="/docs/introduction/restore-window">Configure restore window</a>
 </DocsList>
 </InfoBlock>
 
-With Neon's instant restore capability, also known as point-in-time restore or PITR, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your restore window, where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
+With Neon's instant restore capability, also known as point-in-time restore or PITR, you can easily restore a branch to an earlier state in its own or another branch's history. You can use Time Travel Assist to connect to a specific point in your [restore window](/docs/introduction/restore-window), where you can run read-only queries to pinpoint the exact moment you need to restore to. You can also use Schema Diff to get a side-by-side, GitHub-style visual comparison of your selected branches before restoring.
 
 ## How instant restore works
 
@@ -33,7 +33,7 @@ The restore operation lets you revert the state of a selected branch to an earli
 
 ![branch restore to timestamp](/docs/guides/branch-restore_feature.png)
 
-The default restore window for a Neon project differs by plan. You can revert a branch to any time within your configured [restore window](/docs/manage/projects#configure-your-restore-window), down to the millisecond.
+The default restore window for a Neon project differs by plan. You can revert a branch to any time within your configured [restore window](/docs/introduction/restore-window), down to the millisecond.
 
 A few key points to keep in mind about the restore operation:
 

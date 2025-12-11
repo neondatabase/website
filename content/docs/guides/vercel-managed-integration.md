@@ -174,7 +174,7 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 
 - The linked Neon project moves from the old organization to the new one.
 - Environment variables and settings transfer with it.
-- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time restore window, etc.), you'll be prompted to upgrade.
+- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time [restore window](/docs/introduction/restore-window), etc.), you'll be prompted to upgrade.
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
 

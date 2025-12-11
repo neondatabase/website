@@ -166,6 +166,8 @@
       items:
         - title: Backup & restore
           slug: guides/backup-restore
+        - title: Restore window
+          slug: introduction/restore-window
         - title: Instant restore
           slug: introduction/branch-restore
         - title: Time Travel

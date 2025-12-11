@@ -63,13 +63,13 @@ The two-organization structure enables you to:
 
 Each organization has different limits that apply to all projects created within it. Understanding these limits helps you design your platform's features and set appropriate user expectations.
 
-| Limit                 | Free Organization | Paid Organization | Notes                                                      |
-| --------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
-| **Max branches**      | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
-| **Max snapshots**     | 1 per project     | 10 per project    | Critical for versioning workflows                          |
-| **Compute range**     | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                       |
-| **History retention** | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
-| **Min autosuspend**   | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
+| Limit               | Free Organization | Paid Organization | Notes                                                      |
+| ------------------- | ----------------- | ----------------- | ---------------------------------------------------------- |
+| **Max branches**    | 10 per project    | 1,000 per project | Includes all branches (production, development, snapshots) |
+| **Max snapshots**   | 1 per project     | 10 per project    | Critical for versioning workflows                          |
+| **Compute range**   | 0.25 - 2 CU       | 0.25 - 16 CU      | CU = Compute Units (~4GB RAM per CU)                       |
+| **Restore window**  | 1 day             | Up to 7 days      | Point-in-time recovery window                              |
+| **Min autosuspend** | 5 minutes         | 1 minute          | Minimum time before compute suspends                       |
 
 **Key constraints to consider:**
 
@@ -320,14 +320,14 @@ AI agents and codegen platforms need robust database versioning to manage schema
 
 ### Point-in-time recovery (PITR)
 
-Use PITR for recent history. The history retention window differs between your two organizations:
+Use PITR for recent history. The [restore window](/docs/introduction/restore-window) differs between your two organizations:
 
 - **Free organization (sponsored by Neon)** — 1 day of point-in-time history
 - **Paid organization** — Up to 7 days of point-in-time history
 - **No storage cost** — PITR uses Neon's built-in history, no additional storage charges
-- **Instant restore** — Restore databases to any point within the retention window in seconds
+- **Instant restore** — Restore databases to any point within the restore window in seconds
 
-The Free organization provides 1 day of history retention, while the Paid organization provides up to 7 days. Factor these retention windows into your platform's feature offerings and set appropriate user expectations for each tier.
+The Free organization provides 1 day of restore window, while the Paid organization provides up to 7 days. Factor these restore windows into your platform's feature offerings and set appropriate user expectations for each tier.
 
 Example creating a branch from 2 hours ago using the [Create branch](https://api-docs.neon.tech/reference/createprojectbranch) API:
 
@@ -348,7 +348,7 @@ curl --request POST \
 
 ### Snapshots for longer retention
 
-Use snapshots (branches) for versions you want to keep beyond the PITR retention window:
+Use snapshots (branches) for versions you want to keep beyond the [restore window](/docs/introduction/restore-window):
 
 - **Persistent versions** — Keep snapshots as long as needed
 - **Named versions** — Give meaningful names to important database states
