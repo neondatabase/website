@@ -13,6 +13,8 @@ tag: beta
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/access-control">Access control & security</a>
+    <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
   </DocsList>
 </InfoBlock>
 

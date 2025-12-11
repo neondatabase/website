@@ -350,7 +350,10 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&o
 
 ## Next steps
 
+- **Tutorial**: [Build a note-taking app](/docs/data-api/demo)
 - **RLS**: Learn more about Row-Level Security in Neon
   - [Row-Level Security with Neon](/docs/guides/row-level-security)
   - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)
-- **[Generate TypeScript Types](/docs/data-api/generate-types)**: Introspect your database to get full autocomplete for your table names and columns.
+- **Tools**:
+  - [Generate TypeScript Types](/docs/data-api/generate-types)
+  - [SQL to REST Converter](/docs/data-api/sql-to-rest)

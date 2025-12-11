@@ -7,6 +7,14 @@ updatedOn: '2025-12-10T22:18:02.771Z'
 
 <FeatureBetaProps feature_name="Neon Data API" />
 
+<InfoBlock>
+  <DocsList title="Related docs" theme="docs">
+    <a href="/docs/data-api/get-started">Getting started with Data API</a>
+    <a href="/docs/data-api/manage">Manage Data API</a>
+    <a href="/docs/data-api/access-control">Access control & security</a>
+  </DocsList>
+</InfoBlock>
+
 ## Permission denied to create extension "pg_session_jwt"
 
 ```bash
