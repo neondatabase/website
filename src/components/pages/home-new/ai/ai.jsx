@@ -21,7 +21,7 @@ const AI = () => (
       size="1600"
     >
       <div className="min-w-0">
-        <Heading title="<strong>Get Postgres. Keep going.</strong> Developers start with Neon to build on Postgres without slowing down." />
+        <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and have Cursor do the hard work." />
         <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
           <div className="pointer-events-none relative w-full md:hidden">
             <RiveAnimation
