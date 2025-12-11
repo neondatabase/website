@@ -82,8 +82,6 @@ Choose your framework to get started:
 
 <TechCards>
 
-<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js (API methods)" description="Build your own auth UI" icon="next-js"></a>
-
 <a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With UI components" icon="next-js"></a>
 
 <a href="/docs/auth/quick-start/react" title="React (API methods)" description="Build your own auth UI" icon="react"></a>
