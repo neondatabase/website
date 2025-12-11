@@ -286,7 +286,8 @@ const Navigation = () => {
       {/* Shared submenu container */}
       <div
         className={clsx(
-          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
+          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden',
+          'border-b border-gray-new-20 bg-black-pure',
           'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
           {
             'pointer-events-none': activeMenuIndex === null,
@@ -306,7 +307,8 @@ const Navigation = () => {
             return (
               <div
                 className={clsx(
-                  'absolute left-0 top-0 w-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
+                  'absolute left-0 top-0 w-full',
+                  'transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
                   isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
                 )}
                 key={index}
@@ -318,7 +320,7 @@ const Navigation = () => {
               >
                 {sections.length > 0 && (
                   <Container
-                    className="flex w-full gap-x-[160px] overflow-hidden pb-20 pt-7 xl:gap-x-8"
+                    className="flex w-full gap-x-40 overflow-hidden pb-20 pt-7 xl:gap-x-8"
                     size="1600"
                   >
                     <ul
@@ -354,7 +356,12 @@ const Navigation = () => {
                                   tabIndex={isActive ? 0 : -1}
                                   onKeyDown={makeHandleSubmenuNavigation(index)}
                                 >
-                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white transition-colors duration-200 group-hover:text-gray-new-80">
+                                  <span
+                                    className={clsx(
+                                      'flex items-baseline gap-x-1.5 text-lg font-medium leading-none',
+                                      'text-white transition-colors duration-200 group-hover:text-gray-new-80'
+                                    )}
+                                  >
                                     {title}
                                   </span>
                                   {description}
