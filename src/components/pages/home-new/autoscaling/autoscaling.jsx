@@ -9,6 +9,8 @@ import Container from 'components/shared/container';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
+import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.svg';
+import saveCostsImageMd from 'images/pages/home-new/autoscaling/save-costs-md.svg';
 
 import Heading from '../heading';
 
@@ -37,7 +39,6 @@ const Autoscaling = () => {
     rootMargin: '500px 0px',
   });
   const [activeItem, setActiveItem] = useState(0);
-  const animationMdAspect = activeItem === 0 ? 'md:aspect-[767/599]' : 'md:aspect-[767/1193]';
 
   return (
     <section
@@ -84,13 +85,29 @@ const Autoscaling = () => {
             )}
             ref={animationWrapperRef}
           >
-            <div className={clsx('aspect-[1378/480] w-[1378px] 3xl:max-w-full', animationMdAspect)}>
+            <div className="aspect-[1378/480] w-[1378px] 3xl:max-w-full md:hidden">
               {isAnimationIntersecting && (
                 <Animation
-                  className={clsx('aspect-[1378/480] w-[1378px] 3xl:max-w-full', animationMdAspect)}
+                  className="aspect-[1378/480] w-[1378px] 3xl:max-w-full md:hidden"
                   state={activeItem}
                 />
               )}
+            </div>
+            <div className="hidden md:flex">
+              <Image
+                className={clsx('mx-auto h-0 max-w-none', activeItem === 0 && '!h-auto')}
+                src={saveCostsImageMd}
+                width={768}
+                height={280}
+                alt=""
+              />
+              <Image
+                className={clsx('mx-auto h-0 max-w-none', activeItem === 1 && '!h-auto')}
+                src={avoidImageMd}
+                width={768}
+                height={560}
+                alt=""
+              />
             </div>
           </div>
 

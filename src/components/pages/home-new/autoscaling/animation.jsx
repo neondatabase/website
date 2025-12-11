@@ -10,32 +10,21 @@ import {
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
-import useWindowSize from 'react-use/lib/useWindowSize';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
 
 const Animation = ({ className, state = 0 }) => {
-  const { width } = useWindowSize();
-  const isMobile = width ? width < 768 : false;
-
   const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
-    src: '/animations/pages/home-new/autoscaling.riv?20251210',
-    autoBind: true,
+    src: '/animations/pages/home-new/autoscaling.riv?20251210256',
     fit: Fit.Cover,
-    triggerOnce: false,
-    pauseOnHide: false,
+    threshold: 0.8,
   });
 
   const viewModel = useViewModel(rive);
   const viewModelInstance = useViewModelInstance(viewModel, { rive });
-  const { setValue: setIsMobileInstance } = useViewModelInstanceBoolean(
-    'mobile',
-    viewModelInstance
-  );
   const { setValue: setIsIntroInstance } = useViewModelInstanceBoolean('intro', viewModelInstance);
   const { setValue: setStateInstance } = useViewModelInstanceNumber('state', viewModelInstance);
 
-  // Handle visibility and intro state
   useEffect(() => {
     if (rive) {
       if (isVisible) {
@@ -47,12 +36,6 @@ const Animation = ({ className, state = 0 }) => {
     }
   }, [isVisible, rive, setIsIntroInstance]);
 
-  // Handle mobile state
-  useEffect(() => {
-    setIsMobileInstance(isMobile);
-  }, [isMobile, setIsMobileInstance]);
-
-  // Handle state changes
   useEffect(() => {
     setStateInstance(state);
   }, [state, setStateInstance]);
