@@ -428,17 +428,6 @@ const defaultConfig = {
         destination: '/programs/agents',
         permanent: true,
       },
-      // Guides moved to Docs
-      {
-        source: '/guides',
-        destination: '/docs/guides',
-        permanent: true,
-      },
-      {
-        source: '/guides/:path*',
-        destination: '/docs/guides/:path*',
-        permanent: true,
-      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
