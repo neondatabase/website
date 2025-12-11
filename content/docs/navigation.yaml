@@ -1372,6 +1372,8 @@
       items:
         - title: Community hub
           slug: community/community-intro
+        - title: Community Guides
+          slug: guides
         - title: Docs Contribution Guide
           slug: community/contribution-guide
         - title: Component Guide

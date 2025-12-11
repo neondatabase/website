@@ -308,11 +308,6 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      // {
-      //   source: '/ai',
-      //   destination: '/docs/ai/ai-intro',
-      //   permanent: true,
-      // },
       {
         source: '/deploy',
         destination: '/stage',
@@ -431,6 +426,17 @@ const defaultConfig = {
       {
         source: '/agents',
         destination: '/programs/agents',
+        permanent: true,
+      },
+      // Guides moved to Docs
+      {
+        source: '/guides',
+        destination: '/docs/guides',
+        permanent: true,
+      },
+      {
+        source: '/guides/:path*',
+        destination: '/docs/guides/:path*',
         permanent: true,
       },
       ...docsRedirects,
