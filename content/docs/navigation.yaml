@@ -362,9 +362,11 @@
 
             - section: Tools
               items:
+                - title: JavaScript SDK
+                  slug: reference/javascript-sdk
                 - title: SQL to REST API Translator
                   slug: data-api/sql-to-rest
-                - title: Auto-generated Docs
+                - title: Generate TypeScript types
                   slug: data-api/generate-types
 
             - section: Using the Data API
