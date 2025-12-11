@@ -19,27 +19,6 @@ import MenuBanner from '../menu-banner';
 
 const ANIMATION_DURATION = 0.2;
 
-const variants = {
-  from: {
-    opacity: 0,
-    translateY: 30,
-    transition: {
-      duration: ANIMATION_DURATION,
-    },
-    transitionEnd: {
-      zIndex: -1,
-    },
-  },
-  to: {
-    zIndex: 39,
-    opacity: 1,
-    translateY: 0,
-    transition: {
-      duration: ANIMATION_DURATION,
-    },
-  },
-};
-
 const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
   const [isMenuItemOpen, setIsMenuItemOpen] = useState();
   const Tag = sections ? Button : Link;
@@ -71,50 +50,52 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
           <ChevronIcon width={24} height={24} className="ml-auto text-black-pure dark:text-white" />
         )}
       </Tag>
-      {hasSubmenu && (
-        <AnimatePresence>
-          {isMenuItemOpen && (
-            <m.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: ANIMATION_DURATION }}
-              className="flex gap-x-3.5 md:flex-col md:gap-y-9"
-            >
-              <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
-                {sections.map(({ title, items }, index) => (
-                  <li key={index}>
-                    {title && (
-                      <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
-                        {title}
-                      </h3>
-                    )}
-                    <ul className="flex flex-col gap-5">
-                      {items.map(({ title, description, to, isExternal }) => (
-                        <li key={title}>
-                          <Link
-                            className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
-                            to={to}
-                            isExternal={isExternal}
-                            tagName="MobileMenu"
-                          >
-                            <span className="text-lg font-medium leading-none tracking-extra-tight text-black-pure dark:text-white sm:text-base">
-                              {title}
-                            </span>
+      <LazyMotion features={domAnimation}>
+        {hasSubmenu && (
+          <AnimatePresence>
+            {isMenuItemOpen && (
+              <m.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: ANIMATION_DURATION }}
+                className="flex gap-x-3.5 md:flex-col md:gap-y-9"
+              >
+                <ul className="grid grid-cols-[224px,224px] gap-x-5 gap-y-9 pt-3 sm:grid-cols-2 xs:grid-cols-1">
+                  {sections.map(({ title, items }, index) => (
+                    <li key={index}>
+                      {title && (
+                        <h3 className="mb-5 text-[10px] uppercase leading-none tracking-snug text-gray-new-50">
+                          {title}
+                        </h3>
+                      )}
+                      <ul className="flex flex-col gap-5">
+                        {items.map(({ title, description, to, isExternal }) => (
+                          <li key={title}>
+                            <Link
+                              className="grid gap-y-2 text-[13px] leading-tight tracking-snug text-gray-new-40 dark:text-gray-new-60"
+                              to={to}
+                              isExternal={isExternal}
+                              tagName="MobileMenu"
+                            >
+                              <span className="text-lg font-medium leading-none tracking-extra-tight text-black-pure dark:text-white sm:text-base">
+                                {title}
+                              </span>
 
-                            {description}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </li>
-                ))}
-              </ul>
-              {isProduct && <MenuBanner />}
-            </m.div>
-          )}
-        </AnimatePresence>
-      )}
+                              {description}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </li>
+                  ))}
+                </ul>
+                {isProduct && <MenuBanner />}
+              </m.div>
+            )}
+          </AnimatePresence>
+        )}
+      </LazyMotion>
     </li>
   );
 };
@@ -161,59 +142,49 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
           onClick={toggleMobileMenu}
         />
       </div>
-      <LazyMotion features={domAnimation}>
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <m.nav
-              className="safe-paddings fixed inset-0 z-[-1] hidden flex-col justify-between bg-white dark:bg-black-pure lg:flex"
-              initial="from"
-              animate="to"
-              exit="from"
-              variants={variants}
+      {isMobileMenuOpen && (
+        <nav className="safe-paddings fixed inset-0 z-40 hidden flex-col justify-between bg-white dark:bg-black-pure lg:flex">
+          <div
+            className={clsx('relative h-full pb-[101px] pt-14 sm:pb-[125px]', {
+              'pt-[96px]': hasTopbar,
+              'pb-[148px] sm:pb-[172px]': isDocPage,
+            })}
+          >
+            <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
+              {mobileMenuItems.map((item, index) => (
+                <MobileMenuItem key={index} {...item} />
+              ))}
+            </ul>
+            <div
+              className={clsx(
+                'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
+                { 'pb-20 sm:pb-[68px]': isDocPage }
+              )}
             >
-              <div
-                className={clsx('relative h-full pb-[101px] pt-14 sm:pb-[125px]', {
-                  'pt-[96px]': hasTopbar,
-                  'pb-[148px] sm:pb-[172px]': isDocPage,
-                })}
+              <Button
+                className="h-9 border border-gray-new-40 px-[18px]"
+                to={LINKS.login}
+                theme="transparent"
+                size="xxs"
+                tagName="MobileMenu"
+                analyticsEvent="header_log_in_clicked"
               >
-                <ul className="no-scrollbars flex h-full flex-col overflow-y-auto px-8 pt-1 sm:px-5 sm:pt-3">
-                  {mobileMenuItems.map((item, index) => (
-                    <MobileMenuItem key={index} {...item} />
-                  ))}
-                </ul>
-                <div
-                  className={clsx(
-                    'absolute inset-x-0 bottom-0 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-gray-new-94 bg-white p-8 dark:border-gray-new-20 dark:bg-black-pure sm:grid-cols-1 sm:p-5',
-                    { 'pb-20 sm:pb-[68px]': isDocPage }
-                  )}
-                >
-                  <Button
-                    className="h-9 border border-gray-new-40 px-[18px]"
-                    to={LINKS.login}
-                    theme="transparent"
-                    size="xxs"
-                    tagName="MobileMenu"
-                    analyticsEvent="header_log_in_clicked"
-                  >
-                    Log In
-                  </Button>
-                  <Button
-                    className="h-9 px-[18px]"
-                    to={LINKS.signup}
-                    theme="white-filled-multi"
-                    size="xxs"
-                    tagName="MobileMenu"
-                    analyticsEvent="header_sign_up_clicked"
-                  >
-                    Sign Up
-                  </Button>
-                </div>
-              </div>
-            </m.nav>
-          )}
-        </AnimatePresence>
-      </LazyMotion>
+                Log In
+              </Button>
+              <Button
+                className="h-9 px-[18px]"
+                to={LINKS.signup}
+                theme="white-filled-multi"
+                size="xxs"
+                tagName="MobileMenu"
+                analyticsEvent="header_sign_up_clicked"
+              >
+                Sign Up
+              </Button>
+            </div>
+          </div>
+        </nav>
+      )}
     </>
   );
 };
