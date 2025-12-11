@@ -2,7 +2,7 @@
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 enableTableOfContents: true
-updatedOn: '2025-11-21T00:00:00.000Z'
+updatedOn: '2025-12-11T19:49:37.736Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

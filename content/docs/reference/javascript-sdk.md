@@ -3,6 +3,7 @@ title: JavaScript SDK (Auth & Data API)
 subtitle: Reference documentation for building applications with Neon Auth and Data API
 enableTableOfContents: true
 layout: wide
+updatedOn: '2025-12-11T19:49:37.742Z'
 ---
 
 The Neon JavaScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.

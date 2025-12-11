@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-12-11T16:01:49.201Z'
+updatedOn: '2025-12-11T19:49:37.741Z'
 tag: beta
 ---
 
