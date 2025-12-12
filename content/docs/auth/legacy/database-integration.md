@@ -268,7 +268,7 @@ print('User is not authenticated', response.status_code, response.text)
 ### Legacy Neon Auth
 
 - [Legacy Overview](/docs/auth/legacy/overview) - What is Legacy Neon Auth, claiming projects, environment variables
-- [Migration Guide](/docs/auth/migrate-from-stack-auth) - Upgrade to Neon Auth with Better Auth
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
 
 ### Stack Auth documentation
 
