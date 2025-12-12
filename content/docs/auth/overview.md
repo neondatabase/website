@@ -24,7 +24,9 @@ Neon Auth is a managed authentication service that stores users, sessions, and a
 
 ## Built on Better Auth
 
-Neon Auth is powered by Better Auth, which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
+Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
+
+Neon Auth currently supports Better Auth version **1.4.6**.
 
 ## Basic usage
 
