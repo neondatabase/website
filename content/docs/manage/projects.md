@@ -889,14 +889,12 @@ When you recover a deleted project, the following are restored:
 
 ### What requires reconfiguration
 
-<Admonition type="important">
 The following features are **not** recovered and must be manually re-enabled after recovery:
 
 - **Data API** (including `authenticated` and `anonymous` roles)
 - **GitHub integration**
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
-  </Admonition>
 
 ### Costs
 
