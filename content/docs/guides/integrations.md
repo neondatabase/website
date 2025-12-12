@@ -86,10 +86,6 @@ updatedOn: '2025-07-24T20:03:24.601Z'
 
 <a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
 
-<a href="/docs/guides/neosync-anonymize" title="Neosync" description="Anonymize data with Neosync" icon="neosync"></a>
-
-<a href="/docs/guides/neosync-generate" title="Neosync" description="Seed data with Neosync" icon="neosync"></a>
-
 <a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
