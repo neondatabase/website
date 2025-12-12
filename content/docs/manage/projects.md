@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2025-12-03T13:07:33.041Z'
+updatedOn: '2025-12-11T15:40:49.872Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -55,7 +55,7 @@ The **Settings** page includes these sub-pages:
 
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore** — Set the restore window to enable instant restore, time travel queries, and branching from past states.
+- **Instant restore** — Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
 - **Updates** — Schedule a time for Postgres and Neon updates.
 - **Collaborators** — Invite external collaborators to join your Neon project.
 - **Network security** — Configure Neon's IP and Private Networking features for secure access.
@@ -96,6 +96,8 @@ By default, Neon retains a history of changes for all branches in your project, 
 - [Instant restore](/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
 
+For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](/docs/introduction/restore-window).
+
 If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
 
 Also note that adjusting the restore window affects _all_ branches in your project.
@@ -108,8 +110,6 @@ To configure the restore window for a project:
    ![Restore window configuration](/docs/manage/instant_restore_setting.png)
 4. Use the slider to select the restore window.
 5. Click **Save**.
-
-For information about restore window limits and default settings, see [Neon plans](/docs/introduction/plans).
 
 ### Schedule updates for your project
 

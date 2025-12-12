@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.032Z'
+updatedOn: '2025-12-11T15:40:49.863Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -30,11 +30,9 @@ The ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). An
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window.
+Time Travel queries are limited to your project's restore window. You cannot select a time outside your current restore window.
 
-You cannot select a time outside your current restore window.
-
-To change your restore window, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+To learn more about the restore window, including how to configure it and plan limits, see [Restore window](/docs/introduction/restore-window).
 
 ### Data integrity
 
@@ -48,7 +46,7 @@ Time Travel in the SQL Editor offers a non-destructive way to explore your datab
 
 You can use this feature to help with scenarios like:
 
-- Investigating anomolies
+- Investigating anomalies
 - Assessing the impact of new features
 - Troubleshooting
 - Compliance auditing

@@ -1,7 +1,9 @@
 ---
-title: TypeScript SDK for the Neon API
+title: TypeScript SDK (Neon API)
+subtitle: Programmatically manage Neon projects, branches, databases, and other platform
+  resources
 enableTableOfContents: true
-updatedOn: '2025-11-17T19:26:53.697Z'
+updatedOn: '2025-12-11T19:49:37.745Z'
 ---
 
 <InfoBlock>

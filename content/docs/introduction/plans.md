@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-12-09T15:31:41.488Z'
+updatedOn: '2025-12-11T15:40:49.869Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -271,7 +271,7 @@ The maximum restore window per plan:
 
 > The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
-The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
 
 ### ☑ Private network transfer
 

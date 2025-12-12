@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-12-03T13:07:33.044Z'
+updatedOn: '2025-12-11T15:40:49.874Z'
 ---
 
 ## access token
@@ -238,13 +238,11 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_.
+The history of data changes for all branches in your Neon project. This history is retained to support [instant restore](/docs/introduction/branch-restore), [Time Travel](/docs/guides/time-travel-assist), and other data recovery features. See [Restore window](/docs/introduction/restore-window) to learn how Neon retains and manages this history.
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point.
-
-For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records within your configured [restore window](/docs/introduction/restore-window), which allows you to restore data to any point in time within that window. For more information, see [Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -364,7 +362,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined [restore window](/docs/introduction/restore-window). Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -487,6 +485,10 @@ On the publisher database in a logical replication setup, replication slots trac
 
 Selling the Neon service as part of another service offering.
 
+## restore window
+
+The period of time for which Neon retains a history of changes for your branches. The restore window determines how far back you can restore data, create branches from past states, and run Time Travel queries. The restore window is configurable per project and affects instant restore storage costs. For detailed information, see [Restore window](/docs/introduction/restore-window).
+
 ## root branch
 
 Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch.
@@ -602,7 +604,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your [restore window](/docs/introduction/restore-window) and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 

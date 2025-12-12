@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2025-12-08T00:00:00.000Z'
+updatedOn: '2025-12-11T10:46:56.810Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
 ---
@@ -81,8 +81,6 @@ See [Branching authentication](/docs/auth/branching-authentication) for details 
 Choose your framework to get started:
 
 <TechCards>
-
-<a href="/docs/auth/quick-start/nextjs-api-only" title="Next.js (API methods)" description="Build your own auth UI" icon="next-js"></a>
 
 <a href="/docs/auth/quick-start/nextjs" title="Next.js" description="With UI components" icon="next-js"></a>
 

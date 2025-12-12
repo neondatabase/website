@@ -166,6 +166,8 @@
       items:
         - title: Backup & restore
           slug: guides/backup-restore
+        - title: Restore window
+          slug: introduction/restore-window
         - title: Instant restore
           slug: introduction/branch-restore
         - title: Time Travel
@@ -342,26 +344,39 @@
           icon: api
           slug: data-api/overview
           items:
-            - title: Overview
-              slug: data-api/overview
-            - title: Get started
-              slug: data-api/get-started
-            - title: Building a note-taking app
-              slug: data-api/demo
-            - title: Access control & security
-              slug: data-api/access-control
-            - title: Secure your app with RLS
-              slug: guides/rls-tutorial
-            - title: SQL to PostgREST Converter
-              slug: data-api/sql-to-rest
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
-            - title: Generate Typescript types
-              slug: data-api/generate-types
-            - title: Manage Data API
-              slug: data-api/manage
-            - title: Troubleshooting
-              slug: data-api/troubleshooting
+            - section: Introduction
+              items:
+                - title: Overview
+                  slug: data-api/overview
+                - title: Quickstart
+                  slug: data-api/get-started
+
+            - section: Guides
+              items:
+                - title: Access control & security
+                  slug: data-api/access-control
+                - title: Secure your app with RLS
+                  slug: guides/rls-tutorial
+                - title: Custom authentication providers
+                  slug: data-api/custom-authentication-providers
+
+            - section: Tools
+              items:
+                - title: JavaScript SDK (Auth & Data API)
+                  slug: reference/javascript-sdk
+                - title: SQL to REST API Translator
+                  slug: data-api/sql-to-rest
+                - title: Generate TypeScript types
+                  slug: data-api/generate-types
+
+            - section: Using the Data API
+              items:
+                - title: Building a note-taking app
+                  slug: data-api/demo
+                - title: Managing the Data API
+                  slug: data-api/manage
+                - title: Troubleshooting
+                  slug: data-api/troubleshooting
         - title: Neon Auth
           icon: auth
           slug: auth/overview
@@ -409,7 +424,7 @@
 
             - section: Reference
               items:
-                - title: JavaScript SDK
+                - title: JavaScript SDK (Auth & Data API)
                   slug: reference/javascript-sdk
                 - title: UI Components
                   slug: auth/reference/ui-components
@@ -585,16 +600,18 @@
             - section: SDKs
               icon: sdk
               items:
-                - title: TypeScript SDK
+                - title: JavaScript SDK (Auth & Data API)
+                  slug: reference/javascript-sdk
+                - title: TypeScript SDK (Neon API)
                   slug: reference/typescript-sdk
-                - title: Python SDK
+                - title: Python SDK (Neon API)
                   slug: reference/python-sdk
                 - title: The @neondatabase/toolkit
                   slug: reference/neondatabase-toolkit
-                - title: Go SDK
+                - title: Go SDK (Neon API)
                   slug: https://github.com/kislerdm/neon-sdk-go
                   tag: community
-                - title: Node.js / Deno SDK
+                - title: Node.js / Deno SDK (Neon API)
                   slug: https://github.com/paambaati/neon-js-sdk
                   tag: community
 

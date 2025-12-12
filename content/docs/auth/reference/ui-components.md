@@ -2,7 +2,7 @@
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
 enableTableOfContents: true
-updatedOn: '2025-12-08T00:00:00.000Z'
+updatedOn: '2025-12-11T19:49:37.739Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -216,4 +216,4 @@ function Dashboard() {
 ## Next Steps
 
 - See [React with Neon Auth UI](/docs/auth/quick-start/react-router-components) for a complete example
-- Check the [JavaScript SDK reference](/docs/auth/reference/javascript-sdk) for programmatic auth methods
+- Check the [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk) for programmatic auth methods
