@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
-import useLocalStorage from 'hooks/use-local-storage';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import { doNowOrAfterSomeTime, emailRegexp } from 'utils/forms';
@@ -51,7 +50,6 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
   const isRecognized = !!getCookie('ajs_user_id');
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
-  const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleInputChange = (event) => {
@@ -69,11 +67,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
     } else if (!emailRegexp.test(email)) {
       setErrorMessage('Please enter a valid email');
       setFormState(FORM_STATES.ERROR);
-    } else if (submittedEmail.includes(email)) {
-      setErrorMessage('You have already submitted this email');
-      setFormState(FORM_STATES.ERROR);
     } else {
-      setSubmittedEmail([...submittedEmail, email]);
       setErrorMessage('');
       setFormState(FORM_STATES.LOADING);
 
