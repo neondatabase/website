@@ -5,6 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-12-11T10:46:56.810Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
+  - /docs/auth/migrate/from-stack-auth
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -98,6 +99,6 @@ Neon Auth is currently available for AWS regions only. Azure support is not yet 
 
 ## Migration from Stack Auth
 
-If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-stack-auth).
+If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
 
 <NeedHelp/>
