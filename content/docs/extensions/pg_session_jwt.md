@@ -2,7 +2,7 @@
 title: The pg_session_jwt extension
 subtitle: Handle authenticated sessions through JWTs in Postgres
 enableTableOfContents: true
-updatedOn: '2025-12-12T00:00:00.000Z'
+updatedOn: '2025-12-12T17:42:01.028Z'
 ---
 
 <InfoBlock>
