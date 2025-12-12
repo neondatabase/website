@@ -5,6 +5,9 @@ enableTableOfContents: true
 updatedOn: '2025-12-11T00:00:00.000Z'
 ---
 
+<CopyPrompt src="/prompts/kysely-prompt.md" 
+description="Pre-built prompt for connecting Node/TypeScript applications to Neon using Kysely."/>
+
 <InfoBlock>
 <DocsList title="What you will learn:">
 <p>How to connect from Kysely using different drivers</p>
@@ -49,10 +52,13 @@ npx tsc --init
 
 Configure your `tsconfig.json` for type safety and module resolution. Ensure you have at least the following settings:
 
-```json {4-6}
+```json {4-9}
 {
   "compilerOptions": {
     // ... other settings ...
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "strict": true,
     "allowImportingTsExtensions": true,
     "noEmit": true
@@ -62,7 +68,7 @@ Configure your `tsconfig.json` for type safety and module resolution. Ensure you
 
 Configure your `package.json` to use ES modules by updating or adding the following line:
 
-```json {2}
+```json {3}
 {
   // ... other settings ...
   "type": "module"
