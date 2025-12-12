@@ -5,10 +5,7 @@ enableTableOfContents: true
 updatedOn: '2025-12-12T17:42:01.026Z'
 redirectFrom:
   - /docs/guides/neon-authorize
-tag: beta
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">

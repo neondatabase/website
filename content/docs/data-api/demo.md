@@ -5,8 +5,6 @@ enableTableOfContents: true
 updatedOn: '2025-12-11T19:49:37.740Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Data API" />
-
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 
 ## About the sample application
