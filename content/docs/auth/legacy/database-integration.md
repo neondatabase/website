@@ -13,8 +13,10 @@ redirectFrom:
   - /docs/guides/neon-auth-best-practices
 ---
 
-<Admonition type="note">
-This is the technical reference for Legacy Neon Auth with Stack Auth. For conceptual information and migration options, see the [Legacy Overview](/docs/auth/legacy/overview).
+<Admonition type="warning" title="You are viewing legacy documentation">
+**This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
+
+**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 This guide covers how to work with the `neon_auth.users_sync` table, authenticate backend requests, and implement Row-Level Security (RLS) with Legacy Neon Auth.
