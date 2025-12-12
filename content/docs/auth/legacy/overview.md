@@ -3,7 +3,7 @@ title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
 enableTableOfContents: true
 tag: archived
-updatedOn: '2025-12-12T13:16:11.675Z'
+updatedOn: '2025-12-12T18:18:11.074Z'
 redirectFrom:
   - /docs/neon-auth/overview
   - /docs/neon-auth/claim-project

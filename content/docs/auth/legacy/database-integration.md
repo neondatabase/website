@@ -3,7 +3,7 @@ title: Legacy Neon Auth - Database Integration
 subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
 enableTableOfContents: true
 tag: archived
-updatedOn: '2025-12-12T13:16:11.667Z'
+updatedOn: '2025-12-12T18:18:11.070Z'
 redirectFrom:
   - /docs/neon-auth/how-it-works
   - /docs/neon-auth/best-practices
