@@ -5,8 +5,6 @@ enableTableOfContents: true
 updatedOn: '2025-12-11T14:24:43.415Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Data API" />
-
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
