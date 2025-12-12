@@ -2,7 +2,7 @@
 title: Data API troubleshooting
 subtitle: Common issues and solutions when using the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-12-11T14:24:43.415Z'
+updatedOn: '2025-12-12T19:35:53.908Z'
 ---
 
 <InfoBlock>
