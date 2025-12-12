@@ -9,6 +9,7 @@ content/docs/community/contribution-guide.md
 content/docs/postgresql/query-reference.md
 content/docs/functions/json_extract_path.md
 content/docs/introduction/monitoring-page.md
+content/guides/honc.md
 
 # auth docs (contain code samples with special annotations like // [!code ++])
 content/docs/auth/quick-start/tanstack-router.md
