@@ -13,8 +13,10 @@ redirectFrom:
   - /docs/guides/neon-auth-api
 ---
 
-<Admonition type="note">
-Legacy Neon Auth with Stack Auth is no longer available for new projects but remains fully supported for existing users. See our [migration guide](/docs/auth/migrate/from-legacy-auth) to upgrade to Neon Auth with Better Auth.
+<Admonition type="warning" title="You are viewing legacy documentation">
+**This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
+
+**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 ## What is legacy Neon Auth?

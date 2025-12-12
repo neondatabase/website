@@ -27,7 +27,7 @@ The Neon SDK offers a CLI tool that introspects your database schema to generate
 Use `npx` to run the type generator. You must provide your **Direct Connection String** (Postgres URL) so the tool can connect to and inspect your database.
 
 ```bash
-npx neon-js gen-types \
+npx @neondatabase/neon-js gen-types \
   --db-url "postgresql://user:pass@ep-id.region.neon.tech/neondb" \
   --output src/types/database.ts
 ```
@@ -74,6 +74,25 @@ const { data } = await client.from('posts').select('id, content');
 const { data } = await client.from('posts').select('id, content').single();
 ```
 
+### Helper types
+
+The generated file also exports utility types for working with your tables outside of queries:
+
+```typescript
+import type { Tables, TablesInsert, TablesUpdate } from '@/types/database';
+
+// Tables<> gives you the row type (what you get back from queries)
+type Note = Tables<'notes'>;
+
+// TablesInsert<> gives you the insert type (for creating new rows)
+type NewNote = TablesInsert<'notes'>;
+
+// TablesUpdate<> gives you the update type (for partial updates)
+type NoteUpdate = TablesUpdate<'notes'>;
+```
+
+These are useful when you need to type function parameters, state variables, or props separately from your queries.
+
 ## Automate with package.json
 
 To keep your types in sync with your database schema, we recommend adding a script to your `package.json`.
@@ -81,7 +100,7 @@ To keep your types in sync with your database schema, we recommend adding a scri
 ```json
 {
   "scripts": {
-    "generate-types": "npx neon-js gen-types --db-url \"$DATABASE_URL\" --output src/types/database.ts"
+    "generate-types": "npx @neondatabase/neon-js gen-types --db-url \"$DATABASE_URL\" --output src/types/database.ts"
   }
 }
 ```
