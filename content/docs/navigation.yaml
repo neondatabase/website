@@ -432,7 +432,7 @@
             - section: Migration Guides
               items:
                 - title: From Stack Auth (legacy)
-                  slug: auth/migrate/from-stack-auth
+                  slug: auth/migrate/from-legacy-auth
                 - title: From Supabase
                   slug: auth/migrate/from-supabase
 
