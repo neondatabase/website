@@ -58,7 +58,7 @@ const Features = () => (
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
         <Heading
           icon="features"
-          title="<strong>No feature locks, just usage.</strong> Enterprise-grade features are accessible to everyone with just a <strong>$5</strong> monthly minimum."
+          title="<strong>No platform fees.</strong> Enterprise-grade features available to everyone, without fixed fees or monthly minimums."
         />
         <div className="relative mt-20 xl:mt-16 lg:mt-14 lg:max-w-[800px] md:mt-16">
           <ul className="grid grid-cols-3 gap-x-16 gap-y-[72px] xl:gap-y-10 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-11 md:grid-cols-1 md:gap-y-7">
