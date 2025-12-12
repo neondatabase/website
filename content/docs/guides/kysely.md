@@ -2,7 +2,7 @@
 title: Connect from Kysely to Neon
 subtitle: Learn how to connect to Neon from Kysely
 enableTableOfContents: true
-updatedOn: '2025-12-11T00:00:00.000Z'
+updatedOn: '2025-12-12T13:14:07.926Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
