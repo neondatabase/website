@@ -328,6 +328,8 @@
               slug: guides/drizzle
             - title: Elixir Ecto
               slug: guides/elixir-ecto
+            - title: Kysely
+              slug: guides/kysely
             - title: Laravel (Eloquent)
               slug: guides/laravel
             - title: Prisma
