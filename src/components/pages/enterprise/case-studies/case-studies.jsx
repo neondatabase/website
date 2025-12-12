@@ -32,7 +32,7 @@ const CaseStudies = ({ items }) => (
         </p>
       </div>
       <Link
-        className="mb-1 text-lg font-medium leading-none tracking-tight xl:mb-0.5 xl:text-base md:hidden"
+        className="mb-1 rounded-sm text-lg font-medium leading-none tracking-tight xl:mb-0.5 xl:text-base md:hidden"
         theme="white"
         size="xs"
         to={LINKS.caseStudies}

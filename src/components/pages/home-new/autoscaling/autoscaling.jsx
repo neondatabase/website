@@ -16,9 +16,9 @@ import Heading from '../heading';
 
 import Animation from './animation';
 
-const tabs = ['Avoid outages', 'Save costs'];
+const TABS = ['Avoid outages', 'Save costs'];
 
-const legend = [
+const LEGEND = [
   {
     icon: autoscalingLegendIcon,
     text: 'Neon autoscaling',
@@ -57,12 +57,13 @@ const Autoscaling = () => {
           />
 
           <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
-            {tabs.map((item, index) => (
+            {TABS.map((item, index) => (
               <button
                 className={clsx(
                   'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
                   'text-[15px] font-medium leading-none tracking-tight',
                   'border border-gray-new-10 even:border-l-0',
+                  'focus-visible:z-10',
                   'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 md:text-[14px]',
                   index === activeItem
                     ? 'pointer-events-none bg-white text-gray-new-10'
@@ -113,7 +114,7 @@ const Autoscaling = () => {
 
           <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
             <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
-              {legend.map((item, index) => (
+              {LEGEND.map((item, index) => (
                 <li
                   className="flex items-center gap-x-2.5 whitespace-nowrap text-[15px] leading-snug tracking-extra-tight xl:gap-x-2 md:text-[14px]"
                   key={index}

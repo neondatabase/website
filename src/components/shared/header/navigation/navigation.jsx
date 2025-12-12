@@ -244,7 +244,7 @@ const Navigation = () => {
             >
               <Button
                 className={clsx(
-                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white focus-visible:outline-[revert] group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white group-hover/main-nav:text-gray-new-70 xl:px-2.5',
                   {
                     '-ml-3.5  xl:-ml-2.5 ': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,

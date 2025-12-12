@@ -65,7 +65,7 @@ const AnchorHeading = (Tag) => {
       >
         <span>{cleanedChildren}</span>
         <a
-          className="px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 group-hover:opacity-100 sm:hidden"
+          className="rounded-full px-2 no-underline opacity-0 transition-opacity duration-200 hover:border-none hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-offset-0 group-hover:opacity-100 sm:hidden"
           href={`#${id}`}
           aria-label={`Link to ${extractText(children)}`}
         >

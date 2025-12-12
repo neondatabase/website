@@ -62,7 +62,11 @@ const Logo = ({ className = null, width, height, priority = undefined, isHeader 
 
   return (
     <div className="relative shrink-0">
-      <Link to="/" onContextMenu={isHeader ? handleContextMenu : undefined}>
+      <Link
+        className="block focus-visible:rounded focus-visible:outline-offset-4"
+        to="/"
+        onContextMenu={isHeader ? handleContextMenu : undefined}
+      >
         <span className="sr-only">Neon</span>
         <Image
           className={clsx('dark:hidden', className)}

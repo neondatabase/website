@@ -29,65 +29,51 @@ const GitHubStars = async () => {
   );
 };
 
-const Sidebar = ({ isClient, simpleMode, className }) => (
-  <div
-    className={clsx('flex items-center lg:hidden', simpleMode ? 'gap-x-2.5' : 'gap-x-6', className)}
-  >
-    <Link
-      className={clsx(
-        'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200 ',
-        simpleMode
-          ? 'hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
-          : 'text-black-pure hover:text-gray-new-20 dark:text-white hover:dark:text-gray-new-70',
-        {
-          'size-8 justify-center rounded-full border border-gray-new-70 dark:border-gray-new-30':
-            simpleMode,
-        }
-      )}
-      to={LINKS.discord}
-      target="_blank"
-      rel="noopener noreferrer"
-      tagName="Header"
-    >
-      <DiscordIcon
-        width={18}
-        height={18}
-        className={clsx(
-          !simpleMode &&
-            'text-gray-new-10 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 group-hover:dark:text-gray-new-80'
-        )}
-      />
-      {!simpleMode && <span className="text-sm leading-none tracking-extra-tight">Discord</span>}
-    </Link>
-    {!isClient && (
+const SOCIALS = [
+  {
+    id: 'discord',
+    to: LINKS.discord,
+    icon: DiscordIcon,
+    label: 'Discord',
+  },
+  {
+    id: 'github',
+    to: LINKS.github,
+    icon: GitHubIcon,
+    hasStars: true,
+  },
+];
+
+const Sidebar = ({ isClient, isDocs, className }) => (
+  <div className={clsx('flex items-center lg:hidden', isDocs ? 'gap-x-2.5' : 'gap-x-6', className)}>
+    {SOCIALS.map(({ id, to, icon: Icon, label, hasStars }) => (
       <Link
         className={clsx(
-          'group flex items-center gap-1.5 text-[14px] tracking-extra-tight transition-colors duration-200',
-          simpleMode
-            ? 'hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
-            : 'text-black-pure hover:text-gray-new-20 dark:text-white hover:dark:text-gray-new-70',
-          {
-            'size-8 justify-center rounded-full border border-gray-new-70 dark:border-gray-new-30':
-              simpleMode,
-          }
+          'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200',
+          isDocs && 'size-8 justify-center border border-gray-new-70 dark:border-gray-new-30',
+          isDocs
+            ? 'rounded-full hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
+            : 'rounded-sm text-white hover:text-gray-new-70'
         )}
-        to={LINKS.github}
+        key={id}
+        to={to}
         target="_blank"
         rel="noopener noreferrer"
         tagName="Header"
-        tagText="GitHub"
       >
-        <GitHubIcon
+        <Icon
           width={18}
           height={18}
-          className={clsx(
-            !simpleMode &&
-              'text-gray-new-10 transition-colors group-hover:text-gray-new-30 dark:text-gray-new-90 group-hover:dark:text-gray-new-80'
-          )}
+          className={!isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'}
         />
-        {!simpleMode && <GitHubStars />}
+        {!isDocs && (
+          <span className="text-sm leading-none tracking-extra-tight">
+            {label}
+            {hasStars && !isClient && <GitHubStars />}
+          </span>
+        )}
       </Link>
-    )}
+    ))}
     <div className="flex gap-2.5 lg:hidden">
       <Button
         className="h-9 px-[18px]"
@@ -114,7 +100,7 @@ const Sidebar = ({ isClient, simpleMode, className }) => (
 );
 Sidebar.propTypes = {
   isClient: PropTypes.bool,
-  simpleMode: PropTypes.bool,
+  isDocs: PropTypes.bool,
   className: PropTypes.string,
 };
 

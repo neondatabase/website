@@ -52,7 +52,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
           )}
         >
           <nav
-            className="no-scrollbars z-10 h-[calc(100vh-7rem)] overflow-y-scroll pb-16 pt-11"
+            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
             ref={navRef}
           >
             <Menu basePath={basePath} {...menu} customType={customType} />
