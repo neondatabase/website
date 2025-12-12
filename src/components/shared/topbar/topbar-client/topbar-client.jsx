@@ -58,6 +58,7 @@ const TopbarClient = ({ text, link }) => {
         'safe-paddings group relative z-50 h-9 w-full overflow-hidden px-4 py-2.5',
         'flex items-center justify-center',
         'border-b border-gray-new-90 bg-[#EBF5F0]',
+        'focus-visible:-outline-offset-2',
         'dark:border-gray-new-20 dark:bg-gray-new-10'
       )}
       to={link.url}
