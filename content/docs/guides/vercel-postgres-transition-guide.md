@@ -3,7 +3,7 @@ title: Vercel Postgres Transition Guide
 subtitle: Your complete guide to the transition from Vercel Postgres to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-07-12T14:19:52.050Z'
+updatedOn: '2025-12-03T13:07:33.033Z'
 ---
 
 <InfoBlock>
@@ -85,7 +85,7 @@ Neon is working with the Vercel team to transition Enterprise customers. If you 
 - **CLI support** - Full [Neon CLI](/docs/reference/neon-cli) (Vercel CLI didn't support Postgres)
 - **Terraform support** - [Neon Terraform provider](/docs/reference/terraform)
 - **Multiple Postgres roles** - No longer limited to single role
-- **Larger computes** - Up to 2 vCPUs on Free plan (vs 0.25 CPU limit), more on paid plans
+- **Larger computes** - Up to 2 CU (8 GB RAM) on Free plan, more on paid plans
 - **Multiple Postgres versions** - Upgrade from Postgres 15 to support for Postgres 14, 15, 16, and 17
 - **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)** - Programmatic project and database management
 - **[Organization accounts](/docs/manage/organizations)** - Team and project management

@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-11-11T17:38:12.166Z'
+updatedOn: '2025-12-11T15:40:49.864Z'
 ---
 
 <InfoBlock>
@@ -162,6 +162,7 @@ Everything else (querying data, branching, monitoring usage) works exactly the s
 
 Team membership changes in Vercel automatically sync to your Neon organization:
 
+- **Initial access**: Team members must click **Open in Neon** from the Vercel integration page and complete authentication before they appear in the Neon organization. This one-time step links their Vercel identity to Neon.
 - **Role changes**: When a team member's role changes in Vercel, their Neon role updates based on Vercel's JWT token mapping (see [FAQ](#why-do-vercel-team-members-with-member-role-have-the-admin-role-in-neon) for details). Most Vercel roles (Owner, Admin, Member) map to 'Admin' in Neon, while read-only roles (Viewer, Billing) map to 'Member' in Neon.
 - **Removals**: When a user is removed from your Vercel team, they're automatically removed from the associated Neon organization.
 
@@ -173,7 +174,7 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 
 - The linked Neon project moves from the old organization to the new one.
 - Environment variables and settings transfer with it.
-- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time restore window, etc.), you'll be prompted to upgrade.
+- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time [restore window](/docs/introduction/restore-window), etc.), you'll be prompted to upgrade.
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
 

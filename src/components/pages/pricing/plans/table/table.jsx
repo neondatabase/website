@@ -10,7 +10,7 @@ import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 import Tooltip from 'components/shared/tooltip';
 
-import tableData from '../data/plans.json';
+import tableData from '../data/plans';
 
 // Styles to set fixed height for table cells
 const rowClass = {
@@ -237,7 +237,13 @@ const Table = () => {
                   } else {
                     cell = (
                       <span
-                        className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90 [&_span]:text-sm [&_span]:text-gray-new-50"
+                        className={clsx(
+                          'flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90',
+                          '[&_span]:text-sm [&_span]:text-gray-new-50',
+                          '[&_span_a]:underline [&_span_a]:decoration-gray-new-50 [&_span_a]:underline-offset-4',
+                          '[&_span_a]:transition-colors [&_span_a]:duration-200',
+                          '[&_span_a:hover]:text-green-45 [&_span_a:hover]:decoration-green-45'
+                        )}
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                         dangerouslySetInnerHTML={{ __html: item[key] }}

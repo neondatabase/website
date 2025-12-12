@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-09-30T11:29:44.955Z'
+updatedOn: '2025-12-11T15:40:49.874Z'
 ---
 
 ## access token
@@ -47,7 +47,7 @@ A control mechanism in the Neon autoscaling system that collects metrics from VM
 
 ## Autoscaling
 
-A feature that automatically adjusts the allocation of vCPU and RAM for compute within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
+A feature that automatically adjusts the allocation of compute resources within specified minimum and maximum compute size boundaries, optimizing for performance and cost-efficiency. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
 
 ## Availability Checker
 
@@ -112,7 +112,7 @@ A role in Neon with limited access to specific projects shared with them. Shared
 
 ## Compute
 
-A service that provides virtualized computing resources, equipped with an operating system, a specified number of virtual CPUs (vCPUs), and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
+A service that provides virtualized computing resources, equipped with an operating system and a defined amount of RAM. It provides the processing power and resources for running applications. In the context of Neon, a compute runs Postgres and includes supporting components and extensions.
 
 A [compute endpoint](#compute-endpoint) is the access point for connecting to a Neon compute.
 
@@ -130,11 +130,11 @@ The Compute Units (CU) that are allocated to a Neon compute. A Neon compute can 
 
 ## Compute Unit (CU)
 
-A unit that measures the processing power or "size" of a Neon compute. A Compute Unit (CU) includes vCPU and RAM. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+A unit that measures the processing power or "size" of a Neon compute. Each Compute Unit (CU) allocates approximately 4 GB of RAM to the database instance, along with associated CPU and local SSD resources. Scaling up increases these resources linearly. A Neon compute can have anywhere from .25 to 56 CUs. See [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ## compute hours
 
-A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 vCPU. If you have a compute with .25 vCPU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 vCPU, it would only take 15 minutes to use 1 compute hour.
+A usage metric for tracking compute usage. 1 compute hour is equal to 1 [active hour](#active-hours) for a compute with 1 CU. If you have a compute with .25 CU, as you would on the Neon Free plan, it would require 4 _active hours_ to use 1 compute hour. On the other hand, if you have a compute with 4 CU, it would only take 15 minutes to use 1 compute hour.
 
 To calculate compute hour usage, you would use the following formula:
 
@@ -238,13 +238,11 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_.
+The history of data changes for all branches in your Neon project. This history is retained to support [instant restore](/docs/introduction/branch-restore), [Time Travel](/docs/guides/time-travel-assist), and other data recovery features. See [Restore window](/docs/introduction/restore-window) to learn how Neon retains and manages this history.
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point.
-
-For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records within your configured [restore window](/docs/introduction/restore-window), which allows you to restore data to any point in time within that window. For more information, see [Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -340,7 +338,7 @@ A named organization entity in Neon that groups multiple Neon users under a shar
 
 ## NeonVM
 
-A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of vCPU and RAM. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
+A QEMU-based tool used by Neon to create and manage VMs within a Kubernetes cluster, allowing for the allocation and deallocation of compute resources. For more information, refer to the NeonVM source in the [neondatabase/autoscaling](https://github.com/neondatabase/autoscaling/tree/main/neonvm) repository.
 
 ## non-default branch
 
@@ -364,7 +362,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined [restore window](/docs/introduction/restore-window). Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -487,6 +485,10 @@ On the publisher database in a logical replication setup, replication slots trac
 
 Selling the Neon service as part of another service offering.
 
+## restore window
+
+The period of time for which Neon retains a history of changes for your branches. The restore window determines how far back you can restore data, create branches from past states, and run Time Travel queries. The restore window is configurable per project and affects instant restore storage costs. For detailed information, see [Restore window](/docs/introduction/restore-window).
+
 ## root branch
 
 Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch.
@@ -602,7 +604,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your [restore window](/docs/introduction/restore-window) and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 
@@ -611,10 +613,6 @@ See [Neon user](#neon-user) and [Postgres role](#postgresql-role).
 ## vm-monitor
 
 A program that runs inside the VM alongside Postgres, responsible for requesting more resources from the autoscaler-agent and validating proposed downscaling to ensure sufficient memory.
-
-## vCPU
-
-Virtual CPU, a unit of processing power allocated to a virtual machine or compute.
 
 ## WAL
 

@@ -2,7 +2,7 @@
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
 enableTableOfContents: true
-updatedOn: '2025-08-07T10:06:24.020Z'
+updatedOn: '2025-12-11T15:40:49.863Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.
@@ -26,15 +26,13 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window.
+Time Travel queries are limited to your project's restore window. You cannot select a time outside your current restore window.
 
-You cannot select a time outside your current restore window.
-
-To change your restore window, see [Configure restore window](/docs/manage/projects#configure-restore-window).
+To learn more about the restore window, including how to configure it and plan limits, see [Restore window](/docs/introduction/restore-window).
 
 ### Data integrity
 
@@ -48,7 +46,7 @@ Time Travel in the SQL Editor offers a non-destructive way to explore your datab
 
 You can use this feature to help with scenarios like:
 
-- Investigating anomolies
+- Investigating anomalies
 - Assessing the impact of new features
 - Troubleshooting
 - Compliance auditing
@@ -184,4 +182,4 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
-- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+- Ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).

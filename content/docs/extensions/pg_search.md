@@ -2,7 +2,7 @@
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.239Z'
+updatedOn: '2025-12-03T13:07:33.023Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -468,7 +468,7 @@ Increase parallel workers to speed up indexing:
       SET max_parallel_workers = 8;
       ```
 
-- **`max_parallel_workers_per_gather`**: Limits parallel workers per query. The default in Neon is `2`, but you can adjust. The total number of parallel workers should not exceed your Neon compute's vCPU count. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+- **`max_parallel_workers_per_gather`**: Limits parallel workers per query. The default in Neon is `2`, but you can adjust. The total number of parallel workers should not exceed your Neon compute's CU count. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
   `sql
 SET max_parallel_workers_per_gather = 8;
 `

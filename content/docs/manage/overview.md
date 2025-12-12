@@ -2,7 +2,7 @@
 title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-05-11T11:23:50.625Z'
+updatedOn: '2025-12-03T13:07:33.040Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
@@ -29,7 +29,7 @@ Data resides in a branch. Each Neon project is created with a default branch cal
 
 ## R/W computes and Read Replicas
 
-A compute is a virtualized computing resource that includes vCPU and memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary R/W (read/write) compute is created for a project's default branch. Neon supports both R/W and [Read Replica](/docs/introduction/read-replicas) computes. A branch can have a single primary R/W compute but supports multiple Read Replica computes. To connect to a database that resides on a branch, you must connect via a R/W or Read Replica compute associated with the branch. Your Neon plan defines the resources (vCPU and RAM) available to your R/W and Read Replica computes. For more information, see [Manage computes](/docs/manage/computes). Compute size, autoscaling, and scale to zero are all settings that are configured for R/W and Read Replica computes.
+A compute is a virtualized computing resource that includes memory for running applications. In the context of Neon, a compute runs Postgres. When you create a project in Neon, a primary R/W (read/write) compute is created for a project's default branch. Neon supports both R/W and [Read Replica](/docs/introduction/read-replicas) computes. A branch can have a single primary R/W compute but supports multiple Read Replica computes. To connect to a database that resides on a branch, you must connect via a R/W or Read Replica compute associated with the branch. Your Neon plan defines the compute resources available to your R/W and Read Replica computes. For more information, see [Manage computes](/docs/manage/computes). Compute size, autoscaling, and scale to zero are all settings that are configured for R/W and Read Replica computes.
 
 ## Roles
 

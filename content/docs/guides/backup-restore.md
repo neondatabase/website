@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-11-07T20:24:25.880Z'
+updatedOn: '2025-12-11T15:40:49.861Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -38,7 +38,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [restore window](/docs/manage/projects#configure-your-restore-window).
+You can restore from any time that falls within your project's [restore window](/docs/introduction/restore-window).
 
 1. **Select a time**
 
@@ -145,7 +145,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -435,5 +435,9 @@ Use this option if you need to inspect the restored data before you switch over 
 </TabItem>
 
 </Tabs>
+
+## Limitations
+
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 
 <NeedHelp/>

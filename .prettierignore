@@ -10,3 +10,15 @@ content/docs/postgresql/query-reference.md
 content/docs/functions/json_extract_path.md
 content/docs/introduction/monitoring-page.md
 content/guides/honc.md
+
+# auth docs (contain code samples with special annotations like // [!code ++])
+content/docs/auth/quick-start/tanstack-router.md
+content/docs/auth/quick-start/nextjs-api-only.md
+content/docs/auth/quick-start/nextjs.md
+content/docs/auth/quick-start/react.md
+content/docs/auth/quick-start/react-router-components.md
+content/docs/auth/guides/user-management.md
+content/docs/auth/guides/configure-domains.md
+content/docs/auth/guides/password-reset.md
+content/docs/auth/guides/setup-oauth.md
+content/docs/auth/guides/email-verification.md

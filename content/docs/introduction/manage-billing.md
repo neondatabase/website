@@ -3,7 +3,7 @@ title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
 enableTableOfContents: true
-updatedOn: '2025-09-19T19:35:19.395Z'
+updatedOn: '2025-12-08T15:34:39.149Z'
 ---
 
 <InfoBlock>
@@ -50,7 +50,7 @@ If you are unable to update your payment method, please [contact support](/docs/
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon’s Terms of Service](/terms-of-service).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in the [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
 ### Failing payments for Indian customers
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2025-11-17T19:26:53.691Z'
+updatedOn: '2025-12-11T15:40:49.871Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch) called `production`, which is also designated as your [default branch](#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -15,7 +15,7 @@ For more information about branches and how you can use them in your development
 You can create and manage branches using the Neon Console, [Neon CLI](/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 <Admonition type="important">
-When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/branching#restore-window).
+When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](/docs/introduction/restore-window).
 </Admonition>
 
 ## Branch naming requirements
@@ -38,9 +38,9 @@ To create a branch:
 3. Click **New branch** to open the branch creation dialog.
 4. Specify a branch name.
 5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](/docs/guides/branching-schema-only).
-   <Admonition type="note">
-   When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/manage/projects#configure-restore-window).
-   </Admonition>
+    <Admonition type="note">
+    When creating a branch with past data, you can only specify a date and time that falls within your [restore window](/docs/introduction/restore-window).
+    </Admonition>
 
 6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.

@@ -412,14 +412,95 @@ const defaultConfig = {
         destination: '/',
         permanent: true,
       },
+      // Legacy Stack Auth redirects to official Stack Auth documentation
       {
-        source: '/creators',
-        destination: '/programs/creators',
+        source: '/docs/neon-auth',
+        destination: '/docs/auth',
         permanent: true,
       },
       {
-        source: '/blog/join-the-neon-creator-program',
-        destination: '/programs/creators',
+        source: '/docs/neon-auth/components/sign-in',
+        destination: 'https://docs.stack-auth.com/sdk/components/sign-in',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/sign-up',
+        destination: 'https://docs.stack-auth.com/sdk/components/sign-up',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/user-button',
+        destination: 'https://docs.stack-auth.com/sdk/components/user-button',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/account-settings',
+        destination: 'https://docs.stack-auth.com/sdk/components/account-settings',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/stack-handler',
+        destination: 'https://docs.stack-auth.com/sdk/components/handler',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/stack-theme',
+        destination: 'https://docs.stack-auth.com/sdk/styling',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/:path*',
+        destination: 'https://docs.stack-auth.com/sdk/components',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/sdk/nextjs/:path*',
+        destination: 'https://docs.stack-auth.com/sdk/next',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/sdk/react/:path*',
+        destination: 'https://docs.stack-auth.com/sdk/react',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/sdk/:path*',
+        destination: 'https://docs.stack-auth.com',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/concepts/oauth',
+        destination: 'https://docs.stack-auth.com/oauth',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/concepts/orgs-and-teams',
+        destination: 'https://docs.stack-auth.com/organizations',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/concepts/permissions',
+        destination: 'https://docs.stack-auth.com/permissions',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/concepts/:path*',
+        destination: 'https://docs.stack-auth.com',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/customization/:path*',
+        destination: 'https://docs.stack-auth.com/customization',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/email-configuration',
+        destination: 'https://docs.stack-auth.com/email',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/permissions-roles',
+        destination: 'https://docs.stack-auth.com/permissions',
         permanent: true,
       },
       ...docsRedirects,
@@ -472,10 +553,6 @@ const defaultConfig = {
       {
         source: '/ai-chat',
         destination: '/docs/introduction#ai-chat',
-      },
-      {
-        source: '/agents',
-        destination: '/use-cases/ai-agents',
       },
     ];
   },

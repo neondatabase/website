@@ -6,39 +6,21 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Link from 'components/shared/link';
+import { getNeonStatus, NEON_STATUS } from 'utils/get-neon-status';
 
 const statusData = {
-  UP: {
+  [NEON_STATUS.UP]: {
     color: 'bg-green-45',
     text: 'All systems operational',
   },
-  HASISSUES: {
+  [NEON_STATUS.HASISSUES]: {
     color: 'bg-yellow-70',
     text: 'Experiencing issues',
   },
-  UNDERMAINTENANCE: {
-    color: 'bg-yellow-70',
+  [NEON_STATUS.UNDERMAINTENANCE]: {
+    color: 'bg-[red]',
     text: 'Active maintenance',
   },
-};
-
-const fetchStatus = async () => {
-  const res = await fetch('https://neonstatus.com/api/v1/summary');
-  const response = await res.json();
-  const data = response.subpages;
-
-  const hasOngoingIncidents = data.some((subpage) => subpage.summary.ongoing_incidents.length > 0);
-  const hasInProgressMaintenances = data.some(
-    (subpage) => subpage.summary.in_progress_maintenances.length > 0
-  );
-
-  if (hasOngoingIncidents) {
-    return 'HASISSUES';
-  }
-  if (hasInProgressMaintenances) {
-    return 'UNDERMAINTENANCE';
-  }
-  return 'UP';
 };
 
 const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
@@ -47,11 +29,12 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
 
   useEffect(() => {
     if (inView) {
-      fetchStatus()
-        .then((status) => {
+      getNeonStatus()
+        .then(({ status }) => {
           setCurrentStatus(status);
         })
         .catch((error) => {
+          // eslint-disable-next-line no-console
           console.error(error);
         });
     }
@@ -59,13 +42,13 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
 
   return (
     <Link
-      to="https://neonstatus.com/"
-      target="_blank"
-      rel="noopener noreferrer"
       className={clsx(
         'flex items-center justify-center gap-x-1.5',
         hasThemesSupport ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
       )}
+      to="https://neonstatus.com/"
+      target="_blank"
+      rel="noopener noreferrer"
       ref={ref}
     >
       <span
@@ -80,7 +63,7 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
           isDarkTheme ? 'text-white' : 'text-black-new'
         )}
       >
-        {currentStatus ? statusData[currentStatus].text : 'All systems operational'}
+        {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>
   );

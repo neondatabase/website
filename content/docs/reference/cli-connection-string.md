@@ -2,7 +2,7 @@
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.570Z'
+updatedOn: '2025-12-11T15:40:49.873Z'
 ---
 
 ## Before you begin
@@ -63,7 +63,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require&connect_timeout=30
   ```
 
-- Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [restore window](/docs/manage/projects#configure-restore-window) window.
+- Get a connection string to a specific point in a branch's history by appending `@timestamp` or `@lsn`. Availability depends on your configured [restore window](/docs/introduction/restore-window).
 
   ```bash
   neon connection-string @2024-04-21T00:00:00Z

@@ -5,7 +5,7 @@ subtitle: A checklist of recommended settings to optimize performance, security,
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2025-08-18T18:19:18.015Z'
+updatedOn: '2025-12-11T15:40:49.858Z'
 ---
 
 <CheckList title="Production checklist">
@@ -50,7 +50,7 @@ updatedOn: '2025-08-18T18:19:18.015Z'
 
 ## Set a compute size that can handle production traffic
 
-Before your application goes to production, make sure your database has enough vCPU and memory to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Before your application goes to production, make sure your database has enough compute resources to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 **Recommendation**
 
@@ -61,7 +61,7 @@ We recommend that you **fit your data in memory** and use Neon **autoscaling**:
 
 **About compute size**
 
-A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. One CU includes 1 vCPU and 4 GB of RAM. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
+A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
 
 ## Enable autoscaling to handle usage spikes
 
@@ -117,11 +117,11 @@ Neon retains a history of changes for all branches, enabling instant restore and
 
 **Recommendation**
 
-Set your restore window to 7 days to ensure data integrity and quick recovery.
+Set your [restore window](/docs/introduction/restore-window) to 7 days to ensure data integrity and quick recovery.
 
 **Restore window details**
 
-By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer restore window can increase storage costs, it provides exta security and recoverability for production data.
+By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer [restore window](/docs/introduction/restore-window) can increase storage costs, it provides extra security and recoverability for production data.
 
 ![Restore window setting](/docs/get-started/history_retention_setting.png)
 
