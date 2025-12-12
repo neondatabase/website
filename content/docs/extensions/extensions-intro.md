@@ -261,7 +261,7 @@ Explore supported Postgres extensions by category. Also see:
 
 <a href="/docs/extensions/postgresql-anonymizer" description="Provides data masking and anonymization capabilities for protecting personally identifiable information (PII) and sensitive data in Postgres databases" icon="data">anon</a>
 
-<a href="/docs/guides/neon-authorize#how-the-pgsessionjwt-extension-works" description="Enables RLS policies to verify user identity directly within SQL queries" icon="check">pg_session_jwt</a>
+<a href="/docs/extensions/pg_session_jwt" description="Handle authenticated sessions through JWTs for use with RLS policies" icon="check">pg_session_jwt</a>
 
 <a href="/docs/extensions/pgcrypto" description="Offers cryptographic functions, allowing for encryption and hashing of data within Postgres" icon="check">pgcrypto</a>
 

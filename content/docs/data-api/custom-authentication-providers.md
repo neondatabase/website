@@ -16,6 +16,9 @@ tag: beta
     <a href="/docs/data-api/access-control">Access control & security</a>
     <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
   </DocsList>
+  <DocsList title="Source code" theme="repo">
+    <a href="https://github.com/neondatabase/pg_session_jwt">pg_session_jwt extension</a>
+  </DocsList>
 </InfoBlock>
 
 The Data API works with any authentication provider that issues [JSON Web Tokens (JWTs)](https://jwt.io/introduction). While [Neon Auth](/docs/auth/overview) provides the simplest setup, you can use existing authentication infrastructure with providers like Auth0, Clerk, AWS Cognito, and others.
