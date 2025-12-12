@@ -91,7 +91,7 @@ Choose your framework to get started:
 
 <a href="/docs/auth/quick-start/react-router-components" title="React" description="With UI components" icon="react"></a>
 
-<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="react"></a>
+<a href="/docs/auth/quick-start/tanstack-router" title="TanStack Router" description="With UI components" icon="tanstack"></a>
 
 </TechCards>
 
