@@ -896,7 +896,7 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **GitHub integration**
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
-  </Admonition>
+</Admonition>
 
 ### Costs
 
