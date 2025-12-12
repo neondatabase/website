@@ -4,15 +4,22 @@ import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import useCookie from 'react-use/lib/useCookie';
-import useLocation from 'react-use/lib/useLocation';
 
 import GradientBorder from 'components/shared/gradient-border';
-import { HUBSPOT_NEWSLETTERS_FORM_ID, FORM_STATES } from 'constants/forms';
+import { FORM_STATES } from 'constants/forms';
 import useLocalStorage from 'hooks/use-local-storage';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
-import { doNowOrAfterSomeTime, emailRegexp, sendHubspotFormData } from 'utils/forms';
+import { doNowOrAfterSomeTime, emailRegexp } from 'utils/forms';
+import sendGtagEvent from 'utils/send-gtag-event';
+
+function getCookie(name) {
+  if (typeof document === 'undefined') return null;
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
 
 const appearAndExitAnimationVariants = {
   initial: { opacity: 0 },
@@ -41,21 +48,16 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
+  const isRecognized = !!getCookie('ajs_user_id');
   const [email, setEmail] = useState('');
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [submittedEmail, setSubmittedEmail] = useLocalStorage('submittedEmailNewsletterForm', []);
   const [errorMessage, setErrorMessage] = useState('');
-  const [hubspotutk] = useCookie('hubspotutk');
-  const { href } = useLocation();
+
   const handleInputChange = (event) => {
     setEmail(event.currentTarget.value.trim());
     setFormState(FORM_STATES.DEFAULT);
     setErrorMessage('');
-  };
-
-  const context = {
-    hutk: hubspotutk,
-    pageUri: href,
   };
 
   const handleSubmit = async (event) => {
@@ -78,32 +80,23 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
       const loadingAnimationStartedTime = Date.now();
 
       try {
-        const response = await sendHubspotFormData({
-          formId: HUBSPOT_NEWSLETTERS_FORM_ID,
-          context,
-          values: [
-            {
-              name: 'email',
-              value: email,
-            },
-          ],
-        });
-
-        if (response.ok) {
-          doNowOrAfterSomeTime(() => {
-            setFormState(FORM_STATES.SUCCESS);
-            setEmail('Thank you!');
-          }, loadingAnimationStartedTime);
-          doNowOrAfterSomeTime(() => {
-            setFormState(FORM_STATES.DEFAULT);
-            setEmail('');
-          }, loadingAnimationStartedTime + 3000);
-        } else {
-          doNowOrAfterSomeTime(() => {
-            setFormState(FORM_STATES.ERROR);
-            setErrorMessage('Please reload the page and try again');
-          }, loadingAnimationStartedTime);
+        if (window.zaraz) {
+          // Send identify event if user is not recognized
+          if (!isRecognized) {
+            await sendGtagEvent('identify', { email });
+          }
+          // Send changelog subscription event
+          await sendGtagEvent('Changelog Subscription', { email });
         }
+
+        doNowOrAfterSomeTime(() => {
+          setFormState(FORM_STATES.SUCCESS);
+          setEmail('Thank you!');
+        }, loadingAnimationStartedTime);
+        doNowOrAfterSomeTime(() => {
+          setFormState(FORM_STATES.DEFAULT);
+          setEmail('');
+        }, loadingAnimationStartedTime + 3000);
       } catch (error) {
         doNowOrAfterSomeTime(() => {
           setFormState(FORM_STATES.ERROR);
