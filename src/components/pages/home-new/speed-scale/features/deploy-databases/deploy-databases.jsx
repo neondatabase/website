@@ -94,7 +94,7 @@ const DeployDatabases = () => {
                                 />
                               ) : (
                                 <m.span
-                                  className="block size-full scale-[0.33] bg-[#2C6D4C]"
+                                  className="block size-full scale-[0.33] bg-[#2C6D4C] will-change-transform"
                                   initial={{ backgroundColor: ACTIVITY_COLORS[0], scale: 0.33 }}
                                   animate={{
                                     backgroundColor: inView
