@@ -9,8 +9,8 @@ import Container from 'components/shared/container';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
 import resourceLegendIcon from 'icons/home-new/autoscaling/legend/resource.svg';
-import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.jpg';
-import saveCostsImageMd from 'images/pages/home-new/autoscaling/save-costs-md.jpg';
+import avoidImageMd from 'images/pages/home-new/autoscaling/avoid-illustration-md.png';
+import saveCostsImageMd from 'images/pages/home-new/autoscaling/save-costs-md.png';
 
 import Heading from '../heading';
 
