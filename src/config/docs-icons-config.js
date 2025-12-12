@@ -251,6 +251,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/koyeb.svg',
     darkIconPath: '/images/technology-logos/koyeb-dark.svg',
   },
+  kysely: {
+    name: 'kysely',
+    lightIconPath: '/images/technology-logos/kysely.svg',
+    darkIconPath: '/images/technology-logos/kysely-dark.svg',
+  },
   laravel: {
     name: 'laravel',
     lightIconPath: '/images/technology-logos/laravel.svg',

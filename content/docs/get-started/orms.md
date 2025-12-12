@@ -15,6 +15,8 @@ updatedOn: '2025-08-02T10:33:29.255Z'
 
 <a href="/docs/guides/elixir-ecto" title="Elixir Ecto" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 
+<a href="/docs/guides/kysely" title="Kysely" description="Learn how to connect from Kysely to your Neon Postgres database" icon="kysely"></a>
+
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 
 <a href="/docs/guides/prisma" title="Prisma" description="Learn how to connect from Prisma ORM to your Neon Postgres database" icon="prisma"></a>
