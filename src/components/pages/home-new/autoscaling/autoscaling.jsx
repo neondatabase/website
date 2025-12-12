@@ -16,7 +16,7 @@ import Heading from '../heading';
 
 import Animation from './animation';
 
-const tabs = ['Save costs', 'Avoid outages'];
+const tabs = ['Avoid outages', 'Save costs'];
 
 const legend = [
   {
@@ -93,19 +93,19 @@ const Autoscaling = () => {
                 />
               )}
             </div>
-            <div className="hidden md:flex">
+            <div className="hidden justify-center md:flex">
               <Image
-                className={clsx('mx-auto h-0 max-w-none', activeItem === 0 && '!h-auto')}
-                src={saveCostsImageMd}
-                width={768}
-                height={280}
-                alt=""
-              />
-              <Image
-                className={clsx('mx-auto h-0 max-w-none', activeItem === 1 && '!h-auto')}
+                className={clsx('h-0 w-[768px] max-w-none', activeItem === 0 && '!h-auto')}
                 src={avoidImageMd}
                 width={768}
                 height={560}
+                alt=""
+              />
+              <Image
+                className={clsx('h-0 w-[768px] max-w-none', activeItem === 1 && '!h-auto')}
+                src={saveCostsImageMd}
+                width={768}
+                height={280}
                 alt=""
               />
             </div>
