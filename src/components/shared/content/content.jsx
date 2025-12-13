@@ -55,6 +55,7 @@ import MegaLink from 'components/shared/mega-link';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -162,6 +163,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   LinkPreview,
   DocsList,
   RequestForm,
+  SubprocessorsForm,
   ProgramForm,
   LatencyCalculator,
   CTA: isTemplate ? CtaBlock : DocCta,
