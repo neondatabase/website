@@ -45,8 +45,6 @@
 ## Develop
 
 - [GitHub integration](https://neon.com/docs/guides/neon-github-app): Use the Neon GitHub integration
-- [Neosync](https://neon.com/docs/guides/neosync-anonymize): Anonymize data with Neosync
-- [Neosync](https://neon.com/docs/guides/neosync-generate): Seed data with Neosync
 - [Prisma](https://neon.com/docs/guides/prisma): Connect from Prisma to Neon
 - [TypeORM](https://neon.com/docs/guides/typeorm): Connect from TypeORM to Neon
 - [Knex](https://neon.com/docs/guides/knex): Connect from Knex to Neon
