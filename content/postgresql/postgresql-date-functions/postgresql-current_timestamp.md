@@ -49,15 +49,15 @@ SELECT CURRENT_TIMESTAMP;
 The result is:
 
 ```text
-              now
+       current_timestamp
 -------------------------------
- 2017-08-15 21:05:15.723336-07
+ 2025-12-12 19:02:31.18598+00
 (1 row)
 ```
 
-Internally, the `CURRENT_TIMESTAMP()` is implemented with the [`NOW()`](postgresql-now) function, therefore, the column alias is `NOW`.
+The `CURRENT_TIMESTAMP()` function is equivalent to the [`NOW()`](postgresql-now) function as both return the timestamp at which the current transaction started.
 
-Like the `NOW()` function, the `CURRENT_TIMESTAMP()` function can be used as the default value of a timestamp column.
+Like the `NOW()` function, `CURRENT_TIMESTAMP()` can be used as the default value of a timestamp column.
 
 ### 2\) Using the PostgreSQL CURRENT_TIMESTAMP function as the default value of a column
 
