@@ -26,8 +26,7 @@ const FEATURES = [
   {
     icon: ephemeralityIcon,
     title: 'Ephemerality',
-    description:
-      'Temporary computes shut down automatically when idle, lowering costs and overhead.',
+    description: 'Obsolete branches delete themselves automatically after work is complete.',
   },
 ];
 
