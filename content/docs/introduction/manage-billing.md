@@ -102,6 +102,10 @@ If you find an issue with your invoice, you can request a refund. The request wi
 You cannot upgrade or downgrade to a [legacy plan](/docs/introduction/legacy-plans). If you're currently on a legacy plan, you can only upgrade or downgrade to one of the [current usage-based pricing plans](/docs/introduction/plans).
 </Admonition>
 
+<Admonition type="note" title="Restart required for new limits">
+If you're upgrading your plan, your compute will only pick up the new plan limits (such as max compute size and project storage) after the compute restarts. See [Restart a compute](/docs/manage/computes#restart-a-compute).
+</Admonition>
+
 To upgrade or downgrade your plan:
 
 1. Navigate to the Neon Console.
