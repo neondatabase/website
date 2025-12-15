@@ -438,7 +438,7 @@ Start the development server, and then open http://localhost:3000
   <RightCode label="Terminal">
 
 ```bash
-npm run dev
+npm run dev -- --experimental-https
 ```
 
   </RightCode>
