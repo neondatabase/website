@@ -322,11 +322,117 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 </TwoColumnStep>
 
 
+<TwoColumnStep title="Access user data on server and client">
+  <LeftContent>
+
+You can access the user session and data on the server using the `neonAuth()` helper, on the client using `authClient.useSession()` hook.
+
+  </LeftContent>
+  <RightCode label="Access user data">
+
+<Tabs labels={["Server Component", "Client Component", "API Route"]}>
+
+<TabItem>
+
+Create a new page at `app/server-rendered-page/page.tsx` and add the following code:
+
+```tsx
+import { neonAuth } from "@neondatabase/neon-js/auth/next";
+
+export default async function ServerRenderedPage() {
+    const { session, user } = await neonAuth();
+
+    return (
+        <div className="max-w-xl mx-auto p-6 space-y-4">
+            <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
+
+            <p className="text-gray-400">
+                Authenticated:{" "}
+                <span className={session ? "text-green-500" : "text-red-500"}>
+                    {session ? "Yes" : "No"}
+                </span>
+            </p>
+
+            {user && <p className="text-gray-400">User ID: {user.id}</p>}
+
+            <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
+
+            <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+                {JSON.stringify({ session, user }, null, 2)}
+            </pre>
+        </div>
+    );
+}
+```
+</TabItem>
+
+<TabItem>
+
+Create a new page at `app/client-rendered-page/page.tsx` and add the following code:
+
+```tsx
+"use client";
+
+import { authClient } from "@/lib/auth/client";
+
+export default function ClientRenderedPage() {
+    const { data } = authClient.useSession();
+
+    return (
+        <div className="max-w-xl mx-auto p-6 space-y-4">
+            <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
+
+            <p className="text-gray-400">
+                Authenticated:{" "}
+                <span className={data?.session ? "text-green-500" : "text-red-500"}>
+                    {data?.session ? "Yes" : "No"}
+                </span>
+            </p>
+
+            {data?.user && <p className="text-gray-400">User ID: {data.user.id}</p>}
+
+            <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
+
+            <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+                {JSON.stringify({ session: data?.session, user: data?.user }, null, 2)}
+            </pre>
+        </div>
+    );
+}
+```
+</TabItem>
+
+<TabItem>
+
+Create a new API route at `app/api/secure-api-route/route.ts` and add the following code:
+
+```tsx
+import { neonAuth } from "@neondatabase/neon-js/auth/next";
+
+export async function GET() {
+    const { session, user } = await neonAuth();
+    return new Response(JSON.stringify({ "session": session, "user": user }), {
+        headers: { "Content-Type": "application/json" },
+    });
+}
+```
+</TabItem>
+</Tabs>
+
+  </RightCode>
+</TwoColumnStep>
+
+
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
 Start the development server, and then open http://localhost:3000
 
+  - Visit `/auth/sign-in` to sign in or sign up
+  - Visit `/account/settings` to view account settings
+  - Visit `/server-rendered-page` to see user data on server
+  - Visit `/client-rendered-page` to see user data on client
+  - Visit `/api/secure-api-route` to see user data from API route
 
   </LeftContent>
   <RightCode label="Terminal">
