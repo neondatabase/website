@@ -48,7 +48,7 @@ ElectricSQL requires a Postgres database with logical replication enabled. You'l
       Make sure to turn off connection pooling in the connection string modal. This is essential for Electric to maintain a persistent connection to the Neon database.
       </Admonition>
 
-      ![Neon direct connection string modal](/docs/guides/neon-console-direct-connection-string.png)
+      ![Neon direct connection string modal](/docs/connect/connection_details_without_connection_pooling.png)
 
 ## Setting up Electric
 
