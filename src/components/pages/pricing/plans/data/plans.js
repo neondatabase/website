@@ -32,7 +32,7 @@ export default {
       feature: {
         title: 'Projects',
       },
-      free: '80',
+      free: '100',
       launch: '100',
       scale: '1,000',
     },
