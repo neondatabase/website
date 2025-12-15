@@ -426,7 +426,7 @@ export async function GET() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server, and then open http://localhost:3000
+Start the development server, and then open https://localhost:3000/
 
   - Visit `/auth/sign-in` to sign in or sign up
   - Visit `/account/settings` to view account settings
@@ -438,7 +438,7 @@ Start the development server, and then open http://localhost:3000
   <RightCode label="Terminal">
 
 ```bash
-npm run dev
+npm run dev -- --experimental-https
 ```
 
   </RightCode>
