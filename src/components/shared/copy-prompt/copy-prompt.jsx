@@ -12,7 +12,12 @@ const DEFAULT_DISPLAY_TEXT = 'Use this pre-built prompt to get started faster.';
 const DEFAULT_BUTTON_TEXT = 'Copy prompt';
 
 const CopyPrompt = (props) => {
-  const { src, description = DEFAULT_DISPLAY_TEXT, buttonText = DEFAULT_BUTTON_TEXT } = props;
+  const {
+    src,
+    description = DEFAULT_DISPLAY_TEXT,
+    buttonText = DEFAULT_BUTTON_TEXT,
+    showOpenInCursor = false,
+  } = props;
   const [markdown, setMarkdown] = useState('');
   const [copied, setCopied] = useState(false);
 
@@ -41,25 +46,28 @@ const CopyPrompt = (props) => {
         {description}
       </div>
       <div className="flex shrink-0 items-center gap-3 sm:w-full">
-        <Button
-          className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium"
-          theme="gray-dark-outline-black"
-          aria-label="Open in Cursor"
-          onClick={() =>
-            window.open(
-              `https://cursor.com/link/prompt?text=${encodeURIComponent(markdown)}`,
-              '_blank'
-            )
-          }
-        >
-          <svg viewBox="0 0 466.73 532.09" className="h-4 w-4" fill="none" aria-hidden="true">
-            <path
-              fill="currentColor"
-              d="M457.43 125.94 244.42 2.96a22.127 22.127 0 0 0-22.12 0L9.3 125.94C3.55 129.26 0 135.4 0 142.05v247.99c0 6.65 3.55 12.79 9.3 16.11l213.01 122.98a22.127 22.127 0 0 0 22.12 0l213.01-122.98c5.75-3.32 9.3-9.46 9.3-16.11V142.05c0-6.65-3.55-12.79-9.3-16.11h-.01Zm-13.38 26.05L238.42 508.15c-1.39 2.4-5.06 1.42-5.06-1.36V273.58c0-4.66-2.49-8.97-6.53-11.31L24.87 145.67c-2.4-1.39-1.42-5.06 1.36-5.06h411.26c5.84 0 9.49 6.33 6.57 11.39h-.01Z"
-             />
-          </svg>
-          Open in Cursor
-        </Button>
+        {showOpenInCursor && (
+          <Button
+            className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium"
+            theme="gray-dark-outline-black"
+            aria-label="Open in Cursor"
+            onClick={() => {
+              window.open(
+                `https://cursor.com/link/prompt?text=${encodeURIComponent(markdown)}`,
+                '_blank'
+              );
+              sendGtagEvent('Opened in Cursor', { location: 'Copy Prompt' });
+            }}
+          >
+            <svg viewBox="0 0 466.73 532.09" className="h-4 w-4" fill="none" aria-hidden="true">
+              <path
+                fill="currentColor"
+                d="M457.43 125.94 244.42 2.96a22.127 22.127 0 0 0-22.12 0L9.3 125.94C3.55 129.26 0 135.4 0 142.05v247.99c0 6.65 3.55 12.79 9.3 16.11l213.01 122.98a22.127 22.127 0 0 0 22.12 0l213.01-122.98c5.75-3.32 9.3-9.46 9.3-16.11V142.05c0-6.65-3.55-12.79-9.3-16.11h-.01Zm-13.38 26.05L238.42 508.15c-1.39 2.4-5.06 1.42-5.06-1.36V273.58c0-4.66-2.49-8.97-6.53-11.31L24.87 145.67c-2.4-1.39-1.42-5.06 1.36-5.06h411.26c5.84 0 9.49 6.33 6.57 11.39h-.01Z"
+              />
+            </svg>
+            Open in Cursor
+          </Button>
+        )}
         <Button
           className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium"
           theme="primary"
@@ -78,6 +86,7 @@ CopyPrompt.propTypes = {
   src: PropTypes.string.isRequired,
   description: PropTypes.node,
   buttonText: PropTypes.string,
+  showOpenInCursor: PropTypes.bool,
 };
 
 export default CopyPrompt;
