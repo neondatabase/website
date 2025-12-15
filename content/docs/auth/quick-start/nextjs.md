@@ -426,7 +426,7 @@ export async function GET() {
 <TwoColumnStep title="Start your app">
   <LeftContent>
 
-Start the development server, and then open https://localhost:3000/
+Start the development server, and then open http://localhost:3000/
 
   - Visit `/auth/sign-in` to sign in or sign up
   - Visit `/account/settings` to view account settings
@@ -434,11 +434,15 @@ Start the development server, and then open https://localhost:3000/
   - Visit `/client-rendered-page` to see user data on client
   - Visit `/api/secure-api-route` to see user data from API route
 
+<Admonition type="note" title="Safari users">
+Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- --experimental-https` and open `https://localhost:3000` instead.
+</Admonition>
+
   </LeftContent>
   <RightCode label="Terminal">
 
 ```bash
-npm run dev -- --experimental-https
+npm run dev
 ```
 
   </RightCode>
