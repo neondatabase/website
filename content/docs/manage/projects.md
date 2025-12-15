@@ -382,6 +382,10 @@ To delete a project:
 If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
 </Admonition>
 
+<Admonition type="note">
+**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+</Admonition>
+
 ## Manage projects with the Neon API
 
 Project actions performed in the Neon Console can also be performed using the Neon API. The following examples demonstrate how to create, view, and delete projects using the Neon API. For other project-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -862,5 +866,110 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 ```
 
 </details>
+
+## Recover a deleted project
+
+<EarlyAccess />
+
+If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
+
+<Admonition type="note">
+The deletion recovery period is different from the [restore window](/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+</Admonition>
+
+### What's recovered
+
+When you recover a deleted project, the following are restored:
+
+- All branches, endpoints, snapshots, and compute configurations
+- Project settings (IP Allow, logical replication, protected branches, scheduled updates)
+- Project collaborators
+- Connection strings
+- Vercel-managed projects are automatically reconnected to Vercel
+
+### What requires reconfiguration
+
+The following features are **not** recovered and must be manually re-enabled after recovery:
+
+- **Data API** (including `authenticated` and `anonymous` roles)
+- **GitHub integration**
+- **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
+
+### Costs
+
+There are no storage costs or recovery fees during the 7-day deletion recovery period.
+
+### Recover a project
+
+<Tabs labels={["CLI", "API"]}>
+
+<TabItem>
+
+To list projects that can be recovered:
+
+```bash
+neon projects list --recoverable-only
+```
+
+To recover a deleted project:
+
+```bash
+neon projects recover <project_id>
+```
+
+The command returns details about the recovered project.
+
+**Example:**
+
+```bash
+neon projects recover crimson-voice-12345678
+┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name      │ Region Id     │ Created At           │
+├────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+
+</TabItem>
+
+<TabItem>
+
+To list projects that can be recovered, use the following Neon API method with the `recoverable` query parameter:
+
+```http
+GET /projects?recoverable=true
+```
+
+**Example:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects?recoverable=true' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+To recover a deleted project, use the following Neon API method:
+
+```http
+POST /projects/{project_id}/recover
+```
+
+**Example:**
+
+```bash
+curl -X POST \
+  'https://console.neon.tech/api/v2/projects/crimson-voice-12345678/recover' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+The API returns a `200` status code with the restored project object.
+
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>
