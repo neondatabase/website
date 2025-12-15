@@ -16,7 +16,7 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         <div className="flex items-center gap-x-7">
           <Logo className="h-7" width={102} height={28} priority isHeader />
           <Link
-            className="relative text-[15px] font-medium leading-tight tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
+            className="relative rounded-sm text-[15px] font-medium leading-tight tracking-extra-tight text-gray-new-60 transition-colors duration-200 before:absolute before:inset-y-0 before:-left-3.5 before:h-full before:w-px before:bg-gray-new-80 hover:text-black-new dark:text-gray-new-60 before:dark:bg-gray-new-20 dark:hover:text-white"
             to={customType?.link || LINKS.docs}
           >
             {customType?.title || 'Docs'}
@@ -25,7 +25,7 @@ const DocsHeader = ({ customType, docPageType, basePath, navigation, isClient })
         <div className="absolute left-1/2 flex -translate-x-1/2 gap-2.5 xl:relative xl:left-0 xl:translate-x-0 lg:hidden">
           <InkeepTrigger docPageType={docPageType} />
         </div>
-        <Sidebar className="lg:hidden" isClient={isClient} simpleMode />
+        <Sidebar className="lg:hidden" isClient={isClient} isDocs />
       </div>
       <div className="h-12 lg:hidden">
         <DocsNavigation navigation={navigation} basePath={basePath} />

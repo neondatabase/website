@@ -79,7 +79,7 @@ const Submenu = ({
                         {items?.map(({ title, description, to, isExternal }) => (
                           <li key={title} role="none">
                             <Link
-                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
+                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
                               to={to}
                               isExternal={isExternal}
                               tagName="Navigation"
