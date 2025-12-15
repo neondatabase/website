@@ -17,6 +17,7 @@ npx neonctl@latest init
 ```
 
 This command will:
+
 - Authenticate via OAuth (opens your browser)
 - Create a Neon API key for you automatically
 - Configure your editor's MCP settings automatically
