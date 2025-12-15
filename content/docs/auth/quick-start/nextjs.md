@@ -380,7 +380,7 @@ export default function ClientRenderedPage() {
 
     return (
         <div className="max-w-xl mx-auto p-6 space-y-4">
-            <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
+            <h1 className="text-2xl font-semibold">Client Rendered Page</h1>
 
             <p className="text-gray-400">
                 Authenticated:{" "}
