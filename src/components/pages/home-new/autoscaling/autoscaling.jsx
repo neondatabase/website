@@ -103,7 +103,10 @@ const Autoscaling = () => {
                 alt=""
               />
               <Image
-                className={clsx('h-0 w-[768px] max-w-none', activeItem === 1 && '!h-auto')}
+                className={clsx(
+                  'h-0 w-[768px] max-w-none border-t border-gray-new-10',
+                  activeItem === 1 && '!h-auto'
+                )}
                 src={saveCostsImageMd}
                 width={768}
                 height={280}

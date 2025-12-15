@@ -15,7 +15,7 @@ import useRiveAnimation from 'hooks/use-rive-animation';
 
 const Animation = ({ className, state = 0 }) => {
   const { isReady, animationRef, rive, RiveComponent, isVisible } = useRiveAnimation({
-    src: '/animations/pages/home-new/autoscaling.riv?20251210256',
+    src: '/animations/pages/home-new/autoscaling.riv?2025121142',
     fit: Fit.Cover,
     threshold: 0.8,
   });
