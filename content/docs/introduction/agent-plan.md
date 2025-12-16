@@ -65,7 +65,7 @@ For an overview of Free plan limits and Scale plan features, see [Neon plans](/d
 
 ### Paid organization
 
-The paid organization hosts databases for your paying users. This organization includes Scale plan features but with agent-specific pricing. Neon provides up to $30,000 in initial credits to cover usage charges.
+The paid organization hosts databases for your paying users. This organization includes Scale plan features but with agent-specific pricing. Neon provides up to $25,000 in initial credits to cover usage charges.
 
 Compute is billed at $0.106 per compute unit hour (lower than standard Scale pricing). You can create your own internal tier/plan structure within this organization, configuring different resource quotas for different user segments. Use this organization for users on your paid plans that need resource flexibility.
 
@@ -105,7 +105,7 @@ The agent plan uses usage-based, agent-specific pricing with custom limits and d
 
 ## Billing model
 
-The paid organization receives up to $30,000 in initial credits that cover compute ($0.106 per compute unit hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
+The paid organization receives up to $25,000 in initial credits that cover compute ($0.106 per compute unit hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
 
 The sponsored free organization has no billing charges — Neon sponsors the infrastructure for your free tier users.
 
@@ -120,7 +120,7 @@ The agent plan includes these benefits for participating platforms:
 | Benefit                    | Description                                                                                                                                 |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Your Free Tier is free** | Neon sponsors up to 30,000 projects in your free tier, covering all infrastructure costs.                                                   |
-| **General use credits**    | Up to $30,000 in credits for paid tier usage (for platforms not already enrolled in the [Neon Startup Program](https://neon.com/startups)). |
+| **General use credits**    | Up to $25,000 in credits for paid tier usage (for platforms not already enrolled in the [Neon Startup Program](https://neon.com/startups)). |
 | **Higher rate limits**     | Custom rate limits for Management API and Data API to support high-volume operations.                                                       |
 | **Dedicated support**      | Shared Slack channel with direct access to the Neon team for technical support.                                                             |
 | **Co-marketing**           | Blog features, social promotions, hackathon support, and joint marketing opportunities.                                                     |
