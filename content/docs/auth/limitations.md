@@ -42,4 +42,3 @@ Other frameworks may work but aren't officially documented yet.
 We'll update this page as we expand support. If you run into an issue not listed here, let us know through our [Discord](https://discord.com/invite/neon) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
 
 <NeedHelp/>
-
