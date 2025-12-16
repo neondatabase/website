@@ -6,6 +6,18 @@ updatedOn: '2025-12-12T18:40:44.898Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
+  - /docs/neon-auth/overview
+  - /docs/neon-auth/claim-project
+  - /docs/neon-auth/create-users
+  - /docs/neon-auth/api
+  - /docs/neon-auth/how-it-works
+  - /docs/neon-auth/best-practices
+  - /docs/neon-auth/concepts/backend-integration
+  - /docs/neon-auth/concepts/custom-user-data
+  - /docs/guides/neon-auth-claim-project
+  - /docs/guides/neon-auth-api
+  - /docs/guides/neon-auth-how-it-works
+  - /docs/guides/neon-auth-best-practices
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -13,7 +25,7 @@ redirectFrom:
 Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
 
 <Admonition type="note" title="Before you start">
-Neon Auth is in active development. Review [current limitations](/docs/auth/limitations) to check if your use case is supported.
+Neon Auth is in active development. Check the [roadmap](/docs/auth/limitations) to see what's supported and what's coming next.
 </Admonition>
 
 ## Why Neon Auth?

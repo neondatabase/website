@@ -30,6 +30,9 @@ module.exports = {
 
     // Other pages
     '/thank-you',
+
+    // Legacy docs (deprecated)
+    '/docs/auth/legacy/*',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -55,6 +58,9 @@ module.exports = {
 
           // Other pages
           '/thank-you$',
+
+          // Legacy docs (deprecated)
+          '/docs/auth/legacy/',
         ],
       },
     ],

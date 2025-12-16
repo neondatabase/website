@@ -1,44 +1,58 @@
 ---
-title: Current Limitations
-subtitle: Known limitations and unsupported use cases for Neon Auth
+title: Neon Auth Roadmap
+subtitle: What's supported today and what's coming next
 enableTableOfContents: true
 updatedOn: '2025-12-16T00:00:00.000Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is in active development. Before you start building, review these current limitations to check if your use case is supported.
+Neon Auth is in active development. This page shows what's currently supported and what we're working on next.
 
-## Standalone frontend + backend architectures
+## Frameworks
 
-Architectures where the frontend and backend are separate deployments are **not yet supported**. This includes:
+### Supported
 
-- Create-React-App with a separate Node/Express backend
-- Static frontends (Vite, etc.) calling a standalone API server
-- Any setup where auth needs to be validated across two different deployment targets
+| Framework | Status | Quick start |
+|-----------|--------|-------------|
+| Next.js | ✅ Supported | [Get started](/docs/auth/quick-start/nextjs) |
+| React + React Router | ✅ Supported | [Get started](/docs/auth/quick-start/react-router-components) |
+| React + TanStack Router | ✅ Supported | [Get started](/docs/auth/quick-start/tanstack-router) |
+| Vite + React | ✅ Supported | [Get started](/docs/auth/quick-start/react) |
 
-We're actively working on adding support for these architectures.
+### On the roadmap
+
+| Framework | Status |
+|-----------|--------|
+| Standalone frontend + backend | 🔜 Coming soon |
+| Other frameworks | Based on demand |
+
+<Admonition type="note" title="Standalone architectures">
+Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. We're actively working on this.
+</Admonition>
 
 ## Better Auth plugins
 
-Not all [Better Auth plugins](https://www.better-auth.com/docs/plugins) are supported with Neon Auth. Notably:
+Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Better Auth plugins are currently supported.
 
-- **Organization plugin** — The [organization plugin](https://www.better-auth.com/docs/plugins/organization) for managing members, teams, and roles requires additional work and documentation before it's fully functional with Neon Auth.
+### Supported
 
-If you need a specific Better Auth plugin that isn't working, let us know.
+| Plugin | Status |
+|--------|--------|
+| Email & password | ✅ Supported |
+| Social OAuth (Google, GitHub) | ✅ Supported |
+| Magic link | ✅ Supported |
+| Email OTP | ✅ Supported |
 
-## Framework support
+### On the roadmap
 
-Our quick start guides currently cover React-based frameworks:
-
-- [Next.js](/docs/auth/quick-start/nextjs)
-- [React with React Router](/docs/auth/quick-start/react-router-components)
-- [React with TanStack Router](/docs/auth/quick-start/tanstack-router)
-
-Other frameworks may work but aren't officially documented yet.
+| Plugin | Status |
+|--------|--------|
+| [Organization](https://www.better-auth.com/docs/plugins/organization) | 🔜 Coming soon |
+| Other plugins | Based on demand |
 
 ## Let us know
 
-We'll update this page as we expand support. If you run into an issue not listed here, let us know through our [Discord](https://discord.com/invite/neon) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
+We prioritize based on demand. If you need a specific framework or plugin, let us know through our [Discord](https://discord.com/invite/neon) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
 
 <NeedHelp/>
