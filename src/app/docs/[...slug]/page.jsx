@@ -59,6 +59,7 @@ export async function generateMetadata({ params }) {
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
+    robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
   });
 }

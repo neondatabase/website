@@ -391,6 +391,8 @@
                   slug: auth/authentication-flow
                 - title: Branching Authentication
                   slug: auth/branching-authentication
+                - title: Roadmap
+                  slug: auth/roadmap
 
             - section: Quickstarts
               items:
