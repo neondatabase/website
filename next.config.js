@@ -448,6 +448,26 @@ const defaultConfig = {
         destination: '/docs/auth/overview',
         permanent: true,
       },
+      {
+        source: '/creators',
+        destination: '/programs/creators',
+        permanent: true,
+      },
+      {
+        source: '/blog/join-the-neon-creator-program',
+        destination: '/programs/creators',
+        permanent: true,
+      },
+      {
+        source: '/open-source',
+        destination: '/programs/open-source',
+        permanent: true,
+      },
+      {
+        source: '/agents',
+        destination: '/programs/agents',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
