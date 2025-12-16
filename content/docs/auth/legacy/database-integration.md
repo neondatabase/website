@@ -4,7 +4,7 @@ subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2025-12-12T18:18:11.070Z'
+updatedOn: '2025-12-16T12:23:55.552Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
