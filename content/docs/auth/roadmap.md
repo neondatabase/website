@@ -37,19 +37,20 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 
 ### Supported
 
-| Plugin                        | Status       |
-| ----------------------------- | ------------ |
-| Email & password              | ✅ Supported |
-| Social OAuth (Google, GitHub) | ✅ Supported |
-| Magic link                    | ✅ Supported |
-| Email OTP                     | ✅ Supported |
+| Plugin | Status |
+| ------ | ------ |
+| [Email & password](https://www.better-auth.com/docs/authentication/email-password) | ✅ Supported |
+| [Social OAuth](https://www.better-auth.com/docs/authentication/social-sign-in) (Google, GitHub) | ✅ Supported |
+| [Email OTP](https://www.better-auth.com/docs/plugins/email-otp) | ✅ Supported |
+| [Admin](https://www.better-auth.com/docs/plugins/admin) | ✅ Supported |
+| [Organization](https://www.better-auth.com/docs/plugins/organization) | ⚠️ Partial (invitation emails, JWT token claims in progress) |
 
 ### On the roadmap
 
-| Plugin                                                                | Status          |
-| --------------------------------------------------------------------- | --------------- |
-| [Organization](https://www.better-auth.com/docs/plugins/organization) | 🔜 Coming soon  |
-| Other plugins                                                         | Based on demand |
+| Plugin | Status |
+| ------ | ------ |
+| [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon |
+| Other plugins | Based on demand |
 
 ## Let us know
 
