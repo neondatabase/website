@@ -391,7 +391,7 @@
                   slug: auth/authentication-flow
                 - title: Branching Authentication
                   slug: auth/branching-authentication
-                - title: Current Limitations
+                - title: Limitations
                   slug: auth/limitations
 
             - section: Quickstarts
