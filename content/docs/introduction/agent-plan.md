@@ -2,7 +2,7 @@
 title: Neon Agent Plan
 subtitle: Learn about using Neon to provision and manage databases for agentic platforms
 enableTableOfContents: true
-updatedOn: '2025-11-03T17:05:16.902Z'
+updatedOn: '2025-12-16T23:16:25.133Z'
 ---
 
 <InfoBlock>
