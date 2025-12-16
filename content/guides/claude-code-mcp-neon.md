@@ -31,11 +31,13 @@ Let's break down the key components in this setup:
 
 ## Setting up Neon MCP Server in Claude Code
 
-You have two options for connecting Claude Code to the Neon MCP Server:
+You have three options for connecting Claude Code to the Neon MCP Server:
 
-1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Claude Code. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+1. **Quick Setup (Recommended):** Use the `neonctl init` command to automatically configure Claude Code with OAuth authentication and API key creation.
 
-2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
+2. **Remote MCP Server (OAuth):** Manually connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Claude Code. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+
+3. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
 ### Prerequisites
 
@@ -50,7 +52,17 @@ Before you begin, ensure you have the following:
 
 3. **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
-### Option 1: Setting up the Remote Hosted Neon MCP Server
+### Quick Setup (Recommended)
+
+The fastest way to get started is with the [`neonctl init`](/docs/reference/cli-init) command, which automates OAuth authentication, API key creation, and Claude Code configuration:
+
+```bash
+npx neonctl@latest init
+```
+
+This command authenticates via OAuth, creates an API key, and configures Claude Code automatically. Once complete, ask your AI assistant **"Get started with Neon"**.
+
+### Option 1: Setting up the Remote Hosted Neon MCP Server (OAuth)
 
 <Admonition type="note">
 By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).

@@ -158,6 +158,8 @@ Authenticates via OAuth, creates an API key, and configures Claude Code automati
 </TabItem>
 </Tabs>
 
+For more, see [Get started with Claude Code and Neon Postgres MCP Server](/guides/claude-code-mcp-neon).
+
 ## VS Code (with GitHub Copilot)
 
 <Admonition type="note">
