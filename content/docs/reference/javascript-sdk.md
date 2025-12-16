@@ -131,7 +131,6 @@ const client = createClient({
 | <tt>name</tt>        | string                      | ✓        |
 | <tt>password</tt>    | string                      | ✓        |
 | <tt>image</tt>       | string \| undefined         |          |
-| <tt>phoneNumber</tt> | string \| null \| undefined |          |
 | <tt>callbackURL</tt> | string \| undefined         |          |
 
 </details>
@@ -210,7 +209,7 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 
 | Parameter                   | Type                  | Required |
 | --------------------------- | --------------------- | -------- |
-| <tt>provider</tt>           | object                | ✓        |
+| <tt>provider</tt>           | string                | ✓        |
 | <tt>callbackURL</tt>        | string \| undefined   |          |
 | <tt>newUserCallbackURL</tt> | string \| undefined   |          |
 | <tt>errorCallbackURL</tt>   | string \| undefined   |          |
@@ -301,7 +300,6 @@ Note: Password updates require password reset flow for security.
 | -------------------- | --------------------------- | -------- |
 | <tt>name</tt>        | string \| undefined         |          |
 | <tt>image</tt>       | string \| null \| undefined |          |
-| <tt>phoneNumber</tt> | string \| null \| undefined |          |
 
 </details>
 
@@ -309,7 +307,7 @@ Note: Password updates require password reset flow for security.
 <RightCode>
 ```typescript
 const { data, error } = await client.auth.updateUser({
-  email: 'newemail@example.com'
+  name: 'New Name'
 })
 ```
 </RightCode>
@@ -329,7 +327,7 @@ The user must then call `signIn.emailOtp()` with the received code.
 | Parameter      | Type   | Required |
 | -------------- | ------ | -------- |
 | <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | object | ✓        |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓        |
 
 </details>
 
@@ -435,7 +433,7 @@ Useful for password reset flows where you need to verify the code before allowin
 | Parameter      | Type   | Required |
 | -------------- | ------ | -------- |
 | <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | object | ✓        |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓        |
 | <tt>otp</tt>   | string | ✓        |
 
 </details>
