@@ -13,19 +13,19 @@ Neon Auth is in active development. This page shows what's currently supported a
 
 ### Supported
 
-| Framework | Status | Quick start |
-|-----------|--------|-------------|
-| Next.js | ✅ Supported | [Get started](/docs/auth/quick-start/nextjs) |
-| React + React Router | ✅ Supported | [Get started](/docs/auth/quick-start/react-router-components) |
-| React + TanStack Router | ✅ Supported | [Get started](/docs/auth/quick-start/tanstack-router) |
-| Vite + React | ✅ Supported | [Get started](/docs/auth/quick-start/react) |
+| Framework               | Status       | Quick start                                                   |
+| ----------------------- | ------------ | ------------------------------------------------------------- |
+| Next.js                 | ✅ Supported | [Get started](/docs/auth/quick-start/nextjs)                  |
+| React + React Router    | ✅ Supported | [Get started](/docs/auth/quick-start/react-router-components) |
+| React + TanStack Router | ✅ Supported | [Get started](/docs/auth/quick-start/tanstack-router)         |
+| Vite + React            | ✅ Supported | [Get started](/docs/auth/quick-start/react)                   |
 
 ### On the roadmap
 
-| Framework | Status |
-|-----------|--------|
-| Standalone frontend + backend | 🔜 Coming soon |
-| Other frameworks | Based on demand |
+| Framework                     | Status          |
+| ----------------------------- | --------------- |
+| Standalone frontend + backend | 🔜 Coming soon  |
+| Other frameworks              | Based on demand |
 
 <Admonition type="note" title="Standalone architectures">
 Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. We're actively working on this.
@@ -37,19 +37,19 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 
 ### Supported
 
-| Plugin | Status |
-|--------|--------|
-| Email & password | ✅ Supported |
+| Plugin                        | Status       |
+| ----------------------------- | ------------ |
+| Email & password              | ✅ Supported |
 | Social OAuth (Google, GitHub) | ✅ Supported |
-| Magic link | ✅ Supported |
-| Email OTP | ✅ Supported |
+| Magic link                    | ✅ Supported |
+| Email OTP                     | ✅ Supported |
 
 ### On the roadmap
 
-| Plugin | Status |
-|--------|--------|
-| [Organization](https://www.better-auth.com/docs/plugins/organization) | 🔜 Coming soon |
-| Other plugins | Based on demand |
+| Plugin                                                                | Status          |
+| --------------------------------------------------------------------- | --------------- |
+| [Organization](https://www.better-auth.com/docs/plugins/organization) | 🔜 Coming soon  |
+| Other plugins                                                         | Based on demand |
 
 ## Let us know
 
