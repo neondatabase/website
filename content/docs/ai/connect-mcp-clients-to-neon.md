@@ -318,6 +318,7 @@ For more, see [Get started with Neon MCP server with Claude Desktop](/guides/neo
 1. Open Cline in VS Code (Sidebar -> Cline icon).
 2. Click **MCP Servers** Icon -> **Installed** -> **Configure MCP Servers** to open the configuration file.
 3. Add the "Neon" server entry within the `mcpServers` object:
+
    ```json
    {
      "mcpServers": {
