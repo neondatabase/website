@@ -28,7 +28,7 @@ Neon Auth is in active development. This page shows what's currently supported a
 | Other frameworks              | Based on demand |
 
 <Admonition type="note" title="Standalone architectures">
-Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. We're actively working on this.
+Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
 </Admonition>
 
 ## Better Auth plugins
