@@ -25,7 +25,7 @@ redirectFrom:
 Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
 
 <Admonition type="note" title="Before you start">
-Neon Auth is in active development. Check the [roadmap](/docs/auth/limitations) to see what's supported and what's coming next.
+Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to see what's supported and what's coming next.
 </Admonition>
 
 ## Why Neon Auth?

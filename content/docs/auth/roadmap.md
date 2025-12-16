@@ -56,3 +56,4 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 We prioritize based on demand. If you need a specific framework or plugin, let us know through our [Discord](https://discord.com/invite/neon) or [GitHub Discussions](https://github.com/orgs/neondatabase/discussions).
 
 <NeedHelp/>
+
