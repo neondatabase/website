@@ -344,7 +344,12 @@ const defaultConfig = {
       },
       {
         source: '/hipaa-baa',
-        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
+        destination: 'https://www.databricks.com/legal/neon-baa',
+        permanent: true,
+      },
+      {
+        source: '/baa',
+        destination: 'https://www.databricks.com/legal/neon-baa',
         permanent: true,
       },
       {
