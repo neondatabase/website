@@ -9,6 +9,10 @@ updatedOn: '2025-11-23T00:00:00.000Z'
 
 One of Neon Auth's unique features is native support for database branching. When you create a database branch, your authentication data branches with it, giving each branch its own isolated authentication environment.
 
+<Admonition type="info">
+Neon Auth branching is also supported via API. See the [Neon Auth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+</Admonition>
+
 ## How it works
 
 Because auth data lives in your database's `neon_auth` schema, it's part of your database. When you create a [database branch](/docs/introduction/branching), you get an exact copy of all authentication data from the parent branch at that point in time:
