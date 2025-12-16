@@ -125,13 +125,13 @@ const client = createClient({
 <details>
 <summary>View parameters</summary>
 
-| Parameter            | Type                        | Required |
-| -------------------- | --------------------------- | -------- |
-| <tt>email</tt>       | string                      | ✓        |
-| <tt>name</tt>        | string                      | ✓        |
-| <tt>password</tt>    | string                      | ✓        |
-| <tt>image</tt>       | string \| undefined         |          |
-| <tt>callbackURL</tt> | string \| undefined         |          |
+| Parameter            | Type                | Required |
+| -------------------- | ------------------- | -------- |
+| <tt>email</tt>       | string              | ✓        |
+| <tt>name</tt>        | string              | ✓        |
+| <tt>password</tt>    | string              | ✓        |
+| <tt>image</tt>       | string \| undefined |          |
+| <tt>callbackURL</tt> | string \| undefined |          |
 
 </details>
 
@@ -296,10 +296,10 @@ Note: Password updates require password reset flow for security.
 <details>
 <summary>View parameters</summary>
 
-| Parameter            | Type                        | Required |
-| -------------------- | --------------------------- | -------- |
-| <tt>name</tt>        | string \| undefined         |          |
-| <tt>image</tt>       | string \| null \| undefined |          |
+| Parameter      | Type                        | Required |
+| -------------- | --------------------------- | -------- |
+| <tt>name</tt>  | string \| undefined         |          |
+| <tt>image</tt> | string \| null \| undefined |          |
 
 </details>
 
@@ -324,10 +324,10 @@ The user must then call `signIn.emailOtp()` with the received code.
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type   | Required |
-| -------------- | ------ | -------- |
-| <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓        |
+| Parameter      | Type                 | Required  |
+| -------------- | -------------------- | --------- | ----------------- | --- |
+| <tt>email</tt> | string               | ✓         |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓   |
 
 </details>
 
