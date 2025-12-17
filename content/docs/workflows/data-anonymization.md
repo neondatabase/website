@@ -608,12 +608,12 @@ jobs:
 
 The `masking_rules` input accepts a JSON array where each rule specifies:
 
-| Field | Description |
-|-------|-------------|
-| `database_name` | Target database (e.g., `neondb`) |
-| `schema_name` | Target schema (typically `public`) |
-| `table_name` | Table containing sensitive data |
-| `column_name` | Column to mask |
+| Field              | Description                             |
+| ------------------ | --------------------------------------- |
+| `database_name`    | Target database (e.g., `neondb`)        |
+| `schema_name`      | Target schema (typically `public`)      |
+| `table_name`       | Table containing sensitive data         |
+| `column_name`      | Column to mask                          |
 | `masking_function` | PostgreSQL Anonymizer function to apply |
 
 For available masking functions, see [PostgreSQL Anonymizer documentation](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/) or the [Manage masking rules](#manage-masking-rules) section above.
