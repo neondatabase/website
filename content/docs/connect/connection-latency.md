@@ -16,7 +16,7 @@ Services you integrate with Neon may also have startup times, which can add to c
 
 You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
 
-![Compute status](/docs/connect/compute_endpoint_state.png)
+![Compute status](/docs/connect/compute_state.png)
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
@@ -64,8 +64,6 @@ curl --request PATCH \
 ```
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
-
-![Connection warmup scale to zero and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 

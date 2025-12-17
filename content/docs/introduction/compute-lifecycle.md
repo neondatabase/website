@@ -14,7 +14,7 @@ Generally, an idle compute has been suspended by Neon's scale to zero feature du
 
 If there are no active queries for 5 minutes, which is the scale to zero setting in Neon, your compute is automatically placed into an idle state. If you are on a paid plan, you can disable the scale to zero behavior so that a compute always remains active. This behavior is controlled by your compute's **Scale to zero** setting.
 
-![Scale to zero configuration dialog](/docs/introduction/autosuspend_config.png)
+![Scale to zero configuration dialog](/docs/introduction/autoscaling_config.png)
 
 For information about configuring this setting, see [Edit a compute](/docs/manage/computes#edit-a-compute).
 

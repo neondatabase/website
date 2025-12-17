@@ -48,11 +48,11 @@ VALUES
 3. Click **Create branch** to open the branch creation dialog.
    ![Create branch dialog](/docs/manage/create_branch.png)
 4. Enter a name for the branch. This guide uses the name `my_test_branch`.
-5. Select a parent branch. Select the branch defined as your default branch.
-6. Under **Include data up to**, select the **Current point in time** option to create a branch with the latest available data from the parent branch (the default).
-7. Click **Create new branch** to create your branch.
+5. Select a parent branch. Select the branch defined as your default branch, such as production or main.
+6. By default, the branch is created with the latest available data from the parent branch.
+7. Click **Create** to create your branch.
 
-You are directed to the **Branches** page where you are shown the details for your new branch.
+You are directed to the connection details for the branch, and then the **Branches** page where you are shown the details for your new branch.
 
 You can also create a test branch using the [Neon CLI](/docs/reference/cli-branches#create) or [Neon API](/docs/manage/branches#create-a-branch-with-the-api).
 
