@@ -76,8 +76,8 @@ From the Neon Console, you can view how your compute and RAM usage have scaled f
 Some key points about this Autoscaling graph:
 
 - **Allocated** refers to the compute and memory size provisioned to handle current demand; autoscaling automatically adjusts this allocation, increasing or decreasing the allocated compute and memory size in a step-wise fashion as demand fluctuates, within your minimum and maximum limits.
-- **VCPU Usage** is represented by the green line
-- **RAM usage** is represented by the blue line.
+- **CU Usage** is represented by the blue line
+- **RAM usage** is represented by the green line.
 - A re-activated compute scales up immediately to your minimum allocation, ensuring adequate performance for your anticipated demand.
 
 Place your cursor anywhere in the graph to get more usage detail about that particular point in time.
