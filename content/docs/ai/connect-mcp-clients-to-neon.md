@@ -66,7 +66,7 @@ Run the [init](/docs/reference/cli-init) command:
 npx neonctl@latest init
 ```
 
-Authenticates via OAuth, creates an API key, and configures Cursor automatically. Then ask your AI assistant **"Get started with Neon"**.
+Authenticates via OAuth, creates an API key, and configures Cursor to connect to Neon's remote MCP server. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 <TabItem>
@@ -125,7 +125,7 @@ Run the [init](/docs/reference/cli-init) command:
 npx neonctl@latest init
 ```
 
-Authenticates via OAuth, creates an API key, and configures Claude Code automatically. Then ask your AI assistant **"Get started with Neon"**.
+Authenticates via OAuth, creates an API key, and configures Claude Code to connect to Neon's remote MCP server. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 
@@ -175,7 +175,7 @@ Run the [init](/docs/reference/cli-init) command:
 npx neonctl@latest init
 ```
 
-Authenticates via OAuth, creates an API key, and configures VS Code automatically. Then ask your AI assistant **"Get started with Neon"**.
+Authenticates via OAuth, creates an API key, and configures VS Code to connect to Neon's remote MCP server. Then ask your AI assistant **"Get started with Neon"**.
 
 </TabItem>
 

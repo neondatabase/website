@@ -60,7 +60,7 @@ The fastest way to get started is with the [`neonctl init`](/docs/reference/cli-
 npx neonctl@latest init
 ```
 
-This command authenticates via OAuth, creates an API key, and configures Claude Code automatically. Once complete, ask your AI assistant **"Get started with Neon"**.
+This command authenticates via OAuth, creates an API key, and configures Claude Code to connect to Neon's remote MCP server. Once complete, ask your AI assistant **"Get started with Neon"**.
 
 ### Option 1: Setting up the Remote Hosted Neon MCP Server (OAuth)
 

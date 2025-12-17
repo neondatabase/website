@@ -20,7 +20,7 @@ This command will:
 
 - Authenticate via OAuth (opens your browser)
 - Create a Neon API key for you automatically
-- Configure your editor's MCP settings automatically
+- Configure your editor to connect to Neon's remote MCP server
 
 Currently the `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**
 
