@@ -23,6 +23,7 @@ const styles = {
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
     secondary: 'bg-black text-white hover:bg-[#292929] disabled:bg-[#292929]',
+    'white-off-filled': 'bg-[#E4F1EB] text-gray-new-8',
     'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
@@ -30,7 +31,7 @@ const styles = {
       ' bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
-    'green-filled': 'bg-green-52 text-black hover:bg-primary-1',
+    'green-filled': 'bg-green-52 text-black-pure hover:bg-code-green-2',
     blue: 'bg-blue-80 text-black hover:bg-[#C6EAF1]',
     'gray-10': 'bg-gray-new-10 text-white hover:bg-gray-new-20',
     'gray-20': 'bg-gray-new-20 text-white hover:bg-gray-new-40',

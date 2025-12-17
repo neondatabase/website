@@ -24,7 +24,11 @@ const CopyCodeButton = ({ className, code = '' }) => {
   return (
     <Button className={className} theme="green-filled" size="new" onClick={handleCopyToClipboard}>
       $ {code}
-      {isCopied ? <CopiedIcon aria-hidden /> : <CopyIcon aria-hidden />}
+      {isCopied ? (
+        <CopiedIcon className="text-gray-new-20" aria-hidden />
+      ) : (
+        <CopyIcon className="text-gray-new-20" aria-hidden />
+      )}
     </Button>
   );
 };

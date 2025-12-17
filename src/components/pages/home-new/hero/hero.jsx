@@ -14,7 +14,7 @@ const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'reto
 const Hero = () => (
   <section className="hero safe-paddings relative mt-16 lg:mt-14">
     <Container
-      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[192px] md:!px-5 md:pt-[204px]"
+      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
       size="1600"
     >
       <HeadingLabel>Ship faster with Postgres</HeadingLabel>
@@ -37,7 +37,7 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 select-none border-b border-gray-new-20 pb-10 lg:mt-14 lg:pb-8 sm:mt-12">
+      <div className="relative mt-16 select-none border-b border-gray-new-20 pb-10 lg:mt-14 lg:pb-7 sm:mt-12">
         <Logos className="max-w-full !p-0" logos={logos} size="md" staticDesktop />
       </div>
     </Container>

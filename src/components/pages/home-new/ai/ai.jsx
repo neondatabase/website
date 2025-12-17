@@ -9,11 +9,13 @@ import ideMobile from 'images/pages/home-new/ai/ide-mobile.jpg';
 
 import Heading from '../heading';
 
+import CopyCodeButton from './copy-code-button';
+
 const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode'];
 
 const AI = () => (
   <section
-    className="ai safe-paddings relative scroll-mt-[60px] overflow-hidden py-40 xl:pb-[120px] xl:pt-[150px] lg:scroll-mt-0 lg:pb-[104px] lg:pt-[120px] md:py-24"
+    className="ai safe-paddings relative scroll-mt-[60px] overflow-hidden py-40 xl:pb-[135px] xl:pt-[137px] lg:scroll-mt-0 lg:pb-[118px] lg:pt-[120px] md:pb-20 md:pt-24"
     id="ai"
   >
     <Container
@@ -22,26 +24,28 @@ const AI = () => (
     >
       <div className="min-w-0">
         <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and have Cursor do the hard work." />
-        <div className="relative mt-24 pl-32 xl:mt-[72px] xl:px-4 lg:-mx-8 lg:mt-14 lg:px-0 md:mx-0 md:mt-9">
-          <div className="pointer-events-none relative w-full md:hidden">
+        <div className="relative mt-[182px] pl-32 xl:-mr-8 xl:mt-[174px] xl:pl-16 lg:-mx-8 lg:mt-[143px] lg:px-0 md:mx-0 sm:mt-11">
+          <div className="pointer-events-none relative w-full sm:hidden">
             <RiveAnimation
-              className="aspect-[1056/807] w-full"
-              src="/animations/pages/home-new/speed-scale-ide.riv?20251210"
+              className="absolute -top-[86px] left-1/2 aspect-[941/658] !size-[105%] -translate-x-1/2 xl:-top-[72px] lg:-top-[60px]"
+              src="/animations/pages/home-new/speed-scale-ide.riv"
               fit={Fit.Contain}
               alignment={Alignment.Center}
               threshold={0.2}
             />
             <Image
-              className="absolute left-0 right-0 top-1/2 -z-10 -translate-y-1/2 outline outline-1 outline-gray-new-30"
+              className="relative -z-10 w-full outline outline-1 outline-gray-new-30"
               src={bg}
               alt=""
               width={1056}
               height={628}
+              sizes="(min-width: 1024px) 1056px, 100vw"
               quality={100}
             />
           </div>
+
           <Image
-            className="hidden md:block"
+            className="hidden sm:block"
             src={ideMobile}
             alt="Neon in IDE"
             width={640}
@@ -49,10 +53,18 @@ const AI = () => (
             sizes="100vw"
             quality={100}
           />
+
+          <div className="mt-px flex items-center justify-between gap-x-4 px-4 py-3.5 outline outline-1 outline-gray-new-30 lg:px-3.5 lg:py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-4 sm:py-4">
+            <p className="sm::text-[15px] ml-3 text-[20px] leading-snug tracking-tight text-white lg:text-[18px] sm:ml-0">
+              Try for yourself, start building <br className="hidden md:block" /> with Neon now.
+            </p>
+            <CopyCodeButton code="npx neonctl init" />
+          </div>
         </div>
-        <div className="mt-[100px] flex items-center gap-11 xl:mt-32 xl:gap-[14px] lg:mt-20 md:mt-8 sm:-mx-6 sm:flex-col sm:items-start sm:gap-7">
+
+        <div className="mt-[114px] flex items-center gap-11 xl:mt-[104px] xl:gap-[14px] lg:mt-20 md:mt-[58px] sm:-mx-6 sm:flex-col sm:items-start sm:gap-7">
           <p className="w-[146px] shrink-0 font-medium leading-snug tracking-extra-tight text-gray-new-50 xl:w-32 lg:text-[15px] sm:w-full sm:text-center">
-            Works with any AI coding tool:
+            Connect MCP clients to Neon:
           </p>
           <Logos className="min-w-0 max-w-full" logos={logos} size="sm" />
         </div>
