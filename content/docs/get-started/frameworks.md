@@ -19,6 +19,8 @@ updatedOn: '2025-08-02T10:33:29.254Z'
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
+<a href="/docs/guides/encore" title="Encore" description="Connect an Encore application to Neon" icon="encore"></a>
+
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
 <a href="/docs/guides/express" title="Express" description="Connect an Express application to Neon" icon="express"></a>
