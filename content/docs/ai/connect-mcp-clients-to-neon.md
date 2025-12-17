@@ -3,7 +3,7 @@ title: Connect MCP clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
   ChatGPT, and other tools to your Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2025-10-23T10:46:41.575Z'
+updatedOn: '2025-12-17T19:34:00.752Z'
 ---
 
 The **Neon MCP Server** allows you to connect various [**Model Context Protocol (MCP)**](https://modelcontextprotocol.org) compatible AI tools to your Neon Postgres databases. This guide provides instructions for connecting popular MCP clients to the Neon MCP Server, enabling natural language interaction with your Neon projects.

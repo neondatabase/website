@@ -3,7 +3,7 @@ title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
 enableTableOfContents: true
-updatedOn: '2025-11-14T19:50:51.302Z'
+updatedOn: '2025-12-17T19:34:00.756Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
