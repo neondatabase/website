@@ -92,7 +92,6 @@ const GuidePost = async ({ params }) => {
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         author={author}
-        isGuide
       />
     </>
   );

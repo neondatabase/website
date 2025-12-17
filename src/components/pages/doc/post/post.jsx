@@ -7,7 +7,6 @@ import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
 import Modal from 'components/pages/doc/modal';
 import MODALS from 'components/pages/doc/modal/data';
-import GuidesBreadcrumbs from 'components/pages/guides/breadcrumbs';
 import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
@@ -38,7 +37,6 @@ const Post = ({
   isDocsIndex = false,
   isChangelog = false,
   isPostgres = false,
-  isGuide = false,
   changelogPosts = [],
   currentSlug,
   gitHubPath,
@@ -57,8 +55,6 @@ const Post = ({
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
         )}
-
-        {isGuide && <GuidesBreadcrumbs />}
 
         {isChangelog ? (
           <Changelog currentSlug={currentSlug} posts={changelogPosts} />
@@ -127,7 +123,6 @@ Post.propTypes = {
   isChangelog: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
-  isGuide: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
