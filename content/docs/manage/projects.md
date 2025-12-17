@@ -885,7 +885,7 @@ When you recover a deleted project, the following are restored:
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
-- Vercel-managed projects are automatically reconnected to Vercel
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
 
 ### What requires reconfiguration
 
@@ -894,6 +894,7 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **Data API** (including `authenticated` and `anonymous` roles)
 - **GitHub integration**
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Vercel-Managed Neon integration** (project reconnection via Storage)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
 
 ### Costs
