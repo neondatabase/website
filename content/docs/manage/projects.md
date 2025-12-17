@@ -885,7 +885,7 @@ When you recover a deleted project, the following are restored:
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
-- Vercel-Managed integration projects are re-imported into Vercel for management and billing
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
 
 ### What requires reconfiguration
 
