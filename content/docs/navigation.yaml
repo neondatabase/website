@@ -258,6 +258,8 @@
               slug: guides/astro
             - title: Entity Framework
               slug: guides/dotnet-entity-framework
+            - title: Encore
+              slug: guides/encore
             - title: Express
               slug: guides/express
             - title: Medusa.js

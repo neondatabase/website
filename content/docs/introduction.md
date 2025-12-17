@@ -46,6 +46,8 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 
+<a href="/docs/guides/encore" title="Encore" description="Connect an Encore application to Neon" icon="encore"></a>
+
 <a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 
 <a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
