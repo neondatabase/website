@@ -19,9 +19,10 @@ const InkeepCustomTrigger = dynamic(
 );
 
 const tabsOrder = {
-  default: ['Neon Docs', 'PostgreSQL Tutorial', 'Changelog', 'All'],
-  postgres: ['PostgreSQL Tutorial', 'Neon Docs', 'Changelog', 'All'],
-  changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'All'],
+  default: ['Neon Docs', 'PostgreSQL Tutorial', 'Guides', 'Changelog', 'All'],
+  postgres: ['PostgreSQL Tutorial', 'Neon Docs', 'Guides', 'Changelog', 'All'],
+  changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'Guides', 'All'],
+  guides: ['Guides', 'Neon Docs', 'PostgreSQL Tutorial', 'Changelog', 'All'],
 };
 
 const modalViews = {
@@ -50,6 +51,13 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
   }, []);
 
   useEffect(() => {
+    if (!pathname) return;
+
+    if (pathname.startsWith(LINKS.guides)) {
+      setPageType('guides');
+      return;
+    }
+
     if (pathname === LINKS.changelog) {
       setPageType('changelog');
     }

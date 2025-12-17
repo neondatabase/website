@@ -35,6 +35,15 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
+          partialUrl: 'https://neon.com/guides',
+        },
+      },
+      searchTabLabel: 'Guides',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
           partialUrl: 'https://neon.com/postgresql',
         },
       },
