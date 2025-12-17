@@ -4,16 +4,14 @@ import clsx from 'clsx';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import Button from 'components/shared/button';
-import Container from 'components/shared/container';
-import Link from 'components/shared/link';
 import MENUS from 'constants/menus.js';
 import useClickOutside from 'hooks/use-click-outside';
 import useIsTouchDevice from 'hooks/use-is-touch-device';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import MenuBanner from '../menu-banner';
+import Submenu from '../submenu';
 
-const SUBMENU_SELECTOR_NAME = 'main-navigation-submenu-link';
+const SUBMENU_LINK_CLASSNAME = 'main-navigation-submenu-link';
 
 const Navigation = () => {
   const [activeMenuIndex, setActiveMenuIndex] = useState(null);
@@ -99,13 +97,13 @@ const Navigation = () => {
         e.preventDefault();
         submenuContainerRef.current
           .querySelector(`#submenu-${index}`)
-          .querySelector(`.${SUBMENU_SELECTOR_NAME}`)
+          .querySelector(`.${SUBMENU_LINK_CLASSNAME}`)
           .focus();
       }
     }
   };
 
-  const makeHandleMenuClick = useCallback(
+  const handleMenuClick = useCallback(
     (hasSubmenu, index) => (e) => {
       if (!hasSubmenu) return;
 
@@ -147,7 +145,7 @@ const Navigation = () => {
     [activeMenuIndex]
   );
 
-  const makeHandleSubmenuNavigation = useCallback((containerIndex) => {
+  const handleSubmenuNavigation = useCallback((containerIndex) => {
     let links;
 
     if (submenuContainerRef.current) {
@@ -216,11 +214,11 @@ const Navigation = () => {
   useEffect(() => {
     if (activeMenuIndex !== null) {
       document.addEventListener('keydown', handleEscapeKey);
-
-      return () => {
-        document.removeEventListener('keydown', handleEscapeKey);
-      };
     }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
   }, [activeMenuIndex, handleEscapeKey]);
 
   useEffect(() => {
@@ -246,7 +244,7 @@ const Navigation = () => {
             >
               <Button
                 className={clsx(
-                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white focus-visible:outline-[revert] group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white group-hover/main-nav:text-gray-new-70 xl:px-2.5',
                   {
                     '-ml-3.5  xl:-ml-2.5 ': index === 0,
                     '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
@@ -265,7 +263,7 @@ const Navigation = () => {
                 theme="black"
                 tagName="Navigation"
                 onKeyDown={(e) => handleMenuKeyDown(e, hasSubmenu, index)}
-                onClick={makeHandleMenuClick(hasSubmenu, index)}
+                onClick={handleMenuClick(hasSubmenu, index)}
               >
                 {text}
                 {hasSubmenu && (
@@ -283,105 +281,15 @@ const Navigation = () => {
         })}
       </ul>
 
-      {/* Shared submenu container */}
-      <div
-        className={clsx(
-          'main-navigation-submenu absolute left-0 top-full z-40 -m-px w-full overflow-hidden bg-black-pure',
-          'transition-[height] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
-          {
-            'pointer-events-none': activeMenuIndex === null,
-            '!pointer-events-auto': activeMenuIndex !== null,
-          }
-        )}
-        style={{ height: `${containerHeight}px` }}
-        onMouseEnter={handleSubmenuEnter}
-        onMouseLeave={handleSubmenuLeave}
-      >
-        <div className="relative w-full" ref={submenuContainerRef}>
-          {MENUS.header.map((menu, index) => {
-            const isActive = activeMenuIndex === index;
-            const sections = menu.sections || [];
-            const isProduct = menu.text === 'Product';
-
-            return (
-              <div
-                className={clsx(
-                  'absolute left-0 top-0 w-full transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]',
-                  isActive ? 'active opacity-100' : 'pointer-events-none opacity-0'
-                )}
-                key={index}
-                id={`submenu-${index}`}
-                role="navigation"
-                aria-label={menu.text}
-                aria-hidden={!isActive}
-                data-submenu-panel
-              >
-                {sections.length > 0 && (
-                  <Container
-                    className="flex w-full gap-x-[160px] overflow-hidden pb-20 pt-7 xl:gap-x-8"
-                    size="1600"
-                  >
-                    <ul
-                      className="flex gap-x-[128px] pl-[calc(102px+92px+2px)] pt-1 xl:gap-x-5 xl:pl-[calc(102px+40px)]"
-                      role="menu"
-                    >
-                      {sections.map(({ title, items }, sectionIndex) => (
-                        <li key={sectionIndex} role="none">
-                          {title && (
-                            <span
-                              className="mb-6 block text-[10px] font-medium uppercase leading-none tracking-snug text-gray-new-50"
-                              id={`submenu-${index}-section-${sectionIndex}`}
-                            >
-                              {title}
-                            </span>
-                          )}
-                          <ul
-                            className="flex flex-col gap-y-6"
-                            role="group"
-                            aria-labelledby={
-                              title ? `submenu-${index}-section-${sectionIndex}` : undefined
-                            }
-                          >
-                            {items?.map(({ title, description, to, isExternal }) => (
-                              <li key={title} role="none">
-                                <Link
-                                  className={`group ${SUBMENU_SELECTOR_NAME} -mx-1 -my-3 grid min-w-[224px] gap-y-2 px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
-                                  to={to}
-                                  isExternal={isExternal}
-                                  tagName="Navigation"
-                                  tagText={title}
-                                  role="menuitem"
-                                  tabIndex={isActive ? 0 : -1}
-                                  onKeyDown={makeHandleSubmenuNavigation(index)}
-                                >
-                                  <span className="flex items-baseline gap-x-1.5 text-lg font-medium leading-none text-white transition-colors duration-200 group-hover:text-gray-new-80">
-                                    {title}
-                                  </span>
-                                  {description}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </li>
-                      ))}
-                    </ul>
-                    {isProduct && (
-                      <MenuBanner
-                        linkProps={{
-                          className: SUBMENU_SELECTOR_NAME,
-                          role: 'menuitem',
-                          tabIndex: isActive ? 0 : -1,
-                          onKeyDown: makeHandleSubmenuNavigation(index),
-                        }}
-                      />
-                    )}
-                  </Container>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <Submenu
+        activeMenuIndex={activeMenuIndex}
+        containerHeight={containerHeight}
+        submenuContainerRef={submenuContainerRef}
+        submenuLinkClassName={SUBMENU_LINK_CLASSNAME}
+        handleSubmenuNavigation={handleSubmenuNavigation}
+        handleSubmenuEnter={handleSubmenuEnter}
+        handleSubmenuLeave={handleSubmenuLeave}
+      />
     </nav>
   );
 };

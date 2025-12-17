@@ -18,8 +18,8 @@ const Header = () => (
           'lg:mt-5 lg:text-base lg:leading-snug md:mt-[18px] sm:text-[15px]'
         )}
       >
-        Platforms like Replit rely on Neon to give their users a ready-to-go backend for building
-        full-stack applications. Platforms like Replit rely on Neon to give their users.
+        The most advanced AI Codegen and Text-to-App platforms rely on Neon to give their users
+        batteries-included backend: Database, Auth, API. Operating at the speed of AI.
       </p>
       <Button
         className="mt-9 lg:mt-8 md:mt-7"

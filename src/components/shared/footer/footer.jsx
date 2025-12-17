@@ -50,7 +50,12 @@ const Footer = ({ hasThemesSupport = false }) => (
                     )}
                   >
                     <Tag
-                      className="group/link relative -my-px flex items-center whitespace-nowrap py-px text-[15px] leading-none tracking-extra-tight text-gray-new-40 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-60 hover:dark:text-white"
+                      className={clsx(
+                        'group/link relative -my-px flex items-center whitespace-nowrap rounded-sm py-px',
+                        'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
+                        'transition-colors duration-200 hover:text-black-pure',
+                        'dark:text-gray-new-60 dark:hover:text-white'
+                      )}
                       to={to}
                       rel={isExternalUrl ? 'noopener noreferrer' : null}
                       target={isExternalUrl ? '_blank' : null}

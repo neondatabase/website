@@ -70,7 +70,8 @@ const Toc = () => {
             <li key={section.id}>
               <Link
                 className={clsx(
-                  'relative flex items-center gap-x-2.5 whitespace-nowrap py-1.5 pl-[18px] text-[15px] leading-none tracking-tight transition-colors duration-200',
+                  'relative flex items-center gap-x-2.5 whitespace-nowrap rounded-sm py-1.5 pl-[18px]',
+                  'text-[15px] leading-none tracking-tight transition-colors duration-200',
                   'before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2',
                   'before:size-2 before:rounded-full before:transition-colors before:duration-200',
                   !isActive && 'text-gray-new-50',

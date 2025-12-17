@@ -7,7 +7,8 @@ import { DOCS_BASE_PATH } from 'constants/docs';
 import LINKS from 'constants/links';
 import HomeIcon from 'icons/docs/home.inline.svg';
 
-const linkClassName = 'transition-colors duration-200 hover:text-black dark:hover:text-white';
+const linkClassName =
+  'transition-colors duration-200 hover:text-black dark:hover:text-white rounded-sm';
 
 const Breadcrumbs = ({ breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
   <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60">

@@ -197,7 +197,7 @@ const Table = () => {
                                 <Link
                                   tabIndex={0}
                                   href={item[key].subtitle.href}
-                                  className="mt-1 inline-block w-fit border-b border-[rgba(175,177,182,0.40)] text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+                                  className="z-10 mt-1 inline-block w-fit rounded-sm border-b border-[rgba(175,177,182,0.40)] text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
                                 >
                                   {item[key].subtitle.text}
                                 </Link>
@@ -237,7 +237,13 @@ const Table = () => {
                   } else {
                     cell = (
                       <span
-                        className="flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90 [&_span]:text-sm [&_span]:text-gray-new-50"
+                        className={clsx(
+                          'flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90',
+                          '[&_span]:text-sm [&_span]:text-gray-new-50',
+                          '[&_a]:w-fit [&_a]:rounded-sm [&_a]:text-primary-2',
+                          '[&_a]:transition-colors [&_a]:duration-200',
+                          '[&_a:hover]:underline [&_a]:underline-offset-2'
+                        )}
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
                         dangerouslySetInnerHTML={{ __html: item[key] }}

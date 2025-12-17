@@ -41,7 +41,7 @@ const StatusBadge = () => {
 
   return (
     <Link
-      className="flex items-center justify-center gap-x-1.5"
+      className="flex items-center justify-center gap-x-1.5 rounded-sm"
       to="https://neonstatus.com/"
       target="_blank"
       rel="noopener noreferrer"

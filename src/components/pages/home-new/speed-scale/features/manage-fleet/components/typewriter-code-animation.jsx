@@ -63,8 +63,8 @@ const TypewriterCodeAnimation = ({ targetText, codeClassName, isActive, duration
       preProps: {
         className: preElement.props.className,
         style: preElement.props.style,
-        tabIndex: preElement.props.tabIndex,
         'data-language': preElement.props['data-language'],
+        tabIndex: -1,
       },
       codeProps: {
         className: clsx(codeClassName, codeElement.props.className),

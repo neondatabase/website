@@ -19,6 +19,7 @@ const Item = ({
   ariaLabel = null,
   items = null,
   isSubmenu = false,
+  isHidden = false,
   closeMobileMenu = null,
 }) => {
   const pathname = usePathname();
@@ -51,7 +52,7 @@ const Item = ({
     <li className="group/item flex flex-col">
       <LinkTag
         className={clsx(
-          'group relative flex w-full gap-2 py-2 pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
+          'group relative flex w-full gap-2 rounded-sm py-2 pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           isActive && !items?.length
             ? 'font-medium text-secondary-8 dark:text-primary-1'
             : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',
@@ -63,6 +64,7 @@ const Item = ({
         to={slug ? externalSlug || websiteSlug || docSlug : undefined}
         target={externalSlug ? '_blank' : '_self'}
         icon={externalSlug && 'external'}
+        tabIndex={isHidden ? -1 : undefined}
         onClick={handleClick}
       >
         {ariaLabel && <span className="sr-only">{ariaLabel}</span>}
@@ -77,7 +79,7 @@ const Item = ({
       {items?.length && (
         <LazyMotion features={domAnimation}>
           <m.div
-            className="overflow-hidden"
+            className="-m-1 overflow-hidden p-1"
             initial={isActiveMenu ? 'expanded' : 'collapsed'}
             animate={isCollapsed ? 'collapsed' : 'expanded'}
             variants={{
@@ -93,6 +95,7 @@ const Item = ({
                   key={index}
                   basePath={basePath}
                   closeMobileMenu={closeMobileMenu}
+                  isHidden={isCollapsed}
                   isSubmenu
                 />
               ))}
@@ -121,6 +124,7 @@ Item.propTypes = {
     })
   ),
   isSubmenu: PropTypes.bool,
+  isHidden: PropTypes.bool,
   closeMobileMenu: PropTypes.func,
 };
 

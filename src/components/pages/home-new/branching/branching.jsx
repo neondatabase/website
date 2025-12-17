@@ -26,8 +26,7 @@ const FEATURES = [
   {
     icon: ephemeralityIcon,
     title: 'Ephemerality',
-    description:
-      'Temporary computes shut down automatically when idle, lowering costs and overhead.',
+    description: 'Obsolete branches delete themselves automatically after work is complete.',
   },
 ];
 
@@ -43,7 +42,7 @@ const Branching = () => (
       <div className="min-w-0">
         <Heading
           icon="branching"
-          title="<strong>Instant branching.</strong> Develop and test new features and migrations with data & schema branches to eliminate surprises in production deploys."
+          title="<strong>Instant branching.</strong> Develop and test new features with data & schema branches to eliminate surprises in production deploys."
         />
         <RiveAnimation
           className="pointer-events-none aspect-[1184/500] w-full"

@@ -147,7 +147,7 @@ const Hero = () => {
                     <div className="mt-5 flex flex-col border-t border-dashed border-gray-new-20 pt-5">
                       <span className="text-lg font-medium">Enterprise Plans</span>
                       <Link
-                        className="w-fit text-[15px] decoration-1 underline-offset-4"
+                        className="w-fit rounded-sm text-[15px] decoration-1 underline-offset-4"
                         to={LINKS.contactSales}
                         theme="green-underlined"
                       >
