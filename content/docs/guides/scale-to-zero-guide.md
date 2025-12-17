@@ -114,7 +114,7 @@ To configure the scale to zero default for an existing project:
 
 You can monitor scale to zero on the **Branches** page in the Neon Console. A compute reports either an **Active** or **Idle** status.
 
-![Compute status](/docs/connect/compute_endpoint_state.png)
+![Compute status](/docs/connect/compute_state.png)
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
