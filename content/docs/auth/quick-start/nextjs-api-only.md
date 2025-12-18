@@ -69,409 +69,338 @@ NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Configure the auth client">
+<TwoColumnStep title="Set up your auth API routes">
   <LeftContent>
 
-Create a `lib/auth/client.ts` file to initialize the auth client:
+We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
 
   </LeftContent>
-  <RightCode label="lib/auth/client.ts">
+  <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
+import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
+
+export const { GET, POST } = authApiHandler();
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Add neonAuthMiddleware()">
+  <LeftContent>
+
+The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
+
+  </LeftContent>
+  <RightCode label="proxy.ts">
+
+```typescript
+import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next/server";
+
+export default neonAuthMiddleware({
+  // Redirects unauthenticated users to sign-in page
+  loginUrl: "/auth/sign-in",
+});
+
+export const config = {
+  matcher: [
+    // Protected routes requiring authentication
+    "/account/:path*",
+  ],
+};
+```
+
+  </RightCode>
+</TwoColumnStep>
+
+
+
+<Admonition type="note">
+Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
+</Admonition>
+
+
+<TwoColumnStep title="Configure the auth clients">
+  <LeftContent>
+
+**Client Components:**
+  - The Auth UI components are client rendered and need access to the auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
+
+**Server Components:** 
+  - To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
+
+  </LeftContent>
+  <RightCode>
+<Tabs labels={["Auth Client", "Auth Server"]}>
+
+<TabItem>
+
+Copy and paste following code in `lib/auth/client.ts` file:
+
+```tsx
+'use client';
+
 import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 
 export const authClient = createAuthClient();
 ```
 
+  </TabItem>
+  <TabItem>
+
+Copy and paste following code in `lib/auth/server.ts` file:
+
+```tsx
+import { createAuthServer } from '@neondatabase/neon-js/auth/next/server';
+
+export const authServer = createAuthServer();
+```
+
+  </TabItem>
+  </Tabs>
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Set up the API route">
+<TwoColumnStep title="Create Sign up form">
   <LeftContent>
 
-Create an API route to handle authentication requests:
+Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth server instance we created in previous step
+
+  - To create user with email and password, we will use `authServer.signUp.email()` with user name, email address, and password
+  - You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
 
   </LeftContent>
-  <RightCode label="app/api/auth/[...all]/route.ts">
+  <RightCode>
 
-```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next';
+  <Tabs labels={["Signup action", "Signup form"]}>
+  <TabItem>
+  
+```ts
+'use server';
 
-const handlers = authApiHandler();
+import { authServer } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
 
-export async function GET(request: Request, context: { params: Promise<{ all: string[] }> }) {
-  const params = await context.params;
-  return handlers.GET(request, {
-    params: Promise.resolve({ path: params.all }),
+export async function signUpWithEmail(
+  _prevState: { error: string } | null,
+  formData: FormData
+) {
+  const email = formData.get('email') as string;
+  
+  // Optionally restrict sign ups based on email address
+  if (!email || !email.trim().endsWith("@my-company.com")) {
+    return { error: 'Email must be from my-company.com' };
+  }
+
+  const { error } = await authServer.signUp.email({
+    email,
+    name: formData.get('name') as string,
+    password: formData.get('password') as string,
   });
-}
 
-export async function POST(request: Request, context: { params: Promise<{ all: string[] }> }) {
-  const params = await context.params;
-  return handlers.POST(request, {
-    params: Promise.resolve({ path: params.all }),
-  });
-}
+  if (error) {
+    return { error: error.message || 'Failed to create account' };
+  }
 
-export async function PUT(request: Request, context: { params: Promise<{ all: string[] }> }) {
-  const params = await context.params;
-  return handlers.PUT(request, {
-    params: Promise.resolve({ path: params.all }),
-  });
-}
-
-export async function DELETE(request: Request, context: { params: Promise<{ all: string[] }> }) {
-  const params = await context.params;
-  return handlers.DELETE(request, {
-    params: Promise.resolve({ path: params.all }),
-  });
-}
-
-export async function PATCH(request: Request, context: { params: Promise<{ all: string[] }> }) {
-  const params = await context.params;
-  return handlers.PATCH(request, {
-    params: Promise.resolve({ path: params.all }),
-  });
+  redirect('/');
 }
 ```
 
+  </TabItem>
+  <TabItem>
+
+```tsx
+'use client';
+
+import { useActionState } from 'react';
+import { signUpWithEmail } from './actions';
+
+export default function SignUpForm() {
+  const [state, formAction, isPending] = useActionState(signUpWithEmail, null);
+
+  return (
+    
+    <form action={formAction} 
+      className="flex flex-col gap-5 min-h-screen items-center justify-center">
+    
+      <div className="w-sm">
+       <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Create new account</h1>
+    </div>
+
+      <div className='flex flex-col gap-1.5 w-sm'>
+        <label htmlFor="name" className="block text-sm font-medium text-gray-100">Name</label>
+        <input id="name" name="name" type="text" required placeholder="John Doe"
+          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10 focus:outline-indigo-500"
+        />
+      </div>
+
+      <div className='flex flex-col gap-1.5 w-sm'>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-100">Email address</label>
+        <input id="email" name="email" type="email" required placeholder="john@my-company.com"
+          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"/>
+      </div>
+
+      <div className='flex flex-col gap-1.5 w-sm'>
+        <label htmlFor="password" className="block text-sm font-medium text-gray-100">Password</label>
+        <input id="password" name="password" type="password" required placeholder="*****"
+          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"/>
+      </div>
+
+      {state?.error && (
+        <div className="rounded-md px-3 py-2 text-sm text-red-500">
+          {state.error}
+        </div>
+      )}
+
+      <button type="submit" disabled={isPending}
+        className="flex w-sm justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400">
+        {isPending ? 'Creating account...' : 'Create Account'}
+      </button>
+    </form>
+  );
+}
+```
+  </TabItem>
+  </Tabs>
+
+
   </RightCode>
 </TwoColumnStep>
 
-<TwoColumnStep title="Server Component example">
+
+<TwoColumnStep title="Create Sign in form">
   <LeftContent>
 
-Check authentication in Server Components:
+Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts` files respectively.
+
+  - To sign-in the user we will use `authServer.signIn.email()` with user's email address and password.
+
+  </LeftContent>
+  <RightCode label="Sign In">
+
+  <Tabs labels={["Sign-in action", "Sign-in form"]}>
+  <TabItem>
+  
+```ts
+'use server';
+
+import { authServer } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
+
+export async function signInWithEmail(
+  _prevState: { error: string } | null,
+  formData: FormData
+) {
+  const { error } = await authServer.signIn.email({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  });
+
+  if (error) {
+    return { error: error.message || 'Failed to sign in. Try again' };
+  }
+
+  redirect('/');
+}
+```
+
+  </TabItem>
+  <TabItem>
+
+```tsx
+'use client';
+
+import { useActionState } from 'react';
+import { signInWithEmail } from './actions';
+
+export default function SignInForm() {
+  const [state, formAction, isPending] = useActionState(signInWithEmail, null);
+
+  return (
+    
+    <form action={formAction} 
+      className="flex flex-col gap-5 min-h-screen items-center justify-center">
+    
+      <div className="w-sm">
+       <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Sign in to your account</h1>
+    </div>
+
+      <div className='flex flex-col gap-1.5 w-sm'>
+        <label htmlFor="email" className="block text-sm font-medium text-gray-100">Email address</label>
+        <input id="email" name="email" type="email" required placeholder="john@my-company.com"
+          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"/>
+      </div>
+
+      <div className='flex flex-col gap-1.5 w-sm'>
+        <label htmlFor="password" className="block text-sm font-medium text-gray-100">Password</label>
+        <input id="password" name="password" type="password" required placeholder="*****"
+          className="block rounded-md w-full bg-white/5 px-2 py-1.5 placeholder:text-gray-500 text-white outline-1 outline-white/10  focus:outline-indigo-500"/>
+      </div>
+
+      {state?.error && (
+        <div className="rounded-md px-3 py-2 text-sm text-red-500">
+          {state.error}
+        </div>
+      )}
+
+      <button type="submit" disabled={isPending}
+        className="flex w-sm justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400">
+        Sign in
+      </button>
+    </form>
+  );
+}
+```
+  </TabItem>
+  </Tabs>
+
+
+  </RightCode>
+</TwoColumnStep>
+
+<TwoColumnStep title="Create home page">
+  <LeftContent>
+
+In last step, lets create the home page and display authenticated user status:
 
   </LeftContent>
   <RightCode label="app/page.tsx">
 
 ```typescript
-import { cookies, headers } from 'next/headers';
-import { redirect } from 'next/navigation';
+import { authServer } from "@/lib/auth/server";
+import Link from "next/link";
 
-async function getBaseUrl() {
-  const headersList = await headers();
-  const host = headersList.get('host') || 'localhost:3000';
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  return `${protocol}://${host}`;
-}
+export default async function Home() {
+  const { data } = await authServer.getSession();
 
-async function signOut() {
-  'use server';
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const baseUrl = await getBaseUrl();
-
-  await fetch(`${baseUrl}/api/auth/sign-out`, {
-    method: 'POST',
-    headers: {
-      cookie: cookieHeader,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({}),
-  });
-
-  redirect('/sign-in');
-}
-
-export default async function HomePage() {
-  const cookieStore = await cookies();
-  const cookieHeader = cookieStore.toString();
-  const baseUrl = await getBaseUrl();
-
-  const response = await fetch(`${baseUrl}/api/auth/get-session`, {
-    headers: { cookie: cookieHeader },
-  });
-
-  let data = null;
-  if (response.ok) {
-    const json = await response.json();
-    data = json;
-  }
-
-  // Response structure: { user, session }
-  if (data?.user) {
+  if (data) {
     return (
-      <div>
-        <h1>Welcome, {data.user.email}</h1>
-        <form action={signOut}>
-          <button type="submit">Sign Out</button>
-        </form>
+      <div className="flex flex-col gap-2 min-h-screen items-center justify-center">
+        <h1 className="mb-4 text-4xl">
+          Logged in as <span className="font-bold underline">{data.user.name}</span>
+        </h1>
       </div>
     );
   }
-
   return (
-    <div>
-      <h1>Not signed in</h1>
-      <a href="/sign-in">Sign In</a> | <a href="/sign-up">Sign Up</a>
+    <div className="flex flex-col gap-2 min-h-screen items-center justify-center">
+      <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>
+      <div className="flex item-center gap-2">
+      <Link 
+        href='/auth/sign-up' 
+        className="inline-flex text-lg text-indigo-400 hover:underline">
+          Sign-up
+      </Link>
+      <Link 
+        href='/auth/sign-in' 
+        className="inline-flex text-lg text-indigo-400 hover:underline">
+          Sign-in
+      </Link>
+      </div>
     </div>
   );
 }
 ```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Sign-in page">
-  <LeftContent>
-
-Create a sign-in page using SDK methods:
-
-  </LeftContent>
-  <RightCode label="app/sign-in/page.tsx">
-
-```tsx
-'use client';
-
-import { useState } from 'react';
-import { authClient } from '@/lib/auth/client';
-import { useRouter } from 'next/navigation';
-
-export default function SignInPage() {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleSignIn = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const { error } = await authClient.signIn.email({
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
-      setLoading(false);
-      return;
-    }
-
-    router.refresh();
-    router.push('/');
-  };
-
-  return (
-    <div>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSignIn}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Signing in...' : 'Sign In'}
-        </button>
-      </form>
-      <p>
-        <a href="/sign-up">Don't have an account? Sign up</a>
-      </p>
-    </div>
-  );
-}
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Sign up example">
-  <LeftContent>
-
-Create a sign-up page:
-
-  </LeftContent>
-  <RightCode label="app/sign-up/page.tsx">
-
-```tsx
-'use client';
-
-import { useState } from 'react';
-import { authClient } from '@/lib/auth/client';
-import { useRouter } from 'next/navigation';
-
-export default function SignUpPage() {
-  const router = useRouter();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    const { error } = await authClient.signUp.email({
-      name,
-      email,
-      password,
-    });
-
-    if (error) {
-      alert(error.message);
-      setLoading(false);
-      return;
-    }
-
-    router.refresh();
-    router.push('/');
-  };
-
-  return (
-    <div>
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSignUp}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={loading}>
-          {loading ? 'Signing up...' : 'Sign Up'}
-        </button>
-      </form>
-      <p>
-        <a href="/sign-in">Already have an account? Sign in</a>
-      </p>
-    </div>
-  );
-}
-```
-
-  </RightCode>
-</TwoColumnStep>
-
-<TwoColumnStep title="Add basic styling (optional)">
-  <LeftContent>
-
-The examples above use minimal styling. Add these styles to your existing `app/globals.css` to make your forms more usable:
-
-<Admonition type="note">
-This CSS is optional. The authentication will work without it, but your forms will be unstyled. Add these styles to your existing `globals.css` file—don't replace the entire file.
-</Admonition>
-
-  </LeftContent>
-  <RightCode label="app/globals.css">
-
-<details>
-<summary>View form styling CSS</summary>
-
-Add these styles to your existing `app/globals.css` file:
-
-```css
-body {
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  max-width: 420px;
-  margin: 3rem auto;
-  padding: 0 1rem;
-  color: #000;
-}
-
-h1 {
-  margin-bottom: 1.25rem;
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #000;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
-}
-
-input {
-  padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  transition: border-color 0.15s;
-  color: #000;
-  background: #fff;
-}
-
-input:focus {
-  border-color: #000;
-  outline: none;
-}
-
-button {
-  padding: 0.75rem;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-button:hover {
-  background: #1a1a1a;
-}
-
-button.secondary {
-  background: #fff;
-  color: #000;
-  border: 1px solid #d1d5db;
-}
-
-button.secondary:hover {
-  background: #f9fafb;
-}
-
-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-a {
-  display: inline-block;
-  margin-top: 0.75rem;
-  color: #000;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-```
-
-</details>
 
   </RightCode>
 </TwoColumnStep>
@@ -482,6 +411,11 @@ a:hover {
 Start the development server:
 
 Open your browser to [http://localhost:3000](http://localhost:3000) and test sign-up and sign-in.
+
+<Admonition type="note" title="Safari users">
+Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- --experimental-https` and open `https://localhost:3000` instead.
+</Admonition>
+
 
   </LeftContent>
   <RightCode label="Terminal">
@@ -497,16 +431,13 @@ npm run dev
 
 ## Available SDK methods
 
-- [`authClient.signUp.email()`](/docs/reference/javascript-sdk#auth-signup) - Create a new user account
-- [`authClient.signIn.email()`](/docs/reference/javascript-sdk#auth-signinwithpassword) - Sign in with email and password
-- [`authClient.signOut()`](/docs/reference/javascript-sdk#auth-signout) - Sign out the current user
-- [`authClient.getSession()`](/docs/reference/javascript-sdk#auth-getsession) - Get the current session
-- `/api/auth/get-session` - Get session via API route (for Server Components)
-- `/api/auth/sign-out` - Sign out endpoint
+Both `authClient` and `authServer` expose similar API methods. If you would like to use auth APIs in client components, you can use `authClient`.
 
-<Admonition type="note">
-The response from `/api/auth/get-session` returns `{ user, session }` directly (not nested under `data`). Check `data?.user` to see if authenticated.
-</Admonition>
+- [authClient.signUp.email()](/docs/reference/javascript-sdk#auth-signup) - Create a new user account
+- [authClient.signIn.email()](/docs/reference/javascript-sdk#auth-signinwithpassword) - Sign in with email and password
+- [authClient.signOut()](/docs/reference/javascript-sdk#auth-signout) - Sign out the current user
+- [authClient.getSession()](/docs/reference/javascript-sdk#auth-getsession) - Get the current session
+- `authServer.updateUser()` - To update user details
 
 ## Next steps
 
