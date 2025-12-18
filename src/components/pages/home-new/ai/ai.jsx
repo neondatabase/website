@@ -1,14 +1,13 @@
-import { Alignment, Fit } from '@rive-app/react-canvas';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
-import RiveAnimation from 'components/shared/rive-animation';
 import bg from 'images/pages/home-new/ai/bg.webp';
 import ideMobile from 'images/pages/home-new/ai/ide-mobile.jpg';
 
 import Heading from '../heading';
 
+import Animation from './animation';
 import CopyCodeButton from './copy-code-button';
 
 const logos = ['claude', 'cursor', 'windsurf', 'cline', 'zed', 'openai', 'vscode'];
@@ -26,13 +25,7 @@ const AI = () => (
         <Heading title="<strong>Postgres for the AI Engineering era.</strong> Integrate with a single command and have Cursor do the hard work." />
         <div className="relative mt-[182px] pl-32 xl:-mr-8 xl:mt-[174px] xl:pl-16 lg:-mx-8 lg:mt-[143px] lg:px-0 md:mx-0 sm:mt-11">
           <div className="pointer-events-none relative w-full sm:hidden">
-            <RiveAnimation
-              className="absolute -top-[86px] left-1/2 aspect-[941/658] !size-[105%] -translate-x-1/2 xl:-top-[72px] lg:-top-[60px]"
-              src="/animations/pages/home-new/speed-scale-ide.riv"
-              fit={Fit.Contain}
-              alignment={Alignment.Center}
-              threshold={0.2}
-            />
+            <Animation className="absolute -top-[86px] left-1/2 aspect-[941/658] !size-[105%] -translate-x-1/2 xl:-top-[72px] lg:-top-[60px]" />
             <Image
               className="relative -z-10 w-full outline outline-1 outline-gray-new-30"
               src={bg}
