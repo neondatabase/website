@@ -7,15 +7,15 @@ updatedOn: '2025-12-17T00:00:00.000Z'
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
+Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
+
 Email OTP lets users receive a one-time password (OTP) by email and use it to:
 
 - Sign in without a password
 - Perform password resets
 - Verify their email address (verification codes)
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides full support for Email OTP plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Email OTP plugin.
-
-In addition, Neon Auth UI and Neon SDK are client-side SDKs, so you only invoke their methods. OTP generation and delivery are handled automatically - you do not have direct control over the codes sent to users.
+Neon Auth UI and Neon SDK are client-side SDKs, so you only invoke their methods. OTP generation and delivery are handled automatically - you do not have direct control over the codes sent to users.
 
 ## Prerequisites
 

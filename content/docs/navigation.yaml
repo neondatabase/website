@@ -430,6 +430,8 @@
                 - title: Plugins
                   slug: auth/guides/plugins
                   items:
+                    - title: Admin
+                      slug: auth/guides/plugins/admin
                     - title: Email OTP
                       slug: auth/guides/plugins/email-otp
 
