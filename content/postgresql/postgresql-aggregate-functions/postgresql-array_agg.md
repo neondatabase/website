@@ -56,13 +56,13 @@ ORDER BY
 
 Here is the partial output:
 
-| title            | actors                                                                |
-| ---------------- | --------------------------------------------------------------------- |
-| Academy Dinosaur | {"Rock Dukakis","Mary Keitel","Johnny Cage","Penelope Guiness",...}   |
-| Ace Goldfinger   | {"Minnie Zellweger","Chris Depp","Bob Fawcett","Sean Guiness"}        |
-| Adaptation Holes | {"Cameron Streep","Bob Fawcett","Nick Wahlberg","Ray Johansson",...}  |
-| Affair Prejudice | {"Jodie Degeneres","Kenneth Pesci","Fay Winslet","Oprah Kilmer",...}  |
-| African Egg      | {"Dustin Tautou","Matthew Leigh","Gary Phoenix","Matthew Carrey",...} |
+| title            | actors                                                              |
+| ---------------- | ------------------------------------------------------------------- |
+| Academy Dinosaur | "Rock Dukakis","Mary Keitel","Johnny Cage","Penelope Guiness",...   |
+| Ace Goldfinger   | "Minnie Zellweger","Chris Depp","Bob Fawcett","Sean Guiness",..     |
+| Adaptation Holes | "Cameron Streep","Bob Fawcett","Nick Wahlberg","Ray Johansson",...  |
+| Affair Prejudice | "Jodie Degeneres","Kenneth Pesci","Fay Winslet","Oprah Kilmer",...  |
+| African Egg      | "Dustin Tautou","Matthew Leigh","Gary Phoenix","Matthew Carrey",... |
 
 
 As you can see, the actors in each film are arbitrarily ordered. To sort the actors by last name or first name, you can use the `ORDER BY` clause in the `ARRAY_AGG()` function.
