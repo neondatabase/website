@@ -10,10 +10,15 @@ import {
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 import useRiveAnimation from 'hooks/use-rive-animation';
 
 const Animation = ({ className }) => {
+  const [wrapperRef, isWrapperIntersecting] = useInView({
+    triggerOnce: true,
+    threshold: 0.4,
+  });
   const { isReady, animationRef, rive, RiveComponent } = useRiveAnimation({
     src: '/animations/pages/home-new/speed-scale-ide.riv?2025121142',
     fit: Fit.Contain,
@@ -26,14 +31,14 @@ const Animation = ({ className }) => {
   const startTrigger = useViewModelInstanceTrigger('start', viewModelInstance);
 
   useEffect(() => {
-    if (startTrigger) {
+    if (startTrigger && isWrapperIntersecting) {
       startTrigger.trigger();
     }
-  }, [startTrigger]);
+  }, [startTrigger, isWrapperIntersecting]);
 
   return (
     <div className={clsx('transition-opacity', isReady ? 'opacity-100' : 'opacity-0')}>
-      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" aria-hidden />
+      <span className="absolute left-1/2 top-0 -z-10 h-full w-px" ref={wrapperRef} aria-hidden />
       <div className={clsx('[&_canvas]:!h-full [&_canvas]:!w-full', className)} ref={animationRef}>
         <RiveComponent />
       </div>
