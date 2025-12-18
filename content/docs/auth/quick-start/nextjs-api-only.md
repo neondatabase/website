@@ -219,13 +219,12 @@ export default function SignUpForm() {
   const [state, formAction, isPending] = useActionState(signUpWithEmail, null);
 
   return (
-    
     <form action={formAction} 
       className="flex flex-col gap-5 min-h-screen items-center justify-center">
     
       <div className="w-sm">
-       <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Create new account</h1>
-    </div>
+        <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Create new account</h1>
+      </div>
 
       <div className='flex flex-col gap-1.5 w-sm'>
         <label htmlFor="name" className="block text-sm font-medium text-gray-100">Name</label>
@@ -317,13 +316,12 @@ export default function SignInForm() {
   const [state, formAction, isPending] = useActionState(signInWithEmail, null);
 
   return (
-    
     <form action={formAction} 
       className="flex flex-col gap-5 min-h-screen items-center justify-center">
     
       <div className="w-sm">
        <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Sign in to your account</h1>
-    </div>
+      </div>
 
       <div className='flex flex-col gap-1.5 w-sm'>
         <label htmlFor="email" className="block text-sm font-medium text-gray-100">Email address</label>
@@ -373,7 +371,7 @@ import Link from "next/link";
 export default async function Home() {
   const { data } = await authServer.getSession();
 
-  if (data) {
+  if (data && data.user) {
     return (
       <div className="flex flex-col gap-2 min-h-screen items-center justify-center">
         <h1 className="mb-4 text-4xl">
