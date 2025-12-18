@@ -72,7 +72,7 @@ const client = createClient({
 ```
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
@@ -92,7 +92,8 @@ const client = createClient<Database>({
 ```
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
 
 const client = createClient({
   auth: {

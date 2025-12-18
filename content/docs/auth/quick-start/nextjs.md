@@ -233,12 +233,16 @@ export default function RootLayout({
 
 Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
 
+<Admonition type="tip" title="Not using Tailwind?">
+See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
+</Admonition>
+
   </LeftContent>
   <RightCode label="app/globals.css">
 
 ```css
 @import "tailwindcss";
-@import "@neondatabase/neon-js/ui/css"; // [!code ++]
+@import "@neondatabase/neon-js/ui/tailwind"; // [!code ++]
 
 ```
 

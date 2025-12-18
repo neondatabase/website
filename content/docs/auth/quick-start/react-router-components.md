@@ -101,6 +101,10 @@ Replace the contents of `src/main.tsx` to wrap your app with React Router and th
 
 Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
 
+<Admonition type="tip" title="Styling options">
+To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
+</Admonition>
+
 <details>
 <summary>Example: Adding optional props</summary>
 
