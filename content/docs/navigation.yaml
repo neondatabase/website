@@ -427,6 +427,11 @@
                   slug: auth/guides/configure-domains
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Plugins
+                  slug: auth/guides/plugins
+                  items:
+                    - title: Email OTP
+                      slug: auth/guides/plugins/email-otp
 
             - section: Reference
               items:
