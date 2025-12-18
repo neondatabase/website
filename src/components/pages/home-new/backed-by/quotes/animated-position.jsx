@@ -1,7 +1,8 @@
-import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import useTextStaggeredAnimation from 'hooks/use-text-staggered-animation';
+
+import CharAnimation from './char-animation';
 
 const DURATION = 0.3;
 const START_DELAY = 1.45;
@@ -14,58 +15,37 @@ const AnimatedPosition = ({ author, position }) => {
     textString,
   });
 
-  let currentIndex = 0;
-
-  const result = [author, position].map((part, index) => {
-    if (index === 0) {
-      return (
-        <span className="block font-medium" key={`author-part-${currentIndex}`}>
-          {part.split('').map((char) => {
-            const charIndex = currentIndex;
-            currentIndex += 1;
-            return (
-              <m.span
-                key={charIndex}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0,
-                  delay: START_DELAY + staggeredDelays[groupIndices[charIndex]],
-                }}
-              >
-                {char}
-              </m.span>
-            );
-          })}
-        </span>
-      );
-    }
-
-    return part.split('').map((char) => {
-      const charIndex = currentIndex;
-      currentIndex += 1;
-
-      return (
-        <m.span
-          key={charIndex}
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0,
-            delay: START_DELAY + staggeredDelays[groupIndices[charIndex]],
-          }}
-        >
-          {char}
-        </m.span>
-      );
-    });
+  // Calculate character indices for each part
+  const authorChars = author.split('').map((char, index) => {
+    const globalCharIndex = index;
+    return (
+      <CharAnimation
+        key={globalCharIndex}
+        char={char}
+        delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
+      />
+    );
   });
 
-  return result;
+  const positionChars = position.split('').map((char, index) => {
+    const globalCharIndex = author.length + index;
+    return (
+      <CharAnimation
+        key={globalCharIndex}
+        char={char}
+        delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
+      />
+    );
+  });
+
+  return (
+    <>
+      <span className="block font-medium" key="author-part">
+        {authorChars}
+      </span>
+      {positionChars}
+    </>
+  );
 };
 
 AnimatedPosition.propTypes = {
