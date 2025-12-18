@@ -6,17 +6,6 @@ updatedOn: '2025-12-03T13:07:33.036Z'
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
 
-- [RAM](#ram)
-- [CPU](#cpu)
-- [Connections count](#connections-count)
-- [Database size](#database-size)
-- [Deadlocks](#deadlocks)
-- [Rows](#rows)
-- [Replication delay bytes](#replication-delay-bytes)
-- [Replication delay seconds](#replication-delay-seconds)
-- [Local file cache hit rate](#local-file-cache-hit-rate)
-- [Working set size](#working-set-size)
-
 Your Neon plan defines the range of data you can view.
 
 | Neon Plan                                       | Data Access              |
@@ -69,11 +58,11 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
-### Connections count
+### Postgres connections count
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
-The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute.
+The **Postgres connections count** graph shows the number of idle connections, active connections, and the total number of connections directly to your Postgres database over time for the selected compute. These are the actual connections on the Postgres server itself.
 
 **ACTIVE**: The number of active connections for the selected compute.
 
@@ -94,6 +83,63 @@ The MAX line helps you visualize how close you are to reaching your connection l
 - Optimizing your application's connection management
 
 The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+
+<Admonition type="note">
+If you're using [connection pooling](/docs/connect/connection-pooling), also monitor the [Pooler client connections](#pooler-client-connections) and [Pooler server connections](#pooler-server-connections) graphs. When using a pooled connection, the **Pooler server connections** represent the actual connections from PgBouncer to Postgres, while this **Postgres connections count** graph shows all direct connections to Postgres (including those from the pooler and any direct connections).
+</Admonition>
+
+### Pooler client connections
+
+The **Pooler client connections** graph shows connections from your applications to Neon's PgBouncer connection pooler. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
+
+PgBouncer supports up to 10,000 simultaneous client connections, which is significantly higher than the direct Postgres connection limit. The graph shows the following connection states:
+
+**ACTIVE**: Client connections actively executing a query through the pooler.
+
+These are connections that currently have an active query running. A high number of active connections indicates your application is actively using the database.
+
+**WAITING**: Client connections waiting for an available server connection from the pool.
+
+When all available server connections (connections from PgBouncer to Postgres) are in use, additional client requests must wait in a queue. If you consistently see a high number of waiting connections, it may indicate:
+
+- Your workload requires more server connections than your current `default_pool_size` allows
+- Long-running queries are holding server connections
+- Your compute size may need to be increased to support more concurrent server connections
+
+**ACTIVE CANCEL** and **WAITING CANCEL**: Connections in the process of being cancelled.
+
+These represent client connections where a cancellation request has been issued (for example, when a user cancels a query).
+
+<Admonition type="tip">
+Connection pooling works by allowing many client connections to share a smaller pool of actual Postgres connections. While you can have thousands of client connections, they share a limited number of server connections determined by PgBouncer's `default_pool_size` setting. For more details, see [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
+
+### Pooler server connections
+
+The **Pooler server connections** graph shows connections from Neon's PgBouncer pooler to your Postgres database. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
+
+These server connections are shared by all client connections to the pooler, enabling thousands of clients to efficiently share a smaller pool of Postgres connections. The graph shows the following states:
+
+**SERVER ACTIVE**: Server connections currently serving client queries.
+
+These are the pooler's connections to Postgres that are actively processing queries from clients. This number represents the actual concurrent queries being executed on your Postgres database through the pooler.
+
+**SERVER IDLE**: Server connections in the pool that are available but not currently in use.
+
+PgBouncer maintains these idle connections in the pool so they're ready to handle new client requests without the overhead of establishing new connections. In transaction pooling mode (which Neon uses), connections are returned to the idle state as soon as a transaction completes.
+
+The total number of server connections (active + idle) is limited by PgBouncer's `default_pool_size` setting, which is set to 0.9 × your compute's `max_connections`. For example:
+
+- A 1 CU compute with `max_connections=450` can have up to 405 pooler server connections
+- A 2 CU compute with `max_connections=901` can have up to 810 pooler server connections
+
+<Admonition type="note">
+The **Pooler server connections** count is a subset of what you see in the [Postgres connections count](#postgres-connections-count) graph. The Postgres connections count shows all connections to Postgres, including those from the pooler plus any direct (non-pooled) connections. To understand your complete connection picture when using pooling:
+
+- **Pooler client connections**: Shows how many applications/clients are connected to the pooler
+- **Pooler server connections**: Shows how many connections the pooler is using to Postgres (limited by `default_pool_size`)
+- **Postgres connections count**: Shows all connections to Postgres (pooler connections + direct connections)
+</Admonition>
 
 ### Database size
 
