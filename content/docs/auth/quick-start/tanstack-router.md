@@ -2,7 +2,7 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-15T17:10:57.641Z'
+updatedOn: '2025-12-18T12:00:58.021Z'
 layout: wide
 ---
 
