@@ -28,7 +28,7 @@ The values and plotted lines in your graphs will drop to `0` when your compute i
 ![monitoring graph diagonal pattern for inactive compute](/docs/introduction/monitor_inactive.png)
 </Admonition>
 
-### RAM
+## RAM
 
 ![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
 
@@ -44,7 +44,7 @@ The graph plots a line showing the amount of RAM used. If the line regularly rea
 
 **Cached**: The amount of data cached in memory.
 
-### CPU
+## CPU
 
 ![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
 
@@ -58,7 +58,7 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
-### Postgres connections count
+## Postgres connections count
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
@@ -88,7 +88,7 @@ The connection limit (defined by the Postgres `max_connections` setting) is set 
 If you're using [connection pooling](/docs/connect/connection-pooling), also monitor the [Pooler client connections](#pooler-client-connections) and [Pooler server connections](#pooler-server-connections) graphs. When using a pooled connection, the **Pooler server connections** represent the actual connections from PgBouncer to Postgres, while this **Postgres connections count** graph shows all direct connections to Postgres (including those from the pooler and any direct connections).
 </Admonition>
 
-### Pooler client connections
+## Pooler client connections
 
 The **Pooler client connections** graph shows connections from your applications to Neon's PgBouncer connection pooler. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
 
@@ -114,7 +114,7 @@ These represent client connections where a cancellation request has been issued 
 Connection pooling works by allowing many client connections to share a smaller pool of actual Postgres connections. While you can have thousands of client connections, they share a limited number of server connections determined by PgBouncer's `default_pool_size` setting. For more details, see [Connection pooling](/docs/connect/connection-pooling).
 </Admonition>
 
-### Pooler server connections
+## Pooler server connections
 
 The **Pooler server connections** graph shows connections from Neon's PgBouncer pooler to your Postgres database. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
 
@@ -141,7 +141,7 @@ The **Pooler server connections** count is a subset of what you see in the [Post
 - **Postgres connections count**: Shows all connections to Postgres (pooler connections + direct connections)
 </Admonition>
 
-### Database size
+## Database size
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png)
 
@@ -151,7 +151,7 @@ The **Database size** graph shows the logical data size (the size of your actual
 Database size metrics are only displayed while your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
 </Admonition>
 
-### Deadlocks
+## Deadlocks
 
 ![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png)
 
@@ -159,7 +159,7 @@ The **Deadlocks** graph shows a count of deadlocks over time for the named datab
 
 Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgresql/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html).
 
-### Rows
+## Rows
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
 
@@ -171,26 +171,26 @@ Tracking rows inserted, updated, and deleted over time provides insights into yo
 Row metrics only capture row-level changes (`INSERT`, `UPDATE`, `DELETE`, etc.) and exclude table-level operations such as `TRUNCATE`.
 </Admonition>
 
-### Replication delay bytes
+## Replication delay bytes
 
 ![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
 
 The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
-### Replication delay seconds
+## Replication delay seconds
 
 ![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)
 
 The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
-### Local file cache hit rate
+## Local file cache hit rate
 
 ![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
 The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC). 
 Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
-### Working set size
+## Working set size
 
 ![working set size graph](/docs/introduction/working_set_size.png)
 
