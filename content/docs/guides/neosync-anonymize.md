@@ -3,6 +3,7 @@ title: Anonymize data with Neosync
 subtitle: Learn how to anonymize sensitive data in Neon with Neosync
 enableTableOfContents: true
 updatedOn: '2025-09-09T10:09:25.189Z'
+noindex: 'noindex'
 ---
 
 <Admonition type="important" title="deprecated">
