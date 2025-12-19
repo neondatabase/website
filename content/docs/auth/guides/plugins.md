@@ -9,9 +9,13 @@ updatedOn: '2025-12-18T00:00:00.000Z'
 
 Neon Auth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.
 
-Because Neon Auth is a **managed** Better Auth service, you **don’t install or configure Better Auth plugins yourself**. Instead, Neon Auth exposes a subset of Better Auth plugins through the Neon SDK.
+<Admonition type="info" title="Plugins are managed by Neon Auth">
+Neon Auth is a **managed** Better Auth service. You **don’t install or configure Better Auth plugins directly** - instead, Neon Auth exposes a supported subset of plugins through the Neon SDK.
 
-Neon Auth currently supports the following Better Auth plugins:
+More granular controls like enabling/disabling specific plugins and customizing plugin behavior are on the roadmap.
+</Admonition>
+
+The following Better Auth plugins are currently supported in Neon Auth:
 
 ## Supported plugins
 

@@ -20,6 +20,11 @@ The Admin plugin provides APIs to manage your users and their authentication sta
 ## Prerequisites
 
 - A Neon project with **Auth enabled**
+- An existing user with an **admin** role to call Admin APIs.
+
+  You can assign the **admin** role to a user through the Neon Console. Navigate to **Auth** → **Users**, open the three‑dot menu next to the user, and select **Make admin**.
+
+  ![Assign admin role in Neon Console](/docs/auth/make-admin.png)
 
 ## Use Admin with SDK methods
 
