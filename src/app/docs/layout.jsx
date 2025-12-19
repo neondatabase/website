@@ -1,13 +1,24 @@
 /* eslint-disable react/prop-types */
+import { headers } from 'next/headers';
+
 import MobileNav from 'components/pages/doc/mobile-nav';
 import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
 import { getNavigation } from 'utils/api-docs';
+import getSDKNavigation from 'utils/get-sdk-navigation';
 
 const NeonDocsLayout = async ({ children }) => {
   const navigation = await getNavigation();
+
+  // Get current pathname from headers to determine if SDK navigation should be loaded
+  const headersList = headers();
+  const pathname = headersList.get('x-pathname') || '';
+  const currentSlug = pathname.replace(/^\/docs\//, '');
+
+  // Load SDK navigation data on server if this is an SDK reference page
+  const sdkTOC = await getSDKNavigation(currentSlug);
 
   return (
     <Layout
@@ -28,6 +39,7 @@ const NeonDocsLayout = async ({ children }) => {
             className="w-64 shrink-0 lg:hidden"
             navigation={navigation}
             basePath={DOCS_BASE_PATH}
+            sdkTOC={sdkTOC}
           />
           {children}
         </Container>
