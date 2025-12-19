@@ -38,11 +38,11 @@ const AI = () => (
           </div>
 
           <Image
-            className="hidden sm:block"
+            className="hidden outline outline-1 outline-gray-new-30 sm:block"
             src={ideMobile}
             alt="Neon in IDE"
-            width={640}
-            height={446}
+            width={704}
+            height={490}
             sizes="100vw"
             quality={100}
           />
