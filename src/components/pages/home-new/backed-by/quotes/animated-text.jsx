@@ -18,22 +18,22 @@ const AnimatedText = ({ text, highlight }) => {
 
   const highlightedPartIndex = text.findIndex((part) => part === highlight);
 
-  // Calculate character offset for each part (sum of lengths of previous parts)
-  const partOffsets = text.reduce((offsets, part, index) => {
-    const offset = index === 0 ? 0 : offsets[index - 1] + text[index - 1].length;
-    offsets.push(offset);
-    return offsets;
-  }, []);
+  // Calculate character offset for each part using prefix sum
+  const partOffsets = [];
+  let runningOffset = 0;
+  for (let i = 0; i < text.length; i += 1) {
+    partOffsets.push(runningOffset);
+    runningOffset += text[i].length;
+  }
 
   const result = text.map((part, index) => {
-    const charOffset = partOffsets[index];
-    const firstCharIndex = charOffset;
+    const firstCharIndex = partOffsets[index];
 
     if (index === highlightedPartIndex) {
       return (
         <m.span
           className="-mx-1 bg-[linear-gradient(90deg,rgba(57,165,125,0.6)_50%,transparent_50%)] bg-[size:200%_100%] bg-no-repeat px-1"
-          key={`highlighted-part-${firstCharIndex}`}
+          key={`highlighted-part-${index}`}
           initial={{ backgroundPositionX: '100%', backgroundPositionY: '0' }}
           animate={{
             backgroundPositionX: '0%',
@@ -52,7 +52,7 @@ const AnimatedText = ({ text, highlight }) => {
           }}
         >
           {part.split('').map((char, charIndexInPart) => {
-            const globalCharIndex = charOffset + charIndexInPart;
+            const globalCharIndex = firstCharIndex + charIndexInPart;
 
             return (
               <CharAnimation
@@ -67,7 +67,7 @@ const AnimatedText = ({ text, highlight }) => {
     }
 
     return part.split('').map((char, charIndexInPart) => {
-      const globalCharIndex = charOffset + charIndexInPart;
+      const globalCharIndex = firstCharIndex + charIndexInPart;
 
       return (
         <CharAnimation
@@ -79,7 +79,15 @@ const AnimatedText = ({ text, highlight }) => {
     });
   });
 
-  return result;
+  // Provide accessible text for screen readers
+  const accessibleText = text.join('');
+
+  return (
+    <>
+      <span className="sr-only">{accessibleText}</span>
+      {result}
+    </>
+  );
 };
 
 AnimatedText.propTypes = {

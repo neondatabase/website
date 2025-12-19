@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 const CharAnimation = ({ char, delay }) => (
   <m.span
+    aria-hidden="true"
     initial={{ opacity: 0 }}
     animate={{
       opacity: 1,

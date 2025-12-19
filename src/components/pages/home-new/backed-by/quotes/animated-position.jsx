@@ -15,35 +15,31 @@ const AnimatedPosition = ({ author, position }) => {
     textString,
   });
 
-  // Calculate character indices for each part
-  const authorChars = author.split('').map((char, index) => {
-    const globalCharIndex = index;
-    return (
-      <CharAnimation
-        key={globalCharIndex}
-        char={char}
-        delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
-      />
-    );
-  });
+  // Helper function to create character animation array
+  const createCharArray = (text, startIndex) =>
+    text.split('').map((char, index) => {
+      const globalCharIndex = startIndex + index;
+      return (
+        <CharAnimation
+          key={globalCharIndex}
+          char={char}
+          delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
+        />
+      );
+    });
 
-  const positionChars = position.split('').map((char, index) => {
-    const globalCharIndex = author.length + index;
-    return (
-      <CharAnimation
-        key={globalCharIndex}
-        char={char}
-        delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
-      />
-    );
-  });
+  const authorChars = createCharArray(author, 0);
+  const positionChars = createCharArray(position, author.length);
 
   return (
     <>
-      <span className="block font-medium" key="author-part">
+      <span className="sr-only">
+        {author} {position}
+      </span>
+      <span className="block font-medium" aria-hidden="true">
         {authorChars}
       </span>
-      {positionChars}
+      <span aria-hidden="true">{positionChars}</span>
     </>
   );
 };
