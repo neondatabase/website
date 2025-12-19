@@ -31,11 +31,14 @@ const getActiveMenu = (navigation, slug) =>
     })
     .find((item) => containsActiveSlug(item, slug));
 
-const Sidebar = ({ className = null, navigation, basePath, customType, sdkTOC = null }) => {
+const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const menu = getActiveMenu(navigation, currentSlug);
   const navRef = useRef(null);
+
+  // Get SDK TOC for current page from pre-loaded data
+  const sdkTOC = sdkNavigation?.[currentSlug] || null;
 
   useEffect(() => {
     if (navRef.current) {
@@ -79,20 +82,12 @@ Sidebar.propTypes = {
     title: PropTypes.string,
     link: PropTypes.string,
   }),
-  sdkTOC: PropTypes.shape({
-    title: PropTypes.string,
-    sections: PropTypes.arrayOf(
-      PropTypes.shape({
-        section: PropTypes.string.isRequired,
-        items: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-          })
-        ).isRequired,
-      })
-    ).isRequired,
-  }),
+  sdkNavigation: PropTypes.objectOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      sections: PropTypes.array,
+    })
+  ),
 };
 
 export default Sidebar;

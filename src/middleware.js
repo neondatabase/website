@@ -123,15 +123,7 @@ export async function middleware(req) {
       }
     }
 
-    // Add pathname to headers for server components to access
-    const requestHeaders = new Headers(req.headers);
-    requestHeaders.set('x-pathname', pathname);
-
-    return NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
+    return NextResponse.next();
   } catch (error) {
     console.error('Middleware execution error:', error);
     // General error fallback
