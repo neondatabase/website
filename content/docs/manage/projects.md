@@ -869,8 +869,6 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 
 ## Recover a deleted project
 
-<EarlyAccess />
-
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
