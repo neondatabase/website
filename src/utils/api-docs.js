@@ -2,11 +2,7 @@ const fs = require('fs');
 
 const jsYaml = require('js-yaml');
 
-const {
-  DOCS_DIR_PATH,
-  CHANGELOG_DIR_PATH,
-  SDK_NAVIGATION_DIR_PATH,
-} = require('../constants/content');
+const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
 
 const { getPostSlugs, getPostBySlug } = require('./api-content');
 
@@ -31,39 +27,8 @@ const getAllPosts = async () => {
 const getNavigation = () =>
   jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8'));
 
-const getSDKNavigation = () => {
-  const sdkNavigation = {};
-
-  try {
-    const files = fs.readdirSync(`${process.cwd()}/${SDK_NAVIGATION_DIR_PATH}`);
-
-    files.forEach((file) => {
-      if (!file.endsWith('.json')) return;
-
-      const sdkName = file.replace('.json', '');
-      const slug = `reference/${sdkName}`;
-      const filePath = `${process.cwd()}/${SDK_NAVIGATION_DIR_PATH}/${file}`;
-
-      try {
-        const fileContents = fs.readFileSync(filePath, 'utf8');
-        const sdkNav = JSON.parse(fileContents);
-
-        sdkNavigation[slug] = {
-          title: sdkNav.title || 'SDK Reference',
-          sections: sdkNav.sections || [],
-        };
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error(`Failed to load SDK navigation from ${file}:`, error);
-      }
-    });
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error('Failed to read SDK navigation directory:', error);
-  }
-
-  return sdkNavigation;
-};
+const getSDKNavigation = () =>
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sdk-navigation.yaml`, 'utf8'));
 
 const getNavigationLinks = (slug, flatSidebar) => {
   const posts = [
