@@ -1,7 +1,8 @@
-import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import useTextStaggeredAnimation from 'hooks/use-text-staggered-animation';
+
+import CharAnimation from './char-animation';
 
 const DURATION = 0.3;
 const START_DELAY = 1.45;
@@ -14,58 +15,33 @@ const AnimatedPosition = ({ author, position }) => {
     textString,
   });
 
-  let currentIndex = 0;
-
-  const result = [author, position].map((part, index) => {
-    if (index === 0) {
+  // Helper function to create character animation array
+  const createCharArray = (text, startIndex) =>
+    text.split('').map((char, index) => {
+      const globalCharIndex = startIndex + index;
       return (
-        <span className="block font-medium" key={`author-part-${currentIndex}`}>
-          {part.split('').map((char) => {
-            const charIndex = currentIndex;
-            currentIndex += 1;
-            return (
-              <m.span
-                key={charIndex}
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: 1,
-                }}
-                transition={{
-                  duration: 0,
-                  delay: START_DELAY + staggeredDelays[groupIndices[charIndex]],
-                }}
-              >
-                {char}
-              </m.span>
-            );
-          })}
-        </span>
-      );
-    }
-
-    return part.split('').map((char) => {
-      const charIndex = currentIndex;
-      currentIndex += 1;
-
-      return (
-        <m.span
-          key={charIndex}
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0,
-            delay: START_DELAY + staggeredDelays[groupIndices[charIndex]],
-          }}
-        >
-          {char}
-        </m.span>
+        <CharAnimation
+          key={globalCharIndex}
+          char={char}
+          delay={START_DELAY + staggeredDelays[groupIndices[globalCharIndex]]}
+        />
       );
     });
-  });
 
-  return result;
+  const authorChars = createCharArray(author, 0);
+  const positionChars = createCharArray(position, author.length);
+
+  return (
+    <>
+      <span className="sr-only">
+        {author} {position}
+      </span>
+      <span className="block font-medium" aria-hidden="true">
+        {authorChars}
+      </span>
+      <span aria-hidden="true">{positionChars}</span>
+    </>
+  );
 };
 
 AnimatedPosition.propTypes = {

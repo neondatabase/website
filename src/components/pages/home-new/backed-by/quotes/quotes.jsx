@@ -50,16 +50,15 @@ const QUOTES = [
 
 const Quotes = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFirstShow, setIsFirstShow] = useState(true);
-  const startTimeRef = useRef(Date.now());
-  const pausedTimeRef = useRef(0);
+  const currentIndexRef = useRef(0);
+  const startTimeRef = useRef(null);
+  const pausedIndexRef = useRef(0);
   const frameRef = useRef(null);
 
+  // Sync currentIndex to ref for use in effects
   useEffect(() => {
-    if (isFirstShow) {
-      setIsFirstShow(false);
-    }
-  }, [isFirstShow]);
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
 
   const [ref, isVisible] = useInView({
     threshold: 0.1,
@@ -68,16 +67,16 @@ const Quotes = () => {
 
   useEffect(() => {
     if (!isVisible) {
-      if (frameRef.current) {
-        pausedTimeRef.current = Date.now() - startTimeRef.current;
-        cancelAnimationFrame(frameRef.current);
-        frameRef.current = null;
-      }
       return undefined;
     }
 
-    startTimeRef.current = Date.now() - pausedTimeRef.current;
-    pausedTimeRef.current = 0;
+    // Initialize or restore start time based on saved index
+    if (startTimeRef.current === null) {
+      startTimeRef.current = Date.now();
+    } else {
+      const elapsedForSavedIndex = pausedIndexRef.current * 5000;
+      startTimeRef.current = Date.now() - elapsedForSavedIndex;
+    }
 
     const updateIndex = () => {
       const elapsedTime = Date.now() - startTimeRef.current;
@@ -89,6 +88,8 @@ const Quotes = () => {
     frameRef.current = requestAnimationFrame(updateIndex);
 
     return () => {
+      pausedIndexRef.current = currentIndexRef.current;
+
       if (frameRef.current) {
         cancelAnimationFrame(frameRef.current);
         frameRef.current = null;
