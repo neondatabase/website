@@ -11,7 +11,7 @@ layout: wide
 <TwoColumnLayout>
 
 <TwoColumnStep title="Create a Neon project with Auth enabled">
-  <LeftContent>
+<LeftContent>
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
@@ -19,46 +19,46 @@ Go to the **Auth** page in your project dashboard and click **Enable Auth**.
 
 You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
 
-  </LeftContent>
-  <RightImage label="Console">
+</LeftContent>
+<RightImage label="Console">
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-  </RightImage>
+</RightImage>
 </TwoColumnStep>
 
 <TwoColumnStep title="Create a TanStack Router app">
-  <LeftContent>
+<LeftContent>
 
 Create a new TanStack Router app using the file-router template.
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 npx create-tsrouter-app@latest my-app --template file-router --tailwind
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Install the Neon Auth SDK">
-  <LeftContent>
+<LeftContent>
 
 Install the Neon Auth SDK and UI library:
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 cd my-app && npm install @neondatabase/neon-js
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Set up environment variables">
-  <LeftContent>
+<LeftContent>
 
 Create a `.env` file in your project root and add your Auth URL:
 
@@ -66,18 +66,18 @@ Create a `.env` file in your project root and add your Auth URL:
 Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
-  </LeftContent>
-  <RightCode label=".env">
+</LeftContent>
+<RightCode label=".env">
 
 ```bash
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Add Neon Auth styles">
-  <LeftContent>
+<LeftContent>
 
 Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
 
@@ -85,23 +85,23 @@ Open your existing `src/styles.css` file and add this import at the **top**, rig
 See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
 </Admonition>
 
-  </LeftContent>
-  <RightCode label="Add to src/styles.css">
+</LeftContent>
+<RightCode label="Add to src/styles.css">
 
 ```css
 @import '@neondatabase/neon-js/ui/tailwind';
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Configure the auth client">
-  <LeftContent>
+<LeftContent>
 
 Create a `src/auth.ts` file to initialize the auth client:
 
-  </LeftContent>
-  <RightCode label="src/auth.ts">
+</LeftContent>
+<RightCode label="src/auth.ts">
 
 ```typescript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -110,11 +110,11 @@ import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, { adapter: BetterAuthReactAdapter() });
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Create the Auth Provider">
-  <LeftContent>
+<LeftContent>
 
 Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. This makes the auth state available to the UI components used throughout your app.
 
@@ -136,8 +136,8 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 
 </details>
 
-  </LeftContent>
-  <RightCode label="src/routes/__root.tsx">
+</LeftContent>
+<RightCode label="src/routes/__root.tsx">
 
 ```tsx {4-5,9,22}
 import { Outlet, createRootRoute } from '@tanstack/react-router';
@@ -166,16 +166,16 @@ export const Route = createRootRoute({
 });
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Create the Auth page">
-  <LeftContent>
+<LeftContent>
 
 Create a route to handle authentication views (sign in, sign up, etc.). Create `src/routes/auth.$pathname.tsx`:
 
-  </LeftContent>
-  <RightCode label="src/routes/auth.$pathname.tsx">
+</LeftContent>
+<RightCode label="src/routes/auth.$pathname.tsx">
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
@@ -202,16 +202,16 @@ function Auth() {
 }
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Create the Account page">
-  <LeftContent>
+<LeftContent>
 
 Create a route to handle account management views. Create `src/routes/account.$pathname.tsx`:
 
-  </LeftContent>
-  <RightCode label="src/routes/account.$pathname.tsx">
+</LeftContent>
+<RightCode label="src/routes/account.$pathname.tsx">
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
@@ -238,18 +238,18 @@ function Account() {
 }
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Protect your routes">
-  <LeftContent>
+<LeftContent>
 
 You can protect your routes using the `SignedIn` and `RedirectToSignIn` components. Access the user's session and profile data using the `useSession` hook.
 
 Update `src/routes/index.tsx` to protect the home page:
 
-  </LeftContent>
-  <RightCode label="src/routes/index.tsx">
+</LeftContent>
+<RightCode label="src/routes/index.tsx">
 
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
@@ -297,39 +297,39 @@ function Home() {
 }
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Start your app">
-  <LeftContent>
+<LeftContent>
 
 Start the development server, then open [http://localhost:3000](http://localhost:3000). You'll be redirected to the sign-in page.
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 npm run dev
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="See your users in the database">
-  <LeftContent>
+<LeftContent>
 
 As users sign up, their profiles are stored in your Neon database in the `neon_auth.user` table.
 
 Query your users table in the SQL Editor to see your new users:
 
-  </LeftContent>
-  <RightCode label="SQL Editor">
+</LeftContent>
+<RightCode label="SQL Editor">
 
 ```sql
 SELECT * FROM neon_auth.user;
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 </TwoColumnLayout>

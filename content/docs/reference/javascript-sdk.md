@@ -25,9 +25,11 @@ Install the JavaScript SDK in your project using npm, yarn, pnpm, or bun.
 
 </LeftContent>
 <RightCode>
+
 ```bash
 npm install @neondatabase/neon-js
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -138,6 +140,7 @@ const client = createClient({
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const result = await client.auth.signUp.email({
   email: 'user@example.com',
@@ -151,7 +154,8 @@ console.error('Sign up error:', result.error.message)
 console.log('User created:', result.data.user)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -178,6 +182,7 @@ console.log('User created:', result.data.user)
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const result = await client.auth.signIn.email({
   email: 'user@example.com',
@@ -185,11 +190,12 @@ const result = await client.auth.signIn.email({
 })
 
 if (result.error) {
-  console.error('Sign in error:', result.error.message)
+console.error('Sign in error:', result.error.message)
 } else {
-  console.log('Signed in:', result.data.user.email)
+console.log('Signed in:', result.data.user.email)
 }
-````
+
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -254,6 +260,7 @@ await client.auth.signIn.social({
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { error } = await client.auth.signOut()
 
@@ -261,7 +268,8 @@ if (error) {
 console.error('Sign out error:', error.message)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -274,15 +282,17 @@ console.error('Sign out error:', error.message)
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.getSession()
 
 if (data.session) {
-  console.log('User is logged in:', data.session.user.email)
+console.log('User is logged in:', data.session.user.email)
 } else {
-  console.log('No active session')
+console.log('No active session')
 }
-````
+
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -306,11 +316,13 @@ Note: Password updates require password reset flow for security.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.updateUser({
   name: 'New Name'
 })
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -334,6 +346,7 @@ The user must then call `signIn.emailOtp()` with the received code.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { error } = await client.auth.emailOtp.sendVerificationOtp({
   email: 'user@example.com',
@@ -344,7 +357,8 @@ if (error) {
 console.error('Failed to send OTP:', error.message)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -368,6 +382,7 @@ First call `emailOtp.sendVerificationOtp()` to send the code.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.signIn.emailOtp({
   email: 'user@example.com',
@@ -375,11 +390,12 @@ const { data, error } = await client.auth.signIn.emailOtp({
 })
 
 if (error) {
-  console.error('OTP verification failed:', error.message)
+console.error('OTP verification failed:', error.message)
 } else {
-  console.log('Signed in:', data.user.email)
+console.log('Signed in:', data.user.email)
 }
-````
+
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -404,6 +420,7 @@ This is typically used after `signUp.email()` when email verification is require
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.emailOtp.verifyEmail({
   email: 'user@example.com',
@@ -416,7 +433,8 @@ console.error('Email verification failed:', error.message)
 console.log('Email verified successfully')
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -431,16 +449,17 @@ Useful for password reset flows where you need to verify the code before allowin
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type   | Required |
-| -------------- | ------ | -------- |
-| <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓        |
-| <tt>otp</tt>   | string | ✓        |
+| Parameter      | Type                 | Required  |
+| -------------- | -------------------- | --------- | ----------------- | --- |
+| <tt>email</tt> | string               | ✓         |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓   |
+| <tt>otp</tt>   | string               | ✓         |
 
 </details>
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.emailOtp.checkVerificationOtp({
   email: 'user@example.com',
@@ -449,9 +468,10 @@ const { data, error } = await client.auth.emailOtp.checkVerificationOtp({
 })
 
 if (error || !data.success) {
-  console.error('Invalid OTP code')
+console.error('Invalid OTP code')
 }
-````
+
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -475,6 +495,7 @@ Sends a verification email to the user. Used for email verification after signup
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { error } = await client.auth.sendVerificationEmail({
   email: 'user@example.com',
@@ -485,7 +506,8 @@ if (error) {
 console.error('Failed to send verification email:', error.message)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -508,6 +530,7 @@ Used for email change verification.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.auth.verifyEmail({
   query: {
@@ -517,9 +540,10 @@ const { data, error } = await client.auth.verifyEmail({
 })
 
 if (error) {
-  console.error('Email verification failed:', error.message)
+console.error('Email verification failed:', error.message)
 }
-````
+
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -543,6 +567,7 @@ Sends a password reset email to the user. The email contains a link to reset the
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { error } = await client.auth.requestPasswordReset({
   email: 'user@example.com',
@@ -553,7 +578,8 @@ if (error) {
 console.error('Failed to send password reset email:', error.message)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -574,7 +600,7 @@ console.error('Failed to send password reset email:', error.message)
 
 ```typescript
 const { data, error } = await client.from('todos').select('*');
-````
+```
 
 ```typescript
 const { data, error } = await client.from('todos').select('id, title, completed');
@@ -632,6 +658,7 @@ const { data, error } = await client
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
@@ -639,6 +666,7 @@ const { data, error } = await client
   .eq('id', 1)
   .select()
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -661,12 +689,14 @@ const { data, error } = await client
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { error } = await client
   .from('todos')
   .delete()
   .eq('id', 1)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -679,6 +709,7 @@ const { error } = await client
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client.rpc('get_user_stats', {
   user_id: 123,
@@ -691,7 +722,8 @@ console.error('RPC error:', error.message)
 console.log('Stats:', data)
 }
 
-````
+```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -703,12 +735,13 @@ Can be chained with other filters to create complex queries.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .eq('completed', true)
-````
+```
 
 </RightCode>
 </TwoColumnItem>
@@ -721,12 +754,14 @@ Useful for excluding specific values from results.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .neq('status', 'archived')
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -738,12 +773,14 @@ Works with numeric values, dates, and other comparable types.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .gt('priority', 5)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -755,12 +792,14 @@ Works with numeric values, dates, and other comparable types.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .lt('priority', 10)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -804,12 +843,14 @@ Useful for pagination and preventing large result sets.
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .limit(10)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -821,12 +862,14 @@ The comparison is inclusive (includes rows where column equals the value).
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .gte('priority', 5)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -838,12 +881,14 @@ The comparison is inclusive (includes rows where column equals the value).
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .lte('priority', 10)
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -856,12 +901,14 @@ Use % as wildcard: '%pattern%' matches any string containing 'pattern'
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .like('title', '%groceries%')
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -872,12 +919,14 @@ Use % as wildcard: '%pattern%' matches any string containing 'pattern'
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .ilike('title', '%groceries%')
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -911,12 +960,14 @@ Useful for filtering by multiple possible values (e.g., status in ['pending', 'a
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .in('status', ['pending', 'in-progress'])
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -928,12 +979,14 @@ For arrays, checks if the value exists in the array. For JSONB, checks if the va
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .contains('tags', ['urgent'])
 ```
+
 </RightCode>
 </TwoColumnItem>
 
@@ -944,12 +997,14 @@ Range is inclusive (includes both start and end values).
 
 </LeftContent>
 <RightCode>
+
 ```typescript
 const { data, error } = await client
   .from('todos')
   .select('*')
   .range('priority', 5, 10)
 ```
+
 </RightCode>
 </TwoColumnItem>
 

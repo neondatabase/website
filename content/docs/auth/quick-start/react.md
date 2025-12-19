@@ -11,7 +11,7 @@ layout: wide
 <TwoColumnLayout>
 
 <TwoColumnStep title="Create a Neon project with Auth enabled">
-  <LeftContent>
+<LeftContent>
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
@@ -19,47 +19,47 @@ Go to the **Auth** page in your project dashboard and click **Enable Auth**.
 
 You can then find your Auth **Base URL** on the Configuration tab. Copy this URL - you'll need it in the next step.
 
-  </LeftContent>
-  <RightImage label="Console">
+</LeftContent>
+<RightImage label="Console">
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-  </RightImage>
+</RightImage>
 </TwoColumnStep>
 
 <TwoColumnStep title="Create a React app">
-  <LeftContent>
+<LeftContent>
 
 Create a React app using Vite.
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 npm create vite@latest my-app -- --template react
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Install the Neon SDK">
-  <LeftContent>
+<LeftContent>
 
 The Neon SDK provides authentication methods like `signUp()`, `getSession()`, and `signOut()` for your React app.
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 cd my-app
 npm install @neondatabase/neon-js
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Set up environment variables">
-  <LeftContent>
+<LeftContent>
 
 Create a `.env` file in your project root and add your Auth Base URL:
 
@@ -67,23 +67,23 @@ Create a `.env` file in your project root and add your Auth Base URL:
 Replace the URL with your actual Auth Base URL from the Neon Console.
 </Admonition>
 
-  </LeftContent>
-  <RightCode label=".env">
+</LeftContent>
+<RightCode label=".env">
 
 ```bash
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Configure the Neon client">
-  <LeftContent>
+<LeftContent>
 
 Create a `src/auth.js` file to configure your auth client:
 
-  </LeftContent>
-  <RightCode label="src/auth.js">
+</LeftContent>
+<RightCode label="src/auth.js">
 
 ```javascript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -91,18 +91,18 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Build your authentication UI">
-  <LeftContent>
+<LeftContent>
 
 Neon JS uses a programmatic approach for managing auth state. You'll use React hooks like `useEffect` to check the session and handle auth changes.
 
 Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#auth-signup), [sign-in](/docs/reference/javascript-sdk#auth-signinwithpassword), and [sign-out](/docs/reference/javascript-sdk#auth-signout):
 
-  </LeftContent>
-  <RightCode label="src/App.jsx">
+</LeftContent>
+<RightCode label="src/App.jsx">
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -214,41 +214,41 @@ export default function App() {
 }
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="Start your app">
-  <LeftContent>
+<LeftContent>
 
 Start the development server:
 
 Open your browser to `http://localhost:5173` and create a test user.
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</LeftContent>
+<RightCode label="Terminal">
 
 ```bash
 npm run dev
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 <TwoColumnStep title="See your users in the database">
-  <LeftContent>
+<LeftContent>
 
 As users sign up, their profiles are synced to your Neon database in the `neon_auth.user` table.
 
 Query your users table in the SQL Editor to see your new users:
 
-  </LeftContent>
-  <RightCode label="SQL Editor">
+</LeftContent>
+<RightCode label="SQL Editor">
 
 ```sql
 SELECT * FROM neon_auth.user;
 ```
 
-  </RightCode>
+</RightCode>
 </TwoColumnStep>
 
 </TwoColumnLayout>
