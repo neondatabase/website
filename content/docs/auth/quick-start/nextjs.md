@@ -10,23 +10,23 @@ layout: wide
 
 <TwoColumnLayout>
 
-<TwoColumnStep title="Enable Auth in your Neon project">
-<LeftContent>
+<TwoColumnLayout.Step title="Enable Auth in your Neon project">
+<TwoColumnLayout.Block>
 
 Enable Auth in your [Neon project](https://console.neon.tech) and copy your Auth URL from Configuration.
 
 **Console path:** Project → Branch → Auth → Configuration
 
-</LeftContent>
-<RightImage label="Console">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Console">
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-</RightImage>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Install the Neon Auth SDK">
-<LeftContent>
+<TwoColumnLayout.Step title="Install the Neon Auth SDK">
+<TwoColumnLayout.Block>
 
 Install the Neon SDK into your Next.js app.
 
@@ -38,18 +38,18 @@ cd my-app
 ```
 </details>
 
-</LeftContent>
-<RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm install @neondatabase/neon-js
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Set up environment variables">
-<LeftContent>
+<TwoColumnLayout.Step title="Set up environment variables">
+<TwoColumnLayout.Block>
 
 Create a `.env` file in your project root and add your Auth URL:
 
@@ -57,23 +57,23 @@ Create a `.env` file in your project root and add your Auth URL:
 Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
-</LeftContent>
-<RightCode label=".env">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label=".env">
 
 ```bash
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Set up your auth API routes">
-<LeftContent>
+<TwoColumnLayout.Step title="Set up your auth API routes">
+<TwoColumnLayout.Block>
 
 We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
 
-</LeftContent>
-<RightCode label="app/api/auth/[...path]/route.ts">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
 
 ```typescript
 import { authApiHandler } from '@neondatabase/neon-js/auth/next';
@@ -81,22 +81,16 @@ import { authApiHandler } from '@neondatabase/neon-js/auth/next';
 export const { GET, POST } = authApiHandler();
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Add neonAuthMiddleware()">
-<LeftContent>
+<TwoColumnLayout.Step title="Add neonAuthMiddleware()">
+<TwoColumnLayout.Block>
 
 The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
 
-<div class="mt-auto">
-<Admonition type="note">
-Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
-</Admonition>
-</div>
-
-</LeftContent>
-<RightCode label="proxy.ts">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="proxy.ts">
 
 ```typescript
 import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next";
@@ -114,16 +108,23 @@ export const config = {
 };
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
 
-<TwoColumnStep title="Configure the auth client">
-<LeftContent>
+<div class="col-span-2 xl:col-span-1">
+<Admonition type="note">
+Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
+</Admonition>
+</div>
+
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Configure the auth client">
+<TwoColumnLayout.Block>
 
 The Auth UI components need access to auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
 
-</LeftContent>
-<RightCode label="lib/auth/client.ts">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="lib/auth/client.ts">
 
 ```tsx
 'use client';
@@ -133,11 +134,11 @@ import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 export const authClient = createAuthClient();
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Wrap app layout with auth provider">
-<LeftContent>
+<TwoColumnLayout.Step title="Wrap app layout with auth provider">
+<TwoColumnLayout.Block>
 
 The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app with `NeonAuthUIProvider`.
 
@@ -169,8 +170,8 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
 
 </details>
 
-</LeftContent>
-<RightCode label="app/layout.tsx">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="app/layout.tsx">
 
 ```tsx
 import { authClient } from '@/lib/auth/client'; // [!code ++]
@@ -220,10 +221,10 @@ export default function RootLayout({
 }
 ```
 
-</RightCode>
-</TwoColumnStep>
-<TwoColumnStep title="Add Neon Auth styles">
-<LeftContent>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+<TwoColumnLayout.Step title="Add Neon Auth styles">
+<TwoColumnLayout.Block>
 
 Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
 
@@ -231,14 +232,14 @@ Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at 
 See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
 </Admonition>
 
-<div class="mt-auto">
+<TwoColumnLayout.Footer>
 <Admonition type="note">
 Now that the Auth provider and styles are set up, let's build the pages for signing up and signing in
 </Admonition>
-</div>
+</TwoColumnLayout.Footer>
 
-</LeftContent>
-<RightCode label="app/globals.css">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="app/globals.css">
 
 ```css
 @import "tailwindcss";
@@ -246,10 +247,10 @@ Now that the Auth provider and styles are set up, let's build the pages for sign
 
 ```
 
-</RightCode>
-</TwoColumnStep>
-<TwoColumnStep title="Create the Auth & Account pages">
-<LeftContent>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+<TwoColumnLayout.Step title="Create the Auth & Account pages">
+<TwoColumnLayout.Block>
 Create a dynamic route segment for authentication and account views in `app/auth/[path]/page.tsx` and `app/account/[path]/page.tsx` respectively.
 
 - `AuthView` - with dynamic route segment covers the following paths:
@@ -260,8 +261,8 @@ Create a dynamic route segment for authentication and account views in `app/auth
   - `/account/settings` - User can manage their profile details
   - `/account/security` - Change password and list active session
 
-</LeftContent>
-<RightCode label="create app & account page">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="create app & account page">
 
 <Tabs labels={["Auth Page", "Account Page"]}>
 
@@ -315,16 +316,16 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 </TabItem>
 </Tabs>
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Access user data on server and client">
-<LeftContent>
+<TwoColumnLayout.Step title="Access user data on server and client">
+<TwoColumnLayout.Block>
 
 You can access the user session and data on the server using the `neonAuth()` helper, on the client using `authClient.useSession()` hook.
 
-</LeftContent>
-<RightCode label="Access user data">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Access user data">
 
 <Tabs labels={["Server Component", "Client Component", "API Route"]}>
 
@@ -418,11 +419,11 @@ export async function GET() {
 </TabItem>
 </Tabs>
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Start your app">
-<LeftContent>
+<TwoColumnLayout.Step title="Start your app">
+<TwoColumnLayout.Block>
 
 Start the development server, and then open http://localhost:3000/
 
@@ -436,15 +437,15 @@ Start the development server, and then open http://localhost:3000/
 Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- --experimental-https` and open `https://localhost:3000` instead.
 </Admonition>
 
-</LeftContent>
-<RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm run dev
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
 </TwoColumnLayout>
 

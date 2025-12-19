@@ -10,8 +10,8 @@ layout: wide
 
 <TwoColumnLayout>
 
-<TwoColumnStep title="Create a Neon project with Auth enabled">
-<LeftContent>
+<TwoColumnLayout.Step title="Create a Neon project with Auth enabled">
+<TwoColumnLayout.Block>
 
 If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
 
@@ -19,47 +19,47 @@ Go to the **Auth** page in your project dashboard and click **Enable Auth**.
 
 You can then find your Auth **Base URL** on the Configuration tab. Copy this URL - you'll need it in the next step.
 
-</LeftContent>
-<RightImage label="Console">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Console">
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-</RightImage>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Create a React app">
-<LeftContent>
+<TwoColumnLayout.Step title="Create a React app">
+<TwoColumnLayout.Block>
 
 Create a React app using Vite.
 
-</LeftContent>
-<RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm create vite@latest my-app -- --template react
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Install the Neon SDK">
-<LeftContent>
+<TwoColumnLayout.Step title="Install the Neon SDK">
+<TwoColumnLayout.Block>
 
 The Neon SDK provides authentication methods like `signUp()`, `getSession()`, and `signOut()` for your React app.
 
-</LeftContent>
-<RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 cd my-app
 npm install @neondatabase/neon-js
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Set up environment variables">
-<LeftContent>
+<TwoColumnLayout.Step title="Set up environment variables">
+<TwoColumnLayout.Block>
 
 Create a `.env` file in your project root and add your Auth Base URL:
 
@@ -67,23 +67,23 @@ Create a `.env` file in your project root and add your Auth Base URL:
 Replace the URL with your actual Auth Base URL from the Neon Console.
 </Admonition>
 
-</LeftContent>
-<RightCode label=".env">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label=".env">
 
 ```bash
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Configure the Neon client">
-<LeftContent>
+<TwoColumnLayout.Step title="Configure the Neon client">
+<TwoColumnLayout.Block>
 
 Create a `src/auth.js` file to configure your auth client:
 
-</LeftContent>
-<RightCode label="src/auth.js">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="src/auth.js">
 
 ```javascript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
@@ -91,18 +91,18 @@ import { createAuthClient } from '@neondatabase/neon-js/auth';
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Build your authentication UI">
-<LeftContent>
+<TwoColumnLayout.Step title="Build your authentication UI">
+<TwoColumnLayout.Block>
 
 Neon JS uses a programmatic approach for managing auth state. You'll use React hooks like `useEffect` to check the session and handle auth changes.
 
 Replace the contents of `src/App.jsx` with the following code to implement [sign-up](/docs/reference/javascript-sdk#auth-signup), [sign-in](/docs/reference/javascript-sdk#auth-signinwithpassword), and [sign-out](/docs/reference/javascript-sdk#auth-signout):
 
-</LeftContent>
-<RightCode label="src/App.jsx">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="src/App.jsx">
 
 ```jsx
 import { useState, useEffect } from 'react';
@@ -214,42 +214,42 @@ export default function App() {
 }
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Start your app">
-<LeftContent>
+<TwoColumnLayout.Step title="Start your app">
+<TwoColumnLayout.Block>
 
 Start the development server:
 
 Open your browser to `http://localhost:5173` and create a test user.
 
-</LeftContent>
-<RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm run dev
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="See your users in the database">
-<LeftContent>
+<TwoColumnLayout.Step title="See your users in the database">
+<TwoColumnLayout.Block>
 
 As users sign up, their profiles are synced to your Neon database in the `neon_auth.user` table.
 
 Query your users table in the SQL Editor to see your new users:
 
-</LeftContent>
-<RightCode label="SQL Editor">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="SQL Editor">
 
 ```sql
 SELECT * FROM neon_auth.user;
 ```
 
-</RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
 </TwoColumnLayout>
 
