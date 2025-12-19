@@ -47,7 +47,11 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
   }, [menu]);
 
   const renderContent = sdkTOC ? (
-    <SDKTableOfContents sections={sdkTOC.sections} title={sdkTOC.title} />
+    <SDKTableOfContents
+      title={sdkTOC.title}
+      url={`${basePath}${currentSlug}`}
+      sections={sdkTOC.sections}
+    />
   ) : (
     <Menu basePath={basePath} {...menu} customType={customType} />
   );
