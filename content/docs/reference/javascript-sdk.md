@@ -3,7 +3,7 @@ title: JavaScript SDK (Auth & Data API)
 subtitle: Reference documentation for building applications with Neon Auth and Data API
 enableTableOfContents: true
 layout: wide
-updatedOn: '2025-12-11T19:49:37.742Z'
+updatedOn: '2025-12-18T12:00:58.022Z'
 ---
 
 The Neon JavaScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
@@ -126,14 +126,13 @@ const client = createClient({
 <details>
 <summary>View parameters</summary>
 
-| Parameter            | Type                        | Required |
-| -------------------- | --------------------------- | -------- |
-| <tt>email</tt>       | string                      | ✓        |
-| <tt>name</tt>        | string                      | ✓        |
-| <tt>password</tt>    | string                      | ✓        |
-| <tt>image</tt>       | string \| undefined         |          |
-| <tt>phoneNumber</tt> | string \| null \| undefined |          |
-| <tt>callbackURL</tt> | string \| undefined         |          |
+| Parameter            | Type                | Required |
+| -------------------- | ------------------- | -------- |
+| <tt>email</tt>       | string              | ✓        |
+| <tt>name</tt>        | string              | ✓        |
+| <tt>password</tt>    | string              | ✓        |
+| <tt>image</tt>       | string \| undefined |          |
+| <tt>callbackURL</tt> | string \| undefined |          |
 
 </details>
 
@@ -211,7 +210,7 @@ Sign in with an OAuth provider like Google, GitHub, etc.
 
 | Parameter                   | Type                  | Required |
 | --------------------------- | --------------------- | -------- |
-| <tt>provider</tt>           | object                | ✓        |
+| <tt>provider</tt>           | string                | ✓        |
 | <tt>callbackURL</tt>        | string \| undefined   |          |
 | <tt>newUserCallbackURL</tt> | string \| undefined   |          |
 | <tt>errorCallbackURL</tt>   | string \| undefined   |          |
@@ -298,11 +297,10 @@ Note: Password updates require password reset flow for security.
 <details>
 <summary>View parameters</summary>
 
-| Parameter            | Type                        | Required |
-| -------------------- | --------------------------- | -------- |
-| <tt>name</tt>        | string \| undefined         |          |
-| <tt>image</tt>       | string \| null \| undefined |          |
-| <tt>phoneNumber</tt> | string \| null \| undefined |          |
+| Parameter      | Type                        | Required |
+| -------------- | --------------------------- | -------- |
+| <tt>name</tt>  | string \| undefined         |          |
+| <tt>image</tt> | string \| null \| undefined |          |
 
 </details>
 
@@ -310,7 +308,7 @@ Note: Password updates require password reset flow for security.
 <RightCode>
 ```typescript
 const { data, error } = await client.auth.updateUser({
-  email: 'newemail@example.com'
+  name: 'New Name'
 })
 ```
 </RightCode>
@@ -327,10 +325,10 @@ The user must then call `signIn.emailOtp()` with the received code.
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type   | Required |
-| -------------- | ------ | -------- |
-| <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | object | ✓        |
+| Parameter      | Type                 | Required  |
+| -------------- | -------------------- | --------- | ----------------- | --- |
+| <tt>email</tt> | string               | ✓         |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓   |
 
 </details>
 
@@ -436,7 +434,7 @@ Useful for password reset flows where you need to verify the code before allowin
 | Parameter      | Type   | Required |
 | -------------- | ------ | -------- |
 | <tt>email</tt> | string | ✓        |
-| <tt>type</tt>  | object | ✓        |
+| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓        |
 | <tt>otp</tt>   | string | ✓        |
 
 </details>

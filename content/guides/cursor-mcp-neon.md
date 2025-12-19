@@ -51,19 +51,29 @@ Before you begin, ensure you have the following:
 
 4. **Node.js (>= v18) and npm:** Ensure Node.js (version 18 or later) and npm are installed. Download them from [nodejs.org](https://nodejs.org).
 
-### Option 1: Setting up the Remote Hosted Neon MCP Server
+### Quick Setup (Recommended)
+
+The fastest way to get started is with the [`neonctl init`](/docs/reference/cli-init) command, which automates OAuth authentication, API key creation, and Cursor configuration:
+
+```bash
+npx neonctl@latest init
+```
+
+This command authenticates via OAuth, creates an API key, and configures Cursor to connect to Neon's remote MCP server. API key authentication means **fewer approval prompts** when using MCP tools. Once complete, ask your AI assistant **"Get started with Neon"**.
+
+<Admonition type="tip" title="Cursor Users: One-Click Alternative">
+Cursor offers a deep link for quick OAuth setup:
+
+<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+
+Note: This uses OAuth (not API key), so you'll need to approve each MCP action. For fewer prompts, use Quick Setup above.
+</Admonition>
+
+### Option 1: Setting up the Remote Hosted Neon MCP Server (OAuth)
 
 <Admonition type="note">
 By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication).
 </Admonition>
-
-#### Quick Install (Recommended)
-
-Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
-
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
-
-#### Manual Setup
 
 This method uses Neon's managed server and OAuth authentication.
 

@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-15T20:38:04.163Z'
+updatedOn: '2025-12-18T12:00:58.017Z'
 layout: wide
 ---
 
@@ -255,12 +255,16 @@ export default function RootLayout({
 
 Import the Neon Auth UI styles in your `app/globals.css` file. Add this line at the top of the file:
 
+<Admonition type="tip" title="Not using Tailwind?">
+See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
+</Admonition>
+
   </LeftContent>
   <RightCode label="app/globals.css">
 
 ```css
 @import "tailwindcss";
-@import "@neondatabase/neon-js/ui/css"; // [!code ++]
+@import "@neondatabase/neon-js/ui/tailwind"; // [!code ++]
 
 ```
 

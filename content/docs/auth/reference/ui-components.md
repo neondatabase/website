@@ -2,7 +2,7 @@
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.739Z'
+updatedOn: '2025-12-18T12:00:58.022Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -158,11 +158,34 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 ## Styling
 
-Components use Tailwind CSS v4. Import the stylesheet:
+Choose the import method based on your project setup:
 
-```tsx
+### Without Tailwind CSS
+
+If your project doesn't use Tailwind CSS, import the pre-built CSS bundle:
+
+```typescript
+// In your root layout or app entry point
 import '@neondatabase/neon-js/ui/css';
 ```
+
+This includes all necessary styles (~47KB minified) with no additional configuration required.
+
+### With Tailwind CSS v4
+
+If your project already uses Tailwind CSS v4, import the Tailwind-ready CSS to avoid duplicate styles:
+
+```css
+/* In your main CSS file (e.g., globals.css) */
+@import 'tailwindcss';
+@import '@neondatabase/neon-js/ui/tailwind';
+```
+
+This imports only the theme variables. Your Tailwind build generates the utility classes.
+
+<Admonition type="warning">
+Never import both paths. This causes duplicate styles.
+</Admonition>
 
 For customization options, see **Styling** details within each Better Auth UI component docs page. Example: [Auth View styling](https://better-auth-ui.com/components/auth-view#styling).
 
