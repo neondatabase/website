@@ -1,3 +1,4 @@
+import LINKS from 'constants/links';
 import closeIcon from 'icons/close.svg';
 
 const baseSettings = {
@@ -16,14 +17,14 @@ const baseSettings = {
           {
             UrlMatch: {
               ruleType: 'PartialUrl',
-              partialUrl: 'https://neon.com/docs',
+              partialUrl: LINKS.docs,
             },
           },
           {
             NOT: {
               UrlMatch: {
                 ruleType: 'PartialUrl',
-                partialUrl: 'https://neon.com/docs/changelog',
+                partialUrl: LINKS.changelog,
               },
             },
           },
@@ -35,7 +36,16 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.com/postgresql',
+          partialUrl: LINKS.guides,
+        },
+      },
+      searchTabLabel: 'Guides',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: LINKS.postgresqltutorial,
         },
       },
       searchTabLabel: 'PostgreSQL Tutorial',
@@ -44,7 +54,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: 'https://neon.com/docs/changelog',
+          partialUrl: LINKS.changelog,
         },
       },
       searchTabLabel: 'Changelog',
@@ -68,19 +78,19 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath: 'https://neon.com/docs/introduction',
+  shareChatUrlBasePath: LINKS.docsHome,
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',
       icon: { builtIn: 'FaDiscord' },
       name: 'Discord',
-      url: 'https://discord.gg/92vNTzKDGp',
+      url: LINKS.discord,
     },
     {
       type: 'OPEN_LINK',
       icon: { builtIn: 'IoChatbubblesOutline' },
       name: 'Neon Support',
-      url: 'https://console.neon.com/app/projects?modal=support',
+      url: LINKS.consoleSupport,
     },
   ],
 };

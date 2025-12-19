@@ -62,7 +62,7 @@ const Item = ({
         )}
         type={slug ? undefined : 'button'}
         to={slug ? externalSlug || websiteSlug || docSlug : undefined}
-        target={externalSlug || websiteSlug ? '_blank' : '_self'}
+        target={externalSlug ? '_blank' : '_self'}
         icon={externalSlug && 'external'}
         tabIndex={isHidden ? -1 : undefined}
         onClick={handleClick}

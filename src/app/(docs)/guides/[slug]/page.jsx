@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/guides/post';
-import Container from 'components/shared/container';
-import Layout from 'components/shared/layout';
+import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { GUIDES_DIR_PATH } from 'constants/content';
+import { GUIDES_BASE_PATH } from 'constants/guides';
 import LINKS from 'constants/links';
 import { getPostBySlug } from 'utils/api-content';
 import { getAuthor, getAllGuides, getNavigationLinks } from 'utils/api-guides';
@@ -67,31 +66,33 @@ const GuidePost = async ({ params }) => {
       name: 'Neon',
     },
   };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      <Layout isHeaderSticky hasThemesSupport>
-        <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
-          <Container
-            className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-12 xl:gap-x-7 lg:block lg:gap-x-5 md:pt-10 sm:pt-8"
-            size="1344"
-          >
-            <Post
-              data={data}
-              author={author}
-              content={content}
-              navigationLinks={navigationLinks}
-              slug={slug}
-              gitHubPath={gitHubPath}
-              tableOfContents={tableOfContents}
-            />
-          </Container>
-        </div>
-      </Layout>
+      <Post
+        content={content}
+        data={data}
+        breadcrumbs={[
+          {
+            title: 'Community',
+            slug: 'community/community-intro',
+          },
+          {
+            title: 'Guides',
+            slug: 'guides',
+          },
+        ]}
+        navigationLinks={navigationLinks}
+        navigationLinksBasePath={GUIDES_BASE_PATH}
+        currentSlug={slug}
+        gitHubPath={gitHubPath}
+        tableOfContents={tableOfContents}
+        author={author}
+      />
     </>
   );
 };

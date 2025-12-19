@@ -27,9 +27,6 @@ module.exports = {
     '/radio',
     '/stackoverflow',
     '/youtube',
-
-    // Other pages
-    '/thank-you',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -52,9 +49,6 @@ module.exports = {
           '/radio$',
           '/stackoverflow$',
           '/youtube$',
-
-          // Other pages
-          '/thank-you$',
         ],
       },
     ],

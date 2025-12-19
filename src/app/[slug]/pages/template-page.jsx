@@ -45,7 +45,6 @@ const TemplatePage = ({ params }) => {
           <Post
             content={content}
             data={data}
-            breadcrumbs={[]}
             currentSlug={slug}
             gitHubPath={gitHubPath}
             tableOfContents={tableOfContents}
