@@ -427,7 +427,10 @@
                   slug: auth/guides/configure-domains
                 - title: Production checklist
                   slug: auth/production-checklist
-                - title: Plugins
+
+            - section: Plugins
+              items:
+                - title: Supported plugins
                   slug: auth/guides/plugins
                   items:
                     - title: Admin
