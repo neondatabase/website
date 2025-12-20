@@ -127,14 +127,12 @@ WHERE
 
 Output:
 
-```text
-     indexname     |                                  indexdef
--------------------+-----------------------------------------------------------------------------
- address_pkey      | CREATE UNIQUE INDEX address_pkey ON public.address USING btree (address_id)
- idx_fk_city_id    | CREATE INDEX idx_fk_city_id ON public.address USING btree (city_id)
- idx_address_phone | CREATE INDEX idx_address_phone ON public.address USING btree (phone)
-(3 rows)
-```
+| indexname          | indexdef                                                                 |
+|--------------------|--------------------------------------------------------------------------|
+| address_pkey       | CREATE UNIQUE INDEX address_pkey ON public.address USING btree (address_id) |
+| idx_fk_city_id     | CREATE INDEX idx_fk_city_id ON public.address USING btree (city_id)         |
+| idx_address_phone  | CREATE INDEX idx_address_phone ON public.address USING btree (phone)         |
+
 
 The output shows that the `idx_address_phone` has been created successfully.
 
