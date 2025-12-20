@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2025-11-28T18:21:08.470Z'
+updatedOn: '2025-12-17T22:36:32.015Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
@@ -45,6 +45,8 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
 
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
+
+<a href="/docs/guides/encore" title="Encore" description="Connect an Encore application to Neon" icon="encore"></a>
 
 <a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
 

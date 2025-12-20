@@ -4,7 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various framewo
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2025-08-02T10:33:29.254Z'
+updatedOn: '2025-12-17T22:36:32.010Z'
 ---
 
 <TechCards>
@@ -18,6 +18,8 @@ updatedOn: '2025-08-02T10:33:29.254Z'
 <a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
 
 <a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
+
+<a href="/docs/guides/encore" title="Encore" description="Connect an Encore application to Neon" icon="encore"></a>
 
 <a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
 

@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2025-12-15T16:40:04.580Z'
+updatedOn: '2025-12-19T16:12:24.962Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -869,8 +869,6 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 
 ## Recover a deleted project
 
-<EarlyAccess />
-
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
@@ -885,7 +883,7 @@ When you recover a deleted project, the following are restored:
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
-- Vercel-managed projects are automatically reconnected to Vercel
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
 
 ### What requires reconfiguration
 
@@ -894,6 +892,7 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **Data API** (including `authenticated` and `anonymous` roles)
 - **GitHub integration**
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Vercel-Managed Neon integration** (project reconnection via Storage)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
 
 ### Costs

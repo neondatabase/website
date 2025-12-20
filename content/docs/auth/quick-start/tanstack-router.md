@@ -2,7 +2,7 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-15T17:10:57.641Z'
+updatedOn: '2025-12-18T12:00:58.021Z'
 layout: wide
 ---
 
@@ -81,11 +81,15 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 
 Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
 
+<Admonition type="tip" title="Not using Tailwind?">
+See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
+</Admonition>
+
   </LeftContent>
   <RightCode label="Add to src/styles.css">
 
 ```css
-@import '@neondatabase/neon-js/ui/css';
+@import '@neondatabase/neon-js/ui/tailwind';
 ```
 
   </RightCode>
