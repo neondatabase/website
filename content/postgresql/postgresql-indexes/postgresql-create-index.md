@@ -69,12 +69,10 @@ WHERE
 
 Output:
 
-```text
- address_id |      address       | district  |    phone
-------------+--------------------+-----------+--------------
-         85 | 320 Baiyin Parkway | Mahajanga | 223664661973
-(1 row)
-```
+| address_id | address            | district  | phone        |
+|------------|--------------------|-----------|--------------|
+| 85         | 320 Baiyin Parkway | Mahajanga | 223664661973 |
+
 
 To find the row whose value in the `phone` column is `223664661973`, PostgreSQL must scan the entire `address` table.
 
