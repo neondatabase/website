@@ -2,6 +2,9 @@ const CONTENT_DIR_PATH = 'content';
 const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs`;
 const GUIDES_DIR_PATH = `${CONTENT_DIR_PATH}/guides`;
 const BRANCHING_DIR_PATH = `${CONTENT_DIR_PATH}/branching`;
+const FASTER_DIR_PATH = `${CONTENT_DIR_PATH}/faster`;
+const AUTOSCALING_REPORT_DIR_PATH = `${CONTENT_DIR_PATH}/autoscaling-report`;
+const SUBPROCESSORS_DIR_PATH = `${CONTENT_DIR_PATH}/subscribe-to-subprocessors`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;
 const POSTGRESQL_DIR_PATH = `${CONTENT_DIR_PATH}/postgresql`;
 const TEMPLATE_PAGES_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
@@ -29,6 +32,7 @@ const EXCLUDED_ROUTES = [
 const EXCLUDED_FILES = ['rss.xml'];
 
 module.exports = {
+  AUTOSCALING_REPORT_DIR_PATH,
   CONTENT_ROUTES,
   EXCLUDED_ROUTES,
   EXCLUDED_FILES,

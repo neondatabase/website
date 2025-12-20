@@ -1,6 +1,7 @@
 export default {
   aboutUs: '/about-us',
   ai: '/ai',
+  'autoscaling-report': '/autoscaling-report',
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
