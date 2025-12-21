@@ -76,7 +76,7 @@ We need to mount the `authApiHandler` handler to the auth API route. All Neon Au
   <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next';
+import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
 
 export const { GET, POST } = authApiHandler();
 ```
@@ -93,7 +93,7 @@ The `neonAuthMiddleware()` ensures that user is authenticated before the request
   <RightCode label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next";
+import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next/server";
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
