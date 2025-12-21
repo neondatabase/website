@@ -24,6 +24,7 @@ The following Better Auth plugins are currently supported in Neon Auth:
 | [Email OTP](/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                                 |
 | [Admin](/docs/auth/guides/plugins/admin)               | ✅ Supported                                                 |
 | [Organization](/docs/auth/guides/plugins/organization) | ⚠️ Partial (invitation emails, JWT token claims in progress) |
+| [JWT](/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                                 |
 
 For the latest status (including what’s coming next), see the [Neon Auth roadmap](/docs/auth/roadmap).
 
