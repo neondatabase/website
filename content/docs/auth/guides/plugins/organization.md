@@ -5,12 +5,14 @@ enableTableOfContents: true
 updatedOn: '2025-12-19T00:00:00.000Z'
 ---
 
+<FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
 Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Organization plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Organization plugin.
 
 The Organization plugin allows you to build multi-tenant applications where users can create workspaces, invite other members, and manage permissions using roles.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for customizing invitation emails and JWT token claims is currently in progress.
+The Organization plugin is currently in **Beta**. Support for invitation emails and JWT token claims is currently in progress.
 </Admonition>
 
 ## Prerequisites
@@ -207,11 +209,15 @@ const { data, error } = await authClient.organization.delete({
 
 ## Invitations
 
-Manage invitations to join the organization.
+Manage invitations to join an organization.
+
+<Admonition type="note" title="Invitation Emails">
+Invitation emails are not sent during the Beta phase. They will be supported in a future release. In the meantime, users can accept invitations using the [invitation ID](/docs/auth/guides/plugins/organization#accept-invitation) or by viewing them in their [invitation list](/docs/auth/guides/plugins/organization#list-user-invitations).
+</Admonition>
 
 ### Invite member
 
-Sends an invitation email to a user.
+Sends an invitation to a user.
 
 <details>
 <summary>View parameters</summary>
@@ -235,7 +241,7 @@ const { data, error } = await authClient.organization.inviteMember({
 
 ### Accept invitation
 
-Accepts an invitation using the ID from the invitation email link.
+Accepts an invitation using the invitation ID.
 
 <details>
 <summary>View parameters</summary>
@@ -332,7 +338,7 @@ const { data, error } = await authClient.organization.listInvitations({
 });
 ```
 
-## List user invitations
+### List user invitations
 
 Lists all invitations received by the current user.
 
