@@ -14,10 +14,10 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 Here's a snapshot of what we're working on now:
 
-- **Enhanced connection pooling metrics**: We're expanding our observability capabilities with additional metrics for PgBouncer, available in the Neon Console and through our OpenTelemetry integration. See [Monitoring](/docs/introduction/monitoring) and [OpenTelemetry](/docs/guides/opentelemetry) for more on our observability features.
-- **Extended consumption metrics**: New API endpoints are coming to help you track and monitor usage across Neon's usage-based pricing plans with more granular insights.
-- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances to reduce latency after restarts.
-- **Expanded spatial capabilities**: Support for additional geospatial extensions is in development, building on our existing PostGIS foundation.
+- **Connection pooling metrics**: We're expanding our observability capabilities with additional metrics for PgBouncer, available in the Neon Console and through our OpenTelemetry integration.
+- **Enhanced consumption metrics**: More metrics are coming to help you track and monitor usage across Neon's usage-based pricing plans with more granular insights.
+- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
+- **Expanded spatial capabilities**: Support for additional geospatial extensions is in development.
 - **Postgres 18 general availability**: Postgres 18 is currently in preview and moving toward general availability.
 - **Large object storage**: We're working on adding support for large object storage.
 
@@ -76,10 +76,10 @@ And here's an overview of what we're looking at next:
 
 - **Project recovery**: Accidentally deleted a project? You can now recover it within 7 days of deletion. This feature restores your entire project infrastructure, including all branches, endpoints, compute configurations, and project settings. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **100 Free plan projects**: The Neon Free plan now includes 100 projects, giving you plenty of room to experiment, prototype, and build. [Learn more](/docs/introduction/plans).
-- **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, configuration, and JWKS are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
+- **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, and configuration are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
 - **Purely usage-based billing**: We've removed the $5 monthly minimum from our paid plans. Neon is now purely usage-based: if you use $3 one month, that's the bill you'll receive. [Learn more](/docs/introduction/plans).
 - **One-command MCP setup**: Connecting AI editors to the Neon MCP Server is now a single command: `npx neonctl@latest init`. This command authenticates via OAuth, automatically creates a Neon API key, and configures Cursor, VS Code, or Claude Code CLI to connect to Neon. [Learn more](/docs/ai/connect-mcp-clients-to-neon#cursor).
-- **Data masking with console support**: Create anonymized branches with data masking directly from the Neon Console. We've added support for the PostgreSQL Anonymizer extension (`anon`) with full console and API support. [Learn more](/docs/workflows/data-anonymization).
+- **Data masking with console support**: Create anonymized branches with data masking directly from the Neon Console. [Learn more](/docs/workflows/data-anonymization).
 - **Neon is now a Kiro Power**: Manage your Postgres databases directly from the Kiro IDE. Deploy instantly, branch for safe testing, and time-travel to restore from any past state. [Read the announcement](/blog/just-launched-neon-is-now-a-kiro-power).
 - **Custom Neon agents for GitHub Copilot**: We've built two specialized agents that bring Neon's branching workflow directly into your IDE: the Neon Migration Specialist for safe Postgres migrations and the Neon Performance Analyzer for identifying and fixing slow queries. [Learn more](/docs/ai/ai-github-copilot-agents).
 - **Data API advanced settings**: Added OpenAPI mode for automatic schema generation and server timing headers for debugging slow queries and measuring performance. [Learn more](/docs/data-api/manage).
