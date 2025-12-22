@@ -3,7 +3,7 @@ title: Postgres extension explorer
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2025-12-12T17:42:01.027Z'
+updatedOn: '2025-12-22T13:54:25.153Z'
 ---
 
 Browse supported Postgres extensions by category.
