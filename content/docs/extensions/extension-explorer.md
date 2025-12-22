@@ -298,4 +298,3 @@ Browse supported Postgres extensions by category.
 <a href="/docs/extensions/postgres_fdw" description="Access data in remote Postgres databases as local tables" icon="queries">postgres_fdw</a>
 
 </DetailIconCards>
-
