@@ -7,9 +7,6 @@ const CHANGELOG_SLUG_REGEX = /\d{4}-\d{2}-\d{2}/;
 
 const HOME_MENU_ITEM = { title: 'Home', slug: 'introduction' };
 
-// List of pages that use SDK table of contents instead of regular navigation
-const SDK_REFERENCE_PAGES = ['reference/javascript-sdk'];
-
 module.exports = {
   DOCS_BASE_PATH,
   DOCS_HOME_SLUG,
@@ -18,5 +15,4 @@ module.exports = {
   CHANGELOG_BASE_PATH,
   CHANGELOG_SLUG_REGEX,
   HOME_MENU_ITEM,
-  SDK_REFERENCE_PAGES,
 };
