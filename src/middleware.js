@@ -23,57 +23,44 @@ export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
 
-    // Check if this route has markdown content available
-    const markdownPath = getMarkdownPath(pathname);
+    if (isAIAgentRequest(req)) {
+      const markdownPath = getMarkdownPath(pathname);
 
-    // Temporary logging for debugging AI agent detection
-    if (markdownPath) {
-      const userAgent = req.headers.get('user-agent') || '';
-      const accept = req.headers.get('accept') || '';
+      if (markdownPath) {
+        try {
+          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
 
-      console.log('[AI Agent Debug]', {
-        pathname,
-        markdownPath,
-        userAgent: userAgent.substring(0, 200), // Limit length
-        accept: accept.substring(0, 200),
-        isAIAgent: isAIAgentRequest(req),
-      });
-    }
+          const response = await fetch(markdownUrl);
 
-    if (isAIAgentRequest(req) && markdownPath) {
-      try {
-        const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+          if (!response.ok) {
+            // Only log unexpected errors (500, network issues, etc.)
+            if (response.status !== 404) {
+              console.error('[AI Agent] Failed to fetch markdown', {
+                pathname,
+                markdownPath,
+                status: response.status,
+              });
+            }
 
-        const response = await fetch(markdownUrl);
-
-        if (!response.ok) {
-          // Only log unexpected errors (500, network issues, etc.)
-          if (response.status !== 404) {
-            console.error('[AI Agent] Failed to fetch markdown', {
-              pathname,
-              markdownPath,
-              status: response.status,
-            });
+            return NextResponse.next(); // Serve HTML page instead
           }
 
-          return NextResponse.next(); // Serve HTML page instead
+          const markdown = await response.text();
+
+          // Return markdown content directly with appropriate headers
+          return new NextResponse(markdown, {
+            status: 200,
+            headers: {
+              'Content-Type': 'text/plain; charset=utf-8',
+              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+              'X-Content-Source': 'markdown',
+              'X-Robots-Tag': 'noindex',
+            },
+          });
+        } catch (error) {
+          console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
+          return NextResponse.next();
         }
-
-        const markdown = await response.text();
-
-        // Return markdown content directly with appropriate headers
-        return new NextResponse(markdown, {
-          status: 200,
-          headers: {
-            'Content-Type': 'text/plain; charset=utf-8',
-            'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-            'X-Content-Source': 'markdown',
-            'X-Robots-Tag': 'noindex',
-          },
-        });
-      } catch (error) {
-        console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
-        return NextResponse.next();
       }
     }
 

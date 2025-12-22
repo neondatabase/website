@@ -24,6 +24,8 @@ describe('isAIAgentRequest', () => {
       'GitHub-Copilot',
       'ai-agent',
       'llm-agent',
+      'axios',
+      'got',
     ];
 
     aiAgentPatterns.forEach((pattern) => {
@@ -48,6 +50,16 @@ describe('isAIAgentRequest', () => {
   });
 
   describe('Accept header detection', () => {
+    it('should detect AI agent when Accept includes text/markdown', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect AI agent when Accept includes text/markdown with text/html', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
     it('should detect AI agent when Accept is text/plain without text/html', () => {
       const req = createMockRequest('Mozilla/5.0', 'text/plain');
       expect(isAIAgentRequest(req)).toBe(true);
@@ -63,7 +75,7 @@ describe('isAIAgentRequest', () => {
       expect(isAIAgentRequest(req)).toBe(true);
     });
 
-    it('should NOT detect AI agent when Accept includes text/html', () => {
+    it('should NOT detect AI agent when Accept includes text/html without markdown', () => {
       const req = createMockRequest('Mozilla/5.0', 'text/html,application/json');
       expect(isAIAgentRequest(req)).toBe(false);
     });
@@ -87,6 +99,23 @@ describe('isAIAgentRequest', () => {
 
     it('should detect AI agent with AI User-Agent even with HTML Accept', () => {
       const req = createMockRequest('Claude/1.0', 'text/html');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+  });
+
+  describe('Real-world AI tools detection', () => {
+    it('should detect Claude Code with axios User-Agent and text/markdown Accept', () => {
+      const req = createMockRequest('axios/1.8.4', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect Cursor with got User-Agent', () => {
+      const req = createMockRequest('got (https://github.com/sindresorhus/got)', '*/*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect any tool requesting text/markdown even with regular User-Agent', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown, */*');
       expect(isAIAgentRequest(req)).toBe(true);
     });
   });

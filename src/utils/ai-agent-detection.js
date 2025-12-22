@@ -7,7 +7,8 @@ export function isAIAgentRequest(request) {
   const userAgent = request.headers.get('user-agent') || '';
   const accept = request.headers.get('accept') || '';
 
-  // Primary detection: Accept header explicitly requests non-HTML formats
+  // Primary detection: Accept header explicitly requests markdown or non-HTML formats
+  const requestsMarkdown = accept.includes('text/markdown');
   const hasHtml = accept.includes('text/html');
   const prefersNonHtml =
     !hasHtml &&
@@ -15,7 +16,7 @@ export function isAIAgentRequest(request) {
       accept.includes('text/plain') ||
       accept.includes('application/xml'));
 
-  // Secondary detection: User-Agent patterns for known AI agents
+  // Secondary detection: User-Agent patterns for known AI agents and their HTTP clients
   const aiAgentPatterns = [
     'chatgpt',
     'openai',
@@ -28,13 +29,15 @@ export function isAIAgentRequest(request) {
     'copilot',
     'ai-agent',
     'llm-agent',
+    'axios', // Used by Claude Code
+    'got', // Used by Cursor
   ];
 
   const hasAIAgentUserAgent = aiAgentPatterns.some((pattern) =>
     userAgent.toLowerCase().includes(pattern)
   );
 
-  return prefersNonHtml || hasAIAgentUserAgent;
+  return requestsMarkdown || prefersNonHtml || hasAIAgentUserAgent;
 }
 
 // Convert URL path to markdown file path
