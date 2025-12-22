@@ -2,10 +2,8 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.740Z'
+updatedOn: '2025-12-12T19:35:53.906Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
 

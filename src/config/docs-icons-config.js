@@ -141,6 +141,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/elixir.svg',
     darkIconPath: '/images/technology-logos/elixir-dark.svg',
   },
+  encore: {
+    name: 'encore',
+    lightIconPath: '/images/technology-logos/encore.svg',
+    darkIconPath: null,
+  },
   entity: {
     name: 'entity',
     lightIconPath: '/images/technology-logos/entity.svg',

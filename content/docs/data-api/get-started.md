@@ -2,11 +2,8 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.741Z'
-tag: beta
+updatedOn: '2025-12-12T19:35:53.907Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
 

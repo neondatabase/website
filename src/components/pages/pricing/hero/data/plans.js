@@ -11,7 +11,7 @@ export default [
     features: [
       {
         icon: 'projects',
-        title: '80 projects',
+        title: '100 projects',
         info: '<p>A project is a top-level container<br/> for your database environment.</p>',
         moreLink: { text: 'Read more', href: '#what-is-a-project' },
       },

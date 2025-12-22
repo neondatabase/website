@@ -2,7 +2,7 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-07T00:00:00.000Z'
+updatedOn: '2025-12-18T12:00:58.021Z'
 layout: wide
 ---
 
@@ -81,11 +81,15 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 
 Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
 
+<Admonition type="tip" title="Not using Tailwind?">
+See [UI Component Styles](/docs/auth/reference/ui-components#styling) for alternative setup options.
+</Admonition>
+
   </LeftContent>
   <RightCode label="Add to src/styles.css">
 
 ```css
-@import '@neondatabase/neon-js/ui/css';
+@import '@neondatabase/neon-js/ui/tailwind';
 ```
 
   </RightCode>
@@ -101,8 +105,9 @@ Create a `src/auth.ts` file to initialize the auth client:
 
 ```typescript
 import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
 
-export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, { adapter: BetterAuthReactAdapter() });
 ```
 
   </RightCode>
@@ -239,7 +244,7 @@ function Account() {
 <TwoColumnStep title="Protect your routes">
   <LeftContent>
 
-You can protect your routes using the `SignedIn` and `RedirectToSignIn` components.
+You can protect your routes using the `SignedIn` and `RedirectToSignIn` components. Access the user's session and profile data using the `useSession` hook.
 
 Update `src/routes/index.tsx` to protect the home page:
 
@@ -249,12 +254,15 @@ Update `src/routes/index.tsx` to protect the home page:
 ```tsx
 import { createFileRoute } from '@tanstack/react-router';
 import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
+import { authClient } from '@/auth';
 
 export const Route = createFileRoute('/')({
   component: Home,
 });
 
 function Home() {
+  const { data } = authClient.useSession();
+
   return (
     <>
       <SignedIn>
@@ -272,6 +280,14 @@ function Home() {
             <h1>Welcome!</h1>
             <p>You're successfully authenticated.</p>
             <UserButton />
+            <p className="font-medium text-gray-700 dark:text-gray-200 mt-4">
+              Session and User Data:
+            </p>
+            <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap break-words w-full max-w-full sm:max-w-2xl mx-auto text-left">
+              <code>
+                {JSON.stringify({ session: data?.session, user: data?.user }, null, 2)}
+              </code>
+            </pre>
           </div>
         </div>
       </SignedIn>

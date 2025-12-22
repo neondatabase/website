@@ -4,7 +4,7 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-12-03T13:07:33.042Z'
+updatedOn: '2025-12-17T14:37:40.662Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -91,7 +91,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
   You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
 
-  ![max_connections calculator](/docs/reference/max_connection_calculator.png)
+  ![max_connections calculator](/docs/reference/edit_compute_endpoint.png)
 
   _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
 

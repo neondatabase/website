@@ -2,7 +2,7 @@
 title: Neon CLI commands — projects
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-07-03T12:36:49.570Z'
+updatedOn: '2025-12-15T16:40:04.582Z'
 ---
 
 ## Before you begin
@@ -22,13 +22,14 @@ The `projects` command allows you to list, create, update, delete, and retrieve 
 neon projects <subcommand> [options]
 ```
 
-| Subcommand        | Description      |
-| ----------------- | ---------------- |
-| [list](#list)     | List projects    |
-| [create](#create) | Create a project |
-| [update](#update) | Update a project |
-| [delete](#delete) | Delete a project |
-| [get](#get)       | Get a project    |
+| Subcommand          | Description       |
+| ------------------- | ----------------- |
+| [list](#list)       | List projects     |
+| [create](#create)   | Create a project  |
+| [update](#update)   | Update a project  |
+| [delete](#delete)   | Delete a project  |
+| [recover](#recover) | Recover a project |
+| [get](#get)         | Get a project     |
 
 ### list
 
@@ -44,10 +45,11 @@ neon projects list [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `projects` subcommand supports this option:
 
-| Option           | Description                                                                                   | Type   | Required |
-| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :------: |
-| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |          |
-| `--org-id`       | List all projects belonging to the specified organization.                                    | string |          |
+| Option               | Description                                                                                   | Type    | Required |
+| -------------------- | --------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`     | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string  |          |
+| `--org-id`           | List all projects belonging to the specified organization.                                    | string  |          |
+| `--recoverable-only` | List only projects that can be recovered (deleted within the deletion recovery period).       | boolean |          |
 
 #### Examples
 
@@ -87,6 +89,18 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   ├───────────────────────────┼───────────────────────────┼────────────────────┼──────────────────────┤
   │ crystal-stream-23456789   │ staging-web-app           │ aws-us-east-2      │ 2024-05-17T13:47:35Z │
   └───────────────────────────┴───────────────────────────┴────────────────────┴──────────────────────┘
+  ```
+
+- List projects that can be recovered (deleted within the last 7 days).
+
+  ```bash
+  neon projects list --recoverable-only
+  Projects
+  ┌─────────────────────┬───────────┬───────────────┬──────────────────────┬──────────────────────┬──────────────────────┐
+  │ Id                  │ Name      │ Region Id     │ Created At           │ Deleted At           │ Recoverable Until    │
+  ├─────────────────────┼───────────┼───────────────┼──────────────────────┼──────────────────────┼──────────────────────┤
+  │ crimson-voice-12345 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │ 2024-04-16T14:22:15Z │ 2024-04-23T14:22:15Z │
+  └─────────────────────┴───────────┴───────────────┴──────────────────────┴──────────────────────┴──────────────────────┘
   ```
 
 ### create
@@ -297,6 +311,37 @@ neon projects delete muddy-wood-859533
 ```
 
 Information about the deleted project is displayed. You can verify that the project was deleted by running `neon projects list`.
+
+### recover
+
+<EarlyAccess />
+
+This subcommand allows you to recover a deleted project within the deletion recovery period.
+
+#### Usage
+
+```bash
+neon projects recover <id> [options]
+```
+
+The `id` is the project ID, which you can obtain by listing recoverable projects with `neon projects list --recoverable-only`.
+
+#### Options
+
+Only [global options](/docs/reference/neon-cli#global-options) apply.
+
+#### Example
+
+```bash
+neon projects recover crimson-voice-12345678
+┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name      │ Region Id     │ Created At           │
+├────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+For details on what's recovered and what requires reconfiguration after recovery, see [Recover a deleted project](/docs/manage/projects#recover-a-deleted-project).
 
 ### get
 

@@ -2,12 +2,16 @@
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
 enableTableOfContents: true
-updatedOn: '2025-11-23T00:00:00.000Z'
+updatedOn: '2025-12-16T22:54:52.754Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
 One of Neon Auth's unique features is native support for database branching. When you create a database branch, your authentication data branches with it, giving each branch its own isolated authentication environment.
+
+<Admonition type="info">
+Neon Auth branching is also supported via API. See the [Neon Auth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+</Admonition>
 
 ## How it works
 

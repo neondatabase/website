@@ -3,7 +3,7 @@ title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-26T15:57:17.416Z'
+updatedOn: '2025-12-17T14:37:40.656Z'
 ---
 
 Neon's _Scale to zero_ feature is designed to minimize costs by automatically scaling a compute resource down to zero after a period of inactivity. By default, Neon scales a compute to zero after 5 minutes of inactivity. A characteristic of this feature is the concept of a "cold start". During this process, a compute transitions from an idle state to an active state to process requests. Currently, activating a Neon compute from an idle state typically takes a few hundred milliseconds not counting other factors that can add to latencies such as the physical distance between your application and database or startup times of other services that participate in your connection process.
@@ -16,7 +16,7 @@ Services you integrate with Neon may also have startup times, which can add to c
 
 You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
 
-![Compute status](/docs/connect/compute_endpoint_state.png)
+![Compute status](/docs/connect/compute_state.png)
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
@@ -64,8 +64,6 @@ curl --request PATCH \
 ```
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
-
-![Connection warmup scale to zero and autoscaling configuration](/docs/connect/cold_start_compute_config.png)
 
 For autoscaling configuration instructions, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
