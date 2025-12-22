@@ -45,6 +45,7 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | [Admin](/docs/auth/guides/plugins/admin)                                                                                                          | ✅ Supported                                                 |
 | [Organization](/docs/auth/guides/plugins/organization)                                                                                            | ⚠️ Partial (invitation emails, JWT token claims in progress) |
 | [JWT](/docs/auth/guides/plugins/jwt)                                                                                                              | ✅ Supported                                                 |
+| [Open API](/docs/auth/guides/plugins/openapi)                                                                                                     | ✅ Supported                                                 |
 
 ### On the roadmap
 

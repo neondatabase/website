@@ -337,7 +337,7 @@ You can access the user session and data on the server using the `neonAuth()` he
 Create a new page at `app/server-rendered-page/page.tsx` and add the following code:
 
 ```tsx
-import { neonAuth } from "@neondatabase/neon-js/auth/next";
+import { neonAuth } from "@neondatabase/neon-js/auth/next/server";
 
 export default async function ServerRenderedPage() {
     const { session, user } = await neonAuth();
@@ -347,7 +347,7 @@ export default async function ServerRenderedPage() {
             <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
 
             <p className="text-gray-400">
-                Authenticated:{" "}
+                Authenticated:&nbsp;
                 <span className={session ? "text-green-500" : "text-red-500"}>
                     {session ? "Yes" : "No"}
                 </span>
@@ -383,7 +383,7 @@ export default function ClientRenderedPage() {
             <h1 className="text-2xl font-semibold">Client Rendered Page</h1>
 
             <p className="text-gray-400">
-                Authenticated:{" "}
+                Authenticated:&nbsp;
                 <span className={data?.session ? "text-green-500" : "text-red-500"}>
                     {data?.session ? "Yes" : "No"}
                 </span>
