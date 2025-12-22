@@ -17,10 +17,10 @@ const Hero = () => (
       className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
       size="1600"
     >
-      <HeadingLabel>Ship faster with Postgres</HeadingLabel>
+      <HeadingLabel>NEON: A DATABRICKS COMPANY</HeadingLabel>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Faster application development on trusted serverless Postgres
+        Faster application development on serverless Postgres
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
