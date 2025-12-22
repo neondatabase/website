@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2025-12-09T15:31:41.491Z'
+updatedOn: '2025-12-22T00:00:00.000Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.
@@ -14,10 +14,12 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 Here's a snapshot of what we're working on now:
 
-- **Postgres for AI agents**: [Replit partnered with Neon to back Replit Agents](/blog/looking-at-how-replit-agent-handles-databases), creating thousands of Postgres databases. We're continuing to build out our AI platform support capabilities. If you're building an AI agent platform and would like to integrate agent-ready Postgres, [connect with us](/agent-design-partner) — and checkout our new [Neon for AI Agents](/use-cases/ai-agents) pricing plan.
-- **Monitoring for billing**: Stay tuned for monitoring enhancements for our new usage-based pricing plans.
+- **Enhanced connection pooling metrics**: We're expanding our observability capabilities with additional metrics for PgBouncer, available in the Neon Console and through our OpenTelemetry integration. See [Monitoring](/docs/introduction/monitoring) and [OpenTelemetry](/docs/guides/opentelemetry) for more on our observability features.
+- **Extended consumption metrics**: New API endpoints are coming to help you track and monitor usage across Neon's usage-based pricing plans with more granular insights.
+- **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances to reduce latency after restarts.
+- **Expanded spatial capabilities**: Support for additional geospatial extensions is in development, building on our existing PostGIS foundation.
+- **Postgres 18 general availability**: Postgres 18 is currently in preview and moving toward general availability.
 - **Large object storage**: We're working on adding support for large object storage.
-- **Console support for data anonymization**: Neon supports the Postgres `anon` extension for [data anonymization](/docs/workflows/data-anonymization). We're bringing that support to the console.
 
 Other features you would like to see? [Let us know](#share-your-thoughts).
 
@@ -72,6 +74,17 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Project recovery**: Accidentally deleted a project? You can now recover it within 7 days of deletion. This feature restores your entire project infrastructure, including all branches, endpoints, compute configurations, and project settings. [Learn more](/docs/manage/projects#recover-a-deleted-project).
+- **100 Free plan projects**: The Neon Free plan now includes 100 projects, giving you plenty of room to experiment, prototype, and build. [Learn more](/docs/introduction/plans).
+- **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, configuration, and JWKS are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
+- **Purely usage-based billing**: We've removed the $5 monthly minimum from our paid plans. Neon is now purely usage-based: if you use $3 one month, that's the bill you'll receive. [Learn more](/docs/introduction/plans).
+- **One-command MCP setup**: Connecting AI editors to the Neon MCP Server is now a single command: `npx neonctl@latest init`. This command authenticates via OAuth, automatically creates a Neon API key, and configures Cursor, VS Code, or Claude Code CLI to connect to Neon. [Learn more](/docs/ai/connect-mcp-clients-to-neon#cursor).
+- **Data masking with console support**: Create anonymized branches with data masking directly from the Neon Console. We've added support for the PostgreSQL Anonymizer extension (`anon`) with full console and API support. [Learn more](/docs/workflows/data-anonymization).
+- **Neon is now a Kiro Power**: Manage your Postgres databases directly from the Kiro IDE. Deploy instantly, branch for safe testing, and time-travel to restore from any past state. [Read the announcement](/blog/just-launched-neon-is-now-a-kiro-power).
+- **Custom Neon agents for GitHub Copilot**: We've built two specialized agents that bring Neon's branching workflow directly into your IDE: the Neon Migration Specialist for safe Postgres migrations and the Neon Performance Analyzer for identifying and fixing slow queries. [Learn more](/docs/ai/ai-github-copilot-agents).
+- **Data API advanced settings**: Added OpenAPI mode for automatic schema generation and server timing headers for debugging slow queries and measuring performance. [Learn more](/docs/data-api/manage).
+- **Platform integration paths**: Whether you're building an agent platform, a developer tool, or a SaaS that offers databases to users, there's a [platform integration path](/docs/guides/platform-integration-overview) designed for your use case, including AI Agents integration, Claimable database flow, Embedded Postgres, and OAuth integration.
+- **HIPAA support for Postgres 18**: HIPAA compliance is now supported for Postgres 18 projects in AWS regions. [Learn more](/docs/security/hipaa).
 - **Backup scheduling**: Automate snapshots with daily, weekly, or monthly backup schedules with configurable retention periods. Available on paid plans (excluding the Agent plan). [Learn more](/docs/guides/backup-restore).
 - **Postgres 18 support (Preview)**: Postgres 18 is now available in preview. Create a new project and select Postgres 18 as your version. [Read the announcement](/blog/postgres-18).
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
@@ -84,7 +97,6 @@ And here's an overview of what we're looking at next:
 - **Claimable Databases & Instagres**: A new way for SaaS vendors to partner with Neon to offer instant Postgres databases. Let your users create Postgres databases — no registration required. [Learn more about Instagres](/docs/reference/instagres), and see our [Claimable database integration guide](/docs/workflows/claimable-database-integration).
 - **Neon on Azure GA**: We've announced our general availability release on Azure with deeper Azure integration. [Read the announcement](/blog/azure-native-integration-ga).
 - **Import Data Assistant**: The [Import Data Assistant](/docs/import/import-data-assistant) makes data import easier and faster.
-- **Data anonymization**: We've added support for the PostgreSQL Anonymizer extension (`anon`). [Learn more](/docs/guides/neon-auth).
 - **Neon serverless driver GA**: Our JavaScript/TypeScript serverless driver has reached version 1.0.0, bringing stronger SQL injection safeguards and better performance for serverless environments.
 - **Neon Snapshots (Beta)**: Create and manage point-in-time snapshots of your database with our new unified Backup & Restore experience.
 - **Inbound logical replication GA**: Neon now fully supports Postgres logical replication for inbound data (replicating data to Neon).
