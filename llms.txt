@@ -186,8 +186,6 @@
 - [Neon Guides - neon-twin-full-pg-dump-restore](https://neon.com/llms/guides-neon-twin-full-pg-dump-restore.txt): Create a full Twin of your production database
 - [Neon Guides - neon-twin-intro](https://neon.com/llms/guides-neon-twin-intro.txt): Learn how to Twin your production database with Neon
 - [Neon Guides - neon-twin-partial-pg-dump-restore](https://neon.com/llms/guides-neon-twin-partial-pg-dump-restore.txt): Create a partial Twin of your production database
-- [Neon Guides - neosync-anonymize](https://neon.com/llms/guides-neosync-anonymize.txt): Learn how to anonymize sensitive data in Neon with Neosync
-- [Neon Guides - neosync-generate](https://neon.com/llms/guides-neosync-generate.txt): Learn how to generate synthetic data in your Neon database with Neosync
 - [Neon Guides - nestjs](https://neon.com/llms/guides-nestjs.txt): Set up a Neon project in seconds and connect from a NestJS application
 - [Neon Guides - netlify-functions](https://neon.com/llms/guides-netlify-functions.txt): Connect a Neon Postgres database to your Netlify Functions application
 - [Neon Guides - nextjs](https://neon.com/llms/guides-nextjs.txt): Set up a Neon project in seconds and connect from a Next.js application
