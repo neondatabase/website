@@ -38,7 +38,7 @@ export function isAIAgentRequest(request) {
 }
 
 // Convert URL path to markdown file path
-// Example: /docs/introduction -> docs/introduction.md (maps to public/md/)
+// Example: /docs/introduction -> /md/docs/introduction.md (maps to public/md/)
 export function getMarkdownPath(pathname) {
   const path = pathname.slice(1).replace(/\/$/, ''); // Remove leading and trailing slashes
 
@@ -56,8 +56,14 @@ export function getMarkdownPath(pathname) {
 
   if (!matchedRoute) return null;
 
+  // Get the content directory path from CONTENT_ROUTES and convert to public path
+  // Example: content/docs -> /md/docs
+  const contentPath = CONTENT_ROUTES[matchedRoute];
+  const publicPath = contentPath.replace('content/', '/md/');
+
   // Extract slug after the matched route
   const slug = path === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
 
-  return `/md/${matchedRoute}/${slug}.md`;
+  // Build the full public path: /md/{directory}/{slug}.md
+  return slug ? `${publicPath}/${slug}.md` : `${publicPath}.md`;
 }

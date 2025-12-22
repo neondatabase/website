@@ -113,37 +113,37 @@ describe('getMarkdownPath', () => {
   describe('Valid content routes', () => {
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
-      expect(result).toBe('content/docs/introduction.md');
+      expect(result).toBe('/md/docs/introduction.md');
     });
 
     it('should convert /postgresql/tutorial to markdown path', () => {
       const result = getMarkdownPath('/postgresql/tutorial');
-      expect(result).toBe('content/postgresql/tutorial.md');
+      expect(result).toBe('/md/postgresql/tutorial.md');
     });
 
     it('should convert /guides/neon-sst to markdown path', () => {
       const result = getMarkdownPath('/guides/neon-sst');
-      expect(result).toBe('content/guides/neon-sst.md');
+      expect(result).toBe('/md/guides/neon-sst.md');
     });
 
     it('should convert /branching/introduction to markdown path', () => {
       const result = getMarkdownPath('/branching/introduction');
-      expect(result).toBe('content/branching/introduction.md');
+      expect(result).toBe('/md/branching/introduction.md');
     });
 
     it('should convert /programs/agents to markdown path', () => {
       const result = getMarkdownPath('/programs/agents');
-      expect(result).toBe('content/pages/programs/agents.md');
+      expect(result).toBe('/md/pages/programs/agents.md');
     });
 
     it('should convert /use-cases/ai-agents to markdown path', () => {
       const result = getMarkdownPath('/use-cases/ai-agents');
-      expect(result).toBe('content/pages/use-cases/ai-agents.md');
+      expect(result).toBe('/md/pages/use-cases/ai-agents.md');
     });
 
     it('should handle nested docs paths', () => {
       const result = getMarkdownPath('/docs/guides/logical-replication');
-      expect(result).toBe('content/docs/guides/logical-replication.md');
+      expect(result).toBe('/md/docs/guides/logical-replication.md');
     });
   });
 
@@ -206,12 +206,12 @@ describe('getMarkdownPath', () => {
   describe('Edge cases', () => {
     it('should handle paths with trailing slashes', () => {
       const result = getMarkdownPath('/docs/introduction/');
-      expect(result).toBe('content/docs/introduction/.md');
+      expect(result).toBe('/md/docs/introduction.md');
     });
 
     it('should handle paths with special characters', () => {
       const result = getMarkdownPath('/docs/api-reference');
-      expect(result).toBe('content/docs/api-reference.md');
+      expect(result).toBe('/md/docs/api-reference.md');
     });
   });
 });

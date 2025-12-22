@@ -39,7 +39,7 @@ export async function middleware(req) {
             if (response.status !== 404) {
               console.error('[AI Agent] Failed to fetch markdown', {
                 pathname,
-                localPath: markdownPath,
+                markdownPath,
                 status: response.status,
               });
             }
