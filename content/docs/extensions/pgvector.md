@@ -39,7 +39,7 @@ For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can i
 CREATE EXTENSION vector VERSION '0.7.4';
 ```
 
-To check the latest supported `pgvector` version on Neon, visit our [Postgres extension page](/docs/extensions/extensions-intro). You can install one version back from that version.
+To check the latest supported `pgvector` version on Neon, visit our [Postgres extensions page](/docs/extensions/pg-extensions). You can install one version back from that version.
 
 For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential — for example, version 0.7.4 was followed by 0.8.0.
 
