@@ -57,6 +57,7 @@ const AutoscalingChart = ({
     costMultiplier: 0,
     monthlySavings: 0,
     cheaper: 'Autoscaling',
+    lessCompute: 'Autoscaling',
   });
 
   // Get dataset
@@ -108,6 +109,7 @@ const AutoscalingChart = ({
 
       // Calculate savings
       const cheaper = totalAutoscalingCost < totalFixedCost ? 'Autoscaling' : 'Provisioned';
+      const lessCompute = autoscalingCUHours < fixedCUHours ? 'Autoscaling' : 'Provisioned';
 
       // Calculate multipliers (how many times more the expensive option uses)
       const cuMultiplier =
@@ -118,19 +120,24 @@ const AutoscalingChart = ({
 
       const costDifference = Math.abs(totalAutoscalingCost - totalFixedCost);
 
-      // Monthly savings
+      // Extrapolate to monthly values
       const monthlyHours = 30 * 24;
+      const monthlyAutoscalingCUHours = (autoscalingCUHours / durationHours) * monthlyHours;
+      const monthlyAutoscalingCost = (totalAutoscalingCost / durationHours) * monthlyHours;
+      const monthlyFixedCUHours = (fixedCUHours / durationHours) * monthlyHours;
+      const monthlyFixedCost = (totalFixedCost / durationHours) * monthlyHours;
       const monthlySavings = (costDifference / durationHours) * monthlyHours;
 
       setStats({
-        autoscalingCUHours: autoscalingCUHours.toFixed(0),
-        autoscalingCostTotal: totalAutoscalingCost.toFixed(2),
-        fixedCUHours: fixedCUHours.toFixed(0),
-        fixedCostTotal: totalFixedCost.toFixed(2),
+        autoscalingCUHours: monthlyAutoscalingCUHours.toFixed(0),
+        autoscalingCostTotal: monthlyAutoscalingCost.toFixed(2),
+        fixedCUHours: monthlyFixedCUHours.toFixed(0),
+        fixedCostTotal: monthlyFixedCost.toFixed(2),
         cuMultiplier: cuMultiplier.toFixed(1),
         costMultiplier: costMultiplier.toFixed(1),
         monthlySavings: monthlySavings.toFixed(2),
         cheaper,
+        lessCompute,
       });
     },
     [autoscalingCost, fixedCost, overprovisionPercent, dataset]
@@ -160,7 +167,7 @@ const AutoscalingChart = ({
           { x: lastDate, y: fixedCU },
         ],
         borderColor: '#e8912d',
-        backgroundColor: 'rgba(232, 145, 45, 0.1)',
+        backgroundColor: 'rgba(232, 145, 45, 0.2)',
         borderWidth: 1.5,
         fill: true,
         pointRadius: 0,
@@ -174,7 +181,7 @@ const AutoscalingChart = ({
       label: 'Autoscaling',
       data,
       borderColor: '#73bf69',
-      backgroundColor: 'rgba(36, 45, 43, 0.9)',
+      backgroundColor: '#73bf69',
       borderWidth: 1.5,
       fill: true,
       pointRadius: 0,
@@ -304,7 +311,7 @@ const AutoscalingChart = ({
     >
       {/* Header with controls */}
       <div className="flex items-center justify-between">
-        <h1 className={clsx('font-medium text-white', width === 'window' ? 'text-2xl' : 'text-xl')}>
+        <h1 className={clsx('font-medium text-white', width === 'window' ? 'text-xl' : 'text-xl')}>
           {displayTitle}
         </h1>
         {!autoscalingOnly && (
@@ -315,8 +322,9 @@ const AutoscalingChart = ({
               onChange={handleOverprovisionChange}
             >
               <option value="0">Zero Over-Provisioning</option>
-              <option value="25">25% Over-Provisioning (recommended)</option>
-              <option value="-25">Under-provision</option>
+              <option value="25">25% Over-Provisioning (AWS recommended)</option>
+              <option value="-25">25% Under-provision</option>
+              <option value="-50">50% Under-provision</option>
             </select>
           </div>
         )}
@@ -329,82 +337,149 @@ const AutoscalingChart = ({
 
       {/* Stats */}
       {showStats && (
-        <div className="flex flex-wrap gap-5">
-          {/* Autoscaling Stats */}
-          <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#73bf69] px-5 py-4">
-            <div className="text-gray-400 mb-1.5 text-xs">Autoscaling CU-hours</div>
-            <div className="text-2xl font-medium text-white">
-              {stats.autoscalingCUHours}
-              <span className="text-gray-400 ml-1.5 text-sm">CU-hr</span>
-            </div>
-          </div>
-
-          <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#73bf69] px-5 py-4">
-            <div className="text-gray-400 mb-1.5 text-xs">Autoscaling Rate</div>
-            <div className="flex items-baseline text-2xl font-medium text-white">
-              $
-              <input
-                type="number"
-                value={autoscalingCost}
-                step="0.001"
-                min="0"
-                className="border-gray-700 w-20 border-b bg-transparent p-0 text-left text-2xl font-medium text-white focus:border-[#73bf69] focus:outline-none"
-                onChange={(e) => setAutoscalingCost(parseFloat(e.target.value))}
-              />
-              <span className="text-gray-400 ml-1.5 text-sm">per CU-hr</span>
-            </div>
-          </div>
-
-          <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#73bf69] px-5 py-4">
-            <div className="text-gray-400 mb-1.5 text-xs">Autoscaling Cost</div>
-            <div className="text-2xl font-medium text-white">${stats.autoscalingCostTotal}</div>
-          </div>
-
-          {/* Provisioned Stats */}
-          {!autoscalingOnly && (
-            <>
-              <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#e8912d] px-5 py-4">
-                <div className="text-gray-400 mb-1.5 text-xs">Provisioned CU-hours</div>
-                <div className="text-2xl font-medium text-white">
-                  {stats.fixedCUHours}
-                  <span className="text-gray-400 ml-1.5 text-sm">CU-hr</span>
+        <div className="flex flex-wrap justify-center gap-4">
+          {/* Autoscaling Stats - Combined Panel */}
+          <div className="border-gray-700 bg-gray-800 rounded border border-l-[3px] border-l-[#73bf69] bg-gray-1 px-5 py-4">
+            <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#73bf69]">
+              Autoscaling
+            </h3>
+            <div className="space-y-2">
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-gray-400 text-sm">Compute</span>
+                <div className="text-right">
+                  <span className="text-xl font-light tabular-nums text-white">
+                    {stats.autoscalingCUHours}
+                    <span className="text-gray-500 ml-2 text-xs font-normal">CU-hrs/mon</span>
+                  </span>
+                  <div className="text-gray-500 text-xs">&nbsp;</div>
                 </div>
               </div>
-
-              <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#e8912d] px-5 py-4">
-                <div className="text-gray-400 mb-1.5 text-xs">Provisioned Rate</div>
-                <div className="flex items-baseline text-2xl font-medium text-white">
-                  $
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-gray-400 text-sm">Rate</span>
+                <div className="flex items-baseline">
+                  <span className="text-xl font-light text-white">$</span>
                   <input
                     type="number"
-                    value={fixedCost}
+                    value={autoscalingCost}
                     step="0.001"
                     min="0"
-                    className="border-gray-700 w-20 border-b bg-transparent p-0 text-left text-2xl font-medium text-white focus:border-[#73bf69] focus:outline-none"
-                    onChange={(e) => setFixedCost(parseFloat(e.target.value))}
+                    className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
+                    onChange={(e) => setAutoscalingCost(parseFloat(e.target.value))}
                   />
-                  <span className="text-gray-400 ml-1.5 text-sm">per CU-hr</span>
+                  <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
+                </div>
+              </div>
+              <div className="flex items-baseline justify-between gap-4">
+                <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
+                <span className="text-2xl font-light tabular-nums text-white">
+                  ${stats.autoscalingCostTotal}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Provisioned Stats - Combined Panel */}
+          {!autoscalingOnly && (
+            <>
+              <div className="border-gray-700 bg-gray-800 rounded border border-l-[3px] border-l-[#e8912d] bg-gray-1 px-5 py-4">
+                <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#e8912d]">
+                  Provisioned Equivalent
+                </h3>
+                <div className="space-y-2">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-400 text-sm">Compute</span>
+                    <div className="text-right">
+                      <div className="text-xl font-light tabular-nums text-white">
+                        {(stats.fixedCUHours / 720).toFixed(1)} vCPU /{' '}
+                        {((stats.fixedCUHours / 720) * 4).toFixed(0)} GB
+                      </div>
+                      <div className="text-gray-500 text-xs">({stats.fixedCUHours} CU-hrs/mon)</div>
+                    </div>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-400 text-sm">Equivalent Rate</span>
+                    <div className="flex items-baseline">
+                      <span className="text-xl font-light text-white">$</span>
+                      <input
+                        type="number"
+                        value={fixedCost}
+                        step="0.001"
+                        min="0"
+                        className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
+                        onChange={(e) => setFixedCost(parseFloat(e.target.value))}
+                      />
+                      <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
+                    </div>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
+                    <span className="text-2xl font-light tabular-nums text-white">
+                      ${stats.fixedCostTotal}
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              <div className="border-gray-700 bg-gray-800 min-w-[150px] rounded border border-l-[3px] border-l-[#e8912d] px-5 py-4">
-                <div className="text-gray-400 mb-1.5 text-xs">Provisioned Cost</div>
-                <div className="text-2xl font-medium text-white">${stats.fixedCostTotal}</div>
-              </div>
-
-              {/* Savings Summary */}
-              <div className="border-gray-700 border-t-blue-500 bg-gray-800 min-w-[150px] rounded border border-t-[3px] px-5 py-4">
-                <div className="text-gray-400 mb-1.5 text-xs">Savings Summary</div>
-                <div className="flex flex-col gap-2.5">
-                  <div className="text-sm">
-                    {stats.cheaper} uses{' '}
-                    <span className="text-lg text-white">{stats.cuMultiplier}x</span> less compute
+              {/* Comparison Summary - Redesigned */}
+              <div className="border-gray-700 border-t-blue-500 bg-gray-800 rounded border border-t-[3px] bg-gray-1 px-5 py-4">
+                <div className="grid grid-cols-3 gap-4">
+                  {/* Compute Winner */}
+                  <div className="text-center">
+                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                      Compute Winner
+                    </div>
+                    <div
+                      className={clsx(
+                        'font-bold',
+                        stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
+                      )}
+                    >
+                      {stats.lessCompute}
+                    </div>
+                    <div
+                      className={clsx(
+                        'text-5xl font-bold tabular-nums',
+                        stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
+                      )}
+                    >
+                      {stats.cuMultiplier}×
+                    </div>
+                    <div className="text-gray-400 text-sm">less compute used</div>
                   </div>
-                  <div className="text-sm">
-                    {stats.cheaper} costs{' '}
-                    <span className="text-lg text-white">{stats.costMultiplier}x</span> less.
-                    Monthly savings:{' '}
-                    <span className="text-lg text-white">${stats.monthlySavings}</span>
+
+                  {/* Cost Winner */}
+                  <div className="border-gray-700 border-l border-r text-center">
+                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                      Cost Winner
+                    </div>
+                    <div
+                      className={clsx(
+                        'font-bold',
+                        stats.cheaper === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
+                      )}
+                    >
+                      {stats.cheaper}
+                    </div>
+                    <div
+                      className={`text-5xl font-bold tabular-nums ${
+                        stats.cheaper === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
+                      }`}
+                    >
+                      {stats.costMultiplier}×
+                    </div>
+                    <div className="text-gray-400 text-sm">cheaper</div>
+                  </div>
+
+                  {/* Monthly Savings */}
+                  <div className="text-center">
+                    <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
+                      Monthly Savings
+                    </div>
+                    <div>{stats.cheaper} saves</div>
+                    <div className="text-blue-400 text-5xl font-bold tabular-nums">
+                      ${Math.round(stats.monthlySavings)}
+                    </div>
+                    <div className="text-gray-400 text-sm">per month</div>
                   </div>
                 </div>
               </div>
