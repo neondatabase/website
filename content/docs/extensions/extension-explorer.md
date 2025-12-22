@@ -1,16 +1,14 @@
 ---
-title: Postgres extensions
+title: Postgres extension explorer
 enableTableOfContents: true
+redirectFrom:
+  - /docs/extensions/extensions-intro
 updatedOn: '2025-12-12T17:42:01.027Z'
 ---
 
-Explore supported Postgres extensions by category. Also see:
+Browse supported Postgres extensions by category.
 
-- [List view](/docs/extensions/pg-extensions)
-- [Install an extension](/docs/extensions/pg-extensions#install-an-extension)
-- [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version)
-
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
+[List view](/docs/extensions/pg-extensions) | [Install an extension](/docs/extensions/pg-extensions#install-an-extension) | [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version) | [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 ## AI / Machine Learning
 

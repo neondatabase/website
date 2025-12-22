@@ -12,7 +12,7 @@ Explore Postgres features with Neon's Postgres guides. Learn about data types, e
 
 <a href="/docs/data-types/introduction" description="Learn about commonly-used Postgres data types" icon="database">Data types</a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Extensions</a>
 
 <a href="/docs/functions/introduction" description="Learn about commonly-used Postgres functions" icon="code">Functions</a>
 

@@ -88,7 +88,7 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 <a href="/docs/guides/branching-intro" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
 <a href="/docs/reference/neon-cli" description="Manage Neon directly from the terminal with the Neon CLI" icon="transactions">Neon CLI Reference</a>
 
