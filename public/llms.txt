@@ -316,7 +316,7 @@
 ## Extensions
 
 - [PostGIS-related extensions](https://neon.com/llms/extensions-postgis-related-extensions.txt): Improve geospatial functionality with additional PostGIS extensions
-- [Postgres extensions](https://neon.com/llms/extensions-extensions-intro.txt): Extensions Intro
+- [Postgres extensions](https://neon.com/llms/extensions-pg-extensions.txt): Supported Postgres extensions
 - [Supported Postgres extensions](https://neon.com/llms/extensions-pg-extensions.txt): Pg Extensions
 - [The anon extension](https://neon.com/llms/extensions-postgresql-anonymizer.txt): Protecting sensitive data in Postgres databases
 - [The btree_gin extension](https://neon.com/llms/extensions-btree_gin.txt): Combine GIN and B-tree indexing capabilities for efficient multi-column queries in Postgres

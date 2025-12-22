@@ -49,7 +49,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 - [Import data](https://neon.com/docs/import/import-intro): Load your data into a Postgres database hosted by Neon
 - [AI & embeddings](https://neon.com/docs/ai/ai-intro): Build and scale transformative LLM applications with vector storage and similarity search.
 - [Branching](https://neon.com/docs/guides/branching-intro): Learn to optimize development workflows with database branching
-- [Postgres extensions](https://neon.com/docs/extensions/extensions-intro): Level up your database with our many supported Postgres extensions
+- [Postgres extensions](https://neon.com/docs/extensions/pg-extensions): Level up your database with our many supported Postgres extensions
 - [Neon CLI Reference](https://neon.com/docs/reference/neon-cli): Manage Neon directly from the terminal with the Neon CLI
 
 ## Join the community

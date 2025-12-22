@@ -61,7 +61,7 @@
 
 - [Neon Extensions - citext](https://neon.com/llms/extensions-citext.txt): Use the citext extension to handle case-insensitive data in Postgres
 - [Neon Extensions - dblink](https://neon.com/llms/extensions-dblink.txt): Connect to and query other Postgres databases from Neon using dblink
-- [Neon Extensions - extensions-intro](https://neon.com/llms/extensions-extensions-intro.txt): Guide for Postgres extensions
+- [Neon Extensions - extension-explorer](https://neon.com/llms/extensions-extension-explorer.txt): Browse Postgres extensions by category
 - [Neon Extensions - hstore](https://neon.com/llms/extensions-hstore.txt): Manage key-value pairs in Postgres using hstore
 - [Neon Extensions - ltree](https://neon.com/llms/extensions-ltree.txt): Store and query hierarchical tree-like structures in Postgres
 - [Neon Extensions - neon-utils](https://neon.com/llms/extensions-neon-utils.txt): Monitor how Neon's Autoscaling feature allocates compute resources
