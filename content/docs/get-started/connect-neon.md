@@ -276,6 +276,17 @@ Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wi
 
 Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 
+## Data API
+
+The [Neon Data API](/docs/data-api/overview) provides a REST interface to your database, enabling you to query Postgres directly from web browsers, serverless functions, and edge runtimes using standard HTTP requests. This eliminates the need for connection pooling and works in environments where traditional Postgres drivers cannot operate.
+
+**When to use the Data API:**
+
+- Building browser-based applications that need direct database access
+- Deploying to edge runtimes (Cloudflare Workers, Vercel Edge Functions)
+- Serverless applications with high concurrency that need connectionless scalability
+- Applications requiring RLS-enforced, secure database access via HTTP
+
 ## Connection notes
 
 - Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).

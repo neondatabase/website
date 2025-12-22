@@ -22,6 +22,16 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 </DetailIconCards>
 
+## App backend
+
+<DetailIconCards>
+
+<a href="/docs/auth/overview" description="Store users, sessions, and auth configuration directly in Postgres—branches with your database for development and testing" icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/data-api/overview" description="Query Postgres from directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods" icon="code">Data API</a>
+
+</DetailIconCards>
+
 ## Quickstarts
 
 <TechCards withToggler>
