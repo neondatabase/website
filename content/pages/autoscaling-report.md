@@ -6,7 +6,30 @@ updatedOn: '2025-06-17T09:00:00.000Z'
 
 Up to ten times per second, we check the CPU, Memory, and Local file cache (LFC) utilization of every database running on Neon. If resource utilization is approaching the upper limit we give the database more resources, if utilization is low we reduce resources (and charge less.) This is **compute autoscaling.**
 
-By regularly adjusting compute to suit the demands of each workload, Autoscaling saved Neon customers a total of $82 million in 2025. By scaling up quickly when a database receives an anomalous spike in load, Autoscaling has prevented 1.75 million performance degradations or outages. 
+
+By regularly adjusting compute to suit the demands of each workload, Autoscaling saved Neon customers a total of $82 million in 2025. By scaling up quickly when a database receives an anomalous spike in load, Autoscaling has prevented 1.75 million performance degradations or outages.
+
+<div className="not-prose my-12 grid gap-6 grid-cols-2">
+  <div className="p-8 rounded-lg border border-gray-new-20 bg-gray-new-10">
+    <div className="uppercase text-gray-new-60 text-sm">NEON Autoscaling in 2025</div>
+    <div className="text-5xl font-bold tracking-tight text-black-new dark:text-white sm:text-6xl">
+      $82M
+    </div>
+    <div className="mt-4 text-lg text-gray-new-40 dark:text-gray-new-60">
+      Compute costs saved.
+    </div>
+    <a className="text-sm mt-2" href="#methodology">Methodology</a>
+  </div>
+  <div className="p-8 rounded-lg border border-gray-new-20 bg-gray-new-10">
+    <div className="text-5xl font-bold tracking-tight text-black-new dark:text-white sm:text-6xl">
+      1.75M
+    </div>
+    <div className="mt-4 text-lg text-gray-new-40 dark:text-gray-new-60">
+      Performance degradations and outages prevented.
+    </div>
+    <a className="text-sm mt-2" href="#methodology">Methodology</a>
+  </div>
+</div>
 
 How do we arrive at those numbers? This report explains by first describing the three patterns of autoscaling usage on Neon, and then walking through the methodology for how we compute the equivalent cost and performance degradations running the same workloads on a provisioned platform.
 
@@ -44,7 +67,7 @@ Unless you're prepared to deal with daily outages and performance degradations, 
 <AutoscalingChart title="Fig. 1a: Predictable Fluctuation. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" width="window" autoscalingRate={0.222} />
 
 <Admonition title="How to read this report" type="info">
-You can think of the orange area as all the wasted compute. This is CPU and RAM that was allocated in the provisioned database that was never actually used.
+You can think of the orange area as all the wasted compute. This is CPU and RAM that would need to be allocated in the provisioned database but will never actually be used.
 
 ![Wasted compute](/autoscaling/wasted-compute.png)
 
@@ -112,10 +135,12 @@ For every database on Neon with autoscaling behavior categorized as burst capaci
 
 In Neon, compute can be configured to shut down entirely when there are no active connections, and turn back on in 350ms when needed. We see the capability at work in the last pattern of autoscaling, where databases mostly oscillate between their minimum configured size and zero.
 
-<AutoscalingChart title="Fig. 3: Scale to Zero workload, 1 wk" datasetKey="anomalous_spikes" autoscalingOnly={true} showStats={false} />
+<AutoscalingChart title="Fig. 3: One week of Autoscaling on a Database with Scale-to-Zero workload" datasetKey="scale_to_zero" autoscalingOnly={true} showStats={false} />
 
 This pattern shows up mostly in non-production databases: Dev and staging DB's that shut down outside work hours. But also prototypes, side-projects, early MVPs, etc... It takes a surprising amount of action to keep a database working 24/7.
 
+
+<AutoscalingChart title="Fig. 3a: Scale-to-Zero workload. Neon vs Provisioned" datasetKey="scale_to_zero" width="window" autoscalingRate={0.106} overprovision={-25} />
 
 ## Methodology
 
