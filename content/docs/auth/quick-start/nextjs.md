@@ -143,11 +143,11 @@ export const authClient = createAuthClient();
 
 The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app with `NeonAuthUIProvider`.
 
-Copy and pase the following code into your `app/layout.tsx` file.
-
 <Admonition type="important" title="Hydration Warning">
 Add `suppressHydrationWarning` to the `<html>` tag to prevent React hydration errors caused by `next-themes` client-side theme switching. This property only applies one level deep, so it won't block hydration warnings on other elements.
 </Admonition>
+
+Copy and paste the following code into your `app/layout.tsx` file.
 
 The `NeonAuthUIProvider` can be fully customized with settings you have configured in Neon Console. For example:
 
