@@ -145,6 +145,10 @@ The `NeonAuthUIProvider` component wraps your application with authentication co
 
 Copy and pase the following code into your `app/layout.tsx` file.
 
+<Admonition type="important" title="Hydration Warning">
+Add `suppressHydrationWarning` to the `<html>` tag to prevent React hydration errors caused by `next-themes` client side theme switching. This property only applies one level deep, so it won't block hydration warnings on other elements
+</Admonition>
+
 The `NeonAuthUIProvider` can be fully customized with settings you have configured in Neon Console. For example:
 
   - Add social providers like Google, Github, and Vercel on sign-in page
@@ -203,7 +207,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning> // [!code ++]
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
