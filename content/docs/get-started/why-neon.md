@@ -61,7 +61,7 @@ Independent developers want to build without friction. They don’t want to crea
 - The experience feels lightweight, fast, and developer-first, not enterprise-heavy
 
   <Admonition type="tip" title="Useful links to get started">
-    Check out our [Framework guides](https://neon.com/docs/get-started/frameworks), [templates](https://neon.com/templates), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
+    Check out our [framework guides](https://neon.com/docs/get-started/frameworks), [templates](https://neon.com/templates), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
   </Admonition>
 
 ### Startups: From dev to scale
@@ -195,4 +195,4 @@ Neon and Lakebase share the same core architectural principles, but they are opt
     See the [Lakebase docs](https://docs.databricks.com/aws/en/oltp), review the [latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update), explore [customer stories](https://www.databricks.com/product/lakebase#customer-stories), and [watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center).
 </Admonition>
 
-<CTA title="Contact us?" description="Neon and Lakebase represent two paths built on the same architectural foundation. Explore your options and get help deciding which service is the best fit." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />
+<CTA title="Contact us" description="Neon and Lakebase represent two paths built on the same architectural foundation. Explore your options and get help deciding which service is the best fit." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />
