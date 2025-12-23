@@ -18,7 +18,7 @@ We aim to deliver Postgres as a cloud service that feels effortless, from your f
 Neon is built on a distributed, cloud-native architecture that separates storage and compute, giving Postgres the scale, reliability, and efficiency modern applications require. This foundation unlocks the features developers expect today (autoscaling, scale-to-zero, instant branching, instant restores, usage-based pricing, and much more) without changing the Postgres you already know.
 
 <Admonition type="tip" title="A Databricks company">
-  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase) - learn more in the Neon and Lakebase section.
+  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase) - learn more in the [Neon and Lakebase](https://neon-next-git-carlotas19-patch-1-neondatabase.vercel.app/docs/get-started/why-neon#neon-and-lakebase) section.
 </Admonition>
 
 ## What makes Neon different
@@ -144,8 +144,6 @@ The final piece follows naturally from the others. Compute nodes in Neon do not 
 - Support agent-driven and highly dynamic workloads
 
 ## Neon and Lakebase
-
-**If you’re interested in Neon’s architecture and features, are building on Databricks, and need to combine operational and analytical workloads, you should explore Databricks Lakebase.**
 
 ### Meet Lakebase: Postgres built on object storage
 
