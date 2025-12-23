@@ -18,7 +18,7 @@ We aim to deliver Postgres as a cloud service that feels effortless, from your f
 Neon is built on a distributed, cloud-native architecture that separates storage and compute, giving Postgres the scale, reliability, and efficiency modern applications require. This foundation unlocks the features developers expect today (autoscaling, scale-to-zero, instant branching, instant restores, usage-based pricing, and much more) without changing the Postgres you already know.
 
 <Admonition type="tip" title="A Databricks company">
-  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase). Learn more in the Neon and Lakebase section.
+  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase) - learn more in the Neon and Lakebase section.
 </Admonition>
 
 ## What makes Neon different
@@ -194,10 +194,7 @@ Neon and Lakebase share the same core architectural principles, but they are opt
 | **Best fit when**              | You’re building and shipping applications quickly      | You want OLTP data to participate directly in the Lakehouse            |
 
 <Admonition type="tip" title="Keep exploring Lakebase">
-    [See the Lakebase docs](https://docs.databricks.com/aws/en/oltp)
-    [Review the latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update) 
-    [Explore customer stories](https://www.databricks.com/product/lakebase#customer-stories)
-    [Watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center)
+    See the [Lakebase docs](https://docs.databricks.com/aws/en/oltp), review the [latest updates to the Lakebase platform](https://www.databricks.com/blog/lakebase-holiday-update), explore [customer stories](https://www.databricks.com/product/lakebase#customer-stories), and [watch a demo](https://www.databricks.com/resources/demos/tours/appdev/databricks-lakebase?itm_data=demo_center).
 </Admonition>
 
 <CTA title="Contact us?" description="Neon and Lakebase represent two paths built on the same architectural foundation. Explore your options and get help deciding which service is the best fit." buttonText="Reach out" buttonUrl="https://www.databricks.com/company/contact" />
