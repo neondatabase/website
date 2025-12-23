@@ -36,6 +36,9 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
                 width={116}
                 height={32}
               />
+              <span className="mt-3 text-sm leading-none tracking-extra-tight text-gray-new-50 lg:mt-2 sm:mt-0">
+                A Databricks Company
+              </span>
 
               <StatusBadge hasThemesSupport={hasThemesSupport} isDarkTheme={isDarkTheme} />
               {hasThemesSupport && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
@@ -44,7 +47,7 @@ const Footer = ({ hasThemesSupport = false, theme = null }) => {
           <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
             <p>Made in SF and the World</p>
             <p>
-              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2025 Neon, Inc.
+              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2025 Neon, LLC
             </p>
           </div>
         </div>
