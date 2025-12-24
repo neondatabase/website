@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
   - /docs/get-started/setting-up-a-project
-updatedOn: '2025-12-24T04:05:30.745Z'
+updatedOn: '2025-08-09T09:50:31.819Z'
 ---
 
 <InfoBlock>
@@ -203,7 +203,7 @@ Your project comes with a `development` branch that's an isolated copy of your `
    This shows your existing branches, including the `production` and `development` branches.
 
    <Admonition type="tip">
-   To avoid specifying `--project-id` and `--org-id` with every command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+   To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
    </Admonition>
 
 ## Make some sample schema changes
