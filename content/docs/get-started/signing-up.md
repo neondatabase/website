@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
   - /docs/get-started/setting-up-a-project
-updatedOn: '2025-08-09T09:50:31.819Z'
+updatedOn: '2025-12-24T20:15:40.194Z'
 ---
 
 <InfoBlock>
