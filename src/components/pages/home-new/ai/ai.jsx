@@ -47,7 +47,7 @@ const AI = () => (
             quality={100}
           />
 
-          <div className="mt-px flex items-center justify-between gap-x-4 px-4 py-3.5 outline outline-1 outline-gray-new-30 lg:px-3.5 lg:py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-4 sm:py-4">
+          <div className="mt-px flex items-center justify-between gap-x-4 bg-gray-new-10 px-4 py-3.5 outline outline-1 outline-gray-new-30 lg:px-3.5 lg:py-4 sm:flex-col sm:items-start sm:gap-y-4 sm:px-4 sm:py-4">
             <p className="sm::text-[15px] ml-3 text-[20px] leading-snug tracking-tight text-white lg:text-[18px] sm:ml-0">
               Try for yourself, start building <br className="hidden md:block" /> with Neon now.
             </p>
