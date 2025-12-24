@@ -16,6 +16,9 @@ const Footer = ({ hasThemesSupport = false }) => (
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
           <Logo className="sm:h-6" width={102} height={28} />
+          <span className="mt-3 block whitespace-nowrap text-[13px] leading-none tracking-extra-tight text-gray-new-40">
+            A Databricks Company
+          </span>
         </div>
 
         {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
@@ -24,7 +27,7 @@ const Footer = ({ hasThemesSupport = false }) => (
           <StatusBadge />
           <small className="flex flex-wrap gap-x-1 gap-y-1.5 whitespace-nowrap text-[13px] leading-none tracking-extra-tight text-gray-new-40 xl:flex-col lg:flex-row sm:flex-col">
             <span>Made in SF and the World</span>
-            <span>Copyright Ⓒ 2022 – {new Date().getFullYear()} Neon, Inc.</span>
+            <span>Copyright Ⓒ 2022 – {new Date().getFullYear()} Neon, LLC</span>
           </small>
         </div>
       </div>
