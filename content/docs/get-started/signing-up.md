@@ -170,18 +170,48 @@ Your project comes with a `development` branch that's an isolated copy of your `
 
 3. **View your branches**
 
+   First, list your projects to get your project ID:
+
    ```bash
-   neon branches list
+   neon projects list
    ```
 
-   This command shows your existing branches, including the `production` and `development` branches.
+   You'll be prompted to select your organization. The output shows your project IDs:
+
+   ```bash
+   Projects
+   ┌─────────────────────┬────────────┬───────────────┬──────────────────────┐
+   │ Id                  │ Name       │ Region Id     │ Created At           │
+   ├─────────────────────┼────────────┼───────────────┼──────────────────────┤
+   │ cool-forest-12345678│ myproject  │ aws-us-east-2 │ 2025-10-14T14:33:43Z │
+   └─────────────────────┴────────────┴───────────────┴──────────────────────┘
+   ```
+
+   Now list your branches using your project ID:
+
+   ```bash
+   neon branches list --project-id cool-forest-12345678
+   ┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
+   │ Name         │ Id                         │ Current State │ Created At           │
+   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+   │ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2025-12-23T21:05:05Z │
+   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+   │ ✱ production │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
+   └──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+   ```
+
+   This shows your existing branches, including the `production` and `development` branches.
+
+   <Admonition type="tip">
+   To avoid specifying `--project-id` and `--org-id` with every command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+   </Admonition>
 
 ## Make some sample schema changes
 
 First, let's make sure our development branch is in sync with production. This ensures we're starting from the same baseline:
 
 ```bash
-neon branches reset development --parent
+neon branches reset development --parent --project-id cool-forest-12345678
 ```
 
 Now that our development branch matches production, we can make some changes. The `playing_with_neon` table from production is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
@@ -224,7 +254,7 @@ With `psql` available, let's work from the terminal to connect to your `developm
    Get the connection string to your branch and connect to it directly via `psql`:
 
    ```bash shouldWrap
-   neon connection-string development --database-name neondb --psql
+   neon connection-string development --database-name neondb --project-id cool-forest-12345678 --psql
    ```
 
    This command establishes the psql terminal connection to the `neondb` database on your development branch.
@@ -307,7 +337,7 @@ Use the following command to reset your `development` branch to the state of the
 
     Example:
     ```bash
-    neon branches reset development --parent
+    neon branches reset development --parent --project-id cool-forest-12345678
     ```
 
 If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:
