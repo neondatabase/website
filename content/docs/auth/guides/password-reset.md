@@ -21,9 +21,7 @@ The easiest way to add password reset is using the pre-built UI components `<For
 
 If you're using `<AuthView>`, enable the forgot password flow:
 
-<CodeWithLabel label="src/App.tsx">
-
-```tsx
+```tsx filename="src/App.tsx"
 import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
 import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from './auth';
@@ -37,17 +35,13 @@ export default function App() {
 }
 ```
 
-</CodeWithLabel>
-
 The `<AuthView>` component automatically includes a "Forgot password?" link when `forgotPassword` is enabled.
 
 ### 2. Use standalone form components (#use-standalone-forms)
 
 For more control, use `<ForgotPasswordForm>` and `<ResetPasswordForm>` separately:
 
-<CodeWithLabel label="src/App.tsx">
-
-```tsx
+```tsx filename="src/App.tsx"
 import { useState } from 'react';
 import { ForgotPasswordForm, ResetPasswordForm } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from './auth';
@@ -81,8 +75,6 @@ export default function App() {
   );
 }
 ```
-
-</CodeWithLabel>
 
 <Admonition type="note">
 SDK methods for password reset (`resetPasswordForEmail`) are not fully supported yet. Use the UI components (`<ForgotPasswordForm>` and `<ResetPasswordForm>`) for password reset functionality.

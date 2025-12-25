@@ -50,23 +50,15 @@ This branch isolation enables several testing patterns:
 
 Say you want to add Google OAuth to your production app, but you're not sure if your configuration will work. Instead of testing directly in production, create a branch:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 # Create test branch from production
 neon branches create --name test-google-oauth
 ```
 
-</CodeWithLabel>
-
-<CodeWithLabel label=".env.local">
-
-```env
+```env filename=".env.local"
 # Point your local app to the test branch's Auth URL
 VITE_NEON_AUTH_URL=https://ep-test-google-oauth.neonauth.region.aws.neon.tech/neondb/auth
 ```
-
-</CodeWithLabel>
 
 Now configure Google OAuth in the test branch's Console and verify the sign-in flow works locally. Your production app and users are completely unaffected. Once you confirm it works, apply the same OAuth settings to your production branch.
 
@@ -76,14 +68,10 @@ The same approach works for any auth changes: password reset flows, email verifi
 
 You can also use branches to give each developer their own auth instance to test with:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 # Alice creates her branch
 neon branches create --name dev-alice
 ```
-
-</CodeWithLabel>
 
 Alice can test auth flows, create test users, and experiment without affecting other developers or shared staging environments.
 

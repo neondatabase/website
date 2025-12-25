@@ -241,6 +241,28 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   ```
   ````
 
+- `filename="..."` - add a filename label above the code block.
+
+  Examples:
+
+  ````md
+  ```jsx filename="src/App.jsx"
+  export default function App() {
+    return <div>Hello</div>;
+  }
+  ```
+  ````
+
+  You can combine it with line highlighting and other flags:
+
+  ````md
+  ```jsx filename="src/App.jsx" {2} showLineNumbers shouldWrap
+  export default function App() {
+    return <div>Hello</div>;
+  }
+  ```
+  ````
+
 ## Code Tabs
 
 To display code tabs, wrap all pieces of code with `<CodeTabs></CodeTabs>` and write labels of code tabs in order:
@@ -729,6 +751,7 @@ Prompt markdown files should be placed in the `public/prompts/` directory of you
 
 - Place your prompt file at: `public/prompts/serverless-driver-guardrail-prompt.md`
 - Reference it in your MDX:
+
   ```mdx
   <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
   ```

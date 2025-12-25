@@ -41,7 +41,6 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import CodeWithLabel from 'components/shared/code-with-label';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt/copy-prompt';
 import CtaBlock from 'components/shared/cta-block';
@@ -150,7 +149,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DefinitionList,
   FeatureList,
   Admonition,
-  CodeWithLabel,
   CodeTabs,
   DetailIconCards,
   TechCards,

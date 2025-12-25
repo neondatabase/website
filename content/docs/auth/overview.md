@@ -49,19 +49,12 @@ Neon Auth currently supports Better Auth version **1.4.6**.
 
 Enable Auth in your Neon project, then add authentication to your app:
 
-<CodeWithLabel label="src/auth.ts">
-
-```typescript
+```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
-
-</CodeWithLabel>
-
-<CodeWithLabel label="src/App.tsx">
-
-```tsx
+```tsx filename="src/App.tsx"
 import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from './auth';
 
@@ -73,8 +66,6 @@ export default function App() {
   );
 }
 ```
-
-</CodeWithLabel>
 
 ## Use cases
 

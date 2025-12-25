@@ -34,6 +34,7 @@ function extractTextFromNode(node) {
 const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
+  filename = null,
   children,
   as: Tag = 'figure',
   ...otherProps
@@ -44,13 +45,25 @@ const CodeBlockWrapper = ({
 
   return (
     <Tag
-      className={clsx('code-block group relative flex [&_pre]:min-w-full', className)}
+      className={clsx(
+        'code-block group relative flex flex-col [&_pre]:min-w-full',
+        filename && 'overflow-hidden',
+        className
+      )}
+      data-has-filename={filename ? 'true' : 'false'}
       {...otherProps}
     >
+      {filename && (
+        <div className="flex items-center justify-between gap-3 border-b border-gray-new-90 bg-gray-new-98 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-60">
+          <span className="truncate">{filename}</span>
+        </div>
+      )}
       {children}
+
       <button
         className={clsx(
-          'invisible absolute right-2 top-2 rounded border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          'invisible absolute right-2 rounded border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          filename ? 'top-[50px]' : 'top-2',
           copyButtonClassName
         )}
         type="button"
@@ -73,6 +86,7 @@ export default CodeBlockWrapper;
 CodeBlockWrapper.propTypes = {
   className: PropTypes.string,
   copyButtonClassName: PropTypes.string,
+  filename: PropTypes.string,
   children: PropTypes.node,
   as: PropTypes.string,
 };
