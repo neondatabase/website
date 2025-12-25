@@ -18,9 +18,7 @@ Manage user profiles and account settings after users sign in. This guide covers
 
 Update user profile fields like name, image, or phone number using `updateUser()`:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 import { authClient } from './auth';
 
 const handleUpdateProfile = async (e) => {
@@ -46,8 +44,6 @@ const handleUpdateProfile = async (e) => {
 };
 ```
 
-</CodeWithLabel>
-
 ### Available profile fields
 
 You can update these fields with `updateUser()`:
@@ -62,9 +58,7 @@ Email address changes are not currently supported. To reset a forgotten password
 
 Change a user's password while they are logged in using `changePassword()`. This requires the current password for security:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 import { authClient } from './auth';
 
 const handleChangePassword = async (e) => {
@@ -85,23 +79,17 @@ const handleChangePassword = async (e) => {
 };
 ```
 
-</CodeWithLabel>
-
 ### Revoke other sessions
 
 Optionally sign out from all other devices when changing the password:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 const { data, error } = await authClient.changePassword({
   newPassword: 'new-secure-password',
   currentPassword: 'current-password',
   revokeOtherSessions: true, // Signs out all other devices
 });
 ```
-
-</CodeWithLabel>
 
 <Admonition type="note">
 If a user forgot their password, use the password reset flow (`requestPasswordReset()` and `resetPassword()`) instead. See [Password Reset](/docs/auth/guides/password-reset).
@@ -111,9 +99,7 @@ If a user forgot their password, use the password reset flow (`requestPasswordRe
 
 After updating profile information, refresh the session to get the latest user data:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 import { authClient } from './auth';
 
 const refreshUser = async () => {
@@ -123,8 +109,6 @@ const refreshUser = async () => {
   }
 };
 ```
-
-</CodeWithLabel>
 
 Call `refreshUser()` after successful `updateUser()` calls to ensure your UI displays the latest information.
 

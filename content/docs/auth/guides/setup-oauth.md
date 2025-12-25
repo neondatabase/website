@@ -23,11 +23,9 @@ For production, configure your own OAuth app credentials for both providers. See
 
 Call `signIn.social()` with your provider (`"google"` or `"github"`). The SDK redirects the user to the provider's authorization page, then back to your `callbackURL`:
 
-<CodeWithLabel label="src/App.jsx">
-
 <CodeTabs labels={["Google","GitHub"]}>
 
-```jsx{6}
+```jsx {6} filename="src/App.jsx"
 import { authClient } from './auth';
 
 const handleGoogleSignIn = async () => {
@@ -42,7 +40,7 @@ const handleGoogleSignIn = async () => {
 };
 ```
 
-```jsx{6}
+```jsx {6} filename="src/App.jsx"
 import { authClient } from './auth';
 
 const handleGitHubSignIn = async () => {
@@ -59,8 +57,6 @@ const handleGitHubSignIn = async () => {
 
 </CodeTabs>
 
-</CodeWithLabel>
-
 <Admonition type="note">
 GitHub OAuth requires custom credentials to be configured. Google OAuth works with shared credentials for development.
 </Admonition>
@@ -69,9 +65,7 @@ GitHub OAuth requires custom credentials to be configured. Google OAuth works wi
 
 After the provider redirects back to your app, check for a session:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx{9}
+```jsx {9} filename="src/App.jsx"
 import { authClient } from './auth';
 
 useEffect(() => {
@@ -84,15 +78,11 @@ useEffect(() => {
 }, []);
 ```
 
-</CodeWithLabel>
-
 ## Custom redirect URLs
 
 Specify different URLs for new users or errors:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx{3-5}
+```jsx {3-5} filename="src/App.jsx"
 await authClient.signIn.social({
   provider: "google", // or "github"
   callbackURL: "/dashboard",
@@ -100,8 +90,6 @@ await authClient.signIn.social({
   errorCallbackURL: "/error",
 });
 ```
-
-</CodeWithLabel>
 
 ## Production setup
 
