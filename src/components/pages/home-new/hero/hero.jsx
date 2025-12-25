@@ -37,8 +37,8 @@ const Hero = () => (
         </Button>
       </div>
 
-      <div className="relative mt-16 select-none border-b border-gray-new-20 pb-10 lg:mt-14 lg:pb-7 sm:mt-12">
-        <Logos className="max-w-full !p-0" logos={logos} size="md" staticDesktop />
+      <div className="relative mt-16 select-none border-t border-gray-new-20 pt-10 lg:mt-14 lg:pt-7 sm:mt-12">
+        <Logos className="max-w-full !p-0" logos={logos} size="md" />
       </div>
     </Container>
 
