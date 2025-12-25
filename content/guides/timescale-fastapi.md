@@ -89,10 +89,10 @@ Follow these steps to set up your project and virtual environment:
     │ ├── routes/
     │ │ └── product_routes.py
     │ └── main.py
-    ├── .env  
+    ├── .env
     ├── .python-version
-    ├── README.md  
-    ├── pyproject.toml  
+    ├── README.md
+    ├── pyproject.toml
     └── uv.lock
     ```
 

@@ -140,23 +140,27 @@ Each component should have:
 ## Common MDX Components
 
 ### Navigation and Layout
+
 - **InfoBlock + DocsList** - Related documentation, learning objectives, sample projects
 - **DetailIconCards** - Hub/landing pages with visual navigation cards
 - **Steps** - Sequential tutorials with numbered steps
 - **Tabs + TabItem** - Platform-specific or multi-option content
 
 ### Content Enhancement
+
 - **Admonition** - Notes, tips, warnings, important callouts (types: note, tip, warning, important)
 - **CodeTabs** - Multi-language/framework code examples
 - **FeatureBetaProps** - Beta feature indicators
 
 ### When to Use InfoBlock vs DetailIconCards
+
 - **InfoBlock**: Use on tutorials and guides for related docs and learning objectives
 - **DetailIconCards**: Use on hub/overview pages for visual navigation to sub-topics
 
 ## Documentation Style Reference
 
 For style, tone, and structure examples, use the `/golden-corpus` slash command to load appropriate examples based on content type:
+
 - Tutorial content
 - Getting started guides
 - Concept and overview pages

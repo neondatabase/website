@@ -4,10 +4,11 @@ import Sidebar from 'components/pages/doc/sidebar';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { DOCS_BASE_PATH } from 'constants/docs';
-import { getNavigation } from 'utils/api-docs';
+import { getNavigation, getSDKNavigation } from 'utils/api-docs';
 
 const NeonDocsLayout = async ({ children }) => {
   const navigation = await getNavigation();
+  const sdkNavigation = getSDKNavigation();
 
   return (
     <Layout
@@ -28,6 +29,7 @@ const NeonDocsLayout = async ({ children }) => {
             className="w-64 shrink-0 lg:hidden"
             navigation={navigation}
             basePath={DOCS_BASE_PATH}
+            sdkNavigation={sdkNavigation}
           />
           {children}
         </Container>
