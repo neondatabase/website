@@ -473,6 +473,11 @@ const defaultConfig = {
         destination: '/programs/agents',
         permanent: true,
       },
+      {
+        source: '/cost-fleets',
+        destination: '/',
+        permanent: true,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
