@@ -93,7 +93,7 @@ const client = createClient<Database>({
 
 ```typescript
 import { createClient } from '@neondatabase/neon-js';
-import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
 const client = createClient({
   auth: {

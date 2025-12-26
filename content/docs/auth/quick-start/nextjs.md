@@ -76,7 +76,7 @@ We need to mount the `authApiHandler` handler to the auth API route. All Neon Au
   <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next';
+import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
 
 export const { GET, POST } = authApiHandler();
 ```
@@ -93,7 +93,7 @@ The `neonAuthMiddleware()` ensures that user is authenticated before the request
   <RightCode label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next";
+import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next/server";
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
@@ -118,13 +118,20 @@ Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed
 </Admonition>
 
 
-<TwoColumnStep title="Configure the auth client">
+<TwoColumnStep title="Configure the auth clients">
   <LeftContent>
 
 The Auth UI components need access to auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
 
+To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
+
   </LeftContent>
-  <RightCode label="lib/auth/client.ts">
+  <RightCode>
+<Tabs labels={["Auth Client", "Auth Server"]}>
+
+<TabItem>
+
+Copy and paste following code in `lib/auth/client.ts` file:
 
 ```tsx
 'use client';
@@ -134,6 +141,21 @@ import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 export const authClient = createAuthClient();
 ```
 
+  </TabItem>
+  <TabItem>
+
+Copy and paste following code in `lib/auth/server.ts` file:
+
+```tsx
+'use server';
+
+import { createAuthServer } from '@neondatabase/neon-js/auth/next/server';
+
+export const authServer = createAuthServer();
+```
+
+  </TabItem>
+  </Tabs>
   </RightCode>
 </TwoColumnStep>
 
@@ -329,10 +351,16 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 <TwoColumnStep title="Access user data on server and client">
   <LeftContent>
 
-You can access the user session and data on the server using the `neonAuth()` helper, on the client using `authClient.useSession()` hook.
+**Server Components:**
+  - To use Neon Auth in Next.js server components, import the `authServer` created in `lib/auth/server.ts`, and use different API methods it provides. 
+  - For quick access to session and user details, you can directly use `neonAuth()` utility without needing to create authServer.
+
+**Client Components:**
+  - To use the Neon Auth in Next.js client components, import the `authClient` created in `lib/auth/client.ts`, and use different API methods it provides.
+
 
   </LeftContent>
-  <RightCode label="Access user data">
+  <RightCode>
 
 <Tabs labels={["Server Component", "Client Component", "API Route"]}>
 
@@ -341,7 +369,7 @@ You can access the user session and data on the server using the `neonAuth()` he
 Create a new page at `app/server-rendered-page/page.tsx` and add the following code:
 
 ```tsx
-import { neonAuth } from "@neondatabase/neon-js/auth/next";
+import { neonAuth } from "@neondatabase/neon-js/auth/next/server";
 
 export default async function ServerRenderedPage() {
     const { session, user } = await neonAuth();
@@ -411,13 +439,20 @@ export default function ClientRenderedPage() {
 Create a new API route at `app/api/secure-api-route/route.ts` and add the following code:
 
 ```tsx
-import { neonAuth } from "@neondatabase/neon-js/auth/next";
+import { authServer } from "@/lib/auth/server";
 
 export async function GET() {
-    const { session, user } = await neonAuth();
-    return new Response(JSON.stringify({ "session": session, "user": user }), {
-        headers: { "Content-Type": "application/json" },
-    });
+  const { data } = await authServer.getSession();
+  if (data?.session) {
+    return new Response(
+      JSON.stringify({ "session": data.session, "user": data.user }),
+      { headers: { "Content-Type": "application/json" } }
+    )
+  }
+  return new Response(
+    JSON.stringify({ "error": "Unauthenticated" }),
+    { headers: { "Content-Type": "application/json" }, status: 401 }
+  )
 }
 ```
 </TabItem>
