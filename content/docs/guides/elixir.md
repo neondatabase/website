@@ -6,7 +6,7 @@ updatedOn: '2025-09-30T00:26:10.493Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 
-description="Pre-built prompt for connecting Elixir applications to Neon"/>
+description="Pre-built prompt for connecting Elixir applications to Neon" showOpenInCursor={true} />
 
 This guide describes how to create a Neon project and connect to it from an Elixir application using [Postgrex](https://hex.pm/packages/postgrex), a high-performance, concurrent, and robust PostgreSQL driver for Elixir.
 
