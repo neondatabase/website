@@ -688,6 +688,28 @@ Neon JS SDK supports end-to-end type safety when interacting with the Data API. 
 
 Now, when you type `neon.from('todos').select('...')`, `update('...')`, etc., you will get full type safety and autocompletion based on your database schema. Pull the types again whenever you make schema changes.
 
+## Deploying the application
+
+When you’re ready to deploy your React application, you can use any static site hosting service such as Vercel or Netlify. Ensure that your environment variables are correctly configured in the deployment settings.
+
+Since this example relies on client‑side routing with React Router, you’ll also need to define rewrite rules.
+
+For Vercel, add a `vercel.json` file with the following configuration:
+
+```json
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ]
+}
+```
+
+After deploying your application, add the production URLs to the **Your trusted domains** section in the Neon Auth settings to ensure authentication works correctly.
+
 ## Conclusion
 
 In this guide, you built a secure Todo application using React, Neon Auth, and the Neon Data API. You learned how to configure Neon Auth for user authentication, define your database schema with Drizzle ORM, and enforce Row‑Level Security (RLS) policies to safeguard user data.
