@@ -11,7 +11,7 @@ import Item from '../table-of-contents/item';
 
 const ANCHOR_SCROLL_MARGIN = 130;
 
-const SDKTableOfContents = ({ sections, title = 'SDK Reference' }) => {
+const SDKTableOfContents = ({ title, url, sections }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
@@ -62,7 +62,7 @@ const SDKTableOfContents = ({ sections, title = 'SDK Reference' }) => {
     <div className="flex flex-col gap-6">
       <Link
         className="flex items-center gap-2.5 text-[15px] font-medium leading-snug tracking-extra-tight"
-        to="#"
+        to={url}
         theme="blue-green"
       >
         <SdkIcon className="size-4.5 shrink-0" />
@@ -101,6 +101,8 @@ const SDKTableOfContents = ({ sections, title = 'SDK Reference' }) => {
 };
 
 SDKTableOfContents.propTypes = {
+  title: PropTypes.string,
+  url: PropTypes.string,
   sections: PropTypes.arrayOf(
     PropTypes.shape({
       section: PropTypes.string.isRequired,
@@ -112,7 +114,6 @@ SDKTableOfContents.propTypes = {
       ).isRequired,
     })
   ).isRequired,
-  title: PropTypes.string,
 };
 
 export default SDKTableOfContents;

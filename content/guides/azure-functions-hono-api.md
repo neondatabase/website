@@ -297,7 +297,7 @@ app.get('/api/recipes/:id', async (c) => {
   const [recipeResults, ingredientsResults] = await Promise.all([
     db.query<Recipe>(
       `SELECT id, name, description, preparation_steps, url
-       FROM recipes 
+       FROM recipes
        WHERE id = $1
        LIMIT 1
      `,

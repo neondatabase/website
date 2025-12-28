@@ -521,7 +521,7 @@ async function getJobsByQueue(queueName, limit = 100, offset = 0) {
 
 async function getJobStats() {
   const result = await pool.query(`
-    SELECT 
+    SELECT
       queue_name,
       status,
       COUNT(*) as count
