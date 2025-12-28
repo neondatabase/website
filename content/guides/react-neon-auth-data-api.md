@@ -9,7 +9,7 @@ updatedOn: '2025-12-24T00:00:00.000Z'
 
 This guide will walk you through building a secure Todo application using **React**, [Neon Auth](/docs/auth/overview), and the [Neon Data API](/docs/data-api/overview).
 
-By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their tasks. Authentication is handled through Neon Auth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Neon database.
+By the end of this tutorial, you’ll have a fully functional Todo app that allows users to sign up, log in, and manage their todos. Authentication is handled through Neon Auth, while secure data access is powered by the Neon Data API. The app does not require any backend server; all interactions happen directly between the React frontend and the Neon database.
 
 This architecture keeps things simple yet secure, with all the complexities of authentication and data access managed by Neon.
 
@@ -39,11 +39,14 @@ You'll need to create a Neon project and enable both Neon Auth and the Data API.
     - Finally, click on the **Enable** button to activate the Data API with Neon Auth.
 
 3.  **Copy your credentials:**
-    - **Data API URL:** Found on the Data API page (e.g., `https://ep-xxx.us-east-1.aws.neon.tech/neondb/rest/v1`).
+    - **Data API URL:** Found on the Data API page (e.g., `https://ep-xxx.neon.tech/neondb/rest/v1`).
       ![Data API enabled view](/docs/data-api/data-api-enabled.png)
-    - **Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.aws.neon.tech/neondb/auth`).
+    - **Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
+
+      > The database connection string is used exclusively for Drizzle ORM migrations and should not be exposed in the frontend application.
+
       ![Connection modal](/docs/connect/connection_details.png)
 
 ## Set up the React project
@@ -54,7 +57,7 @@ Create a new React project using Vite and install the required dependencies.
 
     ```bash
     npm create vite@latest react-neon-todo -- --template react-ts
-    cd react-neon-todo
+    cd react-neon-todo && npm install
     ```
 
     When prompted:
@@ -76,13 +79,16 @@ Create a new React project using Vite and install the required dependencies.
     ◇  Install with npm and start now?
     │  No
     │
-    ◇  Scaffolding project in /home/dhanush/codes/neon/demos/auth/react-neon-todo...
+    ◇  Scaffolding project in /home/user/react-neon-todo...
     │
     └  Done.
     ```
 
 2.  **Install dependencies:**
-    We need the Neon SDK, React Router, and Drizzle ORM.
+    You will need the following packages for this project:
+    - **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
+    - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
+    - **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
     ```bash
     npm install @neondatabase/neon-js react-router drizzle-orm
@@ -90,13 +96,13 @@ Create a new React project using Vite and install the required dependencies.
     ```
 
 3.  **Setup Tailwind CSS:**
-    This guide uses Tailwind for styling.
+    Install Tailwind CSS and the Vite plugin:
 
     ```bash
     npm install tailwindcss @tailwindcss/vite
     ```
 
-    Add the `@tailwindcss/vite plugin` to your Vite configuration:
+    Add the `@tailwindcss/vite plugin` to your Vite configuration (`vite.config.ts`):
 
     ```javascript
     import { defineConfig } from 'vite';
@@ -119,7 +125,7 @@ Create a new React project using Vite and install the required dependencies.
 
 ## Configure environment variables
 
-Create a `.env` file in the root of your project and add the credentials you copied in Step 1.
+Create a `.env` file in the root of your project and add the credentials you copied in [Step 1](#create-a-neon-project-with-neon-auth-and-data-api).
 
 ```env
 # Database connection for Drizzle Migrations
@@ -132,9 +138,15 @@ VITE_NEON_AUTH_URL="https://ep-xxx.aws.neon.tech/neondb/auth"
 
 ## Set up Drizzle ORM
 
-Drizzle ORM helps manage your database schema and migrations. It will be used to define the schema for the `todos` table and to interact with the Neon Auth tables. In addition, you will configure Row‑Level Security (RLS) policies to ensure that users can only access their own data.
+<Admonition type="important" title="Why Drizzle ORM?">
+This guide uses Drizzle ORM to define **Row-Level Security (RLS)** policies declaratively in TypeScript, but it is not required. You can use any Postgres-compatible tool or raw SQL. If you prefer SQL, you can reference the scripts in the [GitHub repository](https://github.com/dhanushreddy291/react-neon-todo/blob/main/drizzle/0001_salty_hedge_knight.sql) which are the equivalent of the Drizzle schema and migrations shown here.
 
-**Create Drizzle Config:**
+Drizzle is used only for **managing the database** (migrations). The React application itself uses the **Neon JS SDK** to query data via the Data API.
+</Admonition>
+
+Drizzle ORM helps manage your database schema and migrations. It will be used to define the schema for the `todos` table and to interact with the Neon Auth tables. In addition, you will configure [Row‑Level Security (RLS)](/postgresql/postgresql-administration/postgresql-row-level-security) policies to ensure that users can only access their own data.
+
+**Create Drizzle config:**
 
 Create a `drizzle.config.ts` file in the project root:
 
@@ -189,22 +201,21 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
      └ …
     ```
 
-3.  **Update the schema file:**
-    Update `src/db/schema.ts` to include your application data table (`todos`) along with the Neon Auth tables. Define Row-Level Security (RLS) policies to ensure that users can only access their own todos. Your final `schema.ts` should look like this:
+3.  **Add the Todos table to your schema**
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema.
 
-    ```typescript {16,229-246}
+    At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.  
+    This table links to the `userInNeonAuth` table in the `neon_auth` schema and uses the `crudPolicy` function to enforce Row‑Level Security (RLS).
+
+    ```typescript {9,12,40-60} shouldWrap
     import {
       pgTable,
       pgSchema,
-      index,
-      foreignKey,
       uuid,
       text,
       timestamp,
       unique,
       boolean,
-      uniqueIndex,
-      jsonb,
       bigint,
     } from 'drizzle-orm/pg-core';
     import { sql } from 'drizzle-orm';
@@ -212,38 +223,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     export const neonAuth = pgSchema('neon_auth');
 
-    export const invitationInNeonAuth = neonAuth.table(
-      'invitation',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        organizationId: uuid().notNull(),
-        email: text().notNull(),
-        role: text(),
-        status: text().notNull(),
-        expiresAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        inviterId: uuid().notNull(),
-      },
-      (table) => [
-        index('invitation_email_idx').using('btree', table.email.asc().nullsLast().op('text_ops')),
-        index('invitation_organizationId_idx').using(
-          'btree',
-          table.organizationId.asc().nullsLast().op('uuid_ops')
-        ),
-        foreignKey({
-          columns: [table.organizationId],
-          foreignColumns: [organizationInNeonAuth.id],
-          name: 'invitation_organizationId_fkey',
-        }).onDelete('cascade'),
-        foreignKey({
-          columns: [table.inviterId],
-          foreignColumns: [userInNeonAuth.id],
-          name: 'invitation_inviterId_fkey',
-        }).onDelete('cascade'),
-      ]
-    );
+    // .. other Neon Auth table definitions ..
 
     export const userInNeonAuth = neonAuth.table(
       'user',
@@ -267,179 +247,44 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
       (table) => [unique('user_email_key').on(table.email)]
     );
 
-    export const sessionInNeonAuth = neonAuth.table(
-      'session',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        expiresAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-        token: text().notNull(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        updatedAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-        ipAddress: text(),
-        userAgent: text(),
-        userId: uuid().notNull(),
-        impersonatedBy: text(),
-        activeOrganizationId: text(),
-      },
-      (table) => [
-        index('session_userId_idx').using('btree', table.userId.asc().nullsLast().op('uuid_ops')),
-        foreignKey({
-          columns: [table.userId],
-          foreignColumns: [userInNeonAuth.id],
-          name: 'session_userId_fkey',
-        }).onDelete('cascade'),
-        unique('session_token_key').on(table.token),
-      ]
-    );
-
-    export const organizationInNeonAuth = neonAuth.table(
-      'organization',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        name: text().notNull(),
-        slug: text().notNull(),
-        logo: text(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-        metadata: text(),
-      },
-      (table) => [
-        uniqueIndex('organization_slug_uidx').using(
-          'btree',
-          table.slug.asc().nullsLast().op('text_ops')
-        ),
-        unique('organization_slug_key').on(table.slug),
-      ]
-    );
-
-    export const accountInNeonAuth = neonAuth.table(
-      'account',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        accountId: text().notNull(),
-        providerId: text().notNull(),
-        userId: uuid().notNull(),
-        accessToken: text(),
-        refreshToken: text(),
-        idToken: text(),
-        accessTokenExpiresAt: timestamp({ withTimezone: true, mode: 'string' }),
-        refreshTokenExpiresAt: timestamp({ withTimezone: true, mode: 'string' }),
-        scope: text(),
-        password: text(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        updatedAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-      },
-      (table) => [
-        index('account_userId_idx').using('btree', table.userId.asc().nullsLast().op('uuid_ops')),
-        foreignKey({
-          columns: [table.userId],
-          foreignColumns: [userInNeonAuth.id],
-          name: 'account_userId_fkey',
-        }).onDelete('cascade'),
-      ]
-    );
-
-    export const verificationInNeonAuth = neonAuth.table(
-      'verification',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        identifier: text().notNull(),
-        value: text().notNull(),
-        expiresAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        updatedAt: timestamp({ withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-      },
-      (table) => [
-        index('verification_identifier_idx').using(
-          'btree',
-          table.identifier.asc().nullsLast().op('text_ops')
-        ),
-      ]
-    );
-
-    export const jwksInNeonAuth = neonAuth.table('jwks', {
-      id: uuid().defaultRandom().primaryKey().notNull(),
-      publicKey: text().notNull(),
-      privateKey: text().notNull(),
-      createdAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-      expiresAt: timestamp({ withTimezone: true, mode: 'string' }),
-    });
-
-    export const memberInNeonAuth = neonAuth.table(
-      'member',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        organizationId: uuid().notNull(),
-        userId: uuid().notNull(),
-        role: text().notNull(),
-        createdAt: timestamp({ withTimezone: true, mode: 'string' }).notNull(),
-      },
-      (table) => [
-        index('member_organizationId_idx').using(
-          'btree',
-          table.organizationId.asc().nullsLast().op('uuid_ops')
-        ),
-        index('member_userId_idx').using('btree', table.userId.asc().nullsLast().op('uuid_ops')),
-        foreignKey({
-          columns: [table.organizationId],
-          foreignColumns: [organizationInNeonAuth.id],
-          name: 'member_organizationId_fkey',
-        }).onDelete('cascade'),
-        foreignKey({
-          columns: [table.userId],
-          foreignColumns: [userInNeonAuth.id],
-          name: 'member_userId_fkey',
-        }).onDelete('cascade'),
-      ]
-    );
-
-    export const projectConfigInNeonAuth = neonAuth.table(
-      'project_config',
-      {
-        id: uuid().defaultRandom().primaryKey().notNull(),
-        name: text().notNull(),
-        endpointId: text('endpoint_id').notNull(),
-        createdAt: timestamp('created_at', { withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        updatedAt: timestamp('updated_at', { withTimezone: true, mode: 'string' })
-          .default(sql`CURRENT_TIMESTAMP`)
-          .notNull(),
-        trustedOrigins: jsonb('trusted_origins').notNull(),
-        socialProviders: jsonb('social_providers').notNull(),
-        emailProvider: jsonb('email_provider'),
-        emailAndPassword: jsonb('email_and_password'),
-        allowLocalhost: boolean('allow_localhost').notNull(),
-      },
-      (table) => [unique('project_config_endpoint_id_key').on(table.endpointId)]
-    );
-
     export const todos = pgTable(
       'todos',
       {
         id: bigint('id', { mode: 'number' }).primaryKey().generatedByDefaultAsIdentity().notNull(),
         text: text('text').notNull(),
         completed: boolean('completed').notNull().default(false),
-        userId: uuid('user_id')
+        user_id: uuid('user_id')
           .notNull()
           .references(() => userInNeonAuth.id),
       },
       (table) => [
         crudPolicy({
           role: authenticatedRole,
-          read: sql`(select auth.user_id() = ${table.userId}::text)`,
-          modify: sql`(select auth.user_id() = ${table.userId}::text)`,
+          // Type casting user_id to text for comparison with auth.user_id()
+          read: sql`(select auth.user_id() = ${table.user_id}::text)`,
+          modify: sql`(select auth.user_id() = ${table.user_id}::text)`,
         }),
       ]
     );
+
+    export type Todo = typeof todos.$inferSelect;
     ```
+
+    The `todos` table contains the following columns: `id`, `text`, `completed`, and `user_id`. It is linked to the `user` table in the `neon_auth` schema and secured with Row‑Level Security (RLS) policies:
+    1. **Foreign key reference**  
+       The `todos` table includes a foreign key to the `user` table in the `neon_auth` schema.
+
+    2. **RLS policy (`crudPolicy`)**  
+       This policy ensures that each user can only read and modify their own todos.
+
+    3. **Authenticated User ID**  
+       The `auth.user_id()` function retrieves the ID of the currently authenticated user.
+
+    4. **Access control enforcement**  
+       The `user_id` column in the `todos` table is compared against the value returned by `auth.user_id()` to enforce access control.
+
+    5. **Type casting**  
+       The `user_id` is cast to `text` to ensure compatibility between the UUID type in the table and the text type returned by `auth.user_id()`.
 
 ## Generate and apply migrations
 
@@ -455,11 +300,13 @@ This creates a new SQL file in the `drizzle` directory. Apply this migration to 
 npx drizzle-kit migrate
 ```
 
-Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project console.
+Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
 
-## Initialize the Neon Client
+Now that the database schema is set up, you can proceed to build the React application.
 
-Create a file `src/neon.ts`. This initializes the Neon client, which handles both Authentication and Data API queries. We use the `BetterAuthReactAdapter` to integrate easily with React hooks.
+## Initialize the Neon client
+
+Create a file `src/neon.ts`. This initializes the Neon client, which handles both Authentication and Data API queries. For React hooks support, you will use the `BetterAuthReactAdapter`.
 
 ```typescript
 import { createClient } from '@neondatabase/neon-js';
@@ -476,9 +323,9 @@ export const neon = createClient({
 });
 ```
 
-## Build the Application UI
+## Build the application
 
-The React application consists of the following components:
+Create the main components and pages for the Todo application:
 
 1. Header with user profile and sign out
 2. Auth and Account pages using Neon Auth pre-built components
@@ -486,12 +333,12 @@ The React application consists of the following components:
 
 ### Header Component
 
-Create `src/components/Header.tsx`. We'll use the pre-built `UserButton` component to handle the user profile menu and sign out.
+Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Neon Auth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
 
 ```tsx
 import { UserButton } from '@neondatabase/neon-js/auth/react';
 
-const Header = () => {
+export default function Header() {
   return (
     <header className="bg-blue-600 p-4 text-white shadow-md">
       <div className="container mx-auto flex items-center justify-between">
@@ -500,14 +347,16 @@ const Header = () => {
       </div>
     </header>
   );
-};
-
-export default Header;
+}
 ```
+
+The component creates a simple header with the app title on the left and the `UserButton` on the right, allowing users to access their account options.
 
 ### Auth and Account Pages
 
-Neon provides pre-built UI components that handle the entire flow for Sign In, Sign Up, and Account management.
+Neon provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+
+As outlined in the [Neon Auth React UI guide](/docs/auth/quick-start/react-router-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
 Create `src/pages/Auth.tsx`:
 
@@ -550,16 +399,11 @@ Because **RLS policies** are defined in the schema, you don’t need to manually
 </Admonition>
 
 ```tsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import { neon } from '../neon';
+import type { Todo } from '../db/schema';
 
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-}
-
-const TodoApp = () => {
+export default function TodoApp() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState('');
 
@@ -570,7 +414,7 @@ const TodoApp = () => {
     if (data?.user) {
       const fetchTodos = async () => {
         // Query the Data API directly
-        // RLS automatically ensures we only get *our* todos
+        // RLS automatically ensures that only the current user's todos are returned
         const { data: todosData, error } = await neon
           .from('todos')
           .select('*')
@@ -587,19 +431,19 @@ const TodoApp = () => {
     }
   }, [data]);
 
-  const handleAddTodo = async (e: React.FormEvent) => {
+  const handleAddTodo = async (e: FormEvent) => {
     if (!data?.user) return;
     e.preventDefault();
     if (!inputValue.trim()) return;
 
     // Optimistic UI update
     const tempId = Date.now();
-    const newTodo = { id: tempId, text: inputValue, completed: false };
+    const newTodo = { id: tempId, text: inputValue, completed: false, user_id: data.user.id };
     setTodos([newTodo, ...todos]);
     setInputValue('');
 
     // Insert into Database
-    const { data: insertedData, error } = await neon
+    const { data: insertedData } = await neon
       .from('todos')
       .insert({
         text: newTodo.text,
@@ -683,14 +527,14 @@ const TodoApp = () => {
       </ul>
     </div>
   );
-};
-
-export default TodoApp;
+}
 ```
+
+This component manages the todo list, allowing users to add, toggle, and delete tasks. It uses the Neon Data API to interact with the `todos` table, leveraging RLS policies to ensure secure data access.
 
 ### Layout and Routing
 
-Update `src/App.tsx`. We use `<SignedIn>` to protect the todo route and `<RedirectToSignIn>` to handle unauthenticated access automatically.
+Update `src/App.tsx` to set up routing and layout for the application. The `Layout` component uses `SignedIn` and `RedirectToSignIn` from Neon Auth UI components to manage access based on authentication status.
 
 ```tsx
 import { Routes, Route } from 'react-router';
@@ -726,11 +570,19 @@ export default function App() {
 }
 ```
 
+The routing structure includes three main routes:
+
+1. `/` - The main Todo application, protected by authentication.
+2. `/auth/:path` - The authentication pages (Sign In, Sign Up, etc.).
+3. `/account/:path` - The account management pages.
+
+This setup ensures that only authenticated users can access the Todo application, while unauthenticated users are redirected to the Sign In page.
+
 ### Application Entry Point
 
 Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserRouter` to enable routing and authentication context.
 
-```tsx
+```tsx shouldWrap
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
@@ -750,21 +602,22 @@ createRoot(document.getElementById('root')!).render(
 );
 ```
 
+<Admonition type="tip" title="Setting up OAuth providers">
+In this example, Google OAuth is enabled for social login using the shared credentials provided by Neon Auth. You can customize the setup by adding your own OAuth credentials in the Neon Auth settings. Additional providers such as GitHub, Vercel can also be configured.
+
+For more details, see [Set up OAuth](/docs/auth/guides/setup-oauth).
+</Admonition>
+
 ### Update CSS
 
-Update `src/index.css` with the following Tailwind CSS styles for basic styling of the application:
+Update `src/index.css` to include the Neon Tailwind styles and define a few global styles for the application:
 
 ```css
 @import 'tailwindcss';
 @import '@neondatabase/neon-js/ui/tailwind';
 
 :root {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    sans-serif;
+  font-family: system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #0f172a;
@@ -791,12 +644,49 @@ body {
 
 2.  Open `http://localhost:5173`.
 3.  You will be redirected to the Sign In page.
-4.  Sign up with an email or social provider.
-5.  Once logged in, you can create tasks.
+4.  Sign up with an email or use Google OAuth to create an account.
+5.  Once logged in, you will see the Todo application interface where you can add, toggle, and delete tasks.
 
 ![Todo App Screenshot](/docs/guides/react-neon-auth-data-api-todos-demo.png)
 
 </Steps>
+
+### Optional: Add End-to-End Type Safety
+
+Neon JS SDK supports end-to-end type safety when interacting with the Data API. You can pull the database schema and generate TypeScript types for your tables. This allows you to have type-safe queries in your React application. This step is optional but recommended for better developer experience.
+
+1.  **Generate types:**
+
+    Run the following command to introspect your database and generate a `types.ts` file.
+
+    ```bash
+    npx @neondatabase/neon-js gen-types --db-url "$DATABASE_URL" --output src/types.ts
+    ```
+
+    > Ensure that the `DATABASE_URL` environment variable is set in your terminal session. (Run `export DATABASE_URL="your_connection_string"`)
+
+2.  **Update the Neon Client:**
+
+    Modify `src/neon.ts` to use the generated types. This tells the Neon SDK about your database structure.
+
+    ```typescript
+    import { createClient } from '@neondatabase/neon-js';
+    import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
+    import type { Database } from './types'; // [!code ++]
+
+    export const neon = createClient<Database>({
+      // [!code ++]
+      auth: {
+        url: import.meta.env.VITE_NEON_AUTH_URL,
+        adapter: BetterAuthReactAdapter(),
+      },
+      dataApi: {
+        url: import.meta.env.VITE_NEON_DATA_API_URL,
+      },
+    });
+    ```
+
+Now, when you type `neon.from('todos').select('...')`, `update('...')`, etc., you will get full type safety and autocompletion based on your database schema. Pull the types again whenever you make schema changes.
 
 ## Conclusion
 
@@ -804,7 +694,15 @@ In this guide, you built a secure Todo application using React, Neon Auth, and t
 
 With this foundation, you can create applications that require secure authentication and controlled data access - all without a dedicated backend server. To take your projects further, explore additional features of Neon Auth and the Data API.
 
-Before deploying to production, be sure to review the [Auth production checklist](/docs/auth/production-checklist).
+Before deploying to production, be sure to review the [Neon Auth production checklist](/docs/auth/production-checklist).
+
+## Source code
+
+The complete source code for this example is available on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/dhanushreddy291/react-neon-todo" description="Complete source code for the React Todo example built with Neon Auth and the Neon Data API." icon="github">React Neon Todo Example</a>
+</DetailIconCards>
 
 ## Resources
 
