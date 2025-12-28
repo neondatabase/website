@@ -202,9 +202,9 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
     ```
 
 3.  **Add the Todos table to your schema**
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema.
 
-    At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.  
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.
+
     This table links to the `userInNeonAuth` table in the `neon_auth` schema and uses the `crudPolicy` function to enforce Row‑Level Security (RLS).
 
     ```typescript {9,12,40-60} shouldWrap
@@ -390,7 +390,7 @@ export default function AccountPage() {
 }
 ```
 
-### The Todo Application Logic
+### Todo application component
 
 Create `src/pages/TodoApp.tsx`. This component handles displaying, adding, toggling, and deleting todos using the Neon Data API.
 
@@ -578,7 +578,7 @@ The routing structure includes three main routes:
 
 This setup ensures that only authenticated users can access the Todo application, while unauthenticated users are redirected to the Sign In page.
 
-### Application Entry Point
+### Application entry point
 
 Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserRouter` to enable routing and authentication context.
 
@@ -651,7 +651,7 @@ body {
 
 </Steps>
 
-### Optional: Add End-to-End Type Safety
+### Optional: Add End-to-end type safety
 
 Neon JS SDK supports end-to-end type safety when interacting with the Data API. You can pull the database schema and generate TypeScript types for your tables. This allows you to have type-safe queries in your React application. This step is optional but recommended for better developer experience.
 
@@ -660,22 +660,24 @@ Neon JS SDK supports end-to-end type safety when interacting with the Data API. 
     Run the following command to introspect your database and generate a `types.ts` file.
 
     ```bash
-    npx @neondatabase/neon-js gen-types --db-url "$DATABASE_URL" --output src/types.ts
+    export DATABASE_URL="your_connection_string" && \
+      npx @neondatabase/neon-js gen-types  \
+        --db-url "$DATABASE_URL" \
+        --output src/types.ts
     ```
 
-    > Ensure that the `DATABASE_URL` environment variable is set in your terminal session. (Run `export DATABASE_URL="your_connection_string"`)
+    > Replace `your_connection_string` with your actual Neon database connection string.
 
-2.  **Update the Neon Client:**
+2.  **Update the Neon client:**
 
     Modify `src/neon.ts` to use the generated types. This tells the Neon SDK about your database structure.
 
-    ```typescript
+    ```typescript {3,5}
     import { createClient } from '@neondatabase/neon-js';
     import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
-    import type { Database } from './types'; // [!code ++]
+    import type { Database } from './types';
 
     export const neon = createClient<Database>({
-      // [!code ++]
       auth: {
         url: import.meta.env.VITE_NEON_AUTH_URL,
         adapter: BetterAuthReactAdapter(),
@@ -686,7 +688,7 @@ Neon JS SDK supports end-to-end type safety when interacting with the Data API. 
     });
     ```
 
-Now, when you type `neon.from('todos').select('...')`, `update('...')`, etc., you will get full type safety and autocompletion based on your database schema. Pull the types again whenever you make schema changes.
+Now, when you interact with the Data API using `neon.from('todos').select('...')`, `update('...')`, etc., you will have full type safety and autocompletion based on your database schema. Remember to pull the types again whenever you make schema changes.
 
 ## Deploying the application
 
