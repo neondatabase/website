@@ -296,6 +296,12 @@ npx drizzle-kit generate
 
 This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
 
+<Admonition type="important" title="Issue with commented migrations">
+This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
+
+To resolve this, manually delete the contents of the `0000_...sql` file or replace the block comments with line comments (`--`).
+</Admonition>
+
 ```bash
 npx drizzle-kit migrate
 ```
