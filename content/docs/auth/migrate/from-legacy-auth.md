@@ -2,7 +2,7 @@
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 enableTableOfContents: true
-updatedOn: '2025-12-12T13:16:11.676Z'
+updatedOn: '2025-12-29T21:10:05.266Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
