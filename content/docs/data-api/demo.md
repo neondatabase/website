@@ -90,7 +90,8 @@ Now that you have the app running, let's explore how it uses the Data API. The f
 The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Neon Auth. Here's how the client is configured in `src/lib/auth.ts`:
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
 export const client = createClient<Database>({
