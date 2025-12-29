@@ -138,7 +138,7 @@ For example, you might want to allow only users with an `admin` role to update o
 
 To understand how `pgPolicy` works, let's rewrite the `todos` example using it. The following `pgPolicy` definition is exactly what `crudPolicy` would generate from your simpler configuration.
 
-```typescript {17-20}
+```typescript {18-22}
 import { pgTable, text, bigint, boolean, pgPolicy } from 'drizzle-orm/pg-core';
 import { authenticatedRole, authUid } from 'drizzle-orm/neon';
 import { sql } from 'drizzle-orm';
