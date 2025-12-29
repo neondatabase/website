@@ -259,7 +259,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <NeonAuthUIProvider authClient={authClient} emailOTP>
+        <NeonAuthUIProvider authClient={authClient} emailOTP social={{ providers: ['google'] }}>
           <header className="flex h-16 items-center justify-between border-b p-4">
             <h1 className="text-xl font-bold">Next.js Neon Todo</h1>
             <UserButton size={'icon'} />
@@ -415,6 +415,26 @@ The file defines five Server Actions that handle authentication and database ope
    - Restricts deletion to the authenticated user’s own todos.
    - Revalidates the path to reflect changes in the UI.
 
+## Create middleware for protected routes
+
+To protect certain routes and ensure only authenticated users can access them, create a middleware file. In this case, you'll protect the main page (`/`).
+
+Create `proxy.ts` in the root of your project with the following content:
+
+```typescript
+import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next/server';
+
+export default neonAuthMiddleware({
+  loginUrl: '/auth/sign-in',
+});
+
+export const config = {
+  matcher: ['/'],
+};
+```
+
+The middleware uses `neonAuthMiddleware` to check if a user is authenticated when accessing the root path (`/`). If not authenticated, the user is redirected to the sign-in page (`/auth/sign-in`).
+
 ## Create frontend components
 
 Create the main page and components to display and manage todos.
@@ -451,20 +471,10 @@ Create the main page and components to display and manage todos.
     Update `app/page.tsx` with the following content:
 
     ```tsx shouldWrap
-    import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
     import { getTodos, addTodo } from '@/app/actions';
     import { TodoItem } from '@/app/components/TodoItem';
-    import { redirect } from 'next/navigation';
 
     export default async function Home() {
-      const { session } = await neonAuth();
-
-      // If not logged in, redirect to sign-in page
-      if (!session) {
-        redirect('/auth/signin');
-      }
-
-      // Fetch data on the server
       const todos = await getTodos();
 
       return (
