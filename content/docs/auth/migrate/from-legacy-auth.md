@@ -81,7 +81,7 @@ Uninstall Stack Auth packages and install Better Auth.
 
 ```bash
 npm uninstall @stackframe/stack
-npm install @neondatabase/neon-auth-next @neondatabase/neon-auth-ui
+npm install @neondatabase/auth
 ```
 
 </CodeWithLabel>
@@ -103,12 +103,16 @@ export const stackServerApp = new StackServerApp({
 ```
 
 ```tsx
-// auth.ts
-import { createAuthClient } from '@neondatabase/neon-auth-next';
+// ./lib/auth/client.ts
+'use client';
+import { createAuthClient } from '@neondatabase/auth/next';
 
-export const authClient = createAuthClient({
-  url: process.env.NEXT_PUBLIC_NEON_AUTH_URL!,
-});
+export const authClient = createAuthClient();
+
+// ./lib/auth/server.ts
+import { createAuthServer } from '@neondatabase/auth/next/server';
+
+export const authServer = createAuthServer();
 ```
 
 </CodeTabs>
@@ -131,8 +135,7 @@ export default function SignInPage() {
 ```
 
 ```tsx
-'use client';
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignInPage() {
   return <AuthView pathname="sign-in" />;
@@ -157,8 +160,7 @@ export default function SignUpPage() {
 ```
 
 ```tsx
-'use client';
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignUpPage() {
   return <AuthView pathname="sign-up" />;
@@ -183,8 +185,7 @@ export function Header() {
 ```
 
 ```tsx
-'use client';
-import { UserButton } from '@neondatabase/neon-auth-ui';
+import { UserButton } from '@neondatabase/auth/react';
 
 export function Header() {
   return <UserButton />;
@@ -212,7 +213,7 @@ export function MyComponent() {
 
 ```tsx
 'use client';
-import { authClient } from './auth';
+import { authClient } from '@/lib/auth/client';
 
 export function MyComponent() {
   const { data: session } = authClient.useSession();
@@ -246,12 +247,26 @@ export default function RootLayout({ children }) {
 
 ```tsx
 'use client';
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
-import { authClient } from './auth';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import '@neondatabase/auth/ui/css';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth/client';
 
 export default function RootLayout({ children }) {
-  return <NeonAuthUIProvider authClient={authClient}>{children}</NeonAuthUIProvider>;
+  const router = useRouter();
+
+  return (
+    <NeonAuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={router.refresh}
+      Link={Link}
+    >
+      {children}
+    </NeonAuthUIProvider>
+  );
 }
 ```
 
@@ -276,10 +291,9 @@ export default function Handler(props: any) {
 
 ```tsx
 // app/api/auth/[...path]/route.ts
-import { toNextJsHandler } from '@neondatabase/neon-auth-next';
-import { authClient } from '@/auth';
+import { authApiHandler } from '@neondatabase/auth/next/server';
 
-export const { GET, POST } = toNextJsHandler(authClient);
+export const { GET, POST } = authApiHandler();
 ```
 
 </CodeTabs>
@@ -305,7 +319,7 @@ export default function ProtectedPage() {
 
 ```tsx
 'use client';
-import { SignedIn, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import { SignedIn, RedirectToSignIn } from '@neondatabase/auth/react';
 
 export default function ProtectedPage() {
   return (
@@ -327,7 +341,7 @@ You switch from hook-based redirects to declarative UI helpers that show content
 <CodeWithLabel label="proxy.ts (new)">
 
 ```tsx
-import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
+import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
@@ -339,6 +353,9 @@ export const config = {
     // Protected routes requiring authentication
     '/dashboard/:path*',
     '/settings/:path*',
+
+    // Do not run the middleware for the static resources
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };
 ```
@@ -362,11 +379,10 @@ export default async function ServerComponent() {
 ```
 
 ```tsx
-import { authClient } from '@/auth';
+import { neonAuth } from '@neondatabase/auth/next/server';
 
 export default async function ServerComponent() {
-  const { data: session } = await authClient.getSession();
-  const user = session?.user;
+  const { session, user } = await neonAuth();
   return <div>{user?.name || user?.email}</div>;
 }
 ```
@@ -386,7 +402,7 @@ Uninstall Stack Auth packages and install Better Auth.
 
 ```bash
 npm uninstall @stackframe/stack
-npm install @neondatabase/neon-js @neondatabase/neon-auth-ui
+npm install @neondatabase/neon-js
 ```
 
 </CodeWithLabel>
@@ -415,6 +431,7 @@ export const stackClientApp = new StackClientApp({
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+const { useSession } = authClient;
 ```
 
 </CodeTabs>
@@ -443,19 +460,11 @@ export function MyComponent() {
 ```
 
 ```tsx
-import { useState, useEffect } from 'react';
-import { authClient } from './auth';
+import { useSession } from './auth';
 
 export function MyComponent() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    authClient.getSession().then(({ data }) => {
-      if (data?.session?.user) {
-        setUser(data.session.user);
-      }
-    });
-  }, []);
+  const { data: session } = useSession();
+  const user = data?.user;
 
   return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
 }
@@ -484,8 +493,8 @@ function App() {
 ```
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import '@neondatabase/neon-js/ui/css';
 import { authClient } from './auth';
 
 function App() {
@@ -505,7 +514,7 @@ Delete any `StackHandler` routes. Create custom pages for sign-in and sign-up us
 <CodeWithLabel label="src/pages/SignIn.tsx">
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/neon-js/auth/react';
 
 export default function SignIn() {
   return <AuthView pathname="sign-in" />;
@@ -524,7 +533,7 @@ If you're using React Router, pass navigation helpers to the provider.
 <CodeWithLabel label="src/App.tsx (React Router)">
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authClient } from './auth';
 
