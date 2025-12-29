@@ -1,20 +1,17 @@
 ---
 title: Getting started with Neon Auth and Next.js
-subtitle: Build a Next.js todo app using Neon Auth and Drizzle ORM
+subtitle: Build a todo app using Next.js, Neon Auth, and Drizzle ORM
 author: dhanush-reddy
 enableTableOfContents: true
-createdAt: '2025-08-11T00:00:00.000Z'
-updatedOn: '2025-08-11T00:00:00.000Z'
+createdAt: '2025-12-26T00:00:00.000Z'
+updatedOn: '2025-12-26T00:00:00.000Z'
 ---
 
-[Neon Auth](/docs/neon-auth/overview) integrates user authentication directly with your Neon Postgres database, solving a common development challenge: keeping user data synchronized between systems. Instead of building and maintaining custom sync logic or webhook handlers, Neon Auth automatically populates and updates a `neon_auth.users_sync` table in your database in real-time. This allows you to treat user profiles as regular database rows, ready for immediate use in SQL joins and application logic.
+This guide walks you through building a demo Todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
 
-This guide will walk you through building a simple todo application using Next.js, Neon Auth, and Drizzle ORM. You'll learn how to:
+The guide primarily focuses on using **Server Actions** to securely handle authentication and database operations. Optional steps are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server actions, server components, client components, API routes).
 
-- Set up a Next.js project and enable Neon Auth.
-- Integrate Neon Auth to add sign-up, sign-in, and sign-out functionality.
-- Use Drizzle ORM to interact with the `neon_auth.users_sync` table.
-- Create protected server actions using Neon Auth.
+By the end, you’ll have a fully functional Todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Neon Auth, while Drizzle ORM handles database interactions.
 
 ## Prerequisites
 
@@ -25,202 +22,166 @@ Before you begin, ensure you have the following:
 
 <Steps>
 
-## Set up the Next.js project
-
-To get started, create a new Next.js project. Open your terminal and run the following command:
-
-```bash
-npx create-next-app@latest neon-auth-todo --typescript --tailwind --use-npm --eslint --app --no-src-dir --import-alias "@/*" --no-turbopack
-cd neon-auth-todo
-```
-
-This command sets up a new Next.js project with TypeScript, Tailwind CSS, and ESLint configured.
-
-Open the project in your favorite code editor (e.g., VSCode, Cursor, Windsurf).
-
-## Create a Neon project and enable Neon Auth
+## Create a Neon project with Neon Auth
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `neon-auth-todo`.
-
+1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
 2.  **Enable Neon Auth:**
-    - In your project's dashboard, go to the **Auth** page from the sidebar.
-    - Click **Enable Neon Auth**. This will provision the necessary infrastructure for authentication and user management.
+    - In your project's dashboard, go to the **Neon Auth** tab.
+    - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
-    ![Neon Console - Enable Neon Auth button](/docs/guides/enable-neon-auth.png)
+3.  **Copy your credentials:**
+    - **Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+      ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+    - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
+      ![Connection modal](/docs/connect/connection_details.png)
 
-3.  **Get environment variables:**
-    - After enabling Neon Auth, navigate to the **Configuration** tab on the Auth page.
-    - Select **Next.js** as your framework.
-    - You will see the required environment variables. Copy the entire block, which includes your Neon Auth keys and the database connection string.
+## Set up the Next.js project
 
-    ![Neon Console - Neon Auth configuration keys for Next.js](/docs/guides/neon-auth-example-config-keys.png)
+Create a new Next.js project and install dependencies.
 
-## Integrate Neon Auth into your app
-
-Now, you will integrate Neon Auth into your Next.js application.
-
-1.  **Run the Neon Auth setup command:**
-    In your project's root directory, run the following command to initialize the Neon Auth setup:
+1.  **Initialize the app:**
 
     ```bash
-    npx @stackframe/init-stack@latest --no-browser
+    npx create-next-app@latest next-neon-todo --yes
+    cd next-neon-todo
     ```
 
-    > Enter "Y" when prompted to proceed with the installation.
+2.  **Install dependencies:**
 
-    You should see output similar to this:
-
-    ```
-    npx @stackframe/init-stack@latest --no-browser
-    Need to install the following packages:
-    @stackframe/init-stack@2.8.28
-    Ok to proceed? (y) y
-
-
-          ██████
-      ██████████████
-    ████████████████████
-    ████████████████████                WELCOME TO
-    █████████████████        ╔═╗╔╦╗╔═╗╔═╗╦╔═  ┌─┐┬ ┬┌┬┐┬ ┬
-    █████████████            ╚═╗ ║ ╠═╣║  ╠╩╗  ├─┤│ │ │ ├─┤
-    █████████████   ████     ╚═╝ ╩ ╩ ╩╚═╝╩ ╩  ┴ ┴└─┘ ┴ ┴ ┴
-       █████████████████
-          ██████      ██
-    ████            ████
-      █████    █████
-          ██████
-
-
-    ? Found a Next.js project at /home/user/neon-auth-todo/neon-auth-todo — ready to install Stack Auth? Yes
-
-    Installing dependencies...
-
-    npm warn ERESOLVE overriding peer dependency
-
-    added 272 packages, and audited 604 packages in 9s
-
-    164 packages are looking for funding
-      run `npm fund` for details
-
-    2 low severity vulnerabilities
-
-    To address all issues, run:
-      npm audit fix
-
-    Run `npm audit` for details.
-    √ Command npm install @stackframe/stack succeeded
-
-    Writing files...
-
-    √ Done writing files
-
-    Installation succeeded!
-
-    Commands executed:
-      npm install @stackframe/stack
-
-    Files written:
-      app/layout.tsx
-      .env.local
-      stack/client.tsx
-      stack/server.tsx
-      app/handler/[...stack]/page.tsx
-      app/loading.tsx
-
-    ===============================================
-
-    Successfully installed Stack! 🚀🚀🚀
+    ```bash
+    npm install @neondatabase/neon-js @neondatabase/serverless drizzle-orm
+    npm install -D drizzle-kit dotenv @types/node
     ```
 
-2.  **Configure environment variables:**
-    Paste the environment variables you copied from the Neon Auth configuration into the `.env.local` file.
+## Configure environment variables
 
-    ```env
-    # Neon Auth environment variables for Next.js
-    NEXT_PUBLIC_STACK_PROJECT_ID=YOUR_NEON_AUTH_PROJECT_ID
-    NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=YOUR_NEON_AUTH_PUBLISHABLE_KEY
-    STACK_SECRET_SERVER_KEY=YOUR_NEON_AUTH_SECRET_KEY
+Create a `.env` file in the root of your project.
 
-    # Your Neon connection string
-    DATABASE_URL=YOUR_NEON_CONNECTION_STRING
-    ```
+```env
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
+NEON_AUTH_BASE_URL="https://ep-xxx.neon.tech/neondb/auth"
+```
 
 ## Set up Drizzle ORM
 
-For database interactions, you will use Drizzle ORM.
+Drizzle ORM helps manage your database schema and queries. Alternatively, you can use any Postgres client of your choice.
 
-1.  **Install Drizzle ORM:**
+The core logic is to filter data based on the authenticated user provided by Neon Auth while performing database operations.
 
-    ```bash
-    npm install drizzle-orm @neondatabase/serverless
-    npm install -D drizzle-kit dotenv
-    ```
+### Create Drizzle config
 
-2.  **Create Drizzle config:**
-    Create a file named `drizzle.config.ts` in your project root and add the following configuration:
-
-    ```typescript
-    import { defineConfig } from 'drizzle-kit';
-    import { config } from 'dotenv';
-
-    config({ path: './.env.local' });
-
-    export default defineConfig({
-      dialect: 'postgresql',
-      schema: './app/db/schema.ts',
-      out: './drizzle',
-      dbCredentials: {
-        url: process.env.DATABASE_URL!,
-      },
-    });
-    ```
-
-    This config tells Drizzle Kit where to find your database schema and where to output migration files.
-
-## Define the application schema
-
-Drizzle ORM provides a built-in helper function to work with Neon Auth's `users_sync` table. Instead of manually defining the schema or pulling it from the database, you can use the `usersSync` helper from `drizzle-orm/neon`.
-
-The most important part of this schema is creating a direct link between a todo and the user who owns it. You will achieve this by establishing a foreign key relationship from your `todos` table to the `users_sync` table.
-
-This schema defines the `todos` table with the following columns:
-
-- **`id`**: A unique, auto-incrementing identifier for each todo.
-- **`ownerId`**: A text column that stores the user's ID. This column is configured with a foreign key that `references` the `id` in the `neon_auth.users_sync` table, ensuring data integrity.
-- **`task`**: The text content of the todo item.
-- **`isComplete`**: A boolean flag to track the todo's status.
-- **`insertedAt`**: A timestamp automatically set when a todo is created.
-
-### Create the schema file
-
-Create a `db` directory inside the `app` folder, then add a file named `schema.ts` within it:
-
-```plaintext
-app/
-  db/
-    schema.ts
-```
-
-Add the following code to `app/db/schema.ts`:
+Create `drizzle.config.ts` in the root of your project:
 
 ```typescript
-import { pgTable, text, timestamp, bigint, boolean } from 'drizzle-orm/pg-core';
-import { usersSync } from 'drizzle-orm/neon';
+import 'dotenv/config';
+import type { Config } from 'drizzle-kit';
 
-export const todos = pgTable('todos', {
-  id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
-  ownerId: text('owner_id')
-    .notNull()
-    .references(() => usersSync.id),
-  task: text('task').notNull(),
-  isComplete: boolean('is_complete').notNull().default(false),
-  insertedAt: timestamp('inserted_at', { withTimezone: true }).defaultNow().notNull(),
-});
+export default {
+  schema: './app/db/schema.ts',
+  out: './drizzle',
+  dialect: 'postgresql',
+  schemaFilter: ['public', 'neon_auth'],
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+} satisfies Config;
 ```
 
-The `usersSync` helper from `drizzle-orm/neon` automatically provides the correct schema definition for the `neon_auth.users_sync` table, eliminating the need for manual schema introspection.
+This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Neon Auth stores its user data.
+
+### Pull Neon Auth schema
+
+A key feature of Neon Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
+
+To integrate Neon Auth tables into your Drizzle ORM setup, you need to introspect the existing `neon_auth` schema and generate the corresponding Drizzle schema definitions.
+
+This step is crucial because it makes Drizzle aware of the Neon Auth tables, allowing you to create relationships between your application data (like the `todos` table) and the user data managed by Neon Auth.
+
+1.  **Introspect the database:**
+    Run the Drizzle Kit `pull` command to generate a schema file based on your existing Neon database tables.
+
+    ```bash
+    npx drizzle-kit pull
+    ```
+
+    This command connects to your Neon database, inspects its structure, and creates `schema.ts` and `relations.ts` files inside a new `drizzle` folder. This file will contain the Drizzle schema definition for the Neon Auth tables.
+
+2.  **Organize schema files:**
+    Create a new directory `app/db`. Move the generated `schema.ts` and `relations.ts` files from the `drizzle` directory to `app/db/schema.ts` and `app/db/relations.ts` respectively.
+
+    ```
+     ├ 📂 drizzle
+     │ ├ 📂 meta
+     │ ├ 📜 migration.sql
+     │ ├ 📜 relations.ts ────────┐
+     │ └ 📜 schema.ts ───────────┤
+     ├ 📂 app                    │
+     │ ├ 📂 db                   │
+     │ │ ├ 📜 relations.ts <─────┤
+     │ │ └ 📜 schema.ts <────────┘
+     │ └ 📜 App.tsx
+     └ …
+    ```
+
+3.  **Add the Todos table to your schema**
+
+    Open `app/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition as shown below:
+
+    ```typescript {9,39-49} shouldWrap
+    import {
+      pgTable,
+      pgSchema,
+      uuid,
+      text,
+      timestamp,
+      unique,
+      boolean,
+      bigint,
+    } from 'drizzle-orm/pg-core';
+    import { sql } from 'drizzle-orm';
+
+    export const neonAuth = pgSchema('neon_auth');
+
+    // .. other Neon Auth table definitions ..
+
+    export const userInNeonAuth = neonAuth.table(
+      'user',
+      {
+        id: uuid().defaultRandom().primaryKey().notNull(),
+        name: text().notNull(),
+        email: text().notNull(),
+        emailVerified: boolean().notNull(),
+        image: text(),
+        createdAt: timestamp({ withTimezone: true, mode: 'string' })
+          .default(sql`CURRENT_TIMESTAMP`)
+          .notNull(),
+        updatedAt: timestamp({ withTimezone: true, mode: 'string' })
+          .default(sql`CURRENT_TIMESTAMP`)
+          .notNull(),
+        role: text(),
+        banned: boolean(),
+        banReason: text(),
+        banExpires: timestamp({ withTimezone: true, mode: 'string' }),
+      },
+      (table) => [unique('user_email_key').on(table.email)]
+    );
+
+    export const todos = pgTable('todos', {
+      id: bigint('id', { mode: 'number' }).primaryKey().generatedByDefaultAsIdentity(),
+      text: text('text').notNull(),
+      completed: boolean('completed').notNull().default(false),
+      userId: uuid('user_id')
+        .notNull()
+        .references(() => userInNeonAuth.id),
+      createdAt: timestamp('created_at').defaultNow(),
+    });
+
+    export type Todo = typeof todos.$inferSelect;
+    ```
+
+    The `todos` table contains the following columns: `id`, `text`, `completed`, and `user_id`. It is linked to the `user` table in the `neon_auth` schema via a foreign key relationship on the `user_id` column.
 
 ### Generate and apply migrations
 
@@ -232,17 +193,21 @@ npx drizzle-kit generate
 
 This creates a new SQL file in the `drizzle` directory. Apply this migration to your Neon database by running:
 
+<Admonition type="important" title="Issue with commented migrations">
+This is a [known issue](https://github.com/drizzle-team/drizzle-orm/issues/4851) in Drizzle. If `drizzle-kit pull` generated an initial migration file (e.g., `0000_...sql`) wrapped in block comments (`/* ... */`), `drizzle-kit migrate` may fail with an `unterminated /* comment` error.
+
+To resolve this, manually delete the contents of the `0000_...sql` file or replace the block comments with line comments (`--`).
+</Admonition>
+
 ```bash
 npx drizzle-kit migrate
 ```
 
-Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project console.
+Your `todos` table now exists in your Neon database. You can verify this in the **Tables** section of your Neon project dashboard.
 
-![Neon Auth todos table](/docs/guides/neon-auth-todos-table.png)
+### Initialize database client
 
-## Create the database client
-
-Create a file at `app/db/index.ts` to instantiate the Drizzle client.
+Create `app/db/index.ts` to initialize the Drizzle ORM client.
 
 ```typescript
 import { neon } from '@neondatabase/serverless';
@@ -252,339 +217,332 @@ const sql = neon(process.env.DATABASE_URL!);
 export const db = drizzle(sql);
 ```
 
-## Build the application UI
+Now you have Drizzle ORM set up with Neon Auth and a `todos` table ready for use in your Next.js application.
 
-You will create a simple user interface for your todo app using React components.
+## Set up Neon Auth
 
-1.  **Create the Header Component:**
-    This component will display sign-in/sign-up links or user information and a sign-out button. Create `app/header.tsx`:
+Integrate Neon Auth into your Next.js application for authentication and session management.
 
-    ```tsx
-    'use client';
+### Create Auth client
 
-    import Link from 'next/link';
-    import { useStackApp, useUser } from '@stackframe/stack';
+Create a file `lib/auth/client.ts` at the root of your project to initialize the Neon Auth client.
 
-    export function Header() {
-      const user = useUser();
-      const app = useStackApp();
+```typescript
+'use client';
+import { createAuthClient } from '@neondatabase/neon-js/auth/next';
 
-      return (
-        <header className="dark:bg-gray-900 fixed left-0 top-0 z-50 w-full bg-white shadow-md">
-          <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-3">
-            <div className="text-gray-800 dark:text-gray-100 text-xl font-bold tracking-tight">
-              My Todo App
-            </div>
-            <nav>
-              {user ? (
-                <div className="flex items-center gap-4">
-                  <span className="text-gray-600 dark:text-gray-300">
-                    Hello{' '}
-                    <span className="dark:text-gray-100 font-medium">{user.primaryEmail}</span>
-                  </span>
-                  <Link
-                    href={app.urls.signOut}
-                    className="text-red-500 dark:text-red-400 text-sm hover:underline"
-                  >
-                    Sign Out
-                  </Link>
-                </div>
-              ) : (
-                <div className="flex items-center gap-4">
-                  <Link
-                    href={app.urls.signIn}
-                    className="text-blue-600 dark:text-blue-400 text-sm hover:underline"
-                  >
-                    Sign In
-                  </Link>
-                  <span className="text-gray-400 dark:text-gray-500">|</span>
-                  <Link
-                    href={app.urls.signUp}
-                    className="text-green-600 dark:text-green-400 text-sm hover:underline"
-                  >
-                    Sign Up
-                  </Link>
-                </div>
-              )}
-            </nav>
-          </div>
-        </header>
-      );
-    }
-    ```
+export const authClient = createAuthClient();
+```
 
-    The `useUser()` hook provides the current user's state, while `useStackApp()` provides access to utility URLs like `signIn` and `signOut`.
+### Create API route
 
-    <Admonition type="info" title="Neon Auth Hooks">
-      The Neon Auth SDK for Next.js offers a comprehensive set of hooks to manage authentication and user data throughout your application. It provides distinct tools tailored for different rendering environments, such as the `useUser` hook for Client Components and the `stackServerApp` object for server-side logic.
+Create `app/api/auth/[...path]/route.ts`. This file will handle authentication API requests on the server side.
 
-    To explore the full API, including hooks for more advanced features like handling teams and permissions, refer to the [Neon Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview).
-    </Admonition>
+```typescript
+import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
 
-2.  **Create the Todo components:**
+export const { GET, POST } = authApiHandler();
+```
 
-    For all CRUD operations, you'll use server actions to securely handle form submissions and update the database directly from your Next.js components. The implementation details of these server actions will be covered later in the guide.
+### Add Neon Auth UI provider
 
-    Create a new file `app/todos.tsx` to define the form for adding todos and the list to display them.
+Update `app/layout.tsx` to wrap your application with the `NeonAuthUIProvider`, which supplies authentication context and UI components.
 
-    ```tsx
-    import { addTodo, toggleTodo, deleteTodo } from '@/app/actions/todoActions';
-    import { stackServerApp } from '@/stack/server';
-    import { revalidatePath } from 'next/cache';
+This setup also adds a global header containing a `UserButton` from [Neon Auth UI components](/docs/auth/reference/ui-components) for account management, ensuring the header is visible across all pages.
 
-    type Todo = {
-      id: bigint;
-      task: string;
-      isComplete: boolean;
-    };
+```tsx shouldWrap
+import { authClient } from '@/lib/auth/client';
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/neon-js/auth/react/ui';
+import './globals.css';
 
-    export async function TodoForm() {
-      const user = await stackServerApp.getUser();
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <NeonAuthUIProvider authClient={authClient} emailOTP>
+          <header className="flex h-16 items-center justify-between border-b p-4">
+            <h1 className="text-xl font-bold">Next.js Neon Todo</h1>
+            <UserButton size={'icon'} />
+          </header>
+          {children}
+        </NeonAuthUIProvider>
+      </body>
+    </html>
+  );
+}
+```
 
-      if (!user) {
-        return (
-          <p className="text-gray-500 mt-4 text-center">Please log in to manage your todos.</p>
-        );
-      }
+### Add Neon Auth styles
+
+In `app/globals.css`, add the following import statement directly below the `@import 'tailwindcss';` line.  
+This ensures that the required Tailwind styles for Neon Auth UI components are included.
+
+```css {2}
+@import 'tailwindcss';
+@import '@neondatabase/neon-js/ui/tailwind';
+
+/* ... your existing styles ... */
+```
+
+### Create Auth pages
+
+Create the specific pages for signing in and managing accounts using Neon's pre-built UI components.
+
+1.  **Auth page:**
+
+    Create `app/auth/[path]/page.tsx`. This page will render the Neon Auth sign-in/sign-up UI.
+
+    ```tsx shouldWrap
+    import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+
+    export const dynamicParams = false;
+
+    export default async function AuthPage({ params }: { params: Promise<{ path: string }> }) {
+      const { path } = await params;
 
       return (
-        <form
-          action={async (formData) => {
-            'use server';
-            await addTodo(formData.get('task') as string);
-            revalidatePath('/');
-          }}
-          className="flex gap-2"
-        >
-          <input
-            type="text"
-            name="task"
-            placeholder="New todo"
-            className="flex-1 rounded-md border px-2 py-1"
-            required
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 rounded-md px-3 py-1 text-white"
-          >
-            Add
-          </button>
-        </form>
-      );
-    }
-
-    export function TodoList({ todos }: { todos: Todo[] }) {
-      if (todos.length === 0) {
-        return <p className="text-gray-500 mt-8 text-center">No todos yet. Add one above!</p>;
-      }
-
-      return (
-        <ul className="mt-4 space-y-2">
-          {todos.map((todo) => (
-            <li
-              key={todo.id.toString()}
-              className="flex items-center justify-between border-b py-2"
-            >
-              <span className={todo.isComplete ? 'text-gray-400 line-through' : ''}>
-                {todo.task}
-              </span>
-              <div className="flex gap-2">
-                <form
-                  action={async () => {
-                    'use server';
-                    await toggleTodo(todo.id, !todo.isComplete);
-                    revalidatePath('/');
-                  }}
-                >
-                  <button type="submit" className="text-green-500 hover:text-green-700 text-sm">
-                    {todo.isComplete ? 'Undo' : 'Done'}
-                  </button>
-                </form>
-                <form
-                  action={async () => {
-                    'use server';
-                    await deleteTodo(todo.id);
-                    revalidatePath('/');
-                  }}
-                >
-                  <button type="submit" className="text-red-500 hover:text-red-700 text-sm">
-                    Delete
-                  </button>
-                </form>
-              </div>
-            </li>
-          ))}
-        </ul>
-      );
-    }
-    ```
-
-    The above code defines two main components for managing todos: `TodoForm` and `TodoList`.
-    - `TodoForm` is a form for adding new todos. It checks if the user is logged in and, if so, allows them to submit a new todo item. On submission, it calls the `addTodo` server action and refreshes the page to show the updated list.
-
-    - `TodoList` displays the current user's todos. Each todo item has buttons to mark it as complete/incomplete or delete it. These actions are handled by the `toggleTodo` and `deleteTodo` server actions, respectively. The UI updates automatically after each action, and if there are no todos, a message prompts the user to add one.
-
-3.  **Create the main page:**
-    Replace the content of `app/page.tsx` with the following code. This will be the main page that displays the todo list and the form to add new todos.
-
-    ```tsx
-    import { getTodos } from '@/app/actions/todoActions';
-    import { stackServerApp } from '@/stack/server';
-    import { Header } from './header';
-    import { TodoForm, TodoList } from './todos';
-
-    export default async function HomePage() {
-      const todos = await getTodos();
-
-      return (
-        <main className="mx-auto max-w-lg p-6 pt-24">
-          <Header />
-          <h1 className="mb-4 text-2xl font-bold">My Todos</h1>
-          <TodoForm />
-          <TodoList todos={todos} />
+        <main className="container mx-auto flex grow flex-col items-center justify-center gap-3 self-center p-4 md:p-6">
+          <AuthView path={path} />
         </main>
       );
     }
     ```
 
-## Implement server actions
+2.  **Account page:**
+    Create `app/account/[path]/page.tsx`. This page renders the Neon Auth account management UI, including features such as profile settings, password updates, and more.
 
-To manage todos, you need to create server actions that will handle the database operations. These actions will be responsible for adding, retrieving, updating, and deleting todos.
+    ```tsx shouldWrap
+    import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+    import { accountViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
 
-Create a new file `app/actions/todoActions.ts`:
+    export const dynamicParams = false;
 
-```typescript
+    export function generateStaticParams() {
+      return Object.values(accountViewPaths).map((path) => ({ path }));
+    }
+
+    export default async function AccountPage({ params }: { params: Promise<{ path: string }> }) {
+      const { path } = await params;
+
+      return (
+        <main className="container p-4 md:p-6">
+          <AccountView path={path} />
+        </main>
+      );
+    }
+    ```
+
+## Create server actions
+
+You will use Server Actions to handle database operations securely on the server side. These actions will ensure that only authenticated users can access and modify their todos.
+
+Create `app/actions.ts` with the following content:
+
+```typescript shouldWrap
 'use server';
 
+import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
 import { db } from '@/app/db';
 import { todos } from '@/app/db/schema';
-import { stackServerApp } from '@/stack/server';
 import { eq, desc, and } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
-export async function addTodo(task: string) {
-  const user = await stackServerApp.getUser();
-  if (!user) throw new Error('Not authenticated');
-
-  await db.insert(todos).values({
-    task,
-    ownerId: user.id,
-  });
+async function getAuthUser() {
+  const { user } = await neonAuth();
+  if (!user) throw new Error('Unauthorized');
+  return user;
 }
 
 export async function getTodos() {
-  const user = await stackServerApp.getUser();
-  if (!user) return [];
-
-  return db.select().from(todos).where(eq(todos.ownerId, user.id)).orderBy(desc(todos.insertedAt));
+  const user = await getAuthUser();
+  return db.select().from(todos).where(eq(todos.userId, user.id)).orderBy(desc(todos.createdAt));
 }
 
-export async function toggleTodo(id: bigint, isComplete: boolean) {
-  const user = await stackServerApp.getUser();
-  if (!user) throw new Error('Not authenticated');
+export async function addTodo(formData: FormData) {
+  const user = await getAuthUser();
+  const text = formData.get('text') as string;
+  if (!text) return;
+
+  await db.insert(todos).values({ text, userId: user.id });
+
+  revalidatePath('/');
+}
+
+export async function toggleTodo(id: number, currentStatus: boolean) {
+  const user = await getAuthUser();
 
   await db
     .update(todos)
-    .set({ isComplete })
-    .where(and(eq(todos.id, id), eq(todos.ownerId, user.id)));
+    .set({ completed: !currentStatus })
+    .where(and(eq(todos.id, id), eq(todos.userId, user.id)));
+
+  revalidatePath('/');
 }
 
-export async function deleteTodo(id: bigint) {
-  const user = await stackServerApp.getUser();
-  if (!user) throw new Error('Not authenticated');
+export async function deleteTodo(id: number) {
+  const user = await getAuthUser();
 
-  await db.delete(todos).where(and(eq(todos.id, id), eq(todos.ownerId, user.id)));
+  await db.delete(todos).where(and(eq(todos.id, id), eq(todos.userId, user.id)));
+
+  revalidatePath('/');
 }
 ```
 
-In each action, `stackServerApp.getUser()` retrieves the currently logged-in user. If no user is found, the action either fails or returns an empty state. This ensures that all database operations are securely tied to the authenticated user's ID.
+The file defines five Server Actions that handle authentication and database operations:
 
-## Run and test the application
+1. `getAuthUser()`
+   - Calls `neonAuth()` to get the current user.
+   - Throws an error if no user is authenticated.
+   - Used internally by all other actions to enforce authentication.
 
-You are now ready to run your application.
+2. `getTodos()`
+   - Retrieves todos belonging to the authenticated user.
+   - Filters by `userId` and orders results by `createdAt` in descending order.
+   - Ensures users only see their own todos.
 
-1.  **Start the development server:**
+3. `addTodo(formData)`
+   - Extracts the `text` field from submitted form data.
+   - Inserts a new todo linked to the authenticated user.
+   - Calls `revalidatePath('/')` to refresh the UI after insertion.
+
+4. `toggleTodo(id, currentStatus)`
+   - Flips the `completed` status of a todo.
+   - Ensures the update only applies to the authenticated user’s todo (via `userId` check).
+   - Revalidates the path to update the UI.
+
+5. `deleteTodo(id)`
+   - Deletes a todo by its ID.
+   - Restricts deletion to the authenticated user’s own todos.
+   - Revalidates the path to reflect changes in the UI.
+
+## Create frontend components
+
+Create the main page and components to display and manage todos.
+
+1.  **Todo Item component:**
+
+    Create `app/components/TodoItem.tsx` with the following content:
+
+    ```tsx shouldWrap
+    'use client';
+    import { toggleTodo, deleteTodo } from '../actions';
+    import { Todo } from '@/app/db/schema';
+
+    export function TodoItem({ todo }: { todo: Todo }) {
+      return (
+        <li className="bg-gray-50 dark:bg-gray-800 mb-2 flex items-center justify-between rounded p-3">
+          <div
+            className="flex cursor-pointer items-center gap-2"
+            onClick={() => toggleTodo(todo.id, todo.completed)}
+          >
+            <input type="checkbox" checked={todo.completed} readOnly className="cursor-pointer" />
+            <span className={todo.completed ? 'text-gray-500 line-through' : ''}>{todo.text}</span>
+          </div>
+          <button onClick={() => deleteTodo(todo.id)} className="text-red-400 hover:text-red-600">
+            Delete
+          </button>
+        </li>
+      );
+    }
+    ```
+
+2.  **Main page:**
+
+    Update `app/page.tsx` with the following content:
+
+    ```tsx shouldWrap
+    import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
+    import { getTodos, addTodo } from '@/app/actions';
+    import { TodoItem } from '@/app/components/TodoItem';
+    import { redirect } from 'next/navigation';
+
+    export default async function Home() {
+      const { session } = await neonAuth();
+
+      // If not logged in, redirect to sign-in page
+      if (!session) {
+        redirect('/auth/signin');
+      }
+
+      // Fetch data on the server
+      const todos = await getTodos();
+
+      return (
+        <main className="dark:bg-gray-900 mx-auto mt-10 max-w-md rounded-lg bg-white p-6 shadow">
+          <h2 className="mb-6 text-2xl font-bold">My Tasks</h2>
+
+          <form action={addTodo} className="mb-6 flex gap-2">
+            <input
+              name="text"
+              type="text"
+              placeholder="Add a new task..."
+              className="flex-1 rounded border p-2"
+              required
+            />
+            <button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 rounded px-4 py-2 text-white"
+            >
+              Add
+            </button>
+          </form>
+
+          <ul>
+            {todos.map((todo) => (
+              <TodoItem key={todo.id} todo={todo} />
+            ))}
+            {todos.length === 0 && <p className="text-gray-500 text-center">No tasks yet.</p>}
+          </ul>
+        </main>
+      );
+    }
+    ```
+
+    This page checks if the user is authenticated using `neonAuth()`. If not, it redirects to the sign-in page. It then fetches the user's todos using the `getTodos` Server Action and displays them using the `TodoItem` component. A form is provided to add new todos via the `addTodo` Server Action.
+
+## Run the application
+
+1.  Start the development server:
 
     ```bash
     npm run dev
     ```
 
-2.  **Test the app:**
-    - Open your browser to `http://localhost:3000`.
-    - You will see the header with "Sign In" and "Sign Up" links.
-    - Click **Sign Up** to create a new account. You'll be redirected to the signup page.
-      ![Neon Auth todo app signup page](/docs/guides/neon-auth-todo-app-signup.png)
+2.  Open `http://localhost:3000`.
+3.  You will be redirected to the Sign In page.
+4.  Once logged in, you can manage your todos.
 
-      > Sign up using one of the available OAuth providers (e.g., Google, GitHub) or with your email address.
-
-    - After signing up, you'll be redirected back to the app, now logged in.
-    - Add, complete, and delete a few todos to test the full functionality.
-
-![Neon Auth Todo App Demo](/docs/guides/neon-auth-todo-app-demo.png)
+    ![Todo App Screenshot](/docs/guides/neon-auth-nextjs-todo-demo.png)
 
 </Steps>
 
-## Using Neon Auth in production
+## Deploying the application
 
-Before deploying your application to a live environment, you must complete the following security configurations. These steps are crucial to ensure your application is secure and provides a trusted experience for your users.
+When you’re ready to deploy your Next.js application, you can use any platform that supports Next.js, such as Vercel, Netlify or VPS providers. Be sure to configure the required environment variables (`DATABASE_URL` and `NEON_AUTH_BASE_URL`) in your deployment settings.
 
-### Configure production OAuth credentials
+After deployment, add your production URLs to the **Your trusted domains** section in the Neon Auth settings to ensure authentication functions correctly.
 
-The default OAuth providers (e.g., Google, GitHub) use shared, demo credentials. These are strictly for development and testing purposes. **Do not use them in production.**
+## Conclusion
 
-For a live application, you must create and configure your own OAuth credentials for each provider. This ensures your application is secure and displays your own branding on the provider's consent screen, creating a trusted experience for your users.
+In this guide, you built a secure Todo application using Next.js, Neon Auth, and Drizzle ORM. You learned how to configure Neon Auth for user authentication, define your database schema with Drizzle ORM, and use Server Actions to securely handle authentication and database operations.
 
-> **For detailed instructions, see: [Neon Auth: Production OAuth setup](/docs/neon-auth/best-practices#production-oauth-setup)**
+With this foundation, you can create applications that require secure user authentication and data management using Neon Auth and Next.js.
 
-### Restrict redirect domains
+Before deploying to production, be sure to review the [Neon Auth production checklist](/docs/auth/production-checklist).
 
-To prevent malicious actors from hijacking your authentication flows, you must explicitly whitelist the domains your application will use for authentication redirects (e.g., your main website, admin panels).
+## Source code
 
-When a user signs in, Neon Auth will only redirect them to a domain on this approved list. Any attempts to redirect to an unlisted domain will be blocked, protecting your users from phishing attacks and other security threats.
+The complete source code for this example is available on GitHub.
 
-> **For detailed steps, see: [Neon Auth best practices: Restricting redirect domains](/docs/neon-auth/best-practices#restricting-redirect-domains)**
-
-### Set up a custom email server
-
-By default, Neon Auth sends transactional emails (like email verification and password resets) from a shared server using the `noreply@stackframe.co` address. For a production application, this can appear unprofessional and may cause emails to be filtered as spam.
-
-To ensure a trusted user experience and improve email deliverability, you should configure Neon Auth to send emails from your own domain using a custom SMTP server.
-
-> **For instructions, see: [Neon Auth best practices: Email server setup](/docs/neon-auth/best-practices#email-server)**
-
-### Claim your project for Advanced configuration
-
-Neon Auth is powered by [Stack Auth](https://stack-auth.com/), providing a managed authentication experience directly within the Neon Console. While most features can be used out of the box, you may need more advanced control for certain production use cases.
-
-For advanced configurations or to add OAuth providers beyond the defaults (Github and Google), you can claim your project. Claiming moves the project's management from Neon to your direct control within the Stack Auth dashboard.
-
-You should consider claiming your project if you need to:
-
-- **Add new OAuth providers** (e.g., Spotify, Discord, Apple etc) and manage their unique client IDs/secrets.
-- **Enable production mode** to enforce stricter security settings required for a live application.
-- **Manage multiple environments** (e.g., development, staging, production) directly within the Stack Auth interface.
-
-> **For more information, see: [Claiming a Neon Auth project](/docs/neon-auth/claim-project)**
-
-## Advanced features
-
-You've now built a basic application with Neon Auth. This is just the beginning. Neon Auth also provides more advanced capabilities for complex applications:
-
-- **[Teams and organizations](/docs/neon-auth/concepts/orgs-and-teams):** Group users into teams to manage access and permissions for B2B applications or collaborative projects.
-- **[App/User RBAC permissions](/docs/neon-auth/concepts/permissions):** Implement fine-grained Role-Based Access Control (RBAC) with both team-specific and global (project-level) permissions.
-- **[Custom user data](/docs/neon-auth/concepts/custom-user-data):** Store additional information on user objects using different metadata fields (`clientMetadata`, `serverMetadata`, `clientReadOnlyMetadata`) to control data visibility and mutability between the client and server.
-
-## Summary
-
-Congratulations! You've successfully built a full-stack, secure todo application with Next.js and Neon Auth. You learned how to seamlessly integrate authentication, leverage the automatic user data sync with `neon_auth.users_sync`, and protect server-side logic using a unified auth and database solution.
-
-Neon Auth handles the complexity of user management and data synchronization, allowing you to focus on building your application's core features.
+<DetailIconCards>
+<a href="https://github.com/dhanushreddy291/next-neon-todo" description="Complete source code for the Next.js Todo example built with Neon Auth and Drizzle ORM." icon="github">Next.js Neon Todo Example</a>
+</DetailIconCards>
 
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
 - [How Neon Auth works](/docs/neon-auth/how-it-works)
-- [Neon Auth Best Practices & FAQ](/docs/neon-auth/best-practices)
-- [Neon Auth: Next.js SDK Overview](/docs/neon-auth/sdk/nextjs/overview)
-- [Neon Auth Components](/docs/neon-auth/components/components)
+- [Use Neon Auth with Next.js](/docs/auth/quick-start/nextjs)
+- [Neon Auth UI components](/docs/auth/reference/ui-components)
 
-<NeedHelp/>
+<NeedHelp />
