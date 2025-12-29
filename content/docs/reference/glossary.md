@@ -540,7 +540,7 @@ A memory area in Postgres for caching blocks of data from storage (disk on stand
 
 ## Snapshot
 
-A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ## SNI
 

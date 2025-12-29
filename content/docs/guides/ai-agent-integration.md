@@ -357,6 +357,8 @@ Use snapshots (branches) for versions you want to keep beyond the [restore windo
 
 <Admonition type="important">
 **Snapshot limits:** Free organization projects can only maintain **1 snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 snapshots** simultaneously. Design your versioning UI accordingly.
+
+**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 </Admonition>
 
 Example creating a snapshot:
