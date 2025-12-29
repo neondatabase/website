@@ -1,6 +1,6 @@
 ---
 title: Getting started with Neon Auth and Next.js
-subtitle: Build a todo app using Next.js, Neon Auth, and Drizzle ORM
+subtitle: Learn how to setup Neon Auth in a Next.js application
 author: dhanush-reddy
 enableTableOfContents: true
 createdAt: '2025-12-26T00:00:00.000Z'
@@ -9,7 +9,7 @@ updatedOn: '2025-12-26T00:00:00.000Z'
 
 This guide walks you through building a demo Todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
 
-The guide primarily focuses on using **Server Actions** to securely handle authentication and database operations. Optional steps are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server actions, server components, client components, API routes).
+The guide primarily focuses on using **Server actions** to securely handle authentication and database operations. [Optional steps](#optional-accessing-user-data-elsewhere) are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server actions, server components, client components, API routes).
 
 By the end, you’ll have a fully functional Todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Neon Auth, while Drizzle ORM handles database interactions.
 
@@ -525,6 +525,133 @@ Create the main page and components to display and manage todos.
     ![Todo App Screenshot](/docs/guides/neon-auth-nextjs-todo-demo.png)
 
 </Steps>
+
+## Optional: Accessing user data elsewhere
+
+While this guide focused on **Server Actions** to handle data, your application might need to access the user's session in other contexts, such as rendering a user profile on the server, reacting to session changes on the client, or securing a REST API endpoint.
+
+Here is how you can retrieve user information across different parts of the Next.js stack:
+
+<Tabs labels={["Server Components", "Client Components", "API Routes"]}>
+
+<TabItem>
+
+**Server components (RSC)**
+
+In Server components, you can access session data directly without making API calls. Use the `neonAuth` helper to retrieve the current `session` and `user` objects. This is ideal for initial page loads and conditional rendering based on auth state.
+
+Create `app/server-profile/page.tsx`:
+
+```tsx
+import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
+
+export default async function ServerProfilePage() {
+  const { session, user } = await neonAuth();
+
+  return (
+    <div className="mx-auto max-w-xl space-y-4 p-6">
+      <h1 className="text-2xl font-bold">Server-Side Profile</h1>
+
+      <div className="bg-gray-100 dark:bg-gray-800 rounded p-4">
+        <p>
+          <strong>Status:</strong> {session ? '✅ Authenticated' : '❌ Guest'}
+        </p>
+        {user && (
+          <p>
+            <strong>User ID:</strong> {user.id}
+          </p>
+        )}
+        {user && (
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+        )}
+      </div>
+
+      <pre className="overflow-auto rounded bg-black p-4 text-xs text-white">
+        {JSON.stringify({ session, user }, null, 2)}
+      </pre>
+    </div>
+  );
+}
+```
+
+</TabItem>
+
+<TabItem>
+
+**Client components**
+
+For interactive components that need to react to authentication state changes (like showing a loading spinner while checking a session), use the `authClient.useSession()` hook.
+
+Create `app/client-profile/page.tsx`:
+
+```tsx
+'use client';
+
+import { authClient } from '@/lib/auth/client';
+
+export default function ClientProfilePage() {
+  // The hook automatically updates if the session changes
+  const { data, isPending, error } = authClient.useSession();
+
+  if (isPending) return <div className="p-6">Loading session...</div>;
+
+  return (
+    <div className="mx-auto max-w-xl space-y-4 p-6">
+      <h1 className="text-2xl font-bold">Client-Side Profile</h1>
+
+      <div className="bg-gray-100 dark:bg-gray-800 rounded p-4">
+        <p>
+          <strong>Status:</strong> {data?.session ? '✅ Authenticated' : '❌ Guest'}
+        </p>
+        {data?.user && (
+          <p>
+            <strong>User ID:</strong> {data.user.id}
+          </p>
+        )}
+      </div>
+
+      <pre className="overflow-auto rounded bg-black p-4 text-xs text-white">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+    </div>
+  );
+}
+```
+
+</TabItem>
+
+<TabItem>
+
+**API routes (route handlers)**
+
+If you are building a REST API for mobile apps or external integrations, you can use the same `neonAuth` helper used in Server Components to secure your Route Handlers.
+
+Create `app/api/profile/route.ts`:
+
+```tsx
+import { neonAuth } from '@neondatabase/neon-js/auth/next/server';
+import { NextResponse } from 'next/server';
+
+export async function GET() {
+  // Validate session on the server
+  const { session, user } = await neonAuth();
+
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  // Return secure data
+  return NextResponse.json({
+    message: 'Secure data retrieved',
+    user: user,
+  });
+}
+```
+
+</TabItem>
+</Tabs>
 
 ## Deploying the application
 
