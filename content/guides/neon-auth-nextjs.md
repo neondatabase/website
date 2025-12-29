@@ -7,11 +7,11 @@ createdAt: '2025-12-26T00:00:00.000Z'
 updatedOn: '2025-12-26T00:00:00.000Z'
 ---
 
-This guide walks you through building a demo Todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
+This guide walks you through building a demo todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
 
 The guide primarily focuses on using **Server actions** to securely handle authentication and database operations. [Optional steps](#optional-accessing-user-data-elsewhere) are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server actions, server components, client components, API routes).
 
-By the end, you’ll have a fully functional Todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Neon Auth, while Drizzle ORM handles database interactions.
+By the end, you’ll have a fully functional todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Neon Auth, while Drizzle ORM handles database interactions.
 
 ## Prerequisites
 
@@ -274,7 +274,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ### Add Neon Auth styles
 
-In `app/globals.css`, add the following import statement directly below the `@import 'tailwindcss';` line.  
+In `app/globals.css`, add the following import statement directly below the `@import 'tailwindcss';` line.
+
 This ensures that the required Tailwind styles for Neon Auth UI components are included.
 
 ```css {2}
@@ -309,6 +310,7 @@ Create the specific pages for signing in and managing accounts using Neon's pre-
     ```
 
 2.  **Account page:**
+
     Create `app/account/[path]/page.tsx`. This page renders the Neon Auth account management UI, including features such as profile settings, password updates, and more.
 
     ```tsx shouldWrap
@@ -508,7 +510,8 @@ Create the main page and components to display and manage todos.
     }
     ```
 
-    This page checks if the user is authenticated using `neonAuth()`. If not, it redirects to the sign-in page. It then fetches the user's todos using the `getTodos` Server Action and displays them using the `TodoItem` component. A form is provided to add new todos via the `addTodo` Server Action.
+    This page fetches the authenticated user's todos using the `getTodos` server action and displays them.
+    Since it is protected by the middleware, only logged-in users can access it. It also includes a form to add new todos using the `addTodo` server action.
 
 ## Run the application
 
