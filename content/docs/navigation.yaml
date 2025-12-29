@@ -1022,11 +1022,11 @@
   icon: book
   subnav:
     - title: Extensions
-      slug: extensions/extensions-intro
+      slug: extensions/pg-extensions
       icon: extension
       items:
-        - title: Supported extensions
-          slug: extensions/pg-extensions
+        - title: Extension explorer
+          slug: extensions/extension-explorer
         - title: anon
           slug: extensions/postgresql-anonymizer
         - title: btree_gin

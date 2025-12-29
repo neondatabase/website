@@ -2,7 +2,6 @@
 
 import clsx from 'clsx';
 import { LazyMotion, domAnimation, m } from 'framer-motion';
-import { usePostHog } from 'posthog-js/react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -30,10 +29,7 @@ const scaleCardBorderVariants = {
   },
 };
 
-const Hero = () => {
-  const posthog = usePostHog();
-
-  return (
+const Hero = () => (
     <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-[136px] lg:pt-[56px] md:pt-12">
       <Container className="flex flex-col items-center" size="960">
         <Heading
@@ -52,7 +48,6 @@ const Hero = () => {
             {plans.map(
               (
                 {
-                  planId,
                   type,
                   title,
                   subtitle,
@@ -106,13 +101,6 @@ const Hero = () => {
                     size="sm"
                     to={button.url}
                     tagName={button.event}
-                    onClick={() => {
-                      posthog.capture('ui_interaction', {
-                        action: 'pricing_page_get_started_clicked',
-                        plan: planId,
-                        place: 'hero',
-                      });
-                    }}
                   >
                     Get started
                   </Button>
@@ -184,6 +172,5 @@ const Hero = () => {
       </Container>
     </section>
   );
-};
 
 export default Hero;

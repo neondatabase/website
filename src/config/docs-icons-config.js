@@ -296,11 +296,6 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/neon.svg',
     darkIconPath: '/images/technology-logos/neon-dark.svg',
   },
-  neosync: {
-    name: 'neosync',
-    lightIconPath: '/images/technology-logos/neosync.svg',
-    darkIconPath: '/images/technology-logos/neosync-dark.svg',
-  },
   'nest-js': {
     name: 'nest-js',
     lightIconPath: '/images/technology-logos/nest-js.svg',

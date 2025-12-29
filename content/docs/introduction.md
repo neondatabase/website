@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2025-12-17T22:36:32.015Z'
+updatedOn: '2025-12-22T14:57:25.744Z'
 ---
 
 Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
@@ -19,6 +19,16 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 <a href="/docs/get-started/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
 
 <a href="/docs/get-started/production-checklist" description="Key features to get you production ready">Get ready for production</a>
+
+</DetailIconCards>
+
+## App backend
+
+<DetailIconCards>
+
+<a href="/docs/auth/overview" description="Store users, sessions, and auth configuration directly in Postgres—branches with your database for development and testing" icon="lock-landscape">Neon Auth</a>
+
+<a href="/docs/data-api/overview" description="Query Postgres from directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods" icon="code">Data API</a>
 
 </DetailIconCards>
 
@@ -88,7 +98,7 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 <a href="/docs/guides/branching-intro" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a href="/docs/extensions/pg-extensions" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
 
 <a href="/docs/reference/neon-cli" description="Manage Neon directly from the terminal with the Neon CLI" icon="transactions">Neon CLI Reference</a>
 
