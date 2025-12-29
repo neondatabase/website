@@ -18,7 +18,7 @@ We aim to deliver Postgres as a cloud service that feels effortless, from your f
 Neon is built on a distributed, cloud-native architecture that separates storage and compute, giving Postgres the scale, reliability, and efficiency modern applications require. This foundation unlocks the features developers expect today (autoscaling, scale-to-zero, instant branching, instant restores, usage-based pricing, and much more) without changing the Postgres you already know.
 
 <Admonition type="tip" title="A Databricks company">
-  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase) - learn more in the [Neon and Lakebase](https://neon-next-git-carlotas19-patch-1-neondatabase.vercel.app/docs/get-started/why-neon#neon-and-lakebase) section.
+  In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native development. Our mission stayed the same, but we’re now backed by the performance, security, and global scale of the Databricks Data Intelligence Platform. Neon’s architectural foundation also powers [Lakebase](https://www.databricks.com/product/lakebase) - learn more in the [Neon and Lakebase](#neon-and-lakebase) section.
 </Admonition>
 
 ## What makes Neon different
@@ -61,7 +61,7 @@ Independent developers want to build without friction. They don’t want to crea
 - The experience feels lightweight, fast, and developer-first, not enterprise-heavy
 
   <Admonition type="tip" title="Useful links to get started">
-    Check out our [framework guides](https://neon.com/docs/get-started/frameworks), [templates](https://neon.com/templates), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
+    Check out our [framework guides](/docs/get-started/frameworks), [templates](https://neon.com/templates), [code examples](https://github.com/neondatabase/examples), and join our [community Discord](https://discord.gg/92vNTzKDGp).
   </Admonition>
 
 ### Startups: From dev to scale
@@ -73,12 +73,12 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - Its serverless architecture removes most management
 - Autoscaling handles unpredictable traffic without overprovisioning or planning compute sizes
 - Branching speeds up building - teams can ship safely and quickly
-- Neon's straightforward and feature-complete [API](https://neon.com/docs/reference/api-reference)
+- Neon's straightforward and feature-complete [API](/docs/reference/api-reference)
 - Usage-based pricing means no upfront commitments
-- Neon cheks out in reliability, performance, and compliance
+- Neon checks out in reliability, performance, and compliance
 
 <Admonition type="tip" title="Keep reading">
-     Check out our [success stories](https://neon.com/case-studies), [use cases](https://neon.com/use-cases/serverless-apps), and the [Startup Program](https://neon.com/startups). 
+  Check out our [success stories](https://neon.com/case-studies), [use cases](https://neon.com/use-cases/serverless-apps), and the [Startup Program](https://neon.com/startups). 
 </Admonition>
 
 ### Agents & codegen: From prompt to app
@@ -92,10 +92,10 @@ Full-stack codegen platforms need to spin up thousands of independent applicatio
 - Thousands of short-lived, low-usage databases can be deployed programmatically
 - Scale-to-zero makes per-app databases economically viable, even at scale
 - Branching allows for agent-friendly workflows: versioning, snapshots, rollbacks, checkpoints
-- Neon Auth + Data API form a backend layer what works directly with the database
+- Neon Auth + Data API form a backend layer that works directly with the database
 
 <Admonition type="tip" title="Join the Agent Program">
-  Building an full-stack agent that needs databases? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, and features.
+  Building a full-stack agent that needs databases? Apply to our [Agent Program](https://neon.com/programs/agents#agent-plan-pricing) and get access to special pricing, resource limits, and features.
 </Admonition>
 
 ## The architecture that makes it possible: how Neon works
@@ -152,7 +152,7 @@ A lakebase is a new category of operational database: OLTP built directly on clo
 Databricks is pioneering the category with [Lakebase](https://www.databricks.com/product/lakebase), a managed serverless Postgres service built on the same architectural foundation as Neon and deeply integrated into the Databricks Data Intelligence Platform. This integration unlocks capabilities that only make sense when an operational database lives alongside analytical data:
 
 - **No ETL friction.** Operational data is already in the lakehouse storage layer, so analytics, dashboards, and ML pipelines can access it without replication, CDC jobs, or fragile sync workflows.
-- **Unified analytics and AI.** Operational and analytical workloads to work on the same data foundation.
+- **Unified analytics and AI.** Operational and analytical workloads work on the same data foundation.
 - **Lakehouse-native governance.** Access control, lineage, and security policies apply consistently across operational and analytical data through Unity Catalog.
 - **Serverless operations.** Like Neon, Lakebase removes manual capacity planning by using stateless compute that scales automatically and is optimized for Databricks environments.
 
