@@ -44,7 +44,7 @@ cd my-app
   <RightCode label="Terminal">
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neondatabase/auth
 ```
 
   </RightCode>
@@ -78,7 +78,7 @@ We need to mount the `authApiHandler` handler to the auth API route. All Neon Au
   <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
+import { authApiHandler } from '@neondatabase/auth/next/server';
 
 export const { GET, POST } = authApiHandler();
 ```
@@ -95,7 +95,7 @@ The `neonAuthMiddleware()` ensures that user is authenticated before the request
   <RightCode label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next/server";
+import { neonAuthMiddleware } from "@neondatabase/auth/next/server";
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
@@ -140,7 +140,7 @@ Copy and paste following code in `lib/auth/client.ts` file:
 ```tsx
 'use client';
 
-import { createAuthClient } from '@neondatabase/neon-js/auth/next';
+import { createAuthClient } from '@neondatabase/auth/next';
 
 export const authClient = createAuthClient();
 ```
@@ -151,7 +151,7 @@ export const authClient = createAuthClient();
 Copy and paste following code in `lib/auth/server.ts` file:
 
 ```tsx
-import { createAuthServer } from '@neondatabase/neon-js/auth/next/server';
+import { createAuthServer } from '@neondatabase/auth/next/server';
 
 export const authServer = createAuthServer();
 ```
@@ -175,6 +175,8 @@ Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/au
   <Tabs labels={["Signup action", "Signup form"]}>
   <TabItem>
   
+Copy and paste following code in `app/auth/sign-up/actions.ts` file:
+
 ```ts
 'use server';
 
@@ -186,11 +188,15 @@ export async function signUpWithEmail(
   formData: FormData
 ) {
   const email = formData.get('email') as string;
-  
-  // Optionally restrict sign ups based on email address
-  if (!email || !email.trim().endsWith("@my-company.com")) {
-    return { error: 'Email must be from my-company.com' };
+
+  if (!email) {
+    return { error: "Email address must be provided." }
   }
+
+  // Optionally restrict sign ups based on email address
+  // if (!email.trim().endsWith("@my-company.com")) {
+  //  return { error: 'Email must be from my-company.com' };
+  // }
 
   const { error } = await authServer.signUp.email({
     email,
@@ -209,6 +215,8 @@ export async function signUpWithEmail(
   </TabItem>
   <TabItem>
 
+Copy and paste following code in `app/auth/sign-up/page.tsx` file:
+
 ```tsx
 'use client';
 
@@ -220,7 +228,7 @@ export default function SignUpForm() {
 
   return (
     <form action={formAction} 
-      className="flex flex-col gap-5 min-h-screen items-center justify-center">
+      className="flex flex-col gap-5 min-h-screen items-center justify-center bg-gray-900">
     
       <div className="w-sm">
         <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Create new account</h1>
@@ -317,7 +325,7 @@ export default function SignInForm() {
 
   return (
     <form action={formAction} 
-      className="flex flex-col gap-5 min-h-screen items-center justify-center">
+      className="flex flex-col gap-5 min-h-screen items-center justify-center bg-gray-900">
     
       <div className="w-sm">
        <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Sign in to your account</h1>
@@ -373,7 +381,7 @@ export default async function Home() {
 
   if (data && data.user) {
     return (
-      <div className="flex flex-col gap-2 min-h-screen items-center justify-center">
+      <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
         <h1 className="mb-4 text-4xl">
           Logged in as <span className="font-bold underline">{data.user.name}</span>
         </h1>
@@ -381,7 +389,7 @@ export default async function Home() {
     );
   }
   return (
-    <div className="flex flex-col gap-2 min-h-screen items-center justify-center">
+    <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
       <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>
       <div className="flex item-center gap-2">
       <Link 
