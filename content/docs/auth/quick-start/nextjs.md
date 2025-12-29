@@ -41,7 +41,7 @@ cd my-app
   <RightCode label="Terminal">
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neondatabase/auth
 ```
 
   </RightCode>
@@ -76,7 +76,7 @@ We need to mount the `authApiHandler` handler to the auth API route. All Neon Au
   <RightCode label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/neon-js/auth/next/server';
+import { authApiHandler } from '@neondatabase/auth/next/server';
 
 export const { GET, POST } = authApiHandler();
 ```
@@ -93,7 +93,7 @@ The `neonAuthMiddleware()` ensures that user is authenticated before the request
   <RightCode label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/neon-js/auth/next/server";
+import { neonAuthMiddleware } from "@neondatabase/auth/next/server";
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
@@ -136,7 +136,7 @@ Copy and paste following code in `lib/auth/client.ts` file:
 ```tsx
 'use client';
 
-import { createAuthClient } from '@neondatabase/neon-js/auth/next';
+import { createAuthClient } from '@neondatabase/auth/next';
 
 export const authClient = createAuthClient();
 ```
@@ -149,7 +149,7 @@ Copy and paste following code in `lib/auth/server.ts` file:
 ```tsx
 'use server';
 
-import { createAuthServer } from '@neondatabase/neon-js/auth/next/server';
+import { createAuthServer } from '@neondatabase/auth/next/server';
 
 export const authServer = createAuthServer();
 ```
@@ -199,7 +199,7 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
 
 ```tsx
 import { authClient } from '@/lib/auth/client'; // [!code ++]
-import { NeonAuthUIProvider, UserButton } from '@neondatabase/neon-js/auth/react/ui'; // [!code ++]
+import { NeonAuthUIProvider, UserButton } from '@neondatabase/auth/react'; // [!code ++]
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -264,7 +264,7 @@ See [UI Component Styles](/docs/auth/reference/ui-components#styling) for altern
 
 ```css
 @import "tailwindcss";
-@import "@neondatabase/neon-js/ui/tailwind"; // [!code ++]
+@import "@neondatabase/auth/ui/tailwind"; // [!code ++]
 
 ```
 
@@ -300,7 +300,7 @@ Create a dynamic route segment for authentication and account views in `app/auth
 Create a new page in `app/auth/[path]/page.tsx` and copy-paste following code:
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export const dynamicParams = false;
 
@@ -321,8 +321,8 @@ export default async function AuthPage({ params }: { params: Promise<{ path: str
 Create a new page in `app/account/[path]/page.tsx` and copy-paste following code:
 
 ```tsx
-import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
-import { accountViewPaths } from '@neondatabase/neon-js/auth/react/ui/server';
+import { AccountView } from '@neondatabase/auth/react';
+import { accountViewPaths } from '@neondatabase/auth/react/ui/server';
 
 export const dynamicParams = false;
 
@@ -369,7 +369,7 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 Create a new page at `app/server-rendered-page/page.tsx` and add the following code:
 
 ```tsx
-import { neonAuth } from "@neondatabase/neon-js/auth/next/server";
+import { neonAuth } from "@neondatabase/auth/next/server";
 
 export default async function ServerRenderedPage() {
     const { session, user } = await neonAuth();

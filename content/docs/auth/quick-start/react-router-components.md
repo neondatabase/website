@@ -168,7 +168,7 @@ import {
   SignedIn,
   UserButton,
   RedirectToSignIn,
-} from '@neondatabase/neon-js/auth/react/ui';
+} from '@neondatabase/neon-js/auth/react';
 
 function Home() {
   return (
