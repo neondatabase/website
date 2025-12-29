@@ -3,7 +3,7 @@ title: Simplify RLS with Drizzle
 subtitle: Use Drizzle ORM to declaratively manage Row-Level Security policies in your
   schema
 enableTableOfContents: true
-updatedOn: '2025-11-13T20:54:35.554Z'
+updatedOn: '2025-12-29T11:34:52.612Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
