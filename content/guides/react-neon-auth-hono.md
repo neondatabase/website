@@ -238,7 +238,7 @@ Your `journal_entries` table now exists in your Neon database. You can verify th
 
 Update `src/index.ts` with the following code to set up the Hono server with JWT verification and routes for managing journal entries.
 
-```typescript
+```typescript shouldWrap
 import { serve } from '@hono/node-server';
 import { Hono, type Context, type Next } from 'hono';
 import { cors } from 'hono/cors';
@@ -560,7 +560,7 @@ export const api = {
 
 Modify `src/App.tsx` to implement the journal UI and routes.
 
-```tsx
+```tsx shouldWrap
 import { useState, useEffect } from 'react';
 import { RedirectToSignIn, SignedIn, UserButton } from '@neondatabase/neon-js/auth/react/ui';
 import { api } from './api';
@@ -616,8 +616,7 @@ function Journal() {
             {entries.map((entry) => (
               <div
                 key={entry.id}
-                className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 rounded-lg border bg-white
-                           p-4 shadow-sm"
+                className="border-gray-200 dark:border-gray-700 dark:bg-gray-800 rounded-lg border bg-white p-4 shadow-sm"
               >
                 <p className="mb-2">{entry.content}</p>
                 <small className="text-gray-500 dark:text-gray-400">
