@@ -7,18 +7,20 @@ redirectFrom:
 updatedOn: '2025-12-22T13:54:25.159Z'
 ---
 
-Neon is Postgres re-designed for how developers work today. Our developer experience is built around four core pillars:
+Our developer experience is anchored by four core pillars:
 
-- **Invisible infra** — compute and storage adapt to your workload in real-time
-- **No waiting** - deployment of new instances, restores, and rebuilds from past states are instant
-- **Branching-first, API-first, and AI-first workflows** - databases behave like any other modern tool
-- **A composable stack** — based on strong primitives with optional building blocks, no lock-in
+1. **Invisible infra** - compute and storage adapt to your workload in real-time
+2. **No waiting** - deployment of new instances, restores, and rebuilds from past states are instant
+3. **Branching-first, API-first, and AI-first workflows** - databases behave like any other modern tool
+4. **A composable stack** - based on strong primitives with optional building blocks
 
 ## Invisible infra
 
 ### Autoscaling compute
 
-Traditional OLTP databases force you to provision compute upfront - i.e. choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation. Neon removes this tradeoff by [automatically scaling](https://neon.com/docs/introduction/autoscaling) database compute up and down based on real demand. When your application needs more resources due to traffic spikes, background jobs, or heavy queries, Neon increases available compute, and as demand drops, compute scales back down.
+Traditional OLTP databases force you to provision compute upfront, i.e. choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
+
+Neon removes this tradeoff by [automatically scaling](https://neon.com/docs/introduction/autoscaling) database compute up and down based on real demand. When your application needs more resources due to traffic spikes, background jobs, or heavy queries, Neon increases available compute, and as demand drops, compute scales back down.
 
 **How it works**
 
@@ -41,8 +43,6 @@ You don’t need to pick instance sizes when creating a Neon branch: only your m
 ### Scale to zero
 
 When a database is not actively handling queries, Neon [automatically scales compute all the way down to zero](https://neon.com/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical.
-
-This is especially valuable in non-production environments, where databases are often created for short periods of time and accessed intermittently. Development, testing, and preview environments may sit idle for hours (or days) between uses; traditional OLTP databases still incur full compute costs during that time unless you manually pause them - not on Neon.
 
 **What this means for DX**
 
@@ -68,7 +68,7 @@ Neon developers don’t estimate disk sizes or plan storage migrations. Database
 
 ### New deployments are fast
 
-With Neon, deploying a new database instance is a fast, lightweight operation. Creating a new project or branch does not involve provisioning a new virtual machine, eliminating minutes of provisioning time.
+With Neon, deploying a new database instance is a fast operation that takes less than a second. Creating a new project or branch does not involve provisioning a new virtual machine, eliminating minutes of provisioning time.
 
 **What this means for DX**
 
@@ -76,7 +76,7 @@ Not only does this provide a better overall user experience - it also makes Neon
 
 ### A record of all past states, instantly accessible
 
-Storage in Neon is also [history-preserving](https://neon.com/blog/get-page-at-lsn) by design. As data changes over time, Neon efficiently retains past versions of your database state as part of normal operation, making operations thar are painfully slow in traditional Postgres (like restores) trivial on Neon.
+Storage in Neon is also [history-preserving](https://neon.com/blog/get-page-at-lsn) by design. As data changes over time, Neon efficiently retains past versions of your database state as part of normal operation, making operations that are painfully slow in traditional Postgres (like restores) trivial on Neon.
 
 **Instant restores**
 
@@ -94,23 +94,19 @@ When your database keeps a complete, accessible record of its past, developers c
 
 ### Branching-first
 
-Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Neon treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching) as environments.
+Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Neon treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching).
 
-**Fast and lightweight**
+**Always lightweight**
 
-Neon branches are near instant to deploy because they share underlying data until changes are made. Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Because branches use a copy-on-write model, they also don’t duplicate storage by default - they stay very cost-efficient until you actually change data, especially if they’re short-lived.
+Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Because branches use a copy-on-write model, they don’t duplicate storage by default, staying cost-efficient.
 
 **Designed to be discarded**
 
-Neon branching is optimized for short-lived environments, or environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time, ensuring temporary environments don’t linger out of your [restore window](https://neon.com/docs/introduction/restore-window) to keep storage costs to a minimum.
-
-**One-click updates**
-
-Some branches don’t need to be discharged but refreshed often - for example, staging environments. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
+Neon branching is optimized for short-lived environments or for environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
 
 **What this means for DX**
 
-Because branches are fast to create and inexpensive to keep, teams use them as temporary, task-specific environments rather than long-lived databases. Some [common patterns](https://neon.com/branching) include:
+Teams deploy hundreds of branches as temporary, task-specific environments, substituting additional, long-lived database instances. Some [common patterns](https://neon.com/branching) include:
 
 - **Branch per developer**. Each engineer works against their own isolated database environment (branch), avoiding conflicts when making schema or data changes.
 - **Branch per experiment or feature**. Short-lived branches are used to explore changes, run migrations, or validate ideas, then deleted once the work is done.
@@ -119,7 +115,7 @@ Because branches are fast to create and inexpensive to keep, teams use them as t
 
 ### API-first
 
-Neon is built with an API-first mindset. Every core operation is exposed programmatically, so you can manage your database environments the same way you manage the rest of your infrastructure.
+Neon is built with an API-first mindset. Every core operation is exposed programmatically, so developers can manage your database environments the same way you manage the rest of their infrastructure.
 
 **Proven at scale**
 
