@@ -136,18 +136,20 @@ For local development and CI pipelines, the Neon CLI provides a simple scripting
 - Neon Data API for querying your database over HTTP
 
 **What this means for DX**
+
 Database workflows stop being special-case operations: teams can create, update, and destroy database environments as part of their deployment pipelines.
 
 ### AI-first
 
-AI has changed how developers write code, manage infrastructure, and ship applications - databases need to fit naturally into these workflows.
+AI has changed how developers write code, manage infrastructure, and ship applications, so databases need to fit naturally into these workflows.
 
 **Using Neon with AI IDEs and assistants**
 
 Neon integrates directly with AI IDEs and coding assistants through its [MCP](https://neon.com/docs/ai/neon-mcp-server) and [AI rules](https://neon.com/docs/ai/ai-rules). This allows tools like Cursor, Claude, and other MCP-compatible environments to understand and interact with your Neon project in a structured and safe way.
 
 **A Postgres layer for agents**
-Neon can also be used as the database layer for [full-stack codegen platforms](https://neon.com/use-cases/ai-agents), or systems where AI agents provision, manage, and operate infrastructure autonomously. Neon’s serverless architecture, instant provisioning, and API-first design make it a natural fit for these platforms. AI agents can create thousands of databases programmatically, manage them over their lifecycle, and clean them up automatically, all while staying cost-efficient.
+
+Neon is also ready to be used as the database layer for [full-stack codegen platforms](https://neon.com/use-cases/ai-agents), or systems where AI agents provision, manage, and operate infrastructure autonomously. Neon’s serverless architecture, instant provisioning, and API-first design make it a natural fit for these platforms. AI agents can create thousands of databases programmatically, manage them over their lifecycle, and clean them up automatically, all while staying cost-efficient.
 
 **What this means for DX**
 
@@ -169,4 +171,4 @@ Developers stay in control of their stack. You can adopt Neon incrementally, use
 
 ## Build without friction
 
-Neon is designed to remove friction from database workflows without constraining how you build. Our users often tell us the best thing about Neon is that building feels intuitive, and that they forget the database is even there. That’s exactly the goal. When the database stops getting in the way, teams can move faster, experiment safely, and focus on shipping.
+Neon is designed to remove friction from database workflows without constraining how you build. Our users tell us the best thing about Neon is that building feels intuitive, and that they forget the database is even there. That’s exactly the goal. When the database stops getting in the way, teams can move faster, experiment safely, and focus on shipping.
