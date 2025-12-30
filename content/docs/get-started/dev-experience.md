@@ -104,7 +104,7 @@ Neon branches are near instant to deploy because they share underlying data unti
 
 Neon branching is optimized for short-lived environments, or environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time, ensuring temporary environments don’t linger out of your [restore window](https://neon.com/docs/introduction/restore-window) to keep storage costs to a minimum.
 
-**One-click update**
+**One-click updates**
 
 Some branches don’t need to be discharged but refreshed often - for example, staging environments. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
 
