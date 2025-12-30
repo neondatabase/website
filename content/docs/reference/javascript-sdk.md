@@ -3,7 +3,7 @@ title: JavaScript SDK (Auth & Data API)
 subtitle: Reference documentation for building applications with Neon Auth and Data API
 enableTableOfContents: true
 layout: wide
-updatedOn: '2025-12-11T19:49:37.742Z'
+updatedOn: '2025-12-29T17:42:33.413Z'
 ---
 
 The Neon JavaScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
@@ -72,7 +72,7 @@ const client = createClient({
 ```
 
 ```typescript
-import { createAuthClient } from '@neondatabase/neon-js';
+import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 const auth = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
@@ -92,7 +92,8 @@ const client = createClient<Database>({
 ```
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 
 const client = createClient({
   auth: {

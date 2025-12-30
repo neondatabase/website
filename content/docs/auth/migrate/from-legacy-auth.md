@@ -2,7 +2,7 @@
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 enableTableOfContents: true
-updatedOn: '2025-12-12T13:16:11.676Z'
+updatedOn: '2025-12-29T21:10:05.266Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -57,13 +57,13 @@ STACK_SECRET_SERVER_KEY=your-server-secret
 <CodeWithLabel label=".env (after - Better Auth)">
 
 ```env
-NEXT_PUBLIC_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 ```
 
 </CodeWithLabel>
 
 <Admonition type="note">
-For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead of <code>NEXT_PUBLIC_NEON_AUTH_URL</code>.
+For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead of <code>NEON_AUTH_BASE_URL</code>.
 </Admonition>
 
 You can find your Auth URL in the Neon Console under **Auth** → **Configuration**.
@@ -75,13 +75,13 @@ You replace multiple Stack Auth-specific keys with a single Better Auth URL that
 
 ### Install packages (#nextjs-install-packages)
 
-Uninstall Stack Auth packages and install Better Auth.
+Uninstall Stack Auth packages and install `@neondatabase/auth`
 
 <CodeWithLabel label="Terminal">
 
 ```bash
 npm uninstall @stackframe/stack
-npm install @neondatabase/neon-auth-next @neondatabase/neon-auth-ui
+npm install @neondatabase/auth
 ```
 
 </CodeWithLabel>
@@ -103,18 +103,26 @@ export const stackServerApp = new StackServerApp({
 ```
 
 ```tsx
-// auth.ts
-import { createAuthClient } from '@neondatabase/neon-auth-next';
+// ./lib/auth/client.ts
+'use client';
+import { createAuthClient } from '@neondatabase/auth/next';
+export const { useSession } = authClient;
 
-export const authClient = createAuthClient({
-  url: process.env.NEXT_PUBLIC_NEON_AUTH_URL!,
-});
+// to use in react client components
+export const authClient = createAuthClient();
+
+// ./lib/auth/server.ts
+import { createAuthServer } from '@neondatabase/auth/next/server';
+
+// to use in react server components
+export const authServer = createAuthServer();
 ```
 
 </CodeTabs>
 
 **What changed**  
-You initialize the Better Auth client with your Neon Auth URL instead of configuring Stack Auth with multiple environment variables.
+You initialize the Neon Auth client with `createAuthClient` for client components and with `createAuthServer()` for react server components & server actions.
+The `@neondatabase/auth` module will read the auth url from `process.env.NEON_AUTH_BASE_URL` internally.
 
 ### Replace components (#nextjs-replace-components)
 
@@ -131,8 +139,7 @@ export default function SignInPage() {
 ```
 
 ```tsx
-'use client';
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignInPage() {
   return <AuthView pathname="sign-in" />;
@@ -142,7 +149,7 @@ export default function SignInPage() {
 </CodeTabs>
 
 **What changed**  
-You render Better Auth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
+You render Neon Auth's `AuthView` client component and tell it which flow to show using the `pathname` prop.
 
 #### Sign up page
 
@@ -157,8 +164,7 @@ export default function SignUpPage() {
 ```
 
 ```tsx
-'use client';
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignUpPage() {
   return <AuthView pathname="sign-up" />;
@@ -183,8 +189,7 @@ export function Header() {
 ```
 
 ```tsx
-'use client';
-import { UserButton } from '@neondatabase/neon-auth-ui';
+import { UserButton } from '@neondatabase/auth/react';
 
 export function Header() {
   return <UserButton />;
@@ -194,7 +199,7 @@ export function Header() {
 </CodeTabs>
 
 **What changed**  
-You keep the same `UserButton` API but import it from the Better Auth UI package and mark the component as client-side.
+You keep the same `UserButton` API but import it from the Neon Auth UI package and mark the component as client-side.
 
 ### Replace hooks (#nextjs-replace-hooks)
 
@@ -212,11 +217,11 @@ export function MyComponent() {
 
 ```tsx
 'use client';
-import { authClient } from './auth';
+import { useSession } from '@/lib/auth/client';
 
 export function MyComponent() {
-  const { data: session } = authClient.useSession();
-  const user = session?.user;
+  const { data } = useSession();
+  const user = data?.user;
 
   return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
 }
@@ -225,7 +230,7 @@ export function MyComponent() {
 </CodeTabs>
 
 **What changed**  
-Instead of `useUser()`, you call `authClient.useSession()` and read the user from the session object.
+Instead of `useUser()`, you call `useSession()` hook from `authClient` and read the user & session data from response.
 
 ### Update provider setup (#nextjs-update-provider)
 
@@ -246,19 +251,37 @@ export default function RootLayout({ children }) {
 
 ```tsx
 'use client';
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
-import { authClient } from './auth';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import '@neondatabase/auth/ui/css';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth/client';
 
 export default function RootLayout({ children }) {
-  return <NeonAuthUIProvider authClient={authClient}>{children}</NeonAuthUIProvider>;
+  const router = useRouter();
+
+  return (
+    <NeonAuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={router.refresh}
+      Link={Link}
+    >
+      {children}
+    </NeonAuthUIProvider>
+  );
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-You wrap your app in `NeonAuthUIProvider`, pass it the `authClient`, and import the shared Better Auth styles.
+You wrap your app in `NeonAuthUIProvider`, pass it the `authClient`, and import the Neon Auth UI styles.
+
+<Admonition type="tip" title="Styling options">
+To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
+</Admonition>
 
 ### Replace auth handler route
 
@@ -276,16 +299,15 @@ export default function Handler(props: any) {
 
 ```tsx
 // app/api/auth/[...path]/route.ts
-import { toNextJsHandler } from '@neondatabase/neon-auth-next';
-import { authClient } from '@/auth';
+import { authApiHandler } from '@neondatabase/auth/next/server';
 
-export const { GET, POST } = toNextJsHandler(authClient);
+export const { GET, POST } = authApiHandler();
 ```
 
 </CodeTabs>
 
 **What changed**  
-You expose Better Auth as a Next.js route handler instead of rendering a full-page Stack Auth handler component.
+You proxy Neon Auth APIs from your Next.js application. The `authAPIHandler` will forward all API requests to upstread Neon Auth server.
 
 ### Protect routes
 
@@ -305,7 +327,7 @@ export default function ProtectedPage() {
 
 ```tsx
 'use client';
-import { SignedIn, RedirectToSignIn } from '@neondatabase/neon-auth-ui';
+import { SignedIn, RedirectToSignIn } from '@neondatabase/auth/react';
 
 export default function ProtectedPage() {
   return (
@@ -327,7 +349,7 @@ You switch from hook-based redirects to declarative UI helpers that show content
 <CodeWithLabel label="proxy.ts (new)">
 
 ```tsx
-import { neonAuthMiddleware } from '@neondatabase/neon-js/auth/next';
+import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
 
 export default neonAuthMiddleware({
   // Redirects unauthenticated users to sign-in page
@@ -339,6 +361,9 @@ export const config = {
     // Protected routes requiring authentication
     '/dashboard/:path*',
     '/settings/:path*',
+
+    // Do not run the middleware for the static resources
+    '/((?!_next/static|_next/image|favicon.ico).*)',
   ],
 };
 ```
@@ -362,11 +387,10 @@ export default async function ServerComponent() {
 ```
 
 ```tsx
-import { authClient } from '@/auth';
+import { neonAuth } from '@neondatabase/auth/next/server';
 
 export default async function ServerComponent() {
-  const { data: session } = await authClient.getSession();
-  const user = session?.user;
+  const { session, user } = await neonAuth();
   return <div>{user?.name || user?.email}</div>;
 }
 ```
@@ -380,13 +404,13 @@ Server components now call `authClient.getSession()` and read the user from the 
 
 ### Install packages (#react-install-packages)
 
-Uninstall Stack Auth packages and install Better Auth.
+Uninstall Stack Auth packages and install `@neondatabase/auth`
 
 <CodeWithLabel label="Terminal">
 
 ```bash
 npm uninstall @stackframe/stack
-npm install @neondatabase/neon-js @neondatabase/neon-auth-ui
+npm install @neondatabase/auth
 ```
 
 </CodeWithLabel>
@@ -412,15 +436,16 @@ export const stackClientApp = new StackClientApp({
 
 ```tsx
 // src/auth.ts
-import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { createAuthClient } from '@neondatabase/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
+const { useSession } = authClient;
 ```
 
 </CodeTabs>
 
 **What changed**  
-You replace the Stack Auth client app with a Better Auth `authClient` wired to your Neon Auth URL.
+You replace the Stack Auth client app with a Neon Auth `authClient` wired to your Neon Auth URL.
 
 ### Replace components (#react-replace-components)
 
@@ -443,19 +468,11 @@ export function MyComponent() {
 ```
 
 ```tsx
-import { useState, useEffect } from 'react';
-import { authClient } from './auth';
+import { useSession } from './auth';
 
 export function MyComponent() {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    authClient.getSession().then(({ data }) => {
-      if (data?.session?.user) {
-        setUser(data.session.user);
-      }
-    });
-  }, []);
+  const { data: session } = useSession();
+  const user = data?.user;
 
   return <div>{user ? `Hello, ${user.name || user.email}` : 'Not logged in'}</div>;
 }
@@ -484,8 +501,8 @@ function App() {
 ```
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
-import '@neondatabase/neon-auth-ui/css';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
+import '@neondatabase/auth/ui/css';
 import { authClient } from './auth';
 
 function App() {
@@ -496,7 +513,11 @@ function App() {
 </CodeTabs>
 
 **What changed**  
-You drop the Stack Auth provider/theme and wrap your app in `NeonAuthUIProvider` with the shared Better Auth styles.
+You drop the Stack Auth provider/theme and wrap your app in `NeonAuthUIProvider` with the Neon Auth UI styles.
+
+<Admonition type="tip" title="Styling options">
+To learn more about applying styles to the Auth UI components, including plain CSS and Tailwind CSS v4 options, see [UI Component Styles](/docs/auth/reference/ui-components#styling).
+</Admonition>
 
 ### Remove auth handler route
 
@@ -505,7 +526,7 @@ Delete any `StackHandler` routes. Create custom pages for sign-in and sign-up us
 <CodeWithLabel label="src/pages/SignIn.tsx">
 
 ```tsx
-import { AuthView } from '@neondatabase/neon-auth-ui';
+import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignIn() {
   return <AuthView pathname="sign-in" />;
@@ -515,7 +536,7 @@ export default function SignIn() {
 </CodeWithLabel>
 
 **What changed**  
-Routing is fully controlled by your SPA, and Better Auth just renders the appropriate view for each path.
+Routing is fully controlled by your SPA, and the `AuthView` component just renders the appropriate view for each path.
 
 ### React Router integration
 
@@ -524,7 +545,7 @@ If you're using React Router, pass navigation helpers to the provider.
 <CodeWithLabel label="src/App.tsx (React Router)">
 
 ```tsx
-import { NeonAuthUIProvider } from '@neondatabase/neon-auth-ui';
+import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authClient } from './auth';
 

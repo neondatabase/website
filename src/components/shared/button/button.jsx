@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
@@ -55,14 +54,12 @@ const Button = ({
   size = null,
   theme = null,
   tagName = null,
-  analyticsEvent = null,
   analyticsOnHover = false,
   handleClick = null,
   withArrow = false,
   children,
   ...otherProps
 }) => {
-  const posthog = usePostHog();
   const className = clsx(styles.base, styles.size[size], styles.theme[theme], additionalClassName);
 
   const Tag = to || withArrow ? Link : 'button';
@@ -75,12 +72,6 @@ const Button = ({
       text: getNodeText(children),
       tag_name: tagName,
     });
-
-    if (analyticsEvent) {
-      posthog.capture('ui_interaction', {
-        action: analyticsEvent,
-      });
-    }
   };
 
   return (
@@ -107,7 +98,6 @@ Button.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   tagName: PropTypes.string,
-  analyticsEvent: PropTypes.string,
   analyticsOnHover: PropTypes.bool,
   handleClick: PropTypes.func,
   withArrow: PropTypes.bool,

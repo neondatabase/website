@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 // import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -111,6 +111,34 @@ Card.propTypes = CardPropTypes;
 
 const Cards = ({ items, categories }) => {
   const [activeCategory, setActiveCategory] = useState({ slug: 'all' });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const slugs = new Set(categories.map((c) => c.slug));
+
+    const applyHash = () => {
+      const raw = window.location.hash || '';
+      const slug = raw.replace(/^#/, '').toLowerCase() || 'all';
+
+      if (slug !== 'all' && !slugs.has(slug)) return;
+
+      if (slug === 'all') {
+        setActiveCategory({ slug: 'all' });
+      } else {
+        const cat = categories.find((c) => c.slug === slug);
+        setActiveCategory({ slug, featuredCaseStudy: cat?.featuredCaseStudy });
+      }
+    };
+
+    applyHash();
+
+    window.addEventListener('hashchange', applyHash);
+
+    // eslint-disable-next-line consistent-return
+    return () => window.removeEventListener('hashchange', applyHash);
+  }, [categories]);
+
   // const [isOpen, setIsOpen] = useState(false);
   // const { width: windowWidth } = useWindowSize();
   // const itemsToShow = windowWidth < 768 ? 10 : 17;
@@ -130,7 +158,10 @@ const Cards = ({ items, categories }) => {
   //   hasHiddenItems && isOpen ? filteredItems : filteredItems.slice(0, itemsToShow);
 
   return (
-    <section className="main safe-paddings mt-40 xl:mt-[136px] lg:mt-[104px] md:mt-20">
+    <section
+      className="main safe-paddings mt-40 scroll-mt-20 xl:mt-[136px] lg:mt-[104px] md:mt-20"
+      id={activeCategory.slug}
+    >
       <Container className="flex flex-col items-center lg:!max-w-3xl md:px-5" size="960">
         <h2 className="sr-only">All success stories</h2>
         <p className="text-center text-lg leading-snug tracking-extra-tight text-gray-new-60 sm:max-w-64 sm:text-base">
@@ -140,7 +171,7 @@ const Cards = ({ items, categories }) => {
           <ul className="no-scrollbars flex h-12 items-center overflow-x-auto px-1.5">
             {categories.map(({ name, slug, featuredCaseStudy }, index) => (
               <li className="group" key={index}>
-                <button
+                <Link
                   className={clsx(
                     'flex h-9 items-center whitespace-nowrap rounded-full px-6 font-medium tracking-extra-tight',
                     'border transition-colors duration-200 hover:text-green-45',
@@ -148,11 +179,11 @@ const Cards = ({ items, categories }) => {
                       ? 'border-[#1B2C2E] bg-[#132628]/50 text-green-45'
                       : 'border-transparent text-gray-new-50'
                   )}
-                  type="button"
+                  href={`#${slug}`}
                   onClick={() => setActiveCategory({ slug, featuredCaseStudy })}
                 >
                   {name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>

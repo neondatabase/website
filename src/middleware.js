@@ -28,8 +28,6 @@ export async function middleware(req) {
 
       if (markdownPath) {
         try {
-          // Serve markdown from local public/md directory
-          // Files are copied during build by copy-md-content.js script
           const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
 
           const response = await fetch(markdownUrl);
@@ -39,7 +37,7 @@ export async function middleware(req) {
             if (response.status !== 404) {
               console.error('[AI Agent] Failed to fetch markdown', {
                 pathname,
-                localPath: markdownPath,
+                markdownPath,
                 status: response.status,
               });
             }

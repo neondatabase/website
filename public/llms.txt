@@ -112,7 +112,6 @@
 
 ## Guides
 
-- [Anonymize data with Neosync](https://neon.com/llms/guides-neosync-anonymize.txt): Learn how to anonymize sensitive data in Neon with Neosync
 - [Authenticate Neon Postgres application users with Auth.js](https://neon.com/llms/guides-auth-authjs.txt): Learn how to add passwordless authentication to your Neon Postgres database application using Auth.js and Resend
 - [Authenticate Neon Postgres application users with Auth0](https://neon.com/llms/guides-auth-auth0.txt): Learn how to add authentication to a Neon Postgres database application using Auth0
 - [Authenticate Neon Postgres application users with Clerk](https://neon.com/llms/guides-auth-clerk.txt): Learn how to add authentication to a Neon Postgres database application using Clerk
@@ -187,7 +186,6 @@
 - [File storage with Backblaze B2](https://neon.com/llms/guides-backblaze-b2.txt): Store files via Backblaze B2 and track metadata in Neon
 - [File storage with Cloudflare R2](https://neon.com/llms/guides-cloudflare-r2.txt): Store files via Cloudflare R2 and track metadata in Neon
 - [Full Twin](https://neon.com/llms/guides-neon-twin-full-pg-dump-restore.txt): Create a full Twin of your production database
-- [Generate synthetic data with Neosync](https://neon.com/llms/guides-neosync-generate.txt): Learn how to generate synthetic data in your Neon database with Neosync
 - [Get started with Flyway and Neon](https://neon.com/llms/guides-flyway.txt): Learn how to manage schema changes in Neon with Flyway
 - [Get started with Liquibase and Neon](https://neon.com/llms/guides-liquibase.txt): Learn how to manage schema changes in Neon with Liquibase
 - [Get started with branching](https://neon.com/llms/guides-branching-intro.txt): Everything you need to get started with Neon's branching feature
@@ -318,7 +316,7 @@
 ## Extensions
 
 - [PostGIS-related extensions](https://neon.com/llms/extensions-postgis-related-extensions.txt): Improve geospatial functionality with additional PostGIS extensions
-- [Postgres extensions](https://neon.com/llms/extensions-extensions-intro.txt): Extensions Intro
+- [Postgres extensions](https://neon.com/llms/extensions-pg-extensions.txt): Supported Postgres extensions
 - [Supported Postgres extensions](https://neon.com/llms/extensions-pg-extensions.txt): Pg Extensions
 - [The anon extension](https://neon.com/llms/extensions-postgresql-anonymizer.txt): Protecting sensitive data in Postgres databases
 - [The btree_gin extension](https://neon.com/llms/extensions-btree_gin.txt): Combine GIN and B-tree indexing capabilities for efficient multi-column queries in Postgres
