@@ -8,8 +8,9 @@ updatedOn: '2025-12-22T13:54:25.159Z'
 ---
 
 Neon is Postgres re-designed for how developers work today. Our developer experience is built around four core pillars:
+
 - **Invisible infra** — compute and storage adapt to your workload in real-time
-- **No waiting** - deployment of new instances, restores, and rebuilds from past states are instant 
+- **No waiting** - deployment of new instances, restores, and rebuilds from past states are instant
 - **Branching-first, API-first, and AI-first workflows** - databases behave like any other modern tool
 - **A composable stack** — based on strong primitives with optional building blocks, no lock-in
 
@@ -21,29 +22,29 @@ Traditional OLTP databases force you to provision compute upfront - i.e. choose 
 
 **How it works**
 
-Neon runs a continuous autoscaling loop that continuously monitors three core database / compute metrics. The platform then makes its autoscaling decision, adjusting resources in near real time. The three core metrics are: 
+Neon runs a continuous autoscaling loop that continuously monitors three core database / compute metrics. The platform then makes its autoscaling decision, adjusting resources in near real time. The three core metrics are:
 
 - **CPU load**: Neon tracks the 1-minute CPU load average and aims to keep it below ~90% of available CPU capacity. If the database becomes CPU-bound, compute is scaled up to restore headroom.
 - **Memory usage**: Overall memory consumption is monitored to keep usage below ~75% of allocated RAM. If memory pressure increases, Neon scales compute to provide additional RAM.
 - **Local File Cache (LFC) working set**: Neon [continuously estimates your database’s active working set](https://neon.com/blog/dynamically-estimating-and-scaling-postgres-working-set-size) (the data accessed most frequently) and scales compute so this working set fits in memory, keeping hot data cached locally for fast access.
 
-Rather than relying on fixed intervals or manual triggers, Neon's autoscaling algorithm continuously evaluates these three workload signals, adjusting compute up or down based on the live measurements - while always staying within the minimum and maximum limits you configure. 
+Rather than relying on fixed intervals or manual triggers, Neon's autoscaling algorithm continuously evaluates these three workload signals, adjusting compute up or down based on the live measurements - while always staying within the minimum and maximum limits you configure.
 
 - CPU load and overall memory usage are checked every 5 seconds
 - Local File Cache working set size is evaluated every 20 seconds
 - Memory usage inside Postgres itself is monitored every 100 milliseconds
 
-**What this means for DX** 
+**What this means for DX**
 
-You don’t need to pick instance sizes when creating a Neon branch: only your max/min autoscaling limits. You also don’t have to monitor load capacity to tune capacity or to schedule resizes. Autoscaling happens continuously and transparently as your application runs. 
+You don’t need to pick instance sizes when creating a Neon branch: only your max/min autoscaling limits. You also don’t have to monitor load capacity to tune capacity or to schedule resizes. Autoscaling happens continuously and transparently as your application runs.
 
 ### Scale to zero
 
-When a database is not actively handling queries, Neon [automatically scales compute all the way down to zero](https://neon.com/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical. 
+When a database is not actively handling queries, Neon [automatically scales compute all the way down to zero](https://neon.com/docs/introduction/scale-to-zero). Unused databases consume no compute resources, eliminating the cost of always-on instances that sit unused for large portions of the day. This happens by default after 5 minutes of inactivity, and when it’s time to restart, cold starts take less than 1 second, with less than 500 milliseconds being typical.
 
-This is especially valuable in non-production environments, where databases are often created for short periods of time and accessed intermittently. Development, testing, and preview environments may sit idle for hours (or days) between uses; traditional OLTP databases still incur full compute costs during that time unless you manually pause them - not on Neon. 
+This is especially valuable in non-production environments, where databases are often created for short periods of time and accessed intermittently. Development, testing, and preview environments may sit idle for hours (or days) between uses; traditional OLTP databases still incur full compute costs during that time unless you manually pause them - not on Neon.
 
-**What this means for DX** 
+**What this means for DX**
 
 Scale to zero is a foundational capability for the Neon experience, allowing us to offer:
 
@@ -51,9 +52,9 @@ Scale to zero is a foundational capability for the Neon experience, allowing us 
 
 - **Many short-lived, non-production environments**. Scale to zero makes it practical to run [large numbers of ephemeral databases](https://neon.com/use-cases/dev-test) for previews, CI runs, experiments, and testing. Teams can create and discard environments freely, without cost pressure forcing them to share databases or cut corners.
 
-- **A foundation for platforms and AI agents operating at scale**. Full-stack apps can provision and manage thousands of isolated Neon projects programmatically, fully integrating the process within their own product experience, for example to power their own free plans. Without scale-to-zero, this would imply massive infrastructure costs upfront. 
+- **A foundation for platforms and AI agents operating at scale**. Full-stack apps can provision and manage thousands of isolated Neon projects programmatically, fully integrating the process within their own product experience, for example to power their own free plans. Without scale-to-zero, this would imply massive infrastructure costs upfront.
 
-### On-demand storage 
+### On-demand storage
 
 In traditional Postgres setups, storage is something you plan upfront: you estimate how much data you’ll need, provision disk accordingly, and revisit that decision as your application grows. Getting this wrong leads to wasted capacity and full-disk errors. Neon removes this friction by making storage fully on demand.
 
@@ -73,9 +74,9 @@ With Neon, deploying a new database instance is a fast, lightweight operation. C
 
 Not only does this provide a better overall user experience - it also makes Neon a natural fit for platforms that need to provision databases programmatically for their users, such as open-source frameworks, developer platforms with their own free plans, or agent-driven systems. Instance creation becomes fast enough to sit directly on the user path.
 
-### A record of all past states, instantly accessible 
+### A record of all past states, instantly accessible
 
-Storage in Neon is also [history-preserving](https://neon.com/blog/get-page-at-lsn) by design. As data changes over time, Neon efficiently retains past versions of your database state as part of normal operation, making operations thar are painfully slow in traditional Postgres (like restores) trivial on Neon. 
+Storage in Neon is also [history-preserving](https://neon.com/blog/get-page-at-lsn) by design. As data changes over time, Neon efficiently retains past versions of your database state as part of normal operation, making operations thar are painfully slow in traditional Postgres (like restores) trivial on Neon.
 
 **Instant restores**
 
@@ -87,25 +88,25 @@ In addition to continuous history, Neon exposes [snapshots](https://neon.com/doc
 
 **What this means for DX**
 
-When your database keeps a complete, accessible record of its past, developers can work with a fundamentally different mindset: mistakes are reversible. They iterate more confidently, knowing that mistakes can be undone quickly and precisely. 
+When your database keeps a complete, accessible record of its past, developers can work with a fundamentally different mindset: mistakes are reversible. They iterate more confidently, knowing that mistakes can be undone quickly and precisely.
 
 ## Workflows
 
 ### Branching-first
 
-Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Neon treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching) as environments. 
+Modern software development is built around iteration, but most database setups are still built around a single mutable state. Neon takes a different approach: instead of treating a database as a static resource that must be copied over and over, Neon treats the database as a versioned system using short-lived [branches](https://neon.com/docs/introduction/branching) as environments.
 
-**Fast and lightweight** 
+**Fast and lightweight**
 
 Neon branches are near instant to deploy because they share underlying data until changes are made. Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Because branches use a copy-on-write model, they also don’t duplicate storage by default - they stay very cost-efficient until you actually change data, especially if they’re short-lived.
 
 **Designed to be discarded**
 
-Neon branching is optimized for short-lived environments, or environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time, ensuring temporary environments don’t linger out of your [restore window](https://neon.com/docs/introduction/restore-window) to keep storage costs to a minimum. 
+Neon branching is optimized for short-lived environments, or environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time, ensuring temporary environments don’t linger out of your [restore window](https://neon.com/docs/introduction/restore-window) to keep storage costs to a minimum.
 
-**One-click update** 
+**One-click update**
 
-Some branches don’t need to be discharged but refreshed often - for example, staging environments.  Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
+Some branches don’t need to be discharged but refreshed often - for example, staging environments. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
 
 **What this means for DX**
 
@@ -116,15 +117,16 @@ Because branches are fast to create and inexpensive to keep, teams use them as t
 - **Branch per pull request**. A new branch is created automatically for every PR, powering preview deployments with production-like data.
 - **Branch per CI run**. Test suites run against a fresh database branch, ensuring clean state and reproducible results for every pipeline run.
 
-### API-first 
+### API-first
 
 Neon is built with an API-first mindset. Every core operation is exposed programmatically, so you can manage your database environments the same way you manage the rest of your infrastructure.
 
 **Proven at scale**
 
-Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users. 
+Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users.
 
-The Neon API has been shaped by real-world requirements, and it’s able to 
+The Neon API has been shaped by real-world requirements, and it’s able to
+
 - Manage hundreds of thousands of projects
 - Automate database lifecycles with minimal human intervention
 - Enforce usage limits and cost controls programmatically, including maximum compute uptime per billing cycle, autoscaling limits, monthly data written limits, storage limits per branch, and more
@@ -132,6 +134,7 @@ The Neon API has been shaped by real-world requirements, and it’s able to
 **CLI and native integrations**
 
 For local development and CI pipelines, the Neon CLI provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
+
 - GitHub Actions for CI-driven branching and cleanup
 - Vercel for automatic database branches per preview deployment
 - Neon Data API for querying your database over HTTP
@@ -139,7 +142,7 @@ For local development and CI pipelines, the Neon CLI provides a simple scripting
 **What this means for DX**
 Database workflows stop being special-case operations: teams can create, update, and destroy database environments as part of their deployment pipelines.
 
-### AI-first 
+### AI-first
 
 AI has changed how developers write code, manage infrastructure, and ship applications - databases need to fit naturally into these workflows.
 
@@ -156,9 +159,10 @@ Developers can safely delegate database-related tasks to AI assistants in their 
 
 ## Composable stack
 
-Modern application stacks are increasingly modular. Developers mix and match databases, frameworks, hosting platforms, authentication providers, and AI tools based on their needs and expect each component to integrate cleanly without imposing rigid boundaries. Neon is built around this principle of composability - nothing in Neon requires you to adopt a specific framework or vendor-specific workflow. At its core, Neon is Postgres: you can connect with any driver, ORM, or tool in the ecosystem, deploy it anywhere, and integrate it into existing stacks without changing how you build. 
+Modern application stacks are increasingly modular. Developers mix and match databases, frameworks, hosting platforms, authentication providers, and AI tools based on their needs and expect each component to integrate cleanly without imposing rigid boundaries. Neon is built around this principle of composability - nothing in Neon requires you to adopt a specific framework or vendor-specific workflow. At its core, Neon is Postgres: you can connect with any driver, ORM, or tool in the ecosystem, deploy it anywhere, and integrate it into existing stacks without changing how you build.
 
-At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in - like authentication. [Neon Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Neon Auth is integrated into the platform, 
+At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in - like authentication. [Neon Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Neon Auth is integrated into the platform,
+
 - Auth data branches with your database, making it easy to test real authentication flows in preview and development environments
 - Auth state is versioned and reversible, benefiting from the same restore and snapshot capabilities
 - Auth integrates naturally with database-level concepts like joins, constraints, and row-level security
@@ -170,7 +174,3 @@ Developers stay in control of their stack. You can adopt Neon incrementally, use
 ## Build without friction
 
 Neon is designed to remove friction from database workflows without constraining how you build. Our users often tell us the best thing about Neon is that building feels intuitive, and that they forget the database is even there. That’s exactly the goal. When the database stops getting in the way, teams can move faster, experiment safely, and focus on shipping.
-
-
-
-
