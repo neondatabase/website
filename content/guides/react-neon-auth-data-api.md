@@ -53,77 +53,75 @@ You'll need to create a Neon project and enable both Neon Auth and the Data API.
 
 Create a new React project using Vite and install the required dependencies.
 
-1.  **Initialize the app:**
+### Initialize the app
 
-    ```bash
-    npm create vite@latest react-neon-todo -- --template react-ts
-    cd react-neon-todo && npm install
-    ```
+```bash
+npm create vite@latest react-neon-todo -- --template react-ts
+cd react-neon-todo && npm install
+```
 
-    When prompted:
-    - Select "No" for "Use rolldown-vite (Experimental)?"
-    - Select "No" for "Install with npm and start now?"
+When prompted:
 
-    You should see output similar to:
+- Select "No" for "Use rolldown-vite (Experimental)?"
+- Select "No" for "Install with npm and start now?"
 
-    ```bash
-    $ npm create vite@latest react-neon-todo -- --template react-ts
+You should see output similar to:
 
-    > npx
-    > "create-vite" react-neon-todo --template react-ts
+```bash
+$ npm create vite@latest react-neon-todo -- --template react-ts
 
-    │
-    ◇  Use rolldown-vite (Experimental)?:
-    │  No
-    │
-    ◇  Install with npm and start now?
-    │  No
-    │
-    ◇  Scaffolding project in /home/user/react-neon-todo...
-    │
-    └  Done.
-    ```
+> npx
+> "create-vite" react-neon-todo --template react-ts
 
-2.  **Install dependencies:**
-    You will need the following packages for this project:
-    - **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
-    - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
-    - **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
+│
+◇  Use rolldown-vite (Experimental)?:
+│  No
+│
+◇  Install with npm and start now?
+│  No
+│
+◇  Scaffolding project in /home/user/react-neon-todo...
+│
+└  Done.
+```
 
-    ```bash
-    npm install @neondatabase/neon-js react-router drizzle-orm
-    npm install -D drizzle-kit dotenv @types/node
-    ```
+### Install dependencies
 
-3.  **Setup Tailwind CSS:**
-    Install Tailwind CSS and the Vite plugin:
+You will need the following packages for this project:
 
-    ```bash
-    npm install tailwindcss @tailwindcss/vite
-    ```
+- **Neon SDK:** [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) for interacting with Neon Auth and the Data API.
+- **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
+- **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
-    Add the `@tailwindcss/vite plugin` to your Vite configuration (`vite.config.ts`):
+```bash
+npm install @neondatabase/neon-js react-router drizzle-orm
+npm install -D drizzle-kit dotenv
+```
 
-    ```javascript
-    import { defineConfig } from 'vite';
-    import react from '@vitejs/plugin-react';
-    import tailwindcss from '@tailwindcss/vite'; // [!code ++]
+### Setup Tailwind CSS
 
-    export default defineConfig({
-      plugins: [
-        react(),
-        tailwindcss(), // [!code ++]
-      ],
-    });
-    ```
+Install Tailwind CSS and the Vite plugin:
 
-    Add the following import to your `src/index.css` file:
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
 
-    ```css
-    @import "tailwindcss"; // [!code ++]
-    ```
+Add the `@tailwindcss/vite plugin` to your Vite configuration (`vite.config.ts`):
 
-## Configure environment variables
+```javascript
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite'; // [!code ++]
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(), // [!code ++]
+  ],
+});
+```
+
+### Configure environment variables
 
 Create a `.env` file in the root of your project and add the credentials you copied in [Step 1](#create-a-neon-project-with-neon-auth-and-data-api).
 
@@ -146,7 +144,7 @@ Drizzle is used only for **managing the database** (migrations). The React appli
 
 Drizzle ORM helps manage your database schema and migrations. It will be used to define the schema for the `todos` table and to interact with the Neon Auth tables. In addition, you will configure [Row‑Level Security (RLS)](/postgresql/postgresql-administration/postgresql-row-level-security) policies to ensure that users can only access their own data.
 
-**Create Drizzle config:**
+### Create Drizzle config
 
 Create a `drizzle.config.ts` file in the project root:
 
@@ -167,7 +165,7 @@ export default {
 
 This config tells Drizzle Kit where to find your database schema and where to output migration files. The `schemaFilter` is configured to look at both the `public` and `neon_auth` schemas. The `neon_auth` schema is where Neon Auth stores its user data.
 
-## Pull Neon Auth schema
+### Pull Neon Auth schema
 
 A key feature of Neon Auth is the automatic creation and maintenance of the Better Auth tables within the `neon_auth` schema. Since these tables reside in your Neon database, you can work with them directly using SQL queries or any Postgres‑compatible ORM, including defining foreign key relationships.
 
@@ -286,7 +284,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
     5. **Type casting**  
        The `user_id` is cast to `text` to ensure compatibility between the UUID type in the table and the text type returned by `auth.user_id()`.
 
-## Generate and apply migrations
+### Generate and apply migrations
 
 Now, generate the SQL migration file to create the `todos` table.
 
@@ -310,7 +308,9 @@ Your `todos` table now exists in your Neon database. You can verify this in the 
 
 Now that the database schema is set up, you can proceed to build the React application.
 
-## Initialize the Neon client
+## Configure the Neon client
+
+### Initialize the Neon client
 
 Create a file `src/neon.ts`. This initializes the Neon client, which handles both Authentication and Data API queries. For React hooks support, you will use the `BetterAuthReactAdapter`.
 
@@ -329,38 +329,39 @@ export const neon = createClient({
 });
 ```
 
-## Build the application
+### Application entry point
 
-Create the main components and pages for the Todo application:
+Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserRouter` to enable routing and authentication context.
 
-1. Header with user profile and sign out
-2. Auth and Account pages using Neon Auth pre-built components
-3. Todo application logic using the Neon Data API
+```tsx shouldWrap
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
+import App from './App.tsx';
+import { neon } from './neon.ts';
+import './index.css';
 
-### Header Component
-
-Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Neon Auth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
-
-```tsx
-import { UserButton } from '@neondatabase/neon-js/auth/react';
-
-export default function Header() {
-  return (
-    <header className="bg-blue-600 p-4 text-white shadow-md">
-      <div className="container mx-auto flex items-center justify-between">
-        <h1 className="text-xl font-bold">Neon Todo App</h1>
-        <UserButton size={'icon'} />
-      </div>
-    </header>
-  );
-}
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <NeonAuthUIProvider authClient={neon.auth} emailOTP social={{ providers: ['google'] }}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </NeonAuthUIProvider>
+  </StrictMode>
+);
 ```
 
-The component creates a simple header with the app title on the left and the `UserButton` on the right, allowing users to access their account options.
+<Admonition type="tip" title="Setting up OAuth providers">
+In this example, Google OAuth is enabled for social login using the shared credentials provided by Neon Auth. You can customize the setup by adding your own OAuth credentials in the Neon Auth settings. Additional providers such as GitHub, Vercel can also be configured.
+
+For more details, see [Set up OAuth](/docs/auth/guides/setup-oauth).
+</Admonition>
 
 ### Auth and Account Pages
 
-Neon provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
+Neon Auth provides pre‑built UI components for handling the complete flow of authentication, including Sign In, Sign Up, and Account management.
 
 As outlined in the [Neon Auth React UI guide](/docs/auth/quick-start/react-router-components), you can use the `AuthView` and `AccountView` components to quickly set up these pages.
 
@@ -395,6 +396,60 @@ export default function AccountPage() {
   );
 }
 ```
+
+### Update CSS
+
+Update `src/index.css` to include the Neon Auth Tailwind styles and set the minimal global styles.
+
+```css
+@import 'tailwindcss';
+@import '@neondatabase/neon-js/ui/tailwind';
+
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #0f172a;
+  background-color: #f3f4f6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000000;
+}
+```
+
+## Build the application
+
+Create the main components and pages for the Todo application:
+
+1. Header with user profile and sign out
+2. Todo application logic using the Neon Data API
+
+### Header Component
+
+Create `src/components/Header.tsx`. You'll use the `UserButton` component from [Neon Auth UI components](/docs/auth/reference/ui-components) to display the user's profile and sign-out option.
+
+```tsx
+import { UserButton } from '@neondatabase/neon-js/auth/react';
+
+export default function Header() {
+  return (
+    <header className="bg-blue-600 p-4 text-white shadow-md">
+      <div className="container mx-auto flex items-center justify-between">
+        <h1 className="text-xl font-bold">Neon Todo App</h1>
+        <UserButton size={'icon'} />
+      </div>
+    </header>
+  );
+}
+```
+
+The component creates a simple header with the app title on the left and the `UserButton` on the right, allowing users to access their account options.
 
 ### Todo application component
 
@@ -584,62 +639,6 @@ The routing structure includes three main routes:
 
 This setup ensures that only authenticated users can access the Todo application, while unauthenticated users are redirected to the Sign In page.
 
-### Application entry point
-
-Update `src/main.tsx` to wrap your app in the `NeonAuthUIProvider` and `BrowserRouter` to enable routing and authentication context.
-
-```tsx shouldWrap
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router';
-import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
-import App from './App.tsx';
-import { neon } from './neon.ts';
-import './index.css';
-
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <NeonAuthUIProvider authClient={neon.auth} emailOTP social={{ providers: ['google'] }}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </NeonAuthUIProvider>
-  </StrictMode>
-);
-```
-
-<Admonition type="tip" title="Setting up OAuth providers">
-In this example, Google OAuth is enabled for social login using the shared credentials provided by Neon Auth. You can customize the setup by adding your own OAuth credentials in the Neon Auth settings. Additional providers such as GitHub, Vercel can also be configured.
-
-For more details, see [Set up OAuth](/docs/auth/guides/setup-oauth).
-</Admonition>
-
-### Update CSS
-
-Update `src/index.css` to include the Neon Tailwind styles and define a few global styles for the application:
-
-```css
-@import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
-
-:root {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #0f172a;
-  background-color: #f3f4f6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #000000;
-}
-```
-
 ## Run the application
 
 1.  Start the development server:
@@ -712,7 +711,8 @@ For Vercel, add a `vercel.json` file with the following configuration:
       "source": "/(.*)",
       "destination": "/"
     }
-  ]
+  ],
+  "framework": "vite"
 }
 ```
 
