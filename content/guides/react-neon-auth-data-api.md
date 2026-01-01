@@ -308,7 +308,7 @@ Your `todos` table now exists in your Neon database. You can verify this in the 
 
 Now that the database schema is set up, you can proceed to build the React application.
 
-## Configure the Neon client
+## Configure Neon Auth and Data API
 
 ### Initialize the Neon client
 
@@ -453,7 +453,7 @@ The component creates a simple header with the app title on the left and the `Us
 
 ### Todo application component
 
-Create `src/pages/TodoApp.tsx`. This component handles displaying, adding, toggling, and deleting todos using the Neon Data API.
+Create `src/pages/TodoApp.tsx`. This component manages the todo list, allowing users to add, toggle, and delete tasks. It uses the Neon Data API to interact with the `todos` table, leveraging RLS policies to ensure secure data access.
 
 <Admonition type="note" title="Note">
 Because **RLS policies** are defined in the schema, you don’t need to manually filter by `user_id` when selecting data; the database automatically applies filtering based on the authenticated user’s token. For performance and indexing efficiency, however, it’s still recommended to include `user_id` in your queries.
@@ -474,7 +474,7 @@ export default function TodoApp() {
   useEffect(() => {
     if (data?.user) {
       const fetchTodos = async () => {
-        // Query the Data API directly
+        // Query the Data API
         // RLS automatically ensures that only the current user's todos are returned
         const { data: todosData, error } = await neon
           .from('todos')
@@ -591,11 +591,9 @@ export default function TodoApp() {
 }
 ```
 
-This component manages the todo list, allowing users to add, toggle, and delete tasks. It uses the Neon Data API to interact with the `todos` table, leveraging RLS policies to ensure secure data access.
-
 ### Layout and Routing
 
-Update `src/App.tsx` to set up routing and layout for the application. The `Layout` component uses `SignedIn` and `RedirectToSignIn` from Neon Auth UI components to manage access based on authentication status.
+Update `src/App.tsx` to set up routing and layout for the application.
 
 ```tsx
 import { Routes, Route } from 'react-router';
@@ -614,7 +612,6 @@ const Layout = () => {
           <TodoApp />
         </div>
       </SignedIn>
-      {/* If not signed in, this component redirects to the login page */}
       <RedirectToSignIn />
     </>
   );
@@ -637,6 +634,8 @@ The routing structure includes three main routes:
 2. `/auth/:path` - The authentication pages (Sign In, Sign Up, etc.).
 3. `/account/:path` - The account management pages.
 
+The `<SignedIn>` component ensures that only authenticated users can access the Todo application, while `<RedirectToSignIn>` redirects unauthenticated users to the Sign In page.
+
 This setup ensures that only authenticated users can access the Todo application, while unauthenticated users are redirected to the Sign In page.
 
 ## Run the application
@@ -656,7 +655,7 @@ This setup ensures that only authenticated users can access the Todo application
 
 </Steps>
 
-### Optional: Add End-to-end type safety
+### Optional: Add end-to-end type safety
 
 Neon JS SDK supports end-to-end type safety when interacting with the Data API. You can pull the database schema and generate TypeScript types for your tables. This allows you to have type-safe queries in your React application. This step is optional but recommended for better developer experience.
 
@@ -701,7 +700,7 @@ When you’re ready to deploy your React application, you can use any static sit
 
 Since this example relies on client‑side routing with React Router, you’ll also need to define rewrite rules.
 
-For Vercel, add a `vercel.json` file with the following configuration:
+For example, if you’re deploying to Vercel, add a `vercel.json` file to the root of your project with the following content:
 
 ```json
 {
@@ -737,7 +736,6 @@ The complete source code for this example is available on GitHub.
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [How Neon Auth works](/docs/neon-auth/how-it-works)
 - [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
 - [Neon JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
