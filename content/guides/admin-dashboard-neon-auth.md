@@ -763,8 +763,11 @@ The complete source code for this example is available on GitHub.
 
 ## Resources
 
-- [Neon Auth Admin API Reference](/docs/auth/admin)
-- [Managing Roles](/docs/auth/guides/roles)
-- [Better Auth Documentation](https://www.better-auth.com/)
+- [Neon Auth Admin API Reference](/docs/auth/guides/plugins/admin)
+- [Neon Auth Overview](/docs/neon-auth/overview)
+- [How Neon Auth works](/docs/neon-auth/how-it-works)
+- [Neon Auth UI components](/docs/auth/reference/ui-components)
+- [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
+- [Neon JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
 
 <NeedHelp />
