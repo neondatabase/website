@@ -9,7 +9,7 @@ updatedOn: '2025-12-26T00:00:00.000Z'
 
 This guide walks you through building a demo todo application with **Next.js**, [Neon Auth](/docs/auth/overview), and **Drizzle ORM**. By following along, you’ll learn how to integrate Neon Auth into your Next.js projects and manage database interactions with Drizzle ORM.
 
-The guide primarily focuses on using **Server actions** to securely handle authentication and database operations. [Optional steps](#optional-accessing-user-data-elsewhere) are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server actions, server components, client components, API routes).
+The guide primarily focuses on using **Server actions** to securely handle authentication and database operations. [Optional steps](#optional-accessing-user-data-elsewhere) are included at the end of the guide to demonstrate additional ways of retrieving user information in a Next.js app (e.g., server components, client components, API routes).
 
 By the end, you’ll have a fully functional todo application where users can sign up, log in, and manage their todos. Authentication and session management are powered by Neon Auth, while Drizzle ORM handles database interactions.
 
@@ -468,6 +468,8 @@ Create the main page and components to display and manage todos.
     }
     ```
 
+    The TodoItem component displays an individual todo item with a checkbox to toggle its completion status and a delete button. It uses the `toggleTodo` and `deleteTodo` server actions to perform these operations.
+
 2.  **Main page:**
 
     Update `app/page.tsx` with the following content:
@@ -535,13 +537,13 @@ While this guide focused on **Server Actions** to handle data, your application 
 
 Here is how you can retrieve user information across different parts of the Next.js stack:
 
-<Tabs labels={["Server Components", "Client Components", "API Routes"]}>
+<Tabs labels={["Server components", "Client components", "API Routes"]}>
 
 <TabItem>
 
 **Server components (RSC)**
 
-In Server components, you can access session data directly without making API calls. Use the `neonAuth` helper to retrieve the current `session` and `user` objects. This is ideal for initial page loads and conditional rendering based on auth state.
+In Server components, you can access session data using the `neonAuth` helper to retrieve the current `session` and `user` objects. This is ideal for initial page loads and conditional rendering based on auth state.
 
 Create `app/server-profile/page.tsx`:
 
@@ -629,7 +631,7 @@ export default function ClientProfilePage() {
 
 **API routes (route handlers)**
 
-If you are building a REST API for mobile apps or external integrations, you can use the same `neonAuth` helper used in Server Components to secure your Route Handlers.
+You can also secure API routes by validating the session using `neonAuth()` within your route handlers. This is useful for building RESTful endpoints that require authentication.
 
 Create `app/api/profile/route.ts`:
 
@@ -645,7 +647,6 @@ export async function GET() {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  // Return secure data
   return NextResponse.json({
     message: 'Secure data retrieved',
     user: user,
@@ -681,7 +682,6 @@ The complete source code for this example is available on GitHub.
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [How Neon Auth works](/docs/neon-auth/how-it-works)
 - [Use Neon Auth with Next.js](/docs/auth/quick-start/nextjs)
 - [Neon Auth UI components](/docs/auth/reference/ui-components)
 
