@@ -136,6 +136,7 @@ In the Neon Console, go to the **Data API** page. If a table has RLS disabled, y
 ### Fix
 
 1. Click the **Enable RLS** button in the Console, or run:
+
    ```sql
    ALTER TABLE your_table_name ENABLE ROW LEVEL SECURITY;
    ```
@@ -222,6 +223,7 @@ The Data API caches your database schema for performance. When you create or mod
 3. Retry your request
 
 You'll need to refresh the schema cache whenever you:
+
 - Create new tables
 - Add or remove columns
 - Change column types
