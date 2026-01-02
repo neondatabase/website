@@ -10,6 +10,7 @@ updatedOn: '2025-08-02T10:33:29.256Z'
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
 
 ## Stage 1: Side projects
+
 **Real hosted Postgres with zero costs**
 
 When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most configuration work, delivers real-world performance, and gives you access to core Neon features like branching and autoscaling.
@@ -21,9 +22,10 @@ When you’re looking for a free plan to run Postgres, what you want is simplici
 - A [broad catalog of Postgres extensions](https://neon.com/docs/extensions/pg-extensions) unlocks a Postgres-for-everything workflow
 
 ## Stage 2: Startups
+
 **Build an iterate fast**
 
-As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a frictionless building experience without compromising on performance and reliability. 
+As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a frictionless building experience without compromising on performance and reliability.
 
 <CTA title="Production checklist" description="Before launching your product, go through this checklist to make sure your DB has the right configuration to support your end users." buttonText="View checklist" buttonUrl="/docs/get-started/production-checklist" />
 
@@ -37,11 +39,13 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
 
 ## Scale-ups and large fleets
+
 **Frictionless operations at scale**
 
-At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s architecture is built to address their different requirements directly. 
+At this stage, teams need performance, reliability, isolation, and automation without ballooning costs or operational complexity. Neon’s architecture is built to address their different requirements directly.
 
 ### Operational efficiency
+
 - [On-demand storage](https://neon.com/storage#unique-benefits-derived-from-neons-implementation) grows as data demands it, without planning for capacity in advance and without the risk of full-disk errors
 - [Built-in high availability](https://neon.com/docs/introduction/high-availability) is provided by default through storage redundancy, with data replicated across availability zones and cloud object storage
 - [Backup and restore via snapshots](https://neon.com/docs/guides/backup-restore) allows you to recover multi-terabyte databases in seconds, without full data copies
@@ -50,10 +54,12 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - [Programmatic lifecycle management](https://neon.com/blog/how-dispatch-speeds-up-development-with-neon-while-keeping-workloads-on-aurora) lets you create, reset, and delete large numbers of environments without eating up engineering time
 
 ### Multi-tenancy
+
 - Neon’s [database-per-tenant setup](https://neon.com/use-cases/database-per-tenant) gives each customer a dedicated Neon project, providing strong isolation, eliminating noisy neighbors, and ensuring consistent performance
 - [API-first tenant management](https://neon.com/blog/provision-postgres-neon-api) enables programmatic provisioning, configuration, scaling, recovery, and deletion of tenant databases, making it practical for small teams to manage thousands of tenants
 
-### Fleet management for platforms and agents 
+### Fleet management for platforms and agents
+
 - Instant, API-driven database provisioning allows to deploy a full serverless Postgres backend as part of your [platform](https://neon.com/docs/guides/embedded-postgres) or [agent](https://neon.com/docs/guides/ai-agent-integration)
 - The fully embedded database experience keeps Neon invisible to your end users, with no third-party logins or external configuration required as part of your product workflow
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
