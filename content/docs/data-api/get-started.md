@@ -371,6 +371,7 @@ This workflow applies when using Neon Auth as your authentication provider. If y
 1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your Auth URL on the **Auth** page in the Neon Console.
 
 2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
+
    ```json
    {
      "email": "test@example.com",
@@ -380,6 +381,7 @@ This workflow applies when using Neon Auth as your authentication provider. If y
    ```
 
 3. **Or sign in with an existing user:** Call `POST /api/auth/sign-in/email` with:
+
    ```json
    {
      "email": "test@example.com",
