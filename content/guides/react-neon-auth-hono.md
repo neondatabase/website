@@ -411,7 +411,7 @@ Install Tailwind CSS and the Vite plugin:
 npm install tailwindcss @tailwindcss/vite
 ```
 
-Add the `@tailwindcss/vite plugin` to your Vite configuration (`vite.config.ts`):
+Add the `@tailwindcss/vite` plugin to your Vite configuration (`vite.config.ts`):
 
 ```javascript
 import { defineConfig } from 'vite';
@@ -424,12 +424,6 @@ export default defineConfig({
     tailwindcss(), // [!code ++]
   ],
 });
-```
-
-Add the following import to your `src/index.css` file:
-
-```css
-@import "tailwindcss"; // [!code ++]
 ```
 
 ### Configure environment variables
@@ -474,6 +468,34 @@ createRoot(document.getElementById('root')!).render(
   </StrictMode>
 );
 ```
+
+### Update global styles
+
+Replace the content of `src/index.css` with the following minimal Tailwind CSS setup:
+
+```css
+@import 'tailwindcss';
+@import '@neondatabase/neon-js/ui/tailwind';
+
+:root {
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #0f172a;
+  background-color: #f3f4f6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #000000;
+}
+```
+
+This also includes Neon Auth's Tailwind styles required for the authentication components to render correctly.
 
 ### Create Auth and Account pages
 
@@ -555,6 +577,8 @@ export const api = {
     }),
 };
 ```
+
+The `api` object provides methods to interact with the backend API. It retrieves the current session's JWT using `authClient.getSession()`, attaches it as a Bearer token in the `Authorization` header, and performs fetch requests to the backend.
 
 ### Modify App component
 
@@ -644,33 +668,13 @@ export default function App() {
 }
 ```
 
-### Update styles
-
-Replace the content of `src/index.css` with the following minimal Tailwind CSS setup:
-
-```css
-@import 'tailwindcss';
-@import '@neondatabase/neon-js/ui/tailwind';
-
-:root {
-  font-family: system-ui, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  color: #0f172a;
-  background-color: #f3f4f6;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #000000;
-}
-```
-
-This also includes Neon Auth's Tailwind styles required for the authentication components to render correctly.
+This code implements the main journal functionality:
+- **Journal Component:**  
+  - Fetches and displays journal entries for the authenticated user.
+  - Provides a form to create new journal entries.
+  - Uses the `api` helper to interact with the backend.
+- **App Component:**  
+  - The main application component that sets up routing for the journal, authentication, and account management pages.
 
 ### Start the frontend
 
@@ -729,7 +733,6 @@ The complete source code for this example is available on GitHub:
 ## Resources
 
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [How Neon Auth works](/docs/neon-auth/how-it-works)
 - [Neon Auth JWT Plugin](/docs/auth/guides/plugins/jwt)
 - [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
