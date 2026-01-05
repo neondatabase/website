@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-29T21:10:05.269Z'
+updatedOn: '2026-01-05T15:20:16.717Z'
 layout: wide
 ---
 
@@ -165,7 +165,11 @@ export const authServer = createAuthServer();
 
 The `NeonAuthUIProvider` component wraps your application with authentication context and provides essential hooks and auth methods required by auth components throughout your app. To make authentication globally accessible, wrap your entire app with `NeonAuthUIProvider`.
 
-Copy and pase the following code into your `app/layout.tsx` file.
+<Admonition type="important" title="Hydration Warning">
+Add `suppressHydrationWarning` to the `<html>` tag to prevent React hydration errors caused by `next-themes` client-side theme switching. This property only applies one level deep, so it won't block hydration warnings on other elements.
+</Admonition>
+
+Copy and paste the following code into your `app/layout.tsx` file.
 
 The `NeonAuthUIProvider` can be fully customized with settings you have configured in Neon Console. For example:
 
@@ -225,7 +229,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning> // [!code ++]
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
