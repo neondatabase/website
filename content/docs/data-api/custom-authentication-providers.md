@@ -88,6 +88,8 @@ When you configure a JWT Audience value in the Data API:
 
 If you're unsure whether your provider requires it, you can decode a sample JWT from your provider at [jwt.io](https://jwt.io) and check if it includes an `aud` claim.
 
+<a id="supported-providers"></a>
+
 ## Find your JWKS URL
 
 | Provider                            | JWKS URL Format                                                                             |

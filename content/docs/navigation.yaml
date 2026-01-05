@@ -352,7 +352,7 @@
               items:
                 - title: Overview
                   slug: data-api/overview
-                - title: Quickstart
+                - title: Get started
                   slug: data-api/get-started
 
             - section: Guides

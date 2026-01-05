@@ -25,21 +25,23 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-### 2. Select an authentication option
+### 2. Configure Neon Auth (optional)
 
-Choose how you want to authenticate requests to the Data API:
+The **Use Neon Auth** checkbox allows you to enable [Neon Auth](/docs/auth/overview) as your authentication provider for the Data API. When enabled, Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 
-- **Neon Auth**: Use [Neon Auth](/docs/auth/overview) as your authentication provider (the default).
-- **Other provider**: Use a different authentication provider by entering the JWKS URL. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for a list of supported providers.
-- **Skip (set up later)**: Configure an authentication provider later. See [Add your authentication provider](/docs/data-api/custom-authentication-providers#add-your-authentication-provider).
+<Admonition type="info">
+Anyone on the web can sign up for your app. Support for restricted signups is coming soon.
+</Admonition>
+
+If you prefer to use a different authentication provider (such as Auth0, Clerk, or Firebase Auth), leave this checkbox unchecked and configure your provider later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for details.
 
 <Admonition type="warning" title="Authentication required">
 All requests to the Data API require authentication with a valid JWT token.
 </Admonition>
 
-### 3. Configure schema access
+### 3. Configure schema access (optional)
 
-The **Grant public schema access to authenticated users** toggle (enabled by default) automatically applies database permissions so the `authenticated` role can read and write to tables in the `public` schema.
+The **Grant public schema access** checkbox automatically applies database permissions so the `authenticated` role can read and write to tables in the `public` schema.
 
 <details>
 <summary>View the GRANT statements applied</summary>
@@ -61,19 +63,27 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 
 </details>
 
-Leave this toggle enabled unless you need to manage permissions manually. If you disable it, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
+Enable this checkbox unless you need to manage permissions manually. If you leave it unchecked, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
 
-### 4. Click Enable
+### 4. Click Enable Data API
 
-Click **Enable** to activate the Data API. Once enabled, you'll see your REST API endpoint and configuration options:
+Click **Enable Data API** to activate the Data API. Once enabled, you'll see the Data API page.
 
 ![Data API enabled view](/docs/data-api/data-api-enabled.png)
 
-At this point:
+On the **API** tab, you'll see:
 
-- Your **REST API endpoint** is ready to use.
-- **Neon Auth** is configured as your authentication provider (if selected).
-- Next, add **Row-Level Security (RLS)** policies to define which rows users can access. We'll show you how in the next step.
+- **API URL**: Your REST API endpoint for accessing your database
+- **Refresh schema cache**: A button to update the Data API when you make schema changes
+- **Security section**: Options to configure Neon Auth and enable Row-Level Security on your tables
+
+<Admonition type="warning">
+If you have tables without RLS enabled, you'll see a warning that authenticated users can view all rows in those tables. We'll show you how to add RLS in the next step.
+</Admonition>
+
+> For advanced configuration options like custom authentication providers, exposed schemas, and CORS settings, see the **Settings** tab or refer to [Managing the Data API](/docs/data-api/manage).
+
+Next, you'll create a table with **Row-Level Security (RLS)** policies to define which rows users can access.
 
 ## Create a table with RLS
 
