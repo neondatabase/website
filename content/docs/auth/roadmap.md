@@ -37,13 +37,13 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 
 ### Supported
 
-| Plugin                                                                                          | Status                                                       |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Email & password](https://www.better-auth.com/docs/authentication/email-password)              | ✅ Supported                                                 |
-| [Social OAuth](https://www.better-auth.com/docs/authentication/social-sign-in) (Google, GitHub) | ✅ Supported                                                 |
-| [Email OTP](https://www.better-auth.com/docs/plugins/email-otp)                                 | ✅ Supported                                                 |
-| [Admin](https://www.better-auth.com/docs/plugins/admin)                                         | ✅ Supported                                                 |
-| [Organization](https://www.better-auth.com/docs/plugins/organization)                           | ⚠️ Partial (invitation emails, JWT token claims in progress) |
+| Plugin                                                                                                                                            | Status                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [Email & password](https://www.better-auth.com/docs/authentication/email-password)                                                                | ✅ Supported                                                 |
+| Social OAuth ([Google](https://www.better-auth.com/docs/authentication/google), [GitHub](https://www.better-auth.com/docs/authentication/github)) | ✅ Supported                                                 |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)                                                                                                  | ✅ Supported                                                 |
+| [Admin](/docs/auth/guides/plugins/admin)                                                                                                          | ✅ Supported                                                 |
+| [Organization](https://www.better-auth.com/docs/plugins/organization)                                                                             | ⚠️ Partial (invitation emails, JWT token claims in progress) |
 
 ### On the roadmap
 

@@ -430,6 +430,16 @@
                 - title: Production checklist
                   slug: auth/production-checklist
 
+            - section: Plugins
+              items:
+                - title: Supported plugins
+                  slug: auth/guides/plugins
+                  items:
+                    - title: Admin
+                      slug: auth/guides/plugins/admin
+                    - title: Email OTP
+                      slug: auth/guides/plugins/email-otp
+
             - section: Reference
               items:
                 - title: JavaScript SDK (Auth & Data API)
