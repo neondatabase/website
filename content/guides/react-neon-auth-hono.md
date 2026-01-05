@@ -40,7 +40,7 @@ You'll need to create a Neon project and enable Neon Auth.
 3.  **Copy your credentials:**
     - **Neon Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
       ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
-    - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
+    - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
       ![Connection modal](/docs/connect/connection_details.png)
 
 ## Setup the Backend (Hono)
@@ -61,7 +61,7 @@ cd journal-backend
 The output should look like this:
 
 ```plaintext
-$ npm create hono@latest journal-backend --nodejs
+$ npm create hono@latest journal-backend
 
 > npx
 > "create-hono" journal-backend
@@ -159,7 +159,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below:
 
-    ```typescript {9,39-48} shouldWrap
+    ```typescript {9,39-46} shouldWrap
     import {
       pgTable,
       pgSchema,
@@ -206,8 +206,6 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
       content: text('content').notNull(),
       createdAt: timestamp('created_at').defaultNow(),
     });
-
-    export type JournalEntry = typeof journalEntries.$inferSelect;
     ```
 
     The `journal_entries` table contains the following columns: `id`, `user_id`, `content` and `created_at`. It is linked to the `user` table in the `neon_auth` schema via a foreign key relationship on the `user_id` column.
@@ -669,11 +667,12 @@ export default function App() {
 ```
 
 This code implements the main journal functionality:
-- **Journal Component:**  
+
+- **Journal component:**
   - Fetches and displays journal entries for the authenticated user.
   - Provides a form to create new journal entries.
   - Uses the `api` helper to interact with the backend.
-- **App Component:**  
+- **App component:**
   - The main application component that sets up routing for the journal, authentication, and account management pages.
 
 ### Start the frontend
@@ -688,7 +687,7 @@ npm run dev
 
 1.  Navigate to `http://localhost:5173`.
 2.  **Sign In:** You will be presented with the Neon Auth sign-in page. Create an account or log in using your preferred method (email or Google).
-3.  **Write a Journal Entry:** Type a message and click Save.
+3.  **Write a Journal Entry:** Write a new journal entry in the textarea and click "Save".
 4.  **Verify flow:**
     - The Frontend calls `authClient.getSession()` to grab the session data (which includes the JWT).
     - It sends a `POST` request to `http://localhost:3000/api/entries` with `Authorization: Bearer <jwt>`.
