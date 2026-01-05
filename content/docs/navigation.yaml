@@ -439,6 +439,12 @@
                       slug: auth/guides/plugins/admin
                     - title: Email OTP
                       slug: auth/guides/plugins/email-otp
+                    - title: JWT
+                      slug: auth/guides/plugins/jwt
+                    - title: OpenAPI
+                      slug: auth/guides/plugins/openapi
+                    - title: Organization
+                      slug: auth/guides/plugins/organization
 
             - section: Reference
               items:

@@ -2,7 +2,7 @@
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-18T12:00:58.021Z'
+updatedOn: '2026-01-05T20:32:04.267Z'
 layout: wide
 ---
 
@@ -126,7 +126,7 @@ Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `a
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
-  social={{ providers: ['google', 'github'] }}
+  social={{ providers: ['google', 'github', 'vercel'] }}
   navigate={navigate}
   credentials={{ forgotPassword: true }}
 >

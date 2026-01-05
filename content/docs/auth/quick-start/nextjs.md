@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2026-01-05T15:20:16.717Z'
+updatedOn: '2026-01-05T20:32:04.266Z'
 layout: wide
 ---
 
@@ -185,7 +185,6 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
   authClient={authClient}
   redirectTo="/account/settings"
   emailOTP
-
   social={{  // [!code ++]
     providers: ['google', 'github', 'vercel']  // [!code ++]
   }} // [!code ++]
