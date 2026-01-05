@@ -66,7 +66,7 @@ This section describes the features listed in the [Plan overview](#plan-overview
 Learn how to manage your Neon costs effectively with our [cost optimization guide](/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
 </Admonition>
 
-### ☑ Price
+### Price
 
 On **Launch** and **Scale** plans, you pay only for what you use — there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
@@ -76,13 +76,13 @@ Invoices under $0.50 are not collected.
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
-### ☑ Who it's for
+### Who it's for
 
 - **Free** — Prototypes, side projects, and quick experiments. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
-### ☑ Projects
+### Projects
 
 A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object hierarchy](/docs/manage/overview).
 
@@ -94,7 +94,7 @@ Included per plan:
 - **Launch**: 100 projects
 - **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
-### ☑ Branches
+### Branches
 
 Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
 Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
@@ -111,7 +111,7 @@ See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) 
 
 > Projects can have multiple root branches, with limits based on your plan. See [Branch types: Root branch](/docs/manage/branches#root-branch) for details.
 
-### ☑ Extra branches
+### Extra branches
 
 On paid plans, you can create extra child branches. Extra branches beyond your plan's branch allowance (outlined [above](#-branches)) are billed in **branch-months**, metered hourly.
 
@@ -130,7 +130,7 @@ The maximum number of branches you can have per project:
 
 If you need more, contact [Sales](/contact-sales).
 
-### ☑ Compute
+### Compute
 
 Compute usage depends on compute size and runtime.
 
@@ -178,7 +178,7 @@ average compute size × hours running = CU-hours
 
 Scale to zero suspends computes after inactivity to compute usage and cost.
 
-### ☑ Autoscaling
+### Autoscaling
 
 Adjusts compute size between defined limits based on demand.
 
@@ -188,7 +188,7 @@ Adjusts compute size between defined limits based on demand.
 
 > Autoscaling is capped at 16 CU. Scale supports fixed computes above 16 CU.
 
-### ☑ Scale to zero
+### Scale to zero
 
 Suspends computes after inactivity.
 
@@ -196,7 +196,7 @@ Suspends computes after inactivity.
 - **Launch**: 5 min inactivity — can disable
 - **Scale**: Fully configurable — 1 minute to always on
 
-### ☑ Storage
+### Storage
 
 Storage is your data size, billed on actual usage in **GB-months**, measured hourly.
 
@@ -220,7 +220,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
-### ☑ Public network transfer
+### Public network transfer
 
 Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
 
@@ -232,7 +232,7 @@ Allowances per plan:
 - **Launch**: 100 GB/month, then $0.10/GB
 - **Scale**: 100 GB/month, then $0.10/GB
 
-### ☑ Monitoring
+### Monitoring
 
 View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.
 
@@ -244,12 +244,12 @@ Retention of metrics data differs by plan:
 
 See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 
-### ☑ Metrics/logs export
+### Metrics/logs export
 
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
-### ☑ Instant restore
+### Instant restore
 
 Neon stores a change history to support instant restore.
 
@@ -261,7 +261,7 @@ You can change your [restore window](#restore-window) to control how much change
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
-### ☑ Restore window
+### Restore window
 
 How far back you can restore data.
 
@@ -275,7 +275,7 @@ The maximum restore window per plan:
 
 The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
 
-### ☑ Snapshots
+### Snapshots
 
 Snapshots capture the state of your branch at a point in time. You can create snapshots manually or schedule automated backups.
 
@@ -289,7 +289,7 @@ Snapshot limits per plan:
 
 Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
 
-### ☑ Auth
+### Auth
 
 Neon Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
 
@@ -303,7 +303,7 @@ Monthly Active User (MAU) limits per plan:
 
 See [Neon Auth](/docs/auth/overview) for more information.
 
-### ☑ Private network transfer
+### Private network transfer
 
 Bi-directional data transfer to and from your databases over private networking.
 
@@ -311,7 +311,7 @@ Private networking is available on the **Scale** plan. It uses [AWS PrivateLink]
 
 Billed at $0.01/GB for network transferred to and from Neon. You'll only see this on your bill if you enable this feature.
 
-### ☑ Compliance and security
+### Compliance and security
 
 Compliance certifications available on **Scale**:
 
@@ -329,11 +329,11 @@ Security features:
 - [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
 
-### ☑ Uptime SLA
+### Uptime SLA
 
 Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
 
-### ☑ Support
+### Support
 
 Support level by plan:
 
