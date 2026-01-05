@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-29T21:10:05.269Z'
+updatedOn: '2026-01-05T15:20:16.717Z'
 layout: wide
 ---
 
