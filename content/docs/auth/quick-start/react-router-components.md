@@ -2,7 +2,7 @@
 title: React with Neon Auth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-18T12:00:58.020Z'
+updatedOn: '2025-12-29T21:10:05.270Z'
 layout: wide
 ---
 
@@ -168,7 +168,7 @@ import {
   SignedIn,
   UserButton,
   RedirectToSignIn,
-} from '@neondatabase/neon-js/auth/react/ui';
+} from '@neondatabase/neon-js/auth/react';
 
 function Home() {
   return (

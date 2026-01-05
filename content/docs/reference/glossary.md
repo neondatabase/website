@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-12-11T15:40:49.874Z'
+updatedOn: '2025-12-29T16:46:32.132Z'
 ---
 
 ## access token
@@ -540,7 +540,7 @@ A memory area in Postgres for caching blocks of data from storage (disk on stand
 
 ## Snapshot
 
-A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ## SNI
 
