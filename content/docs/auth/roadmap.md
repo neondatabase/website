@@ -2,7 +2,7 @@
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
 enableTableOfContents: true
-updatedOn: '2025-12-16T12:23:55.558Z'
+updatedOn: '2026-01-05T17:17:46.996Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

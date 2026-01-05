@@ -2,7 +2,7 @@
 title: Plugins
 subtitle: Supported Better Auth plugins in Neon Auth
 enableTableOfContents: true
-updatedOn: '2025-12-18T00:00:00.000Z'
+updatedOn: '2026-01-05T17:17:46.990Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

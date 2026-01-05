@@ -2,7 +2,7 @@
 title: Email OTP
 subtitle: Sign in and verify email addresses with one-time passwords
 enableTableOfContents: true
-updatedOn: '2025-12-17T00:00:00.000Z'
+updatedOn: '2026-01-05T17:17:46.995Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
