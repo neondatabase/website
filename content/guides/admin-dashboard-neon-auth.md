@@ -7,7 +7,7 @@ createdAt: '2025-12-31T00:00:00.000Z'
 updatedOn: '2025-12-31T00:00:00.000Z'
 ---
 
-In a production application, internal tooling is often critical for Operations and Support teams. The Neon Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
+In a production application, internal tooling is often critical for operations and support teams. The Neon Auth [Admin plugin](/docs/auth/guides/plugins/admin) (powered by Better Auth) exposes powerful user management APIs directly through the SDK, allowing you to build these tools without writing complex backend logic.
 
 This guide demonstrates how to build an **internal admin dashboard** using Neon Auth. You will create a React application that allows support staff to view registered users, ban abusive accounts, and securely impersonate users to reproduce bugs. It will cover the following features:
 
@@ -507,7 +507,7 @@ export default function AdminDashboard() {
 }
 ```
 
-The `AdminDashboard` component performs the following tasks:
+The `AdminDashboard` component includes the following features:
 
 1. **State management**
    - `users`: Stores the list of users fetched from the backend.
@@ -526,15 +526,14 @@ The `AdminDashboard` component performs the following tasks:
    - If the logged‑in user has the role `admin`, it triggers `fetchUsers()` to load user data.
 
 4. **Loading state**
-   - If either session data or user data is still loading, displays a centered “Loading users…” message.
+   - If either session data or user data is still loading, displays a “Loading users…” message.
 
 5. **Dashboard rendering**
    - If the user has the `admin` role:
      - Displays a **Support dashboard** header.
-     - Renders a table of users with columns for **User ID, Email, Role, Status, and Actions**.
-     - Each row is rendered using the `UserRow` component, which also supports refreshing data.
+     - Renders a table of users with columns for **User ID, Email, Role, Status, and Actions** (using the `UserRow` component).
    - If the user is not an admin:
-     - Shows an **Access Denied** message styled with red borders and background.
+     - Shows an **Access Denied** message.
 
 6. **Authentication handling**
    - Only renders the dashboard for signed‑in users by wrapping the content in `<SignedIn>`.
@@ -542,7 +541,7 @@ The `AdminDashboard` component performs the following tasks:
 
 ## Add an Impersonation banner
 
-When impersonating a user, it is critical to have a way to return to your admin account. This component checks the session for the `impersonatedBy` field.
+When impersonating a user, it is critical to have a way to return to your admin account. This component checks the session for the `impersonatedBy` field on the session object and displays a banner with a button to stop impersonation.
 
 Create `src/components/ImpersonationBanner.tsx`:
 
@@ -700,10 +699,8 @@ This file defines the main **React application** with routing and a client dashb
    - **Header**
      - Displays a "Client Dashboard" title.
      - Includes a `UserButton` for account management (profile, sign out, etc.).
-   - **Status card**
-     - Shows whether the user is **Authenticated** or a **Guest**.
-     - Displays the user’s ID if available.
-   - **Session JSON viewer**
+   - **User and session details**
+     - Shows authentication status and user ID if logged in.
      - Renders raw session data for debugging purposes.
    - **Admin call‑to‑action**
      - If the user’s role is `admin`, shows an “Admin Access” card.
@@ -712,12 +709,12 @@ This file defines the main **React application** with routing and a client dashb
      - Uses `<SignedIn>` to render content only for authenticated users.
      - Uses `<RedirectToSignIn>` to redirect unauthenticated users to the sign‑in page.
 
-2. **`App` component**
-   - Defines application routes using `react-router`:
-     - `/` → `HomePage`
-     - `/admin` → `AdminDashboard`
-     - `/auth/:path` → `Auth` page
-     - `/account/:path` → `Account` page
+2. **`App` component:**
+   The main application component that sets up routing using `react-router` with the following routes:
+   - `/` → `HomePage`
+   - `/admin` → `AdminDashboard`
+   - `/auth/:path` → `Auth` page
+   - `/account/:path` → `Account` page
 
 This setup provides a **client dashboard** that shows session details, user status, and admin access, while routing users to authentication, account, and admin pages as needed.
 
@@ -730,11 +727,11 @@ This setup provides a **client dashboard** that shows session details, user stat
    ```
 
 2. Open `http://localhost:5173` in your browser.
-3. Log in with the account you assigned the **admin** role to in [Step 2](#create-an-admin-user).
-4. You should now see the dashboard populated with user accounts.  
+3. In a separate browser or incognito window, create some test user accounts by signing up.
+4. In the original browser window, log in with the account you assigned the **admin** role to in [Step 2](#create-an-admin-user).
+5. You should now see the dashboard populated with user accounts.  
    ![Support dashboard](/docs/guides/admin-dashboard-demo.png)
-5. In a separate browser or incognito window, create a regular user account to test impersonation and banning.
-6. Return to the admin dashboard, where you can ban or impersonate that user.
+6. Return to the admin dashboard, where you can list, ban, and impersonate users.
 7. Try impersonating the user. The app will switch to their perspective, allowing you to debug issues they may encounter.  
    ![Impersonation banner](/docs/guides/admin-dashboard-impersonation.png)
 8. The **Go to Admin Dashboard** link is only visible to users with the `admin` role and provides quick access to the admin interface.  
@@ -765,7 +762,6 @@ The complete source code for this example is available on GitHub.
 
 - [Neon Auth Admin API Reference](/docs/auth/guides/plugins/admin)
 - [Neon Auth Overview](/docs/neon-auth/overview)
-- [How Neon Auth works](/docs/neon-auth/how-it-works)
 - [Neon Auth UI components](/docs/auth/reference/ui-components)
 - [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
 - [Neon JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
