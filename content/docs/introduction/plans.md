@@ -220,6 +220,10 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
+**Storage per branch:**
+
+Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](/contact-sales).
+
 ### ☑ Public network transfer
 
 Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
