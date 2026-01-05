@@ -131,3 +131,7 @@ neon branches reset staging --parent
 ```
 
 This ensures staging accurately reflects the current production state for reliable testing.
+
+## Limitations
+
+- **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/introduction/branch-restore) to restore the child branch from the parent directly.
