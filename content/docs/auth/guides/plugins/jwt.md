@@ -2,7 +2,7 @@
 title: JWT
 subtitle: Authenticate using JSON Web Tokens (JWT) for external services
 enableTableOfContents: true
-updatedOn: '2025-12-21T00:00:00.000Z'
+updatedOn: '2026-01-05T20:19:10.004Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
