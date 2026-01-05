@@ -3,6 +3,9 @@ title: Integrating with Neon
 subtitle: Choose the right integration path for your platform or application
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/guides/partner-intro
+  - /docs/guides/platform-integration-intro
 updatedOn: '2025-11-28T18:21:08.467Z'
 ---
 

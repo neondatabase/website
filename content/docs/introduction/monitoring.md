@@ -2,6 +2,8 @@
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
 enableTableOfContents: false
+redirectFrom:
+  - /docs/introduction/monitor-external-tools
 updatedOn: '2025-12-03T13:07:33.036Z'
 ---
 

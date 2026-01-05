@@ -2,6 +2,8 @@
 title: Multitenancy with Neon
 subtitle: How to configure Neon for multitenancy - plus a few design tips
 enableTableOfContents: true
+redirectFrom:
+  - /docs/guides/database-per-user
 updatedOn: '2025-06-23T15:24:08.778Z'
 ---
 
