@@ -2,7 +2,7 @@
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
 enableTableOfContents: true
-updatedOn: '2025-12-18T12:00:58.022Z'
+updatedOn: '2026-01-05T20:32:04.268Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

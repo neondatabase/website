@@ -2,7 +2,7 @@
 title: React with Neon Auth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-29T21:10:05.270Z'
+updatedOn: '2026-01-05T20:32:04.267Z'
 layout: wide
 ---
 

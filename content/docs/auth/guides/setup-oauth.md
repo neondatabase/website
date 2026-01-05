@@ -2,7 +2,7 @@
 title: Set up OAuth
 subtitle: Add Google or GitHub sign-in to your application
 enableTableOfContents: true
-updatedOn: '2025-12-08T00:00:00.000Z'
+updatedOn: '2026-01-05T20:32:04.265Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
