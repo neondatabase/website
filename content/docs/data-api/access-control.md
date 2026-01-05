@@ -99,7 +99,7 @@ RLS has three distinct states that affect data visibility:
 | ---------------------------- | --------------------------------------------------- |
 | **RLS disabled**             | All authenticated users see all rows (no filtering) |
 | **RLS enabled, no policies** | All access is blocked (users see nothing)           |
-| **RLS enabled + policies**   | Rows are filtered according to policy rules         |
+| **RLS enabled + policies**   | Rows filtered by policy rules (typically using `auth.user_id()`) |
 
 <Admonition type="warning" title="RLS disabled means no filtering">
 If RLS is disabled on a table, any authenticated user can see all rows in that table. This is different from "filtering without policies" — it means there is no filtering at all.

@@ -323,7 +323,7 @@ console.log(data);
 
 ### Option 2: Direct HTTP requests
 
-You can query the Data API directly using any HTTP client — cURL, Postman, Python, Go, or any language that can make HTTP requests. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
+Query the Data API directly using any HTTP client. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
 
 **Where to get the JWT token:**
 
@@ -347,7 +347,7 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&o
 
 **Example: INSERT (POST)**
 
-This request inserts a new row into the `posts` table:
+This request inserts a new row into the `posts` table, setting the `content` column:
 
 ```bash shouldWrap
 curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
@@ -368,7 +368,7 @@ If you're using Neon Auth and want to test the Data API without building an appl
 This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
 </Admonition>
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your Auth URL on the **Auth** page in the Neon Console.
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your Auth URL on the **Auth** page in the Neon Console.
 
 2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
 
