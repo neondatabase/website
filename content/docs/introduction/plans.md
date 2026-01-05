@@ -474,13 +474,6 @@ What is autoscaling and how does it work?
 How are read replicas billed?
 : Each read replica is its own compute and contributes to CU-hours.
 
-What are the Auth limits?
-: Auth is included in all plans based on Monthly Active Users (MAU):  
-| • Free: Up to 60,000 MAU  
-| • Launch: Up to 1M MAU  
-| • Scale: Up to 1M MAU  
-| If you need more than 1M MAU, contact [Sales](/contact-sales). Learn more: [Neon Auth](/docs/auth/neon-auth)
-
 Do public network transfer limits reset each month?
 : Yes. Free plan includes 5 GB/month, Launch and Scale include 100 GB/month. Beyond that, it's $0.10/GB.
 
