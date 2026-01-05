@@ -67,12 +67,8 @@ const AutoscalingChart = ({
     performanceDegradations: 0,
   });
 
-  // Get dataset(s) - support both single and multiple datasets
-  const isMultipleDatasets = datasetKeys && Array.isArray(datasetKeys);
-  const datasets = isMultipleDatasets
-    ? datasetKeys.map(key => DATA[key] || DATA[Object.keys(DATA)[0]])
-    : [DATA[datasetKey] || DATA[Object.keys(DATA)[0]]];
-  const dataset = datasets[0]; // Use first dataset for title fallback
+  // Get first dataset for title display
+  const dataset = DATA[datasetKey] || DATA[Object.keys(DATA)[0]];
   const displayTitle = title || dataset.name || 'Database Autoscaling';
 
   // Convert dataset to chart data format
@@ -112,9 +108,14 @@ const AutoscalingChart = ({
       }
       const autoscalingCUHours = autoscalingCUMinutes / 60;
 
+      // Calculate duration from the data itself
+      const durationHours =
+        data.length > 1
+          ? (data[data.length - 1].x.getTime() - data[0].x.getTime()) / (1000 * 60 * 60)
+          : 1; // Default to 1 hour if only one data point
+
       // Calculate Provisioned cost and CU-hours
       const fixedCU = max * (1 + overprovisionPercent / 100);
-      const durationHours = (dataset.values.length * dataset.intervalMinutes) / 60;
       const totalFixedCost = fixedCU * durationHours * fixedCost;
       const fixedCUHours = fixedCU * durationHours;
 
@@ -165,11 +166,17 @@ const AutoscalingChart = ({
         performanceDegradations: Math.round(monthlyPerformanceDegradations),
       });
     },
-    [autoscalingCost, fixedCost, overprovisionPercent, dataset]
+    [autoscalingCost, fixedCost, overprovisionPercent]
   );
 
   // Initialize chart data
   useEffect(() => {
+    // Get dataset(s) - support both single and multiple datasets
+    const isMultipleDatasets = datasetKeys && Array.isArray(datasetKeys);
+    const datasets = isMultipleDatasets
+      ? datasetKeys.map((key) => DATA[key] || DATA[Object.keys(DATA)[0]])
+      : [DATA[datasetKey] || DATA[Object.keys(DATA)[0]]];
+
     // Define colors for multiple datasets
     const datasetColors = [
       { border: '#73bf69', background: '#73bf69' }, // Green
@@ -178,8 +185,11 @@ const AutoscalingChart = ({
       { border: '#ec4899', background: '#ec4899' }, // Pink
       { border: '#06b6d4', background: '#06b6d4' }, // Cyan
     ];
-    if((datasetKey && datasetKey.includes('actual')) || (datasetKeys && datasetKeys[0].includes('actual')) ) {
-      datasetColors.unshift( { border: '#3b82f6', background: '#3b82f666' } ); // Blue for actual compute
+    if (
+      (datasetKey && datasetKey.includes('actual')) ||
+      (datasetKeys && datasetKeys[0].includes('actual'))
+    ) {
+      datasetColors.unshift({ border: '#3b82f6', background: '#3b82f666' }); // Blue for actual compute
     }
 
     // Convert all datasets to chart data
@@ -190,15 +200,15 @@ const AutoscalingChart = ({
     }));
 
     // Get combined data for calculating date range and max values
-    const allData = allDatasets.flatMap(d => d.data);
+    const allData = allDatasets.flatMap((d) => d.data);
     if (allData.length === 0) return;
 
     const allValues = allData.map((d) => d.y).filter((v) => !Number.isNaN(v));
     const max = Math.max(...allValues);
     const fixedCU = max * (1 + overprovisionPercent / 100);
 
-    const firstDate = Math.min(...allData.map(d => d.x.getTime()));
-    const lastDate = Math.max(...allData.map(d => d.x.getTime()));
+    const firstDate = Math.min(...allData.map((d) => d.x.getTime()));
+    const lastDate = Math.max(...allData.map((d) => d.x.getTime()));
 
     const chartDatasets = [];
 
@@ -207,7 +217,8 @@ const AutoscalingChart = ({
     if (!autoscalingOnly && overprovisionPercent < 0 && !isMultipleDatasets) {
       const primaryData = allDatasets[0].data;
       // Calculate interval from the data
-      const intervalMs = primaryData.length > 1 ? primaryData[1].x.getTime() - primaryData[0].x.getTime() : 60000;
+      const intervalMs =
+        primaryData.length > 1 ? primaryData[1].x.getTime() - primaryData[0].x.getTime() : 60000;
 
       // Create dataset with boundary transition points
       const overflowData = [];
@@ -298,7 +309,7 @@ const AutoscalingChart = ({
 
     setChartData({
       datasets: chartDatasets,
-      allData: allData,
+      allData,
       minDate: firstDate,
       maxDate: lastDate,
       fullMinDate: firstDate,
@@ -307,7 +318,15 @@ const AutoscalingChart = ({
 
     // Calculate stats using first dataset
     calculateStats(allDatasets[0].data);
-  }, [datasetKey, datasetKeys, convertDatasetToChartData, calculateStats, overprovisionPercent, autoscalingOnly, progressive]);
+  }, [
+    datasetKey,
+    datasetKeys,
+    convertDatasetToChartData,
+    calculateStats,
+    overprovisionPercent,
+    autoscalingOnly,
+    progressive,
+  ]);
 
   // Recalculate when costs change
   useEffect(() => {
@@ -458,30 +477,33 @@ const AutoscalingChart = ({
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
-    animation: progressive && !hasAnimated
-      ? {
-          x: {
-            type: 'number',
-            easing: 'linear',
-            duration: 20,
-            from: NaN, // the point is initially skipped
-            delay(ctx) {
-              if (ctx.type !== 'data' || ctx.xStarted) {
-                return 0;
-              }
-              ctx.xStarted = true;
-              return ctx.index * 5000 / (ctx.chart.data.datasets[ctx.datasetIndex].data.length - 1);
-            }
+    animation:
+      progressive && !hasAnimated
+        ? {
+            x: {
+              type: 'number',
+              easing: 'linear',
+              duration: 20,
+              from: NaN, // the point is initially skipped
+              delay(ctx) {
+                if (ctx.type !== 'data' || ctx.xStarted) {
+                  return 0;
+                }
+                ctx.xStarted = true;
+                return (
+                  (ctx.index * 5000) / (ctx.chart.data.datasets[ctx.datasetIndex].data.length - 1)
+                );
+              },
+            },
           }
-        }
-      : {},
+        : {},
     interaction: {
       intersect: false,
       mode: 'index',
     },
     plugins: {
       legend: {
-        display: (datasetKeys || !autoscalingOnly),
+        display: datasetKeys || !autoscalingOnly,
         position: 'top',
         align: 'end',
         labels: {
