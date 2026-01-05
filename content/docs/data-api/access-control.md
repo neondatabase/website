@@ -95,10 +95,10 @@ Granting `SELECT` access to the `authenticated` role allows the API to read **al
 
 RLS has three distinct states that affect data visibility:
 
-| State                        | Behavior                                            |
-| ---------------------------- | --------------------------------------------------- |
-| **RLS disabled**             | All authenticated users see all rows (no filtering) |
-| **RLS enabled, no policies** | All access is blocked (users see nothing)           |
+| State                        | Behavior                                                         |
+| ---------------------------- | ---------------------------------------------------------------- |
+| **RLS disabled**             | All authenticated users see all rows (no filtering)              |
+| **RLS enabled, no policies** | All access is blocked (users see nothing)                        |
 | **RLS enabled + policies**   | Rows filtered by policy rules (typically using `auth.user_id()`) |
 
 <Admonition type="warning" title="RLS disabled means no filtering">
