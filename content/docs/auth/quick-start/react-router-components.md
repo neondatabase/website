@@ -111,7 +111,7 @@ To learn more about applying styles to the Auth UI components, including plain C
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
-  social={{ providers: ['google', 'github'] }}
+  social={{ providers: ['google', 'github', 'vercel'] }}
   navigate={navigate}
   credentials={{ forgotPassword: true }}
 >

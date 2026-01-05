@@ -185,7 +185,6 @@ The `NeonAuthUIProvider` can be fully customized with settings you have configur
   authClient={authClient}
   redirectTo="/account/settings"
   emailOTP
-
   social={{  // [!code ++]
     providers: ['google', 'github', 'vercel']  // [!code ++]
   }} // [!code ++]
