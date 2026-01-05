@@ -109,6 +109,7 @@ This highlights another weak point of provisioned databases. **You can't buy exa
 Across the entire Neon platform in 2025, the average standard production database used <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> than if sized at 20% above peak load on a provisioned platform like RDS.
 
 When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.085/CU-hour` equivalent for RDS, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">82% lower costs on Neon</span> on average.
+
 </div>
 
 <span className="not-prose relative top-6 -mb-6 text-sm font-semibold uppercase leading-none -tracking-extra-tight sm:text-[10px] text-blue-80">Pattern 2</span>
