@@ -301,7 +301,7 @@ Monthly Active User (MAU) limits per plan:
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
-See [Neon Auth](/docs/auth/neon-auth) for more information.
+See [Neon Auth](/docs/auth/overview) for more information.
 
 ### ☑ Private network transfer
 
