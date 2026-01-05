@@ -115,6 +115,18 @@ Choose your framework to get started:
 
 Neon Auth is currently available for AWS regions only. Azure support is not yet available.
 
+## Pricing
+
+Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
+
+- **Free**: Up to 60,000 MAU
+- **Launch**: Up to 1M MAU
+- **Scale**: Up to 1M MAU
+
+An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, [contact Sales](/contact-sales).
+
+See [Neon plans](/docs/introduction/plans#auth) for more details.
+
 ## Migration from Stack Auth
 
 If you're using the previous Neon Auth implementation via Stack Auth, your version will continue to work. When you're ready to migrate to the new Better Auth implementation, see our [migration guide](/docs/auth/migrate/from-legacy-auth).
