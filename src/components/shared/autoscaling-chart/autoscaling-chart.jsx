@@ -35,19 +35,25 @@ ChartJS.register(
 
 const AutoscalingChart = ({
   datasetKey = 'predictable_fluctuation',
+  datasetKeys = null,
   autoscalingOnly = false,
   autoscalingRate = 0.106,
-  overprovision = 25,
+  overprovision = 20,
   showStats = true,
+  showOverprovisionSelector = true,
   fixedRate = 0.085,
   title = null,
   width = 'full',
+  compact = false,
+  progressive = false,
 }) => {
   const chartRef = useRef(null);
+  const containerRef = useRef(null);
   const [autoscalingCost, setAutoscalingCost] = useState(autoscalingRate);
   const [fixedCost, setFixedCost] = useState(fixedRate);
   const [overprovisionPercent, setOverprovisionPercent] = useState(overprovision);
   const [chartData, setChartData] = useState(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [stats, setStats] = useState({
     autoscalingCUHours: 0,
     autoscalingCostTotal: 0,
@@ -61,8 +67,12 @@ const AutoscalingChart = ({
     performanceDegradations: 0,
   });
 
-  // Get dataset
-  const dataset = DATA[datasetKey] || DATA[Object.keys(DATA)[0]];
+  // Get dataset(s) - support both single and multiple datasets
+  const isMultipleDatasets = datasetKeys && Array.isArray(datasetKeys);
+  const datasets = isMultipleDatasets
+    ? datasetKeys.map(key => DATA[key] || DATA[Object.keys(DATA)[0]])
+    : [DATA[datasetKey] || DATA[Object.keys(DATA)[0]]];
+  const dataset = datasets[0]; // Use first dataset for title fallback
   const displayTitle = title || dataset.name || 'Database Autoscaling';
 
   // Convert dataset to chart data format
@@ -160,31 +170,51 @@ const AutoscalingChart = ({
 
   // Initialize chart data
   useEffect(() => {
-    const data = convertDatasetToChartData(dataset);
+    // Define colors for multiple datasets
+    const datasetColors = [
+      { border: '#73bf69', background: '#73bf69' }, // Green
+      { border: '#f97316', background: '#f97316' }, // Orange
+      { border: '#8b5cf6', background: '#8b5cf6' }, // Purple
+      { border: '#ec4899', background: '#ec4899' }, // Pink
+      { border: '#06b6d4', background: '#06b6d4' }, // Cyan
+    ];
+    if((datasetKey && datasetKey.includes('actual')) || (datasetKeys && datasetKeys[0].includes('actual')) ) {
+      datasetColors.unshift( { border: '#3b82f6', background: '#3b82f666' } ); // Blue for actual compute
+    }
 
-    if (data.length === 0) return;
+    // Convert all datasets to chart data
+    const allDatasets = datasets.map((ds, index) => ({
+      ds,
+      data: convertDatasetToChartData(ds),
+      color: datasetColors[index % datasetColors.length],
+    }));
 
-    const values = data.map((d) => d.y).filter((v) => !Number.isNaN(v));
-    const max = Math.max(...values);
+    // Get combined data for calculating date range and max values
+    const allData = allDatasets.flatMap(d => d.data);
+    if (allData.length === 0) return;
+
+    const allValues = allData.map((d) => d.y).filter((v) => !Number.isNaN(v));
+    const max = Math.max(...allValues);
     const fixedCU = max * (1 + overprovisionPercent / 100);
 
-    const firstDate = data[0].x;
-    const lastDate = data[data.length - 1].x;
-    const oneWeekAgo = new Date(lastDate.getTime() - 7 * 24 * 60 * 60 * 1000);
+    const firstDate = Math.min(...allData.map(d => d.x.getTime()));
+    const lastDate = Math.max(...allData.map(d => d.x.getTime()));
 
-    const datasets = [];
+    const chartDatasets = [];
 
     // Add red "overflow" dataset when under-provisioning to show performance degradation
-    if (!autoscalingOnly && overprovisionPercent < 0) {
+    // (only for single dataset mode)
+    if (!autoscalingOnly && overprovisionPercent < 0 && !isMultipleDatasets) {
+      const primaryData = allDatasets[0].data;
       // Calculate interval from the data
-      const intervalMs = data.length > 1 ? data[1].x.getTime() - data[0].x.getTime() : 60000;
+      const intervalMs = primaryData.length > 1 ? primaryData[1].x.getTime() - primaryData[0].x.getTime() : 60000;
 
       // Create dataset with boundary transition points
       const overflowData = [];
-      for (let i = 0; i < data.length; i += 1) {
-        const current = data[i];
-        const prev = i > 0 ? data[i - 1] : null;
-        const next = i < data.length - 1 ? data[i + 1] : null;
+      for (let i = 0; i < primaryData.length; i += 1) {
+        const current = primaryData[i];
+        const prev = i > 0 ? primaryData[i - 1] : null;
+        const next = i < primaryData.length - 1 ? primaryData[i + 1] : null;
 
         // Case 1: current is below but next is above - entering overflow zone
         if (current.y < fixedCU && next && next.y > fixedCU) {
@@ -219,7 +249,7 @@ const AutoscalingChart = ({
       }
 
       // Add red overflow area that fills from the baseline
-      datasets.push({
+      chartDatasets.push({
         label: 'Performance Degradation',
         data: overflowData,
         borderColor: '#ef4444',
@@ -233,24 +263,27 @@ const AutoscalingChart = ({
       });
     }
 
-    datasets.push({
-      label: 'Autoscaling',
-      data,
-      borderColor: '#73bf69',
-      backgroundColor: '#73bf69',
-      borderWidth: 1.5,
-      fill: true,
-      pointRadius: 0,
-      pointHoverRadius: 4,
-      tension: 0,
+    // Add all datasets
+    allDatasets.forEach((dataset, index) => {
+      chartDatasets.push({
+        label: dataset.ds.name || `Dataset ${index + 1}`,
+        data: dataset.data,
+        borderColor: dataset.color.border,
+        backgroundColor: dataset.color.background,
+        borderWidth: 1.5,
+        fill: true,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        tension: 0,
+      });
     });
 
     if (!autoscalingOnly) {
-      datasets.push({
+      chartDatasets.push({
         label: 'Provisioned Allocation',
         data: [
-          { x: firstDate, y: fixedCU },
-          { x: lastDate, y: fixedCU },
+          { x: new Date(firstDate), y: fixedCU },
+          { x: new Date(lastDate), y: fixedCU },
         ],
         borderColor: '#e8912d',
         backgroundColor: 'rgba(232, 145, 45, 0.5)',
@@ -264,16 +297,17 @@ const AutoscalingChart = ({
     }
 
     setChartData({
-      datasets,
-      allData: data,
-      minDate: oneWeekAgo.getTime(),
-      maxDate: lastDate.getTime(),
-      fullMinDate: firstDate.getTime(),
-      fullMaxDate: lastDate.getTime(),
+      datasets: chartDatasets,
+      allData: allData,
+      minDate: firstDate,
+      maxDate: lastDate,
+      fullMinDate: firstDate,
+      fullMaxDate: lastDate,
     });
 
-    calculateStats(data);
-  }, [dataset, convertDatasetToChartData, calculateStats, overprovisionPercent, autoscalingOnly]);
+    // Calculate stats using first dataset
+    calculateStats(allDatasets[0].data);
+  }, [datasetKey, datasetKeys, convertDatasetToChartData, calculateStats, overprovisionPercent, autoscalingOnly, progressive]);
 
   // Recalculate when costs change
   useEffect(() => {
@@ -384,6 +418,35 @@ const AutoscalingChart = ({
     chartRef.current.update('none');
   }, [overprovisionPercent, chartData, autoscalingOnly]);
 
+  // Intersection Observer for progressive animation on scroll
+  useEffect(() => {
+    if (!progressive || !containerRef.current || hasAnimated) return undefined;
+
+    const container = containerRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated && chartRef.current) {
+            setHasAnimated(true);
+            // Trigger chart update to start progressive animation
+            chartRef.current.update('default');
+          }
+        });
+      },
+      {
+        threshold: 0.2, // Trigger when 20% of the chart is visible
+      }
+    );
+
+    observer.observe(container);
+
+    return () => {
+      if (container) {
+        observer.unobserve(container);
+      }
+    };
+  }, [progressive, hasAnimated]);
+
   const handleOverprovisionChange = (e) => {
     setOverprovisionPercent(parseFloat(e.target.value));
   };
@@ -395,13 +458,30 @@ const AutoscalingChart = ({
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
+    animation: progressive && !hasAnimated
+      ? {
+          x: {
+            type: 'number',
+            easing: 'linear',
+            duration: 20,
+            from: NaN, // the point is initially skipped
+            delay(ctx) {
+              if (ctx.type !== 'data' || ctx.xStarted) {
+                return 0;
+              }
+              ctx.xStarted = true;
+              return ctx.index * 5000 / (ctx.chart.data.datasets[ctx.datasetIndex].data.length - 1);
+            }
+          }
+        }
+      : {},
     interaction: {
       intersect: false,
       mode: 'index',
     },
     plugins: {
       legend: {
-        display: !autoscalingOnly,
+        display: (datasetKeys || !autoscalingOnly),
         position: 'top',
         align: 'end',
         labels: {
@@ -415,6 +495,31 @@ const AutoscalingChart = ({
       },
       tooltip: {
         enabled: false,
+      },
+      wastedComputeLabel: {
+        afterDatasetsDraw: (chart) => {
+          // Only draw the label when not in autoscaling-only mode
+          if (autoscalingOnly) return;
+
+          const { ctx, chartArea } = chart;
+          const { top, right } = chartArea;
+
+          ctx.save();
+
+          // Set text style to match the screenshot (smaller in compact mode)
+          ctx.font = compact ? 'bold 16px sans-serif' : 'bold 20px sans-serif';
+          ctx.fillStyle = '#e8912d'; // Orange color matching the provisioned allocation
+          ctx.textAlign = 'right';
+          ctx.textBaseline = 'top';
+
+          // Position in upper right of the chart area, with some padding
+          const x = right - (compact ? 20 : 30);
+          const y = top + (compact ? 40 : 90);
+
+          ctx.fillText('Wasted Compute', x, y);
+
+          ctx.restore();
+        },
       },
     },
     scales: {
@@ -439,6 +544,13 @@ const AutoscalingChart = ({
           color: '#9fa0a3',
           maxRotation: 0,
           autoSkipPadding: 20,
+          callback(value) {
+            // Calculate day number from start date
+            const startDate = chartData.minDate;
+            const currentDate = value;
+            const daysDiff = Math.floor((currentDate - startDate) / (1000 * 60 * 60 * 24));
+            return `Day ${daysDiff + 1}`;
+          },
         },
       },
       y: {
@@ -459,8 +571,10 @@ const AutoscalingChart = ({
 
   return (
     <div
+      ref={containerRef}
       className={clsx(
-        'text-gray-200 p-2 py-4',
+        'text-gray-200',
+        compact ? 'p-1 py-2' : 'p-2 py-4',
         width === 'window'
           ? 'relative left-[50%] z-10 w-[90vw] -translate-x-1/2 bg-black-pure'
           : 'w-full'
@@ -468,10 +582,16 @@ const AutoscalingChart = ({
     >
       {/* Header with controls */}
       <div className="flex items-center justify-between">
-        <h1 className={clsx('font-medium text-white', width === 'window' ? 'text-xl' : 'text-xl')}>
+        <h1
+          className={clsx(
+            'font-medium text-white',
+            compact ? 'text-base' : 'text-xl',
+            width === 'window' && !compact ? 'text-xl' : ''
+          )}
+        >
           {displayTitle}
         </h1>
-        {!autoscalingOnly && (
+        {!autoscalingOnly && showOverprovisionSelector && (
           <div className="flex items-center gap-2.5">
             <select
               value={overprovisionPercent}
@@ -479,7 +599,7 @@ const AutoscalingChart = ({
               onChange={handleOverprovisionChange}
             >
               <option value="0">Zero Over-Provisioning</option>
-              <option value="25">25% Over-Provisioning (AWS recommended)</option>
+              <option value="20">20% Over-Provisioning (AWS recommended)</option>
               <option value="-25">25% Under-provision</option>
               <option value="-50">50% Under-provision</option>
             </select>
@@ -488,7 +608,12 @@ const AutoscalingChart = ({
       </div>
 
       {/* Chart */}
-      <div className="mb-5 h-[500px] rounded border border-gray-new-10 bg-black-new p-5">
+      <div
+        className={clsx(
+          'rounded border border-gray-new-10 bg-black-new',
+          compact ? 'mb-3 h-[250px] p-3' : 'mb-5 h-[500px] p-5'
+        )}
+      >
         <Line ref={chartRef} data={chartData} options={chartOptions} />
       </div>
 
@@ -611,7 +736,9 @@ const AutoscalingChart = ({
                         stats.lessCompute === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       )}
                     >
-                      {stats.cuMultiplier}×
+                      {parseFloat(stats.cuMultiplier) < 2
+                        ? `${Math.round((parseFloat(stats.cuMultiplier) - 1) * 100)}%`
+                        : `${stats.cuMultiplier}×`}
                     </div>
                     <div className="text-gray-400 text-sm">less compute used</div>
                   </div>
@@ -634,7 +761,9 @@ const AutoscalingChart = ({
                         stats.cheaper === 'Autoscaling' ? 'text-[#73bf69]' : 'text-[#e8912d]'
                       }`}
                     >
-                      {stats.costMultiplier}×
+                      {parseFloat(stats.costMultiplier) < 2
+                        ? `${Math.round((parseFloat(stats.costMultiplier) - 1) * 100)}%`
+                        : `${stats.costMultiplier}×`}
                     </div>
                     <div className="text-gray-400 text-sm">cheaper</div>
                   </div>
@@ -662,13 +791,17 @@ const AutoscalingChart = ({
 
 AutoscalingChart.propTypes = {
   datasetKey: PropTypes.oneOf(Object.keys(DATA)),
+  datasetKeys: PropTypes.arrayOf(PropTypes.oneOf(Object.keys(DATA))),
   autoscalingOnly: PropTypes.bool,
   autoscalingRate: PropTypes.number,
   showStats: PropTypes.bool,
+  showOverprovisionSelector: PropTypes.bool,
   overprovision: PropTypes.number,
   fixedRate: PropTypes.number,
   title: PropTypes.string,
   width: PropTypes.oneOf(['full', 'window']),
+  compact: PropTypes.bool,
+  progressive: PropTypes.bool,
 };
 
 export default AutoscalingChart;
