@@ -116,7 +116,7 @@ const getVersion = query(async () => {
     const sql = neon(process.env.DATABASE_URL);
     const response = await sql`SELECT version()`;
     const { version } = response[0];
-  
+
     return version;
 }, 'version')
 
@@ -142,7 +142,7 @@ In your server endpoints (API Routes) in your SolidStart application, use the fo
 // File: routes/api/test.ts
 
 import { Pool } from 'pg';
-import { json } from '@solidjs/router'
+import { json } from '@solidjs/router';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -166,12 +166,12 @@ export async function GET() {
 // File: routes/api/test.ts
 
 import postgres from 'postgres';
-import { json } from '@solidjs/router'
+import { json } from '@solidjs/router';
 
 export async function GET() {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  
+
   return json(response[0]);
 }
 ```
@@ -185,7 +185,7 @@ import { json } from '@solidjs/router'
 export async function GET() {
   const sql = neon(process.env.DATABASE_URL!);
   const response = await sql`SELECT version()`;
-  
+
   return json(response[0]);
 }
 ```
