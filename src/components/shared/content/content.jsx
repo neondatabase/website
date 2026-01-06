@@ -39,6 +39,7 @@ import UseCaseContext from 'components/pages/use-case/use-case-context';
 import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import AutoscalingChart from 'components/shared/autoscaling-chart';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import CodeWithLabel from 'components/shared/code-with-label';
@@ -166,6 +167,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   SubprocessorsForm,
   ProgramForm,
   LatencyCalculator,
+  AutoscalingChart,
   CTA: isTemplate ? CtaBlock : DocCta,
   Testimonial,
   TestimonialsWrapper,
