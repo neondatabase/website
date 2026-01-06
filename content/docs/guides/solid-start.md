@@ -64,9 +64,9 @@ To [load data on the server](https://docs.solidjs.com/solid-start/building-your-
 
 ```typescript
 import pg from 'pg';
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
     const pool = new pg.Pool({
         connectionString: process.env.DATABASE_URL,
@@ -74,10 +74,10 @@ const getVersion = async () => {
     const client = await pool.connect();
     const response = await client.query('SELECT version()');
     return response.rows[0].version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -88,17 +88,17 @@ export default function Page() {
 
 ```typescript
 import postgres from 'postgres';
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
-    const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
     const response = await sql`SELECT version()`;
     return response[0].version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -109,18 +109,19 @@ export default function Page() {
 
 ```typescript
 import { neon } from "@neondatabase/serverless";
-import { createAsync } from "@solidjs/router";
+import { createAsync, query } from "@solidjs/router";
 
-const getVersion = async () => {
+const getVersion = query(async () => {
     "use server";
-    const sql = neon(`${process.env.DATABASE_URL}`);
+    const sql = neon(process.env.DATABASE_URL);
     const response = await sql`SELECT version()`;
     const { version } = response[0];
+  
     return version;
-}
+}, 'version')
 
 export const route = {
-  load: () => getVersion(),
+  preload: () => getVersion(),
 };
 
 export default function Page() {
@@ -141,9 +142,10 @@ In your server endpoints (API Routes) in your SolidStart application, use the fo
 // File: routes/api/test.ts
 
 import { Pool } from 'pg';
+import { json } from '@solidjs/router'
 
 const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL,
   ssl: true,
 });
 
@@ -156,7 +158,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
+  return json(data);
 }
 ```
 
@@ -164,13 +166,13 @@ export async function GET() {
 // File: routes/api/test.ts
 
 import postgres from 'postgres';
+import { json } from '@solidjs/router'
 
 export async function GET() {
-  const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+  const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringify(response[0]), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  
+  return json(response[0]);
 }
 ```
 
@@ -178,13 +180,13 @@ export async function GET() {
 // File: routes/api/test.ts
 
 import { neon } from '@neondatabase/serverless';
+import { json } from '@solidjs/router'
 
 export async function GET() {
-  const sql = neon(import.meta.env.DATABASE_URL);
+  const sql = neon(process.env.DATABASE_URL!);
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringify(response[0]), {
-    headers: { 'Content-Type': 'application/json' },
-  });
+  
+  return json(response[0]);
 }
 ```
 

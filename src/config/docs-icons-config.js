@@ -436,6 +436,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/solid.svg',
     darkIconPath: null,
   },
+  solidstart: {
+    name: 'solidstart',
+    lightIconPath: '/images/technology-logos/solidstart.svg',
+    darkIconPath: null,
+  },
   sqlalchemy: {
     name: 'sqlalchemy',
     lightIconPath: '/images/technology-logos/sqlalchemy.svg',
