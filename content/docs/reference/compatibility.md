@@ -79,21 +79,34 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 - The formula for `max_connections` is:
 
   ```go
-  compute_size = min(max_compute_size, 8 * min_compute_size)
-  max_connections = max(100, min(4000, 450.5 * compute_size))
+  compute_size = min(max_compute_size, 8 × min_compute_size)
+  max_connections = max(100, min(4000, floor(compute_size × 419.66)))
   ```
 
-  For example, if you have a fixed compute size of 4 CU, that size is both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
+  In simpler terms:
+  - Neon first determines the effective compute size by taking the smaller of: your maximum size, or 8 times your minimum size
+  - This compute size is then multiplied by approximately 420 connections per CU
+  - The result is capped between a minimum of 100 and a maximum of 4,000 connections
 
-    <Admonition type="note">
-    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It's a static setting determined by your minimum and maximum compute size.
-    </Admonition>
+  **Examples:**
+  - **Fixed compute size of 4 CU:**
+    - Since your min and max are both 4 CU, the compute size is 4.
+    - Max connections = 4 × 419.66 = 1,678 connections
+  - **Autoscaling from 0.25 to 2 CU:**
+    - Compute size = min(2, 8 × 0.25) = min(2, 2) = 2
+    - Max connections = 2 × 419.66 = 839 connections
+  - **Autoscaling from 0.25 to 4 CU:**
+    - Compute size = min(4, 8 × 0.25) = min(4, 2) = 2
+    - Max connections = 2 × 419.66 = 839 connections
+  - **Autoscaling from 2 to 8 CU:**
+    - Compute size = min(8, 8 × 2) = min(8, 16) = 8
+    - Max connections = 8 × 419.66 = 3,357 connections
 
-  You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
+You can view your `max_connections` setting in the Neon Console by navigating to **Branches**, selecting your compute, and clicking **Edit** on the **Compute** tab. The value is displayed as **direct connections**. As you adjust your compute settings, you'll see how changes to your min/max compute size affect the number of direct connections available.
 
-  ![max_connections calculator](/docs/reference/edit_compute_endpoint.png)
+![max_connections calculator](/docs/reference/max_connections_calculator.png)
 
-  _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
+_For most applications, we recommend using connection pooling, which supports up to 10,000 concurrent connections regardless of compute size. Direct connections are best for specific use cases like running `pg_dump`, session-dependent features, or schema migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
 
 - The `maintenance_work_mem` value is set according to your minimum compute size RAM. The formula is:
 
