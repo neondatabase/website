@@ -206,6 +206,8 @@ Your project comes with a `development` branch that's an isolated copy of your `
    To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
    </Admonition>
 
+   > NOTE: You might get error like this: `ERROR: org_id is required, you can find it on your organization settings page` - you'll need to set your project-id, the message is misleading `neon set-context --project-id <projectID>` 
+
 ## Make some sample schema changes
 
 First, let's make sure our development branch is in sync with production. This ensures we're starting from the same baseline:
