@@ -47,7 +47,7 @@ The **Advanced settings** section on the Settings tab controls the security, per
 
 **Default:** `public`
 
-Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, only the `public` schema is accessible. If you use other schemas (e.g., `api`, `v1`), add them here as a comma-separated list.
+Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, only the `public` schema is accessible. If you use other schemas (e.g., `api`, `v1`), select them from the drop-down list to add them.
 
 <Admonition type="note">
 **Permissions apply:** Adding a schema here exposes the *endpoints*, but the database role used by the API must still have `USAGE` privileges on the schema and `SELECT` privileges on the tables. Refer to [Access control for Data API](/docs/data-api/access-control) for more details.
@@ -61,13 +61,13 @@ Specifies the database role used for **unauthenticated requests** (requests sent
 
 ### Maximum rows per request
 
-**Default:** `1000`
+**Default:** `Empty`
 
 Enforces a hard limit on the number of rows returned in a single API response. This prevents accidental performance degradation from large queries. Clients should use pagination limits to retrieve data within this threshold. This also prevents unexpected egress costs from large data transfers.
 
 ### CORS allowed origins
 
-**Default:** Empty (Allows all origins)
+**Default:** `Empty (Allows all origins)`
 
 Controls which web domains are permitted to fetch data from your API via the browser.
 

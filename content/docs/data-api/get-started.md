@@ -7,17 +7,14 @@ updatedOn: '2025-12-12T19:35:53.907Z'
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
 
+## Before you begin
+
+- The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
+- Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
+
 <Steps>
 
 ## Enable the Data API
-
-<Admonition type="important" title="Data API is branch-specific">
-The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the appropriate branch before enabling the API.
-</Admonition>
-
-<Admonition type="note">
-Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
-</Admonition>
 
 ### 1. Navigate to the Data API page
 
@@ -29,13 +26,9 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 The **Use Neon Auth** checkbox allows you to enable [Neon Auth](/docs/auth/overview) as your authentication provider for the Data API. When enabled, Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 
-<Admonition type="info">
-Anyone on the web can sign up for your app. Support for restricted signups is coming soon.
-</Admonition>
-
 If you prefer to use a different authentication provider (such as Auth0, Clerk, or Firebase Auth), leave this checkbox unchecked and configure your provider later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for details.
 
-<Admonition type="warning" title="Authentication required">
+<Admonition type="note" title="Authentication required">
 All requests to the Data API require authentication with a valid JWT token.
 </Admonition>
 
@@ -81,7 +74,7 @@ On the **API** tab, you'll see:
 If you have tables without RLS enabled, you'll see a warning that authenticated users can view all rows in those tables. We'll show you how to add RLS in the next step.
 </Admonition>
 
-> For advanced configuration options like custom authentication providers, exposed schemas, and CORS settings, see the **Settings** tab or refer to [Managing the Data API](/docs/data-api/manage).
+For advanced configuration options like custom authentication providers, exposed schemas, and CORS settings, see the **Settings** tab or refer to [Managing the Data API](/docs/data-api/manage).
 
 Next, you'll create a table with **Row-Level Security (RLS)** policies to define which rows users can access.
 
@@ -231,7 +224,7 @@ The Data API caches your database schema for performance. When you modify your s
 
 To refresh the cache, go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
 
-![Data API refresh schema cache button](/docs/changelog/data_api_schema_refresh.png)
+![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
 
 ## Connect and Query
 
