@@ -204,9 +204,9 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
 - **[Child branches](/docs/reference/glossary#child-branch)**: billed on the minimum of the data changes since creation or the logical data size
 
-When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+When a child branch is created, it initially consumes no storage. As you make changes (inserts, updates, or deletes) to the child branch, a delta is recorded from the point of branch creation. This delta, a log of all write operations, grows over time and counts toward your storage usage.
 
-**Child branch storage is capped at your actual data size** — you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
+Importantly, **child branch storage is capped at your actual data size**: you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
 
 <Admonition type="important" title="Manage child branches to control storage costs">
 
@@ -467,6 +467,9 @@ How are instant restores billed?
  • Scale: Up to 30 days of history, billed at $0.20/GB-month.  
  Change history is stored as Postgres WAL records.
 
+Is instant restore history accumulated at the project or branch level?
+: Instant restore history is accumulated at the project level. It applies to all branches in your project. You set a single restore window (e.g., 7 days or 30 days) for the entire project, and the history size is the cumulative total of all change history across all branches. You cannot enable, disable, or configure instant restore per branch.
+
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
  Launch: Yes, you can disable it.  
@@ -508,6 +511,12 @@ How can I control my costs?
 
 Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+
+How is storage charged for snapshots?
+: Snapshots are currently free during beta and will be charged based on GB-month storage at a rate lower than standard project storage after general availability.
+
+Is storage cost different for archived branches?
+: No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.
 
 </DefinitionList>
 
