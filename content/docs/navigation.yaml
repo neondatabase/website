@@ -31,6 +31,8 @@
       items:
         - title: Overview
           slug: import/migrate-intro
+        - title: Choose your method
+          slug: import/migrate-choosing-method
 
         - title: Utilities
           items:
