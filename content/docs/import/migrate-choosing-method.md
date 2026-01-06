@@ -13,14 +13,14 @@ If you can't afford downtime, use [Logical Replication](#logical-replication). F
 
 ## Migration methods comparison
 
-| Method | Best For | Database Size | Downtime | Technical Skill | Key Benefit |
-|--------|----------|---------------|----------|----------------|-------------|
-| [Import Data Assistant](#import-data-assistant-beta) | Quick migrations | Under 10GB | Minimal (minutes–hours) | Low | Easiest - fully automated |
-| [pg_dump/restore](#pg_dump-and-pg_restore) | Standard migrations | Any size | Required | Medium | Reliable and well-tested |
-| [pgcopydb](#pgcopydb) | Large databases | 10GB+ | Required | Medium | Parallel processing - fast |
-| [Logical Replication](#logical-replication) | Production workloads | Any size | Near-zero | High | Minimal downtime |
-| [pgloader](#migrating-from-other-databases) | Non-Postgres sources | Any size | Required | Medium | Handles MySQL, MSSQL, SQLite |
-| [AWS DMS](#other-sources-oracle-etc) | Multi-source or custom transformations | Any size | Minimal (minutes–hours) | High | Advanced transformation rules |
+| Method                                               | Best For                               | Database Size | Downtime                | Technical Skill | Key Benefit                   |
+| ---------------------------------------------------- | -------------------------------------- | ------------- | ----------------------- | --------------- | ----------------------------- |
+| [Import Data Assistant](#import-data-assistant-beta) | Quick migrations                       | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
+| [pg_dump/restore](#pg_dump-and-pg_restore)           | Standard migrations                    | Any size      | Required                | Medium          | Reliable and well-tested      |
+| [pgcopydb](#pgcopydb)                                | Large databases                        | 10GB+         | Required                | Medium          | Parallel processing - fast    |
+| [Logical Replication](#logical-replication)          | Production workloads                   | Any size      | Near-zero               | High            | Minimal downtime              |
+| [pgloader](#migrating-from-other-databases)          | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
+| [AWS DMS](#other-sources-oracle-etc)                 | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
 
 ## Migrating from Postgres
 
@@ -31,12 +31,14 @@ If you can't afford downtime, use [Logical Replication](#logical-replication). F
 The Import Data Assistant is a guided UI tool that automatically copies your database to a new Neon branch. Just provide your database connection string and Neon handles the rest.
 
 **Key features:**
+
 - Fully automated process - no manual commands
 - Creates a new branch with imported data
 - Compatibility checks built-in (database size, Postgres version, extensions)
 - 1-hour time limit on import operations
 
 **Limitations:**
+
 - Currently limited to databases under 10GB
 - Neon must be able to connect to your source database (for example, allowlisted public access)
 - AWS regions only
@@ -52,6 +54,7 @@ The Import Data Assistant is a guided UI tool that automatically copies your dat
 The traditional Postgres migration approach using command-line tools. This is the most widely-used and tested migration method.
 
 **Key features:**
+
 - Works with any size database
 - Precise control over what gets migrated
 - Can test migration multiple times before final cutover
@@ -59,6 +62,7 @@ The traditional Postgres migration approach using command-line tools. This is th
 - Well-documented with extensive community support
 
 **Limitations:**
+
 - Requires downtime during the dump and restore process
 - For very large databases, the process can be time-consuming
 - Single-threaded by default (though parallel options exist)
@@ -72,6 +76,7 @@ The traditional Postgres migration approach using command-line tools. This is th
 An advanced migration tool that builds on pg_dump and pg_restore with parallel processing capabilities.
 
 **Key features:**
+
 - Parallel migration of multiple tables simultaneously
 - Splits large tables into chunks for faster import
 - Concurrent index creation and constraint application
@@ -79,6 +84,7 @@ An advanced migration tool that builds on pg_dump and pg_restore with parallel p
 - Real-time progress monitoring
 
 **Limitations:**
+
 - Requires downtime during migration
 - More complex setup than basic pg_dump/restore
 - Requires sufficient resources (CPU, memory, disk) on the machine running pgcopydb
@@ -93,6 +99,7 @@ An advanced migration tool that builds on pg_dump and pg_restore with parallel p
 Postgres logical replication continuously streams changes from your source database to Neon in real-time, allowing you to migrate with minimal service interruption.
 
 **Key features:**
+
 - Near-zero downtime migration
 - Keeps source and target databases in sync during migration
 - Can replicate specific tables rather than entire database
@@ -100,6 +107,7 @@ Postgres logical replication continuously streams changes from your source datab
 - Allows for validation before final cutover
 
 **Limitations:**
+
 - Requires source database `wal_level = logical`
 - More complex setup and configuration
 - Schema changes must be handled separately
@@ -108,6 +116,7 @@ Postgres logical replication continuously streams changes from your source datab
 - Inactive replication slots automatically removed after ~40 hours (Neon sources)
 
 **Technical requirements:**
+
 - Source database must support logical replication
 - Appropriate network connectivity between source and Neon
 - Sufficient permissions to create publications and replication slots
@@ -115,6 +124,7 @@ Postgres logical replication continuously streams changes from your source datab
 [Learn more about Logical Replication →](/docs/guides/logical-replication-guide)
 
 **Available guides for specific sources:**
+
 - [PostgreSQL to Neon](/docs/guides/logical-replication-postgres-to-neon)
 - [AWS RDS to Neon](/docs/guides/logical-replication-rds-to-neon)
 - [Google Cloud SQL to Neon](/docs/guides/logical-replication-cloud-sql)
@@ -225,6 +235,7 @@ For databases not directly supported by the above tools, use [AWS Database Migra
 **Scenario:** Neon project on Postgres 14, want to upgrade to Postgres 17.
 
 **Recommended methods:**
+
 - **Under 10GB:** [Import Data Assistant](/docs/import/import-data-assistant) to new project with Postgres 17
 - **10GB+, downtime OK:** [pg_dump/restore](/docs/import/migrate-from-postgres) to new project with Postgres 17
 - **Near-zero downtime required:** [Logical replication](/docs/guides/logical-replication-neon-to-neon) to new project with Postgres 17
