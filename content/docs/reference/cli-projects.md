@@ -53,7 +53,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
 #### Examples
 
-- List all projects belonging to your personal acccount
+- List projects in your [default organization](/docs/reference/glossary#default-organization). If no organization context is set, the CLI will prompt you to select one.
 
   ```bash
   neon projects list

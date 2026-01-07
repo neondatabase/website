@@ -16,6 +16,10 @@ This command sets a background context for your CLI sessions, letting you perfor
 
 The context remains in place until you reset to a new context or remove the `context-file`.
 
+<Admonition type="tip" title="Context file location">
+The Neon CLI determines where to read or create the `.neon` context file by walking up the directory tree from your current directory. It stops at the first directory containing `.neon`, `package.json`, or `.git`. This ensures the context file is stored at your project root (where `package.json` or `.git` typically exists) rather than in a subdirectory. The search stops at your home directory.
+</Admonition>
+
 ### Usage
 
 #### set-context (hidden file)
