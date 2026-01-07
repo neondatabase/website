@@ -26,7 +26,7 @@ For more information, see [Storage](/docs/introduction/plans#storage) and [Manag
 | :--------------------------- | :------------------------- | :---------------- | :----------------- | :------------------------------------------------- |
 | Concurrently active computes | 20                         | same              | same               | Default branch exempt; contact Support to increase |
 | Autoscaling max              | 2 CU (8 GB RAM)            | 16 CU (64 GB RAM) | 16 CU (64 GB RAM)  | -                                                  |
-| Fixed compute max            | -                          | -                 | 56 CU (224 GB RAM) | Scale plan only                                    |
+| Fixed compute max            | 2 CU (8 GB RAM)                          | 16 CU (64 GB RAM)                | 56 CU (224 GB RAM) |                                     |
 | Compute hours                | 100 CU-hours/project/month | Usage-based       | Usage-based        | Free plan limit resets monthly                     |
 | Non-default branch compute   | 5 hours/month              | -                 | -                  | Free plan only; default branch exempt              |
 
