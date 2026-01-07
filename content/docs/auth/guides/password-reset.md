@@ -2,7 +2,7 @@
 title: Password reset
 subtitle: Allow users to reset forgotten passwords
 enableTableOfContents: true
-updatedOn: '2025-12-08T00:00:00.000Z'
+updatedOn: '2026-01-07T15:07:19.157Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

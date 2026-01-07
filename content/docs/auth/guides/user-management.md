@@ -1,8 +1,8 @@
 ---
 title: User management
-subtitle: Update profiles, change passwords, and manage account settings
+subtitle: 'Update profiles, change passwords, and manage account settings'
 enableTableOfContents: true
-updatedOn: '2025-12-02T00:00:00.000Z'
+updatedOn: '2026-01-07T15:07:19.159Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
