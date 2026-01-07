@@ -185,6 +185,7 @@ const EXTENSIONS = {
     { name: 'pg_bulkload' },
     { name: 'pg_documentdb' },
     { name: 'pg_prometheus' },
+    { name: 'pg_textsearch' },
     { name: 'pglogical' },
     { name: 'pldebugger' },
     { name: 'pljava' },

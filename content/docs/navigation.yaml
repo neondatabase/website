@@ -59,6 +59,8 @@
               slug: import/migrate-from-heroku
             - title: MSSQL
               slug: import/migrate-mssql
+            - title: SQLite
+              slug: import/migrate-sqlite
             - title: MySQL
               slug: import/migrate-mysql
             - title: Render
@@ -148,18 +150,46 @@
           slug: guides/branch-expiration
         - title: Schema-only branches
           slug: guides/branching-schema-only
+        - title: Reset from parent
+          slug: guides/reset-from-parent
 
     - section: Read replicas
       icon: replications
       items:
-        - title: Neon read replicas
+        - title: Overview
           slug: introduction/read-replicas
+        - title: Create and manage
+          slug: guides/read-replica-guide
+        - title: Use cases
+          items:
+            - title: Read-only access
+              slug: guides/read-only-access-read-replicas
+            - title: Ad-hoc queries
+              slug: guides/read-replica-adhoc-queries
+            - title: Analytics queries
+              slug: guides/read-replica-data-analysis
+            - title: Scale applications
+              slug: guides/read-replica-integrations
+        - title: With ORMs
+          items:
+            - title: Prisma
+              slug: guides/read-replica-prisma
 
-    - section: Replication
+    - section: Logical replication
       icon: replications
       items:
-        - title: Logical replication
+        - title: Getting started
           slug: guides/logical-replication-guide
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: In Neon
+          slug: guides/logical-replication-neon
+        - title: Commands
+          slug: guides/logical-replication-manage
+        - title: Schema changes
+          slug: guides/logical-replication-schema-changes
+        - title: Tips
+          slug: guides/logical-replication-tips
 
     - section: Data recovery
       icon: report
@@ -256,6 +286,8 @@
           items:
             - title: Astro
               slug: guides/astro
+            - title: Bun
+              slug: guides/bun
             - title: Entity Framework
               slug: guides/dotnet-entity-framework
             - title: Encore
@@ -332,6 +364,8 @@
               slug: guides/elixir-ecto
             - title: Kysely
               slug: guides/kysely
+            - title: Knex
+              slug: guides/knex
             - title: Laravel (Eloquent)
               slug: guides/laravel
             - title: Prisma
@@ -352,7 +386,7 @@
               items:
                 - title: Overview
                   slug: data-api/overview
-                - title: Quickstart
+                - title: Get started
                   slug: data-api/get-started
 
             - section: Guides
@@ -403,6 +437,8 @@
                   items:
                     - title: UI components
                       slug: auth/quick-start/nextjs
+                    - title: API methods
+                      slug: auth/quick-start/nextjs-api-only
                 - title: React
                   slug: auth/quick-start/react
                   items:
@@ -427,6 +463,22 @@
                   slug: auth/guides/configure-domains
                 - title: Production checklist
                   slug: auth/production-checklist
+
+            - section: Plugins
+              items:
+                - title: Supported plugins
+                  slug: auth/guides/plugins
+                  items:
+                    - title: Admin
+                      slug: auth/guides/plugins/admin
+                    - title: Email OTP
+                      slug: auth/guides/plugins/email-otp
+                    - title: JWT
+                      slug: auth/guides/plugins/jwt
+                    - title: OpenAPI
+                      slug: auth/guides/plugins/openapi
+                    - title: Organization
+                      slug: auth/guides/plugins/organization
 
             - section: Reference
               items:
@@ -555,6 +607,8 @@
                   slug: ai/ai-vector-search-optimization
                 - title: Scale with Neon
                   slug: ai/ai-scale-with-neon
+            - title: Google Colab
+              slug: ai/ai-google-colab
     - section: Tools & Workflows
       items:
         - title: Dev tools (API, CLI, SDKs)
@@ -606,6 +660,8 @@
             - section: SDKs
               icon: sdk
               items:
+                - title: Overview
+                  slug: reference/sdk
                 - title: JavaScript SDK (Auth & Data API)
                   slug: reference/javascript-sdk
                 - title: TypeScript SDK (Neon API)
@@ -803,6 +859,10 @@
                   slug: guides/auth-clerk
                 - title: Okta
                   slug: guides/auth-okta
+            - title: Develop
+              items:
+                - title: GitHub integration
+                  slug: guides/neon-github-integration
 
         - title: Workflows & CI/CD
           icon: branching
@@ -892,6 +952,8 @@
               slug: manage/overview
             - title: Projects
               slug: manage/projects
+            - title: Multitenancy
+              slug: guides/multitenancy
             - title: Branches
               slug: manage/branches
             - title: Computes
@@ -918,7 +980,7 @@
               slug: introduction/monitor-active-queries
             - title: Query performance
               slug: introduction/monitor-query-performance
-            - title: External monitoring
+            - title: Third-party monitoring
               items:
                 - title: Datadog
                   slug: guides/datadog
@@ -926,10 +988,12 @@
                   slug: guides/grafana-cloud
                 - title: OpenTelemetry
                   slug: guides/opentelemetry
+                - title: pgAdmin
+                  slug: introduction/monitor-pgadmin
+                - title: PgHero
+                  slug: introduction/monitor-pghero
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
-                - title: Other monitoring tools
-                  slug: introduction/monitor-external-tools
 
         - section: Operations & maintenance
           icon: settings
@@ -1020,11 +1084,11 @@
   icon: book
   subnav:
     - title: Extensions
-      slug: extensions/extensions-intro
+      slug: extensions/pg-extensions
       icon: extension
       items:
-        - title: Supported extensions
-          slug: extensions/pg-extensions
+        - title: Extension explorer
+          slug: extensions/extension-explorer
         - title: anon
           slug: extensions/postgresql-anonymizer
         - title: btree_gin
@@ -1053,6 +1117,8 @@
           slug: extensions/neon
         - title: neon_utils
           slug: extensions/neon-utils
+        - title: online_advisor
+          slug: extensions/online_advisor
         - title: pgcrypto
           slug: extensions/pgcrypto
         - title: pgvector
@@ -1069,6 +1135,8 @@
           slug: extensions/pg_partman
         - title: pg_prewarm
           slug: extensions/pg_prewarm
+        - title: pg_session_jwt
+          slug: extensions/pg_session_jwt
         - title: pg_stat_statements
           slug: extensions/pg_stat_statements
         - title: pg_repack
@@ -1345,3 +1413,11 @@
           slug: introduction/agent-plan
         - title: AI Agent integration
           slug: guides/ai-agent-integration
+
+    - section: Guides
+      icon: book
+      items:
+        - title: Get started with your integration
+          slug: guides/platform-integration-get-started
+        - title: Claimable database integration
+          slug: workflows/claimable-database-integration

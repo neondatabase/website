@@ -2,7 +2,7 @@
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
 enableTableOfContents: true
-updatedOn: '2025-12-16T12:23:55.558Z'
+updatedOn: '2026-01-05T20:19:10.007Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -37,13 +37,15 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 
 ### Supported
 
-| Plugin                                                                                          | Status                                                       |
-| ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Email & password](https://www.better-auth.com/docs/authentication/email-password)              | ✅ Supported                                                 |
-| [Social OAuth](https://www.better-auth.com/docs/authentication/social-sign-in) (Google, GitHub) | ✅ Supported                                                 |
-| [Email OTP](https://www.better-auth.com/docs/plugins/email-otp)                                 | ✅ Supported                                                 |
-| [Admin](https://www.better-auth.com/docs/plugins/admin)                                         | ✅ Supported                                                 |
-| [Organization](https://www.better-auth.com/docs/plugins/organization)                           | ⚠️ Partial (invitation emails, JWT token claims in progress) |
+| Plugin                                                                                                                                            | Status                                                       |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [Email & password](https://www.better-auth.com/docs/authentication/email-password)                                                                | ✅ Supported                                                 |
+| Social OAuth ([Google](https://www.better-auth.com/docs/authentication/google), [GitHub](https://www.better-auth.com/docs/authentication/github)) | ✅ Supported                                                 |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)                                                                                                  | ✅ Supported                                                 |
+| [Admin](/docs/auth/guides/plugins/admin)                                                                                                          | ✅ Supported                                                 |
+| [Organization](/docs/auth/guides/plugins/organization)                                                                                            | ⚠️ Partial (invitation emails, JWT token claims in progress) |
+| [JWT](/docs/auth/guides/plugins/jwt)                                                                                                              | ✅ Supported                                                 |
+| [Open API](/docs/auth/guides/plugins/openapi)                                                                                                     | ✅ Supported                                                 |
 
 ### On the roadmap
 

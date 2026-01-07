@@ -2,7 +2,7 @@
 title: React with Neon Auth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
 enableTableOfContents: true
-updatedOn: '2025-12-18T12:00:58.020Z'
+updatedOn: '2026-01-05T20:32:04.267Z'
 layout: wide
 ---
 
@@ -111,7 +111,7 @@ To learn more about applying styles to the Auth UI components, including plain C
 ```tsx
 <NeonAuthUIProvider
   authClient={authClient}
-  social={{ providers: ['google', 'github'] }}
+  social={{ providers: ['google', 'github', 'vercel'] }}
   navigate={navigate}
   credentials={{ forgotPassword: true }}
 >
@@ -168,7 +168,7 @@ import {
   SignedIn,
   UserButton,
   RedirectToSignIn,
-} from '@neondatabase/neon-js/auth/react/ui';
+} from '@neondatabase/neon-js/auth/react';
 
 function Home() {
   return (
