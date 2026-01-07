@@ -8,9 +8,9 @@ Neon's CLI provides an expanding set of commands to manage your organizations.
 
 ## Authorization
 
-Use the `auth` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to managae both your personal and organization resources.
+Use the `auth` command to authenticate your Neon account from the CLI. This command opens a browser where you will be asked to grant the necessary permissions to manage your Neon resources across all organizations you belong to. Your OAuth token is stored in `~/.config/neonctl/credentials.json`.
 
-Note that authentication is tied to your personal account. Once authenticated, you can access and manage any Organizations that you belong to.
+Authentication is tied to your Neon user account. Once authenticated, you can access and manage any organization you belong to. When running commands, you'll need to specify which organization to use via `--org-id`, a [context file](/docs/reference/cli-set-context), or by responding to the interactive prompt.
 
 See [Auth - CLI](/docs/reference/cli-auth) to learn more.
 
