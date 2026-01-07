@@ -31,9 +31,7 @@ Neon Auth UI and Neon SDK are client-side SDKs, so you only invoke their methods
 
 If you're using Neon Auth UI components, enable Email OTP by passing the `emailOTP` prop to `NeonAuthUIProvider`. This enables OTP flows in the pre-built auth UI.
 
-<CodeWithLabel label="app/layout.tsx">
-
-```tsx shouldWrap
+```tsx shouldWrap filename="app/layout.tsx"
 import { authClient } from '@/lib/auth/client';
 import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react/ui';
 import './globals.css';
@@ -54,8 +52,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 }
 ```
 
-</CodeWithLabel>
-
 Users can now sign in with Email OTP by selecting the option on the sign-in screen and entering the one-time code sent to their email.
 
 ![Email OTP verification](/docs/auth/email-otp-verification.png)
@@ -73,9 +69,7 @@ To send an OTP, call `emailOtp.sendVerificationOtp()` and specify a `type`:
 - `sign-in` - passwordless sign-in
 - `email-verification` - verify an email address
 
-<CodeWithLabel label="src/send-otp.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/send-otp.ts"
 import { authClient } from './auth';
 
 export async function sendSignInOtp(email: string) {
@@ -85,17 +79,13 @@ export async function sendSignInOtp(email: string) {
 }
 ```
 
-</CodeWithLabel>
-
 > For more details, see the [Send verification OTP code](/docs/reference/javascript-sdk#auth-sendverificationotp) in Neon SDK.
 
 ### Sign in with OTP
 
 After the user receives the code, sign them in using `signIn.emailOtp()`:
 
-<CodeWithLabel label="src/sign-in-with-otp.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/sign-in-with-otp.ts"
 import { authClient } from './auth';
 
 export async function signInWithOtp(email: string, otp: string) {
@@ -106,8 +96,6 @@ export async function signInWithOtp(email: string, otp: string) {
 }
 ```
 
-</CodeWithLabel>
-
 > For more details, see the [Sign in with OTP code](/docs/reference/javascript-sdk#auth-signinwithemailotp) in Neon SDK.
 
 ### Verify email with OTP
@@ -116,9 +104,7 @@ If your project has email verification enabled with **verification codes**, Neon
 
 Once the user enters the code, verify the email address using `emailOtp.verifyEmail()`:
 
-<CodeWithLabel label="src/verify-email.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/verify-email.ts"
 import { authClient } from './auth';
 
 export async function verifyEmail(email: string, otp: string) {
@@ -129,8 +115,6 @@ export async function verifyEmail(email: string, otp: string) {
 }
 ```
 
-</CodeWithLabel>
-
 > For more details, see the [Verify email with OTP code](/docs/reference/javascript-sdk#auth-verifyemail) in Neon SDK.
 
 Checkout our [Email verification guide](/docs/auth/guides/email-verification) for a complete walkthrough.
@@ -139,9 +123,7 @@ Checkout our [Email verification guide](/docs/auth/guides/email-verification) fo
 
 If you want to validate an OTP without completing the flow (for example, to check the code before enabling a sensitive UI), you can use `emailOtp.checkVerificationOtp()`:
 
-<CodeWithLabel label="src/otp.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/otp.ts"
 import { authClient } from './auth';
 
 export async function isOtpValid(email: string, otp: string) {
@@ -156,17 +138,13 @@ export async function isOtpValid(email: string, otp: string) {
 }
 ```
 
-</CodeWithLabel>
-
 > For more details, see the [Check verification OTP code](/docs/reference/javascript-sdk#auth-checkverificationotp) in Neon SDK.
 
 ## Reset Password with OTP
 
 You can also use Email OTP to implement password reset flows. To do this use the `authClient.forgetPassword.emailOtp` method to send a password reset OTP to the user's email address.
 
-<CodeWithLabel label="src/send-reset-otp.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/send-reset-otp.ts"
 import { authClient } from './auth';
 
 export async function sendPasswordResetOtp(email: string) {
@@ -175,13 +153,9 @@ export async function sendPasswordResetOtp(email: string) {
 }
 ```
 
-</CodeWithLabel>
-
 Once the user receives the OTP, verify it using `authClient.emailOtp.checkVerificationOtp()` with the `type` set to `forget-password`.
 
-<CodeWithLabel label="src/verify-reset-otp.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/verify-reset-otp.ts"
 import { authClient } from './auth';
 
 export async function verifyPasswordResetOtp(email: string, otp: string) {
@@ -196,13 +170,9 @@ export async function verifyPasswordResetOtp(email: string, otp: string) {
 }
 ```
 
-</CodeWithLabel>
-
 Finally, reset the user's password using `authClient.emailOtp.resetPassword()`:
 
-<CodeWithLabel label="src/reset-password.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/reset-password.ts"
 import { authClient } from './auth';
 
 export async function resetPasswordUsingOtp(email: string, otp: string, newPassword: string) {
@@ -213,8 +183,6 @@ export async function resetPasswordUsingOtp(email: string, otp: string, newPassw
   });
 }
 ```
-
-</CodeWithLabel>
 
 ## Limitations
 

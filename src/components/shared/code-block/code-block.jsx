@@ -6,6 +6,16 @@ import highlight from 'lib/shiki';
 
 import CodeBlockWrapper from '../code-block-wrapper';
 
+const getFileNameFromMeta = (meta) => {
+  if (!meta) return null;
+
+  // Support only: filename=
+  // Examples:
+  // ```js filename=src/app.js
+  const match = meta.match(/\bfilename=(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+  return match ? match[1] || match[2] || match[3] : null;
+};
+
 const CodeBlock = async ({
   className = null,
   copyButtonClassName = null,
@@ -14,6 +24,7 @@ const CodeBlock = async ({
 }) => {
   const language = children?.props?.className?.replace('language-', '');
   const meta = children?.props?.meta;
+  const filename = getFileNameFromMeta(meta);
   const code = children?.props?.children?.trim();
   const html = await highlight(code, language, meta);
 
@@ -24,6 +35,7 @@ const CodeBlock = async ({
         className,
         { 'code-wrap': meta?.includes('shouldWrap') }
       )}
+      filename={filename}
       data-line-numbers={meta?.includes('showLineNumbers')}
       copyButtonClassName={copyButtonClassName}
       {...otherProps}

@@ -33,9 +33,7 @@ You can retrieve a JWT for the currently signed-in user using the Neon SDK.
 
 To fetch a raw token string, use the `authClient.token()` method. This is the recommended approach for client applications that need to attach a token to an API request header manually.
 
-<CodeWithLabel label="src/get-token.ts">
-
-```ts shouldWrap
+```ts shouldWrap filename="src/get-token.ts"
 import { authClient } from './auth';
 
 export async function getJwtToken() {
@@ -47,8 +45,6 @@ export async function getJwtToken() {
   return data.token;
 }
 ```
-
-</CodeWithLabel>
 
 ### Using the session header
 
