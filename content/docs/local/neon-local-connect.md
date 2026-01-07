@@ -1,147 +1,108 @@
 ---
-title: Neon Local Connect Extension
+title: Neon VS Code Extension
 enableTableOfContents: true
-subtitle: Develop with Neon using Neon Local Connect in VS Code, Cursor, Windsurf, and
-  other editors
-updatedOn: '2025-08-21T20:58:54.185Z'
+subtitle: Connect to Neon and manage your database directly in VS Code, Cursor, and other editors
+updatedOn: '2025-01-07T00:00:00.000Z'
 ---
 
-The Neon Local Connect extension lets you connect to any Neon branch using a familiar localhost connection string. Available for VS Code, Cursor, Windsurf, and other VS Code-compatible editors, the underlying Neon Local service handles the routing, authentication, and branch management behind the scenes. Your app connects to `localhost:5432` like a local Postgres instance, but Neon Local routes traffic to your actual Neon branch in the cloud.
+The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings—all without leaving your editor.
 
-You can use this connection string in your app:
-
-```env
-DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
-```
-
-Switch branches, and your app keeps using the same connection string.
 
 ## What you can do
 
-With the Neon Local Connect extension, you can:
+With the Neon extension, you can:
 
-- Instantly connect to any Neon branch using a single, static localhost connection string
-- Create, switch, or reset branches directly from the extension panel
-- Automate ephemeral branch creation and cleanup, no scripts required
-- Browse your database schema with an intuitive tree view showing databases, schemas, tables, columns, and relationships
+- Connect to any Neon project and branch with automatic detection of connection strings in your workspace
+- Browse your database schema with an intuitive tree view showing databases, schemas, tables, views, sequences, and relationships
+- Manage databases, schemas, tables, views, and sequences with professional-grade tools
 - Write and execute SQL queries with syntax highlighting, results display, and export capabilities
-- View, edit, insert, and delete table data with a spreadsheet-like interface without leaving your IDE
-- Launch a psql shell in your integrated terminal for direct SQL access
+- View, edit, insert, and delete table data with a spreadsheet-like interface
+- Import and export data in CSV, JSON, or SQL formats
+- Enable AI-powered database features with automatic MCP Server configuration
 
 All without leaving your editor.  
-Learn more about [branching in Neon](/docs/guides/branching-intro) and [Neon Local](/docs/local/neon-local).
+Learn more about [branching in Neon](/docs/guides/branching-intro).
 
 ## Requirements
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
-- [VS Code 1.85.0+](https://code.visualstudio.com/), [Cursor](https://cursor.sh/), [Windsurf](https://codeium.com/windsurf), or other VS Code-compatible editor
-- A [Neon account](https://neon.tech) and [API key](/docs/manage/api-keys) (for ephemeral branches only; you can also create new keys from the extension)
+- [VS Code 1.85.0+](https://code.visualstudio.com/), [Cursor](https://cursor.sh/), or other VS Code-compatible editor
+- A [Neon account](https://neon.tech)
 
 <Steps>
 
 ## Install the extension
 
-The Neon Local Connect extension is available on both marketplaces:
+Click one of the buttons below to install the extension directly, or search for **"Neon - Serverless Postgres"** in your editor's Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X`).
 
-**For VS Code:**
+<div style={{display: 'flex', gap: '12px', alignItems: 'center'}}><a href="vscode:extension/databricks.neon-local-connect"><img src="/docs/local/vscode-install-dark.svg" alt="Add to VS Code" height="32" /></a><a href="cursor:extension/databricks.neon-local-connect"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add to Cursor" height="32" /></a></div>
 
-- Open the [Neon Local Connect extension page](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) in the VS Code Marketplace.
-- Click **Install**.
-
-**For Cursor, Windsurf, and other VS Code-compatible editors:**
-
-- Open the [Neon Local Connect extension page](https://open-vsx.org/extension/databricks/neon-local-connect) in the OpenVSX Registry.
-- Click **Install** or follow your editor's extension installation process.
+For other VS Code-compatible editors, install from the [Open VSX Registry](https://open-vsx.org/extension/databricks/neon-local-connect).
 
 ## Sign in to Neon
 
-- Open the Neon Local Connect panel in the VS Code sidebar and click **Sign in**.
+1. Open the Neon panel in the sidebar (look for the Neon logo)
+2. Click **Sign in**
 
-  ![Sign in with your Neon account](/docs/local/sign-in.png)
+3. Complete OAuth authorization in your browser
 
-- Authenticate with Neon in your browser when prompted.
-
-  ![Neon OAuth authorization in browser](/docs/local/authorize.png)
+Once signed in, the extension automatically configures the [Neon MCP server](/docs/ai/neon-mcp-server) for AI features.
 
 ## Connect to a branch
 
-You'll need to make a few selections — organization, project, and then branch — before connecting. If you're new to Neon, this reflects our object hierarchy: organizations contain projects, and projects contain branches. [Learn more about how Neon organizes your data.](/docs/manage/overview)
+The extension scans your workspace for existing Neon connection strings and can automatically detect your project and branch.
 
-You can connect to two types of branches:
 
-- **Existing branch:**  
-  For ongoing development, features, or team collaboration. The branch remains available until you delete it. Use this when you want to keep your changes and collaborate with others.
+You can also manually select:
 
-- **Ephemeral branch:**  
-  For temporary, disposable environments (tests, CI, experiments). The extension creates the branch when you connect and deletes it automatically when you disconnect—no manual cleanup required. In CI or CLI workflows, you’d have to script this yourself. The extension does it for you.
+1. **Organization** — your Neon organization
+2. **Project** — the project containing your database
+3. **Branch** — the branch to connect to
 
-As part of choosing your connection, you'll also be asked to choose driver type: **PostgreSQL** for most Postgres connections, or **Neon serverless** for edge/HTTP. [Read more about connection types](/docs/connect/choose-connection).
-
-<Tabs labels={["Existing branch", "Ephemeral branch"]}>
-
-<TabItem>
-Connect to an existing branch (e.g., `main`, `development`, or a feature branch):
-
-![Existing branch connected](/docs/local/connected.png)
-</TabItem>
-
-<TabItem>
-Connect to an ephemeral branch (created just for your session):
-
-![Ephemeral branch connected](/docs/local/ephemeral_connected.png)
-</TabItem>
-
-</Tabs>
+Click **Connect** to establish the connection.
 
 <Admonition type="note">
-Selecting an ephemeral branch will prompt you to create and import API key for authentication.
+If you're new to Neon, this reflects our object hierarchy: organizations contain projects, and projects contain branches. [Learn more about how Neon organizes your data.](/docs/manage/overview)
 </Admonition>
 
 ## Create a new branch
 
-Or you can create a new persistent branch for feature development, bug fixes, or collaborative work:
+You can create a new branch for feature development, bug fixes, or collaborative work:
 
 1. Select your organization and project
 2. Click **Create new branch...** in the branch dropdown
 3. Enter a descriptive branch name (e.g., `feature/user-authentication`, `bugfix/login-validation`)
-4. Choose the parent branch you want to branch from (e.g., `production`, `development`)
+4. Choose the parent branch you want to branch from
 
-The extension creates the new branch and connects you immediately. This branch persists until you manually delete it.
+The extension creates the new branch and connects you immediately.
 
-## Use the static connection string
+## Use your connection string
 
-After connecting, find your local connection string in the extension panel. Copy it, update with your database name, and add it to your app’s `.env` or config.
+After connecting, copy the connection string from the extension panel and add it to your `.env` file:
 
-![Local connection details](/docs/local/connection_string.png)
 
 ```env
-DATABASE_URL="postgres://neon:npg@localhost:5432/<database_name>"
+DATABASE_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require"
 ```
-
-Your app connects to `localhost:5432`, while the Neon Local service routes the traffic to your actual Neon branch in the cloud.
-
-> You only need to set this connection string once, no matter how many times you create, switch, or reset branches. Neon Local handles all the routing behind the scenes, so you never have to update your app config again.
 
 ## Start developing
 
-Your application now connects to `localhost:5432` using the driver you selected in the extension (Postgres or Neon serverless). See the quickstart for your language or framework for more details.
+Your application now connects directly to your Neon branch. See the quickstart for your language or framework for more details.
 
 - [Framework quickstarts](/docs/get-started/frameworks)
 - [Language quickstarts](/docs/get-started/languages)
 
 </Steps>
 
-## Database schema view
+## Database explorer
 
-Once connected, the extension provides a comprehensive **Database Schema** view in the sidebar that lets you explore your database structure visually:
+Once connected, the extension provides a comprehensive **Database Explorer** in the sidebar that lets you browse your database structure with an intuitive tree view:
 
-![Database Schema View](/docs/local/database_schema_view.png)
-
-### What you can see:
+### What you can see
 
 - **Databases**: All available databases in your connected branch
 - **Schemas**: Database schemas organized in a tree structure
 - **Tables & Views**: All tables and views with their column definitions
+- **Sequences**: Database sequences
 - **Data Types**: Column data types, constraints, and relationships
 - **Primary Keys**: Clearly marked primary key columns
 - **Foreign Keys**: Visual indicators for foreign key relationships
@@ -153,60 +114,66 @@ Once connected, the extension provides a comprehensive **Database Schema** view 
   - **View Table Data**: Opens the table data in an editable spreadsheet view
   - **Truncate Table**: Remove all rows from a table
   - **Drop Table**: Delete the table entirely
-- **Right-click databases** to launch a psql shell for that specific database
+- **Right-click databases or schemas** for management operations
 - **Refresh** the schema view to see the latest structural changes
 - **Expand/collapse** database objects to focus on what you need
 
 The schema view automatically updates when you switch between branches, so you always see the current state of your connected database.
 
-## Built-in SQL Editor
+## Database management
+
+The extension provides professional-grade PostgreSQL management tools:
+
+- **Create and drop databases and schemas**
+- **Table designer** with column, index, and constraint management
+- **Foreign key management** with referential integrity
+- **View and sequence management**
+- **User and role management**
+- **Data import/export** in CSV, JSON, or SQL formats
+
+## SQL Editor
 
 Execute SQL queries directly in your IDE with the integrated SQL Editor:
 
-![SQL Editor in your IDE](/docs/local/sql_editor_view.png)
 
-### Features:
+### Features
 
-- **Query Execution**: Run queries with `Ctrl+Enter` or the Execute button
-- **Results Display**: View query results in a tabular format with:
-  - Column sorting and filtering
-  - Export to CSV/JSON formats
-  - Performance statistics (execution time, rows affected, etc.)
-  - Error highlighting with detailed messages
-- **Database Context**: Automatically connects to the selected database
+- **Syntax Highlighting**: Full SQL syntax support
+- **Results Display**: View query results in a tabular format with sorting and filtering
+- **Export Options**: Export results to CSV, JSON, or SQL formats
+- **Query Statistics**: View execution time and performance metrics
+- **Error Highlighting**: Detailed error messages for debugging
 
-### How to use:
+### How to use
 
 1. **From Schema View**: Right-click any table and select "Query Table" for a pre-filled SELECT query
-2. **From Actions Panel**: Click "Open SQL Editor" to start with a blank query
-3. **From Command Palette**: Use `Ctrl+Shift+P` and search for "Neon: Open SQL Editor"
+2. **From Command Palette**: Use `Ctrl+Shift+P` and search for "Neon: Open SQL Editor"
 
 The SQL Editor integrates seamlessly with your database connection, so you can query any database in your current branch without additional setup.
 
-## Table data management
+## Table data editor
 
 View and edit your table data with a powerful, spreadsheet-like interface:
 
-![Table Data Editor](/docs/local/table_data_view.png)
-
-### Viewing data:
+### Viewing data
 
 - **Paginated Display**: Navigate through large datasets with page controls
 - **Column Management**: Show/hide columns, sort by any column
 - **Data Types**: Visual indicators for different data types (primary keys, foreign keys, etc.)
 - **Null Handling**: Clear visualization of NULL values
 
-### Editing capabilities:
+### Editing capabilities
 
-- **Row Editing**: Click the pen (edit) icon next to any row to edit all fields inline (requires primary key)
+- **Inline Editing**: Edit field values directly in the table
 - **Insert New Rows**: Add new records with the "Add Row" button
-- **Delete Rows**: Remove records with confirmation dialogs (requires primary key)
-- **Batch Operations**: Edit multiple fields before saving changes
-- **Data Validation**: Real-time validation based on column types and constraints
+- **Delete Rows**: Remove records with confirmation dialogs
+- **Real-time Validation**: Data validation based on column types and constraints
 
-> **Note**: Row editing and deletion require tables to have a primary key defined. This ensures data integrity by uniquely identifying rows for safe updates.
+<Admonition type="note">
+Row editing and deletion require tables to have a primary key defined. This ensures data integrity by uniquely identifying rows for safe updates.
+</Admonition>
 
-### How to access:
+### How to access
 
 1. **From Schema View**: Right-click any table and select "View Table Data"
 2. The data opens in a new tab with full editing capabilities
@@ -215,48 +182,65 @@ View and edit your table data with a powerful, spreadsheet-like interface:
 
 Perfect for quick data inspection, testing, and small data modifications without writing SQL.
 
+## AI agent integration
+
+The Neon extension includes built-in support for AI-powered database features through the [Neon MCP Server](/docs/ai/neon-mcp-server):
+
+### Features
+
+- **Automatic MCP Server configuration** — enables AI-powered database features with your coding agent
+- **Chat with your database** using natural language
+- **AI-assisted SQL generation** and schema understanding
+- **View and manage MCP server status** directly in the extension
+
+The MCP server is automatically configured when you sign in. You can view the status and manage the configuration from the extension panel.
+
+### Extension settings
+
+This extension contributes the following settings:
+
+| Setting                         | Description                                                  | Default |
+| ------------------------------- | ------------------------------------------------------------ | ------- |
+| `neon.mcpServer.autoConfigEnabled` | Automatically configure the Neon MCP server on sign-in    | `true`  |
+
 ## Available commands
 
-You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) and typing “Neon Local Connect: ...”.
+You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) and typing "Neon".
 
-_All commands below are available under the “Neon Local Connect:” prefix in the Command Palette._
+| Command                    | Description                                    |
+| -------------------------- | ---------------------------------------------- |
+| **Neon: Sign In**          | Sign in to your Neon account                   |
+| **Neon: Sign Out**         | Sign out from your Neon account                |
+| **Neon: Open SQL Editor**  | Open a new SQL editor tab                      |
+| **Neon: View Databases**   | Open the database tree view                    |
+| **Neon: Refresh Databases**| Refresh the database tree view                 |
+| **Neon: Create Branches**  | Create Neon branches                           |
+| **Neon: Get Started**      | Automatically configure your project to work with Neon |
 
-| Command                  | Description                                                                          |
-| ------------------------ | ------------------------------------------------------------------------------------ |
-| **Import API Key**       | Import your Neon API key for authentication.                                         |
-| **Launch PSQL**          | Open a psql shell in your integrated terminal for direct SQL access.                 |
-| **Open SQL Editor**      | Launch the Neon SQL Editor in your browser for advanced queries and data inspection. |
-| **Open Table View**      | Browse your database schema and data in the Neon Console.                            |
-| **Disconnect**           | Stop the local proxy connection.                                                     |
-| **Clear Authentication** | Remove stored authentication tokens.                                                 |
+## Troubleshooting
 
-## Panel actions
+### Connection errors
 
-Once connected, the Neon Local Connect panel provides quick access to common database operations:
+- Verify your Neon account is active
+- Ensure you have access to the selected project and branch
+- Check your network connection
 
-### Branch management:
+### MCP Server not working
 
-- **Reset from Parent Branch:** Instantly revert your branch to match the current state of its parent. Learn more about branch reset in [Docs: Branch Reset](/docs/guides/reset-from-parent). To reset a branch, right-click the branch in the **Database Schema** view and select **Reset from Parent Branch** from the context menu.
-  ![Reset Branch](/docs/local/reset.png)
+- Check the MCP Server panel status in the extension
+- Try disabling and re-enabling the MCP server
+- Reload the window after configuration changes
 
-### Database tools (available in the main panel):
+### Database view not updating
 
-- **Open SQL Editor:** Launch the Neon SQL Editor in your browser for advanced queries
-- **Open Table View:** Browse your database schema and data in the Neon Console
-- **Launch PSQL:** Open a psql shell in the integrated terminal for direct SQL access
-
-### Built-in database tools (new in your IDE):
-
-- **Database Schema View:** Explore your database structure in the sidebar with expandable tree view
-- **Built-in SQL Editor:** Write and execute queries directly in your IDE with results display
-- **Table Data Editor:** View and edit table data with a spreadsheet-like interface
-- **Context Menus:** Right-click databases, tables, and views for quick actions like querying and data management
+- Use the refresh button in the Databases view title bar
+- Disconnect and reconnect to the branch
 
 ## Next steps & resources
 
-- [Neon Local documentation](/docs/local/neon-local)
 - [Branching in Neon](/docs/guides/branching-intro)
+- [Neon MCP Server](/docs/ai/neon-mcp-server)
 - [Serverless driver](/docs/serverless/serverless-driver)
-- [API keys](/docs/manage/api-keys)
+- [Discord Community](https://discord.gg/92vNTzKDGp)
 
 <NeedHelp/>

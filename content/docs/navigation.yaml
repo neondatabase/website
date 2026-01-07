@@ -878,11 +878,8 @@
               slug: reference/instagres
             - title: Neon Local
               slug: local/neon-local
-              items:
-                - title: Neon Local
-                  slug: local/neon-local
-                - title: Neon Local Connect
-                  slug: local/neon-local-connect
+            - title: Neon VS Code Extension
+              slug: local/neon-local-connect
             - title: Terraform
               slug: reference/terraform
             - title: Neon Twin
