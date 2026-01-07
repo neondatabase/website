@@ -29,7 +29,7 @@ const Item = ({
     if (element) {
       // Account for scroll margin and header offset
       const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
-      const offset = 130; // Match ANCHOR_SCROLL_MARGIN
+      const offset = 130 - 1; // Match ANCHOR_SCROLL_MARGIN
       window.scrollTo({
         top: elementTop - offset,
         behavior: 'smooth',
