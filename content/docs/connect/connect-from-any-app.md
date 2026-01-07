@@ -14,7 +14,7 @@ updatedOn: '2025-08-05T16:14:59.258Z'
 
 <DocsList title="Related topics" theme="docs">
 <a href="/docs/connect/choose-connection">Choosing a driver and connection type</a>
-<a href="/docs/local/neon-local-connect">Neon VS Code Extension</a>
+<a href="/docs/local/vscode-extension">Neon VS Code Extension</a>
 <a href="/docs/connect/connect-securely">Connect to Neon securely</a>
 <a href="/docs/connect/connection-pooling">Connection pooling</a>
 <a href="/docs/connect/query-with-psql-editor">Connect with psql</a>
@@ -81,7 +81,7 @@ Neon requires that all connections use SSL/TLS encryption, but you can increase 
 
 ## Connect with the Neon VS Code extension
 
-The [Neon VS Code extension](/docs/local/neon-local-connect) lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, this extension lets you:
+The [Neon VS Code extension](/docs/local/vscode-extension) lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, this extension lets you:
 
 - Connect to any Neon project and branch with automatic detection of connection strings in your workspace
 - Copy connection strings directly to your `.env` file

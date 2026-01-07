@@ -611,7 +611,7 @@
               slug: ai/ai-google-colab
     - section: Tools & Workflows
       items:
-        - title: Dev tools (API, CLI, SDKs)
+        - title: API, CLI & SDKs
           slug: reference/api-reference
           icon: cli
           items:
@@ -676,6 +676,15 @@
                 - title: Node.js / Deno SDK (Neon API)
                   slug: https://github.com/paambaati/neon-js-sdk
                   tag: community
+
+        - title: Local development
+          icon: container
+          slug: local/neon-local
+          items:
+            - title: Neon VS Code Extension
+              slug: local/vscode-extension
+            - title: Neon Local
+              slug: local/neon-local
 
         - title: Integrations (3rd party)
           icon: integrations
@@ -876,10 +885,6 @@
               slug: guides/branching-github-actions
             - title: Instagres
               slug: reference/instagres
-            - title: Neon Local
-              slug: local/neon-local
-            - title: Neon VS Code Extension
-              slug: local/neon-local-connect
             - title: Terraform
               slug: reference/terraform
             - title: Neon Twin

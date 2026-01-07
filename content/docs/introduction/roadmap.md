@@ -90,7 +90,7 @@ And here's an overview of what we're looking at next:
 - **AI Agent Plan**: An AI agent pricing plan for platforms that need to provision thousands of databases. [Learn more](https://neon.com/use-cases/ai-agents).
 - **Usage-based pricing plans**: Our paid plans are fully usage-based — pay only for what you use. See [Neon plans](/docs/introduction/plans).
 - **Branch expiration management**: Set a time-to-live (TTL) for Neon branches to simplify branch cleanup and management, see our [branch expiration guide](/docs/guides/branch-expiration).
-- **Neon VS Code Extension** — An extension that lets you connect to Neon and manage your database directly in your IDE. Available for VS Code, Cursor, and other compatible editors. See [Neon VS Code Extension](/docs/local/neon-local-connect).
+- **Neon VS Code Extension** — An extension that lets you connect to Neon and manage your database directly in your IDE. Available for VS Code, Cursor, and other compatible editors. See [Neon VS Code Extension](/docs/local/vscode-extension).
 - **TanStack integration & new open-source tools**: Neon is now the official database partner of TanStack, with new open-source tools including a Vite Plugin for Neon to streamline fullstack development with TanStack, Vite, and Postgres.
 - **Data API**: Neon's Data API feature, powered by PostgREST, is open to all Neon users. [Learn more](/docs/data-api/get-started).
 - **Monitoring platform support**: Neon supports exporting metrics and Postgres logs to any OpenTelemetry-compatible backend, like New Relic. For details, refer to our [OpenTelemetry docs](/docs/guides/opentelemetry).
