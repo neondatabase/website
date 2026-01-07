@@ -7,7 +7,6 @@ updatedOn: '2025-01-07T00:00:00.000Z'
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings—all without leaving your editor.
 
-
 ## What you can do
 
 With the Neon extension, you can:
@@ -51,7 +50,6 @@ Once signed in, the extension automatically configures the [Neon MCP server](/do
 
 The extension scans your workspace for existing Neon connection strings and can automatically detect your project and branch.
 
-
 You can also manually select:
 
 1. **Organization** — your Neon organization
@@ -78,7 +76,6 @@ The extension creates the new branch and connects you immediately.
 ## Use your connection string
 
 After connecting, copy the connection string from the extension panel and add it to your `.env` file:
-
 
 ```env
 DATABASE_URL="postgresql://user:password@ep-example-123456.us-east-2.aws.neon.tech/neondb?sslmode=require"
@@ -134,7 +131,6 @@ The extension provides professional-grade PostgreSQL management tools:
 ## SQL Editor
 
 Execute SQL queries directly in your IDE with the integrated SQL Editor:
-
 
 ### Features
 
@@ -199,23 +195,23 @@ The MCP server is automatically configured when you sign in. You can view the st
 
 This extension contributes the following settings:
 
-| Setting                         | Description                                                  | Default |
-| ------------------------------- | ------------------------------------------------------------ | ------- |
-| `neon.mcpServer.autoConfigEnabled` | Automatically configure the Neon MCP server on sign-in    | `true`  |
+| Setting                            | Description                                            | Default |
+| ---------------------------------- | ------------------------------------------------------ | ------- |
+| `neon.mcpServer.autoConfigEnabled` | Automatically configure the Neon MCP server on sign-in | `true`  |
 
 ## Available commands
 
 You can run any command by opening the Command Palette (`Cmd+Shift+P` or `Ctrl+Shift+P`) and typing "Neon".
 
-| Command                    | Description                                    |
-| -------------------------- | ---------------------------------------------- |
-| **Neon: Sign In**          | Sign in to your Neon account                   |
-| **Neon: Sign Out**         | Sign out from your Neon account                |
-| **Neon: Open SQL Editor**  | Open a new SQL editor tab                      |
-| **Neon: View Databases**   | Open the database tree view                    |
-| **Neon: Refresh Databases**| Refresh the database tree view                 |
-| **Neon: Create Branches**  | Create Neon branches                           |
-| **Neon: Get Started**      | Automatically configure your project to work with Neon |
+| Command                     | Description                                            |
+| --------------------------- | ------------------------------------------------------ |
+| **Neon: Sign In**           | Sign in to your Neon account                           |
+| **Neon: Sign Out**          | Sign out from your Neon account                        |
+| **Neon: Open SQL Editor**   | Open a new SQL editor tab                              |
+| **Neon: View Databases**    | Open the database tree view                            |
+| **Neon: Refresh Databases** | Refresh the database tree view                         |
+| **Neon: Create Branches**   | Create Neon branches                                   |
+| **Neon: Get Started**       | Automatically configure your project to work with Neon |
 
 ## Troubleshooting
 
