@@ -7,6 +7,19 @@ updatedOn: '2026-01-06T00:00:00.000Z'
 
 Find all Neon platform limits below, organized by category. Limits vary by [plan](/docs/introduction/plans) unless otherwise noted.
 
+## Project and branch limits
+
+| Limit                           | Free | Launch | Scale | Notes                                                                 |
+| :------------------------------ | :--- | :----- | :---- | :-------------------------------------------------------------------- |
+| Projects per account            | 100  | 100    | 1,000 | Scale is a soft limit; contact Support to increase                    |
+| Branches per project (included) | 10   | 10     | 25    | Additional branches billed separately on paid plans                   |
+| Max branches per project        | 10   | 5,000  | 5,000 | Can be increased on request                                           |
+| Root branches per project       | 3    | 5      | 25    | Includes production branch, backup branches, and schema-only branches |
+| Protected branches              | N/A  | 2      | 5     | -                                                                     |
+| Snapshots                       | 1    | 10     | 10    | Point-in-time copies of root branches                                 |
+
+For more information, see [Neon plans](/docs/introduction/plans) and [Manage branches](/docs/manage/branches).
+
 ## Storage limits
 
 | Limit                           | Free                                                      | Launch | Scale | Notes                                                     |
@@ -22,7 +35,7 @@ For more information, see [Storage](/docs/introduction/plans#storage) and [Manag
 | :--------------------------- | :------------------------- | :---------------- | :----------------- | :------------------------------------------------- |
 | Concurrently active computes | 20                         | same              | same               | Default branch exempt; contact Support to increase |
 | Autoscaling max              | 2 CU (8 GB RAM)            | 16 CU (64 GB RAM) | 16 CU (64 GB RAM)  | -                                                  |
-| Fixed compute max            | 2 CU (8 GB RAM)            | 16 CU (64 GB RAM) | 56 CU (224 GB RAM) |                                                    |
+| Fixed compute max            | 2 CU (8 GB RAM)            | 16 CU (64 GB RAM) | 56 CU (224 GB RAM) | -                                                  |
 | Compute hours                | 100 CU-hours/project/month | Usage-based       | Usage-based        | Free plan limit resets monthly                     |
 
 Each Compute Unit (CU) provides approximately 4 GB of RAM. For more information, see [Compute](/docs/introduction/plans#compute) and [Manage computes](/docs/manage/computes).
@@ -31,7 +44,7 @@ Each Compute Unit (CU) provides approximately 4 GB of RAM. For more information,
 
 | Limit                          | Value                 | Notes                                         |
 | :----------------------------- | :-------------------- | :-------------------------------------------- |
-| Postgres `max_connections`     | 104–4,000             | Varies by compute size; see table below       |
+| Postgres `max_connections`     | 104–4,000             | Varies by compute size                        |
 | Pooled connections (PgBouncer) | 10,000 concurrent     | Across all connections to the pooler endpoint |
 | default_pool_size              | 0.9 × max_connections | Per user/database pair                        |
 | max_prepared_statements        | 1,000                 | PgBouncer setting                             |
@@ -48,19 +61,6 @@ Direct connections are limited by the Postgres `max_connections` parameter, whic
 
 For more information, see [Connection pooling](/docs/connect/connection-pooling).
 
-## Project and branch limits
-
-| Limit                           | Free | Launch | Scale | Notes                                                                 |
-| :------------------------------ | :--- | :----- | :---- | :-------------------------------------------------------------------- |
-| Projects per account            | 100  | 100    | 1,000 | Scale is a soft limit; contact Support to increase                    |
-| Branches per project (included) | 10   | 10     | 25    | -                                                                     |
-| Max branches per project        | 10   | 5,000  | 5,000 | Contact [Sales](/contact-sales) to increase                           |
-| Root branches per project       | 3    | 5      | 25    | Includes production branch, backup branches, and schema-only branches |
-| Protected branches              | N/A  | 2      | 5     | -                                                                     |
-| Snapshots                       | 1    | 10     | 10    | Point-in-time copies of root branches                                 |
-
-For more information, see [Manage branches](/docs/manage/branches) and [Neon plans](/docs/introduction/plans#branches).
-
 ## Database object limits
 
 | Limit                | Value |
@@ -69,6 +69,26 @@ For more information, see [Manage branches](/docs/manage/branches) and [Neon pla
 | Roles per branch     | 500   |
 
 For more information, see [Manage databases](/docs/manage/databases) and [Manage roles](/docs/manage/roles).
+
+## Time-based limits
+
+| Limit                 | Free               | Launch              | Scale              | Notes                                               |
+| :-------------------- | :----------------- | :------------------ | :----------------- | :-------------------------------------------------- |
+| Restore window        | 6 hours (1 GB cap) | Up to 7 days        | Up to 30 days      | Configurable; controls how far back you can restore |
+| Monitoring retention  | 1 day              | 3 days              | 14 days            | Metrics history in the Monitoring dashboard         |
+| Scale to zero timeout | 5 min (fixed)      | 5 min (can disable) | 1 min to always-on | Time before idle compute suspends                   |
+
+For more information, see [Restore window](/docs/introduction/restore-window), [Monitoring dashboard](/docs/introduction/monitoring-page), and [Scale to zero](/docs/introduction/scale-to-zero).
+
+## Network transfer limits
+
+| Limit                            | Free       | Launch                | Scale                 | Notes                           |
+| :------------------------------- | :--------- | :-------------------- | :-------------------- | :------------------------------ |
+| Public network transfer (egress) | 5 GB/month | 100 GB/month included | 100 GB/month included | Overage: $0.10/GB on paid plans |
+
+Public network transfer includes data sent via logical replication to any destination, including other Neon databases.
+
+For more information, see [Public network transfer](/docs/introduction/plans#public-network-transfer).
 
 ## Read replica limits
 
@@ -102,26 +122,6 @@ For more information, see [Logical replication](/docs/guides/logical-replication
 If you exceed the rate limit, you'll receive an HTTP 429 (Too Many Requests) error. Contact [Support](/docs/introduction/support) if you need higher limits.
 
 For more information, see [Neon API](/docs/reference/api-reference) and [Manage API keys](/docs/manage/api-keys).
-
-## Network transfer limits
-
-| Limit                            | Free       | Launch                | Scale                 | Notes                           |
-| :------------------------------- | :--------- | :-------------------- | :-------------------- | :------------------------------ |
-| Public network transfer (egress) | 5 GB/month | 100 GB/month included | 100 GB/month included | Overage: $0.10/GB on paid plans |
-
-Public network transfer includes data sent via logical replication to any destination, including other Neon databases.
-
-For more information, see [Public network transfer](/docs/introduction/plans#public-network-transfer).
-
-## Time-based limits
-
-| Limit                 | Free               | Launch              | Scale              | Notes                                               |
-| :-------------------- | :----------------- | :------------------ | :----------------- | :-------------------------------------------------- |
-| Restore window        | 6 hours (1 GB cap) | Up to 7 days        | Up to 30 days      | Configurable; controls how far back you can restore |
-| Monitoring retention  | 1 day              | 3 days              | 14 days            | Metrics history in the Monitoring dashboard         |
-| Scale to zero timeout | 5 min (fixed)      | 5 min (can disable) | 1 min to always-on | Time before idle compute suspends                   |
-
-For more information, see [Restore window](/docs/introduction/restore-window), [Monitoring dashboard](/docs/introduction/monitoring-page), and [Scale to zero](/docs/introduction/scale-to-zero).
 
 ## Authentication limits (Neon Auth)
 
