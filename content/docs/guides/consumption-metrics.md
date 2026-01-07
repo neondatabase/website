@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2025-09-05T17:14:39.189Z'
+updatedOn: '2026-01-07T12:02:47.902Z'
 ---
 
 <Admonition type="note">

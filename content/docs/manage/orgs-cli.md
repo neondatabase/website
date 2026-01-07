@@ -1,7 +1,7 @@
 ---
 title: Manage Organizations using the Neon CLI
 enableTableOfContents: true
-updatedOn: '2025-01-29T23:50:53.962Z'
+updatedOn: '2026-01-07T12:02:47.906Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.
