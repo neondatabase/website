@@ -3,7 +3,7 @@ title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-02-14T17:05:10.001Z'
+updatedOn: '2026-01-07T20:52:32.359Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
