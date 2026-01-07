@@ -175,6 +175,7 @@ A JSON file (`.neon` by default) used by the Neon CLI to store project and organ
 The CLI determines the context file location by walking up the directory tree from your current directory, stopping when it finds a directory containing `.neon`, `package.json`, or `.git`. The `.neon` file is then read from (or created in) that directory. Using `package.json` and `.git` as markers ensures that context files are stored at your project root rather than in a subdirectory. The search stops at your home directory, so there is no global context file.
 
 Example context file contents:
+
 ```json
 {
   "orgId": "org-example-12345678",
