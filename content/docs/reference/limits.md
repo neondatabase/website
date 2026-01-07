@@ -72,9 +72,9 @@ For more information, see [Manage databases](/docs/manage/databases) and [Manage
 
 ## Read replica limits
 
-| Limit                     | Free | Paid Plans | Notes                              |
-| :------------------------ | :--- | :--------- | :--------------------------------- |
-| Read replicas per project | 3    | No limit   | Each replica is a separate compute |
+| Limit                     | Free | Launch   | Scale    | Notes                              |
+| :------------------------ | :--- | :------- | :------- | :--------------------------------- |
+| Read replicas per project | 3    | No limit | No limit | Each replica is a separate compute |
 
 For more information, see [Read replicas](/docs/introduction/read-replicas).
 
