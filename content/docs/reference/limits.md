@@ -39,10 +39,10 @@ Each Compute Unit (CU) provides approximately 4 GB of RAM. For more information,
 
 ### Connection type comparison
 
-| Connection Type | Max Connections | Notes |
-| :-------------- | :-------------- | :---- |
+| Connection Type | Max Connections | Notes                                         |
+| :-------------- | :-------------- | :-------------------------------------------- |
 | Direct          | 104–4,000       | Standard Postgres TCP; varies by compute size |
-| Pooled          | 10,000          | Via PgBouncer |
+| Pooled          | 10,000          | Via PgBouncer                                 |
 
 Direct connections are limited by the Postgres `max_connections` parameter, which scales with compute size. For the formula and detailed breakdown, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
@@ -135,8 +135,8 @@ For more information, see [Neon Auth](/docs/auth/overview).
 
 ## Serverless driver limits
 
-| Limit                      | Value | Notes                                    |
-| :------------------------- | :---- | :--------------------------------------- |
+| Limit                      | Value | Notes                                           |
+| :------------------------- | :---- | :---------------------------------------------- |
 | HTTP request/response size | 64 MB | Queries over HTTP only; WebSockets not affected |
 
 For more information, see [Neon serverless driver](/docs/serverless/serverless-driver).
