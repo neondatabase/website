@@ -36,7 +36,7 @@ Each Compute Unit (CU) provides approximately 4 GB of RAM. For more information,
 
 | Limit                          | Value                 | Notes                                         |
 | :----------------------------- | :-------------------- | :-------------------------------------------- |
-| Postgres `max_connections`                | 104–4,000             | Varies by compute size; see table below       |
+| Postgres `max_connections`     | 104–4,000             | Varies by compute size; see table below       |
 | Pooled connections (PgBouncer) | 10,000 concurrent     | Across all connections to the pooler endpoint |
 | default_pool_size              | 0.9 × max_connections | Per user/database pair                        |
 | max_prepared_statements        | 1,000                 | PgBouncer setting                             |
