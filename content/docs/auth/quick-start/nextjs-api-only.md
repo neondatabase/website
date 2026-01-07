@@ -12,23 +12,23 @@ This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.
 
 <TwoColumnLayout>
 
-<TwoColumnStep title="Enable Auth in your Neon project">
-  <LeftContent>
+<TwoColumnLayout.Step title="Enable Auth in your Neon project">
+<TwoColumnLayout.Block>
 
 Enable Auth in your [Neon project](https://console.neon.tech) and copy your Auth URL from Configuration.
 
 **Console path:** Project → Branch → Auth → Configuration
 
-  </LeftContent>
-  <RightImage label="Console">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Console">
 
 ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
 
-  </RightImage>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Install the Neon SDK">
-  <LeftContent>
+<TwoColumnLayout.Step title="Install the Neon SDK">
+<TwoColumnLayout.Block>
 
 Install the Neon SDK into your Next.js app.
 
@@ -40,18 +40,18 @@ cd my-app
 ```
 </details>
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm install @neondatabase/auth
 ```
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Set up environment variables">
-  <LeftContent>
+<TwoColumnLayout.Step title="Set up environment variables">
+<TwoColumnLayout.Block>
 
 Create a `.env.local` file in your project root and add your Auth URL:
 
@@ -59,23 +59,23 @@ Create a `.env.local` file in your project root and add your Auth URL:
 Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
-  </LeftContent>
-  <RightCode label=".env.local">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label=".env.local">
 
 ```bash
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Set up your auth API routes">
-  <LeftContent>
+<TwoColumnLayout.Step title="Set up your auth API routes">
+<TwoColumnLayout.Block>
 
 We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
 
-  </LeftContent>
-  <RightCode label="app/api/auth/[...path]/route.ts">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
 
 ```typescript
 import { authApiHandler } from '@neondatabase/auth/next/server';
@@ -83,16 +83,16 @@ import { authApiHandler } from '@neondatabase/auth/next/server';
 export const { GET, POST } = authApiHandler();
 ```
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Add neonAuthMiddleware()">
-  <LeftContent>
+<TwoColumnLayout.Step title="Add neonAuthMiddleware()">
+<TwoColumnLayout.Block>
 
 The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
 
-  </LeftContent>
-  <RightCode label="proxy.ts">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="proxy.ts">
 
 ```typescript
 import { neonAuthMiddleware } from "@neondatabase/auth/next/server";
@@ -110,15 +110,16 @@ export const config = {
 };
 ```
 
-  </RightCode>
-</TwoColumnStep>
-
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Footer>
 <Admonition type="note">
-Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
+Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context.
 </Admonition>
+</TwoColumnLayout.Footer>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Configure the auth clients">
-  <LeftContent>
+<TwoColumnLayout.Step title="Configure the auth clients">
+<TwoColumnLayout.Block>
 
 **Client Components:**
 
@@ -128,8 +129,8 @@ Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed
 
 - To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
 
-  </LeftContent>
-  <RightCode>
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 <Tabs labels={["Auth Client", "Auth Server"]}>
 
 <TabItem>
@@ -144,8 +145,8 @@ import { createAuthClient } from '@neondatabase/auth/next';
 export const authClient = createAuthClient();
 ```
 
-  </TabItem>
-  <TabItem>
+</TabItem>
+<TabItem>
 
 Copy and paste following code in `lib/auth/server.ts` file:
 
@@ -155,21 +156,21 @@ import { createAuthServer } from '@neondatabase/auth/next/server';
 export const authServer = createAuthServer();
 ```
 
-  </TabItem>
-  </Tabs>
-  </RightCode>
-</TwoColumnStep>
+</TabItem>
+</Tabs>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Create Sign up form">
-  <LeftContent>
+<TwoColumnLayout.Step title="Create Sign up form">
+<TwoColumnLayout.Block>
 
 Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth server instance we created in previous step
 
 - To create user with email and password, we will use `authServer.signUp.email()` with user name, email address, and password
 - You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
 
-  </LeftContent>
-  <RightCode>
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 <Tabs labels={["Signup action", "Signup form"]}>
 <TabItem>
@@ -211,8 +212,8 @@ export async function signUpWithEmail(
 }
 ```
 
-  </TabItem>
-  <TabItem>
+</TabItem>
+<TabItem>
 
 Copy and paste following code in `app/auth/sign-up/page.tsx` file:
 
@@ -267,21 +268,21 @@ export default function SignUpForm() {
 }
 ```
 
-  </TabItem>
-  </Tabs>
+</TabItem>
+</Tabs>
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Create Sign in form">
-  <LeftContent>
+<TwoColumnLayout.Step title="Create Sign in form">
+<TwoColumnLayout.Block>
 
 Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts` files respectively.
 
 - To sign-in the user we will use `authServer.signIn.email()` with user's email address and password.
 
-  </LeftContent>
-  <RightCode label="Sign In">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Sign In">
 
 <Tabs labels={["Sign-in action", "Sign-in form"]}>
 <TabItem>
@@ -309,8 +310,8 @@ export async function signInWithEmail(
 }
 ```
 
-  </TabItem>
-  <TabItem>
+</TabItem>
+<TabItem>
 
 ```tsx
 'use client';
@@ -356,19 +357,19 @@ export default function SignInForm() {
 }
 ```
 
-  </TabItem>
-  </Tabs>
+</TabItem>
+</Tabs>
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Create home page">
-  <LeftContent>
+<TwoColumnLayout.Step title="Create home page">
+<TwoColumnLayout.Block>
 
 In last step, lets create the home page and display authenticated user status:
 
-  </LeftContent>
-  <RightCode label="app/page.tsx">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="app/page.tsx">
 
 ```typescript
 import { authServer } from "@/lib/auth/server";
@@ -406,11 +407,11 @@ export default async function Home() {
 }
 ```
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
-<TwoColumnStep title="Start your app">
-  <LeftContent>
+<TwoColumnLayout.Step title="Start your app">
+<TwoColumnLayout.Block>
 
 Start the development server:
 
@@ -420,15 +421,15 @@ Open your browser to [http://localhost:3000](http://localhost:3000) and test sig
 Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- --experimental-https` and open `https://localhost:3000` instead.
 </Admonition>
 
-  </LeftContent>
-  <RightCode label="Terminal">
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
 
 ```bash
 npm run dev
 ```
 
-  </RightCode>
-</TwoColumnStep>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
 
 </TwoColumnLayout>
 
