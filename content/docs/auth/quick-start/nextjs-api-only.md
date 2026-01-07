@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 enableTableOfContents: true
-updatedOn: '2025-12-29T17:42:33.408Z'
+updatedOn: '2026-01-07T13:50:40.726Z'
 layout: wide
 ---
 
