@@ -2,7 +2,7 @@
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.224Z'
+updatedOn: '2026-01-06T13:11:04.216Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -50,7 +50,7 @@ You then need to decide whether to use direct connections or pooled connections 
 
 - **Use direct (unpooled) connections if you need persistent connections**
 
-  If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection.
+  If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection. Note that direct connections have limits based on your compute size (ranging from around 100 to 4,000 connections). For details on how this limit is calculated, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
 <Admonition type="note">
 PgBouncer can keep many application connections open (up to 10,000) concurrently, but only a certain number of these can be actively querying the Postgres server at any given time. This number is defined by the PgBouncer `default_pool_size` setting. See [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) for details.

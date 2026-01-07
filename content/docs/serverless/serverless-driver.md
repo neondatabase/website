@@ -212,7 +212,7 @@ You can customize the return format using the configuration options `fullResults
     rowCount: 1,
     rowAsArray: false,
     command: "SELECT"
-  } 
+  }
   */
   ```
 

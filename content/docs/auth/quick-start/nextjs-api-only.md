@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 enableTableOfContents: true
-updatedOn: '2025-12-29T17:42:33.408Z'
+updatedOn: '2026-01-07T13:50:40.726Z'
 layout: wide
 ---
 
@@ -113,21 +113,20 @@ export const config = {
   </RightCode>
 </TwoColumnStep>
 
-
-
 <Admonition type="note">
 Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context. 
 </Admonition>
-
 
 <TwoColumnStep title="Configure the auth clients">
   <LeftContent>
 
 **Client Components:**
-  - The Auth UI components are client rendered and need access to the auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
 
-**Server Components:** 
-  - To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
+- The Auth UI components are client rendered and need access to the auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
+
+**Server Components:**
+
+- To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
 
   </LeftContent>
   <RightCode>
@@ -166,15 +165,15 @@ export const authServer = createAuthServer();
 
 Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth server instance we created in previous step
 
-  - To create user with email and password, we will use `authServer.signUp.email()` with user name, email address, and password
-  - You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
+- To create user with email and password, we will use `authServer.signUp.email()` with user name, email address, and password
+- You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
 
   </LeftContent>
   <RightCode>
 
-  <Tabs labels={["Signup action", "Signup form"]}>
-  <TabItem>
-  
+<Tabs labels={["Signup action", "Signup form"]}>
+<TabItem>
+
 Copy and paste following code in `app/auth/sign-up/actions.ts` file:
 
 ```ts
@@ -227,9 +226,9 @@ export default function SignUpForm() {
   const [state, formAction, isPending] = useActionState(signUpWithEmail, null);
 
   return (
-    <form action={formAction} 
+    <form action={formAction}
       className="flex flex-col gap-5 min-h-screen items-center justify-center bg-gray-900">
-    
+
       <div className="w-sm">
         <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Create new account</h1>
       </div>
@@ -267,27 +266,26 @@ export default function SignUpForm() {
   );
 }
 ```
+
   </TabItem>
   </Tabs>
 
-
   </RightCode>
 </TwoColumnStep>
-
 
 <TwoColumnStep title="Create Sign in form">
   <LeftContent>
 
 Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts` files respectively.
 
-  - To sign-in the user we will use `authServer.signIn.email()` with user's email address and password.
+- To sign-in the user we will use `authServer.signIn.email()` with user's email address and password.
 
   </LeftContent>
   <RightCode label="Sign In">
 
-  <Tabs labels={["Sign-in action", "Sign-in form"]}>
-  <TabItem>
-  
+<Tabs labels={["Sign-in action", "Sign-in form"]}>
+<TabItem>
+
 ```ts
 'use server';
 
@@ -324,9 +322,9 @@ export default function SignInForm() {
   const [state, formAction, isPending] = useActionState(signInWithEmail, null);
 
   return (
-    <form action={formAction} 
+    <form action={formAction}
       className="flex flex-col gap-5 min-h-screen items-center justify-center bg-gray-900">
-    
+
       <div className="w-sm">
        <h1 className="mt-10 text-center text-2xl/9 font-bold text-white">Sign in to your account</h1>
       </div>
@@ -357,9 +355,9 @@ export default function SignInForm() {
   );
 }
 ```
+
   </TabItem>
   </Tabs>
-
 
   </RightCode>
 </TwoColumnStep>
@@ -392,13 +390,13 @@ export default async function Home() {
     <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
       <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>
       <div className="flex item-center gap-2">
-      <Link 
-        href='/auth/sign-up' 
+      <Link
+        href='/auth/sign-up'
         className="inline-flex text-lg text-indigo-400 hover:underline">
           Sign-up
       </Link>
-      <Link 
-        href='/auth/sign-in' 
+      <Link
+        href='/auth/sign-in'
         className="inline-flex text-lg text-indigo-400 hover:underline">
           Sign-in
       </Link>
@@ -421,7 +419,6 @@ Open your browser to [http://localhost:3000](http://localhost:3000) and test sig
 <Admonition type="note" title="Safari users">
 Safari blocks third-party cookies on non-HTTPS connections. Use `npm run dev -- --experimental-https` and open `https://localhost:3000` instead.
 </Admonition>
-
 
   </LeftContent>
   <RightCode label="Terminal">

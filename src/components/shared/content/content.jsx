@@ -23,13 +23,7 @@ import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwoColumnLayout, {
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
-} from 'components/pages/doc/two-column-layout';
+import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -174,11 +168,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Video,
   Steps,
   TwoColumnLayout,
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
   LogosSection,
   DeployPostgresButton,
   ChatOptions,
