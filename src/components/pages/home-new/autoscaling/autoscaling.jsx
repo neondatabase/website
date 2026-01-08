@@ -1,10 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
+import { m, LazyMotion, domAnimation } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import CountingNumber from 'components/shared/animation/counting-number';
 import Container from 'components/shared/container';
 import autoscalingLegendIcon from 'icons/home-new/autoscaling/legend/autoscaling.svg';
 import dbLoadLegendIcon from 'icons/home-new/autoscaling/legend/db-load.svg';
@@ -17,6 +19,18 @@ import Heading from '../heading';
 import Animation from './animation';
 
 const TABS = ['Avoid outages', 'Save costs'];
+
+const STATS = [
+  {
+    number: 13024,
+    text: 'outages prevented by Autoscaling this year',
+  },
+  {
+    prefix: '$',
+    number: 4764912,
+    text: 'dollars saved by Autoscaling this year',
+  },
+];
 
 const LEGEND = [
   {
@@ -61,12 +75,12 @@ const Autoscaling = () => {
               <button
                 className={clsx(
                   'relative h-11 min-w-[134px] whitespace-nowrap px-4 py-3 transition-colors duration-200',
-                  'text-[15px] font-medium leading-none tracking-tight',
+                  'font-medium leading-none tracking-extra-tight',
                   'border border-gray-new-10 even:border-l-0',
                   'focus-visible:z-10',
                   'xl:h-10 xl:min-w-[130px] lg:h-9 lg:min-w-[124px] lg:px-3 lg:py-2.5 md:text-[14px]',
                   index === activeItem
-                    ? 'pointer-events-none bg-white text-gray-new-10'
+                    ? 'bg-white text-gray-new-10'
                     : 'bg-[#E4F1EB] text-gray-new-10/80 hover:bg-white/70 hover:text-gray-new-10'
                 )}
                 key={index}
@@ -113,9 +127,35 @@ const Autoscaling = () => {
                 alt=""
               />
             </div>
+
+            <div className="relative z-20 -mt-8 border-b border-gray-new-10 bg-[#CAE6D9] px-3 py-2.5 2xl:-mt-7 xl:-mt-6">
+              <LazyMotion features={domAnimation}>
+                {STATS.map(({ prefix, number, text }, index) => {
+                  if (index !== activeItem) {
+                    return null;
+                  }
+
+                  return (
+                    <m.p
+                      className="text-pretty font-mono-new uppercase text-[#285D49] xl:text-sm lg:text-xs"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                      key={index}
+                    >
+                      <span className="font-semibold">
+                        {prefix}
+                        <CountingNumber number={number} started />
+                      </span>
+                      <span className="ml-2 font-medium">{text}</span>
+                    </m.p>
+                  );
+                })}
+              </LazyMotion>
+            </div>
           </div>
 
-          <div className="relative z-20 mt-5 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
+          <div className="relative z-20 mt-6 flex items-start justify-between gap-10 text-black-pure xl:mt-6 lg:mt-5 lg:flex-col lg:gap-10 md:gap-8">
             <ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5 xl:mt-0 lg:gap-x-7 xs:flex-col">
               {LEGEND.map((item, index) => (
                 <li

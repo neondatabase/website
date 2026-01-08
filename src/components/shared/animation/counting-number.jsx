@@ -5,10 +5,10 @@ import { useRef, useEffect } from 'react';
 const CountingNumber = ({
   number,
   fromNumber = 0,
-  inView = false,
   thousandsSeparator = ',',
   transition = { stiffness: 280, damping: 50 },
   delay = 0,
+  started = false,
   ...props
 }) => {
   const ref = useRef(null);
@@ -22,7 +22,7 @@ const CountingNumber = ({
   const springVal = useSpring(motionVal, transition);
 
   useEffect(() => {
-    if (inView) {
+    if (started) {
       // Apply delay only when starting animation (convert seconds to milliseconds)
       const timeoutId = setTimeout(() => {
         motionVal.set(number);
@@ -33,7 +33,7 @@ const CountingNumber = ({
     // Reset instantly without delay when out of view
     springVal.jump(fromNumber);
     motionVal.jump(fromNumber);
-  }, [inView, number, motionVal, springVal, delay, fromNumber]);
+  }, [started, number, motionVal, springVal, delay, fromNumber]);
 
   useEffect(() => {
     const unsubscribe = springVal.on('change', (latest) => {
@@ -46,11 +46,15 @@ const CountingNumber = ({
     return () => unsubscribe();
   }, [springVal, thousandsSeparator, ref]);
 
+  const finalText = addThousandsSeparator(number.toString(), thousandsSeparator);
   const initialText = addThousandsSeparator(fromNumber.toString(), thousandsSeparator);
 
   return (
-    <span ref={ref} data-slot="counting-number" {...props}>
-      {initialText}
+    <span className="relative" data-slot="counting-number" {...props}>
+      <span className="invisible opacity-0">{finalText}</span>
+      <span className="absolute left-0" ref={ref}>
+        {initialText}
+      </span>
     </span>
   );
 };
@@ -58,10 +62,10 @@ const CountingNumber = ({
 CountingNumber.propTypes = {
   number: PropTypes.number.isRequired,
   fromNumber: PropTypes.number,
-  inView: PropTypes.bool,
   thousandsSeparator: PropTypes.string,
   transition: PropTypes.object,
   delay: PropTypes.number,
+  started: PropTypes.bool,
 };
 
 export default CountingNumber;
