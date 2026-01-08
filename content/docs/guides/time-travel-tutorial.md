@@ -2,7 +2,7 @@
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
 enableTableOfContents: true
-updatedOn: '2025-08-07T10:06:24.020Z'
+updatedOn: '2025-12-11T15:40:49.863Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.
@@ -14,7 +14,7 @@ In this scenario, your team has recently introduced a streamlined checkout proce
 To follow this tutorial, you'll need:
 
 - A Neon account. [Sign up here](/docs/get-started/signing-up).
-- A [restore window](/docs/manage/projects#configure-restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
+- A [restore window](/docs/introduction/restore-window) that covers the timeframe of interest, allowing for effective use of Time Travel.
 
 <Steps>
 

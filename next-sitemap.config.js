@@ -27,6 +27,9 @@ module.exports = {
     '/radio',
     '/stackoverflow',
     '/youtube',
+
+    // Legacy docs
+    '/docs/auth/legacy/*',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -49,6 +52,9 @@ module.exports = {
           '/radio$',
           '/stackoverflow$',
           '/youtube$',
+
+          // Legacy docs
+          '/docs/auth/legacy/',
         ],
       },
     ],

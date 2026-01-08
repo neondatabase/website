@@ -167,7 +167,6 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                 theme="transparent"
                 size="xxs"
                 tagName="MobileMenu"
-                analyticsEvent="header_log_in_clicked"
               >
                 Log In
               </Button>
@@ -177,7 +176,6 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                 theme="white-filled-multi"
                 size="xxs"
                 tagName="MobileMenu"
-                analyticsEvent="header_sign_up_clicked"
               >
                 Sign Up
               </Button>

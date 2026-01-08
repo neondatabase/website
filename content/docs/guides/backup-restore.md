@@ -3,11 +3,13 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-12-03T15:06:05.464Z'
+updatedOn: '2026-01-06T10:43:28.875Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
 The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+
+**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -38,7 +40,7 @@ Instantly restore your branch to a specific time in its history.
 
 <TabItem>
 
-You can restore from any time that falls within your project's [restore window](/docs/manage/projects#configure-your-restore-window).
+You can restore from any time that falls within your project's [restore window](/docs/introduction/restore-window).
 
 1. **Select a time**
 
@@ -145,7 +147,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -439,5 +441,6 @@ Use this option if you need to inspect the restored data before you switch over 
 ## Limitations
 
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
+- **Reset from parent is unavailable on child branches for up to 24 hours after restoring a parent from a snapshot.** When you restore a branch from a snapshot, any child branches of that restored branch cannot use the [Reset from parent](/docs/guides/reset-from-parent) feature for up to 24 hours.
 
 <NeedHelp/>

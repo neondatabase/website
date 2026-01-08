@@ -59,6 +59,8 @@
               slug: import/migrate-from-heroku
             - title: MSSQL
               slug: import/migrate-mssql
+            - title: SQLite
+              slug: import/migrate-sqlite
             - title: MySQL
               slug: import/migrate-mysql
             - title: Render
@@ -148,24 +150,54 @@
           slug: guides/branch-expiration
         - title: Schema-only branches
           slug: guides/branching-schema-only
+        - title: Reset from parent
+          slug: guides/reset-from-parent
 
     - section: Read replicas
       icon: replications
       items:
-        - title: Neon read replicas
+        - title: Overview
           slug: introduction/read-replicas
+        - title: Create and manage
+          slug: guides/read-replica-guide
+        - title: Use cases
+          items:
+            - title: Read-only access
+              slug: guides/read-only-access-read-replicas
+            - title: Ad-hoc queries
+              slug: guides/read-replica-adhoc-queries
+            - title: Analytics queries
+              slug: guides/read-replica-data-analysis
+            - title: Scale applications
+              slug: guides/read-replica-integrations
+        - title: With ORMs
+          items:
+            - title: Prisma
+              slug: guides/read-replica-prisma
 
-    - section: Replication
+    - section: Logical replication
       icon: replications
       items:
-        - title: Logical replication
+        - title: Getting started
           slug: guides/logical-replication-guide
+        - title: Concepts
+          slug: guides/logical-replication-concepts
+        - title: In Neon
+          slug: guides/logical-replication-neon
+        - title: Commands
+          slug: guides/logical-replication-manage
+        - title: Schema changes
+          slug: guides/logical-replication-schema-changes
+        - title: Tips
+          slug: guides/logical-replication-tips
 
     - section: Data recovery
       icon: report
       items:
         - title: Backup & restore
           slug: guides/backup-restore
+        - title: Restore window
+          slug: introduction/restore-window
         - title: Instant restore
           slug: introduction/branch-restore
         - title: Time Travel
@@ -254,8 +286,12 @@
           items:
             - title: Astro
               slug: guides/astro
+            - title: Bun
+              slug: guides/bun
             - title: Entity Framework
               slug: guides/dotnet-entity-framework
+            - title: Encore
+              slug: guides/encore
             - title: Express
               slug: guides/express
             - title: Medusa.js
@@ -326,6 +362,10 @@
               slug: guides/drizzle
             - title: Elixir Ecto
               slug: guides/elixir-ecto
+            - title: Kysely
+              slug: guides/kysely
+            - title: Knex
+              slug: guides/knex
             - title: Laravel (Eloquent)
               slug: guides/laravel
             - title: Prisma
@@ -340,197 +380,129 @@
       items:
         - title: Data API
           icon: api
-          slug: data-api/get-started
+          slug: data-api/overview
           items:
-            - title: Get started
-              slug: data-api/get-started
-            - title: Building a note-taking app
-              slug: data-api/demo
-            - title: Secure your app with RLS
-              slug: guides/rls-tutorial
-            - title: SQL to PostgREST Converter
-              slug: data-api/sql-to-rest
-            - title: Custom authentication providers
-              slug: data-api/custom-authentication-providers
-            - title: Manage Data API
-              slug: data-api/manage
-            - title: Troubleshooting
-              slug: data-api/troubleshooting
+            - section: Introduction
+              items:
+                - title: Overview
+                  slug: data-api/overview
+                - title: Get started
+                  slug: data-api/get-started
 
+            - section: Guides
+              items:
+                - title: Access control & security
+                  slug: data-api/access-control
+                - title: Secure your app with RLS
+                  slug: guides/rls-tutorial
+                - title: Custom authentication providers
+                  slug: data-api/custom-authentication-providers
+
+            - section: Tools
+              items:
+                - title: JavaScript SDK (Auth & Data API)
+                  slug: reference/javascript-sdk
+                - title: SQL to REST API Translator
+                  slug: data-api/sql-to-rest
+                - title: Generate TypeScript types
+                  slug: data-api/generate-types
+
+            - section: Using the Data API
+              items:
+                - title: Building a note-taking app
+                  slug: data-api/demo
+                - title: Managing the Data API
+                  slug: data-api/manage
+                - title: Troubleshooting
+                  slug: data-api/troubleshooting
         - title: Neon Auth
           icon: auth
-          slug: neon-auth/overview
+          slug: auth/overview
           items:
-            - title: Overview
-              slug: neon-auth/overview
-            - title: Demo
-              slug: neon-auth/demo
+            - section: Introduction
+              items:
+                - title: Overview
+                  slug: auth/overview
+                - title: Authentication Flow
+                  slug: auth/authentication-flow
+                - title: Branching Authentication
+                  slug: auth/branching-authentication
+                - title: Roadmap
+                  slug: auth/roadmap
 
-            - title: Getting Started
+            - section: Quickstarts
               items:
                 - title: Next.js
-                  slug: neon-auth/quick-start/nextjs
+                  slug: auth/quick-start/nextjs
+                  items:
+                    - title: UI components
+                      slug: auth/quick-start/nextjs
+                    - title: API methods
+                      slug: auth/quick-start/nextjs-api-only
                 - title: React
-                  slug: neon-auth/quick-start/react
-                - title: JavaScript
-                  slug: neon-auth/quick-start/javascript
-
-            - title: Concepts
-              items:
-                - title: How Neon Auth Works
-                  slug: neon-auth/how-it-works
-                - title: Guidance (Deep Dive)
-                  slug: neon-auth/tutorial
-                - title: Core Concepts
-                  slug: neon-auth/concepts/stack-app
+                  slug: auth/quick-start/react
                   items:
-                    - title: The StackApp Object
-                      slug: neon-auth/concepts/stack-app
-                    - title: OAuth Authentication
-                      slug: neon-auth/concepts/oauth
-                    - title: Custom User Data
-                      slug: neon-auth/concepts/custom-user-data
-                    - title: App/user permissions
-                      slug: neon-auth/concepts/permissions
-                    - title: Organizations and Teams
-                      slug: neon-auth/concepts/orgs-and-teams
-                    - title: Selecting a Team
-                      slug: neon-auth/concepts/team-selection
-                    - title: User Onboarding
-                      slug: neon-auth/concepts/user-onboarding
-                    - title: Backend Integration
-                      slug: neon-auth/concepts/backend-integration
+                    - title: UI components
+                      slug: auth/quick-start/react-router-components
+                    - title: API methods
+                      slug: auth/quick-start/react
+                - title: TanStack Router
+                  slug: auth/quick-start/tanstack-router
 
-            - title: Guides
+            - section: Guides
               items:
-                - title: Best practices
-                  slug: neon-auth/best-practices
-                - title: Creating Users
-                  slug: neon-auth/create-users
-                - title: Claiming a Project
-                  slug: neon-auth/claim-project
-                - title: Permissions
-                  slug: neon-auth/permissions-roles
-                - title: Email configuration
-                  slug: neon-auth/email-configuration
+                - title: Email verification
+                  slug: auth/guides/email-verification
+                - title: Set up OAuth
+                  slug: auth/guides/setup-oauth
+                - title: Password reset
+                  slug: auth/guides/password-reset
+                - title: User management
+                  slug: auth/guides/user-management
+                - title: Configure domains
+                  slug: auth/guides/configure-domains
+                - title: Production checklist
+                  slug: auth/production-checklist
 
-            - title: SDKs & API
+            - section: Plugins
               items:
-                - title: Next.js SDK
-                  slug: neon-auth/sdk/nextjs/overview
+                - title: Supported plugins
+                  slug: auth/guides/plugins
                   items:
-                    - title: Overview
-                      slug: neon-auth/sdk/nextjs/overview
-                    - title: Objects
-                      slug: neon-auth/sdk/nextjs/objects/stack-app
-                      items:
-                        - title: StackClientApp
-                          slug: neon-auth/sdk/nextjs/objects/stack-app
-                        - title: StackServerApp
-                          slug: neon-auth/sdk/nextjs/objects/stack-server-app
-                    - title: Types
-                      slug: neon-auth/sdk/nextjs/types/contact-channel
-                      items:
-                        - title: ContactChannel
-                          slug: neon-auth/sdk/nextjs/types/contact-channel
-                        - title: API Key
-                          slug: neon-auth/sdk/nextjs/types/api-key
-                        - title: Project
-                          slug: neon-auth/sdk/nextjs/types/project
-                        - title: Team
-                          slug: neon-auth/sdk/nextjs/types/team
-                        - title: TeamPermission
-                          slug: neon-auth/sdk/nextjs/types/team-permission
-                        - title: TeamProfile
-                          slug: neon-auth/sdk/nextjs/types/team-profile
-                        - title: TeamUser
-                          slug: neon-auth/sdk/nextjs/types/team-user
-                        - title: User
-                          slug: neon-auth/sdk/nextjs/types/user
-                    - title: Hooks
-                      slug: neon-auth/sdk/nextjs/hooks/use-stack-app
-                      items:
-                        - title: useStackApp
-                          slug: neon-auth/sdk/nextjs/hooks/use-stack-app
-                        - title: useUser
-                          slug: neon-auth/sdk/nextjs/hooks/use-user
+                    - title: Admin
+                      slug: auth/guides/plugins/admin
+                    - title: Email OTP
+                      slug: auth/guides/plugins/email-otp
+                    - title: JWT
+                      slug: auth/guides/plugins/jwt
+                    - title: OpenAPI
+                      slug: auth/guides/plugins/openapi
+                    - title: Organization
+                      slug: auth/guides/plugins/organization
 
-                - title: React SDK
-                  slug: neon-auth/sdk/react/overview
-                  items:
-                    - title: Overview
-                      slug: neon-auth/sdk/react/overview
-                    - title: Objects
-                      slug: neon-auth/sdk/react/objects/stack-app
-                      items:
-                        - title: StackClientApp
-                          slug: neon-auth/sdk/react/objects/stack-app
-                    - title: Types
-                      slug: neon-auth/sdk/react/types/user
-                      items:
-                        - title: User
-                          slug: neon-auth/sdk/react/types/user
-                        - title: Team
-                          slug: neon-auth/sdk/react/types/team
-                        - title: Project
-                          slug: neon-auth/sdk/react/types/project
-                    - title: Hooks
-                      slug: neon-auth/sdk/react/hooks/use-stack-app
-                      items:
-                        - title: useStackApp
-                          slug: neon-auth/sdk/react/hooks/use-stack-app
-                        - title: useUser
-                          slug: neon-auth/sdk/react/hooks/use-user
-
-                - title: Components
-                  slug: neon-auth/components/components
-                  items:
-                    - title: All Components
-                      slug: neon-auth/components/components
-                    - title: UI Components
-                      slug: neon-auth/components/user-button
-                      items:
-                        - title: UserButton
-                          slug: neon-auth/components/user-button
-                        - title: SelectedTeamSwitcher
-                          slug: neon-auth/components/selected-team-switcher
-                        - title: AccountSettings
-                          slug: neon-auth/components/account-settings
-                        - title: SignIn
-                          slug: neon-auth/components/sign-in
-                        - title: SignUp
-                          slug: neon-auth/components/sign-up
-                        - title: CredentialSignIn
-                          slug: neon-auth/components/credential-sign-in
-                        - title: CredentialSignUp
-                          slug: neon-auth/components/credential-sign-up
-                        - title: OAuthButton
-                          slug: neon-auth/components/oauth-button
-                        - title: OAuthButtonGroup
-                          slug: neon-auth/components/oauth-button-group
-                    - title: Utilities
-                      slug: neon-auth/components/stack-handler
-                      items:
-                        - title: StackHandler
-                          slug: neon-auth/components/stack-handler
-                        - title: StackProvider
-                          slug: neon-auth/components/stack-provider
-                        - title: StackTheme
-                          slug: neon-auth/components/stack-theme
-
-                - title: Admin API
-                  slug: neon-auth/api
-
-            - title: Customization
+            - section: Reference
               items:
-                - title: Colors and Styles
-                  slug: neon-auth/customization/custom-styles
-                - title: Dark/Light Mode
-                  slug: neon-auth/customization/dark-mode
-                - title: Internationalization
-                  slug: neon-auth/customization/internationalization
-                - title: Custom Pages
-                  slug: neon-auth/customization/custom-pages
+                - title: JavaScript SDK (Auth & Data API)
+                  slug: reference/javascript-sdk
+                - title: UI Components
+                  slug: auth/reference/ui-components
+
+            - section: Migration Guides
+              items:
+                - title: From Stack Auth (legacy)
+                  slug: auth/migrate/from-legacy-auth
+                - title: From Supabase
+                  slug: auth/migrate/from-supabase
+
+            - section: Legacy (archive)
+              items:
+                - title: Stack Auth
+                  slug: auth/legacy/overview
+                  items:
+                    - title: Introduction
+                      slug: auth/legacy/overview
+                    - title: Database integration
+                      slug: auth/legacy/database-integration
 
         - title: Postgres RLS
           icon: lock
@@ -635,6 +607,8 @@
                   slug: ai/ai-vector-search-optimization
                 - title: Scale with Neon
                   slug: ai/ai-scale-with-neon
+            - title: Google Colab
+              slug: ai/ai-google-colab
     - section: Tools & Workflows
       items:
         - title: Dev tools (API, CLI, SDKs)
@@ -686,16 +660,20 @@
             - section: SDKs
               icon: sdk
               items:
-                - title: TypeScript SDK
+                - title: Overview
+                  slug: reference/sdk
+                - title: JavaScript SDK (Auth & Data API)
+                  slug: reference/javascript-sdk
+                - title: TypeScript SDK (Neon API)
                   slug: reference/typescript-sdk
-                - title: Python SDK
+                - title: Python SDK (Neon API)
                   slug: reference/python-sdk
                 - title: The @neondatabase/toolkit
                   slug: reference/neondatabase-toolkit
-                - title: Go SDK
+                - title: Go SDK (Neon API)
                   slug: https://github.com/kislerdm/neon-sdk-go
                   tag: community
-                - title: Node.js / Deno SDK
+                - title: Node.js / Deno SDK (Neon API)
                   slug: https://github.com/paambaati/neon-js-sdk
                   tag: community
 
@@ -881,6 +859,10 @@
                   slug: guides/auth-clerk
                 - title: Okta
                   slug: guides/auth-okta
+            - title: Develop
+              items:
+                - title: GitHub integration
+                  slug: guides/neon-github-integration
 
         - title: Workflows & CI/CD
           icon: branching
@@ -970,6 +952,8 @@
               slug: manage/overview
             - title: Projects
               slug: manage/projects
+            - title: Multitenancy
+              slug: guides/multitenancy
             - title: Branches
               slug: manage/branches
             - title: Computes
@@ -996,7 +980,7 @@
               slug: introduction/monitor-active-queries
             - title: Query performance
               slug: introduction/monitor-query-performance
-            - title: External monitoring
+            - title: Third-party monitoring
               items:
                 - title: Datadog
                   slug: guides/datadog
@@ -1004,10 +988,12 @@
                   slug: guides/grafana-cloud
                 - title: OpenTelemetry
                   slug: guides/opentelemetry
+                - title: pgAdmin
+                  slug: introduction/monitor-pgadmin
+                - title: PgHero
+                  slug: introduction/monitor-pghero
                 - title: Metrics and logs reference
                   slug: reference/metrics-logs
-                - title: Other monitoring tools
-                  slug: introduction/monitor-external-tools
 
         - section: Operations & maintenance
           icon: settings
@@ -1098,11 +1084,11 @@
   icon: book
   subnav:
     - title: Extensions
-      slug: extensions/extensions-intro
+      slug: extensions/pg-extensions
       icon: extension
       items:
-        - title: Supported extensions
-          slug: extensions/pg-extensions
+        - title: Extension explorer
+          slug: extensions/extension-explorer
         - title: anon
           slug: extensions/postgresql-anonymizer
         - title: btree_gin
@@ -1131,6 +1117,8 @@
           slug: extensions/neon
         - title: neon_utils
           slug: extensions/neon-utils
+        - title: online_advisor
+          slug: extensions/online_advisor
         - title: pgcrypto
           slug: extensions/pgcrypto
         - title: pgvector
@@ -1147,6 +1135,8 @@
           slug: extensions/pg_partman
         - title: pg_prewarm
           slug: extensions/pg_prewarm
+        - title: pg_session_jwt
+          slug: extensions/pg_session_jwt
         - title: pg_stat_statements
           slug: extensions/pg_stat_statements
         - title: pg_repack
@@ -1425,3 +1415,11 @@
           slug: introduction/agent-plan
         - title: AI Agent integration
           slug: guides/ai-agent-integration
+
+    - section: Guides
+      icon: book
+      items:
+        - title: Get started with your integration
+          slug: guides/platform-integration-get-started
+        - title: Claimable database integration
+          slug: workflows/claimable-database-integration

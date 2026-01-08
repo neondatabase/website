@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import { usePostHog } from 'posthog-js/react';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -23,7 +22,6 @@ const rowClass = {
 
 const TableHeading = ({
   className,
-  planId,
   label,
   price,
   buttonUrl,
@@ -31,8 +29,6 @@ const TableHeading = ({
   isLabelsColumn,
   isFeaturedPlan,
 }) => {
-  const posthog = usePostHog();
-
   // placeholder for the labels column
   if (isLabelsColumn) {
     return <div className="invisible h-[120px]" aria-hidden />;
@@ -61,13 +57,6 @@ const TableHeading = ({
         theme={isFeaturedPlan ? 'primary' : 'gray-20'}
         to={buttonUrl}
         tagName={`Details Table Top > ${label}`}
-        onClick={() => {
-          posthog.capture('ui_interaction', {
-            action: 'pricing_page_get_started_clicked',
-            plan: planId,
-            place: 'table_heading',
-          });
-        }}
       >
         {buttonText}
       </Button>
@@ -77,7 +66,6 @@ const TableHeading = ({
 
 TableHeading.propTypes = {
   className: PropTypes.string,
-  planId: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   price: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
@@ -145,7 +133,6 @@ const Table = () => {
             >
               <TableHeading
                 className={clsx(i === 1 && 'lg:ml-5')}
-                planId={key}
                 isLabelsColumn={isLabelsColumn}
                 isFeaturedPlan={isHighlightedColumn}
                 {...labelList[isLabelsColumn ? arr[1] : key]}
@@ -240,9 +227,10 @@ const Table = () => {
                         className={clsx(
                           'flex flex-col gap-y-1 font-light leading-snug tracking-extra-tight text-gray-new-90',
                           '[&_span]:text-sm [&_span]:text-gray-new-50',
-                          '[&_a]:w-fit [&_a]:rounded-sm [&_a]:text-primary-2',
+                          '[&>a]:text-green-45 [&_span_a]:underline',
+                          '[&_a]:w-fit [&_a]:decoration-gray-new-50 [&_a]:underline-offset-4',
                           '[&_a]:transition-colors [&_a]:duration-200',
-                          '[&_a:hover]:underline [&_a]:underline-offset-2'
+                          '[&_a:hover]:text-green-45 [&_a:hover]:underline [&_a:hover]:decoration-green-45'
                         )}
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}

@@ -4,7 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various ORMs
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/orms
-updatedOn: '2025-08-02T10:33:29.255Z'
+updatedOn: '2025-12-12T13:14:07.923Z'
 ---
 
 <TechCards>
@@ -14,6 +14,8 @@ updatedOn: '2025-08-02T10:33:29.255Z'
 <a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
 
 <a href="/docs/guides/elixir-ecto" title="Elixir Ecto" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
+
+<a href="/docs/guides/kysely" title="Kysely" description="Learn how to connect from Kysely to your Neon Postgres database" icon="kysely"></a>
 
 <a href="/docs/guides/laravel" title="Laravel" description="Connect a Laravel application to Neon" icon="laravel"></a>
 

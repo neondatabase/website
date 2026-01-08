@@ -122,7 +122,6 @@ const Hero = () => {
               to={LINKS.signup}
               target="_blank"
               tagName="Hero"
-              analyticsEvent="home_hero_start_for_free_clicked"
             >
               Start for Free
             </Button>
@@ -131,7 +130,6 @@ const Hero = () => {
               theme="white"
               to={LINKS.contactSales}
               tagName="Hero"
-              analyticsEvent="home_hero_talk_to_us_clicked"
               withArrow
             >
               Talk to Us

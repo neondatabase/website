@@ -4,7 +4,7 @@ subtitle: Enhancing development workflows with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2025-11-13T02:12:26.594Z'
+updatedOn: '2025-12-22T13:54:25.159Z'
 ---
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.
@@ -72,7 +72,7 @@ Postgres extensions are add-ons that enhance the functionality of Postgres, lett
 - **pgcrypto**: Offers cryptographic functions, including data encryption and decryption.
 - **pgvector**: Brings vector similarity search to Postgres for building AI applications.
 
-These are just a few of the extensions supported by Neon. Explore all supported extensions [here](/docs/extensions/extensions-intro).
+These are just a few of the extensions supported by Neon. Explore all supported extensions [here](/docs/extensions/pg-extensions).
 
 Extensions can be installed with a simple `CREATE EXTENSION` command from Neon's [SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client; for example:
 

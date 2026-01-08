@@ -3,7 +3,10 @@ title: Integrating with Neon
 subtitle: Choose the right integration path for your platform or application
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-28T18:21:08.467Z'
+redirectFrom:
+  - /docs/guides/partner-intro
+  - /docs/guides/platform-integration-intro
+updatedOn: '2026-01-06T18:58:21.262Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.

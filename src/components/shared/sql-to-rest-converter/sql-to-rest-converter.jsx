@@ -19,18 +19,42 @@ import CodeBlockWrapper from 'components/shared/code-block-wrapper';
 import highlight from 'lib/shiki';
 
 const neonImportLibrary = `
-import { PostgrestClient } from "@supabase/postgrest-js";
+import { createClient } from "@neondatabase/neon-js";
 
 // An example of how to use the data api with neon auth can be found here:
 // https://github.com/neondatabase-labs/neon-data-api-neon-auth
 
-const postgRESTClient = new PostgrestClient('DATA-API-URL', {
-    headers: {
-        'Authorization': \`Bearer \${access_token}\`,
-    }
+const client = createClient<Database>({
+  auth: {
+    url: 'NEON-AUTH-URL',
+  },
+  dataApi: {
+    url: 'DATA-API-URL',
+  },
 });
 
-const { data, error } = await postgRESTClient`;
+
+// Perform signin using client.auth before making any requests to the data api
+
+const { data, error } = await client`;
+
+const neonImportLibraryOwnAuth = `
+import { fetchWithToken, NeonPostgrestClient } from '@neondatabase/postgrest-js';
+
+const client = new NeonPostgrestClient({
+  dataApiUrl: 'DATA-API-URL',
+  options: {
+    global: {
+      // Replace this with your actual token fetching logic, e.g., from your auth provider
+      fetch: fetchWithToken(async () => {
+        // Example: return await getAccessTokenFromAuthProvider();
+        return 'your-access-token-here';
+      }),
+    },
+  }
+});
+
+const { data, error } = await client`;
 
 const SqlToRestConverter = () => {
   const [sqlQuery, setSqlQuery] = useState(`select
@@ -49,8 +73,10 @@ offset
 
   const [curlOutput, setCurlOutput] = useState('');
   const [httpOutput, setHttpOutput] = useState('');
-  const [jsOutput, setJsOutput] = useState('');
-  const [highlightedJs, setHighlightedJs] = useState('');
+  const [jsOutputNeonAuth, setJsOutputNeonAuth] = useState('');
+  const [jsOutputOwnAuth, setJsOutputOwnAuth] = useState('');
+  const [highlightedJsNeonAuth, setHighlightedJsNeonAuth] = useState('');
+  const [highlightedJsOwnAuth, setHighlightedJsOwnAuth] = useState('');
   const [highlightedCurl, setHighlightedCurl] = useState('');
   const [highlightedHttp, setHighlightedHttp] = useState('');
   const [error, setError] = useState('');
@@ -67,13 +93,22 @@ offset
 
       const rawHttp = formatHttp(baseUrl, httpRequest);
 
-      let { code: jsCode } = await renderSupabaseJs(statement);
+      const { code: jsCode } = await renderSupabaseJs(statement);
 
-      jsCode = jsCode.replace('const { data, error } = await supabase', neonImportLibrary);
+      const jsCodeWithNeon = jsCode.replace(
+        'const { data, error } = await supabase',
+        neonImportLibrary
+      );
+
+      const jsCodeWithOwnAuth = jsCode.replace(
+        'const { data, error } = await supabase',
+        neonImportLibraryOwnAuth
+      );
 
       setCurlOutput(curlCommand);
       setHttpOutput(rawHttp);
-      setJsOutput(jsCode);
+      setJsOutputNeonAuth(jsCodeWithNeon);
+      setJsOutputOwnAuth(jsCodeWithOwnAuth);
     } catch (err) {
       setError(err.message || 'An error occurred while converting SQL');
     }
@@ -91,12 +126,14 @@ offset
   useEffect(() => {
     const highlightAll = async () => {
       try {
-        const [jsHtml, curlHtml, httpHtml] = await Promise.all([
-          highlight(jsOutput || '', 'javascript'),
+        const [jsHtmlNeon, jsHtmlOwn, curlHtml, httpHtml] = await Promise.all([
+          highlight(jsOutputNeonAuth || '', 'javascript'),
+          highlight(jsOutputOwnAuth || '', 'javascript'),
           highlight(curlOutput || '', 'bash'),
           highlight(httpOutput || '', 'text'),
         ]);
-        setHighlightedJs(jsHtml);
+        setHighlightedJsNeonAuth(jsHtmlNeon);
+        setHighlightedJsOwnAuth(jsHtmlOwn);
         setHighlightedCurl(curlHtml);
         setHighlightedHttp(httpHtml);
       } catch (e) {
@@ -104,7 +141,7 @@ offset
       }
     };
     highlightAll();
-  }, [jsOutput, curlOutput, httpOutput]);
+  }, [jsOutputNeonAuth, jsOutputOwnAuth, curlOutput, httpOutput]);
 
   return (
     <div className="sql-to-rest-converter">
@@ -132,8 +169,17 @@ offset
           )}
 
           {!error && (
-            <CodeTabs labels={['JavaScript', 'cURL', 'HTTP']}>
-              <CodeBlockWrapper>{parse(highlightedJs || '')}</CodeBlockWrapper>
+            <CodeTabs
+              labels={[
+                'JavaScript (With Neon Auth)',
+                'JavaScript (Bring your own Auth)',
+                'cURL',
+                'HTTP',
+              ]}
+            >
+              <CodeBlockWrapper>{parse(highlightedJsNeonAuth || '')}</CodeBlockWrapper>
+
+              <CodeBlockWrapper>{parse(highlightedJsOwnAuth || '')}</CodeBlockWrapper>
 
               <CodeBlockWrapper>{parse(highlightedCurl || '')}</CodeBlockWrapper>
 

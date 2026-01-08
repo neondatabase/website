@@ -11,7 +11,7 @@ export default [
     features: [
       {
         icon: 'projects',
-        title: '80 projects',
+        title: '100 projects',
         info: '<p>A project is a top-level container<br/> for your database environment.</p>',
         moreLink: { text: 'Read more', href: '#what-is-a-project' },
       },
@@ -34,6 +34,7 @@ export default [
     otherFeatures: {
       title: 'Features',
       features: [
+        { title: 'Auth', tag: 'new' },
         { title: 'Autoscaling' },
         { title: 'Read replicas' },
         { title: 'Built-in high availability' },
@@ -42,7 +43,6 @@ export default [
     button: {
       url: LINKS.signup,
       event: 'Hero Free Tier Panel',
-      analyticsEvent: 'pricing_page_get_started_with_free_plan_clicked',
     },
   },
   {
@@ -81,7 +81,6 @@ export default [
       url: `${LINKS.console}/app/billing#plans`,
       theme: 'primary',
       event: 'Hero Launch Panel',
-      analyticsEvent: 'pricing_page_get_started_with_launch_plan_clicked',
     },
   },
   {
@@ -126,7 +125,6 @@ export default [
       url: `${LINKS.console}/app/billing#plans`,
       theme: 'primary',
       event: 'Hero Scale Panel',
-      analyticsEvent: 'pricing_page_get_started_with_scale_plan_clicked',
     },
   },
 ];

@@ -25,10 +25,12 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
-          <small className="flex flex-wrap gap-x-1 gap-y-1.5 whitespace-nowrap text-[13px] leading-none tracking-extra-tight text-gray-new-40 xl:flex-col lg:flex-row sm:flex-col">
-            <span>Made in SF and the World</span>
-            <span>Copyright Ⓒ 2022 – {new Date().getFullYear()} Neon, LLC</span>
-          </small>
+          <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
+            <p>Made in SF and the World</p>
+            <p>
+              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2026 Neon, LLC
+            </p>
+          </div>
         </div>
       </div>
 

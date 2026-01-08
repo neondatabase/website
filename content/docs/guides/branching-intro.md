@@ -2,7 +2,7 @@
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
 enableTableOfContents: true
-updatedOn: '2025-11-13T02:12:26.596Z'
+updatedOn: '2025-12-11T15:40:49.861Z'
 ---
 
 Find detailed information and instructions about Neon's branching feature and how you can integrate branching with your development workflows.
@@ -69,7 +69,7 @@ Recover lost data or track down issues by restoring a branch to its history, or 
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your restore window" icon="invert">Instant restore with Time Travel Assist</a>
+<a href="/docs/guides/branch-restore" description="Learn how to instantly recover your database to any point in time within your [restore window](/docs/introduction/restore-window)" icon="invert">Instant restore with Time Travel Assist</a>
 
 <a href="/docs/guides/time-travel-assist" description="Query point-in-time connections with Time Travel " icon="invert">Time Travel</a>
 

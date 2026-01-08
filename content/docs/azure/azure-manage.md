@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-10-30T16:15:01.779Z'
+updatedOn: '2025-12-11T15:40:49.852Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -39,7 +39,7 @@ See [Create a project](/docs/manage/projects#create-a-project) for how to create
 
 ## Create branches
 
-A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](/docs/manage/projects#configure-your-restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](/docs/introduction/branching).
+A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](/docs/introduction/restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](/docs/introduction/branching).
 
 To create branches in the Azure Portal:
 

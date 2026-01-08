@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2025-12-03T13:07:33.021Z'
+updatedOn: '2026-01-06T13:11:04.219Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -31,16 +31,16 @@ Each Postgres connection creates a new process in the operating system, which co
 
 | Compute size (CU) | RAM    | max_connections |
 | :---------------- | :----- | :-------------- |
-| 0.25              | 1 GB   | 112             |
-| 0.50              | 2 GB   | 225             |
-| 1                 | 4 GB   | 450             |
-| 2                 | 8 GB   | 901             |
-| 3                 | 12 GB  | 1351            |
-| 4                 | 16 GB  | 1802            |
-| 5                 | 20 GB  | 2253            |
-| 6                 | 24 GB  | 2703            |
-| 7                 | 28 GB  | 3154            |
-| 8                 | 32 GB  | 3604            |
+| 0.25              | 1 GB   | 104             |
+| 0.50              | 2 GB   | 209             |
+| 1                 | 4 GB   | 419             |
+| 2                 | 8 GB   | 839             |
+| 3                 | 12 GB  | 1258            |
+| 4                 | 16 GB  | 1678            |
+| 5                 | 20 GB  | 2098            |
+| 6                 | 24 GB  | 2517            |
+| 7                 | 28 GB  | 2937            |
+| 8                 | 32 GB  | 3357            |
 | 9                 | 36 GB  | 4000            |
 | 10                | 40 GB  | 4000            |
 | 11                | 44 GB  | 4000            |

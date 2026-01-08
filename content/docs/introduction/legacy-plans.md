@@ -4,12 +4,12 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-12-03T13:07:33.035Z'
+updatedOn: '2026-01-07T13:15:53.853Z'
 ---
 
 This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.
 
-If you're on a legacy paid plan, you can stay on it, but once you [switch to a new plan](/docs/introduction/manage-billing#change-your-plan), you cannot switch back.
+If you're on a legacy paid plan, you will automatically be switched to a new plan in February 2026. You can [switch to a new plan sooner](/docs/introduction/manage-billing#change-your-plan), but you cannot switch back.
 
 <Admonition type="important">
 You cannot upgrade or downgrade to a legacy plan. See our [current usage-based plans](/docs/introduction/plans) for options.
@@ -314,7 +314,7 @@ Here are some strategies to consider:
 
 - **Consider the impact of deletions**
 
-  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your retention window. For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
+  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your [restore window](/docs/introduction/restore-window). For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
 
 - **Delete or reset branches before they age out**
 
@@ -340,7 +340,7 @@ These factors could be contributing to your high storage consumption:
 - **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
 - **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
 
-To mitigate this issue, consider adjusting your [restore window](/docs/introduction/branching#restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
+To mitigate this issue, consider adjusting your [restore window](/docs/introduction/restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
 
 Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
 
@@ -396,7 +396,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 </details>
 

@@ -31,6 +31,7 @@ export default {
   stage: '/stage',
   startups: '/startups',
   storage: '/storage',
+  subprocessorsSubscribe: '/subscribe-to-subprocessors',
   templates: '/templates',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',

@@ -2,10 +2,8 @@
 title: SQL to PostgREST Converter
 subtitle: Convert SQL queries to PostgREST API calls with real-time preview
 enableTableOfContents: false
-updatedOn: '2025-10-01T13:33:56.063Z'
+updatedOn: '2025-12-12T19:35:53.908Z'
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">

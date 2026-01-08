@@ -81,7 +81,6 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         theme="transparent"
         size="xxs"
         tagName="Header"
-        analyticsEvent="header_log_in_clicked"
       >
         Log In
       </Button>
@@ -91,7 +90,6 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         theme="white-filled-multi"
         size="xxs"
         tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
       >
         Sign Up
       </Button>

@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
 import { useEffect, useRef } from 'react';
 
+import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
+
 import Menu from '../menu';
 
 const containsActiveSlug = (menu, slug) => {
@@ -29,17 +31,30 @@ const getActiveMenu = (navigation, slug) =>
     })
     .find((item) => containsActiveSlug(item, slug));
 
-const Sidebar = ({ className = null, navigation, basePath, customType }) => {
+const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
   const pathname = usePathname();
   const currentSlug = pathname.replace(basePath, '');
   const menu = getActiveMenu(navigation, currentSlug);
   const navRef = useRef(null);
+
+  // Get SDK TOC for current page from pre-loaded data
+  const sdkTOC = sdkNavigation?.[currentSlug] || null;
 
   useEffect(() => {
     if (navRef.current) {
       navRef.current.scrollTop = 0;
     }
   }, [menu]);
+
+  const renderContent = sdkTOC ? (
+    <SDKTableOfContents
+      title={sdkTOC.title}
+      url={`${basePath}${currentSlug}`}
+      sections={sdkTOC.sections}
+    />
+  ) : (
+    <Menu basePath={basePath} {...menu} customType={customType} />
+  );
 
   return (
     <aside className={clsx('relative -mt-10', className)}>
@@ -55,7 +70,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
             className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
             ref={navRef}
           >
-            {menu && <Menu basePath={basePath} {...menu} customType={customType} />}
+            {renderContent}
           </nav>
         </div>
       </div>
@@ -66,12 +81,17 @@ const Sidebar = ({ className = null, navigation, basePath, customType }) => {
 Sidebar.propTypes = {
   className: PropTypes.string,
   navigation: PropTypes.array.isRequired,
-  slug: PropTypes.string.isRequired,
   basePath: PropTypes.string.isRequired,
   customType: PropTypes.shape({
     title: PropTypes.string,
     link: PropTypes.string,
   }),
+  sdkNavigation: PropTypes.objectOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      sections: PropTypes.array,
+    })
+  ),
 };
 
 export default Sidebar;

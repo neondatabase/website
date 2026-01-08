@@ -13,7 +13,7 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2025-12-09T15:31:41.488Z'
+updatedOn: '2026-01-06T13:09:53.162Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
@@ -39,7 +39,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | ----------------------------------------------------- | ---------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | [Price](#price)                                       | $0/month                     | Pay for what you use                 | Pay for what you use                                                                              |
 | [Who it's for](#who-its-for)                          | Prototypes and side projects | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
-| [Projects](#projects)                                 | 80                           | 100                                  | 1,000 (can be increased on request)                                                               |
+| [Projects](#projects)                                 | 100                          | 100                                  | 1,000 (can be increased on request)                                                               |
 | [Branches](#branches)                                 | 10/project                   | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                            | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
 | [Compute](#compute)                                   | 100 CU-hours/project         | $0.106/CU-hour                       | $0.222/CU-hour                                                                                    |
@@ -51,6 +51,8 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Metrics/logs export](#metricslogs-export)            | —                            | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                            | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month    | Up to 7 days                         | Up to 30 days                                                                                     |
+| [Snapshots](#snapshots)                               | 1 snapshot                   | 10 snapshots                         | 10 snapshots                                                                                      |
+| [Auth](#auth)                                         | Up to 60k MAU                | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                            | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                            | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
 | [Uptime SLA](#uptime-sla)                             | —                            | —                                    | ✅                                                                                                |
@@ -64,7 +66,7 @@ This section describes the features listed in the [Plan overview](#plan-overview
 Learn how to manage your Neon costs effectively with our [cost optimization guide](/docs/introduction/cost-optimization), which covers strategies for compute, storage, branches, and data transfer.
 </Admonition>
 
-### ☑ Price
+### Price
 
 On **Launch** and **Scale** plans, you pay only for what you use — there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
@@ -74,13 +76,13 @@ Invoices under $0.50 are not collected.
 
 On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
 
-### ☑ Who it's for
+### Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 80 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free** — Prototypes, side projects, and quick experiments. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch** — Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
-### ☑ Projects
+### Projects
 
 A project is a container for your database environment. It includes your database, branches, compute resources, and more. Similar to a Git repository that contains code, artifacts, and branches, a project contains all your database resources. Learn more about [Neon's object hierarchy](/docs/manage/overview).
 
@@ -88,11 +90,11 @@ A project is a container for your database environment. It includes your databas
 
 Included per plan:
 
-- **Free**: 80 projects
+- **Free**: 100 projects
 - **Launch**: 100 projects
 - **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
 
-### ☑ Branches
+### Branches
 
 Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
 Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
@@ -109,7 +111,7 @@ See [Extra branches](#extra-branches) for overage costs and [Storage](#storage) 
 
 > Projects can have multiple root branches, with limits based on your plan. See [Branch types: Root branch](/docs/manage/branches#root-branch) for details.
 
-### ☑ Extra branches
+### Extra branches
 
 On paid plans, you can create extra child branches. Extra branches beyond your plan's branch allowance (outlined [above](#-branches)) are billed in **branch-months**, metered hourly.
 
@@ -128,7 +130,7 @@ The maximum number of branches you can have per project:
 
 If you need more, contact [Sales](/contact-sales).
 
-### ☑ Compute
+### Compute
 
 Compute usage depends on compute size and runtime.
 
@@ -176,7 +178,7 @@ average compute size × hours running = CU-hours
 
 Scale to zero suspends computes after inactivity to compute usage and cost.
 
-### ☑ Autoscaling
+### Autoscaling
 
 Adjusts compute size between defined limits based on demand.
 
@@ -186,7 +188,7 @@ Adjusts compute size between defined limits based on demand.
 
 > Autoscaling is capped at 16 CU. Scale supports fixed computes above 16 CU.
 
-### ☑ Scale to zero
+### Scale to zero
 
 Suspends computes after inactivity.
 
@@ -194,7 +196,7 @@ Suspends computes after inactivity.
 - **Launch**: 5 min inactivity — can disable
 - **Scale**: Fully configurable — 1 minute to always on
 
-### ☑ Storage
+### Storage
 
 Storage is your data size, billed on actual usage in **GB-months**, measured hourly.
 
@@ -202,9 +204,9 @@ Storage is your data size, billed on actual usage in **GB-months**, measured hou
 - **[Root branches](/docs/reference/glossary#root-branch)**: billed on actual data size (_logical data size_)
 - **[Child branches](/docs/reference/glossary#child-branch)**: billed on the minimum of the data changes since creation or the logical data size
 
-When a child branch is created, it adds no storage initially. Once you make writes (inserts, updates, or deletes) to the child branch, the delta grows and counts toward storage.
+When a child branch is created, it initially consumes no storage. As you make changes (inserts, updates, or deletes) to the child branch, a delta is recorded from the point of branch creation. This delta, a log of all write operations, grows over time and counts toward your storage usage.
 
-**Child branch storage is capped at your actual data size** — you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
+Importantly, **child branch storage is capped at your actual data size**: you're billed for the minimum of accumulated changes or logical data size, whichever is lower.
 
 <Admonition type="important" title="Manage child branches to control storage costs">
 
@@ -218,7 +220,11 @@ Even though child branch storage is capped at your logical data size, it's still
 
 > **Free** plan users get 0.5 GB of storage per project
 
-### ☑ Public network transfer
+**Storage per branch:**
+
+Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](/contact-sales).
+
+### Public network transfer
 
 Public network transfer (egress) is the total volume of data sent from your databases over the public internet during the monthly billing period.
 
@@ -230,7 +236,7 @@ Allowances per plan:
 - **Launch**: 100 GB/month, then $0.10/GB
 - **Scale**: 100 GB/month, then $0.10/GB
 
-### ☑ Monitoring
+### Monitoring
 
 View metrics such as RAM, CPU, connections, and database size in the **Monitoring** dashboard in the Neon Console.
 
@@ -242,12 +248,12 @@ Retention of metrics data differs by plan:
 
 See [Monitoring dashboard](/docs/introduction/monitoring-page) for details.
 
-### ☑ Metrics/logs export
+### Metrics/logs export
 
 Export metrics and Postgres logs to [Datadog](/docs/guides/datadog) or any [OTel-compatible platform](/docs/guides/opentelemetry).  
 Available only on the **Scale** plan.
 
-### ☑ Instant restore
+### Instant restore
 
 Neon stores a change history to support instant restore.
 
@@ -259,7 +265,7 @@ You can change your [restore window](#restore-window) to control how much change
 
 > The change history is a log of write operations in the form of Postgres [Write-Ahead Logs](/docs/reference/glossary#write-ahead-logging-wal).
 
-### ☑ Restore window
+### Restore window
 
 How far back you can restore data.
 
@@ -271,9 +277,37 @@ The maximum restore window per plan:
 
 > The restore window defaults are 6 hours for Free plan projects and 1 day for paid plan projects.
 
-The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Configure your restore window](/docs/manage/projects#configure-your-restore-window).
+The restore window is configurable. Shortening it can reduce [instant restore](#instant-restore) storage costs but limits how far back you can restore. See [Restore window](/docs/introduction/restore-window) for configuration details and more information.
 
-### ☑ Private network transfer
+### Snapshots
+
+Snapshots capture the state of your branch at a point in time. You can create snapshots manually or schedule automated backups.
+
+Snapshot limits per plan:
+
+- **Free**: 1 snapshot
+- **Launch**: 10 snapshots
+- **Scale**: 10 snapshots
+
+**Pricing**: Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
+
+Automated backup schedules are available on paid plans except for the Agent plan. See [Backup & restore](/docs/guides/backup-restore) for details.
+
+### Auth
+
+Neon Auth is a managed authentication service built on [Better Auth](https://www.better-auth.com/), fully integrated into the Neon platform.
+
+Monthly Active User (MAU) limits per plan:
+
+- **Free**: Up to 60,000 MAU
+- **Launch**: Up to 1M MAU (contact [Sales](/contact-sales) if you need more)
+- **Scale**: Up to 1M MAU (contact [Sales](/contact-sales) if you need more)
+
+> An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
+
+See [Neon Auth](/docs/auth/overview) for more information.
+
+### Private network transfer
 
 Bi-directional data transfer to and from your databases over private networking.
 
@@ -281,7 +315,7 @@ Private networking is available on the **Scale** plan. It uses [AWS PrivateLink]
 
 Billed at $0.01/GB for network transferred to and from Neon. You'll only see this on your bill if you enable this feature.
 
-### ☑ Compliance and security
+### Compliance and security
 
 Compliance certifications available on **Scale**:
 
@@ -299,11 +333,11 @@ Security features:
 - [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
 - [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
 
-### ☑ Uptime SLA
+### Uptime SLA
 
 Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
 
-### ☑ Support
+### Support
 
 Support level by plan:
 
@@ -433,6 +467,9 @@ How are instant restores billed?
  • Scale: Up to 30 days of history, billed at $0.20/GB-month.  
  Change history is stored as Postgres WAL records.
 
+Is instant restore history accumulated at the project or branch level?
+: Instant restore history is accumulated at the project level. It applies to all branches in your project. You set a single restore window (e.g., 7 days or 30 days) for the entire project, and the history size is the cumulative total of all change history across all branches. You cannot enable, disable, or configure instant restore per branch.
+
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
  Launch: Yes, you can disable it.  
@@ -474,6 +511,12 @@ How can I control my costs?
 
 Do you offer credits for startups?
 : Yes, venture-backed startups may apply for the Neon Startup Program. Learn more: [Startup Program](/startup)
+
+How is storage charged for snapshots?
+: Snapshots are currently free during beta and will be charged based on GB-month storage at a rate lower than standard project storage after general availability.
+
+Is storage cost different for archived branches?
+: No. Archived branches are billed at the same rate as active branches. Neon automatically archives inactive branches to optimize storage resources and maintain a cost-efficient storage infrastructure. See [Branch archiving](/docs/guides/branch-archiving) for details on how archiving works.
 
 </DefinitionList>
 

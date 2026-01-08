@@ -25,10 +25,16 @@ const Item = ({
       setIsUserScrolling(false);
     }
 
-    document.querySelector(anchor)?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+    const element = document.querySelector(anchor);
+    if (element) {
+      // Account for scroll margin and header offset
+      const elementTop = element.getBoundingClientRect().top + window.pageYOffset;
+      const offset = 130 - 1; // Match ANCHOR_SCROLL_MARGIN
+      window.scrollTo({
+        top: elementTop - offset,
+        behavior: 'smooth',
+      });
+    }
 
     // changing hash without default jumps to anchor
     // eslint-disable-next-line no-restricted-globals

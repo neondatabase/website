@@ -19,11 +19,11 @@ The **Monitoring** dashboard in the Neon console provides several graphs for mon
 
 Your Neon plan defines the range of data you can view.
 
-| Neon Plan                                       | Data Access              |
-| ----------------------------------------------- | ------------------------ |
-| Free                                            | 1 day                    |
-| Launch                                          | 3 days                   |
-| Scale                                           | 14 days                  |
+| Neon Plan | Data Access |
+| --------- | ----------- |
+| Free      | 1 day       |
+| Launch    | 3 days      |
+| Scale     | 14 days     |
 
 You can select different periods or a custom period within the permitted range from the menu on the dashboard.
 
@@ -141,7 +141,7 @@ The **Replication delay seconds** graph shows the time delay, in seconds, betwee
 
 ![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
-The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC). 
+The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC).
 Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
 ### Working set size
@@ -156,7 +156,7 @@ The **Working set size** graph visualizes the amount of data accessed—calculat
 - **15m** (15 minutes): Similar to the 5-minute window, this metric tracks the data accessed in the last 15 minutes.
 - **1h** (1 hour): This line represents the data accessed in the last hour.
 - **Local file cache size**: This is the size of the LFC, which is determined by the size of your compute. Larger computes have larger caches. For cache sizes, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
-For optimal performance the local file cache should be larger than your working set size for a given time interval.
-If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
+  For optimal performance the local file cache should be larger than your working set size for a given time interval.
+  If your working set size is larger than the LFC size it is recommended to increase the maximum size of the compute to improve the LFC hit rate and achieve good performance.
 
 If your workload pattern doesn't change much over time it is recommended to compare the 1h time interval working set size with the LFC size and make sure that working set size is smaller than LFC size.

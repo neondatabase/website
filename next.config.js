@@ -340,6 +340,16 @@ const defaultConfig = {
       },
       {
         source: '/hipaa-baa',
+        destination: 'https://www.databricks.com/legal/neon-baa',
+        permanent: true,
+      },
+      {
+        source: '/baa',
+        destination: 'https://www.databricks.com/legal/neon-baa',
+        permanent: true,
+      },
+      {
+        source: '/baa/signed',
         destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
@@ -408,6 +418,42 @@ const defaultConfig = {
         destination: '/',
         permanent: true,
       },
+      // Legacy Neon Auth (Stack Auth) redirects to new Neon Auth docs
+      {
+        source: '/docs/neon-auth',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/components/:path*',
+        destination: '/docs/auth/reference/ui-components',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/sdk/:path*',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/concepts/:path*',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/customization/:path*',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/email-configuration',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
+      {
+        source: '/docs/neon-auth/permissions-roles',
+        destination: '/docs/auth/overview',
+        permanent: true,
+      },
       {
         source: '/creators',
         destination: '/programs/creators',
@@ -426,6 +472,11 @@ const defaultConfig = {
       {
         source: '/agents',
         destination: '/programs/agents',
+        permanent: true,
+      },
+      {
+        source: '/cost-fleets',
+        destination: '/',
         permanent: true,
       },
       ...docsRedirects,

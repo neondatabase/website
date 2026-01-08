@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-12-03T13:07:33.044Z'
+updatedOn: '2026-01-07T12:02:47.909Z'
 ---
 
 ## access token
@@ -108,7 +108,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ## Collaborator
 
-A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in their personal account.
+A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in the Neon Console.
 
 ## Compute
 
@@ -167,6 +167,23 @@ See [Neon Console](#neon-console).
 ## Control Plane
 
 The part of the Neon architecture that manages cloud storage and compute resources.
+
+## Context file
+
+A JSON file (`.neon` by default) used by the Neon CLI to store project and organization context, allowing you to run commands without specifying `--project-id` or `--org-id` each time. The context file is created by the `neon set-context` command or by accepting the CLI's prompt to save your organization as the default.
+
+The CLI determines the context file location by walking up the directory tree from your current directory, stopping when it finds a directory containing `.neon`, `package.json`, or `.git`. The `.neon` file is then read from (or created in) that directory. Using `package.json` and `.git` as markers ensures that context files are stored at your project root rather than in a subdirectory. The search stops at your home directory, so there is no global context file.
+
+Example context file contents:
+
+```json
+{
+  "orgId": "org-example-12345678",
+  "projectId": "cool-forest-86753099"
+}
+```
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## copy-on-write
 
@@ -238,13 +255,11 @@ Deleting data will reduce the rate at which GB-month usage increases from that p
 
 ## History
 
-The history of data changes for all branches in your Neon project. A history is maintained to support _instant restore_.
+The history of data changes for all branches in your Neon project. This history is retained to support [instant restore](/docs/introduction/branch-restore), [Time Travel](/docs/guides/time-travel-assist), and other data recovery features. See [Restore window](/docs/introduction/restore-window) to learn how Neon retains and manages this history.
 
 ## Instant restore
 
-Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records, which allows you to restore data to an earlier point.
-
-For more information about this feature, see [Branching — Instant restore](/docs/introduction/branch-restore).
+Restoration of data to a state that existed at an earlier time. Neon retains a history of changes in the form of Write-Ahead-Log (WAL) records within your configured [restore window](/docs/introduction/restore-window), which allows you to restore data to any point in time within that window. For more information, see [Instant restore](/docs/introduction/branch-restore).
 
 ## IP Allow
 
@@ -364,7 +379,7 @@ A paid Neon service plan. See [Neon plans](/docs/introduction/plans).
 
 ## Pageserver
 
-A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined restore window. Neon retains a history for all branches.
+A Neon architecture component that reads WAL records from Safekeepers to identify modified pages. The Pageserver accumulates and indexes incoming WAL records in memory and writes them to disk in batches. Each batch is written to an immutable file that is never modified after creation. Using these files, the Pageserver can quickly reconstruct any version of a page dating back to the defined [restore window](/docs/introduction/restore-window). Neon retains a history for all branches.
 
 The Pageserver uploads immutable files to cloud storage, which is the final, highly durable destination for data. After a file is successfully uploaded to cloud storage, the corresponding WAL records can be removed from the Safekeepers.
 
@@ -420,6 +435,16 @@ The default branch serves two key purposes:
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
 For more information, see [default branch](/docs/manage/branches#default-branch).
+
+## Default organization
+
+The organization stored in a Neon CLI [context file](#context-file) (`.neon`), used when no `--org-id` option is specified.
+
+When you run a Neon CLI command without specifying an organization (via `--org-id` or a context file), the CLI prompts you to select one and offers to save it as your default. Only if you choose to save does the CLI create a `.neon` context file containing the selected organization ID.
+
+Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## Project
 
@@ -487,6 +512,10 @@ On the publisher database in a logical replication setup, replication slots trac
 
 Selling the Neon service as part of another service offering.
 
+## restore window
+
+The period of time for which Neon retains a history of changes for your branches. The restore window determines how far back you can restore data, create branches from past states, and run Time Travel queries. The restore window is configurable per project and affects instant restore storage costs. For detailed information, see [Restore window](/docs/introduction/restore-window).
+
 ## root branch
 
 Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch.
@@ -538,7 +567,7 @@ A memory area in Postgres for caching blocks of data from storage (disk on stand
 
 ## Snapshot
 
-A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ## SNI
 
@@ -602,7 +631,7 @@ You can obtain an unpooled connection string for your database by clicking the *
 
 ## Time Travel
 
-A Neon feature that lets you connect to any selected point in time within your restore window and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
+A Neon feature that lets you connect to any selected point in time within your [restore window](/docs/introduction/restore-window) and run queries against that connection. See [Time Travel](/docs/guides/time-travel-assist).
 
 ## user
 

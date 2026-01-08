@@ -32,7 +32,7 @@ export default {
       feature: {
         title: 'Projects',
       },
-      free: '80',
+      free: '100',
       launch: '100',
       scale: '1,000',
     },
@@ -134,6 +134,32 @@ export default {
       free: 'Up to 6 hours<span>or 1 GB of data changes</span>',
       launch: 'Up to 7 days',
       scale: 'Up to 30 days',
+    },
+    {
+      rows: '1',
+      feature: 'Auth',
+    },
+    {
+      rows: '3',
+      feature: {
+        title: 'MAU',
+        subtitle: 'Monthly Active Users',
+      },
+      free: 'Up to 60k',
+      launch:
+        "Up to 1M <span>If you're planning to go<br/> beyond that, <a href='/contact-sales'>contact us</a></span>",
+      scale:
+        "Up to 1M <span>If you're planning to go<br/> beyond that, <a href='/contact-sales'>contact us</a></span>",
+    },
+    {
+      rows: '2',
+      feature: {
+        title: 'MFA',
+        subtitle: 'Multi-Factor Authentication',
+      },
+      free: false,
+      launch: 'Coming soon',
+      scale: 'Coming soon',
     },
     {
       rows: '1',
