@@ -18,8 +18,8 @@ const Header = () => (
           'lg:mt-5 lg:text-base lg:leading-snug md:mt-[18px] sm:text-[15px]'
         )}
       >
-        The most advanced AI Codegen and Text-to-App platforms rely on Neon to give their users
-        batteries-included backend: Database, Auth, API. Operating at the speed of AI.
+        Codegen and agent platforms rely on Neon to run the backend for user-generated apps.
+        Database, auth and RESTful data API provisioned cost-efficiently and at AI speed.
       </p>
       <Button
         className="mt-9 lg:mt-8 md:mt-7"

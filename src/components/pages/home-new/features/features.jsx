@@ -15,7 +15,7 @@ const ITEMS = [
   {
     icon: shieldIcon,
     title: 'HIPAA and SOC2.',
-    description: 'Access the compliance you need without high spend commitments.',
+    description: 'Meet your compliance requirements without high spend commitments.',
   },
   {
     icon: connectionsIcon,

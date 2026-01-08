@@ -42,7 +42,7 @@ const Branching = () => (
       <div className="min-w-0">
         <Heading
           icon="branching"
-          title="<strong>Instant branching.</strong> Develop and test new features with data & schema branches to eliminate surprises in production deploys."
+          title="<strong>Instant branching.</strong> Develop and test with efficient copies of any database to eliminate surprises in production deploys."
         />
         <RiveAnimation
           className="pointer-events-none aspect-[1184/500] w-full"
