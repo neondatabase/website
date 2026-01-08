@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useWindowSize from 'react-use/lib/useWindowSize';
 
-import CountingNumber from './counting-number';
+import CountingNumber from 'components/shared/animation/counting-number';
+
 import { ACTIVITY_DATA, TOTAL_DATABASES, ACTIVITY_COLORS, START_DELAY } from './data';
 
 const DeployDatabases = () => {
@@ -25,11 +26,11 @@ const DeployDatabases = () => {
     >
       <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
         Databases deployed:
-        <span className="ml-7 min-w-14 text-gray-new-80 xl:ml-6 xl:min-w-11 sm:ml-3 sm:min-w-6">
+        <span className="ml-7 text-gray-new-80 xl:ml-6 sm:ml-3">
           {isMobile ? (
             TOTAL_DATABASES
           ) : (
-            <CountingNumber number={TOTAL_DATABASES} inView={inView} delay={START_DELAY} />
+            <CountingNumber number={TOTAL_DATABASES} started={inView} delay={START_DELAY} />
           )}
         </span>
       </div>
@@ -45,13 +46,13 @@ const DeployDatabases = () => {
                   <div className="flex gap-5 xl:gap-4 sm:gap-3">
                     <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Active:
-                      <span className="min-w-14 text-green-45 xl:min-w-11 sm:min-w-6">
+                      <span className="text-green-45">
                         {isMobile ? (
                           activeCount
                         ) : (
                           <CountingNumber
                             number={activeCount}
-                            inView={inView}
+                            started={inView}
                             delay={START_DELAY}
                           />
                         )}
@@ -59,11 +60,11 @@ const DeployDatabases = () => {
                     </div>
                     <div className="flex gap-2 xl:gap-1.5 sm:gap-1">
                       Idle:
-                      <span className="min-w-14 text-gray-new-80 xl:min-w-11 sm:min-w-6">
+                      <span className="text-gray-new-80">
                         {isMobile ? (
                           idleCount
                         ) : (
-                          <CountingNumber number={idleCount} inView={inView} delay={START_DELAY} />
+                          <CountingNumber number={idleCount} started={inView} delay={START_DELAY} />
                         )}
                       </span>
                     </div>
