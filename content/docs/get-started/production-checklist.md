@@ -1,201 +1,213 @@
 ---
 title: Getting ready for production
-subtitle: A checklist of recommended settings to optimize performance, security, and
-  reliability
+subtitle: Guidelines to optimize price, performance, and reliability
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2025-12-11T15:40:49.858Z'
+updatedOn: '2026-01-07T00:00:00.000Z'
 ---
 
 <CheckList title="Production checklist">
 
-<CheckItem title="1. Set a compute size that can handle production traffic" href="#set-a-compute-size-that-can-handle-production-traffic">
-  Make sure your default branch can handle production traffic. A higher minimum compute can help you avoid performance bottlenecks.
+<CheckItem title="1. Use a paid plan for production workloads" href="#use-a-paid-plan-for-production-workloads">
+  Paid plans are usage-based, so your app won't stop or be limited as it grows. The Free plan includes compute hour limits, making it better suited for prototyping.
 </CheckItem>
-<CheckItem title="2. Enable autoscaling to handle usage spikes" href="#enable-autoscaling-to-handle-usage-spikes">
-  Set your compute to automatically scale up, allowing your app to handle traffic surges and stay performant without manual scaling.
+<CheckItem title="2. Choose a region close to your application" href="#choose-a-region-close-to-your-application">
+  Deploy your Neon project in the nearest available region to your application to minimize network latency.
 </CheckItem>
-<CheckItem title="3. Disable scale to zero" href="#disable-scale-to-zero">
-  Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
+<CheckItem title="3. Protect your production branch" href="#protect-your-production-branch">
+  Mark production branches as protected to prevent accidental resets or destructive operations.
 </CheckItem>
-<CheckItem title="4. Use a pooled connection" href="#use-a-pooled-connection">
-  Increase your database's ability to handle concurrent connections by using connection pooling.
+<CheckItem title="4. Enable autoscaling and set appropriate limits" href="#enable-autoscaling-and-set-appropriate-limits">
+  Autoscaling lets your database handle traffic spikes automatically. Set limits that balance performance with cost.
 </CheckItem>
-<CheckItem title="5. Increase your project's restore window to 7 days" href="#increase-your-projects-restore-window-to-7-days">
-  Protect your production data from accidental loss. Keep at least a 7-day restore window for quick data recovery and analysis.
+<CheckItem title="5. Decide whether scale-to-zero is acceptable" href="#decide-whether-scale-to-zero-is-acceptable">
+  Scale-to-zero is great for development and bursty usage. For production, disable it if you need consistently low latency.
 </CheckItem>
-<CheckItem title="6. Restrict database access to trusted IPs" href="#restrict-database-access-to-trusted-ips">
-  Secure your database by limiting connections to trusted IP addresses.
+<CheckItem title="6. Test connection retries using the Neon API" href="#test-connection-retries-using-the-neon-api">
+  Brief disconnects can happen during scaling or maintenance. Verify your application reconnects automatically.
 </CheckItem>
-<CheckItem title="7. Set up metrics export" href="#set-up-metrics-export">
-  Export Neon metrics to Datadog or any OTEL-compatible platform like Grafana Cloud or New Relic to centralize database monitoring with your existing observability stack.
+<CheckItem title="7. Set an appropriate restore window" href="#set-an-appropriate-restore-window">
+  Neon keeps 1 day of restore history by default on paid plans. Increasing this gives you more protection, with storage cost tradeoffs.
 </CheckItem>
-<CheckItem title="8. Install pg_stat_statements" href="#install-pgstatstatements">
-  Enable query performance monitoring to track execution times and frequency.
+<CheckItem title="8. Consider snapshot schedules" href="#consider-snapshot-schedules">
+  Snapshot schedules provide consistent backups for point-in-time restore, independently of your restore window.
 </CheckItem>
-<CheckItem title="9. Ensure your app reconnects after your database restarts" href="#ensure-your-app-reconnects-after-your-database-restarts">
-  Verify your application handles compute restarts gracefully.
+<CheckItem title="9. Test your restore workflow" href="#test-your-restore-workflow">
+  Plan whether you'll restore in place or from a snapshot, and how your application will switch if needed.
 </CheckItem>
-<CheckItem title="10. Upgrade to get priority support" href="#upgrade-to-a-neon-business-scale-for-priority-support">
-  Get support for your production database with a Scale plan.
+<CheckItem title="10. Clean up your branches regularly" href="#clean-up-your-branches-regularly">
+  Set branch expiration times and add cleanup logic to automated workflows to avoid unnecessary storage costs.
 </CheckItem>
-<CheckItem title="11. Advanced: Set up cross-region replication" href="#advanced-set-up-cross-region-replication">
-  For added resilience, replicate your data to a Neon project in another region. This helps prepare for regional outages, making it possible to failover to a copy of your database in a different region, if necessary.
+<CheckItem title="11. Use pooled connections where they make sense" href="#use-pooled-connections-where-they-make-sense">
+  Connection pooling improves concurrency for web and serverless apps, but may not be appropriate for migrations or long-running tasks.
+</CheckItem>
+<CheckItem title="12. Restrict access to production data" href="#restrict-access-to-production-data">
+  Limit database access to trusted sources using IP Allow to reduce the risk of unauthorized changes.
+</CheckItem>
+<CheckItem title="13. Install pg_stat_statements" href="#install-pgstatstatements">
+  Enable query performance monitoring to track execution times and frequency. This helps you troubleshoot performance issues independently.
+</CheckItem>
+<CheckItem title="14. Integrate with your existing observability stack" href="#integrate-with-your-existing-observability-stack">
+  Export Neon metrics to Datadog, Grafana, or any OTEL-compatible platform to monitor usage and capacity alongside your existing systems.
 </CheckItem>
 
 </CheckList>
 
 <Steps>
 
-## Set a compute size that can handle production traffic
+## Use a paid plan for production workloads
 
-Before your application goes to production, make sure your database has enough compute resources to handle expected production load. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+Neon's paid plans are fully usage-based, which means your database is never subject to fixed limits that can stop your application as traffic grows. You pay for the compute and storage you use each month, without minimums.
 
-**Recommendation**
+The Free plan is designed to support experimentation and prototyping and includes compute hour limits. It should be avoided for production workloads where uninterrupted availability matters.
 
-We recommend that you **fit your data in memory** and use Neon **autoscaling**:
+If you need technical support beyond billing, the Scale plan includes priority support with access to Neon's support team.
 
-- Start with a compute size that can hold all your data in memory. Or try to fit at least your most frequently accessed data (your [working set](/docs/reference/glossary#working-set)).
-- Once you determine the [right size](/docs/manage/computes#how-to-size-your-compute) for your compute, use that as the **minimum compute size** for [Autoscaling](#set-maximum-compute-to-highest-cu)).
+Keep reading: [Neon plans](/docs/introduction/plans)
 
-**About compute size**
+## Choose a region close to your application
 
-A Compute Unit (CU) in Neon measures the processing power or "size" of a Neon compute. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources. Neon computes can range from **0.25** CUs to **56** CUs, depending on your [Neon plan](/docs/introduction/plans).
+Network latency is one of the most common contributors to database response time: even a well-tuned database will feel slow if it's geographically far from your application servers. When creating a Neon project, choose the region that is closest to where your application runs.
 
-## Enable autoscaling to handle usage spikes
+![Region selection](/docs/introduction/project_creation_regions.png)
 
-Use Neon's [autoscaling](/docs/guides/autoscaling-algorithm) feature to dynamically adjust your compute resources based on your current workload. This means you don't need to scale manually during traffic surges.
+Keep reading: [Neon regions](/docs/introduction/regions)
 
-**Recommendation**
+## Protect your production branch
 
-- **Minimum compute size**: Autoscaling works best if your data can be fully cached in memory.
-- **Maximum compute size**: Set this to as a high a limit as your plan allows. You only pay for what you use.
+Neon makes it easy to branch, reset, and restore databases. In production, that power should be paired with explicit safeguards. Branch protection helps ensure that powerful features like restore, reset, and snapshot operations are used deliberately when applied to production data. This is especially important in teams or automated environments.
+
+![Protect branch button](/docs/guides/ip_allow_set_as_protected.png)
+
+Keep reading: [Protected branches](/docs/guides/protected-branches)
+
+## Enable autoscaling and set appropriate limits
+
+Neon autoscaling automatically adjusts compute resources based on your workload, allowing your database to absorb traffic spikes without manual intervention. For production workloads:
+
+- **Minimum compute size**: Set a minimum high enough so your working set (frequently accessed data) can be fully cached in memory. This is important because Neon's [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) allocation is tied to your compute size. When the compute scales down and the LFC shrinks, frequently accessed data may be evicted and need to be reloaded from storage, which impacts performance.
+
+- **Maximum compute size**: Set a maximum that provides enough extra capacity for traffic spikes. The maximum also determines your available local disk space, which is used for things like temporary files, complex queries, [pg_repack](/docs/extensions/pg_repack), and replication.
+
+A safe minimum combined with a sufficiently high maximum will give you the best performance while avoiding unnecessary baseline cost.
 
 ![Autoscaling control](/docs/get-started/autoscaling_control.png)
 
-To get started with Autoscaling, read:
+Keep reading:
 
-- [Enable Autoscaling in Neon](/docs/guides/autoscaling-guide)
-- [How to size your compute](/docs/manage/computes#how-to-size-your-compute), including the [Autoscaling considerations](/docs/manage/computes#autoscaling-considerations) section.
+- [How to size your compute](/docs/manage/computes#how-to-size-your-compute)
+- [Autoscaling configuration](/docs/introduction/autoscaling#configuring-autoscaling)
+- [Monitor working set size](/docs/introduction/monitoring-page#working-set-size)
+- [How the autoscaling algorithm works](/docs/guides/autoscaling-algorithm)
 
-## Disable scale to zero
+## Decide whether scale-to-zero is acceptable
 
-Scale to zero turns off your compute after a period of inactivity. Ideal for development or other environments with bursty usage.
+Scale-to-zero allows Neon to suspend compute after a period of inactivity. This is a highly effective way to save costs in development environments and workloads with intermittent usage. For production workloads, the decision depends on your latency requirements.
 
-**Recommendation**
+If occasional cold starts are acceptable for your application (e.g., for internal tools), leaving scale-to-zero enabled will be the most cost-effective choice.
 
-Disable scale to zero for production workloads. This ensures your compute is always active, preventing delays and session context resets caused by cold starts.
+Consider disabling scale-to-zero if:
 
-**Session and latency considerations**
+- Your application requires consistently low latency
+- Cold-start delays are unacceptable for user-facing requests
+- You rely on long-lived sessions or in-memory state
 
-By default, your compute scales to zero after 5 minutes. Restarts are nearly instant, but there may still be some latency (around 500 milliseconds depending on the region). Restarts will reset your session context, affecting in-memory statistics and temporary tables. While typical production loads might never go idle long enough to scale to zero, disabling this feature prevents any possible issues from cold starts or session loss.
+**Cache considerations**: When a compute suspends, the cache is cleared. After the compute restarts, rebuilding the cache can take some time and may temporarily degrade query performance. If your workload requires suspension but you want to minimize this impact, consider using the [pg_prewarm](/docs/extensions/pg_prewarm) extension to reload critical data into the cache on startup.
 
-Disabling scale to zero is available on paid plans only. See [Configuring Scale to Zero for Neon computes](/docs/guides/scale-to-zero-guide) for more detail.
+Keep reading: [Scale to zero configuration](/docs/guides/scale-to-zero-guide)
 
-## Use a pooled connection
+## Test connection retries using the Neon API
 
-Connection pooling with [PgBouncer](https://www.pgbouncer.org/) allows your database to handle up to 10,000 concurrent connections, reducing connection overhead and improving performance.
+In a serverless architecture, brief connection interruptions can occur during scaling events or maintenance. Most database drivers and connection pools already implement retry logic for transient failures, but rather than assuming this works, you should test it.
 
-**Recommendation**
+Our recommended approach:
 
-For production environments, enable connection pooling. This increases the number of simultaneous connections your database can handle and optimizes resource usage.
+- Use the Neon API or Console to trigger a compute restart
+- Observe how your application behaves during the restart
+- Confirm that connections are re-established automatically without user-facing errors
 
-**Connection details**
-
-Use a pooled connection string by adding `-pooler` to your endpoint ID, or simply copy the pooled connection string from the **Connect** widget in your **Project Dashboard**. Use this string as your database connection in your application's environment variables. For more information, see [Connection pooling](/docs/connect/connection-pooling).
-
-Example connection string:
-
-```bash shouldWrap
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-## Increase your project's restore window to 7 days
-
-Neon retains a history of changes for all branches, enabling instant restore and time travel queries. This history acts as a backup strategy, allowing recovery of lost data and viewing past database states.
-
-**Recommendation**
-
-Set your [restore window](/docs/introduction/restore-window) to 7 days to ensure data integrity and quick recovery.
-
-**Restore window details**
-
-By default, Neon's restore window is set to **1 day**. Extending it to 7 days helps protect you against data loss, letting you recover from human or application errors that may go unnoticed for days. It can also help you comply with any industry regulations that need longer retention periods. While a longer [restore window](/docs/introduction/restore-window) can increase storage costs, it provides extra security and recoverability for production data.
-
-![Restore window setting](/docs/get-started/history_retention_setting.png)
-
-For more info, see [Instant restore](/docs/introduction/branch-restore).
-
-## Restrict database access to trusted IPs
-
-Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security.
-
-**Recommendation**
-
-Combine an allowlist with protected branches for enhanced security. This setup ensures that only trusted IPs can access critical data, reducing the risk of unauthorized access and safeguarding data integrity.
-
-**Configuration details**
-
-- **IP Allow**: Restricts access to specific, trusted IP addresses, preventing unauthorized connections.
-- **Protected branch**: Safeguards critical data from accidental deletions or modifications by designating branches as protected.
-
-You can configure **IP Allow** and protected branches in your Neon project's settings. For more information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow) and [Protected branches guide](/docs/guides/protected-branches).
-
-![IP allow setting settings](/docs/get-started/ip_allow_settings.png)
-
-## Set up metrics export
-
-Export Neon metrics to your preferred observability platform and centralize your database monitoring with your existing stack.
-
-**Recommendation**
-
-Set up integration with your observability platform to monitor and set alerts for key metrics:
-
-- Connection counts (active and idle database connections)
-- Database size (total size of all databases)
-- Replication delay (lag in bytes and seconds)
-- Compute metrics (CPU and memory usage)
-
-**Available integrations:**
-
-- **[Grafana Cloud](/docs/guides/grafana-cloud)**: Native OTLP integration with automatic routing to Mimir, Loki, and Tempo
-- **[Datadog](/docs/guides/datadog)**: Direct integration with Datadog's observability platform
-- **[OpenTelemetry](/docs/guides/opentelemetry)**: Export to any OTLP-compatible platform, including self-hosted Grafana and Tempo
-
-Choose the platform that best fits your existing monitoring infrastructure.
-
-## Ensure your app reconnects after your database restarts
-
-Verify your application handles compute restarts gracefully. Neon occasionally restarts computes for updates and maintenance.
-
-**Recommendation**
-
-Most database drivers and connection pools handle reconnection automatically, but it's important to test this behavior. You can use the Neon API to trigger a restart and watch your application reconnect:
-
-```bash shouldWrap
+```bash
 curl --request POST \
-  --url https://console.neon.tech/api/v2/projects/your_project_id/endpoints/your_endpoint_id/restart \
-  --header 'accept: application/json' \
-  --header 'authorization: Bearer $NEON_API_KEY'
+     --url https://console.neon.tech/api/v2/projects/{project_id}/endpoints/{endpoint_id}/restart \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-See [Restart compute endpoint](https://api-docs.neon.tech/reference/restartprojectendpoint) for details.
+Keep reading:
 
-For more information:
-
+- [Restart a compute](/docs/manage/computes#restart-a-compute)
 - [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
-- [Maintenance & updates overview](/docs/manage/maintenance-updates-overview)
+- [Maintenance and updates overview](/docs/manage/maintenance-updates-overview)
+
+## Set an appropriate restore window
+
+Neon retains a history of changes for each project to support branching and instant restores. On paid plans, the default restore window is 1 day, which you can increase up to 30 days.
+
+Increasing the restore window gives you more flexibility to recover from bugs discovered later or accidental data loss. However, longer restore windows retain more historical data, which contributes to storage usage. Choose a window that balances recovery needs with predictable storage costs.
+
+Keep reading: [Storage and billing for restores](/docs/introduction/restore-window#storage-and-billing)
+
+## Consider snapshot schedules
+
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later — ensuring that recovery points exist even if they fall outside your chosen restore window.
+
+Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
+
+![Snapshot schedule](/docs/guides/backup_restore_ui.png)
+
+Keep reading: [Snapshot schedules](/docs/guides/backup-restore#create-backup-schedules)
+
+## Test your restore workflow
+
+Don't wait for an incident to learn how restore works. Plan and test your recovery process in advance.
+
+Neon supports multiple restore patterns:
+
+- [Instant branch restores](/docs/guides/backup-restore#instantly-restore-a-branch), where the existing branch is restored to a previous state
+- [Restore from a snapshot into the same branch](/docs/guides/backup-restore#one-step-restore)
+- [Restore from a snapshot into a new branch](/docs/guides/backup-restore#multi-step-restore)
+
+Plan and test which restore method you will use for production incidents, how your application will switch connections if a new branch is created, and how you will validate restored data before resuming traffic.
+
+## Clean up your branches regularly
+
+Neon's branching makes it easy to create preview, test, and temporary environments. Over time, unused branches can accumulate and contribute to unnecessary storage usage. To keep costs and complexity under control:
+
+- Set expiration times for preview and test branches
+- Add explicit delete steps to automated branching workflows
+- Periodically review and remove branches that are no longer in use
+
+Keep reading:
+
+- [Branch expiration](/docs/guides/branch-expiration)
+- [Automate branching with GitHub Actions](/docs/guides/branching-github-actions)
+- [Plans and billing](/docs/introduction/plans)
+
+## Use pooled connections where they make sense
+
+Connection pooling increases the number of concurrent clients your database can serve (up to 10,000) by reusing a smaller number of backend connections. This reduces connection overhead and improves performance in web and serverless applications.
+
+However, pooled connections are not appropriate for all workloads. Avoid them for:
+
+- Long-running database migrations
+- Workloads that rely on session-level state
+- Administrative tasks that require persistent connections (e.g., `pg_dump`)
+- Logical replication (CDC tools like Fivetran, Airbyte)
+
+Keep reading: [Connection pooling](/docs/connect/connection-pooling)
+
+## Restrict access to production data
+
+Neon's IP Allow feature ensures that only trusted IP addresses can connect to your database, preventing unauthorized access and enhancing security. Combine an allowlist with protected branches for enhanced security.
+
+![IP Allow settings](/docs/get-started/ip_allow_settings.png)
+
+Keep reading: [IP Allow](/docs/introduction/ip-allow)
 
 ## Install pg_stat_statements
 
-Enable query performance monitoring to track execution times and frequency.
-
-**Recommendation**
-
-Install the `pg_stat_statements` extension to monitor query performance and identify potential bottlenecks.
-
-**Usage**
+The [pg_stat_statements extension](/docs/extensions/pg_stat_statements) provides query performance monitoring to track execution times and frequency. Since Neon doesn't log queries and has limited visibility into query performance, this extension helps you troubleshoot issues independently.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
@@ -211,37 +223,26 @@ You can also use the **Monitoring Dashboard** in the Neon Console to view live g
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
-For more information, see [Query performance](/docs/postgresql/query-performance) and [Monitoring](/docs/introduction/monitoring).
+Keep reading:
 
-## Upgrade to a Neon Scale plan for priority support
+- [Query performance](/docs/postgresql/query-performance)
+- [Monitoring](/docs/introduction/monitoring)
 
-Scale plan customers can open support tickets with the Neon Support team.
+## Integrate with your existing observability stack
 
-**Recommendation**
+If you already operate an observability platform, you can export Neon metrics and logs to monitor database behavior alongside the rest of your system. This helps you:
 
-Upgrade to a [Scale plan](/docs/introduction/plans) to get both [priority support](/docs/introduction/support#prioritized-support-tickets) and acccess to SLAs.
+- Track connection counts and usage patterns
+- Monitor compute and storage growth over time
+- Correlate database behavior with application-level events
 
-For more information, see the [Support documentation](/docs/introduction/support).
+You can export to any OTLP-compatible platform, Datadog, or Grafana Cloud.
 
-## Advanced: Set up cross-region replication
+Keep reading:
 
-Cross-region replication can provide an added layer of resilience for production environments. It allows you to replicate data from one Neon project to another in a different region — helping you prepare for unlikely regional outages or implement failover strategies.
-
-**Recommendation**
-
-Set up cross-region replication if your app requires high availability across regions or if you're building a disaster recovery plan.
-
-**How it works**
-
-Neon uses [logical replication](/docs/guides/logical-replication-neon-to-neon) to replicate data between Neon projects. You can replicate from a source project in one region to a destination project in another region, creating a near real-time copy of your data.
-
-**Steps to get started**
-
-- Set up a publication on your source database
-- Create matching tables and a subscription on your destination database
-- Test the replication and monitor for consistency
-
-For full details, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
+- [OpenTelemetry export guide](/docs/guides/opentelemetry)
+- [Datadog export guide](/docs/guides/datadog)
+- [Grafana Cloud export guide](/docs/guides/grafana-cloud)
 
 </Steps>
 
