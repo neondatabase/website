@@ -52,7 +52,7 @@ const CountingNumber = ({
   return (
     <span className="relative" data-slot="counting-number" {...props}>
       <span className="invisible opacity-0">{finalText}</span>
-      <span className="absolute left-0" ref={ref}>
+      <span className="absolute left-0" ref={ref} aria-hidden="true">
         {initialText}
       </span>
     </span>
