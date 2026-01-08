@@ -1,6 +1,6 @@
 import Button from 'components/shared/button';
 import PauseableVideo from 'components/shared/pauseable-video';
-import links from 'constants/links';
+import LINKS from 'constants/links';
 
 import CopyCodeButton from './copy-code-button';
 
@@ -17,14 +17,14 @@ const CTA = () => (
           scalable apps faster.
         </p>
         <div className="mb-2 flex items-center gap-5 xl:gap-4 lg:mb-0 md:w-full md:flex-col md:items-stretch md:gap-y-3">
-          <Button theme="white-filled" size="new" to={links.signup}>
+          <Button theme="white-filled" size="new" to={LINKS.signup}>
             Get started
           </Button>
           <Button
             className="bg-[rgba(255,255,255,0.02)] !font-normal"
             theme="gray-40-outline"
             size="new"
-            to={links.docsBranching}
+            to={LINKS.docsBranching}
           >
             Read the docs
           </Button>
@@ -50,11 +50,11 @@ const CTA = () => (
         height={944}
       >
         <source
-          src="/videos/pages/home-new/cta/cta-av1.mp4"
+          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4`}
           type="video/mp4; codecs=av01.0.05M.08,opus"
         />
-        <source src="/videos/pages/home-new/cta/cta.mp4" type="video/mp4" />
-        <source src="/videos/pages/home-new/cta/cta.webm" type="video/webm" />
+        <source src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/home/cta/cta.webm`} type="video/webm" />
       </PauseableVideo>
 
       {/*
@@ -70,11 +70,11 @@ const CTA = () => (
         height={767}
       >
         <source
-          src="/videos/pages/home-new/cta/cta-mob-av1.mp4"
+          src={`${LINKS.cdn}/public/pages/home/cta/cta-mob-av1.mp4`}
           type="video/mp4; codecs=av01.0.05M.08,opus"
         />
-        <source src="/videos/pages/home-new/cta/cta-mob.mp4" type="video/mp4" />
-        <source src="/videos/pages/home-new/cta/cta-mob.webm" type="video/webm" />
+        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/home/cta/cta-mob.webm`} type="video/webm" />
       </PauseableVideo>
     </div>
   </section>

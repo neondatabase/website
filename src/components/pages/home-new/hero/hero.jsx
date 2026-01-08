@@ -6,7 +6,7 @@ import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
 import PauseableVideo from 'components/shared/pauseable-video';
-import links from 'constants/links';
+import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home-new/hero/bg-illustration.jpg';
 
 const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
@@ -24,14 +24,14 @@ const Hero = () => (
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
-        <Button theme="white-filled" size="new" to={links.signup}>
+        <Button theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
         <Button
           className="!font-normal"
           theme="gray-40-outline"
           size="new"
-          to={links.docsBranching}
+          to={LINKS.docsBranching}
         >
           Read the docs
         </Button>
@@ -56,14 +56,14 @@ const Hero = () => (
         )}
         width={1920}
         height={832}
-        poster="/videos/pages/home-new/hero/poster.jpg"
+        poster={`${LINKS.cdn}/public/pages/home/hero/poster.jpg`}
       >
         <source
-          src="/videos/pages/home-new/hero/hero-av1.mp4"
+          src={`${LINKS.cdn}/public/pages/home/hero/hero-av1.mp4`}
           type="video/mp4; codecs=av01.0.05M.08,opus"
         />
-        <source src="/videos/pages/home-new/hero/hero.mp4" type="video/mp4" />
-        <source src="/videos/pages/home-new/hero/hero.webm" type="video/webm" />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.webm`} type="video/webm" />
       </PauseableVideo>
       <Image
         className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block"
