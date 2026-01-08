@@ -16,7 +16,7 @@ nextLink:
 **Summary**: PostgreSQL 18 adds native OAuth 2.0 authentication, letting you connect to your database using tokens from identity providers like Google, Auth0, or your company's SSO system instead of managing database passwords.
 
 <Admonition type="important">
-Postgres 18 on [Neon](https://neon.com) does not currently support OAuth authentication features.
+Postgres 18 on [Neon](https://neon.com) does not currently support PostgreSQL 18's OAuth authentication feature described in this article.
 </Admonition>
 
 > **Note**: As of this writing, PostgreSQL 18 is in beta. The OAuth features described here are subject to change before the final release. Always refer to the [official PostgreSQL 18 documentation](https://www.postgresql.org/docs/18/) for the most current information.
