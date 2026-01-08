@@ -1,6 +1,8 @@
 import LINKS from 'constants/links';
 import closeIcon from 'icons/close.svg';
 
+const BASE_URL = 'https://neon.com';
+
 const baseSettings = {
   apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
   integrationId: process.env.INKEEP_INTEGRATION_ID,
@@ -17,14 +19,14 @@ const baseSettings = {
           {
             UrlMatch: {
               ruleType: 'PartialUrl',
-              partialUrl: LINKS.docs,
+              partialUrl: `${BASE_URL}${LINKS.docs}`,
             },
           },
           {
             NOT: {
               UrlMatch: {
                 ruleType: 'PartialUrl',
-                partialUrl: LINKS.changelog,
+                partialUrl: `${BASE_URL}${LINKS.changelog}`,
               },
             },
           },
@@ -36,7 +38,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: LINKS.guides,
+          partialUrl: `${BASE_URL}${LINKS.guides}`,
         },
       },
       searchTabLabel: 'Guides',
@@ -45,7 +47,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: LINKS.postgresqltutorial,
+          partialUrl: `${BASE_URL}${LINKS.postgresqltutorial}`,
         },
       },
       searchTabLabel: 'PostgreSQL Tutorial',
@@ -54,7 +56,7 @@ const baseSettings = {
       filters: {
         UrlMatch: {
           ruleType: 'PartialUrl',
-          partialUrl: LINKS.changelog,
+          partialUrl: `${BASE_URL}${LINKS.changelog}`,
         },
       },
       searchTabLabel: 'Changelog',
@@ -78,7 +80,7 @@ const aiChatSettings = {
   userAvatarSrcUrl: '/inkeep/images/user.svg',
   userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
   isChatSharingEnabled: true,
-  shareChatUrlBasePath: LINKS.docsHome,
+  shareChatUrlBasePath: `${BASE_URL}${LINKS.docsHome}`,
   getHelpCallToActions: [
     {
       type: 'OPEN_LINK',
