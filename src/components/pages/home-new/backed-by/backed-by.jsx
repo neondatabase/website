@@ -20,7 +20,7 @@ const ITEMS = [
   {
     icon: databricksIcon,
     title: 'Databricks',
-    description: 'Neon has been part of Databricks Company since May 2025.',
+    description: 'Neon has been a Databricks Company since May 2025.',
     className: 'w-64 xl:w-[220px]',
   },
 ];
