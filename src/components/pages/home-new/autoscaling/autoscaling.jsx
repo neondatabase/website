@@ -145,7 +145,11 @@ const Autoscaling = () => {
                     >
                       <span className="font-semibold">
                         {prefix}
-                        <CountingNumber number={number} started />
+                        <CountingNumber
+                          number={number}
+                          transition={{ stiffness: 560, damping: 50 }}
+                          started
+                        />
                       </span>
                       <span className="ml-2 font-medium">{text}</span>
                     </m.p>
