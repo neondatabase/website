@@ -55,7 +55,7 @@ updatedOn: '2025-12-17T22:36:32.010Z'
 
 <a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
-<a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solid"></a>
+<a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solidstart"></a>
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
