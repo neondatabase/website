@@ -1,10 +1,10 @@
 ---
 title: Getting ready for production
-subtitle: Guidelines to optimize price, performance, and reliability
+subtitle: 'Guidelines to optimize price, performance, and reliability'
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-01-07T00:00:00.000Z'
+updatedOn: '2026-01-09T19:53:45.369Z'
 ---
 
 <CheckList title="Production checklist">
