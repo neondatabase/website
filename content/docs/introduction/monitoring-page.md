@@ -90,6 +90,8 @@ If you're using [connection pooling](/docs/connect/connection-pooling), also mon
 
 ## Pooler client connections
 
+![Pooler client connections graph](/docs/introduction/pooler_client_connections.png)
+
 The **Pooler client connections** graph shows connections from your applications to Neon's PgBouncer connection pooler. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
 
 PgBouncer supports up to 10,000 simultaneous client connections, which is significantly higher than the direct Postgres connection limit. The graph shows the following connection states:
@@ -106,6 +108,8 @@ When all available server connections (connections from PgBouncer to Postgres) a
 - Long-running queries are holding server connections
 - Your compute size may need to be increased to support more concurrent server connections
 
+The graph also displays **Max wait**, which shows the maximum time (in seconds) that any client connection has been waiting for an available server connection. A consistently high max wait time indicates that clients are experiencing delays in getting database access, which could impact application performance
+
 **ACTIVE CANCEL** and **WAITING CANCEL**: Connections in the process of being cancelled.
 
 These represent client connections where a cancellation request has been issued (for example, when a user cancels a query).
@@ -115,6 +119,8 @@ Connection pooling works by allowing many client connections to share a smaller 
 </Admonition>
 
 ## Pooler server connections
+
+![Pooler server connections graph](/docs/introduction/pooler_server_connections.png)
 
 The **Pooler server connections** graph shows connections from Neon's PgBouncer pooler to your Postgres database. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
 
