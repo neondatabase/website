@@ -15,40 +15,43 @@ updatedOn: '2026-01-07T00:00:00.000Z'
 <CheckItem title="2. Choose a region close to your application" href="#choose-a-region-close-to-your-application">
   Deploy your Neon project in the nearest available region to your application to minimize network latency.
 </CheckItem>
-<CheckItem title="3. Protect your production branch" href="#protect-your-production-branch">
+<CheckItem title="3. Keep your production branch as the default" href="#keep-your-production-branch-as-the-default">
+  Your production branch should be a root branch set as the default to ensure compute availability, enable snapshots, and simplify billing.
+</CheckItem>
+<CheckItem title="4. Protect your production branch" href="#protect-your-production-branch">
   Mark production branches as protected to prevent accidental resets or destructive operations.
 </CheckItem>
-<CheckItem title="4. Enable autoscaling and set appropriate limits" href="#enable-autoscaling-and-set-appropriate-limits">
+<CheckItem title="5. Enable autoscaling and set appropriate limits" href="#enable-autoscaling-and-set-appropriate-limits">
   Autoscaling lets your database handle traffic spikes automatically. Set limits that balance performance with cost.
 </CheckItem>
-<CheckItem title="5. Decide whether scale-to-zero is acceptable" href="#decide-whether-scale-to-zero-is-acceptable">
+<CheckItem title="6. Decide whether scale-to-zero is acceptable" href="#decide-whether-scale-to-zero-is-acceptable">
   Scale-to-zero is great for development and bursty usage. For production, disable it if you need consistently low latency.
 </CheckItem>
-<CheckItem title="6. Test connection retries using the Neon API" href="#test-connection-retries-using-the-neon-api">
+<CheckItem title="7. Test connection retries using the Neon API" href="#test-connection-retries-using-the-neon-api">
   Brief disconnects can happen during scaling or maintenance. Verify your application reconnects automatically.
 </CheckItem>
-<CheckItem title="7. Set an appropriate restore window" href="#set-an-appropriate-restore-window">
+<CheckItem title="8. Set an appropriate restore window" href="#set-an-appropriate-restore-window">
   Neon keeps 1 day of restore history by default on paid plans. Increasing this gives you more protection, with storage cost tradeoffs.
 </CheckItem>
-<CheckItem title="8. Consider snapshot schedules" href="#consider-snapshot-schedules">
+<CheckItem title="9. Consider snapshot schedules" href="#consider-snapshot-schedules">
   Snapshot schedules provide consistent backups for point-in-time restore, independently of your restore window.
 </CheckItem>
-<CheckItem title="9. Test your restore workflow" href="#test-your-restore-workflow">
+<CheckItem title="10. Test your restore workflow" href="#test-your-restore-workflow">
   Plan whether you'll restore in place or from a snapshot, and how your application will switch if needed.
 </CheckItem>
-<CheckItem title="10. Clean up your branches regularly" href="#clean-up-your-branches-regularly">
+<CheckItem title="11. Clean up your branches regularly" href="#clean-up-your-branches-regularly">
   Set branch expiration times and add cleanup logic to automated workflows to avoid unnecessary storage costs.
 </CheckItem>
-<CheckItem title="11. Use pooled connections where they make sense" href="#use-pooled-connections-where-they-make-sense">
+<CheckItem title="12. Use pooled connections where they make sense" href="#use-pooled-connections-where-they-make-sense">
   Connection pooling improves concurrency for web and serverless apps, but may not be appropriate for migrations or long-running tasks.
 </CheckItem>
-<CheckItem title="12. Restrict access to production data" href="#restrict-access-to-production-data">
+<CheckItem title="13. Restrict access to production data" href="#restrict-access-to-production-data">
   Limit database access to trusted sources using IP Allow to reduce the risk of unauthorized changes.
 </CheckItem>
-<CheckItem title="13. Install pg_stat_statements" href="#install-pgstatstatements">
+<CheckItem title="14. Install pg_stat_statements" href="#install-pgstatstatements">
   Enable query performance monitoring to track execution times and frequency. This helps you troubleshoot performance issues independently.
 </CheckItem>
-<CheckItem title="14. Integrate with your existing observability stack" href="#integrate-with-your-existing-observability-stack">
+<CheckItem title="15. Integrate with your existing observability stack" href="#integrate-with-your-existing-observability-stack">
   Export Neon metrics to Datadog, Grafana, or any OTEL-compatible platform to monitor usage and capacity alongside your existing systems.
 </CheckItem>
 
@@ -73,6 +76,14 @@ Network latency is one of the most common contributors to database response time
 ![Region selection](/docs/introduction/project_creation_regions.png)
 
 Keep reading: [Neon regions](/docs/introduction/regions)
+
+## Keep your production branch as the default root branch
+
+Your production database should run on a [root branch](/docs/reference/glossary#root-branch) that is set as the project's [default branch](/docs/reference/glossary#default-branch). Neon projects are configured this way by default. Using a root branch enables [snapshots](/docs/guides/backup-restore), provides simpler billing (based on actual data size rather than accumulated changes), and prevents accidental deletion.
+
+Setting it as the default also exempts your production compute from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring it stays available even when many development branches are active.
+
+Keep reading: [Manage branches](/docs/manage/branches)
 
 ## Protect your production branch
 
