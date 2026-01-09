@@ -140,12 +140,14 @@ The total number of server connections (active + idle) is limited by PgBouncer's
 - A 2 CU compute with `max_connections=901` can have up to 810 pooler server connections
 
 <Admonition type="note">
+
 The **Pooler server connections** count is a subset of what you see in the [Postgres connections count](#postgres-connections-count) graph. The Postgres connections count shows all connections to Postgres, including those from the pooler plus any direct (non-pooled) connections. To understand your complete connection picture when using pooling:
 
 - **Pooler client connections**: Shows how many applications/clients are connected to the pooler
 - **Pooler server connections**: Shows how many connections the pooler is using to Postgres (limited by `default_pool_size`)
 - **Postgres connections count**: Shows all connections to Postgres (pooler connections + direct connections)
-  </Admonition>
+
+</Admonition>
 
 ## Database size
 
