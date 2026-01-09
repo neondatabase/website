@@ -18,6 +18,7 @@ const getAllPosts = async () => {
         data: { title, subtitle, isDraft, redirectFrom },
         content,
       } = data;
+      // eslint-disable-next-line consistent-return
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
@@ -25,6 +26,9 @@ const getAllPosts = async () => {
 
 const getNavigation = () =>
   jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8'));
+
+const getSDKNavigation = () =>
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sdk-navigation.yaml`, 'utf8'));
 
 const getNavigationLinks = (slug, flatSidebar) => {
   const posts = [
@@ -70,6 +74,7 @@ const getAllChangelogs = async () => {
 
 module.exports = {
   getNavigation,
+  getSDKNavigation,
   getNavigationLinks,
   getAllChangelogs,
   getAllPosts,

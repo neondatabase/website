@@ -2,7 +2,7 @@
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-04-23T16:49:30.288Z'
+updatedOn: '2026-01-07T12:02:47.908Z'
 ---
 
 ## Before you begin
@@ -15,6 +15,10 @@ updatedOn: '2025-04-23T16:49:30.288Z'
 This command sets a background context for your CLI sessions, letting you perform project or branch-specific actions without having to specify the project id in every command. Using the `context-file` parameter, you can save the context to a file of your choice. If you don't specify a file, a default `.neon` file is saved to the current directory. You can switch contexts by providing different files.
 
 The context remains in place until you reset to a new context or remove the `context-file`.
+
+<Admonition type="tip" title="Context file location">
+The Neon CLI determines where to read or create the `.neon` context file by walking up the directory tree from your current directory. It stops at the first directory containing `.neon`, `package.json`, or `.git`. This ensures the context file is stored at your project root (where `package.json` or `.git` typically exists) rather than in a subdirectory. The search stops at your home directory.
+</Admonition>
 
 ### Usage
 

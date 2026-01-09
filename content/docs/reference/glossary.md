@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-12-11T15:40:49.874Z'
+updatedOn: '2026-01-07T12:02:47.909Z'
 ---
 
 ## access token
@@ -108,7 +108,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ## Collaborator
 
-A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in their personal account.
+A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in the Neon Console.
 
 ## Compute
 
@@ -167,6 +167,23 @@ See [Neon Console](#neon-console).
 ## Control Plane
 
 The part of the Neon architecture that manages cloud storage and compute resources.
+
+## Context file
+
+A JSON file (`.neon` by default) used by the Neon CLI to store project and organization context, allowing you to run commands without specifying `--project-id` or `--org-id` each time. The context file is created by the `neon set-context` command or by accepting the CLI's prompt to save your organization as the default.
+
+The CLI determines the context file location by walking up the directory tree from your current directory, stopping when it finds a directory containing `.neon`, `package.json`, or `.git`. The `.neon` file is then read from (or created in) that directory. Using `package.json` and `.git` as markers ensures that context files are stored at your project root rather than in a subdirectory. The search stops at your home directory, so there is no global context file.
+
+Example context file contents:
+
+```json
+{
+  "orgId": "org-example-12345678",
+  "projectId": "cool-forest-86753099"
+}
+```
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## copy-on-write
 
@@ -419,6 +436,16 @@ You can change your default branch, but a branch carrying the default branch des
 
 For more information, see [default branch](/docs/manage/branches#default-branch).
 
+## Default organization
+
+The organization stored in a Neon CLI [context file](#context-file) (`.neon`), used when no `--org-id` option is specified.
+
+When you run a Neon CLI command without specifying an organization (via `--org-id` or a context file), the CLI prompts you to select one and offers to save it as your default. Only if you choose to save does the CLI create a `.neon` context file containing the selected organization ID.
+
+Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
+
 ## Project
 
 A collection of branches, databases, roles, and other project resources and settings. A project contains a primary [compute](#compute) that runs Postgres. It may also include [read replicas](#read-replica). A Neon account may have multiple projects.
@@ -540,7 +567,7 @@ A memory area in Postgres for caching blocks of data from storage (disk on stand
 
 ## Snapshot
 
-A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ## SNI
 

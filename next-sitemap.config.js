@@ -33,6 +33,10 @@ module.exports = {
 
     // Legacy docs (deprecated)
     '/docs/auth/legacy/*',
+
+    // Deprecated guides
+    '/docs/guides/neosync-anonymize',
+    '/docs/guides/neosync-generate',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -61,6 +65,10 @@ module.exports = {
 
           // Legacy docs (deprecated)
           '/docs/auth/legacy/',
+
+          // Deprecated guides
+          '/docs/guides/neosync-anonymize$',
+          '/docs/guides/neosync-generate$',
         ],
       },
     ],

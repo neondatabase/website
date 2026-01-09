@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2025-12-16T12:23:55.557Z'
+updatedOn: '2026-01-07T15:07:19.162Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -49,19 +49,13 @@ Neon Auth currently supports Better Auth version **1.4.6**.
 
 Enable Auth in your Neon project, then add authentication to your app:
 
-<CodeWithLabel label="src/auth.ts">
-
-```typescript
+```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-</CodeWithLabel>
-
-<CodeWithLabel label="src/App.tsx">
-
-```tsx
+```tsx filename="src/App.tsx"
 import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from './auth';
 
@@ -73,8 +67,6 @@ export default function App() {
   );
 }
 ```
-
-</CodeWithLabel>
 
 ## Use cases
 
@@ -114,6 +106,18 @@ Choose your framework to get started:
 ## Availability
 
 Neon Auth is currently available for AWS regions only. Azure support is not yet available.
+
+## Pricing
+
+Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
+
+- **Free**: Up to 60,000 MAU
+- **Launch**: Up to 1M MAU
+- **Scale**: Up to 1M MAU
+
+An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, [contact Sales](/contact-sales).
+
+See [Neon plans](/docs/introduction/plans#auth) for more details.
 
 ## Migration from Stack Auth
 

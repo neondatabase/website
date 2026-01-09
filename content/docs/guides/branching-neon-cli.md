@@ -2,7 +2,7 @@
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
 enableTableOfContents: true
-updatedOn: '2025-08-07T17:19:33.979Z'
+updatedOn: '2025-12-24T20:15:40.197Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -16,7 +16,7 @@ The examples show the default `table` output format. The Neon CLI also supports 
 
 ## Create a branch with the CLI
 
-The following Neon CLI command creates a branch. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#create).
+The following Neon CLI command creates a branch. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#create).
 The command response includes the branch ID, the compute endpoint ID, and the connection URI for connecting to the branch.
 
 <Admonition type="tip">
@@ -80,7 +80,9 @@ connection_uris
 
 ## List branches with the CLI
 
-The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches#list).
+The following Neon CLI command lists all branches in your Neon project, as well as any branches shared with you. This command requires specifying which project to use. You can use the `--project-id` option or set a default project using `neon set-context`. To view the CLI documentation for this method, refer to the [Neon CLI reference](/docs/reference/cli-branches#list).
+
+First, list your projects to get your project ID:
 
 ```bash
 neon projects list
@@ -102,12 +104,29 @@ Shared with you
 └───────────────────┴────────────────────┴──────────────────┴──────────────────────┘
 ```
 
-## Delete a branch with the CLI
-
-The following Neon CLI command deletes the specified branch. If your Neon account has more than one project, you will be required to specify a project ID using the `--project-id` option. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#delete). You can delete a branch by its ID or name.
+Now list your branches using your project ID:
 
 ```bash
-neon branches delete br-rough-sky-158193
+neon branches list --project-id crimson-voice-12345678
+┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
+│ Name         │ Id                         │ Current State │ Created At           │
+├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+│ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2024-04-23T21:05:05Z │
+├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+│ ✱ main       │ br-bold-wind-a4p92kpx      │ ready         │ 2024-04-23T21:04:57Z │
+└──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+```
+
+<Admonition type="tip">
+To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+</Admonition>
+
+## Delete a branch with the CLI
+
+The following Neon CLI command deletes the specified branch. This command requires a `--project-id` option unless you've set a default project with `neon set-context`. To view the CLI documentation for this command, refer to the [Neon CLI reference](/docs/reference/cli-branches#delete). You can delete a branch by its ID or name.
+
+```bash
+neon branches delete br-rough-sky-158193 --project-id crimson-voice-12345678
 ┌───────────────────────┬───────────────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                    │ Name                  │ Default │ Created At           │ Updated At           │
 ├───────────────────────┼───────────────────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -173,7 +192,7 @@ Example:
 This example resets a feature branch to match the latest state of its parent branch:
 
 ```bash
-neon branches reset feature/user-auth --parent
+neon branches reset feature/user-auth --parent --project-id crimson-voice-12345678
 ┌────────────────────────────┬───────────────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                         │ Name              │ Default │ Created At           │ Last Reset At        │
 ├────────────────────────────┼───────────────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -189,7 +208,7 @@ If the branch you want to reset has child branches, you need to include the `pre
 For example, here we are resetting `feature/user-auth` to its parent while preserving its latest state under the branch name `feature/user-auth-backup`:
 
 ```bash
-neon branches reset feature/user-auth --parent --preserve-under-name feature/user-auth-backup
+neon branches reset feature/user-auth --parent --preserve-under-name feature/user-auth-backup --project-id crimson-voice-12345678
 ┌────────────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
 │ Id                         │ Name     │ Default │ Created At           │ Last Reset At        │
 ├────────────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
@@ -206,10 +225,10 @@ Using the CLI, you can restore a branch to an earlier point in its history or an
 neon branches restore <target id|name> <source id|name @ timestamp|lsn>
 ```
 
-This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2024-02-20`
+This command restores the branch `production` to an earlier timestamp in its own history, saving to a backup branch called `production_restore_backup_2024-05-06`:
 
-```bash
-neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06
+```bash shouldWrap
+neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06 --project-id crimson-voice-12345678
 ```
 
 Results of the operation:

@@ -6,7 +6,7 @@ redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2025-08-02T10:33:29.259Z'
+updatedOn: '2025-12-22T13:54:25.159Z'
 ---
 
 Looking back at Neon's debut blog post, [SELECT ’Hello, World’](/blog/hello-world), the fundamental reasons for **Why Neon** remain the same:
@@ -33,7 +33,7 @@ These are Neon's reasons, but given the many _database-as-a-service_ options ava
 
 **Postgres is the world's most popular open-source database.**
 
-From its beginning as a [DARPA-sponsored project at Berkeley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred database among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/extensions-intro).
+From its beginning as a [DARPA-sponsored project at Berkeley](https://www.postgresql.org/docs/current/history.html), Postgres has fostered an ever-growing community and is a preferred database among developers because of its performance, reliability, extensibility, and support for features like ACID transactions, advanced SQL, and NoSQL/JSON. Neon supports all of the latest Postgres versions and numerous [Postgres extensions](/docs/extensions/pg-extensions).
 
 **If your application runs on Postgres, it runs on Neon**. If it doesn't run on Postgres, [sign up](https://console.neon.tech/signup) for a Free plan account, join our [Discord server](https://discord.gg/92vNTzKDGp), and start the journey with us.
 
