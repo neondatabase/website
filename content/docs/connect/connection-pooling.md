@@ -105,6 +105,10 @@ The `max_connections` setting still applies for direct Postgres connections.
 You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
 </Admonition>
 
+<Admonition type="tip" title="Monitor your connection pool activity">
+Track pooled connections on the [Monitoring page](/docs/introduction/monitoring-page) in the Neon Console. PgBouncer metrics are also exported via the [OpenTelemetry](/docs/guides/opentelemetry) and [Datadog](/docs/guides/datadog) integrations.
+</Admonition>
+
 ### Pool lifecycle and compute restarts
 
 Connection pools, when combined with proper health-checks and lifecycle management, significantly reduce user-facing disruptions during compute restarts (such as during maintenance or updates). Here's how pools help maintain a smooth user experience:
