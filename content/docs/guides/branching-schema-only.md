@@ -135,7 +135,7 @@ Unlike other branches, schema-only branches do not have a parent branch, as you 
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 
-Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `production` branch in your Neon project. When you create a schema-only branch, you're creating a new **root branch**.
+Schema-only branches are independent [root branches](/docs/reference/glossary#root-branch), just like the `main` branch in your Neon project. When you create a schema-only branch, you're creating a new **root branch**.
 
 ### Key points about schema-only branches
 

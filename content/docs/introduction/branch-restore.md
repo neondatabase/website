@@ -182,7 +182,7 @@ Here is an example of a command that restores a target branch to an earlier poin
 neon branches restore development production@0/12345
 ```
 
-This command will restore the target branch `development` to an earlier point in time from the source branch `production`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `production`.
+This command will restore the target branch `development` to an earlier point in time from the source branch `main`, using the LSN `0/12345` to specify the point in time. If you left out the point-in-time identifier, the command would default to the latest data (HEAD) for the source branch `main`.
 
 For full CLI documentation for `branches restore`, see [branches restore](/docs/reference/cli-branches#restore).
 </TabItem>
@@ -301,4 +301,4 @@ There are minimal impacts to billing from the instant restore and Time Travel As
 - Deleting backup branches is only supported in certain cases. See [Deleting backup branches](#deleting-backup-branches) for details.
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
 - When you restore a non-root branch to an earlier point in time, the backup branch becomes the parent of the restored branch. This means subsequent "Reset from parent" operations will reset to the backup, not to your original parent branch.
-  For example, let's say you have a `production` branch with a child development branch `development`. You restore `development` to an earlier point in time. At this point, `development`'s parent changes from `production` to the backup `development_old_timestamp`. Later, if you want to refresh `development` with the latest data from `production`, you cannot use **Reset from parent** since the backup is now the parent. Instead, use **Instant restore** and select `production` as the source.
+  For example, let's say you have a `main` branch with a child development branch `development`. You restore `development` to an earlier point in time. At this point, `development`'s parent changes from `main` to the backup `development_old_timestamp`. Later, if you want to refresh `development` with the latest data from `main`, you cannot use **Reset from parent** since the backup is now the parent. Instead, use **Instant restore** and select `main` as the source.
