@@ -78,6 +78,8 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <a href="/docs/guides/outerbase" title="Outerbase" description="Connect Outerbase to Neon" icon="outerbase"></a>
 
+<a href="/docs/guides/draxlr" title="Draxlr" description="Connect Draxlr to Neon" icon="draxlr"></a>
+
 </TechCards>
 
 ## Develop

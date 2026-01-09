@@ -131,6 +131,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/dotnet.svg',
     darkIconPath: null,
   },
+  draxlr: {
+    name: 'draxlr',
+    lightIconPath: '/images/technology-logos/draxlr.svg',
+    darkIconPath: null,
+  },
   drizzle: {
     name: 'drizzle',
     lightIconPath: '/images/technology-logos/drizzle.svg',
