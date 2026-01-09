@@ -236,9 +236,6 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | Neon Auth variables for drop-in authentication                      |
-
-> **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
 
 ---
 

@@ -271,7 +271,7 @@ For attribute definitions, find the [List preloaded libraries](https://api-docs.
       "description": "Anonymization & Data Masking for PostgreSQL",
       "is_default": false,
       "is_experimental": false,
-      "version": "2.1.0"
+      "version": "2.5.1"
     }
   ]
 }

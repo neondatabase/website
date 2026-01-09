@@ -209,6 +209,10 @@ Neon automatically organizes your data into separate service entities: your conf
 
 Click **Add** to save your configuration and start the data export.
 
+<Admonition type="tip">
+You can edit your integration settings at any time from the **Integrations** page in the Neon Console. This allows you to update your endpoint URL, change authentication credentials, or modify resource attributes without having to delete and recreate the integration.
+</Admonition>
+
 ## Verify your integration is working
 
 Your Neon data should start appearing in your observability platform within a few minutes.
@@ -288,6 +292,8 @@ Additionally, if you are setting up the OpenTelemetry integration for a project 
   - If your platform expects data directly at the base URL without suffixes, you may need to change its configuration or use a compatible OTLP gateway.
 
 ## Available metrics
+
+Neon exports a comprehensive set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
 
 For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
