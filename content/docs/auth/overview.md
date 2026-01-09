@@ -80,7 +80,7 @@ export default function App() {
   Test complex org and role hierarchies safely in isolated branches
 
 - **CI/CD workflows**  
-  Run end-to-end auth tests without touching production
+  Run end-to-end auth tests without touching production. The [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action) supports retrieving branch-specific auth URLs for testing authentication flows in GitHub Actions workflows.
 
 - **Development workflows**  
   Spin up complete environments instantly with database and auth together

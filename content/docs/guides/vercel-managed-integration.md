@@ -98,8 +98,9 @@ Once enabled, the flow looks like this:
 
 1.  Developer pushes to feature branch → Vercel kicks off Preview Deployment.
 2.  Vercel sends a webhook to Neon → Neon creates branch `preview/<git-branch>`.
-3.  Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
-4.  (Optional) Run migrations in build step so schema matches code.
+3.  If your production branch has Neon Auth enabled, the integration automatically provisions Neon Auth for the preview branch.
+4.  Environment variables for the branch connection are injected via webhook at deployment time, overriding preview environment variables for this deployment only (cannot be accessed or viewed in your Vercel project's environment variable settings).
+5.  (Optional) Run migrations in build step so schema matches code.
 
     ![Vercel build commands](/docs/guides/vercel_build_command.png)
 
@@ -236,9 +237,9 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | Neon Auth variables for drop-in authentication                      |
+| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Neon Auth URLs for authentication (automatically set when Neon Auth is enabled on your branch) |
 
-> **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
+> **Neon Auth variables** are automatically set for production and preview branches when Neon Auth is enabled. These variables allow you to integrate authentication directly into your application without additional configuration. Learn more in the [Neon Auth documentation](/docs/auth/overview).
 
 ---
 
