@@ -4,7 +4,7 @@ subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2025-11-17T20:56:53.510Z'
+updatedOn: '2026-01-09T19:51:39.514Z'
 ---
 
 Instagres enables instant provisioning of a Postgres database without configuration or account creation.

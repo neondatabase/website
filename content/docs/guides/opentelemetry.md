@@ -3,7 +3,7 @@ title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
 enableTableOfContents: true
-updatedOn: '2025-09-22T19:22:14.582Z'
+updatedOn: '2026-01-09T19:51:39.512Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
