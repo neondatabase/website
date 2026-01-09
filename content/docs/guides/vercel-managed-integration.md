@@ -230,12 +230,12 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 
 ## Environment variables set by the integration
 
-| Variable                                                          | Purpose                                                                                        |
-| :---------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- |
-| `DATABASE_URL`                                                    | Pooled connection string (PgBouncer)                                                           |
-| `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                                                       |
-| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                                             |
-| `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates                            |
+| Variable                                                          | Purpose                                                             |
+| :---------------------------------------------------------------- | :------------------------------------------------------------------ |
+| `DATABASE_URL`                                                    | Pooled connection string (PgBouncer)                                |
+| `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
+| `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
+| `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
 
 ---
 
