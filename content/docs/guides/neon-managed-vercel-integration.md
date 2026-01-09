@@ -135,11 +135,11 @@ When you push commits to a feature branch, Vercel triggers a preview deployment.
 
 ## Integration creates Neon branch
 
-The integration receives a webhook from Vercel and creates a new Neon branch named `preview/<git-branch>` using the Neon API. If your production branch has Neon Auth enabled, the integration automatically provisions Neon Auth for the preview branch.
+The integration receives a webhook from Vercel and creates a new Neon branch named `preview/<git-branch>` using the Neon API.
 
 ## Environment variables injected
 
-Vercel receives the new connection string and injects it as environment variables for that specific deployment only. If Neon Auth is enabled, the integration also sets `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables.
+Vercel receives the new connection string and injects it as environment variables for that specific deployment only.
 
 </Steps>
 
@@ -171,7 +171,6 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications)
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
-- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Neon Auth URLs (automatically set when Neon Auth is enabled on your branch)
 
 **To customize which variables are used:**
 
