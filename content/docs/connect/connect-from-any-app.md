@@ -29,7 +29,7 @@ You are responsible for maintaining the records and associations of any connecti
 
 ## Get a connection string from the Neon console
 
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
 
 You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. This opens the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 

@@ -32,7 +32,7 @@ To set a branch as protected:
 
    ![Branch page](/docs/guides/ip_allow_branch_page.png)
 
-3. Select a branch from the table. In this example, we'll configure our default branch `production` as a protected branch.
+3. Select a branch from the table. In this example, we'll configure our default branch `main` as a protected branch.
 4. On the branch page, click **Protect**.
 
    ![Set as protected](/docs/guides/ip_allow_set_as_protected.png)
