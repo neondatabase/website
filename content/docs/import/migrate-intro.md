@@ -16,14 +16,14 @@ If you can't afford downtime, use [Logical Replication](/docs/guides/logical-rep
 
 ## Migration methods
 
-| Method                                                            | Best For                               | Database Size | Downtime                | Technical Skill | Key Benefit                   |
-| ----------------------------------------------------------------- | -------------------------------------- | ------------- | ----------------------- | --------------- | ----------------------------- |
-| [Import Data Assistant](/docs/import/import-data-assistant)       | Quick migrations                       | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
-| [pg_dump/restore](/docs/import/migrate-from-postgres)             | Standard migrations                    | Any size      | Required                | Medium          | Reliable and well-tested      |
-| [pgcopydb](/docs/import/pgcopydb)                                 | Large databases                        | 10GB+         | Required                | Medium          | Parallel processing - fast    |
-| [Logical Replication](/docs/guides/logical-replication-guide)     | Production workloads                   | Any size      | Near-zero               | High            | Minimal downtime              |
-| [pgloader](#provider-specific-guides)                             | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
-| [AWS DMS](/docs/import/migrate-aws-dms)                           | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
+| Method                                                        | Best For                               | Database Size | Downtime                | Technical Skill | Key Benefit                   |
+| ------------------------------------------------------------- | -------------------------------------- | ------------- | ----------------------- | --------------- | ----------------------------- |
+| [Import Data Assistant](/docs/import/import-data-assistant)   | Quick migrations                       | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
+| [pg_dump/restore](/docs/import/migrate-from-postgres)         | Standard migrations                    | Any size      | Required                | Medium          | Reliable and well-tested      |
+| [pgcopydb](/docs/import/pgcopydb)                             | Large databases                        | 10GB+         | Required                | Medium          | Parallel processing - fast    |
+| [Logical Replication](/docs/guides/logical-replication-guide) | Production workloads                   | Any size      | Near-zero               | High            | Minimal downtime              |
+| [pgloader](#provider-specific-guides)                         | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
+| [AWS DMS](/docs/import/migrate-aws-dms)                       | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
 
 ## Provider-specific guides
 
