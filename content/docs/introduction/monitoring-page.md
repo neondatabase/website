@@ -145,7 +145,7 @@ The **Pooler server connections** count is a subset of what you see in the [Post
 - **Pooler client connections**: Shows how many applications/clients are connected to the pooler
 - **Pooler server connections**: Shows how many connections the pooler is using to Postgres (limited by `default_pool_size`)
 - **Postgres connections count**: Shows all connections to Postgres (pooler connections + direct connections)
-</Admonition>
+  </Admonition>
 
 ## Database size
 
