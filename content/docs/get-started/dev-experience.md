@@ -4,7 +4,7 @@ subtitle: Enhancing development workflows with Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2025-12-22T13:54:25.159Z'
+updatedOn: '2026-01-09T15:57:09.716Z'
 ---
 
 Discover how Neon's features can streamline your development process, reduce risks, and enhance productivity, helping you to ship faster with confidence.
@@ -17,7 +17,7 @@ Neon's branching feature lets you branch your data like you branch code. Neon br
 
 ![Branching workflows](/docs/get-started/branching_workflow.jpg)
 
-You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `production` with a simple CLI command:
+You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 ```bash
 neon branches create --name feature/user-auth
@@ -25,7 +25,7 @@ neon branches create --name feature/user-auth
 
 Neon's copy-on-write technique makes branching instantaneous and cost-efficient. Whether your database is 1 GB or 1 TiB, [it only takes seconds to create a branch](/blog/how-to-copy-large-postgres-databases-in-seconds), and Neon's branches are full database copies by default — with schema-only as an option.
 
-Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `production` with a simple command.
+Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
 ```bash
 neon branches reset feature/user-auth --parent
