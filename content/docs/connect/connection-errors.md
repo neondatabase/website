@@ -25,6 +25,7 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
 - [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
 - [DNS resolution issues](#dns-resolution-issues)
+- [Error: Access to this endpoint is temporarily disabled](#access-to-this-endpoint-is-temporarily-disabled)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -344,5 +345,9 @@ Failure to resolve the Neon hostname can happen for different reasons:
 3. **Using a VPN**
 
    Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
+
+## Access to this endpoint is temporarily disabled
+
+This error can for example happen if you want to connect to a anonymized branch, but the anonymization is not finished yet
 
 <NeedHelp/>
