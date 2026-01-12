@@ -63,32 +63,35 @@ Two improvements are clear in the chart above:
 
 Throughout the rest of this report, we focus on the difference between the amount of compute (and costs) used in an autoscaling vs provisioned database platform running the same workloads.
 
-## Autoscaling Usage Patterns
-
-We see three distinct patterns of autoscaling usage on Neon: [Standard Production](#standard-production), [Burst Capacity](#burst-capacity), and [Scale to Zero](#scale-to-zero).
-For each, we take a different approach to rightsizing the workload on a provisioned platform.
-
----
-
-<span className="not-prose relative top-6 -mb-6 text-sm font-semibold uppercase leading-none -tracking-extra-tight sm:text-[10px] text-blue-80">Pattern 1</span>
-
-### Standard Production
+## Autoscaling for Production Databases
 
 Most production databases have a predictable periodic pattern of load, especially at 24-hour and 7-day intervals.
 
 <AutoscalingChart title="One week of Autoscaling on a Standard Production Database" datasetKey="predictable_fluctuation" autoscalingOnly={true} showStats={false} compact={true}/>
 
-The chart above is the autoscaling record of a Neon database that exemplifies the standard production pattern. In a week of autoscaling we see three patterns:
+We can see three patterns:
 
 1. **Intra-day**: Within a 24hr period, load hits a mid-day peak and a nightly trough.
 2. **Weekend**: On the weekend, load is noticeably lower.
 3. **Daily spike**: A scheduled task causes a spike at the same time most days.
 
-#### Running the same workload on a provisioned instance
+<div className="relative rounded-[1px] border-l-4 bg-gray-new-98 px-6 py-4 dark:bg-gray-new-8 border-[#2982FF] dark:border-[#4C97FF]" style={{"margin-left":"-2rem"}}>
+<span className="relative w-fit font-semibold tracking-extra-tight text-[#2982FF] text-xl">Platform-wide Data for Standard Production Workloads</span>
 
-> _What if you took this exact workload and ran it on a provisioned database like RDS?_
+Across the entire Neon platform in 2025, the average standard production database used <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> than if sized at 20% above peak load on a provisioned platform like RDS.
 
-On a provisioned instance, you need to allocate enough resources to be safely above peak load.
+[CHART]
+
+When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.085/CU-hour` equivalent for RDS, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">82% lower costs on Neon</span> on average.
+
+As databases get larger, the percentage of savings from autoscaling goes down but the total dollar amount goes up.
+
+</div>
+
+### Example
+
+Here is the detailed price comparison for a real Neon customer's Database powering a production application.
+If it were running on a provisioned instance, it would need enough CPU and Memory allocated to always be safely above peak load.
 AWS rightsizing recommendations default to recommending "peak + 20%".
 
 <AutoscalingChart title="Standard Production. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" width="window" autoscalingRate={0.222} />
@@ -103,18 +106,8 @@ The math checks out. Our estimated cost of $587 is on the low side of the range 
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 10CPU 40GB RAM RDS instance, so you are forced to "round up" significantly to the next largest instance.
 
-<div className="relative rounded-[1px] border-l-4 bg-gray-new-98 px-6 py-4 dark:bg-gray-new-8 border-[#2982FF] dark:border-[#4C97FF]" style={{"margin-left":"-2rem"}}>
-<span className="relative w-fit font-semibold tracking-extra-tight text-[#2982FF] text-xl">Platform-wide Data for Standard Production Workloads</span>
 
-Across the entire Neon platform in 2025, the average standard production database used <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> than if sized at 20% above peak load on a provisioned platform like RDS.
-
-When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.085/CU-hour` equivalent for RDS, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">82% lower costs on Neon</span> on average.
-
-</div>
-
-<span className="not-prose relative top-6 -mb-6 text-sm font-semibold uppercase leading-none -tracking-extra-tight sm:text-[10px] text-blue-80">Pattern 2</span>
-
-### Burst Capacity
+### Autoscaling for Burst Capacity
 
 For a second category of databases, the autoscaling graph looks like the one below.
 
