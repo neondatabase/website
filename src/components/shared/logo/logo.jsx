@@ -1,16 +1,14 @@
 'use client';
 
 import * as Toast from '@radix-ui/react-toast';
-import clsx from 'clsx';
 import copyToClipboard from 'copy-to-clipboard';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
 import LINKS from 'constants/links';
 import useContextMenu from 'hooks/use-context-menu';
-import logoBlack from 'images/logo-black.svg';
-import logoWhite from 'images/logo-white.svg';
+import LogoIcon from 'icons/logo.inline.svg';
+import logoSvg from 'images/logo.svg';
 
 import Link from '../link';
 
@@ -21,7 +19,7 @@ import NeonIcon from './images/neon.inline.svg';
 
 const copySvgToClipboard = async () => {
   try {
-    const response = await fetch(logoWhite);
+    const response = await fetch(logoSvg);
     const svgContent = await response.text();
     copyToClipboard(svgContent);
   } catch (error) {
@@ -46,7 +44,7 @@ const data = [
   },
 ];
 
-const Logo = ({ className = null, width, height, priority = undefined, isHeader = false }) => {
+const Logo = ({ className = null, width, height, isHeader = false }) => {
   const { clicked, setClicked } = useContextMenu();
   const [open, setOpen] = useState(false);
 
@@ -68,24 +66,7 @@ const Logo = ({ className = null, width, height, priority = undefined, isHeader 
         onContextMenu={isHeader ? handleContextMenu : undefined}
       >
         <span className="sr-only">Neon</span>
-        <Image
-          className={clsx('dark:hidden', className)}
-          src={logoBlack}
-          alt=""
-          width={width}
-          height={height}
-          priority={priority}
-          aria-hidden
-        />
-        <Image
-          className={clsx('hidden dark:block', className)}
-          src={logoWhite}
-          alt=""
-          width={width}
-          height={height}
-          priority={priority}
-          aria-hidden
-        />
+        <LogoIcon className={className} width={width} height={height} />
       </Link>
       {isHeader && clicked && (
         <div
@@ -129,7 +110,6 @@ Logo.propTypes = {
   className: PropTypes.string,
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
-  priority: PropTypes.bool,
   isHeader: PropTypes.bool,
 };
 

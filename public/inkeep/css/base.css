@@ -26,7 +26,6 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: grayscale(1);
 }
 
 .ikp-tagline:before {
@@ -46,11 +45,6 @@
   }
 
   .ikp-tagline:after {
-    background: url('/inkeep/images/neon-white-logo.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: grayscale(1);
-    opacity: 0.48;
+    opacity: 0.6;
   }
 }
