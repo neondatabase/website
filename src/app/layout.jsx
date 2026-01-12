@@ -7,7 +7,6 @@ import { TabsProvider } from 'contexts/tabs-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
-import SessionProvider from './session-provider';
 import ThemeProvider from './theme-provider';
 
 export const preferredRegion = 'edge';
@@ -28,15 +27,13 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href={LINKS.console} />
     </head>
     <body>
-      <SessionProvider>
-        <ThemeProvider>
-          <HomepageVisitProvider>
-            <TabsProvider>
-              <CodeTabsProvider>{children}</CodeTabsProvider>
-            </TabsProvider>
-          </HomepageVisitProvider>
-        </ThemeProvider>
-      </SessionProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <TabsProvider>
+            <CodeTabsProvider>{children}</CodeTabsProvider>
+          </TabsProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );
