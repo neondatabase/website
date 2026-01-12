@@ -299,8 +299,6 @@ Neon does not provide a built-in file storage service. For managing binary file 
 You can find the source code for the applications described in this guide on GitHub.
 
 <DetailIconCards>
-<!-- <a href="https://github.com/neondatabase/examples/tree/main/with-tanstack-start-server-functions" description="Get started with TanStack Start Server Functions and Neon" icon="github">Get started with TanStack Start Server Functions and Neon</a> -->
-
 
 </DetailIconCards>
 
