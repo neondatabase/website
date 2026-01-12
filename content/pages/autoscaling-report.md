@@ -106,7 +106,6 @@ The math checks out. Our estimated cost of $587 is on the low side of the range 
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 10CPU 40GB RAM RDS instance, so you are forced to "round up" significantly to the next largest instance.
 
-
 ### Autoscaling for Burst Capacity
 
 For a second category of databases, the autoscaling graph looks like the one below.
