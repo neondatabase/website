@@ -11,7 +11,7 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
-  <footer className="safe-paddings mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+  <footer className="safe-paddings relative z-30 mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
     <Container className="flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5" size="1600">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
@@ -56,7 +56,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                   >
                     <Tag
                       className={clsx(
-                        'group/link relative -my-px flex items-center whitespace-nowrap rounded-sm py-px',
+                        'group/link relative -my-px flex cursor-pointer items-center whitespace-nowrap rounded-sm py-px',
                         'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
                         'transition-colors duration-200 hover:text-black-pure',
                         'dark:text-gray-new-60 dark:hover:text-white'
@@ -90,7 +90,7 @@ const Footer = ({ hasThemesSupport = false }) => (
                     {hasSubmenu && (
                       <div
                         className={clsx(
-                          'absolute bottom-full right-0 min-w-[230px] pb-2.5',
+                          'absolute bottom-full right-0 z-50 min-w-[230px] pb-2.5',
                           'pointer-events-none opacity-0',
                           'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
                           'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',

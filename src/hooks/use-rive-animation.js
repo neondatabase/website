@@ -1,8 +1,10 @@
 'use client';
 
-import { Alignment, Fit, decodeFont, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit, useRive } from '@rive-app/react-canvas';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
+
+import { getCachedFontLoader } from 'utils/rive-font-loader';
 
 const useRiveAnimation = ({
   src,
@@ -36,31 +38,6 @@ const useRiveAnimation = ({
     ...(visibilityRootMargin && { rootMargin: visibilityRootMargin }),
   });
 
-  // Default asset loader for fonts
-  const defaultAssetLoader = (asset, bytes) => {
-    if (asset?.cdnUuid?.length > 0 || bytes?.length > 0) {
-      return false;
-    }
-
-    if (asset?.isFont) {
-      const assetName = asset.name || '';
-      const fontUrl =
-        assetName === 'Geist Mono'
-          ? '/fonts/geist-mono/GeistMono-Regular.ttf'
-          : 'https://cdn.rive.app/runtime/flutter/inter.ttf';
-
-      fetch(fontUrl).then(async (res) => {
-        const font = await decodeFont(new Uint8Array(await res.arrayBuffer()));
-        asset.setFont(font);
-        font.unref();
-      });
-
-      return true;
-    }
-
-    return false;
-  };
-
   const { rive, RiveComponent } = useRive({
     src,
     artboard,
@@ -69,7 +46,7 @@ const useRiveAnimation = ({
     autoBind,
     fit,
     alignment,
-    assetLoader: assetLoader || defaultAssetLoader,
+    assetLoader: assetLoader || getCachedFontLoader(),
     onLoad: () => {
       rive?.resizeDrawingSurfaceToCanvas();
       setIsLoaded(true);
