@@ -71,7 +71,7 @@ curl -X POST \
   }'
 ```
 
-For complete parameter documentation and additional examples, see [Create anonymized branch](#create-anonymized-branch) in the API reference below. The API supports all PostgreSQL Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
+For complete parameter documentation and additional examples, see [Create anonymized branch](/docs/workflows/data-anonymization-api#create-anonymized-branch) in the API reference. The API supports all PostgreSQL Anonymizer masking functions, providing more options than the Console UI. You can also export and import masking rules to manage them outside of Neon.
 
 </TabItem>
 
@@ -117,7 +117,7 @@ If you've defined custom masking rules via the API or SQL (such as custom Postgr
 </Admonition>
 
 3. Repeat for all sensitive columns.
-4. When you are ready, click **Apply masking rules** to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
+4. When you are ready, click **Apply masking rules** to start the anonymization job. You can monitor its progress on this page or via the [API](/docs/workflows/data-anonymization-api#get-anonymization-status).
 
 ![Neon Console 'data masking' dialog with example masking functions configured](/docs/workflows/anon-data-masking.png)
 
@@ -129,7 +129,7 @@ Rerunning the anonymization process on the anonymized branch applies rules to pr
 
 <TabItem>
 
-For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below. Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
+For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
 
 **Update masking rules**
 
