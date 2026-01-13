@@ -174,8 +174,11 @@ In your static server functions, add the following code snippet to connect to yo
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
+// server/get-data.ts:
 import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -217,6 +220,8 @@ export default function Page() {
 // server/get-data.ts:
 import postgres from 'postgres';
 import { createServerFn } from "@tanstack/react-start";
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+
 
 export const getData = createServerFn({ method: "GET" })
 .middleware([staticFunctionMiddleware])
@@ -249,6 +254,8 @@ export default function Page() {
 // server/get-data.ts:
 import { neon } from "@neondatabase/serverless";
 import { createServerFn } from "@tanstack/react-start";
+import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
+
 
 export const getData = createServerFn({ method: "GET" })
 .middleware([staticFunctionMiddleware])
