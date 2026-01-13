@@ -776,12 +776,8 @@
                   slug: guides/grafbase
                 - title: Hasura
                   slug: guides/hasura
-                - title: Outerbase
-                  slug: guides/outerbase
                 - title: PostgREST
                   slug: guides/postgrest
-                - title: StepZen
-                  slug: guides/stepzen
                 - title: WunderGraph
                   slug: guides/wundergraph
 

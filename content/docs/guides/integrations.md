@@ -112,11 +112,7 @@ updatedOn: '2025-12-19:17:12:04.720Z'
 
 <a href="/docs/guides/hasura" title="Hasura" description="Connect from Hasura Cloud to Neon" icon="hasura"></a>
 
-<a href="/docs/guides/outerbase" title="Outerbase" description="Connect Outerbase to Neon" icon="outerbase"></a>
-
 <a href="/docs/guides/postgrest" title="PostgREST" description="Create a REST API from your Neon database" icon="postgresql"></a>
-
-<a href="/docs/guides/stepzen" title="StepZen" description="Use StepZen with Neon" icon="stepzen"></a>
 
 <a href="/docs/guides/wundergraph" title="Wundergraph" description="Use Wundergraph with Neon" icon="wundergraph"></a>
 
