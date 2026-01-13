@@ -3,12 +3,12 @@ name: E2E on Chrome
 on:
   push:
     paths:
-      - 'src/utils/forms.js'
-      - 'src/constants/forms.js'
-      - 'cypress/**'
-      - 'src/components/shared/changelog-form/**'
-      - 'src/components/pages/contact-sales/hero/contact-form/**'
-      - 'src/components/pages/startups/hero/contact-form/**'
+      - "src/utils/forms.js"
+      - "src/constants/forms.js"
+      - "cypress/**"
+      - "src/components/shared/changelog-form/**"
+      - "src/components/pages/contact-sales/hero/contact-form/**"
+      - "src/components/pages/startups/hero/contact-form/**"
 permissions:
   contents: read
 
@@ -20,7 +20,6 @@ jobs:
     env:
       QSTASH_CURRENT_SIGNING_KEY: ${{ secrets.QSTASH_CURRENT_SIGNING_KEY }}
       QSTASH_NEXT_SIGNING_KEY: ${{ secrets.QSTASH_NEXT_SIGNING_KEY }}
-      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
     steps:
       - name: Harden the runner (Audit all outbound calls)
         uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
@@ -36,7 +35,7 @@ jobs:
           browser: chrome
           build: npm run build
           start: npm run start
-          wait-on: 'http://localhost:3000'
+          wait-on: "http://localhost:3000"
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
           WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
