@@ -24,8 +24,6 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <TechCards>
 
-<a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
-
 <a href="/docs/guides/cloudflare-pages" title="Cloudflare Pages" description="Use Neon with Cloudflare Pages" icon="cloudflare"></a>
 
 <a href="/docs/guides/cloudflare-workers" title="Cloudflare Workers" description="Use Neon with Cloudflare Workers" icon="cloudflare"></a>
@@ -42,17 +40,19 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <a href="/docs/guides/render" title="Render" description="Use Neon Postgres with Render" icon="render"></a>
 
+<a href="/docs/guides/vercel-overview" title="Vercel" description="Learn how to integrate Neon with Vercel" icon="vercel"></a>
+
 </TechCards>
 
 ## Serverless
 
 <TechCards>
 
-<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
-
 <a href="/docs/guides/aws-lambda" title="AWS Lambda" description="Connect from AWS Lambda to Neon" icon="aws-lambda"></a>
 
 <a href="/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+
+<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
 </TechCards>
 
@@ -86,15 +86,15 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <TechCards>
 
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
+
 <a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
+
+<a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
 
 <a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
 
 <a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
-
-<a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
-
-<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
 
 </TechCards>
 

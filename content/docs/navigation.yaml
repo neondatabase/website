@@ -692,21 +692,6 @@
           items:
             - title: Deploy
               items:
-                - title: Vercel
-                  slug: guides/vercel-overview
-                  items:
-                    - title: Integration Overview
-                      slug: guides/vercel-overview
-                    - title: Vercel-Managed (Native Integration)
-                      slug: guides/vercel-managed-integration
-                    - title: Neon-Managed (Connectable Account)
-                      slug: guides/neon-managed-vercel-integration
-                    - title: Manual Setup
-                      slug: guides/vercel-manual
-                    - title: Connecting to Neon from Vercel
-                      slug: guides/vercel-connection-methods
-                    - title: Migrating from Vercel Postgres
-                      slug: guides/vercel-postgres-transition-guide
                 - title: Cloudflare
                   slug: guides/cloudflare-pages
                   items:
@@ -726,15 +711,30 @@
                   slug: guides/railway
                 - title: Render
                   slug: guides/render
+                - title: Vercel
+                  slug: guides/vercel-overview
+                  items:
+                    - title: Integration Overview
+                      slug: guides/vercel-overview
+                    - title: Vercel-Managed (Native Integration)
+                      slug: guides/vercel-managed-integration
+                    - title: Neon-Managed (Connectable Account)
+                      slug: guides/neon-managed-vercel-integration
+                    - title: Manual Setup
+                      slug: guides/vercel-manual
+                    - title: Connecting to Neon from Vercel
+                      slug: guides/vercel-connection-methods
+                    - title: Migrating from Vercel Postgres
+                      slug: guides/vercel-postgres-transition-guide
 
             - title: Serverless
               items:
-                - title: Neon serverless driver
-                  slug: serverless/serverless-driver
                 - title: AWS Lambda
                   slug: guides/aws-lambda
                 - title: Azure Functions
                   slug: guides/query-postgres-azure-functions
+                - title: Neon serverless driver
+                  slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest
                   slug: guides/trigger-serverless-functions
 
