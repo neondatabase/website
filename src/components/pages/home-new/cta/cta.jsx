@@ -49,11 +49,17 @@ const CTA = () => (
         height={944}
       >
         <source
-          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4`}
+          src={`${LINKS.cdn}/public/pages/home/cta/cta-av1.mp4?updated=20260113`}
           type="video/mp4; codecs=av01.0.05M.08,opus"
         />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4`} type="video/mp4" />
-        <source src={`${LINKS.cdn}/public/pages/home/cta/cta.webm`} type="video/webm" />
+        <source
+          src={`${LINKS.cdn}/public/pages/home/cta/cta.mp4?updated=20260113`}
+          type="video/mp4"
+        />
+        <source
+          src={`${LINKS.cdn}/public/pages/home/cta/cta.webm?updated=20260113`}
+          type="video/webm"
+        />
       </PauseableVideo>
 
       {/*
