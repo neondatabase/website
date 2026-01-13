@@ -2,7 +2,7 @@
 title: Manage Data API
 subtitle: 'Configure schemas, manage authentication providers, and control API access.'
 enableTableOfContents: true
-updatedOn: '2026-01-06T12:00:57.078Z'
+updatedOn: '2026-01-13T19:27:59.708Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -78,12 +78,32 @@ Controls which web domains are permitted to fetch data from your API via the bro
 
 **Default:** `Disabled`
 
-Controls whether an auto-generated OpenAPI 3 schema is available at `/openapi.json`. This schema describes your tables, columns, and REST endpoints. When enabled, you can use it to:
+When enabled, an auto-generated OpenAPI 3 schema describing your tables, columns, and REST endpoints is available at your Data API URL with `/openapi.json` appended:
 
+```
+https://your-data-api-endpoint/rest/v1/openapi.json
+```
+
+<Admonition type="important" title="Authentication required">
+Accessing the OpenAPI spec requires a valid JWT token, just like other Data API requests. Include the `Authorization: Bearer` header when fetching the spec:
+
+```bash
+curl -X GET 'https://your-data-api-endpoint/rest/v1/openapi.json' \
+  -H 'Authorization: Bearer YOUR_JWT_TOKEN'
+```
+
+</Admonition>
+
+You can use the OpenAPI schema to:
+
+- Import your API into Postman for easier exploration and testing
 - Generate API documentation (Swagger UI, Redoc)
 - Build typed client libraries (TypeScript, Python, Go)
-- Import your API into Postman
 - Integrate with API gateways and other OpenAPI-based tools
+
+<Admonition type="tip" title="Auth API reference">
+If you're using Neon Auth, there's also an interactive API reference for authentication endpoints. Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can use this to create test users, sign in, and obtain JWT tokens for testing. See [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl) for details.
+</Admonition>
 
 ### Server timing headers
 

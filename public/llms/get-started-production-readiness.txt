@@ -1,10 +1,10 @@
-# Production readiness with Neon
+# Built to scale
 
-> The document "Production readiness with Neon" outlines the necessary steps and considerations for preparing Neon databases for production environments, including configuration, monitoring, and scaling practices specific to Neon's infrastructure.
+> The document "Built to scale" outlines how Neon supports you from prototype to scale-up, including configuration, monitoring, and scaling practices specific to Neon's infrastructure.
 
 ## Source
 
-- [Production readiness with Neon HTML](https://neon.com/docs/get-started/production-readiness): The original HTML version of this documentation
+- [Built to scale HTML](https://neon.com/docs/get-started/built-to-scale): The original HTML version of this documentation
 
 Learn how autoscaling, scale to zero, Neon's storage architecture, change data capture, read replicas, and support for thousands of connections can improve performance, reliability, and efficiency for your production environments.
 

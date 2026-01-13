@@ -2,6 +2,8 @@
 title: AI Starter Kit
 subtitle: Resources for building AI applications with Neon Postgres
 enableTableOfContents: true
+redirectFrom:
+  - /docs/ai/ai-app-build
 updatedOn: '2025-06-04T19:40:50.197Z'
 ---
 

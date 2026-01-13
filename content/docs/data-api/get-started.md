@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2026-01-06T12:00:57.077Z'
+updatedOn: '2026-01-13T19:27:59.707Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -323,18 +323,19 @@ console.log(data);
 
 ### Option 2: Direct HTTP requests
 
-You can also query the Data API directly using standard HTTP requests. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
+Query the Data API directly using any HTTP client. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
 
 **Where to get the JWT token:**
 
-- **Neon Auth**: After a user signs in, retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
+- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
+- **Neon Auth (programmatic)**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
 - **Other providers**: Retrieve the token from your auth provider's SDK (e.g., `getAccessToken()` in Auth0, `getToken()` in Clerk).
 
 **About the `sub` claim:**
 
 For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
 
-**Example request:**
+**Example: SELECT (GET)**
 
 This request queries the `posts` table for all published posts, ordered by most recent first:
 
@@ -344,9 +345,62 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&o
   -H 'Content-Type: application/json'
 ```
 
-> For more details on constructing requests and handling responses, see the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
+**Example: INSERT (POST)**
+
+This request inserts a new row into the `posts` table, setting the `content` column:
+
+```bash shouldWrap
+curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
+  -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{"content": "Hello world"}'
+```
+
+> For UPDATE, DELETE, filtering, and other operations, see the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
 
 </Steps>
+
+## Testing with Postman or cURL
+
+If you're using Neon Auth and want to test the Data API without building an application first, you can use the Auth API reference UI to create test users and obtain JWT tokens.
+
+<Admonition type="note" title="Neon Auth only">
+This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
+</Admonition>
+
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
+
+2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
+
+   ```json
+   {
+     "email": "test@example.com",
+     "password": "your-password",
+     "name": "Test User"
+   }
+   ```
+
+3. **Or sign in with an existing user:** Call `POST /api/auth/sign-in/email` with:
+
+   ```json
+   {
+     "email": "test@example.com",
+     "password": "your-password"
+   }
+   ```
+
+4. **Get the JWT token:** Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
+
+5. **Query the Data API:** Use the JWT in your requests:
+   ```bash
+   curl -X GET 'https://your-data-api-endpoint/rest/v1/posts' \
+     -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
+     -H 'Content-Type: application/json'
+   ```
+
+<Admonition type="tip" title="Token expiration">
+JWTs expire after approximately 15 minutes. If you receive a `"JWT token has expired"` error, sign in again to get a fresh token.
+</Admonition>
 
 ## Query patterns
 
