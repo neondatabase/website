@@ -1,10 +1,10 @@
 ---
 title: Our DX Principles
-subtitle: Neon adapts to your workflow, not the other way around.
+subtitle: 'Neon adapts to your workflow, not the other way around.'
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2026-01-09T15:57:09.716Z'
+updatedOn: '2026-01-13T19:06:06.649Z'
 ---
 
 Our developer experience is anchored by four core pillars:
