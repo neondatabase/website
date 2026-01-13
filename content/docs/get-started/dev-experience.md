@@ -102,7 +102,7 @@ Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Because 
 
 **Designed to be discarded**
 
-Neon branching is optimized for short-lived environments or for environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one API call, whenever they need a new starting point.
+Neon branching is optimized for short-lived environments or for environments that get to be refreshed often. To support this, Neon provides [branch expiration](https://neon.com/docs/guides/branch-expiration): you can configure branches to automatically expire and be deleted after a set period of time. Neon also allows developers to [reset a branch](https://neon.com/docs/guides/reset-from-parent) to the latest state of its parent instantly, with one click or API call, whenever they need a new starting point.
 
 **What this means for DX**
 
