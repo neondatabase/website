@@ -32,8 +32,8 @@ You'll need to create a Neon project and enable Neon Auth.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
 3.  **Copy your credentials:**
-    - **Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-      ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+    - **Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+      ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
       ![Connection modal](/docs/connect/connection_details.png)
 
