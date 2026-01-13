@@ -3,7 +3,7 @@ title: Access control & security
 subtitle: Understand how the Data API authenticates requests and enforces database
   permissions.
 enableTableOfContents: true
-updatedOn: '2025-12-11T14:24:43.405Z'
+updatedOn: '2026-01-13T19:27:59.704Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
