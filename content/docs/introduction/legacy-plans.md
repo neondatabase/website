@@ -4,12 +4,12 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2025-12-11T15:40:49.868Z'
+updatedOn: '2026-01-07T13:15:53.853Z'
 ---
 
 This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.
 
-If you're on a legacy paid plan, you can stay on it, but once you [switch to a new plan](/docs/introduction/manage-billing#change-your-plan), you cannot switch back.
+If you're on a legacy paid plan, you will automatically be switched to a new plan in February 2026. You can [switch to a new plan sooner](/docs/introduction/manage-billing#change-your-plan), but you cannot switch back.
 
 <Admonition type="important">
 You cannot upgrade or downgrade to a legacy plan. See our [current usage-based plans](/docs/introduction/plans) for options.
@@ -396,7 +396,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 </details>
 
