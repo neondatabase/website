@@ -2,7 +2,7 @@
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
 enableTableOfContents: true
-updatedOn: '2025-12-29T21:10:05.266Z'
+updatedOn: '2026-01-07T15:07:19.160Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -44,23 +44,15 @@ If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'
 
 Update your environment variables to use Better Auth's configuration.
 
-<CodeWithLabel label=".env (before - Stack Auth)">
-
-```env
+```env filename=".env (before - Stack Auth)"
 NEXT_PUBLIC_STACK_PROJECT_ID=your-project-id
 NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY=your-client-key
 STACK_SECRET_SERVER_KEY=your-server-secret
 ```
 
-</CodeWithLabel>
-
-<CodeWithLabel label=".env (after - Better Auth)">
-
-```env
+```env filename=".env (after - Better Auth)"
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 ```
-
-</CodeWithLabel>
 
 <Admonition type="note">
 For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead of <code>NEON_AUTH_BASE_URL</code>.
@@ -77,14 +69,10 @@ You replace multiple Stack Auth-specific keys with a single Better Auth URL that
 
 Uninstall Stack Auth packages and install `@neondatabase/auth`
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 npm uninstall @stackframe/stack
 npm install @neondatabase/auth
 ```
-
-</CodeWithLabel>
 
 **What changed**  
 Your app now depends on Neon Auth's Next.js SDK and UI package instead of the Stack Auth SDK.
@@ -346,9 +334,7 @@ You switch from hook-based redirects to declarative UI helpers that show content
 
 #### Middleware-based protection
 
-<CodeWithLabel label="proxy.ts (new)">
-
-```tsx
+```tsx filename="proxy.ts (new)"
 import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
 
 export default neonAuthMiddleware({
@@ -367,8 +353,6 @@ export const config = {
   ],
 };
 ```
-
-</CodeWithLabel>
 
 **What changed**  
 You can optionally add middleware to enforce auth at the edge for specific paths.
@@ -406,14 +390,10 @@ Server components now call `authClient.getSession()` and read the user from the 
 
 Uninstall Stack Auth packages and install `@neondatabase/auth`
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 npm uninstall @stackframe/stack
 npm install @neondatabase/auth
 ```
-
-</CodeWithLabel>
 
 **What changed**  
 You use the framework-agnostic Neon JS SDK plus the shared UI package instead of the Stack Auth client SDK.
@@ -523,17 +503,13 @@ To learn more about applying styles to the Auth UI components, including plain C
 
 Delete any `StackHandler` routes. Create custom pages for sign-in and sign-up using `<AuthView>`.
 
-<CodeWithLabel label="src/pages/SignIn.tsx">
-
-```tsx
+```tsx filename="src/pages/SignIn.tsx"
 import { AuthView } from '@neondatabase/auth/react';
 
 export default function SignIn() {
   return <AuthView pathname="sign-in" />;
 }
 ```
-
-</CodeWithLabel>
 
 **What changed**  
 Routing is fully controlled by your SPA, and the `AuthView` component just renders the appropriate view for each path.
@@ -542,9 +518,7 @@ Routing is fully controlled by your SPA, and the `AuthView` component just rende
 
 If you're using React Router, pass navigation helpers to the provider.
 
-<CodeWithLabel label="src/App.tsx (React Router)">
-
-```tsx
+```tsx filename="src/App.tsx (React Router)"
 import { NeonAuthUIProvider } from '@neondatabase/auth/react';
 import { useNavigate, Link } from 'react-router-dom';
 import { authClient } from './auth';
@@ -559,8 +533,6 @@ function App() {
   );
 }
 ```
-
-</CodeWithLabel>
 
 **What changed**  
 You let Better Auth reuse your router's navigation and Link components so redirects and links stay in sync with your SPA.

@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.864Z'
+updatedOn: '2026-01-13T14:45:42.240Z'
 ---
 
 <InfoBlock>
@@ -88,6 +88,10 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 ## Enable automated preview branching (recommended)
 
 Preview branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
+
+<Admonition type="tip" title="Neon Auth support for preview deployments">
+If you've enabled [Neon Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+</Admonition>
 
 To enable:
 
@@ -236,9 +240,7 @@ Branches you don't delete are eventually archived, consuming archive storage spa
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | Neon Auth variables for drop-in authentication                      |
-
-> **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](/docs/guides/neon-auth).
+| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Neon Auth endpoints (when enabled on production branch)             |
 
 ---
 

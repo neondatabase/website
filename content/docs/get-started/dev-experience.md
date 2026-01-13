@@ -4,7 +4,7 @@ subtitle: Neon adapts to your workflow, not the other way around.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience
-updatedOn: '2025-12-22T13:54:25.159Z'
+updatedOn: '2026-01-09T15:57:09.716Z'
 ---
 
 Our developer experience is anchored by four core pillars:
@@ -20,15 +20,13 @@ Our developer experience is anchored by four core pillars:
 
 Traditional OLTP databases force you to provision compute upfront—i.e., choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
-Neon removes this tradeoff by [automatically scaling](https://neon.com/docs/introduction/autoscaling) database compute up and down based on real demand. When your application needs more resources due to traffic spikes, background jobs, or heavy queries, Neon increases available compute, and as demand drops, compute scales back down.
+You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
 **How it works**
 
 Neon runs a continuous autoscaling loop that continuously monitors three core database / compute metrics. The platform then makes its autoscaling decision, adjusting resources in near real time. The three core metrics are:
 
-- **CPU load**: Neon tracks the 1-minute CPU load average and aims to keep it below ~90% of available CPU capacity. If the database becomes CPU-bound, compute is scaled up to restore headroom.
-- **Memory usage**: Overall memory consumption is monitored to keep usage below ~75% of allocated RAM. If memory pressure increases, Neon scales compute to provide additional RAM.
-- **Local File Cache (LFC) working set**: Neon [continuously estimates your database’s active working set](https://neon.com/blog/dynamically-estimating-and-scaling-postgres-working-set-size) (the data accessed most frequently) and scales compute so this working set fits in memory, keeping hot data cached locally for fast access.
+Also, with Neon, you can easily keep your development branches up-to-date by resetting your schema and data to the latest from `main` with a simple command.
 
 Rather than relying on fixed intervals or manual triggers, Neon's autoscaling algorithm continuously evaluates these three workload signals, adjusting compute up or down based on the live measurements - while always staying within the minimum and maximum limits you configure.
 

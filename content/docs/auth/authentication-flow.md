@@ -2,7 +2,7 @@
 title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
 enableTableOfContents: true
-updatedOn: '2025-11-23T00:00:00.000Z'
+updatedOn: '2026-01-05T20:32:04.262Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -134,7 +134,7 @@ By default, anyone can sign up for your application. To add an additional verifi
 
 ## OAuth flow
 
-OAuth authentication (Google, GitHub, etc.):
+OAuth authentication (Google, GitHub, Vercel, etc.):
 
 ```typescript
 await client.auth.signIn.social({
