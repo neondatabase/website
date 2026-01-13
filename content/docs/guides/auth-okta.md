@@ -6,6 +6,10 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.893Z'
 ---
 
+<Admonition type="note">
+Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+</Admonition>
+
 User authentication is critical for web applications, especially for apps internal to an organization. [Okta Workforce Indentity Cloud](https://www.okta.com/workforce-identity/) is an identity and access management platform for organizations, that provides authentication, authorization, and user management capabilities.
 
 In this guide, we'll walk through building a simple Next.js application using [Neon's](https://neon.tech) Postgres database, and add user authentication to it using [Okta](https://www.okta.com/). We will cover how to:

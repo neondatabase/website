@@ -1,5 +1,5 @@
 ---
-title: Build Dashboards on Neon Postgres with Draxlr
+title: Build dashboards on Neon Postgres with Draxlr
 subtitle: Create live Neon dashboards and reports directly from your Postgres data
 redirectFrom:
   - /docs/integrations/draxlr
@@ -31,7 +31,7 @@ This guide shows how to connect Draxlr to a Neon Postgres database.
 3. Select **Neon** as the database type
    ![Connect to neon](/docs/guides/draxlr_connect_1.png)
 4. Paste the Neon connection details
-   - Click on **Import from Url** and past the paste the Neon connection string into the connection URL field, or
+   - Click on **Import from URL** and paste the Neon connection string into the connection URL field, or
    - Enter the _Host, Port, Database name, Username, and Password_ manually using values from the Neon Console.
 
    ![Adding connection details](/docs/guides/draxlr_connect_2.png)
@@ -39,11 +39,14 @@ This guide shows how to connect Draxlr to a Neon Postgres database.
 5. Save the connection
    - Click Next and if the connection is successful, choose your desired schemas. Your Neon Postgres database is now connected to Draxlr.
 
-## Neon Analytics with Visual Queries and SQL
+## Neon analytics with visual queries and SQL
 
-Once connected, Draxlr works as a Neon analytics tool that lets you analyze data in multiple ways. - **Visual Query Builder for Neon Analytics**: Build queries using a point-and-click interface. Select tables, define joins, apply filters, and create aggregations without writing SQL.
-![Draxlr Visual Query Builder](/docs/guides/draxlr_queries_1.png) - **Raw SQL for Neon Reporting and Analysis**: Switch to raw query mode to write SQL directly. This is ideal for advanced queries, performance tuning, or when you want full control over your Postgres queries.
-![Draxlr Raw SQL Mode](/docs/guides/draxlr_queries_2.png)
+Once connected, Draxlr works as a Neon analytics tool that lets you analyze data in multiple ways.
+
+- **Visual Query Builder for Neon Analytics**: Build queries using a point-and-click interface. Select tables, define joins, apply filters, and create aggregations without writing SQL.
+  ![Draxlr Visual Query Builder](/docs/guides/draxlr_queries_1.png)
+- **Raw SQL for Neon Reporting and Analysis**: Switch to raw query mode to write SQL directly. This is ideal for advanced queries, performance tuning, or when you want full control over your Postgres queries.
+  ![Draxlr Raw SQL Mode](/docs/guides/draxlr_queries_2.png)
 
 You can freely move between visual queries and SQL, making it easy to start visually and refine queries as needed.
 
@@ -51,13 +54,16 @@ You can freely move between visual queries and SQL, making it easy to start visu
 
 Draxlr also includes an AI-powered chat interface that lets you ask questions about your Neon Postgres data in natural language.
 
-For example, you can ask: - “What were the top 5 customers by revenue last month?” - “Show me daily signups for the past 30 days.” - “Compare average order value by region.”
+For example, you can ask:
 
-    ![Draxlr AI Chat](/docs/guides/draxlr_queries_3.png)
+- "What were the top 5 customers by revenue last month?"
+- "Show me daily signups for the past 30 days."
+- "Compare average order value by region."
+  ![Draxlr AI Chat](/docs/guides/draxlr_queries_3.png)
 
 Draxlr translates these questions into database queries, runs them on your Neon Postgres database, and returns results as tables or visualizations - no SQL required.
 
-## What's More
+## What's next?
 
 With Draxlr and Neon, you can go beyond one off queries and build reliable Neon analytics workflows.
 

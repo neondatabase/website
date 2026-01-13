@@ -6,6 +6,10 @@ enableTableOfContents: true
 updatedOn: '2025-07-07T14:06:11.637Z'
 ---
 
+<Admonition type="note">
+Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+</Admonition>
+
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
 
 <Admonition type="comingSoon">

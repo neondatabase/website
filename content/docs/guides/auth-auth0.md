@@ -6,6 +6,10 @@ enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.891Z'
 ---
 
+<Admonition type="note">
+Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+</Admonition>
+
 User authentication is an essential part of most web applications. Modern apps often require features like social login, multi-factor authentication, and secure user data management that complies with privacy regulations.
 
 [Auth0](https://auth0.com/) is an authentication and authorization platform that provides these features out of the box. It offers SDKs for popular web frameworks, making it straightforward to integrate with your application backed by a Neon Postgres database.

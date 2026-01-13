@@ -24,6 +24,10 @@ updatedOn: '2025-08-02T10:33:29.287Z'
 </DocsList>
 </InfoBlock>
 
+<Admonition type="note">
+Neon also provides a built-in [Data API](/docs/data-api/overview) that automatically creates REST endpoints for your database without requiring PostgREST or any additional setup. The Data API is fully managed and includes built-in authentication support.
+</Admonition>
+
 ## What is PostgREST?
 
 PostgREST is a standalone web server that automatically turns your PostgreSQL database schema into a RESTful API. It uses the database's structure, constraints, and permissions to create API endpoints without requiring you to write any backend code. The API follows REST conventions and supports full CRUD operations, filtering, pagination, and even complex joins.
