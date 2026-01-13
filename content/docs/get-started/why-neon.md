@@ -41,7 +41,7 @@ Neon’s architecture lets us design a database platform that behaves the way de
 - **Scale-to-zero.** Inactive databases shut down automatically to save costs. Ideal for side projects, development environments, and agent-generated apps.
 - **Autoscaling.** For your production database, Neon resizes your compute up and down automatically based on traffic. Your performance stays steady without capacity planning.
 - **Branching.** In Neon, you can clone your entire database (data and schema) instantly to create dev environments, run migrations safely, automate previews, enable safe staging workflows, and build versioning and checkpoints for agents.
-- **Instant restores.** You can also go back to any point in time in seconds, no matter how large your database - or instantly revert to a previously-saved snapshot.
+- **Instant restores.** You can also go back to any point in time in seconds, no matter how large your database — or instantly revert to a previously-saved snapshot.
 - **Usage-based pricing.** In Neon, you pay only for what you use, without provisioning storage or compute in advance and without being forced into expensive add-ons.
 - **A Free Plan developers can actually use.** Our unique architecture makes it incredibly efficient to run a large Free Plan with many projects per account and enough resources to build real apps.
 
