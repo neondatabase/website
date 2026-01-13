@@ -129,7 +129,7 @@ Rerunning the anonymization process on the anonymized branch applies rules to pr
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`). Custom rules you define via API will display as text in the Console showing the full expression, allowing you to view and preserve API-defined rules while working in the Console.
+For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
 
 **Update masking rules**
 
@@ -191,7 +191,7 @@ SECURITY LABEL FOR anon ON COLUMN users.email IS NULL;
 ```
 
 <Admonition type="note">
-SQL-created rules appear in the Console as text and can be retrieved via the API. After creating or modifying rules via SQL, use the Console or API to run anonymization.
+After creating or modifying rules via SQL, use the Console or API to run anonymization. Rules using standard functions appear normally in the Console; custom functions appear as text.
 </Admonition>
 
 </TabItem>
