@@ -431,7 +431,7 @@ A designation that is given to a [branch](#branch) in a Neon project. Each Neon 
 
 The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
+- The compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
