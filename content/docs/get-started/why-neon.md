@@ -1,12 +1,12 @@
 ---
 title: Why Neon?
-subtitle: Serverless Postgres, by Databricks
+subtitle: 'Serverless Postgres, by Databricks'
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2025-12-22T13:54:25.159Z'
+updatedOn: '2026-01-13T19:33:25.861Z'
 ---
 
 ## Our mission
