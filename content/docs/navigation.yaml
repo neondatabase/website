@@ -904,6 +904,11 @@
                   slug: guides/neon-twin-partial-pg-dump-restore
             - title: Data anonymization
               slug: workflows/data-anonymization
+              items:
+                - title: API reference
+                  slug: workflows/data-anonymization-api
+                - title: GitHub Actions
+                  slug: workflows/data-anonymization-github-actions
 
         - title: Templates
           slug: https://neon.com/templates
