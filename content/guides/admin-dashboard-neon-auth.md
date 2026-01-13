@@ -33,10 +33,10 @@ You'll need to create a Neon project and enable Neon Auth.
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
-3.  **Copy your Auth Base URL:**
+3.  **Copy your Auth URL:**
 
     Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-    ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+    ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
 
 ## Create an Admin user
 
@@ -282,8 +282,8 @@ export function UserRow({ user, refreshData }: { user: UserType; refreshData: ()
 
   return (
     <tr className="hover:bg-gray-50 dark:hover:bg-gray-800">
-      <td className="p-4">{user.name}</td>
-      <td className="p-4">{user.email}</td>
+      <td className="p-4 text-gray-900 dark:text-gray-100">{user.name}</td>
+      <td className="p-4 text-gray-900 dark:text-gray-100">{user.email}</td>
       <td className="p-4">
         <span className="bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 rounded px-2 py-1 text-xs font-bold uppercase tracking-wide">
           {user.role || 'user'}
@@ -477,7 +477,7 @@ export default function AdminDashboard() {
               <table className="min-w-full text-sm">
                 <thead className="bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200 sticky top-0 z-10">
                   <tr>
-                    <th className="px-4 py-3 text-left font-medium">User ID</th>
+                    <th className="px-4 py-3 text-left font-medium">User Name</th>
                     <th className="px-4 py-3 text-left font-medium">Email</th>
                     <th className="px-4 py-3 text-left font-medium">Role</th>
                     <th className="px-4 py-3 text-left font-medium">Status</th>
