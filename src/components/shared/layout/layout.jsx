@@ -27,7 +27,7 @@ const Layout = ({
       className={clsx(
         'relative flex flex-col pt-safe',
         isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
-        isDocPage && '!pb-12'
+        isDocPage && 'lg:!pb-12'
       )}
     >
       <Header
