@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2025-09-05T17:14:39.189Z'
+updatedOn: '2026-01-07T12:02:47.902Z'
 ---
 
 <Admonition type="note">
@@ -58,7 +58,7 @@ This endpoint accepts the following query parameters:
 
 ### Optional parameters
 
-- **`org_id`** (string) — Specify the organization for which consumption metrics should be returned. If not provided, metrics for your personal account will be returned.
+- **`org_id`** (string, required) — Specify the organization for which consumption metrics should be returned.
 
 - **`metrics`** (array of strings) — Specify which metrics to include in the response. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 
@@ -167,7 +167,7 @@ This endpoint accepts the following query parameters:
   project_ids=cold-poetry-09157238,quiet-snow-71788278
   ```
 
-- **`org_id`** (string) — Specify the organization for which project consumption metrics should be returned. If not provided, metrics for your personal account projects will be returned.
+- **`org_id`** (string, required) — Specify the organization for which project consumption metrics should be returned.
 
 - **`metrics`** (array of strings) — Specify which metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 

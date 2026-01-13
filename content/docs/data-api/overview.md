@@ -2,7 +2,7 @@
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-12-11T16:01:49.204Z'
+updatedOn: '2026-01-09T19:51:39.509Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -20,6 +20,10 @@ The Neon Data API provides a secure, stateless HTTP interface to your database. 
 - **Secure by default**
 
   The API is designed to expose your database safely. It integrates with Neon Auth and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see.
+
+- **CI/CD integration**
+
+  Test your Data API integrations in isolated branch environments using the [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action), which can retrieve branch-specific Data API URLs for your workflows.
 
 ## PostgREST compatibility
 

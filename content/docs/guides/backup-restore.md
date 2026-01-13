@@ -3,7 +3,7 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-12-29T16:46:32.129Z'
+updatedOn: '2026-01-06T10:43:28.875Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -441,5 +441,6 @@ Use this option if you need to inspect the restored data before you switch over 
 ## Limitations
 
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
+- **Reset from parent is unavailable on child branches for up to 24 hours after restoring a parent from a snapshot.** When you restore a branch from a snapshot, any child branches of that restored branch cannot use the [Reset from parent](/docs/guides/reset-from-parent) feature for up to 24 hours.
 
 <NeedHelp/>
