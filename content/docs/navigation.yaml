@@ -10,8 +10,8 @@
           slug: get-started/why-neon
         - title: Developer experience
           slug: get-started/dev-experience
-        - title: Production ready
-          slug: get-started/production-readiness
+        - title: Built to scale
+          slug: get-started/built-to-scale
         - title: Use cases
           slug: use-cases/use-cases-overview
 

@@ -16,7 +16,7 @@ Neon fits into every stage of growth, from the first side project to operating l
 
 When you’re looking for a free plan to run Postgres, what you want is simplicity and enough room to build. Neon’s Free plan abstracts most configuration work, delivers real-world performance, and gives you access to core Neon features like branching and autoscaling.
 
-- You get a [Free Plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, computes with up to 2 CUs, and 0.5 GB of storage per project - enough to build and test real applications
+- You get a [Free Plan with real resources](https://neon.com/blog/why-so-many-projects-in-the-neon-free-plan), including up to 100 projects, compute endpoints with up to 2 CPUs, and 0.5 GB of storage per project - enough to build and test real applications
 - You get a Postgres connection string in a second so you can start building right away
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) ensures idle databases don’t eat up your compute limits: only active time counts
 - Standard Postgres compatibility means you can plug Neon into [any framework, ORM, or tool that speaks Postgres](https://neon.com/docs/get-started/frameworks)
