@@ -2,7 +2,7 @@
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.608Z'
+updatedOn: '2026-01-13T15:38:46.685Z'
 ---
 
 <CopyPrompt src="/prompts/solidstart-prompt.md"

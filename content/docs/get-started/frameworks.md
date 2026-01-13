@@ -4,7 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various framewo
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2025-12-17T22:36:32.010Z'
+updatedOn: '2026-01-13T15:38:46.683Z'
 ---
 
 <TechCards>
