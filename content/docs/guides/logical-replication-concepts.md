@@ -101,7 +101,7 @@ max_replication_slots = 10
 ```
 
 <Admonition type="important">
-To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time if there are other _active_ replication slots**. If you have or intend on having more than one replication slot, please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
+To prevent storage bloat, **Neon automatically removes _inactive_ replication slots after a period of time. Please see [Unused replication slots](/docs/guides/logical-replication-neon#unused-replication-slots) to learn more.
 </Admonition>
 
 ### Decoder plugins
