@@ -5,18 +5,20 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-12-19T17:12:04.720Z'
+updatedOn: '2025-12-19:17:12:04.720Z'
 ---
 
-## Monitor
+## Authentication
 
 <TechCards>
 
-<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+<a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
 
-<a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Neon Postgres to Grafana Cloud" icon="grafana"></a>
+<a href="/docs/guides/auth-authjs" title="Auth.js" description="Authenticate Neon Postgres application users with Auth.js" icon="auth"></a>
 
-<a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
+<a href="/docs/guides/auth-clerk" title="Clerk" description="Authenticate Neon Postgres application users with Clerk" icon="clerk"></a>
+
+<a href="/docs/guides/auth-okta" title="Okta" description="Authenticate Neon Postgres application users with Okta" icon="okta"></a>
 
 </TechCards>
 
@@ -44,15 +46,53 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 </TechCards>
 
-## Serverless
+## Develop
 
 <TechCards>
 
-<a href="/docs/guides/aws-lambda" title="AWS Lambda" description="Connect from AWS Lambda to Neon" icon="aws-lambda"></a>
+<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
 
-<a href="/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
+<a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
 
-<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
+<a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
+
+<a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
+
+<a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
+
+</TechCards>
+
+## File & media storage
+
+<TechCards>
+
+<a href="/docs/guides/file-storage" title="File storage" description="Integrate file storage with Neon" icon="database"></a>
+
+<a href="/docs/guides/aws-s3" title="AWS S3" description="Integrate AWS S3 with Neon Postgres" icon="aws-s3-bucket"></a>
+
+<a href="/docs/guides/azure-blob-storage" title="Azure Blob Storage" description="Integrate Azure Blob Storage with Neon" icon="azure"></a>
+
+<a href="/docs/guides/backblaze-b2" title="Backblaze B2" description="Integrate Backblaze B2 with Neon" icon="backblaze"></a>
+
+<a href="/docs/guides/cloudflare-r2" title="Cloudflare R2" description="Integrate Cloudflare R2 with Neon" icon="cloudflare"></a>
+
+<a href="/docs/guides/cloudinary" title="Cloudinary" description="Integrate Cloudinary with Neon" icon="cloudinary"></a>
+
+<a href="/docs/guides/imagekit" title="ImageKit" description="Integrate ImageKit with Neon" icon="imagekit"></a>
+
+<a href="/docs/guides/uploadcare" title="Uploadcare" description="Integrate Uploadcare with Neon" icon="uploadcare"></a>
+
+</TechCards>
+
+## Monitor
+
+<TechCards>
+
+<a href="/docs/guides/datadog" title="Datadog" description="Send metrics and events from Neon Postgres to Datadog" icon="datadog"></a>
+
+<a href="/docs/guides/grafana-cloud" title="Grafana Cloud" description="Send metrics and logs from Neon Postgres to Grafana Cloud" icon="grafana"></a>
+
+<a href="/docs/guides/opentelemetry" title="OpenTelemetry" description="Send metrics and events from Neon to any OpenTelemetry compatible backend" icon="opentelemetry"></a>
 
 </TechCards>
 
@@ -82,23 +122,7 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 </TechCards>
 
-## Develop
-
-<TechCards>
-
-<a href="/guides/convex-neon" title="Convex" description="Integrate Convex with Neon Postgres" icon="convex"></a>
-
-<a href="/docs/guides/neon-github-app" title="GitHub integration" description="Use the Neon GitHub integration" icon="github"></a>
-
-<a href="/docs/guides/knex" title="Knex" description="Connect from Knex to Neon" icon="knex"></a>
-
-<a href="/docs/guides/prisma" title="Prisma" description="Connect from Prisma to Neon" icon="prisma"></a>
-
-<a href="/docs/guides/typeorm" title="TypeORM" description="Connect from TypeORM to Neon" icon="typeorm"></a>
-
-</TechCards>
-
-## Replicate data from Neon
+## Replicate from Neon
 
 <TechCards>
 
@@ -116,6 +140,8 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <a href="/docs/guides/logical-replication-fivetran" title="Fivetran" description="Replicate data from Neon with Fivetran" icon="fivetran"></a>
 
+<a href="/docs/guides/logical-replication-inngest" title="Inngest" description="Replicate data from Neon to Inngest" icon="inngest"></a>
+
 <a href="/docs/guides/logical-replication-materialize" title="Materialize" description="Replicate data from Neon to Materialize" icon="materialize"></a>
 
 <a href="/docs/guides/logical-replication-neon-to-neon" title="Neon to Neon" description="Replicate data from Neon to Neon" icon="neon"></a>
@@ -128,15 +154,15 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <a href="/docs/guides/logical-replication-airbyte-snowflake" title="Snowflake" description="Replicate data from Neon to Snowflake with Airbyte" icon="snowflake"></a>
 
-<a href="/docs/guides/logical-replication-inngest" title="Inngest" description="Replicate data from Neon to Inngest" icon="inngest"></a>
-
 </TechCards>
 
-## Replicate data to Neon
+## Replicate to Neon
 
 <TechCards>
 
 <a href="/docs/guides/logical-replication-alloydb" title="AlloyDB" description="Replicate data from AlloyDB to Neon" icon="alloydb"></a>
+
+<a href="/docs/guides/logical-replication-rds-to-neon" title="AWS RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
 
 <a href="/docs/guides/logical-replication-cloud-sql" title="Cloud SQL" description="Replicate data from Cloud SQL to Neon" icon="google-cloud-sql"></a>
 
@@ -144,7 +170,9 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 <a href="/docs/guides/logical-replication-postgres-to-neon" title="PostgreSQL to Neon" description="Replicate data from PostgreSQL to Neon" icon="postgresql"></a>
 
-<a href="/docs/guides/logical-replication-rds-to-neon" title="RDS" description="Replicate data from AWS RDS PostgreSQL to Neon" icon="aws-rds"></a>
+<a href="/docs/import/migrate-from-azure-postgres" title="Replicate from Azure" description="Replicate data from Azure to Neon" icon="azure"></a>
+
+<a href="/docs/guides/logical-replication-supabase-to-neon" title="Replicate from Supabase" description="Replicate data from Supabase to Neon" icon="supabase"></a>
 
 </TechCards>
 
@@ -174,16 +202,14 @@ updatedOn: '2025-12-19T17:12:04.720Z'
 
 </TechCards>
 
-## Authenticate
+## Serverless
 
 <TechCards>
 
-<a href="/docs/guides/auth-auth0" title="Auth0" description="Authenticate Neon Postgres application users with Auth0" icon="auth0"></a>
+<a href="/docs/guides/aws-lambda" title="AWS Lambda" description="Connect from AWS Lambda to Neon" icon="aws-lambda"></a>
 
-<a href="/docs/guides/auth-authjs" title="Auth.js" description="Authenticate Neon Postgres application users with Auth.js" icon="auth"></a>
+<a href="/guides/query-postgres-azure-functions" title="Azure Functions" description="Connect from Azure Functions to Neon" icon="azure"></a>
 
-<a href="/docs/guides/auth-clerk" title="Clerk" description="Authenticate Neon Postgres application users with Clerk" icon="clerk"></a>
-
-<a href="/docs/guides/auth-okta" title="Okta" description="Authenticate Neon Postgres application users with Okta" icon="okta"></a>
+<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
 
 </TechCards>
