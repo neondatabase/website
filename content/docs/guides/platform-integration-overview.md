@@ -6,6 +6,7 @@ isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
+  - /docs/guides/platform-integration-get-started
 updatedOn: '2026-01-06T18:58:21.262Z'
 ---
 

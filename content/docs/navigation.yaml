@@ -1421,7 +1421,5 @@
     - section: Guides
       icon: book
       items:
-        - title: Get started with your integration
-          slug: guides/platform-integration-get-started
         - title: Claimable database integration
           slug: workflows/claimable-database-integration
