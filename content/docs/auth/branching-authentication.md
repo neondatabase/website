@@ -170,7 +170,7 @@ This capability allows agents to spin up "full stack" environments (Database + A
 <Admonition type="important">
 An AI agent cannot log in as a real production user in a branch. Although user records are copied, valid session cookies are domain-scoped and remain with the user's browser; they are not sent to the branch URL. Unless the agent explicitly knows a user's password, it must either perform a sign-up flow or use existing test credentials to log in.
 
-To streamline this, consider maintaining specific test users with known credentials in your production database; these records are automatically cloned to child branches during creation, allowing agents to log in immediately without needing to perform a sign-up step
+To streamline this, consider maintaining specific test users with known credentials in your production database; these records are automatically cloned to child branches during creation, allowing agents to log in immediately without needing to perform a sign-up step.
 </Admonition>
 
 ## What's Next
