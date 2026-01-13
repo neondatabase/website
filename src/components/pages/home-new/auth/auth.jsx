@@ -15,7 +15,7 @@ const Auth = () => (
       <div className="min-w-0 border-t border-gray-new-20 pt-9 lg:pt-7">
         <Heading
           icon="auth"
-          title="<strong>Better Auth, included free.</strong> Fully-featured auth that lives in your database and branches for full-stack preview environments."
+          title="<strong>Better Auth, included free.</strong> Users and sessions live in your database and branch with your data for full-stack testing."
         />
         <RiveAnimation
           className="aspect-[1184/580] w-full"
