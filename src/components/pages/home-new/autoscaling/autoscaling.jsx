@@ -100,10 +100,10 @@ const Autoscaling = () => {
             )}
             ref={animationWrapperRef}
           >
-            <div className="aspect-[1378/480] w-[1378px] 3xl:max-w-full md:hidden">
+            <div className="aspect-[1378/450] w-[1378px] 3xl:max-w-full md:hidden">
               {isAnimationIntersecting && (
                 <Animation
-                  className="aspect-[1378/480] w-[1378px] 3xl:max-w-full md:hidden"
+                  className="aspect-[1378/450] w-[1378px] 3xl:max-w-full md:hidden"
                   state={activeItem}
                 />
               )}
@@ -128,7 +128,7 @@ const Autoscaling = () => {
               />
             </div>
 
-            <div className="relative z-20 -mt-[30px] border-b border-gray-new-10 bg-[#CAE6D9] px-3 py-2.5 2xl:-mt-7 xl:-mt-6 lg:-mt-[18px] md:mt-0">
+            <div className="relative z-20 border-b border-gray-new-10 bg-[#CAE6D9] px-3 py-2.5">
               <LazyMotion features={domAnimation}>
                 {STATS.map(({ prefix, number, text }, index) => {
                   if (index !== activeItem) {
