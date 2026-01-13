@@ -121,7 +121,7 @@ Neon is built with an API-first mindset. Every core operation is exposed program
 
 Neon powers [platforms](https://neon.com/platforms) where thousands of databases are provisioned, scaled, and deleted automatically every day. This includes developer platforms embedding Postgres into their product experience, as well as [AI agents](https://neon.com/use-cases/ai-agents) that provision databases dynamically while building and running applications on behalf of users.
 
-The Neon API has been shaped by real-world requirements, and it’s able to
+The [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) has been shaped by real-world requirements, and it’s able to
 
 - Manage hundreds of thousands of projects
 - Automate database lifecycles with minimal human intervention
