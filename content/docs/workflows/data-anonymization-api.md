@@ -361,4 +361,3 @@ Returns the updated list of masking rules for the branch.
 ```
 
 </details>
-
