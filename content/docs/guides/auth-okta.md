@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.893Z'
+updatedOn: '2026-01-13T18:46:54.022Z'
 ---
 
 <Admonition type="note">

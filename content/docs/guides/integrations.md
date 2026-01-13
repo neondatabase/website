@@ -5,7 +5,7 @@ subtitle: Find detailed instructions for integration across various platforms an
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/
-updatedOn: '2025-12-19:17:12:04.720Z'
+updatedOn: '2026-01-13T18:46:54.024Z'
 ---
 
 ## Authentication

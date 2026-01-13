@@ -3,7 +3,7 @@ title: Authenticate Neon Postgres application users with Auth0
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Auth0
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.891Z'
+updatedOn: '2026-01-13T18:46:54.018Z'
 ---
 
 <Admonition type="note">

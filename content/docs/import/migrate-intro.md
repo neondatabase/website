@@ -5,7 +5,7 @@ subtitle: Learn how to migrate data to Neon Postgres from different database pro
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-01-09T20:37:30.845Z'
+updatedOn: '2026-01-13T18:46:54.027Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.

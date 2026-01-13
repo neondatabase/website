@@ -4,7 +4,7 @@ subtitle: Create live Neon dashboards and reports directly from your Postgres da
 redirectFrom:
   - /docs/integrations/draxlr
 enableTableOfContents: true
-updatedOn: '2026-01-13T16:20:52.181Z'
+updatedOn: '2026-01-13T18:46:54.023Z'
 ---
 
 [Draxlr](https://www.draxlr.com) is a no code analytics tool for Neon Postgres that lets you build dashboards, reports, and insights using SQL, visual queries, or AI. It is commonly used for product analytics, reporting, and embedded dashboards.
