@@ -38,8 +38,8 @@ You'll need to create a Neon project and enable Neon Auth.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
 
 3.  **Copy your credentials:**
-    - **Neon Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-      ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+    - **Neon Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+      ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database connection string:** Found on the **Dashboard** (select "Pooled connection").
       ![Connection modal](/docs/connect/connection_details.png)
 
@@ -53,7 +53,6 @@ In a terminal, run the following commands to create a new Hono project:
 
 ```bash
 npm create hono@latest journal-backend
-cd journal-backend
 ```
 
 > You can choose the runtime and package manager of your choice. For this guide, **Node.js** and `npm` are used.
@@ -74,7 +73,12 @@ create-hono version 0.19.4
 ✔ Cloning the template
 ✔ Installing project dependencies
 🎉 Copied project files
-Get started with: cd journal-backend
+```
+
+Navigate into the project directory:
+
+```bash
+cd journal-backend
 ```
 
 ### Install dependencies
@@ -88,14 +92,14 @@ npm install -D drizzle-kit
 
 ### Configure environment variables
 
-Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Neon database connection string and Neon Auth base URL that you copied in the [previous step](#create-a-neon-project-with-neon-auth).
+Create a `.env` file in `journal-backend/` with the following content. Replace the placeholders with your actual Neon database connection string and Neon Auth URL that you copied in the [previous step](#create-a-neon-project-with-neon-auth).
 
 ```env
 # From Neon Dashboard
 DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 
 # From Neon Auth Page
-NEON_AUTH_BASE_URL="https://ep-xxx.neon.tech/neondb/auth"
+NEON_AUTH_URL="https://ep-xxx.neon.tech/neondb/auth"
 ```
 
 ### Set up Drizzle ORM
@@ -157,7 +161,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
 3.  **Add the Journals table to the schema:**
 
-    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below:
+    Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `journals` table definition as shown below. You will also need to import the missing Drizzle types at the top of the file (e.g, `bigint`).
 
     ```typescript {9,39-46} shouldWrap
     import {
@@ -255,7 +259,7 @@ const sql = neon(process.env.DATABASE_URL!);
 const db = drizzle(sql);
 
 const JWKS = jose.createRemoteJWKSet(
-  new URL(`${process.env.NEON_AUTH_BASE_URL}/.well-known/jwks.json`)
+  new URL(`${process.env.NEON_AUTH_URL}/.well-known/jwks.json`)
 );
 
 const authMiddleware = async (c: Context<{ Variables: AppVariables }>, next: Next) => {
@@ -268,7 +272,7 @@ const authMiddleware = async (c: Context<{ Variables: AppVariables }>, next: Nex
 
   try {
     const { payload } = await jose.jwtVerify(token, JWKS, {
-      issuer: new URL(process.env.NEON_AUTH_BASE_URL!).origin,
+      issuer: new URL(process.env.NEON_AUTH_URL!).origin,
     });
     if (!payload.sub) {
       return c.json({ error: 'Invalid Token' }, 401);
@@ -508,10 +512,10 @@ import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
 import { useParams } from 'react-router';
 
 export default function AuthPage() {
-  const { path } = useParams();
+  const { pathname } = useParams();
   return (
     <div className="bg-gray-50 flex min-h-screen items-center justify-center p-8">
-      <AuthView pathname={path} />
+      <AuthView pathname={pathname} />
     </div>
   );
 }
@@ -524,10 +528,10 @@ import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
 import { useParams } from 'react-router';
 
 export default function AccountPage() {
-  const { path } = useParams();
+  const { pathname } = useParams();
   return (
     <div className="bg-gray-50 flex min-h-screen items-center justify-center p-8">
-      <AccountView pathname={path} />
+      <AccountView pathname={pathname} />
     </div>
   );
 }
