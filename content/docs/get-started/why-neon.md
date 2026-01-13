@@ -145,6 +145,8 @@ The final piece follows naturally from the others. Computes in Neon do not store
 
 ## Neon and Lakebase
 
+In 2025, Neon joined Databricks. Neon continues as a standalone serverless Postgres platform, but the same architectural foundation now also powers Databricks Lakebase, a managed Postgres experience that runs natively in the Databricks Data Intelligence Platform. This section explains what Lakebase is and when you might choose it instead of Neon.
+
 ### Meet Lakebase: Postgres built on object storage
 
 A lakebase is a new category of operational database: OLTP built directly on cloud object storage, the same storage layer already used by your lakehouse. Durability and history live in the object store, not on servers. This decouples storage from compute, making compute stateless and elastic. Operational data becomes lake-native by default, accessible to analytics and AI without ETL.
