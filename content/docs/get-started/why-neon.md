@@ -163,7 +163,7 @@ Neon and Lakebase share the same core architectural principles, but they are opt
 - Neon is serverless Postgres for developers, startups, and agent platforms.
 - Lakebase is serverless Postgres for teams whose operational data benefits from participating directly in the Databricks Lakehouse, alongside analytics, governance, and AI workflows.
 
-**Choose Neon if,**
+**Choose Neon if:**
 
 - You’re a developer looking for a hands-off Postgres to power side projects, experiments, or personal apps without setup friction or infrastructure management
 - You’re a young startup focused on shipping quickly and need a database that keeps up without slowing your team down
