@@ -75,7 +75,7 @@ Startups want to ship product fast and avoid cloud infrastructure complexity. Th
 - Branching speeds up building - teams can ship safely and quickly
 - Neon's straightforward and feature-complete [API](/docs/reference/api-reference)
 - Usage-based pricing means no upfront commitments
-- Neon checks out in reliability, performance, and compliance
+- Neon delivers on reliability, performance, and compliance
 
 <Admonition type="tip" title="Keep reading">
   Check out our [success stories](https://neon.com/case-studies), [use cases](https://neon.com/use-cases/serverless-apps), and the [Startup Program](https://neon.com/startups). 
