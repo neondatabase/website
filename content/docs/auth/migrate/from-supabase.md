@@ -2,7 +2,7 @@
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.736Z'
+updatedOn: '2026-01-07T15:07:19.161Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -27,22 +27,16 @@ Existing password-based users cannot migrate due to different hashing algorithms
 
 Replace the Supabase SDK with Neon's:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 npm uninstall @supabase/supabase-js
 npm install @neondatabase/neon-js
 ```
-
-</CodeWithLabel>
 
 ## Update environment variables
 
 Replace your Supabase credentials with your Neon Auth and Data API URLs:
 
-<CodeWithLabel label=".env">
-
-```env
+```env filename=".env"
 # Remove these:
 # VITE_SUPABASE_URL=https://your-project.supabase.co
 # VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
@@ -51,8 +45,6 @@ Replace your Supabase credentials with your Neon Auth and Data API URLs:
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
 VITE_NEON_DATA_API_URL=https://ep-xxx.us-east-2.aws.neon.build/neondb/rest/v1
 ```
-
-</CodeWithLabel>
 
 **Get your URLs:**
 
@@ -69,9 +61,7 @@ Find your Supabase client file, typically `src/supabase.ts` or `src/lib/supabase
 
 **Before (Supabase):**
 
-<CodeWithLabel label="src/supabase.ts">
-
-```typescript
+```typescript filename="src/supabase.ts"
 import { createClient } from '@supabase/supabase-js';
 
 export const supabase = createClient(
@@ -80,13 +70,9 @@ export const supabase = createClient(
 );
 ```
 
-</CodeWithLabel>
-
 **After (Neon):**
 
-<CodeWithLabel label="src/auth.ts">
-
-```typescript
+```typescript filename="src/auth.ts"
 import { createClient, SupabaseAuthAdapter } from '@neondatabase/neon-js';
 
 export const client = createClient({
@@ -99,8 +85,6 @@ export const client = createClient({
   },
 });
 ```
-
-</CodeWithLabel>
 
 This example renames the file to `auth.ts` and the variable to `client` for a provider-agnostic setup. You can use any naming, just stay consistent throughout your codebase.
 
@@ -122,9 +106,7 @@ After updating imports, use find/replace to change all instances throughout your
 
 Your authentication methods, parameters, and responses work identically. Your components, hooks, and auth flows don't change.
 
-<CodeWithLabel label="Auth methods">
-
-```typescript
+```typescript filename="Auth methods"
 // Sign up
 await client.auth.signUp({ email, password });
 
@@ -148,8 +130,6 @@ const {
 await client.auth.signOut();
 ```
 
-</CodeWithLabel>
-
 ## Your database queries stay the same
 
 Your existing `client.from()` queries work without any code changes:
@@ -168,13 +148,9 @@ For production apps, use Row Level Security (RLS) to secure your data. See our [
 
 Run your app:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 npm run dev
 ```
-
-</CodeWithLabel>
 
 **Test your app:**
 
@@ -189,15 +165,11 @@ Your authentication and database queries should work the same as they did with S
 
 Go to **Auth → Users** in the Neon Console to see your newly created users, or query directly:
 
-<CodeWithLabel label="SQL Editor">
-
-```sql
+```sql filename="SQL Editor"
 SELECT id, email, "createdAt"
 FROM neon_auth.user
 ORDER BY "createdAt" DESC;
 ```
-
-</CodeWithLabel>
 
 </Steps>
 

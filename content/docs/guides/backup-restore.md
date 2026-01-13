@@ -3,11 +3,13 @@ title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.861Z'
+updatedOn: '2026-01-06T10:43:28.875Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
 The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+
+**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 </Admonition>
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
@@ -439,5 +441,6 @@ Use this option if you need to inspect the restored data before you switch over 
 ## Limitations
 
 - Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
+- **Reset from parent is unavailable on child branches for up to 24 hours after restoring a parent from a snapshot.** When you restore a branch from a snapshot, any child branches of that restored branch cannot use the [Reset from parent](/docs/guides/reset-from-parent) feature for up to 24 hours.
 
 <NeedHelp/>

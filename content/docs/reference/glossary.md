@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2025-12-11T15:40:49.874Z'
+updatedOn: '2026-01-09T15:57:09.727Z'
 ---
 
 ## access token
@@ -65,10 +65,12 @@ A branch created by a [instant restore](#branch-restore) operation. When you res
 
 An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
-Each Neon project is created with two branches by default:
+Each Neon project is created with a root branch called `main`, which also serves as the default branch.
 
-- **production** - The default branch. This main line of data is referred to as [root branch](#root-branch).
-- **development** - A child branch of production. A branch created from the root branch or another branch is a [copy-on-write](#copy-on-write) clone.
+You can create additional branches as needed:
+
+- **main** - The root default branch. This main line of data is the starting point for all other branches.
+- **development** - A commonly used name for a child branch dedicated to development work. Many users create a development branch from their main branch to provide an isolated environment for testing changes.
 
 You can create a branch from the current or past state of another branch. A branch created from the current state of another branch includes the data that existed on that branch at the time of branch creation. A branch created from a past state of another branch includes the data that existed in the past state.
 
@@ -108,7 +110,7 @@ Control groups, a Linux kernel feature that allows the organization, prioritizat
 
 ## Collaborator
 
-A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in their personal account.
+A role in Neon with limited access to specific projects shared with them. Shared projects appear under the "Shared with you" section in the Neon Console.
 
 ## Compute
 
@@ -167,6 +169,23 @@ See [Neon Console](#neon-console).
 ## Control Plane
 
 The part of the Neon architecture that manages cloud storage and compute resources.
+
+## Context file
+
+A JSON file (`.neon` by default) used by the Neon CLI to store project and organization context, allowing you to run commands without specifying `--project-id` or `--org-id` each time. The context file is created by the `neon set-context` command or by accepting the CLI's prompt to save your organization as the default.
+
+The CLI determines the context file location by walking up the directory tree from your current directory, stopping when it finds a directory containing `.neon`, `package.json`, or `.git`. The `.neon` file is then read from (or created in) that directory. Using `package.json` and `.git` as markers ensures that context files are stored at your project root rather than in a subdirectory. The search stops at your home directory, so there is no global context file.
+
+Example context file contents:
+
+```json
+{
+  "orgId": "org-example-12345678",
+  "projectId": "cool-forest-86753099"
+}
+```
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## copy-on-write
 
@@ -408,7 +427,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 ## default branch
 
-A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `production`, which carries the _default branch_ designation by default.
+A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) called `main`, which carries the _default branch_ designation by default.
 
 The default branch serves two key purposes:
 
@@ -418,6 +437,16 @@ The default branch serves two key purposes:
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
 For more information, see [default branch](/docs/manage/branches#default-branch).
+
+## Default organization
+
+The organization stored in a Neon CLI [context file](#context-file) (`.neon`), used when no `--org-id` option is specified.
+
+When you run a Neon CLI command without specifying an organization (via `--org-id` or a context file), the CLI prompts you to select one and offers to save it as your default. Only if you choose to save does the CLI create a `.neon` context file containing the selected organization ID.
+
+Since the CLI walks up the directory tree to find context files, a `.neon` file in your project root serves as the default organization for that project and all its subdirectories. You can also set it explicitly using `neon set-context --org-id <org-id>`.
+
+For more information, see [Neon CLI commands — set-context](/docs/reference/cli-set-context).
 
 ## Project
 
@@ -491,7 +520,7 @@ The period of time for which Neon retains a history of changes for your branches
 
 ## root branch
 
-Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `production`. A root branch has no parent branch.
+Each Neon project is created with a root branch, which cannot be deleted and is set as the [default branch](#default-branch) for the project. A project created in the Neon Console has a root branch named `main`. A root branch has no parent branch.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -540,7 +569,7 @@ A memory area in Postgres for caching blocks of data from storage (disk on stand
 
 ## Snapshot
 
-A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact.
+A read-only, point-in-time copy of a root branch's complete state, including the schema and all data. A snapshot is created instantly with minimal performance impact. See [Backup & restore](/docs/guides/backup-restore) for details.
 
 ## SNI
 

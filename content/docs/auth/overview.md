@@ -2,15 +2,31 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2025-12-12T18:40:44.898Z'
+updatedOn: '2026-01-09T19:51:39.505Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
+  - /docs/neon-auth/overview
+  - /docs/neon-auth/claim-project
+  - /docs/neon-auth/create-users
+  - /docs/neon-auth/api
+  - /docs/neon-auth/how-it-works
+  - /docs/neon-auth/best-practices
+  - /docs/neon-auth/concepts/backend-integration
+  - /docs/neon-auth/concepts/custom-user-data
+  - /docs/guides/neon-auth-claim-project
+  - /docs/guides/neon-auth-api
+  - /docs/guides/neon-auth-how-it-works
+  - /docs/guides/neon-auth-best-practices
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test test real authentication workflows in preview environments.
+Neon Auth is a managed authentication service that stores users, sessions, and auth configuration directly in your Neon database. When you branch your database, your entire auth state branches with it. This lets you test real authentication workflows in preview environments.
+
+<Admonition type="note" title="Before you start">
+Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to see what's supported and what's coming next.
+</Admonition>
 
 ## Why Neon Auth?
 
@@ -33,19 +49,13 @@ Neon Auth currently supports Better Auth version **1.4.6**.
 
 Enable Auth in your Neon project, then add authentication to your app:
 
-<CodeWithLabel label="src/auth.ts">
-
-```typescript
+```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
 ```
 
-</CodeWithLabel>
-
-<CodeWithLabel label="src/App.tsx">
-
-```tsx
+```tsx filename="src/App.tsx"
 import { NeonAuthUIProvider, AuthView } from '@neondatabase/neon-js/auth/react/ui';
 import { authClient } from './auth';
 
@@ -57,8 +67,6 @@ export default function App() {
   );
 }
 ```
-
-</CodeWithLabel>
 
 ## Use cases
 
@@ -72,7 +80,7 @@ export default function App() {
   Test complex org and role hierarchies safely in isolated branches
 
 - **CI/CD workflows**  
-  Run end-to-end auth tests without touching production
+  Run end-to-end auth tests without touching production. The [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action) supports retrieving branch-specific auth URLs for testing authentication flows in GitHub Actions workflows.
 
 - **Development workflows**  
   Spin up complete environments instantly with database and auth together
@@ -98,6 +106,18 @@ Choose your framework to get started:
 ## Availability
 
 Neon Auth is currently available for AWS regions only. Azure support is not yet available.
+
+## Pricing
+
+Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
+
+- **Free**: Up to 60,000 MAU
+- **Launch**: Up to 1M MAU
+- **Scale**: Up to 1M MAU
+
+An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, [contact Sales](/contact-sales).
+
+See [Neon plans](/docs/introduction/plans#auth) for more details.
 
 ## Migration from Stack Auth
 

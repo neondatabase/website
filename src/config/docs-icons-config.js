@@ -131,6 +131,11 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/dotnet.svg',
     darkIconPath: null,
   },
+  draxlr: {
+    name: 'draxlr',
+    lightIconPath: '/images/technology-logos/draxlr.svg',
+    darkIconPath: null,
+  },
   drizzle: {
     name: 'drizzle',
     lightIconPath: '/images/technology-logos/drizzle.svg',
@@ -140,6 +145,11 @@ const ICONS_CONFIG = {
     name: 'elixir',
     lightIconPath: '/images/technology-logos/elixir.svg',
     darkIconPath: '/images/technology-logos/elixir-dark.svg',
+  },
+  encore: {
+    name: 'encore',
+    lightIconPath: '/images/technology-logos/encore.svg',
+    darkIconPath: null,
   },
   entity: {
     name: 'entity',
@@ -291,11 +301,6 @@ const ICONS_CONFIG = {
     lightIconPath: '/images/technology-logos/neon.svg',
     darkIconPath: '/images/technology-logos/neon-dark.svg',
   },
-  neosync: {
-    name: 'neosync',
-    lightIconPath: '/images/technology-logos/neosync.svg',
-    darkIconPath: '/images/technology-logos/neosync-dark.svg',
-  },
   'nest-js': {
     name: 'nest-js',
     lightIconPath: '/images/technology-logos/nest-js.svg',
@@ -434,6 +439,11 @@ const ICONS_CONFIG = {
   solid: {
     name: 'solid',
     lightIconPath: '/images/technology-logos/solid.svg',
+    darkIconPath: null,
+  },
+  solidstart: {
+    name: 'solidstart',
+    lightIconPath: '/images/technology-logos/solidstart.svg',
     darkIconPath: null,
   },
   sqlalchemy: {

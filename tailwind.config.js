@@ -136,7 +136,7 @@ module.exports = {
         social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
-      backgroundImage: ({ theme }) => ({
+      backgroundImage: () => ({
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
@@ -259,54 +259,6 @@ module.exports = {
         'program-form-bg':
           'radial-gradient(279.25% 154.72% at 23.51% -33.18%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 100%),' +
           'linear-gradient(0deg, #020203, #020203)',
-        // for deploy page
-        'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
-        'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',
-        'color-picker-variant-3': 'linear-gradient(225deg, #FF66FF 13.02%, #421CFF 92.19%);',
-        'color-picker-variant-4': 'linear-gradient(226.74deg, #E8EFFC 28.6%, #99B3E6 80.81%);',
-        'ticket-text-variant-0':
-          'linear-gradient(215.67deg, #FFFFFF 41.51%, rgba(255, 255, 255, 0.5) 79.11%);',
-        'ticket-text-variant-1': 'linear-gradient(215.67deg, #ffffff 41.51%, #66ffcc 79.11%)',
-        'ticket-text-variant-2': 'linear-gradient(215.67deg, #ffffff 41.51%, #e6ff66 79.11%)',
-        'ticket-text-variant-3': 'linear-gradient(215.67deg, #ffffff 41.51%, #ff99dd 79.11%)',
-        'ticket-text-variant-4': 'linear-gradient(215.67deg, #ffffff 41.51%, #ccccff 79.11%)',
-        'ticket-back-variant-1': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #00d1ff 0%, rgba(51, 255, 187, 0.2) 100%)`,
-        'ticket-back-variant-2': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, rgba(51, 255, 187, 0.6) 0%, rgba(230, 255, 102, 0.4) 100%)`,
-        'ticket-back-variant-3': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #7266ff 28.65%, #ff99dd 100%)`,
-        'ticket-back-variant-4': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #ccccff 28.65%, rgba(204, 204, 255, 0.4) 100%)`,
-        'ticket-border-variant-0': `linear-gradient(0deg, transparent 10%, rgba(255, 255, 255, 0.2) 48%, rgba(255, 255, 255, 0.2) 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, rgba(255, 255, 255, 0.2) 35%, rgba(255, 255, 255, 0.2) 65%, ${theme(
-          'colors.black.pure'
-        )} 100%)`,
-        'ticket-border-variant-1': `linear-gradient(0deg, transparent 10%, #00d1ff 48%, #00d1ff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #00d1ff 35%, #00d1ff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-2': `linear-gradient(0deg, transparent 10%, #33ffbb 48%, #33ffbb 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #33ffbb 35%, #33ffbb 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-3': `linear-gradient(0deg, transparent 10%, #7266ff 48%, #7266ff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #7266ff 35%, #7266ff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-4': `linear-gradient(0deg, transparent 10%, #ccccff 48%, #ccccff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #ccccff 35%, #ccccff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-flare-variant-1':
-          'linear-gradient(106deg, transparent 30%, rgba(51, 255, 187, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-2':
-          'linear-gradient(106deg, transparent 30%, rgba(189, 244, 113, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-3':
-          'linear-gradient(106deg, transparent 30%, rgba(255, 153, 221, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-4':
-          'linear-gradient(106deg, transparent 30%, rgba(204, 204, 255, 0.8) 60%, transparent 60%)',
         'live-video':
           'linear-gradient(103.37deg, rgba(255, 255, 255, 0.05) 12.69%, rgba(255, 255, 255, 0.11) 43.45%, rgba(255, 255, 255, 0) 93.31%)',
       }),

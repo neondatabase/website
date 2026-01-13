@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2025-12-15T16:40:04.580Z'
+updatedOn: '2026-01-09T15:57:09.725Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -14,11 +14,11 @@ In Neon, the project is your main workspace. Within a project, you create branch
 
 When you add a new project, Neon creates the following resources by default:
 
-- Two branches are created for you by default: `production` (your main branch for production workloads) and `development` (a child branch for development work). You can create additional child branches from either of these, or from any other branch. For more information, see [Manage branches](/docs/manage/branches).
+- A branch named `main` is created as your project's root branch, which serves as your production environment. You can create child branches from `main` for development, testing, staging, and other purposes. For more information, see [Manage branches](/docs/manage/branches).
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based—you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
 ## Create a project
 
@@ -869,8 +869,6 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
 
 ## Recover a deleted project
 
-<EarlyAccess />
-
 If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
 
 <Admonition type="note">
@@ -885,7 +883,7 @@ When you recover a deleted project, the following are restored:
 - Project settings (IP Allow, logical replication, protected branches, scheduled updates)
 - Project collaborators
 - Connection strings
-- Vercel-managed projects are automatically reconnected to Vercel
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
 
 ### What requires reconfiguration
 
@@ -894,6 +892,7 @@ The following features are **not** recovered and must be manually re-enabled aft
 - **Data API** (including `authenticated` and `anonymous` roles)
 - **GitHub integration**
 - **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Vercel-Managed Neon integration** (project reconnection via Storage)
 - **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
 
 ### Costs

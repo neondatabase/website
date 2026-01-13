@@ -2,7 +2,7 @@
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
 enableTableOfContents: true
-updatedOn: '2025-11-23T00:00:00.000Z'
+updatedOn: '2026-01-07T15:07:19.155Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -12,6 +12,10 @@ Authentication is often one of the hardest parts of the application stack to tes
 One of Neon Auth's unique features is native support for [database branching](/docs/introduction/branching). Because authentication data (users, sessions, and configuration) lives directly in your database's `neon_auth` schema, it is cloned along with your business data when you create a branch.
 
 This gives each branch its own isolated authentication environment, enabling safe testing of permission changes, new OAuth providers, or full application refactors.
+
+<Admonition type="info">
+Neon Auth branching is also supported via API. See the [Neon Auth API reference](https://api-docs.neon.tech/reference/getneonauth) for a full set of REST API endpoints.
+</Admonition>
 
 ## How it works
 
@@ -83,23 +87,15 @@ Because Neon Auth is part of the database, Alice and Bob don't need to set up se
 
 Say you want to add Google OAuth to your production app, but you're not sure if your configuration will work. Instead of testing directly in production, create a branch:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 # Create test branch from production
 neon branches create --name test-google-oauth
 ```
 
-</CodeWithLabel>
-
-<CodeWithLabel label=".env.local">
-
-```env
+```env filename=".env.local"
 # Point your local app to the test branch's Auth URL
 VITE_NEON_AUTH_URL=https://ep-test-google-oauth.neonauth.region.aws.neon.tech/neondb/auth
 ```
-
-</CodeWithLabel>
 
 Now configure Google OAuth in the test branch's Console and verify the sign-in flow works locally. Your production app and users are completely unaffected. Once you confirm it works, apply the same OAuth settings to your production branch.
 

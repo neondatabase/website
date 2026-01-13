@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-12-12T19:35:53.906Z'
+updatedOn: '2025-12-29T17:42:33.412Z'
 ---
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -90,7 +90,8 @@ Now that you have the app running, let's explore how it uses the Data API. The f
 The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Neon Auth. Here's how the client is configured in `src/lib/auth.ts`:
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
 export const client = createClient<Database>({

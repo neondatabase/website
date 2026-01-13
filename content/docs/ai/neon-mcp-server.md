@@ -3,14 +3,32 @@ title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
 enableTableOfContents: true
-updatedOn: '2025-11-14T19:50:51.302Z'
+updatedOn: '2025-12-17T19:34:00.756Z'
 ---
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-> To get started connecting an MCP Client like **Cursor**, **Claude Code**, **VS Code**, **Windsurf**, **ChatGPT**, and others, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon). If you're using **Cursor**, you can click the button below for a quick install. When prompted, click **Install within Cursor**.
+## Get started
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+The fastest way to set up Neon's MCP Server is with one command:
+
+```bash
+npx neonctl@latest init
+```
+
+This command will:
+
+- Authenticate via OAuth (opens your browser)
+- Create a Neon API key for you automatically
+- Configure your editor to connect to Neon's remote MCP server
+
+Currently the `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**
+
+After running the command, restart your editor and ask your AI assistant to **"Get started with Neon"** to launch the interactive onboarding guide. For more details, see the [neonctl init documentation](/docs/reference/cli-init).
+
+**Prefer manual configuration?** See [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon) for step-by-step instructions for any editor, including Windsurf, ChatGPT, Zed, and others.
+
+---
 
 Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'". Or, to see your projects, you might ask, "List all my Neon projects". The Neon MCP Server makes this possible.
 

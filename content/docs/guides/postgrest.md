@@ -2,7 +2,7 @@
 title: Create a REST API from Postgres with PostgREST
 subtitle: Generate a REST API automatically from your Neon Postgres database schema
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.287Z'
+updatedOn: '2026-01-13T18:46:54.025Z'
 ---
 
 <InfoBlock>
@@ -23,6 +23,10 @@ updatedOn: '2025-08-02T10:33:29.287Z'
 <a href="https://github.com/PostgREST/postgrest">PostgREST GitHub Repository</a>
 </DocsList>
 </InfoBlock>
+
+<Admonition type="note">
+Neon also provides a built-in [Data API](/docs/data-api/overview) that automatically creates REST endpoints for your database without requiring PostgREST or any additional setup. The Data API is fully managed and includes built-in authentication support.
+</Admonition>
 
 ## What is PostgREST?
 

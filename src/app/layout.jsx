@@ -1,6 +1,4 @@
 import 'styles/globals.css';
-
-import dynamic from 'next/dynamic';
 import Script from 'next/script';
 
 import LINKS from 'constants/links';
@@ -9,13 +7,7 @@ import { TabsProvider } from 'contexts/tabs-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
-import PostHogProvider from './posthog-provider';
-import SessionProvider from './session-provider';
 import ThemeProvider from './theme-provider';
-
-const PostHogPageView = dynamic(() => import('./posthog-pageview'), {
-  ssr: false,
-});
 
 export const preferredRegion = 'edge';
 
@@ -35,18 +27,13 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href={LINKS.console} />
     </head>
     <body>
-      <SessionProvider>
-        <PostHogProvider>
-          <PostHogPageView />
-          <ThemeProvider>
-            <HomepageVisitProvider>
-              <TabsProvider>
-                <CodeTabsProvider>{children}</CodeTabsProvider>
-              </TabsProvider>
-            </HomepageVisitProvider>
-          </ThemeProvider>
-        </PostHogProvider>
-      </SessionProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <TabsProvider>
+            <CodeTabsProvider>{children}</CodeTabsProvider>
+          </TabsProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );

@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2025-12-08T20:23:43.016Z'
+updatedOn: '2026-01-13T14:45:42.241Z'
 ---
 
 ## Overview
@@ -27,6 +27,7 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 | **Billing**             | Paid **through Vercel**                                                                               | Paid **through Neon**                                                                                        | Paid **through Neon**                           |
 | **Setup method**        | Vercel Marketplace → Native Integrations → "Neon Postgres"                                            | Vercel Marketplace → Connectable Accounts → "Neon"                                                           | Manual env-vars                                 |
 | **Preview Branching**   | ✅                                                                                                    | ✅                                                                                                           | ✖️                                              |
+| **Neon Auth support**   | ✅ Auto-provisioned on preview branches                                                               | ✅ Auto-provisioned on preview branches                                                                      | Manual setup required                           |
 | **Branch cleanup**      | Automatic (deployment-based)                                                                          | Automatic (Git-branch-based)                                                                                 | N/A                                             |
 | **Implementation type** | [Native Integration](https://vercel.com/docs/integrations/install-an-integration/product-integration) | [Connectable Account](https://vercel.com/docs/integrations/install-an-integration/add-a-connectable-account) | N/A                                             |
 

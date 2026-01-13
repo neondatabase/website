@@ -268,7 +268,7 @@ class DocumentService {
 
       // Start building the SQL query
       let sql = `
-            SELECT 
+            SELECT
                 id,
                 title,
                 content,
@@ -310,7 +310,7 @@ class DocumentService {
       const result = await this.pool.query(
         `
         SELECT id, title, content, category, created_at
-        FROM documents 
+        FROM documents
         WHERE id = $1
       `,
         [id]

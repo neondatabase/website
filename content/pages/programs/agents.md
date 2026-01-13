@@ -43,7 +43,7 @@ If you're building agents that generate apps from prompts, your users want to bu
 | Support                         | **Shared Slack Channel**                                                                              |
 | <br/>**Agent Incentives**       |                                                                                                       |
 | **Your Free Tier is Free**      | Neon pays for up to 30,000 projects/month used in your free tier.                                     |
-| **General Use Credits**         | Up to $30K in credits for those not eligible for the [Startup Program](/startups).                    |
+| **General Use Credits**         | Up to $25K in credits for those not eligible for the [Startup Program](/startups).                    |
 | **Co-Marketing**                | Blog and Social promotions, hackathons and more.                                                      |
 
 <QuoteBlock quote="Integrating Neon was a no-brainer. It gives every Databutton app a production-grade Postgres database in seconds, with zero overhead. Our AI agent can now create, manage, and debug the entire stack, not just code." author="martin-skow-røed" role="CTO and co-founder of Databutton" />
