@@ -2,7 +2,7 @@
 title: Data anonymization API reference
 subtitle: API endpoints for managing anonymized branches and masking rules
 enableTableOfContents: true
-updatedOn: '2025-01-12T00:00:00.000Z'
+updatedOn: '2026-01-13T19:28:54.348Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).

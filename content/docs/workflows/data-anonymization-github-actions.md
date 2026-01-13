@@ -2,7 +2,7 @@
 title: Data anonymization with GitHub Actions
 subtitle: Automate anonymized branch creation in your CI/CD pipeline
 enableTableOfContents: true
-updatedOn: '2025-01-12T00:00:00.000Z'
+updatedOn: '2026-01-13T19:28:54.352Z'
 ---
 
 This page shows how to automate data anonymization with GitHub Actions. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).
