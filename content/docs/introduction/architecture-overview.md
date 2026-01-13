@@ -3,6 +3,7 @@ title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
+  - /docs/guides/neon-features
 updatedOn: '2024-11-21T16:16:13.439Z'
 ---
 
