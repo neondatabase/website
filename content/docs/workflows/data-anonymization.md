@@ -180,7 +180,7 @@ You can create masking rules directly using PostgreSQL Anonymizer's `SECURITY LA
 Example creating a masking rule for an email column:
 
 ```sql
-SECURITY LABEL FOR anon ON COLUMN users.email 
+SECURITY LABEL FOR anon ON COLUMN users.email
 IS 'MASKED WITH FUNCTION anon.dummy_free_email()';
 ```
 
@@ -273,10 +273,10 @@ ORDER BY relname, attname;
 Example result:
 
 ```
- relnamespace | relname | attname |       masking_function        | masking_value 
+ relnamespace | relname | attname |       masking_function        | masking_value
 --------------+---------+---------+-------------------------------+---------------
  public       | users   | address |                               | 'CONFIDENTIAL'
- public       | users   | email   | anon.dummy_free_email()       | 
+ public       | users   | email   | anon.dummy_free_email()       |
  public       | users   | phone   | anon.partial(phone, 2, 'XXX-XXXX', 2) |
 ```
 
