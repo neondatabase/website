@@ -129,7 +129,7 @@ The Neon API has been shaped by real-world requirements, and it’s able to
 
 **CLI and native integrations**
 
-For local development and CI pipelines, the Neon CLI provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
+For local development and CI pipelines, the [Neon CLI](/docs/reference/neon-cli) provides a simple scripting interface that builds directly on the same API. Neon also provides native integrations for common workflows:
 
 - GitHub Actions for CI-driven branching and cleanup
 - Vercel for automatic database branches per preview deployment
