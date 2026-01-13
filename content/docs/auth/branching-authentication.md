@@ -68,15 +68,11 @@ This branch isolation enables several powerful workflows for developers, QA team
 
 In a team environment, developers often step on each other's toes when sharing a single development database. With branching, each developer can have their own instance:
 
-<CodeWithLabel label="Terminal">
-
-```bash
+```bash filename="Terminal"
 # Alice and Bob create their own branches
 neon branches create --name dev-alice
 neon branches create --name dev-bob
 ```
-
-</CodeWithLabel>
 
 - **Alice** works on a "Delete Account" flow. She can delete users and test the full flow without worrying about affecting others.
 - **Bob** works on the "User Dashboard". His user list remains intact, even though Alice is deleting users in her environment.
