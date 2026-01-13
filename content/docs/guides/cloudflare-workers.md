@@ -146,7 +146,7 @@ npm install -D @types/pg
 
 ### Configure wrangler.jsonc
 
-Add the following configuration to your `wrangler.jscon` file:
+Add the following configuration to your `wrangler.jsonc` file:
 
 ```json
 {
