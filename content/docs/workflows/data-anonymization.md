@@ -5,7 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2025-12-17T22:01:22.948Z'
+updatedOn: '2026-01-12T23:57:35.336Z'
 ---
 
 <FeatureBeta />
@@ -92,6 +92,10 @@ From the **Data Masking** page:
 For email columns with unique constraints, use **Random Unique Email**, which generates UUID-based emails that maintain uniqueness while preserving the email format.
 </Admonition>
 
+<Admonition type="note">
+If you've defined custom masking rules via the API (such as custom PostgreSQL expressions like `pg_catalog.concat(anon.dummy_uuidv4(), '@customdomain.com')`), these rules will display as text in the Console showing the underlying expression. The Console preserves these API-defined rules when you run anonymization so you can safely mix Console and API workflows.
+</Admonition>
+
 3. Repeat for all sensitive columns.
 4. When you are ready, click **Apply masking rules** to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
 
@@ -105,7 +109,7 @@ Rerunning the anonymization process on the anonymized branch applies rules to pr
 
 <TabItem>
 
-For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below. Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
+For complete API documentation with request/response examples, see [Data anonymization APIs](#data-anonymization-apis) below. Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`). Custom rules you define via API will display as text in the Console showing the full expression, allowing you to view and preserve API-defined rules while working in the Console.
 
 **Get masking rules**
 
@@ -165,7 +169,8 @@ The branch is unavailable for connections while anonymization is in progress.
 - Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
 - Branch is unavailable during anonymization.
 - Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
-- The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
+- Anonymized branches are not currently supported for projects with [IP restrictions](/docs/introduction/ip-allow) or [private networking](/docs/guides/neon-private-networking) enabled.
+- The Console provides a curated subset of masking functions for creation—use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/). Custom rules defined via API display as text in the Console and are preserved when running anonymization from the Console.
 
 ## Data anonymization APIs
 

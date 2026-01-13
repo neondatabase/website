@@ -495,7 +495,7 @@
 - [Neon ORM guides](https://neon.com/llms/get-started-orms.txt): Find detailed instructions for connecting to Neon from various ORMs
 - [Neon framework guides](https://neon.com/llms/get-started-frameworks.txt): Find detailed instructions for connecting to Neon from various frameworks
 - [Neon language guides](https://neon.com/llms/get-started-languages.txt): Find detailed instructions for connecting to Neon from various languages
-- [Production readiness with Neon](https://neon.com/llms/get-started-production-readiness.txt): Neon features for real-world workloads
+- [Built to scale with Neon](https://neon.com/llms/get-started-built-to-scale.txt): How Neon supports you from side projects through startups to scale-ups and large fleets
 - [Query with Neon's SQL Editor](https://neon.com/llms/get-started-query-with-neon-sql-editor.txt): Query your database from the Neon Console using the Neon SQL Editor
 - [Why Neon?](https://neon.com/llms/get-started-why-neon.txt): Neon is Serverless Postgres built for the cloud
 

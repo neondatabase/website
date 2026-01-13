@@ -198,6 +198,7 @@ To test if an icon works:
 <a href="#" title="Materialize" description="Streaming database (icon: materialize)" icon="materialize">Materialize</a>
 <a href="#" title="Neon" description="Serverless Postgres (icon: neon)" icon="neon">Neon</a>
 <a href="#" title="Outerbase" description="Database interface (icon: outerbase)" icon="outerbase">Outerbase</a>
+<a href="#" title="Draxlr" description="Database interface (icon: draxlr)" icon="draxlr">Draxlr</a>
 <a href="#" title="Polyscale" description="Database proxy (icon: polyscale)" icon="polyscale">Polyscale</a>
 <a href="#" title="PostgreSQL" description="Database system (icon: postgresql)" icon="postgresql">PostgreSQL</a>
 <a href="#" title="Prisma" description="ORM for Node.js (icon: prisma)" icon="prisma">Prisma</a>

@@ -2,7 +2,7 @@
 title: Overview of the Neon object hierarchy
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-03T13:07:33.040Z'
+updatedOn: '2026-01-09T15:57:09.724Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.
@@ -25,7 +25,7 @@ A project is a container for all objects except for API keys, which are global a
 
 ## Default branch
 
-Data resides in a branch. Each Neon project is created with a default branch called `production`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
+Data resides in a branch. Each Neon project is created with a default branch called `main`. This initial branch is also your project's root branch, which cannot be deleted. After creating more branches, you can designate a different branch as your default branch, but your root branch cannot be deleted. You can create child branches from any branch in your project. Each branch can contain multiple databases and roles. Plan limits define the number of branches you can create in a project and the amount of data per branch. To learn more, see [Manage branches](/docs/manage/branches).
 
 ## R/W computes and Read Replicas
 

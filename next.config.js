@@ -314,12 +314,17 @@ const defaultConfig = {
       // },
       {
         source: '/deploy',
-        destination: '/stage',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/generate-ticket',
-        destination: '/stage',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/stage',
+        destination: '/',
         permanent: true,
       },
       {
@@ -350,6 +355,11 @@ const defaultConfig = {
       {
         source: '/baa',
         destination: 'https://www.databricks.com/legal/neon-baa',
+        permanent: true,
+      },
+      {
+        source: '/baa/signed',
+        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
       {
@@ -471,6 +481,11 @@ const defaultConfig = {
       {
         source: '/agents',
         destination: '/programs/agents',
+        permanent: true,
+      },
+      {
+        source: '/cost-fleets',
+        destination: '/',
         permanent: true,
       },
       ...docsRedirects,
