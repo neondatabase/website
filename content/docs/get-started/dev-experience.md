@@ -80,7 +80,7 @@ Storage in Neon is also [history-preserving](https://neon.com/blog/get-page-at-l
 
 **Instant restores**
 
-Neon’s [Instant Restore](https://neon.com/docs/introduction/branch-restore#how-instant-restore-works) allows you to restore your database to a precise point in time in a single API call. Restore operations are near-instant because Neon doesn’t copy data or rebuild the database, it simply re-anchors the database state to a known point in its history.
+Neon’s [Instant Restore](https://neon.com/docs/introduction/branch-restore#how-instant-restore-works) allows you to restore your database to a precise point in time in a few clicks or a single API call. Restore operations are near-instant because Neon doesn’t copy data or rebuild the database, it simply re-anchors the database state to a known point in its history.
 
 **Snapshots as checkpoints**
 
