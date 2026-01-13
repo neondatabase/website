@@ -136,7 +136,7 @@ Separation alone is not enough. Neon’s most distinctive capabilities come from
 
 ### Stateless, ephemeral compute
 
-The final piece follows naturally from the others. Compute nodes in Neon do not store data. They attach to the storage layer at a specific point in history, execute queries, and disappear when no longer needed. They can be created, resized, or destroyed at any time without risking data loss. This is what allows Neon to:
+The final piece follows naturally from the others. Computes in Neon do not store data. They attach to the storage layer at a specific point in history, execute queries, and disappear when no longer needed. They can be created, resized, or destroyed at any time without risking data loss. This is what allows Neon to:
 
 - Autoscale without downtime
 - Scale to zero when idle
