@@ -2,7 +2,7 @@
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.155Z'
+updatedOn: '2026-01-13T20:57:02.562Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
