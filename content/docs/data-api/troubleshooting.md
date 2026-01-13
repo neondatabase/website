@@ -82,12 +82,12 @@ The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represen
 
 If you're using Neon Auth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
 
-Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). From there, you can:
+Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console. From there, you can:
 
-1. Create a test user with `POST /api/auth/sign-up/email`
-2. Sign in with `POST /api/auth/sign-in/email`
-3. Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header
-4. Use that JWT in your Data API requests
+1. Create a test user with `POST /api/auth/sign-up/email`.
+2. Sign in with `POST /api/auth/sign-in/email`.
+3. Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
+4. Use that JWT in your Data API requests.
 
 For step-by-step instructions, see [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl).
 

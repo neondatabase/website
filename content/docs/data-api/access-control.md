@@ -57,11 +57,11 @@ Before RLS can even apply, the database role must have permission to perform the
 
 ### Automatic configuration
 
-When you enable the Data API via the Console, Neon automatically applies default `GRANT` statements to the `authenticated` role for the `public` schema. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for the statements that are applied.
+When you enable the Data API via the Console, Neon automatically applies default `GRANT` statements to the `authenticated` role for the `public` schema. See the manual configuration section below for the statements that are applied.
 
 ### Manual configuration
 
-If you skipped the default Data API setup or you are adding custom roles or working with schemas other than `public`, you may need to grant permissions explicitly.
+If you skipped the default Data API setup in the Neon Console or you are adding custom roles or working with schemas other than `public`, you may need to grant permissions explicitly.
 
 The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (e.g., `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (e.g., `admin`), but you must ensure that the role exists in your database.
 
