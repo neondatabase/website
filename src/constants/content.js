@@ -2,8 +2,6 @@ const CONTENT_DIR_PATH = 'content';
 const DOCS_DIR_PATH = `${CONTENT_DIR_PATH}/docs`;
 const GUIDES_DIR_PATH = `${CONTENT_DIR_PATH}/guides`;
 const BRANCHING_DIR_PATH = `${CONTENT_DIR_PATH}/branching`;
-const FASTER_DIR_PATH = `${CONTENT_DIR_PATH}/faster`;
-const SUBPROCESSORS_DIR_PATH = `${CONTENT_DIR_PATH}/subscribe-to-subprocessors`;
 const CHANGELOG_DIR_PATH = `${CONTENT_DIR_PATH}/changelog`;
 const POSTGRESQL_DIR_PATH = `${CONTENT_DIR_PATH}/postgresql`;
 const TEMPLATE_PAGES_DIR_PATH = `${CONTENT_DIR_PATH}/pages`;
@@ -41,7 +39,5 @@ module.exports = {
   PROGRAMS_DIR_PATH,
   CHANGELOG_DIR_PATH,
   POSTGRESQL_DIR_PATH,
-  FASTER_DIR_PATH,
-  SUBPROCESSORS_DIR_PATH,
   TEMPLATE_PAGES_DIR_PATH,
 };

@@ -10,13 +10,13 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.caseStudies);
 
 const CaseStudiesPage = async () => {
-  const сaseStudies = await getAllWpCaseStudiesPosts();
+  const caseStudies = await getAllWpCaseStudiesPosts();
   const categories = await getAllWpCaseStudiesCategories();
 
   return (
     <Layout>
-      <Hero items={сaseStudies} />
-      <Cards items={сaseStudies} categories={categories} />
+      <Hero items={caseStudies} />
+      <Cards items={caseStudies} categories={categories} />
       <CTA
         className="pb-[320px] pt-[400px] xl:pb-[200px] xl:pt-[240px] lg:pb-[156px] lg:pt-[220px] sm:pb-[110px] sm:pt-[135px]"
         title="Ready to get started with Neon?"

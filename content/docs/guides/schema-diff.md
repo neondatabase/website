@@ -2,7 +2,7 @@
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
 enableTableOfContents: true
-updatedOn: '2025-08-07T10:06:24.019Z'
+updatedOn: '2026-01-09T15:57:09.721Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).
@@ -69,7 +69,7 @@ Use the `schema-diff` subcommand from the `branches` command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `production`, identify `production` as your base branch and `development` as your compare-source.
+The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `main`, identify `main` as your base branch and `development` as your compare-source.
 
 ```bash
 neon branches schema-diff production development

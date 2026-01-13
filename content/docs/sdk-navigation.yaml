@@ -1,0 +1,77 @@
+reference/javascript-sdk:
+  title: Neon JavaScript SDK
+  sections:
+    - section: Getting Started
+      items:
+        - title: Initialize the client
+          id: initializing
+    - section: Auth
+      items:
+        - title: Create a new user account
+          id: auth-signup
+        - title: Sign in with email and password
+          id: auth-signinwithpassword
+        - title: Sign in with OAuth provider
+          id: auth-signinwithoauth
+        - title: Sign out
+          id: auth-signout
+        - title: Get current session
+          id: auth-getsession
+        - title: Update user profile
+          id: auth-updateuser
+        - title: Send verification OTP code
+          id: auth-sendverificationotp
+        - title: Sign in with OTP code
+          id: auth-signinwithotp
+        - title: Verify email with OTP
+          id: auth-verifyemailotp
+        - title: Check verification OTP code
+          id: auth-checkverificationotp
+        - title: Send verification email
+          id: auth-sendverificationemail
+        - title: Verify email address
+          id: auth-verifyemail
+        - title: Request password reset
+          id: auth-requestpasswordreset
+    - section: Database
+      items:
+        - title: Fetch data from a table
+          id: select
+        - title: Insert data into a table
+          id: insert
+        - title: Update existing rows
+          id: update
+        - title: Delete rows from a table
+          id: delete
+        - title: Call a stored procedure
+          id: rpc
+        - title: Column is equal to a value
+          id: eq
+        - title: Column is not equal to a value
+          id: neq
+        - title: Column is greater than a value
+          id: gt
+        - title: Column is less than a value
+          id: lt
+        - title: Order results by column
+          id: order
+    - section: Filters
+      items:
+        - title: Limit number of results
+          id: limit
+        - title: Column is greater than or equal to a value
+          id: gte
+        - title: Column is less than or equal to a value
+          id: lte
+        - title: Column matches a pattern
+          id: like
+        - title: Column matches a pattern (case-insensitive)
+          id: ilike
+        - title: Column is null or not null
+          id: is
+        - title: Column value is in an array
+          id: in
+        - title: Array or JSONB column contains value
+          id: contains
+        - title: Column value is between two values
+          id: range
