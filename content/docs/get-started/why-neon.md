@@ -117,7 +117,7 @@ Neon treats the object store as the system of record. WAL, page versions, and da
 
 ### Separation of storage and compute
 
-With durability and history centralized in storage, compute can be fully decoupled. Data lives in a distributed, durable storage layer. Compute nodes are lightweight and ephemeral processes that attach to that data when needed. This separation is the foundation of everything Neon can do:
+With durability and history centralized in storage, compute can be fully decoupled. Data lives in a distributed, durable storage layer. Computes are lightweight and ephemeral processes that attach to that data when needed. This separation is the foundation of everything Neon can do:
 
 - Start and stop compute in seconds
 - Scale compute independently of storage
