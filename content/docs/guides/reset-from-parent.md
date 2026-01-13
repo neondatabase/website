@@ -2,7 +2,7 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 enableTableOfContents: true
-updatedOn: '2025-08-19T16:52:00.906Z'
+updatedOn: '2026-01-06T10:43:28.879Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -131,3 +131,7 @@ neon branches reset staging --parent
 ```
 
 This ensures staging accurately reflects the current production state for reliable testing.
+
+## Limitations
+
+- **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/introduction/branch-restore) to restore the child branch from the parent directly.
