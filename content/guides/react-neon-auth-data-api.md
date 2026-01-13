@@ -30,19 +30,20 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable both Neon Auth and the Data API.
 
-1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `react-neon-todo`.
+1.  **Create a Neon project:** Navigate to [Neon Console](https://console.neon.tech) to create a new Neon project. Give your project a name, such as `react-neon-todo`.
 2.  **Enable Neon Data API with Neon Auth:**
     - In your project's dashboard, go to the **Data API** page from the sidebar.
-    - Choose **Neon Auth** as the authentication provider.
-    - Toggle the **Grant public schema access** option. This allows authenticated users to access the public schema where your application data will reside.
-      ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
-    - Finally, click on the **Enable** button to activate the Data API with Neon Auth.
+    - Ensure **Use Neon Auth** is selected.
+    - Ensure **Grant public schema access** is enabled.
+    - Finally, click on the **Enable Data API** button to activate the Data API with Neon Auth.
+
+    ![Data API page with enable button](/docs/data-api/data_api_sidebar_with_public_schema.png)
 
 3.  **Copy your credentials:**
     - **Data API URL:** Found on the Data API page (e.g., `https://ep-xxx.neon.tech/neondb/rest/v1`).
       ![Data API enabled view](/docs/data-api/data-api-enabled.png)
-    - **Auth Base URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
-      ![Neon Auth Base URL](/docs/auth/neon-auth-base-url.png)
+    - **Auth URL:** Found on the **Auth** page (e.g., `https://ep-xxx.neon.tech/neondb/auth`).
+      ![Neon Auth URL](/docs/auth/neon-auth-base-url.png)
     - **Database Connection String:** Found on the **Dashboard** (select "Pooled connection").
 
       > The database connection string is used exclusively for Drizzle ORM migrations and should not be exposed in the frontend application.
@@ -203,7 +204,11 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
 
     Open `src/db/schema.ts` to view the `neon_auth` tables that Drizzle generated from your existing Neon database schema. At the bottom of the file, append the `todos` table definition along with the RLS policies shown below.
 
-    This table links to the `userInNeonAuth` table in the `neon_auth` schema and uses the `crudPolicy` function to enforce Row‑Level Security (RLS).
+    You will also need to import the following additional utilities at the top of the file, as they are not included by default:
+    - `bigint` from `drizzle-orm/pg-core` to define the `id` column of the `todos` table.
+    - `authenticatedRole` and `crudPolicy` from `drizzle-orm/neon` to configure Row-Level Security (RLS).
+
+    Drizzle ORM includes built-in support for RLS policies. The `authenticatedRole` represents the role assigned to authenticated users, while `crudPolicy` provides a declarative way to define RLS policies. For more details, see the [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) guide.
 
     ```typescript {9,12,40-60} shouldWrap
     import {
@@ -268,7 +273,7 @@ This step is crucial because it makes Drizzle aware of the Neon Auth tables, all
     export type Todo = typeof todos.$inferSelect;
     ```
 
-    The `todos` table contains the following columns: `id`, `text`, `completed`, and `user_id`. It is linked to the `user` table in the `neon_auth` schema and secured with Row‑Level Security (RLS) policies:
+    The `todos` table contains the following columns: `id`, `text`, `completed`, and `user_id`. It is linked to the `userInNeonAuth` (`user`) table in the `neon_auth` schema and uses the `crudPolicy` function to define RLS policies.
     1. **Foreign key reference**  
        The `todos` table includes a foreign key to the `user` table in the `neon_auth` schema.
 
