@@ -740,22 +740,22 @@
 
             - title: Query
               items:
-                - title: Exograph
-                  slug: guides/exograph
-                - title: PostgREST
-                  slug: guides/postgrest
-                - title: Grafbase
-                  slug: guides/grafbase
-                - title: Hasura
-                  slug: guides/hasura
                 - title: AskYourDatabase
                   slug: guides/askyourdatabase
                 - title: Cloudflare Hyperdrive
                   slug: guides/cloudflare-hyperdrive
                 - title: Draxlr
                   slug: guides/draxlr
+                - title: Exograph
+                  slug: guides/exograph
+                - title: Grafbase
+                  slug: guides/grafbase
+                - title: Hasura
+                  slug: guides/hasura
                 - title: Outerbase
                   slug: guides/outerbase
+                - title: PostgREST
+                  slug: guides/postgrest
                 - title: StepZen
                   slug: guides/stepzen
                 - title: WunderGraph
