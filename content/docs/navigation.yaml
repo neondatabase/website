@@ -740,8 +740,16 @@
 
             - title: Develop
               items:
+                - title: Convex
+                  slug: guides/convex-neon
                 - title: GitHub integration
                   slug: guides/neon-github-integration
+                - title: Knex
+                  slug: guides/knex
+                - title: Prisma
+                  slug: guides/prisma
+                - title: TypeORM
+                  slug: guides/typeorm
 
             - title: File & media storage
               items:
