@@ -206,12 +206,7 @@ You can view existing masking rules via the Console, API, or SQL.
 
 <TabItem>
 
-From the **Data Masking** page, all defined masking rules are displayed for each table and column:
-
-- Rules created via Console appear as dropdown selections showing the friendly function name
-- Rules created via API or SQL appear as text showing the underlying PostgreSQL expression
-
-Both types of rules work equivalently during anonymization.
+From the **Data Masking** page, all defined masking rules are displayed for each table and column. Rules using standard functions appear as dropdown selections, while custom rules (functions not available in the Console dropdown) appear as text showing the underlying PostgreSQL expression.
 
 </TabItem>
 
