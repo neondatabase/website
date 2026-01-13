@@ -18,7 +18,7 @@ Our developer experience is anchored by four core pillars:
 
 ### Autoscaling compute
 
-Traditional OLTP databases force you to provision compute upfront, i.e. choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
+Traditional OLTP databases force you to provision compute upfront—i.e., choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
 Neon removes this tradeoff by [automatically scaling](https://neon.com/docs/introduction/autoscaling) database compute up and down based on real demand. When your application needs more resources due to traffic spikes, background jobs, or heavy queries, Neon increases available compute, and as demand drops, compute scales back down.
 
