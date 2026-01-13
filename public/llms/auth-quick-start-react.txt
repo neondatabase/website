@@ -1,0 +1,17 @@
+# Use Neon Auth with React (API methods)
+
+> The document outlines the process for integrating Neon authentication with React applications, detailing API methods and configurations necessary for seamless user authentication within Neon's platform.
+
+## Source
+
+- [Use Neon Auth with React (API methods) HTML](https://neon.com/docs/auth/quick-start/react): The original HTML version of this documentation
+
+**Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+
+
+## Next steps
+
+- [Learn about Neon Auth concepts](https://neon.com/docs/auth/overview)
+- [Explore the Neon Data API](https://neon.com/docs/data-api/get-started) to build a REST API for your data
+- [View complete SDK reference](https://neon.com/docs/reference/javascript-sdk)

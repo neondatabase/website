@@ -1,0 +1,16 @@
+# Use Neon Auth with Next.js (UI Components)
+
+> The document outlines the process of integrating Neon authentication with Next.js using UI components, detailing setup instructions and code examples to facilitate seamless authentication in a Neon environment.
+
+## Source
+
+- [Use Neon Auth with Next.js (UI Components) HTML](https://neon.com/docs/auth/quick-start/nextjs): The original HTML version of this documentation
+
+**Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+
+
+## Next steps
+
+- [Add email verification](https://neon.com/docs/auth/guides/email-verification)
+- [Learn how to branch your auth](https://neon.com/docs/auth/branching-authentication)

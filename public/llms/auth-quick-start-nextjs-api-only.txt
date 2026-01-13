@@ -1,0 +1,28 @@
+# Use Neon Auth with Next.js (API methods)
+
+> This document outlines the process for integrating Neon authentication with a Next.js application using API methods, detailing the necessary steps and configurations for seamless implementation.
+
+## Source
+
+- [Use Neon Auth with Next.js (API methods) HTML](https://neon.com/docs/auth/quick-start/nextjs-api-only): The original HTML version of this documentation
+
+**Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. To use our pre-built UI components instead, see the [UI components guide](https://neon.com/docs/auth/quick-start/nextjs).
+
+
+
+## Available SDK methods
+
+Both `authClient` and `authServer` expose similar API methods. If you would like to use auth APIs in client components, you can use `authClient`.
+
+- [authClient.signUp.email()](https://neon.com/docs/reference/javascript-sdk#auth-signup) - Create a new user account
+- [authClient.signIn.email()](https://neon.com/docs/reference/javascript-sdk#auth-signinwithpassword) - Sign in with email and password
+- [authClient.signOut()](https://neon.com/docs/reference/javascript-sdk#auth-signout) - Sign out the current user
+- [authClient.getSession()](https://neon.com/docs/reference/javascript-sdk#auth-getsession) - Get the current session
+- `authServer.updateUser()` - To update user details
+
+## Next steps
+
+- [Add email verification](https://neon.com/docs/auth/guides/email-verification)
+- [Branching authentication](https://neon.com/docs/auth/branching-authentication)

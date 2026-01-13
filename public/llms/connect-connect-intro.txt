@@ -21,7 +21,7 @@ To help understand which driver and connection type you need, see:
 Learn how to establish a connection to Neon from any application.
 
 - [Connect from any app](https://neon.com/docs/connect/connect-from-any-app): Learn about connection strings and how to connect to Neon from any application
-- [Connect locally](https://neon.com/docs/local/neon-local-connect): Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf
+- [Connect locally](https://neon.com/docs/local/vscode-extension): Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf
 - [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver): Connect to Neon from serverless environments over HTTP or WebSockets
 - [Connect a GUI application](https://neon.com/docs/connect/connect-postgres-gui): Learn how to connect to a Neon database from a GUI application
 - [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor): Connect with psql, the native command-line client for Postgres

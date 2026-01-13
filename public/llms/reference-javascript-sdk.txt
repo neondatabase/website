@@ -1,0 +1,17 @@
+# JavaScript SDK (Auth & Data API)
+
+> The JavaScript SDK (Auth & Data API) documentation outlines the methods and configurations for integrating authentication and data management functionalities into applications using Neon's platform.
+
+## Source
+
+- [JavaScript SDK (Auth & Data API) HTML](https://neon.com/docs/reference/javascript-sdk): The original HTML version of this documentation
+
+The Neon JavaScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
+
+Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
+
+- **BetterAuthVanillaAdapter** (default) — Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
+- **BetterAuthReactAdapter** — Similar API but with React hooks like `useSession()`. See the [React quickstart](https://neon.com/docs/auth/quick-start/react).
+- **SupabaseAuthAdapter** — Supabase-compatible API for easy migration. See the [migration guide](https://neon.com/docs/auth/migrate/from-supabase).
+
+Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.

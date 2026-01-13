@@ -35,298 +35,423 @@ Once added to your project, AI tools will automatically use these rules when wor
 
 ````md
 ---
-description: Use these rules to relate your database data with your Auth users information
+description: Use these rules when implementing authentication with @neondatabase/auth or @neondatabase/neon-js
 globs: *.tsx, *.ts
 alwaysApply: false
 ---
-# Neon Auth guidelines
+# Neon Auth Guidelines
 
-## The Problem Neon Auth Solves
+> **For AI Agents with file access (Claude Code, etc.):**
+> For complete documentation without summarization, fetch references using:
+> ```bash
+> curl -s -o /tmp/neon-auth-setup.md https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-nextjs.md
+> ```
+> Then read the downloaded file. Replace `nextjs` with `react-spa` or `nodejs` as needed.
 
-Neon Auth integrates user authentication directly with your Neon Postgres database. Its primary purpose is to **eliminate the complexity of synchronizing user data** between your authentication provider and your application's database.
+## Overview
 
--   **Before Neon Auth:** Developers need to build and maintain custom sync logic, webhooks, and separate user tables to handle user creation, updates, and deletions. This is error-prone and adds overhead.
--   **With Neon Auth:** User data is automatically populated and updated in near real-time within a dedicated `neon_auth.users_sync` table in your database. This allows you to treat user profiles as regular database rows, ready for immediate use in SQL joins and application logic.
+Neon Auth provides authentication for your application. It's available as:
+- `@neondatabase/auth` - Auth only (smaller bundle)
+- `@neondatabase/neon-js` - Auth + Data API (full SDK)
 
+## Package Selection
 
-## The Two Halves of Neon Auth
+| Need | Package | Bundle |
+|------|---------|--------|
+| Auth only | `@neondatabase/auth` | Smaller |
+| Auth + Database queries | `@neondatabase/neon-js` | Full |
 
-Think of Neon Auth as a unified system with two main components:
+## Installation
 
-1.  **The Authentication Layer (SDK):** This is for managing user sessions, sign-ins, sign-ups, and accessing user information in your application code (client and server components). It is powered by the Stack Auth SDK (`@stackframe/stack`).
-2.  **The Database Layer (Data Sync):** This is the `neon_auth.users_sync` table within your Neon database. It serves as a near real-time, read-only replica of your user data, ready to be joined with your application's tables.
+```bash
+# Auth only
+npm install @neondatabase/auth
 
-## Stack Auth Setup Guidelines
+# Auth + Data API
+npm install @neondatabase/neon-js
+```
 
-### Initial Setup
+## Quick Setup Patterns
 
-Ask the human developer to do the following steps:
-- Enable Neon Auth: In the Neon project console, navigate to the Auth page and click Enable Neon Auth.
-- Get Credentials: Go to the Configuration tab and copy the environment variables.
+### Next.js App Router
 
-Steps which you can do after that:
-- Run the installation wizard with:  
-  `npx @stackframe/init-stack@latest --no-browser`
-- Update the API keys in your `.env.local` file with the values from the Neon console:  
-  - `NEXT_PUBLIC_STACK_PROJECT_ID`  
-  - `NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY`  
-  - `STACK_SECRET_SERVER_KEY`
-- Key files created/updated include:  
-  - `app/handler/[...stack]/page.tsx` (default auth pages)  
-  - `app/layout.tsx` (wrapped with StackProvider and StackTheme)  
-  - `app/loading.tsx` (provides a Suspense fallback)  
-  - `stack/server.tsx` (initializes your Stack server app)
-  - `stack/client.tsx` (initializes your Stack client app)
+**1. API Route Handler:**
+```typescript
+// app/api/auth/[...path]/route.ts
+import { authApiHandler } from "@neondatabase/auth/next";
+export const { GET, POST } = authApiHandler();
+```
 
-### UI Components
+**2. Auth Client:**
+```typescript
+// lib/auth/client.ts
+import { createAuthClient } from "@neondatabase/auth/next";
+export const authClient = createAuthClient();
+```
 
-- Use pre-built components from `@stackframe/stack` like `<UserButton />`, `<SignIn />`, and `<SignUp />` to quickly set up auth UI.
-- You can also compose smaller pieces like `<OAuthButtonGroup />`, `<MagicLinkSignIn />`, and `<CredentialSignIn />` for custom flows.
-- Example:
-  
-  ```tsx
-  import { SignIn } from '@stackframe/stack';
-  export default function Page() {
-    return <SignIn />;
-  }
-  ```
+**3. Use in Components:**
+```typescript
+"use client";
+import { authClient } from "@/lib/auth/client";
 
-### User Management
+function AuthStatus() {
+  const session = authClient.useSession();
+  if (session.isPending) return <div>Loading...</div>;
+  if (!session.data) return <SignInButton />;
+  return <div>Hello, {session.data.user.name}</div>;
+}
+```
 
-- In Client Components, use the `useUser()` hook to retrieve the current user (it returns `null` when not signed in).
-- Update user details using `user.update({...})` and sign out via `user.signOut()`.
+**Complete setup:** See [Setup Reference - Next.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-nextjs.md)
 
-### Client Component Integration
+### React SPA
 
-- Client Components rely on hooks like `useUser()` and `useStackApp()`.
-- Example:
-  
-  ```tsx
-  "use client";
-  import { useUser } from "@stackframe/stack";
-  export function MyComponent() {
-    const user = useUser();
-    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
-  }
-  ```
+```typescript
+import { createAuthClient } from "@neondatabase/auth";
+import { BetterAuthReactAdapter } from "@neondatabase/auth/react/adapters";
 
-### Server Component Integration
+const authClient = createAuthClient(
+  import.meta.env.VITE_NEON_AUTH_URL,
+  { adapter: BetterAuthReactAdapter() }
+);
+```
 
-- For Server Components, use `stackServerApp.getUser()` from `stack/server.tsx` file.
-- Example:
-  
-  ```tsx
-  import { stackServerApp } from "@/stack/server";
-  export default async function ServerComponent() {
-    const user = await stackServerApp.getUser();
-    return <div>{user ? `Hello, ${user.displayName}` : "Not logged in"}</div>;
-  }
-  ```
+**Complete setup with router:** See [Setup Reference - React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-react-spa.md)
 
-### Page Protection
+### Node.js Backend
 
-- Protect pages by redirecting to Sign in page:
-  - Using `useUser({ or: "redirect" })` in Client Components.
-  - Using `await stackServerApp.getUser({ or: "redirect" })` in Server Components.
-  - Implementing middleware that checks for a user and redirects to `/handler/sign-in` if not found.
-- Example middleware:
-  
-  ```tsx
-  export async function middleware(request: NextRequest) {
-    const user = await stackServerApp.getUser();
-    if (!user) {
-      return NextResponse.redirect(new URL('/handler/sign-in', request.url));
-    }
-    return NextResponse.next();
-  }
-  export const config = { matcher: '/protected/:path*' };
-  ```
+```typescript
+import { createAuthClient } from "@neondatabase/auth";
 
-## Stack Auth SDK Reference
+const auth = createAuthClient(process.env.NEON_AUTH_URL!);
+await auth.signIn.email({ email, password });
+const session = await auth.getSession();
+```
 
-The Stack Auth SDK provides several types and methods:
+**Complete setup:** See [Setup Reference - Node.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-nodejs.md)
 
+## Building Auth Pages
+
+### Use AuthView (Recommended for React Apps)
+
+For authentication pages, use the pre-built `AuthView` component instead of building custom forms.
+
+**What AuthView provides:**
+- Sign-in, sign-up, password reset, magic link pages
+- Social providers (Google, GitHub) - requires TWO configurations: enable in Neon Console AND add `social` prop to NeonAuthUIProvider
+- Form validation, error handling, loading states
+- Consistent styling via CSS variables
+
+**Setup (Next.js App Router):**
+
+1. **Import CSS** (in `app/layout.tsx` or `app/globals.css`):
 ```tsx
-type StackClientApp = {
-  new(options): StackClientApp;
-  getUser([options]): Promise<User>;
-  useUser([options]): User;
-  getProject(): Promise<Project>;
-  useProject(): Project;
-  signInWithOAuth(provider): void;
-  signInWithCredential([options]): Promise<...>;
-  signUpWithCredential([options]): Promise<...>;
-  sendForgotPasswordEmail(email): Promise<...>;
-  sendMagicLinkEmail(email): Promise<...>;
-};
-type StackServerApp =
-  & StackClientApp
-  & {
-    new(options): StackServerApp;
-    getUser([id][, options]): Promise<ServerUser | null>;
-    useUser([id][, options]): ServerUser;
-    listUsers([options]): Promise<ServerUser[]>;
-    useUsers([options]): ServerUser[];
-    createUser([options]): Promise<ServerUser>;
-    getTeam(id): Promise<ServerTeam | null>;
-    useTeam(id): ServerTeam;
-    listTeams(): Promise<ServerTeam[]>;
-    useTeams(): ServerTeam[];
-    createTeam([options]): Promise<ServerTeam>;
-  }
-type CurrentUser = {
-  id: string;
-  displayName: string | null;
-  primaryEmail: string | null;
-  primaryEmailVerified: boolean;
-  profileImageUrl: string | null;
-  signedUpAt: Date;
-  hasPassword: boolean;
-  clientMetadata: Json;
-  clientReadOnlyMetadata: Json;
-  selectedTeam: Team | null;
-  update(data): Promise<void>;
-  updatePassword(data): Promise<void>;
-  getAuthHeaders(): Promise<Record<string, string>>;
-  getAuthJson(): Promise<{ accessToken: string | null }>;
-  signOut([options]): Promise<void>;
-  delete(): Promise<void>;
-  getTeam(id): Promise<Team | null>;
-  useTeam(id): Team | null;
-  listTeams(): Promise<Team[]>;
-  useTeams(): Team[];
-  setSelectedTeam(team): Promise<void>;
-  createTeam(data): Promise<Team>;
-  leaveTeam(team): Promise<void>;
-  getTeamProfile(team): Promise<EditableTeamMemberProfile>;
-  useTeamProfile(team): EditableTeamMemberProfile;
-  hasPermission(scope, permissionId): Promise<boolean>;
-  getPermission(scope, permissionId[, options]): Promise<TeamPermission | null>;
-  usePermission(scope, permissionId[, options]): TeamPermission | null;
-  listPermissions(scope[, options]): Promise<TeamPermission[]>;
-  usePermissions(scope[, options]): TeamPermission[];
-  listContactChannels(): Promise<ContactChannel[]>;
-  useContactChannels(): ContactChannel[];
-};
+import "@neondatabase/auth/ui/css";
 ```
 
-## Stack Auth Best Practices
-- Use the appropriate methods based on component type:
-  - Use hook-based methods (`useXyz`) in Client Components
-  - Use promise-based methods (`getXyz`) in Server Components
-- Always protect sensitive routes using the provided mechanisms
-- Use pre-built UI components whenever possible to ensure proper auth flow handling
-
-## Neon Auth Database Integration
-
-### Database Schema
-
-Neon Auth creates and manages a schema in your database that stores user information:
-
-- **Schema Name**: `neon_auth`
-- **Primary Table**: `users_sync`
-- **Table Structure**:
-  - `raw_json` (JSONB, NOT NULL): Complete user data in JSON format
-  - `id` (TEXT, NOT NULL, PRIMARY KEY): Unique user identifier
-  - `name` (TEXT, NULLABLE): User's display name
-  - `email` (TEXT, NULLABLE): User's email address
-  - `created_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was created
-  - `updated_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was last updated
-  - `deleted_at` (TIMESTAMP WITH TIME ZONE, NULLABLE): When the user was deleted (if applicable)
-- **Indexes**:
-  - `users_sync_deleted_at_idx` on `deleted_at`: For quickly identifying deleted users
-
-> NOTE: The table is automatically created and managed by Neon Auth. Do not manually create or modify it. This is provided for your reference only.
-
-### Database Usage
-
-#### Querying Active Users
-The `deleted_at` column is used for soft deletes. Always include `WHERE deleted_at IS NULL` in your queries to ensure you only work with active user accounts.
-
-```sql
-SELECT * FROM neon_auth.users_sync WHERE deleted_at IS NULL;
-```
-
-#### Relating User Data with Application Tables
-
-To join user data with your application tables:
-
-```sql
-SELECT 
-  t.*,
-  u.id AS user_id,
-  u.name AS user_name,
-  u.email AS user_email
-FROM 
-  public.todos t
-LEFT JOIN 
-  neon_auth.users_sync u ON t.owner = u.id
-WHERE 
-  u.deleted_at IS NULL
-ORDER BY 
-  t.id;
-```
-
-## Integration Flow
-
-1. User authentication happens via Stack Auth UI components
-2. User data is automatically synced to the `neon_auth.users_sync` table
-3. Your application code accesses user information either through:
-   - Stack Auth hooks/methods (in React components)
-   - SQL queries to the `neon_auth.users_sync` table (for read only data operations)
-
-## Best Practices for Integration
-
-- **The `users_sync` Table is a Read-Only Replica**: User data is managed by the Neon Auth service. **NEVER** `INSERT`, `UPDATE`, or `DELETE` rows directly in the `neon_auth.users_sync` table. All user modifications must happen through the Authentication Layer SDK (e.g., `user.update({...})`, `user.delete()`). Direct database modifications will be overwritten and can break the sync process.
-
-- **Use Foreign Keys Correctly**: You **SHOULD** create foreign key constraints from your application tables *to* the `neon_auth.users_sync(id)` column. This maintains referential integrity. Do **NOT** attempt to add foreign keys *from* the `users_sync` table to your own tables.
-
-  ```sql
-  -- CORRECT: Your table references the Neon Auth table.
-  CREATE TABLE posts (
-      id SERIAL PRIMARY KEY,
-      content TEXT,
-      author_id TEXT NOT NULL REFERENCES neon_auth.users_sync(id) ON DELETE CASCADE
-  );
-
-  -- INCORRECT: Do not try to alter the Neon Auth table. Will break entire Neon Auth system.
-  -- ALTER TABLE neon_auth.users_sync ADD CONSTRAINT ...
-  ```
-
-## Example: Custom Profile Page with Database Integration
-
-### Frontend Component
+2. **Wrap app with provider** (create `app/auth-provider.tsx`):
 ```tsx
-'use client';
-import { useUser, useStackApp, UserButton } from '@stackframe/stack';
-export default function ProfilePage() {
-  const user = useUser({ or: "redirect" });
-  const app = useStackApp();
+"use client";
+import { NeonAuthUIProvider } from "@neondatabase/auth/react/ui";
+import { authClient } from "@/lib/auth/client";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
   return (
-    <div>
-      <UserButton />
-      <h1>Welcome, {user.displayName || "User"}</h1>
-      <p>Email: {user.primaryEmail}</p>
-      <button onClick={() => user.signOut()}>Sign Out</button>
-    </div>
+    <NeonAuthUIProvider
+      authClient={authClient}
+      navigate={router.push}
+      replace={router.replace}
+      onSessionChange={() => router.refresh()}
+      Link={Link}
+    >
+      {children}
+    </NeonAuthUIProvider>
   );
 }
 ```
 
-### Database Query for User's Content
-```sql
--- Get all todos for the currently logged in user
-SELECT 
-  t.*
-FROM 
-  public.todos t
-LEFT JOIN 
-  neon_auth.users_sync u ON t.owner = u.id
-WHERE 
-  u.id = $current_user_id
-  AND u.deleted_at IS NULL
-ORDER BY 
-  t.created_at DESC;
+3. **Create auth page** (`app/auth/[path]/page.tsx`):
+```tsx
+import { AuthView } from "@neondatabase/auth/react/ui";
+import { authViewPaths } from "@neondatabase/auth/react/ui/server";
+
+export function generateStaticParams() {
+  return Object.values(authViewPaths).map((path) => ({ path }));
+}
+
+export default async function AuthPage({
+  params,
+}: {
+  params: Promise<{ path: string }>;
+}) {
+  const { path } = await params;
+  return <AuthView pathname={path} />;
+}
 ```
+
+**Result:** You now have `/auth/sign-in`, `/auth/sign-up`, `/auth/forgot-password`, etc.
+
+**Available paths:** `"sign-in"`, `"sign-up"`, `"forgot-password"`, `"reset-password"`, `"magic-link"`, `"two-factor"`, `"callback"`, `"sign-out"`
+
+**For React SPA setup:** See [UI Components Reference - React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-react-spa.md)
+
+### When to Use Low-Level Methods Instead
+
+Use `authClient.signIn.email()`, `authClient.signUp.email()` directly if:
+
+- **Node.js backend** - No React, server-side auth only
+- **Custom design system** - Your design team provides form components
+- **Mobile/CLI apps** - Non-web frontends
+- **Headless auth** - Testing or non-standard flows
+
+For standard React web apps, **use AuthView**.
+
+### Common Anti-Pattern
+
+```tsx
+// ❌ Don't build custom forms unless you have specific requirements
+function CustomSignInPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    const { error } = await authClient.signIn.email({ email, password });
+    if (error) setError(error.message);
+    setLoading(false);
+  };
+
+  // ... 50+ more lines of form JSX, validation, error display
+}
+
+// ✅ Use AuthView instead - one component handles everything
+<AuthView pathname="sign-in" />
+```
+
+## Environment Variables
+
+```bash
+# Next.js (.env.local)
+NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.c-2.us-east-2.aws.neon.build/dbname/auth
+NEXT_PUBLIC_NEON_AUTH_URL=https://ep-xxx.neonauth.c-2.us-east-2.aws.neon.build/dbname/auth
+
+# Vite/React (.env)
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.c-2.us-east-2.aws.neon.build/dbname/auth
+```
+
+**Complete reference:** See framework-specific setup guides above for environment variable details.
+
+## Auth Methods
+
+> **For React apps:** Consider using `AuthView` instead of building custom forms - see [Building Auth Pages](https://neon.com/docs/ai/ai-rules-neon-auth#building-auth-pages) above. The methods below are for Node.js backends, custom design systems, or non-React frontends.
+
+### Sign Up
+```typescript
+await auth.signUp.email({
+  email: "user@example.com",
+  password: "securepassword",
+  name: "John Doe", // Optional
+});
+```
+
+### Sign In
+```typescript
+// Email/password
+await auth.signIn.email({
+  email: "user@example.com",
+  password: "securepassword",
+});
+
+// Social (Google, GitHub)
+await auth.signIn.social({
+  provider: "google", // or "github"
+  callbackURL: "/dashboard",
+});
+```
+
+### Sign Out
+```typescript
+await auth.signOut();
+```
+
+### Get Session
+```typescript
+// Async (Node.js, server components)
+const session = await auth.getSession();
+
+// React hook (client components)
+const session = auth.useSession();
+// Returns: { data: Session | null, isPending: boolean }
+```
+
+### Session Data Structure
+```typescript
+interface Session {
+  user: {
+    id: string;
+    name: string | null;
+    email: string;
+    image: string | null;
+    emailVerified: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  session: {
+    id: string;
+    expiresAt: Date;
+    token: string;
+    createdAt: Date;
+    updatedAt: Date;
+    userId: string;
+  };
+}
+```
+
+## UI Components
+
+For pre-built UI components, see [Building Auth Pages](https://neon.com/docs/ai/ai-rules-neon-auth#building-auth-pages) above.
+
+**Available components:**
+- `AuthView` - Complete auth pages (sign-in, sign-up, forgot-password, etc.) - **use this first**
+- `SignedIn` / `SignedOut` - Conditional rendering based on auth state
+- `UserButton` - User avatar with dropdown menu
+- `NeonAuthUIProvider` - Required wrapper for UI components
+
+**Complete UI reference:** See [UI Components Reference - Next.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-nextjs.md) or [React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-react-spa.md)
+
+## React Styling Guidelines
+
+**CRITICAL:** When creating React components, always use existing CSS variables. Do NOT create new colors or style values.
+
+### Use Existing CSS Variables
+
+The UI package provides all necessary CSS variables. Always use these variables in your custom components (navbar, layouts, pages, etc.):
+
+| Variable | Purpose | Usage |
+|----------|---------|-------|
+| `--background`, `--foreground` | Page background/text | `hsl(var(--background))` |
+| `--card`, `--card-foreground` | Card surfaces | `hsl(var(--card))` |
+| `--primary`, `--primary-foreground` | Primary buttons/actions | `hsl(var(--primary))` |
+| `--secondary`, `--secondary-foreground` | Secondary elements | `hsl(var(--secondary))` |
+| `--muted`, `--muted-foreground` | Muted/subtle elements | `hsl(var(--muted))` |
+| `--destructive` | Destructive/danger actions | `hsl(var(--destructive))` |
+| `--border`, `--input`, `--ring` | Borders and focus rings | `hsl(var(--border))` |
+| `--radius` | Border radius | `var(--radius)` |
+
+### Examples
+
+**✅ Correct - Uses CSS variables:**
+```tsx
+<div style={{ background: 'hsl(var(--background))', color: 'hsl(var(--foreground))' }}>
+  <button style={{ background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}>
+    Submit
+  </button>
+</div>
+```
+
+**❌ Wrong - Creates new colors:**
+```tsx
+<div style={{ background: '#ffffff', color: '#000000' }}>
+  <button style={{ background: '#3b82f6', color: '#ffffff' }}>
+    Submit
+  </button>
+</div>
+```
+
+**Why:** Using CSS variables ensures:
+- Visual consistency with auth components
+- Automatic dark mode support
+- Proper theming integration
+- No duplicate color definitions
+
+**Complete theming guide:** See [UI Theming Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-theming.md)
+
+## Key Imports
+
+```typescript
+// Auth client (Next.js)
+import { authApiHandler, createAuthClient } from "@neondatabase/auth/next";
+
+// Auth client (vanilla)
+import { createAuthClient } from "@neondatabase/auth";
+
+// React adapter (NOT from main entry)
+import { BetterAuthReactAdapter } from "@neondatabase/auth/react/adapters";
+
+// UI components
+import { NeonAuthUIProvider, AuthView, SignInForm } from "@neondatabase/auth/react/ui";
+import { authViewPaths } from "@neondatabase/auth/react/ui/server";
+
+// CSS
+import "@neondatabase/auth/ui/css";
+```
+
+**Complete import reference:** See [Import Reference](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-imports.md)
+
+## Common Mistakes
+
+> **Full Reference:** See [Common Mistakes Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-common-mistakes.md) for detailed solutions.
+
+**Quick Summary:**
+
+1. **Wrong adapter import**: Import `BetterAuthReactAdapter` from `auth/react/adapters` subpath
+2. **Forgetting to call adapter**: Use `BetterAuthReactAdapter()` with parentheses
+3. **Missing CSS**: Import from `ui/css` or `ui/tailwind` (not both)
+4. **Missing "use client"**: Required for components using `useSession()`
+5. **Wrong createAuthClient signature**: First arg is URL: `createAuthClient(url, { adapter })`
+6. **Building custom sign-in/sign-up forms unnecessarily**: Before building forms with `signIn.email()`, check if `AuthView` meets your needs - it handles validation, errors, social providers, and loading states automatically.
+
+**Code generation rules:** See [Code Generation Rules](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/code-generation-rules.md)
+
+## Error Handling
+
+```typescript
+const { error } = await auth.signIn.email({ email, password });
+
+if (error) {
+  switch (error.code) {
+    case "INVALID_EMAIL_OR_PASSWORD":
+      showError("Invalid email or password");
+      break;
+    case "EMAIL_NOT_VERIFIED":
+      showError("Please verify your email");
+      break;
+    case "USER_NOT_FOUND":
+      showError("User not found");
+      break;
+    case "TOO_MANY_REQUESTS":
+      showError("Too many attempts. Please wait.");
+      break;
+    default:
+      showError("Authentication failed");
+  }
+}
+```
+
+## References
+
+### Framework-Specific Setup (choose your framework)
+- [Setup - Next.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-nextjs.md) - Next.js App Router setup
+- [Setup - React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-react-spa.md) - Vite/CRA setup
+- [Setup - Node.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-setup-nodejs.md) - Backend-only setup
+
+### Framework-Specific UI (choose your framework)
+- [UI - Next.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-nextjs.md) - Next.js UI provider
+- [UI - React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-react-spa.md) - React SPA UI provider
+
+### Shared References
+- [Common Mistakes](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-common-mistakes.md) - Import paths, adapter patterns, CSS
+- [Troubleshooting Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-troubleshooting.md) - Error solutions
+- [Code Generation Rules](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/code-generation-rules.md) - Import and CSS strategies
+- [Auth Adapters Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-adapters.md) - Adapter comparison
+- [Import Reference](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-imports.md) - Complete import paths
+- [UI Theming Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-theming.md) - Styling options
+- For database queries with auth, see **neon-js.mdc**
 
 ````

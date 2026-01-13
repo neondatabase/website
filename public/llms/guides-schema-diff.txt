@@ -70,7 +70,7 @@ Use the `schema-diff` subcommand from the `branches` command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `production`, identify `production` as your base branch and `development` as your compare-source.
+The operation will compare a selected branch (`[compare-source]`) against the latest (head) of your base branch (`[base-branch]`). For example, if you want to compare recent changes you made to your development branch `development` against your production branch `main`, identify `main` as your base branch and `development` as your compare-source.
 
 ```bash
 neon branches schema-diff production development

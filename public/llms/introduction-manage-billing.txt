@@ -46,7 +46,7 @@ If you are unable to update your payment method, please [contact support](https:
 
 ### Missed payments
 
-If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in [Neon's Terms of Service](https://neon.com/terms-of-service).
+If an auto-debit payment transaction fails, Neon sends a request to update your payment method. Late fees and payment policies are described in the [Neon Platform Services Product Specific Schedule](https://neon.com/terms-of-service).
 
 ### Failing payments for Indian customers
 
@@ -93,6 +93,8 @@ If you find an issue with your invoice, you can request a refund. The request wi
 ## Change your plan
 
    **Important**: You cannot upgrade or downgrade to a [legacy plan](https://neon.com/docs/introduction/legacy-plans). If you're currently on a legacy plan, you can only upgrade or downgrade to one of the [current usage-based pricing plans](https://neon.com/docs/introduction/plans).
+
+   **Note** Restart required for new limits: If you're upgrading your plan, your compute will only pick up the new plan limits (such as max compute size and project storage) after the compute restarts. See [Restart a compute](https://neon.com/docs/manage/computes#restart-a-compute).
 
 To upgrade or downgrade your plan:
 

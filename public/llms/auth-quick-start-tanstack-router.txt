@@ -1,0 +1,16 @@
+# Use Neon Auth with TanStack Router
+
+> The document explains how to integrate Neon Auth with TanStack Router, detailing the setup process and configuration steps necessary for Neon users to authenticate and manage routing in their applications.
+
+## Source
+
+- [Use Neon Auth with TanStack Router HTML](https://neon.com/docs/auth/quick-start/tanstack-router): The original HTML version of this documentation
+
+**Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+
+
+## Next steps
+
+- [Add email verification](https://neon.com/docs/auth/guides/email-verification)
+- [Learn how to branch your auth](https://neon.com/docs/auth/branching-authentication)
