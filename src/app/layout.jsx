@@ -9,7 +9,6 @@ import { TopbarProvider } from 'contexts/topbar-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
-import SessionProvider from './session-provider';
 import ThemeProvider from './theme-provider';
 
 export const preferredRegion = 'edge';
@@ -30,17 +29,15 @@ const RootLayout = ({ children }) => (
       <link rel="preconnect" href={LINKS.console} />
     </head>
     <body>
-      <SessionProvider>
-        <ThemeProvider>
-          <HomepageVisitProvider>
-            <TopbarProvider>
-              <TabsProvider>
-                <CodeTabsProvider>{children}</CodeTabsProvider>
-              </TabsProvider>
-            </TopbarProvider>
-          </HomepageVisitProvider>
-        </ThemeProvider>
-      </SessionProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <TopbarProvider>
+            <TabsProvider>
+              <CodeTabsProvider>{children}</CodeTabsProvider>
+            </TabsProvider>
+          </TopbarProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );

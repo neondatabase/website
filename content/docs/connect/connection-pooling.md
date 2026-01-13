@@ -4,7 +4,7 @@ subtitle: Learn how connection pooling works in Neon
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-01-06T13:11:04.219Z'
+updatedOn: '2026-01-09T19:51:39.508Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to support connection pooling, enabling up to 10,000 concurrent connections. PgBouncer is a lightweight connection pooler for Postgres.
@@ -103,6 +103,10 @@ The `max_connections` setting still applies for direct Postgres connections.
 
 <Admonition type="important">
 You will not be able to get interactive results from all 10,000 connections at the same time. Connections to the pooler endpoint still consume connections on the main Postgres endpoint: PgBouncer forwards operations from a role's connections through its own pool of connections to Postgres, and adaptively adds more connections to Postgres as needed by other concurrently active role connections. The 10,000 connection limit is therefore most useful for "serverless" applications and application-side connection pools that have many open connections but infrequent and short [transactions](/docs/postgresql/query-reference#transactions).
+</Admonition>
+
+<Admonition type="tip" title="Monitor your connection pool activity">
+Track pooled connections on the [Monitoring page](/docs/introduction/monitoring-page) in the Neon Console. PgBouncer metrics are also exported via the [OpenTelemetry](/docs/guides/opentelemetry) and [Datadog](/docs/guides/datadog) integrations.
 </Admonition>
 
 ### Pool lifecycle and compute restarts

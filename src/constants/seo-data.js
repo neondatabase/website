@@ -22,12 +22,6 @@ export default {
     imagePath: '/images/social-previews/ai.jpg',
     pathname: LINKS.ai,
   },
-  awsIsrael: {
-    title: 'AWS Launches in Israel — Neon',
-    description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',
-    imagePath: '/images/social-previews/aws-israel.jpg',
-    pathname: LINKS.awsIsrael,
-  },
   aboutUs: {
     title: 'About Us — Neon',
     description:
@@ -68,20 +62,6 @@ export default {
     description: 'Explore interactive demos unveiling cutting-edge apps in the serverless era.',
     pathname: LINKS.demos,
     imagePath: '/images/social-previews/demos.jpg',
-  },
-  deploy: {
-    title: 'Neon Deploy — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.deploy,
-    imagePath: '/images/social-previews/deploy.jpg',
-  },
-  developerDays1: {
-    title: 'Neon Developer Days — Neon',
-    description:
-      'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
-    imagePath: '/images/social-previews/developer-days-1.jpg',
-    pathname: LINKS.developerDays1,
   },
   enterprise: {
     title: 'Neon for Enterprise - Neon',
@@ -160,12 +140,6 @@ export default {
     pathname: LINKS.platforms,
     type: 'article',
   },
-  stage: {
-    title: 'Neon Deploy Stage — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.stage,
-  },
   security: {
     title: 'Security — Neon',
     description:
@@ -178,24 +152,6 @@ export default {
     description:
       'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
-  },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
-    description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
-  ticket({ name, login: gitHubHandle }) {
-    const userName = name || gitHubHandle;
-
-    return {
-      title: `${userName}'s ticket for Neon Deploy - Neon`,
-      description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
-    };
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
   },
   error: {
     title: 'Page Is Broken — Neon',

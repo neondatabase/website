@@ -310,12 +310,17 @@ const defaultConfig = {
       },
       {
         source: '/deploy',
-        destination: '/stage',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/generate-ticket',
-        destination: '/stage',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/stage',
+        destination: '/',
         permanent: true,
       },
       {

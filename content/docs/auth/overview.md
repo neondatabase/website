@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.162Z'
+updatedOn: '2026-01-09T19:51:39.505Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -80,7 +80,7 @@ export default function App() {
   Test complex org and role hierarchies safely in isolated branches
 
 - **CI/CD workflows**  
-  Run end-to-end auth tests without touching production
+  Run end-to-end auth tests without touching production. The [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action) supports retrieving branch-specific auth URLs for testing authentication flows in GitHub Actions workflows.
 
 - **Development workflows**  
   Spin up complete environments instantly with database and auth together

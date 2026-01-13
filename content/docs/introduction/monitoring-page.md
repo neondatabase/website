@@ -1,21 +1,10 @@
 ---
 title: Monitoring dashboard
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.036Z'
+updatedOn: '2026-01-09T15:13:11.226Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:
-
-- [RAM](#ram)
-- [CPU](#cpu)
-- [Connections count](#connections-count)
-- [Database size](#database-size)
-- [Deadlocks](#deadlocks)
-- [Rows](#rows)
-- [Replication delay bytes](#replication-delay-bytes)
-- [Replication delay seconds](#replication-delay-seconds)
-- [Local file cache hit rate](#local-file-cache-hit-rate)
-- [Working set size](#working-set-size)
 
 Your Neon plan defines the range of data you can view.
 
@@ -39,7 +28,7 @@ The values and plotted lines in your graphs will drop to `0` when your compute i
 ![monitoring graph diagonal pattern for inactive compute](/docs/introduction/monitor_inactive.png)
 </Admonition>
 
-### RAM
+## RAM
 
 ![Monitoring page RAM graph](/docs/introduction/monitor_ram.png)
 
@@ -55,7 +44,7 @@ The graph plots a line showing the amount of RAM used. If the line regularly rea
 
 **Cached**: The amount of data cached in memory.
 
-### CPU
+## CPU
 
 ![Monitoring page CPU graph](/docs/introduction/monitor_cpu.png)
 
@@ -69,11 +58,11 @@ CPU is allocated according to the size of your compute or your [autoscaling](/do
 
 If the plotted line regularly reaches the maximum amount of allocated CPU, consider increasing your compute size. To see the compute sizes available with Neon, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
-### Connections count
+## Postgres connections count
 
 ![Monitoring page connections graph](/docs/introduction/monitor_connections.png)
 
-The **Connections count** graph shows the number of idle connections, active connections, and the total number of connections over time for the selected compute.
+The **Postgres connections count** graph shows the number of idle connections, active connections, and the total number of connections directly to your Postgres database over time for the selected compute. These are the actual connections on the Postgres server itself.
 
 **ACTIVE**: The number of active connections for the selected compute.
 
@@ -95,7 +84,72 @@ The MAX line helps you visualize how close you are to reaching your connection l
 
 The connection limit (defined by the Postgres `max_connections` setting) is set according to your Neon compute size configuration. For the connection limit for each Neon compute size, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
-### Database size
+<Admonition type="note">
+If you're using [connection pooling](/docs/connect/connection-pooling), also monitor the [Pooler client connections](#pooler-client-connections) and [Pooler server connections](#pooler-server-connections) graphs. When using a pooled connection, the **Pooler server connections** represent the actual connections from PgBouncer to Postgres, while this **Postgres connections count** graph shows all direct connections to Postgres (including those from the pooler and any direct connections).
+</Admonition>
+
+## Pooler client connections
+
+![Pooler client connections graph](/docs/introduction/pooler_client_connections.png)
+
+The **Pooler client connections** graph shows connections from your applications to Neon's PgBouncer connection pooler. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
+
+PgBouncer supports up to 10,000 simultaneous client connections, which is significantly higher than the direct Postgres connection limit. The graph shows the following connection states:
+
+**ACTIVE**: Client connections actively executing a query through the pooler.
+
+These are connections that currently have an active query running. A high number of active connections indicates your application is actively using the database.
+
+**WAITING**: Client connections waiting for an available server connection from the pool.
+
+When all available server connections (connections from PgBouncer to Postgres) are in use, additional client requests must wait in a queue. If you consistently see a high number of waiting connections, it may indicate:
+
+- Your workload requires more server connections than your current `default_pool_size` allows
+- Long-running queries are holding server connections
+- Your compute size may need to be increased to support more concurrent server connections
+
+The graph also displays **Max wait**, which shows the maximum time (in seconds) that any client connection has been waiting for an available server connection. A consistently high max wait time indicates that clients are experiencing delays in getting database access, which could impact application performance
+
+**ACTIVE CANCEL** and **WAITING CANCEL**: Connections in the process of being cancelled.
+
+These represent client connections where a cancellation request has been issued (for example, when a user cancels a query).
+
+<Admonition type="tip">
+Connection pooling works by allowing many client connections to share a smaller pool of actual Postgres connections. While you can have thousands of client connections, they share a limited number of server connections determined by PgBouncer's `default_pool_size` setting. For more details, see [Connection pooling](/docs/connect/connection-pooling).
+</Admonition>
+
+## Pooler server connections
+
+![Pooler server connections graph](/docs/introduction/pooler_server_connections.png)
+
+The **Pooler server connections** graph shows connections from Neon's PgBouncer pooler to your Postgres database. This graph only displays data when you're using a [pooled connection string](/docs/connect/connection-pooling) (one that includes `-pooler` in the endpoint hostname).
+
+These server connections are shared by all client connections to the pooler, enabling thousands of clients to efficiently share a smaller pool of Postgres connections. The graph shows the following states:
+
+**SERVER ACTIVE**: Server connections currently serving client queries.
+
+These are the pooler's connections to Postgres that are actively processing queries from clients. This number represents the actual concurrent queries being executed on your Postgres database through the pooler.
+
+**SERVER IDLE**: Server connections in the pool that are available but not currently in use.
+
+PgBouncer maintains these idle connections in the pool so they're ready to handle new client requests without the overhead of establishing new connections. In transaction pooling mode (which Neon uses), connections are returned to the idle state as soon as a transaction completes.
+
+The total number of server connections (active + idle) is limited by PgBouncer's `default_pool_size` setting, which is set to 0.9 × your compute's `max_connections`. For example:
+
+- A 1 CU compute with `max_connections=450` can have up to 405 pooler server connections
+- A 2 CU compute with `max_connections=901` can have up to 810 pooler server connections
+
+<Admonition type="note">
+
+The **Pooler server connections** count is a subset of what you see in the [Postgres connections count](#postgres-connections-count) graph. The Postgres connections count shows all connections to Postgres, including those from the pooler plus any direct (non-pooled) connections. To understand your complete connection picture when using pooling:
+
+- **Pooler client connections**: Shows how many applications/clients are connected to the pooler
+- **Pooler server connections**: Shows how many connections the pooler is using to Postgres (limited by `default_pool_size`)
+- **Postgres connections count**: Shows all connections to Postgres (pooler connections + direct connections)
+
+</Admonition>
+
+## Database size
 
 ![Monitoring page database size graph](/docs/introduction/monitor_data_size.png)
 
@@ -105,7 +159,7 @@ The **Database size** graph shows the logical data size (the size of your actual
 Database size metrics are only displayed while your compute is active. When your compute is idle, database size values are not reported, and the **Database size** graph shows zero even though data may be present.
 </Admonition>
 
-### Deadlocks
+## Deadlocks
 
 ![Monitoring page deadlocks graph](/docs/introduction/monitor_deadlocks.png)
 
@@ -113,7 +167,7 @@ The **Deadlocks** graph shows a count of deadlocks over time for the named datab
 
 Deadlocks occur in a database when two or more transactions simultaneously block each other by holding onto resources the other transactions need, creating a cycle of dependencies that prevent any of the transactions from proceeding, potentially leading to performance issues or application errors. For lock-related queries you can use to investigate deadlocks, see [Performance tuning](/docs/postgresql/query-reference#performance-tuning). To learn more about deadlocks in Postgres, see [Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html).
 
-### Rows
+## Rows
 
 ![Monitoring page rows graph](/docs/introduction/monitor_rows.png)
 
@@ -125,26 +179,26 @@ Tracking rows inserted, updated, and deleted over time provides insights into yo
 Row metrics only capture row-level changes (`INSERT`, `UPDATE`, `DELETE`, etc.) and exclude table-level operations such as `TRUNCATE`.
 </Admonition>
 
-### Replication delay bytes
+## Replication delay bytes
 
 ![Replication delay bytes](/docs/introduction/rep_delay_bytes.png)
 
 The **Replication delay bytes** graph shows the total size, in bytes, of the data that has been sent from the primary compute but has not yet been applied on the replica. A larger value indicates a higher backlog of data waiting to be replicated, which may suggest issues with replication throughput or resource availability on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
-### Replication delay seconds
+## Replication delay seconds
 
 ![Replication delay seconds](/docs/introduction/rep_delay_seconds.png)
 
 The **Replication delay seconds** graph shows the time delay, in seconds, between the last transaction committed on the primary compute and the application of that transaction on the replica. A higher value suggests that the replica is behind the primary, potentially due to network latency, high replication load, or resource constraints on the replica. This graph is only visible when selecting a **Replica** compute from the **Compute** drop-down menu.
 
-### Local file cache hit rate
+## Local file cache hit rate
 
 ![local file cache hit rate graph](/docs/introduction/local_file_cache_hit_rate.png)
 
 The **Local file cache hit rate** graph shows the percentage of read requests served from Neon's Local File Cache (LFC).
 Queries not served from either Postgres shared buffers or the Local File Cache retrieve data from storage, which is more costly and can result in slower query performance. To learn more about how Neon caches data and how the LFC works with Postgres shared buffers, see [What is the Local File Cache?](/docs/extensions/neon#what-is-the-local-file-cache)
 
-### Working set size
+## Working set size
 
 ![working set size graph](/docs/introduction/working_set_size.png)
 
