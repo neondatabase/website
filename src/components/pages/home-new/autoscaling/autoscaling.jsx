@@ -128,7 +128,7 @@ const Autoscaling = () => {
               />
             </div>
 
-            <div className="relative z-20 -mt-8 border-b border-gray-new-10 bg-[#CAE6D9] px-3 py-2.5 2xl:-mt-7 xl:-mt-6">
+            <div className="relative z-20 -mt-[30px] border-b border-gray-new-10 bg-[#CAE6D9] px-3 py-2.5 2xl:-mt-7 xl:-mt-6 lg:-mt-[18px] md:mt-0">
               <LazyMotion features={domAnimation}>
                 {STATS.map(({ prefix, number, text }, index) => {
                   if (index !== activeItem) {
