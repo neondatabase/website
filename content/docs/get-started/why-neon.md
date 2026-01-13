@@ -170,7 +170,7 @@ Neon and Lakebase share the same core architectural principles, but they are opt
 - You’re a small team iterating fast, looking for ways to accelerate the software lifecycle and deploy safely without blockers
 - You’re building an agent-driven or codegen platform (like Replit, Lovable, or Bolt) and need to spin up and manage fleets of databases efficiently, with costs that stay under control through usage-based pricing and scale-to-zero
 
-**Choose Lakebase if,**
+**Choose Lakebase if:**
 
 - You’re building on the Databricks Data Intelligence Platform
 - You’re running data-intensive or AI-driven applications where unified governance, lineage, and access control across OLTP and analytical data are essential
