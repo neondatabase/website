@@ -156,7 +156,7 @@ export default {
             {
               title: 'Careers',
               to: LINKS.careers,
-              description: 'Data isolation without overhead',
+              description: 'Join the team',
             },
             {
               title: 'Contact',
