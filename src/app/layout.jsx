@@ -1,9 +1,11 @@
 import 'styles/globals.css';
+import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
+import { TopbarProvider } from 'contexts/topbar-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
@@ -19,7 +21,7 @@ export const viewport = {
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
@@ -29,9 +31,11 @@ const RootLayout = ({ children }) => (
     <body>
       <ThemeProvider>
         <HomepageVisitProvider>
-          <TabsProvider>
-            <CodeTabsProvider>{children}</CodeTabsProvider>
-          </TabsProvider>
+          <TopbarProvider>
+            <TabsProvider>
+              <CodeTabsProvider>{children}</CodeTabsProvider>
+            </TabsProvider>
+          </TopbarProvider>
         </HomepageVisitProvider>
       </ThemeProvider>
     </body>

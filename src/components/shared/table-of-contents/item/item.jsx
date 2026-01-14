@@ -55,7 +55,7 @@ const Item = ({
     <LazyMotion features={domAnimation}>
       <a
         className={clsx(
-          'flex items-start gap-2.5 py-1.5 text-sm leading-tight',
+          'flex items-start gap-2.5 rounded-sm py-1.5 text-sm leading-tight',
           'transition-colors duration-200',
           isActive
             ? 'font-medium text-secondary-8 dark:text-primary-1'

@@ -1,7 +1,6 @@
 'use client';
 
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -23,7 +22,7 @@ const statusData = {
   },
 };
 
-const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
+const StatusBadge = () => {
   const [currentStatus, setCurrentStatus] = useState(null);
   const [ref, inView] = useInView({ triggerOnce: true, rootMargin: '0px 0px 200px 0px' });
 
@@ -42,10 +41,7 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
 
   return (
     <Link
-      className={clsx(
-        'flex items-center justify-center gap-x-1.5',
-        hasThemesSupport ? 'mt-12 lg:mt-8' : 'mt-auto lg:mt-8 md:mt-8'
-      )}
+      className="flex items-center justify-center gap-x-1.5 rounded-sm"
       to="https://neonstatus.com/"
       target="_blank"
       rel="noopener noreferrer"
@@ -57,18 +53,11 @@ const StatusBadge = ({ hasThemesSupport = false, isDarkTheme = true }) => {
           currentStatus ? statusData[currentStatus].color : 'bg-gray-new-50'
         )}
       />
-      <span
-        className={clsx(
-          'whitespace-nowrap text-sm leading-none tracking-extra-tight dark:text-white',
-          isDarkTheme ? 'text-white' : 'text-black-new'
-        )}
-      >
+      <span className="whitespace-nowrap text-sm leading-none tracking-extra-tight text-black-pure dark:text-white">
         {currentStatus ? statusData[currentStatus].text : 'Neon status loading...'}
       </span>
     </Link>
   );
 };
-
-StatusBadge.propTypes = { hasThemesSupport: PropTypes.bool, isDarkTheme: PropTypes.bool };
 
 export default StatusBadge;

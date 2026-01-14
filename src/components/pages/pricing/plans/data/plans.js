@@ -235,7 +235,7 @@ export default {
       },
       free: false,
       launch: false,
-      scale: "<a class='text-primary-2' href='/docs/security/hipaa'>Available</a>",
+      scale: "<a href='/docs/security/hipaa'>Available</a>",
     },
     {
       rows: '2',
@@ -244,7 +244,7 @@ export default {
       },
       free: false,
       launch: false,
-      scale: "<a class='text-primary-2' href='/docs/security/compliance#soc-2'>Available</a>",
+      scale: "<a href='/docs/security/compliance#soc-2'>Available</a>",
     },
     {
       rows: '2',
@@ -253,7 +253,7 @@ export default {
       },
       free: 'Community (Discord)',
       launch: 'Standard (Billing issues)',
-      scale: "<a class='text-primary-2' href='/docs/introduction/support'>Multiple options</a>",
+      scale: "<a href='/docs/introduction/support'>Multiple options</a>",
     },
   ],
 };

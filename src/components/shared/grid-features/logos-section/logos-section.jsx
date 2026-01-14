@@ -16,7 +16,7 @@ const LogosSection = ({ logos, logosTitle = 'Powered by Neon.', containerClassNa
       <p className="w-[206px] text-lg font-medium leading-none tracking-extra-tight text-gray-new-70 lg:text-base md:max-w-full md:text-center">
         {logosTitle}
       </p>
-      <LogosWall logos={logos} size="sm" gap="gap-9" />
+      <LogosWall logos={logos} size="sm" />
     </div>
   );
 };

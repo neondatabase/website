@@ -63,6 +63,7 @@ export async function middleware(req) {
       if (pathname === '/' && isLoggedIn) {
         try {
           const referer = await getReferer();
+          // If user is already browsing the site, show them the homepage
           if (
             referer.includes(process.env.VERCEL_BRANCH_URL) ||
             referer.includes(process.env.NEXT_PUBLIC_DEFAULT_SITE_URL)
@@ -72,9 +73,13 @@ export async function middleware(req) {
         } catch (error) {
           console.error('Error getting referer:', error);
         }
+        // If user came from external source, redirect to console
         return NextResponse.redirect(LINKS.console);
       }
-      if (pathname === '/home' && !isLoggedIn) return NextResponse.redirect(new URL(SITE_URL));
+      // If not logged in but on /home, redirect to main homepage
+      if (pathname === '/home' && !isLoggedIn) {
+        return NextResponse.redirect(new URL(SITE_URL));
+      }
     } catch (error) {
       console.error('Error checking login indicator:', error);
     }

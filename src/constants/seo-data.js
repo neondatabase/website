@@ -112,11 +112,6 @@ export default {
     pathname: LINKS.report,
     imagePath: '/images/social-previews/report.jpg',
   },
-  thankYou: {
-    title: 'Thank you for subscribing — Neon',
-    description: 'Thank you for subscribing to the Neon newsletter',
-    pathname: LINKS.thankYou,
-  },
   variable: {
     title: 'Dynamically scale your Postgres database — Neon',
     description:
