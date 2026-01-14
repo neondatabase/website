@@ -146,7 +146,7 @@ export default {
             {
               title: 'Blog',
               to: LINKS.blog,
-              description: 'Autoscale with traffic',
+              description: 'Technical posts & product updates',
             },
             {
               title: 'About us',
