@@ -47,16 +47,16 @@ Neon Auth currently supports Better Auth version **1.4.6**.
 
 ### When to use Neon Auth vs. self-hosting Better Auth
 
-**Choose Neon Auth if you want:**
+Neon Auth is a managed authentication service that integrates seamlessly with Neon's architecture and offerings:
 
-- Integration with Neon's branching and Data API features
-- Managed infrastructure with no servers to run
-- Low-latency auth deployed in the same region as your database
+- **Branch-aware authentication** — Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch
+- **Built-in Data API integration** — JWT token validation for the Data API has native support for Neon Auth
+- **No infrastructure to manage** — Neon Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure
 
-**Choose self-hosted Better Auth if you need:**
+Self-hosting Better Auth makes sense if you need:
 
-- Custom plugins, hooks, and auth configuration options not yet supported by Neon Auth
-- Full control over your auth code and infrastructure
+- Flexibility in auth configuration—custom plugins, hooks, and options not yet supported by Neon Auth
+- Full control over your auth code and the ability to run it inside your own infrastructure
 
 As Neon Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
 
