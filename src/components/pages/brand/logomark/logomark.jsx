@@ -6,10 +6,22 @@ import DownloadIcon from 'icons/download.inline.svg';
 import Section from '../section';
 
 const logos = [
-  { src: '/brand/neon-logomark-light-color.svg', name: 'neon-logomark-light-color.svg' },
-  { src: '/brand/neon-logomark-light-mono.svg', name: 'neon-logomark-light-mono.svg' },
-  { src: '/brand/neon-logomark-dark-color.svg', name: 'neon-logomark-dark-color.svg' },
-  { src: '/brand/neon-logomark-dark-mono.svg', name: 'neon-logomark-dark-mono.svg' },
+  {
+    src: '/brand/neon-logomark-light-color.svg?updated=2026-01-14',
+    name: 'neon-logomark-light-color.svg',
+  },
+  {
+    src: '/brand/neon-logomark-light-mono.svg?updated=2026-01-14',
+    name: 'neon-logomark-light-mono.svg',
+  },
+  {
+    src: '/brand/neon-logomark-dark-color.svg?updated=2026-01-14',
+    name: 'neon-logomark-dark-color.svg',
+  },
+  {
+    src: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-14',
+    name: 'neon-logomark-dark-mono.svg',
+  },
 ];
 
 const Logomark = () => (

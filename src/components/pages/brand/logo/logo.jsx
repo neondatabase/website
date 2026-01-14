@@ -7,22 +7,22 @@ import Section from '../section';
 
 const logos = [
   {
-    src: '/brand/neon-logo-light-color.svg',
+    src: '/brand/neon-logo-light-color.svg?updated=2026-01-14',
     name: 'neon-logo-light-color.svg',
     className: 'bg-white',
   },
   {
-    src: '/brand/neon-logo-dark-color.svg',
+    src: '/brand/neon-logo-dark-color.svg?updated=2026-01-14',
     name: 'neon-logo-dark-color.svg',
     className: 'bg-black-pure border-gray-new-30 border',
   },
   {
-    src: '/brand/neon-logo-dark-mono.svg',
+    src: '/brand/neon-logo-dark-mono.svg?updated=2026-01-14',
     name: 'neon-logo-dark-mono.svg',
     className: 'bg-[#5280FF]',
   },
   {
-    src: '/brand/neon-logo-light-mono.svg',
+    src: '/brand/neon-logo-light-mono.svg?updated=2026-01-14',
     name: 'neon-logo-light-mono.svg',
     className: 'bg-[#4DDBA7]',
   },
