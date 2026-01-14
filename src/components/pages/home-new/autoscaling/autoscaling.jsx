@@ -22,13 +22,13 @@ const TABS = ['Avoid incidents', 'Save costs'];
 
 const STATS = [
   {
-    number: 13024,
-    text: 'outages prevented by Autoscaling this year',
+    number: 54210,
+    text: 'outages and performance degradations prevented by Autoscaling every day',
   },
   {
     prefix: '$',
-    number: 4764912,
-    text: 'dollars saved by Autoscaling this year',
+    number: 345966,
+    text: 'dollars saved by Autoscaling every day',
   },
 ];
 

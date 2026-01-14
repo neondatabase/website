@@ -15,7 +15,7 @@ const FEATURES = [
     icon: copyIcon,
     title: 'Copy-on-write',
     description:
-      'Create lightweight database branches instantly by duplicating metadata, saving space and time.',
+      'Create lightweight database branches instantly with git-like branching, saving space and time.',
   },
   {
     icon: anonymIcon,
