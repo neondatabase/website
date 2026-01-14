@@ -53,6 +53,7 @@ const Autoscaling = () => {
     rootMargin: '500px 0px',
   });
   const [activeItem, setActiveItem] = useState(0);
+  const { ref: statsRef, inView: isStatsInView } = useInView();
 
   return (
     <section
@@ -142,13 +143,14 @@ const Autoscaling = () => {
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}
                       key={index}
+                      ref={statsRef}
                     >
                       <span className="font-semibold">
                         {prefix}
                         <CountingNumber
                           number={number}
                           transition={{ stiffness: 560, damping: 50 }}
-                          started
+                          started={isStatsInView}
                         />
                       </span>
                       <span className="ml-2 font-medium">{text}</span>
