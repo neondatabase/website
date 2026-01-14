@@ -161,7 +161,7 @@ export default {
             {
               title: 'Contact',
               to: LINKS.contactSales,
-              description: 'Offer Postgres to your users',
+              description: 'Get in touch',
             },
           ],
         },
