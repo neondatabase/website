@@ -28,7 +28,7 @@ const ITEMS = [
 const BackedBy = () => (
   <section className="backed-by safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[168px] pt-40 text-black-pure xl:py-[136px] lg:py-[88px] md:py-14">
     <Container className="z-10" size="1344">
-      <div className="relative z-10 flex gap-16 xl:gap-[108px] xl:pl-2 lg:gap-8 lg:pl-3.5 md:gap-5 md:p-0 sm:flex-col sm:gap-20">
+      <div className="relative z-10 flex gap-16 xl:gap-[108px] lg:gap-8 md:gap-5 md:p-0 sm:flex-col sm:gap-20">
         <div className="flex-1 border-l border-gray-new-50 px-8 xl:pl-6 xl:pr-0 lg:pl-[18px] sm:border-none sm:pl-0">
           <HeadingLabel className="mb-5 md:mb-4" theme="black">
             Backed by giants

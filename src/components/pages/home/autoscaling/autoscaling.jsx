@@ -28,7 +28,7 @@ const STATS = [
   {
     prefix: '$',
     number: 345966,
-    text: 'dollars saved by Autoscaling every day',
+    text: 'saved by Autoscaling every day',
   },
 ];
 

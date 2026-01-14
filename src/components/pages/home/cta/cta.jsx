@@ -1,4 +1,5 @@
 import Button from 'components/shared/button';
+import Container from 'components/shared/container';
 import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
@@ -6,33 +7,35 @@ import CopyCodeButton from './copy-code-button';
 
 const CTA = () => (
   <section className="cta safe-paddings relative bg-[#151617]">
-    <div className="absolute inset-0 z-10 mx-auto flex max-w-[1920px] flex-col px-16 pb-9 pt-14 text-white xl:px-8 xl:pb-5 xl:pt-12 lg:pt-9 md:px-5 md:pb-6 md:pt-[52px]">
-      <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
-        Features of tomorrow. <br /> Available today.
-      </h2>
+    <div className="absolute inset-0 z-10 pb-9 pt-14 xl:pb-5 xl:pt-12 lg:pt-9 md:pb-6 md:pt-[52px]">
+      <Container className="flex h-full flex-col" size="1920">
+        <h2 className="text-[80px] leading-none tracking-tighter xl:text-[64px] lg:text-[44px] md:text-[32px]">
+          Features of tomorrow. <br /> Available today.
+        </h2>
 
-      <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
-        <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter xl:max-w-[440px] xl:text-[24px] lg:max-w-[520px] lg:text-[20px] md:text-[18px]">
-          Trusted by developers, ready for agents. Build and scale applications faster with Neon.
-        </p>
-        <div className="mb-2 flex items-center gap-5 xl:gap-4 lg:mb-0 md:w-full md:flex-col md:items-stretch md:gap-y-3">
-          <Button theme="white-filled" size="new" to={LINKS.signup}>
-            Get started
-          </Button>
-          <Button
-            className="bg-[rgba(255,255,255,0.02)] !font-normal"
-            theme="gray-40-outline"
-            size="new"
-            to={LINKS.docsBranching}
-          >
-            Read the docs
-          </Button>
-          <CopyCodeButton
-            className="inline-flex items-center gap-x-3 font-mono-new !font-medium"
-            code="npx neon init"
-          />
+        <div className="mt-auto flex items-end justify-between gap-x-14 lg:flex-col lg:items-start lg:gap-y-5 md:gap-y-6">
+          <p className="max-w-[860px] text-[32px] leading-tight tracking-tighter xl:max-w-[440px] xl:text-[24px] lg:max-w-[520px] lg:text-[20px] md:text-[18px]">
+            Trusted by developers, ready for agents. Build and scale applications faster with Neon.
+          </p>
+          <div className="mb-2 flex items-center gap-5 xl:gap-4 lg:mb-0 md:w-full md:flex-col md:items-stretch md:gap-y-3">
+            <Button theme="white-filled" size="new" to={LINKS.signup}>
+              Get started
+            </Button>
+            <Button
+              className="bg-[rgba(255,255,255,0.02)] !font-normal"
+              theme="gray-40-outline"
+              size="new"
+              to={LINKS.docsBranching}
+            >
+              Read the docs
+            </Button>
+            <CopyCodeButton
+              className="inline-flex items-center gap-x-3 font-mono-new !font-medium"
+              code="npx neon init"
+            />
+          </div>
         </div>
-      </div>
+      </Container>
     </div>
 
     <div className="pointer-events-none relative overflow-hidden">

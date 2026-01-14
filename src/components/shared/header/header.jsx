@@ -39,7 +39,7 @@ const Header = ({
       ) : (
         <Container
           className="!static z-10 flex w-full items-center justify-between md:px-8 sm:px-5"
-          size="1600"
+          size="1920"
         >
           <div className="flex items-center gap-x-[92px] xl:gap-x-10">
             <Logo width={102} height={28} priority isHeader />
