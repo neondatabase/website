@@ -68,7 +68,7 @@ const Autoscaling = () => {
           <Heading
             icon="autoscaling"
             theme="light"
-            title="<strong>Advanced autoscaling.</strong> Keep scaling without worrying about capacity planning. Never overpay for resources you don’t use."
+            title="<strong>Advanced autoscaling.</strong> Keep scaling without worrying about capacity. Never overpay for resources you don’t use."
           />
 
           <div className="group relative z-20 mt-16 w-fit xl:mt-14 lg:mt-12 md:mt-11">
