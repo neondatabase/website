@@ -8,7 +8,231 @@
 
 **Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
+## Create a Neon project with Auth enabled
 
+If you don't have a Neon project yet, create one at [console.neon.tech](https://console.neon.tech).
+
+Go to the **Auth** page in your project dashboard and click **Enable Auth**.
+
+You can then find your Auth URL on the Configuration tab. Copy this URL - you'll need it in the next step.
+
+## Create a TanStack Router app
+
+Create a new TanStack Router app using the file-router template.
+Run in terminal:
+
+```bash
+npx create-tsrouter-app@latest my-app --template file-router --tailwind
+```
+
+## Install the Neon Auth SDK
+
+Install the Neon Auth SDK and UI library:
+Run in terminal:
+
+```bash
+cd my-app && npm install @neondatabase/neon-js
+```
+
+## Set up environment variables
+
+Create a `.env` file in your project root and add your Auth URL:
+
+   **Note**: Replace the URL with your actual Auth URL from the Neon Console.
+In `.env`:
+
+```bash
+VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+```
+
+## Add Neon Auth styles
+
+Open your existing `src/styles.css` file and add this import at the **top**, right after the Tailwind import:
+
+   **Tip** Not using Tailwind?: See [UI Component Styles](https://neon.com/docs/auth/reference/ui-components#styling) for alternative setup options.
+In `Add to src/styles.css`:
+
+```css
+@import '@neondatabase/neon-js/ui/tailwind';
+```
+
+## Configure the auth client
+
+Create a `src/auth.ts` file to initialize the auth client:
+In `src/auth.ts`:
+
+```typescript
+import { createAuthClient } from '@neondatabase/neon-js/auth';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react';
+
+export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL, { adapter: BetterAuthReactAdapter() });
+```
+
+## Create the Auth Provider
+
+Wrap your application with the `NeonAuthUIProvider` in `src/routes/__root.tsx`. This makes the auth state available to the UI components used throughout your app.
+
+Pass props to `NeonAuthUIProvider` for any features you want to use. Only the `authClient` prop is required.
+
+Details: Example: Adding optional props
+```tsx
+<NeonAuthUIProvider
+  authClient={authClient}
+  social={{ providers: ['google', 'github', 'vercel'] }}
+  navigate={navigate}
+  credentials={{ forgotPassword: true }}
+>
+  {children}
+</NeonAuthUIProvider>
+```
+In `src/routes/\_\_root.tsx`:
+
+```tsx {4-5,9,22}
+import { Outlet, createRootRoute } from '@tanstack/react-router';
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+import { TanStackDevtools } from '@tanstack/react-devtools';
+import { NeonAuthUIProvider } from '@neondatabase/neon-js/auth/react';
+import { authClient } from '../auth';
+
+export const Route = createRootRoute({
+  component: () => (
+    
+  ),
+});
+```
+
+## Create the Auth page
+
+Create a route to handle authentication views (sign in, sign up, etc.). Create `src/routes/auth.$pathname.tsx`:
+In `src/routes/auth.$pathname.tsx`:
+
+```tsx
+import { createFileRoute } from '@tanstack/react-router';
+import { AuthView } from '@neondatabase/neon-js/auth/react/ui';
+
+export const Route = createFileRoute('/auth/$pathname')({
+  component: Auth,
+});
+
+function Auth() {
+  const { pathname } = Route.useParams();
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <AuthView pathname={pathname} />
+    </div>
+  );
+}
+```
+
+## Create the Account page
+
+Create a route to handle account management views. Create `src/routes/account.$pathname.tsx`:
+In `src/routes/account.$pathname.tsx`:
+
+```tsx
+import { createFileRoute } from '@tanstack/react-router';
+import { AccountView } from '@neondatabase/neon-js/auth/react/ui';
+
+export const Route = createFileRoute('/account/$pathname')({
+  component: Account,
+});
+
+function Account() {
+  const { pathname } = Route.useParams();
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+      }}
+    >
+      <AccountView pathname={pathname} />
+    </div>
+  );
+}
+```
+
+## Protect your routes
+
+You can protect your routes using the `SignedIn` and `RedirectToSignIn` components. Access the user's session and profile data using the `useSession` hook.
+
+Update `src/routes/index.tsx` to protect the home page:
+In `src/routes/index.tsx`:
+
+```tsx
+import { createFileRoute } from '@tanstack/react-router';
+import { SignedIn, UserButton, RedirectToSignIn } from '@neondatabase/neon-js/auth/react/ui';
+import { authClient } from '@/auth';
+
+export const Route = createFileRoute('/')({
+  component: Home,
+});
+
+function Home() {
+  const { data } = authClient.useSession();
+
+  return (
+    <>
+      <SignedIn>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '100vh',
+            gap: '2rem',
+          }}
+        >
+          <div style={{ textAlign: 'center' }}>
+            <h1>Welcome!</h1>
+            <p>You're successfully authenticated.</p>
+            <UserButton />
+            <p className="font-medium text-gray-700 dark:text-gray-200 mt-4">
+              Session and User Data:
+            </p>
+            <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto whitespace-pre-wrap break-words w-full max-w-full sm:max-w-2xl mx-auto text-left">
+              <code>
+                {JSON.stringify({ session: data?.session, user: data?.user }, null, 2)}
+              </code>
+            </pre>
+          </div>
+        </div>
+      </SignedIn>
+      <RedirectToSignIn />
+    </>
+  );
+}
+```
+
+## Start your app
+
+Start the development server, then open [http://localhost:3000](http://localhost:3000). You'll be redirected to the sign-in page.
+Run in terminal:
+
+```bash
+npm run dev
+```
+
+## See your users in the database
+
+As users sign up, their profiles are stored in your Neon database in the `neon_auth.user` table.
+
+Query your users table in the SQL Editor to see your new users:
+Run this SQL query:
+
+```sql
+SELECT * FROM neon_auth.user;
+```
 
 ## Next steps
 
