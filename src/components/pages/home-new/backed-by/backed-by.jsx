@@ -13,8 +13,8 @@ import Quotes from './quotes';
 const ITEMS = [
   {
     icon: databaseIcon,
-    title: '40,000+',
-    description: 'Databases provisioned daily - built for scale and reliability.',
+    title: '150,000+',
+    description: 'New Postgres compute endpoints provisioned daily.',
     className: 'w-[216px] xl:w-48',
   },
   {
