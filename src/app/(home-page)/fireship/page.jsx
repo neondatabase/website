@@ -1,14 +1,16 @@
-import AiIndex from 'components/pages/home/ai-index';
-import Bento from 'components/pages/home/bento';
+import AI from 'components/pages/home/ai';
+import Auth from 'components/pages/home/auth';
+import Autoscaling from 'components/pages/home/autoscaling';
+import BackedBy from 'components/pages/home/backed-by';
+import Branching from 'components/pages/home/branching';
+import CTA from 'components/pages/home/cta';
+import Features from 'components/pages/home/features';
 import Hero from 'components/pages/home/hero';
-import Industry from 'components/pages/home/industry';
-import InstantProvisioning from 'components/pages/home/instant-provisioning';
-import Lightning from 'components/pages/home/lightning';
-import Logos from 'components/pages/home/logos';
-import Multitenancy from 'components/pages/home/multitenancy';
-import Trusted from 'components/pages/home/trusted';
-import Cta from 'components/shared/cta';
+import SpeedScale from 'components/pages/home/speed-scale';
+import TocWrapper from 'components/pages/home/toc-wrapper/toc-wrapper';
+import JsonLd from 'components/shared/json-ld';
 import SEO_DATA from 'constants/seo-data';
+import { generateOrganizationSchema } from 'lib/schema';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata({
@@ -16,20 +18,26 @@ export const metadata = getMetadata({
   robotsNoindex: 'noindex',
 });
 
-const FireshipPage = () => (
-  <>
-    <Hero />
-    <Logos />
-    <InstantProvisioning />
-    <Lightning />
-    <Bento />
-    <AiIndex />
-    <Multitenancy />
-    <Industry />
-    <Trusted />
-    <Cta />
-  </>
-);
+const FireshipPage = () => {
+  const organizationSchema = generateOrganizationSchema();
+
+  return (
+    <>
+      <JsonLd data={organizationSchema} />
+      <Hero />
+      <TocWrapper>
+        <AI />
+        <Autoscaling />
+        <Branching />
+        <Auth />
+        <Features />
+      </TocWrapper>
+      <SpeedScale />
+      <BackedBy />
+      <CTA />
+    </>
+  );
+};
 
 export default FireshipPage;
 
