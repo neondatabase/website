@@ -20,7 +20,7 @@ const Hero = () => (
       <HeadingLabel>NEON: A DATABRICKS COMPANY</HeadingLabel>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Ship faster with Postgres
+        Ship faster with Postgres for modern engineering teams
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
