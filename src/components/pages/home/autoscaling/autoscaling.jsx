@@ -23,7 +23,7 @@ const TABS = ['Avoid incidents', 'Save costs'];
 const STATS = [
   {
     number: 54210,
-    text: 'outages and performance degradations prevented by Autoscaling every day',
+    text: 'performance degradations prevented by Autoscaling every day',
   },
   {
     prefix: '$',
