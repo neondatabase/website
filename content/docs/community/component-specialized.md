@@ -1,5 +1,5 @@
 ---
-title: Neon Documentation MDX Components - Specialized Guide
+title: Component specialized guide
 subtitle: Specialized and less common components for specific use cases
 enableTableOfContents: true
 updatedOn: '2025-07-11T20:37:11.993Z'

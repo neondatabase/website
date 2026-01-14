@@ -1,5 +1,5 @@
 ---
-title: Neon Documentation MDX Components - Architecture Guide
+title: Component architecture
 subtitle: Technical implementation details for developers and maintainers
 enableTableOfContents: true
 updatedOn: '2025-09-15T12:22:41.749Z'
