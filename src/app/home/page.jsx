@@ -9,6 +9,7 @@ import Hero from 'components/pages/home/hero';
 import SpeedScale from 'components/pages/home/speed-scale';
 import TocWrapper from 'components/pages/home/toc-wrapper/toc-wrapper';
 import JsonLd from 'components/shared/json-ld';
+import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 import { generateOrganizationSchema } from 'lib/schema';
 import getMetadata from 'utils/get-metadata';
@@ -22,7 +23,7 @@ const HomePage = () => {
   const organizationSchema = generateOrganizationSchema();
 
   return (
-    <>
+    <Layout isHeaderSticky isHeaderStickyOverlay>
       <JsonLd data={organizationSchema} />
       <Hero />
       <TocWrapper>
@@ -35,7 +36,7 @@ const HomePage = () => {
       <SpeedScale />
       <BackedBy />
       <CTA />
-    </>
+    </Layout>
   );
 };
 
