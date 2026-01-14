@@ -484,6 +484,62 @@ const defaultConfig = {
         destination: '/',
         permanent: true,
       },
+      // Homepage variants redirects
+      {
+        source: '/all-things-open-2023',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/cfe',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/devs',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/education',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/fireship',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/github',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/last-week-in-aws',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/pgt',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/radio',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/stackoverflow',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/youtube',
+        destination: '/',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
