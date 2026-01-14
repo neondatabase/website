@@ -18,7 +18,7 @@ import Heading from '../heading';
 
 import Animation from './animation';
 
-const TABS = ['Avoid outages', 'Save costs'];
+const TABS = ['Avoid incidents', 'Save costs'];
 
 const STATS = [
   {
