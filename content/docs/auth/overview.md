@@ -45,6 +45,21 @@ Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means
 
 Neon Auth currently supports Better Auth version **1.4.6**.
 
+### When to use Neon Auth vs. self-hosting Better Auth
+
+**Choose Neon Auth if you want:**
+
+- Integration with Neon's branching and Data API features
+- Managed infrastructure with no servers to run
+- Low-latency auth deployed in the same region as your database
+
+**Choose self-hosted Better Auth if you need:**
+
+- Custom plugins, hooks, and auth configuration options not yet supported by Neon Auth
+- Full control over your auth code and infrastructure
+
+As Neon Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
+
 ## Basic usage
 
 Enable Auth in your Neon project, then add authentication to your app:
