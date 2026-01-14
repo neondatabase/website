@@ -18,6 +18,7 @@ export default {
   migration: '/migration',
   partners: '/partners',
   postgresqltutorial: '/postgresql/tutorial',
+  pricing: '/pricing',
   programsAgents: '/programs/agents',
   scaleTrial: '/scale-trial',
   security: '/security',

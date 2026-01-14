@@ -31,7 +31,7 @@ const CTA = () => (
             </Button>
             <CopyCodeButton
               className="inline-flex items-center gap-x-3 font-mono !font-medium"
-              code="npx neon init"
+              code="npx neonctl init"
             />
           </div>
         </div>
