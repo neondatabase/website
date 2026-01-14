@@ -22,11 +22,11 @@ When you're looking for a free plan to run Postgres, what you want is simplicity
 
 ## Stage 2: Startups
 
-**Build and iterate fast**
+**Build an iterate fast**
 
 As a project becomes a product, small teams need to ship quickly and support real users. Neon gives these teams a frictionless building experience without compromising on performance and reliability.
 
-Before launching your product, go through the [production checklist](https://neon.com/docs/get-started/production-checklist) to make sure your DB has the right configuration to support your end users.
+
 
 - [Autoscaling](https://neon.com/docs/introduction/autoscaling) adapts automatically to unpredictable workloads: you don't have to plan capacity in advance
 - [Branching](https://neon.com/branching) lets you spin up development, preview, and test environments instantly, matching the latest production state, without manual work
@@ -64,6 +64,4 @@ At this stage, teams need performance, reliability, isolation, and automation wi
 - [Scale to zero](https://neon.com/docs/introduction/scale-to-zero) keeps unit costs low when large numbers of generated apps are never used or only accessed sporadically
 - A mature API exposes [fleet management and cost-control capabilities](https://neon.com/docs/guides/consumption-limits) including quotas, usage limits, and lifecycle operations
 - You can build versioning, checkpoints, rollbacks, and time-travel workflows with minimal engineering effort via [snapshots](https://neon.com/blog/promoting-postgres-changes-safely-production)
-- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to hook full-stack applications out of the box
-
-If you're building a full-stack agent platform, apply to Neon's [Agent Plan](https://neon.com/programs/agents) for special pricing, resource limits, and assistance.
+- Built-in app platform services such as [Neon Auth](https://neon.com/docs/auth/overview) and our PostgREST-compatible [Data API](https://neon.com/docs/data-api/get-started) make it easy to to hook full-stack applications out of the box
