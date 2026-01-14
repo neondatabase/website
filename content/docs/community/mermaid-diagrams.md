@@ -87,6 +87,7 @@ Show the relationships
 ```
 
 **Tips for Cursor:**
+
 - Be specific about the diagram type (flowchart, sequence, ER, etc.)
 - Mention you want Mermaid syntax
 - Include the main nodes/steps you want to show
@@ -132,6 +133,7 @@ Create a Mermaid Gantt chart for a database migration project:
 ```
 
 **Pro tips:**
+
 - Ask for specific Mermaid diagram types by name
 - Provide the structure or flow you want to visualize
 - Request revisions to adjust complexity or styling
@@ -142,6 +144,7 @@ Create a Mermaid Gantt chart for a database migration project:
 Here are reusable prompt templates for common diagram needs:
 
 **Architecture diagram:**
+
 ```
 Create a Mermaid flowchart showing [system/feature] architecture with:
 - [Component 1]
@@ -151,6 +154,7 @@ Show how they interact and data flows between them.
 ```
 
 **Workflow diagram:**
+
 ```
 Generate a Mermaid flowchart for the [process name] workflow:
 1. [Step 1]
@@ -161,6 +165,7 @@ Generate a Mermaid flowchart for the [process name] workflow:
 ```
 
 **Database schema:**
+
 ```
 Create a Mermaid ER diagram for [use case] with these tables:
 - [table1] with fields [field1, field2, field3]
@@ -189,6 +194,7 @@ flowchart LR
 ````
 
 **Directions:**
+
 - `TD` or `TB` - Top to bottom
 - `LR` - Left to right
 - `RL` - Right to left
@@ -225,13 +231,13 @@ erDiagram
     PROJECTS ||--o{ BRANCHES : contains
     BRANCHES ||--o{ DATABASES : has
     BRANCHES ||--o{ COMPUTES : runs
-    
+
     PROJECTS {
         uuid id PK
         string name
         string region
     }
-    
+
     BRANCHES {
         uuid id PK
         string name
@@ -241,6 +247,7 @@ erDiagram
 ````
 
 **Relationships:**
+
 - `||--||` - One to one
 - `||--o{` - One to many
 - `}o--o{` - Many to many
@@ -291,13 +298,13 @@ classDiagram
         +createBranch()
         +delete()
     }
-    
+
     class Branch {
         +String id
         +String name
         +restore()
     }
-    
+
     Project "1" --> "*" Branch
 ```
 ````
@@ -350,11 +357,13 @@ No manual color configuration needed!
 ### Writing effective diagrams
 
 **Keep it simple:**
+
 - Focus on one concept per diagram
 - Limit to 5-10 nodes for readability
 - Use clear, concise labels
 
 **Use meaningful labels:**
+
 ```mermaid
 flowchart TD
     A[User Creates Branch] --> B[Neon Provisions Compute]
@@ -362,6 +371,7 @@ flowchart TD
 ```
 
 Better than:
+
 ```mermaid
 flowchart TD
     A[Step 1] --> B[Step 2]
@@ -369,11 +379,13 @@ flowchart TD
 ```
 
 **Consider mobile users:**
+
 - Avoid overly wide diagrams
 - Test on smaller screens
 - Use top-to-bottom layouts when possible
 
 **Add context:**
+
 - Include a brief description before the diagram
 - Explain what the diagram shows
 - Reference related documentation
@@ -398,6 +410,7 @@ npm run dev
 ```
 
 Then navigate to your page and:
+
 - Check light mode appearance
 - Toggle to dark mode
 - Test on mobile viewport
@@ -406,6 +419,7 @@ Then navigate to your page and:
 ### Common syntax errors
 
 **Missing quotes:**
+
 ```text
 # Wrong - special characters in labels may cause issues
 flowchart TD
@@ -413,6 +427,7 @@ flowchart TD
 ```
 
 **Incorrect direction:**
+
 ```text
 # Wrong - XY is not a valid direction
 flowchart XY
@@ -424,6 +439,7 @@ flowchart TD
 ```
 
 **Broken relationships in ER diagrams:**
+
 ```text
 # Wrong - incorrect relationship syntax
 erDiagram
@@ -458,13 +474,13 @@ sequenceDiagram
 
     App->>Proxy: Connection Request
     Proxy->>Compute: Check Status
-    
+
     alt Compute Idle
         Proxy->>Compute: Wake Up
         Compute->>Storage: Load Data
         Storage-->>Compute: Ready
     end
-    
+
     Compute-->>Proxy: Active
     Proxy-->>App: Connected
 ```
@@ -477,19 +493,19 @@ erDiagram
     TENANTS ||--o{ DATABASES : owns
     USERS ||--o{ SESSIONS : creates
     DATABASES ||--o{ TABLES : contains
-    
+
     TENANTS {
         uuid id PK
         string name
         timestamp created_at
     }
-    
+
     USERS {
         uuid id PK
         uuid tenant_id FK
         string email
     }
-    
+
     DATABASES {
         uuid id PK
         uuid tenant_id FK
@@ -539,6 +555,7 @@ gantt
 **Check the language tag:**
 
 Wrong:
+
 ````markdown
 ```diagram
 flowchart TD
@@ -547,6 +564,7 @@ flowchart TD
 ````
 
 Correct:
+
 ````markdown
 ```mermaid
 flowchart TD
@@ -555,6 +573,7 @@ flowchart TD
 ````
 
 **Validate syntax:**
+
 - Use [Mermaid Live Editor](https://mermaid.live/)
 - Check for missing quotes, arrows, or semicolons
 - Look for typos in diagram type names
@@ -562,6 +581,7 @@ flowchart TD
 ### Theme not switching correctly
 
 If diagrams don't update when switching themes:
+
 - Hard refresh the page (Cmd+Shift+R / Ctrl+Shift+R)
 - Clear browser cache
 - Check browser console for JavaScript errors
@@ -569,6 +589,7 @@ If diagrams don't update when switching themes:
 ### Performance issues
 
 For pages with many diagrams:
+
 - Consider splitting into multiple pages
 - Simplify complex diagrams
 - Use fewer nodes per diagram
@@ -591,4 +612,3 @@ Need help with Mermaid diagrams?
 ---
 
 Ready to add visual diagrams to your documentation? Start with a simple flowchart and iterate from there. The AI tools make it easy to create professional diagrams quickly!
-
