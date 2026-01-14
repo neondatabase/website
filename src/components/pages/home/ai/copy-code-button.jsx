@@ -9,12 +9,12 @@ import Button from 'components/shared/button';
 import CopiedIcon from 'icons/home/copied.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 
-const CopyCodeButton = ({ code = '' }) => {
+const CopyCodeButton = ({ code = '', copyText = code }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const handleCopyToClipboard = () => {
     try {
-      copyToClipboard(code);
+      copyToClipboard(copyText);
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 1500);
     } catch (e) {
@@ -55,6 +55,7 @@ const CopyCodeButton = ({ code = '' }) => {
 
 CopyCodeButton.propTypes = {
   code: PropTypes.string.isRequired,
+  copyText: PropTypes.string,
 };
 
 export default CopyCodeButton;
