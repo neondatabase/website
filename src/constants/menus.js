@@ -151,7 +151,7 @@ export default {
             {
               title: 'About us',
               to: LINKS.aboutUs,
-              description: 'Scale & restore instantly',
+              description: 'The company and the mission',
             },
             {
               title: 'Careers',
