@@ -19,7 +19,6 @@ const Header = () => (
         )}
       >
         Codegen and agent platforms rely on Neon to run the backend for user-generated apps.
-        Database, auth and RESTful data API provisioned cost-efficiently and at AI speed.
       </p>
       <Button
         className="mt-9 lg:mt-8 md:mt-7"
