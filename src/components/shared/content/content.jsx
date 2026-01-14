@@ -45,6 +45,7 @@ import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
+import Mermaid from 'components/shared/mermaid';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
@@ -80,7 +81,25 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  pre: (props) => <CodeBlock {...props} />,
+  pre: (props) => {
+    // Check if this is a mermaid code block
+    const codeElement = props?.children;
+    const code = codeElement?.props?.children;
+    const className = codeElement?.props?.className || '';
+
+    // Only process as mermaid if we have valid structure and mermaid class
+    if (
+      codeElement &&
+      typeof code === 'string' &&
+      className &&
+      className.includes('language-mermaid')
+    ) {
+      return <Mermaid chart={code.trim()} />;
+    }
+
+    // For all other code blocks, pass to CodeBlock component
+    return <CodeBlock {...props} />;
+  },
   a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;

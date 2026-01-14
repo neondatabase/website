@@ -1,5 +1,5 @@
 ---
-title: Neon Documentation MDX Components - Icon Guide
+title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
 enableTableOfContents: true
 updatedOn: '2025-07-11T20:37:11.993Z'
