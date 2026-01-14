@@ -24,7 +24,7 @@ const CopyCodeButton = ({ code = '' }) => {
 
   return (
     <Button
-      className="group inline-flex w-[34.2%] items-center justify-between gap-x-3 !rounded-none !px-4 font-mono-new !font-medium hover:bg-[#F6FDFA] xl:w-[300px] lg:w-[36%] lg:!px-3 sm:w-full"
+      className="group inline-flex w-[34.2%] items-center justify-between gap-x-3 !rounded-none !px-4 font-mono !font-medium hover:bg-[#F6FDFA] xl:w-[300px] lg:w-[36%] lg:!px-3 sm:w-full"
       theme="white-off-filled"
       size="new"
       onClick={handleCopyToClipboard}

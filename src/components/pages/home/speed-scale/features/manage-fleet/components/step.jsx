@@ -9,7 +9,7 @@ const Step = ({ index, title, children, lineAnimation }) => (
         className={clsx(
           'absolute -top-2 left-0 z-10 flex w-full justify-center bg-black-pure p-2.5',
           index !== 0 && 'h-full',
-          'font-mono-new leading-none text-gray-new-60',
+          'font-mono leading-none text-gray-new-60',
           'xl:-top-1.5 xl:p-[7px] xl:text-[11px] lg:p-2 lg:text-sm sm:-top-[3px] sm:p-1 sm:text-[7px]'
         )}
         aria-label={`Step ${index + 1}`}
@@ -28,7 +28,7 @@ const Step = ({ index, title, children, lineAnimation }) => (
       className={clsx(
         'mb-6 text-xl leading-none tracking-extra-tight',
         '2xl:text-lg xl:mb-4 xl:text-sm lg:mb-[18px] lg:text-lg sm:mb-[10px] sm:text-[9px]',
-        '[&>span]:font-mono-new [&>span]:text-gray-new-70'
+        '[&>span]:font-mono [&>span]:text-gray-new-70'
       )}
       dangerouslySetInnerHTML={{ __html: title }}
     />

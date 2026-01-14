@@ -138,7 +138,7 @@ const Autoscaling = () => {
 
                   return (
                     <m.p
-                      className="text-pretty font-mono-new uppercase text-[#285D49] xl:text-sm lg:text-xs"
+                      className="text-pretty font-mono uppercase text-[#285D49] xl:text-sm lg:text-xs"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.5 }}

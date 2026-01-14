@@ -21,7 +21,7 @@ const Checkpoints = () => (
           '[&_canvas]:!h-full [&_canvas]:!w-full'
         )}
         wrapperClassName="relative"
-        src="/animations/pages/home/checkpoints.riv?20251448"
+        src="/animations/pages/home/checkpoints.riv?20260114"
       />
     </div>
   </div>

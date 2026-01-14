@@ -22,7 +22,7 @@ const DeployDatabases = () => {
   return (
     <div
       ref={ref}
-      className="relative max-w-none font-mono-new leading-none tracking-extra-tight xl:text-xs sm:text-[7px]"
+      className="relative max-w-none font-mono leading-none tracking-extra-tight xl:text-xs sm:text-[7px]"
     >
       <div className="flex w-fit border border-gray-new-50 px-5 py-[18px] xl:px-4 xl:py-3.5 sm:px-2.5 sm:py-2">
         Databases deployed:

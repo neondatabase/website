@@ -109,7 +109,7 @@ const Quotes = () => {
                 <m.figure
                   className={clsx(
                     'absolute inset-x-0 bottom-0 -mx-1 mt-auto overflow-hidden px-1',
-                    'font-mono-new tracking-extra-tight',
+                    'font-mono tracking-extra-tight',
                     !isActive && 'pointer-events-none'
                   )}
                   initial={{ opacity: 0 }}

@@ -21,7 +21,7 @@ export const codeWrapperClassName = clsx(
 );
 
 export const codeClassName = clsx(
-  'font-mono-new tracking-extra-tight text-gray-new-80',
+  'font-mono tracking-extra-tight text-gray-new-80',
   '2xl:text-sm xl:text-[11px] lg:text-sm md:text-xs sm:text-[7px]'
 );
 
