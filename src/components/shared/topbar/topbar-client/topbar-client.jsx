@@ -21,7 +21,7 @@ import rightImageXL from './images/right-pattern-xl.png';
 const Pattern = ({ src, width, isRight, className }) => (
   <Image
     className={clsx(
-      'pointer-events-none absolute top-0 z-0 h-full',
+      'pointer-events-none absolute top-0 z-0 h-9 w-auto',
       isRight ? 'right-0' : 'left-0',
       className
     )}
