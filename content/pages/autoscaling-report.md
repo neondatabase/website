@@ -103,9 +103,9 @@ This highlights another weak point of provisioned databases. **You can't buy exa
 
 ---
 
-## Burst Capacity
+## Burst Capacity Databases
 
-In a second category of autoscaling, the database spends the vast majority of time at its minimum size.
+In a second category of autoscaling workload, the database spends the vast majority of time at its minimum size.
 
 <AutoscalingChart title="One week of Autoscaling on a Database with Burst workload" datasetKey="anomalous_spikes" autoscalingOnly={true} showStats={false}  compact={true}/>
 
@@ -124,7 +124,6 @@ Across the entire Neon platform in 2025, we modeled the savings and quantity of 
 In smaller databases, the burst capacity scaling pattern means even the minimum set of resources is sufficient to run most of the database load.
 <AutoscalingChart title="Small Database Burst Capacity Pattern" datasetKeys={["burst_1d_small_actual", "burst_1d_small"]} autoscalingOnly={true} showStats={false} compact={true}/>
 For these, we modelled the provisioned costs by provisioning them at their steady-state size on Neon _(i.e. 0.25 CU in the example above)_ and tallying up the number of spikes as "incidents" - these are the points where the operator would experience performance degradations or outages on the provisioned platform.
-The results show
 
 #### Large Databases
 
@@ -160,7 +159,11 @@ This pattern shows up mostly in non-production databases: Dev and staging DB's t
 
 ### Scale to Zero Data
 
-...
+Tallying up all the compute used by databases on the Neon platform in 2025 that scaled to zero, and comparing that with the compute required to run the same databases continually on a provisioned platform like RDS, we find that provisioned would use <span className="bg-secondary-1/20 text-secondary-1 p-1">33.2x more compute.</span>
+
+When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 10x.</span>
+The savings numbers from scale to zero are dramatic enough to make it clear that this feature is changing customer behavior.
+Scale to zero changes the equation on what types of database usage patterns are economically viable.
 
 ### Scale to Zero Example
 
@@ -175,27 +178,15 @@ That drives the cost down to <span className="bg-green-45/20 text-green-45 p-1">
 Provisioned platforms cannot scale to zero, so your best option for this workload is to buy the smallest instance that fits the workload (zero over-provisioning).
 Using that approach, running a similar workload on RDS would use <span className="bg-secondary-1/20 text-secondary-1 p-1">7.1x more compute</span> and <span className="bg-secondary-1/20 text-secondary-1 p-1">cost 4.4x more</span>.
 
-<div className="relative rounded-[1px] border-l-4 bg-gray-new-98 px-6 py-4 dark:bg-gray-new-8 border-[#2982FF] dark:border-[#4C97FF]" style={{"margin-left":"-2rem"}}>
-<span className="relative w-fit font-semibold tracking-extra-tight text-[#2982FF] text-xl">Platform-wide data for Scale-to-zero workloads</span>
-
-Tallying up all the compute used by databases on the Neon platform in 2025 that scaled to zero, and comparing that with the compute required to run the same databases continually on a provisioned platform like RDS, we find that provisioned would use <span className="bg-secondary-1/20 text-secondary-1 p-1">33.2x more compute.</span>
-
-When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 10x.</span>
-The savings numbers from scale to zero are dramatic enough to make it clear that this feature is changing customer behavior.
-Scale to zero changes the equation on what types of database usage patterns are economically viable.
-
-</div>
-
 ## Methodology
 
 ### Conservative Estimates
 
 We've been careful to make these numbers as conservative as possible. For example:
 
-1. We ignore the fact that provisioned platforms add costs by forcing buyers to "round up", by only offering certain sizes (e.g. you can't buy an RDS instance with 5 CPU and 20 GB RAM.)
-2. We ignore the fact that Neon comes with durability built-in, while provisioned platforms require you to triple your compute footprint to get durability.
-3. We compute the size of provisioned instance needed per database each month. That assumes on a provisioned platform the operator would be resizing the database monthly for maximum efficiency.
-4. When a Neon database scales to zero and doesn't come back on, we
+1. We ignore the fact that Neon comes with durability and high availability built-in, while provisioned platforms require you to triple your compute footprint to get durability.
+2. We compute the size of provisioned instance needed per database each month. That assumes on a provisioned platform the operator would be resizing the database monthly for maximum efficiency.
+3. When a Neon database scales to zero and never comes back on, we immediately stop tallying up equivalent provisioned costs. In reality many idle databases on provisioned platforms are forgotten about until an invoice or audit exposes them and someone manually terminates them.
 
 ### Classifying workloads
 
