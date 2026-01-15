@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-22T13:20:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Restart PostgreSQL on Windows'
-  slug: 'postgresql-administration/restart-postgresql-windows'
+  title: 'PostgreSQL Password File .pgpass'
+  slug: 'postgresql-administration/postgresql-password-file-pgpass'
 nextLink:
-  title: 'PostgreSQL Functions'
-  slug: 'postgresql-administration/../postgresql-functions'
+  title: 'How to Uninstall PostgreSQL from Ubuntu'
+  slug: 'postgresql-administration/uninstall-postgresql-ubuntu'
 ---
 
 **Summary**: in this tutorial, you will learn how to terminate a process in PostgreSQL using the `pg_terminate_backend()` function.

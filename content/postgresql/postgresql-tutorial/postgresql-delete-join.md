@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL DELETE'
   slug: 'postgresql-tutorial/postgresql-delete'
 nextLink:
-  title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
-  slug: 'postgresql-tutorial/postgresql-upsert'
+  title: 'PostgreSQL DELETE CASCADE'
+  slug: 'postgresql-tutorial/postgresql-delete-cascade'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DELETE` statement to emulate delete join operations.

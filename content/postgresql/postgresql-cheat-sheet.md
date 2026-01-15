@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png'
 updatedOn: '2024-01-16T00:36:34+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL C#: Call a Stored Procedure'
-  slug: 'postgresql-csharp/postgresql-csharp-call-a-stored-procedure'
+  title: 'Getting Started with PostgreSQL'
+  slug: 'postgresql-getting-started'
 nextLink:
-  title: 'PostgreSQL Resources'
-  slug: 'postgresql-resources'
+  title: 'What is PostgreSQL?'
+  slug: 'postgresql-getting-started/what-is-postgresql'
 ---
 
 ![PostgreSQL Cheat Sheet](/postgresqltutorial/PostgreSQL-Cheat-Sheet-300x204.png?alignright)The **PostgreSQL cheat sheet** provides you with the common PostgreSQL commands and statements that enable you to work with PostgreSQL quickly and effectively.

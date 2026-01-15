@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL jsonb_each_text() Function'
   slug: 'postgresql-json-functions/postgresql-jsonb_each_text'
 nextLink:
-  title: 'PostgreSQL jsonb_to_record() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_to_record'
+  title: 'PostgreSQL JSON Path'
+  slug: 'postgresql-json-functions/postgresql-json-path'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_object_keys()` function to extract the keys from a JSON object.

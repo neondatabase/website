@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/postgresql-databases.png'
 updatedOn: '2020-07-17T02:50:14+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Tutorial'
-  slug: 'postgresql-tutorial/..'
+  title: 'PostgreSQL EXPLAIN'
+  slug: 'postgresql-tutorial/postgresql-explain'
 nextLink:
-  title: 'PostgreSQL SELECT'
-  slug: 'postgresql-tutorial/postgresql-select'
+  title: 'How to Compare Two Tables in PostgreSQL'
+  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
 ---
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.

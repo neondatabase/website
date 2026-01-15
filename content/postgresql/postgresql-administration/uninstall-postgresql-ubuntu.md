@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-19T07:24:39+00:00'
 enableTableOfContents: true
 previousLink:
-  title: '17 Practical psql Commands You Don’t Want to Miss'
-  slug: 'postgresql-administration/psql-commands'
+  title: 'PostgreSQL pg_terminate_backend() Function'
+  slug: 'postgresql-administration/postgresql-pg_terminate_backend'
 nextLink:
-  title: 'PostgreSQL Password File .pgpass'
-  slug: 'postgresql-administration/postgresql-password-file-pgpass'
+  title: ''
+  slug: ''
 ---
 
 **Summary**: in this tutorial, you will learn step\-by\-step how to uninstall PostgreSQL from Ubuntu.

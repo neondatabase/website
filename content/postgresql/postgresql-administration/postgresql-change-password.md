@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-18T08:18:38+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Reset Forgotten Password For postgres User'
-  slug: 'postgresql-administration/postgresql-reset-password'
+  title: 'PostgreSQL List Users'
+  slug: 'postgresql-administration/postgresql-list-users'
 nextLink:
-  title: 'PostgreSQL CREATE TABLESPACE'
-  slug: 'postgresql-administration/postgresql-create-tablespace'
+  title: 'How to Create Superuser in PostgreSQL'
+  slug: 'postgresql-administration/create-superuser-postgresql'
 ---
 
 **Summary**: in this tutorial, you will learn how to change the password for a user in PostgreSQL.

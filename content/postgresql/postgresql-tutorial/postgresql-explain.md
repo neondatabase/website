@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL CAST: Convert a value of One Type to Another'
   slug: 'postgresql-tutorial/postgresql-cast'
 nextLink:
-  title: 'PostgreSQL DISTINCT ON'
-  slug: 'postgresql-tutorial/postgresql-distinct-on'
+  title: 'PostgreSQL Server and Database Objects'
+  slug: 'postgresql-tutorial/postgresql-server-and-database-objects'
 ---
 
 **Summary**: in this tutorial, you have learned how to use the PostgreSQL `EXPLAIN` statement to display the execution plan of a statement.

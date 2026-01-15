@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-02-23T14:26:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_path_query_first() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query_first'
+  title: 'PostgreSQL JSON Path'
+  slug: 'postgresql-json-functions/postgresql-json-path'
 nextLink:
   title: 'PostgreSQL JSONB Operators'
   slug: 'postgresql-json-functions/postgresql-jsonb-operators'

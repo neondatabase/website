@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/compare-two-tables-postgresql.jpg'
 updatedOn: '2024-02-01T14:06:45+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Composite Types'
-  slug: 'postgresql-tutorial/postgresql-composite-types'
+  title: 'PostgreSQL Server and Database Objects'
+  slug: 'postgresql-tutorial/postgresql-server-and-database-objects'
 nextLink:
-  title: 'How to Generate a Random Number in a Range'
-  slug: 'postgresql-tutorial/postgresql-random-range'
+  title: 'PostgreSQL generate_series() Function'
+  slug: 'postgresql-tutorial/postgresql-generate_series'
 ---
 
 **Summary**: in this tutorial, you will learn various ways to compare two tables in PostgreSQL.

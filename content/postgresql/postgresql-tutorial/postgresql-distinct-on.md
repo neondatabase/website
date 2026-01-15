@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-01-16T09:44:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL EXPLAIN'
-  slug: 'postgresql-tutorial/postgresql-explain'
+  title: 'PostgreSQL SELECT DISTINCT'
+  slug: 'postgresql-tutorial/postgresql-select-distinct'
 nextLink:
-  title: 'PostgreSQL vs. MySQL'
-  slug: 'postgresql-tutorial/postgresql-vs-mysql'
+  title: 'PostgreSQL WHERE'
+  slug: 'postgresql-tutorial/postgresql-where'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DISTINCT ON` clause to retrieve distinct rows based on a specific column.

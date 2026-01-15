@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-07-01T01:21:22+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL vs. MySQL'
-  slug: 'postgresql-tutorial/postgresql-vs-mysql'
+  title: 'How to Compare Two Tables in PostgreSQL'
+  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
 nextLink:
-  title: 'PostgreSQL PL/pgSQL'
-  slug: 'postgresql-tutorial/../postgresql-plpgsql'
+  title: 'How to Generate a Random Number in a Range'
+  slug: 'postgresql-tutorial/postgresql-random-range'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `generate_series()` function to generate a series of numbers or timestamps.
