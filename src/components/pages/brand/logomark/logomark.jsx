@@ -7,19 +7,19 @@ import Section from '../section';
 
 const logos = [
   {
-    src: '/brand/neon-logomark-light-color.svg?updated=2026-01-14',
+    src: '/brand/neon-logomark-light-color.svg?updated=2026-01-15',
     name: 'neon-logomark-light-color.svg',
   },
   {
-    src: '/brand/neon-logomark-light-mono.svg?updated=2026-01-14',
+    src: '/brand/neon-logomark-light-mono.svg?updated=2026-01-15',
     name: 'neon-logomark-light-mono.svg',
   },
   {
-    src: '/brand/neon-logomark-dark-color.svg?updated=2026-01-14',
+    src: '/brand/neon-logomark-dark-color.svg?updated=2026-01-15',
     name: 'neon-logomark-dark-color.svg',
   },
   {
-    src: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-14',
+    src: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-15',
     name: 'neon-logomark-dark-mono.svg',
   },
 ];
@@ -49,6 +49,7 @@ const Logomark = () => (
               alt="Neon logomark"
               width={64}
               height={64}
+              unoptimized
             />
             <span
               className={clsx(
