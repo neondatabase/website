@@ -146,15 +146,9 @@ export const authClient = createAuthClient();
 Copy and paste following code in `lib/auth/server.ts` file:
 
 ```tsx
-'use server';
-
 import { createAuthServer } from '@neondatabase/auth/next/server';
 
-const authServer = createAuthServer();
-
-export async function getSession() {
-  return authServer.getSession();
-}
+export const authServer = createAuthServer();
 ```
 
 </TabItem>
@@ -441,10 +435,10 @@ export default function ClientRenderedPage() {
 Create a new API route at `app/api/secure-api-route/route.ts` and add the following code:
 
 ```tsx
-import { getSession } from "@/lib/auth/server";
+import { authServer } from "@/lib/auth/server";
 
 export async function GET() {
-  const { data } = await getSession();
+  const { data } = await authServer.getSession();
   if (data?.session) {
     return new Response(
       JSON.stringify({ "session": data.session, "user": data.user }),
