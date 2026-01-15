@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-23T01:14:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Foreign Key'
-  slug: 'postgresql-tutorial/postgresql-foreign-key'
+  title: 'PostgreSQL DELETE JOIN'
+  slug: 'postgresql-tutorial/postgresql-delete-join'
 nextLink:
-  title: 'PostgreSQL CHECK Constraints'
-  slug: 'postgresql-tutorial/postgresql-check-constraint'
+  title: 'How To Delete Duplicate Rows in PostgreSQL'
+  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `DELETE CASCADE` to delete related rows in child tables when a parent row is deleted from the parent table.

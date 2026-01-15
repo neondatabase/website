@@ -8,6 +8,8 @@
       items:
         - title: Getting Started
           slug: postgresql-getting-started
+        - title: Cheat Sheet
+          slug: postgresql-cheat-sheet
     - section: PostgreSQL Quick Start
       icon: start
       items:
@@ -35,6 +37,8 @@
           title: ORDER BY
         - slug: postgresql-tutorial/postgresql-select-distinct
           title: SELECT DISTINCT
+        - slug: postgresql-tutorial/postgresql-distinct-on
+          title: DISTINCT ON
     - section: Filtering Data
       items:
         - slug: postgresql-tutorial/postgresql-where
@@ -115,6 +119,10 @@
           title: DELETE
         - slug: postgresql-tutorial/postgresql-delete-join
           title: DELETE Join
+        - slug: postgresql-tutorial/postgresql-delete-cascade
+          title: DELETE CASCADE
+        - slug: postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql
+          title: Delete Duplicate Rows
         - slug: postgresql-tutorial/postgresql-upsert
           title: Upsert
         - slug: postgresql-tutorial/postgresql-merge
@@ -177,6 +185,8 @@
           title: Temporary Table
         - slug: postgresql-tutorial/postgresql-truncate-table
           title: Truncate Table
+        - slug: postgresql-tutorial/postgresql-copy-table
+          title: Copy Table
     - section: Database Constraints
       items:
         - slug: postgresql-tutorial/postgresql-primary-key
@@ -239,10 +249,28 @@
           title: CASE
         - slug: postgresql-tutorial/postgresql-coalesce
           title: COALESCE
+        - slug: postgresql-tutorial/postgresql-isnull
+          title: ISNULL
         - slug: postgresql-tutorial/postgresql-nullif
           title: NULLIF
         - slug: postgresql-tutorial/postgresql-cast
           title: CAST
+    - section: Performance
+      items:
+        - slug: postgresql-tutorial/postgresql-explain
+          title: EXPLAIN
+    - section: Useful Techniques
+      items:
+        - slug: postgresql-tutorial/postgresql-server-and-database-objects
+          title: Server and Database Objects
+        - slug: postgresql-tutorial/compare-two-tables-in-postgresql
+          title: Compare Two Tables
+        - slug: postgresql-tutorial/postgresql-generate_series
+          title: generate_series() Function
+        - slug: postgresql-tutorial/postgresql-random-range
+          title: Random Number in Range
+        - slug: postgresql-tutorial/postgresql-vs-mysql
+          title: PostgreSQL vs. MySQL
 - nav: Administration
   slug: postgresql-administration
   title: Administration
@@ -261,6 +289,8 @@
           title: Copy a Database
         - slug: postgresql-administration/postgresql-database-indexes-table-size
           title: Get Database Object Sizes
+        - slug: postgresql-administration/postgres-change-database-owner
+          title: Change Database Owner
     - section: Manage Schemas
       items:
         - slug: postgresql-administration/postgresql-schema
@@ -299,6 +329,8 @@
           title: CURRENT_USER
         - slug: postgresql-administration/postgresql-list-users
           title: List Roles
+        - slug: postgresql-administration/postgresql-change-password
+          title: Change Password
         - slug: postgresql-administration/create-superuser-postgresql
           title: Create Superusers
         - slug: postgresql-administration/postgresql-row-level-security
@@ -329,6 +361,12 @@
           title: Get PostgreSQL Version
         - slug: postgresql-administration/postgresql-uptime
           title: Check PostgreSQL Uptime
+        - slug: postgresql-administration/postgresql-password-file-pgpass
+          title: Password File (.pgpass)
+        - slug: postgresql-administration/postgresql-pg_terminate_backend
+          title: Terminate Backend Connections
+        - slug: postgresql-administration/uninstall-postgresql-ubuntu
+          title: Uninstall PostgreSQL on Ubuntu
 - nav: PostgreSQL 18
   slug: postgresql-18-new-features
   title: PostgreSQL 18
@@ -450,6 +488,8 @@
           title: Disable Triggers
         - slug: postgresql-triggers/enable-triggers
           title: Enable Triggers
+        - slug: postgresql-triggers/how-to-list-all-triggers-in-postgresql
+          title: List All Triggers
         - slug: postgresql-triggers/postgresql-event-trigger
           title: Event Triggers
         - slug: postgresql-triggers/postgresql-trigger-when-condition
@@ -626,6 +666,8 @@
           title: jsonb_object_agg
         - slug: postgresql-json-functions/postgresql-jsonb_object_keys
           title: jsonb_object_keys
+        - slug: postgresql-json-functions/postgresql-json-path
+          title: JSON Path
         - slug: postgresql-json-functions/postgresql-jsonb_path_exists
           title: jsonb_path_exists
         - slug: postgresql-json-functions/postgresql-jsonb_path_query
@@ -642,6 +684,10 @@
           title: jsonb_strip_nulls
         - slug: postgresql-json-functions/postgresql-jsonb_to_record
           title: jsonb_to_record
+        - slug: postgresql-json-functions/postgresql-jsonb_populate_record
+          title: jsonb_populate_record
+        - slug: postgresql-json-functions/postgresql-jsonb_populate_recordset
+          title: jsonb_populate_recordset
         - slug: postgresql-json-functions/postgresql-jsonb_typeof
           title: jsonb_typeof
         - slug: postgresql-json-functions/postgresql-row_to_json
@@ -663,12 +709,22 @@
           title: DIV
         - slug: postgresql-math-functions/postgresql-exp
           title: EXP
+        - slug: postgresql-math-functions/postgresql-factorial
+          title: FACTORIAL
         - slug: postgresql-math-functions/postgresql-floor
           title: FLOOR
+        - slug: postgresql-math-functions/postgresql-gcd
+          title: GCD
+        - slug: postgresql-math-functions/postgresql-lcm
+          title: LCM
         - slug: postgresql-math-functions/postgresql-ln
           title: LN
+        - slug: postgresql-math-functions/postgresql-log
+          title: LOG
         - slug: postgresql-math-functions/postgresql-mod
           title: MOD
+        - slug: postgresql-math-functions/postgresql-min_scale
+          title: MIN_SCALE
         - slug: postgresql-math-functions/postgresql-pi-function
           title: PI
         - slug: postgresql-math-functions/postgresql-power
@@ -700,8 +756,12 @@
           title: CHR
         - slug: postgresql-string-functions/postgresql-concat-function
           title: CONCAT
+        - slug: postgresql-string-functions/postgresql-concat_ws
+          title: CONCAT_WS
         - slug: postgresql-string-functions/postgresql-format
           title: FORMAT
+        - slug: postgresql-string-functions/postgresql-initcap
+          title: INITCAP
         - slug: postgresql-string-functions/postgresql-left
           title: LEFT
         - slug: postgresql-string-functions/postgresql-length-function
@@ -720,6 +780,10 @@
           title: REGEXP_MATCHES
         - slug: postgresql-string-functions/regexp_replace
           title: REGEXP_REPLACE
+        - slug: postgresql-string-functions/postgresql-repeat
+          title: REPEAT
+        - slug: postgresql-string-functions/postgresql-reverse
+          title: REVERSE
         - slug: postgresql-string-functions/postgresql-replace
           title: REPLACE
         - slug: postgresql-string-functions/postgresql-right

@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-01-29T01:36:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL CHR() Function'
-  slug: 'postgresql-string-functions/postgresql-chr'
+  title: 'PostgreSQL FORMAT() Function'
+  slug: 'postgresql-string-functions/postgresql-format'
 nextLink:
-  title: 'PostgreSQL POSITION() Function'
-  slug: 'postgresql-string-functions/postgresql-position'
+  title: 'PostgreSQL LEFT() Function'
+  slug: 'postgresql-string-functions/postgresql-left'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `INITCAP()` function to convert a string to a proper case.
