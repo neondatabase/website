@@ -94,7 +94,7 @@ Now that the integration is set up, trigger a new deployment by navigating to th
 
 ![Vercel redeploy button](/docs/guides/vercel_redeploy_button.png)
 
-### Configure Redirect URLs
+### Configure redirect URLs
 
 To enable proper redirection after authentication, you must configure the allowed redirect URLs in the **Neon Console** for your production environment. For preview deployments, the Vercel–Neon integration automatically manages this configuration using the Vercel preview URLs, so this step is required only for production.
 
@@ -153,7 +153,7 @@ Learn more in [Creating Branches in the Neon Console](/docs/manage/branches#crea
 
 ### Modify the database schema
 
-The current message board schema does not support moderation. To implement this,we need to track the approval status of each message.
+The current message board schema does not support moderation. To implement this, you will add a new column `is_approved` to the `messages` table to track whether a message has been approved by an admin.
 
 Add a new column `is_approved` to the `messages` table in `app/db/schema.ts`:
 
@@ -197,7 +197,7 @@ The current setup in the starter repository already includes this step, so no ch
 
 </details>
 
-### Implement Role-Based Logic
+### Implement role-based logic
 
 Update `app/actions.ts` to check the user's role. If they are an admin, their messages are auto-approved; otherwise, they require approval.
 
@@ -382,7 +382,7 @@ The UI checks the user's role using `data?.user.role`. If the user is an admin, 
 
 </details>
 
-## Test in Preview Deployment
+## Test in preview deployment
 
 Now that you have implemented the moderation feature, it's time to test it in a safe environment using Vercel Preview Deployments and Neon Branching.
 
@@ -400,7 +400,7 @@ git push origin feat/moderation-queue
 
 Navigate to your forked repository on GitHub and open a Pull Request (PR) from the `feat/moderation-queue` branch to `main`.
 
-### Automated Provisioning
+### Automated provisioning
 
 When you open the Pull Request, the Neon-Vercel integration kicks in:
 
@@ -408,22 +408,22 @@ When you open the Pull Request, the Neon-Vercel integration kicks in:
 2.  **Vercel** deploys the preview, injecting the connection string and `NEON_AUTH_BASE_URL` specific to that branch.
 3.  **Build Step:** Vercel runs `drizzle-kit migrate` as part of the build step, adding the `is_approved` column to the **preview database only**.
 
-### Verify in Preview
+### Verify in the Preview Environment
 
 Open the Vercel Preview URL provided in the PR comment ([see example](https://github.com/dhanushreddy291/vercel-neon-auth-branching/pull/1#issuecomment-3755610791)).
 
-**Verify Data Integrity**
+**Verify data integrity**
 
 1.  Log in as an existing user from production.
 2.  **Verify:** All previous messages from production are visible in the Live feed. The data integrity is intact.
 
-**Test the Regular User**
+**Test the regular user**
 
 1.  Log in as regular user.
 2.  Post a message: "Can anyone see this?"
 3.  **Verify:** The message should **not** appear in the "Messages" list. It is successfully caught in the pending state for moderation.
 
-**Test the Admin Flow**
+**Test the admin flow**
 To test the admin functionality, you need to promote a user to `admin` role in the Neon Console for the preview branch.
 
 1.  Go to the **Neon Console**.
@@ -462,13 +462,13 @@ You have successfully implemented a sensitive authorization feature and tested i
 
 By combining Vercel’s preview deployments with Neon’s Auth‑aware branching, you created a realistic sandbox. No need to mock data, seed test accounts, or worry about corrupting production logs. What happens in a preview branch stays in that branch, giving your team the confidence to ship features faster and safer.
 
-### Other Use Cases
+### Other use cases
 
 Although this guide demonstrated the workflow with a simple message board, the same approach applies to many scenarios in authentication and user management:
 
 - **Refactoring RBAC:** Safely simulate new permission models against your full user base to catch edge cases before rollout.
-- **Destructive Flows:** Test sensitive actions like _Delete Account_ or _Cancel Subscription_ on real data in an isolated branch. If something goes wrong, simply discard the branch, production remains untouched.
-- **Penetration Testing:** Provide auditors with a dedicated branch of your production environment to run security tests (e.g., SQL injection, privilege escalation) without risking downtime or data loss.
+- **Destructive flows:** Test sensitive actions like _Delete Account_ or _Cancel Subscription_ on real data in an isolated branch. If something goes wrong, simply discard the branch, production remains untouched.
+- **Penetration testing:** Provide auditors with a dedicated branch of your production environment to run security tests (e.g., SQL injection, privilege escalation) without risking downtime or data loss.
 
 ## Resources
 
