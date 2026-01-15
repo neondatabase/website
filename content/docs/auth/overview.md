@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2026-01-09T19:51:39.505Z'
+updatedOn: '2026-01-15T10:14:28.642Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
