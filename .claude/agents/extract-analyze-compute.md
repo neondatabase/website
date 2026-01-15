@@ -2,6 +2,12 @@
 
 You are an autonomous agent that extracts Compute PRs and analyzes them for changelog inclusion.
 
+## Token Budget Management
+
+- **Maximum turns:** 8 (prevents runaway analysis)
+- **Output target:** <5000 words in analysis report
+- **Priority:** If reaching turn limit, prioritize INCLUDE section over EXCLUDE details
+
 ## Your Task
 
 1. Extract Compute PRs from `release-compute` branch for the date range
@@ -319,8 +325,10 @@ The detailed analysis file (`compute_analysis_report.md`) must follow this struc
    - **Confidence:** HIGH/MEDIUM/LOW (be honest!)
    - **Reasoning:** Why you think it's customer-facing
    - **Impact:** HIGH/MEDIUM/LOW
-   - **Suggested Title:** (for HIGH confidence H2-worthy items only) Benefit-focused title
-   - **Draft H2 Description:** (for HIGH confidence H2-worthy items only) Full draft following golden examples
+
+   **MANDATORY IF HIGH CONFIDENCE H2-WORTHY:**
+   - **Suggested Title:** Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** Full draft following golden examples (include version numbers, specific capabilities, multiple paragraphs if needed)
 
 3. **EXCLUDE section:**
 
@@ -439,3 +447,14 @@ If you see audit logging improvements for a specific Postgres version (e.g., pga
 ```
 **POTENTIAL LARGER STORY:** Audit logging improvements for Postgres 18 may indicate HIPAA compliance availability announcement. Check with team for full context.
 ```
+
+---
+
+## Before Returning to Orchestrator
+
+Verify your analysis report contains:
+- [ ] Every HIGH confidence H2-recommended PR has a "Draft H2 Description" (not just "Suggested Title")
+- [ ] Every draft follows golden example patterns (read .claude/golden_changelog_examples.md)
+- [ ] Every draft includes specific details (Postgres versions, extension capabilities, version numbers)
+- [ ] All documentation links are suggestions only (orchestrator will validate)
+- [ ] Confidence levels are honestly assessed (HIGH/MEDIUM/LOW)

@@ -118,6 +118,34 @@ if [ "$PROCESS_STORAGE" = "true" ] || [ "$PROCESS_COMPUTE" = "true" ]; then
     echo "⚠️  Hadron repo not found at $HADRON_REPO"
   fi
 fi
+
+# Fetch latest changes from all repositories
+echo ""
+echo "📥 Fetching latest changes from repositories..."
+
+if [ "$PROCESS_CONSOLE" = "true" ] && [ -d "$NEON_CLOUD_REPO" ]; then
+  echo "Updating Console..."
+  (cd "$NEON_CLOUD_REPO" && git fetch origin)
+fi
+
+if [ "$PROCESS_MCP" = "true" ] && [ -d "$MCP_REPO" ]; then
+  echo "Updating MCP Server..."
+  (cd "$MCP_REPO" && git fetch origin)
+fi
+
+if [ "$PROCESS_CLI" = "true" ] && [ -d "$CLI_REPO" ]; then
+  echo "Updating CLI..."
+  (cd "$CLI_REPO" && git fetch origin)
+fi
+
+if [ "$PROCESS_STORAGE" = "true" ] || [ "$PROCESS_COMPUTE" = "true" ]; then
+  if [ -d "$HADRON_REPO" ]; then
+    echo "Updating Hadron..."
+    (cd "$HADRON_REPO" && git fetch origin)
+  fi
+fi
+
+echo "✅ All repositories updated"
 ```
 
 ## Step 4: Launch Extraction & Analysis Agents
@@ -164,6 +192,7 @@ Task: extract-analyze-console
 Description: Extract and analyze Console PRs
 Prompt: [formatted prompt with env vars as above]
 Subagent: general-purpose
+Model: haiku
 ```
 
 **If PROCESS_MCP:**
@@ -188,6 +217,7 @@ Task: extract-analyze-storage
 Description: Extract and analyze Storage PRs
 Prompt: [formatted prompt with env vars]
 Subagent: general-purpose
+Model: haiku
 ```
 
 **If PROCESS_COMPUTE:**
@@ -199,7 +229,7 @@ Subagent: general-purpose
 Model: haiku
 ```
 
-**Note:** Compute uses Haiku model for faster, more efficient analysis with lower token usage.
+**Note:** Console, Storage, and Compute use Haiku model for faster, more efficient analysis with lower token usage (they process high PR volumes).
 
 **Example of launching 3 agents in parallel:**
 ```
@@ -362,19 +392,44 @@ else
 fi
 ```
 
-**If changelog exists:**
-- Read the existing content first
-- Identify what's already documented
-- Add new items from agent analysis that aren't already covered
-- Preserve existing content that agents didn't find (pricing changes, quota updates, etc.)
-- Improve/polish existing descriptions using agent drafts where applicable
+**IMPORTANT: Different workflows based on whether file exists:**
 
-**If creating new:**
-- Generate fresh changelog from agent recommendations
+**If creating NEW changelog:**
+1. Read all agent analysis report files
+2. Extract all Draft H2 Descriptions from agents
+3. Copy agent drafts verbatim into new changelog
+4. Follow golden examples for structure
+
+**If UPDATING existing changelog:**
+1. Read the existing changelog file first
+2. Identify what sections/items already exist
+3. Read all agent analysis report files
+4. For each agent-recommended item:
+   - If it's NOT in the existing changelog → Add it using agent's draft
+   - If similar content exists → Leave existing content as-is (human already edited it)
+   - If agent draft is better → Replace with agent draft (preserve human intent)
+5. Add a comment at the top: `<!-- Updated with agent findings from [DATE] run -->`
+
+**Decision rule:** When in doubt, preserve human-edited content over agent drafts. Agents are finding NEW items since the last run, not re-analyzing everything.
 
 ### Drafting Process
 
 Read the golden examples file: `.claude/golden_changelog_examples.md`
+
+### CRITICAL: Read Agent Analysis Files
+
+Before drafting the changelog, you MUST read each agent's detailed analysis report to access their Draft H2 Descriptions:
+
+```bash
+# Read each agent's analysis report
+cat "$OUTPUT_DIR/console_analysis_report.md"
+cat "$OUTPUT_DIR/mcp_analysis_report.md"
+cat "$OUTPUT_DIR/cli_analysis_report.md"
+cat "$OUTPUT_DIR/storage_analysis_report.md"
+cat "$OUTPUT_DIR/compute_analysis_report.md"
+```
+
+These files contain the Draft H2 Descriptions that agents wrote. The brief summaries you received in Step 5 do NOT include the draft descriptions.
 
 1. **Read golden examples** to understand voice and structure patterns
 
@@ -422,6 +477,17 @@ Read the golden examples file: `.claude/golden_changelog_examples.md`
    - Do not skip H2 items without explicit reason
    - Extension updates and capacity changes are always H2-worthy
    - All links have been verified to exist
+
+### Pre-Writing Validation Checklist
+
+Before writing the changelog file, verify:
+
+- [ ] I have read all 5 agent analysis report files above
+- [ ] I have extracted each "Draft H2 Description" from agent reports
+- [ ] I have the agent's "Suggested Title" for each H2-worthy item
+- [ ] For items I'm combining across repos, I have drafts from both agents
+- [ ] I will copy agent drafts verbatim (edit only for typos/polish)
+- [ ] I will NOT rewrite agent drafts from scratch
 
 9. **Changelog structure:**
 
