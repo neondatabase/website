@@ -526,7 +526,53 @@ For more information, see [link from agent draft or relevant docs].
 - Agent provides draft with specific UI pages → Keep those specifics
 - Agent recommends H2 → Include as H2, don't demote to Fixes
 
-## Step 9: Generate Summary
+## Step 9: Commit Changelog (Optional)
+
+After generating the changelog draft, ask the user if they want to create a branch and commit it:
+
+**Prompt:** "Changelog generated at `content/changelog/${PUBLICATION_DATE}.md`. Would you like me to create a new branch and commit it? (Y/n)"
+
+If the user confirms (Y or yes), execute the following:
+
+```bash
+# Save current branch
+CURRENT_BRANCH=$(git branch --show-current)
+
+# Create and switch to new changelog branch from main
+git checkout main
+git checkout -b changelog-${PUBLICATION_DATE}
+
+# Add and commit the changelog
+git add content/changelog/${PUBLICATION_DATE}.md
+git commit -m "docs: add changelog for ${PUBLICATION_DATE}
+
+[Brief summary of major updates from H2 entries]
+
+Generated using /triage-changelog command.
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+
+# Return to original branch
+git checkout "$CURRENT_BRANCH"
+
+echo ""
+echo "✅ Changelog committed to branch: changelog-${PUBLICATION_DATE}"
+echo ""
+echo "📋 Next steps:"
+echo "1. Switch to the changelog branch: git checkout changelog-${PUBLICATION_DATE}"
+echo "2. Review the changelog: content/changelog/${PUBLICATION_DATE}.md"
+echo "3. Add screenshots to /public/docs/changelog/ if needed"
+echo "4. Validate documentation links"
+echo "5. Push branch: git push -u origin changelog-${PUBLICATION_DATE}"
+echo "6. Create PR when ready"
+```
+
+If the user declines, inform them:
+- The changelog file is at `content/changelog/${PUBLICATION_DATE}.md`
+- They can commit it manually when ready
+- The triage report is at `${OUTPUT_DIR}/triage_report.md`
+
+## Step 10: Generate Summary
 
 Output a final summary for the user:
 
@@ -548,10 +594,10 @@ Output a final summary for the user:
 📋 Next Steps:
 1. Review triage report for accuracy
 2. Review and edit changelog draft
-3. Update title after reviewing content
-4. Add screenshots to /public/docs/changelog/
-5. Run through Grammarly
-6. Check links
+3. If you created a branch (Step 9), switch to it and push
+4. Update title after reviewing content
+5. Add screenshots to /public/docs/changelog/
+6. Validate all documentation links
 7. Create PR and request reviews
 8. Merge and publish on Friday
 ```
