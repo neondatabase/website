@@ -14,9 +14,11 @@ import leftPatternLG from './images/left-pattern-lg.png';
 import leftPatternSM from './images/left-pattern-sm.png';
 import leftPatternXL from './images/left-pattern-xl.png';
 import leftPatternXS from './images/left-pattern-xs.png';
+import leftPattern from './images/left-pattern.png';
 import rightPatternLG from './images/right-pattern-lg.png';
-import rightImageSM from './images/right-pattern-sm.png';
-import rightImageXL from './images/right-pattern-xl.png';
+import rightPatternSM from './images/right-pattern-sm.png';
+import rightPatternXL from './images/right-pattern-xl.png';
+import rightPattern from './images/right-pattern.png';
 
 const Pattern = ({ src, width, isRight, className }) => (
   <Image
@@ -79,12 +81,14 @@ const TopbarClient = ({ text, link }) => {
         <ChevronIcon className="origin-center -rotate-90 text-black-pure opacity-40 dark:text-white dark:opacity-60" />
       </div>
 
-      <Pattern className="xl:hidden" src={leftPatternXL} width={500} />
-      <Pattern className="xl:hidden" src={rightImageXL} width={500} isRight />
+      <Pattern className="2xl:hidden" src={leftPattern} width={500} />
+      <Pattern className="2xl:hidden" src={rightPattern} width={500} isRight />
+      <Pattern className="hidden 2xl:block xl:hidden" src={leftPatternXL} width={340} />
+      <Pattern className="hidden 2xl:block xl:hidden" src={rightPatternXL} width={260} isRight />
       <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} width={190} />
       <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} width={150} isRight />
       <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} width={230} />
-      <Pattern className="hidden lg:block md:hidden" src={rightImageSM} width={180} isRight />
+      <Pattern className="hidden lg:block md:hidden" src={rightPatternSM} width={180} isRight />
       <Pattern className="hidden md:block" src={leftPatternXS} width={150} />
     </Link>
   );
