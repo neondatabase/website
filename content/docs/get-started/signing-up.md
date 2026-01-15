@@ -211,13 +211,13 @@ Let's create a `development` branch and learn how to use the Neon CLI to manage 
 
 ## Make some sample schema changes
 
-First, let's make sure our development branch is in sync with production. This ensures we're starting from the same baseline:
+First, let's make sure our development branch is in sync with `production`. This ensures we're starting from the same baseline:
 
 ```bash
 neon branches reset development --parent --project-id cool-forest-12345678
 ```
 
-Now that our development branch matches production, we can make some changes. The `playing_with_neon` table from production is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
+Now that our `development` branch matches `production`, we can make some changes. The `playing_with_neon` table from `production` is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
 
 You can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
@@ -332,7 +332,7 @@ After experimenting with changes in your development branch, let's now reset the
 
 [Branch reset](/docs/guides/reset-from-parent) functions much like a `git reset –hard parent` in traditional Git workflows.
 
-Resetting your development branches to your production branch ensures that all changes are discarded, and your branch reflects the latest stable state of `production`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
+Resetting your development branches to the `production` branch ensures that all changes are discarded, and your branch reflects the latest stable state of `production`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
 
 You can reset to parent from the **Branches** page of the Neon Console, but here we'll use the Neon CLI.
 
