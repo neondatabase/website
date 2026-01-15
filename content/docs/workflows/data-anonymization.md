@@ -92,6 +92,10 @@ From the **Data Masking** page:
 For email columns with unique constraints, use **Random Unique Email**, which generates UUID-based emails that maintain uniqueness while preserving the email format.
 </Admonition>
 
+<Admonition type="note">
+Foreign key columns cannot be masked directly to maintain referential integrity. If you attempt to mask a foreign key column, the Console will display an alert with a "Go to primary key" action that navigates to the corresponding primary key column where you can apply masking rules.
+</Admonition>
+
 3. Repeat for all sensitive columns.
 4. When you are ready, click **Apply masking rules** to start the anonymization job. You can monitor its progress on this page or via the [API](#get-anonymization-status).
 
@@ -165,6 +169,7 @@ The branch is unavailable for connections while anonymization is in progress.
 - Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
 - Branch is unavailable during anonymization.
 - Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
+- **Foreign key columns cannot be masked directly.** To maintain referential integrity, you should mask the corresponding primary key column instead. The Console displays an alert with a "Go to primary key" action that navigates to the relevant primary key column.
 - Anonymized branches are not currently supported for projects with [IP restrictions](/docs/introduction/ip-allow) or [private networking](/docs/guides/neon-private-networking) enabled.
 - The Console provides a curated subset of masking functions - use the API for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
