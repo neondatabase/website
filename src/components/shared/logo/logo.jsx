@@ -8,8 +8,10 @@ import { useState } from 'react';
 
 import LINKS from 'constants/links';
 import useContextMenu from 'hooks/use-context-menu';
-import LogoIcon from 'icons/logo.inline.svg';
-import logoSvg from 'images/logo.svg';
+import LogoDarkIcon from 'icons/logo-dark.inline.svg';
+import LogoLightIcon from 'icons/logo-light.inline.svg';
+import logoDarkSvg from 'images/logo-dark.svg';
+import logoLightSvg from 'images/logo-light.svg';
 
 import Link from '../link';
 
@@ -17,7 +19,10 @@ import CheckIcon from './images/check.inline.svg';
 
 const copySvgToClipboard = async () => {
   try {
-    const response = await fetch(logoSvg);
+    const isDarkMode = document.documentElement.classList.contains('dark');
+    const logoToUse = isDarkMode ? logoDarkSvg : logoLightSvg;
+
+    const response = await fetch(logoToUse);
     const svgContent = await response.text();
     copyToClipboard(svgContent);
   } catch (error) {
@@ -62,7 +67,12 @@ const Logo = ({ className = null, width, height, isHeader = false }) => {
         onContextMenu={isHeader ? handleContextMenu : undefined}
       >
         <span className="sr-only">Neon</span>
-        <LogoIcon className={className} width={width} height={height} />
+        <LogoLightIcon className={clsx('dark:hidden', className)} width={width} height={height} />
+        <LogoDarkIcon
+          className={clsx('hidden dark:block', className)}
+          width={width}
+          height={height}
+        />
       </Link>
       {isHeader && clicked && (
         <div
