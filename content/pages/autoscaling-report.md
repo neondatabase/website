@@ -124,15 +124,14 @@ Across the entire Neon platform in 2025, we modeled the savings and quantity of 
 In smaller databases, the burst capacity scaling pattern means even the minimum set of resources is sufficient to run most of the database load.
 <AutoscalingChart title="Small Database Burst Capacity Pattern" datasetKeys={["burst_1d_small_actual", "burst_1d_small"]} autoscalingOnly={true} showStats={false} compact={true}/>
 For these, we modelled the provisioned costs by provisioning them at their steady-state size on Neon _(i.e. 0.25 CU in the example above)_ and tallying up the number of spikes as "incidents" - these are the points where the operator would experience performance degradations or outages on the provisioned platform.
-The results show 
+The results show
 
 #### Large Databases
 
 For larger databases, burst capacity means the operator has intentionally set a higher minimum CU size, typically to guarantee a baseline performance at all times.
 <AutoscalingChart title="Large Database Burst Capacity Pattern" datasetKeys={["actual_compute_1d", "autoscaling_high_min_1d"]} autoscalingOnly={true} showStats={false} compact={true}/>
 For these we followed the AWS recommendations of provisioning at peak load + 20%
-The results: 
-
+The results:
 
 ### Burst Capacity Example
 
@@ -147,7 +146,7 @@ But more importantly, because we have under-provisioned by 50%, we can expect th
 
 #### Checking the math with actual RDS instances
 
-Our estimated provisioned cost of $23.40 is spot-on: To get a 2GB RAM database on RDS we would need to spend $23.36/month on the [`db.t4g.small`](https://instances.vantage.sh/aws/rds/db.t4g.small?currency=USD&duration=monthly) 
+Our estimated provisioned cost of $23.40 is spot-on: To get a 2GB RAM database on RDS we would need to spend $23.36/month on the [`db.t4g.small`](https://instances.vantage.sh/aws/rds/db.t4g.small?currency=USD&duration=monthly)
 
 ---
 
@@ -162,7 +161,6 @@ This pattern shows up mostly in non-production databases: Dev and staging DB's t
 ### Scale to Zero Data
 
 ...
-
 
 ### Scale to Zero Example
 
