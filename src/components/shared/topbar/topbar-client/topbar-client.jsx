@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import ImageComponent from 'next/image';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 
@@ -10,18 +10,18 @@ import { TopbarContext } from 'contexts/topbar-context';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
-import leftImageLG from './images/left-pattern-lg.png';
-import leftImageSM from './images/left-pattern-sm.png';
-import leftImageXL from './images/left-pattern-xl.png';
-import leftImageXS from './images/left-pattern-xs.png';
-import rightImageLG from './images/right-pattern-lg.png';
+import leftPatternLG from './images/left-pattern-lg.png';
+import leftPatternSM from './images/left-pattern-sm.png';
+import leftPatternXL from './images/left-pattern-xl.png';
+import leftPatternXS from './images/left-pattern-xs.png';
+import rightPatternLG from './images/right-pattern-lg.png';
 import rightImageSM from './images/right-pattern-sm.png';
 import rightImageXL from './images/right-pattern-xl.png';
 
-const Image = ({ src, width, isRight, className }) => (
-  <ImageComponent
+const Pattern = ({ src, width, isRight, className }) => (
+  <Image
     className={clsx(
-      'pointer-events-none absolute top-0 z-0',
+      'pointer-events-none absolute top-0 z-0 h-full',
       isRight ? 'right-0' : 'left-0',
       className
     )}
@@ -34,7 +34,7 @@ const Image = ({ src, width, isRight, className }) => (
   />
 );
 
-Image.propTypes = {
+Pattern.propTypes = {
   src: PropTypes.string.isRequired,
   width: PropTypes.number.isRequired,
   className: PropTypes.string,
@@ -65,10 +65,11 @@ const TopbarClient = ({ text, link }) => {
       target={link.target || undefined}
       onClick={() => sendGtagEvent('click_announcement_banner')}
     >
-      <div className="-mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
+      <div className="relative z-10 -mb-px grid grid-cols-[1fr_auto] gap-x-1.5">
         <span
           className={clsx(
             'truncate text-sm font-medium leading-none tracking-extra-tight',
+            'xl:max-w-[790px] lg:max-w-[482px] sm:max-w-[calc(100vw-64px)]',
             'text-black-pure transition-colors duration-200 group-hover:text-gray-new-40',
             'dark:text-white group-hover:dark:text-gray-new-70'
           )}
@@ -78,13 +79,13 @@ const TopbarClient = ({ text, link }) => {
         <ChevronIcon className="origin-center -rotate-90 text-black-pure opacity-40 dark:text-white dark:opacity-60" />
       </div>
 
-      <Image className="xl:hidden" src={leftImageXL} width={500} />
-      <Image className="xl:hidden" src={rightImageXL} width={500} isRight />
-      <Image className="hidden xl:block lg:hidden" src={leftImageLG} width={320} />
-      <Image className="hidden xl:block lg:hidden" src={rightImageLG} width={275} isRight />
-      <Image className="hidden lg:block md:hidden" src={leftImageSM} width={250} />
-      <Image className="hidden lg:block md:hidden" src={rightImageSM} width={180} isRight />
-      <Image className="hidden md:block" src={leftImageXS} width={150} />
+      <Pattern className="xl:hidden" src={leftPatternXL} width={500} />
+      <Pattern className="xl:hidden" src={rightImageXL} width={500} isRight />
+      <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} width={190} />
+      <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} width={150} isRight />
+      <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} width={230} />
+      <Pattern className="hidden lg:block md:hidden" src={rightImageSM} width={180} isRight />
+      <Pattern className="hidden md:block" src={leftPatternXS} width={150} />
     </Link>
   );
 };
