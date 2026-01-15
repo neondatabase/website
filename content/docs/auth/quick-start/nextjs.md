@@ -146,8 +146,6 @@ export const authClient = createAuthClient();
 Copy and paste following code in `lib/auth/server.ts` file:
 
 ```tsx
-'use server';
-
 import { createAuthServer } from '@neondatabase/auth/next/server';
 
 export const authServer = createAuthServer();
