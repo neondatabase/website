@@ -100,8 +100,8 @@ export default {
   certHIPAA: '/docs/security/hipaa',
 
   // Other
-    status: 'https://neonstatus.com',
-    cdn: 'https://cdn.neonapi.io',
+  status: 'https://neonstatus.com',
+  cdn: 'https://cdn.neonapi.io',
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
