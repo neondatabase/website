@@ -22,10 +22,11 @@
   margin-left: 1.5rem;
   width: 64px;
   height: 18px;
-  background: url('/inkeep/images/neon-logo.svg');
+  background: url('/inkeep/images/neon-logo.svg?updated=2025-01-15');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  filter: grayscale(1);
 }
 
 .ikp-tagline:before {
@@ -45,6 +46,11 @@
   }
 
   .ikp-tagline:after {
-    opacity: 0.6;
+    background: url('/inkeep/images/neon-white-logo.svg?updated=2025-01-15');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: grayscale(1);
+    opacity: 0.48;
   }
 }
