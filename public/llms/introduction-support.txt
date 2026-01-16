@@ -50,7 +50,7 @@ All Neon users have access to the [Neon Discord Server](https://discord.gg/92vNT
 
 Neon AI chat assistance is available to all Neon users. You can access it from these locations:
 
-- **Neon Console**: Select the **Get help** option from the help menu (`?`) in the Neon Console.
+- **Neon Console**: Select **Ask AI assistant** from the Resources menu (`?`) in the Neon Console.
 - **Neon documentation**: Toggle **Ask Neon AI** on the [Neon documentation](https://neon.com/docs/introduction) site
 - **Discord**: Join the **#gpt-help** channel on the [Neon Discord server](https://discord.gg/92vNTzKDGp)
 
@@ -60,17 +60,20 @@ Neon AI Chat assistants are updated regularly and built on various sources the N
 
 ### Support tickets
 
-Paying users can raise a support ticket in the Neon Console, via the Neon AI chat assistant, by asking it to create a support ticket.
+Paying users can raise a support ticket in the Neon Console. You can access support in two ways:
+
+1. **Direct access**: Select **Request Support** from the Resources menu (`?`) at the top of the Neon Console
+2. **Via AI assistant**: Select **Ask AI assistant** from the Resources menu, ask your question, and if the assistant is unable to resolve the problem, ask it to create a support ticket
+
+Support options available based on your plan:
 
 - **Launch** plan users can open support tickets for **billing-related issues only**
 - **Scale** plan users can open a support ticket for any Neon issue
 - **Business** and **Production** plan users can open a support ticket for any Neon issue with SLA response times
 
-Select **Get help** from the **?** menu at the top of the Neon Console to open the AI chat assistant.
+   **Tip**: To ensure you receive responses from our support team, please whitelist the `help@databricks.com` email address in your email client. This prevents support responses from being filtered to your spam or junk folder.
 
 
-
-Ask your question or describe your issue. If the assistant is unable to resolve the problem, ask it to create a support ticket.
 
 ### Slack channel
 
@@ -117,7 +120,7 @@ An explanation of each severity level is provided below.
 
 Neon provides Support for eligible plans under the terms of this Support Policy as long as the Customer maintains a current subscription to one of the following Neon plans: Launch, Scale. For more information, see [plans](https://neon.com/docs/introduction/plans). "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development. Support for Free plan users is provided through [Discord](https://neon.com/discord). See Neon [plans](https://neon.com/docs/introduction/plans) and [pricing](https://neon.com/pricing) for more information about our plans.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](https://neon.com/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](https://neon.com/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 
@@ -152,7 +155,7 @@ Details: **Enterprise support (legacy)**
 
 Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. For more information, see [legacy plans](https://neon.com/docs/introduction/legacy-plans#enterprise-plan-legacy). "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
-Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [terms of service](https://neon.com/terms-of-service).
+Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](https://neon.com/terms-of-service).
 
 We provide updates regarding any disruption in our Services on our [status page](https://neonstatus.com/). Please check this source first before seeking support.
 

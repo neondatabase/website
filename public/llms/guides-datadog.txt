@@ -31,10 +31,11 @@ The integration exports [a comprehensive set of metrics](https://neon.com/docs/g
 - **Database size** &#8212; Monitors total size of all databases in bytes.
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
+- **PgBouncer metrics** &#8212; Tracks connection pooling metrics including client and server connections.
 
 ### Postgres logs
 
-**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: The **Postgres logs export** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 The Neon Datadog integration can forward Postgres logs to your Datadog account. These logs provide visibility into database activity, errors, and performance. See [Export Postgres logs to Datadog](https://neon.com/docs/guides/datadog#export-postgres-logs-to-datadog) for details.
 
@@ -658,7 +659,7 @@ Details: Copy JSON configuration
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, and compute metrics (CPU and memory usage). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](https://neon.com/docs/reference/metrics-logs).
+Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](https://neon.com/docs/reference/metrics-logs).
 
 ## Export Postgres logs to Datadog
 

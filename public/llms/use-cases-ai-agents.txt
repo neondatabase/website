@@ -1,6 +1,6 @@
 # Neon for AI Agent Platforms
 
-> The document "Neon for AI Agent Platforms" outlines how Neon's serverless Postgres architecture supports AI agent platforms by providing instant provisioning, autoscaling, and integrated services like Auth and a PostgREST-compatible Data API, enabling efficient and scalable backend management for developers.
+> This document outlines Neon's serverless Postgres architecture tailored for AI agent platforms, highlighting its instant provisioning, autoscaling, and integrated services like Auth and a Data API, enabling developers to manage large-scale, efficient, and programmable backends.
 
 ## Source
 

@@ -34,7 +34,7 @@ const SubItem = ({ icon, title, slug, basePath }) => {
   return (
     <Link
       className={clsx(
-        'flex items-center gap-2 leading-none tracking-tight transition-colors duration-200',
+        'flex items-center gap-2 rounded-sm leading-none tracking-tight transition-colors duration-200',
         'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white'
       )}
       to={externalSlug || websiteSlug || docSlug}
@@ -81,7 +81,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       <LinkTag
         className={clsx(
           'relative flex h-full items-center gap-1',
-          'whitespace-nowrap text-sm font-medium tracking-tight',
+          'whitespace-nowrap rounded-sm text-sm font-medium tracking-tight',
           'transition-colors duration-200',
           'hover:text-black-new group-hover:text-black-new',
           'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',
@@ -108,7 +108,8 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
             'absolute -left-5 top-[90%] z-10',
             'pointer-events-none opacity-0',
             'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
+            'focus-within:pointer-events-auto focus-within:visible focus-within:opacity-100 focus-within:[transform:none]'
           )}
         >
           <ul

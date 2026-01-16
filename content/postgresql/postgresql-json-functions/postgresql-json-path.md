@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-03-16T02:17:02+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL row_to_json() Function'
-  slug: 'postgresql-json-functions/postgresql-row_to_json'
+  title: 'PostgreSQL jsonb_object_keys() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_object_keys'
 nextLink:
-  title: 'PostgreSQL jsonb_path_query() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_path_query'
+  title: 'PostgreSQL jsonb_path_exists() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_path_exists'
 ---
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL JSON path and how to use it to locate an element within a JSON document.

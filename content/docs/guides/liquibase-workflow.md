@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2026-01-09T15:57:09.719Z'
+updatedOn: '2026-01-15T23:54:00.607Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -63,7 +63,7 @@ Now, let's prepare a development database in Neon by creating a development bran
 
 To create a branch:
 
-1. In the Neon Console, select **Branches**. You will see your `main` branch, where you just created your `blog` database and tables.
+1. In the Neon Console, select **Branches**. You will see your `production` branch, where you just created your `blog` database and tables.
 2. Click **New Branch** to open the branch creation dialog.
 3. Enter a name for the branch. Let's call it `feature/blog-schema`.
 4. Leave `production` selected as the parent branch. This is where you created the `blog` database.

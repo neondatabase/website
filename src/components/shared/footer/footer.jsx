@@ -2,168 +2,144 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container';
-import StatusBadge from 'components/shared/footer/status-badge';
 import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-const Footer = ({ hasThemesSupport = false, theme = null }) => {
-  const isDarkTheme = theme === 'dark';
+import StatusBadge from './status-badge';
 
-  return (
-    <footer
-      className={clsx(
-        'safe-paddings relative z-50 mt-auto dark:bg-black-pure dark:text-white',
-        'before:absolute before:left-1/2 before:top-0 before:h-px before:w-full before:max-w-[1920px] before:-translate-x-1/2 before:opacity-10 before:[mask-image:linear-gradient(90deg,transparent_0%,black_40%,black_60%,transparent_100%);] dark:before:bg-white',
-        isDarkTheme ? 'bg-black-pure before:bg-white' : 'bg-white before:bg-gray-new-10'
-      )}
-    >
-      <Container
-        className={clsx(
-          'flex justify-between gap-x-10 pb-[51px] pt-10 xl:pt-9 sm:pt-8',
-          hasThemesSupport ? 'lg:pb-16' : 'lg:pb-9 sm:pb-8'
-        )}
-        size="1344"
-      >
-        <div className="flex flex-col items-start justify-between lg:w-full lg:flex-row sm:flex-col sm:gap-y-5">
-          <div className="mb-[30px] flex grow flex-col lg:mb-0 sm:w-full sm:flex-row sm:justify-between">
-            <div className="flex grow flex-col items-start">
-              <Logo
-                className="h-8 w-[116px] lg:h-7 lg:w-auto sm:h-[26px]"
-                isDarkTheme={isDarkTheme}
-                width={116}
-                height={32}
-              />
-              <span className="mt-3 text-sm leading-none tracking-extra-tight text-gray-new-50 lg:mt-2 sm:mt-0">
-                A Databricks Company
-              </span>
-
-              <StatusBadge hasThemesSupport={hasThemesSupport} isDarkTheme={isDarkTheme} />
-              {hasThemesSupport && <ThemeSelect className="mt-7 xl:mt-6 md:mt-3" />}
-            </div>
-          </div>
-          <div className="flex flex-col gap-x-1 gap-y-3 text-[13px] leading-none tracking-extra-tight text-gray-new-40 lg:flex-row lg:self-end lg:leading-tight sm:flex-col sm:self-start">
-            <p>Made in SF and the World</p>
-            <p>
-              <span className="lg:hidden">Copyright </span>Ⓒ 2022 – 2026 Neon, LLC
-            </p>
-          </div>
+const Footer = ({ hasThemesSupport = false }) => (
+  <footer className="safe-paddings relative z-30 mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
+    <Container className="flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5" size="1920">
+      <div className="flex flex-col items-start lg:w-full">
+        <div className="mb-auto lg:mb-11">
+          <Logo className="sm:h-6" width={102} height={28} />
+          <span
+            className={clsx(
+              'mt-3.5 block whitespace-nowrap text-[13px] leading-none tracking-extra-tight',
+              'text-gray-new-40 dark:text-gray-new-60',
+              'xl:mt-3'
+            )}
+          >
+            A Databricks Company
+          </span>
         </div>
-        <div className="flex w-full max-w-[860px] justify-between xl:max-w-[700px] lg:hidden">
-          {MENUS.footer.map(({ heading, items }, index) => (
-            <div className="flex flex-col pt-3" key={index}>
-              <span
-                className={clsx(
-                  'relative text-xs font-semibold uppercase leading-none tracking-normal dark:text-white',
-                  isDarkTheme ? 'text-white' : 'text-gray-new-10'
-                )}
-              >
-                {heading}
-              </span>
-              <ul className="mt-7 flex grow flex-col gap-y-5">
-                {items.map(({ to, text, description, icon, links }, index) => {
-                  const Tag = to ? Link : 'div';
-                  const isExternalUrl = to?.startsWith('http');
-                  const hasSubmenu = links?.length > 0;
 
-                  return (
-                    <li
+        {hasThemesSupport && <ThemeSelect className="mb-8 lg:mb-6" />}
+
+        <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
+          <StatusBadge />
+          <p
+            className={clsx(
+              'flex gap-x-1 gap-y-1.5 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
+              '2xl:flex-col lg:flex-row sm:flex-col'
+            )}
+          >
+            <span>Made in SF and the World.</span>
+            <span>Copyright Ⓒ 2022 – {new Date().getFullYear()} Neon, LLC</span>
+          </p>
+        </div>
+      </div>
+
+      <div className="flex w-fit gap-x-[88px] xl:gap-x-6 lg:hidden">
+        {MENUS.footer.map(({ heading, items }, index) => (
+          <div className="grid content-start gap-y-7" key={index}>
+            <span className="text-[10px] uppercase leading-none text-gray-new-10 dark:text-white">
+              {heading}
+            </span>
+            <ul className="flex flex-col gap-y-5">
+              {items.map(({ to, text, description, icon, links }, index) => {
+                const Tag = to ? Link : 'div';
+                const isExternalUrl = to?.startsWith('http');
+                const hasSubmenu = links?.length > 0;
+
+                return (
+                  <li
+                    key={index}
+                    className={clsx(
+                      '-my-px flex min-w-[148px] py-px',
+                      hasSubmenu && 'group relative [perspective:2000px]'
+                    )}
+                  >
+                    <Tag
                       className={clsx(
-                        'flex w-fit',
-                        hasSubmenu && 'group relative [perspective:2000px]'
+                        'group/link relative -my-px flex cursor-pointer items-center whitespace-nowrap rounded-sm py-px',
+                        'text-[15px] leading-none tracking-extra-tight text-gray-new-40',
+                        'transition-colors duration-200 hover:text-black-pure',
+                        'dark:text-gray-new-60 dark:hover:text-white'
                       )}
-                      key={index}
+                      to={to}
+                      rel={isExternalUrl ? 'noopener noreferrer' : null}
+                      target={isExternalUrl ? '_blank' : null}
                     >
-                      <Tag
-                        className={clsx(
-                          'group/link relative flex items-center whitespace-nowrap text-[15px] leading-none tracking-extra-tight dark:text-gray-new-70',
-                          isDarkTheme ? 'text-gray-new-70' : 'text-gray-new-30',
-                          to && 'hover:!text-green-45',
-                          hasSubmenu && 'cursor-pointer'
-                        )}
-                        to={to}
-                        theme={isDarkTheme ? 'gray-70' : 'gray-30'}
-                        rel={isExternalUrl ? 'noopener noreferrer' : null}
-                        target={isExternalUrl ? '_blank' : null}
-                      >
-                        {icon && (
-                          <span
-                            className={clsx(
-                              icon,
-                              'inline-block dark:bg-gray-new-70',
-                              heading === 'Compliance' ? 'mr-1.5 size-3' : 'mr-2.5 size-4',
-                              isDarkTheme ? 'bg-gray-new-70' : 'bg-gray-new-30',
-                              to && 'transition-colors duration-200 group-hover/link:bg-green-45'
-                            )}
-                          />
-                        )}
-                        {text}
-                        {description && (
-                          <span
-                            className={clsx(
-                              'ml-1.5 dark:text-gray-new-40',
-                              isDarkTheme ? 'text-gray-new-40' : 'text-gray-new-70',
-                              to &&
-                                'transition-colors duration-200 group-hover/link:text-green-45/50'
-                            )}
-                          >
-                            {description}
-                          </span>
-                        )}
-                        {hasSubmenu && <ChevronIcon className="ml-1" />}
-                      </Tag>
-                      {hasSubmenu && (
-                        <div
+                      {icon && (
+                        <span
                           className={clsx(
-                            'absolute bottom-full right-0 min-w-[230px] pb-2.5',
-                            'pointer-events-none opacity-0',
-                            'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
-                            'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                            icon,
+                            'mr-2.5 inline-block size-4 bg-gray-new-30 dark:bg-gray-new-70',
+                            'group-hover/link:bg-black-pure group-hover/link:dark:bg-white'
+                          )}
+                        />
+                      )}
+                      {text}
+                      {description && (
+                        <span
+                          className={clsx(
+                            'ml-1.5 py-px text-gray-new-70 dark:text-gray-new-40',
+                            to &&
+                              'transition-colors duration-200 group-hover/link:text-gray-new-10 group-hover/link:dark:text-gray-new-90'
                           )}
                         >
-                          <ul
-                            className={clsx(
-                              'relative flex w-full flex-col gap-y-1 rounded-[14px] border px-2 py-2.5 dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]',
-                              isDarkTheme
-                                ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                                : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)]'
-                            )}
-                          >
-                            {links.map(({ text, to }, index) => (
-                              <li key={index}>
-                                <Link
-                                  className={clsx(
-                                    'relative flex items-center overflow-hidden whitespace-nowrap rounded-lg p-3 text-[15px] leading-dense transition-colors duration-300 dark:text-white dark:hover:bg-[#16181D]',
-                                    isDarkTheme
-                                      ? 'text-gray-new-90 hover:bg-[#16181D]'
-                                      : 'text-gray-new-10 hover:bg-[#F5F5F5]'
-                                  )}
-                                  to={to}
-                                >
-                                  {text}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
+                          {description}
+                        </span>
                       )}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </Container>
-    </footer>
-  );
-};
+                      {hasSubmenu && <ChevronIcon className="ml-0.5 opacity-80" />}
+                    </Tag>
+                    {hasSubmenu && (
+                      <div
+                        className={clsx(
+                          'absolute bottom-full right-0 z-50 min-w-[230px] pb-2.5',
+                          'pointer-events-none opacity-0',
+                          'origin-bottom-right transition-[opacity,transform] duration-200 [transform:rotateX(12deg)_scale(0.9)]',
+                          'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]',
+                          'group-focus-within:pointer-events-auto group-focus-within:visible group-focus-within:opacity-100 group-focus-within:[transform:none]'
+                        )}
+                      >
+                        <ul
+                          className={clsx(
+                            'flex w-full flex-col gap-y-1 border border-gray-new-80 bg-gray-new-98 p-2',
+                            'dark:border-gray-new-20 dark:bg-[#0A0A0B]',
+                            'shadow-[0px_10px_20px_0px_rgba(0,0,0,.06)] dark:shadow-[0px_8px_20px_0px_rgba(0,0,0,.4)]'
+                          )}
+                        >
+                          {links.map(({ text, to }) => (
+                            <li key={text}>
+                              <Link
+                                className="block whitespace-nowrap p-3 text-[15px] leading-dense tracking-extra-tight text-gray-new-10 transition-colors duration-200 hover:bg-gray-new-90 dark:text-gray-new-90 dark:hover:bg-gray-new-8"
+                                to={to}
+                              >
+                                {text}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </Container>
+  </footer>
+);
 
 Footer.propTypes = {
   hasThemesSupport: PropTypes.bool,
-  theme: PropTypes.oneOf(['light', 'dark']),
 };
 
 export default Footer;

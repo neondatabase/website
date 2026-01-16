@@ -18,10 +18,6 @@ vi.mock('next/server', () => ({
   },
 }));
 
-vi.mock('next-auth/jwt', () => ({
-  getToken: vi.fn(() => Promise.resolve(null)),
-}));
-
 vi.mock('app/actions', () => ({
   checkCookie: vi.fn(() => Promise.resolve(false)),
   getReferer: vi.fn(() => Promise.resolve('')),

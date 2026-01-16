@@ -5,23 +5,23 @@ subtitle: Learn how to migrate data to Neon Postgres from different database pro
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true
-updatedOn: '2026-01-09T20:37:30.845Z'
+updatedOn: '2026-01-13T18:46:54.027Z'
 ---
 
 This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
 
 <Admonition type="tip" title="Quick guidance">
-If you can't afford downtime, use [Logical Replication](/docs/guides/logical-replication-guide). For databases under 10GB with some downtime flexibility, [Import Data Assistant](/docs/import/import-data-assistant) is the easiest option. For larger databases where downtime is acceptable, choose between [pg_dump/restore](/docs/import/migrate-from-postgres) (simplest) or [pgcopydb](/docs/import/pgcopydb) (fastest).
+If you can't afford downtime, use [Logical Replication](/docs/guides/logical-replication-guide). For Postgres databases under 10GB with some downtime flexibility, [Import Data Assistant](/docs/import/import-data-assistant) is the easiest option. For larger Postgres databases where downtime is acceptable, choose between [pg_dump/restore](/docs/import/migrate-from-postgres) (simplest) or [pgcopydb](/docs/import/pgcopydb) (fastest).
 </Admonition>
 
 ## Migration methods
 
 | Method                                                        | Best For                               | Database Size | Downtime                | Technical Skill | Key Benefit                   |
 | ------------------------------------------------------------- | -------------------------------------- | ------------- | ----------------------- | --------------- | ----------------------------- |
-| [Import Data Assistant](/docs/import/import-data-assistant)   | Quick migrations                       | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
-| [pg_dump/restore](/docs/import/migrate-from-postgres)         | Standard migrations                    | Any size      | Required                | Medium          | Reliable and well-tested      |
-| [pgcopydb](/docs/import/pgcopydb)                             | Large databases                        | 10GB+         | Required                | Medium          | Parallel processing - fast    |
-| [Logical Replication](/docs/guides/logical-replication-guide) | Production workloads                   | Any size      | Near-zero               | High            | Minimal downtime              |
+| [Import Data Assistant](/docs/import/import-data-assistant)   | Quick Postgres migrations              | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
+| [pg_dump/restore](/docs/import/migrate-from-postgres)         | Standard Postgres migrations           | Any size      | Required                | Medium          | Reliable and well-tested      |
+| [pgcopydb](/docs/import/pgcopydb)                             | Large Postgres databases               | 10GB+         | Required                | Medium          | Parallel processing - fast    |
+| [Logical Replication](/docs/guides/logical-replication-guide) | Production Postgres workloads          | Any size      | Near-zero               | High            | Minimal downtime              |
 | [pgloader](#provider-specific-guides)                         | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
 | [AWS DMS](/docs/import/migrate-aws-dms)                       | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
 
@@ -31,7 +31,7 @@ For step-by-step instructions tailored to specific databases or providers, see [
 
 ## Logical replication guides
 
-For near-zero downtime migrations using logical replication, see guides for [AWS RDS](/docs/guides/logical-replication-rds-to-neon), [Google Cloud SQL](/docs/guides/logical-replication-cloud-sql), [AlloyDB](/docs/guides/logical-replication-alloydb), [Azure](/docs/import/migrate-from-azure-postgres), [Supabase](/docs/guides/logical-replication-supabase-to-neon), [PostgreSQL](/docs/guides/logical-replication-postgres-to-neon), or [Neon to Neon](/docs/guides/logical-replication-neon-to-neon).
+For near-zero downtime Postgres database migrations using logical replication, see guides for [AWS RDS](/docs/guides/logical-replication-rds-to-neon), [Google Cloud SQL](/docs/guides/logical-replication-cloud-sql), [AlloyDB](/docs/guides/logical-replication-alloydb), [Azure](/docs/import/migrate-from-azure-postgres), [Supabase](/docs/guides/logical-replication-supabase-to-neon), [PostgreSQL](/docs/guides/logical-replication-postgres-to-neon), or [Neon to Neon](/docs/guides/logical-replication-neon-to-neon).
 
 ## Other imports
 

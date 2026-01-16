@@ -4,7 +4,7 @@ subtitle: Link an existing Neon project to Vercel and keep billing in Neon
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2025-11-11T17:38:12.163Z'
+updatedOn: '2026-01-13T14:45:42.236Z'
 ---
 
 <InfoBlock>
@@ -127,6 +127,10 @@ Once connected successfully, you'll see:
 
 The integration automatically creates isolated database environments for each preview deployment:
 
+<Admonition type="tip" title="Neon Auth support for preview deployments">
+If you've enabled [Neon Auth](/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+</Admonition>
+
 <Steps>
 
 ## Developer pushes to feature branch
@@ -171,6 +175,7 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 
 - `DATABASE_URL`: Pooled connection (recommended for most applications)
 - `DATABASE_URL_UNPOOLED`: Direct connection (for tools requiring direct database access)
+- `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`: Neon Auth endpoints (automatically set when Neon Auth is enabled on production branch)
 
 **To customize which variables are used:**
 

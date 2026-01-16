@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-02-22T08:40:18+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL List Users'
-  slug: 'postgresql-administration/postgresql-list-users'
+  title: 'How to Change the Password of a PostgreSQL User'
+  slug: 'postgresql-administration/postgresql-change-password'
 nextLink:
   title: 'PostgreSQL Row-Level Security'
   slug: 'postgresql-administration/postgresql-row-level-security'

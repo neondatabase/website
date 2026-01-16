@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-03-27T06:05:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DELETE JOIN'
-  slug: 'postgresql-tutorial/postgresql-delete-join'
+  title: 'How To Delete Duplicate Rows in PostgreSQL'
+  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
 nextLink:
   title: 'PostgreSQL MERGE Statement'
   slug: 'postgresql-tutorial/postgresql-merge'

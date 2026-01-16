@@ -10,8 +10,8 @@
           slug: get-started/why-neon
         - title: Developer experience
           slug: get-started/dev-experience
-        - title: Production ready
-          slug: get-started/production-readiness
+        - title: Built to scale
+          slug: get-started/built-to-scale
         - title: Use cases
           slug: use-cases/use-cases-overview
 
@@ -690,23 +690,19 @@
           icon: integrations
           slug: guides/integrations
           items:
+            - title: Authentication
+              items:
+                - title: Auth0
+                  slug: guides/auth-auth0
+                - title: Auth.js
+                  slug: guides/auth-authjs
+                - title: Clerk
+                  slug: guides/auth-clerk
+                - title: Okta
+                  slug: guides/auth-okta
+
             - title: Deploy
               items:
-                - title: Vercel
-                  slug: guides/vercel-overview
-                  items:
-                    - title: Integration Overview
-                      slug: guides/vercel-overview
-                    - title: Vercel-Managed (Native Integration)
-                      slug: guides/vercel-managed-integration
-                    - title: Neon-Managed (Connectable Account)
-                      slug: guides/neon-managed-vercel-integration
-                    - title: Manual Setup
-                      slug: guides/vercel-manual
-                    - title: Connecting to Neon from Vercel
-                      slug: guides/vercel-connection-methods
-                    - title: Migrating from Vercel Postgres
-                      slug: guides/vercel-postgres-transition-guide
                 - title: Cloudflare
                   slug: guides/cloudflare-pages
                   items:
@@ -726,36 +722,70 @@
                   slug: guides/railway
                 - title: Render
                   slug: guides/render
+                - title: Vercel
+                  slug: guides/vercel-overview
+                  items:
+                    - title: Integration Overview
+                      slug: guides/vercel-overview
+                    - title: Vercel-Managed (Native Integration)
+                      slug: guides/vercel-managed-integration
+                    - title: Neon-Managed (Connectable Account)
+                      slug: guides/neon-managed-vercel-integration
+                    - title: Manual Setup
+                      slug: guides/vercel-manual
+                    - title: Connecting to Neon from Vercel
+                      slug: guides/vercel-connection-methods
+                    - title: Migrating from Vercel Postgres
+                      slug: guides/vercel-postgres-transition-guide
 
-            - title: Serverless
+            - title: Develop
               items:
-                - title: Neon serverless driver
-                  slug: serverless/serverless-driver
-                - title: AWS Lambda
-                  slug: guides/aws-lambda
-                - title: Azure Functions
-                  slug: guides/query-postgres-azure-functions
-                - title: Trigger serverless functions with Inngest
-                  slug: guides/trigger-serverless-functions
+                - title: Convex
+                  slug: guides/convex-neon
+                - title: GitHub integration
+                  slug: guides/neon-github-integration
+                - title: Knex
+                  slug: guides/knex
+                - title: Prisma
+                  slug: guides/prisma
+                - title: TypeORM
+                  slug: guides/typeorm
+
+            - title: File & media storage
+              items:
+                - title: File storage
+                  slug: guides/file-storage
+                - title: AWS S3
+                  slug: guides/aws-s3
+                - title: Azure Blob Storage
+                  slug: guides/azure-blob-storage
+                - title: Backblaze B2
+                  slug: guides/backblaze-b2
+                - title: Cloudflare R2
+                  slug: guides/cloudflare-r2
+                - title: Cloudinary
+                  slug: guides/cloudinary
+                - title: ImageKit
+                  slug: guides/imagekit
+                - title: Uploadcare
+                  slug: guides/uploadcare
 
             - title: Query
               items:
-                - title: Exograph
-                  slug: guides/exograph
-                - title: PostgREST
-                  slug: guides/postgrest
-                - title: Grafbase
-                  slug: guides/grafbase
-                - title: Hasura
-                  slug: guides/hasura
                 - title: AskYourDatabase
                   slug: guides/askyourdatabase
                 - title: Cloudflare Hyperdrive
                   slug: guides/cloudflare-hyperdrive
-                - title: Outerbase
-                  slug: guides/outerbase
-                - title: StepZen
-                  slug: guides/stepzen
+                - title: Draxlr
+                  slug: guides/draxlr
+                - title: Exograph
+                  slug: guides/exograph
+                - title: Grafbase
+                  slug: guides/grafbase
+                - title: Hasura
+                  slug: guides/hasura
+                - title: PostgREST
+                  slug: guides/postgrest
                 - title: WunderGraph
                   slug: guides/wundergraph
 
@@ -775,6 +805,8 @@
                   slug: guides/logical-replication-estuary-flow
                 - title: Fivetran
                   slug: guides/logical-replication-fivetran
+                - title: Inngest
+                  slug: guides/logical-replication-inngest
                 - title: Materialize
                   slug: guides/logical-replication-materialize
                 - title: Neon to Neon
@@ -787,23 +819,21 @@
                   slug: guides/sequin
                 - title: Snowflake
                   slug: guides/logical-replication-airbyte-snowflake
-                - title: Inngest
-                  slug: guides/logical-replication-inngest
 
             - title: Replicate to Neon
               items:
                 - title: AlloyDB
                   slug: guides/logical-replication-alloydb
-                - title: Replicate from Azure
-                  slug: import/migrate-from-azure-postgres
+                - title: AWS RDS
+                  slug: guides/logical-replication-rds-to-neon
                 - title: Cloud SQL
                   slug: guides/logical-replication-cloud-sql
                 - title: Neon to Neon
                   slug: guides/logical-replication-neon-to-neon
                 - title: Postgres
                   slug: guides/logical-replication-postgres-to-neon
-                - title: AWS RDS
-                  slug: guides/logical-replication-rds-to-neon
+                - title: Replicate from Azure
+                  slug: import/migrate-from-azure-postgres
                 - title: Replicate from Supabase
                   slug: guides/logical-replication-supabase-to-neon
 
@@ -840,38 +870,16 @@
                 - title: SQLAlchemy
                   slug: guides/sqlalchemy-migrations
 
-            - title: File & media storage
+            - title: Serverless
               items:
-                - title: File storage
-                  slug: guides/file-storage
-                - title: AWS S3
-                  slug: guides/aws-s3
-                - title: Azure Blob Storage
-                  slug: guides/azure-blob-storage
-                - title: Backblaze B2
-                  slug: guides/backblaze-b2
-                - title: Cloudflare R2
-                  slug: guides/cloudflare-r2
-                - title: Cloudinary
-                  slug: guides/cloudinary
-                - title: ImageKit
-                  slug: guides/imagekit
-                - title: Uploadcare
-                  slug: guides/uploadcare
-            - title: Authentication
-              items:
-                - title: Auth0
-                  slug: guides/auth-auth0
-                - title: Auth.js
-                  slug: guides/auth-authjs
-                - title: Clerk
-                  slug: guides/auth-clerk
-                - title: Okta
-                  slug: guides/auth-okta
-            - title: Develop
-              items:
-                - title: GitHub integration
-                  slug: guides/neon-github-integration
+                - title: AWS Lambda
+                  slug: guides/aws-lambda
+                - title: Azure Functions
+                  slug: guides/query-postgres-azure-functions
+                - title: Neon serverless driver
+                  slug: serverless/serverless-driver
+                - title: Trigger serverless functions with Inngest
+                  slug: guides/trigger-serverless-functions
 
         - title: Workflows & CI/CD
           icon: branching
@@ -896,6 +904,11 @@
                   slug: guides/neon-twin-partial-pg-dump-restore
             - title: Data anonymization
               slug: workflows/data-anonymization
+              items:
+                - title: API reference
+                  slug: workflows/data-anonymization-api
+                - title: GitHub Actions
+                  slug: workflows/data-anonymization-github-actions
 
         - title: Templates
           slug: https://neon.com/templates
@@ -1364,6 +1377,8 @@
       items:
         - title: Community hub
           slug: community/community-intro
+        - title: Community Guides
+          slug: /guides
         - title: Docs Contribution Guide
           slug: community/contribution-guide
         - title: Component Guide
@@ -1419,7 +1434,5 @@
     - section: Guides
       icon: book
       items:
-        - title: Get started with your integration
-          slug: guides/platform-integration-get-started
         - title: Claimable database integration
           slug: workflows/claimable-database-integration

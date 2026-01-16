@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/customer.png'
 updatedOn: '2024-01-28T10:36:42+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REGEXP_MATCHES() Function'
-  slug: 'postgresql-string-functions/postgresql-regexp_matches'
-nextLink:
   title: 'PostgreSQL REPEAT() Function'
   slug: 'postgresql-string-functions/postgresql-repeat'
+nextLink:
+  title: 'PostgreSQL REPLACE() Function'
+  slug: 'postgresql-string-functions/postgresql-replace'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REVERSE()` function to reverse the characters within a string.

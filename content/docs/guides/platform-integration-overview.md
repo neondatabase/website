@@ -6,7 +6,8 @@ isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
-updatedOn: '2026-01-06T18:58:21.262Z'
+  - /docs/guides/platform-integration-get-started
+updatedOn: '2026-01-13T19:29:46.134Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.

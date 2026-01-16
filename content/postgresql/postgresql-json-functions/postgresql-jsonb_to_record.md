@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL jsonb_object_keys() Function'
   slug: 'postgresql-json-functions/postgresql-jsonb_object_keys'
 nextLink:
-  title: 'PostgreSQL jsonb_agg() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_agg'
+  title: 'PostgreSQL jsonb_populate_record() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_populate_record'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `jsonb_to_record()` function to convert a JSON object into a PostgreSQL record type.
