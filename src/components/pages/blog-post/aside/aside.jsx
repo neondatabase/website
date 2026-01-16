@@ -72,7 +72,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
           <li key={slug}>
             <Link className="group block rounded-sm" to={`${LINKS.blog}/${slug}`}>
               <article className="flex items-center space-x-3">
-                <div>
+                <div className="flex-grow">
                   <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-green-45">
                     {title}
                   </h1>
