@@ -6,7 +6,6 @@ import { LazyMotion, domAnimation, m } from 'framer-motion';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import CtaBlock from 'components/shared/cta-block';
-import Heading from 'components/shared/heading';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 
@@ -30,16 +29,12 @@ const scaleCardBorderVariants = {
 };
 
 const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-[136px] lg:pt-[56px] md:pt-12">
+  <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-32 lg:pt-[52px] md:pt-11">
     <Container className="flex flex-col items-center" size="960">
-      <Heading
-        className="text-center text-[72px] font-medium !leading-none tracking-tighter xl:!text-6xl md:!text-5xl"
-        tag="h1"
-        size="lg"
-      >
-        <span>Neon Pricing</span>
-      </Heading>
-      <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-light leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[560px] lg:text-lg md:text-base">
+      <h1 className="text-center text-[60px] font-normal leading-dense tracking-tighter text-white xl:text-[52px] lg:text-[44px] md:text-[32px]">
+        Neon pricing
+      </h1>
+      <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-normal leading-snug tracking-extra-tight text-gray-new-60 xl:mt-[14px] xl:max-w-[560px] xl:text-[18px] lg:mt-3 lg:text-[16px] md:mt-[10px] md:text-[14px]">
         Get started for free. Pay per usage as you grow.
       </p>
       <div className="relative mt-16 w-full lg:mt-14 md:mx-0 md:mt-10 md:w-full md:max-w-[524px]">
