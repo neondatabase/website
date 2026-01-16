@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2025-08-02T10:33:29.256Z'
+updatedOn: '2026-01-16T18:23:31.111Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
