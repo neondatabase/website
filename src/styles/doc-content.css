@@ -246,8 +246,54 @@
       }
     }
 
+    /* Details/Summary dropdown styling */
+    details {
+      @apply py-5;
+    }
+
+    /* Only add top border between consecutive dropdowns */
+    details + details {
+      @apply border-t border-gray-new-90 dark:border-gray-new-15;
+    }
+
     details summary {
-      @apply cursor-pointer;
+      @apply flex cursor-pointer items-center justify-between font-semibold text-black-new transition-colors hover:text-secondary-8 dark:text-white dark:hover:text-primary-1;
+      list-style: none;
+
+      /* Hide default marker */
+      &::-webkit-details-marker {
+        @apply hidden;
+      }
+
+      &::marker {
+        @apply hidden;
+      }
+
+      /* Custom arrow on the right side - points right when closed */
+      &::after {
+        content: '';
+        @apply ml-auto h-2 w-2 shrink-0 border-r-2 border-t-2 border-current transition-transform duration-200;
+        transform: rotate(45deg);
+      }
+    }
+
+    /* Rotate arrow to point down when open */
+    details[open] summary::after {
+      transform: rotate(135deg);
+    }
+
+    /* Content area styling */
+    details > *:not(summary) {
+      @apply mt-3;
+    }
+
+    /* Ensure list items inside details have proper spacing */
+    details ul {
+      @apply mb-0;
+    }
+
+    details ul > li:last-child {
+      @apply mb-0;
     }
   }
 
