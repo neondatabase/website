@@ -66,7 +66,7 @@ In your server functions, add the following code snippet to connect to your Neon
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
 
@@ -75,7 +75,7 @@ const pool = new Pool({
   ssl: true,
 });
 
-export const getData = createServerFn({ method: "GET" }).handler(async () => {
+export const getNodePostgresData = createServerFn({ method: "GET" }).handler(async () => {
   const client = await pool.connect();
   try {
     const { rows } = await client.query('SELECT version()');
@@ -85,19 +85,19 @@ export const getData = createServerFn({ method: "GET" }).handler(async () => {
   }
 });
 
-// routes/data.ts
+// routes/node-postgres.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getNodePostgresData } from "data/get-neon-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/node-postgres")({
   loader: async () => {
-    return getData();
+    return getNodePostgresData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
@@ -105,29 +105,29 @@ export default function Page() {
 ```
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import postgres from 'postgres';
 import { createServerFn } from "@tanstack/react-start";
 
-export const getData = createServerFn({ method: "GET" }).handler(async () => {
+export const getPostgresJsData = createServerFn({ method: "GET" }).handler(async () => {
    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
   return response[0].version;
 });
 
-// routes/data.ts
+// routes/postgres-js.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getPostgresJsData } from "data/get-neon-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/postgres-js")({
   loader: async () => {
-    return getData();
+    return getPostgresJsData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
@@ -135,30 +135,30 @@ export default function Page() {
 ```
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import { neon } from "@neondatabase/serverless";
 import { createServerFn } from "@tanstack/react-start";
 
-export const getData = createServerFn({ method: "GET" }).handler(async () => {
+export const getServerlessDriverData = createServerFn({ method: "GET" }).handler(async () => {
   const sql = neon(process.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
 
   return response[0].version;
 });
 
-// routes/data.ts
+// routes/serverless-driver.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getServerlessDriverData } from "data/get-neon-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/serverless-driver")({
   loader: async () => {
-    return getData();
+    return getServerlessDriverData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
@@ -174,7 +174,7 @@ In your static server functions, add the following code snippet to connect to yo
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
@@ -185,7 +185,7 @@ const pool = new Pool({
   ssl: true,
 });
 
-export const getData = createServerFn({ method: "GET" })
+export const getNodePostgresData = createServerFn({ method: "GET" })
 .middleware([staticFunctionMiddleware])
 .handler(async () => {
   const client = await pool.connect();
@@ -197,19 +197,19 @@ export const getData = createServerFn({ method: "GET" })
   }
 });
 
-// routes/data.ts
+// routes/node-postgres.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getNodePostgresData } from "data/get-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/node-postgres")({
   loader: async () => {
-    return getData();
+    return getNodePostgresData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
@@ -217,13 +217,13 @@ export default function Page() {
 ```
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import postgres from 'postgres';
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
 
 
-export const getData = createServerFn({ method: "GET" })
+export const getPostgresJsData = createServerFn({ method: "GET" })
 .middleware([staticFunctionMiddleware])
 .handler(async () => {
   const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
@@ -231,19 +231,19 @@ export const getData = createServerFn({ method: "GET" })
   return response[0].version;
 });
 
-// routes/data.ts
+// routes/postgres-js.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getPostgresJsData } from "data/get-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/postgres-js")({
   loader: async () => {
-    return getData();
+    return getPostgresJsData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
@@ -251,13 +251,13 @@ export default function Page() {
 ```
 
 ```javascript
-// server/get-data.ts:
+// data/get-neon-data.ts:
 import { neon } from "@neondatabase/serverless";
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
 
 
-export const getData = createServerFn({ method: "GET" })
+export const getServerlessDriverData = createServerFn({ method: "GET" })
 .middleware([staticFunctionMiddleware])
 .handler(async () => {
   const sql = neon(process.env.DATABASE_URL);
@@ -266,19 +266,19 @@ export const getData = createServerFn({ method: "GET" })
   return response[0].version;
 });
 
-// routes/data.ts
+// routes/serverless-driver.ts
 import { createFileRoute } from "@tanstack/react-router";
-import { getData } from "server/get-data.ts";
+import { getServerlessDriverData } from "data/get-data.ts";
 
-export const Route = createFileRoute("/page")({
+export const Route = createFileRoute("/serverless-driver")({
   loader: async () => {
-    return getData();
+    return getServerlessDriverData();
   },
 
-  component: Page,
+  component: RouteComponent,
 });
 
-export default function Page() {
+export default function RouteComponent() {
   const data = Route.useLoaderData();
 
   return <>{data}</>;
