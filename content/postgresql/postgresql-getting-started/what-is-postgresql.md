@@ -7,8 +7,8 @@ ogImage: '/postgresqltutorial/What-is-PostgreSQL.png'
 updatedOn: '2024-01-18T09:18:45+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'Getting Started with PostgreSQL'
-  slug: 'postgresql-getting-started/'
+  title: 'PostgreSQL Cheat Sheet'
+  slug: 'postgresql-cheat-sheet'
 nextLink:
   title: 'PostgreSQL Sample Database'
   slug: 'postgresql-getting-started/postgresql-sample-database'

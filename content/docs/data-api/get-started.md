@@ -2,25 +2,19 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.741Z'
-tag: beta
+updatedOn: '2026-01-13T19:27:59.707Z'
 ---
 
-<FeatureBetaProps feature_name="Neon Data API" />
-
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
+
+## Before you begin
+
+- The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
+- Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
 
 <Steps>
 
 ## Enable the Data API
-
-<Admonition type="important" title="Data API is branch-specific">
-The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the appropriate branch before enabling the API.
-</Admonition>
-
-<Admonition type="note">
-Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
-</Admonition>
 
 ### 1. Navigate to the Data API page
 
@@ -28,21 +22,19 @@ In the Neon Console, select your project and go to the **Data API** page in the 
 
 ![Data API page with enable button](/docs/data-api/data_api_sidebar.png)
 
-### 2. Select an authentication option
+### 2. Configure Neon Auth (optional)
 
-Choose how you want to authenticate requests to the Data API:
+The **Use Neon Auth** checkbox allows you to enable [Neon Auth](/docs/auth/overview) as your authentication provider for the Data API. When enabled, Neon Auth manages sign-up, login, and account access, issuing the JWTs required for API requests.
 
-- **Neon Auth**: Use [Neon Auth](/docs/auth/overview) as your authentication provider (the default).
-- **Other provider**: Use a different authentication provider by entering the JWKS URL. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for a list of supported providers.
-- **Skip (set up later)**: Configure an authentication provider later. See [Add your authentication provider](/docs/data-api/custom-authentication-providers#add-your-authentication-provider).
+If you prefer to use a different authentication provider (such as Auth0, Clerk, or Firebase Auth), leave this checkbox unchecked and configure your provider later. See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for details.
 
-<Admonition type="warning" title="Authentication required">
+<Admonition type="note" title="Authentication required">
 All requests to the Data API require authentication with a valid JWT token.
 </Admonition>
 
-### 3. Configure schema access
+### 3. Configure schema access (optional)
 
-The **Grant public schema access to authenticated users** toggle (enabled by default) automatically applies database permissions so the `authenticated` role can read and write to tables in the `public` schema.
+The **Grant public schema access** checkbox automatically applies database permissions so the `authenticated` role can read and write to tables in the `public` schema.
 
 <details>
 <summary>View the GRANT statements applied</summary>
@@ -64,19 +56,27 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO authenticated;
 
 </details>
 
-Leave this toggle enabled unless you need to manage permissions manually. If you disable it, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
+Enable this checkbox unless you need to manage permissions manually. If you leave it unchecked, see [Access control](/docs/data-api/access-control) for details on granting permissions yourself.
 
-### 4. Click Enable
+### 4. Click Enable Data API
 
-Click **Enable** to activate the Data API. Once enabled, you'll see your REST API endpoint and configuration options:
+Click **Enable Data API** to activate the Data API. Once enabled, you'll see the Data API page.
 
 ![Data API enabled view](/docs/data-api/data-api-enabled.png)
 
-At this point:
+On the **API** tab, you'll see:
 
-- Your **REST API endpoint** is ready to use.
-- **Neon Auth** is configured as your authentication provider (if selected).
-- Next, add **Row-Level Security (RLS)** policies to define which rows users can access. We'll show you how in the next step.
+- **API URL**: Your REST API endpoint for accessing your database
+- **Refresh schema cache**: A button to update the Data API when you make schema changes
+- **Security section**: Options to configure Neon Auth and enable Row-Level Security on your tables
+
+<Admonition type="warning">
+If you have tables without RLS enabled, you'll see a warning that authenticated users can view all rows in those tables. We'll show you how to add RLS in the next step.
+</Admonition>
+
+For advanced configuration options like custom authentication providers, exposed schemas, and CORS settings, see the **Settings** tab or refer to [Managing the Data API](/docs/data-api/manage).
+
+Next, you'll create a table with **Row-Level Security (RLS)** policies to define which rows users can access.
 
 ## Create a table with RLS
 
@@ -224,7 +224,7 @@ The Data API caches your database schema for performance. When you modify your s
 
 To refresh the cache, go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
 
-![Data API refresh schema cache button](/docs/changelog/data_api_schema_refresh.png)
+![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
 
 ## Connect and Query
 
@@ -323,18 +323,19 @@ console.log(data);
 
 ### Option 2: Direct HTTP requests
 
-You can also query the Data API directly using standard HTTP requests. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
+Query the Data API directly using any HTTP client. Include the `Authorization` header with a valid JWT token from your authentication provider. The token must include a `sub` claim for RLS policies to work correctly.
 
 **Where to get the JWT token:**
 
-- **Neon Auth**: After a user signs in, retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
+- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
+- **Neon Auth (programmatic)**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
 - **Other providers**: Retrieve the token from your auth provider's SDK (e.g., `getAccessToken()` in Auth0, `getToken()` in Clerk).
 
 **About the `sub` claim:**
 
 For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
 
-**Example request:**
+**Example: SELECT (GET)**
 
 This request queries the `posts` table for all published posts, ordered by most recent first:
 
@@ -344,9 +345,62 @@ curl -X GET 'https://your-data-api-endpoint/rest/v1/posts?is_published=eq.true&o
   -H 'Content-Type: application/json'
 ```
 
-> For more details on constructing requests and handling responses, see the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
+**Example: INSERT (POST)**
+
+This request inserts a new row into the `posts` table, setting the `content` column:
+
+```bash shouldWrap
+curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
+  -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
+  -H 'Content-Type: application/json' \
+  -d '{"content": "Hello world"}'
+```
+
+> For UPDATE, DELETE, filtering, and other operations, see the [PostgREST documentation](https://postgrest.org/en/stable/references/api.html).
 
 </Steps>
+
+## Testing with Postman or cURL
+
+If you're using Neon Auth and want to test the Data API without building an application first, you can use the Auth API reference UI to create test users and obtain JWT tokens.
+
+<Admonition type="note" title="Neon Auth only">
+This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
+</Admonition>
+
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
+
+2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
+
+   ```json
+   {
+     "email": "test@example.com",
+     "password": "your-password",
+     "name": "Test User"
+   }
+   ```
+
+3. **Or sign in with an existing user:** Call `POST /api/auth/sign-in/email` with:
+
+   ```json
+   {
+     "email": "test@example.com",
+     "password": "your-password"
+   }
+   ```
+
+4. **Get the JWT token:** Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
+
+5. **Query the Data API:** Use the JWT in your requests:
+   ```bash
+   curl -X GET 'https://your-data-api-endpoint/rest/v1/posts' \
+     -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
+     -H 'Content-Type: application/json'
+   ```
+
+<Admonition type="tip" title="Token expiration">
+JWTs expire after approximately 15 minutes. If you receive a `"JWT token has expired"` error, sign in again to get a fresh token.
+</Admonition>
 
 ## Query patterns
 

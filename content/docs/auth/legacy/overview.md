@@ -3,18 +3,14 @@ title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
 enableTableOfContents: true
 tag: archived
-updatedOn: '2025-12-06T00:00:00.000Z'
-redirectFrom:
-  - /docs/neon-auth/overview
-  - /docs/neon-auth/claim-project
-  - /docs/neon-auth/create-users
-  - /docs/neon-auth/api
-  - /docs/guides/neon-auth-claim-project
-  - /docs/guides/neon-auth-api
+noindex: true
+updatedOn: '2025-12-16T12:23:55.556Z'
 ---
 
-<Admonition type="note">
-Legacy Neon Auth with Stack Auth is no longer available for new projects but remains fully supported for existing users. See our [migration guide](/docs/auth/migrate/from-stack-auth) to upgrade to Neon Auth with Better Auth.
+<Admonition type="warning" title="You are viewing legacy documentation">
+**This is the documentation for the previous Neon Auth implementation built with Stack Auth.** It is no longer available for new projects but remains supported for existing users.
+
+**For the new Neon Auth built with Better Auth**, see [Neon Auth documentation](/docs/auth/overview). Ready to upgrade? See our [migration guide](/docs/auth/migrate/from-legacy-auth).
 </Admonition>
 
 ## What is legacy Neon Auth?
@@ -165,7 +161,7 @@ After claiming, you'll still be able to access your project from the Neon Consol
 
 ## Migrating to Neon Auth with Better Auth
 
-Ready to upgrade to Neon Auth with Better Auth? See our comprehensive [migration guide](/docs/auth/migrate-from-stack-auth).
+Ready to upgrade to Neon Auth with Better Auth? See our comprehensive [migration guide](/docs/auth/migrate/from-legacy-auth).
 
 ### Benefits of upgrading
 
@@ -181,7 +177,7 @@ Ready to upgrade to Neon Auth with Better Auth? See our comprehensive [migration
 - Environment variable updates
 - Step-by-step instructions
 
-[View Migration Guide →](/docs/auth/migrate-from-stack-auth)
+[View Migration Guide →](/docs/auth/migrate/from-legacy-auth)
 
 ## Additional resources
 
@@ -196,7 +192,7 @@ For SDK documentation, components, hooks, and client-side authentication:
 ### Neon technical docs
 
 - [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
-- [Migration Guide](/docs/auth/migrate-from-stack-auth) - Upgrade to Neon Auth with Better Auth
+- [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
 - [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

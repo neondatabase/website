@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL DROP TABLE'
   slug: 'postgresql-tutorial/postgresql-drop-table'
 nextLink:
-  title: 'PostgreSQL Temporary Table'
-  slug: 'postgresql-tutorial/postgresql-temporary-table'
+  title: 'PostgreSQL Copy Table: A Step-by-Step Guide with Practical Examples'
+  slug: 'postgresql-tutorial/postgresql-copy-table'
 ---
 
 **Summary**: in this tutorial, you will learn how to use PostgreSQL `TRUNCATE TABLE` statement to quickly delete all data from large tables.

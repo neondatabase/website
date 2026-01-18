@@ -2,7 +2,7 @@
 title: Neon CLI commands — init
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-11-28T18:21:08.472Z'
+updatedOn: '2026-01-16T18:21:32.290Z'
 ---
 
 ## Before you begin
@@ -12,9 +12,16 @@ updatedOn: '2025-11-28T18:21:08.472Z'
 
 ## The `init` command
 
-The `init` command initializes your app project with Neon using your AI coding assistant. It installs the Neon MCP (Model Context Protocol) Server, which enables your AI assistant to help set up your Neon integration, and authenticates it to Neon using a Neon API key.
+The `init` command initializes your app project with Neon using your AI coding assistant. It installs the Neon MCP (Model Context Protocol) Server and the Neon VS Code Extension, enabling your AI assistant to help set up your Neon integration and providing database development tools directly in your IDE.
 
-The command supports **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code CLI**. It automatically detects which IDE you have installed and configures the MCP server accordingly.
+This command will:
+
+- Authenticate via OAuth (opens your browser)
+- Create a Neon API key for you automatically
+- Configure your editor to connect to Neon's remote MCP server
+- Install the Neon VS Code Extension (for Cursor and VS Code)
+
+The `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**. It automatically detects which IDE you have installed and configures accordingly. Note that the VS Code Extension is installed for Cursor and VS Code only.
 
 ### Usage
 
@@ -34,7 +41,7 @@ You can also run the `init` command in the root directory of your app with `npx`
 npx neonctl@latest init
 ```
 
-After running the command, restart your IDE and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, including helping you configure a database connection.
+After running the command, restart your IDE and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The Neon MCP Server uses AI rules defined in [neon-get-started.mdc](https://github.com/neondatabase-labs/ai-rules/blob/main/neon-get-started.mdc) to help you get started with Neon, including helping you configure a database connection. The Neon VS Code Extension (installed for Cursor and VS Code) provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
 <Admonition type="note">
 For Cursor users, you can also ask: "Get started with Neon using MCP Resource"
@@ -75,6 +82,8 @@ npx neonctl@latest init
 │
 ◇  Installed Neon MCP server
 │
+◇  Installed Neon VS Code Extension
+│
 ◇  Success! Neon is now ready to use with Cursor / VS Code.
 │
 │
@@ -94,5 +103,26 @@ The `init` command supports:
 - **Claude Code CLI** — Ask: "Get started with Neon"
 
 The command automatically detects your IDE and configures the appropriate MCP server integration.
+
+## Manual setup
+
+If you prefer to configure manually or need to set up for other IDEs, [create a Neon API key](https://console.neon.tech/app/settings?modal=create_api_key) in the Neon Console and use this configuration:
+
+Example configuration for Cursor:
+
+```json
+{
+  "mcpServers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "headers": {
+        "Authorization": "Bearer <$NEON_API_KEY>"
+      }
+    }
+  }
+}
+```
+
+For detailed manual setup instructions for all editors, see [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon).
 
 <NeedHelp/>

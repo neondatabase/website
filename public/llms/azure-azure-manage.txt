@@ -32,7 +32,7 @@ See [Create a project](https://neon.com/docs/manage/projects#create-a-project) f
 
 ## Create branches
 
-A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](https://neon.com/docs/manage/projects#configure-your-restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](https://neon.com/docs/introduction/branching).
+A branch is an independent copy of your database that you can use for development or testing. It will not increase storage until you modify data or the branch falls out of your project's [restore window](https://neon.com/docs/introduction/restore-window). Changes made on a branch do not affect the parent database. To learn more, see [Branching](https://neon.com/docs/introduction/branching).
 
 To create branches in the Azure Portal:
 

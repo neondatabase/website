@@ -8,7 +8,7 @@ redirectFrom:
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
   - /docs/get-started/setting-up-a-project
-updatedOn: '2025-08-09T09:50:31.819Z'
+updatedOn: '2026-01-15T23:54:00.602Z'
 ---
 
 <InfoBlock>
@@ -31,12 +31,11 @@ This tutorial walks you through your first steps using Neon as your Postgres dat
 
 Each [branch](/docs/introduction/branching) is a fully-isolated copy of its parent. We suggest creating a long-term branch for each developer on your team to maintain consistent connection strings. You can reset your development branch to production whenever needed.
 
-After signing up, you'll start with two branches:
+After signing up, you'll start with a `production` branch:
 
-- A `production` branch (the default branch) intended for your production workload, configured with a larger compute size (1-4 CU)
-- A `development` branch (created as a child of production) that you can use for local development, configured with a smaller compute size (0.25-1 CU)
+- `production` is your project's root default branch (default: 0.25-2 CU, adjustable up to 56 CU)
 
-You can change these sizes at any time, but these are meant to align with typical usage, where production will need more compute than your less active development branches.
+You can create additional branches for development, staging, and other environments. For development branches, consider using a smaller compute size (0.25-1 CU) to optimize costs, while keeping production appropriately sized for your workload.
 
 <Steps>
 
@@ -74,9 +73,9 @@ The steps should be self-explanatory, but it's important to understand a few key
 
   It is the top-level container that holds your branches, databases, and roles. Typically, you should create a project for each repository in your application. This allows you to manage your database branches just like you manage your code branches: a branch for production, staging, development, new features, previews, and so forth.
 
-- **We create two branches for you**
-  - `production` is the default (primary) branch and hosts your database, role, and a compute that you can connect your application to
-  - `development` is created as a child branch of production for your development work
+- **We create a production branch for you**
+  - `production` is the root default branch. It hosts your database, role, and a compute that you can connect your application to
+  - You can create additional branches for development, staging, previews, and other workflows as needed
 
 At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
@@ -141,9 +140,13 @@ For a detailed guide on how to interact with your data using the **Tables** page
 
 ## Working with your development branch
 
-Your project comes with a `development` branch that's an isolated copy of your `production` branch. Let's learn how to use the Neon CLI to manage branches and make some schema changes in your development environment.
+Let's create a `development` branch and learn how to use the Neon CLI to manage branches and make schema changes in your development environment.
 
-1. **Install CLI with Brew or NPM**
+1. **Create a development branch**
+
+   From the Neon Console, navigate to the **Branches** page and click **Create branch**. Name it `development`, select `production` as the parent branch, and click **Create new branch**. This creates an isolated copy of your production data that you can safely modify.
+
+2. **Install CLI with Brew or NPM**
 
    Depending on your system, you can install the Neon CLI using either Homebrew (for macOS) or NPM (for other platforms).
    - For macOS using Homebrew:
@@ -158,7 +161,7 @@ Your project comes with a `development` branch that's an isolated copy of your `
      npm install -g neonctl
      ```
 
-2. **Authenticate with Neon**
+3. **Authenticate with Neon**
 
    The `neon auth` command launches a browser window where you can authorize the Neon CLI to access your Neon account.
 
@@ -168,23 +171,53 @@ Your project comes with a `development` branch that's an isolated copy of your `
 
    ![neon auth](/docs/get-started/neonctl_auth.png 'no-border')
 
-3. **View your branches**
+4. **View your branches**
+
+   First, list your projects to get your project ID:
 
    ```bash
-   neon branches list
+   neon projects list
    ```
 
-   This command shows your existing branches, including the `production` and `development` branches.
+   You'll be prompted to select your organization. The output shows your project IDs:
+
+   ```bash
+   Projects
+   ┌─────────────────────┬────────────┬───────────────┬──────────────────────┐
+   │ Id                  │ Name       │ Region Id     │ Created At           │
+   ├─────────────────────┼────────────┼───────────────┼──────────────────────┤
+   │ cool-forest-12345678│ myproject  │ aws-us-east-2 │ 2025-10-14T14:33:43Z │
+   └─────────────────────┴────────────┴───────────────┴──────────────────────┘
+   ```
+
+   Now list your branches using your project ID:
+
+   ```bash
+   neon branches list --project-id cool-forest-12345678
+   ┌──────────────┬────────────────────────────┬───────────────┬──────────────────────┐
+   │ Name         │ Id                         │ Current State │ Created At           │
+   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+   │ development  │ br-calm-sky-a5xd78mn       │ ready         │ 2025-12-23T21:05:05Z │
+   ├──────────────┼────────────────────────────┼───────────────┼──────────────────────┤
+   │ ✱ production │ br-bold-wind-a4p92kpx      │ ready         │ 2025-12-23T21:04:57Z │
+   └──────────────┴────────────────────────────┴───────────────┴──────────────────────┘
+   ```
+
+   This command shows your existing branches, including the `production` branch and the `development` branch you just created.
+
+   <Admonition type="tip">
+   To avoid specifying `--project-id` with each command, use `neon set-context` to set your default project and organization. See [set-context](/docs/reference/cli-set-context) for details.
+   </Admonition>
 
 ## Make some sample schema changes
 
-First, let's make sure our development branch is in sync with production. This ensures we're starting from the same baseline:
+First, let's make sure our development branch is in sync with `production`. This ensures we're starting from the same baseline:
 
 ```bash
-neon branches reset development --parent
+neon branches reset development --parent --project-id cool-forest-12345678
 ```
 
-Now that our development branch matches production, we can make some changes. The `playing_with_neon` table from production is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
+Now that our `development` branch matches `production`, we can make some changes. The `playing_with_neon` table from `production` is now available in your `development` branch, and we'll modify its schema and add new data to demonstrate how branches can diverge.
 
 You can use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) for this, but let's demonstrate how to connect and modify your database from the terminal using `psql`. If you don't have `psql` installed already, follow these steps to get set up:
 
@@ -224,7 +257,7 @@ With `psql` available, let's work from the terminal to connect to your `developm
    Get the connection string to your branch and connect to it directly via `psql`:
 
    ```bash shouldWrap
-   neon connection-string development --database-name neondb --psql
+   neon connection-string development --database-name neondb --project-id cool-forest-12345678 --psql
    ```
 
    This command establishes the psql terminal connection to the `neondb` database on your development branch.
@@ -299,7 +332,7 @@ After experimenting with changes in your development branch, let's now reset the
 
 [Branch reset](/docs/guides/reset-from-parent) functions much like a `git reset –hard parent` in traditional Git workflows.
 
-Resetting your development branches to your production branch ensures that all changes are discarded, and your branch reflects the latest stable state of `production`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
+Resetting your development branches to the `production` branch ensures that all changes are discarded, and your branch reflects the latest stable state of `production`. This is key to maintaining a clean slate for new development tasks and is one of the core advantages of Neon's branching capabilities.
 
 You can reset to parent from the **Branches** page of the Neon Console, but here we'll use the Neon CLI.
 
@@ -307,7 +340,7 @@ Use the following command to reset your `development` branch to the state of the
 
     Example:
     ```bash
-    neon branches reset development --parent
+    neon branches reset development --parent --project-id cool-forest-12345678
     ```
 
 If you go back to your **Schema Diff** and compare branches again, you'll see they are now identical:

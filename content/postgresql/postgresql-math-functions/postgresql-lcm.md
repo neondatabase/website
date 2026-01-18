@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL GCD() Function'
   slug: 'postgresql-math-functions/postgresql-gcd'
 nextLink:
-  title: 'PostgreSQL MIN_SCALE() Function'
-  slug: 'postgresql-math-functions/postgresql-min_scale'
+  title: 'PostgreSQL LN() Function'
+  slug: 'postgresql-math-functions/postgresql-ln'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `lcm()` function to calculate the least common multiple (LCM) of two or more integers.

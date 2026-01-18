@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-20T06:03:34+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Password File .pgpass'
-  slug: 'postgresql-administration/postgresql-password-file-pgpass'
-nextLink:
   title: 'How to Check PostgreSQL Version'
   slug: 'postgresql-administration/postgresql-version'
+nextLink:
+  title: 'PostgreSQL Password File .pgpass'
+  slug: 'postgresql-administration/postgresql-password-file-pgpass'
 ---
 
 **Summary**: in this tutorial, you will learn how to calculate the PostgreSQL uptime based on the current time and the server’s started time.

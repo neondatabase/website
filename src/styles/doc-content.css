@@ -1,4 +1,10 @@
 @layer components {
+  .code-block[data-has-filename='true'] {
+    > pre {
+      @apply rounded-b-lg rounded-t-none;
+    }
+  }
+
   .admonition-text {
     a {
       @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
@@ -66,7 +72,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -240,8 +246,54 @@
       }
     }
 
+    /* Details/Summary dropdown styling */
+    details {
+      @apply py-5;
+    }
+
+    /* Only add top border between consecutive dropdowns */
+    details + details {
+      @apply border-t border-gray-new-90 dark:border-gray-new-15;
+    }
+
     details summary {
-      @apply cursor-pointer;
+      @apply flex cursor-pointer items-center justify-between font-semibold text-black-new transition-colors hover:text-secondary-8 dark:text-white dark:hover:text-primary-1;
+      list-style: none;
+
+      /* Hide default marker */
+      &::-webkit-details-marker {
+        @apply hidden;
+      }
+
+      &::marker {
+        @apply hidden;
+      }
+
+      /* Custom arrow on the right side - points right when closed */
+      &::after {
+        content: '';
+        @apply ml-auto h-2 w-2 shrink-0 border-r-2 border-t-2 border-current transition-transform duration-200;
+        transform: rotate(45deg);
+      }
+    }
+
+    /* Rotate arrow to point down when open */
+    details[open] summary::after {
+      transform: rotate(135deg);
+    }
+
+    /* Content area styling */
+    details > *:not(summary) {
+      @apply mt-3;
+    }
+
+    /* Ensure list items inside details have proper spacing */
+    details ul {
+      @apply mb-0;
+    }
+
+    details ul > li:last-child {
+      @apply mb-0;
     }
   }
 

@@ -31,7 +31,11 @@ const InfoIcon = ({
 }) => (
   <span
     {...(clickable && { tabIndex: 0 })}
-    className={clsx('group/info relative', clickable && 'cursor-pointer', className)}
+    className={clsx(
+      'group/info relative rounded-full focus-visible:outline-primary-2',
+      clickable && 'cursor-pointer',
+      className
+    )}
     data-tooltip-id={`info-icon-${tooltipId}`}
     data-tooltip-html={getTooltipHtml(tooltip, link)}
     aria-hidden

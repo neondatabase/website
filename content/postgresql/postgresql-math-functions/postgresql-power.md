@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-17T15:07:31+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LOG() Function'
-  slug: 'postgresql-math-functions/postgresql-log'
-nextLink:
   title: 'PostgreSQL PI() Function'
   slug: 'postgresql-math-functions/postgresql-pi-function'
+nextLink:
+  title: 'PostgreSQL RADIANS() Function'
+  slug: 'postgresql-math-functions/postgresql-radians'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `POWER()` function to raise a number to a specific power.

@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-18T07:38:31+00:00'
 enableTableOfContents: true
 previousLink:
+  title: 'PostgreSQL LOG() Function'
+  slug: 'postgresql-math-functions/postgresql-log'
+nextLink:
   title: 'PostgreSQL MIN_SCALE() Function'
   slug: 'postgresql-math-functions/postgresql-min_scale'
-nextLink:
-  title: 'PostgreSQL LN() Function'
-  slug: 'postgresql-math-functions/postgresql-ln'
 ---
 
 **Summary**: In this tutorial, you will learn how to use the PostgreSQL `MOD()` function performs the modulo operation, returning the remainder after dividing the first argument by the second one.

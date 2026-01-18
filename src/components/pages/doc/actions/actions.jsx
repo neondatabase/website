@@ -18,7 +18,7 @@ const ActionItem = ({ icon: Icon, text, url, onClick, iconClassName }) => {
   return (
     <Tag
       className={clsx(
-        'flex items-center gap-x-2 text-gray-new-40',
+        'flex w-fit items-center gap-x-2 rounded-sm text-gray-new-40',
         'transition-colors duration-200 hover:text-secondary-8',
         'dark:text-gray-new-60 dark:hover:text-primary-1'
       )}

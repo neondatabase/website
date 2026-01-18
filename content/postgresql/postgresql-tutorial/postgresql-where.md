@@ -7,8 +7,8 @@ ogImage: '/postgresqltutorial/PostgreSQL-WHERE.png'
 updatedOn: '2024-01-16T10:02:38+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SELECT DISTINCT'
-  slug: 'postgresql-tutorial/postgresql-select-distinct'
+  title: 'PostgreSQL DISTINCT ON'
+  slug: 'postgresql-tutorial/postgresql-distinct-on'
 nextLink:
   title: 'PostgreSQL AND Operator'
   slug: 'postgresql-tutorial/postgresql-and'

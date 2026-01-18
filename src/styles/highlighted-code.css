@@ -71,7 +71,7 @@
   }
 
   code .line {
-    @apply px-4;
+    @apply pl-4 pr-10;
   }
 
   code .line::after {

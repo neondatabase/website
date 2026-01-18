@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-04-18T04:23:16+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MOD() Function'
-  slug: 'postgresql-math-functions/postgresql-mod'
+  title: 'PostgreSQL LCM() Function'
+  slug: 'postgresql-math-functions/postgresql-lcm'
 nextLink:
   title: 'PostgreSQL LOG() Function'
   slug: 'postgresql-math-functions/postgresql-log'

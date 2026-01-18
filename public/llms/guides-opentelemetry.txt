@@ -6,7 +6,7 @@
 
 - [OpenTelemetry HTML](https://neon.com/docs/guides/opentelemetry): The original HTML version of this documentation
 
-**Note** Beta: **OpenTelemetry integration** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: The **OpenTelemetry integration** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 What you will learn:
 - How to configure OpenTelemetry exports from Neon
@@ -38,7 +38,7 @@ The integration exports a comprehensive set of metrics including:
 
 ### Postgres logs
 
-**Note** Beta: **Postgres logs export** is in beta and ready to use. We're actively improving it based on feedback from developers like you. Share your experience in our [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+**Note** Beta: The **Postgres logs export** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
 
 The Neon OpenTelemetry integration can forward Postgres logs to your destination platform. These logs provide visibility into database activity, errors, and performance.
 
@@ -194,6 +194,8 @@ Neon automatically organizes your data into separate service entities: your conf
 
 Click **Add** to save your configuration and start the data export.
 
+   **Tip**: You can edit your integration settings at any time from the **Integrations** page in the Neon Console. This allows you to update your endpoint URL, change authentication credentials, or modify resource attributes without having to delete and recreate the integration.
+
 ## Verify your integration is working
 
 Your Neon data should start appearing in your observability platform within a few minutes.
@@ -265,5 +267,7 @@ _Postgres logs flowing into New Relic_
   - If your platform expects data directly at the base URL without suffixes, you may need to change its configuration or use a compatible OTLP gateway.
 
 ## Available metrics
+
+Neon exports a comprehensive set of metrics including system metrics (CPU, RAM), database metrics (connections, rows, deadlocks), and PgBouncer connection pooling metrics (client and server connections).
 
 For a complete list of all metrics and log fields exported by Neon, see the [Metrics and logs reference](https://neon.com/docs/reference/metrics-logs).

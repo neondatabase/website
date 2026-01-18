@@ -43,7 +43,7 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
     <div className="flex shrink-0 space-x-5">
       {links.map(({ icon: Icon, tag: Tag, via, eventName }, index) => (
         <Tag
-          className="group"
+          className="group rounded-sm"
           url={slug}
           title={title}
           via={via}

@@ -2,7 +2,7 @@
 title: Restore window
 subtitle: Configure how far back you can restore your data and run Time Travel queries
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.869Z'
+updatedOn: '2025-12-15T16:40:04.577Z'
 ---
 
 The **restore window** determines how far back Neon retains a history of changes for your branches. This history retention period powers several Neon features: instant restore (point-in-time recovery), Time Travel queries, branching from past states, and snapshots.
@@ -112,5 +112,9 @@ The restore window determines what's available for these features:
 - [Time Travel](/docs/guides/time-travel-assist): Query historical data
 - [Instant restore](/docs/introduction/branch-restore): Restore a branch to any point within the window
 - [Snapshots](/docs/guides/backup-restore): Capture and restore from specific points
+
+<Admonition type="note">
+The restore window is for branch point-in-time recovery (PITR), which restores data to a previous state. This is different from the deletion recovery period, which allows you to recover (undelete) a deleted project. For information about recovering deleted projects, see [Project recovery](/docs/manage/projects#recover-a-deleted-project).
+</Admonition>
 
 <NeedHelp/>

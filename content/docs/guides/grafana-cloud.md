@@ -2,7 +2,7 @@
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
 enableTableOfContents: true
-updatedOn: '2025-08-18T12:11:47.174Z'
+updatedOn: '2026-01-09T19:51:39.512Z'
 ---
 
 <InfoBlock>
@@ -36,6 +36,7 @@ The integration exports [a comprehensive set of metrics](#available-metrics) inc
 - **Database size** &#8212; Monitors total size of all databases in bytes.
 - **Replication delay** &#8212; Measures replication lag in bytes and seconds.
 - **Compute metrics** &#8212; Includes CPU and memory usage statistics for your compute.
+- **PgBouncer metrics** &#8212; Tracks connection pooling metrics including client and server connections.
 
 ### Postgres logs
 
@@ -671,7 +672,7 @@ If any of the computes in your project are active, you should start seeing data 
 
 ## Available metrics
 
-Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, and compute metrics (CPU and memory usage). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
+Neon exports a comprehensive set of metrics including connection counts, database size, replication delay, compute metrics (CPU and memory usage), and PgBouncer connection pooling metrics (client and server connections). For a complete list of all available metrics with detailed descriptions, see the [Metrics and logs reference](/docs/reference/metrics-logs).
 
 ## Export Postgres logs
 

@@ -6,7 +6,7 @@
 
 - [Backup & restore HTML](https://neon.com/docs/guides/backup-restore): The original HTML version of this documentation
 
-**Note** Snapshots in Beta: The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated snapshot schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](https://neon.com/docs/introduction/support).
+**Note** Snapshots in Beta: The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](https://neon.com/docs/introduction/support). **Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 
 Use the **Backup & restore** page in the Neon Console to instantly restore a branch to a previous state or create and restore snapshots of your data. This feature combines **instant point-in-time restore** and **snapshots** to help you recover from accidental changes, data loss, or schema issues.
 
@@ -34,7 +34,7 @@ Instantly restore your branch to a specific time in its history.
 
 Tab: Console
 
-You can restore from any time that falls within your project's [restore window](https://neon.com/docs/manage/projects#configure-your-restore-window).
+You can restore from any time that falls within your project's [restore window](https://neon.com/docs/introduction/restore-window).
 
 1. **Select a time**
 
@@ -139,7 +139,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 Tab: API
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's restore window. The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](https://neon.com/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -165,13 +165,13 @@ The parameters used in the example above:
 - [Update snapshot](https://api-docs.neon.tech/reference/updatesnapshot)
 - [Delete snapshot](https://api-docs.neon.tech/reference/deletesnapshot)
 
-## Create snapshot schedules
+## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Snapshot schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
 Tab: Console
 
-To create or modify a snapshot schedule:
+To create or modify a backup schedule:
 
 1. **Open the schedule editor**
 
@@ -193,7 +193,7 @@ To create or modify a snapshot schedule:
 
    Depending on your selected frequency, configure how often you want to create snapshots and how long to keep them.
 
-Once configured, snapshots created by the schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
+Once configured, snapshots created by the backup schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
 
 ### Snapshot retention
 
@@ -201,7 +201,7 @@ Snapshots are automatically deleted after their retention period expires. You ca
 
 - Shorter retention periods help manage snapshot limits on your plan
 - Deleted snapshots cannot be recovered
-- Manual snapshots are not affected by schedule retention settings
+- Manual snapshots are not affected by backup schedule retention settings
 
 Tab: API
 
@@ -394,3 +394,8 @@ Tab: API
     Parameters:
     - `project_id`: The Neon project ID.
     - `branch_id`: The branch ID of the branch created by the snapshot restore operation.
+
+## Limitations
+
+- Instant restore (PITR) is currently not supported on branches created from a snapshot restore. If you restore a snapshot to create a new branch, you cannot perform point-in-time restore on that branch at this time. Attempting to do so will return an error: `restore from snapshot on target branch is still ongoing`.
+- **Reset from parent is unavailable on child branches for up to 24 hours after restoring a parent from a snapshot.** When you restore a branch from a snapshot, any child branches of that restored branch cannot use the [Reset from parent](https://neon.com/docs/guides/reset-from-parent) feature for up to 24 hours.

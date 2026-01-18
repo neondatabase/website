@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL DROP ROLE Statement'
   slug: 'postgresql-administration/postgresql-drop-role'
 nextLink:
-  title: 'How to Create Superuser in PostgreSQL'
-  slug: 'postgresql-administration/create-superuser-postgresql'
+  title: 'How to Change the Password of a PostgreSQL User'
+  slug: 'postgresql-administration/postgresql-change-password'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL list user command to show all users in a PostgreSQL database server.

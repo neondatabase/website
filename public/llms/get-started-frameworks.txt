@@ -11,10 +11,12 @@
 - [NestJS](https://neon.com/docs/guides/nestjs): Connect a NestJS application to Neon
 - [Astro](https://neon.com/docs/guides/astro): Connect an Astro site or app to Neon
 - [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
+- [Encore](https://neon.com/docs/guides/encore): Connect an Encore application to Neon
 - [Entity Framework](https://neon.com/docs/guides/dotnet-entity-framework): Connect a Dotnet Entity Framework application to Neon
 - [Express](https://neon.com/docs/guides/express): Connect an Express application to Neon
 - [Hono](https://neon.com/docs/guides/hono): Connect a Hono application to Neon
 - [Laravel](https://neon.com/docs/guides/laravel): Connect a Laravel application to Neon
+- [Medusa.js](https://neon.com/docs/guides/medusajs): Use Medusa.js with Neon
 - [Micronaut Kotlin](https://neon.com/docs/guides/micronaut-kotlin): Connect a Micronaut Kotlin application to Neon
 - [Nuxt](https://neon.com/docs/guides/nuxt): Connect a Nuxt application to Neon
 - [OAuth](https://neon.com/docs/guides/oauth-integration): Integrate with Neon using OAuth

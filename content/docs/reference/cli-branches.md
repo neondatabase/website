@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-11-17T19:26:53.694Z'
+updatedOn: '2026-01-09T15:57:09.726Z'
 ---
 
 ## Before you begin
@@ -263,7 +263,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
   neon branches create --name my_read_replica_branch --type read_only
   ```
 
-- Create a branch from a parent branch other than your `production` branch
+- Create a branch from a parent branch other than your `main` branch
 
   ```bash
   neon branches create --name feature/payment-api --parent development
@@ -375,10 +375,10 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-This command restores the branch `production` to an earlier timestamp, saving to a backup branch called `production_restore_backup_2024-02-20`
+This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-05-06`
 
 ```bash shouldWrap
-neon branches restore production ^self@2024-05-06T10:00:00.000Z --preserve-under-name production_restore_backup_2024-05-06
+neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
 ```
 
 Results of the operation:
@@ -395,16 +395,16 @@ Backup branch
 ┌─────────────────────────┬────────────────────────────────┐
 │ Id                      │ Name                           │
 ├─────────────────────────┼────────────────────────────────┤
-│ br-flat-forest-a5z016gm │ production_restore_backup_2024-05-06 │
+│ br-flat-forest-a5z016gm │ main_restore_backup_2024-05-06 │
 └─────────────────────────┴────────────────────────────────┘
 ```
 
 #### Restoring a branch (target) to the head of another branch (source)
 
-This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `production`.
+This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `main`.
 
 ```bash shouldWrap
-neon branches restore feature/user-auth production
+neon branches restore feature/user-auth main
 ```
 
 Results of the operation:
@@ -486,7 +486,7 @@ This command:
 neon branches schema-diff [base-branch] [compare-source[@(timestamp|lsn)]]
 ```
 
-`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `production`, select `production` as your base.
+`[base-branch]` specifies the branch you want to compare against. For example, if you want to compare a development branch against the production branch `main`, select `main` as your base.
 
 This setting is **optional**. If you leave it out, the operation uses either of the following as the base:
 

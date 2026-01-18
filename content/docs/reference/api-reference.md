@@ -4,7 +4,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2025-10-10T13:19:39.266Z'
+updatedOn: '2026-01-09T16:30:44.503Z'
 ---
 
 The Neon API allows you to manage your Neon projects programmatically.
@@ -66,6 +66,6 @@ When using the Neon API programmatically, you can poll the operation `status` to
 
 ## API rate limiting
 
-Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately. Contact support if you need higher limits.
+Neon limits API requests to 700 requests per minute (about 11 per second), with bursts allowed up to 40 requests per second per route, per account. If you exceed this, you'll receive an HTTP 429 Too Many Requests error. These limits apply to all public API requests, including those made by the Neon Console. Limits may change, so make sure your app handles 429 errors and retries appropriately.
 
 <NeedHelp/>

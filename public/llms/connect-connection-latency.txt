@@ -59,8 +59,6 @@ curl --request PATCH \
 
 Consider combining this strategy with Neon's _Autoscaling_ feature, which allows you to run a compute with minimal resources and scale up on demand. For example, with autoscaling, you can configure a minimum compute size to reduce costs during off-peak times. In the image shown below, the scale to zero setting is set to 1 hour so that your compute only suspends after an hour of inactivity, and autoscaling is configured with a minimum compute size that keep costs low during periods of light usage.
 
-
-
 For autoscaling configuration instructions, see [Compute size and autoscaling configuration](https://neon.com/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
 ### Place your application and database in the same region
@@ -180,8 +178,11 @@ The randomize option adds a degree of randomness to the delay to prevent a large
 
 However, this example is a simplification. In a production application, you might want to use a more sophisticated strategy. For example, you could initially attempt to reconnect quickly in the event of a transient network issue, then fall back to slower retries if the problem persists.
 
+For complete examples with connection pooling, transaction handling, and idempotency patterns for write operations, see [Building resilient applications with Postgres](https://neon.com/guides/building-resilient-applications-with-postgres).
+
 #### Connection retry references
 
+- [Building resilient applications with Postgres](https://neon.com/guides/building-resilient-applications-with-postgres)
 - [SQL Alchemy: Dealing with disconnects](https://arc.net/l/quote/nojcaewr)
 - [Fast API blog post: Recycling connections for Neon's scale to zero](https://neon.com/blog/deploy-a-serverless-fastapi-app-with-neon-postgres-and-aws-app-runner-at-any-scale)
 

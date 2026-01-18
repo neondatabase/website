@@ -2,7 +2,7 @@
 title: Manage computes
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-05T20:12:42.055Z'
+updatedOn: '2026-01-06T13:11:04.220Z'
 ---
 
 A compute is a virtualized service that runs applications. In Neon, a compute runs Postgres.
@@ -151,16 +151,16 @@ Compute size support differs by [Neon plan](/docs/introduction/plans). Autoscali
 
 | Compute Size (CU) | RAM (GB) | LFC size (GB) | max_connections |
 | :---------------- | :------- | :------------ | :-------------- |
-| 0.25              | 1        | 0.75          | 112             |
-| 0.50              | 2        | 1.5           | 225             |
-| 1                 | 4        | 3             | 450             |
-| 2                 | 8        | 6             | 901             |
-| 3                 | 12       | 9             | 1351            |
-| 4                 | 16       | 12            | 1802            |
-| 5                 | 20       | 15            | 2253            |
-| 6                 | 24       | 18            | 2703            |
-| 7                 | 28       | 21            | 3154            |
-| 8                 | 32       | 24            | 3604            |
+| 0.25              | 1        | 0.75          | 104             |
+| 0.50              | 2        | 1.5           | 209             |
+| 1                 | 4        | 3             | 419             |
+| 2                 | 8        | 6             | 839             |
+| 3                 | 12       | 9             | 1258            |
+| 4                 | 16       | 12            | 1678            |
+| 5                 | 20       | 15            | 2098            |
+| 6                 | 24       | 18            | 2517            |
+| 7                 | 28       | 21            | 2937            |
+| 8                 | 32       | 24            | 3357            |
 | 9                 | 36       | 27            | 4000            |
 | 10                | 40       | 30            | 4000            |
 | 11                | 44       | 33            | 4000            |

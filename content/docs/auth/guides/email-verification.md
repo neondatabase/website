@@ -2,7 +2,7 @@
 title: Email verification
 subtitle: Verify user email addresses during sign-up or account creation
 enableTableOfContents: true
-updatedOn: '2025-11-19T00:00:00.000Z'
+updatedOn: '2026-01-07T15:07:19.156Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -32,9 +32,7 @@ When a user clicks the verification link in their email, the Neon Auth server ha
 
 Add a session check when your component mounts to detect when a user returns from clicking the verification link:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {9-14}
+```jsx filename="src/App.jsx" {9-14}
 import { useEffect, useState } from 'react';
 import { authClient } from './auth';
 
@@ -53,15 +51,11 @@ export default function App() {
 }
 ```
 
-</CodeWithLabel>
-
 ### 2. Handle sign-up with verification (#handle-signup-with-verification)
 
 After calling `signUp.email()`, check if verification is required and show a message:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {16-18}
+```jsx {16-18} filename="src/App.jsx"
 const handleSignUp = async (e) => {
   e.preventDefault();
   setMessage('');
@@ -87,15 +81,11 @@ const handleSignUp = async (e) => {
 };
 ```
 
-</CodeWithLabel>
-
 ### 3. Check verification status (#check-verification-status)
 
 Access the `emailVerified` field from the user object:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {3}
+```jsx {3} filename="src/App.jsx"
 const { data } = await authClient.getSession();
 
 if (data?.session?.user && !data.session.user.emailVerified) {
@@ -103,8 +93,6 @@ if (data?.session?.user && !data.session.user.emailVerified) {
   console.log('Please verify your email to continue');
 }
 ```
-
-</CodeWithLabel>
 
 ## Verification codes
 
@@ -114,22 +102,16 @@ If you prefer verification codes, users receive a numeric code via email and ent
 
 Add state to track which form to show:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 const [step, setStep] = useState('auth'); // 'auth' or 'verify'
 const [code, setCode] = useState('');
 ```
-
-</CodeWithLabel>
 
 ### 2. Handle code verification (#handle-code-verification)
 
 Create a handler for code verification:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {6-9}
+```jsx {6-9} filename="src/App.jsx"
 const handleVerify = async (e) => {
   e.preventDefault();
   setMessage('');
@@ -158,15 +140,11 @@ const handleVerify = async (e) => {
 };
 ```
 
-</CodeWithLabel>
-
 ### 3. Show verification form (#show-verification-form)
 
 When `step` is `'verify'`, show the verification form:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 if (step === 'verify') {
   return (
     <div>
@@ -188,31 +166,23 @@ if (step === 'verify') {
 }
 ```
 
-</CodeWithLabel>
-
 ### 4. Switch to verification after sign-up (#switch-to-verification)
 
 After calling `signUp.email()`, switch to the verification step:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {3}
+```jsx {3} filename="src/App.jsx"
 if (data?.user && !data.user.emailVerified) {
   setMessage('Check your email for a verification code');
   setStep('verify'); // Switch to verification form
 }
 ```
 
-</CodeWithLabel>
-
 <details>
 <summary>Complete example: App.jsx with verification codes</summary>
 
 Here's a complete, minimal `App.jsx` file that includes sign-up, sign-in, and verification code functionality:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx
+```jsx filename="src/App.jsx"
 import { useState, useEffect } from 'react';
 import { authClient } from './auth';
 import './App.css';
@@ -392,17 +362,13 @@ export default function App() {
 }
 ```
 
-</CodeWithLabel>
-
 </details>
 
 ## Resending verification emails
 
 Both verification links and verification codes expire after **15 minutes**. Allow users to request a new one:
 
-<CodeWithLabel label="src/App.jsx">
-
-```jsx {3-6}
+```jsx {3-6} filename="src/App.jsx"
 const handleResend = async () => {
   try {
     const { error } = await authClient.sendVerificationEmail({
@@ -417,8 +383,6 @@ const handleResend = async () => {
   }
 };
 ```
-
-</CodeWithLabel>
 
 The server sends whichever type (verification link or verification code) you configured in the Console.
 
