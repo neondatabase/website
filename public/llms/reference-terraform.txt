@@ -195,7 +195,7 @@ resource "neon_branch" "dev_branch" {
 **Key `neon_branch` attributes:**
 
 - `project_id`: (Required) ID of the parent project.
-- `name`: (Optional) Name for the new branch.
+- `name`: (Optional) Name for the new branch. If not specified, defaults to the branch ID. If provided, must be unique within the project and can be up to 256 characters. Cannot be empty or only whitespace. See [Branch naming requirements](https://neon.com/docs/manage/branches#branch-naming-requirements).
 - `parent_id`: (Optional) ID of the parent branch. If not specified, defaults to the project's primary branch.
 - `protected`: (Optional, String: "yes" or "no") Set to protect the branch.
 - `parent_lsn`: (Optional) LSN of the parent branch to create from.

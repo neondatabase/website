@@ -2,19 +2,19 @@
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
 enableTableOfContents: true
-updatedOn: '2025-12-11T14:24:43.410Z'
+updatedOn: '2026-01-06T12:00:57.074Z'
 redirectFrom:
   - /docs/guides/neon-authorize
-tag: beta
 ---
-
-<FeatureBetaProps feature_name="Neon Data API" />
 
 <InfoBlock>
   <DocsList title="Related docs" theme="docs">
     <a href="/docs/data-api/get-started">Getting started with Data API</a>
     <a href="/docs/data-api/access-control">Access control & security</a>
     <a href="/docs/guides/rls-tutorial">Secure your app with RLS</a>
+  </DocsList>
+  <DocsList title="Source code" theme="repo">
+    <a href="https://github.com/neondatabase/pg_session_jwt">pg_session_jwt extension</a>
   </DocsList>
 </InfoBlock>
 
@@ -87,6 +87,8 @@ When you configure a JWT Audience value in the Data API:
 - **Most other providers**: Optional — only configure if your provider includes an `aud` claim in tokens
 
 If you're unsure whether your provider requires it, you can decode a sample JWT from your provider at [jwt.io](https://jwt.io) and check if it includes an `aud` claim.
+
+<a id="supported-providers"></a>
 
 ## Find your JWKS URL
 

@@ -160,7 +160,7 @@ To comment out content in a markdown file use this construction:
 [comment]: <> (Single line comment.)
 
 [comment]: <> (
-Multiline comment. 
+Multiline comment.
 You can't use line breaks or () parentheses here.
 )
 ```
@@ -299,49 +299,41 @@ The voice in the documentation should sound like one human being explaining some
 #### Guidelines
 
 1. **Use contractions**:
-
    - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
      - _Example_: "It's essential to save your progress."
    - **Don't**: Overuse contractions, which can compromise clarity.
 
 2. **Simplicity over jargon**:
-
    - **Do**: Choose simpler words when possible.
      - _Example_: "Use the tool," not "Utilize the instrument."
    - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
 
 3. **Active voice**:
-
    - **Do**: Prefer active voice.
      - _Example_: "The software converts the file."
    - **Don't**: Over-rely on passive voice.
      - _Example_: "The file is converted by the software."
 
 4. **Brief sentences**:
-
    - **Do**: Keep sentences concise.
      - _Example_: "Check the settings."
 
 5. **Personalize when relevant**:
-
    - **Do**: Use "you" to address the reader.
      - _Example_: "You can adjust the setting."
    - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
 
 6. **Consistent terminology**:
-
    - **Do**: Stick to one term for one concept.
      - _Example_: Always use "dashboard". Don't mix that term with "control panel".
    - **Don't**: Confuse with synonyms.
      - _Example_: Switching between "log-in", "sign-in", and "access point".
 
 7. **Examples for clarity**:
-
    - **Do**: Provide clear examples.
      - _Example_: "For instance, to upload a file, click on the 'Upload' button."
 
 8. **Use US English**:
-
    - **Do**: Adhere to US English spelling and grammar rules.
 
 9. **Avoid emojis and exclamations**:

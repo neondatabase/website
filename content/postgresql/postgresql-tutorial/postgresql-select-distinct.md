@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL ORDER BY'
   slug: 'postgresql-tutorial/postgresql-order-by'
 nextLink:
-  title: 'PostgreSQL WHERE'
-  slug: 'postgresql-tutorial/postgresql-where'
+  title: 'PostgreSQL DISTINCT ON'
+  slug: 'postgresql-tutorial/postgresql-distinct-on'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `SELECT DISTINCT` clause to remove duplicate rows from a result set returned by a query.

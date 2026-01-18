@@ -4,7 +4,7 @@ subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2025-11-17T20:56:53.510Z'
+updatedOn: '2026-01-09T19:51:39.514Z'
 ---
 
 Instagres enables instant provisioning of a Postgres database without configuration or account creation.
@@ -22,6 +22,7 @@ The service provides the following capabilities:
 - 72-hour database lifespan if not claimed
 - Option to claim databases with a unique claim ID and Neon account
 - Automatic database seeding with SQL scripts for schema and data initialization (via CLI or Vite plugin)
+- Logical replication enabled by default, allowing integration with sync engines like [Electric SQL](https://electric-sql.com/) without additional configuration
 
 ## Access methods
 
@@ -197,6 +198,7 @@ Instagres is designed for scenarios requiring rapid database provisioning:
 - Evaluation of Neon's capabilities before committing to an account
 - AI agent integration without authentication overhead
 - Quick prototyping sessions
+- Real-time sync applications using sync engines like Electric SQL (logical replication is enabled by default)
 
 Note that provisioned databases expire after 72 hours unless claimed as described in the previous section.
 

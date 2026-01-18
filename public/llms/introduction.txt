@@ -17,6 +17,11 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 - [Branching workflows](https://neon.com/docs/get-started/workflow-primer): Add branching to your CI/CD automation
 - [Get ready for production](https://neon.com/docs/get-started/production-checklist): Key features to get you production ready
 
+## App backend
+
+- [Neon Auth](https://neon.com/docs/auth/overview): Store users, sessions, and auth configuration directly in Postgres—branches with your database for development and testing
+- [Data API](https://neon.com/docs/data-api/overview): Query Postgres from directly from web browsers, serverless functions, and edge runtimes using standard HTTP methods
+
 ## Quickstarts
 
 - [Drizzle](https://neon.com/docs/guides/drizzle): Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)
@@ -29,6 +34,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 - [Astro](https://neon.com/docs/guides/astro): Connect an Astro site or app to Neon
 - [Django](https://neon.com/docs/guides/django): Connect a Django application to Neon
 - [Entity Framework](https://neon.com/docs/guides/dotnet-entity-framework): Connect a Dotnet Entity Framework application to Neon
+- [Encore](https://neon.com/docs/guides/encore): Connect an Encore application to Neon
 - [Elixir](https://neon.com/docs/guides/elixir-ecto): Connect from Elixir with Ecto to Neon
 - [Go](https://neon.com/docs/guides/go): Connect a Go application to Neon
 - [Java](https://neon.com/docs/guides/java): Connect a Java application to Neon
@@ -49,7 +55,7 @@ Neon is a serverless Postgres platform designed to help you build reliable and s
 - [Import data](https://neon.com/docs/import/import-intro): Load your data into a Postgres database hosted by Neon
 - [AI & embeddings](https://neon.com/docs/ai/ai-intro): Build and scale transformative LLM applications with vector storage and similarity search.
 - [Branching](https://neon.com/docs/guides/branching-intro): Learn to optimize development workflows with database branching
-- [Postgres extensions](https://neon.com/docs/extensions/extensions-intro): Level up your database with our many supported Postgres extensions
+- [Postgres extensions](https://neon.com/docs/extensions/pg-extensions): Level up your database with our many supported Postgres extensions
 - [Neon CLI Reference](https://neon.com/docs/reference/neon-cli): Manage Neon directly from the terminal with the Neon CLI
 
 ## Join the community

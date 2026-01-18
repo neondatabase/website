@@ -187,44 +187,6 @@ export type Post = typeof postsTable.$inferSelect;
 export type NewPost = typeof postsTable.$inferInsert;
 ```
 
-### Integrating the Neon Auth `users_sync` Table
-Neon Auth automatically synchronizes user data to a `neon_auth.users_sync` table. Drizzle provides a dedicated helper to integrate this seamlessly.
-
-- **Use the `usersSync` helper:** Import `usersSync` from `drizzle-orm/neon` to represent the table without defining its columns manually.
-- **Create foreign key relationships:** Link your application tables to `usersSync.id` to enforce data integrity.
-
-```typescript
-// src/schema.ts
-import { pgTable, text, bigint, boolean, timestamp } from 'drizzle-orm/pg-core';
-// Import the dedicated Neon Auth helper from Drizzle
-import { usersSync } from 'drizzle-orm/neon';
-import { eq } from 'drizzle-orm';
-
-// Example: A `todos` table where each todo belongs to a Neon Auth user
-export const todos = pgTable('todos', {
-  id: bigint('id', { mode: 'bigint' }).primaryKey().generatedByDefaultAsIdentity(),
-  task: text('task').notNull(),
-  isComplete: boolean('is_complete').default(false).notNull(),
-  insertedAt: timestamp('inserted_at').defaultNow().notNull(),
-  
-  // Create a foreign key relationship to the users_sync table
-  ownerId: text('owner_id')
-    .notNull()
-    .references(() => usersSync.id, { onDelete: 'cascade' }),
-});
-
-// This allows for direct SQL joins with user data
-async function getTodosWithUserEmails(db) {
-  return db
-    .select({
-      task: todos.task,
-      ownerEmail: usersSync.email
-    })
-    .from(todos)
-    .leftJoin(usersSync, eq(todos.ownerId, usersSync.id));
-}
-```
-
 ## Neon-Specific Query Optimizations
 
 ### Efficient Queries for Serverless

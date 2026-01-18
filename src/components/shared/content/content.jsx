@@ -23,13 +23,7 @@ import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwoColumnLayout, {
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
-} from 'components/pages/doc/two-column-layout';
+import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -41,7 +35,6 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import CodeWithLabel from 'components/shared/code-with-label';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt/copy-prompt';
 import CtaBlock from 'components/shared/cta-block';
@@ -55,6 +48,7 @@ import MegaLink from 'components/shared/mega-link';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
@@ -149,7 +143,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DefinitionList,
   FeatureList,
   Admonition,
-  CodeWithLabel,
   CodeTabs,
   DetailIconCards,
   TechCards,
@@ -162,6 +155,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   LinkPreview,
   DocsList,
   RequestForm,
+  SubprocessorsForm,
   ProgramForm,
   LatencyCalculator,
   CTA: isTemplate ? CtaBlock : DocCta,
@@ -174,11 +168,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Video,
   Steps,
   TwoColumnLayout,
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
   LogosSection,
   DeployPostgresButton,
   ChatOptions,

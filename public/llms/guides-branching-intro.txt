@@ -44,7 +44,7 @@ Test potentially destructive or performance-impacting queries before your run th
 
 Recover lost data or track down issues by restoring a branch to its history, or just create a point-in-time branch for historical analysis or any other reason.
 
-- [Instant restore with Time Travel Assist](https://neon.com/docs/guides/branch-restore): Learn how to instantly recover your database to any point in time within your restore window
+- [Instant restore with Time Travel Assist](https://neon.com/docs/guides/branch-restore): Learn how to instantly recover your database to any point in time within your [restore window](https://neon.com/docs/introduction/restore-window)
 - [Time Travel](https://neon.com/docs/guides/time-travel-assist): Query point-in-time connections with Time Travel
 - [Schema diff](https://neon.com/docs/guides/schema-diff): Visualize schema differences between branches to help with troubleshooting
 

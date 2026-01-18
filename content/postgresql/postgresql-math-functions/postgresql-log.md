@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL LN() Function'
   slug: 'postgresql-math-functions/postgresql-ln'
 nextLink:
-  title: 'PostgreSQL POWER() Function'
-  slug: 'postgresql-math-functions/postgresql-power'
+  title: 'PostgreSQL MOD() Function'
+  slug: 'postgresql-math-functions/postgresql-mod'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `LOG()` function to calculate the logarithm of a number

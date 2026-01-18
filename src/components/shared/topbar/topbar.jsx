@@ -1,10 +1,8 @@
-import { PropTypes } from 'prop-types';
-
 import TopbarClient from './topbar-client';
 
 const TOPBAR_API_URL = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/api/topbar`;
 
-const Topbar = async ({ isDarkTheme }) => {
+const Topbar = async () => {
   // Skip topbar fetch during static generation (build time)
   // In production, Vercel will use ISR to regenerate pages with fresh data
   const isBuildTime = !process.env.VERCEL && process.env.NODE_ENV === 'production';
@@ -29,14 +27,10 @@ const Topbar = async ({ isDarkTheme }) => {
 
     if (!topbar?.text || !topbar?.link) return null;
 
-    return <TopbarClient {...topbar} isDarkTheme={isDarkTheme} />;
+    return <TopbarClient {...topbar} />;
   } catch (error) {
     return null;
   }
-};
-
-Topbar.propTypes = {
-  isDarkTheme: PropTypes.bool,
 };
 
 export default Topbar;

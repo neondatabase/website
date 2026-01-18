@@ -43,5 +43,5 @@ A copy of Neon's HIPAA compliance report can be requested through our [Trust Cen
 To learn more about how we protect your data and uphold the highest standards of security and privacy, please visit our [Trust Center](https://trust.neon.com/), where you can also request and download audit reports.
 
 - For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
-- For privacy-related questions, reach out to [privacy@neon.tech](mailto:privacy@neon.tech).
+- For privacy-related questions, reach out to [privacy@databricks.com](mailto:privacy@databricks.com).
 - For sales information, please [contact our sales team](https://neon.com/contact-sales).

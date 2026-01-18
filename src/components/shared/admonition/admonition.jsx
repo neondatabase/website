@@ -41,6 +41,8 @@ const themes = {
   },
 };
 
+const textClassName = 'admonition-text mt-2.5 text-base [&_a]:rounded-sm';
+
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
   const typeText = type == 'comingSoon' ? 'Coming soon' : type;
   const theme = themes[type] || themes.note;
@@ -61,12 +63,9 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
         </h4>
       </div>
       {asHTML ? (
-        <div
-          className="admonition-text mt-2.5 text-base"
-          dangerouslySetInnerHTML={{ __html: children }}
-        />
+        <div className={textClassName} dangerouslySetInnerHTML={{ __html: children }} />
       ) : (
-        <div className="admonition-text mt-2.5 text-base">{children}</div>
+        <div className={textClassName}>{children}</div>
       )}
     </div>
   );

@@ -7,8 +7,8 @@ ogImage: '/postgresqltutorial/PostgreSQL-LEFT-example.png'
 updatedOn: '2024-01-29T02:05:23+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL MD5() Function'
-  slug: 'postgresql-string-functions/postgresql-md5'
+  title: 'PostgreSQL INITCAP() Function'
+  slug: 'postgresql-string-functions/postgresql-initcap'
 nextLink:
   title: 'PostgreSQL RIGHT() Function'
   slug: 'postgresql-string-functions/postgresql-right'

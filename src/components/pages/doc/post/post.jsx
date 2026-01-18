@@ -39,19 +39,21 @@ const Post = ({
   },
   content,
   breadcrumbs,
+  breadcrumbsBaseUrl = DOCS_BASE_PATH,
   navigationLinks: { previousLink, nextLink },
-  navigationLinksPrefix,
+  navigationLinksBasePath = DOCS_BASE_PATH,
+  isDocsIndex = false,
   isChangelog = false,
   isPostgres = false,
-  isDocsIndex = false,
   changelogPosts = [],
   currentSlug,
   gitHubPath,
   tableOfContents,
+  author,
 }) => {
   const modal = MODALS.find(
     (modal) =>
-      breadcrumbs.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
+      breadcrumbs?.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
       (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
   );
 
@@ -64,13 +66,10 @@ const Post = ({
   return (
     <>
       <div className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none')}>
-        {breadcrumbs.length > 0 && (
-          <Breadcrumbs
-            breadcrumbs={breadcrumbs}
-            currentSlug={currentSlug}
-            isPostgresPost={isPostgres}
-          />
+        {breadcrumbs?.length > 0 && (
+          <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
         )}
+
         {isChangelog ? (
           <Changelog currentSlug={currentSlug} posts={changelogPosts} />
         ) : (
@@ -101,9 +100,10 @@ const Post = ({
           <NavigationLinks
             previousLink={previousLink}
             nextLink={nextLink}
-            basePath={navigationLinksPrefix || DOCS_BASE_PATH}
+            basePath={navigationLinksBasePath}
           />
         )}
+
         {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
       </div>
 
@@ -116,6 +116,7 @@ const Post = ({
           enableTableOfContents={enableTableOfContents}
           tableOfContents={tableOfContents}
           gitHubPath={gitHubPath}
+          author={author}
         />
       )}
       {modal && <Modal {...modal} />}
@@ -134,12 +135,13 @@ Post.propTypes = {
     contentLayout: PropTypes.oneOf(['split', null]),
   }).isRequired,
   content: PropTypes.string.isRequired,
-  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
+  breadcrumbsBaseUrl: PropTypes.string,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
-  navigationLinksPrefix: PropTypes.string,
+  navigationLinksBasePath: PropTypes.string,
   isChangelog: PropTypes.bool,
   isPostgres: PropTypes.bool,
   isDocsIndex: PropTypes.bool,
@@ -152,6 +154,16 @@ Post.propTypes = {
   currentSlug: PropTypes.string.isRequired,
   gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string,
+    bio: PropTypes.string,
+    link: PropTypes.shape({
+      url: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    photo: PropTypes.string,
+  }),
 };
 
 export default Post;
