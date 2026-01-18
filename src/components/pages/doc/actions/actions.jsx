@@ -8,7 +8,14 @@ import { useState } from 'react';
 import Link from 'components/shared/link';
 import ArrowBackToTopIcon from 'icons/arrow-back-to-top.inline.svg';
 import ChatGptIcon from 'icons/docs/chat-gpt.inline.svg';
+import ClaudeIcon from 'icons/docs/claude.inline.svg';
+import CursorIcon from 'icons/docs/cursor.inline.svg';
+import DeepSeekIcon from 'icons/docs/deepseek.inline.svg';
+import GeminiIcon from 'icons/docs/gemini.inline.svg';
+import GrokIcon from 'icons/docs/grok.inline.svg';
 import MarkdownIcon from 'icons/docs/markdown.inline.svg';
+import PerplexityIcon from 'icons/docs/perplexity.inline.svg';
+import T3ChatIcon from 'icons/docs/t3-chat.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -87,8 +94,60 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
 
   const gitHubLink = `${githubBase}${gitHubPath}`;
   const rawFileLink = `${githubRawBase}${gitHubPath}`;
-  const chatGptLink = `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`;
   const backToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const AI_CHATBOTS = [
+    {
+      name: 'ChatGPT',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://chatgpt.com/?hints=search&q=Read+${rawFileLink}`,
+      icon: ChatGptIcon,
+    },
+    {
+      name: 'Claude',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://claude.ai/new?q=Read+${rawFileLink}`,
+      icon: ClaudeIcon,
+    },
+    {
+      name: 'Cursor',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://cursor.com/link/prompt?text=Read+${rawFileLink}`,
+      icon: CursorIcon,
+    },
+    {
+      name: 'Grok',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://x.com/i/grok?text=Read+${rawFileLink}`,
+      icon: GrokIcon,
+    },
+    {
+      name: 'Perplexity',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://www.perplexity.ai/?q=Read+${rawFileLink}`,
+      icon: PerplexityIcon,
+    },
+    {
+      name: 'T3 Chat',
+      enabled: true,
+      generateLink: (rawFileLink) => `https://t3.chat/new?q=Read+${rawFileLink}`,
+      icon: T3ChatIcon,
+    },
+
+    // Disabled as they currently do not have a way to prefill content via URL
+    {
+      name: 'Gemini',
+      enabled: false,
+      generateLink: (rawFileLink) => `https://gemini.google.com/?q=Read+${rawFileLink}`,
+      icon: GeminiIcon,
+    },
+    {
+      name: 'DeepSeek',
+      enabled: false,
+      generateLink: (rawFileLink) => `https://chat.deepseek.com/?q=Read+${rawFileLink}`,
+      icon: DeepSeekIcon,
+    },
+  ];
 
   const docsActions = (
     <>
@@ -99,12 +158,15 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         url={gitHubLink}
         onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit this page on GitHub' })}
       />
-      <ActionItem
-        icon={ChatGptIcon}
-        text="Open in ChatGPT"
-        url={chatGptLink}
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Open in ChatGPT' })}
-      />
+      {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
+        <ActionItem
+          key={bot.name}
+          icon={bot.icon}
+          text={`Open in ${bot.name}`}
+          url={bot.generateLink(rawFileLink)}
+          onClick={() => sendGtagEvent('Action Clicked', { text: `Open in ${bot.name}` })}
+        />
+      ))}
     </>
   );
 
