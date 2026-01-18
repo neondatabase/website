@@ -26,7 +26,7 @@ Documentation source files are located in the [neondatabase/website](https://git
 1. Edit files directly on GitHub.
 2. Fork the [neondatabase/website](https://github.com/neondatabase/website) repository, create a branch for your changes, and submit a pull request.
 
-If you prefer the first option, which is great for edits and small updates, there is an **Edit this page** link at the bottom of each Neon documentation page.
+If you prefer the first option, which is great for edits and small updates, there is an **Edit this page on GitHub** link in the right-hand sidebar of each Neon documentation page.
 
 ![GitHub edit this page link](/docs/community/edit_this_page.png)
 
