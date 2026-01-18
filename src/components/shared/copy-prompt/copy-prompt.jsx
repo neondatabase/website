@@ -16,7 +16,7 @@ const CopyPrompt = (props) => {
     src,
     description = DEFAULT_DISPLAY_TEXT,
     buttonText = DEFAULT_BUTTON_TEXT,
-    showOpenInCursor = false,
+    showOpenInCursor = true,
   } = props;
   const [markdown, setMarkdown] = useState('');
   const [copied, setCopied] = useState(false);
@@ -48,7 +48,7 @@ const CopyPrompt = (props) => {
       <div className="flex shrink-0 items-center gap-3 sm:w-full">
         {showOpenInCursor && (
           <Button
-            className="inline-flex items-center gap-2 rounded-md px-4 py-1.5 text-sm font-medium"
+            className="inline-flex items-center gap-2 rounded-md border border-gray-new-80 px-4 py-1.5 text-sm font-medium hover:border-gray-new-60 dark:border-gray-new-20 dark:hover:border-gray-new-40"
             theme="gray-dark-outline-black"
             aria-label="Open in Cursor"
             onClick={() => {
