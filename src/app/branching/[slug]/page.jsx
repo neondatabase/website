@@ -62,7 +62,7 @@ const BranchingPage = ({ params }) => {
       <article>
         <h1 className="t-5xl text-balance font-semibold leading-tight tracking-tight">{title}</h1>
         <Content
-          className="prose-flow mt-12 text-lg lg:mt-10 md:mt-8 md:text-base "
+          className="prose-flow mt-12 text-lg lg:mt-10 md:mt-8 md:text-base [&_h4]:!font-medium"
           content={content}
         />
       </article>
@@ -71,7 +71,7 @@ const BranchingPage = ({ params }) => {
         nextLink={nextLink}
         basePath={BRANCHING_BASE_PATH}
       />
-      <DocFooter className="mt-0" updatedOn={updatedOn} slug={`${LINKS.branching}/${slug}`} />
+      <DocFooter className="mt-0" updatedOn={updatedOn} withFeedback={false} />
     </>
   );
 };

@@ -15,7 +15,7 @@ const BranchingIndexPage = async () => {
     <>
       <Hero />
       <Contents contents={contents} />
-      <DocFooter className="mt-20" updatedOn={updatedOn} slug={SEO_DATA.branching.pathname} />
+      <DocFooter className="mt-20" updatedOn={updatedOn} withFeedback={false} />
     </>
   );
 };
