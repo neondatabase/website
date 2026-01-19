@@ -17,7 +17,7 @@ const styles = {
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8 font-semibold',
     xs: 't-base py-[14px] px-[26px] font-medium',
     xxs: 'h-8 px-4 text-sm tracking-extra-tight font-medium',
-    new: 'h-11 px-7 tracking-extra-tight font-medium xl:h-9 xl:text-sm xl:px-[18px]',
+    new: 'h-11 px-7 tracking-extra-tight lg:h-9 lg:text-sm lg:px-[18px]',
   },
   theme: {
     primary: 'bg-primary-1 text-black hover:bg-[#00e5bf]',
@@ -26,7 +26,7 @@ const styles = {
     'white-filled': 'bg-white text-black hover:bg-gray-new-80',
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
-    'gray-40-outline':
+    outlined:
       ' bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
@@ -41,6 +41,11 @@ const styles = {
     transparent:
       'bg-transparent text-black-pure hover:bg-gray-new-90 hover:dark:bg-gray-new-10 dark:text-white',
   },
+};
+
+const getCombinationStyles = (size, theme) => {
+  if (size === 'new' && theme === 'white-filled') return 'font-medium';
+  return null;
 };
 
 const Button = forwardRef(
@@ -63,6 +68,7 @@ const Button = forwardRef(
       styles.base,
       styles.size[size],
       styles.theme[theme],
+      getCombinationStyles(size, theme),
       additionalClassName
     );
 

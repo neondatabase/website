@@ -22,8 +22,8 @@ const CTA = () => (
               Get started
             </Button>
             <Button
-              className="bg-[rgba(255,255,255,0.02)] !font-normal"
-              theme="gray-40-outline"
+              className="bg-[rgba(255,255,255,0.02)]"
+              theme="outlined"
               size="new"
               to={LINKS.docsBranching}
             >
