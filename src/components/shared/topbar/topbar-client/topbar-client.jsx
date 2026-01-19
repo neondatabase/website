@@ -20,7 +20,7 @@ import rightPatternSM from './images/right-pattern-sm.png';
 import rightPatternXL from './images/right-pattern-xl.png';
 import rightPattern from './images/right-pattern.png';
 
-const Pattern = ({ src, width, isRight, className }) => (
+const Pattern = ({ src, isRight, className }) => (
   <Image
     className={clsx(
       'pointer-events-none absolute top-0 z-0 h-9 w-auto',
@@ -28,8 +28,6 @@ const Pattern = ({ src, width, isRight, className }) => (
       className
     )}
     src={src}
-    width={width}
-    height={36}
     quality={100}
     alt=""
     priority
@@ -38,7 +36,6 @@ const Pattern = ({ src, width, isRight, className }) => (
 
 Pattern.propTypes = {
   src: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
   className: PropTypes.string,
   isRight: PropTypes.bool,
 };
@@ -81,15 +78,15 @@ const TopbarClient = ({ text, link }) => {
         <ChevronIcon className="origin-center -rotate-90 text-black-pure opacity-40 dark:text-white dark:opacity-60" />
       </div>
 
-      <Pattern className="2xl:hidden" src={leftPattern} width={500} />
-      <Pattern className="2xl:hidden" src={rightPattern} width={500} isRight />
-      <Pattern className="hidden 2xl:block xl:hidden" src={leftPatternXL} width={340} />
-      <Pattern className="hidden 2xl:block xl:hidden" src={rightPatternXL} width={260} isRight />
-      <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} width={190} />
-      <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} width={150} isRight />
-      <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} width={230} />
-      <Pattern className="hidden lg:block md:hidden" src={rightPatternSM} width={180} isRight />
-      <Pattern className="hidden md:block" src={leftPatternXS} width={150} />
+      <Pattern className="2xl:hidden" src={leftPattern} />
+      <Pattern className="2xl:hidden" src={rightPattern} isRight />
+      <Pattern className="hidden 2xl:block xl:hidden" src={leftPatternXL} />
+      <Pattern className="hidden 2xl:block xl:hidden" src={rightPatternXL} isRight />
+      <Pattern className="hidden xl:block lg:hidden" src={leftPatternLG} />
+      <Pattern className="hidden xl:block lg:hidden" src={rightPatternLG} isRight />
+      <Pattern className="hidden lg:block md:hidden" src={leftPatternSM} />
+      <Pattern className="hidden lg:block md:hidden" src={rightPatternSM} isRight />
+      <Pattern className="hidden md:block" src={leftPatternXS} />
     </Link>
   );
 };
