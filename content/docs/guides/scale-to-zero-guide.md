@@ -114,8 +114,6 @@ To configure the scale to zero default for an existing project:
 
 You can monitor scale to zero on the **Branches** page in the Neon Console. A compute reports either an **Active** or **Idle** status.
 
-![Compute status](/docs/connect/compute_state.png)
-
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
 User actions that activate an idle compute include [connecting from a client such as psql](/docs/connect/query-with-psql-editor), running a query on your database from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), or accessing the compute via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
