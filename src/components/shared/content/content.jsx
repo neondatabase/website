@@ -82,12 +82,11 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
   pre: (props) => {
-    // Check if this is a mermaid code block
     const codeElement = props?.children;
     const code = codeElement?.props?.children;
     const className = codeElement?.props?.className || '';
 
-    // Only process as mermaid if we have valid structure and mermaid class
+    // Check if this is a mermaid code block
     if (
       codeElement &&
       typeof code === 'string' &&
@@ -97,7 +96,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
       return <Mermaid chart={code.trim()} />;
     }
 
-    // For all other code blocks, pass to CodeBlock component
     return <CodeBlock {...props} />;
   },
   a: (props) => <DocsLink {...props} />,

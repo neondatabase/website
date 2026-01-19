@@ -1,1 +1,3 @@
-export { default } from './mermaid';
+import Mermaid from './mermaid';
+
+export default Mermaid;
