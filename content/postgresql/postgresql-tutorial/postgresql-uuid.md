@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL TIME Data Type'
   slug: 'postgresql-tutorial/postgresql-time'
 nextLink:
-  title: 'PostgreSQL Array'
-  slug: 'postgresql-tutorial/postgresql-array'
+  title: 'PostgreSQL JSON'
+  slug: 'postgresql-tutorial/postgresql-json'
 ---
 
 **Summary**: in this tutorial, you will learn about the PostgreSQL UUID data type and how to generate UUID values using a supplied module.
