@@ -23,6 +23,8 @@ Ask user to choose:
 
 ### 3. Install Dependencies
 
+Wait for user choice, then install the correct packages:
+
 ```bash
 # Neon Serverless (HTTP)
 npm install drizzle-orm @neondatabase/serverless dotenv
