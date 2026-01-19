@@ -5,8 +5,7 @@ const Hero = () => (
     <div className="text-center">
       <div className="mx-auto max-w-[640px] md:max-w-xs">
         <h1 className="mx-auto font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-[32px]">
-          Mastering Database
-          <br /> Branching Workflows
+          Mastering Branching Workflows
         </h1>
         <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:mt-3 lg:mx-auto lg:text-base">
           Ship software faster using Neon branches as ephemeral environments.

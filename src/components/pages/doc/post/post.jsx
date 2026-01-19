@@ -98,6 +98,7 @@ const Post = ({
 
         {!isChangelog && (
           <NavigationLinks
+            className="mt-12 md:mt-10"
             previousLink={previousLink}
             nextLink={nextLink}
             basePath={navigationLinksBasePath}

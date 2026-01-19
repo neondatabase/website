@@ -13,18 +13,18 @@ const Contents = ({ contents }) => (
           key={id}
           id={id}
         >
-          <h3 className="text-2xl font-medium leading-tight tracking-tighter lg:text-xl">
+          <h3 className="text-2xl font-medium leading-tight -tracking-tighter md:text-xl">
             {section}
           </h3>
           <ol className="flex flex-col gap-2.5">
             {items.map(({ title, slug }, subIndex) => (
               <li key={slug}>
                 <Link
-                  className="flex justify-between gap-4 text-lg tracking-extra-tight text-gray-new-80 transition-colors duration-200 hover:text-white md:text-base"
+                  className="flex justify-between gap-4 text-lg tracking-extra-tight text-gray-new-80 transition-colors duration-200 hover:text-white"
                   href={`${BRANCHING_BASE_PATH}${slug}`}
                 >
                   {title}
-                  <span className="text-base">
+                  <span className="text-base tracking-extra-tight md:text-[15px]">
                     {index + 1}.{subIndex + 1}
                   </span>
                 </Link>
