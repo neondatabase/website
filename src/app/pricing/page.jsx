@@ -99,7 +99,7 @@ const faqItems = [
       `,
   },
   {
-    question: 'Why is the monthly minimum the same in the Launch plan vs. the Scale plan?',
+    question: 'Why is the monthly minimum the same in Launch plan vs. Scale plan?',
     answer: `
       <p> Instead of charging a higher flat monthly fee, we’ve chosen to price the premium features of the Scale plan through compute usage - via a higher price per CU-hour.</p>
       <p>This means you only pay more when you actually use the additional capabilities. You’re choosing to pay more for higher availability and enhanced security, which require operational redundancy on our side, while still keeping costs tied to your usage.
@@ -129,7 +129,7 @@ const PricingPage = () => (
     <Logos className="mt-32 xl:mt-[120px] lg:mt-[104px] md:mt-20" logos={logos} size="sm" />
     <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
     <Features />
-    <Faq items={faqItems} className="mt-[200px] xl:mt-[192px] lg:mt-[184px] md:mt-[104px]" />
+    <Faq items={faqItems} />
     <CTA
       className="pb-[350px] pt-[445px] xl:pb-[200px] xl:pt-[260px] lg:pb-[150px] lg:pt-[220px] sm:pb-[100px] sm:pt-[160px]"
       title="Still have a question?"
