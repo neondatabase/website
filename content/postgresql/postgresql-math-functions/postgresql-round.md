@@ -30,9 +30,11 @@ The `ROUND()` function accepts 2 arguments:
 
 1\) source
 
-The `source` argument is a number or a numeric expression that is to be rounded.
+The `source` argument is a double precision or a numeric expression that is to be rounded.
 
 2\) n
+
+If you set the `n` argument, the `source` argument must have a `numeric` type, `double precision` type is not allowed.
 
 The `n` argument is an integer that determines the number of decimal places after rounding.
 
