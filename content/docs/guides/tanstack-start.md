@@ -66,7 +66,7 @@ In your server functions, add the following code snippet to connect to your Neon
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
 
@@ -85,9 +85,9 @@ export const getNodePostgresData = createServerFn({ method: "GET" }).handler(asy
   }
 });
 
-// routes/node-postgres.ts
+// src/routes/node-postgres.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getNodePostgresData } from "data/get-neon-data.ts";
+import { getNodePostgresData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/node-postgres")({
   loader: async () => {
@@ -105,7 +105,7 @@ export default function RouteComponent() {
 ```
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import postgres from 'postgres';
 import { createServerFn } from "@tanstack/react-start";
 
@@ -115,9 +115,9 @@ export const getPostgresJsData = createServerFn({ method: "GET" }).handler(async
   return response[0].version;
 });
 
-// routes/postgres-js.ts
+// src/routes/postgres-js.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getPostgresJsData } from "data/get-neon-data.ts";
+import { getPostgresJsData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/postgres-js")({
   loader: async () => {
@@ -135,7 +135,7 @@ export default function RouteComponent() {
 ```
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import { neon } from "@neondatabase/serverless";
 import { createServerFn } from "@tanstack/react-start";
 
@@ -146,9 +146,9 @@ export const getServerlessDriverData = createServerFn({ method: "GET" }).handler
   return response[0].version;
 });
 
-// routes/serverless-driver.ts
+// src/routes/serverless-driver.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getServerlessDriverData } from "data/get-neon-data.ts";
+import { getServerlessDriverData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/serverless-driver")({
   loader: async () => {
@@ -174,7 +174,7 @@ In your static server functions, add the following code snippet to connect to yo
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import { Pool } from 'pg';
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
@@ -197,9 +197,9 @@ export const getNodePostgresData = createServerFn({ method: "GET" })
   }
 });
 
-// routes/node-postgres.ts
+// src/routes/node-postgres.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getNodePostgresData } from "data/get-data.ts";
+import { getNodePostgresData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/node-postgres")({
   loader: async () => {
@@ -217,7 +217,7 @@ export default function RouteComponent() {
 ```
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import postgres from 'postgres';
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
@@ -231,9 +231,9 @@ export const getPostgresJsData = createServerFn({ method: "GET" })
   return response[0].version;
 });
 
-// routes/postgres-js.ts
+// src/routes/postgres-js.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getPostgresJsData } from "data/get-data.ts";
+import { getPostgresJsData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/postgres-js")({
   loader: async () => {
@@ -251,7 +251,7 @@ export default function RouteComponent() {
 ```
 
 ```javascript
-// data/get-neon-data.ts:
+// src/data/get-neon-data.ts:
 import { neon } from "@neondatabase/serverless";
 import { createServerFn } from "@tanstack/react-start";
 import { staticFunctionMiddleware } from "@tanstack/start-static-server-functions";
@@ -266,9 +266,9 @@ export const getServerlessDriverData = createServerFn({ method: "GET" })
   return response[0].version;
 });
 
-// routes/serverless-driver.ts
+// src/routes/serverless-driver.tsx
 import { createFileRoute } from "@tanstack/react-router";
-import { getServerlessDriverData } from "data/get-data.ts";
+import { getServerlessDriverData } from "../data/get-neon-data.ts";
 
 export const Route = createFileRoute("/serverless-driver")({
   loader: async () => {
@@ -289,7 +289,21 @@ export default function RouteComponent() {
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+When you run `npm run dev` you can expect to see the following on:
+
+[localhost:3000/serverless-driver](http://localhost:3000/serverless-driver):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+[localhost:3000/postgres-js](http://localhost:3000/postgres-js):
+
+```shell shouldWrap
+PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+```
+
+[localhost:3000/node-postgres](http://localhost:3000/node-postgres):
 
 ```shell shouldWrap
 PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
