@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 
@@ -7,26 +9,43 @@ import Section from '../section';
 
 const logos = [
   {
-    src: '/brand/neon-logo-light-color.svg?updated=2026-01-15',
-    name: 'neon-logo-light-color.svg',
+    svgSrc: '/brand/neon-logo-light-color.svg?updated=2026-01-15',
+    svgName: 'neon-logo-light-color.svg',
+    pngSrc: '/brand/neon-logo-light-color@2x.png',
+    pngName: 'neon-logo-light-color@2x.png',
     className: 'bg-white',
   },
   {
-    src: '/brand/neon-logo-dark-color.svg?updated=2026-01-15',
-    name: 'neon-logo-dark-color.svg',
+    svgSrc: '/brand/neon-logo-dark-color.svg?updated=2026-01-15',
+    svgName: 'neon-logo-dark-color.svg',
+    pngSrc: '/brand/neon-logo-dark-color@2x.png',
+    pngName: 'neon-logo-dark-color@2x.png',
     className: 'bg-black-pure border-gray-new-30 border',
   },
   {
-    src: '/brand/neon-logo-dark-mono.svg?updated=2026-01-15',
-    name: 'neon-logo-dark-mono.svg',
+    svgSrc: '/brand/neon-logo-dark-mono.svg?updated=2026-01-15',
+    svgName: 'neon-logo-dark-mono.svg',
+    pngSrc: '/brand/neon-logo-dark-mono@2x.png',
+    pngName: 'neon-logo-dark-mono@2x.png',
     className: 'bg-[#5280FF]',
   },
   {
-    src: '/brand/neon-logo-light-mono.svg?updated=2026-01-15',
-    name: 'neon-logo-light-mono.svg',
+    svgSrc: '/brand/neon-logo-light-mono.svg?updated=2026-01-15',
+    svgName: 'neon-logo-light-mono.svg',
+    pngSrc: '/brand/neon-logo-light-mono@2x.png',
+    pngName: 'neon-logo-light-mono@2x.png',
     className: 'bg-[#4DDBA7]',
   },
 ];
+
+const handleDownload = (url, filename) => {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+};
 
 const Logo = () => (
   <Section
@@ -36,26 +55,46 @@ const Logo = () => (
     <ul className="grid grid-cols-2 gap-4 md:grid-cols-1">
       {logos.map((logo, index) => (
         <li key={index}>
-          <a
+          <div
             className={clsx(
               'group relative flex h-[180px] items-center justify-center',
               logo.className
             )}
-            href={logo.src}
-            download={logo.name}
           >
-            <Image src={logo.src} alt="Neon logo" width={157} height={45} priority unoptimized />
-            <span
+            <Image src={logo.svgSrc} alt="Neon logo" width={157} height={45} priority unoptimized />
+            <div
               className={clsx(
-                'absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center border',
+                'absolute right-2.5 top-2.5 flex gap-2',
                 'opacity-0 transition-opacity duration-300',
-                'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                 'group-hover:opacity-100'
               )}
             >
-              <DownloadIcon />
-            </span>
-          </a>
+              <button
+                type="button"
+                className={clsx(
+                  'flex h-7 items-center gap-1.5 border px-2.5',
+                  'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
+                  'transition-colors duration-200 hover:bg-gray-new-15'
+                )}
+                onClick={() => handleDownload(logo.pngSrc, logo.pngName)}
+              >
+                <span className="text-xs font-medium">PNG</span>
+                <DownloadIcon className="h-3.5 w-3.5" />
+              </button>
+              <button
+                type="button"
+                className={clsx(
+                  'flex h-7 items-center gap-1.5 border px-2.5',
+                  'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
+                  'transition-colors duration-200 hover:bg-gray-new-15'
+                )}
+                onClick={() => handleDownload(logo.svgSrc, logo.svgName)}
+              >
+                <span className="text-xs font-medium">SVG</span>
+                <DownloadIcon className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
         </li>
       ))}
     </ul>
