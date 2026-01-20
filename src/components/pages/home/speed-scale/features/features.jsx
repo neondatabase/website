@@ -70,7 +70,7 @@ const Features = () => (
               to={link}
             >
               Learn more
-              <ArrowIcon className="sm:size-3" />
+              <ArrowIcon className="text-gray-new-70 sm:size-3" />
             </Link>
           </div>
           <div className={animationClassName}>{animation}</div>

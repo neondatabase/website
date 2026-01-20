@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import Link from 'components/shared/link';
 import links from 'constants/links';
-import ArrowTopRightIcon from 'icons/arrow-top-right.inline.svg';
+import ArrowTopRightIcon from 'icons/arrow-right.inline.svg';
 
 import bannerImage from './image/banner-pattern.svg';
 import noiseBackground from './image/noise-background.svg';

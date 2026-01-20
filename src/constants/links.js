@@ -26,6 +26,7 @@ export default {
   storage: '/storage',
   subprocessorsSubscribe: '/subscribe-to-subprocessors',
   templates: '/templates',
+  platforms: '/platforms',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
 
