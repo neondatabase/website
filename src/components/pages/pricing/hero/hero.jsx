@@ -7,7 +7,7 @@ import Programs from './programs';
 
 const Hero = () => (
   <section className="hero safe-paddings overflow-hidden pt-40 xl:pt-32 lg:pt-[52px] md:pt-11">
-    <Container className="flex flex-col items-center" size="960">
+    <Container className="flex flex-col items-center md:max-w-[564px]" size="960">
       <h1 className="text-center text-[60px] font-normal leading-dense tracking-tighter text-white xl:text-[52px] lg:text-[44px] md:text-[32px]">
         Neon pricing
       </h1>

@@ -9,7 +9,7 @@ import plans from './data/plans';
 import Features from './features';
 
 const Plans = () => (
-  <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full md:max-w-[524px]">
+  <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
     <h2 className="sr-only">Neon pricing plans</h2>
     <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] lg:grid-cols-2 md:grid-cols-1">
       {plans.map(
