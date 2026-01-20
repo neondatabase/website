@@ -48,6 +48,10 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 - `provision_neon_auth`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
 
+**Neon Data API:**
+
+- `provision_neon_data_api`: Provisions the Neon Data API for a branch, enabling HTTP-based Data API access with optional JWT authentication.
+
 **Search and discovery:**
 
 - `search`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
