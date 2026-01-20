@@ -50,7 +50,7 @@ const FEATURES = [
   },
   {
     icon: securityIcon,
-    title: 'GPDR and ISO compliance.',
+    title: 'GDPR and ISO compliance.',
     description: `Visit our <a href="${LINKS.security}">Security page</a> for more information.`,
   },
 ];
