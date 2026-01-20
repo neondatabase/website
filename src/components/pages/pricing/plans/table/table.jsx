@@ -135,11 +135,11 @@ const Table = () => {
                     return (
                       <li
                         className={clsx(
-                          'relative flex flex-col justify-start transition-colors',
+                          'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
+                          index === 0 && 'border-t-0',
                           isGroupTitle
-                            ? 'h-[86px] justify-end pb-[18px] lg:h-[66px]'
+                            ? 'h-[86px] justify-end border-t pb-[18px] lg:h-[66px]'
                             : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
-                          !isGroupTitle && 'border-t border-dashed border-gray-new-15',
                           i === 1 && 'lg:pl-5',
                           currentRow === index.toString() && !isGroupTitle
                             ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
@@ -175,7 +175,12 @@ const Table = () => {
                                 <Link
                                   tabIndex={0}
                                   href={item[key].subtitle.href}
-                                  className="z-10 mt-1 inline-block w-fit rounded-sm border-b border-[rgba(175,177,182,0.40)] text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+                                  className={clsx(
+                                    'z-10 mt-1 inline-block w-fit rounded-sm border-b border-dashed border-[rgba(175,177,182,0.40)]',
+                                    'text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
+                                    'transition-colors duration-200',
+                                    'hover:border-primary-1 hover:text-primary-1'
+                                  )}
                                 >
                                   {item[key].subtitle.text}
                                 </Link>
@@ -235,13 +240,12 @@ const Table = () => {
                   return (
                     <li
                       className={clsx(
-                        'relative flex flex-col justify-start transition-colors',
+                        'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
+                        index === 0 && 'border-t-0',
                         rowsWithGroupTitles.includes(index)
                           ? 'h-[86px] lg:h-[66px]'
                           : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
-                        item[key] !== undefined &&
-                          !rowsWithGroupTitles.includes(index) &&
-                          'border-t border-dashed border-gray-new-15',
+                        item[key] !== undefined && !rowsWithGroupTitles.includes(index),
                         currentRow === index.toString() &&
                           !rowsWithGroupTitles.includes(index) &&
                           'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
