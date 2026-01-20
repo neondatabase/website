@@ -37,7 +37,7 @@ const Features = ({ title, items }) => (
                 target="_blank"
                 withArrow
               >
-                Learn more <span className="sr-only">about ${title}</span>
+                Learn more <span className="sr-only">about {title}</span>
               </Link>
             </li>
           ))}

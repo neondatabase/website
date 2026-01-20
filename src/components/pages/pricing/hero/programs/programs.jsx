@@ -79,7 +79,7 @@ const Programs = () => (
             theme="gray-80"
             withArrow
           >
-            Learn more
+            Learn more <span className="sr-only">about {title}</span>
           </Link>
         </div>
       ))}
