@@ -34,17 +34,12 @@ const DATA = [
 const Features = () => (
   <ul className="mt-[168px] flex flex-col gap-[200px] xl:mt-[120px] xl:gap-44 lg:gap-[132px] md:mt-[84px] md:gap-[104px]">
     {DATA.map(
-      ({
-        className,
-        contentClassName,
-        title,
-        description,
-        link,
-        animation,
-        animationClassName,
-      }) => (
+      (
+        { className, contentClassName, title, description, link, animation, animationClassName },
+        id
+      ) => (
         <li
-          key={title}
+          key={id}
           className={clsx(
             'flex gap-48 2xl:gap-20 xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
             className
@@ -61,9 +56,9 @@ const Features = () => (
             </Heading>
             <Link
               className={clsx(
-                'group mt-7 flex w-fit items-center gap-2 rounded-sm text-lg font-medium leading-none tracking-extra-tight',
+                'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg font-medium leading-none tracking-extra-tight',
                 'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]',
-                'hover:!text-white [&>svg]:!text-gray-new-70 group-hover:[&>svg]:!text-white'
+                'hover:!text-white [&:hover>svg]:!text-white [&>svg]:!text-gray-new-70'
               )}
               theme="white"
               to={link}
