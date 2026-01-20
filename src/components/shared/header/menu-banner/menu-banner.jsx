@@ -35,10 +35,10 @@ const MenuBanner = ({ linkProps: { className, ...linkProps } = {} }) => (
     />
 
     <div className="flex flex-col gap-y-2">
-      <h3 className="flex items-baseline gap-x-2.5 whitespace-nowrap text-2xl font-medium leading-none tracking-tighter text-white lg:text-lg md:text-base">
+      <p className="flex items-baseline gap-x-2.5 whitespace-nowrap text-2xl font-medium leading-none tracking-tighter text-white lg:text-lg md:text-base">
         What is Neon
         <ArrowTopRightIcon className="-translate-x-2 scale-75 text-white opacity-0 transition-[transform,opacity] duration-200 group-hover:translate-x-0 group-hover:scale-100 group-hover:opacity-100" />
-      </h3>
+      </p>
       <p className="text-[15px] leading-tight tracking-extra-tight text-gray-new-60 lg:text-[13px]">
         Serverless Postgres, by Databricks
       </p>
