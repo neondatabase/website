@@ -12,10 +12,9 @@ import ClaudeIcon from 'icons/docs/claude.inline.svg';
 import CursorIcon from 'icons/docs/cursor.inline.svg';
 import DeepSeekIcon from 'icons/docs/deepseek.inline.svg';
 import GeminiIcon from 'icons/docs/gemini.inline.svg';
-import GrokIcon from 'icons/docs/grok.inline.svg';
 import MarkdownIcon from 'icons/docs/markdown.inline.svg';
 import PerplexityIcon from 'icons/docs/perplexity.inline.svg';
-import T3ChatIcon from 'icons/docs/t3-chat.inline.svg';
+import VSCodeIcon from 'icons/docs/vscode.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -110,28 +109,10 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
       icon: ClaudeIcon,
     },
     {
-      name: 'Cursor',
-      enabled: true,
-      generateLink: (rawFileLink) => `https://cursor.com/link/prompt?text=Read+${rawFileLink}`,
-      icon: CursorIcon,
-    },
-    {
-      name: 'Grok',
-      enabled: true,
-      generateLink: (rawFileLink) => `https://x.com/i/grok?text=Read+${rawFileLink}`,
-      icon: GrokIcon,
-    },
-    {
       name: 'Perplexity',
       enabled: true,
       generateLink: (rawFileLink) => `https://www.perplexity.ai/?q=Read+${rawFileLink}`,
       icon: PerplexityIcon,
-    },
-    {
-      name: 'T3 Chat',
-      enabled: true,
-      generateLink: (rawFileLink) => `https://t3.chat/new?q=Read+${rawFileLink}`,
-      icon: T3ChatIcon,
     },
 
     // Disabled as they currently do not have a way to prefill content via URL
@@ -167,6 +148,22 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
           onClick={() => sendGtagEvent('Action Clicked', { text: `Open in ${bot.name}` })}
         />
       ))}
+      <ActionItem
+        icon={CursorIcon}
+        text="Install MCP server on Cursor"
+        url="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"
+        onClick={() =>
+          sendGtagEvent('Action Clicked', { text: 'Install Neon MCP server on Cursor' })
+        }
+      />
+      <ActionItem
+        icon={VSCodeIcon}
+        text="Install MCP server on VS Code"
+        url="vscode:mcp/install?%7B%22name%22%3A%22Neon%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.neon.tech%2Fmcp%22%7D"
+        onClick={() =>
+          sendGtagEvent('Action Clicked', { text: 'Install Neon MCP server on VS Code' })
+        }
+      />
     </>
   );
 
