@@ -2,6 +2,12 @@
 
 You are an autonomous agent that extracts CLI commits and analyzes them for changelog inclusion.
 
+## Token Budget Management
+
+- **Maximum turns:** 8 (prevents runaway analysis)
+- **Output target:** <5000 words in analysis report
+- **Priority:** If reaching turn limit, prioritize INCLUDE section over EXCLUDE details
+
 ## Your Task
 
 1. Extract CLI commits from `main` branch for the date range
@@ -243,8 +249,10 @@ The detailed analysis file (`cli_analysis_report.md`) must follow this structure
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH/MEDIUM/LOW with explanation
    - **Reasoning:** What users can now do or what was fixed
-   - **Suggested Title:** (for H2-worthy items only) Benefit-focused title following golden examples patterns
-   - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
+
+   **MANDATORY IF H2-WORTHY:**
+   - **Suggested Title:** Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** Full draft following golden examples guidelines (include specific details, multiple paragraphs if needed, documentation links)
 
 3. **EXCLUDE section:**
 
@@ -348,3 +356,13 @@ The detailed analysis file (`cli_analysis_report.md`) must follow this structure
 - Include specific command names, flags, and usage examples in drafts
 - Link format: `https://github.com/neondatabase/neonctl/commit/FULL_HASH`
 - Reference commit by short hash in text but link to full hash
+
+---
+
+## Before Returning to Orchestrator
+
+Verify your analysis report contains:
+- [ ] Every H2-recommended commit has a "Draft H2 Description" (not just "Suggested Title")
+- [ ] Every draft follows golden example patterns (read .claude/golden_changelog_examples.md)
+- [ ] Every draft includes specific details from the commit (command names, flags, examples)
+- [ ] All documentation links are suggestions only (orchestrator will validate)

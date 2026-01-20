@@ -1,7 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
-import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import { LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import useLocation from 'react-use/lib/useLocation';
@@ -53,11 +53,11 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
 
   return (
     <li
-      className="overflow-hidden border-b border-gray-new-15 py-[19px] last:border-0 xl:py-[18px]"
+      className="-mx-1 overflow-hidden border-b border-gray-new-15 px-1 py-[19px] last:border-0 xl:py-[18px]"
       id={id}
     >
       <button
-        className="group relative flex w-full items-start justify-between gap-4 text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
+        className="group relative flex w-full items-start justify-between gap-4 rounded-sm text-left after:absolute after:-inset-y-5 after:left-0 after:w-full"
         type="button"
         aria-expanded={isOpen}
         aria-controls={`panel-${index}`}
@@ -74,30 +74,29 @@ const Item = ({ question, answer, id = null, initialState = 'closed', index }) =
         />
       </button>
       <LazyMotion features={domAnimation}>
-        <AnimatePresence initial={false} mode="wait">
-          <m.div
-            key={index}
-            id={`panel-${index}`}
-            initial={initialState}
-            animate={isOpen ? 'open' : 'closed'}
-            variants={variantsAnimation}
-            transition={{
-              opacity: { duration: 0.2 },
-              height: { duration: 0.3 },
-            }}
-          >
-            <div
-              className={clsx(
-                'with-link-primary with-list-style pr-[52px] pt-4 text-[16px] font-normal leading-normal tracking-extra-tight text-gray-new-80 xl:pr-[52px] lg:pr-[50px] lg:pt-5 md:pr-[32px] md:pt-3 md:text-[15px]',
-                '[&_p+p]:mt-2',
-                '[&_ul]:ml-0 [&_ul]:list-none [&_ul]:pl-4',
-                '[&_li]:relative [&_li]:list-inside [&_li]:!pl-4 [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-0 [&_li]:before:content-["-"]',
-                '[&_code]:my-4 [&_code]:inline-block [&_code]:rounded-lg [&_code]:bg-gray-new-10 [&_code]:px-[10px] [&_code]:py-1'
-              )}
-              dangerouslySetInnerHTML={{ __html: answer }}
-            />
-          </m.div>
-        </AnimatePresence>
+        <m.div
+          key={index}
+          id={`panel-${index}`}
+          initial={initialState}
+          animate={isOpen ? 'open' : 'closed'}
+          variants={variantsAnimation}
+          transition={{
+            opacity: { duration: 0.2 },
+            height: { duration: 0.3 },
+          }}
+        >
+          <div
+            className={clsx(
+              'with-link-primary with-list-style pr-[52px] pt-4 text-[16px] font-normal leading-normal tracking-extra-tight text-gray-new-80 xl:pr-[52px] lg:pr-[50px] lg:pt-5 md:pr-[32px] md:pt-3 md:text-[15px]',
+              '[&_p+p]:mt-2',
+              '[&_ul]:ml-0 [&_ul]:list-none [&_ul]:pl-4',
+              '[&_li]:relative [&_li]:list-inside [&_li]:!pl-4 [&_li]:before:absolute [&_li]:before:left-0 [&_li]:before:top-0 [&_li]:before:content-["-"]',
+              '[&_code]:my-4 [&_code]:inline-block [&_code]:rounded-lg [&_code]:bg-gray-new-10 [&_code]:px-[10px] [&_code]:py-1',
+              '[&_a]:rounded-sm'
+            )}
+            dangerouslySetInnerHTML={{ __html: answer }}
+          />
+        </m.div>
       </LazyMotion>
     </li>
   );

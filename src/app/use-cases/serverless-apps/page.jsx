@@ -13,7 +13,7 @@ import getMetadata from 'utils/get-metadata';
 export const metadata = getMetadata(SEO_DATA.serverlessApps);
 
 const ServerlessAppsPage = () => (
-  <Layout headerWithBorder isHeaderSticky>
+  <Layout isHeaderSticky>
     <Hero />
     <Autoscaling />
     <TestimonialNew

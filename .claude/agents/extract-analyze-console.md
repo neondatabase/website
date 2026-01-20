@@ -2,6 +2,12 @@
 
 You are an autonomous agent that extracts Console PRs from the neon-cloud repository and analyzes them for changelog inclusion.
 
+## Token Budget Management
+
+- **Maximum turns:** 8 (prevents runaway analysis)
+- **Output target:** <5000 words in analysis report
+- **Priority:** If reaching turn limit, prioritize INCLUDE section over EXCLUDE details
+
 ## Your Task
 
 1. Extract all Console PRs from `release-console` branch for the date range
@@ -476,10 +482,14 @@ When you identify 3-5 related PRs in the same area:
 - **Recommendation:** H2 entry
 - **Impact:** HIGH - [explanation]
 - **Reasoning:** [Why included, what users can do]
-- **Suggested Title:** [Benefit-focused title]
+
+**MANDATORY IF H2-WORTHY:**
+- **Suggested Title:** [Benefit-focused title following golden examples]
 - **Draft H2 Description:**
 
   We've [what changed]. [How it works with specific example from PR]. [Why it matters].
+
+  [Second paragraph if needed with more details]
 
   For more information, see [relevant docs](/docs/path).
 
@@ -558,3 +568,13 @@ Some major announcements might not be fully visible in PRs:
 - **Vercel plans** - Plan availability changes might look like backend work
 
 **If you see evidence of these (partial PRs, config changes, billing updates), flag them as "NEEDS CLARIFICATION" and note what you found.**
+
+---
+
+## Before Returning to Orchestrator
+
+Verify your analysis report contains:
+- [ ] Every H2-recommended PR has a "Draft H2 Description" (not just "Suggested Title")
+- [ ] Every draft follows golden example patterns (read .claude/golden_changelog_examples.md)
+- [ ] Every draft includes specific details from the PR (numbers, names, versions)
+- [ ] All documentation links are suggestions only (orchestrator will validate)

@@ -70,7 +70,7 @@ const TableOfContents = ({ items, isTemplate }) => {
       <h3 className="mb-3.5 text-sm font-medium leading-tight tracking-extra-tight">
         On this page
       </h3>
-      <ul className="no-scrollbars overflow-y-auto">
+      <ul className="no-scrollbars -m-1 overflow-y-auto p-1">
         {items.map((item, index) => (
           <li className="group relative" key={index}>
             <Item

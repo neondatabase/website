@@ -12,11 +12,11 @@ In Neon, the project is your main workspace. Within a project, you create branch
 
 When you add a new project, Neon creates the following resources by default:
 
-- Two branches are created for you by default: `production` (your main branch for production workloads) and `development` (a child branch for development work). You can create additional child branches from either of these, or from any other branch. For more information, see [Manage branches](https://neon.com/docs/manage/branches).
+- A branch named `main` is created as your project's root branch, which serves as your production environment. You can create child branches from `main` for development, testing, staging, and other purposes. For more information, see [Manage branches](https://neon.com/docs/manage/branches).
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](https://neon.com/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Each [Neon plan](https://neon.com/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, Neon projects can support data sizes up to 4 TiB. To increase this limit, [contact the Neon Sales team](https://neon.com/contact-sales).
+- Storage depends on your [Neon plan](https://neon.com/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based—you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [contact the Neon Sales team](https://neon.com/contact-sales).
 
 ## Create a project
 
@@ -51,7 +51,7 @@ The **Settings** page includes these sub-pages:
 
 - **General** — Change the name of your project or copy the project ID.
 - **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore** — Set the restore window to enable instant restore, time travel queries, and branching from past states.
+- **Instant restore** — Set the [restore window](https://neon.com/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
 - **Updates** — Schedule a time for Postgres and Neon updates.
 - **Collaborators** — Invite external collaborators to join your Neon project.
 - **Network security** — Configure Neon's IP and Private Networking features for secure access.
@@ -72,7 +72,7 @@ You can change your project's default compute settings on the **Compute** page. 
 
    **Important**: Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
 
-A Compute Unit (CU) represents 1 vCPU with 4 GB of RAM. New branches inherit compute settings from your first branch, but you can change these defaults to:
+A Compute Unit (CU) represents approximately 4 GB of RAM, along with associated CPU and local SSD resources. New branches inherit compute settings from your first branch, but you can change these defaults to:
 
 - Set smaller compute sizes for preview deployments and development branches
 - Standardize settings across read replicas
@@ -90,6 +90,8 @@ By default, Neon retains a history of changes for all branches in your project, 
 - [Instant restore](https://neon.com/docs/introduction/branch-restore) for recovering lost data
 - [Time Travel](https://neon.com/docs/guides/time-travel-assist) queries for investigating data issues
 
+For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](https://neon.com/docs/introduction/restore-window).
+
 If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
 
 Also note that adjusting the restore window affects _all_ branches in your project.
@@ -102,8 +104,6 @@ To configure the restore window for a project:
    
 4. Use the slider to select the restore window.
 5. Click **Save**.
-
-For information about restore window limits and default settings, see [Neon plans](https://neon.com/docs/introduction/plans).
 
 ### Schedule updates for your project
 
@@ -345,6 +345,8 @@ To delete a project:
 4. Select **Delete**.
 
    **Important**: If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+
+   **Note**: **Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](https://neon.com/docs/manage/projects#recover-a-deleted-project).
 
 ## Manage projects with the Neon API
 
@@ -808,3 +810,97 @@ For attribute definitions, find the [Delete project](https://api-docs.neon.tech/
   }
 }
 ```
+
+## Recover a deleted project
+
+If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
+
+   **Note**: The deletion recovery period is different from the [restore window](https://neon.com/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+
+### What's recovered
+
+When you recover a deleted project, the following are restored:
+
+- All branches, endpoints, snapshots, and compute configurations
+- Project settings (IP Allow, logical replication, protected branches, scheduled updates)
+- Project collaborators
+- Connection strings
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
+
+### What requires reconfiguration
+
+The following features are **not** recovered and must be manually re-enabled after recovery:
+
+- **Data API** (including `authenticated` and `anonymous` roles)
+- **GitHub integration**
+- **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Vercel-Managed Neon integration** (project reconnection via Storage)
+- **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
+
+### Costs
+
+There are no storage costs or recovery fees during the 7-day deletion recovery period.
+
+### Recover a project
+
+Tab: CLI
+
+To list projects that can be recovered:
+
+```bash
+neon projects list --recoverable-only
+```
+
+To recover a deleted project:
+
+```bash
+neon projects recover <project_id>
+```
+
+The command returns details about the recovered project.
+
+**Example:**
+
+```bash
+neon projects recover crimson-voice-12345678
+┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name      │ Region Id     │ Created At           │
+├────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+For more information about the Neon CLI, see [Neon CLI — projects](https://neon.com/docs/reference/cli-projects).
+
+Tab: API
+
+To list projects that can be recovered, use the following Neon API method with the `recoverable` query parameter:
+
+```http
+GET /projects?recoverable=true
+```
+
+**Example:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects?recoverable=true' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+To recover a deleted project, use the following Neon API method:
+
+```http
+POST /projects/{project_id}/recover
+```
+
+**Example:**
+
+```bash
+curl -X POST \
+  'https://console.neon.tech/api/v2/projects/crimson-voice-12345678/recover' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+The API returns a `200` status code with the restored project object.

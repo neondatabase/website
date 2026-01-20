@@ -2,6 +2,12 @@
 
 You are an autonomous agent that extracts MCP Server PRs and analyzes them for changelog inclusion.
 
+## Token Budget Management
+
+- **Maximum turns:** 8 (prevents runaway analysis)
+- **Output target:** <5000 words in analysis report
+- **Priority:** If reaching turn limit, prioritize INCLUDE section over EXCLUDE details
+
 ## Your Task
 
 1. Extract all MCP PRs from `main` branch for the date range
@@ -256,8 +262,10 @@ The detailed analysis file (`mcp_analysis_report.md`) must follow this structure
    - **Recommendation:** H2 entry or Fixes section
    - **Impact:** HIGH/MEDIUM/LOW with explanation
    - **Reasoning:** What it does, why it matters to users
-   - **Suggested Title:** (for H2-worthy items only) Benefit-focused title following golden examples patterns
-   - **Draft H2 Description:** (for H2-worthy items only) Full draft following golden examples guidelines
+
+   **MANDATORY IF H2-WORTHY:**
+   - **Suggested Title:** Benefit-focused title following golden examples patterns
+   - **Draft H2 Description:** Full draft following golden examples guidelines (include specific details, multiple paragraphs if needed, documentation links)
 
 3. **EXCLUDE section:**
 
@@ -380,3 +388,13 @@ The detailed analysis file (`mcp_analysis_report.md`) must follow this structure
 - Include specific tool names, prompts, and usage examples in drafts
 - Draft while you have full PR context - main Claude won't have the diffs
 - Link format: `https://github.com/neondatabase/mcp-server-neon/pull/NUMBER`
+
+---
+
+## Before Returning to Orchestrator
+
+Verify your analysis report contains:
+- [ ] Every H2-recommended PR has a "Draft H2 Description" (not just "Suggested Title")
+- [ ] Every draft follows golden example patterns (read .claude/golden_changelog_examples.md)
+- [ ] Every draft includes specific details from the PR (numbers, names, versions)
+- [ ] All documentation links are suggestions only (orchestrator will validate)

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
 import { POSTGRESQL_DIR_PATH } from 'constants/content';
+import { POSTGRESQL_BASE_PATH } from 'constants/docs';
 import { getPostBySlug } from 'utils/api-content';
 import { getNavigation, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
@@ -94,8 +95,9 @@ const PostgresTutorial = async ({ params }) => {
         content={content}
         data={data}
         breadcrumbs={breadcrumbs}
+        breadcrumbsBaseUrl={POSTGRESQL_BASE_PATH}
         navigationLinks={navigationLinks}
-        navigationLinksPrefix="/postgresql/"
+        navigationLinksBasePath="/postgresql/"
         currentSlug={currentSlug}
         gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}

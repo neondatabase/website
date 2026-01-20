@@ -1,4 +1,4 @@
-import Logos, { LogosWall } from './logos';
+import Logos, { LogosWall, allLogos } from './logos';
 
-export { LogosWall };
+export { LogosWall, allLogos };
 export default Logos;

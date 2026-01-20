@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2026-01-09T19:51:39.505Z'
+updatedOn: '2026-01-15T11:54:47.648Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -44,6 +44,24 @@ Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to s
 Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
 Neon Auth currently supports Better Auth version **1.4.6**.
+
+### When to use Neon Auth vs. self-hosting Better Auth
+
+Neon Auth is a managed authentication service that integrates seamlessly with Neon's architecture and offerings:
+
+- **Branch-aware authentication** — Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
+- **Built-in Data API integration** — JWT token validation for the Data API has native support for Neon Auth.
+- **No infrastructure to manage** — Neon Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
+- **Shared OAuth credentials for testing** — Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
+
+Self-hosting Better Auth makes sense if you need:
+
+- Flexibility in auth configuration—custom plugins, hooks, and options not yet supported by Neon Auth.
+- Full control over your auth code and the ability to run it inside your own infrastructure.
+
+For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
+
+As Neon Auth evolves, more Better Auth integrations and features will be added. Check the [roadmap](/docs/auth/roadmap) to see what's currently supported and what's coming next.
 
 ## Basic usage
 

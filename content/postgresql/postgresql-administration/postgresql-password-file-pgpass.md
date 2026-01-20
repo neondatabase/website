@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-19T13:45:32+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Uninstall PostgreSQL from Ubuntu'
-  slug: 'postgresql-administration/uninstall-postgresql-ubuntu'
-nextLink:
   title: 'PostgreSQL Uptime'
   slug: 'postgresql-administration/postgresql-uptime'
+nextLink:
+  title: 'PostgreSQL pg_terminate_backend() Function'
+  slug: 'postgresql-administration/postgresql-pg_terminate_backend'
 ---
 
 **Summary**: in this tutorial, you will learn how to use a PostgreSQL password file `.pgpass` to store passwords securely and use them for connecting to PostgreSQL databases.

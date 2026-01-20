@@ -18,10 +18,21 @@ const InkeepCustomTrigger = dynamic(
   { ssr: false }
 );
 
-const tabsOrder = {
-  default: ['Neon Docs', 'PostgreSQL Tutorial', 'Changelog', 'All'],
-  postgres: ['PostgreSQL Tutorial', 'Neon Docs', 'Changelog', 'All'],
-  changelog: ['Changelog', 'Neon Docs', 'PostgreSQL Tutorial', 'All'],
+const TAB_LABELS = ['Neon Docs', 'PostgreSQL Tutorial', 'Guides', 'Changelog', 'All'];
+
+const PAGE_TYPE_TO_LABEL = {
+  postgres: 'PostgreSQL Tutorial',
+  guides: 'Guides',
+  changelog: 'Changelog',
+};
+
+const getTabsOrder = (pageType) => {
+  if (!pageType || !PAGE_TYPE_TO_LABEL[pageType]) {
+    return TAB_LABELS;
+  }
+
+  const priorityTab = TAB_LABELS[pageType];
+  return [priorityTab, ...TAB_LABELS.filter((tab) => tab !== priorityTab)];
 };
 
 const modalViews = {
@@ -29,6 +40,10 @@ const modalViews = {
   AI_CHAT: 'AI_CHAT',
 };
 
+/*
+ * docPageType prop only for pages with separate layouts (e.g., /postgresql).
+ * for shared layouts (docs/guides/changelog), useEffect determines type from pathname
+ */
 const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType = null }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, systemTheme } = useTheme();
@@ -50,6 +65,13 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
   }, []);
 
   useEffect(() => {
+    if (!pathname) return;
+
+    if (pathname.startsWith(LINKS.guides)) {
+      setPageType('guides');
+      return;
+    }
+
     if (pathname === LINKS.changelog) {
       setPageType('changelog');
     }
@@ -124,7 +146,7 @@ const InkeepTrigger = ({ className = null, isNotFoundPage = false, docPageType =
     },
     searchSettings: {
       tabSettings: {
-        tabOrderByLabel: pageType ? tabsOrder[pageType] : tabsOrder.default,
+        tabOrderByLabel: getTabsOrder(pageType),
       },
     },
     aiChatSettings: {

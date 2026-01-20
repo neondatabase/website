@@ -7,8 +7,8 @@ ogImage: '/postgresqltutorial/PostgreSQL-Copy-Table-300x260.png'
 updatedOn: '2024-02-18T08:28:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Temporary Table'
-  slug: 'postgresql-tutorial/postgresql-temporary-table'
+  title: 'PostgreSQL TRUNCATE TABLE'
+  slug: 'postgresql-tutorial/postgresql-truncate-table'
 nextLink:
   title: 'PostgreSQL Primary Key'
   slug: 'postgresql-tutorial/postgresql-primary-key'

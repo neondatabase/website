@@ -3,7 +3,7 @@ title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
 enableTableOfContents: true
-updatedOn: '2026-01-09T15:57:09.721Z'
+updatedOn: '2026-01-15T23:54:00.610Z'
 ---
 
 In this guide we will create an initial schema on a new database called `people` on our `production` branch. We'll then create a development branch called `feature/address`, following one possible convention for naming feature branches. After making schema changes on `feature/address`, we'll use the **Schema Diff** tool on the **Branches** page to get a side-by-side, GitHub-style visual comparison between the `feature/address` development branch and `production`.
@@ -158,7 +158,7 @@ For the purposes of this tutorial, name the branch `feature/address`, which coul
 1. Create the development branch
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
-   - Select `main` as the default branch.
+   - Select `production` as the parent branch.
    - Name the branch `feature/address`.
 
 1. Verify the schema on your new branch
@@ -374,7 +374,7 @@ Now that you have some differences between your branches, you can view the schem
 
    ![schema diff results](/docs/guides/schema_diff_result.png)
 
-You will see the schema differences between `feature/address` and its parent `main`, including the new address table that we added to the `feature/address` branch.
+You will see the schema differences between `feature/address` and its parent `production`, including the new address table that we added to the `feature/address` branch.
 
 You can also launch Schema Diff from the **Restore** page, usually as part of verifying schemas before you restore a branch to its own or another branch's history. See [Instant restore](/docs/guides/branch-restore) for more info.
 
@@ -388,7 +388,7 @@ Compare the schema of `feature/address` to its parent branch using the `schema-d
 neon branches schema-diff production feature/address --database people
 ```
 
-The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `feature/address` branch but are not present in its parent branch `main`.
+The result shows a comparison between the `feature/address` branch and its parent branch for the database `people`. The output indicates that the `address` table and its related sequences and constraints have been added in the `feature/address` branch but are not present in its parent branch `production`.
 
 ```diff
 --- Database: people (Branch: br-falling-dust-a5bakdqt) // [!code --]

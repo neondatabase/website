@@ -1,6 +1,6 @@
 import LINKS from './links';
 
-export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-01-15';
 
 export default {
   index: {
@@ -111,11 +111,6 @@ export default {
       'We asked 50 developers managing production Postgres about recovery times and their business impact.',
     pathname: LINKS.report,
     imagePath: '/images/social-previews/report.jpg',
-  },
-  thankYou: {
-    title: 'Thank you for subscribing — Neon',
-    description: 'Thank you for subscribing to the Neon newsletter',
-    pathname: LINKS.thankYou,
   },
   variable: {
     title: 'Dynamically scale your Postgres database — Neon',

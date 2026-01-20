@@ -7,11 +7,11 @@ ogImage: 'https://www.mysqltutorial.org//postgresqltutorial/products.svg'
 updatedOn: '2024-01-28T13:56:31+00:00'
 enableTableOfContents: true
 previousLink:
+  title: 'PostgreSQL REGEXP_REPLACE() Function'
+  slug: 'postgresql-string-functions/regexp_replace'
+nextLink:
   title: 'PostgreSQL REVERSE() Function'
   slug: 'postgresql-string-functions/postgresql-reverse'
-nextLink:
-  title: 'PostgreSQL LENGTH() Function'
-  slug: 'postgresql-string-functions/postgresql-length-function'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REPEAT()` function to repeat a string a specified number of times.

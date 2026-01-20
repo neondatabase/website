@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-04-18T03:47:36+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL POWER() Function'
-  slug: 'postgresql-math-functions/postgresql-power'
+  title: 'PostgreSQL MIN_SCALE() Function'
+  slug: 'postgresql-math-functions/postgresql-min_scale'
 nextLink:
   title: 'PostgreSQL RADIANS() Function'
   slug: 'postgresql-math-functions/postgresql-radians'

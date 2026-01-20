@@ -8,6 +8,7 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
+  transpilePackages: ['geist'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -307,11 +308,6 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      // {
-      //   source: '/ai',
-      //   destination: '/docs/ai/ai-intro',
-      //   permanent: true,
-      // },
       {
         source: '/deploy',
         destination: '/',
@@ -487,6 +483,62 @@ const defaultConfig = {
         source: '/cost-fleets',
         destination: '/',
         permanent: true,
+      },
+      // Homepage variants redirects
+      {
+        source: '/all-things-open-2023',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/cfe',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/devs',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/education',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/fireship',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/github',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/last-week-in-aws',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/pgt',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/radio',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/stackoverflow',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/youtube',
+        destination: '/',
+        permanent: false,
       },
       ...docsRedirects,
       ...changelogRedirects,

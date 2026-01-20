@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2026-01-05T20:32:04.266Z'
+updatedOn: '2026-01-15T16:35:55.059Z'
 layout: wide
 ---
 
@@ -146,8 +146,6 @@ export const authClient = createAuthClient();
 Copy and paste following code in `lib/auth/server.ts` file:
 
 ```tsx
-'use server';
-
 import { createAuthServer } from '@neondatabase/auth/next/server';
 
 export const authServer = createAuthServer();

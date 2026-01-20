@@ -1,0 +1,27 @@
+# Plugins
+
+> The document outlines the use of plugins in Neon, detailing how to integrate and manage them within the platform to extend functionality and customize user authentication processes.
+
+## Source
+
+- [Plugins HTML](https://neon.com/docs/auth/guides/plugins): The original HTML version of this documentation
+
+**Note** Beta: The **Neon Auth with Better Auth** is in Beta. Share your feedback on [Discord](https://discord.gg/92vNTzKDGp) or via the [Neon Console](https://console.neon.tech/app/projects?modal=feedback).
+
+Neon Auth is built on [Better Auth](https://www.better-auth.com/), which supports a variety of plugins to extend authentication functionality.
+
+   **Info** Plugins are managed by Neon Auth: Neon Auth is a **managed** Better Auth service. You **don't install or configure Better Auth plugins directly** - instead, Neon Auth exposes a supported subset of plugins through the Neon SDK. More granular controls like enabling/disabling specific plugins and customizing plugin behavior are on the roadmap.
+
+The following Better Auth plugins are currently supported in Neon Auth:
+
+## Supported plugins
+
+| Plugin                                                 | Status                                                       |
+| ------------------------------------------------------ | ------------------------------------------------------------ |
+| [Admin](https://neon.com/docs/auth/guides/plugins/admin)               | ✅ Supported                                                 |
+| [Email OTP](https://neon.com/docs/auth/guides/plugins/email-otp)       | ✅ Supported                                                 |
+| [JWT](https://neon.com/docs/auth/guides/plugins/jwt)                   | ✅ Supported                                                 |
+| [Organization](https://neon.com/docs/auth/guides/plugins/organization) | ⚠️ Partial (invitation emails, JWT token claims in progress) |
+| [Open API](https://neon.com/docs/auth/guides/plugins/openapi)          | ✅ Supported                                                 |
+
+For the latest status (including what's coming next), see the [Neon Auth roadmap](https://neon.com/docs/auth/roadmap).

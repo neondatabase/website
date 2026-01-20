@@ -38,7 +38,7 @@ Once HIPAA is enabled for your organization, you can proceed to enable HIPAA com
 
    **Important**: Once HIPAA compliance is enabled on a project, it cannot be disabled. Enabling HIPAA will also restart all computes, temporarily interrupting database connections.
 
-   **Note**: HIPAA is not yet supported for Postgres 18. You cannot create a Postgres 18 project in a HIPAA-enabled Neon organization.
+   **Note**: HIPAA support for Postgres 18 is currently available in AWS regions only. You cannot create a Postgres 18 HIPAA-compliant project in Azure regions.
 
 Tab: New project
 
@@ -72,7 +72,7 @@ curl --request POST \
     "settings": {
       "hipaa": true
     },
-    "pg_version": 17
+    "pg_version": 18
   }
 }
 '

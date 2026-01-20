@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-17T02:51:29+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Compare Two Tables in PostgreSQL'
-  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
+  title: 'PostgreSQL generate_series() Function'
+  slug: 'postgresql-tutorial/postgresql-generate_series'
 nextLink:
-  title: 'How To Delete Duplicate Rows in PostgreSQL'
-  slug: 'postgresql-tutorial/how-to-delete-duplicate-rows-in-postgresql'
+  title: 'PostgreSQL vs. MySQL'
+  slug: 'postgresql-tutorial/postgresql-vs-mysql'
 ---
 
 **Summary**: This tutorial shows you how to develop a user\-defined function that generates a random number between two numbers.

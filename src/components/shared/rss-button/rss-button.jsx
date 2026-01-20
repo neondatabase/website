@@ -6,7 +6,7 @@ import RSSLogo from 'icons/rss.inline.svg';
 const RssButton = ({ className, basePath, title }) => (
   <a
     className={clsx(
-      'text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-primary-1',
+      'rounded-sm text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-primary-1',
       className
     )}
     href={`${basePath}rss.xml`}

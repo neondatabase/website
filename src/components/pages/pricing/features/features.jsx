@@ -81,7 +81,7 @@ const Features = () => (
             </p>
             <Link
               href={link}
-              className="mt-4 text-[15px] leading-none tracking-[-0.03em]"
+              className="mt-4 rounded-sm text-[15px] leading-none tracking-[-0.03em]"
               theme="white"
               withArrow
             >

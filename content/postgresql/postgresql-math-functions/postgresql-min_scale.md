@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-05-19T04:16:51+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL LCM() Function'
-  slug: 'postgresql-math-functions/postgresql-lcm'
-nextLink:
   title: 'PostgreSQL MOD() Function'
   slug: 'postgresql-math-functions/postgresql-mod'
+nextLink:
+  title: 'PostgreSQL PI() Function'
+  slug: 'postgresql-math-functions/postgresql-pi-function'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `min_scale()` function to determine the minimum number of decimal places required to represent a number accurately.

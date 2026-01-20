@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-02-01T03:13:27+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'How to Generate a Random Number in a Range'
-  slug: 'postgresql-tutorial/postgresql-random-range'
+  title: 'PostgreSQL DELETE CASCADE'
+  slug: 'postgresql-tutorial/postgresql-delete-cascade'
 nextLink:
-  title: 'PostgreSQL CASE'
-  slug: 'postgresql-tutorial/postgresql-case'
+  title: 'PostgreSQL UPSERT using INSERT ON CONFLICT Statement'
+  slug: 'postgresql-tutorial/postgresql-upsert'
 ---
 
 **Summary**: in this tutorial, you will learn how to use various techniques to delete duplicate rows in PostgreSQL.
