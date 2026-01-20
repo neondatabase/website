@@ -2,7 +2,7 @@
 title: Neon community
 subtitle: Learn how to get involved in the Neon community
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.223Z'
+updatedOn: '2026-01-20T19:00:25.309Z'
 ---
 
 Neon is [open source](/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:

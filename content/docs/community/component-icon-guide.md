@@ -2,7 +2,7 @@
 title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
 enableTableOfContents: true
-updatedOn: '2025-07-11T20:37:11.993Z'
+updatedOn: '2026-01-20T19:00:25.315Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.

@@ -2,7 +2,7 @@
 title: Component guide
 subtitle: Most commonly used components for documentation writers
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.223Z'
+updatedOn: '2026-01-20T19:00:25.314Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.

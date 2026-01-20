@@ -2,7 +2,7 @@
 title: Component architecture
 subtitle: Technical implementation details for developers and maintainers
 enableTableOfContents: true
-updatedOn: '2025-09-15T12:22:41.749Z'
+updatedOn: '2026-01-20T19:00:25.312Z'
 ---
 
 A technical reference for developers and maintainers who need to understand, modify, or extend the Neon documentation component system. This guide covers the architecture, file structure, and implementation details.
