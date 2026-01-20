@@ -73,6 +73,7 @@ const Programs = () => (
             className={clsx(
               'mt-5 gap-2 text-base font-medium leading-none tracking-extra-tight',
               'text-gray-new-80 transition-colors hover:text-white',
+              '[&_svg]:text-gray-new-60',
               'lg:gap-1.5 lg:text-[15px]'
             )}
             to={url}

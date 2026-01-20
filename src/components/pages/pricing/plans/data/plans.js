@@ -66,7 +66,7 @@ export default {
       scale: '$0.222 per CU-hour',
     },
     {
-      rows: '1',
+      rows: '1-2',
       feature: {
         title: 'Sizes',
       },
@@ -139,9 +139,9 @@ export default {
       },
       free: 'Up to 60k',
       launch:
-        "Up to 1M <span>If you're planning to go beyond<br/> that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
       scale:
-        "Up to 1M <span>If you're planning to go beyond<br/> that, <a href='/contact-sales'>contact us</a></span>",
+        "Up to 1M <span>If you're planning to go beyond that, <a href='/contact-sales'>contact us</a></span>",
     },
     {
       rows: '2',
