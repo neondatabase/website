@@ -6,42 +6,34 @@ import Image from 'next/image';
 import DownloadIcon from 'icons/download.inline.svg';
 
 import Section from '../section';
+import { handleDownload } from '../utils';
 
 const logos = [
   {
     svgSrc: '/brand/neon-logomark-light-color.svg?updated=2026-01-15',
     svgName: 'neon-logomark-light-color.svg',
-    pngSrc: '/brand/neon-logomark-light-color@2x.png',
+    pngSrc: '/brand/neon-logomark-light-color@2x.png?updated=2026-01-20',
     pngName: 'neon-logomark-light-color@2x.png',
   },
   {
     svgSrc: '/brand/neon-logomark-light-mono.svg?updated=2026-01-15',
     svgName: 'neon-logomark-light-mono.svg',
-    pngSrc: '/brand/neon-logomark-light-mono@2x.png',
+    pngSrc: '/brand/neon-logomark-light-mono@2x.png?updated=2026-01-20',
     pngName: 'neon-logomark-light-mono@2x.png',
   },
   {
     svgSrc: '/brand/neon-logomark-dark-color.svg?updated=2026-01-15',
     svgName: 'neon-logomark-dark-color.svg',
-    pngSrc: '/brand/neon-logomark-dark-color@2x.png',
+    pngSrc: '/brand/neon-logomark-dark-color@2x.png?updated=2026-01-20',
     pngName: 'neon-logomark-dark-color@2x.png',
   },
   {
     svgSrc: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-15',
     svgName: 'neon-logomark-dark-mono.svg',
-    pngSrc: '/brand/neon-logomark-dark-mono@2x.png',
+    pngSrc: '/brand/neon-logomark-dark-mono@2x.png?updated=2026-01-20',
     pngName: 'neon-logomark-dark-mono@2x.png',
   },
 ];
-
-const handleDownload = (url, filename) => {
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-};
 
 const Logomark = () => (
   <Section
@@ -74,24 +66,24 @@ const Logomark = () => (
               )}
             >
               <button
-                type="button"
                 className={clsx(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'
                 )}
+                type="button"
                 onClick={() => handleDownload(logo.pngSrc, logo.pngName)}
               >
                 <span className="text-xs font-medium">PNG</span>
                 <DownloadIcon className="h-3.5 w-3.5" />
               </button>
               <button
-                type="button"
                 className={clsx(
                   'flex h-7 items-center gap-1.5 border px-2.5',
                   'border-gray-new-30 bg-gray-new-8 text-gray-new-94',
                   'transition-colors duration-200 hover:bg-gray-new-15'
                 )}
+                type="button"
                 onClick={() => handleDownload(logo.svgSrc, logo.svgName)}
               >
                 <span className="text-xs font-medium">SVG</span>
