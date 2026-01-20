@@ -1,5 +1,5 @@
 ---
-title: Documentation Contribution Guide
+title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.224Z'
@@ -40,7 +40,7 @@ Neon uses Markdown as the documentation source format. Markdown is a lightweight
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
-For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide).
+For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide). To add visual diagrams to your documentation, check out our [Mermaid Diagrams Guide](/docs/community/mermaid-diagrams).
 
 ## Preview changes in VSCode
 

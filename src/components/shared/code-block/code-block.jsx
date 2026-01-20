@@ -22,10 +22,10 @@ const CodeBlock = async ({
   children,
   ...otherProps
 }) => {
-  const language = children?.props?.className?.replace('language-', '');
-  const meta = children?.props?.meta;
+  const language = children?.props?.className?.replace('language-', '') || 'text';
+  const meta = children?.props?.meta || '';
   const filename = getFileNameFromMeta(meta);
-  const code = children?.props?.children?.trim();
+  const code = children?.props?.children?.trim() || '';
   const html = await highlight(code, language, meta);
 
   return (

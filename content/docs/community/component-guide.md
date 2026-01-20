@@ -1,5 +1,5 @@
 ---
-title: Neon Documentation MDX Components Guide
+title: Component guide
 subtitle: Most commonly used components for documentation writers
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.223Z'
