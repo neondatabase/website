@@ -30,7 +30,7 @@ const getNeonTheme = (isDark) => ({
     background: isDark ? '#18191B' : '#ffffff',
     mainBkg: isDark ? '#18191B' : '#ffffff',
     // Fonts
-    fontFamily: 'IBM Plex Mono, monospace',
+    fontFamily: 'var(--font-geist-mono), ui-monospace, monospace',
     fontSize: '14px',
     // Git graph
     git0: '#00E599',
