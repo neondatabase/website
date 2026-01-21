@@ -10,7 +10,7 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 ## Before you begin
 
 - The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
-- Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
+- Neon Data API does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 
 <Steps>
 

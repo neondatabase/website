@@ -296,7 +296,7 @@ This query returns all rules regardless of how they were created (Console, API, 
 - Branch is unavailable during anonymization.
 - Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
 - **Foreign key columns cannot be masked directly.** To maintain referential integrity, you should mask the corresponding primary key column instead. The Console displays an alert with a "Go to primary key" action that navigates to the relevant primary key column.
-- Anonymized branches are not currently supported for projects with [IP restrictions](/docs/introduction/ip-allow) or [private networking](/docs/guides/neon-private-networking) enabled.
+- Anonymized branches do not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 - The Console provides a curated subset of masking functions for creation—use the API or SQL for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
 ## Related resources
