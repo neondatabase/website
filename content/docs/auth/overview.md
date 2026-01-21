@@ -125,6 +125,8 @@ Choose your framework to get started:
 
 Neon Auth is currently available for AWS regions only. Azure support is not yet available.
 
+Neon Auth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
+
 ## Pricing
 
 Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
