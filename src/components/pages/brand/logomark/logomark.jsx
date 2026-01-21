@@ -10,27 +10,27 @@ import { handleDownload } from '../utils';
 
 const logos = [
   {
-    svgSrc: '/brand/neon-logomark-light-color.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logomark-light-color.svg?updated=2026-01-21',
     svgName: 'neon-logomark-light-color.svg',
-    pngSrc: '/brand/neon-logomark-light-color@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logomark-light-color@2x.png?updated=2026-01-21',
     pngName: 'neon-logomark-light-color@2x.png',
   },
   {
-    svgSrc: '/brand/neon-logomark-light-mono.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logomark-light-mono.svg?updated=2026-01-21',
     svgName: 'neon-logomark-light-mono.svg',
-    pngSrc: '/brand/neon-logomark-light-mono@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logomark-light-mono@2x.png?updated=2026-01-21',
     pngName: 'neon-logomark-light-mono@2x.png',
   },
   {
-    svgSrc: '/brand/neon-logomark-dark-color.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logomark-dark-color.svg?updated=2026-01-21',
     svgName: 'neon-logomark-dark-color.svg',
-    pngSrc: '/brand/neon-logomark-dark-color@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logomark-dark-color@2x.png?updated=2026-01-21',
     pngName: 'neon-logomark-dark-color@2x.png',
   },
   {
-    svgSrc: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logomark-dark-mono.svg?updated=2026-01-21',
     svgName: 'neon-logomark-dark-mono.svg',
-    pngSrc: '/brand/neon-logomark-dark-mono@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logomark-dark-mono@2x.png?updated=2026-01-21',
     pngName: 'neon-logomark-dark-mono@2x.png',
   },
 ];

@@ -11,30 +11,30 @@ import { handleDownload } from '../utils';
 const logos = [
   {
     className: 'bg-white',
-    svgSrc: '/brand/neon-logo-light-color.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logo-light-color.svg?updated=2026-01-21',
     svgName: 'neon-logo-light-color.svg',
-    pngSrc: '/brand/neon-logo-light-color@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logo-light-color@2x.png?updated=2026-01-21',
     pngName: 'neon-logo-light-color@2x.png',
   },
   {
     className: 'bg-black-pure border-gray-new-30 border',
-    svgSrc: '/brand/neon-logo-dark-color.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logo-dark-color.svg?updated=2026-01-21',
     svgName: 'neon-logo-dark-color.svg',
-    pngSrc: '/brand/neon-logo-dark-color@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logo-dark-color@2x.png?updated=2026-01-21',
     pngName: 'neon-logo-dark-color@2x.png',
   },
   {
     className: 'bg-[#5280FF]',
-    svgSrc: '/brand/neon-logo-dark-mono.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logo-dark-mono.svg?updated=2026-01-21',
     svgName: 'neon-logo-dark-mono.svg',
-    pngSrc: '/brand/neon-logo-dark-mono@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logo-dark-mono@2x.png?updated=2026-01-21',
     pngName: 'neon-logo-dark-mono@2x.png',
   },
   {
     className: 'bg-[#4DDBA7]',
-    svgSrc: '/brand/neon-logo-light-mono.svg?updated=2026-01-15',
+    svgSrc: '/brand/neon-logo-light-mono.svg?updated=2026-01-21',
     svgName: 'neon-logo-light-mono.svg',
-    pngSrc: '/brand/neon-logo-light-mono@2x.png?updated=2026-01-20',
+    pngSrc: '/brand/neon-logo-light-mono@2x.png?updated=2026-01-21',
     pngName: 'neon-logo-light-mono@2x.png',
   },
 ];
