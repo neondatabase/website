@@ -39,11 +39,11 @@ const Features = () => (
         id
       ) => (
         <li
-          key={id}
           className={clsx(
             'flex gap-48 2xl:gap-20 xl:gap-16 lg:flex-col lg:items-start lg:gap-[72px] md:gap-[52px]',
             className
           )}
+          key={id}
         >
           <div
             className={clsx(
@@ -58,7 +58,8 @@ const Features = () => (
               className={clsx(
                 'mt-7 flex w-fit items-center gap-2 rounded-sm text-lg font-medium leading-none tracking-extra-tight',
                 'xl:mt-[30px] lg:mt-5 md:mt-[14px] sm:gap-1.5 sm:text-[15px]',
-                'hover:!text-white [&:hover>svg]:!text-white [&>svg]:!text-gray-new-70'
+                '[&>svg]:!text-gray-new-70 [&>svg]:!transition-all',
+                'hover:!text-white [&:hover>svg]:!text-white'
               )}
               theme="white"
               to={link}
