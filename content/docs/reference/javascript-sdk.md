@@ -329,10 +329,10 @@ The user must then call `signIn.emailOtp()` with the received code.
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type                 | Required  |
-| -------------- | -------------------- | --------- | ----------------- | --- |
-| <tt>email</tt> | string               | ✓         |
-| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓   |
+| Parameter      | Type                                                   | Required  |
+| -------------- | ------------------------------------------------------ | --------- |
+| <tt>email</tt> | string                                                 | ✓         |
+| <tt>type</tt>  | "email-verification" \| "sign-in" \| "forget-password" | ✓         |
 
 </details>
 
@@ -441,11 +441,11 @@ Useful for password reset flows where you need to verify the code before allowin
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type                 | Required  |
-| -------------- | -------------------- | --------- | ----------------- | --- |
-| <tt>email</tt> | string               | ✓         |
-| <tt>type</tt>  | "email-verification" | "sign-in" | "forget-password" | ✓   |
-| <tt>otp</tt>   | string               | ✓         |
+| Parameter      | Type                                                   | Required |
+| -------------- | ------------------------------------------------------ | -------- |
+| <tt>email</tt> | string                                                 | ✓        |
+| <tt>type</tt>  | "email-verification" \| "sign-in" \| "forget-password" | ✓        |
+| <tt>otp</tt>   | string                                                 | ✓        |
 
 </details>
 
