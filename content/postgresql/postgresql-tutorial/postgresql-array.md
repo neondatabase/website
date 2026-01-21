@@ -18,7 +18,7 @@ nextLink:
 
 ## Introduction to PostgreSQL array data type
 
-In PostgreSQL, an array of a collection of elements that have the same data type.
+In PostgreSQL, an array is a collection of elements that have the same data type.
 
 Arrays can be one\-dimensional, multidimensional, or even nested arrays.
 
