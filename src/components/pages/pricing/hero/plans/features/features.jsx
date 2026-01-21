@@ -85,8 +85,8 @@ const Features = ({ title, features, type, highlighted }) => (
 );
 
 Features.propTypes = {
-  title: PropTypes.string,
-  features: PropTypes.arrayOf(Feature.propTypes).isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  features: PropTypes.arrayOf(PropTypes.shape(Feature.propTypes)).isRequired,
   type: PropTypes.string.isRequired,
   highlighted: PropTypes.bool,
 };

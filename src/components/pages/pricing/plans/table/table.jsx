@@ -1,8 +1,5 @@
-'use client';
-
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect, useMemo, useState } from 'react';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
@@ -16,8 +13,9 @@ import tableData from '../data/plans';
 // Styles to set fixed height for table cells
 const rowClass = {
   1: 'h-[50px]',
+  '1-2': 'h-[50px] lg:h-[65px]',
   2: 'h-[73px]',
-  3: 'h-[92px] lg:h-[124px] xl:h-[108px]',
+  3: 'h-[92px] xl:h-[108px]',
 };
 
 const TableHeading = ({ className, label, price, isLabelsColumn, isFeaturedPlan }) => {
@@ -67,40 +65,16 @@ TableHeading.propTypes = {
 
 const Table = () => {
   const labelList = tableData.headings;
-  const [currentRow, setCurrentRow] = useState('');
   const tableRows = tableData.cols; // Show all rows at once
   const tableHeadings = Object.keys(tableData.headings);
 
-  useEffect(() => {
-    const cells = document.querySelectorAll(`[data-row-id]`);
-
-    cells.forEach((cell) => {
-      const rowId = cell.getAttribute('data-row-id') || '';
-
-      cell.addEventListener('mouseenter', () => setCurrentRow(rowId));
-      cell.addEventListener('mouseleave', () => setCurrentRow(''));
-    });
-
-    return () => {
-      cells.forEach((cell) => {
-        const rowId = cell.getAttribute('data-row-id') || '';
-
-        cell.removeEventListener('mouseenter', () => setCurrentRow(rowId));
-        cell.removeEventListener('mouseleave', () => setCurrentRow(''));
-      });
-    };
-  }, [tableRows]);
-
-  const rowsWithGroupTitles = useMemo(
-    () =>
-      tableData.cols.reduce((acc, item, index) => {
-        if (typeof item.feature === 'string') {
-          acc.push(index);
-        }
-        return acc;
-      }, []),
-    []
-  );
+  // Calculate rows with group titles (no need for memoization on server)
+  const rowsWithGroupTitles = tableData.cols.reduce((acc, item, index) => {
+    if (typeof item.feature === 'string') {
+      acc.push(index);
+    }
+    return acc;
+  }, []);
 
   return (
     <Container size="1152" className="flex flex-col lg:pr-0 md:pl-5">
@@ -135,18 +109,15 @@ const Table = () => {
                     return (
                       <li
                         className={clsx(
-                          'relative flex flex-col justify-start transition-colors',
+                          'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
+                          index === 0 && 'border-t-0',
                           isGroupTitle
-                            ? 'h-[86px] justify-end pb-[18px] lg:h-[66px]'
+                            ? 'h-[86px] justify-end border-t pb-[18px] lg:h-[66px]'
                             : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
-                          !isGroupTitle && 'border-t border-dashed border-gray-new-15',
                           i === 1 && 'lg:pl-5',
-                          currentRow === index.toString() && !isGroupTitle
-                            ? 'bg-gray-new-8 before:opacity-100 lg:bg-transparent'
-                            : 'before:opacity-0',
+                          'before:opacity-0',
                           'before:absolute before:-inset-y-px before:-left-4 before:z-0 before:w-4 before:rounded-bl-lg before:rounded-tl-lg before:bg-gray-new-8 before:transition-opacity lg:before:hidden'
                         )}
-                        data-row-id={index}
                         key={index}
                       >
                         {isGroupTitle ? (
@@ -175,7 +146,12 @@ const Table = () => {
                                 <Link
                                   tabIndex={0}
                                   href={item[key].subtitle.href}
-                                  className="z-10 mt-1 inline-block w-fit rounded-sm border-b border-[rgba(175,177,182,0.40)] text-sm font-light leading-snug tracking-extra-tight text-gray-new-50 transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+                                  className={clsx(
+                                    'z-10 mt-1 block w-fit border-b border-dashed border-[rgba(175,177,182,0.40)]',
+                                    'text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
+                                    'transition-colors duration-200',
+                                    'hover:border-primary-1 hover:text-primary-1'
+                                  )}
                                 >
                                   {item[key].subtitle.text}
                                 </Link>
@@ -214,6 +190,8 @@ const Table = () => {
                     );
                   } else {
                     const isIncluded = item[key] === 'Included';
+                    const cellValue = item[key];
+                    const isStringValue = typeof cellValue === 'string' && cellValue;
                     cell = (
                       <span
                         className={clsx(
@@ -227,7 +205,9 @@ const Table = () => {
                         )}
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}
-                        dangerouslySetInnerHTML={{ __html: item[key] }}
+                        {...(isStringValue
+                          ? { dangerouslySetInnerHTML: { __html: cellValue } }
+                          : { children: cellValue })}
                       />
                     );
                   }
@@ -235,20 +215,15 @@ const Table = () => {
                   return (
                     <li
                       className={clsx(
-                        'relative flex flex-col justify-start transition-colors',
+                        'relative flex flex-col justify-start border-t border-gray-new-15 transition-colors',
+                        index === 0 && 'border-t-0',
                         rowsWithGroupTitles.includes(index)
                           ? 'h-[86px] lg:h-[66px]'
                           : ['py-[14px] lg:py-2.5', rowClass[item.rows]],
-                        item[key] !== undefined &&
-                          !rowsWithGroupTitles.includes(index) &&
-                          'border-t border-dashed border-gray-new-15',
-                        currentRow === index.toString() &&
-                          !rowsWithGroupTitles.includes(index) &&
-                          'bg-gray-new-8 before:opacity-100 lg:bg-transparent',
+                        item[key] !== undefined && !rowsWithGroupTitles.includes(index),
                         i === arr.length - 1 &&
                           'before:absolute before:-inset-y-px before:-right-4 before:z-0 before:w-4 before:rounded-br-lg before:rounded-tr-lg before:bg-gray-new-8 before:opacity-0 before:transition-opacity lg:before:hidden'
                       )}
-                      data-row-id={index}
                       key={index}
                     >
                       <div

@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-09-13T09:38:53.468Z'
+updatedOn: '2026-01-20T15:30:53.659Z'
 ---
 
 ## Supported actions (tools)
@@ -47,6 +47,10 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 **Neon Auth:**
 
 - `provision_neon_auth`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
+
+**Neon Data API:**
+
+- `provision_neon_data_api`: Provisions the Neon Data API for a branch, enabling HTTP-based Data API access with optional JWT authentication.
 
 **Search and discovery:**
 

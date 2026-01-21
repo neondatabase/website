@@ -1,1 +1,3 @@
-export { default } from './plans';
+import Plans from './plans';
+
+export default Plans;

@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2025-08-02T10:33:29.256Z'
+updatedOn: '2026-01-16T18:23:31.111Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
@@ -39,7 +39,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - [Built-in connection pooling](https://neon.com/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
 - You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
 
-## Scale-ups and large fleets
+## Stage 3: Scale-ups and large fleets
 
 **Frictionless operations at scale**
 
