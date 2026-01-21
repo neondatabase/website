@@ -74,15 +74,15 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         )}
       </Link>
     ))}
-    <div className="flex gap-2.5 lg:hidden">
+    <div className="ml-1.5 flex gap-x-4 xl:ml-1 lg:hidden">
       <Button
         className="h-9 px-[18px]"
         to={LINKS.login}
-        theme="transparent"
+        theme="gray-40-outline"
         size="xxs"
         tagName="Header"
       >
-        Log In
+        Log in
       </Button>
       <Button
         className="h-9 px-[18px]"
@@ -91,11 +91,12 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         size="xxs"
         tagName="Header"
       >
-        Sign Up
+        Sign up
       </Button>
     </div>
   </div>
 );
+
 Sidebar.propTypes = {
   isClient: PropTypes.bool,
   isDocs: PropTypes.bool,

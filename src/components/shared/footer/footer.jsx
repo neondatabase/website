@@ -12,7 +12,7 @@ import StatusBadge from './status-badge';
 
 const Footer = ({ hasThemesSupport = false }) => (
   <footer className="safe-paddings relative z-30 mt-auto border-t border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-black-pure">
-    <Container className="flex justify-between gap-x-10 py-12 xl:py-8 sm:py-5" size="1920">
+    <Container className="flex justify-between gap-x-10 py-12 3xl:py-8 sm:py-5" size="1920">
       <div className="flex flex-col items-start lg:w-full">
         <div className="mb-auto lg:mb-11">
           <Logo className="sm:h-6 sm:w-auto" width={102} height={28} />
