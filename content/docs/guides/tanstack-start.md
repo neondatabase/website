@@ -55,6 +55,32 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
+If you haven't created a database yet, run the following command to generate a [Neon Instagres DB](https://neon.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
+
+<CodeTabs labels={["npm", "yarn", "pnpm", "bun", "deno"]}>
+
+```bash
+  npm get-db
+```
+
+```bash
+  yarn dlx get-db
+```
+
+```bash
+  pnpm get-db
+```
+
+```bash
+  bunx get-db
+```
+
+```bash
+  deno run -A get-db
+```
+
+</CodeTabs>
+
 ## Configure the Postgres client
 
 There are multiple ways to make server side requests with TanStack Start. See below for the different implementations.
