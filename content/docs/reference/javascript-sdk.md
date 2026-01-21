@@ -329,10 +329,10 @@ The user must then call `signIn.emailOtp()` with the received code.
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type                                                   | Required  |
-| -------------- | ------------------------------------------------------ | --------- |
-| <tt>email</tt> | string                                                 | ✓         |
-| <tt>type</tt>  | "email-verification" \| "sign-in" \| "forget-password" | ✓         |
+| Parameter      | Type                                                   | Required |
+| -------------- | ------------------------------------------------------ | -------- |
+| <tt>email</tt> | string                                                 | ✓        |
+| <tt>type</tt>  | "email-verification" \| "sign-in" \| "forget-password" | ✓        |
 
 </details>
 
