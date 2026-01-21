@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import ICONS_CONFIG from 'config/docs-icons-config';
 import CheckIcon from 'icons/check.inline.svg';
 import ChevronRight from 'icons/chevron-right-sm.inline.svg';
-import CopyIcon from 'icons/copy.inline.svg';
+import CopyIcon from 'icons/home/copy.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
 const PromptCards = ({ children = null, withToggler = false }) => {
@@ -149,7 +149,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
           {isCopied ? (
             <CheckIcon className="h-3.5 w-3.5 text-green-45" />
           ) : (
-            <CopyIcon className="h-3.5 w-3.5 text-gray-new-40 dark:text-gray-new-60" />
+            <CopyIcon className="h-3.5 w-3.5 text-gray-new-30 dark:text-gray-new-60" />
           )}
         </div>
       </button>
