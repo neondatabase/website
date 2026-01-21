@@ -1,7 +1,7 @@
 import Features from 'components/pages/pricing/features';
 import Hero from 'components/pages/pricing/hero';
 import Plans from 'components/pages/pricing/plans';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
@@ -130,10 +130,10 @@ const PricingPage = () => (
     <Plans className="mt-[200px] scroll-mt-5 px-safe xl:mt-[184px] lg:mt-40 md:mt-[120px]" />
     <Features />
     <Faq items={faqItems} />
-    <CTA
-      className="pb-[350px] pt-[445px] xl:pb-[200px] xl:pt-[260px] lg:pb-[150px] lg:pt-[220px] sm:pb-[100px] sm:pt-[160px]"
-      title="Still have a question?"
-      description="Complete the form below to get in touch with our Sales team."
+    <CTANew
+      className="mt-[183px] xl:mt-[168px] lg:mt-[145px] md:mt-[90px]"
+      title="Still have questions? Get in touch."
+      description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
       buttonText="Talk to Sales"
       buttonUrl={LINKS.contactSales}
     />
