@@ -34,7 +34,7 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 ## Quick start prompts
 
-Copy a setup prompt and paste it into your AI-enabled code editor to get started with Neon quickly. Or browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides.
+Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides.
 
 <PromptCards withToggler>
 
