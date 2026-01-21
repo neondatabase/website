@@ -98,7 +98,7 @@
     }
 
     .anchor-heading {
-      @apply scroll-mt-32 lg:scroll-mt-5;
+      @apply scroll-mt-24 lg:scroll-mt-5;
     }
 
     p > img {

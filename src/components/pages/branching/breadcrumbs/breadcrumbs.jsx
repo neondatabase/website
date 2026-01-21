@@ -9,7 +9,7 @@ const Breadcrumbs = () => (
       to={LINKS.branching}
     >
       <ArrowBackIcon />
-      Mastering branching workflows
+      Mastering Database Branching Workflows
     </Link>
   </div>
 );
