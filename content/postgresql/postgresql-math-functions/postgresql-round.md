@@ -30,19 +30,33 @@ The `ROUND()` function accepts 2 arguments:
 
 1\) source
 
-The `source` argument is a number or a numeric expression that is to be rounded.
+The `source` argument is a `numeric` or `double precision` value to be rounded.
 
 2\) n
 
 The `n` argument is an integer that determines the number of decimal places after rounding.
 
-The n argument is optional. If you omit the n argument, its default value is 0\.
+The `n` argument is optional. If you omit the `n` argument, its default value is 0.
+
+**Note:** When using the `n` argument, the `source` must be of type `numeric`. There is no built-in `round(double precision, integer)` function. To round a `double precision` value to a specific number of decimal places, cast it to `numeric`:
+
+```sql
+SELECT ROUND(value::numeric, 2);
+```
+
+Alternatively, you can create your own function to handle this automatically:
+
+```sql
+CREATE FUNCTION round(double precision, int) RETURNS numeric AS $$
+  SELECT round($1::numeric, $2)
+$$ LANGUAGE sql;
+```
 
 ## Return value
 
 The `ROUND()` function returns a result whose type is the same as the input if you omit the second argument.
 
-If you use both arguments, the `ROUND()` function returns a numeric value.
+If you use both arguments, the `ROUND()` function returns a `numeric` value.
 
 ## Examples
 
@@ -106,7 +120,7 @@ You can change the second argument to round a number to specific decimal places.
 
 ### 3\) Rounding data from table examples
 
-We will use the following `payment` and `customer` tables in the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
+We will use the following `payment` and `customer` tables in the [sample database](../postgresql-getting-started/postgresql-sample-database) for the demonstration.
 
 ![customer and payment tables](/postgresqltutorial/customer-and-payment-tables.png)The following statement retrieves the average rental fee that each customer has paid.
 
@@ -174,3 +188,5 @@ In this example, we used the `ROUND()` function to round the result to an intege
 ## Summary
 
 - Use the PostgreSQL `ROUND()` function to round a number to its nearest integer or a number of specified decimal places.
+- The single-argument form accepts both `numeric` and `double precision` types.
+- The two-argument form (with decimal places) requires the `source` to be `numeric`.
