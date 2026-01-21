@@ -32,7 +32,7 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 </DetailIconCards>
 
-## Quick start prompts
+## Quickstart prompts
 
 Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides.
 
@@ -120,6 +120,6 @@ Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [l
 
 ## Join the community
 
-If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+Questions about Neon or Postgres? Join our [Discord Server](https://discord.com/invite/92vNTzKDGp)
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>
