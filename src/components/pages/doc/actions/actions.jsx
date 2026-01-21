@@ -133,12 +133,6 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
   const docsActions = (
     <>
       <CopyMarkdownButton rawFileLink={rawFileLink} />
-      <ActionItem
-        icon={GitHubIcon}
-        text="Edit on GitHub"
-        url={gitHubLink}
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit on GitHub' })}
-      />
       {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
         <ActionItem
           key={bot.name}
@@ -159,6 +153,12 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         text="Connect MCP on VS Code"
         url="vscode:mcp/install?%7B%22name%22%3A%22Neon%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.neon.tech%2Fmcp%22%7D"
         onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on VS Code' })}
+      />
+      <ActionItem
+        icon={GitHubIcon}
+        text="Edit on GitHub"
+        url={gitHubLink}
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit on GitHub' })}
       />
     </>
   );
