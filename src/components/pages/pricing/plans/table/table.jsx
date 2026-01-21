@@ -147,10 +147,10 @@ const Table = () => {
                                   tabIndex={0}
                                   href={item[key].subtitle.href}
                                   className={clsx(
-                                    'z-10 mt-1 block w-fit border-b border-dashed border-[rgba(175,177,182,0.40)]',
+                                    'z-10 mt-1 block w-fit border-b border-dashed border-white/40',
                                     'text-sm font-light leading-snug tracking-extra-tight text-gray-new-50',
                                     'transition-colors duration-200',
-                                    'hover:border-primary-1 hover:text-primary-1'
+                                    'hover:border-gray-new-70'
                                   )}
                                 >
                                   {item[key].subtitle.text}
@@ -189,19 +189,16 @@ const Table = () => {
                       </div>
                     );
                   } else {
-                    const isIncluded = item[key] === 'Included';
                     const cellValue = item[key];
                     const isStringValue = typeof cellValue === 'string' && cellValue;
                     cell = (
                       <span
                         className={clsx(
-                          'flex flex-col gap-y-1 font-normal leading-snug tracking-extra-tight',
-                          isIncluded ? 'text-green-52' : 'text-gray-new-90',
+                          'flex flex-col gap-y-1 font-normal leading-snug tracking-extra-tight text-gray-new-80',
                           '[&_span]:text-sm [&_span]:text-gray-new-50',
-                          '[&>a]:text-green-52 [&_span_a]:border-b [&_span_a]:border-dashed',
-                          '[&_a]:w-fit [&_a]:border-gray-new-50',
-                          '[&_a]:transition-colors [&_a]:duration-200',
-                          '[&_a:hover]:border-b [&_a:hover]:border-green-52 [&_a:hover]:text-green-52'
+                          '[&_a]:w-fit [&_a]:transition-colors [&_a]:duration-200',
+                          '[&_a]:border-b [&_a]:border-dashed [&_a]:border-white/40 [&_a]:text-gray-new-80 [&_span_a]:text-gray-new-50',
+                          '[&_a:hover]:border-gray-new-70'
                         )}
                         data-tooltip-id={item[`${key}_tooltip`] && `${key}_tooltip_${index}`}
                         data-tooltip-html={item[`${key}_tooltip`] && item[`${key}_tooltip`]}

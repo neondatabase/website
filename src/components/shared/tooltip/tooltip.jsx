@@ -33,6 +33,7 @@ const Tooltip = ({
           '!px-4 !py-3',
           '!shadow-[0px_4px_30px_0px_rgba(0,0,0,0.8)]',
           '!text-[15px] !leading-snug !tracking-tighter !text-gray-new-80',
+          '[&_a:hover]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-200 [&_a]:hover:text-gray-new-80',
           '!rounded-none',
           className
         )}

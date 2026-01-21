@@ -99,9 +99,9 @@ const Features = () => (
               <p
                 className={clsx(
                   'inline text-gray-new-50',
-                  '[&_a]:border-b [&_a]:border-dashed [&_a]:border-gray-new-70 [&_a]:text-gray-new-70',
+                  '[&_a]:border-b [&_a]:border-dashed [&_a]:border-white/40 [&_a]:text-gray-new-70',
                   '[&_a]:transition-colors [&_a]:duration-200',
-                  '[&_a:hover]:border-green-52 [&_a:hover]:text-green-52'
+                  '[&_a:hover]:border-gray-new-70'
                 )}
                 dangerouslySetInnerHTML={{ __html: description }}
               />
