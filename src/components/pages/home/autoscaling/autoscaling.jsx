@@ -174,8 +174,8 @@ const Autoscaling = () => {
               ))}
             </ul>
             <p className="relative max-w-[480px] shrink-0 text-[18px] leading-normal tracking-extra-tight xl:-right-8 xl:max-w-[352px] lg:right-0 lg:max-w-[480px] md:text-[15px]">
-              By separating compute and storage, Neon automatically scales CPU,
-              memory and storage to fit your workload.
+              By separating compute and storage, Neon automatically scales CPU, memory and storage
+              to fit your workload.
             </p>
           </div>
         </div>

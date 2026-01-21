@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2026-01-13T19:27:59.707Z'
+updatedOn: '2026-01-20T15:30:53.656Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -15,6 +15,10 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 <Steps>
 
 ## Enable the Data API
+
+<Admonition type="tip">
+You can also enable the Data API programmatically using the Neon MCP Server. The `provision_neon_data_api` tool enables LLMs to provision HTTP-based Data API access for Neon databases with optional JWT authentication. See the [Neon MCP Server documentation](/docs/ai/neon-mcp-server#supported-actions-tools) for more information.
+</Admonition>
 
 ### 1. Navigate to the Data API page
 
