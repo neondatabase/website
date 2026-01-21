@@ -54,7 +54,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
   const getButtonText = () => {
     if (status === 'failed') return 'Failed to copy';
     if (status === 'copied') return 'Copied!';
-    return 'Copy page as markdown';
+    return 'Copy markdown';
   };
 
   const copyPageToClipboard = async () => {
@@ -135,9 +135,9 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
       <CopyMarkdownButton rawFileLink={rawFileLink} />
       <ActionItem
         icon={GitHubIcon}
-        text="Edit this page on GitHub"
+        text="Edit on GitHub"
         url={gitHubLink}
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit this page on GitHub' })}
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit on GitHub' })}
       />
       {AI_CHATBOTS.filter((bot) => bot.enabled).map((bot) => (
         <ActionItem
@@ -150,19 +150,15 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
       ))}
       <ActionItem
         icon={CursorIcon}
-        text="Install MCP server on Cursor"
+        text="Connect MCP on Cursor"
         url="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"
-        onClick={() =>
-          sendGtagEvent('Action Clicked', { text: 'Install Neon MCP server on Cursor' })
-        }
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on Cursor' })}
       />
       <ActionItem
         icon={VSCodeIcon}
-        text="Install MCP server on VS Code"
+        text="Connect MCP on VS Code"
         url="vscode:mcp/install?%7B%22name%22%3A%22Neon%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.neon.tech%2Fmcp%22%7D"
-        onClick={() =>
-          sendGtagEvent('Action Clicked', { text: 'Install Neon MCP server on VS Code' })
-        }
+        onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on VS Code' })}
       />
     </>
   );
