@@ -240,14 +240,14 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         icon={CursorIcon}
         text="Connect MCP on Cursor"
         url="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"
-        tooltip="Configure the Neon MCP Server in Cursor"
+        tooltip="Connect the Neon MCP server on Cursor"
         onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on Cursor' })}
       />
       <ActionItem
         icon={VSCodeIcon}
         text="Connect MCP on VS Code"
         url="vscode:mcp/install?%7B%22name%22%3A%22Neon%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.neon.tech%2Fmcp%22%7D"
-        tooltip="Configure the Neon MCP Server in VS Code"
+        tooltip="Connect the Neon MCP server on VS Code"
         onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on VS Code' })}
       />
       <ActionItem
