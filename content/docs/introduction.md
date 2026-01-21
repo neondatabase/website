@@ -3,10 +3,10 @@ title: Neon documentation
 updatedOn: '2025-12-22T14:57:25.744Z'
 ---
 
-Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
+Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
 <CTA title="Set up Neon in one command ✨" 
-description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. Your assistant walks you through Neon setup and configuration — tailored to your codebase. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
+description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
 
 ## Get started
 
