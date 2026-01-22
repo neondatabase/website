@@ -86,10 +86,12 @@ const BlogPage = async ({ params }) => {
             title={title}
             slug={shareUrl}
           />
-          <MoreArticles
-            className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
-            posts={relatedPosts}
-          />
+          {relatedPosts.length > 0 && (
+            <MoreArticles
+              className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
+              posts={relatedPosts}
+            />
+          )}
         </article>
       </div>
     </>
