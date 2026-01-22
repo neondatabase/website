@@ -76,7 +76,7 @@ const Submenu = ({
                         {items?.map(({ title, description, to, isExternal }) => (
                           <li key={title} role="none">
                             <Link
-                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60`}
+                              className={`group ${submenuLinkClassName} -mx-1 -my-3 grid min-w-[224px] gap-y-2 rounded px-1 py-3 text-[13px] leading-tight tracking-snug text-gray-new-60  transition-colors duration-200 hover:text-gray-new-80`}
                               to={to}
                               isExternal={isExternal}
                               tagName="Navigation"
@@ -86,10 +86,7 @@ const Submenu = ({
                               onKeyDown={handleSubmenuNavigation(index)}
                             >
                               <span
-                                className={clsx(
-                                  'flex items-baseline gap-x-1.5 text-lg font-medium leading-none',
-                                  'text-white transition-colors duration-200 group-hover:text-gray-new-80'
-                                )}
+                                className='text-white text-lg font-medium leading-none group-hover:text-gray-new-80'
                               >
                                 {title}
                               </span>
