@@ -1,0 +1,151 @@
+# Monitor billing and usage
+
+> The document outlines how Neon users can monitor their billing and usage through the Neon Console, detailing steps to access usage metrics and billing information for effective account management.
+
+## Source
+
+- [Monitor billing and usage HTML](https://neon.com/docs/introduction/monitor-usage): The original HTML version of this documentation
+
+Neon exposes usage metrics in the Neon Console and through the Neon API. For an explanation of Neon's usage metrics, see [Usage metrics](https://neon.com/docs/introduction/plans#usage-metrics).
+
+## View usage metrics in the Neon Console
+
+Usage metrics in the console can be found on the **Billing** page.
+
+### Billing page
+
+You can monitor billing and usage for your Neon account from the **Billing** page in the Neon Console.
+
+1. Navigate to the Neon Console.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing**.
+
+Here you will find the current bill and usage for your Neon account.
+
+Usage metrics on the **Billing page** include:
+
+- Compute, CU-hour
+- Extra branches, branch-month
+- Instant restore storage, GB-month
+- Private data transfer, GB
+- Public data transfer, GB
+- Storage (root branches), GB-month
+- Storage (child branches), GB-month
+
+These are the usage metrics you'll find on your monthly invoice, if they apply to your plan.
+
+For an explanation of usage metrics, refer to the [Plan feature](https://neon.com/docs/introduction/plans#plan-features) explanations.
+
+   **Note** note: billing metrics for pre-2025 custom contract customers: If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: - **Storage** is measured in GiBs instead of [GB-month](https://neon.com/docs/reference/glossary#gb-month), and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period. - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB). If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
+
+## Retrieve usage metrics with the Neon API
+
+You can retrieve a variety of usage metrics using the Neon API.
+
+   **Tip** monitoring usage for a large number of projects: Enterprise users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints are recommended when monitoring usage for a large number of projects. See [Querying consumption metrics](https://neon.com/docs/guides/consumption-metrics).
+
+Any user can query usage metrics for a branch or a project, as described below. See:
+
+- [Get branch details](https://neon.com/docs/introduction/monitor-usage#get-branch-details)
+- [Get project details](https://neon.com/docs/introduction/monitor-usage#get-project-details)
+
+### Get branch details
+
+This example shows how to retrieve branch details using the [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) API method. Usage data is highlighted. Refer to the response body section of the [Get branch details](https://api-docs.neon.tech/reference/getprojectbranch) documentation for descriptions.
+
+```curl
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/summer-bush-30064139/branches/br-polished-flower-a5tq1sdv \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' | jq
+```
+
+**Response body**
+
+```json {7,11-15}
+{
+  "branch": {
+    "id": "br-polished-flower-a5tq1sdv",
+    "project_id": "summer-bush-30064139",
+    "name": "main",
+    "current_state": "ready",
+    "logical_size": 427474944,
+    "creation_source": "console",
+    "default": true,
+    "protected": false,
+    "cpu_used_sec": 2505,
+    "compute_time_seconds": 2505,
+    "active_time_seconds": 9924,
+    "written_data_bytes": 1566733560,
+    "data_transfer_bytes": 40820887,
+    "created_at": "2024-04-02T12:54:33Z",
+    "updated_at": "2024-04-10T17:43:21Z"
+  }
+}
+```
+
+### Get project details
+
+This example shows how to retrieve project details using the [Get project details](https://api-docs.neon.tech/reference/getproject) API method. Usage data is highlighted. Refer to the response body section of the [Get project details](https://api-docs.neon.tech/reference/getproject) documentation for descriptions.
+
+```curl
+curl --request GET \
+     --url https://console.neon.tech/api/v2/projects/summer-bush-30064139 \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' |jq
+```
+
+**Response body**
+
+```json {3-8,36}
+{
+  "project": {
+    "data_storage_bytes_hour": 113808080168,
+    "data_transfer_bytes": 40821459,
+    "written_data_bytes": 1566830744,
+    "compute_time_seconds": 2785,
+    "active_time_seconds": 11024,
+    "cpu_used_sec": 2785,
+    "id": "summer-bush-30064139",
+    "platform_id": "aws",
+    "region_id": "aws-us-east-2",
+    "name": "summer-bush-30064139",
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false,
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false
+    },
+    "pg_version": 16,
+    "proxy_host": "us-east-2.aws.neon.tech",
+    "branch_logical_size_limit": 204800,
+    "branch_logical_size_limit_bytes": 214748364800,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2024-04-02T12:54:33Z",
+    "updated_at": "2024-04-10T17:26:07Z",
+    "synthetic_storage_size": 492988552,
+    "consumption_period_start": "2024-04-02T12:54:33Z",
+    "consumption_period_end": "2024-05-01T00:00:00Z",
+    "quota_reset_at": "2024-05-01T00:00:00Z",
+    "owner_id": "8d5f604c-d04e-4795-baf7-e87909a5d959",
+    "owner": {
+      "email": "alex@domain.com",
+      "branches_limit": -1,
+      "subscription_type": "launch"
+    },
+    "compute_last_active_at": "2024-04-10T17:26:05Z"
+  }
+}
+```
+
+   **Tip** Optimize your costs: For strategies to reduce your Neon costs across compute, storage, branches, and data transfer, see our [Cost optimization](https://neon.com/docs/introduction/cost-optimization) guide.

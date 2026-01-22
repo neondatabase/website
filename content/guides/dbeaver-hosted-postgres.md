@@ -23,52 +23,46 @@ DBeaver is a versatile database management tool that allows you to interact with
 
 ## Provisioning a Serverless Postgres
 
-To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a new project by entering a project name of your choice.
+1. To get started, go to the the [Neon Console](https://console.neon.tech/) or [pg.new](https://pg.new/) and create a new project by entering a project name of your choice.
 
-![](/guides/images/pg-notify/index.png)
+2. Retrieve connection details for your Neon Postgres database:
+   - Navigate to the **Dashboard** of your Neon project.
+   - Click on the **Connect** button which opens a modal.
+   - Select your database and branch.
+   - Select **Parameters only** to view the connection details.
+     ![Neon Connection Details](/docs/connect/connection_details_parameters_only.png)
 
-All Neon connection strings have the following format:
+   You will be provided with the following details:
+   - `PGHOST`: The hostname of your Neon Postgres database.
+   - `PGDATABASE`: The name of your database
+   - `PGUSER`: Your database username.
+   - `PGPASSWORD`: Your database password.
 
-```bash
-postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
-```
-
-- `user` is the database user.
-- `password` is the database user’s password.
-- `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
-- `port` is the Neon port number. The default port number is 5432.
-- `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require` is an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
-
-You will be using these connection string components in the following steps to connect DBeaver to your Postgres database.
+Save the connection details as you will need them in the next steps.
 
 ## Connecting to Your Hosted Postgres Database
 
 1. **Open DBeaver**: Ensure DBeaver is running. You will see the main dashboard.
 
 2. **Create a New Database Connection**:
-
    - Click on the "New Database Connection" button (usually a plug icon or from the "Database" menu).
    - In the "Connect to Database" wizard, select "PostgreSQL" from the list of database types and click "Next".
 
 3. **Enter Connection Details**:
 
-   ![](/guides/images/dbeaver/conn-1.png)
-
+   ![Connection Details in DBeaver](/guides/images/dbeaver/conn-1.png)
    - Fill in the required fields based on your Neon connection string:
-     - **Host**: The endpoint of your hosted Postgres database (e.g., `ep-...us-east-2.aws.neon.tech`).
-     - **Port**: The port number (default is `5432`).
-     - **Database**: The database name (e.g., `neondb`).
-     - **Username**: Your database username.
-     - **Password**: Your database password.
+     - **Host**: The endpoint of your hosted Postgres database. Enter the value of `PGHOST` you saved earlier from Neon.
+     - **Port**: The port number. Enter 5432 (default for Postgres).
+     - **Database**: The database name. Enter the value of `PGDATABASE`.
+     - **Username**: Your database username. Enter the value of `PGUSER`.
+     - **Password**: Your database password. Enter the value of `PGPASSWORD`.
    - Enable "Show all databases" to ensure all databases in your Neon project are listed.
 
    ![](/guides/images/dbeaver/conn-2.png)
-
    - Click "Edit Driver Settings" if needed to ensure SSL is enabled. Under the "Driver Properties" tab, set `sslmode` to `require`.
 
 4. **Test the Connection**:
-
    - Click the "Test Connection" button to verify the connection details.
    - If successful, click "Finish" to save the connection. Your new database connection will appear in the left sidebar.
 

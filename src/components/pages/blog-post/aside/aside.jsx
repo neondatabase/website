@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
+import ChangelogForm from 'components/shared/changelog-form';
 import Link from 'components/shared/link/link';
 import LINKS from 'constants/links';
 
@@ -9,7 +10,7 @@ import SocialShare from '../social-share';
 
 const Aside = ({ className, title, slug, authors, posts }) => (
   <aside className={clsx('aside ml-auto max-w-[298px] lg:ml-0 lg:max-w-full', className)}>
-    <div className="sticky top-24">
+    <div className="no-scrollbars sticky top-24 -m-1 max-h-[calc(100vh-100px)] overflow-y-auto p-1 pb-5 lg:relative lg:top-0 lg:overflow-hidden">
       {Array.isArray(authors) && authors.length > 0 && (
         <>
           <h3 className="mb-5 text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden">
@@ -69,9 +70,9 @@ const Aside = ({ className, title, slug, authors, posts }) => (
       <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
         {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
           <li key={slug}>
-            <Link className="group" to={`${LINKS.blog}/${slug}`}>
+            <Link className="group block rounded-sm" to={`${LINKS.blog}/${slug}`}>
               <article className="flex items-center space-x-3">
-                <div>
+                <div className="flex-grow">
                   <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-green-45">
                     {title}
                   </h1>
@@ -97,6 +98,7 @@ const Aside = ({ className, title, slug, authors, posts }) => (
         ))}
       </ul>
       <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
+      <ChangelogForm className="mt-10" isSidebar />
     </div>
   </aside>
 );

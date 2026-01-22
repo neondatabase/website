@@ -337,7 +337,7 @@ class WorkExperience extends Model
 }
 ```
 
-Let's quickly note down the most important parts in these model definitions:
+Let's quickly note the most important parts in these model definitions:
 
 - We've used the `$fillable` property to specify which attributes can be mass-assigned. This is a security feature to prevent unintended mass assignment vulnerabilities.
 - We've defined relationships between models. An `Applicant` has many `Education` and `WorkExperience` records, while `Education` and `WorkExperience` belong to an `Applicant`.
@@ -941,7 +941,6 @@ To manually verify that everything works as expected, follow these steps:
 1. Submit the application and verify that you see a success message.
 
 1. To check if the data was persisted correctly:
-
    - Open a database client (like pgAdmin for Postgres) and connect to your Neon database.
    - Check the `applicants`, `educations`, and `work_experiences` tables. You should see your submitted data.
    - Verify that the `applicant_id` in the `educations` and `work_experiences` tables matches the `id` in the `applicants` table for your submission.

@@ -1,114 +1,64 @@
 ---
 title: Monitor billing and usage
-subtitle: Monitor billing and usage metrics for your account and projects from the
-  console or API
+subtitle: Monitor billing and usage for your account and projects
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2025-03-02T15:57:43.215Z'
+updatedOn: '2025-10-08T19:31:56.544Z'
 ---
 
-Neon exposes usage metrics in the Neon Console and through the Neon API. These metrics can answer questions like:
-
-- What's my current bill?
-- How much storage am I using?
-- How many compute hours have I used?
-- How many projects do I have?
-- How many branches do I have?
+Neon exposes usage metrics in the Neon Console and through the Neon API. For an explanation of Neon's usage metrics, see [Usage metrics](/docs/introduction/plans#usage-metrics).
 
 ## View usage metrics in the Neon Console
 
-Usage metrics in the console can be found on the **Billing** page, the **Project Dashboard**, and the **Branches** page.
+Usage metrics in the console can be found on the **Billing** page.
 
 ### Billing page
 
-You can monitor billing and usage for all projects in your Neon account from the **Billing** page in the Neon Console.
+You can monitor billing and usage for your Neon account from the **Billing** page in the Neon Console.
 
 1. Navigate to the Neon Console.
-1. Select your Profile.
-1. Select **Billing** from the menu.
+1. Select your organization from the breadcrumb menu at the top-left of the console.
+1. Select **Billing**.
 
-Here you will find the current bill and total usage for all projects in your Neon account.
+Here you will find the current bill and usage for your Neon account.
 
 Usage metrics on the **Billing page** include:
 
-- **Storage**: Storage is the total volume of data and history stored in Neon, measured in gigabyte months ([GB-month](/docs/reference/glossary#gb-month). Data is your logical data size. History is your data’s change history that is used to enable branching-related features, which you can configure for each project via the [history retention](/docs/manage/projects#configure-history-retention) setting. The displayed storage value reflects your current usage.
-- **Compute**: The total number of compute hours used during the current billing period. Compute usage is reset to zero at the beginning of each month. The monthly compute hour allowance differs by [plan](/docs/introduction/plans).
-- **Archive storage**: The total number of gigabyte-months ([GB-month](/docs/reference/glossary#gb-month) used for [archived branches](/docs/guides/branch-archiving). Branches that are older than 14 days and have not been accessed for the past 24 hours are stored in cost-efficient archive storage. The displayed storage value reflects your current usage.
-- **Projects**: Number of projects currently active in your account. The displayed value reflects your current usage, including any extra projects that have been automatically added as a result of exceeding your [plan allowance](/docs/introduction/plans).
+- Compute, CU-hour
+- Extra branches, branch-month
+- Instant restore storage, GB-month
+- Private data transfer, GB
+- Public data transfer, GB
+- Storage (root branches), GB-month
+- Storage (child branches), GB-month
 
-  The **Peak usage** value is the highest number of projects used during the current billing period. When you exceed your plan's project allowance, extra project units are automatically allocated and billed based on the number of additional units needed to cover your extra usage, prorated from the date the extra was allocated. Project units and their cost are defined according to your [Neon plan](/docs/introduction/plans). Peak usage resets at the beginning of the next billing period.
+These are the usage metrics you'll find on your monthly invoice, if they apply to your plan.
 
-- **Data transfer** The total volume of data transferred out of Neon (egress). Neon does not charge for egress data, but there is an allowance of 5 GB per month for Free Plan users. For all other plans, Neon maintains a reasonable usage policy. For more, see [Data transfer](/docs/introduction/usage-metrics#data-transfer). This metric only applies to the Free Plan.
+For an explanation of usage metrics, refer to the [Plan feature](/docs/introduction/plans#plan-features) explanations.
 
-  <Admonition type="note" title="note: billing metrics for pre-2025 custom contract customers">
-  If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: 
-  - **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month, and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
-  - **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB).
+<Admonition type="note" title="note: billing metrics for pre-2025 custom contract customers">
+If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply: 
+- **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month), and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
+- **Written data** is the total volume of data written from compute to storage over the during the monthly billing period, measured in gigibytes (GiB).
 
-  If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
-  </Admonition>
-
-  ![Monitor billing and usage](/docs/introduction/monitor_billing_usage.png)
-
-#### Interpreting usage metrics
-
-- **Compute** usage is tracked in **compute hours**. A compute hour is 1 active hour for a compute with 1 vCPU. For a compute with .25 vCPU, it takes 4 _active hours_ to use 1 compute hour. On the other hand, if your compute has 4 vCPUs, it takes only 15 minutes to use 1 compute hour.
-
-  <Admonition type="note">
-  On the Free Plan, you have 191.9 compute hours/month&#8212;enough to run a primary 0.25 CU compute 24/7. Up to 5 of those compute hours can be used for non-default branch computes. Autoscaling up to 2 vCPU with 8 GB RAM is available for extra performance during peak times, but please be aware that autoscaling can consume your compute hours more quickly, potentially impacting the ability to run a primary 0.25 CU compute 24/7. If you use Autoscaling or Read Replicas, you'll need to monitor your compute hours to ensure you don't run out before the end of the month.
-  </Admonition>
-
-- **Storage** includes your data size and history. Neon maintains a history of changes to support branching-related features such as [point-in-time restore](/docs/reference/glossary#point-in-time-restore). The Launch plan supports up to 7 days of history retention, the Scale plan allows up to 14 days, and the Business plan offers up to 30 days. The default is 1 day on all plans. Keep in mind that history retention increases storage. More history requires more storage. To manage the amount of history you retain, you can configure the history retention setting for your project. See [Configure history retention](/docs/manage/projects#configure-history-retention).
-
-- **Archive storage** usage reflects how much data from inactive branches has been archived in cost-efficient storage. To minimize storage costs, Neon **automatically** archives branches that are **older than 14 days** and **have not been accessed for 24 hours**. Both conditions must be true for a branch to be archived. If you actively use all of your branches, you shouldn't expect to see archive storage use. Only expect to see usage if you have branches that more than two weeks old that gone unaccessed for 24 hours or more at some point during the month.
-
-- **What about extra usage?**
-
-  The Launch plan supports extra storage, archive storage, and compute usage. The Scale and Business plans support extra storage, archive storage, compute, and project usage. Any extra usage is automatically allocated and billed when you exceed the allowances included in your plan's base fee. The extra usage is reflected in your monthly usage on the **Billing** page. See [Extra usage](/docs/introduction/extra-usage) to learn more.
-
-### Project Dashboard
-
-Project usage is displayed across the top of the Project Dashboard.
-
-![Project usage banner project dashboard](/docs/introduction/usage_banner_projects.png)
-
-The [Projects page](https://console.neon.tech/app/projects) provides an **Account Usage** banner. This banner shows usage for _all of your Neon projects_ for the current billing period.
-
-![Account usage banner project dashboard](/docs/introduction/usage_banner_all_projects.png)
-
-### Branches page
-
-The **Branches** page in the Neon Console provides branch-specific metrics, including:
-
-- **Compute hours**: The number of computer hours used by the branch's primary compute in the current billing period.
-- **Data size**: The size of the data on the branch, not including [history](/docs/reference/glossary#history).
-- **Last active**: The data and time the branch was last active.
-
-To view the branches in your Neon project:
-
-1. In the Neon Console, select a project.
-2. Select **Branches** to view the branches for the project.
-
-You can select a branch from the table to view additional details about the branch.
+If you have questions or want to change the billing metrics defined in your contract, please contact your Neon sales representative.
+</Admonition>
 
 ## Retrieve usage metrics with the Neon API
 
 You can retrieve a variety of usage metrics using the Neon API.
 
+<Admonition type="tip" title="monitoring usage for a large number of projects">
+
+Enterprise users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints are recommended when monitoring usage for a large number of projects. See [Querying consumption metrics](/docs/guides/consumption-metrics).
+
+</Admonition>
+
 Any user can query usage metrics for a branch or a project, as described below. See:
 
 - [Get branch details](#get-branch-details)
 - [Get project details](#get-project-details)
-
-<Admonition type="tip" title="monitoring usage for a large number of projects">
-
-Scale and Business plan users can use Neon's advanced `consumption` endpoints to monitor account and project usage. These endpoints, described in our Partner's Guide, are recommended when monitoring usage for a large number of projects. See:
-
-- [Get account-level aggregated metrics](/docs/guides/partner-consumption-metrics#get-account-level-aggregated-metrics)
-- [Get granular project-level metrics for your account](/docs/guides/partner-consumption-metrics#get-granular-project-level-metrics-for-your-account)
-
-</Admonition>
 
 ### Get branch details
 
@@ -208,3 +158,7 @@ curl --request GET \
   }
 }
 ```
+
+<Admonition type="tip" title="Optimize your costs">
+For strategies to reduce your Neon costs across compute, storage, branches, and data transfer, see our [Cost optimization](/docs/introduction/cost-optimization) guide.
+</Admonition>

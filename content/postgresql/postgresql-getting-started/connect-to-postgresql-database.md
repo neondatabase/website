@@ -58,7 +58,7 @@ postgres=#
 
 In this command, `postgres` is the default database of a PostgreSQL server.
 
-Connecting to the PostgreSQL server will grant you a session. A session is log\-lived, allowing you to perform many requests such as executing commands, before eventually disconnecting.
+Connecting to the PostgreSQL server will grant you a session. A session is long-lived, allowing you to perform many requests such as executing commands, before eventually disconnecting.
 
 Third, execute the following command to retrieve the PostgreSQL version:
 

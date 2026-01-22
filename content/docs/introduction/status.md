@@ -2,33 +2,35 @@
 title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.754Z'
+updatedOn: '2025-06-04T16:43:36.537Z'
 ---
 
-To stay informed about Neon's status, we provide a dedicated status page for each region that Neon supports. To view the Neon Status page, navigate to [https://neonstatus.com/](https://neonstatus.com/).
+Stay informed about Neon's performance and availability at [https://neonstatus.com/](https://neonstatus.com/).
 
-Remember to bookmark the Neon Status page for easy access.
+Bookmark the Neon status page for quick access during incidents.
 
 ![Neon status page](/docs/introduction/neon_status_page.png)
 
-For status information applicable to your Neon project, monitor the status page for the region where your Neon project resides. If you don't know the region, you can find it on the **Project Dashboard** in the Neon Console.
+To monitor the status for your specific Neon project, check the region where your project is located. You can find your project's region on the **Project Dashboard** in the Neon Console, in the **Project settings** widget.
 
-Status pages provide status for:
+The Neon status page tracks the following components:
 
-- Database Connectivity
-- Database Operations
-- Console and API Requests
+- **Database Connectivity** – Ability to connect to active Neon database projects via Postgres protocol
+- **Project/Branch Operations** – Operations including project creation, autosuspend, compute starts, and branch operations
+- **Console API** – The Neon Console management API
+- **Console Frontend** – The management UI at https://console.neon.tech/
+- **Account Creation** – The signup process at https://console.neon.tech/signup, including team invites
+- **Console Login** – The login process at https://console.neon.tech/login
+- **Website** – The Neon website at https://neon.com/
 
-<Admonition type="note" title="platform maintenance notices">
-You can monitor or subscribe to your region's [status page](/docs/manage/platform-maintenance) to stay informed about upcoming platform maintenance. See [Subscribing to Neon status pages](#subscribing-to-neon-status-pages) below.
-
-Neon also applies regular updates to your project's computes, but these updates are not posted to regional status pages since they are specific to your Neon project. To stay informed about these updates, watch for update notices in your project's settings in the Neon Console. See [Updates](/docs/manage/updates) for details.
+<Admonition type="note" title="Updates and maintenance notices">
+Neon performs occasional platform maintenance and applies regular updates to your project's computes, but these maintenance activities and updates are not posted to the Neon status page. To stay informed about maintenance operations and updates, watch for notices in the Neon Console and your project settings. See [Maintenance & updates overview](/docs/manage/maintenance-updates-overview) for details.
 </Admonition>
 
-## Subscribing to Neon status pages
+## Subscribe to status updates
 
-Follow the instructions from the **Subscribe to updates** link on a regional status page to subscribe to updates via email, RSS, or Slack.
+To receive status notifications, click **Subscribe** on the Neon status page and choose your preferred method: webhook, RSS, Microsoft Teams, or Slack.
 
-![Neon status page](/docs/introduction/neon_status_subscribe.png)
+![Neon status page](/docs/introduction/status_subscribe.png)
 
 <NeedHelp/>

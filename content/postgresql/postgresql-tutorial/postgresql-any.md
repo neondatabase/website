@@ -34,7 +34,7 @@ In this syntax:
 
 The `ANY` operator returns `true` if the comparison returns `true` for at least one of the values in the set, and `false` otherwise.
 
-If the subquery returns an empty set, the result of `ANY` comparison is always `true`.
+If the subquery returns an empty set, the result of `ANY` comparison is always `false`.
 
 Besides the subquery, you can use any construct that returns a set of values such as an [`ARRAY`](postgresql-array).
 

@@ -2,7 +2,7 @@
 title: The postgres_fdw extension
 subtitle: Access data in remote Postgres databases from Neon using postgres_fdw
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.748Z'
+updatedOn: '2025-08-02T10:33:29.248Z'
 ---
 
 The `postgres_fdw` (Foreign Data Wrapper) extension provides a powerful and standards-compliant way to access data stored in external Postgres databases from your Neon project. For compliance or regulatory reasons, you might need to keep sensitive data on-premises or within a specific jurisdiction; `postgres_fdw` lets you query this data directly from your Neon database without migrating it, maintaining data residency. This enables you to leverage Neon's features while adhering to data storage policies. This simplifies data integration, enables cross-database querying, and allows you to build applications that seamlessly interact with data across different Postgres deployments.
@@ -19,7 +19,7 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 ## Enable the `postgres_fdw` extension
 
-You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+You can enable the extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;
@@ -46,6 +46,10 @@ CREATE SERVER my_remote_server
 FOREIGN DATA WRAPPER postgres_fdw
 OPTIONS (host '<remote_host>', port '<remote_port>', dbname '<remote_database>');
 ```
+
+<Admonition type="important">
+When setting up `postgres_fdw` with a Neon database as the foreign server, make sure to use the hostname from an [unpooled connection string](/docs/reference/glossary#unpooled-connection-string). Pooled connection strings will result in connection errors. You can find the unpooled connection string in your project dashboard by clicking the **Connect** button and ensuring the **Connection pooling** toggle is disabled.
+</Admonition>
 
 Replace the placeholders with the actual details of your remote Postgres server:
 

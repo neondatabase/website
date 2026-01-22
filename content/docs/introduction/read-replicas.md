@@ -3,20 +3,20 @@ title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
 enableTableOfContents: true
-updatedOn: '2024-12-04T15:33:06.650Z'
+updatedOn: '2025-12-03T13:07:33.038Z'
 ---
 
 Neon read replicas are independent computes designed to perform read operations on the same data as your primary read-write compute. Neon's read replicas do not replicate or duplicate data. Instead, read requests are served from the same storage, as shown in the diagram below. While your read-write queries are directed through your primary compute, read queries can be offloaded to one or more read replicas.
 
 ![read replica simple](/docs/introduction/read_replica_simple.png)
 
-You can instantly create read replicas for any branch in your Neon project and configure the amount of vCPU and memory allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
+You can instantly create read replicas for any branch in your Neon project and configure the compute size allocated to each. Read replicas also support Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/introduction/scale-to-zero) features, providing you with the same control over compute resources that you have with your primary compute.
 
 ## How are Neon read replicas different?
 
 - **No additional storage is required**: With read replicas reading from the same source as your primary read-write compute, no additional storage is required to create a read replica. Data is neither duplicated nor replicated. Creating a read replica involves spinning up a read-only compute instance, which takes a few seconds.
 - **You can create them almost instantly**: With no data replication required, you can create read replicas almost instantly.
-- **They are cost-efficient**: With no additional storage or transfer of data, costs associated with storage and data transfer are avoided. Neon's read replicas also benefit from Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/manage/endpoints#scale-to-zero-configuration) features, which allow you to manage compute usage.
+- **They are cost-efficient**: With no additional storage or transfer of data, costs associated with storage and data transfer are avoided. Neon's read replicas also benefit from Neon's [Autoscaling](/docs/introduction/autoscaling) and [Scale to Zero](/docs/manage/computes#scale-to-zero-configuration) features, which allow you to manage compute usage.
 - **They are instantly available**: You can allow read replicas to scale to zero when not in use without introducing lag. When a read replica starts up in response to a query, it is up to date with your primary read-write compute almost instantly.
 
 ## How do you create read replicas?
@@ -26,7 +26,7 @@ You can create read replicas using the Neon Console, [Neon CLI](/docs/reference/
 From the Neon Console, it's a simple **Add Read Replica** action on a branch.
 
 <Admonition type="note">
-You can add as many read replicas to a branch as you need, accommodating any scale.
+You can add read replicas to a branch as needed to accommodate your workload. The Free plan is limited to a maximum of 3 read replica computes per project.
 </Admonition>
 
 ![Create a read replica](/docs/introduction/create_read_replica.png)
@@ -63,7 +63,7 @@ For more details and how to connect to a read replica, see [Create and manage Re
 
 The following diagram shows how your primary compute and read replicas send read requests to the same Pageserver, which is the component of the [Neon architecture](/docs/introduction/architecture-overview) that is responsible for serving read requests.
 
-![read replica computes](/docs/introduction/read_replicas.jpg)
+![read replica computes](/docs/introduction/read_replicas.png)
 
 Neon read replicas are asynchronous, which means they are _eventually consistent_. As updates are made by your primary compute, Safekeepers store the data changes durably until they are processed by Pageservers. At the same time, Safekeepers keep read replica computes up to date with the most recent changes to maintain data consistency.
 

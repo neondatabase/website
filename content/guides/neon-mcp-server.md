@@ -11,7 +11,15 @@ Imagine managing your database with natural language. Instead of complex SQL, yo
 
 This guide will introduce you to [Neon's MCP server](https://github.com/neondatabase/mcp-server-neon), which allows you to use Large Language Models (LLMs) for intuitive database management. At its core, Neon MCP server allows tools like Claude to easily communicate with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-With Neon's MCP server and an LLM like Claude, you can simplify workflows, improve productivity, and manage your Postgres databases more naturally. Let’s explore how this approach can make database management easier and more efficient.
+With Neon's MCP server and an LLM like Claude, you can simplify workflows, improve productivity, and manage your Postgres databases more naturally. Let's explore how this approach can make database management easier and more efficient.
+
+<Admonition type="important" title="Neon MCP Server Security Considerations">
+The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+
+The Neon MCP Server is intended for local development and IDE integrations only. **We do not recommend using the Neon MCP Server in production environments.** It can execute powerful operations that may lead to accidental or unauthorized changes.
+
+For more information, see [MCP security guidance →](/docs/ai/neon-mcp-server#mcp-security-guidance).
+</Admonition>
 
 ## Understanding MCP
 
@@ -45,28 +53,11 @@ Neon MCP server, combined with Neon, offers:
 - **Natural Language:** Manage databases without direct **Neon API** coding.
 - **Empowering Non-Developers**: Intuitive database interaction for everyone.
 
-<Admonition type="warning">
+<Admonition type="important">
 The Neon MCP server's ability to execute arbitrary commands from natural language requests requires careful attention to security.  Always review and approve actions before they are committed.  Grant access only to authorized users and applications.
 </Admonition>
 
-**Key Actions available via Neon MCP server (powered by Neon API):**
-
-Neon MCP server exposes the following actions, which primarily map to **Neon API endpoints**:
-
-- `list_projects`: Action to list all your Neon projects. This uses the Neon API to retrieve a summary of all projects associated with your Neon account.
-- `describe_project`: Action to get detailed information about a specific Neon project. Provides comprehensive details about a chosen project, such as its ID, name, and associated branches.
-- `create_project`: Action to create a new Neon project — a container in Neon for branches, databases, roles, and computes.
-- `delete_project`: Action to delete an existing Neon project.
-- `create_branch`: Action to create a new branch within a Neon project. Leverages Neon's branching feature, allowing you to create new branches for development or migrations.
-- `delete_branch`: Action to delete an existing branch in a Neon project.
-- `describe_branch`: Action to get details about a specific branch. Retrieves information about a particular branch, such as its name and ID.
-- `get_connection_string`: Action to retrieve a connection string for a specific database in a Neon project. Returns a formatted connection string that can be used to connect to the database.
-- `run_sql`: Action to execute a single SQL query against a Neon database. Allows you to run read or write SQL queries.
-- `run_sql_transaction`: Action to execute a series of SQL queries within a transaction against a Neon database. Enables running multiple SQL statements as a single atomic transaction, ensuring data consistency.
-- `get_database_tables`: Action to list all tables in a specified Neon database. Provides a list of tables.
-- `describe_table_schema`: Action to retrieve the schema definition of a specific table. Details the structure of a table, including columns and data types.
-- `prepare_database_migration`: Action to initiate a database migration process, utilizing a temporary branch for safety. Begins the process of altering your database schema, safely using Neon's branching feature.
-- `complete_database_migration`: Action to apply and finalize a prepared database migration to the main branch. Completes a migration process, applying changes to your main database and cleaning up temporary resources.
+<MCPTools />
 
 These actions enable any MCP Host to interact with various functionalities of the **Neon platform via the Neon API.** Certain tools, especially database migration ones, are tailored for AI agent and LLM usage, leveraging Neon’s branching for safe preview and commit.
 
@@ -78,28 +69,113 @@ We'll use Claude Desktop to interact with Neon MCP server. Here's how to set it 
 
 - **Node.js (>= v18):** Install from [nodejs.org](https://nodejs.org/).
 - **Claude Desktop:** Install Anthropic's [Claude Desktop](https://claude.ai/download).
-- **Neon API Key:** Get your [Neon API Key](/docs/manage/api-keys#creating-api-keys).
+- **Neon Account:** Sign up for a free Neon account at [neon.tech](https://neon.tech).
+- **Neon API Key (for Local MCP server)::** Get your [Neon API Key](/docs/manage/api-keys#creating-api-keys).
 
-### Installation steps
+### Setting up Neon MCP Server in Claude
+
+You have two options for connecting Claude to the Neon MCP Server:
+
+1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Claude. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+
+2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
+
+### Option 1: Setting up the remote hosted Neon MCP Server
+
+<Admonition type="note">
+By default, the Remote MCP Server connects to your personal Neon account. To connect to an organization's account, you must authenticate with an API key. For more information, see [API key-based authentication](/docs/ai/neon-mcp-server#api-key-based-authentication). Claude connectors currently do not support API key authentication.
+</Admonition>
+
+Choose one of the following methods to set up the Remote Neon MCP server in Claude Desktop:
+
+<Tabs labels={['Using Claude Connectors', 'By modifying config file']}>
+
+<TabItem label="Using Claude Connectors">
+
+1. Launch Claude Desktop and open the **Search & Tools** panel, and select **Add Connector**.
+   ![Claude search and tools button](/guides/images/claude_mcp/claude_add_connector.png)
+2. Click on **Add a custom one** to open the custom connector modal.
+   ![Claude custom connector button](/guides/images/claude_mcp/claude_custom_connector.png)
+3. Enter **Neon** in the **Name** field and `https://mcp.neon.tech/mcp` in the **Remote MCP server URL** field, then click **Add**.
+   ![Claude custom connector modal](/guides/images/claude_mcp/claude_custom_connector_modal.png)
+4. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
+5. After authorization, you can start using the Neon MCP server with Claude.
+
+</TabItem>
+
+<TabItem label="By modifying config file">
+
+1. Open Claude desktop and navigate to **Settings**.
+   ![Claude settings](/guides/images/claude_mcp/claude_settings.png)
+2. Under the **Developer** tab, click **Edit Config** (On Windows, it's under File -> Settings -> Developer -> Edit Config) to open the location of configuration file (`claude_desktop_config.json`).
+   ![Claude config](/guides/images/claude_mcp/claude_developer_config.png)
+3. Open the `claude_desktop_config.json` file in a text editor of your choice.
+4. Add the "Neon" server entry within the `mcpServers` object:
+
+   ```json
+   {
+     "mcpServers": {
+       "Neon": {
+         "command": "npx",
+         "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
+       }
+     }
+   }
+   ```
+
+5. Save the configuration file and **restart** Claude Desktop.
+6. An OAuth window will open in your browser. Follow the prompts to authorize Claude to access your Neon account.
+   ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
+7. After authorization, you can start using the Neon MCP server with Claude.
+
+</TabItem>
+</Tabs>
+
+<Admonition type="note">
+The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
+</Admonition>
+
+### Option 2: Setting up the Local Neon MCP Server
+
+This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
 
 1.  Open your terminal.
-2.  Run the following command, replacing `YOUR_NEON_API_KEY` with your actual Neon API key:
+2.  Run the following command to install the Local Neon MCP server for use with Claude Desktop:
 
-  This command configures Neon MCP server to connect to your Neon account using the **Neon API Key**, as shown here:
+    ```bash
+    npx @neondatabase/mcp-server-neon init $NEON_API_KEY
+    ```
 
-  ```bash
-  npx -y @smithery/cli@latest install neon --client claude --config "{\"neonApiKey\":\"napi_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}"
-  ✔ Successfully resolved neon
-  Installing remote server. Please ensure you trust the server author, especially when sharing sensitive data.
-  For information on Smithery's data policy, please visit: https://smithery.ai/docs/data-policy
-  neon successfully installed for claude
-  ```
+    > Make sure to replace `$NEON_API_KEY` with your actual Neon API key. You can generate one through the Neon Console by following the instructions in [Creating API keys](/docs/manage/api-keys#creating-api-keys).
+
+    You will be prompted to install the required dependencies. Type `y` to proceed. You should see output similar to this:
+
+    ```bash
+    npx @neondatabase/mcp-server-neon init napi_xxxx
+    Need to install the following packages:
+    @neondatabase/mcp-server-neon@0.x.x
+    Ok to proceed? (y) y
+
+    Config written to: /Users/USERNAME/Library/Application Support/Claude/claude_desktop_config.json
+    The Neon MCP server will start automatically the next time you open Claude.
+    ```
 
 3.  Restart Claude Desktop. You can do so by quitting the Claude Desktop and opening it again.
 
-- Test: Ask Claude `"List my Neon projects"`. If it works, you'll see your projects listed by Claude, fetched using the **Neon API**. For example, you might see output similar to this:
+### Verifying the connection
 
-  ![Claude output](/guides/images/claude_mcp/claude_list_project.png)
+You can verify that the connection to the Neon MCP server either remote or local is successful by following these steps:
+
+1. In Claude click on the search and tools icon to see the available tools.
+   ![Claude available tools](/guides/images/claude_mcp/claude_available_tools.png)
+2. You should see the Neon MCP server's tools listed. Click on the **neon** tool to see the available tools in detail.
+   ![Claude list available tools](/guides/images/claude_mcp/claude_list_available_tools.png)
+3. Claude is now connected to Neon's remote MCP server.
+
+Ask Claude `"List my Neon projects"`. If it works, you'll see your projects listed by Claude, fetched using the **Neon API**. For example, you might see output similar to this:
+
+![Claude output](/guides/images/claude_mcp/claude_list_project.png)
 
 ## Using Neon MCP server
 

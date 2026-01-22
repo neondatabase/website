@@ -37,7 +37,7 @@ The `order_by_clause` is an optional clause that specifies the order of concaten
 ORDER BY expression1 {ASC | DESC}, [...]
 ```
 
-The `STRING_AGG()` is similar to the [`ARRAY_AGG()`](https://neon.tech/postgresql/postgresql-aggregate-functions/postgresql-array_agg-function/) function except for the return type. The return value of the `STRING_AGG()` function is a string whereas the return value of the `ARRAY_AGG()` function is an [array](../postgresql-tutorial/postgresql-array).
+The `STRING_AGG()` is similar to the [`ARRAY_AGG()`](/postgresql/postgresql-aggregate-functions/postgresql-array_agg-function/) function except for the return type. The return value of the `STRING_AGG()` function is a string whereas the return value of the `ARRAY_AGG()` function is an [array](../postgresql-tutorial/postgresql-array).
 
 Like other aggregate functions such as [`AVG()`](postgresql-avg-function), [`COUNT()`](postgresql-count-function), [`MAX()`](postgresql-max-function), [`MIN()`](postgresql-min-function), and [`SUM()`](postgresql-sum-function), the `STRING_AGG()` function is often used with the [`GROUP BY`](../postgresql-tutorial/postgresql-group-by) clause.
 

@@ -3,24 +3,20 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
-import { getSidebar } from 'utils/api-postgresql';
+import { POSTGRESQL_DIR_PATH } from 'constants/content';
+import { POSTGRESQL_BASE_PATH } from 'constants/docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getNavigation, getAllPostgresTutorials, getNavigationLinks } from 'utils/api-postgresql';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
-import {
-  POSTGRESQL_DIR_PATH,
-  getAllPostgresTutorials,
-  getNavigationLinks,
-  getPostBySlug,
-} from 'utils/postgresql-pages';
 
 const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
   slug.includes('shared-content/') ||
   slug.includes('README') ||
-  slug.includes('GUIDE_TEMPLATE') ||
-  slug.includes('RELEASE_NOTES_TEMPLATE');
+  slug.includes('GUIDE_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPostgresTutorials();
@@ -65,13 +61,13 @@ const PostgresTutorial = async ({ params }) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
 
   const navigationLinks = getNavigationLinks(currentSlug);
-  const fileOriginPath = `${process.env.NEXT_PUBLIC_POSTGRESQL_GITHUB_PATH + currentSlug}.md`;
+  const gitHubPath = `${POSTGRESQL_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, POSTGRESQL_DIR_PATH);
   if (!post) return notFound();
@@ -99,10 +95,11 @@ const PostgresTutorial = async ({ params }) => {
         content={content}
         data={data}
         breadcrumbs={breadcrumbs}
+        breadcrumbsBaseUrl={POSTGRESQL_BASE_PATH}
         navigationLinks={navigationLinks}
-        navigationLinksPrefix="/postgresql/"
+        navigationLinksBasePath="/postgresql/"
         currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isPostgres
       />

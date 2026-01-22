@@ -8,21 +8,21 @@
 }
 
 .ikp-modal-widget__content{
-  box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.06);
-  border: 1px solid #E4E5E7;
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.06);
+  border: 1px solid #C9CBCF;
   background: #FAFAFA;
-  border-radius: 10px;
+  border-radius: 8px;
 }
 
 [data-theme='dark'] {
   .ikp-modal__backdrop {
-    background: rgba(12, 13, 13, 0.8);
+    background: rgba(0, 0, 0, 0.8);
   }
 
   .ikp-modal-widget__content{
-    box-shadow: 4px 4px 10px 0px rgba(0, 0, 0, 0.5);
-    border: 1px solid #303236;
-    background: #131415;
+    box-shadow: 4px 4px 10px 0 rgba(0, 0, 0, 0.5);
+    border: 1px solid #27272A;
+    background: #09090B;
   }
 }
 

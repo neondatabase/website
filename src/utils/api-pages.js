@@ -132,19 +132,4 @@ const getWpPreviewPageData = async (id, status) => {
   }
 };
 
-const getAboutPage = async () => {
-  const aboutPageQuery = gql`
-    query aboutPage {
-      page(id: "about-us", idType: URI) {
-        content
-        ...wpPageSeo
-      }
-    }
-    ${PAGE_SEO_FRAGMENT}
-  `;
-  const data = await fetchGraphQL(graphQLClient).request(aboutPageQuery);
-
-  return data?.page;
-};
-
-export { getLandingPages, getStaticPages, getWpPageBySlug, getAboutPage, getWpPreviewPageData };
+export { getLandingPages, getStaticPages, getWpPageBySlug, getWpPreviewPageData };

@@ -4,14 +4,14 @@ subtitle: Learn about Neon as a managed Postgres service
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2025-03-18T15:50:56.626Z'
+updatedOn: '2026-01-06T13:11:04.221Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
 
 ## Postgres versions
 
-Neon supports Postgres 14, 15, 16, 17. You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
+Neon supports Postgres 14, 15, 16, 17, and 18 (preview), as per the [Neon version support policy](/docs/postgresql/postgres-version-policy). You can select the Postgres version you want to use when creating a Neon project. For information about creating a Neon project, See [Manage projects](/docs/manage/projects). Minor Postgres point releases are rolled out by Neon after extensive validation as part of regular platform maintenance.
 
 ## Postgres extensions
 
@@ -34,7 +34,9 @@ Neon roles cannot install Postgres extensions other than those supported by Neon
 The following table shows parameter settings that are set explicitly for your Neon Postgres instance. These values may differ from standard Postgres defaults, and a few settings differ based on your Neon compute size.
 
 <Admonition type="note">
-Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role), but if you are a paid plan user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported.
+Because Neon is a managed Postgres service, Postgres parameters are not user-configurable outside of a [session, database, or role context](#configuring-postgres-parameters-for-a-session-database-or-role).
+
+If you are a Neon [Scale plan](/docs/introduction/plans) user and require a different Postgres instance-level setting, you can contact [Neon Support](/docs/introduction/support) to see if the desired setting can be supported. Please keep in mind that it may not be possible to support some parameters due to platform limitations and contraints.
 </Admonition>
 
 | Parameter                             | Value         | Note                                                                                                                                                                                                                                                                           |
@@ -42,13 +44,14 @@ Because Neon is a managed Postgres service, Postgres parameters are not user-con
 | `client_connection_check_interval`    | 60000         |                                                                                                                                                                                                                                                                                |
 | `dynamic_shared_memory_type`          | mmap          |                                                                                                                                                                                                                                                                                |
 | `effective_io_concurrency`            | 20            |                                                                                                                                                                                                                                                                                |
-| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                   |
+| `effective_cache_size    `            |               | Set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size                                                                                                                                                    |
 | `fsync`                               | off           | Neon syncs data to the Neon Storage Engine to store your data safely and reliably                                                                                                                                                                                              |
 | `hot_standby`                         | off           |                                                                                                                                                                                                                                                                                |
 | `idle_in_transaction_session_timeout` | 300000        |                                                                                                                                                                                                                                                                                |
 | `listen_addresses`                    | '\*'          |                                                                                                                                                                                                                                                                                |
 | `log_connections`                     | on            |                                                                                                                                                                                                                                                                                |
 | `log_disconnections`                  | on            |                                                                                                                                                                                                                                                                                |
+| `log_min_error_statement`             | panic         |                                                                                                                                                                                                                                                                                |
 | `log_temp_files`                      | 1048576       |                                                                                                                                                                                                                                                                                |
 | `maintenance_work_mem`                | 65536         | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |
 | `max_connections`                     | 112           | The value differs by compute size. See [below](#parameter-settings-that-differ-by-compute-size).                                                                                                                                                                               |
@@ -76,21 +79,34 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 - The formula for `max_connections` is:
 
   ```go
-  compute_size = min(max_compute_size, 8 * min_compute_size)
-  max_connections = max(100, min(4000, 450.5 * compute_size))
+  compute_size = min(max_compute_size, 8 × min_compute_size)
+  max_connections = max(100, min(4000, floor(compute_size × 419.66)))
   ```
 
-  For example, if you have a fixed compute size of 4 CU, that size is both your `max_compute_size` and `min_compute_size`. Inputting that value into the formula gives you a `max_connections` setting of 1802. For an autoscaling configuration with a `min_compute_size` of 0.25 CU and a `max_compute_size` of 2 CU, the `max_connections` setting would be 901.
+  In simpler terms:
+  - Neon first determines the effective compute size by taking the smaller of: your maximum size, or 8 times your minimum size
+  - This compute size is then multiplied by approximately 420 connections per CU
+  - The result is capped between a minimum of 100 and a maximum of 4,000 connections
 
-    <Admonition type="note">
-    It's important to note that `max_connections` does not scale dynamically in an autoscaling configuration. It’s a static setting determined by your minimum and maximum compute size.
-    </Admonition>
+  **Examples:**
+  - **Fixed compute size of 4 CU:**
+    - Since your min and max are both 4 CU, the compute size is 4.
+    - Max connections = 4 × 419.66 = 1,678 connections
+  - **Autoscaling from 0.25 to 2 CU:**
+    - Compute size = min(2, 8 × 0.25) = min(2, 2) = 2
+    - Max connections = 2 × 419.66 = 839 connections
+  - **Autoscaling from 0.25 to 4 CU:**
+    - Compute size = min(4, 8 × 0.25) = min(4, 2) = 2
+    - Max connections = 2 × 419.66 = 839 connections
+  - **Autoscaling from 2 to 8 CU:**
+    - Compute size = min(8, 8 × 2) = min(8, 16) = 8
+    - Max connections = 8 × 419.66 = 3,357 connections
 
-  You can also check your `max_connections` setting in the Neon Console. Go to **Branches**, select your branch, then go to the **Compute** tab and select **Edit**. Your `max_connections` setting is the "direct connections" value. You can adjust the compute configuration to see how it impacts the number of direct connections.
+You can view your `max_connections` setting in the Neon Console by navigating to **Branches**, selecting your compute, and clicking **Edit** on the **Compute** tab. The value is displayed as **direct connections**. As you adjust your compute settings, you'll see how changes to your min/max compute size affect the number of direct connections available.
 
-  ![max_connections calculator](/docs/reference/max_connection_calculator.png)
+![max_connections calculator](/docs/reference/max_connections_calculator.png)
 
-  _You can use connection pooling in Neon to increase the number of supported connections. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
+_For most applications, we recommend using connection pooling, which supports up to 10,000 concurrent connections regardless of compute size. Direct connections are best for specific use cases like running `pg_dump`, session-dependent features, or schema migrations. For more information, see [Connection pooling](/docs/connect/connection-pooling)._
 
 - The `maintenance_work_mem` value is set according to your minimum compute size RAM. The formula is:
 
@@ -106,46 +122,46 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
 
   If you do increase `maintenance_work_mem`, your setting should not exceed 60 percent of your compute's available RAM.
 
-  | Compute Units (CU) | vCPU | RAM    | maintenance_work_mem |
-  | :----------------- | :--- | :----- | :------------------- |
-  | 0.25               | 0.25 | 1 GB   | 64 MB                |
-  | 0.50               | 0.50 | 2 GB   | 64 MB                |
-  | 1                  | 1    | 4 GB   | 67 MB                |
-  | 2                  | 2    | 8 GB   | 134 MB               |
-  | 3                  | 3    | 12 GB  | 201 MB               |
-  | 4                  | 4    | 16 GB  | 268 MB               |
-  | 5                  | 5    | 20 GB  | 335 MB               |
-  | 6                  | 6    | 24 GB  | 402 MB               |
-  | 7                  | 7    | 28 GB  | 470 MB               |
-  | 8                  | 8    | 32 GB  | 537 MB               |
-  | 9                  | 9    | 36 GB  | 604 MB               |
-  | 10                 | 10   | 40 GB  | 671 MB               |
-  | 11                 | 11   | 44 GB  | 738 MB               |
-  | 12                 | 12   | 48 GB  | 805 MB               |
-  | 13                 | 13   | 52 GB  | 872 MB               |
-  | 14                 | 14   | 56 GB  | 939 MB               |
-  | 15                 | 15   | 60 GB  | 1007 MB              |
-  | 16                 | 16   | 64 GB  | 1074 MB              |
-  | 18                 | 18   | 72 GB  | 1208 MB              |
-  | 20                 | 20   | 80 GB  | 1342 MB              |
-  | 22                 | 22   | 88 GB  | 1476 MB              |
-  | 24                 | 24   | 96 GB  | 1610 MB              |
-  | 26                 | 26   | 104 GB | 1744 MB              |
-  | 28                 | 28   | 112 GB | 1878 MB              |
-  | 30                 | 30   | 120 GB | 2012 MB              |
-  | 32                 | 32   | 128 GB | 2146 MB              |
-  | 34                 | 34   | 136 GB | 2280 MB              |
-  | 36                 | 36   | 144 GB | 2414 MB              |
-  | 38                 | 38   | 152 GB | 2548 MB              |
-  | 40                 | 40   | 160 GB | 2682 MB              |
-  | 42                 | 42   | 168 GB | 2816 MB              |
-  | 44                 | 44   | 176 GB | 2950 MB              |
-  | 46                 | 46   | 184 GB | 3084 MB              |
-  | 48                 | 48   | 192 GB | 3218 MB              |
-  | 50                 | 50   | 200 GB | 3352 MB              |
-  | 52                 | 52   | 208 GB | 3486 MB              |
-  | 54                 | 54   | 216 GB | 3620 MB              |
-  | 56                 | 56   | 224 GB | 3754 MB              |
+  | Compute Units (CU) | RAM    | maintenance_work_mem |
+  | :----------------- | :----- | :------------------- |
+  | 0.25               | 1 GB   | 64 MB                |
+  | 0.50               | 2 GB   | 64 MB                |
+  | 1                  | 4 GB   | 67 MB                |
+  | 2                  | 8 GB   | 134 MB               |
+  | 3                  | 12 GB  | 201 MB               |
+  | 4                  | 16 GB  | 268 MB               |
+  | 5                  | 20 GB  | 335 MB               |
+  | 6                  | 24 GB  | 402 MB               |
+  | 7                  | 28 GB  | 470 MB               |
+  | 8                  | 32 GB  | 537 MB               |
+  | 9                  | 36 GB  | 604 MB               |
+  | 10                 | 40 GB  | 671 MB               |
+  | 11                 | 44 GB  | 738 MB               |
+  | 12                 | 48 GB  | 805 MB               |
+  | 13                 | 52 GB  | 872 MB               |
+  | 14                 | 56 GB  | 939 MB               |
+  | 15                 | 60 GB  | 1007 MB              |
+  | 16                 | 64 GB  | 1074 MB              |
+  | 18                 | 72 GB  | 1208 MB              |
+  | 20                 | 80 GB  | 1342 MB              |
+  | 22                 | 88 GB  | 1476 MB              |
+  | 24                 | 96 GB  | 1610 MB              |
+  | 26                 | 104 GB | 1744 MB              |
+  | 28                 | 112 GB | 1878 MB              |
+  | 30                 | 120 GB | 2012 MB              |
+  | 32                 | 128 GB | 2146 MB              |
+  | 34                 | 136 GB | 2280 MB              |
+  | 36                 | 144 GB | 2414 MB              |
+  | 38                 | 152 GB | 2548 MB              |
+  | 40                 | 160 GB | 2682 MB              |
+  | 42                 | 168 GB | 2816 MB              |
+  | 44                 | 176 GB | 2950 MB              |
+  | 46                 | 184 GB | 3084 MB              |
+  | 48                 | 192 GB | 3218 MB              |
+  | 50                 | 200 GB | 3352 MB              |
+  | 52                 | 208 GB | 3486 MB              |
+  | 54                 | 216 GB | 3620 MB              |
+  | 56                 | 224 GB | 3754 MB              |
 
 - The formula for `max_worker_processes` is:
 
@@ -162,7 +178,7 @@ Of the parameter settings listed above, the `max_connections`, `maintenance_work
   shared_buffers_mb = max(128, (1023 + backends * 256) / 1024)
   ```
 
-- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+- The `effective_cache_size` parameter is set based on the [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache) size of your maximum Neon compute size. This helps the Postgres query planner make smarter decisions, which can improve query performance. For details on LFC size by compute size, see the table in [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 ### Configuring Postgres parameters for a session, database, or role
 
@@ -192,21 +208,27 @@ ALTER DATABASE neondb SET maintenance_work_mem='1 GB';
 ALTER USER neondb_owner SET maintenance_work_mem='1 GB';
 ```
 
-## Postgres server logs
+## Tablespaces
 
-Currently, Postgres server logs can only be accessed Neon Support team. Should you require information from the Postgres server logs for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
+Neon does not support PostgreSQL [tablespaces](https://www.postgresql.org/docs/current/manage-ag-tablespaces.html). Attempting to create a tablespace with the `CREATE TABLESPACE` command will result in an error. This is due to Neon's managed cloud architecture, which does not permit direct file system access for custom storage locations.
+
+If you have existing applications or scripts that use tablespaces for organizing database objects across different storage devices, you'll need to remove or modify these references when migrating to Neon.
+
+## Postgres logs
+
+Postgres logs can be accessed through the [Datadog](/docs/guides/datadog) or [OpenTelemetry](/docs/guides/opentelemetry) integration on the Scale plan. The integration forwards logs including error messages, database connection events, system notifications, and general PostgreSQL logs. For other plans or if you need specific log information for troubleshooting purposes, please contact [Neon Support](/docs/introduction/support).
 
 ## Unlogged tables
 
-Unlogged tables are maintained on Neon compute local storage. These tables do not survive compute restarts (including when a Neon compute is placed into an idle state after a period of inactivity). This is unlike a standalone Postgres installation, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Neon computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+Unlogged tables are tables that do not write to the Postgres write-ahead log (WAL). In Noen, these tables are stored on compute local storage and are not persisted across compute restarts or when a compute scales to zero. This is unlike standard Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+
+## Temporary tables
+
+Temporary tables are tied to a session (or optionally a transaction). They exist only for the lifetime of the session or transaction and are automatically dropped when it ends. Like unlogged tables, they are stored on compute local storage and limited by compute local disk space.
 
 ## Memory
 
 SQL queries and index builds can generate large volumes of data that may not fit in memory. In Neon, the size of your compute determines the amount of memory that is available. For information about compute size and available memory, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
-
-## Temporary tables
-
-Temporary tables, which are stored in compute local storage, are limited by compute local storage size.
 
 ## Session context
 
@@ -277,17 +299,8 @@ ICU also supports creating custom collations. For more information, see [ICU Cus
 
 For more about collations in Postgres, see [Collation Support](https://www.postgresql.org/docs/current/collation.html#COLLATION).
 
-## Event triggers
+## track_commit_timestamp parameter
 
-Postgres [event triggers](https://www.postgresql.org/docs/current/event-triggers.html), which require Postgres superuser privileges, are currently not supported. Unlike regular triggers, which are attached to a single table and capture only DML events, event triggers are global to a particular database and are capable of capturing DDL events.
-
-Attempting to create an event trigger will produce errors similar to these:
-
-```sql
-ERROR: permission denied to create event trigger "your_trigger_name" (SQLSTATE 42501)
-
-ERROR:  permission denied to create event trigger "your_trigger_name"
-HINT:  Must be superuser to create an event trigger.
-```
+The `track_commit_timestamp` Postgres parameter is currently not supported in Neon due to platform constraints.
 
 <NeedHelp/>

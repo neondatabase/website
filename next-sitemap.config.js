@@ -1,28 +1,23 @@
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.tech',
+  siteUrl: process.env.NEXT_PUBLIC_DEFAULT_SITE_URL || 'https://neon.com',
   exclude: [
-    '/blog/wp-draft-post-preview-page',
-    '/blog/rss.xml',
-    '/docs/changelog/rss.xml',
-    '/last-week-in-aws',
-    '/ping-thing',
-    '/all-things-open-2023',
-    '/stackoverflow',
-    '/cfe',
-    '/devs',
-    '/github',
-    '/youtube',
-    '/education',
-    '/pgt',
-    '/fireship',
-    '/radio',
-    '/thank-you',
-    '/docs/postgres*',
-    '/blog-sitemap.xml',
+    // API routes
+    '/api/*',
+
+    // XML routes (RSS feeds and sitemaps)
+    '**/*.xml',
+
+    // Blog pages (handled by blog-sitemap.xml)
     '/blog/*',
-    '/guides/rss.xml',
-    '/postgresql/rss.xml',
-    '/enterprise',
+
+    // PostgreSQL Tutorial (handled by sitemap-postgres.xml)
+    '/postgresql/*',
+
+    // Home page for logged-in users
+    '/home',
+
+    // Legacy docs
+    '/docs/auth/legacy/*',
   ],
   generateRobotsTxt: true,
   additionalPaths: async (config) => [await config.transform(config, '/')],
@@ -31,29 +26,17 @@ module.exports = {
       {
         userAgent: '*',
         disallow: [
-          '/blog/wp-draft-post-preview-page$',
-          '/last-week-in-aws$',
-          '/ping-thing$',
-          '/all-things-open-2023$',
-          '/stackoverflow$',
-          '/github$',
-          '/youtube$',
-          '/education$',
-          '/pgt$',
-          '/fireship$',
-          '/radio$',
-          '/docs/postgres*',
-          '/thank-you$',
-          '/cfe$',
-          '/devs$',
+          // Home page for logged-in users
           '/home$',
-          '/enterprise$',
+
+          // Legacy docs
+          '/docs/auth/legacy/',
         ],
       },
     ],
     additionalSitemaps: [
       `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/blog-sitemap.xml`,
-      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/postgresql-sitemap.xml`,
+      `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}/sitemap-postgres.xml`,
     ],
   },
 };

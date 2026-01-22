@@ -1,0 +1,20 @@
+# Postgres data types
+
+> The document outlines the various PostgreSQL data types supported by Neon, detailing their usage and characteristics to facilitate effective database management within the Neon platform.
+
+## Source
+
+- [Postgres data types HTML](https://neon.com/docs/data-types/introduction): The original HTML version of this documentation
+
+Get started with commonly-used Postgres data types with Neon's data type guides. For other data types that Postgres supports, visit the official Postgres [Data Types](https://www.postgresql.org/docs/current/datatype.html) documentation.
+
+- [Array](https://neon.com/docs/data-types/array): Manage collections of elements using arrays
+- [Boolean](https://neon.com/docs/data-types/boolean): Represent truth values in Postgres
+- [Date and time](https://neon.com/docs/data-types/date-and-time): Work with date and time values in Postgres
+- [Character](https://neon.com/docs/data-types/character): Work with text data in Postgres
+- [JSON](https://neon.com/docs/data-types/json): Model JSON data in Postgres
+- [Decimal](https://neon.com/docs/data-types/decimal): Work with exact numerical values in Postgres
+- [Floating point](https://neon.com/docs/data-types/floating-point): Work with float values in Postgres
+- [Integer](https://neon.com/docs/data-types/integer): Work with integers in Postgres
+- [Tsvector](https://neon.com/docs/data-types/tsvector): Optimize full-text search in Postgres with the tsvector data type
+- [UUID](https://neon.com/docs/data-types/uuid): Work with UUIDs in Postgres

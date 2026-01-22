@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Link from 'components/shared/link';
-
-import ArrowIcon from './images/arrow.inline.svg';
+import ArrowBackIcon from 'icons/arrow-back.inline.svg';
 
 const getUrl = (slug, basePath) => {
   if (slug.startsWith('http')) {
@@ -13,60 +12,59 @@ const getUrl = (slug, basePath) => {
   return `${basePath}${slug}`;
 };
 
-const NavigationLinks = ({ previousLink = null, nextLink = null, basePath }) => {
-  const previousLinkUrl = previousLink?.slug && getUrl(previousLink.slug, basePath);
-  const nextLinkUrl = nextLink?.slug && getUrl(nextLink.slug, basePath);
+const NavigationLink = ({ link, basePath, isNext = false }) => {
+  const linkUrl = link?.slug && getUrl(link.slug, basePath);
 
   return (
-    <div className="mt-16 flex w-full space-x-10 sm:mt-[50px] sm:space-x-0">
-      {previousLink?.title && previousLink?.slug && (
-        <Link
-          to={previousLinkUrl}
-          className={clsx(
-            'group mr-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 dark:border-gray-new-20 sm:w-full sm:space-x-3',
-            nextLink?.title && nextLink?.slug && 'sm:hidden'
-          )}
-        >
-          <ArrowIcon className="shrink-0 rotate-180 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 sm:block" />
-          <div className="flex flex-col items-end">
-            <span className="text-sm font-normal text-gray-new-40 dark:text-gray-new-90">
-              Previous
-            </span>
-            <span
-              className="text-right font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
-              dangerouslySetInnerHTML={{ __html: previousLink.title }}
-            />
-          </div>
-        </Link>
+    <Link
+      to={linkUrl}
+      className={clsx(
+        'group flex w-1/2 flex-col gap-3 rounded border border-gray-new-90 px-4 py-5 tracking-tight dark:border-gray-new-20 sm:w-full',
+        isNext ? 'ml-auto items-end' : 'items-start sm:hidden'
       )}
-      {nextLink?.title && nextLink?.slug && (
-        <Link
-          to={nextLinkUrl}
-          className="group ml-auto flex w-1/2 items-center justify-between rounded border border-gray-new-90 p-4 text-right dark:border-gray-new-20 sm:w-full sm:space-x-3"
-        >
-          <div className="flex flex-col items-start">
-            <span className="text-sm font-normal text-gray-new-40 dark:text-gray-new-90">Next</span>
-            <span
-              className="text-left font-semibold transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
-              dangerouslySetInnerHTML={{ __html: nextLink.title }}
-            />
-          </div>
-          <ArrowIcon className="shrink-0 text-gray-new-70 transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 sm:block" />
-        </Link>
-      )}
-    </div>
+    >
+      <span className="flex items-center gap-1 text-sm font-normal leading-none text-gray-new-40 dark:text-gray-new-50">
+        <ArrowBackIcon
+          className={clsx('shrink-0', isNext && 'order-1 rotate-180')}
+          width={14}
+          height={14}
+        />
+        {link.index || (isNext ? 'Next' : 'Previous')}
+      </span>
+      <span
+        className="font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-primary-1 [&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15"
+        dangerouslySetInnerHTML={{ __html: link.title }}
+      />
+    </Link>
   );
 };
 
+const NavigationLinkPropTypes = {
+  title: PropTypes.string,
+  slug: PropTypes.string,
+  index: PropTypes.string,
+};
+
+NavigationLink.propTypes = {
+  link: PropTypes.shape(NavigationLinkPropTypes),
+  basePath: PropTypes.string.isRequired,
+  isNext: PropTypes.bool,
+};
+
+const NavigationLinks = ({ previousLink = null, nextLink = null, basePath }) => (
+  <div className="mt-12 flex w-full gap-6 md:mt-10 ">
+    {previousLink?.title && previousLink?.slug && (
+      <NavigationLink link={previousLink} basePath={basePath} />
+    )}
+    {nextLink?.title && nextLink?.slug && (
+      <NavigationLink link={nextLink} basePath={basePath} isNext />
+    )}
+  </div>
+);
+
 NavigationLinks.propTypes = {
-  previousLink: PropTypes.exact({
-    title: PropTypes.string,
-    slug: PropTypes.string,
-  }),
-  nextLink: PropTypes.exact({
-    title: PropTypes.string,
-    slug: PropTypes.string,
-  }),
+  previousLink: PropTypes.shape(NavigationLinkPropTypes),
+  nextLink: PropTypes.shape(NavigationLinkPropTypes),
   basePath: PropTypes.string.isRequired,
 };
 

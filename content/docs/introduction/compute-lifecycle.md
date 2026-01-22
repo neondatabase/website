@@ -3,7 +3,7 @@ title: Compute lifecycle
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2024-12-13T20:52:57.586Z'
+updatedOn: '2025-12-17T14:37:40.661Z'
 ---
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.
@@ -14,9 +14,9 @@ Generally, an idle compute has been suspended by Neon's scale to zero feature du
 
 If there are no active queries for 5 minutes, which is the scale to zero setting in Neon, your compute is automatically placed into an idle state. If you are on a paid plan, you can disable the scale to zero behavior so that a compute always remains active. This behavior is controlled by your compute's **Scale to zero** setting.
 
-![Scale to zero configuration dialog](/docs/introduction/autosuspend_config.png)
+![Scale to zero configuration dialog](/docs/introduction/autoscaling_config.png)
 
-For information about configuring this setting, see [Edit a compute](/docs/manage/endpoints#edit-a-compute).
+For information about configuring this setting, see [Edit a compute](/docs/manage/computes#edit-a-compute).
 
 <Admonition type="note">
 Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transaction" connection as active to avoid breaking application logic that involves long-running transactions. Only the truly inactive connections are closed after the defined period of inactivity.
@@ -24,7 +24,7 @@ Neon's _Scale to Zero_ feature is conservative. It treats an "idle-in-transactio
 
 ## Compute activation
 
-When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds.
+When you connect to an idle compute, Neon automatically activates it. Activation generally takes a few hundred milliseconds. However, if your Neon project has been idle for more than 7 days, you may experience a slightly longer activation time.
 
 Considering this activation time, your first connection may have a slightly higher latency than subsequent connections to an already-active compute. Also, Postgres memory buffers are cold after a compute wakes up from the idle state, which means that initial queries may take longer until the memory buffers are warmed.
 

@@ -3,7 +3,8 @@ title: Neon architecture
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
-updatedOn: '2024-11-21T16:16:13.439Z'
+  - /docs/guides/neon-features
+updatedOn: '2026-01-13T19:29:46.136Z'
 ---
 
 Neon architecture is based on the separation of compute and storage and is orchestrated by the Neon Control Plane, which manages cloud resources across both storage and compute.
@@ -27,4 +28,4 @@ Durability is at the core of Neon's architecture. As described earlier, incoming
 
 ## Archive storage
 
-Archive storage in Neon, which enables [branch archiving](/docs/guides/branch-archiving) on the Free Plan, optimizes storage resources by offloading data that's not being used. As described above, Neon’s architecture includes Safekeepers, Pageservers, and cloud object storage. In this setup, the Pageservers are responsible for processing and uploading data to cloud object storage as soon as it's written. When a branch is archived, it does not involve moving data; instead, the branch's data is simply evicted from the Pageserver, freeing up Pageserver storage. This approach ensures that while archived data is readily available on demand in cost-efficient object storage, it's no longer taking up space in the more performant storage used by Neon's Pageservers.
+Archive storage in Neon, which enables [branch archiving](/docs/guides/branch-archiving) on the Free plan, optimizes storage resources by offloading data that's not being used. As described above, Neon’s architecture includes Safekeepers, Pageservers, and cloud object storage. In this setup, the Pageservers are responsible for processing and uploading data to cloud object storage as soon as it's written. When a branch is archived, it does not involve moving data; instead, the branch's data is simply evicted from the Pageserver, freeing up Pageserver storage. This approach ensures that while archived data is readily available on demand in cost-efficient object storage, it's no longer taking up space in the more performant storage used by Neon's Pageservers.

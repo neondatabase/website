@@ -1,178 +1,297 @@
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
+'use client';
 
-import Link from 'components/shared/link';
+import clsx from 'clsx';
+import { useState, useRef, useEffect, useCallback } from 'react';
+
+import Button from 'components/shared/button';
 import MENUS from 'constants/menus.js';
+import useClickOutside from 'hooks/use-click-outside';
+import useIsTouchDevice from 'hooks/use-is-touch-device';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
-import MenuBanner from '../menu-banner';
+import Submenu from '../submenu';
 
-const Navigation = ({ isDarkTheme }) => (
-  <nav>
-    <ul className="flex gap-x-10 xl:gap-x-8 lg:hidden [@media(max-width:1070px)]:gap-x-6">
-      {MENUS.header.map(({ to, text, sections }, index) => {
-        const Tag = to ? Link : 'button';
-        const hasSubmenu = sections?.length > 0;
-        const gridSubmenu = sections?.length > 1;
-        const theme = to ? { theme: isDarkTheme ? 'white' : 'black' } : {};
+const SUBMENU_LINK_CLASSNAME = 'main-navigation-submenu-link';
 
-        return (
-          <li className={clsx('relative [perspective:2000px]', hasSubmenu && 'group')} key={index}>
-            <Tag
-              className={clsx(
-                'flex items-center gap-x-1 whitespace-pre text-sm',
-                isDarkTheme ? 'text-white' : 'text-black dark:text-white'
-              )}
-              to={to}
-              {...theme}
+const Navigation = () => {
+  const [activeMenuIndex, setActiveMenuIndex] = useState(null);
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  const submenuContainerRef = useRef(null);
+  const timeoutRef = useRef(null);
+  const menuButtonRefs = useRef([]);
+
+  const isTouchDevice = useIsTouchDevice();
+
+  const handleMenuEnter = (hasSubmenu, index) => {
+    if (isKeyboardOpen || isTouchDevice) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+
+    if (!hasSubmenu) {
+      setActiveMenuIndex(null);
+      return;
+    }
+
+    setActiveMenuIndex(index);
+  };
+
+  const handleMenuLeave = (hasSubmenu) => {
+    if (isKeyboardOpen) return;
+
+    if (hasSubmenu || activeMenuIndex !== null) {
+      timeoutRef.current = setTimeout(() => {
+        setActiveMenuIndex(null);
+      }, 100);
+    }
+  };
+
+  const handleSubmenuEnter = () => {
+    if (isKeyboardOpen) return;
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+  };
+
+  const handleSubmenuLeave = () => {
+    if (isKeyboardOpen) return;
+
+    setActiveMenuIndex(null);
+  };
+
+  const handleMenuKeyDown = (e, hasSubmenu, index) => {
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      const nextIndex = (index + 1) % MENUS.header.length;
+      menuButtonRefs.current[nextIndex].focus();
+    }
+
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      const prevIndex = (index - 1 + MENUS.header.length) % MENUS.header.length;
+      menuButtonRefs.current[prevIndex].focus();
+    }
+
+    if (!hasSubmenu) return;
+
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+
+      if (activeMenuIndex === index) {
+        setActiveMenuIndex(null);
+        setIsKeyboardOpen(false);
+      } else {
+        setActiveMenuIndex(index);
+        setIsKeyboardOpen(true);
+      }
+    }
+
+    if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
+      if (activeMenuIndex === index && submenuContainerRef.current) {
+        e.preventDefault();
+        submenuContainerRef.current
+          .querySelector(`#submenu-${index}`)
+          .querySelector(`.${SUBMENU_LINK_CLASSNAME}`)
+          .focus();
+      }
+    }
+  };
+
+  const handleMenuClick = useCallback(
+    (hasSubmenu, index) => (e) => {
+      if (!hasSubmenu) return;
+
+      if (isTouchDevice) {
+        e.preventDefault();
+        if (activeMenuIndex === index) {
+          setActiveMenuIndex(null);
+          setIsKeyboardOpen(false);
+        } else {
+          setActiveMenuIndex(index);
+          setIsKeyboardOpen(true);
+        }
+      }
+
+      if (!isTouchDevice) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    },
+    [activeMenuIndex, isTouchDevice]
+  );
+
+  const handleEscapeKey = useCallback(
+    (e) => {
+      if (e.key === 'Escape' && activeMenuIndex !== null) {
+        e.preventDefault();
+        setActiveMenuIndex(null);
+        setIsKeyboardOpen(false);
+
+        const currentlyFocused = document.activeElement;
+        const submenuPanel = document.getElementById(`submenu-${activeMenuIndex}`);
+
+        if (!submenuPanel || !submenuPanel.contains(currentlyFocused)) return;
+        if (menuButtonRefs.current[activeMenuIndex]) {
+          menuButtonRefs.current[activeMenuIndex].focus();
+        }
+      }
+    },
+    [activeMenuIndex]
+  );
+
+  const handleSubmenuNavigation = useCallback((containerIndex) => {
+    let links;
+
+    if (submenuContainerRef.current) {
+      links = submenuContainerRef.current
+        .querySelector(`#submenu-${containerIndex}`)
+        .querySelectorAll('.main-navigation-submenu-link');
+    }
+
+    if (!links || links.length === 0) return () => {};
+    if (!menuButtonRefs.current[containerIndex]) return () => {};
+
+    let linkIndex = -1;
+    return (e) => {
+      const menuTrigger = menuButtonRefs.current[containerIndex];
+      const nextMenuTrigger = menuButtonRefs.current[containerIndex + 1] || null;
+
+      if (linkIndex === -1) {
+        links.forEach((link, idx) => {
+          if (link === e.target) {
+            linkIndex = idx;
+          }
+        });
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length) return;
+        links[nextIndex].focus();
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prevIndex = linkIndex - 1;
+
+        if (linkIndex === 0) {
+          menuTrigger.focus();
+        } else {
+          links[prevIndex].focus();
+        }
+      }
+
+      if (e.key === 'Tab') {
+        if (linkIndex === 0 && e.shiftKey) {
+          e.preventDefault();
+          menuTrigger.focus();
+        }
+        const nextIndex = linkIndex + 1;
+        if (nextIndex >= links.length && nextMenuTrigger) {
+          e.preventDefault();
+          nextMenuTrigger.focus();
+        }
+      }
+    };
+  }, []);
+
+  useClickOutside([submenuContainerRef, ...menuButtonRefs.current.filter(Boolean)], (e) => {
+    if (e.target === menuButtonRefs.current[activeMenuIndex]) return;
+
+    if (activeMenuIndex !== null) {
+      setActiveMenuIndex(null);
+      setIsKeyboardOpen(false);
+    }
+  });
+
+  useEffect(() => {
+    if (activeMenuIndex !== null) {
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [activeMenuIndex, handleEscapeKey]);
+
+  useEffect(() => {
+    if (submenuContainerRef.current) {
+      const activePanel = submenuContainerRef.current.querySelector('[data-submenu-panel].active');
+      const newHeight = activePanel ? activePanel.scrollHeight : 0;
+      setContainerHeight(newHeight);
+    }
+  }, [activeMenuIndex]);
+
+  return (
+    <nav className="group/main-nav lg:hidden">
+      <ul className="flex items-center">
+        {MENUS.header.map(({ to, text, sections }, index) => {
+          const hasSubmenu = sections?.length > 0;
+          const isActive = activeMenuIndex === index;
+
+          return (
+            <li
+              key={text}
+              onMouseEnter={() => handleMenuEnter(hasSubmenu, index)}
+              onMouseLeave={() => handleMenuLeave(hasSubmenu)}
             >
-              {text}
-              {hasSubmenu && (
-                <ChevronIcon
-                  className={clsx(
-                    '-mb-px w-2.5 opacity-60 [&_path]:stroke-2',
-                    isDarkTheme ? 'text-white' : 'text-black-new dark:text-white'
-                  )}
-                />
-              )}
-            </Tag>
-            {/* submenu */}
-            {hasSubmenu && (
-              <div
+              <Button
                 className={clsx(
-                  'absolute -left-7 top-full pt-5',
-                  'pointer-events-none opacity-0',
-                  'origin-top-left transition-[opacity,transform] duration-200 [transform:rotateX(-12deg)_scale(0.9)]',
-                  'group-hover:pointer-events-auto group-hover:visible group-hover:opacity-100 group-hover:[transform:none]'
+                  'group/main-nav-trigger relative flex items-center gap-x-1 whitespace-pre rounded-sm px-3.5 text-[15px] font-normal !leading-normal tracking-snug transition-colors duration-200 hover:!text-white group-hover/main-nav:text-gray-new-70 xl:px-2.5',
+                  {
+                    '-ml-3.5  xl:-ml-2.5 ': index === 0,
+                    '-mr-3.5 xl:-mr-2.5': index === MENUS.header.length - 1,
+                    '!text-white': isActive,
+                    '!text-gray-new-70': activeMenuIndex !== null && !isActive,
+                    'before:absolute before:top-0 before:h-10 before:w-full': hasSubmenu,
+                  }
                 )}
+                ref={(el) => {
+                  menuButtonRefs.current[index] = el;
+                }}
+                aria-haspopup={hasSubmenu ? 'menu' : undefined}
+                aria-expanded={hasSubmenu ? isActive : undefined}
+                aria-controls={hasSubmenu ? `submenu-${index}` : undefined}
+                to={to}
+                theme="black"
+                tagName="Navigation"
+                onKeyDown={(e) => handleMenuKeyDown(e, hasSubmenu, index)}
+                onClick={handleMenuClick(hasSubmenu, index)}
               >
-                <ul
-                  className={clsx(
-                    'relative rounded-[14px] border',
-                    gridSubmenu
-                      ? 'grid w-max grid-cols-[repeat(2,minmax(0,auto));] gap-x-14 gap-y-9 px-7 py-6'
-                      : 'p-4',
-                    isDarkTheme
-                      ? 'border-[#16181D] bg-[#0B0C0F] shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                      : 'border-gray-new-94 bg-white shadow-[0px_14px_20px_0px_rgba(0,0,0,.1)] dark:border-[#16181D] dark:bg-[#0B0C0F] dark:shadow-[0px_14px_20px_0px_rgba(0,0,0,.5)]'
-                  )}
-                >
-                  {sections.map(({ title, items, banner, isExtended }, index) => {
-                    if (banner) {
-                      return <MenuBanner {...banner} key={index} />;
-                    }
+                {text}
+                {hasSubmenu && (
+                  <ChevronIcon
+                    className={clsx(
+                      'text-gray-new-70 opacity-60 transition-all duration-200 group-hover/main-nav-trigger:text-white',
+                      { 'text-white': isActive }
+                    )}
+                    aria-hidden="true"
+                  />
+                )}
+              </Button>
+            </li>
+          );
+        })}
+      </ul>
 
-                    return (
-                      <li
-                        className={clsx(
-                          'min-w-[94px]',
-                          gridSubmenu && [isExtended ? 'w-[216px]' : 'w-[196px]']
-                        )}
-                        key={index}
-                      >
-                        {title && (
-                          <span className="mb-5 block text-[11px] font-medium uppercase leading-none text-gray-new-40 dark:text-gray-new-50">
-                            {title}
-                          </span>
-                        )}
-                        <ul className={clsx('flex flex-col', isExtended ? 'gap-5' : 'gap-[18px]')}>
-                          {items.map(
-                            ({
-                              icon: Icon,
-                              iconGradient: IconGradient,
-                              title,
-                              description,
-                              to,
-                            }) => (
-                              <li key={title}>
-                                <Link
-                                  className={clsx(
-                                    'relative flex items-center',
-                                    isExtended
-                                      ? 'gap-3 before:rounded-[14px]'
-                                      : 'gap-2.5 before:rounded-[10px]',
-                                    'before:pointer-events-none before:absolute before:-inset-2.5 before:transform-gpu before:opacity-0 before:transition-opacity before:duration-200 hover:before:opacity-100',
-                                    isDarkTheme
-                                      ? 'before:bg-[#16181D]'
-                                      : 'before:bg-[#f5f5f5] dark:before:bg-[#16181D]'
-                                  )}
-                                  to={to}
-                                >
-                                  {isExtended && IconGradient && (
-                                    <div
-                                      className={clsx(
-                                        'relative z-10 flex size-8 shrink-0 items-center justify-center rounded-lg border',
-                                        isDarkTheme
-                                          ? 'border-[#2E3038] bg-[#16181D]'
-                                          : 'border-gray-new-90 bg-[#F5F5F5] dark:border-[#2E3038] dark:bg-[#16181D]'
-                                      )}
-                                    >
-                                      <IconGradient
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-white'
-                                            : 'text-gray-new-20 dark:text-white dark:[&_stop:not([stop-opacity])]:gradient-stop-opacity-40 dark:[&_stop[stop-opacity="0.6"]]:gradient-stop-opacity-100'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  {!isExtended && Icon && (
-                                    <div className="relative z-10 shrink-0">
-                                      <Icon
-                                        className={clsx(
-                                          'size-4',
-                                          isDarkTheme
-                                            ? 'text-gray-new-80'
-                                            : 'text-gray-new-30 dark:text-gray-new-80'
-                                        )}
-                                      />
-                                    </div>
-                                  )}
-                                  <div className="relative z-10">
-                                    <span
-                                      className={clsx(
-                                        'block text-sm leading-none tracking-snug transition-colors duration-200',
-                                        isDarkTheme
-                                          ? 'text-white'
-                                          : 'text-black-new dark:text-white'
-                                      )}
-                                    >
-                                      {title}
-                                    </span>
-                                    {description && (
-                                      <span
-                                        className={clsx(
-                                          'mt-1.5 block text-xs font-light leading-none tracking-extra-tight',
-                                          isDarkTheme
-                                            ? 'text-gray-new-50'
-                                            : 'text-gray-new-40 dark:text-gray-new-50'
-                                        )}
-                                      >
-                                        {description}
-                                      </span>
-                                    )}
-                                  </div>
-                                </Link>
-                              </li>
-                            )
-                          )}
-                        </ul>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  </nav>
-);
-
-Navigation.propTypes = {
-  isDarkTheme: PropTypes.bool,
+      <Submenu
+        activeMenuIndex={activeMenuIndex}
+        containerHeight={containerHeight}
+        submenuContainerRef={submenuContainerRef}
+        submenuLinkClassName={SUBMENU_LINK_CLASSNAME}
+        handleSubmenuNavigation={handleSubmenuNavigation}
+        handleSubmenuEnter={handleSubmenuEnter}
+        handleSubmenuLeave={handleSubmenuLeave}
+      />
+    </nav>
+  );
 };
 
 export default Navigation;

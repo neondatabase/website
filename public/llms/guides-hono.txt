@@ -1,0 +1,156 @@
+# Connect a Hono application to Neon
+
+> This document guides users on connecting a Hono application to a Neon database, detailing the necessary configuration steps and code adjustments required for seamless integration.
+
+## Source
+
+- [Connect a Hono application to Neon HTML](https://neon.com/docs/guides/hono): The original HTML version of this documentation
+
+[Hono](https://hono.dev/) is a lightweight, multi-runtime web framework for the Edge, Node.js, Deno, Bun, and other runtimes. This topic describes how to create a Neon project and access it from a Hono application.
+
+To create a Neon project and access it from a Hono application:
+
+## Create a Neon project
+
+If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
+
+1.  Navigate to the [Projects](https://console.neon.tech/app/projects) page in the Neon Console.
+2.  Click **New Project**.
+3.  Specify your project settings and click **Create Project**.
+
+## Create a Hono project and add dependencies
+
+1.  Create a Hono project if you do not have one. For instructions, see [Quick Start](https://hono.dev/docs/getting-started/basic), in the Hono documentation.
+
+2.  Add project dependencies using one of the following commands:
+
+Tab: node-postgres
+
+```shell
+npm install pg
+```
+
+Tab: postgres.js
+
+```shell
+npm install postgres
+```
+
+Tab: Neon serverless driver
+
+```shell
+npm install @neondatabase/serverless
+```
+
+## Store your Neon credentials
+
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find your connection details by clicking **Connect** on the Neon **Project Dashboard**. For more information, see [Connect from any application](https://neon.com/docs/connect/connect-from-any-app).
+
+```shell
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
+```
+
+## Configure the Postgres client
+
+In your Hono application (e.g., in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
+
+Here's how you can set up a simple route to query the database:
+
+Tab: node-postgres
+
+```typescript
+import { Pool } from 'pg';
+import { Hono } from 'hono';
+import { serve } from '@hono/node-server';
+
+const app = new Hono();
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+app.get('/', async (c) => {
+  const client = await pool.connect();
+  try {
+    const { rows } = await client.query('SELECT version()');
+    return c.json({ version: rows[0].version });
+  } catch (error) {
+    console.error('Database query failed:', error);
+    return c.text('Failed to connect to database', 500);
+  } finally {
+    client.release();
+  }
+});
+
+serve(app);
+```
+
+Tab: postgres.js
+
+```typescript
+import { Hono } from 'hono';
+import postgres from 'postgres';
+import { serve } from '@hono/node-server';
+
+const app = new Hono();
+
+app.get('/', async (c) => {
+  try {
+    const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+    const response = await sql`SELECT version()`;
+    return c.json({ version: response[0].version });
+  } catch (error) {
+    console.error('Database query failed:', error);
+    return c.text('Failed to connect to database', 500);
+  }
+});
+
+serve(app);
+```
+
+Tab: Neon serverless driver
+
+```typescript
+import { Hono } from 'hono';
+import { serve } from '@hono/node-server';
+import { neon } from '@neondatabase/serverless';
+
+const app = new Hono();
+
+app.get('/', async (c) => {
+  try {
+    const sql = neon(process.env.DATABASE_URL);
+    const response = await sql`SELECT version()`;
+    return c.json({ version: response[0]?.version });
+  } catch (error) {
+    console.error('Database query failed:', error);
+    return c.text('Failed to connect to database', 500);
+  }
+});
+
+serve(app);
+```
+
+## 5. Run the app
+
+Start your Hono development server. You can use the following command:
+
+```bash
+npm run dev
+```
+
+Navigate to your application's URL ([localhost:3000](http://localhost:3000)). You should see a JSON response with the PostgreSQL version:
+
+```json
+{
+  "version": "PostgreSQL 17.4 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit"
+}
+```
+
+> The specific version may vary depending on the PostgreSQL version you are using.
+
+## Source code
+
+You can find a sample Hono application configured for Neon on GitHub:
+
+- [Get started with Hono and Neon](https://github.com/neondatabase/examples/tree/main/with-hono)

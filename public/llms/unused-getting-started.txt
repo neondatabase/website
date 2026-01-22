@@ -1,0 +1,18 @@
+# Getting Started
+
+> This page provides a brief introduction to Neon as a fully managed serverless Postgres, with links to resources for connecting with psql, using the web query editor, and finding integration guides for various application stacks.
+
+## Source
+
+- [Getting Started HTML](https://neon.com/docs/unused/getting-started): The original HTML version of this documentation
+
+## Overview
+
+Neon is a fully managed serverless Postgres.
+
+If you are already familiar with Postgres, you can jump to [Query with psql](https://neon.com/docs/tutorials#query-with-psql) to learn how to connect to your project with 'psql'.
+Then, look at the examples of how to do branching and Point-in-Time queries (coming soon).
+
+If you are new to Postgres, look at our [web query editor](https://neon.com/docs/tutorials#query-via-ui) for a primer.
+
+For instructions on how to use Neon with your application stack, see [Integrations](https://neon.com/docs/integrations).

@@ -33,7 +33,7 @@ By the end of this guide, you'll have a system where database changes are as sea
    Your connection string will look similar to this:
 
    ```shell
-   postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
 ## Set up the project
@@ -54,7 +54,10 @@ By the end of this guide, you'll have a system where database changes are as sea
 
 ## Configure the database schema
 
+This guide demonstrates database schema definition using Drizzle ORM. The underlying principles can be easily adapted to your preferred ORM, such as Prisma, TypeORM, or Sequelize.
+
 1. Create `app/db/schema.ts`:
+   The following code defines the database schema for a simple Todo application:
 
    ```typescript
    import { integer, text, boolean, pgTable } from 'drizzle-orm/pg-core';
@@ -100,10 +103,10 @@ By the end of this guide, you'll have a system where database changes are as sea
 4. Create a `.env` file in your project root:
 
    ```bash shouldWrap
-   DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+   DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
    ```
 
-5. Push your code to a Github repository.
+5. Push your code to a GitHub repository.
 
 ## Set up the Neon GitHub integration
 
@@ -133,6 +136,7 @@ on:
       - synchronize
       - closed
 
+# Ensures only the latest commit runs, preventing race conditions in concurrent PR updates
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
@@ -152,9 +156,6 @@ jobs:
 
   create_neon_branch:
     name: Create Neon Branch
-    outputs:
-      db_url: ${{ steps.create_neon_branch_encode.outputs.db_url }}
-      db_url_with_pooler: ${{ steps.create_neon_branch_encode.outputs.db_url_with_pooler }}
     needs: setup
     if: |
       github.event_name == 'pull_request' && (
@@ -226,6 +227,12 @@ To set up GitHub Actions correctly:
 
 </Admonition>
 
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
+</Admonition>
+
+It's important to understand the roles of your GitHub secrets. The `NEON_API_KEY` (created by the integration) is used to manage your Neon project, like creating and deleting branches. The `DATABASE_URL` secret you just created points exclusively to your primary production database. The workflow uses this only after a PR is successfully merged to apply migrations, ensuring a safe separation from the ephemeral preview databases used during testing.
+
 ## Understanding the workflow
 
 The GitHub Actions workflow automates database branching and schema management for pull requests. Here's a breakdown of the workflow:
@@ -235,20 +242,18 @@ The GitHub Actions workflow automates database branching and schema management f
 This job runs when a pull request is opened, reopened, or synchronized:
 
 1. **Branch Creation**:
-
-   - Uses Neon's `create-branch-action` to create a new database branch
+   - Uses Neon's [`create-branch-action`](https://github.com/marketplace/actions/neon-create-branch-github-action) to create a new database branch
    - Names the branch using the pattern `preview/pr-{number}-{branch_name}`
    - Inherits the schema and data from the parent branch
 
 2. **Migration Handling**:
-
    - Installs project dependencies
    - Generates migration files using Drizzle
    - Applies migrations to the newly created branch
    - Uses the branch-specific `DATABASE_URL` for migration operations
 
 3. **Schema Diff Generation**:
-   - Uses Neon's `schema-diff-action`
+   - Uses Neon's [`schema-diff-action`](https://github.com/marketplace/actions/neon-schema-diff-github-action)
    - Compares the schema of the new branch with the parent branch
    - Automatically posts the differences as a comment on the pull request
    - Helps reviewers understand database changes at a glance
@@ -258,13 +263,12 @@ This job runs when a pull request is opened, reopened, or synchronized:
 This job executes when a pull request is closed (either merged or rejected):
 
 1. **Production Migration**:
-
    - If the PR is merged, applies migrations to the production database
    - Uses the main `DATABASE_URL` stored in repository secrets
    - Ensures production database stays in sync with merged changes
 
 2. **Cleanup**:
-   - Removes the preview branch using Neon's `delete-branch-action`
+   - Removes the preview branch using Neon's [`delete-branch-action`](https://github.com/marketplace/actions/neon-database-delete-branch)
 
 ## Flow Summary
 
@@ -346,7 +350,7 @@ You can find the complete source code for this example on GitHub.
 ## Resources
 
 - [Neon GitHub Integration Documentation](/docs/guides/neon-github-integration)
-- [Database Branching Workflows](https://neon.tech/flow)
+- [Database Branching Workflows](/branching)
 - [GitHub Actions Documentation](https://docs.github.com/en/actions)
 
 <NeedHelp/>

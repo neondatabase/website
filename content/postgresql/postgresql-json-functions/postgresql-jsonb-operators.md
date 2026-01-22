@@ -22,11 +22,11 @@ JSONB type allows you to store and query [JSON](../postgresql-tutorial/postgresq
 
 The following table illustrates the JSONB operators:
 
-<table><thead><tr><th>Operator</th><th>Syntax</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-&gt;</code></td><td><code>jsonb-&gt;'key'</code></td><td>Extract the value of the ‘key’ from a JSON object as a JSONB value</td></tr><tr><td><code>-&gt;&gt;</code></td><td><code>jsonb-&gt;&gt;'key'</code></td><td>Extract the value of the ‘key’ from a JSON object as a text string</td></tr><tr><td><code>@&gt;</code></td><td><code>jsonb @&gt; jsonb → boolean</code></td><td>Return true if the first JSONB value contains the second JSONB value or false otherwise.</td></tr><tr><td><code>&lt;@</code></td><td><code>jsonb &lt;@ jsonb → boolean</code></td><td>Return true if the first JSONB value is contained in the second one or false otherwise.</td></tr><tr><td><code>?</code></td><td><code>jsonb ? text → boolean</code></td><td>Return true if a text string exists as a top-level key of a JSON object or as an element of a JSON array or false otherwise.</td></tr><tr><td><code>?|</code></td><td><code>jsonb ?| text[] → boolean</code></td><td>Return true if any text string in an array exists as top-level keys of a JSON object or as elements of a JSON array.</td></tr><tr><td><code>?&amp;</code></td><td><code>jsonb ?&amp; text[] → boolean</code></td><td>Return true if all text strings in an array exist as top-level keys of a JSON object or as elements of a JSON array.</td></tr><tr><td><code>||</code></td><td><code>jsonb || jsonb → jsonb</code></td><td>Concatenate two JSONB values into one.</td></tr><tr><td><code>-</code></td><td><code>jsonb - text → jsonb</code></td><td>Delete a key (and its value) from a JSON object, or matching string value(s) from a JSON array.</td></tr><tr><td><code>-</code></td><td><code>jsonb - text[] → jsonb</code></td><td>Delete all matching keys or array elements from the left operand.</td></tr><tr><td><code>-</code></td><td><code>jsonb - integer → jsonb</code></td><td>Delete the array element with specified index (negative integers count from the end of the array).</td></tr><tr><td><code>#-</code></td><td><code>jsonb #- text[] → jsonb</code></td><td>Delete the field or array element at the specified path.</td></tr><tr><td><code>@?</code></td><td><code>jsonb @? jsonpath → boolean</code></td><td>Return true if a JSON path returns any item for the specified JSONB value.</td></tr><tr><td><code>@@</code></td><td><code>jsonb @@ jsonpath → boolean</code></td><td>Evaluate a JSON path against a JSONB value and return a boolean result based on whether the JSON path matches any items within the JSONB value</td></tr></tbody></table>
+<table><thead><tr><th>Operator</th><th>Syntax</th><th>Meaning</th></tr></thead><tbody><tr><td><code>-&gt;</code></td><td><code>jsonb-&gt;'key'</code></td><td>Extract the value of the 'key' from a JSON object as a JSONB value</td></tr><tr><td><code>-&gt;&gt;</code></td><td><code>jsonb-&gt;&gt;'key'</code></td><td>Extract the value of the 'key' from a JSON object as a text string</td></tr><tr><td><code>@&gt;</code></td><td><code>jsonb @&gt; jsonb → boolean</code></td><td>Return true if the first JSONB value contains the second JSONB value or false otherwise.</td></tr><tr><td><code>&lt;@</code></td><td><code>jsonb &lt;@ jsonb → boolean</code></td><td>Return true if the first JSONB value is contained in the second one or false otherwise.</td></tr><tr><td><code>?</code></td><td><code>jsonb ? text → boolean</code></td><td>Return true if a text string exists as a top-level key of a JSON object or as an element of a JSON array or false otherwise.</td></tr><tr><td><code>?|</code></td><td><code>jsonb ?| text[] → boolean</code></td><td>Return true if any text string in an array exists as top-level keys of a JSON object or as elements of a JSON array.</td></tr><tr><td><code>?&amp;</code></td><td><code>jsonb ?&amp; text[] → boolean</code></td><td>Return true if all text strings in an array exist as top-level keys of a JSON object or as elements of a JSON array.</td></tr><tr><td><code>||</code></td><td><code>jsonb || jsonb → jsonb</code></td><td>Concatenate two JSONB values into one.</td></tr><tr><td><code>-</code></td><td><code>jsonb - text → jsonb</code></td><td>Delete a key (and its value) from a JSON object, or matching string value(s) from a JSON array.</td></tr><tr><td><code>-</code></td><td><code>jsonb - text[] → jsonb</code></td><td>Delete all matching keys or array elements from the left operand.</td></tr><tr><td><code>-</code></td><td><code>jsonb - integer → jsonb</code></td><td>Delete the array element with specified index (negative integers count from the end of the array).</td></tr><tr><td><code>#-</code></td><td><code>jsonb #- text[] → jsonb</code></td><td>Delete the field or array element at the specified path.</td></tr><tr><td><code>@?</code></td><td><code>jsonb @? jsonpath → boolean</code></td><td>Return true if a JSON path returns any item for the specified JSONB value.</td></tr><tr><td><code>@@</code></td><td><code>jsonb @@ jsonpath → boolean</code></td><td>Evaluate a JSON path against a JSONB value and return a boolean result based on whether the JSON path matches any items within the JSONB value</td></tr></tbody></table>
 
 ## PostgreSQL JSONB operators examples
 
-Let’s set up a sample table and take some examples of using PostgreSQL JSONB operators.
+Let's set up a sample table and take some examples of using PostgreSQL JSONB operators.
 
 ### Setting up a table
 
@@ -508,7 +508,7 @@ The following example uses the operator (`-`) to remove the `age` and `email` ke
 
 ```sql
 SELECT
-  '{"name": "John Doe", "age": 22, "email": "[[email protected]](../cdn-cgi/l/email-protection.html)"}' :: jsonb - ARRAY[ 'age',
+  '{"name": "John Doe", "age": 22, "email": "john.doe@example.com"}' :: jsonb - ARRAY[ 'age',
   'email' ] result;
 ```
 
@@ -549,7 +549,8 @@ For example, the following uses the @? operator to retrieve the products whose p
 
 ```sql
 SELECT
-  data ->> 'name' product_name
+  data ->> 'name' product_name,
+  data ->> 'price' price
 FROM
   products
 WHERE
@@ -559,50 +560,37 @@ WHERE
 Output:
 
 ```text
- product_name
----------------
- iPhone 15 Pro
+  product_name  | price
+----------------+--------
+ iPhone 15 Pro  | 999.99
 (1 row)
 ```
 
-In this example, we use the operator `@?` to check if the JSON path `'$.price ? (@ > 999)'` returns any element in the JSONB value of the data column.
+### 14\) Operator (@\@)
 
-### 14\) Operator (@@)
-
-The operator (`@@`) evaluates a [JSON path](postgresql-json-path) against a JSONB value and returns a boolean result based on whether the JSON path matches any items within the JSONB value. If the result is not a boolean, then the `@@` operator returns `NULL`.
+The operator `@@` evaluates a JSON path against a JSONB value and returns a boolean result based on whether the JSON path matches any items within the JSONB value:
 
 ```sql
 jsonb @@ jsonpath → boolean
 ```
 
-For example, the following example returns null because the JSON path `'$.scores'` returns an array, not a boolean result:
+For example, the following statement uses the operator `@@` to retrieve the products whose prices are greater than `999`:
 
 ```sql
-SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores') result;
+SELECT
+  data ->> 'name' product_name,
+  data ->> 'price' price
+FROM
+  products
+WHERE
+  data @@ '$.price > 999';
 ```
 
 Output:
 
 ```text
- result
---------
- null
+product_name   | price
+---------------+--------
+iPhone 15 Pro  | 999.99
 (1 row)
 ```
-
-However, the following statement returns true because the JSON path `'$.scores[*] > 2'` matches the elements that are greater than 2\.
-
-```sql
-SELECT ('{"scores": [1,2,3,4,5]}'::jsonb @@ '$.scores[*] > 2') result;
-```
-
-Output:
-
-```text
- result
---------
- t
-(1 row)
-```
-
-Notice that the `'$.scores[*] > 2'` matches 3, 4, and 5 but it only considers the result of the first matched item, which is 3\.

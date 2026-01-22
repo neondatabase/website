@@ -2,13 +2,16 @@
 title: Updates
 enableTableOfContents: true
 isDraft: false
-tag: new
-updatedOn: '2025-03-05T21:09:38.756Z'
+updatedOn: '2025-08-19T17:01:24.239Z'
 ---
 
 To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
 
 Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
+
+<Admonition type="important">
+Brief connection drops are expected during compute updates. Verify that your application has a retry policy configured to handle these brief interruptions. For guidance on implementing retry logic, see [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres).
+</Admonition>
 
 ## What updates are included?
 
@@ -39,9 +42,9 @@ If a compute is excluded from an update, Neon will apply the missed update with 
 Please be aware that Neon must occasionally perform essential **platform maintenance** outside the scheduled updates performed on Neon computes. This means that you may experience brief disruptions from time to time. To learn more, see [Platform maintenance](/docs/manage/platform-maintenance).
 </Admonition>
 
-## Updates on the Free Plan
+## Updates on the Free plan
 
-On the **Free Plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
+On the **Free plan**, updates are scheduled and applied automatically. You can check your project's settings for updates. We'll post a notice there at least **1 day** ahead of a planned update, letting you know when it's coming.
 
 To view planned updates:
 
@@ -70,6 +73,8 @@ In the Neon Console:
    ![Paid plan updates UI](/docs/manage/paid_plan_updates.png)
 
 You can check your project's settings for upcoming updates. We'll post a notice there at least **7 days** ahead of a planned update, letting you know when it's coming.
+
+> If you're a Scale plan customer, you will also receive an **email notification** 7 days in advance of a planned update.
 
 </TabItem>
 
@@ -119,7 +124,7 @@ curl --request GET \
      --header 'authorization: Bearer $NEON_API_KEY'
 ```
 
-In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free Plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
+In the response, locate the `maintenance_window` field. It specifies the selected weekday and hour for updates. For Free plan accounts, the update window is set by Neon. Paid plan accounts can [choose a preferred update window](#updates-on-paid-plans). The `weekdays` value is a number from 1 to 7, representing the day of the week.
 
 ```json
 {
@@ -144,7 +149,7 @@ Computes receive available updates immediately upon restart. For example, if Neo
 
 If a compute regularly scales to zero, it will receive updates when it starts up again. In such cases, you may not need to pay much attention to update notifications, as updates will be applied naturally through your compute's stop/start cycles.
 
-For compute restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For compute restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Updating large computes
 
@@ -152,14 +157,19 @@ Computes larger than 8 CU or set to scale beyond 8 CU are not updated automatica
 
 Neon typically releases compute updates weekly, so we recommend scheduling weekly compute restarts.
 
-For restart instructions, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+For restart instructions, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 ## Handling connection disruptions during compute updates
 
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will transparently reconnect.
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived connection interruptions. This means that for most applications, a brief restart should result in minimal disruption, as the driver will reconnect automatically.
 
 However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for the few seconds it takes to apply updates to your Neon compute. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+
+## See also
+
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres) — Best practices for handling connection drops with retry logic, connection pooling, and idempotency
+- [Connection latency and timeouts](/docs/connect/connection-latency) — Strategies for managing connection latencies and timeouts
 
 <NeedHelp/>

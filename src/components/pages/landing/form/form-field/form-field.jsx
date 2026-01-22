@@ -61,7 +61,6 @@ const Input = ({
     placeholder={placeholder}
     isDisabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
     error={errors[name]?.message}
-    errorClassName={clsx(errorClassName, 'relative right-0 ml-auto mt-2 -mb-3')}
     {...register(name)}
   />
 );

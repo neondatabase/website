@@ -2,8 +2,7 @@
 title: Platform maintenance
 enableTableOfContents: true
 isDraft: false
-tag: new
-updatedOn: '2025-03-06T17:12:06.387Z'
+updatedOn: '2025-08-19T11:11:49.496Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.
@@ -30,10 +29,13 @@ If there is ongoing maintenance, you'll see a **Maintenance** indicator at the t
 
 ## Handling disruptions and latency during platform maintenance
 
-Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions. This means that most applications are able to transparently reconnect to a Neon database following a brief disruption.
+Most Postgres connection drivers include built-in retry mechanisms that automatically handle short-lived interruptions, so most applications reconnect to a Neon database automatically after a brief disruption.
 
-However, if your application has strict availability requirements, you may want to ensure that your connection settings are configured to allow for connection retries. Check your driver's documentation for options like connection timeouts, retry intervals, and connection pooling strategies. Your configuration should account for occasional disruptions. For related information, see [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application).
+If your application has strict SLOs (Service Level Objectives) or availability requirements, verify that retries are enabled and that you have tuned connection timeouts, retry intervals, and pooling strategies to tolerate occasional disruptions. For detailed guidance, see:
 
-If your application or integration uses the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](https://neon.tech/docs/reference/sdk) that wrap the Neon API, we recommend building in the same type of retry logic.
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres)
+- [Build connection timeout handling into your application](/docs/connect/connection-latency#build-connection-timeout-handling-into-your-application)
+
+If you use the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) or [SDKs](/docs/reference/sdk) that wrap it, apply the same retry logic to those calls.
 
 <NeedHelp/>

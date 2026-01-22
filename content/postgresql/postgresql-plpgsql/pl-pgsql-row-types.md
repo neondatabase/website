@@ -20,7 +20,7 @@ nextLink:
 
 Row variables or row\-type variables are variables of composite types that can store the entire rows of a result set.
 
-These row variables can hold the entire row returned by the [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) or `for` statement.
+These row variables can hold the entire row returned by the [`select into`](/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) or `for` statement.
 
 Here’s the syntax for [declaring a row variable](plpgsql-variables):
 
@@ -45,7 +45,7 @@ row_variable.field_name
 We’ll use the `actor` table from the [sample database](../postgresql-getting-started/postgresql-sample-database) to show how row types work:
 
 ![](/postgresqltutorial/actor.png)
-The following example retrieve the row with id 1 from the actor table and assign it to a row variable:
+The following example retrieves the row with id 10 from the actor table and assigns it to a row variable:
 
 ```sql
 do
@@ -70,7 +70,7 @@ $$;
 How it works.
 
 - First, declare a row variable called `selected_actor` with the same type as the row in the `actor` table.
-- Second, assign the row whose value in the `actor_id` column is 10 to the `selected_actor` variable using the [`select into`](https://neon.tech/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement.
+- Second, assign the row whose value in the `actor_id` column is 10 to the `selected_actor` variable using the [`select into`](/postgresql/postgresql-plpgsql/pl-pgsql-select-into/) statement.
 - Third, show the first and last names of the selected actor using the `raise notice` statement.
 
 ## Summary

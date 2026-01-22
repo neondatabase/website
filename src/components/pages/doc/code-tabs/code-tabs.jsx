@@ -2,45 +2,39 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { Fragment, useState, useMemo, useContext, useEffect } from 'react';
+import React, { Fragment, useState, useContext, useEffect } from 'react';
 
-import { ActiveLabelContext } from './CodeTabsContext';
+import { CodeTabsContext } from 'contexts/code-tabs-context';
 
-const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
-  const { activeLabel, setActiveLabel } = useContext(ActiveLabelContext);
+const CodeTabs = ({ labels = [], reverse = false, children }) => {
+  const { activeTab, setActiveTab } = useContext(CodeTabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const tmp = labels.indexOf(activeLabel);
+    const tmp = labels.indexOf(activeTab);
     if (tmp !== -1) setCurrentIndex(tmp);
-  }, [activeLabel, labels]);
+  }, [activeTab, labels]);
 
-  const displayedLabels = useMemo(
-    () => (reverse ? [...labels].reverse() : labels),
-    [labels, reverse]
-  );
-
-  const displayedChildren = useMemo(
-    () => (reverse ? [...children].reverse() : children),
-    [children, reverse]
-  );
+  const displayedLabels = reverse ? [...labels].reverse() : labels;
+  const displayedChildren = reverse ? [...children].reverse() : children;
 
   const handleTabClick = (index) => {
     const label = labels[index];
     setCurrentIndex(index);
-    setActiveLabel(label);
+    setActiveTab(label);
   };
 
   return (
-    <figure className="my-5 max-w-full overflow-hidden rounded-md bg-gray-new-98 dark:bg-gray-new-10 [&_.code-block]:my-0">
-      <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap overflow-auto after:absolute after:bottom-0 after:h-px after:w-full after:bg-gray-new-90 dark:after:bg-gray-new-20">
+    <div className="my-0 max-w-full">
+      {/* Tabs above code block */}
+      <div className="no-scrollbars relative mb-2.5 flex w-full flex-nowrap gap-2 overflow-auto">
         {displayedLabels.map((label, index) => (
           <div
             className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b-2 px-[18px] pb-3.5 pt-3 font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45',
+              'relative z-10 cursor-pointer whitespace-nowrap rounded-lg px-4 py-2.5 text-[13px] font-medium leading-none transition-all duration-200',
               index === currentIndex
-                ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-primary-1 dark:text-primary-1'
-                : 'border-transparent text-gray-new-40 dark:text-gray-7'
+                ? 'bg-black-new text-white shadow-md dark:bg-white dark:text-black-new'
+                : 'bg-gray-new-94 text-gray-new-40 hover:bg-gray-new-90 hover:text-gray-new-20 dark:bg-gray-new-15 dark:text-gray-new-70 dark:hover:bg-gray-new-20 dark:hover:text-gray-new-90'
             )}
             key={`lb-${index}`}
             tabIndex="0"
@@ -52,21 +46,21 @@ const CodeTabs = ({ children = null, labels = [], reverse = false }) => {
           </div>
         ))}
       </div>
-      {displayedChildren.map((child, index) => {
-        if (index !== currentIndex) return null;
-        return <Fragment key={index}>{child}</Fragment>;
-      })}
-    </figure>
+      {/* Code block container */}
+      <div className="overflow-hidden rounded-lg border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10 [&_.code-block]:my-0">
+        {displayedChildren.map((child, index) => {
+          if (index !== currentIndex) return null;
+          return <Fragment key={index}>{child}</Fragment>;
+        })}
+      </div>
+    </div>
   );
 };
 
 CodeTabs.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.arrayOf(PropTypes.object),
-  ]),
   labels: PropTypes.arrayOf(PropTypes.string),
   reverse: PropTypes.bool,
+  children: PropTypes.node.isRequired,
 };
 
 export default CodeTabs;

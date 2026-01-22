@@ -2,7 +2,7 @@
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2025-02-07T17:55:42.640Z'
+updatedOn: '2026-01-09T15:57:09.726Z'
 ---
 
 ## Before you begin
@@ -20,18 +20,19 @@ The `branches` command allows you to list, create, rename, delete, and retrieve 
 neon branches <subcommand> [options]
 ```
 
-| Subcommand                  | Description                                  |
-| --------------------------- | -------------------------------------------- |
-| [list](#list)               | List branches                                |
-| [create](#create)           | Create a branch                              |
-| [reset](#reset)             | Reset data to parent                         |
-| [restore](#restore)         | Restore a branch to a selected point in time |
-| [rename](#rename)           | Rename a branch                              |
-| [schema-diff](#schema-diff) | Compare schemas                              |
-| [set-default](#set-default) | Set a default branch                         |
-| [add-compute](#add-compute) | Add replica to a branch                      |
-| [delete](#delete)           | Delete a branch                              |
-| [get](#get)                 | Get a branch                                 |
+| Subcommand                        | Description                                  |
+| --------------------------------- | -------------------------------------------- |
+| [list](#list)                     | List branches                                |
+| [create](#create)                 | Create a branch                              |
+| [reset](#reset)                   | Reset data to parent                         |
+| [restore](#restore)               | Restore a branch to a selected point in time |
+| [rename](#rename)                 | Rename a branch                              |
+| [schema-diff](#schema-diff)       | Compare schemas                              |
+| [set-default](#set-default)       | Set a default branch                         |
+| [set-expiration](#set-expiration) | Set expiration date for a branch             |
+| [add-compute](#add-compute)       | Add replica to a branch                      |
+| [delete](#delete)                 | Delete a branch                              |
+| [get](#get)                       | Get a branch                                 |
 
 ## list
 
@@ -58,13 +59,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 
   ```bash
   neon branches list --project-id solitary-leaf-288182
-  ┌────────────────────────┬──────────┬──────────────────────┬──────────────────────┐
-  │ Id                     │ Name     │ Created At           │ Updated At           │
-  ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-  │ br-small-meadow-878874 │ main     │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
-  ├────────────────────────┼──────────┼──────────────────────┼──────────────────────┤
-  │ br-round-queen-335380  │ mybranch │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
-  └────────────────────────┴──────────┴──────────────────────┴──────────────────────┘
+  ┌────────────────────────┬─────────────┬──────────────────────┬──────────────────────┐
+  │ Id                     │ Name        │ Created At           │ Updated At           │
+  ├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
+  │ br-small-meadow-878874 │ production  │ 2023-07-06T13:15:12Z │ 2023-07-06T14:26:32Z │
+  ├────────────────────────┼─────────────┼──────────────────────┼──────────────────────┤
+  │ br-round-queen-335380  │ development │ 2023-07-06T14:45:50Z │ 2023-07-06T14:45:50Z │
+  └────────────────────────┴─────────────┴──────────────────────┴──────────────────────┘
   ```
 
 - List branches with the `json` output format. This format provides more information than the default `table` output format.
@@ -75,7 +76,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
   {
       "id": "br-wild-boat-648259",
       "project_id": "solitary-leaf-288182",
-      "name": "main",
+      "name": "production",
       "current_state": "ready",
       "logical_size": 29515776,
       "creation_source": "console",
@@ -93,7 +94,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
       "project_id": "solitary-leaf-288182",
       "parent_id": "br-wild-boat-648259",
       "parent_lsn": "0/1E88838",
-      "name": "mybranch",
+      "name": "development",
       "current_state": "ready",
       "creation_source": "console",
       "default": false,
@@ -122,18 +123,19 @@ neon branches create [options]
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `create` subcommand supports these options:
 
-| Option              | Description                                                                                                                                                                                                                                                           | Type    |                      Required                       |
-| :------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------ | :-------------------------------------------------: |
-| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                         | string  |                                                     |
-| `--project-id`      | Project ID                                                                                                                                                                                                                                                            | string  | Only if your Neon account has more than one project |
-| `--name`            | The branch name                                                                                                                                                                                                                                                       | string  |                                                     |
-| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                             | string  |                                                     |
-| `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                        | boolean |                                                     |
-| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                             | string  |                                                     |
-| `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week). | number  |                                                     |
-| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                          | string  |                                                     |
-| `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                      | boolean |                                                     |
-| `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                 | boolean |                                                     |
+| Option              | Description                                                                                                                                                                                                                                                                     | Type    |                      Required                       |
+| :------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :------ | :-------------------------------------------------: |
+| `--context-file`    | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                                                   | string  |                                                     |
+| `--project-id`      | Project ID                                                                                                                                                                                                                                                                      | string  | Only if your Neon account has more than one project |
+| `--name`            | The branch name. Optional: if not specified, defaults to the branch ID. If provided, must be unique within the project and can be up to 256 characters. Cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements). | string  |                                                     |
+| `--parent`          | Parent branch name, id, timestamp, or LSN. Defaults to the default branch                                                                                                                                                                                                       | string  |                                                     |
+| `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                                  | boolean |                                                     |
+| `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                                       | string  |                                                     |
+| `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week).           | number  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                                    | string  |                                                     |
+| `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                                | boolean |                                                     |
+| `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                           | boolean |                                                     |
+| `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                                | string  |                                                     |
 
 <Admonition type="note">
 When creating a branch from a protected parent branch, role passwords on the child branch are changed. For more information about this Protected Branches feature, see [New passwords generated for Postgres roles on child branches](/docs/guides/protected-branches#new-passwords-generated-for-postgres-roles-on-child-branches).
@@ -223,7 +225,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
     ],
     "connection_uris": [
         {
-        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname",
+        "connection_uri": "postgresql://alex:AbC123dEf@@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
         "connection_parameters": {
             "database": "dbname",
             "password": "AbC123dEf",
@@ -240,7 +242,7 @@ When creating a branch from a protected parent branch, role passwords on the chi
 - Create a branch with a user-defined name:
 
   ```bash
-  neon branches create --name mybranch
+  neon branches create --name feature/user-auth
   ```
 
 - Set the compute size when creating a branch:
@@ -264,16 +266,16 @@ When creating a branch from a protected parent branch, role passwords on the chi
 - Create a branch from a parent branch other than your `main` branch
 
   ```bash
-  neon branches create --name my_child_branch --parent mybranch
+  neon branches create --name feature/payment-api --parent development
   ```
 
-- Create a point-in-time restore branch by specifying the `--parent` option with a timestamp:
+- Create an instant restore branch by specifying the `--parent` option with a timestamp:
 
   ```bash
   neon branches create --name data_recovery --parent 2023-07-11T10:00:00Z
   ```
 
-  The timestamp must be provided in ISO 8601 format. You can use this [timestamp converter](https://www.timestamp-converter.com/). For more information about point-in-time restore, see [Branching — Point-in-time restore (PITR)](/docs/guides/branching-pitr).
+  The timestamp must be provided in RFC 3339 format. You can use this [timestamp converter](https://it-tools.tech/date-converter). For more information about instant restore, see [Instant restore](/docs/guides/branch-restore).
 
 - Create a branch and connect to it with `psql`.
 
@@ -327,12 +329,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neon branches reset dev/alex --parent
-┌──────────────────────┬──────────┬─────────┬──────────────────────┬──────────────────────┐
-│ Id                   │ Name     │ Default │ Created At           │ Last Reset At        │
-├──────────────────────┼──────────┼─────────┼──────────────────────┼──────────────────────┤
-│ br-aged-sun-a5qowy01 │ dev/alex │ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
-└──────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
+neon branches reset development --parent
+┌──────────────────────┬────────────┬─────────┬──────────────────────┬──────────────────────┐
+│ Id                   │ Name       │ Default │ Created At           │ Last Reset At        │
+├──────────────────────┼────────────┼─────────┼──────────────────────┼──────────────────────┤
+│ br-aged-sun-a5qowy01 │ development│ false   │ 2024-05-07T09:31:59Z │ 2024-05-07T09:36:32Z │
+└──────────────────────┴────────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
 
 ## restore
@@ -373,7 +375,7 @@ Examples of the different kinds of restore operations you can do:
 
 #### Restoring a branch to an earlier point in its own history (with backup)
 
-This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-02-20`
+This command restores the branch `main` to an earlier timestamp, saving to a backup branch called `main_restore_backup_2024-05-06`
 
 ```bash shouldWrap
 neon branches restore main ^self@2024-05-06T10:00:00.000Z --preserve-under-name main_restore_backup_2024-05-06
@@ -399,10 +401,10 @@ Backup branch
 
 #### Restoring a branch (target) to the head of another branch (source)
 
-This command restores the target branch `dev/alex` to latest data (head) from the source branch `main`.
+This command restores the target branch `feature/user-auth` to latest data (head) from the source branch `main`.
 
 ```bash shouldWrap
-neon branches restore dev/alex main
+neon branches restore feature/user-auth main
 ```
 
 Results of the operation:
@@ -410,19 +412,19 @@ Results of the operation:
 ```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-curly-bar-82389180 head
 Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:42:34Z │
-└────────────────────────────┴──────────┴──────────────────────┘
+┌────────────────────────────┬───────────────────┬──────────────────────┐
+│ Id                         │ Name              │ Last Reset At        │
+├────────────────────────────┼───────────────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:42:34Z │
+└────────────────────────────┴───────────────────┴──────────────────────┘
 ```
 
 #### Restoring a branch to its parent at an earlier point in time
 
-This command restores the branch `dev/alex` to a selected point in time from its parent branch.
+This command restores the branch `feature/user-auth` to a selected point in time from its parent branch.
 
 ```bash shouldWrap
-neon branches restore dev/alex ^parent@2024-02-21T10:30:00.000Z
+neon branches restore feature/user-auth ^parent@2024-02-21T10:30:00.000Z
 ```
 
 Results of the operation:
@@ -430,11 +432,11 @@ Results of the operation:
 ```bash shouldWrap
 INFO: Restoring branch br-restless-frost-69810125 to the branch br-patient-union-a5s838zf timestamp 2024-02-21T10:30:00.000Z
 Restored branch
-┌────────────────────────────┬──────────┬──────────────────────┐
-│ Id                         │ Name     │ Last Reset At        │
-├────────────────────────────┼──────────┼──────────────────────┤
-│ br-restless-frost-69810125 │ dev/alex │ 2024-02-21T15:55:04Z │
-└────────────────────────────┴──────────┴──────────────────────┘
+┌────────────────────────────┬───────────────────┬──────────────────────┐
+│ Id                         │ Name              │ Last Reset At        │
+├────────────────────────────┼───────────────────┼──────────────────────┤
+│ br-restless-frost-69810125 │ feature/user-auth │ 2024-02-21T15:55:04Z │
+└────────────────────────────┴───────────────────┴──────────────────────┘
 ```
 
 ## rename
@@ -448,6 +450,8 @@ neon branches rename <id|name> <new-name> [options]
 ```
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+`<new-name>` is the new name for the branch. It must be unique within the project and can be up to 256 characters. It cannot be empty or only whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for full details.
 
 #### Options
 
@@ -520,13 +524,13 @@ Examples of different kinds of schema diff operations you can do:
 
 #### Compare to another branch's head
 
-This command compares the schema of the `main` branch to the head of the branch `dev/alex`.
+This command compares the schema of the `production` branch to the head of the branch `development`.
 
-```
-neon branches schema-diff main dev/alex
+```bash
+neon branches schema-diff production development
 ```
 
-The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `dev/alex` branch that is not present in the `main` branch.
+The output indicates that in the table `public.playing_with_neon`, a new column `description character varying(255)` has been added in the `development` branch that is not present in the `production` branch.
 
 ```diff
 --- Database: neondb	(Branch: br-wandering-firefly-a50un462) // [!code --]
@@ -544,26 +548,26 @@ The output indicates that in the table `public.playing_with_neon`, a new column 
 
 #### Comparing a branch to an earlier point in its history
 
-This command compares the schema of `dev-alex` to a previous state in its history at LSN 0/123456.
+This command compares the schema of `feature/user-auth` to a previous state in its history at LSN 0/123456.
 
 ```bash
-neon branches schema-diff dev-alex ^self@0/123456
+neon branches schema-diff feature/user-auth ^self@0/123456
 ```
 
 #### Comparing a branch to its parent
 
-This command compares the schema of `dev/alex` to the head of its parent branch.
+This command compares the schema of `feature/user-auth` to the head of its parent branch.
 
 ```bash
-neon branches schema-diff dev/alex ^parent
+neon branches schema-diff feature/user-auth ^parent
 ```
 
 #### Comparing a branch to an earlier point in another branch's history
 
-This command compares the schema of the `main` branch to the state of the `dev/jordan` branch at timestamp `2024-06-01T00:00:00.000Z`.
+This command compares the schema of the `production` branch to the state of the `feature/payment-api` branch at timestamp `2024-06-01T00:00:00.000Z`.
 
 ```bash
-neon branches schema-diff main dev/jordan@2024-06-01T00:00:00.000Z
+neon branches schema-diff production feature/payment-api@2024-06-01T00:00:00.000Z
 ```
 
 ## set-default
@@ -597,6 +601,44 @@ neon branches set-default mybranch
 │ br-odd-frog-703504 │ mybranch │ true    │ 2023-07-11T12:22:12Z │ 2023-07-11T12:22:59Z │
 └────────────────────┴──────────┴─────────┴──────────────────────┴──────────────────────┘
 ```
+
+## set-expiration
+
+This subcommand allows you to set or update the expiration date for a branch. When the expiration time is reached, the branch and its compute endpoints are permanently deleted.
+
+#### Usage
+
+```bash
+neon branches set-expiration <id|name> --expires-at <timestamp> [options]
+```
+
+`<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
+
+`--expires-at <timestamp>` specifies the expiration timestamp in RFC 3339 format (e.g., `2025-08-15T18:00:00Z`).
+
+#### Options
+
+In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `set-expiration` subcommand supports these options:
+
+| Option           | Description                                                                                   | Type   |                      Required                       |
+| ---------------- | --------------------------------------------------------------------------------------------- | ------ | :-------------------------------------------------: |
+| `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name | string |                                                     |
+| `--project-id`   | Project ID                                                                                    | string | Only if your Neon account has more than one project |
+| `--expires-at`   | Expiration timestamp in RFC 3339 format                                                       | string |                                                     |
+
+#### Examples
+
+- Set an expiration date for a branch:
+
+  ```bash
+  neon branches set-expiration mybranch --expires-at 2025-08-15T18:00:00Z
+  ```
+
+- Remove expiration from a branch (omit the parameter):
+
+  ```bash
+  neon branches set-expiration mybranch
+  ```
 
 ## add-compute
 
@@ -702,22 +744,22 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Examples
 
 ```bash
-neon branches get main
-┌────────────────────────┬──────┬──────────────────────┬──────────────────────┐
-│ Id                     │ Name │ Created At           │ Updated At           │
-├────────────────────────┼──────┼──────────────────────┼──────────────────────┤
-│ br-small-meadow-878874 │ main │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
-└────────────────────────┴──────┴──────────────────────┴──────────────────────┘
+neon branches get production
+┌────────────────────────┬────────────┬──────────────────────┬──────────────────────┐
+│ Id                     │ Name       │ Created At           │ Updated At           │
+├────────────────────────┼────────────┼──────────────────────┼──────────────────────┤
+│ br-small-meadow-878874 │ production │ 2023-07-06T13:15:12Z │ 2023-07-06T13:32:37Z │
+└────────────────────────┴────────────┴──────────────────────┴──────────────────────┘
 ```
 
 A `get` example with the `--output` format option set to `json`:
 
 ```bash
-neon branches get main --output json
+neon branches get production --output json
 {
   "id": "br-lingering-bread-896475",
   "project_id": "noisy-rain-039137",
-  "name": "main",
+  "name": "production",
   "current_state": "ready",
   "logical_size": 29769728,
   "creation_source": "console",
@@ -729,6 +771,7 @@ neon branches get main --output json
   "data_transfer_bytes": 20715,
   "created_at": "2023-06-28T10:17:28Z",
   "updated_at": "2023-07-11T12:22:59Z"
+}
 ```
 
 <NeedHelp/>

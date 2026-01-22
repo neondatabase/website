@@ -11,7 +11,7 @@ A Neon user is identified by their email address.
 
 A user registers and authenticates in Neon Web UI with their email, GitHub, Google, or partner account.
 
-After authenticating, a user can create and access [Projects](#project) and [query Project data](/docs/get-started-with-neon/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
+After authenticating, a user can create and access [Projects](#project) and [query Project data](/docs/get-started/tutorials#query-via-ui). You can also manage [Postgres Users](#postgres-users) and [Databases](#postgres-databases) in each Project.
 
 ### Using API keys
 
@@ -19,13 +19,13 @@ API keys allow users to access Neon application programming interface.
 
 An API key provides access to any action available to the user. Currently, API keys cannot be scoped to the specific Projects. Neon users can provision multiple API keys. An API key that is no longer needed can be revoked; this action cannot be reverted. Any issued API key is valid forever until it is revoked.
 
-Check out the [API Reference](https://neon.tech/api-reference) for more information about using the API keys and available API methods.
+Check out the [API Reference](/api-reference) for more information about using the API keys and available API methods.
 
 ## Project
 
 A Project is a collection of Postgres databases, Postgres users and other settings on Neon cloud service.
 
-A Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the Project data. The amount of virtual resources available for the Project is subject to limits defined by the [Technical Preview Free Plan](#free-plan).
+A Project contains a virtual instance with a Postgres server, also called Compute, as well as the storage used to store the Project data. The amount of virtual resources available for the Project is subject to limits defined by the [Technical Preview Free plan](#free-plan).
 
 Compute is stateless and can be automatically activated and suspended due to user activity.
 
@@ -55,13 +55,13 @@ When a Project is created, a ready-to-use database for storing data is created a
 
 ## Limits
 
-Neon gives you no cost access to the Postgres databases within the Technical Preview Free Plan limits.
+Neon gives you no cost access to the Postgres databases within the Technical Preview Free plan limits.
 
 | Limit                                                 | Value  |
 | ----------------------------------------------------- | ------ |
 | Max Projects per Neon User                            | 3      |
 | Max size of a Project                                 | 10 GiB  |
-| Max Number of processor cores for Compute per Project | 1vCPU  |
+| Max Number of processor cores for Compute per Project | 1 CU   |
 | Max RAM per Compute in Project                        | 256 MB |
 
 See detailed explanation in chapters below.
@@ -98,7 +98,7 @@ has been exceeded
 
 Neon storage consumes extra space in order to support Point in Time Reset (PITR) and the ability to reset a branch to a historical state. The historical data is stored in log based format.
 
-Neon has limits on the amount of modification history stored for the [Technical Preview Free Plan](#free-plan) customers.
+Neon has limits on the amount of modification history stored for the [Technical Preview Free plan](#free-plan) customers.
 
 ## Compute Config
 
@@ -108,17 +108,17 @@ See [Default Parameters](/docs/compatibility#default-parameters).
 
 See [https://www.postgresql.org/docs/14/runtime-config.html](https://www.postgresql.org/docs/14/runtime-config.html) for details.
 
-## Technical Preview Free Plan
+## Technical Preview Free plan
 
 Neon cloud service is available for free during the [Limited and the Technical Preview](/docs/roadmap).
 
-Technical Preview Free Plan users can only create three Projects in Neon. Projects created under Technical Preview Free Plan are subject to additional limits:
+Technical Preview Free plan users can only create three Projects in Neon. Projects created under Technical Preview Free plan are subject to additional limits:
 
 - Data size in the Project is limited to 10 GB;
 - PITR time window is limited to 7 days of _reasonable usage_;
-- Compute node can use up to 1vCPU/256 MB.
+- Compute node can use up to 1 CU/256 MB.
 
-_Note: Technical Preview Free Plan limits are subject to change over the course of [Technical Preview](/docs/roadmap)._
+_Note: Technical Preview Free plan limits are subject to change over the course of [Technical Preview](/docs/roadmap)._
 
 ## Branches (coming soon)
 

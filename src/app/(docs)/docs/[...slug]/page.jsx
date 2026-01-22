@@ -3,15 +3,10 @@ import { notFound } from 'next/navigation';
 
 import Post from 'components/pages/doc/post';
 import VERCEL_URL from 'constants/base';
-import { DOCS_DIR_PATH } from 'constants/content';
+import { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import {
-  getAllPosts,
-  getAllChangelogs,
-  getNavigationLinks,
-  getPostBySlug,
-  getSidebar,
-} from 'utils/api-docs';
+import { getPostBySlug } from 'utils/api-content';
+import { getAllPosts, getAllChangelogs, getNavigationLinks, getNavigation } from 'utils/api-docs';
 import { getBreadcrumbs } from 'utils/get-breadcrumbs';
 import { getFlatSidebar } from 'utils/get-flat-sidebar';
 import getMetadata from 'utils/get-metadata';
@@ -21,8 +16,7 @@ const isUnusedOrSharedContent = (slug) =>
   slug.includes('unused/') ||
   slug.includes('shared-content/') ||
   slug.includes('README') ||
-  slug.includes('GUIDE_TEMPLATE') ||
-  slug.includes('RELEASE_NOTES_TEMPLATE');
+  slug.includes('GUIDE_TEMPLATE');
 
 export async function generateStaticParams() {
   const posts = await getAllPosts();
@@ -53,9 +47,9 @@ export async function generateMetadata({ params }) {
   const title = post?.data?.title || 'Changelog';
   const encodedTitle = Buffer.from(title).toString('base64');
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, sidebar);
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const category = breadcrumbs.length > 0 ? breadcrumbs[0].title : '';
   const encodedCategory = category && Buffer.from(category).toString('base64');
 
@@ -65,6 +59,7 @@ export async function generateMetadata({ params }) {
     imagePath: `${VERCEL_URL}/docs/og?title=${encodedTitle}&category=${encodedCategory}`,
     pathname: `${LINKS.docs}/${currentSlug}`,
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
+    robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
   });
 }
@@ -75,18 +70,16 @@ const DocPost = async ({ params }) => {
 
   if (isUnusedOrSharedContent(currentSlug)) return notFound();
 
-  const sidebar = getSidebar();
+  const sidebar = getNavigation();
   const flatSidebar = await getFlatSidebar(sidebar);
 
   const isDocsIndex = currentSlug === 'introduction';
   const isChangelogIndex = !!currentSlug.match('changelog')?.length;
   const allChangelogPosts = await getAllChangelogs();
 
-  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar, getSidebar());
+  const breadcrumbs = getBreadcrumbs(currentSlug, flatSidebar);
   const navigationLinks = getNavigationLinks(currentSlug, flatSidebar);
-  const fileOriginPath = isChangelogIndex
-    ? process.env.NEXT_PUBLIC_CHANGELOG_GITHUB_PATH
-    : `${process.env.NEXT_PUBLIC_DOCS_GITHUB_PATH + currentSlug}.md`;
+  const gitHubPath = isChangelogIndex ? CHANGELOG_DIR_PATH : `${DOCS_DIR_PATH}/${currentSlug}.md`;
 
   const post = getPostBySlug(currentSlug, DOCS_DIR_PATH);
   if (!isChangelogIndex && !post) return notFound();
@@ -96,9 +89,9 @@ const DocPost = async ({ params }) => {
       <Post
         data={{}}
         content={{}}
-        breadcrumbs={[]}
+        breadcrumbs={breadcrumbs}
         currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
+        gitHubPath={gitHubPath}
         changelogPosts={allChangelogPosts}
         navigationLinks={navigationLinks}
         changelogActiveLabel="all"
@@ -132,7 +125,7 @@ const DocPost = async ({ params }) => {
         breadcrumbs={breadcrumbs}
         navigationLinks={navigationLinks}
         currentSlug={currentSlug}
-        fileOriginPath={fileOriginPath}
+        gitHubPath={gitHubPath}
         tableOfContents={tableOfContents}
         isDocsIndex={isDocsIndex}
       />

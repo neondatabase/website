@@ -20,7 +20,7 @@ nextLink:
 
 In PostgreSQL, a view is a named query stored in the database server. To create a new view, you can use the `CREATE VIEW` statement.
 
-Here’s the basic syntax of the `CREATE VIEW` statement:
+Here's the basic syntax of the `CREATE VIEW` statement:
 
 ```phpsql
 CREATE VIEW view_name
@@ -35,9 +35,9 @@ In this syntax:
 
 ## PostgreSQL CREATE VIEW statement examples
 
-Let’s take some examples of using the `CREATE VIEW` statement.
+Let's take some examples of using the `CREATE VIEW` statement.
 
-We’ll use the `customer` table from the [sample database](../postgresql-getting-started/postgresql-sample-database):
+We'll use the `customer` table from the [sample database](../postgresql-getting-started/postgresql-sample-database):
 
 ![customer table](/postgresqltutorial/customer.png)
 
@@ -72,9 +72,9 @@ Output:
 ```text
  first_name  |  last_name   |                  email
 -------------+--------------+------------------------------------------
- Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)
- Mary        | Smith        | [[email protected]](../cdn-cgi/l/email-protection.html)
- Patricia    | Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)
+ Jared       | Ely          | jared.ely@example.com
+ Mary        | Smith        | mary.smith@example.com
+ Patricia    | Johnson      | patricia.johnson@example.com
 ...
 ```
 
@@ -110,9 +110,9 @@ Output:
 ```
  first_name  |  last_name   |                  email                   |    phone     |            city            | postal_code |                country
 -------------+--------------+------------------------------------------+--------------+----------------------------+-------------+---------------------------------------
- Jared       | Ely          | [[email protected]](../cdn-cgi/l/email-protection.html)             | 35533115997  | Purwakarta                 | 25972       | Indonesia
- Mary        | Smith        | [[email protected]](../cdn-cgi/l/email-protection.html)            | 28303384290  | Sasebo                     | 35200       | Japan
- Patricia    | Johnson      | [[email protected]](../cdn-cgi/l/email-protection.html)      | 838635286649 | San Bernardino             | 17886       | United States
+ Jared       | Ely          | jared.ely@example.com             | 35533115997  | Purwakarta                 | 25972       | Indonesia
+ Mary        | Smith        | mary.smith@example.com            | 28303384290  | Sasebo                     | 35200       | Japan
+ Patricia    | Johnson      | patricia.johnson@example.com      | 838635286649 | San Bernardino             | 17886       | United States
 ...
 ```
 
@@ -131,7 +131,7 @@ WHERE
   country = 'United States';
 ```
 
-Here’s the query that retrieves data from the customer_usa view:
+Here's the query that retrieves data from the customer_usa view:
 
 ```sql
 SELECT * FROM customer_usa;
@@ -142,9 +142,9 @@ Output:
 ```
  first_name | last_name  |                email                 |    phone     |          city           | postal_code |    country
 ------------+------------+--------------------------------------+--------------+-------------------------+-------------+---------------
- Zachary    | Hite       | [[email protected]](../cdn-cgi/l/email-protection.html)      | 191958435142 | Akron                   | 88749       | United States
- Richard    | Mccrary    | [[email protected]](../cdn-cgi/l/email-protection.html)   | 262088367001 | Arlington               | 42141       | United States
- Diana      | Alexander  | [[email protected]](../cdn-cgi/l/email-protection.html)   | 6171054059   | Augusta-Richmond County | 30695       | United States
+ Zachary    | Hite       | zachary.hite@example.com      | 191958435142 | Akron                   | 88749       | United States
+ Richard    | Mccrary    | richard.mccrary@example.com   | 262088367001 | Arlington               | 42141       | United States
+ Diana      | Alexander  | diana.alexander@example.com   | 6171054059   | Augusta-Richmond County | 30695       | United States
 ...
 ```
 

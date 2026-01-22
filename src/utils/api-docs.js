@@ -1,37 +1,10 @@
 const fs = require('fs');
 
-const { glob } = require('glob');
-const matter = require('gray-matter');
 const jsYaml = require('js-yaml');
 
 const { DOCS_DIR_PATH, CHANGELOG_DIR_PATH } = require('../constants/content');
 
-const getExcerpt = require('./get-excerpt');
-
-const getPostSlugs = async (pathname) => {
-  const files = await glob.sync(`${pathname}/**/*.md`, {
-    ignore: [
-      '**/RELEASE_NOTES_TEMPLATE.md',
-      '**/README.md',
-      '**/unused/**',
-      '**/shared-content/**',
-      '**/GUIDE_TEMPLATE.md',
-    ],
-  });
-  return files.map((file) => file.replace(pathname, '').replace('.md', ''));
-};
-
-const getPostBySlug = (slug, pathname) => {
-  try {
-    const source = fs.readFileSync(`${process.cwd()}/${pathname}/${slug}.md`, 'utf-8');
-    const { data, content } = matter(source);
-    const excerpt = getExcerpt(content, 200);
-
-    return { data, content, excerpt };
-  } catch (e) {
-    return null;
-  }
-};
+const { getPostSlugs, getPostBySlug } = require('./api-content');
 
 const getAllPosts = async () => {
   const slugs = await getPostSlugs(DOCS_DIR_PATH);
@@ -45,13 +18,17 @@ const getAllPosts = async () => {
         data: { title, subtitle, isDraft, redirectFrom },
         content,
       } = data;
+      // eslint-disable-next-line consistent-return
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
-const getSidebar = () =>
-  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sidebar.yaml`, 'utf8'));
+const getNavigation = () =>
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/navigation.yaml`, 'utf8'));
+
+const getSDKNavigation = () =>
+  jsYaml.load(fs.readFileSync(`${process.cwd()}/${DOCS_DIR_PATH}/sdk-navigation.yaml`, 'utf8'));
 
 const getNavigationLinks = (slug, flatSidebar) => {
   const posts = [
@@ -96,9 +73,8 @@ const getAllChangelogs = async () => {
 };
 
 module.exports = {
-  getPostSlugs,
-  getPostBySlug,
-  getSidebar,
+  getNavigation,
+  getSDKNavigation,
   getNavigationLinks,
   getAllChangelogs,
   getAllPosts,

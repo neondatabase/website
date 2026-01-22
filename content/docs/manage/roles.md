@@ -4,20 +4,20 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/manage/users
-updatedOn: '2025-02-07T19:29:48.918Z'
+updatedOn: '2025-09-05T12:26:43.316Z'
 ---
 
 In Neon, roles are Postgres roles. Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a role named `neondb_owner`. This role owns the database that is created in your Neon project's default branch.
 
-Your Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
+Your Postgres role and roles created in the Neon Console, API, and CLI are granted membership in the [neon_superuser](#the-neonsuperuser-role) role. Roles created with SQL from clients like [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) are only granted the basic [public schema privileges](/docs/manage/database-access#public-schema-privileges) granted to newly created roles in a standalone Postgres installation. These users must be selectively granted permissions for each database object. For more information, see [Manage database access](/docs/manage/database-access).
 
 <Admonition type="note">
 Neon is a managed Postgres service, so you cannot access the host operating system, and you can't connect using the Postgres `superuser` account like you can in a standalone Postgres installation.
 </Admonition>
 
-You can create roles in a project's default branch or child branches. While there is no strict limit on the number of roles you can create, we recommend keeping it under 500 per branch.
+You can create roles in a project's default branch or child branches. Neon enforces a limit of 500 roles per branch.
 
-In Neon, roles belong to a branch, which could be your main branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `alex` exists in the parent branch, role `alex` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
+In Neon, roles belong to a branch, which could be your production branch or a child branch. When you create a child branch, roles in the parent branch are duplicated in the child branch. For example, if role `alex` exists in the parent branch, role `alex` is copied to the child branch when the child branch is created. The only time this does not occur is when you create a branch that only includes data up to a particular point in time. If the role was created in the parent branch after that point in time, it is not duplicated in the child branch.
 
 Neon supports creating and managing roles from the following interfaces:
 
@@ -40,8 +40,10 @@ Roles created in the Neon Console, CLI, or API, including the role created with 
 - `pg_create_subscription`: A predefined Postgres role that lets users with `CREATE` permission on the database issue `CREATE SUBSCRIPTION`. The `pg_create_subscription` role is only available as of Postgres 16. The `neon_superuser` role in Postgres 14 and 15 can issue `CREATE SUBSCRIPTION` with only `CREATE` permission on the database.
 - `pg_monitor`: A predefined Postgres role that provides read/execute privileges on various Postgres monitoring views and functions. The `neon_superuser` role also has `WITH ADMIN` on the `pg_monitor` role, which enables granting the `pg_monitor` to other Postgres roles.
 - `EXECUTE` privilege on the `pg_stat_statements_reset()` function that is part of the `pg_stat_statements` extension. This privilege was introduced with the January 12, 2024 release. If you installed the `pg_stat_statements` extension before this release, drop and recreate the `pg_stat_statements` extension to enable this privilege. See [Install an extension](/docs/extensions/pg-extensions#install-an-extension).
+- `pg_signal_backend`: The `neon_superuser` role is granted the `pg_signal_backend` privilege, which allows it to cancel (terminate) backend sessions belonging to roles that are not members of `neon_superuser`. The `WITH ADMIN OPTION` allows `neon_superuser` to grant the `pg_signal_backend` role to other users/roles.
 - `GRANT ALL ON TABLES` and `WITH GRANT OPTION` on the `public` schema.
 - `GRANT ALL ON SEQUENCES` and `WITH GRANT OPTION` on the `public` schema.
+- `CREATE EVENT TRIGGER`, `ALTER EVENT TRIGGER`, `DROP EVENT TRIGGER`. The `ALTER EVENT TRIGGER` command does not allow changing the function associated with the event trigger.
 
 You can think of roles with `neon_superuser` privileges as administrator roles. If you require roles with limited privileges, such as a read-only role, you can create those roles from an SQL client. For more information, see [Manage database access](/docs/manage/database-access).
 
@@ -94,7 +96,7 @@ To reset a role's password:
 6. On the **Reset password** modal, click **Reset**. A reset password modal is displayed with your new password.
 
 <Admonition type="note">
-Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
+Resetting a password in the Neon Console resets the password to a generated value. To set your own password value, you can reset the password using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or an SQL client like [psql](/docs/connect/query-with-psql-editor) with the following syntax:
 
 ```sql
 ALTER USER user_name WITH PASSWORD 'new_password';
@@ -126,6 +128,7 @@ The `jq` option specified in each example is an optional third-party tool that f
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
 <LinkAPIKey />
+
 ### Create a role with the API
 
 The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchrole).
@@ -141,7 +144,7 @@ Role names cannot exceed 63 characters, and some role names are not permitted. S
 The API method appears as follows when specified in a cURL command. The `project_id` and `branch_id` are required parameters, and the role `name` is a required attribute. The length of a role name is limited to 63 bytes.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
+curl 'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -155,38 +158,30 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create role](https://api-docs.neon.tech/reference/createprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
-    "password": "FLfASd8mbKO9",
+    "password": "npg_A9xYoejTz6iQ",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:35:48Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:47:05Z"
   },
   "operations": [
     {
-      "id": "b4fc0c92-8a4f-4a1a-9891-fd36155de853",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "9c61fc28-c89e-4b25-ad5c-8777742e66a3",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
-    },
-    {
-      "id": "74fef831-7537-4d78-bb87-222e0918df54",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:35:48Z",
-      "updated_at": "2023-01-04T20:35:48Z"
+      "created_at": "2025-08-04T07:47:05Z",
+      "updated_at": "2025-08-04T07:47:05Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -212,6 +207,8 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 <details>
 <summary>Response body</summary>
+
+For attribute definitions, find the [List roles](https://api-docs.neon.tech/reference/listprojectbranchroles) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
@@ -248,7 +245,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'POST' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/alex/reset_password' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex/reset_password' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -256,38 +253,30 @@ curl -X 'POST' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Reset role password](https://api-docs.neon.tech/reference/resetprojectbranchrolepassword) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
-    "password": "sFA4k3pESzVA",
+    "password": "npg_iDKnwMW7bUg5",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:38:49Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:51:10Z"
   },
   "operations": [
     {
-      "id": "d319b791-96c7-48b4-8683-f127839dfb99",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "23b3db33-d36a-45bf-9fda-0e73b5b272e5",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:38:49Z",
-      "updated_at": "2023-01-04T20:38:49Z"
-    },
-    {
-      "id": "7bd5bb24-92e1-49d1-a3f4-c02e5b6d11e4",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:38:49Z",
-      "updated_at": "2023-01-04T20:38:49Z"
+      "created_at": "2025-08-04T07:51:10Z",
+      "updated_at": "2025-08-04T07:51:10Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -307,7 +296,7 @@ The API method appears as follows when specified in a cURL command. The `project
 
 ```bash
 curl -X 'DELETE' \
-  'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles/alex' \
+  'https://console.neon.tech/api/v2/projects/dry-heart-13671059/branches/br-morning-meadow-afu2s1jl/roles/alex' \
   -H 'Accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
@@ -315,37 +304,29 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Delete role](https://api-docs.neon.tech/reference/deleteprojectbranchrole) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "role": {
-    "branch_id": "br-blue-tooth-671580",
+    "branch_id": "br-morning-meadow-afu2s1jl",
     "name": "alex",
     "protected": false,
-    "created_at": "2023-01-04T20:35:48Z",
-    "updated_at": "2023-01-04T20:38:49Z"
+    "created_at": "2025-08-04T07:47:05Z",
+    "updated_at": "2025-08-04T07:51:10Z"
   },
   "operations": [
     {
-      "id": "0789c601-9d97-4124-80df-cd7b332f11ef",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
+      "id": "722b9f9b-c50e-424c-845e-78b38151b82f",
+      "project_id": "dry-heart-13671059",
+      "branch_id": "br-morning-meadow-afu2s1jl",
+      "endpoint_id": "ep-holy-heart-afbmgcfx",
       "action": "apply_config",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T20:40:27Z",
-      "updated_at": "2023-01-04T20:40:27Z"
-    },
-    {
-      "id": "d3b79f02-f369-4ad0-8bf5-ff0daf27dd9a",
-      "project_id": "hidden-cell-763301",
-      "branch_id": "br-blue-tooth-671580",
-      "endpoint_id": "ep-aged-math-668285",
-      "action": "suspend_compute",
-      "status": "scheduling",
-      "failures_count": 0,
-      "created_at": "2023-01-04T20:40:27Z",
-      "updated_at": "2023-01-04T20:40:27Z"
+      "created_at": "2025-08-04T07:53:22Z",
+      "updated_at": "2025-08-04T07:53:22Z",
+      "total_duration_ms": 0
     }
   ]
 }
@@ -357,7 +338,7 @@ curl -X 'DELETE' \
 
 Roles created with SQL have the same basic `public` schema privileges as newly created roles in a standalone Postgres installation. These roles are not granted membership in the [neon_superuser](#the-neonsuperuser-role) role like roles created with the Neon Console, CLI, or API. You must grant these roles the privileges you want them to have.
 
-To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+To create a role with SQL, issue a `CREATE ROLE` statement from a client such as [psql](/docs/connect/query-with-psql-editor), [pgAdmin](https://www.pgadmin.org/), or the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 ```sql
 CREATE ROLE <name> WITH LOGIN PASSWORD 'password';

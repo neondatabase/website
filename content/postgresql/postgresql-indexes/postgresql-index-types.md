@@ -41,7 +41,7 @@ In addition, the query planner can use a B\-tree index for queries that involve 
 
 ```
 column_name LIKE 'foo%'
-column_name LKE 'bar%'
+column_name LIKE 'bar%'
 column_name  ~ '^foo'
 ```
 

@@ -1,47 +1,36 @@
 # Neon data migration guides
 
-Learn how to migrate data to Neon Postgres from different database providers
+> The Neon data migration guides offer step-by-step instructions for migrating data to Neon, detailing processes for various data sources and ensuring seamless integration into the Neon database environment.
 
-Find instructions for migrating data from Postgres, CSV, other Neon projects, and other database providers. For near-zero downtime data migrations from other Postgres providers, consider using logical replication. Additionally, if you're new to Neon and want to try it out, our sample data guide provides datasets for exploration and testing.
+## Source
 
+- [Neon data migration guides HTML](https://neon.com/docs/import/migrate-intro): The original HTML version of this documentation
 
-If you're planning to migrate a production workload to Neon, let us know&#8212;we'll connect you with an expert from our team. You can reach out to us [here](https://neon.tech/migration-assistance).
+This guide helps you choose the best migration method based on your database size, downtime tolerance, source database type, and technical requirements.
 
+   **Tip** Quick guidance: If you can't afford downtime, use [Logical Replication](https://neon.com/docs/guides/logical-replication-guide). For Postgres databases under 10GB with some downtime flexibility, [Import Data Assistant](https://neon.com/docs/import/import-data-assistant) is the easiest option. For larger Postgres databases where downtime is acceptable, choose between [pg_dump/restore](https://neon.com/docs/import/migrate-from-postgres) (simplest) or [pgcopydb](https://neon.com/docs/import/pgcopydb) (fastest).
 
-## Data migration guides
+## Migration methods
 
+| Method                                                        | Best For                               | Database Size | Downtime                | Technical Skill | Key Benefit                   |
+| ------------------------------------------------------------- | -------------------------------------- | ------------- | ----------------------- | --------------- | ----------------------------- |
+| [Import Data Assistant](https://neon.com/docs/import/import-data-assistant)   | Quick Postgres migrations              | Under 10GB    | Minimal (minutes–hours) | Low             | Easiest - fully automated     |
+| [pg_dump/restore](https://neon.com/docs/import/migrate-from-postgres)         | Standard Postgres migrations           | Any size      | Required                | Medium          | Reliable and well-tested      |
+| [pgcopydb](https://neon.com/docs/import/pgcopydb)                             | Large Postgres databases               | 10GB+         | Required                | Medium          | Parallel processing - fast    |
+| [Logical Replication](https://neon.com/docs/guides/logical-replication-guide) | Production Postgres workloads          | Any size      | Near-zero               | High            | Minimal downtime              |
+| [pgloader](https://neon.com/docs/import/migrate-intro#provider-specific-guides)                         | Non-Postgres sources                   | Any size      | Required                | Medium          | Handles MySQL, MSSQL, SQLite  |
+| [AWS DMS](https://neon.com/docs/import/migrate-aws-dms)                       | Multi-source or custom transformations | Any size      | Minimal (minutes–hours) | High            | Advanced transformation rules |
 
+## Provider-specific guides
 
-Import Data Assistant
+For step-by-step instructions tailored to specific databases or providers, see [MySQL](https://neon.com/docs/import/migrate-mysql), [MSSQL](https://neon.com/docs/import/migrate-mssql), [SQLite](https://neon.com/docs/import/migrate-sqlite), [Heroku](https://neon.com/docs/import/migrate-from-heroku), [Supabase](https://neon.com/docs/import/migrate-from-supabase), [Render](https://neon.com/docs/import/migrate-from-render), [Azure](https://neon.com/docs/import/migrate-from-azure-postgres), [Digital Ocean](https://neon.com/docs/import/migrate-from-digital-ocean), [Firebase](https://neon.com/docs/import/migrate-from-firebase), or [another Neon project](https://neon.com/docs/import/migrate-from-neon).
 
-Migrate with pg_dump and pg_restore
+## Logical replication guides
 
-Migrate from another Neon project
+For near-zero downtime Postgres database migrations using logical replication, see guides for [AWS RDS](https://neon.com/docs/guides/logical-replication-rds-to-neon), [Google Cloud SQL](https://neon.com/docs/guides/logical-replication-cloud-sql), [AlloyDB](https://neon.com/docs/guides/logical-replication-alloydb), [Azure](https://neon.com/docs/import/migrate-from-azure-postgres), [Supabase](https://neon.com/docs/guides/logical-replication-supabase-to-neon), [PostgreSQL](https://neon.com/docs/guides/logical-replication-postgres-to-neon), or [Neon to Neon](https://neon.com/docs/guides/logical-replication-neon-to-neon).
 
-Migrate schema only
+## Other imports
 
-Import data from CSV
-
-Migrate from Firebase Firestore
-
-Migrate from Heroku
-
-Migrate with AWS DMS
-
-Migrate from Azure
-
-Migrate from Digital Ocean
-
-Import sample data
-
-Migrate from MySQL
-
-Migrate from Render
-
-Migrate from Supabase
-
-
-
-## Use logical replication for near-zero downtime data migrations
-
-Postgres logical replication in Neon provides an efficient way to migrate data from other Postgres providers with minimal downtime. By replicating data in real-time, this method allows you to transition your applications to Neon without interrupting your services. Please refer to our logical replication guides for instructions.
+- [Import data from CSV](https://neon.com/docs/import/import-from-csv) — Import data from CSV files using psql
+- [Import sample data](https://neon.com/docs/import/import-sample-data) — Try Neon with sample datasets
+- [Migrate schema only](https://neon.com/docs/import/migrate-schema-only) — Migrate just the schema without data

@@ -4,7 +4,7 @@ subtitle: Enable Postgres as a vector store with the pgvector extension
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2025-02-05T22:33:33.740Z'
+updatedOn: '2025-12-22T13:54:25.157Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -23,7 +23,7 @@ This topic describes how to enable the `pgvector` extension in Neon and how to c
 
 ## Enable the pgvector extension
 
-You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](<(/docs/get-started-with-neon/query-with-neon-sql-editor)>) or from a client such as [psql](<(/docs/connect/query-with-psql-editor)>) that is connected to Neon.
+You can enable the `pgvector` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to Neon.
 
 ```sql
 CREATE EXTENSION vector;
@@ -39,7 +39,7 @@ For example, if Neon’s latest supported `pgvector` version is 0.8.0, you can i
 CREATE EXTENSION vector VERSION '0.7.4';
 ```
 
-To check the latest supported `pgvector` version on Neon, visit our [Postgres extension page](/docs/extensions/extensions-intro). You can install one version back from that version.
+To check the latest supported `pgvector` version on Neon, visit our [Postgres extensions page](/docs/extensions/pg-extensions). You can install one version back from that version.
 
 For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential — for example, version 0.7.4 was followed by 0.8.0.
 
@@ -284,7 +284,7 @@ Like other index types, it’s faster to create an index after loading your init
   HINT:  Increase maintenance_work_mem to speed up builds.
   ```
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -306,7 +306,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 
@@ -412,7 +412,7 @@ Like other index types, it’s faster to create an index after loading your init
 
 - `maintenance_work_mem`
 
-  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/endpoints#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+  In Postgres, the `maintenance_work_mem` setting determines the maximum memory allocation for tasks such as `CREATE INDEX`. The default `maintenance_work_mem` value in Neon is set according to your Neon [compute size](/docs/manage/computes#how-to-size-your-compute). For a table that shows the `maintenance_work_mem` setting by compute size, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
   To optimize `pgvector` index build time, you can increase the `maintenance_work_mem` setting for the current session with a command similar to the following:
 
@@ -434,7 +434,7 @@ Like other index types, it’s faster to create an index after loading your init
   SET max_parallel_maintenance_workers = 7
   ```
 
-  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the vCPUs available.
+  For example, if you have a 7 CU compute size, you could set `max_parallel_maintenance_workers` to 7, before index creation, to make use of all of the available CPU cores.
 
   For a large number of workers, you may also need to increase the Postgres `max_parallel_workers`, which is `8` by default.
 

@@ -48,18 +48,11 @@ export default function getMetadata({
     keywords: Array.from(new Set(keywords?.split(',').map((keyword) => keyword.trim()))).join(', '), // Remove duplicates
     robots,
     icons: {
-      icon: '/favicon/favicon.png',
-      apple: [
-        { url: '/favicon/favicon.png' },
-        { url: '/favicon/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
-        { url: '/favicon/favicon-72x72.png', sizes: '72x72', type: 'image/png' },
-        { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-        { url: '/favicon/favicon-144x144.png', sizes: '144x144', type: 'image/png' },
-        { url: '/favicon/favicon-180x180.png', sizes: '180x180', type: 'image/png' },
-        { url: '/favicon/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
-        { url: '/favicon/favicon-384x384.png', sizes: '384x384', type: 'image/png' },
-        { url: '/favicon/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+      icon: [
+        { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+        { url: '/favicon/favicon.ico', sizes: '32x32' },
       ],
+      apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
     },
     openGraph: {
       title: metaTitle,

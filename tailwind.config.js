@@ -24,6 +24,7 @@ module.exports = {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
         pure: '#000000',
+        fog: '#0d0e12',
       },
       white: '#ffffff',
       primary: {
@@ -73,6 +74,7 @@ module.exports = {
       },
       green: {
         45: '#00E599',
+        52: '#34D59A',
       },
       blue: {
         80: '#ADE0EB',
@@ -105,7 +107,7 @@ module.exports = {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         title: ['var(--font-esbuild)', ...defaultTheme.fontFamily.sans],
-        mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         xs: [defaultTheme.fontSize.xs[0]],
@@ -128,23 +130,14 @@ module.exports = {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
         snug: '-0.01em',
+        wide: '0.02em',
         wider: '0.04em',
       },
       boxShadow: {
         social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
         contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
-      backgroundImage: ({ theme }) => ({
-        'header-menu-banner':
-          'radial-gradient(69.47% 49.51% at 29.09% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(14.22% 14.24% at 82.11% 0%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'radial-gradient(46.71% 50% at 80.6% 0%, rgba(86, 198, 189, 0.60) 0%, rgba(33, 80, 91, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
-        'header-menu-banner-mobile':
-          'radial-gradient(16.35% 46.44% at 99.06% 3.75%, rgba(86, 198, 189, 0.60) 13.19%, rgba(33, 80, 91, 0.00) 100%),' +
-          'radial-gradient(30.11% 65.43% at 71.03% 0%, #131D3E 0%, rgba(25, 39, 82, 0.00) 100%),' +
-          'radial-gradient(43.11% 44.64% at 99.53% 4.38%, #A3F0E9 0%, rgba(163, 240, 233, 0.00) 100%),' +
-          'linear-gradient(0deg, #18191B, #18191B)',
+      backgroundImage: () => ({
         'header-docs-button-border':
           'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
           'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
@@ -195,10 +188,11 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'subscribe-form-dark':
+          'radial-gradient(98.19% 94.16% at 96.13% 96.15%, rgba(21, 40, 40, 0.90) 0%, rgba(16, 30, 30, 0.00) 100%),' +
+          'linear-gradient(0deg, #101013, #101013)',
         'blog-subscribe-form':
           'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.80) 93%, rgba(19, 20, 21, 0) 100%);',
         'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
         'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
         'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
@@ -238,54 +232,34 @@ module.exports = {
           'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
           'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
           'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
-        // for deploy page
-        'color-picker-variant-1': 'linear-gradient(225deg, #4CFFFF 31.6%, #00E660 74.65%);',
-        'color-picker-variant-2': 'linear-gradient(225deg, #BDF471 35.94%, #00CC33 100%);',
-        'color-picker-variant-3': 'linear-gradient(225deg, #FF66FF 13.02%, #421CFF 92.19%);',
-        'color-picker-variant-4': 'linear-gradient(226.74deg, #E8EFFC 28.6%, #99B3E6 80.81%);',
-        'ticket-text-variant-0':
-          'linear-gradient(215.67deg, #FFFFFF 41.51%, rgba(255, 255, 255, 0.5) 79.11%);',
-        'ticket-text-variant-1': 'linear-gradient(215.67deg, #ffffff 41.51%, #66ffcc 79.11%)',
-        'ticket-text-variant-2': 'linear-gradient(215.67deg, #ffffff 41.51%, #e6ff66 79.11%)',
-        'ticket-text-variant-3': 'linear-gradient(215.67deg, #ffffff 41.51%, #ff99dd 79.11%)',
-        'ticket-text-variant-4': 'linear-gradient(215.67deg, #ffffff 41.51%, #ccccff 79.11%)',
-        'ticket-back-variant-1': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #00d1ff 0%, rgba(51, 255, 187, 0.2) 100%)`,
-        'ticket-back-variant-2': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, rgba(51, 255, 187, 0.6) 0%, rgba(230, 255, 102, 0.4) 100%)`,
-        'ticket-back-variant-3': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #7266ff 28.65%, #ff99dd 100%)`,
-        'ticket-back-variant-4': `radial-gradient(transparent 0%, ${theme(
-          'colors.black.pure'
-        )} 72%), linear-gradient(225deg, #ccccff 28.65%, rgba(204, 204, 255, 0.4) 100%)`,
-        'ticket-border-variant-0': `linear-gradient(0deg, transparent 10%, rgba(255, 255, 255, 0.2) 48%, rgba(255, 255, 255, 0.2) 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, rgba(255, 255, 255, 0.2) 35%, rgba(255, 255, 255, 0.2) 65%, ${theme(
-          'colors.black.pure'
-        )} 100%)`,
-        'ticket-border-variant-1': `linear-gradient(0deg, transparent 10%, #00d1ff 48%, #00d1ff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #00d1ff 35%, #00d1ff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-2': `linear-gradient(0deg, transparent 10%, #33ffbb 48%, #33ffbb 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #33ffbb 35%, #33ffbb 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-3': `linear-gradient(0deg, transparent 10%, #7266ff 48%, #7266ff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #7266ff 35%, #7266ff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-border-variant-4': `linear-gradient(0deg, transparent 10%, #ccccff 48%, #ccccff 52%, transparent 90%), linear-gradient(90deg, ${theme(
-          'colors.black.pure'
-        )} 0%, #ccccff 35%, #ccccff 65%, ${theme('colors.black.pure')} 100%)`,
-        'ticket-flare-variant-1':
-          'linear-gradient(106deg, transparent 30%, rgba(51, 255, 187, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-2':
-          'linear-gradient(106deg, transparent 30%, rgba(189, 244, 113, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-3':
-          'linear-gradient(106deg, transparent 30%, rgba(255, 153, 221, 0.8) 60%, transparent 60%)',
-        'ticket-flare-variant-4':
-          'linear-gradient(106deg, transparent 30%, rgba(204, 204, 255, 0.8) 60%, transparent 60%)',
+        'migration-card-left-bg':
+          'radial-gradient(77.42% 74.82% at 75.59% -18.04%, rgba(38, 66, 89, 0.80) 0%, rgba(8, 20, 25, 0.00) 100%),' +
+          'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'migration-card-right-bg':
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+        'migration-steps-slider-progress-bg':
+          'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
+        'template-cta':
+          'linear-gradient(95.19deg, rgba(26, 212, 150, 0) 65.7%, rgba(47, 128, 120, 0.2) 86.63%, rgba(12, 222, 201, 0.3) 99.73%)',
+        'contact-form-bg':
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.5), rgba(20, 24, 31, 0.3) 48%, transparent)',
+        'startups-info-card-1':
+          'radial-gradient(70.46% 67.03% at 100% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(213deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-2':
+          'radial-gradient(112.22% 99.2% at -18.6% -17.8%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(139deg, rgba(1, 119, 99, 0.00) 52.16%, rgba(1, 119, 99, 0.20) 126.56%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-3':
+          'linear-gradient(76deg, rgba(1, 119, 99, 0.00) 45.97%, rgba(1, 119, 99, 0.20) 111.02%),' +
+          'linear-gradient(293deg, rgba(1, 119, 99, 0.00) 58.47%, rgba(1, 119, 99, 0.15) 118.39%),' +
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 47.96%, rgba(20, 24, 31, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'program-form-bg':
+          'radial-gradient(279.25% 154.72% at 23.51% -33.18%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 100%),' +
+          'linear-gradient(0deg, #020203, #020203)',
         'live-video':
           'linear-gradient(103.37deg, rgba(255, 255, 255, 0.05) 12.69%, rgba(255, 255, 255, 0.11) 43.45%, rgba(255, 255, 255, 0) 93.31%)',
       }),

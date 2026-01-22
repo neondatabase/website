@@ -1,26 +1,23 @@
-import BranchData from 'components/pages/branching/branch-data';
-import CTA from 'components/pages/branching/cta';
-import Features from 'components/pages/branching/features';
+import Contents from 'components/pages/branching/contents';
 import Hero from 'components/pages/branching/hero';
-import Recovery from 'components/pages/branching/recovery';
-import Workflows from 'components/pages/branching/workflows';
-import Layout from 'components/shared/layout';
+import DocFooter from 'components/shared/doc-footer';
 import SEO_DATA from 'constants/seo-data';
+import { getIndexContent, getLatestUpdateDate } from 'utils/api-branching';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.branching);
 
-const BranchingPage = () => (
-  <Layout>
-    <Hero />
-    <BranchData />
-    <Workflows />
-    <Recovery />
-    <Features />
-    <CTA />
-  </Layout>
-);
+const BranchingIndexPage = async () => {
+  const contents = await getIndexContent();
+  const updatedOn = await getLatestUpdateDate();
 
-export default BranchingPage;
+  return (
+    <>
+      <Hero />
+      <Contents contents={contents} />
+      <DocFooter className="mt-20" updatedOn={updatedOn} slug={SEO_DATA.branching.pathname} />
+    </>
+  );
+};
 
-export const revalidate = 60;
+export default BranchingIndexPage;

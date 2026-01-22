@@ -15,7 +15,7 @@ const BlogPostCard = ({
   className,
   title,
   subtitle,
-  content,
+  excerpt: content,
   slug,
   date,
   category,
@@ -108,7 +108,7 @@ const BlogPostCard = ({
           {cat && (
             <Link
               className={clsx(
-                'font-med<a class="font-medium text-green-45" href="/blog/category/company">Company</a>ium',
+                'rounded-sm font-medium',
                 CATEGORY_COLORS[cat.slug] || 'text-green-45'
               )}
               to={cat.slug}
@@ -129,7 +129,7 @@ const BlogPostCard = ({
             {formattedDate}
           </time>
         </div>
-        <Link className="group flex flex-col" to={link}>
+        <Link className="group flex flex-col rounded-sm" to={link}>
           {/* title */}
           <h1
             className={clsx(
@@ -167,7 +167,7 @@ BlogPostCard.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  content: PropTypes.string.isRequired,
+  excerpt: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   category: PropTypes.string,

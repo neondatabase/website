@@ -1,0 +1,78 @@
+# Postgres functions
+
+> The document outlines the use and implementation of PostgreSQL functions within the Neon database, detailing how to create, manage, and utilize these functions to enhance database operations.
+
+## Source
+
+- [Postgres functions HTML](https://neon.com/docs/functions/introduction): The original HTML version of this documentation
+
+Get started with commonly-used Postgres functions with Neon's function guides. For other functions that Postgres supports, visit the official Postgres [Functions and Operators](https://www.postgresql.org/docs/current/functions.html) documentation.
+
+## Aggregate functions
+
+- [array_agg()](https://neon.com/docs/functions/array_agg): Aggregate elements into an array
+- [avg()](https://neon.com/docs/functions/avg): Calculate the average of a set of values
+- [count()](https://neon.com/docs/functions/count): Count rows or non-null values in a result set
+- [max()](https://neon.com/docs/functions/max): Find the maximum value in a set of values
+- [sum()](https://neon.com/docs/functions/sum): Calculate the sum of a set of values
+
+## Array functions
+
+- [array_length()](https://neon.com/docs/functions/array_length): Determine the length of an array
+
+## Date / Time functions
+
+- [age()](https://neon.com/docs/functions/age): Calculate the difference between timestamps or between a timestamp and the current date/time
+- [current_timestamp](https://neon.com/docs/functions/current_timestamp): Get the current date and time
+- [date_trunc()](https://neon.com/docs/functions/date_trunc): Truncate date/time values to a specified precision
+- [extract()](https://neon.com/docs/functions/extract): Extract date and time components from timestamps and intervals
+- [now()](https://neon.com/docs/functions/now): Get the current date and time
+
+## JSON functions
+
+- [array_to_json()](https://neon.com/docs/functions/array_to_json): Convert an SQL array to a JSON array
+- [json()](https://neon.com/docs/functions/json): Transform JSON data into relational views
+- [json_agg()](https://neon.com/docs/functions/json_agg): Aggregate values into a JSON array
+- [json_array_elements()](https://neon.com/docs/functions/json_array_elements): Expand a JSON array into a set of rows
+- [jsonb_array_elements()](https://neon.com/docs/functions/jsonb_array_elements): Expand a JSONB array into a set of rows
+- [json_build_object()](https://neon.com/docs/functions/json_build_object): Build a JSON object out of a variadic argument list
+- [json_each()](https://neon.com/docs/functions/json_each): Expand JSON into a record per key-value pair
+- [json_exists()](https://neon.com/docs/functions/json_exists): Check for Values in JSON Data Using SQL/JSON Path Expressions
+- [json_extract_path()](https://neon.com/docs/functions/json_extract_path): Extract a JSON sub-object at the specified path
+- [json_extract_path_text()](https://neon.com/docs/functions/json_extract_path_text): Extract a JSON sub-object at the specified path as text
+- [json_object()](https://neon.com/docs/functions/json_object): Create a JSON object from key-value pairs
+- [json_populate_record()](https://neon.com/docs/functions/json_populate_record): Cast a JSON object to a record
+- [json_query()](https://neon.com/docs/functions/json_query): Extract and Transform JSON Values with SQL/JSON Path Expressions
+- [json_scalar()](https://neon.com/docs/functions/json_scalar): Convert Text and Binary Data to JSON Values
+- [json_serialize()](https://neon.com/docs/functions/json_serialize): Convert JSON Values to Text or Binary Format
+- [json_table()](https://neon.com/docs/functions/json_table): Transform JSON data into relational views
+- [json_to_record()](https://neon.com/docs/functions/json_to_record): Convert a JSON object to a record
+- [json_value()](https://neon.com/docs/functions/json_value): Extract and Convert JSON Scalar Values
+- [jsonb_each()](https://neon.com/docs/functions/jsonb_each): Expand JSONB into a record per key-value pair
+- [jsonb_extract_path()](https://neon.com/docs/functions/jsonb_extract_path): Extract a JSONB sub-object at the specified path
+- [jsonb_extract_path_text()](https://neon.com/docs/functions/jsonb_extract_path_text): Extract a JSONB sub-object at the specified path as text
+- [jsonb_object()](https://neon.com/docs/functions/jsonb_object): Create a JSONB object from key-value pairs
+- [jsonb_populate_record()](https://neon.com/docs/functions/jsonb_populate_record): Cast a JSONB object to a record
+- [jsonb_to_record()](https://neon.com/docs/functions/jsonb_to_record): Convert a JSONB object to a record
+
+## Mathematical functions
+
+- [abs()](https://neon.com/docs/functions/math-abs): Calculate the absolute value of a number
+- [random()](https://neon.com/docs/functions/math-random): Generate a random number between 0 and 1
+- [round()](https://neon.com/docs/functions/math-round): Round numbers to a specified precision
+
+## String functions
+
+- [concat()](https://neon.com/docs/functions/concat): Concatenate strings
+- [lower()](https://neon.com/docs/functions/lower): Convert a string to lowercase
+- [substring()](https://neon.com/docs/functions/substring): Extract a substring from a string
+- [regexp_match()](https://neon.com/docs/functions/regexp_match): Extract substrings matching a regular expression pattern
+- [regexp_replace()](https://neon.com/docs/functions/regexp_replace): Replace substrings matching a regular expression pattern
+- [trim()](https://neon.com/docs/functions/trim): Remove leading and trailing characters from a string
+
+## Window functions
+
+- [dense_rank()](https://neon.com/docs/functions/dense_rank): Return the rank of the current row without gaps
+- [lag()](https://neon.com/docs/functions/window-lag): Access values from previous rows in a result set
+- [lead()](https://neon.com/docs/functions/window-lead): Access values from subsequent rows in a result set
+- [rank()](https://neon.com/docs/functions/window-rank): Assign ranks to rows within a result set

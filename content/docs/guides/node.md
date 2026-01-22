@@ -5,8 +5,11 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2025-02-03T20:41:57.331Z'
+updatedOn: '2025-10-31T11:07:57.605Z'
 ---
+
+<CopyPrompt src="/prompts/javascript-prompt.md" 
+description="Pre-built prompt for connecting Node.js applications to Neon."/>
 
 This guide describes how to create a Neon project and connect to it from a Node.js application. Examples are provided for using the [node-postgres](https://www.npmjs.com/package/pg) and [Postgres.js](https://www.npmjs.com/package/postgres) clients. Use the client you prefer.
 
@@ -16,11 +19,7 @@ The same configuration steps can be used for Express and Next.js applications.
 
 To connect to Neon from a Node.js application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a NodeJS project and add dependencies](#create-a-nodejs-project-and-add-dependencies)
-3. [Store your Neon credentials](#store-your-neon-credentials)
-4. [Configure the Postgres client](#configure-the-postgres-client)
-5. [Run app.js](#run-appjs)
+<Steps>
 
 ## Create a Neon project
 
@@ -91,7 +90,9 @@ const { neon } = require('@neondatabase/serverless');
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
 
-const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
+const sql = neon(
+  `postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require&channel_binding=require`
+);
 
 async function getPgVersion() {
   const result = await sql`SELECT version()`;
@@ -222,6 +223,8 @@ Run `node app.js` to view the result.
   version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit'
 }
 ```
+
+</Steps>
 
 ## Endpoint ID variable
 

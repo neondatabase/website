@@ -11,7 +11,7 @@ const BlogHeader = ({ className, title, category, basePath }) => (
     )}
   >
     <div className="flex items-end gap-5 md:w-full md:justify-between">
-      <h1 className="font-title text-4xl font-medium leading-none tracking-extra-tight lg:text-[32px] md:text-[28px]">
+      <h1 className="text-4xl font-medium leading-none tracking-extra-tight lg:text-[32px] md:text-[28px]">
         {title}
         {category && <span className="sr-only">{category}</span>}
       </h1>

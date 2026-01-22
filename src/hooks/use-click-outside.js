@@ -8,7 +8,7 @@ export default function useClickOutside(refs, onClickOutside) {
 
   const onClick = (event) => {
     if (isOutside(event.target)) {
-      onClickOutside();
+      onClickOutside(event);
     }
   };
 

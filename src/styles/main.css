@@ -2,6 +2,16 @@
   body {
     @apply relative min-w-[320px] !overflow-x-hidden bg-white font-sans text-black antialiased dark:bg-black-pure dark:text-white;
     -webkit-tap-highlight-color: transparent;
+
+    ::selection {
+      background-color: #39a57d;
+      color: white;
+    }
+
+    ::-moz-selection {
+      background-color: #39a57d;
+      color: white;
+    }
   }
 
   input[type='number']::-webkit-outer-spin-button,
@@ -9,6 +19,14 @@
   input[type='number'] {
     -webkit-appearance: none;
     -moz-appearance: textfield !important;
+  }
+
+  a,
+  button,
+  input,
+  pre,
+  select {
+    @apply outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-2;
   }
 }
 
@@ -109,4 +127,9 @@
     @apply whitespace-nowrap border-b border-gray-new-70/40 text-gray-new-80;
     @apply transition-colors duration-200 hover:border-green-45/40 hover:text-green-45;
   }
+}
+
+.header:has([aria-haspopup='menu'][aria-expanded='true']) + .navigation-overlay {
+  opacity: 1;
+  transition-delay: 0s;
 }

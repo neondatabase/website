@@ -602,4 +602,4 @@ There are other packages and tools available to help you build multi-tenant appl
 
 - [Laravel Documentation](https://laravel.com/docs)
 - [stancl/tenancy Documentation](https://tenancyforlaravel.com/)
-- [Neon Documentation](https://neon.tech/docs/)
+- [Neon Documentation](/docs/)

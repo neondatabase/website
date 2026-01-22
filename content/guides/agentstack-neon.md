@@ -179,9 +179,9 @@ Open `src/config/tasks.yaml` and configure the tasks as follows:
 ```yaml shouldWrap
 scrape_site:
   description: >-
-    Fetch the content of https://neon.tech/guides in markdown format. Ensure accurate and complete retrieval of website content.
+    Fetch the content of https://neon.com/guides in markdown format. Ensure accurate and complete retrieval of website content.
   expected_output: >-
-    The complete content of the website https://neon.tech/guides, formatted in markdown.
+    The complete content of the website https://neon.com/guides, formatted in markdown.
   agent: >-
     web_scraper
 extract:

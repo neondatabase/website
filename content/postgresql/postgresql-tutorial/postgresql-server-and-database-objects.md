@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/postgresql-databases.png'
 updatedOn: '2020-07-17T02:50:14+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL Tutorial'
-  slug: 'postgresql-tutorial/..'
+  title: 'PostgreSQL EXPLAIN'
+  slug: 'postgresql-tutorial/postgresql-explain'
 nextLink:
-  title: 'PostgreSQL SELECT'
-  slug: 'postgresql-tutorial/postgresql-select'
+  title: 'How to Compare Two Tables in PostgreSQL'
+  slug: 'postgresql-tutorial/compare-two-tables-in-postgresql'
 ---
 
 **Summary**: in this tutorial, you are going to get familiar with the most common **server and database objects** provided by PostgreSQL. It is important to understand those objects and their functionality so you do not miss out on the cool features that you may wish to have in the system.
@@ -26,7 +26,7 @@ When you install a PostgreSQL instance, you will have a corresponding PostgreSQL
 
 ## Databases
 
-A database is a container of other objects such as tables, [views](../postgresql-views), [functions](https://neon.tech/postgresql/postgresql-stored-procedures/), and [indexes](../postgresql-indexes). You can create as many databases as you want inside a PostgreSQL server.
+A database is a container of other objects such as tables, [views](../postgresql-views), [functions](/postgresql/postgresql-stored-procedures/), and [indexes](../postgresql-indexes). You can create as many databases as you want inside a PostgreSQL server.
 
 ![](/postgresqltutorial/postgresql-databases.png)
 
@@ -65,7 +65,7 @@ The following picture shows the default tablespaces:
 
 ## Functions
 
-A [function](https://neon.tech/postgresql/postgresql-stored-procedures/) is a reusable block of SQL code that returns a scalar value of a set of rows.
+A [function](/postgresql/postgresql-stored-procedures/) is a reusable block of SQL code that returns a scalar value of a set of rows.
 
 ![](/postgresqltutorial/postgresql-functions.png)
 

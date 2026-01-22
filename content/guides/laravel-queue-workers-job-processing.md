@@ -143,7 +143,6 @@ Let's break down the key components of this job class:
 1. `implements ShouldQueue`: This interface tells Laravel that this job should be pushed onto the queue instead of running synchronously.
 
 2. Use statements:
-
    - `Dispatchable`: Allows the job to be dispatched to the queue.
    - `InteractsWithQueue`: Provides methods for interacting with the queue.
    - `Queueable`: Allows the job to be pushed onto queues.

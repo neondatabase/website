@@ -5,14 +5,16 @@ on:
     - cron: '0 0 * * 1'
 
 env:
-  GATSBY_DEFAULT_SITE_URL: https://neon.tech
+  GATSBY_DEFAULT_SITE_URL: https://neon.com
 permissions:
   contents: read
 
 jobs:
   linkinator:
     name: 'Checks broken links'
-    runs-on: ubuntu-latest
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
     continue-on-error: true
     steps:
       - name: Harden the runner (Audit all outbound calls)

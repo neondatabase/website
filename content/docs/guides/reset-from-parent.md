@@ -2,16 +2,16 @@
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
 enableTableOfContents: true
-updatedOn: '2025-02-21T18:32:44.263Z'
+updatedOn: '2026-01-06T10:43:28.879Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
 
 ## Example scenario
 
-When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your main branch.
+When working with database branches, you might find yourself in a situation where you need to update your working branch to the latest data from your production branch.
 
-For example, let's say you have two child branches `staging` and `development` forked from your `main` branch. You have been working on the `development` branch and find it is now too far out of date with `main`.
+For example, let's say you have two child branches `staging` and `development` forked from your `production` branch. You have been working on the `development` branch and find it is now too far out of date with `production`.
 
 You have no schema changes in `development` to consider or preserve; you just want a quick refresh of the data. With the **Reset from parent** feature, you can perform a clean, instant reset to the latest data from the parent in a single operation, saving you the complication of manually creating and restoring branches.
 
@@ -21,10 +21,18 @@ When you reset a branch to its parent, the data and schema is completely replace
 
 ### Key points
 
-- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Branch Restore](/docs/guides/branch-restore), a similar feature, with some differences: branch restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
+- You can only reset a branch to the latest data from its parent. Point-in-time resets based on timestamp or LSN are possible using [Instant restore](/docs/introduction/branch-restore), a similar feature, with some differences: instant restore leaves a backup branch and is in general is intended more for data recovery than development workflow.
 - This reset is a complete overwrite, not a refresh or a merge. Any local changes made to the child branch are lost during this reset.
 - Existing connections will be temporarily interrupted during the reset. However, your connection details _do not change_. All connections are re-established as soon as the reset is done.
-- Root branches (like your project's `main` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
+- Root branches (like your project's `production` branch or schema-only branches) cannot be reset because they have no parent branch to reset to.
+
+### Branch expiration behavior
+
+When you reset a branch that has an expiration set, the expiration timer restarts from the reset time using the original duration.
+
+For example, if your branch was originally set to expire in 24 hours, resetting gives it another full 24 hours from the reset time. This process recalculates the new `expires_at` value using the preserved `ttl_interval_seconds`, but the TTL interval itself remains unchanged.
+
+For more details about branch expiration, see [branch expiration](/docs/guides/branch-expiration).
 
 ## How to Reset from parent
 
@@ -79,13 +87,22 @@ Read more about performing branching actions from the CLI in [CLI - branches](/d
 </TabItem>
 
 <TabItem>
-To reset a branch to its parent using the API, use the branch restore endpoint, selecting the parent as the source:
+To reset a branch to its parent using the API, use the [Restore branch](https://api-docs.neon.tech/reference/restoreprojectbranch) endpoint, specifying the parent branch ID as the `source_branch_id`:
 
 ```bash
-POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
+curl --request POST \
+     --url https://console.neon.tech/api/v2/projects/{NEON_PROJECT_ID}/branches/{BRANCH_ID}/restore \
+     --header 'accept: application/json' \
+     --header 'authorization: Bearer $NEON_API_KEY' \
+     --header 'content-type: application/json' \
+     --data '
+{
+  "source_branch_id": "br-autumn-tree-a4a9k5g8"
+}
+'
 ```
 
-For details, see [Branch Restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
 
 </TabItem>
 
@@ -114,3 +131,7 @@ neon branches reset staging --parent
 ```
 
 This ensures staging accurately reflects the current production state for reliable testing.
+
+## Limitations
+
+- **Reset from parent is unavailable for up to 24 hours after a parent is restored from a snapshot.** If a parent branch is restored from a snapshot, its child branches cannot be reset from that parent for up to 24 hours. If you need to update a child branch during this period, consider using [Instant restore](/docs/introduction/branch-restore) to restore the child branch from the parent directly.

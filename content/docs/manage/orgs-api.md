@@ -1,7 +1,7 @@
 ---
 title: Manage organizations using the Neon API
 enableTableOfContents: true
-updatedOn: '2025-02-13T13:32:35.158Z'
+updatedOn: '2025-06-02T15:04:05.575Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.
@@ -37,19 +37,19 @@ Both examples retrieve a list of projects, but notice how the personal API key r
 
 Some operations require a personal API key from an organization admin and cannot be performed using organization API keys. These operations are marked with ❌ in the matrix below.
 
-| Action                                                                                    | Personal API Key | Organization API Key |
-| ----------------------------------------------------------------------------------------- | ---------------- | -------------------- |
-| [Create an organization API key](#create-an-organization-api-key)                         | ✅               | ❌                   |
-| [Get a list of organization API keys](#list-organization-api-keys)                        | ✅               | ✅                   |
-| [Revoke an organization API key](#revoke-an-organization-api-key)                         | ✅               | ✅                   |
-| [Get organization details](#get-organization-details)                                     | ✅               | ✅                   |
-| [Get organization members details](#get-details-about-all-members)                        | ✅               | ✅                   |
-| [Get organization member details](#get-details-about-an-individual-member)                | ✅               | ✅                   |
-| [Update the role for an organization member](#update-the-role-for-an-organization-member) | ✅               | ✅                   |
-| [Remove member from the organization](#remove-member-from-the-organization)               | ✅               | ❌                   |
-| [Get organization invitation details](#get-organization-invitation-details)               | ✅               | ✅                   |
-| [Create organization invitations](#create-organization-invitations)                       | ✅               | ❌                   |
-| [Transfer projects between organizations](#transfer-projects-between-organizations)       | ✅               | ❌                   |
+| Action                                                                              | Personal API Key | Organization API Key |
+| ----------------------------------------------------------------------------------- | ---------------- | -------------------- |
+| [Create an organization API key](#create-api-keys)                                  | ✅               | ❌                   |
+| [Get a list of organization API keys](#list-api-keys)                               | ✅               | ✅                   |
+| [Revoke an organization API key](#revoke-an-api-key)                                | ✅               | ✅                   |
+| [Get organization details](#get-organization-details)                               | ✅               | ✅                   |
+| [Get organization members details](#list-members)                                   | ✅               | ✅                   |
+| [Get organization member details](#get-member-details)                              | ✅               | ✅                   |
+| [Update the role for an organization member](#update-member-role)                   | ✅               | ✅                   |
+| [Remove member from the organization](#remove-member)                               | ✅               | ❌                   |
+| [Get organization invitation details](#list-invitations)                            | ✅               | ✅                   |
+| [Create organization invitations](#create-invitations)                              | ✅               | ❌                   |
+| [Transfer projects between organizations](#transfer-projects-between-organizations) | ✅               | ❌                   |
 
 ## Finding your org_id
 
@@ -66,7 +66,7 @@ There are two types of organization API keys:
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createorgapikey)
+[Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
 
 ## List API keys
 
@@ -97,7 +97,7 @@ Example response:
 ]
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/listorgapikeys)
+[Try in API Reference](https://api-docs.neon.tech/reference/listorgapikeys)
 
 ## Revoke an API key
 
@@ -124,7 +124,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/revokeorgapikey)
+[Try in API Reference](https://api-docs.neon.tech/reference/revokeorgapikey)
 
 ## Get organization details
 
@@ -150,7 +150,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganization)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganization)
 
 ## List members
 
@@ -189,13 +189,13 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationmembers)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmembers)
 
 <Admonition type="note">The member ID (`id`) from this response is needed for operations like updating roles or removing members.</Admonition>
 
 ## Get member details
 
-Retrieves information about a specific member using their member ID (obtained from the [Get all members](#get-details-about-all-members) endpoint).
+Retrieves information about a specific member using their member ID (obtained from the [List members](#list-members) endpoint).
 
 ```bash shouldWrap
 curl --request GET \
@@ -216,7 +216,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationmember)
 
 ## Update member role
 
@@ -243,7 +243,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/updateorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/updateorganizationmember)
 
 ## Remove member
 
@@ -256,7 +256,7 @@ curl --request DELETE \
      --header 'authorization: Bearer $PERSONAL_API_KEY'
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/removeorganizationmember)
+[Try in API Reference](https://api-docs.neon.tech/reference/removeorganizationmember)
 
 ## List invitations
 
@@ -286,7 +286,7 @@ Example response:
 }
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/getorganizationinvitations)
+[Try in API Reference](https://api-docs.neon.tech/reference/getorganizationinvitations)
 
 ## Create invitations
 
@@ -314,7 +314,7 @@ curl --request POST \
      }' | jq
 ```
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/createorganizationinvitations)
+[Try in API Reference](https://api-docs.neon.tech/reference/createorganizationinvitations)
 
 ## Transfer projects between organizations
 
@@ -325,4 +325,4 @@ Key requirements:
 - Must use a personal API key
 - Requires admin permissions in the source organization and at least member permissions in the target
 
-[Try in API Reference ↗](https://api-docs.neon.tech/reference/transferproject)
+[Try in API Reference](https://api-docs.neon.tech/reference/transferproject)

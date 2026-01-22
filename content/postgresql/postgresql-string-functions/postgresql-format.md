@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/customer-table.png'
 updatedOn: '2024-01-27T14:36:05+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RTRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-rtrim'
+  title: 'PostgreSQL CONCAT_WS() Function'
+  slug: 'postgresql-string-functions/postgresql-concat_ws'
 nextLink:
-  title: 'PostgreSQL MD5() Function'
-  slug: 'postgresql-string-functions/postgresql-md5'
+  title: 'PostgreSQL INITCAP() Function'
+  slug: 'postgresql-string-functions/postgresql-initcap'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FORMAT()` function to format a string based on a template.
@@ -45,7 +45,7 @@ The following shows the syntax of the format specifier:
 %[position][flags][width]type
 ```
 
-A format specifier starts with `%` character and include three optional components `position`, `flags`, `with` and a required component `type`.
+A format specifier starts with `%` character and include three optional components `position`, `flags`, `width` and a required component `type`.
 
 **position**
 
@@ -142,7 +142,7 @@ In this example, we used two format specifiers `%s %s` which are then replaced b
 
 ### 3\) Using FORMAT() function with the flags component
 
-The following statement uses the FORMAT() function with the `flags` and `with` components in the format specifier:
+The following statement uses the FORMAT() function with the `flags` and `width` components in the format specifier:
 
 ```
 SELECT FORMAT('|%10s|', 'one');

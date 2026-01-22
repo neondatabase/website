@@ -1,7 +1,7 @@
 ---
 title: Neon Postgres Version Support Policy
 enableTableOfContents: true
-updatedOn: '2024-11-30T11:53:56.075Z'
+updatedOn: '2025-11-28T18:21:08.471Z'
 ---
 
 This topic outlines [Neon's Postgres Version Support Policy](#neon-version-support-policy).
@@ -35,7 +35,7 @@ Neon is committed to providing stability and hassle-free maintenance. You select
 
 Minor release updates are announced in the [Neon Changelog](/docs/changelog).
 
-To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or any SQL client connection to your database:
+To check your current Postgres major and minor version, you can run the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client connection to your database:
 
 ```sql
 SELECT version();
@@ -47,7 +47,7 @@ Your Postgres major version is also displayed in the **Project settings** widget
 
 In Neon, an instance of Postgres runs on each compute in your Neon project. When the PostgreSQL Global Development Group releases a new minor version, Neon automatically updates your computes to the new minor version. Typically, no user action is required for minor version updates. While we aim to make the new minor version available at the same time as the official Postgres release, these updates may occur a few days later than the official release date.
 
-Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/endpoints#restart-a-compute).
+Once a new minor version is available on Neon, it is applied the next time your compute restarts (for any reason). For example, if your compute suspends due to inactivity, the compute will be updated to the new minor version the next time it restarts due to a user-initiated or control-plane initiated action that wakes the compute. If your compute is always active (i.e., it never stops due to regular database activity or because you disabled [scale to zero](/docs/introduction/scale-to-zero)), and you want to force a restart to pick up the latest update, see [Restart a compute](/docs/manage/computes#restart-a-compute).
 
 Neon only supports the latest minor release for each major Postgres version. For example, when 16.4 is the latest minor release of Postgres version 16, it is no longer possible run a Neon compute with version 16.3.
 
@@ -59,9 +59,22 @@ As a managed service, Neon strives to manage all minor version updates automatic
 
 In such cases, your action may occasionally be required. When this occurs &#8212; which is infrequently &#8212; we will notify you through appropriate communication channels to ensure you are aware of any necessary steps.
 
-### Major versions
+### Supported major versions
 
-Neon currently supports Postgres 14, 15, 16, and 17. In the future, Neon intends to **support the five latest major Postgres versions, in alignment with the official Postgres version support policy.**
+Neon currently supports Postgres 14, 15, 16, 17, and 18 (preview). Neon supports the five latest major Postgres versions, in alignment with the official Postgres version support policy.
+
+### Postgres 18 support
+
+Postgres 18 is available on Neon as a preview release. While fully functional, we recommend waiting until it exits preview status before upgrading production databases.
+
+#### Current limitations
+
+- **Stability**: Expect minor issues as we complete testing and integration.
+- **Performance**: Neon currently runs Postgres 18 with `io_method = 'sync'` to use the traditional synchronous I/O behavior found in Postgres 17 and earlier versions. We're working to integrate with Postgres 18's new async I/O system.
+- **Extensions**: Limited extension support at launch, [check extension compatibility](/docs/extensions/pg-extensions) before upgrading.
+- **HIPAA**: HIPAA support for Postgres 18 is only available in AWS regions. You cannot create a Postgres 18 HIPAA-compliant project in Azure regions.
+
+We'll remove the preview designation once these limitations are addressed.
 
 ### Major version upgrades
 

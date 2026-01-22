@@ -1,9 +1,8 @@
 ---
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
-tag: new
 enableTableOfContents: true
-updatedOn: '2025-03-18T16:32:50.751Z'
+updatedOn: '2025-12-03T13:07:33.023Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -16,17 +15,31 @@ In this guide, you'll learn how to enable `pg_search` on Neon, understand the fu
 
 <Admonition type="note" title="pg_search on Neon">
 
-`pg_search` is currently only available on Neon projects using Postgres 17 and created in an [AWS region](/docs/introduction/regions#aws-regions).
+`pg_search` is currently only available on Neon projects created in an [AWS region](/docs/introduction/regions#aws-regions). It is not yet supported on Neon projects created in Azure regions.
 
 </Admonition>
 
 ## Enable the `pg_search` extension
 
-You can install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
+<Tabs labels={["Postgres 17", "Postgres 14 - 16"]}>
+
+<TabItem>
+
+Install the `pg_search` extension by running the following `CREATE EXTENSION` statement in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or from a client such as [psql](/docs/connect/query-with-psql-editor) that is connected to your Neon database.
 
 ```sql
 CREATE EXTENSION IF NOT EXISTS pg_search;
 ```
+
+</TabItem>
+
+<TabItem>
+
+The `pg_search` extension is supported on Postgres 14–16 for Neon projects in AWS regions. Contact Neon support to enable it for your project.
+
+</TabItem>
+
+</Tabs>
 
 ## Understanding text search with `pg_search`
 
@@ -68,7 +81,7 @@ With these basics in mind, let's learn how to create a BM25 index and start perf
 
 To demonstrate how `pg_search` functions, we'll begin by creating a sample table named `mock_items` and populating it with example data. ParadeDB provides a convenient tool to generate a test table with sample data for experimentation.
 
-First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
+First, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Once connected, execute the following SQL command:
 
 ```sql
 CALL paradedb.create_bm25_test_table(
@@ -419,7 +432,6 @@ Most users will not need to adjust these advanced throughput settings.
 Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
 
 - **`paradedb.statement_parallelism`**: Controls indexing threads during `INSERT/UPDATE/COPY`. Default is `0` (auto-detects parallelism).
-
   - Use `1` for single-row atomic inserts/updates to avoid unnecessary threading.
   - Use a higher value for bulk inserts and updates.
 
@@ -428,7 +440,6 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
     ```
 
 - **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
-
   - If set to `0`, `maintenance_work_mem / paradedb.statement_parallelism` is used.
   - For single-row updates, 15 MB prevents excess memory allocation.
   - For bulk inserts/updates, increase as needed.
@@ -457,7 +468,7 @@ Increase parallel workers to speed up indexing:
       SET max_parallel_workers = 8;
       ```
 
-- **`max_parallel_workers_per_gather`**: Limits parallel workers per query. The default in Neon is `2`, but you can adjust. The total number of parallel workers should not exceed your Neon compute's vCPU count. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+- **`max_parallel_workers_per_gather`**: Limits parallel workers per query. The default in Neon is `2`, but you can adjust. The total number of parallel workers should not exceed your Neon compute's CU count. See [Neon parameter settings by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
   `sql
 SET max_parallel_workers_per_gather = 8;
 `
@@ -468,7 +479,7 @@ Keeping indexes in memory improves query performance by reducing disk access. In
 
 In addition to `shared_buffers`, **Neon’s Local File Cache (LFC)** extends memory up to 75% of your compute’s RAM. This allows frequently accessed indexes and data to remain in memory, improving performance.
 
-Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/endpoints#how-to-size-your-compute).
+Both `shared_buffers` and the LFC size depend on your compute size. For details, see [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
 
 To further optimize performance, you can use the Postgres `pg_prewarm` extension to preload indexes into memory. This ensures fast query response times by warming up the cache after index creation or a restart of your Neon compute.
 

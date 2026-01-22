@@ -394,7 +394,7 @@ Instead, consider your specific use case:
 
 Always measure the performance impact in your specific scenario before deciding on indexing strategy.
 
-For more information about indexes in general, refer to Neon's documentation on [indexes](https://neon.tech/docs/postgres/indexes).
+For more information about indexes in general, refer to Neon's documentation on [indexes](/docs/postgres/indexes).
 
 ## Testing Soft Deletes
 
@@ -514,7 +514,7 @@ This test verifies that force deleting a post removes it entirely from the datab
 
 Laravel's soft delete feature provides a way to manage data deletion without losing valuable information. By using soft deletes, you can improve your application's data integrity and provide features like data recovery or undo functionality to your users.
 
-Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Neon Postgres's capabilities, such as [indexing](https://neon.tech/docs/postgres/indexes) and [table partitioning](https://neon.tech/docs/postgres/ddl-partitioning), to maintain high performance as your application scales.
+Consider the performance implications of soft deletes, especially when working with large datasets. Utilize Neon Postgres's capabilities, such as [indexing](/docs/postgres/indexes) and [table partitioning](/docs/postgres/ddl-partitioning), to maintain high performance as your application scales.
 
 When implementing soft deletes, always think about the lifecycle of your data. Plan on implementing policies for permanent deletion of old soft-deleted records to manage database growth optimally and comply with data retention regulations.
 

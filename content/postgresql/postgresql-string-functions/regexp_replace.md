@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-01-29T01:38:59+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL REPLACE() Function'
-  slug: 'postgresql-string-functions/postgresql-replace'
-nextLink:
   title: 'PostgreSQL REGEXP_MATCHES() Function'
   slug: 'postgresql-string-functions/postgresql-regexp_matches'
+nextLink:
+  title: 'PostgreSQL REPEAT() Function'
+  slug: 'postgresql-string-functions/postgresql-repeat'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REGEXP_REPLACE()` function to replace strings that match a regular expression.

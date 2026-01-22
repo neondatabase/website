@@ -18,7 +18,7 @@ Get started with commonly-used Postgres data types with Neon's data type guides.
 
 <a href="/docs/data-types/character" description="Work with text data in Postgres" icon="app-store" icon="app-store">Character</a>
 
-<a href="/docs/pdata-types/json" description="Model JSON data in Postgres" icon="app-store" icon="app-store">JSON</a>
+<a href="/docs/data-types/json" description="Model JSON data in Postgres" icon="app-store" icon="app-store">JSON</a>
 
 <a href="/docs/data-types/decimal" description="Work with exact numerical values in Postgres" icon="app-store" icon="app-store">Decimal</a>
 

@@ -1,96 +1,102 @@
 'use client';
 
-import { Alignment, Fit, Layout, useRive } from '@rive-app/react-canvas';
+import { Alignment, Fit } from '@rive-app/react-canvas';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import useIsTouchDevice from 'hooks/use-is-touch-device';
+import useRiveAnimation from 'hooks/use-rive-animation';
 
 const RiveAnimation = ({
   className = '',
   intersectionClassName = '',
+  wrapperClassName = '',
   src,
-  artboard,
+  artboard = 'main',
   stateMachines = 'SM',
   autoplay = false,
-  fit = 'FitWidth',
-  alignment = 'TopCenter',
-  intersectionRootMargin = '500px 0px',
-  animationRootMargin = '300px 0px',
+  autoBind = true,
+  fit = Fit.FitWidth,
+  alignment = Alignment.TopCenter,
+  threshold = 0.4,
+  triggerOnce = true,
+  rootMargin = '500px 0px',
+  visibilityRootMargin,
+  pauseOnHide = true,
+  showLazyLoadHelper = true,
+  assetLoader,
   onLoad,
 }) => {
   const isTouch = useIsTouchDevice();
-  const [containerRef, isIntersecting] = useInView({
-    triggerOnce: true,
-    rootMargin: intersectionRootMargin,
-  });
-  const [animationRef, isVisible] = useInView({ rootMargin: animationRootMargin });
 
-  const { rive, RiveComponent } = useRive({
+  const { isReady, wrapperRef, animationRef, isIntersecting, RiveComponent } = useRiveAnimation({
     src,
     artboard,
-    autoplay,
     stateMachines,
-    layout: new Layout({
-      fit: Fit[fit],
-      alignment: Alignment[alignment],
-    }),
-    onLoad: () => {
-      rive?.resizeDrawingSurfaceToCanvas();
-      onLoad?.();
-    },
+    autoplay,
+    autoBind,
+    fit,
+    alignment,
+    threshold,
+    triggerOnce,
+    rootMargin,
+    visibilityRootMargin,
+    assetLoader,
+    onLoad,
+    pauseOnHide,
   });
 
-  useEffect(() => {
-    if (!rive) {
-      return;
-    }
-
-    if (isVisible) {
-      rive.play();
-    } else {
-      rive.pause();
-    }
-  }, [rive, isVisible]);
-
   return (
-    <>
-      <span
-        className={clsx(intersectionClassName, 'absolute left-1/2 top-0 -z-10 h-full w-px')}
-        ref={containerRef}
-        aria-hidden
-      />
+    <div
+      className={clsx(
+        'transition-opacity',
+        isReady ? 'opacity-100' : 'opacity-0',
+        wrapperClassName
+      )}
+    >
+      {showLazyLoadHelper && (
+        <span
+          className={clsx(intersectionClassName, 'absolute left-1/2 top-0 -z-10 h-full w-px')}
+          ref={wrapperRef}
+          aria-hidden
+        />
+      )}
       <div
         className={clsx(
-          className,
+          'size-full [&_canvas]:!h-full [&_canvas]:!w-full',
           {
             'pointer-events-none': isTouch,
           },
-          '[&_canvas]:!h-auto [&_canvas]:!w-full'
+          className
         )}
         ref={animationRef}
         aria-hidden
       >
         {isIntersecting ? <RiveComponent /> : null}
       </div>
-    </>
+    </div>
   );
 };
 
 RiveAnimation.propTypes = {
   src: PropTypes.string.isRequired,
-  artboard: PropTypes.string.isRequired,
+  artboard: PropTypes.string,
   stateMachines: PropTypes.string,
   autoplay: PropTypes.bool,
+  autoBind: PropTypes.bool,
   fit: PropTypes.oneOf(Object.keys(Fit)),
   alignment: PropTypes.oneOf(Object.keys(Alignment)),
+  threshold: PropTypes.number,
+  triggerOnce: PropTypes.bool,
+  rootMargin: PropTypes.string,
+  visibilityRootMargin: PropTypes.string,
+  pauseOnHide: PropTypes.bool,
+  showLazyLoadHelper: PropTypes.bool,
   onLoad: PropTypes.func,
-  intersectionRootMargin: PropTypes.string,
-  animationRootMargin: PropTypes.string,
+  assetLoader: PropTypes.func,
   className: PropTypes.string,
   intersectionClassName: PropTypes.string,
+  wrapperClassName: PropTypes.string,
 };
 
 export default RiveAnimation;

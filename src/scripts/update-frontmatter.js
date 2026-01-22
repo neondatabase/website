@@ -26,7 +26,7 @@ const matter = require('gray-matter');
 
 const updateFrontmatter = async () => {
   // const files = await glob.sync(`content/docs/**/*.md`, {
-  //   ignore: ['**/RELEASE_NOTES_TEMPLATE.md', '**/README.md', '**/unused/**'],
+  //   ignore: ['**/README.md', '**/unused/**'],
   // });
 
   // NOTE: to fetch the last update date from GitHub, uncomment the code above,
@@ -37,9 +37,7 @@ const updateFrontmatter = async () => {
   const docsMdFilePaths = mdFilePaths.filter(
     (path) =>
       (path.includes('content/docs') || path.includes('content/use-cases')) &&
-      (!path.includes('RELEASE_NOTES_TEMPLATE.md') ||
-        !path.includes('README.md') ||
-        !path.includes('unused'))
+      (!path.includes('README.md') || !path.includes('unused'))
   );
 
   docsMdFilePaths.forEach(async (path) => {

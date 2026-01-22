@@ -18,7 +18,7 @@ nextLink:
 
 ## Introduction to the PL/pgSQL exit statement
 
-The `exit` statement allows you to prematurely terminate a loop including an unconditional [loop](plpgsql-loop-statements), a [while loop](https://neon.tech/postgresql/plpgsql-while-loop/), and a [for loop](plpgsql-for-loop).
+The `exit` statement allows you to prematurely terminate a loop including an unconditional [loop](plpgsql-loop-statements), a [while loop](/postgresql/plpgsql-while-loop/), and a [for loop](plpgsql-for-loop).
 
 The following shows the syntax of the `exit` statement:
 

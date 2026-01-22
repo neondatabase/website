@@ -3,34 +3,28 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
-import { DOCS_BASE_PATH, POSTGRESQL_BASE_PATH } from 'constants/docs';
+import { DOCS_BASE_PATH } from 'constants/docs';
+import LINKS from 'constants/links';
+import HomeIcon from 'icons/docs/home.inline.svg';
 
-const linkClassName = 'transition-colors duration-200 hover:text-black dark:hover:text-white';
+const linkClassName =
+  'transition-colors duration-200 hover:text-black dark:hover:text-white rounded-sm';
 
-const Breadcrumbs = ({ breadcrumbs, isPostgresPost = false }) => (
-  <div className="mb-4 flex flex-wrap space-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60 lg:hidden">
-    {isPostgresPost ? (
-      <Link className={linkClassName} to={POSTGRESQL_BASE_PATH}>
-        PostgreSQL Tutorial
-      </Link>
-    ) : (
-      <Link className={linkClassName} to={DOCS_BASE_PATH}>
-        Docs
-      </Link>
-    )}
-
-    <span>/</span>
+const Breadcrumbs = ({ breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
+  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60">
+    <Link className={linkClassName} to={baseUrl}>
+      <HomeIcon />
+    </Link>
 
     {breadcrumbs.map(({ title, slug }, index) => {
       const isLast = index === breadcrumbs.length - 1;
+      const href = slug === 'guides' ? LINKS.guides : `${baseUrl}${slug}`;
+
       return (
         <Fragment key={index}>
-          {index > 0 && <span>/</span>}
+          <span>/</span>
           {slug ? (
-            <Link
-              className={linkClassName}
-              to={isPostgresPost ? `${POSTGRESQL_BASE_PATH}${slug}` : `${DOCS_BASE_PATH}${slug}`}
-            >
+            <Link className={linkClassName} to={href}>
               {title}
             </Link>
           ) : (
@@ -55,7 +49,7 @@ Breadcrumbs.propTypes = {
       slug: PropTypes.string,
     })
   ).isRequired,
-  isPostgresPost: PropTypes.bool,
+  baseUrl: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;

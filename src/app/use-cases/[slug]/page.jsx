@@ -1,52 +1,42 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
-import Post from 'components/pages/doc/post';
+import TemplatePage from 'app/[slug]/pages/template-page';
 import { USE_CASES_DIR_PATH } from 'constants/content';
 import LINKS from 'constants/links';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
-import { getPostBySlug } from 'utils/api-docs';
+import { getPostBySlug, getPostSlugs } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
-import getTableOfContents from 'utils/get-table-of-contents';
+
+export async function generateStaticParams() {
+  const slugs = await getPostSlugs(USE_CASES_DIR_PATH);
+  return slugs.map((slug) => ({
+    slug: slug.slice(1),
+  }));
+}
 
 export async function generateMetadata({ params }) {
-  const { slug: currentSlug } = params;
+  const { slug } = params;
 
-  const post = getPostBySlug(currentSlug, USE_CASES_DIR_PATH);
-
-  if (!post) return notFound();
+  const post = getPostBySlug(slug, USE_CASES_DIR_PATH);
+  if (!post) return null;
 
   return getMetadata({
     title: post?.data?.title,
     description: post?.data?.subtitle,
-    pathname: `${LINKS.useCases}/${currentSlug}`,
+    pathname: `${LINKS.useCases}/${slug}`,
     type: 'article',
-    imagePath: post?.data?.image || DEFAULT_IMAGE_PATH,
+    imagePath: post?.data?.image,
   });
 }
 
-const UseCasePage = ({ params }) => {
-  const { slug: currentSlug } = params;
+const UseCasePage = async ({ params }) => {
+  const { slug } = params;
+  const currentSlug = `use-cases/${slug}`;
 
-  const post = getPostBySlug(currentSlug, USE_CASES_DIR_PATH);
+  const post = getPostBySlug(slug, USE_CASES_DIR_PATH);
   if (!post) return notFound();
 
-  const { data, content } = post;
-  const tableOfContents = getTableOfContents(content);
-  const fileOriginPath = `${process.env.NEXT_PUBLIC_USE_CASES_GITHUB_PATH}${currentSlug}.md`;
-
-  return (
-    <Post
-      content={content}
-      data={data}
-      breadcrumbs={[]}
-      navigationLinks={{ previousLink: null, nextLink: null }}
-      currentSlug={currentSlug}
-      fileOriginPath={fileOriginPath}
-      tableOfContents={tableOfContents}
-      isUseCase
-    />
-  );
+  return <TemplatePage params={{ slug: currentSlug }} />;
 };
 
 export default UseCasePage;

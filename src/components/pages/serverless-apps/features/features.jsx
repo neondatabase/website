@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
+import TagCloud from 'components/pages/use-case/tag-cloud';
 import Container from 'components/shared/container/container';
 import aiIcon from 'icons/serverless-apps/features/ai.svg';
 import autoScalingIcon from 'icons/serverless-apps/features/auto-scaling.svg';
@@ -9,7 +10,7 @@ import costIcon from 'icons/serverless-apps/features/cost.svg';
 import handIcon from 'icons/serverless-apps/features/hand.svg';
 import maintenanceIcon from 'icons/serverless-apps/features/maintenance.svg';
 import peakIcon from 'icons/serverless-apps/features/peak.svg';
-import perfomanceIcon from 'icons/serverless-apps/features/perfomance.svg';
+import performanceIcon from 'icons/serverless-apps/features/performance.svg';
 import scalingIcon from 'icons/serverless-apps/features/scaling.svg';
 import speedIcon from 'icons/serverless-apps/features/speed.svg';
 import storageIcon from 'icons/serverless-apps/features/storage.svg';
@@ -36,7 +37,7 @@ const items = [
       },
       {
         title: 'Optimized performance',
-        icon: perfomanceIcon,
+        icon: performanceIcon,
       },
     ],
     image: {
@@ -170,25 +171,12 @@ const Features = () => (
                 )}
                 dangerouslySetInnerHTML={{ __html: desctiprion }}
               />
-              <ul className="mt-6 flex flex-wrap gap-3 lg:mt-4 lg:gap-x-2">
-                {features.map(({ title, icon }) => (
-                  <li
-                    className="flex h-10 items-center gap-2.5 rounded-full border border-gray-new-15 px-[18px] lg:h-[34px] lg:px-3 md:h-[30px]"
-                    key={title}
-                  >
-                    <Image
-                      className="md:size-[14px]"
-                      src={icon}
-                      width="16"
-                      height="16"
-                      alt={title}
-                    />
-                    <span className="text-[15px] font-medium leading-none tracking-extra-tight text-[#E3E4E9] lg:text-sm">
-                      {title}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+              {/* // add tag cloud here */}
+              <TagCloud
+                items={features}
+                className="gap-3 lg:gap-x-2"
+                titleClassName="text-[15px]"
+              />
             </div>
           </li>
         ))}

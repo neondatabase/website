@@ -20,12 +20,10 @@ Before you start, make sure you have the following prerequisites in place:
 - **Python 3.7 or higher:** This guide uses Python. If you don't have it already, download and install it from [python.org](https://www.python.org/downloads/).
 
 - **Neon account and API Key:**
-
   - Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
   - Once signed up, you can find your Neon API Key [here](https://console.neon.tech/app/settings/profile). You'll need this key to authenticate your application with Neon.
 
 - **Composio account and API Key:**
-
   - Create a Composio account by visiting [composio.dev](https://composio.dev/).
   - After signing up and logging in, your Composio API key will be available in your [Composio dashboard](https://app.composio.dev/dashboard). You will need this to authenticate your application.
 

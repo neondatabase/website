@@ -5,7 +5,7 @@ subtitle: Learn how to migrate your database from Supabase to Neon Postgres usin
 redirectFrom:
   - /docs/import/import-from-supabase
 enableTableOfContents: true
-updatedOn: '2025-02-11T15:10:57.064Z'
+updatedOn: '2025-08-02T10:33:29.294Z'
 ---
 
 This guide describes how to migrate a database from Supabase to Neon Postgres.
@@ -102,7 +102,7 @@ This section describes how to prepare your destination Neon Postgres database to
 
 To maintain consistency with your Supabase setup, you can create a new database in Neon with the same database name you used in Supabase.
 
-1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or a Postgres client like [psql](/docs/connect/query-with-psql-editor).
+1. Connect to your Neon project using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a Postgres client like [psql](/docs/connect/query-with-psql-editor).
 
 2. Create a new database. For example, if your Supabase database was named `lego`, run:
 
@@ -166,7 +166,7 @@ pg_restore: creating SEQUENCE "public.lego_inventories_id_seq"
 
 After the restore process completes, you should verify that your data has been successfully migrated:
 
-1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or `psql`.
+1. Connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or `psql`.
 
 2. Run some application queries to check your data. For example, if you're using the LEGO database, you can run the following:
 

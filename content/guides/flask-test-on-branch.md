@@ -203,11 +203,9 @@ This can be particularly useful when testing complex features or changes that re
 ### Creating a Neon Branch
 
 1. **Log In to Neon Dashboard:**
-
    - Access your Neon dashboard by logging in at [Neon's official website](https://neon.tech).
 
 2. **Select Your Database:**
-
    - Navigate to the database project that you are using for your production environment.
 
 3. **Create a New Branch:**
@@ -221,7 +219,6 @@ This can be particularly useful when testing complex features or changes that re
 Go back to your Flask project and integrate the Neon branch into your testing setup:
 
 1. **Update Environment Configuration:**
-
    - Once your branch is created, obtain the get details (hostname, database name, username, and password) from the Neon dashboard.
    - Create a new environment file for testing, such as `.env.test`, and configure it to use the Neon testing branch:
 
@@ -230,7 +227,6 @@ Go back to your Flask project and integrate the Neon branch into your testing se
      ```
 
 2. **Update Test Configuration:**
-
    - Modify your `test_app.py` file to use the testing environment:
 
      ```python
@@ -245,7 +241,6 @@ Go back to your Flask project and integrate the Neon branch into your testing se
      ```
 
 3. **Run Tests:**
-
    - With the testing branch configured, you can run your tests against the isolated database environment:
 
      ```bash

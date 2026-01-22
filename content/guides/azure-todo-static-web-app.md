@@ -7,6 +7,10 @@ createdAt: '2024-12-14T00:00:00.000Z'
 updatedOn: '2024-12-14T00:00:00.000Z'
 ---
 
+<Admonition type="important" title="deprecated">
+The Neon Azure Native Integration is deprecated and reaches end of life on **January 31, 2026**. After this date, Azure-managed organizations will no longer be available. [Transfer your projects to a Neon-managed organization](/docs/import/migrate-from-azure-native) to continue using Neon.
+</Admonition>
+
 If you’re looking for a modern way to deploy web applications without managing traditional server infrastructure, [Azure Static Web Apps](https://azure.microsoft.com/en-us/products/app-service/static) might be just what you need. It’s a service optimized for hosting static assets with global distribution, but its real strength lies in its integration with [Azure Functions](https://azure.microsoft.com/en-us/products/functions) for backend operations.
 
 One of the most compelling features of Azure Static Web Apps is its built-in CI/CD pipeline powered by [GitHub Actions](https://github.com/features/actions). When you connect your repository, Azure configures the required GitHub workflows automatically. You only need to push your code, and GitHub Actions will build, optimize, and deploy your entire application across a global network.
@@ -46,7 +50,6 @@ To begin building your Azure Static Web App with Neon Postgres, you'll need to s
 ### Installing required tools
 
 1. Install the **Azure Static Web Apps** and **Azure Functions** extensions for Visual Studio Code:
-
    - Open VS Code.
    - Click the Extensions icon or press `Ctrl+Shift+X` or `Cmd+Shift+X`.
    - Search for "Azure Static Web Apps" and "Azure Functions" extensions.
@@ -377,21 +380,18 @@ Let's break down the key functions and features of the todo app:
 Core Functions:
 
 1. `loadTodos()`
-
    - Fetches existing todos from the Azure Functions API endpoint via `GET` request
    - Handles loading states and error conditions
    - Automatically called when the DOM loads
    - Updates the UI with current todo items
 
 2. `addTodo()`
-
    - Creates new todo items via `POST` request to the API
    - Validates input to prevent empty submissions
    - Updates local state and UI after successful creation
    - Includes error handling with user feedback
 
 3. `toggleTodo(id)`
-
    - Updates todo completion status via `PUT` request
    - Includes error handling and state updates
 
@@ -409,12 +409,10 @@ UI Management:
 Utility Functions:
 
 1. `showLoading()`
-
    - Displays loading indicator during API operations.
    - Provides visual feedback for better user experience.
 
 2. `hideLoading()`
-
    - Removes loading indicator after operations complete.
    - Prepares UI for content display.
 
@@ -633,24 +631,19 @@ Core Components:
    ```
 
    Supported operations:
-
    1. `GET`: Retrieves all todos
-
       - Automatically creates table on first request.
       - Returns array of todo items.
 
    2. `POST`: Creates new todo
-
       - Requires: `text` field.
       - Returns: newly created todo.
 
    3. `PUT`: Updates todo completion status
-
       - Requires: `id` and `completed` status.
       - Returns: updated todo or `404` if not found.
 
    4. `DELETE`: Removes a todo
-
       - Requires: todo `id`.
       - Returns: success message or `404` if not found.
 
@@ -670,7 +663,7 @@ Start by configuring the `local.settings.json` in your `api` directory with your
 {
   "Values": {
     ...
-    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require"
+    "DATABASE_URL": "postgresql://neondb_owner:<your_password>@<your_host>.neon.tech/neondb?sslmode=require&channel_binding=require"
   }
 }
 ```

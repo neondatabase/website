@@ -10,8 +10,8 @@ previousLink:
   title: ''
   slug: ''
 nextLink:
-  title: 'What is PostgreSQL?'
-  slug: 'postgresql-getting-started/what-is-postgresql'
+  title: 'PostgreSQL Cheat Sheet'
+  slug: 'postgresql-cheat-sheet'
 ---
 
 This section helps you get started with PostgreSQL by showing you how to install PostgreSQL on Windows, Linux, and macOS. You also learn how to connect to PostgreSQL using the psql tool as well as how to load a sample database into the PostgreSQL for practicing.

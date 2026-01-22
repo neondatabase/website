@@ -1,33 +1,3 @@
-import AiAgentsIcon from 'icons/header/ai-agent.inline.svg';
-import ApiGradientIcon from 'icons/header/api-gradient.inline.svg';
-import ApiIcon from 'icons/header/api.inline.svg';
-import AutoscalingGradientIcon from 'icons/header/autoscaling-gradient.inline.svg';
-import AutoscalingIcon from 'icons/header/autoscaling.inline.svg';
-import BlogIcon from 'icons/header/blog.inline.svg';
-import BuildingGradientIcon from 'icons/header/building-gradient.inline.svg';
-import BuildingIcon from 'icons/header/building.inline.svg';
-import CareerIcon from 'icons/header/career.inline.svg';
-import ChatIcon from 'icons/header/chat.inline.svg';
-import ConnectionGradientIcon from 'icons/header/connection-gradient.inline.svg';
-import ConnectionIcon from 'icons/header/connection.inline.svg';
-import DatabaseGradientIcon from 'icons/header/database-gradient.inline.svg';
-import DatabaseIcon from 'icons/header/database.inline.svg';
-import FlowGradientIcon from 'icons/header/flow-gradient.inline.svg';
-import FlowIcon from 'icons/header/flow.inline.svg';
-import FolderGradientIcon from 'icons/header/folder-gradient.inline.svg';
-import FolderIcon from 'icons/header/folder.inline.svg';
-import GearIcon from 'icons/header/gear.inline.svg';
-import MigrationGradientIcon from 'icons/header/migration-gradient.inline.svg';
-import MigrationIcon from 'icons/header/migration.inline.svg';
-import PeopleIcon from 'icons/header/people.inline.svg';
-import PrivacyGradientIcon from 'icons/header/privacy-gradient.inline.svg';
-import PrivacyIcon from 'icons/header/privacy.inline.svg';
-import SaasIcon from 'icons/header/saas.inline.svg';
-import SecurityIcon from 'icons/header/security.inline.svg';
-import ServerlessIcon from 'icons/header/serverless.inline.svg';
-import StarGradientIcon from 'icons/header/star-gradient.inline.svg';
-import StarIcon from 'icons/header/star.inline.svg';
-
 import LINKS from './links';
 
 export default {
@@ -39,75 +9,63 @@ export default {
           title: 'Database',
           items: [
             {
-              icon: AutoscalingIcon,
-              iconGradient: AutoscalingGradientIcon,
               title: 'Autoscaling',
-              description: 'Automatic instance sizing',
               to: LINKS.autoscaling,
+              description: 'Automatic instance sizing',
             },
             {
-              icon: ConnectionIcon,
-              iconGradient: ConnectionGradientIcon,
-              title: 'Connection pooler',
-              description: 'Thousands of connections',
-              to: LINKS.connectionPooling,
-            },
-            {
-              icon: DatabaseIcon,
-              iconGradient: DatabaseGradientIcon,
-              title: 'Instant PITR',
-              description: 'Copy-on-write storage',
-              to: LINKS.branchRestore,
-            },
-          ],
-          isExtended: true,
-        },
-        {
-          banner: {
-            title: 'What is Neon?',
-            description: 'Serverless Postgres',
-            to: LINKS.whyNeon,
-          },
-        },
-        {
-          title: 'Workflow',
-          items: [
-            {
-              icon: FlowIcon,
-              iconGradient: FlowGradientIcon,
               title: 'Branching',
-              description: 'For ephemeral environments',
-              to: LINKS.flow,
+              to: LINKS.branching,
+              description: 'Faster Postgres workflows',
             },
             {
-              icon: MigrationIcon,
-              iconGradient: MigrationGradientIcon,
-              title: 'Migration tool',
-              description: 'Move data to Neon',
-              to: LINKS.migration,
+              title: 'Bottomless storage',
+              to: LINKS.storage,
+              description: 'With copy-on-write',
+            },
+            {
+              title: 'Instant restores',
+              to: LINKS.branchRestore,
+              description: 'Recover TBs in seconds',
+            },
+            {
+              title: 'Connection pooler',
+              to: LINKS.connectionPooling,
+              description: 'Built-in with pgBouncer',
             },
           ],
-          isExtended: true,
         },
         {
-          title: 'Backend',
+          title: 'Ecosystem',
           items: [
             {
-              icon: ApiIcon,
-              iconGradient: ApiGradientIcon,
-              title: 'Auth',
-              description: 'Authenticate your users',
-              to: LINKS.auth,
+              title: 'Neon API',
+              to: LINKS.api,
+              description: 'Manage infra, billing, quotas',
             },
             {
-              icon: PrivacyIcon,
-              iconGradient: PrivacyGradientIcon,
-              title: 'RLS',
-              description: 'RLS made simple',
-              to: LINKS.rlsAuthorize,
+              title: 'Auth',
+              to: LINKS.auth,
+              description: 'Add authentication',
+            },
+            {
+              title: 'Data API',
+              to: LINKS.dataApi,
+              description: 'PostgREST-compatible',
+            },
+
+            {
+              title: 'Instagres',
+              to: LINKS.instagres,
+              description: 'No-signup flow',
+              isExternal: true,
+            },
+            {
+              title: 'Migration guides',
+              to: LINKS.migrationIntro,
+              description: 'Step-by-step',
             },
           ],
-          isExtended: true,
         },
       ],
     },
@@ -118,29 +76,34 @@ export default {
           title: 'Use cases',
           items: [
             {
-              icon: SaasIcon,
-              title: 'SaaS Apps',
-              to: `${LINKS.useCases}/postgres-for-saas`,
-            },
-            {
-              icon: ServerlessIcon,
-              title: 'Serverless Apps',
+              title: 'Serverless apps',
               to: `${LINKS.useCases}/serverless-apps`,
+              description: 'Autoscale with traffic',
             },
             {
-              icon: DatabaseIcon,
-              title: 'Database per Tenant',
+              title: 'Multi-TB',
+              to: `${LINKS.useCases}/multi-tb`,
+              description: 'Scale & restore instantly',
+            },
+            {
+              title: 'Database per tenant',
               to: `${LINKS.useCases}/database-per-tenant`,
+              description: 'Data isolation without overhead',
             },
             {
-              icon: GearIcon,
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Offer Postgres to your users',
+            },
+            {
               title: 'Dev/Test',
               to: `${LINKS.useCases}/dev-test`,
+              description: 'Production-like environments',
             },
             {
-              icon: AiAgentsIcon,
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
+              description: 'Build full-stack AI agents',
             },
           ],
         },
@@ -148,28 +111,21 @@ export default {
           title: 'For teams',
           items: [
             {
-              icon: BuildingIcon,
-              iconGradient: BuildingGradientIcon,
-              title: 'Enterprise',
-              description: 'Scale & grow',
-              to: LINKS.enterprise,
+              title: 'Startups',
+              to: LINKS.startups,
+              description: 'Build with Neon',
             },
             {
-              icon: StarIcon,
-              iconGradient: StarGradientIcon,
-              title: 'Partners',
-              description: 'Add Neon to your platform',
-              to: LINKS.partners,
+              title: 'Security',
+              to: LINKS.security,
+              description: 'Compliance & privacy',
             },
             {
-              icon: FolderIcon,
-              iconGradient: FolderGradientIcon,
               title: 'Case studies',
-              description: 'Explore customer stories',
               to: LINKS.caseStudies,
+              description: 'Explore customer stories',
             },
           ],
-          isExtended: true,
         },
       ],
     },
@@ -185,31 +141,52 @@ export default {
       text: 'Company',
       sections: [
         {
+          title: 'Company',
           items: [
             {
-              icon: BlogIcon,
               title: 'Blog',
               to: LINKS.blog,
+              description: 'Technical posts & product updates',
             },
             {
-              icon: PeopleIcon,
               title: 'About us',
               to: LINKS.aboutUs,
+              description: 'The company and the mission',
             },
             {
-              icon: CareerIcon,
               title: 'Careers',
               to: LINKS.careers,
+              description: 'Join the team',
             },
             {
-              icon: ChatIcon,
               title: 'Contact',
               to: LINKS.contactSales,
+              description: 'Get in touch',
             },
+          ],
+        },
+        {
+          title: 'Resources',
+          items: [
             {
-              icon: SecurityIcon,
               title: 'Security',
               to: LINKS.security,
+              description: 'Security & compliance portal',
+            },
+            {
+              title: 'Status',
+              to: LINKS.status,
+              description: 'Service status',
+            },
+            {
+              title: 'Changelog',
+              to: LINKS.changelog,
+              description: 'Product updates',
+            },
+            {
+              title: 'Community',
+              to: LINKS.discord,
+              description: 'Connect on Discord',
             },
           ],
         },
@@ -303,13 +280,17 @@ export default {
           to: LINKS.postgresqltutorial,
         },
         {
+          text: 'Startups',
+          to: LINKS.startups,
+        },
+        {
           text: 'Creators',
           to: LINKS.creators,
         },
       ],
     },
     {
-      heading: 'Social',
+      heading: 'Community',
       items: [
         {
           text: 'Discord',
@@ -322,7 +303,7 @@ export default {
           icon: 'github-icon',
         },
         {
-          text: 'x.com',
+          text: 'X.com',
           to: LINKS.twitter,
           icon: 'x-icon',
         },
@@ -344,37 +325,31 @@ export default {
         {
           text: 'CCPA',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certCCPA,
         },
         {
           text: 'GDPR',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certGDPR,
         },
         {
           text: 'ISO 27001',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certISO27001,
         },
         {
           text: 'ISO 27701',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certISO27701,
         },
         {
           text: 'SOC 2',
           description: 'Certified',
-          icon: 'check-icon',
           to: LINKS.certSOC2,
         },
         {
           text: 'HIPAA',
           description: 'Compliant',
-          icon: 'check-icon',
           to: LINKS.certHIPAA,
           links: [
             {

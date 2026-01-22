@@ -6,13 +6,15 @@ redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-02-03T20:41:57.311Z'
+updatedOn: '2025-10-24T12:53:27.785Z'
 ---
+
+<CopyPrompt src="/prompts/django-prompt.md" 
+description="Pre-built prompt for connecting Django applications to Neon"/>
 
 To connect to Neon from a Django application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Configure Django connection settings](#configure-django-connection-settings)
+<Steps>
 
 ## Create a Neon project
 
@@ -39,6 +41,8 @@ In your Django project, navigate to the `DATABASES` section of your `settings.py
 from os import getenv
 from dotenv import load_dotenv
 
+load_dotenv()
+
 # Replace the DATABASES section of your settings.py with this
 DATABASES = {
   'default': {
@@ -64,6 +68,8 @@ You can find all of the connection details listed above by clicking the **Connec
 
 For additional information about Django project settings, see [Django Settings: Databases](https://docs.djangoproject.com/en/4.0/ref/settings#databases), in the Django documentation.
 
+</Steps>
+
 ## Connection issues
 
 - Django uses the `psycopg2` driver as the default adapter for Postgres. If you have an older version of that driver, you may encounter an `Endpoint ID is not specified` error when connecting to Neon. This error occurs if the client library used by your driver does not support the Server Name Indication (SNI) mechanism in TLS, which Neon uses to route incoming connections. The `psycopg2` driver uses the `libpq` client library, which supports SNI as of v14. You can check your `psycopg2` and `libpq` versions by starting a Django shell in your Django project and running the following commands:
@@ -81,7 +87,6 @@ For additional information about Django project settings, see [Django Settings: 
   The version number for `libpq` is presented in a different format, for example, version 14.1 will be shown as 140001. If your `libpq` version is less than version 14, you can either upgrade your `psycopg2` driver to get a newer `libpq` version or use one of the workarounds described in our [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified) documentation. Upgrading your `psycopg2` driver may introduce compatibility issues with your Django or Python version, so you should test your application thoroughly.
 
 - If you encounter an `SSL SYSCALL error: EOF detected` when connecting to the database, this typically occurs because the application is trying to reuse a connection after the Neon compute has been suspended due to inactivity. To resolve this issue, try one of the following options:
-
   - Set your Django [`CONN_MAX_AGE`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-max-age) setting to a value less than or equal to the scale to zero setting configured for your compute. The default is 5 minutes (300 seconds).
   - Enable [`CONN_HEALTH_CHECKS`](https://docs.djangoproject.com/en/5.1/ref/settings/#conn-health-checks) by setting it to `true`. This forces a health check to verify that the connection is alive before executing a query.
 
@@ -102,7 +107,7 @@ For schema migration with Django, see our guide:
 Learn how to use Django with Neon Postgres with this blog post and the accompanying sample application.
 
 <DetailIconCards>
-<a href="https://neon.tech/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
+<a href="/blog/python-django-and-neons-serverless-postgres" description="Learn how to build a Django application with Neon Postgres" icon="import">Blog Post: Using Django with Neon</a>
 
 <a href="https://github.com/evanshortiss/django-neon-quickstart" description="Django with Neon Postgres" icon="github">Django sample application</a>
 </DetailIconCards>

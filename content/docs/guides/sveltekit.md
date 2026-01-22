@@ -2,17 +2,17 @@
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
 enableTableOfContents: true
-updatedOn: '2025-03-05T21:09:38.752Z'
+updatedOn: '2025-10-31T11:07:57.609Z'
 ---
+
+<CopyPrompt src="/prompts/sveltekit-prompt.md"
+description="Pre-built prompt for connecting SvelteKit applications to Neon."/>
 
 Sveltekit is a modern JavaScript framework that compiles your code to tiny, framework-less vanilla JS. This guide explains how to connect Sveltekit with Neon using a secure server-side request.
 
 To create a Neon project and access it from a Sveltekit application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create a Sveltekit project and add dependencies](#create-a-sveltekit-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -54,7 +54,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
@@ -174,6 +174,8 @@ When you run `npm run dev` you can expect to see the following on [localhost:517
 Database Version
 PostgreSQL 17.2 on x86_64-pc-linux-gnu, compiled by gcc (Debian 12.2.0-14) 12.2.0, 64-bit
 ```
+
+</Steps>
 
 ## Source code
 

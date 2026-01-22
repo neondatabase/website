@@ -16,7 +16,7 @@ nextLink:
 
 **Summary**: in this tutorial, you will learn how to retrieve data from a PostgreSQL table from the C\# program.
 
-This tutorial begins where [Deleting data from PostgreSQL using C\#](postgresql-csharp-delete) is left off.
+This tutorial begins where [Deleting data from PostgreSQL using C\#](postgresql-csharp-delete) is left off.
 
 ## How to query data from PostgreSQL using C\#
 
@@ -28,7 +28,7 @@ Second, create a command object `NpgsqlCommand` with a `SELECT` statement from t
 
 Third, execute the `SELECT` statement by calling one of the following methods of the `NpgsqlCommand` object:
 
-- `ExecuteReaderAsync()` – executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query’s result set.
+- `ExecuteReaderAsync()` – executes a query that returns a result set. The method returns a `NpgsqlDataReader` that can be used to read rows from the query's result set.
 - `ExecuteScalarAsync()` – executes a query that returns a scalar value such as a query that uses an [aggregate function](../postgresql-aggregate-functions) to return a [count](../postgresql-aggregate-functions/postgresql-count-function), [sum](../postgresql-aggregate-functions/postgresql-sum-function), [maximum](../postgresql-aggregate-functions/postgresql-max-function), [minimum](../postgresql-aggregate-functions/postgresql-min-function), and [average value](../postgresql-aggregate-functions/postgresql-avg-function).
 
 Finally, iterate over the result set and use the Get\* methods of the NpgsqlDataReader object to retrieve the values of columns in each row.
@@ -83,17 +83,17 @@ catch (NpgsqlException ex)
 
 Output:
 
-```cs
-2       Emma    Smith   [[email protected]](../cdn-cgi/l/email-protection.html)    5/20/2024
-3       Liam    Johnson [[email protected]](../cdn-cgi/l/email-protection.html)  5/20/2024
-4       Olivia  Williams        [[email protected]](../cdn-cgi/l/email-protection.html)       5/20/2024
-5       Noah    Brown   [[email protected]](../cdn-cgi/l/email-protection.html)    5/15/2024
-6       Ava     Jones   [[email protected]](../cdn-cgi/l/email-protection.html)     5/15/2024
-7       William Garcia  [[email protected]](../cdn-cgi/l/email-protection.html)        5/15/2024
-8       Sophia  Miller  [[email protected]](../cdn-cgi/l/email-protection.html) 5/10/2024
-9       James   Davis   [[email protected]](../cdn-cgi/l/email-protection.html)   5/10/2024
-10      Isabella        Rodriguez       [[email protected]](../cdn-cgi/l/email-protection.html)    5/10/2024
-11      Benjamin        Martinez        [[email protected]](../cdn-cgi/l/email-protection.html)     5/10/2024
+```text
+2   Emma     Smith      emma.smith@example.com          5/20/2024
+3   Liam     Johnson    liam.johnson@example.com        5/20/2024
+4   Olivia   Williams   olivia.williams@example.com     5/20/2024
+5   Noah     Brown      noah.brown@example.com          5/15/2024
+6   Ava      Jones      ava.jones@example.com           5/15/2024
+7   William  Garcia     william.garcia@example.com      5/15/2024
+8   Sophia   Miller     sophia.miller@example.com       5/10/2024
+9   James    Davis      james.davis@example.com         5/10/2024
+10  Isabella Rodriguez  isabella.rodriguez@example.com  5/10/2024
+11  Benjamin Martinez   benjamin.martinez@example.com   5/10/2024
 ```
 
 ## Querying data with parameters

@@ -1,0 +1,15 @@
+# Read Path
+
+> This draft document briefly explains Neon's read path architecture, describing how Postgres requests pages from the Pageserver, which uses immutable files to materialize requested page versions and downloads required files from cloud storage when needed.
+
+## Source
+
+- [Read Path HTML](https://neon.com/docs/unused/read-path): The original HTML version of this documentation
+
+## Overview
+
+Postgres &lt;-- Pageserver &lt;-- Cloud storage
+
+When Postgres needs to read a page, it sends a GetPage@LSN request to the Pageserver. The Pageserver uses the set of immutable files to locate the last base image of the page and any WAL records over the base image, and uses them to materialize the requested page version.
+
+If the requested page might not be available in the set of files stored on the Pageserver, the required files are downloaded from cloud storage.

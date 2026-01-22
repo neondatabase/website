@@ -4,7 +4,7 @@ updatedOn: '2024-05-13T13:24:36.612Z'
 
 # Guides
 
-Welcome to Neon guides! This folder contains the source code of the [Neon guides](https://neon.tech/guides/).
+Welcome to Neon guides! This folder contains the source code of the [Neon guides](/guides/).
 
 ## Basic information
 
@@ -37,7 +37,6 @@ You can use fenced code blocks with three backticks (```) on the lines before an
 - enable highlighting single lines, multiple lines, and ranges of code lines
 
   Examples:
-
   - Single line highlight
 
     ````md

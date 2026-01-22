@@ -10,8 +10,8 @@ previousLink:
   title: 'PostgreSQL CONCAT() Function'
   slug: 'postgresql-string-functions/postgresql-concat-function'
 nextLink:
-  title: 'PostgreSQL TRANSLATE() Function'
-  slug: 'postgresql-string-functions/postgresql-translate'
+  title: 'PostgreSQL FORMAT() Function'
+  slug: 'postgresql-string-functions/postgresql-format'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `CONCAT_WS()` function to concatenate strings into a single string, separated by a specified separator.

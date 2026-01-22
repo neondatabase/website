@@ -6,10 +6,13 @@ redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
-updatedOn: '2025-01-31T16:41:54.394Z'
+  - /docs/introduction/point-in-time-restore
+updatedOn: '2025-12-11T15:40:49.866Z'
 ---
 
 With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
+
+You can also rewind your data or create branches from the past to recover from mistakes or analyze historical states.
 
 ## What is a branch?
 
@@ -41,7 +44,7 @@ The following video demonstrates creating a branch in the Neon Console. For step
   <source type="video/mp4" src="/docs/introduction/create_branch.mp4"/>
 </video>
 
-You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the Neon [Postgres Previews Integration](/docs/guides/vercel-previews-integration) to create a branch for each preview deployment.
+You can integrate branching into your development workflows and toolchains using the Neon CLI, API, or GitHub Actions. If you use Vercel, you can use the [Neon-managed Vercel integration](/docs/guides/neon-managed-vercel-integration) to create a branch for each preview deployment.
 
 Refer to the following guides for instructions:
 
@@ -53,7 +56,7 @@ Refer to the following guides for instructions:
 
 <a href="/docs/guides/branching-github-actions" description="Automate branching with Neon's GitHub Actions for branching" icon="split-branch">Branching with GitHub Actions</a>
 
-<a href="/docs/guides/branching-neon-api" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon Postgres Previews Integration</a>
+<a href="/docs/guides/neon-managed-vercel-integration" description="Connect your Vercel project and create a branch for each preview deployment" icon="split-branch">The Neon-Managed Vercel Integration</a>
 
 </DetailIconCards>
 
@@ -71,18 +74,39 @@ Refer to the following guide for instructions.
 
 </DetailIconCards>
 
-### Data recovery
+### Temporary environments
 
-If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its history retention period to recover lost data. You can also create a new point-in-time branch for historical analysis or any other reason.
+Create branches with TTL by [setting an expiration date](/docs/guides/branch-expiration). Perfect for temporary development and testing environments that need automatic deletion.
 
-![data recovery branch](/docs/introduction/branching_data_loss.png)
+Branches with expiration are particularly useful for:
 
-Refer to the following guides for instructions.
+- CI/CD pipeline testing environments
+- Feature development with known lifespans
+- Automated testing scenarios
+- AI-driven development workflows
+
+## Restore and recover data
+
+If you lose data due to an unintended deletion or some other event, you can restore a branch to any point in its restore window to recover lost data. You can also create a new restore branch for historical analysis or any other reason.
+
+![Recover from data loss using restore branching](/docs/introduction/branching_data_loss.png)
+
+### Restore window
+
+Neon retains a history of changes for your branches, enabling data recovery features. The restore window determines how far back you can restore data, with defaults of 6 hours on Free plan and 1 day on paid plans.
+
+Increasing your restore window expands your data recovery options but also increases storage costs, as more history is retained. You can configure it up to 7 days on Launch or 30 days on Scale plans.
+
+For complete information about the restore window, including how to configure it, plan limits, storage implications, and how it works, see [Restore window](/docs/introduction/restore-window).
+
+Learn how to use these data recovery features:
 
 <DetailIconCards>
 
-<a href="/docs/guides/branch-restore" description="Restore a branch to its history with Branch Restore" icon="invert">Branch Restore with Time Travel</a>
+<a href="/docs/guides/branch-restore" description="Restore a branch to an earlier point in its history" icon="invert">Instant restore</a>
 
-<a href="/docs/guides/branching-pitr" description="Learn how to create a branch from historical data" icon="screen">Create a branch from the past</a>
+<a href="/docs/guides/reset-from-parent" description="Reset a branch to match its parent" icon="split-branch">Reset from parent</a>
+
+<a href="/docs/guides/time-travel-assist" description="Run SQL queries against your database's past state" icon="queries">Time Travel queries</a>
 
 </DetailIconCards>

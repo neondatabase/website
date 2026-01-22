@@ -88,7 +88,7 @@ The memberships table has three columns id, member_id, and membership_type:
 
 - The `id` is a serial and primary key column.
 - The `member_id` references the id column of the `members` table. It is a foreign key column.
-- The `membership_type` column has a default value of “free”.
+- The `membership_type` column has a default value of "free".
 
 Third, define a trigger function that inserts a default free membership for every member:
 
@@ -116,7 +116,7 @@ Fifth, [insert a new row](../postgresql-tutorial/postgresql-insert) into the `me
 
 ```sql
 INSERT INTO members(name, email)
-VALUES('John Doe', '[[email protected]](../cdn-cgi/l/email-protection.html)')
+VALUES('John Doe', 'john.doe@example.com')
 RETURNING *;
 ```
 
@@ -125,7 +125,7 @@ Output:
 ```text
  id |   name   |       email
 ----+----------+--------------------
-  1 | John Doe | [[email protected]](../cdn-cgi/l/email-protection.html)
+  1 | John Doe | john.doe@example.com
 (1 row)
 ```
 

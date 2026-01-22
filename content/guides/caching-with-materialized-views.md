@@ -13,12 +13,12 @@ This approach is particularly useful for complex aggregations, expensive joins, 
 
 ## Steps
 
-* Create the orders table
-* Insert sample data into the orders table
-* Create a materialized view
-* Refresh the materialized view
-* Index the materialized view for performance
-* Automate materialized view refreshes
+- Create the orders table
+- Insert sample data into the orders table
+- Create a materialized view
+- Refresh the materialized view
+- Index the materialized view for performance
+- Automate materialized view refreshes
 
 ### Create the Orders Table
 
@@ -76,12 +76,12 @@ SELECT * FROM daily_revenue ORDER BY total_revenue DESC;
 
 The above query returns the following result, which shows the days with the most order revenue.
 
-| #  | order_date  | total_revenue |
-|----|------------|--------------|
-| 1  | 2025-03-17 | 450.75       |
-| 2  | 2025-03-18 | 375.25       |
-| 3  | 2025-03-19 | 250.50       |
-| 4  | 2025-03-20 | 100.00       |
+| #   | order_date | total_revenue |
+| --- | ---------- | ------------- |
+| 1   | 2025-03-17 | 450.75        |
+| 2   | 2025-03-18 | 375.25        |
+| 3   | 2025-03-19 | 250.50        |
+| 4   | 2025-03-20 | 100.00        |
 
 ### Refresh the Materialized View
 

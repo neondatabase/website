@@ -1,6 +1,6 @@
 import LINKS from './links';
 
-export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg';
+export const DEFAULT_IMAGE_PATH = '/images/social-previews/index.jpg?updated=2026-01-15';
 
 export default {
   index: {
@@ -9,16 +9,24 @@ export default {
       'The database you love, on a serverless platform designed to help you build reliable and scalable applications faster.',
     pathname: '',
   },
-  aiChat: {
-    title: 'Neon AI Chat',
-    description: 'AI assistant trained on documentation, help articles, and other content',
-    pathname: LINKS.aiChat,
+  about: {
+    title: 'About Us - Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+    pathname: '',
   },
-  awsIsrael: {
-    title: 'AWS Launches in Israel — Neon',
-    description: 'Neon is delighted to support the 2023 launch of AWS in Israel.',
-    imagePath: '/images/social-previews/aws-israel.jpg',
-    pathname: LINKS.awsIsrael,
+  ai: {
+    title: 'Postgres for AI — Neon',
+    description:
+      'Build AI agents faster with Neon, the serverless Postgres optimized for vectors, scale, and speed.',
+    imagePath: '/images/social-previews/ai.jpg',
+    pathname: LINKS.ai,
+  },
+  aboutUs: {
+    title: 'About Us — Neon',
+    description:
+      'The Neon team consists of PostgreSQL contributors and technologists on a mission to create a cloud-native database service for every developer.',
+    pathname: LINKS.aboutUs,
   },
   blog: {
     title: 'Our Blog — Neon',
@@ -32,20 +40,6 @@ export default {
     description: 'Learn how to use Neon with our guides.',
     pathname: LINKS.guides,
   },
-  branching: {
-    title: 'Instant branching for Postgres — Neon',
-    description:
-      'Neon allows you to instantly branch your data the same way that you branch your code.',
-    imagePath: '/images/social-previews/branching.jpg',
-    pathname: LINKS.branching,
-  },
-  careers: {
-    title: 'Careers — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    imagePath: '/images/social-previews/careers.jpg',
-    pathname: LINKS.careers,
-  },
   caseStudies: {
     title: 'Case Studies — Neon',
     description: 'Discover how other companies are using Neon.',
@@ -58,13 +52,6 @@ export default {
     pathname: LINKS.cli,
     imagePath: '/images/social-previews/cli.jpg',
   },
-  faster: {
-    title: 'Faster is what we help you ship - Neon',
-    description: 'A page dedicated to teams shipping faster experiences faster on Neon.',
-    imagePath: '/images/social-previews/faster.jpg',
-    pathname: LINKS.faster,
-    type: 'article',
-  },
   contactSales: {
     title: 'Contact Sales — Neon',
     description: 'Interested in learning more about our plans and pricing? Contact our sales team.',
@@ -76,26 +63,24 @@ export default {
     pathname: LINKS.demos,
     imagePath: '/images/social-previews/demos.jpg',
   },
-  deploy: {
-    title: 'Neon Deploy — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.deploy,
-    imagePath: '/images/social-previews/deploy.jpg',
-  },
-  developerDays1: {
-    title: 'Neon Developer Days — Neon',
-    description:
-      'Join us virtually on December 6th, 7th, and 8th to learn about Neon and how to build better with Serverless Postgres.',
-    imagePath: '/images/social-previews/developer-days-1.jpg',
-    pathname: LINKS.developerDays1,
-  },
   enterprise: {
     title: 'Neon for Enterprise - Neon',
     description:
       'Switch to Neon for improved scalability, reliability, and engineering efficiency. For developers and AI Agents.',
     pathname: LINKS.enterprise,
     imagePath: '/images/social-previews/enterprise.jpg',
+  },
+  migration: {
+    title: 'Postgres Migration — Neon',
+    description: 'Learn how to migrate your Postgres database to Neon.',
+    pathname: LINKS.migration,
+    imagePath: '/images/social-previews/migration.jpg',
+  },
+  multiTB: {
+    title: 'Neon for Multi-TB Migrations - Neon',
+    description: 'Migrating a multi-TB workload? We can help.',
+    pathname: LINKS.multiTB,
+    imagePath: '/images/social-previews/multi-tb.jpg',
   },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
@@ -120,10 +105,12 @@ export default {
     imagePath: '/images/social-previews/pricing.jpg',
     pathname: LINKS.pricing,
   },
-  thankYou: {
-    title: 'Thank you for subscribing — Neon',
-    description: 'Thank you for subscribing to the Neon newsletter',
-    pathname: LINKS.thankYou,
+  report: {
+    title: 'Impact of Postgres restores survey',
+    description:
+      'We asked 50 developers managing production Postgres about recovery times and their business impact.',
+    pathname: LINKS.report,
+    imagePath: '/images/social-previews/report.jpg',
   },
   variable: {
     title: 'Dynamically scale your Postgres database — Neon',
@@ -139,24 +126,19 @@ export default {
     imagePath: '/images/social-previews/cost-fleets.jpg',
     pathname: LINKS.costFleets,
   },
-  flow: {
+  branching: {
     title: 'Database Branching Workflows - Neon',
-    description: 'Boost development velocity by adding data to your existing GitHub workflows',
-    imagePath: '/images/social-previews/flow.jpg',
-    pathname: LINKS.flow,
+    description:
+      'A new paradigm for managing Postgres. Instantly create, test, preview, and roll back environments with Neon’s powerful database branching.',
+    imagePath: '/images/social-previews/branching.jpg',
+    pathname: LINKS.branching,
     type: 'article',
   },
-  scalableArchitecture: {
-    title: 'Neon Scalable Architecture — Neon',
-    description:
-      'Neon is a distributed team building open-source, cloud-native Postgres. We are a well-funded startup with deep knowledge of Postgres internals and decades of experience building databases.',
-    pathname: LINKS.scalableArchitecture,
-  },
-  stage: {
-    title: 'Neon Deploy Stage — Neon',
-    description:
-      'Join us online on October 30th at 10:00 AM PT to learn how Neon empowers developers to ship faster with Postgres.',
-    pathname: LINKS.stage,
+  platforms: {
+    title: 'Embedded Postgres for Platforms - Neon',
+    description: 'Offer Postgres to your users',
+    pathname: LINKS.platforms,
+    type: 'article',
   },
   security: {
     title: 'Security — Neon',
@@ -165,23 +147,11 @@ export default {
     imagePath: '/images/social-previews/security.jpg',
     pathname: LINKS.security,
   },
-  generateTicket: {
-    title: 'Grab the ticket for Neon Deploy',
+  startups: {
+    title: 'Neon Startup Program',
     description:
-      "Generate a unique ticket image with your GitHub profile and participate in Neon's right after the conference.",
-    pathname: LINKS.generateTicket,
-  },
-  ticket({ name, login: githubHandle }) {
-    const userName = name || githubHandle;
-
-    return {
-      title: `${userName}'s ticket for Neon Deploy - Neon`,
-      description: `Join ${userName} virtually at Deploy on October 30th to learn how Neon empowers developers to ship faster with Postgres.`,
-    };
-  },
-  '404-ticket': {
-    title: 'Ticket Not Found - Neon',
-    imagePath: '/images/social-previews/no-name-ticket.jpg',
+      'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
+    pathname: LINKS.startups,
   },
   error: {
     title: 'Page Is Broken — Neon',

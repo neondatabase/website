@@ -1,11 +1,11 @@
 import Bento from 'components/pages/enterprise/bento';
 import CaseStudies from 'components/pages/enterprise/case-studies';
-import Faq from 'components/pages/enterprise/faq';
 import Features from 'components/pages/enterprise/features';
 import Hero from 'components/pages/enterprise/hero';
 import HowNeonHelps from 'components/pages/enterprise/how-neon-helps';
 import Usage from 'components/pages/enterprise/usage';
 import CTA from 'components/shared/cta';
+import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
 import TestimonialNew from 'components/shared/testimonial-new';
@@ -157,7 +157,7 @@ const caseStudies = [
   },
   {
     title: '10x less capacity',
-    description: 'vs Aurora Global.',
+    description: 'vs other serverless databases.',
     logo: {
       src: dispatchLogo,
       width: 104,
@@ -253,7 +253,7 @@ const faqItems = [
   },
   {
     question: 'Is Neon compliant?',
-    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>.`,
+    answer: `Yes. Neon adheres to SOC 2, ISO 27001, ISO 27701 standards and complies with GDPR, CCPA, and HIPAA. <a href="/docs/security/compliance">Read more.</a>`,
   },
   {
     question: 'How secure is Neon’s platform?',
@@ -276,10 +276,6 @@ const faqItems = [
     answer: `Yes, we provide annual contracts for Enterprise clients accounting for higher resource limits and dedicated requirements. If you’re interested, <a href="/contact-sales">contact us.</a>`,
   },
   {
-    question: 'Can Neon help with migrations?',
-    answer: `Absolutely. Our expert team assists Enterprise clients throughout the migration process. <a href="/migration-assistance">Tell us here</a> if you’re considering migrating to Neon.`,
-  },
-  {
     question: 'What can I expect during the sales process?',
     answer: `Our sales process is designed to be smooth and flexible: <ol><li><b>Reach Out:</b> Fill out our contact form.</li><li><b>Information Gathering:</b> We’ll email you to learn more about your workload and requirements.</li><li><b>Call with Solutions Team:</b> Discuss timelines, configurations, and request demos or follow-ups.</li><li><b>Pricing Proposal:</b> Based on your inputs, we’ll provide a pricing proposal, often with a proof-of-concept migration plan.</li><li><b>Additional Details (if needed):</b> For complex setups, we may request more information, like itemized bills or specifics about your current environment.</li><li><b>Stakeholder Support:</b> We assist with security reviews, documentation, and answering any stakeholder questions.</li></ol> We’re always happy to adjust the process to fit your unique needs. <a href="/contact-sales">Reach out to us</a> and tell us about your use case: we're here to help.`,
   },
@@ -292,9 +288,11 @@ const EnterprisePage = () => (
     <TestimonialNew
       className="mt-[118px] xl:mt-[80px] lg:mt-[76px]"
       quote="Neon worked out of the box, handling hundreds of Lambdas without any of the connection issues we saw in Aurora v2. On top of that, it costs us 1/6 of what we were paying with AWS."
-      name="Cody Jenkins"
-      position="Head of Engineering at Invenco"
-      avatar={authorCodyJenkins}
+      author={{
+        name: 'Cody Jenkins',
+        position: 'Head of Engineering at Invenco',
+        avatar: authorCodyJenkins,
+      }}
       isPriority
     />
     <Features title="Hundreds of Enterprises are switching to Neon. Here’s why" items={features} />
@@ -304,17 +302,21 @@ const EnterprisePage = () => (
     <TestimonialNew
       className="mt-[126px] xl:mt-[106px] lg:mt-[70px] md:mt-[58px]"
       quote="Time to launch is crucial for us: when we tried Neon and saw that spinning up a new ephemeral environment takes seconds, we were blown away."
-      name="Alex Co"
-      position="Head of Platform Engineering at Mindvalley"
-      avatar={authorAlexCo}
+      author={{
+        name: 'Alex Co',
+        position: 'Head of Platform Engineering at Mindvalley',
+        avatar: authorAlexCo,
+      }}
     />
     <Bento cards={bentoCards} />
     <TestimonialNew
       className="mt-[130px] xl:mt-[106px] lg:mt-[48px] md:mt-[62px]"
       quote="With Neon’s preview branches, we can catch issues early and fix them before they hit production."
-      name="Robert Chandler"
-      position="CTO at Wordware.ai"
-      avatar={authorRobertChandler}
+      author={{
+        name: 'Robert Chandler',
+        position: 'CTO at Wordware.ai',
+        avatar: authorRobertChandler,
+      }}
     />
     <Faq items={faqItems} />
     <CTA

@@ -3,19 +3,25 @@ title: Use Neon Postgres with Railway
 subtitle: Connect a Neon Postgres database to your Node application deployed with
   Railway
 enableTableOfContents: true
-updatedOn: '2025-02-03T20:41:57.334Z'
+updatedOn: '2025-12-15T16:14:56.282Z'
 ---
 
-[Railway](https://railway.app) is an application deployment platform that allows users to develop web applications locally, provision infrastructure and then deploy to the cloud. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
+[Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
 
 This guide shows how to deploy a simple Node.js application connected to a Neon Postgres database on Railway.
+
+## Quick start alternative
+
+If you want to get started quickly with Next.js and Neon Postgres on Railway, you can use the [Next.js with Neon Postgres template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon). This template uses [Instagres](/docs/guides/instagres) to provision a Neon database instantly without signup, perfect for rapid prototyping. The database is claimable for 72 hours, giving you time to develop before claiming it to your Neon account.
+
+For a more detailed walkthrough using Node.js/Express with manual Neon setup, continue with this guide below.
 
 ## Prerequisites
 
 To follow along with this guide, you will need:
 
-- A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A Railway account. If you do not have one, sign up at [Railway](https://railway.app) to get started.
+- A Neon account. If you do not have one, sign up at [Neon](https://neon.com). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
+- A Railway account. If you do not have one, sign up at [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) to get started.
 - A GitHub account. Railway integrates with Gitub for continuous deployment. So, you'd need a GitHub account to upload your application code.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
@@ -54,7 +60,7 @@ To follow along with this guide, you will need:
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.
@@ -167,7 +173,8 @@ You can find the source code for the application described in this guide on GitH
 
 ## Resources
 
-- [Railway platform](https://railway.app/)
-- [Neon](https://neon.tech)
+- [Railway platform](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon)
+- [Next.js with Neon Postgres Railway template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon)
+- [Instagres](/docs/guides/instagres)
 
 <NeedHelp/>

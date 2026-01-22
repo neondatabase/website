@@ -4,22 +4,15 @@ import PropTypes from 'prop-types';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/chat-options/discord.inline.svg';
-import GithubIcon from 'icons/chat-options/github.inline.svg';
-import NeonIcon from 'icons/chat-options/neon.inline.svg';
+import GitHubIcon from 'icons/chat-options/github.inline.svg';
 import VSCodeIcon from 'icons/chat-options/vscode.inline.svg';
 
 const ITEMS = [
   {
-    title: 'Docs',
-    icon: NeonIcon,
-    link: LINKS.aiChat,
-  },
-  {
     title: 'GitHub Copilot',
-    icon: GithubIcon,
+    icon: GitHubIcon,
     link: LINKS.githubCopilot,
     isExternal: true,
-    className: 'xl:order-1',
   },
   {
     title: 'VS Code',
@@ -37,7 +30,6 @@ const ITEMS = [
 
 const themeClassNames = {
   sidebar: {
-    block: 'mt-[60px] max-w-[184px]',
     title: 'mb-4 text-sm font-semibold leading-tight tracking-extra-tight',
     list: 'flex flex-wrap gap-2',
     item: 'block',

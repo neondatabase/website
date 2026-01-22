@@ -14,10 +14,6 @@ nextLink:
   slug: 'postgresql-triggers/postgresql-trigger-when-condition'
 ---
 
-<Admonition type="note">
-Neon Postgres currently does not support event triggers. For more information, see [Event triggers](/docs/reference/compatibility#event-triggers) in our _Postgres compatibility_ guide.
-</Admonition>
-
 **Summary**: in this tutorial, you will learn about PostgreSQL event triggers and how to use the `CREATE EVENT TRIGGER` statement to define a new event trigger.
 
 ## Introduction to the PostgreSQL event trigger
@@ -35,7 +31,7 @@ PostgreSQL supports the following events:
 - `table_rewrite`
 - `sql_drop`
 
-The `ddl_command_start` events before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For complete commands that the event trigger supports, read more on the [event trigger firing matrix](https://www.postgresql.org/docs/current/event-trigger-matrix.html).
+The `ddl_command_start` events before PostgreSQL executes the `CREATE`, `ALTER`, `DROP`, `GRANT`, `REVOKE`, `SECURITY` `LABEL`, and `COMMENT` statements. For additional information, see the [overview of event trigger behavior](https://www.postgresql.org/docs/current/event-trigger-definition.html).
 
 Please note that the `ddl_command_start` does not occur for shared objects like databases, tablespaces, and roles.
 

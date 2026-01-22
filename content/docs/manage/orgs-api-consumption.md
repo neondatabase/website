@@ -1,16 +1,15 @@
 ---
 title: Query organization usage metrics with the Neon API
 enableTableOfContents: true
-updatedOn: '2024-12-18T18:37:32.360Z'
+updatedOn: '2025-09-05T12:26:43.315Z'
 ---
 
-You can use the Neon API to retrieve three types of consumption metrics for your organization:
+You can use the Neon API to retrieve two types of consumption history metrics for your organization:
 
-| Metric                                                                                           | Description                                                                              | Plan Availability |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- | ----------------- |
-| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                                     | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity        | Scale plan only   |
-| [Project-level](https://api-docs.neon.tech/reference/listprojectsconsumption) (billing period)   | Consumption metrics for each project in your Organization for the current billing period | All plans         |
+| Metric                                                                                           | Description                                                                       | Plan Availability |
+| ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------- | ----------------- |
+| [Account-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)            | Total usage across all projects in your organization                              | Scale             |
+| [Project-level](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) (granular) | Project-level metrics available at hourly, daily, or monthly level of granularity | Scale             |
 
 ## Finding organizations for consumption queries
 
@@ -31,8 +30,20 @@ The response includes details about each organization, including the `org_id` yo
     {
       "id": "org-morning-bread-81040908",
       "name": "Morning Bread Organization",
-      "created_at": "2022-11-23T17:42:25Z",
-      "updated_at": "2022-12-04T02:39:25Z"
+      "handle": "morning-bread-organization-org-morning-bread-81040908",
+      "plan": "free_v2",
+      "created_at": "2025-04-30T14:43:00Z",
+      "managed_by": "console",
+      "updated_at": "2025-04-30T14:46:22Z"
+    },
+    {
+      "id": "org-super-grass-41324851",
+      "name": "Super Org Inc",
+      "handle": "super-org-inc-org-super-grass-41324851",
+      "plan": "scale_v2",
+      "created_at": "2025-06-02T16:56:18Z",
+      "managed_by": "console",
+      "updated_at": "2025-06-02T16:56:18Z"
     }
   ]
 }
@@ -55,16 +66,20 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-The response will provide aggregated hourly consumption metrics, including active time, compute time, written data, and synthetic storage size, for each hour between June 30 and July 2.
+The response will provide aggregated hourly consumption metrics, including `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes`, for each hour between June 30 and July 2.
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json
 {
   "periods": [
     {
       "period_id": "random-period-abcdef",
+      "period_plan": "scale",
+      "period_start": "2024-06-01T00:00:00Z",
       "consumption": [
         {
           "timeframe_start": "2024-06-30T15:00:00Z",
@@ -128,7 +143,9 @@ curl --request GET \
 ```
 
 <details>
-<summary>Response</summary>
+<summary>Response body</summary>
+
+For attribute definitions, find the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
 
 ```json shouldWrap
 {
@@ -138,6 +155,8 @@ curl --request GET \
       "periods": [
         {
           "period_id": "random-period-abcdef",
+          "period_plan": "scale",
+          "period_start": "2024-06-30T00:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-06-30T00:00:00Z",
@@ -160,6 +179,8 @@ curl --request GET \
         },
         {
           "period_id": "random-period-ghijkl",
+          "period_plan": "scale",
+          "period_start": "2024-07-01T09:00:00Z",
           "consumption": [
             {
               "timeframe_start": "2024-07-01T09:00:00Z",
@@ -193,4 +214,13 @@ curl --request GET \
      --header 'authorization: Bearer $ORG_API_KEY'
 ```
 
-See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/partner-consumption-limits#retrieving-metrics-for-all-projects) page in our Partner Guide.
+See more details about using this endpoint on the [Manage billing with consumption limits](/docs/guides/consumption-limits#retrieving-metrics-for-all-projects) page in our Platform integration guide.
+
+## Metric definitions
+
+- **active_time_seconds** — The number of seconds the project’s computes have been active during the period.
+- **compute_time_seconds** — The number of CPU seconds used by the project's computes, including computes that have been deleted; for example:
+  - A compute that uses 1 CPU for 1 second is equal to `compute_time=1`.
+  - A compute that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
+- **written_data_bytes** — The total amount of data written to all of a project's branches.
+- **synthetic_storage_size_bytes** — The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.

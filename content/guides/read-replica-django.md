@@ -7,7 +7,7 @@ createdAt: '2024-10-20T00:00:00.000Z'
 updatedOn: '2024-10-20T00:00:00.000Z'
 ---
 
-[Neon read replicas](https://neon.tech/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
+[Neon read replicas](/docs/introduction/read-replicas) are independent read-only compute instances that can significantly enhance database performance and scalability. By distributing read operations across these replicas, you can reduce latency and improve overall system responsiveness, especially for read-heavy applications. A standout feature of Neon is that adding a read replica doesn't require extra storage. This makes it a cost-effective way to scale your database, suitable for businesses of all sizes.
 
 This guide explains how to integrate Neon read replicas into your Django application. You'll learn how to configure your Django database router to direct read operations to these replicas, optimizing your database performance and overall application speed.
 
@@ -15,7 +15,7 @@ This guide explains how to integrate Neon read replicas into your Django applica
 
 Before you begin, make sure you have:
 
-- A Neon account and project. If you don't have one, sign up for a Neon account and create a project by following the [Getting started guide](https://neon.tech/docs/get-started-with-neon/signing-up).
+- A Neon account and project. If you don't have one, sign up for a Neon account and create a project by following the [Getting started guide](/docs/get-started/signing-up).
 - Basic knowledge of [Django](https://docs.djangoproject.com/en) and Python.
 - [Python](https://www.python.org/downloads/) installed on your local machine.
 
@@ -268,9 +268,9 @@ To create a read replica:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
+5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Suspend compute after inactivity** setting, which is the amount of idle time after which your read replica compute is automatically suspended. The default setting is 5 minutes.
    <Admonition type="note">
-   The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
+   The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](/docs/introduction/billing).
    </Admonition>
 6. When you finish making selections, click **Create**.
 

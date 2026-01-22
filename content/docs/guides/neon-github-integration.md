@@ -5,7 +5,7 @@ subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app
-updatedOn: '2024-12-03T21:31:16.325Z'
+updatedOn: '2025-09-04T13:53:03.415Z'
 ---
 
 The Neon GitHub integration connects your Neon project to a GitHub repository, streamlining database development within your overall application development workflow. For instance, you can configure GitHub Actions to create a database branch for each pull request and automatically apply schema changes to that database branch. To help you get started, we provide a [sample GitHub Actions workflow](#add-the-github-actions-workflow-to-your-repository).
@@ -26,7 +26,7 @@ This guide walks you through the following steps:
 
 ## Prerequisites
 
-- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started-with-neon/signing-up).
+- You have a Neon account and project. If not, see [Sign up for a Neon account](/docs/get-started/signing-up).
 - You have a GitHub account with an application repository that you want to connect to your Neon project.
 
 ## Install the GitHub App and connect your Neon project
@@ -152,10 +152,13 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 ```
 
+<Admonition type="tip">
+The step outputs from the `create_neon_branch` action will only be available within the same job (`create_neon_branch`). Therefore, write all test code, migrations, and related steps in that job itself. The outputs are marked as secrets. If you need separate jobs, refer to [GitHub's documentation on workflow commands](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-commands#workflow) for patterns on how to handle this.
+</Admonition>
+
 To add the workflow to your repository:
 
 1. In your repository, create a workflow file in the `.github/workflows` directory; for example, create a file named `neon_workflow.yml`.
-
    - If the `.github/workflows` directory already exists, add the file.
    - If your repository doesn't have a `.github/workflows` directory, add the file `.github/workflows/neon-workflow.yml`. This creates the `.github` and `workflows` directories and the `neon-workflow.yml` file.
 
@@ -224,7 +227,7 @@ The Neon GitHub integration configures a `NEON_API_KEY` secret and a `PROJECT_ID
 
 <DetailIconCards>
 
-<a href="https://neon.tech/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
+<a href="/guides/neon-github-actions-authomated-branching" description="Learn how to automate database branching for your application using Neon and GitHub Actions" icon="github">Automated Database Branching with GitHub Actions</a>
 
 <a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
 
@@ -328,8 +331,8 @@ To remove the GitHub integration:
 
 - [Creating GitHub Actions](https://docs.github.com/en/actions/creating-actions)
 - [Quickstart for GitHub Actions](https://docs.github.com/en/actions/quickstart)
-- [Database Branching Workflows](https://neon.tech/flow)
-- [Database branching workflow guide for developers](https://neon.tech/blog/database-branching-workflows-a-guide-for-developers)
+- [Database Branching Workflows](/branching)
+- [Database branching workflow guide for developers](/blog/database-branching-workflows-a-guide-for-developers)
 
 ## Feedback and future improvements
 

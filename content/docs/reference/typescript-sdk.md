@@ -1,7 +1,9 @@
 ---
-title: TypeScript SDK for the Neon API
+title: TypeScript SDK (Neon API)
+subtitle: Programmatically manage Neon projects, branches, databases, and other platform
+  resources
 enableTableOfContents: true
-updatedOn: '2025-02-28T12:08:12.273Z'
+updatedOn: '2025-12-11T19:49:37.745Z'
 ---
 
 <InfoBlock>
@@ -33,11 +35,15 @@ The Neon TypeScript SDK allows you to manage:
 - [**Projects:**](/docs/manage/projects) Create, list, update, and delete Neon projects.
 - [**Branches:**](/docs/manage/branches) Manage branches, including creation, deletion, restoration, and schema management.
 - [**Databases:**](/docs/manage/databases) Create, list, update, and delete databases within your branches.
-- [**Compute Endpoints:**](/docs/manage/endpoints) Manage compute endpoints, including creation, scaling, suspension, and restart.
+- [**Compute Endpoints:**](/docs/manage/computes) Manage compute endpoints, including creation, scaling, suspension, and restart.
 - [**Roles:**](/docs/manage/roles) Create, list, update, and delete Postgres roles within your branches.
 - [**Operations:**](/docs/manage/operations) Monitor and track the status of asynchronous operations performed on your Neon resources.
 - [**Organizations:**](/docs/manage/orgs-api) Manage organization settings, API keys, and members (for Neon organizational accounts).
-- [**Consumption Metrics:**](/docs/guides/partner-consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
+- [**Consumption Metrics:**](/docs/guides/consumption-metrics) Retrieve usage metrics for your account and projects to monitor resource consumption.
+
+<Admonition type="tip" title="AI Rules available">
+Working with AI coding assistants? Check out our [AI rules for the Neon TypeScript SDK](/docs/ai/ai-rules-neon-typescript-sdk) to help your AI assistant generate better code when managing Neon resources programmatically.
+</Admonition>
 
 ## Quick Start
 
@@ -78,7 +84,7 @@ For this quick start, we'll set the API key as an environment variable:
 export NEON_API_KEY="YOUR_API_KEY_FROM_NEON_CONSOLE"
 ```
 
-Replace "YOUR_API_KEY_FROM_NEON_CONSOLE" with the API key you copied from the Neon Console.
+Replace `YOUR_API_KEY_FROM_NEON_CONSOLE` with the API key you copied from the Neon Console.
 
 ## Examples
 
@@ -190,8 +196,8 @@ createNeonProject('test-project').catch((error) => {
 
 #### Key points:
 
-- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](https://neon.tech/docs/introduction/regions).
-- The `pg_version` parameter specifies the major version of Postgres to use in the project. The currently supported versions are `14`, `15`, `16`, and `17`.
+- The `region_id` parameter specifies the cloud region where the project will be hosted. You can find the list of supported regions at [Neon Regions](/docs/introduction/regions).
+- The `pg_version` parameter specifies the major supported version of Postgres to use in the project.
 
 ### Create a Branch
 
@@ -235,9 +241,10 @@ createNeonBranch('your-project-id', 'dev-1').catch((error) => {
 
 #### Key points:
 
+- `name` (optional): The branch name. If not provided, defaults to the branch ID. If specified, must be unique within the project and can be up to 256 characters. Cannot be empty or consist only of whitespace. See [Branch naming requirements](/docs/manage/branches#branch-naming-requirements) for details.
 - `parent_id` (optional): Specifies the branch to branch from. If omitted, the project's default branch is used.
 - `EndpointType`: Enum to define endpoint type (`ReadWrite` or `ReadOnly`).
-- Compute Unit (CU) customization (optional): Control compute size using `autoscaling_limit_min_cu` and `autoscaling_limit_max_cu`. Refer to [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration) for available options.
+- Compute Unit (CU) customization (optional): Control compute size using `autoscaling_limit_min_cu` and `autoscaling_limit_max_cu`. Refer to [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration) for available options.
 
 ### List Branches
 

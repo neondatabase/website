@@ -3,7 +3,7 @@ title: Replicate data from Supabase
 subtitle: Learn how to replicate data from Supabase to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-03-05T21:09:38.752Z'
+updatedOn: '2025-08-02T10:33:29.284Z'
 ---
 
 This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NO
 
 After creating a publication on the source database, you need to create a subscription on your Neon destination database.
 
-1. Use the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your Neon database.
+1. Use the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), `psql`, or another SQL client to connect to your Neon database.
 
 2. Create the subscription using the `CREATE SUBSCRIPTION` statement. Use the **direct connection string** you obtained from Supabase in the previous steps.
 
@@ -126,7 +126,6 @@ After creating a publication on the source database, you need to create a subscr
    ```
 
    Replace the following placeholders in the statement:
-
    - `my_subscription`: A name you chose for the subscription.
    - `postgresql://<supabase_connection_string>`: The **direct connection string** for your Supabase database, obtained with the IPv4 add-on enabled.
    - `my_publication`: The name of the publication you created on the Supabase database.

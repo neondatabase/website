@@ -1,19 +1,15 @@
 import 'styles/globals.css';
-
-import dynamic from 'next/dynamic';
+import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
-import { ActiveLabelProvider } from 'components/pages/doc/code-tabs/CodeTabsContext';
+import LINKS from 'constants/links';
+import { CodeTabsProvider } from 'contexts/code-tabs-context';
+import { TabsProvider } from 'contexts/tabs-context';
+import { TopbarProvider } from 'contexts/topbar-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
-import PostHogProvider from './posthog-provider';
-import ThemeProvider from './provider';
-import SessionProvider from './session-provider';
-
-const PostHogPageView = dynamic(() => import('./posthog-pageview'), {
-  ssr: false,
-});
+import ThemeProvider from './theme-provider';
 
 export const preferredRegion = 'edge';
 
@@ -21,29 +17,27 @@ export const viewport = {
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
-  themeColor: '#000000',
 };
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
-      <link rel="preconnect" href="https://console.neon.tech" />
+      <link rel="preconnect" href={LINKS.console} />
     </head>
     <body>
-      <SessionProvider>
-        <PostHogProvider>
-          <PostHogPageView />
-          <ThemeProvider>
-            <HomepageVisitProvider>
-              <ActiveLabelProvider>{children}</ActiveLabelProvider>
-            </HomepageVisitProvider>
-          </ThemeProvider>
-        </PostHogProvider>
-      </SessionProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <TopbarProvider>
+            <TabsProvider>
+              <CodeTabsProvider>{children}</CodeTabsProvider>
+            </TabsProvider>
+          </TopbarProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );

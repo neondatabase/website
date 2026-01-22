@@ -1,5 +1,0 @@
-# Manage database access
-
-Learn how to manage user access to databases in your Neon project
-
-Each Neon project is created with a Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.

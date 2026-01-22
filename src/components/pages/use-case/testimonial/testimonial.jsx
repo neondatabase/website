@@ -5,18 +5,28 @@ import { PropTypes } from 'prop-types';
 import BgDecor from 'components/pages/use-case/bg-decor';
 import Link from 'components/shared/link';
 
-const Testimonial = ({ className, text, author, url }) => (
+const Testimonial = ({ simpleMode = false, className, text, author, url }) => (
   <figure
     className={clsx(
-      'not-prose relative mt-7 w-full rounded-lg bg-[#0D0E10] p-14 pb-8 pr-11',
-      'before:absolute before:left-6 before:top-6 before:size-16 before:bg-[url("/images/pages/variable-load/blockquote.svg")] before:bg-contain before:bg-no-repeat',
-      'xl:mt-6 lg:mt-5 lg:p-12 lg:pb-7 lg:pr-10 sm:mt-4 sm:p-6 sm:pb-7',
-      'lg:before:left-[22px] lg:before:top-[22px] lg:before:size-14 sm:before:hidden',
+      'not-prose relative mt-7 w-full',
+      !simpleMode && [
+        'rounded-lg bg-[#0D0E10] p-14 pb-8 pr-11',
+        'before:absolute before:left-6 before:top-6 before:size-16 before:bg-[url("/images/pages/variable-load/blockquote.svg")] before:bg-contain before:bg-no-repeat',
+        'xl:mt-6 lg:mt-5 lg:p-12 lg:pb-7 lg:pr-10 sm:mt-4 sm:p-6 sm:pb-7',
+        'lg:before:left-[22px] lg:before:top-[22px] lg:before:size-14 sm:before:hidden',
+      ],
       className
     )}
   >
     <div className="relative z-10">
-      <blockquote className="text-lg leading-snug tracking-tighter">{text}</blockquote>
+      <blockquote
+        className={clsx(
+          simpleMode ? 'text-2xl md:text-lg' : 'text-lg',
+          'leading-snug tracking-tighter'
+        )}
+      >
+        {simpleMode ? `"${text}"` : text}
+      </blockquote>
       <div className="mt-5 flex items-center justify-between sm:mt-2.5 sm:flex-col sm:items-start sm:gap-4">
         {author && (
           <div className="flex items-center gap-3 sm:gap-2">
@@ -54,11 +64,12 @@ const Testimonial = ({ className, text, author, url }) => (
         )}
       </div>
     </div>
-    <BgDecor hasBorder />
+    {!simpleMode && <BgDecor hasBorder />}
   </figure>
 );
 
 Testimonial.propTypes = {
+  simpleMode: PropTypes.bool,
   className: PropTypes.string,
   text: PropTypes.string.isRequired,
   author: PropTypes.shape({

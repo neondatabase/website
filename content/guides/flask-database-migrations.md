@@ -136,7 +136,6 @@ This sets up a basic Flask application with SQLAlchemy and Flask-Migrate, and de
 5. **SQLAlchemy and Flask-Migrate Setup**: We initialize SQLAlchemy and Flask-Migrate with our Flask app. This sets up our ORM and migration capabilities.
 
 6. **User Model**: We define a `User` model that represents the structure of our `user` table in the database. It includes:
-
    - An `id` field as the primary key
    - A `name` field that's required and has a maximum length of 100 characters
    - An `email` field that's required, unique, and has a maximum length of 120 characters
@@ -390,7 +389,7 @@ This workflow does the following:
 Using Neon's branching feature in your CI pipeline offers several advantages:
 
 - You can test your migrations and schema changes in a separate branch without affecting your production or staging databases.
-- Catch migration issues before they reach your main branch or production environment.
+- Catch migration issues before they reach your production branch or production environment.
 - Ensures that your database schema changes are always tested alongside your application code changes.
 - Allows you to run your full test suite against the updated schema without risk to existing data.
 

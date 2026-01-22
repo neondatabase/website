@@ -7,11 +7,11 @@ ogImage: ''
 updatedOn: '2024-01-29T01:38:44+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL SPLIT_PART() Function'
-  slug: 'postgresql-string-functions/postgresql-split_part'
+  title: 'PostgreSQL REVERSE() Function'
+  slug: 'postgresql-string-functions/postgresql-reverse'
 nextLink:
-  title: 'PostgreSQL REGEXP_REPLACE() Function'
-  slug: 'postgresql-string-functions/regexp_replace'
+  title: 'PostgreSQL RIGHT() Function'
+  slug: 'postgresql-string-functions/postgresql-right'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `REPLACE()` function to replace a substring with a new one.
@@ -129,9 +129,9 @@ Output:
 ```
  id |           title           |                              url
 ----+---------------------------+---------------------------------------------------------------
-  1 | PostgreSQL Tutorial       | https://neon.tech/postgresql
-  2 | PL/pgSQL                  | https://neon.tech/postgresql/postgresql-plpgsql/
-  3 | PostgreSQL Administration+| https://neon.tech/postgresql/postgresql-administration/
+  1 | PostgreSQL Tutorial       | https://neon.com/postgresql
+  2 | PL/pgSQL                  | https://neon.com/postgresql/postgresql-plpgsql/
+  3 | PostgreSQL Administration+| https://neon.com/postgresql/postgresql-administration/
     |                           |
 (3 rows)
 ```

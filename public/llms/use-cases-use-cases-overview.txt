@@ -1,0 +1,13 @@
+# Neon use cases
+
+> The document outlines various use cases for Neon, detailing how it can be utilized for scalable, serverless PostgreSQL databases in different application scenarios.
+
+## Source
+
+- [Neon use cases HTML](https://neon.com/docs/use-cases/use-cases-overview): The original HTML version of this documentation
+
+- [SaaS apps](https://neon.com/use-cases/postgres-for-saas): Build faster with Neon using autoscaling, database branching, and serverless operations
+- [Serverless apps](https://neon.com/use-cases/serverless-apps): Autoscale with traffic using real-time compute scaling and usage-based pricing
+- [Database-per-tenant](https://neon.com/use-cases/database-per-tenant): Data isolation without overhead using instant provisioning and scale-to-zero
+- [Dev/Test](https://neon.com/use-cases/dev-test): Production-like environments with database branching and cost efficiency
+- [AI agents](https://neon.com/use-cases/ai-agents): Deploy Postgres via AI agents with instant provisioning and simple APIs

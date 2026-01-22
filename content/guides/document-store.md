@@ -191,7 +191,7 @@ WHERE (data -> 'author' ->> 'age') ~ '^\d+$'
 
 ## Update and modify JSONB data
 
-You can also update individual properties within your JSONB document without overwriting the entire document using the [`jsonb_set()` function](https://neon.tech/postgresql/postgresql-json-functions/postgresql-jsonb_set).
+You can also update individual properties within your JSONB document without overwriting the entire document using the [`jsonb_set()` function](/postgresql/postgresql-json-functions/postgresql-jsonb_set).
 For example, the following code updates the `author.age` property to 35 for all documents whose `author.name` property is "John Smith".
 
 ```sql

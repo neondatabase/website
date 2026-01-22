@@ -1,0 +1,11 @@
+# Control Plane
+
+> This is a draft document about the Control Plane concept in Neon. The content is currently under development.
+
+## Source
+
+- [Control Plane HTML](https://neon.com/docs/unused/control-plane): The original HTML version of this documentation
+
+## Overview
+
+This document is currently a draft and does not contain published content. It will provide information about the Control Plane in Neon when completed.
