@@ -1,5 +1,5 @@
 ---
-title: TypeScript SDK (Neon API)
+title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
 enableTableOfContents: true

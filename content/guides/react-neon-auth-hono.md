@@ -739,7 +739,7 @@ The complete source code for this example is available on GitHub:
 - [Neon Auth JWT Plugin](/docs/auth/guides/plugins/jwt)
 - [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
-- [Neon JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk)
 - [Connect a Hono application to Neon](/docs/guides/hono)
 - [Getting started with the HONC (Hono, Drizzle ORM, Neon, and Cloudflare) stack](/guides/honc)
 

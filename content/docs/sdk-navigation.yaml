@@ -1,5 +1,5 @@
 reference/javascript-sdk:
-  title: Neon JavaScript SDK
+  title: Neon Auth & Data API TypeScript SDKs
   sections:
     - section: Getting Started
       items:

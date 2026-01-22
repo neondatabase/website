@@ -239,4 +239,4 @@ function Dashboard() {
 ## Next Steps
 
 - See [React with Neon Auth UI](/docs/auth/quick-start/react-router-components) for a complete example
-- Check the [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk) for programmatic auth methods
+- Check the [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) for programmatic auth methods
