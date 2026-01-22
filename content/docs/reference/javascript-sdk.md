@@ -3,7 +3,7 @@ title: Neon Auth & Data API TypeScript SDKs
 subtitle: Reference documentation for building applications with Neon Auth and Data API
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-01-21T23:23:42.095Z'
+updatedOn: '2026-01-22T15:48:50.618Z'
 ---
 
 The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.

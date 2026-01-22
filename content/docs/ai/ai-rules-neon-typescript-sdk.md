@@ -2,7 +2,7 @@
 title: 'AI Rules: Neon API TypeScript SDK'
 subtitle: Context rules for AI tools to use the Neon API TypeScript SDK
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.264Z'
+updatedOn: '2026-01-22T15:48:50.613Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">
