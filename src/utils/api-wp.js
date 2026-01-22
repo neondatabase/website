@@ -1,3 +1,4 @@
+import isEmpty from 'lodash.isempty';
 import { cache } from 'react';
 
 import { BLOG_POSTS_PER_PAGE, BLOG_POSTS_FOR_PREVIEW, EXTRA_CATEGORIES } from 'constants/blog';
@@ -299,7 +300,7 @@ const getWpPostBySlug = cache(async (slug) => {
         }
         ...wpPostSeo
       }
-      posts(first: 4, where: { orderby: { field: DATE, order: DESC } }) {
+      posts(first: 6, where: { orderby: { field: DATE, order: DESC } }) {
         nodes {
           categories {
             nodes {
@@ -341,7 +342,9 @@ const getWpPostBySlug = cache(async (slug) => {
 
   const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes.filter((post) => post.slug !== slug).slice(0, 3);
+  const sortedPosts = data?.posts?.nodes
+    .filter((post) => post.slug !== slug || isEmpty(post.pageBlogPost?.largeCover))
+    .slice(0, 3);
 
   return {
     post: data?.post,

@@ -57,46 +57,50 @@ const Aside = ({ className, title, slug, authors, posts }) => (
           </div>
         </>
       )}
-      <h3
-        className={clsx(
-          'text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden',
-          {
-            'mt-16': Array.isArray(authors) && authors.length > 0,
-          }
-        )}
-      >
-        More articles
-      </h3>
-      <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
-        {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
-          <li key={slug}>
-            <Link className="group block rounded-sm" to={`${LINKS.blog}/${slug}`}>
-              <article className="flex items-center space-x-3">
-                <div className="flex-grow">
-                  <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-green-45">
-                    {title}
-                  </h1>
-                  <span className="mt-1.5 text-sm leading-none tracking-extra-tight text-gray-new-80">
-                    {authors[0]?.author?.title}
-                  </span>
-                </div>
-                {largeCover?.mediaItemUrl ? (
-                  <Image
-                    className="h-[59px] w-[104px] shrink-0 rounded-md"
-                    src={largeCover?.mediaItemUrl}
-                    width={104}
-                    height={59}
-                    quality={85}
-                    alt={largeCover?.altText || title}
-                  />
-                ) : (
-                  <span className="h-16 w-[104px] shrink-0 rounded-md bg-gray-new-30" />
-                )}
-              </article>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {posts.length > 0 && (
+        <>
+          <h3
+            className={clsx(
+              'text-[12px] font-semibold uppercase leading-none -tracking-extra-tight text-blue-80 lg:hidden',
+              {
+                'mt-16': Array.isArray(authors) && authors.length > 0,
+              }
+            )}
+          >
+            More articles
+          </h3>
+          <ul className="mt-5 flex flex-col space-y-6 lg:hidden">
+            {posts.map(({ title, slug, pageBlogPost: { authors, largeCover } }) => (
+              <li key={slug}>
+                <Link className="group block rounded-sm" to={`${LINKS.blog}/${slug}`}>
+                  <article className="flex items-center space-x-3">
+                    <div className="flex-grow">
+                      <h1 className="line-clamp-2 font-title font-medium leading-tight tracking-extra-tight transition-colors duration-200 group-hover:text-green-45">
+                        {title}
+                      </h1>
+                      <span className="mt-1.5 text-sm leading-none tracking-extra-tight text-gray-new-80">
+                        {authors[0]?.author?.title}
+                      </span>
+                    </div>
+                    {largeCover?.mediaItemUrl ? (
+                      <Image
+                        className="h-[59px] w-[104px] shrink-0 rounded-md"
+                        src={largeCover?.mediaItemUrl}
+                        width={104}
+                        height={59}
+                        quality={85}
+                        alt={largeCover?.altText || title}
+                      />
+                    ) : (
+                      <span className="h-16 w-[104px] shrink-0 rounded-md bg-gray-new-30" />
+                    )}
+                  </article>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       <SocialShare className="mt-16 lg:hidden" title={title} slug={slug} withTopBorder />
       <ChangelogForm className="mt-10" isSidebar />
     </div>
