@@ -30,19 +30,39 @@ The **apply worker process** is crucial for logical replication on the subscribe
 
 To maintain transactional consistency, the apply worker applies `INSERT`, `UPDATE`, `DELETE`, and `TRUNCATE` operations in the same commit order as on the publisher.
 
-During subscription setup, the apply worker may start `tablesync worker` processes for initial table synchronization. The `max_logical_replication_workers` setting limits the total number of apply and tablesync workers.
+During subscription setup, the apply worker may start `tablesync worker` processes for initial table synchronization. The `max_logical_replication_workers` setting limits the total number of apply and tablesync workers allowed to run simultaneously.
 
 ### The Tablesync worker process
 
 The **Tablesync worker process** handles initial data synchronization when creating a new subscription. Started by the apply worker, it manages copying existing data. For each table in a new subscription, the apply worker starts a tablesync worker.
 
-The tablesync worker uses the efficient `COPY` command to transfer all data from the publisher to the subscriber. After copying, it requests the publisher to replicate changes during the copy process, fully synchronizing the subscriber table. Multiple tablesync workers can run in parallel to speed up synchronization, especially with many tables. `max_sync_workers_per_subscription` controls parallelism for a single subscription.
+The tablesync worker performs two critical tasks:
+
+1. It creates a **temporary replication slot** on the publisher to ensure it gets a consistent snapshot of the data.
+2. It uses the efficient `COPY` command to transfer all data from the publisher to the subscriber.
+
+After copying, it must "catch up" by requesting the publisher to replicate changes that occurred _during_ the copy process. Once fully synchronized, the tablesync worker hands off control to the main apply worker and exits.
+
+Crucially, multiple tablesync workers can run in parallel, but they are limited by the `max_sync_workers_per_subscription` configuration (default is usually 2). This limit is a common source of confusion when monitoring initialization.
 
 ## Workflow of data changes in logical replication
 
-Let's walk through the typical workflow of data changes in Postgres logical replication. This sequence illustrates how data modifications on the publisher propagate to the subscriber, ensuring consistent replication.
+Let's walk through the typical workflow of data changes in Postgres logical replication. This sequence illustrates how data modifications on the publisher propagate to the subscriber, ensuring consistent replication. It consists of two main phases: initial synchronization and continuous replication.
 
-### Process from data change on publisher to application on subscriber
+### Initial data synchronization
+
+When a new subscription is created (and `copy_data` is enabled, the default), the system must first synchronize existing data using **tablesync workers**:
+
+1.  **Start of apply worker**: The apply worker starts when the subscription is created.
+2.  **Launch of tablesync workers**: The apply worker launches tablesync workers up to the limit set by `max_sync_workers_per_subscription`. Each worker is assigned a table to synchronize.
+3.  **Creation of temporary replication slots**: Each tablesync worker creates a replication slot on the publisher. This slot ensures a consistent snapshot of the table data.
+4.  **Data copy**: The tablesync worker uses the `COPY` command to efficiently transfer the table's data to the subscriber.
+5.  **Synchronization**: After copying, the tablesync worker synchronizes. It consumes the replication stream from the walsender to catch up on changes that occurred during the data copy. This ensures the subscriber table is consistent with the publisher at the point of synchronization.
+6.  **Handover**: Once synchronized, the tablesync worker finishes, drops the temporary replication slot, and hands control back to the apply worker for ongoing replication of that table.
+
+### Continuous replication flow
+
+Once initial synchronization is complete, data modifications propagate continuously from publisher to subscriber:
 
 1.  **Data modification on the publisher**: A transaction on the publisher database modifies data in a published table. This can be `INSERT`, `UPDATE`, `DELETE`, or `TRUNCATE`.
 
@@ -64,15 +84,7 @@ Let's walk through the typical workflow of data changes in Postgres logical repl
     - The apply worker maps these operations to tables in the subscriber database.
     - Critically, the apply worker applies changes in the _exact commit order_ from the publisher, maintaining transactional consistency.
 
-6.  **Initial data synchronization using tablesync workers**:
-    - When a new subscription is created (and `copy_data` is enabled, the default), the apply worker starts.
-    - The apply worker then launches tablesync workers, typically one per table in the subscription.
-    - Each tablesync worker creates a replication slot on the publisher. This slot ensures a consistent snapshot of the table data.
-    - The tablesync worker uses the `COPY` command to efficiently transfer the table's data to the subscriber.
-    - After copying, the tablesync worker synchronizes. It consumes the replication stream from the walsender to catch up on changes that occurred during the data copy. This ensures the subscriber table is consistent with the publisher at the point of synchronization.
-    - Once synchronized, the tablesync worker finishes, and the apply worker handles ongoing replication.
-
-This workflow ensures reliable and consistent replication of publisher data modifications to the subscriber, maintaining transactional integrity. Tablesync workers handle initial synchronization, and walsender and apply worker processes manage continuous, real-time replication of incremental changes.
+This combined workflow ensures reliable and consistent replication, handling both the initial data load and real-time updates. Tablesync workers handle initial synchronization, and walsender and apply worker processes manage continuous, real-time replication of incremental changes.
 
 ## Monitoring replication status with pg_subscription_rel
 
@@ -98,42 +110,38 @@ To use `pg_subscription_rel` for monitoring, understanding its key columns is es
 
 ### Understanding the `srsubstate` codes
 
-The `srsubstate` column uses single-character codes for different stages in a table's replication lifecycle. These sequential states clearly show replication progress for each table. Here’s a breakdown of each code:
+The `srsubstate` column uses single-character codes for different stages in a table's replication lifecycle.
 
-- **`i` - Initialize:** A table enters **"Initialize"** when added to a subscription. The subscription is aware of the table and preparing for replication. No data synchronization or active replication has started yet.
+- **`i` - Initialize:** A table enters **"Initialize"** when added to a subscription. It is waiting for a `tablesync worker` to become available. If all worker slots are full, tables will remain in this state.
 
-- **`d` - Data is being copied:** It means initial data synchronization is active. A `tablesync worker` is copying table data from publisher to subscriber using `COPY`.
+- **`d` - Data is being copied:** Initial data synchronization is active. A `tablesync worker` has been assigned and is copying table data from publisher to subscriber using `COPY`.
 
-- **`f` - Finished table copy:** This state confirms the `tablesync worker` completed the initial data copy. However, the table might not be fully synchronized yet, as changes could have occurred on the publisher during the copy.
+- **`f` - Finished table copy (Catch-up phase):** The `COPY` command is done, but the table is not yet consistent. The `tablesync worker` is now actively consuming WAL from the publisher to "catch up" on changes that occurred while the copy was running. **This is where high-volume tables often spend the most time.**
 
-- **`s` - Synchronized:** This state is a crucial intermediary state. The subscriber has caught up with all publisher changes committed _up to the point_ of initial data copy. The subscriber's table reflects a consistent snapshot of the publisher's table, including transactions during the copy.
+- **`s` - Synchronized (Waiting for handover):** The `tablesync worker` has fully caught up with the publisher. It has marked the table as safe and is waiting for the main `apply worker` to acknowledge this state and take over control.
 
-- **`r` - Ready (Normal replication):** This is the desired, stable state in LR, the table is actively and continuously replicating changes from the publisher. The `apply worker` receives and applies these changes to the subscriber ongoing.
-
-The typical lifecycle and transitions of these states are visualized in the diagram below:
-
-![pg_subscription_rel different substates](/docs/guides/pg_subscription_rel.png)
+- **`r` - Ready (Normal replication):** The `tablesync worker` has exited. The main `apply worker` is now responsible for this table and applies transactions as part of the main replication stream.
 
 **Typical state progression:**
 
-| State code | Description                        |
-| ---------- | ---------------------------------- |
-| `i`        | Table added to subscription.       |
-| `d`        | Initial data copy in progress.     |
-| `f`        | Data copy complete.                |
-| `s`        | Table synchronized with publisher. |
-| `r`        | Normal replication active.         |
+| State code | Description                                                               |
+| :--------- | :------------------------------------------------------------------------ |
+| `i`        | Table is queued for sync.                                                 |
+| `d`        | Initial data copy (`COPY` command) in progress.                           |
+| `f`        | **Catch-up phase:** applying changes that happened during copy.           |
+| `s`        | **Handover phase:** Sync complete, waiting for Apply worker to take over. |
+| `r`        | Normal replication active (Apply worker in charge).                       |
 
 States progress sequentially from 'i' to 'r' (`i` -> `d` -> `f` -> `s` -> `r`), with `'r'` (Ready) being the desired state for normal ongoing replication.
 
 Understanding state progression is key to interpreting replication status and quickly identifying issues. Unexpected or prolonged states can signal potential problems in the replication setup. We'll delve into troubleshooting based on these states later in the [guide](#troubleshooting-logical-replication-issues).
 
 <Admonition type="note" title="Still Confused between 's' and 'r' states?">
-It's easy to confuse 's' (Synchronized) and 'r' (Ready) states. Here's a simple distinction:
+It's easy to confuse 's' (Synchronized) and 'r' (Ready) states. Here's the technical distinction:
 
-The 's' (Synchronized) state is transitional. It means the initial data copy is complete, and the subscriber has caught up to a specific point in time on the publisher. It's the end of the initial catch-up phase.
+**'s' (Synchronized)**: The **Tablesync Worker** has successfully finished copying and catching up. It is effectively "done" and is waiting for the main Apply Worker to acknowledge the work and take over. (If a table stays here, it's usually waiting for a lock).
 
-The 'r' (Ready) state indicates full, continuous replication mode. Changes stream from the publisher and are applied to the subscriber in real-time, going forward. In 'r' state, `srsublsn` updates continuously, reflecting the stream of latest changes.
+**'r' (Ready)**: The Tablesync Worker has exited. The **Apply Worker** (the main supervisor) is now fully responsible for this table and applies transactions as part of the main real-time replication stream.
 </Admonition>
 
 ## Monitoring replication status using SQL queries
@@ -156,31 +164,34 @@ This query returns the OID and name of all subscriptions in the database. Use th
 
 ## Troubleshooting logical replication issues
 
-Once you have successfully monitored the replication status using `pg_subscription_rel`, you can use the information to troubleshoot common logical replication issues
+Once you have successfully monitored the replication status using `pg_subscription_rel`, you can use the information to troubleshoot common logical replication issues. The `srsubstate` column is particularly useful for diagnosing problems based on the current state of each table in the subscription.
 
 ![Troubleshooting in pg_subscription_rel](/docs/guides/pg_subscription_rel_troubleshoot.png)
 
-**Troubleshooting steps Based on `srsubstate`:**
+**Troubleshooting steps based on `srsubstate`:**
 
 - **Table stuck in 'i' (initialize) state:**
-  - **Check publisher connection details:** Verify connection details (hostname, port, credentials) to the publisher are correct in the subscription definition.
-  - **Verify replication privileges:** Ensure the subscription user has necessary replication privileges on the publisher database to connect and stream changes.
-  - **Examine publication inclusion:** On the publisher, verify the table is correctly included in the publication the subscription uses. Forgetting to add tables to publications is common.
+  - **Check Worker Availability (Most Common):** Postgres limits how many tables can sync at once via `max_sync_workers_per_subscription` (default 2). If you subscribe to 100 tables, 2 will be in 'd' and 98 will be stuck in 'i' waiting their turn. This is normal queuing behavior.
+  - **Check Connection/Privileges:** If _no_ tables are moving to 'd', verify the subscription user has privileges and can connect to the publisher.
 
 - **Table stuck in 'd' (data copy) state:**
   - **Investigate network connectivity:** Check network connection between subscriber and publisher. Look for latency or instability slowing down data copy.
   - **Monitor resource utilization:** Check CPU, memory, disk I/O on both subscriber and publisher. Resource bottlenecks prolong data copy.
-  - **Assess table size:** Large tables take longer to copy. A prolonged 'd' state may be normal for very large tables.
+  - **Assess table size:** Large tables take longer to copy. A prolonged 'd' state may be normal for very large tables.Ensure the network isn't dropping connections and that `statement_timeout` on the publisher isn't killing the `COPY` command.
 
-- **Table stuck in 'f' (finished copy) state:**
-  - **Review subscriber logs for copy errors:** Examine subscriber Postgres logs for errors during or after data copy. Logs may detail why the process isn't proceeding beyond 'f'.
-  - **Check schema compatibility:** Carefully verify schema compatibility between publisher and subscriber tables. Data type, constraint, or column definition differences can cause issues after data copy, preventing transition to 'synchronized'.
+- **Table stuck in 'f' (finished copy / catch-up) state:**
+  - **High Write Volume (The "Infinite Loop"):** This is the catch-up phase. If the publisher is writing to this table faster than the tablesync worker can apply the changes, the worker will never catch up to the current timestamp. It will remain in 'f' indefinitely. You may need to temporarily stop writes to this table on the publisher to allow the subscriber to catch up.
+  - **Constraint Violations:** Transactions occurring during the copy phase are applied here. If a row was inserted on the publisher but conflicts with a constraint on the subscriber, the sync will fail here.
 
-- 's' state: Expected during initial setup, indicating synchronization and expected transition to 'r'.
-- 'r' state: Normal, healthy state. Ongoing replication is active. It is the desired state for continuous replication.
+- **Table stuck in 's' (synchronized) state:**
+  - **Apply Worker Lag:** The table remains in 's' until the main apply worker's replay position reaches or exceeds the LSN at which the tablesync worker finished. If there are many transactions being applied to other tables, this handover is delayed. Check `pg_stat_subscription` to see the apply worker's current position.
 
-In addition to monitoring the `pg_subscription_rel` catalog and its states, it is also essential to monitor the overall resource utilization on both the publisher and subscriber. This includes monitoring disk space usage (especially on the publisher for WAL retention), CPU utilization, and memory consumption. High resource usage can often indicate performance bottlenecks in the replication process which need to be addressed.
+- **Not reaching 'r' (ready) state:**
+  - If a table cycles between 'd' and 'f' repeatedly, check the Postgres logs on the subscriber. It is likely hitting an error (like a unique constraint violation or data type mismatch), crashing, and restarting the sync process from scratch.
+
+In addition to monitoring the `pg_subscription_rel` catalog, ensure you monitor disk space on the publisher. High resource usage can often indicate performance bottlenecks in the replication process which need to be addressed. If a subscription is broken or paused, the replication slot will prevent WAL cleanup, potentially filling the disk on the publisher.
 
 ## References
 
 - [pg_subscription_rel on PostgreSQL documentation](https://www.postgresql.org/docs/current/catalog-pg-subscription-rel.html)
+- [Logical Replication Configuration Settings](https://www.postgresql.org/docs/current/runtime-config-replication.html#RUNTIME-CONFIG-REPLICATION-SUBSCRIBER)
