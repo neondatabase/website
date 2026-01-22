@@ -1,46 +1,39 @@
 ---
-title: 'Tooling and automation'
-subtitle: 'Automate branch management with Neon API, CLI, and CI/CD integrations for efficient workflows'
-updatedOn: '2025-07-08T12:47:21.296Z'
----
+title: 'Tooling and resources to implement branching'
+subtitle: 'A collection of tools and resources to implement branching workflows, snapshot-based promotion, automation via APIs, and integrations with GitHub, Vercel, and agents'
+updatedOn: '2026-01-22T00:00:00.000Z'
+--- 
 
-## Neon API
+## Conceptual blog posts
 
-Neon offers the most feature-complete [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on the market for developers and agents that need to create, manage, and scale thousands of branches programmatically. An example of what you can do via the Neon API:
+- [Practical Guide to Database Branching](https://neon.com/blog/practical-guide-to-database-branching) \- a walkthrough of common workflows and patterns.  
+- [Promoting Postgres Changes Safely From Multiple Environments to Production](https://neon.com/blog/promoting-postgres-changes-safely-production) \- your guide to the snapshot-based promotion workflow.  
+- [Instantly Copy TB-Size Datasets: The Magic of Copy-On-Write](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write) \- an introduction to the storage architecture that enables fast branches and snapshots.  
+- [I Dropped a Table in Production, Now What?](https://neon.com/blog/recover-production-database) \- a recovery workflow based on branches and PITR
 
-- Create a branch per PR, test run, or user/agent session
-- Reset or delete branches
-- Tracking compute time, data written, and storage usage at the branch level.
-- Connect compute endpoints on demand
-- Combine it with Neon’s hosted MCP server to manage branches in real time
+## Branching & snapshot docs
 
-```
-POST /projects/{project_id}/branches
-{
-  "branch": {
-    "name": "preview-pr-142",
-    "parent_id": "main"
-  }
-}
-```
+- [Branching overview](https://neon.com/docs/introduction/branching?utm_source=chatgpt.com) \- on branching, time travel, and restore windows.
+- [Get started with branching](https://neon.com/docs/guides/branching-intro?utm_source=chatgpt.com) \- how to build branching workflows via the API, CLI, GitHub Actions, and Vercel integrations.
+- [Anonymized branches](https://api-docs.neon.tech/reference/createprojectbranchanonymized?utm_source=chatgpt.com) \-  If you have PII, use this API endpoint for creating anonymized branches with masking rules.
 
-## Neon CLI
+## Automation & integration
 
-The [Neon CLI](/docs/reference/neon-cli) lets you create, reset, and delete branches from the terminal or in scripts. deal for integrating into Git hooks, dev onboarding scripts, or CI setup steps.
+- [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) \- use the API to automate branching, snapshots, restores, credentials, and more.  
+- [Vercel integration](https://neon.com/docs/guides/vercel-overview) \- create Neon branches for every Vercel preview environment.
+- [Github integration](https://neon.com/docs/guides/neon-github-integration) \- Link your Neon project to a repository and create branches via Github Actions
 
-```
-# Create a new branch from main
-neon branch create preview-pr-101 --parent main
+## Agents & platform builders
 
-# Reset a branch to match its parent
-neon branch reset dev-bob
+- [Database versioning with snapshots](https://neon.com/docs/ai/ai-database-versioning) \- how codegen platforms implement database version control using snapshots and preview branches  
+- [Agent Plan](https://neon.com/use-cases/ai-agents) \- get special pricing and feature support
 
-# Delete a branch
-neon branch delete preview-pr-101
-```
+## Other useful docs
 
-## CI/CD
+- [Branch expiration](https://neon.com/docs/guides/branch-expiration) \- automatically expire and clean up old branches.
+- [Neon Auth with branchable identity](https://neon.com/docs/auth/overview) \- work with a branchable auth state, enabling full-stack preview testing including users and sessions.
 
-- [GitHub integration](/docs/guides/neon-github-integration). Automatically creates, resets, and deletes Neon branches in response to pull request actions using ready‑made GitHub Actions workflows.
-- [Vercel integration](/docs/guides/vercel-managed-integration). Every Vercel preview deploy triggers a matching Neon branch, with DATABASE_URL injected automatically and seamless cleanup when previews end.
-- Terraform [Community]. Manage branches with IaC.
+## Try it yourself
+
+- [Start branching on the Free Plan](https://neon.com/signup) \- create a free Neon account and build your first branching workflows.
+- [Join the community](https://neon.com/discord) \- ask us questions and get help from other Neon users on Discord.

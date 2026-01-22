@@ -1,18 +1,30 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
+import Link from 'components/shared/link';
+
 import Feedback from './feedback';
 import LastUpdatedDate from './last-updated-date';
 
-const DocFooter = ({ updatedOn, slug, className }) => (
+const DocFooter = ({ updatedOn, slug, className, withFeedback = true, tocLink = null }) => (
   <div
     className={clsx(
       'mt-10 flex items-center justify-between border-t border-gray-new-90 pt-5 dark:border-gray-new-20 sm:flex-col sm:space-y-4',
       className
     )}
   >
-    {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
-    <Feedback slug={slug} />
+    {tocLink && (
+      <Link
+        className="text-sm leading-[1.375em] text-gray-new-80 transition-colors duration-200 hover:text-white"
+        to={tocLink}
+      >
+        Start from the beginning
+      </Link>
+    )}
+    <div className="flex items-center gap-6 sm:flex-col sm:items-start sm:gap-4">
+      {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
+      {withFeedback && <Feedback slug={slug} />}
+    </div>
   </div>
 );
 
@@ -20,6 +32,8 @@ DocFooter.propTypes = {
   updatedOn: PropTypes.string,
   slug: PropTypes.string.isRequired,
   className: PropTypes.string,
+  withFeedback: PropTypes.bool,
+  tocLink: PropTypes.string,
 };
 
 export default DocFooter;

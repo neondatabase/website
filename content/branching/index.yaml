@@ -1,45 +1,32 @@
-- section: The problem
-  id: the-problem
+- section: Starting point
+  id: starting-point
   items:
-    - title: Traditional database workflows are broken
+    - title: "The problem: the stack has evolved, databases haven't"
       slug: introduction
-    - title: Rethinking the database
+    - title: Rethinking the database DX with branches
       slug: rethinking-the-database
-- section: Core concepts
-  id: core-concepts
+- section: Building blocks
+  id: building-blocks
   items:
-    - title: Projects
-      slug: projects
-    - title: Branches
-      slug: branches
-    - title: Hierarchies
-      slug: hierarchies
-- section: Architectures
-  id: architectures
+    - title: Foundational concepts for the branching DX
+      slug: foundational-concepts
+- section: Popular workflows
+  id: popular-workflows
   items:
-    - title: Identifying your use case
-      slug: identifying-use-case
-    - title: Production lives on Neon
-      slug: production-on-neon
-    - title: You're using Neon for dev/test
-      slug: neon-for-dev-test
-- section: Workflows
-  id: workflows
-  items:
-    - title: One branch per developer
-      slug: branch-per-developer
-    - title: One branch per preview
-      slug: branch-per-preview
-    - title: One branch per test run
-      slug: branch-per-test-run
-    - title: Ephemeral environments
-      slug: ephemeral-environments
-    - title: Branching for agents
+    - title: Branching workflows for production & staging
+      slug: production-staging-workflows
+    - title: Branching workflows for development
+      slug: branching-workflows-for-development
+    - title: Branching workflows for CI and previews
+      slug: ci-preview-workflows
+    - title: Branching workflows for recovery
+      slug: recovery-workflows
+    - title: Branching workflows for agents & platforms
       slug: branching-for-agents
-- section: Additional resources
-  id: additional-resources
+    - title: Advanced branching workflows
+      slug: advanced-branching-workflows
+- section: Next steps
+  id: next-steps
   items:
-    - title: Tooling and automation
+    - title: Tooling and resources to implement branching
       slug: tooling-and-automation
-    - title: Resources and next steps
-      slug: resources-and-next-steps

@@ -58,20 +58,30 @@ const BranchingPage = ({ params }) => {
 
   return (
     <>
-      <Breadcrumbs title={title} />
+      <Breadcrumbs />
       <article>
         <h1 className="t-5xl text-balance font-semibold leading-tight tracking-tight">{title}</h1>
         <Content
-          className="prose-flow mt-12 text-lg lg:mt-10 md:mt-8 md:text-base "
+          className="prose-flow mt-12 text-lg text-gray-new-98 lg:mt-10 md:mt-8 md:text-base [&_h4]:!font-medium [&_p]:opacity-90"
           content={content}
         />
       </article>
-      <NavigationLinks
-        previousLink={previousLink}
-        nextLink={nextLink}
-        basePath={BRANCHING_BASE_PATH}
+      <div className="mt-12 lg:mt-10 md:mt-8">
+        <p className="text-2xl font-medium leading-none tracking-tight">Keep reading</p>
+        <NavigationLinks
+          className="mt-7 lg:mt-6 md:mt-5"
+          previousLink={previousLink}
+          nextLink={nextLink}
+          basePath={BRANCHING_BASE_PATH}
+          showLabel={false}
+        />
+      </div>
+      <DocFooter
+        className="mt-0"
+        updatedOn={updatedOn}
+        withFeedback={false}
+        tocLink={LINKS.branching}
       />
-      <DocFooter className="mt-0" updatedOn={updatedOn} slug={`${LINKS.branching}/${slug}`} />
     </>
   );
 };
