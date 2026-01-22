@@ -22,7 +22,7 @@ const PROGRAMS = [
   {
     type: 'For open source on Neon',
     title: 'Open-Source Program',
-    description: 'Discounted usage and funding for referring users.',
+    description: 'Credits and funding for building on Neon.',
     url: '/programs/open-source',
   },
 ];
