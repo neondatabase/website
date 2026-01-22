@@ -1,7 +1,7 @@
 ---
 title: 'Branching workflows for agents & platforms'
-subtitle: 'Enable safe AI agent workflows with database checkpoints, rollbacks, and time travel capabilities'
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: 'Learn how to use branching in your agents or platforms. Manage databases per user or app and build versioning with snapshots that keep code and database state in sync'
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
 Full-stack agentic platforms, codegen tools, CMS builders, and internal developer platforms need to provision databases per user, per app, or per version. Branching and snapshots are the primitives Neon users rely on to make this practical.

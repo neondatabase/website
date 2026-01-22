@@ -1,7 +1,7 @@
 ---
 title: 'Rethinking the database DX with branches'
-subtitle: "Discover how Neon's branching model transforms database workflows with instant, ephemeral environments"
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: "Rethink the database developer experience: database branching replaces instance copying with fast, isolated environments built on copy-on-write storage"
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
 ## From single state to versioned environments

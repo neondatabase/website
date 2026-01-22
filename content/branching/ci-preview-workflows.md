@@ -1,7 +1,7 @@
 ---
 title: 'Branching workflows for CI and previews'
-subtitle: ''
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: 'Build branching workflows for CI and previews: spin up isolated branches per preview or test run, automate cleanup, and avoid shared test databases'
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
 Once teams are comfortable creating branches on demand, the next step is to let automation take over. Branching works particularly well for short-lived environments that exist only for validation, previews, or test execution.These branches are created automatically, used briefly, and then discarded.

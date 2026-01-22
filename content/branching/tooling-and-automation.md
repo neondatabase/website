@@ -1,7 +1,7 @@
 ---
 title: 'Tooling and resources to implement branching'
-subtitle: 'Automate branch management with Neon API, CLI, and CI/CD integrations for efficient workflows'
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: 'A collection of tools and resources to implement branching workflows, snapshot-based promotion, automation via APIs, and integrations with GitHub, Vercel, and agents'
+updatedOn: '2026-01-22T00:00:00.000Z'
 --- 
 
 ## Conceptual blog posts

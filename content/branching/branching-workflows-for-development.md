@@ -1,7 +1,7 @@
 ---
 title: 'Branching workflows for development'
-subtitle: 'Eliminate developer conflicts with isolated database environments for each team member'
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: 'Build branching workflows for development: create one branch per developer, shared dev branches, or per-PR databases for safe, isolated, production-like testing'
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
 Development environments are where branching tends to click for most teams. Instead of sharing a single mutable database, each workflow gives developers isolation by default while keeping environments closely aligned with production.

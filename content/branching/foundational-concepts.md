@@ -1,7 +1,7 @@
 ---
 title: 'Foundational concepts for the branching DX'
-subtitle: ''
-updatedOn: '2026-01-16T00:00:00.000Z'
+subtitle: 'Learn how Neon projects, branches, and hierarchies work: fast copy-on-write branching, isolated compute per branch, and instant restore with snapshots'
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
 ## Projects
