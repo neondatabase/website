@@ -10,10 +10,10 @@ In Neon, a [project](https://neon.com/docs/manage/projects) is the top-level uni
 
 A project includes:
 
-- A default branch (typically `main`)  
-- Any number of additional branches  
-- One or more compute endpoints (used to run queries)  
-- Role-based access controls  
+- A default branch (typically `main`)
+- Any number of additional branches
+- One or more compute endpoints (used to run queries)
+- Role-based access controls
 - Storage, usage, and billing settings
 
 All branches in a project share the same underlying storage backend. This shared storage is what makes Neon’s branching fast, efficient, and scalable \- branches don’t duplicate data unless they diverge.
@@ -24,9 +24,9 @@ A [branch](https://neon.com/docs/introduction/branching) in Neon is a lightweigh
 
 Key properties of Neon branches:
 
-- **Instant creation.** Branches spin up in seconds, [even for large databases](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write). There’s no exporting, importing, or replication setup.  
-- **Copy-on-write storage.** [A branch shares its parent’s data until changes are made](https://neon.com/blog/get-page-at-lsn). Only the diffs are written, which keeps branching fast and cost-efficient.  
-- **Short-lived by design.** Branches are meant to be created freely, used for a specific purpose, and deleted when they’re no longer needed.  
+- **Instant creation.** Branches spin up in seconds, [even for large databases](https://neon.com/blog/instantly-copy-tb-size-datasets-the-magic-of-copy-on-write). There’s no exporting, importing, or replication setup.
+- **Copy-on-write storage.** [A branch shares its parent’s data until changes are made](https://neon.com/blog/get-page-at-lsn). Only the diffs are written, which keeps branching fast and cost-efficient.
+- **Short-lived by design.** Branches are meant to be created freely, used for a specific purpose, and deleted when they’re no longer needed.
 - **Resettable.** Any branch can be instantly [reset](https://neon.com/docs/guides/reset-from-parent) to match its parent.
 
 ## Hierarchies
@@ -43,8 +43,8 @@ In most projects, the root branch becomes the source of truth. It might represen
 
 Each branch in Neon gets its own independent [compute endpoint](https://neon.com/docs/manage/computes). That means:
 
-- No noisy neighbors between environments  
-- No shared connection pools  
+- No noisy neighbors between environments
+- No shared connection pools
 - No risk of a test or migration impacting production performance
 
 Compute [scales independently per branch based on load](https://neon.com/docs/introduction/autoscaling). When a branch is idle, Neon automatically scales its compute [down to zero](https://neon.com/docs/introduction/scale-to-zero). When traffic returns, it resumes automatically.
@@ -55,9 +55,9 @@ Compute [scales independently per branch based on load](https://neon.com/docs/in
 
 Because Neon’s storage is versioned, every branch preserves [history](https://neon.com/docs/introduction/restore-window). This allows you to:
 
-- Create a new branch from any previous point in time  
-- Recover dropped tables or deleted data  
-- Inspect historical states without restoring backups  
+- Create a new branch from any previous point in time
+- Recover dropped tables or deleted data
+- Inspect historical states without restoring backups
 - Debug migrations by comparing before and after states
 
 Snapshots build on this same foundation. A snapshot captures the full logical state of a branch (schema and data) at a precise moment, and can be restored instantly to another branch in the same project.

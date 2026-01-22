@@ -14,8 +14,8 @@ Teams often combine more than one of the patterns below, depending on team size 
 
 This is one of the most common workflows. Each engineer gets their own development branch, typically created directly from production, or from an anonymized version of production if PII is involved. This gives you:
 
-- Isolation: no stepping on each other’s changes  
-- Production-like data: the branch starts from real state  
+- Isolation: no stepping on each other’s changes
+- Production-like data: the branch starts from real state
 - Low overhead: no storage duplication, and compute can be very small
 
 Because branches are lightweight and scale to zero when idle, this pattern remains affordable even as the team grows.
@@ -32,8 +32,8 @@ A variation of the above is to maintain a single shared development branch. This
 
 Like staging, this branch is relatively long-lived, but it still needs to stay in sync with production. Teams periodically reset it to the parent branch to avoid drift. This approach:
 
-- Reduces the number of active branches to manage  
-- Works well when coordination is easy  
+- Reduces the number of active branches to manage
+- Works well when coordination is easy
 - Still avoids touching production directly
 
 ### One branch per pull request
@@ -42,8 +42,8 @@ Like staging, this branch is relatively long-lived, but it still needs to stay i
 
 In this setup, every pull request automatically gets its own database branch. The branch is created when the PR opens and deleted when the PR is merged or closed. This gives you:
 
-- Fully isolated environments for each change  
-- A safe place to run migrations specific to the PR  
+- Fully isolated environments for each change
+- A safe place to run migrations specific to the PR
 - End-to-end testing against realistic data
 
 If you already have a staging branch, PR branches are often derived from staging. If not, they can be derived directly from production or from an anonymized production branch.

@@ -10,8 +10,8 @@ Because Neon preserves database history, branches can also be used as a practica
 
 Neon continuously retains history for each branch within a defined [restore window](https://neon.com/docs/introduction/restore-window). At any point, you can create a new branch from a previous moment in time. This branch is fully independent:
 
-- It has the exact schema and data from that point  
-- It doesn’t affect the current production state  
+- It has the exact schema and data from that point
+- It doesn’t affect the current production state
 - You can query it, inspect it, or export data from it
 
 ## Recover dropped tables or deleted data
@@ -20,16 +20,16 @@ Neon continuously retains history for each branch within a defined [restore wind
 
 If a table was dropped or data was accidentally removed, you can create a branch from just before the incident. From there, you can:
 
-- Inspect the table or rows that were lost  
-- Export only the data you need  
+- Inspect the table or rows that were lost
+- Export only the data you need
 - Restore it into production manually, without rolling production back
 
 ## Debugging bad migrations
 
 When a migration behaves unexpectedly, branches make it easy to investigate. Instead of guessing or reproducing issues manually, you can:
 
-- Create a branch from before the migration  
-- Compare schema and data before and after  
+- Create a branch from before the migration
+- Compare schema and data before and after
 - Re-run the migration in isolation to understand what went wrong
 
 ## Auditing and compliance checks

@@ -18,13 +18,13 @@ Some of the largest Neon customers are running this workflow in production, e.g.
 
 The first step is to give production and development their own independent root branches.The setup looks like this:
 
-- Start with your existing production branch  
-- Take a snapshot of production  
+- Start with your existing production branch
+- Take a snapshot of production
 - Restore that snapshot and name the restored branch `dev`
 
 You now have two root branches
 
-- `prod`: your live production environment  
+- `prod`: your live production environment
 - `dev`: a fully isolated development environment
 
 They start from the same schema and data, but they are no longer linked. Changes in one will never affect the other. From this point on, `dev` behaves like a standalone database, while still preserving a clean lineage back to production.
@@ -35,9 +35,9 @@ They start from the same schema and data, but they are no longer linked. Changes
 
 Teams typically:
 
-- Apply schema and data changes directly on `dev`  
-- Create short-lived child branches from `dev` for previews, PRs, or user-level environments  
-- Validate changes in those child branches  
+- Apply schema and data changes directly on `dev`
+- Create short-lived child branches from `dev` for previews, PRs, or user-level environments
+- Validate changes in those child branches
 - Apply validated changes back to `dev` using migrations or scripts
 
 At the end of this phase, the `dev` branch represents the next production candidate.
@@ -48,16 +48,16 @@ At the end of this phase, the `dev` branch represents the next production candid
 
 When time is right, promotion is done using snapshots. The process is:
 
-1. Take a snapshot of `prod` (this becomes your rollback point)  
-2. Take a snapshot of `dev` (this is the version you want to publish)  
+1. Take a snapshot of `prod` (this becomes your rollback point)
+2. Take a snapshot of `dev` (this is the version you want to publish)
 3. Restore the `dev` snapshot onto `prod`
 
 Restoring a snapshot instantly rewrites the production branch to match the state of `dev`, while keeping the same production endpoint. Active connections are briefly dropped during the restore, typically for milliseconds.
 
 After the restore,
 
-- `prod` reflects the new version  
-- Development continues on `dev` toward the next release  
+- `prod` reflects the new version
+- Development continues on `dev` toward the next release
 - A backup branch (`old prod`) is created automatically
 
 ### Step 4: Refreshing dev from production
@@ -66,7 +66,7 @@ After the restore,
 
 After promotion, the `dev` branch will eventually become outdated. To refresh it:
 
-1. Take a snapshot of the current `prod` branch  
+1. Take a snapshot of the current `prod` branch
 2. Restore that snapshot onto `dev`
 
 This rewrites `dev` to match production while keeping the same branch identity and endpoint. A backup branch (`old dev`) is created automatically and can be deleted or kept briefly for verification.
@@ -75,13 +75,13 @@ This rewrites `dev` to match production while keeping the same branch identity a
 
 If something goes wrong after promotion, rollback uses the same mechanism:
 
-- Identify a previous production snapshot  
+- Identify a previous production snapshot
 - Restore it onto `prod`
 
 As with promotion, restores are instant and preserve the production endpoint. A backup branch is created automatically after each restore.
 
 There are important operational constraints to understand:
 
-- **Production writes after the snapshot are lost**. Restoring a snapshot replaces the entire branch state. If production continues receiving writes after the snapshot is taken, those writes will not be present after restore. This workflow works best when production is read-only or when writes can be safely discarded or reconciled at the application level.  
-- **Restore operations briefly drop active connections.** Applications should retry queries automatically.  
+- **Production writes after the snapshot are lost**. Restoring a snapshot replaces the entire branch state. If production continues receiving writes after the snapshot is taken, those writes will not be present after restore. This workflow works best when production is read-only or when writes can be safely discarded or reconciled at the application level.
+- **Restore operations briefly drop active connections.** Applications should retry queries automatically.
 - **Cleanup matters.** Root branches and snapshots are billed based on logical size. Child branches are cheap, but snapshots should be retained intentionally and cleaned up when no longer needed.

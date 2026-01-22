@@ -12,8 +12,8 @@ In a branching model, production is just a branch, typically the root branch in 
 
 **Production branch best practices**
 
-- Treat production as a [protected branch](https://neon.com/docs/guides/protected-branches) to prevent accidental deletion or resets  
-- Avoid manual experimentation on production  
+- Treat production as a [protected branch](https://neon.com/docs/guides/protected-branches) to prevent accidental deletion or resets
+- Avoid manual experimentation on production
 - Use branches for all schema changes, debugging, and data inspection
 
 There’s also an important security behavior to be aware of. When production is protected and you create a child branch from it, Neon automatically generates new database credentials for that branch. This means development, staging, and preview environments cannot reuse production credentials, and connections are physically isolated by default.
@@ -24,11 +24,11 @@ There’s also an important security behavior to be aware of. When production is
 
 If your production data does not contain PII, the simplest staging setup is to create a staging branch directly from production. This branch:
 
-- Captures the exact schema and data of production at the moment you branch  
-- Is fully isolated, with its own compute endpoint  
+- Captures the exact schema and data of production at the moment you branch
+- Is fully isolated, with its own compute endpoint
 - Can be sized smaller than production and scales to zero when idle
 
-Staging branches are typically long-lived, but they still need to stay in sync with production. As production evolves, staging can be periodically refreshed by resetting it to its parent. In Neon, this is a single operation.  
+Staging branches are typically long-lived, but they still need to stay in sync with production. As production evolves, staging can be periodically refreshed by resetting it to its parent. In Neon, this is a single operation.
 
 ## Staging via anonymized branches (with PII)
 
@@ -38,6 +38,6 @@ When production data does contain PII or regulated information, branching direct
 
 The workflow looks like this:
 
-- Create an anonymized branch from production, with sensitive fields masked based on defined rules  
-- Use this anonymized branch as a safe, production-like baseline  
+- Create an anonymized branch from production, with sensitive fields masked based on defined rules
+- Use this anonymized branch as a safe, production-like baseline
 - Derive staging (and later development and preview) branches from it
