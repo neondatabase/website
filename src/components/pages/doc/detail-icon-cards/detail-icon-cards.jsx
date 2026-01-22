@@ -162,11 +162,16 @@ const icons = {
 
 const monochromeIcons = ['github'];
 
-const DetailIconCards = ({ children = null, withNumbers = false }) => {
+const DetailIconCards = ({ children = null, withNumbers = false, compact = false }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
 
   return (
-    <ListComponent className="not-prose !my-10 grid grid-cols-2 gap-5 !p-0 sm:grid-cols-1">
+    <ListComponent
+      className={clsx(
+        'not-prose grid !p-0 sm:grid-cols-1',
+        compact ? '!my-7 grid-cols-2 gap-3' : '!my-10 grid-cols-2 gap-5'
+      )}
+    >
       {React.Children.map(children, (child, index) => {
         const { children, href, description, icon, target } = child.props ?? {};
         const Icon = icons[icon];
@@ -175,8 +180,14 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
           <li className="!m-0 flex before:hidden" key={index}>
             <Link
               className={clsx(
-                'relative flex w-full items-start rounded-[10px] border border-gray-new-94 py-5 transition-colors duration-200',
-                withNumbers ? 'gap-x-0.5 px-5' : 'gap-x-3.5 px-6',
+                'relative flex w-full items-start rounded-[10px] border border-gray-new-94 transition-colors duration-200',
+                compact
+                  ? withNumbers
+                    ? 'gap-x-0.5 px-4 py-3'
+                    : 'gap-x-2.5 px-4 py-3'
+                  : withNumbers
+                    ? 'gap-x-0.5 px-5 py-5'
+                    : 'gap-x-3.5 px-6 py-5',
                 'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
                 'hover:border-gray-new-80 hover:before:opacity-100',
                 'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
@@ -191,8 +202,12 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
                     ? 'text-black-new dark:text-white'
                     : 'text-secondary-8 dark:text-green-45',
                   withNumbers
-                    ? 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
-                    : 'mt-0.5 h-4 w-4'
+                    ? compact
+                      ? 'w-5 text-base font-medium leading-tight tracking-extra-tight'
+                      : 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
+                    : compact
+                      ? 'mt-0.5 h-3.5 w-3.5'
+                      : 'mt-0.5 h-4 w-4'
                 )}
               >
                 {withNumbers ? (
@@ -210,17 +225,25 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
                 )}
               </div>
               <div className="relative z-10 flex flex-col gap-x-2.5">
-                <h3 className="text-balance text-lg font-semibold leading-tight text-black-new dark:text-white">
-                  {children}
-                </h3>
-                <p
+                <h3
                   className={clsx(
-                    'text-balance text-sm leading-normal text-gray-new-50 dark:text-gray-new-80',
-                    withNumbers ? 'mt-1' : 'mt-2.5'
+                    'text-balance font-semibold leading-tight text-black-new dark:text-white',
+                    compact ? 'text-base' : 'text-lg'
                   )}
                 >
-                  {description}
-                </p>
+                  {children}
+                </h3>
+                {description && (
+                  <p
+                    className={clsx(
+                      'text-balance leading-normal text-gray-new-50 dark:text-gray-new-80',
+                      compact ? 'mt-1 text-xs' : 'text-sm',
+                      withNumbers ? 'mt-1' : compact ? 'mt-1' : 'mt-2.5'
+                    )}
+                  >
+                    {description}
+                  </p>
+                )}
               </div>
             </Link>
           </li>
@@ -233,6 +256,7 @@ const DetailIconCards = ({ children = null, withNumbers = false }) => {
 DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
+  compact: PropTypes.bool,
 };
 
 export default DetailIconCards;

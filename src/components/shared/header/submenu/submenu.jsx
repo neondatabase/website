@@ -53,10 +53,10 @@ const Submenu = ({
             {sections.length > 0 && (
               <Container
                 className="flex w-full gap-x-40 overflow-hidden pb-20 pt-7 xl:gap-x-8"
-                size="1600"
+                size="1920"
               >
                 <ul
-                  className="flex gap-x-[128px] pl-[calc(102px+92px+2px)] pt-1 xl:gap-x-5 xl:pl-[calc(102px+40px)]"
+                  className="flex gap-x-[128px] pl-[195px] pt-1 xl:gap-x-5 xl:pl-[143px]"
                   role="menu"
                 >
                   {sections.map(({ title, items }, sectionIndex) => (

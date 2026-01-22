@@ -26,6 +26,7 @@ export default {
   storage: '/storage',
   subprocessorsSubscribe: '/subscribe-to-subprocessors',
   templates: '/templates',
+  platforms: '/platforms',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
 
@@ -54,6 +55,7 @@ export default {
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
+  scaleToZero: '/docs/guides/scale-to-zero-guide',
   variableTraffic: '/use-cases/serverless-apps',
   whyNeon: '/docs/get-started/why-neon',
 

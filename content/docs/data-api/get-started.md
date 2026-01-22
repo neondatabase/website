@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2026-01-20T15:30:53.656Z'
+updatedOn: '2026-01-21T23:10:35.119Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -10,7 +10,7 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 ## Before you begin
 
 - The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
-- Neon Data API is incompatible with [IP Allow](/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
+- Neon Data API does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 
 <Steps>
 

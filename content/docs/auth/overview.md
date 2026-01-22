@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2026-01-15T11:54:47.648Z'
+updatedOn: '2026-01-21T23:10:35.115Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -124,6 +124,8 @@ Choose your framework to get started:
 ## Availability
 
 Neon Auth is currently available for AWS regions only. Azure support is not yet available.
+
+Neon Auth does not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
 
 ## Pricing
 

@@ -123,11 +123,19 @@ Notice that the letter `S` is uppercase.
 
 ## Replacing triggers
 
-PostgreSQL doesn’t support the `OR REPLACE` statement that allows you to modify the trigger definition like the function that will be executed when the trigger is fired.
-
-To do so, you can use the `DROP TRIGGER` and `CREATE TRIGGER` statements. You can also wrap these statements within a [transaction](../postgresql-tutorial/postgresql-transaction).
+PostgreSQL versions 14 and later support the `OR REPLACE` statement that allows you to modify the trigger definition like the function that will be executed when the trigger is fired.
 
 The following example illustrates how to change the `check_salary` function of the `salary_before_update` trigger to `validate_salary`:
+
+```sql
+CREATE OR REPLACE TRIGGER salary_before_update
+  BEFORE UPDATE
+  ON employees
+  FOR EACH ROW
+  EXECUTE PROCEDURE validate_salary();
+```
+
+In versions prior to 14, the `OR REPLACE` statement was not supported, and to do so, you would have to use the `DROP TRIGGER` and `CREATE TRIGGER` statements. You can also wrap these statements within a [transaction](../postgresql-tutorial/postgresql-transaction) to guarantee the trigger with the old function is dropped in favor of the one with the new function.
 
 ```sql
 BEGIN;
@@ -135,7 +143,7 @@ BEGIN;
 DROP TRIGGER IF EXISTS salary_before_update
 ON employees;
 
-CREATE TRIGGER salary_before_udpate
+CREATE TRIGGER salary_before_update
   BEFORE UPDATE
   ON employees
   FOR EACH ROW
@@ -147,4 +155,4 @@ COMMIT;
 ## Summary
 
 - Use the `ALTER TRIGGER` statement to rename a trigger.
-- Use the pair of the `DROP TRIGGER` and `CREATE TRIGGER` statements to replace a trigger with a new one.
+- Use the `CREATE OR REPLACE TRIGGER` statement in new versions of PostgreSQL to replace a trigger with a new one or the pair of the `DROP TRIGGER` and `CREATE TRIGGER` statements in older versions.
