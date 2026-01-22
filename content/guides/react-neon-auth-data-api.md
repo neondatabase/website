@@ -743,7 +743,7 @@ The complete source code for this example is available on GitHub.
 - [Neon Auth Overview](/docs/neon-auth/overview)
 - [React with Neon Auth UI (UI Components)](/docs/auth/quick-start/react-router-components)
 - [Use Neon Auth with React (API methods)](/docs/auth/quick-start/react)
-- [Neon JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk)
 - [Getting started with Neon Data API](/docs/data-api/get-started)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)
 

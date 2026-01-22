@@ -1,6 +1,6 @@
 ---
-title: 'AI Rules: Neon TypeScript SDK'
-subtitle: Context rules for AI tools to use the Neon TypeScript SDK
+title: 'AI Rules: Neon API TypeScript SDK'
+subtitle: Context rules for AI tools to use the Neon API TypeScript SDK
 enableTableOfContents: true
 updatedOn: '2025-10-10T13:19:39.264Z'
 ---
@@ -11,7 +11,7 @@ AI Rules are currently in beta. We're actively improving them and would love to 
 
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
-  <a href="/docs/reference/typescript-sdk">Get started with Neon Typescript SDK</a>
+  <a href="/docs/reference/typescript-sdk">Get started with Neon API TypeScript SDK</a>
   <a href="/docs/reference/api-reference">Neon API Reference</a>
 </DocsList>
 

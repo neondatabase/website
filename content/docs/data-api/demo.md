@@ -260,7 +260,7 @@ You can rename any note by editing its title directly in the app. When you do, t
 const { error } = await client.from('notes').update({ title: newTitle }).eq('id', id);
 ```
 
-You can chain methods like `.from()`, `.update()`, and `.eq()` to build queries. For more complex queries, refer to the [JavaScript SDK documentation](/docs/reference/javascript-sdk#insert).
+You can chain methods like `.from()`, `.update()`, and `.eq()` to build queries. For more complex queries, refer to the [Neon TypeScript SDK documentation](/docs/reference/javascript-sdk#insert).
 
 Here's how a note looks after you update its title:
 
@@ -421,6 +421,6 @@ Now test deleting a note that has paragraphs — both the note and its paragraph
 - [Generate TypeScript types](/docs/data-api/generate-types)
 - [SQL to REST Converter](/docs/data-api/sql-to-rest)
 - [Neon Auth documentation](/docs/auth/overview)
-- [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

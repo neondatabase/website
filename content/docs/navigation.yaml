@@ -400,7 +400,7 @@
 
             - section: Tools
               items:
-                - title: JavaScript SDK (Auth & Data API)
+                - title: Neon Auth & Data API TypeScript SDKs
                   slug: reference/javascript-sdk
                 - title: SQL to REST API Translator
                   slug: data-api/sql-to-rest
@@ -482,7 +482,7 @@
 
             - section: Reference
               items:
-                - title: JavaScript SDK (Auth & Data API)
+                - title: Neon Auth & Data API TypeScript SDKs
                   slug: reference/javascript-sdk
                 - title: UI Components
                   slug: auth/reference/ui-components
@@ -662,9 +662,9 @@
               items:
                 - title: Overview
                   slug: reference/sdk
-                - title: JavaScript SDK (Auth & Data API)
+                - title: Neon Auth & Data API TypeScript SDKs
                   slug: reference/javascript-sdk
-                - title: TypeScript SDK (Neon API)
+                - title: Neon API TypeScript SDK
                   slug: reference/typescript-sdk
                 - title: Python SDK (Neon API)
                   slug: reference/python-sdk

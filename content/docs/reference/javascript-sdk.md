@@ -1,12 +1,12 @@
 ---
-title: JavaScript SDK (Auth & Data API)
+title: Neon Auth & Data API TypeScript SDKs
 subtitle: Reference documentation for building applications with Neon Auth and Data API
 enableTableOfContents: true
 layout: wide
 updatedOn: '2026-01-21T23:23:42.095Z'
 ---
 
-The Neon JavaScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
+The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
@@ -21,7 +21,7 @@ Database query methods (`client.from()`, `.select()`, etc.) work the same regard
 <TwoColumnLayout.Item title="Installation" id="installation">
 <TwoColumnLayout.Block>
 
-Install the JavaScript SDK in your project using npm, yarn, pnpm, or bun.
+Install the TypeScript SDK in your project using npm, yarn, pnpm, or bun.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

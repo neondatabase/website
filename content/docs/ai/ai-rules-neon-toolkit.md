@@ -13,7 +13,7 @@ AI Rules are currently in beta. We're actively improving them and would love to 
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/reference/neondatabase-toolkit">Get started with the @neondatabase/toolkit</a>
-  <a href="/docs/reference/typescript-sdk">Neon TypeScript SDK Reference</a>
+  <a href="/docs/reference/typescript-sdk">Neon API TypeScript SDK</a>
   <a href="/docs/reference/api-reference">Neon API Reference</a>
 </DocsList>
 

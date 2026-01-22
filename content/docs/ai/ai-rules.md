@@ -35,7 +35,7 @@ For other AI tools like Cursor, you can use these individual `.mdc` context rule
 
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="drizzle">Neon Drizzle</a>
 
-<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="code">Neon TypeScript SDK</a>
+<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon API TypeScript SDK" icon="code">Neon API TypeScript SDK</a>
 
 <a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="code">Neon Python SDK</a>
 
