@@ -31,7 +31,7 @@ const Programs = () => (
   <div className="relative mt-[18px] w-full overflow-hidden border border-gray-new-30">
     <div className="relative overflow-hidden p-5">
       <h2 className="relative z-10 text-2xl font-normal leading-snug tracking-extra-tight text-white md:text-xl">
-        Need something custom?
+        Special Programs
       </h2>
       <Image
         className="pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none md:hidden"
