@@ -1,7 +1,7 @@
 ---
 title: Migrate with AWS Database Migration Service (DMS)
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.411Z'
+updatedOn: '2025-07-03T12:36:49.566Z'
 ---
 
 This guide outlines the steps for using the AWS Database Migration Service (DMS) to migrate data to Neon from another hosted database server. AWS DMS supports a variety of database migration sources including PostgreSQL, MySQL, Oracle, and Microsoft SQL Server. For a complete list of data migration sources supported by AWS DMS, see [Source endpoints for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Introduction.Sources.html#CHAP_Introduction.Sources.DataMigration).
@@ -21,6 +21,8 @@ Complete the following steps before you begin:
 - Set up a Neon project and a target database. See [Create a project](/docs/manage/projects#create-a-project), and [Create a database](/docs/manage/databases#delete-a-database) for instructions.
 - If you are migrating from a database other than Postgres, use the [Schema Conversion Tool](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.SCT.html) or [DMS Schema Conversion](https://docs.aws.amazon.com/dms/latest/userguide/getting-started.html) to convert and export the schema from the source database to the target database. Perform this step after creating the target endpoint for the Neon database but before the data migration. If migrating from a Postgres database, schema conversion is not required.
 
+<Steps>
+
 ## Create a target endpoint for your Neon database
 
 1. In the AWS Console, select **Database Migration Service**.
@@ -29,8 +31,7 @@ Complete the following steps before you begin:
 4. Select **Target endpoint** as the **Endpoint type**.
 5. Provide an **Endpoint identifier** label for your new target endpoint. In this guide, we use `neon` as the identifier.
 6. In the **Target engine** drop-down menu, select `PostgreSQL`.
-7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find in the **Connection Details** widget on the Neon **Dashboard**. Your connection string will look similar to this: `postgres://daniel:AbC123dEf@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb"`.
-
+7. Under **Access to endpoint database**, select **Provide access information manually** and enter the information outlined below. You can obtain the connection details from your Neon connection string, which you can find by clicking the **Connect** button on your Neon **Project Dashboard**. Your connection string will look similar to this: `postgresql://daniel:AbC123dEf@ep-curly-term-54009904.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"`.
    - **Server name**: Specify your Neon hostname, which is this portion of your connection string: `ep-curly-term-54009904.us-east-2.aws.neon.tech`
    - **Port**: `5432`
    - **User name**: Specify the Neon user.
@@ -40,7 +41,7 @@ Complete the following steps before you begin:
      endpoint=ep-curly-term-54009904$AbC123dEf
      ```
 
-     You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-curly-term-54009904`. For information about why this password format is required, see [Connection errors](https://neon.tech/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](https://neon.tech/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
+     You can obtain the `endpoint_id` and password from your Neon connection string. The `endpoint_id` appears similar to this: `ep-curly-term-54009904`. For information about why this password format is required, see [Connection errors](/docs/connect/connection-errors#the-endpoint-id-is-not-specified). AWS DMS requires the [Option D workaround](/docs/connect/connection-errors#d-specify-the-endpoint-id-in-the-password-field).
 
    - **Secure Sockets Layer (SSL) mode**: Select `require`.
    - **Database name**: The name of your Neon database. In this example, we use a database named `neondb`
@@ -103,11 +104,13 @@ To verify that data was migrated to your Neon database:
 3. Select the **Branch**, **Database**, and **Schema** where you imported the data.
    ![Neon Tables view showing imported data](/docs/import/dms_neon_table_data.png).
 
+</Steps>
+
 ## Migration notes
 
 This section contains notes from our experience using AWS DMS to migrate data to Neon from an RDS Postgres database.
 
-- When testing migration steps, the the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
+- When testing migration steps, the [Getting started with AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.html) tutorial was our primary reference. As recommended in the tutorial, we created a VPC and created all resources within the VPC.
 - We created all resources in the same region (`us-east-2a`)
 - We created an RDS PostgreSQL 15 database called `dms_sample` as the source database. The Neon target database was also Postgres 15.
 - We populated the RDS PostgreSQL source database using the [AWS DMS sample Postgres database](https://github.com/aws-samples/aws-database-migration-samples/blob/master/PostgreSQL/sampledb/v1/README.md). To do this, we created an EC2 instance to connect to the database following the steps in this topic: [Create an Amazon EC2 Client](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_GettingStarted.Prerequisites.html#CHAP_GettingStarted.Prerequisites.client).

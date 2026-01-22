@@ -1,7 +1,7 @@
 ---
 title: Security reporting
 enableTableOfContents: true
-updatedOn: '2023-10-07T10:43:33.430Z'
+updatedOn: '2025-03-07T12:51:22.977Z'
 ---
 
 We have established the following security reporting procedure to address security issues quickly.
@@ -20,7 +20,9 @@ If you have a security concern or believe you have found a vulnerability in any 
 
 We strive to resolve all problems quickly and publicize any discoveries after their resolution.
 
-Neon does not have a bug bounty program and does not pay financial bonuses or bounties for reporting bugs or vulnerability issues.
+## Bug bounty program with HackerOne
+
+Neon offers a public bug bounty program. If you discover a vulnerability, report it through our [bug bounty program](https://hackerone.com/neon_bbp).
 
 ## How to disclose vulnerabilities
 

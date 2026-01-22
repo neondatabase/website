@@ -1,11 +1,15 @@
 ---
-title: Managing your data with interactive tables
-subtitle: 'Use the Tables page to easily view, edit, and manage your database entries'
+title: Managing your data and schemas in the Neon Console
+subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
 enableTableOfContents: true
-updatedOn: '2024-06-20T18:17:05.283Z'
+updatedOn: '2025-09-25T14:36:08.174Z'
 ---
 
-The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, as well as export data in both .json and .csv formats.
+The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.
+
+<Admonition type="note">
+The **Tables** page is powered by a Drizzle Studio integration. For tracking updates, see [Tables page enhancements and updates](#tables-page-enhancements-and-updates).
+</Admonition>
 
 ## Edit records
 
@@ -50,8 +54,77 @@ Use the checkboxes to mark any unwanted records for deletion, or use the select-
 
 You can also use the checkboxes to mark records for export. Select the records you want to include in your export, then choose `Export selected...` from the export dropdown.
 
-Or just choose `Export all..` to download the entire contents of the table.
+Or just choose `Export all...` to download the entire contents of the table.
 
 You can export to either JSON or CSV.
 
 ![export data from table](/docs/manage/export_drizzle.png)
+
+## Manage schemas
+
+In addition to managing data, you can manage your database schema directly from the **Tables** page. Schema management options include:
+
+- Creating, altering, and dropping schemas
+- Creating and altering tables
+- Creating and altering views
+- Creating enums
+- Refreshing the database schema
+
+![Drizzle Studio Schema Management UI](/docs/changelog/drizzle_schema_mgmt.png)
+
+## Create Postgres roles
+
+You can create Postgres roles from the **Tables** page. Define a role name, select from a list of commonly granted privileges, set a password, and click **Review and Create**.
+
+![Create roles on the tables page](/docs/changelog/tables_page_create_roles.png)
+
+> Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
+
+## Add privileges
+
+For more advanced privilege assignments, click the **Add privilege** link when creating a role to build your `GRANT` statements.
+
+![Add privileges on the tables page](/docs/changelog/tables_page_add_privileges.png)
+
+> Neon role and privilege limitations apply. See [Manage roles](/docs/manage/roles).
+
+## Define RLS policies
+
+Create Postgres RLS policies using the templates provided. Templates like "based on user_id" restrict each user to their own rows. When using the Data API, access is matched to the `auth.user_id()` function.
+
+![Set RLS policies on the tables page](/docs/changelog/tables_page_rls_policies.png)
+
+### Database studio view
+
+The **Database studio** view makes it easy to explore your database objects—including schemas, tables, views, roles, and policies—all in one place.
+
+To open the view, select **Database studio** from the **Tables** page:
+
+![Select database studio view](/docs/changelog/tables_page_select_studio_view.png)
+
+Use the top navbar to navigate:
+
+![Studio view](/docs/changelog/tables_page_studio_view.png)
+
+## Tables page updates
+
+The **Tables** page in the Neon Console is powered by a Drizzle Studio integration. You can check the Drizzle Studio integration version in your browser by inspecting the Tables page. For example, in Chrome, right-click, select **Inspect**, and go to the **Console** tab to view the current `Tables version`. You can cross-reference this version with the [Neon Drizzle Studio Integration Changelog](https://github.com/neondatabase/neon-drizzle-studio-changelog/blob/main/CHANGELOG.md) to track updates.
+
+## Reporting errors
+
+If you see an error message on the **Tables** page, this could be due to a DNS resolution issue.
+
+Please refer to [DNS resolution issues](/docs/connect/connection-errors#dns-resolution-issues) for workarounds.
+
+If it's not a DNS resolution issue, other troubleshooting steps you can try include:
+
+- **Refreshing the page** — This can resolve temporary glitches.
+- **Clearing browser cache** — Cached files might cause issues, so clearing the cache could help.
+- **Disabling browser extensions** — Extensions may interfere with the page’s functionality.
+- **Using a different browser or device** — Check if the issue occurs on another browser or device.
+- **Trying incognito mode** — Using an incognito window can help bypass issues related to cookies or extensions.
+
+If the issue persists, please follow these steps to report the error:
+
+1. [Open a support ticket](https://console.neon.tech/app/projects?modal=support) and provide a detailed description of what you were doing when the error occurred. Please include any screen captures or files that will help us reproduce the issue. We'll work with our partners at Drizzle to investigate and resolve the issue.
+2. If you're on the Free plan, you can report the issue on [Discord](https://discord.gg/92vNTzKDGp).

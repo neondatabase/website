@@ -4,10 +4,8 @@ subtitle: Learn how to create an automatic audit trail for your Postgres databas
   Bemi
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2024-06-16T10:21:49.227Z'
+updatedOn: '2025-08-02T10:33:29.265Z'
 ---
-
-<LRNotice/>
 
 [Bemi](https://bemi.io/) is an open-source solution that plugs into Postgres and ORMs such as Prisma, TypeORM, SQLAlchemy, and Ruby on Rails to track database changes automatically. It unlocks robust context-aware audit trails and time travel querying inside your application.
 
@@ -19,6 +17,7 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 
 - A [Bemi account](https://bemi.io/)
 - A [Neon account](https://console.neon.tech/)
+- Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 ## Enable logical replication in Neon
 
@@ -31,11 +30,11 @@ Enabling logical replication modifies the Postgres `wal_level` configuration p
 To enable logical replication in Neon:
 
 1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
-4. Click **Enable** to enable logical replication.
+2. On the Neon **Dashboard**, select **Settings**.
+3. Select **Logical Replication**.
+4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](https://neon.tech/docs/get-started-with-neon/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [[Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
@@ -50,15 +49,14 @@ The following instructions assume you are connecting with a Postgres role create
 
 To connect your database to Bemi:
 
-1. In Neon, retrieve your database connection string from the **Connection Details** widget on the **Project Dashboard**, which will look similar to this:
+1. In Neon, retrieve your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It will look similar to this:
 
    ```sql shouldWrap
-   postgres://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require
+   postgresql://neondb_owner:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
    ```
 
 2. In Bemi, select **Databases** > **Add Database** to open the **Connect PostgreSQL Database** dialog.
 3. Enter the Neon database connection details from your connection string. For example, given the connection string shown above, enter the details in the **Connect PostgreSQL Database** dialog as shown below. Your values will differ except for the port number. Neon uses the default Postgres port, `5432`.
-
    - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
    - **Port**: 5432
    - **Database Name**: neondb
@@ -98,7 +96,7 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO [username];
 ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO [username];
 
 -- Create "bemi" PUBLICATION to enable logical replication
-CREATE PUBLICATION bemi FOR ALL TABLES;
+CREATE PUBLICATION bemi FOR TABLE <tbl1, tbl2, tbl3>;
 
 -- Create a procedure to set REPLICA IDENTITY FULL for tables to track the "before" state on DB row changes
 CREATE OR REPLACE PROCEDURE _bemi_set_replica_identity() AS $$ DECLARE current_tablename TEXT;
@@ -112,12 +110,12 @@ CALL _bemi_set_replica_identity();
 ```
 
 <Admonition type="note">
-After creating a read-only role, you can find the connection details for this role in the **Connection Details** widget in the Neon console. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
+After creating a read-only role, you can find the connection details for this role by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use this role when connecting your Neon database to Bemi, as described [above](#connect-your-neon-database-to-bemi).
 </Admonition>
 
 ## Allow inbound traffic
 
-If you're using Neon's IP Allow feature, available with the Neon [Scale](/docs/introduction/plans#scale) plan, to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+If you're using Neon's IP Allow feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Bemi. [Contact Bemi](mailto:hi@bemi.io) to get the static IPs that need to be allowlisted. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## References
 

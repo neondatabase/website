@@ -2,8 +2,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Container from 'components/shared/container/container';
-
-import QuoteIcon from './images/quote.inline.svg';
+import QuoteIcon from 'icons/quote.inline.svg';
 
 const Testimonial = ({
   className = '',
@@ -30,7 +29,7 @@ const Testimonial = ({
           {quote}
         </p>
       </blockquote>
-      <figcaption className="mt-5 text-lg leading-tight tracking-[-0.02em] text-white xl:text-base lg:mt-4 md:mt-2.5">
+      <figcaption className="mt-5 text-lg leading-tight tracking-extra-tight text-white xl:text-base lg:mt-4 md:mt-2.5">
         {name} <cite className="font-light not-italic text-gray-new-70">– {position}</cite>
       </figcaption>
     </Container>

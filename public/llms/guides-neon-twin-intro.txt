@@ -1,0 +1,27 @@
+# Create a Neon Twin
+
+> The document outlines the process for creating a Neon Twin, which allows users to clone a database environment in Neon for testing and development purposes without affecting the original data.
+
+## Source
+
+- [Create a Neon Twin HTML](https://neon.com/docs/guides/neon-twin-intro): The original HTML version of this documentation
+
+## What is a Neon Twin?
+
+A Neon Twin is a full or partial clone of your production or staging database, providing developers and teams with isolated, sandboxed environments that closely mirror production.
+
+
+
+## Designed for efficiency
+
+Creating a Neon Twin will streamline development workflows, enhance productivity, and help teams ship faster—all while being more [cost-effective](https://neon.com/docs/introduction/pricing-estimation-guide) and easier to manage than traditional development/testing environments.
+
+## Automatically synced
+
+The workflows in this section enable automatic synchronization between your production database and your Neon Twin.
+
+## Instant Branches
+
+With a Neon Twin created, [branches](https://neon.com/docs/introduction/branching) can be quickly spun up or torn down, enabling developers to build new features or debug issues—all within their own isolated environments with a dedicated compute resource.
+
+Branches can be created and managed through the [Neon console](https://console.neon.tech/) or programmatically via the [API](https://neon.com/docs/reference/api-reference).

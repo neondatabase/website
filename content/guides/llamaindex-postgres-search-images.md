@@ -35,14 +35,14 @@ Using Serverless Postgres database helps you scale down to zero. With Neon, you 
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and enter the name of your choice as the project name.
 
-You will then be presented with a dialog that provides a connecting string of your database. Click on **Pooled connection** on the top right of the dialog and the connecting string automatically updates in the box below it.
+You will then be presented with a dialog that provides a connecting string of your database. You can enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/llamaindex-postgres-search-images/create-database.png)
 
 All Neon connection strings have the following format:
 
 ```bash
-postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require
+postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
 ```
 
 - `user` is the database user.
@@ -50,7 +50,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `endpoint_hostname` is the host with neon.tech as the [TLD](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project.
-- `?sslmode=require` an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode while connecting to the Postgres instance for better security.
+- `?sslmode=require&channel_binding=require` optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding while connecting to the Postgres instance for better security.
 
 Save this connecting string somewhere safe to be used as the `POSTGRES_URL` further in the guide. Proceed further in this guide to create a Astro application.
 
@@ -137,7 +137,7 @@ First, create an `.env` file in the root directory of your project with the foll
 ```bash
 # Neon Postgres Pooled Connection URL
 
-POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+POSTGRES_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require"
 ```
 
 The file, `.env` should be kept secret and not included in Git history. Ensure that `.env` is added to the `.gitignore` file in your project.

@@ -37,7 +37,7 @@ Using a serverless Postgres database powered by Neon allows you to scale down to
 
 To get started, go to the [Neon Console](https://console.neon.tech/app/projects) and enter a name for your project.
 
-You will be presented with a dialog that provides a connection string of your database. Click on the **Pooled connection** option and the connecting string automatically changes to a pooled connection string.
+You will be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
 
 ![](/guides/images/self-hosting-umami-neon/1689d44f-4c5d-4b2a-8d13-32407f9c8781.png)
 
@@ -52,7 +52,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>
 - `endpoint_hostname` is the host with neon.tech as the [top level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `port` is the Neon port number. The default port number is 5432.
 - `dbname` is the name of the database. “neondb” is the default database created with each Neon project if you don't specify your own database name.
-- `?sslmode=require` is an optional query parameter that enforces the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce the [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
 
 Please save the connection string somewhere safe. Later, you will use it to configure the `DATABASE_URL` variable.
 

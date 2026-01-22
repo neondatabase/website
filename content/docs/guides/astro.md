@@ -1,19 +1,19 @@
 ---
-title: Connect an Astro site or application to Neon Postgres
-subtitle: Set up a Neon project in seconds and connect to your Postgres database from an
-  Astro site or application
+title: Connect Astro to Postgres on Neon
+subtitle: Learn how to make server-side queries to Postgres from .astro files or API
+  routes.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.382Z'
+updatedOn: '2025-07-29T16:22:53.110Z'
 ---
+
+<CopyPrompt src="/prompts/astro-serverless-prompt.md" 
+description="Pre-built prompt for connecting Astro to Neon using the Neon serverless driver"/>
 
 Astro builds fast content sites, powerful web applications, dynamic server APIs, and everything in-between. This guide describes how to create a Neon Postgres database and access it from an Astro site or application.
 
 To create a Neon project and access it from an Astro site or application:
 
-1. [Create a Neon project](#create-a-neon-project)
-2. [Create an Astro project and add dependencies](#create-an-astro-project-and-add-dependencies)
-3. [Configure a Postgres client](#configure-the-postgres-client)
-4. [Run the app](#run-the-app)
+<Steps>
 
 ## Create a Neon project
 
@@ -47,17 +47,17 @@ If you do not have one already, create a Neon project. Save your connection deta
 
 ## Store your Neon credentials
 
-Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ```shell shouldWrap
-DATABASE_URL="postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require"
+DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with Astro. See below for the different implementations.
+There a multiple ways to make server side requests with Astro. See below for two of those options: **astro files** and **Server Endpoints (API Routes)**.
 
-### .astro files
+### astro files
 
 In your `.astro` files, use the following code snippet to connect to your Neon database:
 
@@ -148,7 +148,7 @@ export async function GET() {
   } finally {
     client.release();
   }
-  return new Response(JSON.stringiify(data), { headers: { 'Content-Type': 'application/json' } });
+  return new Response(JSON.stringify(data), { headers: { 'Content-Type': 'application/json' } });
 }
 ```
 
@@ -160,7 +160,7 @@ import postgres from 'postgres';
 export async function GET() {
   const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
@@ -174,7 +174,7 @@ import { neon } from '@neondatabase/serverless';
 export async function GET() {
   const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
-  return new Response(JSON.stringiify(response[0]), {
+  return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
   });
 }
@@ -189,6 +189,8 @@ When you run `npm run dev` you can expect to see the following when you visit th
 ```shell shouldWrap
 { version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
 ```
+
+</Steps>
 
 ## Source code
 

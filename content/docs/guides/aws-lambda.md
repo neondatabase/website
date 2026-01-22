@@ -2,7 +2,7 @@
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.384Z'
+updatedOn: '2025-08-02T10:33:29.262Z'
 ---
 
 AWS Lambda is a serverless, event-driven compute service that allows you to run code without provisioning or managing servers. It is a convenient and cost-effective solution for running various types of workloads, including those that require a database.
@@ -15,8 +15,8 @@ This guide describes how to set up a Neon database and connect to it from an AWS
 
 ## Prerequisites
 
-- A Neon account. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up/) for instructions.
-- An AWS account. You can create a free AWS account at [AWS Free Tier](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
+- A Neon account. If you do not have one, see [Sign up](/docs/get-started/signing-up/) for instructions.
+- An AWS account. You can create a free AWS account at [AWS Free plan](https://aws.amazon.com/free/). An [IAM User and Access Key](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) are required to programmatically interact with your AWS account. You must provide these credentials when deploying the Serverless Framework project.
 - A Service Framework account. You can sign up at [Serverless Framework](https://www.serverless.com/).
 
 ## Create a Neon project
@@ -136,7 +136,7 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    ```json
    {
      "dependencies": {
-       "pg": "^8.8.0"
+       "pg": "^8.13.1"
      }
    }
    ```
@@ -145,19 +145,44 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
 
    ```javascript
    'use strict';
-
    const { Client } = require('pg');
 
+   let client;
+
    module.exports.getAllUsers = async () => {
-     var client = new Client(process.env.DATABASE_URL);
-     client.connect();
-     var { rows } = await client.query('SELECT * from users');
-     return {
-       statusCode: 200,
-       body: JSON.stringify({
-         data: rows,
-       }),
-     };
+     if (!client) {
+       console.log('Initializing new database client');
+       client = new Client({ connectionString: process.env.DATABASE_URL });
+       try {
+         await client.connect();
+       } catch (error) {
+         console.error('Error connecting to the database:', error);
+         return {
+           statusCode: 500,
+           body: JSON.stringify({
+             error: 'Failed to connect to the database',
+           }),
+         };
+       }
+     }
+
+     try {
+       const { rows } = await client.query('SELECT * FROM users');
+       return {
+         statusCode: 200,
+         body: JSON.stringify({
+           data: rows,
+         }),
+       };
+     } catch (error) {
+       console.error('Error executing query:', error);
+       return {
+         statusCode: 500,
+         body: JSON.stringify({
+           error: 'Failed to fetch users',
+         }),
+       };
+     }
    };
    ```
 
@@ -173,14 +198,14 @@ Create the Lambda function using the [Serverless Framework](https://www.serverle
    Environment variables can also be added to a `.env` file and loaded automatically with the help of the [dotenv](https://www.npmjs.com/package/dotenv) package. For more information, see [Resolution of environment variables](https://www.serverless.com/framework/docs/environment-variables).
    </Admonition>
 
-   You can copy the connection string from **Connection Details** widget the Neon Console. Add the `DATABASE_URL` under `environment`, and add `sslmode=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
+   You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**. Add the `DATABASE_URL` under `environment`, and add `sslmode=require&channel_binding=require` to the end of the connection string to enable SSL. The `sslmode=require` option tells Postgres to use SSL encryption and verify the server's certificate.
 
    ```yaml shouldWrap
    provider:
      name: aws
      runtime: nodejs14.x
      environment:
-       DATABASE_URL: postgres://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require
+       DATABASE_URL: postgresql://[user]:[password]@[neon_hostname]/[dbname]?sslmode=require&channel_binding=require
 
    functions:
      getAllUsers:

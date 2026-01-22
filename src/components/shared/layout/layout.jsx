@@ -9,36 +9,45 @@ import Topbar from 'components/shared/topbar';
 const Layout = ({
   className = null,
   headerClassName = null,
-  headerTheme = null,
-  footerTheme = null,
   withOverflowHidden = false,
   children,
-  headerWithBorder = false,
   isHeaderSticky = false,
   isHeaderStickyOverlay = false,
+  hasThemesSupport = false,
   isDocPage = false,
-  isBlogPage = false,
+  docPageType = null,
+  docsNavigation = null,
+  docsBasePath = null,
+  customType = null,
+  isClient = false,
 }) => (
   <>
-    <Topbar isDarkTheme={headerTheme === 'dark'} />
-    {/* 36px is the height of the topbar */}
-    <div className="relative flex min-h-[calc(100vh-36px)] flex-col pt-safe">
+    {!isClient && <Topbar />}
+    <div
+      className={clsx(
+        'relative flex flex-col pt-safe',
+        isClient ? 'min-h-screen' : 'min-h-[calc(100vh-36px)]',
+        isDocPage && 'lg:!pb-12'
+      )}
+    >
       <Header
         className={headerClassName}
-        theme={headerTheme}
-        isDarkTheme={headerTheme === 'dark'}
         isSticky={isHeaderSticky}
         isStickyOverlay={isHeaderStickyOverlay}
+        hasThemesSupport={hasThemesSupport}
         isDocPage={isDocPage}
-        isBlogPage={isBlogPage}
-        withBorder={headerWithBorder}
+        docPageType={docPageType}
+        docsNavigation={docsNavigation}
+        docsBasePath={docsBasePath}
+        customType={customType}
+        isClient={isClient}
       />
       <main
         className={clsx(withOverflowHidden && 'overflow-hidden', 'flex flex-1 flex-col', className)}
       >
         {children}
       </main>
-      <Footer isDocPage={isDocPage} theme={footerTheme} />
+      <Footer hasThemesSupport={hasThemesSupport} />
       <CookieConsent />
     </div>
   </>
@@ -47,15 +56,20 @@ const Layout = ({
 Layout.propTypes = {
   className: PropTypes.string,
   headerClassName: PropTypes.string,
-  headerTheme: PropTypes.oneOf(['light', 'dark']),
-  footerTheme: PropTypes.oneOf(['light', 'dark']),
   withOverflowHidden: PropTypes.bool,
   children: PropTypes.node.isRequired,
   isHeaderSticky: PropTypes.bool,
   isHeaderStickyOverlay: PropTypes.bool,
-  headerWithBorder: PropTypes.bool,
   isDocPage: PropTypes.bool,
-  isBlogPage: PropTypes.bool,
+  docPageType: PropTypes.string,
+  docsNavigation: PropTypes.array,
+  docsBasePath: PropTypes.string,
+  hasThemesSupport: PropTypes.bool,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
+  isClient: PropTypes.bool,
 };
 
 export default Layout;

@@ -2,20 +2,21 @@
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
 enableTableOfContents: true
-updatedOn: '2024-02-08T15:20:54.290Z'
+updatedOn: '2025-10-24T12:53:27.790Z'
 ---
+
+<CopyPrompt src="/prompts/ruby-on-rails-prompt.md" 
+description="Pre-built prompt for connecting Ruby on Rails to Neon Postgres"/>
 
 [Ruby on Rails](https://rubyonrails.org/), also known simply as Rails, is an open-source web application framework written in Ruby. It uses a model-view-controller architecture, making it a good choice for developing database-backed web applications. This guide shows how to connect to a Ruby on Rails application to a Neon Postgres database.
 
 To connect to Neon from a Ruby on Rails application:
 
-1. [Create a Neon Project](#create-a-neon-project)
-2. [Create a Rails Project](#create-a-rails-project)
-3. [Configure a PostgreSQL Database using Rails](#configure-a-postgresql-database-using-rails)
-4. [Create a Rails Controller](#create-a-rails-controller-to-query-the-database)
-5. [Run the application](#run-the-application)
+<Admonition type="note">
+This guide was tested using Ruby v3.4.6 and Rails v8.0.3.
+</Admonition>
 
-This guide was tested using Ruby v3.3.0 and Rails v7.1.2.
+<Steps>
 
 ## Create a Neon Project
 
@@ -41,11 +42,11 @@ You now have a Rails project in a folder named `neon-with-rails`.
 Create a `.env` file in the root of your Rails project, and add the connection string for your Neon compute. Do not specify a database name after the forward slash in the connection string. Rails will choose the correct database depending on the environment.
 
 ```shell shouldWrap
-DATABASE_URL=postgres://[user]:[password]@[neon_hostname]/
+DATABASE_URL=postgresql://[user]:[password]@[neon_hostname]/
 ```
 
 <Admonition type="note">
-You can find the connection string for your database in the **Connection Details** widget on the Neon **Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
+You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 </Admonition>
 
 <Admonition type="important">
@@ -91,7 +92,7 @@ Replace the contents of the view file at `app/views/home/index.html.erb` with:
 Replace the contents of `config/routes.rb` with the following code to serve your home view as the root page of the application:
 
 ```ruby
-Rails.application.routes.draw do.
+Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
@@ -112,6 +113,8 @@ Visit [localhost:3000/](http://localhost:3000/) in your web browser. Your Neon d
 ```
 PostgreSQL 15.5 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
 ```
+
+</Steps>
 
 ## Schema migration with Ruby on Rails
 

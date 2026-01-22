@@ -7,7 +7,7 @@ module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     screens: {
-      '3xl': { max: '1920px' },
+      '3xl': { max: '1919px' },
       '2xl': { max: '1599px' },
       xl: { max: '1279px' },
       lt: { max: '1127px' },
@@ -24,6 +24,7 @@ module.exports = {
         DEFAULT: '#1a1a1a',
         new: '#0c0d0d',
         pure: '#000000',
+        fog: '#0d0e12',
       },
       white: '#ffffff',
       primary: {
@@ -73,6 +74,7 @@ module.exports = {
       },
       green: {
         45: '#00E599',
+        52: '#34D59A',
       },
       blue: {
         80: '#ADE0EB',
@@ -100,20 +102,12 @@ module.exports = {
         'brown-1': '#A86624',
         'brown-2': '#BA8C5E',
       },
-      pricing: {
-        black: '#0c0d0d',
-        primary: {
-          1: '#00e599',
-          3: 'rgb(0,229,153,0.4)',
-          4: 'rgba(19,236,182,0.1)',
-        },
-      },
     },
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
         title: ['var(--font-esbuild)', ...defaultTheme.fontFamily.sans],
-        mono: ['IBM Plex Mono', 'IBM Plex Mono Fallback', ...defaultTheme.fontFamily.mono],
+        mono: ['var(--font-geist-mono)', ...defaultTheme.fontFamily.mono],
       },
       fontSize: {
         xs: [defaultTheme.fontSize.xs[0]],
@@ -135,30 +129,26 @@ module.exports = {
       letterSpacing: {
         tighter: '-0.04em',
         'extra-tight': '-0.02em',
+        snug: '-0.01em',
+        wide: '0.02em',
         wider: '0.04em',
       },
       boxShadow: {
-        tooltip: '0px 2px 20px rgba(0, 0, 0, 0.3)',
+        social: 'inset 0px -2px 10px rgba(255, 255, 255, 0.15)',
+        contact: '0px 4px 10px 0px rgba(0, 0, 0, .5), 0px 4px 30px 0px rgba(0, 0, 0, .5)',
       },
       backgroundImage: () => ({
-        'button-overlay': 'linear-gradient(0deg, rgba(12,13,13,0) 0%, rgba(12,13,13,1) 100%);',
-        'community-light':
-          'radial-gradient(100% 2244.95% at 100% 100%, rgba(217, 238, 242, 0.5) 0%, rgba(217, 238, 242, 0.1) 70.08%);',
-        'community-dark':
-          'radial-gradient(100% 2244.95% at 100% 100%, #262626 0%, rgba(38, 38, 38, 0.1) 63.96%);',
-        'subscribe-sm':
-          'linear-gradient(160deg, rgba(173, 224, 235, 0.00) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0.00) 77%);',
-        'pricing-table-featured-column':
-          'linear-gradient(180deg, rgba(19, 20, 21, 0.40) 92.77%, rgba(19, 20, 21, 0.00) 100%);',
+        'header-docs-button-border':
+          'radial-gradient(78.71% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.78), transparent),' +
+          'linear-gradient(0deg, #BCBEC2, #BCBEC2)',
+        'header-docs-button-border-dark':
+          'radial-gradient(54.19% 83.93% at 50% 3.57%, rgba(255, 255, 255, 0.55), transparent),' +
+          'linear-gradient(0deg, #303236, #303236)',
         'home-lightning-title':
           'radial-gradient(30.52% 57.36% at 67.98% 84.29%, #070707 8.6%, #525252 44.72%, #A7A7A7 69.37%, #FFFFFF 100%)',
         'home-lightning-title-xl':
-          'radial-gradient(15.52% 40% at 58.98% 87.29%, #070707 8.6%, #525252 39.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
-        'home-lightning-title-xl-ipad':
           'radial-gradient(149px 165px at 73.95% 81%, transparent, transparent 51%, white), linear-gradient(180deg, white, white 47%, transparent 47%, transparent)',
         'home-lightning-title-lg':
-          'radial-gradient(16% 47% at 64% 83.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
-        'home-lightning-title-lg-ipad':
           'radial-gradient(149px 165px at 78.95% 77%, transparent, transparent 57%, white 74%, white), linear-gradient(180deg, white, white 47%, transparent 47%, transparent)',
         'home-lightning-title-md':
           'radial-gradient(16% 40% at 72% 78.29%, #070707 7%, #525252 40.72%, #A7A7A7 78.37%, #FFFFFF 100%)',
@@ -198,11 +188,85 @@ module.exports = {
           'radial-gradient(18.96% 17.96% at 13% -1%, #C7D3FF 0%, #7995F7 8.96%, #4E5F9C 26.83%, rgba(78, 95, 156, 0) 100%),' +
           'radial-gradient(57.03% 30.65% at 100% 36.84%, #191C27 0%, rgba(25, 28, 39, 0) 100%),' +
           'linear-gradient(0deg, #141416, #141416)',
+        'subscribe-form-dark':
+          'radial-gradient(98.19% 94.16% at 96.13% 96.15%, rgba(21, 40, 40, 0.90) 0%, rgba(16, 30, 30, 0.00) 100%),' +
+          'linear-gradient(0deg, #101013, #101013)',
+        'blog-subscribe-form':
+          'linear-gradient(160deg, rgba(173, 224, 235, 0) 23%, rgba(173, 224, 235, 0.45) 50%, rgba(173, 224, 235, 0) 77%);',
+        'variable-list-icon-bg': 'linear-gradient(220deg, #272A35 8%, #16181D 70%)',
+        'variable-list-icon-border': 'linear-gradient(224deg, #FFF 2.43%, rgba(255, 255, 255, 0))',
+        'variable-value-1': 'linear-gradient(220deg, #FFFFFF 22%, #41BAB9 142%)',
+        'variable-value-2': 'linear-gradient(73deg, #EFEFEF 13%, #89E0EA 61%, #7F95EB 93%)',
+        'variable-value-3':
+          'linear-gradient(90deg, rgba(255, 255, 255, 0.60), rgba(255, 255, 255, 0.50))',
+        'variable-value-text': 'linear-gradient(90deg, #797D86 0%, #A4B7E2 100%)',
+        'azure-form-bg': 'linear-gradient(127deg, #0F0F10 0%, #070708 81.66%)',
+        'azure-form-bg-top':
+          'linear-gradient(152deg, #3FDFFF 28.7%, #2B49E3 41.01%, rgba(78, 97, 198, 0) 77.16%)',
+        'azure-form-bg-bottom':
+          'radial-gradient(49.98% 51.52% at 52.26% -7.36%, #3DFFFF 12.54%, rgba(51, 147, 147, 0) 94.44%),' +
+          'linear-gradient(143deg, #42B2F2 -8.71%, #29DEDE 0.6%, rgba(69, 127, 239, 0) 95.22%)',
+        'azure-form-border':
+          'radial-gradient(60.96% 60.55% at 0% 0%, rgba(100, 144, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
+          'radial-gradient(64.38% 53.06% at 100% 100%, rgba(100, 158, 185, 0.50) 0%, rgba(90, 109, 141, 0.50) 46%, rgba(90, 109, 141, 0) 80%),' +
+          'linear-gradient(0deg, #242628, #242628)',
+        'azure-form-input-1':
+          'linear-gradient(93deg, rgba(47, 66, 96, 0.80) -2.17%, rgba(30, 34, 52, 0.80) 18.83%, rgba(24, 25, 27, 0.80) 57.17%)',
+        'azure-form-input-2':
+          'linear-gradient(100deg, rgba(33, 39, 58, 0.80) -6.09%, rgba(24, 25, 27, 0.80) 27.66%)',
+        'azure-form-input-3':
+          'linear-gradient(276deg, rgba(32, 48, 55, 0.80) 2.61%, rgba(24, 25, 27, 0.80) 32.96%)',
+        'serverless-apps-hero-border':
+          'linear-gradient(27deg, transparent 76%, #1B9A86 90%, #5AADBB),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0.10))',
+        'security-card-bg':
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-card-link-bg':
+          'radial-gradient(43.67% 34.97% at 0.71% 0%, rgba(35, 54, 50, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(94.73% 89.93% at 1.9% 0%, rgba(21, 33, 30, 0.80) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'radial-gradient(111.21% 103.81% at 1.9% 0%, rgba(19, 20, 21, 0.60) 0%, rgba(19, 20, 21, 0.00) 100%),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'security-slide-icon-bg':
+          'radial-gradient(50% 50% at 50% 100%, rgba(0, 229, 153, 0.15) 0%, rgba(0, 229, 153, 0.00) 100%),' +
+          'radial-gradient(78.12% 78.13% at 50% 0%, rgba(226, 230, 235, 0.06) 0%, rgba(226, 230, 235, 0.00) 100%),' +
+          'linear-gradient(0deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02)),' +
+          'linear-gradient(0deg, #0C0C0D, #0C0C0D)',
+        'migration-card-left-bg':
+          'radial-gradient(77.42% 74.82% at 75.59% -18.04%, rgba(38, 66, 89, 0.80) 0%, rgba(8, 20, 25, 0.00) 100%),' +
+          'radial-gradient(86.92% 83.32% at 26.62% 128.01%, rgba(1, 119, 119, 0.17) 0%, rgba(1, 119, 119, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'migration-card-right-bg':
+          'radial-gradient(70.46% 67.03% at 0% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%), linear-gradient(147deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%)',
+        'migration-steps-slider-progress-bg':
+          'linear-gradient(90deg, rgba(36, 38, 40, 0) 0%, #242628 6.17%, #242628 78.58%, rgba(36, 38, 40, 0) 100%)',
+        'template-cta':
+          'linear-gradient(95.19deg, rgba(26, 212, 150, 0) 65.7%, rgba(47, 128, 120, 0.2) 86.63%, rgba(12, 222, 201, 0.3) 99.73%)',
+        'contact-form-bg':
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.5), rgba(20, 24, 31, 0.3) 48%, transparent)',
+        'startups-info-card-1':
+          'radial-gradient(70.46% 67.03% at 100% -10.6%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(213deg, rgba(1, 119, 99, 0.00) 52.96%, rgba(1, 119, 99, 0.20) 138.77%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-2':
+          'radial-gradient(112.22% 99.2% at -18.6% -17.8%, rgba(19, 33, 45, 0.80) 14.53%, rgba(22, 33, 42, 0.00) 85.73%),' +
+          'linear-gradient(139deg, rgba(1, 119, 99, 0.00) 52.16%, rgba(1, 119, 99, 0.20) 126.56%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'startups-info-card-3':
+          'linear-gradient(76deg, rgba(1, 119, 99, 0.00) 45.97%, rgba(1, 119, 99, 0.20) 111.02%),' +
+          'linear-gradient(293deg, rgba(1, 119, 99, 0.00) 58.47%, rgba(1, 119, 99, 0.15) 118.39%),' +
+          'radial-gradient(921.66% 127.87% at 79.08% -31.9%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 47.96%, rgba(20, 24, 31, 0.00) 100%),' +
+          'linear-gradient(0deg, #0D0E12, #0D0E12)',
+        'program-form-bg':
+          'radial-gradient(279.25% 154.72% at 23.51% -33.18%, rgba(20, 24, 31, 0.50) 0%, rgba(20, 24, 31, 0.30) 100%),' +
+          'linear-gradient(0deg, #020203, #020203)',
+        'live-video':
+          'linear-gradient(103.37deg, rgba(255, 255, 255, 0.05) 12.69%, rgba(255, 255, 255, 0.11) 43.45%, rgba(255, 255, 255, 0) 93.31%)',
       }),
       keyframes: (theme) => ({
         'text-blink': {
           '0%': {
-            color: theme('colors.black'),
+            color: theme('colors.black.pure'),
             textShadow: `-1px -1px 0 ${theme('colors.gray.1')}, 1px -1px 0 ${theme(
               'colors.gray.1'
             )}, -1px 1px 0 ${theme('colors.gray.1')}, 1px 1px 0 ${theme('colors.gray.1')}`,
@@ -213,7 +277,7 @@ module.exports = {
               '-1px -1px 0 transparent, 1px -1px 0 transparent, -1px 1px 0 transparent, 1px 1px 0 transparent',
           },
           '50%': {
-            color: theme('colors.black'),
+            color: theme('colors.black.pure'),
             textShadow: `-1px -1px 0 ${theme('colors.gray.1')}, 1px -1px 0 ${theme(
               'colors.gray.1'
             )}, -1px 1px 0 ${theme('colors.gray.1')}, 1px 1px 0 ${theme('colors.gray.1')}`,
@@ -251,6 +315,14 @@ module.exports = {
             opacity: 0,
           },
         },
+        slideIn: {
+          '0%': {
+            width: 0,
+          },
+          '100%': {
+            width: '100%',
+          },
+        },
         dialogShow: {
           '0%': {
             opacity: 0,
@@ -271,13 +343,23 @@ module.exports = {
             transform: 'translateY(-2%) scale(.96)',
           },
         },
+        logoMove: {
+          '0%': {
+            transform: 'translateY(0)',
+          },
+          '100%': {
+            transform: 'translateY(-3%)',
+          },
+        },
       }),
       animation: {
         'text-blink': 'text-blink 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         'fade-in-overlay': 'fadeInOverlay 0.2s',
         'fade-out-overlay': 'fadeOutOverlay 0.2s',
+        'slide-in': 'slideIn 5s cubic-bezier(0.4, 0, 0.6, 1) forwards',
         'dialog-show': 'dialogShow 0.3s cubic-bezier(.16,1,.3,1)',
         'dialog-hide': 'dialogHide 0.3s cubic-bezier(.16,1,.3,1)',
+        'logo-move': 'logoMove 1s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate',
         loading: 'loading 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       typography: () => ({
@@ -301,7 +383,7 @@ module.exports = {
     require('tailwindcss/plugin')(({ addVariant }) => {
       addVariant('search-cancel', '&::-webkit-search-cancel-button');
     }),
-    plugin(({ matchUtilities, theme }) => {
+    plugin(({ matchUtilities, addUtilities, theme }) => {
       matchUtilities(
         {
           'border-image': (value) => ({
@@ -313,6 +395,14 @@ module.exports = {
         },
         { values: theme('backgroundImage') }
       );
+      addUtilities({
+        '.gradient-stop-opacity-40': {
+          'stop-opacity': '0.4',
+        },
+        '.gradient-stop-opacity-100': {
+          'stop-opacity': '1',
+        },
+      });
     }),
   ],
 };

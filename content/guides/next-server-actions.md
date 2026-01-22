@@ -7,7 +7,7 @@ createdAt: '2024-05-13T13:24:36.612Z'
 updatedOn: '2024-05-13T13:24:36.612Z'
 ---
 
-In this guide, you will learn the the process of creating a simple web application using Next.js Server Actions that allows you to capture user input via forms, and insert them into Postgres via `@neondatabase/serverless` and `pg`.
+In this guide, you will learn the process of creating a simple web application using Next.js Server Actions that allows you to capture user input via forms, and insert them into Postgres via `@neondatabase/serverless` and `pg`.
 
 To create a Neon project and access it from an Next.js application:
 

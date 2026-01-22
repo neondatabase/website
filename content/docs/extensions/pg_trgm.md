@@ -2,7 +2,7 @@
 title: The pg_trgm extension
 subtitle: Improve Postgres text searches with the pg_trgm extension
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.371Z'
+updatedOn: '2025-08-02T10:33:29.240Z'
 ---
 
 The `pg_trgm` extension enhances Postgres' ability to perform text searches by using trigram matching. Trigrams are groups of three consecutive characters taken from a string. By breaking down text into trigrams, Postgres can perform more efficient and flexible searches, such as similarity and proximity searches.
@@ -19,9 +19,7 @@ In this guide, we'll explore the `pg_trgm` extension, covering how to enable it,
 
 **Version availability**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
-
-Currently, Neon uses version `1.6` of the `pg_trgm` extension for all Postgres versions.
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 ## Enable the `pg_trgm` extension
 
@@ -31,7 +29,7 @@ Activate `pg_trgm` by running the `CREATE EXTENSION` statement in your Postgres 
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Example usage
 

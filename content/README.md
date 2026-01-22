@@ -27,9 +27,9 @@ This section describes objects in the Neon hierarchy, such as API keys, projects
 
 This section is for various languages, frameworks, and integrations that Neon supports. The length of these pages determines the number of steps needed, so it is okay that some pages are longer than others, as one setup or integration may be more complex than another. This section may also include guides that are not language or framework-specific. For example, it could contain guides pertaining to particular Neon features. Such content will be considered on a case-by-case basis.
 
-## Import Data
+## Migrate to Neon
 
-This section provides instructions for how to import data into Neon. Currently, it includes instructions for importing from Postgres using `psql` and importing data from other vendors. It can be expanded to include other data import methods and migrations.
+This section provides instructions for how to import data into Neon. Currently, it includes instructions for migrating from Postgres and other vendors. It can be expanded to include other data import methods and migrations.
 
 ## Reference
 

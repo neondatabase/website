@@ -1,94 +1,97 @@
+'use client';
+
 import clsx from 'clsx';
-import dynamic from 'next/dynamic';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
+import { useEffect, useRef } from 'react';
 
-import Link from 'components/shared/link';
-import MENUS from 'constants/menus';
+import SDKTableOfContents from 'components/shared/sdk-table-of-contents';
 
-import InkeepTrigger from '../inkeep-trigger';
+import Menu from '../menu';
 
-import Item from './item';
+const containsActiveSlug = (menu, slug) => {
+  if (menu.slug === slug) return true;
 
-const Search = dynamic(() => import('components/shared/search/search'));
-
-const NavWithIcon = ({ className, items }) => (
-  <ul className={className}>
-    {items.map(({ icon: Icon, title, slug }, index) => (
-      <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-        <Link className="group flex items-center space-x-3" to={slug}>
-          <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-            <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-          </span>
-          <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-            {title}
-          </span>
-        </Link>
-      </li>
-    ))}
-  </ul>
-);
-
-NavWithIcon.propTypes = {
-  className: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.exact({
-      icon: PropTypes.elementType.isRequired,
-      title: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  return menu?.items?.some((item) => containsActiveSlug(item, slug));
 };
 
-const Sidebar = ({ className = null, sidebar, basePath, indexName, isPostgres = false }) => (
-  <aside
-    className={clsx(
-      'relative col-start-1 col-end-4 max-w-[254px] pt-0.5 before:absolute before:-bottom-20 before:-right-5 before:-top-[104px] before:z-10 before:w-screen before:bg-gray-new-98 dark:before:bg-black-new lg:hidden',
-      className
-    )}
-  >
-    <div className="sticky top-[104px] z-30 max-h-[calc(100vh-108px)] after:pointer-events-none after:absolute after:-bottom-16 after:z-20 after:h-28 after:w-full after:bg-gradient-to-b after:from-transparent after:to-gray-new-98 dark:before:to-black-new dark:after:to-black-new">
-      <Search className="z-30" indexName={indexName} />
-      <nav className="no-scrollbars relative z-10 max-h-[calc(100vh-146px)] overflow-y-scroll pb-36 pt-9">
-        {isPostgres ? (
-          <NavWithIcon className="mb-8" items={MENUS.postgresSidebar} />
-        ) : (
-          <>
-            <InkeepTrigger isSidebar />
-            <NavWithIcon className="mb-11" items={MENUS.docSidebar} />
-          </>
-        )}
-        <ul className={clsx({ 'mt-14': !isPostgres })}>
-          {sidebar.map((item, index) => (
-            <Item {...item} key={index} basePath={basePath} isChildren={false} />
-          ))}
-        </ul>
-      </nav>
-    </div>
-  </aside>
-);
+const getActiveMenu = (navigation, slug) =>
+  navigation
+    ?.flatMap((menu) => {
+      // If menu has subnav, find the matching subnav item
+      if (menu.subnav) {
+        if (menu.subnav.some((subnavItem) => subnavItem.section)) {
+          return menu.subnav.flatMap((subnavItem) => subnavItem.items);
+        }
 
-export const sidebarPropTypes = PropTypes.arrayOf(
-  PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    slug: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    items: PropTypes.arrayOf(
-      PropTypes.exact({
-        title: PropTypes.string.isRequired,
-        slug: PropTypes.string,
-        items: PropTypes.arrayOf(PropTypes.any),
-        ariaLabel: PropTypes.string,
-      })
-    ),
-  })
-).isRequired;
+        return menu.subnav;
+      }
+      // Otherwise, find the matching nav menu
+      return [menu];
+    })
+    .find((item) => containsActiveSlug(item, slug));
+
+const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
+  const pathname = usePathname();
+  const currentSlug = pathname.replace(basePath, '');
+  const menu = getActiveMenu(navigation, currentSlug);
+  const navRef = useRef(null);
+
+  // Get SDK TOC for current page from pre-loaded data
+  const sdkTOC = sdkNavigation?.[currentSlug] || null;
+
+  useEffect(() => {
+    if (navRef.current) {
+      navRef.current.scrollTop = 0;
+    }
+  }, [menu]);
+
+  const renderContent = sdkTOC ? (
+    <SDKTableOfContents
+      title={sdkTOC.title}
+      url={`${basePath}${currentSlug}`}
+      sections={sdkTOC.sections}
+    />
+  ) : (
+    <Menu basePath={basePath} {...menu} customType={customType} />
+  );
+
+  return (
+    <aside className={clsx('relative -mt-10', className)}>
+      <div className="sticky top-28">
+        <div
+          className={clsx(
+            'relative',
+            'after:pointer-events-none after:absolute after:inset-x-0 after:top-0 after:h-10',
+            'after:bg-gradient-to-b after:from-white after:to-transparent after:dark:from-black-pure after:dark:to-transparent'
+          )}
+        >
+          <nav
+            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
+            ref={navRef}
+          >
+            {renderContent}
+          </nav>
+        </div>
+      </div>
+    </aside>
+  );
+};
 
 Sidebar.propTypes = {
   className: PropTypes.string,
-  sidebar: sidebarPropTypes,
+  navigation: PropTypes.array.isRequired,
   basePath: PropTypes.string.isRequired,
-  indexName: PropTypes.string.isRequired,
-  isPostgres: PropTypes.bool,
+  customType: PropTypes.shape({
+    title: PropTypes.string,
+    link: PropTypes.string,
+  }),
+  sdkNavigation: PropTypes.objectOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      sections: PropTypes.array,
+    })
+  ),
 };
 
 export default Sidebar;

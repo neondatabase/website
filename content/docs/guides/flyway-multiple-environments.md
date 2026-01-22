@@ -2,7 +2,7 @@
 title: Manage multiple database environments
 subtitle: Learn how to manage schemas for multiple database environments with Flyway
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.391Z'
+updatedOn: '2026-01-15T23:54:00.606Z'
 ---
 
 With Flyway, you can manage and track changes to your database schema, ensuring that the database evolves consistently across different environments.
@@ -14,14 +14,14 @@ In this guide, we'll show you how to use Neon's branching feature to spin up a b
 ## Prerequisites
 
 - A flyway installation. See [Get started with Flyway and Neon](/docs/guides/flyway) for installation instructions.
-- A Neon account and project. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A database. This guide uses the ready-to-use `neondb` database on the `main` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
+- A Neon account and project. See [Sign up](/docs/get-started/signing-up).
+- A database. This guide uses the ready-to-use `neondb` database on the `production` branch of your Neon project. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Add a table to your database
 
-Set up a database to work with by adding a table to your `neondb` database on the `main` branch of your Neon project. If you completed [Get started with Flyway and Neon](/docs/guides/flyway), you might already have this `person` table created. We'll consider this your _production_ environment database.
+Set up a database to work with by adding a table to your `neondb` database on the `production` branch of your Neon project. If you completed [Get started with Flyway and Neon](/docs/guides/flyway), you might already have this `person` table created. We'll consider this your _production_ environment database.
 
-If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), and run the following statement:
+If you still need to create the `person` table, open the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), and run the following statement:
 
 ```bash
 create table person (
@@ -50,7 +50,7 @@ Perform these steps twice, once for your _development_ branch and once for your 
 <TabItem>
 
 ```bash showLineNumbers
-neonctl branches create --name development
+neon branches create --name development
 ```
 
 </TabItem>
@@ -85,9 +85,9 @@ When you are finished, you should have a _development_ branch and a _staging_ br
 
 ## Retrieve your Neon database connection strings
 
-From the Neon **Dashboard**, retrieve the connection string for each branch (`main`, `development`, and `staging`) from the **Connection Details** widget. Use the **Branch** drop-down menu to select each branch before copying the connection string.
+From the Neon **Dashboard**, click **Connect** to retrieve the connection string for each branch (`production`, `development`, and `staging`) from the **Connect to your database** modal. Use the **Branch** drop-down menu to select each branch before copying the connection string.
 
-Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute instance.
+Your connection strings should look something like the ones shown below. Note that the hostname differs for each (the part starting with `ep-` and ending with `aws.neon.tech`). That's because each branch is hosted on its own compute.
 
 - **main**
 
@@ -124,7 +124,7 @@ By default, Flyway loads its configuration from the default `conf/flyway.conf` f
    cp flyway.conf env_prod.conf
    ```
 
-2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `main`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
+2. In each configuration file, update the following items with the correct connection details for that database environment. The `url` setting will differ for each environment (in `env_prod.conf`, the `url` will point to `production`). In this example, where you are the only user, the `user` and `password` settings should be the same for each of your three database environments.
 
    ```bash shouldWrap
    flyway.url=jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech:5432/neondb
@@ -201,7 +201,7 @@ After you run the migration commands, your database should be consistent across 
 
 ## Conclusion
 
-You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](https://neon.tech/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
+You've seen how you can instantly create new database environment with Neon's branching feature and how to keep schemas consistent across different environments using Flyway. The steps in this guide were performed manually from the command line but could be easily integrated into your release management pipeline. Neon provides a [CLI](/docs/reference/neon-cli) and [API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) for automating various tasks in Neon, such as branch creation, which you can also integrate into your release automation.
 
 ## References
 

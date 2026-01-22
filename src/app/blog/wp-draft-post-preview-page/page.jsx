@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -11,11 +10,9 @@ import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
-import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
-import SEO_DATA from 'constants/seo-data';
-import { getWpPreviewPostData } from 'utils/api-posts';
+import { getWpPreviewPostData } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
@@ -32,17 +29,16 @@ import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blo
   You can't have a post in Wordpress with the "wp-draft-post-preview-page" slug. Please be careful.
 */
 const BlogDraft = async ({ searchParams }) => {
-  const { isEnabled: isDraftModeEnabled } = draftMode();
+  // TODO: this is a temporary fix for a known problem with accessing serachParams on the Vercel side - https://github.com/vercel/next.js/issues/54507
+  await Promise.resolve(JSON.stringify(searchParams));
 
-  if (!isDraftModeEnabled) {
+  if (!searchParams?.id || !searchParams?.status) {
     return notFound();
   }
 
   const { post, relatedPosts } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
 
-  if (!post) {
-    return notFound();
-  }
+  if (!post) return notFound();
 
   const { slug, title, content, pageBlogPost, date, dateGmt, modifiedGmt, categories, seo } = post;
   const shareUrl = `${process.env.NEXT_PUBLIC_DEFAULT_SITE_URL}${LINKS.blog}/${slug}`;
@@ -105,32 +101,45 @@ const BlogDraft = async ({ searchParams }) => {
             title={title}
             slug={shareUrl}
           />
-
-          <SubscribeForm
-            size="sm"
-            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
-          />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
             posts={relatedPosts}
           />
         </article>
       </div>
-      {isDraftModeEnabled && <PreviewWarning />}
+      <PreviewWarning />
     </>
   );
 };
 
-export async function generateMetadata() {
-  const { title, description, imagePath } = SEO_DATA.blog;
+export async function generateMetadata({ searchParams }) {
+  if (!searchParams?.id || !searchParams?.status) {
+    return null;
+  }
+
+  const { post } = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
+
+  if (!post) return null;
+
+  const {
+    seo: {
+      title,
+      metaDesc,
+      metaKeywords,
+      metaRobotsNoindex,
+      opengraphTitle,
+      opengraphDescription,
+      twitterImage,
+    },
+  } = post;
 
   return getMetadata({
-    title,
-    description,
-    keywords: '',
-    robotsNoindex: 'noindex',
+    title: opengraphTitle || title,
+    description: opengraphDescription || metaDesc,
+    keywords: metaKeywords,
+    robotsNoindex: metaRobotsNoindex || 'noindex',
     pathname: `${LINKS.blog}/wp-draft-post-preview-page`,
-    imagePath,
+    imagePath: twitterImage?.mediaItemUrl,
   });
 }
 

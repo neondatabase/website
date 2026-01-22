@@ -4,14 +4,14 @@ import { useThrottleCallback } from '@react-hook/throttle';
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import TOCIcon from './images/toc.inline.svg';
 import Item from './item';
 
-const CURRENT_ANCHOR_GAP_PX = 100;
+const ANCHOR_SCROLL_MARGIN = 130;
 
-const TableOfContents = ({ items }) => {
+const TableOfContents = ({ items, isTemplate }) => {
   const titles = useRef([]);
   const [currentAnchor, setCurrentAnchor] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(null);
   const [isUserScrolling, setIsUserScrolling] = useState(true);
 
   const flatItems = useMemo(
@@ -36,7 +36,12 @@ const TableOfContents = ({ items }) => {
     const currentTitleIdx = titles.current.findIndex((anchor) => {
       const { top } = anchor.getBoundingClientRect();
 
-      return top - CURRENT_ANCHOR_GAP_PX >= 0;
+      // Check if the anchor is inside a collapsed details element
+      if (anchor.closest('details:not([open])')) {
+        return false;
+      }
+
+      return top - ANCHOR_SCROLL_MARGIN >= 0;
     });
 
     const idx =
@@ -45,12 +50,8 @@ const TableOfContents = ({ items }) => {
     const currentTitle = titles.current[idx];
 
     setCurrentAnchor(currentTitle?.id);
-
-    if (isUserScrolling) {
-      // Open sub-items only if it's user-initiated scrolling
-      setCurrentAnchor(currentTitle?.id);
-    }
-  }, [isUserScrolling]);
+    setCurrentIndex(idx);
+  }, []);
 
   const onScroll = useThrottleCallback(updateCurrentAnchor, 100);
 
@@ -66,17 +67,19 @@ const TableOfContents = ({ items }) => {
 
   return (
     <>
-      <h3 className="flex items-center space-x-2 py-2 text-sm font-semibold leading-tight">
-        <TOCIcon className="h-3.5 w-3.5 text-black dark:text-white" />
-        <span>On this page</span>
+      <h3 className="mb-3.5 text-sm font-medium leading-tight tracking-extra-tight">
+        On this page
       </h3>
-      <ul className="mt-2.5">
+      <ul className="no-scrollbars -m-1 overflow-y-auto p-1">
         {items.map((item, index) => (
-          <li key={index}>
+          <li className="group relative" key={index}>
             <Item
+              index={item.index}
+              currentIndex={currentIndex}
               currentAnchor={currentAnchor}
               isUserScrolling={isUserScrolling}
               setIsUserScrolling={setIsUserScrolling}
+              isTemplate={isTemplate}
               {...item}
             />
           </li>
@@ -89,11 +92,13 @@ const TableOfContents = ({ items }) => {
 TableOfContents.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
+      index: PropTypes.number,
       id: PropTypes.string.isRequired,
       level: PropTypes.number.isRequired,
       title: PropTypes.string.isRequired,
     })
   ).isRequired,
+  isTemplate: PropTypes.bool,
 };
 
 export default TableOfContents;

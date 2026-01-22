@@ -1,105 +1,128 @@
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
-import ReleaseNoteList from 'components/pages/changelog/changelog-list';
+import ChangelogList from 'components/pages/changelog/changelog-list';
 import Hero from 'components/pages/changelog/hero';
+import Aside from 'components/pages/doc/aside';
 import Breadcrumbs from 'components/pages/doc/breadcrumbs';
+import Modal from 'components/pages/doc/modal';
+import MODALS from 'components/pages/doc/modal/data';
+import ChangelogForm from 'components/shared/changelog-form';
 import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
-import LastUpdatedDate from 'components/shared/last-updated-date';
 import NavigationLinks from 'components/shared/navigation-links';
-import TableOfContents from 'components/shared/table-of-contents';
-// import Pagination from 'components/pages/changelog/pagination';
-// import ChangelogFilter from 'components/pages/changelog/changelog-filter';
 import { DOCS_BASE_PATH } from 'constants/docs';
 
 import Tag from '../tag';
 
-// TODO: Add pagination for changelog
-const Changelog = ({
-  // currentSlug,
-  items,
-}) => (
+const Changelog = ({ posts }) => (
   <>
     <Hero />
-    {/* <ChangelogFilter currentSlug={currentSlug} /> */}
-    <ReleaseNoteList className="mt-4" items={items} />
-    {/* {pageCount > 1 && <Pagination currentPageIndex={currentPageIndex} pageCount={pageCount} />} */}
+    <ChangelogForm className="mb-5 hidden xl:flex" />
+    <ChangelogList className="mt-4" posts={posts} />
   </>
 );
 
 Changelog.propTypes = {
-  // currentSlug: PropTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      slug: PropTypes.string.isRequired,
-      content: PropTypes.string.isRequired,
-    })
-  ).isRequired,
+  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const Post = ({
-  data: { title, subtitle, enableTableOfContents = false, tag = null, updatedOn = null },
+  data: {
+    title,
+    subtitle,
+    enableTableOfContents = false,
+    tag = null,
+    updatedOn = null,
+    layout = null,
+    contentLayout = null,
+  },
   content,
   breadcrumbs,
+  breadcrumbsBaseUrl = DOCS_BASE_PATH,
   navigationLinks: { previousLink, nextLink },
+  navigationLinksBasePath = DOCS_BASE_PATH,
+  isDocsIndex = false,
   isChangelog = false,
-  isFlowPage = false,
+  isPostgres = false,
   changelogPosts = [],
   currentSlug,
-  fileOriginPath,
+  gitHubPath,
   tableOfContents,
-}) => (
-  <>
-    <div
-      className={clsx(
-        'flex flex-col lg:ml-0 lg:pt-0 md:mx-auto md:pb-[70px] sm:pb-8',
-        isFlowPage
-          ? 'col-span-6 col-start-4 -mx-10 2xl:col-span-9 2xl:col-start-2 2xl:mx-5 xl:col-span-8 xl:col-start-3'
-          : 'col-span-6 -mr-12 ml-[-33px] 2xl:-ml-4 xl:col-span-9 xl:ml-10 xl:mr-0 xl:max-w-[750px] lg:max-w-none'
-      )}
-    >
-      {breadcrumbs.length > 0 && <Breadcrumbs breadcrumbs={breadcrumbs} />}
-      {isChangelog ? (
-        <Changelog currentSlug={currentSlug} items={changelogPosts} />
-      ) : (
-        <article>
-          <h1
-            className={clsx(
-              'font-title text-[36px] font-medium leading-tight tracking-tighter xl:text-3xl',
-              tag && 'inline'
-            )}
-          >
-            {title}
-          </h1>
-          {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
-          {subtitle && (
-            <p className="my-2 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80">
-              {subtitle}
-            </p>
-          )}
-          <Content className="mt-5" content={content} />
-          {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
-        </article>
-      )}
+  author,
+}) => {
+  const modal = MODALS.find(
+    (modal) =>
+      breadcrumbs?.some((breadcrumb) => modal.pagesToShow.includes(breadcrumb.title)) ||
+      (isDocsIndex && modal.pagesToShow.includes('Neon Docs'))
+  );
 
-      {!isChangelog && (
-        <NavigationLinks
-          previousLink={previousLink}
-          nextLink={nextLink}
-          basePath={DOCS_BASE_PATH}
+  // Check if wide layout is enabled (hides right sidebar/TOC)
+  const isWideLayout = layout === 'wide';
+
+  // Check if split content layout is enabled (2-column grid for SDK reference style)
+  const isSplitLayout = contentLayout === 'split';
+
+  return (
+    <>
+      <div className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none')}>
+        {breadcrumbs?.length > 0 && (
+          <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
+        )}
+
+        {isChangelog ? (
+          <Changelog currentSlug={currentSlug} posts={changelogPosts} />
+        ) : (
+          <article>
+            <h1
+              className={clsx(
+                'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
+                tag && 'inline'
+              )}
+            >
+              {title}
+            </h1>
+            {tag && <Tag className="relative -top-1.5 ml-3 inline" label={tag} />}
+            {subtitle && (
+              <p className="mt-2.5 text-xl leading-tight text-gray-new-40 dark:text-gray-new-80 md:mt-1.5 md:text-lg">
+                {subtitle}
+              </p>
+            )}
+            <Content
+              className={clsx('mt-7 md:mt-5', isSplitLayout && 'split-layout')}
+              content={content}
+              isPostgres={isPostgres}
+            />
+          </article>
+        )}
+
+        {!isChangelog && (
+          <NavigationLinks
+            previousLink={previousLink}
+            nextLink={nextLink}
+            basePath={navigationLinksBasePath}
+          />
+        )}
+
+        {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
+      </div>
+
+      {/* Regular pages: Show standard right sidebar */}
+      {!isWideLayout && (
+        <Aside
+          className="!ml-0 w-64 shrink-0 xl:hidden"
+          isDocsIndex={isDocsIndex}
+          isChangelog={isChangelog}
+          enableTableOfContents={enableTableOfContents}
+          tableOfContents={tableOfContents}
+          gitHubPath={gitHubPath}
+          author={author}
         />
       )}
-      <DocFooter fileOriginPath={fileOriginPath} slug={currentSlug} />
-    </div>
-
-    <div className="col-start-10 col-end-13 ml-[50px] h-full xl:ml-0 xl:hidden">
-      <nav className="no-scrollbars sticky bottom-10 top-[104px] max-h-[calc(100vh-80px)] overflow-y-auto overflow-x-hidden">
-        {enableTableOfContents && <TableOfContents items={tableOfContents} />}
-      </nav>
-    </div>
-  </>
-);
+      {modal && <Modal {...modal} />}
+    </>
+  );
+};
 
 Post.propTypes = {
   data: PropTypes.shape({
@@ -108,15 +131,20 @@ Post.propTypes = {
     enableTableOfContents: PropTypes.bool,
     tag: PropTypes.string,
     updatedOn: PropTypes.string,
+    layout: PropTypes.oneOf(['wide', null]),
+    contentLayout: PropTypes.oneOf(['split', null]),
   }).isRequired,
   content: PropTypes.string.isRequired,
-  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
+  breadcrumbsBaseUrl: PropTypes.string,
   navigationLinks: PropTypes.exact({
     previousLink: PropTypes.shape({}),
     nextLink: PropTypes.shape({}),
   }).isRequired,
+  navigationLinksBasePath: PropTypes.string,
   isChangelog: PropTypes.bool,
-  isFlowPage: PropTypes.bool,
+  isPostgres: PropTypes.bool,
+  isDocsIndex: PropTypes.bool,
   changelogPosts: PropTypes.arrayOf(
     PropTypes.shape({
       slug: PropTypes.string,
@@ -124,8 +152,18 @@ Post.propTypes = {
     })
   ),
   currentSlug: PropTypes.string.isRequired,
-  fileOriginPath: PropTypes.string.isRequired,
+  gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
+  author: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    position: PropTypes.string,
+    bio: PropTypes.string,
+    link: PropTypes.shape({
+      url: PropTypes.string,
+      title: PropTypes.string,
+    }),
+    photo: PropTypes.string,
+  }),
 };
 
 export default Post;

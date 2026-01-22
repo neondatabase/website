@@ -35,7 +35,7 @@ const AnimatedButton = ({
   isAnimated = false,
   animationColor = '#00E599',
   size = null,
-  tag_name = null,
+  tagName = null,
   theme,
   children,
   linesOffsetTop = 28,
@@ -118,7 +118,7 @@ const AnimatedButton = ({
         sendGtagEvent('Button Clicked', {
           style: 'Animated',
           text: getNodeText(children),
-          tag_name,
+          tagName,
         });
       }}
       {...otherProps}
@@ -155,7 +155,7 @@ AnimatedButton.propTypes = {
   className: PropTypes.string,
   to: PropTypes.string,
   size: PropTypes.oneOf(Object.keys(styles.size)),
-  tag_name: PropTypes.string,
+  tagName: PropTypes.string,
   theme: PropTypes.oneOf(Object.keys(styles.theme)).isRequired,
   children: PropTypes.node.isRequired,
   animationColor: PropTypes.string,

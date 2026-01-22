@@ -2,7 +2,7 @@
 title: Google Colab
 subtitle: Use Google Colab with Neon for vector similarity search
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.360Z'
+updatedOn: '2025-02-03T20:41:57.298Z'
 ---
 
 [Google Colab](https://colab.research.google.com/) is a hosted Jupyter Notebook service that requires no setup to use and provides free access to computing resources, including GPUs and TPUs.
@@ -16,9 +16,9 @@ To perform the steps in this guide, you require a Neon database for storing vect
 
 ## Retrieve your database connection string
 
-In the **Connection Details** widget on the Neon **Dashboard**, select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
+Click **Connect** on your **Project Dashboard** to open the **Connect to your database** modal, and select a branch, a user, and the database you want to connect to. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection modal](/docs/connect/connection_details.png)
 
 ## Create a notebook
 
@@ -34,14 +34,14 @@ Alternatively, you can open a predefined Google Colab notebook for this guide by
 
 ## Connect to your database
 
-1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
+1. In your Colab notebook, create a code block to define your database connection and create a cursor object. Replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with the database connection string you retrieved in the previous step.
 
    ```python shouldWrap
    import os
    import psycopg2
 
    # Provide your Neon connection string
-   connection_string = "postgres://[user]:[password]@[neon_hostname]/[dbname]"
+   connection_string = "postgresql://[user]:[password]@[neon_hostname]/[dbname]"
 
    # Connect using the connection string
    connection = psycopg2.connect(connection_string)

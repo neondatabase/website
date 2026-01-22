@@ -2,7 +2,7 @@
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.396Z'
+updatedOn: '2025-08-02T10:33:29.277Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -11,9 +11,9 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 
 ## Prerequisites
 
-- A Neon account. See [Sign up](/docs/get-started-with-neon/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started-with-neon/setting-up-a-project).
-- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS`.
+- A Neon account. See [Sign up](/docs/get-started/signing-up).
+- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
+- Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase
 
@@ -78,7 +78,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 1. Open the [Neon Console](https://console.neon.tech/app/projects).
 1. Select your project.
 1. Select **Databases** from the sidebar and create a database named `blog`. For instructions, see [Create a database](/docs/manage/databases#create-a-database).
-1. Using the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor), add the following tables:
+1. Using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor), add the following tables:
 
    ```sql
    -- Creating the `authors` table
@@ -102,7 +102,7 @@ For demonstration purposes, create a `blog` database in Neon with two tables, `p
 
 ## Retrieve your Neon database connection string
 
-From the Neon **Dashboard**, retrieve your password and a Java connection string from the **Connection Details** widget. Use the selection drop-down menu.
+Find your database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Use the selection drop-down menu.
 
 Your Java connection string should look something like the one shown below.
 
@@ -125,11 +125,11 @@ jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex
    touch liquibase.properties
    ```
 
-3. Open the the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
+3. Open the `liquibase.properties` file in an editor and add entries for a [liquibase changelog file](https://docs.liquibase.com/concepts/changelogs/home.html) and your database `url`. We'll call the changelog file `dbchangelog.xml`. You will use this file to define schema changes. For the `url`, specify the Neon connection string you retrieved previously.
 
    ```bash shouldWrap
    changeLogFile:dbchangelog.xml
-   url: jdbc:postgresql://ep-floral-poetry-66238369.us-east-2.aws.neon.tech/blog?user=alex&password=4GfNAqycba8P&sslmode=require
+   url: jdbc:postgresql://ep-cool-darkness-123456.us-east-2.aws.neon.tech/blog?user=alex&password=AbC123dEf&sslmode=require&channel_binding=require
    ```
 
 ## Take a snapshot of your database

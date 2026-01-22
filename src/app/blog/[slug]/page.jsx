@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { draftMode } from 'next/headers';
+
 import { notFound } from 'next/navigation';
 
 import Aside from 'components/pages/blog-post/aside';
@@ -9,26 +9,16 @@ import Content from 'components/pages/blog-post/content';
 import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
-import PreviewWarning from 'components/pages/blog-post/preview-warning';
 import SocialShare from 'components/pages/blog-post/social-share';
-import SubscribeForm from 'components/pages/blog-post/subscribe-form';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
-import { getAllWpPosts, getWpPostBySlug, getWpPreviewPostData } from 'utils/api-posts';
+import { getAllWpPosts, getWpPostBySlug } from 'utils/api-wp';
 import getFormattedDate from 'utils/get-formatted-date';
 import getMetadata from 'utils/get-metadata';
 import getReactContentWithLazyBlocks from 'utils/get-react-content-with-lazy-blocks';
 
-const BlogPage = async ({ params, searchParams }) => {
-  const { isEnabled: isDraftModeEnabled } = draftMode();
-
-  let postResult;
-
-  if (isDraftModeEnabled) {
-    postResult = await getWpPreviewPostData(searchParams?.id, searchParams?.status);
-  } else {
-    postResult = await getWpPostBySlug(params?.slug);
-  }
+const BlogPage = async ({ params }) => {
+  const postResult = await getWpPostBySlug(params?.slug);
 
   const { post, relatedPosts } = postResult;
 
@@ -72,17 +62,16 @@ const BlogPage = async ({ params, searchParams }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="safe-paddings">
-        <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+        <article className="dark mx-auto grid max-w-[1472px] grid-cols-12 gap-x-10 pb-40 pt-16 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-3xl lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
           <Hero
-            className="post-title col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
+            className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
             {...pageBlogPost}
           />
-
           <Content
-            className="col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="post-content col-start-4 col-end-10 row-start-2 mt-10 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
             html={contentWithLazyBlocks}
           />
           <Aside
@@ -97,18 +86,12 @@ const BlogPage = async ({ params, searchParams }) => {
             title={title}
             slug={shareUrl}
           />
-
-          <SubscribeForm
-            size="sm"
-            className="col-span-6 col-start-4 mt-16 xl:col-span-8 lg:col-span-full"
-          />
           <MoreArticles
             className="col-span-10 col-start-2 mt-16 xl:col-span-full xl:mt-14 lg:mt-12 md:mt-11"
             posts={relatedPosts}
           />
         </article>
       </div>
-      {isDraftModeEnabled && <PreviewWarning />}
     </>
   );
 };

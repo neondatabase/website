@@ -1,4 +1,4 @@
-import Hero from 'components/pages/404/hero';
+import Hero from 'components/pages/error/hero';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
 
@@ -12,7 +12,10 @@ const NotFoundPage = () => (
     <title>{SEO_DATA[404].title}</title>
 
     <Layout>
-      <Hero />
+      <Hero
+        title="Page not found..."
+        text="Sorry, the page you are looking for doesn’t exist or has been moved."
+      />
     </Layout>
   </>
 );

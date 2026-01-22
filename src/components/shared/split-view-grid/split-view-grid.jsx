@@ -6,6 +6,7 @@ import GradientLabel from 'components/shared/gradient-label';
 
 const SplitViewGrid = ({
   className = null,
+  titleClassName = null,
   label,
   title,
   description,
@@ -14,7 +15,7 @@ const SplitViewGrid = ({
   ctaText = '',
   size = 'md',
 }) => (
-  <section className={clsx('benefits safe-paddings', className)}>
+  <section className={clsx('features safe-paddings', className)}>
     <Container className="grid-gap-x grid grid-cols-12" size="medium">
       <div
         className={clsx(
@@ -27,7 +28,7 @@ const SplitViewGrid = ({
       >
         <div
           className={clsx(
-            'col-span-4 col-start-1 flex flex-col items-start xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5',
+            'col-span-4 col-start-1 flex min-w-[440px] flex-col items-start 2xl:min-w-0 xl:max-w-[300px] xl:self-start xl:justify-self-start xl:pl-8 lg:col-span-full lg:max-w-none lg:px-7 md:pl-6 md:pr-3.5',
             {
               'pl-12': size === 'md',
               'pl-11': size === 'sm',
@@ -37,27 +38,28 @@ const SplitViewGrid = ({
           {isGradientLabel ? (
             <GradientLabel>{label}</GradientLabel>
           ) : (
-            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none tracking-[0.02em] text-green-45">
+            <span className="inline-block rounded-[40px] bg-green-45/10 px-3.5 py-2 text-xs font-semibold uppercase leading-none -tracking-extra-tight text-green-45">
               {label}
             </span>
           )}
           <h2
-            className={clsx('mt-3 font-title font-medium leading-none', {
-              'max-w-[322px] text-[52px] tracking-[-0.02em] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]':
-                size === 'md',
-              'text-5xl tracking-tight': size === 'sm',
-            })}
+            className={clsx(
+              'mt-3 text-balance font-title font-medium leading-none',
+              'max-w-[322px] xl:max-w-[270px] xl:text-[44px] lg:max-w-none lg:text-4xl md:text-[32px]',
+              {
+                'text-[52px] tracking-extra-tight': size === 'md',
+                'text-5xl tracking-tight': size === 'sm',
+              },
+              titleClassName
+            )}
           >
             {title}
           </h2>
           <p
-            className={clsx(
-              'max-w-[362px] text-lg font-light leading-snug xl:max-w-[280px] xl:text-base lg:max-w-[648px] md:mt-2.5 sm:max-w-none sm:pr-1.5',
-              {
-                'mt-4': size === 'md',
-                'mt-5': size === 'sm',
-              }
-            )}
+            className={clsx('text-lg font-light leading-snug xl:text-base md:mt-2.5', {
+              'mt-4': size === 'md',
+              'mt-5': size === 'sm',
+            })}
           >
             {description}
           </p>
@@ -90,7 +92,7 @@ const SplitViewGrid = ({
               />
               <div className="flex flex-col">
                 <h3
-                  className={clsx('font-title font-medium leading-tight tracking-[-0.02em]', {
+                  className={clsx('font-title font-medium leading-tight tracking-extra-tight', {
                     'text-[22px] xl:text-xl': size === 'md',
                     'text-lg': size === 'sm',
                   })}
@@ -122,6 +124,7 @@ const SplitViewGrid = ({
 
 SplitViewGrid.propTypes = {
   className: PropTypes.string,
+  titleClassName: PropTypes.string,
   label: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

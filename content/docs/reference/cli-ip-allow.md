@@ -2,13 +2,13 @@
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.114Z'
+updatedOn: '2025-09-29T19:49:33.018Z'
 ---
 
 ## Before you begin
 
 - Before running the `ip-allow` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
 For information about Neon's **IP Allow** feature, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
@@ -19,7 +19,7 @@ The `ip-allow` command allows you to perform `list`, `add`, `remove`, and `reset
 ### Usage
 
 ```bash
-neonctl ip-allow <subcommand> [options]
+neon ip-allow <subcommand> [options]
 ```
 
 | Subcommand        | Description                               |
@@ -36,7 +36,7 @@ This subcommand allows you to list addresses in the IP allowlist.
 #### Usage
 
 ```bash
-neonctl ip-allow list [options]
+neon ip-allow list [options]
 ```
 
 #### Options
@@ -51,13 +51,13 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Examples
 
 ```bash
-neonctl ip-allow list --project-id cold-grass-40154007
+neon ip-allow list --project-id cold-grass-40154007
 ```
 
 List the IP allowlist with the `--output` format set to `json`:
 
 ```bash
-neonctl ip-allow list --project-id cold-grass-40154007 --output json
+neon ip-allow list --project-id cold-grass-40154007 --output json
 ```
 
 ### add
@@ -67,7 +67,7 @@ This subcommand allows you to add IP addresses to the IP allowlist for your Neon
 #### Usage
 
 ```bash
-neonctl ip-allow add [ips ...] [options]
+neon ip-allow add [ips ...] [options]
 ```
 
 #### Options
@@ -78,12 +78,12 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ | ------ | :-------------------------------------------------: |
 | `--context-file`   | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                      | string |                                                     |
 | `--project-id`     | Project ID                                                                                                         | string | Only if your Neon account has more than one project |
-| `--primary-branch` | If true, the list will be applied only to the default branch. Use `--primary-branch false` to remove this setting. | string |                                                     |
+| `--protected-only` | If true, the list will be applied only to protected branches. Use `--protected-only false` to remove this setting. | string |                                                     |
 
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow add 192.0.2.3 --project-id cold-grass-40154007
+neon ip-allow add 192.0.2.3 --project-id cold-grass-40154007
 ```
 
 ### remove
@@ -93,7 +93,7 @@ This subcommand allows you to remove IP addresses from the IP allowlist for your
 #### Usage
 
 ```bash
-neonctl ip-allow remove [ips ...] [options]
+neon ip-allow remove [ips ...] [options]
 ```
 
 #### Options
@@ -108,7 +108,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow remove 192.0.2.3 --project-id cold-grass-40154007
+neon ip-allow remove 192.0.2.3 --project-id cold-grass-40154007
 ```
 
 ### reset
@@ -118,7 +118,7 @@ This subcommand allows you to reset the list of IP addresses. You can reset to d
 #### Usage
 
 ```bash
-neonctl ip-allow reset [ips ...] [options]
+neon ip-allow reset [ips ...] [options]
 ```
 
 #### Options
@@ -133,7 +133,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash shouldWrap
-neonctl ip-allow reset 192.0.2.1 --project-id cold-grass-40154007
+neon ip-allow reset 192.0.2.1 --project-id cold-grass-40154007
 ```
 
 <NeedHelp/>

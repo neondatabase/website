@@ -2,19 +2,19 @@
 title: Use Neon with Netlify Functions
 subtitle: Connect a Neon Postgres database to your Netlify Functions application
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.402Z'
+updatedOn: '2025-06-30T11:30:21.908Z'
 ---
 
 [Netlify Functions](https://www.netlify.com/products/functions/) provide a serverless execution environment for building and deploying backend functionality without managing server infrastructure. It's integrated with Netlify's ecosystem, making it ideal for augmenting web applications with server-side logic, API integrations, and data processing tasks in a scalable way.
 
-This guide will show you how to connect to a Neon Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
+This guide will show you how to connect to a Neon Postgres database from your Netlify Functions project. We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
 Before starting, ensure you have:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A Netlify account for deploying your site with `Functions`. Sign up at [Netlify](https://netlify.com) if necessary. While Netlify can deploy directly from a Github repository, we'll use the `Netlify` CLI tool to deploy our project manually.
+- A Netlify account for deploying your site with `Functions`. Sign up at [Netlify](https://netlify.com) if necessary. While Netlify can deploy directly from a GitHub repository, we'll use the `Netlify` CLI tool to deploy our project manually.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed locally for developing and deploying your Functions.
 
 ## Setting up your Neon database
@@ -31,6 +31,7 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
    CREATE TABLE favorite_coffee_blends (
        id SERIAL PRIMARY KEY,
        name TEXT,
+       origin TEXT,
        notes TEXT
    );
    ```
@@ -40,18 +41,18 @@ After logging into the Neon Console, proceed to the [Projects](https://console.n
    ```sql
    INSERT INTO favorite_coffee_blends (name, origin, notes)
    VALUES
-       ('Morning Joy', 'Citrus, Honey, Floral'),
-       ('Dark Roast Delight', 'Rich, Chocolate, Nutty'),
-       ('Arabica Aroma', 'Smooth, Caramel, Fruity'),
-       ('Robusta Revolution', 'Strong, Bold, Bitter');
+       ('Morning Joy', 'Ethiopia', 'Citrus, Honey, Floral'),
+       ('Dark Roast Delight', 'Colombia', 'Rich, Chocolate, Nutty'),
+       ('Arabica Aroma', 'Brazil', 'Smooth, Caramel, Fruity'),
+       ('Robusta Revolution', 'Vietnam', 'Strong, Bold, Bitter');
    ```
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your Neon database connection string by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.
@@ -218,7 +219,15 @@ The CLI will build and deploy your site and functions to Netlify. After deployme
 
 For cleanup, delete your Netlify site and functions via the Netlify dashboard or CLI. Consult the [Netlify documentation](https://docs.netlify.com/) for detailed instructions.
 
-To remove your Neon project, follow the deletion steps in Neon's documentation under [Manage Projects](https://neon.tech/docs/manage/projects#delete-a-project).
+To remove your Neon project, follow the deletion steps in Neon's documentation under [Manage Projects](/docs/manage/projects#delete-a-project).
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-netlify-functions" description="Connect a Neon Postgres database to your Netlify Functions application" icon="github">Use Neon with Netlify Functions</a>
+</DetailIconCards>
 
 ## Resources
 

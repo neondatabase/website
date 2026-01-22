@@ -6,54 +6,75 @@ import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 import remarkGfm from 'remark-gfm';
 
-
+import ChatOptions from 'components/pages/doc/chat-options';
+import CheckItem from 'components/pages/doc/check-item';
+import CheckList from 'components/pages/doc/check-list';
 import CodeTabs from 'components/pages/doc/code-tabs';
 import CommunityBanner from 'components/pages/doc/community-banner';
 import DefinitionList from 'components/pages/doc/definition-list';
 import DetailIconCards from 'components/pages/doc/detail-icon-cards';
+import DocsLink from 'components/pages/doc/docs-link';
+import DocsList from 'components/pages/doc/docs-list';
+// eslint-disable-next-line import/no-cycle
 import IncludeBlock from 'components/pages/doc/include-block';
+import InfoBlock from 'components/pages/doc/info-block';
+import LinkPreview from 'components/pages/doc/link-preview';
+import PromptCards from 'components/pages/doc/prompt-cards';
+import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
-import TechnologyNavigation from 'components/pages/doc/technology-navigation';
+import TechCards from 'components/pages/doc/tech-cards';
+import TwoColumnLayout from 'components/pages/doc/two-column-layout';
+import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
+import SubscriptionForm from 'components/pages/use-case/subscription-form';
+import Testimonial from 'components/pages/use-case/testimonial';
+import TestimonialsWrapper from 'components/pages/use-case/testimonials-wrapper';
+import UseCaseContext from 'components/pages/use-case/use-case-context';
+import UseCaseList from 'components/pages/use-case/use-case-list';
 import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
+import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import Link from 'components/shared/link';
-import LINKS from 'constants/links';
+import ComputeCalculator from 'components/shared/compute-calculator';
+import CopyPrompt from 'components/shared/copy-prompt/copy-prompt';
+import CtaBlock from 'components/shared/cta-block';
+import DeployPostgresButton from 'components/shared/deploy-postgres-button';
+import DocCta from 'components/shared/doc-cta';
+import ExternalCode from 'components/shared/external-code';
+import GradientBorder from 'components/shared/gradient-border';
+import ImageZoom from 'components/shared/image-zoom';
+import LatencyCalculator from 'components/shared/latency-calculator';
+import MegaLink from 'components/shared/mega-link';
+import Mermaid from 'components/shared/mermaid';
+import ProgramForm from 'components/shared/program-form';
+import RequestForm from 'components/shared/request-form';
+import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
+import SubprocessorsForm from 'components/shared/subprocessors-form';
 import getCodeProps from 'lib/rehype-code-props';
 
 import sharedMdxComponents from '../../../../content/docs/shared-content';
-import DocCta from '../doc-cta';
-import ImageZoom from '../image-zoom'
+import FeatureList from '../feature-list';
+import LogosSection from '../grid-features/logos-section';
+import QuickLinks from '../quick-links';
+import QuoteBlock from '../quote-block';
 
 const sharedComponents = Object.keys(sharedMdxComponents).reduce((acc, key) => {
-  acc[key] = () => IncludeBlock({ url: sharedMdxComponents[key] });
+  acc[key] = (props) => IncludeBlock({ url: sharedMdxComponents[key], ...props });
   return acc;
 }, {});
 
-const Heading =
-  (Tag) =>
-  // eslint-disable-next-line react/prop-types
-  ({ children, className = null }) => (
-    <Tag className={clsx(className, 'postgres-heading')}>{children}</Tag>
-  );
-
-const getHeadingComponent = (heading, withoutAnchorHeading, isPostgres) => {
+const getHeadingComponent = (heading, withoutAnchorHeading) => {
   if (withoutAnchorHeading) {
     return heading;
   }
-  if (isPostgres) {
-    return Heading(heading);
-  }
-
   return AnchorHeading(heading);
 };
 
-const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
-  h2: getHeadingComponent('h2', withoutAnchorHeading, isPostgres),
-  h3: getHeadingComponent('h3', withoutAnchorHeading, isPostgres),
-  h4: getHeadingComponent('h4', withoutAnchorHeading, isPostgres),
+const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate) => ({
+  h2: getHeadingComponent('h2', withoutAnchorHeading),
+  h3: getHeadingComponent('h3', withoutAnchorHeading),
+  h4: getHeadingComponent('h4', withoutAnchorHeading),
   table: (props) => (
     <div className="table-wrapper">
       <table {...props} />
@@ -61,72 +82,120 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres) => ({
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  pre: (props) => <CodeBlock {...props} />,
-  a: (props) => {
-    const { href, children, ...otherProps } = props;
-    if (children === '#id') {
-      const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-      return <span id={id} />;
+  pre: (props) => {
+    const codeElement = props?.children;
+    const code = codeElement?.props?.children;
+    const className = codeElement?.props?.className || '';
+
+    // Check if this is a mermaid code block
+    if (
+      codeElement &&
+      typeof code === 'string' &&
+      className &&
+      className.includes('language-mermaid')
+    ) {
+      return <Mermaid chart={code.trim()} />;
     }
 
-    const regex = /^(?!\/|https?:|#)[\w-]+$/;
-    if (isPostgres && regex.test(href)) {
-      const postgresHref = `${LINKS.postgres}/${href}`;
-
-      return (
-        <Link to={postgresHref} {...otherProps}>
-          {children}
-        </Link>
-      );
-    }
-
-    return (
-      <Link to={href} {...otherProps}>
-        {children}
-      </Link>
-    );
+    return <CodeBlock {...props} />;
   },
+  a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
 
-    return (
-      <ImageZoom src={src}>
-        <Image
-          className={clsx(className, { 'no-border': title === 'no-border' })}
-          src={src}
-          width={isReleaseNote ? 762 : 796}
-          height={isReleaseNote ? 428 : 447}
-          style={{ width: '100%', height: '100%' }}
-          title={title !== 'no-border' ? title : undefined}
-          {...rest}
-        />
-      </ImageZoom>
-    );
-  },
-  p: (props) => {
-    const { children, className } = props;
-    const href =
-      // eslint-disable-next-line react/prop-types
-      Array.isArray(children) ? children.find((child) => child?.props?.href)?.props?.href : null;
-
-    const id = href?.startsWith('#') ? href.replace('#', '') : undefined;
-
-    if (isPostgres) {
-      return <p className={clsx(className, { 'postgres-paragraph': id })} id={id} {...props} />;
+    // No zoom on PostgreSQLTutorial Images
+    if (!isPostgres) {
+      return (
+        <ImageZoom src={src}>
+          <Image
+            className={clsx(
+              className,
+              { 'no-border': title === 'no-border' },
+              isTemplate && 'rounded-lg'
+            )}
+            src={src}
+            width={isReleaseNote ? 762 : 796}
+            height={isReleaseNote ? 428 : 447}
+            style={{ width: '100%', height: '100%' }}
+            title={title !== 'no-border' ? title : undefined}
+            {...rest}
+          />
+          {isTemplate && <GradientBorder className="rounded-lg" withBlend />}
+        </ImageZoom>
+      );
     }
 
-    return <p {...props} />;
+    return src.includes('?') ? (
+      // Authors can use anchor tags to make images float right/left
+      <Image
+        className={clsx(
+          className,
+          {
+            'no-border':
+              title === 'no-border' || src.includes('alignleft') || src.includes('alignright'),
+          },
+          { 'float-right clear-left p-4 grayscale filter': src.includes('alignright') },
+          { 'float-left clear-right p-4 grayscale filter': src.includes('alignleft') }
+        )}
+        src={src.split('?')[0]}
+        width={100}
+        height={100}
+        style={{ width: 'auto', height: 'auto', maxWidth: '128px', maxHeight: '128px' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    ) : (
+      <Image
+        className={clsx(className, { 'no-border': title === 'no-border' })}
+        src={src}
+        width={200}
+        height={100}
+        style={{ width: 'auto', height: 'auto' }}
+        title={title !== 'no-border' ? title : undefined}
+        {...rest}
+      />
+    );
   },
+  Button,
   YoutubeIframe,
   DefinitionList,
+  FeatureList,
   Admonition,
   CodeTabs,
   DetailIconCards,
-  TechnologyNavigation,
+  TechCards,
+  PromptCards,
   CommunityBanner,
+  QuickLinks,
+  QuoteBlock,
   Tabs,
   TabItem,
-  CTA: DocCta,
+  InfoBlock,
+  LinkPreview,
+  DocsList,
+  RequestForm,
+  SubprocessorsForm,
+  ProgramForm,
+  LatencyCalculator,
+  CTA: isTemplate ? CtaBlock : DocCta,
+  Testimonial,
+  TestimonialsWrapper,
+  UseCaseList,
+  UseCaseContext,
+  ComputeCalculator,
+  SubscriptionForm,
+  Video,
+  Steps,
+  TwoColumnLayout,
+  LogosSection,
+  DeployPostgresButton,
+  ChatOptions,
+  CheckList,
+  CheckItem,
+  ExternalCode: (props) => <ExternalCode {...props} />,
+  MegaLink,
+  CopyPrompt,
+  SqlToRestConverter,
   ...sharedComponents,
 });
 
@@ -138,13 +207,20 @@ const Content = ({
   withoutAnchorHeading = false,
   isReleaseNote = false,
   isPostgres = false,
+  isTemplate = false,
 }) => (
-  <div className={clsx('prose-doc prose dark:prose-invert xs:prose-code:break-words', className)}>
+  <div
+    className={clsx(
+      'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
+      isTemplate && 'prose-template',
+      className
+    )}
+  >
     {asHTML ? (
       <div dangerouslySetInnerHTML={{ __html: content }} />
     ) : (
       <MDXRemote
-        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres)}
+        components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
         options={{
           mdxOptions: {
@@ -166,6 +242,7 @@ Content.propTypes = {
   withoutAnchorHeading: PropTypes.bool,
   isReleaseNote: PropTypes.bool,
   isPostgres: PropTypes.bool,
+  isTemplate: PropTypes.bool,
 };
 
 export default Content;

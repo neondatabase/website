@@ -1,8 +1,8 @@
 ---
-title: Documentation Contribution Guide
+title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2024-06-14T13:53:28.219Z'
+updatedOn: '2026-01-20T19:00:25.317Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -40,6 +40,8 @@ Neon uses Markdown as the documentation source format. Markdown is a lightweight
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
+For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide). To add visual diagrams to your documentation, check out our [Mermaid Diagrams Guide](/docs/community/mermaid-diagrams).
+
 ## Preview changes in VSCode
 
 At Neon, we use VSCode for writing documentation. VSCode includes a built-in markdown previewer that you can use to view your changes locally.
@@ -63,7 +65,7 @@ The Neon documentation file structure reflects the navigation you see on the web
     ├── community
     ├── connect
     ├── extensions
-    ├── get-started-with-neon
+    ├── get-started
     ├── guides
     ├── introduction
     ├── manage
@@ -77,48 +79,9 @@ The Neon documentation file structure reflects the navigation you see on the web
 
 ## Documentation table of contents
 
-This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `sidebar.yaml`, which you can find at the root of the `/docs` directory.
+This section describes how to modify the documentation table of contents, also referred to as the "sidebar". Adding, removing, or moving a page in the documentation requires updating the sidebar. The sidebar is defined in a `yaml` file, conveniently named `navigation.yaml`, which you can find at the root of the `/docs` directory.
 
-### Add a new category
-
-To add a new category to the sidebar, add a new item to the top-level array with `title` and `items` key values, as shown below:
-
-```diff
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
-+- title: Category 2
-+  items:
-+    - title: Page 2
-+      slug: page-2
-```
-
-### Add a new page
-
-To add new page, add a new item to the `items` array with the `title` and `slug` keys under the category or subcategory.
-
-```diff yaml
- - title: Category 1
-   items:
-     - title: Page 1
-       slug: page-1
- - title: Category 2
-   items:
-     - title: Page 2
-       slug: page-2
-    - title: Subcategory 1
-      items:
-        - title: Page 3
-          slug: page-3
-+       - title: Page 4
-+         slug: page-4
-    - title: Page 5
-      slug: page-5
-```
-
-- The `title` in the sidebar may differ from `title` in the Markdown file. For example, your sidebar title might be a shorter version of the title in your Markdown file. This lets you write longer, more informative page titles while keeping the sidebar titles short, readable, and easy to scan. These titles should remain logically related. For example, in our docs we reduce the page title "Use Grafbase Edge Resolvers with Neon" to just "Grafbase" in the sidebar.
-- `slug` should always exactly match the page's slug (the last part of the URL after the final backslash "/", in our case the name of the Markdown file).
+Refer to the [## Navigation](https://github.com/neondatabase/website/blob/main/content/docs/README.md#navigation) in the docs README for more information on how to update the sidebar.
 
 ## Markdown frontmatter
 
@@ -197,7 +160,7 @@ To comment out content in a markdown file use this construction:
 [comment]: <> (Single line comment.)
 
 [comment]: <> (
-Multiline comment. 
+Multiline comment.
 You can't use line breaks or () parentheses here.
 )
 ```
@@ -257,7 +220,7 @@ npm install postgres
 </CodeTabs>
 ````
 
-To view this example in the Neon documentation, see [Create a Next.js project and add dependencies](https://neon.tech/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
+To view this example in the Neon documentation, see [Create a Next.js project and add dependencies](/docs/guides/nextjs#create-a-nextjs-project-and-add-dependencies).
 
 ## Admonitions
 
@@ -270,6 +233,8 @@ The Neon documentation supports the following admonitions:
 - Info
 
 To use an admonition, enclose your text with `<Admonition></Admonition>` and specify the admonition type: `note`, `important`, `tip`, `warning`, and `info`. The default is `note`.
+
+For a complete list of available components and their usage, see the [Component Guide](/docs/community/component-guide).
 
 ```md
 <Admonition type="note">
@@ -296,6 +261,8 @@ This is a very important note.
 Neon uses Figma to create diagrams.
 
 If you're interested in updating or adding a diagram, please open a GitHub issue with your suggestions. Please include a draft, if possible. You can use a tool like [tldraw](https://www.tldraw.com/) to create a draft.
+
+For technical details about how components are implemented, see the [Component Architecture](/docs/community/component-architecture) guide.
 
 If possible, please take screen captures on a high resolution monitor (UHD/4K). Screen captures should be unaltered (no borders or special effects).
 
@@ -332,49 +299,41 @@ The voice in the documentation should sound like one human being explaining some
 #### Guidelines
 
 1. **Use contractions**:
-
    - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
      - _Example_: "It's essential to save your progress."
    - **Don't**: Overuse contractions, which can compromise clarity.
 
 2. **Simplicity over jargon**:
-
    - **Do**: Choose simpler words when possible.
      - _Example_: "Use the tool," not "Utilize the instrument."
    - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
 
 3. **Active voice**:
-
    - **Do**: Prefer active voice.
      - _Example_: "The software converts the file."
    - **Don't**: Over-rely on passive voice.
      - _Example_: "The file is converted by the software."
 
 4. **Brief sentences**:
-
    - **Do**: Keep sentences concise.
      - _Example_: "Check the settings."
 
 5. **Personalize when relevant**:
-
    - **Do**: Use "you" to address the reader.
      - _Example_: "You can adjust the setting."
    - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
 
 6. **Consistent terminology**:
-
    - **Do**: Stick to one term for one concept.
      - _Example_: Always use "dashboard". Don't mix that term with "control panel".
    - **Don't**: Confuse with synonyms.
      - _Example_: Switching between "log-in", "sign-in", and "access point".
 
 7. **Examples for clarity**:
-
    - **Do**: Provide clear examples.
      - _Example_: "For instance, to upload a file, click on the 'Upload' button."
 
 8. **Use US English**:
-
    - **Do**: Adhere to US English spelling and grammar rules.
 
 9. **Avoid emojis and exclamations**:
@@ -404,7 +363,6 @@ Generally, feature names should be lowercase.
 
 Capitalize names of:
 
-- Neon tiers and plans. For example, "Neon Free Tier".
 - Third-party organizations, software, and products. Kubernetes, Git, and Vercel.
 - Methods or methodologies. Continuous Integration, Continuous Deployment, etc.
 
@@ -422,25 +380,34 @@ When including user information in connection details, API calls, or UI instruct
 Connection strings should be defined as follows:
 
 ```text
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 If you need to provide a connection string with realistic values, use one of the user names mentioned above, `AbC123dEf` for the password, and `dbname` for the database name:
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 ### Commands, parameters, values, filenames
 
 Commands, parameters, values, filenames, error messages, connection strings, and other similar items should be enclosed in backticks. For example:
 
-- "Run the `neonctl projects list` command."
+- "Run the `neon projects list` command."
 
 - "Execute `git clone` to clone a Git repository..."
 
 - `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
-- "A connection string has this format: `postgres://[user]:[password]@[neon_hostname]/[dbname]`"
+- "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
+
+## Additional Resources
+
+When contributing to Neon documentation, you may find these additional resources helpful:
+
+- **[Component Guide](/docs/community/component-guide)**: Complete reference for common MDX components
+- **[Component Specialized Guide](/docs/community/component-specialized)**: Advanced and specialized components
+- **[Component Icon Guide](/docs/community/component-icon-guide)**: Icon systems and usage guidelines
+- **[Component Architecture](/docs/community/component-architecture)**: Technical implementation details
 
 <NeedHelp/>

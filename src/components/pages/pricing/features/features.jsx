@@ -1,66 +1,96 @@
-import Container from 'components/shared/container/container';
-import GradientLabel from 'components/shared/gradient-label';
-import Heading from 'components/shared/heading';
-import compatibilityIcon from 'icons/ai/compatibility.svg';
-import branchingIcon from 'icons/aws/branching.svg';
-import storageIcon from 'icons/aws/storage.svg';
-import timerIcon from 'icons/landing/timer.svg';
+import Image from 'next/image';
 
-import computeIllustration from './images/compute-illustration.jpg';
-import storageIllustration from './images/storage-illustration.jpg';
-import Row from './row';
+import Container from 'components/shared/container';
+import Link from 'components/shared/link';
+import LINKS from 'constants/links';
+import authIcon from 'icons/pricing/features/auth.svg';
+import cableIcon from 'icons/pricing/features/cable.svg';
+import checkIcon from 'icons/pricing/features/check.svg';
+import complianceIcon from 'icons/pricing/features/compliance.svg';
+import copyIcon from 'icons/pricing/features/copy.svg';
+import gridIcon from 'icons/pricing/features/grid.svg';
+import scaleIcon from 'icons/pricing/features/scale.svg';
+import searchIcon from 'icons/pricing/features/search.svg';
 
-const storageItems = [
+const DATA = [
   {
-    icon: branchingIcon,
-    title: 'Branch-based Postgres',
-    text: 'Databases in Neon are brancheable (both schema and data). Think of code branches, but for your data.',
+    icon: checkIcon,
+    title: 'High availability',
+    description: 'Storage uses multi-AZ to minimize disruptions without HA standbys.',
+    link: `${LINKS.docs}/introduction/high-availability`,
   },
   {
-    icon: storageIcon,
-    title: 'Branches share storage',
-    text: 'When you branch a database, the new branch won&apos;t add to your storage bill. Branches are ready instantly, no matter how large the dataset.',
-  },
-];
-
-const computeItems = [
-  {
-    icon: compatibilityIcon,
-    title: 'Serverless compute',
-    text: 'Compute size is measured in <span class="font-medium text-white underline decoration-dotted underline-offset-4" data-tooltip-id="cu-icon" data-tooltip-html="1 CU = 1 vCPU, 4 GB RAM">CUs</span>. Database branches autoscale from 0.25 to 8 CU based on load and down to zero when inactive.',
+    icon: copyIcon,
+    title: 'Read replicas',
+    description: 'Offload read-heavy workloads to replicas, avoiding storage costs.',
+    link: `${LINKS.blog}/neon-read-replicas-in-the-wild-how-beatgig-uses-them`,
   },
   {
-    icon: timerIcon,
-    title: 'Compute usage is measured in compute hours',
-    text: 'Example: a 4 CU compute running for 20 hours uses 80 compute hours. All monthly plans include generous usage, with extra compute hours billed separately.',
+    icon: scaleIcon,
+    title: 'Autoscaling',
+    description: 'Neon automatically adjusts compute and storage as needed.',
+    link: LINKS.autoscaling,
+  },
+  {
+    icon: searchIcon,
+    title: 'Monitoring',
+    description: 'Monitor resource usage in real time with optimization dashboards.',
+    link: `${LINKS.docs}/introduction/monitoring-page`,
+  },
+  {
+    icon: cableIcon,
+    title: 'Connection pooling',
+    description: 'Built on pgBouncer, ready to scale to 10,000 connections.',
+    link: LINKS.connectionPooling,
+  },
+  {
+    icon: gridIcon,
+    title: 'Postgres extensions library',
+    description: 'Extend with pg_search, PostGIS, TimescaleDB, etc.',
+    link: `${LINKS.docs}/extensions/pg-extensions`,
+  },
+  {
+    icon: authIcon,
+    title: 'Neon Auth',
+    description: 'Simple setup, built right into the platform — no added overhead.',
+    link: LINKS.auth,
+  },
+  {
+    icon: complianceIcon,
+    title: 'GDPR and ISO compliance',
+    description: 'Visit our Security page for more information.',
+    link: LINKS.security,
   },
 ];
 
 const Features = () => (
-  <section className="safe-paddings relative mt-60 xl:mt-48 lg:mt-[124px] md:mt-[88px]">
-    <Container className="grid-gap-x grid grid-cols-12" size="medium">
-      <div className="col-span-10 col-start-2">
-        <GradientLabel className="mx-auto block w-fit">Details</GradientLabel>
-        <Heading
-          className="mt-4 text-center text-[48px] font-medium leading-none tracking-tight lg:text-4xl sm:text-[36px]"
-          tag="h2"
-          theme="white"
-        >
-          Neon billing fundamentals
-        </Heading>
-        <p className="mt-3 text-center text-lg font-light leading-snug sm:text-base">
-          An architecture with branch-based storage and compute that autoscales
-        </p>
-      </div>
-      <div className="col-span-10 col-start-2 mt-[72px] flex flex-col items-center gap-y-20 xl:col-span-full xl:col-start-1 xl:gap-y-[104px] md:gap-y-16">
-        <Row title="Storage" items={storageItems} image={storageIllustration} />
-        <Row
-          title="Compute"
-          items={computeItems}
-          image={computeIllustration}
-          imagePosition="right"
-        />
-      </div>
+  <section className="features mt-[200px] scroll-mt-5 px-safe xl:mt-[192px] lg:mt-[184px] md:mt-[102px]">
+    <Container size="1152" className="xl:px-16 md:px-5">
+      <h2 className="text-center font-title text-[52px] font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[32px]">
+        Features in all Neon databases
+      </h2>
+      <ul className="mx-auto mt-14 grid grid-cols-4 justify-center gap-x-10 gap-y-11 xl:grid-cols-3 lg:mt-12 lg:max-w-[640px] lg:grid-cols-2 lg:gap-10 md:gap-[34px] sm:mt-10 xs:grid-cols-1">
+        {DATA.map(({ icon, title, description, link }) => (
+          <li className="sm:max-w-[260px]" key={title}>
+            <Image className="size-6" src={icon} width={24} height={24} alt="" loading="lazy" />
+            <h3 className="mt-2.5 text-xl font-medium leading-snug tracking-extra-tight md:text-lg sm:mt-2">
+              {title}
+            </h3>
+            <p className="mt-2 leading-snug tracking-extra-tight text-gray-new-70 md:mt-1.5">
+              {description}
+            </p>
+            <Link
+              href={link}
+              className="mt-4 rounded-sm text-[15px] leading-none tracking-[-0.03em]"
+              theme="white"
+              withArrow
+            >
+              Read more
+              <span className="sr-only">about {title}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </Container>
   </section>
 );

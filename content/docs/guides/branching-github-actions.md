@@ -2,240 +2,76 @@
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.103Z'
+updatedOn: '2025-07-30T11:06:50.989Z'
 ---
 
-Neon provides the following GitHub Actions for working with Neon branches, which you can add to your CI workflows:
+Neon provides a set of GitHub Actions to automate the creation, deletion, and management of database branches in your Neon projects.
+These actions allow you to automate database branching as part of your CI/CD workflows, enabling you to create ephemeral database branches for pull requests, run tests against isolated data, and clean up resources automatically.
 
-- [Create branch action](#create-branch-action)
-- [Delete branch action](#delete-branch-action)
-- [Reset from parent action](#reset-from-parent-action)
+This guide covers how to set up and use the Neon GitHub Actions for managing database branches, including creating, deleting, resetting branches, and comparing schemas.
 
-## Create branch action
+## Getting started
 
-This GitHub Action creates a new branch in your Neon project.
+To use Neon's GitHub Actions, you need to add your Neon API key and Project ID to your GitHub repository. This allows the actions to authenticate with your Neon project and perform operations on your database branches.
 
-<Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/create-branch-action).
-</Admonition>
+### Automatically set up with the Neon GitHub integration
 
-### Prerequisites
+The easiest way to get started is with the [Neon GitHub integration](/docs/guides/neon-github-integration). It connects your Neon project to a GitHub repository, automatically creating the necessary `NEON_API_KEY` secret and `NEON_PROJECT_ID` variable for you. If you use the integration, you can skip the manual setup steps below.
 
-- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-  4. Click **Add Secret**.
+### Manually set up your repository
 
-### Example
+1.  **Create a Neon API key.** For instructions, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
+2.  **Add the key to GitHub.** In your GitHub repository, navigate to **Settings** > **Secrets and variables** > **Actions**.
+3.  Click **New repository secret**.
+4.  Name the secret `NEON_API_KEY` and paste your API key into the value field.
+5.  Click **Add secret**.
+6.  You will also need your Neon **Project ID**, which you can find in the **Settings** page of the Neon console.
+    ![Neon Project ID in the console](/docs/manage/settings_page.png)
+7.  Add the Project ID to your GitHub repository as a **variable**:
+    - In your GitHub repository, navigate to **Settings** > **Secrets and variables** > **Actions**.
+    - Select **Variables** and click **New repository variable**.
+    - Name the variable `NEON_PROJECT_ID` and set its value to your Neon Project ID.
+    - Click **Add variable**.
 
-The following example creates a branch based on the specified parent branch:
+You can now use the Neon GitHub Actions in your workflows by referencing them in your `.github/workflows` YAML files.
 
-```yaml
-name: Create Neon Branch with GitHub Actions Demo
-run-name: Create a Neon Branch 🚀
-jobs:
-  Create-Neon-Branch:
-    uses: neondatabase/create-branch-action@v5
-    with:
-      project_id: rapid-haze-373089
-      # optional (defaults to your project's default branch)
-      parent: dev
-      # optional (defaults to neondb)
-      database: my-database
-      branch_name: from_action_reusable
-      username: db_user_for_url
-      api_key: ${{ secrets.NEON_API_KEY }}
-    id: create-branch
-  - run: echo db_url ${{ steps.create-branch.outputs.db_url }}
-  - run: echo host ${{ steps.create-branch.outputs.host }}
-  - run: echo branch_id ${{ steps.create-branch.outputs.branch_id }}
-```
+## Available actions
 
-### Input variables
+Neon provides the following GitHub Actions for working with Neon branches. For detailed information on usage, inputs, and outputs, please refer to the official documentation for each action on the GitHub Marketplace.
 
-```yaml
-inputs:
-  project_id:
-    required: true
-    description: 'The project id'
-  branch_name:
-    required: false
-    description: 'The branch name'
-  api_key:
-    description: 'The Neon API key'
-    required: true
-  username:
-    description: 'The db role name'
-    required: true
-  database:
-    description: 'The database name'
-    default: neondb
-  prisma:
-    description: 'Use prisma or not'
-    default: 'false'
-  parent:
-    description: 'The parent branch name or id or LSN or timestamp. By default the default branch is used'
-  suspend_timeout:
-    description: >
-      Duration of inactivity in seconds after which the compute endpoint is
-      For more information, see [Auto-suspend configuration](https://neon.tech/docs/manage/endpoints#auto-suspend-configuration).
-    default: '0'
-  ssl:
-    description: >
-      Add sslmode to the connection string. Supported values are: "require", "verify-ca", "verify-full", "omit".
-    default: 'require'
-```
+- **[Create branch action](https://github.com/marketplace/actions/neon-create-branch-github-action)**: Creates a new database branch in your Neon project. This is ideal for setting up isolated environments for preview deployments or running tests against a feature branch.
+- **[Delete branch action](https://github.com/marketplace/actions/neon-database-delete-branch)**: Deletes a specified database branch. Use this to automate the cleanup of ephemeral branches after a pull request is merged or closed.
+- **[Reset branch action](https://github.com/marketplace/actions/neon-database-reset-branch-action)**: Resets a branch to the latest state of its parent. This is useful for refreshing a development or staging branch with the most up-to-date data.
+- **[Schema diff action](https://github.com/marketplace/actions/neon-schema-diff-github-action)**: Compares the schemas of two branches and posts a diff summary as a comment on a pull request, allowing for easy review of schema changes.
 
-### Outputs
+For detailed information on how to use these actions, including required inputs, outputs, and examples, check the individual actions documentation on GitHub Marketplace:
 
-```yaml
-outputs:
-  db_url:
-    description: 'New branch DATABASE_URL'
-    value: ${{ steps.create-branch.outputs.db_url }}
-  db_url_with_pooler:
-    description: 'New branch DATABASE_URL with pooling enabled'
-    value: ${{ steps.create-branch.outputs.db_url_with_pooler }}
-  host:
-    description: 'New branch host'
-    value: ${{ steps.create-branch.outputs.host }}
-  host_with_pooler:
-    description: 'New branch host with pooling enabled'
-    value: ${{ steps.create-branch.outputs.host_with_pooler }}
-  branch_id:
-    description: 'New branch id'
-    value: ${{ steps.create-branch.outputs.branch_id }}
-  password:
-    description: 'Password for connecting to the new branch database with the input username'
-    value: ${{ steps.create-branch.outputs.password }}
-```
+<DetailIconCards>
 
-## Delete branch action
+<a href="https://github.com/marketplace/actions/neon-create-branch-github-action" description="Creates a new database branch. Ideal for setting up isolated environments for preview deployments or feature testing." icon="github">Create branch action</a>
 
-This GitHub Action deletes a branch from your Neon project.
+<a href="https://github.com/marketplace/actions/neon-database-delete-branch" description="Deletes a specified database branch. Use this to clean up ephemeral branches after a pull request is merged or closed." icon="github">Delete branch action</a>
 
-<Admonition type="info">
-The source code for this action is available on [GitHub](https://github.com/neondatabase/delete-branch-action).
-</Admonition>
+<a href="https://github.com/marketplace/actions/neon-database-reset-branch-action" description="Resets a branch to the latest state of its parent. Useful for refreshing a development branch with production data." icon="github">Reset branch action</a>
 
-### Prerequisites
+<a href="https://github.com/marketplace/actions/neon-schema-diff-github-action" description="Compares the schema of two branches and posts a diff summary as a comment on a pull request." icon="github">Schema diff action</a>
 
-- Using the action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field
-  4. Click **Add Secret**.
-
-### Example
-
-The following example deletes a branch with the `br-long-forest-224191` branch ID from a Neon project with the project ID `rapid-haze-373089` when a pull request is merged.
-
-```yaml
-name: Delete Neon Branch with GitHub Actions Demo
-run-name: Delete a Neon Branch 🚀
-on: [push]
-jobs:
-  delete-neon-branch:
-    uses: neondatabase/delete-branch-action@v3
-    with:
-      project_id: rapid-haze-373089
-      branch: br-long-forest-224191
-      api_key: { { secrets.NEON_API_KEY } }
-```
-
-### Input variables
-
-```yaml
-inputs:
-  project_id:
-    required: true
-    description: 'The Neon project id'
-  branch_id:
-    description: 'The Neon branch id'
-    deprecationMessage: 'The `branch_id` input is deprecated in favor of `branch`'
-  api_key:
-    description: 'The Neon API key, read more at https://neon.tech/docs/manage/api-keys'
-    required: true
-  branch:
-    description: 'The Neon branch name or id'
-```
-
-### Outputs
-
-This Action has no outputs.
-
-## Reset from parent action
-
-This GitHub Action resets a child branch with the latest data from its parent branch.
-
-> **Info**
-> The source code for this action is available on [GitHub](https://github.com/neondatabase/reset-branch-action).
-
-### Prerequisites
-
-- Using this action requires a Neon API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key).
-- Add your Neon API key to your GitHub Secrets:
-  1. In your GitHub repository, go to **Project settings** and locate **Secrets** at the bottom of the left sidebar.
-  2. Click **Actions** > **New Repository Secret**.
-  3. Name the secret `NEON_API_KEY` and paste your API key in the **Secret** field.
-  4. Click **Add Secret**.
-
-### Example
-
-The following example demonstrates how to reset a branch in your Neon project:
-
-```yaml
-name: Reset Neon Branch with GitHub Actions Demo
-run-name: Reset a Neon Branch 🚀
-jobs:
-  Reset-Neon-Branch:
-    uses: neondatabase/reset-branch-action@v1
-    with:
-      project_id: rapid-haze-373089
-      parent: true
-      branch: child_branch
-      api_key: {{ secrets.NEON_API_KEY }}
-    id: reset-branch
-  - run: echo branch_id ${{ steps.reset-branch.outputs.branch_id }}
-```
-
-### Input variables
-
-```yaml
-inputs:
-  project_id:
-    required: true
-    description: 'The project id'
-  branch:
-    required: true
-    description: 'The branch name or id to reset'
-  api_key:
-    description: 'The Neon API key'
-    required: true
-  parent:
-    description: 'If specified, the branch will be reset to the parent branch'
-    required: false
-```
-
-### Outputs
-
-```yaml
-outputs:
-  branch_id:
-    description: 'Reset branch id'
-    value: ${{ steps.reset-branch.outputs.branch_id }}
-```
+</DetailIconCards>
 
 ## Example applications
 
-The following example applications use GitHub Actions to create and delete branches in Neon.
+For complete, deployable examples, explore these starter repositories:
 
 <DetailIconCards>
-<a href="https://github.com/neondatabase/neon_twitter" description="A micro-blogging application that uses GitHub Actions to create and delete a branch with each pull request" icon="github">Neon Twitter app</a>
-<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="An application demonstrating using GitHub Actions with preview deployments in Vercel" icon="github">Preview branches app</a>
+
+<a href="https://github.com/neondatabase/preview-branches-with-cloudflare" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Cloudflare Pages preview deployment" icon="github">Preview branches with Cloudflare Pages</a>
+
+<a href="https://github.com/neondatabase/preview-branches-with-vercel" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Vercel preview deployment" icon="github">Preview branches with Vercel</a>
+
+<a href="https://github.com/neondatabase/preview-branches-with-fly" description="Demonstrates using GitHub Actions workflows to create a Neon branch for every Fly.io preview deployment" icon="github">Preview branches with Fly.io</a>
+
+<a href="https://github.com/neondatabase/neon_twitter" description="Demonstrates using GitHub Actions workflows to create a Neon branch for schema validation and perform migrations" icon="github">Neon Twitter app</a>
+
 </DetailIconCards>
 
 <NeedHelp/>

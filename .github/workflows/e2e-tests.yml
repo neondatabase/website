@@ -3,24 +3,34 @@ name: E2E on Chrome
 on:
   push:
     paths:
-      - 'src/components/pages/contact-sales/hero/**'
-      - 'src/components/pages/partners/apply/**'
-      - 'src/components/pages/blog-post/subscribe-form/**'
-      - 'src/components/shared/subscribe/**'
-      - 'src/components/shared/subscribe-minimalistic/**'
-      - 'src/components/shared/subscription-form/**'
-      - 'src/utils/forms.js'
-      - 'src/constants/forms.js'
-      - 'cypress/**'
+      - "src/utils/forms.js"
+      - "src/constants/forms.js"
+      - "cypress/**"
+      - "src/components/shared/changelog-form/**"
+      - "src/components/pages/contact-sales/hero/contact-form/**"
+      - "src/components/pages/startups/hero/contact-form/**"
+permissions:
+  contents: read
+
 jobs:
   install:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: neondatabase-protected-runner-group
+      labels: linux-ubuntu-latest
+    env:
+      QSTASH_CURRENT_SIGNING_KEY: ${{ secrets.QSTASH_CURRENT_SIGNING_KEY }}
+      QSTASH_NEXT_SIGNING_KEY: ${{ secrets.QSTASH_NEXT_SIGNING_KEY }}
     steps:
+      - name: Harden the runner (Audit all outbound calls)
+        uses: step-security/harden-runner@4d991eb9b905ef189e4c376166672c3f2f230481 # v2.11.0
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Cypress run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@108b8684ae52e735ff7891524cbffbcd4be5b19f # v6.7.16
         with:
           browser: chrome
           build: npm run build
@@ -28,11 +38,6 @@ jobs:
           wait-on: "http://localhost:3000"
         env:
           NEXT_PUBLIC_DEFAULT_SITE_URL: http://localhost:3000
-          WP_HTACCESS_USERNAME: ${{ secrets.WP_HTACCESS_USERNAME }}
-          WP_HTACCESS_PASSWORD: ${{ secrets.WP_HTACCESS_PASSWORD }}
           WP_GRAPHQL_URL: ${{ secrets.WP_GRAPHQL_URL }}
-          NEXT_PUBLIC_RELEASE_NOTES_API_URL: ${{ secrets.NEXT_PUBLIC_RELEASE_NOTES_API_URL }}
-          NEXT_PUBLIC_DOCS_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_DOCS_GITHUB_PATH }}
-          NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_RELEASE_NOTES_GITHUB_PATH }}
-          NEXT_PUBLIC_SEGMENT_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_SEGMENT_WRITE_KEY }}
-
+          NEXT_PUBLIC_GITHUB_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_PATH }}
+          NEXT_PUBLIC_GITHUB_RAW_PATH: ${{ secrets.NEXT_PUBLIC_GITHUB_ROW_PATH }}

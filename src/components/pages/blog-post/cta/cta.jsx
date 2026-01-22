@@ -17,7 +17,7 @@ const CTA = ({ title, description, buttonText, buttonUrl }) => (
         <h2 className="max-w-sm font-title text-2xl font-medium leading-none tracking-tighter text-white md:my-0 sm:leading-tight">
           {title}
         </h2>
-        <p className="mt-2.5 text-sm leading-tight tracking-[-0.02em] text-gray-new-70">
+        <p className="mt-2.5 text-sm leading-tight tracking-extra-tight text-gray-new-70">
           {description}
         </p>
       </div>

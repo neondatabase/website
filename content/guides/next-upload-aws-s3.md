@@ -54,8 +54,8 @@ In the **Policy** section, use the following json to define the actions allowed 
       "Sid": "PublicReadGetObject",
       "Effect": "Allow",
       "Principal": "*",
-      "Action": ["s3:PutObject", "s3:GetObject"],
-      "Resource": "arn:aws:s3:::launchfast-bucket-0/*"
+      "Action": ["s3:GetObject"],
+      "Resource": "arn:aws:s3:::my-custom-bucket-0/*"
     }
   ]
 }
@@ -147,7 +147,7 @@ AWS_SECRET_ACCESS_KEY=".../...+"
 AWS_S3_BUCKET_NAME="...-bucket-0"
 
 # Postgres (powered by Neon) Environment Variable
-DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
+DATABASE_URL="postgresql://neondb_owner:...@...-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 ```
 
 Now, let's move on to creating an API route to obtain a presigned URL to upload objects to.

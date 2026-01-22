@@ -4,202 +4,158 @@ enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
-  - /docs/get-started-with-neon/projects
-updatedOn: '2024-06-21T14:17:23.477Z'
+  - /docs/get-started/projects
+updatedOn: '2026-01-15T23:54:00.614Z'
 ---
 
-With Neon, everything starts with the project. It is the top-level object in the [Neon object hierarchy](/docs/manage/overview). A project can hold as many databases and branches as your application or workflow needs. However, [tier limits](/docs/introduction/plans) define how many projects you can create. The Neon Free Tier limits you to one project per Neon account.
-
-Learn more about projects and how to manage them in these sections:
-
-- [Default resources](#default-resources)
-- [Project Settings](#about-the-settings-page)
-- [Basic actions](#basic-actions)
-- [Advanced settings](#advanced-settings)
-- [Manage projects from the API](#manage-projects-with-the-neon-api)
+In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
 
 ## Default resources
 
 When you add a new project, Neon creates the following resources by default:
 
-- A default branch called `main`. You can create child branches from the default branch or from any previously created branch. For more information, see [Manage branches](/docs/manage/branches).
-- A single read-write compute endpoint. This is the compute instance associated with the branch. For more information, see [Manage computes](/docs/manage/endpoints).
-- A Postgres database that resides on the project's default branch. If you ddid not specify your own database name when creating the project, the database created is named `neondb`.
+- A root branch is created as your project's default branch. In the Console, this branch is named `production`; via API/CLI, it's named `main`. You can create child branches for development, testing, staging, and other purposes. For more information, see [Manage branches](/docs/manage/branches).
+- A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
+- A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based—you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [contact the Neon Sales team](/contact-sales).
 
-## About the Settings page
+## Create a project
 
-Once you open a project, you can use the **Project settings** page to manage that particular project and configure any defaults.
-
-![Project Settings page](/docs/manage/settings_page.png)
-
-You can tab between these sections:
-
-- **General** &#8212; Change the name of your project or copy the project ID.
-- **Compute** &#8212; Set the autosuspend and sizing defaults for any new compute instances you create when branching.
-- **Storage** &#8212; Choose how long Neon maintains a history of changes for all branches.
-- **Sharing** &#8212; Let other users access your project's databases.
-- **Delete** &#8212; Use with care! This action deletes your entire project and all its objects, and is irreversible.
-
-## Basic actions
-
-Here are some basic actions you can take to add or manage projects:
-
-- [Create a project](#create-a-project)
-- [View projects](#view-projects)
-- [Change a project name](#change-the-name-or-copy-the-id-of-your-project)
-- [Delete a project](#delete-a-project)
-- [Share a project](#share-a-project)
-
-### Create a project
-
-The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Sign up](/docs/get-started-with-neon/signing-up). Neon Free Tier users are limited to a single Neon project. Support for multiple projects is only available to users on paid plans.
+The following instructions describe how to create additional Neon projects. If you are creating your very first Neon project, refer to the instructions in [Playing with Neon](/docs/get-started/signing-up).
 
 To create a Neon project:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
 2. Click **New Project**.
-3. Specify values for **Name**, **Postgres version**, and **Region**. Project names are limited to 64 characters. If you are a paying user, you can specify **Compute size** settings when creating a project. The settings you specify become the default settings for compute endpoints that you add to your project when creating [branches](/docs/manage/branches#create-a-branch) or [read replicas](/docs/guides/read-replica-guide).
-
-   - Neon supports fixed size computes and autoscaling. For more information, see [Compute size and autoscaling configuration](/docs/manage/endpoints#compute-size-and-autoscaling-configuration).
-   - The **Suspend compute after a period of inactivity** setting defines the period of inactivity after which a compute endpoint is automatically suspended. For more information, see [Autosuspend configuration](/docs/manage/endpoints#auto-suspend-configuration).
-
+3. Specify values for **Project Name**, **Postgres version**, **Cloud service provider**, and **Region**. Project names are limited to 64 characters.
 4. Click **Create Project**.
 
-After creating a project, you are presented with a dialog that provides your connection details for a ready-to-use `neondb` database. The connection details include your password.
+After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-Similar to **docs.new** for instantly creating Google Docs or **repo.new** for adding new GitHub repositories, you can use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken straight to the **Create project** page where you can create your new project.
+You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
-### View projects
+## View projects
 
 To view your projects:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-1. Select **Home** or the Neon logo at the top left of the Console.
+1. From the breadcrumb navigation menu at the top-left of the console, select your organization.
 1. The **Projects** page lists your projects, including any projects that have been shared with you.
 
-### Change the name or copy the ID of your project
+## Project settings
 
-You are permitted to change the name of your project at any point. The project ID is permanent.
+Once you open a project, you can use the **Settings** page to manage your project and configure any defaults.
 
-To edit a Neon project:
+![Project Settings page](/docs/manage/settings_page.png)
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select the project that you want to edit.
-3. Select **Project settings**.
-4. Select **General**.
-5. Make your changes and click **Save**.
+The **Settings** page includes these sub-pages:
 
-### Delete a project
+- **General** — Change the name of your project or copy the project ID.
+- **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
+- **Instant restore** — Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
+- **Updates** — Schedule a time for Postgres and Neon updates.
+- **Collaborators** — Invite external collaborators to join your Neon project.
+- **Network security** — Configure Neon's IP and Private Networking features for secure access.
+- **RLS** — Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
+- **Logical replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
+- **Transfer** — Transfer your project from the current organization to another organization you are a member of.
+- **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
-Deleting a project is a permanent action, which also deletes any compute endpoints, branches, databases, and roles that belong to the project.
+### General project settings
 
-To delete a project:
+On the **General** page, you are permitted to change the name of your project or copy the project ID. The project ID is permanent and cannot be changed.
 
-1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select the project that you want to delete.
-3. Select **Project settings**.
-4. Select **Delete**.
-5. Click **Delete project.**
-6. On the confirmation dialog, click **Delete**.
+### Change your project's default compute settings
 
-### Share a project
+You can change your project's default compute settings on the **Compute** page. These settings determine the compute resources allocated to any new branches or read replicas you create.
 
-Neon's project sharing feature allows you to share your project with other Neon accounts.
-
-To share a project:
-
-1. In the Neon Console, select a project.
-1. Select **Project settings**.
-1. Select **Sharing**.
-1. Under **Grant access to your project**, enter the email address of the account you want to share access with.
-1. Click **Grant access**.
-
-The email you specify is added to the list of **Users with access to the project**. The Neon account associated with that email address is granted full access to the project with the exception privileges required to delete the project. This account can also share the project with other Neon users. When that user logs in to Neon, the shared project is listed on their **Projects** page, under **Shared with me**.
-
-The costs associated with a shared project are charged to the Neon account that owns the project. For example, if you share your project with another Neon user account, any usage incurred by that user within your project is billed to your Neon account, not theirs.
-
-For additional information, refer to our [Project sharing guide](/docs/guides/project-sharing-guide).
-
-## Advanced settings
-
-From the **Project settings** page, you can also set defaults or apply bulk changes across your Neon objects:
-
-- [Reset default compute size](#reset-the-default-compute-size)
-- [Configure history retention range](#configure-history-retention)
-- [Enable logical replication](#enable-logical-replication)
-- [Configure IP Allow](#configure-ip-allow)
-
-### Reset the default compute size
-
-_Compute size_ is the number of Compute Units (CUs) assigned to a Neon compute endpoint. The number of CUs determines the processing capacity of the compute endpoint. One CU is equal to 1 vCPU with 4 GB of RAM. Currently, a Neon compute endpoint can have anywhere from .25 CUs to 8 CUs. Larger compute sizes will be supported in a future release.
-
-For [Neon Free Tier](/docs/introduction/plans#free-tier) users, Neon sets your compute size to a static shared .25 vCPU, with 1 GB of RAM for each branch (max 10 branches).
-
-Users on paid plans have the flexibility to choose a compute size for each branch's compute endpoint individually. By default, new branches inherit the compute endpoint size from your first branch (i.e., `main`). However, there may be times when you want to reset this default. For example, if you want to create a series of read-only replicas, where each replica typically requires less compute per branch.
-
-To reset the default compute size, go to **Project settings** > **Compute**.
-
-Using the slider, you can configure a fixed-size compute or enable autoscaling.
-
-- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 8 CUs. A fixed-size compute does not scale to meet workload demand.
-- **Autoscaling:** Specify a minimum and maximum compute size. Neon scales the compute size up and down within the selected compute size boundaries in response to the current load. Currently, the _Autoscaling_ feature supports a range of 1/4 (.25) CU to 8 CUs. The 1/4 CU and 1/2 CU settings are _shared compute_. For information about how Neon implements the _Autoscaling_ feature, see [Autoscaling](/docs/introduction/autoscaling).
-
-_Example: default minimum and maximum autoscale settings_
-
-![Default autoscaling min and max](/docs/manage/default_autoscale.png)
-
-### Configure history retention
-
-By default, Neon retains a history of changes for all branches in a Neon project, which allows you to create a branch that restores data to any point within the defined retention period. The supported limits are 24 hours for [Neon Free Tier](/docs/introduction/plans#free-tier) users, 7 days for [Launch](/docs/introduction/plans#launch) plan users, and 30 days for [Scale](/docs/introduction/plans#scale) plan users. Please be aware that increasing the history retention period affects all branches in your project and increases [project storage](/docs/introduction/usage-metrics#storage).
-
-To configure the history retention period for a project:
-
-1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Storage**.
-   ![History retention configuration](/docs/manage/history_retention.png)
-4. Use the slider to select the history retention period.
-5. Click **Save**.
-
-## Enable logical replication
-
-Logical replication enables replicating data from your Neon databases to a variety of external destinations, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+![default_compute_settings](/docs/manage/default_compute_settings.png)
 
 <Admonition type="important">
-Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+Changes to default compute settings only affect **newly created computes**. Existing computes, including those on your primary branch and read replicas, will not be automatically updated. To change settings for existing computes, you need to update them individually through the **Branches** page.
 </Admonition>
 
-To enable logical replication for your project:
+A Compute Unit (CU) represents approximately 4 GB of RAM, along with associated CPU and local SSD resources. New branches inherit compute settings from your first branch, but you can change these defaults to:
 
-1. Select your project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **Beta**.
-4. Click **Enable**.
+- Set smaller compute sizes for preview deployments and development branches
+- Standardize settings across read replicas
+- Optimize resource usage and costs for non-production workloads
 
-You can verify that logical replication is enabled by running the following query:
+Neon supports two compute configurations:
 
-```sql
-SHOW wal_level;
-wal_level
------------
-logical
-```
+- **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
+- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: When setting maximum above 10 CUs, the minimum must be at least max/8. For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
-After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
+### Configure your restore window
+
+By default, Neon retains a history of changes for all branches in your project, enabling features like:
+
+- [Instant restore](/docs/introduction/branch-restore) for recovering lost data
+- [Time Travel](/docs/guides/time-travel-assist) queries for investigating data issues
+
+For complete details about the restore window feature, including plan limits, how it works, and storage implications, see [Restore window](/docs/introduction/restore-window).
+
+If you extend this restore window, you'll expand the range of data recovery and query options, but note that this will also increase your instant restore storage.
+
+Also note that adjusting the restore window affects _all_ branches in your project.
+
+To configure the restore window for a project:
+
+1. Select a project in the Neon Console.
+2. On your **Project Dashboard**, select **Settings**.
+3. Select **Restore window**.
+   ![Restore window configuration](/docs/manage/instant_restore_setting.png)
+4. Use the slider to select the restore window.
+5. Click **Save**.
+
+### Schedule updates for your project
+
+To keep your Neon computes and Postgres instances up to date, Neon automatically applies scheduled updates that include Postgres minor version upgrades, security patches, and new features. Updates are applied to the computes within your project. They require a quick compute restart, take only a few seconds, and typically occur weekly.
+
+On the Free plan, updates are automatically scheduled. On paid plans, you can set a preferred day and time for updates. Restarts occur within your selected time window and take only a few seconds.
+
+To set your project's update schedule or view currently scheduled updates:
+
+1. Go to **Settings** > **Updates**.
+1. Choose a day of the week and an hour. Updates will occur within this time window and take only a few seconds.
+
+For more information, see [Updates](/docs/manage/updates).
+
+### Invite collaborators to a project
+
+Neon's project collaboration feature allows you to invite external Neon accounts to collaborate on a Neon project.
+
+<Admonition type="note">
+Organization members cannot be added as collaborators to organization-owned projects since they already have access to all projects through their organization membership.
+</Admonition>
+
+To invite collaborators to a Neon project:
+
+1. In the Neon Console, select a project.
+1. Select **Settings**.
+1. Select **Collaborators**.
+1. Select **Invite** and enter the email address of the account you want to collaborate with.
+1. Click **Invite**.
+
+The email you specify is added to the list of **Collaborators**. The Neon account associated with that email address is granted full access to the project, with the exception of privileges required to delete the project. This account can also invite other Neon users to the project. When that user logs in to Neon, the project they were invited to is listed on their **Projects** page under **Shared with you**.
+
+The costs associated with projects being collaborated on are charged to the Neon account that owns the project. For example, if you invite another Neon user account to a project you own, any usage incurred by that user within your project is billed to your Neon account, not theirs.
+
+For additional information, refer to our [Project collaboration guide](/docs/guides/project-collaboration-guide).
 
 ### Configure IP Allow
 
-Available to [Scale](/docs/introduction/plans#scale) plan users, the IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
+The IP Allow feature provides an added layer of security for your data, restricting access to the branch where your database resides to only those IP addresses that you specify. In Neon, the IP allowlist is applied to all branches by default.
 
-Optionally, you can allow unrestricted access to your project's [non-default branches](/docs/manage/branches#non-default-branch). For instance, you might want to restrict access to the default branch to a handful of trusted IPs while allowing unrestricted access to your development branches.
+Optionally, you can allow unrestricted access to your project's non-protected branches. For instance, you might want to restrict access to protected branches to a handful of trusted IPs while allowing unrestricted access to your development branches.
 
 By default, Neon allows IP addresses from `0.0.0.0`, which means that Neon accepts connections from any IP address. Once you configure IP Allow by adding IP addresses or ranges, only those IP addresses will be allowed to access Neon.
 
 <Admonition type="note">
-Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
+Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon project provisioned on Azure currently on support IPv4.
 </Admonition>
 
 <Tabs labels={["Neon Console", "CLI", "API"]}>
@@ -209,11 +165,11 @@ Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_versio
 To configure an allowlist:
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
-3. Select **IP Allow**.
+2. On the **Project Dashboard**, select **Settings**.
+3. Select **Network security**.
    ![IP Allow configuration](/docs/manage/ip_allow.png)
-4. Specify the IP addresses you want to permit. Separate multiple entries with commas.
-5. Optionally, select **Allow unrestricted access to non-default branches** to allow full access to your [no default branches](/docs/manage/branches#non-default-branch).
+4. Under **IP Allow**, specify the IP addresses you want to permit. Separate multiple entries with commas.
+5. Optionally, under **Branch access**, select **Restrict IP Access to protected branches only** to restrict access to only the branches you have designated as protected.
 6. Click **Save changes**.
 
 </TabItem>
@@ -223,32 +179,32 @@ To configure an allowlist:
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports IP Allow configuration. For example, the following `add` command adds IP addresses to the allowlist for an existing Neon project. Multiple entries are separated by a space. No delimiter is required.
 
 ```bash
-neonctl ip-allow add 203.0.113.0 203.0.113.1
+neon ip-allow add 203.0.113.0 203.0.113.1
 ┌─────────────────────┬─────────────────────┬──────────────┬─────────────────────┐
-│ Id                  │ Name                │ IP Addresses │ default branch Only │
-├─────────────────────┼─────────────────────┼──────────────┼─────────────────────┤
+│ Id                  │ Name                │ IP Addresses │ Protected Only      │
+├─────────────────────|─────────────────────┼──────────────┼─────────────────────┤
 │ wispy-haze-26469780 │ wispy-haze-26469780 │ 203.0.113.0  │ false               │
 │                     │                     │ 203.0.113.1  │                     │
 └─────────────────────┴─────────────────────┴──────────────┴─────────────────────┘
 ```
 
-To apply an IP allowlist to the default branch only, use the you can `--primary-only` option:
+To apply an IP allowlist to protected branches only, you can use the `--protected-only` option:
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only
+neon ip-allow add 203.0.113.1 --protected-only
 ```
 
-To reverse that setting, use `--primary-only false`.
+To reverse that setting, use `--protected-only false`.
 
 ```bash
-neonctl ip-allow add 203.0.113.1 --primary-only false
+neon ip-allow add 203.0.113.1 --protected-only false
 ```
 
 </TabItem>
 
 <TabItem>
 
-The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"primary_branch_only` option to `true` to apply the allowlist to your default branch only, or `false` to apply it to all branches in your Neon project.
+The [Create project](https://api-docs.neon.tech/reference/createproject) and [Update project](https://api-docs.neon.tech/reference/updateproject) methods support **IP Allow** configuration. For example, the following API call configures **IP Allow** for an existing Neon project. Separate multiple entries with commas. Each entry must be quoted. You can set the `"protected_branches_only` option to `true` to apply the allowlist to protected branches only, or `false` to apply it to all branches in your Neon project.
 
 ```bash
 curl -X PATCH \
@@ -261,7 +217,7 @@ curl -X PATCH \
   "project": {
     "settings": {
       "allowed_ips": {
-        "primary_branch_only": true,
+        "protected_branches_only": true,
         "ips": [
           "203.0.113.0", "203.0.113.1"
         ]
@@ -300,7 +256,11 @@ You can define an allowlist with individual IP addresses, IP ranges, or [CIDR no
   203.0.113.0/24
   ```
 
-- **Use IPv6 addresses**: Neon also supports specifying IPv6 addresses. For example:
+- **Use IPv6 addresses**: Neon projects provisioned on AWS also support specifying IPv6 addresses. For example:
+
+  <Admonition type="note">
+  IPv6 is not yet supported for projects provisioned on Azure.
+  </Admonition>
 
   ```text
   2001:DB8:5432::/48
@@ -329,11 +289,11 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 <TabItem>
 
 1. Select a project in the Neon Console.
-2. On the Neon **Dashboard**, select **Project settings**.
+2. On the **Project Dashboard**, select **Settings**.
 3. Select **IP Allow**.
 4. Clear the **Allowed IP addresses and ranges** field.
-5. If applicable, clear the **Apply to default branch only** checkbox.
-6. Click **Apply changes**.
+5. If applicable, clear the **Restrict IP Access to protected branches only** checkbox.
+6. Click **Save changes**.
 
 </TabItem>
 
@@ -342,14 +302,14 @@ To remove an IP configuration entirely to go back to the default "no IP restrict
 The [Neon CLI ip-allow command](/docs/reference/cli-ip-allow) supports removing an IP Allow configuration. To do so, specify `--ip-allow reset` without specifying any IP address values:
 
 ```bash
-neonctl ip-allow reset
+neon ip-allow reset
 ```
 
 </TabItem>
 
 <TabItem>
 
-Specify the `ips` option with an empty string. If applicable, also include `"primary_branch_only": false`.
+Specify the `ips` option with an empty string. If applicable, also include `"protected_branches_only": false`.
 
 ```bash
 curl -X PATCH \
@@ -362,7 +322,7 @@ curl -X PATCH \
   "project": {
     "settings": {
       "allowed_ips": {
-        "primary_branch_only": false,
+        "protected_branches_only": false,
         "ips": []
       }
     }
@@ -374,6 +334,57 @@ curl -X PATCH \
 </TabItem>
 
 </Tabs>
+
+### Enable the Data API
+
+The Data API turns your database tables into a REST API, making it easy to query your data from client applications. When you enable the Data API, it automatically creates `authenticated` and `anonymous` roles and sets up the necessary permissions for secure client-side access.
+
+For setup instructions and examples, see the [Data API documentation](/docs/data-api/get-started).
+
+### Enable logical replication
+
+Logical replication lets you replicate data changes from Neon to external data services and platforms, including data warehouses, analytical database services, messaging platforms, event-streaming platforms, and external Postgres databases.
+
+<Admonition type="important">
+Enabling logical replication modifies the PostgreSQL `wal_level` configuration parameter, changing it from `replica` to `logical` for all databases in your Neon project. Once the `wal_level` setting is changed to `logical`, it cannot be reverted. Enabling logical replication also restarts all computes in your Neon project, meaning that active connections will be dropped and have to reconnect.
+</Admonition>
+
+To enable logical replication in Neon:
+
+1. Select your project in the Neon Console.
+2. On the **Project Dashboard**, select **Settings**.
+3. Select **Logical replication**.
+4. Click **Enable** to enable logical replication.
+
+You can verify that logical replication is enabled by running the following query:
+
+```sql
+SHOW wal_level;
+wal_level
+-----------
+logical
+```
+
+After enabling logical replication, the next steps involve creating publications on your replication source database in Neon and configuring subscriptions on the destination system or service. To get started, refer to our [logical replication guides](/docs/guides/logical-replication-guide).
+
+### Delete a project
+
+Deleting a project is a permanent action, which also deletes any computes, branches, databases, and roles that belong to the project.
+
+To delete a project:
+
+1. Navigate to the [Neon Console](https://console.neon.tech).
+2. Select the project that you want to delete.
+3. Select **Settings**.
+4. Select **Delete**.
+
+<Admonition type="important">
+If you are any of Neon's paid plans, deleting all your Neon projects won't stop monthly billing. To avoid charges, you also need to downgrade to the Free plan. You can do so from the [Billing](https://console.neon.tech/app/billing#change_plan) page in the Neon Console.
+</Admonition>
+
+<Admonition type="note">
+**Early Access:** Deleted projects can be recovered within the deletion recovery period (7 days) via the API or CLI. For details, see [Recover a deleted project](#recover-a-deleted-project).
+</Admonition>
 
 ## Manage projects with the Neon API
 
@@ -389,9 +400,11 @@ The `jq` option specified in each example is an optional third-party tool that f
 
 A Neon API request requires an API key. For information about obtaining an API key, see [Create an API key](/docs/manage/api-keys#create-an-api-key). In the cURL examples shown below, `$NEON_API_KEY` is specified in place of an actual API key, which you must provide when making a Neon API request.
 
+<LinkAPIKey />
+
 ### Create a project with the API
 
-The following Neon API method creates a project. The [Neon Free Tier](/docs/introduction/plans#free-tier) permits one project per account. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
+The following Neon API method creates a project. To view the API documentation for this method, refer to the [Neon API reference](https://api-docs.neon.tech/reference/createproject).
 
 ```http
 POST /projects
@@ -411,113 +424,160 @@ curl 'https://console.neon.tech/api/v2/projects' \
 }' | jq
 ```
 
-The response includes information about the role, the database, the default branch, and the read-write compute endpoint that is created with the project.
+The response includes information about the role, the database, the default branch, and the primary read-write compute that is created with the project.
 
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Create project](https://api-docs.neon.tech/reference/createproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
+    "data_storage_bytes_hour": 0,
+    "data_transfer_bytes": 0,
+    "written_data_bytes": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
     "cpu_used_sec": 0,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
+    "region_id": "aws-us-east-1",
     "name": "myproject",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:33:11Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:15:41Z",
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca"
   },
   "connection_uris": [
     {
-      "connection_uri": "postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname"
+      "connection_uri": "postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech/dbname?sslmode=require&channel_binding=require",
+      "connection_parameters": {
+        "database": "dbname",
+        "password": "AbC123dEf",
+        "role": "alex",
+        "host": "ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech",
+        "pooler_host": "ep-cool-darkness-123456-pooler.c-2.us-east-1.aws.neon.tech"
+      }
     }
   ],
   "roles": [
     {
-      "branch_id": "br-falling-frost-286006",
-      "name": "alex",
-      "password": "AbC123dEf",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "name": "neondb_owner",
+      "password": "npg_Se0ECYqaJ5jA",
       "protected": false,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
-    },
-    {
-      "branch_id": "br-falling-frost-286006",
-      "name": "web_access",
-      "protected": true,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z"
     }
   ],
   "databases": [
     {
-      "id": 1138408,
-      "branch_id": "br-falling-frost-286006",
-      "name": "dbname",
-      "owner_name": "alex",
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "id": 5140981,
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "name": "neondb",
+      "owner_name": "neondb_owner",
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z"
     }
   ],
   "operations": [
     {
-      "id": "b7c32d83-6402-49c8-b40b-0388309549da",
+      "id": "cacca1d4-ad0e-46dc-ae82-886ffb96889d",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
+      "branch_id": "br-gentle-salad-ad7v90qq",
       "action": "create_timeline",
       "status": "running",
       "failures_count": 0,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "total_duration_ms": 0
     },
     {
-      "id": "756f2b87-f45c-4a61-9b21-6cd3f3c48c68",
+      "id": "1df43d11-5c07-4de1-9440-ac09d305fdf3",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
-      "endpoint_id": "ep-jolly-moon-631024",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "endpoint_id": "ep-cool-darkness-123456",
       "action": "start_compute",
       "status": "scheduling",
       "failures_count": 0,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z"
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "total_duration_ms": 0
     }
   ],
   "branch": {
-    "id": "br-falling-frost-286006",
+    "id": "br-gentle-salad-ad7v90qq",
     "project_id": "ep-cool-darkness-123456",
     "name": "main",
     "current_state": "init",
     "pending_state": "ready",
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:33:11Z"
+    "state_changed_at": "2025-08-04T05:15:41Z",
+    "creation_source": "console",
+    "primary": true,
+    "default": true,
+    "protected": false,
+    "cpu_used_sec": 0,
+    "compute_time_seconds": 0,
+    "active_time_seconds": 0,
+    "written_data_bytes": 0,
+    "data_transfer_bytes": 0,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:15:41Z",
+    "init_source": "parent-data"
   },
   "endpoints": [
     {
-      "host": "ep-jolly-moon-631024.us-east-2.aws.neon.tech",
-      "id": "ep-jolly-moon-631024",
+      "host": "ep-cool-darkness-123456.c-2.us-east-1.aws.neon.tech",
+      "id": "ep-cool-darkness-123456",
       "project_id": "ep-cool-darkness-123456",
-      "branch_id": "br-falling-frost-286006",
-      "autoscaling_limit_min_cu": 1,
-      "autoscaling_limit_max_cu": 1,
-      "region_id": "aws-us-east-2",
+      "branch_id": "br-gentle-salad-ad7v90qq",
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "region_id": "aws-us-east-1",
       "type": "read_write",
       "current_state": "init",
       "pending_state": "active",
-      "settings": {
-        "pg_settings": {}
-      },
+      "settings": {},
       "pooler_enabled": false,
       "pooler_mode": "transaction",
       "disabled": false,
       "passwordless_access": true,
-      "created_at": "2023-01-04T17:33:11Z",
-      "updated_at": "2023-01-04T17:33:11Z",
-      "proxy_host": "us-east-2.aws.neon.tech"
+      "creation_source": "console",
+      "created_at": "2025-08-04T05:15:41Z",
+      "updated_at": "2025-08-04T05:15:41Z",
+      "proxy_host": "c-2.us-east-1.aws.neon.tech",
+      "suspend_timeout_seconds": 0,
+      "provisioner": "k8s-neonvm"
     }
   ]
 }
@@ -544,24 +604,106 @@ curl 'https://console.neon.tech/api/v2/projects' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [List projects](https://api-docs.neon.tech/reference/listprojects) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "projects": [
     {
-      "cpu_used_sec": 0,
-      "id": "purple-shape-491160",
+      "id": "frosty-tree-10754091",
       "platform_id": "aws",
-      "region_id": "aws-us-east-2",
-      "name": "purple-shape-491160",
-      "provisioner": "k8s-pod",
-      "pg_version": 15,
-      "locked": false,
-      "created_at": "2023-01-03T18:22:56Z",
-      "updated_at": "2023-01-03T18:22:56Z",
-      "proxy_host": "us-east-2.aws.neon.tech",
-      "branch_logical_size_limit": 3072
+      "region_id": "aws-ap-southeast-1",
+      "name": "personal_projects",
+      "provisioner": "k8s-neonvm",
+      "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 0.25,
+        "autoscaling_limit_max_cu": 2,
+        "suspend_timeout_seconds": 0
+      },
+      "settings": {
+        "allowed_ips": {
+          "ips": [],
+          "protected_branches_only": false
+        },
+        "enable_logical_replication": false,
+        "maintenance_window": {
+          "weekdays": [4],
+          "start_time": "15:00",
+          "end_time": "16:00"
+        },
+        "block_public_connections": false,
+        "block_vpc_connections": false,
+        "hipaa": false
+      },
+      "pg_version": 17,
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "branch_logical_size_limit": 512,
+      "branch_logical_size_limit_bytes": 536870912,
+      "store_passwords": true,
+      "active_time": 1260,
+      "cpu_used_sec": 319,
+      "creation_source": "console",
+      "created_at": "2024-11-08T17:20:01Z",
+      "updated_at": "2025-08-03T01:16:18Z",
+      "synthetic_storage_size": 96929448,
+      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+      "compute_last_active_at": "2025-08-03T01:16:18Z",
+      "history_retention_seconds": 86400
+    },
+    {
+      "id": "lingering-grass-54827563",
+      "platform_id": "aws",
+      "region_id": "aws-ap-southeast-1",
+      "name": "brizai",
+      "provisioner": "k8s-neonvm",
+      "default_endpoint_settings": {
+        "autoscaling_limit_min_cu": 0.25,
+        "autoscaling_limit_max_cu": 2,
+        "suspend_timeout_seconds": 0
+      },
+      "settings": {
+        "allowed_ips": {
+          "ips": [],
+          "protected_branches_only": false
+        },
+        "enable_logical_replication": false,
+        "maintenance_window": {
+          "weekdays": [1],
+          "start_time": "16:00",
+          "end_time": "17:00"
+        },
+        "block_public_connections": false,
+        "block_vpc_connections": false,
+        "hipaa": false
+      },
+      "pg_version": 17,
+      "proxy_host": "ap-southeast-1.aws.neon.tech",
+      "branch_logical_size_limit": 512,
+      "branch_logical_size_limit_bytes": 536870912,
+      "store_passwords": true,
+      "active_time": 0,
+      "cpu_used_sec": 0,
+      "creation_source": "console",
+      "created_at": "2024-10-28T16:26:49Z",
+      "updated_at": "2025-08-01T00:34:48Z",
+      "synthetic_storage_size": 31082816,
+      "quota_reset_at": "2025-09-01T00:00:00Z",
+      "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+      "compute_last_active_at": "2025-02-14T09:51:30Z",
+      "history_retention_seconds": 86400
     }
-  ]
+  ],
+  "unavailable_project_ids": [],
+  "pagination": {
+    "cursor": "lingering-grass-54827563"
+  },
+  "applications": {
+    "frosty-tree-10754091": ["vercel"]
+  },
+  "integrations": {
+    "frosty-tree-10754091": ["vercel"]
+  }
 }
 ```
 
@@ -578,7 +720,7 @@ PATCH /projects/{project_id}
 The API method appears as follows when specified in a cURL command. The `project_id` is a required parameter. The example changes the project `name` to `project1`.
 
 ```bash
-curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
   -H 'accept: application/json' \
   -H "Authorization: Bearer $NEON_API_KEY" \
   -H 'Content-Type: application/json' \
@@ -592,21 +734,56 @@ curl 'https://console.neon.tech/api/v2/projects/ep-cool-darkness-123456' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Update project](https://api-docs.neon.tech/reference/updateproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
-    "cpu_used_sec": 0,
+    "data_storage_bytes_hour": 35697544,
+    "data_transfer_bytes": 13444,
+    "written_data_bytes": 34595496,
+    "compute_time_seconds": 89,
+    "active_time_seconds": 348,
+    "cpu_used_sec": 89,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
+    "region_id": "aws-us-east-1",
     "name": "project1",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:36:17Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T05:55:58Z",
+    "synthetic_storage_size": 35697544,
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+    "compute_last_active_at": "2025-08-04T05:15:47Z"
   },
   "operations": []
 }
@@ -634,25 +811,164 @@ curl -X 'DELETE' \
 <details>
 <summary>Response body</summary>
 
+For attribute definitions, find the [Delete project](https://api-docs.neon.tech/reference/deleteproject) endpoint in the [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Definitions are provided in the **Responses** section.
+
 ```json
 {
   "project": {
-    "cpu_used_sec": 0,
+    "data_storage_bytes_hour": 35697544,
+    "data_transfer_bytes": 13444,
+    "written_data_bytes": 34595496,
+    "compute_time_seconds": 89,
+    "active_time_seconds": 348,
+    "cpu_used_sec": 89,
     "id": "ep-cool-darkness-123456",
     "platform_id": "aws",
-    "region_id": "aws-us-east-2",
-    "name": "project1",
-    "provisioner": "k8s-pod",
-    "pg_version": 15,
-    "locked": false,
-    "created_at": "2023-01-04T17:33:11Z",
-    "updated_at": "2023-01-04T17:36:17Z",
-    "proxy_host": "us-east-2.aws.neon.tech",
-    "branch_logical_size_limit": 3072
+    "region_id": "aws-us-east-1",
+    "name": "project2",
+    "provisioner": "k8s-neonvm",
+    "default_endpoint_settings": {
+      "autoscaling_limit_min_cu": 0.25,
+      "autoscaling_limit_max_cu": 0.25,
+      "suspend_timeout_seconds": 0
+    },
+    "settings": {
+      "allowed_ips": {
+        "ips": [],
+        "protected_branches_only": false
+      },
+      "enable_logical_replication": false,
+      "maintenance_window": {
+        "weekdays": [7],
+        "start_time": "06:00",
+        "end_time": "07:00"
+      },
+      "block_public_connections": false,
+      "block_vpc_connections": false,
+      "hipaa": false
+    },
+    "pg_version": 17,
+    "proxy_host": "c-2.us-east-1.aws.neon.tech",
+    "branch_logical_size_limit": 512,
+    "branch_logical_size_limit_bytes": 536870912,
+    "store_passwords": true,
+    "creation_source": "console",
+    "history_retention_seconds": 86400,
+    "created_at": "2025-08-04T05:15:41Z",
+    "updated_at": "2025-08-04T06:10:55Z",
+    "synthetic_storage_size": 35697544,
+    "consumption_period_start": "0001-01-01T00:00:00Z",
+    "consumption_period_end": "0001-01-01T00:00:00Z",
+    "owner_id": "91cbdacd-06c2-49f5-bacf-78b9463c81ca",
+    "compute_last_active_at": "2025-08-04T05:15:47Z"
   }
 }
 ```
 
 </details>
+
+## Recover a deleted project
+
+If you accidentally delete a project, you can recover it within 7 days. This **deletion recovery period** allows you to restore deleted projects with all their data and configuration intact.
+
+<Admonition type="note">
+The deletion recovery period is different from the [restore window](/docs/introduction/restore-window). The restore window enables point-in-time recovery (PITR) for branch data, while the deletion recovery period allows you to recover (undelete) an entire deleted project.
+</Admonition>
+
+### What's recovered
+
+When you recover a deleted project, the following are restored:
+
+- All branches, endpoints, snapshots, and compute configurations
+- Project settings (IP Allow, logical replication, protected branches, scheduled updates)
+- Project collaborators
+- Connection strings
+- Vercel-Managed Neon integration projects are re-imported into Vercel for management and billing
+
+### What requires reconfiguration
+
+The following features are **not** recovered and must be manually re-enabled after recovery:
+
+- **Data API** (including `authenticated` and `anonymous` roles)
+- **GitHub integration**
+- **Neon-Managed Vercel integration** (Vercel Connected Accounts)
+- **Vercel-Managed Neon integration** (project reconnection via Storage)
+- **Monitoring integrations** (Datadog, OpenTelemetry, etc.)
+
+### Costs
+
+There are no storage costs or recovery fees during the 7-day deletion recovery period.
+
+### Recover a project
+
+<Tabs labels={["CLI", "API"]}>
+
+<TabItem>
+
+To list projects that can be recovered:
+
+```bash
+neon projects list --recoverable-only
+```
+
+To recover a deleted project:
+
+```bash
+neon projects recover <project_id>
+```
+
+The command returns details about the recovered project.
+
+**Example:**
+
+```bash
+neon projects recover crimson-voice-12345678
+┌────────────────────────┬───────────┬───────────────┬──────────────────────┐
+│ Id                     │ Name      │ Region Id     │ Created At           │
+├────────────────────────┼───────────┼───────────────┼──────────────────────┤
+│ crimson-voice-12345678 │ myproject │ aws-us-east-2 │ 2024-04-15T11:17:30Z │
+└────────────────────────┴───────────┴───────────────┴──────────────────────┘
+```
+
+For more information about the Neon CLI, see [Neon CLI — projects](/docs/reference/cli-projects).
+
+</TabItem>
+
+<TabItem>
+
+To list projects that can be recovered, use the following Neon API method with the `recoverable` query parameter:
+
+```http
+GET /projects?recoverable=true
+```
+
+**Example:**
+
+```bash
+curl 'https://console.neon.tech/api/v2/projects?recoverable=true' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+To recover a deleted project, use the following Neon API method:
+
+```http
+POST /projects/{project_id}/recover
+```
+
+**Example:**
+
+```bash
+curl -X POST \
+  'https://console.neon.tech/api/v2/projects/crimson-voice-12345678/recover' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer $NEON_API_KEY" | jq
+```
+
+The API returns a `200` status code with the restored project object.
+
+</TabItem>
+
+</Tabs>
 
 <NeedHelp/>

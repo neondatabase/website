@@ -1,61 +1,36 @@
-import Image from 'next/image';
-
-import Button from 'components/shared/button';
-import Container from 'components/shared/container';
-import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
-import LINKS from 'constants/links';
-
-import illustration from './images/illustration.png';
+import PauseableVideo from 'components/shared/pauseable-video';
 
 const Hero = () => (
-  <section className="hero safe-paddings overflow-hidden bg-black-pure pt-[158px] text-white xl:pt-[136px] lg:pt-9 sm:pt-6">
-    <Container
-      className="flex w-full items-end justify-between space-x-14 border-b border-dashed border-gray-2 lg:flex-col lg:items-center lg:space-x-0 lg:space-y-14"
-      size="1344"
-    >
-      <div className="max-w-[605px] shrink-0 pb-[88px] xl:max-w-[376px] xl:pb-[60px] lg:pb-0 lg:text-center">
-        <Heading
-          className="text-[72px] font-bold leading-dense 2xl:text-6xl xl:text-[56px] lg:text-[44px]"
-          tag="h1"
-        >
-          Instant branching for Postgres
-        </Heading>
-        <p className="mt-7 text-xl xl:text-base">
-          Neon allows you to instantly branch your data the same way that you branch your code.
+  <section className="hero safe-paddings">
+    <div className="text-center">
+      <div className="mx-auto max-w-[640px] md:max-w-xs">
+        <h1 className="mx-auto font-title text-6xl font-medium leading-none tracking-extra-tight xl:text-[56px] lg:text-5xl md:text-[32px]">
+          Mastering Database
+          <br /> Branching Workflows
+        </h1>
+        <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:mt-3 lg:mx-auto lg:text-base">
+          Ship software faster using Neon branches as ephemeral environments.
         </p>
-        <div className="mt-9 space-x-10 xl:space-x-8 xs:flex xs:flex-col xs:items-center xs:space-x-0 xs:space-y-6">
-          <Button
-            className="px-9 py-6 !text-lg xl:!text-base lg:px-8 lg:py-5"
-            theme="primary"
-            size="sm"
-            to={LINKS.signup}
-          >
-            Sign up
-          </Button>
-          <Link
-            className="text-lg font-semibold before:-bottom-1 before:h-[3px] xl:text-base"
-            theme="black-primary-1"
-            to="/docs/introduction/branching/"
-          >
-            Explore the docs
-          </Link>
-        </div>
       </div>
-      <div>
-        <Image
-          className="lg:max-w-[464px]"
-          src={illustration}
-          quality={70}
-          width={752}
-          height={616}
-          alt=""
-          sizes="100%"
-          priority
-          aria-hidden
-        />
+    </div>
+    <div className="relative -z-10 mt-14 h-[600px] w-full xl:h-[560px] lg:h-[410px] md:h-[50vw]">
+      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        {/* 
+          Recommended video omtimization parameters:
+          mp4: -pix_fmt yuv420p -vf scale=2392:-2 -movflags faststart -vcodec libx264 -crf 20
+          webm: -c:v libvpx-vp9 -crf 20 -vf scale=2392:-2 -deadline best -an
+        */}
+        <PauseableVideo
+          className="-left-[35px] -top-1 w-[1196px] xl:w-[1120px] lg:-left-5 lg:w-[820px] md:-left-3 md:-top-5 md:w-[100vw]"
+          width={1196}
+          height={900}
+          poster="/images/pages/branching/workflow.jpg"
+        >
+          <source src="/videos/pages/branching/workflow.mp4" type="video/mp4" />
+          <source src="/videos/pages/branching/workflow.webm" type="video/webm" />
+        </PauseableVideo>
       </div>
-    </Container>
+    </div>
   </section>
 );
 

@@ -205,8 +205,18 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
         if (domNode.attribs?.class?.includes('wp-block-heading')) {
           return AnchorHeading(domNode.name)({
             children: domToReact(domNode.children),
-            className: `${domNode.attribs.class} !scroll-mt-20`,
+            className: `${domNode.attribs.class}`,
           });
+        }
+
+        if (domNode.name === 'video') {
+          const props = transformProps(attributesToProps(domNode.attribs));
+          const children = domToReact(domNode.children);
+          return (
+            <video {...props} crossOrigin="anonymous">
+              {children}
+            </video>
+          );
         }
 
         if (!includeBaseTags) return <></>;

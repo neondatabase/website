@@ -1,8 +1,8 @@
 ---
 title: Postgres sample data
-subtitle: 'Download sample data for learning, testing, and exploring Neon'
+subtitle: 'Import sample data for learning, testing, and exploring Neon'
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.411Z'
+updatedOn: '2025-08-18T12:11:47.176Z'
 ---
 
 This guide describes how to download and install sample data for use with Neon.
@@ -12,9 +12,9 @@ This guide describes how to download and install sample data for use with Neon.
 - [wget](https://www.gnu.org/software/wget/) for downloading datasets, unless otherwise instructed. If your system does not support `wget`, you can paste the source file address in your browser's address bar.
 - A `psql` client for connecting to your Neon database and loading data. This client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
 - A `pg_restore` client if you are loading the [employees](#employees-database) or [postgres_air](#postgres-air-database) database. The `pg_restore` client is included with a standalone PostgreSQL installation. See [PostgreSQL Downloads](https://www.postgresql.org/download/).
-- A Neon database connection string. After creating a database, you can obtain the connection string from the **Connection Details** widget on the Neon **Dashboard**. In the instructions that follow, replace `postgres://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
-- A Neon [Pro](/docs/introduction/pro-plan) account if you intend to install a dataset larger than 3 GB.
-- Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor).
+- A Neon database connection string. After creating a database, you can find the connection details by clicking the **Connect** button on your **Project Dashboard**. In the instructions that follow, replace `postgresql://[user]:[password]@[neon_hostname]/[dbname]` with your connection string.
+- A Neon [paid plan](/docs/introduction/plans) if you intend to install a dataset larger than 0.5 GB.
+- Instructions for each dataset require that you create a database. You can do so from a client such as `psql` or from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor).
 
 <Admonition type="note">
 You can also load sample data using the Neon CLI. See [Load sample data with the Neon CLI](#load-sample-data-with-the-neon-cli).
@@ -22,7 +22,7 @@ You can also load sample data using the Neon CLI. See [Load sample data with the
 
 ## Sample data
 
-Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free Tier has a storage limit of 3 GB per branch. Datasets larger than 3 GB cannot be loaded on the Free Tier.
+Sample datasets are listed in order of the smallest to largest installed size. Please be aware that the Neon Free plan has a storage limit of 500 MB per branch. Datasets larger than 500 MB cannot be loaded on the Free plan.
 
 | Name                                                        | Tables | Records  | Source file size | Installed size |
 | ----------------------------------------------------------- | ------ | -------- | ---------------- | -------------- |
@@ -60,16 +60,16 @@ A table containing data about the periodic table of elements.
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash shouldWrap
-   psql -d "postgres://[user]:[password]@[neon_hostname]/periodic_table" -f periodic_table.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/periodic_table" -f periodic_table.sql
    ```
 
 4. Connect to the `periodic_table` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/periodic_table
+   psql postgresql://[user]:[password]@[neon_hostname]/periodic_table
    ```
 
-5. Look up the the element with the Atomic Number 10:
+5. Look up the element with the Atomic Number 10:
 
    ```sql
    SELECT * FROM periodic_table WHERE "AtomicNumber" = 10;
@@ -98,13 +98,13 @@ A dataset with multiple indicators for evaluating the happiness of countries of 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash
-   psql -d "postgres://[user]:[password]@[neon_hostname]/happiness_index" -f happiness_index.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/happiness_index" -f happiness_index.sql
    ```
 
 4. Connect to the `titanic` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/world_happiness_index
+   psql postgresql://[user]:[password]@[neon_hostname]/world_happiness_index
    ```
 
 5. Find the countries where the happiness score is above average but the GDP per capita is below average:
@@ -146,13 +146,13 @@ A dataset containing information on the passengers aboard the RMS Titanic, which
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash shouldWrap
-   psql -d "postgres://[user]:[password]@[neon_hostname]/titanic" -f titanic.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/titanic" -f titanic.sql
    ```
 
 4. Connect to the `titanic` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/titanic
+   psql postgresql://[user]:[password]@[neon_hostname]/titanic
    ```
 
 5. Query passengers with the most expensive fares:
@@ -186,13 +186,13 @@ A dataset containing information about movies and tv shows on Netflix.
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash
-   psql -d "postgres://[user]:[password]@[neon_hostname]/netflix" -f netflix.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/netflix" -f netflix.sql
    ```
 
 4. Connect to the `netflix` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/netflix
+   psql postgresql://[user]:[password]@[neon_hostname]/netflix
    ```
 
 5. Find the directors with the most movies in the database:
@@ -234,13 +234,13 @@ Sample data for a fictional DVD rental store. Pagila includes tables for films, 
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash
-   psql -d "postgres://[user]:[password]@[neon_hostname]/pagila" -f pagila.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/pagila" -f pagila.sql
    ```
 
 4. Connect to the `pagila` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/pagila
+   psql postgresql://[user]:[password]@[neon_hostname]/pagila
    ```
 
 5. Find the top 10 most popular film categories based on rental frequency:
@@ -279,13 +279,13 @@ A sample database for a digital media store, including tables for artists, album
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash shouldWrap
-   psql -d "postgres://[user]:[password]@[neon_hostname]/chinook" -f chinook.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/chinook" -f chinook.sql
    ```
 
 4. Connect to the `chinook` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/chinook
+   psql postgresql://[user]:[password]@[neon_hostname]/chinook
    ```
 
 5. Find out the most sold item by track title:
@@ -328,13 +328,13 @@ A dataset containing information about various LEGO sets, their themes, parts, c
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash
-   psql -d "postgres://[user]:[password]@[neon_hostname]/lego" -f lego.sql
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/lego" -f lego.sql
    ```
 
 4. Connect to the `lego` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/lego
+   psql postgresql://[user]:[password]@[neon_hostname]/lego
    ```
 
 5. Find the top 5 LEGO themes by the number of sets:
@@ -372,7 +372,7 @@ A dataset containing details about employees, their departments, salaries, and m
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash shouldWrap
-   pg_restore -d postgres://[user]:[password]@[neon_hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
+   pg_restore -d postgresql://[user]:[password]@[neon_hostname]/employees -Fc employees.sql.gz -c -v --no-owner --no-privileges
    ```
 
    Database objects are created in the `employees` schema rather than the `public` schema.
@@ -380,7 +380,7 @@ A dataset containing details about employees, their departments, salaries, and m
 4. Connect to the `employees` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/employees
+   psql postgresql://[user]:[password]@[neon_hostname]/employees
    ```
 
 5. Find the top 5 departments with the highest average salary:
@@ -424,7 +424,7 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 4. Connect to the `wikipedia` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/wikipedia
+   psql postgresql://[user]:[password]@[neon_hostname]/wikipedia
    ```
 
 5. Install the `pgvector` extension:
@@ -458,11 +458,11 @@ An OpenAI example dataset containing pre-computed vector embeddings for 25000 Wi
 8. Navigate to the directory where you extracted the source file, and run the following command:
 
    ```bash shouldWrap
-   psql -d "postgres://[user]:[password]@[neon_hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
+   psql -d "postgresql://[user]:[password]@[neon_hostname]/wikipedia" -c "\COPY public.articles (id, url, title, content, title_vector, content_vector, vector_id) FROM 'vector_database_wikipedia_articles_embedded.csv' WITH (FORMAT CSV, HEADER true, DELIMITER ',');"
    ```
 
 <Admonition type="note">
-If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Indexing vectors](/docs/extensions/pgvector#indexing-vectors) for how to increase this setting.
+If you encounter a memory error related to the `maintenance_work_mem` setting, refer to [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size) for how to increase this setting.
 </Admonition>
 
 - Source: [OpenAI](https://github.com/openai/openai-cookbook/tree/main/examples/vector_databases)
@@ -483,7 +483,7 @@ An airport database containing information about airports, aircraft, bookings, p
 3. Navigate to the directory where you downloaded the source file, and run the following command:
 
    ```bash shouldWrap
-   pg_restore -d postgres://[user]:[password]@[neon_hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
+   pg_restore -d postgresql://[user]:[password]@[neon_hostname]/postgres_air -Fc postgres_air_2023.backup -c -v --no-owner --no-privileges
    ```
 
    Database objects are created in a `postgres_air` schema rather than the `public` schema.
@@ -491,7 +491,7 @@ An airport database containing information about airports, aircraft, bookings, p
 4. Connect to the `postgres_air` database:
 
    ```bash
-   psql postgres://[user]:[password]@[neon_hostname]/wikipedia
+   psql postgresql://[user]:[password]@[neon_hostname]/postgres_air
    ```
 
 5. Find the aircraft type with the most flights:
@@ -531,23 +531,22 @@ To load sample data:
    Alternatively, supply your own data file.
 
 2. Load the data using one of the following Neon CLI commands ([projects](/docs/reference/cli-projects), [branches](/docs/reference/cli-branches), or [connection-string](/docs/reference/cli-connection-string)):
-
    - Create a new Neon project, connect to it with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl projects create --psql -- -f periodic_table.sql
+     neon projects create --psql -- -f periodic_table.sql
      ```
 
    - Create a branch, connect to it with `psql`, and run the an `.sql` file.
 
      ```bash
-     neonctl branches create --psql -- -f periodic_table.sql
+     neon branches create --psql -- -f periodic_table.sql
      ```
 
    - Get a connection string, connect with `psql`, and run the `.sql` file.
 
      ```bash
-     neonctl connection-string --psql -- -f periodic_table.sql
+     neon connection-string --psql -- -f periodic_table.sql
      ```
 
 <NeedHelp/>

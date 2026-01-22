@@ -5,7 +5,7 @@ subtitle: Find examples of commonly-used Postgres queries for basic to advanced
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
-updatedOn: '2024-06-14T07:55:54.420Z'
+updatedOn: '2026-01-06T13:50:10.823Z'
 ---
 
 <CTA />
@@ -866,10 +866,10 @@ Get the maximum number of connections for your Postgres instance.
 SHOW max_connections;
 ```
 
-The `max_connections` setting is configured by Neon according to your compute size. See [Connection limits without connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
+The `max_connections` setting is configured by Neon according to your compute size configuration. See [Connection limits without connection pooling](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).
 
 <Admonition type="tip">
-You can use [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
+You can use [connection pooling](/docs/connect/connection-pooling#connection-pooling) to increase your concurrent connection limit.
 </Admonition>
 
 ### Get the percentage of maximum connections in use
@@ -879,7 +879,7 @@ SELECT (SELECT SUM(numbackends) FROM pg_stat_database) / (SELECT
 setting::float FROM pg_settings WHERE name = 'max_connections');
 ```
 
-This query only considers your `max_connections` setting. It does not account for [connection pooling](https://neon.tech/docs/connect/connection-pooling#connection-pooling).
+This query only considers your `max_connections` setting. It does not account for [connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 ### Get the current number of connections for a database
 
@@ -910,19 +910,49 @@ WHERE
   OR state = '<idle>';
 ```
 
-### Drop long-running or idle connections
+### Cancel or terminate queries and sessions
+
+To cancel or terminate a process:
+
+- **Cancel a running query** (without ending the session):  
+  Use `pg_cancel_backend(pid)`.
+
+- **Terminate a session** (including all running queries):  
+  Use `pg_terminate_backend(pid)`.
+
+Examples:
+
+Cancel a query:
+
+```sql
+SELECT pg_cancel_backend(pid)
+FROM pg_stat_activity
+WHERE datname = 'databasename'
+  AND pid <> pg_backend_pid();
+```
+
+Terminate a session:
 
 ```sql
 SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
 WHERE datname = 'databasename'
   AND pid <> pg_backend_pid()
-  AND state IN ('idle');
+  AND state = 'idle';
 ```
 
 <Admonition type="note">
-To terminate a session, you can run `pg_cancel_backend(pid)` or `pg_terminate_backend(pid)`. The first command terminates the currently executing query, and the second one (used in the query above) terminates both the query and the session.
+To identify long-running queries and the users executing them, run:
+
+```sql
+SELECT pid, usename, client_addr, application_name, state, query, now() - query_start AS duration
+FROM pg_stat_activity
+WHERE state <> 'idle'
+ORDER BY duration DESC;
+```
+
 </Admonition>
+
 
 ## Postgres version
 
@@ -949,10 +979,10 @@ SELECT pg_size_pretty(sum(pg_database_size(datname)))
 FROM pg_database;
 ```
 
-Alternatively, you can check the `Data size` value on the **Branches** widget in the Neon Console.
+Alternatively, you can check the **Data size** value on the **Branches** page in the Neon Console, which gives you the data size for the databases on that branch.
 
 <Admonition type="note">
-Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like point-in-time restore.
+Data size does not include the [history](/docs/reference/glossary#history) that is maintained in Neon to support features like instant restore.
 </Admonition>
 
 <NeedHelp/>

@@ -3,10 +3,18 @@ title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.383Z'
+updatedOn: '2026-01-13T18:46:54.021Z'
 ---
 
+<Admonition type="note">
+Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+</Admonition>
+
 User authentication is a critical requirement for web applications. Modern applications require advanced features like social login and multi-factor authentication besides the regular login flow. Additionally, managing personally identifiable information (PII) requires a secure solution compliant with data protection regulations.
+
+<Admonition type="comingSoon">
+Looking to manage **authorization** along with authentication? Currently in Early Access for select users, [Neon RLS](/docs/guides/neon-authorize) brings JSON Web Token (JWT) authorization directly to Postgres, where you can use Row-level Security (RLS) policies to manage access at the database level.
+</Admonition>
 
 [Clerk](https://clerk.com/) is a user authentication and identity management platform that provides these features out of the box. It comes with adapters for popular web frameworks, making it easy to integrate with an application backed by a Neon Postgres database.
 
@@ -22,7 +30,7 @@ In this guide, we'll walk through setting up a simple Next.js application using 
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A [Clerk](https://clerk.com/) account for user authentication. Clerk provides a free tier that you can use to get started.
+- A [Clerk](https://clerk.com/) account for user authentication. Clerk provides a free plan that you can use to get started.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and test the application locally.
 
 ## Initialize your Next.js project
@@ -43,11 +51,13 @@ npm install @clerk/nextjs
 
 We use the `@neondatabase/serverless` package as the Postgres client, and `drizzle-orm`, a lightweight typescript ORM, to interact with the database. `@clerk/nextjs` is the Clerk SDK for Next.js applications. We also use `dotenv` to manage environment variables and the `drizzle-kit` CLI tool for generating database migrations.
 
-Also, add a `.env.local` file to the root of your project, which we'll use to store Neon/Clerk connection parameters:
+Also, add a `.env` file to the root of your project, which we'll use to store Neon/Clerk connection parameters:
 
 ```bash
-touch .env.local
+touch .env
 ```
+
+Make sure to add an entry for `.env` to your `.gitignore` file, so that it's not committed to your repository.
 
 ## Setting up your Neon database
 
@@ -59,16 +69,16 @@ touch .env.local
 
 ### Retrieve your Neon database connection string
 
-Navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+You can find your database connection string by clicking the **Connect** button on your **Project Dashboard**. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Add this connection string to the `.env.local` file in your Next.js project.
+Add this connection string to the `.env` file in your Next.js project.
 
 ```bash
-# .env.local
+# .env
 DATABASE_URL=NEON_DB_CONNECTION_STRING
 ```
 
@@ -76,19 +86,19 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 
 ### Create a Clerk application
 
-1. Log in to your Clerk account and navigate to the [Dashboard](https://dashboard.clerk.dev/). From the left sidebar, select `Create Application` to create a new app.
-2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `Github` as allowed sign-in methods.
+1. Log in to the [Clerk Dashboard](https://dashboard.clerk.com/). Select `Create Application` to create a new app.
+2. In the dialog that appears, provide a name for your application and a few sign-in options. For this tutorial, we'll use `Email`, `Google` and `GitHub` as allowed sign-in methods.
 
 ### Retrieve your API keys
 
-From the sidebar, click on **Developers > API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
+From the `Configure` tab, click on **API Keys** to find your API keys, needed to authenticate your application with Clerk. Select the `Next.js` option to get them as environment variables for your Next.js project. It should look similar to this:
 
 ```bash
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=**************
 CLERK_SECRET_KEY=**************
 ```
 
-Add these variables to the `.env.local` file in your Next.js project.
+Add these variables to the `.env` file in your Next.js project.
 
 ## Implementing the application
 
@@ -138,30 +148,21 @@ This schema defines a table `user_messages` to store a message for each user, wi
 We'll use the `drizzle-kit` CLI tool to generate migrations for the schema we defined. To configure how it connects to the database, add a `drizzle.config.ts` file at the project root.
 
 ```typescript
-/// drizzle.config.ts
-
-import type { Config } from 'drizzle-kit';
-import * as dotenv from 'dotenv';
-
-dotenv.config({ path: '.env.local' });
-
+// drizzle.config.ts
+import { defineConfig } from 'drizzle-kit';
 if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found in environment');
-
-export default {
+export default defineConfig({
+  dialect: 'postgresql',
   schema: './app/db/schema.ts',
+  dbCredentials: { url: process.env.DATABASE_URL! },
   out: './drizzle',
-  driver: 'pg',
-  dbCredentials: {
-    connectionString: process.env.DATABASE_URL,
-  },
-  strict: true,
-} satisfies Config;
+});
 ```
 
 Now, generate the migration files by running the following command:
 
 ```bash
-npx drizzle-kit generate:pg
+npx drizzle-kit generate
 ```
 
 This will create a `drizzle` folder at the project root with the migration files. To apply the migration to the database, run:
@@ -180,17 +181,17 @@ all the app routes are protected by Clerk's authentication:
 ```typescript
 /// middleware.ts
 
-import { authMiddleware } from '@clerk/nextjs';
+import { clerkMiddleware } from '@clerk/nextjs/server';
 
-export default authMiddleware({
-  // Routes that should be accessible without signing in can be defined as
-  // strings in this array, e.g, your home page, or a sign in page.
-  publicRoutes: [],
-});
+export default clerkMiddleware();
 
 export const config = {
-  // Protects all routes - https://clerk.com/docs/references/nextjs/auth-middleware
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/'],
+  matcher: [
+    // Skip Next.js internals and all static files, unless found in search params
+    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
+    // Always run for API routes
+    '/(api|trpc)(.*)',
+  ],
 };
 ```
 
@@ -240,7 +241,7 @@ Create a new file at `app/actions.ts` with the following content:
 ```typescript
 'use server';
 
-import { currentUser } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 import { UserMessages } from './db/schema';
 import { db } from './db';
 import { redirect } from 'next/navigation';
@@ -267,7 +268,7 @@ export async function deleteUserMessage() {
 }
 ```
 
-The `addUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
+The `createUserMessage` function inserts a new message into the `user_messages` table, while `deleteUserMessage` removes the message associated with the current user.
 
 Next, we implement a minimal UI to interact with these functions. Replace the contents of the `app/page.tsx` file with the following:
 
@@ -363,7 +364,7 @@ You can find the source code for the application described in this guide on GitH
 
 For more information on the tools used in this guide, refer to the following documentation:
 
-- [Neon Serverless Driver](https://neon.tech/docs/serverless/serverless-driver)
+- [Neon Serverless Driver](/docs/serverless/serverless-driver)
 - [Drizzle ORM](https://orm.drizzle.team/)
 - [Clerk Authentication](https://clerk.com/)
 - [Next.js Documentation](https://nextjs.org/docs)

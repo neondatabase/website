@@ -1,157 +1,266 @@
 'use client';
 
 import clsx from 'clsx';
-import { LazyMotion, domAnimation, m, useAnimation } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import Item from 'components/pages/doc/sidebar/item';
-import Link from 'components/shared/link/link';
-import MENUS from 'constants/menus';
-import useBodyLockScroll from 'hooks/use-body-lock-scroll';
-import useClickOutside from 'hooks/use-click-outside';
-import useWindowSize from 'hooks/use-window-size';
-import ChevronRight from 'icons/chevron-right.inline.svg';
+import ChevronIcon from 'icons/chevron-down.inline.svg';
+import CornerIcon from 'icons/corner-left.inline.svg';
 
-import InkeepTrigger from '../inkeep-trigger';
-import { sidebarPropTypes } from '../sidebar/sidebar';
+import Icon from '../menu/icon';
 
-const ANIMATION_DURATION = 0.2;
-const MOBILE_NAV_HEIGHT = 44;
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './collapsible';
+import { Drawer, DrawerContent, DrawerTitle, DrawerTrigger } from './drawer';
 
-const variants = {
-  from: {
-    opacity: 0,
-    translateY: 10,
-    transition: {
-      duration: ANIMATION_DURATION,
-    },
-    transitionEnd: {
-      zIndex: -1,
-    },
-  },
-  to: {
-    zIndex: 20,
-    opacity: 1,
-    translateY: 0,
-    transition: {
-      duration: ANIMATION_DURATION,
-    },
-  },
+const isExternalSlug = (slug) => typeof slug === 'string' && /^https?:\/\//.test(slug);
+const isWebsiteSlug = (slug) => typeof slug === 'string' && slug.startsWith('/');
+
+const resolveHref = (slug, basePath) => {
+  if (!slug) return null;
+
+  if (isExternalSlug(slug)) return slug;
+
+  if (isWebsiteSlug(slug)) return slug;
+
+  return `${basePath}${slug}`;
 };
 
-const MobileNav = ({ className = null, sidebar, basePath, isPostgres = false }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [containerHeight, setContainerHeight] = useState(null);
-  const [buttonTop, setButtonTop] = useState(null);
+function transformNavigationNode(raw, basePath, depth = 0) {
+  const { nav, icon, section } = raw;
+  const title = raw.title || raw.nav;
+  const slug = resolveHref(raw.slug, basePath);
 
-  const { height } = useWindowSize();
-  const wrapperRef = useRef(null);
-  const buttonRef = useRef(null);
-  const controls = useAnimation();
+  let children = [];
 
-  const toggleMenu = () => setIsOpen((isOpen) => !isOpen);
-  useBodyLockScroll(isOpen);
+  if (Array.isArray(raw.subnav) && raw.subnav.length) {
+    children = raw.subnav.map((sn) => transformNavigationNode(sn, basePath, depth + 1));
+  } else if (Array.isArray(raw.items) && raw.items.length) {
+    children = raw.items.map((it) => transformNavigationNode(it, basePath, depth + 1));
+  }
 
-  const onOutsideClick = () => {
-    setIsOpen(false);
-  };
+  return { nav, title, section, slug, icon, items: children, depth };
+}
 
-  useClickOutside([wrapperRef], onOutsideClick);
+function transformNavigation(navigation, basePath) {
+  return navigation.map((item) => transformNavigationNode(item, basePath, 0));
+}
 
-  useEffect(() => {
-    const onScroll = () => {
-      if (isOpen) {
-        setButtonTop(buttonRef.current.getBoundingClientRect().top);
-      }
-    };
+function hasActiveDescendant(node, currentPath) {
+  const selfActive =
+    typeof node.slug === 'string' && !isExternalSlug(node.slug) && node.slug === currentPath;
 
-    window.addEventListener('scroll', onScroll);
+  if (selfActive) return true;
 
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-    };
-  }, [isOpen]);
+  if (Array.isArray(node.items)) {
+    return node.items.some((child) => hasActiveDescendant(child, currentPath));
+  }
 
-  useEffect(() => {
-    if (isOpen) {
-      setButtonTop(buttonRef.current.getBoundingClientRect().top);
-      setContainerHeight(height - buttonTop - MOBILE_NAV_HEIGHT);
-    }
-  }, [height, isOpen, buttonTop]);
+  return false;
+}
 
-  useEffect(() => {
-    if (isOpen) {
-      controls.start('to');
-    } else {
-      controls.start('from');
-    }
-  }, [controls, isOpen]);
+const NodeLink = ({ className, node }) => {
+  const href = node.slug || '#';
+  const external = isExternalSlug(href);
+  const Comp = external ? 'a' : Link;
+  const extraProps = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+
   return (
-    <nav
+    <Comp
       className={clsx(
-        'safe-paddings relative border-b border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-8',
+        'flex h-10 w-full flex-1 items-center gap-x-2 pr-7 text-sm leading-snug tracking-tight hover:text-black-new dark:hover:text-white',
+        node.section
+          ? 'font-medium text-black-new dark:text-white'
+          : 'text-gray-new-20 dark:text-gray-new-80',
         className
       )}
-      ref={wrapperRef}
+      href={href}
+      {...extraProps}
     >
-      <button
-        className="relative z-10 flex w-full cursor-pointer appearance-none justify-start text-ellipsis bg-gray-new-98 py-2.5 outline-none transition-colors duration-200 hover:bg-gray-new-94 active:bg-gray-new-94 dark:bg-gray-new-15 lg:px-8 md:px-4"
-        type="button"
-        ref={buttonRef}
-        onClick={toggleMenu}
-      >
-        <span>Documentation menu</span>
-        <ChevronRight
-          className="absolute right-[37px] top-1/2 -translate-y-1/2 rotate-90 md:right-5"
-          aria-hidden
-        />
-      </button>
-      <LazyMotion features={domAnimation}>
-        <m.div
-          className={clsx(
-            'absolute inset-x-0 top-[calc(100%+1px)] z-20 overflow-y-scroll bg-white pb-4 pl-8 pr-[29px] pt-10 dark:bg-gray-new-10 md:pl-4 md:pr-[13px]'
-          )}
-          initial="from"
-          animate={controls}
-          variants={variants}
-          style={{ height: containerHeight }}
-        >
-          {!isPostgres && (
-            <>
-              <InkeepTrigger isSidebar />
-              <ul className="mb-7">
-                {MENUS.docSidebar.map(({ icon: Icon, title, slug }, index) => (
-                  <li className="py-[7px] first:pt-0 last:pb-0" key={index}>
-                    <Link className="group flex items-center space-x-3" to={slug}>
-                      <span className="relative flex h-6 w-6 items-center justify-center rounded bg-[linear-gradient(180deg,#EFEFF0_100%,#E4E5E7_100%)] before:absolute before:inset-px before:rounded-[3px] before:bg-[linear-gradient(180deg,#FFF_100%,#FAFAFA_100%)] dark:bg-[linear-gradient(180deg,rgba(255,255,255,0.1)_31.25%,rgba(255,255,255,0.05)_100%)] dark:before:bg-[linear-gradient(180deg,#242628_31.25%,#1D1E20_100%)]">
-                        <Icon className="relative z-10 h-3 w-3 text-gray-new-30 dark:text-gray-new-80" />
-                      </span>
-                      <span className="text-sm font-medium leading-tight transition-colors duration-200 group-hover:text-secondary-8 dark:group-hover:text-green-45">
-                        {title}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
-          <ul className={clsx({ 'mt-2.5': isPostgres })}>
-            {sidebar.map((item, index) => (
-              <Item {...item} key={index} closeMenu={toggleMenu} basePath={basePath} />
-            ))}
-          </ul>
-        </m.div>
-      </LazyMotion>
-    </nav>
+      {node.icon && <Icon title={node.icon} className="size-4.5 shrink-0" />}
+      <span>{node.title || node.section}</span>
+    </Comp>
   );
 };
 
-MobileNav.propTypes = {
+NodeLink.propTypes = {
+  node: PropTypes.shape({
+    title: PropTypes.string,
+    slug: PropTypes.string,
+    icon: PropTypes.string,
+    section: PropTypes.string,
+    depth: PropTypes.number,
+  }).isRequired,
   className: PropTypes.string,
-  sidebar: sidebarPropTypes,
-  basePath: PropTypes.string.isRequired,
-  isPostgres: PropTypes.bool,
 };
 
-export default MobileNav;
+const RecursiveItem = ({ node, currentPath }) => {
+  const isActive = hasActiveDescendant(node, currentPath);
+  const [open, setOpen] = useState(isActive);
+
+  useEffect(() => {
+    if (isActive) setOpen(true);
+  }, [isActive]);
+
+  const hasChildren = Array.isArray(node.items) && node.items.length > 0;
+
+  if (!hasChildren) {
+    return (
+      <li>
+        <NodeLink
+          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          node={node}
+        />
+      </li>
+    );
+  }
+
+  if (node.section) {
+    return (
+      <li>
+        <NodeLink
+          className={clsx(isActive && 'font-medium text-secondary-8 dark:text-primary-1')}
+          node={node}
+        />
+        <ul
+          className={clsx(
+            'flex flex-col',
+            node.nav && 'mt-[5px]',
+            node.depth > 1 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
+          )}
+        >
+          {node.items.map((child, idx) => (
+            <RecursiveItem key={idx} node={child} depth={node.depth} currentPath={currentPath} />
+          ))}
+        </ul>
+      </li>
+    );
+  }
+
+  return (
+    <li>
+      <Collapsible open={open} onOpenChange={setOpen}>
+        <CollapsibleTrigger
+          className={clsx(
+            'group flex h-10 w-full items-center justify-between px-0 text-left',
+            'leading-snug tracking-tight transition-colors duration-200',
+            'text-gray-new-30 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
+            node.nav ? 'text-base font-medium' : 'text-sm'
+          )}
+        >
+          <span>{node.nav || node.title}</span>
+          <ChevronIcon
+            className="shrink-0 -rotate-90 text-gray-new-50 transition-all duration-200 group-hover:text-black-new group-data-[state=open]:rotate-0 dark:group-hover:text-white"
+            aria-hidden
+          />
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          {node.nav && (
+            <div className="mt-[5px]">
+              <NodeLink
+                className={clsx(
+                  '!text-[15px] font-medium',
+                  isActive
+                    ? '!text-secondary-8 dark:!text-primary-1'
+                    : '!text-black-new dark:!text-white'
+                )}
+                node={node}
+              />
+            </div>
+          )}
+          <ul
+            className={clsx(
+              'flex flex-col',
+              node.nav && 'mt-[5px]',
+              node.depth > 0 && 'border-l border-gray-new-80 pl-3 dark:border-gray-new-20'
+            )}
+          >
+            {node.items.map((child, idx) => (
+              <RecursiveItem key={idx} node={child} depth={node.depth} currentPath={currentPath} />
+            ))}
+          </ul>
+        </CollapsibleContent>
+      </Collapsible>
+    </li>
+  );
+};
+
+RecursiveItem.propTypes = {
+  node: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    section: PropTypes.string,
+    nav: PropTypes.string,
+    slug: PropTypes.string,
+    icon: PropTypes.string,
+    items: PropTypes.array,
+    depth: PropTypes.number,
+  }).isRequired,
+  currentPath: PropTypes.string.isRequired,
+};
+
+const RecursiveList = ({ nodes, currentPath }) => (
+  <ul className="flex flex-col gap-y-2.5">
+    {nodes.map((node, idx) => (
+      <RecursiveItem key={idx} node={node} currentPath={currentPath} />
+    ))}
+  </ul>
+);
+
+RecursiveList.propTypes = {
+  nodes: PropTypes.array.isRequired,
+  currentPath: PropTypes.string.isRequired,
+};
+
+const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const onOpenChange = useCallback((next) => setOpen(next), []);
+
+  const menu = useMemo(
+    () => transformNavigation(navigation || [], basePath),
+    [navigation, basePath]
+  );
+
+  if (!menu.length) return null;
+
+  return (
+    <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
+      <DrawerTrigger className="group fixed bottom-0 left-0 right-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
+        <CornerIcon
+          className="shrink-0 text-gray-new-60 transition-all duration-200 group-hover:text-black-new dark:group-hover:text-white"
+          aria-hidden
+        />
+        <span className="text-[15px]">{title}</span>
+        <ChevronIcon
+          className="ml-auto shrink-0 text-gray-new-60 transition-all duration-200 group-hover:text-black-new dark:group-hover:text-white"
+          aria-hidden
+        />
+      </DrawerTrigger>
+
+      <DrawerContent className="hidden !h-[70dvh] flex-col rounded-t-2xl border-gray-new-80 bg-white p-0 text-black-new dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
+        <DrawerTitle className="sr-only">Menu</DrawerTitle>
+        <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-20 pt-[15px]">
+          <RecursiveList nodes={menu} currentPath={pathname} />
+        </div>
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-20 w-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_73.36%)] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.00)_0%,#09090B_73.36%)]"
+          aria-hidden
+        />
+      </DrawerContent>
+    </Drawer>
+  );
+};
+
+MobileMenu.propTypes = {
+  navigation: PropTypes.array.isRequired,
+  basePath: PropTypes.string.isRequired,
+  title: PropTypes.string,
+};
+
+export default MobileMenu;

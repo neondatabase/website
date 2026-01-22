@@ -1,0 +1,100 @@
+import LINKS from 'constants/links';
+import closeIcon from 'icons/close.svg';
+
+const BASE_URL = 'https://neon.com';
+
+const baseSettings = {
+  apiKey: process.env.INKEEP_INTEGRATION_API_KEY,
+  integrationId: process.env.INKEEP_INTEGRATION_ID,
+  organizationId: process.env.INKEEP_ORGANIZATION_ID,
+  primaryBrandColor: '#00E599',
+  organizationDisplayName: 'Neon',
+  customIcons: {
+    close: { custom: closeIcon },
+  },
+  customCardSettings: [
+    {
+      filters: {
+        AND: [
+          {
+            UrlMatch: {
+              ruleType: 'PartialUrl',
+              partialUrl: `${BASE_URL}${LINKS.docs}`,
+            },
+          },
+          {
+            NOT: {
+              UrlMatch: {
+                ruleType: 'PartialUrl',
+                partialUrl: `${BASE_URL}${LINKS.changelog}`,
+              },
+            },
+          },
+        ],
+      },
+      searchTabLabel: 'Neon Docs',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: `${BASE_URL}${LINKS.guides}`,
+        },
+      },
+      searchTabLabel: 'Guides',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: `${BASE_URL}${LINKS.postgresqltutorial}`,
+        },
+      },
+      searchTabLabel: 'PostgreSQL Tutorial',
+    },
+    {
+      filters: {
+        UrlMatch: {
+          ruleType: 'PartialUrl',
+          partialUrl: `${BASE_URL}${LINKS.changelog}`,
+        },
+      },
+      searchTabLabel: 'Changelog',
+    },
+  ],
+};
+
+const aiChatSettings = {
+  botName: 'Neon AI',
+  placeholder: 'How do I get started?',
+  introMessage:
+    "<p>Hi!<br>I'm an AI assistant trained on documentation, help articles, and other content.</p><p>Ask me anything about Neon.</p>",
+  quickQuestions: [
+    'What’s Neon?',
+    'How do I sign up for Neon?',
+    'How to create a project?',
+    'How to get started with the Neon API?',
+  ],
+  botAvatarSrcUrl: '/inkeep/images/bot.svg',
+  botAvatarDarkSrcUrl: '/inkeep/images/bot-dark.svg',
+  userAvatarSrcUrl: '/inkeep/images/user.svg',
+  userAvatarDarkSrcUrl: '/inkeep/images/user-dark.svg',
+  isChatSharingEnabled: true,
+  shareChatUrlBasePath: `${BASE_URL}${LINKS.docsHome}`,
+  getHelpCallToActions: [
+    {
+      type: 'OPEN_LINK',
+      icon: { builtIn: 'FaDiscord' },
+      name: 'Discord',
+      url: LINKS.discord,
+    },
+    {
+      type: 'OPEN_LINK',
+      icon: { builtIn: 'IoChatbubblesOutline' },
+      name: 'Neon Support',
+      url: LINKS.consoleSupport,
+    },
+  ],
+};
+
+export { baseSettings, aiChatSettings };

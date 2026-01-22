@@ -30,14 +30,14 @@ Using a serverless Postgres database powered by Neon lets you scale down to zero
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
 
-Enable **Pooled connection** in the **Connection String** section of the **Connection Details** panel to obtain the Postgres connection string.
+Enable the **Connection pooling** toggle on the **Connection Details** panel to obtain the Postgres connection string.
 
 ![](/guides/images/payload/98592ce7-3b8a-411b-a769-a0b89eaac8a3.png)
 
 All Neon connection strings have the following format:
 
 ```bash
-postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require
+postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
 ```
 
 - `<user>` is the database user.
@@ -45,7 +45,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `<endpoint_hostname>.neon.tech` is the host with `neon.tech` as the [top-level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `<port>` is the Neon port number. The default port number is 5432.
 - `<dbname>` is the name of the database. **neondb** is the default database created with each Neon project if you do not define your own.
-- `?sslmode=require` is an optional query parameter that enforces [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
 
 Save the connecting string somewhere safe. You will use it later to configure the `POSTGRES_URL` variable.
 
@@ -65,7 +65,7 @@ When prompted, choose the following:
 
 - `ecommerce` as the project template.
 - `PostgreSQL (beta)` as the database.
-- The connection string you obtained earlier as the PostgreSQL connection string: `postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require` .
+- The connection string you obtained earlier as the PostgreSQL connection string: `postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require&channel_binding=require` .
 
 Once that's done, change to the project directory and start the app:
 
@@ -114,7 +114,7 @@ Congratulations! You have now completed creating your own e-commerce store ✨
 
 ## Scale-to-zero with Postgres (powered by Neon)
 
-Interestingly, during the entire process of setting up this app, you were using Neon's **Scale-to-zero** feature, which places your Postgres compute endpoint into an `Idle` state when the database is inactive for more than 5 minutes. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+Interestingly, during the entire process of setting up this app, you were using Neon's **Scale-to-zero** feature, which places your Postgres compute endpoint into an idle state when the database is inactive for more than 5 minutes. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
 
 ![Neon Monitoring page](/guides/images/payload/74a2aa54-6d28-4f47-b181-077957df6779.png)
 

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
-import slugify from 'slugify';
 
-import AnchorIcon from 'icons/anchor.inline.svg';
+import AnchorHeading from 'components/shared/anchor-heading';
+
 // local constants
 const termDelimiterRegEx = /\n/;
 const listDelimiterRegEx = /\n:/;
@@ -10,7 +10,6 @@ const termDelimiterVariations = ['\n', '\n ', ' \n'];
 const listDelimiterVariations = ['\n:', ' \n:', '\n: '];
 // local helpers
 const checkStrNonEmpty = (str) => str && str.trim().length > 0;
-const getPlainText = (arr) => arr.reduce((acc, cur) => acc.concat(cur.props?.children ?? cur), '');
 
 const buildRenderContent = ({ delimiterRegEx, delimiterVariations }, jsx) => {
   // 1. Content is a plain string
@@ -56,11 +55,13 @@ const buildRenderContent = ({ delimiterRegEx, delimiterVariations }, jsx) => {
   return store;
 };
 
-const DefinitionList = ({ children }) => {
+const DefinitionList = ({ bulletType = 'dash', children }) => {
   let content = children;
   if (!Array.isArray(children)) {
     content = [children];
   }
+  const AnchorSpan = AnchorHeading('span');
+
   return (
     <dl>
       {content.map(({ props: { children } }, idx) => {
@@ -78,30 +79,17 @@ const DefinitionList = ({ children }) => {
           },
           term
         );
-        const termTextContent = Array.isArray(term) ? getPlainText(term) : term;
+
         return (
           <Fragment key={idx}>
-            {terms.map((term, termIdx) => {
-              const anchorMold = slugify(termTextContent, { lower: true });
-              return (
-                <dt
-                  className="group relative mt-4 flex items-start font-bold first:mt-0"
-                  id={!termIdx ? anchorMold : termIdx}
-                  key={termIdx}
-                >
-                  <span className="mr-2.5">—</span>
-                  {term}
-                  {!termIdx && (
-                    <a
-                      className="ml-2 mt-2.5 !border-b-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                      href={`#${anchorMold}`}
-                    >
-                      <AnchorIcon className="h-4 w-4" />
-                    </a>
-                  )}
-                </dt>
-              );
-            })}
+            {terms.map((term, termIdx) => (
+              <dt className="relative mt-4 flex items-start font-bold first:mt-0" key={termIdx}>
+                <span className="mr-2.5">
+                  {bulletType === 'dash' ? '—' : bulletType === 'check' ? '✓' : '✗'}
+                </span>
+                <AnchorSpan className="font-bold">{term}</AnchorSpan>
+              </dt>
+            ))}
             {descriptions.map((description, index) => (
               <dd className="pl-6 first:mt-1" key={index}>
                 {description}
@@ -115,6 +103,7 @@ const DefinitionList = ({ children }) => {
 };
 
 DefinitionList.propTypes = {
+  bulletType: PropTypes.oneOf(['dash', 'check', 'x']),
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 

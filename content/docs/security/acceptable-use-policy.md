@@ -1,14 +1,14 @@
 ---
 title: Acceptable Use Policy
 enableTableOfContents: true
-updatedOn: '2024-01-29T09:55:23.882Z'
+updatedOn: '2025-12-08T15:34:39.156Z'
 ---
 
 **Last Updated:** 23 January 2024
 
 ## Overview
 
-Neon ("Neon," "we," "us," or "our") is committed to providing a secure and productive computing environment. This Acceptable Use Policy (“AUP”) outlines the acceptable use of our Platform and Services. By accessing and using Neon's Platform and Services, you agree to comply with this policy. Unless otherwise provided herein, capitalized terms will have the meaning specified in the applicable Terms of Service, Master Service Agreement, or any other agreed terms (“Agreement”).
+Neon ("Neon," "we," "us," or "our") is committed to providing a secure and productive computing environment. This Acceptable Use Policy (“AUP”) outlines the acceptable use of our Platform and Services. By accessing and using Neon's Platform and Services, you agree to comply with this policy. Unless otherwise provided herein, capitalized terms will have the meaning specified in the applicable Neon Platform Services Product Specific Schedule, Master Service Agreement, or any other agreed terms ("Agreement").
 
 ## Acceptable Use
 
@@ -32,7 +32,7 @@ The following activities are strictly prohibited:
 - **Violations of Privacy:** Users must respect the privacy of others and should not engage in activities that violate the privacy of Neon's users or any third parties.
 - **Network Interference:** Users are not allowed to interfere with the normal operation of Neon's network infrastructure, including attempting to bypass security measures or manipulating network protocols.
 - **Insecure Development Practices:** Users are expected to follow secure development practices when utilizing Neon's services, and any insecure coding practices that could compromise the integrity of the service are prohibited.
-- **Creating Multiple Accounts:** Avoid creating multiple accounts, as this can result in an account block due to misuse of free-tier resources.
+- **Creating Multiple Accounts:** Avoid creating multiple accounts, as this can result in an account block due to misuse of free-plan resources.
 
 ## Enforcement
 

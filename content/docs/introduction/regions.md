@@ -4,21 +4,35 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2024-06-14T07:55:54.415Z'
+updatedOn: '2025-08-15T15:54:41.889Z'
 ---
 
-Neon supports project deployment in several regions. We recommended that you select the region closest to your application server to reduce latency between your Neon database and your application.
+Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.
 
-## Available regions
+## AWS regions
 
-Neon currently supports the following AWS regions:
+- 🇺🇸 AWS US East (N. Virginia) &mdash; `aws-us-east-1`
+- 🇺🇸 AWS US East (Ohio) &mdash; `aws-us-east-2`
+- 🇺🇸 AWS US West (Oregon) &mdash; `aws-us-west-2`
+- 🇩🇪 AWS Europe (Frankfurt) &mdash; `aws-eu-central-1`
+- 🇬🇧 AWS Europe (London) &mdash; `aws-eu-west-2`
+- 🇸🇬 AWS Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
+- 🇦🇺 AWS Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+- 🇧🇷 AWS South America (São Paulo) &mdash; `aws-sa-east-1`
 
-- US East (N. Virginia) &mdash; `aws-us-east-1`
-- US East (Ohio) &mdash; `aws-us-east-2`
-- US West (Oregon) &mdash; `aws-us-west-2`
-- Europe (Frankfurt) &mdash; `aws-eu-central-1`
-- Asia Pacific (Singapore) &mdash; `aws-ap-southeast-1`
-- Asia Pacific (Sydney) &mdash; `aws-ap-southeast-2`
+## Azure regions
+
+- 🇺🇸 Azure East US 2 region (Virginia) &mdash; `azure-eastus2`
+- 🇺🇸 Azure West US 3 region (Arizona) &mdash; `azure-westus3`
+- 🇩🇪 Azure Germany West Central region (Frankfurt) &mdash; `azure-gwc`
+
+<Admonition type="note" title="Deployment options on azure">
+For information about Neon deployment options on Azure, see [Neon on Azure](/docs/manage/azure).
+</Admonition>
+
+## Request a region
+
+<RequestForm type="region" />
 
 ## Select a region for your Neon project
 
@@ -29,22 +43,51 @@ All branches and databases created in a Neon project are created in the region s
 ![Select region image](/docs/introduction/project_creation_regions.png)
 
 <Admonition type="note">
-After you select a region for a Neon project, it cannot be changed for that project.
+After you select a region for a Neon project, it cannot be changed for that project. To use a different region, create a new project in your desired region and [move your data to the new project](/docs/introduction/regions#move-project-data-to-a-new-region).
 </Admonition>
+
+## NAT Gateway IP addresses
+
+A NAT gateway has a public IP address that external systems see when private resources initiate outbound connections. Neon uses 3 to 6 IP addresses per region for this outbound communication, corresponding to each availability zone in the region. To ensure proper connectivity for setups such as replicating data to Neon, you should allow access to all the NAT gateway IP addresses associated with your Neon project's region.
+
+If you are unsure of your project's region, you can find this information in the **Settings** widget on the **Project Dashboard**.
+
+### AWS NAT Gateway IP Addresses
+
+| Region                                            | NAT Gateway IP Addresses                                                                                                                                                          |
+| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AWS US East (N. Virginia) — aws-us-east-1         | 3.222.32.110, 13.219.161.141, 23.23.0.232, 34.202.217.219, 34.233.170.231, 34.235.208.71, 34.239.66.10, 35.168.244.148, 52.73.235.120, 54.88.155.118, 54.160.39.3, 54.205.208.153 |
+| AWS US East (Ohio) — aws-us-east-2                | 3.16.227.37, 3.128.6.252, 3.129.145.179, 3.139.195.115, 18.217.181.229, 52.15.165.218                                                                                             |
+| AWS US West (Oregon) — aws-us-west-2              | 35.83.202.11, 35.164.221.218, 44.235.241.217, 44.236.56.140, 52.32.22.241, 52.37.48.254, 54.213.57.47                                                                             |
+| AWS Europe (Frankfurt) — aws-eu-central-1         | 3.66.63.165, 3.125.57.42, 3.125.234.79, 18.158.63.175, 18.194.181.241, 52.58.17.95                                                                                                |
+| AWS Europe (London) — aws-eu-west-2               | 3.10.42.8, 18.133.205.39, 52.56.191.86                                                                                                                                            |
+| AWS Asia Pacific (Singapore) — aws-ap-southeast-1 | 54.254.50.26, 54.254.92.70, 54.255.161.23                                                                                                                                         |
+| AWS Asia Pacific (Sydney) — aws-ap-southeast-2    | 13.55.152.144, 13.237.134.148, 54.153.185.87                                                                                                                                      |
+| AWS South America (São Paulo) — aws-sa-east-1     | 18.230.1.215, 52.67.202.176, 54.232.117.41                                                                                                                                        |
+
+### Azure NAT Gateway IP Addresses
+
+| Region                                     | NAT Gateway IP Addresses                       |
+| :----------------------------------------- | :--------------------------------------------- |
+| Azure East US 2 (Virginia) — azure-eastus2 | 48.211.218.176, 48.211.218.194, 48.211.218.200 |
+| Azure Germany West Central — azure-gwc     | 20.52.100.129, 20.52.100.208, 20.52.187.150    |
+| Azure West US 3 (Arizona) — azure-westus3  | 20.38.38.171, 20.168.0.32, 20.168.0.77         |
 
 ## Move project data to a new region
 
-If you need to move your data to a different region, the following steps are recommended:
+Moving a project to a different region requires moving your data using one of the following options:
 
-1. Create a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
-1. Move your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/import-from-postgres).
+### Option 1: Dump and restore
 
-<Admonition type="note">
-Neon Free Tier users are limited to a single project. In this case, you can export your data using `pg_dump`, remove your existing project, create a new project in the desired region, and import your data into the new project.
-</Admonition>
+Using the dump and restore method involves the following steps:
 
-Moving data to a new Neon project may require downtime if you are moving a production database, as the import procedure may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
+1. Creating a new project in the desired region. For project creation instructions, see [Create a project](/docs/manage/projects#create-a-project).
+1. Moving your data from the old project to the new project. For instructions, see [Import data from Postgres](/docs/import/migrate-from-postgres).
 
-Neon regularly reviews opportunities for expanding into new regions. We welcome your input regarding where you'd like to see us next. Please share your suggestions or express your interest in specific regions via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or in our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.
+Moving data to a new Neon project using this method may take some time depending on the size of your data. To prevent the loss of data during the import operation, consider disabling writes from your applications before initiating the import operation. You can re-enable writes when the import is completed. Neon does not currently support disabling database writes. Writes must be disabled at the application level.
+
+### Option 2: Logical replication
+
+As an alternative to the dump and restore method described above, you can use **logical replication** to replicate data from one Neon project to another for a near-zero downtime data migration. For more information, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).
 
 <NeedHelp/>

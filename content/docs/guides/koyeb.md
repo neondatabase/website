@@ -3,7 +3,7 @@ title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
 enableTableOfContents: true
-updatedOn: '2024-06-21T14:17:23.471Z'
+updatedOn: '2025-08-02T10:33:29.274Z'
 ---
 
 [Koyeb](https://www.koyeb.com/) is a developer-friendly, serverless platform designed to easily deploy reliable and scalable applications globally. Koyeb offers native autoscaling, automatic HTTPS (SSL), auto-healing, and global load-balancing across their edge network with zero configuration.
@@ -11,7 +11,7 @@ updatedOn: '2024-06-21T14:17:23.471Z'
 This guide describes how connect a Neon Postgres database to an application deployed with Koyeb. To follow the instructions in this guide, you require:
 
 - A [Koyeb account](https://app.koyeb.com/) to deploy the application. Alternatively, you can install the [Koyeb CLI](https://www.koyeb.com/docs/quickstart/koyeb-cli) if you prefer to deploy the application from your terminal.
-- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started-with-neon/signing-up).
+- A Neon account to deploy the Postgres database. If you do not have one, see [Sign up](/docs/get-started/signing-up).
 
 The example application connects to your Neon Postgres database using [Prisma](https://www.prisma.io/) as an ORM. Prisma synchronizes the database schema with the Prisma schema included with the application and seeds the database.
 
@@ -25,7 +25,7 @@ The example application connects to your Neon Postgres database using [Prisma](h
 A dialog pops up with your Neon connection string, which appears similar to the following:
 
 ```bash
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 Store this value in a safe place. It is required later. The connection string specifies `neondb` as the database. This is the database created with your Neon project if you did not specify a different database name. You will use this database with the example application.

@@ -1,165 +1,83 @@
-'use client';
-
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useState, useRef, createRef, useEffect, useCallback } from 'react';
-import useWindowSize from 'react-use/lib/useWindowSize';
 
+import HeadingLabel from 'components/pages/home/heading-label';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import Logos from 'components/shared/logos';
+import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
-import useIsSafari from 'hooks/use-is-safari';
-import branchingIcon from 'icons/home/hero/branching.svg';
-import scalingIcon from 'icons/home/hero/scaling.svg';
-import bg from 'images/pages/home/hero/bg.jpg';
+import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 
-import Video from './video';
+const logos = ['replit', 'outfront', 'doordash', 'bcg', 'pepsi', 'zimmer', 'retool', 'meta'];
 
-const Hls = require('hls.js/dist/hls.light.min.js');
+const Hero = () => (
+  <section className="hero safe-paddings relative mt-16 lg:mt-14">
+    <Container
+      className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
+      size="1600"
+    >
+      <HeadingLabel>NEON: A DATABRICKS COMPANY</HeadingLabel>
 
-const IS_MOBILE_SCREEN_WIDTH = 639;
+      <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
+        Ship faster with Postgres for modern engineering teams
+      </h1>
 
-/* 
-  Video optimization parameters:
-    -mp4: -pix_fmt yuv420p -vf "scale=-2:932" -movflags faststart -vcodec libx264 -crf 20
-    Scaling
-      -m3u8: -codec: copy -start_number 0 -hls_time 2 -hls_list_size 0 -f hls scaling.m3u8
-    Branching
-      -m3u8: -codec: copy -start_number 0 -hls_time 3 -hls_list_size 0 -f hls branching.m3u8
-*/
-const ITEMS = [
-  {
-    video: {
-      icon: scalingIcon,
-      title: 'Scaling',
-      mp4: '/videos/pages/home/hero/scaling.mp4?updated=20240514120633',
-      m3u8: '/videos/pages/home/hero/scaling.m3u8?updated=20240514120633',
-    },
-    title: 'Scaling',
-    description:
-      'Focus on building applications with time and money-saving features like instant provisioning, autoscaling according to load, and scale to zero.',
-    linkLabel: 'Discover Autoscaling',
-    linkUrl: LINKS.autoscaling,
-  },
-  {
-    video: {
-      icon: branchingIcon,
-      title: 'Branching',
-      mp4: '/videos/pages/home/hero/branching.mp4?updated=20240508184252',
-      m3u8: '/videos/pages/home/hero/branching.m3u8?updated=20240508184252',
-    },
-    title: 'Branching',
-    description:
-      'Instantly branch your data and schema to access isolated DB copies for development, CI/CD, and schema migrations with copy-on-write storage.',
-    linkLabel: 'Explore Branching',
-    linkUrl: LINKS.branching,
-  },
-];
+      <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
+        <Button theme="white-filled" size="new" to={LINKS.signup}>
+          Get started
+        </Button>
+        <Button
+          className="!font-normal"
+          theme="gray-40-outline"
+          size="new"
+          to={LINKS.docsBranching}
+        >
+          Read the docs
+        </Button>
+      </div>
 
-const Hero = () => {
-  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
+      <div className="relative mt-16 select-none border-t border-gray-new-20 pt-10 lg:mt-14 lg:pt-7 sm:mt-12">
+        <Logos className="max-w-full !p-0" logos={logos} size="md" />
+      </div>
+    </Container>
 
-  const { width: windowWidth } = useWindowSize();
-  const [isMobile, setIsMobile] = useState(false);
-  const [initialVideoPlayback, setInitialVideoPlayback] = useState(true);
-
-  const videoRefs = useRef(ITEMS.map(() => createRef()));
-
-  const isSafari = useIsSafari();
-
-  useEffect(() => {
-    setIsMobile(windowWidth <= IS_MOBILE_SCREEN_WIDTH);
-  }, [windowWidth]);
-
-  useEffect(() => {
-    videoRefs.current.forEach((ref, index) => {
-      const videoElement = ref.current;
-      const videoSrc = isSafari ? ITEMS[index].video.mp4 : ITEMS[index].video.m3u8;
-
-      if (!videoElement) return;
-
-      // Using HLS.js for browsers that support it, except for Safari which has native HLS support.
-      if (Hls.isSupported() && !isSafari) {
-        const hls = new Hls();
-        hls.loadSource(videoSrc);
-        hls.attachMedia(videoElement);
-      } else {
-        const source = document.createElement('source');
-        source.src = videoSrc;
-        source.type = 'video/mp4';
-        videoElement.appendChild(source);
-      }
-    });
-  }, [videoRefs, isSafari]);
-
-  const switchVideo = useCallback(
-    (index) => {
-      videoRefs.current[currentVideoIndex].current.pause();
-      videoRefs.current[currentVideoIndex].current.currentTime = 0;
-      setCurrentVideoIndex(index);
-    },
-    [currentVideoIndex]
-  );
-
-  return (
-    <section className="hero safe-paddings relative pt-[136px] xl:pt-[120px] lg:pt-24">
+    <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
+      {/*
+        Video optimization parameters:
+          mp4 av1: ffmpeg -i hero.mov -c:v libaom-av1 -crf 25 -b:v 0 -pix_fmt yuv420p10le -vf scale=2880:-2 -cpu-used 0 -tiles 4x2 -row-mt 1 -threads 16 -strict experimental -tag:v av01 -movflags faststart -an hero-av1.mp4
+          mp4: ffmpeg -i hero.mov -c:v libx265 -crf 25 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -tag:v hvc1 -movflags faststart -an hero.mp4
+          webm: ffmpeg -i hero.mov -c:v libvpx-vp9 -pix_fmt yuv420p10le -crf 35 -vf scale=2880:-2 -deadline best -an hero.webm
+      */}
+      <PauseableVideo
+        className={clsx(
+          'relative left-1/2 w-[1920px] -translate-x-1/2',
+          'xl:-top-[50px] xl:w-[1304px] lg:-top-2 lg:w-[1016px] sm:hidden'
+        )}
+        width={1920}
+        height={832}
+        poster={`${LINKS.cdn}/public/pages/home/hero/poster.jpg`}
+      >
+        <source
+          src={`${LINKS.cdn}/public/pages/home/hero/hero-av1.mp4`}
+          type="video/mp4; codecs=av01.0.05M.08,opus"
+        />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/home/hero/hero.webm`} type="video/webm" />
+      </PauseableVideo>
       <Image
-        className="absolute left-1/2 top-0 min-w-[1760px] -translate-x-1/2 xl:min-w-[1588px] lg:top-[-22px] lg:min-w-[1420px] md:top-[46px] md:min-w-[1058px]"
-        src={bg}
-        sizes="(max-width: 639px) 1058px"
-        width={1760}
-        height={980}
+        className="relative left-[40%] hidden w-[752px] max-w-none -translate-x-1/2 sm:block"
+        src={mobileBgIllustration}
+        width={752}
+        height={326}
         quality={100}
         alt=""
         priority
       />
+    </div>
 
-      <Container className="xl:px-8" size="1100">
-        <div className="text-center">
-          <h1 className="font-title text-[72px] font-medium leading-none -tracking-[0.03em] text-white xl:text-[64px] lg:text-[48px] md:text-[40px] sm:text-[32px]">
-            Ship faster with Postgres
-          </h1>
-          <p className="mx-auto mt-3.5 max-w-xl text-[19px] font-light leading-snug -tracking-[0.04em] text-gray-new-80 lg:mt-2.5 lg:max-w-lg lg:text-balance lg:text-base sm:max-w-xs">
-            The database you love, on a serverless platform designed to help you build reliable and
-            scalable applications faster.
-          </p>
-          <Button
-            className="pointer-events-auto relative mt-[26px] h-11 w-[144px] text-[15px] !font-semibold tracking-tighter xl:mt-8 lg:mt-6 sm:h-10"
-            theme="primary"
-            to={LINKS.signup}
-            target="_blank"
-            tag_name="Hero"
-          >
-            Get Started
-          </Button>
-        </div>
-
-        <div className="mt-[74px] flex gap-x-2.5 xl:mt-16 lg:mt-14 sm:mt-9 sm:flex-col sm:gap-y-9">
-          {ITEMS.map((item, index) => (
-            <Video
-              className={clsx(
-                'transition-all duration-700',
-                currentVideoIndex === index
-                  ? 'w-[64.7273%] flex-shrink-0 xl:w-[61.863%] lg:w-[62.746%] sm:w-full'
-                  : 'w-full'
-              )}
-              videoClassName={clsx(index === 1 && 'left-[-172px]')}
-              {...item}
-              isActive={currentVideoIndex === index}
-              isMobile={isMobile}
-              switchVideo={() => switchVideo((currentVideoIndex + 1) % ITEMS.length)}
-              setActiveVideoIndex={() => setCurrentVideoIndex(index)}
-              initialVideoPlayback={initialVideoPlayback}
-              setInitialVideoPlayback={setInitialVideoPlayback}
-              ref={videoRefs.current[index]}
-              index={index}
-              key={index}
-            />
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-};
+    <div className="absolute bottom-0 z-20 h-[88px] w-full bg-[linear-gradient(0deg,#000_0%,rgba(0,0,0,0.00)_100%)] xl:h-[165px] lg:h-[156px] sm:h-[258px]" />
+  </section>
+);
 
 export default Hero;

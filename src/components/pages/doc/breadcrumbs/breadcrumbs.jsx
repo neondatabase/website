@@ -1,26 +1,44 @@
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { Fragment } from 'react';
 
 import Link from 'components/shared/link';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import LINKS from 'constants/links';
+import HomeIcon from 'icons/docs/home.inline.svg';
 
-const Breadcrumbs = ({ breadcrumbs }) => (
-  <div className="mb-4 flex space-x-1 text-sm leading-none text-gray-new-40 dark:text-gray-new-80">
-    {breadcrumbs.map(({ title, slug }, index) => (
-      <Fragment key={index}>
-        {index !== 0 && <span>/</span>}
-        {slug ? (
-          <Link
-            className="transition-colors duration-200 hover:text-black dark:hover:text-gray-new-94"
-            to={DOCS_BASE_PATH + slug}
-          >
-            {title}
-          </Link>
-        ) : (
-          <span>{title}</span>
-        )}
-      </Fragment>
-    ))}
+const linkClassName =
+  'transition-colors duration-200 hover:text-black dark:hover:text-white rounded-sm';
+
+const Breadcrumbs = ({ breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
+  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60">
+    <Link className={linkClassName} to={baseUrl}>
+      <HomeIcon />
+    </Link>
+
+    {breadcrumbs.map(({ title, slug }, index) => {
+      const isLast = index === breadcrumbs.length - 1;
+      const href = slug === 'guides' ? LINKS.guides : `${baseUrl}${slug}`;
+
+      return (
+        <Fragment key={index}>
+          <span>/</span>
+          {slug ? (
+            <Link className={linkClassName} to={href}>
+              {title}
+            </Link>
+          ) : (
+            <span
+              className={clsx(
+                isLast ? 'text-black dark:text-white' : 'text-gray-new-40 dark:text-gray-new-60'
+              )}
+            >
+              {title}
+            </span>
+          )}
+        </Fragment>
+      );
+    })}
   </div>
 );
 
@@ -31,6 +49,7 @@ Breadcrumbs.propTypes = {
       slug: PropTypes.string,
     })
   ).isRequired,
+  baseUrl: PropTypes.string.isRequired,
 };
 
 export default Breadcrumbs;

@@ -1,0 +1,36 @@
+# Monitor Neon with pgAdmin
+
+> The document details the process for monitoring Neon databases using pgAdmin, including setup instructions and configuration steps specific to Neon's environment.
+
+## Source
+
+- [Monitor Neon with pgAdmin HTML](https://neon.com/docs/introduction/monitor-pgadmin): The original HTML version of this documentation
+
+pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics.
+
+
+
+With pgAdmin, you can monitor real-time activity for a variety of metrics including:
+
+- Active sessions (Total, Active, and Idle)
+- Transactions per second (Transactions, Commits, Rollbacks)
+- Tuples in (Inserts, Updates, Deletes)
+- Tuples out (Fetched, Returned)
+- Block I/O for shared buffers (see [Cache your data](https://neon.com/docs/postgresql/query-performance#cache-your-data) for information about Neon's Local File Cache)
+- Database activity (Sessions, Locks, Prepared Transactions)
+
+   **Note** Notes: Neon currently does not support the `system_stats` extension required to use the **System Statistics** tab in pgAdmin. It's also important to note that pgAdmin, while active, polls your database for statistics, which does not allow your compute to suspend as it normally would when there is no other database activity.
+
+## How to install pgAdmin
+
+Pre-compiled and configured installation packages for pgAdmin 4 are available for different desktop environments. For installation instructions, refer to the [pgAdmin deployment documentation](https://www.pgadmin.org/docs/pgadmin4/latest/deployment.html). Downloads can be found on the [PgAdmin Downloads](https://www.pgadmin.org/download/) page.
+
+## How to connect to your database from pgAdmin
+
+Find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
+
+
+
+Enter your connection details as shown [here](https://neon.com/docs/connect/connect-postgres-gui#connect-to-the-database).
+
+Neon uses the default Postgres port: `5432`

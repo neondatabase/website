@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2024-06-14T07:55:54.363Z'
+updatedOn: '2026-01-13T19:31:35.479Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -17,6 +17,14 @@ This topic describes how to resolve connection errors you may encounter when usi
 - [Error undefined: Database error](#error-undefined-database-error)
 - [Terminating connection due to administrator command](#terminating-connection-due-to-administrator-command)
 - [Unsupported startup parameter](#unsupported-startup-parameter)
+- [You have exceeded the limit of concurrently active endpoints](#you-have-exceeded-the-limit-of-concurrently-active-endpoints)
+- [Remaining connection slots are reserved for roles with the SUPERUSER attribute](#remaining-connection-slots-are-reserved-for-roles-with-the-superuser-attribute)
+- [Relation not found](#relation-not-found)
+- [Postgrex: DBConnection ConnectionError ssl send: closed](#postgrex-dbconnection-connectionerror-ssl-send-closed)
+- [query_wait_timeout SSL connection has been closed unexpectedly](#querywaittimeout-ssl-connection-has-been-closed-unexpectedly)
+- [The request could not be authorized due to an internal error](#the-request-could-not-be-authorized-due-to-an-internal-error)
+- [Terminating connection due to idle-in-transaction timeout](#terminating-connection-due-to-idle-in-transaction-timeout)
+- [DNS resolution issues](#dns-resolution-issues)
 
 <Admonition type="info">
 Connection problems are sometimes related to a system issue. To check for system issues, please refer to the [Neon status page](https://neonstatus.com/).  
@@ -27,12 +35,12 @@ Connection problems are sometimes related to a system issue. To check for system
 With older clients and some native Postgres clients, you may receive the following error when attempting to connect to Neon:
 
 ```txt shouldWrap
-ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.tech/sni](https://neon.tech/sni) for more information.
+ERROR: The endpoint ID is not specified. Either upgrade the Postgres client library (libpq) for SNI support or pass the endpoint ID (the first part of the domain name) as a parameter: '&options=endpoint%3D'. See [https://neon.com/sni](/sni) for more information.
 ```
 
 This error occurs if your client library or application does not support the **Server Name Indication (SNI)** mechanism in TLS.
 
-Neon uses compute endpoint IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
+Neon uses compute IDs (the first part of a Neon domain name) to route incoming connections. However, the Postgres wire protocol does not transfer domain name information, so Neon relies on the Server Name Indication (SNI) extension of the TLS protocol to do this.
 
 SNI support was added to `libpq` (the official Postgres client library) in Postgres 14, which was released in September 2021. Clients that use your system's `libpq` library should work if your Postgres version is >= 14. On Linux and macOS, you can check Postgres version by running `pg_config --version`. On Windows, check the `libpq.dll` version in your Postgres installation's `bin` directory. Right-click on the file, select **Properties** > **Details**.
 
@@ -40,10 +48,10 @@ If a library or application upgrade does not help, there are several workarounds
 
 ### A. Pass the endpoint ID as an option
 
-Neon supports a connection option named `endpoint`, which you can use to identify the compute endpoint you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's endpoint ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
+Neon supports a connection option named `endpoint`, which you can use to identify the compute you are connecting to. Specifically, you can add `options=endpoint%3D[endpoint_id]` as a parameter to your connection string, as shown in the example below. The `%3D` is a URL-encoded `=` sign. Replace `[endpoint_id]` with your compute's ID, which you can find in your Neon connection string. It looks similar to this: `ep-cool-darkness-123456`.
 
 ```txt shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]?options=endpoint%3D[endpoint-id]
 ```
 
 <Admonition type="note">
@@ -81,14 +89,14 @@ endpoint=<endpoint_id>$<password>
 Example:
 
 ```txt
-postgres://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:endpoint=ep-cool-darkness-123456;AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
 Using a dollar sign (`$`) character as a separator may be required if a semicolon (`;`) is not a permitted character in a password field. For example, the [AWS Database Migration Service (DMS)](https://aws.amazon.com/dms/) does not permit a semicolon character in the **Password** field when defining connection details for database endpoints.
 </Admonition>
 
-This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites. We intend deprecate this option when most libraries and applications provide SNI support.
+This approach causes the authentication method to be downgraded from `scram-sha-256` (never transfers a plain text password) to `password` (transfers a plain text password). However, the connection is still TLS-encrypted, so the level of security is equivalent to the security provided by `https` websites as long as `sslmode=verify-full` or channel binding is used. We intend deprecate this option when most libraries and applications provide SNI support.
 
 ### Libraries
 
@@ -99,9 +107,9 @@ Neon has tested the following drivers for SNI support:
 | Driver            | Language   | SNI Support | Notes                                                                                                                                             |
 | ----------------- | ---------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | npgsql            | C#         | &check;     |                                                                                                                                                   |
-| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](https://neon.tech/docs/guides/elixir-ecto#configure-ecto)                                         |
-| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22                                                                       |
-| pgx               | Go         | &check;     | SNI support merged with v5.0.0-beta.3 yet                                                                                                         |
+| Postgrex          | Elixir     | &check;     | [Requires ssl_opts with server_name_indication](/docs/guides/elixir-ecto#configure-ecto)                                                          |
+| github.com/lib/pq | Go         | &check;     | Supported with macOS Build 436, Windows Build 202, and Ubuntu 20, 21 and 22 (Deprecated, use pgx instead)                                         |
+| pgx               | Go         | &check;     | Recommended driver for Go. SNI support available in v5.0.0-beta.3 and later                                                                       |
 | go-pg             | Go         | &check;     | requires `verify-full` mode                                                                                                                       |
 | JDBC              | Java       | &check;     |                                                                                                                                                   |
 | node-postgres     | JavaScript | &check;     | Requires the `ssl: {'sslmode': 'require'}` option                                                                                                 |
@@ -117,13 +125,13 @@ Neon has tested the following drivers for SNI support:
 The following error is often the result of an incorrectly defined connection information, or the driver you are using does not support Server Name Indication (SNI).
 
 ```text shouldWrap
-ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require`)
+ERROR:  password authentication failed for user '<user_name>' connection to server at "ep-billowing-fun-123456.us-west-2.aws.neon.tech" (12.345.67.89), port 5432 failed: ERROR:  connection is insecure (try using `sslmode=require&channel_binding=require`)
 ```
 
-Check your connection to see if it is defined correctly. Your Neon connection string can be obtained from the **Connection Details** widget on the Neon **Dashboard**. It appears similar to this:
+Check your connection to see if it is defined correctly. Your Neon connection string can be obtained by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. It appears similar to this:
 
 ```text shouldWrap
-postgres://[user]:[password]@[neon_hostname]/[dbname]
+postgresql://[user]:[password]@[neon_hostname]/[dbname]
 ```
 
 For clients or applications that require specifying connection parameters such as user, password, and hostname separately, the values in a Neon connection string correspond to the following:
@@ -138,16 +146,16 @@ If you find that your connection string is defined correctly, see the instructio
 
 ## Couldn't connect to compute node
 
-This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [Autosuspend](/docs/reference/glossary#autosuspend) (scale to zero). Currently, the transition from an idle state to an active one takes a few seconds.
+This error arises when the Neon proxy, which accepts and handles connections from clients that use the Postgres protocol, fails to establish a connection with your compute. This issue sometimes occurs due to repeated connection attempts during the compute's restart phase after it has been idle due to [scale to zero](/docs/reference/glossary#scale-to-zero). The transition from an idle to an active state only takes a few hundred milliseconds.
 
 Consider these recommended steps:
 
 - Visit the [Neon status page](https://neonstatus.com/) to ensure there are no ongoing issues.
 - Pause for a short period to allow your compute to restart, then try reconnecting.
-- Try [connecting with psql](https://neon.tech/docs/connect/query-with-psql-editor) to see if a connection can be established.
-- Review the strategies in [Connection latency and timeouts](https://neon.tech/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
+- Try [connecting with psql](/docs/connect/query-with-psql-editor) to see if a connection can be established.
+- Review the strategies in [Connection latency and timeouts](/docs/connect/connection-latency) for avoiding connection issues due to compute startup time.
 
-If the connection issue persists, please reach out to [Support](https://neon.tech/docs/introduction/support).
+If the connection issue persists, please reach out to [Support](/docs/introduction/support).
 
 ## Can't reach database server
 
@@ -176,9 +184,9 @@ Prisma Migrate requires a direct connection to the database. It does not support
 
 ## Terminating connection due to administrator command
 
-The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute endpoint to suspend due to inactivity. Neon automatically suspends a compute endpoint after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
+The `terminating connection due to administrator command` error is typically encountered when running a query from a connection that has sat idle long enough for the compute to suspend due to inactivity. Neon automatically suspends a compute after 5 minutes of inactivity, by default. You can reproduce this error by connecting to your database from an application or client such as `psql`, letting the connection remain idle until the compute suspends, and then running a query from the same connection.
 
-If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are a paying user, you can disable autosuspend or configure a different suspension period. For instructions, see [Configuring Autosuspend for Neon computes](/docs/guides/auto-suspend-guide). [Neon Free Tier](/docs/introduction/plans#free-tier) users cannot modify the default 5 minute autosuspend setting.
+If you encounter this error, you can try adjusting the timing of your query or reestablishing the connection before running the query. Alternatively, if you are on a paid plan, you can disable scale to zero. For instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide). [Free plan](/docs/introduction/plans) users cannot disable scale to zero.
 
 ## Unsupported startup parameter
 
@@ -193,5 +201,148 @@ unsupported startup parameter in options: <...>
 ```
 
 The error occurs when using a pooled Neon connection string with startup options that are not supported by PgBouncer. PgBouncer allows only startup parameters it can keep track of in startup packets. These include: `client_encoding`, `datestyle`, `timezone`, `standard_conforming_strings`, and `application_name`. See **track_extra_parameters**, in the [PgBouncer documentation](https://www.pgbouncer.org/config.html#track_extra_parameters). To resolve this error, you can either remove the unsupported parameter from your connection string or use an unpooled Neon connection string. For information about pooled and unpooled connections in Neon, see [Connection pooling](/docs/connect/connection-pooling).
+
+## You have exceeded the limit of concurrently active endpoints
+
+This error can also appear as: `active endpoints limit exceeded`.
+
+Neon limits [concurrently active computes](/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. The compute associated with the default branch is exempt from this limit, ensuring that it is always available. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+
+## Remaining connection slots are reserved for roles with the SUPERUSER attribute
+
+This error occurs when the maximum number of simultaneous database connections, defined by the Postgres `max_connections` setting, is reached.
+
+To resolve this issue, you have several options:
+
+- Find and remove long-running or idle connections. See [Find long-running or idle connections](/docs/postgresql/query-reference#find-long-running-or-idle-connections).
+- Use a larger compute, with a higher `max_connections` configuration. See [How to size your compute](/docs/manage/computes#how-to-size-your-compute).
+- Enable [connection pooling](/docs/connect/connection-pooling).
+
+If you are already using connection pooling, you may need to reach out to Neon Support to request a higher `default_pool_size` setting for PgBouncer. See [Neon PgBouncer configuration settings for more information](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
+
+## Relation not found
+
+This error is often encountered when attempting to set the Postgres `search_path` session variable using a `SET search_path` statement over a pooled connection. For more information and workarounds, please see [Connection pooling in transaction mode](/docs/connect/connection-pooling#connection-pooling-in-transaction-mode).
+
+## Postgrex: DBConnection ConnectionError ssl send: closed
+
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+
+```elixir
+config :app_name, AppName.Repo
+  # normal connection options
+  ...
+  idle_interval:
+:timer.hours(24)
+```
+
+For additional details, refer to this discussion on our Discord server: [Compute not suspended due to Postgrex idle_interval setting](https://discord.com/channels/1176467419317940276/1295401751574351923/1295419826319265903)
+
+## query_wait_timeout SSL connection has been closed unexpectedly
+
+The `query_wait_timeout` setting is a PgBouncer configuration option that determines the maximum time a query can wait in the queue before being executed. Neon’s default value for this setting is **120 seconds**. If a query exceeds this timeout while in the queue, it will not be executed. For more details about this setting, refer to [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings).
+
+To avoid this error, we recommend reviewing your workload. If it includes batch processing with `UPDATE` or `INSERT` statements, review their performance. Slow queries may be the root cause. Try optimizing these queries to reduce execution time, which can help prevent them from exceeding the timeout.
+
+Alternatively, Neon can increase the `query_wait_timeout` value for you, but this is not typically recommended, as increasing the timeout can lead to higher latency or blocked queries under heavy workloads.
+
+## The request could not be authorized due to an internal error
+
+This error page in the Neon Console is most often the result of attempting to access a Neon project in one browser window after you've have logged in under a different Neon user account from another browser window. The error occurs because the currently logged in Neon user account does not have access to the Neon project. To avoid this issue, ensure that you're logged in with a Neon user account that has access to the Neon project you're trying to access.
+
+## Terminating connection due to idle-in-transaction timeout
+
+This error occurs when a session remains idle within an open transaction for longer than the specified timeout period. By default, the `idle_in_transaction_session_timeout` setting is set to `5min` (300,000 milliseconds). This timeout helps prevent idle sessions from holding locks or contributing to table bloat.
+
+If you encounter this error, you can adjust the `idle_in_transaction_session_timeout` setting to a higher value or disable it entirely by setting it to `0`. Below are ways to change this setting:
+
+1. Change at the session level: `SET idle_in_transaction_session_timeout = 0;`
+
+2. Change at the database level: `ALTER DATABASE <dbname> SET idle_in_transaction_session_timeout = 0;` (replace `<dbname>` with the name of your database)
+
+3. Change at the role level: `ALTER ROLE <role> SET idle_in_transaction_session_timeout = 0;` (replace `<role>` with the name of the user role)
+
+Be aware that leaving transactions idle for extended periods can prevent vacuuming and increase the number of open connections. Please use caution and consider only changing the value temporarily, as needed.
+
+## DNS resolution issues
+
+Some users encounter DNS resolution failures when connecting to their Neon database. These issues are often reported when using the **Tables** page in the Neon Console. In such cases, users may see an **Unexpected error happened** message like the one below:
+
+![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
+
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+
+```bash shouldWrap
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+```
+
+If the Neon hostname resolves correctly, you'll see output similar to this:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
+Server:		192.168.2.1
+Address:	192.168.2.1#53
+
+Non-authoritative answer:
+p-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech	canonical name = ap-southeast-1.aws.neon.tech.
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.10
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.20
+Name:	ap-southeast-1.aws.neon.tech
+Address: 203.0.113.30
+```
+
+If the hostname does not resolve, you might see an error like this, where the DNS query is refused:
+
+```bash shouldWrap
+** server can't find ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech: REFUSED
+```
+
+To verify that it's a DNS resolution issue, run the following test using a public DNS resolver, such as Google DNS:
+
+```bash
+nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech 8.8.8.8
+```
+
+If this succeeds, it's very likely a DNS resolution issue.
+
+**Cause**
+
+Failure to resolve the Neon hostname can happen for different reasons:
+
+- Regional DNS caching or propagation delays
+- Restrictive or misconfigured DNS resolvers (such as those provided by your ISP)
+- System-wide web proxy settings that interfere with DNS resolution
+
+**Workarounds**
+
+1. **Using a Public DNS Resolver**
+   - Google DNS: 8.8.8.8, 8.8.4.4
+   - Cloudflare DNS: 1.1.1.1, 1.0.0.1
+
+   These can be changed at:
+   - OS level (macOS, Windows, Linux)
+   - Router level
+   - Mobile device network settings
+   - Android Private DNS (configure a trusted provider such as `dns.google` or `1dot1dot1dot1.cloudflare-dns.com`)
+
+   To change your DNS configuration at the OS level:
+   - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
+   - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
+   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
+
+   This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
+
+2. **Disable system-wide web proxies**
+
+   If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
+   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
+
+3. **Using a VPN**
+
+   Using a VPN routes DNS queries through a different resolver and often bypasses the issue entirely.
 
 <NeedHelp/>

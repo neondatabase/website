@@ -2,7 +2,7 @@
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.372Z'
+updatedOn: '2025-08-02T10:33:29.247Z'
 ---
 
 The `postgis` extension provides support for spatial data - coordinates, maps and polygons, encompassing geographical and location-based information. It introduces new data types, functions, and operators to manage and analyze spatial data effectively.
@@ -12,14 +12,14 @@ The `postgis` extension provides support for spatial data - coordinates, maps an
 This guide introduces you to the `postgis` extension - how to enable it, store and query spatial data, and perform geospatial analysis with real-world examples. Geospatial data is crucial in fields like urban planning, environmental science, and logistics.
 
 <Admonition type="note">
-    PostGIS is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below. Detailed installation instructions and compatibility information can be found at [PostGIS Documentation](https://postgis.net/documentation/).
+    PostGIS is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below. Detailed installation instructions and compatibility information can be found at [PostGIS Documentation](https://postgis.net/documentation/). 
+    
+    For information about PostGIS-related extensions, including `pgrouting`, H3_PostGIS, PostGIS SFCGAL, and PostGIS Tiger Geocoder, see [PostGIG-related extensions](/docs/extensions/postgis-related-extensions).
 </Admonition>
 
 **Version availability:**
 
-Please refer to the [list of all extensions](https://neon.tech/docs/extensions/pg-extensions) available in Neon for up-to-date information.
-
-Currently, Neon uses version `3.3.3` of the `postgis` extension for all Postgres versions.
+Please refer to the [list of all extensions](/docs/extensions/pg-extensions) available in Neon for up-to-date information.
 
 ## Enable the `postgis` extension
 
@@ -29,7 +29,7 @@ You can enable the extension by running the following `CREATE EXTENSION` stateme
 CREATE EXTENSION IF NOT EXISTS postgis;
 ```
 
-For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
+For information about using the Neon SQL Editor, see [Query with Neon's SQL Editor](/docs/get-started/query-with-neon-sql-editor). For information about using the `psql` client with Neon, see [Connect with psql](/docs/connect/query-with-psql-editor).
 
 ## Example usage
 
@@ -58,7 +58,7 @@ VALUES
     ('Elm St & 5th Ave', ST_Point(-73.991070, 40.730824));
 ```
 
-The `ST_Point` function is used to create a point from the specified latitude and longitude.
+The `ST_Point` function is used to create a point from the specified longitude and latitude.
 
 **Querying spatial data**
 
@@ -86,7 +86,7 @@ The `ST_DWithin` function returns true if the distance between two points is les
 PostGIS extends Postgres data types to handle spatial data. The primary spatial types are:
 
 - **GEOMETRY**: A flexible type for spatial data, supporting various shapes. It models shapes in the cartesian coordinate plane. Each `GEOMETRY` value is also associated with a spatial reference system (SRS), which defines the coordinate system and units of measurement.
-- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of latitude and longitude.
+- **GEOGRAPHY**: Specifically designed for large-scale spatial operations on the Earth's surface, factoring in the Earth's curvature. The coordinates for a `GEOGRAPHY` shape are specified in degrees of longitude and latitude.
 
 The actual shapes are stored as a set of coordinates. For example, a point is stored as a pair of coordinates, a line as a set of points, and a polygon as a set of lines.
 

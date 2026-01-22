@@ -2,12 +2,22 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2023-11-02T10:54:40.454Z'
+updatedOn: '2025-08-05T16:14:59.260Z'
 ---
 
 Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
 
 For integrating Neon with different frameworks, languages, and platforms, refer to our [Guides](/docs/guides/guides-intro) documentation.
+
+## Choose a connection type
+
+To help understand which driver and connection type you need, see:
+
+<DetailIconCards>
+
+<a href="/docs/connect/choose-connection" description="How to select the right driver and connection type for your application" icon="network">Choose a driver and connection type</a>
+
+</DetailIconCards>
 
 ## Connect from clients and applications
 
@@ -17,11 +27,27 @@ Learn how to establish a connection to Neon from any application.
 
 <a href="/docs/connect/connect-from-any-app" description="Learn about connection strings and how to connect to Neon from any application" icon="gamepad">Connect from any app</a>
 
+<a href="/docs/local/vscode-extension" description="Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf" icon="code">Connect locally</a>
+
+<a href="/docs/serverless/serverless-driver" description="Connect to Neon from serverless environments over HTTP or WebSockets" icon="audio-jack">Neon serverless driver</a>
+
 <a href="/docs/connect/connect-postgres-gui" description="Learn how to connect to a Neon database from a GUI application" icon="gui">Connect a GUI application</a>
 
 <a href="/docs/connect/query-with-psql-editor" description="Connect with psql, the native command-line client for Postgres" icon="cli">Connect with psql</a>
 
 <a href="/docs/connect/passwordless-connect" description="Connect without a password using Neon's psql passwordless auth feature" icon="unlock">Passwordless auth</a>
+
+</DetailIconCards>
+
+## Connect from frameworks and languages
+
+Learn how to connect to Neon from different frameworks and languages.
+
+<DetailIconCards>
+
+<a href="/docs/get-started/frameworks" description="Find detailed instructions for connecting to Neon from frameworks" icon="gamepad">Connect from various frameworks</a>
+
+<a href="/docs/get-started/languages" description="Find detailed instructions for connecting to Neon from languages" icon="gui">Connect from various languages</a>
 
 </DetailIconCards>
 
@@ -45,7 +71,7 @@ Ensure the integrity and security of your connections to Neon.
 
 <a href="/docs/connect/connect-securely" description="Learn how to connect to Neon securely using SSL/TLS encrypted connections" icon="privacy">Connect to Neon securely</a>
 
-<a href="https://neon.tech/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="lock-landscape">Avoid MME attacks in Postgres 16</a>
+<a href="/blog/avoid-mitm-attacks-with-psql-postgres-16" description="Learn how the psql client in Postgres 16 makes it simple to connect securely" icon="lock-landscape">Avoid MME attacks in Postgres 16</a>
 
 </DetailIconCards>
 

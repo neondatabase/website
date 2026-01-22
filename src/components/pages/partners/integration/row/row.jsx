@@ -27,7 +27,7 @@ const Row = ({
           : 'order-1 col-start-7 translate-x-10 justify-self-start pr-10 lg:order-none lg:translate-x-0 lg:justify-self-stretch lg:pr-0'
       )}
     >
-      <h3 className="text-4xl font-medium leading-tight tracking-tighter xl:text-[28px] lg:text-[24px] md:text-[22px]">
+      <h3 className="font-title text-4xl font-medium leading-tight tracking-tighter xl:text-[28px] lg:text-[24px] md:text-[22px]">
         {title}
       </h3>
       <p className="mt-2.5 text-lg font-light leading-snug xl:text-base lg:mt-2">{description}</p>

@@ -2,62 +2,104 @@
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
 enableTableOfContents: true
-updatedOn: '2024-06-20T17:29:55.097Z'
+updatedOn: '2026-01-09T15:57:09.711Z'
 ---
+
+<InfoBlock>
+<DocsList title="What you will learn:">
+<p>Where to find database connections details</p>
+<p>Where to find example connection snippets</p>
+<p>Protocols supported by Neon</p>
+</DocsList>
+
+<DocsList title="Related topics" theme="docs">
+<a href="/docs/connect/choose-connection">Choosing a driver and connection type</a>
+<a href="/docs/local/vscode-extension">Neon VS Code Extension</a>
+<a href="/docs/connect/connect-securely">Connect to Neon securely</a>
+<a href="/docs/connect/connection-pooling">Connection pooling</a>
+<a href="/docs/connect/query-with-psql-editor">Connect with psql</a>
+</DocsList>
+</InfoBlock>
+
+You can connect to your Neon database from any application. The standard method is to copy your [connection string](#get-a-connection-string-from-the-neon-console) from the Neon console and use it in your app or client. For a streamlined development experience, you can also use the [Neon VS Code extension](#connect-with-the-neon-vs-code-extension) to manage connections, browse schemas, and run queries directly in your editor.
+
+<Admonition type="important">
+You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
+</Admonition>
+
+## Get a connection string from the Neon console
 
 When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
 
-You can obtain the database connection details you require from the **Connection Details** widget on the **Neon Dashboard**. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
+You can find the connection details for your database by clicking the **Connect** button on your **Project Dashboard**. This opens the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
-![Connection details widget](/docs/connect/connection_details.png)
+![Connection details modal](/docs/connect/connection_details.png)
 
-Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+Neon supports both pooled and direct connections to your database. Neon's connection pooler supports a higher number of concurrent connections, so we provide pooled connection details in the **Connect to your database** modal by default, which adds a `-pooler` option to your connection string. If needed, you can get direct database connection details from the modal disabling the **Connection pooling** toggle. For more information about pooled connections, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
 
 A Neon connection string includes the role, password, hostname, and database name.
 
 ```text
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-           ^    ^         ^                                               ^
-     role -|    |         |- hostname                                     |- database
-                |
-                |- password
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+             ^    ^         ^                         ^                              ^
+       role -|    |         |- hostname               |- pooler option               |- database
+                  |
+                  |- password
 ```
 
 <Admonition type="note">
-The hostname includes the ID of the compute endpoint, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
+The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-123456`. For more information about Neon connection strings, see [connection string](/docs/reference/glossary#connection-string).
 </Admonition>
 
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
+You can use the details from the **Connect to your database** modal to configure your database connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
 
-`.env` file:
+**.env file**
 
 ```text
-PGHOST=ep-cool-darkness-123456.us-east-2.aws.neon.tech
+PGHOST=ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech
 PGDATABASE=dbname
 PGUSER=alex
 PGPASSWORD=AbC123dEf
 PGPORT=5432
 ```
 
-Variable:
+**Variable**
 
 ```text shouldWrap
-DATABASE_URL="postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require"
+DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
 ```
 
-Command-line:
+**Command-line**
 
 ```bash shouldWrap
-psql postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 <Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending the `sslmode` parameter to your connection string. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
+Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by configuring the `sslmode` option. For more information, see [Connect to Neon securely](/docs/connect/connect-securely).
 </Admonition>
 
-## Where do I obtain a password?
+## Connect with the Neon VS Code extension
 
-It's included in your Neon connection string, which you can find on the Neon **Dashboard**, in the **Connection Details** widget.
+The [Neon VS Code extension](/docs/local/vscode-extension) lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, this extension lets you:
+
+- Connect to any Neon project and branch with automatic detection of connection strings in your workspace
+- Copy connection strings directly to your `.env` file
+- Browse database schemas, run SQL queries, and edit table data
+- Create and manage branches directly from your editor
+- Enable AI-powered database features with automatic MCP Server configuration
+
+The extension provides a streamlined workflow for working with Neon during development without leaving your editor.
+
+## Where can I find my password?
+
+It's included in your Neon connection string. Click the **Connection** button on your **Project Dashboard** to open the **Connect to your database** modal.
+
+### Save your connection details to 1Password
+
+If have a [1Password](https://1password.com/) browser extension, you can save your database connection details to 1Password directly from the Neon Console. In your **Project Dashboard**, click **Connect**, then click **Save in 1Password**.
+
+![1Password button on connection modal](/docs/connect/1_password_button.png)
 
 ## What port does Neon use?
 
@@ -65,21 +107,22 @@ Neon uses the default Postgres port, `5432`.
 
 ## Connection examples
 
-The **Connection Details** widget on the **Neon Dashboard** also provides connection examples for different programming languages and application frameworks, constructed for the branch, database, and role that you select.
+The **Connect to your database** modal provides connection examples for different frameworks and languages, constructed for the branch, database, and role that you select.
 
 ![Language and framework connection examples](/docs/connect/code_connection_examples.png)
 
-See our [Framework, language, and platform guides](https://neon.tech/docs/guides/guides-intro) for more connection examples.
+See our [frameworks](/docs/get-started/frameworks) and [languages](/docs/get-started/languages) guides for more connection examples.
 
 ## Network protocol support
 
-Neon supports both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses.
+Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure support IPv4.
 
-Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
+Additionally, Neon provides a low-latency serverless driver that supports connections over WebSockets and HTTP. Great for serverless or edge environments where connections over TCP may not be not supported. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
 
 ## Connection notes
 
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
+- Some older Postgres client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support, which means that a connection workaround may be required. For more information, see [Connection errors: The endpoint ID is not specified](/docs/connect/connection-errors#the-endpoint-id-is-not-specified).
 - Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI when configuring a connection to Neon. For examples, see [Connect a GUI or IDE](/docs/connect/connect-postgres-gui#connect-to-the-database).
+- When connecting from BI tools like Metabase, Tableau, or Power BI, we recommend using a **read replica** instead of your main database compute. BI tools often run long or resource-intensive queries, which can impact performance on your primary branch. Read replicas can scale independently and handle these workloads without affecting your main production traffic. To learn more, see [Neon read replicas](/docs/introduction/read-replicas).
 
 <NeedHelp/>

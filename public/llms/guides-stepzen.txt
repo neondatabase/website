@@ -1,0 +1,9 @@
+# Use StepZen with Neon
+
+> The document outlines the integration process of StepZen with Neon, detailing the steps to connect a Neon database to a StepZen GraphQL API for streamlined data querying and management.
+
+## Source
+
+- [Use StepZen with Neon HTML](https://neon.com/docs/guides/stepzen): The original HTML version of this documentation
+
+This guide has been deprecated. Please see our [integrations page](https://neon.com/docs/guides/integrations) for current third-party integration options.

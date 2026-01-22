@@ -34,14 +34,14 @@ Using a serverless Postgres database powered by Neon lets you scale compute reso
 
 To get started, go to the [Neon console](https://console.neon.tech/app/projects) and create a project.
 
-You will then be presented with a dialog that provides a connection string of your database. Click on **Pooled connection** option and the connection string automatically updates to a pooled connection string.
+You will then be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
 
 ![Neon Connection Details](/guides/images/strapi-cms/20b94d5f-aff4-4594-b60b-3a65d4fc884c.png)
 
 All Neon connection strings have the following format:
 
 ```bash
-postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require
+postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require
 ```
 
 - `<user>` is the database user.
@@ -49,7 +49,7 @@ postgres://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmo
 - `<endpoint_hostname>.neon.tech` is the host with `neon.tech` as the [top-level domain (TLD)](https://www.cloudflare.com/en-gb/learning/dns/top-level-domain/).
 - `<port>` is the Neon port number. The default port number is 5432.
 - `<dbname>` is the name of the database. **neondb** is the default database created with each Neon project if you do not define your own.
-- `?sslmode=require` is an optional query parameter that enforces [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode for better security when connecting to the Postgres instance.
+- `?sslmode=require&channel_binding=require` are optional query parameters that enforce [SSL](https://www.cloudflare.com/en-gb/learning/ssl/what-is-ssl/) mode and channel binding for better security when connecting to the Postgres instance.
 
 Each of the above values (except `sslmode`) is used in the next step &#8212; creating a local instance of the Strapi CMS application with Postgres.
 
@@ -320,7 +320,7 @@ npm run build && npm run preview
 
 ## Scale-to-zero with Postgres (powered by Neon)
 
-Interestingly, during the entire process of building this application, you have used Neon's **Scale-to-zero** feature which places your Postgres compute endpoint into an `Idle` state after 5 minutes of inactivity. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
+Interestingly, during the entire process of building this application, you have used Neon's **Scale-to-zero** feature which places your Postgres compute endpoint into an idle state after 5 minutes of inactivity. Click the **Operations** button in your Neon console sidebar to see when the compute was started and automatically suspended to reduce compute usage.
 
 ![Neon Monitoring page](/guides/images/strapi-cms/ee753f7d-3da8-4a4c-84c5-be7b6cdce486.png)
 

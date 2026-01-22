@@ -2,14 +2,14 @@
 title: Use Neon with Cloudflare Pages
 subtitle: Connect a Neon Postgres database to your Cloudflare Pages web application
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.388Z'
+updatedOn: '2025-06-30T11:30:21.896Z'
 ---
 
 `Cloudflare Pages` is a modern web application hosting platform that allows you to build, deploy, and scale your web applications. While it is typically used to host static websites, you can also use it to host interactive web applications by leveraging `functions` to run server-side code. Internally, Cloudflare functions are powered by `Cloudflare Workers`, a serverless platform that allows you to run JavaScript code on Cloudflare's edge network.
 
 This guide demonstrates how to connect to a Neon Postgres database from your Cloudflare Pages application. We'll create a simple web application using `React` that tracks our reading list using the database and provides a form to add new books to it.
 
-We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the database and make queries.
+We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the database and make queries.
 
 ## Prerequisites
 
@@ -50,10 +50,10 @@ To follow along with this guide, you will need:
 
 ### Retrieve your Neon database connection string
 
-Log in to the Neon Console and navigate to the **Connection Details** section to find your database connection string. It should look similar to this:
+Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. It should look similar to this:
 
 ```bash
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
 Keep your connection string handy for later use.
@@ -176,7 +176,7 @@ The `App` component fetches the list of books from the server and displays them.
 
 ### Implement the serverless functions
 
-We'll use the [Neon serverless driver](https://neon.tech/docs/serverless/serverless-driver) to connect to the Neon database, so we first need to install it as a dependency:
+We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to connect to the Neon database, so we first need to install it as a dependency:
 
 ```bash
 npm install @neondatabase/serverless
@@ -334,6 +334,14 @@ Now, visit the URL of your `Cloudflare Pages` application to interact with it. Y
 To delete your `Cloudflare Pages` application, you can use the Cloudflare dashboard. Refer to the [Pages documentation](https://developers.cloudflare.com/pages) for more details.
 
 To delete your Neon project, follow the steps outlined in the Neon documentation under [Delete a project](/docs/manage/projects#delete-a-project).
+
+## Source code
+
+You can find the source code for the application described in this guide on GitHub.
+
+<DetailIconCards>
+<a href="https://github.com/neondatabase/examples/tree/main/deploy-with-cloudflare-pages" description="Connect a Neon Postgres database to your Cloudflare Pages web application" icon="github">Use Neon with Cloudflare Pages</a>
+</DetailIconCards>
 
 ## Resources
 

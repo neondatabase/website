@@ -2,15 +2,15 @@
 title: Neon CLI commands — operations
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.423Z'
+updatedOn: '2024-08-09T20:21:45.351Z'
 ---
 
 ## Before you begin
 
 - Before running the `operations` command, ensure that you have [installed the Neon CLI](/docs/reference/cli-install).
-- If you have not authenticated with the [neonctl auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
+- If you have not authenticated with the [neon auth](/docs/reference/cli-auth) command, running a Neon CLI command automatically launches the Neon CLI browser authentication process. Alternatively, you can specify a Neon API key using the `--api-key` option when running a command. See [Connect](/docs/reference/neon-cli#connect).
 
-For information about operations in Neon, see [Operations](/docs/manage/operations).
+For information about operations in Neon, see [System operations](/docs/manage/operations).
 
 ## The `operations` command
 
@@ -19,7 +19,7 @@ The `operations` command allows you to list operations for a Neon project.
 ### Usage
 
 ```bash
-neonctl operations <subcommand> [options]
+neon operations <subcommand> [options]
 ```
 
 | Subcommand    | Description     |
@@ -33,7 +33,7 @@ This subcommand allows you to list operations.
 #### Usage
 
 ```bash
-neonctl operations list [options]
+neon operations list [options]
 ```
 
 #### Options
@@ -48,7 +48,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 #### Example
 
 ```bash
-neonctl operations list
+neon operations list
 ┌──────────────────────────────────────┬────────────────────┬──────────┬──────────────────────┐
 │ Id                                   │ Action             │ Status   │ Created At           │
 ├──────────────────────────────────────┼────────────────────┼──────────┼──────────────────────┤

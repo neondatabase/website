@@ -6,7 +6,7 @@ const fs = require('fs').promises;
 const matter = require('gray-matter');
 
 // The function below is for getting the last update date from GitHub,
-// as Github has the rate limit for unauthenticated requests (60 requests per hour),
+// as GitHub has the rate limit for unauthenticated requests (60 requests per hour),
 // the script was run manually and the date was hardcoded in the frontmatter of the docs.
 
 // const octokit = new Octokit({
@@ -26,7 +26,7 @@ const matter = require('gray-matter');
 
 const updateFrontmatter = async () => {
   // const files = await glob.sync(`content/docs/**/*.md`, {
-  //   ignore: ['**/RELEASE_NOTES_TEMPLATE.md', '**/README.md', '**/unused/**'],
+  //   ignore: ['**/README.md', '**/unused/**'],
   // });
 
   // NOTE: to fetch the last update date from GitHub, uncomment the code above,
@@ -36,10 +36,8 @@ const updateFrontmatter = async () => {
 
   const docsMdFilePaths = mdFilePaths.filter(
     (path) =>
-      (path.includes('content/docs') || path.includes('content/flow')) &&
-      (!path.includes('RELEASE_NOTES_TEMPLATE.md') ||
-        !path.includes('README.md') ||
-        !path.includes('unused'))
+      (path.includes('content/docs') || path.includes('content/use-cases')) &&
+      (!path.includes('README.md') || !path.includes('unused'))
   );
 
   docsMdFilePaths.forEach(async (path) => {
