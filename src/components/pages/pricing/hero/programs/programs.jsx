@@ -8,22 +8,22 @@ import bgPattern from './images/bg-pattern.jpg';
 
 const PROGRAMS = [
   {
-    type: 'Agent',
-    title: 'For teams & agencies',
-    description: 'Shared usage and management.',
+    type: 'For codegen platforms',
+    title: 'Agent Plan',
+    description: 'Custom rates and limits for thousands of databases.',
     url: '/programs/agents',
   },
   {
-    type: 'Enterprise',
-    title: 'For large organizations',
-    description: 'Tailored setup and support.',
-    url: '/contact-sales',
+    type: 'For early-stage startups',
+    title: 'Startup Program',
+    description: 'Launch faster with up to $100k in credits.',
+    url: '/programs/startup',
   },
   {
-    type: 'Startup',
-    title: 'For early-stage teams',
-    description: 'Discounted plans and guidance.',
-    url: '/programs/startup',
+    type: 'For open source on Neon',
+    title: 'Open-Source Program',
+    description: 'Discounted usage and funding for referring users.',
+    url: '/programs/open-source',
   },
 ];
 
