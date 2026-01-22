@@ -402,6 +402,9 @@ module.exports = {
         '.gradient-stop-opacity-100': {
           'stop-opacity': '1',
         },
+        '.wrap-anywhere': {
+          'overflow-wrap': 'anywhere',
+        },
       });
     }),
   ],

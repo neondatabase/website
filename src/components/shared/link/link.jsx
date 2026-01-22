@@ -80,7 +80,7 @@ const Link = forwardRef(
       styles.size[size],
       styles.theme[theme],
       additionalClassName,
-      (withArrow || icon) && 'group inline-flex w-fit items-center gap-1'
+      (withArrow || icon) && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere'
     );
 
     const Icon = icons[icon];
