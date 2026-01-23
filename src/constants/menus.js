@@ -123,10 +123,10 @@ export default {
       to: LINKS.pricing,
     },
     {
-      text: 'Company',
+      text: 'Resources',
       sections: [
         {
-          title: 'Resources',
+          title: 'Learn',
           items: [
             {
               title: 'Blog',
@@ -173,7 +173,6 @@ export default {
               to: LINKS.contactSales,
               description: 'Get in touch',
             },
-
             {
               title: 'Security',
               to: LINKS.security,
