@@ -8,20 +8,20 @@ import bgPattern from './images/bg-pattern.jpg';
 
 const PROGRAMS = [
   {
-    type: 'Agent',
-    title: 'For codegen agent platforms',
+    type: 'Agent Plan',
+    title: 'App Generation Platforms',
     description: 'Custom rates and limits for thousands of databases.',
     url: '/programs/agents',
   },
   {
-    type: 'Startup',
-    title: 'For early-stage startups',
+    type: 'Startup Program',
+    title: 'Early-stage Startups',
     description: 'Launch faster with up to $100k in credits.',
     url: '/programs/startup',
   },
   {
-    type: 'Open-Source',
-    title: 'For open source on Neon',
+    type: 'Open Source Program',
+    title: 'Open Source on Neon',
     description: 'Credits and funding for building on Neon.',
     url: '/programs/open-source',
   },
