@@ -85,9 +85,7 @@ const Submenu = ({
                               tabIndex={isActive ? 0 : -1}
                               onKeyDown={handleSubmenuNavigation(index)}
                             >
-                              <span
-                                className='text-white text-lg font-medium leading-none group-hover:text-gray-new-80'
-                              >
+                              <span className="text-white text-lg font-medium leading-none group-hover:text-gray-new-80">
                                 {title}
                               </span>
                               {description}
