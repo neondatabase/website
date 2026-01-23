@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2026-01-21T12:00:58.427Z'
+updatedOn: '2026-01-23T14:08:34.212Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
@@ -45,6 +45,8 @@ Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [l
 <a title="Drizzle" icon="drizzle" promptSrc="/prompts/drizzle-prompt.md"></a>
 
 <a title="React Router" icon="react" promptSrc="/prompts/react-router-prompt.md"></a>
+
+<a title="TanStack Start" icon="tanstack" promptSrc="/prompts/tanstack-start-prompt.md"></a>
 
 <a title="Express" icon="express" promptSrc="/prompts/express-prompt.md"></a>
 

@@ -144,7 +144,7 @@ LogosWall.propTypes = {
 };
 
 const Logos = ({ className, logoClassName, withGreenFade, logos, size, staticDesktop }) => (
-  <Container size="medium" className={clsx('w-full', className)}>
+  <Container size="1100" className={clsx('w-full', className)}>
     <div className="relative select-none">
       <LogosWall
         logos={logos}
