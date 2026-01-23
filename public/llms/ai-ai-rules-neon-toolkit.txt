@@ -10,7 +10,7 @@
 
 Related docs:
 - [Get started with the @neondatabase/toolkit](https://neon.com/docs/reference/neondatabase-toolkit)
-- [Neon TypeScript SDK Reference](https://neon.com/docs/reference/typescript-sdk)
+- [Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk)
 - [Neon API Reference](https://neon.com/docs/reference/api-reference)
 
 Repository:

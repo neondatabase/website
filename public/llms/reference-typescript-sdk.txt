@@ -1,10 +1,10 @@
-# TypeScript SDK (Neon API)
+# Neon API TypeScript SDK
 
 > The TypeScript SDK for the Neon API documentation details how to integrate and interact with Neon's API using TypeScript, offering guidance on installation, configuration, and usage of the SDK for efficient database management.
 
 ## Source
 
-- [TypeScript SDK (Neon API) HTML](https://neon.com/docs/reference/typescript-sdk): The original HTML version of this documentation
+- [Neon API TypeScript SDK HTML](https://neon.com/docs/reference/typescript-sdk): The original HTML version of this documentation
 
 What you will learn:
 - What is the Neon TypeScript SDK

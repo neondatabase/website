@@ -325,31 +325,49 @@ For pre-built UI components, see [Building Auth Pages](https://neon.com/docs/ai/
 
 **Complete UI reference:** See [UI Components Reference - Next.js](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-nextjs.md) or [React SPA](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-auth-ui-react-spa.md)
 
-## React Styling Guidelines
+## Styling
 
-**CRITICAL:** When creating React components, always use existing CSS variables. Do NOT create new colors or style values.
+Neon Auth UI **automatically inherits your app's existing theme**. If you have CSS variables like `--primary`, `--background`, etc. defined (from Tailwind, shadcn/ui, or custom CSS), auth components use them with no configuration.
+
+**Key features:**
+- **Automatic inheritance**: Uses your existing `--primary`, `--background`, etc.
+- **No conflicts**: Auth styles are in `@layer neon-auth`, so your styles always win
+- **Import order doesn't matter**: CSS layers handle priority automatically
+
+### Integration with shadcn/ui
+
+If you use shadcn/ui or similar libraries that define `--primary`, `--background`, etc., Neon Auth will automatically inherit those colors. No additional configuration needed.
 
 ### Use Existing CSS Variables
 
-The UI package provides all necessary CSS variables. Always use these variables in your custom components (navbar, layouts, pages, etc.):
+When creating custom components, use CSS variables for consistency:
 
-| Variable | Purpose | Usage |
-|----------|---------|-------|
-| `--background`, `--foreground` | Page background/text | `hsl(var(--background))` |
-| `--card`, `--card-foreground` | Card surfaces | `hsl(var(--card))` |
-| `--primary`, `--primary-foreground` | Primary buttons/actions | `hsl(var(--primary))` |
-| `--secondary`, `--secondary-foreground` | Secondary elements | `hsl(var(--secondary))` |
-| `--muted`, `--muted-foreground` | Muted/subtle elements | `hsl(var(--muted))` |
-| `--destructive` | Destructive/danger actions | `hsl(var(--destructive))` |
-| `--border`, `--input`, `--ring` | Borders and focus rings | `hsl(var(--border))` |
-| `--radius` | Border radius | `var(--radius)` |
+| Variable | Purpose |
+|----------|---------|
+| `--background`, `--foreground` | Page background/text |
+| `--card`, `--card-foreground` | Card surfaces |
+| `--primary`, `--primary-foreground` | Primary buttons/actions |
+| `--muted`, `--muted-foreground` | Muted/subtle elements |
+| `--border`, `--ring` | Borders and focus rings |
+| `--radius` | Border radius |
+
+### Auth-Specific Customization
+
+To customize auth components differently from your main app, use `--neon-*` prefix:
+
+```css
+:root {
+  --primary: oklch(0.55 0.25 250);       /* Your app's blue */
+  --neon-primary: oklch(0.55 0.18 145);  /* Auth uses green */
+}
+```
 
 ### Examples
 
 **✅ Correct - Uses CSS variables:**
 ```tsx
-<div style={{ background: 'hsl(var(--background))', color: 'hsl(var(--foreground))' }}>
-  <button style={{ background: 'hsl(var(--primary))', color: 'hsl(var(--primary-foreground))' }}>
+<div style={{ background: 'var(--background)', color: 'var(--foreground)' }}>
+  <button style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}>
     Submit
   </button>
 </div>
@@ -363,12 +381,6 @@ The UI package provides all necessary CSS variables. Always use these variables 
   </button>
 </div>
 ```
-
-**Why:** Using CSS variables ensures:
-- Visual consistency with auth components
-- Automatic dark mode support
-- Proper theming integration
-- No duplicate color definitions
 
 **Complete theming guide:** See [UI Theming Guide](https://raw.githubusercontent.com/neondatabase-labs/ai-rules/main/references/neon-js-theming.md)
 

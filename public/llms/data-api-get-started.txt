@@ -11,9 +11,11 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 ## Before you begin
 
 - The Neon Data API is enabled at the **branch** level for a single database. Each branch has its own Data API configuration, so you must select the correct branch before enabling the API.
-- Neon Data API is incompatible with [IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow). Ensure IP Allow is disabled before proceeding.
+- Neon Data API does not currently support projects with [IP Allow](https://neon.com/docs/manage/projects#configure-ip-allow) or [Private Networking](https://neon.com/docs/guides/neon-private-networking) enabled.
 
 ## Enable the Data API
+
+   **Tip**: You can also enable the Data API programmatically using the Neon MCP Server. The `provision_neon_data_api` tool enables LLMs to provision HTTP-based Data API access for Neon databases with optional JWT authentication. See the [Neon MCP Server documentation](https://neon.com/docs/ai/neon-mcp-server#supported-actions-tools) for more information.
 
 ### 1. Navigate to the Data API page
 
@@ -381,7 +383,7 @@ If you're using Neon Auth and want to test the Data API without building an appl
 
 ## Query patterns
 
-The Data API supports full CRUD operations and advanced queries. Here's a quick reference of the most common methods available in the [JavaScript SDK](https://neon.com/docs/reference/javascript-sdk):
+The Data API supports full CRUD operations and advanced queries. Here's a quick reference of the most common methods available in the [Neon TypeScript SDK](https://neon.com/docs/reference/javascript-sdk):
 
 ### CRUD operations
 
@@ -416,12 +418,12 @@ The Data API supports full CRUD operations and advanced queries. Here's a quick 
 | `.limit()`  | Limit rows returned | `.limit(10)`                                 |
 | `.single()` | Return single row   | `.select('*').eq('id', 1).single()`          |
 
-For the complete list of methods and detailed examples, see the [JavaScript SDK (Auth & Data API)](https://neon.com/docs/reference/javascript-sdk).
+For the complete list of methods and detailed examples, see the [Neon Auth & Data API TypeScript SDKs](https://neon.com/docs/reference/javascript-sdk).
 
 ## Next steps
 
 - [Build a note-taking app](https://neon.com/docs/data-api/demo) — Hands-on tutorial with Data API queries
-- [JavaScript SDK (Auth & Data API)](https://neon.com/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
+- [Neon Auth & Data API TypeScript SDKs](https://neon.com/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
 - [Generate TypeScript types](https://neon.com/docs/data-api/generate-types) — Get autocomplete for table names and columns
 - [SQL to REST Converter](https://neon.com/docs/data-api/sql-to-rest) — Convert SQL queries to API calls
 - [Row-Level Security with Neon](https://neon.com/docs/guides/row-level-security) — Secure your data at the database level

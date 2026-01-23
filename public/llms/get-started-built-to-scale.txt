@@ -37,7 +37,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - [Built-in connection pooling](https://neon.com/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
 - You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts
 
-## Scale-ups and large fleets
+## Stage 3: Scale-ups and large fleets
 
 **Frictionless operations at scale**
 
