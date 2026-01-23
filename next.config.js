@@ -645,6 +645,18 @@ const defaultConfig = {
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
 
+    config.module.rules.push({
+      test: (filePath) => {
+        const fileName = filePath.split('/').pop();
+
+        return fileName === 'rive.wasm';
+      },
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/[name].[hash][ext]',
+      },
+    });
+
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,

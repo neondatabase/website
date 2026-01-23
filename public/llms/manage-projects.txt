@@ -12,7 +12,7 @@ In Neon, the project is your main workspace. Within a project, you create branch
 
 When you add a new project, Neon creates the following resources by default:
 
-- A branch named `main` is created as your project's root branch, which serves as your production environment. You can create child branches from `main` for development, testing, staging, and other purposes. For more information, see [Manage branches](https://neon.com/docs/manage/branches).
+- A root branch is created as your project's default branch. In the Console, this branch is named `production`; via API/CLI, it's named `main`. You can create child branches for development, testing, staging, and other purposes. For more information, see [Manage branches](https://neon.com/docs/manage/branches).
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](https://neon.com/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.

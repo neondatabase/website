@@ -15,13 +15,13 @@ Neon provides two categories of SDKs to support different use cases:
 
 Use these SDKs to build applications with Neon Auth and the Data API.
 
-- [JavaScript SDK (Auth & Data API)](https://neon.com/docs/reference/javascript-sdk): Build apps with Neon Auth and Data API using authentication methods and database queries
+- [Neon Auth & Data API TypeScript SDKs](https://neon.com/docs/reference/javascript-sdk): Build apps with Neon Auth and Data API using authentication methods and database queries
 
 ## Management SDKs
 
 Use these SDKs to programmatically manage your Neon infrastructure — projects, branches, databases, endpoints, roles, and operations.
 
-- [TypeScript SDK (Neon API)](https://neon.com/docs/reference/typescript-sdk): Programmatically manage Neon projects, branches, databases, and other platform resources
+- [Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk): Programmatically manage Neon projects, branches, databases, and other platform resources
 - [Python SDK (Neon API)](https://neon.com/docs/reference/python-sdk): Programmatically manage Neon projects, branches, databases, and other platform resources
 - [@neondatabase/toolkit](https://neon.com/docs/reference/neondatabase-toolkit): An SDK for AI Agents (and humans) that includes both the Neon TypeScript SDK and the Neon Serverless Driver
 

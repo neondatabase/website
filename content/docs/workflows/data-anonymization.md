@@ -5,11 +5,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-<<<<<<< HEAD
-updatedOn: '2026-01-21T23:10:35.120Z'
-=======
-updatedOn: '2026-01-22T18:21:32.293Z'
->>>>>>> a007fe701 (chore: add meta)
+updatedOn: '2026-01-23T03:36:48.217Z'
 ---
 
 <FeatureBeta />

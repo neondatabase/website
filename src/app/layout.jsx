@@ -2,6 +2,7 @@ import 'styles/globals.css';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
+import RiveWasm from 'components/shared/rive-wasm';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
@@ -27,6 +28,7 @@ const RootLayout = ({ children }) => (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
       <link rel="preconnect" href={LINKS.console} />
+      <RiveWasm />
     </head>
     <body>
       <ThemeProvider>
