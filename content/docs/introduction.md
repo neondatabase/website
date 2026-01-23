@@ -1,101 +1,127 @@
 ---
 title: Neon documentation
-updatedOn: '2025-12-17T22:36:32.015Z'
+updatedOn: '2026-01-23T14:08:34.212Z'
 ---
 
-Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
+Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
 <CTA title="Set up Neon in one command ✨" 
-description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. Your assistant walks you through Neon setup and configuration — tailored to your codebase. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
+description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
 
 ## Get started
 
-<DetailIconCards withNumbers>
+<DetailIconCards withNumbers compact>
 
-<a href="/docs/get-started/signing-up" description="Sign up for free and learn the basics of database branching with Neon">Learn the basics</a>
+<a href="/docs/get-started/signing-up" description="Sign up and learn database branching basics">Learn the basics</a>
 
-<a href="/docs/get-started/connect-neon" description="Connect Neon to the platform, language, ORM and other tools in your tech stack">Connect Neon to your stack</a>
+<a href="/docs/get-started/connect-neon" description="Connect to your tech stack">Connect your stack</a>
 
-<a href="/docs/get-started/workflow-primer" description="Add branching to your CI/CD automation">Branching workflows</a>
+<a href="/docs/get-started/workflow-primer" description="Branch for dev, preview, and test">Branching workflows</a>
 
-<a href="/docs/get-started/production-checklist" description="Key features to get you production ready">Get ready for production</a>
+<a href="/docs/get-started/production-checklist" description="Get ready for production">Production checklist</a>
 
 </DetailIconCards>
 
-## Quickstarts
+## App backend
 
-<TechCards withToggler>
+<DetailIconCards compact>
 
-<a href="/docs/guides/drizzle" title="Drizzle" description="Learn how to use Drizzle ORM with your Neon Postgres database (Drizzle docs)" icon="drizzle"></a>
+<a href="/docs/auth/overview" description="Managed auth that branches with your database" icon="lock-landscape">Neon Auth</a>
 
-<a href="/docs/guides/react" title="React" description="Build powerful and interactive user interfaces with React using Neon as your database" icon="react"></a>
+<a href="/docs/data-api/overview" description="Query your Postgres database over HTTP" icon="code">Data API</a>
 
-<a href="/docs/guides/node" title="Node.js" description="Quickly add authentication and user management to your Node.js application" icon="node-js"></a>
+</DetailIconCards>
 
-<a href="/docs/serverless/serverless-driver" title="Neon" description="Connect with the Neon serverless driver" icon="neon"></a>
+## Quickstart prompts
 
-<a href="/docs/guides/dotnet-npgsql" title=".NET" description="Connect a .NET (C#) application to Neon" icon="dotnet"></a>
+Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [language](/docs/get-started/languages), and [ORM](/docs/get-started/orms) guides.
 
-<a href="/docs/guides/nextjs" title="Next.js" description="Connect a Next.js application to Neon" icon="next-js"></a>
+<PromptCards withToggler>
 
-<a href="/docs/guides/nuxt" title="Nuxt" description="Connect a Nuxt application to Neon" icon="nuxt"></a>
+<a title="Next.js" icon="next-js" promptSrc="/prompts/nextjs-prompt.md"></a>
 
-<a href="/docs/guides/astro" title="Astro" description="Connect an Astro site or app to Neon" icon="astro"></a>
+<a title="Django" icon="django" promptSrc="/prompts/django-prompt.md"></a>
 
-<a href="/docs/guides/django" title="Django" description="Connect a Django application to Neon" icon="django"></a>
+<a title="Drizzle" icon="drizzle" promptSrc="/prompts/drizzle-prompt.md"></a>
 
-<a href="/docs/guides/dotnet-entity-framework" title="Entity Framework" description="Connect a Dotnet Entity Framework application to Neon" icon="dotnet"></a>
+<a title="React Router" icon="react" promptSrc="/prompts/react-router-prompt.md"></a>
 
-<a href="/docs/guides/encore" title="Encore" description="Connect an Encore application to Neon" icon="encore"></a>
+<a title="TanStack Start" icon="tanstack" promptSrc="/prompts/tanstack-start-prompt.md"></a>
 
-<a href="/docs/guides/elixir-ecto" title="Elixir" description="Connect from Elixir with Ecto to Neon" icon="elixir"></a>
+<a title="Express" icon="express" promptSrc="/prompts/express-prompt.md"></a>
 
-<a href="/docs/guides/go" title="Go" description="Connect a Go application to Neon" icon="go"></a>
+<a title="NestJS" icon="nest-js" promptSrc="/prompts/nestjs-prompt.md"></a>
 
-<a href="/docs/guides/java" title="Java" description="Connect a Java application to Neon" icon="java"></a>
+<a title="Astro" icon="astro" promptSrc="/prompts/astro-serverless-prompt.md"></a>
 
-<a href="/docs/guides/laravel" title="Laravel" description="Connect from Laravel to Neon" icon="laravel"></a>
+<a title="SvelteKit" icon="svelte" promptSrc="/prompts/sveltekit-prompt.md"></a>
 
-<a href="/docs/guides/python" title="Python" description="Connect a Python application to Neon" icon="python"></a>
+<a title="Nuxt" icon="nuxt" promptSrc="/prompts/nuxt-neon-prompt.md"></a>
 
-<a href="/docs/guides/quarkus-jdbc" title="Quarkus" description="Connect Quarkus (JDBC) to Neon" icon="quarkus"></a>
+<a title="Laravel" icon="laravel" promptSrc="/prompts/laravel-prompt.md"></a>
 
-<a href="/docs/guides/quarkus-reactive" title="Quarkus" description="Connect Quarkus (Reactive) to Neon" icon="quarkus"></a>
+<a title="Rails" icon="rails" promptSrc="/prompts/ruby-on-rails-prompt.md"></a>
 
-<a href="/docs/guides/ruby-on-rails" title="Rails" description="Connect a Rails application to Neon" icon="rails"></a>
+<a title="Python" icon="python" promptSrc="/prompts/python-prompt.md"></a>
 
-<a href="/docs/guides/remix" title="Remix" description="Connect a Remix application to Neon" icon="remix"></a>
+<a title="Go" icon="go" promptSrc="/prompts/golang-prompt.md"></a>
 
-<a href="/docs/guides/rust" title="Rust" description="Connect a Rust application to Neon" icon="rust"></a>
+<a title="Java" icon="java" promptSrc="/prompts/java-prompt.md"></a>
 
-<a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect an SQLAlchemy application to Neon" icon="sqlalchemy"></a>
+<a title="Rust" icon="rust" promptSrc="/prompts/rust-prompt.md"></a>
 
-<a href="/docs/guides/sveltekit" title="Svelte" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+<a title=".NET" icon="dotnet" promptSrc="/prompts/dotnet-prompt.md"></a>
 
-<a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
+<a title="Elixir" icon="elixir" promptSrc="/prompts/elixir-prompt.md"></a>
 
-</TechCards>
+<a title="Phoenix" icon="phoenix" promptSrc="/prompts/phoenix-prompt.md"></a>
 
-## Explore the Neon Docs
+<a title="Prisma" icon="prisma" promptSrc="/prompts/prisma-prompt.md"></a>
 
-<DetailIconCards>
+<a title="Kysely" icon="kysely" promptSrc="/prompts/kysely-prompt.md"></a>
 
-<a href="/docs/connect/connect-intro" description="Learn how to connect to a  Serverless Postgres database from any application" icon="audio-jack">Connect</a>
+<a title="TypeORM" icon="typeorm" promptSrc="/prompts/typeorm-prompt.md"></a>
 
-<a href="/docs/import/import-intro" description="Load your data into a Postgres database hosted by Neon" icon="import">Import data</a>
+<a title="SQLAlchemy" icon="sqlalchemy" promptSrc="/prompts/sqlalchemy-prompt.md"></a>
 
-<a href="/docs/ai/ai-intro" description="Build and scale transformative LLM applications with vector storage and similarity search." icon="openai">AI & embeddings</a>
+<a title="Hono" icon="hono" promptSrc="/prompts/hono-prompt.md"></a>
 
-<a href="/docs/guides/branching-intro" description="Learn to optimize development workflows with database branching" icon="split-branch">Branching</a>
+<a title="SolidStart" icon="solidstart" promptSrc="/prompts/solidstart-prompt.md"></a>
 
-<a href="/docs/extensions/extensions-intro" description="Level up your database with our many supported Postgres extensions" icon="app-store">Postgres extensions</a>
+<a title="Reflex" icon="reflex" promptSrc="/prompts/reflex-prompt.md"></a>
 
-<a href="/docs/reference/neon-cli" description="Manage Neon directly from the terminal with the Neon CLI" icon="transactions">Neon CLI Reference</a>
+<a title="JavaScript" icon="javascript" promptSrc="/prompts/javascript-prompt.md"></a>
+
+<a title="Symfony" icon="symfony" promptSrc="/prompts/symfony-prompt.md"></a>
+
+<a title="Quarkus" icon="quarkus" promptSrc="/prompts/quarkus-jdbc-prompt.md"></a>
+
+<a title="Micronaut" icon="micronaut" promptSrc="/prompts/micronaut-kotlin-prompt.md"></a>
+
+<a title="Redwood" icon="redwoodsdk" promptSrc="/prompts/redwood-sdk-prompt.md"></a>
+
+</PromptCards>
+
+## Explore the docs
+
+<DetailIconCards compact>
+
+<a href="/docs/connect/connect-intro" description="Connect from any application" icon="audio-jack">Connect</a>
+
+<a href="/docs/import/import-intro" description="Migrate your data to Neon" icon="import">Import data</a>
+
+<a href="/docs/ai/ai-intro" description="Build AI apps with pgvector" icon="openai">AI & embeddings</a>
+
+<a href="/docs/guides/branching-intro" description="Optimize development workflows" icon="split-branch">Branching</a>
+
+<a href="/docs/extensions/pg-extensions" description="Extend Postgres capabilities" icon="app-store">Extensions</a>
+
+<a href="/docs/reference/neon-cli" description="Manage from the terminal" icon="transactions">Neon CLI</a>
 
 </DetailIconCards>
 
 ## Join the community
 
-If you have questions about Neon or Postgres, reach out to Neon community members and developers on our [Discord Server](https://discord.com/invite/92vNTzKDGp).
+Questions about Neon or Postgres? Join our [Discord Server](https://discord.com/invite/92vNTzKDGp)
 
 <CommunityBanner buttonText="Join server" buttonUrl="https://discord.gg/92vNTzKDGp" logo="discord">Welcome to the Neon Discord Server!</CommunityBanner>

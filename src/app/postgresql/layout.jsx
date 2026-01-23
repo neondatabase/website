@@ -23,7 +23,6 @@ const NeonPostgresLayout = async ({ children }) => {
       docPageType="postgres"
       isDocPage
       isHeaderSticky
-      headerWithBorder
       hasThemesSupport
     >
       <div className="safe-paddings flex flex-1 dark:bg-black-pure dark:text-white lg:block">

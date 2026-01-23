@@ -9,7 +9,7 @@ const Hero = () => (
           <br /> Branching Workflows
         </h1>
         <p className="mt-4 text-lg leading-snug tracking-extra-tight text-gray-new-80 xl:mt-3 lg:mx-auto lg:text-base">
-          Ship software faster using Neon branches as ephemeral environments.
+          Ship software faster using Neon branches
         </p>
       </div>
     </div>

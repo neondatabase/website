@@ -4,7 +4,7 @@ subtitle: Find detailed instructions for connecting to Neon from various framewo
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2025-12-17T22:36:32.010Z'
+updatedOn: '2026-01-23T14:08:34.208Z'
 ---
 
 <TechCards>
@@ -55,11 +55,13 @@ updatedOn: '2025-12-17T22:36:32.010Z'
 
 <a href="/docs/guides/symfony" title="Symfony" description="Connect from Symfony with Doctrine to Neon" icon="symfony"></a>
 
-<a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solid"></a>
+<a href="/docs/guides/solid-start" title="SolidStart" description="Connect a SolidStart site or app to Neon" icon="solidstart"></a>
 
 <a href="/docs/guides/sqlalchemy" title="SQLAlchemy" description="Connect a SQLAlchemy application to Neon" icon="sqlalchemy"></a>
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
+
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon" icon="tanstack"></a>
 
 <a href="/docs/guides/vue" title="Vue" description="Connect a Vue.js application to Neon" icon="vue"></a>
 

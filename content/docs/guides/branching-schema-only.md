@@ -2,7 +2,7 @@
 title: Schema-only branches
 subtitle: Protect sensitive data with schema-only branches
 enableTableOfContents: true
-updatedOn: '2025-10-13T13:15:12.567Z'
+updatedOn: '2026-01-15T23:54:00.605Z'
 ---
 
 <FeatureBeta />
@@ -77,7 +77,7 @@ curl --request POST \
 
 To try out schema-only branches:
 
-1. Start by creating an `employees` table on your Neon project's `main` branch and adding some dummy data. You can do this from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
+1. Start by creating an `employees` table on your Neon project's `production` branch and adding some dummy data. You can do this from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or any SQL client by copying and pasting the following statements:
 
    ```sql
    CREATE TABLE employees (
@@ -104,7 +104,7 @@ To try out schema-only branches:
    ('Hannah', 'Martin', 'hannah.martin@example.com', '888-777-6666', 'Backend Developer', 92000.00, '2019-07-23');
    ```
 
-2. Navigate to the **Tables** page in the Neon Console, and select your `main` branch from the bread-crumb menu at the top of the console. Your `employees` table will have both schema and data, as shown here:
+2. Navigate to the **Tables** page in the Neon Console, and select your `production` branch from the bread-crumb menu at the top of the console. Your `employees` table will have both schema and data, as shown here:
 
    ![production branch with schema and data](/docs/guides/schema-data-branch.png)
 
@@ -131,7 +131,7 @@ Connecting to a schema-only branch works the same way as connecting to any Neon 
 
 ## What's different about schema-only branches?
 
-Unlike other branches, schema-only branches do not have a parent branch, as you can see below. Both the `main` branch of the project and the schema-only branch have no parent, indicated by the dash in the **Parent** column (`-`) on the **Branches** page in your Neon project.
+Unlike other branches, schema-only branches do not have a parent branch, as you can see below. Both the `production` branch of the project and the schema-only branch have no parent, indicated by the dash in the **Parent** column (`-`) on the **Branches** page in your Neon project.
 
 ![schema-only branch](/docs/guides/schema_only_no_parent.png)
 

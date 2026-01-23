@@ -3,7 +3,7 @@ title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.743Z'
+updatedOn: '2026-01-22T15:48:50.619Z'
 ---
 
 <InfoBlock>
@@ -14,7 +14,7 @@ updatedOn: '2025-12-11T19:49:37.743Z'
 </DocsList>
 
 <DocsList title="Related resources" theme="docs">
-  <a href="/docs/reference/typescript-sdk">TypeScript SDK (Neon API)</a>
+  <a href="/docs/reference/typescript-sdk">Neon API TypeScript SDK</a>
   <a href="/docs/reference/api-reference">Neon API Reference</a>
   <a href="/docs/serverless/serverless-driver">Neon Serverless Driver</a>
   <a href="/blog/why-neondatabase-toolkit">Why we built @neondatabase/toolkit</a>
@@ -29,7 +29,7 @@ updatedOn: '2025-12-11T19:49:37.743Z'
 
 ## About the toolkit
 
-The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
+The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API TypeScript SDK](/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
 
 The primary goal of the toolkit is to abstract away the multi-step process of creating a project, retrieving its connection string, and then establishing a database connection. This makes it an excellent choice for:
 
@@ -248,6 +248,6 @@ const { data } = await apiClient.listProjects({});
 console.log("All projects in your account:", data.projects);
 ```
 
-With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [TypeScript SDK (Neon API)](/docs/reference/typescript-sdk) documentation.
+With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [Neon API TypeScript SDK](/docs/reference/typescript-sdk) documentation.
 
 As with all of our experimental features, changes are ongoing. If you have any feedback, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

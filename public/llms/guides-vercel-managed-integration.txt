@@ -77,6 +77,8 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 Preview branching creates an isolated Neon branch (copy-on-write) for every Vercel Preview Deployment so database schema changes can be tested safely.
 
+   **Tip** Neon Auth support for preview deployments: If you've enabled [Neon Auth](https://neon.com/docs/auth/overview) on your production branch, it's automatically provisioned on preview branches too. Preview deployments receive `NEON_AUTH_BASE_URL` and `VITE_NEON_AUTH_URL` environment variables, letting you test authentication in isolated environments. Auth data branches with your database, so each preview has its own independent user profiles and sessions.
+
 To enable:
 
 1. While connecting the project (step above) toggle **Required → Preview**.
@@ -148,6 +150,7 @@ Everything else (querying data, branching, monitoring usage) works exactly the s
 
 Team membership changes in Vercel automatically sync to your Neon organization:
 
+- **Initial access**: Team members must click **Open in Neon** from the Vercel integration page and complete authentication before they appear in the Neon organization. This one-time step links their Vercel identity to Neon.
 - **Role changes**: When a team member's role changes in Vercel, their Neon role updates based on Vercel's JWT token mapping (see [FAQ](https://neon.com/docs/guides/vercel-managed-integration#why-do-vercel-team-members-with-member-role-have-the-admin-role-in-neon) for details). Most Vercel roles (Owner, Admin, Member) map to 'Admin' in Neon, while read-only roles (Viewer, Billing) map to 'Member' in Neon.
 - **Removals**: When a user is removed from your Vercel team, they're automatically removed from the associated Neon organization.
 
@@ -159,7 +162,7 @@ When you transfer a Vercel project to another team, the linked Neon project auto
 
 - The linked Neon project moves from the old organization to the new one.
 - Environment variables and settings transfer with it.
-- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time restore window, etc.), you'll be prompted to upgrade.
+- If the destination's plan doesn't support the project's requirements (autoscaling limits, point-in-time [restore window](https://neon.com/docs/introduction/restore-window), etc.), you'll be prompted to upgrade.
 
 This eliminates the need to manually reconfigure integrations when reorganizing projects.
 
@@ -217,9 +220,7 @@ Preview branches are automatically deleted when their deployments expire, but yo
 | `DATABASE_URL_UNPOOLED`                                           | Direct connection string                                            |
 | `PGHOST`, `PGHOST_UNPOOLED`, `PGUSER`, `PGDATABASE`, `PGPASSWORD` | Raw pieces to build custom strings                                  |
 | `POSTGRES_*` (legacy)                                             | Provided for backwards compatibility with Vercel Postgres templates |
-| `NEXT_PUBLIC_STACK_PROJECT_ID`, `STACK_SECRET_SERVER_KEY`, etc.   | Neon Auth variables for drop-in authentication                      |
-
-> **Neon Auth variables** automatically sync user profiles to your database in the `neon_auth.users_sync` table, enabling authentication without additional setup. Learn more in the [Neon Auth guide](https://neon.com/docs/guides/neon-auth).
+| `NEON_AUTH_BASE_URL`, `VITE_NEON_AUTH_URL`                        | Neon Auth endpoints (when enabled on production branch)             |
 
 ---
 

@@ -1,8 +1,8 @@
 ---
-title: Documentation Contribution Guide
+title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.224Z'
+updatedOn: '2026-01-20T19:00:25.317Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -40,7 +40,7 @@ Neon uses Markdown as the documentation source format. Markdown is a lightweight
 
 If you're new to Markdown, GitHub provides an excellent guide to get you started. The [GitHub Markdown Documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) covers most of the basic writing and formatting syntax you'll need to contribute to the Neon docs.
 
-For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide).
+For advanced formatting and custom components, see the [Component Guide](/docs/community/component-guide). To add visual diagrams to your documentation, check out our [Mermaid Diagrams Guide](/docs/community/mermaid-diagrams).
 
 ## Preview changes in VSCode
 
@@ -160,7 +160,7 @@ To comment out content in a markdown file use this construction:
 [comment]: <> (Single line comment.)
 
 [comment]: <> (
-Multiline comment. 
+Multiline comment.
 You can't use line breaks or () parentheses here.
 )
 ```
@@ -299,49 +299,41 @@ The voice in the documentation should sound like one human being explaining some
 #### Guidelines
 
 1. **Use contractions**:
-
    - **Do**: Use contractions like "it's", "don't", "you're" to make the tone more conversational.
      - _Example_: "It's essential to save your progress."
    - **Don't**: Overuse contractions, which can compromise clarity.
 
 2. **Simplicity over jargon**:
-
    - **Do**: Choose simpler words when possible.
      - _Example_: "Use the tool," not "Utilize the instrument."
    - **Don't**: Oversimplify to the point of being inaccurate or leaving out useful context.
 
 3. **Active voice**:
-
    - **Do**: Prefer active voice.
      - _Example_: "The software converts the file."
    - **Don't**: Over-rely on passive voice.
      - _Example_: "The file is converted by the software."
 
 4. **Brief sentences**:
-
    - **Do**: Keep sentences concise.
      - _Example_: "Check the settings."
 
 5. **Personalize when relevant**:
-
    - **Do**: Use "you" to address the reader.
      - _Example_: "You can adjust the setting."
    - **Don't**: Overdo direct addresses. Not every sentence should start with "You".
 
 6. **Consistent terminology**:
-
    - **Do**: Stick to one term for one concept.
      - _Example_: Always use "dashboard". Don't mix that term with "control panel".
    - **Don't**: Confuse with synonyms.
      - _Example_: Switching between "log-in", "sign-in", and "access point".
 
 7. **Examples for clarity**:
-
    - **Do**: Provide clear examples.
      - _Example_: "For instance, to upload a file, click on the 'Upload' button."
 
 8. **Use US English**:
-
    - **Do**: Adhere to US English spelling and grammar rules.
 
 9. **Avoid emojis and exclamations**:

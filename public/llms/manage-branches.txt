@@ -6,14 +6,25 @@
 
 - [Manage branches HTML](https://neon.com/docs/manage/branches): The original HTML version of this documentation
 
-Data resides in a branch. Each Neon project is created with a [root branch](https://neon.com/docs/manage/branches#root-branch) called `production`, which is also designated as your [default branch](https://neon.com/docs/manage/branches#default-branch). You can create child branches from `production` or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](https://neon.com/docs/introduction/plans) define the number of branches you can create.
+Data resides in a branch. Each Neon project is created with a [root branch](https://neon.com/docs/manage/branches#root-branch), which is also designated as your [default branch](https://neon.com/docs/manage/branches#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](https://neon.com/docs/introduction/plans) define the number of branches you can create.
 
 A child branch is a copy-on-write clone of the parent branch. You can modify the data in a branch without affecting the data in the parent branch.
 For more information about branches and how you can use them in your development workflows, see [Branching](https://neon.com/docs/introduction/branching).
 
 You can create and manage branches using the Neon Console, [Neon CLI](https://neon.com/docs/reference/neon-cli), or [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
-   **Important**: When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](https://neon.com/docs/introduction/branching#restore-window).
+   **Important**: When working with branches, it is important to remove old and unused branches. Branches hold a lock on the data they contain, which will add to your storage usage as they age out of your project's [restore window](https://neon.com/docs/introduction/restore-window).
+
+## Branch naming requirements
+
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (e.g., `br-curly-wave-af4i4oeu`).
+
+If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
+
+- **Maximum length**: 256 characters (API limit). Note that the Neon Console enforces a more restrictive limit of 128 characters.
+- **Uniqueness**: Branch names must be unique within a project. You cannot have two branches with the same name in the same project.
+- **Non-empty**: Branch names cannot be empty or consist only of whitespace characters.
+- **Character flexibility**: Unlike some other Neon resources (such as databases or roles), branch names have no special character restrictions. You can use any characters as long as they meet the requirements above.
 
 ## Create a branch
 
@@ -25,7 +36,7 @@ To create a branch:
 4. Specify a branch name.
 5. Select a **branch setup** option. If you're interested in schema-only branches, see [Schema-only branches](https://neon.com/docs/guides/branching-schema-only).
 
-   **Note**: When creating a branch with past data, you can only specify a date and time that falls within your [restore window](https://neon.com/docs/manage/projects#configure-restore-window).
+   **Note**: When creating a branch with past data, you can only specify a date and time that falls within your [restore window](https://neon.com/docs/introduction/restore-window).
 
 6. By default, **Automatically delete branch after** is checked with 1 day selected to help prevent unused branches from accumulating. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. This is useful for CI/CD pipelines and short-lived development environments. Note: This default only applies when creating branches through the Console; API and CLI branches have no expiration by default. Refer to our [Branch expiration guide](https://neon.com/docs/guides/branch-expiration) for details.
 7. Click **Create new branch**.
@@ -86,9 +97,9 @@ Neon permits renaming a branch, including your project's default branch. To rena
 
 ## Set a branch as default
 
-Each Neon project is created with a default branch called `production`, but you can designate any branch as your project's default branch. The default branch serves two key purposes:
+Each Neon project is created with a default branch (named `production` in the Console, `main` via API/CLI), but you can designate any branch as your project's default branch. The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 For more information, see [Default branch](https://neon.com/docs/manage/branches#default-branch).
@@ -191,13 +202,15 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 
 Data size is your logical data size.
 
+   **Note**: Paid plans support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](https://neon.com/contact-sales).
+
 ## Branch types
 
 Neon has different branch types with different characteristics.
 
 ### Root branch
 
-A root branch is a branch without a parent branch. Each Neon project starts with a root branch named `production`, which cannot be deleted and is set as the [default branch](https://neon.com/docs/manage/branches#default-branch) for the project.
+A root branch is a branch without a parent branch. Each Neon project starts with a root branch (named `production` in the Console, `main` via API/CLI), which cannot be deleted and is set as the [default branch](https://neon.com/docs/manage/branches#default-branch) for the project.
 
 Neon also supports two other types of root branches that have no parent but _can_ be deleted:
 
@@ -218,15 +231,14 @@ Each Neon project has a default branch. In the Neon Console, your default branch
 
 The default branch serves two key purposes:
 
-- For users on paid plans, the compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
+- The compute associated with the default branch is exempt from the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit), ensuring that it is always available.
 - The [Neon-Managed Vercel integration](https://neon.com/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
 
 ### Non-default branch
 
 Any branch not designated as the default branch is considered a non-default branch. You can rename or delete non-default branches.
 
-- For Neon Free plan users, computes associated with **non-default branches** are suspended if you exceed the Neon Free plan 5 hours per month for **non-default branches**.
-- For users on paid plans, default limits prevent more than 20 concurrently active computes. Beyond that limit, additional computes will remain suspended.
+Non-default branches are affected by the [concurrently active compute limit](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit). Beyond this limit, additional computes will remain suspended.
 
 ### Protected branch
 

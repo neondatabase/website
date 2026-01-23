@@ -8,9 +8,27 @@
 
 The **Neon MCP Server** is an open-source tool that lets you interact with your Neon Postgres databases in **natural language**.
 
-> To get started connecting an MCP Client like **Cursor**, **Claude Code**, **VS Code**, **Windsurf**, **ChatGPT**, and others, see [Connect MCP clients](https://neon.com/docs/ai/connect-mcp-clients-to-neon). If you're using **Cursor**, you can click the button below for a quick install. When prompted, click **Install within Cursor**.
+## Get started
 
-<a href="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"><img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Add Neon MCP server to Cursor" height="32" /></a>
+The fastest way to set up Neon's MCP Server is with one command:
+
+```bash
+npx neonctl@latest init
+```
+
+This command will:
+
+- Authenticate via OAuth (opens your browser)
+- Create a Neon API key for you automatically
+- Configure your editor to connect to Neon's remote MCP server
+
+Currently the `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**
+
+After running the command, restart your editor and ask your AI assistant to **"Get started with Neon"** to launch the interactive onboarding guide. For more details, see the [neonctl init documentation](https://neon.com/docs/reference/cli-init).
+
+**Prefer manual configuration?** See [Connect MCP clients](https://neon.com/docs/ai/connect-mcp-clients-to-neon) for step-by-step instructions for any editor, including Windsurf, ChatGPT, Zed, and others.
+
+---
 
 Imagine you want to create a new database. Instead of using the Neon Console or API, you could just type a request like, "Create a database named 'my-new-database'". Or, to see your projects, you might ask, "List all my Neon projects". The Neon MCP Server makes this possible.
 
@@ -64,22 +82,9 @@ You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. Thi
 #### Setup steps:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
-2.  Register a new MCP Server. Add a configuration block for "Neon" under 'mcpServers' key. The configuration should look like this:
+2.  Register a new MCP Server. When prompted for the configuration, name the server "Neon" and enter `https://mcp.neon.tech/mcp` as the Remote MCP Server URL.
 
-    ```json
-    {
-      "mcpServers": {
-        "Neon": {
-          "command": "npx",
-          "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
-        }
-      }
-    }
-    ```
-
-    This command uses `npx` to run a [small helper (`mcp-remote`)](https://github.com/geelen/mcp-remote) that connects to Neon's hosted server endpoint (`https://mcp.neon.tech/mcp`).
-
-    MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
+    > MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
 
 3.  Save the configuration and **restart or refresh** your MCP client application.
 4.  The first time the client initializes Neon's MCP server, it should trigger an **OAuth flow**:
@@ -152,8 +157,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Project management:**
 
-- `list_projects`: Retrieves a list of your Neon projects, providing a summary of each project associated with your Neon account. Supports a search parameter and limiting the number of projects returned (default: 10).
-- `list_shared_projects`: Retrieves a list of Neon projects shared with the current user. Supports a search parameter and limiting the number of projects returned (default: 10).
+- `list_projects`: Lists the first 10 Neon projects in your account, providing a summary of each project. If you can't find a specific project, increase the limit by passing a higher value to the limit parameter.
+- `list_shared_projects`: Lists Neon projects shared with the current user. Supports a search parameter and limiting the number of projects returned (default: 10).
 - `describe_project`: Fetches detailed information about a specific Neon project, including its ID, name, and associated branches and databases.
 - `create_project`: Creates a new Neon project in your Neon account. A project acts as a container for branches, databases, roles, and computes.
 - `delete_project`: Deletes an existing Neon project and all its associated resources.
@@ -161,12 +166,12 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Branch management:**
 
-- `compare_database_schema`: Shows a schema diff between a child branch and its parent.
 - `create_branch`: Creates a new branch within a specified Neon project. Leverages [Neon's branching](https://neon.com/docs/introduction/branching) feature for development, testing, or migrations.
 - `delete_branch`: Deletes an existing branch from a Neon project.
 - `describe_branch`: Retrieves details about a specific branch, such as its name, ID, and parent branch.
-- `list_branch_computes`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, and autoscaling information.
-- `reset_from_parent`: Resets the current branch to its parent's state, discarding local changes. Automatically preserves to backup if branch has children, or optionally on request.
+- `list_branch_computes`: Lists compute endpoints for a project or specific branch, including compute ID, type, size, last active time, and autoscaling information.
+- `compare_database_schema`: Shows the schema diff between the child branch and its parent.
+- `reset_from_parent`: Resets the current branch to its parent's state, discarding local changes. Automatically preserves to backup if branch has children, or optionally preserve on request with a custom name.
 
 **SQL query execution:**
 
@@ -175,22 +180,35 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `run_sql_transaction`: Executes a series of SQL queries within a single transaction against a Neon database.
 - `get_database_tables`: Lists all tables within a specified Neon database.
 - `describe_table_schema`: Retrieves the schema definition of a specific table, detailing columns, data types, and constraints.
-- `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
 
 **Database migrations (schema changes):**
 
 - `prepare_database_migration`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
 - `complete_database_migration`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
 
-**Query performance tuning:**
+**Query performance optimization:**
 
-- `explain_sql_statement`: Analyzes a SQL query and returns detailed execution plan information to help understand query performance.
-- `prepare_query_tuning`: Identifies potential performance issues in a SQL query and suggests optimizations. Creates a temporary branch for testing improvements.
-- `complete_query_tuning`: Finalizes and applies query optimizations after testing. Merges changes from the temporary tuning branch to the main branch.
+- `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
+- `explain_sql_statement`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
+- `prepare_query_tuning`: Analyzes query performance and suggests optimizations, like index creation. Creates a temporary branch for safely testing these optimizations.
+- `complete_query_tuning`: Finalizes query tuning by either applying optimizations to the main branch or discarding them. Cleans up the temporary tuning branch.
 
 **Neon Auth:**
 
-- `provision_neon_auth`: Provisions Neon Auth for a Neon project. Sets up authentication infrastructure by creating an integration with Stack Auth (`@stackframe/stack`).
+- `provision_neon_auth`: Provisions Neon Auth for a Neon project. It allows developers to easily set up authentication infrastructure by creating an integration with an Auth provider.
+
+**Neon Data API:**
+
+- `provision_neon_data_api`: Provisions the Neon Data API for a branch, enabling HTTP-based Data API access with optional JWT authentication.
+
+**Search and discovery:**
+
+- `search`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
+- `fetch`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
+
+**Documentation and resources:**
+
+- `load_resource`: Loads comprehensive Neon documentation and usage guidelines, including the "neon-get-started" guide for setup, configuration, and best practices.
 
 ## Usage examples
 
@@ -226,21 +244,6 @@ The Neon MCP Server supports API key-based authentication for remote access, in 
 ```
 
 > Currently, only [streamable HTTP](https://neon.com/docs/ai/neon-mcp-server#streamable-http-support) responses are supported with API-key based authentication. Server-Sent Events (SSE) responses are not yet supported for this authentication method.
-
-## Streamable HTTP support
-
-The Neon MCP Server supports streamable HTTP as an alternative to Server-Sent Events (SSE) for streaming responses. This makes it easier to consume streamed data in environments where SSE is not ideal — such as CLI tools, backend services, or AI agents. To use streamable HTTP, make sure to use the latest remote MCP server, and specify the `https://mcp.neon.tech/mcp` endpoint, as shown in the following configuration example:
-
-```json
-{
-  "mcpServers": {
-    "neon": {
-      "command": "npx",
-      "args": ["-y", "mcp-remote@latest", "https://mcp.neon.tech/mcp"]
-    }
-  }
-}
-```
 
 ## Search across resources
 

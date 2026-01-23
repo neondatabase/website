@@ -141,7 +141,7 @@ Tab: Console
 1. Create the development branch
 
    On the **Branches** page, click **Create Branch**, making sure of the following:
-   - Select `production` as the default branch.
+   - Select `production` as the parent branch.
    - Name the branch `feature/address`.
 
 1. Verify the schema on your new branch

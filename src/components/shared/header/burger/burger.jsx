@@ -7,14 +7,14 @@ const ANIMATION_DURATION = 0.2;
 const Burger = ({ className = null, isToggled = null, onClick = null }) => (
   <LazyMotion features={domAnimation}>
     <m.button
-      className={clsx('flex h-8 w-7 shrink rounded-full', className)}
+      className={clsx('flex h-8 w-8 shrink', className)}
       type="button"
       animate={isToggled ? 'toggled' : 'initial'}
       aria-label={isToggled ? 'Close menu' : 'Open menu'}
       onClick={onClick}
     >
       <m.span
-        className="absolute left-px top-2 block h-0.5 w-6 rounded-full bg-current"
+        className="absolute left-1 top-2 block h-0.5 w-6 bg-current"
         variants={{
           initial: {
             top: 8,
@@ -29,7 +29,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-px top-4 block h-0.5 w-6 rounded-full bg-current"
+        className="absolute left-1 top-4 block h-0.5 w-6 bg-current"
         variants={{
           initial: {
             visibility: 'visible',
@@ -42,7 +42,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute bottom-1.5 left-px block h-0.5 w-6 rounded-full bg-current"
+        className="absolute bottom-1.5 left-1 block h-0.5 w-6 bg-current"
         variants={{
           initial: {
             bottom: 6,
@@ -57,7 +57,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
+        className="absolute left-[5px] top-4 h-0.5 w-[22px] bg-current"
         variants={{
           initial: {
             rotate: '0deg',
@@ -72,7 +72,7 @@ const Burger = ({ className = null, isToggled = null, onClick = null }) => (
         }}
       />
       <m.span
-        className="absolute left-[3px] top-4 h-0.5 w-[22px] rounded-full bg-current"
+        className="absolute left-[5px] top-4 h-0.5 w-[22px] bg-current"
         variants={{
           initial: {
             rotate: '0deg',

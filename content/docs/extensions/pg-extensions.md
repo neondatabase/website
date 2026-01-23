@@ -1,14 +1,14 @@
 ---
-title: Supported Postgres extensions
+title: Postgres extensions
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2025-12-12T19:00:37.840Z'
+updatedOn: '2026-01-09T19:51:39.510Z'
 ---
 
-Neon supports the Postgres extensions shown in the following table. The supported version of the extension sometimes differs by Postgres version. A dash (`-`) indicates that an extension is not yet supported.
+Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
 
-**Need an extension we don't have?** 📩 [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
+[Explore by category](/docs/extensions/extension-explorer) | [Install an extension](/docs/extensions/pg-extensions#install-an-extension) | [Update an extension](/docs/extensions/pg-extensions#update-an-extension-version) | [Request an extension](/docs/extensions/pg-extensions#request-an-extension)
 
 <a id="default-extensions/"></a>
 
@@ -16,7 +16,7 @@ Neon supports the Postgres extensions shown in the following table. The supporte
 | :----------------------------------------------------------------------------------------------- | ------: | ------: | ------: | ------: | -----: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [address_standardizer](https://postgis.net/docs/Extras.html#Address_Standardizer)                |   3.3.3 |   3.3.3 |   3.3.3 |   3.5.0 |  3.6.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [address_standardizer_data_us](https://postgis.net/docs/Extras.html#Address_Standardizer_Tables) |   3.3.3 |   3.3.3 |   3.3.3 |   3.5.0 |  3.6.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [anon](/docs/extensions/postgresql-anonymizer)                                                   |   2.4.1 |   2.4.1 |   2.4.1 |   2.4.1 |  2.4.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| [anon](/docs/extensions/postgresql-anonymizer)                                                   |   2.5.1 |   2.5.1 |   2.5.1 |   2.5.1 |  2.5.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [autoinc (spi)](https://www.postgresql.org/docs/current/contrib-spi.html)                        |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [bloom](https://www.postgresql.org/docs/16/bloom.html)                                           |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [btree_gin](/docs/extensions/btree_gin)                                                          |     1.3 |     1.3 |     1.3 |     1.3 |    1.3 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -271,7 +271,7 @@ For attribute definitions, find the [List preloaded libraries](https://api-docs.
       "description": "Anonymization & Data Masking for PostgreSQL",
       "is_default": false,
       "is_experimental": false,
-      "version": "2.1.0"
+      "version": "2.5.1"
     }
   ]
 }

@@ -2,7 +2,7 @@
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
 enableTableOfContents: true
-updatedOn: '2025-12-18T12:00:58.022Z'
+updatedOn: '2026-01-22T15:48:50.615Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -35,16 +35,16 @@ function App() {
 
 ### Common Props
 
-| Prop                         | Type                     | Description                                               | Example                                        |
-| ---------------------------- | ------------------------ | --------------------------------------------------------- | ---------------------------------------------- |
-| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance              | `authClient={authClient}`                      |
-| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (e.g., Google, GitHub) | `social={{ providers: ['google', 'github'] }}` |
-| `navigate`                   | `(href: string) => void` | Navigation function for React Router                      | `navigate={navigate}`                          |
-| `Link`                       | `ComponentType`          | Custom Link component for routing                         | `Link={RouterLink}`                            |
-| `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                   | See example below                              |
-| `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                   | `avatar={{ size: 256, extension: 'webp' }}`    |
-| `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings            | See example below                              |
-| `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                               | `credentials={{ forgotPassword: true }}`       |
+| Prop                         | Type                     | Description                                                       | Example                                                  |
+| ---------------------------- | ------------------------ | ----------------------------------------------------------------- | -------------------------------------------------------- |
+| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance                      | `authClient={authClient}`                                |
+| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (e.g., Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
+| `navigate`                   | `(href: string) => void` | Navigation function for React Router                              | `navigate={navigate}`                                    |
+| `Link`                       | `ComponentType`          | Custom Link component for routing                                 | `Link={RouterLink}`                                      |
+| `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                           | See example below                                        |
+| `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                           | `avatar={{ size: 256, extension: 'webp' }}`              |
+| `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings                    | See example below                                        |
+| `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                                       | `credentials={{ forgotPassword: true }}`                 |
 
 ### Enable OAuth Providers
 
@@ -59,7 +59,7 @@ function App() {
     <NeonAuthUIProvider
       authClient={authClient}
       social={{
-        providers: ['google', 'github'], // Enable Google and GitHub sign-in
+        providers: ['google', 'github', 'vercel'], // Enable Google, GitHub, and Vercel sign-in
       }}
     >
       {/* Your app */}
@@ -88,7 +88,7 @@ function App() {
       navigate={navigate}
       Link={RouterLink}
       social={{
-        providers: ['google', 'github'],
+        providers: ['google', 'github', 'vercel'],
       }}
     >
       {/* Your app */}
@@ -143,7 +143,7 @@ For complete prop documentation, see the TypeScript types exported from `@neonda
 
 **Form Components:** `<SignUpForm>`, `<SignInForm>`, `<ForgotPasswordForm>`, `<ResetPasswordForm>`, and `<AuthCallback>` are also available. `<AuthView>` includes sign-in and sign-up functionality with a "create account" link to switch between forms. Use the form components separately if you need more control over layout.
 
-**OAuth Provider Buttons:** OAuth provider buttons (Google, GitHub, etc.) appear automatically in `<AuthView>` when configured via the `social.providers` prop. OAuth buttons do not appear in standalone `<SignInForm>` or `<SignUpForm>` components.
+**OAuth Provider Buttons:** OAuth provider buttons (Google, GitHub, Vercel, etc.) appear automatically in `<AuthView>` when configured via the `social.providers` prop. OAuth buttons do not appear in standalone `<SignInForm>` or `<SignUpForm>` components.
 
 ### User Management Components
 
@@ -239,4 +239,4 @@ function Dashboard() {
 ## Next Steps
 
 - See [React with Neon Auth UI](/docs/auth/quick-start/react-router-components) for a complete example
-- Check the [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk) for programmatic auth methods
+- Check the [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) for programmatic auth methods

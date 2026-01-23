@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-07-29T15:29:29.872Z'
+updatedOn: '2026-01-22T15:48:50.608Z'
 ---
 
 # Docs
@@ -238,6 +238,28 @@ You can use fenced code blocks with three backticks (```) on the lines before an
   ````md
   ```powershell shouldWrap
   powershell -Command "Start-Process -FilePath powershell -Verb RunAs -ArgumentList '-NoProfile','-InputFormat None','-ExecutionPolicy Bypass','-Command ""iex (iwr -UseBasicParsing https://cli.configu.com/install.ps1)""'"
+  ```
+  ````
+
+- `filename="..."` - add a filename label above the code block.
+
+  Examples:
+
+  ````md
+  ```jsx filename="src/App.jsx"
+  export default function App() {
+    return <div>Hello</div>;
+  }
+  ```
+  ````
+
+  You can combine it with line highlighting and other flags:
+
+  ````md
+  ```jsx filename="src/App.jsx" {2} showLineNumbers shouldWrap
+  export default function App() {
+    return <div>Hello</div>;
+  }
   ```
   ````
 
@@ -488,6 +510,77 @@ Create a new development branch off of `main`. This branch will be an exact, iso
 
 </details>
 
+## Two Column Layout
+
+The `TwoColumnLayout` component creates a two-column layout for tutorial pages and reference documentation. Use `TwoColumnLayout.Step` for numbered tutorial steps or `TwoColumnLayout.Item` for default items. Nested content blocks should be wrapped with `TwoColumnLayout.Block`.
+
+> **Note:** Pages using `TwoColumnLayout` should include `layout: wide` prop to hide the right sidebar (Table of Contents) and provide more space for the two-column layout.
+
+Check [Neon Auth with Next.js](https://neon.com/docs/auth/quick-start/nextjs) and [Neon Auth & Data API TypeScript SDKs](https://neon.com/docs/reference/javascript-sdk) for usage examples.
+
+````md
+<TwoColumnLayout>
+
+<TwoColumnLayout.Step title="Install dependencies">
+<TwoColumnLayout.Block>
+
+Install the required packages for your project.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="Terminal">
+
+```bash
+npm install @neondatabase/neon-js
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Item title="Sign in with email" method="auth.signIn.email()" id="signin-email">
+<TwoColumnLayout.Block>
+
+Authenticate a user with their email and password.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript
+await client.auth.signIn.email({
+  email: 'user@example.com',
+  password: 'password123',
+});
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Footer>
+<Admonition type="note">
+Additional information that spans both columns
+</Admonition>
+</TwoColumnLayout.Footer>
+
+</TwoColumnLayout>
+````
+
+**Components:**
+
+- `TwoColumnLayout.Step` - Numbered step with `title` prop (for tutorials)
+- `TwoColumnLayout.Item` - Default item with `title`, `method`, and `id` prop
+- `TwoColumnLayout.Block` - Nested content block with optional `label` prop
+- `TwoColumnLayout.Footer` - Full-width content at the bottom of a step
+
+<details>
+<summary>Examples</summary>
+
+![Two Column Layout example](images/two-column-layout-example.jpg)
+
+Example with steps:
+
+![Two Column Layout example](images/two-column-layout-steps-example.jpg)
+
+</details>
+
 ## Feature List
 
 To display a list of features, use the `FeatureList` component.
@@ -729,6 +822,7 @@ Prompt markdown files should be placed in the `public/prompts/` directory of you
 
 - Place your prompt file at: `public/prompts/serverless-driver-guardrail-prompt.md`
 - Reference it in your MDX:
+
   ```mdx
   <CopyPrompt src="/prompts/serverless-driver-guardrail-prompt.md" />
   ```

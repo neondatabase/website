@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/customer-table.png'
 updatedOn: '2024-01-27T14:36:05+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL RTRIM() Function'
-  slug: 'postgresql-string-functions/postgresql-rtrim'
+  title: 'PostgreSQL CONCAT_WS() Function'
+  slug: 'postgresql-string-functions/postgresql-concat_ws'
 nextLink:
-  title: 'PostgreSQL MD5() Function'
-  slug: 'postgresql-string-functions/postgresql-md5'
+  title: 'PostgreSQL INITCAP() Function'
+  slug: 'postgresql-string-functions/postgresql-initcap'
 ---
 
 **Summary**: in this tutorial, you will learn how to use the PostgreSQL `FORMAT()` function to format a string based on a template.

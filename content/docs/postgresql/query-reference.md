@@ -5,7 +5,7 @@ subtitle: Find examples of commonly-used Postgres queries for basic to advanced
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference
-updatedOn: '2025-02-19T23:50:10.715Z'
+updatedOn: '2026-01-06T13:50:10.823Z'
 ---
 
 <CTA />
@@ -912,8 +912,6 @@ WHERE
 
 ### Cancel or terminate queries and sessions
 
-On the Neon platform, superuser privileges are not available, so you can only cancel or terminate your own queries and sessions. You cannot stop other users' queries or sessions directly.
-
 To cancel or terminate a process:
 
 - **Cancel a running query** (without ending the session):  
@@ -944,8 +942,6 @@ WHERE datname = 'databasename'
 ```
 
 <Admonition type="note">
-Since you cannot terminate other users' queries or sessions on Neon, you may need to contact the user running the query and ask them to stop it.
-
 To identify long-running queries and the users executing them, run:
 
 ```sql

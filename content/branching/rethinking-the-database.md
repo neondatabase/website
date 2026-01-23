@@ -1,42 +1,48 @@
 ---
-title: 'Rethinking the database'
-subtitle: "Discover how Neon's branching model transforms database workflows with instant, ephemeral environments"
-updatedOn: '2025-07-08T12:47:21.296Z'
+title: 'Rethinking the database DX with branches'
+subtitle: "Rethink the database developer experience: database branching replaces instance copying with fast, isolated environments built on copy-on-write storage"
+updatedOn: '2026-01-22T00:00:00.000Z'
 ---
 
-Neon replaces these outdated workflows with a more powerful model: ephemeral, on-demand environments backed by database branching.
+## From single state to versioned environments
 
-Instead of creating and managing separate database instances for every task, teams work from a single source of truth (a production-like parent branch) and create lightweight, fully functional clones for development, testing, and preview workflows.
+If copying databases doesn’t scale, the alternative isn’t better scripts or faster restores \- it’s a different model.
 
-The result: faster development cycles, safer experimentation, and simpler infrastructure management.
+Instead of treating a database as a single mutable thing that gets copied over and over, you treat it as a versioned system. Multiple environments can exist at the same time, all starting from the same baseline, and diverging only where changes are made.
 
-<TestimonialsWrapper>
+A versioned database model changes what’s practical:
 
-<Testimonial
-text="We’re a small team, but we’re scaling quickly and doing a lot. We’re shipping multiple times a day — to do that, we need to test stuff quickly and merge to main very quickly as well. Neon branches are a game changer for this."
-author={{
-  name: 'Avi Romanoff',
-  company: 'Founder at Magic Circle',
-}}
-simpleMode
-/>
+- Creating a new environment takes seconds, not hours
+- Environments start from real, production-like data
+- Changes are isolated by default
+- Rolling back means switching versions, not rebuilding state
 
-<Testimonial
-text="Neon’s branching paradigm has been great for us. It lets us create isolated environments without having to move huge amounts of data around. This has lightened the load on our ops team, now it’s effortless to spin up entire environments."
-author={{
-  name: 'Jonathan Reyes',
-  company: 'Principal Engineer at Dispatch',
-}}
-simpleMode
-/>
+This is how source control works for code, but until recently, databases couldn’t do this efficiently. This is the shift that database branching enables.
 
-<Testimonial
-text="Developers already face significant delays when working on a PR — running CI tests, ensuring everything is ready for preview, it all adds up. Time to launch is crucial for us: when we tried Neon and saw that spinning up a new branch takes seconds, we were blown away."
-author={{
-  name: 'Alex Co',
-  company: 'Head of Platform Engineering at Mindvalley',
-}}
-simpleMode
-/>
+## What database branching actually means
 
-</TestimonialsWrapper>
+A database branch is not a database copy. When you copy a database, you duplicate all of its data and schema into a new, independent database. This is slow, expensive, and quickly becomes stale. A branch works differently: when you create a branch, you get a new database environment that,
+
+- Starts from the exact schema and data of its parent at a specific point in time
+- Shares the same underlying data instead of duplicating it
+- Stores only the changes you make after branching
+
+As long as two branches haven’t diverged, they reference the same data. When you run migrations, insert data, or modify tables on a branch, only those changes are written separately.
+
+This makes branches cheap and fast enough to use everywhere. Branches are meant to be created, used, and deleted freely, by developers, agents, and automation.
+
+## The architecture that makes branching possible
+
+Traditional Postgres systems aren’t built for this model. They tie storage and compute together and treat the database as a single mutable filesystem. That’s why copying is the only option.
+
+Neon is different.Neon separates compute (the Postgres process) from storage (a distributed, versioned storage engine). All data changes are stored using copy-on-write, which means every change creates a new version instead of overwriting existing data.
+
+Because of this:
+
+- Multiple branches can reference the same underlying data safely
+- Branches can be created instantly, regardless of database size
+- Any previous state can be referenced without restoring backups
+
+Each branch also gets its own independent compute endpoint. Branches scale independently, and non-production branches automatically scale to zero when idle, so they don’t consume resources when they’re not being used.
+
+This architecture turns branching into a primitive, not a feature bolted on top.

@@ -176,8 +176,16 @@ You can now exchange the authorization code returned from the previous step for 
 
 The response object includes an `access_token` value, required for making requests to the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) on your users' behalf. This value must be supplied in the Authorization header of the HTTP request when sending requests to the Neon API.
 
-## Example OAuth applications
+## Example OAuth application
 
-For an example application that leverages the Neon OAuth integration, see the [Visualizing Neon Database Branches](https://neon-experimental.vercel.app) application. You can find the application code on GitHub.
+For a complete working example of a Neon OAuth integration, check out the **Neon Branches Visualizer** application. This app demonstrates how to:
 
-- [Neon Branches Visualizer](https://github.com/neondatabase/neon-branches-visualizer): A Neon branching visualizer app showcasing how to build an OAuth integration with Neon
+- Implement the OAuth flow with Neon
+- Handle user authorization and token exchange
+- Make authenticated API requests to manage Neon resources
+- Build a user-friendly interface for Neon account management
+
+- [View live demo](https://neon-experimental.vercel.app): Try the live demo application
+- [View on GitHub](https://github.com/neondatabase/neon-branches-visualizer): Explore the source code and implementation
+
+The source code provides a practical reference for implementing OAuth with Neon in your own applications.

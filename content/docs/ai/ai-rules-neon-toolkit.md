@@ -3,7 +3,7 @@ title: 'AI Rules: The @neondatabase/toolkit'
 subtitle: Context rules for AI tools to use the @neondatabase/toolkit for ephemeral
   Postgres databases
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.263Z'
+updatedOn: '2026-01-22T15:48:50.612Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">
@@ -13,7 +13,7 @@ AI Rules are currently in beta. We're actively improving them and would love to 
 <InfoBlock>
 <DocsList title="Related docs" theme="docs">
   <a href="/docs/reference/neondatabase-toolkit">Get started with the @neondatabase/toolkit</a>
-  <a href="/docs/reference/typescript-sdk">Neon TypeScript SDK Reference</a>
+  <a href="/docs/reference/typescript-sdk">Neon API TypeScript SDK</a>
   <a href="/docs/reference/api-reference">Neon API Reference</a>
 </DocsList>
 

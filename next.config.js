@@ -8,6 +8,7 @@ const generateDocPagePath = require('./src/utils/generate-doc-page-path');
 
 const defaultConfig = {
   poweredByHeader: false,
+  transpilePackages: ['geist'],
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [
@@ -307,19 +308,19 @@ const defaultConfig = {
         destination: 'https://console.neon.tech/signup',
         permanent: true,
       },
-      // {
-      //   source: '/ai',
-      //   destination: '/docs/ai/ai-intro',
-      //   permanent: true,
-      // },
       {
         source: '/deploy',
-        destination: '/stage',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/generate-ticket',
-        destination: '/stage',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/stage',
+        destination: '/',
         permanent: true,
       },
       {
@@ -350,6 +351,11 @@ const defaultConfig = {
       {
         source: '/baa',
         destination: 'https://www.databricks.com/legal/neon-baa',
+        permanent: true,
+      },
+      {
+        source: '/baa/signed',
+        destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
         permanent: true,
       },
       {
@@ -473,6 +479,67 @@ const defaultConfig = {
         destination: '/programs/agents',
         permanent: true,
       },
+      {
+        source: '/cost-fleets',
+        destination: '/',
+        permanent: true,
+      },
+      // Homepage variants redirects
+      {
+        source: '/all-things-open-2023',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/cfe',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/devs',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/education',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/fireship',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/github',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/last-week-in-aws',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/pgt',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/radio',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/stackoverflow',
+        destination: '/',
+        permanent: false,
+      },
+      {
+        source: '/youtube',
+        destination: '/',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -577,6 +644,18 @@ const defaultConfig = {
 
     // Modify the file loader rule to ignore *.svg, since we have it handled now.
     fileLoaderRule.exclude = /\.svg$/i;
+
+    config.module.rules.push({
+      test: (filePath) => {
+        const fileName = filePath.split('/').pop();
+
+        return fileName === 'rive.wasm';
+      },
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/[name].[hash][ext]',
+      },
+    });
 
     config.resolve.fallback = {
       ...config.resolve.fallback,

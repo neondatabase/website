@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-02-24T11:07:59+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL jsonb_object_agg() Function'
-  slug: 'postgresql-json-functions/postgresql-jsonb_object_agg'
+  title: 'PostgreSQL jsonb_populate_recordset() Function'
+  slug: 'postgresql-json-functions/postgresql-jsonb_populate_recordset'
 nextLink:
   title: 'PostgreSQL jsonb_pretty() Function'
   slug: 'postgresql-json-functions/postgresql-jsonb_pretty'

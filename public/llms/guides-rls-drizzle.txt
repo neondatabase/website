@@ -48,29 +48,17 @@ CREATE TABLE IF NOT EXISTS "todos" (
 -- This boilerplate SQL code is required for every table you want to secure
 ALTER TABLE "todos" ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY "create todos" ON "todos" FOR INSERT
-TO "authenticated"
-WITH CHECK ((select auth.user_id()) = user_id);
-
-CREATE POLICY "view todos" ON "todos" FOR SELECT
-TO "authenticated"
-USING ((select auth.user_id()) = user_id);
-
-CREATE POLICY "update todos" ON "todos" FOR UPDATE
-TO "authenticated"
-USING ((select auth.user_id()) = user_id)
-WITH CHECK ((select auth.user_id()) = user_id);
-
-CREATE POLICY "delete todos" ON "todos" FOR DELETE
+CREATE POLICY "manage todos" ON "todos"
+FOR ALL
 TO "authenticated"
 USING ((select auth.user_id()) = user_id);
 ```
 
 These SQL policies guarantee that authenticated users can only create, view, update, or delete todo items they own, that is when `auth.user_id()` matches the `user_id` column for a given row. This enforces strict, per-user access control at the database level.
 
-In these RLS policies, the `USING` clause defines the condition under which a row is accessible (readable) by a user, while the `WITH CHECK` clause enforces the condition required for inserting or updating a row. Together, these clauses provide precise, row-level access control to your data.
+In this RLS policy, the `USING` clause defines the condition under which a row is accessible (readable) by a user and, when `WITH CHECK` is not specified, also enforces the condition required for inserting or updating a row. Together, this provides precise, row-level access control to your data.
 
-While this approach is secure and explicit, it can quickly become repetitive and hard to maintain as your application grows and you introduce more tables or roles. Drizzle's declarative `crudPolicy` and `pgPolicy` helpers eliminate this boilerplate, letting you define and manage your security logic directly in your Drizzle schema for better maintainability.
+While this approach is secure and explicit, managing multiple policies across many tables can become repetitive. Drizzle's declarative `crudPolicy` and `pgPolicy` helpers eliminate this boilerplate, letting you define and manage your security logic directly in your Drizzle schema for better maintainability.
 
 ## Simplifying RLS with crudPolicy
 
@@ -138,9 +126,9 @@ For example, you might want to allow only users with an `admin` role to update o
 
 #### Replicating `crudPolicy` with `pgPolicy`
 
-To understand how `pgPolicy` works, let's rewrite the `todos` example using it. The following four `pgPolicy` definitions are exactly what `crudPolicy` would generate from your simpler configuration.
+To understand how `pgPolicy` works, let's rewrite the `todos` example using it. The following `pgPolicy` definition is exactly what `crudPolicy` would generate from your simpler configuration.
 
-```typescript {18-22,25-29,32-37,40-44}
+```typescript {18-22}
 import { pgTable, text, bigint, boolean, pgPolicy } from 'drizzle-orm/pg-core';
 import { authenticatedRole, authUid } from 'drizzle-orm/neon';
 import { sql } from 'drizzle-orm';
@@ -157,38 +145,18 @@ export const todos = pgTable(
   },
   (table) => {
     return [
-      // Policy for viewing (SELECT) todos
-      pgPolicy('view todos', {
-        for: 'select',
+      // Single policy for all CRUD operations
+      pgPolicy('manage todos', {
+        for: 'all',
         to: authenticatedRole,
-        using: authUid(table.userId), // users can only read their own todos
-      }),
-
-      // Policy for creating (INSERT) todos
-      pgPolicy('create todos', {
-        for: 'insert',
-        to: authenticatedRole,
-        withCheck: authUid(table.userId), // users can only create their own todos
-      }),
-
-      // Policy for updating (UPDATE) todos
-      pgPolicy('update todos', {
-        for: 'update',
-        to: authenticatedRole,
-        using: authUid(table.userId), // users can only update their own todos
-        withCheck: authUid(table.userId), // users can only update their own todos
-      }),
-
-      // Policy for deleting (DELETE) todos
-      pgPolicy('delete todos', {
-        for: 'delete',
-        to: authenticatedRole,
-        using: authUid(table.userId), // users can only delete their own todos
+        using: authUid(table.userId), // users can only access their own todos
       }),
     ];
   }
 );
 ```
+
+This single `pgPolicy` definition with `for: 'all'` is exactly what `crudPolicy` would generate from your simpler configuration. Note that `withCheck` is omitted because when it's not specified, PostgreSQL automatically uses the `USING` clause for both read and write checks. This eliminates unnecessary repetition while maintaining the same security guarantees.
 
 You can apply this approach to additional tables and operations, allowing you to define increasingly sophisticated and tailored security policies as your application's requirements evolve.
 
@@ -286,24 +254,8 @@ Tab: Drizzle (pgPolicy)
 
 ```typescript
 [
-  pgPolicy('view todos', {
-    for: 'select',
-    to: authenticatedRole,
-    using: authUid(table.userId),
-  }),
-  pgPolicy('create todos', {
-    for: 'insert',
-    to: authenticatedRole,
-    withCheck: authUid(table.userId),
-  }),
-  pgPolicy('update todos', {
-    for: 'update',
-    to: authenticatedRole,
-    using: authUid(table.userId),
-    withCheck: authUid(table.userId),
-  }),
-  pgPolicy('delete todos', {
-    for: 'delete',
+  pgPolicy('manage todos', {
+    for: 'all',
     to: authenticatedRole,
     using: authUid(table.userId),
   }),
@@ -320,7 +272,7 @@ Tab: Drizzle (crudPolicy)
 
 ```
 
-```typescript {17-37,40-60}
+```typescript {17-21,24-28}
 import { sql } from 'drizzle-orm';
 import { authenticatedRole, authUid, anonymousRole } from 'drizzle-orm/neon';
 import { bigint, boolean, pgPolicy, pgTable, text } from 'drizzle-orm/pg-core';
@@ -336,50 +288,20 @@ export const posts = pgTable(
     published: boolean().notNull().default(false),
   },
   (table) => [
-    // Anonymous users
-    pgPolicy('Allow anonymous users to read any post', {
+    // Anonymous users can read but not modify
+    pgPolicy('Anonymous users can read posts', {
       to: anonymousRole,
-      for: 'select',
-      using: sql`true`,
-    }),
-    pgPolicy('Deny anonymous users from inserting posts', {
-      to: anonymousRole,
-      for: 'insert',
-      withCheck: sql`false`,
-    }),
-    pgPolicy('Deny anonymous users from updating posts', {
-      to: anonymousRole,
-      for: 'update',
-      withCheck: sql`false`,
-      using: sql`false`,
-    }),
-    pgPolicy('Deny anonymous users from deleting posts', {
-      to: anonymousRole,
-      for: 'delete',
-      using: sql`false`,
+      for: 'all',
+      using: sql`true`, // can read all posts
+      withCheck: sql`false`, // cannot create/modify posts
     }),
 
-    // Authenticated users
-    pgPolicy('Allow authenticated users to read any post', {
+    // Authenticated users can read all, modify their own
+    pgPolicy('Authenticated users manage their own posts', {
       to: authenticatedRole,
-      for: 'select',
-      using: sql`true`,
-    }),
-    pgPolicy('Allow authenticated users to insert their own posts', {
-      to: authenticatedRole,
-      for: 'insert',
-      withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to update their own posts', {
-      to: authenticatedRole,
-      for: 'update',
-      using: authUid(table.userId),
-      withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to delete their own posts', {
-      to: authenticatedRole,
-      for: 'delete',
-      using: authUid(table.userId),
+      for: 'all',
+      using: sql`true`, // can read all posts
+      withCheck: authUid(table.userId), // can only create/modify their own
     }),
   ]
 );

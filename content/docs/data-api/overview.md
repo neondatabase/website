@@ -2,7 +2,7 @@
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
 enableTableOfContents: true
-updatedOn: '2025-12-11T16:01:49.204Z'
+updatedOn: '2026-01-22T15:48:50.617Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -21,6 +21,10 @@ The Neon Data API provides a secure, stateless HTTP interface to your database. 
 
   The API is designed to expose your database safely. It integrates with Neon Auth and respects PostgreSQL [Row-Level Security (RLS)](/docs/guides/row-level-security) policies, ensuring users only access the data they are explicitly permitted to see.
 
+- **CI/CD integration**
+
+  Test your Data API integrations in isolated branch environments using the [Neon Create Branch GitHub Action](https://github.com/marketplace/actions/neon-create-branch-github-action), which can retrieve branch-specific Data API URLs for your workflows.
+
 ## PostgREST compatibility
 
 The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/stable/). This compatibility allows you to query your database using any standard HTTP client (such as Postman or `cURL`) or integrate easily using client libraries, including [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js) and [`@neondatabase/postgrest-js`](https://www.npmjs.com/package/@neondatabase/postgrest-js).
@@ -33,7 +37,7 @@ The Neon Data API is fully compatible with [PostgREST](https://postgrest.org/en/
 
 <a href="/docs/data-api/demo" description="Explore our demo note-taking app to learn Data API queries with RLS." icon="audio-jack">Tutorial</a>
 
-<a href="/docs/reference/javascript-sdk" description="Complete reference for authentication and database query methods." icon="code">JavaScript SDK</a>
+<a href="/docs/reference/javascript-sdk" description="Complete reference for authentication and database query methods." icon="code">Neon Auth & Data API TypeScript SDKs</a>
 
 <a href="/docs/data-api/sql-to-rest" description="Convert SQL queries into RESTful HTTP requests." icon="sql">SQL to REST Converter</a>
 

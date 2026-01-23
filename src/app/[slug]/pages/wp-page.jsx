@@ -146,12 +146,8 @@ export async function generateViewport({ params }) {
 
   if (!page) return notFound();
 
-  const {
-    template: { templateName },
-  } = page;
-
   return {
-    themeColor: templateName === 'Landing' ? '#000000' : '#ffffff',
+    themeColor: '#000000',
   };
 }
 

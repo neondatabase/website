@@ -13,25 +13,10 @@ module.exports = {
     // PostgreSQL Tutorial (handled by sitemap-postgres.xml)
     '/postgresql/*',
 
-    // Home page variants
+    // Home page for logged-in users
     '/home',
-    '/all-things-open-2023',
-    '/cfe',
-    '/devs',
-    '/education',
-    '/fireship',
-    '/github',
-    '/last-week-in-aws',
-    '/ping-thing',
-    '/pgt',
-    '/radio',
-    '/stackoverflow',
-    '/youtube',
 
-    // Other pages
-    '/thank-you',
-
-    // Legacy docs (deprecated)
+    // Legacy docs
     '/docs/auth/legacy/*',
   ],
   generateRobotsTxt: true,
@@ -41,25 +26,10 @@ module.exports = {
       {
         userAgent: '*',
         disallow: [
-          // Home page variants
+          // Home page for logged-in users
           '/home$',
-          '/all-things-open-2023$',
-          '/cfe$',
-          '/devs$',
-          '/education$',
-          '/fireship$',
-          '/github$',
-          '/last-week-in-aws$',
-          '/ping-thing$',
-          '/pgt$',
-          '/radio$',
-          '/stackoverflow$',
-          '/youtube$',
 
-          // Other pages
-          '/thank-you$',
-
-          // Legacy docs (deprecated)
+          // Legacy docs
           '/docs/auth/legacy/',
         ],
       },

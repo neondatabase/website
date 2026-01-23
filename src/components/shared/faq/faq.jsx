@@ -7,15 +7,20 @@ import Item from './item';
 
 const Faq = ({ items, className }) => (
   <section
-    className={clsx('faq safe-paddings mt-[200px] xl:mt-[160px] lg:mt-[126px]', className)}
+    className={clsx('faq safe-paddings mt-[200px] xl:mt-[184px] lg:mt-40 md:mt-[104px]', className)}
     id="faq"
   >
-    <Container className="flex gap-x-[100px] xl:gap-x-[92px] xl:px-8 lg:flex-wrap" size="1152">
-      <h2 className="shrink-0 text-balance font-title text-[52px] font-medium leading-none tracking-tighter xl:text-[48px] lg:w-full lg:text-center md:text-[40px]">
+    <Container className="flex gap-x-16 xl:gap-x-8 lg:flex-col lg:gap-y-10 md:gap-y-5" size="1152">
+      <h2
+        className={clsx(
+          'w-80 shrink-0 text-balance text-[44px] leading-dense tracking-[-0.05em]',
+          'xl:w-[288px] xl:text-[36px] lg:w-full md:text-[28px]'
+        )}
+      >
         Your questions, <br className="lg:hidden" />
         answered
       </h2>
-      <ul className="-my-4 flex w-full flex-col xl:-my-5 lg:mt-12 md:mt-[18px]">
+      <ul className="flex w-full flex-col">
         {items.map((item, index) => (
           <Item {...item} key={item.question} index={index} />
         ))}

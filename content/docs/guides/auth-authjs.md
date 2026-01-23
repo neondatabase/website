@@ -3,8 +3,12 @@ title: Authenticate Neon Postgres application users with Auth.js
 subtitle: Learn how to add passwordless authentication to your Neon Postgres database
   application using Auth.js and Resend
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.261Z'
+updatedOn: '2026-01-13T18:46:54.020Z'
 ---
+
+<Admonition type="note">
+Neon also provides [Neon Auth](/docs/auth/overview), a managed authentication service built on Better Auth that stores users, sessions, and auth configuration directly in your Neon database. Neon Auth branches with your database, letting you test authentication workflows in preview environments.
+</Admonition>
 
 <Admonition type="tip" title="Did you know?">
 We recently introduced an Auth.js adapter for Neon, making it easier to store user and session data in Neon. For installation and setup instructions, see [Neon Adapter](https://authjs.dev/getting-started/adapters/neon).

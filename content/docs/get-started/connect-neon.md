@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2025-08-02T10:33:29.253Z'
+updatedOn: '2026-01-09T15:57:09.715Z'
 ---
 
 Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
@@ -204,7 +204,7 @@ func main() {
 
 ## Obtaining connection details
 
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`production`) or a child branch.
+When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
 
 You can obtain the database connection details you require by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
 
@@ -275,6 +275,17 @@ Neon uses the default Postgres port, `5432`.
 Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure currently only support IPv4.
 
 Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
+
+## Data API
+
+The [Neon Data API](/docs/data-api/overview) provides a REST interface to your database, enabling you to query Postgres directly from web browsers, serverless functions, and edge runtimes using standard HTTP requests. This eliminates the need for connection pooling and works in environments where traditional Postgres drivers cannot operate.
+
+**When to use the Data API:**
+
+- Building browser-based applications that need direct database access
+- Deploying to edge runtimes (Cloudflare Workers, Vercel Edge Functions)
+- Serverless applications with high concurrency that need connectionless scalability
+- Applications requiring RLS-enforced, secure database access via HTTP
 
 ## Connection notes
 

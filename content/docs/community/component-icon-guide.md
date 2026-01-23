@@ -1,8 +1,8 @@
 ---
-title: Neon Documentation MDX Components - Icon Guide
+title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
 enableTableOfContents: true
-updatedOn: '2025-07-11T20:37:11.993Z'
+updatedOn: '2026-01-20T19:00:25.315Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -197,8 +197,8 @@ To test if an icon works:
 <a href="#" title="Liquibase" description="Database migration tool (icon: liquibase)" icon="liquibase">Liquibase</a>
 <a href="#" title="Materialize" description="Streaming database (icon: materialize)" icon="materialize">Materialize</a>
 <a href="#" title="Neon" description="Serverless Postgres (icon: neon)" icon="neon">Neon</a>
-<a href="#" title="Neosync" description="Data synchronization (icon: neosync)" icon="neosync">Neosync</a>
 <a href="#" title="Outerbase" description="Database interface (icon: outerbase)" icon="outerbase">Outerbase</a>
+<a href="#" title="Draxlr" description="Database interface (icon: draxlr)" icon="draxlr">Draxlr</a>
 <a href="#" title="Polyscale" description="Database proxy (icon: polyscale)" icon="polyscale">Polyscale</a>
 <a href="#" title="PostgreSQL" description="Database system (icon: postgresql)" icon="postgresql">PostgreSQL</a>
 <a href="#" title="Prisma" description="ORM for Node.js (icon: prisma)" icon="prisma">Prisma</a>

@@ -107,7 +107,7 @@ INSERT INTO production_orders (description)
 VALUES('Make for Infosys inc.');
 ```
 
-Then, to make sure that the `qty` field is not null, you can add the not\-null constraint to the `qty` column. However, the column already contains data. If you try to add the not\-null constraint, PostgreSQL will issue an error.
+Then, to make sure that the `qty` field is not null, you can add the not\-null constraint to the `qty` column. However, the column currently contains no value \(NULL\). If you try to add the not\-null constraint, PostgreSQL will issue an error.
 
 To add the `NOT NULL` constraint to a column that already contains NULL, you need to update `NULL` to non\-NULL first, like this:
 

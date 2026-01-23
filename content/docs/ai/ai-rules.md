@@ -2,7 +2,7 @@
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 enableTableOfContents: true
-updatedOn: '2025-10-24T11:19:19.274Z'
+updatedOn: '2026-01-22T15:48:50.614Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI assistants understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
@@ -35,7 +35,7 @@ For other AI tools like Cursor, you can use these individual `.mdc` context rule
 
 <a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="drizzle">Neon Drizzle</a>
 
-<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon TypeScript SDK" icon="code">Neon TypeScript SDK</a>
+<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon API TypeScript SDK" icon="code">Neon API TypeScript SDK</a>
 
 <a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="code">Neon Python SDK</a>
 

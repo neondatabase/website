@@ -27,15 +27,13 @@ However, you can see the history of operations related to the creation and delet
 
 ### How long do ephemeral endpoints remain active
 
-The ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
+The ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). An ephemeral compute remains active for as long as you keep running queries against it. After 30 seconds of inactivity, the timeline is deleted and the endpoint is removed.
 
 ### Restore window
 
-You are only able to run Time Travel queries that fall within your restore window.
+Time Travel queries are limited to your project's restore window. You cannot select a time outside your current restore window.
 
-You cannot select a time outside your current restore window.
-
-To change your restore window, see [Configure restore window](https://neon.com/docs/manage/projects#configure-restore-window).
+To learn more about the restore window, including how to configure it and plan limits, see [Restore window](https://neon.com/docs/introduction/restore-window).
 
 ### Data integrity
 
@@ -49,7 +47,7 @@ Time Travel in the SQL Editor offers a non-destructive way to explore your datab
 
 You can use this feature to help with scenarios like:
 
-- Investigating anomolies
+- Investigating anomalies
 - Assessing the impact of new features
 - Troubleshooting
 - Compliance auditing
@@ -175,4 +173,4 @@ The ephemeral endpoints used to run your Time Travel queries do contribute to yo
 A couple of details to note:
 
 - The endpoints are shortlived. They are suspended 30 seconds after you stop querying.
-- Ephemeral endpoints are created with a .50 CU compute size, which has 0.50 vCPU size with 2 GB of RAM. This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute).
+- Ephemeral endpoints are created with a .50 CU compute size (2 GB of RAM). This is Neon's second smallest compute size. For more about compute sizes in Neon, see [How to size your compute](https://neon.com/docs/manage/computes#how-to-size-your-compute).

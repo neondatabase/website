@@ -3,7 +3,7 @@ title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-11T15:40:49.860Z'
+updatedOn: '2025-12-29T16:46:32.129Z'
 ---
 
 This guide covers the technical implementation of the Neon agent plan for your platform. You'll learn how to provision databases, implement versioning, manage user upgrades, and monitor usage at scale.
@@ -357,6 +357,8 @@ Use snapshots (branches) for versions you want to keep beyond the [restore windo
 
 <Admonition type="important">
 **Snapshot limits:** Free organization projects can only maintain **1 snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 snapshots** simultaneously. Design your versioning UI accordingly.
+
+**Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 </Admonition>
 
 Example creating a snapshot:

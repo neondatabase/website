@@ -231,7 +231,7 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
 
   return (
     <Drawer open={open} shouldScaleBackground={false} onOpenChange={onOpenChange}>
-      <DrawerTrigger className="group fixed bottom-0 left-0 right-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
+      <DrawerTrigger className="group fixed bottom-0 left-0 right-0 z-[55] hidden h-12 w-full items-center gap-x-2 border-t border-gray-new-80 bg-white px-8 outline-none dark:border-gray-new-15 dark:bg-black-pure dark:text-white lg:flex">
         <CornerIcon
           className="shrink-0 text-gray-new-60 transition-all duration-200 group-hover:text-black-new dark:group-hover:text-white"
           aria-hidden
@@ -243,13 +243,13 @@ const MobileMenu = ({ navigation, basePath, title = 'Neon Docs' }) => {
         />
       </DrawerTrigger>
 
-      <DrawerContent className="hidden !h-[70dvh] flex-col rounded-t-2xl border-gray-new-80 bg-white p-0 text-black-new dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
+      <DrawerContent className="bottom-12 hidden !h-[70dvh] flex-col rounded-t-2xl border-b-0 border-gray-new-80 bg-white p-0 text-black-new after:hidden dark:border-[#27272A] dark:bg-black-pure dark:text-white lg:flex">
         <DrawerTitle className="sr-only">Menu</DrawerTitle>
-        <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-20 pt-[15px]">
+        <div className="flex flex-1 flex-col overflow-y-auto p-6 pb-8 pt-[15px]">
           <RecursiveList nodes={menu} currentPath={pathname} />
         </div>
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-20 w-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_73.36%)] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.00)_0%,#09090B_73.36%)]"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-10 w-full bg-[linear-gradient(180deg,rgba(255,255,255,0.00)_0%,#FFF_73.36%)] dark:bg-[linear-gradient(180deg,rgba(9,9,11,0.00)_0%,#09090B_73.36%)]"
           aria-hidden
         />
       </DrawerContent>

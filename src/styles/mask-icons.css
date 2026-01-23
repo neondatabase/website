@@ -12,36 +12,6 @@
     @apply mask-styles;
   }
 
-  /* Used in a /src/components/pages/pricing/hero/features/features.jsx  */
-  .pricing-icon-size {
-    -webkit-mask-size: 14px 14px;
-  }
-
-  .pricing-check-icon {
-    -webkit-mask-image: url('/images/checklist.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-autoscale-icon {
-    -webkit-mask-image: url('/images/pricing/autoscale.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-clock-icon {
-    -webkit-mask-image: url('/images/pricing/clock.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-projects-icon {
-    -webkit-mask-image: url('/images/pricing/projects.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
-  .pricing-storage-icon {
-    -webkit-mask-image: url('/images/pricing/storage.svg');
-    @apply mask-styles pricing-icon-size;
-  }
-
   /* Used in a /src/components/pages/pricing/table/table.jsx */
   .pricing-check-icon {
     -webkit-mask-image: url('/images/check.svg');

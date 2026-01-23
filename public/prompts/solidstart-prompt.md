@@ -60,13 +60,13 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
 ### 2. Configure Environment Variables
 
 1.  Check for the presence of a `.env` file at the root of the project. If it doesn't exist, create one.
-2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete connection string from Neon.
+2.  Add the following `DATABASE_URL` parameter to the `.env` file and **prompt the user to replace the placeholder value** with their complete pooled connection string from Neon.
 
     ```dotenv title=".env"
-    DATABASE_URL="postgresql://user:password@endpoint.neon.tech/neondb?sslmode=require&channel_binding=require"
+    DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>-pooler.neon.tech/<dbname>?sslmode=require"
     ```
 
-3.  Direct the user to find this value in the **Neon Console → Project → Connect**.
+3.  Direct the user to find this value in the **Neon Console → Project Dashboard → Connect button**. Make sure to select **Pooled connection** for better performance with serverless applications.
 
 ---
 
@@ -82,22 +82,24 @@ To demonstrate both server-side rendering and API endpoints, create two separate
     ##### Option A: Using `@neondatabase/serverless`
 
     ```typescript title="src/routes/index.tsx"
-    import { createAsync } from "@solidjs/router";
     import { neon } from "@neondatabase/serverless";
+    import { createAsync, query } from "@solidjs/router";
 
-    const getDbVersion = async () => {
+    const getVersion = query(async () => {
       "use server";
-      const sql = neon(process.env.DATABASE_URL!);
+      const sql = neon(process.env.DATABASE_URL);
       const response = await sql`SELECT version()`;
-      return response[0].version as string;
-    };
+      const { version } = response[0];
+
+      return version;
+    }, 'version')
 
     export const route = {
-      load: () => getDbVersion(),
+      preload: () => getVersion(),
     };
 
-    export default function Home() {
-      const version = createAsync(() => getDbVersion());
+    export default function Page() {
+      const version = createAsync(() => getVersion());
       return (
         <main>
           <h1>DB Connection Test</h1>
@@ -110,22 +112,22 @@ To demonstrate both server-side rendering and API endpoints, create two separate
     ##### Option B: Using `postgres` (postgres.js)
 
     ```typescript title="src/routes/index.tsx"
-    import { createAsync } from "@solidjs/router";
-    import postgres from "postgres";
+    import postgres from 'postgres';
+    import { createAsync, query } from "@solidjs/router";
 
-    const getDbVersion = async () => {
+    const getVersion = query(async () => {
       "use server";
-      const sql = postgres(process.env.DATABASE_URL!);
+      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
       const response = await sql`SELECT version()`;
       return response[0].version;
-    };
+    }, 'version')
 
     export const route = {
-      load: () => getDbVersion(),
+      preload: () => getVersion(),
     };
 
-    export default function Home() {
-      const version = createAsync(() => getDbVersion());
+    export default function Page() {
+      const version = createAsync(() => getVersion());
       return (
         <main>
           <h1>DB Connection Test</h1>
@@ -138,28 +140,25 @@ To demonstrate both server-side rendering and API endpoints, create two separate
     ##### Option C: Using `pg` (node-postgres)
 
     ```typescript title="src/routes/index.tsx"
-    import { createAsync } from "@solidjs/router";
-    import { Pool } from "pg";
+    import pg from 'pg';
+    import { createAsync, query } from "@solidjs/router";
 
-    const getDbVersion = async () => {
+    const getVersion = query(async () => {
       "use server";
-      const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
+      const pool = new pg.Pool({
+        connectionString: process.env.DATABASE_URL,
+      });
       const client = await pool.connect();
-      try {
-        const { rows } = await client.query('SELECT version()');
-        return rows[0].version;
-      } finally {
-        client.release();
-        await pool.end();
-      }
-    };
+      const response = await client.query('SELECT version()');
+      return response.rows[0].version;
+    }, 'version')
 
     export const route = {
-      load: () => getDbVersion(),
+      preload: () => getVersion(),
     };
 
-    export default function Home() {
-      const version = createAsync(() => getDbVersion());
+    export default function Page() {
+      const version = createAsync(() => getVersion());
       return (
         <main>
           <h1>DB Connection Test</h1>
@@ -178,13 +177,13 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     ```typescript title="src/routes/api/version.ts"
     import { neon } from '@neondatabase/serverless';
+    import { json } from '@solidjs/router'
 
     export async function GET() {
       const sql = neon(process.env.DATABASE_URL!);
-      const [response] = await sql`SELECT version()`;
-      return new Response(JSON.stringify(response), {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const response = await sql`SELECT version()`;
+
+      return json(response[0]);
     }
     ```
 
@@ -192,13 +191,13 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     ```typescript title="src/routes/api/version.ts"
     import postgres from 'postgres';
+    import { json } from '@solidjs/router'
 
     export async function GET() {
-      const sql = postgres(process.env.DATABASE_URL!);
-      const [response] = await sql`SELECT version()`;
-      return new Response(JSON.stringify(response), {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      const sql = postgres(process.env.DATABASE_URL, { ssl: 'require' });
+      const response = await sql`SELECT version()`;
+
+      return json(response[0]);
     }
     ```
 
@@ -206,19 +205,23 @@ To demonstrate both server-side rendering and API endpoints, create two separate
 
     ```typescript title="src/routes/api/version.ts"
     import { Pool } from 'pg';
+    import { json } from '@solidjs/router'
+
+    const pool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: true,
+    });
 
     export async function GET() {
-      const pool = new Pool({ connectionString: process.env.DATABASE_URL! });
       const client = await pool.connect();
+      let data = {};
       try {
         const { rows } = await client.query('SELECT version()');
-        return new Response(JSON.stringify(rows[0]), {
-          headers: { 'Content-Type': 'application/json' },
-        });
+        data = rows[0];
       } finally {
         client.release();
-        await pool.end();
       }
+      return json(data);
     }
     ```
 

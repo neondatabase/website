@@ -427,9 +427,9 @@ async function searchSnippets({ query, language, tag, page = 1, limit = 10 }) {
   const offset = (page - 1) * limit;
 
   let searchQuery = `
-    SELECT 
-      s.snippet_id, 
-      s.title, 
+    SELECT
+      s.snippet_id,
+      s.title,
       s.description,
       l.name AS language,
       u.username AS created_by,
@@ -475,7 +475,7 @@ async function searchSnippets({ query, language, tag, page = 1, limit = 10 }) {
   const results = await db.query(searchQuery, queryParams);
 
   let countQuery = `
-    SELECT COUNT(*) 
+    SELECT COUNT(*)
     FROM snippets s
     JOIN languages l ON s.language_id = l.language_id
   `;

@@ -1,21 +1,16 @@
 import 'styles/globals.css';
-
-import dynamic from 'next/dynamic';
+import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
+import RiveWasm from 'components/shared/rive-wasm';
 import LINKS from 'constants/links';
 import { CodeTabsProvider } from 'contexts/code-tabs-context';
 import { TabsProvider } from 'contexts/tabs-context';
+import { TopbarProvider } from 'contexts/topbar-context';
 
 import { inter, esbuild } from './fonts';
 import { HomepageVisitProvider } from './homepage-visit-context';
-import PostHogProvider from './posthog-provider';
-import SessionProvider from './session-provider';
 import ThemeProvider from './theme-provider';
-
-const PostHogPageView = dynamic(() => import('./posthog-pageview'), {
-  ssr: false,
-});
 
 export const preferredRegion = 'edge';
 
@@ -27,26 +22,24 @@ export const viewport = {
 
 // eslint-disable-next-line react/prop-types
 const RootLayout = ({ children }) => (
-  <html lang="en" className={`${inter.variable} ${esbuild.variable} dark`}>
+  <html lang="en" className={`${inter.variable} ${esbuild.variable} ${GeistMono.variable} dark`}>
     <head>
       {process.env.NODE_ENV === 'production' && (
         <Script strategy="afterInteractive" src="https://neonapi.io/cb.js" />
       )}
       <link rel="preconnect" href={LINKS.console} />
+      <RiveWasm />
     </head>
     <body>
-      <SessionProvider>
-        <PostHogProvider>
-          <PostHogPageView />
-          <ThemeProvider>
-            <HomepageVisitProvider>
-              <TabsProvider>
-                <CodeTabsProvider>{children}</CodeTabsProvider>
-              </TabsProvider>
-            </HomepageVisitProvider>
-          </ThemeProvider>
-        </PostHogProvider>
-      </SessionProvider>
+      <ThemeProvider>
+        <HomepageVisitProvider>
+          <TopbarProvider>
+            <TabsProvider>
+              <CodeTabsProvider>{children}</CodeTabsProvider>
+            </TabsProvider>
+          </TopbarProvider>
+        </HomepageVisitProvider>
+      </ThemeProvider>
     </body>
   </html>
 );

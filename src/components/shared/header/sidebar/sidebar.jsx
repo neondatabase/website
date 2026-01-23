@@ -3,115 +3,103 @@ import PropTypes from 'prop-types';
 import { Suspense } from 'react';
 
 import Button from 'components/shared/button';
-import GitHubStarCounter from 'components/shared/github-star-counter';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/discord.inline.svg';
 import GitHubIcon from 'icons/github.inline.svg';
 import { getGitHubStars } from 'utils/get-github-data';
 
-const themePropTypes = {
-  isDarkTheme: PropTypes.bool,
+const formatStars = (starsCount) => {
+  const fixedThousands = (starsCount / 1000).toFixed(1);
+  if (fixedThousands.endsWith('.0')) {
+    return `${fixedThousands.replace('.0', '')}k`;
+  }
+
+  return `${fixedThousands}k`;
 };
 
-const GitHubStars = async ({ isDarkTheme }) => {
+const GitHubStars = async () => {
   const starsCount = await getGitHubStars();
   return (
     <Suspense>
-      <GitHubStarCounter isDarkTheme={isDarkTheme} starsCount={starsCount} tagName="Header" />
+      <span className="whitespace-nowrap" aria-label={`Star us on GitHub (${starsCount})`}>
+        {formatStars(starsCount)}
+      </span>
     </Suspense>
   );
 };
 
-GitHubStars.propTypes = themePropTypes;
+const SOCIALS = [
+  {
+    id: 'discord',
+    to: LINKS.discord,
+    icon: DiscordIcon,
+    label: 'Discord',
+  },
+  {
+    id: 'github',
+    to: LINKS.github,
+    icon: GitHubIcon,
+    hasStars: true,
+  },
+];
 
-const Sidebar = ({ isDarkTheme, isClient, simpleMode, className }) => (
-  <div
-    className={clsx('flex items-center lg:hidden', simpleMode ? 'gap-x-2.5' : 'gap-x-6', className)}
-  >
-    {simpleMode ? (
-      <>
-        <Link
-          className={clsx(
-            'flex size-8 items-center justify-center rounded-full border border-gray-new-70',
-            'transition-colors duration-200 hover:border-black-new hover:text-black-new',
-            'dark:border-gray-new-30 dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
-          )}
-          to={LINKS.discord}
-          target="_blank"
-          rel="noopener noreferrer"
-          tagName="Header"
-        >
-          <DiscordIcon width={18} height={18} />
-        </Link>
-        <Link
-          className={clsx(
-            'flex size-8 items-center justify-center rounded-full border border-gray-new-70',
-            'transition-colors duration-200 hover:border-black-new hover:text-black-new',
-            'dark:border-gray-new-30 dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
-          )}
-          to={LINKS.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          tagName="Header"
-          tagText="GitHub"
-        >
-          <GitHubIcon width={18} height={18} />
-        </Link>
-      </>
-    ) : (
-      <>
-        <Link
-          className={clsx(
-            'flex items-center gap-1.5 transition-colors duration-200',
-            isDarkTheme
-              ? 'text-gray-new-90 hover:text-green-45'
-              : 'text-gray-new-8 hover:text-green-45 dark:text-gray-new-90 dark:hover:text-green-45'
-          )}
-          to={LINKS.discord}
-          target="_blank"
-          rel="noopener noreferrer"
-          tagName="Header"
-        >
-          <DiscordIcon width={18} height={18} />
-          <span className="text-sm leading-none tracking-extra-tight">Discord</span>
-        </Link>
-        {!isClient && <GitHubStars isDarkTheme={isDarkTheme} />}
-      </>
-    )}
-    <div className="flex gap-2.5 lg:hidden">
-      <Button
+const Sidebar = ({ isClient, isDocs, className }) => (
+  <div className={clsx('flex items-center lg:hidden', isDocs ? 'gap-x-2.5' : 'gap-x-6', className)}>
+    {SOCIALS.map(({ id, to, icon: Icon, label, hasStars }) => (
+      <Link
         className={clsx(
-          'px-4.5 whitespace-nowrap border font-semibold',
-          isDarkTheme
-            ? 'border-gray-new-30 text-white hover:border-gray-new-40'
-            : 'border-gray-new-70 hover:border-gray-new-50 dark:border-gray-new-30 dark:hover:border-gray-new-40'
+          'group flex items-center gap-1.5 tracking-extra-tight transition-colors duration-200',
+          isDocs && 'size-8 justify-center border border-gray-new-70 dark:border-gray-new-30',
+          isDocs
+            ? 'rounded-full hover:border-black-new hover:text-black-new dark:text-gray-new-60 dark:hover:border-gray-new-40 dark:hover:text-white'
+            : 'rounded-sm text-white hover:text-gray-new-70'
         )}
+        key={id}
+        to={to}
+        target="_blank"
+        rel="noopener noreferrer"
+        tagName="Header"
+      >
+        <Icon
+          width={18}
+          height={18}
+          className={!isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'}
+        />
+        {!isDocs && (
+          <span className="text-sm leading-none tracking-extra-tight">
+            {label}
+            {hasStars && !isClient && <GitHubStars />}
+          </span>
+        )}
+      </Link>
+    ))}
+    <div className="ml-1.5 flex gap-x-4 xl:ml-1 lg:hidden">
+      <Button
+        className="h-9 px-[18px]"
         to={LINKS.login}
+        theme="outlined"
         size="xxs"
         tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
       >
-        Log In
+        Log in
       </Button>
       <Button
-        className="px-4.5 whitespace-nowrap font-semibold"
+        className="h-9 px-[18px]"
         to={LINKS.signup}
-        theme="primary"
+        theme="white-filled-multi"
         size="xxs"
         tagName="Header"
-        analyticsEvent="header_sign_up_clicked"
       >
-        Sign Up
+        Sign up
       </Button>
     </div>
   </div>
 );
 
 Sidebar.propTypes = {
-  ...themePropTypes,
   isClient: PropTypes.bool,
-  simpleMode: PropTypes.bool,
+  isDocs: PropTypes.bool,
   className: PropTypes.string,
 };
 

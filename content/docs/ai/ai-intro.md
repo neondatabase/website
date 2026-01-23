@@ -2,7 +2,9 @@
 title: AI Starter Kit
 subtitle: Resources for building AI applications with Neon Postgres
 enableTableOfContents: true
-updatedOn: '2025-06-04T19:40:50.197Z'
+redirectFrom:
+  - /docs/ai/ai-app-build
+updatedOn: '2026-01-13T19:29:46.131Z'
 ---
 
 This guide collects resources for building AI applications with Neon Postgres. You'll find core concepts, starter applications, framework integrations, and deployment guides. Use these resources to build applications like RAG chatbots, semantic search engines, or custom AI tools.

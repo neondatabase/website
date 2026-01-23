@@ -30,8 +30,8 @@ You can add a read replica by following these steps:
 2. Select the branch where your database resides.
 3. Click **Add Read Replica**.
 4. On the **Add new compute** dialog, select **Read replica** as the **Compute type**.
-5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of vCPU and RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
-      **Note**: The compute size configuration determines the processing power of your database. More vCPU and memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](https://neon.com/docs/introduction/billing).
+5. Specify the **Compute size settings** options. You can configure a **Fixed Size** compute with a specific amount of RAM (the default) or enable autoscaling by configuring a minimum and maximum compute size. You can also configure the **Scale to zero** setting, which controls whether your read replica compute is automatically suspended due to inactivity after 5 minutes.
+      **Note**: The compute size configuration determines the processing power of your database. More memory means more processing power but also higher compute costs. For information about compute costs, see [Billing metrics](https://neon.com/docs/introduction/billing).
 6. When you finish making selections, click **Create**.
 
    Your read replica compute is provisioned and appears on the **Computes** tab of the **Branches** page.

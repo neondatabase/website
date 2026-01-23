@@ -2,7 +2,7 @@
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
 enableTableOfContents: true
-updatedOn: '2025-12-12T19:35:53.906Z'
+updatedOn: '2026-01-22T15:48:50.616Z'
 ---
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -90,7 +90,8 @@ Now that you have the app running, let's explore how it uses the Data API. The f
 The demo app uses `@neondatabase/neon-js` to connect to both the Data API and Neon Auth. Here's how the client is configured in `src/lib/auth.ts`:
 
 ```typescript
-import { createClient, BetterAuthReactAdapter } from '@neondatabase/neon-js';
+import { createClient } from '@neondatabase/neon-js';
+import { BetterAuthReactAdapter } from '@neondatabase/neon-js/auth/react/adapters';
 import type { Database } from '../../types/database';
 
 export const client = createClient<Database>({
@@ -259,7 +260,7 @@ You can rename any note by editing its title directly in the app. When you do, t
 const { error } = await client.from('notes').update({ title: newTitle }).eq('id', id);
 ```
 
-You can chain methods like `.from()`, `.update()`, and `.eq()` to build queries. For more complex queries, refer to the [JavaScript SDK documentation](/docs/reference/javascript-sdk#insert).
+You can chain methods like `.from()`, `.update()`, and `.eq()` to build queries. For more complex queries, refer to the [Neon TypeScript SDK documentation](/docs/reference/javascript-sdk#insert).
 
 Here's how a note looks after you update its title:
 
@@ -420,6 +421,6 @@ Now test deleting a note that has paragraphs — both the note and its paragraph
 - [Generate TypeScript types](/docs/data-api/generate-types)
 - [SQL to REST Converter](/docs/data-api/sql-to-rest)
 - [Neon Auth documentation](/docs/auth/overview)
-- [JavaScript SDK (Auth & Data API)](/docs/reference/javascript-sdk)
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk)
 - [PostgREST documentation](https://docs.postgrest.org/en/v13/)
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle)

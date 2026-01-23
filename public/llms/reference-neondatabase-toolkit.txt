@@ -11,7 +11,7 @@ What you will learn:
 - How to get started
 
 Related resources:
-- [TypeScript SDK for the Neon API](https://neon.com/docs/reference/typescript-sdk)
+- [Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk)
 - [Neon API Reference](https://neon.com/docs/reference/api-reference)
 - [Neon Serverless Driver](https://neon.com/docs/serverless/serverless-driver)
 - [Why we built @neondatabase/toolkit](https://neon.com/blog/why-neondatabase-toolkit)
@@ -22,7 +22,7 @@ Source code:
 
 ## About the toolkit
 
-The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon TypeScript SDK](https://neon.com/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
+The [@neondatabase/toolkit](https://github.com/neondatabase/toolkit) ([@neon/toolkit](https://jsr.io/@neon/toolkit) on JSR) is a terse client that lets you spin up a Postgres database in seconds and run SQL queries. It includes both the [Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk) and the [Neon Serverless Driver](https://github.com/neondatabase/serverless), making it an excellent choice for AI agents that need to quickly set up an SQL database or test environments where manually deploying a new database isn't practical.
 
 The primary goal of the toolkit is to abstract away the multi-step process of creating a project, retrieving its connection string, and then establishing a database connection. This makes it an excellent choice for:
 
@@ -241,6 +241,6 @@ const { data } = await apiClient.listProjects({});
 console.log("All projects in your account:", data.projects);
 ```
 
-With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [TypeScript SDK for the Neon API](https://neon.com/docs/reference/typescript-sdk) documentation.
+With the `apiClient`, you can perform any operation supported by the Neon API. For a complete guide on its capabilities, see the [Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk) documentation.
 
 As with all of our experimental features, changes are ongoing. If you have any feedback, we'd love to hear it. Let us know via the [Feedback](https://console.neon.tech/app/projects?modal=feedback) form in the Neon Console or our [feedback channel](https://discord.com/channels/1176467419317940276/1176788564890112042) on Discord.

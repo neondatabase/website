@@ -468,7 +468,7 @@ SELECT
 Result:
 
 ```sql
-60
+6
 ```
 
 The following example uses the `EXTRACT()` function to extract the millennium from an interval:

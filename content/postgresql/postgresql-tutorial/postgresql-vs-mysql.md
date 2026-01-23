@@ -7,11 +7,11 @@ ogImage: '/postgresqltutorial/postgresql-vs-mysql-features.jpg'
 updatedOn: '2024-03-15T14:32:40+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DISTINCT ON'
-  slug: 'postgresql-tutorial/postgresql-distinct-on'
+  title: 'How to Generate a Random Number in a Range'
+  slug: 'postgresql-tutorial/postgresql-random-range'
 nextLink:
-  title: 'PostgreSQL generate_series() Function'
-  slug: 'postgresql-tutorial/postgresql-generate_series'
+  title: ''
+  slug: ''
 ---
 
 The choice between PostgreSQL and MySQL is crucial when selecting an open\-source relational database management system.

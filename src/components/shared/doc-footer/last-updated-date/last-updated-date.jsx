@@ -10,7 +10,7 @@ const LastUpdatedDate = ({ className = null, updatedOn }) => {
   });
 
   return (
-    <p className={clsx('text-sm text-gray-new-40 dark:text-gray-new-80', className)}>
+    <p className={clsx('text-sm leading-[1.375em] text-gray-new-80', className)}>
       Last updated on <time dateTime={updatedOn}>{lastUpdatedOn}</time>
     </p>
   );

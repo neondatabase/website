@@ -11,7 +11,6 @@ import useWindowSize from 'hooks/use-window-size';
 
 const Tooltip = ({
   id = null,
-  arrowColor = '#161928',
   place = 'right',
   className = null,
   offset = 10,
@@ -28,8 +27,16 @@ const Tooltip = ({
   if (isTooltipVisible) {
     return createPortal(
       <ReactTooltip
-        className={clsx('z-[9999] sm:max-w-[80vw]', className)}
-        arrowColor={arrowColor}
+        className={clsx(
+          'z-[9999] sm:max-w-[80vw]',
+          '!border !border-gray-new-30 !bg-gray-new-8',
+          '!px-4 !py-3',
+          '!shadow-[0px_4px_30px_0px_rgba(0,0,0,0.8)]',
+          '!text-[15px] !leading-snug !tracking-tighter !text-gray-new-80',
+          '[&_a:hover]:border-gray-new-70 [&_a]:transition-colors [&_a]:duration-200 [&_a]:hover:text-gray-new-80',
+          '!rounded-none',
+          className
+        )}
         id={id}
         place={width < 640 ? 'top-center' : place}
         effect="solid"
@@ -38,6 +45,7 @@ const Tooltip = ({
         anchorSelect={anchorSelect}
         opacity={1}
         multiline
+        noArrow
         {...rest}
       />,
       document.body
@@ -49,7 +57,6 @@ const Tooltip = ({
 
 Tooltip.propTypes = {
   id: PropTypes.string,
-  arrowColor: PropTypes.string,
   place: PropTypes.string,
   className: PropTypes.string,
   offset: PropTypes.shape({}),

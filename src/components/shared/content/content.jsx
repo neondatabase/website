@@ -19,17 +19,12 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
 import TabItem from 'components/pages/doc/tabs/tab-item';
 import TechCards from 'components/pages/doc/tech-cards';
-import TwoColumnLayout, {
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
-} from 'components/pages/doc/two-column-layout';
+import TwoColumnLayout from 'components/pages/doc/two-column-layout';
 import Video from 'components/pages/doc/video';
 import YoutubeIframe from 'components/pages/doc/youtube-iframe';
 import SubscriptionForm from 'components/pages/use-case/subscription-form';
@@ -41,7 +36,6 @@ import Admonition from 'components/shared/admonition';
 import AnchorHeading from 'components/shared/anchor-heading';
 import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
-import CodeWithLabel from 'components/shared/code-with-label';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt/copy-prompt';
 import CtaBlock from 'components/shared/cta-block';
@@ -52,6 +46,7 @@ import GradientBorder from 'components/shared/gradient-border';
 import ImageZoom from 'components/shared/image-zoom';
 import LatencyCalculator from 'components/shared/latency-calculator';
 import MegaLink from 'components/shared/mega-link';
+import Mermaid from 'components/shared/mermaid';
 import ProgramForm from 'components/shared/program-form';
 import RequestForm from 'components/shared/request-form';
 import SqlToRestConverter from 'components/shared/sql-to-rest-converter';
@@ -87,7 +82,23 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ),
   // eslint-disable-next-line react/jsx-no-useless-fragment
   undefined: (props) => <Fragment {...props} />,
-  pre: (props) => <CodeBlock {...props} />,
+  pre: (props) => {
+    const codeElement = props?.children;
+    const code = codeElement?.props?.children;
+    const className = codeElement?.props?.className || '';
+
+    // Check if this is a mermaid code block
+    if (
+      codeElement &&
+      typeof code === 'string' &&
+      className &&
+      className.includes('language-mermaid')
+    ) {
+      return <Mermaid chart={code.trim()} />;
+    }
+
+    return <CodeBlock {...props} />;
+  },
   a: (props) => <DocsLink {...props} />,
   img: (props) => {
     const { className, title, src, ...rest } = props;
@@ -150,10 +161,10 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   DefinitionList,
   FeatureList,
   Admonition,
-  CodeWithLabel,
   CodeTabs,
   DetailIconCards,
   TechCards,
+  PromptCards,
   CommunityBanner,
   QuickLinks,
   QuoteBlock,
@@ -176,11 +187,6 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   Video,
   Steps,
   TwoColumnLayout,
-  TwoColumnStep,
-  TwoColumnItem,
-  LeftContent,
-  RightCode,
-  RightImage,
   LogosSection,
   DeployPostgresButton,
   ChatOptions,

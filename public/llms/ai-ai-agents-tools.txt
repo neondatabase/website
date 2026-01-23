@@ -21,6 +21,12 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 
 - [Claude Code plugin for Neon](https://neon.com/docs/ai/ai-claude-code-plugin): Includes Claude Code Skills for Neon, Neon MCP integration, and context rules
 
+## GitHub Copilot agents
+
+Custom agents for GitHub Copilot that bring Neon's branching workflow directly into VS Code for safe migrations and query optimization.
+
+- [Neon agents for GitHub Copilot](https://neon.com/docs/ai/ai-github-copilot-agents): Safe database migrations and query optimization using Neon branching
+
 ## AI rules
 
 For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
@@ -28,7 +34,7 @@ For other AI tools like Cursor, use these individual `.mdc` context rule files. 
 - [Neon Auth](https://neon.com/docs/ai/ai-rules-neon-auth): AI rules for implementing authentication with Neon
 - [Neon Drizzle](https://neon.com/docs/ai/ai-rules-neon-drizzle): AI rules for using Drizzle ORM with Neon
 - [Neon Serverless Driver](https://neon.com/docs/ai/ai-rules-neon-serverless): AI rules for serverless database connections
-- [Neon TypeScript SDK](https://neon.com/docs/ai/ai-rules-neon-typescript-sdk): AI rules for using the Neon TypeScript SDK
+- [Neon API TypeScript SDK](https://neon.com/docs/ai/ai-rules-neon-typescript-sdk): AI rules for using the Neon API TypeScript SDK
 - [Neon Python SDK](https://neon.com/docs/ai/ai-rules-neon-python-sdk): AI rules for using the Neon Python SDK
 - [Neon API](https://neon.com/docs/ai/ai-rules-neon-api): AI rules for using the Neon API
 - [Neon Toolkit](https://neon.com/docs/ai/ai-rules-neon-toolkit): AI rules for using the Neon Toolkit

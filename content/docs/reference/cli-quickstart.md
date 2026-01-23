@@ -2,7 +2,7 @@
 title: Neon CLI Quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.492Z'
+updatedOn: '2026-01-07T12:02:47.908Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.
@@ -113,6 +113,10 @@ For more about authenticating, see [Neon CLI commands — auth](/docs/reference/
 
 Context files allow you to use CLI commands without specifying your project ID or organization ID with each command.
 
+<Admonition type="tip">
+If you run a CLI command without an organization context, the CLI will prompt you to select an organization and offer to save it as your default. If you choose to save, this creates a `.neon` context file automatically.
+</Admonition>
+
 To set the context for your Neon project:
 
 ```bash
@@ -192,7 +196,7 @@ Here are some common operations you can perform with the Neon CLI:
 neon projects list
 ```
 
-If you want to list projects in your organization, don't forget to set your organization context or specify `--org-id <your-org-id>`. Otherwise, you'll list the projects in your personal Neon account.
+If no organization context is set, the CLI will prompt you to select an organization. To avoid being prompted, set your organization context with `neon set-context --org-id <your-org-id>` or specify `--org-id` with each command.
 
 For more about the `projects` command, see [Neon CLI commands — projects](/docs/reference/cli-projects).
 

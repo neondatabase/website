@@ -24,6 +24,8 @@ describe('isAIAgentRequest', () => {
       'GitHub-Copilot',
       'ai-agent',
       'llm-agent',
+      'axios',
+      'got',
     ];
 
     aiAgentPatterns.forEach((pattern) => {
@@ -48,6 +50,16 @@ describe('isAIAgentRequest', () => {
   });
 
   describe('Accept header detection', () => {
+    it('should detect AI agent when Accept includes text/markdown', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect AI agent when Accept includes text/markdown with text/html', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
     it('should detect AI agent when Accept is text/plain without text/html', () => {
       const req = createMockRequest('Mozilla/5.0', 'text/plain');
       expect(isAIAgentRequest(req)).toBe(true);
@@ -63,7 +75,7 @@ describe('isAIAgentRequest', () => {
       expect(isAIAgentRequest(req)).toBe(true);
     });
 
-    it('should NOT detect AI agent when Accept includes text/html', () => {
+    it('should NOT detect AI agent when Accept includes text/html without markdown', () => {
       const req = createMockRequest('Mozilla/5.0', 'text/html,application/json');
       expect(isAIAgentRequest(req)).toBe(false);
     });
@@ -91,6 +103,23 @@ describe('isAIAgentRequest', () => {
     });
   });
 
+  describe('Real-world AI tools detection', () => {
+    it('should detect Claude Code with axios User-Agent and text/markdown Accept', () => {
+      const req = createMockRequest('axios/1.8.4', 'text/markdown, text/html, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect Cursor with got User-Agent', () => {
+      const req = createMockRequest('got (https://github.com/sindresorhus/got)', '*/*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+
+    it('should detect any tool requesting text/markdown even with regular User-Agent', () => {
+      const req = createMockRequest('Mozilla/5.0', 'text/markdown, */*');
+      expect(isAIAgentRequest(req)).toBe(true);
+    });
+  });
+
   describe('Edge cases', () => {
     it('should handle missing User-Agent header', () => {
       const req = createMockRequest('', 'text/html');
@@ -113,37 +142,37 @@ describe('getMarkdownPath', () => {
   describe('Valid content routes', () => {
     it('should convert /docs/introduction to markdown path', () => {
       const result = getMarkdownPath('/docs/introduction');
-      expect(result).toBe('content/docs/introduction.md');
+      expect(result).toBe('/md/docs/introduction.md');
     });
 
     it('should convert /postgresql/tutorial to markdown path', () => {
       const result = getMarkdownPath('/postgresql/tutorial');
-      expect(result).toBe('content/postgresql/tutorial.md');
+      expect(result).toBe('/md/postgresql/tutorial.md');
     });
 
     it('should convert /guides/neon-sst to markdown path', () => {
       const result = getMarkdownPath('/guides/neon-sst');
-      expect(result).toBe('content/guides/neon-sst.md');
+      expect(result).toBe('/md/guides/neon-sst.md');
     });
 
     it('should convert /branching/introduction to markdown path', () => {
       const result = getMarkdownPath('/branching/introduction');
-      expect(result).toBe('content/branching/introduction.md');
+      expect(result).toBe('/md/branching/introduction.md');
     });
 
     it('should convert /programs/agents to markdown path', () => {
       const result = getMarkdownPath('/programs/agents');
-      expect(result).toBe('content/pages/programs/agents.md');
+      expect(result).toBe('/md/pages/programs/agents.md');
     });
 
     it('should convert /use-cases/ai-agents to markdown path', () => {
       const result = getMarkdownPath('/use-cases/ai-agents');
-      expect(result).toBe('content/pages/use-cases/ai-agents.md');
+      expect(result).toBe('/md/pages/use-cases/ai-agents.md');
     });
 
     it('should handle nested docs paths', () => {
       const result = getMarkdownPath('/docs/guides/logical-replication');
-      expect(result).toBe('content/docs/guides/logical-replication.md');
+      expect(result).toBe('/md/docs/guides/logical-replication.md');
     });
   });
 
@@ -206,12 +235,12 @@ describe('getMarkdownPath', () => {
   describe('Edge cases', () => {
     it('should handle paths with trailing slashes', () => {
       const result = getMarkdownPath('/docs/introduction/');
-      expect(result).toBe('content/docs/introduction/.md');
+      expect(result).toBe('/md/docs/introduction.md');
     });
 
     it('should handle paths with special characters', () => {
       const result = getMarkdownPath('/docs/api-reference');
-      expect(result).toBe('content/docs/api-reference.md');
+      expect(result).toBe('/md/docs/api-reference.md');
     });
   });
 });
