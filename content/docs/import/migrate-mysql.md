@@ -133,6 +133,50 @@ Docker command:
 docker run -v C:\path\to\config.load:/config.load d183dc100d3af5e703bd867b3b7826c117fa16b7ee2cd360af591dc895b121dc pgloader --no-ssl-cert-verification /config.load
 ```
 
+### Using a custom Docker file
+
+If the solution described above does not work, which was the case on an AWS EC2 instance running Ubuntu 22, you can try creating a custom Docker file with the local cert files installed.
+
+1. Create a new directory on your machine where you will store your Dockerfile and any additional files needed for the Docker image. You can do this via the terminal with `mkdir <directory-name>` and navigate into it with `cd <directory-name>`.
+
+2. Inside your new directory, create a file named `Dockerfile`. This can be done using a text editor or via the terminal with a command like `touch Dockerfile`.
+
+3. Open the Dockerfile in a text editor and add the following content:
+
+   ```plaintext
+   # Use the official pgloader image as a parent image
+   FROM ghcr.io/dimitri/pgloader:latest
+
+   # Run package update and install ca-certificates
+   RUN apt-get update && \
+    apt-get install -y ca-certificates && \
+    update-ca-certificates
+   ```
+
+   This Dockerfile starts from the official `pgloader` image, updates the package lists, installs `ca-certificates`, and updates the certificates on the system.
+
+4. With the Dockerfile saved, return to your terminal. Ensure you're in the directory containing the Dockerfile. Run the following command to build your Docker image, replacing `custom-pgloader-image` with the name you wish to give your image:
+
+   ```sh
+   docker build -t custom-pgloader-image .
+   ```
+
+5. Ensure the configuration file (`config.load`) is prepared and located in a known directory on your host machine, e.g., `/home/ubuntu/pgload`. Example configuration in `config.load`:
+
+   ```plaintext
+   load database
+     from mysql://user:password@host/source_db?sslmode=require
+     into postgres://alex:endpoint=ep-cool-darkness-123456:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require;
+   ```
+
+   You do not need to specify the `--no-ssl-cert-verification` option described in the previous section since your custom Docker image now includes the certs.
+
+6. Execute the following command to run your custom Docker container:
+
+   ```sh
+   docker run --rm -it -v /home/ubuntu/pgload:/mnt custom-pgloader-image pgloader /mnt/config.load
+   ```
+
 ## References
 
 - [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html)
