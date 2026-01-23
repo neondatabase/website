@@ -1,15 +1,15 @@
-# AI Rules: Neon TypeScript SDK
+# AI Rules: Neon API TypeScript SDK
 
 > The document outlines the AI Rules for the Neon TypeScript SDK, detailing how to implement and manage AI-driven functionalities within Neon's database environment using TypeScript.
 
 ## Source
 
-- [AI Rules: Neon TypeScript SDK HTML](https://neon.com/docs/ai/ai-rules-neon-typescript-sdk): The original HTML version of this documentation
+- [AI Rules: Neon API TypeScript SDK HTML](https://neon.com/docs/ai/ai-rules-neon-typescript-sdk): The original HTML version of this documentation
 
 **Note** AI Rules are in Beta: AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
 
 Related docs:
-- [Get started with Neon Typescript SDK](https://neon.com/docs/reference/typescript-sdk)
+- [Get started with Neon API TypeScript SDK](https://neon.com/docs/reference/typescript-sdk)
 - [Neon API Reference](https://neon.com/docs/reference/api-reference)
 
 Repository:

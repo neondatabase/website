@@ -1,6 +1,6 @@
 # Neon Postgres
 
-> Neon is a serverless Postgres platform designed to help you build reliable and scalable applications faster. We separate compute and storage to offer modern developer features such as **autoscaling**, **branching**, **instant restore**, and more. Get started today with our [Free plan](https://console.neon.tech)
+> Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
 ## Docs
 
@@ -155,6 +155,7 @@
 - [Connect a Rust application to Neon Postgres](https://neon.com/llms/guides-rust.txt): Learn how to run SQL queries in Neon from Rust using the postgres or tokio-postgres crates
 - [Connect a SolidStart application to Neon](https://neon.com/llms/guides-solid-start.txt): Set up a Neon project in seconds and connect from a SolidStart application
 - [Connect a Sveltekit application to Neon](https://neon.com/llms/guides-sveltekit.txt): Set up a Neon project in seconds and connect from a Sveltekit application
+- [Connect a TanStack Start application to Neon](https://neon.com/llms/guides-tanstack-start.txt): Set up a Neon project in seconds and connect from a TanStack Start application
 - [Connect a Vue.js application to Neon](https://neon.com/llms/guides-vue.txt): Set up a Neon project in seconds and connect from a Vue.js application
 - [Connect an Elixir application to Neon Postgres](https://neon.com/llms/guides-elixir.txt): Learn how to run SQL queries in Neon from Elixir using Postgrex
 - [Connect an Encore application to Neon](https://neon.com/llms/guides-encore.txt): Set up a Neon project in seconds and connect from an Encore.ts application
@@ -275,7 +276,6 @@
 
 ## Use Cases
 
-- [Neon for AI Agent Platforms](https://neon.com/llms/use-cases-ai-agents.txt): Build full-stack agents on a serverless Postgres backend
 - [Neon use cases](https://neon.com/llms/use-cases-use-cases-overview.txt): Explore popular Neon use cases
 
 ## Serverless
@@ -292,9 +292,9 @@
 - [AI Concepts](https://neon.com/llms/ai-ai-concepts.txt): Learn how embeddings are used to build AI applications
 - [AI Rules Neon Serverless Driver](https://neon.com/llms/ai-ai-rules-neon-serverless.txt): Context rules for AI tools to help implement the Neon Serverless driver
 - [AI Rules: Neon API](https://neon.com/llms/ai-ai-rules-neon-api.txt): Context rules for AI tools to use the Neon API to programmatically manage Neon projects, branches, databases, and other resources.
+- [AI Rules: Neon API TypeScript SDK](https://neon.com/llms/ai-ai-rules-neon-typescript-sdk.txt): Context rules for AI tools to use the Neon API TypeScript SDK
 - [AI Rules: Neon Auth](https://neon.com/llms/ai-ai-rules-neon-auth.txt): Context rules for AI tools to help implement authentication with Neon Auth
 - [AI Rules: Neon Python SDK](https://neon.com/llms/ai-ai-rules-neon-python-sdk.txt): Context rules for AI tools to use the Neon Python SDK
-- [AI Rules: Neon TypeScript SDK](https://neon.com/llms/ai-ai-rules-neon-typescript-sdk.txt): Context rules for AI tools to use the Neon TypeScript SDK
 - [AI Rules: Neon with Drizzle](https://neon.com/llms/ai-ai-rules-neon-drizzle.txt): Context rules for AI tools to help implement Drizzle ORM with Neon databases
 - [AI Rules: The @neondatabase/toolkit](https://neon.com/llms/ai-ai-rules-neon-toolkit.txt): Context rules for AI tools to use the @neondatabase/toolkit for ephemeral Postgres databases
 - [AI Starter Kit](https://neon.com/llms/ai-ai-intro.txt): Resources for building AI applications with Neon Postgres
@@ -448,10 +448,11 @@
 
 - [Glossary](https://neon.com/llms/reference-glossary.txt): Glossary
 - [Instagres](https://neon.com/llms/reference-instagres.txt): Launch an instant Neon Postgres database with zero configuration
-- [JavaScript SDK (Auth & Data API)](https://neon.com/llms/reference-javascript-sdk.txt): Reference documentation for building applications with Neon Auth and Data API
 - [Manage Neon with Terraform](https://neon.com/llms/reference-terraform.txt): Use Terraform to provision and manage your Neon projects, branches, endpoints, roles, databases, and other resources as code.
 - [Metrics and logs reference](https://neon.com/llms/reference-metrics-logs.txt): Complete reference for all metrics and log fields exported by Neon
 - [Neon API](https://neon.com/llms/reference-api-reference.txt): Api Reference
+- [Neon API TypeScript SDK](https://neon.com/llms/reference-typescript-sdk.txt): Programmatically manage Neon projects, branches, databases, and other platform resources
+- [Neon Auth & Data API TypeScript SDKs](https://neon.com/llms/reference-javascript-sdk.txt): Reference documentation for building applications with Neon Auth and Data API
 - [Neon CLI](https://neon.com/llms/reference-neon-cli.txt): Use the Neon CLI to manage Neon directly from the terminal
 - [Neon CLI Quickstart](https://neon.com/llms/reference-cli-quickstart.txt): Get set up with the Neon CLI in just a few steps
 - [Neon CLI commands — auth](https://neon.com/llms/reference-cli-auth.txt): Use the Neon CLI to manage Neon directly from the terminal
@@ -474,7 +475,6 @@
 - [Postgres compatibility](https://neon.com/llms/reference-compatibility.txt): Learn about Neon as a managed Postgres service
 - [Python SDK (Neon API)](https://neon.com/llms/reference-python-sdk.txt): Programmatically manage Neon projects, branches, databases, and other platform resources
 - [The @neondatabase/toolkit](https://neon.com/llms/reference-neondatabase-toolkit.txt): A terse client for AI agents that can spin up Postgres in seconds and run SQL queries
-- [TypeScript SDK (Neon API)](https://neon.com/llms/reference-typescript-sdk.txt): Programmatically manage Neon projects, branches, databases, and other platform resources
 
 ## Security
 
