@@ -46,6 +46,8 @@ Copy a setup prompt, or browse our [framework](/docs/get-started/frameworks), [l
 
 <a title="React Router" icon="react" promptSrc="/prompts/react-router-prompt.md"></a>
 
+<a title="TanStack Start" icon="tanstack" promptSrc="/prompts/tanstack-start-prompt.md"></a>
+
 <a title="Express" icon="express" promptSrc="/prompts/express-prompt.md"></a>
 
 <a title="NestJS" icon="nest-js" promptSrc="/prompts/nestjs-prompt.md"></a>
