@@ -111,7 +111,7 @@ const defaultConfig = {
   async redirects() {
     const docPosts = await getAllPosts();
     const changelogPosts = await getAllChangelogs();
-    const docsRedirects = docPosts.reduce((acc, post) => {
+    const docsRedirects = docPosts.filter(Boolean).reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
         return acc;
@@ -125,7 +125,7 @@ const defaultConfig = {
 
       return [...acc, ...postRedirectsArray];
     }, []);
-    const changelogRedirects = changelogPosts.reduce((acc, post) => {
+    const changelogRedirects = changelogPosts.filter(Boolean).reduce((acc, post) => {
       const { slug, redirectFrom: postRedirects } = post;
       if (!postRedirects || !postRedirects.length) {
         return acc;

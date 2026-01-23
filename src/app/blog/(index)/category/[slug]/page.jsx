@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
-import AlgoliaSearch from 'components/shared/algolia-search';
+import BlogSearch from 'components/shared/blog-search';
 import ChangelogForm from 'components/shared/changelog-form';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
@@ -25,11 +25,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
         category={category.name}
         basePath={BLOG_BASE_PATH}
       />
-      <AlgoliaSearch
-        indexName={process.env.NEXT_PUBLIC_ALGOLIA_BLOG_INDEX_NAME}
-        posts={posts}
-        searchInputClassName="lg:-top-[68px] md:top-0"
-      >
+      <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">
         <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
           {posts.slice(0, 10).map((post, index) => (
             <BlogGridItem
@@ -49,7 +45,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
           )}
           <ChangelogForm className="-order-1 col-span-2 md:col-span-1" />
         </div>
-      </AlgoliaSearch>
+      </BlogSearch>
     </>
   );
 };
