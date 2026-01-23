@@ -17,7 +17,7 @@ const PROGRAMS = [
     type: 'Startup Program',
     title: 'Early-stage Startups',
     description: 'Launch faster with up to $100k in credits.',
-    url: '/programs/startup',
+    url: '/startups',
   },
   {
     type: 'Open Source Program',
