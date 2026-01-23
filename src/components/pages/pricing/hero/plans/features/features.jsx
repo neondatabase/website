@@ -5,27 +5,19 @@ import { Fragment } from 'react';
 import InfoIcon from 'components/shared/info-icon';
 import Link from 'components/shared/link';
 
-const icons = {
-  projects: 'pricing-projects-icon',
-  storage: 'pricing-storage-icon',
-  clock: 'pricing-clock-icon',
-  autoscale: 'pricing-autoscale-icon',
-};
-
-const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLink, tag }) => (
+const Feature = ({ title, info, type, highlighted, index, subtitle, moreLink, tag }) => (
   <li className="flex gap-x-2">
     <span
       className={clsx(
-        icon ? icons[icon] : 'pricing-check-icon',
-        'mt-px size-4 flex-shrink-0 translate-y-px',
-        highlighted ? 'bg-green-45' : 'bg-gray-new-60'
+        'mt-[3px] size-3.5 flex-shrink-0 border-[3px] border-black-pure',
+        highlighted ? 'bg-green-52' : 'bg-gray-new-90'
       )}
       aria-hidden
     />
     <p
       className={clsx(
-        'text-[15px] leading-normal tracking-extra-tight',
-        highlighted ? 'text-gray-new-98' : 'text-gray-new-80'
+        'text-[15px] leading-snug tracking-extra-tight',
+        highlighted ? 'text-white' : 'text-gray-new-80'
       )}
     >
       <span className="with-link-primary">
@@ -46,7 +38,7 @@ const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLi
       </span>
       {info && (
         <InfoIcon
-          className="relative top-0.5 ml-1 inline-block"
+          className="relative top-0.5 ml-1.5 inline-block"
           tooltip={info}
           tooltipId={`${type}_tooltip_${index}`}
           link={moreLink}
@@ -54,7 +46,7 @@ const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLi
         />
       )}
       {tag && (
-        <span className="ml-1.5 rounded-full bg-green-45/20 px-[5px] py-0.5 text-[11px] font-medium uppercase leading-none tracking-extra-tight text-green-45">
+        <span className="ml-1.5 inline-flex h-5 items-center border border-green-52/20 bg-green-52/[0.08] px-2 font-mono text-[13px] font-medium uppercase leading-none text-green-52">
           {tag}
         </span>
       )}
@@ -63,7 +55,6 @@ const Feature = ({ icon, title, info, type, highlighted, index, subtitle, moreLi
 );
 
 Feature.propTypes = {
-  icon: PropTypes.oneOf(Object.keys(icons)),
   title: PropTypes.string.isRequired,
   info: PropTypes.string,
   subtitle: PropTypes.string,
@@ -78,16 +69,14 @@ Feature.propTypes = {
 };
 
 const Features = ({ title, features, type, highlighted }) => (
-  <div
-    className={clsx(
-      'mt-5 space-y-4 border-t border-dashed border-gray-new-20 pt-5',
-      'text-[15px] leading-none tracking-extra-tight',
-      highlighted ? 'text-white' : 'text-gray-new-80'
+  <div className="flex flex-col gap-y-3 border-t border-dashed border-gray-new-20 p-5">
+    {title && (
+      <p className="text-[15px] font-normal leading-snug tracking-extra-tight text-gray-new-60">
+        {title}
+      </p>
     )}
-  >
-    {title && <p className="text-[15px] font-medium leading-none tracking-extra-tight">{title}</p>}
 
-    <ul className="space-y-3">
+    <ul className="flex flex-col gap-y-3">
       {features.map((feature, index) => (
         <Feature {...feature} type={type} highlighted={highlighted} index={index} key={index} />
       ))}
@@ -96,8 +85,8 @@ const Features = ({ title, features, type, highlighted }) => (
 );
 
 Features.propTypes = {
-  title: PropTypes.string,
-  features: PropTypes.arrayOf(Feature.propTypes).isRequired,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  features: PropTypes.arrayOf(PropTypes.shape(Feature.propTypes)).isRequired,
   type: PropTypes.string.isRequired,
   highlighted: PropTypes.bool,
 };

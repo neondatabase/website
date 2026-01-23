@@ -11,7 +11,7 @@ function getTooltipHtml(info, link) {
 
   const linkHTML = `
     <a
-      class="mt-1 inline-block w-fit border-b border-[rgba(228,229,231,0.5)] text-sm font-light leading-snug tracking-extra-tight transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
+      class="mt-1 block w-fit border-b text-[15px] leading-snug tracking-tighter text-gray-new-80 border-dashed border-[rgba(255,255,255,0.4)] transition-colors duration-200 hover:border-primary-1 hover:text-primary-1"
       href="${link.href}"
     >
       ${link.text}

@@ -78,7 +78,7 @@ const Sidebar = ({ isClient, isDocs, className }) => (
       <Button
         className="h-9 px-[18px]"
         to={LINKS.login}
-        theme="gray-40-outline"
+        theme="outlined"
         size="xxs"
         tagName="Header"
       >

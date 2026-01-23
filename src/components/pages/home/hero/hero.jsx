@@ -27,12 +27,7 @@ const Hero = () => (
         <Button theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
-        <Button
-          className="!font-normal"
-          theme="gray-40-outline"
-          size="new"
-          to={LINKS.docsBranching}
-        >
+        <Button theme="outlined" size="new" to={LINKS.docsBranching}>
           Read the docs
         </Button>
       </div>
