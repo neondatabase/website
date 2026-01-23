@@ -25,7 +25,7 @@ If you do not have one already, create a Neon project. Save your connection deta
 2. Click **New Project**.
 3. Specify your project settings and click **Create Project**.
 
-## 2 Create a Start project and add dependencies
+## Create a Start project and add dependencies
 
 1. Create a Start project if you do not have one. For instructions see the [quick start guides](https://tanstack.com/start/latest), in the [TanStack](https://tanstack.com/) documentation.
 

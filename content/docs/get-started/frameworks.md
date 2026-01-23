@@ -61,6 +61,8 @@ updatedOn: '2026-01-13T15:38:46.683Z'
 
 <a href="/docs/guides/sveltekit" title="Sveltekit" description="Connect a Sveltekit application to Neon" icon="svelte"></a>
 
+<a href="/docs/guides/tanstack-start" title="TanStack Start" description="Connect a TanStack Start application to Neon" icon="tanstack"></a>
+
 <a href="/docs/guides/vue" title="Vue" description="Connect a Vue.js application to Neon" icon="vue"></a>
 
 </TechCards>
