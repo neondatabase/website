@@ -8,14 +8,20 @@ enableTableOfContents: true
 updatedOn: '2026-01-07T12:02:47.902Z'
 ---
 
+<Admonition type="note">
+Consumption metrics apply to Scale and Enterprise plan accounts, and to [Neon's legacy Scale, Business, and Enterprise accounts](/docs/introduction/legacy-plans).
+
+**Important:** The consumption APIs do not retrieve all billable metrics for Neon's current [usage-based Scale plan](https://neon.com/docs/introduction/about-billing). See [Usage-based pricing limitations](#usage-based-pricing-limitations) for details.
+</Admonition>
+
 Using the Neon API, you can query a range of account-level and project-level metrics to help you track your resource consumption. Issuing calls to these APIs does not wake a project's compute endpoints.
 
 Here are the different ways to retrieve these metrics:
 
-| Endpoint                                                                                                         | Description                                                                                                           | Plan availability                                                  |
-| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                | Scale, Enterprise and legacy Scale, Business, and Enterprise plans |
-| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) | Scale and Enterprise plans                                         |
+| Endpoint                                                                                                         | Description                                                                                                           | Plan availability                                              |
+| ---------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [Get account consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)          | Aggregates all metrics from all projects in an account into a single cumulative number for each metric                | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
+| [Get consumption metrics for each project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (hourly, daily, or monthly) | Scale, Enterprise and legacy Scale, Business, Enterprise plans |
 
 <Admonition type="info">
 **Date format:** Both endpoints require timestamps in RFC 3339 format, which looks like `2024-06-30T15:30:00Z`. This format includes the date, time, and timezone (the `Z` indicates UTC). You can use this [timestamp converter](https://it-tools.tech/date-converter) to generate RFC 3339 formatted timestamps.
@@ -25,11 +31,7 @@ Here are the different ways to retrieve these metrics:
 
 ## Get account-level aggregated metrics
 
-Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount), you can find total usage across all projects in your organization. This endpoint provides a comprehensive view of consumption metrics accumulated for the billing period.
-
-<Admonition type="note">
-These metrics are not fully aligned with Neon's current [usage-based pricing plans](/docs/introduction/plans). For pricing metrics that fully align with Neon's usage-based pricing plans, use the [Retrieve project consumption metrics](#get-project-level-metrics-usage-based-pricing-plans) endpoint.
-</Admonition>
+Using the [Get account consumption metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount), you can find total usage across all projects in your organization. This provides a comprehensive view of consumption metrics accumulated for the billing period.
 
 API endpoint:
 
@@ -60,7 +62,7 @@ This endpoint accepts the following query parameters:
 
 - **`metrics`** (array of strings) — Specify which metrics to include in the response. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 
-  Available metrics (not fully aligned with usage-based pricing):
+  Available metrics:
   - `active_time_seconds`
   - `compute_time_seconds`
   - `written_data_bytes`
@@ -126,9 +128,9 @@ For attribute definitions, see the [Retrieve account consumption metrics](https:
 
 </details>
 
-## Get project-level metrics (usage-based pricing plans)
+## Get project-level metrics
 
-Using the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, you can get detailed metrics for each project in your account, broken down by the specified granularity level. This endpoint returns metrics aligned with Neon's current [usage-based pricing plans](/docs/introduction/plans).
+Using the [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint, you can get detailed metrics for each project in your account, broken down by the specified granularity level.
 
 API endpoint:
 
@@ -167,17 +169,9 @@ This endpoint accepts the following query parameters:
 
 - **`org_id`** (string, required) — Specify the organization for which project consumption metrics should be returned.
 
-- **`metrics`** (array of strings) — Specify which metrics to include in the response.
+- **`metrics`** (array of strings) — Specify which metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 
-  Available metrics for usage-based pricing plans:
-  - `compute_unit_seconds` — Compute usage measured in Compute Unit-seconds
-  - `root_branch_bytes_month` — Storage for root (production) branches
-  - `child_branch_bytes_month` — Storage for child (development) branches
-  - `instant_restore_bytes_month` — Point-in-time restore storage (WAL data)
-  - `public_network_transfer_bytes` — Data transfer over public internet
-  - `private_network_transfer_bytes` — Data transfer over AWS PrivateLink
-
-  Legacy metrics (for older billing plans):
+  Available metrics:
   - `active_time_seconds`
   - `compute_time_seconds`
   - `written_data_bytes`
@@ -247,20 +241,7 @@ For attribute definitions, see the [Retrieve project consumption metrics](https:
 
 ## Metric definitions
 
-### Usage-based pricing metrics
-
-These metrics align with Neon's current [usage-based pricing plans](/docs/introduction/plans):
-
-- **compute_unit_seconds** — Compute Unit-seconds. Measures compute usage in Compute Units over time. One Compute Unit (CU) equals 1 vCPU and 4 GB of RAM.
-- **root_branch_bytes_month** — Byte-months. Storage consumed by root (production) branches, measured monthly.
-- **child_branch_bytes_month** — Byte-months. Storage consumed by child (development) branches, measured monthly.
-- **instant_restore_bytes_month** — Byte-months. Point-in-time restore storage (Write-Ahead Log data) that enables instant recovery, measured monthly.
-- **public_network_transfer_bytes** — Bytes. Data transferred from Neon to the internet over public networks.
-- **private_network_transfer_bytes** — Bytes. Data transferred over AWS PrivateLink for private connectivity.
-
-### Legacy metrics
-
-These metrics are used for Neon's [legacy billing plans](/docs/introduction/legacy-plans):
+### Default metrics
 
 - **active_time_seconds** — Seconds. The amount of time the compute endpoints have been active.
 - **compute_time_seconds** — Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example:
@@ -268,6 +249,9 @@ These metrics are used for Neon's [legacy billing plans](/docs/introduction/lega
   - A compute that uses 2 CPUs simultaneously for 1 second equals `compute_time=2`
 - **written_data_bytes** — Bytes. The total amount of data written to all of a project's branches.
 - **synthetic_storage_size_bytes** — Bytes. The space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+
+### Additional metrics
+
 - **data_storage_bytes_hour** — Bytes-Hour. The amount of storage consumed hourly.
 - **logical_size_bytes** — Bytes. The amount of logical size consumed.
 - **logical_size_bytes_hour** — Bytes-Hour. The amount of logical size consumed hourly.
@@ -309,9 +293,13 @@ Neon's consumption data is updated approximately every 15 minutes, so a minimum 
 
 ### What is the rate limit for consumption APIs?
 
-Consumption API endpoints support high-frequency polling designed to handle typical billing and monitoring use cases. The rate limiting uses a token bucket approach, which refills at a steady rate while allowing bursts of requests above the baseline. This means you can poll consistently at regular intervals and still handle temporary spikes in activity.
+Both consumption API endpoints share the same rate limiter and are limited to approximately 50 requests per minute per account.
 
-Updated usage data is available approximately every 15 minutes, but integrators and customers are free to choose their own reporting and billing intervals based on their requirements.
+Neon uses a **token bucket** rate-limiting approach, which refills at a steady rate while allowing short bursts within the bucket size. This behaves more like a sliding window rather than a fixed reset every minute. For more details, see [Token bucket](https://en.wikipedia.org/wiki/Token_bucket).
+
+### How often should consumption data be polled for reporting or invoicing?
+
+Usage data can be pulled every 15 minutes, but integrators and customers are free to choose their own reporting and billing intervals based on their requirements. Neon does not dictate how integrators bill their users.
 
 ### Does consumption polling wake up computes?
 
@@ -319,26 +307,48 @@ No. Neon's consumption APIs do not wake computes that have been suspended due to
 
 ### Do the consumption APIs provide all the metrics for usage-based Scale plan billing?
 
-Yes. The [Retrieve project consumption metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) endpoint now returns metrics that align with Neon's current [usage-based pricing plans](/docs/introduction/plans), including:
+No. These consumption APIs were designed for Neon's legacy billing model and do not fully align with the current usage-based Scale plan pricing structure. The APIs return aggregate storage metrics (like `synthetic_storage_size_bytes`) rather than separate metrics for root branch storage, child branch storage, and instant restore storage. They also don't provide metrics for extra branches or network transfer (public/private).
 
-- Compute usage (`compute_unit_seconds`)
-- Root branch storage (`root_branch_bytes_month`)
-- Child branch storage (`child_branch_bytes_month`)
-- Instant restore storage (`instant_restore_bytes_month`)
-- Public network transfer (`public_network_transfer_bytes`)
-- Private network transfer (`private_network_transfer_bytes`)
+For detailed information about these limitations and what the APIs are best used for, see [Usage-based pricing limitations](#usage-based-pricing-limitations).
 
-These metrics match the billing line items on usage-based plan invoices. For metric definitions, see [Usage-based pricing metrics](#usage-based-pricing-metrics).
+## Usage-based pricing limitations
+
+These consumption APIs were designed for Neon's legacy billing plans and do not fully align with the current [usage-based plan](/docs/introduction/plans) structure introduced in August 2025.
+
+### Storage metrics differences
+
+**Legacy billing model:**
+
+Neon's legacy plans use `synthetic_storage_size_bytes`, which combines logical data size and Write-Ahead Log (WAL) data for all branches into a single metric
+
+**Current usage-based pricing:**
+
+The current usage based pricing plans use these billable storage metrics:
+
+- **Storage (root branches)** — Billed based on logical data size only
+- **Storage (child branches)** — Billed based on the delta (changes made) up to the logical data size limit
+- **Instant restore storage** — Change history (WAL data) billed separately
+
+The consumption APIs return the legacy storage metric that doesn't map directly to these separate billing line items on current usage-based plan invoices.
+
+### Missing billable metrics
+
+The consumption APIs do not provide the following metrics that appear on usage-based plan invoices:
+
+- **Extra branches** — Branches beyond your plan's included allowance
+- **Instant restore storage** — Separately billed change history for point-in-time restore
+- **Public network transfer** — Data egress over the public internet
+- **Private network transfer** — Data transfer over AWS PrivateLink
 
 <Admonition type="note">
-The endpoint also continues to support legacy metrics for accounts on [older billing plans](/docs/introduction/legacy-plans).
+We plan to enhance the consumption APIs in future releases to provide metrics that align with the current usage-based billing plan structure.
 </Admonition>
 
 ## Error responses
 
 Common error responses you may encounter:
 
-- **403 Forbidden** — These endpoints are only available for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts.
+- **403 Forbidden** — This endpoint is only available for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts.
 - **404 Not Found** — Account is not a member of the organization specified by `org_id`.
 - **406 Not Acceptable** — The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different granularity.
 - **429 Too Many Requests** — You've exceeded the rate limit. Wait before retrying.
