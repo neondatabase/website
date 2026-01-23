@@ -173,6 +173,38 @@ PR_DATA_FILE="$OUTPUT_DIR/raw_data/pr_data_storage_${TODAY}.txt"
 - CI/CD
 - Infrastructure work
 
+**🚨 Lakebase Detection (Content-Based):**
+
+The hadron repository is shared between Neon and Lakebase (Databricks variant). **You must read PR descriptions carefully to identify Lakebase-only changes.**
+
+**EXCLUDE if PR description contains:**
+
+1. **`wal2delta`** / **`Forward ETL`** / **`Delta table`** keywords
+   - Databricks Delta Lake technology
+   - Neon doesn't use Delta tables
+   - Examples: "wal2delta background worker", "Forward ETL automation"
+
+2. **Parity language:** "brings X into parity with Neon" or "aligning X with Neon"
+   - If X is being brought into parity with Neon, then Neon already has it
+   - The change only affects X (Lakebase), not Neon
+   - Example: "Brings Lakebase v1 into parity with Neon"
+
+3. **`lakebase_*` database objects**
+   - References to `lakebase_attributes` table
+   - Any `lakebase_*` prefixed schema objects
+   - These are variant-specific infrastructure
+
+**When analyzing a PR:**
+- Read the full description, not just the title
+- Look for these keywords in the body text and file changes
+- If you find any of these patterns → Flag as Lakebase-only and EXCLUDE
+
+**Examples from Recent Triage:**
+- ❌ PR about "wal2delta delta writer" → Lakebase-only (Forward ETL)
+- ❌ PR "brings Lakebase v1 into parity with Neon" → Lakebase-only (parity language)
+- ❌ PR mentions "lakebase_attributes table" → Lakebase-only (variant schema)
+- ✅ PR about "Neon extension v1.14" → Neon (extension update)
+
 **Default Stance:** When uncertain, EXCLUDE. Storage has a high bar.
 
 ### Analysis Process

@@ -489,7 +489,9 @@ Before writing the changelog file, verify:
 - [ ] I will copy agent drafts verbatim (edit only for typos/polish)
 - [ ] I will NOT rewrite agent drafts from scratch
 
-9. **Changelog structure:**
+9. **Changelog structure with PR validation links:**
+
+**CRITICAL:** Include PR links as HTML comments below each item for writer validation.
 
 ```markdown
 ---
@@ -501,6 +503,7 @@ title: TBD
 ## [Agent's suggested title - use verbatim or minor edits only]
 
 [Agent's draft description - copy directly, edit only for polish]
+<!-- PR #XXXX: https://github.com/org/repo/pull/XXXX -->
 
 [Optional: Screenshot reference if mentioned in triage report]
 [Optional: Code example if in agent draft]
@@ -510,21 +513,39 @@ For more information, see [link from agent draft or relevant docs].
 ## [Next H2 from agents]
 
 [Agent's draft - preserve specifics and examples from PRs]
+<!-- PR #YYYY: https://github.com/org/repo/pull/YYYY -->
 
 <details>
 <summary>**Fixes & improvements**</summary>
 
 [Group fixes from all repos by area]
-- **[Repo/Area]:** [Use agent's reasoning as base for bullet]
-- [Include all Fixes-recommended items]
+- **[Repo/Area]:**
+  - [Fix description from agent reasoning]
+    <!-- PR #ZZZZ: https://github.com/org/repo/pull/ZZZZ -->
+  - [Next fix description]
+    <!-- PR #AAAA: https://github.com/org/repo/pull/AAAA -->
 
 </details>
 ```
+
+**PR Link Format:**
+- Place HTML comment on line BELOW the content (not above)
+- Format: `<!-- PR #XXXX: https://github.com/org/repo/pull/XXXX -->`
+- For multiple PRs: `<!-- PR #XXXX: https://..., PR #YYYY: https://... -->`
+- Writers use these as validation checklist: read → click to verify → delete comment when validated
+- Remaining comments = items not yet validated
+
+**Repositories:**
+- Console: `https://github.com/databricks-eng/neon-cloud/pull/XXXX`
+- MCP Server: `https://github.com/neondatabase/mcp-server-neon/pull/XXXX`
+- CLI: `https://github.com/neondatabase/neonctl/commit/XXXX` (commits, not PRs)
+- Storage/Compute: `https://github.com/databricks-eng/hadron/pull/XXXX`
 
 **Example of using agent drafts correctly:**
 - Agent says: "Suggested Title: Data masking improvements" → Use that title
 - Agent provides draft with specific UI pages → Keep those specifics
 - Agent recommends H2 → Include as H2, don't demote to Fixes
+- Always include PR link from agent analysis
 
 ## Step 9: Commit Changelog (Optional)
 
@@ -593,7 +614,11 @@ Output a final summary for the user:
 
 📋 Next Steps:
 1. Review triage report for accuracy
-2. Review and edit changelog draft
+2. Review and edit changelog draft:
+   - Read each item's content
+   - Click PR links (HTML comments) to verify if unsure
+   - Delete PR comment after validating each item
+   - Remaining PR comments = items not yet validated
 3. If you created a branch (Step 9), switch to it and push
 4. Update title after reviewing content
 5. Add screenshots to /public/docs/changelog/

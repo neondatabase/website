@@ -166,6 +166,17 @@ The pr_data file may be large (200KB+). Read it in chunks if needed, but:
   - Admin-only pages, read-only admin permissions, admin operations
   - Any PR mentioning "admin" in context of internal management tools
   - Users, organizations, tenants, nodes, pageservers, safekeepers management UIs
+  - Admin panel features (promo program editing, internal user management)
+- **Component Library Improvements** (internal design system work - NOT customer-facing)
+  - Adding props/options to components (e.g., "Support icons in Select options")
+  - Component refactoring (e.g., "Rewrite PrincipalSelect for server-side filtering")
+  - Design system unification (e.g., "Unify select sizes", "Actualize Select sizes")
+  - Component library enhancements that don't directly impact user experience
+- **Lakebase-Specific Features** (Databricks variant only - NOT for Neon public users)
+  - "provisioned instances" (Lakebase compute model)
+  - "LBM Proxy API" or "LBM" (Lakebase Manager)
+  - "stable computes" (Lakebase HA terminology)
+  - Features that explicitly mention Lakebase/Databricks in their description
 - Neon Auth backend (internal auth service)
 - Infrastructure/Operations (CI/CD, ops scripts, metrics, deployment)
 - Backend configuration (secrets rotation, database migrations)
@@ -229,7 +240,28 @@ If you find 3-5 related PRs in the same feature area:
 
 **H2 vs Fixes Decision:**
 - **H2 worthy:** New features, substantial enhancements, multiple related PRs forming coherent story, breaking changes
-- **Fixes worthy:** Single bug fixes, small UI tweaks, minor improvements
+- **Fixes worthy:** Single bug fixes, small UI tweaks, minor improvements where users will notice the change
+
+**Higher Bar for Fixes Section:**
+Only include items in Fixes where:
+- Users will directly notice the change or benefit
+- There's a clear bug fix or tangible improvement
+- It's not pure refactoring or infrastructure work
+
+**Exclude from Fixes:**
+- Vague configuration changes (e.g., "Added GA limits configuration" without explanation)
+- Backend infrastructure changes users won't see
+- Internal metrics or logging improvements
+- Code refactoring that doesn't change user experience
+
+**Writing Fixes Entries:**
+Write complete, narrative descriptions instead of curt bullets:
+
+❌ **Too curt:** "Batch branch count endpoint"
+
+✅ **Better:** "Improved projects list page performance by switching to batch branch count requests, reducing load times when viewing multiple projects."
+
+**Formula for Fixes:** [What changed] + [Why it matters/benefit to user]
 
 ### Analysis Process
 

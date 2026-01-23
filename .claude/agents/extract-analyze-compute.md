@@ -186,6 +186,36 @@ PR_DATA_FILE="$OUTPUT_DIR/raw_data/pr_data_compute_${TODAY}.txt"
 - Refactoring
 - Configuration tweaks
 
+**🚨 Lakebase Detection (Content-Based):**
+
+The hadron repository is shared between Neon and Lakebase (Databricks variant). **You must read PR descriptions carefully to identify Lakebase-only changes.**
+
+**EXCLUDE if PR description contains:**
+
+1. **`lakebase_*` database objects**
+   - References to `lakebase_attributes` table
+   - Any `lakebase_*` prefixed schema objects
+   - These are variant-specific infrastructure
+   - Example: "Integration with lakebase_attributes table for state persistence"
+
+2. **Parity language:** "brings X into parity with Neon" or "aligning X with Neon"
+   - If X is being brought into parity with Neon, then Neon already has it
+   - The change only affects X (Lakebase), not Neon
+
+3. **Lakebase-specific features** mentioned explicitly
+   - "Lakebase only", "Databricks variant"
+   - Features described as Lakebase-specific in the PR body
+
+**When analyzing a PR:**
+- Read the full description, not just the title
+- Look for these keywords in the body text and file changes
+- If you find any of these patterns → Flag as Lakebase-only and EXCLUDE
+
+**Examples from Recent Triage:**
+- ❌ PR mentions "lakebase_attributes table" → Lakebase-only
+- ❌ PR about "autoscaling state transfer" referencing lakebase schema → Lakebase-only
+- ✅ PR about "Postgres 18 protocol support" → Neon (platform feature)
+
 ### Exploratory Analysis Process
 
 For EACH PR:
