@@ -10,7 +10,7 @@ redirectFrom:
 updatedOn: '2025-12-11T15:40:49.866Z'
 ---
 
-With Neon, you can quickly and cost-effectively branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
+With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
 
 You can also rewind your data or create branches from the past to recover from mistakes or analyze historical states.
 

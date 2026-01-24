@@ -96,7 +96,7 @@ Modern software development is built around iteration, but most database setups 
 
 **Always lightweight**
 
-Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Because branches use a copy-on-write model, they don’t duplicate storage by default, staying cost-efficient.
+Whether your database is 1 GB or 1 TB, creating a branch takes seconds. Branches use a copy-on-write model, so they're instant to create regardless of database size.
 
 **Designed to be discarded**
 

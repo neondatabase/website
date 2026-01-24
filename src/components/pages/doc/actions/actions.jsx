@@ -145,7 +145,7 @@ const CopyNeonCLIButton = () => {
   const getButtonText = () => {
     if (status === 'failed') return 'Failed to copy';
     if (status === 'copied') return 'Copied!';
-    return 'Copy neon init';
+    return 'Copy neon init command';
   };
 
   const copyCommand = () => {

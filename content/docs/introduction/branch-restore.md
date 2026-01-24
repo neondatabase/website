@@ -292,7 +292,7 @@ To keep your **Branches** page organized, consider renaming backup branches that
 
 There are minimal impacts to billing from the instant restore and Time Travel Assist features:
 
-- **Instant restore** &#8212; The backups created when you restore a branch do add to your total number of branches, but since they do not have a compute attached they do not add to consumption costs.
+- **Instant restore** &#8212; The backup branches created when you restore a branch do add to your total number of branches and incur storage costs, but since they do not have a compute attached, they do not add to compute costs.
 - **Time Travel Assist** &#8212; Costs related to Time Travel queries are minimal. See [Billing considerations](/docs/guides/time-travel-assist#billing-considerations).
 
 ## Limitations

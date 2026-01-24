@@ -14,7 +14,6 @@ Neon branches are:
 
 - **Isolated**: changes made to a branch don't affect its parent.
 - **Fast to create**: creating a branch takes ~1 second, regardless of the size of your database.
-- **Cost-effective**: you're only billed for unique data across all branches, and they scale to zero when not in use (you can configure this behavior for every branch).
 - **Ready to use**: branches will have the parent branch's schema and all its data (you can also include data up to a certain point in time). If you're working with sensitive data, Neon also supports a [schema-only branching](/docs/guides/branching-schema-only) option.
 
 Every Neon branch has a unique Postgres connection string, so they're completely isolated from one another.
@@ -197,5 +196,15 @@ test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530
 </Admonition>
 
 You can create test branches from the same date and time or Log Sequence Number (LSN) for tests requiring static or deterministic data.
+
+## Additional branching features
+
+### Working with sensitive data
+
+If you're working with sensitive data and need to avoid copying production data to development or test environments, Neon supports [schema-only branching](/docs/guides/branching-schema-only). This creates branches with only the database schema (tables, indexes, constraints) without any of the actual data, allowing you to populate branches with anonymized or synthetic data instead.
+
+### Automatic branch cleanup
+
+To prevent branch accumulation and manage resources effectively, you can set branches to automatically expire and be deleted after a specified time period. This is particularly useful for temporary environments like CI/CD test branches or time-limited preview deployments. See [Branch expiration](/docs/guides/branch-expiration) for details on configuring automatic branch deletion.
 
 <NeedHelp/>

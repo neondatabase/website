@@ -7,26 +7,41 @@ redirectFrom:
 updatedOn: '2026-01-09T15:57:09.715Z'
 ---
 
-Using Neon as the serverless database in your tech stack means configuring connections. Whether it’s a direct connection string from your language or framework, setting environment variables for your deployment platform, connecting to ORMs like Prisma, or configuring deployment settings for CI/CD workflows, it starts with the connection.
+Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
 
-## Connecting to your application
+## Get your connection string
 
-This section provides connection string samples for various frameworks and languages, helping you integrate Neon into your tech stack.
+From your Neon **Project Dashboard**, click the **Connect** button to open the **Connection Details** modal. Select your branch, database, and role. Your connection string appears automatically.
 
-<CodeTabs labels={["psql", ".env", "Next.js", "Drizzle", "Prisma", "Python", ".NET", "Ruby", "Rust", "Go"]}>
+![Connection details modal](/docs/connect/connection_details.png)
 
-```bash
-# psql example connection string
-psql postgresql://username:password@hostname:5432/database?sslmode=require&channel_binding=require
+The connection string includes everything you need to connect:
+
+```text
+postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require
+             ^    ^         ^                                                   ^
+       role -|    |         |- hostname                                        |- database
+                  |
+                  |- password
 ```
 
-```ini
-# .env example
-PGHOST=hostname
-PGDATABASE=database
-PGUSER=username
-PGPASSWORD=password
-PGPORT=5432
+<Admonition type="note">
+Neon supports both pooled and direct connections. Use a pooled connection string (with `-pooler` in the hostname) if your application creates many concurrent connections. See [Connection pooling](/docs/connect/connection-pooling) for details.
+</Admonition>
+
+## Connect from your application
+
+Use your connection string to connect from any application. Here are examples for various frameworks and languages:
+
+<CodeTabs labels={["Neon serverless driver", "Next.js", "Drizzle", "Prisma", "Python", "Go", ".NET", "Ruby", "Rust", "psql"]}>
+
+```javascript
+// Works in Node.js, Next.js, serverless, and edge runtimes
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon(process.env.DATABASE_URL);
+
+const users = await sql`SELECT * FROM users`;
 ```
 
 ```javascript
@@ -44,9 +59,7 @@ const conn = postgres({
   ssl: 'require',
 });
 
-function selectAll() {
-  return conn.query('SELECT * FROM hello_world');
-}
+const users = await conn`SELECT * FROM users`;
 ```
 
 ```javascript
@@ -91,6 +104,44 @@ with conn.cursor() as cur:
 
 # Close the connection
 conn.close()
+```
+
+```go
+// Go example
+package main
+import (
+    "database/sql"
+    "fmt"
+    "log"
+    "os"
+
+    _ "github.com/lib/pq"
+    "github.com/joho/godotenv"
+)
+
+func main() {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatalf("Error loading .env file: %v", err)
+    }
+
+    connStr := os.Getenv("DATABASE_URL")
+    if connStr == "" {
+        panic("DATABASE_URL environment variable is not set")
+    }
+
+    db, err := sql.Open("postgres", connStr)
+    if err != nil {
+        panic(err)
+    }
+    defer db.Close()
+
+    var version string
+    if err := db.QueryRow("select version()").Scan(&version); err != nil {
+        panic(err)
+    }
+    fmt.Printf("version=%s\n", version)
+}
 ```
 
 ```csharp
@@ -162,134 +213,29 @@ fn main() -> Result<(), Box<dyn error::Error>> {
 }
 ```
 
-```go
-// Go example
-package main
-import (
-    "database/sql"
-    "fmt"
-    "log"
-    "os"
-
-    _ "github.com/lib/pq"
-    "github.com/joho/godotenv"
-)
-
-func main() {
-    err := godotenv.Load()
-    if err != nil {
-        log.Fatalf("Error loading .env file: %v", err)
-    }
-
-    connStr := os.Getenv("DATABASE_URL")
-    if connStr == "" {
-        panic("DATABASE_URL environment variable is not set")
-    }
-
-    db, err := sql.Open("postgres", connStr)
-    if err != nil {
-        panic(err)
-    }
-    defer db.Close()
-
-    var version string
-    if err := db.QueryRow("select version()").Scan(&version); err != nil {
-        panic(err)
-    }
-    fmt.Printf("version=%s\n", version)
-}
+```bash
+# psql example connection string
+psql postgresql://username:password@hostname:5432/database?sslmode=require&channel_binding=require
 ```
 
 </CodeTabs>
 
-## Obtaining connection details
+Store your connection string in an environment variable (like `DATABASE_URL`) rather than hardcoding it in your application.
 
-When connecting to Neon from an application or client, you connect to a database in your Neon project. In Neon, a database belongs to a branch, which may be the default branch of your project (`main`) or a child branch.
+## Next steps
 
-You can obtain the database connection details you require by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. Select a branch, a compute, a database, and a role. A connection string is constructed for you.
+This covers the basics. For more connection options and detailed guidance:
 
-![Connection details modal](/docs/connect/connection_details.png)
+<DetailIconCards>
 
-Neon supports pooled and direct connections to the database. Use a pooled connection string if your application uses a high number of concurrent connections. For more information, see [Connection pooling](/docs/connect/connection-pooling#connection-pooling).
+<a href="/docs/connect/connect-intro" description="Comprehensive guide to all connection methods, troubleshooting, and security" icon="network">Connect documentation</a>
 
-A Neon connection string includes the role, password, hostname, and database name.
+<a href="/docs/get-started/frameworks" description="Step-by-step guides for Next.js, Remix, Django, Rails, and more" icon="gamepad">Framework guides</a>
 
-```text
-postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-             ^    ^         ^                         ^                              ^
-       role -|    |         |- hostname               |- pooler option               |- database
-                  |
-                  |- password
-```
+<a href="/docs/get-started/languages" description="Connection examples for JavaScript, Python, Go, Rust, and other languages" icon="code">Language guides</a>
 
-<Admonition type="note">
-The hostname includes the ID of the compute, which has an `ep-` prefix: `ep-cool-darkness-a1b2c3d4`. For more information about Neon connection strings, see [Connection string](/docs/reference/glossary#connection-string).
-</Admonition>
+<a href="/docs/serverless/serverless-driver" description="Connect from serverless and edge environments using HTTP or WebSockets" icon="audio-jack">Serverless driver</a>
 
-<Admonition type="important">
-You are responsible for maintaining the records and associations of any connection strings in your environment and systems.
-</Admonition>
-
-## Using connection details
-
-You can use the details from the connection string or the connection string itself to configure a connection. For example, you might place the connection details in an `.env` file, assign the connection string to a variable, or pass the connection string on the command-line.
-
-### `.env` file
-
-```text
-PGUSER=alex
-PGHOST=ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech
-PGDATABASE=dbname
-PGPASSWORD=AbC123dEf
-PGPORT=5432
-```
-
-### Variable
-
-```text shouldWrap
-DATABASE_URL="postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require"
-```
-
-### Command-line
-
-```bash shouldWrap
-psql postgresql://alex:AbC123dEf@ep-cool-darkness-a1b2c3d4.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-<Admonition type="note">
-Neon requires that all connections use SSL/TLS encryption, but you can increase the level of protection by appending an `sslmode` parameter setting to your connection string. For instructions, see [Connect to Neon securely](/docs/connect/connect-securely).
-</Admonition>
-
-## FAQs
-
-### Where do I obtain a password?
-
-It's included in your Neon connection string, which you can find by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal.
-
-### What port does Neon use?
-
-Neon uses the default Postgres port, `5432`.
-
-## Network protocol support
-
-Neon projects provisioned on AWS support both [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) and [IPv6](https://en.wikipedia.org/wiki/IPv6) addresses. Neon projects provisioned on Azure currently only support IPv4.
-
-Additionally, Neon provides a serverless driver that supports both WebSocket and HTTP connections. For further information, refer to our [Neon serverless driver](/docs/serverless/serverless-driver) documentation.
-
-## Data API
-
-The [Neon Data API](/docs/data-api/overview) provides a REST interface to your database, enabling you to query Postgres directly from web browsers, serverless functions, and edge runtimes using standard HTTP requests. This eliminates the need for connection pooling and works in environments where traditional Postgres drivers cannot operate.
-
-**When to use the Data API:**
-
-- Building browser-based applications that need direct database access
-- Deploying to edge runtimes (Cloudflare Workers, Vercel Edge Functions)
-- Serverless applications with high concurrency that need connectionless scalability
-- Applications requiring RLS-enforced, secure database access via HTTP
-
-## Connection notes
-
-- Some older client libraries and drivers, including older `psql` executables, are built without [Server Name Indication (SNI)](/docs/reference/glossary#sni) support and require a workaround. For more information, see [Connection errors](/docs/connect/connection-errors).
-- Some Java-based tools that use the pgJDBC driver for connecting to Postgres, such as DBeaver, DataGrip, and CLion, do not support including a role name and password in a database connection string or URL field. When you find that a connection string is not accepted, try entering the database name, role, and password values in the appropriate fields in the tool's connection UI
+</DetailIconCards>
 
 <NeedHelp/>
