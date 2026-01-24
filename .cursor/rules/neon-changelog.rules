@@ -73,7 +73,7 @@ rules:
 
     notes: |
       # How to use (documentation only; safe to keep in rules)
-      - **Create next Friday’s draft (typical):**
+      - **Create next Friday's draft (typical):**
         - Run: `generate:changelog`
         - Optional: set `TIMEZONE` (default `America/New_York`).
       - **Create for a specific date (backfill / special case):**
@@ -142,4 +142,4 @@ rules:
 
       Notes:
         - If a file already exists for the computed or specified date, no file is written.
-        - The template includes a collapsible “Fixes & improvements” section.
+        - The template includes a collapsible "Fixes & improvements" section.
