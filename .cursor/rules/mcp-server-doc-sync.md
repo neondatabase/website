@@ -125,6 +125,16 @@ For PRs with user-facing changes:
 
 #### A. Tools List (`content/docs/shared-content/mcp-tools.md`)
 
+<Admonition type="important" title="Single Source of Truth for Tools">
+`mcp-tools.md` is a **shared component** used across multiple guides via the `<MCPTools />` component. 
+
+**NEVER duplicate the tools list in individual guides.** Update only this one file, and it automatically propagates to all guides that include `<MCPTools />`.
+
+Guides using this component:
+- `content/guides/neon-mcp-server.md`
+- Other guides as needed
+</Admonition>
+
 **When to update:**
 - New tools added
 - Tool parameters changed
@@ -258,10 +268,11 @@ After completing updates, provide a summary:
 
 ### Documentation Changes Made:
 
-#### Tools Reference
+#### Tools Reference (Shared Component)
 1. **Added tool**: `tool_name`
-   - File: content/docs/shared-content/mcp-tools.md
+   - File: content/docs/shared-content/mcp-tools.md (shared component)
    - Category: [category]
+   - Note: Automatically propagates to all guides using `<MCPTools />`
 
 #### Reference Documentation
 1. **Updated setup instructions**: OAuth improvements
@@ -286,10 +297,17 @@ After completing updates, provide a summary:
 - CI/CD workflows
 - Testing infrastructure
 
+### Shared Component Pattern (CRITICAL)
+**The tools list is a shared component:**
+- `content/docs/shared-content/mcp-tools.md` is the **single source of truth**
+- Guides include this via `<MCPTools />` component
+- **NEVER duplicate tool lists in individual guides**
+- Update only `mcp-tools.md` and it propagates automatically to all guides
+
 ### Multiple Guides Often Need Updates
 Some changes affect multiple files:
 - New OAuth feature → Reference docs + all client guides
-- New tool → Tools list only
+- New tool → **Tools list ONLY** (via shared component)
 - Security change → Reference docs + potentially all guides
 - New client → New guide + reference docs
 
@@ -321,7 +339,8 @@ When syncing documentation:
 - [ ] Review each PR description and changes
 - [ ] Identify user-facing changes only
 - [ ] Determine documentation scope (Tools / Setup / Client / Security)
-- [ ] Update `mcp-tools.md` if new or changed tools
+- [ ] Update `mcp-tools.md` if new or changed tools (ONLY update this file - it's a shared component)
+- [ ] DO NOT duplicate tools list in guides - they use `<MCPTools />` component
 - [ ] Update reference docs if setup or server changes
 - [ ] Update client guides if client-specific changes
 - [ ] Update security admonitions if security implications
@@ -344,8 +363,10 @@ When syncing documentation:
 
 **Typical workflow:**
 1. PR adds `provision_neon_data_api` tool
-   - Update `mcp-tools.md` with tool description in "Neon Data API" section
+   - Update `mcp-tools.md` ONLY (shared component - don't touch guides)
+   - Add tool description in "Neon Data API" section
    - Update frontmatter date
+   - Tool automatically appears in all guides using `<MCPTools />`
 
 2. PR improves OAuth flow
    - Update `neon-mcp-server.md` OAuth setup section
