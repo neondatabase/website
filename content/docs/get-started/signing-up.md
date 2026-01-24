@@ -44,7 +44,7 @@ You can create additional branches for development, staging, and other environme
 <div className="flex gap-5 sm:flex-col">
   <div style={{ flex: '0 0 60%' }}>
 
-    If you're already signed up or coming to Neon from **Azure**, you can skip ahead to [Step 2](/docs/get-started/signing-up#step-2-onboarding-in-the-neon-console).
+    If you're already signed up, you can skip ahead to [Step 2](/docs/get-started/signing-up#step-2-onboarding-in-the-neon-console).
 
     If you haven't signed up yet, you can sign up for free here:
 
@@ -77,7 +77,7 @@ The steps should be self-explanatory, but it's important to understand a few key
   - `production` is the root default branch. It hosts your database, role, and a compute that you can connect your application to
   - You can create additional branches for development, staging, previews, and other workflows as needed
 
-At this point, if you want to just get started connecting Neon to your toolchain, go to [Day 2 - Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
+At this point, if you want to just get started connecting Neon to your toolchain, go to [Connecting Neon to your tools](/docs/get-started/connect-neon). Or if you want a more detailed walkthrough of some of our key console and branching features, let's keep going.
 
 ## Add sample data
 
@@ -132,7 +132,7 @@ Learn more about AI features in the [SQL Editor documentation](/docs/get-started
 
 ## View and modify data in the console
 
-Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, add or remove columns, drop or truncate tables, and export data in `.json` and `.csv` formats.
+Now that you have some data to play with, let's take a look at it on the **Tables** page in the Neon Console. The **Tables** page, powered by [Drizzle Studio](https://orm.drizzle.team/drizzle-studio/overview), provides a visual interface for exploring and modifying data and schemas directly from the console. The integration with Drizzle Studio provides the ability to add, update, and delete records, filter data, export data in `.json` and `.csv` formats, manage schemas (including creating and altering tables, views, and enums), create Postgres roles, and define RLS policies.
 
 ![Tables page Drizzle integration](/docs/get-started/tables_drizzle.png)
 
@@ -365,10 +365,11 @@ Depending on your development workflow, you can use branch reset:
 
 </Steps>
 
-Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Day 3 - Branching workflows](/docs/get-started/workflow-primer).
+Make sure that your development team is always working from the latest schema and data by including branch reset in your workflow. To read more about using branching in your workflows, see [Branching workflows](/docs/get-started/workflow-primer).
 
-<Admonition type="tip" title="working with sensitive data?">
-Neon also supports schema-only branching. [Learn more](/docs/guides/branching-schema-only).
+<Admonition type="tip" title="Additional branching features">
+- **Working with sensitive data?** Neon supports [schema-only branching](/docs/guides/branching-schema-only) to create branches with just the database structure, without copying production data.
+- **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period—perfect for temporary test branches or time-limited preview environments.
 </Admonition>
 
 <NeedHelp/>

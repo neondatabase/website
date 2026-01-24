@@ -223,7 +223,7 @@ Monitor these resources for updates that could impact your integration:
 
 ### Isolated development environments
 
-Neon's [branching](/docs/introduction/branching) feature lets your users create isolated copies of their database for development and testing. Branches are copy-on-write, so they don't add to storage costs initially.
+Neon's [branching](/docs/introduction/branching) feature lets your users create isolated copies of their database for development and testing. Branches are copy-on-write clones that initially share data with their parent, though storage costs accumulate as changes are made to the branch.
 
 Each user can:
 
