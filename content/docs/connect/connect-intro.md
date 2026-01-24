@@ -2,7 +2,7 @@
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
 enableTableOfContents: true
-updatedOn: '2025-08-05T16:14:59.260Z'
+updatedOn: '2026-01-24T16:13:09.582Z'
 ---
 
 This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](/docs/get-started/connect-neon).

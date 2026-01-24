@@ -4,7 +4,7 @@ subtitle: Learn how to integrate Neon into your application
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon
-updatedOn: '2026-01-09T15:57:09.715Z'
+updatedOn: '2026-01-24T16:13:09.587Z'
 ---
 
 Connecting to Neon works like any Postgres database. You use a standard connection string with your language or framework of choice. This guide shows you the essentials to get connected quickly.
