@@ -2,7 +2,11 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 enableTableOfContents: true
+<<<<<<< HEAD
 updatedOn: '2026-01-30T14:03:06.272Z'
+=======
+updatedOn: '2026-01-24T00:00:00.000Z'
+>>>>>>> dc48e230d (docs: document Next.js session caching configuration)
 layout: wide
 ---
 
