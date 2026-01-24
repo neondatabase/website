@@ -382,13 +382,13 @@ Learn how our Developer Advocate approaches snapshot-based workflows in [Promoti
 
 ### When to use each approach
 
-| Use Case                        | Recommended Method   | Why                                                                   |
-| ------------------------------- | -------------------- | --------------------------------------------------------------------- |
-| **Undo recent changes**         | PITR (point-in-time) | Instant restore, automatic history (1 day to 7 days) |
-| **Save before major migration** | Snapshot (branch)    | Persist beyond PITR window, named versions, explicit control          |
-| **Daily automated backups**     | PITR (built-in)      | Already available, no action needed                                   |
-| **Release versions**            | Snapshot (branch)    | Keep indefinitely, tag with version numbers                           |
-| **Experiment/test safely**      | Development branch   | Isolated, can be deleted after testing                                |
+| Use Case                        | Recommended Method   | Why                                                          |
+| ------------------------------- | -------------------- | ------------------------------------------------------------ |
+| **Undo recent changes**         | PITR (point-in-time) | Instant restore, automatic history (1 day to 7 days)         |
+| **Save before major migration** | Snapshot (branch)    | Persist beyond PITR window, named versions, explicit control |
+| **Daily automated backups**     | PITR (built-in)      | Already available, no action needed                          |
+| **Release versions**            | Snapshot (branch)    | Keep indefinitely, tag with version numbers                  |
+| **Experiment/test safely**      | Development branch   | Isolated, can be deleted after testing                       |
 
 ### Recommended approach
 
