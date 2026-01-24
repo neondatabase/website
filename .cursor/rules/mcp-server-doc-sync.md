@@ -256,7 +256,54 @@ Ensure all updates follow these standards:
 6. **Examples** - Include configuration examples
 7. **Cross-linking** - Link to related guides and reference docs
 
-### Step 6: Create Summary
+### Step 6: Update Source Repository README (if needed)
+
+**Check if the source repo README needs updates:**
+
+After reviewing PRs and updating website documentation, check if the README in the source repository also needs updates.
+
+**Repository:** https://github.com/neondatabase-labs/mcp-server-neon
+
+**When to update the source README:**
+- New tools were added but README wasn't updated in the PR
+- Tool descriptions in README are outdated or incomplete
+- Setup instructions changed but README wasn't updated
+- New features documented on website but missing from README
+
+**What to update in README:**
+- Tools list (keep in sync with website's `mcp-tools.md`)
+- Setup instructions (OAuth, configuration)
+- Prerequisites
+- Usage examples
+- Security considerations
+
+**Process:**
+1. Review the source repo's README.md
+2. Identify gaps between README and website docs
+3. If updates needed:
+   - Fork the repo (if not already)
+   - Create a new branch (e.g., `docs/update-readme-tools`)
+   - Update README.md
+   - Open a PR to `neondatabase-labs/mcp-server-neon`
+   - Title: "docs: update README with [new tools/features/setup]"
+   - Link to the website PR in the description
+   - Mention which website docs were updated for context
+
+**Example PR description:**
+```markdown
+## Summary
+Updates README to document [feature/tools] that were added in PR #X but not reflected in the README.
+
+## Changes
+- Added tool descriptions for `tool_name_1`, `tool_name_2`
+- Updated setup instructions for [feature]
+
+## Related
+- Website documentation updated in neondatabase/website#[PR number]
+- Implements documentation for PR #X
+```
+
+### Step 7: Create Summary
 
 After completing updates, provide a summary:
 
@@ -285,6 +332,11 @@ After completing updates, provide a summary:
    - File: content/guides/cursor-mcp-neon.md
    - Change: Added one-click install button
 
+#### Source Repository README
+1. **Status**: README needs update / README already up to date
+   - Repo: neondatabase-labs/mcp-server-neon
+   - Action: [Opened PR #X / No action needed]
+
 ### No Documentation Changes Needed:
 - PR #Z: Internal refactoring only
 ```
@@ -303,6 +355,14 @@ After completing updates, provide a summary:
 - Guides include this via `<MCPTools />` component
 - **NEVER duplicate tool lists in individual guides**
 - Update only `mcp-tools.md` and it propagates automatically to all guides
+
+### Source Repository README Sync
+**Keep the source repo README in sync:**
+- The README in `neondatabase-labs/mcp-server-neon` also documents MCP tools and setup
+- After updating website docs, **always check** if README needs updates
+- If PRs didn't update README but added features/tools, open a PR to update it
+- README serves developers who go directly to the GitHub repo
+- Link between website PR and source repo PR for traceability
 
 ### Multiple Guides Often Need Updates
 Some changes affect multiple files:
@@ -347,7 +407,9 @@ When syncing documentation:
 - [ ] Update frontmatter dates on all modified files
 - [ ] Check for cross-guide consistency
 - [ ] Verify all links work
-- [ ] Create summary of changes made
+- [ ] **Check source repo README** for gaps vs website docs
+- [ ] **Open PR to source repo** if README needs updates
+- [ ] Create summary of changes made (including source repo README status)
 
 ## Example Usage
 
@@ -367,13 +429,16 @@ When syncing documentation:
    - Add tool description in "Neon Data API" section
    - Update frontmatter date
    - Tool automatically appears in all guides using `<MCPTools />`
+   - **Check source README**: If tool not documented there, open PR to add it
 
 2. PR improves OAuth flow
    - Update `neon-mcp-server.md` OAuth setup section
    - Update all client guides that mention OAuth
    - Update frontmatter dates
+   - **Check source README**: Verify OAuth setup instructions are current
 
 3. PR adds Cursor one-click install
    - Add install button to `cursor-mcp-neon.md`
    - Mention in `neon-mcp-server.md` if relevant
    - Update frontmatter dates
+   - **Check source README**: May not need update (client-specific feature)
