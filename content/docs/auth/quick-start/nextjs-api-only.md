@@ -2,7 +2,7 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.163Z'
+updatedOn: '2026-01-24T00:00:00.000Z'
 layout: wide
 ---
 
@@ -59,11 +59,20 @@ Create a `.env.local` file in your project root and add your Auth URL:
 Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
+<Admonition type="tip" title="Optional: Enable session caching for better performance">
+Add `NEON_AUTH_COOKIE_SECRET` to enable local session data caching, which reduces Auth Server API calls by 95-99%. Session data is cached with a 5-minute TTL and validated using signed cookies. The secret must be at least 32 characters long.
+
+This feature is opt-in and fully backward compatible. Without this variable, the SDK will continue to validate sessions with the Auth Server on every request.
+</Admonition>
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label=".env.local">
 
 ```bash
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+
+# Optional: Enable session caching (recommended for production)
+NEON_AUTH_COOKIE_SECRET=your-secret-key-at-least-32-characters-long
 ```
 
 </TwoColumnLayout.Block>
