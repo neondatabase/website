@@ -33,6 +33,52 @@ ChartJS.register(
   TimeScale
 );
 
+// Helper function to calculate P99.5 (throw away top 0.5% of values)
+const calculateP995 = (values) => {
+  if (values.length === 0) return 0;
+  if (values.length === 1) return values[0];
+
+  // Sort values in ascending order
+  const sorted = [...values].sort((a, b) => a - b);
+
+  // Calculate the index for P99.5
+  const percentile = 99.5;
+  const index = (percentile / 100) * (sorted.length - 1);
+
+  // If index is an integer, return that value
+  if (Number.isInteger(index)) {
+    return sorted[index];
+  }
+
+  // Otherwise, interpolate between the two nearest values
+  const lower = Math.floor(index);
+  const upper = Math.ceil(index);
+  const fraction = index - lower;
+
+  return sorted[lower] + (sorted[upper] - sorted[lower]) * fraction;
+};
+
+// Helper function to calculate provisioned CU based on strategy
+const calculateProvisionedCU = (values, strategy) => {
+  if (values.length === 0) return 0;
+
+  const p995 = calculateP995(values);
+  const max = Math.max(...values);
+
+  switch (strategy) {
+    case 'p99.5+20':
+      return p995 * 1.2;
+    case 'p99.5':
+      return p995;
+    case 'p100':
+      return max;
+    case 'p99.5-20':
+      return p995 * 0.8;
+    default:
+      return p995 * 1.2;
+  }
+};
+
 const AutoscalingChart = ({
   datasetKey = 'predictable_fluctuation',
   datasetKeys = null,
@@ -47,11 +93,22 @@ const AutoscalingChart = ({
   compact = false,
   progressive = false,
 }) => {
+  // Map old overprovision prop to new provisioning strategy
+  const mapOverprovisionToStrategy = (value) => {
+    if (value === 20) return 'p99.5+20';
+    if (value === 0) return 'p99.5';
+    if (value === -20) return 'p99.5-20';
+    // Default to p99.5+20 for any other value
+    return 'p99.5+20';
+  };
+
   const chartRef = useRef(null);
   const containerRef = useRef(null);
   const [autoscalingCost, setAutoscalingCost] = useState(autoscalingRate);
   const [fixedCost, setFixedCost] = useState(fixedRate);
-  const [overprovisionPercent, setOverprovisionPercent] = useState(overprovision);
+  const [provisioningStrategy, setProvisioningStrategy] = useState(
+    mapOverprovisionToStrategy(overprovision)
+  );
   const [chartData, setChartData] = useState(null);
   const [hasAnimated, setHasAnimated] = useState(false);
   const [stats, setStats] = useState({
@@ -97,8 +154,6 @@ const AutoscalingChart = ({
 
       if (values.length === 0) return;
 
-      const max = Math.max(...values);
-
       // Calculate autoscaling cost and CU-hours
       let totalAutoscalingCost = 0;
       let autoscalingCUMinutes = 0;
@@ -115,7 +170,7 @@ const AutoscalingChart = ({
           : 1; // Default to 1 hour if only one data point
 
       // Calculate Provisioned cost and CU-hours
-      const fixedCU = max * (1 + overprovisionPercent / 100);
+      const fixedCU = calculateProvisionedCU(values, provisioningStrategy);
       const totalFixedCost = fixedCU * durationHours * fixedCost;
       const fixedCUHours = fixedCU * durationHours;
 
@@ -166,7 +221,7 @@ const AutoscalingChart = ({
         performanceDegradations: Math.round(monthlyPerformanceDegradations),
       });
     },
-    [autoscalingCost, fixedCost, overprovisionPercent]
+    [autoscalingCost, fixedCost, provisioningStrategy]
   );
 
   // Initialize chart data
@@ -199,22 +254,21 @@ const AutoscalingChart = ({
       color: datasetColors[index % datasetColors.length],
     }));
 
-    // Get combined data for calculating date range and max values
+    // Get combined data for calculating date range and provisioned CU
     const allData = allDatasets.flatMap((d) => d.data);
     if (allData.length === 0) return;
 
     const allValues = allData.map((d) => d.y).filter((v) => !Number.isNaN(v));
-    const max = Math.max(...allValues);
-    const fixedCU = max * (1 + overprovisionPercent / 100);
+    const fixedCU = calculateProvisionedCU(allValues, provisioningStrategy);
 
     const firstDate = Math.min(...allData.map((d) => d.x.getTime()));
     const lastDate = Math.max(...allData.map((d) => d.x.getTime()));
 
     const chartDatasets = [];
 
-    // Add red "overflow" dataset when under-provisioning to show performance degradation
+    // Add red "overflow" dataset to show performance degradation when values exceed provisioned allocation
     // (only for single dataset mode)
-    if (!autoscalingOnly && overprovisionPercent < 0 && !isMultipleDatasets) {
+    if (!autoscalingOnly && !isMultipleDatasets) {
       const primaryData = allDatasets[0].data;
       // Calculate interval from the data
       const intervalMs =
@@ -323,7 +377,7 @@ const AutoscalingChart = ({
     datasetKeys,
     convertDatasetToChartData,
     calculateStats,
-    overprovisionPercent,
+    provisioningStrategy,
     autoscalingOnly,
     progressive,
   ]);
@@ -333,15 +387,14 @@ const AutoscalingChart = ({
     if (chartData?.allData) {
       calculateStats(chartData.allData);
     }
-  }, [autoscalingCost, fixedCost, overprovisionPercent, chartData?.allData, calculateStats]);
+  }, [autoscalingCost, fixedCost, provisioningStrategy, chartData?.allData, calculateStats]);
 
-  // Update fixed resource line and performance degradation when overprovision changes
+  // Update fixed resource line and performance degradation when provisioning strategy changes
   useEffect(() => {
     if (!chartRef.current || !chartData || autoscalingOnly) return;
 
     const values = chartData.allData.map((d) => d.y).filter((v) => !Number.isNaN(v));
-    const max = Math.max(...values);
-    const fixedCU = max * (1 + overprovisionPercent / 100);
+    const fixedCU = calculateProvisionedCU(values, provisioningStrategy);
 
     const firstDate = chartData.allData[0].x;
     const lastDate = chartData.allData[chartData.allData.length - 1].x;
@@ -365,52 +418,53 @@ const AutoscalingChart = ({
     }
 
     // Handle Performance Degradation dataset
-    if (overprovisionPercent < 0) {
-      // Calculate interval from the data
-      const intervalMs =
-        chartData.allData.length > 1
-          ? chartData.allData[1].x.getTime() - chartData.allData[0].x.getTime()
-          : 60000;
+    // Calculate interval from the data
+    const intervalMs =
+      chartData.allData.length > 1
+        ? chartData.allData[1].x.getTime() - chartData.allData[0].x.getTime()
+        : 60000;
 
-      // Create dataset with boundary transition points
-      const overflowData = [];
-      for (let i = 0; i < chartData.allData.length; i += 1) {
-        const current = chartData.allData[i];
-        const prev = i > 0 ? chartData.allData[i - 1] : null;
-        const next = i < chartData.allData.length - 1 ? chartData.allData[i + 1] : null;
+    // Create dataset with boundary transition points
+    const overflowData = [];
+    for (let i = 0; i < chartData.allData.length; i += 1) {
+      const current = chartData.allData[i];
+      const prev = i > 0 ? chartData.allData[i - 1] : null;
+      const next = i < chartData.allData.length - 1 ? chartData.allData[i + 1] : null;
 
-        // Case 1: current is below but next is above - entering overflow zone
-        if (current.y < fixedCU && next && next.y > fixedCU) {
-          // Add null point for previous interval
-          overflowData.push({
-            x: new Date(current.x.getTime() - intervalMs),
-            y: null,
-          });
-          // Add fixedCU point for current interval
-          overflowData.push({
-            x: current.x,
-            y: fixedCU,
-          });
-        }
-        // Case 2: current is above - in overflow zone
-        else if (current.y > fixedCU) {
-          overflowData.push(current);
-        }
-        // Case 3: current is below but previous was above - exiting overflow zone
-        else if (current.y < fixedCU && prev && prev.y > fixedCU) {
-          // Add fixedCU point for current timestamp
-          overflowData.push({
-            x: current.x,
-            y: fixedCU,
-          });
-          // Add null point for next interval
-          overflowData.push({
-            x: new Date(current.x.getTime() + intervalMs),
-            y: null,
-          });
-        }
+      // Case 1: current is below but next is above - entering overflow zone
+      if (current.y < fixedCU && next && next.y > fixedCU) {
+        // Add null point for previous interval
+        overflowData.push({
+          x: new Date(current.x.getTime() - intervalMs),
+          y: null,
+        });
+        // Add fixedCU point for current interval
+        overflowData.push({
+          x: current.x,
+          y: fixedCU,
+        });
       }
+      // Case 2: current is above - in overflow zone
+      else if (current.y > fixedCU) {
+        overflowData.push(current);
+      }
+      // Case 3: current is below but previous was above - exiting overflow zone
+      else if (current.y < fixedCU && prev && prev.y > fixedCU) {
+        // Add fixedCU point for current timestamp
+        overflowData.push({
+          x: current.x,
+          y: fixedCU,
+        });
+        // Add null point for next interval
+        overflowData.push({
+          x: new Date(current.x.getTime() + intervalMs),
+          y: null,
+        });
+      }
+    }
 
+    // Only show performance degradation if there are any overflow points
+    if (overflowData.length > 0) {
       if (perfDegradationIndex !== -1) {
         // Update existing Performance Degradation dataset
         chartRef.current.data.datasets[perfDegradationIndex].data = overflowData;
@@ -430,12 +484,12 @@ const AutoscalingChart = ({
         });
       }
     } else if (perfDegradationIndex !== -1) {
-      // Remove Performance Degradation dataset if overprovision is not negative
+      // Remove Performance Degradation dataset if there are no overflow points
       chartRef.current.data.datasets.splice(perfDegradationIndex, 1);
     }
 
     chartRef.current.update('none');
-  }, [overprovisionPercent, chartData, autoscalingOnly]);
+  }, [provisioningStrategy, chartData, autoscalingOnly]);
 
   // Intersection Observer for progressive animation on scroll
   useEffect(() => {
@@ -466,8 +520,8 @@ const AutoscalingChart = ({
     };
   }, [progressive, hasAnimated]);
 
-  const handleOverprovisionChange = (e) => {
-    setOverprovisionPercent(parseFloat(e.target.value));
+  const handleProvisioningStrategyChange = (e) => {
+    setProvisioningStrategy(e.target.value);
   };
 
   if (!chartData) {
@@ -616,14 +670,14 @@ const AutoscalingChart = ({
         {!autoscalingOnly && showOverprovisionSelector && (
           <div className="flex items-center gap-2.5">
             <select
-              value={overprovisionPercent}
+              value={provisioningStrategy}
               className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 rounded border px-4 py-2 text-sm transition-all focus:border-[#73bf69] focus:outline-none"
-              onChange={handleOverprovisionChange}
+              onChange={handleProvisioningStrategyChange}
             >
-              <option value="0">Zero Over-Provisioning</option>
-              <option value="20">20% Over-Provisioning (AWS recommended)</option>
-              <option value="-25">25% Under-provision</option>
-              <option value="-50">50% Under-provision</option>
+              <option value="p99.5+20">P99.5 + 20% (AWS default)</option>
+              <option value="p99.5">P99.5</option>
+              <option value="p100">P100 (Max)</option>
+              <option value="p99.5-20">P99.5 - 20%</option>
             </select>
           </div>
         )}
@@ -729,9 +783,9 @@ const AutoscalingChart = ({
                 {/* Performance Degradations Warning */}
                 {stats.performanceDegradations > 0 && (
                   <div className="max-w-64 rounded border border-code-red-1 bg-code-red-1/10 p-2 text-xs">
-                    <strong>Under-provisioned:</strong> <br />
-                    Workload will experience degraded performance or outages{' '}
-                    {stats.performanceDegradations} times/month.
+                    <strong>Performance Degradations:</strong> <br />
+                    Workload will exceed provisioned allocation {stats.performanceDegradations}{' '}
+                    times/month, potentially causing degraded performance or outages.
                   </div>
                 )}
               </div>

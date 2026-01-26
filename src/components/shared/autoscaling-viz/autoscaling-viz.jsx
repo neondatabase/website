@@ -10,7 +10,7 @@ const AutoscalingViz = () => {
 
   // Autoscaling pattern: 12 columns with varying heights (total: 32 squares)
   // One column peaks at 8 squares
-  const autoscalingPattern = [1, 2, 4, 1, 2, 1, 8, 2, 3, 1, 2, 1, 1, 2, 1];
+  const autoscalingPattern = [1, 2, 4, 1, 2, 1, 8, 2, 3, 1, 2, 1, 2, 2, 1];
 
   // Provisioned: 15 columns, each with 10 squares (total: 150 squares)
   const provisionedHeight = 10;
@@ -96,7 +96,7 @@ const AutoscalingViz = () => {
     >
       <div className="mb-6">
         <span className="text-xl font-medium text-white">
-          The average production database on Neon used 4.7x less compute than provisioned capacity
+          The average production database on Neon used 4.6x less compute than provisioned capacity
           in 2025
         </span>
       </div>
