@@ -1,15 +1,10 @@
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-import Container from 'components/shared/container';
+import SecondarySection from 'components/shared/secondary-section';
 import arrowUpRightIcon from 'images/pages/about/stats/arrow-up-right.svg';
 import databaseIcon from 'images/pages/about/stats/database.svg';
 import gearIcon from 'images/pages/about/stats/gear.svg';
-
-import BulbNoisy from './images/bulb-horizontal-noise.inline.svg';
-import BulbLargeNoisy from './images/bulb-large-horizontal-noise.inline.svg';
-// import bulbLargeNoisy from './images/bulb-large-horizontal-noise.svg';
-import Bulb from './images/bulb.inline.svg';
 
 const STATS_DATA = [
   {
@@ -77,60 +72,51 @@ StatCard.propTypes = {
 };
 
 const Stats = () => (
-  <section className="stats safe-paddings overflow-hidden bg-[#E4F1EB]">
-    <h2 className="sr-only">Company Statistics and Vision</h2>
-    <Container
-      size={1344}
-      className="relative py-40 xl:!max-w-[1100px] xl:py-32 lg:py-24 md:py-20 sm:py-16"
-    >
-      <div className="flex gap-x-[108px] xl:gap-x-16 lg:flex-col lg:gap-y-16 md:gap-y-12">
-        {/* Left Column - Main heading and stats */}
-        <div className="relative flex-1 border-l border-gray-new-50 pl-[19px] lg:order-1 lg:pl-5">
-          <SectionLabel text="Where we're headed" />
+  <SecondarySection title="Company Statistics and Vision">
+    <div className="flex gap-x-[108px] xl:gap-x-16 lg:flex-col lg:gap-y-16 md:gap-y-12">
+      {/* Left Column - Main heading and stats */}
+      <div className="relative flex-1 border-l border-gray-new-50 pl-[19px] lg:order-1 lg:pl-5">
+        <SectionLabel text="Where we're headed" />
 
-          <h3 className="mt-[34px] max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:mt-7 xl:max-w-[600px] xl:text-[40px] lg:mt-6 lg:max-w-full lg:text-4xl md:mt-5 md:text-[32px] sm:text-[28px]">
-            <span className="text-black-pure">Neon is a Databricks company.</span>{' '}
-            <span className="text-gray-new-40">
-              In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native
-              development.
-            </span>
-          </h3>
+        <h3 className="mt-[34px] max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:mt-7 xl:max-w-[600px] xl:text-[40px] lg:mt-6 lg:max-w-full lg:text-4xl md:mt-5 md:text-[32px] sm:text-[28px]">
+          <span className="text-black-pure">Neon is a Databricks company.</span>{' '}
+          <span className="text-gray-new-40">
+            In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native
+            development.
+          </span>
+        </h3>
 
-          <div className="mt-[194px] flex gap-x-[84px] xl:mt-[140px] xl:gap-x-12 lg:mt-[100px] lg:gap-x-8 md:mt-16 md:flex-col md:gap-y-10">
-            {STATS_DATA.map((stat, index) => (
-              <StatCard key={index} {...stat} />
-            ))}
-          </div>
-        </div>
-
-        {/* Right Column - Vision statements */}
-        <div className="lg:order-0 relative w-[436px] border-l border-gray-new-50 pl-5 xl:w-[380px] lg:w-full">
-          <div className="pt-[3px]">
-            <SectionLabel text="Our Vision" />
-          </div>
-
-          <div className="mt-[340px] w-[416px] xl:mt-[260px] xl:w-[360px] lg:mt-[200px] lg:w-full md:mt-32 sm:mt-24">
-            <p className="text-xl font-medium leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
-              The mission stays the same:{' '}
-              <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">deliver Postgres</mark>{' '}
-              for developers and AI agents — now backed by the scale and expertise of Databricks.
-            </p>
-
-            <p className="mt-10 text-xl font-medium leading-normal tracking-tighter text-black-pure xl:mt-8 xl:text-lg lg:mt-6 lg:text-base">
-              The same technology behind Neon powers Lakebase: The&nbsp;first serverless Postgres
-              database{' '}
-              <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">
-                integrated with the lakehouse, built for the AI era.
-              </mark>
-            </p>
-          </div>
+        <div className="mt-[194px] flex gap-x-[84px] xl:mt-[140px] xl:gap-x-12 lg:mt-[100px] lg:gap-x-8 md:mt-16 md:flex-col md:gap-y-10">
+          {STATS_DATA.map((stat, index) => (
+            <StatCard key={index} {...stat} />
+          ))}
         </div>
       </div>
-      <BulbLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45" />
-      <BulbNoisy className="pointer-events-none absolute bottom-0 left-full -rotate-[75deg]" />
-      <Bulb className="pointer-events-none absolute -bottom-[30%] left-[85%] -rotate-45" />
-    </Container>
-  </section>
+
+      {/* Right Column - Vision statements */}
+      <div className="lg:order-0 relative w-[436px] border-l border-gray-new-50 pl-5 xl:w-[380px] lg:w-full">
+        <div className="pt-[3px]">
+          <SectionLabel text="Our Vision" />
+        </div>
+
+        <div className="mt-[340px] w-[416px] xl:mt-[260px] xl:w-[360px] lg:mt-[200px] lg:w-full md:mt-32 sm:mt-24">
+          <p className="text-xl font-medium leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
+            The mission stays the same:{' '}
+            <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">deliver Postgres</mark> for
+            developers and AI agents — now backed by the scale and expertise of Databricks.
+          </p>
+
+          <p className="mt-10 text-xl font-medium leading-normal tracking-tighter text-black-pure xl:mt-8 xl:text-lg lg:mt-6 lg:text-base">
+            The same technology behind Neon powers Lakebase: The&nbsp;first serverless Postgres
+            database{' '}
+            <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">
+              integrated with the lakehouse, built for the AI era.
+            </mark>
+          </p>
+        </div>
+      </div>
+    </div>
+  </SecondarySection>
 );
 
 export default Stats;
