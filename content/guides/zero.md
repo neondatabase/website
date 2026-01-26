@@ -43,7 +43,7 @@ Zero requires a Postgres database (version 15+) with logical replication enabled
       <Admonition type="important">
       Make sure to turn off connection pooling in the connection string modal. This is essential for `zero-cache` to maintain a persistent connection to the Neon database.
       </Admonition>
-      ![Neon direct connection string modal](/docs/guides/neon-console-direct-connection-string.png)
+      ![Neon direct connection string modal](/docs/connect/connection_details_without_connection_pooling.png)
 
 ## Setting up the `hello-zero` example application
 
