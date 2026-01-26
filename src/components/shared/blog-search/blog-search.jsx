@@ -75,7 +75,14 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
 
 BlogSearch.propTypes = {
   children: PropTypes.node.isRequired,
-  posts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  posts: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      subtitle: PropTypes.string.isRequired,
+      excerpt: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   searchInputClassName: PropTypes.string,
 };
 

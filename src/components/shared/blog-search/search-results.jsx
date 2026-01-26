@@ -27,7 +27,17 @@ const SearchResults = ({ posts, className, children }) => {
 };
 
 SearchResults.propTypes = {
-  posts: PropTypes.arrayOf(PropTypes.object),
+  posts: PropTypes.oneOfType([
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        slug: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        subtitle: PropTypes.string.isRequired,
+        excerpt: PropTypes.string.isRequired,
+      })
+    ),
+    PropTypes.oneOf([null]),
+  ]),
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
 };
