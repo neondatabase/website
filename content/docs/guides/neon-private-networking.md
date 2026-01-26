@@ -51,21 +51,21 @@ To configure Neon Private Networking, perform the following steps:
 
     1. Under **Service settings**, specify the **Service name**. Some regions require specifying two or three service names, and service names vary by region:
 
-       - **us-east-1**: Create three entries, one for each of the following:
+       - **us-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-074ac4111275eaf07`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0de57c578b0e614a9`
          - `com.amazonaws.vpce.us-east-1.vpce-svc-0f37140e9710ee3af`
-       - **us-east-2**: Create two entries, one for each of the following:
+       - **us-east-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-2.vpce-svc-010736480bcef5824`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0465c21ce8ba95fb2`
          - `com.amazonaws.vpce.us-east-2.vpce-svc-0056bdfba63cc6ea1`
-       - **eu-central-1**: Create two entries, one for each of the following:
+       - **eu-central-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05554c35009a5eccb`
          - `com.amazonaws.vpce.eu-central-1.vpce-svc-05a252e6836f01cfd`
        - **eu-west-2**:
          - `com.amazonaws.vpce.eu-west-2.vpce-svc-0c6fedbe99fced2cd`
-       - **us-west-2**: Create two entries, one for each of the following:
+       - **us-west-2**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-west-2.vpce-svc-060e0d5f582365b8e`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-07b750990c172f22f`
          - `com.amazonaws.vpce.us-west-2.vpce-svc-045eebdf710e1066d`
