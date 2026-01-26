@@ -127,9 +127,8 @@ const Stats = () => (
         </div>
       </div>
       <BulbLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45" />
-      <BulbNoisy className="pointer-events-none absolute bottom-0 left-1/2 -rotate-[75deg]" />
+      <BulbNoisy className="pointer-events-none absolute bottom-0 left-full -rotate-[75deg]" />
       <Bulb className="pointer-events-none absolute -bottom-[30%] left-[85%] -rotate-45" />
-      {/* <Image width="1398" height="1159" src={bulbLargeNoisy} /> */}
     </Container>
   </section>
 );

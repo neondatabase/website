@@ -1,5 +1,6 @@
 import Connections from 'components/pages/about/connections';
 import Developers from 'components/pages/about/developers';
+import Features from 'components/pages/about/features';
 import Hero from 'components/pages/about/hero';
 import Leadership from 'components/pages/about/leadership';
 import Stats from 'components/pages/about/stats';
@@ -30,6 +31,7 @@ const AboutUsPage = () => (
       buttonClassName="mt-9 h-12 w-[174px] xl:mt-[18px] lg:h-11 lg:mt-4 lg:w-[166px] md:mt-5 md:h-10 md:w-[151px] md:text-sm"
     />
     <Stats />
+    <Features />
   </Layout>
 );
 
