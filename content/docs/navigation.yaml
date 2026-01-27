@@ -24,8 +24,8 @@
           slug: get-started/connect-neon
         - title: 3 - Branching
           slug: get-started/workflow-primer
-        - title: 4 - Ready for production
-          slug: get-started/production-checklist
+        - title: 4 - Setup Neon Auth
+          slug: auth/overview
     - section: Migrate to Neon
       icon: import
       items:
@@ -1013,6 +1013,8 @@
         - section: Operations & maintenance
           icon: settings
           items:
+            - title: Production checklist
+              slug: get-started/production-checklist
             - title: Backups
               slug: manage/backups
               items:

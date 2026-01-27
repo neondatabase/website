@@ -110,6 +110,8 @@ Learn how Neon secures your projects and data, and explore the security features
 
 <DetailIconCards>
 
+<a href="/docs/get-started/production-checklist" description="Guidelines to optimize price, performance, and reliability" icon="check">Production checklist</a>
+
 <a href="/docs/manage/backups" description="An overview of backup strategies for Neon Postgres" icon="database">Backups</a>
 
 <a href="/docs/manage/backup-pg-dump" description="Learn how to create a backup of your Neon database using pg_dump" icon="database">Backup with pg_dump</a>
