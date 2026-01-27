@@ -86,13 +86,14 @@ When we take every production database on Neon and run the AWS RDS rightsizing a
 For this report, a database is classified as production if it is running at greater than 1CU on average.
 
 #### Compute
+
 Across the entire Neon platform in December 2025, the average production database used <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> than if sized at 20% above P99.5 load on a provisioned platform like RDS.
 
 <AutoscalingViz />
 
 #### Cost
-When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
 
+When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
 
 <Admonition title="Why is cost savings less than compute savings?" type="info">
   Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
@@ -103,6 +104,7 @@ When we factor in the cost of each database _(which varies depending on if the a
 </Admonition>
 
 #### Performance Degradations
+
 Database compute loads can be spiky. Operations like index creation, schema changes and migrations, bulk exports, and even just user load patterns can cause momentary spikes in memory and CPU in particular. When we follow the AWS rightsizing algorithm and provision at P99.5 + 20%, the top 0.5% of loads are often spiky enough to exceed that 20% buffer.
 
 When we counted up the number of times each production database on Neon autoscaled up beyond the provisioned P99.5 + 20% equivalent, we found that <span className="bg-secondary-1/20 text-secondary-1 p-1">the average production database would experience 20 incidents per month</span> where compute resources would be exhausted if it were running on a provisioned platform.
@@ -130,13 +132,12 @@ The closest m-series latest-generation RDS instances that fit the provisioned sp
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 4.8CPU 19GB RAM RDS instance, so you are forced to "round up" to the next largest instance.
 
-
 ---
 
 ## Scale to Zero
 
 In one of the features unique to Neon, compute can be configured to shut down entirely when there are no active connections and turn back on in [350ms](https://neon-latency-benchmarks.vercel.app/) when needed.
-Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero: 
+Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero:
 
 <AutoscalingChart title="Fig. 3: One week of Autoscaling on a Database with Scale-to-Zero workload" datasetKey="scale_to_zero" autoscalingOnly={true} showStats={false} compact={true} />
 
@@ -147,9 +148,11 @@ This pattern shows up mostly in **non-production databases**: Dev and staging DB
 If we tally up the compute used by small non-production databases that scale to zero on Neon and compare it with the compute required to run the same databases continually on a provisioned platform like RDS, we find that the savings are even more extreme than production databases.
 
 #### Compute
- A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
+
+A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
 
 #### Costs
+
 When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 4.9x.</span>
 The savings numbers from scale to zero are dramatic enough to make it clear that this feature is changing customer behavior.
 Scale to zero changes the equation on what types of database usage patterns are economically viable.
@@ -168,8 +171,8 @@ Provisioned platforms cannot scale to zero, so your best option for this workloa
 Using that approach, running a similar workload on RDS would use <span className="bg-secondary-1/20 text-secondary-1 p-1">7.1x more compute</span> and <span className="bg-secondary-1/20 text-secondary-1 p-1">cost 4.4x more</span>.
 
 #### Checking the math with actual RDS instances
-The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs 
 
+The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs
 
 ## Methodology
 
@@ -200,6 +203,7 @@ We use P99.5 + 20% as the default over-provisioning setting following the defaul
 ### Counting Incidents
 
 To get a count of performance degradation incidents, we:
+
 1. Calculate the P99.5 + 20% "provisioned equivalent" size of each Neon database for each month
 2. Count the number of distinct time periods where the autoscaling history showed the database scaling up to larger than the P99.5 + 20% size.
 
