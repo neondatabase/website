@@ -16,19 +16,9 @@ description="Run <code>npx neonctl@latest init</code> to configure your app with
 
 <a href="/docs/get-started/connect-neon" description="Connect to your tech stack">Connect your stack</a>
 
-<a href="/docs/get-started/workflow-primer" description="Branch for dev, preview, and test">Branching workflows</a>
+<a href="/docs/get-started/workflow-primer" description="Integrate branching into your workflow">Learn about branching</a>
 
-<a href="/docs/get-started/production-checklist" description="Get ready for production">Production checklist</a>
-
-</DetailIconCards>
-
-## App backend
-
-<DetailIconCards compact>
-
-<a href="/docs/auth/overview" description="Managed auth that branches with your database" icon="lock-landscape">Neon Auth</a>
-
-<a href="/docs/data-api/overview" description="Query your Postgres database over HTTP" icon="code">Data API</a>
+<a href="/docs/auth/overview" description="Set up managed auth that branches with your database" icon="lock-landscape">Setup Neon Auth</a>
 
 </DetailIconCards>
 
