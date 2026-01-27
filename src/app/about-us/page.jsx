@@ -1,3 +1,4 @@
+import Community from 'components/pages/about/community';
 import Connections from 'components/pages/about/connections';
 import Developers from 'components/pages/about/developers';
 import Features from 'components/pages/about/features';
@@ -32,6 +33,7 @@ const AboutUsPage = () => (
     />
     <Stats />
     <Features />
+    <Community />
   </Layout>
 );
 

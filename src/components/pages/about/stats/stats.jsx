@@ -2,7 +2,7 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import SecondarySection from 'components/shared/secondary-section';
-import arrowUpRightIcon from 'images/pages/about/stats/arrow-up-right.svg';
+import SectionLabel from 'components/shared/section-label';
 import databaseIcon from 'images/pages/about/stats/database.svg';
 import gearIcon from 'images/pages/about/stats/gear.svg';
 
@@ -20,26 +20,6 @@ const STATS_DATA = [
     iconGap: 'gap-5',
   },
 ];
-
-const SectionLabel = ({ text }) => (
-  <div className="flex items-end gap-2">
-    <Image
-      src={arrowUpRightIcon}
-      alt=""
-      width={12}
-      height={14}
-      aria-hidden="true"
-      className="text-gray-new-20"
-    />
-    <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-20">
-      {text}
-    </span>
-  </div>
-);
-
-SectionLabel.propTypes = {
-  text: PropTypes.string.isRequired,
-};
 
 const StatCard = ({ icon, value, description, iconGap }) => (
   <div
@@ -76,7 +56,7 @@ const Stats = () => (
     <div className="flex gap-x-[108px] xl:gap-x-16 lg:flex-col lg:gap-y-16 md:gap-y-12">
       {/* Left Column - Main heading and stats */}
       <div className="relative flex-1 border-l border-gray-new-50 pl-[19px] lg:order-1 lg:pl-5">
-        <SectionLabel text="Where we're headed" />
+        <SectionLabel>Where we&apos;re headed</SectionLabel>
 
         <h3 className="mt-[34px] max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:mt-7 xl:max-w-[600px] xl:text-[40px] lg:mt-6 lg:max-w-full lg:text-4xl md:mt-5 md:text-[32px] sm:text-[28px]">
           <span className="text-black-pure">Neon is a Databricks company.</span>{' '}
@@ -96,7 +76,7 @@ const Stats = () => (
       {/* Right Column - Vision statements */}
       <div className="lg:order-0 relative w-[436px] border-l border-gray-new-50 pl-5 xl:w-[380px] lg:w-full">
         <div className="pt-[3px]">
-          <SectionLabel text="Our Vision" />
+          <SectionLabel>Our Vision</SectionLabel>
         </div>
 
         <div className="mt-[340px] w-[416px] xl:mt-[260px] xl:w-[360px] lg:mt-[200px] lg:w-full md:mt-32 sm:mt-24">
