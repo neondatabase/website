@@ -5,8 +5,13 @@ updatedOn: '2026-01-23T14:08:34.212Z'
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
 
-<CTA title="Set up Neon in one command ✨" 
-description="Run <code>npx neonctl@latest init</code> to configure your app with AI-guided onboarding. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>" isIntro></CTA>
+<CTA 
+  title="Set up Neon in one command" 
+  description="Run this command to launch AI-guided setup. <a href='https://neon.com/blog/one-command-to-bridge-cursor-and-neon'>Learn more →</a>"
+  command="npx neonctl@latest init"
+  trackingLabel="Copy neonctl init - docs intro"
+  isIntro
+/>
 
 ## Get started
 

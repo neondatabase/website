@@ -1,9 +1,12 @@
+'use client';
+
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
 
 import Button from '../button';
+import CodeBlockWrapper from '../code-block-wrapper';
 
 const DEFAULT_DATA = {
   title: 'Try it on Neon!',
@@ -18,6 +21,8 @@ const DocCta = ({
   description = DEFAULT_DATA.description,
   buttonText = DEFAULT_DATA.buttonText,
   buttonUrl = DEFAULT_DATA.buttonUrl,
+  command = null,
+  trackingLabel = null,
   isIntro = false,
 }) => (
   <figure
@@ -49,6 +54,16 @@ const DocCta = ({
         )}
         dangerouslySetInnerHTML={{ __html: description }}
       />
+      {command && (
+        <CodeBlockWrapper
+          className="mt-4 rounded-md border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10 [&>pre]:!bg-transparent [&>pre]:p-3"
+          trackingLabel={trackingLabel}
+        >
+          <pre className="!my-0">
+            <code className="language-bash">{command}</code>
+          </pre>
+        </CodeBlockWrapper>
+      )}
     </div>
     {!isIntro && (
       <Button
@@ -67,6 +82,8 @@ DocCta.propTypes = {
   description: PropTypes.node,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
+  command: PropTypes.string,
+  trackingLabel: PropTypes.string,
   isIntro: PropTypes.bool,
 };
 
