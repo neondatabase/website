@@ -29,7 +29,7 @@ Use these SDKs to programmatically manage your Neon infrastructure — projects,
 
 <a href="/docs/reference/python-sdk" description="Programmatically manage Neon projects, branches, databases, and other platform resources" icon="neon">Python SDK (Neon API)</a>
 
-<a href="/docs/reference/neondatabase-toolkit" description="An SDK for AI Agents (and humans) that includes both the Neon TypeScript SDK and the Neon Serverless Driver" icon="neon">@neondatabase/toolkit</a>
+<a href="/docs/reference/neondatabase-toolkit" description="An SDK for AI Agents (and humans) that includes both the Neon API TypeScript SDK and the Neon Serverless Driver" icon="neon">@neondatabase/toolkit</a>
 
 </DetailIconCards>
 
