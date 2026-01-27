@@ -12,7 +12,7 @@ import LINKS from 'constants/links';
 import MENUS from 'constants/menus';
 import { TopbarContext } from 'contexts/topbar-context';
 import useMobileMenu from 'hooks/use-mobile-menu';
-import ChevronIcon from 'icons/chevron-down.inline.svg';
+import ChevronIcon from 'icons/chevron-down-thin.inline.svg';
 
 import Burger from '../burger';
 import MenuBanner from '../menu-banner';
@@ -47,7 +47,7 @@ const MobileMenuItem = ({ text, to, sections, ...otherProps }) => {
       >
         {text}
         {sections && (
-          <ChevronIcon width={24} height={24} className="ml-auto text-black-pure dark:text-white" />
+          <ChevronIcon className="ml-auto text-gray-new-30 dark:text-gray-new-70" />
         )}
       </Tag>
       <LazyMotion features={domAnimation}>
@@ -168,7 +168,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                 size="xxs"
                 tagName="MobileMenu"
               >
-                Log In
+                Log in
               </Button>
               <Button
                 className="h-9 px-[18px]"
@@ -177,7 +177,7 @@ const MobileMenu = ({ isDocPage = false, docPageType = null }) => {
                 size="xxs"
                 tagName="MobileMenu"
               >
-                Sign Up
+                Sign up
               </Button>
             </div>
           </div>

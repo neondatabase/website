@@ -90,6 +90,11 @@ export default {
               to: `${LINKS.useCases}/database-per-tenant`,
               description: 'Data isolation without overhead',
             },
+          ],
+        },
+        {
+          title: 'Build & Operate',
+          items: [
             {
               title: 'Platforms',
               to: LINKS.platforms,
@@ -107,26 +112,6 @@ export default {
             },
           ],
         },
-        {
-          title: 'For teams',
-          items: [
-            {
-              title: 'Startups',
-              to: LINKS.startups,
-              description: 'Build with Neon',
-            },
-            {
-              title: 'Security',
-              to: LINKS.security,
-              description: 'Compliance & privacy',
-            },
-            {
-              title: 'Case studies',
-              to: LINKS.caseStudies,
-              description: 'Explore customer stories',
-            },
-          ],
-        },
       ],
     },
     {
@@ -138,16 +123,41 @@ export default {
       to: LINKS.pricing,
     },
     {
-      text: 'Company',
+      text: 'Resources',
       sections: [
         {
-          title: 'Company',
+          title: 'Learn',
           items: [
             {
               title: 'Blog',
               to: LINKS.blog,
               description: 'Technical posts & product updates',
             },
+            {
+              title: 'Case studies',
+              to: LINKS.caseStudies,
+              description: 'Explore customer stories',
+            },
+            {
+              title: 'Changelog',
+              to: LINKS.changelog,
+              description: 'Product updates',
+            },
+            {
+              title: 'Community',
+              to: LINKS.discord,
+              description: 'Connect on Discord',
+            },
+            {
+              title: 'Startups',
+              to: LINKS.startups,
+              description: 'Build with Neon',
+            },
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
             {
               title: 'About us',
               to: LINKS.aboutUs,
@@ -163,30 +173,15 @@ export default {
               to: LINKS.contactSales,
               description: 'Get in touch',
             },
-          ],
-        },
-        {
-          title: 'Resources',
-          items: [
             {
               title: 'Security',
               to: LINKS.security,
-              description: 'Security & compliance portal',
+              description: 'Compliance & privacy',
             },
             {
               title: 'Status',
               to: LINKS.status,
               description: 'Service status',
-            },
-            {
-              title: 'Changelog',
-              to: LINKS.changelog,
-              description: 'Product updates',
-            },
-            {
-              title: 'Community',
-              to: LINKS.discord,
-              description: 'Connect on Discord',
             },
           ],
         },
