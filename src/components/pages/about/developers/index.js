@@ -1,3 +1,1 @@
-import Developers from './developers';
-
-export default Developers;
+export { default } from './developers';

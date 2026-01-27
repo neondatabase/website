@@ -1,3 +1,1 @@
-import Connections from './connections';
-
-export default Connections;
+export { default } from './connections';

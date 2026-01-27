@@ -1,3 +1,1 @@
-import Stats from './stats';
-
-export default Stats;
+export { default } from './stats';
