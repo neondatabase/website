@@ -34,7 +34,7 @@ As a project becomes a product, small teams need to ship quickly and support rea
 - [Branching](https://neon.com/branching) lets you spin up development, preview, and test environments instantly, matching the latest production state, without manual work
 - [Out-of-the-box integrations](https://neon.com/docs/guides/integrations) with platforms like Vercel further simplify previews and deployments
 - [API-first workflows](https://neon.com/docs/reference/api-reference) make it easy to automate almost all database operations
-- AI-coding support via [MCP](https://neon.com/docs/ai/neon-mcp-server) and [AI rules](https://neon.com/docs/ai/ai-rules) allows tools like Cursor and Claude to fully interact with Neon
+- AI-coding support via [MCP](https://neon.com/docs/ai/neon-mcp-server) and [Agent Skills](https://neon.com/docs/ai/agent-skills) allows tools like Cursor and Claude to fully interact with Neon
 - [Instant restores](https://neon.com/docs/guides/backup-restore) lower the stakes for mistakes and accidents
 - [Built-in connection pooling](https://neon.com/docs/connect/connection-pooling) takes care of growing connections in your serverless apps
 - You get access to [compliance and security features](https://neon.com/blog/why-we-no-longer-lock-premium-features) without enterprise-only contracts

@@ -14,6 +14,7 @@ const sharedMdxComponents = {
   NeonRLSDeprecation: 'shared-content/neon-rls-deprecation',
   LinkAPIKey: 'shared-content/manage-api-keys',
   AIRule: 'shared-content/ai-rule-usage',
+  AISkill: 'shared-content/ai-skill-usage',
   NextSteps: 'shared-content/next-steps',
   MCPTools: 'shared-content/mcp-tools',
   PrivatePreviewEnquire: 'shared-content/private-preview-enquire',
