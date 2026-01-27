@@ -53,7 +53,7 @@ Which skills do you have access to?
 You should see the Neon skills listed. Start using them with natural language prompts like:
 
 - _"Get started with Neon"_
-- _"Set up Drizzle ORM with Neon"_  
+- _"Set up Drizzle ORM with Neon"_
 - _"Create a new Neon branch using the API"_
 
 Claude will automatically select and execute the relevant skill.

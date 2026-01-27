@@ -11,6 +11,7 @@ npx add-skill neondatabase/agent-skills
 ```
 
 This works with:
+
 - **Cursor** - Skills are auto-discovered and invokable via slash commands
 - **Claude Code** - Skills load automatically when relevant
 - **Other agents** - Any tool supporting the Agent Skills format
