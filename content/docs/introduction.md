@@ -1,6 +1,6 @@
 ---
 title: Neon documentation
-updatedOn: '2026-01-27T12:19:44.640Z'
+updatedOn: '2026-01-27T16:46:27.353Z'
 ---
 
 Neon is serverless Postgres designed to help you build faster. **Autoscaling**, **branching**, **instant restore**, and more. Get started with our [Free plan](https://console.neon.tech)
