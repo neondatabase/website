@@ -1,15 +1,15 @@
 ---
 title: 'Compute Autoscaling Report'
-subtitle: A deep-dive into the numbers behind Neon Autoscaling in 2025.
+subtitle: A deep-dive into the numbers behind Neon Autoscaling.
 updatedOn: '2025-06-17T09:00:00.000Z'
 ---
 
 ### Summary
 
-- Neon customers <span className="bg-green-45/20 text-green-45 p-1">saved $74.3 million</span> in 2025 using Autoscaling.
-- Production databases use <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> on Neon by scaling up and down to match workload.
-- Autoscaling <span className="bg-green-45/20 text-green-45 p-1">prevented 51 million performance degradation</span> incidents in 2025.
-- Running scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned costs 14.6x more</span> than on Neon.
+- Neon customers <span className="bg-green-45/20 text-green-45 p-1">saved $4.07 million</span> in December 2025 thanks to autoscaling.
+- Production databases use <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> on Neon by scaling up and down to match workload.
+- Autoscaling <span className="bg-green-45/20 text-green-45 p-1">prevented 6.9 million performance degradation</span> incidents in December.
+- Running scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned costs 4.9x more</span> than on Neon.
 
 We arrive at these numbers by comparing the amount of compute used on Neon to the amount of compute it would take to run the same workloads on a provisioned (non-autoscaling) platform like RDS.
 
@@ -22,11 +22,11 @@ This report focuses on **compute** autoscaling only.
 ## About Autoscaling
 
 The amount of CPU, memory and local disk needed to run any database changes constantly over time.
-For example, here's the aggregate compute utilization over a 24-hour period for an average database:
+For example, here is the compute utilization of a typical database over a 24-hour period:
 
 <AutoscalingChart title="Compute Usage of a Database over 24hrs" datasetKey="actual_compute_1d" autoscalingOnly={true} showStats={false} compact={true}/>
 
-In the chart above, a CU is an index of CPU, memory, and local file cache (LFC) utilization.
+In the chart, a CU is an index of CPU, memory, and local file cache (LFC) utilization.
 1 CU ≈ 1 CPU, 4GB RAM.
 
 <blockquote className="text-xl">
@@ -36,21 +36,23 @@ In the chart above, a CU is an index of CPU, memory, and local file cache (LFC) 
 A **provisioned** database platform (RDS for example) is one where databases run on instances with a fixed amount of CPU, memory, and sometimes even disk.
 Sizing a workload in provisioned platforms presents a challenge because nobody knows how much compute their database will use in the future.
 
-Since we are only looking at past usage in this report, we can model the instance size any database needs using Amazon's database rightsizing algorithm which defaults to recommending "P99.5 utilization + 20%" when it comes to CPU and memory:
+But when we're looking at historic compute utilization data, we can determine the instance size any database would have needed using Amazon's database rightsizing algorithm which defaults to recommending "P99.5 utilization + 20%" when it comes to CPU and memory.
+
+Here's what P99.5 + 20% looks like for our example database:
 
 <AutoscalingChart title="Provisioned: P99.5 + 20% (AWS Recommended)" datasetKey="actual_compute_1d" showStats={false} compact={true} showOverprovisionSelector={false}/>
 
-In the chart above, the <span className="p-1" style={{"background-color":"rgb(255 166 76 / 0.2)", "color":"rgb(255 166 76)"}}>orange is wasted compute.</span>
+You can think of <span className="p-1" style={{"background-color":"rgb(255 166 76 / 0.2)", "color":"rgb(255 166 76)"}}>orange as wasted compute.</span>
 It's cloud compute that we paid for, but it delivered zero value.
 It just sat there idle.
 
-Even when we over-provision, we see some <span className="bg-secondary-1/20 text-secondary-1 p-1">performance degradations in red</span>. This is because AWS rightsizing algorithm over-provisions 20% above **the P99.5%** value of resource utilization. So the most extreme 0.5% resource peaks may still exhaust the available resources.
+Even when we over-provision, we see two <span className="bg-secondary-1/20 text-secondary-1 p-1">performance degradations in red</span>. This is because AWS rightsizing algorithm over-provisions 20% above **the P99.5%** value of resource utilization. So the most extreme 0.5% resource peaks may still exhaust the available resources.
 
 To save money, we could under-provision _(i.e.: buy a smaller instance)_:
 
 <AutoscalingChart title="Provisioned: Under-provision " datasetKey="actual_compute_1d" showStats={false} compact={true} overprovision={-20} showOverprovisionSelector={false}/>
 
-But now we see <span className="bg-secondary-1/20 text-secondary-1 p-1">incidents in red</span> where the database needs more compute than what is available.
+But now we see even more <span className="bg-secondary-1/20 text-secondary-1 p-1">incidents in red</span> where the database needs more compute than what is available.
 At these points we might experience degraded performance, even total failure.
 
 Autoscaling removes the sizing decision from the customer.
@@ -58,10 +60,10 @@ It uses an algorithm to buy and allocate the right amount of compute at each poi
 
 <AutoscalingChart title="Autoscaling: Compute allocated automatically to match workload" datasetKeys={['actual_compute_1d', 'autoscaling_1d']} showStats={false} compact={true} autoscalingOnly={true}/>
 
-Two improvements are clear in the chart above:
+As you can see, with autoscaling we have:
 
 1. **Less wasted compute** - The area in green (compute that was bought but not used) is minimal.
-2. **Less resource exhaustion** - There are no points where the workload needed more compute than what was available.
+2. **Little or no resource exhaustion** - There are no points where the workload needed more compute than what was available.
 
 Throughout the rest of this report, we focus on the difference between the amount of compute (and costs) used in an autoscaling vs provisioned database platform running the same workloads.
 
@@ -80,17 +82,36 @@ Three patterns are visible:
 
 ### Production Statistics
 
-When we take every production database on Neon and run the AWS RDS rightsizing algorithm on each one using their autoscaling history from 2025, we can calculate the equivalent compute usage and cost.
+When we take every production database on Neon and run the AWS RDS rightsizing algorithm on each one using their autoscaling history from December 2025, we can calculate the equivalent compute usage and cost.
+For this report, a database is classified as production if it is running at greater than 1CU on average.
 
 #### Compute
-
-Across the entire Neon platform in 2025, the average production database used <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> than if sized at 20% above P99.5 load on a provisioned platform like RDS.
+Across the entire Neon platform in December 2025, the average production database used <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> than if sized at 20% above P99.5 load on a provisioned platform like RDS.
 
 <AutoscalingViz />
 
 #### Cost
+When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
 
-When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for large provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">2x lower costs on Neon</span> on average.
+
+<Admonition title="Why is cost savings less than compute savings?" type="info">
+  Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
+  
+  Autoscaling platforms run a distributed system that automatically handles high availability and keeps warm pools of capacity ready for databases that are autoscaling up. This requires additional compute and puts a small price premium on the base CU-hour rate for autoscaling relative to provisioned.
+  
+  See [methodology](#methodology) for our exact approach and rationale for estimating cost.
+</Admonition>
+
+#### Performance Degradations
+Database compute loads can be spiky. Operations like index creation, schema changes and migrations, bulk exports, and even just user load patterns can cause momentary spikes in memory and CPU in particular. When we follow the AWS rightsizing algorithm and provision at P99.5 + 20%, the top 0.5% of loads are often spiky enough to exceed that 20% buffer.
+
+When we counted up the number of times each production database on Neon autoscaled up beyond the provisioned P99.5 + 20% equivalent, we found that <span className="bg-secondary-1/20 text-secondary-1 p-1">the average production database would experience 20 incidents per month</span> where compute resources would be exhausted if it were running on a provisioned platform.
+
+Autoscaling helps turn load spikes that would cause late-night on-call pages and customer-facing issues on a provisioned platform into a few extra pennies in cost on Neon.
+
+#### Autoscaling Events per Database
+
+The average production database running on Neon adjusts its compute size 11,354 times per month. To understand how it works, the documentation on [Neon Autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is the best place to start.
 
 ### Production Example
 
@@ -109,12 +130,13 @@ The closest m-series latest-generation RDS instances that fit the provisioned sp
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 4.8CPU 19GB RAM RDS instance, so you are forced to "round up" to the next largest instance.
 
+
 ---
 
 ## Scale to Zero
 
 In one of the features unique to Neon, compute can be configured to shut down entirely when there are no active connections and turn back on in [350ms](https://neon-latency-benchmarks.vercel.app/) when needed.
-Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero:
+Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero: 
 
 <AutoscalingChart title="Fig. 3: One week of Autoscaling on a Database with Scale-to-Zero workload" datasetKey="scale_to_zero" autoscalingOnly={true} showStats={false} compact={true} />
 
@@ -122,9 +144,13 @@ This pattern shows up mostly in **non-production databases**: Dev and staging DB
 
 ### Scale to Zero Statistics
 
-Tallying up all the compute used by databases on the Neon platform in 2025 that scaled to zero, and comparing that with the compute required to run the same databases continually on a provisioned platform like RDS, we find that provisioned would use <span className="bg-secondary-1/20 text-secondary-1 p-1">33.2x more compute.</span>
+If we tally up the compute used by small non-production databases that scale to zero on Neon and compare it with the compute required to run the same databases continually on a provisioned platform like RDS, we find that the savings are even more extreme than production databases.
 
-When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 10x.</span>
+#### Compute
+ A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
+
+#### Costs
+When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 4.9x.</span>
 The savings numbers from scale to zero are dramatic enough to make it clear that this feature is changing customer behavior.
 Scale to zero changes the equation on what types of database usage patterns are economically viable.
 
@@ -141,6 +167,10 @@ That drives the cost down to <span className="bg-green-45/20 text-green-45 p-1">
 Provisioned platforms cannot scale to zero, so your best option for this workload is to buy the smallest instance that fits the workload (zero over-provisioning).
 Using that approach, running a similar workload on RDS would use <span className="bg-secondary-1/20 text-secondary-1 p-1">7.1x more compute</span> and <span className="bg-secondary-1/20 text-secondary-1 p-1">cost 4.4x more</span>.
 
+#### Checking the math with actual RDS instances
+The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs 
+
+
 ## Methodology
 
 ### Conservative Estimates
@@ -154,17 +184,26 @@ We've been careful to make these numbers as conservative as possible. For exampl
 ### Classifying workloads
 
 - **Production:** Any database with an average CU-hour rate greater than or equal to 1.
-- **Scale to Zero:** Any database that is running less than 95% of time.
+- **Scale to Zero/Non-Production:** Any database with an average CU-hour rate less than 1 that is running less than 95% of time.
+
+We've excluded all databases on the Neon Free Plan from this analysis.
 
 ### Sizing workloads
 
-We use P99.5 + 20% as the default over-provisioning setting https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html
+We use P99.5 + 20% as the default over-provisioning setting following the default logic of [AWS RDS rightsizing tool](https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html). To compute the P99.5 for each database we look at the autoscaling history that month and discard the 0.5% of time where the database was scaled largest. So if a database spent 1% of time scaled up to 8CU, the P99.5 would be 8CU. If a database spent only 0.25% of time scaled up to 8CU the P99.5 would be lower.
 
 ### Provisioned costs
 
-To find the approximate CU-hour rate to use from RDS
+- **Small Databases** - We used a `$0.065` per CU-hour equivalent rate based on the equivalent hourly cost of the smallest RDS instances without dedicated storage bundled in.
+- **Large Databases** - We used a `$0.132` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger RDS instances (`$0.085`) and adding a percentage penalty (50%) to account for the fact that you cannot buy the exact size compute you need _(there is no 19GB RAM instance)_ and you are forced to round up to the next instance.
 
 ### Counting Incidents
+
+To get a count of performance degradation incidents, we:
+1. Calculate the P99.5 + 20% "provisioned equivalent" size of each Neon database for each month
+2. Count the number of distinct time periods where the autoscaling history showed the database scaling up to larger than the P99.5 + 20% size.
+
+This means if a database spent 1 minute above the P99.5 + 20% threshold, it would count as one incident, and if it scaled above and below the threshold for 5 seconds at a time in three separate occasions it would count as three incidents.
 
 ## Terminology
 
