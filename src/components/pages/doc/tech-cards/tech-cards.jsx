@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import clsx from 'clsx';
 import NextLink from 'next/link';
