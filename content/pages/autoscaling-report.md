@@ -83,11 +83,13 @@ Three patterns are visible:
 When we take every production database on Neon and run the AWS RDS rightsizing algorithm on each one using their autoscaling history from 2025, we can calculate the equivalent compute usage and cost.
 
 #### Compute
+
 Across the entire Neon platform in 2025, the average production database used <span className="bg-green-45/20 text-green-45 p-1">4.6x less compute</span> than if sized at 20% above P99.5 load on a provisioned platform like RDS.
 
 <AutoscalingViz />
 
 #### Cost
+
 When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for large provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">2x lower costs on Neon</span> on average.
 
 ### Production Example
@@ -107,13 +109,12 @@ The closest m-series latest-generation RDS instances that fit the provisioned sp
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 4.8CPU 19GB RAM RDS instance, so you are forced to "round up" to the next largest instance.
 
-
 ---
 
 ## Scale to Zero
 
 In one of the features unique to Neon, compute can be configured to shut down entirely when there are no active connections and turn back on in [350ms](https://neon-latency-benchmarks.vercel.app/) when needed.
-Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero: 
+Many small databases have an autoscaling history that looks like the one below, oscillating between a minimum configured size and zero:
 
 <AutoscalingChart title="Fig. 3: One week of Autoscaling on a Database with Scale-to-Zero workload" datasetKey="scale_to_zero" autoscalingOnly={true} showStats={false} compact={true} />
 
