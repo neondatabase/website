@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
