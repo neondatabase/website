@@ -91,6 +91,7 @@ const Link = forwardRef(
         style: theme,
         text: tagText || getNodeText(children),
         tag_name: tagName,
+        destination: to,
       });
     };
 

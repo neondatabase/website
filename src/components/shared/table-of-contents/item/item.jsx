@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
+import sendGtagEvent from 'utils/send-gtag-event';
+
 const Item = ({
   title,
   level,
@@ -35,6 +37,14 @@ const Item = ({
         behavior: 'smooth',
       });
     }
+
+    // Track TOC click
+    sendGtagEvent('TOC clicked', {
+      heading: title,
+      anchor: id,
+      level,
+      tag_name: 'TableOfContents',
+    });
 
     // changing hash without default jumps to anchor
     // eslint-disable-next-line no-restricted-globals

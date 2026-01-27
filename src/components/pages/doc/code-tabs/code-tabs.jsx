@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useState, useContext, useEffect } from 'react';
 
 import { CodeTabsContext } from 'contexts/code-tabs-context';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 const CodeTabs = ({ labels = [], reverse = false, children }) => {
   const { activeTab, setActiveTab } = useContext(CodeTabsContext);
@@ -22,6 +23,7 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
     const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
+    sendGtagEvent('Tab clicked', { tab_label: label, tag_name: 'CodeTab' });
   };
 
   return (

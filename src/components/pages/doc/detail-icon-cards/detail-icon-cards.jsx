@@ -193,6 +193,8 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                 'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
               )}
               to={href}
+              tagName="DocsNavCard"
+              tagText={children}
               {...(target && { target })}
             >
               <div
