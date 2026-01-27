@@ -87,7 +87,7 @@ A Compute Unit (CU) represents approximately 4 GB of RAM, along with associated 
 Neon supports two compute configurations:
 
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
-- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: When setting maximum above 10 CUs, the minimum must be at least max/8. For more information, see [Autoscaling](/docs/introduction/autoscaling)
+- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (e.g., if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
 ### Configure your restore window
 
