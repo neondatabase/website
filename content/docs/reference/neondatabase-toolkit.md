@@ -41,8 +41,8 @@ The primary goal of the toolkit is to abstract away the multi-step process of cr
 This is an experimental feature and is subject to change.
 </Admonition>
 
-<Admonition type="tip" title="AI Rules available">
-Working with AI coding assistants? Check out our [AI rules for the @neondatabase/toolkit](/docs/ai/ai-rules-neon-toolkit) to help your AI assistant create, query, and destroy ephemeral Neon Postgres databases.
+<Admonition type="tip" title="Agent Skills available">
+Working with AI coding assistants? Check out our [Agent Skill for Neon](/docs/ai/agent-skills) to help your AI assistant create, query, and destroy ephemeral Neon Postgres databases.
 </Admonition>
 
 ## Getting started

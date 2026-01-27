@@ -30,8 +30,8 @@ updatedOn: '2025-12-11T19:49:37.744Z'
 
 Neon supports the [neon-api - Python client for the Neon API](https://pypi.org/project/neon-api/), a wrapper for the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). This SDK simplifies integration of Python applications with the Neon platform, providing methods to programmatically manage API keys, Neon projects, branches, databases, endpoints, roles, and operations.
 
-<Admonition type="tip" title="AI Rules available">
-Working with AI coding assistants? Check out our [AI rules for the Neon Python SDK](/docs/ai/ai-rules-neon-python-sdk) to help your AI assistant generate better code when managing Neon resources with Python.
+<Admonition type="tip" title="Agent Skills available">
+Working with AI coding assistants? Check out our [Agent Skill for the Neon Python SDK](/docs/ai/agent-skills-neon-python-sdk) to help your AI assistant generate better code when managing Neon resources with Python.
 </Admonition>
 
 ## Installation

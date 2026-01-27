@@ -46,7 +46,7 @@ You can also run the `init` command in the root directory of your app with `npx`
 npx neonctl@latest init
 ```
 
-After running the command, restart your IDE and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The Neon MCP Server installs Cursor skills from the [Neon skills repository](https://github.com/neondatabase-labs/ai-skills) to help you get started with Neon, including helping you configure a database connection. The Neon VS Code Extension (installed for Cursor and VS Code) provides database schema browsing, SQL editing, and table data management directly in your IDE.
+After running the command, restart your IDE and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The Neon MCP Server provides built-in guidelines to help you get started with Neon, including helping you configure a database connection. The command also installs [Neon Agent Skills](/docs/ai/agent-skills) for context-aware guidance. The Neon VS Code Extension (installed for Cursor and VS Code) provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
 <Admonition type="note">
 For Cursor users, you can also ask: "Get started with Neon using MCP Resource"
