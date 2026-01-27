@@ -35,17 +35,17 @@ const CONNECTIONS_DATA = [
 ];
 
 const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) => (
-  <article className="group relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 xl:p-6 md:p-5">
+  <article className="group relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 xl:p-6 lg:px-7 lg:py-6 md:px-6 md:py-6">
     <Icon
-      className="relative z-10 h-[52px] w-[52px] text-black-pure xl:h-12 xl:w-12 lg:h-11 lg:w-11"
+      className="relative z-10 h-[52px] w-[52px] text-black-pure lg:h-11 lg:w-11"
       aria-hidden="true"
     />
 
-    <div className="relative z-10 mb-6 mt-[87px] flex flex-col gap-3 xl:mt-16 xl:gap-2.5 lg:mt-12 lg:gap-2 md:mt-10">
-      <h4 className="text-2xl font-medium leading-tight tracking-extra-tight text-black-pure xl:text-[22px] lg:text-xl md:text-lg">
+    <div className="relative z-10 mb-6 mt-[87px] flex flex-col gap-3 xl:mt-16 xl:gap-2.5 lg:mt-12 lg:gap-2.5 md:mb-5 md:mt-8">
+      <h4 className="text-2xl font-medium leading-tight tracking-extra-tight text-black-pure lg:text-xl">
         {platform}
       </h4>
-      <p className="text-lg font-normal leading-snug tracking-[-0.05em] text-gray-new-20 xl:text-base lg:text-[15px] md:text-sm">
+      <p className="text-lg font-normal leading-snug tracking-[-0.025em] text-gray-new-20 lg:text-base">
         {description}
       </p>
     </div>
@@ -54,7 +54,7 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40"
+      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40 lg:text-sm"
       aria-label={`${linkText} - ${platform}`}
     >
       <span>{linkText}</span>
@@ -62,7 +62,7 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
     </a>
 
     <div
-      className="pointer-events-none absolute right-0 top-0 h-full w-[320px] xl:w-[280px] lg:w-[260px] md:w-[240px]"
+      className="pointer-events-none absolute right-0 top-0 h-full w-[320px] xl:w-[280px] lg:w-[240px] md:w-[220px]"
       aria-hidden="true"
       style={{
         maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -84,10 +84,10 @@ ConnectionCard.propTypes = {
 
 const Connections = () => (
   <SecondarySection title="Community" className="pb-20">
-    <header className="mb-[64px] xl:mb-14 lg:mb-12 md:mb-10">
+    <header className="mb-[64px] xl:mb-14 lg:mb-12 md:mb-10 sm:mb-8">
       <SectionLabel>Community</SectionLabel>
 
-      <h3 className="mt-5 max-w-[813px] text-5xl font-normal leading-dense tracking-tighter text-black-pure xl:max-w-[680px] xl:text-[40px] lg:max-w-[560px] lg:text-4xl md:max-w-full md:text-[32px] sm:text-[28px]">
+      <h3 className="mt-5 max-w-[813px] text-5xl font-normal leading-dense tracking-tighter text-black-pure xl:max-w-[680px] xl:text-[40px] lg:max-w-[560px] lg:text-[36px] md:max-w-full md:text-[28px]">
         Connect with us{' '}
         <span className="text-gray-new-40">wherever you work, build, and share your journey.</span>
       </h3>
@@ -96,7 +96,7 @@ const Connections = () => (
     </header>
 
     {/* Cards Grid */}
-    <ul className="grid grid-cols-3 gap-[31px] xl:gap-6 lg:grid-cols-2 lg:gap-5 md:grid-cols-1 md:gap-4">
+    <ul className="grid grid-cols-3 gap-[31px] xl:gap-5 lg:grid-cols-2 lg:gap-4 md:grid-cols-1 md:gap-4">
       {CONNECTIONS_DATA.map((card) => (
         <li key={card.platform}>
           <ConnectionCard {...card} />

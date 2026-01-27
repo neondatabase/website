@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import HeadingLabel from 'components/pages/home/heading-label';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Logos from 'components/shared/logos';
 import PauseableVideo from 'components/shared/pauseable-video';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 
@@ -17,7 +17,7 @@ const Hero = () => (
       className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
       size="1600"
     >
-      <HeadingLabel>NEON: A DATABRICKS COMPANY</HeadingLabel>
+      <SectionLabel className="text-gray-new-80">NEON: A DATABRICKS COMPANY</SectionLabel>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
         Ship faster with Postgres for modern engineering teams

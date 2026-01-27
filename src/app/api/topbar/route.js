@@ -29,6 +29,7 @@ export async function GET() {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Failed to fetch topbar data', error);
-    return NextResponse.json({ error: 'Failed to fetch topbar data' }, { status: 500 });
+    // Return empty data instead of 500 error to allow page to render
+    return NextResponse.json({ text: '', link: null }, { status: 200 });
   }
 }

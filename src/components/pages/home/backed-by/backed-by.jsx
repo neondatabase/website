@@ -2,11 +2,11 @@ import clsx from 'clsx';
 import Image from 'next/image';
 
 import Container from 'components/shared/container';
+import SectionLabel from 'components/shared/section-label';
 import databaseIcon from 'icons/home/database.svg';
 import databricksIcon from 'icons/home/databricks.svg';
 import bgNoise from 'images/pages/home/backed-by/bg-noise.jpg';
 
-import HeadingLabel from '../heading-label';
 
 import Quotes from './quotes';
 
@@ -30,9 +30,7 @@ const BackedBy = () => (
     <Container className="z-10" size="1344">
       <div className="relative z-10 flex gap-16 xl:gap-[108px] lg:gap-8 md:gap-5 md:p-0 sm:flex-col sm:gap-20">
         <div className="flex-1 border-l border-gray-new-50 px-8 xl:pl-6 xl:pr-0 lg:pl-[18px] sm:border-none sm:pl-0">
-          <HeadingLabel className="mb-5 md:mb-4" theme="black">
-            Backed by giants
-          </HeadingLabel>
+          <SectionLabel className="mb-5 md:mb-4">Backed by giants</SectionLabel>
           <h2
             className={clsx(
               'text-[44px] leading-dense tracking-tighter text-gray-new-40',
@@ -69,9 +67,7 @@ const BackedBy = () => (
             'xl:w-[340px] xl:pl-5 xl:pr-0 lg:w-64 lg:pl-[18px] sm:w-full sm:border-none sm:pl-0'
           )}
         >
-          <HeadingLabel className="md:mb-4" theme="black">
-            Trusted by the best
-          </HeadingLabel>
+          <SectionLabel className="md:mb-4">Trusted by the best</SectionLabel>
           <Quotes />
         </div>
       </div>
