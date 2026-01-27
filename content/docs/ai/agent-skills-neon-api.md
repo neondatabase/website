@@ -28,48 +28,48 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 ### Guidelines
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/guidelines.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/guidelines.md"
   language="md"
 />
 
 ### Projects
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/projects.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/projects.md"
   language="md"
 />
 
 ### Branches
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/branches.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/branches.md"
   language="md"
 />
 
 ### Endpoints
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/endpoints.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/endpoints.md"
   language="md"
 />
 
 ### API Keys
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/keys.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/keys.md"
   language="md"
 />
 
 ### Operations
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/operations.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/operations.md"
   language="md"
 />
 
 ### Organizations
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-rest-api/organizations.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-rest-api/organizations.md"
   language="md"
 />

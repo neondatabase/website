@@ -27,6 +27,6 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 ## Reference
 
 <ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/using-neon/references/neon-auth.md"
+  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-auth.md"
   language="md"
 />
