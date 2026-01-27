@@ -41,7 +41,7 @@ The MCP server integration lets Claude interact with Neon's live API endpoints. 
 2. Install the Neon plugin:
 
    ```bash
-   /plugin install using-neon@neon-agent-skills
+   /plugin install neon-postgres@neon-agent-skills
    ```
 
 Once installed, verify by asking Claude Code:
@@ -53,7 +53,7 @@ Which skills do you have access to?
 You should see the Neon skills listed. Start using them with natural language prompts like:
 
 - _"Get started with Neon"_
-- _"Set up Drizzle ORM with Neon"_  
+- _"Set up Drizzle ORM with Neon"_
 - _"Create a new Neon branch using the API"_
 
 Claude will automatically select and execute the relevant skill.
