@@ -23,7 +23,7 @@ Neon is serverless Postgres designed to help you build faster. **Autoscaling**, 
 
 <a href="/docs/get-started/workflow-primer" description="Integrate branching into your workflow">Learn about branching</a>
 
-<a href="/docs/auth/overview" description="Set up managed auth that branches with your database" icon="lock-landscape">Setup Neon Auth</a>
+<a href="/docs/auth/overview" description="Set up managed auth that branches with your database" icon="lock-landscape">Set up Neon Auth</a>
 
 </DetailIconCards>
 
