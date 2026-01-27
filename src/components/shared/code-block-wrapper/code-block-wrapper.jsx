@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import CheckIcon from './images/check.inline.svg';
 import CopyIcon from './images/copy.inline.svg';
@@ -35,6 +36,7 @@ const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
   filename = null,
+  trackingLabel = null,
   children,
   as: Tag = 'figure',
   ...otherProps
@@ -42,6 +44,13 @@ const CodeBlockWrapper = ({
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
   const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
+
+  const handleCopyWithTracking = () => {
+    handleCopy(code);
+    if (trackingLabel) {
+      sendGtagEvent('Button Clicked', { text: trackingLabel });
+    }
+  };
 
   return (
     <Tag
@@ -69,7 +78,7 @@ const CodeBlockWrapper = ({
         type="button"
         aria-label={isCopied ? 'Copied' : 'Copy'}
         disabled={isCopied}
-        onClick={() => handleCopy(code)}
+        onClick={handleCopyWithTracking}
       >
         {isCopied ? (
           <CheckIcon className="h-4 w-4 text-current" />
@@ -87,6 +96,7 @@ CodeBlockWrapper.propTypes = {
   className: PropTypes.string,
   copyButtonClassName: PropTypes.string,
   filename: PropTypes.string,
+  trackingLabel: PropTypes.string,
   children: PropTypes.node,
   as: PropTypes.string,
 };

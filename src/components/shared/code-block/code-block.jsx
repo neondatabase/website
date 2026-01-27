@@ -16,6 +16,16 @@ const getFileNameFromMeta = (meta) => {
   return match ? match[1] || match[2] || match[3] : null;
 };
 
+const getTrackingLabelFromMeta = (meta) => {
+  if (!meta) return null;
+
+  // Support: trackingLabel="Copy neonctl init - docs intro"
+  // Examples:
+  // ```bash trackingLabel="Copy neonctl init - docs intro"
+  const match = meta.match(/\btrackingLabel=(?:"([^"]+)"|'([^']+)'|(\S+))/i);
+  return match ? match[1] || match[2] || match[3] : null;
+};
+
 const CodeBlock = async ({
   className = null,
   copyButtonClassName = null,
@@ -25,6 +35,7 @@ const CodeBlock = async ({
   const language = children?.props?.className?.replace('language-', '') || 'text';
   const meta = children?.props?.meta || '';
   const filename = getFileNameFromMeta(meta);
+  const trackingLabel = getTrackingLabelFromMeta(meta);
   const code = children?.props?.children?.trim() || '';
   const html = await highlight(code, language, meta);
 
@@ -36,6 +47,7 @@ const CodeBlock = async ({
         { 'code-wrap': meta?.includes('shouldWrap') }
       )}
       filename={filename}
+      trackingLabel={trackingLabel}
       data-line-numbers={meta?.includes('showLineNumbers')}
       copyButtonClassName={copyButtonClassName}
       {...otherProps}
