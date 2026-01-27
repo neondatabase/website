@@ -23,7 +23,7 @@ const AboutUsPage = () => (
     <Connections />
     <CtaNew
       title="Still have questions? Get in touch."
-      description="Get personalized guidance from our team — we'll help you quickly find the right solution."
+      description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
       buttonText="Talk to Sales"
       buttonUrl={LINKS.contactSales}
     />

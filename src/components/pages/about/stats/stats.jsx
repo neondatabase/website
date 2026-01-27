@@ -53,12 +53,12 @@ StatCard.propTypes = {
 
 const Stats = () => (
   <SecondarySection title="Company Statistics and Vision">
-    <div className="flex gap-x-[108px] xl:gap-x-16 lg:flex-col lg:gap-y-16 md:gap-y-12">
+    <div className="flex gap-x-[128px] xl:gap-x-16 lg:flex-col lg:gap-y-16 md:gap-y-12">
       {/* Left Column - Main heading and stats */}
-      <div className="relative flex-1 border-l border-gray-new-50 pl-[19px] lg:order-1 lg:pl-5">
+      <div className="relative flex-1 before:absolute before:-left-5 before:top-0 before:h-full before:w-px before:bg-gray-new-50 lg:before:hidden">
         <SectionLabel>Where we&apos;re headed</SectionLabel>
 
-        <h3 className="mt-[34px] max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:mt-7 xl:max-w-[600px] xl:text-[40px] lg:mt-6 lg:max-w-full lg:text-4xl md:mt-5 md:text-[32px] sm:text-[28px]">
+        <h3 className="mt-5 max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:mt-7 xl:max-w-[600px] xl:text-[40px] lg:mt-6 lg:max-w-full lg:text-4xl md:mt-5 md:text-[32px] sm:text-[28px]">
           <span className="text-black-pure">Neon is a Databricks company.</span>{' '}
           <span className="text-gray-new-40">
             In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native
@@ -74,19 +74,17 @@ const Stats = () => (
       </div>
 
       {/* Right Column - Vision statements */}
-      <div className="lg:order-0 relative w-[436px] border-l border-gray-new-50 pl-5 xl:w-[380px] lg:w-full">
-        <div className="pt-[3px]">
-          <SectionLabel>Our Vision</SectionLabel>
-        </div>
+      <div className="lg:order-0 relative grid w-[416px] content-between before:absolute before:-left-5 before:top-0 before:h-full before:w-px before:bg-gray-new-50 xl:w-[380px] lg:w-full lg:before:hidden">
+        <SectionLabel>Our Vision</SectionLabel>
 
-        <div className="mt-[340px] w-[416px] xl:mt-[260px] xl:w-[360px] lg:mt-[200px] lg:w-full md:mt-32 sm:mt-24">
-          <p className="text-xl font-medium leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
+        <div className="grid gap-y-10">
+          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
             The mission stays the same:{' '}
             <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">deliver Postgres</mark> for
             developers and AI agents — now backed by the scale and expertise of Databricks.
           </p>
 
-          <p className="mt-10 text-xl font-medium leading-normal tracking-tighter text-black-pure xl:mt-8 xl:text-lg lg:mt-6 lg:text-base">
+          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
             The same technology behind Neon powers Lakebase: The&nbsp;first serverless Postgres
             database{' '}
             <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">

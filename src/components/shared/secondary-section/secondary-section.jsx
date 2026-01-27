@@ -1,17 +1,16 @@
 import PropTypes from 'prop-types';
 
-import Container from 'components/shared/container';
-
 import BulbNoisy from '../../pages/about/stats/images/bulb-horizontal-noise.inline.svg';
 import BulbLargeNoisy from '../../pages/about/stats/images/bulb-large-horizontal-noise.inline.svg';
 import Bulb from '../../pages/about/stats/images/bulb.inline.svg';
+import Container from '../container';
 
 const SecondarySection = ({ children, title = null, className = '' }) => (
   <section className={`safe-paddings overflow-hidden bg-[#E4F1EB] ${className}`.trim()}>
     {title && <h2 className="sr-only">{title}</h2>}
     <Container
-      size={1344}
-      className="relative py-40 xl:!max-w-[1100px] xl:py-32 lg:py-24 md:py-20 sm:py-16"
+      className="py-40 xl:!max-w-[1100px] xl:py-32 lg:py-24 md:py-20 sm:py-16"
+      size="small"
     >
       {children}
       <BulbLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45" />
