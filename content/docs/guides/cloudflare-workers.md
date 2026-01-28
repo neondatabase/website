@@ -179,6 +179,7 @@ Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will
 ```
 
 Replace the following placeholders:
+
 - `localConnectionString` with your Neon connection string (the same one you used to create the Hyperdrive configuration). This is required for local development with `wrangler dev`.
 
 ### Implement the Worker script
