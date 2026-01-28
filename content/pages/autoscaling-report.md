@@ -151,7 +151,7 @@ If we tally up the compute used by small non-production databases that scale to 
 
 #### Compute
 
-A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon. 
+A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
 This is using the same P99.5 + 20% methodology as before.
 
 #### Costs
