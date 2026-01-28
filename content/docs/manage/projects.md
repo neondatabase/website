@@ -5,7 +5,7 @@ isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-01-15T23:54:00.614Z'
+updatedOn: '2026-01-28T07:08:36.343Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
