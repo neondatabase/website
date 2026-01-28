@@ -27,8 +27,8 @@ description="Pre-built prompt for connecting Node/TypeScript applications to Neo
 
 Drizzle is a modern ORM for TypeScript that provides a simple and type-safe way to interact with your database. This guide demonstrates how to connect your application to a Neon Postgres database using Drizzle ORM.
 
-<Admonition type="tip" title="AI Rules available">
-Working with AI coding assistants? Check out our [AI rules for Drizzle ORM with Neon](/docs/ai/ai-rules-neon-drizzle) to help your AI assistant generate better code when using Drizzle with your Neon database.
+<Admonition type="tip" title="Agent Skills available">
+Working with AI coding assistants? Check out our [Agent Skill for Drizzle ORM with Neon](/docs/ai/agent-skills-neon-drizzle) to help your AI assistant generate better code when using Drizzle with your Neon database.
 </Admonition>
 
 To connect a TypeScript/Node.js project to Neon using Drizzle ORM, follow these steps:
