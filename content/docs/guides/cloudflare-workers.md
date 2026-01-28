@@ -21,7 +21,7 @@ Hyperdrive is the recommended approach as it provides optimized connection pooli
 To follow along with this guide, you will need:
 
 - A Neon account. If you do not have one, sign up at [Neon](https://neon.tech). Your Neon project comes with a ready-to-use Postgres database named `neondb`. We'll use this database in the following examples.
-- A Cloudflare account. If you do not have one, sign up for [Cloudflare Workers](https://workers.cloudflare.com/) to get started.
+- A Cloudflare account. If you do not have one, sign up at [Cloudflare](https://dash.cloudflare.com/) to get started.
 - [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your local machine. We'll use Node.js to build and deploy the Workers application.
 
 ## Setting up your Neon database
@@ -53,18 +53,6 @@ Log in to the Neon Console and navigate to the [Projects](https://console.neon.t
        ('1984', 'George Orwell');
    ```
 
-### Retrieve your Neon database connection string
-
-Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
-
-Your pooled connection string should look similar to this:
-
-```bash
-postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-Keep your connection string handy for later use.
-
 ## Setting up your Cloudflare Workers project
 
 <Tabs labels={["Hyperdrive (recommended)", "Neon serverless driver"]}>
@@ -75,42 +63,24 @@ Keep your connection string handy for later use.
 
 To use Hyperdrive with Neon, you'll need to create a dedicated database role for Hyperdrive to use:
 
-1. In the Neon Console, navigate to your project and select **Roles** from the sidebar.
-2. Click **New Role** and enter `hyperdrive-user` as the name (or your preferred name).
-3. **Copy the password** that is generated. Note that the password will not be displayed again - you will have to reset it if you don't save it somewhere secure.
+1. In the Neon Console, navigate to your project.
+2. Select **Branches** from the sidebar, then select the branch you want to use.
+3. Navigate to the **Roles & Databases** section.
+4. Click **New Role** and enter `hyperdrive-user` as the name (or your preferred name).
+5. **Copy the password** that is generated. You'll use this password in the connection string in the next step.
 
 ### Get your Neon connection string for Hyperdrive
 
 1. In the Neon Console, select **Dashboard** from the sidebar.
 2. Go to the **Connection Details** pane.
 3. Select the **branch**, **database**, and **role** (for example, `hyperdrive-user`) that Hyperdrive will connect through.
-4. Select the **psql** option from the connection string dropdown.
-5. **Important**: Uncheck the **connection pooling** checkbox. Hyperdrive manages connection pooling, so you need the direct connection string.
+4. Select **Connection String** from the dropdown menu.
+5. **Important**: Uncheck the **Pooled connection** checkbox. Hyperdrive manages connection pooling, so you need the direct connection string.
 6. Copy the connection string, which should look like this:
 
    ```bash
    postgres://hyperdrive-user:PASSWORD@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname
    ```
-
-### Create a Hyperdrive configuration
-
-#### Authenticate Wrangler with your Cloudflare account
-
-Run the following command to link the Wrangler tool to your Cloudflare account:
-
-```bash
-npx wrangler login
-```
-
-This command will open a browser window and prompt you to log into your Cloudflare account. After logging in and approving the access request for `Wrangler`, you can close the browser window and return to your terminal.
-
-Use Wrangler to create a Hyperdrive configuration with your Neon connection string:
-
-```bash
-npx wrangler hyperdrive create my-neon-hyperdrive --connection-string="postgres://USERNAME:PASSWORD@HOSTNAME:PORT/DATABASE"
-```
-
-Replace the placeholder values with your actual connection details from the previous step. After running this command, save the Hyperdrive ID that is displayed in the output - you'll need it for your `wrangler` configuration file.
 
 ### Create a new Worker project
 
@@ -124,16 +94,49 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 
 ```bash
 ├ In which directory do you want to create your application?
-│ dir ./my-neon-worker
+│ type my-neon-worker
 │
-├ What type of application do you want to create?
-│ type "Hello World" Worker
+├ What would you like to start with?
+│ select "Hello World example"
 │
-├ Do you want to use TypeScript?
-│ no typescript
+├ Which template would you like to use?
+│ Select "Worker only"
+│
+├ Which language do you want to use?
+│ select "TypeScript"
+│
+├ Do you want to use git for version control?
+│ select "Yes"
+│
+├ Do you want to deploy your application?
+│ select "No"
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform.
+For the purpose of demonstration, we will use the **Worker only** template and will deploy the application later.
+
+Navigate to your project directory:
+
+```bash
+cd my-neon-worker
+```
+
+### Create a Hyperdrive configuration
+
+If you are not already authenticated with your Cloudflare account, use the following command:
+
+```bash
+npx wrangler login
+```
+
+This command will open a browser window and prompt you to log into your Cloudflare account. After logging in, you can close the browser window and return to your terminal.
+
+Now, create a Hyperdrive configuration with your Neon connection string:
+
+```bash
+npx wrangler hyperdrive create my-neon-hyperdrive --connection-string="postgres://USERNAME:PASSWORD@HOSTNAME:PORT/DATABASE"
+```
+
+Replace the placeholder values with your actual connection details from the previous step. You will then be prompted with "Would you like Wrangler to add it on your behalf?". Enter **Y**, and continue with the default name. This will add the required Hyperdrive configuration (bindings) to your project.
 
 ### Install the node-postgres driver
 
@@ -144,27 +147,39 @@ npm install pg
 npm install -D @types/pg
 ```
 
+### Create types
+
+To generate the types for your Hyperdrive binding, use the following command:
+
+```bash
+npm run cf-typegen
+```
+
 ### Configure wrangler.jsonc
 
-Add the following configuration to your `wrangler.jsonc` file:
+Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will also update the Hyperdrive binding and add the **localConnectionString**. This will allow our locally running application connect to the Neon database via Hyperdrive. The complete `wrangler.jsonc` file should be as follows:
 
-```json
+```json shouldWrap
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "my-neon-worker",
+  "main": "src/index.js",
   "compatibility_flags": [
     "nodejs_compat"
   ],
-  "compatibility_date": "2024-09-23",
+  "compatibility_date": "2025-09-27",
   "hyperdrive": [
     {
       "binding": "HYPERDRIVE",
-      "id": "<your-hyperdrive-id-here>"
+      "id": "<your-hyperdrive-id-here>",
+      "localConnectionString": "postgres://USERNAME:PASSWORD@HOSTNAME:PORT/DATABASE"
     }
   ]
 }
 ```
 
-Replace `your-hyperdrive-id-here` with the Hyperdrive ID you received when creating the Hyperdrive configuration.
+Replace the following placeholders:
+- `localConnectionString` with your Neon connection string (the same one you used to create the Hyperdrive configuration). This is required for local development with `wrangler dev`.
 
 ### Implement the Worker script
 
@@ -180,13 +195,12 @@ export default {
     });
 
     await client.connect();
-    const result = await client.query('SELECT * FROM books_to_read');
-    const resp = Response.json(result.rows);
+	  const result = await client.query('SELECT * FROM books_to_read;');
 
-    // Clean up the client connection in the background
-    ctx.waitUntil(client.end());
+	  // Clean up the client connection in the background
+	  ctx.waitUntil(client.end());
 
-    return resp;
+	  return Response.json(result.rows);
   },
 };
 ```
@@ -202,20 +216,30 @@ When using Hyperdrive with Neon, always use native PostgreSQL drivers like node-
 To test the worker application locally, run:
 
 ```bash
-npx wrangler dev
+npm run dev
 ```
 
 This command starts a local server and simulates the Cloudflare Workers environment.
 
 ```bash
-❯ npx wrangler dev
- ⛅️ wrangler 3.28.1
--------------------
-Your worker has access to the following bindings:
-- Hyperdrive Configs:
-  - HYPERDRIVE: your-hyperdrive-id
+❯ npm run dev
+
+> my-neon-worker@0.0.0 dev
+> wrangler dev
+
+
+ ⛅️ wrangler 4.61.0
+───────────────────
+Your Worker has access to the following bindings:
+Binding                                                Resource               Mode
+env.HYPERDRIVE (YOUR_HYPERDRIVE_ID)      Hyperdrive Config      local
+
+❓ Your types might be out of date. Re-run `wrangler types` to ensure your types are correct.
+╭──────────────────────────────────────────────────────────────────────╮
+│  [b] open a browser [d] open devtools [c] clear console [x] to exit  │
+╰──────────────────────────────────────────────────────────────────────╯
 ⎔ Starting local server...
-[wrangler:inf] Ready on http://localhost:8787
+[wrangler:info] Ready on http://localhost:8787
 ```
 
 Visit `http://localhost:8787` in your browser to test the worker application. It should return a JSON response with the list of books from the `books_to_read` table.
@@ -223,6 +247,18 @@ Visit `http://localhost:8787` in your browser to test the worker application. It
 </TabItem>
 
 <TabItem>
+
+### Retrieve your Neon database connection string
+
+Navigate to your **Project Dashboard** in the Neon Console and click **Connect** to open the **Connect to your database** modal to find your database connection string. Enable the **Connection pooling** toggle to add the `-pooler` option to your connection string. A pooled connection is recommended for serverless environments. For more information, see [Connection pooling](/docs/connect/connection-pooling).
+
+Your pooled connection string should look similar to this:
+
+```bash
+postgresql://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
+```
+
+Keep your connection string handy for later use.
 
 ### Create a new Worker project
 
@@ -236,18 +272,27 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 
 ```bash
 ├ In which directory do you want to create your application?
-│ dir ./my-neon-worker
+│ type my-neon-worker
 │
-├ What type of application do you want to create?
-│ type "Hello World" Worker
+├ What would you like to start with?
+│ select "Hello World example"
 │
-├ Do you want to use TypeScript?
-│ no typescript
+├ Which template would you like to use?
+│ Select "Worker only"
+│
+├ Which language do you want to use?
+│ select "TypeScript"
+│
+├ Do you want to use git for version control?
+│ select "Yes"
+│
+├ Do you want to deploy your application?
+│ select "No"
 ```
 
-When asked if you want to deploy your application, select `no`. We'll develop and test the application locally before deploying it to Cloudflare Workers platform.
+We'll develop and test the application locally before deploying it to Cloudflare.
 
-The `create-cloudflare` CLI installs the `Wrangler` tool to manage the full workflow of testing and managing your Worker applications.
+The `create-cloudflare` CLI installs the `Wrangler` CLI to manage the full workflow of testing and managing your Worker applications.
 
 ### Implement the Worker script
 
@@ -285,13 +330,13 @@ DATABASE_URL=YOUR_NEON_CONNECTION_STRING
 Now, to test the worker application locally, you can use the `wrangler` CLI which comes with the Cloudflare project setup.
 
 ```bash
-npx wrangler dev
+npm run dev
 ```
 
 This command starts a local server and simulates the Cloudflare Workers environment.
 
 ```bash
-❯ npx wrangler dev
+❯ npm run dev
  ⛅️ wrangler 3.28.1
 -------------------
 Using vars defined in .dev.vars
@@ -316,19 +361,18 @@ You can visit `http://localhost:8787` in your browser to test the worker applica
 
 ### Authenticate Wrangler with your Cloudflare account
 
-Run the following command to link the Wrangler tool to your Cloudflare account:
+If you aren't authenticated, run the following command to link the Wrangler tool to your Cloudflare account:
 
 ```bash
 npx wrangler login
 ```
 
-This command will open a browser window and prompt you to log into your Cloudflare account. After logging in and approving the access request for `Wrangler`, you can close the browser window and return to your terminal.
-
+This command will open a browser window and prompt you to log into your Cloudflare account. After logging in and approving, you can close the browser window and return to your terminal.
 
 ### Configure secrets
 
 <Admonition type="note">
-If you're using **Hyperdrive**, your connection is already configured in the `wrangler.toml` file, so you can skip this step and proceed directly to publishing your Worker.
+If you're using **Hyperdrive**, your connection is already configured in the `wrangler.jsonc` file, so you can skip this step and proceed directly to publishing your Worker.
 
 If you're using the **Neon serverless driver**, you need to add your connection string as a secret.
 </Admonition>
@@ -346,13 +390,13 @@ When prompted, paste your pooled Neon connection string.
 Now, you can deploy your application to Cloudflare Workers by running the following command:
 
 ```bash
-npx wrangler deploy
+npm run deploy
 ```
 
 The Wrangler CLI will output the URL of your Worker hosted on the Cloudflare platform. Visit this URL in your browser or use `curl` to verify the deployment works as expected.
 
 ```text
-❯ npx wrangler deploy
+❯ npm run deploy
  ⛅️ wrangler 3.28.1
 -------------------
 Total Upload: 189.98 KiB / gzip: 49.94 KiB
