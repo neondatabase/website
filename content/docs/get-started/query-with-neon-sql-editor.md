@@ -81,9 +81,11 @@ For more details about using Time Travel queries, see:
 - [Time Travel](/docs/guides/time-travel-assist)
 - [Time Travel tutorial](/docs/guides/time-travel-tutorial)
 
-## Export data to CSV, JSON and XLSX
+## Export or copy query results
 
-The Neon SQL Editor supports exporting your data to `JSON`, `CSV` and `XLSX`. You can access the download button from the bottom right corner of the **SQL Editor** page. The download button only appears when there is a result set to download.
+The Neon SQL Editor lets you export data to `CSV`, `JSON`, and `XLSX` formats, or copy query results directly to your clipboard as JSON. Access the download and copy buttons from the bottom right corner of the **SQL Editor** page. These buttons only appear when there is a result set to display.
+
+To copy query results as JSON without downloading a file, click the copy icon button. The JSON will be instantly available in your clipboard, ready to paste into other applications or documentation.
 
 ## Expand results section of the SQL Editor window
 
