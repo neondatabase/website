@@ -33,10 +33,12 @@ In the chart, a CU is an index of CPU, memory, and local file cache (LFC) utiliz
 <p><em>How much compute should you buy to run this database?</em></p>
 </blockquote>
 
-A **provisioned** database platform (RDS for example) is one where databases run on instances with a fixed amount of CPU, memory, and sometimes even disk.
+In an autoscaling platform that is decided automatically, while in a provisioned platform, the user must decide how much compute to buy.
+
+A provisioned platform is one where databases run on instances with a fixed amount of CPU, memory, and sometimes even disk.
 Sizing a workload in provisioned platforms presents a challenge because nobody knows how much compute their database will use in the future.
 
-But when we're looking at historic compute utilization data, we can determine the instance size any database would have needed using Amazon's database rightsizing algorithm which defaults to recommending "P99.5 utilization + 20%" when it comes to CPU and memory.
+To help provisioned database users make informed compute size decisions, AWS has an "RDS Rightsizing" tool that works by finding the P99.5 CPU and memory utilization over a lookback window and adding 20%.
 
 Here's what P99.5 + 20% looks like for our example database:
 
@@ -93,7 +95,7 @@ Across the entire Neon platform in December 2025, the average production databas
 
 #### Cost
 
-When we factor in the cost of each database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to compute for production databases see <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
+When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
 
 <Admonition title="Why is cost savings less than compute savings?" type="info">
   Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
@@ -105,7 +107,7 @@ When we factor in the cost of each database _(which varies depending on if the a
 
 #### Performance Degradations
 
-Database compute loads can be spiky. Operations like index creation, schema changes and migrations, bulk exports, and even just user load patterns can cause momentary spikes in memory and CPU in particular. When we follow the AWS rightsizing algorithm and provision at P99.5 + 20%, the top 0.5% of loads are often spiky enough to exceed that 20% buffer.
+Database compute loads can be spiky. Operations like index creates, schema changes and migrations, bulk exports, and even just user load patterns can cause spikes in memory and CPU in particular. When we follow the AWS rightsizing algorithm and provision at P99.5 + 20%, the top 0.5% of loads are often spiky enough to exceed that 20% buffer.
 
 When we counted up the number of times each production database on Neon autoscaled up beyond the provisioned P99.5 + 20% equivalent, we found that <span className="bg-secondary-1/20 text-secondary-1 p-1">the average production database would experience 20 incidents per month</span> where compute resources would be exhausted if it were running on a provisioned platform.
 
@@ -118,17 +120,17 @@ The average production database running on Neon adjusts its compute size 11,354 
 ### Production Example
 
 Here is a detailed price comparison for a real Neon customer with a production workload.
-If it were running on a provisioned instance, this database would need enough CPU and Memory allocated to always be safely above peak load.
-AWS rightsizing recommendations default to recommending "P99.5 + 20%".
 
 <AutoscalingChart title="Production. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" width="window" autoscalingRate={0.222} />
 
 The results: <span className="bg-secondary-1/20 text-secondary-1 p-1">Provisioned uses 3.5x more compute</span> to serve the same workload, because much of the time only a fraction of allocated resources are being used. Translating that to costs, this workload incurs <span className="bg-green-45/20 text-green-45 p-1">2.1x lower cost on Neon</span> thanks to autoscaling. We're using the `$0.222/CU-hour` rate from the Neon Scale plan _recommended for businesses_ and a conservative `$0.132/CU-hour` rate for provisioned instances like RDS.
 
+Not only is autoscaling cheaper and more efficient, but this exact workload running on a provisioned platform at exactly the AWS-recommended P99.5 + 20% compute utilization would experience <span className="bg-secondary-1/20 text-secondary-1 p-1">~73 performance degradations per month</span> as a result of exhausting the allocated resources.
+
 #### Checking the math with actual RDS instances
 
 The compute for this exact database costs <span className="bg-green-45/20 text-green-45 p-1">$217/month</span> on Neon.
-The closest m-series latest-generation RDS instances that fit the provisioned specs necessary to run this workload are [`db.m8g.2xlarge`](https://instances.vantage.sh/aws/rds/db.m8g.4xlarge) with 8 CPU and 32GB RAM at `$0.672/hour` costing <span className="bg-secondary-1/20 text-secondary-1 p-1">$504/month</span> which is slightly higher than our $456/month estimate.
+The closest m-series latest-generation RDS instances that fit the provisioned specs necessary to run this workload are [`db.m8g.2xlarge`](https://instances.vantage.sh/aws/rds/db.m8g.4xlarge) with 8 CPU and 32GB RAM at `$0.672/hour` costing <span className="bg-secondary-1/20 text-secondary-1 p-1">$504/month</span> which is even more expensive than our $456/month estimate.
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 4.8CPU 19GB RAM RDS instance, so you are forced to "round up" to the next largest instance.
 
@@ -149,7 +151,8 @@ If we tally up the compute used by small non-production databases that scale to 
 
 #### Compute
 
-A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
+A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon. 
+This is using the same P99.5 + 20% methodology as before.
 
 #### Costs
 
@@ -172,7 +175,7 @@ Using that approach, running a similar workload on RDS would use <span className
 
 #### Checking the math with actual RDS instances
 
-The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs
+The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instances.vantage.sh/aws/rds/db.t4g.micro?currency=USD) which runs `$11.68` per month.
 
 ## Methodology
 
