@@ -200,8 +200,8 @@ We use P99.5 + 20% as the default over-provisioning setting following the defaul
 
 ### Provisioned costs
 
-- **Small Databases** - We used a `$0.065` per CU-hour equivalent rate based on the equivalent hourly cost of the smallest RDS instances without dedicated storage bundled in.
-- **Large Databases** - We used a `$0.132` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger RDS instances (`$0.085`) and adding a percentage penalty (50%) to account for the fact that you cannot buy the exact size compute you need _(there is no 19GB RAM instance)_ and you are forced to round up to the next instance.
+- **Small Databases** - We used a `$0.065` per CU-hour equivalent rate based on the equivalent hourly cost of small provisioned databases across RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
+- **Large Databases** - We used a `$0.132` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger production-grade instances on provisioned database platforms like RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
 
 ### Counting Incidents
 
