@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2025-10-23T14:56:50.641Z'
+updatedOn: '2026-01-28T13:00:52.476Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
