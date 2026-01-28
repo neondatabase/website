@@ -100,7 +100,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ select "Hello World example"
 │
 ├ Which template would you like to use?
-│ Select "Worker only"
+│ select "Worker only"
 │
 ├ Which language do you want to use?
 │ select "TypeScript"
@@ -157,13 +157,13 @@ npm run cf-typegen
 
 ### Configure wrangler.jsonc
 
-Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will also update the Hyperdrive binding and add the **localConnectionString**. This will allow our locally running application connect to the Neon database via Hyperdrive. The complete `wrangler.jsonc` file should be as follows:
+Update your `wrangler.jsonc` to add the **compatibility_flags** binding. We will also update the Hyperdrive binding and add the **localConnectionString**. This will allow our locally running application to connect to the Neon database via Hyperdrive. The complete `wrangler.jsonc` file should be as follows:
 
 ```json shouldWrap
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "my-neon-worker",
-  "main": "src/index.js",
+  "main": "src/index.ts",
   "compatibility_flags": [
     "nodejs_compat"
   ],
@@ -183,9 +183,9 @@ Replace the following placeholders:
 
 ### Implement the Worker script
 
-Update the `src/index.js` file in your project directory with the following code:
+Update the `src/index.ts` file in your project directory with the following code:
 
-```js
+```ts
 import { Client } from 'pg';
 
 export default {
@@ -195,14 +195,14 @@ export default {
     });
 
     await client.connect();
-	  const result = await client.query('SELECT * FROM books_to_read;');
+    const result = await client.query('SELECT * FROM books_to_read;');
 
-	  // Clean up the client connection in the background
-	  ctx.waitUntil(client.end());
+    // Clean up the client connection in the background
+    ctx.waitUntil(client.end());
 
-	  return Response.json(result.rows);
+    return Response.json(result.rows);
   },
-};
+} satisfies ExportedHandler<Env>;
 ```
 
 The `fetch` handler uses the Hyperdrive binding to connect to your Neon database through Cloudflare's optimized connection pooling service.
@@ -278,7 +278,7 @@ This initiates an interactive CLI prompt to generate a new project. To follow al
 │ select "Hello World example"
 │
 ├ Which template would you like to use?
-│ Select "Worker only"
+│ select "Worker only"
 │
 ├ Which language do you want to use?
 │ select "TypeScript"
@@ -302,9 +302,9 @@ We'll use the [Neon serverless driver](/docs/serverless/serverless-driver) to co
 npm install @neondatabase/serverless
 ```
 
-Now, you can update the `src/index.js` file in the project directory with the following code:
+Now, you can update the `src/index.ts` file in the project directory with the following code:
 
-```js
+```ts
 import { Client } from '@neondatabase/serverless';
 
 export default {
@@ -314,7 +314,7 @@ export default {
     const { rows } = await client.query('SELECT * FROM books_to_read;');
     return new Response(JSON.stringify(rows));
   },
-};
+} satisfies ExportedHandler<Env>;
 ```
 
 The `fetch` handler defined above gets called when the worker receives an HTTP request. It will query the Neon database to fetch the full list of books in our to-read list.
