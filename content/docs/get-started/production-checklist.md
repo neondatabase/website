@@ -4,7 +4,7 @@ subtitle: 'Guidelines to optimize price, performance, and reliability'
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-01-09T19:53:45.369Z'
+updatedOn: '2026-01-29T16:44:02.629Z'
 ---
 
 <CheckList title="Production checklist">
