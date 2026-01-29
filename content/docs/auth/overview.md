@@ -65,7 +65,26 @@ As Neon Auth evolves, more Better Auth integrations and features will be added. 
 
 ## Basic usage
 
-Enable Auth in your Neon project, then add authentication to your app:
+Enable Auth in your Neon project, then add authentication to your app.
+
+**For Next.js:**
+
+```typescript filename="lib/auth/server.ts"
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
+});
+```
+
+```typescript filename="app/api/auth/[...path]/route.ts"
+import { auth } from '@/lib/auth/server';
+
+export const { GET, POST } = auth.handler();
+```
+
+**For React/Vite:**
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
