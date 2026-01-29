@@ -59,12 +59,12 @@ See [CLI reference](#command-line-interface) for details.
 
 Unclaimed databases have stricter quotas. Claiming resets limits to your Neon plan.
 
-| | Unclaimed | Claimed (Free plan) |
-|---|-----------|---------------------|
-| Storage | 100 MB | 512 MB |
-| Transfer | 1 GB | ~5 GB |
-| Branches | No | Yes |
-| Expiration | 72 hours | None |
+|            | Unclaimed | Claimed (Free plan) |
+| ---------- | --------- | ------------------- |
+| Storage    | 100 MB    | 512 MB              |
+| Transfer   | 1 GB      | ~5 GB               |
+| Branches   | No        | Yes                 |
+| Expiration | 72 hours  | None                |
 
 ## Claiming a database
 
@@ -91,10 +91,10 @@ The Instagres API provides programmatic database provisioning. No authentication
 POST /api/v1/database
 ```
 
-| Parameter | Required | Description |
-|-----------|----------|-------------|
-| `ref` | Yes | Referrer identifier (for tracking) |
-| `enable_logical_replication` | No | Enable logical replication (default: false) |
+| Parameter                    | Required | Description                                 |
+| ---------------------------- | -------- | ------------------------------------------- |
+| `ref`                        | Yes      | Referrer identifier (for tracking)          |
+| `enable_logical_replication` | No       | Enable logical replication (default: false) |
 
 ### Get database
 
@@ -106,26 +106,26 @@ Returns the same response schema.
 
 ### Response fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Database identifier (UUID v7) |
-| `status` | string | `UNCLAIMED`, `CLAIMING`, or `CLAIMED` |
-| `neon_project_id` | string | Underlying Neon project ID |
+| Field               | Type           | Description                                                                                                              |
+| ------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `id`                | string         | Database identifier (UUID v7)                                                                                            |
+| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                    |
+| `neon_project_id`   | string         | Underlying Neon project ID                                                                                               |
 | `connection_string` | string \| null | PostgreSQL connection URL with pooling (null after claimed). For direct connections, remove `-pooler` from the hostname. |
-| `claim_url` | string | URL to claim the database |
-| `expires_at` | string | ISO 8601 expiration timestamp |
-| `created_at` | string | ISO 8601 creation timestamp |
-| `updated_at` | string | ISO 8601 last update timestamp |
+| `claim_url`         | string         | URL to claim the database                                                                                                |
+| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                            |
+| `created_at`        | string         | ISO 8601 creation timestamp                                                                                              |
+| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                           |
 
 <details>
 <summary>Error responses</summary>
 
-| Condition | HTTP | Message |
-|-----------|------|---------|
-| Missing or empty `ref` | 400 | `Missing referrer` (includes `hint`) |
-| Invalid database ID | 400 | `Database not found` |
-| Invalid JSON body | 500 | `Failed to create the database.` |
-| Invalid parameter type | 500 | `Failed to create the database.` |
+| Condition              | HTTP | Message                              |
+| ---------------------- | ---- | ------------------------------------ |
+| Missing or empty `ref` | 400  | `Missing referrer` (includes `hint`) |
+| Invalid database ID    | 400  | `Database not found`                 |
+| Invalid JSON body      | 500  | `Failed to create the database.`     |
+| Invalid parameter type | 500  | `Failed to create the database.`     |
 
 </details>
 
@@ -164,16 +164,16 @@ deno run -A get-db
 
 **Options:**
 
-| Option | Alias | Description | Default |
-|--------|-------|-------------|---------|
-| `--yes` | `-y` | Skip prompts and use defaults | |
-| `--env <path>` | `-e` | Path to the .env file | `./.env` |
-| `--key <string>` | `-k` | Env var for connection string | `DATABASE_URL` |
-| `--prefix <string>` | `-p` | Prefix for generated public vars | `PUBLIC_` |
-| `--seed <path>` | `-s` | Path to SQL file to seed the database | |
-| `--logical-replication` | `-L` | Enable logical replication | `false` |
-| `--ref <string>` | `-r` | Referrer ID for affiliates program | |
-| `--help` | `-h` | Show help message | |
+| Option                  | Alias | Description                           | Default        |
+| ----------------------- | ----- | ------------------------------------- | -------------- |
+| `--yes`                 | `-y`  | Skip prompts and use defaults         |                |
+| `--env <path>`          | `-e`  | Path to the .env file                 | `./.env`       |
+| `--key <string>`        | `-k`  | Env var for connection string         | `DATABASE_URL` |
+| `--prefix <string>`     | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
+| `--seed <path>`         | `-s`  | Path to SQL file to seed the database |                |
+| `--logical-replication` | `-L`  | Enable logical replication            | `false`        |
+| `--ref <string>`        | `-r`  | Referrer ID for affiliates program    |                |
+| `--help`                | `-h`  | Show help message                     |                |
 
 **Example output in `.env`:**
 
