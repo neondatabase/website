@@ -19,10 +19,6 @@ Deploying Neon natively on Azure lets you manage your Neon organization alongsid
 - **Consolidated billing**: Simplify cost management with unified billing through the Azure Marketplace.
 - **Integrated workflows**: Use the Azure CLI and SDKs to manage Neon as part of your regular workflows, integrated with your existing Azure resources.
 
-    <Admonition type="note">
-    Management of Neon organizations, projects, and branches is supported via the Azure portal, CLI, and SDK. We continue to enhance the integration between Neon and Azure, including with other Azure native services. Additional Neon features and advanced configurations remain accessible through the Neon Console.
-    </Admonition>
-
 ### Getting started
 
 <DetailIconCards>
