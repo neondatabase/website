@@ -1,7 +1,7 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2025-11-28T18:21:08.474Z'
+updatedOn: '2026-01-28T19:23:10.997Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
@@ -11,6 +11,8 @@ HIPAA support is currently available at no additional cost. Once billing is fina
 </Admonition>
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are available to customers who have accepted our Business Associate Agreement (BAA) through the self-serve enablement process. The BAA outlines our responsibilities for protecting Protected Health Information (PHI) and ensuring HIPAA compliance.
+
+You can find the Business Associate Agreement (BAA) [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf).
 
 ## What is HIPAA?
 

@@ -4,7 +4,7 @@ subtitle: 'Guidelines to optimize price, performance, and reliability'
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-01-09T19:53:45.369Z'
+updatedOn: '2026-01-29T16:44:02.629Z'
 ---
 
 <CheckList title="Production checklist">
@@ -80,8 +80,6 @@ Keep reading: [Neon regions](/docs/introduction/regions)
 ## Keep your production branch as the default root branch
 
 Your production database should run on a [root branch](/docs/reference/glossary#root-branch) that is set as the project's [default branch](/docs/reference/glossary#default-branch). Neon projects are configured this way by default. Using a root branch enables [snapshots](/docs/guides/backup-restore), provides simpler billing (based on actual data size rather than accumulated changes), and prevents accidental deletion.
-
-Setting it as the default also exempts your production compute from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring it stays available even when many development branches are active.
 
 Keep reading: [Manage branches](/docs/manage/branches)
 
