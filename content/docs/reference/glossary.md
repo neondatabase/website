@@ -429,10 +429,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) (named `production` in the Console, `main` via API/CLI), which carries the _default branch_ designation by default.
 
-The default branch serves two key purposes:
-
-- The compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
-- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
+When creating a new branch without specifying the parent, a new branch is created from your project's default branch. The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) also creates preview deployment branches from your project's default branch.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
@@ -555,7 +552,7 @@ A Neon feature that lets you compare database schemas between different branches
 
 ## Concurrently active compute limit
 
-This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit. The default limit is 20 concurrently active computes.
+This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default limit is 20 concurrently active computes.
 
 When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 
