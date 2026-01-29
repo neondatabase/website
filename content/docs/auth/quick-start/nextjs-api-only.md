@@ -80,7 +80,7 @@ NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 Create a unified auth instance in `lib/auth/server.ts`. This single instance provides all server-side auth functionality:
 
 - `.handler()` for API routes
-- `.middleware()` for route protection  
+- `.middleware()` for route protection
 - `.getSession()` and all Better Auth server methods
 
 </TwoColumnLayout.Block>
@@ -401,7 +401,7 @@ export default async function Home() {
       </div>
     );
   }
-  
+
   return (
     <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
       <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>

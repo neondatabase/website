@@ -78,7 +78,7 @@ NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 Create a unified auth instance in `lib/auth/server.ts`. This single instance provides all server-side auth functionality:
 
 - `.handler()` for API routes
-- `.middleware()` for route protection  
+- `.middleware()` for route protection
 - `.getSession()` and all Better Auth server methods
 
 </TwoColumnLayout.Block>
@@ -457,11 +457,11 @@ import { auth } from '@/lib/auth/server';
 
 export async function GET() {
   const { data: session } = await auth.getSession();
-  
+
   if (!session?.user) {
     return Response.json({ error: 'Unauthenticated' }, { status: 401 });
   }
-  
+
   return Response.json({ session: session.session, user: session.user });
 }
 ```

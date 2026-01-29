@@ -149,11 +149,11 @@ import { neonAuth } from '@neondatabase/auth/next/server';
 
 export default async function DashboardPage() {
   const { session, user } = await neonAuth();
-  
+
   if (!user) {
     return <div>Not logged in</div>;
   }
-  
+
   return <div>Hello {user.name}</div>;
 }
 ```
@@ -169,11 +169,11 @@ export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
   const { data: session } = await auth.getSession();
-  
+
   if (!session?.user) {
     return <div>Not logged in</div>;
   }
-  
+
   return <div>Hello {session.user.name}</div>;
 }
 ```
@@ -224,11 +224,11 @@ import { authServer } from '@/lib/auth/server';
 
 export async function GET() {
   const { data } = await authServer.getSession();
-  
+
   if (!data?.session) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
-  
+
   return Response.json({ user: data.user });
 }
 ```
@@ -241,11 +241,11 @@ import { auth } from '@/lib/auth/server';
 
 export async function GET() {
   const { data: session } = await auth.getSession();
-  
+
   if (!session?.user) {
     return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
-  
+
   return Response.json({ user: session.user });
 }
 ```
@@ -279,12 +279,12 @@ export function UserProfile() {
 
 ### Removed APIs
 
-| v0.1 API | v0.2 Replacement |
-|----------|------------------|
-| `neonAuth()` | `auth.getSession()` |
-| `authApiHandler()` | `auth.handler()` |
+| v0.1 API               | v0.2 Replacement    |
+| ---------------------- | ------------------- |
+| `neonAuth()`           | `auth.getSession()` |
+| `authApiHandler()`     | `auth.handler()`    |
 | `neonAuthMiddleware()` | `auth.middleware()` |
-| `createAuthServer()` | `createNeonAuth()` |
+| `createAuthServer()`   | `createNeonAuth()`  |
 
 ### Return value changes
 
@@ -316,15 +316,15 @@ import { createNeonAuth } from '@neondatabase/auth/next/server';
 export const auth = createNeonAuth({
   // Required: Your Neon Auth base URL
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  
+
   // Required: Cookie configuration
   cookies: {
     // Required: Secret for signing session data cookies (min 32 characters)
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    
+
     // Optional: Session data cache TTL in seconds (default: 300 = 5 minutes)
     sessionDataTtl: 300,
-    
+
     // Optional: Cookie domain for cross-subdomain sharing (e.g., '.example.com')
     domain: '.example.com',
   },
@@ -363,6 +363,7 @@ export const dynamic = 'force-dynamic';
 ### Session not persisting
 
 Ensure your `NEON_AUTH_COOKIE_SECRET` is:
+
 - At least 32 characters long
 - The same across all environments
 - Not changing between deployments
