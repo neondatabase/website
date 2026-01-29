@@ -489,6 +489,8 @@
 
             - section: Migration Guides
               items:
+                - title: From Neon Auth SDK v0.1
+                  slug: auth/migrate/from-auth-v0.1
                 - title: From Stack Auth (legacy)
                   slug: auth/migrate/from-legacy-auth
                 - title: From Supabase
