@@ -314,19 +314,9 @@ The `createNeonAuth()` function accepts these configuration options:
 import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 export const auth = createNeonAuth({
-  // Required: Your Neon Auth base URL
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
-
-  // Required: Cookie configuration
   cookies: {
-    // Required: Secret for signing session data cookies (min 32 characters)
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-
-    // Optional: Session data cache TTL in seconds (default: 300 = 5 minutes)
-    sessionDataTtl: 300,
-
-    // Optional: Cookie domain for cross-subdomain sharing (e.g., '.example.com')
-    domain: '.example.com',
   },
 });
 ```

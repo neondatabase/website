@@ -65,17 +65,12 @@ Returns an `auth` object with:
 
 ### Parameters
 
-<details>
-<summary>View parameters</summary>
-
 | Parameter                       | Type   | Required | Default |
 | ------------------------------- | ------ | -------- | ------- |
 | <tt>baseUrl</tt>                | string | ✓        | -       |
 | <tt>cookies.secret</tt>         | string | ✓        | -       |
 | <tt>cookies.sessionDataTtl</tt> | number |          | 300     |
 | <tt>cookies.domain</tt>         | string |          | -       |
-
-</details>
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -88,8 +83,6 @@ export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    sessionDataTtl: 300,     // Optional: 5 minutes (default)
-    domain: ".example.com",  // Optional: cross-subdomain cookies
   },
 });
 ```
@@ -848,11 +841,8 @@ import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
-
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    sessionDataTtl: 300,
-    domain: ".example.com",
   },
 });
 ```
