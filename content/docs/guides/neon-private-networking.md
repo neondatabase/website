@@ -49,7 +49,7 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying two or three service names, and service names vary by region:
+    1. Under **Service settings**, specify the **Service name**. Some regions require specifying multiple service names, and service names vary by region:
 
        - **us-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`
