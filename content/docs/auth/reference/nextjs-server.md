@@ -57,6 +57,7 @@ NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 Creates a unified auth instance that provides all server-side authentication functionality.
 
 Returns an `auth` object with:
+
 - `handler()` - Creates API route handlers
 - `middleware()` - Creates Next.js middleware for route protection
 - `getSession()` - Retrieves current session
@@ -67,12 +68,12 @@ Returns an `auth` object with:
 <details>
 <summary>View parameters</summary>
 
-| Parameter                | Type     | Required | Default |
-| ------------------------ | -------- | -------- | ------- |
-| <tt>baseUrl</tt>         | string   | ✓        | -       |
-| <tt>cookies.secret</tt>  | string   | ✓        | -       |
-| <tt>cookies.sessionDataTtl</tt> | number | | 300     |
-| <tt>cookies.domain</tt>  | string   |          | -       |
+| Parameter                       | Type   | Required | Default |
+| ------------------------------- | ------ | -------- | ------- |
+| <tt>baseUrl</tt>                | string | ✓        | -       |
+| <tt>cookies.secret</tt>         | string | ✓        | -       |
+| <tt>cookies.sessionDataTtl</tt> | number |          | 300     |
+| <tt>cookies.domain</tt>         | string |          | -       |
 
 </details>
 
@@ -132,6 +133,7 @@ export const { GET, POST } = auth.handler();
 Creates Next.js middleware for session validation and route protection.
 
 The middleware automatically:
+
 - Validates session cookies on each request
 - Provides session data to server components
 - Redirects unauthenticated users to the login page
@@ -142,9 +144,9 @@ The middleware automatically:
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type   | Required | Default         |
-| -------------- | ------ | -------- | --------------- |
-| <tt>loginUrl</tt> | string |       | `/auth/sign-in` |
+| Parameter         | Type   | Required | Default         |
+| ----------------- | ------ | -------- | --------------- |
+| <tt>loginUrl</tt> | string |          | `/auth/sign-in` |
 
 </details>
 
@@ -183,10 +185,10 @@ Server Components that use `auth.getSession()` must export `dynamic = 'force-dyn
 
 ### Returns
 
-| Field   | Type              | Description                                      |
-| ------- | ----------------- | ------------------------------------------------ |
-| `data`  | Session \| null   | Session with user data, or null if not authenticated |
-| `error` | Error \| null     | Error object if session retrieval failed         |
+| Field   | Type            | Description                                          |
+| ------- | --------------- | ---------------------------------------------------- |
+| `data`  | Session \| null | Session with user data, or null if not authenticated |
+| `error` | Error \| null   | Error object if session retrieval failed             |
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -408,10 +410,10 @@ Update the current user's profile. Password updates require the password reset f
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type                 | Required |
-| -------------- | -------------------- | -------- |
-| <tt>name</tt>  | string \| undefined  |          |
-| <tt>image</tt> | string \| undefined  |          |
+| Parameter      | Type                | Required |
+| -------------- | ------------------- | -------- |
+| <tt>name</tt>  | string \| undefined |          |
+| <tt>image</tt> | string \| undefined |          |
 
 </details>
 
@@ -629,10 +631,10 @@ Create a new organization. Available when the organizations plugin is enabled.
 <details>
 <summary>View parameters</summary>
 
-| Parameter      | Type   | Required |
-| -------------- | ------ | -------- |
-| <tt>name</tt>  | string | ✓        |
-| <tt>slug</tt>  | string |          |
+| Parameter     | Type   | Required |
+| ------------- | ------ | -------- |
+| <tt>name</tt> | string | ✓        |
+| <tt>slug</tt> | string |          |
 
 </details>
 
@@ -674,11 +676,11 @@ Invite a member to an organization.
 <details>
 <summary>View parameters</summary>
 
-| Parameter              | Type   | Required |
-| ---------------------- | ------ | -------- |
-| <tt>organizationId</tt>| string | ✓        |
-| <tt>email</tt>         | string | ✓        |
-| <tt>role</tt>          | string |          |
+| Parameter               | Type   | Required |
+| ----------------------- | ------ | -------- |
+| <tt>organizationId</tt> | string | ✓        |
+| <tt>email</tt>          | string | ✓        |
+| <tt>role</tt>           | string |          |
 
 </details>
 
@@ -826,12 +828,12 @@ const { data: session2 } = await auth.getSession();
 
 Complete configuration options for `createNeonAuth()`:
 
-| Option                   | Type     | Required | Default     |
-| ------------------------ | -------- | -------- | ----------- |
-| `baseUrl`                | string   | Yes      | -           |
-| `cookies.secret`         | string   | Yes      | -           |
-| `cookies.sessionDataTtl` | number   | No       | 300         |
-| `cookies.domain`         | string   | No       | undefined   |
+| Option                   | Type   | Required | Default   |
+| ------------------------ | ------ | -------- | --------- |
+| `baseUrl`                | string | Yes      | -         |
+| `cookies.secret`         | string | Yes      | -         |
+| `cookies.sessionDataTtl` | number | No       | 300       |
+| `cookies.domain`         | string | No       | undefined |
 
 - **baseUrl**: Your Neon Auth server URL from the Neon Console
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
