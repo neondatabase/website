@@ -2,6 +2,7 @@
 title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Neon Auth
 enableTableOfContents: true
+layout: wide
 updatedOn: '2026-01-30T00:00:00.000Z'
 ---
 
@@ -9,15 +10,35 @@ Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/aut
 
 For client-side authentication, see the [Client SDK reference](/docs/reference/javascript-sdk). For UI components, see the [UI Components reference](/docs/auth/reference/ui-components).
 
-## Installation
+<TwoColumnLayout>
+
+<TwoColumnLayout.Item title="Installation" id="installation">
+<TwoColumnLayout.Block>
+
+Install the Neon Auth package in your Next.js project using npm, yarn, pnpm, or bun.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```bash
 npm install @neondatabase/auth
 ```
 
-## Environment variables
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="Environment variables" id="environment-variables">
+<TwoColumnLayout.Block>
 
 Configure these environment variables in your `.env.local` file:
+
+- **NEON_AUTH_BASE_URL** (required): Your Neon Auth server URL from the Neon Console
+- **NEON_AUTH_COOKIE_SECRET** (required): Secret for signing session cookies (must be 32+ characters for HMAC-SHA256 security)
+
+Generate a secure secret with: `openssl rand -base64 32`
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```bash
 # Required: Your Neon Auth server URL
@@ -27,37 +48,36 @@ NEON_AUTH_BASE_URL=https://your-neon-auth-url.neon.tech
 NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
 
-<Admonition type="important">
-The `NEON_AUTH_COOKIE_SECRET` must be at least 32 characters long for HMAC-SHA256 security. Generate a secure secret with:
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-```bash
-openssl rand -base64 32
-```
-
-</Admonition>
-
-## createNeonAuth()
+<TwoColumnLayout.Item title="createNeonAuth()" method="createNeonAuth(config)" id="createneonauth">
+<TwoColumnLayout.Block>
 
 Creates a unified auth instance that provides all server-side authentication functionality.
 
-### Syntax
+Returns an `auth` object with:
+- `handler()` - Creates API route handlers
+- `middleware()` - Creates Next.js middleware for route protection
+- `getSession()` - Retrieves current session
+- All Better Auth server methods (signIn, signUp, signOut, etc.)
 
-```typescript
-import { createNeonAuth } from '@neondatabase/auth/next/server';
+### Parameters
 
-export const auth = createNeonAuth(config);
-```
+<details>
+<summary>View parameters</summary>
 
-### Configuration
+| Parameter                | Type     | Required | Default |
+| ------------------------ | -------- | -------- | ------- |
+| <tt>baseUrl</tt>         | string   | ✓        | -       |
+| <tt>cookies.secret</tt>  | string   | ✓        | -       |
+| <tt>cookies.sessionDataTtl</tt> | number | | 300     |
+| <tt>cookies.domain</tt>  | string   |          | -       |
 
-| Parameter                | Type     | Required | Description                                    |
-| ------------------------ | -------- | -------- | ---------------------------------------------- |
-| `baseUrl`                | `string` | Yes      | Your Neon Auth server URL                      |
-| `cookies.secret`         | `string` | Yes      | Secret for signing session cookies (32+ chars) |
-| `cookies.sessionDataTtl` | `number` | No       | Session cache TTL in seconds (default: 300)    |
-| `cookies.domain`         | `string` | No       | Cookie domain for cross-subdomain support      |
+</details>
 
-### Example
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 // lib/auth/server.ts
@@ -67,43 +87,21 @@ export const auth = createNeonAuth({
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
   cookies: {
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    sessionDataTtl: 300,          // Optional: 5 minutes (default)
-    domain: ".example.com",        // Optional: for cross-subdomain cookies
+    sessionDataTtl: 300,     // Optional: 5 minutes (default)
+    domain: ".example.com",  // Optional: cross-subdomain cookies
   },
 });
 ```
 
-### Returns
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Returns an `auth` object with the following methods:
-
-- `handler()` - Creates API route handlers
-- `middleware()` - Creates Next.js middleware for route protection
-- `getSession()` - Retrieves current session
-- All Better Auth server methods (signIn, signUp, signOut, etc.)
-
-## auth.handler()
+<TwoColumnLayout.Item title="auth.handler()" method="auth.handler()" id="auth-handler">
+<TwoColumnLayout.Block>
 
 Creates GET and POST route handlers for the Neon Auth API proxy.
 
-### Syntax
-
-```typescript
-export const { GET, POST } = auth.handler();
-```
-
-### Usage
-
-Create a catch-all route at `app/api/auth/[...path]/route.ts`:
-
-```typescript
-// app/api/auth/[...path]/route.ts
-import { auth } from '@/lib/auth/server';
-
-export const { GET, POST } = auth.handler();
-```
-
-This handles all authentication API calls from your client, including:
+Create a catch-all route at `app/api/auth/[...path]/route.ts`. This handles all authentication API calls from your client, including:
 
 - Sign in/sign up requests
 - OAuth callbacks
@@ -115,28 +113,46 @@ This handles all authentication API calls from your client, including:
 
 Object with `GET` and `POST` Next.js route handlers.
 
-## auth.middleware()
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+
+```typescript
+// app/api/auth/[...path]/route.ts
+import { auth } from '@/lib/auth/server';
+
+export const { GET, POST } = auth.handler();
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.middleware()" method="auth.middleware(options)" id="auth-middleware">
+<TwoColumnLayout.Block>
 
 Creates Next.js middleware for session validation and route protection.
 
-### Syntax
+The middleware automatically:
+- Validates session cookies on each request
+- Provides session data to server components
+- Redirects unauthenticated users to the login page
+- Refreshes session tokens when needed
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required | Default         |
+| -------------- | ------ | -------- | --------------- |
+| <tt>loginUrl</tt> | string |       | `/auth/sign-in` |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
-export default auth.middleware(options);
-```
-
-### Options
-
-| Parameter  | Type     | Required | Description                                                       |
-| ---------- | -------- | -------- | ----------------------------------------------------------------- |
-| `loginUrl` | `string` | No       | Redirect URL for unauthenticated users (default: `/auth/sign-in`) |
-
-### Usage
-
-Create a `proxy.ts` file in your project root:
-
-```typescript
-// proxy.ts
+// middleware.ts
 import { auth } from '@/lib/auth/server';
 
 export default auth.middleware({
@@ -151,65 +167,35 @@ export const config = {
 };
 ```
 
-The middleware automatically:
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-- Validates session cookies on each request
-- Provides session data to server components
-- Redirects unauthenticated users to the login page (for protected routes)
-- Refreshes session tokens when needed
-
-## auth.getSession()
+<TwoColumnLayout.Item title="auth.getSession()" method="auth.getSession()" id="auth-getsession">
+<TwoColumnLayout.Block>
 
 Retrieves the current session in Server Components, Server Actions, and API Routes.
 
-### Syntax
+- Returns cached session if available (fast)
+- Automatically refreshes expired tokens
+- Returns null if no active session
 
-```typescript
-const { data: session, error } = await auth.getSession();
-```
+Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies.
 
 ### Returns
 
-Returns an object with:
+| Field   | Type              | Description                                      |
+| ------- | ----------------- | ------------------------------------------------ |
+| `data`  | Session \| null   | Session with user data, or null if not authenticated |
+| `error` | Error \| null     | Error object if session retrieval failed         |
 
-| Field   | Type              | Description                                                                     |
-| ------- | ----------------- | ------------------------------------------------------------------------------- |
-| `data`  | `Session \| null` | Session object containing user and session data, or `null` if not authenticated |
-| `error` | `Error \| null`   | Error object if session retrieval failed                                        |
-
-### Session Object
-
-```typescript
-{
-  user: {
-    id: string;
-    email: string;
-    name: string | null;
-    image: string | null;
-    emailVerified: boolean;
-    createdAt: Date;
-    updatedAt: Date;
-  };
-  session: {
-    id: string;
-    expiresAt: Date;
-    ipAddress: string | null;
-    userAgent: string | null;
-  };
-}
-```
-
-### Usage in Server Components
-
-<Admonition type="important">
-Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies that can only be read at request time.
-</Admonition>
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
+<CodeTabs labels={["Server Component", "Server Action", "API Route"]}>
 
 ```typescript
 // app/dashboard/page.tsx
 import { auth } from '@/lib/auth/server';
 
-// Required for Server Components using auth methods
 export const dynamic = 'force-dynamic';
 
 export default async function DashboardPage() {
@@ -219,16 +205,9 @@ export default async function DashboardPage() {
     return <div>Not authenticated</div>;
   }
 
-  return (
-    <div>
-      <h1>Welcome, {session.user.name || session.user.email}</h1>
-      <p>User ID: {session.user.id}</p>
-    </div>
-  );
+  return <h1>Welcome, {session.user.name}</h1>;
 }
 ```
-
-### Usage in Server Actions
 
 ```typescript
 // app/actions.ts
@@ -247,8 +226,6 @@ export async function updateProfile(formData: FormData) {
 }
 ```
 
-### Usage in API routes
-
 ```typescript
 // app/api/user/route.ts
 import { auth } from '@/lib/auth/server';
@@ -264,19 +241,34 @@ export async function GET() {
 }
 ```
 
-## Server-side auth methods
+</CodeTabs>
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-All Better Auth server methods are available directly on the `auth` object for use in Server Actions and API Routes.
+<TwoColumnLayout.Item title="auth.signIn.email()" method="auth.signIn.email(credentials)" id="auth-signin-email">
+<TwoColumnLayout.Block>
 
-### Authentication methods
+Sign in with email and password. Use in Server Actions for form-based authentication.
 
-#### auth.signIn.email()
+### Parameters
 
-Sign in with email and password.
+<details>
+<summary>View parameters</summary>
+
+| Parameter         | Type   | Required |
+| ----------------- | ------ | -------- |
+| <tt>email</tt>    | string | ✓        |
+| <tt>password</tt> | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 'use server';
 import { auth } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
 
 export async function signIn(formData: FormData) {
   const { data, error } = await auth.signIn.email({
@@ -285,13 +277,32 @@ export async function signIn(formData: FormData) {
   });
 
   if (error) return { error: error.message };
-  return { success: true };
+  redirect('/dashboard');
 }
 ```
 
-#### auth.signIn.social()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Sign in with OAuth provider.
+<TwoColumnLayout.Item title="auth.signIn.social()" method="auth.signIn.social(options)" id="auth-signin-social">
+<TwoColumnLayout.Block>
+
+Sign in with OAuth provider like Google, GitHub, etc.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| <tt>provider</tt>    | string | ✓        |
+| <tt>callbackURL</tt> | string |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.signIn.social({
@@ -300,9 +311,28 @@ const { data, error } = await auth.signIn.social({
 });
 ```
 
-#### auth.signIn.emailOtp()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Sign in with email OTP (one-time password).
+<TwoColumnLayout.Item title="auth.signIn.emailOtp()" method="auth.signIn.emailOtp(credentials)" id="auth-signin-emailotp">
+<TwoColumnLayout.Block>
+
+Sign in with email OTP (one-time password). First call `emailOtp.sendVerificationOtp()` to send the code.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.signIn.emailOtp({
@@ -311,9 +341,29 @@ const { data, error } = await auth.signIn.emailOtp({
 });
 ```
 
-#### auth.signUp.email()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Create a new user account.
+<TwoColumnLayout.Item title="auth.signUp.email()" method="auth.signUp.email(credentials)" id="auth-signup-email">
+<TwoColumnLayout.Block>
+
+Create a new user account with email and password.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter         | Type   | Required |
+| ----------------- | ------ | -------- |
+| <tt>email</tt>    | string | ✓        |
+| <tt>password</tt> | string | ✓        |
+| <tt>name</tt>     | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.signUp.email({
@@ -323,9 +373,16 @@ const { data, error } = await auth.signUp.email({
 });
 ```
 
-#### auth.signOut()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Sign out the current user.
+<TwoColumnLayout.Item title="auth.signOut()" method="auth.signOut()" id="auth-signout">
+<TwoColumnLayout.Block>
+
+Sign out the current user. Clears session and authentication tokens.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 'use server';
@@ -338,11 +395,28 @@ export async function signOut() {
 }
 ```
 
-### User management methods
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-#### auth.updateUser()
+<TwoColumnLayout.Item title="auth.updateUser()" method="auth.updateUser(data)" id="auth-updateuser">
+<TwoColumnLayout.Block>
 
-Update the current user's profile.
+Update the current user's profile. Password updates require the password reset flow for security.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type                 | Required |
+| -------------- | -------------------- | -------- |
+| <tt>name</tt>  | string \| undefined  |          |
+| <tt>image</tt> | string \| undefined  |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.updateUser({
@@ -351,21 +425,59 @@ const { data, error } = await auth.updateUser({
 });
 ```
 
-#### auth.changePassword()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.changePassword()" method="auth.changePassword(passwords)" id="auth-changepassword">
+<TwoColumnLayout.Block>
 
 Change the current user's password.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter                    | Type    | Required |
+| ---------------------------- | ------- | -------- |
+| <tt>currentPassword</tt>     | string  | ✓        |
+| <tt>newPassword</tt>         | string  | ✓        |
+| <tt>revokeOtherSessions</tt> | boolean |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.changePassword({
   currentPassword: 'old-password',
   newPassword: 'new-password',
-  revokeOtherSessions: true, // Optional: sign out other sessions
+  revokeOtherSessions: true,
 });
 ```
 
-#### auth.sendVerificationEmail()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.sendVerificationEmail()" method="auth.sendVerificationEmail(options)" id="auth-sendverificationemail">
+<TwoColumnLayout.Block>
 
 Send email verification to the current user.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| <tt>callbackURL</tt> | string |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.sendVerificationEmail({
@@ -373,21 +485,42 @@ const { data, error } = await auth.sendVerificationEmail({
 });
 ```
 
-#### auth.deleteUser()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Delete the current user account.
+<TwoColumnLayout.Item title="auth.deleteUser()" method="auth.deleteUser()" id="auth-deleteuser">
+<TwoColumnLayout.Block>
+
+Delete the current user account. This action is irreversible.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.deleteUser();
 ```
 
-### Email OTP methods
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Available when Email OTP authentication is enabled.
+<TwoColumnLayout.Item title="auth.emailOtp.sendVerificationOtp()" method="auth.emailOtp.sendVerificationOtp(options)" id="auth-emailotp-sendverificationotp">
+<TwoColumnLayout.Block>
 
-#### auth.emailOtp.sendVerificationOtp()
+Send a one-time password via email. Available when Email OTP authentication is enabled.
 
-Send a one-time password via email.
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.emailOtp.sendVerificationOtp({
@@ -395,9 +528,28 @@ const { data, error } = await auth.emailOtp.sendVerificationOtp({
 });
 ```
 
-#### auth.emailOtp.verifyEmail()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.emailOtp.verifyEmail()" method="auth.emailOtp.verifyEmail(credentials)" id="auth-emailotp-verifyemail">
+<TwoColumnLayout.Block>
 
 Verify email with OTP code.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.emailOtp.verifyEmail({
@@ -406,19 +558,42 @@ const { data, error } = await auth.emailOtp.verifyEmail({
 });
 ```
 
-### Session management methods
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-#### auth.listSessions()
+<TwoColumnLayout.Item title="auth.listSessions()" method="auth.listSessions()" id="auth-listsessions">
+<TwoColumnLayout.Block>
 
 List all active sessions for the current user.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.listSessions();
 ```
 
-#### auth.revokeSession()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Revoke a specific session.
+<TwoColumnLayout.Item title="auth.revokeSession()" method="auth.revokeSession(options)" id="auth-revokesession">
+<TwoColumnLayout.Block>
+
+Revoke a specific session by ID.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter          | Type   | Required |
+| ------------------ | ------ | -------- |
+| <tt>sessionId</tt> | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.revokeSession({
@@ -426,21 +601,43 @@ const { data, error } = await auth.revokeSession({
 });
 ```
 
-#### auth.revokeOtherSessions()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.revokeOtherSessions()" method="auth.revokeOtherSessions()" id="auth-revokeothersessions">
+<TwoColumnLayout.Block>
 
 Revoke all sessions except the current one.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.revokeOtherSessions();
 ```
 
-### Organization methods
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Available when organizations plugin is enabled.
+<TwoColumnLayout.Item title="auth.organization.create()" method="auth.organization.create(data)" id="auth-organization-create">
+<TwoColumnLayout.Block>
 
-#### auth.organization.create()
+Create a new organization. Available when the organizations plugin is enabled.
 
-Create a new organization.
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>name</tt>  | string | ✓        |
+| <tt>slug</tt>  | string |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.organization.create({
@@ -449,17 +646,44 @@ const { data, error } = await auth.organization.create({
 });
 ```
 
-#### auth.organization.list()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-List user's organizations.
+<TwoColumnLayout.Item title="auth.organization.list()" method="auth.organization.list()" id="auth-organization-list">
+<TwoColumnLayout.Block>
+
+List the current user's organizations.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.organization.list();
 ```
 
-#### auth.organization.inviteMember()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="auth.organization.inviteMember()" method="auth.organization.inviteMember(options)" id="auth-organization-invitemember">
+<TwoColumnLayout.Block>
 
 Invite a member to an organization.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter              | Type   | Required |
+| ---------------------- | ------ | -------- |
+| <tt>organizationId</tt>| string | ✓        |
+| <tt>email</tt>         | string | ✓        |
+| <tt>role</tt>          | string |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.organization.inviteMember({
@@ -469,13 +693,28 @@ const { data, error } = await auth.organization.inviteMember({
 });
 ```
 
-### Admin methods
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Available for users with admin role.
+<TwoColumnLayout.Item title="auth.admin.listUsers()" method="auth.admin.listUsers(options)" id="auth-admin-listusers">
+<TwoColumnLayout.Block>
 
-#### auth.admin.listUsers()
+List all users. Available for users with admin role.
 
-List all users.
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>limit</tt>  | number |          |
+| <tt>offset</tt> | number |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.admin.listUsers({
@@ -484,9 +723,28 @@ const { data, error } = await auth.admin.listUsers({
 });
 ```
 
-#### auth.admin.banUser()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Ban a user.
+<TwoColumnLayout.Item title="auth.admin.banUser()" method="auth.admin.banUser(options)" id="auth-admin-banuser">
+<TwoColumnLayout.Block>
+
+Ban a user. Available for users with admin role.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>userId</tt> | string | ✓        |
+| <tt>reason</tt> | string |          |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.admin.banUser({
@@ -495,9 +753,28 @@ const { data, error } = await auth.admin.banUser({
 });
 ```
 
-#### auth.admin.setRole()
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Set a user's role.
+<TwoColumnLayout.Item title="auth.admin.setRole()" method="auth.admin.setRole(options)" id="auth-admin-setrole">
+<TwoColumnLayout.Block>
+
+Set a user's role. Available for users with admin role.
+
+### Parameters
+
+<details>
+<summary>View parameters</summary>
+
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>userId</tt> | string | ✓        |
+| <tt>role</tt>   | string | ✓        |
+
+</details>
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 const { data, error } = await auth.admin.setRole({
@@ -506,13 +783,15 @@ const { data, error } = await auth.admin.setRole({
 });
 ```
 
-## Performance features
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+<TwoColumnLayout.Item title="Performance features" id="performance-features">
+<TwoColumnLayout.Block>
 
 ### Session caching
 
 Session data is automatically cached in a signed, HTTP-only cookie to reduce API calls to the Auth Server by 95-99%.
-
-**Key features:**
 
 - Default cache TTL: 5 minutes (300 seconds)
 - Configurable via `cookies.sessionDataTtl`
@@ -520,7 +799,16 @@ Session data is automatically cached in a signed, HTTP-only cookie to reduce API
 - Synchronous cache clearing on sign-out
 - Secure HMAC-SHA256 signing
 
-**Cache behavior:**
+### Request deduplication
+
+Multiple concurrent `getSession()` calls are automatically deduplicated:
+
+- Single network request for concurrent calls
+- 10x faster cold starts
+- Reduces server load
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 // First call: Fetches from Auth Server
@@ -530,76 +818,88 @@ const { data: session } = await auth.getSession();
 const { data: session2 } = await auth.getSession();
 ```
 
-### Request deduplication
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-Multiple concurrent `getSession()` calls are automatically deduplicated:
+<TwoColumnLayout.Item title="Configuration reference" id="configuration-reference">
+<TwoColumnLayout.Block>
 
-- Single network request for concurrent calls
-- 10x faster cold starts
-- Reduces server load by N-1 for N concurrent calls
+Complete configuration options for `createNeonAuth()`:
 
-## Configuration reference
+| Option                   | Type     | Required | Default     |
+| ------------------------ | -------- | -------- | ----------- |
+| `baseUrl`                | string   | Yes      | -           |
+| `cookies.secret`         | string   | Yes      | -           |
+| `cookies.sessionDataTtl` | number   | No       | 300         |
+| `cookies.domain`         | string   | No       | undefined   |
 
-### Complete configuration example
+- **baseUrl**: Your Neon Auth server URL from the Neon Console
+- **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
+- **cookies.sessionDataTtl**: Cache TTL in seconds
+- **cookies.domain**: For cross-subdomain sessions (e.g., ".example.com")
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```typescript
 import { createNeonAuth } from '@neondatabase/auth/next/server';
 
 export const auth = createNeonAuth({
-  // Required: Your Neon Auth server URL
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
 
   cookies: {
-    // Required: Secret for signing session cookies (32+ characters)
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-
-    // Optional: Session cache TTL in seconds (default: 300)
-    // How long to cache session data in cookies before re-fetching
     sessionDataTtl: 300,
-
-    // Optional: Cookie domain for cross-subdomain support
-    // Allows sharing session across subdomains
-    // Example: ".example.com" works for app.example.com, api.example.com
     domain: ".example.com",
   },
 });
 ```
 
-### Configuration options table
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
 
-| Option                   | Type     | Required | Default     | Description                                                                |
-| ------------------------ | -------- | -------- | ----------- | -------------------------------------------------------------------------- |
-| `baseUrl`                | `string` | Yes      | -           | Your Neon Auth server URL from the Neon Console                            |
-| `cookies.secret`         | `string` | Yes      | -           | Secret for HMAC-SHA256 signing of session cookies (must be 32+ characters) |
-| `cookies.sessionDataTtl` | `number` | No       | `300`       | Time-to-live for cached session data in seconds                            |
-| `cookies.domain`         | `string` | No       | `undefined` | Cookie domain for cross-subdomain sessions (e.g., ".example.com")          |
-
-## Project structure
+<TwoColumnLayout.Item title="Project structure" id="project-structure">
+<TwoColumnLayout.Block>
 
 Recommended file structure for Next.js with Neon Auth:
+
+- `app/api/auth/[...path]/route.ts` - Auth API handlers
+- `app/auth/[path]/page.tsx` - Auth views (sign-in, sign-up)
+- `app/dashboard/page.tsx` - Protected pages
+- `lib/auth/server.ts` - Server auth instance
+- `lib/auth/client.ts` - Client auth instance
+- `middleware.ts` - Next.js middleware
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block>
 
 ```
 app/
 ├── api/
 │   └── auth/
 │       └── [...path]/
-│           └── route.ts      # Auth API handlers (auth.handler())
+│           └── route.ts
 ├── auth/
 │   └── [path]/
-│       └── page.tsx          # Auth views (sign-in, sign-up, etc.)
+│       └── page.tsx
 ├── dashboard/
-│   └── page.tsx              # Protected page (uses auth.getSession())
-├── actions.ts                # Server actions (uses auth methods)
-└── layout.tsx                # Root layout
+│   └── page.tsx
+├── actions.ts
+└── layout.tsx
 
 lib/
 └── auth/
-    ├── server.ts             # Server auth instance (createNeonAuth())
-    └── client.ts             # Client auth instance (for client components)
+    ├── server.ts
+    └── client.ts
 
-proxy.ts                      # Next.js middleware (auth.middleware())
-.env.local                    # Environment variables
+middleware.ts
+.env.local
 ```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Item>
+
+</TwoColumnLayout>
 
 ## Migration from v0.1
 
