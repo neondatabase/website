@@ -394,6 +394,7 @@ npm run dev
 
 ## Additional resources
 
+- [Next.js Server SDK Reference](/docs/auth/reference/nextjs-server) - Complete API documentation
 - [Neon Auth SDK Changelog](https://github.com/neondatabase/neon-js/blob/main/packages/auth/CHANGELOG.md#020-beta1)
 - [Next.js Integration Guide](/docs/auth/quick-start/nextjs)
 - [Neon Auth Overview](/docs/auth/overview)

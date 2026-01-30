@@ -81,6 +81,8 @@ Create a unified auth instance in `lib/auth/server.ts`. This single instance pro
 - `.middleware()` for route protection
 - `.getSession()` and all Better Auth server methods
 
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="lib/auth/server.ts">
 
