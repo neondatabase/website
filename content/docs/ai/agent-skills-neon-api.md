@@ -22,4 +22,11 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 </DocsList>
 </InfoBlock>
 
+## What's covered
+
+- REST API guidelines, authentication, and rate limiting
+- Core concepts (Organization, Project, Branch, Endpoint, Database, Role)
+- Managing projects, branches, endpoints, databases, and roles
+- API keys and async operations
+
 <AISkill name="Neon API" />

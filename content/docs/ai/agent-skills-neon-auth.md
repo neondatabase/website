@@ -23,4 +23,11 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 </DocsList>
 </InfoBlock>
 
+## What's covered
+
+- Package selection (`@neondatabase/auth` vs `@neondatabase/neon-js`)
+- Setup patterns for Next.js App Router, React SPA, and Node.js
+- Environment variables and key imports
+- Common mistakes and troubleshooting
+
 <AISkill name="Neon Auth" />

@@ -25,4 +25,10 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 </DocsList>
 </InfoBlock>
 
+## What's covered
+
+- Managing projects, branches, endpoints, databases, and roles
+- API keys and operations
+- Error handling patterns
+
 <AISkill name="Neon Python SDK" />

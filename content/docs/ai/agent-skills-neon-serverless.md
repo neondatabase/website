@@ -22,4 +22,12 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 </DocsList>
 </InfoBlock>
 
+## What's covered
+
+- HTTP queries with the `neon()` function
+- WebSocket connections with `Pool` and `Client`
+- Transactions (HTTP and interactive)
+- ORM integration (Prisma, Kysely, Drizzle)
+- Environment-specific optimizations (Vercel Edge, Cloudflare)
+
 <AISkill name="Neon Serverless" />

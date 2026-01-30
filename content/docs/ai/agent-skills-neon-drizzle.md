@@ -22,4 +22,12 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 </DocsList>
 </InfoBlock>
 
+## What's covered
+
+- Driver selection for different platforms (Vercel, Cloudflare, Railway, etc.)
+- Connection setup (TCP, HTTP adapter, WebSocket adapter)
+- Drizzle config and migrations
+- Schema definition and query patterns
+- Working with Neon branches
+
 <AISkill name="Neon with Drizzle" />
