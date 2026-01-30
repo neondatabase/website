@@ -23,13 +23,18 @@ curl -X POST https://instagres.com/api/v1/database \
   -d '{"ref": "your-app-name"}'
 ```
 
-Returns JSON (partial response):
+Example response:
 
 ```json
 {
-  "connection_string": "postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require",
+  "id": "01abc123-def4-5678-9abc-def012345678",
+  "status": "UNCLAIMED",
+  "neon_project_id": "cool-breeze-12345678",
+  "connection_string": "postgresql://neondb_owner:npg_xxxx@ep-cool-breeze-pooler...",
   "claim_url": "https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678",
-  "expires_at": "2026-02-01T12:00:00.000Z"
+  "expires_at": "2026-02-01T12:00:00.000Z",
+  "created_at": "2026-01-29T12:00:00.000Z",
+  "updated_at": "2026-01-29T12:00:00.000Z"
 }
 ```
 
