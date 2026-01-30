@@ -33,6 +33,7 @@ The `NEON_AUTH_COOKIE_SECRET` must be at least 32 characters long for HMAC-SHA25
 ```bash
 openssl rand -base64 32
 ```
+
 </Admonition>
 
 ## createNeonAuth()
@@ -49,12 +50,12 @@ export const auth = createNeonAuth(config);
 
 ### Configuration
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `baseUrl` | `string` | Yes | Your Neon Auth server URL |
-| `cookies.secret` | `string` | Yes | Secret for signing session cookies (32+ chars) |
-| `cookies.sessionDataTtl` | `number` | No | Session cache TTL in seconds (default: 300) |
-| `cookies.domain` | `string` | No | Cookie domain for cross-subdomain support |
+| Parameter                | Type     | Required | Description                                    |
+| ------------------------ | -------- | -------- | ---------------------------------------------- |
+| `baseUrl`                | `string` | Yes      | Your Neon Auth server URL                      |
+| `cookies.secret`         | `string` | Yes      | Secret for signing session cookies (32+ chars) |
+| `cookies.sessionDataTtl` | `number` | No       | Session cache TTL in seconds (default: 300)    |
+| `cookies.domain`         | `string` | No       | Cookie domain for cross-subdomain support      |
 
 ### Example
 
@@ -103,6 +104,7 @@ export const { GET, POST } = auth.handler();
 ```
 
 This handles all authentication API calls from your client, including:
+
 - Sign in/sign up requests
 - OAuth callbacks
 - Session management
@@ -125,9 +127,9 @@ export default auth.middleware(options);
 
 ### Options
 
-| Parameter | Type | Required | Description |
-|-----------|------|----------|-------------|
-| `loginUrl` | `string` | No | Redirect URL for unauthenticated users (default: `/auth/sign-in`) |
+| Parameter  | Type     | Required | Description                                                       |
+| ---------- | -------- | -------- | ----------------------------------------------------------------- |
+| `loginUrl` | `string` | No       | Redirect URL for unauthenticated users (default: `/auth/sign-in`) |
 
 ### Usage
 
@@ -137,8 +139,8 @@ Create a `proxy.ts` file in your project root:
 // proxy.ts
 import { auth } from '@/lib/auth/server';
 
-export default auth.middleware({ 
-  loginUrl: '/auth/sign-in' 
+export default auth.middleware({
+  loginUrl: '/auth/sign-in'
 });
 
 export const config = {
@@ -150,6 +152,7 @@ export const config = {
 ```
 
 The middleware automatically:
+
 - Validates session cookies on each request
 - Provides session data to server components
 - Redirects unauthenticated users to the login page (for protected routes)
@@ -169,10 +172,10 @@ const { data: session, error } = await auth.getSession();
 
 Returns an object with:
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `data` | `Session \| null` | Session object containing user and session data, or `null` if not authenticated |
-| `error` | `Error \| null` | Error object if session retrieval failed |
+| Field   | Type              | Description                                                                     |
+| ------- | ----------------- | ------------------------------------------------------------------------------- |
+| `data`  | `Session \| null` | Session object containing user and session data, or `null` if not authenticated |
+| `error` | `Error \| null`   | Error object if session retrieval failed                                        |
 
 ### Session Object
 
@@ -235,7 +238,7 @@ import { redirect } from 'next/navigation';
 
 export async function updateProfile(formData: FormData) {
   const { data: session } = await auth.getSession();
-  
+
   if (!session?.user) {
     redirect('/auth/sign-in');
   }
@@ -280,7 +283,7 @@ export async function signIn(formData: FormData) {
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   });
-  
+
   if (error) return { error: error.message };
   return { success: true };
 }
@@ -510,6 +513,7 @@ const { data, error } = await auth.admin.setRole({
 Session data is automatically cached in a signed, HTTP-only cookie to reduce API calls to the Auth Server by 95-99%.
 
 **Key features:**
+
 - Default cache TTL: 5 minutes (300 seconds)
 - Configurable via `cookies.sessionDataTtl`
 - Automatic expiration based on JWT `exp` claim
@@ -517,6 +521,7 @@ Session data is automatically cached in a signed, HTTP-only cookie to reduce API
 - Secure HMAC-SHA256 signing
 
 **Cache behavior:**
+
 ```typescript
 // First call: Fetches from Auth Server
 const { data: session } = await auth.getSession();
@@ -528,6 +533,7 @@ const { data: session2 } = await auth.getSession();
 ### Request Deduplication
 
 Multiple concurrent `getSession()` calls are automatically deduplicated:
+
 - Single network request for concurrent calls
 - 10x faster cold starts
 - Reduces server load by N-1 for N concurrent calls
@@ -542,15 +548,15 @@ import { createNeonAuth } from '@neondatabase/auth/next/server';
 export const auth = createNeonAuth({
   // Required: Your Neon Auth server URL
   baseUrl: process.env.NEON_AUTH_BASE_URL!,
-  
+
   cookies: {
     // Required: Secret for signing session cookies (32+ characters)
     secret: process.env.NEON_AUTH_COOKIE_SECRET!,
-    
+
     // Optional: Session cache TTL in seconds (default: 300)
     // How long to cache session data in cookies before re-fetching
     sessionDataTtl: 300,
-    
+
     // Optional: Cookie domain for cross-subdomain support
     // Allows sharing session across subdomains
     // Example: ".example.com" works for app.example.com, api.example.com
@@ -561,12 +567,12 @@ export const auth = createNeonAuth({
 
 ### Configuration Options Table
 
-| Option | Type | Required | Default | Description |
-|--------|------|----------|---------|-------------|
-| `baseUrl` | `string` | Yes | - | Your Neon Auth server URL from the Neon Console |
-| `cookies.secret` | `string` | Yes | - | Secret for HMAC-SHA256 signing of session cookies (must be 32+ characters) |
-| `cookies.sessionDataTtl` | `number` | No | `300` | Time-to-live for cached session data in seconds |
-| `cookies.domain` | `string` | No | `undefined` | Cookie domain for cross-subdomain sessions (e.g., ".example.com") |
+| Option                   | Type     | Required | Default     | Description                                                                |
+| ------------------------ | -------- | -------- | ----------- | -------------------------------------------------------------------------- |
+| `baseUrl`                | `string` | Yes      | -           | Your Neon Auth server URL from the Neon Console                            |
+| `cookies.secret`         | `string` | Yes      | -           | Secret for HMAC-SHA256 signing of session cookies (must be 32+ characters) |
+| `cookies.sessionDataTtl` | `number` | No       | `300`       | Time-to-live for cached session data in seconds                            |
+| `cookies.domain`         | `string` | No       | `undefined` | Cookie domain for cross-subdomain sessions (e.g., ".example.com")          |
 
 ## Project Structure
 
