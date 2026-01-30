@@ -3,7 +3,7 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-10-29T19:08:44.078Z'
+updatedOn: '2026-01-30T14:03:06.279Z'
 ---
 
 <Admonition type="important" title="deprecated">

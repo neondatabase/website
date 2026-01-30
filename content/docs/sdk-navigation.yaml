@@ -75,3 +75,83 @@ reference/javascript-sdk:
           id: contains
         - title: Column value is between two values
           id: range
+
+auth/reference/nextjs-server:
+  title: Next.js Server SDK
+  sections:
+    - section: Setup
+      items:
+        - title: Installation
+          id: installation
+        - title: Environment variables
+          id: environment-variables
+        - title: createNeonAuth()
+          id: createneonauth
+    - section: Core Methods
+      items:
+        - title: auth.handler()
+          id: auth-handler
+        - title: auth.middleware()
+          id: auth-middleware
+        - title: auth.getSession()
+          id: auth-getsession
+    - section: Authentication
+      items:
+        - title: auth.signIn.email()
+          id: auth-signin-email
+        - title: auth.signIn.social()
+          id: auth-signin-social
+        - title: auth.signIn.emailOtp()
+          id: auth-signin-emailotp
+        - title: auth.signUp.email()
+          id: auth-signup-email
+        - title: auth.signOut()
+          id: auth-signout
+    - section: User Management
+      items:
+        - title: auth.updateUser()
+          id: auth-updateuser
+        - title: auth.changePassword()
+          id: auth-changepassword
+        - title: auth.sendVerificationEmail()
+          id: auth-sendverificationemail
+        - title: auth.deleteUser()
+          id: auth-deleteuser
+    - section: Email OTP
+      items:
+        - title: auth.emailOtp.sendVerificationOtp()
+          id: auth-emailotp-sendverificationotp
+        - title: auth.emailOtp.verifyEmail()
+          id: auth-emailotp-verifyemail
+    - section: Session Management
+      items:
+        - title: auth.listSessions()
+          id: auth-listsessions
+        - title: auth.revokeSession()
+          id: auth-revokesession
+        - title: auth.revokeOtherSessions()
+          id: auth-revokeothersessions
+    - section: Organizations
+      items:
+        - title: auth.organization.create()
+          id: auth-organization-create
+        - title: auth.organization.list()
+          id: auth-organization-list
+        - title: auth.organization.inviteMember()
+          id: auth-organization-invitemember
+    - section: Admin
+      items:
+        - title: auth.admin.listUsers()
+          id: auth-admin-listusers
+        - title: auth.admin.banUser()
+          id: auth-admin-banuser
+        - title: auth.admin.setRole()
+          id: auth-admin-setrole
+    - section: Reference
+      items:
+        - title: Performance features
+          id: performance-features
+        - title: Configuration reference
+          id: configuration-reference
+        - title: Project structure
+          id: project-structure
