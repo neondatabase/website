@@ -15,7 +15,7 @@ For client-side authentication, see the [Client SDK reference](/docs/reference/j
 npm install @neondatabase/auth
 ```
 
-## Environment Variables
+## Environment variables
 
 Configure these environment variables in your `.env.local` file:
 
@@ -247,7 +247,7 @@ export async function updateProfile(formData: FormData) {
 }
 ```
 
-### Usage in API Routes
+### Usage in API routes
 
 ```typescript
 // app/api/user/route.ts
@@ -264,11 +264,11 @@ export async function GET() {
 }
 ```
 
-## Server-Side Auth Methods
+## Server-side auth methods
 
 All Better Auth server methods are available directly on the `auth` object for use in Server Actions and API Routes.
 
-### Authentication Methods
+### Authentication methods
 
 #### auth.signIn.email()
 
@@ -338,7 +338,7 @@ export async function signOut() {
 }
 ```
 
-### User Management Methods
+### User management methods
 
 #### auth.updateUser()
 
@@ -381,7 +381,7 @@ Delete the current user account.
 const { data, error } = await auth.deleteUser();
 ```
 
-### Email OTP Methods
+### Email OTP methods
 
 Available when Email OTP authentication is enabled.
 
@@ -406,7 +406,7 @@ const { data, error } = await auth.emailOtp.verifyEmail({
 });
 ```
 
-### Session Management Methods
+### Session management methods
 
 #### auth.listSessions()
 
@@ -434,7 +434,7 @@ Revoke all sessions except the current one.
 const { data, error } = await auth.revokeOtherSessions();
 ```
 
-### Organization Methods
+### Organization methods
 
 Available when organizations plugin is enabled.
 
@@ -469,7 +469,7 @@ const { data, error } = await auth.organization.inviteMember({
 });
 ```
 
-### Admin Methods
+### Admin methods
 
 Available for users with admin role.
 
@@ -506,9 +506,9 @@ const { data, error } = await auth.admin.setRole({
 });
 ```
 
-## Performance Features
+## Performance features
 
-### Session Caching
+### Session caching
 
 Session data is automatically cached in a signed, HTTP-only cookie to reduce API calls to the Auth Server by 95-99%.
 
@@ -530,7 +530,7 @@ const { data: session } = await auth.getSession();
 const { data: session2 } = await auth.getSession();
 ```
 
-### Request Deduplication
+### Request deduplication
 
 Multiple concurrent `getSession()` calls are automatically deduplicated:
 
@@ -538,9 +538,9 @@ Multiple concurrent `getSession()` calls are automatically deduplicated:
 - 10x faster cold starts
 - Reduces server load by N-1 for N concurrent calls
 
-## Configuration Reference
+## Configuration reference
 
-### Complete Configuration Example
+### Complete configuration example
 
 ```typescript
 import { createNeonAuth } from '@neondatabase/auth/next/server';
@@ -565,7 +565,7 @@ export const auth = createNeonAuth({
 });
 ```
 
-### Configuration Options Table
+### Configuration options table
 
 | Option                   | Type     | Required | Default     | Description                                                                |
 | ------------------------ | -------- | -------- | ----------- | -------------------------------------------------------------------------- |
@@ -574,7 +574,7 @@ export const auth = createNeonAuth({
 | `cookies.sessionDataTtl` | `number` | No       | `300`       | Time-to-live for cached session data in seconds                            |
 | `cookies.domain`         | `string` | No       | `undefined` | Cookie domain for cross-subdomain sessions (e.g., ".example.com")          |
 
-## Project Structure
+## Project structure
 
 Recommended file structure for Next.js with Neon Auth:
 
@@ -605,7 +605,7 @@ proxy.ts                      # Next.js middleware (auth.middleware())
 
 If you're upgrading from Neon Auth SDK v0.1, see the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
 
-## Related Documentation
+## Related documentation
 
 - [Client SDK Reference](/docs/reference/javascript-sdk) - Client-side authentication
 - [UI Components Reference](/docs/auth/reference/ui-components) - Pre-built auth UI
