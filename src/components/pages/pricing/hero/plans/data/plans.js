@@ -3,116 +3,155 @@ import LINKS from 'constants/links';
 export default [
   {
     planId: 'free',
-    type: 'Free Plan',
-    title: '$0',
+    type: 'For basic use',
+    title: 'Free',
     subtitle: 'No card required',
-    price: 0,
-    description: 'For prototypes and side projects',
-    features: [
-      {
-        title: '100 projects',
-        info: '<p>A project is a top-level container<br/> for your database environment.</p>',
-        moreLink: { text: 'Read more', href: '#what-is-a-project' },
+    price: {
+      small: 0,
+      medium: 0,
+      large: 0,
+    },
+    features: {
+      database: {
+        title: 'Database',
+        features: [
+          {
+            title: '100 projects',
+            info: '<p>A project is a top-level container<br/> for your database environment.</p>',
+            moreLink: { text: 'Read more', href: '#what-is-a-project' },
+          },
+          {
+            title: '100 CU-hrs per project',
+            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            moreLink: { text: 'Read more', href: '#compute-usage' },
+          },
+          {
+            title: '0.5 GB of storage per project',
+          },
+          {
+            title: 'Sizes up to 2 CU (8 GB RAM)',
+          },
+        ],
       },
-      {
-        title: '100 CU-hours per project',
-        info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
-        moreLink: { text: 'Read more', href: '#compute-usage' },
+      backend: {
+        title: 'Backend',
+        features: [
+          { title: 'Auth: built on Better Auth' },
+          { title: 'Data API: PostgREST compatible' },
+        ],
       },
-      {
-        title: '0.5 GB per project',
+      other: {
+        title: 'Features',
+        features: [{ title: 'Branching' }, { title: 'Autoscaling' }, { title: 'Read replicas' }],
       },
-      {
-        title: 'Sizes to 2 CU',
-        subtitle: '(8 GB RAM)',
-      },
-    ],
-    otherFeatures: {
-      title: 'Features',
-      features: [
-        { title: 'Auth', tag: 'new' },
-        { title: 'Autoscaling' },
-        { title: 'Read replicas' },
-        { title: 'Built-in high availability' },
-      ],
     },
     button: {
       url: LINKS.signup,
+      text: 'Try Neon',
       event: 'Hero Free Tier Panel',
     },
   },
   {
     planId: 'launch',
-    type: 'Launch',
-    title: 'Usage-based',
-    subtitle: 'No monthly minimum',
+    type: 'For building products',
+    title: 'Launch',
     highlighted: true,
-    price: 5,
-    priceFrom: true,
-    description: 'For startups and growing teams',
-    features: [
-      {
-        title: '100 projects',
-        info: '<p>A project is a top-level container<br/> for your database environment.</p>',
-        moreLink: { text: 'Read more', href: '#what-is-a-project' },
+    hasDynamicPricing: true,
+    price: {
+      small: 25,
+      medium: 35,
+      large: 45,
+    },
+    features: {
+      database: {
+        title: 'Database',
+        features: [
+          {
+            title: '100 projects',
+            info: '<p>A project is a top-level container<br/> for your database environment.</p>',
+            moreLink: { text: 'Read more', href: '#what-is-a-project' },
+          },
+          {
+            title: '$0.106 per CU-hr',
+            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            moreLink: { text: 'Read more', href: '#compute-usage' },
+          },
+          {
+            title: '$0.35 per GB-month',
+          },
+          { title: 'Sizes up to 16 CU (64 GB RAM)' },
+        ],
       },
-      {
-        title: '$0.106 per CU-hour compute',
-        info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
-        moreLink: { text: 'Read more', href: '#compute-usage' },
+      backend: {
+        title: 'Backend',
+        features: [
+          { title: 'Auth: 1M MAU', info: '<p>Monthly Active Users included</p>' },
+          { title: 'Data API: 1B requests', info: '<p>Billion requests included per month</p>' },
+        ],
       },
-      {
-        title: '$0.35 per GB-month storage',
+      other: {
+        title: 'All features in free, plus...',
+        features: [{ title: '7-day time travel/restores' }, { title: '3-day metrics/logs in UI' }],
       },
-      { title: 'Sizes up to 16 CU', subtitle: '(64 GB RAM)' },
-    ],
-    otherFeatures: {
-      title: 'All features in Free, plus...',
-      features: [{ title: '7-day time travel/PITR' }, { title: '3-day monitoring retention' }],
     },
     button: {
       url: `${LINKS.console}/app/billing#plans`,
+      text: 'Get started',
       theme: 'primary',
       event: 'Hero Launch Panel',
     },
   },
   {
     planId: 'scale',
-    type: 'Scale',
-    title: 'Usage-based',
-    subtitle: 'No monthly minimum',
-    price: 50,
-    priceFrom: true,
-    description: 'For the most demanding workloads',
-    features: [
-      {
-        title: '1,000+ projects',
-        info: '<p>Accounts needing more than 1k projects<br/> can contact support for a limit increase.</p>',
-        moreLink: { text: 'Read more', href: '#what-is-a-project' },
+    type: 'For production workloads',
+    title: 'Scale',
+    hasDynamicPricing: true,
+    price: {
+      small: 50,
+      medium: 60,
+      large: 70,
+    },
+    features: {
+      database: {
+        title: 'Database',
+        features: [
+          {
+            title: '1,000+ projects',
+            info: '<p>Accounts needing more than 1k projects<br/> can contact support for a limit increase.</p>',
+            moreLink: { text: 'Read more', href: '#what-is-a-project' },
+          },
+          {
+            title: '$0.222 per CU-hr',
+            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            moreLink: { text: 'Read more', href: '#compute-usage' },
+          },
+          {
+            title: '$0.35 per GB-month',
+          },
+          { title: 'Sizes up to 56 CU (224 GB RAM)' },
+        ],
       },
-      {
-        title: '$0.222 per CU-hour compute',
-        info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
-        moreLink: { text: 'Read more', href: '#compute-usage' },
+      backend: {
+        title: 'Backend',
+        features: [
+          { title: 'Auth: 1M MAU', info: '<p>Monthly Active Users included</p>' },
+          { title: 'Data API: 1B requests', info: '<p>Billion requests included per month</p>' },
+        ],
       },
-      {
-        title: '$0.35 per GB-month storage',
+      other: {
+        title: 'All features in launch, plus...',
+        features: [
+          { title: '30-day time travel/restores' },
+          { title: '14-day metrics/logs in UI' },
+          { title: 'Metrics/logs export (Otel, Datadog)' },
+          { title: 'Private network, IP rules' },
+          { title: 'SLAs, SOC2, HIPAA', info: '<p>Enterprise-grade compliance and SLAs</p>' },
+        ],
       },
-      { title: 'Sizes up to 56 CU', subtitle: '(224 GB RAM)' },
-    ],
-    otherFeatures: {
-      title: 'All features in Launch, plus...',
-      features: [
-        { title: '30-day time travel/PITR' },
-        { title: '14-day monitoring retention' },
-        { title: 'Metrics / logs export' },
-        { title: 'Private Network / IP Rules' },
-        { title: '99.95% SLA' },
-        { title: 'SOC 2 Report, HIPAA Available' },
-      ],
     },
     button: {
       url: `${LINKS.console}/app/billing#plans`,
+      text: 'Get started',
       theme: 'primary',
       event: 'Hero Scale Panel',
     },
