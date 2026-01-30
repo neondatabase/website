@@ -2,7 +2,7 @@
 title: Migrate from Neon Auth SDK v0.1 to v0.2
 subtitle: Upgrade guide for breaking changes in the Neon Auth SDK
 enableTableOfContents: true
-updatedOn: '2026-01-30T00:00:00.000Z'
+updatedOn: '2026-01-30T14:03:06.266Z'
 ---
 
 This guide helps you migrate from Neon Auth SDK v0.1.x to v0.2.x, which introduces a unified API and performance improvements through session caching.

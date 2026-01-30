@@ -3,7 +3,7 @@ title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Neon Auth
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-01-30T00:00:00.000Z'
+updatedOn: '2026-01-30T14:03:06.275Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
