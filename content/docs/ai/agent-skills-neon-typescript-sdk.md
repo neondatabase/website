@@ -20,14 +20,8 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
 <DocsList title="Repository" theme="repo">
   <a href="https://www.npmjs.com/package/@neondatabase/api-client">@neondatabase/api-client on npm</a>
   <a href="https://github.com/neondatabase/agent-skills">Agent Skills Repository</a>
+  <a href="https://github.com/neondatabase/agent-skills/blob/main/skills/neon-postgres/references/neon-typescript-sdk.md">View this reference</a>
 </DocsList>
 </InfoBlock>
 
 <AISkill name="Neon TypeScript SDK" />
-
-## Reference
-
-<ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-typescript-sdk.md"
-  language="md"
-/>

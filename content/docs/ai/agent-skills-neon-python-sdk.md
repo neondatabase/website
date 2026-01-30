@@ -21,14 +21,8 @@ Agent Skills are new and actively being improved. We'd love your feedback! Join 
   <a href="https://github.com/neondatabase/neon-api-python">Github Repo</a>
   <a href="https://neon-api-python.readthedocs.io/en/latest/">Python SDK Docs</a>
   <a href="https://github.com/neondatabase/agent-skills">Agent Skills Repository</a>
+  <a href="https://github.com/neondatabase/agent-skills/blob/main/skills/neon-postgres/references/neon-python-sdk.md">View this reference</a>
 </DocsList>
 </InfoBlock>
 
 <AISkill name="Neon Python SDK" />
-
-## Reference
-
-<ExternalCode
-  url="https://raw.githubusercontent.com/neondatabase/agent-skills/main/skills/neon-postgres/references/neon-python-sdk.md"
-  language="md"
-/>
