@@ -2,11 +2,15 @@
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.163Z'
+updatedOn: '2026-01-30T00:00:00.000Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="note">
+Upgrading from Neon Auth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+</Admonition>
 
 This guide shows you how to integrate Neon Auth into a [Next.js](https://nextjs.org) (App Router) project using SDK methods directly. To use our pre-built UI components instead, see the [UI components guide](/docs/auth/quick-start/nextjs).
 
@@ -53,10 +57,10 @@ npm install @neondatabase/auth
 <TwoColumnLayout.Step title="Set up environment variables">
 <TwoColumnLayout.Block>
 
-Create a `.env.local` file in your project root and add your Auth URL:
+Create a `.env.local` file in your project root and add your Auth URL and a cookie secret:
 
 <Admonition type="note">
-Replace the URL with your actual Auth URL from the Neon Console.
+Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a secure cookie secret with `openssl rand -base64 32`.
 </Admonition>
 
 </TwoColumnLayout.Block>
@@ -64,48 +68,77 @@ Replace the URL with your actual Auth URL from the Neon Console.
 
 ```bash
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Set up your auth API routes">
+<TwoColumnLayout.Step title="Create auth server instance">
 <TwoColumnLayout.Block>
 
-We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
+Create a unified auth instance in `lib/auth/server.ts`. This single instance provides all server-side auth functionality:
+
+- `.handler()` for API routes
+- `.middleware()` for route protection
+- `.getSession()` and all Better Auth server methods
+
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="lib/auth/server.ts">
+
+```typescript
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Set up auth API routes">
+<TwoColumnLayout.Block>
+
+Create an API route handler that proxies auth requests. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = authApiHandler();
+export const { GET, POST } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Add neonAuthMiddleware()">
+<TwoColumnLayout.Step title="Add authentication middleware">
 <TwoColumnLayout.Block>
 
-The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
+The middleware ensures users are authenticated before accessing protected routes. Create `proxy.ts` file in your project root:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/auth/next/server";
+import { auth } from '@/lib/auth/server';
 
-export default neonAuthMiddleware({
+export default auth.middleware({
   // Redirects unauthenticated users to sign-in page
-  loginUrl: "/auth/sign-in",
+  loginUrl: '/auth/sign-in',
 });
 
 export const config = {
   matcher: [
     // Protected routes requiring authentication
-    "/account/:path*",
+    '/account/:path*',
   ],
 };
 ```
@@ -113,29 +146,22 @@ export const config = {
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Footer>
 <Admonition type="note">
-Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the Auth UI Provider and wrap your layout with auth context.
+Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed with setting up the auth clients.
 </Admonition>
 </TwoColumnLayout.Footer>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Configure the auth clients">
+<TwoColumnLayout.Step title="Configure the auth client">
 <TwoColumnLayout.Block>
 
-**Client Components:**
+Create the auth client in `lib/auth/client.ts` for client-side auth operations (form submissions, hooks, etc.).
 
-- The Auth UI components are client rendered and need access to the auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
-
-**Server Components:**
-
-- To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
+<Admonition type="note">
+The server-side `auth` instance was already created in a previous step. The client is separate and handles browser-side auth operations.
+</Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-<Tabs labels={["Auth Client", "Auth Server"]}>
-
-<TabItem>
-
-Copy and paste following code in `lib/auth/client.ts` file:
+<TwoColumnLayout.Block label="lib/auth/client.ts">
 
 ```tsx
 'use client';
@@ -145,28 +171,15 @@ import { createAuthClient } from '@neondatabase/auth/next';
 export const authClient = createAuthClient();
 ```
 
-</TabItem>
-<TabItem>
-
-Copy and paste following code in `lib/auth/server.ts` file:
-
-```tsx
-import { createAuthServer } from '@neondatabase/auth/next/server';
-
-export const authServer = createAuthServer();
-```
-
-</TabItem>
-</Tabs>
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
 <TwoColumnLayout.Step title="Create Sign up form">
 <TwoColumnLayout.Block>
 
-Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth server instance we created in previous step
+Lets create a sign-up form and action in `app/auth/sign-up/page.tsx` and `app/auth/sign-up/actions.ts` files respectively using the auth instance we created in previous step
 
-- To create user with email and password, we will use `authServer.signUp.email()` with user name, email address, and password
+- To create user with email and password, we will use `auth.signUp.email()` with user name, email address, and password
 - You can optionally add business logic before invoking the API, for example restrict signups to emails ending with `@my-company.com`
 
 </TwoColumnLayout.Block>
@@ -180,7 +193,7 @@ Copy and paste following code in `app/auth/sign-up/actions.ts` file:
 ```ts
 'use server';
 
-import { authServer } from '@/lib/auth/server';
+import { auth } from '@/lib/auth/server';
 import { redirect } from 'next/navigation';
 
 export async function signUpWithEmail(
@@ -198,7 +211,7 @@ export async function signUpWithEmail(
   //  return { error: 'Email must be from my-company.com' };
   // }
 
-  const { error } = await authServer.signUp.email({
+  const { error } = await auth.signUp.email({
     email,
     name: formData.get('name') as string,
     password: formData.get('password') as string,
@@ -279,7 +292,7 @@ export default function SignUpForm() {
 
 Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/auth/sign-in/actions.ts` files respectively.
 
-- To sign-in the user we will use `authServer.signIn.email()` with user's email address and password.
+- To sign-in the user we will use `auth.signIn.email()` with user's email address and password.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Sign In">
@@ -290,14 +303,14 @@ Lets create a sign-in form and action in `app/auth/sign-in/page.tsx` and `app/au
 ```ts
 'use server';
 
-import { authServer } from '@/lib/auth/server';
+import { auth } from '@/lib/auth/server';
 import { redirect } from 'next/navigation';
 
 export async function signInWithEmail(
   _prevState: { error: string } | null,
   formData: FormData
 ) {
-  const { error } = await authServer.signIn.email({
+  const { error } = await auth.signIn.email({
     email: formData.get('email') as string,
     password: formData.get('password') as string,
   });
@@ -372,35 +385,41 @@ In last step, lets create the home page and display authenticated user status:
 <TwoColumnLayout.Block label="app/page.tsx">
 
 ```typescript
-import { authServer } from "@/lib/auth/server";
-import Link from "next/link";
+import { auth } from '@/lib/auth/server';
+import Link from 'next/link';
+
+// Server components using auth methods must be rendered dynamically
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
-  const { data } = await authServer.getSession();
+  const { data: session } = await auth.getSession();
 
-  if (data && data.user) {
+  if (session?.user) {
     return (
       <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
         <h1 className="mb-4 text-4xl">
-          Logged in as <span className="font-bold underline">{data.user.name}</span>
+          Logged in as <span className="font-bold underline">{session.user.name}</span>
         </h1>
       </div>
     );
   }
+
   return (
     <div className="flex flex-col gap-2 min-h-screen items-center justify-center bg-gray-900">
       <h1 className="mb-4 text-4xl font-bold">Not logged in</h1>
       <div className="flex item-center gap-2">
-      <Link
-        href='/auth/sign-up'
-        className="inline-flex text-lg text-indigo-400 hover:underline">
+        <Link
+          href="/auth/sign-up"
+          className="inline-flex text-lg text-indigo-400 hover:underline"
+        >
           Sign-up
-      </Link>
-      <Link
-        href='/auth/sign-in'
-        className="inline-flex text-lg text-indigo-400 hover:underline">
+        </Link>
+        <Link
+          href="/auth/sign-in"
+          className="inline-flex text-lg text-indigo-400 hover:underline"
+        >
           Sign-in
-      </Link>
+        </Link>
       </div>
     </div>
   );
@@ -435,13 +454,15 @@ npm run dev
 
 ## Available SDK methods
 
-Both `authClient` and `authServer` expose similar API methods. If you would like to use auth APIs in client components, you can use `authClient`.
+Both `authClient` and `auth` expose similar API methods. Use `authClient` for client components and `auth` for server components, server actions, and API routes.
 
-- [authClient.signUp.email()](/docs/reference/javascript-sdk#auth-signup) - Create a new user account
-- [authClient.signIn.email()](/docs/reference/javascript-sdk#auth-signinwithpassword) - Sign in with email and password
-- [authClient.signOut()](/docs/reference/javascript-sdk#auth-signout) - Sign out the current user
-- [authClient.getSession()](/docs/reference/javascript-sdk#auth-getsession) - Get the current session
-- `authServer.updateUser()` - To update user details
+- [authClient.signUp.email()](/docs/reference/javascript-sdk#auth-signup) / `auth.signUp.email()` - Create a new user account
+- [authClient.signIn.email()](/docs/reference/javascript-sdk#auth-signinwithpassword) / `auth.signIn.email()` - Sign in with email and password
+- [authClient.signOut()](/docs/reference/javascript-sdk#auth-signout) / `auth.signOut()` - Sign out the current user
+- [authClient.getSession()](/docs/reference/javascript-sdk#auth-getsession) / `auth.getSession()` - Get the current session
+- `authClient.updateUser()` / `auth.updateUser()` - Update user details
+
+The `auth` instance also includes `.handler()` for API routes and `.middleware()` for route protection.
 
 ## Next steps
 
