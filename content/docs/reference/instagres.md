@@ -113,16 +113,16 @@ Returns the same response schema.
 
 ### Response fields
 
-| Field               | Type           | Description                                                                                                              |
-| ------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `id`                | string         | Database identifier (UUID v7)                                                                                            |
-| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                    |
-| `neon_project_id`   | string         | Underlying Neon project ID                                                                                               |
+| Field               | Type           | Description                                                                                                            |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `id`                | string         | Database identifier (UUID v7)                                                                                          |
+| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                  |
+| `neon_project_id`   | string         | Underlying Neon project ID                                                                                             |
 | `connection_string` | string \| null | Postgres connection URL with pooling (null after claimed). For direct connections, remove `-pooler` from the hostname. |
-| `claim_url`         | string         | URL to claim the database                                                                                                |
-| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                            |
-| `created_at`        | string         | ISO 8601 creation timestamp                                                                                              |
-| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                           |
+| `claim_url`         | string         | URL to claim the database                                                                                              |
+| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                          |
+| `created_at`        | string         | ISO 8601 creation timestamp                                                                                            |
+| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                         |
 
 <details>
 <summary>Error responses</summary>
