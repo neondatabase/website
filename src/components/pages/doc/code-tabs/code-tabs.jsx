@@ -23,7 +23,7 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
     const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
-    sendGtagEvent('Tab clicked', { tab_label: label, tag_name: 'CodeTab' });
+    sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'CodeTab' });
   };
 
   return (

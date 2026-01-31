@@ -37,7 +37,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
             href={href}
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
-            onClick={() => sendGtagEvent('Link clicked', { text: title, tag_name: 'TechCard' })}
+            onClick={() => sendGtagEvent('Link Clicked', { text: title, tag_name: 'TechCard' })}
           >
             <div className="relative z-10">
               <img

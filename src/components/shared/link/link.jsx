@@ -87,7 +87,7 @@ const Link = forwardRef(
 
     const handleClick = () => {
       if (!tagName) return;
-      sendGtagEvent('Link clicked', {
+      sendGtagEvent('Link Clicked', {
         style: theme,
         text: tagText || getNodeText(children),
         tag_name: tagName,

@@ -20,7 +20,7 @@ const Tabs = ({ labels = [], children }) => {
     const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
-    sendGtagEvent('Tab clicked', { tab_label: label, tag_name: 'ContentTab' });
+    sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
   };
 
   return (
