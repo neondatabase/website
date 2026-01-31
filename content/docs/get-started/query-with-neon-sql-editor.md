@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
   - /docs/get-started-with-neon/query-with-neon-sql-editor
-updatedOn: '2025-12-11T15:40:49.859Z'
+updatedOn: '2026-01-30T00:03:04.778Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -81,9 +81,11 @@ For more details about using Time Travel queries, see:
 - [Time Travel](/docs/guides/time-travel-assist)
 - [Time Travel tutorial](/docs/guides/time-travel-tutorial)
 
-## Export data to CSV, JSON and XLSX
+## Export or copy query results
 
-The Neon SQL Editor supports exporting your data to `JSON`, `CSV` and `XLSX`. You can access the download button from the bottom right corner of the **SQL Editor** page. The download button only appears when there is a result set to download.
+The Neon SQL Editor lets you export data to `CSV`, `JSON`, and `XLSX` formats, or copy query results directly to your clipboard as JSON. Access the download and copy buttons from the bottom right corner of the **SQL Editor** page. These buttons only appear when there is a result set to display.
+
+To copy query results as JSON without downloading a file, click the copy icon button. The JSON will be instantly available in your clipboard, ready to paste into other applications or documentation.
 
 ## Expand results section of the SQL Editor window
 

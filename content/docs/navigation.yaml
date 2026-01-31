@@ -484,11 +484,15 @@
               items:
                 - title: Neon Auth & Data API TypeScript SDKs
                   slug: reference/javascript-sdk
+                - title: Next.js Server SDK
+                  slug: auth/reference/nextjs-server
                 - title: UI Components
                   slug: auth/reference/ui-components
 
             - section: Migration Guides
               items:
+                - title: From Neon Auth SDK v0.1
+                  slug: auth/migrate/from-auth-v0.1
                 - title: From Stack Auth (legacy)
                   slug: auth/migrate/from-legacy-auth
                 - title: From Supabase

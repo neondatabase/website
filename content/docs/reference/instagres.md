@@ -4,12 +4,14 @@ subtitle: Launch an instant Neon Postgres database with zero configuration
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2026-01-29T00:00:00.000Z'
+updatedOn: '2026-01-30T19:25:14.192Z'
 ---
 
-Instagres gives you an instant PostgreSQL database with a single API call. No account required.
+Instagres gives you an instant Postgres database with a single API call. No account required.
 
-Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running PostgreSQL 17.
+Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running Postgres 17.
+
+Access it at [instagres.com](https://instagres.com/) or [neon.new](https://neon.new/).
 
 ## Quick start
 
@@ -111,16 +113,16 @@ Returns the same response schema.
 
 ### Response fields
 
-| Field               | Type           | Description                                                                                                              |
-| ------------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `id`                | string         | Database identifier (UUID v7)                                                                                            |
-| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                    |
-| `neon_project_id`   | string         | Underlying Neon project ID                                                                                               |
-| `connection_string` | string \| null | PostgreSQL connection URL with pooling (null after claimed). For direct connections, remove `-pooler` from the hostname. |
-| `claim_url`         | string         | URL to claim the database                                                                                                |
-| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                            |
-| `created_at`        | string         | ISO 8601 creation timestamp                                                                                              |
-| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                           |
+| Field               | Type           | Description                                                                                                            |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `id`                | string         | Database identifier (UUID v7)                                                                                          |
+| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                  |
+| `neon_project_id`   | string         | Underlying Neon project ID                                                                                             |
+| `connection_string` | string \| null | Postgres connection URL with pooling (null after claimed). For direct connections, remove `-pooler` from the hostname. |
+| `claim_url`         | string         | URL to claim the database                                                                                              |
+| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                          |
+| `created_at`        | string         | ISO 8601 creation timestamp                                                                                            |
+| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                         |
 
 <details>
 <summary>Error responses</summary>

@@ -2,11 +2,15 @@
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
 enableTableOfContents: true
-updatedOn: '2026-01-15T16:35:55.059Z'
+updatedOn: '2026-01-30T14:03:06.274Z'
 layout: wide
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
+
+<Admonition type="note">
+Upgrading from Neon Auth SDK v0.1? See the [migration guide](/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+</Admonition>
 
 <TwoColumnLayout>
 
@@ -51,10 +55,10 @@ npm install @neondatabase/auth
 <TwoColumnLayout.Step title="Set up environment variables">
 <TwoColumnLayout.Block>
 
-Create a `.env` file in your project root and add your Auth URL:
+Create a `.env` file in your project root and add your Auth URL and a cookie secret:
 
 <Admonition type="note">
-Replace the URL with your actual Auth URL from the Neon Console.
+Replace the Auth URL with your actual Auth URL from the Neon Console. Generate a secure cookie secret with `openssl rand -base64 32`.
 </Admonition>
 
 </TwoColumnLayout.Block>
@@ -62,48 +66,77 @@ Replace the URL with your actual Auth URL from the Neon Console.
 
 ```bash
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
+NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Set up your auth API routes">
+<TwoColumnLayout.Step title="Create auth server instance">
 <TwoColumnLayout.Block>
 
-We need to mount the `authApiHandler` handler to the auth API route. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory and add the following code:
+Create a unified auth instance in `lib/auth/server.ts`. This single instance provides all server-side auth functionality:
+
+- `.handler()` for API routes
+- `.middleware()` for route protection
+- `.getSession()` and all Better Auth server methods
+
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+
+</TwoColumnLayout.Block>
+<TwoColumnLayout.Block label="lib/auth/server.ts">
+
+```typescript
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+```
+
+</TwoColumnLayout.Block>
+</TwoColumnLayout.Step>
+
+<TwoColumnLayout.Step title="Set up auth API routes">
+<TwoColumnLayout.Block>
+
+Create an API route handler that proxies auth requests. All Neon Auth APIs will be routed through this handler. Create a route file inside `/api/auth/[...path]` directory:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="app/api/auth/[...path]/route.ts">
 
 ```typescript
-import { authApiHandler } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = authApiHandler();
+export const { GET, POST } = auth.handler();
 ```
 
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Add neonAuthMiddleware()">
+<TwoColumnLayout.Step title="Add authentication middleware">
 <TwoColumnLayout.Block>
 
-The `neonAuthMiddleware()` ensures that user is authenticated before the request reaches your page components or API routes. Create `proxy.ts` file in your project root:
+The middleware ensures users are authenticated before accessing protected routes. Create `proxy.ts` file in your project root:
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="proxy.ts">
 
 ```typescript
-import { neonAuthMiddleware } from "@neondatabase/auth/next/server";
+import { auth } from '@/lib/auth/server';
 
-export default neonAuthMiddleware({
+export default auth.middleware({
   // Redirects unauthenticated users to sign-in page
-  loginUrl: "/auth/sign-in",
+  loginUrl: '/auth/sign-in',
 });
 
 export const config = {
   matcher: [
     // Protected routes requiring authentication
-    "/account/:path*",
+    '/account/:path*',
   ],
 };
 ```
@@ -118,19 +151,17 @@ Your Next.js project is now fully configured to use Neon Auth. Now, lets proceed
 
 </TwoColumnLayout.Step>
 
-<TwoColumnLayout.Step title="Configure the auth clients">
+<TwoColumnLayout.Step title="Configure the auth client">
 <TwoColumnLayout.Block>
 
-The Auth UI components need access to auth APIs. Lets first create the auth client in `lib/auth/client.ts` file then we pass it to `NeonAuthUIProvider`
+The Auth UI components need access to auth APIs. Create the auth client in `lib/auth/client.ts` file, which you'll pass to `NeonAuthUIProvider`.
 
-To use Auth APIs in server components and server actions, you can also create auth-server in `lib/auth/server.ts` file.
+<Admonition type="note">
+The server-side `auth` instance was already created in a previous step. The client is separate and handles browser-side auth operations.
+</Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block>
-<Tabs labels={["Auth Client", "Auth Server"]}>
-<TabItem>
-
-Copy and paste following code in `lib/auth/client.ts` file:
+<TwoColumnLayout.Block label="lib/auth/client.ts">
 
 ```tsx
 'use client';
@@ -140,19 +171,6 @@ import { createAuthClient } from '@neondatabase/auth/next';
 export const authClient = createAuthClient();
 ```
 
-  </TabItem>
-  <TabItem>
-
-Copy and paste following code in `lib/auth/server.ts` file:
-
-```tsx
-import { createAuthServer } from '@neondatabase/auth/next/server';
-
-export const authServer = createAuthServer();
-```
-
-</TabItem>
-</Tabs>
 </TwoColumnLayout.Block>
 </TwoColumnLayout.Step>
 
@@ -346,12 +364,11 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 
 **Server Components:**
 
-- To use Neon Auth in Next.js server components, import the `authServer` created in `lib/auth/server.ts`, and use different API methods it provides.
-- For quick access to session and user details, you can directly use `neonAuth()` utility without needing to create authServer.
+- Use the `auth` instance from `lib/auth/server.ts` to access session data and call auth methods in server components and server actions.
 
 **Client Components:**
 
-- To use the Neon Auth in Next.js client components, import the `authClient` created in `lib/auth/client.ts`, and use different API methods it provides.
+- Use the `authClient` from `lib/auth/client.ts` to access session data and call auth methods in client components.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block label="Access user data">
@@ -363,31 +380,34 @@ export default async function AccountPage({ params }: { params: Promise<{ path: 
 Create a new page at `app/server-rendered-page/page.tsx` and add the following code:
 
 ```tsx
-import { neonAuth } from "@neondatabase/auth/next/server";
+import { auth } from '@/lib/auth/server';
+
+// Server components using auth methods must be rendered dynamically
+export const dynamic = 'force-dynamic';
 
 export default async function ServerRenderedPage() {
-    const { session, user } = await neonAuth();
+  const { data: session } = await auth.getSession();
 
-    return (
-        <div className="max-w-xl mx-auto p-6 space-y-4">
-            <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
+  return (
+    <div className="max-w-xl mx-auto p-6 space-y-4">
+      <h1 className="text-2xl font-semibold">Server Rendered Page</h1>
 
-            <p className="text-gray-400">
-                Authenticated:{" "}
-                <span className={session ? "text-green-500" : "text-red-500"}>
-                    {session ? "Yes" : "No"}
-                </span>
-            </p>
+      <p className="text-gray-400">
+        Authenticated:{' '}
+        <span className={session ? 'text-green-500' : 'text-red-500'}>
+          {session ? 'Yes' : 'No'}
+        </span>
+      </p>
 
-            {user && <p className="text-gray-400">User ID: {user.id}</p>}
+      {session?.user && <p className="text-gray-400">User ID: {session.user.id}</p>}
 
-            <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
+      <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
 
-            <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
-                {JSON.stringify({ session, user }, null, 2)}
-            </pre>
-        </div>
-    );
+      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+        {JSON.stringify({ session: session?.session, user: session?.user }, null, 2)}
+      </pre>
+    </div>
+  );
 }
 ```
 
@@ -398,33 +418,33 @@ export default async function ServerRenderedPage() {
 Create a new page at `app/client-rendered-page/page.tsx` and add the following code:
 
 ```tsx
-"use client";
+'use client';
 
-import { authClient } from "@/lib/auth/client";
+import { authClient } from '@/lib/auth/client';
 
 export default function ClientRenderedPage() {
-    const { data } = authClient.useSession();
+  const { data } = authClient.useSession();
 
-    return (
-        <div className="max-w-xl mx-auto p-6 space-y-4">
-            <h1 className="text-2xl font-semibold">Client Rendered Page</h1>
+  return (
+    <div className="max-w-xl mx-auto p-6 space-y-4">
+      <h1 className="text-2xl font-semibold">Client Rendered Page</h1>
 
-            <p className="text-gray-400">
-                Authenticated:{" "}
-                <span className={data?.session ? "text-green-500" : "text-red-500"}>
-                    {data?.session ? "Yes" : "No"}
-                </span>
-            </p>
+      <p className="text-gray-400">
+        Authenticated:{' '}
+        <span className={data?.session ? 'text-green-500' : 'text-red-500'}>
+          {data?.session ? 'Yes' : 'No'}
+        </span>
+      </p>
 
-            {data?.user && <p className="text-gray-400">User ID: {data.user.id}</p>}
+      {data?.user && <p className="text-gray-400">User ID: {data.user.id}</p>}
 
-            <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
+      <p className="font-medium text-gray-700 dark:text-gray-200">Session and User Data:</p>
 
-            <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
-                {JSON.stringify({ session: data?.session, user: data?.user }, null, 2)}
-            </pre>
-        </div>
-    );
+      <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded text-sm overflow-x-auto text-gray-800 dark:text-gray-200">
+        {JSON.stringify({ session: data?.session, user: data?.user }, null, 2)}
+      </pre>
+    </div>
+  );
 }
 ```
 
@@ -435,20 +455,16 @@ export default function ClientRenderedPage() {
 Create a new API route at `app/api/secure-api-route/route.ts` and add the following code:
 
 ```tsx
-import { authServer } from "@/lib/auth/server";
+import { auth } from '@/lib/auth/server';
 
 export async function GET() {
-  const { data } = await authServer.getSession();
-  if (data?.session) {
-    return new Response(
-      JSON.stringify({ "session": data.session, "user": data.user }),
-      { headers: { "Content-Type": "application/json" } }
-    )
+  const { data: session } = await auth.getSession();
+
+  if (!session?.user) {
+    return Response.json({ error: 'Unauthenticated' }, { status: 401 });
   }
-  return new Response(
-    JSON.stringify({ "error": "Unauthenticated" }),
-    { headers: { "Content-Type": "application/json" }, status: 401 }
-  )
+
+  return Response.json({ session: session.session, user: session.user });
 }
 ```
 
