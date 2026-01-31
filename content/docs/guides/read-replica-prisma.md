@@ -109,13 +109,13 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
    import { readReplicas } from '@prisma/extension-read-replicas';
 
    // Create adapter for primary connection
-   const mainAdapter = new PrismaNeon({ 
-     connectionString: process.env.DATABASE_URL 
+   const mainAdapter = new PrismaNeon({
+     connectionString: process.env.DATABASE_URL
    });
 
    // Create adapter for replica connection
-   const replicaAdapter = new PrismaNeon({ 
-     connectionString: process.env.DATABASE_REPLICA_URL 
+   const replicaAdapter = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL
    });
 
    // Create replica client
@@ -138,11 +138,11 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 
    ```javascript
    // Create adapters for multiple replicas
-   const replicaAdapter1 = new PrismaNeon({ 
-     connectionString: process.env.DATABASE_REPLICA_URL_1 
+   const replicaAdapter1 = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL_1
    });
-   const replicaAdapter2 = new PrismaNeon({ 
-     connectionString: process.env.DATABASE_REPLICA_URL_2 
+   const replicaAdapter2 = new PrismaNeon({
+     connectionString: process.env.DATABASE_REPLICA_URL_2
    });
 
    // Create replica clients
