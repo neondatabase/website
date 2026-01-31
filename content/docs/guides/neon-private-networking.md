@@ -4,7 +4,7 @@ subtitle: Learn how to connect to your Neon database via AWS PrivateLink
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-01-28T13:00:52.476Z'
+updatedOn: '2026-01-30T19:25:14.189Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -49,7 +49,7 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)
 
-    1. Under **Service settings**, specify the **Service name**. Some regions require specifying two or three service names, and service names vary by region:
+    1. Under **Service settings**, specify the **Service name**. Some regions require specifying multiple service names, and service names vary by region:
 
        - **us-east-1**: Create entries, one for each of the following:
          - `com.amazonaws.vpce.us-east-1.vpce-svc-02a0abd91f32f1ed7`

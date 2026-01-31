@@ -3,7 +3,7 @@ title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-11T15:40:49.852Z'
+updatedOn: '2026-01-30T14:03:06.276Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -29,13 +29,11 @@ This topic describes how to manage your Neon resource on Azure. It covers how to
 
 ## Create additional Neon projects
 
-You can add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console.
+<Admonition type="note">
+As part of the deprecation process, project creation is no longer available for Azure-managed organizations. To create new projects, [transfer your existing projects to a Neon-managed organization](/docs/import/migrate-from-azure-native).
+</Admonition>
 
-In Azure, navigate to the **Projects** page and select **Create Project**.
-
-![Project page in Neon](/docs/introduction/azure_project_form.png)
-
-See [Create a project](/docs/manage/projects#create-a-project) for how to create a project from the Neon Console.
+Previously, you could add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console. The project creation button is now disabled for Azure-managed organizations.
 
 ## Create branches
 

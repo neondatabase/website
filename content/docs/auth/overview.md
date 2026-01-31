@@ -2,7 +2,7 @@
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
 enableTableOfContents: true
-updatedOn: '2026-01-21T23:10:35.115Z'
+updatedOn: '2026-01-30T14:03:06.271Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -34,7 +34,7 @@ Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to s
   All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
 
 - **Zero server management**  
-  Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [SDK](/docs/reference/javascript-sdk) in your app. No infrastructure to maintain.
+  Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
 
 - **Auth that branches with your data**  
   Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
@@ -65,7 +65,30 @@ As Neon Auth evolves, more Better Auth integrations and features will be added. 
 
 ## Basic usage
 
-Enable Auth in your Neon project, then add authentication to your app:
+Enable Auth in your Neon project, then add authentication to your app.
+
+**For Next.js (server-side):**
+
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+
+```typescript filename="lib/auth/server.ts"
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
+});
+```
+
+```typescript filename="app/api/auth/[...path]/route.ts"
+import { auth } from '@/lib/auth/server';
+
+export const { GET, POST } = auth.handler();
+```
+
+**For React/Vite (client-side):**
+
+See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation.
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';

@@ -3,7 +3,7 @@ title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-10-29T19:08:44.078Z'
+updatedOn: '2026-01-30T14:03:06.279Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -18,10 +18,6 @@ Deploying Neon natively on Azure lets you manage your Neon organization alongsid
 - **Single sign-on (SSO)**: Access Neon using your Azure credentials—no separate logins required.
 - **Consolidated billing**: Simplify cost management with unified billing through the Azure Marketplace.
 - **Integrated workflows**: Use the Azure CLI and SDKs to manage Neon as part of your regular workflows, integrated with your existing Azure resources.
-
-    <Admonition type="note">
-    Management of Neon organizations, projects, and branches is supported via the Azure portal, CLI, and SDK. We continue to enhance the integration between Neon and Azure, including with other Azure native services. Additional Neon features and advanced configurations remain accessible through the Neon Console.
-    </Admonition>
 
 ### Getting started
 
