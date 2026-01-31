@@ -33,7 +33,7 @@ Let's break down the key components in this setup:
 
 You have two options for connecting Cline to the Neon MCP Server:
 
-1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cline. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+1. **Remote MCP Server:** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cline. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
 
 2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
@@ -77,10 +77,6 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
 7. A browser window will open asking you to sign in to your Neon account and authorize Cline to access your Neon projects.
    ![Neon OAuth window](/docs/guides/neon-oauth-window.png)
 8. Once authentication is complete, Cline will display a confirmation message, and **Neon** will appear under your list of available MCP servers.
-
-<Admonition type="note">
-  The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
-</Admonition>
 
 ### Option 2: Setting up the Local Neon MCP Server
 
