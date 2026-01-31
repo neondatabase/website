@@ -76,6 +76,7 @@ const CopyMarkdownButton = ({ rawFileLink }) => {
       const content = await response.text();
       copyToClipboard(content);
       setStatus('copied');
+      sendGtagEvent('Action Clicked', { text: 'Copy markdown', tag_name: 'DocsSidebar' });
       setTimeout(() => {
         setStatus('default');
       }, 2000);
@@ -152,6 +153,7 @@ const CopyNeonCLIButton = () => {
     try {
       copyToClipboard(cliCommand);
       setStatus('copied');
+      sendGtagEvent('Action Clicked', { text: 'Copy neon init command', tag_name: 'DocsSidebar' });
       setTimeout(() => {
         setStatus('default');
       }, 2000);
@@ -231,7 +233,12 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
           text={`Open in ${bot.name}`}
           url={bot.generateLink(rawFileLink)}
           tooltip={`Open this page in ${bot.name}`}
-          onClick={() => sendGtagEvent('Action Clicked', { text: `Open in ${bot.name}` })}
+          onClick={() =>
+            sendGtagEvent('Action Clicked', {
+              text: `Open in ${bot.name}`,
+              tag_name: 'DocsSidebar',
+            })
+          }
         />
       ))}
       <CopyNeonCLIButton />
@@ -241,21 +248,33 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         text="Connect MCP on Cursor"
         url="cursor://anysphere.cursor-deeplink/mcp/install?name=Neon&config=eyJ1cmwiOiJodHRwczovL21jcC5uZW9uLnRlY2gvbWNwIn0%3D"
         tooltip="Connect the Neon MCP server on Cursor"
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on Cursor' })}
+        onClick={() =>
+          sendGtagEvent('Action Clicked', {
+            text: 'Connect MCP on Cursor',
+            tag_name: 'DocsSidebar',
+          })
+        }
       />
       <ActionItem
         icon={VSCodeIcon}
         text="Connect MCP on VS Code"
         url="vscode:mcp/install?%7B%22name%22%3A%22Neon%22%2C%22url%22%3A%22https%3A%2F%2Fmcp.neon.tech%2Fmcp%22%7D"
         tooltip="Connect the Neon MCP server on VS Code"
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Connect MCP on VS Code' })}
+        onClick={() =>
+          sendGtagEvent('Action Clicked', {
+            text: 'Connect MCP on VS Code',
+            tag_name: 'DocsSidebar',
+          })
+        }
       />
       <ActionItem
         icon={GitHubIcon}
         text="Edit on GitHub"
         url={gitHubLink}
         tooltip="Suggest changes to this page"
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Edit on GitHub' })}
+        onClick={() =>
+          sendGtagEvent('Action Clicked', { text: 'Edit on GitHub', tag_name: 'DocsSidebar' })
+        }
       />
     </>
   );
@@ -268,7 +287,9 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         url={gitHubLink}
         iconClassName="size-[18px] text-white"
         tooltip="Propose changes to this page"
-        onClick={() => sendGtagEvent('Action Clicked', { text: 'Suggest edits' })}
+        onClick={() =>
+          sendGtagEvent('Action Clicked', { text: 'Suggest edits', tag_name: 'DocsSidebar' })
+        }
       />
       <ActionItem
         icon={ArrowBackToTopIcon}
