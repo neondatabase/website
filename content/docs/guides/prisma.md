@@ -233,7 +233,7 @@ import { PrismaClient } from './generated/prisma'
 import { PrismaNeon } from '@prisma/adapter-neon'
 
 // Create the Neon adapter with your pooled connection string
-const adapter = new PrismaNeon({ 
+const adapter = new PrismaNeon({
   connectionString: process.env.DATABASE_URL!
 })
 
