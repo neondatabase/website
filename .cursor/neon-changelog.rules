@@ -1,0 +1,145 @@
+rules:
+  - name: Neon Weekly Changelog Generator (next Friday)
+    description: >
+      Create the Neon weekly changelog for the next upcoming Friday (from now).
+      Writes content/changelog/YYYY-MM-DD.md with a consistent structure.
+    trigger:
+      command: generate:changelog
+    variables:
+      - key: TIMEZONE
+        default: America/New_York
+        description: IANA timezone used to compute "now" and next Friday.
+    instructions: |
+      You are generating a Neon weekly changelog file.
+
+      ## Date logic (MUST DO)
+      - Use the IANA timezone in `${TIMEZONE}` (default America/New_York).
+      - Compute **next upcoming Friday** from the current moment in `${TIMEZONE}`:
+        - Let `today` be the current date in `${TIMEZONE}`.
+        - Let `dow` be Sunday=0 … Friday=5.
+        - `delta = (5 - dow + 7) % 7`
+        - If `delta === 0`, treat **today as Friday** and select **Friday of next week** (`add=7`) so drafts created on a Friday always target the *next* release. Otherwise `add=delta`.
+        - `target = today + add days`
+      - Format `target` as `YYYY-MM-DD` → `CHANGELOG_DATE`.
+      - Paths:
+        - `DEST_DIR = content/changelog`
+        - `FILENAME = ${CHANGELOG_DATE}.md`
+        - `DEST_PATH = ${DEST_DIR}/${FILENAME}`
+
+      ## File rules
+      - If `${DEST_PATH}` already exists: STOP and report that the changelog file already exists. Do not overwrite.
+      - Otherwise, create `${DEST_PATH}` with the template below.
+
+      ## Voice & content guidelines
+      - Friendly, concise, user-focused; sentence-style capitalization.
+      - Use H2 (`##`) for top-level sections.
+      - Feature headings should communicate user value, not just internal names.
+      - Each feature description: 1–3 sentences.
+      - Include optional image blocks where relevant.
+      - Always include a **Fixes & improvements** section as a collapsible `<details>`.
+      - **IMPORTANT**: Use only placeholder content (Lorem ipsum) and generic headings like "## New feature" - DO NOT create fictional features, improvements, or specific content.
+
+      ## Markdown template (write exactly this shape, replacing bracketed placeholders)
+      ---
+      title: [Concise main theme of the release]
+      ---
+
+      ## New feature
+
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+      ## Another feature
+
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+      ## Third feature
+
+      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+      <details>
+      <summary>**Fixes & improvements**</summary>
+
+      - [Short bullet describing a fix or improvement.]
+      - [Another short bullet, if applicable.]
+
+      </details>
+
+      ## Output requirements
+      - Save the file to `${DEST_PATH}` with the above content.
+      - After creation, print:
+        - `CHANGELOG_DATE`
+        - `DEST_PATH`
+        - A checklist of any `[placeholders]` still present.
+
+    notes: |
+      # How to use (documentation only; safe to keep in rules)
+      - **Create next Friday’s draft (typical):**
+        - Run: `generate:changelog`
+        - Optional: set `TIMEZONE` (default `America/New_York`).
+      - **Create for a specific date (backfill / special case):**
+        - Run: `generate:changelog:for` with `TARGET_DATE=YYYY-MM-DD`.
+      - **Show usage help:**
+        - Run: `generate:changelog:help`
+
+      ### Helper (JS) — compute next Friday in a specific timezone (no external deps)
+      ```js
+      function nextFriday(tz = "America/New_York") {
+        const now = new Date();
+        const fmt = new Intl.DateTimeFormat('en-CA', {
+          timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short'
+        });
+        const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
+        const base = new Date(`${parts.year}-${parts.month}-${parts.day}T00:00:00`);
+        const dow = base.getDay(); // 0..6
+        const delta = (5 - dow + 7) % 7; // 5 = Friday
+        const add = (delta === 0 ? 7 : delta);
+        const friday = new Date(base.getTime() + add * 86400000);
+        const y = friday.getFullYear();
+        const m = String(friday.getMonth() + 1).padStart(2, '0');
+        const d = String(friday.getDate()).padStart(2, '0');
+        return `${y}-${m}-${d}`;
+      }
+      ```
+
+  - name: Neon Weekly Changelog Generator (override date)
+    description: >
+      Create a Neon changelog for a specific date (YYYY-MM-DD) when you need to
+      backfill or pre-create a non-standard week.
+    trigger:
+      command: generate:changelog:for
+    variables:
+      - key: TARGET_DATE
+        description: Date string in YYYY-MM-DD (must be a valid calendar date).
+    instructions: |
+      - Validate `${TARGET_DATE}` is a valid `YYYY-MM-DD`.
+      - Use `${TARGET_DATE}` as `CHANGELOG_DATE`.
+      - Set:
+        - `DEST_DIR = content/changelog`
+        - `FILENAME = ${CHANGELOG_DATE}.md`
+        - `DEST_PATH = ${DEST_DIR}/${FILENAME}`
+      - If the file exists, STOP and report; otherwise create it using the same template and rules as the main command.
+
+  - name: Neon Weekly Changelog Generator (help)
+    description: >
+      Print usage instructions for the changelog generator commands.
+    trigger:
+      command: generate:changelog:help
+    instructions: |
+      Print the following usage guide and then exit without creating files:
+
+      Neon Weekly Changelog — Usage
+      --------------------------------
+      1) Next Friday draft (default)
+         - Run: generate:changelog
+         - Optional var: TIMEZONE=America/New_York
+
+      2) Specific date (backfill or special case)
+         - Run: generate:changelog:for
+         - Required var: TARGET_DATE=YYYY-MM-DD
+
+      Output path pattern:
+        content/changelog/YYYY-MM-DD.md
+
+      Notes:
+        - If a file already exists for the computed or specified date, no file is written.
+        - The template includes a collapsible “Fixes & improvements” section.
