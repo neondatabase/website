@@ -4,7 +4,7 @@ subtitle: Learn how to create event-driven flows on your backend triggered by ch
   your Neon Postgres database
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.283Z'
+updatedOn: '2026-01-31T12:00:00.000Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.
@@ -79,17 +79,22 @@ npm install @prisma/extension-pulse@latest
 
 ### Extend your Prisma Client instance with the Pulse extension
 
-Add the following to extend your existing Prisma Client instance with the Prisma Pulse extension. Don't forget to insert your own API key.
+Add the following to extend your existing Prisma Client instance with the Prisma Pulse extension.
 
 ```tsx
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter }).$extends(
+  withPulse({ apiKey: process.env.PULSE_API_KEY })
+);
 ```
 
 <Admonition type="note">
-For a real production use case, you should consider moving sensitive values like your API key into environment variables.
+In Prisma 7, you must use a driver adapter since the `url` property is no longer supported in the schema file. See [Connect from Prisma to Neon](/docs/guides/prisma) for complete setup instructions.
 </Admonition>
 
 ### Create your first Pulse stream
@@ -97,10 +102,15 @@ For a real production use case, you should consider moving sensitive values like
 The code below subscribes to a `User` model in your Prisma schema. You can use a similar approach to subscribe to any model that exists in your project.
 
 ```tsx
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 import { withPulse } from '@prisma/extension-pulse';
 
-const prisma = new PrismaClient().$extends(withPulse({ apiKey: '<your Pulse API key>' }));
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter }).$extends(
+  withPulse({ apiKey: process.env.PULSE_API_KEY })
+);
 
 async function main() {
   // Create a stream from the 'User' model

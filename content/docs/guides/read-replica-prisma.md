@@ -2,7 +2,7 @@
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.031Z'
+updatedOn: '2026-01-31T12:00:00.000Z'
 ---
 
 A Neon read replica is an independent read-only compute that performs read operations on the same data as your primary read-write compute, which means adding a read replica to a Neon project requires no additional storage.
@@ -15,7 +15,7 @@ In this guide, we'll show you how you can leverage Neon read replicas to efficie
 
 ## Prerequisites
 
-- An application that uses Prisma with a Neon database.
+- An application that uses Prisma with a Neon database. If you haven't set up Prisma yet, see [Connect from Prisma to Neon](/docs/guides/prisma).
 
 ## Create a read replica
 
@@ -103,22 +103,29 @@ Notice that the `endpoint_id` (`ep-damp-cell-123456`) for the read replica compu
 2. Extend your Prisma Client instance by importing the extension and adding the `DATABASE_REPLICA_URL` environment variable as shown:
 
    ```javascript
+   import 'dotenv/config';
    import { PrismaClient } from '@prisma/client';
+   import { PrismaNeon } from '@prisma/adapter-neon';
    import { readReplicas } from '@prisma/extension-read-replicas';
 
-   const prisma = new PrismaClient().$extends(
+   const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+   const prisma = new PrismaClient({ adapter }).$extends(
      readReplicas({
-       url: DATABASE_REPLICA_URL,
+       url: process.env.DATABASE_REPLICA_URL,
      })
    );
    ```
 
    <Admonition type="note">
+   In Prisma 7, you must use a driver adapter since the `url` property is no longer supported in the schema file. See [Connect from Prisma to Neon](/docs/guides/prisma) for complete setup instructions.
+   </Admonition>
+
+   <Admonition type="note">
    You can also pass an array of read replica connection strings if you want to use multiple read replicas. Neon supports adding multiple read replicas to a database branch.
 
    ```javascript
-   // lib/prisma.ts
-   const prisma = new PrismaClient().$extends(
+   const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+   const prisma = new PrismaClient({ adapter }).$extends(
      readReplicas({
        url: [process.env.DATABASE_REPLICA_URL_1, process.env.DATABASE_REPLICA_URL_2],
      })

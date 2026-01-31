@@ -3,7 +3,7 @@ title: Schema migration with Neon Postgres and Prisma ORM
 subtitle: Set up Neon Postgres and run migrations for your Javascript project using
   Prisma ORM
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.910Z'
+updatedOn: '2026-01-31T12:00:00.000Z'
 ---
 
 [Prisma](https://www.prisma.io/) is an open-source ORM for Node.js and Typescript, known for its ease of use and focus on type safety. It supports many databases, including Postgres, and provides a robust system for managing database schemas and migrations.
@@ -47,10 +47,11 @@ npm pkg set type="module" && npm pkg set scripts.start="node index.js"
 npm install express
 ```
 
-To use the Prisma ORM for making queries, install the `@prisma/client` package and the Prisma CLI. The CLI is only needed as a development dependency to generate the Prisma Client for the given schema.
+To use the Prisma ORM for making queries, install the Prisma packages. The CLI is only needed as a development dependency to generate the Prisma Client.
 
 ```bash
-npm install @prisma/client && npm install prisma --save-dev
+npm install @prisma/client @prisma/adapter-neon dotenv
+npm install prisma --save-dev
 npx prisma init
 ```
 
@@ -58,13 +59,26 @@ These commands create a new `prisma` folder in your project with a `schema.prism
 
 ### Configure Prisma to Use Neon Database
 
-Open the `prisma/schema.prisma` file and update the `datasource db` block with your Neon database connection details:
+Open the `prisma/schema.prisma` file and update the `datasource db` block:
 
 ```prisma
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
+```
+
+Create a `prisma.config.ts` file in your project root to configure the database connection for Prisma CLI commands:
+
+```typescript
+import 'dotenv/config'
+import { defineConfig, env } from 'prisma/config'
+
+export default defineConfig({
+  schema: 'prisma/schema.prisma',
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+})
 ```
 
 Add the `DATABASE_URL` environment variable to your `.env` file, which you'll use to connect to your Neon database. Use the connection string that you obtained from the Neon Console earlier:
@@ -73,6 +87,19 @@ Add the `DATABASE_URL` environment variable to your `.env` file, which you'll us
 # .env
 DATABASE_URL=NEON_DATABASE_CONNECTION_STRING
 ```
+
+<Admonition type="note" title="Prisma 6 and earlier">
+If you're using Prisma 6 or earlier, you can include the `url` property directly in your `schema.prisma` file instead of using `prisma.config.ts`:
+
+```prisma
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+```
+
+Starting with Prisma 7, the `url` property is no longer supported in the schema file.
+</Admonition>
 
 ### Define the Database schema
 
@@ -112,12 +139,15 @@ npx prisma migrate dev --name init
 
 This command generates migration files written in SQL corresponding to our schema definitions and applies them to create the tables in your Neon database. We used the `--name` flag to name the migration.
 
-The command also generates a Prisma Client that is aware of our schemas:
+The command also generates a Prisma Client that is aware of our schemas. To use it in Prisma 7, you need to use the Neon adapter:
 
 ```javascript
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 ```
 
 We'll use this client later to interact with the database.
@@ -128,10 +158,12 @@ To test that the application works, we need to add some example data to our tabl
 
 ```javascript
 // seed.js
-
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 const seed = async () => {
   const authors = [
@@ -203,10 +235,13 @@ Now that the database is set up and populated with data, we can implement the AP
 Create an `index.ts` file at the project root, and add the following code to set up your Express server:
 
 ```javascript
+import 'dotenv/config';
 import express from 'express';
 import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
 
-const prisma = new PrismaClient();
+const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 const app = express();
 const port = process.env.PORT || 3000;
 
