@@ -61,7 +61,7 @@ This command authenticates via OAuth, creates an API key, and configures VS Code
 
 #### Manual Remote Setup (OAuth)
 
-Alternatively, you can manually configure the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server-preview). This setup requires no local installation or API key management.
+Alternatively, you can manually configure the [Remote Hosted MCP Server option](https://github.com/neondatabase-labs/mcp-server-neon?tab=readme-ov-file#option-1-remote-hosted-mcp-server). This setup requires no local installation or API key management.
 
 In your project directory, create a new file named `.vscode/mcp.json` and add the following configuration:
 

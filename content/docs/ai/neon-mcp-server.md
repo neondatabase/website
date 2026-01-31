@@ -74,13 +74,9 @@ The Neon MCP server grants powerful database management capabilities through nat
 
 You can set up the Neon MCP Server in two ways:
 
-### Remote hosted server (preview)
+### Remote hosted server
 
 You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. This is the **easiest** way to start using the Neon MCP Server. It streamlines the setup process by utilizing OAuth for authentication, eliminating the need to manage Neon API keys directly in your client configuration.
-
-<Admonition type="note">
-The remote hosted MCP server is currently in its preview phase. As the [OAuth specification for MCP](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/) is still quite new, we are releasing it in this preview state. During the initial weeks, you may experience some adjustments to the setup. However, the instructions provided should be straightforward to follow at this time.
-</Admonition>
 
 #### Prerequisites:
 

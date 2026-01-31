@@ -94,10 +94,6 @@ Replace `<YOUR_NEON_API_KEY>` with your actual Neon API key which you obtained f
 
 </Admonition>
 
-<Admonition type="note">
-The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
-</Admonition>
-
 ### Option 2: Setting up the Local Neon MCP Server
 
 This method runs the Neon MCP server locally on your machine, using a Neon API key for authentication.
@@ -235,7 +231,7 @@ Claude Code will use the `create_branch` MCP tool to create the branch and provi
 
 ## Conclusion
 
-Claude Code combined with the Neon MCP Server, whether using the **Remote Hosted (Preview)** option or the **Local Server** setup, lets you use natural language to interact with your database and take advantage of Neon's branching capabilities for fast iteration. This approach is ideal for quickly testing database ideas and making schema changes during development.
+Claude Code combined with the Neon MCP Server, whether using the **Remote Hosted** option or the **Local Server** setup, lets you use natural language to interact with your database and take advantage of Neon's branching capabilities for fast iteration. This approach is ideal for quickly testing database ideas and making schema changes during development.
 
 ## Resources
 
