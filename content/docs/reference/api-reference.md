@@ -12,10 +12,6 @@ description="Copy this prompt into your AI coding assistant (Cursor, Copilot, et
 
 The Neon API allows you to manage your Neon projects programmatically. You can create and manage projects, branches, databases, roles, compute endpoints, and more — everything you can do in the Neon Console, you can do with the API.
 
-<Admonition type="tip" title="Need persistent AI rules?">
-For long-term AI guidance that applies automatically to your project, check out our [AI rules for the Neon API](/docs/ai/ai-rules-neon-api). These can be saved to your project's `.cursor/rules/` directory for Cursor, or included as context in other AI tools.
-</Admonition>
-
 ## Quick links
 
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) — Interactive API documentation with "Try It" feature
