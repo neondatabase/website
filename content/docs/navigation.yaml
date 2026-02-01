@@ -532,29 +532,27 @@
                   slug: ai/neon-mcp-server
                 - title: Connect MCP clients
                   slug: ai/connect-mcp-clients-to-neon
-            - section: AI rules & prompts
+            - section: Agent Skills & prompts
               icon: docs
               items:
-                - title: AI rules
-                  slug: ai/ai-rules
+                - title: Agent Skills
+                  slug: ai/agent-skills
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
                 - title: Neon Auth
-                  slug: ai/ai-rules-neon-auth
+                  slug: ai/agent-skills-neon-auth
                 - title: Drizzle
-                  slug: ai/ai-rules-neon-drizzle
+                  slug: ai/agent-skills-neon-drizzle
                 - title: Neon Serverless
-                  slug: ai/ai-rules-neon-serverless
+                  slug: ai/agent-skills-neon-serverless
                 - title: Neon TypeScript SDK
-                  slug: ai/ai-rules-neon-typescript-sdk
+                  slug: ai/agent-skills-neon-typescript-sdk
                 - title: Neon Python SDK
-                  slug: ai/ai-rules-neon-python-sdk
+                  slug: ai/agent-skills-neon-python-sdk
                 - title: Neon API
-                  slug: ai/ai-rules-neon-api
-                - title: Neon Toolkit
-                  slug: ai/ai-rules-neon-toolkit
+                  slug: ai/agent-skills-neon-api
             - section: Build AI agents
               icon: openai
               items:

@@ -7,6 +7,18 @@ updatedOn: '2026-01-22T15:48:50.611Z'
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
 
+## Agent Skills
+
+Install the Neon agent skill to give AI tools like Cursor and Claude Code context-aware guidance for working with Neon:
+
+```bash
+npx add-skill neondatabase/agent-skills
+```
+
+Topics covered include Neon Auth, Drizzle ORM, serverless connections, API usage, and more. See [Agent Skills](/docs/ai/agent-skills) for the full list.
+
+For Claude Code, you can also install via the [Claude Code plugin](/docs/ai/ai-claude-code-plugin) which includes Agent Skills and MCP integration.
+
 ## MCP integration
 
 The Model Context Protocol (MCP) is a standardized way for AI tools to interact with Neon databases using natural language, providing secure and contextual access to your data and infrastructure.
@@ -14,14 +26,6 @@ The Model Context Protocol (MCP) is a standardized way for AI tools to interact 
 <DetailIconCards>
 <a href="/docs/ai/neon-mcp-server" description="Learn about managing your Neon projects using natural language with Neon MCP Server" icon="github">Neon MCP Server</a>
 <a href="/docs/ai/connect-mcp-clients-to-neon" description="Learn how to connect MCP clients like Cursor, Claude Code, and ChatGPT to your Neon database" icon="github">Connect MCP clients</a>
-</DetailIconCards>
-
-## Claude Code plugin
-
-If you're using Claude Code, install the Neon plugin to get Skills, MCP integration, and all the context rules in one package.
-
-<DetailIconCards>
-<a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
 </DetailIconCards>
 
 ## GitHub Copilot agents
@@ -32,20 +36,6 @@ Custom agents for GitHub Copilot that bring Neon's branching workflow directly i
 <a href="/docs/ai/ai-github-copilot-agents" description="Safe database migrations and query optimization using Neon branching" icon="github">Neon agents for GitHub Copilot</a>
 </DetailIconCards>
 
-## AI rules
-
-For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
-
-<DetailIconCards>
-<a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth</a>
-<a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Driver</a>
-<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon API TypeScript SDK" icon="github">Neon API TypeScript SDK</a>
-<a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK</a>
-<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API</a>
-<a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the Neon Toolkit" icon="github">Neon Toolkit</a>
-</DetailIconCards>
-
 ## Build AI agents
 
 Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with our terse JavaScript client or the Neon API.
@@ -53,8 +43,6 @@ Create autonomous agents that can manage and interact with your Neon databases p
 <DetailIconCards>
 
 <a href="https://neon.com/use-cases/ai-agents" description="Read about Neon as a solution for agents that need backends." icon="openai">Neon for AI agent platforms</a>
-
-<a href="https://github.com/neondatabase/toolkit" description="A terse JavaScript client for spinning up Postgres databases and running SQL queries" icon="github">@neondatabase/toolkit</a>
 
 <a href="/docs/ai/ai-database-versioning" description="How AI agents and codegen platforms use Neon snapshot APIs for database versioning" icon="openai">Database versioning</a>
 
