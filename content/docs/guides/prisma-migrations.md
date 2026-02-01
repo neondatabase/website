@@ -111,6 +111,7 @@ npx prisma migrate dev --name init
 ```
 
 This command:
+
 1. Creates a `prisma/migrations` folder with SQL migration files
 2. Applies the migration to your Neon database
 3. Generates the Prisma Client
