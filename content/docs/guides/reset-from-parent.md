@@ -102,7 +102,7 @@ curl --request POST \
 '
 ```
 
-For details, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](/docs/introduction/branch-restore#how-to-use-instant-restore)
 
 </TabItem>
 

@@ -112,11 +112,11 @@ If rolling back migrations doesn't solve the issue, [Neon's backup and restore](
 
 ### Restoration steps
 
-To restore your database using Neon, you can either use the Neon dashboard or the Neon CLI or API. Follow the steps outlined in [Neon's Branch Restore Guide](/docs/guides/branch-restore#how-to-use-branch-restore):
+To restore your database using Neon, you can either use the Neon dashboard or the Neon CLI or API. Follow the steps outlined in [Neon's Branch Restore Guide](/docs/introduction/branch-restore#how-to-use-instant-restore):
 
 After restoring the database, align your codebase with the restored data to ensure consistency.
 
-For detailed steps, refer to the [Neon Branch Restore Guide](/docs/guides/branch-restore#how-to-use-branch-restore).
+For detailed steps, refer to the [Neon Branch Restore Guide](/docs/introduction/branch-restore#how-to-use-instant-restore).
 
 ## Best practices for deployment and recovery
 

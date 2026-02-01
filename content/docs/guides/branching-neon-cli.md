@@ -249,6 +249,6 @@ Backup branch
 └─────────────────────────┴────────────────────────────────┘
 ```
 
-For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/guides/branch-restore#how-to-use-branch-restore).
+For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/introduction/branch-restore#how-to-use-instant-restore).
 
 <NeedHelp/>
