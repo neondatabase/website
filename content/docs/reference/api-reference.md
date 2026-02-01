@@ -36,11 +36,11 @@ Before using the Neon API, you need:
 
 Neon supports three types of API keys, each with different scopes:
 
-| Key Type | Scope | Best For |
-|----------|-------|----------|
-| **Personal API Key** | All projects you own or have access to | Personal development, scripts |
-| **Organization API Key** | All projects within an organization | Team automation, CI/CD |
-| **Project-scoped API Key** | Single project only | Limited access integrations |
+| Key Type                   | Scope                                  | Best For                      |
+| -------------------------- | -------------------------------------- | ----------------------------- |
+| **Personal API Key**       | All projects you own or have access to | Personal development, scripts |
+| **Organization API Key**   | All projects within an organization    | Team automation, CI/CD        |
+| **Project-scoped API Key** | Single project only                    | Limited access integrations   |
 
 Create your first API key in the Neon Console under **Account settings** > **API keys**. For detailed instructions, see [Manage API keys](/docs/manage/api-keys).
 
@@ -237,7 +237,7 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10&cursor=...' ...
 Instead of using curl, you can use our official SDKs:
 
 - **[TypeScript SDK](/docs/reference/typescript-sdk)** — Full-featured SDK for Node.js and browser
-- **[Python SDK](/docs/reference/python-sdk)** — Pythonic wrapper for the Neon API  
+- **[Python SDK](/docs/reference/python-sdk)** — Pythonic wrapper for the Neon API
 - **[@neondatabase/toolkit](/docs/reference/neondatabase-toolkit)** — Combined SDK for AI agents (includes API SDK + Serverless Driver)
 - **[Neon CLI](/docs/reference/neon-cli)** — Command-line interface for Neon
 
@@ -248,7 +248,7 @@ See [Neon SDKs](/docs/reference/sdk) for the full list, including community SDKs
 The interactive [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) provides:
 
 - Complete endpoint documentation
-- Request/response examples  
+- Request/response examples
 - "Try It" feature to execute requests directly
 - Schema definitions for all objects
 
