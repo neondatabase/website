@@ -2,7 +2,7 @@
 title: Schema migrations with Prisma and Neon
 subtitle: Learn how to manage database schema changes using Prisma Migrate with Neon
 enableTableOfContents: true
-updatedOn: '2026-02-01T12:00:00.000Z'
+updatedOn: '2026-02-01T11:47:48.275Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
