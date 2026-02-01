@@ -64,7 +64,7 @@ setupListener().catch(console.error);
 
 Make sure to disable connection pooling in your Neon connection string (make sure your connection string does not include `-pooler`).
 
-  ![Connection String without Pooler](/docs/connect/connection_details_without_connection_pooling.png)
+![Connection String without Pooler](/docs/connect/connection_details_without_connection_pooling.png)
 
 `LISTEN` and `NOTIFY` are session-specific features and are not compatible with Neon connection pooling.
 
