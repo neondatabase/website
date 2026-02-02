@@ -4,7 +4,7 @@ import Features from 'components/pages/enterprise/features';
 import Hero from 'components/pages/enterprise/hero';
 import HowNeonHelps from 'components/pages/enterprise/how-neon-helps';
 import Usage from 'components/pages/enterprise/usage';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Faq from 'components/shared/faq/faq';
 import Layout from 'components/shared/layout';
 import Logos from 'components/shared/logos';
@@ -319,10 +319,8 @@ const EnterprisePage = () => (
       }}
     />
     <Faq items={faqItems} />
-    <CTA
-      className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
+    <CTANew
       title="The Postgres of tomorrow, <br /> available today"
-      titleClassName="!text-[68px] leading-none xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />

@@ -9,21 +9,32 @@ import LINKS from 'constants/links';
 import ctaBackground from './images/cta-bg.jpg';
 import Label from './label';
 
-const CtaNew = ({
+const CTANew = ({
   className,
+  copyWrapperClassName = null,
   title = "The world's most advanced <br /> Postgres platform.",
-  description = 'Trusted by developers, ready for agents. Build and scale applications faster with Neon.',
+  description = null,
   label = 'Get started',
   buttonText = 'Get started',
   buttonUrl = LINKS.signup,
 }) => (
-  <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
+  <section
+    className={clsx(
+      'cta safe-paddings relative mt-[183px] bg-[#151617] xl:mt-[168px] lg:mt-[145px] md:mt-[90px]',
+      className
+    )}
+  >
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
         <Label className="sm:mb-4">{label}</Label>
-        <div className="mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none">
+        <div
+          className={clsx(
+            'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none',
+            copyWrapperClassName
+          )}
+        >
           <h2 className="text-white sm:inline" dangerouslySetInnerHTML={{ __html: title }} />
-          <p className="text-gray-new-50 sm:inline">{description}</p>
+          {description && <p className="text-gray-new-50 sm:inline">{description}</p>}
         </div>
         <Button className="mt-10 lg:mt-8" theme="white-filled" size="new" to={buttonUrl}>
           {buttonText}
@@ -44,8 +55,9 @@ const CtaNew = ({
   </section>
 );
 
-CtaNew.propTypes = {
+CTANew.propTypes = {
   className: PropTypes.string,
+  copyWrapperClassName: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   label: PropTypes.string,
@@ -53,4 +65,4 @@ CtaNew.propTypes = {
   buttonUrl: PropTypes.string,
 };
 
-export default CtaNew;
+export default CTANew;

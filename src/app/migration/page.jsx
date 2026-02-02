@@ -2,7 +2,7 @@ import CardsSupport from 'components/pages/migration/cards-support';
 import Hero from 'components/pages/migration/hero';
 import Task from 'components/pages/migration/task';
 import TaskSteps from 'components/pages/migration/tasks-steps';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import GridFeatures from 'components/shared/grid-features';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
@@ -78,13 +78,10 @@ const MigrationPage = () => (
       description="Neon provides a serverless, fully managed Postgres built for modern development — fast, reliable, and cost-effective."
       items={FEATURES}
     />
-    <CTA
-      className="pb-[298px] pt-[296px] xl:pb-[259px] xl:pt-[250px] lg:pb-[186px] lg:pt-[182px] md:pb-[171px] md:pt-[157px]"
+    <CTANew
       title="18K+ databases created daily"
-      titleClassName="max-w-[560px] leading-none xl:max-w-[500px] lg:max-w-[400px] md:max-w-[320px] xl:text-[56px] xl:leading-[90%] xl:tracking-[-0.03em] lg:text-[48px] lg:leading-[90%] md:text-balance md:text-[40px]"
       buttonText="Meet with our team"
       buttonUrl={LINKS.contactSales}
-      buttonClassName="mt-[32px] h-12 px-6 min-w-[144px] text-[16px] xl:mt-8 xl:px-11 lg:mt-7 md:mt-6 md:h-12 md:px-10 md:min-w-auto"
     />
   </Layout>
 );

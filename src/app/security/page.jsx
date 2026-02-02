@@ -4,7 +4,7 @@ import Hero from 'components/pages/security/hero';
 import Privacy from 'components/pages/security/privacy';
 import SubProcessors from 'components/pages/security/sub-processors';
 import TrustCenter from 'components/pages/security/trust-center';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -20,10 +20,8 @@ const SecurityPage = () => (
     <TrustCenter />
     <SubProcessors />
     <Features />
-    <CTA
-      className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
-      title="The Postgres of tomorrow, available today"
-      titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
+    <CTANew
+      title="The Postgres of tomorrow, <br class='xs:hidden' /> available today"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
     />
