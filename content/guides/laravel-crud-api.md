@@ -9,7 +9,7 @@ updatedOn: '2024-07-01T00:00:00.000Z'
 
 Laravel is a powerful PHP framework that allows developers to easily build web applications and APIs.
 
-In this guide, we'll walk through the process of creating a CRUD (Create, Read, Update, Delete) API using Laravel, and we'll implement authentication using [Laravel Sanctum](https://laravel.com/docs/11.x/sanctum).
+In this guide, we'll walk through the process of creating a CRUD (Create, Read, Update, Delete) API using Laravel, and we'll implement authentication using [Laravel Sanctum](https://laravel.com/docs/12.x/sanctum).
 
 By the end of this tutorial, you'll have a fully functional API that allows authenticated users to perform CRUD operations on a resource. We'll use a 'Task' model as our example resource and implement the necessary endpoints to manage tasks.
 
@@ -18,6 +18,7 @@ By the end of this tutorial, you'll have a fully functional API that allows auth
 Before we begin, ensure you have the following:
 
 - PHP 8.1 or higher installed on your system
+- A PostgreSQL client and the `php-pgsql` extension enabled in your PHP configuration
 - [Composer](https://getcomposer.org/) for managing PHP dependencies
 - A [Neon](https://console.neon.tech/signup) account for database hosting
 - Basic knowledge of Laravel and RESTful API principles
@@ -78,7 +79,7 @@ Let's create it along with its migration file:
 php artisan make:model Task -m
 ```
 
-Once created, open the newly created migration file in `database/migrations` and update it to include the necessary columns for the 'tasks' table:
+Once created, open the newly created migration file in `database/migrations` (`YYYY_MM_DD_HHMMSS_create_tasks_table.php`) and update it to include the necessary columns for the 'tasks' table:
 
 ```php
 public function up()
@@ -251,12 +252,12 @@ Let's update the `app/Models/User.php` file and add the `HasApiTokens` trait:
 <?php
 
 // Existing imports
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens; // [!code ++]
 
 class User extends Authenticatable
 {
     // Add the HasApiTokens trait here
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable; // [!code ++]
 
     // Existing code
 }
@@ -279,12 +280,18 @@ This relationship allows us to retrieve all tasks associated with a user and cre
 
 To test the authentication endpoints, you can use a tool like [Postman](https://www.postman.com/) or [Insomnia](https://insomnia.rest/).
 
+Start the Laravel development server by running:
+
+```bash
+php artisan serve
+```
+
 For the sake of simplicity, you can use the `curl` command in your terminal.
 
 Let's start by testing the registration route and try to register a new user:
 
 ```bash
-curl -X POST http://laravel-crud-api.test/api/register \
+curl -X POST http://localhost:8000/api/register \
     -H 'Content-Type: application/json' \
     -d '{
         "name": "John Doe",
@@ -293,8 +300,6 @@ curl -X POST http://laravel-crud-api.test/api/register \
         "password_confirmation": "password"
     }'
 ```
-
-> Note: Replace `laravel-crud-api.test` with your Laravel project URL.
 
 The response should include an access token like this:
 
@@ -308,7 +313,7 @@ The response should include an access token like this:
 To log in with the registered user:
 
 ```bash
-curl -X POST http://laravel-crud-api.test/api/login \
+curl -X POST http://localhost:8000/api/login \
     -H 'Content-Type: application/json' \
     -d '{
         "email": "john@example.com",
@@ -328,7 +333,7 @@ This will return another access token:
 With the access token, you can now access the protected routes. To log out, use the `/logout` route:
 
 ```bash
-curl -X POST http://laravel-crud-api.test/api/logout \
+curl -X POST http://localhost:8000/api/logout \
     -H 'Authorization: Bearer <your_access_token_here>'
 ```
 
@@ -339,6 +344,8 @@ Replace `<your_access_token_here>` with the access token you received during log
   "message": "Logged out successfully"
 }
 ```
+
+Stop the server by pressing `CTRL + C` in your terminal.
 
 ## Implementing CRUD Operations
 
@@ -433,13 +440,14 @@ Once we have the `TaskController` set up, let's add the task routes to `routes/a
 
 ```php
 // Include the TaskController at the top:
-use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\TaskController; // [!code ++]
+// other imports and routes...
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // Add the task routes here:
-    Route::apiResource('tasks', TaskController::class);
+    Route::apiResource('tasks', TaskController::class); // [!code ++]
 });
 ```
 
@@ -558,10 +566,16 @@ Now, when you fetch tasks, create a new task, or update an existing task, the re
 
 To test the new Task API, you can again use `curl` or a tool like Postman or Insomnia.
 
+Start the Laravel development server if it's not already running:
+
+```bash
+php artisan serve
+```
+
 Let's first create a new task:
 
 ```bash
-curl -X POST http://laravel-crud-api.test/api/tasks \
+curl -X POST http://localhost:8000/api/tasks \
     -H 'Content-Type: application/json' \
     -H 'Authorization: Bearer <your_access_token_here>' \
     -d '{
@@ -572,6 +586,8 @@ curl -X POST http://laravel-crud-api.test/api/tasks \
         "priority": 2
     }'
 ```
+
+> Replace `<your_access_token_here>` with an access token obtained from login endpoint.
 
 As a response, you should see the newly created task:
 
@@ -591,7 +607,7 @@ As a response, you should see the newly created task:
 You can then fetch all tasks:
 
 ```bash
-curl -X GET http://laravel-crud-api.test/api/tasks \
+curl -X GET http://localhost:8000/api/tasks \
     -H 'Authorization: Bearer <your_access_token_here>'
 ```
 
@@ -745,7 +761,7 @@ Generate the documentation:
 php artisan scribe:generate
 ```
 
-This will create a `public/docs` directory with the generated API documentation. You can access it by visiting `http://laravel-crud-api.test/docs`. The generated format will also include Postman collections and OpenAPI specifications.
+This will create a `public/docs` directory with the generated API documentation. You can access it by visiting `http://localhost:8000/docs`. The generated format will also include Postman collections and OpenAPI specifications.
 
 ## Implementing API Versioning
 
