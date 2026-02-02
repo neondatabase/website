@@ -244,10 +244,10 @@
 - [Schema migration with Neon Postgres and Drizzle ORM](https://neon.com/llms/guides-drizzle-migrations.txt): Set up Neon Postgres and run migrations for your TypeScript project using Drizzle ORM
 - [Schema migration with Neon Postgres and Entity Framework](https://neon.com/llms/guides-entity-migrations.txt): Set up Neon Postgres and run migrations for your Entity Framework project
 - [Schema migration with Neon Postgres and Laravel](https://neon.com/llms/guides-laravel-migrations.txt): Set up Neon Postgres and run migrations for your Laravel project
-- [Schema migration with Neon Postgres and Prisma ORM](https://neon.com/llms/guides-prisma-migrations.txt): Set up Neon Postgres and run migrations for your Javascript project using Prisma ORM
 - [Schema migration with Neon Postgres and Ruby on Rails](https://neon.com/llms/guides-rails-migrations.txt): Set up Neon Postgres and run migrations for your Rails project
 - [Schema migration with Neon Postgres and SQLAlchemy](https://neon.com/llms/guides-sqlalchemy-migrations.txt): Manage database migrations in your Python project with SQLAlchemy and Alembic
 - [Schema migration with Neon Postgres and Sequelize](https://neon.com/llms/guides-sequelize.txt): Set up Neon Postgres and run migrations for your Javascript project using Sequelize ORM
+- [Schema migrations with Prisma and Neon](https://neon.com/llms/guides-prisma-migrations.txt): Learn how to manage database schema changes using Prisma Migrate with Neon
 - [Schema-only branches](https://neon.com/llms/guides-branching-schema-only.txt): Protect sensitive data with schema-only branches
 - [Secure your app with RLS](https://neon.com/llms/guides-rls-tutorial.txt): Learn how Row-level Security (RLS) protects user data
 - [Self-Host Medusa with Neon](https://neon.com/llms/guides-medusajs.txt): Learn how to self-host Medusa using Neon Postgres as your database.
@@ -514,6 +514,7 @@
 
 ### Migrate
 
+- [Migrate from Neon Auth SDK v0.1 to v0.2](https://neon.com/llms/auth-migrate-from-auth-v0.1.txt): Upgrade guide for breaking changes in the Neon Auth SDK
 - [Migrate from Supabase to Neon](https://neon.com/llms/auth-migrate-from-supabase.txt): Switch from Supabase Auth and Database to Neon in a few steps
 - [Migrate to Neon Auth with Better Auth](https://neon.com/llms/auth-migrate-from-legacy-auth.txt): Update from the legacy Stack Auth-based implementation
 
@@ -527,6 +528,7 @@
 
 ### Reference
 
+- [Next.js Server SDK Reference](https://neon.com/llms/auth-reference-nextjs-server.txt): Server-side authentication API for Next.js with Neon Auth
 - [UI Components Reference](https://neon.com/llms/auth-reference-ui-components.txt): Quick reference for Neon Auth UI components
 
 ## General

@@ -269,7 +269,7 @@ Neon's consumption data is updated approximately every 15 minutes, so a minimum 
 
 ### What is the rate limit for consumption APIs?
 
-Both consumption API endpoints share the same rate limiter and are limited to approximately 30 requests per minute per account.
+Both consumption API endpoints share the same rate limiter and are limited to approximately 50 requests per minute per account.
 
 Neon uses a **token bucket** rate-limiting approach, which refills at a steady rate while allowing short bursts within the bucket size. This behaves more like a sliding window rather than a fixed reset every minute. For more details, see [Token bucket](https://en.wikipedia.org/wiki/Token_bucket).
 

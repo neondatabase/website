@@ -12,6 +12,8 @@ Neon offers HIPAA compliance as a self-serve feature available to customers on t
 
 We take the security and privacy of health information seriously. This guide explains how Neon supports HIPAA compliance and what it means for you as a customer. HIPAA features are available to customers who have accepted our Business Associate Agreement (BAA) through the self-serve enablement process. The BAA outlines our responsibilities for protecting Protected Health Information (PHI) and ensuring HIPAA compliance.
 
+You can find the Business Associate Agreement (BAA) [here](https://www.databricks.com/sites/default/files/2025-08/baa-neon.pdf).
+
 ## What is HIPAA?
 
 HIPAA is a federal law that sets national standards for the protection of health information. It requires businesses handling PHI to implement safeguards to ensure privacy and security.

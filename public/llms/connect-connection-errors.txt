@@ -198,7 +198,7 @@ The error occurs when using a pooled Neon connection string with startup options
 
 This error can also appear as: `active endpoints limit exceeded`.
 
-Neon limits [concurrently active computes](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. The compute associated with the default branch is exempt from this limit, ensuring that it is always available. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](https://neon.com/docs/introduction/support) to request a `max_active_endpoints` limit increase.
+Neon limits [concurrently active computes](https://neon.com/docs/reference/glossary#concurrently-active-compute-limit) to prevent resource exhaustion. When you exceed the limit, additional computes beyond the limit will remain suspended and you will see this error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](https://neon.com/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 
 ## Remaining connection slots are reserved for roles with the SUPERUSER attribute
 
@@ -218,7 +218,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.com/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](https://neon.com/docs/introduction/scale-to-zero) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo

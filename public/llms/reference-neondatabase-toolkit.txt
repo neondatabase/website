@@ -227,7 +227,7 @@ As you can see, the toolkit makes it incredibly easy to manage the lifecycle of 
 
 ## Accessing the underlying API client
 
-The toolkit is a convenience wrapper. For more advanced operations not covered by the toolkit's methods (like creating a branch, managing roles, or listing all your projects), you can access the full Neon TypeScript SDK instance via the `apiClient` property.
+The toolkit is a convenience wrapper. For more advanced operations not covered by the toolkit's methods (like creating a branch, managing roles, or listing all your projects), you can access the full Neon API TypeScript SDK instance via the `apiClient` property.
 
 ```javascript
 import { NeonToolkit } from "@neondatabase/toolkit";

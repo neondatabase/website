@@ -6,35 +6,126 @@
 
 - [Instagres HTML](https://neon.com/docs/reference/instagres): The original HTML version of this documentation
 
-Instagres enables instant provisioning of a Postgres database without configuration or account creation.
+Instagres gives you an instant Postgres database with a single API call. No account required.
 
-Built on Neon's serverless Postgres platform, it provides immediate database access for development and testing.
+Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running Postgres 17.
 
-Access it now at [neon.new](https://neon.new/).
+Access it at [instagres.com](https://instagres.com/) or [neon.new](https://neon.new/).
 
-## Core features
+## Quick start
 
-The service provides the following capabilities:
+Tab: API
 
-- Instant database provisioning with immediate connection string availability
-- Resource limits matching Neon's Free plan specifications
-- 72-hour database lifespan if not claimed
-- Option to claim databases with a unique claim ID and Neon account
-- Automatic database seeding with SQL scripts for schema and data initialization (via CLI or Vite plugin)
-- Logical replication enabled by default, allowing integration with sync engines like [Electric SQL](https://electric-sql.com/) without additional configuration
+```bash
+curl -X POST https://instagres.com/api/v1/database \
+  -H 'Content-Type: application/json' \
+  -d '{"ref": "your-app-name"}'
+```
 
-## Access methods
+Example response:
 
-### Browser access
+```json
+{
+  "id": "01abc123-def4-5678-9abc-def012345678",
+  "status": "UNCLAIMED",
+  "neon_project_id": "cool-breeze-12345678",
+  "connection_string": "postgresql://neondb_owner:npg_xxxx@ep-cool-breeze-pooler...",
+  "claim_url": "https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678",
+  "expires_at": "2026-02-01T12:00:00.000Z",
+  "created_at": "2026-01-29T12:00:00.000Z",
+  "updated_at": "2026-01-29T12:00:00.000Z"
+}
+```
 
-1. Navigate to [https://neon.new](https://neon.new/)
-2. Select `Try in your browser`, which redirects to [https://neon.new/db](https://neon.new/db)
-3. Receive an automatically generated connection string
-4. Save the provided `Claim URL` to add this database to a Neon account later, or claim now
+See [API reference](https://neon.com/docs/reference/instagres#api) for details.
 
-### Command-line interface
+Tab: CLI
 
-Execute with your preferred package manager:
+```bash
+npx get-db --yes
+```
+
+Writes to your `.env` file (partial output):
+
+```
+DATABASE_URL=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+```
+
+See [CLI reference](https://neon.com/docs/reference/instagres#command-line-interface) for details.
+
+## Limits
+
+Unclaimed databases have stricter quotas. Claiming resets limits to your Neon plan.
+
+|            | Unclaimed | Claimed (Free plan) |
+| ---------- | --------- | ------------------- |
+| Storage    | 100 MB    | 512 MB              |
+| Transfer   | 1 GB      | ~5 GB               |
+| Branches   | No        | Yes                 |
+| Expiration | 72 hours  | None                |
+
+## Claiming a database
+
+Claiming is **optional**. Your database works immediately. Claim only if you want to keep it beyond 72 hours.
+
+**To claim:**
+
+1. Visit the `claim_url` from the API response
+2. Sign in to Neon (or create an account)
+3. Choose an organization for the database
+4. Complete the transfer
+
+After claiming, the database appears in your Neon console with expiration removed. The `status` changes to `CLAIMED` and `connection_string` becomes `null` in the API (use Neon console instead).
+
+## API
+
+The Instagres API provides programmatic database provisioning. No authentication required.
+
+**Base URL:** `https://instagres.com/api/v1`
+
+### Create database
+
+```
+POST /api/v1/database
+```
+
+| Parameter                    | Required | Description                                 |
+| ---------------------------- | -------- | ------------------------------------------- |
+| `ref`                        | Yes      | Referrer identifier (for tracking)          |
+| `enable_logical_replication` | No       | Enable logical replication (default: false) |
+
+### Get database
+
+```
+GET /api/v1/database/:id
+```
+
+Returns the same response schema.
+
+### Response fields
+
+| Field               | Type           | Description                                                                                                            |
+| ------------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `id`                | string         | Database identifier (UUID v7)                                                                                          |
+| `status`            | string         | `UNCLAIMED`, `CLAIMING`, or `CLAIMED`                                                                                  |
+| `neon_project_id`   | string         | Underlying Neon project ID                                                                                             |
+| `connection_string` | string \| null | Postgres connection URL with pooling (null after claimed). For direct connections, remove `-pooler` from the hostname. |
+| `claim_url`         | string         | URL to claim the database                                                                                              |
+| `expires_at`        | string         | ISO 8601 expiration timestamp                                                                                          |
+| `created_at`        | string         | ISO 8601 creation timestamp                                                                                            |
+| `updated_at`        | string         | ISO 8601 last update timestamp                                                                                         |
+
+Details: Error responses
+| Condition              | HTTP | Message                              |
+| ---------------------- | ---- | ------------------------------------ |
+| Missing or empty `ref` | 400  | `Missing referrer` (includes `hint`) |
+| Invalid database ID    | 400  | `Database not found`                 |
+| Invalid JSON body      | 500  | `Failed to create the database.`     |
+| Invalid parameter type | 500  | `Failed to create the database.`     |
+
+## Command-line interface
+
+The `get-db` CLI creates a database and writes credentials to your `.env` file:
 
 Tab: npx
 
@@ -66,158 +157,71 @@ Tab: deno
 deno run -A get-db
 ```
 
-**CLI options:**
+**Options:**
 
-| Option              | Alias | Description                           | Default        |
-| ------------------- | ----- | ------------------------------------- | -------------- |
-| `--yes`             | `-y`  | Skip prompts and use defaults         |                |
-| `--env <path>`      | `-e`  | Path to the .env file                 | `./.env`       |
-| `--key <string>`    | `-k`  | Env var for connection string         | `DATABASE_URL` |
-| `--prefix <string>` | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
-| `--seed <path>`     | `-s`  | Path to SQL file to seed the database | not set        |
-| `--ref <string>`    | `-r`  | Referrer ID for affiliates program    | not set        |
-| `--help`            | `-h`  | Show help message                     |                |
+| Option                  | Alias | Description                           | Default        |
+| ----------------------- | ----- | ------------------------------------- | -------------- |
+| `--yes`                 | `-y`  | Skip prompts and use defaults         |                |
+| `--env <path>`          | `-e`  | Path to the .env file                 | `./.env`       |
+| `--key <string>`        | `-k`  | Env var for connection string         | `DATABASE_URL` |
+| `--prefix <string>`     | `-p`  | Prefix for generated public vars      | `PUBLIC_`      |
+| `--seed <path>`         | `-s`  | Path to SQL file to seed the database |                |
+| `--logical-replication` | `-L`  | Enable logical replication            | `false`        |
+| `--ref <string>`        | `-r`  | Referrer ID for affiliates program    |                |
+| `--help`                | `-h`  | Show help message                     |                |
 
-**Examples:**
-
-```bash
-# Basic usage: creates a new Neon database and writes credentials to .env
-npx get-db
-
-# Seed the database with a SQL file after creation
-npx get-db --seed ./init.sql
-
-# Use a custom .env file and environment variable key
-npx get-db --env ./my.env --key MY_DB_URL
-
-# Skip prompts and use defaults
-npx get-db --yes
-
-# Detects PUBLIC_INSTAGRES_CLAIM_URL (default) from your environment,
-# and opens the defined claim URL in your browser
-npx get-db claim
-```
-
-The CLI writes the connection string, claim URL, and expiration to the specified `.env` file and outputs them in the terminal. For example:
+**Example output in `.env`:**
 
 ```txt
-# Claimable DB expires at: Sun, 05 Oct 2025 23:11:33 GMT
-# Claim it now to your account: https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
-DATABASE_URL=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1-pooler.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_4zqVsO2sJeUS@ep-tiny-scene-bgmszqe1.c-2.eu-central-1.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-PUBLIC_INSTAGRES_CLAIM_URL=https://neon.new/database/aefc1112-0419-323a-97d4-05254da94551
+# Claimable DB expires at: Sat, 01 Feb 2026 12:00:00 GMT
+# Claim it now to your account: https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678
+DATABASE_URL=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
+PUBLIC_INSTAGRES_CLAIM_URL=https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678
 ```
 
-For advanced SDK/API usage, see the [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db).
+To claim, visit the URL in the comments above or run `npx get-db claim` to open it in your browser.
 
-### Integration with development tools
+## Vite plugin
 
-Add Postgres support to Vite projects using the [vite-plugin-db](https://www.npmjs.com/package/vite-plugin-db) plugin. The plugin provisions a database and injects credentials into your environment file if needed.
+Add automatic database provisioning to Vite projects with `vite-plugin-db`:
 
-> The example below includes React, but you can use the Neon plugin with any Vite-compatible framework.
-
-**Configuration options:**
-
-| Option      | Type   | Description                      | Default        |
-| ----------- | ------ | -------------------------------- | -------------- |
-| `env`       | string | Path to the .env file            | `.env`         |
-| `envKey`    | string | Name of the environment variable | `DATABASE_URL` |
-| `envPrefix` | string | Prefix for public env vars       | `VITE_`        |
-| `seed`      | object | Seeding config (optional)        | not set        |
-
-**`seed` object:**
-
-| Property | Type   | Description                 |
-| -------- | ------ | --------------------------- |
-| `type`   | string | Only `sql-script` supported |
-| `path`   | string | Path to SQL file to execute |
-
-**Example config:**
+```bash
+npm install -D vite-plugin-db
+```
 
 ```js
 import { postgres } from 'vite-plugin-db';
-import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [
-    postgres({
-      env: '.env.local', // Custom .env file (default: '.env')
-      envKey: 'DATABASE_URL', // Env variable for connection string (default: 'DATABASE_URL')
-      envPrefix: 'VITE_', // Prefix for public environment variables
-      seed: {
-        type: 'sql-script',
-        path: './schema.sql', // SQL file to run after DB creation
-      },
-    }),
-    react(),
+    postgres({ referrer: 'your-app-name' }),
   ],
 });
 ```
 
-> **Note**: The plugin exports a named export (postgres) instead of relying on the default export to improve auto-completion.
+The plugin provisions a database on first `vite dev` if `DATABASE_URL` is missing. It's inactive during `vite build`.
 
-**How the plugin works:**
+**Additional options:**
 
-1. When running `vite dev`, the plugin checks if the `envKey` (default: `DATABASE_URL`) exists in your environment (default: `.env`) file
-2. If the environment variable exists, the plugin takes no action
-3. If the environment variable is missing, the plugin:
-   - Automatically creates a new Neon claimable database
-   - Adds two connection strings to your environment file:
-     - `DATABASE_URL` - Connection pooler string (default)
-     - `DATABASE_URL_DIRECT` - Direct connection string
-   - Includes the claimable URL as a comment and public variable in the environment file
-
-The plugin is inactive during production builds (`vite build`) to prevent changes to environment files and database provisioning in production environments. If `seed` is configured, the specified SQL script is executed after database creation. If an error occurs (such as a missing or invalid SQL file), an error message will be displayed.
-
-For more details, see the [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db).
-
-## Claiming a database
-
-To persist a database beyond the 72-hour expiration period:
-
-1. Access the claim URL provided during database creation
-2. Sign in to an existing Neon account or create a new one
-3. Follow the on-screen instructions to complete the claim process
-
-The claim URL is available:
-
-- On the Instagres interface where the connection string is displayed
-- As a comment and public claim variable in environment files (e.g., `.env`) when using the CLI
-- The public claim variable is used when executing `npx get-db claim` to claim the database, which launches the browser window
-
-### Claim process details
-
-When claiming a project, you'll be asked to choose an organization to claim it into. Note that projects cannot be claimed into Vercel organizations.
-
-## Use cases
-
-Instagres is designed for scenarios requiring rapid database provisioning:
-
-- Development and testing environments
-- Evaluation of Neon's capabilities before committing to an account
-- AI agent integration without authentication overhead
-- Quick prototyping sessions
-- Real-time sync applications using sync engines like Electric SQL (logical replication is enabled by default)
-
-Note that provisioned databases expire after 72 hours unless claimed as described in the previous section.
-
-## Default configuration
-
-The service uses the following default settings:
-
-| Parameter        | Value        |
-| ---------------- | ------------ |
-| Provider         | AWS          |
-| Region           | eu-central-1 |
-| Postgres version | 17           |
-
-## Technical implementation
-
-The Instagres service is built on Neon's [claimable database integration](https://neon.com/docs/workflows/claimable-database-integration), which provides APIs for creating projects and generating transfer requests. This allows the service to provision databases immediately while deferring account creation until users choose to claim their database. You can build similar experiences in your own application using the [claimable database APIs](https://neon.com/docs/workflows/claimable-database-integration).
+```js
+// Inside defineConfig({ plugins: [...] })
+postgres({
+  referrer: 'your-app-name', // Required
+  dotEnvFile: '.env.local', // Default: .env
+  dotEnvKey: 'DATABASE_URL', // Default: DATABASE_URL
+  envPrefix: 'VITE_', // For public env vars
+  seed: {
+    type: 'sql-script',
+    path: './schema.sql',
+  },
+})
+```
 
 ## Resources
 
-- [get-db CLI package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db)
-- [Vite Plugin package on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
-- Blog post: [Neon Launchpad: A Tool For Instant Postgres, No Login Needed](https://neon.com/blog/neon-launchpad)
+- [Instagres website](https://instagres.com/)
+- [get-db CLI on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db)
+- [Vite Plugin on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
+- [Claimable database integration](https://neon.com/docs/workflows/claimable-database-integration) (build your own Instagres-like experience)

@@ -98,7 +98,7 @@ curl --request POST \
 '
 ```
 
-For details, see [Instant restore using the API](https://neon.com/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](https://neon.com/docs/introduction/branch-restore#how-to-use-instant-restore)
 
 ## Integrating branch resets in CI/CD workflows
 
