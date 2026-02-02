@@ -65,7 +65,7 @@ If you skipped the default Data API setup in the Neon Console or you are adding 
 
 The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (e.g., `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (e.g., `admin`), but you must ensure that the role exists in your database.
 
-Run these commands in the [SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) to ensure your API users can access your tables:
+Run these commands in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) to ensure your API users can access your tables:
 
 ```sql
 -- 1. Grant usage on the schema

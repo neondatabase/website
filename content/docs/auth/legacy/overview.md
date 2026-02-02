@@ -193,6 +193,6 @@ For SDK documentation, components, hooks, and client-side authentication:
 
 - [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
 - [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
-- [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

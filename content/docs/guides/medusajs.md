@@ -138,7 +138,7 @@ You can optionally enable IP whitelisting in the Neon Console to restrict databa
 
 ## Resources
 
-- [Neon Documentation](/docs)
+- [Neon Documentation](/docs/introduction)
 - [Medusa Official Documentation](https://docs.medusajs.com/)
 - [Medusa Application Deployment Guide](https://docs.medusajs.com/learn/deployment/general)
 

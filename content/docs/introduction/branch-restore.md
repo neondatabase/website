@@ -259,7 +259,7 @@ curl --request POST \ // [!code word:br-damp-smoke-91135977]
 </TabItem>
 </Tabs>
 
-To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides//time-travel-assist) before running a restore job, but the backup branch is there if you need it.
+To make sure you choose the right restore point, we encourage you to use [Time Travel Assist](/docs/guides/time-travel-assist) before running a restore job, but the backup branch is there if you need it.
 
 If you need to revert your changes:
 

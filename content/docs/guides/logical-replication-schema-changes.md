@@ -92,4 +92,4 @@ If you have suggestions, tips, or requests regarding schema management in a repl
 ## References
 
 - [PostgreSQL logical replication restrictions](https://www.postgresql.org/docs/current/logical-replication-restrictions.html)
-- [Import a database schema](/docs/import/import-schema-only)
+- [Import a database schema](/docs/import/migrate-schema-only)

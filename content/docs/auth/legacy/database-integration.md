@@ -276,6 +276,6 @@ For SDK components, hooks, and OAuth configuration:
 
 - [Secure your app with RLS](/docs/guides/rls-tutorial) - RLS tutorial
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) - RLS with Drizzle ORM
-- [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>
