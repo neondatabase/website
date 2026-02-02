@@ -6,9 +6,9 @@ import SectionLabel from 'components/shared/section-label';
 import databaseIcon from 'images/pages/about/vision/database.svg';
 import gearIcon from 'images/pages/about/vision/gear.svg';
 
-import BulbNoisy from './images/bulb-horizontal-noise.inline.svg';
-import BulbLargeNoisy from './images/bulb-large-horizontal-noise.inline.svg';
-import Bulb from './images/bulb.inline.svg';
+import BlobNoisy from './images/blob-horizontal-noise.inline.svg';
+import BlobLargeNoisy from './images/blob-large-horizontal-noise.inline.svg';
+import Blob from './images/blob.inline.svg';
 
 const STATS_DATA = [
   {
@@ -91,9 +91,9 @@ const Vision = () => (
         </div>
       </div>
     </div>
-    <BulbLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45 xl:left-[35%]" />
-    <BulbNoisy className="pointer-events-none absolute bottom-0 left-full -rotate-[75deg] xl:left-3/4" />
-    <Bulb className="pointer-events-none absolute -bottom-[30%] left-[85%] -rotate-45 xl:left-[70%]" />
+    <BlobLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45 xl:left-[35%]" />
+    <BlobNoisy className="pointer-events-none absolute bottom-0 left-full -rotate-[75deg] xl:left-3/4" />
+    <Blob className="pointer-events-none absolute -bottom-[30%] left-[85%] -rotate-45 xl:left-[70%]" />
   </SecondarySection>
 );
 
