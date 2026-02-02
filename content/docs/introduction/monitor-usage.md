@@ -28,8 +28,8 @@ Usage metrics on the **Billing page** include:
 - Compute, CU-hour
 - Extra branches, branch-month
 - Instant restore storage, GB-month
-- Private data transfer, GB
-- Public data transfer, GB
+- Public network transfer
+- Private network transfer
 - Storage (root branches), GB-month
 - Storage (child branches), GB-month
 

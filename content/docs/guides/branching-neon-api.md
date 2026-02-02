@@ -2,7 +2,7 @@
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
 enableTableOfContents: true
-updatedOn: '2025-08-07T21:36:07.671Z'
+updatedOn: '2026-02-01T13:37:13.526Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon API. For other branch-related API methods, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
@@ -239,7 +239,7 @@ To revert changes or recover lost data, you can use the branch restore endpoint 
 POST /projects/{project_id}/branches/{branch_id_to_restore}/restore
 ```
 
-For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore).
+For details on how to use this endpoint to restore a branch to its own or another branch's history, restore a branch to the head of its parent, and other restore options, see [Instant restore using the API](/docs/introduction/branch-restore#how-to-use-instant-restore).
 
 ## Creating a schema-only branch using the API
 
