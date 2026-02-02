@@ -62,7 +62,7 @@ SELECT * FROM embeddings;
 ## Perform nearest neighbor searches
 
 Vector search typically means finding the closest vectors in the database to a given vector.
-There are different distance metrics to calculate which vector is closest, like Euclidean distance (`<->`), cosine similarity (`<=>`), and inner product (`<#>`).
+There are different distance metrics to calculate which vector is closest, like Euclidean distance (`<->`), cosine distance (`<=>`), and inner product (`<#>`).
 
 - `<->`: Euclidean distance (L2). Measues straight-line distance between two vectors. Good for general similarity tasks when magnitude matters.
 - `<=>`: Cosine distance. Compares the angle between two vectors. Common for text embeddings, where direction matters more than magnitude.
