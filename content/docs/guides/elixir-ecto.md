@@ -2,7 +2,7 @@
 title: Connect from Elixir with Ecto to Neon
 subtitle: Set up a Neon project in seconds and connect from Elixir with Ecto
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:53:27.787Z'
+updatedOn: '2026-02-02T12:37:39.447Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-ecto-prompt.md" 

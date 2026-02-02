@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2026-01-24T16:13:09.594Z'
+updatedOn: '2026-02-02T12:37:39.465Z'
 ---
 
 <InfoBlock>

@@ -3,7 +3,7 @@ title: Managing schema changes in a logical replication setup
 subtitle: Learn about managing schema changes in a logical replication setup
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-02T15:04:05.571Z'
+updatedOn: '2026-02-02T12:37:39.456Z'
 ---
 
 When working with Postgres logical replication, managing schema changes is a task that requires careful planning. As stated in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-restrictions.html):
