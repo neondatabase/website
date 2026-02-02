@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
@@ -25,27 +26,29 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
         category={category.name}
         basePath={BLOG_BASE_PATH}
       />
-      <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">
-        <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
-          {posts.slice(0, 10).map((post, index) => (
-            <BlogGridItem
-              key={post.slug}
-              post={post}
-              category={category}
-              isFeatured={post.isFeatured}
-              isPriority={index < 5}
-            />
-          ))}
-          {posts.length > 10 && (
-            <ScrollLoader itemsCount={10}>
-              {posts.slice(10).map((post) => (
-                <BlogGridItem key={post.slug} post={post} category={category} />
-              ))}
-            </ScrollLoader>
-          )}
-          <ChangelogForm className="-order-1 col-span-2 md:col-span-1" />
-        </div>
-      </BlogSearch>
+      <Suspense fallback={null}>
+        <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">
+          <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
+            {posts.slice(0, 10).map((post, index) => (
+              <BlogGridItem
+                key={post.slug}
+                post={post}
+                category={category}
+                isFeatured={post.isFeatured}
+                isPriority={index < 5}
+              />
+            ))}
+            {posts.length > 10 && (
+              <ScrollLoader itemsCount={10}>
+                {posts.slice(10).map((post) => (
+                  <BlogGridItem key={post.slug} post={post} category={category} />
+                ))}
+              </ScrollLoader>
+            )}
+            <ChangelogForm className="-order-1 col-span-2 md:col-span-1" />
+          </div>
+        </BlogSearch>
+      </Suspense>
     </>
   );
 };
