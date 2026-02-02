@@ -82,6 +82,7 @@ const MigrationPage = () => (
       title="18K+ databases created daily"
       buttonText="Meet with our team"
       buttonUrl={LINKS.contactSales}
+      buttonType="aiHelper"
     />
   </Layout>
 );

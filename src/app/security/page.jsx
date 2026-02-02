@@ -24,6 +24,7 @@ const SecurityPage = () => (
       title="The Postgres of tomorrow, <br class='xs:hidden' /> available today"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
+      buttonType="aiHelper"
     />
   </Layout>
 );

@@ -23,6 +23,7 @@ const CaseStudiesPage = async () => {
         description="Interested in increasing your free tier limits or learning about pricing? Complete the form below to get in touch"
         buttonText="Contact sales"
         buttonUrl={LINKS.contactSales}
+        buttonType="aiHelper"
       />
     </Layout>
   );

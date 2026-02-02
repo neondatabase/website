@@ -66,6 +66,7 @@ const VariableLoadPage = async () => {
           description="Start saving with Neon"
           buttonText="Contact us"
           buttonUrl={LINKS.contactSales}
+          buttonType="aiHelper"
         />
       </div>
     </Layout>

@@ -22,6 +22,7 @@ const ReportPage = () => (
       title="Wanna meet us?"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
+      buttonType="aiHelper"
     />
   </Layout>
 );

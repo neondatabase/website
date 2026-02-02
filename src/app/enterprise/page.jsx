@@ -323,6 +323,7 @@ const EnterprisePage = () => (
       title="The Postgres of tomorrow, <br /> available today"
       buttonText="Book a meeting with our team"
       buttonUrl={LINKS.contactSales}
+      buttonType="aiHelper"
     />
   </Layout>
 );

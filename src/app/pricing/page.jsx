@@ -134,6 +134,7 @@ const PricingPage = () => (
       description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
       buttonText="Talk to Sales"
       buttonUrl={LINKS.contactSales}
+      buttonType="aiHelper"
     />
   </Layout>
 );

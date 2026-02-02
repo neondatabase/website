@@ -3,11 +3,25 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
+import ButtonAiHelper from 'components/shared/button-ai-helper';
 import Container from 'components/shared/container';
 import LINKS from 'constants/links';
 
 import ctaBackground from './images/cta-bg.jpg';
 import Label from './label';
+
+const CONTACT_SALES_AI_SETTINGS = {
+  botName: 'Neon Sales AI',
+  placeholder: 'How do I get started?',
+  introMessage:
+    "<p>Hi!<br>I'm an AI assistant here to help you learn about Neon and answer any questions you have.</p><p>Feel free to ask about pricing, features, enterprise solutions, or anything else!</p>",
+  quickQuestions: [
+    'How to get a Demo request?',
+    'What are the Enterprice Pricing?',
+    'HIPAA Compliance',
+    'Security Overview',
+  ],
+};
 
 const CTANew = ({
   className,
@@ -17,6 +31,7 @@ const CTANew = ({
   label = 'Get started',
   buttonText = 'Get started',
   buttonUrl = LINKS.signup,
+  buttonType = null,
 }) => (
   <section
     className={clsx(
@@ -36,9 +51,15 @@ const CTANew = ({
           <h2 className="text-white sm:inline" dangerouslySetInnerHTML={{ __html: title }} />
           {description && <p className="text-gray-new-50 sm:inline">{description}</p>}
         </div>
-        <Button className="mt-10 lg:mt-8" theme="white-filled" size="new" to={buttonUrl}>
-          {buttonText}
-        </Button>
+        {buttonType === 'aiHelper' ? (
+          <ButtonAiHelper className="mt-10 lg:mt-8" {...CONTACT_SALES_AI_SETTINGS}>
+            {buttonText}
+          </ButtonAiHelper>
+        ) : (
+          <Button className="mt-10 lg:mt-8" theme="white-filled" size="new" to={buttonUrl}>
+            {buttonText}
+          </Button>
+        )}
       </Container>
     </div>
 
@@ -63,6 +84,7 @@ CTANew.propTypes = {
   label: PropTypes.string,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
+  buttonType: PropTypes.oneOf(['aiHelper', null]),
 };
 
 export default CTANew;
