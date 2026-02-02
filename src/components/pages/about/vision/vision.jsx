@@ -6,6 +6,10 @@ import SectionLabel from 'components/shared/section-label';
 import databaseIcon from 'images/pages/about/vision/database.svg';
 import gearIcon from 'images/pages/about/vision/gear.svg';
 
+import BulbNoisy from './images/bulb-horizontal-noise.inline.svg';
+import BulbLargeNoisy from './images/bulb-large-horizontal-noise.inline.svg';
+import Bulb from './images/bulb.inline.svg';
+
 const STATS_DATA = [
   {
     icon: databaseIcon,
@@ -20,7 +24,7 @@ const STATS_DATA = [
 ];
 
 const StatCard = ({ icon, value, description }) => (
-  <div className="flex w-[212px] flex-col gap-5 xl:w-48 xl:gap-4 lg:w-40 lg:gap-[14px] md:w-full md:gap-3.5">
+  <div className="flex w-[212px] flex-col gap-5 xl:w-48 xl:gap-4 lg:w-40 lg:gap-3.5 md:w-full">
     <Image
       src={icon}
       alt=""
@@ -33,7 +37,7 @@ const StatCard = ({ icon, value, description }) => (
       <span className="text-[38px] font-normal leading-dense tracking-tighter text-black-pure xl:text-[36px] lg:text-[28px] md:text-2xl">
         {value}
       </span>
-      <p className="text-base font-normal leading-normal tracking-extra-tight text-gray-new-40 xl:text-sm">
+      <p className="text-base font-normal leading-normal tracking-extra-tight text-gray-new-40 xl:text-sm xl:leading-snug">
         {description}
       </p>
     </div>
@@ -47,7 +51,7 @@ StatCard.propTypes = {
 };
 
 const Vision = () => (
-  <SecondarySection title="Company Statistics and Vision">
+  <SecondarySection title="Company Statistics and Vision" className="md:pb-[26px]">
     <div className="flex gap-x-[128px] xl:gap-x-[108px] lg:gap-x-12 md:flex-col md:gap-y-20">
       <div className="relative flex-1 before:absolute before:-left-5 before:top-0 before:h-full before:w-px before:bg-gray-new-50 xl:ml-8 md:ml-0 md:before:hidden">
         <SectionLabel>Where we&apos;re headed</SectionLabel>
@@ -71,13 +75,13 @@ const Vision = () => (
         <SectionLabel>Our Vision</SectionLabel>
 
         <div className="grid gap-y-10 xl:gap-y-9 lg:gap-y-7 md:gap-y-4">
-          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
+          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:text-[15px]">
             The mission stays the same:{' '}
             <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">deliver Postgres</mark> for
             developers and AI agents — now backed by the scale and expertise of Databricks.
           </p>
 
-          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base">
+          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:text-[15px]">
             The same technology behind Neon powers Lakebase: The&nbsp;first serverless Postgres
             database{' '}
             <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">
@@ -87,6 +91,9 @@ const Vision = () => (
         </div>
       </div>
     </div>
+    <BulbLargeNoisy className="pointer-events-none absolute bottom-[48%] left-[47%] -rotate-45 xl:left-[35%]" />
+    <BulbNoisy className="pointer-events-none absolute bottom-0 left-full -rotate-[75deg] xl:left-3/4" />
+    <Bulb className="pointer-events-none absolute -bottom-[30%] left-[85%] -rotate-45 xl:left-[70%]" />
   </SecondarySection>
 );
 
