@@ -6,51 +6,28 @@
 
 - [Connect to Neon HTML](https://neon.com/docs/connect/connect-intro): The original HTML version of this documentation
 
-Find detailed information and instructions about connecting to Neon from different clients and applications, troubleshooting connection issues, connection pooling, and more.
+This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](https://neon.com/docs/get-started/connect-neon).
 
-For integrating Neon with different frameworks, languages, and platforms, refer to our [Guides](https://neon.com/docs/guides/guides-intro) documentation.
-
-## Choose a connection type
-
-To help understand which driver and connection type you need, see:
-
-- [Choose a driver and connection type](https://neon.com/docs/connect/choose-connection): How to select the right driver and connection type for your application
-
-## Connect from clients and applications
-
-Learn how to establish a connection to Neon from any application.
+## Getting started with connections
 
 - [Connect from any app](https://neon.com/docs/connect/connect-from-any-app): Learn about connection strings and how to connect to Neon from any application
-- [Connect locally](https://neon.com/docs/local/vscode-extension): Connect to any Neon branch using a localhost connection string in VS Code, Cursor, or Windsurf
-- [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver): Connect to Neon from serverless environments over HTTP or WebSockets
-- [Connect a GUI application](https://neon.com/docs/connect/connect-postgres-gui): Learn how to connect to a Neon database from a GUI application
+- [Choose a connection type](https://neon.com/docs/connect/choose-connection): How to select the right driver and connection type for your application
+
+## Connection methods
+
+- [Neon serverless driver](https://neon.com/docs/serverless/serverless-driver): Connect from serverless and edge environments over HTTP or WebSockets
+- [Data API](https://neon.com/docs/data-api/overview): Query Postgres via HTTP without database drivers or connection pooling
 - [Connect with psql](https://neon.com/docs/connect/query-with-psql-editor): Connect with psql, the native command-line client for Postgres
-- [Passwordless auth](https://neon.com/docs/connect/passwordless-connect): Connect without a password using Neon's psql passwordless auth feature
+- [GUI applications](https://neon.com/docs/connect/connect-postgres-gui): Connect from GUI tools like pgAdmin, DBeaver, and TablePlus
+- [VS Code Extension](https://neon.com/docs/local/vscode-extension): Connect to Neon branches and manage your database directly in VS Code, Cursor, and other editors
+- [Passwordless auth](https://neon.com/docs/connect/passwordless-connect): Connect to psql without a password using Neon's passwordless auth
 
-## Connect from frameworks and languages
+## Optimize and secure your connections
 
-Learn how to connect to Neon from different frameworks and languages.
+- [Connection pooling](https://neon.com/docs/connect/connection-pooling): Enable connection pooling to support up to 10,000 concurrent connections
+- [Secure connections](https://neon.com/docs/connect/connect-securely): Connect securely using SSL/TLS encryption and certificate verification
+- [Latency and timeouts](https://neon.com/docs/connect/connection-latency): Strategies for managing connection latency and timeouts
 
-- [Connect from various frameworks](https://neon.com/docs/get-started/frameworks): Find detailed instructions for connecting to Neon from frameworks
-- [Connect from various languages](https://neon.com/docs/get-started/languages): Find detailed instructions for connecting to Neon from languages
+## Troubleshooting
 
-## Troubleshoot connection issues
-
-Troubleshoot and resolve common connection issues.
-
-- [Connection errors](https://neon.com/docs/connect/connection-errors): Learn how to resolve commonly-encountered connection errors
-- [Connect latency and timeouts](https://neon.com/docs/connect/connection-latency): Learn about strategies for managing connection latency and timeouts
-
-## Secure connections
-
-Ensure the integrity and security of your connections to Neon.
-
-- [Connect to Neon securely](https://neon.com/docs/connect/connect-securely): Learn how to connect to Neon securely using SSL/TLS encrypted connections
-- [Avoid MME attacks in Postgres 16](https://neon.com/blog/avoid-mitm-attacks-with-psql-postgres-16): Learn how the psql client in Postgres 16 makes it simple to connect securely
-
-## Connection pooling
-
-Optimize your connections by enabling connection pooling.
-
-- [Connection pooling in Neon](https://neon.com/docs/connect/connection-pooling): Learn how to enable connection pooling to support up to 10,000 concurrent connections
-- [Connection pooling with Prisma](https://neon.com/docs/guides/prisma#connect-from-serverless-functions): Learn about connecting from Prisma to Neon from serverless functions
+- [Connection errors](https://neon.com/docs/connect/connection-errors): Resolve common connection errors including SNI issues and driver compatibility

@@ -14,13 +14,8 @@ Neon is serverless Postgres designed to help you build faster. **Autoscaling**, 
 
 - [Learn the basics](https://neon.com/docs/get-started/signing-up): Sign up and learn database branching basics
 - [Connect your stack](https://neon.com/docs/get-started/connect-neon): Connect to your tech stack
-- [Branching workflows](https://neon.com/docs/get-started/workflow-primer): Branch for dev, preview, and test
-- [Production checklist](https://neon.com/docs/get-started/production-checklist): Get ready for production
-
-## App backend
-
-- [Neon Auth](https://neon.com/docs/auth/overview): Managed auth that branches with your database
-- [Data API](https://neon.com/docs/data-api/overview): Query your Postgres database over HTTP
+- [Learn about branching](https://neon.com/docs/get-started/workflow-primer): Integrate branching into your workflow
+- [Set up Neon Auth](https://neon.com/docs/auth/overview): Set up managed auth that branches with your database
 
 ## Quickstart prompts
 

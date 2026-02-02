@@ -1,0 +1,657 @@
+# Next.js Server SDK Reference
+
+> The Next.js Server SDK Reference document details the integration of Neon's authentication features within Next.js applications, outlining configuration, API usage, and server-side implementation specifics for developers.
+
+## Source
+
+- [Next.js Server SDK Reference HTML](https://neon.com/docs/auth/reference/nextjs-server): The original HTML version of this documentation
+
+Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
+
+For client-side authentication, see the [Client SDK reference](https://neon.com/docs/reference/javascript-sdk). For UI components, see the [UI Components reference](https://neon.com/docs/auth/reference/ui-components).
+
+## Installation
+
+Install the Neon Auth package in your Next.js project using npm, yarn, pnpm, or bun.
+```bash
+npm install @neondatabase/auth
+```
+
+## Environment variables
+
+Configure these environment variables in your `.env.local` file:
+
+- **NEON_AUTH_BASE_URL** (required): Your Neon Auth server URL from the Neon Console
+- **NEON_AUTH_COOKIE_SECRET** (required): Secret for signing session cookies (must be 32+ characters for HMAC-SHA256 security)
+
+Generate a secure secret with: `openssl rand -base64 32`
+```bash
+# Required: Your Neon Auth server URL
+NEON_AUTH_BASE_URL=https://your-neon-auth-url.neon.tech
+
+# Required: Cookie secret for session data signing (32+ characters)
+NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
+```
+
+## createNeonAuth()
+
+Method: `createNeonAuth(config)`
+
+Creates a unified auth instance that provides all server-side authentication functionality.
+
+Returns an `auth` object with:
+
+- `handler()` - Creates API route handlers
+- `middleware()` - Creates Next.js middleware for route protection
+- `getSession()` - Retrieves current session
+- All Better Auth server methods (signIn, signUp, signOut, etc.)
+
+### Parameters
+
+| Parameter                       | Type   | Required | Default |
+| ------------------------------- | ------ | -------- | ------- |
+| <tt>baseUrl</tt>                | string | ✓        | -       |
+| <tt>cookies.secret</tt>         | string | ✓        | -       |
+| <tt>cookies.sessionDataTtl</tt> | number |          | 300     |
+| <tt>cookies.domain</tt>         | string |          | -       |
+```typescript
+// lib/auth/server.ts
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+```
+
+## auth.handler()
+
+Method: `auth.handler()`
+
+Creates GET and POST route handlers for the Neon Auth API proxy.
+
+Create a catch-all route at `app/api/auth/[...path]/route.ts`. This handles all authentication API calls from your client, including:
+
+- Sign in/sign up requests
+- OAuth callbacks
+- Session management
+- Email verification
+- Password reset
+
+### Returns
+
+Object with `GET` and `POST` Next.js route handlers.
+```typescript
+// app/api/auth/[...path]/route.ts
+import { auth } from '@/lib/auth/server';
+
+export const { GET, POST } = auth.handler();
+```
+
+## auth.middleware()
+
+Method: `auth.middleware(options)`
+
+Creates Next.js middleware for session validation and route protection.
+
+The middleware automatically:
+
+- Validates session cookies on each request
+- Provides session data to server components
+- Redirects unauthenticated users to the login page
+- Refreshes session tokens when needed
+
+### Parameters
+
+Details: View parameters
+| Parameter         | Type   | Required | Default         |
+| ----------------- | ------ | -------- | --------------- |
+| <tt>loginUrl</tt> | string |          | `/auth/sign-in` |
+```typescript
+// middleware.ts
+import { auth } from '@/lib/auth/server';
+
+export default auth.middleware({
+  loginUrl: '/auth/sign-in'
+});
+
+export const config = {
+  matcher: [
+    // Match all paths except static files
+    "/((?!_next/static|_next/image|favicon.ico).*)",
+  ],
+};
+```
+
+## auth.getSession()
+
+Method: `auth.getSession()`
+
+Retrieves the current session in Server Components, Server Actions, and API Routes.
+
+- Returns cached session if available (fast)
+- Automatically refreshes expired tokens
+- Returns null if no active session
+
+Server Components that use `auth.getSession()` must export `dynamic = 'force-dynamic'` because session data depends on cookies.
+
+### Returns
+
+| Field   | Type            | Description                                          |
+| ------- | --------------- | ---------------------------------------------------- |
+| `data`  | Session \| null | Session with user data, or null if not authenticated |
+| `error` | Error \| null   | Error object if session retrieval failed             |
+Tab: Server Component
+
+```typescript
+// app/dashboard/page.tsx
+import { auth } from '@/lib/auth/server';
+
+export const dynamic = 'force-dynamic';
+
+export default async function DashboardPage() {
+  const { data: session } = await auth.getSession();
+
+  if (!session?.user) {
+    return <div>Not authenticated</div>;
+  }
+
+  return <h1>Welcome, {session.user.name}</h1>;
+}
+```
+
+Tab: Server Action
+
+```typescript
+// app/actions.ts
+'use server';
+import { auth } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
+
+export async function updateProfile(formData: FormData) {
+  const { data: session } = await auth.getSession();
+
+  if (!session?.user) {
+    redirect('/auth/sign-in');
+  }
+
+  // Update user profile...
+}
+```
+
+Tab: API Route
+
+```typescript
+// app/api/user/route.ts
+import { auth } from '@/lib/auth/server';
+
+export async function GET() {
+  const { data: session } = await auth.getSession();
+
+  if (!session?.user) {
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  return Response.json({ user: session.user });
+}
+```
+
+## auth.signIn.email()
+
+Method: `auth.signIn.email(credentials)`
+
+Sign in with email and password. Use in Server Actions for form-based authentication.
+
+### Parameters
+
+Details: View parameters
+| Parameter         | Type   | Required |
+| ----------------- | ------ | -------- |
+| <tt>email</tt>    | string | ✓        |
+| <tt>password</tt> | string | ✓        |
+```typescript
+'use server';
+import { auth } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
+
+export async function signIn(formData: FormData) {
+  const { data, error } = await auth.signIn.email({
+    email: formData.get('email') as string,
+    password: formData.get('password') as string,
+  });
+
+  if (error) return { error: error.message };
+  redirect('/dashboard');
+}
+```
+
+## auth.signIn.social()
+
+Method: `auth.signIn.social(options)`
+
+Sign in with OAuth provider like Google, GitHub, etc.
+
+### Parameters
+
+Details: View parameters
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| <tt>provider</tt>    | string | ✓        |
+| <tt>callbackURL</tt> | string |          |
+```typescript
+const { data, error } = await auth.signIn.social({
+  provider: 'google',
+  callbackURL: '/dashboard',
+});
+```
+
+## auth.signIn.emailOtp()
+
+Method: `auth.signIn.emailOtp(credentials)`
+
+Sign in with email OTP (one-time password). First call `emailOtp.sendVerificationOtp()` to send the code.
+
+### Parameters
+
+Details: View parameters
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+```typescript
+const { data, error } = await auth.signIn.emailOtp({
+  email: 'user@example.com',
+  otp: '123456',
+});
+```
+
+## auth.signUp.email()
+
+Method: `auth.signUp.email(credentials)`
+
+Create a new user account with email and password.
+
+### Parameters
+
+Details: View parameters
+| Parameter         | Type   | Required |
+| ----------------- | ------ | -------- |
+| <tt>email</tt>    | string | ✓        |
+| <tt>password</tt> | string | ✓        |
+| <tt>name</tt>     | string | ✓        |
+```typescript
+const { data, error } = await auth.signUp.email({
+  email: 'user@example.com',
+  password: 'secure-password',
+  name: 'John Doe',
+});
+```
+
+## auth.signOut()
+
+Method: `auth.signOut()`
+
+Sign out the current user. Clears session and authentication tokens.
+```typescript
+'use server';
+import { auth } from '@/lib/auth/server';
+import { redirect } from 'next/navigation';
+
+export async function signOut() {
+  await auth.signOut();
+  redirect('/auth/sign-in');
+}
+```
+
+## auth.updateUser()
+
+Method: `auth.updateUser(data)`
+
+Update the current user's profile. Password updates require the password reset flow for security.
+
+### Parameters
+
+Details: View parameters
+| Parameter      | Type                | Required |
+| -------------- | ------------------- | -------- |
+| <tt>name</tt>  | string \| undefined |          |
+| <tt>image</tt> | string \| undefined |          |
+```typescript
+const { data, error } = await auth.updateUser({
+  name: 'Jane Doe',
+  image: 'https://example.com/avatar.jpg',
+});
+```
+
+## auth.changePassword()
+
+Method: `auth.changePassword(passwords)`
+
+Change the current user's password.
+
+### Parameters
+
+Details: View parameters
+| Parameter                    | Type    | Required |
+| ---------------------------- | ------- | -------- |
+| <tt>currentPassword</tt>     | string  | ✓        |
+| <tt>newPassword</tt>         | string  | ✓        |
+| <tt>revokeOtherSessions</tt> | boolean |          |
+```typescript
+const { data, error } = await auth.changePassword({
+  currentPassword: 'old-password',
+  newPassword: 'new-password',
+  revokeOtherSessions: true,
+});
+```
+
+## auth.sendVerificationEmail()
+
+Method: `auth.sendVerificationEmail(options)`
+
+Send email verification to the current user.
+
+### Parameters
+
+Details: View parameters
+| Parameter            | Type   | Required |
+| -------------------- | ------ | -------- |
+| <tt>callbackURL</tt> | string |          |
+```typescript
+const { data, error } = await auth.sendVerificationEmail({
+  callbackURL: '/dashboard',
+});
+```
+
+## auth.deleteUser()
+
+Method: `auth.deleteUser()`
+
+Delete the current user account. This action is irreversible.
+```typescript
+const { data, error } = await auth.deleteUser();
+```
+
+## auth.emailOtp.sendVerificationOtp()
+
+Method: `auth.emailOtp.sendVerificationOtp(options)`
+
+Send a one-time password via email. Available when Email OTP authentication is enabled.
+
+### Parameters
+
+Details: View parameters
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+```typescript
+const { data, error } = await auth.emailOtp.sendVerificationOtp({
+  email: 'user@example.com',
+});
+```
+
+## auth.emailOtp.verifyEmail()
+
+Method: `auth.emailOtp.verifyEmail(credentials)`
+
+Verify email with OTP code.
+
+### Parameters
+
+Details: View parameters
+| Parameter      | Type   | Required |
+| -------------- | ------ | -------- |
+| <tt>email</tt> | string | ✓        |
+| <tt>otp</tt>   | string | ✓        |
+```typescript
+const { data, error } = await auth.emailOtp.verifyEmail({
+  email: 'user@example.com',
+  otp: '123456',
+});
+```
+
+## auth.listSessions()
+
+Method: `auth.listSessions()`
+
+List all active sessions for the current user.
+```typescript
+const { data, error } = await auth.listSessions();
+```
+
+## auth.revokeSession()
+
+Method: `auth.revokeSession(options)`
+
+Revoke a specific session by ID.
+
+### Parameters
+
+Details: View parameters
+| Parameter          | Type   | Required |
+| ------------------ | ------ | -------- |
+| <tt>sessionId</tt> | string | ✓        |
+```typescript
+const { data, error } = await auth.revokeSession({
+  sessionId: 'session-id',
+});
+```
+
+## auth.revokeOtherSessions()
+
+Method: `auth.revokeOtherSessions()`
+
+Revoke all sessions except the current one.
+```typescript
+const { data, error } = await auth.revokeOtherSessions();
+```
+
+## auth.organization.create()
+
+Method: `auth.organization.create(data)`
+
+Create a new organization. Available when the organizations plugin is enabled.
+
+### Parameters
+
+Details: View parameters
+| Parameter     | Type   | Required |
+| ------------- | ------ | -------- |
+| <tt>name</tt> | string | ✓        |
+| <tt>slug</tt> | string |          |
+```typescript
+const { data, error } = await auth.organization.create({
+  name: 'My Organization',
+  slug: 'my-org',
+});
+```
+
+## auth.organization.list()
+
+Method: `auth.organization.list()`
+
+List the current user's organizations.
+```typescript
+const { data, error } = await auth.organization.list();
+```
+
+## auth.organization.inviteMember()
+
+Method: `auth.organization.inviteMember(options)`
+
+Invite a member to an organization.
+
+### Parameters
+
+Details: View parameters
+| Parameter               | Type   | Required |
+| ----------------------- | ------ | -------- |
+| <tt>organizationId</tt> | string | ✓        |
+| <tt>email</tt>          | string | ✓        |
+| <tt>role</tt>           | string |          |
+```typescript
+const { data, error } = await auth.organization.inviteMember({
+  organizationId: 'org-id',
+  email: 'member@example.com',
+  role: 'member',
+});
+```
+
+## auth.admin.listUsers()
+
+Method: `auth.admin.listUsers(options)`
+
+List all users. Available for users with admin role.
+
+### Parameters
+
+Details: View parameters
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>limit</tt>  | number |          |
+| <tt>offset</tt> | number |          |
+```typescript
+const { data, error } = await auth.admin.listUsers({
+  limit: 100,
+  offset: 0,
+});
+```
+
+## auth.admin.banUser()
+
+Method: `auth.admin.banUser(options)`
+
+Ban a user. Available for users with admin role.
+
+### Parameters
+
+Details: View parameters
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>userId</tt> | string | ✓        |
+| <tt>reason</tt> | string |          |
+```typescript
+const { data, error } = await auth.admin.banUser({
+  userId: 'user-id',
+  reason: 'Violation of terms',
+});
+```
+
+## auth.admin.setRole()
+
+Method: `auth.admin.setRole(options)`
+
+Set a user's role. Available for users with admin role.
+
+### Parameters
+
+Details: View parameters
+| Parameter       | Type   | Required |
+| --------------- | ------ | -------- |
+| <tt>userId</tt> | string | ✓        |
+| <tt>role</tt>   | string | ✓        |
+```typescript
+const { data, error } = await auth.admin.setRole({
+  userId: 'user-id',
+  role: 'admin',
+});
+```
+
+## Performance features
+
+### Session caching
+
+Session data is automatically cached in a signed, HTTP-only cookie to reduce API calls to the Auth Server by 95-99%.
+
+- Default cache TTL: 5 minutes (300 seconds)
+- Configurable via `cookies.sessionDataTtl`
+- Automatic expiration based on JWT `exp` claim
+- Synchronous cache clearing on sign-out
+- Secure HMAC-SHA256 signing
+
+### Request deduplication
+
+Multiple concurrent `getSession()` calls are automatically deduplicated:
+
+- Single network request for concurrent calls
+- 10x faster cold starts
+- Reduces server load
+```typescript
+// First call: Fetches from Auth Server
+const { data: session } = await auth.getSession();
+
+// Subsequent calls within TTL: Uses cached data (no API call)
+const { data: session2 } = await auth.getSession();
+```
+
+## Configuration reference
+
+Complete configuration options for `createNeonAuth()`:
+
+| Option                   | Type   | Required | Default   |
+| ------------------------ | ------ | -------- | --------- |
+| `baseUrl`                | string | Yes      | -         |
+| `cookies.secret`         | string | Yes      | -         |
+| `cookies.sessionDataTtl` | number | No       | 300       |
+| `cookies.domain`         | string | No       | undefined |
+
+- **baseUrl**: Your Neon Auth server URL from the Neon Console
+- **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
+- **cookies.sessionDataTtl**: Cache TTL in seconds
+- **cookies.domain**: For cross-subdomain sessions (e.g., ".example.com")
+```typescript
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
+```
+
+## Project structure
+
+Recommended file structure for Next.js with Neon Auth:
+
+- `app/api/auth/[...path]/route.ts` - Auth API handlers
+- `app/auth/[path]/page.tsx` - Auth views (sign-in, sign-up)
+- `app/dashboard/page.tsx` - Protected pages
+- `lib/auth/server.ts` - Server auth instance
+- `lib/auth/client.ts` - Client auth instance
+- `middleware.ts` - Next.js middleware
+```
+app/
+├── api/
+│   └── auth/
+│       └── [...path]/
+│           └── route.ts
+├── auth/
+│   └── [path]/
+│       └── page.tsx
+├── dashboard/
+│   └── page.tsx
+├── actions.ts
+└── layout.tsx
+
+lib/
+└── auth/
+    ├── server.ts
+    └── client.ts
+
+middleware.ts
+.env.local
+```
+
+## Migration from v0.1
+
+If you're upgrading from Neon Auth SDK v0.1, see the [migration guide](https://neon.com/docs/auth/migrate/from-auth-v0.1) for step-by-step instructions.
+
+## Related documentation
+
+- [Client SDK Reference](https://neon.com/docs/reference/javascript-sdk) - Client-side authentication
+- [UI Components Reference](https://neon.com/docs/auth/reference/ui-components) - Pre-built auth UI
+- [Next.js Quickstart](https://neon.com/docs/auth/quick-start/nextjs) - Getting started guide
+- [Migration Guide](https://neon.com/docs/auth/migrate/from-auth-v0.1) - Upgrading from v0.1
