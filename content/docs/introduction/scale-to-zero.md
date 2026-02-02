@@ -2,7 +2,7 @@
 title: Scale to Zero
 subtitle: Minimize costs by automatically scaling inactive databases to zero
 redirectFrom:
-  - /docs/introduction/auto-suspend
+  - /docs/introduction/scale-to-zero
 enableTableOfContents: true
 updatedOn: '2025-12-05T20:12:42.054Z'
 ---

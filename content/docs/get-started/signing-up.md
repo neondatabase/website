@@ -7,7 +7,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-  - /docs/get-started/setting-up-a-project
+  - /docs/get-started/signing-up
 updatedOn: '2026-01-24T16:13:09.589Z'
 ---
 
