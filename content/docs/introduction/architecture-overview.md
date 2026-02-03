@@ -46,7 +46,7 @@ The Neon difference appears when the system crosses the boundary between executi
 
 For reads, **the compute node always prefers local access.** It first looks in memory, then in the local NVMe cache. Only when a page is missing locally does the compute node request it from the pageserver, which reconstructs the correct page version and returns it over the network. At no point does the compute node read directly from object storage.
 
-## Storage layer 
+## Storage layer
 
 If the compute layer is responsible for execution, the storage layer is responsible for correctness, durability, and history. **This layer exists independently of any single compute node and continues to operate even when computes come and go.**
 
@@ -66,11 +66,11 @@ This is a fundamental difference from how traditional Postgres works:
 - Commit latency depends on network RTT, not disk fsync
 - No single machine defines the durable state of the database
 
-### Pageserver: WAL ⇄ pages 
+### Pageserver: WAL ⇄ pages
 
-The pageserver sits between WAL and data [pages](https://neon.com/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.  
+The pageserver sits between WAL and data [pages](https://neon.com/docs/reference/glossary#page). Its job is to **materialize page versions** by combining previously materialized base pages and committed WAL records. It is the system’s translation layer between the logical history of the database and the physical representation needed to run queries.
 
-When a compute node needs a page at a specific [LSN (Log Sequence Number)](https://neon.com/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database. 
+When a compute node needs a page at a specific [LSN (Log Sequence Number)](https://neon.com/docs/reference/glossary#lsn), it asks the pageserver. The pageserver checks whether it already has that version available. If not, it reconstructs the page by replaying WAL up to the requested LSN and returns the result. Materialized pages are later persisted into object storage asynchronously, building up the long-term history of the database.
 
 Importantly, page materialization is not on the transaction’s critical path. Commits do not wait for pages to be written or uploaded.
 
@@ -86,7 +86,7 @@ When a transaction executes on a compute node,
 
 1. **Postgres applies changes in memory.** Rows are updated in shared buffers, indexes are modified, and WAL records are generated as usual.
 2. **WAL is streamed to the safekeepers.** Instead of flushing WAL to a local filesystem, the compute node sends WAL records over the network to multiple safekeepers.
-3. **Commit is defined by quorum.** A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record.  At this point, the client receives success.
+3. **Commit is defined by quorum.** A transaction is considered committed once a quorum of safekeepers has acknowledged the WAL record. At this point, the client receives success.
 4. **Page materialization happens later.** Page reconstruction and persistence happen asynchronously in the storage layer.
 
 ## Read path: serving data without object-store latency
@@ -115,7 +115,7 @@ Once returned, the page can be cached in RAM and NVMe, making subsequent reads f
 
 Durability in Neon is not a single mechanism but a composition of responsibilities. No single component is responsible for everything, and no single machine defines the state of the database.
 
-This layering is what allows Neon to tolerate failures intrinsically: 
+This layering is what allows Neon to tolerate failures intrinsically:
 
 - If a compute node dies → queries stop, but data is safe. A new compute attaches immediately and continues from the same history.
 - If a pageserver dies → no durable state is lost. Another pageserver can be deployed and it can reconstruct pages using WAL and object storage.
