@@ -36,6 +36,7 @@ const SearchInput = ({ className, value, onChange, asPlaceholder }) => {
           className={clsx('ais-SearchBox-input', asPlaceholder && 'pointer-events-none')}
           disabled={asPlaceholder}
           placeholder="Search..."
+          aria-label="Search blog posts"
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
