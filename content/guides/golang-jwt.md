@@ -161,6 +161,8 @@ Install the essential packages:
 
 ```bash
 go get github.com/jackc/pgx/v5          # PostgreSQL driver
+go get github.com/jackc/pgx/v5/pgconn   # PostgreSQL connection
+go get github.com/jackc/pgx/v5/pgxpool  # Connection pooling
 go get github.com/gorilla/mux           # HTTP router
 go get github.com/golang-jwt/jwt/v5     # JWT library
 go get golang.org/x/crypto/bcrypt       # Password hashing
@@ -191,7 +193,7 @@ import (
 
 // Connect establishes a connection to the Postgres database
 func Connect(connectionString string) (*sql.DB, error) {
-    db, err := sql.Open("postgres", connectionString)
+    db, err := sql.Open("pgx", connectionString)
     if err != nil {
         return nil, err
     }
@@ -522,6 +524,7 @@ import (
     "encoding/json"
     "errors"
     "net/http"
+    "time"
 
     "github.com/yourusername/auth-system/auth"
 )
@@ -814,7 +817,52 @@ The main benefit of refresh tokens is that they:
 Let's add an HTTP handler for refreshing tokens:
 
 ```go
-// handlers/auth.go (existing methods)
+// handlers/auth.go
+
+// Update the LoginResponse to include refresh token
+// LoginResponse contains the JWT token and refresh token after successful login
+type LoginResponse struct {
+    AccessToken  string `json:"access_token"`
+    RefreshToken string `json:"refresh_token"`
+}
+
+// Update the Login function
+func (h *AuthHandler) Login(w http.ResponseWriter, r *http.Request) {
+    // Parse the request body
+    var req LoginRequest
+    if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+        http.Error(w, "Invalid request payload", http.StatusBadRequest)
+        return
+    }
+
+    // Define refresh token TTL (e.g., 7 days)
+    refreshTokenTTL := 7 * 24 * time.Hour
+
+    // Attempt to login with refresh token generation
+    accessToken, refreshToken, err := h.authService.LoginWithRefresh(req.Email, req.Password, refreshTokenTTL)
+    if err != nil {
+        if errors.Is(err, auth.ErrInvalidCredentials) {
+            http.Error(w, "Invalid credentials", http.StatusUnauthorized)
+        } else {
+            http.Error(w, "Internal server error", http.StatusInternalServerError)
+        }
+        return
+    }
+
+    // Return the tokens
+    response := LoginResponse{
+        AccessToken:  accessToken,
+        RefreshToken: refreshToken,
+    }
+    w.Header().Set("Content-Type", "application/json")
+    json.NewEncoder(w).Encode(response)
+}
+```
+
+Let's also add the HTTP handler for refreshing tokens:
+
+```go
+// handlers/auth.go
 
 // RefreshRequest represents the refresh token payload
 type RefreshRequest struct {
@@ -823,7 +871,7 @@ type RefreshRequest struct {
 
 // RefreshResponse contains the new access token
 type RefreshResponse struct {
-    Token string `json:"token"`
+    Token string `json:"access_token"`
 }
 
 // RefreshToken handles access token refresh
@@ -1182,11 +1230,13 @@ Expected response:
 ```json
 {
   "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "refresh_token": "c3d4e5f6-7890-a1b2-c3d4-e5f67890a1b2"
+  "refresh_token": "c3d4e5f6-7890-...."
 }
 ```
 
-3. Save the access token and use it to access a protected endpoint:
+Save the `access_token` and `refresh_token` from the response for the next steps.
+
+3. Use the access token to access a protected route:
 
 ```bash
 export ACCESS_TOKEN="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
@@ -1205,10 +1255,10 @@ Expected response:
 }
 ```
 
-4. When your access token expires, refresh it using the refresh token:
+4. When your access token expires, refresh it using the refresh token you received during login:
 
 ```bash
-export REFRESH_TOKEN="c3d4e5f6-7890-a1b2-c3d4-e5f67890a1b2"
+export REFRESH_TOKEN="c3d4e5f6-7890-...."
 
 curl -X POST http://localhost:8080/api/auth/refresh \
   -H "Content-Type: application/json" \
