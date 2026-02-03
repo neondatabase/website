@@ -86,9 +86,11 @@ Neon is open source and built in public, so if you are interested in understandi
 Similar to the manual restore operation using the Neon Console and API described [here](/docs/guides/branching-pitr), the Restore operation performs a similar set of actions, but automatically:
 
 1. On initiating a restore action, Neon builds a new point-in-time branch by matching your selected timestamp to the corresponding LSN of the relevant entries in the shared WAL record.
-1. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
-1. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
-1. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. Note: When restoring a root branch, both the new branch and the backup branch become root branches with no parent. When restoring a non-root branch, the initial branch (now the backup) becomes the parent of the new branch.
+2. The compute for your initial branch is moved to this new branch so that your connection string remains stable.
+3. We rename your new branch to the exact name as your initial branch, so the effect is seamless; it looks and acts like the same branch.
+4. Your initial branch, which now has no compute attached to it, is renamed to _branch_name_old_head_timestamp_ to keep the pre-restore branch available should you need to roll back. 
+
+> When restoring a root branch, both the new branch and the backup branch become root branches with no parent. When restoring a non-root branch, the initial branch (now the backup) becomes the parent of the new branch.
 
 </details>
 
@@ -108,34 +110,54 @@ You can use the Neon Console, CLI, or API to restore branches.
 
 ### Restoring from history
 
-Use the **Restore** page to restore a branch to an earlier timestamp in its history.
+Use the **Backup & Restore** page to restore a branch to an earlier point in time in its own or another branch's history.
 
-First, select the **Branch to restore**. This is the target branch for the restore operation.
+First select the branch you want to restore from the left-hand branch list, then select the **Backup & Restore** tab.
 
-![branch restore to timestamp](/docs/guides/branch_restore_timestamp.png)
+![Branch Restore Page](/docs/guides/branch_restore_page.png)
 
-#### To restore a branch from its own history:
+#### Restore to the earlier state of the production branch
 
-1. Make sure the **From history** tab is selected.
-1. Choose your timestamp or switch to LSN.
-1. Click **Next**.
+1. Make sure the **Enhanced view** toggle is enabled.
+   ![Branch Restore from Production Branch](/docs/guides/branch_restore_from_production_branch.png)
+2. Select the branch you want to restore in the sidebar.
+3. Select the point in time you want to restore to using the timestamp selector. If you'd like to verify the data from that moment, click **Preview data**. This opens a *Preview historic data** window where you can browse, query, or compare the schema of your branch at the chosen timestamp.
+4. Click **Restore to point in time** once you've selected the desired timestamp.
 
-   A confirmation window opens giving you details about the pending restore operation. Review these details to make sure you've made the correct selections.
+   A confirmation window opens giving you details about the restore operation. Review these details to make sure you've made the correct selections.
 
-1. Click **Restore** to complete the operation.
+5. Click **Restore** to complete the operation.
 
-#### To restore from another branch:
+This operation resets the current branch to the selected point in time in the production branch's history. All databases on the selected branch are instantly updated with the data and schema from the chosen point in time.
 
-1.  Switch to the **From another branch** tab.
-1.  Select the source branch that you want to restore data from.
-1.  By default, the operation pulls the latest data from the source branch. If you want to pull from an earlier point in time, disable **Restore from latest data (head)**.
+#### Restore to an earlier point in its own history
 
-    The timestamp selector will appear.
+1. Disable the **Enhanced view** toggle.
+2. Make sure the **From history** tab is selected.
+   ![Branch Restore from History](/docs/guides/branch_restore_from_history.png)
+3. Choose your timestamp or switch to LSN.
+4. Click **Schema Diff** to compare the current branch with the selected point in time. This opens a Schema Diff window showing a side-by-side visual comparison of the two schemas. Review the differences, close the window when you're finished, or repeat as needed until you identify the correct point in time.
+5. Click **Proceed**.
 
-1.  Choose your timestamp or switch to the LSN input.
-1.  Click **Next**, confirm the details of the operation, then click **Restore** to complete.
+   A confirmation window opens giving you details about the restore operation. Review these details to make sure you've made the correct selections.
 
-All databases on the selected branch are instantly updated with the data and schema from the chosen point in time. From the **Branches** page, you can now see a backup branch was created with the state of the branch at the restore point in time.
+6. Click **Restore** to complete the operation.
+   This operation resets the current branch to the selected point in time in its own history. All databases on the selected branch are instantly updated with the data and schema from the chosen point in time.
+
+#### Restore to the earlier or latest state of another branch
+
+1. Disable the **Enhanced view** toggle.
+2. Make sure the **From another branch** tab is selected.
+3. In the **Restore from** dropdown, choose the source branch.
+4. Select either **Timestamp** or **LSN** to define a point in time on the source branch. If you prefer to use the branch’s most recent data instead, you can enable **Restore from latest data (head)**.
+
+5. Review the restore details and click **Proceed**.
+
+   A confirmation window opens giving you details about the restore operation. Review these details to make sure you've made the correct selections.
+
+6. Click **Restore** to complete the operation.
+
+All databases on the selected branch are instantly updated with the data and schema from the chosen point in time of the source branch.
 
 <Admonition type="note">
 Backup branches created when restoring a root branch from another branch cannot be deleted. See [Deleting backup branches](#deleting-backup-branches) for details.
@@ -227,14 +249,17 @@ curl --request POST \
 In this example, we are restoring a development branch `dev/alex` (branch ID `br-twilight-river-31791249`) to the latest data (head) of its parent branch `br-jolly-star-07007859`. Note that we don't include any time identifier or backup branch name; this is a straight reset of the branch to the head of its parent.
 
 ```bash shouldWrap
-curl --request POST \ // [!code word:br-twilight-river-31791249]
+curl --request POST \
+     # [!code word:br-twilight-river-31791249]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-twilight-river-31791249/restore \
      --header 'Accept: application/json' \
      --header "Authorization: Bearer $NEON_API_KEY" \
-     --header 'Content-Type: application/json' \ // [!code word:br-jolly-star-07007859]
+     --header 'Content-Type: application/json' \
      --data '
 {
-  "source_branch_id": "br-jolly-star-07007859"}
+  # [!code word:br-jolly-star-07007859]
+  "source_branch_id": "br-jolly-star-07007859"
+}
 ' | jq
 ```
 
@@ -243,13 +268,15 @@ curl --request POST \ // [!code word:br-twilight-river-31791249]
 In this example, we are restoring branch `dev/jordan` (branch ID `br-damp-smoke-91135977`) to branch `dev/alex` (branch ID `br-twilight-river-31791249`) at the point in time of `Feb 26, 2024 12:00:00.000 AM`.
 
 ```bash shouldWrap
-curl --request POST \ // [!code word:br-damp-smoke-91135977]
+curl --request POST \
+     # [!code word:br-damp-smoke-91135977]
      --url https://console.neon.tech/api/v2/projects/floral-disk-86322740/branches/br-damp-smoke-91135977/restore \
      --header 'Accept: application/json' \
-     --header "Authorization: Bearer $NEON_API_KEY" \ //  [!code word:br-jolly-star-07007859]
+     --header "Authorization: Bearer $NEON_API_KEY" \
      --header 'Content-Type: application/json' \
      --data '
 {
+  # [!code word:br-jolly-star-07007859]
   "source_branch_id": "br-jolly-star-07007859",
   "source_timestamp": "2024-02-26T12:00:00Z"
 }

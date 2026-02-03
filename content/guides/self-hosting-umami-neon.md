@@ -39,7 +39,7 @@ To get started, go to the [Neon Console](https://console.neon.tech/app/projects)
 
 You will be presented with a dialog that provides a connection string of your database. Enable the **Connection pooling** toggle for a pooled connection string.
 
-![](/guides/images/self-hosting-umami-neon/1689d44f-4c5d-4b2a-8d13-32407f9c8781.png)
+![Neon Connection string](/docs/connect/connection_details.png)
 
 All Neon connection strings have the following format:
 
