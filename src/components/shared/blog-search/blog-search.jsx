@@ -22,16 +22,17 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   const debouncedUpdateURL = useMemo(
     () =>
       debounce((value) => {
-        const params = new URLSearchParams(searchParams);
+        const params = new URLSearchParams(window.location.search);
         if (value) {
           params.set('query', value);
         } else {
           params.delete('query');
         }
         const queryString = params.toString();
-        router.replace(`${pathname}${queryString ? `?${queryString}` : ''}`, { scroll: false });
+        const newUrl = `${pathname}${queryString ? `?${queryString}` : ''}`;
+        router.push(newUrl, { scroll: false });
       }, 100),
-    [pathname, router, searchParams]
+    [pathname, router]
   );
 
   // Filter posts based on query
