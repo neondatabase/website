@@ -19,7 +19,7 @@ This separation is what allows Neon to behave like a serverless database. Comput
 
 Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
-![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
+![Neon architecture overview](content/docs/introduction/neon-architecture-overview.png)
 
 ## Compute layer
 
@@ -84,7 +84,7 @@ This distinction is critical for performance. Object storage is optimal for dura
 
 ## Write path: committing a transaction in Neon
 
-![Write path in Neon](/docs/introduction/neon-write-path.png)
+![Write path in Neon](content/docs/introduction/neon-write-path.png)
 
 When a transaction executes on a compute node,
 
@@ -95,7 +95,7 @@ When a transaction executes on a compute node,
 
 ## Read path: serving data without object-store latency
 
-![Read path in Neon](/docs/introduction/neon-read-path.png)
+![Read path in Neon](content/docs/introduction/neon-read-path.png)
 
 The obvious concern with running a database on object storage is latency, but Neon’s architecture is designed specifically to avoid this. The most important thing to understand about reads in Neon is this: **queries do not read from object storage.** Object storage backs the system, but it is never on the hot query path.
 
