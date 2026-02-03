@@ -9,6 +9,10 @@ updatedOn: '2026-01-05T20:19:10.007Z'
 
 Neon Auth is in active development. This page shows what's currently supported and what we're working on next.
 
+## General availability
+
+Neon Auth is targeting general availability this quarter. We're actively working on additional plugins and features to bring Neon Auth out of beta.
+
 ## Frameworks
 
 ### Supported
@@ -52,6 +56,10 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | Plugin                                                            | Status          |
 | ----------------------------------------------------------------- | --------------- |
 | [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon  |
+| Webhook support (hook into different auth events)                 | 🔜 Coming soon  |
+| Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
+| MFA support                                                       | 🔜 Coming soon  |
+| Plugin customization (Organization, Admin)                        | 🔜 Coming soon  |
 | Other plugins                                                     | Based on demand |
 
 ## Let us know
