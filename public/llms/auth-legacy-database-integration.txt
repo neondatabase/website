@@ -255,4 +255,4 @@ For SDK components, hooks, and OAuth configuration:
 
 - [Secure your app with RLS](https://neon.com/docs/guides/rls-tutorial) - RLS tutorial
 - [Simplify RLS with Drizzle](https://neon.com/docs/guides/rls-drizzle) - RLS with Drizzle ORM
-- [Neon Auth](https://neon.com/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](https://neon.com/docs/auth/overview) - Current Neon Auth with Better Auth

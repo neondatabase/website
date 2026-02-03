@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-01-29T16:44:02.626Z'
+updatedOn: '2026-02-02T12:37:39.435Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:
@@ -226,7 +226,7 @@ This error is often encountered when attempting to set the Postgres `search_path
 
 ## Postgrex: DBConnection ConnectionError ssl send: closed
 
-Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/auto-suspend) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
+Postgrex has an `:idle_interval` connection parameter that defines an interval for pinging connections after a period of inactivity. The default setting is `1000ms`. If you rely on Neon's [autosuspend](/docs/introduction/scale-to-zero) feature to scale your compute to zero when your database is not active, this setting will prevent that and you may encounter a `(DBConnection.ConnectionError) ssl send: closed (ecto_sql 3.12.0)` error as a result. As a workaround, you can set the interval to a higher value to allow your Neon compute to suspend. For example:
 
 ```elixir
 config :app_name, AppName.Repo

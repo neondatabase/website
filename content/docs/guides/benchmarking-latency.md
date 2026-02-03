@@ -3,7 +3,7 @@ title: Benchmarking latency in Neon's serverless Postgres
 subtitle: Techniques for obtaining meaningful latency data in serverless database
   environments
 enableTableOfContents: true
-updatedOn: '2025-08-26T15:57:17.419Z'
+updatedOn: '2026-02-02T12:37:39.445Z'
 ---
 
 Benchmarking database query latency is inherently complex, requiring careful consideration of numerous variables and testing methodologies. Neon's serverless Postgres environment adds additional layers to this complexity due to compute auto-suspension, connection protocol differences, and geographic distribution. This guide provides detailed methodologies for separating cold-start costs from operational latency, selecting optimal connection types, and designing tests that accurately reflect production conditions.
@@ -16,7 +16,7 @@ When benchmarking Neon databases, you'll encounter two distinct types of queries
 
 - **Hot queries**: Execute on an already-active database instance, delivering consistent low latency. These represent typical performance in production environments where databases run continuously or remain active most of the time.
 
-Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/auto-suspend) for more details.
+Free-tier Neon databases automatically suspend after 5 minutes of inactivity. Paid plans allow you to disable the auto-suspend timeout to eliminate cold starts entirely. The Neon [Scale plan](/docs/introduction/plans) lets you disable or configure the setting, enabling you to customize your testing approach. See [Compute Lifecycle](/docs/introduction/compute-lifecycle) and [Auto-suspend Configuration](/docs/introduction/scale-to-zero) for more details.
 
 ## Benchmarking methodology
 

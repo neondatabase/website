@@ -3,7 +3,7 @@ title: Replicate data from Supabase
 subtitle: Learn how to replicate data from Supabase to Neon
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.284Z'
+updatedOn: '2026-02-02T12:37:39.460Z'
 ---
 
 This guide describes how to replicate data from Supabase to Neon using native Postgres logical replication. The steps in this guide follow those described in [Replicate to another Postgres database using Logical Replication](https://supabase.com/docs/guides/database/postgres/setup-replication-external), in the _Supabase documentation_.
@@ -103,7 +103,7 @@ This section describes how to prepare your Neon Postgres database (the subscribe
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables defined in your publication on the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables defined in your publication on the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/migrate-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement in your Neon SQL Editor or using `psql`:
 

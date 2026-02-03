@@ -308,9 +308,8 @@ AI agents and codegen platforms need robust database versioning to manage schema
 
 Use PITR for recent history. The [restore window](https://neon.com/docs/introduction/restore-window) differs between your two organizations:
 
-- **Free organization (sponsored by Neon)** — 1 day of point-in-time history
-- **Paid organization** — Up to 7 days of point-in-time history
-- **No storage cost** — PITR uses Neon's built-in history, no additional storage charges
+- **Free organization (sponsored by Neon)** — 1 day of point-in-time history (included at no charge)
+- **Paid organization** — Up to 7 days of point-in-time history (billed at $0.20/GB-month for change history)
 - **Instant restore** — Restore databases to any point within the restore window in seconds
 
 The Free organization provides 1 day of restore window, while the Paid organization provides up to 7 days. Factor these restore windows into your platform's feature offerings and set appropriate user expectations for each tier.
@@ -363,13 +362,13 @@ curl --request POST \
 
 ### When to use each approach
 
-| Use Case                        | Recommended Method   | Why                                                                   |
-| ------------------------------- | -------------------- | --------------------------------------------------------------------- |
-| **Undo recent changes**         | PITR (point-in-time) | No storage cost, instant restore, automatic history (1 day to 7 days) |
-| **Save before major migration** | Snapshot (branch)    | Persist beyond PITR window, named versions, explicit control          |
-| **Daily automated backups**     | PITR (built-in)      | Already available, no action needed                                   |
-| **Release versions**            | Snapshot (branch)    | Keep indefinitely, tag with version numbers                           |
-| **Experiment/test safely**      | Development branch   | Isolated, can be deleted after testing                                |
+| Use Case                        | Recommended Method   | Why                                                          |
+| ------------------------------- | -------------------- | ------------------------------------------------------------ |
+| **Undo recent changes**         | PITR (point-in-time) | Instant restore, automatic history (1 day to 7 days)         |
+| **Save before major migration** | Snapshot (branch)    | Persist beyond PITR window, named versions, explicit control |
+| **Daily automated backups**     | PITR (built-in)      | Already available, no action needed                          |
+| **Release versions**            | Snapshot (branch)    | Keep indefinitely, tag with version numbers                  |
+| **Experiment/test safely**      | Development branch   | Isolated, can be deleted after testing                       |
 
 ### Recommended approach
 

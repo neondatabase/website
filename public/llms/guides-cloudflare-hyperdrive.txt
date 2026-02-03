@@ -227,6 +227,24 @@ export default {
 };
 ```
 
+### Optimize Worker placement
+
+By default, Workers run in the data center closest to where the request was received. If your Worker makes multiple round trips to your Neon database, you can reduce latency by placing the Worker closer to your database instead.
+
+You can specify the cloud region where your database is hosted by adding a placement in your `wrangler.toml`. For example, if your database is in AWS US East 1:
+
+```toml
+[placement]
+region = "aws:us-east-1"
+```
+
+Or if your database is in Azure Germany West Central:
+
+```toml
+[placement]
+region = "azure:germanywestcentral"
+```
+
 ### Deploy the updated Worker
 
 Now that we have updated the Worker script to use the Hyperdrive service, we can deploy the updated Worker to the Cloudflare Workers platform:

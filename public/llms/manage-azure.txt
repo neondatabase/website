@@ -17,8 +17,6 @@ Deploying Neon natively on Azure lets you manage your Neon organization alongsid
 - **Consolidated billing**: Simplify cost management with unified billing through the Azure Marketplace.
 - **Integrated workflows**: Use the Azure CLI and SDKs to manage Neon as part of your regular workflows, integrated with your existing Azure resources.
 
-       **Note**: Management of Neon organizations, projects, and branches is supported via the Azure portal, CLI, and SDK. We continue to enhance the integration between Neon and Azure, including with other Azure native services. Additional Neon features and advanced configurations remain accessible through the Neon Console.
-
 ### Getting started
 
 - [Deploy Neon on Azure](https://neon.com/docs/azure/azure-deploy): Deploy Neon Postgres as Native ISV Service from the Azure Marketplace

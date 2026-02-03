@@ -2,9 +2,9 @@
 title: Scale to Zero
 subtitle: Minimize costs by automatically scaling inactive databases to zero
 redirectFrom:
-  - /docs/introduction/auto-suspend
+  - /docs/introduction/scale-to-zero
 enableTableOfContents: true
-updatedOn: '2025-12-05T20:12:42.054Z'
+updatedOn: '2026-02-02T12:37:39.466Z'
 ---
 
 Neon's _Scale to Zero_ feature suspends the Neon compute that runs your Postgres database after a period of inactivity, which minimizes costs for databases that aren’t always active, such as development or test environment databases — and even production databases that aren't used 24/7.

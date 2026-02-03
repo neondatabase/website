@@ -62,6 +62,7 @@ Learn how Neon secures your projects and data, and explore the security features
 
 ## Operations & maintenance
 
+- [Production checklist](https://neon.com/docs/get-started/production-checklist): Guidelines to optimize price, performance, and reliability
 - [Backups](https://neon.com/docs/manage/backups): An overview of backup strategies for Neon Postgres
 - [Backup with pg_dump](https://neon.com/docs/manage/backup-pg-dump): Learn how to create a backup of your Neon database using pg_dump
 - [Automate pg_dump backups](https://neon.com/docs/manage/backup-pg-dump-automate): Automate backups of your Neon database to S3 with pg_dump and GitHub Actions

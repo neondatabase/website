@@ -4,7 +4,7 @@ subtitle: For existing users only (not available for new projects)
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2025-12-16T12:23:55.556Z'
+updatedOn: '2026-02-02T12:37:39.432Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -193,6 +193,6 @@ For SDK documentation, components, hooks, and client-side authentication:
 
 - [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
 - [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
-- [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

@@ -6,6 +6,8 @@
 
 - [Neon API HTML](https://neon.com/docs/reference/api-reference): The original HTML version of this documentation
 
+The Neon API allows you to manage your Neon projects programmatically. You can create and manage projects, branches, databases, roles, compute endpoints, and more — everything you can do in the Neon Console, you can do with the API.
+
 ## Quick links
 
 - [Neon API Reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api) — Interactive API documentation with "Try It" feature
@@ -18,23 +20,23 @@
 
 Before using the Neon API, you need:
 
-1. **A Neon account** — Sign up at https://console.neon.tech/signup
-2. **An API key** — Create one in the Neon Console under Account settings > API keys
-3. **curl or an HTTP client** — Or use the TypeScript or Python SDKs
+1. **A Neon account** — [Sign up](https://console.neon.tech/signup) if you don't have one
+2. **An API key** — Create one in the Neon Console (see below)
+3. **curl or an HTTP client** — Or use our [TypeScript](https://neon.com/docs/reference/typescript-sdk) or [Python](https://neon.com/docs/reference/python-sdk) SDKs
 
 ### API key types
 
-Neon supports three types of API keys:
+Neon supports three types of API keys, each with different scopes:
 
-| Key Type | Scope | Best For |
-|----------|-------|----------|
-| **Personal API Key** | All projects you own or have access to | Personal development, scripts |
-| **Organization API Key** | All projects within an organization | Team automation, CI/CD |
-| **Project-scoped API Key** | Single project only | Limited access integrations |
+| Key Type                   | Scope                                  | Best For                      |
+| -------------------------- | -------------------------------------- | ----------------------------- |
+| **Personal API Key**       | All projects you own or have access to | Personal development, scripts |
+| **Organization API Key**   | All projects within an organization    | Team automation, CI/CD        |
+| **Project-scoped API Key** | Single project only                    | Limited access integrations   |
 
-**Important:** API key tokens are shown only once at creation. Store them securely — you cannot retrieve them later.
+Create your first API key in the Neon Console under **Account settings** > **API keys**. For detailed instructions, see [Manage API keys](https://neon.com/docs/manage/api-keys).
 
-For detailed instructions, see [Manage API keys](https://neon.com/docs/manage/api-keys).
+   **Important**: API key tokens are shown only once at creation. Store them securely — you cannot retrieve them later.
 
 ### Base URL
 
@@ -56,9 +58,9 @@ curl 'https://console.neon.tech/api/v2/projects' \
 
 ## Make your first API call
 
-Set your API key as an environment variable, then list your projects.
+Set your API key as an environment variable, then list your projects:
 
-### Using curl
+Tab: curl
 
 ```bash
 # Set your API key
@@ -70,7 +72,7 @@ curl 'https://console.neon.tech/api/v2/projects' \
   -H "Authorization: Bearer $NEON_API_KEY" | jq
 ```
 
-### Using the TypeScript SDK
+Tab: TypeScript SDK
 
 ```bash
 npm install @neondatabase/api-client
@@ -91,7 +93,7 @@ async function listProjects() {
 listProjects();
 ```
 
-### Using the Python SDK
+Tab: Python SDK
 
 ```bash
 pip install neon-api
@@ -107,7 +109,7 @@ projects = neon.projects()
 print(projects)
 ```
 
-### Example response
+The response includes your projects with their IDs, regions, and other details:
 
 ```json
 {
@@ -123,11 +125,10 @@ print(projects)
 }
 ```
 
-### Create a branch
+Use the `project_id` from the response to make subsequent requests, such as creating a branch:
 
-Use the `project_id` from the response to create a branch:
+Tab: curl
 
-**curl:**
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/spring-example-302709/branches' \
   -H 'Accept: application/json' \
@@ -136,7 +137,8 @@ curl -X POST 'https://console.neon.tech/api/v2/projects/spring-example-302709/br
   -d '{"branch": {"name": "dev-branch"}}'
 ```
 
-**TypeScript SDK:**
+Tab: TypeScript SDK
+
 ```typescript
 const response = await apiClient.createProjectBranch('spring-example-302709', {
   branch: { name: 'dev-branch' },
@@ -144,7 +146,8 @@ const response = await apiClient.createProjectBranch('spring-example-302709', {
 console.log(response.data.branch);
 ```
 
-**Python SDK:**
+Tab: Python SDK
+
 ```python
 branch = neon.branch_create(
     project_id="spring-example-302709",
@@ -201,7 +204,7 @@ curl 'https://console.neon.tech/api/v2/projects?limit=10&cursor=...' ...
 
 ## SDKs and tools
 
-Instead of using curl, you can use official SDKs:
+Instead of using curl, you can use our official SDKs:
 
 - **[TypeScript SDK](https://neon.com/docs/reference/typescript-sdk)** — Full-featured SDK for Node.js and browser
 - **[Python SDK](https://neon.com/docs/reference/python-sdk)** — Pythonic wrapper for the Neon API
@@ -229,7 +232,7 @@ The following sections link to API examples and guides throughout the Neon docum
 
 Manage the fundamental building blocks of your Neon account.
 
-- [Manage API keys](https://neon.com/docs/manage/api-keys#manage-api-keys-with-the-neon-api) — Create, list, and revoke API keys
+- [Manage API keys](https://neon.com/docs/manage/api-keys#manage-api-keys-with-the-neon-api) — Create, list, and revoke API keys for personal accounts and organizations
 - [Manage projects](https://neon.com/docs/manage/projects#manage-projects-with-the-neon-api) — Create, list, update, delete, and recover projects
 - [Manage branches](https://neon.com/docs/manage/branches#branching-with-the-neon-api) — Create, list, and delete branches
 - [Manage computes](https://neon.com/docs/manage/computes#manage-computes-with-the-neon-api) — Create, configure, restart, and delete compute endpoints

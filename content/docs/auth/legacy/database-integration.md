@@ -4,7 +4,7 @@ subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2025-12-16T12:23:55.552Z'
+updatedOn: '2026-02-02T12:37:39.429Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -276,6 +276,6 @@ For SDK components, hooks, and OAuth configuration:
 
 - [Secure your app with RLS](/docs/guides/rls-tutorial) - RLS tutorial
 - [Simplify RLS with Drizzle](/docs/guides/rls-drizzle) - RLS with Drizzle ORM
-- [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

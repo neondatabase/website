@@ -15,21 +15,28 @@ const containsActiveSlug = (menu, slug) => {
   return menu?.items?.some((item) => containsActiveSlug(item, slug));
 };
 
-const getActiveMenu = (navigation, slug) =>
-  navigation
-    ?.flatMap((menu) => {
-      // If menu has subnav, find the matching subnav item
-      if (menu.subnav) {
-        if (menu.subnav.some((subnavItem) => subnavItem.section)) {
-          return menu.subnav.flatMap((subnavItem) => subnavItem.items);
-        }
-
-        return menu.subnav;
+const getActiveMenu = (navigation, slug) => {
+  const flatMenus = navigation?.flatMap((menu) => {
+    // If menu has subnav, find the matching subnav item
+    if (menu.subnav) {
+      if (menu.subnav.some((subnavItem) => subnavItem.section)) {
+        return menu.subnav.flatMap((subnavItem) => subnavItem.items);
       }
-      // Otherwise, find the matching nav menu
-      return [menu];
-    })
-    .find((item) => containsActiveSlug(item, slug));
+
+      return menu.subnav;
+    }
+    // Otherwise, find the matching nav menu
+    return [menu];
+  });
+
+  // First, try to find a menu where the slug is a direct match on the menu itself
+  // This prioritizes dedicated sections (e.g., Neon Auth) over cross-references
+  const directMatch = flatMenus?.find((item) => item.slug === slug);
+  if (directMatch) return directMatch;
+
+  // Fall back to finding a menu that contains the slug in its items
+  return flatMenus?.find((item) => containsActiveSlug(item, slug));
+};
 
 const Sidebar = ({ className = null, navigation, basePath, customType, sdkNavigation }) => {
   const pathname = usePathname();

@@ -2,7 +2,7 @@
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
 enableTableOfContents: true
-updatedOn: '2026-01-15T23:54:00.607Z'
+updatedOn: '2026-02-02T12:37:39.450Z'
 ---
 
 Liquibase is an open-source database-independent library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -14,7 +14,7 @@ The instructions in this guide are based on the workflow described in the [Liqui
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 - An installation of Liquibase. For instructions, refer to [Get started with Liquibase and Neon](/docs/guides/liquibase).
 

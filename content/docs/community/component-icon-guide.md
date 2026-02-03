@@ -2,7 +2,7 @@
 title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.315Z'
+updatedOn: '2026-02-02T12:37:39.433Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -332,7 +332,7 @@ To test if an icon works:
 
 ## Summary
 
-This guide provides an overview of Neon's icon systems and usage guidelines. For complete icon listings and detailed examples, refer to the [Component Showcase](/docs/community/component-showcase).
+This guide provides an overview of Neon's icon systems and usage guidelines. For complete icon listings and detailed examples, refer to the [Component Guide](/docs/community/component-guide).
 
 ### Key takeaways
 

@@ -2,7 +2,7 @@
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.616Z'
+updatedOn: '2026-02-02T12:37:39.437Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -88,7 +88,7 @@ The Data API interacts directly with your Postgres schema. Because the API is ac
 
 In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. **Choose the approach that matches how you manage your database schema:**
 
-- **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
+- **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
 - **Drizzle (crudPolicy)**: A high-level helper that generates all four CRUD policies (select, insert, update, delete) in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
 - **Drizzle (pgPolicy)**: Define individual policies for each operation. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
 
