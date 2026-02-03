@@ -20,7 +20,12 @@ const SearchResults = ({ posts, className, children }) => {
   return (
     <div className={clsx('search-results', className)}>
       {posts.map((post, index) => (
-        <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />
+        <>
+          <div role="status" aria-live="polite" className="sr-only">
+            {posts.length} results found
+          </div>
+          <BlogGridItem key={post.slug} post={post} isPriority={index < 5} />
+        </>
       ))}
     </div>
   );
