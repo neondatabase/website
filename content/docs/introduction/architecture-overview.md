@@ -19,6 +19,8 @@ This separation is what allows Neon to behave like a serverless database. Comput
 
 Neon’s design intentionally keeps object storage off the critical path. Object storage provides durability and scale, but never sits in front of query execution. Latency-sensitive work stays close to compute, while durability and history are handled asynchronously and independently.
 
+![Neon architecture overview](/docs/introduction/neon-architecture-overview.png)
+
 ## Compute layer
 
 The compute layer is where Postgres actually runs. Each Neon compute node is a standard Postgres instance: it parses SQL, plans queries, executes transactions, enforces MVCC, and manages locks and indexes. From the perspective of the query engine, nothing about Postgres itself is rewritten or replaced.
@@ -82,6 +84,8 @@ This distinction is critical for performance. Object storage is optimal for dura
 
 ## Write path: committing a transaction in Neon
 
+![Write path in Neon](/docs/introduction/neon-write-path.png)
+
 When a transaction executes on a compute node,
 
 1. **Postgres applies changes in memory.** Rows are updated in shared buffers, indexes are modified, and WAL records are generated as usual.
@@ -90,6 +94,8 @@ When a transaction executes on a compute node,
 4. **Page materialization happens later.** Page reconstruction and persistence happen asynchronously in the storage layer.
 
 ## Read path: serving data without object-store latency
+
+![Read path in Neon](/docs/introduction/neon-read-path.png)
 
 The obvious concern with running a database on object storage is latency, but Neon’s architecture is designed specifically to avoid this. The most important thing to understand about reads in Neon is this: **queries do not read from object storage.** Object storage backs the system, but it is never on the hot query path.
 
