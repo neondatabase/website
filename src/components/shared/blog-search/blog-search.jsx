@@ -13,7 +13,12 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState(searchParams.get('query') || '');
+  const urlQuery = searchParams.get('query') || '';
+  const [query, setQuery] = useState(urlQuery);
+  
+  useEffect(() => {
+    setQuery(urlQuery);
+  }, [urlQuery]);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
