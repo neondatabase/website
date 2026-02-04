@@ -28,7 +28,7 @@
 - [Neon Agent Plan](https://neon.com/llms/introduction-agent-plan.txt): Learn about using Neon to provision and manage databases for agentic platforms
 - [Neon Enterprise Sales Process](https://neon.com/llms/introduction-enterprise-sales-process.txt): A guide to Neon's Enterprise sales process
 - [Neon Read Replicas](https://neon.com/llms/introduction-read-replicas.txt): Scale your app, run ad-hoc queries, and provide read-only access without duplicating data
-- [Neon architecture](https://neon.com/llms/introduction-architecture-overview.txt): Architecture Overview
+- [Neon architecture](https://neon.com/llms/introduction-architecture-overview.txt): Serverless Postgres with decoupled compute and durable storage
 - [Neon legacy plans](https://neon.com/llms/introduction-legacy-plans.txt): Legacy Plans
 - [Neon plans](https://neon.com/llms/introduction-plans.txt): Plans
 - [Neon status](https://neon.com/llms/introduction-status.txt): Stay informed about the performance and availability of Neon
