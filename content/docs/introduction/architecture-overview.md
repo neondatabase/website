@@ -86,7 +86,7 @@ This distinction is critical for performance. Object storage is optimal for dura
 
 ![Write path in Neon](/docs/introduction/neon-write-path.png)
 
-When a transaction executes on a compute node,
+When a transaction executes on a compute node:
 
 1. **Postgres applies changes in memory.** Rows are updated in shared buffers, indexes are modified, and WAL records are generated as usual.
 2. **WAL is streamed to the safekeepers.** Instead of flushing WAL to a local filesystem, the compute node sends WAL records over the network to multiple safekeepers.
