@@ -4,7 +4,6 @@ subtitle: Neon supports you from prototype to scale-up
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-  - /docs/get-started/production-readiness
 updatedOn: '2025-08-02T10:33:29.256Z'
 ---
 
