@@ -4,7 +4,7 @@ subtitle: Neon supports you from prototype to scale-up
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-updatedOn: '2025-08-02T10:33:29.256Z'
+updatedOn: '2026-02-04T13:28:35.596Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.
