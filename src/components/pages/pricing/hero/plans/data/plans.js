@@ -22,7 +22,7 @@ export default [
           },
           {
             title: '100 CU-hrs per project',
-            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            info: '<p>CU-hour = CU x active hours</p><p>1 CU ≈ 4 GB RAM</p>',
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
@@ -73,7 +73,7 @@ export default [
           },
           {
             title: '$0.106 per CU-hr',
-            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            info: '<p>CU-hour = CU x active hours</p><p>1 CU ≈ 4 GB RAM</p>',
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
@@ -85,8 +85,11 @@ export default [
       backend: {
         title: 'Backend',
         features: [
-          { title: 'Auth: 1M MAU', info: '<p>Monthly Active Users included</p>' },
-          { title: 'Data API: 1B requests', info: '<p>Billion requests included per month</p>' },
+          { title: 'Auth: 1M MAU', info: '<p>More capacity available via support request</p>' },
+          {
+            title: 'Data API: 1B requests',
+            info: '<p>More capacity available via support request</p>',
+          },
         ],
       },
       other: {
@@ -117,12 +120,12 @@ export default [
         features: [
           {
             title: '1,000+ projects',
-            info: '<p>Accounts needing more than 1k projects<br/> can contact support for a limit increase.</p>',
+            info: '<p>A project is a top-level container<br/> for your database environment.</p>',
             moreLink: { text: 'Read more', href: '#what-is-a-project' },
           },
           {
             title: '$0.222 per CU-hr',
-            info: '<p>CU-hour = CU x active hours (compute usage)</p><p>1 CU ≈ 4 GB RAM</p>',
+            info: '<p>CU-hour = CU x active hours</p><p>1 CU ≈ 4 GB RAM</p>',
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
           {
@@ -134,8 +137,11 @@ export default [
       backend: {
         title: 'Backend',
         features: [
-          { title: 'Auth: 1M MAU', info: '<p>Monthly Active Users included</p>' },
-          { title: 'Data API: 1B requests', info: '<p>Billion requests included per month</p>' },
+          { title: 'Auth: 1M MAU', info: '<p>More capacity available via support request</p>' },
+          {
+            title: 'Data API: 1B requests',
+            info: '<p>More capacity available via support request</p>',
+          },
         ],
       },
       other: {
@@ -145,7 +151,11 @@ export default [
           { title: '14-day metrics/logs in UI' },
           { title: 'Metrics/logs export (Otel, Datadog)' },
           { title: 'Private network, IP rules' },
-          { title: 'SLAs, SOC2, HIPAA', info: '<p>Enterprise-grade compliance and SLAs</p>' },
+          {
+            title: 'SLAs, SOC2, HIPAA',
+            info: '<p>HIPAA incurs additional costs.</p>',
+            moreLink: { text: 'Read more', href: '/docs/security/hipaa' },
+          },
         ],
       },
     },
