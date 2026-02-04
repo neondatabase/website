@@ -56,6 +56,7 @@ Before getting started, ensure the following:
 ### 1. Get your Grafana Cloud credentials
 
 In your Grafana Cloud instance:
+
 1. Navigate to **Connections** → **Add new connection**.
 2. Search for and select **Neon**.
 3. Follow the **Neon Integration** wizard to generate a token with the required permissions.
@@ -71,6 +72,7 @@ The wizard automatically generates a token with the correct permissions (metrics
 ### 2. Configure the integration in Neon
 
 In the Neon Console:
+
 1. Go to your project's **Integrations** page and select **OpenTelemetry** → **Add**.
 2. Configure the connection:
    - **Protocol**: HTTP (recommended).
