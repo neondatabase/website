@@ -2,7 +2,7 @@
 title: Connect from Phoenix to Neon
 subtitle: Set up a Neon project in seconds and connect from Phoenix
 enableTableOfContents: true
-updatedOn: '2025-11-05T08:57:51.484Z'
+updatedOn: '2026-02-04T19:25:39.221Z'
 ---
 
 <CopyPrompt src="/prompts/phoenix-prompt.md"
