@@ -10,13 +10,6 @@ This guide describes how to connect Neon in a [Phoenix](https://www.phoenixframe
 
 It is assumed that you have a working installation of [Elixir](https://elixir-lang.org/install.html).
 
-To connect to Neon from Phoenix with Ecto:
-
-- [Create a Neon project](https://neon.com/docs/guides/phoenix#create-a-neon-project)
-- [Store your Neon credentials](https://neon.com/docs/guides/phoenix#store-your-neon-credentials)
-- [Create a Phoenix project](https://neon.com/docs/guides/phoenix#create-a-phoenix-project)
-- [Build and Run the Phoenix application](https://neon.com/docs/guides/phoenix#build-and-run-the-phoenix-application)
-
 ## Create a Neon project
 
 If you do not have one already, create a Neon project. Save your connection details including your password. They are required when defining connection settings.
@@ -37,17 +30,21 @@ You will need the connection string details later in the setup.
 
 ## Create a Phoenix project
 
-1. [Create a Phoenix project](https://hexdocs.pm/phoenix/installation.html#phoenix) if you do not have one, with the following command:
+[Create a Phoenix project](https://hexdocs.pm/phoenix/installation.html#phoenix) if you do not have one:
 
-   ```bash
-   # install phx.new if you haven't already
-   # mix archive.install hex phx_new
-   mix phx.new hello
-   ```
+```bash
+# install phx.new if you haven't already
+# mix archive.install hex phx_new
+mix phx.new hello
+```
 
-   When prompted to, choose to not install the dependencies.
+When prompted, choose to not install the dependencies yet.
 
-2. Update `config/dev.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied previously.
+## Configure database connections
+
+Update the following configuration files with your Neon database connection details from the connection string you copied earlier.
+
+1. Update `config/dev.exs`:
 
    ```elixir {2-5,9}
    config :hello, Hello.Repo,
@@ -61,9 +58,9 @@ You will need the connection string details later in the setup.
       ssl: [cacerts: :public_key.cacerts_get()]
    ```
 
-         **Note**: The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
+      **Note**: The `:ssl` option is required to connect to Neon. Postgrex, since v0.18, verifies the server SSL certificate and you need to select CA trust store using `:cacerts` or `:cacertfile` options. You can use the OS-provided CA store by setting `cacerts: :public_key.cacerts_get()`. While not recommended, you can disable certificate verification by setting `ssl: [verify: :verify_none]`.
 
-3. Update`config/runtime.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied previously.
+2. Update `config/runtime.exs`:
 
    ```elixir {2}
    config :hello, Hello.Repo,
@@ -73,7 +70,7 @@ You will need the connection string details later in the setup.
       socket_options: maybe_ipv6
    ```
 
-4. Update`config/test.exs` file's configuration with your Neon database connection details. Use the connection details from the Neon connection string you copied in the first part of the guide.
+3. Update `config/test.exs`:
 
    ```elixir {2,3,4,8}
    config :hello, Hello.Repo,
@@ -86,21 +83,26 @@ You will need the connection string details later in the setup.
       ssl: [cacerts: :public_key.cacerts_get()]
    ```
 
-5. Now, install the dependencies used in your Phoenix application using the following command:
+      **Tip**: This guide configures the test environment for completeness but doesn't cover running tests. For production workflows, consider using [Neon branches](https://neon.com/docs/introduction/branching) instead of a separate test database. Branches provide isolated, cost-effective copies of your database that are ideal for testing and CI/CD pipelines.
+
+## Install dependencies and create databases
+
+1. Install the dependencies:
 
    ```bash
    mix deps.get
    ```
 
-6. Seed the Neon database with the following command:
+2. Create the development and test databases:
 
    ```bash
    mix ecto.create
+   MIX_ENV=test mix ecto.create
    ```
 
-Once that's done, move on to building and running the application in production mode.
+   The first command creates the development database (`neondb`). The second creates the test database (`with_phoenix_test`).
 
-## Build and Run the Phoenix application
+## Build and run the Phoenix application
 
 To compile the app in production mode, run the following command:
 
@@ -120,11 +122,12 @@ For each deployment, a secret key is required for encrypting and signing data. R
 mix phx.gen.secret
 ```
 
-When you run the following command, you can expect to see the Phoenix application on [localhost:4001](localhost:4001):
+When you run the following command, you can expect to see the Phoenix application at [http://localhost:4001](http://localhost:4001):
 
 ```bash
 PORT=4001 \
 MIX_ENV=prod \
+PHX_HOST=localhost \
 DATABASE_URL="postgresql://...:...@...aws.neon.tech/neondb?sslmode=require&channel_binding=require" \
 SECRET_KEY_BASE=".../..." \
 mix phx.server
