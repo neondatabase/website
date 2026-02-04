@@ -163,7 +163,7 @@ With the theory out of the way, let's start by creating a new project directory 
 Now, let's install the necessary packages for our project:
 
 ```bash
-pip install "fastapi[all]" sqlalchemy psycopg2-binary pyjwt "passlib[bcrypt]" python-dotenv
+pip install "fastapi[all]" sqlalchemy psycopg2-binary pyjwt bcrypt python-dotenv
 ```
 
 This command installs:
@@ -172,7 +172,7 @@ This command installs:
 - SQLAlchemy: An ORM for database interactions
 - psycopg2-binary: PostgreSQL adapter for Python
 - PyJWT: For working with JWT tokens instead of handling them manually
-- passlib: For password hashing
+- bcrypt: For secure password hashing
 - python-dotenv: To load environment variables from a .env file
 
 You can also create a `requirements.txt` file to manage your dependencies using the following:
@@ -276,7 +276,7 @@ class User(BaseModel):
     email: EmailStr
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class Token(BaseModel):
     access_token: str
@@ -294,7 +294,7 @@ Now that we have the database models and schemas in place, let's add some utilit
 Create a file called `auth.py` where we will define functions for password hashing, verification, and JWT token creation:
 
 ```python
-from passlib.context import CryptContext
+import bcrypt
 import jwt
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
@@ -307,13 +307,13 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return bcrypt.checkpw(plain_password.encode('utf-8'), hashed_password.encode('utf-8'))
 
-def verify_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
-
-def get_password_hash(password):
-    return pwd_context.hash(password)
+def get_password_hash(password: str) -> str:
+    salt = bcrypt.gensalt()
+    hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed.decode('utf-8')
 
 def create_access_token(data: dict):
     to_encode = data.copy()
@@ -339,7 +339,7 @@ This file includes functions for:
 - Creating JWT access tokens
 - Verifying JWT tokens
 
-The `CryptContext` from passlib is used for secure password hashing, while `PyJWT` is used for JWT token creation and verification. PyJWT provides a simpler and more focused API for JWT operations compared to `python-jose`.
+The `bcrypt` library is used for secure password hashing, while `PyJWT` is used for JWT token creation and verification. PyJWT provides a simpler and more focused API for JWT operations compared to `python-jose`.
 
 ## API Endpoints
 
@@ -501,7 +501,7 @@ Make sure that you don't include the `.env` file in the Docker image to keep you
 To run the Docker container, use the following command:
 
 ```bash
-docker run -d -p 8000:8000 --env-file .env fastapi-auth-demo
+docker run -d -p 8000:8000 fastapi-auth-demo
 ```
 
 This command starts the container in detached mode, maps port 8000 on the host to port 8000 in the container, and loads environment variables from the `.env` file.
