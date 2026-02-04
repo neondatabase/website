@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
+import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 export const RESOURCE_SIZES = [
@@ -18,13 +19,9 @@ const ResourceSizeSelect = ({ value, onChange }) => {
 
   const selectedOption = RESOURCE_SIZES.find((size) => size.id === value) || RESOURCE_SIZES[1];
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (containerRef.current && !containerRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
+  useClickOutside([containerRef], () => setIsOpen(false));
 
+  useEffect(() => {
     const handleEscape = (event) => {
       if (event.key === 'Escape') {
         setIsOpen(false);
@@ -32,12 +29,10 @@ const ResourceSizeSelect = ({ value, onChange }) => {
     };
 
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
       document.addEventListener('keydown', handleEscape);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isOpen]);
