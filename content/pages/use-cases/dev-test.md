@@ -242,7 +242,3 @@ url="/blog/how-dispatch-speeds-up-development-with-neon"
 <Admonition type="note" title="Get $100 in credits">
 Neon offers a Free Plan, and we’ll give you $100 in credits when you first upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
 </Admonition>
-
----
-
-<CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we're here to help you set things up. We can also discuss pricing options and annual contracts." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />

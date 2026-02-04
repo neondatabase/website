@@ -198,9 +198,7 @@ Custom-tailored for large teams, SaaS vendors, and fleet-level deployments.
 - Custom domain proxy
 - Security reviews and compliance questionnaires
 - Invoice billing and annual commitments
-- [Enterprise support](/docs/introduction/support#enterprise-support)
-
-To explore an Enterprise plan, [contact sales](https://neon.tech/contact-sales) or [request a trial](https://neon.tech/enterprise#request-trial).
+- Enterprise support
 
 ## Extra usage
 
@@ -396,8 +394,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [contact the Neon Sales team](/contact-sales).
-
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/feedback?msg=Storage%20limit%20increase).
 </details>
 
 ### Archive storage

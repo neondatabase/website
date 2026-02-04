@@ -20,10 +20,10 @@ const ReportPage = () => (
     <RecoverySolution />
     <CTA
       className="pb-[328px] pt-[380px] xl:pb-[234px] xl:pt-[303px] lg:pb-[193px] lg:pt-[273px] sm:pb-[150px] sm:pt-36"
-      title="Wanna meet us?"
+      title="Ready to get started?"
       titleClassName="font-title !text-[72px] max-w-[745px] xl:max-w-[600px] lg:!text-[56px] lg:max-w-[400px] lg:leading-none sm:!text-[40px]"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+      buttonText="Scale faster with $100 credits"
+      buttonUrl={LINKS.signupCredits}
     />
   </Layout>
 );

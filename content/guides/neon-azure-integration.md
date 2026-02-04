@@ -72,10 +72,6 @@ For organizations requiring enterprise-grade features, the Business Plan provide
 - Priority support for quick issue resolution
 - Private Link support for secure connectivity
 
-<Admonition type="note" title="Note">
-For custom enterprise requirements beyond the Business Plan, [you can reach out to Neon's sales team](/contact-sales).
-</Admonition>
-
 ## Configuring your resource
 
 For this guide, we'll use the Free Tier, but you can easily upgrade later as your needs grow. We will proceed to the resource configuration stage by clicking on **Subscribe** with the Free Plan selected.
