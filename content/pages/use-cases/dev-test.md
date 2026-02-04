@@ -205,7 +205,7 @@ text: 'With scale to zero',
 textSize="md"
 />
 
-<CTA title="Reach out to us for an exact quote" description="Tell us more about your use case and we’ll send you back detailed information on how much you could save with Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
+<CTA title="Get $100 to get started" description="Sign up here to get started free, and you'll have $100 credits ready when it's time to scale." buttonText="Contact us" buttonUrl="https://fyi.neon.tech/credits" />
 
 ### Can Neon also help lower the costs of my production database?
 
