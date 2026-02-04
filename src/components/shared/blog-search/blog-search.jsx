@@ -2,7 +2,7 @@
 
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import PropTypes from 'prop-types';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 
 import debounce from 'utils/debounce';
 
@@ -15,9 +15,14 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   const searchParams = useSearchParams();
   const urlQuery = searchParams.get('query') || '';
   const [query, setQuery] = useState(urlQuery);
-  
+  const isInternalUpdateRef = useRef(false);
+
   useEffect(() => {
-    setQuery(urlQuery);
+    // Only sync from URL if it's an external change (browser back/forward)
+    // not from our own typing which triggers debounced URL updates
+    if (!isInternalUpdateRef.current) {
+      setQuery(urlQuery);
+    }
   }, [urlQuery]);
   const [mounted, setMounted] = useState(false);
 
@@ -27,6 +32,7 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
   const debouncedUpdateURL = useMemo(
     () =>
       debounce((value) => {
+        isInternalUpdateRef.current = true;
         const params = new URLSearchParams(window.location.search);
         if (value) {
           params.set('query', value);
@@ -36,14 +42,16 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
         const queryString = params.toString();
         const newUrl = `${pathname}${queryString ? `?${queryString}` : ''}`;
         router.push(newUrl, { scroll: false });
+        // Reset flag after allowing time for URL change to propagate
+        setTimeout(() => {
+          isInternalUpdateRef.current = false;
+        }, 50);
       }, 100),
     [pathname, router]
   );
-useEffect(() => {
-  return () => {
-    debouncedUpdateURL.cancel?.();
-  };
-}, [debouncedUpdateURL]);
+  useEffect(() => () => {
+      debouncedUpdateURL.cancel?.();
+    }, [debouncedUpdateURL]);
 
   // Filter posts based on query
   const filteredPosts = useMemo(() => {
