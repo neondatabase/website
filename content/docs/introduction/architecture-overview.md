@@ -1,11 +1,11 @@
 ---
 title: Neon architecture
-subtitle: 'Serverless Postgres with decoupled compute and durable storage'
+subtitle: Serverless Postgres with decoupled compute and durable storage
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-01-13T19:29:46.136Z'
+updatedOn: '2026-02-04T16:31:12.751Z'
 ---
 
 ## Top level overview
