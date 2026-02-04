@@ -1,7 +1,7 @@
 ---
 title: HIPAA Compliance
 enableTableOfContents: true
-updatedOn: '2026-01-28T19:23:10.997Z'
+updatedOn: '2026-02-04T20:00:07.519Z'
 ---
 
 Neon offers HIPAA compliance as a self-serve feature available to customers on the [Scale](/docs/introduction/plans) plan.
