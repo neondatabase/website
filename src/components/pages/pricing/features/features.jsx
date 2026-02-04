@@ -31,7 +31,7 @@ const FEATURES = [
   {
     icon: monitoringIcon,
     title: 'Monitoring.',
-    description: `Built-in dashboards in the console give you <a href="${LINKS.docs}/introduction/monitoring-page">real time</a> visibility into usage and performance.`,
+    description: `Built-in dashboards in the console give you <a href="${LINKS.docs}/introduction/monitoring-page">real-time</a> visibility into usage and performance.`,
   },
   {
     icon: connectionsIcon,

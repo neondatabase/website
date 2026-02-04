@@ -123,7 +123,7 @@ export default {
       rows: '3',
       feature: {
         title: 'Restore window',
-        subtitle: 'Controls history',
+        subtitle: 'Controls history (configurable)',
       },
       free: 'Up to 6 hours<span>or 1 GB of data changes</span>',
       launch: 'Up to 7 days',
