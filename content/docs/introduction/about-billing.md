@@ -14,8 +14,6 @@ updatedOn: '2025-11-27T14:20:46.132Z'
 
 <a href="/docs/introduction/plans" description="Learn about Neon's usage-based pricing plans and what's included" icon="cards">Plans</a>
 
-<a href="/docs/introduction/legacy-plans" description="A reference for users currently on these plans — not available for new signups" icon="cards">Legacy plans</a>
-
 </DetailIconCards>
 
 ## Manage billing

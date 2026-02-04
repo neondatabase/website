@@ -13,16 +13,16 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
+  - /docs/introduction/legacy-plans
+  - /docs/introduction/extra-usage
 updatedOn: '2026-01-06T13:09:53.162Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Azure Marketplace**.
-
-<Admonition type="important">
-If you signed up with Neon through **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans.
+<Admonition type="note">
+If you signed up with Neon through **Azure Marketplace**, see [Azure Marketplace](/docs/introduction/billing-azure-marketplace) for plan and billing information specific to Azure users.
 </Admonition>
 
 ---

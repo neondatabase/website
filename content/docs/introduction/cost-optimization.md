@@ -7,7 +7,7 @@ updatedOn: '2025-12-11T15:40:49.867Z'
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
 
-## ☑ Compute (CU-hours)
+## Compute (CU-hours)
 
 Compute is typically the largest component of your Neon bill. You're charged based on compute size (in CUs) multiplied by the hours your compute is running.
 
@@ -23,7 +23,7 @@ Compute is typically the largest component of your Neon bill. You're charged bas
 
 - **Be aware of logical replication impact** — If you're using [logical replication](/docs/guides/logical-replication-neon), note that computes with active replication subscribers will not scale to zero, resulting in 24/7 compute usage. Plan accordingly and consider whether logical replication is necessary for all environments.
 
-## ☑ Storage (root and child branches)
+## Storage (root and child branches)
 
 Storage costs are based on actual data size for root branches and the minimum of accumulated changes or logical data size for child branches, billed in GB-months.
 
@@ -36,7 +36,133 @@ Storage costs are based on actual data size for root branches and the minimum of
 
 - **Implement branch lifecycle management** — Review your branches regularly and delete any that are no longer needed. Keeping your branch count under control reduces both storage costs and potential [extra branch charges](/docs/introduction/plans#extra-branches).
 
-## ☑ Instant restore storage
+### Storage FAQs
+
+<details>
+<summary>**Do branches add to storage?**</summary>
+
+When branches are created, they initially do not add to storage since they share data with the parent branch. However, as soon as changes are made to a branch, new WAL records are created, adding to your history. Additionally, when a branch ages out of your project's restore window, its data is no longer shared with its parent and is counted independently, thus adding to storage.
+
+To avoid branches consuming storage unnecessarily, [reset](/docs/guides/reset-from-parent) branches to restart the clock or [delete](/docs/manage/branches) them before they age out of the restore window.
+
+</details>
+
+<details>
+<summary>**Does a delete operation add to storage?**</summary>
+
+Yes. Any data-modifying operation, such as deleting a row from a table in your database, generates a WAL record, so even deletions temporarily increase your history size until those records age out of your restore window.
+
+</details>
+
+<details>
+<summary>**What increases the size of history?**</summary>
+
+Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/restore-window), they are removed, reducing your history and potentially decreasing your total storage size.
+
+</details>
+
+<details>
+<summary>**What can I do to minimize my storage?**</summary>
+
+Here are some strategies to consider:
+
+- **Optimize your restore window**
+
+  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/restore-window) for how to configure your restore window.
+
+- **Use branches instead of duplicating data**
+
+  Use short-lived Neon branches for things like testing, previews, and feature development instead of creating separate standalone databases. As long as your branch remains within the restore window, it shares data with its parent, making branches very storage-efficient. Added to that, branches can be created instantly, and they let you work with data that mirrors production.
+
+- **Consider the impact of deletions**
+
+  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your [restore window](/docs/introduction/restore-window). For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
+
+- **Delete or reset branches before they age out**
+
+  [Delete](/docs/manage/branches) old branches or [reset](/docs/guides/reset-from-parent) them before they age out of the restore window. Deleting branches before they age out avoids potentially large increases in storage. Resetting a branch sets the clock back to zero for that branch.
+
+</details>
+
+<details>
+<summary>**What happens when I reach my storage limit?**</summary>
+
+Your storage limit varies depending on your Neon plan.
+
+- **Free plan**: If you reach your storage limit on the Free plan, any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
+- **Paid plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in extra usage charges.
+
+</details>
+
+<details>
+<summary>**I have a small database. Why is my storage so large?**</summary>
+
+These factors could be contributing to your high storage consumption:
+
+- **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
+- **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
+
+To mitigate this issue, consider adjusting your [restore window](/docs/introduction/restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
+
+Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
+
+</details>
+
+<details>
+<summary>**How does running `VACUUM` or `VACUUM FULL` affect my storage costs?**</summary>
+
+If you're looking to control your storage costs, you might start by deleting old data from your tables, which reduces the data size you're billed for going forward. Since, in typical Postgres operations, deleted tuples are not physically removed until a vacuum is performed, you might then run `VACUUM`, expecting to see a further reduction in the `Data size` reported in the Console — but you don't see the expected decrease.
+
+**Why no reduction?**
+
+In Postgres, [VACUUM](https://www.postgresql.org/docs/current/sql-vacuum.html) doesn't reduce your storage size. Instead, it marks the deleted space in the table for reuse, meaning future data can fill that space without increasing data size. While, `VACUUM` by itself won't make the data size smaller, it is good practice to run it periodically, and it does not impact availability of your data.
+
+```sql
+VACUUM your_table_name;
+```
+
+**Use VACUUM FULL to reclaim space**
+
+Running `VACUUM FULL` _does_ reclaim physical storage space by rewriting the table, removing empty spaces, and shrinking the table size. This can help lower the **Data size** part of your storage costs. It's recommended to use `VACUUM FULL` when a table has accumulated a lot of unused space, which can happen after heavy updates or deletions. For smaller tables or less frequent updates, a regular `VACUUM` is usually enough.
+
+To reclaim space using `VACUUM FULL`, you can run the following command per table you want to vacuum:
+
+```sql
+VACUUM FULL your_table_name;
+```
+
+However, there are some trade-offs:
+
+- **Table locking** — `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
+- **Temporary storage spike** — The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free plan, this might even cause the operation to fail if you hit the storage limit.
+
+In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
+
+**Recommendations**
+
+- **Set a reasonable history window** — We recommend setting your restore window to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
+- **Use VACUUM FULL sparingly** — Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
+- **Consider timing** — Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
+- **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it's safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
+
+  To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
+
+  ```sql
+  VACUUM (VERBOSE, ANALYZE) playing_with_neon;
+  ```
+
+  See [VACUUM and ANALYZE statistic](/docs/postgresql/query-reference#vacuum-and-analyze-statistics) for a query that shows the last time vacuum and analyze were run.
+
+</details>
+
+<details>
+<summary>**What is the maximum data size that Neon supports?**</summary>
+
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [contact the Neon Sales team](/contact-sales).
+
+</details>
+
+## Instant restore storage
 
 Instant restore storage is based on the amount of change history (WAL records) retained, not the number of restores performed.
 
@@ -46,7 +172,7 @@ Instant restore storage is based on the amount of change history (WAL records) r
 
 - **Understand the trade-offs** — Reducing your restore window decreases instant restore storage costs but limits how far back you can restore data. Consider your actual recovery requirements and set the window accordingly.
 
-## ☑ Extra branches
+## Extra branches
 
 Extra branches beyond your plan's allowance are billed at $1.50/branch-month, prorated hourly. Plans include 10 branches for Free and Launch, 25 for Scale.
 
@@ -56,7 +182,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 - **Automate cleanup** — Consider implementing automated cleanup scripts using the [Neon API](/docs/manage/branches#branching-with-the-neon-api) or [Neon CLI](/docs/guides/branching-neon-cli) to stay within your plan's branch allowance.
 
-## ☑ Public data transfer
+## Public data transfer
 
 Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month, while paid plans include 100 GB/month, then $0.10/GB.
 
