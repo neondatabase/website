@@ -395,6 +395,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
 Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/feedback?msg=Storage%20limit%20increase).
+
 </details>
 
 ### Archive storage

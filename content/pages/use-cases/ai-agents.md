@@ -99,7 +99,7 @@ To get inspired, explore how others are building and scaling their agents on top
 - [Dyad](https://neon.com/blog/dyad-brings-postgres-to-local-ai-app-building-powered-by-neon)
 - [xpander.ai](https://neon.com/blog/xpander-ai-agents-slack-neon-backend)
 
-For instructions on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro). 
+For instructions on using the Neon API to provision and manage backends on behalf of your users, see [Neon for Platforms Documentation](https://neon.com/docs/guides/platform-integration-intro).
 
 To learn more about the Agent Plan, [see the details on this page](https://neon.com/programs/agents#agent-plan-pricing) or [fill out the application form directly, at the top of this page](#agent-form).
 
