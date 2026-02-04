@@ -53,26 +53,35 @@ Before getting started, ensure the following:
 
 ## Set up the integration
 
-1. **Get your Grafana Cloud OTLP configuration**
-   1. Sign in to the [Grafana Cloud Portal](https://grafana.com/orgs/)
-   1. Click on the **OpenTelemetry** card
-   1. Copy your OTLP endpoint URL and authentication credentials from the configuration details
+### 1. Get your Grafana Cloud credentials
 
-    <Admonition type="tip">
-    The Authentication key should follow the format `<openTelemetry-instance-id>:<grafana-cloud-token>`
-    </Admonition>
+In your Grafana Cloud instance:
+1. Navigate to **Connections** → **Add new connection**.
+2. Search for and select **Neon**.
+3. Follow the **Neon Integration** wizard to generate a token with the required permissions.
+4. Copy these three values for the next step:
+   - **OTLP Endpoint** (e.g., `https://otlp-gateway-prod-us-central-0.grafana.net/otlp`)
+   - **Instance ID** (will be used as the username)
+   - **API Key** (the generated token, will be used as the password)
 
-2. **Configure the Neon OpenTelemetry integration**
-   1. In the Neon Console, navigate to the **Integrations** page in your Neon project
-   1. Locate the **OpenTelemetry** card and click **Add**
-   1. Select **HTTP** as the connection protocol (recommended)
-   1. Enter your Grafana Cloud OTLP endpoint URL
-   1. Choose **Bearer** authentication and paste your Grafana Cloud authentication token
-   1. Configure the `service.name` resource attribute (e.g., "neon-postgres-production")
-   1. Select what you want to export:
-      - **Metrics**: System metrics and database statistics (CPU, memory, connections, etc.)
-      - **Postgres logs**: Error messages, warnings, connection events, and system notifications
-   1. Click **Add** to complete the integration
+<Admonition type="tip">
+The wizard automatically generates a token with the correct permissions (metrics:write, logs:write, traces:write).
+</Admonition>
+
+### 2. Configure the integration in Neon
+
+In the Neon Console:
+1. Go to your project's **Integrations** page and select **OpenTelemetry** → **Add**.
+2. Configure the connection:
+   - **Protocol**: HTTP (recommended).
+   - **Endpoint**: Your Grafana Cloud OTLP endpoint.
+   - **Authentication**: Basic.
+     - **Username**: Your OpenTelemetry Instance ID.
+     - **Password**: Your Grafana Cloud API Key.
+   - **Service name**: A descriptive name (e.g., "neon-postgres-production").
+   - **Export options**: Select **Metrics** and/or **Postgres logs** as needed.
+
+Click **Add** to enable the integration.
 
       <Admonition type="tip">
       You can change these settings later by editing your integration configuration from the **Integrations** page.
