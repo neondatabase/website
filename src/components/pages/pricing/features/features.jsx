@@ -16,7 +16,7 @@ const FEATURES = [
   {
     icon: storageIcon,
     title: 'High availability.',
-    description: `Storage uses <a href="${LINKS.docsHighAvailability}">multi-AZ</a> to minimize disruptions without HA standbys.`,
+    description: `Neon’s storage is <a href="${LINKS.docsHighAvailability}">multi-AZ</a> by default, without the need for HA standbys.`,
   },
   {
     icon: replicasIcon,
