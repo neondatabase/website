@@ -12,21 +12,21 @@ updatedOn: '2026-01-30T14:03:06.280Z'
 
 ## The `init` command
 
-The `init` command initializes your app project with Neon using your AI coding assistant. It installs the Neon MCP (Model Context Protocol) Server, Cursor skills, and the Neon VS Code Extension, enabling your AI assistant to help set up your Neon integration and providing database development tools directly in your IDE.
+The `init` command initializes your app project with Neon using your AI coding assistant. It configures the Neon MCP (Model Context Protocol) Server or installs the Neon Local Connect extension depending on your editor, installs agent skills, and enables your AI assistant to help set up your Neon integration.
 
 This command will:
 
 - Authenticate via OAuth (opens your browser)
 - Create a Neon API key for you automatically
-- Configure your editor to connect to Neon's remote MCP server
-- Install Cursor skills from the [Neon skills repository](https://github.com/neondatabase-labs/ai-skills)
-- Install the Neon VS Code Extension (for Cursor and VS Code)
+- For **VS Code and Cursor**: Install the [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect), which includes the Neon MCP Server and provides database development tools directly in your IDE
+- For **Claude Code**: Configure the Neon MCP Server in `~/.claude.json`
+- Install [Neon agent skills](https://github.com/neondatabase/agent-skills) for your selected editor(s)
 
 <Admonition type="note">
 Authentication is required to run this command. If you're not already authenticated, the command will automatically launch your browser to complete the authentication process.
 </Admonition>
 
-The `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**. It automatically detects which IDE you have installed and configures accordingly. Note that the VS Code Extension is installed for Cursor and VS Code only.
+The `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**. It automatically detects which editors you have installed and lets you choose which to configure.
 
 ### Usage
 
@@ -46,11 +46,7 @@ You can also run the `init` command in the root directory of your app with `npx`
 npx neonctl@latest init
 ```
 
-After running the command, restart your IDE and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The Neon MCP Server installs Cursor skills from the [Neon skills repository](https://github.com/neondatabase-labs/ai-skills) to help you get started with Neon, including helping you configure a database connection. The Neon VS Code Extension (installed for Cursor and VS Code) provides database schema browsing, SQL editing, and table data management directly in your IDE.
-
-<Admonition type="note">
-For Cursor users, you can also ask: "Get started with Neon using MCP Resource"
-</Admonition>
+After running the command, restart your editor and ask your AI assistant to "Get started with Neon" to launch an interactive onboarding guide. The command installs [Neon agent skills](https://github.com/neondatabase/agent-skills) to help you get started with Neon, including helping you configure a database connection. For Cursor and VS Code users, the Neon Local Connect extension also provides database schema browsing, SQL editing, and table data management directly in your IDE.
 
 ### Options
 
@@ -77,7 +73,7 @@ npx neonctl@latest init
 │  ◼ VS Code
 │  ◻ Claude CLI
 │
-◒  Authenticating
+◒  Authenticating...
 ┌────────┬──────────────────┬────────┬────────────────┐
 │ Login  │ Email            │ Name   │ Projects Limit │
 ├────────┼──────────────────┼────────┼────────────────┤
@@ -85,43 +81,46 @@ npx neonctl@latest init
 └────────┴──────────────────┴────────┴────────────────┘
 ◇  Authentication successful ✓
 │
-◇  Installed Neon MCP server
+◇  Installing agent skills for Neon...
 │
-◇  Installed Neon VS Code Extension
+◇  Agent skills installed ✓
 │
-◇  Success! Neon is now ready to use with Cursor / VS Code.
+◇  Neon Local Connect extension installed for Cursor / VS Code.
 │
+├  What's next? ───────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                  │
+│  Restart Cursor / VS Code, open the Neon extension and type                                      |
+|  in "Get started with Neon" in your agent chat                                                   │
+│                                                                                                  │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────╯
 │
-◇  What's next? ─────────────────────────────────────────────────────────────╮
-│                                                                            │
-│  Restart Cursor / VS Code and type in "Get started with Neon" in the chat  │
-│                                                                            │
-├────────────────────────────────────────────────────────────────────────────╯
+└  Have feedback? Email us at feedback@neon.tech
 ```
 
 ## Supported AI Assistants
 
 The `init` command supports:
 
-- **Cursor** — Ask: "Get started with Neon using MCP Resource"
+- **Cursor** — Ask: "Get started with Neon"
 - **VS Code with GitHub Copilot** — Ask: "Get started with Neon"
-- **Claude Code CLI** — Ask: "Get started with Neon"
+- **Claude Code** — Ask: "Get started with Neon"
 
-The command automatically detects your IDE and configures the appropriate MCP server integration.
+The command automatically detects which editors are installed and lets you select which to configure.
 
 ## Manual setup
 
 If you prefer to configure manually or need to set up for other IDEs, [create a Neon API key](https://console.neon.tech/app/settings?modal=create_api_key) in the Neon Console and use this configuration:
 
-Example configuration for Cursor:
+Example configuration for Claude Code (`~/.claude.json`):
 
 ```json
 {
   "mcpServers": {
     "Neon": {
+      "type": "http",
       "url": "https://mcp.neon.tech/mcp",
       "headers": {
-        "Authorization": "Bearer <$NEON_API_KEY>"
+        "Authorization": "Bearer <NEON_API_KEY>"
       }
     }
   }
