@@ -21,6 +21,7 @@ const getAllPosts = async () => {
       // eslint-disable-next-line consistent-return
       return { slug: slugWithoutFirstSlash, title, subtitle, isDraft, content, redirectFrom };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
@@ -69,6 +70,7 @@ const getAllChangelogs = async () => {
         redirectFrom,
       };
     })
+    .filter(Boolean)
     .filter((item) => process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production' || !item.isDraft);
 };
 
