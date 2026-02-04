@@ -1,8 +1,6 @@
 ---
 title: Scale to Zero
 subtitle: Minimize costs by automatically scaling inactive databases to zero
-redirectFrom:
-  - /docs/introduction/scale-to-zero
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.466Z'
 ---
