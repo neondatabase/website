@@ -45,10 +45,10 @@ const Card = ({
             <figure className="mt-auto w-full">
               {quote && (
                 <>
-                  <blockquote>
-                    <p
-                      className="text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base"
-                      dangerouslySetInnerHTML={{ __html: `“${quote}”` }}
+                  <blockquote className="before:content-['“'] after:content-['”']">
+                    <div
+                      className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base [&_p]:inline"
+                      dangerouslySetInnerHTML={{ __html: `<p>${quote}</p>` }}
                     />
                   </blockquote>
                   {author && author.name && (

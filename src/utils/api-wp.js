@@ -647,6 +647,59 @@ const getAllWpCaseStudiesCategories = cache(async () => {
   return [{ name: 'All', slug: 'all' }, ...updatedCategories];
 });
 
+const getUseCasesCards = cache(async () => {
+  const useCasesQuery = gql`
+    query UseCasesCards {
+      globalFields {
+        useCaseCards {
+          useCaseCards {
+            icon
+            title
+            description
+            link {
+              url
+              title
+              target
+            }
+            linkedCaseStudy {
+              ... on CaseStudy {
+                title
+                slug
+                caseStudyPost {
+                  logo {
+                    mediaItemUrl
+                    mediaDetails {
+                      width
+                      height
+                    }
+                  }
+                  quote
+                  author {
+                    name
+                    post
+                  }
+                  isInternal
+                  externalUrl
+                  post {
+                    ... on Post {
+                      slug
+                    }
+                  }
+                }
+              }
+            }
+            tags
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await fetchGraphQL(graphQLClient).request(useCasesQuery);
+
+  return data?.globalFields?.useCaseCards?.useCaseCards || [];
+});
+
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
@@ -656,6 +709,7 @@ export {
   getAllWpPosts,
   getAllPosts,
   getCategoryBySlug,
+  getUseCasesCards,
   getWpPostBySlug,
   getPostsByCategorySlug,
   getWpPreviewPost,
