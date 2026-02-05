@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2025-10-31T11:07:57.604Z'
+updatedOn: '2026-02-05T13:09:31.725Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
