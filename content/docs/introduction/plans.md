@@ -255,7 +255,7 @@ Available only on the **Scale** plan.
 
 ### Instant restore
 
-Neon stores a change history to support instant restore.
+Neon stores a change history to support instant restore. This history is billed only for root branches.
 
 - **Free**: No charge, 6-hour limit, capped at 1 GB of change history
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
@@ -481,14 +481,14 @@ How is extra branch usage billed?
  Example: If your plan includes 10 branches and you run 2 extra branches for 5 hours each, that's 10 branch-hours (~$0.02).
 
 How are instant restores billed?
-: Instant restore storage is billed based on the amount of change history retained, not the number of restores performed.  
+: Instant restore storage is billed based on the amount of change history retained on root branches, not the number of restores performed.  
  • Free: Up to 6 hours of history, capped at 1 GB of changes, no charge.  
  • Launch: Up to 7 days of history, billed at $0.20/GB-month.  
  • Scale: Up to 30 days of history, billed at $0.20/GB-month.  
  Change history is stored as Postgres WAL records.
 
 Is instant restore history accumulated at the project or branch level?
-: Instant restore history is accumulated at the project level. It applies to all branches in your project. You set a single restore window (e.g., 7 days or 30 days) for the entire project, and the history size is the cumulative total of all change history across all branches. You cannot enable, disable, or configure instant restore per branch.
+: Instant restore history is accumulated at the project level, but only root branches contribute to your billed instant restore storage. You set a single restore window (e.g., 7 days or 30 days) for the entire project. You cannot enable, disable, or configure instant restore per branch.
 
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
