@@ -106,10 +106,14 @@ Implement the following examples to showcase different Next.js patterns.
 Modify the main page to fetch and display the database version on the server.
 **Replace the contents of `app/page.tsx`** with the code corresponding to the selected driver.
 
+**Important for AI:** The code examples below include `export const dynamic = 'force-dynamic'` to ensure fresh database queries on every request. After implementing, briefly inform the user that this setting prevents Next.js from caching the page statically, and they can explore other caching strategies in the [Next.js Caching docs](https://nextjs.org/docs/app/building-your-application/caching) if needed.
+
 ##### Option A & B: For `@neondatabase/serverless` or `postgres`
 
 ```tsx title="app/page.tsx"
 import { sql } from '@/app/lib/db';
+
+export const dynamic = 'force-dynamic';
 
 async function getDbVersion() {
   const result = await sql`SELECT version()`;
@@ -131,6 +135,8 @@ export default async function Home() {
 
 ```tsx title="app/page.tsx"
 import { pool } from '@/app/lib/db';
+
+export const dynamic = 'force-dynamic';
 
 async function getDbVersion() {
   const client = await pool.connect();
