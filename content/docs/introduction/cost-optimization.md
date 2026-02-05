@@ -7,6 +7,8 @@ updatedOn: '2025-12-11T15:40:49.867Z'
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.
 
+To monitor your current usage, check the **Billing** page in the [Neon Console](https://console.neon.tech), which shows your charges to date for each billing metric.
+
 ## Compute (CU-hours)
 
 Compute is typically the largest component of your Neon bill. You're charged based on compute size (in CUs) multiplied by the hours your compute is running.
@@ -23,6 +25,8 @@ Compute is typically the largest component of your Neon bill. You're charged bas
 
 - **Be aware of logical replication impact** — If you're using [logical replication](/docs/guides/logical-replication-neon), note that computes with active replication subscribers will not scale to zero, resulting in 24/7 compute usage. Plan accordingly and consider whether logical replication is necessary for all environments.
 
+- **Consider read replica costs** — [Read replicas](/docs/introduction/read-replicas) are billed as separate compute endpoints. If you have read replicas, they add to your total compute hours. Review whether all replicas are needed, and consider scale to zero settings for replicas used infrequently.
+
 ## Storage (root and child branches)
 
 Storage costs are based on actual data size for root branches and the minimum of accumulated changes or logical data size for child branches, billed in GB-months.
@@ -31,17 +35,17 @@ Storage costs are based on actual data size for root branches and the minimum of
 
 - **Manage child branch storage** — Child branches are billed for the minimum of accumulated data changes or your logical data size—capped at your actual data size. While this prevents charges from exceeding your data size, managing branches effectively still helps minimize costs:
   - Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
-  - Delete child branches when they're no longer needed
+  - [Delete](/docs/manage/branches#delete-a-branch) child branches when they're no longer needed
   - For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead—root branches are billed on your actual data size.
 
-- **Implement branch lifecycle management** — Review your branches regularly and delete any that are no longer needed. Keeping your branch count under control reduces both storage costs and potential [extra branch charges](/docs/introduction/plans#extra-branches).
+- **Implement branch lifecycle management** — Review your branches regularly and [delete](/docs/manage/branches#delete-a-branch) any that are no longer needed. Keeping your branch count under control reduces both storage costs and potential [extra branch charges](/docs/introduction/plans#extra-branches).
 
 ### Storage FAQs
 
 <details>
 <summary>**Do branches add to storage?**</summary>
 
-When branches are created, they initially do not add to storage since they share data with the parent branch. However, as soon as changes are made to a branch, new WAL records are created, adding to your history. Additionally, when a branch ages out of your project's restore window, its data is no longer shared with its parent and is counted independently, thus adding to storage.
+When branches are created, they initially do not add to storage since they share data with the parent branch. However, as soon as changes are made to a branch, new data is written, adding to child branch storage.
 
 To avoid branches consuming storage unnecessarily:
 
@@ -52,39 +56,9 @@ To avoid branches consuming storage unnecessarily:
 </details>
 
 <details>
-<summary>**Does a delete operation add to storage?**</summary>
+<summary>**Do delete operations add to storage?**</summary>
 
-Yes. Any data-modifying operation, such as deleting a row from a table in your database, generates a WAL record, so even deletions temporarily increase your history size until those records age out of your restore window.
-
-</details>
-
-<details>
-<summary>**What increases the size of history?**</summary>
-
-Any data-modifying operation increases the size of your history. As WAL records age out of your [restore window](/docs/introduction/restore-window), they are removed, reducing your history and potentially decreasing your total storage size.
-
-</details>
-
-<details>
-<summary>**What can I do to minimize my storage?**</summary>
-
-Here are some strategies to consider:
-
-- **Optimize your restore window**
-
-  Your restore window setting controls how much change history your project retains. Decreasing history reduces the window available for things like instant restore or time-travel. Retaining no history at all would make branches expensive, as a branch can only share data with its parent if history is retained. Your goal should be a balanced restore window configuration; one that supports the features you need but does not consume too much storage. See [Restore window](/docs/introduction/restore-window) for how to configure your restore window.
-
-- **Use branches instead of duplicating data**
-
-  Use short-lived Neon branches for things like testing, previews, and feature development instead of creating separate standalone databases. As long as your branch remains within the restore window, it shares data with its parent, making branches very storage-efficient. Added to that, branches can be created instantly, and they let you work with data that mirrors production.
-
-- **Consider the impact of deletions**
-
-  It may seem counterintuitive, but deleting rows from a table temporarily increases storage because delete operations are logged as part of your change history. The records for those deletions remain part of your history until they age out of your [restore window](/docs/introduction/restore-window). For mass deletions, `DELETE TABLE` and `TRUNCATE TABLE` operations are more storage-efficient since they log a single operation rather than a record for each deleted row.
-
-- **Delete or reset branches before they age out**
-
-  [Delete](/docs/manage/branches) old branches or [reset](/docs/guides/reset-from-parent) them before they age out of the restore window. Deleting branches before they age out avoids potentially large increases in storage. Resetting a branch sets the clock back to zero for that branch.
+Yes. Any data-modifying operation, including deletes, generates [WAL records](/docs/reference/glossary#write-ahead-logging-wal) that temporarily increase your storage size until they age out of your restore window. For mass deletions, `TRUNCATE TABLE` is more storage-efficient since it logs a single operation rather than a record for each deleted row.
 
 </details>
 
@@ -93,22 +67,21 @@ Here are some strategies to consider:
 
 Storage limits depend on your Neon plan:
 
-- **Free plan**: The Free plan includes 0.5 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or upgrade to a paid plan.
+- **Free plan**: The Free plan includes 0.5 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or [upgrade to a paid plan](/docs/introduction/manage-billing#change-your-plan).
 - **Paid plans**: Launch and Scale plans have no storage limit. Storage is billed based on actual usage at $0.35/GB-month, so you simply pay for what you use.
 
 </details>
 
 <details>
-<summary>**I have a small database. Why is my storage so large?**</summary>
+<summary>**I have a small database. Why is my bill higher than expected?**</summary>
 
-These factors could be contributing to your high storage consumption:
+If your database is small but your bill seems high, check these factors:
 
-- **Frequent data modifications:** If you are performing a lot of writes (inserts, updates, deletes), each operation generates WAL records, which are added to your history. For instance, rewriting your entire database daily can lead to a storage amount that is a multiple of your database size, depending on the number of days of history your Neon project retains.
-- **Restore window:** The length of your restore window plays a significant role. If you perform many data modifications daily and your restore window is set to 7 days, you will accumulate a 7-day history of those changes, which can increase your storage significantly.
+- **Instant restore history:** Every write operation (insert, update, delete) generates WAL records that are retained for instant restore. If you perform many data modifications daily with a 7-day restore window, you'll accumulate 7 days of change history. This is billed separately as **Instant restore storage** at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
+- **Unused branches:** Child branches accumulate storage over time. If you created branches and forgot about them, they could be contributing to your storage costs. Review and [delete](/docs/manage/branches#delete-a-branch) branches you no longer need.
+- **Table bloat:** Frequent updates and deletes can cause table bloat (dead tuples). While this doesn't affect your Neon bill directly until you run VACUUM FULL, it can make your data size larger than expected. See the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) for details.
 
-To mitigate this issue, consider adjusting your [restore window](/docs/introduction/restore-window) setting. Perhaps you can do with a shorter window for instant restore, for example. Retaining less history should reduce your future storage consumption.
-
-Also, make sure you don't have old branches lying around. If you created a bunch of branches and let those age out of your restore window, that could also explain why your storage is so large.
+To see what's driving your costs, check the **Billing** page in the Neon Console, which shows your charges to date for each billing metric.
 
 </details>
 
@@ -144,10 +117,8 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 
 **Recommendations**
 
-- **Set a reasonable history window** — We recommend setting your restore window to balance your data recovery needs and storage costs. Longer history means more data recovery options, but it consumes more storage.
-- **Use VACUUM FULL sparingly** — Because it locks tables and can temporarily increase storage costs, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed and you're prepared for a temporary spike in storage consumption.
-- **Consider timing** — Running `VACUUM FULL` near the end of the month can help minimize the time that temporary storage spikes impact your bill, since charges are prorated.
-- **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute endpoint suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), it's safer to run manual `VACUUM` operations regularly on frequently updated tables rather than relying on autovacuum. This helps avoid potential issues caused by the loss of statistics when your compute endpoint is suspended.
+- **Use VACUUM FULL sparingly** — Because it locks tables and can temporarily increase storage, only run `VACUUM FULL` when there is a significant amount of space to be reclaimed.
+- **Manual VACUUM for scale to zero users** — In Neon, [autovacuum](https://www.postgresql.org/docs/current/routine-vacuuming.html#AUTOVACUUM) is enabled by default. However, when your compute suspends due to inactivity, the database activity statistics that autovacuum relies on are lost. If your project uses [scale to zero](/docs/guides/scale-to-zero-guide#considerations), consider running manual `VACUUM` operations regularly on frequently updated tables.
 
   To clean a single table named `playing_with_neon`, analyze it for the optimizer, and print a detailed vacuum activity report:
 
@@ -168,13 +139,15 @@ Paid plans (Launch and Scale) support a logical data size of up to 16 TB per bra
 
 ## Instant restore storage
 
-Instant restore storage is based on the amount of change history (WAL records) retained, not the number of restores performed.
+Instant restore storage is the change history (WAL records) retained for point-in-time recovery. It's billed at $0.20/GB-month on paid plans, separate from your data storage. The Free plan includes up to 1 GB of instant restore history at no charge.
 
 **Optimization strategies:**
 
-- **Adjust your restore window** — By default, Neon retains history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, you can reduce your restore window to lower costs. Find the right balance between restore capability and cost. See [Restore window](/docs/introduction/restore-window).
+- **Adjust your restore window** — By default, Neon retains instant restore history for 6 hours on Free plan projects and 1 day on paid plan projects. You can increase this up to the maximum for your plan (6 hours for Free, 7 days for Launch, 30 days for Scale). If you don't need much recovery capability, reduce your restore window to lower costs. See [Restore window](/docs/introduction/restore-window).
 
-- **Understand the trade-offs** — Reducing your restore window decreases instant restore storage costs but limits how far back you can restore data. Consider your actual recovery requirements and set the window accordingly.
+- **Understand the trade-offs** — A longer restore window means more recovery options but higher instant restore storage costs. A shorter window reduces costs but limits how far back you can restore. Consider your actual recovery requirements when setting the window.
+
+- **High-write workloads generate more history** — If your application performs many writes, you'll accumulate instant restore history faster. For write-heavy workloads, a shorter restore window can significantly reduce costs.
 
 ## Extra branches
 
@@ -196,4 +169,4 @@ Public network transfer (egress) is the data sent from your databases over the p
   - Data sent to client applications
   - [Logical replication](/docs/reference/glossary#logical-replication) to any destination, including other Neon databases
 
-- **Review your bill** — If you see unexpectedly high public data transfer charges, [contact support](/docs/introduction/support) for assistance. Neon does not currently expose detailed data transfer metrics in the Console.
+- **Review your invoice** — If you see unexpectedly high public data transfer charges, [contact support](/docs/introduction/support) for assistance. Neon does not currently expose detailed data transfer metrics in the Console. See [Invoices](/docs/introduction/manage-billing#invoices) for how to access and download your invoices.
