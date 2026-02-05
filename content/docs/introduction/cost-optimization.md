@@ -43,7 +43,11 @@ Storage costs are based on actual data size for root branches and the minimum of
 
 When branches are created, they initially do not add to storage since they share data with the parent branch. However, as soon as changes are made to a branch, new WAL records are created, adding to your history. Additionally, when a branch ages out of your project's restore window, its data is no longer shared with its parent and is counted independently, thus adding to storage.
 
-To avoid branches consuming storage unnecessarily, [reset](/docs/guides/reset-from-parent) branches to restart the clock or [delete](/docs/manage/branches) them before they age out of the restore window.
+To avoid branches consuming storage unnecessarily:
+
+- Set a [branch expiration](/docs/guides/branch-expiration) (time to live) to automatically delete branches after a specified period
+- [Reset](/docs/guides/reset-from-parent) branches to restart the clock
+- [Delete](/docs/manage/branches) branches before they age out of the restore window
 
 </details>
 
@@ -87,10 +91,10 @@ Here are some strategies to consider:
 <details>
 <summary>**What happens when I reach my storage limit?**</summary>
 
-Your storage limit varies depending on your Neon plan.
+Storage limits depend on your Neon plan:
 
-- **Free plan**: If you reach your storage limit on the Free plan, any further database operations that would increase storage (inserts, updates, and deletes) will fail, and you will receive an error message.
-- **Paid plans**: For users on a paid plan (Launch, Scale, or Business), exceeding your storage limit will result in extra usage charges.
+- **Free plan**: The Free plan includes 0.5 GB of storage per project. If you reach this limit, database operations that would increase storage (inserts, updates, and deletes) will fail until you reduce your storage or upgrade to a paid plan.
+- **Paid plans**: Launch and Scale plans have no storage limit. Storage is billed based on actual usage at $0.35/GB-month, so you simply pay for what you use.
 
 </details>
 
@@ -134,9 +138,9 @@ VACUUM FULL your_table_name;
 However, there are some trade-offs:
 
 - **Table locking** — `VACUUM FULL` locks your table during the operation. If this is your production database, this may not be an option.
-- **Temporary storage spike** — The process creates a new table, temporarily increasing your storage. If the table is large, this could push you over your plan's storage allowance, triggering extra usage charges. On the Free plan, this might even cause the operation to fail if you hit the storage limit.
+- **Temporary storage spike** — The process creates a new copy of the table, temporarily increasing your storage usage. On the Free plan, this could cause the operation to fail if you hit the 0.5 GB storage limit.
 
-In short, `VACUUM FULL` can help reduce your data size and future storage costs, but it can also result in temporary extra usage charges for the current billing period.
+In short, `VACUUM FULL` can help reduce your data size and future storage costs, but be aware of the temporary storage spike and table locking during the operation.
 
 **Recommendations**
 
@@ -158,7 +162,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [contact the Neon Sales team](/contact-sales).
+Paid plans (Launch and Scale) support a logical data size of up to 16 TB per branch. The Free plan is limited to 0.5 GB per project. To increase the 16 TB limit, [contact the Neon Sales team](/contact-sales).
 
 </details>
 

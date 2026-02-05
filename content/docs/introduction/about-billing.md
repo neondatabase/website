@@ -34,6 +34,4 @@ updatedOn: '2025-11-27T14:20:46.132Z'
 
 <a href="/enterprise" description="Find out how Enterprises are maximizing engineering efficiency with Neon" icon="handshake">Neon for the Enterprise</a>
 
-<a href="/docs/introduction/enterprise-sales-process" description="Learn about Neon's Enterprise sales process and what to expect" icon="import">Neon Enterprise Sales Process</a>
-
 </DetailIconCards>
