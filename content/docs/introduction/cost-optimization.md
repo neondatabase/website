@@ -75,7 +75,7 @@ Storage limits depend on your Neon plan:
 
 If your database is small but your bill seems high, check these factors:
 
-- **Instant restore history:** Every write operation (insert, update, delete) generates WAL records that are retained for instant restore. If you perform many data modifications daily with a 7-day restore window, you'll accumulate 7 days of change history. This is billed separately as **Instant restore storage** at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
+- **Instant restore history:** Neon charges for point-in-time restore (PITR) storage only for branches you can point-in-time restore from: **root branches**. Child branches do not add to PITR storage charges. If you perform many data modifications on your root branch(es) with a 7-day restore window, you'll accumulate 7 days of that billable history at $0.20/GB-month. See [Instant restore storage](#instant-restore-storage) for optimization strategies.
 - **Unused branches:** If you created branches, performed write operations, and forgot about the branches, they could be contributing to your storage costs. Review and [delete](/docs/manage/branches#delete-a-branch) branches you no longer need.
 - **Table bloat:** Frequent updates and deletes can cause table bloat (dead tuples), which can make your data size larger than expected. See the [VACUUM FAQ](#how-does-running-vacuum-or-vacuum-full-affect-my-storage-costs) for details.
 
@@ -137,7 +137,7 @@ Paid plans (Launch and Scale) support a logical data size of up to 16 TB per bra
 
 ## Instant restore storage
 
-Instant restore storage is the change history (WAL records) retained for point-in-time recovery, billed only for root branches. It's billed at $0.20/GB-month on paid plans, separate from your data storage. The Free plan includes up to 1 GB of instant restore history at no charge.
+Instant restore storage (PITR storage) is the change history retained for point-in-time recovery. Neon only charges for PITR storage on branches you can point-in-time restore from: **root branches**. You cannot point-in-time restore from child branches, so child branches do not add to this charge. Instant restore storage is billed at $0.20/GB-month on paid plans, separate from your data storage. The Free plan includes up to 1 GB of instant restore history at no charge.
 
 **Optimization strategies:**
 
@@ -145,7 +145,7 @@ Instant restore storage is the change history (WAL records) retained for point-i
 
 - **Understand the trade-offs.** A longer restore window means more recovery options but higher instant restore storage costs. A shorter window reduces costs but limits how far back you can restore. Consider your actual recovery requirements when setting the window.
 
-- **High-write workloads generate more history.** If your application performs many writes, you'll accumulate instant restore history faster. For write-heavy workloads, a shorter restore window can significantly reduce costs.
+- **High-write workloads on root branches generate more history.** The more writes on your root branch(es), the more instant restore history accumulates. For write-heavy root branches, a shorter restore window can significantly reduce costs.
 
 ## Extra branches
 
