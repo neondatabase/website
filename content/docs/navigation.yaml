@@ -1055,8 +1055,6 @@
           slug: introduction/plans
         - title: Agent plan
           slug: introduction/agent-plan
-        - title: Legacy plans
-          slug: introduction/legacy-plans
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Monitor billing
@@ -1067,8 +1065,6 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
-        - title: Enterprise sales process
-          slug: introduction/enterprise-sales-process
 
     - title: Neon on Azure
       icon: azure

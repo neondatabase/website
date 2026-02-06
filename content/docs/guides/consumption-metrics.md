@@ -9,7 +9,7 @@ updatedOn: '2026-01-23T18:24:22.655Z'
 ---
 
 <Admonition type="note">
-Consumption metrics apply to Scale and Enterprise plan accounts, and to [Neon's legacy Scale, Business, and Enterprise accounts](/docs/introduction/legacy-plans).
+Consumption metrics apply to Scale and Enterprise plan accounts.
 
 **Important:** The consumption APIs do not retrieve all billable metrics for Neon's current [usage-based Scale plan](https://neon.com/docs/introduction/about-billing). See [Usage-based pricing limitations](#usage-based-pricing-limitations) for details.
 </Admonition>
