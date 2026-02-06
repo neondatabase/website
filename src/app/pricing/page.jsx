@@ -34,90 +34,138 @@ const faqItems = [
     id: 'what-is-a-project',
     initialState: 'open',
     answer: `
-      <p>A project in Neon is the top-level container for your database environment. Each project includes your primary database, its branches, and compute resources. You can think of it like a GitHub repo - one project, many branches. <a href="${LINKS.docs}/manage/overview">Learn more about Neon’s object hierarchy.</a></p>
+      <p>A project in Neon is the top-level container for your database environment. Each project includes your primary database, its branches, and compute resources. You can think of it like a GitHub repo: one project, many branches. <a href="${LINKS.docs}/manage/overview">Learn more about Neon's object hierarchy.</a></p>
     `,
   },
   {
     question: 'What is a CU?',
     answer: `
-      <p>A CU (short for Compute Unit) is Neon's way of representing instance size. It defines how much CPU and memory your database is using at any moment. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources.</p>
+      <p>A CU (short for Compute Unit) is Neon's way of representing compute size. It defines how much CPU and memory your database is using at any moment. Each CU allocates approximately 1 vCPU and 4 GB of RAM. <a href="${LINKS.docs}/manage/computes#compute-size-and-autoscaling-configuration">Learn more about compute sizing on Neon.</a></p>
     `,
   },
   {
-    question: 'How is compute usage measured in Neon?',
+    question: 'What is a CU-hour?',
     id: 'compute-usage',
     answer: `
-      <p>Neon is a serverless database: it bills per true monthly usage. Your compute monthly usage is based on how long your compute runs and at what size.<br/>We measure compute usage in CU-hours:</p>
-      <code>CU-hours = CU size of your compute × number of hours it runs</code>
-      <p>For example: if a 2 CU machine runs for 3 hours, that’s 6 CU-hours of usage.<br/><a href="${LINKS.docs}/introduction/autoscaling">Learn more about Neon’s serverless model.</a></p>
+      <p>A CU-hour is Neon's unit for measuring compute usage.</p>
+      <p>Because Neon is a serverless database, you're billed only for the compute resources you actually use. In other words, your monthly compute usage depends on:</p>
+      <ul>
+        <li>How many compute endpoints are you running</li>
+        <li>How large your compute endpoints are (in CUs)</li>
+        <li>How long they run (in hours)</li>
+      </ul>
+      <p>For a single compute, the calculation works similar to this:</p>
+      <code>Monthly CU-hours = [average CU size] × [number of hours the compute runs in the month]</code>
+      <code>Monthly compute cost = [monthly CU-hours] × [CU-hour price]</code>
+      <p>The CU-hour price depends on your pricing plan:</p>
+      <ul>
+        <li>Launch plan: $0.106 per CU-hour</li>
+        <li>Scale plan: $0.222 per CU-hour</li>
+      </ul>
+      <p>Remember that when your database is idle, compute can scale down to zero, so you don't consume CU-hours while it's not running. <a href="${LINKS.docs}/introduction/about-billing">Learn more about Neon's billing.</a></p>
     `,
   },
   {
-    question: 'How is storage usage billed in Neon?',
+    question: 'What does 100 CU-hours per project give me on the Free plan?',
     answer: `
-      <p>Neon also charges for storage based on actual data usage, not allocated capacity. We measure this in GB-months:</p>
-      <code>1 GB-month = 1 GB stored for 1 full month</code>
-      <p>Storage is metered hourly and summed over the month, so you only pay for what you actually use, not for the maximum size your database reaches.</p>
+      <p>On the Free plan, each project gets 100 CU-hours per month, and compute automatically scales down to zero when idle. What this means in practice:</p>
+      <ul>
+        <li>You can create up to 100 projects, each with its own independent 100 CU-hour allowance</li>
+        <li>CU-hours are only consumed while a database is actively running queries. When a project is idle, compute scales to zero and uses no CU-hours</li>
+        <li>Usage is typically spread across short bursts of activity, not continuous runtime</li>
+      </ul>
+      <p>A realistic example for a single project:</p>
+      <ul>
+        <li>The database runs at an average of 1 CU for ~3 hours per day. It scales down to zero the rest of the time</li>
+        <li>Over a month, this uses roughly 90 CU-hours, staying within the Free plan limits for that project</li>
+      </ul>
+      <p>This model is designed to make it practical to have many small or intermittent databases (for development, demos, previews, or experiments) without being forced into an upgrade. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
     `,
   },
   {
-    question: 'What happens with branches and storage?',
+    question: 'What does "no monthly minimum" mean on paid plans?',
+    answer: `
+      <p>Neon's paid plans don't require a minimum monthly spend or base fee. You're billed purely based on usage. If one month you barely use Neon, your bill might be just a few dollars.</p>
+      <p>For example, if your databases are mostly idle that month, or you only run them briefly for development or testing, you'll only pay for the compute and storage actually consumed during that time. Remember that Neon databases scale to zero by default.</p>
+    `,
+  },
+  {
+    question: 'Are the Free Plan quotas included in the paid plans?',
+    answer: `
+      <p>No. Neon's paid plans work independently of the Free plan.</p>
+      <p>When you're on a paid plan, usage starts metering from zero for both compute and storage. Free plan quotas don't apply once you upgrade. Instead, you're billed purely based on actual usage, at the rates of your paid plan.</p>
+      <p>You should consider a paid plan if:</p>
+      <ul>
+        <li>You expect higher or more sustained usage than what's included per project on the Free plan</li>
+        <li>You care about production guarantees, such as consistent availability, predictable performance, and never having your database paused due to usage limits</li>
+      </ul>
+      <p>If your usage fits comfortably within the Free plan and you're not running a production workload, there's no reason to upgrade. The Free plan is designed to be genuinely useful for development and prototyping. <a href="${LINKS.blog}/why-so-many-projects-in-the-neon-free-plan">Learn more about our Free Plan philosophy.</a></p>
+    `,
+  },
+  {
+    question: 'How is storage billed in Neon?',
     id: 'branches-and-storage',
     answer: `
-      <p>Each project in Neon starts with a root branch (your main database). You can then create child branches, which are isolated copies of your database state - great for testing, previews, and development.<br/>But Neon uses a copy-on-write model, so:</p>
+      <p>In Neon, you don't provision or manage storage in advance. Storage scales automatically and invisibly as your data grows. At the end of each month, you're billed for the storage actually consumed per project, measured in GB-months.</p>
+      <p>Neon bills storage usage using two separate metrics:</p>
+      <p><strong>History storage (or instant restore storage)</strong></p>
+      <p>Neon retains a history of database changes so you can restore a branch to a previous point in time, create branches from past states, run time travel queries, and more. This history is controlled by your <a href="${LINKS.docs}/introduction/restore-window">restore window</a>, which is configurable per project (1 day by default in paid plans).</p>
+      <p>History storage is billed based on the amount of Write-Ahead Log (WAL) history retained within your restore window, at $0.20 per GB-month on paid plans. This is billed separately from your regular database storage.</p>
+      <p>If you don't need deep recovery or long time travel capabilities, you can shorten the restore window to reduce costs.</p>
+      <p><strong>Database storage (root and child branches)</strong></p>
+      <p>This is the storage used by your database data itself. Since Neon databases can branch, this is how branches contribute to database storage:</p>
       <ul>
-        <li>Child branches do not increase your storage bill unless they diverge from the root.</li>
-        <li>Only the differences (delta) between the root and each branch are counted.</li>
+        <li>Root branches are billed based on their actual data size (for example, 5 GB)</li>
+        <li>Child branches <em>might</em> be billed based on the minimum of: the accumulated data changes since the branch was created, or the underlying storage footprint, which is zero if the branch is still within the restore window (in this case, the child branch effectively shares storage with its parent).</li>
       </ul>
-      <p>At the end of the month, your total storage usage is:</p>
-      <code>Total GB-month = Root branch size + delta from all child branches</code>
-      <br/>
-      <a href="${LINKS.docs}/introduction/branching">Learn more about Neon’s serverless model.</a>
+      <p>The SUM of both components will be billed as your database storage at $0.35 per GB-month.</p>
+      <p>What this implies:</p>
+      <ul>
+        <li>A child branch that has no data changes compared to its parent and is still within the <a href="${LINKS.docs}/introduction/restore-window">restore window</a> does not incur additional database storage costs.</li>
+        <li>As a child branch accumulates changes over time, its storage usage increases.</li>
+        <li>If a child branch falls out of the restore window, it becomes as expensive as a root branch, since it no longer shares storage with its parent.</li>
+      </ul>
+      <p>To keep database storage costs low, child branches are best kept short-lived - for example, by setting <a href="${LINKS.docs}/guides/branch-expiration">expiration times</a>, <a href="${LINKS.docs}/guides/reset-from-parent">resetting them</a> frequently, or deleting branches when they're no longer needed.</p>
     `,
   },
   {
-    question: 'How are Instant Restores billed?',
-    id: 'instant-restores',
-    answer: `
-      <p>Instant restores (also known as Point-in-Time Recovery, or PITR) are billed based on how much data changes in your primary branch over time, not how many restores you do:</p>
-      <ul>
-        <li>The Free plan gives you up to 6 hours of restore history, or 1 GB of data changes - whichever comes first. If your app writes a lot of data, you may get less than 6 hours of coverage.</li>
-        <li>In the Launch plan, you can choose any restore window from 0 to 7 days. You're charged $0.20 per GB-month, based on how much data changes during that window. Setting it to 0 disables Instant Restores, and implies $0 additional costs.</li>
-        <li>In the Enterprise plan, you can set a restore window up to 30 days, billed at $0.20 per GB-month for the changed data (same logic as Launch).</li>
-      </ul>
-      <a href="${LINKS.docs}/introduction/branch-restore">Read the docs</a> for more information on Instant Restores.
-    `,
-  },
-  {
-    question: 'How does billing for additional branches work?',
+    question: 'How are extra branches billed?',
     id: 'additional-branches-billing',
     answer: `
-      <p>Each paid Neon plan includes a number of branches per project at no extra cost. For example, the Launch plan includes 10 branches.</p>
-      <p>You can create and delete branches freely within that allowance. If you create more total branches than your plan includes, the extras are billed as branch-months, metered hourly. The pricing: </p>
-      <code>$1.50 per extra branch-month (≈ $0.002 per hour) billed only for branches that exceed your included allowance</code>
-      <p>For example: The Launch plan includes 10 branches per project. You create 2 extra branches for 5 hours each → 10 extra branch-hours × $0.002/hour = $0.02 total.</p>    
-      `,
+      <p>Each Neon plan includes a set number of branches per project at no additional cost (10 branches per project in Launch, 25 branches per project in Scale) but you can create and delete branches freely within your plan's included allowance:</p>
+      <ul>
+        <li>If the total number of concurrent branches in a project exceeds your plan's allowance, the extra branches are billed as branch-months, prorated hourly.</li>
+        <li>The price is $1.50 per extra branch-month (≈ $0.002 per hour)</li>
+        <li>You're only billed for branches that exceed your included limit, and only for the time they exist.</li>
+      </ul>
+      <p>Example: The Launch plan includes 10 branches per project. If you already have 10 branches but create 2 additional branches and keep them for 5 hours each, that'd be 10 extra branch-hours total: 10 × $0.002/hour = $0.02</p>
+      <p><strong>How to avoid extra branch charges</strong></p>
+      <ul>
+        <li><a href="${LINKS.docs}/guides/branch-expiration">Use branch expiration.</a> Set automatic deletion times on temporary branches so they're cleaned up when no longer needed.</li>
+        <li>Automate cleanup. Use the <a href="${LINKS.docs}/manage/branches#branching-with-the-neon-api">Neon API</a> or <a href="${LINKS.docs}/guides/branching-neon-cli">Neon CLI</a> to periodically delete unused branches and stay within your included allowance.</li>
+      </ul>
+    `,
   },
   {
-    question: 'How are snapshots billed?',
+    question: 'How is Neon Auth billed?',
     answer: `
-      <p><a href="https://neon.com/docs/guides/backup-restore">Snapshots</a> are provided free of charge during their beta, 
-      and will be charged based on GB-month storage at a rate lower than standard project storage after GA.</p>
+      <p>Neon Auth is included at no additional cost for all Neon databases until you reach 1 million monthly active users (MAU). If you surpass that threshold, a member of our team will reach out to discuss pricing.</p>
+      <p>On the Free plan, Neon Auth is included for up to 60,000 MAU.</p>
     `,
   },
   {
     question: 'How can I control my costs?',
     answer: `
-      <p>Neon lets you control compute usage by setting a maximum autoscaling limit per branch. This acts as a de-facto cost ceiling - your database won’t scale beyond the limit, even if traffic spikes.</p>
-      <p>For example, if you set a limit of 1 CU, your usage will never exceed 1 CU-hour per hour, regardless of demand.
-      <a href="${LINKS.docs}/introduction/autoscaling#configuring-autoscaling">Learn how to configure autoscaling limits.</a></p>
+      <p>Compute is often the most variable part of a monthly bill. The most effective way to control compute costs in Neon is to configure maximum autoscaling limits and scale-to-zero.</p>
+      <p>Autoscaling limits act as a built-in cost ceiling: your database will never scale beyond the limit you set, even during traffic spikes. If you want to prioritize performance over costs in a particular compute endpoint (e.g. production), choose a higher limit. If you want to optimize for cost predictability, set a lower one. <a href="${LINKS.docs}/guides/autoscaling-guide#configure-autoscaling-defaults-for-your-project">Learn how to configure autoscaling limits.</a></p>
+      <p>Another effective way to control compute costs is to ensure scale to zero is enabled for all non-production branches. When a branch is idle, compute scales down automatically, so you're not charged for unused databases. <a href="${LINKS.docs}/introduction/scale-to-zero">Learn about scale to zero.</a></p>
+      <p>To manage storage costs, regularly clean up unused branches, snapshots, and projects, and avoid retaining large restore windows if not required by your use case. <a href="${LINKS.docs}/introduction/cost-optimization#storage-root-and-child-branches">Learn more about optimizing storage usage.</a></p>
     `,
   },
   {
-    question: 'Do you offer credits for startups?',
+    question: 'Do you offer credit programs for startups?',
     answer: `
-      <p>Early startups that have received venture funding are eligible to apply to our Startup Program.</p>
-      <a href="${LINKS.startups}">Learn more and apply here</a>
+      <p>Early startups that have received venture funding are eligible to apply to our Startup Program. <a href="${LINKS.startups}">Learn more and apply here.</a></p>
     `,
   },
 ];
@@ -132,7 +180,7 @@ const PricingPage = () => (
     <CTANew
       className="mt-[183px] xl:mt-[168px] lg:mt-[145px] md:mt-[90px]"
       title="Still have questions? Get in touch."
-      description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
+      description="Get personalized guidance from our team — we'll help you quickly find the right solution."
       buttonText="Talk to Sales"
       buttonUrl={LINKS.contactSales}
     />

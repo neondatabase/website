@@ -69,9 +69,9 @@ Feature.propTypes = {
 };
 
 const Features = ({ title, features, type, highlighted }) => (
-  <div className="flex flex-col gap-y-3 border-t border-dashed border-gray-new-20 p-5">
+  <div className="flex flex-col gap-y-3.5 px-6 py-4 md:px-5">
     {title && (
-      <p className="text-[15px] font-normal leading-snug tracking-extra-tight text-gray-new-60">
+      <p className="font-mono text-xs font-medium uppercase leading-none tracking-extra-tight text-gray-new-50">
         {title}
       </p>
     )}

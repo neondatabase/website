@@ -16,42 +16,42 @@ const FEATURES = [
   {
     icon: storageIcon,
     title: 'High availability.',
-    description: `Storage uses <a href="${LINKS.docsHighAvailability}">multi-AZ</a> to minimize disruptions without HA standbys.`,
+    description: `Neon’s storage is <a href="${LINKS.docsHighAvailability}">multi-AZ</a> by default, without the need for HA standbys.`,
   },
   {
     icon: replicasIcon,
     title: 'Read replicas.',
-    description: `Offload read-heavy <a href="${LINKS.docs}/introduction/read-replicas">workloads to replicas</a>, avoiding storage costs.`,
+    description: `Neon lets you offload <a href="${LINKS.docs}/introduction/read-replicas">read-heavy queries</a> without added storage costs.`,
   },
   {
     icon: autoscalingIcon,
     title: 'Autoscaling.',
-    description: `Neon automatically <a href="${LINKS.autoscaling}">adjusts compute</a> and storage as needed.`,
+    description: `Neon automatically <a href="${LINKS.autoscaling}">adjusts compute</a> and storage based on demand, including on the Free plan.`,
   },
   {
     icon: monitoringIcon,
     title: 'Monitoring.',
-    description: `Monitor resource usage in <a href="${LINKS.docs}/introduction/monitoring-page">real time</a> with optimization dashboards.`,
+    description: `Built-in dashboards in the console give you <a href="${LINKS.docs}/introduction/monitoring-page">real-time</a> visibility into usage and performance.`,
   },
   {
     icon: connectionsIcon,
     title: 'Connection pooling.',
-    description: `Built on pgBouncer, ready to scale to <a href="${LINKS.connectionPooling}">10,000 connections</a>.`,
+    description: `All Neon databases can use pooled connections built on pgBouncer (up to <a href="${LINKS.connectionPooling}">10,000 connections</a>).`,
   },
   {
     icon: extensionsIcon,
     title: 'Postgres extensions library.',
-    description: `Extend with <a href="${LINKS.pgSearch}">pg_search</a>, PostGIS, TimescaleDB, etc.`,
+    description: `You can add extensions like <a href="${LINKS.docsExtensionsPgVector}">pg_vector</a>, <a href="${LINKS.docsExtensionsPostgisRelatedExtensions}">PostGIS</a>, <a href="${LINKS.docsExtensionsTimescaledb}">TimescaleDB</a>, and many more.`,
   },
   {
     icon: authIcon,
-    title: 'Neon auth.',
-    description: `Simple setup, built right <a href="${LINKS.auth}">into the platform</a> — no added overhead.`,
+    title: 'Auth.',
+    description: `Neon comes with <a href="${LINKS.auth}">built-in authentication</a> based on Better Auth, with a one-click install.`,
   },
   {
     icon: securityIcon,
     title: 'GDPR and ISO compliance.',
-    description: `Visit our <a href="${LINKS.security}">Security page</a> for more information.`,
+    description: `Included across all plans. Learn more on our <a href="${LINKS.security}">Security page</a>.`,
   },
 ];
 
@@ -60,13 +60,13 @@ const Features = () => (
     <Container size="1152" className="px-8">
       <h2
         className={clsx(
-          'text-pretty indent-24 text-5xl leading-dense tracking-tighter text-gray-new-50',
-          'xl:px-8 xl:text-[40px] lg:text-wrap lg:px-5 lg:indent-16 lg:text-[28px] md:indent-0 md:text-[24px] sm:px-0',
+          'text-pretty text-5xl leading-dense tracking-tighter text-gray-new-50',
+          'xl:px-8 xl:text-[40px] lg:text-wrap lg:px-5 lg:text-[28px] md:text-[24px] sm:px-0',
           '[&>strong]:font-normal [&>strong]:text-white'
         )}
       >
-        <strong>Powerful and essential features </strong>
-        that are consistently available in every Neon database, regardless of configuration or plan.
+        <strong>Included with every Neon database, on every plan, by default.</strong> These are
+        core platform capabilities that come out of the box with Neon.
       </h2>
       <ul
         className={clsx(
