@@ -6,12 +6,12 @@ updatedOn: '2025-06-17T09:00:00.000Z'
 
 ### Summary
 
-- Neon customers <span className="bg-green-45/20 text-green-45 p-1">saved $4.07 million</span> in December 2025 thanks to autoscaling.
-- Production databases use <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> on Neon by scaling up and down to match workload.
-- Autoscaling <span className="bg-green-45/20 text-green-45 p-1">prevented 6.9 million performance degradation</span> incidents in December.
-- Running scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned costs 4.9x more</span> than on Neon.
+- The average production database on Neon uses <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> and <span className="bg-green-45/20 text-green-45 p-1">50% less cost</span> than if it were running on a provisioned platform.
+- Putting the same Neon production workloads on a provisioned platform would result in <span className="bg-secondary-1/20 text-secondary-1 p-1">55 performance degradations</span> per db per month because even provisioning at P99.5 + 20% doesn't account for the most extreme load spikes.
+- Read replicas on Neon use <span className="bg-green-45/20 text-green-45 p-1">4x less compute</span> than if they were running on a provisioned platform because they make use of both autoscaling and scale to zero.
+- Running small scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned costs 7.5x more</span> than Neon.
 
-We arrive at these numbers by comparing the amount of compute used on Neon to the amount of compute it would take to run the same workloads on a provisioned (non-autoscaling) platform like RDS.
+We arrive at these numbers by comparing the amount of compute used on Neon to the amount of compute it would take to run the same workloads on a provisioned (non-autoscaling) platform like RDS or Heroku. These numbers are using Dec, 2025 data.
 
 <Admonition>
 This report focuses on **compute** autoscaling only.
@@ -33,12 +33,10 @@ In the chart, a CU is an index of CPU, memory, and local file cache (LFC) utiliz
 <p><em>How much compute should you buy to run this database?</em></p>
 </blockquote>
 
-In an autoscaling platform that is decided automatically, while in a provisioned platform, the user must decide how much compute to buy.
+In an autoscaling platform compute is allocated automatically, while in a provisioned (non-autoscaling) platform the user must decide how much compute to buy.
 
 A provisioned platform is one where databases run on instances with a fixed amount of CPU, memory, and sometimes even disk.
-Sizing a workload in provisioned platforms presents a challenge because nobody knows how much compute their database will use in the future.
-
-To help provisioned database users make informed compute size decisions, AWS has an "RDS Rightsizing" tool that works by finding the P99.5 CPU and memory utilization over a lookback window and adding 20%.
+To help provisioned database users make informed compute size decisions, AWS has an [RDS Rightsizing](https://aws.amazon.com/blogs/aws-cloud-financial-management/new-rightsizing-recommendations-for-amazon-rds-mysql-and-rds-postgresql-in-aws-compute-optimizer/) tool that works by finding the P99.5 CPU and memory utilization over a lookback window and adding 20%.
 
 Here's what P99.5 + 20% looks like for our example database:
 
@@ -50,7 +48,7 @@ It just sat there idle.
 
 Even when we over-provision, we see two <span className="bg-secondary-1/20 text-secondary-1 p-1">performance degradations in red</span>. This is because AWS rightsizing algorithm over-provisions 20% above **the P99.5%** value of resource utilization. So the most extreme 0.5% resource peaks may still exhaust the available resources.
 
-To save money, we could under-provision _(i.e.: buy a smaller instance)_:
+To save money, we could also under-provision _(i.e.: buy a smaller instance)_:
 
 <AutoscalingChart title="Provisioned: Under-provision " datasetKey="actual_compute_1d" showStats={false} compact={true} overprovision={-20} showOverprovisionSelector={false}/>
 
@@ -93,9 +91,13 @@ Across the entire Neon platform in December 2025, the average production databas
 
 <AutoscalingViz />
 
+#### Read-Replica Compute
+
+[Neon read-replicas](/docs/introduction/read-replicas) are different than thos in provisioned platforms because they don't replicate or duplicate data—they read from the same storage as the primary compute. Each read replica can independently autoscale and scale to zero. Because of this, when we apply the same comparison logic as above we find they are <span className="bg-green-45/20 text-green-45 p-1">4x more efficient</span> than if they were running on a provisioned platform, and <span className="bg-green-45/20 text-green-45 p-1">78% lower cost</span>.
+
 #### Cost
 
-When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">74% lower costs on Neon</span> on average.
+When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">50% lower compute costs on Neon</span> on average.
 
 <Admonition title="Why is cost savings less than compute savings?" type="info">
   Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
@@ -109,7 +111,7 @@ When we factor in the cost of each production database _(which varies depending 
 
 Database compute loads can be spiky. Operations like index creates, schema changes and migrations, bulk exports, and even just user load patterns can cause spikes in memory and CPU in particular. When we follow the AWS rightsizing algorithm and provision at P99.5 + 20%, the top 0.5% of loads are often spiky enough to exceed that 20% buffer.
 
-When we counted up the number of times each production database on Neon autoscaled up beyond the provisioned P99.5 + 20% equivalent, we found that <span className="bg-secondary-1/20 text-secondary-1 p-1">the average production database would experience 20 incidents per month</span> where compute resources would be exhausted if it were running on a provisioned platform.
+When we counted up the number of times each production database on Neon autoscaled up beyond the provisioned P99.5 + 20% equivalent, we found that <span className="bg-secondary-1/20 text-secondary-1 p-1">the average production database would experience 55 incidents per month</span> where compute resources would be exhausted if it were running on a provisioned platform.
 
 Autoscaling helps turn load spikes that would cause late-night on-call pages and customer-facing issues on a provisioned platform into a few extra pennies in cost on Neon.
 
@@ -123,7 +125,7 @@ Here is a detailed price comparison for a real Neon customer with a production w
 
 <AutoscalingChart title="Production. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" width="window" autoscalingRate={0.222} />
 
-The results: <span className="bg-secondary-1/20 text-secondary-1 p-1">Provisioned uses 3.5x more compute</span> to serve the same workload, because much of the time only a fraction of allocated resources are being used. Translating that to costs, this workload incurs <span className="bg-green-45/20 text-green-45 p-1">2.1x lower cost on Neon</span> thanks to autoscaling. We're using the `$0.222/CU-hour` rate from the Neon Scale plan _recommended for businesses_ and a conservative `$0.132/CU-hour` rate for provisioned instances like RDS.
+The results: <span className="bg-secondary-1/20 text-secondary-1 p-1">Provisioned uses 3.5x more compute</span> to serve the same workload, because much of the time only a fraction of allocated resources are being used. Translating that to costs, this workload incurs <span className="bg-green-45/20 text-green-45 p-1">2.1x lower cost on Neon</span> thanks to autoscaling. We're using the `$0.222/CU-hour` rate from the Neon Scale plan _recommended for businesses_ and a conservative `$0.1/CU-hour` rate for provisioned instances like RDS.
 
 Not only is autoscaling cheaper and more efficient, but this exact workload running on a provisioned platform at exactly the AWS-recommended P99.5 + 20% compute utilization would experience <span className="bg-secondary-1/20 text-secondary-1 p-1">~73 performance degradations per month</span> as a result of exhausting the allocated resources.
 
@@ -156,7 +158,7 @@ This is using the same P99.5 + 20% methodology as before.
 
 #### Costs
 
-When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 4.9x.</span>
+When we factor in costs using the rates of each database on Neon ($0.222 or $0.106 per CU-hour depending on the plan) and a conservative $0.065 per CU-hour equivalent on RDS, we find that <span className="bg-green-45/20 text-green-45 p-1">scale-to-zero reduces costs by 7.5x.</span>
 The savings numbers from scale to zero are dramatic enough to make it clear that this feature is changing customer behavior.
 Scale to zero changes the equation on what types of database usage patterns are economically viable.
 
@@ -201,7 +203,7 @@ We use P99.5 + 20% as the default over-provisioning setting following the defaul
 ### Provisioned costs
 
 - **Small Databases** - We used a `$0.065` per CU-hour equivalent rate based on the equivalent hourly cost of small provisioned databases across RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
-- **Large Databases** - We used a `$0.132` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger production-grade instances on provisioned database platforms like RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
+- **Large Databases** - We used a `$0.1` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger production-grade instances on provisioned database platforms like RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
 
 ### Counting Incidents
 
