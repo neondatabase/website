@@ -1,6 +1,7 @@
 ---
 title: The pg_mooncake extension
 subtitle: Fast analytics in Postgres with columnstore tables and DuckDB execution
+summary: Covers the setup of the pg_mooncake extension for Postgres, enabling fast analytics through columnstore tables and DuckDB execution, allowing efficient data retrieval and integration with object stores.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.237Z'
 ---

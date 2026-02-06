@@ -2,6 +2,7 @@
 title: The Neon GitHub integration
 subtitle: Connect Neon Postgres to a GitHub repository and build GitHub Actions
   workflows
+summary: Covers the setup of the Neon GitHub integration, enabling connection between a Neon Postgres project and a GitHub repository to facilitate database development and automate workflows using GitHub Actions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-github-app

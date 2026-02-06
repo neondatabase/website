@@ -2,6 +2,7 @@
 title: Create an automatic audit trail with Bemi
 subtitle: Learn how to create an automatic audit trail for your Postgres database with
   Bemi
+summary: How to create an automatic audit trail for your Postgres database using Bemi, including steps to enable logical replication in your Neon project for real-time change tracking.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-08-02T10:33:29.265Z'

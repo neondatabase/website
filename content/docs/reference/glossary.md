@@ -1,5 +1,6 @@
 ---
 title: Glossary
+summary: Covers definitions and explanations of key terms related to Neon's services, including access tokens, compute activity metrics, user roles, API authentication, and resource management operations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary

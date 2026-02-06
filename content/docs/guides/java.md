@@ -2,6 +2,7 @@
 title: Connect a Java application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC
   driver
+summary: Covers the setup of a Neon project and the connection process for a Java application using JDBC, including performing basic CRUD operations on a Neon Postgres database.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java

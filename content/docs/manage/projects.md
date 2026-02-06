@@ -3,6 +3,7 @@ title: Manage projects
 enableTableOfContents: true
 isDraft: false
 subtitle: Learn how to manage Neon projects from the Neon Console or the Neon API.
+summary: How to manage Neon projects using the Neon Console or API, including creating branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
 updatedOn: '2026-01-28T07:08:36.343Z'

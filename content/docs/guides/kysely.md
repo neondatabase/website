@@ -1,6 +1,7 @@
 ---
 title: Connect from Kysely to Neon
 subtitle: Learn how to connect to Neon from Kysely
+summary: How to connect a TypeScript/Node.js application to a Neon Postgres database using Kysely, including setup, TypeScript schema definitions, and executing migrations and queries.
 enableTableOfContents: true
 updatedOn: '2025-12-12T13:14:07.926Z'
 ---

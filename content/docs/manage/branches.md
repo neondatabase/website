@@ -1,5 +1,6 @@
 ---
 title: Manage branches
+summary: Covers the management of branches within Neon projects, including creation, naming requirements, and the implications of branch usage on storage and data modification.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

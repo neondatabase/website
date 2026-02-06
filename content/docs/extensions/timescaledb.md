@@ -1,6 +1,7 @@
 ---
 title: The timescaledb extension
 subtitle: Work with time-series data in Postgres with the timescaledb extension
+summary: Covers the setup and usage of the `timescaledb` extension in Neon for efficient storage and retrieval of time-series data, including enabling the extension, creating hypertables, and running queries.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.250Z'
 ---

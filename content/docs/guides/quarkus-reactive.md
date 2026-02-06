@@ -1,6 +1,7 @@
 ---
 title: Connect Quarkus (Reactive) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using a Reactive SQL Client
+summary: How to connect a Quarkus application to Neon using a Reactive SQL Client, including project creation, configuration of a PostgreSQL data source, and usage of the Reactive PostgreSQL client.
 enableTableOfContents: true
 updatedOn: '2025-10-24T12:48:41.462Z'
 ---

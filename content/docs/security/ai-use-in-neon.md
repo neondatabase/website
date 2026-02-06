@@ -1,6 +1,7 @@
 ---
 title: AI use in Neon
 subtitle: How Neon integrates AI into its platform
+summary: Covers the integration of AI in Neon, detailing its use in the SQL Editor for query assistance and in chat support for user guidance, while ensuring data privacy and security.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.304Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: The intarray extension
 subtitle: Efficiently manipulate and query integer arrays in Postgres
+summary: Covers the setup and functionality of the `intarray` extension in Postgres, enabling efficient manipulation and querying of integer arrays, including operations like sorting and counting elements.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.234Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Connect Vercel and Neon manually
 subtitle: Learn how to connect a Vercel project to a Neon database manually
+summary: How to connect a Vercel project to a Neon database manually, covering prerequisites, connection steps using environment variables, and scenarios for choosing manual connections over integrations.
 enableTableOfContents: true
 updatedOn: '2025-07-07T22:27:57.419Z'
 ---

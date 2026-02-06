@@ -2,6 +2,7 @@
 title: The online_advisor extension
 subtitle: Get index, statistics, and prepared statement recommendations based on your
   query workload
+summary: Covers the setup of the `online_advisor` extension, which provides recommendations for indexes, extended statistics, and prepared statements based on query workload analysis in PostgreSQL 17.
 enableTableOfContents: true
 updatedOn: '2025-08-16T11:33:02.132Z'
 ---

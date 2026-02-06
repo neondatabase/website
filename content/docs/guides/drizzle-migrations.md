@@ -2,6 +2,7 @@
 title: Schema migration with Neon Postgres and Drizzle ORM
 subtitle: Set up Neon Postgres and run migrations for your TypeScript project using
   Drizzle ORM
+summary: Step-by-step guide for setting up Neon Postgres with Drizzle ORM in a TypeScript project, including database initialization and connection string retrieval for seamless schema migration and application development.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.898Z'
 ---

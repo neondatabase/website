@@ -1,6 +1,7 @@
 ---
 title: Get started with Neon on Azure
 subtitle: Learn how to deploy Neon as a native service on Azure
+summary: Covers the setup of Neon as a native service on Azure, including how to find, subscribe, and create a Neon Serverless Postgres resource within the Azure portal.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/azure-get-started

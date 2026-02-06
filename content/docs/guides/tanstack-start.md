@@ -1,6 +1,7 @@
 ---
 title: Connect a TanStack Start application to Neon
 subtitle: Set up a Neon project in seconds and connect from a TanStack Start application
+summary: How to connect a TanStack Start application to a Neon project by creating a Neon project, adding necessary dependencies, and configuring connection settings with your database credentials.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start

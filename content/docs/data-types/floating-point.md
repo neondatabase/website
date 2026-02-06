@@ -1,6 +1,7 @@
 ---
 title: Postgres Floating-point data types
 subtitle: Work with float values in Postgres
+summary: Covers the use of floating-point data types in Postgres, detailing the `REAL` and `DOUBLE PRECISION` types, their storage requirements, precision levels, and example applications for scientific and weather data.
 enableTableOfContents: true
 updatedOn: '2024-02-03T16:07:31.867Z'
 ---

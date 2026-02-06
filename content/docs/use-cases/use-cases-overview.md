@@ -1,6 +1,7 @@
 ---
 title: Neon use cases
 subtitle: Explore popular Neon use cases
+summary: Covers popular use cases for Neon, including building SaaS applications, serverless apps, database-per-tenant solutions, development/testing environments, and deploying Postgres via AI agents.
 enableTableOfContents: true
 updatedOn: '2025-05-29T18:14:43.689Z'
 ---

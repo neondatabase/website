@@ -1,6 +1,7 @@
 ---
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
+summary: Covers the setup and usage of the `pg_repack` extension in Neon to efficiently remove bloat from tables and indexes, enhancing database performance with minimal locking during the process.
 enableTableOfContents: true
 updatedOn: '2025-12-11T15:40:49.857Z'
 ---

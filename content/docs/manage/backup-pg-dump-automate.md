@@ -1,6 +1,7 @@
 ---
 title: Automate pg_dump backups
 subtitle: Automate backups of your Neon database to S3 with pg_dump and GitHub Actions
+summary: Step-by-step guide for automating backups of a Neon database using pg_dump and GitHub Actions, enabling nightly backups to S3 for long-term data retention and recovery.
 enableTableOfContents: true
 updatedOn: '2025-04-21T13:34:15.081Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: IP Allow
 subtitle: Limit database access to trusted IP addresses
+summary: Covers the setup of Neon's IP Allow feature to restrict database access to specified IP addresses, enhancing security by preventing unauthorized connections and allowing configuration for individual IPs or ranges.
 enableTableOfContents: true
 updatedOn: '2024-12-04T13:30:28.567Z'
 ---

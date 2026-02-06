@@ -1,5 +1,6 @@
 ---
 title: Updates
+summary: Covers the process for applying updates to Neon computes and Postgres instances, including scheduling options, types of updates, and handling brief connection drops during the update process.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-08-19T17:01:24.239Z'

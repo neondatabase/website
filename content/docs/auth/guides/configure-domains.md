@@ -1,6 +1,7 @@
 ---
 title: Configure trusted domains
 subtitle: Add your application domains to enable secure authentication redirects
+summary: Covers the setup of application domains in Neon Auth's allowlist to enable secure OAuth and email verification redirects, preventing unauthorized access and ensuring proper functionality in production environments.
 enableTableOfContents: true
 updatedOn: '2025-11-30T00:00:00.000Z'
 ---

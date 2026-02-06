@@ -1,6 +1,7 @@
 ---
 title: UI Components Reference
 subtitle: Quick reference for Neon Auth UI components
+summary: Step-by-step guide for integrating Neon Auth UI components using `@neondatabase/neon-js`, including installation, provider setup, and configuration of common props for customization.
 enableTableOfContents: true
 updatedOn: '2026-01-22T15:48:50.615Z'
 ---

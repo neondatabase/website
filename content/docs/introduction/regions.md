@@ -1,5 +1,6 @@
 ---
 title: Regions
+summary: Covers the selection and deployment of Neon projects across various AWS and Azure regions to optimize latency between databases and application servers.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

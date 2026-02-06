@@ -2,6 +2,7 @@
 title: The @neondatabase/toolkit
 subtitle: A terse client for AI agents that can spin up Postgres in seconds and run SQL
   queries
+summary: Covers the setup of the @neondatabase/toolkit, a client that enables rapid creation of Postgres databases and execution of SQL queries, tailored for AI agents and testing environments.
 enableTableOfContents: true
 updatedOn: '2026-01-27T14:34:28.522Z'
 ---

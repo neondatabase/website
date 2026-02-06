@@ -1,6 +1,7 @@
 ---
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
+summary: Step-by-step guide for installing and configuring the Flyway command-line tool to manage schema changes in a Neon database, including setting up the connection and executing migrations.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.448Z'
 ---

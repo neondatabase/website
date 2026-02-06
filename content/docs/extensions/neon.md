@@ -2,6 +2,7 @@
 title: The neon extension
 subtitle: An extension for Neon-specific statistics including the Local File Cache hit
   ratio
+summary: Covers the setup of the `neon` extension for gathering Neon-specific metrics, including monitoring the Local File Cache hit ratio through the `neon_stat_file_cache` view.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.438Z'
 ---

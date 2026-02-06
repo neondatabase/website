@@ -1,6 +1,7 @@
 ---
 title: Schema migration with Neon Postgres and SQLAlchemy
 subtitle: Manage database migrations in your Python project with SQLAlchemy and Alembic
+summary: Step-by-step guide for managing schema migrations in a Neon Postgres database using SQLAlchemy and Alembic, including project setup and connection string retrieval.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.917Z'
 ---

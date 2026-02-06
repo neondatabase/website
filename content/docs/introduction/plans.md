@@ -1,5 +1,6 @@
 ---
 title: Neon plans
+summary: Covers the comparison of Neon's Free, Launch, and Scale plans, detailing features, pricing, and target users to support projects from prototypes to production at scale.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

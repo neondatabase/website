@@ -1,6 +1,7 @@
 ---
 title: Plugins
 subtitle: Supported Better Auth plugins in Neon Auth
+summary: Covers the supported Better Auth plugins in Neon Auth, detailing their status and management through the Neon SDK without direct installation or configuration by users.
 enableTableOfContents: true
 updatedOn: '2026-01-05T20:19:10.001Z'
 ---

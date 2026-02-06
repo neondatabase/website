@@ -1,6 +1,7 @@
 ---
 title: Connect a Ruby on Rails application to Neon Postgres
 subtitle: Set up a Neon project in seconds and connect from a Ruby on Rails application
+summary: Step-by-step guide for connecting a Ruby on Rails application to a Neon Postgres database, including project setup and configuration of the database connection.
 enableTableOfContents: true
 updatedOn: '2025-10-24T12:53:27.790Z'
 ---

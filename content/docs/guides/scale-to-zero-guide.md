@@ -1,6 +1,7 @@
 ---
 title: Configuring Scale to Zero for Neon computes
 subtitle: Learn how to configure Neon's Scale to Zero feature
+summary: How to configure Neon's Scale to Zero feature to manage compute idleness based on inactivity, including enabling, disabling, and setting thresholds for different plans.
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true

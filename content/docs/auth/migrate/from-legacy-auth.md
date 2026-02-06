@@ -1,6 +1,7 @@
 ---
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
+summary: Covers the code differences and necessary updates for migrating from legacy Neon Auth (Stack Auth) to Neon Auth with Better Auth, including environment variable changes and benefits of the new system.
 enableTableOfContents: true
 updatedOn: '2026-01-30T14:03:06.270Z'
 redirectFrom:

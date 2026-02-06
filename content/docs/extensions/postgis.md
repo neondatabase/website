@@ -1,6 +1,7 @@
 ---
 title: The postgis extension
 subtitle: Work with geospatial data in Postgres using PostGIS
+summary: Covers the setup of the PostGIS extension in Neon for managing and analyzing geospatial data, including enabling the extension, storing spatial data, and querying with practical examples.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.247Z'
 ---

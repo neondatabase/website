@@ -1,6 +1,7 @@
 ---
 title: LangChain
 subtitle: Build AI applications faster with LangChain and Postgres
+summary: Covers the setup of LangChain with Neon as a vector store, detailing how to initialize Postgres, generate embeddings, and implement chat completions using OpenAI's API.
 enableTableOfContents: true
 updatedOn: '2024-12-11T08:48:36.316Z'
 ---

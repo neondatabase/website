@@ -1,6 +1,7 @@
 ---
 title: Monitor Neon with pgAdmin
 subtitle: Monitor your Neon Postgres database with pgAdmin
+summary: Covers the setup and monitoring of a Neon Postgres database using pgAdmin, detailing installation, connection procedures, and performance metrics tracking.
 enableTableOfContents: true
 updatedOn: '2025-01-17T00:00:00.000Z'
 ---

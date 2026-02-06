@@ -1,6 +1,7 @@
 ---
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
+summary: Covers the setup of high availability in Neon by detailing its unique architecture that separates storage and compute, ensuring data redundancy and compute resiliency across multiple Availability Zones.
 enableTableOfContents: true
 updatedOn: '2025-03-13T12:56:34.386Z'
 ---

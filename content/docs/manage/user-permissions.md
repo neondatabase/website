@@ -1,6 +1,7 @@
 ---
 title: User Permissions
 subtitle: What each role can do in Neon organizations
+summary: Covers the permissions and capabilities associated with different roles in Neon organizations, detailing what Admins, Members, and Collaborators can do at both the organization and project levels.
 enableTableOfContents: true
 updatedOn: '2025-11-13T02:12:26.598Z'
 ---

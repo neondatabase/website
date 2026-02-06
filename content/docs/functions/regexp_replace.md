@@ -1,6 +1,7 @@
 ---
 title: Postgres regexp_replace() function
 subtitle: Replace substrings matching a regular expression pattern
+summary: Covers the usage of the Postgres `regexp_replace()` function for replacing substrings that match a regular expression pattern, including syntax, parameters, and practical examples for data manipulation and formatting.
 enableTableOfContents: true
 updatedOn: '2024-06-30T16:56:43.860Z'
 ---

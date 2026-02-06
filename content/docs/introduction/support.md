@@ -1,5 +1,6 @@
 ---
 title: Support
+summary: Covers the support plans, channels, and policies available for Neon users, detailing how to access support based on their specific pricing plan.
 enableTableOfContents: true
 updatedOn: '2025-12-08T15:34:39.154Z'
 ---

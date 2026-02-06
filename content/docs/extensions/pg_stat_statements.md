@@ -1,6 +1,7 @@
 ---
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
+summary: Covers the setup and usage of the `pg_stat_statements` extension in Postgres to track SQL statement execution statistics, enabling performance analysis and optimization for Neon projects.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.439Z'
 ---

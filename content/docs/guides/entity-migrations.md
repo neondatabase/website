@@ -1,6 +1,7 @@
 ---
 title: Schema migration with Neon Postgres and Entity Framework
 subtitle: Set up Neon Postgres and run migrations for your Entity Framework project
+summary: Step-by-step guide for setting up Neon Postgres with Entity Framework, including project initialization, database connection string retrieval, and managing schema migrations in a .NET application.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.899Z'
 ---

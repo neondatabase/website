@@ -1,6 +1,7 @@
 ---
 title: Replicate data with Decodable
 subtitle: Learn how to replicate data from Neon with Decodable
+summary: Step-by-step guide for configuring a Postgres source connector in Decodable to replicate data from a Neon Postgres database, including enabling logical replication and creating a dedicated Postgres role for the process.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-11-07T12:28:56.609Z'

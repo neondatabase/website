@@ -1,5 +1,6 @@
 ---
 title: Neon OAuth integration
+summary: How to integrate your application with Neon using OAuth, enabling secure interactions with user accounts while maintaining data privacy and requiring user approval for access.
 enableTableOfContents: true
 updatedOn: '2025-05-30T16:54:40.477Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Neon on Azure
 subtitle: Use Neon on Azure as a Native ISV Service
+summary: Covers the setup and management of Neon as a native ISV service on Azure, including deployment, billing management, and integration with Azure workflows.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-30T14:03:06.279Z'

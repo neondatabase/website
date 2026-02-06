@@ -1,6 +1,7 @@
 ---
 title: Organization
 subtitle: 'Manage multi-tenant organizations, members, and invitations'
+summary: Covers the management of multi-tenant organizations within the Neon platform, including creating organizations, inviting members, and managing permissions through the Organization plugin APIs.
 enableTableOfContents: true
 updatedOn: '2026-01-05T20:19:10.006Z'
 ---

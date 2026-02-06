@@ -1,6 +1,7 @@
 ---
 title: The pgstattuple extension
 subtitle: 'Analyze table, index bloat, and fragmentation in Postgres'
+summary: Covers the setup and functionality of the `pgstattuple` extension for analyzing table and index bloat, fragmentation, and space utilization in Postgres, aiding in performance tuning and storage management.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.244Z'
 ---

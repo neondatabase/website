@@ -1,5 +1,6 @@
 ---
 title: HIPAA Compliance
+summary: Covers the setup of HIPAA compliance for organizations using Neon, detailing the self-serve process to enable features and accept the Business Associate Agreement (BAA) for handling Protected Health Information (PHI).
 enableTableOfContents: true
 updatedOn: '2026-02-04T20:00:07.519Z'
 ---

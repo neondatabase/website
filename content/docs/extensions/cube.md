@@ -1,6 +1,7 @@
 ---
 title: The cube extension
 subtitle: Store and query multidimensional points and cubes in Postgres
+summary: Covers the setup and usage of the cube extension in Postgres, enabling the storage and querying of multidimensional points and cubes for applications in GIS, business intelligence, and scientific computing.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.230Z'
 ---

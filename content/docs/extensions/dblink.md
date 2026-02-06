@@ -1,6 +1,7 @@
 ---
 title: The dblink extension
 subtitle: Connect to and query other Postgres databases from Neon using dblink
+summary: Covers the setup and usage of the `dblink` extension in Neon, enabling connections to and querying of remote Postgres databases for data integration and cross-database operations.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.231Z'
 ---

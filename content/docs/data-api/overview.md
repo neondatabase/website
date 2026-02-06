@@ -1,6 +1,7 @@
 ---
 title: Neon Data API
 subtitle: A fully managed REST interface for your Neon database
+summary: Covers the setup of the Neon Data API, a secure HTTP interface for managing Neon databases, enabling access from browsers and serverless functions while ensuring scalability and security.
 enableTableOfContents: true
 updatedOn: '2026-01-22T15:48:50.617Z'
 ---

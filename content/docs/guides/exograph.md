@@ -1,6 +1,7 @@
 ---
 title: Use Exograph with Neon
 subtitle: Build GraphQL backends in minutes with Exograph and Neon
+summary: Step-by-step guide for creating a GraphQL backend using Exograph with Neon, covering project setup, schema creation, and backend launch.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-07-03T12:36:49.560Z'

@@ -1,6 +1,7 @@
 ---
 title: Connect from Phoenix to Neon
 subtitle: Set up a Neon project in seconds and connect from Phoenix
+summary: Step-by-step guide for connecting a Phoenix application to a Neon database, including project creation, credential storage, and configuration of database connections using Ecto.
 enableTableOfContents: true
 updatedOn: '2026-02-04T19:25:39.221Z'
 ---

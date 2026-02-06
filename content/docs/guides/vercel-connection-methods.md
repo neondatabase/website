@@ -1,6 +1,7 @@
 ---
 title: Connecting to Neon from Vercel
 subtitle: Learn how Vercel Fluid compute optimizes database connections and why standard TCP is the recommended method.
+summary: Covers the setup of standard Postgres TCP connections and connection pooling for optimizing database interactions between Vercel's Fluid compute model and Neon, highlighting performance improvements over traditional methods.
 enableTableOfContents: true
 updatedOn: '2025-11-10T14:15:32.000Z'
 ---

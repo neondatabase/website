@@ -2,6 +2,7 @@
 title: Branch expiration
 subtitle: Learn how to use Neon's branch expiration feature to automatically delete
   temporary branches
+summary: Covers the setup of Neon's branch expiration feature, enabling automatic deletion of temporary branches by setting expiration timestamps through the Console, CLI, or API.
 enableTableOfContents: true
 updatedOn: '2025-12-12T17:42:01.029Z'
 ---

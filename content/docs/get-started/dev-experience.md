@@ -1,6 +1,7 @@
 ---
 title: Our DX Principles
 subtitle: 'Neon adapts to your workflow, not the other way around.'
+summary: Covers the core principles of Neon's developer experience, focusing on invisible infrastructure, instant deployments, modern workflows, and a composable stack to enhance database management and adaptability.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/dev-experience

@@ -2,6 +2,7 @@
 title: The fuzzystrmatch extension
 subtitle: Perform fuzzy string matching for names, typos, and similar-sounding words in
   Postgres
+summary: Covers the setup and usage of the `fuzzystrmatch` extension in Postgres, providing functions for fuzzy string matching to handle typos, phonetic variations, and approximate text comparisons.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.233Z'
 ---

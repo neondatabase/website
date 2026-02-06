@@ -1,5 +1,6 @@
 ---
 title: Monitoring dashboard
+summary: Covers the setup of the Monitoring dashboard in the Neon console, detailing how to view and analyze system and database metrics based on your Neon plan and selected compute or branch.
 enableTableOfContents: true
 updatedOn: '2026-01-09T15:13:11.226Z'
 ---

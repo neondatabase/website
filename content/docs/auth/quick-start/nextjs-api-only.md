@@ -1,6 +1,7 @@
 ---
 title: Use Neon Auth with Next.js (API methods)
 subtitle: Build your own auth UI using SDK methods
+summary: How to integrate Neon Auth into a Next.js project using SDK methods, including enabling authentication, installing the Neon SDK, and setting up environment variables.
 enableTableOfContents: true
 updatedOn: '2026-01-30T14:03:06.272Z'
 layout: wide

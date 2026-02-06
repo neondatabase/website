@@ -1,6 +1,7 @@
 ---
 title: Replicate data from Supabase
 subtitle: Learn how to replicate data from Supabase to Neon
+summary: Step-by-step guide for replicating data from a Supabase Postgres database to a Neon database using native Postgres logical replication, including prerequisites and configuration details.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-02-02T12:37:39.460Z'

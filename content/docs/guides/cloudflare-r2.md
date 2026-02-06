@@ -1,6 +1,7 @@
 ---
 title: File storage with Cloudflare R2
 subtitle: Store files via Cloudflare R2 and track metadata in Neon
+summary: Step-by-step guide for integrating Cloudflare R2 with Neon to store files and track metadata in your Neon database, utilizing R2's S3-compatible object storage capabilities.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.267Z'
 ---

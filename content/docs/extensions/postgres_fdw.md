@@ -1,6 +1,7 @@
 ---
 title: The postgres_fdw extension
 subtitle: Access data in remote Postgres databases from Neon using postgres_fdw
+summary: Covers the setup of the `postgres_fdw` extension in Neon to access and query data from remote Postgres databases, enabling seamless integration and compliance with data residency requirements.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.248Z'
 ---

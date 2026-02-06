@@ -1,6 +1,7 @@
 ---
 title: The pgvector extension
 subtitle: Enable Postgres as a vector store with the pgvector extension
+summary: Covers the setup of the `pgvector` extension in Neon for storing vector embeddings and performing vector similarity searches, including installation, version management, and table creation for vector storage.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding

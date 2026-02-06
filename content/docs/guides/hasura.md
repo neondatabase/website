@@ -1,6 +1,7 @@
 ---
 title: Connect from Hasura Cloud to Neon
 subtitle: Learn how to connect a Hasura Cloud project to a new or existing Neon database
+summary: Step-by-step guide for connecting a Hasura Cloud project to a new or existing Neon database, including authentication and configuration instructions for seamless integration.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura

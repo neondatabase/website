@@ -1,6 +1,7 @@
 ---
 title: AI Agent integration guide
 subtitle: Implement database provisioning and versioning for your AI agent platform
+summary: Covers the technical implementation of database provisioning, versioning, user upgrades, and usage monitoring for AI agent platforms using the Neon agent plan.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-24T16:13:09.592Z'

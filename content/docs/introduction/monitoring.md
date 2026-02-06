@@ -1,6 +1,7 @@
 ---
 title: Monitoring in Neon
 subtitle: Learn about monitoring resources and metrics in Neon
+summary: Covers the monitoring of resources and metrics in Neon, including usage tracking, performance analysis, and integration with Datadog and OpenTelemetry for enhanced observability.
 enableTableOfContents: false
 redirectFrom:
   - /docs/introduction/monitor-external-tools

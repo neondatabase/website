@@ -1,5 +1,6 @@
 ---
 title: Neon API
+summary: How to manage Neon projects programmatically using the Neon API, including creating and managing projects, branches, databases, and roles, along with guidance on obtaining an API key and using SDKs.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about

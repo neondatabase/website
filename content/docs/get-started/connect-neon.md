@@ -1,6 +1,7 @@
 ---
 title: Connecting Neon to your stack
 subtitle: Learn how to integrate Neon into your application
+summary: Covers the setup of connecting Neon to applications using standard Postgres connection strings, including examples for various programming languages and frameworks, and details on pooled versus direct connections.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/connect-neon

@@ -1,6 +1,7 @@
 ---
 title: Postgres concat() function
 subtitle: Concatenate strings in Postgres with the concat() function
+summary: Covers the usage of the `concat()` function in Postgres to concatenate multiple strings, including examples for combining data from columns and generating dynamic outputs.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.373Z'
 ---

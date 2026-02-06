@@ -2,6 +2,7 @@
 title: Use WunderGraph with Neon
 subtitle: Leverage the power of Neon and WunderGraph to build fully serverless apps in
   minutes
+summary: Step-by-step guide for integrating WunderGraph with a Neon database to create serverless applications, including setup instructions for deploying a full-stack app with Next.js in under 15 minutes.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-10-22T15:41:04.377Z'

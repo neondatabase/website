@@ -1,6 +1,7 @@
 ---
 title: Neon CLI commands — branches
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
+summary: Covers the usage of the `branches` command in the Neon CLI for managing branches in a Neon project, including listing, creating, renaming, and deleting branches, as well as setting defaults and performing schema comparisons.
 enableTableOfContents: true
 updatedOn: '2026-01-09T15:57:09.726Z'
 ---

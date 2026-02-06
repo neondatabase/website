@@ -1,6 +1,7 @@
 ---
 title: Postgres Integer data types
 subtitle: Work with integers in Postgres
+summary: Covers the usage and characteristics of Postgres integer data types, including `SMALLINT`, `INTEGER`, and `BIGINT`, along with examples of their application in database design and operations.
 enableTableOfContents: true
 updatedOn: '2024-02-03T16:07:31.867Z'
 ---

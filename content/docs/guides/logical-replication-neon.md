@@ -1,6 +1,7 @@
 ---
 title: Logical replication in Neon
 subtitle: Information about logical replication specific to Neon
+summary: Covers the setup and important considerations for logical replication in Neon, detailing how it functions as both a publisher and subscriber, including management of replication slots and implications for scaling.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-07T20:52:32.359Z'

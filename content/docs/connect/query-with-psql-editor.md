@@ -1,6 +1,7 @@
 ---
 title: Connect with psql
 subtitle: Learn how to connect to Neon using psql
+summary: How to connect to Neon using the `psql` command-line client, including installation instructions and connection string retrieval for seamless interaction with Neon's Postgres environment.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres

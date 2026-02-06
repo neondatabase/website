@@ -1,5 +1,6 @@
 ---
 title: Manage Neon Organizations
+summary: Covers the management of Neon organizations, including creating organizations, inviting members, and setting permissions based on assigned roles.
 enableTableOfContents: true
 updatedOn: '2025-03-14T18:29:25.736Z'
 ---

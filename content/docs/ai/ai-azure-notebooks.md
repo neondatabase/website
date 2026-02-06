@@ -1,6 +1,7 @@
 ---
 title: Azure Data Studio Notebooks
 subtitle: Use Azure Data Studio Notebooks with Neon for vector similarity search
+summary: Covers the setup of Azure Data Studio Notebooks with Neon, detailing how to create a Python notebook, connect to a Neon database, install the `pgvector` extension, and execute vector search queries.
 enableTableOfContents: true
 updatedOn: '2025-02-03T20:41:57.296Z'
 ---

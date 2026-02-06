@@ -1,5 +1,6 @@
 ---
 title: Overview of the Neon object hierarchy
+summary: Covers the structure of the Neon object hierarchy, detailing how Organizations, Projects, Branches, Computes, Roles, and Databases are organized and managed within a Neon environment.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-15T23:54:00.612Z'

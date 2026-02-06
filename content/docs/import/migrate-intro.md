@@ -2,6 +2,7 @@
 title: Neon data migration guides
 subtitle: Learn how to migrate data to Neon Postgres from different database providers
   and sources
+summary: Covers the selection of migration methods for transferring data to Neon Postgres from various database sources, considering factors like database size, downtime tolerance, and technical skill requirements.
 redirectFrom:
   - /docs/import/import-intro
 enableTableOfContents: true

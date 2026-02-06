@@ -1,6 +1,7 @@
 ---
 title: AI Rules Neon Serverless Driver
 subtitle: Context rules for AI tools to help implement the Neon Serverless driver
+summary: Covers the implementation of AI rules for the Neon Serverless driver, providing context and guidance for integrating AI tools within the Neon environment.
 enableTableOfContents: true
 updatedOn: '2025-10-10T13:19:39.263Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: AI Concepts
 subtitle: Learn how embeddings are used to build AI applications
+summary: Covers the use, generation, and storage of embeddings in Postgres for AI applications, detailing how to transform unstructured data into structured formats and measure text similarity through vector distance calculations.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.216Z'
 ---

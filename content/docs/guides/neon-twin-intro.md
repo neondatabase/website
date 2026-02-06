@@ -1,6 +1,7 @@
 ---
 title: Create a Neon Twin
 subtitle: Learn how to Twin your production database with Neon
+summary: Covers the creation of a Neon Twin, a clone of your production database, enabling developers to work in isolated environments with automatic synchronization and efficient management for development and testing workflows.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-02-20T12:23:17.865Z'

@@ -1,6 +1,7 @@
 ---
 title: Postgres now() function
 subtitle: Get the current date and time
+summary: Covers the usage of the Postgres `now()` function to retrieve the current date and time with timezone, including examples for timestamping database entries and calculating time differences.
 enableTableOfContents: true
 updatedOn: '2024-06-30T14:16:15.749Z'
 ---

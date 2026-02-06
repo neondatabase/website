@@ -1,5 +1,6 @@
 ---
 title: Manage databases
+summary: Covers the management of databases within Neon's project branches, including creation, schema details, and privileges, as well as interfaces for database operations like the Neon Console, CLI, API, and SQL.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-09-05T12:26:43.313Z'

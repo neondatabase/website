@@ -1,5 +1,6 @@
 ---
 title: Manage computes
+summary: Covers the management of computes in Neon, detailing how to connect applications to Postgres databases via primary and read replica computes, along with viewing and editing compute details in the Neon Console.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-28T07:08:36.342Z'

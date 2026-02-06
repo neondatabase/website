@@ -1,6 +1,7 @@
 ---
 title: Datadog integration
 subtitle: Send metrics and logs from Neon Postgres to Datadog
+summary: Covers the setup of the Datadog integration for Neon, enabling the export of metrics and Postgres logs to monitor database performance and resource utilization directly within Datadog's observability platform.
 enableTableOfContents: true
 updatedOn: '2026-01-09T19:51:39.511Z'
 ---

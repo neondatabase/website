@@ -1,6 +1,7 @@
 ---
 title: Neon CLI commands — completion
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
+summary: Covers the usage of the `completion` command in the Neon CLI to generate a script that enhances command-line efficiency by providing auto-completion for `neonctl` commands and options.
 enableTableOfContents: true
 updatedOn: '2024-06-30T14:35:12.893Z'
 ---

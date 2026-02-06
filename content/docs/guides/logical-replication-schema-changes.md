@@ -1,6 +1,7 @@
 ---
 title: Managing schema changes in a logical replication setup
 subtitle: Learn about managing schema changes in a logical replication setup
+summary: Covers the management of schema changes in a Postgres logical replication setup, emphasizing the need for manual synchronization of schema modifications and recommending the application of additive changes to the subscriber first.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-02-02T12:37:39.456Z'

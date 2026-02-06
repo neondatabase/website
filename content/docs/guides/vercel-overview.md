@@ -1,6 +1,7 @@
 ---
 title: Integrating Neon with Vercel
 subtitle: Choose the right connection path in seconds
+summary: Step-by-step guide for selecting the appropriate Neon-Vercel integration based on your project needs, whether starting new or utilizing existing infrastructure.
 redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel

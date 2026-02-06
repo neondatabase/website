@@ -1,6 +1,7 @@
 ---
 title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
+summary: Covers the setup of the Vercel-Managed Integration for adding and managing Neon Postgres databases within the Vercel dashboard, including installation, billing management, and enabling automated Preview Branching.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews

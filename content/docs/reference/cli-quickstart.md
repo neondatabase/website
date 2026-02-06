@@ -1,6 +1,7 @@
 ---
 title: Neon CLI Quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
+summary: How to quickly set up and authenticate the Neon CLI, including installation instructions for various platforms and methods for managing authentication through web or API key options.
 enableTableOfContents: true
 updatedOn: '2026-01-07T12:02:47.908Z'
 ---

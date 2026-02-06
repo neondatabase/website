@@ -1,6 +1,7 @@
 ---
 title: Neon community
 subtitle: Learn how to get involved in the Neon community
+summary: Covers how to contribute to the Neon community through documentation, community guides, code contributions, and engagement on platforms like Discord and YouTube.
 enableTableOfContents: true
 updatedOn: '2026-01-20T19:00:25.309Z'
 ---

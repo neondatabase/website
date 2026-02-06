@@ -2,6 +2,7 @@
 title: Neon integration guides
 subtitle: Find detailed instructions for integration across various platforms and
   services.
+summary: Covers the integration of Neon with various authentication services and deployment platforms, providing detailed instructions for developers to connect and utilize Neon Postgres in their applications.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/integrations-list/

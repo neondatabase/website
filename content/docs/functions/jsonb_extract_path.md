@@ -1,6 +1,7 @@
 ---
 title: Postgres jsonb_extract_path() function
 subtitle: Extracts a JSONB sub-object at the specified path
+summary: Covers the usage of the `jsonb_extract_path` function in Postgres to efficiently extract values from nested JSONB documents, enhancing performance over full JSONB payload queries.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.376Z'
 ---

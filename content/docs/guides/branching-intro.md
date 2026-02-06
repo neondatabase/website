@@ -1,6 +1,7 @@
 ---
 title: Get started with branching
 subtitle: Everything you need to get started with Neon's branching feature
+summary: Covers the setup and integration of Neon's branching feature into development workflows, including automation with APIs, CLI, and CI/CD tools for efficient branch management and preview deployments.
 enableTableOfContents: true
 updatedOn: '2025-12-11T15:40:49.861Z'
 ---

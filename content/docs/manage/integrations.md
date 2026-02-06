@@ -1,5 +1,6 @@
 ---
 title: Manage integrations
+summary: Covers the management of third-party integrations within a Neon project, including adding, configuring, and suggesting new integrations to enhance functionality and streamline workflows.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2024-01-12T16:49:12.349Z'

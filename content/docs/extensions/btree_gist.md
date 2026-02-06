@@ -2,6 +2,7 @@
 title: The btree_gist extension
 subtitle: Combine GiST and B-tree indexing capabilities for efficient multi-column
   queries and constraints
+summary: Covers the setup of the `btree_gist` extension in Postgres, enabling the creation of multicolumn GiST indexes that integrate B-tree data types for efficient querying and exclusion constraints.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.229Z'
 ---

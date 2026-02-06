@@ -1,6 +1,7 @@
 ---
 title: Next.js Server SDK Reference
 subtitle: Server-side authentication API for Next.js with Neon Auth
+summary: Covers the setup of the Neon Auth Next.js server SDK for implementing server-side authentication in Next.js applications, detailing installation, environment variable configuration, and core functionalities like session management and middleware creation.
 enableTableOfContents: true
 layout: wide
 updatedOn: '2026-01-30T14:03:06.275Z'

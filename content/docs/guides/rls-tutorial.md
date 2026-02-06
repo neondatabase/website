@@ -1,6 +1,7 @@
 ---
 title: Secure your app with RLS
 subtitle: Learn how Row-level Security (RLS) protects user data
+summary: Step-by-step guide for implementing Row-Level Security (RLS) in a React.js app using Neon, demonstrating how to secure user data by enforcing access control at the database level with JWT authentication.
 enableTableOfContents: true
 updatedOn: '2025-12-10T22:18:02.771Z'
 redirectFrom:

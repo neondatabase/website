@@ -1,6 +1,7 @@
 ---
 title: Develop with Neon on Azure
 subtitle: Find the resources you need to start developing with Neon on Azure
+summary: Covers the setup of developing with Neon on Azure, including getting started resources, connection methods, and available Azure CLIs and SDKs for managing Neon resources.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-10-30T16:15:01.778Z'

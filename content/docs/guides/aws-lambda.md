@@ -1,6 +1,7 @@
 ---
 title: Connect from AWS Lambda
 subtitle: Learn how to set up a Neon database and connect from an AWS Lambda function
+summary: Step-by-step guide for setting up a Neon database and connecting it to an AWS Lambda function using Node.js, including creating the Lambda function and deploying it with the Serverless Framework.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.262Z'
 ---

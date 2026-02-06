@@ -2,6 +2,7 @@
 title: Postgres query reference
 subtitle: Find examples of commonly-used Postgres queries for basic to advanced
   operations
+summary: Covers examples of commonly-used Postgres queries for creating tables, modifying columns, and performing data operations such as inserting, updating, deleting, and selecting data.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-reference

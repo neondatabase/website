@@ -2,6 +2,7 @@
 title: Neon MCP Server overview
 subtitle: Learn about managing your Neon projects using natural language with Neon MCP
   Server
+summary: Covers the setup and management of Neon Postgres databases using the Neon MCP Server, enabling users to execute commands and make schema changes through natural language without coding.
 enableTableOfContents: true
 updatedOn: '2026-02-06T17:34:17.401Z'
 ---

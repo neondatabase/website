@@ -1,6 +1,7 @@
 ---
 title: Use Neon read replicas with Prisma
 subtitle: Learn how to scale Prisma applications with Neon read replicas
+summary: Step-by-step guide for leveraging Neon read replicas to scale Prisma applications, including creating read replicas and configuring compute size settings for optimized read operations.
 enableTableOfContents: true
 updatedOn: '2026-02-01T11:47:48.279Z'
 ---

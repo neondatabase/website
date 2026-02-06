@@ -3,6 +3,7 @@ title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service offers unified billing through Azure
   Marketplace
+summary: Covers the setup of Neon as an Azure Native Service, detailing pricing plans, billing through Azure Marketplace, and the transition from deprecated Azure-managed organizations to Neon-managed organizations.
 updatedOn: '2025-10-30T22:50:07.253Z'
 ---
 

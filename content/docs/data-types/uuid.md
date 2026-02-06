@@ -1,6 +1,7 @@
 ---
 title: Postgres UUID data type
 subtitle: Work with UUIDs in Postgres
+summary: Covers the usage and implementation of the UUID data type in Postgres, including storage format, syntax, and example queries for generating and managing unique identifiers in databases.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.367Z'
 ---

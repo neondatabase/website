@@ -1,6 +1,7 @@
 ---
 title: The pg_trgm extension
 subtitle: Improve Postgres text searches with the pg_trgm extension
+summary: Covers the setup and usage of the `pg_trgm` extension in Postgres for enhancing text search capabilities through trigram matching, enabling efficient fuzzy string matching and proximity searches.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.240Z'
 ---

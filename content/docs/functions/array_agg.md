@@ -1,6 +1,7 @@
 ---
 title: Postgres array_agg() function
 subtitle: Aggregate values into an array
+summary: Covers the usage of the Postgres `array_agg()` function to aggregate multiple row values into a single array, including syntax, ordering options, and practical examples for data denormalization.
 enableTableOfContents: true
 updatedOn: '2024-06-28T22:54:53.164Z'
 ---

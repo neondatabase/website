@@ -1,6 +1,7 @@
 ---
 title: File storage with Azure Blob Storage
 subtitle: Store files via Azure Blob Storage and track metadata in Neon
+summary: Step-by-step guide for integrating Azure Blob Storage with Neon to store files and track their metadata in the Neon database.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.264Z'
 ---

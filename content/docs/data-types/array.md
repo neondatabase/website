@@ -1,6 +1,7 @@
 ---
 title: Postgres Array data type
 subtitle: Manage collections of elements using arrays
+summary: Covers the usage of the `ARRAY` data type in Postgres for storing and manipulating collections of elements, including syntax, storage, and practical examples for managing related data efficiently.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.365Z'
 ---

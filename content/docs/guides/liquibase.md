@@ -1,6 +1,7 @@
 ---
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
+summary: Step-by-step guide for installing and configuring Liquibase to manage database schema changes in a Neon environment, including deployment and rollback procedures.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.451Z'
 ---

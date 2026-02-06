@@ -1,5 +1,6 @@
 ---
 title: Security reporting
+summary: Covers the procedure for reporting security issues, including contact information, response commitments, confidentiality measures, and details about Neon's bug bounty program through HackerOne.
 enableTableOfContents: true
 updatedOn: '2025-03-07T12:51:22.977Z'
 ---

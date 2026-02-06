@@ -1,6 +1,7 @@
 ---
 title: Backups
 subtitle: An overview of backup strategies for Neon Postgres
+summary: Covers backup strategies for Neon Postgres, including instant restore capabilities and the use of `pg_dump` for traditional and automated backups, ensuring data recovery and compliance.
 enableTableOfContents: true
 updatedOn: '2025-12-11T15:40:49.870Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Connect a Next.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Next.js application
+summary: Covers the setup of a Neon project and the connection process from a Next.js application, including project creation, dependency installation, and credential management.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel

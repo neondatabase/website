@@ -1,6 +1,7 @@
 ---
 title: Deploy Neon on Azure
 subtitle: Learn how to deploy Neon as a Native ISV Service on Azure
+summary: Step-by-step guide for deploying Neon as a native service on Azure, including prerequisites and instructions for creating projects in Azure regions without native integration.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-10-30T16:15:01.776Z'

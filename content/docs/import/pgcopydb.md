@@ -1,6 +1,7 @@
 ---
 title: Migrate data to Neon Postgres using pgcopydb
 subtitle: Streamline your Postgres data migration to Neon using pgcopydb
+summary: Step-by-step guide for migrating data to Neon Postgres using pgcopydb, covering setup, monitoring, and advanced usage options for efficient and reliable database transfers.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-06-30T11:30:21.920Z'

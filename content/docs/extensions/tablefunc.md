@@ -2,6 +2,7 @@
 title: The tablefunc extension
 subtitle: Reshape data with pivot tables and navigate hierarchical structures in
   Postgres
+summary: Covers the setup and usage of the `tablefunc` extension in Postgres for creating pivot tables, generating random numbers, and navigating hierarchical data structures within a Neon database.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.249Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Upgrading your Postgres version
 subtitle: Learn how upgrade to a new major Postgres version in Neon
+summary: How to upgrade your Neon project to a new major Postgres version, including steps for creating a new project with the desired version and considerations for compatibility and performance testing.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.302Z'
 ---

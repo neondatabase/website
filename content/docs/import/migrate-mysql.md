@@ -1,5 +1,6 @@
 ---
 title: Migrate from MySQL to Neon Postgres
+summary: Covers the migration of a MySQL database to Neon Postgres using the `pgloader` utility, detailing prerequisites, credential retrieval, and data transformation processes.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-08-18T12:11:47.178Z'

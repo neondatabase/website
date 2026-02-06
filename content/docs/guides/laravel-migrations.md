@@ -1,6 +1,7 @@
 ---
 title: Schema migration with Neon Postgres and Laravel
 subtitle: Set up Neon Postgres and run migrations for your Laravel project
+summary: Step-by-step guide for setting up Neon Postgres with Laravel, including initializing a project, retrieving the database connection string, and managing schema migrations using Laravel's migration system.
 enableTableOfContents: true
 updatedOn: '2025-08-18T15:43:43.463Z'
 ---

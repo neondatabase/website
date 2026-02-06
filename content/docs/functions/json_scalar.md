@@ -1,6 +1,7 @@
 ---
 title: Postgres json_scalar() Function
 subtitle: Convert SQL Scalar Values to JSON Scalar Values
+summary: Covers the usage of the `json_scalar()` function in PostgreSQL 17 for converting SQL scalar values, such as numbers, strings, timestamps, and booleans, into their JSON equivalents, ensuring proper formatting and null handling.
 enableTableOfContents: true
 updatedOn: '2025-03-05T21:09:38.749Z'
 ---

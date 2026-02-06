@@ -1,6 +1,7 @@
 ---
 title: Organizations
 subtitle: Manage your projects and collaborate with team members
+summary: Covers the management of projects within organizations in Neon, detailing user roles, permissions, and the process for creating and overseeing organizations and their associated projects.
 enableTableOfContents: true
 updatedOn: '2025-05-23T18:48:33.110Z'
 ---

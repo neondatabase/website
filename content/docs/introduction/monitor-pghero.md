@@ -1,6 +1,7 @@
 ---
 title: Monitor Neon with PgHero
 subtitle: Monitor your Neon Postgres database with PgHero
+summary: How to install and connect PgHero to monitor your Neon Postgres database, enabling the identification of long-running queries, vacuuming needs, and indexing issues through a user-friendly dashboard interface.
 enableTableOfContents: true
 updatedOn: '2025-01-17T00:00:00.000Z'
 ---

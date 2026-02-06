@@ -1,6 +1,7 @@
 ---
 title: Auth production checklist
 subtitle: Required configuration before launching with Neon Auth
+summary: Step-by-step guide for configuring essential settings before launching an application with Neon Auth, including trusted domains, custom email providers, OAuth credentials, email verification, and security measures.
 enableTableOfContents: true
 updatedOn: '2025-11-30T00:00:00.000Z'
 ---

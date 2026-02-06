@@ -1,6 +1,7 @@
 ---
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
+summary: Covers the setup of AI context rules for Neon, including installation instructions for the Claude Code plugin and individual context rule files for other AI tools, enhancing code suggestions and reducing errors.
 enableTableOfContents: true
 updatedOn: '2026-01-22T15:48:50.614Z'
 ---

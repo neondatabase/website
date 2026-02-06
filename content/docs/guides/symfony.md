@@ -1,6 +1,7 @@
 ---
 title: Connect from Symfony with Doctrine to Neon
 subtitle: Set up a Neon project in seconds and connect from Symfony with Doctrine
+summary: Step-by-step guide for connecting a Symfony application to a Neon project using Doctrine ORM, including project creation and configuration of the database connection settings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/symfony

@@ -2,6 +2,7 @@
 title: File storage
 subtitle: Store files in external object storage and file management services and track
   metadata in Neon
+summary: Covers the setup of integrating Neon with external object storage services for file uploads and management, detailing how to store file references and metadata in a Neon Postgres database.
 enableTableOfContents: true
 updatedOn: '2025-04-27T11:08:17.425Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Postgres json_each() function
 subtitle: Expands JSON into a record per key-value pair
+summary: Covers the usage of the `json_each` function in Postgres to expand a JSON object into key-value pairs, enabling iteration and data transformation for dynamic JSON structures.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.374Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Replicate data with Inngest
 subtitle: Learn how to replicate data from Neon with Inngest
+summary: How to replicate data from a Neon Postgres database to Inngest workflows using Neon's logical replication feature, enabling custom transformations and integration with third-party APIs.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-02-03T20:41:57.321Z'

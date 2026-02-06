@@ -2,6 +2,7 @@
 title: Manage Neon with Terraform
 subtitle: Use Terraform to provision and manage your Neon projects, branches, endpoints,
   roles, databases, and other resources as code.
+summary: How to use Terraform to provision and manage Neon projects, including branches, databases, and compute endpoints, enabling automated and consistent infrastructure management.
 enableTableOfContents: true
 tag: community
 updatedOn: '2025-11-17T19:26:53.695Z'

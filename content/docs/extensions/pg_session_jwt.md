@@ -1,6 +1,7 @@
 ---
 title: The pg_session_jwt extension
 subtitle: Handle authenticated sessions through JWTs in Postgres
+summary: Covers the setup of the `pg_session_jwt` extension in Postgres for managing authenticated sessions using JSON Web Tokens (JWTs), including JWK validation and PostgREST compatibility for secure user identity handling.
 enableTableOfContents: true
 updatedOn: '2025-12-12T17:42:01.028Z'
 ---

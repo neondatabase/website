@@ -1,6 +1,7 @@
 ---
 title: Postgres abs() function
 subtitle: Calculate the absolute value of a number
+summary: Covers the usage of the Postgres `abs()` function to calculate the absolute value of numbers, including examples for ordering transactions and performing distance calculations.
 enableTableOfContents: true
 updatedOn: '2024-06-27T15:43:16.385Z'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Manage API Keys
+summary: Covers the management of API keys in Neon, detailing types of keys, creation processes, and security practices for storing and using these keys effectively.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys

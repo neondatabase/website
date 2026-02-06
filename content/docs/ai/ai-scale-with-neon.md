@@ -1,6 +1,7 @@
 ---
 title: Scale your AI application with Neon
 subtitle: Scale your AI application with Neon's Autoscaling and Read Replica features
+summary: Covers the scaling of AI applications using Neon's Autoscaling and Read Replica features, detailing vertical and horizontal scaling options with specific compute sizes and associated memory configurations.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.016Z'
 ---

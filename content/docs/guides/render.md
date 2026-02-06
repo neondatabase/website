@@ -1,6 +1,7 @@
 ---
 title: Use Neon Postgres with Render
 subtitle: Connect a Neon Postgres database to your Node application deployed with Render
+summary: Step-by-step guide for deploying a Node.js application connected to a Neon Postgres database on Render, including project setup and database initialization.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.915Z'
 ---

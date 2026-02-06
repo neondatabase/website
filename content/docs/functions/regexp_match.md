@@ -1,6 +1,7 @@
 ---
 title: Postgres regexp_match() function
 subtitle: Extract substrings matching a regular expression pattern
+summary: Covers the usage of the Postgres `regexp_match()` function to extract substrings from a string based on a specified regular expression pattern, including examples for parsing log entries.
 enableTableOfContents: true
 updatedOn: '2024-06-30T16:27:35.359Z'
 ---

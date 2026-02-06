@@ -1,6 +1,7 @@
 ---
 title: The pgrag extension
 subtitle: Create end-to-end Retrieval-Augmented Generation (RAG) pipelines
+summary: Covers the setup and usage of the `pgrag` extension for creating end-to-end Retrieval-Augmented Generation (RAG) pipelines directly within a SQL client, utilizing Postgres and `pgvector` for efficient information retrieval.
 enableTableOfContents: true
 updatedOn: '2025-06-23T15:24:08.758Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Postgres Decimal data types
 subtitle: Work with exact numerical values in Postgres
+summary: Covers the usage of Postgres decimal data types for representing exact numerical values, including syntax for defining precision and scale, and examples of their application in financial contexts.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.366Z'
 ---
