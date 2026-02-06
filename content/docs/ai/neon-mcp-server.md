@@ -120,6 +120,8 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 }
 ```
 
+</Admonition>
+
 <Admonition type="note">
 Use an organization API key to limit access to organization projects only.
 </Admonition>
@@ -141,6 +143,8 @@ Use an organization API key to limit access to organization projects only.
     ```
 
     > MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
+
+</TabItem>
 
 <TabItem>
 
