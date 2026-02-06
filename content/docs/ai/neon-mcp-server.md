@@ -48,6 +48,7 @@ It works by acting as a bridge between natural language requests and the [Neon A
 
 <Admonition type="important" title="Neon MCP Server Security Considerations">
 The Neon MCP Server grants powerful database management capabilities through natural language requests. **Always review and authorize actions requested by the LLM before execution.** Ensure that only authorized users and applications have access to the Neon MCP Server.
+</Admonition>
 
 ## Other setup options
 
