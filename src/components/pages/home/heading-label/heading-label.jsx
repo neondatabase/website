@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-import triangleIcon from 'icons/home/triangle.svg';
+import triangleIcon from 'icons/triangle.svg';
 
 const themeClassName = {
   white: 'text-gray-new-80',
