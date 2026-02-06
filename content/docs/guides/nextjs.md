@@ -5,7 +5,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/vercel
   - /docs/integrations/vercel
-updatedOn: '2025-10-31T11:07:57.604Z'
+updatedOn: '2026-02-05T13:09:31.725Z'
 ---
 
 <CopyPrompt src="/prompts/nextjs-prompt.md"
@@ -128,6 +128,18 @@ export default async function Page() {
 
 </CodeTabs>
 
+#### Understanding Caching in Server Components
+
+The examples above will work in development, but in production builds, Next.js will statically render these pages at build time. This means the database query runs once during build, not on every request.
+
+If you need fresh data on each request, add this to your page:
+
+```typescript
+export const dynamic = 'force-dynamic';
+```
+
+For other scenarios like periodic updates, see [Time-based Revalidation](https://nextjs.org/docs/app/building-your-application/caching#time-based-revalidation) in the Next.js docs.
+
 #### Server Actions
 
 In your server actions using the App Router, add the following code snippet to connect to your Neon database:
@@ -187,7 +199,7 @@ export default async function Page() {
     const sql = neon(process.env.DATABASE_URL);
     await sql`CREATE TABLE IF NOT EXISTS comments (comment TEXT)`;
     const comment = formData.get("comment");
-    await sql("INSERT INTO comments (comment) VALUES ($1)", [comment]);
+    await sql`INSERT INTO comments (comment) VALUES (${comment})`;
   }
   return (
     <form action={create}>
@@ -391,7 +403,7 @@ import { neon } from '@neondatabase/serverless';
 
 const sql = neon(process.env.DATABASE_URL);
 
-export default async function handler(req, res) {
+export default async function handler(req: Request) {
   const response = await sql`SELECT version()`;
   const { version } = response[0];
   return Response.json({ version });
@@ -400,10 +412,10 @@ export default async function handler(req, res) {
 
 ## Run the app
 
-When you run `npm run dev` you can expect to see the following on [localhost:3000](localhost:3000):
+When you run `npm run dev` you can expect to see the following on `localhost:3000`:
 
 ```shell shouldWrap
-PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
 </Steps>
