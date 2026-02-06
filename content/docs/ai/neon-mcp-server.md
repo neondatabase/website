@@ -103,6 +103,12 @@ Run the MCP server locally on your machine.
 
 **Requires:** Node.js >= v18, [Neon API key](/docs/manage/api-keys)
 
+```bash
+npx add-mcp "npx -y @neondatabase/mcp-server-neon start <YOUR_NEON_API_KEY>" --name neon
+```
+
+Or add this to your MCP config file:
+
 ```json
 {
   "mcpServers": {
