@@ -13,20 +13,21 @@ The **Neon MCP Server** is an open-source tool that lets you interact with your 
 The fastest way to set up Neon's MCP Server is with one command:
 
 ```bash
-npx neonctl@latest init
+npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This command will:
+This command auto-detects compatible MCP clients in your workspace (Cursor, VS Code, Claude Code, and others) and configures them to connect to Neon's remote MCP server. An OAuth window will open to authorize access to your Neon account.
 
-- Authenticate via OAuth (opens your browser)
-- Create a Neon API key for you automatically
-- Configure your editor to connect to Neon's remote MCP server
+**Alternative setup options:**
 
-Currently the `init` command supports: **Cursor**, **VS Code with GitHub Copilot**, and **Claude Code**
+- **Cursor, VS Code, Claude Code:** Run `npx neonctl@latest init` for automatic setup with API key authentication. See the [neonctl init documentation](/docs/reference/cli-init).
+- **API key authentication:** For remote agents or when OAuth isn't available:
+  ```bash
+  npx add-mcp https://mcp.neon.tech/mcp --header "Authorization: Bearer $NEON_API_KEY"
+  ```
+- **Manual configuration:** See [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon) for step-by-step instructions for any editor, including Windsurf, ChatGPT, Zed, and others.
 
-After running the command, restart your editor and ask your AI assistant to **"Get started with Neon"** to launch the interactive onboarding guide. For more details, see the [neonctl init documentation](/docs/reference/cli-init).
-
-**Prefer manual configuration?** See [Connect MCP clients](/docs/ai/connect-mcp-clients-to-neon) for step-by-step instructions for any editor, including Windsurf, ChatGPT, Zed, and others.
+After setup, restart your editor and ask your AI assistant to **"Get started with Neon"** to launch the interactive onboarding guide.
 
 ---
 
@@ -83,6 +84,16 @@ You can use Neon's managed MCP server, available at `https://mcp.neon.tech`. Thi
 - An MCP Client application (e.g., Cursor, Windsurf, Claude Desktop, Claude Code, Cline, Zed, ChatGPT).
 - A Neon account.
 
+#### Quick setup with add-mcp:
+
+Run the following command to configure Neon's MCP Server for all detected editors in your workspace:
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp
+```
+
+An OAuth window will open in your browser. Follow the prompts to authorize your MCP client to access your Neon account.
+
 <Admonition type="tip" title="Install in a single click for Cursor users">
 Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
 
@@ -90,10 +101,21 @@ Click the button below to install the Neon MCP server in Cursor. When prompted, 
 
 </Admonition>
 
-#### Setup steps:
+#### Manual setup:
 
 1.  Go to your MCP Client's settings where you configure MCP Servers (this varies by client)
-2.  Register a new MCP Server. When prompted for the configuration, name the server "Neon" and enter `https://mcp.neon.tech/mcp` as the Remote MCP Server URL.
+2.  Register a new MCP Server. When prompted for the configuration, name the server "Neon" and add the following configuration:
+
+    ```json
+    {
+      "mcpServers": {
+        "Neon": {
+          "type": "http",
+          "url": "https://mcp.neon.tech/mcp"
+        }
+      }
+    }
+    ```
 
     > MCP supports two remote server transports: the deprecated Server-Sent Events (SSE) and the newer, recommended Streamable HTTP. If your LLM client doesn't support Streamable HTTP yet, you can switch the endpoint from `https://mcp.neon.tech/mcp` to `https://mcp.neon.tech/sse` to use SSE instead.
 

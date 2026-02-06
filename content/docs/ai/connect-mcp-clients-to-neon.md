@@ -45,6 +45,14 @@ Ensure you are using the latest version of your chosen MCP client as MCP integra
 
 ## Setup Options
 
+**Quickest Setup:** Configure all detected MCP clients at once:
+
+```bash
+npx add-mcp https://mcp.neon.tech/mcp
+```
+
+This auto-detects compatible editors and configures them with OAuth authentication. For API key authentication, add `--header "Authorization: Bearer $NEON_API_KEY"`.
+
 **Quick Setup:** Cursor, Claude Code, and VS Code support automatic setup with `npx neonctl@latest init`. This configures API key-based authentication for streamlined tool access with fewer approval prompts.
 
 **Manual Setup:** All editors support **OAuth** (remote server) or **Local** (run MCP server locally) setup.
