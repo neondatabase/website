@@ -12,6 +12,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 
 Here's a snapshot of what we're working on now:
 
+- **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](https://neon.com/docs/auth/roadmap) for details.
 - **Connection pooling metrics**: We're expanding our observability capabilities with additional metrics for PgBouncer, available in the Neon Console and through our OpenTelemetry integration.
 - **Enhanced consumption metrics**: More metrics are coming to help you track and monitor usage across Neon's usage-based pricing plans with more granular insights.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.

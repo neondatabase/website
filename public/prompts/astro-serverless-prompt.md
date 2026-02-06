@@ -25,7 +25,33 @@ npm install @neondatabase/serverless
 
 ---
 
-### 2. Verify that there is an `.env` file
+### 2. Enable on-demand rendering
+
+Run:
+
+```
+npx astro add node --yes
+```
+
+This enables server-side rendering (SSR) so pages can fetch fresh data on each request. Without this, the database will only be queried at build time.
+
+---
+
+### 3. Create a database utility file
+
+Create `src/lib/neon.ts` with:
+
+```typescript
+import { neon } from '@neondatabase/serverless';
+
+export const sql = neon(import.meta.env.DATABASE_URL);
+```
+
+This centralizes your database configuration following best practices.
+
+---
+
+### 4. Verify that there is an `.env` file
 
 - Check for the presence of a `.env` file at the root of the project.
 - If it doesn't exist, advise the user to create one and add the following line, replacing the connection string with the one copied from their Neon project,
@@ -39,14 +65,13 @@ npm install @neondatabase/serverless
 
 ---
 
-### 3. Update the Astro project to use the Neon driver server-side
+### 5. Update the Astro project to use the Neon driver server-side
 
 #### `.astro` frontmatter
 
 ```
-import { neon } from '@neondatabase/serverless';
+import { sql } from '../lib/neon';
 
-const sql = neon(import.meta.env.DATABASE_URL);
 const response = await sql`SELECT version()`;
 const data = response[0].version;
 ```
@@ -59,10 +84,9 @@ const data = response[0].version;
 #### API route (`src/pages/api/index.ts`)
 
 ```
-import { neon } from '@neondatabase/serverless';
+import { sql } from '../../lib/neon';
 
 export async function GET() {
-  const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
   return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
@@ -94,6 +118,9 @@ You should see the Postgres version returned by your Neon database.
 Before suggesting code or making edits, ensure:
 
 - The `@neondatabase/serverless` package is used exclusively
+- The Node.js adapter is installed (`npx astro add node`)
+- A `src/lib/neon.ts` utility file is created and exports the `sql` function
+- Code imports from the utility file (`import { sql } from '../lib/neon'`), not inline initialization
 - Queries are server-side only (not in client JS or components)
 - The connection string is loaded from `import.meta.env.DATABASE_URL`
 - A `.env` file is present or has been created

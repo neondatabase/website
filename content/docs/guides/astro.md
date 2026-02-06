@@ -3,7 +3,7 @@ title: Connect Astro to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres from .astro files or API
   routes.
 enableTableOfContents: true
-updatedOn: '2025-07-29T16:22:53.110Z'
+updatedOn: '2026-02-04T22:32:55.752Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
@@ -45,6 +45,20 @@ If you do not have one already, create a Neon project. Save your connection deta
 
    </CodeTabs>
 
+## Enable on-demand rendering
+
+Astro requires an adapter to query databases at request time. Run:
+
+```shell
+npx astro add node
+```
+
+This enables [on-demand rendering](https://docs.astro.build/en/guides/on-demand-rendering/) (also known as server-side rendering or SSR) so your pages can fetch fresh data on each request.
+
+<Admonition type="note">
+This adapter is required for real-time database queries in production. Without it, your database is queried only once at build time, and production will serve static data. Development mode (`npm run dev`) rebuilds pages automatically and does not require the adapter.
+</Admonition>
+
 ## Store your Neon credentials
 
 Add a `.env` file to your project directory and add your Neon connection string to it. You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard** to open the **Connect to your database** modal. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
@@ -53,24 +67,50 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
+## Create a database utility
+
+Create a reusable database client that you can import throughout your application. This approach centralizes your database configuration and follows best practices for code organization.
+
+Create a new file at `src/lib/neon.ts` (or `src/lib/neon.js`) with the following code:
+
+<CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
+
+```typescript
+import { Pool } from 'pg';
+
+export const pool = new Pool({
+  connectionString: import.meta.env.DATABASE_URL,
+  ssl: true
+});
+```
+
+```typescript
+import postgres from 'postgres';
+
+export const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+```
+
+```typescript
+import { neon } from '@neondatabase/serverless';
+
+export const sql = neon(import.meta.env.DATABASE_URL);
+```
+
+</CodeTabs>
+
 ## Configure the Postgres client
 
-There a multiple ways to make server side requests with Astro. See below for two of those options: **astro files** and **Server Endpoints (API Routes)**.
+There are multiple ways to make server side requests with Astro. See below for two of those options: **Page Components (.astro files)** and **Server Endpoints (API Routes)**.
 
-### astro files
+### Page Components (.astro files)
 
-In your `.astro` files, use the following code snippet to connect to your Neon database:
+In your `.astro` page components (e.g., `src/pages/index.astro`), you can query the database in the frontmatter section (between the `---` fences). Import the database client from your utility file:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```astro
 ---
-import { Pool } from 'pg';
-
-const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
-  ssl: true
-});
+import { pool } from '../lib/neon';
 
 const client = await pool.connect();
 
@@ -89,9 +129,7 @@ try {
 
 ```astro
 ---
-import postgres from 'postgres';
-
-const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
+import { sql } from '../lib/neon';
 
 const response = await sql`SELECT version()`;
 const data = response[0].version;
@@ -102,9 +140,7 @@ const data = response[0].version;
 
 ```astro
 ---
-import { neon } from '@neondatabase/serverless';
-
-const sql = neon(import.meta.env.DATABASE_URL);
+import { sql } from '../lib/neon';
 
 const response = await sql`SELECT version()`;
 const data = response[0].version;
@@ -115,29 +151,28 @@ const data = response[0].version;
 
 </CodeTabs>
 
+<Admonition type="note">
+You can also initialize the database connection directly in each `.astro` file, but using a shared utility file is recommended for maintainability and code organization.
+</Admonition>
+
 #### Run the app
 
-When you run `npm run dev` you can expect to see the following when you visit [localhost:4321](localhost:4321):
+When you run `npm run dev` you can expect to see something like the following when you visit `localhost:4321`:
 
 ```shell shouldWrap
-PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit
+PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
 ```
 
 ### Server Endpoints (API Routes)
 
-In your server endpoints (API Routes) in Astro application, use the following code snippet to connect to your Neon database:
+In your server endpoints (API Routes) in Astro application, import the database client from your utility file:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 
 ```javascript
 // File: src/pages/api/index.ts
 
-import { Pool } from 'pg';
-
-const pool = new Pool({
-  connectionString: import.meta.env.DATABASE_URL,
-  ssl: true,
-});
+import { pool } from '../../lib/neon';
 
 export async function GET() {
   const client = await pool.connect();
@@ -155,10 +190,9 @@ export async function GET() {
 ```javascript
 // File: src/pages/api/index.ts
 
-import postgres from 'postgres';
+import { sql } from '../../lib/neon';
 
 export async function GET() {
-  const sql = postgres(import.meta.env.DATABASE_URL, { ssl: 'require' });
   const response = await sql`SELECT version()`;
   return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
@@ -169,10 +203,9 @@ export async function GET() {
 ```javascript
 // File: src/pages/api/index.ts
 
-import { neon } from '@neondatabase/serverless';
+import { sql } from '../../lib/neon';
 
 export async function GET() {
-  const sql = neon(import.meta.env.DATABASE_URL);
   const response = await sql`SELECT version()`;
   return new Response(JSON.stringify(response[0]), {
     headers: { 'Content-Type': 'application/json' },
@@ -184,10 +217,10 @@ export async function GET() {
 
 #### Run the app
 
-When you run `npm run dev` you can expect to see the following when you visit the [localhost:4321/api](localhost:4321/api) route:
+When you run `npm run dev` you can expect to see something like the following when you visit the `localhost:4321/api` route:
 
 ```shell shouldWrap
-{ version: 'PostgreSQL 16.0 on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit' }
+{ version: 'PostgreSQL 17.7 on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit' }
 ```
 
 </Steps>

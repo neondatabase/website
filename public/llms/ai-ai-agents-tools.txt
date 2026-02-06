@@ -8,6 +8,16 @@
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
 
+## Quick setup
+
+The fastest way to get started with Neon and AI:
+
+```bash
+npx neonctl@latest init
+```
+
+This authenticates via OAuth, creates an API key, configures your editor (Cursor, VS Code, or Claude Code), and installs [agent skills](https://github.com/neondatabase/agent-skills). Then restart and ask your AI assistant **"Get started with Neon"**.
+
 ## MCP integration
 
 The Model Context Protocol (MCP) is a standardized way for AI tools to interact with Neon databases using natural language, providing secure and contextual access to your data and infrastructure.
