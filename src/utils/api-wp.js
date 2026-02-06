@@ -275,7 +275,6 @@ const getWpPostBySlug = cache(async (slug) => {
         modifiedGmt
         title(format: RENDERED)
         content(format: RENDERED)
-        readingTime
         pageBlogPost {
           largeCover {
             altText
@@ -311,7 +310,6 @@ const getWpPostBySlug = cache(async (slug) => {
           slug
           title(format: RENDERED)
           date
-          readingTime
           pageBlogPost {
             largeCover {
               altText
@@ -342,7 +340,8 @@ const getWpPostBySlug = cache(async (slug) => {
 
   const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes
+  const nodes = data?.posts?.nodes ?? [];
+  const sortedPosts = nodes
     .filter((post) => post.slug !== slug || isEmpty(post.pageBlogPost?.largeCover))
     .slice(0, 3);
 

@@ -67,7 +67,7 @@ const BlogPage = async ({ params }) => {
             className="col-start-4 col-end-10 xl:col-start-1 xl:col-end-9 lg:col-span-full"
             title={title}
             date={formattedDate}
-            category={categories.nodes[0]}
+            category={categories?.nodes?.[0] ?? { name: 'Blog', slug: 'uncategorized' }}
             {...pageBlogPost}
           />
           <Content
@@ -78,7 +78,7 @@ const BlogPage = async ({ params }) => {
             className="col-span-3 col-end-13 row-start-2 mt-10 xl:col-span-4 lg:col-span-full lg:mt-5"
             title={title}
             slug={shareUrl}
-            authors={pageBlogPost.authors}
+            authors={pageBlogPost?.authors ?? []}
             posts={relatedPosts}
           />
           <SocialShare
@@ -104,25 +104,18 @@ export async function generateMetadata({ params }) {
 
   if (!post) return notFound();
 
-  const {
-    seo: {
-      title,
-      metaDesc,
-      metaKeywords,
-      metaRobotsNoindex,
-      opengraphTitle,
-      opengraphDescription,
-      twitterImage,
-    },
-    date,
-    pageBlogPost,
-    categories,
-  } = post;
+  const { seo, date, pageBlogPost, categories } = post;
+  const authors = (pageBlogPost?.authors ?? []).map(({ author }) => author?.title);
 
-  const authors = pageBlogPost.authors.map(({ author }) => author?.title);
+  const title = seo?.opengraphTitle || seo?.title;
+  const metaDesc = seo?.metaDesc;
+  const metaKeywords = seo?.metaKeywords;
+  const metaRobotsNoindex = seo?.metaRobotsNoindex;
+  const opengraphDescription = seo?.opengraphDescription;
+  const twitterImage = seo?.twitterImage;
 
   return getMetadata({
-    title: opengraphTitle || title,
+    title,
     description: opengraphDescription || metaDesc,
     keywords: metaKeywords,
     robotsNoindex: metaRobotsNoindex,
@@ -130,7 +123,7 @@ export async function generateMetadata({ params }) {
     imagePath: twitterImage?.mediaItemUrl,
     type: 'article',
     publishedTime: date,
-    category: categories.nodes[0]?.name,
+    category: categories?.nodes?.[0]?.name,
     authors,
   });
 }
