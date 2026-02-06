@@ -1,6 +1,7 @@
 ---
 title: Data anonymization
 subtitle: Mask sensitive data in development branches using PostgreSQL Anonymizer
+summary: Covers the setup of anonymized branches in Neon to mask sensitive data using PostgreSQL Anonymizer, enabling realistic testing without exposing personally identifiable information (PII).
 redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new

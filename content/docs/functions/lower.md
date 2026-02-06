@@ -1,6 +1,7 @@
 ---
 title: Postgres lower() function
 subtitle: Convert strings to lowercase
+summary: Covers the usage of the `lower()` function in Postgres to convert strings to lowercase for case-insensitive searches and standardization of user input, with examples for practical application.
 enableTableOfContents: true
 updatedOn: '2024-06-27T15:05:08.274Z'
 ---

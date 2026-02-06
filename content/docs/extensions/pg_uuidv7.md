@@ -1,6 +1,7 @@
 ---
 title: The pg_uuidv7 extension
 subtitle: Generate and manage time-ordered version 7 UUIDs in Postgres
+summary: Covers the setup and usage of the `pg_uuidv7` extension in Postgres for generating and managing time-ordered version 7 UUIDs, enhancing database performance through improved indexing and data locality.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.241Z'
 ---

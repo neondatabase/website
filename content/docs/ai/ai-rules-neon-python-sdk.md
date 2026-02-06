@@ -1,6 +1,7 @@
 ---
 title: 'AI Rules: Neon Python SDK'
 subtitle: Context rules for AI tools to use the Neon Python SDK
+summary: Covers the context rules for AI tools utilizing the Neon Python SDK, currently in beta, and invites user feedback for improvements.
 enableTableOfContents: true
 updatedOn: '2025-10-10T13:19:39.262Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
+summary: How to create and manage read replicas in Neon, including steps for adding replicas to branches, configuring compute sizes, and utilizing features like Autoscaling and Scale to Zero for optimized performance.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.031Z'
 ---

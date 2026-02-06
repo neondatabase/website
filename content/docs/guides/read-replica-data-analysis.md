@@ -1,6 +1,7 @@
 ---
 title: Run analytics queries with Read Replicas
 subtitle: Leverage read replicas for running data-intensive analytics queries
+summary: How to create and use read replicas in Neon for executing data-intensive analytics queries without affecting the performance of your production database.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.031Z'
 ---

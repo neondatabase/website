@@ -1,5 +1,6 @@
 ---
 title: Neon Postgres Version Support Policy
+summary: Covers the support policy for PostgreSQL versions used by Neon, detailing major and minor release schedules, end-of-life timelines, and version numbering conventions.
 enableTableOfContents: true
 updatedOn: '2025-11-28T18:21:08.471Z'
 ---

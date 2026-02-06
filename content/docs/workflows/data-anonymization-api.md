@@ -1,6 +1,7 @@
 ---
 title: Data anonymization API reference
 subtitle: API endpoints for managing anonymized branches and masking rules
+summary: Covers the API endpoints for creating anonymized branches and managing masking rules using PostgreSQL Anonymizer, enabling users to handle sensitive data effectively within Neon.
 enableTableOfContents: true
 updatedOn: '2026-01-13T19:28:54.348Z'
 ---

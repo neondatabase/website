@@ -1,6 +1,7 @@
 ---
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
+summary: How to enable the `pg_search` extension on Neon for efficient full-text search and analytics in Postgres, utilizing BM25 indexing for high-relevance results and advanced text search capabilities.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.023Z'
 ---

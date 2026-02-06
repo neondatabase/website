@@ -1,6 +1,7 @@
 ---
 title: Postgres JSON_QUERY() Function
 subtitle: Extract and Transform JSON Values with SQL/JSON Path Expressions
+summary: Covers the usage of the `JSON_QUERY()` function in PostgreSQL 17 for extracting and transforming JSON values using SQL/JSON path expressions, including details on wrappers and quote behavior.
 enableTableOfContents: true
 updatedOn: '2025-06-23T15:24:08.761Z'
 ---

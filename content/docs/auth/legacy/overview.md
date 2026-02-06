@@ -1,6 +1,7 @@
 ---
 title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
+summary: Covers the setup and functionality of the legacy Neon Auth system using Stack Auth for existing users, detailing user management and data synchronization within a Neon Postgres database.
 enableTableOfContents: true
 tag: archived
 noindex: true

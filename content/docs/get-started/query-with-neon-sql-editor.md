@@ -1,6 +1,7 @@
 ---
 title: Query with Neon's SQL Editor
 subtitle: Query your database from the Neon Console using the Neon SQL Editor
+summary: Covers the use of Neon's SQL Editor for executing queries on databases within the Neon Console, including features like query history, saving queries, and utilizing Explain and Analyze functions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials

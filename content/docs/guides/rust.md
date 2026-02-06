@@ -2,6 +2,7 @@
 title: Connect a Rust application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Rust using the postgres or
   tokio-postgres crates
+summary: Covers the setup of connecting a Rust application to a Neon Postgres database using the rust-postgres and tokio-postgres crates, including project creation and dependency management.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust

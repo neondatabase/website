@@ -1,6 +1,7 @@
 ---
 title: Postgres indexes
 subtitle: Optimize query performance with indexes in Postgres
+summary: Covers the setup of various index types in Postgres, including B-tree, Hash, GiST, GIN, and BRIN, and provides guidance on creating and effectively using these indexes to optimize query performance.
 enableTableOfContents: true
 updatedOn: '2024-08-09T20:46:35.871Z'
 ---

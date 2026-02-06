@@ -1,6 +1,7 @@
 ---
 title: Semantic Kernel
 subtitle: Quickly build AI RAG and Agentic workflows with Semantic Kernel and Neon
+summary: Step-by-step guide for initializing a Postgres Vector Store with Semantic Kernel in Neon, utilizing the `pgvector` extension for AI-driven search and retrieval tasks.
 enableTableOfContents: true
 updatedOn: '2025-03-12T23:30:20.650Z'
 ---

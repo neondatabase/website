@@ -1,6 +1,7 @@
 ---
 title: Project collaboration
 subtitle: Learn how to invite people to collaborate on your Neon project
+summary: Step-by-step guide for inviting users to collaborate on a Neon project, detailing the process of setting up accounts and sending invitations through the Neon Console.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/project-sharing-guide

@@ -1,5 +1,6 @@
 ---
 title: Postgres guides
+summary: Covers the features of Postgres within the Neon environment, including data types, extensions, functions, and strategies for optimizing query performance.
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/postgres-intro

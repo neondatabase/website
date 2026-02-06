@@ -1,6 +1,7 @@
 ---
 title: Postgres json_extract_path_text() Function
 subtitle: Extracts a JSON sub-object at the specified path as text
+summary: Covers the usage of the `json_extract_path_text` function in Postgres for extracting text values from JSON objects at specified paths, facilitating easier text manipulation and comparison.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.375Z'
 ---

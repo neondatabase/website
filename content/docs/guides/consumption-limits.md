@@ -1,6 +1,7 @@
 ---
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
+summary: How to set consumption limits for projects using the Neon API, including configuring quotas for various metrics like active time, compute time, and data transfer to manage resource usage effectively.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-billing

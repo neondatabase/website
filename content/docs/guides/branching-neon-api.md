@@ -1,6 +1,7 @@
 ---
 title: Branching with the Neon API
 subtitle: Learn how to create and delete branches with the Neon API
+summary: Covers the creation and deletion of branches using the Neon API, including example requests and prerequisites for making API calls.
 enableTableOfContents: true
 updatedOn: '2026-02-01T13:37:13.526Z'
 ---

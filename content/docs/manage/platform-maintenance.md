@@ -1,5 +1,6 @@
 ---
 title: Platform maintenance
+summary: Covers the process of Neon platform maintenance, detailing potential disruptions, types of updates performed, and how to monitor for maintenance notifications while ensuring applications handle brief interruptions effectively.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-08-19T11:11:49.496Z'

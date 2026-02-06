@@ -1,6 +1,7 @@
 ---
 title: 'Neon for AI Agent Platforms'
 subtitle: Build full-stack agents on a serverless Postgres backend
+summary: Covers the setup of a serverless Postgres backend specifically designed for AI agent platforms, enabling instant provisioning, automatic scaling, and integrated services for building full-stack applications.
 enableTableOfContents: true
 updatedOn: '2025-07-26T09:00:00.000Z'
 image: '/images/social-previews/use-cases/ai-agents.jpg'

@@ -1,6 +1,7 @@
 ---
 title: The pgcrypto extension
 subtitle: Secure your data with cryptographic functions in Postgres
+summary: Covers the setup and usage of the `pgcrypto` extension in Neon, detailing how to enable it and utilize its cryptographic functions for encryption, decryption, and hashing within Postgres.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.242Z'
 ---

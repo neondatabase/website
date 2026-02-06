@@ -1,6 +1,7 @@
 ---
 title: Migrate a database schema
 subtitle: Perform a schema-only migration with pg_dump and pg_restore
+summary: Covers the setup of a schema-only migration using `pg_dump` and `pg_restore`, detailing how to dump and modify a database schema for compatibility with Neon.
 enableTableOfContents: true
 updatedOn: '2026-02-04T13:28:35.600Z'
 ---

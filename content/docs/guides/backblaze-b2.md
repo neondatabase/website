@@ -1,6 +1,7 @@
 ---
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
+summary: Step-by-step guide for integrating Backblaze B2 with Neon to store files and track metadata in your Neon database, enabling efficient management of unstructured data.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.264Z'
 ---

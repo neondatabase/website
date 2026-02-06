@@ -1,6 +1,7 @@
 ---
 title: Postgres jsonb_to_record() function
 subtitle: Convert a JSONB object to a record
+summary: Covers the usage of the `jsonb_to_record` function to convert a JSONB object into a structured record, enabling the extraction and insertion of JSONB data into PostgreSQL tables.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.377Z'
 ---

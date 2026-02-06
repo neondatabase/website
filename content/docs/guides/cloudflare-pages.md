@@ -1,6 +1,7 @@
 ---
 title: Use Neon with Cloudflare Pages
 subtitle: Connect a Neon Postgres database to your Cloudflare Pages web application
+summary: Step-by-step guide for connecting a Neon Postgres database to a Cloudflare Pages web application, including project setup and database initialization for managing a reading list.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.896Z'
 ---

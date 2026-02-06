@@ -1,6 +1,7 @@
 ---
 title: Logical replication commands
 subtitle: Commands for managing your logical replication configuration
+summary: Covers commands for managing publications, subscriptions, and replication slots in logical replication setups, including creating, modifying, and removing publications and subscriptions.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-07T20:52:32.356Z'

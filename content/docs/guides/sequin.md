@@ -2,6 +2,7 @@
 title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
+summary: Step-by-step guide for connecting your Neon database to Sequin to capture and stream real-time changes, including inserts, updates, and deletes, to various applications and services using logical replication.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.289Z'
 ---

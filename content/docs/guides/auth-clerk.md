@@ -2,6 +2,7 @@
 title: Authenticate Neon Postgres application users with Clerk
 subtitle: Learn how to add authentication to a Neon Postgres database application using
   Clerk
+summary: Step-by-step guide for integrating Clerk authentication in a Next.js application using a Neon Postgres database, covering project setup, database connection, schema definition, and user data management.
 enableTableOfContents: true
 updatedOn: '2026-01-13T18:46:54.021Z'
 ---

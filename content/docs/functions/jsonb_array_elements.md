@@ -1,6 +1,7 @@
 ---
 title: Postgres jsonb_array_elements() function
 subtitle: Expands a JSONB array into a set of rows
+summary: Covers the usage of the `jsonb_array_elements()` function to expand a JSONB array into individual rows, facilitating efficient data extraction from JSON arrays in PostgreSQL.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.376Z'
 ---

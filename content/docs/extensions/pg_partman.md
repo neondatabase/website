@@ -1,6 +1,7 @@
 ---
 title: The pg_partman extension
 subtitle: Manage large Postgres tables using the PostgreSQL Partition Manager extension
+summary: Covers the setup and usage of the `pg_partman` extension for managing partitioned tables in Postgres, including automated partition creation and maintenance tailored for Neon projects.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.237Z'
 ---

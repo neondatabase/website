@@ -1,5 +1,6 @@
 ---
 title: Security overview
+summary: Covers the security measures implemented by Neon, including SSL/TLS encryption for secure connections, password enforcement with 60-bit entropy, and the use of a proxy to protect against unauthorized access.
 enableTableOfContents: true
 redirectFrom:
   - /docs/security/security

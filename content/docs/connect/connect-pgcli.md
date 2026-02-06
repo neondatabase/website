@@ -1,6 +1,7 @@
 ---
 title: Connect with pgcli
 subtitle: Learn how to connect to Neon using the interactive pgcli client
+summary: How to connect to Neon using the `pgcli` client, including obtaining a connection string from the Project Dashboard and executing queries with enhanced features like autocompletion and query history.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-07-03T12:36:49.553Z'

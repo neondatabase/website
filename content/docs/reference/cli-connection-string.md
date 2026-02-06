@@ -1,6 +1,7 @@
 ---
 title: Neon CLI commands — connection-string
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
+summary: Covers the usage of the Neon CLI `connection-string` command to retrieve a Postgres connection string for databases in Neon projects, including options for specifying branches and historical states.
 enableTableOfContents: true
 updatedOn: '2025-12-11T15:40:49.873Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Postgres rank() window function
 subtitle: Use rank() to assign ranks to rows within a result set
+summary: Covers the usage of the `rank()` window function in Postgres to assign ranks to rows within a result set based on specified ordering, including examples for practical applications like ranking employees by salary within departments.
 enableTableOfContents: true
 updatedOn: '2024-06-27T14:57:35.907Z'
 ---

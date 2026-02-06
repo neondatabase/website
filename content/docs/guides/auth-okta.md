@@ -2,6 +2,7 @@
 title: Authenticate Neon Postgres application users with Okta
 subtitle: Learn how to add authentication to a Neon Postgres database application with
   Okta
+summary: Step-by-step guide for adding user authentication to a Neon Postgres application using Okta, including project setup, database connection, schema definition, and user data management.
 enableTableOfContents: true
 updatedOn: '2026-01-13T18:46:54.022Z'
 ---

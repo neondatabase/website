@@ -1,6 +1,7 @@
 ---
 title: Open API
 subtitle: Interactive API documentation and client generation
+summary: Covers the setup of the OpenAPI plugin for Neon Auth, providing an interactive API reference UI and a JSON Schema endpoint for generating type-safe clients.
 enableTableOfContents: true
 updatedOn: '2026-01-05T20:19:10.005Z'
 ---

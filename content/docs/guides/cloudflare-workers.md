@@ -1,6 +1,7 @@
 ---
 title: Use Neon with Cloudflare Workers
 subtitle: Connect a Neon Postgres database to your Cloudflare Workers application
+summary: How to connect a Neon Postgres database to a Cloudflare Workers application using Hyperdrive for optimized connection pooling or the Neon serverless driver for low-latency access.
 enableTableOfContents: true
 updatedOn: '2026-01-28T21:45:38.857Z'
 ---

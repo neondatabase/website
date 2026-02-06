@@ -1,6 +1,7 @@
 ---
 title: Connect Looker Studio to Neon
 subtitle: Learn how to connect your Neon Postgres database to Looker Studio
+summary: How to connect your Neon Postgres database to Looker Studio by configuring the PostgreSQL data source, setting up SSL, and authenticating the connection.
 enableTableOfContents: true
 updatedOn: '2025-07-24T17:33:50.501Z'
 ---

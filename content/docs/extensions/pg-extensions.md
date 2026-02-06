@@ -1,5 +1,6 @@
 ---
 title: Postgres extensions
+summary: Covers the supported Postgres extensions in Neon, including version compatibility and installation instructions, along with options for updating and requesting additional extensions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions

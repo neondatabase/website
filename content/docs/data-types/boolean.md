@@ -1,6 +1,7 @@
 ---
 title: Postgres Boolean data type
 subtitle: Represent truth values in Postgres
+summary: Covers the representation and usage of the Boolean data type in Postgres, including storage, syntax, and practical examples for filtering data based on truth values.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.365Z'
 ---

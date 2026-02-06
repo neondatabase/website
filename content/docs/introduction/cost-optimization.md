@@ -1,6 +1,7 @@
 ---
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
+summary: Covers strategies for managing and reducing Neon costs by optimizing compute usage, including right-sizing, effective autoscaling, enabling scale to zero, and managing persistent connections.
 enableTableOfContents: true
 updatedOn: '2025-12-11T15:40:49.867Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Inngest
 subtitle: Quickly build AI RAG and Agentic workflows that scale with Inngest and Neon
+summary: Covers the setup of Inngest for building scalable AI RAG and Agentic workflows, including automatic retries, caching, and integration with Neon Postgres for triggering workflows based on database changes.
 enableTableOfContents: true
 updatedOn: '2025-06-20T22:07:37.255Z'
 ---

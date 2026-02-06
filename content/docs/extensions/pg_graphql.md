@@ -1,6 +1,7 @@
 ---
 title: The pg_graphql extension
 subtitle: Instantly create a GraphQL API for your Postgres database
+summary: Covers the setup of the `pg_graphql` extension to create a GraphQL API for your Postgres database, enabling direct querying through the `graphql.resolve()` function while maintaining data security and integrity.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.236Z'
 ---

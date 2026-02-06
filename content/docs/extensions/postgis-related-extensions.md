@@ -1,6 +1,7 @@
 ---
 title: PostGIS-related extensions
 subtitle: Improve geospatial functionality with additional PostGIS extensions
+summary: Covers the setup and functionality of various PostGIS-related extensions in Neon, including pgrouting, H3_PostGIS, PostGIS SFCGAL, and PostGIS Tiger Geocoder, to enhance geospatial data handling and analysis.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.247Z'
 ---

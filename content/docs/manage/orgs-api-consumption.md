@@ -1,5 +1,6 @@
 ---
 title: Query organization usage metrics with the Neon API
+summary: Covers the retrieval of account-level and project-level consumption metrics for organizations using the Neon API, including how to find organization IDs necessary for querying.
 enableTableOfContents: true
 updatedOn: '2025-09-05T12:26:43.315Z'
 ---

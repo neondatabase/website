@@ -1,6 +1,7 @@
 ---
 title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
+summary: How to manage Neon resources on Azure, including creating additional projects, transferring projects to a Neon-managed organization, deleting resources, and troubleshooting issues related to Azure integration.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-30T14:03:06.276Z'

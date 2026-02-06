@@ -1,6 +1,7 @@
 ---
 title: Build dashboards on Neon Postgres with Draxlr
 subtitle: Create live Neon dashboards and reports directly from your Postgres data
+summary: Step-by-step guide for connecting Draxlr to a Neon Postgres database, enabling users to build dashboards and reports using SQL, visual queries, or AI for data analysis and insights.
 redirectFrom:
   - /docs/integrations/draxlr
 enableTableOfContents: true

@@ -1,6 +1,7 @@
 ---
 title: Email OTP
 subtitle: Sign in and verify email addresses with one-time passwords
+summary: Covers the setup of Email OTP functionality in Neon Auth, enabling users to sign in, reset passwords, and verify email addresses using one-time passwords sent via email, with automatic handling of OTP generation and delivery.
 enableTableOfContents: true
 updatedOn: '2026-01-07T15:07:19.158Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Restore window
 subtitle: Configure how far back you can restore your data and run Time Travel queries
+summary: Covers the configuration of the restore window in Neon, detailing how it affects data retention for Time Travel queries, instant restores, and associated storage costs based on different plan limits.
 enableTableOfContents: true
 updatedOn: '2025-12-15T16:40:04.577Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Neon RSS feeds
 subtitle: Stay updated with the latest news from Neon
+summary: Covers the setup of RSS feeds for tracking Neon updates, including the Changelog, blog posts, community guides, and operational status, with instructions for subscribing via RSS readers or Slack.
 enableTableOfContents: true
 updatedOn: '2025-05-30T16:54:40.492Z'
 ---

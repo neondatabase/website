@@ -2,6 +2,7 @@
 title: Use Neon Postgres with Railway
 subtitle: Connect a Neon Postgres database to your Node application deployed with
   Railway
+summary: Step-by-step guide for deploying a Node.js application connected to a Neon Postgres database on Railway, including prerequisites and setup instructions for both quick start and manual configurations.
 enableTableOfContents: true
 updatedOn: '2025-12-15T16:14:56.282Z'
 ---

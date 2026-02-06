@@ -1,6 +1,7 @@
 ---
 title: Choosing your driver and connection type
 subtitle: How to select the right driver and connection type for your application
+summary: Covers the selection of the appropriate driver and connection type for applications connecting to a Neon Postgres database, including options for serverless environments and TCP-based connections.
 enableTableOfContents: true
 updatedOn: '2026-01-06T13:11:04.216Z'
 ---

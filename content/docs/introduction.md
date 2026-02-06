@@ -1,5 +1,6 @@
 ---
 title: Neon documentation
+summary: How to set up Neon, a serverless Postgres solution, with commands for launching, signing up, connecting to tech stacks, and integrating branching into workflows.
 updatedOn: '2026-01-27T16:46:27.353Z'
 ---
 

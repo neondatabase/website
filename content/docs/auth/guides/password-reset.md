@@ -1,6 +1,7 @@
 ---
 title: Password reset
 subtitle: Allow users to reset forgotten passwords
+summary: Covers the setup of password reset functionality in Neon Auth, including enabling email authentication and using pre-built UI components for user password recovery.
 enableTableOfContents: true
 updatedOn: '2026-01-07T15:07:19.157Z'
 ---

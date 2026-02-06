@@ -1,6 +1,7 @@
 ---
 title: Branching — Testing queries
 subtitle: Create a Neon branch to test queries before running them in production
+summary: Step-by-step guide for creating a Neon branch to test potentially destructive queries using a copy of production data, including instructions for testing and deleting the branch afterward.
 enableTableOfContents: true
 redirectFrom:
   - /docs/tutorial/test-queries

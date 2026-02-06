@@ -1,5 +1,6 @@
 ---
 title: Claude Code plugin for Neon
+summary: Covers the setup of the Neon Claude Code plugin, which integrates Neon-specific Skills and API access into Claude Code, enabling tasks like managing databases and configuring serverless connections.
 description: >-
   Install the Neon Claude Code plugin to give Claude access to Neon’s APIs,
   Postgres workflows, and built-in Skills.

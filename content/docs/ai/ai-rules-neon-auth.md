@@ -1,6 +1,7 @@
 ---
 title: 'AI Rules: Neon Auth'
 subtitle: Context rules for AI tools to help implement authentication with Neon Auth
+summary: Covers the implementation of authentication rules for AI tools using Neon Auth, providing context and guidelines for effective integration.
 enableTableOfContents: true
 updatedOn: '2025-12-12T17:42:01.021Z'
 ---

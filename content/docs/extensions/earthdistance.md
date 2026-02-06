@@ -1,6 +1,7 @@
 ---
 title: The earthdistance extension
 subtitle: Calculate great-circle distances between points on Earth in Postgres
+summary: Covers the setup and usage of the `earthdistance` extension in Postgres for calculating great-circle distances between geographic points, essential for geospatial applications and location-based services.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.232Z'
 ---

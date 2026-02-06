@@ -2,6 +2,7 @@
 title: Access control & security
 subtitle: Understand how the Data API authenticates requests and enforces database
   permissions.
+summary: Covers the authentication process of the Neon Data API, detailing how it utilizes PostgreSQL's security model to enforce role privileges and Row-Level Security for database access control.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.435Z'
 ---

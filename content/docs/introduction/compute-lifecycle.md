@@ -1,5 +1,6 @@
 ---
 title: Compute lifecycle
+summary: Covers the states of compute in Neon, detailing the transition between idle and active states, the scale to zero feature, and the activation process for Postgres connections.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle

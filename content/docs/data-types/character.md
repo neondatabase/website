@@ -1,6 +1,7 @@
 ---
 title: Postgres Character data types
 subtitle: Work with text data in Postgres
+summary: Covers the usage of character data types in Postgres, detailing `CHAR(n)`, `VARCHAR(n)`, and `TEXT` for storing strings of varying lengths, along with examples for practical implementation.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.365Z'
 ---

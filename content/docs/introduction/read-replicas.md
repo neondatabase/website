@@ -2,6 +2,7 @@
 title: Neon Read Replicas
 subtitle: Scale your app, run ad-hoc queries, and provide read-only access without
   duplicating data
+summary: Step-by-step guide for creating and managing Neon read replicas, which provide read-only access to the same data as the primary compute without duplicating data, allowing for efficient scaling and resource management.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.038Z'
 ---

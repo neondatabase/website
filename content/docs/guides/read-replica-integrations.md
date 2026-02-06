@@ -1,6 +1,7 @@
 ---
 title: Scale your application with Read Replicas
 subtitle: Scale your app with read replicas using built-in framework support
+summary: Covers the setup of read replicas in Neon to enhance application scalability by distributing read requests, including integration examples for popular frameworks like Prisma.
 enableTableOfContents: true
 updatedOn: '2025-05-30T16:54:40.479Z'
 ---

@@ -1,5 +1,6 @@
 ---
 title: Neon SDKs
+summary: Covers the setup of Client and Management SDKs for Neon, enabling application developers to implement user authentication and database queries, as well as manage platform resources programmatically.
 enableTableOfContents: true
 updatedOn: '2026-01-27T14:34:28.525Z'
 ---

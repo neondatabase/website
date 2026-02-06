@@ -1,6 +1,7 @@
 ---
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
+summary: Covers the setup of Neon Auth, a managed authentication service that integrates with your Neon database, allowing for branch-aware authentication and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
 updatedOn: '2026-01-30T14:03:06.271Z'
 redirectFrom:

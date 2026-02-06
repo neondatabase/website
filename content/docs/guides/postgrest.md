@@ -1,6 +1,7 @@
 ---
 title: Create a REST API from Postgres with PostgREST
 subtitle: Generate a REST API automatically from your Neon Postgres database schema
+summary: Covers the setup of PostgREST to automatically generate a REST API from a Neon Postgres database schema, including configuration, authentication with JWT, and implementing row-level security.
 enableTableOfContents: true
 updatedOn: '2026-01-13T18:46:54.025Z'
 ---

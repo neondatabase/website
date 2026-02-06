@@ -1,6 +1,7 @@
 ---
 title: The uuid-ossp extension
 subtitle: Generate Universally Unique Identifiers (UUIDs) in your Postgres database
+summary: Covers the setup of the `uuid-ossp` extension in Postgres on Neon, detailing how to enable it and utilize various functions for generating different types of UUIDs for unique data identification.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.251Z'
 ---

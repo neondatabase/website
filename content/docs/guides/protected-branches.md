@@ -2,6 +2,7 @@
 title: Protected branches
 subtitle: Learn how to use Neon's protected branches feature to secure your critical
   data
+summary: Covers the setup of Neon's protected branches feature, detailing how to secure critical data by preventing deletion, resetting, and applying IP restrictions on designated branches.
 enableTableOfContents: true
 updatedOn: '2026-01-15T23:54:00.609Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Account recovery
 subtitle: Learn how to recover a lost Neon account
+summary: Covers the steps to recover a Neon account owned by a former employee, including methods for regaining access through original login methods or initiating a manual identity verification process if those methods are unavailable.
 enableTableOfContents: true
 updatedOn: '2025-10-09T18:29:43.721Z'
 ---

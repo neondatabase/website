@@ -1,6 +1,7 @@
 ---
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
+summary: Step-by-step guide for integrating ImageKit.io with Neon to upload media files directly from the client-side and store their metadata in a Neon database.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.273Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Run ad-hoc queries with Read Replicas
 subtitle: Leverage read replicas for running ad-hoc queries
+summary: Covers the setup of Neon Read Replicas for executing ad-hoc queries, enabling quick data retrieval without affecting the performance of the primary database.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.030Z'
 ---

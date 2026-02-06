@@ -1,5 +1,6 @@
 ---
 title: Roadmap
+summary: Covers the development roadmap for Neon, detailing current projects like Neon Auth and performance optimizations, as well as upcoming features in backups, security, and cloud region expansions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap

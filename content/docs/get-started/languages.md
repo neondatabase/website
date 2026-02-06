@@ -1,6 +1,7 @@
 ---
 title: Neon language guides
 subtitle: Find detailed instructions for connecting to Neon from various languages
+summary: Covers the setup of connections to Neon for various programming languages, including .NET, Elixir, Go, Java, JavaScript, Python, and Rust.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/guides-intro

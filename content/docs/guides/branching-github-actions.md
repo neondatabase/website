@@ -1,6 +1,7 @@
 ---
 title: Automate branching with GitHub Actions
 subtitle: Create and delete branches with GitHub Actions
+summary: Covers the setup and usage of Neon GitHub Actions for automating the creation, deletion, and management of database branches within CI/CD workflows, including authentication and configuration steps.
 enableTableOfContents: true
 updatedOn: '2025-07-30T11:06:50.989Z'
 ---

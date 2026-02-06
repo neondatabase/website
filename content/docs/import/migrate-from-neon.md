@@ -1,5 +1,6 @@
 ---
 title: Migrate data from another Neon project
+summary: Covers the migration of a database between Neon projects using `pg_dump` and `pg_restore`, including considerations for connection types, Postgres version upgrades, and alternative migration methods.
 enableTableOfContents: true
 redirectFrom:
   - /docs/import/import-from-neon

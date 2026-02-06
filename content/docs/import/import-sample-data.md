@@ -1,6 +1,7 @@
 ---
 title: Postgres sample data
 subtitle: 'Import sample data for learning, testing, and exploring Neon'
+summary: Covers the process of downloading and installing sample data for Neon, including prerequisites and instructions for various datasets to facilitate learning, testing, and exploration.
 enableTableOfContents: true
 updatedOn: '2025-08-18T12:11:47.176Z'
 ---

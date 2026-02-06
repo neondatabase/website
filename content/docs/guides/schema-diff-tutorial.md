@@ -2,6 +2,7 @@
 title: Schema diff tutorial
 subtitle: Step-by-step guide showing you how to compare two development branches using
   Schema Diff
+summary: Step-by-step guide for comparing two development branches using the Schema Diff tool in Neon, including creating an initial schema and visualizing differences between branches.
 enableTableOfContents: true
 updatedOn: '2026-01-15T23:54:00.610Z'
 ---

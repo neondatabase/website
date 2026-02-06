@@ -1,6 +1,7 @@
 ---
 title: Logical replication tips
 subtitle: Learn how to optimize for logical replication
+summary: Covers tips for optimizing logical replication in Neon, including strategies for managing initial data load, adjusting timeout settings, and ensuring compatibility with Postgres extensions during data migrations.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-12-11T15:40:49.862Z'

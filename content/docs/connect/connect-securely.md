@@ -1,6 +1,7 @@
 ---
 title: Connect to Neon securely
 subtitle: Learn how to connect to Neon securely when using a connection string
+summary: Covers the setup of secure connections to Neon using SSL/TLS encryption, detailing the `sslmode` parameter options for varying levels of connection security in PostgreSQL.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

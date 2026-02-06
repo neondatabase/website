@@ -1,6 +1,7 @@
 ---
 title: Get started with logical replication
 subtitle: Learn how to replicate data to and from your Neon Postgres database
+summary: Covers the setup of logical replication in Neon Postgres, enabling data streaming to and from external sources, live migrations, and inter-project data replication using a publisher-subscriber model.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

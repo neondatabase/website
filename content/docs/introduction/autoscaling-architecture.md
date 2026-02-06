@@ -1,6 +1,7 @@
 ---
 title: Autoscaling architecture
 subtitle: Learn how Neon automatically scales compute resources on demand
+summary: Covers the structure of Neon's autoscaling architecture, detailing the roles of the autoscaler-agent and Kubernetes scheduler in dynamically allocating compute resources for Postgres instances.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.034Z'
 ---

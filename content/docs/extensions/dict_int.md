@@ -2,6 +2,7 @@
 title: The dict_int extension
 subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
   performance and relevance.
+summary: Covers the setup of the `dict_int` extension to optimize integer indexing in Postgres Full-Text Search, enhancing search performance and relevance by controlling how integers are tokenized and indexed.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.232Z'
 ---

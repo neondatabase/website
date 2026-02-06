@@ -1,6 +1,7 @@
 ---
 title: Use Neon with Deno Deploy
 subtitle: Connect a Neon Postgres database to your Deno Deploy application
+summary: How to connect a Neon Postgres database to a Deno application, covering local deployment with Deno Runtime and deployment on the Deno Deploy serverless platform.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.897Z'
 ---

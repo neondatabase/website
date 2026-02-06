@@ -1,6 +1,7 @@
 ---
 title: Liquibase developer workflow with Neon
 subtitle: Implement a developer workflow with Liquibase and Neon branching
+summary: Step-by-step guide for setting up a developer workflow using Liquibase with Neon's branching feature, enabling schema changes on a development branch and applying them to the production branch of a Neon project.
 enableTableOfContents: true
 updatedOn: '2026-02-02T12:37:39.450Z'
 ---

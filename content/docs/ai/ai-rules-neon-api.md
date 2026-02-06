@@ -2,6 +2,7 @@
 title: 'AI Rules: Neon API'
 subtitle: Context rules for AI tools to use the Neon API to programmatically manage Neon
   projects, branches, databases, and other resources.
+summary: Covers the setup of AI rules for using the Neon API to manage projects, branches, databases, and resources programmatically, with options for copying rules or cloning from a repository.
 enableTableOfContents: true
 updatedOn: '2025-10-10T13:19:39.260Z'
 ---

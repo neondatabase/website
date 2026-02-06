@@ -1,6 +1,7 @@
 ---
 title: Connect a Go application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Go using the pgx library
+summary: How to connect a Go application to a Neon Postgres database using the pgx library, including project setup and performing basic CRUD operations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go

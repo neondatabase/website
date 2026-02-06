@@ -1,5 +1,6 @@
 ---
 title: Postgres functions
+summary: Step-by-step guide for using commonly-used Postgres functions in Neon, including aggregate, array, date/time, and JSON functions to enhance database operations.
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/functions-intro

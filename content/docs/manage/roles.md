@@ -1,5 +1,6 @@
 ---
 title: Manage roles
+summary: Covers the management of Postgres roles in Neon, including role creation, permissions, and the relationship between roles and project branches.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:

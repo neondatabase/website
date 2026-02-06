@@ -1,6 +1,7 @@
 ---
 title: Postgres COUNT() function
 subtitle: Count rows or non-null values in a result set
+summary: Covers the usage of the Postgres `COUNT()` function to count rows or non-null values in a result set, including function signatures and example queries for practical applications.
 enableTableOfContents: true
 updatedOn: '2024-06-29T12:27:47.894Z'
 ---

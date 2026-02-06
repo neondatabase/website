@@ -2,6 +2,7 @@
 title: Use Neon with Koyeb
 subtitle: Learn how to connect a Neon Postgres database to an application deployed with
   Koyeb
+summary: How to connect a Neon Postgres database to an application deployed on Koyeb, including project creation and deployment steps using the Koyeb control panel or CLI.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.274Z'
 ---

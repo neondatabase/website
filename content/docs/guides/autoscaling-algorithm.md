@@ -1,6 +1,7 @@
 ---
 title: Understanding Neon’s autoscaling algorithm
 subtitle: How Neon’s algorithm scales resources to match your workload
+summary: Covers the mechanics of Neon's autoscaling algorithm, detailing how it monitors key metrics like CPU load and memory usage to automatically adjust compute resources for optimal performance and efficiency.
 enableTableOfContents: true
 updatedOn: '2025-12-03T13:07:33.026Z'
 ---

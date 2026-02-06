@@ -1,6 +1,7 @@
 ---
 title: Manage database access
 subtitle: Learn how to manage user access to databases in your Neon project
+summary: Covers the management of user access to databases in Neon projects, including creating roles with specific permissions, assigning roles to users, and implementing a least privilege model for database access.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/manage-database-access

@@ -1,6 +1,7 @@
 ---
 title: Postgres json() Function
 subtitle: Convert Text and Binary Data to JSON Values
+summary: Covers the usage of the `json()` function in Postgres for converting text and binary data into JSON values, including options for handling duplicate keys and specifying encoding.
 enableTableOfContents: true
 updatedOn: '2025-06-23T15:24:08.760Z'
 ---

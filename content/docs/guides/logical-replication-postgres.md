@@ -1,6 +1,7 @@
 ---
 title: Replicate data to an external Postgres instance
 subtitle: Learn how to replicate data from Neon to an external Postgres instance
+summary: Covers the setup of logical replication to stream data from a Neon Postgres database to an external Postgres instance, including prerequisites and configuration steps.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-02-02T12:37:39.455Z'

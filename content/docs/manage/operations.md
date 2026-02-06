@@ -1,5 +1,6 @@
 ---
 title: System operations
+summary: Covers the operations performed by the Neon Control Plane on various resources, including user-initiated actions like creating branches and system-initiated tasks such as monitoring compute availability.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-12-11T15:40:49.871Z'

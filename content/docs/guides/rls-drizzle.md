@@ -2,6 +2,7 @@
 title: Simplify RLS with Drizzle
 subtitle: Use Drizzle ORM to declaratively manage Row-Level Security policies in your
   schema
+summary: Covers the setup of Row-Level Security (RLS) using Drizzle ORM, including how to implement `crudPolicy`, utilize custom Postgres roles, and integrate RLS with the Data API and serverless driver.
 enableTableOfContents: true
 updatedOn: '2025-12-29T11:34:52.612Z'
 redirectFrom:

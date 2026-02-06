@@ -1,6 +1,7 @@
 ---
 title: Admin
 subtitle: 'Manage users, roles, bans, sessions, and impersonation'
+summary: Covers the management of users, roles, bans, sessions, and impersonation through the Admin plugin APIs in Neon, enabling the creation and updating of user accounts and their authentication states.
 enableTableOfContents: true
 updatedOn: '2026-01-05T17:17:46.994Z'
 ---

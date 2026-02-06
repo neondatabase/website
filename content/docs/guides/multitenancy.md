@@ -1,6 +1,7 @@
 ---
 title: Multitenancy with Neon
 subtitle: How to configure Neon for multitenancy - plus a few design tips
+summary: How to configure Neon for a multitenant architecture using a database-per-user approach, ensuring data isolation and security while managing multiple users efficiently.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user

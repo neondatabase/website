@@ -1,6 +1,7 @@
 ---
 title: Postgres array_to_json() function
 subtitle: Converts an SQL array to a JSON array
+summary: Covers the usage of the `array_to_json` function in Postgres to convert SQL arrays into JSON arrays, facilitating data integration with web services and APIs.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.372Z'
 ---

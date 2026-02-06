@@ -1,6 +1,7 @@
 ---
 title: Schema migration with Neon Postgres and Django
 subtitle: Set up Neon Postgres and run migrations for your Django project
+summary: Covers the setup of a Neon Postgres database for a Django project, including initializing the project, retrieving the database connection string, and managing schema migrations using Django's migration system.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.898Z'
 ---

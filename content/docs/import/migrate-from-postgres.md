@@ -1,5 +1,6 @@
 ---
 title: Migrate data from Postgres with pg_dump and pg_restore
+summary: Covers the migration of data between Postgres databases using `pg_dump` and `pg_restore`, including connection requirements and best practices for Neon environments.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/tutorials

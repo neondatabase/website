@@ -1,6 +1,7 @@
 ---
 title: 'One Database per User, Zero Complexity'
 subtitle: Give every end-user a dedicated Postgres database with full isolation. Meet compliance requirements, eliminate noisy neighbors, and scale without friction.
+summary: Covers the setup of a database-per-user architecture in Neon, enabling full isolation for each tenant with dedicated Postgres databases, ensuring compliance, stable performance, and simplified management without added complexity.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/db-per-tenant.jpg'

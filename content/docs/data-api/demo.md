@@ -1,6 +1,7 @@
 ---
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
+summary: Step-by-step guide for setting up a note-taking app using Neon's Data API with Row-Level Security (RLS) and authentication, demonstrating how to write queries from frontend code securely.
 enableTableOfContents: true
 updatedOn: '2026-01-22T15:48:50.616Z'
 ---

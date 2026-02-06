@@ -1,6 +1,7 @@
 ---
 title: Connection latency and timeouts
 subtitle: Learn about strategies to manage connection latencies and timeouts
+summary: Covers strategies for managing connection latencies and timeouts in Neon, including the impact of the _Scale to zero_ feature and how to check the status of a compute resource.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-12-17T14:37:40.656Z'

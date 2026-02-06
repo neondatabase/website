@@ -1,5 +1,6 @@
 ---
 title: Transfer projects
+summary: Covers the transfer of projects between organizations in Neon, detailing methods for individual and bulk transfers through the Console and API, along with necessary permissions and limitations.
 enableTableOfContents: true
 updatedOn: '2025-08-29T10:41:36.006Z'
 ---

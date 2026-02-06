@@ -1,6 +1,7 @@
 ---
 title: Postgres dense_rank() function
 subtitle: Returns the rank of the current row without gaps
+summary: Covers the usage of the `dense_rank()` function in PostgreSQL to assign non-gapped ranks to rows in a dataset, including examples with and without the `PARTITION BY` clause.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.373Z'
 ---

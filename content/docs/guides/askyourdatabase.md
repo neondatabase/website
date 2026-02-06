@@ -1,6 +1,7 @@
 ---
 title: Chat with Neon Postgres with AskYourDatabase
 subtitle: Chat with your Neon Postgres database without writing SQL
+summary: How to connect AskYourDatabase to Neon Postgres for natural language interactions, allowing users to manage data, visualize information, and perform queries without writing SQL.
 redirectFrom:
   - /docs/connect/connect-ai
 enableTableOfContents: true

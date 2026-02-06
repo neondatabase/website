@@ -1,6 +1,7 @@
 ---
 title: Postgres JSON_TABLE() function
 subtitle: Transform JSON data into relational views
+summary: Covers the usage of the `JSON_TABLE` function in PostgreSQL 17 to transform JSON data into relational views, enabling SQL queries on complex JSON structures through a virtual table format.
 enableTableOfContents: true
 updatedOn: '2024-11-18T22:53:11.101Z'
 ---

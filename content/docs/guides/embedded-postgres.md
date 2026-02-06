@@ -1,6 +1,7 @@
 ---
 title: Embedded Postgres
 subtitle: 'Offer instant, managed Postgres databases to your users with Neon'
+summary: Covers the setup of embedding Neon's managed Postgres databases into platforms, enabling instant provisioning, autoscaling, and user-specific isolation without requiring user sign-up or setup.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-24T16:13:09.593Z'

@@ -1,6 +1,7 @@
 ---
 title: Instagres
 subtitle: Launch an instant Neon Postgres database with zero configuration
+summary: How to launch an instant Neon Postgres database with a single API call, which expires after 72 hours unless claimed to a Neon account, with details on usage limits and claiming process.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad

@@ -1,6 +1,7 @@
 ---
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
+summary: Covers the setup of Neon projects for users through the project database claim API, detailing the process of creating, transferring, and claiming Postgres databases.
 enableTableOfContents: true
 updatedOn: '2025-11-17T20:56:53.511Z'
 ---

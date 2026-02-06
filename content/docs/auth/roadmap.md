@@ -1,6 +1,7 @@
 ---
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
+summary: Covers the current support status and future roadmap for Neon Auth, detailing supported frameworks and upcoming features as it transitions out of beta.
 enableTableOfContents: true
 updatedOn: '2026-02-04T14:17:22.339Z'
 ---

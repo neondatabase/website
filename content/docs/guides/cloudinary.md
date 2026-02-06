@@ -1,6 +1,7 @@
 ---
 title: Media storage with Cloudinary
 subtitle: Store files via Cloudinary and track metadata in Neon
+summary: Covers the integration of Cloudinary with Neon for securely uploading files from the client-side, generating backend signatures, and storing asset metadata in a Neon database.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.267Z'
 ---

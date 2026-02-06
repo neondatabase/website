@@ -2,6 +2,7 @@
 title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
+summary: How to configure OpenTelemetry exports from Neon to send metrics and Postgres logs to any OTEL-compatible observability platform, including setup with Grafana OSS, Tempo, and integration with New Relic.
 enableTableOfContents: true
 updatedOn: '2026-01-09T19:51:39.512Z'
 ---

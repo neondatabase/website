@@ -1,6 +1,7 @@
 ---
 title: Authentication flow
 subtitle: Understanding the complete sign-in and sign-up process
+summary: Covers the authentication flow for sign-in and sign-up processes using Neon Auth, detailing the SDK integration, session creation, and database interactions.
 enableTableOfContents: true
 updatedOn: '2026-01-05T20:32:04.262Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Branching
 subtitle: Branch your data the same way you branch your code
+summary: Covers the creation and management of data branches in Neon, allowing for isolated development, testing, and historical analysis without impacting the performance of the production database.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches

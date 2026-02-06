@@ -1,6 +1,7 @@
 ---
 title: Branching authentication
 subtitle: How authentication works with Neon database branches
+summary: Covers the setup of Neon Auth's branching feature, enabling isolated authentication environments for testing changes to permissions and configurations without impacting production data.
 enableTableOfContents: true
 updatedOn: '2026-01-13T20:57:02.562Z'
 ---

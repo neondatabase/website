@@ -1,6 +1,7 @@
 ---
 title: Postgres logical replication concepts
 subtitle: Learn about PostgreSQL logical replication concepts
+summary: Covers the concepts of PostgreSQL logical replication, detailing how to replicate data between databases using a publisher-subscriber model, and enabling logical replication in Neon for real-time data updates.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2026-01-13T15:35:43.717Z'

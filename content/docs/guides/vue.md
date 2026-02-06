@@ -1,6 +1,7 @@
 ---
 title: Connect a Vue.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Vue.js application
+summary: Step-by-step guide for connecting a Vue.js application to Neon, focusing on server-side access through frameworks like Nuxt.js and Quasar Framework.
 enableTableOfContents: true
 updatedOn: '2025-05-20T14:57:22.322Z'
 ---

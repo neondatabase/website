@@ -1,6 +1,7 @@
 ---
 title: Accounts
 subtitle: Manage your Neon account
+summary: Covers the management of your Neon account, including updating personal information, changing your email and password, and switching login methods.
 enableTableOfContents: true
 updatedOn: '2025-04-17T08:58:53.655Z'
 ---

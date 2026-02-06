@@ -1,6 +1,7 @@
 ---
 title: Provide read-only access with Read Replicas
 subtitle: Leverage read replicas to provide read-only access to your data
+summary: Covers the setup of read replicas in Neon to provide read-only access to data, allowing users or third-party applications to run queries without modifying the underlying database.
 enableTableOfContents: true
 updatedOn: '2025-06-30T11:30:21.913Z'
 ---

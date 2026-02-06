@@ -1,6 +1,7 @@
 ---
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
+summary: How to connect a TypeScript/Node.js application to a Neon Postgres database using Drizzle ORM, including configuration for migrations and driver connections.
 enableTableOfContents: true
 updatedOn: '2025-11-05T19:50:31.418Z'
 ---

@@ -1,6 +1,7 @@
 ---
 title: Email verification
 subtitle: Verify user email addresses during sign-up or account creation
+summary: Covers the setup of email verification in Neon Auth, detailing methods for verifying user email addresses during sign-up, including verification codes and links, along with configuration steps for each method.
 enableTableOfContents: true
 updatedOn: '2026-01-07T15:07:19.156Z'
 ---

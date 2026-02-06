@@ -2,6 +2,7 @@
 title: Use Grafbase Edge Resolvers with Neon
 subtitle: Learn how to build and deploy serverless GraphQL backends with Grafbase and
   Neon
+summary: How to create a GraphQL API using Grafbase with Edge Resolvers to interact with a Neon database, including setting up a product marketplace example with dynamic pricing based on database data.
 enableTableOfContents: true
 isDraft: false
 updatedOn: '2025-02-03T20:41:57.314Z'

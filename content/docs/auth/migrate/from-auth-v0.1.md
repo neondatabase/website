@@ -1,6 +1,7 @@
 ---
 title: Migrate from Neon Auth SDK v0.1 to v0.2
 subtitle: Upgrade guide for breaking changes in the Neon Auth SDK
+summary: Covers the migration process from Neon Auth SDK v0.1.x to v0.2.x, detailing changes such as a unified API, session caching, and explicit configuration requirements.
 enableTableOfContents: true
 updatedOn: '2026-01-30T14:03:06.266Z'
 ---

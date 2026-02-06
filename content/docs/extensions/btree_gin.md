@@ -2,6 +2,7 @@
 title: The btree_gin extension
 subtitle: Combine GIN and B-tree indexing capabilities for efficient multi-column
   queries in Postgres
+summary: Covers the setup and functionality of the `btree_gin` extension in Postgres, enabling efficient multicolumn GIN indexing for both complex and simple data types to optimize query performance.
 enableTableOfContents: true
 updatedOn: '2025-08-02T10:33:29.228Z'
 ---

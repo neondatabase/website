@@ -1,6 +1,7 @@
 ---
 title: Postgres JSON data types
 subtitle: Model JSON data in Postgres
+summary: Covers the storage and manipulation of JSON and JSONB data types in Postgres, highlighting their differences, use cases, and how to create and query JSON data effectively.
 enableTableOfContents: true
 updatedOn: '2024-06-14T07:55:54.366Z'
 ---

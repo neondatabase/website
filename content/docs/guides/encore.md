@@ -1,6 +1,7 @@
 ---
 title: Connect an Encore application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Encore.ts application
+summary: Step-by-step guide for connecting an Encore application to Neon, including installation, application creation, database schema definition, and API endpoint setup for production deployments.
 enableTableOfContents: true
 updatedOn: '2025-12-17T22:36:32.013Z'
 ---
