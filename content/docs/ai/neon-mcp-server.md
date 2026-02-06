@@ -166,6 +166,7 @@ Or add this to your MCP config file:
 ```
 
 <Admonition type="note" title="Windows users">
+
 Use `cmd` or `wsl` if you encounter issues:
 
 <CodeTabs labels={["Windows", "Windows (WSL)"]}>
