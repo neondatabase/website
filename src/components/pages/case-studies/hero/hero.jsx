@@ -59,7 +59,7 @@ const FeaturedCard = ({
               <blockquote className="before:content-['“'] after:content-['”']">
                 <div
                   className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base [&_p]:inline"
-                  dangerouslySetInnerHTML={{ __html: `<p>${quote}</p>` }}
+                  dangerouslySetInnerHTML={{ __html: `${quote}` }}
                 />
               </blockquote>
               {author && author.name && (

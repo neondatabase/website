@@ -132,7 +132,7 @@ const UseCaseCard = ({ className, icon, title, description, link, logo, testimon
         {testimonial && (
           <div className="mt-auto">
             <blockquote
-              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-[#1F805C] [&_mark]:text-inherit"
+              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-[#1F805C] [&_mark]:text-inherit [&_p]:inline"
               dangerouslySetInnerHTML={{ __html: testimonial.quote }}
             />
             <p className="mt-3.5 text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 md:text-sm">
