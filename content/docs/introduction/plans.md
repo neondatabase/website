@@ -128,7 +128,7 @@ The maximum number of branches you can have per project:
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
 
-If you need more, contact [Sales](/contact-sales).
+If you need more, [request an increase in the feedback form in console](https://console.neon.tech/feedback?msg=Branch%20limit%20increase).
 
 ### Compute
 
@@ -222,7 +222,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 **Storage per branch:**
 
-Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](/contact-sales).
+Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/feedback?msg=Storage%20limit%20increase).
 
 ### Public network transfer
 
@@ -300,8 +300,8 @@ Neon Auth is a managed authentication service built on [Better Auth](https://www
 Monthly Active User (MAU) limits per plan:
 
 - **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU (contact [Sales](/contact-sales) if you need more)
-- **Scale**: Up to 1M MAU (contact [Sales](/contact-sales) if you need more)
+- **Launch**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/feedback?msg=MAU%20limit%20increase) if you need more)
+- **Scale**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/feedback?msg=MAU%20limit%20increase) if you need more)
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 
@@ -335,7 +335,7 @@ Security features:
 
 ### Uptime SLA
 
-Guaranteed service availability is offered on the **Scale** plan. Contact [Sales](/contact-sales) for details.
+Guaranteed service availability is offered on the **Scale** plan. Contact [support](https://console.neon.tech) via the console for details.
 
 ### Support
 

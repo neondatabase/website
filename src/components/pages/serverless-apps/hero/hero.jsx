@@ -56,14 +56,6 @@ const Hero = () => (
             <h3 className="text-balance text-xl font-medium leading-snug tracking-tighter md:text-2xl">
               Sign up to get the Free Plan, plus $100 in credits
             </h3>
-            <p
-              className={clsx(
-                'mt-2 text-pretty font-light leading-snug tracking-extra-tight text-gray-new-70 xl:font-normal',
-                '[&_a:hover]:border-gray-new-70 [&_a]:border-b [&_a]:border-gray-new-70/40 [&_a]:font-normal [&_a]:transition-colors [&_a]:duration-300'
-              )}
-            >
-              ...or <a href={LINKS.contactSales}>talk to our team</a> if you have any questions.
-            </p>
             <Button
               className="mt-5 h-11 w-full font-semibold tracking-tighter"
               theme="primary"

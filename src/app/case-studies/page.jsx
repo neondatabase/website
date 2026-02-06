@@ -21,10 +21,10 @@ const CaseStudiesPage = async () => {
         className="pb-[320px] pt-[400px] xl:pb-[200px] xl:pt-[240px] lg:pb-[156px] lg:pt-[220px] sm:pb-[110px] sm:pt-[135px]"
         title="Ready to get started with Neon?"
         titleClassName="!text-[56px] xl:!text-[48px] lg:!text-[40px] sm:!text-[32px] sm:max-w-[272px]"
-        description="Interested in increasing your free tier limits or learning about pricing? Complete the form below to get in touch"
+        description="Interested in moving your business to Neon? Here's $100 to get started."
         descriptionClassName="!max-w-xl lg:!max-w-lg sm:!max-w-xs"
-        buttonText="Contact sales"
-        buttonUrl={LINKS.contactSales}
+        buttonText="Sign Up"
+        buttonUrl={LINKS.signupCredits}
       />
     </Layout>
   );

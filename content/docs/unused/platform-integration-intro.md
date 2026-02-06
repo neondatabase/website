@@ -21,8 +21,6 @@ Learn about the benefits of integrating with Neon and how to set up your platfor
 
 <a href="/use-cases/ai-agents" description="Learn how agents and codegen platforms integrate Neon as their database backend" icon="handshake">Postgres for AI agent platforms</a>
 
-<a href="/contact-sales" description="Request a meeting with our team to learn more" icon="todo">Meet with our team</a>
-
 </DetailIconCards>
 
 ## Integrate with Neon

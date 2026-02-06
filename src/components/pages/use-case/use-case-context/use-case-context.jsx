@@ -32,8 +32,7 @@ const UseCaseContext = () => {
         </p>
         <p>
           To find out if Neon is right for your use case,{' '}
-          <Link to={LINKS.signup}>get started on the free plan</Link> or{' '}
-          <Link to={LINKS.contactSales}>talk to our team</Link>.
+          <Link to={LINKS.signup}>get started on the free plan</Link>
         </p>
       </div>
     </div>

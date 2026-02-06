@@ -321,10 +321,10 @@ const EnterprisePage = () => (
     <Faq items={faqItems} />
     <CTA
       className="pb-[300px] pt-[390px] xl:pb-[266px] xl:pt-[322px] lg:pb-[270px] lg:pt-[288px] md:pb-[170px] md:pt-[163px]"
-      title="The Postgres of tomorrow, <br /> available today"
+      title="Interested in moving your business to Neon? Here's $100 to get you started."
       titleClassName="!text-[68px] leading-none xl:!text-[56px] lg:!text-[40px] md:!text-[32px]"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+      buttonText="Sign up with $100 credits"
+      buttonUrl={LINKS.signupCredits}
     />
   </Layout>
 );

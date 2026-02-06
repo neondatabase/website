@@ -63,11 +63,11 @@ const VariableLoadPage = async () => {
         </Container>
         <Cta
           className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
-          title="Ask us for a<br> price estimation"
+          title="Sign up with $100 credits"
           description="Start saving with Neon"
           buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
-          buttonText="Contact us"
-          buttonUrl={LINKS.contactSales}
+          buttonText="Sign up with $100 credits"
+          buttonUrl={LINKS.signupCredits}
         />
       </div>
     </Layout>
