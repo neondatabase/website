@@ -17,15 +17,22 @@ The **Neon MCP Server** is an open-source tool that lets you interact with your 
 The fastest way to set up Neon's MCP Server is with one command:
 
 ```bash
+npx neonctl@latest init
+```
+
+This configures the Neon MCP Server for compatible MCP clients in your workspace (Cursor, VS Code, Claude Code, and others) using API key authentication. See the [neonctl init documentation](/docs/reference/cli-init).
+
+**If you only want the MCP server and nothing else**, use:
+
+```bash
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This command auto-detects compatible MCP clients in your workspace (Cursor, VS Code, Claude Code, and others) and configures them to connect to Neon's remote MCP server. An OAuth window will open to authorize access to your Neon account.
+This command adds the required configuration to your editor's MCP config files; it does not open a browser by itself. Add `-g` for global (user-level) setup instead of project-level. Restart your editor (or enable the MCP server in your editor's settings). When you use the MCP connection, an OAuth window will open in your browser to authorize access to your Neon account. For more options (e.g., global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp).
 
-**Alternative setup options:**
+**Other setup options:**
 
-- **Cursor, VS Code, Claude Code:** Run `npx neonctl@latest init` for automatic setup with API key authentication. See the [neonctl init documentation](/docs/reference/cli-init).
-- **API key authentication:** For remote agents or when OAuth isn't available:
+- **API key authentication (remote agents):** For remote agents or when OAuth isn't available:
   ```bash
   npx add-mcp https://mcp.neon.tech/mcp --header "Authorization: Bearer $NEON_API_KEY"
   ```
@@ -85,15 +92,15 @@ Connect using API key authentication. Useful for remote agents where OAuth isn't
 npx add-mcp https://mcp.neon.tech/mcp --header "Authorization: Bearer <NEON_API_KEY>"
 ```
 
-#### Quick setup with add-mcp:
+#### MCP-only setup (OAuth):
 
-Run the following command to configure Neon's MCP Server for all detected editors in your workspace:
+If you only want the MCP server and prefer OAuth, run:
 
 ```bash
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-An OAuth window will open in your browser. Follow the prompts to authorize your MCP client to access your Neon account.
+The command adds the config to your editor; restart your editor (or enable the MCP server) for it to take effect. When you use the MCP connection, an OAuth window will open in your browser—follow the prompts to authorize. For the recommended quick setup (API key + agent skills), use `npx neonctl@latest init` instead.
 
 <Admonition type="tip" title="Install in a single click for Cursor users">
 Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
