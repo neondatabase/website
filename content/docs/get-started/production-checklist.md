@@ -1,11 +1,15 @@
 ---
 title: Getting ready for production
 subtitle: 'Guidelines to optimize price, performance, and reliability'
-summary: Covers the setup of production environments in Neon, including guidelines for selecting plans, optimizing performance, managing branches, enabling autoscaling, and ensuring reliability through connection testing and restore settings.
+summary: >-
+  Covers the setup of production environments in Neon, including guidelines for
+  selecting plans, optimizing performance, managing branches, enabling
+  autoscaling, and ensuring reliability through connection testing and restore
+  settings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-01-29T16:44:02.629Z'
+updatedOn: '2026-02-06T22:07:32.892Z'
 ---
 
 <CheckList title="Production checklist">

@@ -1,9 +1,11 @@
 ---
 title: Neon CLI commands — vpc
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
-summary: Covers the usage of the Neon CLI `vpc` command for managing Private Networking configurations, including VPC endpoints and project-level restrictions.
+summary: >-
+  Covers the usage of the Neon CLI `vpc` command for managing Private Networking
+  configurations, including VPC endpoints and project-level restrictions.
 enableTableOfContents: true
-updatedOn: '2025-03-12T15:31:54.854Z'
+updatedOn: '2026-02-06T22:07:33.142Z'
 ---
 
 ## Before you begin

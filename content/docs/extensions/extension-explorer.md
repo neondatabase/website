@@ -1,10 +1,13 @@
 ---
 title: Postgres extension explorer
-summary: Covers the browsing of supported Postgres extensions categorized by functionality, including installation and update instructions for various extensions related to AI, analytics, and auditing.
+summary: >-
+  Covers the browsing of supported Postgres extensions categorized by
+  functionality, including installation and update instructions for various
+  extensions related to AI, analytics, and auditing.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/extensions-intro
-updatedOn: '2025-12-22T13:54:25.153Z'
+updatedOn: '2026-02-06T22:07:32.828Z'
 ---
 
 Browse supported Postgres extensions by category.

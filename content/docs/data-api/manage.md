@@ -1,9 +1,12 @@
 ---
 title: Manage Data API
 subtitle: 'Configure schemas, manage authentication providers, and control API access.'
-summary: How to manage the Data API by configuring schemas, setting up authentication providers, and controlling API access to customize its behavior and security settings.
+summary: >-
+  How to manage the Data API by configuring schemas, setting up authentication
+  providers, and controlling API access to customize its behavior and security
+  settings.
 enableTableOfContents: true
-updatedOn: '2026-01-13T19:27:59.708Z'
+updatedOn: '2026-02-06T22:07:32.812Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />

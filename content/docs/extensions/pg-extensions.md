@@ -1,10 +1,13 @@
 ---
 title: Postgres extensions
-summary: Covers the supported Postgres extensions in Neon, including version compatibility and installation instructions, along with options for updating and requesting additional extensions.
+summary: >-
+  Covers the supported Postgres extensions in Neon, including version
+  compatibility and installation instructions, along with options for updating
+  and requesting additional extensions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-02-06T21:19:32.421Z'
+updatedOn: '2026-02-06T22:07:32.833Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.

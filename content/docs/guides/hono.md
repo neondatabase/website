@@ -1,9 +1,12 @@
 ---
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
-summary: Step-by-step guide for creating a Neon project and connecting it to a Hono application, including setting up dependencies and configuring the Postgres client for database access.
+summary: >-
+  Step-by-step guide for creating a Neon project and connecting it to a Hono
+  application, including setting up dependencies and configuring the Postgres
+  client for database access.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:48:41.460Z'
+updatedOn: '2026-02-06T22:07:32.985Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"

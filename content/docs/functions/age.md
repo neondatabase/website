@@ -2,9 +2,12 @@
 title: Postgres age() function
 subtitle: Calculate the difference between timestamps or between a timestamp and the
   current date/time
-summary: Covers the usage of the Postgres `age()` function to calculate the difference between timestamps, enabling the determination of ages, durations, and time intervals in various applications.
+summary: >-
+  Covers the usage of the Postgres `age()` function to calculate the difference
+  between timestamps, enabling the determination of ages, durations, and time
+  intervals in various applications.
 enableTableOfContents: true
-updatedOn: '2024-06-29T12:27:47.891Z'
+updatedOn: '2026-02-06T22:07:32.852Z'
 ---
 
 The Postgres `age()` function calculates the difference between two timestamps or the difference between a timestamp and the current date and time.

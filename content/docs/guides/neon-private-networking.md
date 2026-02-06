@@ -1,11 +1,14 @@
 ---
 title: Neon Private Networking
 subtitle: Learn how to connect to your Neon database via AWS PrivateLink
-summary: Covers the setup of secure connections to Neon databases using AWS PrivateLink, allowing traffic to remain within AWS's private network instead of the public internet.
+summary: >-
+  Covers the setup of secure connections to Neon databases using AWS
+  PrivateLink, allowing traffic to remain within AWS's private network instead
+  of the public internet.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-01-30T19:25:14.189Z'
+updatedOn: '2026-02-06T22:07:33.024Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">

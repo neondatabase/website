@@ -1,12 +1,15 @@
 ---
 title: Neon architecture
 subtitle: Serverless Postgres with decoupled compute and durable storage
-summary: Covers the architecture of Neon, a serverless Postgres database that separates compute and storage layers, enabling independent scaling and optimized performance while ensuring data durability and history management.
+summary: >-
+  Covers the architecture of Neon, a serverless Postgres database that separates
+  compute and storage layers, enabling independent scaling and optimized
+  performance while ensuring data durability and history management.
 redirectFrom:
   - /docs/storage-engine/architecture-overview
   - /docs/conceptual-guides/architecture-overview
   - /docs/guides/neon-features
-updatedOn: '2026-02-04T16:31:12.751Z'
+updatedOn: '2026-02-06T22:07:33.082Z'
 ---
 
 ## Top level overview

@@ -1,9 +1,12 @@
 ---
 title: Connect from any application
 subtitle: Learn how to connect to Neon from any application
-summary: Covers the process of connecting to a Neon database from any application, including how to obtain connection strings and utilize the Neon VS Code extension for enhanced development.
+summary: >-
+  Covers the process of connecting to a Neon database from any application,
+  including how to obtain connection strings and utilize the Neon VS Code
+  extension for enhanced development.
 enableTableOfContents: true
-updatedOn: '2026-01-09T15:57:09.711Z'
+updatedOn: '2026-02-06T22:07:32.786Z'
 ---
 
 <InfoBlock>

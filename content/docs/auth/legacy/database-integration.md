@@ -1,11 +1,14 @@
 ---
 title: Legacy Neon Auth - Database Integration
 subtitle: 'Technical reference for users_sync table, backend auth, and RLS'
-summary: Covers how to utilize the `neon_auth.users_sync` table for user data synchronization, authenticate backend requests, and implement Row-Level Security (RLS) within the Legacy Neon Auth framework.
+summary: >-
+  Covers how to utilize the `neon_auth.users_sync` table for user data
+  synchronization, authenticate backend requests, and implement Row-Level
+  Security (RLS) within the Legacy Neon Auth framework.
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2026-02-02T12:37:39.429Z'
+updatedOn: '2026-02-06T22:07:32.752Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">

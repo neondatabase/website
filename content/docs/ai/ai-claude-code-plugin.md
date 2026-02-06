@@ -1,10 +1,13 @@
 ---
 title: Claude Code plugin for Neon
-summary: Covers the setup of the Neon Claude Code plugin, which integrates Neon-specific Skills and API access into Claude Code, enabling tasks like managing databases and configuring serverless connections.
+summary: >-
+  Covers the setup of the Neon Claude Code plugin, which integrates
+  Neon-specific Skills and API access into Claude Code, enabling tasks like
+  managing databases and configuring serverless connections.
 description: >-
   Install the Neon Claude Code plugin to give Claude access to Neon’s APIs,
   Postgres workflows, and built-in Skills.
-updatedOn: '2025-10-24T11:19:19.273Z'
+updatedOn: '2026-02-06T22:07:32.716Z'
 ---
 
 The **Neon Claude Code plugin** adds Neon-specific Skills and API access to Claude Code, Anthropic’s AI development environment. It’s part of the [Neon AI Rules toolkit](https://github.com/neondatabase-labs/ai-rules), and it bundles four guided Skills plus an MCP (Model Context Protocol) server integration.

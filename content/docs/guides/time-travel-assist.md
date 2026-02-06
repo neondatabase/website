@@ -1,9 +1,12 @@
 ---
 title: Time Travel
 subtitle: Learn how to query point-in-time connections against your data's history
-summary: Covers the setup of Time Travel in Neon, enabling users to query data at specific points in time within the restore window using the SQL Editor, Restore flow, or Neon CLI for historical data analysis.
+summary: >-
+  Covers the setup of Time Travel in Neon, enabling users to query data at
+  specific points in time within the restore window using the SQL Editor,
+  Restore flow, or Neon CLI for historical data analysis.
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.863Z'
+updatedOn: '2026-02-06T22:07:33.059Z'
 ---
 
 To help review your data's history, Time Travel lets you connect to any selected point in time within your restore window and then run queries against that connection. This capability is part of Neon's instant restore feature, which maintains a history of changes through Write-Ahead Log (WAL) records.

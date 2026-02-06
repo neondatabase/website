@@ -1,9 +1,12 @@
 ---
 title: Postgres json_to_record() function
 subtitle: Converts a JSON object to a record
-summary: Covers the usage of the `json_to_record` function to convert JSON objects into structured records in PostgreSQL, enabling efficient parsing and insertion of JSON data into database tables.
+summary: >-
+  Covers the usage of the `json_to_record` function to convert JSON objects into
+  structured records in PostgreSQL, enabling efficient parsing and insertion of
+  JSON data into database tables.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.375Z'
+updatedOn: '2026-02-06T22:07:32.870Z'
 ---
 
 You can use the `json_to_record` function to convert a top-level `JSON` object into a row, with the type specified by the `AS` clause.

@@ -1,11 +1,14 @@
 ---
 title: The anon extension
 subtitle: Protecting sensitive data in Postgres databases
-summary: Covers the setup of the `anon` extension for data masking and anonymization in Postgres databases, enabling protection of sensitive information and compliance with regulations like GDPR.
+summary: >-
+  Covers the setup of the `anon` extension for data masking and anonymization in
+  Postgres databases, enabling protection of sensitive information and
+  compliance with regulations like GDPR.
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/anon
-updatedOn: '2025-11-12T21:09:33.758Z'
+updatedOn: '2026-02-06T22:07:32.848Z'
 ---
 
 The `anon` extension ([PostgreSQL Anonymizer](https://postgresql-anonymizer.readthedocs.io)) provides data masking and anonymization capabilities to protect sensitive data in Postgres databases. It helps protect personally identifiable information (PII) and other sensitive data, facilitating compliance with regulations such as [GDPR](https://gdpr-info.eu/).

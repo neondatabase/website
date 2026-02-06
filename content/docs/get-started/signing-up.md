@@ -1,14 +1,17 @@
 ---
 title: Learn the basics
 subtitle: Sign up for free and learn the basics of database branching with Neon
-summary: Step-by-step guide for signing up and learning the basics of database branching with Neon, including how to view and modify data, create isolated database copies, and reset branches to production.
+summary: >-
+  Step-by-step guide for signing up and learning the basics of database
+  branching with Neon, including how to view and modify data, create isolated
+  database copies, and reset branches to production.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-02-02T18:36:46.802Z'
+updatedOn: '2026-02-06T22:07:32.899Z'
 ---
 
 <InfoBlock>

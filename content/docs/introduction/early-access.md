@@ -1,9 +1,12 @@
 ---
 title: Join the Early Access Program
 subtitle: Help shape the future of Neon
-summary: Join the Early Access Program to gain exclusive previews of upcoming Neon features, connect with the team via a private community, and receive weekly updates on developments for personal or organizational accounts.
+summary: >-
+  Join the Early Access Program to gain exclusive previews of upcoming Neon
+  features, connect with the team via a private community, and receive weekly
+  updates on developments for personal or organizational accounts.
 enableTableOfContents: true
-updatedOn: '2025-05-23T18:48:33.109Z'
+updatedOn: '2026-02-06T22:07:33.089Z'
 ---
 
 Sign up for the **Early Access Program** and get:

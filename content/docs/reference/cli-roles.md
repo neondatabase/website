@@ -1,9 +1,11 @@
 ---
 title: Neon CLI commands — roles
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
-summary: Covers the usage of the `roles` command in the Neon CLI for managing roles within a Neon project, including listing, creating, and deleting roles.
+summary: >-
+  Covers the usage of the `roles` command in the Neon CLI for managing roles
+  within a Neon project, including listing, creating, and deleting roles.
 enableTableOfContents: true
-updatedOn: '2025-02-07T17:55:42.640Z'
+updatedOn: '2026-02-06T22:07:33.141Z'
 ---
 
 ## Before you begin

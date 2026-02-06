@@ -1,9 +1,12 @@
 ---
 title: Postgres abs() function
 subtitle: Calculate the absolute value of a number
-summary: Covers the usage of the Postgres `abs()` function to calculate the absolute value of numbers, including examples for ordering transactions and performing distance calculations.
+summary: >-
+  Covers the usage of the Postgres `abs()` function to calculate the absolute
+  value of numbers, including examples for ordering transactions and performing
+  distance calculations.
 enableTableOfContents: true
-updatedOn: '2024-06-27T15:43:16.385Z'
+updatedOn: '2026-02-06T22:07:32.878Z'
 ---
 
 The Postgres `abs()` function is used to compute the absolute value of a number. The absolute value is the non-negative value of a number without regard to its sign.

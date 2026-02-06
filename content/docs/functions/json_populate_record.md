@@ -1,9 +1,12 @@
 ---
 title: Postgres json_populate_record() function
 subtitle: Casts a JSON object to a record
-summary: Covers the usage of the `json_populate_record` function to populate a record type with values from a JSON object, facilitating the integration of JSON data into existing PostgreSQL records.
+summary: >-
+  Covers the usage of the `json_populate_record` function to populate a record
+  type with values from a JSON object, facilitating the integration of JSON data
+  into existing PostgreSQL records.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.375Z'
+updatedOn: '2026-02-06T22:07:32.867Z'
 ---
 
 The `json_populate_record` function is used to populate a record type with values from a `JSON` object. It is useful for parsing `JSON` data received from external sources, particularly when merging it into an existing record.

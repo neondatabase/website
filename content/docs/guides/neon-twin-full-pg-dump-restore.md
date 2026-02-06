@@ -1,10 +1,12 @@
 ---
 title: Full Twin
 subtitle: Create a full Twin of your production database
-summary: Step-by-step guide for creating a full Neon Twin of your production database using `pg_dump` and `pg_restore` within a GitHub Actions workflow.
+summary: >-
+  Step-by-step guide for creating a full Neon Twin of your production database
+  using `pg_dump` and `pg_restore` within a GitHub Actions workflow.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.285Z'
+updatedOn: '2026-02-06T22:07:33.024Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.

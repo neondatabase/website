@@ -1,9 +1,12 @@
 ---
 title: Schema diff
 subtitle: Learn how to use Neon's Schema Diff tool to compare branches of your database
-summary: Covers the use of Neon's Schema Diff tool to compare database schemas across branches, enabling detailed analysis through the Neon Console, CLI, or API for migration reviews, audits, and consistency checks.
+summary: >-
+  Covers the use of Neon's Schema Diff tool to compare database schemas across
+  branches, enabling detailed analysis through the Neon Console, CLI, or API for
+  migration reviews, audits, and consistency checks.
 enableTableOfContents: true
-updatedOn: '2026-01-09T15:57:09.721Z'
+updatedOn: '2026-02-06T22:07:33.051Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).

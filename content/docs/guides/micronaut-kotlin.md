@@ -2,9 +2,12 @@
 title: Connect a Micronaut Kotlin application to Neon Postgres
 subtitle: Learn how to make server-side queries to Postgres from a Micronaut Kotlin
   application
-summary: Step-by-step guide for connecting a Micronaut Kotlin application to a Neon Postgres database, including project creation, database configuration, and implementing CRUD operations through REST endpoints.
+summary: >-
+  Step-by-step guide for connecting a Micronaut Kotlin application to a Neon
+  Postgres database, including project creation, database configuration, and
+  implementing CRUD operations through REST endpoints.
 enableTableOfContents: true
-updatedOn: '2025-10-29T16:57:58.906Z'
+updatedOn: '2026-02-06T22:07:33.019Z'
 ---
 
 <CopyPrompt src="/prompts/micronaut-kotlin-prompt.md"

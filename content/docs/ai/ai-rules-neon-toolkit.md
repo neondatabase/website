@@ -2,9 +2,12 @@
 title: 'AI Rules: The @neondatabase/toolkit'
 subtitle: Context rules for AI tools to use the @neondatabase/toolkit for ephemeral
   Postgres databases
-summary: Covers the context rules for utilizing the @neondatabase/toolkit with ephemeral Postgres databases, currently in beta, and invites user feedback for improvements.
+summary: >-
+  Covers the context rules for utilizing the @neondatabase/toolkit with
+  ephemeral Postgres databases, currently in beta, and invites user feedback for
+  improvements.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.612Z'
+updatedOn: '2026-02-06T22:07:32.725Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

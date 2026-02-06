@@ -2,9 +2,12 @@
 title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
-summary: Covers the automatic archiving of inactive branches in Neon to reduce storage costs, including conditions for archiving and unarchiving processes, as well as monitoring branch status.
+summary: >-
+  Covers the automatic archiving of inactive branches in Neon to reduce storage
+  costs, including conditions for archiving and unarchiving processes, as well
+  as monitoring branch status.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.266Z'
+updatedOn: '2026-02-06T22:07:32.925Z'
 ---
 
 <InfoBlock>

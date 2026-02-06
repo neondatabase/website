@@ -1,9 +1,12 @@
 ---
 title: Connect a NestJS application to Neon
 subtitle: Set up a Neon project in seconds and connect from a NestJS application
-summary: Step-by-step guide for connecting a NestJS application to a Neon project, including project setup, dependency installation, and configuration of database credentials for secure access.
+summary: >-
+  Step-by-step guide for connecting a NestJS application to a Neon project,
+  including project setup, dependency installation, and configuration of
+  database credentials for secure access.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:48:41.461Z'
+updatedOn: '2026-02-06T22:07:33.026Z'
 ---
 
 <CopyPrompt src="/prompts/nestjs-prompt.md"

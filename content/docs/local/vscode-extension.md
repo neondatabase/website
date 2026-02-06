@@ -1,11 +1,15 @@
 ---
 title: Neon VS Code Extension
 enableTableOfContents: true
-subtitle: Connect to Neon and manage your database directly in VS Code, Cursor, and other editors
-summary: Covers the setup of the Neon extension for VS Code and compatible editors, enabling users to connect to Neon branches, manage databases, run queries, and edit data directly within their IDE.
+subtitle: Connect to Neon and manage your database directly in VS Code, Cursor, and
+  other editors
+summary: >-
+  Covers the setup of the Neon extension for VS Code and compatible editors,
+  enabling users to connect to Neon branches, manage databases, run queries, and
+  edit data directly within their IDE.
 redirectFrom:
   - /docs/local/neon-local-connect
-updatedOn: '2026-01-07T00:00:00.000Z'
+updatedOn: '2026-02-06T22:07:33.110Z'
 ---
 
 The Neon extension lets you connect to any Neon branch and manage your database directly in your IDE. Available for VS Code, Cursor, and other VS Code-compatible editors, you can browse schemas, run queries, edit table data, and get connection strings, without leaving your editor.

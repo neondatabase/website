@@ -1,9 +1,12 @@
 ---
 title: Connect a React application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React application
-summary: Step-by-step guide for connecting a React application to a Neon Postgres database using various React meta-frameworks, ensuring proper server-side access.
+summary: >-
+  Step-by-step guide for connecting a React application to a Neon Postgres
+  database using various React meta-frameworks, ensuring proper server-side
+  access.
 enableTableOfContents: true
-updatedOn: '2026-01-21T15:49:42.790Z'
+updatedOn: '2026-02-06T22:07:33.036Z'
 ---
 
 React by Facebook is an open-source front-end JavaScript library for building user interfaces based on components.

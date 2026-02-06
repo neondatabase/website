@@ -1,11 +1,14 @@
 ---
 title: Connecting with the Neon-Managed Integration
 subtitle: Link an existing Neon project to Vercel and keep billing in Neon
-summary: How to connect an existing Neon project to Vercel, enabling isolated database branches for each preview deployment while managing billing directly through Neon.
+summary: >-
+  How to connect an existing Neon project to Vercel, enabling isolated database
+  branches for each preview deployment while managing billing directly through
+  Neon.
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-01-13T14:45:42.236Z'
+updatedOn: '2026-02-06T22:07:33.023Z'
 ---
 
 <InfoBlock>

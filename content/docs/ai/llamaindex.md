@@ -1,9 +1,12 @@
 ---
 title: LlamaIndex
 subtitle: Build AI applications faster with LlamaIndex and Postgres
-summary: Covers the setup of LlamaIndex with Postgres as a vector store, detailing how to initialize the vector store, generate embeddings, and integrate chat completions using OpenAI's API.
+summary: >-
+  Covers the setup of LlamaIndex with Postgres as a vector store, detailing how
+  to initialize the vector store, generate embeddings, and integrate chat
+  completions using OpenAI's API.
 enableTableOfContents: true
-updatedOn: '2025-06-04T16:43:36.529Z'
+updatedOn: '2026-02-06T22:07:32.732Z'
 ---
 
 LlamaIndex is a popular framework for working with AI, Vectors, and embeddings. LlamaIndex supports using Neon as a vector store, using the `pgvector` extension.

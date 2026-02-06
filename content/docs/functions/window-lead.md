@@ -1,9 +1,12 @@
 ---
 title: Postgres lead() window function
 subtitle: Use lead() to access values from subsequent rows in a result set
-summary: Covers the usage of the `lead()` window function in Postgres to access values from subsequent rows, enabling comparisons and analyses such as calculating time until the next event in a dataset.
+summary: >-
+  Covers the usage of the `lead()` window function in Postgres to access values
+  from subsequent rows, enabling comparisons and analyses such as calculating
+  time until the next event in a dataset.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.378Z'
+updatedOn: '2026-02-06T22:07:32.884Z'
 ---
 
 The `lead()` function in Postgres is a window function that allows you to access values from subsequent rows in a result set without the need for a self-join.

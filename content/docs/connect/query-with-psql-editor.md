@@ -1,13 +1,16 @@
 ---
 title: Connect with psql
 subtitle: Learn how to connect to Neon using psql
-summary: How to connect to Neon using the `psql` command-line client, including installation instructions and connection string retrieval for seamless interaction with Neon's Postgres environment.
+summary: >-
+  How to connect to Neon using the `psql` command-line client, including
+  installation instructions and connection string retrieval for seamless
+  interaction with Neon's Postgres environment.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/postgres
   - /docs/integrations/postgres
   - /docs/get-started/query-with-psql-editor
-updatedOn: '2025-10-01T10:19:43.124Z'
+updatedOn: '2026-02-06T22:07:32.802Z'
 ---
 
 The following instructions require a working installation of [psql](https://www.postgresql.org/download/). The `psql` client is the native command-line client for Postgres. It provides an interactive session for sending commands to Postgres and running ad-hoc queries. For more information about `psql`, refer to the [psql reference](https://www.postgresql.org/docs/15/app-psql.html), in the _PostgreSQL Documentation_.

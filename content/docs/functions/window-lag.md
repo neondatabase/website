@@ -1,9 +1,12 @@
 ---
 title: Postgres lag() window function
 subtitle: Use lag() to access values from previous rows in a result set
-summary: Covers the usage of the `lag()` window function in Postgres to access values from previous rows, enabling comparisons and calculations such as running differences and time series analysis without self-joins.
+summary: >-
+  Covers the usage of the `lag()` window function in Postgres to access values
+  from previous rows, enabling comparisons and calculations such as running
+  differences and time series analysis without self-joins.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.378Z'
+updatedOn: '2026-02-06T22:07:32.883Z'
 ---
 
 The `lag()` function in Postgres is a window function that allows you to access values from previous rows in a result set without the need for a self-join. It's useful for comparing values between the current row and a previous row, for example, when calculating running differences, plotting trends, or doing time series analysis.

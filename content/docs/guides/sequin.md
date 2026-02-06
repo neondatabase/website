@@ -2,9 +2,12 @@
 title: Stream changes from your Neon database to anywhere
 subtitle: Learn how to capture and stream changes and rows from your database to
   anywhere with Sequin
-summary: Step-by-step guide for connecting your Neon database to Sequin to capture and stream real-time changes, including inserts, updates, and deletes, to various applications and services using logical replication.
+summary: >-
+  Step-by-step guide for connecting your Neon database to Sequin to capture and
+  stream real-time changes, including inserts, updates, and deletes, to various
+  applications and services using logical replication.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.289Z'
+updatedOn: '2026-02-06T22:07:33.053Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.

@@ -2,9 +2,12 @@
 title: Serverless
 subtitle: Postgres with instant provisioning, no server management, and pay-per-usage
   billing
-summary: Covers the setup of serverless Postgres on Neon, detailing features like instant provisioning, automatic scaling, and usage-based billing, enabling efficient management of multiple databases without server maintenance.
+summary: >-
+  Covers the setup of serverless Postgres on Neon, detailing features like
+  instant provisioning, automatic scaling, and usage-based billing, enabling
+  efficient management of multiple databases without server maintenance.
 enableTableOfContents: true
-updatedOn: '2025-08-07T07:19:10.379Z'
+updatedOn: '2026-02-06T22:07:33.107Z'
 ---
 
 Neon takes the world's most loved database &#8212; Postgres &#8212; and delivers it as a serverless platform, enabling teams to ship reliable and scalable applications faster.

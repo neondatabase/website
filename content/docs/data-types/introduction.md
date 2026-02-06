@@ -1,10 +1,13 @@
 ---
 title: Postgres data types
-summary: Covers commonly-used Postgres data types in Neon, including arrays, booleans, date and time, characters, JSON, decimals, floating points, integers, tsvector, and UUIDs, with links to detailed guides for each type.
+summary: >-
+  Covers commonly-used Postgres data types in Neon, including arrays, booleans,
+  date and time, characters, JSON, decimals, floating points, integers,
+  tsvector, and UUIDs, with links to detailed guides for each type.
 enableTableOfContents: false
 redirectFrom:
   - /docs/postgres/data-types-intro
-updatedOn: '2024-06-30T17:25:28.125Z'
+updatedOn: '2026-02-06T22:07:32.821Z'
 ---
 
 Get started with commonly-used Postgres data types with Neon's data type guides. For other data types that Postgres supports, visit the official Postgres [Data Types](https://www.postgresql.org/docs/current/datatype.html) documentation.

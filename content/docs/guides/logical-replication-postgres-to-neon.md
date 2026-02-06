@@ -2,10 +2,13 @@
 title: Replicate data from Postgres to Neon
 subtitle: Learn how to replicate data from a local Postgres instance or another Postgres
   provider to Neon
-summary: Covers the setup of logical replication from a local Postgres instance or another provider to Neon, detailing prerequisites and steps to prepare the source database for data replication.
+summary: >-
+  Covers the setup of logical replication from a local Postgres instance or
+  another provider to Neon, detailing prerequisites and steps to prepare the
+  source database for data replication.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-02T12:37:39.454Z'
+updatedOn: '2026-02-06T22:07:33.015Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from a local Postgres instance or another Postgres provider to Neon. If you're looking to replicate data from one Neon Postgres instance to another, see [Replicate data from one Neon project to another](/docs/guides/logical-replication-neon-to-neon).

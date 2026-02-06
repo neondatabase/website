@@ -1,9 +1,12 @@
 ---
 title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
-summary: Covers the guidelines for contributing to the Neon documentation, including how to edit files on GitHub, submit pull requests, and utilize templates for creating new guides.
+summary: >-
+  Covers the guidelines for contributing to the Neon documentation, including
+  how to edit files on GitHub, submit pull requests, and utilize templates for
+  creating new guides.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.317Z'
+updatedOn: '2026-02-06T22:07:32.782Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.

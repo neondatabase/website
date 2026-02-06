@@ -1,9 +1,12 @@
 ---
 title: Neon CLI Quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
-summary: How to quickly set up and authenticate the Neon CLI, including installation instructions for various platforms and methods for managing authentication through web or API key options.
+summary: >-
+  How to quickly set up and authenticate the Neon CLI, including installation
+  instructions for various platforms and methods for managing authentication
+  through web or API key options.
 enableTableOfContents: true
-updatedOn: '2026-01-07T12:02:47.908Z'
+updatedOn: '2026-02-06T22:07:33.141Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This guide will help you quickly set up and start using the Neon CLI.

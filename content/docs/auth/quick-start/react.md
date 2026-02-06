@@ -1,9 +1,12 @@
 ---
 title: Use Neon Auth with React (API methods)
 subtitle: Build your own auth UI
-summary: Step-by-step guide for integrating Neon Auth into a React application, covering project setup, SDK installation, environment variable configuration, and client setup for authentication methods.
+summary: >-
+  Step-by-step guide for integrating Neon Auth into a React application,
+  covering project setup, SDK installation, environment variable configuration,
+  and client setup for authentication methods.
 enableTableOfContents: true
-updatedOn: '2025-11-12T00:00:00.000Z'
+updatedOn: '2026-02-06T22:07:32.769Z'
 layout: wide
 ---
 

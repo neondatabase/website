@@ -1,9 +1,11 @@
 ---
 title: 'AI Rules: Neon API TypeScript SDK'
 subtitle: Context rules for AI tools to use the Neon API TypeScript SDK
-summary: Covers the context rules for utilizing the Neon API TypeScript SDK, currently in beta, to enhance AI tool integration and functionality.
+summary: >-
+  Covers the context rules for utilizing the Neon API TypeScript SDK, currently
+  in beta, to enhance AI tool integration and functionality.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.613Z'
+updatedOn: '2026-02-06T22:07:32.726Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

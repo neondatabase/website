@@ -1,9 +1,12 @@
 ---
 title: Neon CLI commands — ip-allow
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
-summary: Covers the usage of the `ip-allow` command in the Neon CLI to manage the IP allowlist for a Neon project, including actions to list, add, remove, and reset IP addresses.
+summary: >-
+  Covers the usage of the `ip-allow` command in the Neon CLI to manage the IP
+  allowlist for a Neon project, including actions to list, add, remove, and
+  reset IP addresses.
 enableTableOfContents: true
-updatedOn: '2025-09-29T19:49:33.018Z'
+updatedOn: '2026-02-06T22:07:33.136Z'
 ---
 
 ## Before you begin

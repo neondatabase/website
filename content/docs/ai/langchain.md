@@ -1,9 +1,12 @@
 ---
 title: LangChain
 subtitle: Build AI applications faster with LangChain and Postgres
-summary: Covers the setup of LangChain with Neon as a vector store, detailing how to initialize Postgres, generate embeddings, and implement chat completions using OpenAI's API.
+summary: >-
+  Covers the setup of LangChain with Neon as a vector store, detailing how to
+  initialize Postgres, generate embeddings, and implement chat completions using
+  OpenAI's API.
 enableTableOfContents: true
-updatedOn: '2024-12-11T08:48:36.316Z'
+updatedOn: '2026-02-06T22:07:32.732Z'
 ---
 
 LangChain is a popular framework for working with AI, Vectors, and embeddings. LangChain supports using Neon as a vector store, using the `pgvector` extension.

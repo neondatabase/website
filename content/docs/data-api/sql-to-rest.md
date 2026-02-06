@@ -1,9 +1,12 @@
 ---
 title: SQL to PostgREST Converter
 subtitle: Convert SQL queries to PostgREST API calls with real-time preview
-summary: How to convert SQL queries into PostgREST API calls with real-time previews, supporting features like filtering, sorting, pagination, joins, and aggregations.
+summary: >-
+  How to convert SQL queries into PostgREST API calls with real-time previews,
+  supporting features like filtering, sorting, pagination, joins, and
+  aggregations.
 enableTableOfContents: false
-updatedOn: '2025-12-12T19:35:53.908Z'
+updatedOn: '2026-02-06T22:07:32.815Z'
 ---
 
 <InfoBlock>

@@ -1,9 +1,12 @@
 ---
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
-summary: How to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and execute your first query, including optional authentication and schema access configurations.
+summary: >-
+  How to enable the Neon Data API for your database, create a table with
+  Row-Level Security (RLS), and execute your first query, including optional
+  authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-02T12:37:39.437Z'
+updatedOn: '2026-02-06T22:07:32.811Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.

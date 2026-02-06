@@ -2,9 +2,12 @@
 title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
-summary: Covers the management of billing in Neon, including accessing the Billing page, updating payment methods, downloading invoices, changing plans, and account deletion.
+summary: >-
+  Covers the management of billing in Neon, including accessing the Billing
+  page, updating payment methods, downloading invoices, changing plans, and
+  account deletion.
 enableTableOfContents: true
-updatedOn: '2025-12-15T11:31:51.513Z'
+updatedOn: '2026-02-06T22:07:33.091Z'
 ---
 
 <InfoBlock>

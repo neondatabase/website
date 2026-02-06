@@ -1,9 +1,12 @@
 ---
 title: File storage with Backblaze B2
 subtitle: Store files via Backblaze B2 and track metadata in Neon
-summary: Step-by-step guide for integrating Backblaze B2 with Neon to store files and track metadata in your Neon database, enabling efficient management of unstructured data.
+summary: >-
+  Step-by-step guide for integrating Backblaze B2 with Neon to store files and
+  track metadata in your Neon database, enabling efficient management of
+  unstructured data.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.264Z'
+updatedOn: '2026-02-06T22:07:32.923Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.

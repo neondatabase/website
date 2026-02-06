@@ -1,9 +1,12 @@
 ---
 title: Component guide
 subtitle: Most commonly used components for documentation writers
-summary: Step-by-step guide for using common MDX components in Neon documentation, including best practices, syntax, and prop usage for effective content organization and presentation.
+summary: >-
+  Step-by-step guide for using common MDX components in Neon documentation,
+  including best practices, syntax, and prop usage for effective content
+  organization and presentation.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.314Z'
+updatedOn: '2026-02-06T22:07:32.778Z'
 ---
 
 A practical guide for the most commonly used MDX components in Neon documentation. This guide focuses on components you'll use most frequently when writing documentation.

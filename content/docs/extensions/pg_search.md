@@ -1,9 +1,12 @@
 ---
 title: The pg_search extension
 subtitle: An Elasticsearch alternative for full-text search and analytics on Postgres
-summary: How to enable the `pg_search` extension on Neon for efficient full-text search and analytics in Postgres, utilizing BM25 indexing for high-relevance results and advanced text search capabilities.
+summary: >-
+  How to enable the `pg_search` extension on Neon for efficient full-text search
+  and analytics in Postgres, utilizing BM25 indexing for high-relevance results
+  and advanced text search capabilities.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.023Z'
+updatedOn: '2026-02-06T22:07:32.839Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.

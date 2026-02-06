@@ -1,12 +1,15 @@
 ---
 title: Built to scale
 subtitle: Neon supports you from prototype to scale-up
-summary: Covers the stages of growth for using Neon, from free plans for side projects to scalable solutions for startups, emphasizing ease of use, performance, and reliability throughout the development lifecycle.
+summary: >-
+  Covers the stages of growth for using Neon, from free plans for side projects
+  to scalable solutions for startups, emphasizing ease of use, performance, and
+  reliability throughout the development lifecycle.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
   - /docs/get-started/production-readiness
-updatedOn: '2026-01-22T18:23:31.111Z'
+updatedOn: '2026-02-06T22:07:32.886Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.

@@ -1,9 +1,12 @@
 ---
 title: Neon CLI commands — set-context
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
-summary: Covers the usage of the `set-context` command in the Neon CLI to establish a background context for CLI sessions, enabling project-specific actions without repeatedly specifying project IDs.
+summary: >-
+  Covers the usage of the `set-context` command in the Neon CLI to establish a
+  background context for CLI sessions, enabling project-specific actions without
+  repeatedly specifying project IDs.
 enableTableOfContents: true
-updatedOn: '2026-01-07T12:02:47.908Z'
+updatedOn: '2026-02-06T22:07:33.142Z'
 ---
 
 ## Before you begin

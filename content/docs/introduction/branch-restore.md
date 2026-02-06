@@ -2,7 +2,10 @@
 title: Instant restore
 subtitle: Learn how to revert changes or recover lost data using Neon's instant restore
   with Time Travel Assist
-summary: Covers the process of using Neon's instant restore feature to revert root branches to previous states, allowing recovery of lost data and querying historical data through Time Travel Assist.
+summary: >-
+  Covers the process of using Neon's instant restore feature to revert root
+  branches to previous states, allowing recovery of lost data and querying
+  historical data through Time Travel Assist.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/branching-pitr
@@ -10,7 +13,7 @@ redirectFrom:
   - /docs/guides/branch-promote
   - /docs/guides/branch-restore
   - /docs/guides/instant-restore
-updatedOn: '2026-02-02T12:37:39.465Z'
+updatedOn: '2026-02-06T22:07:33.086Z'
 ---
 
 <InfoBlock>

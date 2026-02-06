@@ -1,11 +1,14 @@
 ---
 title: Postgres compatibility
 subtitle: Learn about Neon as a managed Postgres service
-summary: Covers the differences and features of Neon as a managed Postgres service, including supported Postgres versions, available extensions, and the roles and permissions model specific to Neon.
+summary: >-
+  Covers the differences and features of Neon as a managed Postgres service,
+  including supported Postgres versions, available extensions, and the roles and
+  permissions model specific to Neon.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-02-02T12:37:39.468Z'
+updatedOn: '2026-02-06T22:07:33.142Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.

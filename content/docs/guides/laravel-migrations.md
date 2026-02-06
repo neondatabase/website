@@ -1,9 +1,12 @@
 ---
 title: Schema migration with Neon Postgres and Laravel
 subtitle: Set up Neon Postgres and run migrations for your Laravel project
-summary: Step-by-step guide for setting up Neon Postgres with Laravel, including initializing a project, retrieving the database connection string, and managing schema migrations using Laravel's migration system.
+summary: >-
+  Step-by-step guide for setting up Neon Postgres with Laravel, including
+  initializing a project, retrieving the database connection string, and
+  managing schema migrations using Laravel's migration system.
 enableTableOfContents: true
-updatedOn: '2025-08-18T15:43:43.463Z'
+updatedOn: '2026-02-06T22:07:32.999Z'
 ---
 
 [Laravel](https://laravel.com/) is a popular PHP web application framework that provides an expressive and elegant syntax for building web applications. It includes an ORM (Object-Relational Mapping) called Eloquent, which allows you to interact with databases using a fluent API. Laravel also provides a powerful migration system to manage database schema changes over time.

@@ -1,8 +1,11 @@
 ---
 title: Enable Autoscaling in Neon
-summary: How to enable autoscaling for compute resources in a Neon project, including configuring minimum and maximum compute sizes to automatically adjust based on workload demand.
+summary: >-
+  How to enable autoscaling for compute resources in a Neon project, including
+  configuring minimum and maximum compute sizes to automatically adjust based on
+  workload demand.
 enableTableOfContents: true
-updatedOn: '2026-01-28T07:08:36.338Z'
+updatedOn: '2026-02-06T22:07:32.920Z'
 ---
 
 <InfoBlock>

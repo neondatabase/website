@@ -1,9 +1,12 @@
 ---
 title: User management
 subtitle: 'Update profiles, change passwords, and manage account settings'
-summary: Covers the management of user profiles, including updating personal information, securely changing passwords, verifying email address changes, and deleting accounts within the Neon platform.
+summary: >-
+  Covers the management of user profiles, including updating personal
+  information, securely changing passwords, verifying email address changes, and
+  deleting accounts within the Neon platform.
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.159Z'
+updatedOn: '2026-02-06T22:07:32.752Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

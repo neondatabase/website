@@ -1,9 +1,12 @@
 ---
 title: Connect from TypeORM to Neon
 subtitle: Learn how to connect to Neon from TypeORM
-summary: Step-by-step guide for connecting TypeORM to Neon, including retrieving the connection string, configuring DataSource initialization, and setting up environment variables for secure database access.
+summary: >-
+  Step-by-step guide for connecting TypeORM to Neon, including retrieving the
+  connection string, configuring DataSource initialization, and setting up
+  environment variables for secure database access.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:53:27.791Z'
+updatedOn: '2026-02-06T22:07:33.062Z'
 ---
 
 <CopyPrompt src="/prompts/typeorm-prompt.md" 

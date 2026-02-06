@@ -1,9 +1,12 @@
 ---
 title: Connect to Neon
 subtitle: Everything you need to know about connecting to Neon
-summary: Covers the various methods to connect to a Neon database, including standard Postgres connections, specialized drivers, and tools for different environments and applications.
+summary: >-
+  Covers the various methods to connect to a Neon database, including standard
+  Postgres connections, specialized drivers, and tools for different
+  environments and applications.
 enableTableOfContents: true
-updatedOn: '2026-01-24T16:13:09.582Z'
+updatedOn: '2026-02-06T22:07:32.788Z'
 ---
 
 This section covers all the ways to connect to your Neon database, from standard Postgres connections to specialized drivers and tools. For framework-specific guides and quick starts, see [Get Started](/docs/get-started/connect-neon).

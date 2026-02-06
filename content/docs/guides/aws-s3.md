@@ -1,9 +1,12 @@
 ---
 title: File storage with AWS S3
 subtitle: Store files via AWS S3 and track metadata in Neon
-summary: Covers the integration of AWS S3 with Neon for storing files and managing metadata, including setup instructions for creating a Neon project and configuring an S3 bucket.
+summary: >-
+  Covers the integration of AWS S3 with Neon for storing files and managing
+  metadata, including setup instructions for creating a Neon project and
+  configuring an S3 bucket.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.263Z'
+updatedOn: '2026-02-06T22:07:32.921Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.

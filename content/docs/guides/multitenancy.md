@@ -1,11 +1,14 @@
 ---
 title: Multitenancy with Neon
 subtitle: How to configure Neon for multitenancy - plus a few design tips
-summary: How to configure Neon for a multitenant architecture using a database-per-user approach, ensuring data isolation and security while managing multiple users efficiently.
+summary: >-
+  How to configure Neon for a multitenant architecture using a database-per-user
+  approach, ensuring data isolation and security while managing multiple users
+  efficiently.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/database-per-user
-updatedOn: '2026-01-06T18:58:21.259Z'
+updatedOn: '2026-02-06T22:07:33.021Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.

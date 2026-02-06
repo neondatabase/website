@@ -2,9 +2,12 @@
 title: The dict_int extension
 subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
   performance and relevance.
-summary: Covers the setup of the `dict_int` extension to optimize integer indexing in Postgres Full-Text Search, enhancing search performance and relevance by controlling how integers are tokenized and indexed.
+summary: >-
+  Covers the setup of the `dict_int` extension to optimize integer indexing in
+  Postgres Full-Text Search, enhancing search performance and relevance by
+  controlling how integers are tokenized and indexed.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.232Z'
+updatedOn: '2026-02-06T22:07:32.827Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.

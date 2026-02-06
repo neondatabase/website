@@ -1,12 +1,15 @@
 ---
 title: Roadmap
-summary: Covers the development roadmap for Neon, detailing current projects like Neon Auth and performance optimizations, as well as upcoming features in backups, security, and cloud region expansions.
+summary: >-
+  Covers the development roadmap for Neon, detailing current projects like Neon
+  Auth and performance optimizations, as well as upcoming features in backups,
+  security, and cloud region expansions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/roadmap
   - /docs/conceptual-guides/roadmap
   - /docs/reference/roadmap
-updatedOn: '2026-02-04T14:17:22.342Z'
+updatedOn: '2026-02-06T22:07:33.106Z'
 ---
 
 Our development teams are focused on helping you ship faster with Postgres. This roadmap describes committed features we're working on right now, what we delivered recently, and a peek at what's on the horizon.

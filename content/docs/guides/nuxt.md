@@ -1,9 +1,12 @@
 ---
 title: Connect Nuxt to Postgres on Neon
 subtitle: Learn how to make server-side queries to Postgres using Nitro API routes
-summary: Step-by-step guide for connecting a Nuxt application to a Postgres database on Neon, including project creation, dependency installation, and configuration of connection settings.
+summary: >-
+  Step-by-step guide for connecting a Nuxt application to a Postgres database on
+  Neon, including project creation, dependency installation, and configuration
+  of connection settings.
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.606Z'
+updatedOn: '2026-02-06T22:07:33.028Z'
 ---
 
 <CopyPrompt src="/prompts/nuxt-neon-prompt.md"

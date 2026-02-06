@@ -1,10 +1,12 @@
 ---
 title: Replicate data with Fivetran
 subtitle: Learn how to replicate data from Neon with Fivetran
-summary: Step-by-step guide for defining a Neon Postgres database as a data source in Fivetran to enable data replication to supported destinations.
+summary: >-
+  Step-by-step guide for defining a Neon Postgres database as a data source in
+  Fivetran to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-07T12:28:56.611Z'
+updatedOn: '2026-02-06T22:07:33.009Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

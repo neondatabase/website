@@ -1,12 +1,15 @@
 ---
 title: Connect to Neon securely
 subtitle: Learn how to connect to Neon securely when using a connection string
-summary: Covers the setup of secure connections to Neon using SSL/TLS encryption, detailing the `sslmode` parameter options for varying levels of connection security in PostgreSQL.
+summary: >-
+  Covers the setup of secure connections to Neon using SSL/TLS encryption,
+  detailing the `sslmode` parameter options for varying levels of connection
+  security in PostgreSQL.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/security/secure-connections
-updatedOn: '2025-07-03T12:36:49.554Z'
+updatedOn: '2026-02-06T22:07:32.793Z'
 ---
 
 Neon requires that all connections use SSL/TLS encryption to ensure that data sent over the Internet cannot be viewed or manipulated by third parties. Neon rejects connections that do not use SSL/TLS, behaving in the same way as standalone Postgres with only `hostssl` records in a `pg_hba.conf` configuration file.

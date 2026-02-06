@@ -1,9 +1,12 @@
 ---
 title: Postgres indexes
 subtitle: Optimize query performance with indexes in Postgres
-summary: Covers the setup of various index types in Postgres, including B-tree, Hash, GiST, GIN, and BRIN, and provides guidance on creating and effectively using these indexes to optimize query performance.
+summary: >-
+  Covers the setup of various index types in Postgres, including B-tree, Hash,
+  GiST, GIN, and BRIN, and provides guidance on creating and effectively using
+  these indexes to optimize query performance.
 enableTableOfContents: true
-updatedOn: '2024-08-09T20:46:35.871Z'
+updatedOn: '2026-02-06T22:07:33.125Z'
 ---
 
 Indexes are a powerful tool to optimize query performance in relational databases like Neon Postgres. They allow the database engine to quickly locate and retrieve specific rows, significantly speeding up data access. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.

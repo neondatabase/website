@@ -1,9 +1,12 @@
 ---
 title: Postgres UUID data type
 subtitle: Work with UUIDs in Postgres
-summary: Covers the usage and implementation of the UUID data type in Postgres, including storage format, syntax, and example queries for generating and managing unique identifiers in databases.
+summary: >-
+  Covers the usage and implementation of the UUID data type in Postgres,
+  including storage format, syntax, and example queries for generating and
+  managing unique identifiers in databases.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.367Z'
+updatedOn: '2026-02-06T22:07:32.822Z'
 ---
 
 `UUID` stands for `Universally Unique Identifier`. A `UUID` is a 128-bit value used to ensure global uniqueness across tables and databases.

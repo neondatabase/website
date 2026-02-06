@@ -1,9 +1,12 @@
 ---
 title: Row-Level Security with Neon
 subtitle: How Neon features use Postgres Row-Level Security
-summary: Covers the implementation of Row-Level Security (RLS) in Neon, detailing how to secure data access through RLS policies when using the Data API and Drizzle ORM.
+summary: >-
+  Covers the implementation of Row-Level Security (RLS) in Neon, detailing how
+  to secure data access through RLS policies when using the Data API and Drizzle
+  ORM.
 enableTableOfContents: true
-updatedOn: '2025-09-25T14:36:08.173Z'
+updatedOn: '2026-02-06T22:07:33.048Z'
 ---
 
 <InfoBlock>

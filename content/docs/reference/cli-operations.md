@@ -1,9 +1,12 @@
 ---
 title: Neon CLI commands — operations
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
-summary: Covers the usage of the Neon CLI `operations` command to list operations for a Neon project, including subcommands and options for effective management from the terminal.
+summary: >-
+  Covers the usage of the Neon CLI `operations` command to list operations for a
+  Neon project, including subcommands and options for effective management from
+  the terminal.
 enableTableOfContents: true
-updatedOn: '2024-08-09T20:21:45.351Z'
+updatedOn: '2026-02-06T22:07:33.138Z'
 ---
 
 ## Before you begin

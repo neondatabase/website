@@ -1,9 +1,12 @@
 ---
 title: Self-Host Medusa with Neon
 subtitle: Learn how to self-host Medusa using Neon Postgres as your database.
-summary: Step-by-step guide for self-hosting Medusa using Neon as the Postgres database, including setup instructions and prerequisites for creating a Neon project and connecting to the database.
+summary: >-
+  Step-by-step guide for self-hosting Medusa using Neon as the Postgres
+  database, including setup instructions and prerequisites for creating a Neon
+  project and connecting to the database.
 enableTableOfContents: true
-updatedOn: '2026-02-02T12:37:39.461Z'
+updatedOn: '2026-02-06T22:07:33.018Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.

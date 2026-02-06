@@ -1,8 +1,11 @@
 ---
 title: Acceptable Use Policy
-summary: Covers the acceptable use of Neon's Platform and Services, detailing guidelines for lawful and ethical use, security responsibilities, and prohibited activities to ensure a secure computing environment.
+summary: >-
+  Covers the acceptable use of Neon's Platform and Services, detailing
+  guidelines for lawful and ethical use, security responsibilities, and
+  prohibited activities to ensure a secure computing environment.
 enableTableOfContents: true
-updatedOn: '2025-12-08T15:34:39.156Z'
+updatedOn: '2026-02-06T22:07:33.149Z'
 ---
 
 **Last Updated:** 23 January 2024

@@ -1,9 +1,12 @@
 ---
 title: Migrate from SQLite to Neon Postgres
-summary: Covers the migration of an SQLite database to Neon Postgres using pgloader, detailing prerequisites, data type differences, and the process for efficient data transfer and transformation.
+summary: >-
+  Covers the migration of an SQLite database to Neon Postgres using pgloader,
+  detailing prerequisites, data type differences, and the process for efficient
+  data transfer and transformation.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-18T12:11:47.179Z'
+updatedOn: '2026-02-06T22:07:33.078Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)

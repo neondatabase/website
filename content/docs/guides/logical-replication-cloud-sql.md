@@ -1,10 +1,13 @@
 ---
 title: Replicate data from Cloud SQL Postgres
 subtitle: Learn how to replicate data from Google Cloud SQL Postgres to Neon
-summary: How to replicate data from Google Cloud SQL Postgres to Neon using native Postgres logical replication, including preparation steps for the source database and enabling necessary settings.
+summary: >-
+  How to replicate data from Google Cloud SQL Postgres to Neon using native
+  Postgres logical replication, including preparation steps for the source
+  database and enabling necessary settings.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-02T12:37:39.452Z'
+updatedOn: '2026-02-06T22:07:33.005Z'
 ---
 
 This guide describes how to replicate data from Cloud SQL Postgres using native Postgres logical replication, as described in [Set up native PostgreSQL logical replication](https://cloud.google.com/sql/docs/postgres/replication/configure-logical-replication#set-up-native-postgresql-logical-replication), in the Google Cloud SQL documentation.

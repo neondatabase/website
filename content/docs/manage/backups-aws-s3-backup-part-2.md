@@ -1,8 +1,11 @@
 ---
 title: Set up a GitHub Action to perform nightly Postgres backups
-summary: How to configure a GitHub Action for nightly Postgres backups using `pg_dump` and AWS S3, ensuring automated database backups are securely stored in the cloud.
+summary: >-
+  How to configure a GitHub Action for nightly Postgres backups using `pg_dump`
+  and AWS S3, ensuring automated database backups are securely stored in the
+  cloud.
 enableTableOfContents: true
-updatedOn: '2025-07-04T12:47:21.309Z'
+updatedOn: '2026-02-06T22:07:33.114Z'
 ---
 
 In this guide, you'll learn how to configure nightly Postgres backups using a scheduled GitHub Action and `pg_dump`.

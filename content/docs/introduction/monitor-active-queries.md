@@ -1,9 +1,12 @@
 ---
 title: Monitor active queries
 subtitle: View and analyze running queries in your database
-summary: Covers the monitoring of active queries in a Neon project through the Neon Console, detailing how to access and refresh the list of currently running queries using the `pg_stat_activity` system view.
+summary: >-
+  Covers the monitoring of active queries in a Neon project through the Neon
+  Console, detailing how to access and refresh the list of currently running
+  queries using the `pg_stat_activity` system view.
 enableTableOfContents: true
-updatedOn: '2025-10-22T15:44:06.423Z'
+updatedOn: '2026-02-06T22:07:33.091Z'
 ---
 
 You can monitor active queries for your Neon project from the **Monitoring** page in the Neon Console.

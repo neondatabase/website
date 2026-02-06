@@ -1,9 +1,12 @@
 ---
 title: Cost optimization
 subtitle: Strategies to manage and reduce your Neon costs
-summary: Covers strategies for managing and reducing Neon costs by optimizing compute usage, including right-sizing, effective autoscaling, enabling scale to zero, and managing persistent connections.
+summary: >-
+  Covers strategies for managing and reducing Neon costs by optimizing compute
+  usage, including right-sizing, effective autoscaling, enabling scale to zero,
+  and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.867Z'
+updatedOn: '2026-02-06T22:07:33.089Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.

@@ -1,9 +1,12 @@
 ---
 title: Monitor Neon with pgAdmin
 subtitle: Monitor your Neon Postgres database with pgAdmin
-summary: Covers the setup and monitoring of a Neon Postgres database using pgAdmin, detailing installation, connection procedures, and performance metrics tracking.
+summary: >-
+  Covers the setup and monitoring of a Neon Postgres database using pgAdmin,
+  detailing installation, connection procedures, and performance metrics
+  tracking.
 enableTableOfContents: true
-updatedOn: '2025-01-17T00:00:00.000Z'
+updatedOn: '2026-02-06T22:07:33.091Z'
 ---
 
 pgAdmin is a database management tool for Postgres designed to facilitate various database tasks, including monitoring performance metrics.

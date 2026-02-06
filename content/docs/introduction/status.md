@@ -1,9 +1,12 @@
 ---
 title: Neon status
 subtitle: Stay informed about the performance and availability of Neon
-summary: Covers the monitoring of Neon's performance and availability, detailing how to access the status page, track specific project components, and subscribe for updates on incidents and maintenance.
+summary: >-
+  Covers the monitoring of Neon's performance and availability, detailing how to
+  access the status page, track specific project components, and subscribe for
+  updates on incidents and maintenance.
 enableTableOfContents: true
-updatedOn: '2025-06-04T16:43:36.537Z'
+updatedOn: '2026-02-06T22:07:33.108Z'
 ---
 
 Stay informed about Neon's performance and availability at [https://neonstatus.com/](https://neonstatus.com/).

@@ -1,9 +1,12 @@
 ---
 title: React with Neon Auth UI (UI Components)
 subtitle: Build authentication with pre-built UI components
-summary: Covers the setup of authentication in a React application using Neon's pre-built UI components, including enabling Neon Auth, creating a React app, and configuring the necessary environment variables.
+summary: >-
+  Covers the setup of authentication in a React application using Neon's
+  pre-built UI components, including enabling Neon Auth, creating a React app,
+  and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-01-05T20:32:04.267Z'
+updatedOn: '2026-02-06T22:07:32.768Z'
 layout: wide
 ---
 

@@ -1,10 +1,13 @@
 ---
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
-summary: Covers the process of using the Backup & Restore feature in Neon to instantly restore branches to previous states, create and manage snapshots, and schedule automated backups for data recovery.
+summary: >-
+  Covers the process of using the Backup & Restore feature in Neon to instantly
+  restore branches to previous states, create and manage snapshots, and schedule
+  automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-01-06T10:43:28.875Z'
+updatedOn: '2026-02-06T22:07:32.923Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">

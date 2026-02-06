@@ -1,10 +1,13 @@
 ---
 title: Use StepZen with Neon
 subtitle: Learn how to use StepZen to build a GraphQL API for your Neon database
-summary: Covers the integration of StepZen to build a GraphQL API for a Neon database, with a note that the guide has been deprecated and directs users to the integrations page for current options.
+summary: >-
+  Covers the integration of StepZen to build a GraphQL API for a Neon database,
+  with a note that the guide has been deprecated and directs users to the
+  integrations page for current options.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-01-13T18:46:54.026Z'
+updatedOn: '2026-02-06T22:07:33.055Z'
 redirectTo: /docs/guides/integrations
 ---
 

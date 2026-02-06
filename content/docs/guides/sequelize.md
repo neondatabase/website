@@ -2,9 +2,12 @@
 title: Schema migration with Neon Postgres and Sequelize
 subtitle: Set up Neon Postgres and run migrations for your Javascript project using
   Sequelize ORM
-summary: Covers the setup of Neon Postgres with Sequelize ORM in a Node.js application, including project initialization, database connection string retrieval, and running migrations.
+summary: >-
+  Covers the setup of Neon Postgres with Sequelize ORM in a Node.js application,
+  including project initialization, database connection string retrieval, and
+  running migrations.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.916Z'
+updatedOn: '2026-02-06T22:07:33.051Z'
 ---
 
 [Sequelize](https://sequelize.org/) is a promise-based Node.js ORM that supports multiple relational databases. In this guide, we'll explore how to use `Sequelize` ORM with a Neon Postgres database in a JavaScript project.

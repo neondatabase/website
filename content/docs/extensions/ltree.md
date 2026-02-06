@@ -1,9 +1,12 @@
 ---
 title: The ltree extension
 subtitle: Store and query hierarchical tree-like structures in Postgres
-summary: Covers the setup of the `ltree` extension in Postgres, enabling the creation and querying of hierarchical tree-like structures for modeling parent-child relationships in data.
+summary: >-
+  Covers the setup of the `ltree` extension in Postgres, enabling the creation
+  and querying of hierarchical tree-like structures for modeling parent-child
+  relationships in data.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.234Z'
+updatedOn: '2026-02-06T22:07:32.831Z'
 ---
 
 The `ltree` extension provides a data type for representing labels of data stored in a hierarchical tree-like structure. It offers specialized functions and operators for efficiently traversing and searching through these tree structures, making it ideal for modeling hierarchical relationships in your data.

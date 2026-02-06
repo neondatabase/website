@@ -1,6 +1,9 @@
 ---
 title: Neon plans
-summary: Covers the comparison of Neon's Free, Launch, and Scale plans, detailing features, pricing, and target users to support projects from prototypes to production at scale.
+summary: >-
+  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
+  features, pricing, and target users to support projects from prototypes to
+  production at scale.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -16,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-01-06T13:09:53.162Z'
+updatedOn: '2026-02-06T22:07:33.097Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.

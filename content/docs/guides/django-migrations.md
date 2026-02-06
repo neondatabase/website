@@ -1,9 +1,12 @@
 ---
 title: Schema migration with Neon Postgres and Django
 subtitle: Set up Neon Postgres and run migrations for your Django project
-summary: Covers the setup of a Neon Postgres database for a Django project, including initializing the project, retrieving the database connection string, and managing schema migrations using Django's migration system.
+summary: >-
+  Covers the setup of a Neon Postgres database for a Django project, including
+  initializing the project, retrieving the database connection string, and
+  managing schema migrations using Django's migration system.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.898Z'
+updatedOn: '2026-02-06T22:07:32.947Z'
 ---
 
 [Django](https://www.djangoproject.com/) is a high-level Python framework to make database-driven web applications. It provides an ORM (Object-Relational Mapping) layer that abstracts database operations, making it easy to interact with databases using Python code. Django also includes a powerful migration system that allows you to define and manage database schema changes over time.

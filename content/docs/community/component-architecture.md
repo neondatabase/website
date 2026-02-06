@@ -1,9 +1,12 @@
 ---
 title: Component architecture
 subtitle: Technical implementation details for developers and maintainers
-summary: Covers the architecture and implementation details of the Neon documentation component system, including MDX integration, file structure, and development workflows for modifying and extending components.
+summary: >-
+  Covers the architecture and implementation details of the Neon documentation
+  component system, including MDX integration, file structure, and development
+  workflows for modifying and extending components.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.312Z'
+updatedOn: '2026-02-06T22:07:32.777Z'
 ---
 
 A technical reference for developers and maintainers who need to understand, modify, or extend the Neon documentation component system. This guide covers the architecture, file structure, and implementation details.

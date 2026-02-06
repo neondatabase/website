@@ -1,9 +1,12 @@
 ---
 title: Set up OAuth
 subtitle: Add Google or GitHub sign-in to your application
-summary: Step-by-step guide for setting up OAuth sign-in with Google, GitHub, or Vercel in your application using Neon Auth, including development and production configurations.
+summary: >-
+  Step-by-step guide for setting up OAuth sign-in with Google, GitHub, or Vercel
+  in your application using Neon Auth, including development and production
+  configurations.
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.159Z'
+updatedOn: '2026-02-06T22:07:32.749Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
