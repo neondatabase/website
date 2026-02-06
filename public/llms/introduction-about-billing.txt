@@ -20,4 +20,3 @@
 ## Neon for Enterprise
 
 - [Neon for the Enterprise](https://neon.com/enterprise): Find out how Enterprises are maximizing engineering efficiency with Neon
-- [Neon Enterprise Sales Process](https://neon.com/docs/introduction/enterprise-sales-process): Learn about Neon's Enterprise sales process and what to expect

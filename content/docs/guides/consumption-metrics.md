@@ -8,7 +8,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-05T00:00:00.000Z'
 ---
 
-Using the Neon API, you can query consumption metrics to track your resource usage.
+Using the Neon API, you can query consumption metrics to track your resource usage on Neon's paid plans.
 
 | API                                     | Endpoint                           | Description                                                                                                                                                        | Plan availability                |
 | --------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
