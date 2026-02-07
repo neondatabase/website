@@ -6,6 +6,8 @@ description: 'Prime documentation agents with essential project structure, key r
 
 This command provides agents comprehensive knowledge of the Neon documentation project structure, key reference files, and major content categories. Use this to understand the documentation ecosystem before working on content tasks.
 
+If the user asks what doc AI tools are available (e.g. "what AI tools for docs?", "what tools are available for documentation?"), read `.cursor/doc-ai-tools-list.md` and output the list, or suggest they run the list-doc-ai-tools command.
+
 ## Project Architecture Overview
 
 ### Directory Structure

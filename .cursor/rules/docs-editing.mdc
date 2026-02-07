@@ -1,0 +1,41 @@
+---
+description: "Apply Neon documentation standards when editing docs, guides, or changelog. Uses the Docs contribution guide and Style Guide as the source of truth."
+globs: content/docs/**/*.md, content/guides/**/*.md, content/changelog/**/*.md
+alwaysApply: false
+---
+
+# Neon documentation editing
+
+When editing files under `content/docs/`, `content/guides/`, or `content/changelog/`, follow these rules. The canonical source for style and structure is the [Docs contribution guide](/docs/community/contribution-guide) and its **Style Guide** section (voice and language, capitalization, links, code blocks, frontmatter).
+
+## Style and voice (from contribution guide)
+
+- **Voice:** One human explaining to another; approachable and professional. Use contractions ("it's", "you're"), active voice, brief sentences, "you" for the reader. Use US English. No emojis or exclamation marks in docs.
+- **Terminology:** One term per concept (e.g. "dashboard" not "control panel"). Link instead of repeating text from other topics.
+- **Capitalization:** Sentence-style for titles; lowercase where possible. Product names and UI text match official capitalization (e.g. PostgreSQL, GitHub).
+- **Code and commands:** Commands, parameters, filenames, connection strings in backticks. Connection string format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`. Use `@example.com` or example names (e.g. Alex Lopez, Dana Smith) for fake user info.
+
+## Components and icons (documentation definition)
+
+When editing docs, use the community documentation definition so you know all available components and icons. Load these when you need to add or validate MDX components or icons:
+
+- **Component catalog:** Read `content/docs/community/component-guide.md` for common components (Admonition, CodeTabs, InfoBlock, Steps, etc.) and usage.
+- **Icons:** Read `content/docs/community/component-icon-guide.md` for available icons and usage.
+- **Specialized components:** Read `content/docs/community/component-specialized.md` for advanced/specialized components when needed.
+- **Diagrams:** Read `content/docs/community/mermaid-diagrams.md` when adding or editing Mermaid diagrams.
+
+Use the Read tool on these paths when your edit involves components, icons, or diagrams. This matches the same documentation definition used in Claude (see `.claude/commands/doc-context-bridge.md`).
+
+## Structure and reuse
+
+- **Shared content:** Before adding a new repeated block, check `content/docs/shared-content/` and `shared-content/index.js`. Use or extend shared components (e.g. NeedHelp, NewPricing, Admonition) rather than duplicating.
+- **Cross-doc consistency:** After changing a procedure or definition, consider: "Is this same instruction stated elsewhere?" Search (e.g. by key phrase in `content/docs` and `content/guides`) and align wording or link to a single source.
+- **Glossary:** When introducing or using Neon product terms (e.g. compute, branch, Activity Monitor, API key), link to `content/docs/reference/glossary.md` where appropriate, or add the term to the glossary if it is new.
+
+## Moves and redirects
+
+- When moving or renaming a doc, follow the redirect workflow: (1) Add `redirectFrom` on the **destination** file with the old path(s). (2) Update internal links (cross-references) to the new path. (3) Update `content/docs/navigation.yaml` if the page is in the sidebar. (4) Preserve any existing `redirectFrom` entries when moving. (5) Update hub/landing pages that link to the moved content. Full steps and examples: `.claude/commands/redirect-update.md`.
+
+## Human review
+
+All doc edits are reviewed via pull requests. Do not skip review; ensure PRs are created for changes.

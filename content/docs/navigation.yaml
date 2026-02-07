@@ -1391,6 +1391,8 @@
           slug: community/component-icon-guide
         - title: Component architecture
           slug: community/component-architecture
+        - title: AI tools for documentation
+          slug: community/ai-tools
     - title: Glossary
       slug: reference/glossary
       icon: glossary
