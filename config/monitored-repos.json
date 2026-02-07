@@ -1,0 +1,162 @@
+{
+  "repos": [
+    {
+      "name": "neon-cloud",
+      "path": "~/neon-cloud",
+      "github_url": "git@github.com:databricks-eng/neon-cloud.git",
+      "github_org": "databricks-eng",
+      "github_repo": "neon-cloud",
+      "release_type": "branch",
+      "release_pattern": "rc/release-*/*",
+      "organize_by_category": true,
+      "comment": "Includes both control-plane and console releases"
+    },
+    {
+      "name": "hadron",
+      "path": "~/hadron",
+      "github_url": "git@github.com:databricks-eng/hadron.git",
+      "github_org": "databricks-eng",
+      "github_repo": "hadron",
+      "release_type": "tag",
+      "release_pattern": "release-(compute|storage|proxy|hcm)-*",
+      "organize_by_category": true,
+      "group_by_release_component": true,
+      "release_components": {
+        "compute": "Compute",
+        "storage": "Storage",
+        "proxy": "Proxy",
+        "hcm": "Host Compute Manager"
+      }
+    },
+    {
+      "name": "neonctl",
+      "path": "~/neonctl",
+      "github_url": "git@github.com:neondatabase/neonctl.git",
+      "github_org": "neondatabase",
+      "github_repo": "neonctl",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "neon_local_vs_code_extension",
+      "path": "~/neon_local_vs_code_extension",
+      "github_url": "git@github.com:neondatabase/neon_local_vs_code_extension.git",
+      "github_org": "neondatabase",
+      "github_repo": "neon_local_vs_code_extension",
+      "release_type": "direct",
+      "organize_by_category": false,
+      "comment": "No release tags - PRs merge directly to main"
+    },
+    {
+      "name": "neon-js",
+      "path": "~/neon-js",
+      "github_url": "git@github.com:neondatabase/neon-js.git",
+      "github_org": "neondatabase",
+      "github_repo": "neon-js",
+      "release_type": "tag",
+      "release_pattern": "*",
+      "organize_by_category": false
+    },
+    {
+      "name": "neon-api-python",
+      "path": "~/neon-api-python",
+      "github_url": "git@github.com:neondatabase/neon-api-python.git",
+      "github_org": "neondatabase",
+      "github_repo": "neon-api-python",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "serverless",
+      "path": "~/serverless",
+      "github_url": "git@github.com:neondatabase/serverless.git",
+      "github_org": "neondatabase",
+      "github_repo": "serverless",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "neon-drizzle-studio-changelog",
+      "path": "~/neon-drizzle-studio-changelog",
+      "github_url": "git@github.com:neondatabase/neon-drizzle-studio-changelog.git",
+      "github_org": "neondatabase",
+      "github_repo": "neon-drizzle-studio-changelog",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "mcp-server-neon",
+      "path": "~/mcp-server-neon",
+      "github_url": "git@github.com:neondatabase-labs/mcp-server-neon.git",
+      "github_org": "neondatabase-labs",
+      "github_repo": "mcp-server-neon",
+      "release_type": "direct",
+      "organize_by_category": false,
+      "comment": "No releases - PRs merge directly to main"
+    },
+    {
+      "name": "agent-skills",
+      "path": "~/agent-skills",
+      "github_url": "git@github.com:neondatabase/agent-skills.git",
+      "github_org": "neondatabase",
+      "github_repo": "agent-skills",
+      "release_type": "direct",
+      "organize_by_category": false,
+      "comment": "Agent Skills for Neon Serverless Postgres - PRs merge directly to main"
+    },
+    {
+      "name": "create-branch-action",
+      "path": "~/create-branch-action",
+      "github_url": "git@github.com:neondatabase/create-branch-action.git",
+      "github_org": "neondatabase",
+      "github_repo": "create-branch-action",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "delete-branch-action",
+      "path": "~/delete-branch-action",
+      "github_url": "git@github.com:neondatabase/delete-branch-action.git",
+      "github_org": "neondatabase",
+      "github_repo": "delete-branch-action",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "reset-branch-action",
+      "path": "~/reset-branch-action",
+      "github_url": "git@github.com:neondatabase/reset-branch-action.git",
+      "github_org": "neondatabase",
+      "github_repo": "reset-branch-action",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "schema-diff-action",
+      "path": "~/schema-diff-action",
+      "github_url": "git@github.com:neondatabase/schema-diff-action.git",
+      "github_org": "neondatabase",
+      "github_repo": "schema-diff-action",
+      "release_type": "tag",
+      "release_pattern": "v*",
+      "organize_by_category": false
+    },
+    {
+      "name": "instagres-web",
+      "path": "~/instagres-web",
+      "github_url": "git@github.com:neondatabase/instagres-web.git",
+      "github_org": "neondatabase",
+      "github_repo": "instagres-web",
+      "release_type": "direct",
+      "organize_by_category": false,
+      "comment": "Instagres web application - PRs merge directly to main"
+    }
+  ]
+}
