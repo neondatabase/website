@@ -6,7 +6,7 @@ summary: >-
   website repo for documentation work, so you can use the same standards in
   either environment.
 enableTableOfContents: true
-updatedOn: '2026-02-07T00:00:00.000Z'
+updatedOn: '2026-02-07T21:34:27.955Z'
 ---
 
 The Neon website repo includes rules and commands for **Claude** and **Cursor** so that documentation work follows the same standards no matter which tool you use. All changes are reviewed by humans via pull requests.
