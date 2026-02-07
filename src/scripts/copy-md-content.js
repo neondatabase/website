@@ -2,44 +2,27 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-console */
 
-const fs = require('fs').promises;
+/**
+ * Post-build script to process MDX content into LLM-friendly markdown
+ *
+ * This script processes all content routes, converting MDX components
+ * into clean markdown that AI agents can understand.
+ */
+
 const path = require('path');
 
 const { CONTENT_ROUTES } = require('../constants/content');
 
-const copyMarkdownFiles = async (src, dest) => {
-  // Create destination directory if it doesn't exist
-  await fs.mkdir(dest, { recursive: true });
-
-  // Read all items in the source directory
-  const items = await fs.readdir(src, { withFileTypes: true });
-
-  for (const item of items) {
-    const srcPath = path.join(src, item.name);
-    const destPath = path.join(dest, item.name);
-
-    if (item.isDirectory()) {
-      // If item is a directory, recurse
-      await copyMarkdownFiles(srcPath, destPath);
-    } else if (item.isFile() && path.extname(item.name) === '.md') {
-      // If item is a Markdown file, copy it
-      await fs.copyFile(srcPath, destPath);
-    }
-  }
-};
+const { processAllContent } = require('./process-md-for-llms');
 
 (async () => {
-  console.log('Copying markdown content...');
+  console.log('Processing markdown content for LLMs...\n');
   try {
-    const copyTasks = Object.entries(CONTENT_ROUTES).map(([route, srcPath]) => {
-      const destPath = `public/md/${route}`;
-      return copyMarkdownFiles(srcPath, destPath);
-    });
-
-    await Promise.all(copyTasks);
-
-    console.log('Done copying markdown content.');
+    const projectRoot = path.resolve(__dirname, '../..');
+    await processAllContent(CONTENT_ROUTES, projectRoot);
+    console.log('\nDone processing markdown content.');
   } catch (err) {
-    console.error('Error occurred while copying markdown files:', err);
+    console.error('Error occurred while processing markdown files:', err);
+    process.exit(1);
   }
 })();

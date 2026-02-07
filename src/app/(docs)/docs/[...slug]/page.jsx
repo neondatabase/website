@@ -61,6 +61,7 @@ export async function generateMetadata({ params }) {
     rssPathname: isChangelog ? `${LINKS.changelog}/rss.xml` : null,
     robotsNoindex: post?.data?.noindex ? 'noindex' : null,
     type: 'article',
+    markdownPath: `/docs/${currentSlug}.md`,
   });
 }
 

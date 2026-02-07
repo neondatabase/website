@@ -6,6 +6,7 @@ import { checkCookie, getReferer } from 'app/actions';
 import LINKS from 'constants/links';
 
 import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
+import llmsRedirectMap from './utils/llms-redirect-map.json';
 
 const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
@@ -15,6 +16,16 @@ const SITE_URL =
 export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
+
+    // Legacy /llms/*.txt redirect (deprecated URLs -> canonical .md URLs)
+    if (pathname.startsWith('/llms/')) {
+      const filename = pathname.replace('/llms/', '');
+      const target = llmsRedirectMap[filename];
+      if (target) {
+        return NextResponse.redirect(new URL(target, req.url), { status: 301 });
+      }
+      // No match in map = fall through to 404 naturally
+    }
 
     if (isAIAgentRequest(req)) {
       const markdownPath = getMarkdownPath(pathname);
@@ -96,6 +107,7 @@ export const config = {
   matcher: [
     '/', // Check if the user is logged in
     '/home', // Check if the user is logged in
+    '/llms/:path*', // Legacy .txt redirect
     '/(docs|postgresql|guides|branching|programs|use-cases)/:path*', // All markdown routes
   ],
 };
