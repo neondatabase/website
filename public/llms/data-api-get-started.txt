@@ -78,17 +78,17 @@ The Data API interacts directly with your Postgres schema. Because the API is ac
 In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. **Choose the approach that matches how you manage your database schema:**
 
 - **SQL**: Write SQL directly in the [Neon SQL Editor](https://neon.com/docs/get-started/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](https://neon.com/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
-- **Drizzle (crudPolicy)**: A high-level helper that generates all four CRUD policies (select, insert, update, delete) in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
-- **Drizzle (pgPolicy)**: Define individual policies for each operation. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
+- **Drizzle (crudPolicy)**: A high-level helper that generates RLS policies in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
+- **Drizzle (pgPolicy)**: Define policies per operation or use a single `FOR ALL` policy. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
 
 For more on Drizzle RLS, see our [Drizzle RLS guide](https://neon.com/docs/guides/rls-drizzle).
 
 Tab: SQL
 
 ```sql
--- This script creates a posts table, enables RLS, and defines four policies:
--- one allows authenticated users to read published posts or their own posts,
--- and the other three let users insert, update, and delete only their own posts.
+-- This script creates a posts table, enables RLS, and defines two policies:
+-- one allows authenticated users to read published posts, and the other
+-- gives users full access (read, insert, update, delete) to their own posts.
 
 -- 1. Create the table
 CREATE TABLE posts (
@@ -102,37 +102,24 @@ CREATE TABLE posts (
 -- 2. Enable RLS
 ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 
--- 3. Create Policy: Users can see all published posts and their own posts
-CREATE POLICY "Public read access" ON posts
-  AS PERMISSIVE
-  FOR SELECT TO authenticated
-  USING (is_published OR (select auth.user_id() = "posts"."user_id"));
+-- 3. Read published posts
+CREATE POLICY read_published_posts ON posts
+FOR SELECT TO authenticated
+USING (is_published = true);
 
--- 4. Create Policy: Users can insert their own posts
-CREATE POLICY "Users can insert their own posts" ON posts
-  AS PERMISSIVE
-  FOR INSERT TO "authenticated"
-  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
-
--- 5. Create Policy: Users can update their own posts
-CREATE POLICY "Users can update their own posts" ON posts
-  AS PERMISSIVE
-  FOR UPDATE TO "authenticated"
-  USING ((select auth.user_id() = "posts"."user_id"))
-  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
-
-CREATE POLICY "Users can delete their own posts" ON posts
-  AS PERMISSIVE
-  FOR DELETE TO "authenticated"
-  USING ((select auth.user_id() = "posts"."user_id"));
+-- 4. Full access to own posts
+CREATE POLICY manage_own_posts ON posts
+FOR ALL TO authenticated
+USING (auth.user_id() = user_id)
+WITH CHECK (auth.user_id() = user_id);
 ```
 
 Tab: Drizzle (crudPolicy)
 
 ```typescript
-// This schema defines the same posts table using Drizzle ORM. The crudPolicy helper
-// generates all four RLS policies (select, insert, update, delete) in a single declaration:
-// `read` controls who can view posts, and `modify` controls who can insert, update, or delete them.
+// This schema defines the same two-policy behavior using Drizzle ORM. The crudPolicy
+// helper generates equivalent RLS: `read` allows published posts or own posts,
+// and `modify` restricts insert, update, and delete to own posts.
 
 import { sql } from 'drizzle-orm';
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
@@ -150,11 +137,10 @@ export const posts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    // Policy for authenticated users
     crudPolicy({
       role: authenticatedRole,
-      read: sql`is_published OR (select auth.user_id() = ${table.userId})`, // Can read published posts or their own posts
-      modify: authUid(table.userId), // Can only modify their own posts
+      read: sql`is_published OR (auth.user_id() = ${table.userId})`,
+      modify: authUid(table.userId),
     }),
   ]
 );
@@ -163,9 +149,8 @@ export const posts = pgTable(
 Tab: Drizzle (pgPolicy)
 
 ```typescript
-// This schema defines the same posts table using Drizzle ORM with individual pgPolicy
-// declarations for each operation. This approach gives you fine-grained control when
-// you need different logic for select, insert, update, and delete.
+// This schema defines the same two-policy behavior using Drizzle ORM with pgPolicy.
+// One policy allows reading published posts; the other gives full access to own posts.
 
 import { sql } from 'drizzle-orm';
 import { authenticatedRole, authUid } from 'drizzle-orm/neon';
@@ -183,27 +168,16 @@ export const posts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    // Authenticated users
-    pgPolicy('Allow authenticated users to read published posts and their own posts', {
+    pgPolicy('read_published_posts', {
       to: authenticatedRole,
       for: 'select',
-      using: sql`is_published OR (select auth.user_id() = ${table.userId})`,
+      using: sql`is_published = true`,
     }),
-    pgPolicy('Allow authenticated users to insert their own posts', {
+    pgPolicy('manage_own_posts', {
       to: authenticatedRole,
-      for: 'insert',
-      withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to update their own posts', {
-      to: authenticatedRole,
-      for: 'update',
+      for: 'all',
       using: authUid(table.userId),
       withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to delete their own posts', {
-      to: authenticatedRole,
-      for: 'delete',
-      using: authUid(table.userId),
     }),
   ]
 );
