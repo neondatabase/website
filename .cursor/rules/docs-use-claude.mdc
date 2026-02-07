@@ -1,0 +1,27 @@
+---
+description: "When doing documentation work in Cursor, load and apply Claude guidance from .claude/ so both toolchains stay aligned."
+globs: content/docs/**/*.md, content/guides/**/*.md, content/changelog/**/*.md
+alwaysApply: false
+---
+
+# Use Claude doc guidance from Cursor
+
+When editing docs or running documentation tasks in this repo, also use the guidance in `.claude/` so behavior matches whether you are in Cursor or Claude.
+
+## When to load which file
+
+- **Style and examples:** Read `.claude/commands/golden-corpus.md` for exemplary doc files by type (tutorial, get-started, concept, how-to, reference, integration, framework, hub) and Neon style patterns.
+- **Full write workflow:** Read `.claude/commands/write-content.md` for the orchestrated flow (IA → drafter → refiner → syntax-validator) and when to use it.
+- **One-off review:** Read `.claude/commands/review-content.md` for review criteria. For review logic and feedback shape, read `.claude/agents/content-refiner.md`.
+- **Moves and redirects:** Read `.claude/commands/redirect-update.md` for the step-by-step redirect and link-update workflow.
+- **Navigation and placement:** Read `.claude/commands/navigation-principles.md` for `navigation.yaml` structure. Read `.claude/agents/ia-specialist.md` for content scoping and hierarchy.
+- **Changelog from other repos:** Read `.claude/commands/triage-changelog.md` for the extraction workflow; extract-analyze agents are in `.claude/agents/` (extract-analyze-console, -cli, -mcp, -storage, -compute).
+- **Project layout:** Read `.claude/commands/docs-prime.md` for directory structure and key paths.
+- **Components and icons:** Read `content/docs/community/component-guide.md` and `content/docs/community/component-icon-guide.md` for the full component and icon catalog; `content/docs/community/component-specialized.md` and `content/docs/community/mermaid-diagrams.md` for specialized components and diagrams. (Same documentation definition as in `.cursor/rules/docs-editing.mdc`; doc-context-bridge points Claude to the same files.)
+- **Intro or small edits:** Read `.claude/commands/improve-intro.md` for intro improvements; read `.claude/agents/syntax-validator.md` for MDX/build checks.
+
+Use the Read tool on the relevant path (e.g. `Read(".claude/commands/golden-corpus.md")`) when the task matches the description above. Skill behavior for the four Cursor skills (consistency, glossary, version/SDK, redirect-and-links) is defined in `.cursor/doc-ai-tools-list.md` (Cursor section).
+
+## When the user asks what doc AI tools are available
+
+If the user asks "what doc AI tools are available", "what AI tools for docs", "what AI tools are available for documentation", or similar, read `.cursor/doc-ai-tools-list.md` and output the list of tools with their one- or two-sentence descriptions as your response. Do not summarize; print the list so the user gets the full reference.
