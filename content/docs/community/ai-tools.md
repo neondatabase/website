@@ -13,29 +13,33 @@ The Neon website repo includes rules and commands for **Claude** and **Cursor** 
 
 ## Cursor (`.cursor/`)
 
-| Tool                     | Description                                                                                                                                                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **neon-changelog.rules** | Generate next Friday's changelog draft or a changelog for a specific date; template with Fixes & improvements.                                                                                                   |
-| **docs-editing rule**    | When editing docs/guides/changelog: apply Neon voice (see [contribution guide](/docs/community/contribution-guide)), use shared content, keep cross-doc consistency, link to glossary, follow redirect workflow. |
-| **docs-use-claude rule** | Points to `.claude/` agents and commands (golden corpus, write-content, review-content, redirect-update, etc.) so Cursor can load them for style and workflows.                                                  |
-| **Skills (planned)**     | Consistency check, glossary sync, version/SDK check, redirect-and-links — on-demand checks invoked by the user.                                                                                                  |
+| Tool                      | Description                                                                                                                                                                                                                                |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Neon changelog**        | Generate next Friday's changelog draft or a changelog for a specific date; template with Fixes & improvements. Rule: `neon-changelog.rules`.                                                                                               |
+| **Docs editing**          | When editing docs/guides/changelog: apply Neon voice (see [contribution guide](/docs/community/contribution-guide)), use shared content, keep cross-doc consistency, link to glossary, follow redirect workflow. Rule: `docs-editing.mdc`. |
+| **Docs use Claude**       | Points to `.claude/` agents and commands so Cursor can load them for style and workflows. Rule: `docs-use-claude.mdc`.                                                                                                                     |
+| **Docs PR report**        | Weekly doc review: report of merged PRs across monitored repos (default: since last Friday), grouped by category with docs-impact indicators. Reports to ~/docs-reviews/. Rule: `docs-pr-report.mdc`.                                      |
+| **Consistency check**     | Find other places that say the same thing; suggest a single source or aligned wording. Skill: `.cursor/skills/consistency-check.md`.                                                                                                       |
+| **Docs glossary updater** | Compare a doc to the glossary; list missing or review terms. Skill: `.cursor/skills/docs-glossary-updater.md`.                                                                                                                             |
+| **Redirect and links**    | After moving a file, ensure redirectFrom and suggest link/nav updates. Skill: `.cursor/skills/redirect-and-links.md`.                                                                                                                      |
+| **Docs Roadmap updater**  | Review changelog (default: past 1 month) and sync the introduction roadmap with "What we've shipped recently." Skill: `.cursor/skills/docs-roadmap-updater.md`.                                                                            |
 
 ## Claude (`.claude/`)
 
-| Tool                      | Description                                                                                                                       |
-| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| **golden-corpus**         | Exemplary doc files by type; use for style, tone, and structure.                                                                  |
-| **write-content**         | Full workflow: IA → drafter → refiner → syntax-validator, then git/PR.                                                            |
-| **simple-content**        | Lighter workflow with user confirmation at each step.                                                                             |
-| **review-content**        | One-off review for style, standards, and technical accuracy.                                                                      |
-| **redirect-update**       | Step-by-step for moves/renames: redirectFrom, links, navigation.                                                                  |
-| **triage-changelog**      | Extract PRs from Console/CLI/MCP/Storage/Compute and draft changelog.                                                             |
-| **docs-prime**            | Project structure and key paths for the doc ecosystem.                                                                            |
-| **improve-intro**         | Improve the first paragraph of a doc page.                                                                                        |
-| **navigation-principles** | How `navigation.yaml` works (nav, subnav, items).                                                                                 |
-| **doc-context-bridge**    | Points to `.cursor/` rules and skills so Claude follows the same Cursor-side guidance.                                            |
-| **list-doc-ai-tools**     | Prints the list of doc AI tools when run or when asked (e.g. "what doc AI tools are available?").                                 |
-| **Agents**                | content-drafter, content-planner, content-refiner, ia-specialist, syntax-validator, supervisor; extract-analyze-\* for changelog. |
+| Tool                      | Description                                                                                                                                 |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| **golden-corpus**         | Exemplary doc files by type; use for style, tone, and structure.                                                                            |
+| **write-content**         | Full workflow: IA → drafter → refiner → syntax-validator, then git/PR.                                                                      |
+| **simple-content**        | Lighter workflow with user confirmation at each step.                                                                                       |
+| **review-content**        | One-off review for style, standards, and technical accuracy.                                                                                |
+| **redirect-update**       | Step-by-step for moves/renames: redirectFrom, links, navigation. (Same workflow as Cursor **Redirect and links**.)                          |
+| **triage-changelog**      | Extract PRs from Console/CLI/MCP/Storage/Compute and draft changelog.                                                                       |
+| **docs-prime**            | Project structure and key paths for the doc ecosystem.                                                                                      |
+| **improve-intro**         | Improve the first paragraph of a doc page.                                                                                                  |
+| **navigation-principles** | How `navigation.yaml` works (nav, subnav, items).                                                                                           |
+| **doc-context-bridge**    | Points to `.cursor/` rules and skills so Claude can use Consistency check, Docs glossary updater, Redirect and links, Docs Roadmap updater. |
+| **list-doc-ai-tools**     | Prints the list of doc AI tools when run or when asked (e.g. "what doc AI tools are available?").                                           |
+| **Agents**                | content-drafter, content-planner, content-refiner, ia-specialist, syntax-validator, supervisor; extract-analyze-\* for changelog.           |
 
 For full details and when to use each tool, see the files under `.cursor/` and `.claude/commands/` or `.claude/agents/` in the [website repository](https://github.com/neondatabase/website).
 

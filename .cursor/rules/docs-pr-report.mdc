@@ -7,18 +7,11 @@ tags: ["docs-review", "pr-analysis", "documentation"]
 # Documentation PR Report Generator
 
 <!--
-===============================================================================
-INTERNAL USE ONLY
-===============================================================================
-This rule is intended for internal use by Databricks/Neon employees. It references
-and accesses internal repositories (e.g. databricks-eng/neon-cloud, hadron) that
-are not publicly cloneable. If you are outside the organization and have this
+This rule references both public and internal repositories If you are outside the organization and have this
 code: you should not expect to be able to run this report; the scripts require
-local clones of those internal repos, which you cannot obtain.
+local clones of non-public repos.
 
-===============================================================================
 WHAT THIS TOOL DOES (for humans reading this file)
-===============================================================================
 
 This is an automated documentation review system for the Neon documentation team.
 
@@ -29,18 +22,16 @@ PURPOSE:
 - Saves hours of manual work filtering through GitHub PRs and commits
 
 HOW IT WORKS:
-1. Monitors 14 Neon repositories (neon-cloud, hadron, neonctl, agent-skills, etc.)
+1. Monitors 14 Neon repositories
 2. Fetches recent merged PRs based on time window (default: since last Friday)
 3. Groups PRs by category tags, release component, or direct merges
 4. Adds documentation impact indicators (✅ ❓ ❌)
-5. Saves combined report to ~/docs-reviews/ with clickable GitHub PR links
+5. Saves combined report locally to ~/docs-reviews/ with clickable GitHub PR links
 
 SETUP (in this repo):
 - Config: config/monitored-repos.json
 - Scripts: ./scripts/generate-docs-pr-report.sh, ./scripts/setup-repos.sh, ./scripts/check-docs-report-deps.sh
 - Run from repository root. Reports go to ~/docs-reviews/ (auto-created).
-
-===============================================================================
 -->
 
 This rule enables AI-powered generation of documentation PR reports from monitored repositories.
