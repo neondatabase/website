@@ -19,10 +19,7 @@ Our development teams are focused on helping you ship faster with Postgres. This
 Here's a snapshot of what we're working on now:
 
 - **Neon Auth general availability**: Neon Auth is moving toward general availability with additional plugins and features on the way. Check the [Neon Auth roadmap](/docs/auth/roadmap) for details.
-- **Connection pooling metrics**: We're expanding our observability capabilities with additional metrics for PgBouncer, available in the Neon Console and through our OpenTelemetry integration.
-- **Enhanced consumption metrics**: More metrics are coming to help you track and monitor usage across Neon's usage-based pricing plans with more granular insights.
 - **Performance optimizations for large computes**: We're working on improving startup performance for larger compute instances after restarts.
-- **Expanded spatial capabilities**: Support for additional geospatial extensions is in development.
 - **Postgres 18 general availability**: Postgres 18 is currently in preview and moving toward general availability.
 - **Large object storage**: We're working on adding support for large object storage.
 
@@ -79,6 +76,10 @@ And here's an overview of what we're looking at next:
 
 ## What we've shipped recently 🚢
 
+- **Consumption history API**: The consumption history API is now available on all paid plans. You can use it with Neon's usage-based pricing plans to track usage programmatically—query compute, storage, and data transfer at hourly, daily, or monthly granularity for custom dashboards and alerts. [Learn more](/docs/guides/consumption-metrics).
+- **Instagres REST API**: Instagres now offers a REST API for programmatic database provisioning, making it easy to integrate Postgres into platforms, CI/CD, and automation. [Learn more](/docs/reference/instagres).
+- **Agent Skills**: Install [Agent Skills](https://github.com/neondatabase/agent-skills) to teach your AI assistant about Neon best practices.
+- **Connection pooling metrics**: Pooler client and server connection graphs are now available in the Neon Console and via OpenTelemetry and Datadog integrations, so you can monitor PgBouncer usage and tune pool size. [Learn more](/docs/introduction/monitoring-page).
 - **Project recovery**: Accidentally deleted a project? You can now recover it within 7 days of deletion. This feature restores your entire project infrastructure, including all branches, endpoints, compute configurations, and project settings. [Learn more](/docs/manage/projects#recover-a-deleted-project).
 - **100 Free plan projects**: The Neon Free plan now includes 100 projects, giving you plenty of room to experiment, prototype, and build. [Learn more](/docs/introduction/plans).
 - **Neon Auth rebuilt with Better Auth**: Neon Auth now uses [Better Auth](https://www.better-auth.com/) as the foundation. All authentication data lives directly in your Neon database, so when you branch, your entire auth state branches with it. Users, sessions, organizations, and configuration are stored in a dedicated `neon_auth` schema. [Read the announcement](/blog/neon-auth-branchable-identity-in-your-database).
