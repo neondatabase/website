@@ -11,6 +11,7 @@ When editing files under `content/docs/`, `content/guides/`, or `content/changel
 ## Style and voice (from contribution guide)
 
 - **Voice:** One human explaining to another; approachable and professional. Use contractions ("it's", "you're"), active voice, brief sentences, "you" for the reader. Use US English. No emojis or exclamation marks in docs.
+- **No em dashes:** Do not use em dashes (—) in documentation content. Use commas, parentheses, or separate sentences instead.
 - **Terminology:** One term per concept (e.g. "dashboard" not "control panel"). Link instead of repeating text from other topics.
 - **Capitalization:** Sentence-style for titles; lowercase where possible. Product names and UI text match official capitalization (e.g. PostgreSQL, GitHub).
 - **Code and commands:** Commands, parameters, filenames, connection strings in backticks. Connection string format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`. Use `@example.com` or example names (e.g. Alex Lopez, Dana Smith) for fake user info.

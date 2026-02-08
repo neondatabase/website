@@ -2,6 +2,8 @@
 
 **When to use:** The user asks to "update the roadmap," "sync roadmap with changelog," "review roadmap against changelog," "run roadmap updater," or similar.
 
+**Always:** When doing any work on the roadmap (edits, new bullets, or reviews), read and follow this skill. Treat it as the single source of truth for roadmap structure, style, and workflow.
+
 **Goal:** Keep the Neon introduction roadmap aligned with the changelog. Review changelog entries from a recent time window (default: past 1 month), then update the roadmap by (1) moving items from "What we're working on now" to "What we've shipped recently" when they have clearly shipped in the changelog, and (2) adding any major changelog features that are missing from "What we've shipped recently." If everything is already reflected, report that we're up to date and make no changes.
 
 **Roadmap path:** `content/docs/introduction/roadmap.md`  
@@ -17,7 +19,7 @@ The roadmap has three main sections:
 2. **What's on the horizon** — Subsections (### Backups & restore, ### Security, etc.) with short bullets. No need to change these unless the user asks.
 3. **What we've shipped recently** — Bullet list. Each item: **Bold title**: one-sentence description. Often ends with "[Learn more](/docs/...)" or "[Read the announcement](/blog/...)." Keep the same tone and format. New entries go at the **top** of this list (most recent first). Optionally there is a `<details><summary>Shipped in 2024</summary>...</details>` (or other year) at the bottom; do not add current-year items there.
 
-**Style:** Short, clear bullets. Use existing roadmap wording patterns. Prefer docs links (`/docs/...`) or blog links (`/blog/...`) where relevant. Avoid em dashes unless necessary.
+**Style:** Short, clear bullets. Use existing roadmap wording patterns. Prefer docs links (`/docs/...`) or blog links (`/blog/...`) where relevant. **In the roadmap document (content users read), do not use em dashes (—).** Use commas, parentheses, or separate sentences instead.
 
 ---
 
@@ -71,6 +73,7 @@ The roadmap has three main sections:
 - **One bullet per feature:** One roadmap bullet per shipped feature; combine very small related items only when they're the same theme (e.g. "Postgres extension updates" if the changelog has a single section for multiple extension version bumps).
 - **Don't invent links:** Only add "[Learn more](...)" or "[Read the announcement](...)" when the changelog or existing roadmap clearly points to that URL. Otherwise omit or use a generic docs path if obvious.
 - **Don't change "What's on the horizon":** Unless the user explicitly asks to update that section, leave it as is.
+- **No em dashes in the roadmap:** In `content/docs/introduction/roadmap.md` (the content users read), do not use em dashes (—). Use commas, parentheses, or separate sentences instead.
 
 ---
 
