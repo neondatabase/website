@@ -27,6 +27,17 @@ When editing docs, use the community documentation definition so you know all av
 
 Use the Read tool on these paths when your edit involves components, icons, or diagrams. This matches the same documentation definition used in Claude (see `.claude/commands/doc-context-bridge.md`).
 
+### Icons: never make up names (build/runtime errors)
+
+**Never invent or guess icon names.** Using an icon name that is not supported by the site causes runtime errors (e.g. 500 on the page) or build failures. Always use only icons that exist in the codebase.
+
+**Where to find supported icons:**
+
+- **DetailIconCards** (cards in docs with `icon="..."` on `<a>` inside `<DetailIconCards>`): Supported names are the **keys of the `icons` object** in `src/components/pages/doc/detail-icon-cards/detail-icon-cards.jsx`. A human-readable list and examples are in `content/docs/community/component-icon-guide.md` in the "DetailIconCards Icons" / "Complete icon showcase" section. If you add a card, verify the icon key exists in that component file before committing.
+- **TechCards** (technology/framework cards): Icons are **filenames (without `.svg`)** under `public/images/technology-logos/`. The icon name in the doc must match a file in that directory (e.g. `icon="next-js"` requires `next-js.svg`). See the component icon guide "TechCards Icons" section.
+
+When in doubt, open the component source or the icon guide and choose an icon from the existing list.
+
 ## Structure and reuse
 
 - **Shared content:** Before adding a new repeated block, check `content/docs/shared-content/` and `shared-content/index.js`. Use or extend shared components (e.g. NeedHelp, NewPricing, Admonition) rather than duplicating.
