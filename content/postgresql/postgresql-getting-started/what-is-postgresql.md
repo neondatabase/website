@@ -61,6 +61,7 @@ PostgreSQL with the [PostGIS extension](https://postgis.net/) supports geospatia
 PostgreSQL supports the most popular programming languages:
 
 - Python
+- PHP
 - Java
 - C\#
 - C/C\+\+
