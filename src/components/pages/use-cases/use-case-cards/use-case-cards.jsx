@@ -23,7 +23,17 @@ const ICONS = {
   incognito: IncognitoIcon,
 };
 
-const UseCaseCard = ({ className, icon, title, description, link, logo, testimonial, tags }) => {
+const UseCaseCard = ({
+  className,
+  icon,
+  title,
+  description,
+  link,
+  logo,
+  testimonial,
+  tags,
+  index,
+}) => {
   const IconComponent = icon && ICONS[icon];
 
   return (
@@ -124,7 +134,7 @@ const UseCaseCard = ({ className, icon, title, description, link, logo, testimon
             alt={title}
             width={logo.mediaDetails.width}
             height={logo.mediaDetails.height}
-            priority
+            priority={index <= 1}
           />
         )}
 
@@ -159,7 +169,13 @@ UseCaseCard.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   link: PropTypes.string,
-  logo: PropTypes.string,
+  logo: PropTypes.shape({
+    mediaItemUrl: PropTypes.string.isRequired,
+    mediaDetails: PropTypes.shape({
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }),
   testimonial: PropTypes.shape({
     quote: PropTypes.node.isRequired,
     author: PropTypes.string.isRequired,
@@ -171,6 +187,7 @@ UseCaseCard.propTypes = {
       icon: PropTypes.string,
     })
   ),
+  index: PropTypes.number.isRequired,
 };
 
 const UseCaseCards = ({ className, items }) => (
@@ -179,7 +196,7 @@ const UseCaseCards = ({ className, items }) => (
   >
     <Container className="flex flex-col gap-11 xl:gap-10 lg:gap-8" size="960">
       {items.map((item, index) => (
-        <UseCaseCard key={index} {...item} />
+        <UseCaseCard key={index} {...item} index={index} />
       ))}
     </Container>
   </section>
@@ -193,7 +210,13 @@ UseCaseCards.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       link: PropTypes.string,
-      logo: PropTypes.string,
+      logo: PropTypes.shape({
+        mediaItemUrl: PropTypes.string.isRequired,
+        mediaDetails: PropTypes.shape({
+          width: PropTypes.number.isRequired,
+          height: PropTypes.number.isRequired,
+        }).isRequired,
+      }),
       testimonial: PropTypes.shape({
         quote: PropTypes.node.isRequired,
         author: PropTypes.string.isRequired,

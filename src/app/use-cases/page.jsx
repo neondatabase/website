@@ -6,7 +6,6 @@ import { getUseCasesCards } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.useCases);
-export const revalidate = 60;
 
 // Get case study link based on isInternal flag
 const getCaseStudyLink = (caseStudyPost) => {
@@ -54,5 +53,7 @@ const UseCasesPage = async () => {
     </Layout>
   );
 };
+
+export const revalidate = 60;
 
 export default UseCasesPage;
