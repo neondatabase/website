@@ -2,31 +2,44 @@
   id: starting-point
   items:
     - title: "The problem: the stack has evolved, databases haven't"
+      description: Why DB copies don't scale — and branching does
       slug: introduction
     - title: Rethinking the database DX with branches
+      description: Branching replaces instance copies with isolated environments
       slug: rethinking-the-database
+
 - section: Building blocks
   id: building-blocks
   items:
     - title: Foundational concepts for the branching DX
+      description: Learn how Neon projects, branches, and hierarchies work
       slug: foundational-concepts
+
 - section: Popular workflows
   id: popular-workflows
   items:
     - title: Branching workflows for production & staging
+      description: Learn how to manage production and staging with branching
       slug: production-staging-workflows
     - title: Branching workflows for development
+      description: Isolated branches for safe, production-like testing
       slug: branching-workflows-for-development
     - title: Branching workflows for CI and previews
+      description: Isolated branches per preview or test run — no shared test DBs
       slug: ci-preview-workflows
     - title: Branching workflows for recovery
+      description: Restore data, debug migrations, and audit history with branches
       slug: recovery-workflows
     - title: Branching workflows for agents & platforms
+      description: Version DBs with snapshots that sync code and data
       slug: branching-for-agents
     - title: Advanced branching workflows
+      description: Build a snapshot-based promotion workflow for Postgres
       slug: advanced-branching-workflows
+
 - section: Next steps
   id: next-steps
   items:
     - title: Tooling and resources to implement branching
+      description: Tools for branching, snapshots, automation, and integrations
       slug: tooling-and-automation

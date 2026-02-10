@@ -8,7 +8,6 @@ const styles = {
     md: 'max-w-[1760px] 3xl:max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px]',
     medium: 'max-w-[1472px] 2xl:px-10',
     sm: 'max-w-[1460px] 2xl:max-w-[1216px] xl:max-w-[936px]',
-    small: 'max-w-[1216px]',
     xs: 'max-w-[860px]',
     xxs: 'max-w-[704px] md:px-5',
     1920: 'max-w-[1856px] px-8',
@@ -25,6 +24,9 @@ const styles = {
     768: 'max-w-3xl',
     640: 'max-w-[640px]',
     576: 'max-w-[576px]',
+
+    // Semantic alias for branching pages.
+    branching: 'max-w-[1216px] 3xl:max-w-[1216px] xl:max-w-full xl:px-8 md:px-8 sm:px-5',
   },
 };
 
