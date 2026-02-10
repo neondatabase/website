@@ -141,7 +141,7 @@ Enabling HIPAA on an existing project will force a restart of all computes to ap
 
 </Tabs>
 
-If you have trouble enabling HIPAA, contact `hipaa@neon.tech`.
+If you have trouble enabling HIPAA, [raise a Support request](https://console.neon.tech/app/projects?modal=support).
 
 <Admonition type="note">
 For information about disabling HIPAA compliance, see [Disabling HIPAA](#disabling-hipaa).
@@ -181,7 +181,7 @@ For information about disabling HIPAA compliance, see [Disabling HIPAA](#disabli
    - Customers need to avoid including PHI in support tickets or metadata fields.
 
 6. PHI access and amendments
-   - Customers can request access to audit logs by contacting `hipaa@neon.tech`.
+   - Customers can request access to audit logs by [raising a Support request](https://console.neon.tech/app/projects?modal=support).
    - Any updates or corrections to PHI need to be carried out by the customer.
 
 ## Your rights and what to expect
@@ -201,7 +201,7 @@ Neon maintains a comprehensive audit trail to support HIPAA compliance. This inc
 1. [Neon Console and API audit logs](#neon-console-and-api-audit-logs): Captures user actions in the Neon Console and via the Neon API.
 2. [Postgres audit logs](#postgres-audit-logs-pgaudit): Logged using the [pgAudit](https://www.pgaudit.org/) extension (`pgaudit`) for Postgres.
 
-> Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by contacting `hipaa@neon.tech`.
+> Self-serve access to HIPAA audit logs is currently not supported. Access to audit logs can be requested by [raising a Support request](https://console.neon.tech/app/projects?modal=support).
 
 ### Neon console and API audit logs
 
@@ -349,7 +349,7 @@ The following features are not currently HIPAA-compliant and should not be used 
 - [Neon Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
 - [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
 
-For updates on HIPAA support for these features, contact [hipaa@neon.tech](mailto:hipaa@neon.tech).
+For updates on HIPAA support for these features, [raise a Support request](https://console.neon.tech/app/projects?modal=support).
 
 ## Security incidents
 
@@ -380,6 +380,6 @@ A: Contact our security team immediately at security@neon.tech.
 
 ## Contact information
 
-For any questions regarding our HIPAA compliance or to report an issue, please reach out to `hipaa@neon.tech`.
+For any questions regarding our HIPAA compliance or to report an issue, please [raise a Support request](https://console.neon.tech/app/projects?modal=support).
 
 _This guide provides a high-level overview of Neon's HIPAA compliance efforts. For more details, please refer to your Business Associate Agreement (BAA) or contact us directly via our [support channels](/docs/introduction/support)._
