@@ -58,8 +58,7 @@ function toTitleCase(str) {
 /**
  * Scan a directory recursively and collect document metadata
  */
-// eslint-disable-next-line no-unused-vars
-async function scanDirectory(dirPath, baseContentPath, _routePrefix) {
+async function scanDirectory(dirPath, baseContentPath) {
   const docs = [];
 
   async function scan(currentPath, relativePath = '') {
@@ -206,7 +205,7 @@ function generateIndexText(organized, introText, collapsedEntries = []) {
     lines.push('');
   }
 
-  return `${lines.join('\n').trim()  }\n`;
+  return `${lines.join('\n').trim()}\n`;
 }
 
 /**
@@ -262,7 +261,7 @@ async function main() {
     }
 
     const fullPath = path.join(projectRoot, srcPath);
-    const docs = await scanDirectory(fullPath, contentPath, route);
+    const docs = await scanDirectory(fullPath, contentPath);
     allDocs.push(...docs);
     console.log(`  ${route}: ${docs.length} files`);
   }
