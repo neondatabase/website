@@ -349,8 +349,6 @@ The following features are not currently HIPAA-compliant and should not be used 
 - [Neon Auth](/docs/neon-auth/overview) – Uses an authentication provider that is not covered under Neon’s HIPAA compliance.
 - [Data API](/docs/data-api/get-started) – Hosted outside Neon’s HIPAA-compliant infrastructure.
 
-For updates on HIPAA support for these features, [raise a Support request](https://console.neon.tech/app/projects?modal=support).
-
 ## Security incidents
 
 If a security breach occurs, Neon will:
