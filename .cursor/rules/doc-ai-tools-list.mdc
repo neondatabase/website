@@ -1,0 +1,9 @@
+---
+description: "When the user asks what doc AI tools are available, output the full list with one- or two-sentence descriptions from .cursor/doc-ai-tools-list.md"
+globs: "**"
+alwaysApply: true
+---
+
+# Doc AI tools list
+
+When the user asks "what doc AI tools are available", "what AI tools for docs", "what AI tools are available for documentation", "what tools do we have for docs", or similar, read `.cursor/doc-ai-tools-list.md` and output the list of tools with their one- or two-sentence descriptions as your response. Print the full list; do not summarize.
