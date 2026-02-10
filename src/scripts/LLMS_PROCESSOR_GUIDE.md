@@ -9,7 +9,7 @@ The processor converts MDX documentation files into clean markdown that AI agent
 - Transforms MDX components into plain markdown equivalents
 - Preserves standard HTML elements like `<details>`
 - Converts relative URLs to absolute
-- Adds an index pointer and navigation footer to every page
+- Adds a page header (location + index pointer) and navigation footer to every page
 - Uses zero new dependencies (leverages existing transitive deps: `unified`, `remark-parse`, `remark-mdx`, `remark-gfm`, `unist-util-visit`, `mdast-util-to-markdown`, `mdast-util-mdx`, `mdast-util-gfm`, plus direct deps `gray-matter` and `js-yaml`)
 
 This is an **isolated post-build script** -- no changes to React components. A more integrated approach (Markdown as a first-class render target in the component layer) is a potential next step as AI agent traffic grows.
@@ -22,8 +22,7 @@ This is an **isolated post-build script** -- no changes to React components. A m
 - `copy-md-content.js` - Postbuild entry point that calls the processor
 - `compare-md-conversion.js` - Dev tool for comparing single file conversions
 - `generate-legacy-llms-output.js` - Dev tool: generates `public/llms/` in old flat `.txt` format for comparison
-- `generate-llms-redirect-map.js` - One-time script: generated the legacy `/llms/*.txt` redirect map
-- `../utils/llms-redirect-map.json` - Static redirect map (committed, maps 493 old `.txt` filenames to canonical `.md` URLs)
+- `../utils/llms-redirect-map.json` - Static redirect map (committed, maps 493 old `.txt` filenames to canonical `.md` URLs). Generated once by a now-deleted one-time script
 
 ## Architecture
 
@@ -43,7 +42,7 @@ buildNavigationMap(rootDir)       <-- parses navigation.yaml files once
     |-- remarkCleanCodeBlocks (remove shouldWrap, Shiki annotations)
     |-- remarkAbsoluteUrls (convert /docs/... to https://neon.com/docs/...)
     |-- toMarkdown (serialize back to markdown)
-    |-- Add index pointer + navigation footer
+    |-- addNavigationContext() (breadcrumb header + sibling footer)
     |-- Write to public/md/{route}/{slug}.md
     |
 Build verification (fail if 0 files generated)
@@ -70,15 +69,12 @@ All paths serve from the same source: `public/md/`.
 Each processed markdown file has this structure:
 
 ```markdown
+> This page location: Section > Subsection > Page Title
+> Full Neon documentation index: https://neon.com/docs/llms.txt
+
 # Title (from frontmatter)
 
 Subtitle (from frontmatter, if present)
-
-> Summary (from frontmatter `summary` field, if present)
-
-> **Documentation Index**
-> A complete list of all documentation pages is at: https://neon.com/docs/llms.txt
-> Refer to this index to find and navigate available topics.
 
 [converted content body...]
 
@@ -90,7 +86,9 @@ Subtitle (from frontmatter, if present)
 - [Another Sibling](https://neon.com/docs/path/to/other)
 ```
 
-The **navigation footer** is built from `content/docs/navigation.yaml` and `content/postgresql/navigation.yaml`. The current page is omitted, only immediate siblings are shown, and URLs use standard format (no `.md`). Pages not in `navigation.yaml` get no footer.
+Navigation context is added by `addNavigationContext()`, which calls `buildPageHeader()` and `buildNavigationFooter()`. The **page header** always includes the documentation index URL. For pages in the navigation map, it also includes the page location (breadcrumb trail). The location includes section nodes (non-linkable groupings) that the HTML site's breadcrumbs skip, giving LLMs richer hierarchical context. Consecutive duplicate ancestors are deduplicated, and the trailing page title is omitted when it matches the last breadcrumb (e.g. "Connect to Neon" instead of "Connect to Neon > Connect to Neon"). The **footer** lists sibling pages (current page omitted), with standard URLs (no `.md`). Pages not in `navigation.yaml` get only the index line (no location, no footer).
+
+**Cross-references:** Some pages appear in multiple `navigation.yaml` locations (e.g. `extensions/pgvector` is listed under both AI and Extensions). To pick the canonical location, `processNavItems` scores each occurrence by how many siblings share the same slug prefix. For pgvector, the Extensions section siblings all share `extensions/` while the AI section siblings have `ai/` — so Extensions wins. Ties keep the first occurrence.
 
 ## Component Handlers
 
@@ -162,7 +160,7 @@ Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/conte
 
 ## Legacy /llms/*.txt Redirects
 
-`src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. No new `.txt` files will ever be created. The map was generated once by `generate-llms-redirect-map.js`.
+`src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. No new `.txt` files will ever be created. The map was generated once by a now-deleted one-time script.
 
 ## Build & Verification
 

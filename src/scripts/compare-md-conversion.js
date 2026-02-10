@@ -64,8 +64,16 @@ Options:
   }
 
   // Load and process
-  const { processFile } = require('./process-md-for-llms.js');
-  const converted = await processFile(inputPath, pageUrl);
+  const {
+    processFile,
+    buildNavigationMap,
+    addNavigationContext,
+  } = require('./process-md-for-llms.js');
+  let converted = await processFile(inputPath, pageUrl);
+
+  // Add breadcrumb header and navigation footer (same as processDirectory does)
+  const navMap = buildNavigationMap(projectRoot);
+  converted = addNavigationContext(converted, relativePath, navMap);
 
   // Write converted to temp file
   const baseName = path.basename(inputPath, '.md');

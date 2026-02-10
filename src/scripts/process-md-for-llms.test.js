@@ -2,7 +2,12 @@ import fs from 'fs/promises';
 
 import { describe, it, expect } from 'vitest';
 
-import { processFile, buildNavigationMap, buildNavigationFooter } from './process-md-for-llms.js';
+import {
+  processFile,
+  buildNavigationMap,
+  buildNavigationFooter,
+  buildPageHeader,
+} from './process-md-for-llms.js';
 
 // Test actual file conversion - the important stuff
 describe('MDX to Markdown Conversion', () => {
@@ -518,33 +523,15 @@ See [CONN_MAX_AGE](https://example.com).
 
   // Test index pointer
   describe('Index pointer', () => {
-    async function processInlineMdx(mdxContent) {
+    it('should not include index pointer in processFile output (moved to page header)', async () => {
       const tempPath = '/tmp/test-mdx-conversion.md';
-      await fs.writeFile(tempPath, `---\ntitle: Test Page\nsubtitle: A test\n---\n${mdxContent}`);
-      return processFile(tempPath);
-    }
+      await fs.writeFile(tempPath, `---\ntitle: Test Page\n---\nSome content here.`);
+      const result = await processFile(tempPath);
 
-    it('should include llms.txt index pointer after title block', async () => {
-      const result = await processInlineMdx('Some content here.');
-
-      expect(result).toContain('> **Documentation Index**');
-      expect(result).toContain(
-        '> A complete list of all documentation pages is at: https://neon.com/docs/llms.txt'
-      );
-      expect(result).toContain('> Refer to this index to find and navigate available topics.');
-    });
-
-    it('should place index pointer after title/subtitle and before content', async () => {
-      const result = await processInlineMdx('Some content here.');
-
-      const titleIdx = result.indexOf('# Test Page');
-      const subtitleIdx = result.indexOf('A test');
-      const indexIdx = result.indexOf('> **Documentation Index**');
-      const contentIdx = result.indexOf('Some content here.');
-
-      expect(titleIdx).toBeLessThan(subtitleIdx);
-      expect(subtitleIdx).toBeLessThan(indexIdx);
-      expect(indexIdx).toBeLessThan(contentIdx);
+      // Index pointer is no longer in processFile -- it's added by addNavigationContext
+      expect(result).not.toContain('llms.txt');
+      expect(result).toContain('# Test Page');
+      expect(result).toContain('Some content here.');
     });
   });
 
@@ -643,6 +630,166 @@ See [CONN_MAX_AGE](https://example.com).
         // "Overview" is at the parent level, not a sibling
         expect(siblingsSlugs).not.toContain('introduction/read-replicas');
       }
+    });
+
+    it('should store breadcrumbs in navigation map entries', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      const connectEntry = navMap.get('get-started/connect-neon');
+      expect(connectEntry).toBeDefined();
+      expect(connectEntry.breadcrumbs).toBeDefined();
+      expect(Array.isArray(connectEntry.breadcrumbs)).toBe(true);
+      expect(connectEntry.breadcrumbs.length).toBeGreaterThan(0);
+    });
+
+    it('should include section nodes in breadcrumbs for nested pages', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      // auth/guides/password-reset is under: Backend > Neon Auth > Guides
+      const entry = navMap.get('auth/guides/password-reset');
+      expect(entry).toBeDefined();
+      expect(entry.breadcrumbs).toContain('Backend');
+      expect(entry.breadcrumbs).toContain('Neon Auth');
+      expect(entry.breadcrumbs).toContain('Guides');
+    });
+
+    it('should track deep nesting in breadcrumbs', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      // Read-only access is deeply nested: Read replicas > Use cases
+      const readOnlyEntry = navMap.get('guides/read-only-access-read-replicas');
+      if (readOnlyEntry) {
+        expect(readOnlyEntry.breadcrumbs.length).toBeGreaterThanOrEqual(2);
+        expect(readOnlyEntry.breadcrumbs).toContain('Use cases');
+      }
+    });
+
+    it('should prefer canonical nav location over cross-references', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      // extensions/pgvector appears in both AI section and Extensions section;
+      // should prefer Extensions (siblings share extensions/ prefix)
+      const pgvectorEntry = navMap.get('extensions/pgvector');
+      expect(pgvectorEntry).toBeDefined();
+      expect(pgvectorEntry.breadcrumbs).not.toContain('AI App Starter Kit');
+      expect(pgvectorEntry.sectionName).toBe('Extensions');
+
+      // auth/overview appears in "Start with Neon" and the Auth section;
+      // should prefer Auth section (siblings share auth/ prefix)
+      const authEntry = navMap.get('auth/overview');
+      expect(authEntry).toBeDefined();
+      expect(authEntry.breadcrumbs).not.toContain('Start with Neon');
+      expect(authEntry.breadcrumbs).toContain('Neon Auth');
+    });
+  });
+
+  describe('Page header', () => {
+    it('should include location and index for pages in nav map', () => {
+      const navMap = new Map();
+      navMap.set('auth/guides/password-reset', {
+        sectionName: 'Guides',
+        urlPrefix: 'docs',
+        siblings: [],
+        breadcrumbs: ['Neon Auth', 'Guides'],
+        pageTitle: 'Password reset',
+      });
+
+      const header = buildPageHeader('auth/guides/password-reset', navMap);
+      expect(header).toBe(
+        '> This page location: Neon Auth > Guides > Password reset\n' +
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
+      );
+    });
+
+    it('should include only index line for pages not in map', () => {
+      const navMap = new Map();
+      const header = buildPageHeader('nonexistent/page', navMap);
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+    });
+
+    it('should include only index line for pages with empty breadcrumbs', () => {
+      const navMap = new Map();
+      navMap.set('top-level/page', {
+        sectionName: 'Section',
+        urlPrefix: 'docs',
+        siblings: [],
+        breadcrumbs: [],
+      });
+
+      const header = buildPageHeader('top-level/page', navMap);
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+    });
+
+    it('should include only index line when navMap is null', () => {
+      const header = buildPageHeader('any/page', null);
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+    });
+
+    it('should include only index line when slug is null', () => {
+      const navMap = new Map();
+      const header = buildPageHeader(null, navMap);
+      expect(header).toBe('> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n');
+    });
+
+    it('should deduplicate consecutive identical ancestors', () => {
+      const navMap = new Map();
+      navMap.set('test/page', {
+        sectionName: 'Sub',
+        urlPrefix: 'docs',
+        siblings: [],
+        breadcrumbs: ['Parent', 'Parent', 'Sub'],
+        pageTitle: 'My Page',
+      });
+
+      const header = buildPageHeader('test/page', navMap);
+      expect(header).toContain('> This page location: Parent > Sub > My Page');
+      expect(header).toContain('> Full Neon documentation index:');
+    });
+
+    it('should not duplicate trailing pageTitle when it matches last breadcrumb', () => {
+      const navMap = new Map();
+      navMap.set('connect/connect-intro', {
+        sectionName: 'Connect to Neon',
+        urlPrefix: 'docs',
+        siblings: [],
+        breadcrumbs: ['Connect to Neon'],
+        pageTitle: 'Connect to Neon',
+      });
+
+      const header = buildPageHeader('connect/connect-intro', navMap);
+      // Should be "Connect to Neon" NOT "Connect to Neon > Connect to Neon"
+      expect(header).toContain('> This page location: Connect to Neon\n');
+      expect(header).not.toContain('Connect to Neon > Connect to Neon');
+    });
+
+    it('should generate correct header for real navigation data', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      const header = buildPageHeader('auth/guides/password-reset', navMap);
+      expect(header).toBe(
+        '> This page location: Backend > Neon Auth > Guides > Password reset\n' +
+          '> Full Neon documentation index: https://neon.com/docs/llms.txt\n\n'
+      );
+    });
+
+    it('should not produce redundant breadcrumbs for real nav entries', () => {
+      const rootDir = process.cwd();
+      const navMap = buildNavigationMap(rootDir);
+
+      // connect/connect-intro has "Connect to Neon" as both section and page title
+      const connectHeader = buildPageHeader('connect/connect-intro', navMap);
+      expect(connectHeader).not.toContain('Connect to Neon > Connect to Neon');
+      expect(connectHeader).toContain('> This page location:');
+
+      // introduction/about-billing has "Plans and billing" as both section and page title
+      const billingHeader = buildPageHeader('introduction/about-billing', navMap);
+      expect(billingHeader).not.toContain('Plans and billing > Plans and billing');
+      expect(billingHeader).toContain('> This page location:');
     });
   });
 });

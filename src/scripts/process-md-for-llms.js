@@ -1583,11 +1583,6 @@ async function processFile(inputPath, pageUrl, rootDir) {
   //   output += `> ${frontmatter.summary}\n\n`;
   // }
 
-  // Index pointer for discoverability
-  output += `> **Documentation Index**\n`;
-  output += `> A complete list of all documentation pages is at: ${BASE_URL}/docs/llms.txt\n`;
-  output += `> Refer to this index to find and navigate available topics.\n\n`;
-
   output += `${markdown.trim()}\n`;
 
   // Normalize smart quotes to straight quotes (matches Python behavior)
@@ -1660,9 +1655,13 @@ let navigationMap = null;
  * Build a navigation lookup map from navigation.yaml files.
  *
  * Parses both content/docs/navigation.yaml and content/postgresql/navigation.yaml
- * into a Map<slug, { sectionName, siblings: [{ title, slug }] }>.
+ * into a Map<slug, { sectionName, siblings, urlPrefix, breadcrumbs, pageTitle }>.
  *
- * Siblings are the other items at the same nesting level in the same section/sub-group.
+ * - sectionName: the section/sub-group name containing this page
+ * - siblings: other leaf pages at the same nesting level [{ title, slug }]
+ * - urlPrefix: 'docs' or 'postgresql' (for building full URLs)
+ * - breadcrumbs: ancestor titles from root to this page's parent (not including the page itself)
+ * - pageTitle: this page's title from navigation.yaml
  */
 function buildNavigationMap(rootDir) {
   const navMap = new Map();
@@ -1688,8 +1687,11 @@ function buildNavigationMap(rootDir) {
         const sectionName = section.section || section.title || '';
         const items = section.items || [];
 
+        // Start ancestor chain with the section name (if it exists)
+        const ancestors = sectionName ? [sectionName] : [];
+
         // Process items at this level, handling nested sub-groups
-        processNavItems(items, sectionName, urlPrefix, navMap);
+        processNavItems(items, sectionName, urlPrefix, navMap, ancestors);
       }
     }
   }
@@ -1700,8 +1702,9 @@ function buildNavigationMap(rootDir) {
 /**
  * Recursively process navigation items, registering siblings at each level.
  * Items with a `slug` are leaf pages. Items with `items` but no `slug` are sub-groups.
+ * `ancestors` tracks the hierarchy path from the root for breadcrumb context.
  */
-function processNavItems(items, sectionName, urlPrefix, navMap) {
+function processNavItems(items, sectionName, urlPrefix, navMap, ancestors = []) {
   // Collect leaf pages at this level (these are siblings of each other)
   const leafPages = [];
 
@@ -1711,21 +1714,40 @@ function processNavItems(items, sectionName, urlPrefix, navMap) {
     }
     // If item has nested items, recurse into the sub-group
     if (item.items) {
-      const subGroupName = item.title || sectionName;
-      processNavItems(item.items, subGroupName, urlPrefix, navMap);
+      const subGroupName = item.title || item.section || sectionName;
+      // Append this sub-group's name to the ancestor chain for its children
+      const childAncestors = [...ancestors, subGroupName];
+      processNavItems(item.items, subGroupName, urlPrefix, navMap, childAncestors);
     }
   }
 
-  // Register each leaf page with its siblings
+  // Register each leaf page with its siblings.
+  // When a slug appears in multiple nav sections (cross-references), prefer the
+  // location where more siblings share the same slug prefix — that's the canonical home.
+  // e.g. extensions/pgvector belongs under Extensions (siblings: extensions/*),
+  // not under AI (siblings: ai/*). Ties keep the first occurrence.
   for (const page of leafPages) {
-    // Only register the first occurrence (primary location in nav)
-    if (navMap.has(page.slug)) continue;
-
+    const slugPrefix = page.slug.split('/')[0];
     const siblings = leafPages
       .filter((p) => p.slug !== page.slug)
       .map((p) => ({ title: p.title, slug: p.slug }));
+    const prefixScore = siblings.filter((s) => s.slug.split('/')[0] === slugPrefix).length;
 
-    navMap.set(page.slug, { sectionName, siblings, urlPrefix });
+    if (navMap.has(page.slug)) {
+      const existing = navMap.get(page.slug);
+      if (prefixScore <= (existing._prefixScore || 0)) continue; // existing is better or equal
+    }
+
+    // breadcrumbs: ancestor titles leading to this page (not including the page itself)
+    // pageTitle: the page's own title from navigation.yaml
+    navMap.set(page.slug, {
+      sectionName,
+      siblings,
+      urlPrefix,
+      breadcrumbs: [...ancestors],
+      pageTitle: page.title,
+      _prefixScore: prefixScore,
+    });
   }
 }
 
@@ -1750,6 +1772,83 @@ function buildNavigationFooter(slug, navMap) {
 }
 
 /**
+ * Build the page header block prepended to every generated markdown file.
+ * Always includes the documentation index line. Includes the location line
+ * only if the page is in the navigation map with breadcrumbs.
+ *
+ * @param {string|null} slug - Navigation slug, or null for pages outside nav
+ * @param {Map|null} navMap - Navigation map from buildNavigationMap()
+ * @returns {string} Header block (1-2 lines in a blockquote, followed by blank line)
+ */
+function buildPageHeader(slug, navMap) {
+  const lines = [];
+
+  // Location line (only for pages in the nav map)
+  if (slug && navMap) {
+    const entry = navMap.get(slug);
+    if (entry && entry.breadcrumbs && entry.breadcrumbs.length > 0) {
+      const deduped = entry.breadcrumbs.filter((b, i) => i === 0 || b !== entry.breadcrumbs[i - 1]);
+      // Also avoid trailing duplication when pageTitle matches the last breadcrumb
+      const trail =
+        entry.pageTitle && entry.pageTitle !== deduped[deduped.length - 1]
+          ? [...deduped, entry.pageTitle]
+          : deduped;
+      lines.push(`> This page location: ${trail.join(' > ')}`);
+    }
+  }
+
+  // Index line (always)
+  lines.push(`> Full Neon documentation index: ${BASE_URL}/docs/llms.txt`);
+
+  return `${lines.join('\n')}\n\n`;
+}
+
+/**
+ * Compute navigation slug from a content-relative path.
+ * Strips the first path segment (e.g. "docs/" or "postgresql/") and the .md extension.
+ * Returns null if the path has no subdirectory (root-level files).
+ *
+ * @param {string} relativePath - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @returns {string|null} Navigation slug (e.g. "guides/prisma") or null
+ */
+function getNavSlug(relativePath) {
+  const parts = relativePath.split('/');
+  if (parts.length < 2) return null;
+  return parts.slice(1).join('/').replace(/\.md$/, '');
+}
+
+/**
+ * Add navigation context (page header + sibling footer) to processed markdown.
+ * This is the single place where nav context is applied, used by both processDirectory
+ * and compare-md-conversion.js.
+ *
+ * The page header always includes the documentation index URL. If the page is in the
+ * navigation map, it also includes the page location (breadcrumb trail).
+ *
+ * @param {string} content - Processed markdown content
+ * @param {string} relativePath - Path relative to content/ (e.g. "docs/guides/prisma.md")
+ * @param {Map} navMap - Navigation map from buildNavigationMap()
+ * @returns {string} Content with page header prepended and nav footer appended
+ */
+function addNavigationContext(content, relativePath, navMap) {
+  const slug = getNavSlug(relativePath);
+
+  // Page header (always added -- index line for all pages, location line when in nav map)
+  const header = buildPageHeader(slug, navMap);
+  let result = header + content;
+
+  // Navigation footer (only for pages in the nav map)
+  if (slug) {
+    const navFooter = buildNavigationFooter(slug, navMap);
+    if (navFooter) {
+      result += navFooter;
+    }
+  }
+
+  return result;
+}
+
+/**
  * Process a directory recursively
  */
 async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
@@ -1769,18 +1868,7 @@ async function processDirectory(inputDir, outputDir, baseContentDir, rootDir) {
 
       try {
         let result = await processFile(inputPath, pageUrl, rootDir);
-
-        // Append navigation footer if this page is in the navigation map
-        // relativePath is like "docs/get-started/connect-neon.md" -- strip first segment and .md
-        const pathParts = relativePath.split('/');
-        if (pathParts.length >= 2) {
-          const slug = pathParts.slice(1).join('/').replace(/\.md$/, '');
-          const navFooter = buildNavigationFooter(slug, navigationMap);
-          if (navFooter) {
-            result += navFooter;
-          }
-        }
-
+        result = addNavigationContext(result, relativePath, navigationMap);
         await fs.writeFile(outputPath, result);
         console.log(`✓ ${relativePath}`);
       } catch (error) {
@@ -1839,6 +1927,8 @@ module.exports = {
   printBuildSummary,
   buildNavigationMap,
   buildNavigationFooter,
+  buildPageHeader,
+  addNavigationContext,
 };
 
 /**
