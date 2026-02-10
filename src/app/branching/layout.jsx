@@ -5,8 +5,8 @@ import Layout from 'components/shared/layout';
 const FlowPage = ({ children }) => (
   <Layout isHeaderSticky withOverflowHidden>
     <Container
-      className="w-full pb-20 pt-[88px] xl:pt-16 lg:pb-16 lg:pt-12 md:pb-14 md:pt-10"
-      size="xxs"
+      className="w-full pb-20 pt-[104px] xl:pt-16 lg:pb-16 lg:pt-12 md:pb-14 md:pt-10"
+      size="small"
     >
       {children}
     </Container>
