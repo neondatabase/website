@@ -1,10 +1,14 @@
 ---
 title: Postgres compatibility
 subtitle: Learn about Neon as a managed Postgres service
+summary: >-
+  Covers the differences and features of Neon as a managed Postgres service,
+  including supported Postgres versions, available extensions, and the roles and
+  permissions model specific to Neon.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compatibility
-updatedOn: '2026-02-02T12:37:39.468Z'
+updatedOn: '2026-02-10T21:50:47.696Z'
 ---
 
 **Neon is Postgres**. However, as a managed Postgres service, there are some differences you should be aware of.
@@ -220,7 +224,7 @@ Postgres logs can be accessed through the [Datadog](/docs/guides/datadog) or [Op
 
 ## Unlogged tables
 
-Unlogged tables are tables that do not write to the Postgres write-ahead log (WAL). In Noen, these tables are stored on compute local storage and are not persisted across compute restarts or when a compute scales to zero. This is unlike standard Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
+Unlogged tables are tables that do not write to the Postgres write-ahead log (WAL). In Neon, these tables are stored on compute local storage and are not persisted across compute restarts or when a compute scales to zero. This is unlike standard Postgres, where unlogged tables are only truncated in the event of abnormal process termination. Additionally, unlogged tables are limited by compute local disk space. Computes allocate 20 GiB of local disk space or 15 GiB x the maximum compute size (whichever is highest) for temporary files used by Postgres.
 
 ## Temporary tables
 

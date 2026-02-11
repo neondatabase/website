@@ -1,8 +1,12 @@
 ---
 title: Connect from Laravel to Neon
 subtitle: Set up a Neon project in seconds and connect from a Laravel application
+summary: >-
+  Step-by-step guide for creating a Neon project and configuring a Laravel
+  application to connect to Neon Postgres, including troubleshooting connection
+  issues with older Postgres clients.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:53:27.788Z'
+updatedOn: '2026-02-06T22:07:33.000Z'
 ---
 
 <CopyPrompt src="/prompts/laravel-prompt.md" 

@@ -65,8 +65,9 @@ public/sitemap-postgres.xml
 public/sitemap-postgres-0.xml
 public/robots.txt
 
-# ignore local markdown files
+# ignore generated markdown/llms files
 public/md
+public/docs/llms.txt
 
 # Mac files
 .DS_Store

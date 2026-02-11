@@ -1,8 +1,12 @@
 ---
 title: Custom authentication providers
 subtitle: Configure custom authentication providers with the Data API
+summary: >-
+  Covers the configuration of custom authentication providers for the Data API,
+  enabling integration with existing systems that issue JSON Web Tokens (JWTs)
+  like Auth0, Clerk, and AWS Cognito.
 enableTableOfContents: true
-updatedOn: '2026-01-06T12:00:57.074Z'
+updatedOn: '2026-02-06T22:07:32.806Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---

@@ -1,10 +1,14 @@
 ---
 title: Manage API Keys
+summary: >-
+  Covers the management of API keys in Neon, detailing types of keys, creation
+  processes, and security practices for storing and using these keys
+  effectively.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/using-api-keys
   - /docs/get-started/api-keys
-updatedOn: '2025-09-05T12:26:43.311Z'
+updatedOn: '2026-02-06T22:07:33.112Z'
 ---
 
 Most actions performed in the Neon Console can also be performed using the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). You'll need an API key to validate your requests. Each key is a randomly-generated 64-bit token that you must include when calling Neon API methods. All keys remain valid until deliberately revoked.

@@ -1,10 +1,13 @@
 ---
 title: Regions
+summary: >-
+  Covers the selection and deployment of Neon projects across various AWS and
+  Azure regions to optimize latency between databases and application servers.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/conceptual-guides/regions
-updatedOn: '2026-01-30T19:25:14.190Z'
+updatedOn: '2026-02-06T22:07:33.104Z'
 ---
 
 Neon offers project deployment in multiple AWS and Azure regions. To minimize latency between your Neon database and application, we recommend choosing the region closest to your application server.

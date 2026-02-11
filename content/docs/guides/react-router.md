@@ -1,8 +1,12 @@
 ---
 title: Connect a React Router application to Neon
 subtitle: Set up a Neon project in seconds and connect from a React Router application
+summary: >-
+  Step-by-step guide for connecting a React Router application to a Neon
+  project, including project creation, dependency installation, and
+  configuration of the Postgres client using a server-side `loader` function.
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.607Z'
+updatedOn: '2026-02-06T22:07:33.036Z'
 ---
 
 [React Router](https://reactrouter.com/home) is a powerful routing library for React that also includes modern, full-stack framework features. This guide explains how to connect a React Router application to Neon using a server-side `loader` function.

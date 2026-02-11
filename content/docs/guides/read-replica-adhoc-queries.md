@@ -1,8 +1,12 @@
 ---
 title: Run ad-hoc queries with Read Replicas
 subtitle: Leverage read replicas for running ad-hoc queries
+summary: >-
+  Covers the setup of Neon Read Replicas for executing ad-hoc queries, enabling
+  quick data retrieval without affecting the performance of the primary
+  database.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.030Z'
+updatedOn: '2026-02-06T22:07:33.037Z'
 ---
 
 In many situations, you may need to run quick, one-time queries to retrieve specific data or test an idea. These are known as **ad-hoc queries**. Ad-hoc queries are particularly useful for tasks like analytics, troubleshooting, or exploring your data without setting up complex reports. However, running resource-intensive queries on your production database can degrade performance, especially if they target heavily used tables.

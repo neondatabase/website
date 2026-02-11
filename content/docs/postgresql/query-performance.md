@@ -1,10 +1,14 @@
 ---
 title: Optimize Postgres query performance
 subtitle: Learn about strategies for optimizing Postgres query performance
+summary: >-
+  Covers strategies for optimizing Postgres query performance, including query
+  analysis, database design, and resource optimization, with a focus on using
+  the pg_stat_statements extension for monitoring.
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/query-performance
-updatedOn: '2025-08-02T10:33:29.303Z'
+updatedOn: '2026-02-06T22:07:33.127Z'
 ---
 
 Many factors can impact query performance in Postgres, ranging from insufficient indexing and database maintenance to poorly optimized queries or inadequate system resources. With such a wide range of factors, it can be difficult to know where to start. In this topic, we'll look at several strategies you can use to optimize query performance in Postgres.

@@ -1,10 +1,14 @@
 ---
 title: Neon framework guides
 subtitle: Find detailed instructions for connecting to Neon from various frameworks
+summary: >-
+  Covers the setup of various frameworks, including Node.js, Django, and
+  Laravel, to connect applications to Neon, providing detailed instructions for
+  each integration.
 enableTableOfContents: false
 redirectFrom:
   - /docs/get-started-with-neon/frameworks
-updatedOn: '2026-01-23T14:08:34.208Z'
+updatedOn: '2026-02-06T22:07:32.888Z'
 ---
 
 <TechCards>

@@ -1,8 +1,12 @@
 ---
 title: Use Neon Postgres with Render
 subtitle: Connect a Neon Postgres database to your Node application deployed with Render
+summary: >-
+  Step-by-step guide for deploying a Node.js application connected to a Neon
+  Postgres database on Render, including project setup and database
+  initialization.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.915Z'
+updatedOn: '2026-02-06T22:07:33.042Z'
 ---
 
 [Render](https://render.com) is a comprehensive cloud service that provides hosting for web applications and static sites, with PR previews, zero-downtime deployments, and more. Render supports full-stack applications, offering both web services and background workers.

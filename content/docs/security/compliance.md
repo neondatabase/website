@@ -1,9 +1,13 @@
 ---
 title: Compliance
+summary: >-
+  Covers the compliance achievements of Neon, including SOC 2, SOC 3, ISO 27001,
+  ISO 27701, GDPR, and CCPA, ensuring data security, privacy, and adherence to
+  regulatory standards.
 enableTableOfContents: false
 redirectFrom:
   - /docs/security/soc2-compliance
-updatedOn: '2026-01-07T16:05:22.643Z'
+updatedOn: '2026-02-06T22:07:33.149Z'
 ---
 
 At Neon, we prioritize data security and privacy, and we have achieved several key compliances that validate our efforts. We have completed audits for SOC 2 Type 1 and Type 2, SOC 3, ISO 27001, and ISO 27701, and we adhere to GDPR and CCPA regulations.

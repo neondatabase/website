@@ -1,5 +1,9 @@
 ---
 title: Neon plans
+summary: >-
+  Covers the comparison of Neon's Free, Launch, and Scale plans, detailing
+  features, pricing, and target users to support projects from prototypes to
+  production at scale.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
@@ -13,16 +17,16 @@ redirectFrom:
   - /docs/reference/technical-preview-free-tier
   - /docs/reference/pricing-estimation-guide
   - /docs/reference/billing-sample
-updatedOn: '2026-01-06T13:09:53.162Z'
+  - /docs/introduction/legacy-plans
+  - /docs/introduction/extra-usage
+updatedOn: '2026-02-06T22:07:33.097Z'
 ---
 
 Neon offers plans to support you at every stage—from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
-> The plans described on this page are Neon's new usage-based pricing plans, introduced **August 14, 2025**. If you signed up for a paid plan earlier, you may still be on a [legacy plan](/docs/introduction/legacy-plans). To switch to a new plan, see [Change your plan](/docs/introduction/manage-billing#change-your-plan). Free plan users were automatically moved to the new Free plan described below, unless you signed up through **Azure Marketplace**.
-
-<Admonition type="important">
-If you signed up with Neon through **Azure Marketplace**, you are still on a [Neon legacy plan](/docs/introduction/legacy-plans) — this applies to both Free and paid plans.
+<Admonition type="note">
+If you signed up with Neon through **Azure Marketplace**, see [Azure Marketplace](/docs/introduction/billing-azure-marketplace) for plan and billing information specific to Azure users.
 </Admonition>
 
 ---
@@ -255,7 +259,7 @@ Available only on the **Scale** plan.
 
 ### Instant restore
 
-Neon stores a change history to support instant restore.
+Neon stores a change history to support point-in-time restore (instant restore). You can only point-in-time restore from **root branches**, so PITR storage is charged only for root branches. Child branches do not add to this charge.
 
 - **Free**: No charge, 6-hour limit, capped at 1 GB of change history
 - **Launch**: Up to 7 days, billed at $0.20/GB-month
@@ -481,14 +485,14 @@ How is extra branch usage billed?
  Example: If your plan includes 10 branches and you run 2 extra branches for 5 hours each, that's 10 branch-hours (~$0.02).
 
 How are instant restores billed?
-: Instant restore storage is billed based on the amount of change history retained, not the number of restores performed.  
+: Neon charges for PITR (point-in-time restore) storage only for branches you can point-in-time restore from: root branches. The charge is based on the amount of change history retained on those branches, not the number of restores you perform. Child branches do not add to PITR storage charges.  
  • Free: Up to 6 hours of history, capped at 1 GB of changes, no charge.  
  • Launch: Up to 7 days of history, billed at $0.20/GB-month.  
  • Scale: Up to 30 days of history, billed at $0.20/GB-month.  
  Change history is stored as Postgres WAL records.
 
 Is instant restore history accumulated at the project or branch level?
-: Instant restore history is accumulated at the project level. It applies to all branches in your project. You set a single restore window (e.g., 7 days or 30 days) for the entire project, and the history size is the cumulative total of all change history across all branches. You cannot enable, disable, or configure instant restore per branch.
+: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single restore window (e.g., 7 days or 30 days) for the entire project. You cannot enable, disable, or configure the restore window per branch.
 
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  

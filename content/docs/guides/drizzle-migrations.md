@@ -2,8 +2,12 @@
 title: Schema migration with Neon Postgres and Drizzle ORM
 subtitle: Set up Neon Postgres and run migrations for your TypeScript project using
   Drizzle ORM
+summary: >-
+  Step-by-step guide for setting up Neon Postgres with Drizzle ORM in a
+  TypeScript project, including database initialization and connection string
+  retrieval for seamless schema migration and application development.
 enableTableOfContents: true
-updatedOn: '2025-06-30T11:30:21.898Z'
+updatedOn: '2026-02-06T22:07:32.956Z'
 ---
 
 [Drizzle](https://orm.drizzle.team/) is a TypeScript-first ORM that connects to all major databases and works across most Javascript runtimes. It provides a simple way to define database schemas and queries in an SQL-like dialect and tools to generate and run migrations.

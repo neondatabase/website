@@ -1,7 +1,11 @@
 ---
 title: Manage Organizations using the Neon CLI
+summary: >-
+  Covers the management of organizations using the Neon CLI, including
+  authentication, listing organizations, and managing projects within specified
+  organizations.
 enableTableOfContents: true
-updatedOn: '2026-01-07T12:02:47.906Z'
+updatedOn: '2026-02-06T22:07:33.119Z'
 ---
 
 Neon's CLI provides an expanding set of commands to manage your organizations.

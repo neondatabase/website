@@ -1,9 +1,13 @@
 ---
 title: Compute lifecycle
+summary: >-
+  Covers the states of compute in Neon, detailing the transition between idle
+  and active states, the scale to zero feature, and the activation process for
+  Postgres connections.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/compute-lifecycle
-updatedOn: '2025-12-17T14:37:40.661Z'
+updatedOn: '2026-02-06T22:07:33.088Z'
 ---
 
 A compute in Neon is a stateless Postgres process due to the separation of storage and compute. It has two main states: `Idle` and `Active`.

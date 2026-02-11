@@ -1,8 +1,13 @@
 ---
 title: Neon Agent Plan
 subtitle: Learn about using Neon to provision and manage databases for agentic platforms
+summary: >-
+  Covers the organization and functionality of the Neon agent plan for
+  provisioning and managing Postgres databases, including enrollment
+  requirements and features like instant provisioning and autoscaling for
+  agentic platforms.
 enableTableOfContents: true
-updatedOn: '2025-12-16T23:16:25.133Z'
+updatedOn: '2026-02-06T22:07:33.081Z'
 ---
 
 <InfoBlock>

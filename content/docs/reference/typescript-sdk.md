@@ -2,8 +2,12 @@
 title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
+summary: >-
+  Covers the setup and usage of the Neon TypeScript SDK to programmatically
+  manage projects, branches, databases, and other resources within the Neon
+  platform, simplifying API interactions and resource management.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.620Z'
+updatedOn: '2026-02-06T22:07:33.148Z'
 ---
 
 <InfoBlock>

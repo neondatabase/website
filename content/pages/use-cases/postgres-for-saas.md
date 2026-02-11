@@ -1,6 +1,7 @@
 ---
 title: 'Postgres for SaaS'
 subtitle: Build and scale your SaaS faster thanks to autoscaling, database branching, and the serverless operating model.
+summary: Covers the setup of Postgres on Neon for SaaS applications, highlighting features like database branching for testing, autoscaling for resource management, and a serverless model to simplify operations.
 enableTableOfContents: true
 updatedOn: '2024-08-23T09:00:00.000Z'
 image: '/images/social-previews/use-cases/postgres-for-saas.jpg'

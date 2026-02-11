@@ -1,12 +1,16 @@
 ---
 title: Configure consumption limits
 subtitle: Learn how to set consumption limits per project with the Neon API
+summary: >-
+  How to set consumption limits for projects using the Neon API, including
+  configuring quotas for various metrics like active time, compute time, and
+  data transfer to manage resource usage effectively.
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2025-12-03T13:07:33.028Z'
+updatedOn: '2026-02-06T22:07:32.943Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -158,10 +162,10 @@ curl --request PATCH \
 
 You can use the Neon API to retrieve consumption metrics for your organization and projects using these endpoints:
 
-| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics#get-account-level-aggregated-metrics)                              |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics for the account](consumption-metrics#get-granular-project-level-metrics-for-your-account) |
+| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics#get-account-level-aggregated-metrics-legacy-plans) |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics](consumption-metrics#get-project-level-metrics-legacy-plans)              |
 
 ## Resetting a project after suspend
 

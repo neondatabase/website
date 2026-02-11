@@ -1,12 +1,17 @@
 ---
 title: Why Neon?
 subtitle: 'Serverless Postgres, by Databricks'
+summary: >-
+  Covers the features and architecture of Neon, a fully managed, serverless
+  Postgres solution designed for scalable application development, emphasizing
+  its unique separation of storage and compute for enhanced performance and
+  reliability.
 enableTableOfContents: true
 redirectFrom:
   - /docs/cloud/about
   - /docs/introduction/about
   - /docs/get-started-with-neon/why-neon
-updatedOn: '2026-01-13T19:33:25.861Z'
+updatedOn: '2026-02-06T22:07:32.900Z'
 ---
 
 ## Our mission

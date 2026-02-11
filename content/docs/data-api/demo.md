@@ -1,8 +1,12 @@
 ---
 title: Neon Data API tutorial
 subtitle: Explore our demo note-taking app to learn about Data API queries with RLS
+summary: >-
+  Step-by-step guide for setting up a note-taking app using Neon's Data API with
+  Row-Level Security (RLS) and authentication, demonstrating how to write
+  queries from frontend code securely.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.616Z'
+updatedOn: '2026-02-06T22:07:32.807Z'
 ---
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.

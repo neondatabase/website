@@ -1,10 +1,14 @@
 ---
 title: Built to scale
 subtitle: Neon supports you from prototype to scale-up
+summary: >-
+  Covers the scalability of Neon from initial side projects to large production
+  databases, highlighting features like a free plan, autoscaling, and Postgres
+  compatibility to support various stages of development.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-readiness
-updatedOn: '2026-02-04T13:28:35.596Z'
+updatedOn: '2026-02-06T22:07:32.893Z'
 ---
 
 Neon fits into every stage of growth, from the first side project to operating large fleets of production databases - without forcing you to rethink your database architecture along the way.

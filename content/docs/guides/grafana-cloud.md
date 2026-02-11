@@ -1,8 +1,12 @@
 ---
 title: Grafana Cloud integration
 subtitle: Send metrics and logs from Neon Postgres to Grafana Cloud
+summary: >-
+  Covers the setup of Grafana Cloud integration for Neon Postgres, detailing
+  configuration for log forwarding and the transmission of metrics related to
+  database performance and resource utilization.
 enableTableOfContents: true
-updatedOn: '2026-02-05T14:54:26.782Z'
+updatedOn: '2026-02-06T22:07:32.975Z'
 ---
 
 <InfoBlock>

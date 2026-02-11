@@ -1,8 +1,12 @@
 ---
 title: Schema migrations with Prisma and Neon
 subtitle: Learn how to manage database schema changes using Prisma Migrate with Neon
+summary: >-
+  Step-by-step guide for managing database schema changes using Prisma Migrate
+  with Neon, including setting up a Node.js application and creating a book
+  catalog API while applying schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-02-01T11:47:48.275Z'
+updatedOn: '2026-02-06T22:07:33.032Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

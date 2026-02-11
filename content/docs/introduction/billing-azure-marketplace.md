@@ -3,7 +3,11 @@ title: Azure Marketplace
 enableTableOfContents: true
 subtitle: Neon as an Azure Native Service offers unified billing through Azure
   Marketplace
-updatedOn: '2025-10-30T22:50:07.253Z'
+summary: >-
+  Covers the setup of Neon as an Azure Native Service, detailing pricing plans,
+  billing through Azure Marketplace, and the transition from deprecated
+  Azure-managed organizations to Neon-managed organizations.
+updatedOn: '2026-02-06T22:07:33.085Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -29,10 +33,10 @@ To get started, see [Deploying Neon on Azure](/docs/azure/azure-deploy).
 
 ## Neon pricing plans and overages
 
-Neon pricing plans include allowances for compute, storage, and projects. For details on each plan's allowances, see [Neon plans](/docs/introduction/legacy-plans). If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
+Neon pricing plans include allowances for compute, storage, and projects. If you exceed these allowances on a paid plan, overage charges will apply to your monthly bill. You can track your usage on the **Billing** page in the Neon Console. For guidance, see [Monitoring Billing](/docs/introduction/monitor-usage).
 
 <Admonition type="note">
-Currently, only Neon [legacy plans](/docs/introduction/legacy-plans) are supported on Azure. Neon's latest [pricing plans](/docs/introduction/plans) will be introduced on Azure at a later date. 
+Azure Marketplace users are currently on legacy Neon plans. Neon's latest [pricing plans](/docs/introduction/plans) will be introduced on Azure at a later date.
 </Admonition>
 
 ## Enterprise plan support on Azure

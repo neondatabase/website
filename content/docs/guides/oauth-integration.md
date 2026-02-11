@@ -1,7 +1,11 @@
 ---
 title: Neon OAuth integration
+summary: >-
+  How to integrate your application with Neon using OAuth, enabling secure
+  interactions with user accounts while maintaining data privacy and requiring
+  user approval for access.
 enableTableOfContents: true
-updatedOn: '2025-05-30T16:54:40.477Z'
+updatedOn: '2026-02-06T22:07:33.029Z'
 ---
 
 You can integrate your application or service with Neon using OAuth. The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.

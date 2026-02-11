@@ -1,8 +1,12 @@
 ---
 title: Time Travel tutorial
 subtitle: Use Time Travel to analyze changes made to your database over time
+summary: >-
+  Covers the use of Time Travel in Neon to debug issues related to feature flag
+  activations after CI/CD deployments, including database setup and simulation
+  of feature flag changes.
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.863Z'
+updatedOn: '2026-02-06T22:07:33.060Z'
 ---
 
 This guide demonstrates how you could use Time Travel to address a common development scenario: debugging issues following a CI/CD deployment to production.

@@ -1,8 +1,13 @@
 ---
 title: JWT
 subtitle: Authenticate using JSON Web Tokens (JWT) for external services
+summary: >-
+  Covers the setup of JWT authentication using the Neon SDK for scenarios
+  requiring raw tokens, such as microservices and API requests from different
+  domains, while emphasizing that it does not replace session management for
+  standard web applications.
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.158Z'
+updatedOn: '2026-02-06T22:07:32.746Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

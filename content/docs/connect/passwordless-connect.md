@@ -1,8 +1,12 @@
 ---
 title: Passwordless auth
 subtitle: Learn how to connect to Neon without a password
+summary: >-
+  Covers the setup of Neon's passwordless authentication feature for connecting
+  to the database using `psql`, detailing the command to initiate the connection
+  and the steps to authenticate via a web link.
 enableTableOfContents: true
-updatedOn: '2025-01-27T10:55:00.126Z'
+updatedOn: '2026-02-06T22:07:32.801Z'
 ---
 
 Neon's `psql` passwordless auth feature helps you quickly authenticate a connection to Neon without providing a password.

@@ -1,8 +1,12 @@
 ---
 title: Using Mermaid diagrams
 subtitle: Guide for creating visual diagrams in Neon documentation
+summary: >-
+  Step-by-step guide for creating visual diagrams in Neon documentation using
+  Mermaid, a markdown-like syntax that generates styled diagrams and flowcharts,
+  supporting both light and dark modes.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.318Z'
+updatedOn: '2026-02-06T22:07:32.783Z'
 ---
 
 This guide shows Neon documentation writers and contributors how to create visual diagrams using Mermaid, a markdown-like syntax for generating diagrams and flowcharts. Mermaid diagrams are automatically styled with Neon's brand colors and support both light and dark modes.

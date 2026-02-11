@@ -1,0 +1,15 @@
+---
+description: "Run the glossary updater when the user asks to check glossary for a file, review the glossary, run docs-glossary-updater, update the glossary, check for obsolete entries, or similar. Follow the full instructions in the skill."
+globs: content/docs/**/*.md, content/docs/reference/glossary.md
+alwaysApply: false
+---
+
+# Docs glossary updater
+
+When the user asks to "check glossary for this file," "glossary sync," "glossary review," "run docs-glossary-updater," "update the glossary," "check for obsolete glossary entries," or similar:
+
+1. **Read** `.cursor/skills/docs-glossary-updater.md` in full.
+2. **Follow** the skill: choose Mode A (doc file → missing terms), Mode B (glossary → order, cross-links, best practices, obsolete entries), or Combined as appropriate.
+3. **Apply** your suggested changes to the glossary (or doc) by editing the file(s). If the user only wants a report or checklist with no edits, output that instead.
+
+Glossary path: `content/docs/reference/glossary.md`.

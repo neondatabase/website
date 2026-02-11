@@ -1,8 +1,12 @@
 ---
 title: Postgres Date and Time data types
 subtitle: Work with date and time values in Postgres
+summary: >-
+  Covers the storage and manipulation of date and time values in Postgres,
+  detailing five primary data types and their usage in various applications such
+  as event logging and duration calculations.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.366Z'
+updatedOn: '2026-02-06T22:07:32.819Z'
 ---
 
 Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them.

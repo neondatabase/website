@@ -1,11 +1,15 @@
 ---
 title: Connection errors
 subtitle: Learn how to resolve connection errors
+summary: >-
+  Covers how to resolve various connection errors encountered when using Neon,
+  including issues related to endpoint IDs, authentication failures, and
+  database server accessibility.
 enableTableOfContents: true
 redirectFrom:
   - /docs/how-to-guides/connectivity-issues
   - /docs/connect/connectivity-issues
-updatedOn: '2026-02-02T12:37:39.435Z'
+updatedOn: '2026-02-06T22:07:32.794Z'
 ---
 
 This topic describes how to resolve connection errors you may encounter when using Neon. The errors covered include:

@@ -1,10 +1,14 @@
 ---
 title: Neon API
+summary: >-
+  How to manage Neon projects programmatically using the Neon API, including
+  creating and managing projects, branches, databases, and roles, along with
+  guidance on obtaining an API key and using SDKs.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2026-02-01T13:37:13.532Z'
+updatedOn: '2026-02-06T22:07:33.129Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API"
@@ -274,7 +278,7 @@ Manage the fundamental building blocks of your Neon account.
 Monitor resource consumption and configure usage limits.
 
 - [Monitor usage metrics](/docs/introduction/monitor-usage#retrieve-usage-metrics-with-the-neon-api) — Retrieve usage data for projects and branches
-- [Query consumption metrics](/docs/guides/consumption-metrics#get-account-level-aggregated-metrics) — Query account-level and project-level consumption history
+- [Query consumption metrics](/docs/guides/consumption-metrics#get-account-level-aggregated-metrics-legacy-plans) — Query account-level and project-level consumption history
 - [Organization consumption](/docs/manage/orgs-api-consumption#account-level-metrics) — Query usage metrics for organizations
 - [Configure consumption limits](/docs/guides/consumption-limits#configuring-quotas) — Set and update quotas on compute, storage, and data transfer
 
