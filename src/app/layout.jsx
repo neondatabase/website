@@ -1,4 +1,5 @@
 import 'styles/globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import { GeistMono } from 'geist/font/mono';
 import Script from 'next/script';
 
@@ -40,6 +41,7 @@ const RootLayout = ({ children }) => (
           </TopbarProvider>
         </HomepageVisitProvider>
       </ThemeProvider>
+      <Analytics />
     </body>
   </html>
 );
