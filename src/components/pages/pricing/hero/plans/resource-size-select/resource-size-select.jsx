@@ -8,17 +8,17 @@ import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 export const LAUNCH_RESOURCE_SIZES = [
-  { id: 'small', cu: 150, storage: 1 },
+  { id: 'small', cu: 140, storage: 1 },
   { id: 'medium', cu: 360, storage: 5 },
-  { id: 'large', cu: 750, storage: 10 },
-  { id: 'xlarge', cu: 3000, storage: 100 },
+  { id: 'large', cu: 725, storage: 10 },
+  { id: 'xlarge', cu: 2970, storage: 100 },
 ];
 
 export const SCALE_RESOURCE_SIZES = [
-  { id: 'small', cu: 150, storage: 1 },
+  { id: 'small', cu: 140, storage: 1 },
   { id: 'medium', cu: 360, storage: 5 },
-  { id: 'large', cu: 750, storage: 10 },
-  { id: 'xlarge', cu: 3000, storage: 100 },
+  { id: 'large', cu: 725, storage: 10 },
+  { id: 'xlarge', cu: 2970, storage: 100 },
   { id: '2xlarge', cu: 6000, storage: 1000 },
 ];
 

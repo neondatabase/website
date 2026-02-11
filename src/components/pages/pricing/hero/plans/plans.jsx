@@ -134,10 +134,10 @@ const Plans = () => {
                     </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-baseline gap-1 leading-snug tracking-extra-tight">
-                          <span className="text-[15px] text-gray-new-60">Typical spend:</span>
-                          <span className="text-lg text-white">${displayPrice}</span>
-                          <span className="text-sm text-white">/mo</span>
+                        <div className="flex items-baseline gap-1.5 leading-snug tracking-extra-tight">
+                          <span className="text-2xl text-white">${displayPrice}</span>
+                          <span className="text-base text-white">/mo</span>
+                          <span className="text-[15px] text-gray-new-60">typical spend</span>
                         </div>
                         {currentSize && setCurrentSize && resourceSizes && (
                           <ResourceSizeSelect
@@ -149,9 +149,9 @@ const Plans = () => {
                       </div>
                     ) : (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-baseline gap-0.5 leading-snug tracking-extra-tight">
-                          <span className="text-lg text-white">${displayPrice}</span>
-                          <span className="text-sm text-white">/mo</span>
+                        <div className="flex items-baseline gap-1 leading-snug tracking-extra-tight">
+                          <span className="text-2xl text-white">${displayPrice}</span>
+                          <span className="text-base text-white">/mo</span>
                         </div>
                         {subtitle && (
                           <p className="text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
