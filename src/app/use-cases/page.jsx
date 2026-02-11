@@ -2,46 +2,43 @@ import Hero from 'components/pages/use-cases/hero';
 import UseCaseCards from 'components/pages/use-cases/use-case-cards';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
-import { getUseCasesCards } from 'utils/api-wp';
+import { getAllWpUseCases } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
 
 export const metadata = getMetadata(SEO_DATA.useCases);
 
-// Get case study link based on isInternal flag
 const getCaseStudyLink = (caseStudyPost) => {
-  if (!caseStudyPost) return null;
-  if (caseStudyPost.isInternal && caseStudyPost.post?.slug) {
+  if (caseStudyPost?.isInternal && caseStudyPost?.post?.slug) {
     return `/blog/${caseStudyPost.post.slug}`;
   }
-  return caseStudyPost.externalUrl || null;
+  return caseStudyPost?.externalUrl;
 };
 
-// Transform WP data to match component props
-const transformUseCasesData = (wpData) =>
-  wpData.map((item) => {
-    const caseStudy = item.linkedCaseStudy?.[0];
+const transformUseCasesData = (items) =>
+  items.map((item) => {
+    const caseStudy = item.useCase?.linkedCaseStudy?.[0];
     const caseStudyPost = caseStudy?.caseStudyPost;
 
+    if (!caseStudyPost) return null;
+
     return {
-      icon: item.icon,
+      icon: item.useCase?.icon,
       title: item.title,
-      description: item.description,
-      link: item.link?.url,
+      description: item.useCase?.description,
+      link: item.useCase?.link?.url,
       logo: caseStudyPost?.logo,
-      testimonial: caseStudyPost
-        ? {
-            quote: caseStudyPost.quote,
-            author: `${caseStudyPost.author?.name}${caseStudyPost.author?.post ? ` – ${caseStudyPost.author.post}` : ''}`,
-            caseStudyLink: getCaseStudyLink(caseStudyPost),
-          }
-        : null,
-      tags: item.tags?.map((tag) => ({ title: tag, icon: 'incognito' })) || [],
+      testimonial: {
+        quote: caseStudyPost?.quote || '',
+        author: `${caseStudyPost.author?.name}${caseStudyPost.author?.post ? ` – ${caseStudyPost.author.post}` : ''}`,
+        caseStudyLink: getCaseStudyLink(caseStudyPost),
+      },
+      tags: item.useCaseTags?.nodes?.map((tag) => ({ title: tag.name, icon: 'incognito' })) || [],
     };
   });
 
 const UseCasesPage = async () => {
-  const wpUseCases = await getUseCasesCards();
-  const useCasesData = transformUseCasesData(wpUseCases);
+  const useCases = await getAllWpUseCases();
+  const useCasesData = transformUseCasesData(useCases);
 
   return (
     <Layout>
