@@ -22,9 +22,9 @@ const Aside = ({
   return (
     <div
       className={clsx(
-        'relative col-span-2 -ml-12 w-full max-w-64 xl:hidden',
+        'relative col-span-2 -ml-6 w-full max-w-64 xl:hidden',
         isTemplate
-          ? 'col-span-2 col-start-11 -ml-12 max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+          ? 'col-span-2 col-start-11 -ml-6 max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
           : '',
         className
       )}
