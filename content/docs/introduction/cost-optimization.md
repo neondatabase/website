@@ -163,12 +163,14 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month, while paid plans include 100 GB/month, then $0.10/GB.
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer.
 
 **Optimization strategies:**
 
 - **Optimize query results.** Select only the columns you need rather than using `SELECT *`. For large result sets, use pagination or streaming instead of fetching all rows at once.
 
 - **Consider logical replication costs.** [Logical replication](/docs/guides/logical-replication-neon) to external destinations counts as public data transfer. If you're replicating large amounts of data, factor this into your transfer costs.
+
+- **Reduce backup-related egress.** Frequent `pg_dump` (or similar) exports send your data over the network and count as public data transfer. To lower egress, reduce how often you run dumps and consider using [Neon's snapshots](/docs/guides/backup-restore) with [scheduled backups](/docs/guides/backup-restore#create-backup-schedules) as a backup alternative that does not transfer data off Neon.
 
 - **Monitor with the consumption API.** Track data transfer programmatically using the [Consumption API](/docs/guides/consumption-metrics), or check the **Billing** page in the Console for current charges.
