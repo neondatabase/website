@@ -45,6 +45,7 @@ const Contents = ({ contents }) => (
                       <span className="lg:hidden">Learn more</span>
                       <ArrowRightIcon
                         aria-hidden="true"
+                        focusable="false"
                         className="-mb-px shrink-0 text-gray-new-70 transition-transform duration-200 group-hover:translate-x-[3px]"
                       />
                     </span>
@@ -62,15 +63,17 @@ const Contents = ({ contents }) => (
 Contents.propTypes = {
   contents: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       section: PropTypes.string.isRequired,
       items: PropTypes.arrayOf(
         PropTypes.shape({
           title: PropTypes.string.isRequired,
+          description: PropTypes.string,
           slug: PropTypes.string.isRequired,
         })
-      ),
+      ).isRequired,
     })
-  ),
+  ).isRequired,
 };
 
 export default Contents;

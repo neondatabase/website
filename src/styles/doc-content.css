@@ -414,18 +414,54 @@
     }
   }
 
-  .prose-flow {
-    > p {
+  .prose-doc.prose-branching {
+    > h2 {
+      @apply mb-4 mt-12 text-[28px] font-normal tracking-[-0.05em] md:mt-9 md:text-2xl;
+    }
+
+    :not(pre) > code {
+      @apply !rounded border border-gray-new-30 bg-[#0C0D0D] !px-1 !py-[1px] text-sm leading-[1.2] tracking-extra-tight !text-white;
+    }
+
+    p > img,
+    p > [data-rmiz] img {
       @apply my-6;
     }
 
-    > ul,
-    > ol {
-      @apply my-6;
+    > p {
+      @apply mb-6 mt-4 text-lg font-normal tracking-tight text-gray-new-80 md:text-base;
+    }
 
-      > li {
-        @apply my-4;
-      }
+    > ul {
+      @apply mb-6 pl-5;
+    }
+
+    > ul > li {
+      @apply my-[10px] text-lg font-normal leading-normal tracking-tight text-gray-new-80 md:text-base;
+      padding-left: calc(16px + 1ch);
+    }
+
+    > ul > li::before {
+      content: '–';
+      @apply left-0 top-0 h-auto w-auto rounded-none bg-transparent text-gray-new-80;
+    }
+
+    > .table-wrapper {
+      @apply mb-6 mt-6 2xl:mx-0 2xl:overflow-visible 2xl:px-0;
+    }
+
+    > .table-wrapper table {
+      @apply my-0 w-full min-w-0 max-w-none border-collapse border border-gray-new-20 2xl:min-w-0;
+    }
+
+    > .table-wrapper table thead tr,
+    > .table-wrapper table tbody tr {
+      @apply border-0;
+    }
+
+    > .table-wrapper table th,
+    > .table-wrapper table td {
+      @apply border border-gray-new-20 px-[21px] py-[21px] text-left text-base font-normal leading-normal tracking-extra-tight text-gray-new-80 md:text-sm;
     }
   }
 
