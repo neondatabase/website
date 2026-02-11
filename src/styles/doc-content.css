@@ -420,7 +420,23 @@
     }
 
     :not(pre) > code {
-      @apply !rounded border border-gray-new-30 bg-[#0C0D0D] !px-1 !py-[1px] text-sm leading-[1.2] tracking-extra-tight !text-white;
+      @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-[1px] text-sm leading-[1.2] tracking-extra-tight !text-white;
+    }
+
+    > .code-block {
+      @apply my-6 rounded-none border-none !bg-black-pure py-2;
+    }
+
+    > .code-block > pre[data-language] {
+      @apply rounded-none border border-gray-new-20 !bg-black-pure px-4 py-4;
+    }
+
+    > .code-block code .line {
+      @apply !leading-normal;
+    }
+
+    > .code-block button {
+      @apply right-3 top-3 border-gray-new-30 bg-[#111318];
     }
 
     p > img,
