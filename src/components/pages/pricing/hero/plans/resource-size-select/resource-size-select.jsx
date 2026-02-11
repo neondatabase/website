@@ -38,7 +38,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
   const selectedOption = sizes?.find((size) => size.id === value) || sizes?.[1] || sizes?.[0];
 
   // Generate dynamic tooltip text
-  const tooltipText = `Estimated cost of a ${selectedOption.cu} CU-hour, ${selectedOption.storage} GB database workload.`;
+  const tooltipText = `Estimated cost of a ${selectedOption.cu} CU-hour,<br/> ${selectedOption.storage} GB database workload.`;
 
   useClickOutside([containerRef], () => setIsOpen(false));
 
