@@ -7,7 +7,7 @@ summary: >-
   manage projects, branches, databases, and other resources within the Neon
   platform, simplifying API interactions and resource management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.148Z'
+updatedOn: '2026-02-11T23:59:05.503Z'
 ---
 
 <InfoBlock>
