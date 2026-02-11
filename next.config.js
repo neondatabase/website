@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const { CONTENT_ROUTES } = require('./src/constants/content');
 const { getAllPosts, getAllChangelogs } = require('./src/utils/api-docs');
 const generateChangelogPath = require('./src/utils/generate-changelog-path');
 const generateDocPagePath = require('./src/utils/generate-doc-page-path');
@@ -545,45 +546,62 @@ const defaultConfig = {
     ];
   },
   async rewrites() {
-    return [
-      {
-        source: '/api_spec/release/v2.json',
-        destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
-      },
-      {
-        source: '/demos/ping-thing',
-        destination: 'https://ping-thing.vercel.app/demos/ping-thing',
-      },
-      {
-        source: '/demos/ping-thing/:path*',
-        destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
-      },
-      {
-        source: '/demos/playground',
-        destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
-      },
-      {
-        source: '/demos/playground/:path*',
-        destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
-      },
-      {
-        source: '/developer-days/:path*',
-        destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
-      },
-      {
-        source: '/demos/regional-latency',
-        destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
-      },
-      {
-        source: '/demos/regional-latency/:path*',
-        destination:
-          'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
-      },
-      {
-        source: '/ai-chat',
-        destination: '/docs/introduction#ai-chat',
-      },
-    ];
+    // Generate rewrites for AI agent markdown access
+    // Maps /docs/x.md → /md/docs/x.md (internal public/md/ directory)
+    const contentRewrites = Object.keys(CONTENT_ROUTES).map((route) => ({
+      source: `/${route}/:path*.md`,
+      destination: `/md/${route}/:path*.md`,
+    }));
+
+    return {
+      // afterFiles: runs after checking pages/public files but before dynamic routes
+      // This ensures physical .md files are served first, with fallback to public/md/
+      afterFiles: [
+        // Serve /llms.txt from /docs/llms.txt (canonical location is public/docs/llms.txt)
+        { source: '/llms.txt', destination: '/docs/llms.txt' },
+        ...contentRewrites,
+      ],
+      // fallback: existing rewrites for external services
+      fallback: [
+        {
+          source: '/api_spec/release/v2.json',
+          destination: 'https://dfv3qgd2ykmrx.cloudfront.net/api_spec/release/v2.json',
+        },
+        {
+          source: '/demos/ping-thing',
+          destination: 'https://ping-thing.vercel.app/demos/ping-thing',
+        },
+        {
+          source: '/demos/ping-thing/:path*',
+          destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
+        },
+        {
+          source: '/demos/playground',
+          destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
+        },
+        {
+          source: '/demos/playground/:path*',
+          destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
+        },
+        {
+          source: '/developer-days/:path*',
+          destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
+        },
+        {
+          source: '/demos/regional-latency',
+          destination: 'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency',
+        },
+        {
+          source: '/demos/regional-latency/:path*',
+          destination:
+            'https://latency-benchmarks-dashboard.vercel.app/demos/regional-latency/:path*',
+        },
+        {
+          source: '/ai-chat',
+          destination: '/docs/introduction#ai-chat',
+        },
+      ],
+    };
   },
   webpack(config) {
     const fileLoaderRule = config.module.rules.find((rule) => rule.test?.test?.('.svg'));
