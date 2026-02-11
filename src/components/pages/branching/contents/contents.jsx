@@ -14,11 +14,11 @@ const Contents = ({ contents }) => (
       <ul className="w-full">
         {contents.map(({ section, id, items }) => (
           <li
-            className="flex flex-col gap-8 py-8 first:border-0 first:pt-0 last:pb-0 lg:gap-6 lg:py-7 md:gap-5"
+            className="flex flex-col gap-8 py-8 first:pt-0 last:pb-0 lg:gap-6 lg:py-7 md:gap-5"
             key={id}
             id={id}
           >
-            <h3 className="font-mono text-xs font-medium uppercase leading-3 text-gray-new-60 md:text-[10px]">
+            <h3 className="font-mono text-xs font-medium uppercase leading-3 text-gray-new-60 md:text-[10px] md:leading-none">
               {section}
             </h3>
             <ol className="flex flex-col">
@@ -31,7 +31,7 @@ const Contents = ({ contents }) => (
                     className="group flex w-full items-center gap-x-16 font-sans text-base"
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
-                    <span className="flex flex-row items-center lg:flex-col lg:items-baseline lg:gap-1">
+                    <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
                       <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white xl:w-[256px] lg:w-auto">
                         {title}
                       </span>
