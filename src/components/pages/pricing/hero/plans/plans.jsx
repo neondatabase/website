@@ -122,16 +122,13 @@ const Plans = () => {
                 <div className="p-6 pb-2 md:p-5 md:pb-2">
                   <h3
                     className={clsx(
-                      'font-mono text-sm font-medium uppercase leading-none',
+                      'whitespace-nowrap text-2xl font-normal leading-none tracking-extra-tight lg:text-2xl lg:tracking-tighter',
                       highlighted ? 'text-green-52' : 'text-gray-new-60'
                     )}
                   >
-                    {type}
+                    {title}
                   </h3>
                   <div className="mt-14 flex flex-col gap-3">
-                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-extra-tight lg:text-2xl lg:tracking-tighter">
-                      {title}
-                    </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
                         <div className="flex items-baseline gap-1.5 leading-snug tracking-extra-tight">
