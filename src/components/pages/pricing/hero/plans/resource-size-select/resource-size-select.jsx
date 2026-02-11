@@ -66,10 +66,10 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
   return (
     <div ref={containerRef} className="relative">
       <div className="flex flex-nowrap items-center gap-1 text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
-        <span className="whitespace-nowrap">Based on:</span>
+        <span className="flex-shrink-0 whitespace-nowrap">Based on:</span>
         <button
           type="button"
-          className="group inline-flex flex-shrink-0 items-center gap-1 rounded border border-gray-new-20 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
+          className="group flex flex-1 items-center justify-between gap-1 rounded border border-gray-new-20 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
