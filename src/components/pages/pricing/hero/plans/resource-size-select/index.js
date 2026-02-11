@@ -1,4 +1,7 @@
-import ResourceSizeSelect, { RESOURCE_SIZES } from './resource-size-select';
+import ResourceSizeSelect, {
+  LAUNCH_RESOURCE_SIZES,
+  SCALE_RESOURCE_SIZES,
+} from './resource-size-select';
 
-export { RESOURCE_SIZES };
+export { LAUNCH_RESOURCE_SIZES, SCALE_RESOURCE_SIZES };
 export default ResourceSizeSelect;

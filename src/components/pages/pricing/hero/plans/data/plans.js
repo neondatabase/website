@@ -6,11 +6,7 @@ export default [
     type: 'For basic use',
     title: 'Free',
     subtitle: 'No card required',
-    price: {
-      small: 0,
-      medium: 0,
-      large: 0,
-    },
+    price: 0,
     features: {
       database: {
         title: 'Database',
@@ -57,11 +53,8 @@ export default [
     title: 'Launch',
     highlighted: true,
     hasDynamicPricing: true,
-    price: {
-      small: 25,
-      medium: 35,
-      large: 45,
-    },
+    computeRate: 0.106,
+    storageRate: 0.35,
     features: {
       database: {
         title: 'Database',
@@ -109,11 +102,8 @@ export default [
     type: 'For production workloads',
     title: 'Scale',
     hasDynamicPricing: true,
-    price: {
-      small: 50,
-      medium: 60,
-      large: 70,
-    },
+    computeRate: 0.222,
+    storageRate: 0.35,
     features: {
       database: {
         title: 'Database',

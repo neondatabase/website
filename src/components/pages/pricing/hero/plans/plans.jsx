@@ -7,46 +7,108 @@ import Button from 'components/shared/button';
 
 import plans from './data/plans';
 import Features from './features';
-import ResourceSizeSelect, { RESOURCE_SIZES } from './resource-size-select';
+import ResourceSizeSelect, {
+  LAUNCH_RESOURCE_SIZES,
+  SCALE_RESOURCE_SIZES,
+} from './resource-size-select';
 
 const Plans = () => {
-  const [selectedSize, setSelectedSize] = useState('medium');
+  const [launchSize, setLaunchSize] = useState('small');
+  const [scaleSize, setScaleSize] = useState('xlarge');
+
+  console.log('Imported constants:', {
+    LAUNCH_RESOURCE_SIZES,
+    SCALE_RESOURCE_SIZES,
+  });
 
   return (
     <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
       <h2 className="sr-only">Neon pricing plans</h2>
 
-      <div className="mt-0.5 grid grid-cols-3 xl:mt-0 lg:grid-cols-2 md:mb-4 md:grid-cols-1">
-        <div className="border-l border-black-pure lg:hidden" aria-hidden />
-        <div
-          className={clsx(
-            'flex h-12 items-center border-l border-t border-gray-new-30 px-6 md:border-r md:px-5'
-          )}
-        >
-          <span className="text-sm leading-none tracking-extra-tight text-white">
-            Choose the resource size for your project:
-          </span>
-        </div>
-        <ResourceSizeSelect value={selectedSize} onChange={setSelectedSize} />
-      </div>
-
       <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-b border-t border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
         {plans.map(
           (
             {
+              planId,
               type,
               title,
               subtitle,
               highlighted = false,
               price,
+              computeRate,
+              storageRate,
               features,
               button,
               hasDynamicPricing = false,
             },
             index
           ) => {
-            const displayPrice = price[selectedSize];
-            const selectedResource = RESOURCE_SIZES.find((size) => size.id === selectedSize);
+            // Determine which size state to use based on the plan
+            let currentSize;
+            let setCurrentSize;
+            let resourceSizes;
+
+            if (planId === 'launch') {
+              currentSize = launchSize;
+              setCurrentSize = setLaunchSize;
+              resourceSizes = LAUNCH_RESOURCE_SIZES;
+            } else if (planId === 'scale') {
+              currentSize = scaleSize;
+              setCurrentSize = setScaleSize;
+              resourceSizes = SCALE_RESOURCE_SIZES;
+            }
+
+            // Calculate price dynamically based on resource size and rates
+            let displayPrice = 0;
+
+            console.log('Condition check:', {
+              planId,
+              hasDynamicPricing,
+              computeRate,
+              storageRate,
+              resourceSizes: !!resourceSizes,
+              currentSize,
+              launchSize,
+              scaleSize,
+            });
+
+            if (
+              hasDynamicPricing &&
+              computeRate !== undefined &&
+              storageRate !== undefined &&
+              resourceSizes &&
+              currentSize
+            ) {
+              const selectedResource = resourceSizes.find((size) => size.id === currentSize);
+              if (
+                selectedResource &&
+                selectedResource.cu !== undefined &&
+                selectedResource.storage !== undefined
+              ) {
+                const computeCost = Number(selectedResource.cu) * Number(computeRate);
+                const storageCost = Number(selectedResource.storage) * Number(storageRate);
+                displayPrice = Math.round(computeCost + storageCost);
+                console.log('Price calculation:', {
+                  planId,
+                  currentSize,
+                  selectedResource,
+                  computeRate,
+                  storageRate,
+                  computeCost,
+                  storageCost,
+                  displayPrice,
+                });
+              } else {
+                console.log('selectedResource not found or missing properties:', {
+                  currentSize,
+                  resourceSizes,
+                  selectedResource,
+                });
+              }
+            } else {
+              displayPrice = price !== undefined ? price : 0;
+              console.log('Using static price:', { planId, price, displayPrice });
+            }
 
             return (
               <li
@@ -74,21 +136,22 @@ const Plans = () => {
                       <div className="flex flex-col gap-1.5">
                         <div className="flex items-baseline gap-1 leading-snug tracking-extra-tight">
                           <span className="text-[15px] text-gray-new-60">Typical spend:</span>
-                          <span className="text-lg text-gray-new-80">${displayPrice}</span>
-                          <span className="text-sm text-gray-new-80">/mo</span>
+                          <span className="text-lg text-white">${displayPrice}</span>
+                          <span className="text-sm text-white">/mo</span>
                         </div>
-                        <p className="text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
-                          Based on:{' '}
-                          <span className="text-gray-new-80">
-                            {selectedResource.cu} CU-hours, {selectedResource.storage} GB
-                          </span>
-                        </p>
+                        {currentSize && setCurrentSize && resourceSizes && (
+                          <ResourceSizeSelect
+                            value={currentSize}
+                            sizes={resourceSizes}
+                            onChange={setCurrentSize}
+                          />
+                        )}
                       </div>
                     ) : (
                       <div className="flex flex-col gap-1.5">
                         <div className="flex items-baseline gap-0.5 leading-snug tracking-extra-tight">
-                          <span className="text-lg text-gray-new-80">${displayPrice}</span>
-                          <span className="text-sm text-gray-new-80">/mo</span>
+                          <span className="text-lg text-white">${displayPrice}</span>
+                          <span className="text-sm text-white">/mo</span>
                         </div>
                         {subtitle && (
                           <p className="text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
