@@ -52,16 +52,13 @@ StatCard.propTypes = {
 
 const Vision = () => (
   <SecondarySection title="Company Statistics and Vision" className="md:pb-[26px]">
-    <div className="flex gap-x-[128px] xl:gap-x-[108px] lg:gap-x-12 md:flex-col md:gap-y-20">
+    <div className="flex gap-x-[140px] xl:gap-x-32 lg:gap-x-12 md:flex-col md:gap-y-20">
       <div className="relative flex-1 before:absolute before:-left-5 before:top-0 before:h-full before:w-px before:bg-gray-new-50 xl:ml-8 md:ml-0 md:before:hidden">
         <SectionLabel>Where we&apos;re headed</SectionLabel>
 
-        <h3 className="mt-5 max-w-[736px] text-5xl font-normal leading-dense tracking-tighter xl:max-w-[600px] xl:text-[36px] lg:max-w-full lg:text-2xl md:mt-4 md:text-xl">
-          <span className="text-black-pure">Neon is a Databricks company.</span>{' '}
-          <span className="text-gray-new-40">
-            In May 2025, Neon joined Databricks to shape the future of Postgres and AI-native
-            development.
-          </span>
+        <h3 className="mt-5 max-w-[736px] text-5xl font-normal leading-dense tracking-tighter text-gray-new-40 xl:max-w-[600px] xl:text-[36px] lg:max-w-full lg:text-2xl md:mt-4 md:text-xl">
+          <span className="text-black-pure">Neon is a Databricks company.</span> In May 2025, Neon
+          joined Databricks to shape the future of Postgres and AI-native development.
         </h3>
 
         <div className="mt-[194px] flex gap-x-[84px] xl:mt-[136px] xl:gap-x-16 lg:gap-x-8 md:mt-9 md:flex-col md:gap-y-7 md:pr-24">
@@ -81,7 +78,7 @@ const Vision = () => (
             developers and AI agents — now backed by the scale and expertise of Databricks.
           </p>
 
-          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:text-[15px]">
+          <p className="text-xl leading-normal tracking-tighter text-black-pure xl:text-lg lg:text-base md:mr-8 md:text-[15px]">
             The same technology behind Neon powers Lakebase: The&nbsp;first serverless Postgres
             database{' '}
             <mark className="rounded-sm bg-[#39A57D]/60 text-black-pure">

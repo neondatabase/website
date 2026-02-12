@@ -17,7 +17,6 @@ const AboutUsPage = () => (
     <Hero />
     <Timeline />
     <Leadership />
-    <div className="h-[100px]" />
     <Vision />
     <Developers />
     <Connections />

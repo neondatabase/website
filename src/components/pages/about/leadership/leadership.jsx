@@ -49,7 +49,7 @@ const ITEMS = [
 ];
 
 const Leadership = () => (
-  <section className="leadership safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[96px]">
+  <section className="leadership safe-paddings my-[216px] xl:my-[152px] lg:my-[112px] md:my-[96px]">
     <Container size={768} className="lg:!max-w-[640px] lg:!px-0 md:!px-5 ">
       <Heading
         className="max-w-[800px] text-[68px] font-medium leading-[0.9] tracking-extra-tight xl:max-w-[663px] xl:text-[56px] lg:max-w-[564px] lg:text-5xl md:text-[36px]"
