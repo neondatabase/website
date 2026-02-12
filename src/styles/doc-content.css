@@ -415,39 +415,28 @@
   }
 
   .prose-doc.prose-branching {
+    /* Headings */
     > h2 {
       @apply mb-4 mt-12 text-[28px] font-normal tracking-[-0.05em] md:mt-9 md:text-2xl;
     }
 
+    /* Inline code */
     :not(pre) > code {
       @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-[1px] text-sm leading-[1.2] tracking-extra-tight !text-white;
     }
 
-    > .code-block {
-      @apply my-6 rounded-none border-none !bg-black-pure py-2;
-    }
-
-    > .code-block > pre[data-language] {
-      @apply rounded-none border border-gray-new-20 !bg-black-pure px-4 py-4;
-    }
-
-    > .code-block code .line {
-      @apply !leading-normal;
-    }
-
-    > .code-block button {
-      @apply right-3 top-3 border-gray-new-30 bg-[#111318];
-    }
-
+    /* Media inside text */
     p > img,
     p > [data-rmiz] img {
       @apply my-6;
     }
 
+    /* Paragraphs */
     > p {
       @apply mb-6 mt-4 text-lg font-normal tracking-tight text-gray-new-80 md:text-base;
     }
 
+    /* Lists */
     > ul {
       @apply mb-6 pl-5;
     }
@@ -462,6 +451,7 @@
       @apply left-0 top-0 h-auto w-auto rounded-none bg-transparent text-gray-new-80;
     }
 
+    /* Tables */
     > .table-wrapper {
       @apply mb-6 mt-6 2xl:mx-0 2xl:overflow-visible 2xl:px-0;
     }
