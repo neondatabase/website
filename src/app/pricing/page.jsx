@@ -83,6 +83,58 @@ const faqItems = [
     `,
   },
   {
+    question: 'How are the workload cost estimates calculated?',
+    id: 'workload-cost-estimates',
+    answer: `
+      <p>The typical monthly cost estimates shown in our pricing plans are based on representative database workloads that reflect common usage patterns across different application types.</p>
+      <p>Each estimate combines two components:</p>
+      <ul>
+        <li><strong>Compute cost:</strong> Based on the specified CU-hours per month. </li>
+        <li><strong>Storage cost:</strong> Based on the specified amount of database storage in GB. </li>
+      </ul>
+      <p>These estimates help you compare typical workloads across plans.</p>
+      <p>Here's a detailed breakdown of each of the workload sizes and what they represent:</p>
+      <h3 class="mt-6 text-lg text-white font-semibold">Intermittent Load:</h3>
+      <p>
+        140 CU-hours compute, 1 GB-month of storage. Typical of a small database that doesn't need to run 24/7.
+        <img class="my-4" src="/images/pricing/140-CU-Hours.webp" />
+        A databse using 140 CU-hours compute per month can scale to zero when idle, and start back up in 350ms when it's needed. When it's running it is set to a minimum size of 0.25 CU but can scale up to 2CU when needed.</p>
+      <h3 class="mt-6 text-lg text-white font-semibold">Low Load:</h3>
+      <p>
+        190 CU-hours compute, 5 GB-month of storage. A small database that <em>does</em> need to run 24/7.
+        <img class="my-4" src="/images/pricing/190-CU-Hours.webp" />
+        Once scale to zero is disabled, the minimum CU-hours a database can use in a month is 187.5 <em>(750 hours in a month x 0.25 minimum CU size = 187.5)</em> so this example represents a database that has scale to zero disable but only occasionally needs to scale above the 0.25 minimum size. Good for small production applications and databases that need to be always-on for features like real-time sync.
+      </p>
+      <h3 class="mt-6 text-lg text-white font-semibold">Medium Load:</h3>
+      <p>
+        720 CU-hours compute, 10 GB-month of storage. Representative of a constant-load application database.
+        <img class="my-4" src="/images/pricing/720-CU-Hours.webp" />
+        As you can see from the autoscaling chart above, 720 CU hours translates to a database that scales between 0.5 and 4 CU based on load. 
+      </p>
+      <h3 class="mt-6 text-lg text-white font-semibold">High Load:</h3>
+      <p>
+        3,000 CU-hours compute, 100 GB-month of storage.
+        <img class="my-4" src="/images/pricing/3000-CU-Hours.webp" />
+        As an example, a database that is scaling between 3 CU and 7 CU will often use around 3000 CU hours in a month. This level represents production applications with sustained traffic, higher data volumes, and more complex queries requiring consistent compute resources.
+      </p>
+      <h3 class="mt-6 text-lg text-white font-semibold">XL Load:</h3>
+      <p>
+        6,000 CU-hours compute, 1,000 GB-month of storage.
+        <img class="my-4" src="/images/pricing/6000-CU-Hours.webp" />
+        A database scaling between 6 and 14 CU can use in the range of 6,000 CU hours in a month. This is representative of large-scale production workloads with high traffic volumes, extensive datasets, and applications requiring significant compute capacity and storage.
+      </p>
+      
+      <p>Your actual costs will vary based on:</p>
+      <ul>
+        <li>How much your database autoscales based on actual query load</li>
+        <li>How long your computes run before scaling to zero</li>
+        <li>Your actual data size and number of branches</li>
+        <li>Your configured restore window (affects history storage costs)</li>
+      </ul>
+      <p>Remember that Neon bills based on actual usage, not estimates. Use these workload examples as reference points, then monitor your usage in the <a href="${LINKS.console}">Neon Console</a> to understand your real costs. <a href="${LINKS.docs}/introduction/about-billing">Learn more about how Neon billing works.</a></p>
+    `,
+  },
+  {
     question: 'What does "no monthly minimum" mean on paid plans?',
     answer: `
       <p>Neon's paid plans don't require a minimum monthly spend or base fee. You're billed purely based on usage. If one month you barely use Neon, your bill might be just a few dollars.</p>

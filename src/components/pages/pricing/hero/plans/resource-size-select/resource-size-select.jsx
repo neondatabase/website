@@ -10,16 +10,16 @@ import ChevronIcon from 'icons/chevron-down.inline.svg';
 
 export const LAUNCH_RESOURCE_SIZES = [
   { id: 'small', cu: 140, storage: 1 },
-  { id: 'medium', cu: 360, storage: 5 },
+  { id: 'medium', cu: 190, storage: 5 },
   { id: 'large', cu: 720, storage: 10 },
-  { id: 'xlarge', cu: 2900, storage: 100 },
+  { id: 'xlarge', cu: 3000, storage: 100 },
 ];
 
 export const SCALE_RESOURCE_SIZES = [
   { id: 'small', cu: 140, storage: 1 },
-  { id: 'medium', cu: 360, storage: 5 },
+  { id: 'medium', cu: 190, storage: 5 },
   { id: 'large', cu: 720, storage: 10 },
-  { id: 'xlarge', cu: 2995, storage: 100 },
+  { id: 'xlarge', cu: 3000, storage: 100 },
   { id: '2xlarge', cu: 6000, storage: 1000 },
 ];
 
@@ -69,7 +69,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
         <span className="flex-shrink-0 whitespace-nowrap">Based on:</span>
         <button
           type="button"
-          className="group flex flex-1 items-center justify-between gap-1 rounded border border-gray-new-20 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
+          className="group flex flex-1 items-center justify-between gap-1 rounded border border-gray-new-20 bg-gray-new-8 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
@@ -98,7 +98,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
       </div>
 
       {isOpen && (
-        <div className="absolute left-[-24px] top-full z-20 mt-3 w-[calc(100%+48px)] border border-gray-new-30 bg-black-pure md:left-[-20px] md:w-[calc(100%+40px)]">
+        <div className="absolute left-[-24px] top-full z-20 mt-3 w-[calc(100%+48px)] border-y border-gray-new-30 bg-black-pure md:left-[-20px] md:w-[calc(100%+40px)]">
           <ul className="flex flex-col" role="listbox">
             {sizes.map((option) => {
               const isSelected = option.id === value;
@@ -106,7 +106,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
 
               return (
                 <li
-                  className="group border-b border-gray-new-20 transition-colors last:border-b-0 hover:bg-gray-new-8"
+                  className="group border-x-0 border-b border-t-0 border-gray-new-20 bg-gray-new-8 transition-colors last:border-b-0 hover:bg-gray-new-15"
                   key={option.id}
                 >
                   <button
