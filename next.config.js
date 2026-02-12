@@ -551,17 +551,16 @@ const defaultConfig = {
     ];
   },
   async rewrites() {
-    // Generate rewrites for AI agent markdown access
-    // Maps /docs/x.md → /md/docs/x.md (internal public/md/ directory)
+    // Generate rewrites for AI agent markdown access.
+    // Rewrite to API route so .md is served by a route handler that reads from public/md/,
+    // ensuring the file is available in the serverless bundle (via outputFileTracingIncludes).
     const contentRewrites = Object.keys(CONTENT_ROUTES).map((route) => ({
       source: `/${route}/:path*.md`,
-      destination: `/md/${route}/:path*.md`,
+      destination: `/api/serve-doc-md/${route}/:path*`,
     }));
 
     return {
       // beforeFiles: run first so *.md URLs are rewritten before any page/dynamic route matches.
-      // Otherwise /docs/ai/ai-rules.md is handled by docs/[...slug] with slug containing ".md",
-      // getPostBySlug looks for .../ai-rules.md.md and returns null → 404.
       beforeFiles: [...contentRewrites],
       afterFiles: [
         // Serve /llms.txt from /docs/llms.txt (canonical location is public/docs/llms.txt)
@@ -698,6 +697,12 @@ const defaultConfig = {
     INKEEP_INTEGRATION_API_KEY: process.env.INKEEP_INTEGRATION_API_KEY,
     INKEEP_INTEGRATION_ID: process.env.INKEEP_INTEGRATION_ID,
     INKEEP_ORGANIZATION_ID: process.env.INKEEP_ORGANIZATION_ID,
+  },
+  // Include public/md in the serverless bundle for the doc-md API route (Vercel preview/prod).
+  experimental: {
+    outputFileTracingIncludes: {
+      '/api/serve-doc-md/**': ['./public/md/**'],
+    },
   },
 };
 
