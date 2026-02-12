@@ -23,12 +23,9 @@ const Contents = ({ contents }) => (
             </h3>
             <ol className="flex flex-col">
               {items.map(({ title, description, slug }) => (
-                <li
-                  className="-mt-px border-t border-gray-new-20 py-6 last:pb-0 lg:py-[18px] md:py-[14px]"
-                  key={slug}
-                >
+                <li className="group/item -mt-px border-t border-gray-new-20" key={slug}>
                   <Link
-                    className="group flex w-full items-center gap-x-16 font-sans text-base"
+                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base group-last/item:pb-0 lg:py-[18px] md:py-[14px]"
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
