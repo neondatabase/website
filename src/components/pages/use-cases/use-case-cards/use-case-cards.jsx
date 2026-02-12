@@ -6,17 +6,49 @@ import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import DotsPattern from 'images/dots-pattern.inline.svg';
 
+import ApiDrivenIcon from './icons/api-driven.inline.svg';
+import AutomationIcon from './icons/automation.inline.svg';
+import AutoscalingIcon from './icons/autoscaling.inline.svg';
+import BranchingIcon from './icons/branching.inline.svg';
+import CiWorkflowsIcon from './icons/ci-workflows.inline.svg';
+import ConnectionPoolingIcon from './icons/connection-pooling.inline.svg';
 import ConnectionsIcon from './icons/connections.inline.svg';
+import CostEfficiencyIcon from './icons/cost-efficiency.inline.svg';
+import DataIsolationIcon from './icons/data-isolation.inline.svg';
 import DatabaseIcon from './icons/database.inline.svg';
+import ElasticScalingIcon from './icons/elastic-scaling.inline.svg';
 import IncognitoIcon from './icons/incognito.inline.svg';
+import InstantProvisioningIcon from './icons/instant-provisioning.inline.svg';
+import InstantRestoresIcon from './icons/instant-restores.inline.svg';
+import MultiTenancyIcon from './icons/multi-tenancy.inline.svg';
+import SaasAppsIcon from './icons/saas-apps.inline.svg';
 import ScaleFromBottomLeftIcon from './icons/scale-from-bottom-left.inline.svg';
+import ScaleToZeroIcon from './icons/scale-to-zero.inline.svg';
+import SchemaIcon from './icons/schema.inline.svg';
 import SparkleIcon from './icons/sparkle.inline.svg';
+import UsageBasedIcon from './icons/usage-based.inline.svg';
 import WindowCodeIcon from './icons/window-code.inline.svg';
 
 // Map icon names to imported components
 const ICONS = {
+  'api-driven': ApiDrivenIcon,
+  automation: AutomationIcon,
+  autoscaling: AutoscalingIcon,
+  branching: BranchingIcon,
+  'ci-workflows': CiWorkflowsIcon,
+  'connection-pooling': ConnectionPoolingIcon,
   connections: ConnectionsIcon,
+  'cost-efficiency': CostEfficiencyIcon,
+  'data-isolation': DataIsolationIcon,
+  'elastic-scaling': ElasticScalingIcon,
+  'instant-provisioning': InstantProvisioningIcon,
+  'instant-restores': InstantRestoresIcon,
+  'multi-tenancy': MultiTenancyIcon,
+  'saas-apps': SaasAppsIcon,
   'scale-from-bottom-left': ScaleFromBottomLeftIcon,
+  'scale-to-zero': ScaleToZeroIcon,
+  schema: SchemaIcon,
+  'usage-based': UsageBasedIcon,
   'window-code': WindowCodeIcon,
   database: DatabaseIcon,
   sparkle: SparkleIcon,

@@ -25,8 +25,7 @@ const Hero = () => (
         Postgres for modern development workflows
       </h1>
       <p className="mt-6 max-w-[672px] text-lg leading-normal tracking-extra-tight text-gray-new-60 xl:mt-5 lg:mt-[18px] lg:max-w-[581px] lg:text-base md:mt-4 md:max-w-full md:text-[0.9375rem] md:leading-snug">
-        Explore how teams use Neon to support branching databases, CI pipelines, preview
-        environments, and production workloads.
+        Explore how teams use Neon.
       </p>
       <Button
         className="mt-9 h-11 px-7 text-base font-medium tracking-extra-tight xl:mt-8 xl:h-9 xl:px-[18px] xl:text-sm lg:mt-7 md:mt-6"
