@@ -6,7 +6,7 @@ import { BRANCHING_BASE_PATH } from 'constants/branching';
 import ArrowRightIcon from 'icons/arrow-right.inline.svg';
 
 const Contents = ({ contents }) => (
-  <section className="safe-paddings table-of-contents w-full pb-[220px] pt-[180px] xl:pt-[136px] lg:pt-[88px] md:pb-[80px] md:pt-20">
+  <section className="safe-paddings table-of-contents w-full pb-[220px] pt-[180px] xl:pt-[136px] lg:pt-[88px] md:pb-20 md:pt-20">
     <Container className="w-full text-left" size="branching">
       <h2 className="mb-14 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[36px] lg:mb-11 md:mb-9 md:text-[28px]">
         Branching Workflows
@@ -29,7 +29,7 @@ const Contents = ({ contents }) => (
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
-                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white xl:w-[256px] lg:w-auto">
+                      <span className="w-[448px] shrink-0 leading-snug tracking-tight text-gray-new-80 transition-colors duration-200 group-hover:text-white xl:w-64 lg:w-auto">
                         {title}
                       </span>
 
@@ -38,7 +38,7 @@ const Contents = ({ contents }) => (
                       </span>
                     </span>
 
-                    <span className="ml-auto inline-flex shrink-0 items-center gap-2 font-medium leading-none tracking-[-0.02em]">
+                    <span className="ml-auto inline-flex shrink-0 items-center gap-2 font-medium leading-none tracking-extra-tight">
                       <span className="lg:hidden">Learn more</span>
                       <ArrowRightIcon
                         aria-hidden="true"

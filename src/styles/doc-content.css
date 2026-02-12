@@ -426,7 +426,7 @@
 
     /* Inline code */
     :not(pre) > code {
-      @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-[1px] text-sm leading-[1.2] tracking-extra-tight !text-white;
+      @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-px text-sm leading-[1.2] tracking-extra-tight !text-white;
     }
 
     /* Media inside text */
@@ -446,7 +446,7 @@
     }
 
     > ul > li {
-      @apply my-[10px] text-lg font-normal leading-normal tracking-tight text-gray-new-80 md:text-base;
+      @apply my-2.5 text-lg font-normal leading-normal tracking-tight text-gray-new-80 md:text-base;
       padding-left: calc(16px + 1ch);
     }
 

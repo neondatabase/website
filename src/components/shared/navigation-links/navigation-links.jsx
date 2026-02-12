@@ -19,7 +19,7 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
     <Link
       to={linkUrl}
       className={clsx(
-        'group flex w-1/2 min-w-0 flex-col gap-3 rounded-[4px] border border-gray-new-20 px-4 py-5 sm:w-full',
+        'group flex w-1/2 min-w-0 flex-col gap-3 rounded border border-gray-new-20 px-4 py-5 sm:w-full',
         isNext ? 'ml-auto items-end' : 'items-start sm:hidden'
       )}
       tagName="DocsPagination"
