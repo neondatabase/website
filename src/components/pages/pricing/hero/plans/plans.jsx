@@ -16,11 +16,6 @@ const Plans = () => {
   const [launchSize, setLaunchSize] = useState('small');
   const [scaleSize, setScaleSize] = useState('xlarge');
 
-  console.log('Imported constants:', {
-    LAUNCH_RESOURCE_SIZES,
-    SCALE_RESOURCE_SIZES,
-  });
-
   return (
     <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
       <h2 className="sr-only">Neon pricing plans</h2>
@@ -61,17 +56,6 @@ const Plans = () => {
             // Calculate price dynamically based on resource size and rates
             let displayPrice = 0;
 
-            console.log('Condition check:', {
-              planId,
-              hasDynamicPricing,
-              computeRate,
-              storageRate,
-              resourceSizes: !!resourceSizes,
-              currentSize,
-              launchSize,
-              scaleSize,
-            });
-
             if (
               hasDynamicPricing &&
               computeRate !== undefined &&
@@ -88,26 +72,9 @@ const Plans = () => {
                 const computeCost = Number(selectedResource.cu) * Number(computeRate);
                 const storageCost = Number(selectedResource.storage) * Number(storageRate);
                 displayPrice = Math.round(computeCost + storageCost);
-                console.log('Price calculation:', {
-                  planId,
-                  currentSize,
-                  selectedResource,
-                  computeRate,
-                  storageRate,
-                  computeCost,
-                  storageCost,
-                  displayPrice,
-                });
-              } else {
-                console.log('selectedResource not found or missing properties:', {
-                  currentSize,
-                  resourceSizes,
-                  selectedResource,
-                });
               }
             } else {
               displayPrice = price !== undefined ? price : 0;
-              console.log('Using static price:', { planId, price, displayPrice });
             }
 
             return (
