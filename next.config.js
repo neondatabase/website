@@ -559,12 +559,13 @@ const defaultConfig = {
     }));
 
     return {
-      // afterFiles: runs after checking pages/public files but before dynamic routes
-      // This ensures physical .md files are served first, with fallback to public/md/
+      // beforeFiles: run first so *.md URLs are rewritten before any page/dynamic route matches.
+      // Otherwise /docs/ai/ai-rules.md is handled by docs/[...slug] with slug containing ".md",
+      // getPostBySlug looks for .../ai-rules.md.md and returns null → 404.
+      beforeFiles: [...contentRewrites],
       afterFiles: [
         // Serve /llms.txt from /docs/llms.txt (canonical location is public/docs/llms.txt)
         { source: '/llms.txt', destination: '/docs/llms.txt' },
-        ...contentRewrites,
       ],
       // fallback: existing rewrites for external services
       fallback: [
