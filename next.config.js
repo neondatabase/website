@@ -471,6 +471,11 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/blog/autoscaling-report-2025',
+        destination: '/autoscaling-report',
+        permanent: true,
+      },
+      {
         source: '/open-source',
         destination: '/programs/open-source',
         permanent: true,

@@ -159,6 +159,12 @@ export default {
       'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
   },
+  autoscalingReport: {
+    title: 'Compute Autoscaling Report',
+    description: 'A deep-dive into the numbers behind Neon Autoscaling.',
+    imagePath: '/images/social-previews/compute-autoscaling-report.jpg',
+    pathname: LINKS.autoscalingReport,
+  },
   error: {
     title: 'Page Is Broken — Neon',
   },

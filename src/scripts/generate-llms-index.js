@@ -44,11 +44,21 @@ const COLLAPSED_ROUTES = {
   },
 };
 
+/** Display names for path segments (spelling/casing only; structure stays from directory) */
+const SECTION_DISPLAY_NAMES = {
+  ai: 'AI',
+  'data-api': 'Data API',
+  postgresql: 'PostgreSQL',
+};
+
 /**
  * Convert directory/file name to title case
  * e.g., "connect-intro" -> "Connect Intro"
+ * Uses SECTION_DISPLAY_NAMES for known casing (AI, Data API, PostgreSQL).
  */
 function toTitleCase(str) {
+  const key = str.toLowerCase();
+  if (SECTION_DISPLAY_NAMES[key]) return SECTION_DISPLAY_NAMES[key];
   return str
     .replace(/-/g, ' ')
     .replace(/_/g, ' ')
@@ -57,6 +67,7 @@ function toTitleCase(str) {
 
 /**
  * Scan a directory recursively and collect document metadata
+ * Sections/subsections are derived from directory structure only; display names use SECTION_DISPLAY_NAMES for casing.
  */
 async function scanDirectory(dirPath, baseContentPath) {
   const docs = [];
@@ -85,7 +96,7 @@ async function scanDirectory(dirPath, baseContentPath) {
           const content = await fs.readFile(fullPath, 'utf-8');
           const { data: frontmatter } = matter(content);
 
-          // Derive section from first directory level
+          // Derive section/subsection from path only (one section per top-level dir)
           const pathParts = relPath.split('/');
           const section = pathParts.length > 1 ? toTitleCase(pathParts[0]) : 'General';
           const subSection = pathParts.length > 2 ? toTitleCase(pathParts[1]) : null;
