@@ -943,6 +943,8 @@
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
+                - title: Auto-provision by domain
+                  slug: manage/orgs-auto-provision-domain
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
                 - title: Organizations API
