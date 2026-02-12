@@ -417,7 +417,11 @@
   .prose-doc.prose-branching {
     /* Headings */
     > h2 {
-      @apply mb-4 mt-12 text-[28px] font-normal tracking-[-0.05em] md:mt-9 md:text-2xl;
+      @apply mb-4 mt-12 text-[28px] font-normal leading-tight tracking-[-0.05em] md:mt-9 md:text-2xl;
+    }
+
+    > h3 {
+      @apply mb-4 mt-8 text-xl font-medium leading-snug tracking-tight;
     }
 
     /* Inline code */
