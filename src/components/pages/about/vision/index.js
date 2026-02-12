@@ -1,1 +1,3 @@
-export { default } from './vision';
+import Vision from './vision';
+
+export default Vision;
