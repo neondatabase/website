@@ -688,10 +688,10 @@ const AutoscalingChart = ({
       <div className="border border-gray-new-30 bg-gray-new-8">
         <div className={clsx(compact ? 'p-6' : 'p-8')}>
           {/* Header with controls */}
-          <div className="flex items-center justify-between">
+          <div className="relative mb-4">
             <h1
               className={clsx(
-                'font-mono font-medium text-white',
+                'text-center font-mono font-medium text-white',
                 compact ? 'text-base' : 'text-xl',
                 width === 'window' && !compact ? 'text-xl' : ''
               )}
@@ -699,7 +699,7 @@ const AutoscalingChart = ({
               {displayTitle}
             </h1>
             {!autoscalingOnly && showOverprovisionSelector && (
-              <div className="flex items-center gap-2.5">
+              <div className="absolute right-0 top-0 flex items-center gap-2.5">
                 <select
                   value={provisioningStrategy}
                   className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-none"
@@ -809,8 +809,8 @@ const AutoscalingChart = ({
                   <div className="-m-[25px] mt-4 border border-code-red-1 bg-code-red-1/10 p-3 font-mono text-xs">
                     <strong>Performance Degradations:</strong> <br />
                     Provisioned workload will exceed allocated resources{' '}
-                    {stats.performanceDegradations} times/month, potentially causing degraded
-                    performance or outages.
+                    <strong>{stats.performanceDegradations} times/month</strong>, potentially
+                    causing degraded performance or outages.
                   </div>
                 )}
               </div>
