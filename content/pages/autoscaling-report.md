@@ -113,7 +113,7 @@ Autoscaling helps turn load spikes that would cause late-night on-call pages and
 
 #### Autoscaling Events per Database
 
-The average production database running on Neon adjusts its compute size 11,354 times per month. To understand how it works, the documentation on [Neon Autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is the best place to start.
+The average production database running on Neon adjusts its compute size 32,016 times per month, or about once every 81 seconds. To understand how it works, the documentation on [Neon Autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is the best place to start.
 
 ### Production Example
 
