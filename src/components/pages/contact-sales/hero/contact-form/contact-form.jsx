@@ -3,8 +3,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
 import clsx from 'clsx';
+import { useSearchParams } from 'next/navigation';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -64,9 +65,27 @@ const schema = yup
 
 const labelClassName = 'text-sm text-gray-new-90';
 
+const azurePresetKey = 'azure-migration';
+
+const MESSAGE_PRESETS = {
+  [azurePresetKey]: "I'd like to migrate my Azure managed account.",
+};
+
+const getDefaultMessageFromSearchParams = (searchParams) => {
+  const messageParam = searchParams?.get('message');
+  if (messageParam === azurePresetKey) return MESSAGE_PRESETS[azurePresetKey];
+  return '';
+};
+
 const ContactForm = () => {
+  const searchParams = useSearchParams();
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
+
+  const defaultMessage = useMemo(
+    () => getDefaultMessageFromSearchParams(searchParams),
+    [searchParams]
+  );
 
   const {
     register,
@@ -78,6 +97,7 @@ const ContactForm = () => {
     defaultValues: {
       companySize: 'hidden',
       reasonForContact: 'hidden',
+      message: defaultMessage,
     },
   });
 
