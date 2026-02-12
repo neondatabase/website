@@ -139,42 +139,42 @@ This highlights another weak point of provisioned databases. **You can't buy exa
 [Neon read-replicas](/docs/introduction/read-replicas) are different than those in provisioned platforms because they don't replicate or duplicate data. They read from the same storage as the primary compute. This has a few benefits:
 
 <svg viewBox="0 0 900 320" style={{width: '100%', maxWidth: '56rem', margin: '2rem auto'}} xmlns="http://www.w3.org/2000/svg">
-  <text x="180" y="35" textAnchor="middle" fill="#73bf69" fontFamily="monospace" fontSize="16px" fontWeight="500">NEON</text>
-  <rect x="60" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
-  <text x="115" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Primary</text>
-  <text x="115" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
-  <rect x="190" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
-  <text x="245" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Read Replica</text>
-  <text x="245" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
-  <path d="M 115 130 L 115 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
-  <path d="M 245 130 L 245 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
-  <rect x="60" y="165" width="240" height="95" fill="#73bf69" fillOpacity="0.3" stroke="#73bf69" strokeWidth="2" rx="4"/>
-  <text x="180" y="208" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="15px" fontWeight="500">Shared Storage</text>
-  <text x="180" y="230" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="13px">(Single copy of data)</text>
-  <line x1="420" y1="45" x2="420" y2="270" stroke="#3d3d3d" strokeWidth="1" strokeDasharray="4,4"/>
-  <text x="660" y="35" textAnchor="middle" fill="#e8912d" fontFamily="monospace" fontSize="16px" fontWeight="500">PROVISIONED</text>
-  <rect x="520" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
-  <text x="585" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Primary Instance</text>
-  <rect x="540" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
-  <text x="585" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
-  <rect x="540" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
-  <text x="585" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
-  <rect x="690" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
-  <text x="755" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Read Replica</text>
-  <rect x="710" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
-  <text x="755" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
-  <rect x="710" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
-  <text x="755" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
-  <path d="M 650 130 L 690 130" stroke="#e8912d" strokeWidth="2" markerEnd="url(#arroworange)"/>
-  <text x="670" y="120" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="11px">replication</text>
-  <defs>
-    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#73bf69"/>
-    </marker>
-    <marker id="arroworange" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
-      <path d="M0,0 L0,6 L9,3 z" fill="#e8912d"/>
-    </marker>
-  </defs>
+<text x="180" y="35" textAnchor="middle" fill="#73bf69" fontFamily="monospace" fontSize="16px" fontWeight="500">NEON</text>
+<rect x="60" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
+<text x="115" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Primary</text>
+<text x="115" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+<rect x="190" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
+<text x="245" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Read Replica</text>
+<text x="245" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+<path d="M 115 130 L 115 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
+<path d="M 245 130 L 245 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
+<rect x="60" y="165" width="240" height="95" fill="#73bf69" fillOpacity="0.3" stroke="#73bf69" strokeWidth="2" rx="4"/>
+<text x="180" y="208" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="15px" fontWeight="500">Shared Storage</text>
+<text x="180" y="230" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="13px">(Single copy of data)</text>
+<line x1="420" y1="45" x2="420" y2="270" stroke="#3d3d3d" strokeWidth="1" strokeDasharray="4,4"/>
+<text x="660" y="35" textAnchor="middle" fill="#e8912d" fontFamily="monospace" fontSize="16px" fontWeight="500">PROVISIONED</text>
+<rect x="520" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
+<text x="585" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Primary Instance</text>
+<rect x="540" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
+<text x="585" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+<rect x="540" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
+<text x="585" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
+<rect x="690" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
+<text x="755" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Read Replica</text>
+<rect x="710" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
+<text x="755" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+<rect x="710" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
+<text x="755" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
+<path d="M 650 130 L 690 130" stroke="#e8912d" strokeWidth="2" markerEnd="url(#arroworange)"/>
+<text x="670" y="120" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="11px">replication</text>
+<defs>
+<marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0,6 L9,3 z" fill="#73bf69"/>
+</marker>
+<marker id="arroworange" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+<path d="M0,0 L0,6 L9,3 z" fill="#e8912d"/>
+</marker>
+</defs>
 </svg>
 
 | Feature             | Neon                                                     | Provisioned                                                   |
