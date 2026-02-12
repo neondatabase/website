@@ -234,6 +234,8 @@ const Content = ({
             ],
             rehypePlugins: [getCodeProps],
           },
+          blockJS: false,
+          blockDangerousJS: true,
         }}
       />
     )}
