@@ -1,13 +1,13 @@
 ---
 title: Connect MCP clients to Neon
 subtitle: Learn how to connect MCP clients such as Cursor, Claude Code, VS Code,
-  ChatGPT, and other tools to your Neon Postgres database.
+  ChatGPT, Jules, and other tools to your Neon Postgres database.
 summary: >-
   Covers the setup of connecting MCP clients like Cursor, Claude Code, and VS
   Code to the Neon Postgres database, including quick setup, OAuth
   authentication, and local server options.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.729Z'
+updatedOn: '2026-02-12T00:00:00.000Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.
@@ -378,6 +378,13 @@ Restart Zed (or enable the MCP server in settings). When the OAuth window opens,
 </Tabs>
 
 For more details, including workflow examples and troubleshooting, see [Get started with Zed and Neon Postgres MCP Server](/guides/zed-mcp-neon).
+
+## Jules
+
+1. Create a [Neon API key](/docs/manage/api-keys#creating-api-keys) from your Neon Console **Settings**.
+2. Go to [jules.google.com](https://jules.google.com) > **Settings** > **MCP** (or use [this direct link](https://jules.google.com/settings/mcp)).
+3. Click **Connect** on the Neon server and paste your API key when prompted.
+4. Run a task invoking the Neon MCP server to verify the connection.
 
 ## Other MCP clients
 
