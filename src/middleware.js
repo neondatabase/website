@@ -32,7 +32,12 @@ export async function middleware(req) {
 
       if (markdownPath) {
         try {
-          const markdownUrl = `${req.nextUrl.origin}${markdownPath}`;
+          // Fetch the public .md URL so the rewrite to /api/serve-doc-md applies
+          const pathWithoutTrailingSlash = pathname.replace(/\/$/, '');
+          const publicMdUrl = pathname.endsWith('.md')
+            ? pathWithoutTrailingSlash
+            : `${pathWithoutTrailingSlash}.md`;
+          const markdownUrl = `${req.nextUrl.origin}${publicMdUrl}`;
 
           const response = await fetch(markdownUrl);
 
@@ -41,7 +46,7 @@ export async function middleware(req) {
             if (response.status !== 404) {
               console.error('[AI Agent] Failed to fetch markdown', {
                 pathname,
-                markdownPath,
+                markdownUrl,
                 status: response.status,
               });
             }
