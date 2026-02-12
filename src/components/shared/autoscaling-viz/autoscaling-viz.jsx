@@ -160,7 +160,7 @@ const AutoscalingViz = ({
       </div>
 
       <div
-        className="flex scale-[0.6] cursor-pointer flex-col items-center justify-center gap-6 md:scale-100 md:flex-row md:gap-8 sm:scale-50"
+        className="flex cursor-pointer flex-row items-center justify-center gap-6 md:flex-col md:gap-8"
         role="button"
         tabIndex={0}
         onClick={handleToggle}
