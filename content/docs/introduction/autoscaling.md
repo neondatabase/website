@@ -1,8 +1,12 @@
 ---
 title: Autoscaling
 subtitle: An introduction to Neon's autoscaling
+summary: >-
+  Covers the setup of Neon's autoscaling feature, which automatically adjusts
+  compute resources based on demand, optimizing performance and cost without
+  manual intervention.
 enableTableOfContents: true
-updatedOn: '2026-01-28T07:08:36.341Z'
+updatedOn: '2026-02-06T22:07:33.084Z'
 ---
 
 Neon's _Autoscaling_ feature dynamically adjusts the amount of compute resources allocated to a Neon compute in response to the current load, eliminating the need for manual intervention or restarts.

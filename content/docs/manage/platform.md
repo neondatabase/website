@@ -3,7 +3,11 @@ title: Platform overview
 enableTableOfContents: true
 subtitle: Find information about managing all aspects of your database using the Neon
   platform
-updatedOn: '2026-01-27T12:19:44.643Z'
+summary: >-
+  Covers the management of user access, project resources, and collaboration
+  within the Neon platform, including account types, permissions, project setup,
+  and database management.
+updatedOn: '2026-02-06T22:07:33.120Z'
 ---
 
 ## Access & collaboration

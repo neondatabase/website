@@ -2,8 +2,12 @@
 title: Optimize pgvector search
 subtitle: Fine-tune parameters for efficient and accurate similarity searches in
   Postgres
+summary: >-
+  Step-by-step guide for optimizing `pgvector` searches in Postgres, focusing on
+  profiling queries, indexing strategies, and parameter tuning to enhance
+  performance and accuracy in AI applications.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.019Z'
+updatedOn: '2026-02-06T22:07:32.728Z'
 ---
 
 This guide explores how to effectively use `pgvector` for vector similarity searches in your AI applications. We'll address the following key questions:

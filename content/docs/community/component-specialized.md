@@ -1,8 +1,12 @@
 ---
 title: Component specialized guide
 subtitle: Specialized and less common components for specific use cases
+summary: >-
+  Covers the use of specialized MDX components in Neon for specific scenarios,
+  detailing when to select them, their technical requirements, and best
+  practices for implementation.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.316Z'
+updatedOn: '2026-02-06T22:07:32.779Z'
 ---
 
 A comprehensive reference for specialized and less commonly used MDX components in Neon documentation. This guide covers components used in specific scenarios, specialized workflows, and edge cases.

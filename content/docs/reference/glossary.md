@@ -1,10 +1,14 @@
 ---
 title: Glossary
+summary: >-
+  Covers definitions and explanations of key terms related to Neon's services,
+  including access tokens, compute activity metrics, user roles, API
+  authentication, and resource management operations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-01-29T16:44:02.632Z'
+updatedOn: '2026-02-06T22:07:33.144Z'
 ---
 
 ## access token
@@ -86,7 +90,7 @@ A Neon feature that allows you to create an isolated copy of your data for paral
 
 ### Business plan
 
-A [legacy paid plan](/docs/introduction/legacy-plans) designed for mid-to-large enterprises that require higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans).
+A legacy paid plan (no longer available) that was designed for mid-to-large enterprises requiring higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans) for current plan options.
 
 ## check_availability
 

@@ -1,8 +1,12 @@
 ---
 title: Data anonymization with GitHub Actions
 subtitle: Automate anonymized branch creation in your CI/CD pipeline
+summary: >-
+  Automate anonymized branch creation in your CI/CD pipeline using GitHub
+  Actions with the Neon Create Branch Action, allowing for the definition of
+  masking rules directly in your workflow.
 enableTableOfContents: true
-updatedOn: '2026-01-13T19:28:54.352Z'
+updatedOn: '2026-02-06T22:07:33.153Z'
 ---
 
 This page shows how to automate data anonymization with GitHub Actions. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).

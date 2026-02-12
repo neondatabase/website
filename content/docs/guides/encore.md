@@ -1,8 +1,12 @@
 ---
 title: Connect an Encore application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Encore.ts application
+summary: >-
+  Step-by-step guide for connecting an Encore application to Neon, including
+  installation, application creation, database schema definition, and API
+  endpoint setup for production deployments.
 enableTableOfContents: true
-updatedOn: '2025-12-17T22:36:32.013Z'
+updatedOn: '2026-02-06T22:07:32.960Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.

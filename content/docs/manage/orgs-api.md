@@ -1,7 +1,11 @@
 ---
 title: Manage organizations using the Neon API
+summary: >-
+  Covers managing Neon Organizations through the Neon API, including handling
+  organization API keys, member management, and invitations, with distinctions
+  between personal and organization API key usage.
 enableTableOfContents: true
-updatedOn: '2025-06-02T15:04:05.575Z'
+updatedOn: '2026-02-06T22:07:33.118Z'
 ---
 
 Learn how to manage Neon Organizations using the Neon API, including managing organization API keys, working with organization members, and handling member invitations.

@@ -1,8 +1,12 @@
 ---
 title: Connect a RedwoodSDK application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Redwood application
+summary: >-
+  Step-by-step guide for creating a Neon project and connecting it to a
+  RedwoodSDK application, including setting up dependencies and storing
+  connection credentials.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:48:41.463Z'
+updatedOn: '2026-02-06T22:07:33.041Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"

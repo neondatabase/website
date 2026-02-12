@@ -1,8 +1,12 @@
 ---
 title: The unaccent extension
 subtitle: Remove accents and diacritics for effective text searching in Postgres
+summary: >-
+  Covers the setup and usage of the `unaccent` extension in Postgres for
+  removing accents and diacritics from text, enhancing search capabilities in
+  multilingual applications on the Neon platform.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.250Z'
+updatedOn: '2026-02-06T22:07:32.850Z'
 ---
 
 The `unaccent` extension for Postgres enables handling of text data in a more user-friendly and language-tolerant way. It allows you to remove [accents/stress](<https://en.wikipedia.org/wiki/Stress_(linguistics)>) ([diacritic signs](https://en.wikipedia.org/wiki/Diacritic)) from text strings, making it easier to perform searches and comparisons that are insensitive to accents. This is particularly useful in multilingual applications where users might not consistently use accents when typing search queries.

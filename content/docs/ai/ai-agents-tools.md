@@ -1,8 +1,12 @@
 ---
 title: AI tools for Agents
 subtitle: AI-powered tools for development and database management
+summary: >-
+  Covers the integration of AI tools with Neon for database management,
+  including setup instructions, Model Context Protocol (MCP) usage, and plugins
+  for Claude Code and GitHub Copilot.
 enableTableOfContents: true
-updatedOn: '2026-02-04T14:57:09.212Z'
+updatedOn: '2026-02-06T22:07:32.712Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.

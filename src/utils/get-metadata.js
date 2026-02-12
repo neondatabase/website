@@ -17,6 +17,7 @@ export default function getMetadata({
   imagePath = DEFAULT_IMAGE_PATH,
   isPostgres = false,
   currentSlug = null,
+  markdownPath = null,
 }) {
   const SITE_URL =
     process.env.VERCEL_ENV === 'preview'
@@ -42,6 +43,7 @@ export default function getMetadata({
         : canonicalUrl,
       types: {
         'application/rss+xml': rssPathname ? `${SITE_URL}${rssPathname}` : null,
+        'text/markdown': markdownPath ? `${SITE_URL}${markdownPath}` : null,
       },
     },
     manifest: `${SITE_URL}/manifest.json`,

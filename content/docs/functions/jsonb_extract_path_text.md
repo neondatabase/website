@@ -1,8 +1,12 @@
 ---
 title: Postgres jsonb_extract_path_text() Function
 subtitle: Extracts a JSON sub-object at the specified path as text
+summary: >-
+  Covers the usage of the `jsonb_extract_path_text` function in Postgres for
+  extracting text from `JSONB` data at specified paths, facilitating easier text
+  manipulation and comparison.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.377Z'
+updatedOn: '2026-02-06T22:07:32.874Z'
 ---
 
 The `jsonb_extract_path_text` function is designed to simplify extracting text from `JSONB` data in Postgres. This function is similar to `jsonb_extract_path` — it also produces the value at the specified path from a `JSONB` object but casts it to plain text before returning. This makes it more straightforward for text manipulation and comparison operations.

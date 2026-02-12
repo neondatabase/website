@@ -1,13 +1,17 @@
 ---
 title: Connect from Prisma to Neon
 subtitle: Learn how to connect to Neon from Prisma
+summary: >-
+  Step-by-step guide for connecting a Prisma application to Neon using the
+  serverless driver adapter, including installation of dependencies, obtaining
+  connection strings, and configuring the Prisma schema.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/prisma
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-02-01T11:47:48.278Z'
+updatedOn: '2026-02-06T22:07:33.033Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

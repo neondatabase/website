@@ -1,8 +1,12 @@
 ---
 title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
+summary: >-
+  Covers the selection and implementation of various icon systems in Neon,
+  detailing available icons, usage guidelines, and best practices for effective
+  integration in components.
 enableTableOfContents: true
-updatedOn: '2026-02-02T12:37:39.433Z'
+updatedOn: '2026-02-06T22:07:32.778Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.

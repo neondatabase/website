@@ -2,8 +2,12 @@
 title: Connect a Python application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Python using psycopg, psycopg2, or
   asyncpg
+summary: >-
+  How to connect a Python application to a Neon Postgres database using psycopg,
+  psycopg2, or asyncpg, including steps for project creation and performing CRUD
+  operations.
 enableTableOfContents: true
-updatedOn: '2025-09-30T00:26:10.497Z'
+updatedOn: '2026-02-06T22:07:33.034Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 

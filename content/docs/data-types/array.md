@@ -1,8 +1,12 @@
 ---
 title: Postgres Array data type
 subtitle: Manage collections of elements using arrays
+summary: >-
+  Covers the usage of the `ARRAY` data type in Postgres for storing and
+  manipulating collections of elements, including syntax, storage, and practical
+  examples for managing related data efficiently.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.365Z'
+updatedOn: '2026-02-06T22:07:32.818Z'
 ---
 
 In Postgres, the `ARRAY` data type is used to store and manipulate collections of elements in a single column. An array can have variable length and one or more dimensions, but must hold elements of the same data type. Postgres provides a variety of functions and operators for working with arrays.

@@ -1,8 +1,12 @@
 ---
 title: Migrate from Supabase to Neon
 subtitle: Switch from Supabase Auth and Database to Neon in a few steps
+summary: >-
+  Step-by-step guide for migrating from Supabase to Neon, covering the
+  transition of authentication and database access using Neon Auth and Data API,
+  including necessary SDK installations and environment variable updates.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.614Z'
+updatedOn: '2026-02-06T22:07:32.760Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

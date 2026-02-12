@@ -2,10 +2,14 @@
 title: Database branching workflow primer
 subtitle: An introduction to integrating Postgres branching into your development
   workflow
+summary: >-
+  Covers the setup of Neon's database branching feature, enabling developers to
+  create isolated data branches quickly for integration into their workflows
+  using the Neon CLI or GitHub actions.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/workflow-primer
-updatedOn: '2026-01-24T16:13:09.590Z'
+updatedOn: '2026-02-06T22:07:32.900Z'
 ---
 
 With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.

@@ -1,9 +1,13 @@
 ---
 title: Replicate data with Kafka (Confluent) and Debezium
 subtitle: Learn how to replicate data from Neon with Kafka (Confluent) and Debezium
+summary: >-
+  Step-by-step guide for replicating data from a Neon Postgres database to a
+  Kafka cluster in Confluent Cloud using Debezium for real-time Change Data
+  Capture (CDC) events.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-07T12:28:56.611Z'
+updatedOn: '2026-02-06T22:07:33.011Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

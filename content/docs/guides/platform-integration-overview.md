@@ -1,13 +1,17 @@
 ---
 title: Integrating with Neon
 subtitle: Choose the right integration path for your platform or application
+summary: >-
+  Covers the integration options for incorporating Postgres into platforms and
+  applications, focusing on AI agent workflows and instant database provisioning
+  without user signup.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-01-13T19:29:46.134Z'
+updatedOn: '2026-02-06T22:07:33.031Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.

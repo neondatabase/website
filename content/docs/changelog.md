@@ -1,5 +1,9 @@
 ---
 title: Changelog
+summary: >-
+  Covers the updates and changes made to Neon's features, functionality, and
+  performance, providing a comprehensive history of modifications and
+  improvements.
 isDraft: false
-updatedOn: '2024-06-14T08:04:50.305Z'
+updatedOn: '2026-02-07T12:02:40.574Z'
 ---

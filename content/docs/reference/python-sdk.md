@@ -2,8 +2,12 @@
 title: Python SDK (Neon API)
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
+summary: >-
+  Covers the setup and usage of the Neon Python SDK, enabling programmatic
+  management of Neon projects, branches, databases, and other platform resources
+  through the Neon API.
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.744Z'
+updatedOn: '2026-02-06T22:07:33.147Z'
 ---
 
 <InfoBlock>

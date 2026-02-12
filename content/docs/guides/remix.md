@@ -1,8 +1,12 @@
 ---
 title: Connect a Remix application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Remix application
+summary: >-
+  How to connect a Remix application to a Neon project by creating a Neon
+  project, setting up a Remix project, and configuring connection settings
+  securely.
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.608Z'
+updatedOn: '2026-02-06T22:07:33.042Z'
 ---
 
 <Admonition type="note">

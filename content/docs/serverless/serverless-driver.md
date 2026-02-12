@@ -2,7 +2,11 @@
 title: Neon serverless driver
 enableTableOfContents: true
 subtitle: Connect to Neon from serverless environments over HTTP or WebSockets
-updatedOn: '2025-10-10T13:19:39.268Z'
+summary: >-
+  Covers the setup of the Neon serverless driver for JavaScript and TypeScript,
+  enabling low-latency Postgres queries over HTTP or WebSockets in serverless
+  environments.
+updatedOn: '2026-02-06T22:07:33.151Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 

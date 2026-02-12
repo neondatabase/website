@@ -1,8 +1,12 @@
 ---
 title: Postgres sum() function
 subtitle: Calculate the sum of a set of values
+summary: >-
+  Covers the usage of the Postgres `sum()` function to calculate totals of
+  numeric values, including examples for basic calculations and aggregating data
+  with `GROUP BY`.
 enableTableOfContents: true
-updatedOn: '2024-06-29T11:31:24.999Z'
+updatedOn: '2026-02-06T22:07:32.883Z'
 ---
 
 The Postgres `sum()` function calculates the total of a set of numeric values.

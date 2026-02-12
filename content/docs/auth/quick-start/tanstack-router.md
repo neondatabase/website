@@ -1,8 +1,12 @@
 ---
 title: Use Neon Auth with TanStack Router
 subtitle: Set up authentication using pre-built UI components
+summary: >-
+  Step-by-step guide for setting up Neon Auth with TanStack Router, including
+  project creation, SDK installation, environment variable configuration, and
+  style integration.
 enableTableOfContents: true
-updatedOn: '2026-01-05T20:32:04.267Z'
+updatedOn: '2026-02-06T22:07:32.771Z'
 layout: wide
 ---
 

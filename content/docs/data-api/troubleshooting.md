@@ -1,8 +1,12 @@
 ---
 title: Data API troubleshooting
 subtitle: Common issues and solutions when using the Neon Data API
+summary: >-
+  Covers common issues and solutions for troubleshooting the Neon Data API,
+  including permission errors and JWT validation failures, along with steps to
+  resolve them.
 enableTableOfContents: true
-updatedOn: '2026-01-13T19:27:59.709Z'
+updatedOn: '2026-02-06T22:07:32.817Z'
 ---
 
 <InfoBlock>

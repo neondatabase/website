@@ -2,8 +2,13 @@
 title: Database versioning with snapshots
 subtitle: How AI agents and codegen platforms implement database version control using
   snapshots and preview branches
+summary: >-
+  Covers the implementation of database versioning using Neon's snapshot APIs,
+  enabling the creation of point-in-time database versions, instant rollbacks,
+  and stable connection strings for applications in AI agent and code generation
+  contexts.
 enableTableOfContents: true
-updatedOn: '2025-12-29T16:46:32.125Z'
+updatedOn: '2026-02-06T22:07:32.718Z'
 ---
 
 <Admonition type="note" title="Beta">

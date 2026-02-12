@@ -1,8 +1,12 @@
 ---
 title: Neon CLI commands — auth
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
+summary: >-
+  Covers the usage of the `auth` command in the Neon CLI for user
+  authentication, detailing the process of authorizing access to a Neon account
+  and managing credentials.
 enableTableOfContents: true
-updatedOn: '2025-07-12T14:19:52.053Z'
+updatedOn: '2026-02-06T22:07:33.129Z'
 ---
 
 ## Before you begin

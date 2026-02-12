@@ -1,8 +1,12 @@
 ---
 title: Monitor query performance
 subtitle: View and analyze query performance for your Neon database
+summary: >-
+  Covers the monitoring of query performance in a Neon database, detailing how
+  to access and analyze query history through the Neon Console's Monitoring
+  page.
 enableTableOfContents: true
-updatedOn: '2025-10-22T15:44:06.425Z'
+updatedOn: '2026-02-06T22:07:33.093Z'
 redirectFrom:
   - /docs/introduction/monitor-query-history
 ---

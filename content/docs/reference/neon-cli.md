@@ -1,10 +1,14 @@
 ---
 title: Neon CLI
 subtitle: Use the Neon CLI to manage Neon directly from the terminal
+summary: >-
+  How to manage Neon using the command-line interface (CLI), including
+  installation instructions for macOS, Windows, and Linux, along with available
+  commands and options.
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/cli-create-app
-updatedOn: '2025-11-28T18:21:08.473Z'
+updatedOn: '2026-02-06T22:07:33.146Z'
 ---
 
 The Neon CLI is a command-line interface that lets you manage Neon directly from the terminal. This documentation references all commands and options available in the Neon CLI.
