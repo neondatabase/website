@@ -93,7 +93,7 @@ Across the entire Neon platform in December 2025, the average production databas
 
 #### Cost
 
-When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">50% lower compute costs on Neon</span> on average.
+When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.1/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">50% lower compute costs on Neon</span> on average.
 
 <Admonition title="Why is cost savings less than compute savings?" type="info">
   Provisioned platforms run Postgres for you on a Virtual Machine (VM) managed by the provider. So the cost of compute in provisioned closely tracks commodity VM prices. 
