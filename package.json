@@ -96,7 +96,7 @@
     "react-share": "^5.1.0",
     "react-tooltip": "^5.26.3",
     "react-use": "^17.5.0",
-    "remark-gfm": "^3.0.1",
+    "remark-gfm": "^4.0.1",
     "rss": "^1.2.2",
     "slugify": "^1.6.6",
     "swiper": "^11.1.5",
