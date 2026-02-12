@@ -6,10 +6,10 @@ updatedOn: '2025-06-17T09:00:00.000Z'
 
 ### Summary
 
-- The average production database on Neon uses <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> and <span className="bg-green-45/20 text-green-45 p-1">50% less cost</span> than if it were running on a provisioned platform.
+- Production databases on Neon use <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> and <span className="bg-green-45/20 text-green-45 p-1">50% less cost</span> than if it were running on a provisioned platform.
 - Putting the same Neon production workloads on a provisioned platform would result in <span className="bg-secondary-1/20 text-secondary-1 p-1">55 performance degradations</span> per db per month because even provisioning at P99.5 + 20% doesn't account for the most extreme load spikes.
-- Read replicas on Neon use <span className="bg-green-45/20 text-green-45 p-1">4x less compute</span> than if they were running on a provisioned platform because they make use of both autoscaling and scale to zero.
-- Running small scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned costs 7.5x more</span> than Neon.
+- Read replicas on Neon use <span className="bg-green-45/20 text-green-45 p-1">4x less compute</span> than if they were running on a provisioned platform because of how well autoscaling aligns with their use cases.
+- Running the same small scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned would cost 7.5x more</span> than Neon.
 
 We arrive at these numbers by comparing the amount of compute used on Neon to the amount of compute it would take to run the same workloads on a provisioned (non-autoscaling) platform like RDS or Heroku. These numbers are using Dec, 2025 data.
 
@@ -91,10 +91,6 @@ Across the entire Neon platform in December 2025, the average production databas
 
 <AutoscalingViz />
 
-#### Read-Replica Compute
-
-[Neon read-replicas](/docs/introduction/read-replicas) are different than thos in provisioned platforms because they don't replicate or duplicate data—they read from the same storage as the primary compute. Each read replica can independently autoscale and scale to zero. Because of this, when we apply the same comparison logic as above we find they are <span className="bg-green-45/20 text-green-45 p-1">4x more efficient</span> than if they were running on a provisioned platform, and <span className="bg-green-45/20 text-green-45 p-1">78% lower cost</span>.
-
 #### Cost
 
 When we factor in the cost of each production database _(which varies depending on if the account is on the Scale or Launch plan)_ and compare it with a conservative `$0.132/CU-hour` equivalent for provisioned databases, that equates to <span className="bg-green-45/20 text-green-45 p-1">50% lower compute costs on Neon</span> on average.
@@ -138,6 +134,93 @@ This highlights another weak point of provisioned databases. **You can't buy exa
 
 ---
 
+## Read Replicas
+
+[Neon read-replicas](/docs/introduction/read-replicas) are different than those in provisioned platforms because they don't replicate or duplicate data. They read from the same storage as the primary compute. This has a few benefits:
+
+<svg viewBox="0 0 900 320" style={{width: '100%', maxWidth: '56rem', margin: '2rem auto'}} xmlns="http://www.w3.org/2000/svg">
+  {/* Neon Side */}
+  <text x="180" y="35" textAnchor="middle" fill="#73bf69" fontFamily="monospace" fontSize="16px" fontWeight="500">NEON</text>
+
+  {/* Neon Compute Layer */}
+  <rect x="60" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
+  <text x="115" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Primary</text>
+  <text x="115" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+
+  <rect x="190" y="60" width="110" height="70" fill="#73bf69" fillOpacity="0.2" stroke="#73bf69" strokeWidth="2" rx="4"/>
+  <text x="245" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Read Replica</text>
+  <text x="245" y="108" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+
+  {/* Arrows from compute to storage */}
+  <path d="M 115 130 L 115 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
+  <path d="M 245 130 L 245 165" stroke="#73bf69" strokeWidth="2" markerEnd="url(#arrowgreen)"/>
+
+  {/* Neon Storage Layer */}
+  <rect x="60" y="165" width="240" height="95" fill="#73bf69" fillOpacity="0.3" stroke="#73bf69" strokeWidth="2" rx="4"/>
+  <text x="180" y="208" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="15px" fontWeight="500">Shared Storage</text>
+  <text x="180" y="230" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="13px">(Single copy of data)</text>
+
+  {/* Divider */}
+  <line x1="420" y1="45" x2="420" y2="270" stroke="#3d3d3d" strokeWidth="1" strokeDasharray="4,4"/>
+
+  {/* Provisioned Side */}
+  <text x="660" y="35" textAnchor="middle" fill="#e8912d" fontFamily="monospace" fontSize="16px" fontWeight="500">PROVISIONED</text>
+
+  {/* Primary Instance */}
+  <rect x="520" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
+  <text x="585" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Primary Instance</text>
+
+  <rect x="540" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
+  <text x="585" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+
+  <rect x="540" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
+  <text x="585" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
+
+  {/* Read Replica Instance */}
+  <rect x="690" y="60" width="130" height="165" fill="#e8912d" fillOpacity="0.1" stroke="#e8912d" strokeWidth="2" rx="4"/>
+  <text x="755" y="90" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px" fontWeight="500">Read Replica</text>
+
+  <rect x="710" y="105" width="90" height="50" fill="#e8912d" fillOpacity="0.2" stroke="#e8912d" strokeWidth="1" rx="2"/>
+  <text x="755" y="135" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Compute</text>
+
+  <rect x="710" y="165" width="90" height="50" fill="#e8912d" fillOpacity="0.3" stroke="#e8912d" strokeWidth="1" rx="2"/>
+  <text x="755" y="195" textAnchor="middle" fill="#e5e5e5" fontFamily="monospace" fontSize="13px">Storage</text>
+
+  {/* Streaming Replication Arrow */}
+  <path d="M 650 130 L 690 130" stroke="#e8912d" strokeWidth="2" markerEnd="url(#arroworange)"/>
+  <text x="670" y="120" textAnchor="middle" fill="#b0b0b0" fontFamily="monospace" fontSize="11px">replication</text>
+
+  {/* Arrow markers */}
+  <defs>
+    <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#73bf69"/>
+    </marker>
+    <marker id="arroworange" markerWidth="10" markerHeight="10" refX="5" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#e8912d"/>
+    </marker>
+  </defs>
+</svg>
+
+| Feature | Neon | Provisioned |
+|---------|------|-------------|
+| **Storage costs** | No increase when adding replicas | Adding a replica doubles storage costs |
+| **Compute scaling** | Each replica independently autoscales and scales to zero | Replicas typically sized similarly to primary to avoid issues |
+| **Creation time** | Seconds, regardless of database size | Hours for large databases |
+
+This makes read replicas on Neon particularly valuable not just for horizontally scaling reads, but also for offloading ad-hoc or analytical queries and anything else that you may not want to impact primary performance.
+
+### Read Replica Statistics
+
+When we apply the same comparison logic as we did with production databases above, we find that read replicas on Neon are <span className="bg-green-45/20 text-green-45 p-1">4x more efficient</span> than if they were running on a provisioned platform, and <span className="bg-green-45/20 text-green-45 p-1">78% lower cost.</span>
+
+<AutoscalingViz multiplier={4} provisionedTotal={160} autoscalingTotal={40} label="read replica" />
+
+Read replicas are more compute-efficient than standard production databases because of the different ways they are used: The compute efficiency of a read replica that is only used to scale out reads is fairly similar to the 2.4x stat we saw in the standard production category. But many read replicas on Neon have particularly spiky loads, leading us to infer that they are likely used for things like analytics, ad-hoc analysis, and batch work. The spikier the workload, the more pronounced the compute savings relative to a provisioned platform.
+
+This efficiency even accounts for cases where read replicas are created and destroyed on-demand in Neon. If a replica only exists for one day, we only compare it to one day of provisioned cost.
+
+---
+
 ## Scale to Zero
 
 In one of the features unique to Neon, compute can be configured to shut down entirely when there are no active connections and turn back on in [350ms](https://neon-latency-benchmarks.vercel.app/) when needed.
@@ -155,6 +238,8 @@ If we tally up the compute used by small non-production databases that scale to 
 
 A provisioned platform that cannot scale to zero would use <span className="bg-secondary-1/20 text-secondary-1 p-1">13.7x more compute</span> to run the same small database workloads as Neon.
 This is using the same P99.5 + 20% methodology as before.
+
+<AutoscalingViz multiplier={13.7} provisionedTotal={140} autoscalingTotal={10} label="scale-to-zero database" />
 
 #### Costs
 
@@ -185,7 +270,7 @@ The smallest instance we can buy on RDS is the [`db.t4g.micro`](https://instance
 
 We've been careful to make these numbers as conservative as possible. For example:
 
-1. We ignore the fact that Neon comes with durability and high availability built-in, while provisioned platforms require you to triple your compute footprint to get durability.
+1. We ignore the fact that Neon comes with storage durability and high availability built-in, while provisioned platforms require you to triple your compute footprint to get durability.
 2. We compute the size of provisioned instance needed per database each month. That assumes on a provisioned platform the operator would be resizing the database monthly for maximum efficiency.
 3. When a Neon database scales to zero and never comes back on, we immediately stop tallying up equivalent provisioned costs. In reality many idle databases on provisioned platforms are forgotten about until an invoice or audit exposes them and someone manually terminates them.
 
@@ -198,12 +283,19 @@ We've excluded all databases on the Neon Free Plan from this analysis.
 
 ### Sizing workloads
 
-We use P99.5 + 20% as the default over-provisioning setting following the default logic of [AWS RDS rightsizing tool](https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html). To compute the P99.5 for each database we look at the autoscaling history that month and discard the 0.5% of time where the database was scaled largest. So if a database spent 1% of time scaled up to 8CU, the P99.5 would be 8CU. If a database spent only 0.25% of time scaled up to 8CU the P99.5 would be lower.
+We use P99.5 + 20% as the default over-provisioning setting following the default logic of [AWS RDS rightsizing tool](https://docs.aws.amazon.com/compute-optimizer/latest/ug/rightsizing-preferences.html). To compute the P99.5 + 20% for each database we:
+
+1. Start with the dataset of that endpoint's autoscaling history for the month 
+2. Discard the 0.5% of time where the database was scaled largest.
+3. Find the maximum remaining size.
+4. Add 20% to it.
+
+So if a database spent 1% of time scaled up to 8CU, the P99.5 would be 8CU and the P99.5 + 20% would be 9.6CU. If a database spent only 0.25% of time scaled up to 8CU the P99.5 would be lower.
 
 ### Provisioned costs
 
 - **Small Databases** - We used a `$0.065` per CU-hour equivalent rate based on the equivalent hourly cost of small provisioned databases across RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
-- **Large Databases** - We used a `$0.1` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger production-grade instances on provisioned database platforms like RDS, Google Cloud SQL, Heroku, DigitalOcean and PlanetScale.
+- **Large Databases** - We used a `$0.1` per CU-hour equivalent rate by starting with an equivalent hourly cost of larger production-grade instances on provisioned database platforms like RDS, Google Cloud SQL, Heroku, DigitalOcean and Aiven.
 
 ### Counting Incidents
 

@@ -128,6 +128,35 @@ const AutoscalingChart = ({
   const dataset = DATA[datasetKey] || DATA[Object.keys(DATA)[0]];
   const displayTitle = title || dataset.name || 'Database Autoscaling';
 
+  // Create pattern for provisioned allocation background
+  const createXPattern = useCallback(() => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const size = 20; // Pattern repeat size
+    canvas.width = size;
+    canvas.height = size;
+
+    // Fill with base orange color
+    ctx.fillStyle = 'rgba(232, 145, 45, 0.5)';
+    ctx.fillRect(0, 0, size, size);
+
+    // Draw X pattern in slightly darker orange (reduced contrast)
+    ctx.strokeStyle = 'rgba(232, 145, 45, 0.2)';
+    ctx.lineWidth = 1.5;
+
+    // Draw X
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.setLineDash([8, 12]);
+    ctx.lineTo(size, size);
+    ctx.moveTo(size, 0);
+    ctx.setLineDash([8, 12]);
+    ctx.lineTo(0, size);
+    ctx.stroke();
+
+    return ctx.createPattern(canvas, 'repeat');
+  }, []);
+
   // Convert dataset to chart data format
   const convertDatasetToChartData = useCallback((ds) => {
     const data = [];
@@ -244,7 +273,7 @@ const AutoscalingChart = ({
       (datasetKey && datasetKey.includes('actual')) ||
       (datasetKeys && datasetKeys[0].includes('actual'))
     ) {
-      datasetColors.unshift({ border: '#3b82f6', background: '#3b82f666' }); // Blue for actual compute
+      datasetColors.unshift({ border: '#3b82f6', background: '#3b82f6' }); // Blue for actual compute
     }
 
     // Convert all datasets to chart data
@@ -344,6 +373,7 @@ const AutoscalingChart = ({
     });
 
     if (!autoscalingOnly) {
+      const pattern = createXPattern();
       chartDatasets.push({
         label: 'Provisioned Allocation',
         data: [
@@ -351,7 +381,7 @@ const AutoscalingChart = ({
           { x: new Date(lastDate), y: fixedCU },
         ],
         borderColor: '#e8912d',
-        backgroundColor: 'rgba(232, 145, 45, 0.5)',
+        backgroundColor: pattern,
         borderWidth: 1.5,
         fill: true,
         pointRadius: 0,
@@ -380,6 +410,7 @@ const AutoscalingChart = ({
     provisioningStrategy,
     autoscalingOnly,
     progressive,
+    createXPattern,
   ]);
 
   // Recalculate when costs change
@@ -558,14 +589,15 @@ const AutoscalingChart = ({
     plugins: {
       legend: {
         display: datasetKeys || !autoscalingOnly,
-        position: 'top',
+        position: 'bottom',
         align: 'end',
         labels: {
           color: '#d8d9da',
-          usePointStyle: true,
+          usePointStyle: false,
           padding: 15,
           font: {
             size: 12,
+            family: 'monospace',
           },
         },
       },
@@ -649,59 +681,55 @@ const AutoscalingChart = ({
     <div
       ref={containerRef}
       className={clsx(
-        'text-gray-200',
-        compact ? 'p-1 py-2' : 'p-2 py-4',
-        width === 'window'
-          ? 'relative left-[50%] z-10 w-[90vw] -translate-x-1/2 bg-black-pure'
-          : 'w-full'
+        'text-gray-200 not-prose',
+        width === 'window' ? 'relative left-[50%] z-10 w-[90vw] -translate-x-1/2' : 'w-full'
       )}
     >
-      {/* Header with controls */}
-      <div className="flex items-center justify-between">
-        <h1
-          className={clsx(
-            'font-medium text-white',
-            compact ? 'text-base' : 'text-xl',
-            width === 'window' && !compact ? 'text-xl' : ''
-          )}
-        >
-          {displayTitle}
-        </h1>
-        {!autoscalingOnly && showOverprovisionSelector && (
-          <div className="flex items-center gap-2.5">
-            <select
-              value={provisioningStrategy}
-              className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 rounded border px-4 py-2 text-sm transition-all focus:border-[#73bf69] focus:outline-none"
-              onChange={handleProvisioningStrategyChange}
+      <div className="border border-gray-new-30 bg-gray-new-8">
+        <div className={clsx(compact ? 'p-6' : 'p-8')}>
+          {/* Header with controls */}
+          <div className="flex items-center justify-between">
+            <h1
+              className={clsx(
+                'font-mono font-medium text-white',
+                compact ? 'text-base' : 'text-xl',
+                width === 'window' && !compact ? 'text-xl' : ''
+              )}
             >
-              <option value="p99.5+20">P99.5 + 20% (AWS default)</option>
-              <option value="p99.5">P99.5</option>
-              <option value="p100">P100 (Max)</option>
-              <option value="p99.5-20">P99.5 - 20%</option>
-            </select>
+              {displayTitle}
+            </h1>
+            {!autoscalingOnly && showOverprovisionSelector && (
+              <div className="flex items-center gap-2.5">
+                <select
+                  value={provisioningStrategy}
+                  className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-none"
+                  onChange={handleProvisioningStrategyChange}
+                >
+                  <option value="p99.5+20">P99.5 + 20% (AWS default)</option>
+                  <option value="p99.5">P99.5</option>
+                  <option value="p100">P100 (Max)</option>
+                  <option value="p99.5-20">P99.5 - 20%</option>
+                </select>
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      {/* Chart */}
-      <div
-        className={clsx(
-          'rounded border border-gray-new-10 bg-black-new',
-          compact ? 'mb-3 h-[250px] p-3' : 'mb-5 h-[500px] p-5'
-        )}
-      >
-        <Line ref={chartRef} data={chartData} options={chartOptions} />
+          {/* Chart */}
+          <div className={clsx('bg-[#131415]', compact ? 'h-[250px] p-3' : 'h-[500px] p-5')}>
+            <Line ref={chartRef} data={chartData} options={chartOptions} />
+          </div>
+        </div>
       </div>
 
       {/* Stats */}
       {showStats && (
-        <div className="flex flex-wrap items-start justify-center gap-4">
+        <div className="flex flex-wrap items-start justify-center gap-0">
           {/* Autoscaling Stats - Combined Panel */}
-          <div className="border-gray-700 bg-gray-800 rounded border border-l-[3px] border-l-[#73bf69] bg-gray-1 px-5 py-4">
-            <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#73bf69]">
+          <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+            <h3 className="mb-3 mt-0 font-mono text-xs font-medium uppercase tracking-wide text-[#73bf69]">
               Autoscaling
             </h3>
-            <div className="space-y-2">
+            <div className="space-y-2 font-mono">
               <div className="flex items-baseline justify-between gap-4">
                 <span className="text-gray-400 text-sm">Compute</span>
                 <div className="text-right">
@@ -739,62 +767,59 @@ const AutoscalingChart = ({
           {/* Provisioned Stats - Combined Panel */}
           {!autoscalingOnly && (
             <>
-              <div className="border-gray-700 bg-gray-800 flex flex-col gap-2 rounded border border-l-[3px] border-l-[#e8912d] bg-gray-1 px-5 py-4">
-                <div>
-                  <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#e8912d]">
-                    Provisioned Equivalent
-                  </h3>
-                  <div className="space-y-2">
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-gray-400 text-sm">Compute</span>
-                      <div className="text-right">
-                        <div className="text-xl font-light tabular-nums text-white">
-                          {(stats.fixedCUHours / 720).toFixed(1)} vCPU /{' '}
-                          {((stats.fixedCUHours / 720) * 4).toFixed(0)} GB
-                        </div>
-                        <div className="text-gray-500 text-xs">
-                          ({stats.fixedCUHours} CU-hrs/mon)
-                        </div>
+              <div className="-ml-[1px] -mt-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6">
+                <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#e8912d]">
+                  Provisioned Equivalent
+                </h3>
+                <div className="space-y-2 font-mono">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-400 text-sm">Compute</span>
+                    <div className="text-right">
+                      <div className="text-xl font-light tabular-nums text-white">
+                        {(stats.fixedCUHours / 720).toFixed(1)} vCPU /{' '}
+                        {((stats.fixedCUHours / 720) * 4).toFixed(0)} GB
                       </div>
+                      <div className="text-gray-500 text-xs">({stats.fixedCUHours} CU-hrs/mon)</div>
                     </div>
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-gray-400 text-sm">Equivalent Rate</span>
-                      <div className="flex items-baseline">
-                        <span className="text-xl font-light text-white">$</span>
-                        <input
-                          type="number"
-                          value={fixedCost}
-                          step="0.001"
-                          min="0"
-                          className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
-                          onChange={(e) => setFixedCost(parseFloat(e.target.value))}
-                        />
-                        <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
-                      </div>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-400 text-sm">Equivalent Rate</span>
+                    <div className="flex items-baseline">
+                      <span className="text-xl font-light text-white">$</span>
+                      <input
+                        type="number"
+                        value={fixedCost}
+                        step="0.001"
+                        min="0"
+                        className="border-gray-700 w-20 border-b bg-gray-3/40 text-right text-xl font-light tabular-nums text-white focus:border-[#73bf69] focus:outline-none"
+                        onChange={(e) => setFixedCost(parseFloat(e.target.value))}
+                      />
+                      <span className="text-gray-500 ml-2 text-xs font-normal">/CU-hr</span>
                     </div>
-                    <div className="flex items-baseline justify-between gap-4">
-                      <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
-                      <span className="text-2xl font-light tabular-nums text-white">
-                        ${stats.fixedCostTotal}
-                      </span>
-                    </div>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <span className="text-gray-300 text-sm font-medium">Monthly Cost</span>
+                    <span className="text-2xl font-light tabular-nums text-white">
+                      ${stats.fixedCostTotal}
+                    </span>
                   </div>
                 </div>
                 {/* Performance Degradations Warning */}
                 {stats.performanceDegradations > 0 && (
-                  <div className="max-w-64 rounded border border-code-red-1 bg-code-red-1/10 p-2 text-xs">
+                  <div className="-m-[25px] mt-4 border border-code-red-1 bg-code-red-1/10 p-3 font-mono text-xs">
                     <strong>Performance Degradations:</strong> <br />
-                    Workload will exceed provisioned allocation {stats.performanceDegradations}{' '}
-                    times/month, potentially causing degraded performance or outages.
+                    Provisioned workload will exceed allocated resources{' '}
+                    {stats.performanceDegradations} times/month, potentially causing degraded
+                    performance or outages.
                   </div>
                 )}
               </div>
 
               {/* Comparison Summary - Redesigned */}
-              <div className="border-gray-700 border-t-blue-500 bg-gray-800 rounded border border-t-[3px] bg-gray-1 px-5 py-4">
-                <div className="grid grid-cols-3 gap-4">
+              <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
+                <div className="grid grid-cols-3 gap-0 font-mono">
                   {/* Compute Winner */}
-                  <div className="text-center">
+                  <div className="px-4 text-center">
                     <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
                       Compute Winner
                     </div>
@@ -820,7 +845,7 @@ const AutoscalingChart = ({
                   </div>
 
                   {/* Cost Winner */}
-                  <div className="border-gray-700 border-l border-r text-center">
+                  <div className="border-l border-r border-gray-new-30 px-4 text-center">
                     <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
                       Cost Winner
                     </div>
@@ -845,7 +870,7 @@ const AutoscalingChart = ({
                   </div>
 
                   {/* Monthly Savings */}
-                  <div className="text-center">
+                  <div className="px-4 text-center">
                     <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">
                       Monthly Savings
                     </div>
