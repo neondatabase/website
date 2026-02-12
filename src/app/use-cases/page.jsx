@@ -32,7 +32,7 @@ const transformUseCasesData = (items) =>
         author: `${caseStudyPost.author?.name}${caseStudyPost.author?.post ? ` – ${caseStudyPost.author.post}` : ''}`,
         caseStudyLink: getCaseStudyLink(caseStudyPost),
       },
-      tags: item.useCaseTags?.nodes?.map((tag) => ({ title: tag.name, icon: 'incognito' })) || [],
+      tags: item.useCaseTags?.nodes?.map((tag) => ({ title: tag.name, slug: tag.slug })) || [],
     };
   });
 

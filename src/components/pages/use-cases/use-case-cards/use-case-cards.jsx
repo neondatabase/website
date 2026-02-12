@@ -133,19 +133,14 @@ const UseCaseCard = ({
         {/* Tags - footer of left section */}
         {tags && tags.length > 0 && (
           <ul className="mt-auto flex flex-wrap gap-3.5 md:gap-3">
-            {tags.map(({ title: tagTitle, icon: tagIcon }) => {
-              const TagIconComponent = tagIcon && ICONS[tagIcon];
+            {tags.map(({ title: tagTitle, slug: tagSlug }) => {
+              const TagIconComponent = tagSlug && ICONS[tagSlug];
               return (
                 <li
                   className="flex h-[30px] items-center gap-2 rounded-sm bg-gray-new-15/90 px-2 py-1.5 md:h-[26px] md:gap-1.5 md:px-1.5 md:py-[5px]"
                   key={tagTitle}
                 >
-                  {TagIconComponent && (
-                    <TagIconComponent
-                      className="h-4 w-4 text-gray-new-94 md:h-3 md:w-3"
-                      aria-hidden
-                    />
-                  )}
+                  {TagIconComponent && <TagIconComponent className="" aria-hidden />}
                   <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 md:text-[0.625rem]">
                     {tagTitle}
                   </span>
