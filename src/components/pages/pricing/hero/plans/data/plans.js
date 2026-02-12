@@ -31,10 +31,7 @@ export default [
       },
       backend: {
         title: 'Backend',
-        features: [
-          { title: 'Auth: built on Better Auth' },
-          { title: 'Data API: PostgREST compatible' },
-        ],
+        features: [{ title: 'Auth: 60k MAU' }, { title: 'PostgREST-compatible Data API' }],
       },
       other: {
         title: 'Features',
