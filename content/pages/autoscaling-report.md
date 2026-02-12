@@ -127,7 +127,7 @@ Not only is autoscaling cheaper and more efficient, but this exact workload runn
 
 #### Checking the math with actual RDS instances
 
-The compute for this exact database costs <span className="bg-green-45/20 text-green-45 p-1">$128/month</span> on Neon.
+The compute for this exact database costs <span className="bg-green-45/20 text-green-45 p-1">$217.16/month</span> on Neon.
 The closest m-series latest-generation RDS instances that fit the provisioned specs necessary to run this workload are [`db.m8g.2xlarge`](https://instances.vantage.sh/aws/rds/db.m8g.4xlarge) with 8 CPU and 32GB RAM at `$0.672/hour` costing <span className="bg-secondary-1/20 text-secondary-1 p-1">$504/month</span> which is even more expensive than our $345.60/month estimate.
 
 This highlights another weak point of provisioned databases. **You can't buy exactly the compute you need.** There is no 4.8CPU 19GB RAM RDS instance, so you are forced to "round up" to the next largest instance.
