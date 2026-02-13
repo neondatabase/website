@@ -26,7 +26,7 @@ Organizations have two main member roles:
 
 For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
 
-You can also [auto-provision members by email domain](/docs/manage/orgs-auto-provision-domain) so that users whose email matches a verified domain are added to the organization automatically when they sign up or log in.
+You can also [auto-provision members by email domain](/docs/manage/orgs-add-members-by-domain) so that users whose email matches a verified domain are added to the organization automatically when they sign up or log in.
 
 ## Creating a new organization
 
