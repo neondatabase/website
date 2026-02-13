@@ -25,7 +25,7 @@ After confirming, you'll be directed to your new organization's **Projects** pag
 
 ## Invite Members
 
-Only Admins have the authority to invite new Members to the organization. Invitations are issued via email. If a recipient does not have a Neon account, they will receive instructions to create one.
+Only Admins have the authority to invite new Members to the organization. Invitations are issued via email. If a recipient does not have a Neon account, they will receive instructions to create one. Alternatively, you can [auto-provision members by domain](/docs/manage/orgs-add-members-by-domain) so that users with a matching email domain are added automatically when they sign up or log in.
 
 ![organizations people tab](/docs/manage/orgs_people.png)
 
