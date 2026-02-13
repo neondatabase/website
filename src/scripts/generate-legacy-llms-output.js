@@ -52,7 +52,7 @@ function shouldExcludeFile(relativePath, filename) {
   // Check excluded patterns (simple glob matching)
   for (const pattern of LLMS_EXCLUDED_PATTERNS) {
     // Convert glob pattern to regex
-    const regex = new RegExp(`^${pattern.replace('*', '.*')}$`);
+    const regex = new RegExp(`^${  pattern.replace('*', '.*')  }$`);
     if (regex.test(relativePath)) {
       return true;
     }
@@ -110,7 +110,7 @@ async function processToLlmsDir(rootDir) {
         const outputPath = path.join(outputDir, flatName);
 
         // Build page URL for this file
-        const pageUrl = `https://neon.com/docs/${relativePath.replace(/\.md$/, '')}`;
+        const pageUrl = `https://neon.com/docs/${  relativePath.replace(/\.md$/, '')}`;
 
         try {
           const result = await processFile(fullPath, pageUrl, rootDir);
@@ -128,7 +128,7 @@ async function processToLlmsDir(rootDir) {
   await processDir(docsDir);
 
   // Build summary
-  console.log(`\n${'='.repeat(50)}`);
+  console.log(`\n${  '='.repeat(50)}`);
   console.log('Processing complete:');
   console.log(`- Files processed: ${totalFiles}`);
   console.log(`- Files skipped: ${skippedFiles} (excluded by rules)`);
