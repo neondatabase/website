@@ -1,99 +1,162 @@
+'use client';
+
 import clsx from 'clsx';
+import { useState } from 'react';
 
 import Button from 'components/shared/button';
-import Link from 'components/shared/link';
 
 import plans from './data/plans';
 import Features from './features';
+import ResourceSizeSelect, {
+  LAUNCH_RESOURCE_SIZES,
+  SCALE_RESOURCE_SIZES,
+} from './resource-size-select';
 
-const Plans = () => (
-  <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
-    <h2 className="sr-only">Neon pricing plans</h2>
-    <ul className="grid-gap relative z-10 grid grid-cols-3 gap-x-[18px] lg:grid-cols-2 md:grid-cols-1">
-      {plans.map(
-        (
-          {
-            type,
-            title,
-            subtitle,
-            highlighted = false,
-            price,
-            priceFrom = false,
-            description,
-            features,
-            otherFeatures,
-            button,
-          },
-          index
-        ) => (
-          <li
-            className={clsx(
-              'group relative flex min-h-full flex-col border',
-              highlighted ? 'border-[#2f8968]' : 'border-gray-new-30'
-            )}
-            key={index}
-          >
-            <div className="p-5">
-              <h3
+const Plans = () => {
+  const [launchSize, setLaunchSize] = useState('small');
+  const [scaleSize, setScaleSize] = useState('xlarge');
+
+  return (
+    <div className="relative mt-16 w-full xl:mt-14 lg:mt-12 md:mx-0 md:mt-11 md:w-full">
+      <h2 className="sr-only">Neon pricing plans</h2>
+
+      <ul className="relative z-10 grid grid-cols-3 gap-y-[18px] border-b border-t border-gray-new-30 lg:grid-cols-2 lg:border-0 md:grid-cols-1">
+        {plans.map(
+          (
+            {
+              planId,
+              type,
+              title,
+              subtitle,
+              highlighted = false,
+              price,
+              computeRate,
+              storageRate,
+              features,
+              button,
+              hasDynamicPricing = false,
+            },
+            index
+          ) => {
+            // Determine which size state to use based on the plan
+            let currentSize;
+            let setCurrentSize;
+            let resourceSizes;
+
+            if (planId === 'launch') {
+              currentSize = launchSize;
+              setCurrentSize = setLaunchSize;
+              resourceSizes = LAUNCH_RESOURCE_SIZES;
+            } else if (planId === 'scale') {
+              currentSize = scaleSize;
+              setCurrentSize = setScaleSize;
+              resourceSizes = SCALE_RESOURCE_SIZES;
+            }
+
+            // Calculate price dynamically based on resource size and rates
+            let displayPrice = 0;
+
+            if (
+              hasDynamicPricing &&
+              computeRate !== undefined &&
+              storageRate !== undefined &&
+              resourceSizes &&
+              currentSize
+            ) {
+              const selectedResource = resourceSizes.find((size) => size.id === currentSize);
+              if (
+                selectedResource &&
+                selectedResource.cu !== undefined &&
+                selectedResource.storage !== undefined
+              ) {
+                const computeCost = Number(selectedResource.cu) * Number(computeRate);
+                const storageCost = Number(selectedResource.storage) * Number(storageRate);
+                displayPrice = Math.round(computeCost + storageCost);
+              }
+            } else {
+              displayPrice = price !== undefined ? price : 0;
+            }
+
+            return (
+              <li
                 className={clsx(
-                  'font-mono text-sm font-medium uppercase leading-none',
-                  highlighted ? 'text-green-52' : 'text-gray-new-60'
+                  'group relative flex min-h-full flex-col border-l border-gray-new-30 last:border-r',
+                  'lg:border lg:pb-[66px] lg:first:border-r-0 lg:last:pb-0',
+                  'md:pb-0 md:first:border'
                 )}
+                key={index}
               >
-                {type}
-              </h3>
-              <div className="mt-[46px] flex flex-col gap-0.5">
-                <h4 className="whitespace-nowrap text-2xl font-normal leading-snug tracking-extra-tight">
-                  {title}
-                </h4>
-                {subtitle ? (
-                  <p className="text-lg leading-snug tracking-extra-tight text-gray-new-50">
-                    {subtitle}
-                  </p>
-                ) : (
-                  <p className="text-lg leading-snug tracking-extra-tight text-gray-new-50">
-                    ${price}/month{` ${priceFrom ? 'minimum' : ''}`}
-                  </p>
-                )}
-              </div>
+                <div className="p-6 pb-2 md:p-5 md:pb-2">
+                  <h3
+                    className={clsx(
+                      'font-mono text-sm font-medium uppercase leading-none',
+                      highlighted ? 'text-green-52' : 'text-gray-new-60'
+                    )}
+                  >
+                    {type}
+                  </h3>
+                  <div className="mt-14 flex flex-col gap-3">
+                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-extra-tight lg:text-2xl lg:tracking-tighter">
+                      {title}
+                    </h4>
+                    {hasDynamicPricing ? (
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex items-baseline gap-1.5 leading-snug tracking-extra-tight">
+                          <span className="text-2xl text-white">${displayPrice}</span>
+                          <span className="text-base text-white">/mo</span>
+                          <span className="text-[15px] text-gray-new-60">typical spend</span>
+                        </div>
+                        {currentSize && setCurrentSize && resourceSizes && (
+                          <ResourceSizeSelect
+                            value={currentSize}
+                            sizes={resourceSizes}
+                            onChange={setCurrentSize}
+                          />
+                        )}
+                      </div>
+                    ) : (
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex items-baseline gap-1 leading-snug tracking-extra-tight">
+                          <span className="text-2xl text-white">${displayPrice}</span>
+                          <span className="text-base text-white">/mo</span>
+                        </div>
+                        {subtitle && (
+                          <p className="text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
+                            {subtitle}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
 
-              <Button
-                className="mt-5 w-full"
-                theme={highlighted ? 'white-filled' : 'outlined'}
-                to={button.url}
-                size="new"
-                tagName={button.event}
-              >
-                Get started
-              </Button>
-              <p className="mt-5 text-base leading-snug tracking-extra-tight text-gray-new-70">
-                {Array.isArray(description)
-                  ? description.map((part, i) =>
-                      typeof part === 'string' ? (
-                        part
-                      ) : (
-                        <Link key={i} to={part.href} onClick={part.onClick}>
-                          {part.text}
-                        </Link>
-                      )
-                    )
-                  : description}
-              </p>
-            </div>
-            <Features features={features} type={type} highlighted={highlighted} />
-            {otherFeatures && (
-              <Features
-                title={otherFeatures.title}
-                features={otherFeatures.features}
-                type={type}
-                highlighted={highlighted}
-              />
-            )}
-          </li>
-        )
-      )}
-    </ul>
-  </div>
-);
+                  <Button
+                    className="mt-6 w-full"
+                    theme={highlighted ? 'white-filled' : 'outlined'}
+                    to={button.url}
+                    size="sm-new"
+                    tagName={button.event}
+                  >
+                    {button.text || 'Get started'}
+                  </Button>
+                </div>
+                <div className="flex flex-col divide-y divide-dashed divide-gray-new-20 pb-2 lg:mt-1 md:pb-1">
+                  {Object.entries(features).map(([key, section]) => (
+                    <Features
+                      key={key}
+                      title={section.title}
+                      features={section.features}
+                      type={type}
+                      highlighted={highlighted}
+                    />
+                  ))}
+                </div>
+              </li>
+            );
+          }
+        )}
+      </ul>
+    </div>
+  );
+};
 
 export default Plans;

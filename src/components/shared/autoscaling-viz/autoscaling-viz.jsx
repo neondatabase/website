@@ -150,7 +150,7 @@ const AutoscalingViz = ({
   return (
     <div
       ref={containerRef}
-      className="not-prose w-full border border-gray-new-30 bg-gray-new-8 p-8"
+      className="not-prose w-full border border-gray-new-30 bg-gray-new-8 p-4 md:p-8"
     >
       <div className="mb-6">
         <span className="text-pretty indent-24 text-3xl font-normal leading-dense tracking-tighter text-gray-new-50 [&>strong]:font-normal [&>strong]:text-white">
@@ -160,7 +160,7 @@ const AutoscalingViz = ({
       </div>
 
       <div
-        className="flex cursor-pointer items-center justify-center gap-8"
+        className="flex cursor-pointer flex-row items-center justify-center gap-6 md:flex-col md:gap-8"
         role="button"
         tabIndex={0}
         onClick={handleToggle}
