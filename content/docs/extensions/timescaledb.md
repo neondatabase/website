@@ -19,14 +19,7 @@ This guide provides an introduction to the `timescaledb` extension. You’ll lea
 `timescaledb` is an open-source extension for Postgres that can be installed on any Neon Project using the instructions below.
 </Admonition>
 
-**Version availability:**
-
-The version of `timescaledb` available on Neon depends on the version of Postgres you select for your Neon project.
-
-- Postgres 14 - `timescaledb` 2.10.1
-- Postgres 15 - `timescaledb` 2.10.1
-- Postgres 16 - `timescaledb` 2.13.0
-- Postgres 17 - `timescaledb` 2.17.1
+**Version availability:** For version availability, refer to our [Postgres extensions](/docs/extensions/pg-extensions) page, which includes a table of supported extension versions by Postgres version.
 
 _Only [Apache-2](https://docs.timescale.com/about/latest/timescaledb-editions/) licensed features are supported. Compression is not supported._
 
