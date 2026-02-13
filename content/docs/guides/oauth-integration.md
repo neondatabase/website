@@ -11,7 +11,7 @@ updatedOn: '2026-02-06T22:07:33.029Z'
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
 
 <Admonition>
-We only provide OAuth integrations for partners we have active commercial relationships with. If you already partner with Neon, the information below documents our OAUth integration. Reach out to your Neon point of contact if you have any questions.
+We only provide OAuth integrations for partners we have active commercial relationships with. If you already partner with Neon, the information below documents our OAuth integration. Reach out to your Neon point of contact if you have any questions.
 </Admonition>
 
 ## How the OAuth integration works
@@ -24,7 +24,7 @@ Here is a high-level overview of how Neon's OAuth implementation works:
 2. An authorization URL is generated.
 3. The user is redirected to Neon’s OAuth consent screen to authorize the application.
 4. The user logs in and authorizes the application, granting it the necessary permissions.
-5. A redirect is performed to a callback endpoint, which includes an access token that allows the application to manage Neon resources on the user’s behalf.
+5. The user is redirected to your callback endpoint with an access token that allows the application to manage Neon resources on the user’s behalf.
 
 ## About the Neon OAuth server
 
@@ -114,7 +114,7 @@ Let's now go through the full flow, step by step:
 
 To initiate the OAuth flow, you need to generate an authorization URL. You can do that by directing your users to `https://oauth2.neon.tech/oauth2/auth` while passing the following query parameters:
 
-- `client_id`: your OAuth application's ID (provided to you by Neon after your application is received)
+- `client_id`: your OAuth application's ID (provided by Neon when your OAuth application is registered)
 - `redirect_uri`: the full URL that Neon should redirect users to after authorizing your application. The URL should match at least one of the callback URLs you provided when setting up your OAuth application.
 - `scope`: This is a space-separated list of predefined scopes that define the level of access you want to request. For a full list of supported scopes and their meanings, see the [Supported OAuth Scopes](#supported-oauth-scopes) section.
 

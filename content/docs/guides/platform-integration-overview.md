@@ -16,7 +16,7 @@ updatedOn: '2026-02-06T22:07:33.031Z'
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
 
-## ☑ AI Agents integration
+## AI Agents integration
 
 **Best for:** AI agent and codegen platforms that need database versioning and isolated environments
 
@@ -50,7 +50,7 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 ---
 
-## ☑ Claimable database flow (Instagres)
+## Claimable database flow (Instagres)
 
 **Best for:** Plugins and platforms that want to offer instant database provisioning as part of their developer experience without requiring user signup
 
@@ -89,7 +89,7 @@ Use this approach when you want to create databases for your users without requi
 
 ---
 
-## ☑ Embedded Postgres integration
+## Embedded Postgres integration
 
 **Best for:** SaaS platforms and services that offer Postgres databases to their users
 
@@ -121,7 +121,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 ---
 
-## ☑ OAuth integration
+## OAuth integration
 
 **Best for:** Tools and applications that need to interact with existing Neon user accounts
 
