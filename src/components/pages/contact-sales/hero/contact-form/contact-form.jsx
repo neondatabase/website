@@ -64,6 +64,8 @@ const schema = yup
 
 const labelClassName = 'text-sm text-gray-new-90';
 
+const AZURE_MIGRATION_MESSAGE = "I'd like to migrate my Azure managed account.";
+
 const ContactForm = () => {
   const [formState, setFormState] = useState(FORM_STATES.DEFAULT);
   const [isBroken, setIsBroken] = useState(false);
@@ -71,6 +73,7 @@ const ContactForm = () => {
   const {
     register,
     reset,
+    setValue,
     handleSubmit,
     formState: { isValid, errors },
   } = useForm({
@@ -78,8 +81,16 @@ const ContactForm = () => {
     defaultValues: {
       companySize: 'hidden',
       reasonForContact: 'hidden',
+      message: '',
     },
   });
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('message') === 'azure-migration') {
+      setValue('message', AZURE_MIGRATION_MESSAGE);
+    }
+  }, [setValue]);
 
   useEffect(() => {
     const hasErrors = Object.keys(errors).length > 0;
