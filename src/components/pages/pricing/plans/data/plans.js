@@ -100,7 +100,8 @@ export default {
     {
       rows: '2',
       feature: {
-        title: 'Rates',
+        title: 'Database',
+        subtitle: 'Root and child branches',
       },
       free: 'Free<span>0.5 GB per Project</span>',
       launch: '$0.35 per GB-month',
@@ -109,8 +110,8 @@ export default {
     {
       rows: '3',
       feature: {
-        title: 'Instant Restore (PITR)',
-        subtitle: { text: 'Read more', href: '#instant-restores' },
+        title: 'History',
+        subtitle: 'Instant restore storage',
       },
       free: 'Free<span>with limited window/size</span>',
       launch:
@@ -121,7 +122,8 @@ export default {
     {
       rows: '3',
       feature: {
-        title: 'Instant Restore (PITR) Window',
+        title: 'Restore window',
+        subtitle: 'Controls history (configurable)',
       },
       free: 'Up to 6 hours<span>or 1 GB of data changes</span>',
       launch: 'Up to 7 days',

@@ -29,6 +29,7 @@ export default {
   platforms: '/platforms',
   useCases: '/use-cases',
   useCasesAI: '/use-cases/ai-agents',
+  autoscalingReport: '/autoscaling-report',
 
   // Docs
   docs: '/docs',
@@ -52,6 +53,10 @@ export default {
   manageBilling: '/docs/introduction/manage-billing',
   migrationIntro: '/docs/import/migrate-intro',
   pgSearch: '/docs/extensions/pg_search',
+  docsExtensionsPgVector: '/docs/extensions/pgvector',
+  docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
+  docsExtensionsTimescaledb: '/docs/extensions/timescaledb',
+
   rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
