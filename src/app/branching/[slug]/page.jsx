@@ -59,15 +59,15 @@ const BranchingPage = ({ params }) => {
 
   return (
     <Container
-      className="w-full pb-[120px] pt-[88px] xl:pb-24 xl:pt-16 lg:pb-20 lg:pt-12 md:pb-[72px] md:pt-12"
+      className="w-full pb-[120px] pt-[88px] xl:pb-24 xl:pt-16 lg:pb-20 lg:pt-11 md:pb-[72px] md:pt-8"
       size="xxs"
     >
       <Breadcrumbs />
       <article>
-        <h1 className="text-balance font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:text-[36px] md:text-[28px]">
+        <h1 className="text-balance font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-5xl lg:text-[36px] md:text-[32px]">
           {title}
         </h1>
-        <Content className="prose-branching mt-16 lg:mt-14 md:mt-10" content={content} />
+        <Content className="prose-branching mt-16 lg:mt-12 md:mt-10" content={content} />
       </article>
       <div className="mt-14 md:mt-10">
         <p className="font-regular text-[28px] leading-tight tracking-[-0.05em] md:text-2xl">

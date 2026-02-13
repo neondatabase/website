@@ -417,11 +417,16 @@
   .prose-doc.prose-branching {
     /* Headings */
     > h2 {
-      @apply mb-4 mt-12 text-[28px] font-normal leading-tight tracking-[-0.05em] md:mt-9 md:text-2xl;
+      @apply mb-[18px] mt-14 text-[28px] font-medium leading-tight tracking-tighter md:mt-11 md:text-2xl;
     }
 
     > h3 {
-      @apply mb-4 mt-8 text-xl font-medium leading-snug tracking-tight;
+      @apply mb-4 mt-[34px] text-xl font-medium leading-snug tracking-extra-tight;
+    }
+
+    /* Paragraphs */
+    > p {
+      @apply mb-6 mt-4 text-lg font-normal leading-normal tracking-tight text-gray-new-85 md:text-base md:tracking-extra-tight;
     }
 
     /* Inline code */
@@ -435,24 +440,19 @@
       @apply my-6;
     }
 
-    /* Paragraphs */
-    > p {
-      @apply mb-6 mt-4 text-lg font-normal tracking-tight text-gray-new-80 md:text-base;
-    }
-
     /* Lists */
     > ul {
-      @apply mb-6 pl-5;
+      @apply mb-6 pl-5 md:pl-2.5;
     }
 
     > ul > li {
-      @apply my-2.5 text-lg font-normal leading-normal tracking-tight text-gray-new-80 md:text-base;
+      @apply my-2.5 text-lg font-normal leading-normal tracking-tight text-gray-new-85 md:text-base md:tracking-extra-tight;
       padding-left: calc(16px + 1ch);
     }
 
     > ul > li::before {
       content: '–';
-      @apply left-0 top-0 h-auto w-auto rounded-none bg-transparent text-gray-new-80;
+      @apply left-0 top-0 h-auto w-auto rounded-none bg-transparent text-gray-new-85;
     }
 
     /* Tables */
@@ -471,7 +471,7 @@
 
     > .table-wrapper table th,
     > .table-wrapper table td {
-      @apply border border-gray-new-20 px-[21px] py-[21px] text-left text-base font-normal leading-normal tracking-extra-tight text-gray-new-80 md:text-sm;
+      @apply border border-gray-new-20 px-[21px] py-[21px] text-left text-base font-normal leading-normal tracking-extra-tight text-gray-new-85 md:text-sm;
     }
   }
 
