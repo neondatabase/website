@@ -5,7 +5,7 @@ summary: >-
   interactions with user accounts while maintaining data privacy and requiring
   user approval for access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.029Z'
+updatedOn: '2026-02-13T12:51:21.153Z'
 ---
 
 The Neon OAuth integration enables your application to interact with Neon user accounts, carrying out permitted actions on their behalf. Our integration does not require direct access to user login credentials and is conducted with their approval, ensuring data privacy and security.
