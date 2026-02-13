@@ -1,0 +1,118 @@
+---
+description: Create Neon weekly changelog files for the next Friday or a specific date; use titled dropdown sections instead of a single Fixes & improvements section
+globs: "content/changelog/**"
+---
+
+# Neon Weekly Changelog Generator
+
+This rule defines how to generate Neon weekly changelog files. Changelogs use **titled dropdown sections** (multiple `<details>` blocks with descriptive summary titles), not a single "Fixes & improvements" section.
+
+## When to Activate
+
+- User says "generate changelog", "set up changelog", "create changelog file", or similar.
+- User runs `generate:changelog` (next Friday) or `generate:changelog:for` with `TARGET_DATE=YYYY-MM-DD`.
+
+## Date logic (MUST DO)
+
+- Use the IANA timezone **America/New_York** (or `${TIMEZONE}` if provided).
+- Compute **next upcoming Friday** from the current moment:
+  - Let `today` be the current date in that timezone.
+  - Let `dow` be Sunday=0 … Friday=5.
+  - `delta = (5 - dow + 7) % 7`
+  - If `delta === 0`, treat today as Friday and use **next week's Friday** (`add=7`). Otherwise `add=delta`.
+  - `target = today + add days`
+- Format `target` as `YYYY-MM-DD` → `CHANGELOG_DATE`.
+- Paths: `DEST_DIR = content/changelog`, `FILENAME = ${CHANGELOG_DATE}.md`, `DEST_PATH = ${DEST_DIR}/${FILENAME}`.
+
+## File rules
+
+- If `${DEST_PATH}` already exists: STOP and report that the changelog file already exists. Do not overwrite.
+- Otherwise, create `${DEST_PATH}` with the template below.
+
+## Voice & content guidelines
+
+- Friendly, concise, user-focused; sentence-style capitalization.
+- Use H2 (`##`) for top-level (feature) sections.
+- Feature headings should communicate user value, not just internal names.
+- Each feature description: 1–3 sentences.
+- Include optional image blocks where relevant.
+- **Dropdown sections:** After the main feature sections, include one or more **titled dropdown sections** using `<details>` and `<summary>**Section title**</summary>`. Each dropdown has a **descriptive title** (e.g. **Neon API**, **Tables page**, **Console**) that groups related fixes or improvements. We no longer use a single "Fixes & improvements" section; we use multiple dropdowns with distinct titles by product area or topic.
+- **IMPORTANT:** Use only placeholder content (Lorem ipsum) and generic headings when creating a draft. Do not create fictional features or specific content.
+
+## Markdown template
+
+Use this shape, replacing bracketed placeholders. The bottom section shows **titled dropdown sections** (two dummy examples; add or rename as needed for the week):
+
+```markdown
+---
+title: [Concise main theme of the release]
+---
+
+## New feature
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+## Another feature
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+## Third feature
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+<details>
+<summary>**Neon API**</summary>
+
+- [Short bullet describing an API change or improvement.]
+
+</details>
+
+<details>
+<summary>**Console**</summary>
+
+- [Short bullet describing a console or UI change.]
+
+</details>
+```
+
+- Each `<details>` block has a **title** in the summary (e.g. **Neon API**, **Console**, **Tables page**). Add as many titled dropdown sections as needed for the release; typical recent changelogs use two or more.
+- Content inside each dropdown can be bullets or short paragraphs.
+
+## Override date (backfill or specific date)
+
+- For `generate:changelog:for` with `TARGET_DATE=YYYY-MM-DD`: validate the date, use it as `CHANGELOG_DATE`, and use the same template and rules above.
+
+## Output after creation
+
+- Print: `CHANGELOG_DATE`, `DEST_PATH`, and a checklist of any `[placeholders]` still present.
+
+## Usage summary
+
+| Intent | Action |
+|--------|--------|
+| Next Friday draft | `generate:changelog` (optional: `TIMEZONE=America/New_York`) |
+| Specific date | `generate:changelog:for` with `TARGET_DATE=YYYY-MM-DD` |
+| Help | `generate:changelog:help` |
+
+Output path: `content/changelog/YYYY-MM-DD.md`.
+
+### Helper (JS) — next Friday in a timezone
+
+```js
+function nextFriday(tz = "America/New_York") {
+  const now = new Date();
+  const fmt = new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit', weekday: 'short'
+  });
+  const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
+  const base = new Date(`${parts.year}-${parts.month}-${parts.day}T00:00:00`);
+  const dow = base.getDay();
+  const delta = (5 - dow + 7) % 7;
+  const add = (delta === 0 ? 7 : delta);
+  const friday = new Date(base.getTime() + add * 86400000);
+  const y = friday.getFullYear();
+  const m = String(friday.getMonth() + 1).padStart(2, '0');
+  const d = String(friday.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+```

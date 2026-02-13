@@ -8,7 +8,7 @@ When the user asks "what doc AI tools are available" or "what AI tools for docs"
 
 **Rules**
 
-- **Neon changelog** — Generates next Friday's changelog draft (or a specific date). Uses a template with Fixes & improvements and timezone (America/New_York). Rule: `neon-changelog.rules`.
+- **Neon changelog** — Generates next Friday's changelog draft (or a specific date). Uses a template with titled dropdown sections and timezone (America/New_York). Rule: `neon-changelog.mdc`.
 - **Docs editing** — Applies when editing docs/guides/changelog: Neon voice, shared content, cross-doc consistency, glossary links, redirect workflow. Based on the Docs contribution guide and Style Guide. Rule: `docs-editing.mdc`.
 - **Docs use Claude** — Tells Cursor to load the right `.claude/` command or agent (e.g. golden-corpus, write-content, redirect-update) for the current task so behavior matches Claude. Rule: `docs-use-claude.mdc`.
 - **Docs PR report** — Weekly documentation review: generates a report of merged PRs across monitored Neon repos (default: since last Friday), grouped by category with docs-impact indicators. Saves to ~/docs-reviews/. Run from repo root. Rule: `docs-pr-report.mdc`. Scripts: `./scripts/generate-docs-pr-report.sh`, `./scripts/check-docs-report-deps.sh`; config: `config/monitored-repos.json`.

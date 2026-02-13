@@ -199,7 +199,7 @@ You can enable either or both options based on your monitoring needs.
    **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
-   - **API Key**: Enter your API key
+   - **API Key**: Enter your API key. You can optionally set a **Custom header name** for the key; it defaults to `X-API-Key` if not specified. Some backends (for example, Honeycomb) expect a different header name, so use this option to match your platform's requirements.
 
 ## Configure resource attributes
 
