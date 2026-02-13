@@ -4,6 +4,7 @@ import Image from 'next/image';
 import HeadingLabel from 'components/pages/home/heading-label';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import Link from 'components/shared/link';
 import Logos from 'components/shared/logos';
 import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
@@ -17,17 +18,22 @@ const Hero = () => (
       className="relative z-30 pt-[409px] xl:px-16 xl:pt-[216px] lg:pt-[208px] md:!px-5 md:pt-[212px]"
       size="1600"
     >
-      <HeadingLabel>NEON: A DATABRICKS COMPANY</HeadingLabel>
+      <Link href="#backed-by-giants">
+        <HeadingLabel size="large" databricks>
+          A DATABRICKS COMPANY
+        </HeadingLabel>
+      </Link>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
-        Ship faster with Postgres for modern engineering teams
+        The Postgres Database <br />
+        for Teams that Ship Faster
       </h1>
 
       <div className="mt-8 flex gap-x-5 lg:mt-7 lg:gap-x-4">
         <Button theme="white-filled" size="new" to={LINKS.signup}>
           Get started
         </Button>
-        <Button theme="outlined" size="new" to={LINKS.docsBranching}>
+        <Button theme="outlined" size="new" to={LINKS.docsHome}>
           Read the docs
         </Button>
       </div>

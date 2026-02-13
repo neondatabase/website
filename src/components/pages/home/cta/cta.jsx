@@ -26,7 +26,7 @@ const CTA = () => (
               className="bg-[rgba(255,255,255,0.02)]"
               theme="outlined"
               size="new"
-              to={LINKS.docsBranching}
+              to={LINKS.docsHome}
             >
               Read the docs
             </Button>

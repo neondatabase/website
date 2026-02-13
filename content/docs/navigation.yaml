@@ -1048,9 +1048,15 @@
           items:
             - title: Production checklist
               slug: get-started/production-checklist
-            - title: Backups
+            - title: Backup & restore
               slug: manage/backups
               items:
+                - title: Backup & restore
+                  slug: guides/backup-restore
+                - title: Restore window
+                  slug: introduction/restore-window
+                - title: Instant restore
+                  slug: introduction/branch-restore
                 - title: Overview
                   slug: manage/backups
                 - title: Backup with pg_dump
