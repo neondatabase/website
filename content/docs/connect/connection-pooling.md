@@ -1,10 +1,14 @@
 ---
 title: Connection pooling
 subtitle: Learn how connection pooling works in Neon
+summary: >-
+  Covers the setup and functionality of connection pooling in Neon using
+  PgBouncer, detailing how to manage concurrent connections effectively and
+  avoid common pitfalls related to connection limits based on compute size.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/connection-pooling
-updatedOn: '2026-01-24T16:13:09.585Z'
+updatedOn: '2026-02-06T22:07:32.800Z'
 ---
 
 Neon uses [PgBouncer](https://www.pgbouncer.org/) to provide connection pooling, enabling up to 10,000 concurrent connections. This guide explains how pooling works, when to use it, and how to avoid common issues.

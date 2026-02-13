@@ -1,8 +1,12 @@
 ---
 title: Connect a Sveltekit application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Sveltekit application
+summary: >-
+  Step-by-step guide for connecting a SvelteKit application to a Neon project,
+  including project creation, dependency installation, and configuration of
+  database credentials.
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.609Z'
+updatedOn: '2026-02-06T22:07:33.056Z'
 ---
 
 <CopyPrompt src="/prompts/sveltekit-prompt.md"

@@ -1,13 +1,17 @@
 ---
 title: Get started with logical replication
 subtitle: Learn how to replicate data to and from your Neon Postgres database
+summary: >-
+  Covers the setup of logical replication in Neon Postgres, enabling data
+  streaming to and from external sources, live migrations, and inter-project
+  data replication using a publisher-subscriber model.
 enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/logical-replication
   - /docs/guides/logical-replication-clickhouse
   - /docs/guides/logical-replication-aurora-to-neon
-updatedOn: '2025-02-24T15:53:13.359Z'
+updatedOn: '2026-02-06T22:07:33.010Z'
 ---
 
 Neon's logical replication feature, available to all Neon users, allows you to replicate data to and from your Neon Postgres database:

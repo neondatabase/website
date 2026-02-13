@@ -1,8 +1,12 @@
 ---
 title: Run analytics queries with Read Replicas
 subtitle: Leverage read replicas for running data-intensive analytics queries
+summary: >-
+  How to create and use read replicas in Neon for executing data-intensive
+  analytics queries without affecting the performance of your production
+  database.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.031Z'
+updatedOn: '2026-02-06T22:07:33.037Z'
 ---
 
 With Neon's read replica feature, you can instantly create a dedicated read replica for running data-intensive analytics or reporting queries. This allows you to avoid disruption or performance degradation on your production database.

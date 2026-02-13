@@ -1,11 +1,14 @@
 ---
 title: Connect a Node.js application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Node.js application
+summary: >-
+  Covers the setup of a Neon project and the connection process from a Node.js
+  application, including examples using node-postgres and Postgres.js clients.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/node
   - /docs/integrations/node
-updatedOn: '2025-10-31T11:07:57.605Z'
+updatedOn: '2026-02-06T22:07:33.028Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

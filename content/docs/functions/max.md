@@ -1,8 +1,12 @@
 ---
 title: Postgres max() function
 subtitle: Find the maximum value in a set of values
+summary: >-
+  Covers the usage of the Postgres `max()` function to determine the maximum
+  value in a dataset, including examples for finding the largest order amount
+  and the most recent order date in an orders table.
 enableTableOfContents: true
-updatedOn: '2024-06-30T11:39:13.123Z'
+updatedOn: '2026-02-06T22:07:32.880Z'
 ---
 
 You can use the Postgres `max()` function to find the maximum value in a set of values.

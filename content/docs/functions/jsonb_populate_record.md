@@ -1,8 +1,12 @@
 ---
 title: Postgres jsonb_populate_record() function
 subtitle: Casts a JSONB object to a record
+summary: >-
+  Covers the usage of the `jsonb_populate_record` function to populate a record
+  type from a `JSONB` object, facilitating the integration of external JSONB
+  data into existing database records.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.377Z'
+updatedOn: '2026-02-06T22:07:32.875Z'
 ---
 
 The `jsonb_populate_record` function is used to populate a record type with values from a `JSONB` object. It is useful for parsing `JSONB` data received from external sources, particularly when merging it into an existing record.

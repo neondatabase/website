@@ -1,9 +1,13 @@
 ---
 title: Partial Twin
 subtitle: Create a partial Twin of your production database
+summary: >-
+  Covers the setup of a workflow to create a partial Neon Twin of a production
+  database using `pg_dump`, `pg_restore`, and `psql`, including necessary
+  directory structure and code configuration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.285Z'
+updatedOn: '2026-02-06T22:07:33.025Z'
 ---
 
 This workflow will create a partial Neon Twin using `pg_dump`, `pg_restore` and `psql`.

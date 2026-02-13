@@ -1,9 +1,0 @@
-# Connect Outerbase to Neon
-
-> The document details the steps required to connect Outerbase to a Neon database, including configuration instructions and necessary prerequisites for seamless integration.
-
-## Source
-
-- [Connect Outerbase to Neon HTML](https://neon.com/docs/guides/outerbase): The original HTML version of this documentation
-
-**Important** deprecated: Outerbase was [acquired by Cloudflare](https://blog.cloudflare.com/cloudflare-acquires-outerbase-database-dx/) and shut down on October 15, 2025. This guide has been deprecated. Please see our [integrations page](https://neon.com/docs/guides/integrations) for current third-party integration options.

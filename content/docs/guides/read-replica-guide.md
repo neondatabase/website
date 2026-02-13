@@ -1,8 +1,12 @@
 ---
 title: Create and manage Read Replicas
 subtitle: Learn how to create and manage read replicas in Neon
+summary: >-
+  How to create and manage read replicas in Neon, including steps for adding
+  replicas to branches, configuring compute sizes, and utilizing features like
+  Autoscaling and Scale to Zero for optimized performance.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.031Z'
+updatedOn: '2026-02-06T22:07:33.037Z'
 ---
 
 [Read replicas](/docs/introduction/read-replicas) are supported with all Neon plans. The Free plan is limited to a maximum of 3 read replica computes per project. This guide steps you through the process of creating and managing read replicas.

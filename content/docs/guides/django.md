@@ -1,12 +1,16 @@
 ---
 title: Connect a Django application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Django application
+summary: >-
+  How to connect a Django application to a Neon project by creating a project in
+  the Neon Console and configuring the database connection settings in the
+  Django `settings.py` file.
 enableTableOfContents: true
 redirectFrom:
   - /docs/integrations/
   - /docs/quickstart/django/
   - /docs/cloud/integrations/django/
-updatedOn: '2025-10-24T12:53:27.785Z'
+updatedOn: '2026-02-06T22:07:32.948Z'
 ---
 
 <CopyPrompt src="/prompts/django-prompt.md" 

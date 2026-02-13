@@ -26,7 +26,10 @@ const ITEMS = [
 ];
 
 const BackedBy = () => (
-  <section className="backed-by safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[168px] pt-40 text-black-pure xl:py-[136px] lg:py-[88px] md:py-14">
+  <section
+    id="backed-by-giants"
+    className="backed-by safe-paddings relative overflow-hidden bg-[#E4F1EB] pb-[168px] pt-40 text-black-pure xl:py-[136px] lg:py-[88px] md:py-14"
+  >
     <Container className="z-10" size="1344">
       <div className="relative z-10 flex gap-16 xl:gap-[108px] lg:gap-8 md:gap-5 md:p-0 sm:flex-col sm:gap-20">
         <div className="flex-1 border-l border-gray-new-50 px-8 xl:pl-6 xl:pr-0 lg:pl-[18px] sm:border-none sm:pl-0">
@@ -40,8 +43,8 @@ const BackedBy = () => (
               '[&>strong]:font-normal [&>strong]:text-black-pure'
             )}
           >
-            <strong>Backed by Giants. Trusted Postgres. Battle-tested scale.</strong> Neon was
-            founded by Postgres committers, bringing decades of expertise.
+            <strong>Trusted Postgres, Backed by Giants.</strong> Neon was founded by Postgres
+            committers, bringing decades of expertise. In 2025, Neon became a Databricks company.
           </h2>
           <ul className="mt-[216px] flex gap-[92px] xl:mt-[136px] xl:gap-16 lg:gap-8 md:gap-5 sm:mt-9 xs:flex-col xs:gap-7">
             {ITEMS.map(({ icon, title, description, className }) => (

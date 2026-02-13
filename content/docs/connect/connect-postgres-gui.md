@@ -1,8 +1,12 @@
 ---
 title: Connect a GUI application
 subtitle: Learn how to connect a GUI application to Neon
+summary: >-
+  How to connect a GUI application or IDE to a Neon database by gathering
+  necessary connection details and entering them into the application for
+  successful database access.
 enableTableOfContents: true
-updatedOn: '2026-01-27T16:55:52.442Z'
+updatedOn: '2026-02-06T22:07:32.790Z'
 ---
 
 This topic describes how to connect to a Neon database from a GUI application or IDE. Most GUI applications and IDEs that support connecting to a Postgres database also support connecting to Neon.

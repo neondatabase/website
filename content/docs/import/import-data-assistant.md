@@ -1,9 +1,13 @@
 ---
 title: Import Data Assistant
 subtitle: Move your database to Neon using our automated import tool
+summary: >-
+  How to use the Import Data Assistant to automatically transfer your existing
+  database to Neon by providing a connection string, or to migrate data between
+  Neon projects.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2025-07-22T16:08:58.778Z'
+updatedOn: '2026-02-06T22:07:33.066Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---

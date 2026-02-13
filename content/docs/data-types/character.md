@@ -1,8 +1,12 @@
 ---
 title: Postgres Character data types
 subtitle: Work with text data in Postgres
+summary: >-
+  Covers the usage of character data types in Postgres, detailing `CHAR(n)`,
+  `VARCHAR(n)`, and `TEXT` for storing strings of varying lengths, along with
+  examples for practical implementation.
 enableTableOfContents: true
-updatedOn: '2024-06-14T07:55:54.365Z'
+updatedOn: '2026-02-06T22:07:32.818Z'
 ---
 
 In Postgres, character data types are used to store strings. There are three primary character types: `CHAR(n)`, `VARCHAR(n)`, and `TEXT`. `CHAR(n)` and `VARCHAR(n)` types are suitable for strings with known or limited length; for example, usernames and email addresses. Whereas `TEXT` is ideal for storing large variable-length strings, such as blog posts or product descriptions.

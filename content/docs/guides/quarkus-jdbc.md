@@ -1,8 +1,11 @@
 ---
 title: Connect Quarkus (JDBC) to Neon
 subtitle: Learn how to connect to Neon from Quarkus using JDBC
+summary: >-
+  How to connect a Quarkus application to Neon using the PostgreSQL JDBC driver,
+  including project setup and configuration of the data source.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:48:41.462Z'
+updatedOn: '2026-02-06T22:07:33.034Z'
 ---
 
 <CopyPrompt src="/prompts/quarkus-jdbc-prompt.md"

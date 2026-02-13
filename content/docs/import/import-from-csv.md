@@ -1,7 +1,11 @@
 ---
 title: Import data from CSV
+summary: >-
+  How to import data into a Neon database table from a CSV file using the `psql`
+  command-line client, including steps for connecting to the database, creating
+  the target table, and preparing the CSV file.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.291Z'
+updatedOn: '2026-02-06T22:07:33.066Z'
 ---
 
 This topic shows how to import data into a Neon database table from a CSV file using a simple example.

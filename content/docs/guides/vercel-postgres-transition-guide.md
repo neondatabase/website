@@ -1,9 +1,13 @@
 ---
 title: Vercel Postgres Transition Guide
 subtitle: Your complete guide to the transition from Vercel Postgres to Neon
+summary: >-
+  Step-by-step guide for transitioning from Vercel Postgres to Neon, detailing
+  changes in setup, billing, new features, and technical compatibility for users
+  migrating to the Neon platform.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-03T13:07:33.033Z'
+updatedOn: '2026-02-06T22:07:33.065Z'
 ---
 
 <InfoBlock>

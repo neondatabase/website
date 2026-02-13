@@ -1,8 +1,12 @@
 ---
 title: Managing your data and schemas in the Neon Console
 subtitle: 'Use the Tables page to easily view, edit, and manage your data and schemas'
+summary: >-
+  Covers the management of data and schemas in the Neon Console's Tables page,
+  including adding, editing, and deleting records, filtering data, and modifying
+  table structures.
 enableTableOfContents: true
-updatedOn: '2025-09-25T14:36:08.174Z'
+updatedOn: '2026-02-06T22:07:33.058Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.

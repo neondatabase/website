@@ -2,8 +2,12 @@
 title: Neon API TypeScript SDK
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
+summary: >-
+  Covers the setup and usage of the Neon TypeScript SDK to programmatically
+  manage projects, branches, databases, and other resources within the Neon
+  platform, simplifying API interactions and resource management.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.620Z'
+updatedOn: '2026-02-11T23:59:05.503Z'
 ---
 
 <InfoBlock>
@@ -92,7 +96,7 @@ Let's create a simple TypeScript file to list your Neon projects using the SDK.
 
 ### List Projects
 
-Create a new file named `list-projects.ts` in your project directory and add the following code:
+All Neon accounts are organization-based. To list projects, first retrieve the user's organization, then pass `org_id`:
 
 ```typescript
 import { createApiClient } from '@neondatabase/api-client';
@@ -103,7 +107,12 @@ const apiClient = createApiClient({
 
 async function listNeonProjects() {
   try {
-    const response = await apiClient.listProjects({});
+    // Get the user's organizations
+    const orgsResponse = await apiClient.getCurrentUserOrganizations();
+    const orgId = orgsResponse.data.organizations[0].id;
+
+    // List projects within the org
+    const response = await apiClient.listProjects({ org_id: orgId });
     console.log(response.data.projects);
   } catch (error) {
     console.error('Error listing projects:', error);
@@ -377,7 +386,10 @@ const apiClient = createApiClient({
 
 async function listNeonProjects(): Promise<void> {
   try {
-    const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({});
+    const orgsResponse = await apiClient.getCurrentUserOrganizations();
+    const orgId = orgsResponse.data.organizations[0].id;
+
+    const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({ org_id: orgId });
     const projects = response.data.projects;
     console.log('Projects:', projects);
   } catch (error) {

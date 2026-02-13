@@ -1,8 +1,12 @@
 ---
 title: Use Neon Auth with Next.js (UI Components)
 subtitle: Set up authentication in Next.js using pre-built UI components
+summary: >-
+  Covers the setup of Neon Auth in a Next.js application using pre-built UI
+  components, including enabling authentication, installing the SDK, configuring
+  environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-01-30T14:03:06.274Z'
+updatedOn: '2026-02-06T22:07:32.768Z'
 layout: wide
 ---
 

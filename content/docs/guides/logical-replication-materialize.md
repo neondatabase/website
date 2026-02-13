@@ -1,9 +1,13 @@
 ---
 title: Replicate data to Materialize
 subtitle: Learn how to replicate data from Neon to Materialize
+summary: >-
+  Step-by-step guide for replicating data from a Neon Postgres database to
+  Materialize using logical replication, enabling low-latency data processing
+  for operational workloads.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-07T12:28:56.612Z'
+updatedOn: '2026-02-06T22:07:33.013Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
