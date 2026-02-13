@@ -7,7 +7,7 @@ summary: >-
   logs to any OTEL-compatible observability platform, including setup with
   Grafana OSS, Tempo, and integration with New Relic.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.030Z'
+updatedOn: '2026-02-13T20:09:53.504Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
