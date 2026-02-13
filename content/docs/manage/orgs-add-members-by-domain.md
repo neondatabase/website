@@ -48,6 +48,10 @@ TXT records can take from a few minutes to 48 hours to propagate. If verificatio
 
 After the TXT record has propagated, click **Verify** in the Neon Console (in the verification section for that domain). If the record matches, the domain status changes to **Verified**. Users who sign up or log in with an email at that domain will then be automatically added to the organization as members.
 
+<Admonition type="tip" title="After verification">
+You can delete the TXT record from your domain after verification. Neon only uses it to confirm ownership; the record does not need to remain in place.
+</Admonition>
+
 </Steps>
 
 ## Remove a domain
