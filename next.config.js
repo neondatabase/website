@@ -592,14 +592,6 @@ const defaultConfig = {
           destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
         },
         {
-          source: '/demos/playground',
-          destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
-        },
-        {
-          source: '/demos/playground/:path*',
-          destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
-        },
-        {
           source: '/developer-days/:path*',
           destination: 'https://neon-dev-days-next.vercel.app/developer-days/:path*',
         },
