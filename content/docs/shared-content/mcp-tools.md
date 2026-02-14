@@ -39,7 +39,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 **Query performance optimization:**
 
-- `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
+- `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the [pg_stat_statements](/docs/extensions/pg_stat_statements) extension; statistics accumulate as queries run, so you may need to allow time for data collection before listing.
 - `explain_sql_statement`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
 - `prepare_query_tuning`: Analyzes query performance and suggests optimizations, like index creation. Creates a temporary branch for safely testing these optimizations.
 - `complete_query_tuning`: Finalizes query tuning by either applying optimizations to the main branch or discarding them. Cleans up the temporary tuning branch.
