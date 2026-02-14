@@ -24,6 +24,7 @@ const BlogPage = async () => {
         className="lg:-top-[68px] md:-top-[62px] md:pb-16"
         title="Blog"
         basePath={BLOG_BASE_PATH}
+        inlineRss
       />
       <Suspense fallback={null}>
         <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">

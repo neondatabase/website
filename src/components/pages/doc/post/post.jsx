@@ -156,6 +156,7 @@ Post.propTypes = {
   gitHubPath: PropTypes.string.isRequired,
   tableOfContents: PropTypes.arrayOf(PropTypes.shape({})),
   author: PropTypes.shape({
+    slug: PropTypes.string,
     name: PropTypes.string.isRequired,
     position: PropTypes.string,
     bio: PropTypes.string,

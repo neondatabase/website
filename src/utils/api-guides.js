@@ -15,6 +15,7 @@ const getAuthor = (id) => {
     const authorData = authorsData[id];
     const authorPhoto = `/guides/authors/${id}.jpg`;
     const author = {
+      slug: id,
       ...authorData,
       photo: authorPhoto,
     };
@@ -41,7 +42,6 @@ const getAllGuides = async () => {
         data: { title, subtitle, createdAt, updatedOn, isDraft, redirectFrom, author },
         excerpt,
       } = data;
-
       const authorData = getAuthor(author);
 
       // eslint-disable-next-line consistent-return
@@ -75,4 +75,4 @@ const getNavigationLinks = (slug, posts) => {
   };
 };
 
-export { getAuthors, getAuthor, getNavigationLinks, getAllGuides };
+export { getAllGuides, getAuthor, getAuthors, getNavigationLinks };
