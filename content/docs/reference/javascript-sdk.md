@@ -7,7 +7,7 @@ summary: >-
   adapter options for different frameworks.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-02-06T22:07:33.145Z'
+updatedOn: '2026-02-15T20:51:54.261Z'
 ---
 
 The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.

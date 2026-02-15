@@ -6,7 +6,7 @@ summary: >-
   rules using PostgreSQL Anonymizer, enabling users to handle sensitive data
   effectively within Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.152Z'
+updatedOn: '2026-02-15T20:51:54.278Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).

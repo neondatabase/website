@@ -6,7 +6,7 @@ summary: >-
   organized and managed within a Neon environment.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.120Z'
+updatedOn: '2026-02-15T20:51:54.238Z'
 ---
 
 Managing your Neon environment requires an understanding of the Neon object hierarchy. At the top level, an **Organization** contains one or more **Projects**. Each Project contains **Branches**, which in turn contain **Computes**, **Roles**, and **Databases**. The diagram below illustrates this hierarchy.

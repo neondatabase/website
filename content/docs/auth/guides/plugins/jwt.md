@@ -7,7 +7,7 @@ summary: >-
   domains, while emphasizing that it does not replace session management for
   standard web applications.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.746Z'
+updatedOn: '2026-02-15T20:51:54.038Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

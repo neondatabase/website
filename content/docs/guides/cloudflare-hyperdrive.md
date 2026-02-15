@@ -7,7 +7,7 @@ summary: >-
   enhancing query performance for serverless applications by utilizing a
   globally distributed pool of database connections.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.934Z'
+updatedOn: '2026-02-15T20:51:54.141Z'
 ---
 
 [Cloudflare Hyperdrive](https://developers.cloudflare.com/hyperdrive/) is a serverless application that proxies queries to your database and accelerates them. It works by maintaining a globally distributed pool of database connections, and routing queries to the closest available connection.

@@ -6,7 +6,7 @@ summary: >-
   Postgres database schema, including configuration, authentication with JWT,
   and implementing row-level security.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.032Z'
+updatedOn: '2026-02-15T20:51:54.186Z'
 ---
 
 <InfoBlock>

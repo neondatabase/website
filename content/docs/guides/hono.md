@@ -6,7 +6,7 @@ summary: >-
   application, including setting up dependencies and configuring the Postgres
   client for database access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.985Z'
+updatedOn: '2026-02-15T20:51:54.164Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"

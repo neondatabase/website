@@ -6,7 +6,7 @@ summary: >-
   Covers the setup of Neon Local, a proxy service that enables connection to
   existing or ephemeral Neon database branches using Docker, simplifying branch
   management and eliminating the need for manual connection string updates.
-updatedOn: '2026-02-06T22:07:33.109Z'
+updatedOn: '2026-02-15T20:51:54.220Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:

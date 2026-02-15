@@ -6,7 +6,7 @@ summary: >-
   capabilities and the use of `pg_dump` for traditional and automated backups,
   ensuring data recovery and compliance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.114Z'
+updatedOn: '2026-02-15T20:51:54.226Z'
 ---
 
 <InfoBlock>

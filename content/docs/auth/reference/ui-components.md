@@ -6,7 +6,7 @@ summary: >-
   `@neondatabase/neon-js`, including installation, provider setup, and
   configuration of common props for customization.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.773Z'
+updatedOn: '2026-02-15T20:51:54.052Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

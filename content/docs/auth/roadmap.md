@@ -5,7 +5,7 @@ summary: >-
   Covers the current support status and future roadmap for Neon Auth, detailing
   supported frameworks and upcoming features as it transitions out of beta.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.773Z'
+updatedOn: '2026-02-15T20:51:54.052Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

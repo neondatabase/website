@@ -6,7 +6,7 @@ summary: >-
   configuration for log forwarding and the transmission of metrics related to
   database performance and resource utilization.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.975Z'
+updatedOn: '2026-02-15T20:51:54.161Z'
 ---
 
 <InfoBlock>

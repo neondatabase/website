@@ -7,7 +7,7 @@ summary: >-
   recommendations for indexes, extended statistics, and prepared statements
   based on query workload analysis in PostgreSQL 17.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.832Z'
+updatedOn: '2026-02-15T20:51:54.081Z'
 ---
 
 The `online_advisor` extension recommends **indexes**, **extended statistics**, and **prepared statements** based on your actual query workload. It uses the same executor hook mechanism as [`auto_explain`](https://www.postgresql.org/docs/current/auto-explain.html) to collect and analyze execution data.

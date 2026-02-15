@@ -7,7 +7,7 @@ summary: >-
   database using popular drivers like pg, Postgres.js, and the Neon serverless
   driver, including performing basic CRUD operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.993Z'
+updatedOn: '2026-02-15T20:51:54.166Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 

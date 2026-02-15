@@ -6,7 +6,7 @@ summary: >-
   prerequisites, connection steps using environment variables, and scenarios for
   choosing manual connections over integrations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.064Z'
+updatedOn: '2026-02-15T20:51:54.203Z'
 ---
 
 <InfoBlock>

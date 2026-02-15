@@ -4,7 +4,7 @@ summary: >-
   Covers the support plans, channels, and policies available for Neon users,
   detailing how to access support based on their specific pricing plan.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.109Z'
+updatedOn: '2026-02-15T20:51:54.219Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.

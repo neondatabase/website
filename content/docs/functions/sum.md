@@ -6,7 +6,7 @@ summary: >-
   numeric values, including examples for basic calculations and aggregating data
   with `GROUP BY`.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.883Z'
+updatedOn: '2026-02-15T20:51:54.104Z'
 ---
 
 The Postgres `sum()` function calculates the total of a set of numeric values.

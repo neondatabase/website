@@ -6,7 +6,7 @@ summary: >-
   installation, application creation, database schema definition, and API
   endpoint setup for production deployments.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.960Z'
+updatedOn: '2026-02-15T20:51:54.152Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.

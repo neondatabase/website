@@ -7,7 +7,7 @@ summary: >-
   Neon projects.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-02-06T22:07:33.066Z'
+updatedOn: '2026-02-15T20:51:54.206Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---

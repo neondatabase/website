@@ -5,7 +5,7 @@ summary: >-
   command-line client, including steps for connecting to the database, creating
   the target table, and preparing the CSV file.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.066Z'
+updatedOn: '2026-02-15T20:51:54.207Z'
 ---
 
 This topic shows how to import data into a Neon database table from a CSV file using a simple example.

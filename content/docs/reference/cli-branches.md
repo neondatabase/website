@@ -7,7 +7,7 @@ summary: >-
   deleting branches, as well as setting defaults and performing schema
   comparisons.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.130Z'
+updatedOn: '2026-02-15T20:51:54.255Z'
 ---
 
 ## Before you begin

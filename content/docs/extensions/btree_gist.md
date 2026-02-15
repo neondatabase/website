@@ -7,7 +7,7 @@ summary: >-
   creation of multicolumn GiST indexes that integrate B-tree data types for
   efficient querying and exclusion constraints.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.823Z'
+updatedOn: '2026-02-15T20:51:54.074Z'
 ---
 
 The `btree_gist` extension for Postgres provides a specialized set of **GiST operator classes**. These allow common, "B-tree-like" data types (such as integers, text, or timestamps) to be included in **GiST (Generalized Search Tree) indexes**. This is especially useful when you need to create **multicolumn GiST indexes** that combine GiST-native types (like geometric data or range types) with these simpler B-tree types. `btree_gist` also plays a key role in defining **exclusion constraints** involving standard data types.

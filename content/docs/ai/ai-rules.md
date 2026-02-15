@@ -6,7 +6,7 @@ summary: >-
   instructions for the Claude Code plugin and individual context rule files for
   other AI tools, enhancing code suggestions and reducing errors.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.726Z'
+updatedOn: '2026-02-15T20:51:54.033Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI assistants understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.

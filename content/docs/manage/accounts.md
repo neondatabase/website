@@ -5,7 +5,7 @@ summary: >-
   Covers the management of your Neon account, including updating personal
   information, changing your email and password, and switching login methods.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.111Z'
+updatedOn: '2026-02-15T20:51:54.223Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.

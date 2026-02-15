@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.944Z'
+updatedOn: '2026-02-15T20:51:54.147Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage on Neon's paid plans.

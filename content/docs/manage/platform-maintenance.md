@@ -7,7 +7,7 @@ summary: >-
   effectively.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.120Z'
+updatedOn: '2026-02-15T20:51:54.239Z'
 ---
 
 Neon occasionally performs essential **platform maintenance** outside of [scheduled updates](/docs/manage/updates) performed on Neon computes. This means that you may experience brief disruptions from time to time for these important updates.

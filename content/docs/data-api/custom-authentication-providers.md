@@ -6,7 +6,7 @@ summary: >-
   enabling integration with existing systems that issue JSON Web Tokens (JWTs)
   like Auth0, Clerk, and AWS Cognito.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.806Z'
+updatedOn: '2026-02-15T20:51:54.070Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---

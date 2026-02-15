@@ -5,7 +5,7 @@ summary: >-
   how to view and analyze system and database metrics based on your Neon plan
   and selected compute or branch.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.095Z'
+updatedOn: '2026-02-15T20:51:54.215Z'
 ---
 
 The **Monitoring** dashboard in the Neon console provides several graphs for monitoring system and database metrics. You can access the **Monitoring** dashboard from the sidebar in the Neon Console. Observable metrics include:

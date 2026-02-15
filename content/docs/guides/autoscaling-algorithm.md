@@ -6,7 +6,7 @@ summary: >-
   monitors key metrics like CPU load and memory usage to automatically adjust
   compute resources for optimal performance and efficiency.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.919Z'
+updatedOn: '2026-02-15T20:51:54.123Z'
 ---
 
 <InfoBlock>

@@ -6,7 +6,7 @@ summary: >-
   storage and querying of multidimensional points and cubes for applications in
   GIS, business intelligence, and scientific computing.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.824Z'
+updatedOn: '2026-02-15T20:51:54.075Z'
 ---
 
 The cube extension for Postgres provides a specialized data type for representing multidimensional "cubes", which are, more generally, n-dimensional boxes or points. This makes it useful for applications dealing with multidimensional data, such as geographic information systems (GIS) storing coordinates (latitude, longitude, altitude), business intelligence (BI) applications analyzing data across various dimensions, or scientific computing tasks involving vector operations.

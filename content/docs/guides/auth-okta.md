@@ -7,7 +7,7 @@ summary: >-
   application using Okta, including project setup, database connection, schema
   definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.919Z'
+updatedOn: '2026-02-15T20:51:54.120Z'
 ---
 
 <Admonition type="note">

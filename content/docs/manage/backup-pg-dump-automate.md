@@ -6,7 +6,7 @@ summary: >-
   GitHub Actions, enabling nightly backups to S3 for long-term data retention
   and recovery.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.113Z'
+updatedOn: '2026-02-15T20:51:54.224Z'
 ---
 
 Keeping regular backups of your database is critical for protecting against data loss. While Neon offers an [instant restore](/docs/introduction/branch-restore) feature (point-in-time restore) for backups of up to 30 days, there are scenarios (such as business continuity, disaster recovery, or regulatory compliance) where maintaining independent and longer-lived backup files may be necessary. In these cases, using the Postgres `pg_dump` tool to create backups and storing them on a reliable external service (like an AWS S3 bucket) gives you control over long-term retention and recovery of your data.

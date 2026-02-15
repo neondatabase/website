@@ -6,7 +6,7 @@ summary: >-
   architecture that separates storage and compute, ensuring data redundancy and
   compute resiliency across multiple Availability Zones.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.090Z'
+updatedOn: '2026-02-15T20:51:54.214Z'
 ---
 
 At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.

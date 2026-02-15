@@ -6,7 +6,7 @@ summary: >-
   detailing five primary data types and their usage in various applications such
   as event logging and duration calculations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.819Z'
+updatedOn: '2026-02-15T20:51:54.073Z'
 ---
 
 Postgres offers a rich set of native data types for storing date and time values. Both moment-in-time and interval data can be stored, and Postgres provides a variety of functions to query and manipulate them.

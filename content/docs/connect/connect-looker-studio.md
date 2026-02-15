@@ -5,7 +5,7 @@ summary: >-
   How to connect your Neon Postgres database to Looker Studio by configuring the
   PostgreSQL data source, setting up SSL, and authenticating the connection.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.789Z'
+updatedOn: '2026-02-15T20:51:54.066Z'
 ---
 
 [Looker Studio](https://lookerstudio.google.com/) is Google's data visualization and business intelligence platform. This guide explains how to connect your Neon Postgres database to Looker Studio using a PostgreSQL data source.

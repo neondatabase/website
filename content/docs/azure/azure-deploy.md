@@ -7,7 +7,7 @@ summary: >-
   native integration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:32.774Z'
+updatedOn: '2026-02-15T20:51:54.053Z'
 ---
 
 <Admonition type="important" title="deprecated">

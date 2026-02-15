@@ -6,7 +6,7 @@ summary: >-
   Neon organizations, detailing what Admins, Members, and Collaborators can do
   at both the organization and project levels.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.124Z'
+updatedOn: '2026-02-15T20:51:54.244Z'
 ---
 
 In Neon, roles determine what actions you can take within an organization and its projects. This page provides a detailed breakdown of permissions for each role: **Admin**, **Member**, and **Collaborator**.

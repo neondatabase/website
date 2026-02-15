@@ -7,7 +7,7 @@ summary: >-
   Covers the setup of Neon as an Azure Native Service, detailing pricing plans,
   billing through Azure Marketplace, and the transition from deprecated
   Azure-managed organizations to Neon-managed organizations.
-updatedOn: '2026-02-06T22:07:33.085Z'
+updatedOn: '2026-02-15T20:51:54.212Z'
 ---
 
 <Admonition type="important" title="deprecated">

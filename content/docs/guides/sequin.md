@@ -7,7 +7,7 @@ summary: >-
   stream real-time changes, including inserts, updates, and deletes, to various
   applications and services using logical replication.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.053Z'
+updatedOn: '2026-02-15T20:51:54.200Z'
 ---
 
 Neon's Logical Replication features makes it possible to detect every change in your database. It can be used to power read-replicas and backups, but can also be used to add streaming characteristics to Neon.

@@ -7,7 +7,7 @@ summary: >-
   pgloader, detailing prerequisites, setup steps, and configuration requirements
   for a successful data transfer.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.076Z'
+updatedOn: '2026-02-15T20:51:54.209Z'
 ---
 
 This guide describes how to migrate your database from a Microsoft SQL Server (MSSQL) database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).

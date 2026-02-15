@@ -7,7 +7,7 @@ summary: >-
   psycopg2, or asyncpg, including steps for project creation and performing CRUD
   operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.034Z'
+updatedOn: '2026-02-15T20:51:54.190Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 

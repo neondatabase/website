@@ -6,7 +6,7 @@ summary: >-
   with Neon, including setting up a Node.js application and creating a book
   catalog API while applying schema migrations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.032Z'
+updatedOn: '2026-02-15T20:51:54.187Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 

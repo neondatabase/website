@@ -8,7 +8,7 @@ summary: >-
   infrastructure management.
 enableTableOfContents: true
 tag: community
-updatedOn: '2026-02-06T22:07:33.148Z'
+updatedOn: '2026-02-15T20:51:54.266Z'
 ---
 
 Terraform is an open-source infrastructure as code (IaC) tool that allows you to define and provision cloud resources in a declarative configuration language. By codifying infrastructure, Terraform enables consistent, repeatable, and automated deployments, significantly reducing manual errors.

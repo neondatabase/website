@@ -6,7 +6,7 @@ summary: >-
   including adding, editing, and deleting records, filtering data, and modifying
   table structures.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.058Z'
+updatedOn: '2026-02-15T20:51:54.200Z'
 ---
 
 The **Tables** page in the Neon Console offers a dynamic, visual interface for managing data and schemas. Fully interactive, this view lets you add, update, and delete records, filter data, modify columns, drop or truncate tables, export data in both .json and .csv formats, and manage schemas, tables, views, and enums.

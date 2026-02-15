@@ -6,7 +6,7 @@ summary: >-
   RedwoodSDK application, including setting up dependencies and storing
   connection credentials.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.041Z'
+updatedOn: '2026-02-15T20:51:54.192Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"

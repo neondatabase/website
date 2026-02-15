@@ -6,7 +6,7 @@ summary: >-
   enabling XML parsing, XPath querying, and XSLT transformations for XML data
   management within Neon databases.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.852Z'
+updatedOn: '2026-02-15T20:51:54.098Z'
 ---
 
 The `xml2` extension for Postgres provides functions to parse XML data, evaluate XPath queries against it, and perform XSLT transformations. This can be useful for applications that need to process or extract information from XML documents stored within the database.

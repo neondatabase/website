@@ -6,7 +6,7 @@ summary: >-
   database migrations and query optimization in VS Code, utilizing Neon's
   branching workflow for efficient development.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.719Z'
+updatedOn: '2026-02-15T20:51:54.032Z'
 ---
 
 GitHub Copilot now supports custom agents, and we've built two specialized agents that bring Neon's branching workflow directly into your IDE. These agents help you run safe database migrations and identify slow queries, all without leaving VS Code.

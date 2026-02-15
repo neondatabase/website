@@ -5,7 +5,7 @@ summary: >-
   for organizations using the Neon API, including how to find organization IDs
   necessary for querying.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.118Z'
+updatedOn: '2026-02-15T20:51:54.232Z'
 ---
 
 You can use the Neon API to retrieve two types of consumption history metrics for your organization:

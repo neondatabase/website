@@ -6,7 +6,7 @@ summary: >-
   database, including setup instructions and prerequisites for creating a Neon
   project and connecting to the database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.018Z'
+updatedOn: '2026-02-15T20:51:54.172Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.

@@ -6,7 +6,7 @@ summary: >-
   Npgsql library, including steps for creating a Neon project and performing
   CRUD operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.954Z'
+updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 

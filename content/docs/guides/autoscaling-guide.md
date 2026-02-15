@@ -5,7 +5,7 @@ summary: >-
   configuring minimum and maximum compute sizes to automatically adjust based on
   workload demand.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.920Z'
+updatedOn: '2026-02-15T20:51:54.123Z'
 ---
 
 <InfoBlock>

@@ -4,7 +4,7 @@ summary: >-
   Covers the management of Neon organizations, including creating organizations,
   inviting members, and setting permissions based on assigned roles.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.119Z'
+updatedOn: '2026-02-15T20:51:54.238Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.

@@ -9,7 +9,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-02-06T22:07:32.892Z'
+updatedOn: '2026-02-15T20:51:54.105Z'
 ---
 
 <CheckList title="Production checklist">

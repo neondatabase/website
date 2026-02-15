@@ -7,7 +7,7 @@ summary: >-
   database, including project creation, dependency installation, and enabling
   on-demand rendering for real-time queries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.912Z'
+updatedOn: '2026-02-15T20:51:54.115Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 

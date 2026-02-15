@@ -6,7 +6,7 @@ summary: >-
   application with Neon Auth, including trusted domains, custom email providers,
   OAuth credentials, email verification, and security measures.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.764Z'
+updatedOn: '2026-02-15T20:51:54.048Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />

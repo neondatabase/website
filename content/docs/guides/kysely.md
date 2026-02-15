@@ -6,7 +6,7 @@ summary: >-
   using Kysely, including setup, TypeScript schema definitions, and executing
   migrations and queries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.997Z'
+updatedOn: '2026-02-15T20:51:54.167Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 

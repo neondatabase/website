@@ -6,7 +6,7 @@ summary: >-
   GiST, GIN, and BRIN, and provides guidance on creating and effectively using
   these indexes to optimize query performance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.125Z'
+updatedOn: '2026-02-15T20:51:54.245Z'
 ---
 
 Indexes are a powerful tool to optimize query performance in relational databases like Neon Postgres. They allow the database engine to quickly locate and retrieve specific rows, significantly speeding up data access. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.

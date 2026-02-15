@@ -6,7 +6,7 @@ summary: >-
   branches, enabling detailed analysis through the Neon Console, CLI, or API for
   migration reviews, audits, and consistency checks.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.051Z'
+updatedOn: '2026-02-15T20:51:54.199Z'
 ---
 
 Neon's Schema Diff tool lets you compare an SQL script of the schemas for two selected branches in a side-by-side view (or line-by-line on mobile devices).

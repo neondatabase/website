@@ -6,7 +6,7 @@ summary: >-
   using `pg_dump` and `pg_restore` within a GitHub Actions workflow.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.024Z'
+updatedOn: '2026-02-15T20:51:54.180Z'
 ---
 
 This workflow will create a full Neon Twin using `pg_dump` and `pg_restore`.

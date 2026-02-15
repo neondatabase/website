@@ -6,7 +6,7 @@ summary: >-
   the `num_cpus()` function for monitoring CPU resource allocation by Neon's
   Autoscaling feature in response to workload changes.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.831Z'
+updatedOn: '2026-02-15T20:51:54.079Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates CPU resources in response to workload. The function returns the current number of allocated CPU cores.

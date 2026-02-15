@@ -6,7 +6,7 @@ summary: >-
   authenticated sessions using JSON Web Tokens (JWTs), including JWK validation
   and PostgREST compatibility for secure user identity handling.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.839Z'
+updatedOn: '2026-02-15T20:51:54.089Z'
 ---
 
 <InfoBlock>

@@ -7,7 +7,7 @@ summary: >-
   Postgres Full-Text Search, enhancing search performance and relevance by
   controlling how integers are tokenized and indexed.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.827Z'
+updatedOn: '2026-02-15T20:51:54.077Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.

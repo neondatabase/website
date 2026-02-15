@@ -6,7 +6,7 @@ summary: >-
   from the client-side, generating backend signatures, and storing asset
   metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.943Z'
+updatedOn: '2026-02-15T20:51:54.143Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
