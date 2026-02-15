@@ -368,16 +368,16 @@ Lists members with support for pagination, sorting, and filtering.
 <details>
 <summary>View parameters</summary>
 
-| Parameter                     | Type                                    | Required | Notes                                |
-| :---------------------------- | :-------------------------------------- | :------: | :----------------------------------- |
-| <tt>query.organizationId</tt> | string \| undefined                     |          | Defaults to the active organization  |
-| <tt>query.limit</tt>          | number \| undefined                     |          | Items per page (default: 100)        |
-| <tt>query.offset</tt>         | number \| undefined                     |          | Items to skip                        |
+| Parameter                     | Type                                    | Required | Notes                                       |
+| :---------------------------- | :-------------------------------------- | :------: | :------------------------------------------ |
+| <tt>query.organizationId</tt> | string \| undefined                     |          | Defaults to the active organization         |
+| <tt>query.limit</tt>          | number \| undefined                     |          | Items per page (default: 100)               |
+| <tt>query.offset</tt>         | number \| undefined                     |          | Items to skip                               |
 | <tt>query.sortBy</tt>         | string \| undefined                     |          | Field to sort by (for example, `createdAt`) |
-| <tt>query.sortDirection</tt>  | "asc" \| "desc" \| undefined            |          | Sort direction                       |
-| <tt>query.filterField</tt>    | string \| undefined                     |          | Field to filter by                   |
-| <tt>query.filterOperator</tt> | "eq" \| "ne" \| "gt" \| "contains" etc. |          | Operator for filtering               |
-| <tt>query.filterValue</tt>    | string \| undefined                     |          | Value to filter for                  |
+| <tt>query.sortDirection</tt>  | "asc" \| "desc" \| undefined            |          | Sort direction                              |
+| <tt>query.filterField</tt>    | string \| undefined                     |          | Field to filter by                          |
+| <tt>query.filterOperator</tt> | "eq" \| "ne" \| "gt" \| "contains" etc. |          | Operator for filtering                      |
+| <tt>query.filterValue</tt>    | string \| undefined                     |          | Value to filter for                         |
 
 </details>
 

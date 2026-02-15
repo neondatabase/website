@@ -256,15 +256,15 @@ GET https://console.neon.tech/api/v2/consumption_history/v2/projects
 
 This endpoint provides metrics that map directly to usage-based billing line items:
 
-| Metric                           | Description                                                 |
-| -------------------------------- | ----------------------------------------------------------- |
-| `compute_unit_seconds`           | Compute usage measured in compute unit seconds              |
-| `root_branch_bytes_month`        | Storage consumed by root branches                           |
-| `child_branch_bytes_month`       | Storage consumed by child branches (delta from parent)      |
-| `instant_restore_bytes_month`    | Change history storage for point-in-time restore            |
-| `public_network_transfer_bytes`  | Data transfer over the public internet                      |
+| Metric                           | Description                                                        |
+| -------------------------------- | ------------------------------------------------------------------ |
+| `compute_unit_seconds`           | Compute usage measured in compute unit seconds                     |
+| `root_branch_bytes_month`        | Storage consumed by root branches                                  |
+| `child_branch_bytes_month`       | Storage consumed by child branches (delta from parent)             |
+| `instant_restore_bytes_month`    | Change history storage for point-in-time restore                   |
+| `public_network_transfer_bytes`  | Data transfer over the public internet                             |
 | `private_network_transfer_bytes` | Data transfer over private networks (for example, AWS PrivateLink) |
-| `extra_branches_month`           | Extra branches beyond your plan's included allowance        |
+| `extra_branches_month`           | Extra branches beyond your plan's included allowance               |
 
 ### Required parameters
 
@@ -380,15 +380,15 @@ For full API details including all parameters and response schema, see [Retrieve
 
 These metrics are returned by the [project metrics API for usage-based plans](#get-project-level-metrics-for-usage-based-plans) and align directly with billing line items:
 
-| Metric                           | Unit    | Description                                                 |
-| -------------------------------- | ------- | ----------------------------------------------------------- |
-| `compute_unit_seconds`           | Seconds | Compute usage measured in compute unit seconds              |
-| `root_branch_bytes_month`        | Bytes   | Storage consumed by root branches                           |
-| `child_branch_bytes_month`       | Bytes   | Storage consumed by child branches (delta from parent)      |
-| `instant_restore_bytes_month`    | Bytes   | Change history storage for point-in-time restore            |
-| `public_network_transfer_bytes`  | Bytes   | Data transfer over the public internet                      |
+| Metric                           | Unit    | Description                                                        |
+| -------------------------------- | ------- | ------------------------------------------------------------------ |
+| `compute_unit_seconds`           | Seconds | Compute usage measured in compute unit seconds                     |
+| `root_branch_bytes_month`        | Bytes   | Storage consumed by root branches                                  |
+| `child_branch_bytes_month`       | Bytes   | Storage consumed by child branches (delta from parent)             |
+| `instant_restore_bytes_month`    | Bytes   | Change history storage for point-in-time restore                   |
+| `public_network_transfer_bytes`  | Bytes   | Data transfer over the public internet                             |
 | `private_network_transfer_bytes` | Bytes   | Data transfer over private networks (for example, AWS PrivateLink) |
-| `extra_branches_month`           | Count   | Extra branches beyond your plan's included allowance        |
+| `extra_branches_month`           | Count   | Extra branches beyond your plan's included allowance               |
 
 ### Legacy plan metrics
 
