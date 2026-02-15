@@ -78,7 +78,7 @@ After enabling logical replication on Neon, you'll now connect your Neon databas
    Defining specific tables lets you add or remove tables from the publication later, which you cannot do when creating publications with `FOR ALL TABLES`.
    </Admonition>
 
-5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (e.g. `neondb`) and click **Create Database**.
+5. Back in the Sequin Console, enter the name of the replication slot (`sequin_slot`) and publication (`sequin_pub`) you just created. Then, name your database (for example `neondb`) and click **Create Database**.
 
 With these steps completed, your Neon database is now connected to Sequin via a replication slot and publication. Sequin is now detecting changes to your tables.
 
@@ -101,7 +101,7 @@ Set up a consumer in Sequin to stream changes from your database.
    - **HTTP Pull** (similar to SQS): Your application pulls changes from Sequin.
 
 6. Enter the final details for your consumer:
-   - Give your consumer a name (e.g., `neon-changes-consumer`).
+   - Give your consumer a name (for example, `neon-changes-consumer`).
    - If using HTTP Push, provide the endpoint URL where Sequin should send the changes. You can also provide encrypted headers.
    - Optionally, set a timeout and add an endpoint path.
 

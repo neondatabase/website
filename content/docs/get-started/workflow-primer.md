@@ -191,7 +191,7 @@ We recommend following this naming convention to identify these branches easily:
 test/<git_branch_name-test_run_name-commit_SHA-time_of_the_test_execution>
 ```
 
-The time of the test execution can be an epoch UNIX timestamp (e.g., 1704305739). For example:
+The time of the test execution can be an epoch UNIX timestamp (such as 1704305739). For example:
 
 ```bash
 test/feat/new-login-loginPageFunctionality-1a2b3c4d-20240211T1530

@@ -228,7 +228,7 @@ Means a high-impact problem in a customer's production systems. Essential operat
 
 Examples:
 
-- Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
+- Partial outage of the service provided by Neon: service usable, but key feature unusable, for example:
   - Cannot create a new branch
   - Cannot execute a branch restore
   - Cannot perform point-in-time recovery (PITR)

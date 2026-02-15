@@ -47,7 +47,7 @@ Create a new Encore application using the CLI.
 encore app create my-neon-app
 ```
 
-Select **TypeScript** as the language and choose the template that fits your needs (e.g., **URL Shortener** or **Empty app**).
+Select **TypeScript** as the language and choose the template that fits your needs (for example, **URL Shortener** or **Empty app**).
 
 Navigate to your app directory.
 

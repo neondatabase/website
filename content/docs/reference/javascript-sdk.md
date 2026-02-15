@@ -944,7 +944,7 @@ const { data, error } = await client.from('todos').select('*').is('completed_at'
 <TwoColumnLayout.Block>
 
 Filters rows where the column value matches any value in the provided array.
-Useful for filtering by multiple possible values (e.g., status in ['pending', 'active']).
+Useful for filtering by multiple possible values (for example, status in ['pending', 'active']).
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

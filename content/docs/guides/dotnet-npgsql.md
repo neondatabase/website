@@ -49,7 +49,7 @@ For your .NET project, you will create a project directory and add the required 
     cd NeonLibraryExample
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code, Visual Studio).
+    > Open this directory in your preferred code editor (for example, VS Code, Visual Studio).
 
 2.  Add the required NuGet packages using `dotnet add package`.
     - `Npgsql`: The .NET data provider for PostgreSQL.

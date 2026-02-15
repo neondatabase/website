@@ -32,7 +32,7 @@ This configures the Neon MCP Server for compatible MCP clients in your workspace
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This command adds the required configuration to your editor's MCP config files; it does not open a browser by itself. Add `-g` for global (user-level) setup instead of project-level. Restart your editor (or enable the MCP server in your editor's settings). When you use the MCP connection, an OAuth window will open in your browser to authorize access to your Neon account. For more options (e.g., global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp).
+This command adds the required configuration to your editor's MCP config files; it does not open a browser by itself. Add `-g` for global (user-level) setup instead of project-level. Restart your editor (or enable the MCP server in your editor's settings). When you use the MCP connection, an OAuth window will open in your browser to authorize access to your Neon account. For more options (for example, global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp).
 
 **Other setup options:**
 

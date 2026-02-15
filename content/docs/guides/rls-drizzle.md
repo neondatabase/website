@@ -114,12 +114,12 @@ The `crudPolicy` function from `drizzle-orm/neon` is a high-level helper that de
 - **`read`**: Controls access to `SELECT` operations. Accepts:
   - `true` to allow all reads for the role
   - `false` to deny all reads
-  - a custom SQL expression for fine-grained access (e.g., `authUid(table.userId)`)
+  - a custom SQL expression for fine-grained access (for example, `authUid(table.userId)`)
   - `null` to skip generating a `SELECT` policy
 - **`modify`**: Controls access to `INSERT`, `UPDATE`, and `DELETE` operations. Accepts:
   - `true` to allow all modifications
   - `false` to deny all modifications
-  - a custom SQL expression for conditional access (e.g., `authUid(table.userId)`)
+  - a custom SQL expression for conditional access (for example, `authUid(table.userId)`)
   - `null` to skip generating policies for these operations
 
 The `crudPolicy` helper generates an array of RLS policy definitions for all CRUD operations (select, insert, update, delete) based on these parameters. For most use cases, this lets you express common access patterns with minimal boilerplate.

@@ -252,7 +252,7 @@ To get started:
 
 5. Connect to the database **on the development branch** with an SQL client. Be mindful that a child branch connection string differs from a parent branch connection string. The branches reside on different hosts. If you need help connecting to your branch, see [Connect from any client](/docs/connect/connect-from-any-app).
 
-6. After connecting the database on your new branch, create a developer user (e.g., `dev_user1`). The password requirements described above apply here as well.
+6. After connecting the database on your new branch, create a developer user (for example, `dev_user1`). The password requirements described above apply here as well.
 
    ```sql
    CREATE ROLE dev_user1 WITH LOGIN PASSWORD '<password>';

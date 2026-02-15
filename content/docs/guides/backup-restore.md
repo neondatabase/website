@@ -151,7 +151,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \

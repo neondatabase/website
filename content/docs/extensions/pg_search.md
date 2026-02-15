@@ -52,7 +52,7 @@ The `pg_search` extension is supported on Postgres 14–16 for Neon projects in 
 Key features include:
 
 - **Advanced relevance ranking:** Orders search results by relevance, incorporating phrase, regex, fuzzy matching, and other specialized FTS queries.
-- **Powerful indexing with flexible tokenization:** Supports multiple tokenizers (e.g., ICU, Lindera) and token filters (e.g., language-aware stemmers), improving search accuracy across different languages.
+- **Powerful indexing with flexible tokenization:** Supports multiple tokenizers (for example, ICU, Lindera) and token filters (for example, language-aware stemmers), improving search accuracy across different languages.
 - **Hybrid search:** Combines BM25 scores with `pgvector` embeddings to enhance search experiences.
 - **Faceted search:** Allows categorization and filtering of search results based on query parameters.
 - **Expressive query builder:** Provides an Elastic DSL-like query syntax for constructing complex search queries.

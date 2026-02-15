@@ -383,7 +383,7 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 | **Storage (root branches), GB-month**  | Data storage for root branches, billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                                                      |
 | **Storage (child branches), GB-month** | Data storage for child branches (minimum of delta or logical size), billed per GB-month. [Learn more](/docs/introduction/plans#storage).                                  |
 | **Public network transfer**            | Outbound data transfer (egress) from your databases to the public internet. [Learn more](/docs/introduction/plans#public-network-transfer).                               |
-| **Private network transfer**           | Bi-directional data transfer to and from your databases over private networking (e.g., AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
+| **Private network transfer**           | Bi-directional data transfer to and from your databases over private networking (for example, AWS PrivateLink). [Learn more](/docs/introduction/plans#private-network-transfer). |
 
 ## Usage-based cost examples
 
@@ -492,7 +492,7 @@ How are instant restores billed?
  Change history is stored as Postgres WAL records.
 
 Is instant restore history accumulated at the project or branch level?
-: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single restore window (e.g., 7 days or 30 days) for the entire project. You cannot enable, disable, or configure the restore window per branch.
+: You can only point-in-time restore from root branches, so only root branches contribute to your billed PITR storage. You set a single restore window (for example, 7 days or 30 days) for the entire project. You cannot enable, disable, or configure the restore window per branch.
 
 Can I disable scale-to-zero?
 : Free: No, it's always enabled (5 min idle timeout).  
@@ -512,7 +512,7 @@ How is private network transfer billed?
 : Only available on Scale: $0.01/GB, bidirectional, between Neon and private network services.
 
 What happens if I exceed my Free plan limits?
-: On the Free plan, compute will suspend when limits are reached (e.g., CU-hours or public network transfer). To continue, upgrade to a paid plan.
+: On the Free plan, compute will suspend when limits are reached (for example, CU-hours or public network transfer). To continue, upgrade to a paid plan.
 
 Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.

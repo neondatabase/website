@@ -77,7 +77,7 @@ You can create a new branch for feature development, bug fixes, or collaborative
 
 1. Select your organization and project.
 2. Click **Create new branch...** in the branch dropdown.
-3. Enter a descriptive branch name (e.g., `feature/user-authentication`, `bugfix/login-validation`).
+3. Enter a descriptive branch name (for example, `feature/user-authentication`, `bugfix/login-validation`).
 4. Choose the parent branch you want to branch from.
 
 The extension creates the new branch and connects you immediately.

@@ -36,7 +36,7 @@ However, a branch **cannot** be archived if it:
 
 - Has an **unarchived child branch**.
 - Has **computes running**.
-- Is **in transition** (e.g., currently being created or unarchived).
+- Is **in transition** (for example, currently being created or unarchived).
 - Is a **protected branch** ([learn more](/docs/guides/protected-branches)).
 
 <Admonition type="note">

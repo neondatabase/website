@@ -54,7 +54,7 @@ Note that these policies apply _only_ to the metadata in Neon. Access control fo
 
 ## Upload files to ImageKit.io and store metadata in Neon
 
-The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (e.g., a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Neon.
+The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (for example, a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Neon.
 
 This requires two backend endpoints:
 
@@ -181,7 +181,7 @@ Create a `.env` file with your credentials:
 # ImageKit.io Credentials
 IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
 IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
-IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint # e.g., https://ik.imagekit.io/your_instance_id
+IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint # for example, https://ik.imagekit.io/your_instance_id
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string

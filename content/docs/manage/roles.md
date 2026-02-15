@@ -357,7 +357,7 @@ CREATE ROLE <name> WITH LOGIN PASSWORD 'password';
       - Lowercase letters (a-z)
       - Uppercase letters (A-Z)
       - Numbers (0-9)
-      - Special symbols (e.g., !@#$%^&*)
+      - Special symbols (for example, !@#$%^&*)
     - **Avoid predictability**: To maintain a high level of unpredictability, do not use:
       - Sequential patterns (such as '1234', 'abcd', 'qwerty')
       - Common words or phrases

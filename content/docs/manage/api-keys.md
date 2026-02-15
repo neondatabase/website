@@ -59,7 +59,7 @@ curl https://console.neon.tech/api/v2/api_keys
 
 **Parameters:**
 
-- `key_name`: A descriptive name for the API key (e.g., "development", "staging", "ci-pipeline")
+- `key_name`: A descriptive name for the API key (for example, "development", "staging", "ci-pipeline")
 
 **Response:**
 

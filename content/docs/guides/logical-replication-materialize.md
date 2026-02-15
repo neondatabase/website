@@ -195,9 +195,9 @@ Now that you’ve configured your database network and created an ingestion clus
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
-   - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
-   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
+   - Replace `<host>` with your Neon hostname (for example, `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+   - Replace `<role_name>` with the name of your Postgres role (for example, `alex`)
+   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (for example, `dbname`)
 
 3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
 

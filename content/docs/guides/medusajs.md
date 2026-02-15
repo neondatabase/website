@@ -63,7 +63,7 @@ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 ### Installation steps
 
 1.  **Follow the prompts:** The CLI will ask a few questions to configure your setup:
-    - **Project name:** Enter a name for your project (e.g., `medusa-neon-store`).
+    - **Project name:** Enter a name for your project (for example, `medusa-neon-store`).
     - **Frontend starter:** Choose whether to install the Next.js Starter Storefront or skip it depending on your preference.
 2.  **Automatic setup:**
     - The tool will install the Medusa backend and optionally the Next.js Starter Storefront.

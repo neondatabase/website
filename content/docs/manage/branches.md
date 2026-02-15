@@ -24,7 +24,7 @@ When working with branches, it is important to remove old and unused branches. B
 
 ## Branch naming requirements
 
-Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (e.g., `br-curly-wave-af4i4oeu`).
+Specifying a branch name is optional. If you don't provide one, the branch name defaults to the automatically generated branch ID with a `br-` prefix (for example, `br-curly-wave-af4i4oeu`).
 
 If you do specify a custom branch name when creating or renaming a branch, it must meet the following requirements:
 

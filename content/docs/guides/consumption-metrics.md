@@ -263,7 +263,7 @@ This endpoint provides metrics that map directly to usage-based billing line ite
 | `child_branch_bytes_month`       | Storage consumed by child branches (delta from parent)      |
 | `instant_restore_bytes_month`    | Change history storage for point-in-time restore            |
 | `public_network_transfer_bytes`  | Data transfer over the public internet                      |
-| `private_network_transfer_bytes` | Data transfer over private networks (e.g., AWS PrivateLink) |
+| `private_network_transfer_bytes` | Data transfer over private networks (for example, AWS PrivateLink) |
 | `extra_branches_month`           | Extra branches beyond your plan's included allowance        |
 
 ### Required parameters
@@ -387,7 +387,7 @@ These metrics are returned by the [project metrics API for usage-based plans](#g
 | `child_branch_bytes_month`       | Bytes   | Storage consumed by child branches (delta from parent)      |
 | `instant_restore_bytes_month`    | Bytes   | Change history storage for point-in-time restore            |
 | `public_network_transfer_bytes`  | Bytes   | Data transfer over the public internet                      |
-| `private_network_transfer_bytes` | Bytes   | Data transfer over private networks (e.g., AWS PrivateLink) |
+| `private_network_transfer_bytes` | Bytes   | Data transfer over private networks (for example, AWS PrivateLink) |
 | `extra_branches_month`           | Count   | Extra branches beyond your plan's included allowance        |
 
 ### Legacy plan metrics

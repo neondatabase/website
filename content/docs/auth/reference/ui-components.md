@@ -42,7 +42,7 @@ function App() {
 | Prop                         | Type                     | Description                                                       | Example                                                  |
 | ---------------------------- | ------------------------ | ----------------------------------------------------------------- | -------------------------------------------------------- |
 | `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance                      | `authClient={authClient}`                                |
-| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (e.g., Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
+| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (for example, Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
 | `navigate`                   | `(href: string) => void` | Navigation function for React Router                              | `navigate={navigate}`                                    |
 | `Link`                       | `ComponentType`          | Custom Link component for routing                                 | `Link={RouterLink}`                                      |
 | `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                           | See example below                                        |
@@ -180,7 +180,7 @@ This includes all necessary styles (~47KB minified) with no additional configura
 If your project already uses Tailwind CSS v4, import the Tailwind-ready CSS to avoid duplicate styles:
 
 ```css
-/* In your main CSS file (e.g., globals.css) */
+/* In your main CSS file (for example, globals.css) */
 @import 'tailwindcss';
 @import '@neondatabase/neon-js/ui/tailwind';
 ```

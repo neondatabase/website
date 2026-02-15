@@ -373,7 +373,7 @@ Lists members with support for pagination, sorting, and filtering.
 | <tt>query.organizationId</tt> | string \| undefined                     |          | Defaults to the active organization  |
 | <tt>query.limit</tt>          | number \| undefined                     |          | Items per page (default: 100)        |
 | <tt>query.offset</tt>         | number \| undefined                     |          | Items to skip                        |
-| <tt>query.sortBy</tt>         | string \| undefined                     |          | Field to sort by (e.g., `createdAt`) |
+| <tt>query.sortBy</tt>         | string \| undefined                     |          | Field to sort by (for example, `createdAt`) |
 | <tt>query.sortDirection</tt>  | "asc" \| "desc" \| undefined            |          | Sort direction                       |
 | <tt>query.filterField</tt>    | string \| undefined                     |          | Field to filter by                   |
 | <tt>query.filterOperator</tt> | "eq" \| "ne" \| "gt" \| "contains" etc. |          | Operator for filtering               |
@@ -513,7 +513,7 @@ const canDelete = authClient.organization.checkRolePermission({
 Because Neon Auth is a managed service, some Better Auth features are not currently supported:
 
 - **Teams:** The Teams sub-feature is not currently enabled.
-- **Hooks:** Server-side hooks (e.g., `beforeCreateOrganization`) are not supported.
+- **Hooks:** Server-side hooks (for example, `beforeCreateOrganization`) are not supported.
 - **Custom Permissions:** You cannot currently define custom roles or modify default permissions.
 - **Dynamic Access Control:** Dynamic creation of roles via API is not enabled.
 

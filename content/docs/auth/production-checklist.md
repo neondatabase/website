@@ -47,7 +47,7 @@ In your project's **Settings** → **Auth** page, configure your email provider:
 
 1. Select **Custom SMTP provider**
 2. Enter your SMTP credentials:
-   - **Host**: Your SMTP server hostname (e.g., `smtp.gmail.com`)
+   - **Host**: Your SMTP server hostname (for example, `smtp.gmail.com`)
    - **Port**: SMTP port (typically `465` for SSL or `587` for TLS)
    - **Username**: Your SMTP username
    - **Password**: Your SMTP password or app-specific password

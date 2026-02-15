@@ -38,7 +38,7 @@ Production (main)                Preview Branch (preview-pr-123)
 After branching, the environments operate independently:
 
 1.  **Data Isolation:** Changes in one branch don't affect others. Creating a user in a preview branch does not create them in production.
-2.  **Config Isolation:** You can modify auth settings (e.g., email templates, token settings) in the branch without affecting the parent.
+2.  **Config Isolation:** You can modify auth settings (for example, email templates, token settings) in the branch without affecting the parent.
 3.  **Endpoint Isolation:** Each branch gets a unique Auth API URL. Tokens issued in one branch are not valid in another.
 
 ```
@@ -143,7 +143,7 @@ With Neon Auth, you can spin up a complete parallel environment for your new ver
 **The workflow:**
 
 1.  **Branch production:** Create a branch named `v2-beta` from your main production database. This clones your entire application state, including the `neon_auth` schema containing all user identities and hashed passwords.
-2.  **Deploy v2:** Deploy your new application code (e.g., to `beta.myapp.com`) and point it to the `v2-beta` branch's Auth URL.
+2.  **Deploy v2:** Deploy your new application code (for example, to `beta.myapp.com`) and point it to the `v2-beta` branch's Auth URL.
 3.  **Seamless login:** Existing users can visit your new v2 site and **log in immediately using their existing credentials**. They do not need to sign up again or reset their passwords.
 
 This allows you to test radical architectural changes such as renaming database columns, changing table structures, or modifying authentication flows in a live environment. Your v1 application remains completely unaffected, while your v2 beta feels like a production-ready extension of your platform.

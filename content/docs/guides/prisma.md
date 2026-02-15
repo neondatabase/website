@@ -101,7 +101,7 @@ export default defineConfig({
 
 ### Step 5: Create your Prisma Client
 
-Create a file to instantiate Prisma Client with the Neon adapter (e.g., `src/db.ts`):
+Create a file to instantiate Prisma Client with the Neon adapter (for example, `src/db.ts`):
 
 ```typescript
 import 'dotenv/config'

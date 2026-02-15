@@ -258,7 +258,7 @@ When HIPAA audit logging is enabled for a Neon project, Neon configures pgAudit 
 | ---------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
 | `pgaudit.log`                | `all, -misc` | Logs all classes of SQL statements except low-risk miscellaneous commands.                    |
 | `pgaudit.log_parameter`      | `off`        | Parameters passed to SQL statements are not logged to avoid capturing sensitive values.       |
-| `pgaudit.log_catalog`        | `off`        | Queries on system catalog tables (e.g., `pg_catalog`) are excluded from logs to reduce noise. |
+| `pgaudit.log_catalog`        | `off`        | Queries on system catalog tables (for example, `pg_catalog`) are excluded from logs to reduce noise. |
 | `pgaudit.log_statement`      | `on`         | The full SQL statement text is included in the log.                                           |
 | `pgaudit.log_relation`       | `off`        | Only a single log entry is generated per statement, not per table or view.                    |
 | `pgaudit.log_statement_once` | `off`        | SQL statements are logged with every entry, not just once per session.                        |
@@ -272,7 +272,7 @@ This configuration enables logging for all major classes of SQL activity while e
 - **FUNCTION**: Function calls and `DO` blocks.
 - **ROLE**: Role and permission changes, including `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`.
 - **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` (all DDL operations not included in the `ROLE` class).
-- **MISC_SET**: Miscellaneous `SET` commands, e.g. `SET ROLE`.
+- **MISC_SET**: Miscellaneous `SET` commands, for example `SET ROLE`.
 
 Excluded:
 
@@ -290,7 +290,7 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 - Logs are sent to a dedicated Neon audit collector endpoint and securely stored.
-- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
+- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (for example, `neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
 
 #### Postgres audit log example
 
@@ -336,7 +336,7 @@ The following example shows how a simple SQL command (`CREATE SCHEMA IF NOT EXIS
 | 27                 | CREATE SCHEMA IF NOT EXISTS healthcare  | Full SQL text of the statement.                                                   |
 | 28                 | `<not logged>`                          | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`). |
 | 29–35              | _(empty)_                               | Reserved/unused fields.                                                           |
-| 36                 | neon-internal-sql-editor                | Application name or source of the query (e.g., SQL Editor in the Neon Console).   |
+| 36                 | neon-internal-sql-editor                | Application name or source of the query (for example, SQL Editor in the Neon Console).   |
 
 #### Extension configuration
 

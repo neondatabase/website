@@ -164,7 +164,7 @@ curl --request POST \
 ```
 
 <Admonition type="tip">
-**Creating multiple paid tiers:** You can define different quota levels within your paid organization to match your platform's pricing tiers (e.g., Pro, Business, Enterprise). Simply adjust the quota values and compute limits for each tier.
+**Creating multiple paid tiers:** You can define different quota levels within your paid organization to match your platform's pricing tiers (for example, Pro, Business, Enterprise). Simply adjust the quota values and compute limits for each tier.
 </Admonition>
 
 For detailed information about configuring quotas and what happens when limits are reached, see [Configure consumption limits](/docs/guides/consumption-limits).
@@ -455,7 +455,7 @@ curl --request POST \
 Control when development branch computes scale to zero:
 
 - **Set to `0`**: Uses the default suspension timeout (300 seconds)
-- **Positive integer** (e.g., `600`): Custom timeout in seconds before scaling to zero
+- **Positive integer** (for example, `600`): Custom timeout in seconds before scaling to zero
 - **Set to `-1`**: Disables suspension entirely (compute always on, higher costs)
 
 For development branches, a 5-minute timeout (300 seconds) balances cost efficiency with user experience.
@@ -512,7 +512,7 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 
 ## Best practices
 
-- **Project naming**: Use consistent naming to track ownership and tier (e.g., `myapp-username-free-tier-timestamp`, `myapp-username-paid-tier-timestamp`).
+- **Project naming**: Use consistent naming to track ownership and tier (for example, `myapp-username-free-tier-timestamp`, `myapp-username-paid-tier-timestamp`).
 - **Monitor quotas**: Alert users at 80% and 95% of consumption limits. See [Query consumption metrics](/docs/guides/consumption-metrics).
 - **Retry logic**: Implement exponential backoff for API calls to handle rate limits and transient failures.
 - **Project deletion**: Delete immediately when users request it; warn before removing inactive projects; offer final snapshots.

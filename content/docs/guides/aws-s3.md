@@ -26,7 +26,7 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
 
 1.  Sign up for or log in to your [AWS Account](https://aws.amazon.com/).
 2.  Navigate to the **S3** service in the AWS Management Console.
-3.  Click **Create bucket**. Provide a unique bucket name (e.g., `my-neon-app-s3-uploads`), select an AWS Region (e.g., `us-east-1`), and configure initial settings.
+3.  Click **Create bucket**. Provide a unique bucket name (for example, `my-neon-app-s3-uploads`), select an AWS Region (for example, `us-east-1`), and configure initial settings.
     ![Create S3 Bucket](/docs/guides/aws-s3-create-bucket.png)
 4.  **Public Access (for this example):** For simplicity in accessing uploaded files via URL in this guide, we'll configure the bucket to allow public read access _for objects uploaded with specific permissions_. Under **Block Public Access settings for this bucket**, _uncheck_ "Block all public access". Acknowledge the warning.
     ![Public Access Settings](/docs/guides/aws-s3-public-access.png)
@@ -60,7 +60,7 @@ This guide demonstrates how to integrate AWS S3 with Neon by storing file metada
 6.  **Create IAM user for programmatic access:**
     - Navigate to the **IAM** service in the AWS Console.
     - Go to **Users** and click **Add users**.
-    - Enter a username (e.g., `neon-app-s3-user`). Select **Access key - Programmatic access** as the credential type. Click **Next: Permissions**.
+    - Enter a username (for example, `neon-app-s3-user`). Select **Access key - Programmatic access** as the credential type. Click **Next: Permissions**.
     - Choose **Attach policies directly**. Search for and select `AmazonS3FullAccess`.
       ![Attach S3 Policy](/docs/guides/aws-s3-attach-policy.png)
     - Click **Next**, then **Create user**.
@@ -104,7 +104,7 @@ We need a table in Neon to store metadata about the objects uploaded to S3.
     );
     ```
 
-2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size`).
+2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `s3_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -139,8 +139,8 @@ Create a `.env` file:
 # AWS S3 Credentials & Config
 AWS_ACCESS_KEY_ID=your_iam_user_access_key_id
 AWS_SECRET_ACCESS_KEY=your_iam_user_secret_access_key
-AWS_REGION=your_s3_bucket_region # e.g., us-east-1
-S3_BUCKET_NAME=your_s3_bucket_name # e.g., my-neon-app-s3-uploads
+AWS_REGION=your_s3_bucket_region # for example, us-east-1
+S3_BUCKET_NAME=your_s3_bucket_name # for example, my-neon-app-s3-uploads
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string
@@ -249,8 +249,8 @@ Create a `.env` file:
 # AWS S3 Credentials & Config
 AWS_ACCESS_KEY_ID=your_iam_user_access_key_id
 AWS_SECRET_ACCESS_KEY=your_iam_user_secret_access_key
-AWS_REGION=your_s3_bucket_region # e.g., us-east-1
-S3_BUCKET_NAME=your_s3_bucket_name # e.g., my-neon-app-s3-uploads
+AWS_REGION=your_s3_bucket_region # for example, us-east-1
+S3_BUCKET_NAME=your_s3_bucket_name # for example, my-neon-app-s3-uploads
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string
@@ -441,7 +441,7 @@ Testing the presigned URL flow involves multiple steps:
 - The file appears in your S3 bucket (check the AWS Console).
 - A new row appears in your `s3_files` table in Neon containing the `object_key` and `file_url`.
 
-You can now integrate API calls to these endpoints from various parts of your application (e.g., web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
+You can now integrate API calls to these endpoints from various parts of your application (for example, web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
@@ -470,7 +470,7 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - The `file_url` column contains the direct link to access the file via S3.
-- Use this `file_url` in your application (e.g., `<img>` tags, download links)
+- Use this `file_url` in your application (for example, `<img>` tags, download links)
 
   <Admonition type="note" title="Private buckets">
   For private S3 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.

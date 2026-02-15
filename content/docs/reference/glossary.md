@@ -106,7 +106,7 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ## CIDR notation
 
-CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (e.g., 203.0.113.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (for example, 203.0.113.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## cgroups
 
@@ -162,7 +162,7 @@ A string containing details for connecting to a Neon Postgres database. The deta
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (e.g., `c-2`) in the region slug to support scalability in Neon's high-demand regions.
+The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (for example, `c-2`) in the region slug to support scalability in Neon's high-demand regions.
 
 Connection strings for a Neon databases can be obtained by clicking the **Connect** button on your **Project Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 

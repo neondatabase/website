@@ -133,7 +133,7 @@ While highly versatile, especially for spatial and full-text search data, GiST i
 
 ## GIN Indexes
 
-Generalized Inverted Indexes (GIN) are useful for indexing composite values, such as arrays or full-text search documents. GIN indexes store a separate entry for each component value (e.g., each array element or each word in a text document). This is similar to an `inverted index` typically used in text search engines, except that it can be extended to handle data types other than text.
+Generalized Inverted Indexes (GIN) are useful for indexing composite values, such as arrays or full-text search documents. GIN indexes store a separate entry for each component value (for example, each array element or each word in a text document). This is similar to an `inverted index` typically used in text search engines, except that it can be extended to handle data types other than text.
 
 ### Create a GIN Index in Postgres
 

@@ -123,7 +123,7 @@ VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello,
 
 ## Manage text tokens
 
-When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
+When a conversation contains more tokens than a model can process (for example, over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
 
 Additionally, lengthy conversations may result in incomplete replies. For example, if a `gpt-3.5-turbo` conversation spans 4090 tokens, the response will be limited to just six tokens.
 
