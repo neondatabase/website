@@ -279,7 +279,7 @@ curl -X POST http://localhost:3000/upload \
   }
   ```
 
-You can now integrate calls to this `/upload` endpoint from various parts of your application (e.g., web clients, mobile apps, backend services) to handle file uploads.
+You can now integrate calls to this `/upload` endpoint from various parts of your application (for example, web clients, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
@@ -308,7 +308,7 @@ WHERE
 
 - The query returns rows containing the file metadata stored in Neon.
 - The crucial piece of information is the `file_url`. This is the direct link (CDN URL) to the file stored on Uploadcare.
-- You can use this `file_url` in your application (e.g., in frontend `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
+- You can use this `file_url` in your application (for example, in frontend `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
 
 This pattern separates file storage and delivery (handled by Uploadcare) from structured metadata management (handled by Neon).
 

@@ -253,7 +253,7 @@ _Postgres logs flowing into New Relic_
 **Find your data under APM & Services**
 ![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
-- **Logs**: Check your configured service name in APM & Services (e.g., `neon-postgres-test`)
+- **Logs**: Check your configured service name in APM & Services (for example, `neon-postgres-test`)
 - **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services
 
 </Steps>

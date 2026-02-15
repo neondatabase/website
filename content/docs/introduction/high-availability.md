@@ -65,7 +65,7 @@ Our serverless architecture manages compute failures through rapid recovery and 
 
 ### Compute endpoints are ephemeral
 
-Your compute endpoint exists essentially as metadata — with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
+Your compute endpoint exists essentially as metadata, with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
 
 ### Postgres failure
 

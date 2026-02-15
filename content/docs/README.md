@@ -21,7 +21,7 @@ Right now Markdown files accept the following fields:
 1. `title` — title of the page (required)
 2. `subTitle` — subtitle of the page.
 3. `tag` — tag for the page. It can be one of the following: `new`, `beta`, `coming soon`, `deprecated`, or you can use your own tag. Don't forget to add it to the `navigation.yaml` file as well.
-4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, e.g. `/docs/old-path/`
+4. `redirectFrom` — array of strings with paths to redirect from to the page, should start and end with a slash, for example `/docs/old-path/`
 5. `isDraft` — flag that says the page is not ready yet. It won't appear in production but will appear in the development mode.
 6. `enableTableOfContents` — flag that turns on the display of the outline for the page. The outline gets built out of second and third-level headings ([`h2`, `h3`]), thus appears as two-level nested max.
 7. `ogImage` - the social preview image of the page.
@@ -131,7 +131,7 @@ To add a new page, add a new item with keys `title` and `slug` under the appropr
 - `section`: Section header for grouping related items
 - `items`: Array of navigation items
 - `subnav`: Sub-navigation items for the sidebar
-- `tag`: Optional tag (e.g., "new", "beta") displayed next to the title
+- `tag`: Optional tag (for example, "new", "beta") displayed next to the title
 
 ### Important Notes
 
@@ -352,7 +352,7 @@ The `ExternalCode` component allows embedding code content from external sources
 
 ### Best Practices
 
-1. Always use raw URLs from the GitHub repository (e.g., `https://raw.githubusercontent.com/...`).
+1. Always use raw URLs from the GitHub repository (for example, `https://raw.githubusercontent.com/...`).
 2. Use the `language` prop when the file extension doesn't match the actual content type.
 
 ## Tabs

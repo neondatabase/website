@@ -394,7 +394,7 @@ For Cursor, VS Code, and Claude Code, use `npx neonctl@latest init` as the prefe
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (e.g., `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add one of these to your client's `mcpServers` section:
+This tool auto-detects supported clients and configures them. Use `-a <agent>` to target a specific agent (for example, `-a cursor`). Add `-g` for global (user-level) setup instead of project-level. For more options (including global vs project-level), see the [add-mcp repository](https://github.com/neondatabase/add-mcp). For manual configuration, add one of these to your client's `mcpServers` section:
 
 **OAuth (remote server):**
 

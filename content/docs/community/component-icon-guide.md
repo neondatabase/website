@@ -92,7 +92,7 @@ _For technical implementation details, see the [Icon Systems section](/docs/comm
 
 ### Icon naming conventions
 
-- **TechCards**: Use kebab-case (e.g., `node-js`, `next-js`)
+- **TechCards**: Use kebab-case (for example, `node-js`, `next-js`)
 - **DetailIconCards**: Use camelCase or kebab-case as defined in the mapping
 - **File Requirements**: Ensure SVG files exist in the correct directories
 

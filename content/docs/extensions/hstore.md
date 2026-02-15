@@ -231,7 +231,7 @@ This query returns the following:
 
 ## Comparing `hstore` with `JSON`
 
-The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model — both keys and values must be strings. This makes it more efficient for simple key-value data.
+The `hstore` and `JSON` data types can be both used to store semi-structured data. `Hstore` has a flat data model; both keys and values must be strings. This makes it more efficient for simple key-value data.
 
 In constrast, `JSON` supports a variety of data types, and can also store nested data structures. This makes it more flexible, but trades off some performance.
 

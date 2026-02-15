@@ -43,7 +43,7 @@ For your Elixir project, create a project directory using `mix` and add the requ
     cd neon_elixir_quickstart
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code).
+    > Open this directory in your preferred code editor (for example, VS Code).
 
 2.  Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.18.0"}`:
 

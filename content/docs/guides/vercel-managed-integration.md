@@ -85,7 +85,7 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 3. Click **Connect**.
 
-<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, e.g. `PRIMARY_`.</Admonition>
+<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, for example `PRIMARY_`.</Admonition>
 
 ---
 

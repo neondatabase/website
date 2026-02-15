@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-06T22:07:32.719Z'
 ---
 
-GitHub Copilot now supports custom agents, and we've built two specialized agents that bring Neon's branching workflow directly into your IDE. These agents help you run safe database migrations and identify slow queries — all without leaving VS Code.
+GitHub Copilot now supports custom agents, and we've built two specialized agents that bring Neon's branching workflow directly into your IDE. These agents help you run safe database migrations and identify slow queries, all without leaving VS Code.
 
 ## Available agents
 
@@ -23,7 +23,7 @@ The [Neon Migration Specialist](https://github.com/github/awesome-copilot/blob/m
 2. Runs your migration on the test branch to validate it works
 3. Validates the changes thoroughly
 4. Deletes the test branch after validation
-5. Creates migration files and opens a PR — letting you or your CI/CD apply the migration to your main branch
+5. Creates migration files and opens a PR, letting you or your CI/CD apply the migration to your main branch
 
 The agent works with your existing ORM migration system (Prisma, Drizzle, SQLAlchemy, Django, Rails, and more) and falls back to [migra](https://github.com/djrobstep/migra) if no migration system exists.
 

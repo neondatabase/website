@@ -75,9 +75,9 @@ Use this approach when you want to create databases for your users without requi
 
 **Example implementations:**
 
-- [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development) — Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
-- [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/) — One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Instagres](https://neon.new/) — Try instant Postgres provisioning without signup using `npx get-db` or at [neon.new](https://neon.new/)
+- [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
+- [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
+- [Instagres](https://neon.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [neon.new](https://neon.new/)
 
 <DetailIconCards>
 
@@ -142,7 +142,7 @@ Use OAuth when you're building a tool or service that connects to existing Neon 
 
 **Example implementation:**
 
-- [Hasura Cloud](https://hasura.io/) — Uses OAuth to seamlessly authenticate users and provision Neon databases from Hasura projects
+- [Hasura Cloud](https://hasura.io/): Uses OAuth to seamlessly authenticate users and provision Neon databases from Hasura projects
 
 <DetailIconCards>
 

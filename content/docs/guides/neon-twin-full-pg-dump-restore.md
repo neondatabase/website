@@ -1,5 +1,5 @@
 ---
-title: Full Twin
+title: pg_dump / pg_restore — Full Twin
 subtitle: Create a full Twin of your production database
 summary: >-
   Step-by-step guide for creating a full Neon Twin of your production database

@@ -14,9 +14,9 @@ Neon occasionally performs essential **platform maintenance** outside of [schedu
 
 Platform maintenance may include any of the following:
 
-- Neon infrastructure updates and upgrades (e.g., updates to Neon Kubernetes clusters or compute nodes)
-- Resource management updates (e.g., rebalancing of compute nodes)
-- Critical security patches (e.g., addressing a zero-day vulnerability)
+- Neon infrastructure updates and upgrades (for example, updates to Neon Kubernetes clusters or compute nodes)
+- Resource management updates (for example, rebalancing of compute nodes)
+- Critical security patches (for example, addressing a zero-day vulnerability)
 
 We strive to avoid disruptions as much as possible, but certain updates may require compute restarts or result in temporary latency for operations like compute starts, queries, or API requests.
 

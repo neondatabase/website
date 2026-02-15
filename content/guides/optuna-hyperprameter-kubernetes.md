@@ -23,7 +23,7 @@ Before you begin, ensure you have the following tools and services set up:
 
 ## Overview
 
-Hyperparameters are essential to machine learning model performance. Unlike parameters learned during training, hyperparameters—like learning rates, batch sizes, or the number of layers in a neural network—need to be set in advance. Tuning these hyperparameters effectively can greatly improve model performance, squeezing out the last bit of accuracy or reducing training time.
+Hyperparameters are essential to machine learning model performance. Unlike parameters learned during training, hyperparameters (like learning rates, batch sizes, or the number of layers in a neural network) need to be set in advance. Tuning these hyperparameters effectively can greatly improve model performance, squeezing out the last bit of accuracy or reducing training time.
 
 Bayesian optimization offers an efficient method for hyperparameter tuning. Unlike traditional approaches like grid or random search, Bayesian optimization builds a probabilistic model of the objective function to help it sample which hyperparameters to test next, which reduces the number of experiments needed, saving time and compute.
 

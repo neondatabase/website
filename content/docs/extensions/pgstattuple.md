@@ -133,7 +133,7 @@ The `pgstattuple_approx(relation regclass)` function offers a faster way to get 
 SELECT * FROM pgstattuple_approx('your_table_name');
 ```
 
-This function is particularly useful for large tables where a full `pgstattuple()` scan would be too slow or resource-intensive for frequent checks. - Output columns are similar to `pgstattuple()`, but with `approx_` prefixes for estimated values (e.g., `approx_tuple_count`, `approx_free_space`). - `dead_tuple_count` and `dead_tuple_len` are exact.
+This function is particularly useful for large tables where a full `pgstattuple()` scan would be too slow or resource-intensive for frequent checks. - Output columns are similar to `pgstattuple()`, but with `approx_` prefixes for estimated values (for example, `approx_tuple_count`, `approx_free_space`). - `dead_tuple_count` and `dead_tuple_len` are exact.
 
 ### Analyzing B-tree index statistics with `pgstatindex()`
 
@@ -271,7 +271,7 @@ LIMIT 10;
 ```
 
 <Admonition type="warning" title="Resource Intensive Query">
-Running `pgstattuple()` for every table can be very resource-intensive. For larger databases, consider using `pgstattuple_approx()` in the `CROSS JOIN LATERAL` subquery or filtering tables by size first (e.g., adding `AND pg_total_relation_size(c.oid) > '1GB'` to the `WHERE` clause).
+Running `pgstattuple()` for every table can be very resource-intensive. For larger databases, consider using `pgstattuple_approx()` in the `CROSS JOIN LATERAL` subquery or filtering tables by size first (for example, adding `AND pg_total_relation_size(c.oid) > '1GB'` to the `WHERE` clause).
 </Admonition>
 
 ### Diagnosing and resolving index bloat and fragmentation
@@ -287,7 +287,7 @@ SELECT
 FROM pgstatindex('idx_customers_first_name');
 ```
 
-If `avg_leaf_density` is low (e.g., < 60-70%) or `leaf_fragmentation` is high (e.g., > 20-30% for frequently scanned indexes), the index might benefit from rebuilding.
+If `avg_leaf_density` is low (for example, < 60-70%) or `leaf_fragmentation` is high (for example, > 20-30% for frequently scanned indexes), the index might benefit from rebuilding.
 
 To rebuild an index:
 

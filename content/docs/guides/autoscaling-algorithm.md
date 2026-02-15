@@ -21,15 +21,15 @@ updatedOn: '2026-02-06T22:07:32.919Z'
 </DocsList>
 </InfoBlock>
 
-The key concept behind autoscaling is that compute resizing happens _automatically_ — once you set up your minimum and maximum [compute sizes](/docs/manage/endpoints#how-to-size-your-compute), there’s no action required on your part other than [monitoring](/docs/introduction/monitoring-page) your usage metrics to see if adjustments are needed.
+The key concept behind autoscaling is that compute resizing happens _automatically_; once you set up your minimum and maximum [compute sizes](/docs/manage/endpoints#how-to-size-your-compute), there’s no action required on your part other than [monitoring](/docs/introduction/monitoring-page) your usage metrics to see if adjustments are needed.
 
-That said, it can be helpful to understand exactly when and under what circumstances the algorithm optimizes your database on two key fronts — **performance** and **efficiency**. In a nutshell, the algorithm automatically **scales up** your compute to ensure optimal performance and **scales down** to maximize efficiency.
+That said, it can be helpful to understand exactly when and under what circumstances the algorithm optimizes your database on two key fronts: **performance** and **efficiency**. In a nutshell, the algorithm automatically **scales up** your compute to ensure optimal performance and **scales down** to maximize efficiency.
 
 ![autoscaling algorithm](/docs/guides/autoscaling_algorithm.png)
 
 ## How the algorithm works
 
-Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache). These metrics determine how your compute resources — the virtual machine that powers your database — should be scaled to maintain performance and efficiency.
+Neon's autoscaling algorithm uses two components, the [vm-monitor](/docs/reference/glossary#vm-monitor) and the [autoscaler-agent](/docs/reference/glossary#autoscaler-agent), to continuously monitor three key metrics: your average CPU load, your memory usage, and the activity of your [Local File Cache (LFC)](/docs/reference/glossary#local-file-cache). These metrics determine how your compute resources (the virtual machine that powers your database) should be scaled to maintain performance and efficiency.
 
 ### The Formula
 
@@ -45,7 +45,7 @@ The formula can be expressed as:
 goalCU := max(cpuGoalCU, memGoalCU, lfcGoalCU)
 ```
 
-The algorithm selects the highest value from these goals as the overall `goalCU`, ensuring your database has enough resources to handle the most demanding metric — while staying within the minimum and maximum limits you’ve set.
+The algorithm selects the highest value from these goals as the overall `goalCU`, ensuring your database has enough resources to handle the most demanding metric, while staying within the minimum and maximum limits you’ve set.
 
 ### The Metrics
 
@@ -67,7 +67,7 @@ The algorithm aims to keep overall memory usage at or below 75% of the total all
 
 #### Local File Cache (LFC) working set size
 
-An important part of the scaling algorithm is estimating your current working set size — a subset of your most frequently accessed data — and scaling your compute to ensure it fits within the LFC.
+An important part of the scaling algorithm is estimating your current working set size (a subset of your most frequently accessed data) and scaling your compute to ensure it fits within the LFC.
 
 Every 20 seconds, the autoscaler-agent checks the working set size across a variety of time windows, ranging from 1 to 60 minutes. The goal is to fit your working set within 75% of the compute’s RAM allocated to the LFC. If your working set exceeds this threshold, the algorithm increases compute size to expand the LFC, keeping frequently accessed data in memory for faster access. To learn more about how we do this, see [Dynamically estimating and scaling Postgres’ working set size](/blog/dynamically-estimating-and-scaling-postgres-working-set-size).
 

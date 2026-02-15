@@ -176,10 +176,10 @@ SET neon.allow_unstable_extensions = 'true';
 
 **Things to know about experimental extensions:**
 
-- **Use with caution:** We recommend trying experimental extensions in a separate project—not in the Neon project you use for production.
-- **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible—but we can’t guarantee more than that.
+- **Use with caution:** We recommend trying experimental extensions in a separate project, not in the Neon project you use for production.
+- **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible, but we can’t guarantee more than that.
 - **No guarantees:** An experimental extension might never become fully supported. It could require significant work from Neon or the extension’s maintainers before it’s ready for general use.
-- **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed—especially if they pose security or operational risks.
+- **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed, especially if they pose security or operational risks.
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
 
@@ -207,11 +207,11 @@ curl --request GET \
 
 The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
 
-- `library_name` — library name, typically named for the associated extension
-- `description` — a description of the extension
-- `is_default` — whether the library is enabled by default
-- `is_experimental` — whether the extensions is [experimental](#experimental-extensions)
-- `version` — the extension version
+- `library_name`: library name, typically named for the associated extension
+- `description`: a description of the extension
+- `is_default`: whether the library is enabled by default
+- `is_experimental`: whether the extensions is [experimental](#experimental-extensions)
+- `version`: the extension version
 
 <details>
 <summary>Response body</summary>
@@ -318,7 +318,7 @@ When running a `Create project` or `Update project` API call to enable libraries
 - Library names must be quoted, comma-separated, and specified in a single string.
 - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
 - The "use_defaults": true`option overrides the`"enabled_libraries"` option, enabling only default libraries
-- The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
+- The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
 
 ## Extension notes

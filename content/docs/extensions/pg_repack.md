@@ -87,7 +87,7 @@ Let's break down the key components:
 
 ### Reorganization options
 
-- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (e.g., `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
+- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (for example, `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
 - **`-I TABLE`, `--parent-table=TABLE`**: Reorganize both the specified table(s) and its inheritors.
 - **`-c SCHEMA`, `--schema=SCHEMA`**: Repacks all eligible tables within the specified schema(s).
 - **`-o COLUMNS [,...]`, `--order-by=COLUMNS [,...]`**: Reorders the table rows based on the specified column(s). This performs an online `CLUSTER`.
@@ -112,7 +112,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 ### Generic options
 
 - **`-e`, `--echo`**: Prints the SQL commands executed by `pg_repack` to the terminal. Useful for debugging or understanding the process.
-- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (e.g., `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
+- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (for example, `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
 - `--help`: Displays help information about `pg_repack` and its options.
 - `--version`: Displays the version of `pg_repack`.
 

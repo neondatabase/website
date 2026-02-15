@@ -58,7 +58,7 @@ The `Query` type is the entry point for all read operations.
 
 ### Collections
 
-For each accessible table (e.g., `Book`), `pg_graphql` creates a collection field (e.g., `bookCollection`) on the `Query` type. Collections allow you to fetch multiple records and support pagination, filtering, and sorting.
+For each accessible table (for example, `Book`), `pg_graphql` creates a collection field (for example, `bookCollection`) on the `Query` type. Collections allow you to fetch multiple records and support pagination, filtering, and sorting.
 
 #### Basic collection fetch
 
@@ -649,7 +649,7 @@ $$);
 - **Role permissions**: A user querying via `pg_graphql` can only see/interact with tables, columns, and functions they have SQL permissions for. If a role lacks `SELECT` on a table, that table won't appear in their GraphQL schema.
 - **Row-Level Security (RLS)**: All RLS policies are automatically applied.
 
-While this guide provides a solid foundation, `pg_graphql` offers a rich set of advanced features not covered here. For a deeper dive into capabilities like exposing complex SQL functions as queries or mutations, advanced filtering techniques including nested logical operators and array operations, fine-tuning schema generation with more comment directives (e.g., for computed relationships on views or custom naming for all elements), handling transactions, performance optimization strategies, and detailed guides for integrating with client libraries like Apollo and Relay, please refer to the official [`pg_graphql` documentation](https://supabase.github.io/pg_graphql/).
+While this guide provides a solid foundation, `pg_graphql` offers a rich set of advanced features not covered here. For a deeper dive into capabilities like exposing complex SQL functions as queries or mutations, advanced filtering techniques including nested logical operators and array operations, fine-tuning schema generation with more comment directives (for example, for computed relationships on views or custom naming for all elements), handling transactions, performance optimization strategies, and detailed guides for integrating with client libraries like Apollo and Relay, please refer to the official [`pg_graphql` documentation](https://supabase.github.io/pg_graphql/).
 
 ## Conclusion
 

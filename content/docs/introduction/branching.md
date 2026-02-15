@@ -74,7 +74,7 @@ Refer to the following guide for instructions.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching — Testing queries</a>
+<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching: Testing queries</a>
 
 </DetailIconCards>
 

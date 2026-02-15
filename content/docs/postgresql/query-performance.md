@@ -185,8 +185,8 @@ Interpreting `EXPLAIN` output can be a little daunting at first, but you can lea
 
 There are numerous other resources you can draw upon to learn more about leveraging `EXPLAIN` to optimize queries. Here are a few to get you started:
 
-- [Using EXPLAIN — official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
-- [Using EXPLAIN — PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN).
+- [Using EXPLAIN: official PostgreSQL documentation](https://www.postgresql.org/docs/current/using-explain.html)
+- [Using EXPLAIN: PostgreSQL wiki](https://wiki.postgresql.org/wiki/Using_EXPLAIN).
 - [PostgreSQL EXPLAIN tutorial](/postgresql/postgresql-tutorial/postgresql-explain)
 
 <Admonition type="tip" title="Tips">
@@ -437,7 +437,7 @@ To reduce table bloat, you can run the [VACUUM](https://www.postgresql.org/docs/
 VACUUM your_table_name;
 ```
 
-For more aggressive space reclamation, you can use `VACUUM FULL`, but this command locks the table, which can be disruptive — affecting database performance significantly.
+For more aggressive space reclamation, you can use `VACUUM FULL`, but this command locks the table, which can be disruptive and can affect database performance significantly.
 
 To remove index bloat, you can use the [REINDEX](https://www.postgresql.org/docs/current/sql-reindex.html) command, which rebuilds the index from scratch. Be aware that this can be an intensive operation, especially for large indexes, as it requires an exclusive lock on the index.
 

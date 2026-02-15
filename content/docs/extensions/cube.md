@@ -333,10 +333,10 @@ LIMIT 3;
     - Storing latitude/longitude/altitude points.
     - Defining bounding boxes for map features.
 2.  **Business Intelligence (BI) / OLAP**:
-    - Representing data points in a multidimensional space (e.g., sales by `product_category_id`, `region_id`, `time_id`).
+    - Representing data points in a multidimensional space (for example, sales by `product_category_id`, `region_id`, `time_id`).
     - Filtering data based on ranges in multiple dimensions.
 3.  **Scientific computing**: Storing points or regions in n-dimensional parameter spaces for experiments or simulations.
-4.  **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (e.g., temperature, humidity, pressure) at a specific time.
+4.  **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (for example, temperature, humidity, pressure) at a specific time.
 
     **Example:**
 
@@ -344,7 +344,7 @@ LIMIT 3;
     CREATE TABLE sensor_log (
       ts TIMESTAMPTZ NOT NULL,
       device_id INT,
-      metrics CUBE -- e.g., (temperature, humidity, pressure)
+      metrics CUBE -- for example, (temperature, humidity, pressure)
     );
 
     INSERT INTO sensor_log (ts, device_id, metrics) VALUES

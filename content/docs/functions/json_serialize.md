@@ -112,7 +112,7 @@ While both `json_serialize()` and `json()` work with `JSON` data, they serve dif
 
 - `json()` converts text or binary data into `JSON` values
 - `json_serialize()` converts `JSON` values into text or binary format
-- `json()` focuses on input validation (e.g., `WITH UNIQUE` keys)
+- `json()` focuses on input validation (for example, `WITH UNIQUE` keys)
 - `json_serialize()` focuses on output format control
 
 Think of them as complementary functions:

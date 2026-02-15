@@ -31,7 +31,7 @@ updatedOn: '2026-02-06T22:07:33.063Z'
 
 Vercel's **Fluid** compute model fundamentally changes the performance trade-offs for connecting to your Neon database.
 
-**The short answer:** With Vercel Fluid, we recommend you use a **standard Postgres TCP connection** (e.g., with the [node-postgres package](https://node-postgres.com/)) and a connection pool. This is the new fastest and most robust method.
+**The short answer:** With Vercel Fluid, we recommend you use a **standard Postgres TCP connection** (for example, with the [node-postgres package](https://node-postgres.com/)) and a connection pool. This is the new fastest and most robust method.
 
 This guide explains why this is a change, the difference between connection methods, and what you should use.
 

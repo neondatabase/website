@@ -29,7 +29,7 @@ While there is no strict limit on the number of API keys you can create, we reco
 
 You'll need to create your first API key from the Neon Console, where you are already authenticated. You can then use that key to generate new keys from the API.
 
-> When creating API keys from the Neon Console, the secret token will be displayed only once. Copy it immediately and store it securely in a credential manager (like AWS Key Management Service or Azure Key Vault) — you won't be able to retrieve it later. If you lose an API key, you'll need to revoke it and create a new one.
+> When creating API keys from the Neon Console, the secret token will be displayed only once. Copy it immediately and store it securely in a credential manager (like AWS Key Management Service or Azure Key Vault); you won't be able to retrieve it later. If you lose an API key, you'll need to revoke it and create a new one.
 
 <Admonition type="important">
 You are responsible for maintaining the records and associations of any API keys in your environment and systems.
@@ -59,7 +59,7 @@ curl https://console.neon.tech/api/v2/api_keys
 
 **Parameters:**
 
-- `key_name`: A descriptive name for the API key (e.g., "development", "staging", "ci-pipeline")
+- `key_name`: A descriptive name for the API key (for example, "development", "staging", "ci-pipeline")
 
 **Response:**
 
@@ -251,7 +251,7 @@ You should revoke API keys that are no longer needed or if you suspect a key may
 
 - The action is immediate and permanent
 - All API requests using the revoked key will fail with a 401 Unauthorized error
-- The key cannot be reactivated — you'll need to create a new key if access is needed again
+- The key cannot be reactivated; you'll need to create a new key if access is needed again
 
 ### Who can revoke keys
 

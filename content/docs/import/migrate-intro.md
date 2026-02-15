@@ -39,8 +39,8 @@ For near-zero downtime Postgres database migrations using logical replication, s
 
 ## Other imports
 
-- [Import data from CSV](/docs/import/import-from-csv) — Import data from CSV files using psql
-- [Import sample data](/docs/import/import-sample-data) — Try Neon with sample datasets
-- [Migrate schema only](/docs/import/migrate-schema-only) — Migrate just the schema without data
+- [Import data from CSV](/docs/import/import-from-csv): Import data from CSV files using psql
+- [Import sample data](/docs/import/import-sample-data): Try Neon with sample datasets
+- [Migrate schema only](/docs/import/migrate-schema-only): Migrate just the schema without data
 
 <NeedHelp/>

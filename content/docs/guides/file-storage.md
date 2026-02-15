@@ -15,7 +15,7 @@ Applications often need to handle file uploads and storage, from user avatars an
 The typical pattern looks like this:
 
 1. Upload files from your application (client or backend) to an object storage provider or file management service.
-2. Store references—such as the file URL, unique key, or identifier—and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.
+2. Store references (such as the file URL, unique key, or identifier) and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.
 
 This pattern separates file storage from relational data management, with purpose-built services like S3 or R2 handling file storage and Neon managing your data.
 

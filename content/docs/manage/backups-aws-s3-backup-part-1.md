@@ -73,7 +73,7 @@ Select `sts.amazonaws.com` from the **Audience dropdown** menu, then fill out th
 When you’re ready, click **Next**.
 ![AWS Trust Identity 2](/docs/manage/1-s3-backups-github-actions-05-trust-identity-2.jpg)
 
-## Add Permissions — Skip
+## Add Permissions: Skip
 
 You can skip selecting anything from this screen and click **Next** to continue.
 

@@ -36,7 +36,7 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 
 <DetailIconCards>
 
-<a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" description="Manage your Neon Resource with the Azure CLI" icon="cli">Azure CLI — az neon</a>
+<a href="https://learn.microsoft.com/en-us/cli/azure/neon?view=azure-cli-latest" description="Manage your Neon Resource with the Azure CLI" icon="cli">Azure CLI: az neon</a>
 
 <a href="https://learn.microsoft.com/en-us/java/api/overview/azure/neonpostgres?view=azure-java-preview" description="Manage your Neon Resource with the Azure SDK for Java" icon="code">Azure SDK for Java</a>
 
@@ -52,18 +52,18 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 
 ## Getting started
 
-- [Get started with Neon Serverless Postgres on Azure](/guides/neon-azure-integration) — A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
-- [Familiarize yourself with Neon](/docs/get-started/signing-up) — Get to know the Neon platform and features by stepping through our official getting started guides
+- [Get started with Neon Serverless Postgres on Azure](/guides/neon-azure-integration): A step-by-step guide to deploying Neon's serverless Postgres via the Azure Marketplace
+- [Familiarize yourself with Neon](/docs/get-started/signing-up): Get to know the Neon platform and features by stepping through our official getting started guides
 
 ## Migrate data to Neon on Azure
 
-- [Migrating data to Neon](/docs/import/migrate-intro) — learn how to move data to Neon from various sources using different migration tools and methods
+- [Migrating data to Neon](/docs/import/migrate-intro): learn how to move data to Neon from various sources using different migration tools and methods
 
 ## Connect to Neon
 
 - [Connecting to Neon](/docs/connect/connect-intro) – Learn about connecting to a Neon database
 - [Connect with Azure Service Connector](/guides/azure-service-connector) - Connect Azure services to Neon
-- [Integrate Neon Serverless Postgres with Service Connector](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-neon-postgres?tabs=dotnet) — Azure documentation for Service Connector
+- [Integrate Neon Serverless Postgres with Service Connector](https://learn.microsoft.com/en-us/azure/service-connector/how-to-integrate-neon-postgres?tabs=dotnet): Azure documentation for Service Connector
 
 ## AI
 
@@ -74,14 +74,14 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [AI-powered email assistant in Azure](/blog/how-to-create-your-personal-ai-powered-email-assistant-in-azure) - Create a personal AI email assistant in Azure
 - [SQL query assistant with .NET and Azure OpenAI](/blog/building-sql-query-assistant-with-dotnet-azure-functions-openai) - Build an intelligent SQL query assistant with Neon, .NET, and Azure OpenAI
 - [Generative feedback loops with Azure OpenAI](/blog/generative-feedback-loops-with-neon-serverless-postgres-azure-functions-and-azure-openai) - Create generative feedback loops with Neon, Azure Functions, and Azure OpenAI
-- [Build your first AI agent for Postgres on Azure](/guides/azure-ai-agent-service) — Build an AI agent for Postgres using Azure AI Agent Service
-- [Semantic Kernel](/docs/ai/semantic-kernel) — Build AI RAG and agentic workflows with Semantic Kernel and Neon
+- [Build your first AI agent for Postgres on Azure](/guides/azure-ai-agent-service): Build an AI agent for Postgres using Azure AI Agent Service
+- [Semantic Kernel](/docs/ai/semantic-kernel): Build AI RAG and agentic workflows with Semantic Kernel and Neon
 
 ### Live AI demos
 
 <DetailIconCards>
 
-<a href="https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/" description="Creates a Neon project with a vector storage per user—each user's data is completely isolated" icon="enable">Multi-user RAG in Azure</a>
+<a href="https://multiuser-rag-g0e0g3h6ekhtf7cg.germanywestcentral-01.azurewebsites.net/" description="Creates a Neon project with a vector storage per user; each user's data is completely isolated" icon="enable">Multi-user RAG in Azure</a>
 
 <a href="https://rag-vrjtpx5tgrsnm-ca.wittyriver-637b2279.eastus2.azurecontainerapps.io/" description="Ask questions about data in a Neon database using React and FastAPI in Python" icon="enable">AI-Powered Neon Database Q&A Chatbot in Azure</a>
 
@@ -111,7 +111,7 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Building a serverless referral system](/guides/azure-functions-referral-system) - Create a referral system with Neon and Azure Functions
 - [Building a robust JSON API with TypeScript](/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
 - [Azure Static Web Apps with Neon](/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
-- [Azure Logic Apps with Neon](/guides/azure-logic-apps) — Integrate Neon with Azure Logic Apps
+- [Azure Logic Apps with Neon](/guides/azure-logic-apps): Integrate Neon with Azure Logic Apps
 
 ## Security & access control
 

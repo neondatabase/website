@@ -227,7 +227,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 
 - **Connection persistence**: Database connection strings remain valid after transfer
 - **Organization transfers**: Users must be members of the target organization
-- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (e.g., `org-cool-breeze-12345678`)
+- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (for example, `org-cool-breeze-12345678`)
 - **Vercel organization limitation**: Projects cannot be claimed into Vercel organizations
 
 ## Example use cases

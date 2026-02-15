@@ -168,7 +168,7 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SECRET pgpass AS '<PASSWORD>';
    ```
 
-   You can access the password for your Neon Postgres role from the to open **Connect to your database** modal — click the **Connect** button on your **Project Dashboard** to open the modal.
+   You can access the password for your Neon Postgres role from the **Connect to your database** modal; click the **Connect** button on your **Project Dashboard** to open the modal.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
@@ -183,7 +183,7 @@ Now that you’ve configured your database network and created an ingestion clus
    );
    ```
 
-   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button.
+   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard**; click the **Connect** button.
 
    <Admonition type="important">
    Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).
@@ -195,9 +195,9 @@ Now that you’ve configured your database network and created an ingestion clus
    postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
    ```
 
-   - Replace `<host>` with your Neon hostname (e.g., `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
-   - Replace `<role_name>` with the name of your Postgres role (e.g., `alex`)
-   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (e.g., `dbname`)
+   - Replace `<host>` with your Neon hostname (for example, `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+   - Replace `<role_name>` with the name of your Postgres role (for example, `alex`)
+   - Replace `<database>` with the name of the database containing the tables you want to replicate to Materialize (for example, `dbname`)
 
 3. Use the [CREATE SOURCE](https://materialize.com/docs/sql/create-source/) command to connect Materialize to your Neon Postgres database and start ingesting data from the publication you created earlier:
 

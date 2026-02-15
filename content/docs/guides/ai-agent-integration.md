@@ -22,20 +22,20 @@ This guide covers the technical implementation of the Neon agent plan for your p
 
 This integration guide walks through:
 
-1. **Provisioning projects** — Creating databases for free and paid users with appropriate quotas
-2. **Handling user upgrades** — Transferring projects between organizations when users change tiers
-3. **Implementing database versioning** — Using PITR and snapshots for undo/redo functionality
-4. **Creating development environments** — Setting up isolated branches for safe testing
-5. **Monitoring and billing** — Tracking usage and configuring limits
+1. **Provisioning projects**: Creating databases for free and paid users with appropriate quotas
+2. **Handling user upgrades**: Transferring projects between organizations when users change tiers
+3. **Implementing database versioning**: Using PITR and snapshots for undo/redo functionality
+4. **Creating development environments**: Setting up isolated branches for safe testing
+5. **Monitoring and billing**: Tracking usage and configuring limits
 
 ## Before you begin
 
 After enrolling in the [Neon Agent Plan](/docs/introduction/agent-plan), you should have:
 
-- **Two Neon organization IDs** — One for Free (sponsored) projects, one for paid projects
-- **Organization API keys** — For creating and managing projects in each organization
-- **Personal API key** — For transferring projects between organizations
-- **Admin access** — Full control over both organizations via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
+- **Two Neon organization IDs**: One for Free (sponsored) projects, one for paid projects
+- **Organization API keys**: For creating and managing projects in each organization
+- **Personal API key**: For transferring projects between organizations
+- **Admin access**: Full control over both organizations via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)
 
 Keep your API keys secure. You'll use them for all API operations in this guide. If you do not have the API keys, see [Manage API keys](/docs/manage/api-keys) for how to retrieve them.
 
@@ -58,10 +58,10 @@ When a user on your platform needs a database, create a project in the appropria
 
 The two-organization structure enables you to:
 
-1. **Offer a truly free tier** — Neon sponsors all infrastructure costs for up to 30,000 free projects
-2. **Scale sustainably** — Paid users consume from your credits ($0.106 per compute unit hour)
-3. **Upgrade users** — Transfer projects from free to paid organizations when users upgrade
-4. **Control resources** — Set different usage quotas/limits for projects to match your desired pricing model
+1. **Offer a truly free tier**: Neon sponsors all infrastructure costs for up to 30,000 free projects
+2. **Scale sustainably**: Paid users consume from your credits ($0.106 per compute unit hour)
+3. **Upgrade users**: Transfer projects from free to paid organizations when users upgrade
+4. **Control resources**: Set different usage quotas/limits for projects to match your desired pricing model
 
 ### Project limits by organization
 
@@ -77,9 +77,9 @@ Each organization has different limits that apply to all projects created within
 
 **Key constraints to consider:**
 
-- **Snapshot limits** — Free projects can only maintain 1 snapshot at a time, while paid projects can keep up to 10. This significantly impacts versioning strategies.
-- **Branch limits** — Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots.
-- **Compute limits** — Free projects can autoscale up to 2 CU, while paid projects can scale up to 16 CU for more demanding workloads.
+- **Snapshot limits**: Free projects can only maintain 1 snapshot at a time, while paid projects can keep up to 10. This significantly impacts versioning strategies.
+- **Branch limits**: Free projects are limited to 10 branches total, so you'll need to implement cleanup for development branches and temporary snapshots.
+- **Compute limits**: Free projects can autoscale up to 2 CU, while paid projects can scale up to 16 CU for more demanding workloads.
 
 For detailed quota examples and consumption limits, see [Configure consumption limits](/docs/guides/consumption-limits).
 
@@ -164,7 +164,7 @@ curl --request POST \
 ```
 
 <Admonition type="tip">
-**Creating multiple paid tiers:** You can define different quota levels within your paid organization to match your platform's pricing tiers (e.g., Pro, Business, Enterprise). Simply adjust the quota values and compute limits for each tier.
+**Creating multiple paid tiers:** You can define different quota levels within your paid organization to match your platform's pricing tiers (for example, Pro, Business, Enterprise). Simply adjust the quota values and compute limits for each tier.
 </Admonition>
 
 For detailed information about configuring quotas and what happens when limits are reached, see [Configure consumption limits](/docs/guides/consumption-limits).
@@ -173,9 +173,9 @@ For detailed information about configuring quotas and what happens when limits a
 
 Project provisioning is near-instant (typically under 1 second), but consider these timing factors:
 
-1. **Project creation** — Returns immediately with project details
-2. **Compute activation** — First connection may take 1-2 seconds as compute starts
-3. **Subsequent connections** — Near-instant once compute is active
+1. **Project creation**: Returns immediately with project details
+2. **Compute activation**: First connection may take 1-2 seconds as compute starts
+3. **Subsequent connections**: Near-instant once compute is active
 
 For the best user experience:
 
@@ -209,10 +209,10 @@ postgres://[role]:[password]@[endpoint]/[database]?sslmode=require
 
 Each new project includes:
 
-- **One default branch** — Named `main` by default
-- **One database** — Named `neondb` by default
-- **One role** — Named `neondb_owner` with full privileges
-- **One compute endpoint** — Configured with your specified settings
+- **One default branch**: Named `main` by default
+- **One database**: Named `neondb` by default
+- **One role**: Named `neondb_owner` with full privileges
+- **One compute endpoint**: Configured with your specified settings
 
 Using the [Create project](https://api-docs.neon.tech/reference/createproject) API, you can customize these defaults during project creation or create additional databases, roles, and branches as needed.
 
@@ -326,9 +326,9 @@ AI agents and codegen platforms need robust database versioning to manage schema
 
 Use PITR for recent history. The [restore window](/docs/introduction/restore-window) differs between your two organizations:
 
-- **Free organization (sponsored by Neon)** — 1 day of point-in-time history (included at no charge)
-- **Paid organization** — Up to 7 days of point-in-time history (billed at $0.20/GB-month for change history)
-- **Instant restore** — Restore databases to any point within the restore window in seconds
+- **Free organization (sponsored by Neon)**: 1 day of point-in-time history (included at no charge)
+- **Paid organization**: Up to 7 days of point-in-time history (billed at $0.20/GB-month for change history)
+- **Instant restore**: Restore databases to any point within the restore window in seconds
 
 The Free organization provides 1 day of restore window, while the Paid organization provides up to 7 days. Factor these restore windows into your platform's feature offerings and set appropriate user expectations for each tier.
 
@@ -353,10 +353,10 @@ curl --request POST \
 
 Use snapshots (branches) for versions you want to keep beyond the [restore window](/docs/introduction/restore-window):
 
-- **Persistent versions** — Keep snapshots as long as needed
-- **Named versions** — Give meaningful names to important database states
-- **Storage cost** — Snapshots count toward storage usage
-- **Snapshot limits** — Free projects: 1 snapshot max; Paid projects: 10 snapshots max
+- **Persistent versions**: Keep snapshots as long as needed
+- **Named versions**: Give meaningful names to important database states
+- **Storage cost**: Snapshots count toward storage usage
+- **Snapshot limits**: Free projects: 1 snapshot max; Paid projects: 10 snapshots max
 
 <Admonition type="important">
 **Snapshot limits:** Free organization projects can only maintain **1 snapshot at a time**. If you need to create a new snapshot, you must delete the existing one first. Paid organization projects can maintain up to **10 snapshots** simultaneously. Design your versioning UI accordingly.
@@ -398,11 +398,11 @@ Learn how our Developer Advocate approaches snapshot-based workflows in [Promoti
 
 Combine both methods for the best user experience:
 
-1. **Use PITR for recent history** — Fast, automatic undo/redo (1 day for Free tier, up to 7 days for Paid tier)
-2. **Create snapshots for milestones** — Preserve important versions (releases, working states) as branches
-3. **Manage snapshot limits** — Free tier users can only keep 1 snapshot; implement a "replace snapshot" workflow. Paid tier users get 10 snapshots.
-4. **Set user expectations** — Explain that recent history restores instantly, older versions may take longer
-5. **Automate cleanup** — Delete old snapshots that are no longer needed to control storage costs and stay within limits
+1. **Use PITR for recent history**: Fast, automatic undo/redo (1 day for Free tier, up to 7 days for Paid tier)
+2. **Create snapshots for milestones**: Preserve important versions (releases, working states) as branches
+3. **Manage snapshot limits**: Free tier users can only keep 1 snapshot; implement a "replace snapshot" workflow. Paid tier users get 10 snapshots.
+4. **Set user expectations**: Explain that recent history restores instantly, older versions may take longer
+5. **Automate cleanup**: Delete old snapshots that are no longer needed to control storage costs and stay within limits
 
 For more details on using snapshots, see [Database versioning for AI agents](/docs/ai/ai-database-versioning).
 
@@ -414,15 +414,15 @@ Agent platforms can give each user completely isolated development environments 
 
 For each user project, you can create:
 
-1. **Production branch** — The main branch with live data
-2. **Development branches** — Isolated copies for testing, development, and experimentation
+1. **Production branch**: The main branch with live data
+2. **Development branches**: Isolated copies for testing, development, and experimentation
 
 Development branches are:
 
-- **Instant to create** — Copy-on-write means instant branch creation
-- **Fully isolated** — Separate compute, no impact on production
-- **Cost-efficient** — Only pay for storage differences and actual compute usage
-- **Easy to reset** — Restore development branch to match production anytime
+- **Instant to create**: Copy-on-write means instant branch creation
+- **Fully isolated**: Separate compute, no impact on production
+- **Cost-efficient**: Only pay for storage differences and actual compute usage
+- **Easy to reset**: Restore development branch to match production anytime
 
 <Admonition type="note">
 **Branch limits:** Remember that Free organization projects have a **10 branch maximum** (including main branch, development branches, and snapshots), while Paid organization projects support up to **1,000 branches**. Implement branch cleanup for temporary development branches to stay within limits.
@@ -454,9 +454,9 @@ curl --request POST \
 
 Control when development branch computes scale to zero:
 
-- **Set to `0`** — Uses the default suspension timeout (300 seconds)
-- **Positive integer** (e.g., `600`) — Custom timeout in seconds before scaling to zero
-- **Set to `-1`** — Disables suspension entirely (compute always on, higher costs)
+- **Set to `0`**: Uses the default suspension timeout (300 seconds)
+- **Positive integer** (for example, `600`): Custom timeout in seconds before scaling to zero
+- **Set to `-1`**: Disables suspension entirely (compute always on, higher costs)
 
 For development branches, a 5-minute timeout (300 seconds) balances cost efficiency with user experience.
 
@@ -475,10 +475,10 @@ You can use the Neon API to retrieve consumption metrics for your organizations 
 
 Available metrics:
 
-- `active_time_seconds` — Compute active time
-- `compute_time_seconds` — CPU seconds consumed
-- `written_data_bytes` — Data written to all branches
-- `synthetic_storage_size_bytes` — Total storage used
+- `active_time_seconds`: Compute active time
+- `compute_time_seconds`: CPU seconds consumed
+- `written_data_bytes`: Data written to all branches
+- `synthetic_storage_size_bytes`: Total storage used
 
 For complete details on parameters, pagination, response formats, and metric definitions, see [Query consumption metrics](/docs/guides/consumption-metrics).
 
@@ -512,45 +512,45 @@ See [Configure consumption limits](/docs/guides/consumption-limits) for details.
 
 ## Best practices
 
-- **Project naming** — Use consistent naming to track ownership and tier (e.g., `myapp-username-free-tier-timestamp`, `myapp-username-paid-tier-timestamp`).
-- **Monitor quotas** — Alert users at 80% and 95% of consumption limits. See [Query consumption metrics](/docs/guides/consumption-metrics).
-- **Retry logic** — Implement exponential backoff for API calls to handle rate limits and transient failures.
-- **Project deletion** — Delete immediately when users request it; warn before removing inactive projects; offer final snapshots.
-- **Connection pooling** — Provide [pooled database connection strings](/docs/connect/connection-pooling) by default for bursty workloads.
-- **Reserved names** — Avoid [reserved role names](/docs/manage/roles#reserved-role-names) and [database names](/docs/manage/databases#reserved-database-names).
+- **Project naming**: Use consistent naming to track ownership and tier (for example, `myapp-username-free-tier-timestamp`, `myapp-username-paid-tier-timestamp`).
+- **Monitor quotas**: Alert users at 80% and 95% of consumption limits. See [Query consumption metrics](/docs/guides/consumption-metrics).
+- **Retry logic**: Implement exponential backoff for API calls to handle rate limits and transient failures.
+- **Project deletion**: Delete immediately when users request it; warn before removing inactive projects; offer final snapshots.
+- **Connection pooling**: Provide [pooled database connection strings](/docs/connect/connection-pooling) by default for bursty workloads.
+- **Reserved names**: Avoid [reserved role names](/docs/manage/roles#reserved-role-names) and [database names](/docs/manage/databases#reserved-database-names).
 
 ## API and SDKs
 
 All platform integrations use the Neon API. You can call it directly or use language-specific SDKs:
 
-- **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)** — All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
-- **[Neon Toolkit](/docs/reference/neondatabase-toolkit)** (TypeScript) — API client for management + serverless driver for queries; optimized for edge/serverless runtimes.
-- **Other SDKs** — [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
+- **[Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api)**: All operations (projects, branches, databases, monitoring) are API-driven; language-agnostic REST interface. Agent plan participants receive higher rate limits optimized for high-volume operations.
+- **[Neon Toolkit](/docs/reference/neondatabase-toolkit)** (TypeScript): API client for management + serverless driver for queries; optimized for edge/serverless runtimes.
+- **Other SDKs**: [Python SDK](/docs/reference/python-sdk), [Go SDK](https://github.com/kislerdm/neon-sdk-go), [Node.js/Deno SDK](https://github.com/paambaati/neon-js-sdk). See [Neon SDKs](/docs/reference/sdk) for all options.
 
 ## Cost management
 
-- **Free organization** — No charges to you for up to 30,000 free tier projects (Neon-sponsored).
-- **Paid organization** — Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. See [Agent plan pricing](/docs/introduction/agent-plan#pricing).
-- **Monitor usage** — Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
-- **Set quotas** — Configure usage limits during [project creation](#provisioning-projects) or update later. See [Configure consumption limits](/docs/guides/consumption-limits).
-- **Optimize costs** — Set shorter `suspend_timeout_seconds` (5 min) for free tier computes; cap `autoscaling_limit_max_cu` per tier to limit compute size scaling; cleanup old branches/snapshots to save on storage; alert your users at 80%/95% usage thresholds; right-size compute size ranges when creating projects for your users.
+- **Free organization**: No charges to you for up to 30,000 free tier projects (Neon-sponsored).
+- **Paid organization**: Usage-based billing at $0.106 per compute unit hour, covered by your initial credits. See [Agent plan pricing](/docs/introduction/agent-plan#pricing).
+- **Monitor usage**: Track `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, `synthetic_storage_size_bytes` using [project metrics API](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject). Poll every 15 minutes; doesn't wake computes. See [Query consumption metrics](/docs/guides/consumption-metrics).
+- **Set quotas**: Configure usage limits during [project creation](#provisioning-projects) or update later. See [Configure consumption limits](/docs/guides/consumption-limits).
+- **Optimize costs**: Set shorter `suspend_timeout_seconds` (5 min) for free tier computes; cap `autoscaling_limit_max_cu` per tier to limit compute size scaling; cleanup old branches/snapshots to save on storage; alert your users at 80%/95% usage thresholds; right-size compute size ranges when creating projects for your users.
 
 ## Troubleshooting common issues
 
-- **Project transfer fails with 403 error** — Using an organization API key instead of a personal API key. Project transfers between your Free (sponsored) and paid organizations require a personal API key because it has access to both organizations. Organization API keys only work within a single organization. Generate a personal API key in the Neon console under **Account settings** > **Developer settings**. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key).
+- **Project transfer fails with 403 error**: Using an organization API key instead of a personal API key. Project transfers between your Free (sponsored) and paid organizations require a personal API key because it has access to both organizations. Organization API keys only work within a single organization. Generate a personal API key in the Neon console under **Account settings** > **Developer settings**. See [Create a personal API key](/docs/manage/api-keys#create-a-personal-api-key).
 
-- **Users hit quota limits unexpectedly** — Autoscaling can consume compute time faster than anticipated. Set `autoscaling_limit_max_cu` appropriately for each tier, monitor consumption metrics and alert users at 80% threshold, and consider lowering `suspend_timeout_seconds` for free tier to reduce active time.
+- **Users hit quota limits unexpectedly**: Autoscaling can consume compute time faster than anticipated. Set `autoscaling_limit_max_cu` appropriately for each tier, monitor consumption metrics and alert users at 80% threshold, and consider lowering `suspend_timeout_seconds` for free tier to reduce active time.
 
-- **First database connection is slow** — Compute needs to start from idle state (cold start). This is expected behavior for serverless compute (1-2 seconds on first connection). Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
+- **First database connection is slow**: Compute needs to start from idle state (cold start). This is expected behavior for serverless compute (1-2 seconds on first connection). Set user expectations accordingly. For critical production endpoints, use `suspend_timeout_seconds: -1` to keep compute always on. Subsequent connections are near-instant.
 
-- **Storage grows larger than expected** — Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
+- **Storage grows larger than expected**: Multiple branches or snapshots accumulate over time. Implement branch cleanup for old development branches, delete snapshots that are no longer needed, and monitor storage metrics to alert users approaching limits.
 
 ## Support
 
 As an Neon Agent Plan participant, you have access to:
 
-- **Dedicated Slack channel** — Direct access to the Neon team for technical questions
-- **Your Neon representative** — Contact them for rate limit adjustments, limit increases, or custom needs
-- **Priority support** — Faster response times for platform-critical issues
+- **Dedicated Slack channel**: Direct access to the Neon team for technical questions
+- **Your Neon representative**: Contact them for rate limit adjustments, limit increases, or custom needs
+- **Priority support**: Faster response times for platform-critical issues
 
 For immediate help, reach out through your dedicated Slack channel.

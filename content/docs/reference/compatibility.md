@@ -78,7 +78,7 @@ If you are a Neon [Scale plan](/docs/introduction/plans) user and require a diff
 ### Parameter settings that differ by compute size
 
 Of the parameter settings listed above, the `max_connections`, `maintenance_work_mem`,
-`shared_buffers`, `max_worker_processes`, and `effective_cache_size` differ by your compute size—defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)—or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
+`shared_buffers`, `max_worker_processes`, and `effective_cache_size` differ by your compute size (defined in [Compute Units (CU)](/docs/reference/glossary#compute-unit-cu)) or by your autoscaling configuration, which has a minimum and maximum compute size. To understand how values are set, see the formulas below.
 
 - The formula for `max_connections` is:
 

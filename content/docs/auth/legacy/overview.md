@@ -25,8 +25,8 @@ Neon Auth brings authentication and user management natively to your Neon Postgr
 
 Neon Auth helps you move faster by handling the auth stack for you:
 
-- **Add auth to your app in minutes** — SDKs for Next.js and React
-- **No more custom sync code** — user profiles are always up-to-date in your database, ready for SQL joins and analytics.
+- **Add auth to your app in minutes**: SDKs for Next.js and React
+- **No more custom sync code**: user profiles are always up-to-date in your database, ready for SQL joins and analytics.
 - **Built-in support for teams, roles, and permissions**.
 
 ## How it works
