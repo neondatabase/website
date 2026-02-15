@@ -38,7 +38,7 @@ The plugin contains:
 | **neon-drizzle**       | Guides Claude through setting up [Drizzle ORM](https://orm.drizzle.team) with Neon. Handles schema creation, connection setup, and project scaffolding.                             |
 | **neon-serverless**    | Teaches Claude how to configure [Neon's serverless Postgres driver](https://neon.com/docs/serverless/serverless-driver) and test connections.                                       |
 | **neon-toolkit**       | Provides workflows for using the [Neon Management API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create databases, projects, and branches dynamically. |
-| **add-neon-knowledge** | Gives Claude access to [Neon documentation](https://neon.com/docs/introduction) snippets and usage examples: the "Neon brain."                                                     |
+| **add-neon-knowledge** | Gives Claude access to [Neon documentation](https://neon.com/docs/introduction) snippets and usage examples: the "Neon brain."                                                      |
 
 ## How it works
 
