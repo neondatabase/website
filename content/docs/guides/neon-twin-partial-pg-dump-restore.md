@@ -1,5 +1,5 @@
 ---
-title: Partial Twin
+title: pg_dump / pg_restore — Partial Twin
 subtitle: Create a partial Twin of your production database
 summary: >-
   Covers the setup of a workflow to create a partial Neon Twin of a production
