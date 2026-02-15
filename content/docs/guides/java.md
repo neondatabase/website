@@ -60,7 +60,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
     cd neon-java-jdbc
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code, IntelliJ IDEA).
+    > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
 
 3.  Add the `postgresql` driver and `dotenv-java` libraries as dependencies in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add these within the `<dependencies>` section.
 

@@ -30,7 +30,7 @@ This extension powers the [Neon Data API](/docs/data-api/overview), enabling sec
 ## Features
 
 - **JWT session initialization** using a JWK (JSON Web Key) for secure JWT validation
-- **Flexible authentication modes** — use either JWK-validated JWTs or PostgREST-compatible JWT claims
+- **Flexible authentication modes**: use either JWK-validated JWTs or PostgREST-compatible JWT claims
 - **User ID retrieval** directly from the database for use in RLS policies
 - **JSONB-based storage** and retrieval of session information
 

@@ -120,7 +120,7 @@ SELECT * FROM propose_indexes(false);
 
 - Does not check operator ordering for compound indexes
 - Does not suggest indexes for joins or `ORDER BY` clauses
-- Does not estimate the benefit of adding an index — pair with [HypoPG](https://github.com/HypoPG/hypopg#) if you want to simulate usage
+- Does not estimate the benefit of adding an index; pair with [HypoPG](https://github.com/HypoPG/hypopg#) if you want to simulate usage
 - Recommendations are per database
 
 ## Remove the extension

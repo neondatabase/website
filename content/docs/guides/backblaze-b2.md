@@ -26,21 +26,21 @@ This guide demonstrates how to integrate Backblaze B2 with Neon by storing file 
 
 1.  Sign up for or log in to your [Backblaze account](https://www.backblaze.com/sign-up/cloud-storage?referrer=getstarted).
 2.  Navigate to **B2 Cloud Storage** > **Buckets** in the left sidebar.
-3.  Click **Create a Bucket**. Provide a globally unique bucket name (e.g., `my-neon-app-b2-files`), choose whether files should be **Private** or **Public**. For this guide, we'll use **Public** for simplicity, but **Private** is recommended for production applications where you want to control access to files.
+3.  Click **Create a Bucket**. Provide a globally unique bucket name (for example, `my-neon-app-b2-files`), choose whether files should be **Private** or **Public**. For this guide, we'll use **Public** for simplicity, but **Private** is recommended for production applications where you want to control access to files.
     ![Create B2 Bucket](/docs/guides/backblaze-b2-create-bucket.png)
 4.  **Create application key:**
     - Navigate to **B2 Cloud Storage** > **Application Keys** in the left sidebar.
     - Click **+ Add a New Application Key**.
-    - Give the key a name (e.g., `neon-app-b2-key`).
-    - **Crucially**, restrict the key's access: Select **Allow access to Bucket(s)** and choose the bucket you just created (e.g., `my-neon-app-b2-files`).
+    - Give the key a name (for example, `neon-app-b2-key`).
+    - **Crucially**, restrict the key's access: Select **Allow access to Bucket(s)** and choose the bucket you just created (for example, `my-neon-app-b2-files`).
     - Select **Read and Write** for the **Type of Access**.
-    - Leave other fields blank unless needed (e.g., File name prefix).
+    - Leave other fields blank unless needed (for example, File name prefix).
     - Click **Create New Key**.
     - Copy the **Key ID** and **Application Key**. These will be used in your application to authenticate with B2.
       ![Create B2 Application Key](/docs/guides/backblaze-b2-create-app-key.png)
 5.  **Find S3 endpoint:**
     - Navigate back to **B2 Cloud Storage** > **Buckets**.
-    - Find your bucket and note the **Endpoint** URL listed (e.g., `s3.us-west-000.backblazeb2.com`). You'll need this S3-compatible endpoint for the SDK configuration.
+    - Find your bucket and note the **Endpoint** URL listed (for example, `s3.us-west-000.backblazeb2.com`). You'll need this S3-compatible endpoint for the SDK configuration.
       ![B2 Bucket Endpoint](/docs/guides/backblaze-b2-bucket-endpoint.png)
 
 ## Configure CORS for client-side uploads
@@ -72,7 +72,7 @@ We need a table in Neon to store metadata about the objects uploaded to B2.
 
     > Storing the full public `file_url` is only useful if the bucket is public. For private buckets, you'll typically only store the `object_key` and generate presigned download URLs on demand.
 
-2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size` if needed).
+2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size` if needed).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `b2_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -444,7 +444,7 @@ WHERE
 
 - The query returns metadata stored in Neon.
 - **Accessing the file:**
-  - If your bucket is **Public**, you can use the `file_url` directly in your application (e.g., `<img>` tags, download links).
+  - If your bucket is **Public**, you can use the `file_url` directly in your application (for example, `<img>` tags, download links).
   - If your bucket is **Private**, the stored `file_url` is likely irrelevant. You **must** generate a **presigned download URL** (a GET URL) on demand using your backend. This involves a similar process to generating the upload URL but using `GetObjectCommand` (JS) or `generate_presigned_url('get_object', ...)` (Python) with read permissions. This provides secure, temporary read access.
 
 This pattern effectively separates file storage and delivery concerns (handled by Backblaze B2) from structured metadata management (handled by Neon), leveraging the strengths of both services.

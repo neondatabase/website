@@ -73,16 +73,16 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA api GRANT SELECT ON TABLES TO anonymous;
 ```
 
 <Admonition type="tip">
-While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems—especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
+While this example uses SERIAL for simplicity, consider using UUID as a primary key in production systems, especially in distributed environments, when exposing identifiers in URLs, or when avoiding predictable sequences is important.
 </Admonition>
 
 ## Copy your database connection string
 
-Retrieve an unpooled database connection string — PostgREST requires a direct connection to your database.
+Retrieve an unpooled database connection string. PostgREST requires a direct connection to your database.
 
 1. Navigate to your **Project Dashboard** in the Neon Console.
 2. Click the **Connect** button to open the **Connect to your database modal**.
-3. Toggle **Connection pooling** to disable it — you need an unpooled connection string.
+3. Toggle **Connection pooling** to disable it; you need an unpooled connection string.
 4. Copy the connection string.
 
 ![Connect to your database modal](/docs/guides/postgrest_connection_string.png)
@@ -294,7 +294,7 @@ Because the `students` table has a RLS policy attached to the student's ID, the 
 
 ## Summary
 
-The examples shown above are simple, but they illustrate how PostgREST works. With Neon and PostgREST, you can instantly turn your Postgres database into a REST API—no backend code required. This setup is ideal for rapid prototyping, internal tools, or even production workloads where you want to focus on your data and business logic rather than boilerplate API code.
+The examples shown above are simple, but they illustrate how PostgREST works. With Neon and PostgREST, you can instantly turn your Postgres database into a REST API; no backend code required. This setup is ideal for rapid prototyping, internal tools, or even production workloads where you want to focus on your data and business logic rather than boilerplate API code.
 
 ## Next steps
 

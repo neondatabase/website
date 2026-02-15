@@ -137,7 +137,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--compute`         | Create a branch with or without a compute. By default, the branch is created with a read-write endpoint. The default value is `true`. To create a branch without a compute, use `--no-compute`                                                                                  | boolean |                                                     |
 | `--type`            | Type of compute to add. Choices are `read_write` (the default) or `read_only`. A read-only compute is a [read replica](/docs/introduction/read-replicas).                                                                                                                       | string  |                                                     |
 | `--suspend-timeout` | Duration of inactivity in seconds after which the compute is automatically suspended. The value `0` means use the global default. The value `-1` means never suspend. The default value is `300` seconds (5 minutes). The maximum value is `604800` seconds (1 week).           | number  |                                                     |
-| `--cu`              | The number of Compute Units. Could be a fixed size (e.g. "2") or a range delimited by a dash (e.g. "0.5-3").                                                                                                                                                                    | string  |                                                     |
+| `--cu`              | The number of Compute Units. Could be a fixed size (for example "2") or a range delimited by a dash (for example "0.5-3").                                                                                                                                                      | string  |                                                     |
 | `--psql`            | Connect to a new branch via `psql`. `psql` must be installed to use this option.                                                                                                                                                                                                | boolean |                                                     |
 | `--schema-only`     | Create a schema-only branch. Requires exactly one read-write compute.                                                                                                                                                                                                           | boolean |                                                     |
 | `--expires-at`      | Set an expiration timestamp (RFC 3339 format) for automatic branch deletion. The branch and its compute endpoints are permanently deleted at the specified time.                                                                                                                | string  |                                                     |
@@ -619,7 +619,7 @@ neon branches set-expiration <id|name> --expires-at <timestamp> [options]
 
 `<id|name>` refers to the Branch ID and branch name. You can specify one or the other.
 
-`--expires-at <timestamp>` specifies the expiration timestamp in RFC 3339 format (e.g., `2025-08-15T18:00:00Z`).
+`--expires-at <timestamp>` specifies the expiration timestamp in RFC 3339 format (for example, `2025-08-15T18:00:00Z`).
 
 #### Options
 
@@ -666,7 +666,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--context-file` | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                                                                                                                       | string |                                                     |
 | `--project-id`   | Project ID                                                                                                                                                                                                                                          | string | Only if your Neon account has more than one project |
 | `--type`         | Type of compute to add. Choices are `read_only` (the default) or `read_write`. A read-only compute is a [read replica](/docs/introduction/read-replicas). A branch can have a single primary read-write compute and multiple read replica computes. | string |                                                     |
-| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (e.g., "2"). For autoscaling, enter a range with a dash (e.g., "0.5-3").                                                                                            | string |                                                     |
+| `--cu`           | Sets the compute size in Compute Units. For a fixed size, enter a single number (for example, "2"). For autoscaling, enter a range with a dash (for example, "0.5-3").                                                                              | string |                                                     |
 
 #### Examples
 

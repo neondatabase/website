@@ -836,7 +836,7 @@ Complete configuration options for `createNeonAuth()`:
 - **baseUrl**: Your Neon Auth server URL from the Neon Console
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
 - **cookies.sessionDataTtl**: Cache TTL in seconds
-- **cookies.domain**: For cross-subdomain sessions (e.g., ".example.com")
+- **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

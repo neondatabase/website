@@ -20,7 +20,7 @@ First, determine how the account was accessed.
 
 ### A. If the account used a third-party login
 
-If the former employee signed up with a third-party identity provider (e.g., Google, GitHub, Microsoft, Hasura), you must recover access to that account through your organization's identity provider. Neon cannot bypass third-party authentication.
+If the former employee signed up with a third-party identity provider (for example, Google, GitHub, Microsoft, Hasura), you must recover access to that account through your organization's identity provider. Neon cannot bypass third-party authentication.
 
 ### B. If the account used email and password
 

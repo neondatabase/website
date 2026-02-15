@@ -45,7 +45,7 @@ For your Python project, create a project directory, set up a virtual environmen
     cd neon-python-quickstart
     ```
 
-    > Open the directory in your preferred code editor (e.g., VS Code, PyCharm).
+    > Open the directory in your preferred code editor (for example, VS Code, PyCharm).
 
 2.  Create and activate a Python virtual environment. This isolates your project's dependencies from your system's Python environment.
 

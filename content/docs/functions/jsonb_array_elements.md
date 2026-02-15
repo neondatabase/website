@@ -378,7 +378,7 @@ GROUP BY name;
 
 If your query involves navigating through multiple levels of nesting, complex filtering conditions, or updates to `JSONB` data, `jsonb_path_query` is often the preferred choice.
 
-Consider a simple example — to extract the first skill of each developer in the `developers` table:
+Consider a simple example: to extract the first skill of each developer in the `developers` table:
 
 ```sql
 SELECT jsonb_path_query(skills, '$[0]') AS first_skill

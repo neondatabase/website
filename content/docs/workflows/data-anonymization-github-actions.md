@@ -85,7 +85,7 @@ The `masking_rules` input accepts a JSON array where each rule specifies:
 
 | Field              | Description                             |
 | ------------------ | --------------------------------------- |
-| `database_name`    | Target database (e.g., `neondb`)        |
+| `database_name`    | Target database (for example, `neondb`) |
 | `schema_name`      | Target schema (typically `public`)      |
 | `table_name`       | Table containing sensitive data         |
 | `column_name`      | Column to mask                          |

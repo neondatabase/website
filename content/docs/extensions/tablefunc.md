@@ -130,18 +130,18 @@ FROM crosstab(
 1.  **`crosstab('source_sql_query_as_string')`**:
 
     The `source_sql_query_as_string` must return three columns:
-    - **Row identifier**: Values in this column become distinct rows in the output (e.g., `product`).
-    - **Category**: Values in this column become new column headers in the output (e.g., `quarter`).
-    - **Value**: Values in this column populate the cells of the new pivot table (e.g., `sales`).
+    - **Row identifier**: Values in this column become distinct rows in the output (for example, `product`).
+    - **Category**: Values in this column become new column headers in the output (for example, `quarter`).
+    - **Value**: Values in this column populate the cells of the new pivot table (for example, `sales`).
 
-    Crucially, this source query **must** be sorted by the first column, then the second (`ORDER BY 1, 2`). This ensures `crosstab` processes data correctly (e.g., `Q1` comes before `Q2`).
+    Crucially, this source query **must** be sorted by the first column, then the second (`ORDER BY 1, 2`). This ensures `crosstab` processes data correctly (for example, `Q1` comes before `Q2`).
 
 2.  **`AS ct(column_definitions)`**:
     - Because `crosstab` returns a generic `SETOF record`, you must explicitly define the structure of the output table.
     - `ct`: An alias for the resulting table.
     - `product TEXT`: Corresponds to the first column of the `source_sql_query`. Its data type should match.
     - `Q1_sales INT, Q2_sales INT, Q3_sales INT`: These are the new columns derived from the unique values in the 'category' (second) column of your `source_sql_query`. Their data types must match the 'value' (third) column of the `source_sql_query`.
-    - If a row identifier/category combination doesn't exist in the source data (e.g., Banana for `Q3`), the corresponding cell in the pivot table will be `NULL`.
+    - If a row identifier/category combination doesn't exist in the source data (for example, Banana for `Q3`), the corresponding cell in the pivot table will be `NULL`.
     - If the source data contains categories not defined in the `AS ct(...)` clause, those categories will be ignored.
 
 #### `crosstab()` with fixed columns (using two SQL queries)
@@ -222,7 +222,7 @@ FROM crosstab(
       1.  The column(s) that will identify each row in your final table (here, `student_name`).
       2.  The column whose values will become your new column headers (here, `subject`).
       3.  The column whose values will fill the cells of your new table (here, `score`).
-    - It's very important to `ORDER BY` the row identifier column(s) (e.g., `ORDER BY student_name` or `ORDER BY 1`).
+    - It's very important to `ORDER BY` the row identifier column(s) (for example, `ORDER BY student_name` or `ORDER BY 1`).
 
 2.  **`category_sql` (the second query string):**
     - This query's job is to produce a single column containing the exact list of categories you want as your new column headers.
@@ -334,7 +334,7 @@ FROM connectby(
   'product_categories',   -- 1. Table name
   'category_id',          -- 2. Key field column name
   'parent_category_id',   -- 3. Parent key field column name
-  '1',                    -- 4. Start row's key value (e.g., 'Electronics' category_id)
+  '1',                    -- 4. Start row's key value (for example, 'Electronics' category_id)
   0,                      -- 5. Maximum depth (0 for all levels)
   '>'                     -- 6. Branch delimiter string for the branch_path
 ) AS t(
@@ -357,8 +357,8 @@ FROM connectby(
 
 - **Output Definition `AS t(...)`**:
   You must define the structure of the output table:
-  - `key_field_alias <type>`: The key of the current item. Its data type should match the `key_field` in the source table (e.g., `current_category_id INT`).
-  - `parent_key_field_alias <type>`: The key of the parent item. Its data type should match the `parent_key_field` (or `key_field`) in the source table (e.g., `parent_id INT`).
+  - `key_field_alias <type>`: The key of the current item. Its data type should match the `key_field` in the source table (for example, `current_category_id INT`).
+  - `parent_key_field_alias <type>`: The key of the parent item. Its data type should match the `parent_key_field` (or `key_field`) in the source table (for example, `parent_id INT`).
   - `level <INTEGER>`: The depth of the current item in the hierarchy (0 for the starting item, 1 for its direct children, and so on).
   - `branch_path <TEXT>`: If the `branch_delimiter` argument is provided to `connectby`, this column will contain a text representation of the path from the starting item to the current item, using the specified delimiter.
 

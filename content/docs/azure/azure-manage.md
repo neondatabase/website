@@ -101,13 +101,13 @@ To retrieve a connection URL for your Neon database:
 
    The values you select define the connection string for your database:
 
-   | Value        | Description                                                                                                                                                                            |
-   | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Project**  | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches.                                                           |
-   | **Branch**   | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides.                                                                                      |
-   | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to.                                                                                         |
-   | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                           |
-   | **Compute**  | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
+   | Value        | Description                                                                                                                                                                             |
+   | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Project**  | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches.                                                            |
+   | **Branch**   | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides.                                                                                       |
+   | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to.                                                                                          |
+   | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                            |
+   | **Compute**  | The compute that runs Postgres. Usually "Primary"; this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
 
 You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 

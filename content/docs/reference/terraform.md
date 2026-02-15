@@ -157,7 +157,7 @@ This configuration creates a new Neon project.
 
 - `name`: (Optional) Name of the project.
 - `pg_version`: (Optional) The major supported PostgreSQL version, such as 17.
-- `region_id`: (Optional) The region where the project will be created (e.g., `aws-us-east-1`).
+- `region_id`: (Optional) The region where the project will be created (for example, `aws-us-east-1`).
   > For up-to-date information on available regions, see [Neon Regions](/docs/introduction/regions).
 - `org_id`: The Organization ID under which to create the project.
 - `history_retention_seconds`: (Optional) Duration in seconds to retain historical data for point-in-time recovery. Free plans have a maximum of 21600 seconds (6 hours). Default is 86400 seconds (24 hours) for paid plans.
@@ -398,7 +398,7 @@ You have now successfully created and managed Neon resources using Terraform! Yo
 
 ## Import existing Neon resources
 
-If you have existing Neon resources that were created outside of Terraform (e.g., via the Neon Console or API directly), you can bring them under Terraform's management. This allows you to manage their lifecycle with code moving forward.
+If you have existing Neon resources that were created outside of Terraform (for example, via the Neon Console or API directly), you can bring them under Terraform's management. This allows you to manage their lifecycle with code moving forward.
 
 Terraform offers two primary ways to do this: using the `terraform import` CLI command or, for Terraform `1.5.0` and later, using declarative `import` blocks directly in your configuration.
 
@@ -442,11 +442,11 @@ When importing Neon resources, you need to know the specific ID format for each 
 
 Here are some common formats for different Neon resources:
 
-- **`neon_project`:** Uses the Project ID (e.g., `damp-recipe-88779456`).
-- **`neon_branch`:** Uses the Branch ID (e.g., `br-orange-bonus-a4v00wjl`).
-- **`neon_endpoint`:** Uses the Endpoint ID (e.g., `ep-blue-cell-a4xzunwf`).
-- **`neon_role`:** Uses a composite ID: `<project_id>/<branch_id>/<role_name>` (e.g., `damp-recipe-88779456/br-orange-bonus-a4v00wjl/application_user`).
-- **`neon_database`:** Uses a composite ID: `<project_id>/<branch_id>/<database_name>` (e.g., `damp-recipe-88779456/br-orange-bonus-a4v00wjl/service_specific_database`).
+- **`neon_project`:** Uses the Project ID (for example, `damp-recipe-88779456`).
+- **`neon_branch`:** Uses the Branch ID (for example, `br-orange-bonus-a4v00wjl`).
+- **`neon_endpoint`:** Uses the Endpoint ID (for example, `ep-blue-cell-a4xzunwf`).
+- **`neon_role`:** Uses a composite ID: `<project_id>/<branch_id>/<role_name>` (for example, `damp-recipe-88779456/br-orange-bonus-a4v00wjl/application_user`).
+- **`neon_database`:** Uses a composite ID: `<project_id>/<branch_id>/<database_name>` (for example, `damp-recipe-88779456/br-orange-bonus-a4v00wjl/service_specific_database`).
 - **`neon_api_key` and `neon_jwks_url`:** These resources do not support import. You'll need to recreate them using Terraform if you want to manage them via IaC.
 
 ### Order of import for dependent resources
@@ -465,7 +465,7 @@ Depending on your preference and the version of Terraform you are using, you can
 
 For each Neon resource you want to import, you'll generally follow these two steps:
 
-1.  **Write a resource block:** Add a corresponding `resource` block to your Terraform configuration files (e.g., `main.tf`). This block tells Terraform how you _want_ the resource to be configured. You might not know all the attributes perfectly upfront; Terraform will populate many of them from the actual state of the resource during the import.
+1.  **Write a resource block:** Add a corresponding `resource` block to your Terraform configuration files (for example, `main.tf`). This block tells Terraform how you _want_ the resource to be configured. You might not know all the attributes perfectly upfront; Terraform will populate many of them from the actual state of the resource during the import.
 
 2.  **Run `terraform import`:** Execute the import command, which takes the Terraform resource address and the Neon-specific ID of the existing resource.
     ```shell
@@ -556,7 +556,7 @@ Here's a breakdown of the minimal HCL and why certain attributes are included:
   - This defines the Terraform resource for a service-specific database.
   - The HCL requires `project_id` and `branch_id` to link to the imported Terraform resources.
   - The `name` attribute must be specified in the HCL and match the existing database's name.
-  - The `owner_name` should also be included, linking to the Terraform role resource (e.g., `neon_role.app_user.name`) that owns this database.
+  - The `owner_name` should also be included, linking to the Terraform role resource (for example, `neon_role.app_user.name`) that owns this database.
 
 All other configurable attributes will be populated into Terraform's state file from the live Neon resource during the `terraform import` process. You will then refine your HCL by reviewing the `terraform plan` output.
 
@@ -710,7 +710,7 @@ For each existing Neon resource you want to bring under Terraform management, yo
 - A standard `resource "resource_type" "resource_name" {}` block. For the initial import, this block can be minimal. It primarily tells Terraform the type and name of the resource in your configuration.
 - An `import {}` block:
   - `to = resource_type.resource_name`: This refers to the Terraform address of the `resource` block you defined above.
-  - `id = "neon_specific_id"`: This is the actual ID of the resource as it exists in Neon (e.g., project ID, branch ID, or composite ID for roles/databases).
+  - `id = "neon_specific_id"`: This is the actual ID of the resource as it exists in Neon (for example, project ID, branch ID, or composite ID for roles/databases).
 
 **Example using `import` blocks:**
 
@@ -814,7 +814,7 @@ After importing your resources using either method, you need to ensure that your
 
 2.  **Understanding the plan output:**
     The plan might show:
-    - **Attributes to be added to your HCL:** Terraform will identify attributes present in the imported state (e.g., `pg_version`, `region_id`, `default_endpoint_settings` for a project) that are not yet explicitly in your HCL `resource` blocks.
+    - **Attributes to be added to your HCL:** Terraform will identify attributes present in the imported state (for example, `pg_version`, `region_id`, `default_endpoint_settings` for a project) that are not yet explicitly in your HCL `resource` blocks.
     - **"Update in-place" actions:** You might see actions like `~ update in-place` for some resources, even if no actual value in Neon is changing. For example, for `neon_endpoint`, you might see `+ branch_id = "your-branch-id"`. This is often because Terraform is now resolving a reference (like `neon_branch.dev_branch.id`) to its concrete value and wants to explicitly set this in its managed configuration. It's a reconciliation step and usually safe to apply.
 
 3.  **Update your HCL (`main.tf`):**

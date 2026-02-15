@@ -254,14 +254,14 @@ fb7c2e2f-cb09-4405-b543-dbe1b88614b6 2025-05-25 10:18:45.340 +0000 `{ "changes":
 
 When HIPAA audit logging is enabled for a Neon project, Neon configures pgAudit with the following settings by default:
 
-| Setting                      | Value        | Description                                                                                   |
-| ---------------------------- | ------------ | --------------------------------------------------------------------------------------------- |
-| `pgaudit.log`                | `all, -misc` | Logs all classes of SQL statements except low-risk miscellaneous commands.                    |
-| `pgaudit.log_parameter`      | `off`        | Parameters passed to SQL statements are not logged to avoid capturing sensitive values.       |
-| `pgaudit.log_catalog`        | `off`        | Queries on system catalog tables (e.g., `pg_catalog`) are excluded from logs to reduce noise. |
-| `pgaudit.log_statement`      | `on`         | The full SQL statement text is included in the log.                                           |
-| `pgaudit.log_relation`       | `off`        | Only a single log entry is generated per statement, not per table or view.                    |
-| `pgaudit.log_statement_once` | `off`        | SQL statements are logged with every entry, not just once per session.                        |
+| Setting                      | Value        | Description                                                                                          |
+| ---------------------------- | ------------ | ---------------------------------------------------------------------------------------------------- |
+| `pgaudit.log`                | `all, -misc` | Logs all classes of SQL statements except low-risk miscellaneous commands.                           |
+| `pgaudit.log_parameter`      | `off`        | Parameters passed to SQL statements are not logged to avoid capturing sensitive values.              |
+| `pgaudit.log_catalog`        | `off`        | Queries on system catalog tables (for example, `pg_catalog`) are excluded from logs to reduce noise. |
+| `pgaudit.log_statement`      | `on`         | The full SQL statement text is included in the log.                                                  |
+| `pgaudit.log_relation`       | `off`        | Only a single log entry is generated per statement, not per table or view.                           |
+| `pgaudit.log_statement_once` | `off`        | SQL statements are logged with every entry, not just once per session.                               |
 
 #### What does `pgaudit.log = 'all, -misc'` include?
 
@@ -271,15 +271,15 @@ This configuration enables logging for all major classes of SQL activity while e
 - **WRITE**: `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` commands that write to tables.
 - **FUNCTION**: Function calls and `DO` blocks.
 - **ROLE**: Role and permission changes, including `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`.
-- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` — all DDL operations not included in the `ROLE` class.
-- **MISC_SET**: Miscellaneous `SET` commands, e.g. `SET ROLE`.
+- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` (all DDL operations not included in the `ROLE` class).
+- **MISC_SET**: Miscellaneous `SET` commands, for example `SET ROLE`.
 
 Excluded:
 
 - **MISC**: Low-impact commands such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`.
 
 <Admonition type="note">
-In some cases, audit logs may include SQL statements that contain plain-text passwords—for example, in a `CREATE ROLE ... LOGIN PASSWORD` command. This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
+In some cases, audit logs may include SQL statements that contain plain-text passwords (for example, in a `CREATE ROLE ... LOGIN PASSWORD` command). This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
 
 This behavior is a known issue. We recommend avoiding the inclusion of raw credentials in SQL statements where possible.
 </Admonition>
@@ -290,11 +290,11 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 - Logs are written using the standard [PostgreSQL logging facility](https://www.postgresql.org/docs/current/runtime-config-logging.html).
 - Logs are sent to a dedicated Neon audit collector endpoint and securely stored.
-- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (e.g.,`neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
+- Each log entry includes metadata such as the timestamp of the activity, the Neon compute ID (`endpoint_id`), Neon project ID (`project_id`), the Postgres role, the database accessed, and the method of access (for example, `neon-internal-sql-editor`), etc. See the following log record example and field descriptions:
 
 #### Postgres audit log example
 
-The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXISTS healthcare`—is captured in Neon’s audit logs. The table provides a description of the log record's parts.
+The following example shows how a simple SQL command (`CREATE SCHEMA IF NOT EXISTS healthcare`) is captured in Neon’s audit logs. The table provides a description of the log record's parts.
 
 **Query:**
 
@@ -308,35 +308,35 @@ The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXI
 
 **Field descriptions:**
 
-| **Field position** | **Example value**                       | **Description**                                                                   |
-| ------------------ | --------------------------------------- | --------------------------------------------------------------------------------- |
-| 1                  | 2025-05-05 20:23:01.277                 | Timestamp when the log was received by the logging system.                        |
-| 2                  | `<134>`                                 | Syslog priority code (facility + severity).                                       |
-| 3                  | May 6 00:23:01                          | Syslog timestamp (when the message was generated on the source host).             |
-| 4                  | vm-compute-shy-waterfall-w2cn1o3t-b6vmn | Hostname or compute instance where the event occurred.                            |
-| 5                  | young-recipe-29421150/ep-calm-da        | Project and endpoint name in the format `<project>/<endpoint>`.                   |
-| 6                  | 2025-05-06 00:23:01.277 GMT             | Timestamp of the database event in UTC.                                           |
-| 7                  | neondb_owner                            | Database role (user) that executed the statement.                                 |
-| 8                  | neondb                                  | Database name.                                                                    |
-| 9                  | 1405                                    | Process ID (PID) of the PostgreSQL backend.                                       |
-| 10                 | 10.6.42.155:13702                       | Client IP address and port that issued the query.                                 |
-| 11                 | 68195665.57d                            | PostgreSQL virtual transaction ID.                                                |
-| 12                 | 1                                       | Backend process number.                                                           |
-| 13                 | CREATE SCHEMA                           | Command tag.                                                                      |
-| 14                 | 2025-05-06 00:23:01 GMT                 | Statement start timestamp.                                                        |
-| 15                 | 16/2                                    | Log sequence number (LSN).                                                        |
-| 16                 | 767                                     | Statement duration in milliseconds.                                               |
-| 17                 | 00000                                   | SQLSTATE error code (00000 = success).                                            |
-| 18                 | SESSION                                 | Log message level.                                                                |
-| 19                 | 1                                       | Session ID.                                                                       |
-| 20                 | 1                                       | Subsession or transaction ID.                                                     |
-| 21                 | DDL                                     | Statement type: Data Definition Language.                                         |
-| 22                 | CREATE SCHEMA                           | Statement tag/type.                                                               |
-| 23–26              | _(empty)_                               | Reserved/unused fields.                                                           |
-| 27                 | CREATE SCHEMA IF NOT EXISTS healthcare  | Full SQL text of the statement.                                                   |
-| 28                 | `<not logged>`                          | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`). |
-| 29–35              | _(empty)_                               | Reserved/unused fields.                                                           |
-| 36                 | neon-internal-sql-editor                | Application name or source of the query (e.g., SQL Editor in the Neon Console).   |
+| **Field position** | **Example value**                       | **Description**                                                                        |
+| ------------------ | --------------------------------------- | -------------------------------------------------------------------------------------- |
+| 1                  | 2025-05-05 20:23:01.277                 | Timestamp when the log was received by the logging system.                             |
+| 2                  | `<134>`                                 | Syslog priority code (facility + severity).                                            |
+| 3                  | May 6 00:23:01                          | Syslog timestamp (when the message was generated on the source host).                  |
+| 4                  | vm-compute-shy-waterfall-w2cn1o3t-b6vmn | Hostname or compute instance where the event occurred.                                 |
+| 5                  | young-recipe-29421150/ep-calm-da        | Project and endpoint name in the format `<project>/<endpoint>`.                        |
+| 6                  | 2025-05-06 00:23:01.277 GMT             | Timestamp of the database event in UTC.                                                |
+| 7                  | neondb_owner                            | Database role (user) that executed the statement.                                      |
+| 8                  | neondb                                  | Database name.                                                                         |
+| 9                  | 1405                                    | Process ID (PID) of the PostgreSQL backend.                                            |
+| 10                 | 10.6.42.155:13702                       | Client IP address and port that issued the query.                                      |
+| 11                 | 68195665.57d                            | PostgreSQL virtual transaction ID.                                                     |
+| 12                 | 1                                       | Backend process number.                                                                |
+| 13                 | CREATE SCHEMA                           | Command tag.                                                                           |
+| 14                 | 2025-05-06 00:23:01 GMT                 | Statement start timestamp.                                                             |
+| 15                 | 16/2                                    | Log sequence number (LSN).                                                             |
+| 16                 | 767                                     | Statement duration in milliseconds.                                                    |
+| 17                 | 00000                                   | SQLSTATE error code (00000 = success).                                                 |
+| 18                 | SESSION                                 | Log message level.                                                                     |
+| 19                 | 1                                       | Session ID.                                                                            |
+| 20                 | 1                                       | Subsession or transaction ID.                                                          |
+| 21                 | DDL                                     | Statement type: Data Definition Language.                                              |
+| 22                 | CREATE SCHEMA                           | Statement tag/type.                                                                    |
+| 23–26              | _(empty)_                               | Reserved/unused fields.                                                                |
+| 27                 | CREATE SCHEMA IF NOT EXISTS healthcare  | Full SQL text of the statement.                                                        |
+| 28                 | `<not logged>`                          | Parameter values (redacted or disabled by settings like `pgaudit.log_parameter`).      |
+| 29–35              | _(empty)_                               | Reserved/unused fields.                                                                |
+| 36                 | neon-internal-sql-editor                | Application name or source of the query (for example, SQL Editor in the Neon Console). |
 
 #### Extension configuration
 

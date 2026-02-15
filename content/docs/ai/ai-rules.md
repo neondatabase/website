@@ -29,7 +29,7 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 
 ## Individual AI rules
 
-For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
+For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory; the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 

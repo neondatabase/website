@@ -51,7 +51,7 @@ As an Azure Benefit Eligible partner on Azure Marketplace, Neon Postgres purchas
 
 - When you purchase Neon Postgres via Azure Marketplace, the cost is billed through your Microsoft Azure subscription.
 - These charges are eligible to count toward your MACC, helping you maximize your existing commitment to Azure.
-- There are no additional steps required—your eligible Neon Postgres spend is automatically applied to your MACC.
+- There are no additional steps required; your eligible Neon Postgres spend is automatically applied to your MACC.
 
 For more details on how MACC applies to marketplace purchases, see [Microsoft's documentation on MACC](https://learn.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit)
 

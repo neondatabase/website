@@ -41,7 +41,7 @@ Key columns in the output include:
 
 - `locked_row` (`tid`): The Tuple ID (physical location) of the locked row.
 - `locker` (`xid`): The Transaction ID (or Multixact ID if `multi` is true) of the transaction holding the lock
-- `multi` (`boolean`): True if `locker` is a Multixact ID (indicating multiple transactions might be involved, e.g., for shared locks).
+- `multi` (`boolean`): True if `locker` is a Multixact ID (indicating multiple transactions might be involved, for example, for shared locks).
 - `xids` (`xid[]`): An array of Transaction IDs that are holding locks on this specific row. This is particularly informative when `multi` is true.
 - `modes` (`text[]`): An array listing the lock modes held by the corresponding `xids` on the row. Common modes include `For Key Share`, `For Share`, `For No Key Update`, `For Update`, and `Update`.
 - `pids` (`integer[]`): An array of Process IDs (PIDs) of the backend database sessions holding the locks. This helps identify the specific connections.
@@ -67,7 +67,7 @@ Now, to create some row locks, you would typically use multiple database session
 
 **Scenario setup (to be performed in separate `psql` sessions or database connections):**
 
-1.  **In Session 1:** Start a transaction and update Alice's account (e.g., her balance), but do not commit. This will place an exclusive lock on Alice's row.
+1.  **In Session 1:** Start a transaction and update Alice's account (for example, her balance), but do not commit. This will place an exclusive lock on Alice's row.
 
     ```sql
     -- In Session 1
@@ -186,7 +186,7 @@ This output provides a comprehensive view of the locking situation, including th
 ## Important considerations and limitations
 
 - **Lock acquisition**: `pgrowlocks` takes an `AccessShareLock` on the target table to read its rows.
-- **Blocking**: If an `ACCESS EXCLUSIVE` lock is held on the table (e.g., by an `ALTER TABLE` operation), `pgrowlocks` will be blocked until that exclusive lock is released.
+- **Blocking**: If an `ACCESS EXCLUSIVE` lock is held on the table (for example, by an `ALTER TABLE` operation), `pgrowlocks` will be blocked until that exclusive lock is released.
 - **Performance**: `pgrowlocks` reads each row of the table to check for locks. This can be slow and resource-intensive on very large tables.
 
 ## Conclusion

@@ -106,9 +106,9 @@ Meta-commands can significantly speed up your workflow by providing quick access
 
 Here are some of the meta-commands that you can use within the Neon SQL Editor:
 
-- `\dt` — List all tables in the current database.
-- `\d [table_name]` — Describe a table's structure.
-- `\l` — List all databases.
+- `\dt`: List all tables in the current database.
+- `\d [table_name]`: Describe a table's structure.
+- `\l`: List all databases.
 - `\?` - A cheat sheet of available meta-commands
 - `\h [NAME]` - Get help for any Postgres command. For example, try `\h SELECT`.
 

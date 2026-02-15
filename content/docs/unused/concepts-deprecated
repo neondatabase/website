@@ -102,7 +102,7 @@ Neon has limits on the amount of modification history stored for the [Technical 
 
 ## Compute Config
 
-During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (e.g. when compute is suspended).
+During the Technical Preview, Neon only supports modification to session level configuration parameters. Parameters are reset when the session is terminated (for example when compute is suspended).
 
 See [Default Parameters](/docs/compatibility#default-parameters).
 

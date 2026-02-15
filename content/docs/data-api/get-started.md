@@ -94,7 +94,7 @@ In this example, we'll create a `posts` table where users can read published pos
 
 - **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
 - **Drizzle (crudPolicy)**: A high-level helper that generates RLS policies in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
-- **Drizzle (pgPolicy)**: Define policies per operation or use a single `FOR ALL` policy. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
+- **Drizzle (pgPolicy)**: Define policies per operation or use a single `FOR ALL` policy. Use this when you need different logic for different operations (for example, time-limited updates, different rules for INSERT vs UPDATE).
 
 For more on Drizzle RLS, see our [Drizzle RLS guide](/docs/guides/rls-drizzle).
 
@@ -309,9 +309,9 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **Where to get the JWT token:**
 
-- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
+- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
 - **Neon Auth (programmatic)**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
-- **Other providers**: Retrieve the token from your auth provider's SDK (e.g., `getAccessToken()` in Auth0, `getToken()` in Clerk).
+- **Other providers**: Retrieve the token from your auth provider's SDK (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
 
 **About the `sub` claim:**
 
@@ -350,7 +350,7 @@ If you're using Neon Auth and want to test the Data API without building an appl
 This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
 </Admonition>
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
 
 2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
 
@@ -425,8 +425,8 @@ For the complete list of methods and detailed examples, see the [Neon Auth & Dat
 
 ## Next steps
 
-- [Build a note-taking app](/docs/data-api/demo) — Hands-on tutorial with Data API queries
-- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
-- [Generate TypeScript types](/docs/data-api/generate-types) — Get autocomplete for table names and columns
-- [SQL to REST Converter](/docs/data-api/sql-to-rest) — Convert SQL queries to API calls
-- [Row-Level Security with Neon](/docs/guides/row-level-security) — Secure your data at the database level
+- [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
+- [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
+- [SQL to REST Converter](/docs/data-api/sql-to-rest): Convert SQL queries to API calls
+- [Row-Level Security with Neon](/docs/guides/row-level-security): Secure your data at the database level

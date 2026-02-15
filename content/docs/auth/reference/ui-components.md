@@ -39,16 +39,16 @@ function App() {
 
 ### Common Props
 
-| Prop                         | Type                     | Description                                                       | Example                                                  |
-| ---------------------------- | ------------------------ | ----------------------------------------------------------------- | -------------------------------------------------------- |
-| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance                      | `authClient={authClient}`                                |
-| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (e.g., Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
-| `navigate`                   | `(href: string) => void` | Navigation function for React Router                              | `navigate={navigate}`                                    |
-| `Link`                       | `ComponentType`          | Custom Link component for routing                                 | `Link={RouterLink}`                                      |
-| `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                           | See example below                                        |
-| `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                           | `avatar={{ size: 256, extension: 'webp' }}`              |
-| `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings                    | See example below                                        |
-| `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                                       | `credentials={{ forgotPassword: true }}`                 |
+| Prop                         | Type                     | Description                                                              | Example                                                  |
+| ---------------------------- | ------------------------ | ------------------------------------------------------------------------ | -------------------------------------------------------- |
+| `authClient`                 | `NeonAuthPublicApi`      | **Required.** Your Neon Auth client instance                             | `authClient={authClient}`                                |
+| `social.providers`           | `SocialProvider[]`       | Array of OAuth providers to enable (for example, Google, GitHub, Vercel) | `social={{ providers: ['google', 'github', 'vercel'] }}` |
+| `navigate`                   | `(href: string) => void` | Navigation function for React Router                                     | `navigate={navigate}`                                    |
+| `Link`                       | `ComponentType`          | Custom Link component for routing                                        | `Link={RouterLink}`                                      |
+| `localization`               | `AuthLocalization`       | Customize text labels throughout the UI                                  | See example below                                        |
+| `avatar`                     | `AvatarOptions`          | Avatar upload and display configuration                                  | `avatar={{ size: 256, extension: 'webp' }}`              |
+| `additionalFields`           | `AdditionalFields`       | Custom fields for sign-up and account settings                           | See example below                                        |
+| `credentials.forgotPassword` | `boolean`                | Enable forgot password flow                                              | `credentials={{ forgotPassword: true }}`                 |
 
 ### Enable OAuth Providers
 
@@ -180,7 +180,7 @@ This includes all necessary styles (~47KB minified) with no additional configura
 If your project already uses Tailwind CSS v4, import the Tailwind-ready CSS to avoid duplicate styles:
 
 ```css
-/* In your main CSS file (e.g., globals.css) */
+/* In your main CSS file (for example, globals.css) */
 @import 'tailwindcss';
 @import '@neondatabase/neon-js/ui/tailwind';
 ```

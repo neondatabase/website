@@ -274,7 +274,7 @@ Some users encounter DNS resolution failures when connecting to their Neon datab
 
 ![Unexpected error happened on Tables page](/docs/guides/tables_error.png)
 
-To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (e.g., `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
+To check for a DNS resolution issue, you can run `nslookup` on your Neon hostname, which is the part of your Neon database [connection string](/docs/reference/glossary#connection-string) starting with your endpoint ID (for example, `ep-cool-darkness-a1b2c3d4`) and ending with `neon.tech`. For example:
 
 ```bash shouldWrap
 nslookup ep-cool-darkness-a1b2c3d4.ap-southeast-1.aws.neon.tech
@@ -334,16 +334,16 @@ Failure to resolve the Neon hostname can happen for different reasons:
    To change your DNS configuration at the OS level:
    - **macOS**: System Settings → Network → Wi-Fi → Details → DNS
    - **Windows**: Control Panel → Network and Internet → Network Connections → Right-click your connection → Properties → Internet Protocol Version 4 (TCP/IPv4)
-   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (e.g., NetworkManager, Netplan)
+   - **Linux**: Edit `/etc/resolv.conf` or configure your network manager (for example, NetworkManager, Netplan)
 
    This article provides detailed instructions: [How to Turn on Private DNS Mode](https://news.trendmicro.com/2023/03/21/how-to-turn-on-private-dns-mode/)
 
 2. **Disable system-wide web proxies**
 
    If you’re using a proxy configured at the OS level, it may interfere with DNS lookups. To check and disable system proxy settings:
-   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (e.g., "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
+   - **macOS**: System Settings → Network → Wi-Fi → Details → Proxies. Uncheck any active proxy options (for example, "Web Proxy (HTTP)", "Secure Web Proxy (HTTPS)")
    - **Windows**: Settings → Network & Internet → Proxy. Turn off "Use a proxy server" if it's enabled
-   - **Linux**: Check your environment variables (e.g., `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
+   - **Linux**: Check your environment variables (for example, `http_proxy`, `https_proxy`) and system settings under Network/Proxy.
 
 3. **Using a VPN**
 

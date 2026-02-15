@@ -119,7 +119,7 @@ Keep reading:
 
 Scale-to-zero allows Neon to suspend compute after a period of inactivity. This is a highly effective way to save costs in development environments and workloads with intermittent usage. For production workloads, the decision depends on your latency requirements.
 
-If occasional cold starts are acceptable for your application (e.g., for internal tools), leaving scale-to-zero enabled will be the most cost-effective choice.
+If occasional cold starts are acceptable for your application (for example, for internal tools), leaving scale-to-zero enabled will be the most cost-effective choice.
 
 Consider disabling scale-to-zero if:
 
@@ -164,7 +164,7 @@ Keep reading: [Storage and billing for restores](/docs/introduction/restore-wind
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later — ensuring that recovery points exist even if they fall outside your chosen restore window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen restore window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 
@@ -206,7 +206,7 @@ However, pooled connections are not appropriate for all workloads. Avoid them fo
 
 - Long-running database migrations
 - Workloads that rely on session-level state
-- Administrative tasks that require persistent connections (e.g., `pg_dump`)
+- Administrative tasks that require persistent connections (for example, `pg_dump`)
 - Logical replication (CDC tools like Fivetran, Airbyte)
 
 Keep reading: [Connection pooling](/docs/connect/connection-pooling)
