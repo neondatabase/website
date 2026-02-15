@@ -20,7 +20,7 @@ updatedOn: '2026-02-06T22:07:32.805Z'
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system — it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
+The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system; it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
 
 Securing your data involves two layers:
 
@@ -106,7 +106,7 @@ RLS has three distinct states that affect data visibility:
 | **RLS enabled + policies**   | Rows filtered by policy rules (typically using `auth.user_id()`) |
 
 <Admonition type="warning" title="RLS disabled means no filtering">
-If RLS is disabled on a table, any authenticated user can see all rows in that table. This is different from "filtering without policies" — it means there is no filtering at all.
+If RLS is disabled on a table, any authenticated user can see all rows in that table. This is different from "filtering without policies"; it means there is no filtering at all.
 </Admonition>
 
 ### Checking RLS status in the Console

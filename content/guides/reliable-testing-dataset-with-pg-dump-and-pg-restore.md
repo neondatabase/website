@@ -71,7 +71,7 @@ This name will appear in the **Actions** section of the GitHub UI. Regardless of
 
 This section of the workflow determines when the Action will run. The `schedule` field includes a `cron` expression, which uses [POSIX cron syntax](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07) to specify how often the Action should execute.
 
-I've also included the `workflow_dispatch` field, which lets you manually trigger this Action from the GitHub UI—a useful feature while developing and testing the workflow.
+I've also included the `workflow_dispatch` field, which lets you manually trigger this Action from the GitHub UI, a useful feature while developing and testing the workflow.
 
 ### env
 
@@ -203,7 +203,7 @@ jobs:
           $POSTGRES/psql "${{ env.DEV_DATABASE_URL }}" -c "\copy public.transactions FROM '${{ github.workspace }}/transactions-subset.csv' WITH CSV HEADER"
 ```
 
-The above code snippet might look a bit complicated at first, but it’s actually not that bad—let me break it down for you.
+The above code snippet might look a bit complicated at first, but it’s actually not that bad; let me break it down for you.
 
 ### Dump schema
 

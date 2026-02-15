@@ -425,8 +425,8 @@ For the complete list of methods and detailed examples, see the [Neon Auth & Dat
 
 ## Next steps
 
-- [Build a note-taking app](/docs/data-api/demo) — Hands-on tutorial with Data API queries
-- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
-- [Generate TypeScript types](/docs/data-api/generate-types) — Get autocomplete for table names and columns
-- [SQL to REST Converter](/docs/data-api/sql-to-rest) — Convert SQL queries to API calls
-- [Row-Level Security with Neon](/docs/guides/row-level-security) — Secure your data at the database level
+- [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
+- [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
+- [SQL to REST Converter](/docs/data-api/sql-to-rest): Convert SQL queries to API calls
+- [Row-Level Security with Neon](/docs/guides/row-level-security): Secure your data at the database level

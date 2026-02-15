@@ -22,7 +22,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:33.097Z'
 ---
 
-Neon offers plans to support you at every stage—from your first prototype to production at scale.
+Neon offers plans to support you at every stage, from your first prototype to production at scale.
 Start for free, then **pay only for what you use** as your needs grow.
 
 <Admonition type="note">
@@ -72,19 +72,19 @@ Learn how to manage your Neon costs effectively with our [cost optimization guid
 
 ### Price
 
-On **Launch** and **Scale** plans, you pay only for what you use — there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
+On **Launch** and **Scale** plans, you pay only for what you use; there's no minimum monthly fee. Usage for compute, storage, extra branches, and other features is billed at the published rates (see the [Plan overview](#plan-overview) table).
 
 <Admonition type="note">
 Invoices under $0.50 are not collected.
 </Admonition>
 
-On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more — for $0/month.
+On the **Free** plan, there is no monthly cost. You get usage allowances for projects, branches, compute, storage, and more, for $0/month.
 
 ### Who it's for
 
-- **Free** — Prototypes, side projects, and quick experiments. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
-- **Launch** — Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
-- **Scale** — Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
+- **Free**: Prototypes, side projects, and quick experiments. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
+- **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
 
 ### Projects
 
@@ -96,12 +96,12 @@ Included per plan:
 
 - **Free**: 100 projects
 - **Launch**: 100 projects
-- **Scale**: 1,000 projects (soft limit — request more if needed via [support](/docs/introduction/support))
+- **Scale**: 1,000 projects (soft limit; request more if needed via [support](/docs/introduction/support))
 
 ### Branches
 
 Each Neon project is created with a [root branch](/docs/reference/glossary#root-branch), like the `main` branch in Git.  
-Postgres objects — databases, schemas, tables, records, indexes, roles — are created on a branch.
+Postgres objects (databases, schemas, tables, records, indexes, roles) are created on a branch.
 
 You can create [child branches](/docs/reference/glossary#child-branch) for testing, previews, or development.
 
@@ -196,9 +196,9 @@ Adjusts compute size between defined limits based on demand.
 
 Suspends computes after inactivity.
 
-- **Free**: 5 min inactivity — cannot disable
-- **Launch**: 5 min inactivity — can disable
-- **Scale**: Fully configurable — 1 minute to always on
+- **Free**: 5 min inactivity; cannot disable
+- **Launch**: 5 min inactivity; can disable
+- **Scale**: Fully configurable; 1 minute to always on
 
 ### Storage
 
@@ -218,7 +218,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 - Set a [time to live](/docs/guides/branch-expiration) on development and preview branches
 - Delete child branches when they're no longer needed
-- For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead — root branches are billed on your actual data size with no delta tracking overhead.
+- For production workloads, use a [root branch](/docs/manage/branches#root-branch) instead; root branches are billed on your actual data size with no delta tracking overhead.
 
 </Admonition>
 
@@ -333,9 +333,9 @@ Compliance certifications available on **Scale**:
 
 Security features:
 
-- [Protected branches](/docs/guides/protected-branches) — safeguards for critical data (available on **Launch** and **Scale**)
-- [IP Allow](/docs/introduction/ip-allow) — restricts access to trusted IPs (available on **Scale**)
-- [Private Networking](/docs/guides/neon-private-networking) — secure private connections via AWS PrivateLink (available on **Scale**)
+- [Protected branches](/docs/guides/protected-branches): safeguards for critical data (available on **Launch** and **Scale**)
+- [IP Allow](/docs/introduction/ip-allow): restricts access to trusted IPs (available on **Scale**)
+- [Private Networking](/docs/guides/neon-private-networking): secure private connections via AWS PrivateLink (available on **Scale**)
 
 ### Uptime SLA
 
@@ -389,42 +389,42 @@ The following metrics may appear on your Neon invoice. Each metric represents a 
 
 The following examples show what your monthly bill might look like on the **Launch** and **Scale** plans at different levels of usage. Each example includes compute, storage (root and child branches), and instant restore history. Your actual costs will depend on your specific workload, usage patterns, and configuration.
 
-> **Note:** The "billable days" shown below refer to **active compute time** — the total hours your compute is actively running in a month. Computes can scale to zero when idle, so you may accumulate these hours in shorter periods of usage throughout the month rather than running continuously.
+> **Note:** The "billable days" shown below refer to **active compute time** (the total hours your compute is actively running) in a month. Computes can scale to zero when idle, so you may accumulate these hours in shorter periods of usage throughout the month rather than running continuously.
 
 ### Launch plan
 
 - **Example 1 (light usage)**
-  - Compute: ~10 CU-hours = 1 CU × 10 hours — **$1.06**  
+  - Compute: ~10 CU-hours = 1 CU × 10 hours: **$1.06**  
     _(10 CU-hours × $0.106/CU-hour)_
-  - Root branch storage: 2 GB — **$0.70**  
+  - Root branch storage: 2 GB: **$0.70**  
     _(2 GB × $0.35/GB-month)_
-  - Child branch storage: 1 GB — **$0.35**  
+  - Child branch storage: 1 GB: **$0.35**  
     _(1 GB × $0.35/GB-month)_
-  - Instant restore history: 1 GB — **$0.20**  
+  - Instant restore history: 1 GB: **$0.20**  
     _(1 GB × $0.20/GB-month)_
 
     **Amount due:** **$2.31**
 
 - **Example 2**
-  - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days) — **$12.72**  
+  - Compute: ~120 CU-hours = 1 CU × 120 hours (about 5 billable days): **$12.72**  
     _(120 CU-hours × $0.106/CU-hour)_
-  - Root branch storage: 20 GB — **$7.00**  
+  - Root branch storage: 20 GB: **$7.00**  
     _(20 GB × $0.35/GB-month)_
-  - Child branch storage: 5 GB — **$1.75**  
+  - Child branch storage: 5 GB: **$1.75**  
     _(5 GB × $0.35/GB-month)_
-  - Instant restore history: 10 GB — **$2.00**  
+  - Instant restore history: 10 GB: **$2.00**  
     _(10 GB × $0.20/GB-month)_
 
     **Amount due:** **$23.47**
 
 - **Example 3**
-  - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days) — **$26.50**  
+  - Compute: ~250 CU-hours = 2 CU × 125 hours (about 5.2 billable days): **$26.50**  
     _(250 CU-hours × $0.106/CU-hour)_
-  - Root branch storage: 40 GB — **$14.00**  
+  - Root branch storage: 40 GB: **$14.00**  
     _(40 GB × $0.35/GB-month)_
-  - Child branch storage: 10 GB — **$3.50**  
+  - Child branch storage: 10 GB: **$3.50**  
     _(10 GB × $0.35/GB-month)_
-  - Instant restore history: 20 GB — **$4.00**  
+  - Instant restore history: 20 GB: **$4.00**  
     _(20 GB × $0.20/GB-month)_
 
     **Amount due:** **$48.00**
@@ -434,25 +434,25 @@ The following examples show what your monthly bill might look like on the **Laun
 ### Scale plan
 
 - **Example 1**
-  - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days) — **$377.40**  
+  - Compute: ~1,700 CU-hours = 4 CU × 425 hours (about 17.7 billable days): **$377.40**  
     _(1,700 CU-hours × $0.222/CU-hour)_
-  - Root branch storage: 100 GB — **$35.00**  
+  - Root branch storage: 100 GB: **$35.00**  
     _(100 GB × $0.35/GB-month)_
-  - Child branch storage: 25 GB — **$8.75**  
+  - Child branch storage: 25 GB: **$8.75**  
     _(25 GB × $0.35/GB-month)_
-  - Instant restore history: 50 GB — **$10.00**  
+  - Instant restore history: 50 GB: **$10.00**  
     _(50 GB × $0.20/GB-month)_
 
     **Amount due:** **$431.15**
 
 - **Example 2**
-  - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days) — **$577.20**  
+  - Compute: ~2,600 CU-hours = 8 CU × 325 hours (about 13.5 billable days): **$577.20**  
     _(2,600 CU-hours × $0.222/CU-hour)_
-  - Root branch storage: 150 GB — **$52.50**  
+  - Root branch storage: 150 GB: **$52.50**  
     _(150 GB × $0.35/GB-month)_
-  - Child branch storage: 40 GB — **$14.00**  
+  - Child branch storage: 40 GB: **$14.00**  
     _(40 GB × $0.35/GB-month)_
-  - Instant restore history: 75 GB — **$15.00**  
+  - Instant restore history: 75 GB: **$15.00**  
     _(75 GB × $0.20/GB-month)_
 
     **Amount due:** **$658.70**
@@ -475,10 +475,10 @@ How is compute usage measured in Neon?
 How is storage usage billed in Neon?
 : Storage is billed based on actual usage, measured in **GB-months**:  
  1 GB-month = 1 GB stored for 1 month  
- Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size — capped at your actual data size. On the Free plan, you get 0.5 GB per project.
+ Storage usage is metered hourly and summed over the month. For child branches, you're billed for the minimum of accumulated changes or logical data size; capped at your actual data size. On the Free plan, you get 0.5 GB per project.
 
 How do branches affect storage?
-: Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size — you never pay more than your actual data size. Delete unused branches to control storage costs.
+: Your root branch contains your main data. Child branches share data with the root until changes are made. Child branches are billed for the minimum of accumulated changes or logical data size; you never pay more than your actual data size. Delete unused branches to control storage costs.
 
 How is extra branch usage billed?
 : Paid plans include a set number of branches per project. Additional branches are billed at **$1.50/branch-month**, prorated hourly (about $0.002/hour).  
@@ -518,7 +518,7 @@ Do you charge for idle computes?
 : If scale-to-zero is enabled, no. Computes that are suspended do not accrue CU-hours.
 
 What is the difference between root and child branch storage billing?
-: Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size — ensuring you never pay more than your actual data size.
+: Root branches are billed for their full logical data size. Child branches are billed for the minimum of accumulated changes since creation or logical data size; ensuring you never pay more than your actual data size.
 
 Can I get more than the listed project limit?
 : Yes, on Scale you can request increases for projects beyond the listed limit.

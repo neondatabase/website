@@ -17,7 +17,7 @@ This guide will help you get started with implementing this architecture.
 
 ## Multitenant architectures in Postgres
 
-In a multitenant architecture, a single system supports multiple users (tenants), each with access to manage their own data. In a database like Postgres, this setup requires careful structuring to keep each tenant's data private, secure, and isolated—all while remaining efficient to manage and scale.
+In a multitenant architecture, a single system supports multiple users (tenants), each with access to manage their own data. In a database like Postgres, this setup requires careful structuring to keep each tenant's data private, secure, and isolated, all while remaining efficient to manage and scale.
 
 Following these principles, there are three primary routes you could follow to implement multitenant architectures in Postgres:
 
@@ -33,7 +33,7 @@ To better situate our use case, let's briefly outline the differences between th
 
 In a database-per-user design, each user's data is fully isolated in its own database, eliminating any risk of data overlap. This setup is straightforward to design and highly secure. However, implementing this in managed Postgres databases has traditionally been challenging. For users of AWS RDS or similar services, two primary options have existed for achieving a database-per-user design:
 
-1. **Using one large instance to host multiple user databases.** This option can be tempting due to the reduced number of instances to manage and (probably) lower infrastructure costs. But the trade-off is a higher demand for DBA expertise—this is a design that requires careful planning, especially at scale. Hosting all users on shared resources can impact performance, particularly if users have varying workload patterns, and if the instance fails, all customers are affected. Migrations and upgrades also become complex.
+1. **Using one large instance to host multiple user databases.** This option can be tempting due to the reduced number of instances to manage and (probably) lower infrastructure costs. But the trade-off is a higher demand for DBA expertise; this is a design that requires careful planning, especially at scale. Hosting all users on shared resources can impact performance, particularly if users have varying workload patterns, and if the instance fails, all customers are affected. Migrations and upgrades also become complex.
 
 2. **Handling multiple instances, each hosting a single production database.** In this scenario, each instance scales independently, preventing resource competition between users and minimizing the risk of widespread failures. This is a much simpler design from the perspective of the database layer, but managing hundreds of instances in AWS can get very costly and complex. As the number of instances grows into the thousands, management becomes nearly impossible.
 
@@ -53,7 +53,7 @@ In Neon, we generally don't recommend this approach for SaaS applications, unles
 
 Lastly, Postgres's robustness actually makes it possible to ensure tenant isolation within a shared schema. In this model, all users' data resides within the same tables, with isolation enforced through foreign keys and row-level security.
 
-While this is a common choice—and can be a good starting point if you're just beginning to build your app—we still recommend the project-per-user route if possible. Over time, as your app scales, meeting requirements within a shared schema setup becomes increasingly challenging. Enforcing compliance and managing access restrictions at the schema level grows more complex as you add more users.
+While this is a common choice (and can be a good starting point if you're just beginning to build your app), we still recommend the project-per-user route if possible. Over time, as your app scales, meeting requirements within a shared schema setup becomes increasingly challenging. Enforcing compliance and managing access restrictions at the schema level grows more complex as you add more users.
 
 You'll also need to manage very large Postgres tables, as all customer data is stored in the same tables. As these tables grow, additional Postgres fine-tuning will be required to maintain performance.
 
@@ -68,7 +68,7 @@ Now that we've reviewed your options, let's focus on the design choice we recomm
 We recommend setting up one project per user, rather than, for example, using a branch per customer. A Neon [project](/docs/manage/overview) serves as the logical equivalent of an "instance" but without the management overhead. Here's why we suggest this design:
 
 - **Straightforward scalability**  
-  Instead of learning how to handle large Postgres databases, this model allows you to simply create a new project when a user joins—something that can be handled automatically via the Neon API. This approach is very cost-effective, as we'll see below. Databases remain small, keeping management at the database level simple.
+  Instead of learning how to handle large Postgres databases, this model allows you to simply create a new project when a user joins, something that can be handled automatically via the Neon API. This approach is very cost-effective, as we'll see below. Databases remain small, keeping management at the database level simple.
 
 - **Better performance with lower costs**  
   This design is also highly efficient in terms of compute usage. Each project has its own dedicated compute, which scales up and down independently per customer; a spike in usage for one tenant doesn't affect others, and inactive projects remain practically free.
@@ -84,7 +84,7 @@ We recommend setting up one project per user, rather than, for example, using a 
 
 ## Managing many projects
 
-As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it's much simpler in practice than it seems—some Neon users [manage hundreds of thousands of projects](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here's why that's possible:
+As you scale, following a project-per-user design means eventually managing thousands of Neon projects. This might sound overwhelming, but it's much simpler in practice than it seems; some Neon users [manage hundreds of thousands of projects](/blog/how-retool-uses-retool-and-the-neon-api-to-manage-300k-postgres-databases) with just one engineer. Here's why that's possible:
 
 - **You can manage everything with the Neon API**  
   The API allows you to automate every step of project management, including setting resource limits per customer and configuring resources.
@@ -93,7 +93,7 @@ As you scale, following a project-per-user design means eventually managing thou
   New Neon projects are ready in milliseconds. You can set things up to create new projects instantly when new customers join, without the need to manually pre-provision instances.
 
 - **You only pay for active projects**  
-  Empty projects are virtually free thanks to Neon's [scale-to-zero](/docs/guides/auto-suspend-guide) feature. If, on a given day, you have a few hundred projects that were only active for a few minutes, that's fine—your bill won't suffer.
+  Empty projects are virtually free thanks to Neon's [scale-to-zero](/docs/guides/auto-suspend-guide) feature. If, on a given day, you have a few hundred projects that were only active for a few minutes, that's fine; your bill won't suffer.
 
 - **Subscription plans**  
   To support this usage pattern, our paid plans include a generous number of projects.
@@ -125,7 +125,7 @@ You can set up your catalog database as a separate Neon project. When it's time 
 - Use foreign keys to link tables like `project` and `payment` to `customer`.
 - Choose data types carefully: `citext` for case-insensitive text, `uuid` for unique identifiers to obscure sequence data, and `timestamptz` for tracking real-world time.
 - Track key operational data, like `schema_version`, in the `project` table.
-- Index wisely! While the catalog will likely remain smaller than user databases, it will grow—especially with recurring events like payments—so indexing is crucial for control plane performance at scale.
+- Index wisely! While the catalog will likely remain smaller than user databases, it will grow, especially with recurring events like payments, so indexing is crucial for control plane performance at scale.
 - Start with essential data fields and plan for future extensions as needs evolve.
 - Standard Neon metadata (e.g., compute size, branch info) is accessible via the console. Avoid duplicating it in the catalog database unless separate access adds significant complexity.
 

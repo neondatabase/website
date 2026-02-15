@@ -61,9 +61,9 @@ The extension scans your workspace for existing Neon connection strings and can 
 
 You can also manually select:
 
-1. **Organization** — your Neon organization.
-2. **Project** — the project containing your database.
-3. **Branch** — the branch to connect to.
+1. **Organization**: your Neon organization.
+2. **Project**: the project containing your database.
+3. **Branch**: the branch to connect to.
 
 Click **Connect** to establish the connection.
 
@@ -130,12 +130,12 @@ The schema view automatically updates when you switch between branches, so you a
 
 Right-click databases, schemas, or tables to access management operations:
 
-- **Create and drop databases and schemas** — Add new databases or remove existing ones.
-- **Table designer** — Create tables with columns, indexes, and constraints.
-- **Foreign key management** — Set up relationships with referential integrity.
-- **View and sequence management** — Create and manage database views and sequences.
-- **User and role management** — Control database access and permissions.
-- **Data import/export** — Transfer data in CSV, JSON, or SQL formats.
+- **Create and drop databases and schemas**: Add new databases or remove existing ones.
+- **Table designer**: Create tables with columns, indexes, and constraints.
+- **Foreign key management**: Set up relationships with referential integrity.
+- **View and sequence management**: Create and manage database views and sequences.
+- **User and role management**: Control database access and permissions.
+- **Data import/export**: Transfer data in CSV, JSON, or SQL formats.
 
 Access these features through the context menu (right-click) in the Database Explorer.
 
@@ -195,7 +195,7 @@ The Neon extension includes built-in support for AI-powered database features th
 
 ### Features
 
-- **Automatic MCP Server configuration** — enables AI-powered database features with your coding agent.
+- **Automatic MCP Server configuration**: enables AI-powered database features with your coding agent.
 - **Chat with your database** using natural language.
 - **AI-assisted SQL generation** and schema understanding.
 - **View and manage MCP server status** directly in the extension.

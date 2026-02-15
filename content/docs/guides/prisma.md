@@ -38,8 +38,8 @@ npm install prisma --save-dev
 
 From your Neon Console, click **Connect** and copy both connection strings:
 
-- **Pooled connection** (has `-pooler` in the hostname) — for your application
-- **Direct connection** — for Prisma CLI commands (migrations, introspection)
+- **Pooled connection** (has `-pooler` in the hostname): for your application
+- **Direct connection**: for Prisma CLI commands (migrations, introspection)
 
 ![Connection details modal](/docs/connect/connection_details.png)
 
@@ -216,8 +216,8 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 ## Next steps
 
-- [Schema migrations with Prisma](/docs/guides/prisma-migrations) — Full tutorial for building an app with migrations
-- [Neon serverless driver](/docs/serverless/serverless-driver) — Learn more about the driver powering the adapter
+- [Schema migrations with Prisma](/docs/guides/prisma-migrations): Full tutorial for building an app with migrations
+- [Neon serverless driver](/docs/serverless/serverless-driver): Learn more about the driver powering the adapter
 
 ## Resources
 

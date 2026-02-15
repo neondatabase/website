@@ -47,7 +47,7 @@ db:
 
 ## Ephemeral database branches for development and testing
 
-To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database — without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
+To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database, without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
 
 ### Docker run
 

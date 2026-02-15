@@ -60,7 +60,7 @@ Every agent project maps to one Neon project with a designated [root branch](/do
 **The active branch:**
 
 - Gets its data replaced during finalized rollbacks
-- Maintains a consistent database connection string through Neon's restore mechanism — see [How restore works](#how-restore-works) for details
+- Maintains a consistent database connection string through Neon's restore mechanism; see [How restore works](#how-restore-works) for details
 - Must be a root branch for snapshot creation
 
 **The snapshots:**

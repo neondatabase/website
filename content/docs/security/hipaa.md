@@ -271,7 +271,7 @@ This configuration enables logging for all major classes of SQL activity while e
 - **WRITE**: `INSERT`, `UPDATE`, `DELETE`, `TRUNCATE`, and `COPY` commands that write to tables.
 - **FUNCTION**: Function calls and `DO` blocks.
 - **ROLE**: Role and permission changes, including `GRANT`, `REVOKE`, `CREATE ROLE`, `ALTER ROLE`, and `DROP ROLE`.
-- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` — all DDL operations not included in the `ROLE` class.
+- **DDL**: Schema and object changes like `CREATE TABLE`, `ALTER INDEX`, `DROP VIEW` (all DDL operations not included in the `ROLE` class).
 - **MISC_SET**: Miscellaneous `SET` commands, e.g. `SET ROLE`.
 
 Excluded:
@@ -279,7 +279,7 @@ Excluded:
 - **MISC**: Low-impact commands such as `DISCARD`, `FETCH`, `CHECKPOINT`, `VACUUM`, and `SET`.
 
 <Admonition type="note">
-In some cases, audit logs may include SQL statements that contain plain-text passwords—for example, in a `CREATE ROLE ... LOGIN PASSWORD` command. This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
+In some cases, audit logs may include SQL statements that contain plain-text passwords (for example, in a `CREATE ROLE ... LOGIN PASSWORD` command). This is due to limitations in the Postgres `pgaudit` extension, which may log full statements without redacting sensitive values.
 
 This behavior is a known issue. We recommend avoiding the inclusion of raw credentials in SQL statements where possible.
 </Admonition>
@@ -294,7 +294,7 @@ For more details, see the [pgAudit documentation](https://github.com/pgaudit/pga
 
 #### Postgres audit log example
 
-The following example shows how a simple SQL command—`CREATE SCHEMA IF NOT EXISTS healthcare`—is captured in Neon’s audit logs. The table provides a description of the log record's parts.
+The following example shows how a simple SQL command (`CREATE SCHEMA IF NOT EXISTS healthcare`) is captured in Neon’s audit logs. The table provides a description of the log record's parts.
 
 **Query:**
 

@@ -195,7 +195,7 @@ Encore will do the following.
 - Deploy your application
 - Configure all connections
 
-You can verify the database was created by checking your [Neon Console](https://console.neon.tech) — you'll see a new database created by Encore with your migrations applied.
+You can verify the database was created by checking your [Neon Console](https://console.neon.tech); you'll see a new database created by Encore with your migrations applied.
 
 > **Preview Environments with Neon Branching**
 >

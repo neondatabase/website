@@ -22,7 +22,7 @@ Our developer experience is anchored by four core pillars:
 
 ### Autoscaling compute
 
-Traditional OLTP databases force you to provision compute upfront—i.e., choose an instance size, plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
+Traditional OLTP databases force you to provision compute upfront (i.e., choose an instance size), plan for peak traffic, and manually adjust capacity over time. This adds overhead and leads to either overpaying for idle resources or underprovisioning and risk performance degradation.
 
 You can build your database branching workflows using the [Neon CLI](/docs/reference/neon-cli), [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), or [GitHub Actions](/docs/guides/branching-github-actions). For example, this example shows how to create a development branch from `main` with a simple CLI command:
 
@@ -161,7 +161,7 @@ Developers can safely delegate database-related tasks to AI assistants in their 
 
 Modern application stacks are increasingly modular. Developers mix and match databases, frameworks, hosting platforms, authentication providers, and AI tools based on their needs and expect each component to integrate cleanly without imposing rigid boundaries. Neon is built around this principle of composability - nothing in Neon requires you to adopt a specific framework or vendor-specific workflow. At its core, Neon is Postgres: you can connect with any driver, ORM, or tool in the ecosystem, deploy it anywhere, and integrate it into existing stacks without changing how you build.
 
-At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in — like authentication. [Neon Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Neon Auth is integrated into the platform,
+At the same time, Neon provides optional building blocks that make common patterns easier, without locking you in, like authentication. [Neon Auth](https://neon.com/docs/auth/overview) provides authentication primitives that live directly alongside your data in Postgres. Users, sessions, organizations, and permissions are stored in your database and follow the same lifecycle as the rest of your application state. Because Neon Auth is integrated into the platform,
 
 - Auth data branches with your database, making it easy to test real authentication flows in preview and development environments
 - Auth state is versioned and reversible, benefiting from the same restore and snapshot capabilities

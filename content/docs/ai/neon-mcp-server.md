@@ -105,7 +105,7 @@ If you only want the MCP server and prefer OAuth, run:
 npx add-mcp https://mcp.neon.tech/mcp
 ```
 
-The command adds the config to your editor; restart your editor (or enable the MCP server) for it to take effect. When you use the MCP connection, an OAuth window will open in your browser—follow the prompts to authorize. For the recommended quick setup (API key + agent skills), use `npx neonctl@latest init` instead.
+The command adds the config to your editor; restart your editor (or enable the MCP server) for it to take effect. When you use the MCP connection, an OAuth window will open in your browser; follow the prompts to authorize. For the recommended quick setup (API key + agent skills), use `npx neonctl@latest init` instead.
 
 <Admonition type="tip" title="Install in a single click for Cursor users">
 Click the button below to install the Neon MCP server in Cursor. When prompted, click **Install** within Cursor.
@@ -251,7 +251,7 @@ The Neon MCP Server grants powerful database management capabilities through nat
 
 After setup, interact with your Neon databases using natural language:
 
-- `"Get started with Neon"` — Launch the interactive onboarding guide
+- `"Get started with Neon"`: Launch the interactive onboarding guide
 - `"List my Neon projects"`
 - `"Create a project named 'my-app'"`
 - `"Show tables in database 'main'"`
@@ -270,7 +270,7 @@ The Neon MCP server provides powerful database tools. We recommend MCP for **dev
 
 - Use MCP only for local development or IDE-based workflows
 - Never connect MCP agents to production databases
-- Avoid exposing production or PII data—use anonymized data only
+- Avoid exposing production or PII data; use anonymized data only
 - Always review and authorize LLM-requested actions before execution
 - Restrict MCP access to trusted users and regularly audit access
 

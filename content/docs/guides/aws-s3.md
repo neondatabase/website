@@ -483,7 +483,7 @@ This pattern effectively separates file storage and delivery concerns (handled b
 ## Resources
 
 - [AWS S3 documentation](https://docs.aws.amazon.com/s3/index.html)
-- [AWS — Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
+- [AWS: Sharing objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html)
 - [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

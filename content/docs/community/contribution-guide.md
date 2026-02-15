@@ -410,7 +410,7 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 The Neon website repo includes rules and commands (in Cursor and Claude) to keep documentation consistent. You don't need to memorize them.
 
 - **Open the doc** you're editing so the right rules apply, then describe what you want in plain language.
-- **Optional:** You can ask for specific help—e.g. "check consistency on this page," "use our style examples," or "walk me through the redirect steps."
+- **Optional:** You can ask for specific help (e.g. "check consistency on this page," "use our style examples," or "walk me through the redirect steps.").
 - **Curious what's available?** Ask: "What doc AI tools are available?" to see the list.
 - All changes go through a pull request and human review.
 

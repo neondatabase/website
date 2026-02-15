@@ -12,7 +12,7 @@ redirectFrom:
 updatedOn: '2026-02-06T22:07:32.900Z'
 ---
 
-With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow — as many branches as you need.
+With Neon, you can work with your data just like you work with your code. The key is Neon's database [branching](/docs/guides/branching-intro) feature, which lets you instantly create branches of your data that you can include in your workflow, as many branches as you need.
 
 Neon branches are:
 
@@ -67,7 +67,7 @@ For more information, see:
 
 ### GitHub Actions
 
-If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action), [deleting](/docs/guides/branching-github-actions#delete-branch-action), and [resetting](/docs/guides/branching-github-actions#reset-from-parent-action) branches — and there's also a [schema diff action](/docs/guides/branching-github-actions#schema-diff-action).
+If you're using GitHub Actions for your CI workflows, Neon provides GitHub Actions for [creating](/docs/guides/branching-github-actions#create-branch-action), [deleting](/docs/guides/branching-github-actions#delete-branch-action), and [resetting](/docs/guides/branching-github-actions#reset-from-parent-action) branches, and there's also a [schema diff action](/docs/guides/branching-github-actions#schema-diff-action).
 
 <Tabs labels={["Create branch", "Delete branch"]}>
 

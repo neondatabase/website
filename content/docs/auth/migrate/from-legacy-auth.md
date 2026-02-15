@@ -30,7 +30,7 @@ If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'
 
 - **Native Branching Support**
 
-  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration—perfect for preview environments and testing.
+  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration, perfect for preview environments and testing.
 
 - **Database as Source of Truth**
 

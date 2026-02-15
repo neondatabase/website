@@ -105,9 +105,9 @@ npx neonctl@latest init
 
 The `init` command supports:
 
-- **Cursor** — Ask: "Get started with Neon"
-- **VS Code with GitHub Copilot** — Ask: "Get started with Neon"
-- **Claude Code** — Ask: "Get started with Neon"
+- **Cursor**: Ask: "Get started with Neon"
+- **VS Code with GitHub Copilot**: Ask: "Get started with Neon"
+- **Claude Code**: Ask: "Get started with Neon"
 
 The command automatically detects which editors are installed and lets you select which to configure.
 

@@ -43,7 +43,7 @@ Transforming data into embeddings and computing similarities between one or more
 - **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
 - **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
 - **Recommendation systems:** Using vector similarity, we can recommend items similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
-- **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies—items that don't quite fit the pattern. This can be crucial in many fields, from cybersecurity to quality control.
+- **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies (items that don't quite fit the pattern). This can be crucial in many fields, from cybersecurity to quality control.
 
 ### Distance metrics
 

@@ -103,7 +103,7 @@ export const todos = pgTable(
 ```
 
 <Admonition type="note">
-**About Drizzle's role:** Drizzle is used here to **declare your RLS policies** in TypeScript. When you run migrations, these policies are created in your Postgres database. After that, the policies are enforced regardless of how you query your data—via the Data API, the serverless driver, or any other connection method.
+**About Drizzle's role:** Drizzle is used here to **declare your RLS policies** in TypeScript. When you run migrations, these policies are created in your Postgres database. After that, the policies are enforced regardless of how you query your data (via the Data API, the serverless driver, or any other connection method).
 </Admonition>
 
 ### Configuration parameters

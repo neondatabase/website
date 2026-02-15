@@ -25,7 +25,7 @@ Neon Auth simplifies database operations by automatically managing user data syn
 
 ### The users_sync table
 
-The `neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth. No action is needed from you—it's immediately available for use in your schema and queries.
+The `neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth. No action is needed from you; it's immediately available for use in your schema and queries.
 
 **Table structure:**
 

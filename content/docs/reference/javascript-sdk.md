@@ -14,9 +14,9 @@ The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and da
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
-- **BetterAuthVanillaAdapter** (default) — Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
-- **BetterAuthReactAdapter** — Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
-- **SupabaseAuthAdapter** — Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+- **BetterAuthVanillaAdapter** (default): Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
+- **BetterAuthReactAdapter**: Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
+- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
 
@@ -54,7 +54,7 @@ Use this when you only need authentication (no database queries). You get:
 - Auth methods like `auth.signIn.email()` and `auth.signUp.email()`
 - No database query methods
 
-The auth methods are identical—only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
+The auth methods are identical; only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

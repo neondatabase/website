@@ -164,7 +164,7 @@ Keep reading: [Storage and billing for restores](/docs/introduction/restore-wind
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later — ensuring that recovery points exist even if they fall outside your chosen restore window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen restore window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 

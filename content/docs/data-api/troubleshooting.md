@@ -160,7 +160,7 @@ If you've enabled RLS but queries return no data, you likely haven't created any
 
 ### Why this happens
 
-When RLS is enabled on a table, all access is blocked by default until you create policies that grant access. This is a security feature — it ensures data is protected even if you forget to add policies.
+When RLS is enabled on a table, all access is blocked by default until you create policies that grant access. This is a security feature; it ensures data is protected even if you forget to add policies.
 
 ### Fix
 

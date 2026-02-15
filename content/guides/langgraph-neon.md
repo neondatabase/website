@@ -34,7 +34,7 @@ Before building your AI agent workflows, it's important to understand the core c
 LangGraph is an open‐source orchestration framework for building stateful, multi-actor applications with large language models (LLMs). It enables you to create complex agentic workflows by modeling your application as a graph of interconnected nodes. With LangGraph, you can:
 
 - **Manage state:** Persist and update the conversation and workflow state across interactions.
-- **Customize workflows:** Design flexible control flows—including conditional branching, loops, and hierarchical structures—to suit your specific use case.
+- **Customize workflows:** Design flexible control flows (including conditional branching, loops, and hierarchical structures) to suit your specific use case.
 - **Stream agent reasoning:** Deliver real-time, token-by-token streaming of agent actions to enhance user experience.
 
 ### Key components of LangGraph
@@ -45,7 +45,7 @@ LangGraph is an open‐source orchestration framework for building stateful, mul
 - **Tools:** Integration points for external functionalities (like web search, code execution, or API calls) that extend the agent’s capabilities beyond simple text generation.
 - **Human-in-the-loop workflows:** Built-in mechanisms that allow human oversight, ensuring that agent decisions can be validated, corrected, or enhanced before proceeding.
 
-By leveraging these powerful components, LangGraph empowers you to build reliable, scalable, and highly customizable AI agent applications—from prototyping to production.
+By leveraging these powerful components, LangGraph empowers you to build reliable, scalable, and highly customizable AI agent applications, from prototyping to production.
 
 ## Why Neon for AI Agents?
 

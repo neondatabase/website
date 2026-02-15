@@ -31,7 +31,7 @@ The Neon Azure Native Integration is deprecated and reaches end of life on **Jan
 This guide steps you through deploying Neon as an Azure native service.
 
 <Admonition type="note">
-You can also create Neon projects in Azure regions without the native service integration—to learn more, see [Create Neon projects in Azure regions without the integration](#create-neon-projects-in-azure-regions-without-the-integration).
+You can also create Neon projects in Azure regions without the native service integration; to learn more, see [Create Neon projects in Azure regions without the integration](#create-neon-projects-in-azure-regions-without-the-integration).
 </Admonition>
 
 ## Prerequisites
@@ -96,7 +96,7 @@ You can also create Neon projects in Azure regions without the native service in
 
 If you want to deploy a Neon project to an Azure region without using the **Azure Native ISV Service** integration, you can simply select one of our supported Azure regions when creating a Neon project from the Neon Console.
 
-If you do not use the Azure integration, there is no difference from a Neon project created in an AWS region—your Neon project simply resides in an Azure region instead of AWS region.
+If you do not use the Azure integration, there is no difference from a Neon project created in an AWS region; your Neon project simply resides in an Azure region instead of AWS region.
 
 You might consider this option if:
 

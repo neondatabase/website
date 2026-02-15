@@ -168,7 +168,7 @@ Now that you’ve configured your database network and created an ingestion clus
    CREATE SECRET pgpass AS '<PASSWORD>';
    ```
 
-   You can access the password for your Neon Postgres role from the to open **Connect to your database** modal — click the **Connect** button on your **Project Dashboard** to open the modal.
+   You can access the password for your Neon Postgres role from the **Connect to your database** modal; click the **Connect** button on your **Project Dashboard** to open the modal.
 
 2. Use the [CREATE CONNECTION](https://materialize.com/docs/sql/create-connection/) command to create a connection object with access and authentication details for Materialize to use:
 
@@ -183,7 +183,7 @@ Now that you’ve configured your database network and created an ingestion clus
    );
    ```
 
-   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard** — click the **Connect** button.
+   You can find the connection details for your replication role in the **Connect to your database** modal on your **Project Dashboard**; click the **Connect** button.
 
    <Admonition type="important">
    Use a **direct connection** to your compute endpoint, not a pooled connection. Logical replication requires a persistent connection and is not compatible with connection poolers. When copying your connection string from Neon, make sure it does not include `-pooler` in the hostname. For more information about connection pooling and when to use direct connections, see [Connection pooling](/docs/connect/connection-pooling).

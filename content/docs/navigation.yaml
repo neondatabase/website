@@ -902,9 +902,9 @@
             - title: Neon Twin
               slug: guides/neon-twin-intro
               items:
-                - title: pg_dump / pg_restore — Full Twin
+                - title: pg_dump / pg_restore: Full Twin
                   slug: guides/neon-twin-full-pg-dump-restore
-                - title: pg_dump / pg_restore — Partial Twin
+                - title: pg_dump / pg_restore: Partial Twin
                   slug: guides/neon-twin-partial-pg-dump-restore
             - title: Data anonymization
               slug: workflows/data-anonymization

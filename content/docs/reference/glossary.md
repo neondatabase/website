@@ -67,7 +67,7 @@ A branch created by a [instant restore](#branch-restore) operation. When you res
 
 ## branch
 
-An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
+An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles (everything that comprises data in a Postgres instance). Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
 Each Neon project is created with a root branch, which also serves as the default branch. Projects created in the Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`.
 

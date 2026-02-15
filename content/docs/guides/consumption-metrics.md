@@ -43,27 +43,27 @@ GET https://console.neon.tech/api/v2/consumption_history/account
 ```
 
 <Admonition type="tip">
-You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)—just fill in the required parameters and add your API key to see live results.
+You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount); just fill in the required parameters and add your API key to see live results.
 </Admonition>
 
 This endpoint accepts the following query parameters:
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
+- **`from`** (date-time, required): Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
 
-- **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
+- **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
 
-- **`granularity`** (string, required) — The granularity of consumption metrics. Options:
-  - `hourly` — Limited to the last 168 hours (7 days)
-  - `daily` — Limited to the last 60 days
-  - `monthly` — Limited to the past year
+- **`granularity`** (string, required): The granularity of consumption metrics. Options:
+  - `hourly`: Limited to the last 168 hours (7 days)
+  - `daily`: Limited to the last 60 days
+  - `monthly`: Limited to the past year
 
 ### Optional parameters
 
-- **`org_id`** (string) — Specify the organization for which consumption metrics should be returned. If not provided, returns metrics for the authenticated user's account.
+- **`org_id`** (string): Specify the organization for which consumption metrics should be returned. If not provided, returns metrics for the authenticated user's account.
 
-- **`metrics`** (array of strings) — Specify which metrics to include in the response. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
+- **`metrics`** (array of strings): Specify which metrics to include in the response. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 
   Available metrics:
   - `active_time_seconds`
@@ -142,25 +142,25 @@ GET https://console.neon.tech/api/v2/consumption_history/projects
 ```
 
 <Admonition type="tip">
-You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject)—just fill in the required parameters and add your API key to see live results.
+You can run this endpoint interactively in the [Neon API Reference](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject); just fill in the required parameters and add your API key to see live results.
 </Admonition>
 
 This endpoint accepts the following query parameters:
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
+- **`from`** (date-time, required): Start date-time for the consumption period in [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339) format. The value is rounded according to the specified granularity.
 
-- **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
+- **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity.
 
-- **`granularity`** (string, required) — The granularity of consumption metrics. Options:
-  - `hourly` — Limited to the last 168 hours (7 days)
-  - `daily` — Limited to the last 60 days
-  - `monthly` — Limited to the past year
+- **`granularity`** (string, required): The granularity of consumption metrics. Options:
+  - `hourly`: Limited to the last 168 hours (7 days)
+  - `daily`: Limited to the last 60 days
+  - `monthly`: Limited to the past year
 
 ### Optional parameters
 
-- **`project_ids`** (array of strings, 0-100 items) — Filter the response to specific project IDs. If omitted, all projects are included. Can be specified as an array or comma-separated list:
+- **`project_ids`** (array of strings, 0-100 items): Filter the response to specific project IDs. If omitted, all projects are included. Can be specified as an array or comma-separated list:
 
   ```
   # As an array
@@ -170,9 +170,9 @@ This endpoint accepts the following query parameters:
   project_ids=cold-poetry-09157238,quiet-snow-71788278
   ```
 
-- **`org_id`** (string) — Specify the organization for which project consumption metrics should be returned. If not provided, returns metrics for the authenticated user's projects.
+- **`org_id`** (string): Specify the organization for which project consumption metrics should be returned. If not provided, returns metrics for the authenticated user's projects.
 
-- **`metrics`** (array of strings) — Specify which metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
+- **`metrics`** (array of strings): Specify which metrics to include. If omitted, `active_time_seconds`, `compute_time_seconds`, `written_data_bytes`, and `synthetic_storage_size_bytes` are returned.
 
   Available metrics:
   - `active_time_seconds`
@@ -183,9 +183,9 @@ This endpoint accepts the following query parameters:
   - `logical_size_bytes`
   - `logical_size_bytes_hour`
 
-- **`limit`** (integer, 1-100) — Number of projects to include in the response. Default: `10`.
+- **`limit`** (integer, 1-100): Number of projects to include in the response. Default: `10`.
 
-- **`cursor`** (string) — Cursor value from the previous response to get the next batch of projects. See [Pagination](#pagination) for details.
+- **`cursor`** (string): Cursor value from the previous response to get the next batch of projects. See [Pagination](#pagination) for details.
 
 ### Example request
 
@@ -268,17 +268,17 @@ This endpoint provides metrics that map directly to usage-based billing line ite
 
 ### Required parameters
 
-- **`from`** (date-time, required) — Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available starting from March 1, 2024.
-- **`to`** (date-time, required) — End date-time for the consumption period in RFC 3339 format.
-- **`granularity`** (string, required) — The granularity of consumption metrics: `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (last year).
-- **`org_id`** (string, required) — The organization ID to query metrics for.
+- **`from`** (date-time, required): Start date-time for the consumption period in RFC 3339 format. The value is rounded according to the specified granularity. Consumption history is available starting from March 1, 2024.
+- **`to`** (date-time, required): End date-time for the consumption period in RFC 3339 format.
+- **`granularity`** (string, required): The granularity of consumption metrics: `hourly` (last 168 hours), `daily` (last 60 days), or `monthly` (last year).
+- **`org_id`** (string, required): The organization ID to query metrics for.
 
 ### Optional parameters
 
-- **`metrics`** (array of strings) — Specify which metrics to include in the response. If omitted, all metrics are returned.
-- **`project_ids`** (array of strings, 0-100 items) — Filter to specific project IDs.
-- **`limit`** (integer, 1-100) — Number of projects per response. Default: `10`.
-- **`cursor`** (string) — Cursor for pagination.
+- **`metrics`** (array of strings): Specify which metrics to include in the response. If omitted, all metrics are returned.
+- **`project_ids`** (array of strings, 0-100 items): Filter to specific project IDs.
+- **`limit`** (integer, 1-100): Number of projects per response. Default: `10`.
+- **`cursor`** (string): Cursor for pagination.
 
 ### Example
 
@@ -396,18 +396,18 @@ These metrics are returned by the [legacy API](#get-project-level-metrics-legacy
 
 **Default metrics:**
 
-- **active_time_seconds** — Seconds. The amount of time the compute endpoints have been active.
-- **compute_time_seconds** — Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example:
+- **active_time_seconds**: Seconds. The amount of time the compute endpoints have been active.
+- **compute_time_seconds**: Seconds. The number of CPU seconds used by compute endpoints, including compute endpoints that have been deleted. For example:
   - A compute that uses 1 CPU for 1 second equals `compute_time=1`
   - A compute that uses 2 CPUs simultaneously for 1 second equals `compute_time=2`
-- **written_data_bytes** — Bytes. The total amount of data written to all of a project's branches.
-- **synthetic_storage_size_bytes** — Bytes. The space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+- **written_data_bytes**: Bytes. The total amount of data written to all of a project's branches.
+- **synthetic_storage_size_bytes**: Bytes. The space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
 
 **Additional metrics:**
 
-- **data_storage_bytes_hour** — Bytes-Hour. The amount of storage consumed hourly.
-- **logical_size_bytes** — Bytes. The amount of logical size consumed.
-- **logical_size_bytes_hour** — Bytes-Hour. The amount of logical size consumed hourly.
+- **data_storage_bytes_hour**: Bytes-Hour. The amount of storage consumed hourly.
+- **logical_size_bytes**: Bytes. The amount of logical size consumed.
+- **logical_size_bytes_hour**: Bytes-Hour. The amount of logical size consumed hourly.
 
 ## Pagination
 
@@ -482,25 +482,25 @@ The legacy API uses `synthetic_storage_size_bytes`, which combines logical data 
 
 The usage-based plans API returns separate metrics that match your invoice:
 
-- **`root_branch_bytes_month`** — Storage for root branches
-- **`child_branch_bytes_month`** — Storage for child branches (delta from parent)
-- **`instant_restore_bytes_month`** — Change history (WAL data) for point-in-time restore
+- **`root_branch_bytes_month`**: Storage for root branches
+- **`child_branch_bytes_month`**: Storage for child branches (delta from parent)
+- **`instant_restore_bytes_month`**: Change history (WAL data) for point-in-time restore
 
 ### Metrics only available in usage-based plans API
 
 The legacy APIs do not provide the following metrics. Use the [project metrics endpoint for usage-based plans](#get-project-level-metrics-for-usage-based-plans) to retrieve these:
 
-- **`compute_unit_seconds`** — Compute usage in compute unit seconds
-- **`instant_restore_bytes_month`** — Separately billed change history for point-in-time restore
-- **`public_network_transfer_bytes`** — Data egress over the public internet
-- **`private_network_transfer_bytes`** — Data transfer over AWS PrivateLink
-- **`extra_branches_month`** — Branches beyond your plan's included allowance
+- **`compute_unit_seconds`**: Compute usage in compute unit seconds
+- **`instant_restore_bytes_month`**: Separately billed change history for point-in-time restore
+- **`public_network_transfer_bytes`**: Data egress over the public internet
+- **`private_network_transfer_bytes`**: Data transfer over AWS PrivateLink
+- **`extra_branches_month`**: Branches beyond your plan's included allowance
 
 ## Error responses
 
 Common error responses you may encounter:
 
-- **403 Forbidden** — This endpoint is only available for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts.
-- **404 Not Found** — Account is not a member of the organization specified by `org_id`.
-- **406 Not Acceptable** — The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different granularity.
-- **429 Too Many Requests** — You've exceeded the rate limit. Wait before retrying.
+- **403 Forbidden**: This endpoint is only available for Scale and Enterprise plan accounts, and for legacy Scale, Business, and Enterprise plan accounts.
+- **404 Not Found**: Account is not a member of the organization specified by `org_id`.
+- **406 Not Acceptable**: The specified date-time range is outside the boundaries of the specified granularity. Adjust your `from` and `to` values or select a different granularity.
+- **429 Too Many Requests**: You've exceeded the rate limit. Wait before retrying.
