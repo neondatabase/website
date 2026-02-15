@@ -56,13 +56,13 @@ The plugin’s MCP server integration lets Claude interact with Neon’s live AP
 1. Add the Neon marketplace:
 
    ```bash
-   /plugin marketplace add neondatabase-labs/ai-rules
+   /plugin marketplace add neondatabase/agent-skills
    ```
 
 2. Install the Neon plugin:
 
    ```bash
-   /plugin install neon-plugin@neon
+   /plugin install neon-postgres@neon
    ```
 
 3. Verify the installation:
@@ -72,7 +72,7 @@ The plugin’s MCP server integration lets Claude interact with Neon’s live AP
    which skills do you have access to?
    ```
 
-   You should see the four Neon Skills listed.
+   You should see the `neon-postgres` skill listed.
 
 4. Start using the Skills:
    Use natural language prompts like:
