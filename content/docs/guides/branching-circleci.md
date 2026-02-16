@@ -179,6 +179,10 @@ Deletes a Neon branch. This is typically used in the final step of a job to clea
 
 Resets a branch to the latest state of its parent. This is useful for long-lived branches (like `staging` or `dev`) that need to be refreshed with production data before running tests.
 
+<Admonition type="note">
+Unlike `neon/create-branch`, this command does not export a `DATABASE_URL`. It also does not support options like `role`, `password`, `create_auth`, or `create_data_api`. You must ensure your job has access to the connection details for the target branch (e.g., via CircleCI context or project environment variables).
+</Admonition>
+
 | Input           | Type   | Default                                            | Description                                        |
 | :-------------- | :----- | :------------------------------------------------- | :------------------------------------------------- |
 | `branch_id`     | string | -                                                  | The ID of the branch to reset.                     |
@@ -240,6 +244,7 @@ jobs:
 
       - run:
           name: Run Integration Tests
+          # Ensure DATABASE_URL is set in your environment (e.g., via CircleCI Project Settings)
           command: npm run test:integration
 ```
 
