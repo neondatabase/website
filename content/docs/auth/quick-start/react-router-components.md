@@ -6,7 +6,7 @@ summary: >-
   pre-built UI components, including enabling Neon Auth, creating a React app,
   and configuring the necessary environment variables.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.768Z'
+updatedOn: '2026-02-16T13:08:22.371Z'
 layout: wide
 ---
 

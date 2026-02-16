@@ -6,7 +6,7 @@ summary: >-
   Neon Auth (Stack Auth) to Neon Auth with Better Auth, including environment
   variable changes and benefits of the new system.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.044Z'
+updatedOn: '2026-02-16T13:08:22.360Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
