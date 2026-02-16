@@ -5,7 +5,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/guides/partner-get-started
-updatedOn: '2026-01-13T19:29:46.139Z'
+updatedOn: '2026-02-16T13:09:07.973Z'
 ---
 
 This guide outlines the steps to integrate Neon into your platform, enabling you to offer managed Postgres databases to your users. Whether you’re developing a SaaS product, AI agent, enterprise platform, or something else entirely, this guide walks you through what's involved in setting up, configuring, and managing your Neon integration.

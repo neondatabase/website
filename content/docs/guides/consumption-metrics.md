@@ -1,14 +1,16 @@
 ---
 title: Querying consumption metrics
-subtitle: Learn how to query project consumption metrics for usage-based plans using the Neon API
+subtitle: Learn how to query project consumption metrics for usage-based plans using the
+  Neon API
 summary: >-
-  How to query project consumption metrics for usage-based plans using the Neon API.
-  Retrieve compute, storage, and data transfer metrics without activating compute endpoints.
+  How to query project consumption metrics for usage-based plans using the Neon
+  API. Retrieve compute, storage, and data transfer metrics without activating
+  compute endpoints.
 redirectFrom:
   - /docs/guides/metrics-api
   - /docs/guides/partner-consumption-metrics
 enableTableOfContents: true
-updatedOn: '2026-02-16'
+updatedOn: '2026-02-16T13:09:07.969Z'
 ---
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans.

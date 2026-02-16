@@ -7,7 +7,7 @@ summary: >-
   isolation without requiring user sign-up or setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.150Z'
+updatedOn: '2026-02-16T13:09:07.970Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.

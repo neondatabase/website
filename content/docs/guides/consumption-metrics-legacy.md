@@ -1,12 +1,13 @@
 ---
 title: Query consumption metrics (legacy)
-subtitle: Legacy account and project consumption APIs for Scale, Business, and Enterprise plans
+subtitle: Legacy account and project consumption APIs for Scale, Business, and
+  Enterprise plans
 summary: >-
   How to query account and project consumption metrics using the legacy Neon API
   (active time, compute time, written data, synthetic storage). For usage-based
   plans, use Query consumption metrics instead.
 enableTableOfContents: true
-updatedOn: '2026-02-16'
+updatedOn: '2026-02-16T13:09:07.968Z'
 ---
 
 Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. You can call these endpoints on **legacy plans** (Scale, Business, Enterprise) or **usage-based plans** (Launch, Scale, Agent, Enterprise). The difference is that they only return **legacy metrics** (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics instead.
