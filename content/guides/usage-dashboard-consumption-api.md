@@ -211,7 +211,6 @@ type MetricValue = {
     value: number;
 };
 
-// This shape is what our UI will consume
 export type DailyUsage = {
     date: string;
     compute: number;         // Seconds
@@ -227,10 +226,10 @@ export type Project = {
     name: string;
 };
 
-export async function getProjects(orgId: string): Promise<Project[]> {
-    const apiKey = process.env.NEON_API_KEY;
-    if (!apiKey) throw new Error('NEON_API_KEY is not defined');
+const apiKey = process.env.NEON_API_KEY;
+if (!apiKey) throw new Error('NEON_API_KEY is not defined');
 
+export async function getProjects(orgId: string): Promise<Project[]> {
     const params = new URLSearchParams({ org_id: orgId, limit: '400' });
     const response = await fetch(
         `https://console.neon.tech/api/v2/projects?${params.toString()}`,
@@ -252,11 +251,7 @@ export async function getProjects(orgId: string): Promise<Project[]> {
 }
 
 export async function getNeonUsage(orgId: string, projectIds?: string[]): Promise<DailyUsage[]> {
-    const apiKey = process.env.NEON_API_KEY;
-
-    if (!apiKey) throw new Error('NEON_API_KEY is not defined');
-
-    // 2. Calculate Dates: Last 30 days, rounded to midnight UTC
+    // Calculate Dates: Last 30 days, rounded to midnight UTC
     const today = new Date();
 
     // To include today in the range
@@ -266,7 +261,7 @@ export async function getNeonUsage(orgId: string, projectIds?: string[]): Promis
     const from = new Date(thirtyDaysAgo.setUTCHours(0, 0, 0, 0)).toISOString();
     const to = new Date(tomorrow.setUTCHours(0, 0, 0, 0)).toISOString();
 
-    // 3. Construct URL with all metrics
+    // Construct URL with all metrics
     const params = new URLSearchParams({
         from,
         to,
@@ -306,7 +301,7 @@ export async function getNeonUsage(orgId: string, projectIds?: string[]): Promis
 
     const BYTES_TO_GIB = 1024 * 1024 * 1024;
 
-    // 4. Flatten and Aggregate Data
+    // Flatten and Aggregate Data
     json.projects.forEach((project: any) => {
         project.periods.forEach((period: any) => {
             period.consumption.forEach((day: any) => {
