@@ -72,13 +72,17 @@ workflows:
 - `migrate_command`: The command to prepare the database (e.g., run migrations).
 - `test_command`: The command to execute your tests.
 - `ttl_seconds`: (Optional) The lifespan of the branch in seconds. Used as a safety net for cleanup. Defaults to `3600` (1 hour). Set to `0` for disabling automatic cleanup of branches.
+- `role`: (Optional) The role to use for the connection. Defaults to `neondb_owner`.
+- `password`: (Optional) The password for the role. You need to set this if you chose not to store passwords in the Neon console.
+- `create_auth`: (Optional) Whether to enable Neon Auth for the branch. Defaults to `false`. If set to `true`, the job exports the `NEON_AUTH_URL` environment variable.
+- `create_data_api`: (Optional) Whether to enable the Neon Data API for the branch. Defaults to `false`. If set to `true`, the job exports the `NEON_DATA_API_URL` environment variable.
 
 ### How it works
 
 When the `neon/run-tests` job runs, it performs the following steps automatically:
 
 1.  **Provision**: Creates a new Neon branch derived from the `parent_branch`. The branch name is deterministically generated based on the pipeline ID (e.g., `ci-run-1234`) to ensure traceability.
-2.  **Connect**: Exports the connection string as `DATABASE_URL` (and individual PG variables like `PGHOST`, `PGUSER`) to the job environment.
+2.  **Connect**: Exports the connection string as `DATABASE_URL` (and individual PG variables like `PGHOST`, `PGUSER`, `PGPASSWORD`, `PGHOST_POOLED`) to the job environment.
 3.  **Prepare**: Runs the `migrate_command` you provided.
 4.  **Test**: Runs the `test_command` you provided.
 5.  **Cleanup**: Deletes the branch after tests complete, regardless of success or failure.
@@ -123,7 +127,9 @@ Most modern ORMs and migration tools (such as Prisma, Drizzle, or Sequelize) aut
 
 If your tool does not support `DATABASE_URL` and requires individual connection parameters, the `neon/run-tests` job also exports the following variables:
 
+- `DATABASE_URL_POOLED` — The pooled connection string.
 - `PGHOST`
+- `PGHOST_POOLED` — The pooled host.
 - `PGUSER`
 - `PGPASSWORD`
 - `PGDATABASE`
@@ -144,13 +150,22 @@ Creates a new database branch. This command waits for the branch to be active ("
 | :-------------- | :------ | :------------------------------------------------- | :----------------------------------------------------------------------- |
 | `parent_branch` | string  | Your project's default branch (e.g., `production`) | The name or ID of the parent branch to fork from.                        |
 | `branch_name`   | string  | _generated_                                        | Custom name for the branch. Defaults to `ci-build-<ID>`.                 |
+| `role`          | string  | `neondb_owner`                                     | The role to use for the connection.                                      |
+| `password`      | string  | _generated_                                        | The password for the role. You need to set this if you chose not to store passwords in the Neon console. |
 | `ttl_seconds`   | integer | `3600`                                             | The lifespan of the branch in seconds. Used as a safety net for cleanup. |
+| `create_auth` | boolean | `false` | Whether to enable Neon Auth for the branch. |
+| `create_data_api` | boolean | `false` | Whether to enable the Neon Data API for the branch. |
 
 **Outputs:**
 
 - `DATABASE_URL`: The full connection string.
-- `PGHOST`, `PGUSER`, `PGPASSWORD`, `PGDATABASE`: Individual connection parameters.
+- `DATABASE_URL_POOLED`: The pooled connection string.
+- `PGHOST`: The host address.
+- `PGHOST_POOLED`: The pooled host address.
+- `PGUSER`, `PGPASSWORD`, `PGDATABASE`: Individual connection parameters.
 - `NEON_BRANCH_ID`: The ID of the created branch.
+- `NEON_AUTH_URL`: The Neon Auth URL (if `create_auth` is `true`).
+- `NEON_DATA_API_URL`: The Neon Data API URL (if `create_data_api` is `true`).
 
 ### `neon/delete-branch`
 
