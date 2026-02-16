@@ -51,7 +51,7 @@ Create a new Next.js project and install dependencies.
 2.  **Install dependencies:**
 
     ```bash
-    npm install @neondatabase/neon-js @neondatabase/serverless drizzle-orm
+    npm install @neondatabase/neon-js@latest @neondatabase/serverless drizzle-orm
     npm install -D drizzle-kit dotenv @types/node
     ```
 

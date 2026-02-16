@@ -56,7 +56,7 @@ The Neon SDK provides authentication methods like `signUp()`, `getSession()`, an
 
 ```bash
 cd my-app
-npm install @neondatabase/neon-js
+npm install @neondatabase/neon-js@latest
 ```
 
 </TwoColumnLayout.Block>

@@ -16,7 +16,7 @@ Quick reference for Neon Auth UI components from `@neondatabase/neon-js`. These 
 ## Installation
 
 ```bash
-npm install @neondatabase/neon-js
+npm install @neondatabase/neon-js@latest
 ```
 
 ## Provider Setup

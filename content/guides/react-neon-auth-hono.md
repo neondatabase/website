@@ -402,7 +402,7 @@ Navigate into the project directory and install the required dependencies:
 
 ```bash
 cd journal-frontend && npm install
-npm install @neondatabase/neon-js react-router
+npm install @neondatabase/neon-js@latest react-router
 ```
 
 ### Configure Tailwind CSS

@@ -95,7 +95,7 @@ You will need the following packages for this project:
 - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
 
 ```bash
-npm install @neondatabase/neon-js react-router
+npm install @neondatabase/neon-js@latest react-router
 ```
 
 ### Setup Tailwind CSS
