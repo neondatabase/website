@@ -539,6 +539,8 @@
                   slug: ai/ai-rules
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
+                - title: Cursor plugin
+                  slug: ai/ai-cursor-plugin
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
                 - title: Neon Auth
