@@ -64,35 +64,35 @@ Optional query parameters:
 
 ## Security checks
 
-| Check | Severity | Description |
-|-------|----------|-------------|
-| [RLS disabled in public](#rls-disabled-in-public) | ERROR | Tables exposed via the Data API without row-level security |
-| [Policy exists RLS disabled](#policy-exists-rls-disabled) | ERROR | RLS policies exist but RLS is not enabled on the table |
-| [Sensitive columns exposed](#sensitive-columns-exposed) | ERROR | API-exposed tables without RLS that contain potentially sensitive columns |
-| [Security definer view](#security-definer-view) | ERROR | Views using SECURITY DEFINER, bypassing the querying user's permissions |
-| [Neon Auth users exposed](#neon-auth-users-exposed) | ERROR | Views exposing `neon_auth.user` data to API roles |
-| [RLS references Neon Auth metadata](#rls-references-neon-auth-metadata) | ERROR | RLS policies referencing user-editable Neon Auth fields |
-| [FK to Neon Auth unique constraint](#fk-to-neon-auth-unique-constraint) | ERROR | Foreign keys referencing Neon Auth unique constraints instead of primary keys |
-| [RLS policy always true](#rls-policy-always-true) | WARN | RLS policies with always-true expressions that bypass access control |
-| [Function search path mutable](#function-search-path-mutable) | WARN | Functions without an explicit `search_path` setting |
-| [Extension in public](#extension-in-public) | WARN | Extensions installed in the `public` schema, exposing their objects via the Data API |
-| [Extension versions outdated](#extension-versions-outdated) | WARN | Extensions not using the recommended default version |
-| [Materialized view in API](#materialized-view-in-api) | WARN | Materialized views accessible to API roles, bypassing RLS |
-| [Foreign table in API](#foreign-table-in-api) | WARN | Foreign tables accessible over the Data API, which cannot use RLS |
-| [Unsupported reg types](#unsupported-reg-types) | WARN | Columns using `reg*` types that prevent `pg_upgrade` |
-| [RLS enabled no policy](#rls-enabled-no-policy) | INFO | RLS is enabled but no policies have been created |
+| Check                                                                   | Severity | Description                                                                          |
+| ----------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| [RLS disabled in public](#rls-disabled-in-public)                       | ERROR    | Tables exposed via the Data API without row-level security                           |
+| [Policy exists RLS disabled](#policy-exists-rls-disabled)               | ERROR    | RLS policies exist but RLS is not enabled on the table                               |
+| [Sensitive columns exposed](#sensitive-columns-exposed)                 | ERROR    | API-exposed tables without RLS that contain potentially sensitive columns            |
+| [Security definer view](#security-definer-view)                         | ERROR    | Views using SECURITY DEFINER, bypassing the querying user's permissions              |
+| [Neon Auth users exposed](#neon-auth-users-exposed)                     | ERROR    | Views exposing `neon_auth.user` data to API roles                                    |
+| [RLS references Neon Auth metadata](#rls-references-neon-auth-metadata) | ERROR    | RLS policies referencing user-editable Neon Auth fields                              |
+| [FK to Neon Auth unique constraint](#fk-to-neon-auth-unique-constraint) | ERROR    | Foreign keys referencing Neon Auth unique constraints instead of primary keys        |
+| [RLS policy always true](#rls-policy-always-true)                       | WARN     | RLS policies with always-true expressions that bypass access control                 |
+| [Function search path mutable](#function-search-path-mutable)           | WARN     | Functions without an explicit `search_path` setting                                  |
+| [Extension in public](#extension-in-public)                             | WARN     | Extensions installed in the `public` schema, exposing their objects via the Data API |
+| [Extension versions outdated](#extension-versions-outdated)             | WARN     | Extensions not using the recommended default version                                 |
+| [Materialized view in API](#materialized-view-in-api)                   | WARN     | Materialized views accessible to API roles, bypassing RLS                            |
+| [Foreign table in API](#foreign-table-in-api)                           | WARN     | Foreign tables accessible over the Data API, which cannot use RLS                    |
+| [Unsupported reg types](#unsupported-reg-types)                         | WARN     | Columns using `reg*` types that prevent `pg_upgrade`                                 |
+| [RLS enabled no policy](#rls-enabled-no-policy)                         | INFO     | RLS is enabled but no policies have been created                                     |
 
 ## Performance checks
 
-| Check | Severity | Description |
-|-------|----------|-------------|
-| [Auth RLS InitPlan](#auth-rls-initplan) | WARN | RLS policy functions re-evaluated per row instead of once per query |
-| [Multiple permissive policies](#multiple-permissive-policies) | WARN | Multiple permissive RLS policies on the same table for the same role and action |
-| [Duplicate index](#duplicate-index) | WARN | Two or more identical indexes on the same table |
-| [Unindexed foreign keys](#unindexed-foreign-keys) | INFO | Foreign key columns without a covering index |
-| [Unused index](#unused-index) | INFO | Indexes that have never been used |
-| [No primary key](#no-primary-key) | INFO | Tables without a primary key |
-| [Table bloat](#table-bloat) | INFO | Tables with excessive bloat that may benefit from maintenance |
+| Check                                                         | Severity | Description                                                                     |
+| ------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| [Auth RLS InitPlan](#auth-rls-initplan)                       | WARN     | RLS policy functions re-evaluated per row instead of once per query             |
+| [Multiple permissive policies](#multiple-permissive-policies) | WARN     | Multiple permissive RLS policies on the same table for the same role and action |
+| [Duplicate index](#duplicate-index)                           | WARN     | Two or more identical indexes on the same table                                 |
+| [Unindexed foreign keys](#unindexed-foreign-keys)             | INFO     | Foreign key columns without a covering index                                    |
+| [Unused index](#unused-index)                                 | INFO     | Indexes that have never been used                                               |
+| [No primary key](#no-primary-key)                             | INFO     | Tables without a primary key                                                    |
+| [Table bloat](#table-bloat)                                   | INFO     | Tables with excessive bloat that may benefit from maintenance                   |
 
 ---
 
