@@ -127,9 +127,9 @@ Most modern ORMs and migration tools (such as Prisma, Drizzle, or Sequelize) aut
 
 If your tool does not support `DATABASE_URL` and requires individual connection parameters, the `neon/run-tests` job also exports the following variables:
 
-- `DATABASE_URL_POOLED` — The pooled connection string.
+- `DATABASE_URL_POOLED`: The pooled connection string.
 - `PGHOST`
-- `PGHOST_POOLED` — The pooled host.
+- `PGHOST_POOLED`
 - `PGUSER`
 - `PGPASSWORD`
 - `PGDATABASE`
@@ -146,15 +146,15 @@ The Orb provides the following commands for building custom workflows.
 
 Creates a new database branch. This command waits for the branch to be active ("ready") and exports the connection details to the environment.
 
-| Input           | Type    | Default                                            | Description                                                              |
-| :-------------- | :------ | :------------------------------------------------- | :----------------------------------------------------------------------- |
-| `parent_branch` | string  | Your project's default branch (e.g., `production`) | The name or ID of the parent branch to fork from.                        |
-| `branch_name`   | string  | _generated_                                        | Custom name for the branch. Defaults to `ci-build-<ID>`.                 |
-| `role`          | string  | `neondb_owner`                                     | The role to use for the connection.                                      |
-| `password`      | string  | _generated_                                        | The password for the role. You need to set this if you chose not to store passwords in the Neon console. |
-| `ttl_seconds`   | integer | `3600`                                             | The lifespan of the branch in seconds. Used as a safety net for cleanup. |
-| `create_auth` | boolean | `false` | Whether to enable Neon Auth for the branch. |
-| `create_data_api` | boolean | `false` | Whether to enable the Neon Data API for the branch. |
+| Input             | Type    | Default                                            | Description                                                                                              |
+| :---------------- | :------ | :------------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| `parent_branch`   | string  | Your project's default branch (e.g., `production`) | The name or ID of the parent branch to fork from.                                                        |
+| `branch_name`     | string  | _generated_                                        | Custom name for the branch. Defaults to `ci-build-<ID>`.                                                 |
+| `role`            | string  | `neondb_owner`                                     | The role to use for the connection.                                                                      |
+| `password`        | string  | _generated_                                        | The password for the role. You need to set this if you chose not to store passwords in the Neon console. |
+| `ttl_seconds`     | integer | `3600`                                             | The lifespan of the branch in seconds. Used as a safety net for cleanup.                                 |
+| `create_auth`     | boolean | `false`                                            | Whether to enable Neon Auth for the branch.                                                              |
+| `create_data_api` | boolean | `false`                                            | Whether to enable the Neon Data API for the branch.                                                      |
 
 **Outputs:**
 
