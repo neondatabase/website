@@ -212,7 +212,7 @@ Neon reserves certain names for roles and databases. See [Reserved role names](/
 - Rate limit: ~30 requests per minute per account
 - Polling does NOT wake suspended computes
 
-See the [consumption polling FAQ](/docs/guides/consumption-metrics#consumption-polling-faq) for more details.
+See [Consumption polling](/docs/guides/consumption-metrics#consumption-polling) for more details.
 
 ### Staying informed
 

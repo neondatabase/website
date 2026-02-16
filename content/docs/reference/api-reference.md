@@ -278,7 +278,7 @@ Manage the fundamental building blocks of your Neon account.
 Monitor resource consumption and configure usage limits.
 
 - [Monitor usage metrics](/docs/introduction/monitor-usage#retrieve-usage-metrics-with-the-neon-api): Retrieve usage data for projects and branches
-- [Query consumption metrics](/docs/guides/consumption-metrics#get-account-level-aggregated-metrics-legacy-plans): Query account-level and project-level consumption history
+- [Query consumption metrics](/docs/guides/consumption-metrics): Query project consumption metrics for usage-based plans. For legacy account and project endpoints, see [Query consumption metrics (legacy)](/docs/guides/consumption-metrics-legacy).
 - [Organization consumption](/docs/manage/orgs-api-consumption#account-level-metrics): Query usage metrics for organizations
 - [Configure consumption limits](/docs/guides/consumption-limits#configuring-quotas): Set and update quotas on compute, storage, and data transfer
 
