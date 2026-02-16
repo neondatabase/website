@@ -1,60 +1,55 @@
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings pt-[194px] xl:pt-[154px] lg:pt-[46px] md:pt-[34px]">
+  <section className="hero safe-paddings relative h-[904px] border-b border-gray-new-20 lg:h-[665px] md:h-[555px]">
     <Container
-      className="flex justify-between xl:max-w-[832px] lg:justify-center lg:gap-x-[60px] md:max-w-[544px] md:flex-col md:!px-5"
-      size="960"
+      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[432px] lg:items-start lg:pb-10 lg:pt-[226px] md:justify-end md:gap-y-4 md:pt-0"
+      size="1600"
     >
-      <header className="max-w-[510px] grow xl:max-w-[426px] lg:max-w-[356px] md:max-w-none">
-        <Heading
-          className="text-6xl font-medium leading-none tracking-extra-tight xl:text-5xl lg:text-4xl md:text-[36px]"
-          tag="h1"
-        >
-          Neon is the
-          <br />
-          Postgres layer
-          <br />
-          for the internet
-        </Heading>
-        <div className="mt-7 flex items-center gap-6 lg:mt-6 md:mt-7 md:gap-x-[18px]">
-          <Button
-            className="h-12 w-[203px] !font-semibold tracking-tighter lg:h-10 lg:text-sm md:h-9 md:w-40"
-            theme="primary"
-            to={LINKS.signup}
-            aria-label="Create an Account"
-          >
-            Create an Account
-          </Button>
-          <Link
-            className="tracking-tight lg:whitespace-nowrap lg:text-sm"
-            to={LINKS.careers}
-            theme="white"
-            aria-label="View Open Positions"
-            withArrow
-            isExternal
-          >
-            View Open Positions
-          </Link>
-        </div>
-      </header>
-      <div className="max-w-sm pt-3 text-lg leading-snug tracking-extra-tight text-gray-new-50 xl:max-w-[352px] xl:pt-1.5 lg:max-w-[288px] lg:pt-1 lg:text-base md:mt-8 md:max-w-none md:pt-0">
-        <p>
-          <span className="text-white">Our mission:</span> deliver Postgres as a cloud service
-          designed to help teams build scalable, dependable applications faster than ever.
-        </p>
-        <p className="mt-6">
+      <Heading className="lg:max-w-[544px] md:max-w-80" tag="h1" theme="white" size="md-about-us">
+        Neon is the Postgres layer for the internet
+      </Heading>
+      <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
+        <p className="max-w-[704px] font-sans text-xl font-normal leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[448px] lg:max-w-[640px] lg:text-[18px] md:max-w-80 md:text-[15px] md:text-gray-new-60">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
-          the level of performance, reliability, and scale to make Postgres{` `}
-          <span className="text-white">a foundational building block</span> as&nbsp;universal
-          as&nbsp;S3.
+          the level of performance, reliability, and scale.
         </p>
+        <div className="flex items-center justify-center gap-x-5 xl:gap-x-4 xl:pb-2 lg:pb-0">
+          <Button
+            size="lg-new"
+            theme="white-filled"
+            className="min-w-[230px] shrink-0 font-medium xl:min-w-0"
+            to={LINKS.signup}
+          >
+            Create an account
+          </Button>
+          <Button
+            size="lg-new"
+            theme="outlined"
+            className="min-w-[230px] shrink-0 font-normal xl:min-w-0"
+            to={LINKS.careers}
+          >
+            View open positions
+          </Button>
+        </div>
       </div>
     </Container>
+    <div className="absolute inset-0 -z-10">
+      <PauseableVideo
+        className="h-full w-full"
+        videoClassName="h-full w-full object-cover top-10 scale-[1.2] lg:top-0 lg:scale-[1.4]"
+        width={2390}
+        height={1102}
+        poster="/images/pages/about/hero.jpg"
+      >
+        <source src="/videos/pages/about/hero.mp4" type="video/mp4" />
+        <source src="/videos/pages/about/hero.webm" type="video/webm" />
+      </PauseableVideo>
+    </div>
   </section>
 );
 

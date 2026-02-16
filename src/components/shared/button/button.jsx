@@ -12,6 +12,8 @@ const styles = {
   base: 'inline-flex cursor-pointer items-center justify-center !leading-none text-center whitespace-nowrap rounded-full transition-colors duration-200 outline-none',
   size: {
     lg: 'text-base h-12 px-[54px] lg:h-11 lg:px-11 lg:text-sm font-semibold',
+    'lg-new':
+      'text-base h-11 px-7 tracking-extra-tight xl:text-sm xl:px-[18px] xl:h-9 md:px-[14px]',
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8 font-semibold',
     'md-new': 'px-9 h-12 font-medium tracking-tighter lg:h-11 lg:px-11 xs:h-10 xs:text-sm',
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8 font-semibold',
@@ -27,7 +29,9 @@ const styles = {
     'white-filled-multi':
       'dark:bg-white dark:text-black hover:dark:bg-gray-new-80 bg-black-pure text-white hover:bg-gray-new-20',
     outlined:
-      ' bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
+      'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
+    'outlined-new':
+      'bg-black-pure/0.02 text-black-pure border-gray-new-20 hover:border-black-pure dark:bg-white/0.02 border dark:border-gray-new-40 dark:text-white hover:dark:border-white',
     'green-underlined':
       'underline decoration-green-45/40 hover:decoration-green-45/100 text-green-45 transition-colors duration-500',
     'green-filled': 'bg-green-52 text-black-pure hover:bg-code-green-2',

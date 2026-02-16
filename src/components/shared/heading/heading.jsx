@@ -8,6 +8,8 @@ const styles = {
     xl: 't-7xl font-medium leading-dense',
     lg: 'text-[72px] font-medium leading-tight 2xl:text-6xl xl:text-[56px] xl:leading-dense md:text-[44px]',
     md: 't-6xl font-medium leading-dense',
+    'md-about-us':
+      'font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-[44px] md:text-[32px]',
     '2sm':
       'text-[56px] font-medium leading-none tracking-tighter xl:text-[44px] lg:text-[40px] sm:text-[30px]',
     sm: 't-4xl font-medium',
@@ -25,6 +27,8 @@ const HeadingBadge = ({ text }) => (
   </span>
 );
 
+const sizesWithCustomFont = new Set(['md-about-us']);
+
 const Heading = forwardRef(
   (
     {
@@ -40,7 +44,7 @@ const Heading = forwardRef(
     ref
   ) => {
     const className = clsx(
-      'font-title',
+      !sizesWithCustomFont.has(size) && 'font-title',
       styles.size[size],
       styles.theme[theme],
       additionalClassName
