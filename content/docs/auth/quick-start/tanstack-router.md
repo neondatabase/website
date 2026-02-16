@@ -55,7 +55,7 @@ Install the Neon Auth SDK and UI library:
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-cd my-app && npm install @neondatabase/neon-js
+cd my-app && npm install @neondatabase/neon-js@latest
 ```
 
 </TwoColumnLayout.Block>

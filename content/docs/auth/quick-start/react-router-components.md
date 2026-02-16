@@ -56,7 +56,7 @@ Install the Neon SDK, UI components, and React Router:
 
 ```bash
 cd my-app
-npm install @neondatabase/neon-js react-router-dom
+npm install @neondatabase/neon-js@latest react-router-dom
 ```
 
 </TwoColumnLayout.Block>

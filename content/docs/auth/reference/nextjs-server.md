@@ -26,7 +26,7 @@ Install the Neon Auth package in your Next.js project using npm, yarn, pnpm, or 
 <TwoColumnLayout.Block>
 
 ```bash
-npm install @neondatabase/auth
+npm install @neondatabase/auth@latest
 ```
 
 </TwoColumnLayout.Block>

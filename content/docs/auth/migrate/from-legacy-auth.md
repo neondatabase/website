@@ -76,7 +76,7 @@ Uninstall Stack Auth packages and install `@neondatabase/auth`
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/auth
+npm install @neondatabase/auth@latest
 ```
 
 **What changed**  
@@ -403,7 +403,7 @@ Uninstall Stack Auth packages and install `@neondatabase/auth`
 
 ```bash filename="Terminal"
 npm uninstall @stackframe/stack
-npm install @neondatabase/auth
+npm install @neondatabase/auth@latest
 ```
 
 **What changed**  

@@ -52,7 +52,7 @@ cd my-app
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-npm install @neondatabase/auth
+npm install @neondatabase/auth@latest
 ```
 
 </TwoColumnLayout.Block>
