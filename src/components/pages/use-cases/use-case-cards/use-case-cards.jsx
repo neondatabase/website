@@ -79,7 +79,7 @@ const UseCaseCard = ({
     >
       {/* Decorative dots pattern (right side) */}
       <div
-        className="pointer-events-none absolute right-2 top-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:bottom-2 md:top-auto md:h-[296px] md:w-[312px]"
+        className="pointer-events-none absolute right-2 top-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:top-2 md:h-[296px] md:w-[312px]"
         style={{
           maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
           WebkitMaskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
