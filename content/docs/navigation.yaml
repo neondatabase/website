@@ -1434,6 +1434,8 @@
           slug: guides/consumption-limits
         - title: Query consumption metrics
           slug: guides/consumption-metrics
+        - title: Query consumption metrics (legacy)
+          slug: guides/consumption-metrics-legacy
 
     - section: Neon for AI Agents
       icon: ai-agent
