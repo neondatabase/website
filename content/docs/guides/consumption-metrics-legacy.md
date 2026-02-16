@@ -11,10 +11,10 @@ updatedOn: '2026-02-16'
 
 Using the Neon API, you can query consumption metrics with the legacy endpoints: account-level aggregated metrics and project-level metrics. You can call these endpoints on **legacy plans** (Scale, Business, Enterprise) or **usage-based plans** (Launch, Scale, Agent, Enterprise). The difference is that they only return **legacy metrics** (active time, compute time, written data, synthetic storage). On a usage-based plan, those metrics do not match your invoice; for invoice-aligned metrics use the [project metrics endpoint](/docs/guides/consumption-metrics) in Query consumption metrics instead.
 
-| API                    | Endpoint                        | Description                                      | Available on                          |
-| ---------------------- | ------------------------------- | ------------------------------------------------ | ------------------------------------- |
-| **Account metrics**    | `/consumption_history/account`  | Aggregated metrics across all projects           | Legacy and usage-based plans          |
-| **Project metrics**    | `/consumption_history/projects` | Per-project metrics at chosen granularity        | Legacy and usage-based plans          |
+| API                 | Endpoint                        | Description                               | Available on                 |
+| ------------------- | ------------------------------- | ----------------------------------------- | ---------------------------- |
+| **Account metrics** | `/consumption_history/account`  | Aggregated metrics across all projects    | Legacy and usage-based plans |
+| **Project metrics** | `/consumption_history/projects` | Per-project metrics at chosen granularity | Legacy and usage-based plans |
 
 Issuing calls to these APIs does not wake a project's compute endpoints.
 
@@ -30,15 +30,15 @@ The legacy endpoints return consumption data for legacy billing plans. Date form
 
 Both endpoints return metrics that align with legacy billing. Default metrics are returned unless you specify otherwise with the `metrics` parameter:
 
-| Metric                           | Unit      | Description                                                                 |
-| -------------------------------- | --------- | --------------------------------------------------------------------------- |
-| `active_time_seconds`            | Seconds   | Time compute endpoints have been active                                     |
-| `compute_time_seconds`          | Seconds   | CPU seconds used by compute endpoints (see [Legacy metric definitions](#legacy-metric-definitions)) |
-| `written_data_bytes`            | Bytes     | Total data written to all of a project's branches                           |
-| `synthetic_storage_size_bytes`   | Bytes     | Storage used (logical data + WAL for all branches)                           |
-| `data_storage_bytes_hour`       | Bytes-Hour| Storage consumed hourly (optional)                                           |
-| `logical_size_bytes`            | Bytes     | Logical size consumed (optional)                                             |
-| `logical_size_bytes_hour`       | Bytes-Hour| Logical size consumed hourly (optional)                                      |
+| Metric                         | Unit       | Description                                                                                         |
+| ------------------------------ | ---------- | --------------------------------------------------------------------------------------------------- |
+| `active_time_seconds`          | Seconds    | Time compute endpoints have been active                                                             |
+| `compute_time_seconds`         | Seconds    | CPU seconds used by compute endpoints (see [Legacy metric definitions](#legacy-metric-definitions)) |
+| `written_data_bytes`           | Bytes      | Total data written to all of a project's branches                                                   |
+| `synthetic_storage_size_bytes` | Bytes      | Storage used (logical data + WAL for all branches)                                                  |
+| `data_storage_bytes_hour`      | Bytes-Hour | Storage consumed hourly (optional)                                                                  |
+| `logical_size_bytes`           | Bytes      | Logical size consumed (optional)                                                                    |
+| `logical_size_bytes_hour`      | Bytes-Hour | Logical size consumed hourly (optional)                                                             |
 
 ### Account-level endpoint
 

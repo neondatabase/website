@@ -13,9 +13,9 @@ updatedOn: '2026-02-16'
 
 Using the Neon API, you can query consumption metrics to track your resource usage. This page describes the **project metrics** endpoint, which returns metrics that align with [usage-based billing](/docs/introduction/plans) and match your invoice on usage-based plans.
 
-| API                               | Endpoint                           | Description                                                                                                                                                        | Plan availability                |
-| --------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------- |
-| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore), data transfer, extra branches                             | Launch, Scale, Agent, Enterprise |
+| API                               | Endpoint                           | Description                                                                                                                            | Plan availability                |
+| --------------------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| **Project metrics (usage-based)** | `/consumption_history/v2/projects` | Returns metrics aligned with usage-based billing: compute units, storage (root, child, instant restore), data transfer, extra branches | Launch, Scale, Agent, Enterprise |
 
 Issuing calls to this API does not wake a project's compute endpoints.
 
