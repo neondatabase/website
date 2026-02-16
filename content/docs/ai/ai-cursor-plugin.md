@@ -6,6 +6,7 @@ summary: >-
 description: >-
   Install the Neon Cursor plugin to use Neon agent skills and MCP-powered
   database operations directly in Cursor.
+updatedOn: '2026-02-16T23:25:57.647Z'
 ---
 
 The **Neon Cursor plugin** adds Neon-specific Skills and MCP integration to Cursor so your assistant can both reason about best practices and take database actions.
