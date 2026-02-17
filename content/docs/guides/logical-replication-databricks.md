@@ -1,20 +1,20 @@
 ---
-title: Replicate data to Databricks with Airbyte
-subtitle: Learn how to replicate data from Neon to Databricks Lakehouse with Airbyte
+title: Replicate data to Databricks with Lakeflow Connect
+subtitle: Learn how to replicate data from Neon to Databricks Lakehouse using the Databricks Lakeflow Connect PostgreSQL connector
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-06-09T00:00:00.000Z'
+updatedOn: '2026-02-16T00:00:00.000Z'
 ---
 
-Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Databricks Lakehouse.
+Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to prepare your Neon database as a source and use [Databricks Lakeflow Connect](https://docs.databricks.com/ingestion/lakeflow-connect/index.html) (LFC) to stream data into Databricks Lakehouse.
 
-[Airbyte](https://airbyte.com) is an open-source data integration platform that moves data from a source to a destination system. Airbyte offers a large library of connectors for various data sources and destinations.
+Lakeflow Connect provides fully-managed ingestion connectors, including a **PostgreSQL connector** that uses logical replication and change data capture (CDC). Databricks recommends this approach for replicating from databases like Neon into the lakehouse. The connector runs an ingestion gateway that continuously captures changes from your Neon database and an ingestion pipeline that applies them to Unity Catalog tables.
 
-[Databricks](https://databricks.com) is a unified, open analytics platform that combines the best of data lakes and data warehouses into a "lakehouse" architecture. Databricks allows organizations to build, deploy, and manage data, analytics, and AI solutions at scale.
+[Databricks](https://databricks.com) is a unified analytics platform that combines data lakes and data warehouses in a "lakehouse" architecture. [Unity Catalog](https://docs.databricks.com/data-governance/unity-catalog/index.html) provides governance for the replicated tables.
 
 ## Prerequisites
 
-- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you're just testing this out and need some data to play with, you run the following statements from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create a table with sample data:
+- A source [Neon project](/docs/manage/projects#create-a-project) with a database containing the data you want to replicate. If you're just testing, run the following from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor) to create sample data:
 
   ```sql shouldWrap
   CREATE TABLE IF NOT EXISTS playing_with_neon(id SERIAL PRIMARY KEY, name TEXT NOT NULL, value REAL);
@@ -22,13 +22,13 @@ Neon's logical replication feature allows you to replicate data from your Neon P
   SELECT LEFT(md5(i::TEXT), 10), random() FROM generate_series(1, 10) s(i);
   ```
 
-- An [Airbyte cloud account](https://airbyte.com/) or a self-hosted Airbyte instance
-- A [Databricks account](https://databricks.com/try-databricks) with an active workspace.
+- A [Databricks account](https://databricks.com/try-databricks) with an active workspace enabled for [Unity Catalog](https://docs.databricks.com/data-governance/unity-catalog/index.html).
+- Access to the **Lakeflow Connect PostgreSQL connector**, which is in **Public Preview**. Contact your Databricks account team to enroll.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 
 ## Prepare your source Neon database
 
-This section describes how to prepare your source Neon database (the publisher) for replicating data.
+This section describes how to prepare your Neon database (the publisher) for logical replication. The steps align with what the [Databricks PostgreSQL source setup](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-source-setup.html) expects. You must create the **publication before the replication slot**.
 
 ### Enable logical replication in Neon
 
@@ -43,7 +43,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or an SQL client such as [psql](/docs/connect/query-with-psql-editor):
+Verify that logical replication is enabled:
 
 ```sql
 SHOW wal_level;
@@ -54,50 +54,32 @@ SHOW wal_level;
 
 ### Create a Postgres role for replication
 
-It's recommended that you create a dedicated Postgres role for replicating data. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created using the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
+Create a dedicated Postgres role for the Databricks connector. The role must have the `REPLICATION` privilege. The default Postgres role created with your Neon project and roles created via the Neon CLI, Console, or API are granted membership in the [neon_superuser](/docs/manage/roles#the-neonsuperuser-role) role, which has the required `REPLICATION` privilege.
 
 <Tabs labels={["CLI", "Console", "API"]}>
 
 <TabItem>
 
-The following CLI command creates a role. To view the CLI documentation for this command, see [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole)
-
 ```bash
-neon roles create --name replication_user
+neon roles create --name databricks_replication
 ```
+
+See [Neon CLI commands — roles](https://api-docs.neon.tech/reference/createprojectbranchrole).
 
 </TabItem>
 
 <TabItem>
-
-To create a role in the Neon Console:
 
 1. Navigate to the [Neon Console](https://console.neon.tech).
-2. Select a project.
-3. Select **Branches**.
-4. Select the branch where you want to create the role.
-5. Select the **Roles & Databases** tab.
-6. Click **Add Role**.
-7. In the role creation dialog, specify a role name.
-8. Click **Create**. The role is created, and you are provided with the password for the role.
+2. Select a project, then **Branches** and the branch where you want the role.
+3. Open the **Roles & Databases** tab and click **Add Role**.
+4. Enter a role name (e.g. `databricks_replication`) and click **Create**. Save the password; you will need it for the Databricks connection.
 
 </TabItem>
 
 <TabItem>
 
-The following Neon API method creates a role. To view the API documentation for this method, refer to the [Neon API reference](/docs/reference/cli-roles).
-
-```bash
-curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-blue-tooth-671580/roles' \
-  -H 'Accept: application/json' \
-  -H "Authorization: Bearer $NEON_API_KEY" \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "role": {
-    "name": "replication_user"
-  }
-}' | jq
-```
+See the [Neon API reference](/docs/reference/cli-roles) for creating a role via API.
 
 </TabItem>
 
@@ -105,178 +87,122 @@ curl 'https://console.neon.tech/api/v2/projects/hidden-cell-763301/branches/br-b
 
 ### Grant schema access to your Postgres role
 
-If your replication role does not own the schemas and tables you are replicating from, make sure to grant access. For example, the following commands grant access to all tables in the `public` schema to Postgres role `replication_user`:
+Grant the replication role access to the schemas and tables you will replicate. For example, for the `public` schema:
 
 ```sql
-GRANT USAGE ON SCHEMA public TO replication_user;
-GRANT SELECT ON ALL TABLES IN SCHEMA public TO replication_user;
-ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO replication_user;
+GRANT USAGE ON SCHEMA public TO databricks_replication;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO databricks_replication;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO databricks_replication;
 ```
 
-Granting `SELECT ON ALL TABLES IN SCHEMA` instead of naming the specific tables avoids having to add privileges later if you add tables to your publication.
+Granting `SELECT ON ALL TABLES IN SCHEMA` avoids having to add privileges when you add tables to the publication later.
 
-### Create a replication slot
+### Set replica identity for tables
 
-Airbyte requires a dedicated replication slot. Only one source should be configured to use this replication slot.
-
-Airbyte uses the `pgoutput` plugin in Postgres for decoding WAL changes into a logical replication stream. To create a replication slot called `airbyte_slot` that uses the `pgoutput` plugin, run the following command on your database using your replication role:
+For each table you want to replicate, set the replica identity. For tables with a primary key and no large TOASTable columns, use `DEFAULT`:
 
 ```sql
-SELECT pg_create_logical_replication_slot('airbyte_slot', 'pgoutput');
+ALTER TABLE playing_with_neon REPLICA IDENTITY DEFAULT;
 ```
 
-`airbyte_slot` is the name assigned to the replication slot. You will need to provide this name when you set up your Airbyte source.
+For tables with large variable-length columns (e.g. `TEXT`, `BYTEA`) or no primary key, use `FULL`. See [PostgreSQL replica identity](https://www.postgresql.org/docs/current/logical-replication-publication.html#LOGICAL-REPLICATION-PUBLICATION-REPLICA-IDENTITY).
 
 ### Create a publication
 
-Perform the following steps for each table you want to replicate data from:
+Create a publication that includes all tables you want to replicate. **Create the publication before creating the replication slot.**
 
-1. Add the replication identity (the method of distinguishing between rows) for each table you want to replicate:
+```sql
+CREATE PUBLICATION databricks_publication FOR TABLE playing_with_neon;
+```
 
-   ```sql
-   ALTER TABLE <table_name> REPLICA IDENTITY DEFAULT;
-   ```
+Use a different table list or `FOR ALL TABLES` as needed. The publication name is customizable; you will use it when configuring the Lakeflow Connect pipeline.
 
-   In rare cases, if your tables use data types that support [TOAST](https://www.postgresql.org/docs/current/storage-toast.html) or have very large field values, consider using `REPLICA IDENTITY FULL` instead:
+### Create a replication slot
 
-   ```sql
-   ALTER TABLE <table_name> REPLICA IDENTITY FULL;
-   ```
+The Lakeflow Connect gateway uses one logical replication slot per database, with the `pgoutput` plugin. Create the slot **after** the publication:
 
-2. Create the Postgres publication. Include all tables you want to replicate as part of the publication:
+```sql
+SELECT pg_create_logical_replication_slot('databricks_slot', 'pgoutput');
+```
 
-   ```sql
-   CREATE PUBLICATION airbyte_publication FOR TABLE <tbl1, tbl2, tbl3>;
-   ```
-
-   The publication name is customizable. Refer to the [Postgres docs](https://www.postgresql.org/docs/current/logical-replication-publication.html) if you need to add or remove tables from your publication.
+Use this slot name when you configure the ingestion pipeline in Databricks. Only one consumer (the Lakeflow gateway) should use this slot.
 
 <Admonition type="note">
-The Airbyte UI currently allows selecting any table for Change Data Capture (CDC). If a table is selected that is not part of the publication, it will not be replicated even though it is selected. If a table is part of the publication but does not have a replication identity, the replication identity will be created automatically on the first run if the Postgres role you use with Airbyte has the necessary permissions.
+Neon manages replication slot parameters (such as WAL retention) for you. If you use multiple replication slots, ensure you do not exceed Neon's limits. When you delete the ingestion pipeline in Databricks, you must [drop the replication slot](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-maintenance.html#cleanup-replication-slots) in Neon to avoid leaving an unused slot.
 </Admonition>
 
-## Create a Postgres source in Airbyte
+### Allow inbound traffic (if using Neon IP Allow)
 
-1. From your Airbyte Cloud account, or your self-hosted Airbyte instance, select **Sources** from the left navigation bar, search for **Postgres**, and then create a new Postgres source.
-2. Enter the connection details for your Neon database. You can find your database connection details by clicking the **Connect** button on your **Project Dashboard**.
+If you use Neon's [IP Allow](/docs/manage/projects#configure-ip-allow) feature to restrict which IPs can connect, you must allow the IPs from which the Databricks ingestion gateway connects. Configure your firewall or security group to allow connections from your Databricks workspace (or the region where the gateway runs). For details, see [Databricks networking](https://docs.databricks.com/ingestion/lakeflow-connect/index.html#networking) and [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
-   > Make sure to select the `replication_user` role you created earlier when connecting to your Neon database. This role must have the `REPLICATION` privilege and access to the schemas and tables you want to replicate.
+## Create a connection and pipeline in Databricks
 
-   For example, given a connection string like this:
+In Databricks, you create a **Unity Catalog connection** that stores your Neon credentials, then create an **ingestion gateway** and **ingestion pipeline** that read from Neon and write to Unity Catalog tables. The gateway runs continuously to capture changes; the pipeline runs on a schedule (or on demand) to apply them to destination tables.
 
-   ```bash shouldWrap
-   postgresql://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require
-   ```
+Full step-by-step instructions are in the Databricks documentation. Below is a summary with Neon-specific details.
 
-   Enter the details in the Airbyte **Create a source** dialog as shown below. Your values will differ.
-   - **Host**: ep-cool-darkness-123456.us-east-2.aws.neon.tech
-   - **Port**: 5432
-   - **Database Name**: dbname
-   - **Username**: replication_user
-   - **Password**: AbC123dEf
+### Connection details from Neon
 
-   ![Airbyte Create a source](/docs/guides/airbyte_create_source.png)
+You need the following from Neon (available from the **Connect** button on your project dashboard):
 
-3. Under **Optional fields**, list the schemas you want to sync. Schema names are case-sensitive, and multiple schemas may be specified. By default, `public` is the only selected schema.
-4. Select an SSL mode. You will most frequently choose `require` or `verify-ca`. Both of these options always require encryption. The `verify-ca` mode requires a certificate. Refer to [Connect securely](/docs/connect/connect-securely) for information about the location of certificate files you can use with Neon.
-5. Under **Advanced**:
-   - Select **Read Changes using Write-Ahead Log (CDC)** from available replication methods.
-   - In the **Replication Slot** field, enter the name of the replication slot you created previously: `airbyte_slot`.
-   - In the **Publication** field, enter the name of the publication you created previously: `airbyte_publication`.
-     ![Airbyte advanced fields](/docs/guides/airbyte_cdc_advanced_fields.png)
+- **Host**: Your Neon hostname (e.g. `ep-cool-darkness-123456.us-east-2.aws.neon.tech`)
+- **Port**: `5432`
+- **Database**: Your database name (e.g. `neondb`)
+- **User**: The replication role (e.g. `databricks_replication`)
+- **Password**: The password for that role
 
-### Allow inbound traffic
+Use **SSL**: Databricks supports secure connections; use `require` or `verify-ca` as appropriate. See [Connect securely](/docs/connect/connect-securely) for Neon certificate options.
 
-If you are on Airbyte Cloud, and you are using Neon's **IP Allow** feature to limit IP addresses that can connect to Neon, you will need to allow inbound traffic from Airbyte's IP addresses. You can find a list of IPs that need to be allowlisted in the [Airbyte Security docs](https://docs.airbyte.com/operating-airbyte/security). For self-hosted Airbyte, you will need to allow inbound traffic from the IP address of your Airbyte instance. For information about configuring allowed IPs in Neon, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+### Option 1: Databricks UI
 
-### Complete the source setup
+If the [PostgreSQL connector UI](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-pipeline.html) is available in your workspace:
 
-To complete your source setup, click **Set up source** in the Airbyte UI. Airbyte will test the connection to your database. Once this succeeds, you've successfully configured an Airbyte Postgres source for your Neon database.
+1. In the sidebar, click **Data Ingestion**, then under **Databricks connectors** click **PostgreSQL**.
+2. In the wizard, name the ingestion gateway and choose a catalog and schema for **staging** (where the gateway stores extracted data).
+3. Name the pipeline and select the **destination catalog** for ingested tables.
+4. Create or select a **connection**: choose **PostgreSQL** and enter the Neon Host, Port, Database, User, and Password from above.
+5. Select the **tables** to ingest (only tables that are in your publication will sync).
+6. On **Database Setup**, enter the **replication slot name** (`databricks_slot`) and **publication name** (`databricks_publication`) you created in Neon.
+7. Optionally add a **schedule** and notifications, then save and run the pipeline.
 
-## Configure Databricks Lakehouse as a destination
+If the UI is not yet available for PostgreSQL, use the CLI or a notebook as in Option 2.
 
-To complete your data integration setup, you can now add Databricks Lakehouse as your destination.
+### Option 2: Databricks CLI or APIs
 
-### Prerequisites
+1. **Create a PostgreSQL connection** in Unity Catalog with the Neon host, port, database, user, and password. See [Connect to managed ingestion sources — PostgreSQL](https://docs.databricks.com/connect/managed-ingestion.html#postgresql).
+2. **Create the ingestion gateway and pipeline** using the [Databricks CLI or a notebook](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-pipeline.html#option-2-other-interfaces). In the pipeline configuration, set:
+   - `slot_name` to `databricks_slot`
+   - `publication_name` to `databricks_publication`
+   - `source_catalog` to your Neon database name
+   - `source_schema` (e.g. `public`) and the tables or schema to ingest
 
-- **Databricks Server Hostname**: The hostname of your Databricks SQL Warehouse or All-Purpose Cluster (e.g., `adb-xxxxxxxxxxxxxxx.x.azuredatabricks.net` or `dbc-xxxxxxxx-xxxx.cloud.databricks.com`). You can find this in the Connection Details of your SQL Warehouse or Cluster.
-- **Databricks HTTP Path**: The HTTP Path for your SQL Warehouse or Cluster. Found in the Connection Details.
-- **Databricks Personal Access Token (PAT)**: A token used to authenticate. You can generate it from the same connection details page in Databricks.
-- **Databricks Unity Catalog Name**: The name of the Unity Catalog you wish to use.
-- **(Optional) Default Schema**: The schema within the Unity Catalog where tables will be created if not otherwise specified.
-
-<Admonition type="important">
-Ensure the Databricks SQL Warehouse or Cluster is running and accessible. The PAT must have sufficient permissions within the specified Unity Catalog and for the operations Airbyte will perform (e.g., `CREATE TABLE`, `CREATE SCHEMA` if the `Default Schema` doesn't exist, `INSERT data`).
-</Admonition>
-
-### Set up Databricks Lakehouse as a destination
-
-1.  Navigate to Airbyte.
-2.  Select **Destinations** from the left navigation bar, search for **Databricks Lakehouse**, and then select it.
-3.  Click **+ New destination** and choose **Databricks Lakehouse**.
-4.  Configure the Databricks Lakehouse destination:
-
-    | Field                                                | Description                                                                                                                   | Example (Illustrative)                   |
-    | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-    | **Destination name**                                 | A descriptive name for your destination in Airbyte.                                                                           | `Databricks Lakehouse`                   |
-    | **Server Hostname**                                  | The Server Hostname of your Databricks SQL Warehouse or cluster.                                                              | `dbc-a1b2345c-d6e7.cloud.databricks.com` |
-    | **HTTP Path**                                        | The HTTP Path from your Databricks SQL Warehouse or cluster's connection details.                                             | `/sql/1.0/warehouses/1234567890abcdef`   |
-    | **Databricks Unity Catalog Name** (Required)         | The name of the Unity Catalog where data will be written.                                                                     | `workspace`                              |
-    | **Authentication**                                   | Choose **Personal Access Token**.                                                                                             | `Personal Access Token`                  |
-    | _Personal Access Token_                              | Enter your Databricks PAT.                                                                                                    | `dapi1234567890abcdef1234567890abcd`     |
-    | **Port** (Optional Fields)                           | The port for the Databricks connection.                                                                                       | `443` (Default)                          |
-    | **Default Schema** (Optional Fields)                 | The default schema within the Unity Catalog to write to. Airbyte will create this schema if it doesn't exist.                 | `airbyte_neon_data`                      |
-    | **Purge Staging Files and Tables** (Optional Fields) | Enable to automatically clean up temporary staging files and tables used during the replication process. Usually recommended. | `Enabled` (Default)                      |
-    | **Raw Table Schema Name** (Optional Fields)          | Schema used for storing raw data tables (_airbyte_raw_\*).                                                                    | `airbyte_internal` (Default)             |
-
-    ![Airbyte Databricks Lakehouse destination setup](/docs/guides/airbyte_databricks_destination.png)
-
-5.  When you're finished filling in the fields, click **Set up destination**. Airbyte will test the connection to your Databricks Lakehouse environment.
-
-## Set up a connection
-
-In this step, you'll set up a connection between your Neon Postgres source and your Databricks Lakehouse destination.
-
-To set up a new connection:
-
-1.  Navigate to Airbyte.
-2.  Select **Connections** from the left navigation bar, then click **+ New connection**.
-3.  Select the existing Postgres source you created earlier.
-4.  Select the existing Databricks Lakehouse destination you created earlier.
-5.  For the **Sync Mode**, select **Replicate Source**. Then, choose the specific tables from your Neon Postgres source that you want to replicate. Ensure you only select tables that are part of the PostgreSQL publication you created earlier (e.g., `playing_with_neon`).
-6.  Click **Next**.
-    ![Airbyte Neon Databricks connection setup](/docs/guides/airbyte_neon_databricks_connection_setup.png)
-7.  Configure the sync frequency and other settings as needed. Select **Source defined** for the **Destination Namespace**.
-    ![Airbyte Neon Databricks connection sync settings](/docs/guides/airbyte_neon_databricks_sync_settings.png)
-
-Your first sync will start automatically soon, or you can initiate it manually if you opted for a manual schedule. Airbyte will then replicate data from Neon Postgres to your Databricks Lakehouse. The time this initial sync takes will depend on the amount of data.
+The gateway must run **continuously** so that the replication slot is consumed and WAL does not grow unbounded. The pipeline can run on a schedule (e.g. daily) to apply changes to destination tables.
 
 ## Verify the replication
 
-After the sync operation is complete, you can verify the replication by navigating to your Databricks workspace.
+After the first pipeline run (or after the initial sync completes):
 
-1.  Go to your Databricks workspace.
-2.  Navigate to **SQL Editor** from the left sidebar.
-3.  Run the following SQL query to check the replicated data:
+1. In your Databricks workspace, open **SQL Editor**.
+2. Query the destination table using the three-level namespace `catalog.schema.table`:
 
-    ```sql
-    SELECT * FROM workspace.public.playing_with_neon;
-    ```
+   ```sql
+   SELECT * FROM <your_catalog>.<your_schema>.playing_with_neon;
+   ```
 
-    > In the query, substitute `workspace` with the Databricks Unity Catalog Name you configured in Airbyte. The schema `public` should be replaced with the Default Schema you specified in the destination settings. Similarly, replace `playing_with_neon` with the name of the table you replicated.
+   Replace `<your_catalog>` and `<your_schema>` with the destination catalog and schema you chose in the pipeline. This shows the data replicated from Neon into Databricks.
 
-    ![Databricks SQL Editor showing replicated data](/docs/guides/databricks_sql_editor_replicated_data.png)
-
-This will display the data replicated from your Neon Postgres into your Databricks Lakehouse.
+You can also check the pipeline run history and record counts on the pipeline details page in Databricks.
 
 ## References
 
-- [Airbyte Documentation](https://docs.airbyte.com/)
-- [Airbyte Databricks Lakehouse Destination Connector](https://docs.airbyte.com/integrations/destinations/databricks)
-- [Databricks Documentation](https://docs.databricks.com/)
-- [Databricks Unity Catalog documentation](https://docs.databricks.com/aws/en/data-governance/unity-catalog)
+- [Databricks Lakeflow Connect](https://docs.databricks.com/ingestion/lakeflow-connect/index.html)
+- [Configure PostgreSQL for ingestion (source setup)](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-source-setup.html)
+- [Ingest data from PostgreSQL (create pipeline)](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-pipeline.html)
+- [PostgreSQL connector reference](https://docs.databricks.com/ingestion/lakeflow-connect/postgresql-reference.html)
+- [Connect to managed ingestion sources — PostgreSQL](https://docs.databricks.com/connect/managed-ingestion.html#postgresql)
 - [Neon Logical Replication](/docs/guides/logical-replication-neon)
-- [Logical replication - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
-- [Publications - PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
+- [Logical replication — PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication.html)
+- [Publications — PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
 
-<NeedHelp/>
+<NeedHelp />
+
