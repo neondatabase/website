@@ -10,7 +10,7 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 ## Add Neon Auth to a project
 
-Go to [pg.new](https://pg.new) to create a new Neon project.
+Go to [neon.new](https://neon.new) to create a new Neon project.
 
 Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
 
