@@ -41,10 +41,9 @@ const Hero = () => (
     <div className="absolute inset-0 -z-10">
       <PauseableVideo
         className="h-full w-full"
-        videoClassName="h-full w-full object-cover top-10 scale-[1.2] lg:top-0 lg:scale-[1.4]"
+        videoClassName="h-full w-full object-cover top-12 scale-[1.2] lg:top-0 lg:scale-[1.4]"
         width={2390}
         height={1102}
-        poster="/images/pages/about/hero.jpg"
       >
         <source src="/videos/pages/about/hero.mp4" type="video/mp4" />
         <source src="/videos/pages/about/hero.webm" type="video/webm" />
