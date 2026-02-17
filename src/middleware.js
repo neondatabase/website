@@ -69,7 +69,7 @@ export async function middleware(req) {
               new NextResponse(markdown, {
                 status: 200,
                 headers: {
-                  'Content-Type': 'text/plain; charset=utf-8',
+                  'Content-Type': 'text/markdown; charset=utf-8',
                   'Cache-Control': 'public, max-age=3600, s-maxage=86400',
                   'X-Content-Source': 'markdown',
                   'X-Robots-Tag': 'noindex',
