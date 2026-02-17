@@ -2,11 +2,9 @@
 
 import clsx from 'clsx';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import SimpleArrowButton from 'components/shared/simple-arrow-button';
 import LINKS from 'constants/links';
 
 const ITEMS = [
@@ -48,137 +46,72 @@ const ITEMS = [
   },
 ];
 
-const Timeline = () => {
-  const scrollRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
+const Timeline = () => (
+  <section className="timeline safe-paddings overflow-hidden pb-[200px] pt-40 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[88px] md:pb-[104px] md:pt-[72px]">
+    <Container size="1600">
+      <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
+        Our mission{' '}
+        <span className="text-gray-new-60">
+          is to deliver Postgres as a cloud service designed to help teams build scalable,
+          dependable applications faster than ever.
+        </span>
+      </h2>
+      <div className="no-scrollbars w-full sm:-mx-5 sm:-mt-2 sm:w-screen sm:overflow-x-auto sm:pb-2">
+        <div className="relative h-[284px] w-full xl:h-[264px] lg:h-64 md:h-[189px] md:min-w-[545px] sm:mx-5">
+          <ol className="grid h-full w-full grid-cols-[repeat(5,minmax(0,243fr))_320fr] xl:grid-cols-[repeat(5,minmax(0,152fr))_200fr] lg:grid-cols-[repeat(5,minmax(0,112fr))_147fr] md:grid-cols-[repeat(5,minmax(0,86fr))_114fr]">
+            {ITEMS.map((item, index) => {
+              const Wrapper = item.link ? Link : 'div';
+              const wrapperProps = item.link ? { to: item.link, isExternal: item.isExternal } : {};
 
-  const updateScrollState = useCallback(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    setCanScrollLeft(scrollLeft > 1);
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 1);
-  }, []);
-
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return undefined;
-
-    updateScrollState();
-
-    el.addEventListener('scroll', updateScrollState, { passive: true });
-
-    const resizeObserver = new ResizeObserver(updateScrollState);
-    resizeObserver.observe(el);
-
-    return () => {
-      el.removeEventListener('scroll', updateScrollState);
-      resizeObserver.disconnect();
-    };
-  }, [updateScrollState]);
-
-  const scroll = (direction) => {
-    const el = scrollRef.current;
-    if (!el) return;
-
-    const scrollAmount = el.clientWidth * 0.75;
-    el.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth',
-    });
-  };
-
-  const showButtons = canScrollLeft || canScrollRight;
-
-  return (
-    <section className="timeline safe-paddings overflow-hidden pb-[200px] pt-40 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[88px] md:pb-[104px] md:pt-[72px]">
-      <Container size="1600">
-        <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
-          Our mission{' '}
-          <span className="text-gray-new-60">
-            is to deliver Postgres as a cloud service designed to help teams build scalable,
-            dependable applications faster than ever.
-          </span>
-        </h2>
-        <div
-          ref={scrollRef}
-          className="no-scrollbars w-full sm:-mx-5 sm:w-screen sm:overflow-x-auto sm:pb-6"
-        >
-          <div className="relative h-[284px] w-full xl:h-[264px] lg:h-64 md:h-[189px] md:min-w-[545px] sm:mx-5">
-            <ol className="grid h-full w-full grid-cols-[repeat(5,minmax(0,243fr))_320fr] xl:grid-cols-[repeat(5,minmax(0,152fr))_200fr] lg:grid-cols-[repeat(5,minmax(0,112fr))_147fr] md:grid-cols-[repeat(5,minmax(0,86fr))_114fr]">
-              {ITEMS.map((item, index) => {
-                const Wrapper = item.link ? Link : 'div';
-                const wrapperProps = item.link
-                  ? { to: item.link, isExternal: item.isExternal }
-                  : {};
-
-                return (
-                  <li
-                    key={index}
+              return (
+                <li
+                  key={index}
+                  className={clsx(
+                    '-ml-px border-l border-gray-new-30',
+                    index % 2 === 0 ? 'self-end' : 'self-start'
+                  )}
+                >
+                  <Wrapper
                     className={clsx(
-                      '-ml-px border-l border-gray-new-30',
-                      index % 2 === 0 ? 'self-end' : 'self-start'
+                      'flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
+                      index % 2 === 0 && 'justify-end',
+                      item.link && 'group'
                     )}
+                    {...wrapperProps}
                   >
-                    <Wrapper
-                      className={clsx(
-                        'flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
-                        index % 2 === 0 && 'justify-end',
-                        item.link && 'group'
-                      )}
-                      {...wrapperProps}
+                    <time
+                      dateTime={item.dateTime}
+                      className="whitespace-nowrap font-mono text-base font-normal leading-none tracking-extra-tight text-gray-new-50 no-underline xl:text-sm md:text-xs"
                     >
-                      <time
-                        dateTime={item.dateTime}
-                        className="whitespace-nowrap font-mono text-base font-normal leading-none tracking-extra-tight text-gray-new-50 no-underline xl:text-sm md:text-xs"
-                      >
-                        {item.date}
-                      </time>
-                      <p
-                        className={clsx(
-                          'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
-                          item.link &&
-                            'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-colors duration-200 group-hover:decoration-white',
-                          index !== ITEMS.length - 1 && 'whitespace-nowrap'
-                        )}
-                      >
-                        {item.title}
-                      </p>
-                    </Wrapper>
-                  </li>
-                );
-              })}
-            </ol>
-            <Image
-              className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8"
-              width={1536}
-              height={56}
-              src="/images/pages/about/timeline.svg"
-              aria-hidden="true"
-              alt=""
-            />
-          </div>
+                      {item.date}
+                    </time>
+                    <p
+                      className={clsx(
+                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                        item.link &&
+                          'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-colors duration-200 group-hover:decoration-white',
+                        index !== ITEMS.length - 1 && 'whitespace-nowrap'
+                      )}
+                    >
+                      {item.title}
+                    </p>
+                  </Wrapper>
+                </li>
+              );
+            })}
+          </ol>
+          <Image
+            className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8"
+            width={1536}
+            height={56}
+            src="/images/pages/about/timeline.svg"
+            aria-hidden="true"
+            alt=""
+          />
         </div>
-        {showButtons && (
-          <div className="hidden gap-2 sm:flex">
-            <SimpleArrowButton
-              disabled={!canScrollLeft}
-              aria-label="Scroll left"
-              onClick={() => scroll('left')}
-            />
-            <SimpleArrowButton
-              disabled={!canScrollRight}
-              aria-label="Scroll right"
-              mirrored
-              onClick={() => scroll('right')}
-            />
-          </div>
-        )}
-      </Container>
-    </section>
-  );
-};
+      </div>
+    </Container>
+  </section>
+);
 
 export default Timeline;

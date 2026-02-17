@@ -5,9 +5,9 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative h-[904px] border-b border-gray-new-20 lg:h-[665px] md:h-[555px]">
+  <section className="hero safe-paddings relative h-[820px] border-b border-gray-new-20 xl:h-[904px] lg:h-[665px] md:h-[555px]">
     <Container
-      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[432px] lg:items-start lg:pb-10 lg:pt-[226px] md:justify-end md:gap-y-4 md:pt-0"
+      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[402px] xl:pt-[432px] lg:items-start lg:pb-10 lg:pt-[226px] md:justify-end md:gap-y-4 md:pt-0"
       size="1600"
     >
       <Heading className="lg:max-w-[544px] md:max-w-80" tag="h1" theme="white" size="md-new">
