@@ -1,13 +1,15 @@
 @layer components {
   .code-block[data-has-filename='true'] {
     > pre {
-      @apply rounded-b-lg rounded-t-none;
+      @apply rounded-none;
     }
   }
 
   .admonition-text {
+    @apply text-base font-normal leading-normal tracking-tight dark:text-[#D7D8DB];
+
     a {
-      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color,opacity] duration-200 ease-in-out hover:border-secondary-8 dark:border-b-0 dark:text-white dark:underline dark:decoration-dotted dark:underline-offset-[3px] dark:hover:opacity-80 sm:break-words;
     }
     p:first-child {
       @apply mt-0;
@@ -72,7 +74,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-dashed prose-a:border-gray-new-50 prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-gray-new-85 dark:hover:prose-a:border-solid dark:hover:prose-a:border-gray-new-85 prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -94,7 +96,23 @@
     }
 
     h2 {
-      @apply mb-3 mt-10;
+      @apply mb-3 mt-7 text-[28px] font-medium leading-tight tracking-tighter;
+    }
+
+    h3 {
+      @apply text-xl font-medium leading-snug tracking-extra-tight;
+    }
+
+    h4 {
+      @apply mb-3 mt-7 text-lg font-medium leading-snug tracking-extra-tight;
+    }
+
+    p {
+      @apply my-3 text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
+    }
+
+    .admonition h4 {
+      @apply m-0 inline-flex items-center;
     }
 
     .anchor-heading {
@@ -176,13 +194,13 @@
 
       thead {
         tr {
-          @apply border-b border-gray-new-70;
+          @apply border-b border-gray-new-90 dark:border-gray-new-20;
         }
       }
 
       tbody {
         tr {
-          @apply border-b border-gray-new-90 last:border-gray-new-70 dark:border-gray-new-20 dark:last:border-gray-new-70;
+          @apply border-b border-gray-new-90 dark:border-gray-new-20;
         }
       }
     }
@@ -210,7 +228,7 @@
     }
 
     :not(pre) > code {
-      @apply break-words !rounded-sm bg-gray-new-94 !px-1.5 !py-0.5 !font-mono !font-normal !text-black-new dark:bg-gray-new-15 dark:!text-white;
+      @apply break-words border border-gray-new-90 bg-gray-new-94 !px-1 !py-px !font-mono !font-normal !text-black-new dark:border-gray-new-30 dark:bg-black dark:!text-white;
 
       &::before,
       &::after {
@@ -236,31 +254,32 @@
     }
 
     blockquote {
-      @apply border-secondary-8 font-normal not-italic;
+      @apply font-normal not-italic;
 
       p {
+        @apply my-0 text-lg font-normal leading-normal tracking-tight text-gray-new-85;
+
         &::before,
         &::after {
           @apply hidden;
         }
       }
+
+      cite,
+      footer {
+        @apply mt-5 flex items-center gap-2.5 text-sm font-medium leading-tight tracking-tight text-gray-new-8 dark:text-gray-new-90;
+      }
     }
 
     /* Details/Summary dropdown styling */
     details {
-      @apply py-5;
-    }
-
-    /* Only add top border between consecutive dropdowns */
-    details + details {
-      @apply border-t border-gray-new-90 dark:border-gray-new-15;
+      @apply relative -mb-px border border-gray-new-90 bg-transparent p-4 dark:border-gray-new-20;
     }
 
     details summary {
-      @apply flex cursor-pointer items-center justify-between font-semibold text-black-new transition-colors hover:text-secondary-8 dark:text-white dark:hover:text-primary-1;
+      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-new dark:text-white;
       list-style: none;
 
-      /* Hide default marker */
       &::-webkit-details-marker {
         @apply hidden;
       }
@@ -269,22 +288,25 @@
         @apply hidden;
       }
 
-      /* Custom arrow on the right side - points right when closed */
-      &::after {
+      &::before {
         content: '';
-        @apply ml-auto h-2 w-2 shrink-0 border-r-2 border-t-2 border-current transition-transform duration-200;
-        transform: rotate(45deg);
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        background: currentColor;
+        clip-path: polygon(30% 22%, 30% 78%, 78% 50%);
+        transform: rotate(0deg);
+        transform-origin: 50% 50%;
+        transition: transform 200ms ease;
       }
     }
 
-    /* Rotate arrow to point down when open */
-    details[open] summary::after {
-      transform: rotate(135deg);
+    details[open] > summary::before {
+      transform: rotate(90deg);
     }
 
-    /* Content area styling */
     details > *:not(summary) {
-      @apply mt-3;
+      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-60 dark:text-gray-new-85;
     }
 
     /* Ensure list items inside details have proper spacing */
@@ -373,44 +395,6 @@
 
     a {
       @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
-    }
-  }
-
-  .prose-template {
-    @apply text-lg leading-normal tracking-tight md:text-base;
-    @apply dark:prose-strong:text-white;
-
-    .anchor-heading {
-      @apply scroll-mt-20 lg:scroll-mt-5;
-    }
-
-    > h2 {
-      @apply mt-16 text-[28px] leading-tight -tracking-widest lg:mt-14 md:mt-12 md:text-2xl;
-
-      & + p {
-        @apply mt-3;
-      }
-    }
-
-    > h3 {
-      @apply text-[22px] leading-tight -tracking-widest;
-    }
-
-    .anchor-heading {
-      @apply scroll-mt-20 lg:scroll-mt-5;
-    }
-
-    > p {
-      @apply my-5 text-gray-new-80 lg:my-4;
-    }
-
-    > ul,
-    > ol {
-      @apply my-5 text-gray-new-80;
-
-      > li {
-        @apply text-gray-new-80;
-      }
     }
   }
 

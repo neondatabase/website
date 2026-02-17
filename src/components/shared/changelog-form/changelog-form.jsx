@@ -29,7 +29,9 @@ const appearAndExitAnimationVariants = {
 const themeClassNames = {
   sidebar: {
     block: 'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px]',
-    title: 'text-[15px] lg:shrink-0 lg:text-lg',
+    title: 'text-base lg:shrink-0 lg:text-lg font-medium leading-tight tracking-extra-tight',
+    description:
+      'text-[15px] font-normal leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-70 opacity-90',
     input: 'pr-20 lg:pr-32',
     sendText: 'hidden lg:block',
     errorMessage: 'mt-5 sm:mt-6',
@@ -39,6 +41,7 @@ const themeClassNames = {
     title: 'shrink-0 text-lg',
     input: 'pr-32',
     sendIcon: 'hidden',
+    submitButton: 'px-6 min-w-16',
     errorMessage: 'mt-1.5 sm:mt-6',
   },
 };
@@ -103,7 +106,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
   return (
     <div
       className={clsx(
-        'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
+        'changelog-form safe-paddings relative flex scroll-mt-20 overflow-hidden rounded-none bg-gray-new-94',
         classNames.block,
         className,
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
@@ -111,24 +114,51 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
       )}
       id="changelog-form"
     >
-      <h2
-        className={clsx(classNames.title, 'font-medium leading-snug tracking-tighter xs:text-base')}
+      {/* <div aria-hidden className="pointer-events-none absolute inset-0 hidden dark:block">
+        <div className="absolute -bottom-16 right-[-72px] h-52 w-72 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(59,215,163,0.35)_0%,rgba(59,215,163,0)_70%)] blur-2xl" />
+        <div className="absolute -bottom-10 right-[-8px] h-44 w-52 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(236,119,46,0.45)_0%,rgba(236,119,46,0)_70%)] blur-xl" />
+        <Image
+          className="absolute -bottom-4 right-0 h-auto w-auto max-w-none origin-bottom-right scale-50 opacity-75 mix-blend-screen"
+          src={greenDots}
+          alt=""
+        />
+      </div> */}
+      <div className="flex flex-col gap-3.5">
+        <h2
+          className={clsx(
+            classNames.title,
+            'relative z-10 font-medium leading-snug tracking-tighter xs:text-base'
+          )}
+        >
+          Subscribe to our changelog
+        </h2>
+        <p
+          className={clsx(
+            classNames.description,
+            'relative z-10 text-[15px] font-normal leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-70'
+          )}
+        >
+          Receive only our latest updates.
+          <br /> No spam, guaranteed.
+        </p>
+      </div>
+      <form
+        className="relative z-10 w-full flex-1"
+        method="POST"
+        noValidate
+        onSubmit={handleSubmit}
       >
-        Subscribe to our changelog.
-        <br /> No spam, guaranteed.
-      </h2>
-      <form className="relative w-full flex-1" method="POST" noValidate onSubmit={handleSubmit}>
         <input
           className={clsx(
             'remove-autocomplete-styles h-[38px] w-full appearance-none pl-4 tracking-extra-tight',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
-            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-black-new lg:text-base xs:pr-20',
+            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-[rgba(19,20,21,0.60)] lg:text-base xs:pr-20',
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
-              : 'border-gray-new-90 dark:border-gray-new-15',
+              : 'border-gray-new-90 dark:border-gray-new-20',
             formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
-            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60'
+            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-40'
           )}
           type="email"
           name="email"
@@ -143,11 +173,12 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
               <m.button
                 className={clsx(
                   'absolute inset-y-1 right-1 rounded-full outline-none',
-                  'h-[30px] min-w-16 px-6',
+                  'h-[30px] px-1.5',
+                  classNames.submitButton,
                   'text-black-new transition-colors duration-200',
                   formState === FORM_STATES.ERROR
                     ? 'bg-secondary-1/50'
-                    : 'bg-green-45 hover:bg-[#00FFAA]'
+                    : 'bg-white hover:bg-gray-new-90'
                 )}
                 type="submit"
                 initial="initial"
@@ -225,7 +256,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
           </span>
         )}
       </form>
-      <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />
+      <GradientBorder className="hidden dark:block" withBlend />
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Content from 'components/shared/content';
 import DocFooter from 'components/shared/doc-footer';
 
 const contentClassName =
-  'col-span-6 col-start-4 w-full max-w-[704px] 2xl:col-span-7 2xl:col-start-3 2xl:max-w-none xl:col-span-12 xl:col-start-1 xl:mx-auto xl:max-w-[704px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto';
+  'col-span-6 col-start-4 w-full max-w-[704px] 2xl:col-span-7 2xl:col-start-3 2xl:max-w-[704px] xl:col-span-12 xl:col-start-1 xl:mx-auto xl:max-w-[704px] lg:ml-0 lg:max-w-none lg:pt-0 md:mx-auto';
 
 const Post = ({ data: { title, subtitle, updatedOn = null }, content, currentSlug }) => (
   <div className={clsx(contentClassName, 'ml-7')}>
@@ -18,7 +18,7 @@ const Post = ({ data: { title, subtitle, updatedOn = null }, content, currentSlu
       </p>
     )}
     <div className={clsx(contentClassName, 'mt-16 md:pb-[70px] sm:mt-10 sm:pb-8')}>
-      <Content content={content} isTemplate />
+      <Content content={content} isTemplate={false} />
       <DocFooter updatedOn={updatedOn} slug={currentSlug} />
     </div>
   </div>

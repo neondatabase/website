@@ -49,7 +49,7 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
         ))}
       </div>
       {/* Code block container */}
-      <div className="overflow-hidden rounded-lg border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10 [&_.code-block]:my-0">
+      <div className="overflow-hidden border border-gray-new-90 bg-gray-new-98 dark:border-gray-new-20 dark:bg-gray-new-10 [&_.code-block]:my-0">
         {displayedChildren.map((child, index) => {
           if (index !== currentIndex) return null;
           return <Fragment key={index}>{child}</Fragment>;

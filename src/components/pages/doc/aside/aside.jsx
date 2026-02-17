@@ -18,13 +18,12 @@ const Aside = ({
   author,
 }) => {
   const authorPagePath = author ? `${GUIDES_BASE_PATH}authors/${author.slug}` : null;
-
   return (
     <div
       className={clsx(
-        'relative col-span-2 -ml-6 w-full max-w-64 xl:hidden',
+        'relative -ml-6 w-full max-w-64 xl:hidden',
         isTemplate
-          ? 'col-span-2 col-start-11 -ml-6 max-w-64 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto 2xl:max-w-[238px]'
+          ? 'col-span-2 col-start-11 -ml-6 w-64 min-w-64 max-w-64 justify-self-end 2xl:col-start-10 2xl:ml-auto'
           : '',
         className
       )}
@@ -94,6 +93,8 @@ const Aside = ({
           </div>
         )}
       </div>
+
+      {isTemplate && <ChangelogForm className="mt-12" isSidebar />}
     </div>
   );
 };

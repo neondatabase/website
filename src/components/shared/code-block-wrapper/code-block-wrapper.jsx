@@ -63,7 +63,7 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="flex items-center justify-between gap-3 border-b border-gray-new-90 bg-gray-new-98 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-60">
+        <div className="bg-grey-15 flex items-center justify-between gap-3 border-b border-gray-new-90 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
           <span className="truncate">{filename}</span>
         </div>
       )}
@@ -71,8 +71,8 @@ const CodeBlockWrapper = ({
 
       <button
         className={clsx(
-          'invisible absolute right-2 rounded border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-gray-3 dark:bg-gray-new-10 dark:text-gray-8 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
-          filename ? 'top-[50px]' : 'top-2',
+          'invisible absolute right-4 border border-gray-7 bg-gray-9 p-1.5  text-gray-new-80 opacity-0 transition-[background-color,opacity,visibility] duration-200 hover:bg-white group-hover:visible group-hover:opacity-100 dark:border-[#303236] dark:bg-gray-new-10 dark:text-gray-new-60 dark:hover:bg-gray-new-8 lg:visible lg:opacity-100',
+          filename ? 'top-[58px]' : 'top-4',
           copyButtonClassName
         )}
         type="button"
@@ -81,9 +81,9 @@ const CodeBlockWrapper = ({
         onClick={handleCopyWithTracking}
       >
         {isCopied ? (
-          <CheckIcon className="h-4 w-4 text-current" />
+          <CheckIcon className="h-3.5 w-3.5 text-current" />
         ) : (
-          <CopyIcon className="text-current" />
+          <CopyIcon className="h-3.5 w-3.5 text-current" />
         )}
       </button>
     </Tag>

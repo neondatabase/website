@@ -9,7 +9,7 @@ const LogosSection = ({ logos, logosTitle = 'Powered by Neon.', containerClassNa
   return (
     <div
       className={clsx(
-        'mx-auto flex max-w-3xl items-center gap-10 md:flex-col md:gap-6',
+        'mx-auto my-3.5 flex max-w-3xl items-center gap-10 md:flex-col md:gap-6',
         containerClassName
       )}
     >

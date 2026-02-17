@@ -36,6 +36,7 @@ const Post = ({
     updatedOn = null,
     layout = null,
     contentLayout = null,
+    postClassName = null,
   },
   content,
   breadcrumbs,
@@ -50,6 +51,7 @@ const Post = ({
   gitHubPath,
   tableOfContents,
   author,
+  className = 'max-w-[704px] lg:max-w-none',
 }) => {
   const modal = MODALS.find(
     (modal) =>
@@ -65,7 +67,13 @@ const Post = ({
 
   return (
     <>
-      <div className={clsx('min-w-0 pb-32 lg:pb-24 md:pb-20', isWideLayout && 'max-w-none')}>
+      <div
+        className={clsx(
+          'min-w-0 pb-32 lg:pb-24 md:pb-20',
+          isWideLayout && 'max-w-none',
+          className || postClassName
+        )}
+      >
         {breadcrumbs?.length > 0 && (
           <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
         )}
@@ -134,6 +142,7 @@ Post.propTypes = {
     updatedOn: PropTypes.string,
     layout: PropTypes.oneOf(['wide', null]),
     contentLayout: PropTypes.oneOf(['split', null]),
+    postClassName: PropTypes.string,
   }).isRequired,
   content: PropTypes.string.isRequired,
   breadcrumbs: PropTypes.arrayOf(PropTypes.shape({})),
@@ -166,6 +175,7 @@ Post.propTypes = {
     }),
     photo: PropTypes.string,
   }),
+  className: PropTypes.string,
 };
 
 export default Post;
