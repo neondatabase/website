@@ -1,8 +1,12 @@
 ---
 title: Connect a SolidStart application to Neon
 subtitle: Set up a Neon project in seconds and connect from a SolidStart application
+summary: >-
+  Step-by-step guide for connecting a SolidStart application to a Neon project,
+  including project creation, dependency installation, and configuration of
+  connection settings for secure server-side requests.
 enableTableOfContents: true
-updatedOn: '2026-01-13T15:38:46.685Z'
+updatedOn: '2026-02-06T22:07:33.053Z'
 ---
 
 <CopyPrompt src="/prompts/solidstart-prompt.md"

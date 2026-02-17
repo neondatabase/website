@@ -200,7 +200,11 @@ For instructions on editing your hosts file on different operating systems, see 
 
 <TabItem>
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -218,7 +222,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    </CodeTabs>
 
-2. **Configure the connection**
+3. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -259,7 +263,11 @@ For instructions on editing your hosts file on different operating systems, see 
 </TabItem>
 <TabItem>
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -277,7 +285,7 @@ For instructions on editing your hosts file on different operating systems, see 
 
    </CodeTabs>
 
-2. **Configure the connection**
+3. **Configure the connection**
 
    ```typescript
    import { neon, neonConfig, Pool } from '@neondatabase/serverless';
@@ -320,7 +328,7 @@ For instructions on editing your hosts file on different operating systems, see 
    export const drizzleClientWs = drizzleWs({ client: pool });
    ```
 
-3. **Migration setup**
+4. **Migration setup**
 
    To ensure your Drizzle migrations run smoothly and without errors in your development environment, you can install the `postgres` package as a development dependency.
 
@@ -346,7 +354,11 @@ For instructions on editing your hosts file on different operating systems, see 
 
 Note that Driver Adapters are still in preview for Prisma. Please refer to the [Prisma documentation](https://www.prisma.io/docs/orm/overview/databases/neon) for the latest information.
 
-1. Install Dependencies
+1. **Set your environment**
+
+   The following code expects `NODE_ENV` to be set to `development` during local development. Verify that your environment is configured accordingly. Alternatively, you can modify the code to use an explicit connection string for each environment instead of relying solely on `NODE_ENV`.
+
+2. **Install Dependencies**
 
    <CodeTabs labels={["npm", "yarn", "pnpm"]}>
 
@@ -364,7 +376,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
 
    </CodeTabs>
 
-2. **Enable the Preview Flag**
+3. **Enable the Preview Flag**
 
    To use the Neon serverless driver with Prisma, enable the preview flag in your `schema.prisma` file.
 
@@ -375,7 +387,7 @@ Note that Driver Adapters are still in preview for Prisma. Please refer to the [
      }
    ```
 
-3. **Configure the connection**
+4. **Configure the connection**
 
    ```typescript
    import { neonConfig } from '@neondatabase/serverless';

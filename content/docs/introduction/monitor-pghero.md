@@ -1,8 +1,12 @@
 ---
 title: Monitor Neon with PgHero
 subtitle: Monitor your Neon Postgres database with PgHero
+summary: >-
+  How to install and connect PgHero to monitor your Neon Postgres database,
+  enabling the identification of long-running queries, vacuuming needs, and
+  indexing issues through a user-friendly dashboard interface.
 enableTableOfContents: true
-updatedOn: '2025-01-17T00:00:00.000Z'
+updatedOn: '2026-02-06T22:07:33.093Z'
 ---
 
 [PgHero](https://github.com/pghero/pghero) is an open-source performance tool for Postgres that can help you find and fix data issues, using a dashboard interface.

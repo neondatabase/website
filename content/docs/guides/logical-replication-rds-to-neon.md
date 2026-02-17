@@ -1,9 +1,13 @@
 ---
 title: Replicate data from Amazon RDS Postgres
 subtitle: Learn how to replicate data from Amazon RDS Postgres to Neon
+summary: >-
+  Covers the setup of logical replication from Amazon RDS PostgreSQL to Neon,
+  including prerequisites, enabling logical replication, and preparing the
+  source database for data migration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.283Z'
+updatedOn: '2026-02-06T22:07:33.016Z'
 ---
 
 <MigrationAssistant/>
@@ -111,7 +115,7 @@ This section describes how to prepare your source Neon Postgres database (the su
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/migrate-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 

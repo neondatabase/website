@@ -1,8 +1,12 @@
 ---
 title: Getting started with Neon Data API
 subtitle: Learn how to enable and use the Neon Data API
+summary: >-
+  How to enable the Neon Data API for your database, create a table with
+  Row-Level Security (RLS), and execute your first query, including optional
+  authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.616Z'
+updatedOn: '2026-02-15T20:51:54.072Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -88,18 +92,18 @@ The Data API interacts directly with your Postgres schema. Because the API is ac
 
 In this example, we'll create a `posts` table where users can read published posts and manage their own posts securely. **Choose the approach that matches how you manage your database schema:**
 
-- **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started-with-neon/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
-- **Drizzle (crudPolicy)**: A high-level helper that generates all four CRUD policies (select, insert, update, delete) in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
-- **Drizzle (pgPolicy)**: Define individual policies for each operation. Use this when you need different logic for different operations (e.g., time-limited updates, different rules for INSERT vs UPDATE).
+- **SQL**: Write SQL directly in the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or manage migrations manually. See our [PostgreSQL RLS tutorial](/postgresql/postgresql-administration/postgresql-row-level-security) for more on RLS fundamentals.
+- **Drizzle (crudPolicy)**: A high-level helper that generates RLS policies in one declaration. Best for simple cases where read and modify permissions follow the same pattern.
+- **Drizzle (pgPolicy)**: Define policies per operation or use a single `FOR ALL` policy. Use this when you need different logic for different operations (for example, time-limited updates, different rules for INSERT vs UPDATE).
 
 For more on Drizzle RLS, see our [Drizzle RLS guide](/docs/guides/rls-drizzle).
 
 <CodeTabs labels={["SQL", "Drizzle (crudPolicy)", "Drizzle (pgPolicy)"]}>
 
 ```sql
--- This script creates a posts table, enables RLS, and defines four policies:
--- one allows authenticated users to read published posts or their own posts,
--- and the other three let users insert, update, and delete only their own posts.
+-- This script creates a posts table, enables RLS, and defines two policies:
+-- one allows authenticated users to read published posts, and the other
+-- gives users full access (read, insert, update, delete) to their own posts.
 
 -- 1. Create the table
 CREATE TABLE posts (
@@ -113,35 +117,22 @@ CREATE TABLE posts (
 -- 2. Enable RLS
 ALTER TABLE posts ENABLE ROW LEVEL SECURITY;
 
--- 3. Create Policy: Users can see all published posts and their own posts
-CREATE POLICY "Public read access" ON posts
-  AS PERMISSIVE
-  FOR SELECT TO authenticated
-  USING (is_published OR (select auth.user_id() = "posts"."user_id"));
+-- 3. Read published posts
+CREATE POLICY read_published_posts ON posts
+FOR SELECT TO authenticated
+USING (is_published = true);
 
--- 4. Create Policy: Users can insert their own posts
-CREATE POLICY "Users can insert their own posts" ON posts
-  AS PERMISSIVE
-  FOR INSERT TO "authenticated"
-  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
-
--- 5. Create Policy: Users can update their own posts
-CREATE POLICY "Users can update their own posts" ON posts
-  AS PERMISSIVE
-  FOR UPDATE TO "authenticated"
-  USING ((select auth.user_id() = "posts"."user_id"))
-  WITH CHECK ((select auth.user_id() = "posts"."user_id"));
-
-CREATE POLICY "Users can delete their own posts" ON posts
-  AS PERMISSIVE
-  FOR DELETE TO "authenticated"
-  USING ((select auth.user_id() = "posts"."user_id"));
+-- 4. Full access to own posts
+CREATE POLICY manage_own_posts ON posts
+FOR ALL TO authenticated
+USING (auth.user_id() = user_id)
+WITH CHECK (auth.user_id() = user_id);
 ```
 
 ```typescript
-// This schema defines the same posts table using Drizzle ORM. The crudPolicy helper
-// generates all four RLS policies (select, insert, update, delete) in a single declaration:
-// `read` controls who can view posts, and `modify` controls who can insert, update, or delete them.
+// This schema defines the same two-policy behavior using Drizzle ORM. The crudPolicy
+// helper generates equivalent RLS: `read` allows published posts or own posts,
+// and `modify` restricts insert, update, and delete to own posts.
 
 import { sql } from 'drizzle-orm';
 import { crudPolicy, authenticatedRole, authUid } from 'drizzle-orm/neon';
@@ -159,20 +150,18 @@ export const posts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    // Policy for authenticated users
     crudPolicy({
       role: authenticatedRole,
-      read: sql`is_published OR (select auth.user_id() = ${table.userId})`, // Can read published posts or their own posts
-      modify: authUid(table.userId), // Can only modify their own posts
+      read: sql`is_published OR (auth.user_id() = ${table.userId})`,
+      modify: authUid(table.userId),
     }),
   ]
 );
 ```
 
 ```typescript
-// This schema defines the same posts table using Drizzle ORM with individual pgPolicy
-// declarations for each operation. This approach gives you fine-grained control when
-// you need different logic for select, insert, update, and delete.
+// This schema defines the same two-policy behavior using Drizzle ORM with pgPolicy.
+// One policy allows reading published posts; the other gives full access to own posts.
 
 import { sql } from 'drizzle-orm';
 import { authenticatedRole, authUid } from 'drizzle-orm/neon';
@@ -190,27 +179,16 @@ export const posts = pgTable(
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [
-    // Authenticated users
-    pgPolicy('Allow authenticated users to read published posts and their own posts', {
+    pgPolicy('read_published_posts', {
       to: authenticatedRole,
       for: 'select',
-      using: sql`is_published OR (select auth.user_id() = ${table.userId})`,
+      using: sql`is_published = true`,
     }),
-    pgPolicy('Allow authenticated users to insert their own posts', {
+    pgPolicy('manage_own_posts', {
       to: authenticatedRole,
-      for: 'insert',
-      withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to update their own posts', {
-      to: authenticatedRole,
-      for: 'update',
+      for: 'all',
       using: authUid(table.userId),
       withCheck: authUid(table.userId),
-    }),
-    pgPolicy('Allow authenticated users to delete their own posts', {
-      to: authenticatedRole,
-      for: 'delete',
-      using: authUid(table.userId),
     }),
   ]
 );
@@ -331,9 +309,9 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **Where to get the JWT token:**
 
-- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
+- **Neon Auth (manual testing)**: Use the Auth API reference UI (navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`) to sign in and get a token. See [Testing with Postman or cURL](#testing-with-postman-or-curl) below.
 - **Neon Auth (programmatic)**: Retrieve the token using `client.auth.getSession()` from the `@neondatabase/neon-js` library. See [Get current session](/docs/reference/javascript-sdk#auth-getsession) for details.
-- **Other providers**: Retrieve the token from your auth provider's SDK (e.g., `getAccessToken()` in Auth0, `getToken()` in Clerk).
+- **Other providers**: Retrieve the token from your auth provider's SDK (for example, `getAccessToken()` in Auth0, `getToken()` in Clerk).
 
 **About the `sub` claim:**
 
@@ -372,7 +350,7 @@ If you're using Neon Auth and want to test the Data API without building an appl
 This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
 </Admonition>
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
 
 2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
 
@@ -447,8 +425,8 @@ For the complete list of methods and detailed examples, see the [Neon Auth & Dat
 
 ## Next steps
 
-- [Build a note-taking app](/docs/data-api/demo) — Hands-on tutorial with Data API queries
-- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk) — All database methods: select, insert, update, delete, filters, and more
-- [Generate TypeScript types](/docs/data-api/generate-types) — Get autocomplete for table names and columns
-- [SQL to REST Converter](/docs/data-api/sql-to-rest) — Convert SQL queries to API calls
-- [Row-Level Security with Neon](/docs/guides/row-level-security) — Secure your data at the database level
+- [Build a note-taking app](/docs/data-api/demo): Hands-on tutorial with Data API queries
+- [Neon Auth & Data API TypeScript SDKs](/docs/reference/javascript-sdk): All database methods: select, insert, update, delete, filters, and more
+- [Generate TypeScript types](/docs/data-api/generate-types): Get autocomplete for table names and columns
+- [SQL to REST Converter](/docs/data-api/sql-to-rest): Convert SQL queries to API calls
+- [Row-Level Security with Neon](/docs/guides/row-level-security): Secure your data at the database level

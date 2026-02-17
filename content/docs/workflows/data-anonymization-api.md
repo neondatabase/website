@@ -1,8 +1,12 @@
 ---
 title: Data anonymization API reference
 subtitle: API endpoints for managing anonymized branches and masking rules
+summary: >-
+  Covers the API endpoints for creating anonymized branches and managing masking
+  rules using PostgreSQL Anonymizer, enabling users to handle sensitive data
+  effectively within Neon.
 enableTableOfContents: true
-updatedOn: '2026-01-13T19:28:54.348Z'
+updatedOn: '2026-02-15T20:51:54.278Z'
 ---
 
 This page provides detailed API documentation for data anonymization. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).
@@ -26,8 +30,8 @@ Creates a new branch with anonymized data using PostgreSQL Anonymizer for static
   - `schema_name`: Target schema (typically `public`)
   - `table_name`: Table containing sensitive data
   - `column_name`: Column to mask
-  - `masking_function` (optional): Dynamic PostgreSQL expression (e.g., `anon.fake_email()` or `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`). Use for realistic test data. You can combine `pg_catalog.*` functions with PostgreSQL Anonymizer functions for custom expressions. Mutually exclusive with `masking_value`.
-  - `masking_value` (optional): Static literal value (e.g., `'REDACTED'`, `0`, `NULL`). Use for simple redaction. Mutually exclusive with `masking_function`.
+  - `masking_function` (optional): Dynamic PostgreSQL expression (for example, `anon.fake_email()` or `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`). Use for realistic test data. You can combine `pg_catalog.*` functions with PostgreSQL Anonymizer functions for custom expressions. Mutually exclusive with `masking_value`.
+  - `masking_value` (optional): Static literal value (for example, `'REDACTED'`, `0`, `NULL`). Use for simple redaction. Mutually exclusive with `masking_function`.
 - `start_anonymization` (optional): Set to `true` to automatically start anonymization after creation
 
 **Example request:**

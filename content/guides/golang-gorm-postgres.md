@@ -227,7 +227,7 @@ When you run this code, GORM will:
 
 The `AutoMigrate` function works by comparing your Go struct definitions to the actual database schema and making necessary changes to align them. It accepts a list of model struct pointers and returns an error if something goes wrong.
 
-Note that `AutoMigrate` only adds things that are missing—it won't delete columns or tables that exist in the database but not in your models. This is a safety feature to prevent accidental data loss.
+Note that `AutoMigrate` only adds things that are missing; it won't delete columns or tables that exist in the database but not in your models. This is a safety feature to prevent accidental data loss.
 
 This will create the necessary tables if they don't exist and update them to match your model definitions.
 

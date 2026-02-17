@@ -1,8 +1,12 @@
 ---
 title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
+summary: >-
+  Covers the setup of AI context rules for Neon, including installation
+  instructions for the Claude Code plugin and individual context rule files for
+  other AI tools, enhancing code suggestions and reducing errors.
 enableTableOfContents: true
-updatedOn: '2026-01-22T15:48:50.614Z'
+updatedOn: '2026-02-15T20:51:54.033Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI assistants understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
@@ -25,7 +29,7 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 
 ## Individual AI rules
 
-For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
+For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory; the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 

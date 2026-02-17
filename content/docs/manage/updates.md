@@ -1,11 +1,15 @@
 ---
 title: Updates
+summary: >-
+  Covers the process for applying updates to Neon computes and Postgres
+  instances, including scheduling options, types of updates, and handling brief
+  connection drops during the update process.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-19T17:01:24.239Z'
+updatedOn: '2026-02-15T20:51:54.243Z'
 ---
 
-To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window — a specific day and hour for updates.
+To keep your Neon [computes](/docs/reference/glossary#compute) and Postgres instances up to date with the latest patches and features, Neon applies updates to your project's computes. We notify you of updates in advance so that you can plan for them if necessary. On Neon's paid plans, you can select an update window (a specific day and hour for updates).
 
 Neon briefly restarts a compute to apply an update. The entire process takes just a few seconds, minimizing any potential disruption.
 
@@ -33,7 +37,7 @@ Neon applies updates to computes based on the following rules:
 
 - Computes that have been active for 30 days or more receive updates.
 - Computes that are restarted receive available updates immediately.
-- Computes in a transition state (e.g., shutting down or restarting) at the time of an update are not updated.
+- Computes in a transition state (for example, shutting down or restarting) at the time of an update are not updated.
 - Computes larger than 8 CU or that can scale past 8 CU are not updated automatically. See [Updating large computes](#updating-large-computes).
 
 If a compute is excluded from an update, Neon will apply the missed update with the next update, assuming the compute meets the update criteria mentioned above.
@@ -169,7 +173,7 @@ If your application or integration uses the [Neon API](https://api-docs.neon.tec
 
 ## See also
 
-- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres) — Best practices for handling connection drops with retry logic, connection pooling, and idempotency
-- [Connection latency and timeouts](/docs/connect/connection-latency) — Strategies for managing connection latencies and timeouts
+- [Building resilient applications with Postgres](/guides/building-resilient-applications-with-postgres): Best practices for handling connection drops with retry logic, connection pooling, and idempotency
+- [Connection latency and timeouts](/docs/connect/connection-latency): Strategies for managing connection latencies and timeouts
 
 <NeedHelp/>

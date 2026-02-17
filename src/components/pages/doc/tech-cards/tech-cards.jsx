@@ -1,3 +1,5 @@
+'use client';
+
 /* eslint-disable @next/next/no-img-element */
 import clsx from 'clsx';
 import NextLink from 'next/link';
@@ -6,6 +8,7 @@ import React from 'react';
 
 import ICONS_CONFIG from 'config/docs-icons-config';
 import { DOCS_BASE_PATH } from 'constants/docs';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import TechCardsWrapper from './tech-cards-wrapper';
 
@@ -34,6 +37,7 @@ const TechCards = ({ children = null, withToggler = false }) => (
             href={href}
             target={isExternal ? '_blank' : undefined}
             rel={isExternal ? 'noopener noreferrer' : undefined}
+            onClick={() => sendGtagEvent('Link Clicked', { text: title, tag_name: 'TechCard' })}
           >
             <div className="relative z-10">
               <img

@@ -2,8 +2,12 @@
 title: The pg_tiktoken extension
 subtitle: Efficiently tokenize data in your Postgres database using OpenAI's `tiktoken`
   library
+summary: >-
+  Covers the installation and usage of the `pg_tiktoken` extension for efficient
+  tokenization of data in Postgres databases using OpenAI's `tiktoken` library,
+  including functions for encoding and counting tokens.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.240Z'
+updatedOn: '2026-02-15T20:51:54.091Z'
 ---
 
 The `pg_tiktoken` extension enables fast and efficient tokenization of data in your Postgres database using OpenAI's [tiktoken](https://github.com/openai/tiktoken) library.
@@ -119,7 +123,7 @@ VALUES ('user', 'Hello, how are you?', tiktoken_count('text-davinci-003','Hello,
 
 ## Manage text tokens
 
-When a conversation contains more tokens than a model can process (e.g., over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
+When a conversation contains more tokens than a model can process (for example, over 4096 tokens for `gpt-3.5-turbo`), you will need to truncate the text to fit within the model's limit.
 
 Additionally, lengthy conversations may result in incomplete replies. For example, if a `gpt-3.5-turbo` conversation spans 4090 tokens, the response will be limited to just six tokens.
 

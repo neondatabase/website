@@ -70,6 +70,7 @@ const DocCta = ({
         className="px-6 py-3 font-semibold leading-none md:mt-4"
         to={buttonUrl}
         theme="primary"
+        tagName="DocsCTA"
       >
         {buttonText}
       </Button>

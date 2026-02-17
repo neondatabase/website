@@ -1,8 +1,11 @@
 ---
 title: 'AI Rules: Neon with Drizzle'
 subtitle: Context rules for AI tools to help implement Drizzle ORM with Neon databases
+summary: >-
+  Covers the implementation of Drizzle ORM with Neon databases, including
+  context rules for AI tools to enhance the integration process.
 enableTableOfContents: true
-updatedOn: '2025-10-10T13:19:39.262Z'
+updatedOn: '2026-02-06T22:07:32.723Z'
 ---
 
 <Admonition type="note" title="AI Rules are in Beta">

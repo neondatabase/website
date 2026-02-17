@@ -1,8 +1,12 @@
 ---
 title: The neon_utils extension
 subtitle: Monitor how Neon's Autoscaling feature allocates compute resources
+summary: >-
+  Covers the installation and usage of the `neon_utils` extension, specifically
+  the `num_cpus()` function for monitoring CPU resource allocation by Neon's
+  Autoscaling feature in response to workload changes.
 enableTableOfContents: true
-updatedOn: '2025-12-03T13:07:33.022Z'
+updatedOn: '2026-02-15T20:51:54.079Z'
 ---
 
 The `neon_utils` extension provides a `num_cpus()` function you can use to monitor how Neon's _Autoscaling_ feature allocates CPU resources in response to workload. The function returns the current number of allocated CPU cores.
@@ -21,7 +25,7 @@ For information about using the Neon **SQL Editor**, see [Query with Neon's SQL 
 
 ## Use the `num_cpus()` function
 
-In Neon, computing capacity is measured in _Compute Units (CU)_. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources — for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. A Neon compute can have anywhere from .25 to 56 CU, but _Autoscaling_ is only supported up to 16 CU.
+In Neon, computing capacity is measured in _Compute Units (CU)_. Each CU allocates approximately 4 GB of RAM, along with associated CPU and local SSD resources; for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. A Neon compute can have anywhere from .25 to 56 CU, but _Autoscaling_ is only supported up to 16 CU.
 
 Defining a minimum and maximum compute size for your compute, as shown below, enables autoscaling.
 

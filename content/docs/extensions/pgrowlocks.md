@@ -1,8 +1,12 @@
 ---
 title: The pgrowlocks extension
 subtitle: Display row-level locking information for a specific table in Postgres
+summary: >-
+  Covers the setup and usage of the `pgrowlocks` extension to inspect active
+  row-level locks on a specified table in Postgres, aiding in diagnosing lock
+  contention and performance issues.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.244Z'
+updatedOn: '2026-02-15T20:51:54.094Z'
 ---
 
 The `pgrowlocks` extension provides a function to inspect active row-level locks for a specified table within your Postgres database. This is invaluable for diagnosing lock contention issues, understanding which specific rows are currently locked, and identifying the transactions or processes holding these locks. By offering a detailed, real-time view of row locks, `pgrowlocks` helps developers and database administrators troubleshoot performance bottlenecks related to concurrent data access.
@@ -37,7 +41,7 @@ Key columns in the output include:
 
 - `locked_row` (`tid`): The Tuple ID (physical location) of the locked row.
 - `locker` (`xid`): The Transaction ID (or Multixact ID if `multi` is true) of the transaction holding the lock
-- `multi` (`boolean`): True if `locker` is a Multixact ID (indicating multiple transactions might be involved, e.g., for shared locks).
+- `multi` (`boolean`): True if `locker` is a Multixact ID (indicating multiple transactions might be involved, for example, for shared locks).
 - `xids` (`xid[]`): An array of Transaction IDs that are holding locks on this specific row. This is particularly informative when `multi` is true.
 - `modes` (`text[]`): An array listing the lock modes held by the corresponding `xids` on the row. Common modes include `For Key Share`, `For Share`, `For No Key Update`, `For Update`, and `Update`.
 - `pids` (`integer[]`): An array of Process IDs (PIDs) of the backend database sessions holding the locks. This helps identify the specific connections.
@@ -63,7 +67,7 @@ Now, to create some row locks, you would typically use multiple database session
 
 **Scenario setup (to be performed in separate `psql` sessions or database connections):**
 
-1.  **In Session 1:** Start a transaction and update Alice's account (e.g., her balance), but do not commit. This will place an exclusive lock on Alice's row.
+1.  **In Session 1:** Start a transaction and update Alice's account (for example, her balance), but do not commit. This will place an exclusive lock on Alice's row.
 
     ```sql
     -- In Session 1
@@ -182,7 +186,7 @@ This output provides a comprehensive view of the locking situation, including th
 ## Important considerations and limitations
 
 - **Lock acquisition**: `pgrowlocks` takes an `AccessShareLock` on the target table to read its rows.
-- **Blocking**: If an `ACCESS EXCLUSIVE` lock is held on the table (e.g., by an `ALTER TABLE` operation), `pgrowlocks` will be blocked until that exclusive lock is released.
+- **Blocking**: If an `ACCESS EXCLUSIVE` lock is held on the table (for example, by an `ALTER TABLE` operation), `pgrowlocks` will be blocked until that exclusive lock is released.
 - **Performance**: `pgrowlocks` reads each row of the table to check for locks. This can be slow and resource-intensive on very large tables.
 
 ## Conclusion

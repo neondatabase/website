@@ -1,8 +1,12 @@
 ---
 title: Claimable database integration guide
 subtitle: Manage Neon projects for users with the project database claim API
+summary: >-
+  Covers the setup of Neon projects for users through the project database claim
+  API, detailing the process of creating, transferring, and claiming Postgres
+  databases.
 enableTableOfContents: true
-updatedOn: '2025-11-17T20:56:53.511Z'
+updatedOn: '2026-02-15T20:51:54.278Z'
 ---
 
 ## Overview
@@ -223,7 +227,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 
 - **Connection persistence**: Database connection strings remain valid after transfer
 - **Organization transfers**: Users must be members of the target organization
-- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (e.g., `org-cool-breeze-12345678`)
+- **Organization ID format**: `org-[descriptive-term]-[numeric-id]` (for example, `org-cool-breeze-12345678`)
 - **Vercel organization limitation**: Projects cannot be claimed into Vercel organizations
 
 ## Example use cases

@@ -1,9 +1,13 @@
 ---
 title: Replicate Data with Estuary Flow
 subtitle: Learn how to replicate data from Neon with Estuary Flow
+summary: >-
+  How to replicate data from a Neon Postgres database to external destinations
+  using Estuary Flow by configuring a Postgres source connector for real-time
+  data streaming and optional transformations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-11-07T12:28:56.610Z'
+updatedOn: '2026-02-15T20:51:54.168Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -66,7 +70,7 @@ To create a role in the Neon Console:
 4. Select the branch where you want to create the role.
 5. Select the **Roles & Databases** tab.
 6. Click **Add Role**.
-7. In the role creation dialog, specify a role name (e.g., `cdc_role`).
+7. In the role creation dialog, specify a role name (for example, `cdc_role`).
 8. Click **Create**. The role is created, and you are provided with the password for the role.
 
 </TabItem>

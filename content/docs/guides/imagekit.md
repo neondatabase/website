@@ -1,8 +1,11 @@
 ---
 title: Media storage with ImageKit.io
 subtitle: Store files via ImageKit.io and track metadata in Neon
+summary: >-
+  Step-by-step guide for integrating ImageKit.io with Neon to upload media files
+  directly from the client-side and store their metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.273Z'
+updatedOn: '2026-02-15T20:51:54.164Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
@@ -51,7 +54,7 @@ Note that these policies apply _only_ to the metadata in Neon. Access control fo
 
 ## Upload files to ImageKit.io and store metadata in Neon
 
-The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (e.g., a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Neon.
+The recommended approach for client-side uploads is to generate secure **authentication parameters** on your backend. The client (for example, a web browser) uses these parameters, along with your public API key, to upload the file directly to ImageKit's Upload API. After a successful upload, the client sends the returned metadata (like `fileId` and `url`) back to your backend to be saved in Neon.
 
 This requires two backend endpoints:
 
@@ -178,7 +181,7 @@ Create a `.env` file with your credentials:
 # ImageKit.io Credentials
 IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
 IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
-IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint # e.g., https://ik.imagekit.io/your_instance_id
+IMAGEKIT_URL_ENDPOINT=your_imagekit_url_endpoint # for example, https://ik.imagekit.io/your_instance_id
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string

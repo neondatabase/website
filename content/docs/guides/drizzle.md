@@ -1,8 +1,12 @@
 ---
 title: Connect from Drizzle to Neon
 subtitle: Learn how to connect to Neon from Drizzle
+summary: >-
+  How to connect a TypeScript/Node.js application to a Neon Postgres database
+  using Drizzle ORM, including configuration for migrations and driver
+  connections.
 enableTableOfContents: true
-updatedOn: '2025-11-05T19:50:31.418Z'
+updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -78,7 +82,7 @@ Install Drizzle ORM, Drizzle Kit for migrations, and your preferred database dri
 
 <TabItem>
 
-Use the Neon serverless HTTP driver for serverless environments (e.g., Vercel, Netlify).
+Use the Neon serverless HTTP driver for serverless environments (for example, Vercel, Netlify).
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
@@ -89,7 +93,7 @@ npm install -D drizzle-kit
 
 <TabItem>
 
-Use the Neon WebSocket driver for long-running applications that require a persistent connection (e.g., a standard Node.js server).
+Use the Neon WebSocket driver for long-running applications that require a persistent connection (for example, a standard Node.js server).
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless ws dotenv

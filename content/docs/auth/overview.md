@@ -1,8 +1,12 @@
 ---
 title: Neon Auth
 subtitle: Managed authentication that branches with your database
+summary: >-
+  Covers the setup of Neon Auth, a managed authentication service that
+  integrates with your Neon database, allowing for branch-aware authentication
+  and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-01-21T23:10:35.115Z'
+updatedOn: '2026-02-15T20:51:54.045Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -34,7 +38,7 @@ Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to s
   All authentication data is stored in the `neon_auth` schema. It's queryable with SQL and compatible with Row Level Security (RLS) policies.
 
 - **Zero server management**  
-  Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [SDK](/docs/reference/javascript-sdk) in your app. No infrastructure to maintain.
+  Neon Auth runs as a managed REST API service. Configure settings in the Console; use the [client SDK](/docs/reference/javascript-sdk) or [server SDK](/docs/auth/reference/nextjs-server) in your app. No infrastructure to maintain.
 
 - **Auth that branches with your data**  
   Test sign-up, login, password reset, and OAuth flows in isolated branches without touching production data.
@@ -49,14 +53,14 @@ Neon Auth currently supports Better Auth version **1.4.6**.
 
 Neon Auth is a managed authentication service that integrates seamlessly with Neon's architecture and offerings:
 
-- **Branch-aware authentication** — Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
-- **Built-in Data API integration** — JWT token validation for the Data API has native support for Neon Auth.
-- **No infrastructure to manage** — Neon Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
-- **Shared OAuth credentials for testing** — Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
+- **Branch-aware authentication**: Every Neon branch gets its own isolated auth environment, so you can test authentication features without affecting your production branch.
+- **Built-in Data API integration**: JWT token validation for the Data API has native support for Neon Auth.
+- **No infrastructure to manage**: Neon Auth is deployed in the same region as your database, reducing latency without requiring you to run auth infrastructure.
+- **Shared OAuth credentials for testing**: Get started quickly with out-of-the-box Google OAuth credentials, eliminating the setup complexity for testing and prototyping.
 
 Self-hosting Better Auth makes sense if you need:
 
-- Flexibility in auth configuration—custom plugins, hooks, and options not yet supported by Neon Auth.
+- Flexibility in auth configuration: custom plugins, hooks, and options not yet supported by Neon Auth.
 - Full control over your auth code and the ability to run it inside your own infrastructure.
 
 For more details on the SDK differences between `@neondatabase/auth` and `better-auth/client`, see [Why use @neondatabase/auth over better-auth/client](https://github.com/neondatabase/neon-js/blob/main/packages/auth/neon-auth_vs_better-auth.md).
@@ -65,7 +69,30 @@ As Neon Auth evolves, more Better Auth integrations and features will be added. 
 
 ## Basic usage
 
-Enable Auth in your Neon project, then add authentication to your app:
+Enable Auth in your Neon project, then add authentication to your app.
+
+**For Next.js (server-side):**
+
+See the [Next.js Server SDK reference](/docs/auth/reference/nextjs-server) for complete API documentation.
+
+```typescript filename="lib/auth/server.ts"
+import { createNeonAuth } from '@neondatabase/auth/next/server';
+
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: { secret: process.env.NEON_AUTH_COOKIE_SECRET! },
+});
+```
+
+```typescript filename="app/api/auth/[...path]/route.ts"
+import { auth } from '@/lib/auth/server';
+
+export const { GET, POST } = auth.handler();
+```
+
+**For React/Vite (client-side):**
+
+See the [Client SDK reference](/docs/reference/javascript-sdk) for complete API documentation.
 
 ```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';

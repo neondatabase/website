@@ -1,13 +1,17 @@
 ---
 title: The pg_uuidv7 extension
 subtitle: Generate and manage time-ordered version 7 UUIDs in Postgres
+summary: >-
+  Covers the setup and usage of the `pg_uuidv7` extension in Postgres for
+  generating and managing time-ordered version 7 UUIDs, enhancing database
+  performance through improved indexing and data locality.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.241Z'
+updatedOn: '2026-02-15T20:51:54.092Z'
 ---
 
 The `pg_uuidv7` extension allows you to generate and work with version 7 Universally Unique Identifiers (UUIDs) in Postgres. UUIDv7 is a newer UUID format designed to be time-ordered and sortable, which offers significant benefits for database performance, especially when used as primary keys or in time-series data.
 
-Unlike traditional random UUIDs (like Version 4), UUIDv7 embeds a Unix timestamp in its leading bits, followed by random bits. This structure ensures that newly generated UUIDs are roughly sequential, which is highly beneficial for database indexing (e.g., B-trees) and can improve data locality, leading to faster queries and insertions.
+Unlike traditional random UUIDs (like Version 4), UUIDv7 embeds a Unix timestamp in its leading bits, followed by random bits. This structure ensures that newly generated UUIDs are roughly sequential, which is highly beneficial for database indexing (for example, B-trees) and can improve data locality, leading to faster queries and insertions.
 
 <CTA />
 
@@ -52,7 +56,7 @@ This function converts a given `TIMESTAMPTZ` value into a version 7 UUID. It tak
 1. `ts TIMESTAMPTZ`: The timestamp to embed in the UUID.
 2. `zero_random_bits BOOLEAN` (optional, defaults to `false`):
    - If `false` (default), the random bits portion of the UUID will be filled with new random data. This is useful for creating a UUID tied to a specific past or future time but still unique.
-   - If `true`, the random bits portion of the UUID will be set to all zeros. This is particularly useful for creating boundary UUIDs for time-range queries (e.g., the earliest possible UUID for a given timestamp).
+   - If `true`, the random bits portion of the UUID will be set to all zeros. This is particularly useful for creating boundary UUIDs for time-range queries (for example, the earliest possible UUID for a given timestamp).
 
 #### Generating a UUID for a specific timestamp with random bits
 
@@ -88,7 +92,7 @@ Example output (random part will be fixed):
 
 Using version 7 UUIDs in your database schema can provide several advantages over traditional UUIDs, especially in scenarios where time-based ordering is important. Here are some key benefits:
 
-1.  **Improved Indexing performance:** Because UUIDv7s are time-ordered, new entries are typically inserted towards the end of an index (e.g., a B-tree index on a UUIDv7 primary key). This leads to better data locality, reduced page splits, and less index fragmentation compared to random UUIDs (like v4). This can significantly boost insert performance and make range scans more efficient.
+1.  **Improved Indexing performance:** Because UUIDv7s are time-ordered, new entries are typically inserted towards the end of an index (for example, a B-tree index on a UUIDv7 primary key). This leads to better data locality, reduced page splits, and less index fragmentation compared to random UUIDs (like v4). This can significantly boost insert performance and make range scans more efficient.
 2.  **Natural sortability:** UUIDv7s can be sorted chronologically by their value, which is useful for ordering records by creation time without needing a separate timestamp column for this purpose.
 3.  **Distributed systems friendliness:** Like all UUIDs, v7 can be generated independently across multiple nodes without coordination, ensuring global uniqueness. The time-ordered property adds benefits for distributed databases that might later need to merge or sort data by generation time.
 

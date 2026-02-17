@@ -22,7 +22,7 @@ To follow this guide, you'll need:
 
 ## What is `pg_search`?
 
-The [`pg_search`](/docs/extensions/pg_search) extension adds full-text search capabilities to Postgres using the BM25 scoring algorithm—the same approach used by modern search engines. It offers:
+The [`pg_search`](/docs/extensions/pg_search) extension adds full-text search capabilities to Postgres using the BM25 scoring algorithm, the same approach used by modern search engines. It offers:
 
 - Fast and relevant search results
 - Easy integration with your existing database

@@ -2,8 +2,12 @@
 title: Manage billing
 subtitle: Invoices, payment methods, changing your plan, and other actions around
   managing your bill
+summary: >-
+  Covers the management of billing in Neon, including accessing the Billing
+  page, updating payment methods, downloading invoices, changing plans, and
+  account deletion.
 enableTableOfContents: true
-updatedOn: '2025-12-15T11:31:51.513Z'
+updatedOn: '2026-02-15T20:51:54.215Z'
 ---
 
 <InfoBlock>
@@ -54,7 +58,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ### Failing payments for Indian customers
 
-Neon’s billing system uses **Stripe Checkout**, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
+Neon’s billing system uses **Stripe Checkout**, which does not currently support **e-Mandates** (a requirement from the Reserve Bank of India) (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
 
 ## Update your billing email
 
@@ -97,10 +101,6 @@ If you find an issue with your invoice, you can request a refund. The request wi
 1. Find the invoice you want to request a refund for, and select **Request credit note** from the menu. Enter a problem description explaining the reason for the request.
 
 ## Change your plan
-
-<Admonition type="important">
-You cannot upgrade or downgrade to a [legacy plan](/docs/introduction/legacy-plans). If you're currently on a legacy plan, you can only upgrade or downgrade to one of the [current usage-based pricing plans](/docs/introduction/plans).
-</Admonition>
 
 <Admonition type="note" title="Restart required for new limits">
 If you're upgrading your plan, your compute will only pick up the new plan limits (such as max compute size and project storage) after the compute restarts. See [Restart a compute](/docs/manage/computes#restart-a-compute).

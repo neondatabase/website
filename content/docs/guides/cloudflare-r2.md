@@ -1,8 +1,12 @@
 ---
 title: File storage with Cloudflare R2
 subtitle: Store files via Cloudflare R2 and track metadata in Neon
+summary: >-
+  Step-by-step guide for integrating Cloudflare R2 with Neon to store files and
+  track metadata in your Neon database, utilizing R2's S3-compatible object
+  storage capabilities.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.267Z'
+updatedOn: '2026-02-15T20:51:54.143Z'
 ---
 
 [Cloudflare R2](https://www.cloudflare.com/en-in/developer-platform/products/r2/) is S3-compatible object storage offering zero egress fees, designed for storing and serving large amounts of unstructured data like images, videos, and documents globally.
@@ -22,11 +26,11 @@ This guide demonstrates how to integrate Cloudflare R2 with Neon by storing file
 
 1.  Sign up for or log in to your [Cloudflare account](https://dash.cloudflare.com/sign-up/r2).
 2.  Navigate to **R2** in the Cloudflare dashboard sidebar.
-3.  Click **Create bucket**, provide a unique bucket name (e.g., `my-neon-app-files`), and click **Create bucket**.
+3.  Click **Create bucket**, provide a unique bucket name (for example, `my-neon-app-files`), and click **Create bucket**.
     ![Create R2 Bucket](/docs/guides/cloudflare-r2-create-bucket.png)
 4.  Generate R2 API credentials (**Access Key ID** and **Secret Access Key**) by following [Create an R2 API Token](https://developers.cloudflare.com/r2/api/tokens/). Select **Object Read & Write** permissions. Copy these credentials securely.
 5.  Obtain your Cloudflare **Account ID** by following [Find your Account ID](https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/#find-your-account-id).
-6.  For this example, enable public access to your bucket URL by following [Allow public access to your bucket](https://developers.cloudflare.com/r2/buckets/public-buckets/#enable-managed-public-access). Note your bucket's public URL (e.g., `https://pub-xxxxxxxx.r2.dev`).
+6.  For this example, enable public access to your bucket URL by following [Allow public access to your bucket](https://developers.cloudflare.com/r2/buckets/public-buckets/#enable-managed-public-access). Note your bucket's public URL (for example, `https://pub-xxxxxxxx.r2.dev`).
 
     <Admonition type="note" title="Public access">
     Public access makes all objects readable via URL; consider private buckets and signed URLs for sensitive data in production.
@@ -400,7 +404,7 @@ Testing the presigned URL flow involves multiple steps:
 - The file is uploaded to your R2 bucket. You can verify this in the Cloudflare dashboard or by accessing the `publicFileUrl` if your bucket is public.
 - A new row appears in your `r2_files` table in Neon containing the `object_key` and `file_url`.
 
-You can now integrate API calls to these endpoints from various parts of your application (e.g., web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
+You can now integrate API calls to these endpoints from various parts of your application (for example, web clients using JavaScript's `fetch` API, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
@@ -429,7 +433,7 @@ WHERE
 
 - The query returns rows containing the file metadata stored in Neon.
 - The `file_url` column contains the direct link to access the file.
-- Use this `file_url` in your application (e.g., `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
+- Use this `file_url` in your application (for example, `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
 
     <Admonition type="note" title="Private buckets">
     For private R2 buckets, store only the `object_key` and generate presigned *read* URLs on demand using a similar backend process.

@@ -33,7 +33,7 @@ Let's break down the key components in this setup:
 
 You have two options for connecting Cursor to the Neon MCP Server:
 
-1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cursor. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+1. **Remote MCP Server:** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Cursor. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
 
 2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
@@ -106,10 +106,6 @@ This method uses Neon's managed server and OAuth authentication.
    ![Cursor with Neon MCP Tools](/docs/guides/cursor-with-neon-mcp-tools.png)
 
 7. Cursor is now connected to Neon's remote MCP server.
-
-<Admonition type="note">
-The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
-</Admonition>
 
 ### Option 2: Setting up the Local Neon MCP Server
 
@@ -330,7 +326,7 @@ Cursor will use the `create_branch` MCP tool to create the branch and provide yo
 
 ## Conclusion
 
-Cursor combined with the Neon MCP Server, whether using the **Remote Hosted (Preview)** option or the **Local Server** setup, lets you use natural language to interact with your database and take advantage of Neon's branching capabilities for fast iteration. This approach is ideal for quickly testing
+Cursor combined with the Neon MCP Server, whether using the **Remote Hosted** option or the **Local Server** setup, lets you use natural language to interact with your database and take advantage of Neon's branching capabilities for fast iteration. This approach is ideal for quickly testing
 database ideas and making schema changes during development.
 
 ## Resources

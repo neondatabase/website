@@ -1,8 +1,12 @@
 ---
 title: High Availability (HA) in Neon
 subtitle: Understanding Neon's approach to High Availability
+summary: >-
+  Covers the setup of high availability in Neon by detailing its unique
+  architecture that separates storage and compute, ensuring data redundancy and
+  compute resiliency across multiple Availability Zones.
 enableTableOfContents: true
-updatedOn: '2025-03-13T12:56:34.386Z'
+updatedOn: '2026-02-15T20:51:54.214Z'
 ---
 
 At Neon, our serverless architecture takes a different approach to high availability. Instead of maintaining idle standby compute replicas, we achieve multi-AZ resilience through our separation of storage and compute.
@@ -61,7 +65,7 @@ Our serverless architecture manages compute failures through rapid recovery and 
 
 ### Compute endpoints are ephemeral
 
-Your compute endpoint exists essentially as metadata — with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
+Your compute endpoint exists essentially as metadata, with your connection string being the core element. This design means endpoints can be instantly reassigned to new compute resources without changing your application's configuration. When you first connect, Neon assigns your endpoint to an available VM from our ready-to-use pool, eliminating traditional provisioning delays.
 
 ### Postgres failure
 

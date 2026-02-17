@@ -1,8 +1,12 @@
 ---
 title: Migrate to Neon Auth with Better Auth
 subtitle: Update from the legacy Stack Auth-based implementation
+summary: >-
+  Covers the code differences and necessary updates for migrating from legacy
+  Neon Auth (Stack Auth) to Neon Auth with Better Auth, including environment
+  variable changes and benefits of the new system.
 enableTableOfContents: true
-updatedOn: '2026-01-07T15:07:19.160Z'
+updatedOn: '2026-02-15T20:51:54.044Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -26,7 +30,7 @@ If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'
 
 - **Native Branching Support**
 
-  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration—perfect for preview environments and testing.
+  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration, perfect for preview environments and testing.
 
 - **Database as Source of Truth**
 
@@ -52,16 +56,17 @@ STACK_SECRET_SERVER_KEY=your-server-secret
 
 ```env filename=".env (after - Better Auth)"
 NEON_AUTH_BASE_URL=https://ep-xxx.neonauth.us-east-2.aws.neon.build/neondb/auth
+NEON_AUTH_COOKIE_SECRET=your-secret-at-least-32-characters-long
 ```
 
 <Admonition type="note">
-For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead of <code>NEON_AUTH_BASE_URL</code>.
+For React SPAs, use <code>VITE_NEON_AUTH_URL</code> instead. The <code>NEON_AUTH_COOKIE_SECRET</code> is only needed for Next.js (generate with <code>openssl rand -base64 32</code>).
 </Admonition>
 
 You can find your Auth URL in the Neon Console under **Auth** → **Configuration**.
 
 **What changed**  
-You replace multiple Stack Auth-specific keys with a single Better Auth URL that points at your Neon project.
+You replace multiple Stack Auth-specific keys with a single Better Auth URL that points at your Neon project. For Next.js, you also need a cookie secret for session caching.
 
 ## Next.js migration
 
@@ -94,23 +99,26 @@ export const stackServerApp = new StackServerApp({
 // ./lib/auth/client.ts
 'use client';
 import { createAuthClient } from '@neondatabase/auth/next';
-export const { useSession } = authClient;
 
 // to use in react client components
 export const authClient = createAuthClient();
 
 // ./lib/auth/server.ts
-import { createAuthServer } from '@neondatabase/auth/next/server';
+import { createNeonAuth } from '@neondatabase/auth/next/server';
 
-// to use in react server components
-export const authServer = createAuthServer();
+// to use in react server components, server actions, and API routes
+export const auth = createNeonAuth({
+  baseUrl: process.env.NEON_AUTH_BASE_URL!,
+  cookies: {
+    secret: process.env.NEON_AUTH_COOKIE_SECRET!,
+  },
+});
 ```
 
 </CodeTabs>
 
 **What changed**  
-You initialize the Neon Auth client with `createAuthClient` for client components and with `createAuthServer()` for react server components & server actions.
-The `@neondatabase/auth` module will read the auth url from `process.env.NEON_AUTH_BASE_URL` internally.
+You initialize the Neon Auth client with `createAuthClient` for client components and with `createNeonAuth()` for server-side auth. The unified `auth` instance provides `.handler()`, `.middleware()`, `.getSession()`, and all Better Auth server methods.
 
 ### Replace components (#nextjs-replace-components)
 
@@ -287,15 +295,15 @@ export default function Handler(props: any) {
 
 ```tsx
 // app/api/auth/[...path]/route.ts
-import { authApiHandler } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth/server';
 
-export const { GET, POST } = authApiHandler();
+export const { GET, POST } = auth.handler();
 ```
 
 </CodeTabs>
 
 **What changed**  
-You proxy Neon Auth APIs from your Next.js application. The `authAPIHandler` will forward all API requests to upstread Neon Auth server.
+You proxy Neon Auth APIs from your Next.js application. The `auth.handler()` method forwards all API requests to the Neon Auth server.
 
 ### Protect routes
 
@@ -335,9 +343,9 @@ You switch from hook-based redirects to declarative UI helpers that show content
 #### Middleware-based protection
 
 ```tsx filename="proxy.ts (new)"
-import { neonAuthMiddleware } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth/server';
 
-export default neonAuthMiddleware({
+export default auth.middleware({
   // Redirects unauthenticated users to sign-in page
   loginUrl: '/auth/sign-in',
 });
@@ -371,18 +379,21 @@ export default async function ServerComponent() {
 ```
 
 ```tsx
-import { neonAuth } from '@neondatabase/auth/next/server';
+import { auth } from '@/lib/auth/server';
+
+// Server components using auth methods must be rendered dynamically
+export const dynamic = 'force-dynamic';
 
 export default async function ServerComponent() {
-  const { session, user } = await neonAuth();
-  return <div>{user?.name || user?.email}</div>;
+  const { data: session } = await auth.getSession();
+  return <div>{session?.user?.name || session?.user?.email}</div>;
 }
 ```
 
 </CodeTabs>
 
 **What changed**  
-Server components now call `authClient.getSession()` and read the user from the returned session.
+Server components now call `auth.getSession()` and read the user from the returned session. Components using auth methods must set `dynamic = 'force-dynamic'`.
 
 ## React SPA migration
 

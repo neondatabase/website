@@ -1,11 +1,15 @@
 ---
 title: Connecting with the Vercel-Managed Integration
 subtitle: Create and manage Neon databases directly from your Vercel dashboard
+summary: >-
+  Covers the setup of the Vercel-Managed Integration for adding and managing
+  Neon Postgres databases within the Vercel dashboard, including installation,
+  billing management, and enabling automated Preview Branching.
 redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-01-13T14:45:42.240Z'
+updatedOn: '2026-02-15T20:51:54.203Z'
 ---
 
 <InfoBlock>
@@ -81,7 +85,7 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 3. Click **Connect**.
 
-<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, e.g. `PRIMARY_`.</Admonition>
+<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, for example `PRIMARY_`.</Admonition>
 
 ---
 

@@ -1,10 +1,14 @@
 ---
 title: Glossary
+summary: >-
+  Covers definitions and explanations of key terms related to Neon's services,
+  including access tokens, compute activity metrics, user roles, API
+  authentication, and resource management operations.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/glossary
   - /docs/cloud/concepts/
-updatedOn: '2026-01-15T23:54:00.616Z'
+updatedOn: '2026-02-15T20:51:54.260Z'
 ---
 
 ## access token
@@ -63,7 +67,7 @@ A branch created by a [instant restore](#branch-restore) operation. When you res
 
 ## branch
 
-An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles — everything that comprises data in a Postgres instance. Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
+An isolated copy of data, similar to a Git branch. Data includes databases, schemas, tables, records, indexes, roles (everything that comprises data in a Postgres instance). Just as a Git branch allows developers to work on separate features or fixes without impacting their main line of code, a Neon branch enables users to modify a copy of their data in isolation from their main line of data. This approach facilitates parallel database development, testing, and other features, similar to Git's code branching system.
 
 Each Neon project is created with a root branch, which also serves as the default branch. Projects created in the Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`.
 
@@ -86,7 +90,7 @@ A Neon feature that allows you to create an isolated copy of your data for paral
 
 ### Business plan
 
-A [legacy paid plan](/docs/introduction/legacy-plans) designed for mid-to-large enterprises that require higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans).
+A legacy paid plan (no longer available) that was designed for mid-to-large enterprises requiring higher compute capacity and advanced security and compliance features. See [Neon plans](/docs/introduction/plans) for current plan options.
 
 ## check_availability
 
@@ -102,7 +106,7 @@ Continuous integration and continuous delivery or continuous deployment.
 
 ## CIDR notation
 
-CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (e.g., 203.0.113.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
+CIDR (Classless Inter-Domain Routing) notation is a method used to define ranges of IP addresses in network management. It is presented in the format of an IP address, followed by a slash, and then a number (for example, 203.0.113.0/24). The number after the slash represents the size of the address block, providing a compact way to specify a large range of IP addresses. In Neon's IP Allow feature, CIDR notation allows for efficiently specifying a block of IP addresses, especially useful for larger networks or subnets. This can be advantageous when managing access to branches with numerous potential users, such as in a large development team or a company-wide network. For related information, see [Configure IP Allow](/docs/manage/projects#configure-ip-allow).
 
 ## cgroups
 
@@ -158,7 +162,7 @@ A string containing details for connecting to a Neon Postgres database. The deta
 postgresql://alex:AbC123dEf@ep-cool-darkness-123456.c-2.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (e.g., `c-2`) in the region slug to support scalability in Neon's high-demand regions.
+The compute hostname includes an `endpoint_id` (`ep-cool-darkness-123456`), a region slug (`c-2.us-east-2`), the cloud platform (`aws`), and Neon domain (`neon.tech`). Connection strings in some AWS regions may include a cell identifier (for example, `c-2`) in the region slug to support scalability in Neon's high-demand regions.
 
 Connection strings for a Neon databases can be obtained by clicking the **Connect** button on your **Project Dashboard**. For information about connecting to Neon, see [Connect from any application](/docs/connect/connect-from-any-app).
 
@@ -429,10 +433,7 @@ A feature in Neon that allows secure connections to Neon databases through AWS P
 
 A designation that is given to a [branch](#branch) in a Neon project. Each Neon project is initially created with a [root branch](#root-branch) (named `production` in the Console, `main` via API/CLI), which carries the _default branch_ designation by default.
 
-The default branch serves two key purposes:
-
-- The compute associated with the default branch is exempt from the [concurrently active compute limit](#concurrently-active-compute-limit), ensuring that it is always available.
-- The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) creates preview deployment branches from your Neon project's default branch.
+When creating a new branch without specifying the parent, a new branch is created from your project's default branch. The [Neon-Managed Vercel integration](/docs/guides/neon-managed-vercel-integration) also creates preview deployment branches from your project's default branch.
 
 You can change your default branch, but a branch carrying the default branch designation cannot be deleted.
 
@@ -555,7 +556,7 @@ A Neon feature that lets you compare database schemas between different branches
 
 ## Concurrently active compute limit
 
-This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default branch is exempt from this limit. The default limit is 20 concurrently active computes.
+This limit caps how many computes can run at the same time to prevent resource exhaustion. It protects against accidental surges, such as starting many endpoints at once. The default limit is 20 concurrently active computes.
 
 When you exceed the limit, additional computes beyond the limit will remain suspended and you will see an error when attempting to connect to them. You can suspend other active computes and try again. Alternatively, if you encounter this error often, you can reach out to [Support](/docs/introduction/support) to request a `max_active_endpoints` limit increase.
 

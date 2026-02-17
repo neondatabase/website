@@ -2,8 +2,12 @@
 title: The dict_int extension
 subtitle: Control how integers are indexed in Postgres Full-Text Search to improve
   performance and relevance.
+summary: >-
+  Covers the setup of the `dict_int` extension to optimize integer indexing in
+  Postgres Full-Text Search, enhancing search performance and relevance by
+  controlling how integers are tokenized and indexed.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.232Z'
+updatedOn: '2026-02-15T20:51:54.077Z'
 ---
 
 [Postgres Full-Text Search (FTS)](/postgresql/postgresql-indexes/postgresql-full-text-search) is a powerful tool for searching through textual data. However, when this data includes a significant number of integers like product IDs, serial numbers, or document codes, default FTS behavior can sometimes lead to inefficient indexes and slower search performance.
@@ -134,7 +138,7 @@ SELECT ts_lexize('intdict_for_testing', '987');       -- Result: {987} (within l
 For a custom integer dictionary to be used during indexing and searching, it must be associated with specific token types in a text search configuration.
 
 <Admonition type="important" title="Modifying default text search configurations on Neon">
-Altering default text search configurations (like `english`) requires superuser privileges on Neon. If you encounter an "ERROR: must be owner of text search configuration english", you will need to first **create a copy of an existing configuration** (e.g., `english`) and then modify your own copy.
+Altering default text search configurations (like `english`) requires superuser privileges on Neon. If you encounter an "ERROR: must be owner of text search configuration english", you will need to first **create a copy of an existing configuration** (for example, `english`) and then modify your own copy.
 </Admonition>
 
 Here's the recommended approach:
@@ -150,7 +154,7 @@ Here's the recommended approach:
     );
     ```
 
-2.  Create a copy of an existing text search configuration (e.g., `english`):
+2.  Create a copy of an existing text search configuration (for example, `english`):
 
     ```sql
     CREATE TEXT SEARCH CONFIGURATION public.my_app_search_config (COPY = pg_catalog.english);
@@ -268,7 +272,7 @@ WHERE version_tsv @@ to_tsquery('public.doc_search_config', '7654321');
 
 ## Limitations
 
-- **Integer-specific:** `dict_int` is designed for whole numbers (integers). It does not process floating-point numbers (e.g., `3.14159`). Standard FTS tokenizers will handle floating-point numbers, but `dict_int`'s logic won't apply to them.
+- **Integer-specific:** `dict_int` is designed for whole numbers (integers). It does not process floating-point numbers (for example, `3.14159`). Standard FTS tokenizers will handle floating-point numbers, but `dict_int`'s logic won't apply to them.
 - **Text representation:** It operates on the textual representation of numbers as tokenized by the FTS parser. If your column is of type `INTEGER` and you cast it to `TEXT` for `to_tsvector`, `dict_int` will then process that text.
 
 ## Conclusion

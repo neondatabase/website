@@ -1,8 +1,12 @@
 ---
 title: Docs contribution guide
 subtitle: Learn how to contribute to the Neon documentation
+summary: >-
+  Covers the guidelines for contributing to the Neon documentation, including
+  how to edit files on GitHub, submit pull requests, and utilize templates for
+  creating new guides.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.317Z'
+updatedOn: '2026-02-15T20:51:54.064Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -138,7 +142,7 @@ To add a subsection heading, equivalent to an `h3`, add another `#` character:
 ```
 
 - Try to avoid heading levels beyond h4 (`####`).
-- Do not skip a level, e.g., do not go from `##` to `####`.
+- Do not skip a level, for example, do not go from `##` to `####`.
 - Ensure there's a blank line before and after each heading.
 
 ## Common markup
@@ -400,6 +404,17 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 - `git clone` is a command that should be in lowercase, whereas Git is the product and should have a capital G.
 
 - "A connection string has this format: `postgresql://[user]:[password]@[neon_hostname]/[dbname]`"
+
+## Working with doc AI
+
+The Neon website repo includes rules and commands (in Cursor and Claude) to keep documentation consistent. You don't need to memorize them.
+
+- **Open the doc** you're editing so the right rules apply, then describe what you want in plain language.
+- **Optional:** You can ask for specific help (for example "check consistency on this page," "use our style examples," or "walk me through the redirect steps.").
+- **Curious what's available?** Ask: "What doc AI tools are available?" to see the list.
+- All changes go through a pull request and human review.
+
+For the full list of tools, see [AI tools for documentation](/docs/community/ai-tools).
 
 ## Additional Resources
 

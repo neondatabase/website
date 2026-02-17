@@ -68,6 +68,14 @@ The libraries installed include:
 
 Now, let's move on to setting up event triggers that will send notifications upon insertion of a row in a specific table.
 
+## Configure environment variables
+
+Create a `.env` file in the root directory of your project and add the following line, replacing `<your_connection_string>` with the connection string you saved earlier:
+
+```env
+DATABASE_URL=<your_connection_string>
+```
+
 ## Set up triggers
 
 To set up event triggers for a specific table (say `my_table`), you will define a trigger function called `my_trigger_function`. Create a file named `setup.js` with the following code:
@@ -212,6 +220,8 @@ node send.js
 
 <Admonition type="note" title="Note">
 By default, Neon scales to zero after 5 minutes of inactivity, which ends any running sessions. As a result, `NOTIFY` and `LISTEN` commands only persist for the duration of the current session and are lost when the session ends.
+
+If you need persistent listeners, you can [disable Neon's Scale to Zero](/docs/guides/scale-to-zero-guide#enable-or-disable-scale-to-zero) feature. In that case all [listeners are terminated](/docs/reference/compatibility#session-context), which may result in missed messages when the database restarts.
 </Admonition>
 
 ## Summary

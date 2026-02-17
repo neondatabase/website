@@ -1,0 +1,157 @@
+---
+description: Automated documentation review system for analyzing PRs across Neon repositories and identifying documentation updates needed
+alwaysApply: true
+tags: ["docs-review", "pr-analysis", "documentation"]
+---
+
+# Documentation PR Report Generator
+
+<!--
+This rule references both public and internal repositories If you are outside the organization and have this
+code: you should not expect to be able to run this report; the scripts require
+local clones of non-public repos.
+
+WHAT THIS TOOL DOES (for humans reading this file)
+
+This is an automated documentation review system for the Neon documentation team.
+
+PURPOSE:
+- Replaces manual weekly review of code changes across multiple repositories
+- Generates organized reports of merged PRs grouped by category/release component
+- Helps identify which PRs need documentation updates
+- Saves hours of manual work filtering through GitHub PRs and commits
+
+HOW IT WORKS:
+1. Monitors 14 Neon repositories
+2. Fetches recent merged PRs based on time window (default: since last Friday)
+3. Groups PRs by category tags, release component, or direct merges
+4. Adds documentation impact indicators (✅ ❓ ❌)
+5. Saves combined report locally to ~/docs-reviews/ with clickable GitHub PR links
+
+SETUP (in this repo):
+- Config: config/monitored-repos.json
+- Scripts: ./scripts/generate-docs-pr-report.sh, ./scripts/setup-repos.sh, ./scripts/check-docs-report-deps.sh
+- Run from repository root. Reports go to ~/docs-reviews/ (auto-created).
+-->
+
+This rule enables AI-powered generation of documentation PR reports from monitored repositories.
+
+## When to Activate
+
+Activate this rule when the user requests any of:
+
+- "run docs pr report"
+- "generate docs pr report"
+- "generate documentation report"
+- "show releases"
+- "create pr report"
+- "create a docs PR report"
+
+## Default Behavior
+
+**Always default to "since last Friday 00:00 UTC"** unless the user specifies a different time range.
+
+**Important:** All time calculations use **UTC** for consistency across global teams.
+
+## Time Range Parsing
+
+Parse time ranges from natural language:
+
+**Default (no time specified):** "run docs pr report" → Since last Friday 00:00 UTC
+
+**Relative times:** "for last 24 hours", "for last 12 hours", "for last hour", "for last 3 days"
+
+**Absolute dates:** "since January 20", "since 2026-01-20", "from January 20 to January 23"
+
+## Workflow (Docs PR Report)
+
+Run all commands from the **repository root** (website repo).
+
+1. **Parse the time range** from the user's request (default: last Friday).
+
+2. **Run the dependency checker:**
+   ```bash
+   ./scripts/check-docs-report-deps.sh
+   ```
+
+3. **If the checker fails (exit non-zero):**
+   - Show the checker output to the user.
+   - Summarize in plain language: what is missing (e.g. jq, git, config, or repos not cloned) and what you will do to set it up (e.g. run the setup script to clone missing repos; for jq or git they must install manually).
+   - **Ask:** "You don't have all the requirements yet. [Summary of what's missing.] I can run `./scripts/setup-repos.sh --yes` to clone missing repos now. For jq or git, install them first (e.g. `brew install jq`), then say 'create a docs PR report' again. Do you want to proceed with setup? (yes/no)"
+   - **If the user says yes or proceed:** Run `./scripts/setup-repos.sh --yes`. Then run `./scripts/check-docs-report-deps.sh` again. If it still fails (e.g. jq missing), tell them to install the missing tools and try "create a docs PR report" again. If it passes, go to step 4.
+   - **Do not run the report script** until the checker passes.
+
+4. **If the checker passes:** Run the report:
+   ```bash
+   ./scripts/generate-docs-pr-report.sh [parsed-time]
+   ```
+   Pass the time directly (e.g. "24 hours ago", "2026-01-20"), not with a --since= prefix. Then report the result (summary and file location) and open the report for the user.
+
+## Script Arguments (reference)
+
+```bash
+# Default (since last Friday)
+./scripts/generate-docs-pr-report.sh
+
+# Specific time ranges
+./scripts/generate-docs-pr-report.sh --since="24 hours ago"
+./scripts/generate-docs-pr-report.sh --since="2026-01-20"
+```
+
+## Output Location
+
+Reports are saved to: `~/docs-reviews/docs-pr-report-[timestamp].md`
+
+## PR Deep Dive Feature
+
+When the user wants to investigate a PR more deeply to determine documentation impact.
+
+### Activation Triggers
+
+- "review PR #[number]", "deep dive on PR #[number]", "investigate PR #[number]", "tell me more about PR #[number]", "analyze PR #[number]", "what's in PR #[number]"
+
+### Workflow
+
+**Step 1: Identify the repository**
+- **First:** Look at the last generated docs PR report in `~/docs-reviews/` (the most recent `docs-pr-report-*.md` file). Reports group PRs by repo (e.g. `## neon-cloud`, `## hadron`); search the report for the PR number (e.g. `#4369`) to see which repo section it appears in. Use that repo for `gh pr view` / `gh pr diff`.
+- If the PR number is not in the latest report, or the user specifies a repo, use that. Common repos: neon-cloud (databricks-eng), hadron (databricks-eng), neondatabase/website.
+- If still unclear, ask the user which repo the PR is in.
+
+**Step 2: Check GitHub CLI:** Run `gh auth status`. If not installed or not authenticated, tell them to run `brew install gh` (if needed) and `gh auth login`, then retry.
+
+**Step 3: Fetch PR details:**
+```bash
+gh pr view [PR-number] --repo [org]/[repo] --json title,body,author,labels,files
+gh pr diff [PR-number] --repo [org]/[repo]
+```
+
+**Step 4:** Present the structured analysis (Summary, Changes Overview, Key Technical Changes, Documentation Impact Assessment, Suggested Changelog Entry, Questions to Consider).
+
+**Step 5:** After the analysis, present the menu:
+- 1. Create documentation PR
+- 2. Add changelog entry
+- 3. Both
+- 4. Nothing (analysis only)
+
+Wait for user response before proceeding.
+
+## Documentation PR Workflow (when user picks 1 or 3)
+
+- Identify affected docs under `content/docs/` (ai/, auth/, guides/, manage/, introduction/, reference/).
+- Present a Documentation Update Plan (files to modify/create, navigation updates). Wait for approval.
+- Create branch `docs/pr-{PR_NUMBER}-{short-slug}`, make changes, run `npm run lint:md`, then `gh pr create --repo neondatabase/website` with title and body linking to the original PR.
+
+## Changelog Entry Workflow (when user picks 2 or 3)
+
+- Classify as major feature (H2 at top) or minor (bullet in `<details>`). Ask user preference if unclear.
+- Compute next Friday (America/New_York) per `.cursor/rules/neon-changelog.mdc`. Check for existing `content/changelog/YYYY-MM-DD.md` or open changelog PR.
+- Draft entry; present for approval. If new changelog file: create it with template; if exists: add H2 or bullet. Commit, push, create or update PR with `gh pr create` or `gh pr edit`.
+
+All paths for changelog and docs PRs are from repository root (e.g. `content/changelog/`, `content/docs/`).
+
+## Notes
+
+- Script automatically pulls all repos before generating report.
+- Only shows commits from actual releases (tags or release branches).
+- All PR numbers in the report are clickable links to GitHub.
+- Documentation PRs are separate from changelog PRs.

@@ -1,8 +1,12 @@
 ---
 title: Build a Python App with Reflex and Neon
 subtitle: Learn how to build a Python Full Stack application with Reflex and Neon
+summary: >-
+  Step-by-step guide for building a full-stack Python application using the
+  Reflex framework and connecting it to a Neon Postgres database, including
+  project setup and dependency management.
 enableTableOfContents: true
-updatedOn: '2025-10-31T11:07:57.607Z'
+updatedOn: '2026-02-06T22:07:33.041Z'
 ---
 
 <CopyPrompt src="/prompts/reflex-prompt.md"

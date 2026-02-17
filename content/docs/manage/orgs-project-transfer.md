@@ -1,7 +1,11 @@
 ---
 title: Transfer projects
+summary: >-
+  Covers the transfer of projects between organizations in Neon, detailing
+  methods for individual and bulk transfers through the Console and API, along
+  with necessary permissions and limitations.
 enableTableOfContents: true
-updatedOn: '2025-08-29T10:41:36.006Z'
+updatedOn: '2026-02-06T22:07:33.119Z'
 ---
 
 You can transfer your projects to any organization you are a member of. You can do this individually from project **Settings**, in bulk from organization **Settings**, or via the Neon API.

@@ -75,7 +75,6 @@ npm run check:broken-links -- https://neon.com  # Check for broken links
 
 Copy `.env.example` to `.env` and configure:
 
-- Algolia search credentials (required for blog pages)
 - See internal Notion page for values
 
 ## Content Guidelines

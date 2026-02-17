@@ -1,10 +1,14 @@
 ---
 title: Connecting with the Neon-Managed Integration
 subtitle: Link an existing Neon project to Vercel and keep billing in Neon
+summary: >-
+  How to connect an existing Neon project to Vercel, enabling isolated database
+  branches for each preview deployment while managing billing directly through
+  Neon.
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-01-13T14:45:42.236Z'
+updatedOn: '2026-02-15T20:51:54.176Z'
 ---
 
 <InfoBlock>
@@ -180,7 +184,7 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 **To customize which variables are used:**
 
 1. Go to **Neon Console → Integrations → Manage → Settings**
-2. Select the variables you want (e.g., `PGHOST`, `PGUSER`, etc.)
+2. Select the variables you want (for example, `PGHOST`, `PGUSER`, etc.)
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)

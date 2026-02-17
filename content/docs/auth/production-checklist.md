@@ -1,8 +1,12 @@
 ---
 title: Auth production checklist
 subtitle: Required configuration before launching with Neon Auth
+summary: >-
+  Step-by-step guide for configuring essential settings before launching an
+  application with Neon Auth, including trusted domains, custom email providers,
+  OAuth credentials, email verification, and security measures.
 enableTableOfContents: true
-updatedOn: '2025-11-30T00:00:00.000Z'
+updatedOn: '2026-02-15T20:51:54.048Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -43,7 +47,7 @@ In your project's **Settings** → **Auth** page, configure your email provider:
 
 1. Select **Custom SMTP provider**
 2. Enter your SMTP credentials:
-   - **Host**: Your SMTP server hostname (e.g., `smtp.gmail.com`)
+   - **Host**: Your SMTP server hostname (for example, `smtp.gmail.com`)
    - **Port**: SMTP port (typically `465` for SSL or `587` for TLS)
    - **Username**: Your SMTP username
    - **Password**: Your SMTP password or app-specific password

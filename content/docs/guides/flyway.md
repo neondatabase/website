@@ -1,8 +1,12 @@
 ---
 title: Get started with Flyway and Neon
 subtitle: Learn how to manage schema changes in Neon with Flyway
+summary: >-
+  Step-by-step guide for installing and configuring the Flyway command-line tool
+  to manage schema changes in a Neon database, including setting up the
+  connection and executing migrations.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.271Z'
+updatedOn: '2026-02-06T22:07:32.969Z'
 ---
 
 Flyway is a database migration tool that facilitates version control for databases. It allows developers to manage and track changes to the database schema, ensuring that the database evolves consistently across different environments.
@@ -12,7 +16,7 @@ This guide steps you through installing the Flyway command-line tool, configurin
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - A database. This guide uses the ready-to-use `neondb` database. You can create your own database if you like. See [Create a database](/docs/manage/databases#create-a-database) for instructions.
 
 ## Download and extract Flyway

@@ -1,9 +1,13 @@
 ---
 title: Backup & restore
 subtitle: Restore your branch from a point in time or snapshot
+summary: >-
+  Covers the process of using the Backup & Restore feature in Neon to instantly
+  restore branches to previous states, create and manage snapshots, and schedule
+  automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-01-06T10:43:28.875Z'
+updatedOn: '2026-02-15T20:51:54.134Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -147,7 +151,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -179,13 +183,13 @@ The parameters used in the example above:
 
 ## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals (daily, weekly, or monthly) to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
 <Tabs labels={["Console", "API"]}>
 
 <TabItem>
 
-To create or modify a backup schedule:
+To create a backup schedule:
 
 1. **Open the schedule editor**
 
@@ -196,10 +200,10 @@ To create or modify a backup schedule:
 2. **Select a schedule frequency**
 
    Choose from the following options:
-   - **No schedule** — Disables automated snapshots (default)
-   - **Daily** — Creates a snapshot every day at a specified time
-   - **Weekly** — Creates a snapshot on a specific day of the week
-   - **Monthly** — Creates a snapshot on a specific day of the month
+   - **No schedule**: Disables automated snapshots (default)
+   - **Daily**: Creates a snapshot every day at a specified time
+   - **Weekly**: Creates a snapshot on a specific day of the week
+   - **Monthly**: Creates a snapshot on a specific day of the month
 
    ![Schedule frequency options dropdown](/docs/guides/snapshot_schedule_menu.png)
 
@@ -209,19 +213,11 @@ To create or modify a backup schedule:
 
 Once configured, snapshots created by the backup schedule will appear on the **Backup & restore** page with a label indicating they were created automatically.
 
-### Snapshot retention
-
-Snapshots are automatically deleted after their retention period expires. You can adjust retention settings at any time by editing the schedule. Note that:
-
-- Shorter retention periods help manage snapshot limits on your plan
-- Deleted snapshots cannot be recovered
-- Manual snapshots are not affected by backup schedule retention settings
-
 </TabItem>
 
 <TabItem>
 
-You can view and update backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+You can view and set backup schedules for branches using the Neon API. For complete API documentation, refer to the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 **View backup schedule**
 
@@ -250,16 +246,26 @@ curl 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id
 }
 ```
 
-**Update backup schedule**
+**Set backup schedule**
 
-Updates the backup schedule configuration for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint. You can set daily, weekly, or monthly schedules with custom retention periods.
+Set the backup schedule for a branch using the [Update backup schedule](https://api-docs.neon.tech/reference/setsnapshotschedule) endpoint.
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/backup_schedule
 ```
 
+The request body must include a `schedule` array. Each item in the array can specify:
+
+- `frequency` (required): `hourly`, `daily`, `weekly`, `monthly`, or `yearly`
+- `hour` (optional): Hour of the day (0–23) to take the snapshot
+- `day` (optional): Day of the week or month (1–31) to take the snapshot
+- `month` (optional): Month of the year (1–12) to take the snapshot
+- `retention_seconds` (optional): How long to keep the snapshot before it is automatically deleted (minimum 3600). If not set, the snapshot is kept indefinitely.
+
+**Example: set a daily schedule**
+
 ```bash shouldWrap
-curl -X PUT 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule' \
+curl -X PUT "https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule" \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -270,7 +276,52 @@ curl -X PUT 'https://console.neon.tech/api/v2/projects/<project_id>/branches/<br
         "retention_seconds": 604800
       }
     ]
-  }' | jq
+  }'
+```
+
+This example creates a daily snapshot at 23:00 (11:00 PM) UTC and keeps it for 7 days (604800 seconds).
+
+</TabItem>
+
+</Tabs>
+
+### Snapshot retention
+
+Snapshots are automatically deleted after their retention period expires. You can adjust retention settings at any time by editing the schedule. Note that:
+
+- Shorter retention periods help manage snapshot limits on your plan
+- Deleted snapshots cannot be recovered
+- Manual snapshots are not affected by backup schedule retention settings
+
+## Update backup schedules
+
+Change an existing backup schedule or turn it off.
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+From the **Backup & restore** page, click **Edit schedule** to open the **Edit backup schedule** modal. Change the frequency or schedule details, then click **Update schedule** to save.
+
+**To turn off a snapshot schedule:** Select **No schedule** from the dropdown in the **Edit backup schedule** modal, then click **Update schedule**. No snapshots will be created until you set a schedule again.
+
+![Edit backup schedule modal](/docs/guides/edit_backup_schedule_modal.png)
+
+</TabItem>
+
+<TabItem>
+
+To update a backup schedule via API, use the same PUT endpoint and request format as for creating a schedule. See [Create backup schedules](#create-backup-schedules) for the endpoint, request body parameters, and example.
+
+**To turn off a backup schedule:** Send a PUT request with an empty `schedule` array in the request body:
+
+```bash shouldWrap
+curl -X PUT "https://console.neon.tech/api/v2/projects/<project_id>/branches/<branch_id>/backup_schedule" \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "schedule": []
+  }'
 ```
 
 </TabItem>
@@ -329,7 +380,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/sna
 Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation — no need to change the connection details in your application.
+- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application.
 - `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
 
 <Admonition type="note">

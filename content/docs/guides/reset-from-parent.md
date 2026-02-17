@@ -1,8 +1,12 @@
 ---
 title: Reset from parent
 subtitle: Learn how to reset a branch from its parent
+summary: >-
+  Covers the process of resetting a branch in Neon to match the latest schema
+  and data from its parent branch, allowing for quick updates and
+  synchronization without preserving local changes.
 enableTableOfContents: true
-updatedOn: '2026-01-06T10:43:28.879Z'
+updatedOn: '2026-02-06T22:07:33.042Z'
 ---
 
 Neon's **Reset from parent** feature lets you instantly reset all databases on a branch to the latest schema and data from its parent branch, helping you recover from issues, start on new feature development, or keep the different branches in your environment in sync.
@@ -102,7 +106,7 @@ curl --request POST \
 '
 ```
 
-For details, see [Instant restore using the API](/docs/guides/branch-restore#how-to-use-branch-restore)
+For details, see [Instant restore using the API](/docs/introduction/branch-restore#how-to-use-instant-restore)
 
 </TabItem>
 

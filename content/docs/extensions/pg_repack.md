@@ -1,8 +1,12 @@
 ---
 title: The pg_repack extension
 subtitle: Remove bloat from your tables and indexes with minimal locking
+summary: >-
+  Covers the setup and usage of the `pg_repack` extension in Neon to efficiently
+  remove bloat from tables and indexes, enhancing database performance with
+  minimal locking during the process.
 enableTableOfContents: true
-updatedOn: '2025-12-11T15:40:49.857Z'
+updatedOn: '2026-02-15T20:51:54.087Z'
 ---
 
 Postgres, like any database system, can accumulate bloat over time due to frequent updates and deletes. Bloat refers to wasted space within your tables and indexes, which can lead to decreased query performance and increased storage usage. `pg_repack` is a powerful Postgres extension that allows you to efficiently remove this bloat by rewriting tables and indexes online, with minimal locking. Unlike `VACUUM FULL` or `CLUSTER`, `pg_repack` avoids exclusive locks, ensuring your applications remain available during the reorganization process.
@@ -83,7 +87,7 @@ Let's break down the key components:
 
 ### Reorganization options
 
-- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (e.g., `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
+- **`-t TABLE`, `--table=TABLE`**: Specifies the table to be reorganized. You can reorganize multiple tables by using this option multiple times (for example, `-t table1 -t table2`). By default, all eligible tables in the target databases are reorganized.
 - **`-I TABLE`, `--parent-table=TABLE`**: Reorganize both the specified table(s) and its inheritors.
 - **`-c SCHEMA`, `--schema=SCHEMA`**: Repacks all eligible tables within the specified schema(s).
 - **`-o COLUMNS [,...]`, `--order-by=COLUMNS [,...]`**: Reorders the table rows based on the specified column(s). This performs an online `CLUSTER`.
@@ -108,7 +112,7 @@ These options specify how `pg_repack` connects to your database. You can often o
 ### Generic options
 
 - **`-e`, `--echo`**: Prints the SQL commands executed by `pg_repack` to the terminal. Useful for debugging or understanding the process.
-- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (e.g., `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
+- **`-E LEVEL`, `--elevel=LEVEL`**: Sets the output message level (for example, `DEBUG`, `INFO`, `WARNING`, `ERROR`). Defaults to `INFO`.
 - `--help`: Displays help information about `pg_repack` and its options.
 - `--version`: Displays the version of `pg_repack`.
 

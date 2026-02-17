@@ -1,13 +1,20 @@
 ---
 title: Neon Auth roadmap
 subtitle: What's supported today and what's coming next
+summary: >-
+  Covers the current support status and future roadmap for Neon Auth, detailing
+  supported frameworks and upcoming features as it transitions out of beta.
 enableTableOfContents: true
-updatedOn: '2026-01-05T20:19:10.007Z'
+updatedOn: '2026-02-15T20:51:54.052Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
 Neon Auth is in active development. This page shows what's currently supported and what we're working on next.
+
+## General availability
+
+Neon Auth is targeting general availability this quarter. We're actively working on additional plugins and features to bring Neon Auth out of beta.
 
 ## Frameworks
 
@@ -28,7 +35,7 @@ Neon Auth is in active development. This page shows what's currently supported a
 | Other frameworks              | Based on demand |
 
 <Admonition type="note" title="Standalone architectures">
-Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
+Architectures where frontend and backend are separate deployments (for example, Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
 </Admonition>
 
 ## Better Auth plugins
@@ -52,6 +59,10 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | Plugin                                                            | Status          |
 | ----------------------------------------------------------------- | --------------- |
 | [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon  |
+| Webhook support (hook into different auth events)                 | 🔜 Coming soon  |
+| Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
+| MFA support                                                       | 🔜 Coming soon  |
+| Plugin customization (Organization, Admin)                        | 🔜 Coming soon  |
 | Other plugins                                                     | Based on demand |
 
 ## Let us know

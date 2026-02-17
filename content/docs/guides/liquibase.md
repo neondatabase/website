@@ -1,8 +1,12 @@
 ---
 title: Get started with Liquibase and Neon
 subtitle: Learn how to manage schema changes in Neon with Liquibase
+summary: >-
+  Step-by-step guide for installing and configuring Liquibase to manage database
+  schema changes in a Neon environment, including deployment and rollback
+  procedures.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.277Z'
+updatedOn: '2026-02-06T22:07:33.002Z'
 ---
 
 Liquibase is an open-source library for tracking, managing, and applying database schema changes. To learn more about Liquibase, refer to the [Liquibase documentation](https://docs.liquibase.com/home.html).
@@ -12,7 +16,7 @@ This guide steps you through installing the Liquibase CLI, configuring Liquibase
 ## Prerequisites
 
 - A Neon account. See [Sign up](/docs/get-started/signing-up).
-- A Neon project. See [Create your first project](/docs/get-started/setting-up-a-project).
+- A Neon project. See [Create your first project](/docs/get-started/signing-up).
 - Liquibase requires Java. For Liquibase Java requirements, see [Requirements](https://docs.liquibase.com/start/install/liquibase-requirements.html). To check if you have Java installed, run `java --version`, or `java -version` on macOS.
 
 ## Download and extract Liquibase

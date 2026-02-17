@@ -1,8 +1,12 @@
 ---
 title: Connect a Hono application to Neon
 subtitle: Set up a Neon project in seconds and connect from a Hono application
+summary: >-
+  Step-by-step guide for creating a Neon project and connecting it to a Hono
+  application, including setting up dependencies and configuring the Postgres
+  client for database access.
 enableTableOfContents: true
-updatedOn: '2025-10-24T12:48:41.460Z'
+updatedOn: '2026-02-15T20:51:54.164Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"
@@ -54,7 +58,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-In your Hono application (e.g., in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
+In your Hono application (for example, in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
 
 Here's how you can set up a simple route to query the database:
 

@@ -1,12 +1,13 @@
 # 💡 AI Prompt: Integrate a TypeScript/Node.js Project with Neon and Prisma ORM
 
-**Role:** You are an expert software agent responsible for configuring the current TypeScript/Node.js project to connect to a Neon Postgres database using Prisma ORM.
+**Role:** You are an expert software agent responsible for configuring the current TypeScript/Node.js project to connect to a Neon Postgres database using Prisma ORM with the Neon serverless driver.
 
-**Purpose:** To install the necessary packages, initialize a Prisma schema, configure the database connection for both application and migration workflows, define a sample schema, and provide a working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle.
+**Purpose:** To install the necessary packages, configure Prisma for both application and CLI workflows, define a sample schema, and provide a working script that demonstrates a full CRUD (Create, Read, Update, Delete) lifecycle.
 
 **Scope:**
 - Assumes the user is working within an existing Node.js project directory.
-- Assumes the user has a Neon project and access to its database connection string.
+- Assumes the user has a Neon project and access to its database connection strings.
+- Uses Prisma 7+ with the `@prisma/adapter-neon` driver adapter (GA since v6.16.0).
 
 ✅ Read and understand the entire instruction set before executing.
 
@@ -24,69 +25,68 @@ Identify the project's package manager (`npm`, `yarn`, `pnpm`, `bun`) and use it
     ```bash
     npm init -y
     ```
-2.  Install the Prisma CLI as a development dependency and the Prisma Client as a production dependency. `tsx` is included for running TypeScript files directly.
+2.  Install dependencies:
     ```bash
     # Production dependencies
-    npm install @prisma/client
+    npm install @prisma/client @prisma/adapter-neon dotenv
 
     # Development dependencies
     npm install -D prisma typescript tsx @types/node
     ```
-3.  Initialize the Prisma project, which creates a `prisma/schema.prisma` file and a `.env` file.
-    ```bash
-    npx prisma init
-    ```
 
-### 2. Select a Connection Method
+### 2. Initialize Prisma
 
-Ask the user to choose their preferred connection method. Explain the use cases to help them decide:
-
-1.  **Standard TCP Driver with Connection Pooling:** Recommended for long-running applications like traditional Node.js servers (e.g., Express.js, NestJS). It uses Neon's built-in PgBouncer for efficient connection management.
-2.  **Neon Serverless Driver:** Recommended for short-lived, serverless environments like Vercel Edge Functions, Cloudflare Workers, or AWS Lambda. It connects over HTTP, bypassing TCP connection limits in these environments.
-
----
-
-### 3. Configure Based on Selection
-
-Execute the appropriate configuration steps based on the user's choice.
-
-#### Option A: Standard TCP Driver (with Connection Pooling)
-
-1.  **Update `.env` File:**
-    Instruct the user to populate the `.env` file with the connection string from their Neon Console.
-    ```env title=".env"
-    # Get your connection string from the Neon Console
-    # Project -> Dashboard -> Connect
-    DATABASE_URL="postgresql://[user]:[password]@[neon_hostname]-pooler/[dbname]?sslmode=require&channel_binding=require"
-    ```
-
-2.  **Update `prisma/schema.prisma`:**
-    Ensure the `datasource` block is configured to use the environment variable.
-    ```prisma title="prisma/schema.prisma"
-    datasource db {
-      provider = "postgresql"
-      url      = env("DATABASE_URL")
-    }
-    ```
-
-#### Option B: Neon Serverless Driver
-
-**Install Additional Dependency:**
-Install the Prisma adapter for Neon.
 ```bash
-npm install @prisma/adapter-neon
+npx prisma init
 ```
 
-Configure `.env` file and `prisma/schema.prisma` using the same steps outlined for the Standard TCP Driver.
+This creates a `prisma/schema.prisma` file and a `.env` file.
 
----
+### 3. Configure Environment Variables
 
-### 4. Define a Sample Schema
+Update the `.env` file with both connection strings from the Neon Console:
 
-Update the `prisma/schema.prisma` file with a sample `User` model. This schema is identical for both connection methods.
+```env title=".env"
+# Pooled connection for your application (note the -pooler suffix in hostname)
+# Get this from Neon Console -> Connect -> Connection string (pooled)
+DATABASE_URL="postgresql://[user]:[password]@[endpoint]-pooler.[region].aws.neon.tech/[dbname]?sslmode=require"
+
+# Direct connection for Prisma CLI (migrations, db push, introspection)
+# Get this from Neon Console -> Connect -> Connection string (direct)
+DIRECT_URL="postgresql://[user]:[password]@[endpoint].[region].aws.neon.tech/[dbname]?sslmode=require"
+```
+
+**Important:** The pooled URL has `-pooler` in the hostname. The direct URL does not.
+
+### 4. Configure prisma.config.ts
+
+Create a `prisma.config.ts` file in the project root. This is required for Prisma 7+ to configure the CLI:
+
+```typescript title="prisma.config.ts"
+import 'dotenv/config'
+import { defineConfig, env } from 'prisma/config'
+
+export default defineConfig({
+  schema: 'prisma/schema.prisma',
+  datasource: {
+    url: env('DIRECT_URL'),
+  },
+})
+```
+
+### 5. Update Prisma Schema
+
+Update `prisma/schema.prisma`. **Important:** In Prisma 7+, do NOT include a `url` property in the datasource block:
 
 ```prisma title="prisma/schema.prisma"
-// This section is added below the datasource and generator blocks
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
 
 model User {
   id        Int      @id @default(autoincrement())
@@ -96,116 +96,84 @@ model User {
 }
 ```
 
-### 5. Create CRUD Example Script
+### 6. Create Prisma Client with Neon Adapter
 
-Create a `main.ts` file in the project root. The content of this file **depends on the connection method selected in step 2**.
+Create `src/db.ts` to instantiate Prisma Client with the Neon serverless driver:
 
-#### For Standard TCP Driver
-```typescript title="main.ts"
-import { PrismaClient } from './generated/prisma';
+```typescript title="src/db.ts"
+import 'dotenv/config'
+import { PrismaClient } from './generated/prisma'
+import { PrismaNeon } from '@prisma/adapter-neon'
 
-const prisma = new PrismaClient();
+const adapter = new PrismaNeon({ 
+  connectionString: process.env.DATABASE_URL! 
+})
 
-async function main() {
-  try {
-    console.log('🚀 Performing CRUD operations...');
-
-    // CREATE
-    const newUser = await prisma.user.create({
-      data: { name: 'Alice', email: `alice-${Date.now()}@prisma.io` },
-    });
-    console.log('✅ CREATE: New user created:', newUser);
-
-    // READ
-    const foundUser = await prisma.user.findUnique({ where: { id: newUser.id } });
-    console.log('✅ READ: Found user:', foundUser);
-
-    // UPDATE
-    const updatedUser = await prisma.user.update({
-      where: { id: newUser.id },
-      data: { name: 'Alice Smith' },
-    });
-    console.log('✅ UPDATE: User updated:', updatedUser);
-
-    // DELETE
-    await prisma.user.delete({ where: { id: newUser.id } });
-    console.log('✅ DELETE: User deleted.');
-
-    console.log('\nCRUD operations completed successfully.');
-  } catch (error) {
-    console.error('❌ Error performing CRUD operations:', error);
-    process.exit(1);
-  } finally {
-    await prisma.$disconnect();
-  }
-}
-
-main();
+export const prisma = new PrismaClient({ adapter })
 ```
 
-#### For Neon Serverless Driver
-```typescript title="main.ts"
-import 'dotenv/config';
-import { PrismaClient } from './generated/prisma';
-import { PrismaNeon } from '@prisma/adapter-neon';
+### 7. Create CRUD Example Script
 
-const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL! });
-const prisma = new PrismaClient({ adapter });
+Create `src/main.ts`:
+
+```typescript title="src/main.ts"
+import { prisma } from './db'
 
 async function main() {
-    try {
-        console.log('🚀 Performing CRUD operations...');
+  console.log('🚀 Performing CRUD operations...')
 
-        // CREATE
-        const newUser = await prisma.user.create({
-            data: { name: 'Alice', email: `alice-${Date.now()}@prisma.io` },
-        });
-        console.log('✅ CREATE: New user created:', newUser);
+  // CREATE
+  const newUser = await prisma.user.create({
+    data: { name: 'Alice', email: `alice-${Date.now()}@example.com` },
+  })
+  console.log('✅ CREATE: New user created:', newUser)
 
-        // READ
-        const foundUser = await prisma.user.findUnique({ where: { id: newUser.id } });
-        console.log('✅ READ: Found user:', foundUser);
+  // READ
+  const foundUser = await prisma.user.findUnique({ where: { id: newUser.id } })
+  console.log('✅ READ: Found user:', foundUser)
 
-        // UPDATE
-        const updatedUser = await prisma.user.update({
-            where: { id: newUser.id },
-            data: { name: 'Alice Smith' },
-        });
-        console.log('✅ UPDATE: User updated:', updatedUser);
+  // UPDATE
+  const updatedUser = await prisma.user.update({
+    where: { id: newUser.id },
+    data: { name: 'Alice Smith' },
+  })
+  console.log('✅ UPDATE: User updated:', updatedUser)
 
-        // DELETE
-        await prisma.user.delete({ where: { id: newUser.id } });
-        console.log('✅ DELETE: User deleted.');
+  // DELETE
+  await prisma.user.delete({ where: { id: newUser.id } })
+  console.log('✅ DELETE: User deleted.')
 
-        console.log('\nCRUD operations completed successfully.');
-    } catch (error) {
-        console.error('❌ Error performing CRUD operations:', error);
-        process.exit(1);
-    } finally {
-        await prisma.$disconnect();
-    }
+  console.log('\n🎉 CRUD operations completed successfully!')
 }
 
-main();
+main()
+  .catch((error) => {
+    console.error('❌ Error:', error)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })
 ```
+
 ---
 
 ## 🚀 Next Steps
 
 Once the setup is complete:
 
-1.  Verify the user has correctly set their `DATABASE_URL` in `.env`.
-2.  Generate the Prisma Client based on the schema:
+1.  Verify the user has correctly set both `DATABASE_URL` and `DIRECT_URL` in `.env`.
+2.  Generate the Prisma Client:
     ```bash
     npx prisma generate
     ```
-3.  Create and apply the initial migration to their Neon database:
+3.  Push the schema to the Neon database:
     ```bash
-    npx prisma migrate dev --name initialize_schema
+    npx prisma db push
     ```
-4.  Finally, run the example CRUD script:
+4.  Run the example CRUD script:
     ```bash
-    npx tsx main.ts
+    npx tsx src/main.ts
     ```
 5.  If successful, the output should show log messages for each C-R-U-D step.
 
@@ -214,10 +182,12 @@ Once the setup is complete:
 ## ✅ Validation Rules for AI
 
 Before suggesting code or making edits, ensure:
-- The `package.json` contains `prisma` (dev), `@prisma/client` (prod), and `tsx` (dev).
-- The `.env` file is present, and the connection string is loaded from `process.env`.
-- A sample `User` model exists in `schema.prisma`.
-- The `main.ts` script correctly imports `PrismaClient` from `./generated/prisma`.
+- The `package.json` contains `prisma` (dev), `@prisma/client` (prod), `@prisma/adapter-neon` (prod), and `tsx` (dev).
+- The `.env` file has both `DATABASE_URL` (pooled) and `DIRECT_URL` (direct).
+- The `prisma.config.ts` file exists and points to `DIRECT_URL`.
+- The `prisma/schema.prisma` does NOT have a `url` property in the datasource block.
+- The Prisma Client import uses the generated path: `./generated/prisma`.
+- The `PrismaNeon` adapter is instantiated with `{ connectionString: process.env.DATABASE_URL! }`.
 
 ---
 
@@ -226,3 +196,5 @@ Before suggesting code or making edits, ensure:
 - Do not hardcode credentials in any `.ts`, `.prisma`, or `.json` file.
 - Do not output the contents of the `.env` file or the user's connection string in any response.
 - **Do not import `PrismaClient` from `@prisma/client`. Always use the generated client path: `./generated/prisma`.**
+- **Do not include `url = env("DATABASE_URL")` in the datasource block for Prisma 7+.**
+- **Do not install `@neondatabase/serverless` or `ws` packages — they are not needed with `@prisma/adapter-neon`.**

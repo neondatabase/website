@@ -484,11 +484,15 @@
               items:
                 - title: Neon Auth & Data API TypeScript SDKs
                   slug: reference/javascript-sdk
+                - title: Next.js Server SDK
+                  slug: auth/reference/nextjs-server
                 - title: UI Components
                   slug: auth/reference/ui-components
 
             - section: Migration Guides
               items:
+                - title: From Neon Auth SDK v0.1
+                  slug: auth/migrate/from-auth-v0.1
                 - title: From Stack Auth (legacy)
                   slug: auth/migrate/from-legacy-auth
                 - title: From Supabase
@@ -939,6 +943,8 @@
                   slug: manage/organizations
                 - title: Manage Organizations
                   slug: manage/orgs-manage
+                - title: Add members by domain
+                  slug: manage/orgs-add-members-by-domain
                 - title: Transfer projects
                   slug: manage/orgs-project-transfer
                 - title: Organizations API
@@ -1015,9 +1021,15 @@
           items:
             - title: Production checklist
               slug: get-started/production-checklist
-            - title: Backups
+            - title: Backup & restore
               slug: manage/backups
               items:
+                - title: Backup & restore
+                  slug: guides/backup-restore
+                - title: Restore window
+                  slug: introduction/restore-window
+                - title: Instant restore
+                  slug: introduction/branch-restore
                 - title: Overview
                   slug: manage/backups
                 - title: Backup with pg_dump
@@ -1051,8 +1063,6 @@
           slug: introduction/plans
         - title: Agent plan
           slug: introduction/agent-plan
-        - title: Legacy plans
-          slug: introduction/legacy-plans
         - title: Manage billing
           slug: introduction/manage-billing
         - title: Monitor billing
@@ -1063,8 +1073,6 @@
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace
           slug: introduction/billing-azure-marketplace
-        - title: Enterprise sales process
-          slug: introduction/enterprise-sales-process
 
     - title: Neon on Azure
       icon: azure
@@ -1391,6 +1399,8 @@
           slug: community/component-icon-guide
         - title: Component architecture
           slug: community/component-architecture
+        - title: AI tools for documentation
+          slug: community/ai-tools
     - title: Glossary
       slug: reference/glossary
       icon: glossary

@@ -1,8 +1,12 @@
 ---
 title: Connect an Encore application to Neon
 subtitle: Set up a Neon project in seconds and connect from an Encore.ts application
+summary: >-
+  Step-by-step guide for connecting an Encore application to Neon, including
+  installation, application creation, database schema definition, and API
+  endpoint setup for production deployments.
 enableTableOfContents: true
-updatedOn: '2025-12-17T22:36:32.013Z'
+updatedOn: '2026-02-15T20:51:54.152Z'
 ---
 
 [Encore](https://encore.dev) is a backend development framework that uses static analysis and type-safe primitives to provide automatic infrastructure provisioning, distributed tracing, and API documentation. This guide shows you how to use Neon with Encore for production deployments.
@@ -43,7 +47,7 @@ Create a new Encore application using the CLI.
 encore app create my-neon-app
 ```
 
-Select **TypeScript** as the language and choose the template that fits your needs (e.g., **URL Shortener** or **Empty app**).
+Select **TypeScript** as the language and choose the template that fits your needs (for example, **URL Shortener** or **Empty app**).
 
 Navigate to your app directory.
 
@@ -191,7 +195,7 @@ Encore will do the following.
 - Deploy your application
 - Configure all connections
 
-You can verify the database was created by checking your [Neon Console](https://console.neon.tech) — you'll see a new database created by Encore with your migrations applied.
+You can verify the database was created by checking your [Neon Console](https://console.neon.tech); you'll see a new database created by Encore with your migrations applied.
 
 > **Preview Environments with Neon Branching**
 >

@@ -1,8 +1,11 @@
 ---
 title: Branching with the Neon CLI
 subtitle: Learn how to create and delete branches with the Neon CLI
+summary: >-
+  Covers the creation, viewing, and deletion of branches using the Neon CLI,
+  including authentication methods and output format options.
 enableTableOfContents: true
-updatedOn: '2025-12-24T20:15:40.197Z'
+updatedOn: '2026-02-06T22:07:32.931Z'
 ---
 
 The examples in this guide demonstrate creating, viewing, and deleting branches using the Neon CLI. For other branch-related CLI commands, refer to [Neon CLI commands — branches](/docs/reference/cli-branches). This guide also describes how to use the `--api-key` option to authenticate CLI branching commands from the command line.
@@ -249,6 +252,6 @@ Backup branch
 └─────────────────────────┴────────────────────────────────┘
 ```
 
-For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/guides/branch-restore#how-to-use-branch-restore).
+For full details about the different restore options available with this command, see [Restoring using the CLI](/docs/introduction/branch-restore#how-to-use-instant-restore).
 
 <NeedHelp/>

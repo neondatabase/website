@@ -2,8 +2,12 @@
 title: Connect a JavaScript/Node.js application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from JavaScript using pg, postgres.js, or
   the Neon serverless driver
+summary: >-
+  Covers the setup of connecting a Node.js application to a Neon Postgres
+  database using popular drivers like pg, Postgres.js, and the Neon serverless
+  driver, including performing basic CRUD operations.
 enableTableOfContents: true
-updatedOn: '2025-09-30T00:26:10.496Z'
+updatedOn: '2026-02-15T20:51:54.166Z'
 ---
 
 <CopyPrompt src="/prompts/javascript-prompt.md" 
@@ -18,7 +22,7 @@ This guide describes how to create a Neon project and connect to it from a Node.
 You'll learn how to connect to your Neon database from a JavaScript application and perform basic Create, Read, Update, and Delete (CRUD) operations.
 
 <Admonition type="important" title="Connect from the Server-Side Only">
-Your database connection string contains sensitive credentials and must **never** be exposed in client-side javascript code (e.g., in a browser). All database operations should be handled in a secure, server-side environment like a Node.js backend or a serverless function.
+Your database connection string contains sensitive credentials and must **never** be exposed in client-side javascript code (for example, in a browser). All database operations should be handled in a secure, server-side environment like a Node.js backend or a serverless function.
 </Admonition>
 
 ## Prerequisites
@@ -49,7 +53,7 @@ For your Node.js project, create a project directory, initialize it with `npm`, 
     cd neon-nodejs-quickstart
     ```
 
-    > Open the directory in your preferred code editor (e.g., VS Code).
+    > Open the directory in your preferred code editor (for example, VS Code).
 
 2.  Initialize a new Node.js project. The `-y` flag accepts all the default settings.
 

@@ -1,9 +1,13 @@
 ---
 title: Manage Neon on Azure
 subtitle: Instructions for managing your Neon resource on Azure
+summary: >-
+  How to manage Neon resources on Azure, including creating additional projects,
+  transferring projects to a Neon-managed organization, deleting resources, and
+  troubleshooting issues related to Azure integration.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-12-11T15:40:49.852Z'
+updatedOn: '2026-02-15T20:51:54.060Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -29,13 +33,11 @@ This topic describes how to manage your Neon resource on Azure. It covers how to
 
 ## Create additional Neon projects
 
-You can add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console.
+<Admonition type="note">
+As part of the deprecation process, project creation is no longer available for Azure-managed organizations. To create new projects, [transfer your existing projects to a Neon-managed organization](/docs/import/migrate-from-azure-native).
+</Admonition>
 
-In Azure, navigate to the **Projects** page and select **Create Project**.
-
-![Project page in Neon](/docs/introduction/azure_project_form.png)
-
-See [Create a project](/docs/manage/projects#create-a-project) for how to create a project from the Neon Console.
+Previously, you could add Neon projects to an existing Neon resource from the **Projects** page in Azure or from the Neon Console. The project creation button is now disabled for Azure-managed organizations.
 
 ## Create branches
 
@@ -99,13 +101,13 @@ To retrieve a connection URL for your Neon database:
 
    The values you select define the connection string for your database:
 
-   | Value        | Description                                                                                                                                                                            |
-   | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-   | **Project**  | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches.                                                           |
-   | **Branch**   | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides.                                                                                      |
-   | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to.                                                                                         |
-   | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                           |
-   | **Compute**  | The compute that runs Postgres. Usually "Primary"—this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
+   | Value        | Description                                                                                                                                                                             |
+   | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+   | **Project**  | The [Neon project](/docs/reference/glossary#project) you want to connect to. A Neon project includes databases and branches.                                                            |
+   | **Branch**   | A [branch](/docs/reference/glossary#branch) within your Neon project where your database resides.                                                                                       |
+   | **Database** | The name of the [Postgres database](/docs/reference/glossary#database) you want to connect to.                                                                                          |
+   | **Role**     | The [Postgres role](/docs/reference/glossary#postgres-role) (user) you want to connect with.                                                                                            |
+   | **Compute**  | The compute that runs Postgres. Usually "Primary"; this is the read-write compute for the branch, but you may also have [read replica](/docs/reference/glossary#read-replica) computes. |
 
 You can toggle the **Connection pooling** option to use a pooled connection string, which supports up to 10,000 concurrent connections. A pooled connection string is recommended for most use cases. Use a direct connection for `pg_dump`, session-dependent features, or schema migrations. For more about pooled connections, see [Connection pooling](/docs/connect/connection-pooling).
 

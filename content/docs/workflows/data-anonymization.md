@@ -1,11 +1,15 @@
 ---
 title: Data anonymization
 subtitle: Mask sensitive data in development branches using PostgreSQL Anonymizer
+summary: >-
+  Covers the setup of anonymized branches in Neon to mask sensitive data using
+  PostgreSQL Anonymizer, enabling realistic testing without exposing personally
+  identifiable information (PII).
 redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-01-23T03:36:48.217Z'
+updatedOn: '2026-02-15T20:51:54.280Z'
 ---
 
 <FeatureBeta />
@@ -106,15 +110,15 @@ You can create and manage masking rules via the Console, API, or SQL. All three 
 From the **Data Masking** page:
 
 1. Select the schema, table, and column you want to mask.
-2. Choose a masking function from the dropdown list (e.g., **Dummy Free Email** to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API or SQL.
+2. Choose a masking function from the dropdown list (for example, **Dummy Free Email** to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API or SQL.
 
 <Admonition type="tip">
 For email columns with unique constraints, use **Random Unique Email**, which generates UUID-based emails that maintain uniqueness while preserving the email format.
 </Admonition>
 
 <Admonition type="note" title="usage notes">
-- Foreign key columns cannot be masked directly to maintain referential integrity. If you attempt to mask a foreign key column, the Console will display an alert with a "Go to primary key" action that navigates to the corresponding primary key column where you can apply masking rules.
-- If you've defined custom masking rules via the API or SQL (such as custom PostgreSQL expressions like `pg_catalog.concat(anon.dummy_uuidv4(), '@customdomain.com')` that aren't available in the Console's dropdown), these rules will display as text in the Console showing the underlying expression. The Console preserves these custom rules when you run anonymization—you can safely mix Console, API, and SQL workflows.
+- Foreign key columns cannot be masked directly to maintain referential integrity. If you attempt to mask a foreign key column, the Console will display an alert with a "Go to primary key" action that navigates to the corresponding primary key column where you can apply masking rules. Primary key columns can be anonymized. Neon automatically handles foreign key constraints during the anonymization process to maintain referential integrity across related tables.
+- If you've defined custom masking rules via the API or SQL (such as custom PostgreSQL expressions like `pg_catalog.concat(anon.dummy_uuidv4(), '@customdomain.com')` that aren't available in the Console's dropdown), these rules will display as text in the Console showing the underlying expression. The Console preserves these custom rules when you run anonymization. You can safely mix Console, API, and SQL workflows.
 </Admonition>
 
 3. Repeat for all sensitive columns.
@@ -130,7 +134,7 @@ Rerunning the anonymization process on the anonymized branch applies rules to pr
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
+For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (for example, **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (for example, `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
 
 **Update masking rules**
 
@@ -295,9 +299,9 @@ This query returns all rules regardless of how they were created (Console, API, 
 - Currently cannot reset to parent, restore, or delete the read-write endpoint for anonymized branches.
 - Branch is unavailable during anonymization.
 - Masking does not fully enforce database constraints, but improvements are ongoing. For example, use **Random Unique Email** for columns with unique constraints on emails.
-- **Foreign key columns cannot be masked directly.** To maintain referential integrity, you should mask the corresponding primary key column instead. The Console displays an alert with a "Go to primary key" action that navigates to the relevant primary key column.
+- **Foreign key columns cannot be masked directly.** To maintain referential integrity, mask the corresponding primary key column instead. Neon automatically handles foreign key constraints during anonymization, temporarily modifying them to cascade updates and restoring them to their original state after the process completes. The Console displays an alert with a "Go to primary key" action that navigates to the relevant primary key column.
 - Anonymized branches do not currently support projects with [IP Allow](/docs/manage/projects#configure-ip-allow) or [Private Networking](/docs/guides/neon-private-networking) enabled.
-- The Console provides a curated subset of masking functions for creation—use the API or SQL for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
+- The Console provides a curated subset of masking functions for creation. Use the API or SQL for all [PostgreSQL Anonymizer masking functions](https://postgresql-anonymizer.readthedocs.io/en/latest/masking_functions/).
 
 ## Related resources
 

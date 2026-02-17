@@ -2,11 +2,15 @@
 title: Connect a Java application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Java using the PostgreSQL JDBC
   driver
+summary: >-
+  Covers the setup of a Neon project and the connection process for a Java
+  application using JDBC, including performing basic CRUD operations on a Neon
+  Postgres database.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/java
   - /docs/integrations/java
-updatedOn: '2025-09-30T00:26:10.495Z'
+updatedOn: '2026-02-15T20:51:54.165Z'
 ---
 
 <CopyPrompt src="/prompts/java-prompt.md" 
@@ -56,7 +60,7 @@ Create a project using the Maven `archetype:generate` command. This sets up a st
     cd neon-java-jdbc
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code, IntelliJ IDEA).
+    > Open this directory in your preferred code editor (for example, VS Code, IntelliJ IDEA).
 
 3.  Add the `postgresql` driver and `dotenv-java` libraries as dependencies in your `pom.xml` file. There may be other dependencies already present (e.g, `junit`), so ensure you add these within the `<dependencies>` section.
 

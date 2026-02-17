@@ -2,8 +2,12 @@
 title: Python SDK (Neon API)
 subtitle: Programmatically manage Neon projects, branches, databases, and other platform
   resources
+summary: >-
+  Covers the setup and usage of the Neon Python SDK, enabling programmatic
+  management of Neon projects, branches, databases, and other platform resources
+  through the Neon API.
 enableTableOfContents: true
-updatedOn: '2025-12-11T19:49:37.744Z'
+updatedOn: '2026-02-15T20:51:54.265Z'
 ---
 
 <InfoBlock>
@@ -53,11 +57,12 @@ neon = NeonAPI(api_key='your_api_key')
 
 ## Documentation
 
-Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://neon-api-python.readthedocs.io/en/latest/#quickstart), can be found on **Read the Docs**. See [neon-api — Python client for the Neon API](https://neon-api-python.readthedocs.io/en/latest/#neon-api-python-client-for-the-neon-api).
+Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://neon-api-python.readthedocs.io/en/latest/#quickstart), can be found on **Read the Docs**. See [neon-api: Python client for the Neon API](https://neon-api-python.readthedocs.io/en/latest/#neon-api-python-client-for-the-neon-api).
 
 ## Methods of the `NeonAPI` Class
 
 - `me()`: Returns the current user.
+- `current_user_organizations()`: Returns the current user's organizations.
 
 ### Manage API Keys
 
@@ -67,7 +72,15 @@ Documentation for the `neon-api - Python SDK`, including a [Quickstart](https://
 
 ### Manage Projects
 
-- `projects()`: Returns a list of projects.
+All Neon accounts are organization-based. To list projects, first retrieve the user's organization with `current_user_organizations()`, then pass `org_id`:
+
+```python
+orgs = neon.current_user_organizations()
+org_id = orgs[0].id
+projects = neon.projects(org_id=org_id)
+```
+
+- `projects(org_id=None)`: Returns a list of projects. Pass `org_id` to list projects within an organization.
 - `project(project_id)`: Returns a specific project.
 - `project_create(project_id, **json)`: Creates a new project.
 - `project_update(project_id, **json)`: Updates a given project.

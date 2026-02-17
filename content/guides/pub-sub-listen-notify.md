@@ -31,11 +31,22 @@ Because of connection pooling, setting up a pub/sub listener in the Neon console
 But you can create a Node.js script that listens to notifications on the channel `my_channel` as follows.
 Note that you do **not** need to explicitly create the `my_channel` channel, subscribing to the channel also creates the channel.
 
+Create a new directory and initialize a new Node.js project.
+
+```bash
+mkdir pg-listen-notify
+cd pg-listen-notify
+npm init -y && npm install pg dotenv
+```
+
+Then, create a new file `listener.js` with the following content.
+
 ```javascript
 const { Client } = require('pg');
+require('dotenv').config();
 
 const client = new Client({
-  connectionString: YOUR CONNECTION STRING HERE
+  connectionString: process.env.DATABASE_URL,
 });
 
 async function setupListener() {
@@ -52,18 +63,34 @@ setupListener().catch(console.error);
 ```
 
 Make sure to disable connection pooling in your Neon connection string (make sure your connection string does not include `-pooler`).
+
+![Connection String without Pooler](/docs/connect/connection_details_without_connection_pooling.png)
+
 `LISTEN` and `NOTIFY` are session-specific features and are not compatible with Neon connection pooling.
 
-Run the above script and you should see the following output.
-Keep the above script running, you will trigger a notification in the next section.
+Create a `.env` file in the same directory with your Neon connection string.
+
+```
+DATABASE_URL=your_neon_connection_string_without_pooler
+```
+
+Run the listener script:
+
+```bash
+node listener.js
+```
+
+You should see the following output:
 
 ```
 Listening for notifications on my_channel...
 ```
 
+Keep the above script running, you will trigger a notification in the next section.
+
 ### Send a Message using NOTIFY
 
-You can send a message to the above Node.js script from the Neon console using the following SQL command.
+With the listener now configured, connect to your Neon database using the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) or a client like [psql](/docs/connect/query-with-psql-editor). Then, run the following command to publish a notification to the `my_channel` channel.
 
 ```sql
 NOTIFY my_channel, 'Hello from another session!';
@@ -94,3 +121,7 @@ If you need message persistence or guarantees that a message was processed, you 
 
 If you are using `LISTEN` and `NOTIFY`, you should disable Neon's [Scale to Zero feature](/docs/introduction/scale-to-zero).
 If Neon scales your compute to 0, [it will terminate all listeners](/docs/reference/compatibility#session-context), which may lead to lost messages when your database reactivates.
+
+## Resources
+
+- [PostgreSQL Documentation on LISTEN and NOTIFY](https://www.postgresql.org/docs/current/sql-listen.html)

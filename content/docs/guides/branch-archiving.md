@@ -2,8 +2,12 @@
 title: Branch archiving
 subtitle: Learn how Neon automatically archives inactive branches to cost-effective
   storage
+summary: >-
+  Covers the automatic archiving of inactive branches in Neon to reduce storage
+  costs, including conditions for archiving and unarchiving processes, as well
+  as monitoring branch status.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.266Z'
+updatedOn: '2026-02-15T20:51:54.137Z'
 ---
 
 <InfoBlock>
@@ -32,7 +36,7 @@ However, a branch **cannot** be archived if it:
 
 - Has an **unarchived child branch**.
 - Has **computes running**.
-- Is **in transition** (e.g., currently being created or unarchived).
+- Is **in transition** (for example, currently being created or unarchived).
 - Is a **protected branch** ([learn more](/docs/guides/protected-branches)).
 
 <Admonition type="note">

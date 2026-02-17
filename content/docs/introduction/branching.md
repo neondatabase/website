@@ -1,13 +1,17 @@
 ---
 title: Branching
 subtitle: Branch your data the same way you branch your code
+summary: >-
+  Covers the creation and management of data branches in Neon, allowing for
+  isolated development, testing, and historical analysis without impacting the
+  performance of the production database.
 enableTableOfContents: true
 redirectFrom:
   - /docs/conceptual-guides/branches
   - /docs/conceptual-guides/branching
   - /docs/concepts/branching
   - /docs/introduction/point-in-time-restore
-updatedOn: '2026-01-24T16:13:09.595Z'
+updatedOn: '2026-02-15T20:51:54.213Z'
 ---
 
 With Neon, you can quickly branch your data for development, testing, and various other purposes, enabling you to improve developer productivity and optimize continuous integration and delivery (CI/CD) pipelines.
@@ -70,7 +74,7 @@ Refer to the following guide for instructions.
 
 <DetailIconCards>
 
-<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching — Testing queries</a>
+<a href="/docs/guides/branching-test-queries" description="Instantly create a branch to test queries before running them in production" icon="queries">Branching: Testing queries</a>
 
 </DetailIconCards>
 

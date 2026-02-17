@@ -1,14 +1,17 @@
 ---
 title: Learn the basics
 subtitle: Sign up for free and learn the basics of database branching with Neon
+summary: >-
+  Step-by-step guide for signing up and learning the basics of database
+  branching with Neon, including how to view and modify data, create isolated
+  database copies, and reset branches to production.
 enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/console/
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-  - /docs/get-started/setting-up-a-project
-updatedOn: '2026-01-24T16:13:09.589Z'
+updatedOn: '2026-02-15T20:51:54.110Z'
 ---
 
 <InfoBlock>
@@ -369,7 +372,7 @@ Make sure that your development team is always working from the latest schema an
 
 <Admonition type="tip" title="Additional branching features">
 - **Working with sensitive data?** Neon supports [schema-only branching](/docs/guides/branching-schema-only) to create branches with just the database structure, without copying production data.
-- **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period—perfect for temporary test branches or time-limited preview environments.
+- **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period, perfect for temporary test branches or time-limited preview environments.
 </Admonition>
 
 <NeedHelp/>

@@ -1,18 +1,22 @@
 ---
 title: Neon Auth & Data API TypeScript SDKs
 subtitle: Reference documentation for building applications with Neon Auth and Data API
+summary: >-
+  Covers the setup and usage of the Neon TypeScript SDK for implementing
+  authentication and database operations in applications, including various
+  adapter options for different frameworks.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-01-22T15:48:50.618Z'
+updatedOn: '2026-02-15T20:51:54.261Z'
 ---
 
 The Neon TypeScript SDK (`@neondatabase/neon-js`) provides authentication and database operations for your applications.
 
 Authentication is provided through an adapter-based architecture, letting you work more easily with your existing code or preferred framework. Available adapters:
 
-- **BetterAuthVanillaAdapter** (default) — Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
-- **BetterAuthReactAdapter** — Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
-- **SupabaseAuthAdapter** — Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
+- **BetterAuthVanillaAdapter** (default): Promise-based authentication methods like `client.auth.signIn.email()`. Used in all examples on this page.
+- **BetterAuthReactAdapter**: Similar API but with React hooks like `useSession()`. See the [React quickstart](/docs/auth/quick-start/react).
+- **SupabaseAuthAdapter**: Supabase-compatible API for easy migration. See the [migration guide](/docs/auth/migrate/from-supabase).
 
 Database query methods (`client.from()`, `.select()`, etc.) work the same regardless of which adapter you use.
 
@@ -50,7 +54,7 @@ Use this when you only need authentication (no database queries). You get:
 - Auth methods like `auth.signIn.email()` and `auth.signUp.email()`
 - No database query methods
 
-The auth methods are identical—only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
+The auth methods are identical; only the access path differs. `client.auth.signIn.email()` and `auth.signIn.email()` do the same thing.
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>
@@ -940,7 +944,7 @@ const { data, error } = await client.from('todos').select('*').is('completed_at'
 <TwoColumnLayout.Block>
 
 Filters rows where the column value matches any value in the provided array.
-Useful for filtering by multiple possible values (e.g., status in ['pending', 'active']).
+Useful for filtering by multiple possible values (for example, status in ['pending', 'active']).
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

@@ -2,9 +2,13 @@
 title: Replicate data from one Neon project to another
 subtitle: Replicate data to a different Neon project for cross-region replication,
   version migration, or region migration
+summary: >-
+  Covers the setup of logical replication to transfer data between different
+  Neon projects, facilitating cross-region replication, Postgres version
+  migration, and region migration scenarios.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-02T10:33:29.281Z'
+updatedOn: '2026-02-06T22:07:33.014Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -92,7 +96,7 @@ This section explains how to prepare your destination Neon Postgres database (th
 
 ### Prepare your database schema
 
-When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/import-schema-only) for instructions.
+When configuring logical replication in Postgres, the tables in the source database you are replicating from must also exist in the destination database, and they must have the same table names and columns. You can create the tables manually in your destination database or use utilities like `pg_dump` and `pg_restore` to dump the schema from your source database and load it to your destination database. See [Import a database schema](/docs/import/migrate-schema-only) for instructions.
 
 If you're using the sample `playing_with_neon` table, you can create the same table on the destination database with the following statement:
 

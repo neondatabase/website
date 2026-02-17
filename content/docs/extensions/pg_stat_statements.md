@@ -1,8 +1,12 @@
 ---
 title: The pg_stat_statements extension
 subtitle: Track planning and execution statistics for all SQL statements
+summary: >-
+  Covers the setup and usage of the `pg_stat_statements` extension in Postgres
+  to track SQL statement execution statistics, enabling performance analysis and
+  optimization for Neon projects.
 enableTableOfContents: true
-updatedOn: '2025-08-02T10:33:29.239Z'
+updatedOn: '2026-02-06T22:07:32.840Z'
 ---
 
 The `pg_stat_statements` extension provides a detailed statistical view of SQL statement execution within a Postgres database. It tracks information such as execution counts, total and average execution times, and more, helping database administrators and developers analyze and optimize SQL query performance.
@@ -25,7 +29,7 @@ The version of `pg_stat_statements` available on Neon depends on the version of 
 
 ### Data persistence
 
-In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute restarts. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/conceptual-guides/compute-lifecycle/). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
+In Neon, statistics collected by the `pg_stat_statements` extension are not retained when your Neon compute (where Postgres runs) is suspended or restarted. For example, if your compute scales down to zero due to inactivity, any existing statistics are lost. New statistics will be gathered once your compute restarts. For more details about the lifecycle of a Neon compute, see [Compute lifecycle](/docs/introduction/compute-lifecycle). For information about configuring Neon's scale to zero behavior, see [Scale to Zero](/docs/introduction/scale-to-zero).
 
 ## Enable the `pg_stat_statements` extension
 

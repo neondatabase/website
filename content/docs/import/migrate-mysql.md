@@ -1,8 +1,12 @@
 ---
 title: Migrate from MySQL to Neon Postgres
+summary: >-
+  Covers the migration of a MySQL database to Neon Postgres using the `pgloader`
+  utility, detailing prerequisites, credential retrieval, and data
+  transformation processes.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2025-08-18T12:11:47.178Z'
+updatedOn: '2026-02-15T20:51:54.210Z'
 ---
 
 This topic describes how to migrate your MySQL database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html).
@@ -62,7 +66,7 @@ Here's how you can set up `pgloader` for your database migration:
 
    See [Installing pgloader](https://pgloader.readthedocs.io/en/latest/install.html) for Debian (apt), RPM package, and Docker installation instructions.
 
-2. Create a `pgloader` configuration file (e.g., `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved and modified in the previous step as the destination.
+2. Create a `pgloader` configuration file (for example, `config.load`). Use your MySQL database credentials to define the connection string for your database source. Use the Neon database connection string you retrieved and modified in the previous step as the destination.
 
    <Admonition type="note">
    If you need to specify an SSL mode in your connection string, the following format is recommended: `sslmode=require`. Other formats may not work.

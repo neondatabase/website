@@ -1,8 +1,11 @@
 ---
 title: Connect an Elixir application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from Elixir using Postgrex
+summary: >-
+  How to connect an Elixir application to a Neon Postgres database using
+  Postgrex, including project setup and performing basic CRUD operations.
 enableTableOfContents: true
-updatedOn: '2025-09-30T00:26:10.493Z'
+updatedOn: '2026-02-15T20:51:54.150Z'
 ---
 
 <CopyPrompt src="/prompts/elixir-prompt.md" 
@@ -40,7 +43,7 @@ For your Elixir project, create a project directory using `mix` and add the requ
     cd neon_elixir_quickstart
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code).
+    > Open this directory in your preferred code editor (for example, VS Code).
 
 2.  Add `postgrex` as a dependency in your `mix.exs` file. Find the `deps` function and add `{:postgrex, "~> 0.18.0"}`:
 

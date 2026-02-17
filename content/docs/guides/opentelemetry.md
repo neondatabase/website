@@ -2,8 +2,12 @@
 title: OpenTelemetry
 subtitle: Send Neon metrics and Postgres logs to any OTEL-compatible observability
   platform
+summary: >-
+  How to configure OpenTelemetry exports from Neon to send metrics and Postgres
+  logs to any OTEL-compatible observability platform, including setup with
+  Grafana OSS, Tempo, and integration with New Relic.
 enableTableOfContents: true
-updatedOn: '2026-01-09T19:51:39.512Z'
+updatedOn: '2026-02-15T20:51:54.183Z'
 ---
 
 <FeatureBetaProps feature_name="OpenTelemetry integration" />
@@ -195,7 +199,7 @@ You can enable either or both options based on your monitoring needs.
    **For other platforms**: Choose the appropriate method:
    - **Bearer**: Enter your bearer token or API key
    - **Basic**: Provide your username and password credentials
-   - **API Key**: Enter your API key
+   - **API Key**: Enter your API key. You can optionally set a **Custom header name** for the key; it defaults to `X-API-Key` if not specified. Some backends (for example, Honeycomb) expect a different header name, so use this option to match your platform's requirements.
 
 ## Configure resource attributes
 
@@ -249,7 +253,7 @@ _Postgres logs flowing into New Relic_
 **Find your data under APM & Services**
 ![Multiple Neon services in New Relic APM & Services](/docs/guides/new_relic_services.png)
 
-- **Logs**: Check your configured service name in APM & Services (e.g., `neon-postgres-test`)
+- **Logs**: Check your configured service name in APM & Services (for example, `neon-postgres-test`)
 - **Metrics**: Look for the auto-created `compute-host-metrics` and `sql-metrics` services
 
 </Steps>

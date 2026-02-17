@@ -1,8 +1,13 @@
 ---
 title: Account recovery
 subtitle: Learn how to recover a lost Neon account
+summary: >-
+  Covers the steps to recover a Neon account owned by a former employee,
+  including methods for regaining access through original login methods or
+  initiating a manual identity verification process if those methods are
+  unavailable.
 enableTableOfContents: true
-updatedOn: '2025-10-09T18:29:43.721Z'
+updatedOn: '2026-02-15T20:51:54.222Z'
 ---
 
 If a former employee owned a Neon account and didn’t shut it down or transfer access before leaving, you can follow the steps outlined below to recover the account.
@@ -15,7 +20,7 @@ First, determine how the account was accessed.
 
 ### A. If the account used a third-party login
 
-If the former employee signed up with a third-party identity provider (e.g., Google, GitHub, Microsoft, Hasura), you must recover access to that account through your organization's identity provider. Neon cannot bypass third-party authentication.
+If the former employee signed up with a third-party identity provider (for example, Google, GitHub, Microsoft, Hasura), you must recover access to that account through your organization's identity provider. Neon cannot bypass third-party authentication.
 
 ### B. If the account used email and password
 

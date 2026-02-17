@@ -33,7 +33,7 @@ Let's break down the key components in this setup:
 
 You have two options for connecting Windsurf to the Neon MCP Server:
 
-1. **Remote MCP Server (Preview):** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Windsurf. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
+1. **Remote MCP Server:** Connect to Neon's managed MCP server using OAuth for authentication. This method is more convenient as it eliminates the need to manage API keys in Windsurf. Additionally, you will automatically receive the latest features and improvements as soon as they are released.
 
 2. **Local MCP Server:** Run the Neon MCP server locally on your machine, authenticating with a Neon API key.
 
@@ -92,10 +92,6 @@ By default, the Remote MCP Server connects to your personal Neon account. To con
    ![Windsurf MCP Toolbar](/docs/guides/windsurf-mcp-server-available.png)
 
 9. Windsurf is now connected to the Neon MCP server.
-
-<Admonition type="note">
-The remote hosted MCP server is in preview due to the [new OAuth MCP specification](https://spec.modelcontextprotocol.io/specification/2025-03-26/basic/authorization/), expect potential changes as we continue to refine the OAuth integration.
-</Admonition>
 
 <Admonition type="tip" title="Troubleshooting OAuth Errors">
 If you encounter an error message like `{"code":"invalid_request","error":"invalid redirect uri"}` when starting Windsurf with the remote MCP server, this is typically due to cached OAuth credentials. To fix this issue:

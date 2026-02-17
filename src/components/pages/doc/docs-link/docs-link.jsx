@@ -1,3 +1,5 @@
+'use client';
+
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -37,6 +39,7 @@ const DocsLink = ({ href, children, ...otherProps }) => {
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
       icon={icon}
+      tagName="DocsInlineLink"
       {...otherProps}
     >
       {children}

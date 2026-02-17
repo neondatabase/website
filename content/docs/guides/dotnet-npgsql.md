@@ -1,8 +1,12 @@
 ---
 title: Connect a .NET (C#) application to Neon Postgres
 subtitle: Learn how to run SQL queries in Neon from .NET using the Npgsql library
+summary: >-
+  How to connect a .NET (C#) application to a Neon Postgres database using the
+  Npgsql library, including steps for creating a Neon project and performing
+  CRUD operations.
 enableTableOfContents: true
-updatedOn: '2025-09-30T00:26:10.491Z'
+updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 
@@ -45,7 +49,7 @@ For your .NET project, you will create a project directory and add the required 
     cd NeonLibraryExample
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code, Visual Studio).
+    > Open this directory in your preferred code editor (for example, VS Code, Visual Studio).
 
 2.  Add the required NuGet packages using `dotnet add package`.
     - `Npgsql`: The .NET data provider for PostgreSQL.

@@ -1,8 +1,12 @@
 ---
 title: Component icon guide
 subtitle: Complete reference for all icon systems and usage
+summary: >-
+  Covers the selection and implementation of various icon systems in Neon,
+  detailing available icons, usage guidelines, and best practices for effective
+  integration in components.
 enableTableOfContents: true
-updatedOn: '2026-01-20T19:00:25.315Z'
+updatedOn: '2026-02-15T20:51:54.063Z'
 ---
 
 A comprehensive guide to all icon systems used in Neon documentation. This guide helps you understand which icon system to use and how to implement them correctly.
@@ -88,7 +92,7 @@ _For technical implementation details, see the [Icon Systems section](/docs/comm
 
 ### Icon naming conventions
 
-- **TechCards**: Use kebab-case (e.g., `node-js`, `next-js`)
+- **TechCards**: Use kebab-case (for example, `node-js`, `next-js`)
 - **DetailIconCards**: Use camelCase or kebab-case as defined in the mapping
 - **File Requirements**: Ensure SVG files exist in the correct directories
 
@@ -332,7 +336,7 @@ To test if an icon works:
 
 ## Summary
 
-This guide provides an overview of Neon's icon systems and usage guidelines. For complete icon listings and detailed examples, refer to the [Component Showcase](/docs/community/component-showcase).
+This guide provides an overview of Neon's icon systems and usage guidelines. For complete icon listings and detailed examples, refer to the [Component Guide](/docs/community/component-guide).
 
 ### Key takeaways
 

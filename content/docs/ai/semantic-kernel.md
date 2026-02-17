@@ -1,8 +1,12 @@
 ---
 title: Semantic Kernel
 subtitle: Quickly build AI RAG and Agentic workflows with Semantic Kernel and Neon
+summary: >-
+  Step-by-step guide for initializing a Postgres Vector Store with Semantic
+  Kernel in Neon, utilizing the `pgvector` extension for AI-driven search and
+  retrieval tasks.
 enableTableOfContents: true
-updatedOn: '2025-03-12T23:30:20.650Z'
+updatedOn: '2026-02-06T22:07:32.734Z'
 ---
 
 [Semantic Kernel](https://learn.microsoft.com/en-us/semantic-kernel/overview/) is an open-source SDK developed by Microsoft that enables the integration of large language models (LLMs) with traditional programming constructs. It allows developers to build AI-powered applications by combining natural language processing, planning, and memory capabilities. Semantic Kernel supports orchestration of AI workflows, plugin-based extensibility, and vector-based memory storage for retrieval-augmented generation (RAG) use cases. It is commonly used to create intelligent agents, chatbots, and automation tools that leverage LLMs like OpenAI’s GPT models.

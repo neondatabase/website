@@ -1,8 +1,13 @@
 ---
 title: Neon Agent Plan
 subtitle: Learn about using Neon to provision and manage databases for agentic platforms
+summary: >-
+  Covers the organization and functionality of the Neon agent plan for
+  provisioning and managing Postgres databases, including enrollment
+  requirements and features like instant provisioning and autoscaling for
+  agentic platforms.
 enableTableOfContents: true
-updatedOn: '2025-12-16T23:16:25.133Z'
+updatedOn: '2026-02-15T20:51:54.211Z'
 ---
 
 <InfoBlock>
@@ -57,7 +62,7 @@ Neon creates two organizations in your account:
 
 ### Free organization
 
-This sponsored free organization hosts databases for your free-tier users at no cost to you — Neon sponsors the infrastructure. This organization includes Neon Scale plan features, but individual projects have resource limits similar to Neon's standard free tier.
+This sponsored free organization hosts databases for your free-tier users at no cost to you; Neon sponsors the infrastructure. This organization includes Neon Scale plan features, but individual projects have resource limits similar to Neon's standard free tier.
 
 You are not charged for usage in this organization. Use this for users who haven't upgraded to your platform's paid plans. This means your free tier is truly free, with no database infrastructure costs passed to you.
 
@@ -107,7 +112,7 @@ The agent plan uses usage-based, agent-specific pricing with custom limits and d
 
 The paid organization receives up to $25,000 in initial credits that cover compute ($0.106 per compute unit hour), storage, and data transfer charges. Usage is tracked per project, and the API exposes consumption metrics for building usage-based billing into your platform.
 
-The sponsored free organization has no billing charges — Neon sponsors the infrastructure for your free tier users.
+The sponsored free organization has no billing charges; Neon sponsors the infrastructure for your free tier users.
 
 ### Consumption metrics
 

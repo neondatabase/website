@@ -1,7 +1,11 @@
 ---
 title: Enable Autoscaling in Neon
+summary: >-
+  How to enable autoscaling for compute resources in a Neon project, including
+  configuring minimum and maximum compute sizes to automatically adjust based on
+  workload demand.
 enableTableOfContents: true
-updatedOn: '2026-01-28T07:08:36.338Z'
+updatedOn: '2026-02-15T20:51:54.123Z'
 ---
 
 <InfoBlock>
@@ -34,7 +38,7 @@ To edit a compute:
    ![Edit compute menu](/docs/guides/autoscaling_edit.png)
 1. On the **Edit compute** drawer, select **Autoscale** and use the slider to specify a minimum and maximum compute size.
 
-   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 CU. Each CU allocates approximately 4 GB of RAM — for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
+   Neon scales the compute size up and down within the specified range to meet workload demand. Autoscaling currently supports a range of 1/4 (.25) to 16 CU. Each CU allocates approximately 4 GB of RAM; for example, 1 CU has 4 GB of RAM, 2 CU has 8 GB of RAM, and so on. For an overview of available compute sizes, see [Compute size and autoscaling configuration](/docs/manage/computes#compute-size-and-autoscaling-configuration).
 
    <Admonition type="note">
    The maximum permitted autoscaling range is 8 CU. This means the difference between your maximum and minimum compute size cannot exceed 8 CU. For example, if you set the minimum to 1 CU, the maximum can be at most 9 CU.

@@ -1,10 +1,15 @@
 ---
 title: Getting ready for production
 subtitle: 'Guidelines to optimize price, performance, and reliability'
+summary: >-
+  Covers the setup of production environments in Neon, including guidelines for
+  selecting plans, optimizing performance, managing branches, enabling
+  autoscaling, and ensuring reliability through connection testing and restore
+  settings.
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started-with-neon/production-checklist
-updatedOn: '2026-01-09T19:53:45.369Z'
+updatedOn: '2026-02-15T20:51:54.105Z'
 ---
 
 <CheckList title="Production checklist">
@@ -81,8 +86,6 @@ Keep reading: [Neon regions](/docs/introduction/regions)
 
 Your production database should run on a [root branch](/docs/reference/glossary#root-branch) that is set as the project's [default branch](/docs/reference/glossary#default-branch). Neon projects are configured this way by default. Using a root branch enables [snapshots](/docs/guides/backup-restore), provides simpler billing (based on actual data size rather than accumulated changes), and prevents accidental deletion.
 
-Setting it as the default also exempts your production compute from the [concurrently active compute limit](/docs/reference/glossary#concurrently-active-compute-limit), ensuring it stays available even when many development branches are active.
-
 Keep reading: [Manage branches](/docs/manage/branches)
 
 ## Protect your production branch
@@ -116,7 +119,7 @@ Keep reading:
 
 Scale-to-zero allows Neon to suspend compute after a period of inactivity. This is a highly effective way to save costs in development environments and workloads with intermittent usage. For production workloads, the decision depends on your latency requirements.
 
-If occasional cold starts are acceptable for your application (e.g., for internal tools), leaving scale-to-zero enabled will be the most cost-effective choice.
+If occasional cold starts are acceptable for your application (for example, for internal tools), leaving scale-to-zero enabled will be the most cost-effective choice.
 
 Consider disabling scale-to-zero if:
 
@@ -161,7 +164,7 @@ Keep reading: [Storage and billing for restores](/docs/introduction/restore-wind
 
 ## Consider snapshot schedules
 
-Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later — ensuring that recovery points exist even if they fall outside your chosen restore window.
+Snapshot schedules provide regular, durable restore points taken daily, weekly, or monthly. While [point-in-time restore](/docs/introduction/branch-restore) lets you roll back to any moment within the restore window, snapshots capture stable points in time that you can return to later, ensuring that recovery points exist even if they fall outside your chosen restore window.
 
 Snapshot schedules are only available on [root branches](/docs/manage/branches#root-branch).
 
@@ -203,7 +206,7 @@ However, pooled connections are not appropriate for all workloads. Avoid them fo
 
 - Long-running database migrations
 - Workloads that rely on session-level state
-- Administrative tasks that require persistent connections (e.g., `pg_dump`)
+- Administrative tasks that require persistent connections (for example, `pg_dump`)
 - Logical replication (CDC tools like Fivetran, Airbyte)
 
 Keep reading: [Connection pooling](/docs/connect/connection-pooling)

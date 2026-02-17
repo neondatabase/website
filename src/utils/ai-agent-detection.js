@@ -66,7 +66,8 @@ export function getMarkdownPath(pathname) {
 
   // Extract slug after the matched route
   const slug = path === matchedRoute ? '' : path.replace(`${matchedRoute}/`, '');
+  const mdSlug = slug.endsWith('.md') ? slug : `${slug}.md`;
 
   // Build the full public path: /md/{directory}/{slug}.md
-  return slug ? `${publicPath}/${slug}.md` : `${publicPath}.md`;
+  return slug ? `${publicPath}/${mdSlug}` : `${publicPath}.md`;
 }

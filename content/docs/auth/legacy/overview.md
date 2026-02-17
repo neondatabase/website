@@ -1,10 +1,14 @@
 ---
 title: Legacy Neon Auth with Stack Auth
 subtitle: For existing users only (not available for new projects)
+summary: >-
+  Covers the setup and functionality of the legacy Neon Auth system using Stack
+  Auth for existing users, detailing user management and data synchronization
+  within a Neon Postgres database.
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2025-12-16T12:23:55.556Z'
+updatedOn: '2026-02-15T20:51:54.041Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -21,8 +25,8 @@ Neon Auth brings authentication and user management natively to your Neon Postgr
 
 Neon Auth helps you move faster by handling the auth stack for you:
 
-- **Add auth to your app in minutes** — SDKs for Next.js and React
-- **No more custom sync code** — user profiles are always up-to-date in your database, ready for SQL joins and analytics.
+- **Add auth to your app in minutes**: SDKs for Next.js and React
+- **No more custom sync code**: user profiles are always up-to-date in your database, ready for SQL joins and analytics.
 - **Built-in support for teams, roles, and permissions**.
 
 ## How it works
@@ -193,6 +197,6 @@ For SDK documentation, components, hooks, and client-side authentication:
 
 - [Database Integration](/docs/auth/legacy/database-integration) - Technical reference for `users_sync`, backend auth, RLS
 - [Migration Guide](/docs/auth/migrate/from-legacy-auth) - Upgrade to Neon Auth with Better Auth
-- [Neon Auth](/docs/auth) - Current Neon Auth with Better Auth
+- [Neon Auth](/docs/auth/overview) - Current Neon Auth with Better Auth
 
 <NeedHelp/>

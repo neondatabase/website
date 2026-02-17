@@ -1,7 +1,10 @@
 ---
 title: Support
+summary: >-
+  Covers the support plans, channels, and policies available for Neon users,
+  detailing how to access support based on their specific pricing plan.
 enableTableOfContents: true
-updatedOn: '2025-12-08T15:34:39.154Z'
+updatedOn: '2026-02-15T20:51:54.219Z'
 ---
 
 This page outlines Neon's support plans, available channels, and policies. To learn how to access support, please refer to the [Support channels](#support-channels) section. Identify the channels available to you based on your plan and follow the links to navigate to the relevant information.
@@ -150,14 +153,14 @@ We reserve the right to modify, amend, or update this Support Policy, including 
 
 ## Legacy enterprise support
 
-Customers on a legacy [Enterprise plan](/docs/introduction/legacy-plans#enterprise-plan-legacy) can view support plan details in the following dropdown.
+Customers on a legacy Enterprise plan can view support plan details in the following dropdown.
 
 <details>
 <summary>**Enterprise support (legacy)**</summary>
 
 ### General support policy
 
-Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. For more information, see [legacy plans](/docs/introduction/legacy-plans#enterprise-plan-legacy). "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
+Neon provides Support for Enterprise plans under the terms of this Support Policy as long as the Customer maintains a current subscription to an Enterprise plan. "Support" means the services described in this Support Policy and does not include one-time services or other services not specified in this Support Policy, such as training, consulting, or custom development.
 
 Unless described otherwise, defined terms mentioned in this policy shall have the same meaning as defined in our [Neon Platform Services Product Specific Schedule](/terms-of-service).
 
@@ -225,7 +228,7 @@ Means a high-impact problem in a customer's production systems. Essential operat
 
 Examples:
 
-- Partial outage of the service provided by Neon: service usable, but key feature unusable, e.g.:
+- Partial outage of the service provided by Neon: service usable, but key feature unusable, for example:
   - Cannot create a new branch
   - Cannot execute a branch restore
   - Cannot perform point-in-time recovery (PITR)

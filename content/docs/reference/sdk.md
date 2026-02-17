@@ -1,13 +1,17 @@
 ---
 title: Neon SDKs
+summary: >-
+  Covers the setup of Client and Management SDKs for Neon, enabling application
+  developers to implement user authentication and database queries, as well as
+  manage platform resources programmatically.
 enableTableOfContents: true
-updatedOn: '2026-01-27T14:34:28.525Z'
+updatedOn: '2026-02-15T20:51:54.265Z'
 ---
 
 Neon provides two categories of SDKs to support different use cases:
 
-- **Client SDKs** — For application developers building apps with [Neon Auth](/docs/auth/overview) and the [Data API](/docs/data-api/overview). These SDKs handle user authentication and database queries from your application.
-- **Management SDKs** — For programmatically managing Neon platform resources like projects, branches, databases, endpoints, and roles. These are wrappers around the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+- **Client SDKs**: For application developers building apps with [Neon Auth](/docs/auth/overview) and the [Data API](/docs/data-api/overview). These SDKs handle user authentication and database queries from your application.
+- **Management SDKs**: For programmatically managing Neon platform resources like projects, branches, databases, endpoints, and roles. These are wrappers around the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
 
 ## Client SDKs
 
@@ -21,7 +25,7 @@ Use these SDKs to build applications with Neon Auth and the Data API.
 
 ## Management SDKs
 
-Use these SDKs to programmatically manage your Neon infrastructure — projects, branches, databases, endpoints, roles, and operations.
+Use these SDKs to programmatically manage your Neon infrastructure (projects, branches, databases, endpoints, roles, and operations).
 
 <DetailIconCards>
 
