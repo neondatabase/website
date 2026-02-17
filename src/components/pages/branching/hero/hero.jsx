@@ -23,7 +23,6 @@ const Hero = () => (
         className="relative h-full w-full"
         width={1920}
         height={848}
-        poster="/images/pages/branching/branching-poster.jpg"
         videoClassName="h-full w-full object-cover"
       >
         <source src="/videos/pages/branching/branching.mp4" type="video/mp4" />
