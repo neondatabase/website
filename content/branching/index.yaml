@@ -1,45 +1,45 @@
 - section: Starting point
   id: starting-point
   items:
-    - title: "The problem: the stack has evolved, databases haven't"
+    - title: Traditional database workflows are broken
       description: Why DB copies don't scale — and branching does
       slug: introduction
-    - title: Rethinking the database DX with branches
+    - title: Use database branches as environments
       description: Branching replaces instance copies with isolated environments
       slug: rethinking-the-database
 
 - section: Building blocks
   id: building-blocks
   items:
-    - title: Foundational concepts for the branching DX
+    - title: The building blocks
       description: Learn how Neon projects, branches, and hierarchies work
       slug: foundational-concepts
 
 - section: Popular workflows
   id: popular-workflows
   items:
-    - title: Branching workflows for production & staging
+    - title: Manage production and staging as branches
       description: Learn how to manage production and staging with branching
       slug: production-staging-workflows
-    - title: Branching workflows for development
+    - title: Create one branch per PR and per developer
       description: Isolated branches for safe, production-like testing
       slug: branching-workflows-for-development
-    - title: Branching workflows for CI and previews
+    - title: Create one branch per preview and per test run
       description: Isolated branches per preview or test run — no shared test DBs
       slug: ci-preview-workflows
-    - title: Branching workflows for recovery
+    - title: Use branches to restore instantly
       description: Restore data, debug migrations, and audit history with branches
       slug: recovery-workflows
-    - title: Branching workflows for agents & platforms
+    - title: Build versioning / checkpoints for your agent
       description: Version DBs with snapshots that sync code and data
       slug: branching-for-agents
-    - title: Advanced branching workflows
+    - title: Promote from dev to prod without conflict
       description: Build a snapshot-based promotion workflow for Postgres
       slug: advanced-branching-workflows
 
 - section: Next steps
   id: next-steps
   items:
-    - title: Tooling and resources to implement branching
+    - title: Blog posts, docs, guides, and more
       description: Tools for branching, snapshots, automation, and integrations
       slug: tooling-and-automation

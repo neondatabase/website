@@ -1,5 +1,5 @@
 ---
-title: 'Advanced branching workflows'
+title: 'Promote from dev to prod without conflict'
 subtitle: 'Build a snapshot-based promotion workflow for Postgres: replace production with a known-good dev version using database branches, snapshots, and instant restores'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---

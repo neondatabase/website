@@ -1,5 +1,5 @@
 ---
-title: 'Branching workflows for agents & platforms'
+title: 'Build versioning / checkpoints for your agent'
 subtitle: 'Learn how to use branching in your agents or platforms. Manage databases per user or app and build versioning with snapshots that keep code and database state in sync'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---

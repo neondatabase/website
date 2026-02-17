@@ -1,5 +1,5 @@
 ---
-title: 'Branching workflows for recovery'
+title: 'Use branches to restore instantly'
 subtitle: 'Learn how to use branching for recovery: use database branches to go back in time, recover lost data, debug migrations, and audit historical states safely'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---
