@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/tanstack-start
   - /docs/integrations/tanstack-start
-updatedOn: '2026-02-06T22:07:33.058Z'
+updatedOn: '2026-02-17T17:13:56.584Z'
 ---
 
 <CopyPrompt src="/prompts/tanstack-start-prompt.md"

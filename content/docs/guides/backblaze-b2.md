@@ -6,7 +6,7 @@ summary: >-
   track metadata in your Neon database, enabling efficient management of
   unstructured data.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.128Z'
+updatedOn: '2026-02-17T17:13:56.578Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2026-02-06T22:07:33.144Z'
+updatedOn: '2026-02-17T17:13:56.589Z'
 ---
 
 Instagres gives you an instant Postgres database with a single API call. No account required.
