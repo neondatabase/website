@@ -7,9 +7,9 @@ import PauseableVideo from 'components/shared/pauseable-video';
   mp4: -pix_fmt yuv420p -vf scale={width}:-2 -movflags faststart -vcodec libx264 -crf 20
   webm: -c:v libvpx-vp9 -crf 20 -vf scale={width}:-2 -deadline best -an
 */
-const Video = ({ sources, width, height }) => (
+const Video = ({ sources = [], width, height }) => (
   <PauseableVideo width={width} height={height}>
-    {sources.map(({ src, type }) => (
+    {(Array.isArray(sources) ? sources : []).map(({ src, type }) => (
       <source key={src} src={src} type={type} />
     ))}
   </PauseableVideo>
@@ -21,7 +21,7 @@ Video.propTypes = {
       src: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
 };
