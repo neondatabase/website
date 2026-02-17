@@ -26,7 +26,7 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
+1.  **Create a Neon project:** Navigate to [neon.new](https://neon.new) to create a new Neon project. Give your project a name, such as `next-neon-todo`.
 2.  **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.

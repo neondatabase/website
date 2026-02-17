@@ -37,7 +37,7 @@ To create a Neon project:
 After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
+You can also use [neon.new](https://neon.new) to create a new Neon Postgres project. Simply visit [neon.new](https://neon.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
 ## View projects

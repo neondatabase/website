@@ -23,7 +23,7 @@ DBeaver is a versatile database management tool that allows you to interact with
 
 ## Provisioning a Serverless Postgres
 
-1. To get started, go to the the [Neon Console](https://console.neon.tech/) or [pg.new](https://pg.new/) and create a new project by entering a project name of your choice.
+1. To get started, go to the the [Neon Console](https://console.neon.tech/) or [neon.new](https://neon.new/) and create a new project by entering a project name of your choice.
 
 2. Retrieve connection details for your Neon Postgres database:
    - Navigate to the **Dashboard** of your Neon project.

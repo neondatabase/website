@@ -16,7 +16,7 @@ This guide demonstrates how to combine the power of [Neon's database branching](
 Before you start, ensure you have the following:
 
 - **A Neon Account:** Sign up for a free Neon account at [neon.tech](https://console.neon.tech/signup).
-- **A Neon Project:** You need to have a Neon project. If you do not have one, create it via [pg.new](https://pg.new)
+- **A Neon Project:** You need to have a Neon project. If you do not have one, create it via [neon.new](https://neon.new)
 - **A Hasura Instance:** A running Hasura instance (v2.x or later). This can be Hasura Cloud Professional or Enterprise tiers, or a self-hosted Enterprise instance. Dynamic routing is not available in the free tier.
 
 ## Understanding the core concepts

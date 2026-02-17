@@ -32,7 +32,7 @@ Before you begin, ensure you have:
 
 ### Create a Neon project with Auth and Data API
 
-1. Go to [pg.new](https://pg.new) to create a new Neon project
+1. Go to [neon.new](https://neon.new) to create a new Neon project
 2. In the Neon Console, navigate to your project and go to the **Data API** page in the left sidebar
 3. Select **Neon Auth** as your authentication option (the default), then click **Enable**
 
