@@ -27,7 +27,7 @@ const HeadingBadge = ({ text }) => (
   </span>
 );
 
-const sizesWithCustomFont = new Set(['md-about-us']);
+const sizesWithCustomFont = new Set(['md-new']);
 
 const Heading = forwardRef(
   (
