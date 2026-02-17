@@ -28,7 +28,8 @@ const appearAndExitAnimationVariants = {
 
 const themeClassNames = {
   sidebar: {
-    block: 'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px]',
+    block:
+      'flex-col gap-3 p-3.5 lg:flex-row lg:items-center lg:gap-[72px] dark:border dark:border-gray-new-20',
     title: 'text-base lg:shrink-0 lg:text-lg font-medium leading-tight tracking-extra-tight',
     description:
       'text-[15px] font-normal leading-snug tracking-extra-tight text-gray-new-30 dark:text-gray-new-70 opacity-90',
@@ -45,6 +46,35 @@ const themeClassNames = {
     errorMessage: 'mt-1.5 sm:mt-6',
   },
 };
+const ELLIPSES = [
+  {
+    color: '#FF6200',
+    width: 114,
+    height: 85,
+    rotate: -28,
+    blur: 24,
+    left: 155,
+    top: 40,
+  },
+  {
+    color: '#1C7154',
+    width: 261,
+    height: 132,
+    rotate: -30,
+    blur: 30,
+    top: 50,
+    left: 10,
+  },
+  {
+    color: '#DDF2FF',
+    width: 64,
+    height: 47,
+    rotate: -38,
+    blur: 22,
+    top: 81,
+    left: 127,
+  },
+];
 
 const ChangelogForm = ({ isSidebar = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
@@ -107,22 +137,45 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
     <div
       className={clsx(
         'changelog-form safe-paddings relative flex scroll-mt-20 overflow-hidden rounded-none bg-gray-new-94',
+        'border border-gray-new-90',
         classNames.block,
         className,
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
-        'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
+        'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
       )}
       id="changelog-form"
     >
-      {/* <div aria-hidden className="pointer-events-none absolute inset-0 hidden dark:block">
-        <div className="absolute -bottom-16 right-[-72px] h-52 w-72 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(59,215,163,0.35)_0%,rgba(59,215,163,0)_70%)] blur-2xl" />
-        <div className="absolute -bottom-10 right-[-8px] h-44 w-52 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(236,119,46,0.45)_0%,rgba(236,119,46,0)_70%)] blur-xl" />
-        <Image
-          className="absolute -bottom-4 right-0 h-auto w-auto max-w-none origin-bottom-right scale-50 opacity-75 mix-blend-screen"
-          src={greenDots}
-          alt=""
-        />
-      </div> */}
+      <div
+        className="pointer-events-none absolute bottom-0 right-0 h-[119px] w-[254px] overflow-hidden"
+        style={{
+          maskImage: "url('/images/background-dots.png')",
+          WebkitMaskImage: "url('/images/background-dots.png')",
+          maskRepeat: 'no-repeat',
+          maskSize: '300% 640.336%',
+          maskPosition: '0px -579.5px',
+          WebkitMaskRepeat: 'no-repeat',
+          WebkitMaskSize: '300% 640.336%',
+          WebkitMaskPosition: '0px -579.5px',
+        }}
+      >
+        <div className="absolute top-[35px]">
+          {ELLIPSES.map((ellipse, i) => (
+            <div
+              key={i}
+              className="absolute rounded-full mix-blend-color-dodge"
+              style={{
+                width: ellipse.width,
+                height: ellipse.height,
+                background: ellipse.color,
+                filter: `blur(${ellipse.blur}px)`,
+                transform: `rotate(${ellipse.rotate}deg)`,
+                top: ellipse.top,
+                left: ellipse.left,
+              }}
+            />
+          ))}
+        </div>
+      </div>
       <div className="flex flex-col gap-3.5">
         <h2
           className={clsx(
@@ -153,7 +206,7 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
             'remove-autocomplete-styles h-[38px] w-full appearance-none pl-4 tracking-extra-tight',
             (formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) &&
               classNames.input,
-            'rounded-full border bg-white text-[13px] focus:outline-none dark:bg-[rgba(19,20,21,0.60)] lg:text-base xs:pr-20',
+            'rounded-full border bg-white text-[13px] backdrop-blur-xl focus:outline-none dark:bg-[rgba(19,20,21,0.60)] lg:text-base xs:pr-20',
             formState === FORM_STATES.ERROR
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-20',

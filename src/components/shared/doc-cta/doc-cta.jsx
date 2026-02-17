@@ -1,14 +1,12 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
 
 import Button from '../button';
 import CodeBlockWrapper from '../code-block-wrapper';
-import greenDots from '../cta-block/images/green-dots.png';
 
 const DEFAULT_DATA = {
   title: 'Try it on Neon!',
@@ -17,6 +15,27 @@ const DEFAULT_DATA = {
   buttonText: 'Sign Up',
   buttonUrl: LINKS.signup,
 };
+
+const ELLIPSES = [
+  {
+    color: 'rgba(255, 228, 130, 0.90)',
+    width: 176,
+    height: 137,
+    rotate: 66,
+    blur: 40,
+    left: 86,
+    top: 60,
+  },
+  {
+    color: '#1C7154',
+    width: 606,
+    height: 176,
+    rotate: -110,
+    blur: 80,
+    top: 250,
+    left: -100,
+  },
+];
 
 const DocCta = ({
   title = DEFAULT_DATA.title,
@@ -37,14 +56,37 @@ const DocCta = ({
       'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
     )}
   >
-    <Image
-      className="pointer-events-none absolute inset-0 size-full select-none object-cover opacity-85"
-      src={greenDots}
-      alt=""
-      sizes="704px"
-      aria-hidden
-      fill
-    />
+    <div
+      className="pointer-events-none absolute bottom-0 right-0 h-full w-full overflow-hidden"
+      style={{
+        maskImage: "url('/images/background-dots-cta.png')",
+        WebkitMaskImage: "url('/images/background-dots-cta.png')",
+        maskRepeat: 'no-repeat',
+        maskSize: '136.364% 490.547%',
+        maskPosition: '-256px -327px',
+        WebkitMaskRepeat: 'no-repeat',
+        WebkitMaskSize: '136.364% 490.547%',
+        WebkitMaskPosition: '-256px -327px',
+      }}
+    >
+      <div className="absolute left-[493px] top-[44px]">
+        {ELLIPSES.map((ellipse, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full mix-blend-color-dodge"
+            style={{
+              width: ellipse.width,
+              height: ellipse.height,
+              background: ellipse.color,
+              filter: `blur(${ellipse.blur}px)`,
+              transform: `rotate(${ellipse.rotate}deg)`,
+              top: ellipse.top,
+              left: ellipse.left,
+            }}
+          />
+        ))}
+      </div>
+    </div>
 
     <div
       className={clsx(
