@@ -205,4 +205,3 @@ You can also check the pipeline run history and record counts on the pipeline de
 - [Publications — PostgreSQL documentation](https://www.postgresql.org/docs/current/logical-replication-publication.html)
 
 <NeedHelp />
-
