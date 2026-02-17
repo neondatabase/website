@@ -5,10 +5,13 @@ import Post from 'components/pages/template/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
 import { TEMPLATE_PAGES_DIR_PATH } from 'constants/content';
-import { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
+import seoData, { DEFAULT_IMAGE_PATH } from 'constants/seo-data';
 import { getPostBySlug } from 'utils/api-content';
 import getMetadata from 'utils/get-metadata';
 import getTableOfContents from 'utils/get-table-of-contents';
+
+// Helper to convert kebab-case to camelCase
+const kebabToCamel = (str) => str.replace(/-([a-z])/g, (_, letter) => letter.toUpperCase());
 
 export async function generateMetadata({ params }) {
   const { slug } = params;
@@ -17,12 +20,16 @@ export async function generateMetadata({ params }) {
 
   if (!post) return null;
 
+  // Check if there's a corresponding entry in seo-data.js
+  const seoKey = kebabToCamel(slug);
+  const seoEntry = seoData[seoKey];
+
   return getMetadata({
-    title: post?.data?.title,
-    description: post?.data?.subtitle,
-    pathname: slug,
-    type: 'article',
-    imagePath: post?.data?.image || DEFAULT_IMAGE_PATH,
+    title: seoEntry?.title || post?.data?.title,
+    description: seoEntry?.description || post?.data?.subtitle,
+    pathname: seoEntry?.pathname || slug,
+    type: seoEntry?.type || 'article',
+    imagePath: seoEntry?.imagePath || post?.data?.image || DEFAULT_IMAGE_PATH,
   });
 }
 
