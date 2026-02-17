@@ -25,8 +25,6 @@ const styles = {
     768: 'max-w-3xl',
     640: 'max-w-[640px]',
     576: 'max-w-[576px]',
-
-    aboutUs: 'max-w-[1536px] px-8 xl:maw-w-full md:px-5',
   },
 };
 

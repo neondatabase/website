@@ -10,11 +10,11 @@ const Hero = () => (
       className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[432px] lg:items-start lg:pb-10 lg:pt-[226px] md:justify-end md:gap-y-4 md:pt-0"
       size="1600"
     >
-      <Heading className="lg:max-w-[544px] md:max-w-80" tag="h1" theme="white" size="md-about-us">
+      <Heading className="lg:max-w-[544px] md:max-w-80" tag="h1" theme="white" size="md-new">
         Neon is the Postgres layer for the internet
       </Heading>
       <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
-        <p className="max-w-[704px] font-sans text-xl font-normal leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-[448px] lg:max-w-[640px] lg:text-[18px] md:max-w-80 md:text-[15px] md:text-gray-new-60">
+        <p className="max-w-[704px] font-sans text-xl font-normal leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-md lg:max-w-[640px] lg:text-lg md:max-w-80 md:text-[15px] md:text-gray-new-60">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
           the level of performance, reliability, and scale.
         </p>
