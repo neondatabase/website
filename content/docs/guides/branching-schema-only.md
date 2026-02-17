@@ -6,12 +6,12 @@ summary: >-
   replicate only the database schema from a source branch without copying
   sensitive data, ensuring a secure environment for development and testing.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.931Z'
+updatedOn: '2026-02-15T20:51:54.140Z'
 ---
 
 <FeatureBeta />
 
-Neon supports creating schema-only branches, letting you create branches that replicate only the database schema from a source branch — without copying any of the actual data. This feature is ideal for working with confidential information. Instead of duplicating this sensitive data, you can now create a branch with just the database structure and populate it with randomized or anonymized data instead. This provides your team with a secure and compliant environment for developing and testing using Neon branches.
+Neon supports creating schema-only branches, letting you create branches that replicate only the database schema from a source branch, without copying any of the actual data. This feature is ideal for working with confidential information. Instead of duplicating this sensitive data, you can now create a branch with just the database structure and populate it with randomized or anonymized data instead. This provides your team with a secure and compliant environment for developing and testing using Neon branches.
 
 ## Creating schema-only branches
 
@@ -116,7 +116,7 @@ To try out schema-only branches:
 
    ![schema-only branch creation](/docs/guides/create_schema_only_branch.png)
 
-4. On the **Tables** page, select your newly created `employees_schema_only` branch from the bread-crumb menu at the top of the console. You can see that the schema-only branch contains the schema, but no data. The same will be true for any table in any database on the schema-only branch — only the schema will be present.
+4. On the **Tables** page, select your newly created `employees_schema_only` branch from the bread-crumb menu at the top of the console. You can see that the schema-only branch contains the schema, but no data. The same will be true for any table in any database on the schema-only branch; only the schema will be present.
 
    ![schema-only branch with only the schema](/docs/guides/schema-only-branch.png)
 

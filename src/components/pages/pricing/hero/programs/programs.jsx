@@ -28,7 +28,7 @@ const PROGRAMS = [
 ];
 
 const Programs = () => (
-  <div className="relative mt-[18px] w-full overflow-hidden border border-gray-new-30">
+  <div className="relative mt-6 w-full overflow-hidden border border-gray-new-30 lg:mt-4">
     <div className="relative overflow-hidden p-5">
       <h2 className="relative z-10 text-2xl font-normal leading-snug tracking-extra-tight text-white md:text-xl">
         Special Programs

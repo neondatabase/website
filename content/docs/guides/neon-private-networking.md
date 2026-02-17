@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/guides/neon-private-access
-updatedOn: '2026-02-06T22:07:33.024Z'
+updatedOn: '2026-02-15T20:51:54.178Z'
 ---
 
 <Admonition type="comingSoon" title="Private Networking availability">
@@ -48,7 +48,7 @@ To configure Neon Private Networking, perform the following steps:
 
        ![VPC Dashboard](/docs/guides/pl_vpc_dashboard.png)
 
-    1. Optionally, enter a **Name tag** for the endpoint (e.g., `My Neon Private Networking`).
+    1. Optionally, enter a **Name tag** for the endpoint (for example, `My Neon Private Networking`).
     1. For **Type**, select the **Endpoint services that use NLBs and GWLBs** category.
 
        ![VPC Create endpoint](/docs/guides/pl_vpc_create_endpoint.png)

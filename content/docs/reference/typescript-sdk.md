@@ -7,7 +7,7 @@ summary: >-
   manage projects, branches, databases, and other resources within the Neon
   platform, simplifying API interactions and resource management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.148Z'
+updatedOn: '2026-02-15T20:51:54.266Z'
 ---
 
 <InfoBlock>
@@ -80,7 +80,7 @@ Authentication with the Neon API is handled through API keys. Follow these steps
 - Log in to the [Neon Console](https://console.neon.tech/)
 - Navigate to [Account settings > API keys](https://console.neon.tech/app/settings/api-keys).
 - Click Generate new API key.
-- Enter a descriptive Name (e.g., "neon-typescript-sdk-demo") for your key and click Create.
+- Enter a descriptive Name (for example, "neon-typescript-sdk-demo") for your key and click Create.
 
 For this quick start, we'll set the API key as an environment variable:
 
@@ -96,7 +96,7 @@ Let's create a simple TypeScript file to list your Neon projects using the SDK.
 
 ### List Projects
 
-Create a new file named `list-projects.ts` in your project directory and add the following code:
+All Neon accounts are organization-based. To list projects, first retrieve the user's organization, then pass `org_id`:
 
 ```typescript
 import { createApiClient } from '@neondatabase/api-client';
@@ -107,7 +107,12 @@ const apiClient = createApiClient({
 
 async function listNeonProjects() {
   try {
-    const response = await apiClient.listProjects({});
+    // Get the user's organizations
+    const orgsResponse = await apiClient.getCurrentUserOrganizations();
+    const orgId = orgsResponse.data.organizations[0].id;
+
+    // List projects within the org
+    const response = await apiClient.listProjects({ org_id: orgId });
     console.log(response.data.projects);
   } catch (error) {
     console.error('Error listing projects:', error);
@@ -322,7 +327,7 @@ createNeonDatabase('your-project-id', 'your-branch-id', 'mydatabase', 'neondb_ow
 ```
 
 - The `owner_name` parameter specifies the owner of the database. Ensure this role exists in the branch beforehand.
-- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (e.g., [listProjectBranches](#list-branches), [listProjects](#list-projects)).
+- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (for example, [listProjectBranches](#list-branches), [listProjects](#list-projects)).
 
 ### Create a Role
 
@@ -356,7 +361,7 @@ createNeonRole('your-project-id', 'your-branch-id', 'new_user_role').catch((erro
 #### Key points:
 
 - `role.name`: Specifies the name of the Postgres role to be created.
-- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (e.g., [listProjectBranches](#list-branches), [listProjects](#list-projects))
+- Branch & Project IDs: You can obtain these IDs from the [Neon Console](/docs/manage/branches#view-branches) or using SDK methods (for example, [listProjectBranches](#list-branches), [listProjects](#list-projects))
 
 ## TypeScript Types
 
@@ -381,7 +386,10 @@ const apiClient = createApiClient({
 
 async function listNeonProjects(): Promise<void> {
   try {
-    const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({});
+    const orgsResponse = await apiClient.getCurrentUserOrganizations();
+    const orgId = orgsResponse.data.organizations[0].id;
+
+    const response: AxiosResponse<ProjectsResponse> = await apiClient.listProjects({ org_id: orgId });
     const projects = response.data.projects;
     console.log('Projects:', projects);
   } catch (error) {
@@ -519,7 +527,7 @@ When an error occurs during an API request, the SDK throws an `AxiosError` objec
 
 **`error.response`**: This property (if present) is an Axios response object containing details from the API error response.
 
-- **`error.response.status`**: The HTTP status code of the error response (e.g., 400, 401, 404, 500).
+- **`error.response.status`**: The HTTP status code of the error response (for example, 400, 401, 404, 500).
 - **`error.response.data`**: The response body, which, for Neon API errors, often follows a consistent structure, including an `error` object with `code` and `message` properties.
 
 ### Common Error Scenarios and Debugging

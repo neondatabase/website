@@ -82,6 +82,12 @@ export default {
     pathname: LINKS.multiTB,
     imagePath: '/images/social-previews/multi-tb.jpg',
   },
+  useCases: {
+    title: 'Use Cases — Neon',
+    description:
+      'Explore how teams use Neon to support branching databases, CI pipelines, preview environments, and production workloads.',
+    pathname: LINKS.useCases,
+  },
   serverlessApps: {
     title: 'Postgres for serverless apps — Neon',
     description:
@@ -152,6 +158,12 @@ export default {
     description:
       'Apply to the Neon Startup Program and get up to 100k in Neon credits. For venture-backed companies and startup accelerator programs.',
     pathname: LINKS.startups,
+  },
+  autoscalingReport: {
+    title: 'Compute Autoscaling Report',
+    description: 'A deep-dive into the numbers behind Neon Autoscaling.',
+    imagePath: '/images/social-previews/compute-autoscaling-report.jpg',
+    pathname: LINKS.autoscalingReport,
   },
   error: {
     title: 'Page Is Broken — Neon',

@@ -6,7 +6,7 @@ summary: >-
   storage and querying of multidimensional points and cubes for applications in
   GIS, business intelligence, and scientific computing.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.824Z'
+updatedOn: '2026-02-15T20:51:54.075Z'
 ---
 
 The cube extension for Postgres provides a specialized data type for representing multidimensional "cubes", which are, more generally, n-dimensional boxes or points. This makes it useful for applications dealing with multidimensional data, such as geographic information systems (GIS) storing coordinates (latitude, longitude, altitude), business intelligence (BI) applications analyzing data across various dimensions, or scientific computing tasks involving vector operations.
@@ -333,10 +333,10 @@ LIMIT 3;
     - Storing latitude/longitude/altitude points.
     - Defining bounding boxes for map features.
 2.  **Business Intelligence (BI) / OLAP**:
-    - Representing data points in a multidimensional space (e.g., sales by `product_category_id`, `region_id`, `time_id`).
+    - Representing data points in a multidimensional space (for example, sales by `product_category_id`, `region_id`, `time_id`).
     - Filtering data based on ranges in multiple dimensions.
 3.  **Scientific computing**: Storing points or regions in n-dimensional parameter spaces for experiments or simulations.
-4.  **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (e.g., temperature, humidity, pressure) at a specific time.
+4.  **Time-series data with multidimensional attributes**: Storing sensor readings where each reading has multiple values (for example, temperature, humidity, pressure) at a specific time.
 
     **Example:**
 
@@ -344,7 +344,7 @@ LIMIT 3;
     CREATE TABLE sensor_log (
       ts TIMESTAMPTZ NOT NULL,
       device_id INT,
-      metrics CUBE -- e.g., (temperature, humidity, pressure)
+      metrics CUBE -- for example, (temperature, humidity, pressure)
     );
 
     INSERT INTO sensor_log (ts, device_id, metrics) VALUES

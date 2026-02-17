@@ -6,7 +6,7 @@ summary: >-
   how to edit files on GitHub, submit pull requests, and utilize templates for
   creating new guides.
 enableTableOfContents: true
-updatedOn: '2026-02-07T21:34:27.958Z'
+updatedOn: '2026-02-15T20:51:54.064Z'
 ---
 
 This page provides guidelines for contributing to the Neon documentation. Our goal is to create an environment where our community has the information and knowledge required to confidently participate in improving the Neon documentation.
@@ -142,7 +142,7 @@ To add a subsection heading, equivalent to an `h3`, add another `#` character:
 ```
 
 - Try to avoid heading levels beyond h4 (`####`).
-- Do not skip a level, e.g., do not go from `##` to `####`.
+- Do not skip a level, for example, do not go from `##` to `####`.
 - Ensure there's a blank line before and after each heading.
 
 ## Common markup
@@ -410,7 +410,7 @@ Commands, parameters, values, filenames, error messages, connection strings, and
 The Neon website repo includes rules and commands (in Cursor and Claude) to keep documentation consistent. You don't need to memorize them.
 
 - **Open the doc** you're editing so the right rules apply, then describe what you want in plain language.
-- **Optional:** You can ask for specific help—e.g. "check consistency on this page," "use our style examples," or "walk me through the redirect steps."
+- **Optional:** You can ask for specific help (for example "check consistency on this page," "use our style examples," or "walk me through the redirect steps.").
 - **Curious what's available?** Ask: "What doc AI tools are available?" to see the list.
 - All changes go through a pull request and human review.
 

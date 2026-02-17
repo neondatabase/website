@@ -6,7 +6,7 @@ summary: >-
   from the client-side, generating backend signatures, and storing asset
   metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.943Z'
+updatedOn: '2026-02-15T20:51:54.143Z'
 ---
 
 [Cloudinary](https://cloudinary.com/) is a cloud-based platform for image and video management, offering upload, storage, real-time manipulation, optimization, and delivery via CDN.
@@ -45,18 +45,18 @@ We need a table in Neon to store metadata about the assets uploaded to Cloudinar
         id SERIAL PRIMARY KEY,
         public_id TEXT NOT NULL UNIQUE,  -- Cloudinary's unique identifier for the asset
         media_url TEXT NOT NULL,         -- Media URL for the asset on Cloudinary's CDN
-        resource_type TEXT NOT NULL,     -- Type of asset (e.g., 'image', 'video', 'raw')
+        resource_type TEXT NOT NULL,     -- Type of asset (for example, 'image', 'video', 'raw')
         user_id TEXT NOT NULL,           -- User associated with the file
         upload_timestamp TIMESTAMPTZ DEFAULT NOW()
     );
     ```
 
-2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (e.g., `version`, `format`, `width`, `height`, `tags`).
+2.  Run the SQL statement. You can customize this table by adding other useful columns returned by Cloudinary (for example, `version`, `format`, `width`, `height`, `tags`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), apply appropriate policies to the `cloudinary_files` table to control access to the metadata stored in Neon based on your rules.
 
-Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (e.g., via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
+Note that these policies apply _only_ to the metadata in Neon. Access control for the assets themselves is managed within Cloudinary (for example, via asset types, delivery types). By default, uploaded assets are typically accessible via their CDN URL.
 </Admonition>
 
 ## Upload files to Cloudinary and store metadata in Neon

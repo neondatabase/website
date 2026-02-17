@@ -7,7 +7,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/pg-extensions
-updatedOn: '2026-02-06T22:07:32.833Z'
+updatedOn: '2026-02-15T20:51:54.083Z'
 ---
 
 Neon supports the Postgres extensions shown below. Extension versions may differ by Postgres version. A dash (`-`) indicates an extension is not yet supported for that version.
@@ -93,7 +93,7 @@ Neon supports the Postgres extensions shown below. Extension versions may differ
 | [semver](https://pgxn.org/dist/semver)                                                           |  0.32.1 |  0.32.1 |  0.32.1 |  0.40.0 | 0.40.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [tablefunc](/docs/extensions/tablefunc)                                                          |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [tcn](https://www.postgresql.org/docs/16/tcn.html)                                               |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
-| [timescaledb](/docs/extensions/timescaledb)                                                      |  2.10.1 |  2.10.1 |  2.13.0 |  2.17.1 | 2.24.0 | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                                                                                                                                                                                                                                                                                  |
+| [timescaledb](/docs/extensions/timescaledb)                                                      |  2.10.1 |  2.10.1 |  2.13.0 |  2.17.1 |      - | Only Apache-2 licensed features are supported. Compression is not supported.                                                                                                                                                                                                                                                                                                                                                                                  |
 | [tsm_system_rows](https://www.postgresql.org/docs/16/tsm-system-rows.html)                       |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [tsm_system_time](https://www.postgresql.org/docs/16/tsm-system-time.html)                       |     1.0 |     1.0 |     1.0 |     1.0 |    1.0 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | [unaccent](/docs/extensions/unaccent)                                                            |     1.1 |     1.1 |     1.1 |     1.1 |    1.1 |                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -176,10 +176,10 @@ SET neon.allow_unstable_extensions = 'true';
 
 **Things to know about experimental extensions:**
 
-- **Use with caution:** We recommend trying experimental extensions in a separate project—not in the Neon project you use for production.
-- **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible—but we can’t guarantee more than that.
+- **Use with caution:** We recommend trying experimental extensions in a separate project, not in the Neon project you use for production.
+- **Limited support:** Experimental extensions aren’t covered by Neon support. If an extension causes your database to fail or prevents it from starting, we’ll help you disable it if possible, but we can’t guarantee more than that.
 - **No guarantees:** An experimental extension might never become fully supported. It could require significant work from Neon or the extension’s maintainers before it’s ready for general use.
-- **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed—especially if they pose security or operational risks.
+- **Subject to change or removal:** Experimental extensions may be updated at any time, including breaking changes. They can also be removed, especially if they pose security or operational risks.
 
 If you're experimenting with an extension and run into trouble, we recommend checking with the extension’s maintainers or community for support.
 
@@ -207,11 +207,11 @@ curl --request GET \
 
 The response body lists available libraries and whether the libraries are enabled by default. Response body attributes include:
 
-- `library_name` — library name, typically named for the associated extension
-- `description` — a description of the extension
-- `is_default` — whether the library is enabled by default
-- `is_experimental` — whether the extensions is [experimental](#experimental-extensions)
-- `version` — the extension version
+- `library_name`: library name, typically named for the associated extension
+- `description`: a description of the extension
+- `is_default`: whether the library is enabled by default
+- `is_experimental`: whether the extensions is [experimental](#experimental-extensions)
+- `version`: the extension version
 
 <details>
 <summary>Response body</summary>
@@ -318,7 +318,7 @@ When running a `Create project` or `Update project` API call to enable libraries
 - Library names must be quoted, comma-separated, and specified in a single string.
 - Specify all libraries that should be enabled. If a library is not included in the API call, it will not be enabled.
 - The "use_defaults": true`option overrides the`"enabled_libraries"` option, enabling only default libraries
-- The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not — they're used by a Neon system-managed database.
+- The `neon` and `pg_stat_statements` libraries will remain enabled whether you include them in your API call or not; they're used by a Neon system-managed database.
 - If you do not use one of the libraries enabled by default, you can exclude it from your API call. For example, if you do not use the `pgrag` extension, you can exclude its libraries (`"rag_bge_small_en_v15,rag_jina_reranker_v1_tiny_en"`).
 
 ## Extension notes

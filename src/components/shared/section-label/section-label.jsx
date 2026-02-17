@@ -12,7 +12,7 @@ const themeClassName = {
 
 const sizeClassName = {
   regular: 'text-xs sm:text-[10px]',
-  large: 'text-sm sm:text-[10px]',
+  large: 'text-[13px] sm:text-[10px]',
 };
 
 const SectionLabel = ({
@@ -27,8 +27,8 @@ const SectionLabel = ({
       <Image
         className="sm:size-2.5"
         src={databricksIcon}
-        width={22}
-        height={22}
+        width={20}
+        height={20}
         alt="Databricks logo"
       />
     ) : (

@@ -1915,6 +1915,12 @@ async function processAllContent(contentRoutes, rootDir) {
   }
 
   printBuildSummary(rootDir);
+
+  if (processingErrors.length > 0) {
+    throw new Error(
+      `BUILD FAILED: ${processingErrors.length} file(s) failed to process. See errors above.`
+    );
+  }
 }
 
 // Export for use by other scripts

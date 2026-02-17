@@ -2,7 +2,7 @@
 title: Neon for Database-per-user
 subtitle: How to configure Neon for multi-tenancy - plus a few design tips
 enableTableOfContents: true
-updatedOn: '2026-01-06T18:58:21.264Z'
+updatedOn: '2026-02-15T20:51:54.273Z'
 ---
 
 With its serverless and API-first nature, Neon is an excellent choice for building database-per-user applications (or apps where each user/customer has their own Postgres database). Neon is particularly well-suited for architectures that prioritize maximum database isolation, achieving the equivalent of instance-level isolation.
@@ -121,7 +121,7 @@ You can set up your catalog database as a separate Neon project. When it's time 
 - Track key operational data, like `schema_version`, in the `project` table.
 - Index wisely! While the catalog will likely remain smaller than user databases, it will grow—especially with recurring events like payments—so indexing is crucial for control plane performance at scale.
 - Start with essential data fields and plan for future extensions as needs evolve.
-- Standard Neon metadata (e.g., compute size, branch info) is accessible via the console. Avoid duplicating it in the catalog database unless separate access adds significant complexity.
+- Standard Neon metadata (for example, compute size, branch info) is accessible via the console. Avoid duplicating it in the catalog database unless separate access adds significant complexity.
 
 ### Automations
 
@@ -188,7 +188,7 @@ In this architecture, each customer has instead a dedicated application environm
 
 - Since each customer can now have a unique application environment, it’s easier to implement personalized features and configurations, to keep separate versions for particular customers, and so on.
 - Compliance is also simpler if you’re handling multiple regions. Deploying the application in multiple regions can also help with latency.
-- This design also opens the door for customers to control their own upgrade schedules, e.g., via defining their own maintenance windows.
+- This design also opens the door for customers to control their own upgrade schedules, for example, via defining their own maintenance windows.
 
 #### Cons of isolated environments
 

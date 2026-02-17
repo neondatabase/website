@@ -7,7 +7,7 @@ summary: >-
   Neon projects.
 enableTableOfContents: true
 tag: beta
-updatedOn: '2026-02-06T22:07:33.066Z'
+updatedOn: '2026-02-15T20:51:54.206Z'
 redirectFrom:
   - /docs/import/migration-assistant
 ---
@@ -34,7 +34,7 @@ The Import Data Assistant always creates a **new branch** for your imported data
 
    ![Import Data Assistant from Quick Start widget](/docs/import/import_data_assistant_quickstart_widget.png)
 
-Both options use the same automated import process — just provide your database connection string and we'll handle the rest.
+Both options use the same automated import process; just provide your database connection string and we'll handle the rest.
 
 ## Before you start
 
@@ -69,7 +69,7 @@ Once checks pass, we'll:
 - Verify that the import completed successfully.
 
 <Admonition type="note">
-During import, your source database remains untouched — we only read from it to create a copy in Neon.
+During import, your source database remains untouched; we only read from it to create a copy in Neon.
 </Admonition>
 
 ### Known Limitations

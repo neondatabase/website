@@ -144,7 +144,7 @@ Wait for user response before proceeding.
 ## Changelog Entry Workflow (when user picks 2 or 3)
 
 - Classify as major feature (H2 at top) or minor (bullet in `<details>`). Ask user preference if unclear.
-- Compute next Friday (America/New_York) per `.cursor/neon-changelog.rules`. Check for existing `content/changelog/YYYY-MM-DD.md` or open changelog PR.
+- Compute next Friday (America/New_York) per `.cursor/rules/neon-changelog.mdc`. Check for existing `content/changelog/YYYY-MM-DD.md` or open changelog PR.
 - Draft entry; present for approval. If new changelog file: create it with template; if exists: add H2 or bullet. Commit, push, create or update PR with `gh pr create` or `gh pr edit`.
 
 All paths for changelog and docs PRs are from repository root (e.g. `content/changelog/`, `content/docs/`).

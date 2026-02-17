@@ -6,7 +6,7 @@ summary: >-
   including permission errors and JWT validation failures, along with steps to
   resolve them.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.817Z'
+updatedOn: '2026-02-15T20:51:54.073Z'
 ---
 
 <InfoBlock>
@@ -86,7 +86,7 @@ The `sub` claim in this example: `41a5f680-89d2-474d-ae59-e27bfbbbd293` represen
 
 If you're using Neon Auth, you can use the Auth API reference UI to create test users and obtain JWT tokens for testing with tools like Postman or cURL.
 
-Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console. From there, you can:
+Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console. From there, you can:
 
 1. Create a test user with `POST /api/auth/sign-up/email`.
 2. Sign in with `POST /api/auth/sign-in/email`.
@@ -160,7 +160,7 @@ If you've enabled RLS but queries return no data, you likely haven't created any
 
 ### Why this happens
 
-When RLS is enabled on a table, all access is blocked by default until you create policies that grant access. This is a security feature — it ensures data is protected even if you forget to add policies.
+When RLS is enabled on a table, all access is blocked by default until you create policies that grant access. This is a security feature; it ensures data is protected even if you forget to add policies.
 
 ### Fix
 

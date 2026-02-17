@@ -6,7 +6,7 @@ summary: >-
   and analytics in Postgres, utilizing BM25 indexing for high-relevance results
   and advanced text search capabilities.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.839Z'
+updatedOn: '2026-02-15T20:51:54.089Z'
 ---
 
 The `pg_search` extension by [ParadeDB](https://www.paradedb.com/) adds functions and operators to Postgres that use [BM25 (Best Matching 25)](https://en.wikipedia.org/wiki/Okapi_BM25) indexes for efficient, high-relevance text searches. It supports standard SQL syntax and JSON query objects, offering features similar to those in Elasticsearch.
@@ -47,12 +47,12 @@ The `pg_search` extension is supported on Postgres 14–16 for Neon projects in 
 
 ## Understanding text search with `pg_search`
 
-`pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns. Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. It also addresses major performance limitations of native Postgres full-text search (FTS) by using a **BM25 covering index**, which indexes text along with metadata (numeric, datetime, JSON, etc.), enabling complex boolean, aggregate, and ordered queries to be processed significantly faster—often reducing query times from minutes to seconds.
+`pg_search` enables text searching within your Postgres database, helping you find rows containing specific keywords or phrases in text columns. Unlike basic `LIKE` queries, `pg_search` offers advanced scoring, relevance ranking, and language handling to deliver more accurate and context-aware search results. It also addresses major performance limitations of native Postgres full-text search (FTS) by using a **BM25 covering index**, which indexes text along with metadata (numeric, datetime, JSON, etc.), enabling complex boolean, aggregate, and ordered queries to be processed significantly faster, often reducing query times from minutes to seconds.
 
 Key features include:
 
 - **Advanced relevance ranking:** Orders search results by relevance, incorporating phrase, regex, fuzzy matching, and other specialized FTS queries.
-- **Powerful indexing with flexible tokenization:** Supports multiple tokenizers (e.g., ICU, Lindera) and token filters (e.g., language-aware stemmers), improving search accuracy across different languages.
+- **Powerful indexing with flexible tokenization:** Supports multiple tokenizers (for example, ICU, Lindera) and token filters (for example, language-aware stemmers), improving search accuracy across different languages.
 - **Hybrid search:** Combines BM25 scores with `pgvector` embeddings to enhance search experiences.
 - **Faceted search:** Allows categorization and filtering of search results based on query parameters.
 - **Expressive query builder:** Provides an Elastic DSL-like query syntax for constructing complex search queries.
@@ -425,7 +425,7 @@ Optimize index build time with these settings. The `maintenance_work_mem` settin
       SET paradedb.create_index_parallelism = 8;
       ```
 
-For more information about optimizing BM25 index size, see [ParadeDB — Index Size](https://docs.paradedb.com/documentation/configuration/index_size).
+For more information about optimizing BM25 index size, see [ParadeDB: Index Size](https://docs.paradedb.com/documentation/configuration/index_size).
 
 ### Throughput
 
@@ -443,7 +443,7 @@ Tune `INSERT/UPDATE/COPY` throughput for the BM25 index with these settings:
     SET paradedb.statement_parallelism = 1;
     ```
 
-- **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB — Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
+- **`paradedb.statement_memory_budget`**: Memory per indexing thread before writing to disk. Default is 1024 MB (1 GB). Higher values may improve indexing performance. See [ParadeDB: Statement Memory Budget](https://docs.paradedb.com/documentation/configuration/write#statement-memory-budget).
   - If set to `0`, `maintenance_work_mem / paradedb.statement_parallelism` is used.
   - For single-row updates, 15 MB prevents excess memory allocation.
   - For bulk inserts/updates, increase as needed.

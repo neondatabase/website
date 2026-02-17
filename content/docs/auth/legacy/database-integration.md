@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 tag: archived
 noindex: true
-updatedOn: '2026-02-06T22:07:32.752Z'
+updatedOn: '2026-02-15T20:51:54.040Z'
 ---
 
 <Admonition type="warning" title="You are viewing legacy documentation">
@@ -25,7 +25,7 @@ Neon Auth simplifies database operations by automatically managing user data syn
 
 ### The users_sync table
 
-The `neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth. No action is needed from you—it's immediately available for use in your schema and queries.
+The `neon_auth.users_sync` table is automatically created and kept in sync by Neon Auth. No action is needed from you; it's immediately available for use in your schema and queries.
 
 **Table structure:**
 
@@ -91,7 +91,7 @@ Since the `neon_auth.users_sync` table is updated asynchronously, there may be a
 If you do choose to use foreign keys, make sure to specify an `ON DELETE` behavior that matches your needs: for example, `CASCADE` for personal data like todos or user preferences, and `SET NULL` for content like blog posts or comments that should persist after user deletion.
 
 ```sql
--- For personal data that should be removed with the user (e.g., todos)
+-- For personal data that should be removed with the user (for example, todos)
 CREATE TABLE todos (
     id SERIAL PRIMARY KEY,
     task TEXT NOT NULL,
@@ -99,7 +99,7 @@ CREATE TABLE todos (
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
 );
 
--- For content that should persist after user deletion (e.g., blog posts)
+-- For content that should persist after user deletion (for example, blog posts)
 CREATE TABLE posts (
     id SERIAL PRIMARY KEY,
     title TEXT NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE posts (
 
 When querying data that relates to users:
 
-- Use LEFT JOINs instead of INNER JOINs with the `users_sync` table in case of any sync delays. This ensures that all records from the main table (e.g., posts) are returned even if there's no matching user in the `users_sync` table yet.
+- Use LEFT JOINs instead of INNER JOINs with the `users_sync` table in case of any sync delays. This ensures that all records from the main table (for example, posts) are returned even if there's no matching user in the `users_sync` table yet.
 - Filter out deleted users since the table uses soft deletes (users are marked with a `deleted_at` timestamp when deleted).
 
 Here's an example of how to handle both in your queries:

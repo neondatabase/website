@@ -7,7 +7,7 @@ summary: >-
   deletion of temporary branches by setting expiration timestamps through the
   Console, CLI, or API.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.925Z'
+updatedOn: '2026-02-15T20:51:54.140Z'
 ---
 
 ## Overview
@@ -17,9 +17,9 @@ Branch expiration allows you to set automatic deletion timestamps on branches. W
 <Admonition type="tip" title="Quick guide">
 **Console:** When creating a branch, **Automatically delete branch after** is checked by default with 1 day selected. You can choose 1 hour, 1 day, or 7 days, or uncheck to disable. When updating an existing branch, you can select a custom date and time.
 
-**CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
+**CLI:** Use `--expires-at` with [RFC 3339 format](#timestamp-format-requirements) (for example, `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
 
-**API:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (e.g., `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
+**API:** Use `expires_at` with [RFC 3339 format](#timestamp-format-requirements) (for example, `2025-07-15T18:02:16Z`). Note: Expiration must be explicitly set; there is no default.
 </Admonition>
 
 <InfoBlock>
@@ -61,7 +61,7 @@ When you set an expiration timestamp on a branch:
 
 1. The system stores both:
    - **Expiration timestamp** (`expires_at`) - The scheduled date and time when the branch will be deleted
-   - **TTL interval** (`ttl_interval_seconds`) - The duration between creation/update and expiration (e.g., 24 hours = 86400 seconds), a read-only value
+   - **TTL interval** (`ttl_interval_seconds`) - The duration between creation/update and expiration (for example, 24 hours = 86400 seconds), a read-only value
 
 2. A background process monitors branches and deletes them after their expiration time is reached
 

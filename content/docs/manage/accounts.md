@@ -5,7 +5,7 @@ summary: >-
   Covers the management of your Neon account, including updating personal
   information, changing your email and password, and switching login methods.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.111Z'
+updatedOn: '2026-02-15T20:51:54.223Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
@@ -48,11 +48,11 @@ If you change your email (whether you started with email or social login), you'l
 
 ## Change password
 
-No surprises here — just enter your current password, then your new one (twice). We'll enforce our current password rules for your security.
+No surprises here: just enter your current password, then your new one (twice). We'll enforce our current password rules for your security.
 
 ## Create personal API keys
 
-Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API.. Your personal API key works for any organization you belong to — so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API.. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
 
 [Learn more about API keys](/docs/manage/api-keys)
 

@@ -7,7 +7,7 @@ summary: >-
   utilizes PostgreSQL's security model to enforce role privileges and Row-Level
   Security for database access control.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.805Z'
+updatedOn: '2026-02-15T20:51:54.069Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -20,7 +20,7 @@ updatedOn: '2026-02-06T22:07:32.805Z'
   </DocsList>
 </InfoBlock>
 
-The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system — it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
+The Neon Data API is designed to be secure by default. It relies on PostgreSQL's native security model, meaning the API does not have its own separate permission system; it simply acts as a gateway that respects the roles and Row-Level Security (RLS) policies defined in your database.
 
 Securing your data involves two layers:
 
@@ -46,12 +46,12 @@ When a client sends a valid Bearer token, the API switches to the `authenticated
 If a request arrives with no `Authorization` header, the API switches to the `anonymous` role.
 
 - By default, this role has **no permissions**.
-- You can explicitly `GRANT` SELECT permissions to this role if you want to expose public data (e.g., a list of products or public blog posts) without requiring users to log in.
+- You can explicitly `GRANT` SELECT permissions to this role if you want to expose public data (for example, a list of products or public blog posts) without requiring users to log in.
 - The `GRANT` statements would be similar to the grants for the `authenticated` role. See [Configure schema access](/docs/data-api/get-started#3-configure-schema-access) for an example.
 
 ### 3. Custom roles
 
-The API determines the role based on the `role` claim in the JWT. If you issue your own tokens with a custom role claim (e.g., `"role": "admin"`), the API will attempt to switch to a Postgres role named `admin`. You must ensure this role exists in your database and has the correct permissions.
+The API determines the role based on the `role` claim in the JWT. If you issue your own tokens with a custom role claim (for example, `"role": "admin"`), the API will attempt to switch to a Postgres role named `admin`. You must ensure this role exists in your database and has the correct permissions.
 
 The following Layers explain how to configure these roles for secure access.
 
@@ -67,7 +67,7 @@ When you enable the Data API via the Console, Neon automatically applies default
 
 If you skipped the default Data API setup in the Neon Console or you are adding custom roles or working with schemas other than `public`, you may need to grant permissions explicitly.
 
-The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (e.g., `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (e.g., `admin`), but you must ensure that the role exists in your database.
+The following example SQL commands grant the `authenticated` role access to all existing and future tables in the `public` schema. If your tables are in a different schema (for example, `sales`, `analytics` etc), update the schema name accordingly. You can also substitute `authenticated` with a custom role (for example, `admin`), but you must ensure that the role exists in your database.
 
 Run these commands in the [SQL Editor](/docs/get-started/query-with-neon-sql-editor) to ensure your API users can access your tables:
 
@@ -93,7 +93,7 @@ If you encounter a "permission denied" error immediately after creating a new ta
 
 ## Layer 2: Row-Level Security (RLS)
 
-Granting `SELECT` access to the `authenticated` role allows the API to read **all rows** in the table. To restrict access to specific data (e.g., "users can only see their own posts"), you must enable Row-Level Security and create policies.
+Granting `SELECT` access to the `authenticated` role allows the API to read **all rows** in the table. To restrict access to specific data (for example, "users can only see their own posts"), you must enable Row-Level Security and create policies.
 
 ### Understanding RLS states
 
@@ -106,7 +106,7 @@ RLS has three distinct states that affect data visibility:
 | **RLS enabled + policies**   | Rows filtered by policy rules (typically using `auth.user_id()`) |
 
 <Admonition type="warning" title="RLS disabled means no filtering">
-If RLS is disabled on a table, any authenticated user can see all rows in that table. This is different from "filtering without policies" — it means there is no filtering at all.
+If RLS is disabled on a table, any authenticated user can see all rows in that table. This is different from "filtering without policies"; it means there is no filtering at all.
 </Admonition>
 
 ### Checking RLS status in the Console

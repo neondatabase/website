@@ -17,6 +17,7 @@ const styles = {
     md: 't-2xl py-7 px-11 2xl:py-[26px] xl:py-[21px] xl:px-9 md:py-5 md:px-8 font-semibold',
     'md-new': 'px-9 h-12 font-medium tracking-tighter lg:h-11 lg:px-11 xs:h-10 xs:text-sm',
     sm: 't-xl py-[26px] px-11 2xl:py-[21px] 2xl:px-9 xl:py-5 xl:px-8 font-semibold',
+    'sm-new': 'h-[38px] px-7 tracking-extra-tight text-sm',
     xs: 't-base py-[14px] px-[26px] font-medium',
     xxs: 'h-8 px-4 text-sm tracking-extra-tight font-medium',
     new: 'h-11 px-7 tracking-extra-tight lg:h-9 lg:text-sm lg:px-[18px]',

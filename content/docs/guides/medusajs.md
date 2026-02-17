@@ -6,7 +6,7 @@ summary: >-
   database, including setup instructions and prerequisites for creating a Neon
   project and connecting to the database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.018Z'
+updatedOn: '2026-02-15T20:51:54.172Z'
 ---
 
 [Medusa](https://medusajs.com/) is an open-source headless e-commerce platform that provides a flexible backend for building modern e-commerce applications. It uses Postgres as its primary database to store all product, order, and customer data.
@@ -63,7 +63,7 @@ npx create-medusa-app@latest --db-url "YOUR_NEON_CONNECTION_STRING"
 ### Installation steps
 
 1.  **Follow the prompts:** The CLI will ask a few questions to configure your setup:
-    - **Project name:** Enter a name for your project (e.g., `medusa-neon-store`).
+    - **Project name:** Enter a name for your project (for example, `medusa-neon-store`).
     - **Frontend starter:** Choose whether to install the Next.js Starter Storefront or skip it depending on your preference.
 2.  **Automatic setup:**
     - The tool will install the Medusa backend and optionally the Next.js Starter Storefront.

@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/integrations/prisma
   - /docs/guides/prisma-guide
   - /docs/guides/prisma-migrate
-updatedOn: '2026-02-06T22:07:33.033Z'
+updatedOn: '2026-02-15T20:51:54.189Z'
 ---
 
 <CopyPrompt src="/prompts/prisma-prompt.md" 
@@ -38,8 +38,8 @@ npm install prisma --save-dev
 
 From your Neon Console, click **Connect** and copy both connection strings:
 
-- **Pooled connection** (has `-pooler` in the hostname) — for your application
-- **Direct connection** — for Prisma CLI commands (migrations, introspection)
+- **Pooled connection** (has `-pooler` in the hostname): for your application
+- **Direct connection**: for Prisma CLI commands (migrations, introspection)
 
 ![Connection details modal](/docs/connect/connection_details.png)
 
@@ -101,7 +101,7 @@ export default defineConfig({
 
 ### Step 5: Create your Prisma Client
 
-Create a file to instantiate Prisma Client with the Neon adapter (e.g., `src/db.ts`):
+Create a file to instantiate Prisma Client with the Neon adapter (for example, `src/db.ts`):
 
 ```typescript
 import 'dotenv/config'
@@ -216,8 +216,8 @@ The `directUrl` property is available in Prisma 4.10.0 and higher.
 
 ## Next steps
 
-- [Schema migrations with Prisma](/docs/guides/prisma-migrations) — Full tutorial for building an app with migrations
-- [Neon serverless driver](/docs/serverless/serverless-driver) — Learn more about the driver powering the adapter
+- [Schema migrations with Prisma](/docs/guides/prisma-migrations): Full tutorial for building an app with migrations
+- [Neon serverless driver](/docs/serverless/serverless-driver): Learn more about the driver powering the adapter
 
 ## Resources
 

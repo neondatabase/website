@@ -40,8 +40,8 @@ const BackedBy = () => (
               '[&>strong]:font-normal [&>strong]:text-black-pure'
             )}
           >
-            <strong>Backed by Giants. Trusted Postgres. Battle-tested scale.</strong> Neon was
-            founded by Postgres committers, bringing decades of expertise.
+            <strong>Trusted Postgres, Backed by Giants.</strong> Neon was founded by Postgres
+            committers, bringing decades of expertise. In 2025, Neon became a Databricks company.
           </h2>
           <ul className="mt-[216px] flex gap-[92px] xl:mt-[136px] xl:gap-16 lg:gap-8 md:gap-5 sm:mt-9 xs:flex-col xs:gap-7">
             {ITEMS.map(({ icon, title, description, className }) => (

@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/go
   - /docs/integrations/go
-updatedOn: '2026-02-06T22:07:32.974Z'
+updatedOn: '2026-02-15T20:51:54.157Z'
 ---
 
 <CopyPrompt src="/prompts/golang-prompt.md" 
@@ -46,7 +46,7 @@ For your Go project, create a project directory, initialize a Go module, and add
     cd neon-go-quickstart
     ```
 
-    > Open the directory in your preferred code editor (e.g., VS Code, GoLand).
+    > Open the directory in your preferred code editor (for example, VS Code, GoLand).
 
 2.  Initialize a Go module. This command creates a `go.mod` file to track your project's dependencies.
 

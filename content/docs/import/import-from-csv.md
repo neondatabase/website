@@ -5,7 +5,7 @@ summary: >-
   command-line client, including steps for connecting to the database, creating
   the target table, and preparing the CSV file.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.066Z'
+updatedOn: '2026-02-15T20:51:54.207Z'
 ---
 
 This topic shows how to import data into a Neon database table from a CSV file using a simple example.
@@ -32,7 +32,7 @@ For more information about connecting to Neon with `psql`, see [Connect with psq
 
 ## Create the target table
 
-Create the `customer` table — table you are importing to must exist in your database and the columns must match your CSV file.
+Create the `customer` table: the table you are importing to must exist in your database and the columns must match your CSV file.
 
 ```sql
 CREATE TABLE customer (
@@ -50,7 +50,7 @@ You can also create tables using the **SQL Editor** in the Neon Console. See [Qu
 
 ## Prepare the CSV file
 
-Prepare a `customer.csv` file with the following data — note that the columns in the CSV file match the columns in the table you created in the previous step.
+Prepare a `customer.csv` file with the following data. Note that the columns in the CSV file match the columns in the table you created in the previous step.
 
 ```text
 First Name,Last Name,Email

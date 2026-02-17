@@ -8,7 +8,7 @@ summary: >-
   management and middleware creation.
 enableTableOfContents: true
 layout: wide
-updatedOn: '2026-02-06T22:07:32.772Z'
+updatedOn: '2026-02-15T20:51:54.049Z'
 ---
 
 Reference documentation for the Neon Auth Next.js server SDK (`@neondatabase/auth/next/server`). This package provides server-side authentication for Next.js applications using React Server Components, API routes, middleware, and server actions.
@@ -836,7 +836,7 @@ Complete configuration options for `createNeonAuth()`:
 - **baseUrl**: Your Neon Auth server URL from the Neon Console
 - **cookies.secret**: Secret for HMAC-SHA256 signing (32+ characters)
 - **cookies.sessionDataTtl**: Cache TTL in seconds
-- **cookies.domain**: For cross-subdomain sessions (e.g., ".example.com")
+- **cookies.domain**: For cross-subdomain sessions (for example, ".example.com")
 
 </TwoColumnLayout.Block>
 <TwoColumnLayout.Block>

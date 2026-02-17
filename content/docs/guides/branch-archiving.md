@@ -7,7 +7,7 @@ summary: >-
   costs, including conditions for archiving and unarchiving processes, as well
   as monitoring branch status.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.925Z'
+updatedOn: '2026-02-15T20:51:54.137Z'
 ---
 
 <InfoBlock>
@@ -36,7 +36,7 @@ However, a branch **cannot** be archived if it:
 
 - Has an **unarchived child branch**.
 - Has **computes running**.
-- Is **in transition** (e.g., currently being created or unarchived).
+- Is **in transition** (for example, currently being created or unarchived).
 - Is a **protected branch** ([learn more](/docs/guides/protected-branches)).
 
 <Admonition type="note">
