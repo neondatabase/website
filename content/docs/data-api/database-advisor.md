@@ -1,11 +1,11 @@
 ---
-title: Database Advisor
+title: Data API Advisor
 subtitle: Identify security and performance issues in your API-exposed database
 enableTableOfContents: true
 updatedOn: '2026-02-16T00:00:00.000Z'
 ---
 
-The Database Advisor analyzes your database schema and configuration to detect security and performance issues, with a focus on tables and objects exposed through the [Data API](/docs/data-api/overview). It runs a set of checks against your database and reports issues with severity levels and recommended fixes.
+The Data API Advisor analyzes your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. It runs a set of checks against your database and reports issues with severity levels and recommended fixes.
 
 Because the Data API exposes your database schema directly over HTTP, security misconfigurations that would normally be hidden behind an application server become directly exploitable. Missing RLS policies and overly permissive views are especially dangerous in this context. The advisor also checks for common performance issues like unindexed foreign keys and table bloat. It helps you catch both types of issues before they reach production.
 
@@ -772,3 +772,5 @@ SELECT pg_size_pretty(pg_table_size('<schema>.<table>'));
 If a table is repeatedly flagged for bloat, review your autovacuum settings to ensure vacuuming runs frequently enough. Contact [Neon support](/docs/introduction/support) for help tuning autovacuum for high-churn tables.
 
 </details>
+
+Database lints originally based on [open-source lints](https://github.com/supabase/supabase/blob/master/apps/studio/lib/api/self-hosted/lints.ts) from the Supabase project, Apache 2.0.
