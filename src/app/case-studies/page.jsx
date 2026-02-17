@@ -2,7 +2,6 @@ import Cards from 'components/pages/case-studies/cards';
 import Hero from 'components/pages/case-studies/hero';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import { getAllWpCaseStudiesPosts, getAllWpCaseStudiesCategories } from 'utils/api-wp';
 import getMetadata from 'utils/get-metadata';
@@ -18,11 +17,10 @@ const CaseStudiesPage = async () => {
       <Hero items={caseStudies} />
       <Cards items={caseStudies} categories={categories} />
       <CTANew
-        copyWrapperClassName="max-w-[840px] xl:max-w-[780px]"
-        title="Ready to get started with Neon?"
-        description="Interested in increasing your free tier limits or learning about pricing? Complete the form below to get in touch"
-        buttonText="Contact sales"
-        buttonUrl={LINKS.contactSales}
+        label="ASK AI"
+        title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+        description="It knows Neon inside and out."
+        buttonText="Get Answers"
         buttonType="aiHelper"
       />
     </Layout>

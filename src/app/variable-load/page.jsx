@@ -10,7 +10,6 @@ import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -62,10 +61,10 @@ const VariableLoadPage = async () => {
           </div>
         </Container>
         <CTANew
-          title="Ask us for a<br> price estimation"
-          description="Start saving with Neon"
-          buttonText="Contact us"
-          buttonUrl={LINKS.contactSales}
+          label="ASK AI"
+          title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+          description="It knows Neon inside and out."
+          buttonText="Get Answers"
           buttonType="aiHelper"
         />
       </div>

@@ -6,7 +6,6 @@ import SubHero from 'components/pages/multi-tb/sub-hero';
 import TestReliably from 'components/pages/multi-tb/test-reliably';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -21,9 +20,10 @@ const MultiTBPage = () => (
     <TestReliably />
     <HighAvailability />
     <CTANew
-      title="The Postgres of tomorrow, <br class='xs:hidden' /> available today"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
       buttonType="aiHelper"
     />
   </Layout>

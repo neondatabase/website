@@ -320,9 +320,10 @@ const EnterprisePage = () => (
     />
     <Faq items={faqItems} />
     <CTANew
-      title="The Postgres of tomorrow, <br /> available today"
-      buttonText="Book a meeting with our team"
-      buttonUrl={LINKS.contactSales}
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
       buttonType="aiHelper"
     />
   </Layout>

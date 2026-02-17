@@ -17,7 +17,7 @@ const CONTACT_SALES_AI_SETTINGS = {
     "<p>Hi!<br>I'm an AI assistant here to help you learn about Neon and answer any questions you have.</p><p>Feel free to ask about pricing, features, enterprise solutions, or anything else!</p>",
   quickQuestions: [
     'How to get a Demo request?',
-    'What are the Enterprice Pricing?',
+    'What are the Enterprise Pricing?',
     'HIPAA Compliance',
     'Security Overview',
   ],

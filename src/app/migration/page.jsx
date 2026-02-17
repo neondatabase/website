@@ -6,7 +6,6 @@ import CTANew from 'components/shared/cta-new';
 import GridFeatures from 'components/shared/grid-features';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import costEffective from 'icons/migration/grid-features/cost-effective.svg';
 import developerFriendly from 'icons/migration/grid-features/developer-friendly.svg';
@@ -79,9 +78,10 @@ const MigrationPage = () => (
       items={FEATURES}
     />
     <CTANew
-      title="18K+ databases created daily"
-      buttonText="Meet with our team"
-      buttonUrl={LINKS.contactSales}
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
       buttonType="aiHelper"
     />
   </Layout>
