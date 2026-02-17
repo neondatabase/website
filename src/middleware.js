@@ -3,6 +3,7 @@
 import { NextResponse } from 'next/server';
 
 import { checkCookie, getReferer } from 'app/actions';
+import { CONTENT_ROUTES } from 'constants/content';
 import LINKS from 'constants/links';
 
 import { isAIAgentRequest, getMarkdownPath } from './utils/ai-agent-detection';
@@ -12,6 +13,20 @@ const SITE_URL =
   process.env.VERCEL_ENV === 'preview'
     ? `https://${process.env.VERCEL_BRANCH_URL}`
     : process.env.NEXT_PUBLIC_DEFAULT_SITE_URL;
+
+function isContentRoute(pathname) {
+  const path = pathname.slice(1).replace(/\/$/, ''); // strip leading + trailing slashes
+  return Object.keys(CONTENT_ROUTES).some(
+    (route) => path === route || path.startsWith(`${route}/`)
+  );
+}
+
+function applyDocHeaders(response) {
+  response.headers.append('Vary', 'Accept');
+  response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
+  response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+  return response;
+}
 
 export async function middleware(req) {
   try {
@@ -45,27 +60,42 @@ export async function middleware(req) {
                 status: response.status,
               });
             }
+            // Fall through to isContentRoute below
+          } else {
+            const markdown = await response.text();
 
-            return NextResponse.next(); // Serve HTML page instead
+            // Return markdown content directly with appropriate headers
+            return applyDocHeaders(
+              new NextResponse(markdown, {
+                status: 200,
+                headers: {
+                  'Content-Type': 'text/plain; charset=utf-8',
+                  'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+                  'X-Content-Source': 'markdown',
+                  'X-Robots-Tag': 'noindex',
+                },
+              })
+            );
           }
-
-          const markdown = await response.text();
-
-          // Return markdown content directly with appropriate headers
-          return new NextResponse(markdown, {
-            status: 200,
-            headers: {
-              'Content-Type': 'text/plain; charset=utf-8',
-              'Cache-Control': 'public, max-age=3600, s-maxage=86400',
-              'X-Content-Source': 'markdown',
-              'X-Robots-Tag': 'noindex',
-            },
-          });
         } catch (error) {
           console.error('[AI Agent] Error serving markdown', { pathname, error: error.message });
-          return NextResponse.next();
+          // Fall through to isContentRoute below
         }
       }
+    }
+
+    // Apply doc headers to all content route responses (.md URLs and HTML pages)
+    // Note: Vary: Accept is set in next.config.js for this path because Next.js's
+    // renderer overwrites middleware Vary values. The AI agent path above uses
+    // applyDocHeaders() which includes Vary since that response bypasses rendering.
+    if (isContentRoute(pathname)) {
+      const response = NextResponse.next();
+      response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
+      response.headers.append('Link', '</docs/llms.txt>; rel="llms-txt"');
+      if (pathname.endsWith('.md')) {
+        response.headers.set('X-Robots-Tag', 'noindex');
+      }
+      return response;
     }
 
     // Check if the user is logged in

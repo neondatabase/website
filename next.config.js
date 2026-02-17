@@ -94,6 +94,12 @@ const defaultConfig = {
           },
         ],
       },
+      // Vary: Accept for content routes — set here (not middleware) because
+      // Next.js's renderer overwrites middleware Vary values during rendering.
+      ...Object.keys(CONTENT_ROUTES).map((route) => ({
+        source: `/${route}/:path*`,
+        headers: [{ key: 'Vary', value: 'Accept' }],
+      })),
       {
         source: '/blog/parsing-json-from-postgres-in-js',
         headers: [
@@ -107,17 +113,6 @@ const defaultConfig = {
           },
         ],
       },
-      // Prevent search engines from indexing raw markdown files
-      // (these are for AI agents, not human search results)
-      ...Object.keys(CONTENT_ROUTES).map((route) => ({
-        source: `/${route}/:path*.md`,
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex',
-          },
-        ],
-      })),
     ];
   },
   async redirects() {
