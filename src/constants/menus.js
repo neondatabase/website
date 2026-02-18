@@ -283,10 +283,6 @@ export default {
           text: 'Startups',
           to: LINKS.startups,
         },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
-        },
       ],
     },
     {
