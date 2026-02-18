@@ -18,7 +18,7 @@ const Hero = () => (
       </p>
     </Container>
 
-    <div className="absolute inset-0 -z-10 h-full w-full">
+    <div className="absolute inset-0 -z-10 mx-auto h-full w-full max-w-[1920px]">
       <PauseableVideo
         className="relative h-full w-full"
         width={1920}
