@@ -56,10 +56,10 @@ const FeaturedCard = ({
         <figure className="w-full">
           {quote && (
             <>
-              <blockquote className="before:content-['“'] after:content-['”']">
-                <p
-                  className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base [&_p]:inline"
-                  dangerouslySetInnerHTML={{ __html: `${quote}` }}
+              <blockquote>
+                <div
+                  className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white before:content-['“'] after:content-['”'] sm:text-base [&_p]:inline"
+                  dangerouslySetInnerHTML={{ __html: `${quote.trim()}` }}
                 />
               </blockquote>
               {author && author.name && (
