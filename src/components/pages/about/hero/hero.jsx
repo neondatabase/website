@@ -7,10 +7,15 @@ import LINKS from 'constants/links';
 const Hero = () => (
   <section className="hero safe-paddings relative h-[820px] border-b border-gray-new-20 xl:h-[904px] lg:h-[665px] md:h-[555px]">
     <Container
-      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[402px] xl:pt-[432px] lg:items-start lg:pb-10 lg:pt-[226px] md:justify-end md:gap-y-4 md:pt-0"
+      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[402px] xl:pt-[432px] lg:pb-10 lg:pt-[210px] md:justify-end md:gap-y-[164px] md:pt-0"
       size="1600"
     >
-      <Heading className="lg:max-w-[544px] md:max-w-80" tag="h1" theme="white" size="md-new">
+      <Heading
+        className="text-center lg:max-w-[544px] md:max-w-80"
+        tag="h1"
+        theme="white"
+        size="md-new"
+      >
         Neon is the Postgres layer for the internet
       </Heading>
       <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
@@ -37,25 +42,25 @@ const Hero = () => (
           </Button>
         </div>
       </div>
+
+      {/*
+       Video optimization parameters:
+       mp4: ffmpeg -i input.mov -c:v libx265 -crf 28 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -x265-params tune=animation -tag:v hvc1 -movflags faststart -an hero.mp4
+       webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 2 -an -y hero.webm
+      */}
+
+      <div className="absolute inset-0 -z-10">
+        <PauseableVideo
+          className="h-full w-full"
+          videoClassName="h-full w-full object-cover top-12 xl:top-8 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-16"
+          width={2880}
+          height={1328}
+        >
+          <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.mp4`} type="video/mp4" />
+          <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.webm`} type="video/webm" />
+        </PauseableVideo>
+      </div>
     </Container>
-
-    {/*
-      Video optimization parameters:
-      mp4: ffmpeg -i input.mov -c:v libx265 -crf 25 -vf scale=1920:-2 -pix_fmt yuv420p -preset veryslow -tag:v hvc1 -movflags faststart -an output.mp4
-      webm: ffmpeg -i input.mov -c:v libsvtav1 -crf 35 -b:v 0 -vf scale=1920:-2 -pix_fmt yuv420p -preset 6 -an output.webm
-    */}
-
-    <div className="absolute inset-0 -z-10">
-      <PauseableVideo
-        className="h-full w-full"
-        videoClassName="h-full w-full object-cover top-12 scale-[1.2] lg:top-0 lg:scale-[1.4]"
-        width={2390}
-        height={1102}
-      >
-        <source src="/videos/pages/about/hero.mp4" type="video/mp4" />
-        <source src="/videos/pages/about/hero.webm" type="video/webm" />
-      </PauseableVideo>
-    </div>
   </section>
 );
 
