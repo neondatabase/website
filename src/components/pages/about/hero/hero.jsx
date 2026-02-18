@@ -21,7 +21,7 @@ const Hero = () => (
       <div className="flex w-full items-center justify-between xl:items-end lg:flex-col lg:items-start lg:gap-y-6">
         <p className="max-w-[704px] font-sans text-xl font-normal leading-snug tracking-extra-tight text-gray-new-80 xl:max-w-md lg:max-w-[640px] lg:text-lg md:max-w-80 md:text-[15px] md:text-gray-new-60">
           Neon is built on a distributed architecture that separates storage and compute, unlocking
-          the level of performance, reliability, and scale.
+          a new level of performance, reliability, and scale.
         </p>
         <div className="flex items-center justify-center gap-x-5 xl:gap-x-4 xl:pb-2 lg:pb-0">
           <Button
