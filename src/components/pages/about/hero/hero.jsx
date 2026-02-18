@@ -42,25 +42,25 @@ const Hero = () => (
           </Button>
         </div>
       </div>
+    </Container>
 
-      {/*
+    {/*
        Video optimization parameters:
        mp4: ffmpeg -i input.mov -c:v libx265 -crf 28 -pix_fmt yuv420p10le -vf scale=2880:-2 -preset veryslow -x265-params tune=animation -tag:v hvc1 -movflags faststart -an hero.mp4
        webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 3681k -vf scale=2880:-2 -svtav1-params preset=4:lookahead=120:keyint=80 -pass 2 -an -y hero.webm
-      */}
+    */}
 
-      <div className="absolute inset-0 -z-10">
-        <PauseableVideo
-          className="h-full w-full"
-          videoClassName="h-full w-full object-cover top-12 xl:top-8 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-16"
-          width={2880}
-          height={1328}
-        >
-          <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.mp4`} type="video/mp4" />
-          <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.webm`} type="video/webm" />
-        </PauseableVideo>
-      </div>
-    </Container>
+    <div className="absolute inset-0 -z-10 mx-auto max-w-[1920px]">
+      <PauseableVideo
+        className="h-full w-full"
+        videoClassName="h-full w-full object-cover top-12 xl:top-8 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-16"
+        width={2880}
+        height={1328}
+      >
+        <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.mp4`} type="video/mp4" />
+        <source src={`${LINKS.cdn}/public/pages/about/hero/hero-anim.webm`} type="video/webm" />
+      </PauseableVideo>
+    </div>
   </section>
 );
 
