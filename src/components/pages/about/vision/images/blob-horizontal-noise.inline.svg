@@ -1,0 +1,66 @@
+<svg width="852" height="745" viewBox="0 0 852 745" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g opacity="0.5">
+    <!-- Background glow -->
+    <g opacity="0.5" filter="url(#bh-filter0)">
+      <ellipse cx="425.538" cy="403.126" rx="197.365" ry="304.791" transform="rotate(90 425.538 403.126)" fill="url(#bh-paint0)"/>
+    </g>
+    
+    <!-- Main masked content -->
+    <mask id="bh-mask0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="91" width="852" height="624">
+      <ellipse cx="425.541" cy="403.124" rx="311.453" ry="425.541" transform="rotate(90 425.541 403.124)" fill="url(#bh-paint1)"/>
+    </mask>
+    
+    <g mask="url(#bh-mask0)">
+      <!-- Noise texture mask -->
+      <mask id="bh-mask1" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="852" height="745">
+        <rect x="0" y="0" width="852" height="745" fill="#808080" filter="url(#bh-noise)"/>
+      </mask>
+      
+      <g mask="url(#bh-mask1)">
+        <g style="mix-blend-mode:soft-light" filter="url(#bh-filter1)">
+          <ellipse cx="425.54" cy="403.125" rx="303.125" ry="413.883" transform="rotate(90 425.54 403.125)" fill="url(#bh-paint2)"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  
+  <defs>
+    <!-- Noise filter -->
+    <filter id="bh-noise" x="-20%" y="-20%" width="140%" height="140%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse" color-interpolation-filters="linearRGB">
+      <feTurbulence type="turbulence" baseFrequency="0.11" numOctaves="4" seed="15" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="turbulence"/>
+      <feSpecularLighting surfaceScale="11" specularConstant="1.6" specularExponent="20" lighting-color="#a9a9a9" x="0%" y="0%" width="100%" height="100%" in="turbulence" result="specularLighting">
+        <feDistantLight azimuth="3" elevation="1"/>
+      </feSpecularLighting>
+      <feColorMatrix type="saturate" values="0" x="0%" y="0%" width="100%" height="100%" in="specularLighting" result="colormatrix"/>
+    </filter>
+    
+    <!-- Blur filters -->
+    <filter id="bh-filter0" x="20.7471" y="105.761" width="809.582" height="594.729" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur"/>
+    </filter>
+    
+    <filter id="bh-filter1" x="-88.3423" y="0" width="1027.77" height="806.251" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+      <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur"/>
+    </filter>
+    
+    <!-- Gradients -->
+    <radialGradient id="bh-paint0" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(425.538 275.297) rotate(90) scale(432.62 280.139)">
+      <stop offset="0.21284" stop-color="#61756C"/>
+      <stop offset="1" stop-color="#61756C" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="bh-paint1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(425.541 206.186) rotate(90) scale(622.479 455.592)">
+      <stop offset="0.439707" stop-color="#596660"/>
+      <stop offset="1" stop-color="#596660" stop-opacity="0"/>
+    </radialGradient>
+    
+    <radialGradient id="bh-paint2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(425.54 203.679) rotate(90) scale(398.476 544.074)">
+      <stop offset="0.280925" stop-color="#E4F1EB" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#E4F1EB"/>
+    </radialGradient>
+  </defs>
+</svg>

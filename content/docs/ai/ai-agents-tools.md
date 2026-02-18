@@ -4,9 +4,9 @@ subtitle: AI-powered tools for development and database management
 summary: >-
   Covers the integration of AI tools with Neon for database management,
   including setup instructions, Model Context Protocol (MCP) usage, and plugins
-  for Claude Code and GitHub Copilot.
+  for Cursor, Claude Code, and GitHub Copilot.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.027Z'
+updatedOn: '2026-02-16T23:25:57.644Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -36,6 +36,14 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 
 <DetailIconCards>
 <a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
+</DetailIconCards>
+
+## Cursor plugin
+
+If you're using Cursor, install the Neon plugin to get Neon Skills and MCP integration in one package.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-cursor-plugin" description="Install the Neon Cursor plugin to use Neon Skills and Neon MCP integration directly in Cursor" icon="github">Cursor plugin for Neon</a>
 </DetailIconCards>
 
 ## GitHub Copilot agents

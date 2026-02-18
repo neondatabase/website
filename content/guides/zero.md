@@ -28,7 +28,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 Zero requires a Postgres database (version 15+) with logical replication enabled. You'll configure your Neon project accordingly.
 
-1.  **Create a Neon Project:** If you haven't already, create a new Neon project using [pg.new](https://pg.new).
+1.  **Create a Neon Project:** If you haven't already, create a new Neon project using [neon.new](https://neon.new).
 2.  **Enable Logical Replication:** Zero uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project using the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.

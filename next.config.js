@@ -402,12 +402,12 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: 'https://pg.new',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: 'https://pg.new',
         permanent: false,
       },
       {
@@ -473,12 +473,17 @@ const defaultConfig = {
       },
       {
         source: '/creators',
-        destination: '/programs/creators',
+        destination: '/docs/community/community-intro',
         permanent: true,
       },
       {
         source: '/blog/join-the-neon-creator-program',
-        destination: '/programs/creators',
+        destination: '/docs/community/community-intro',
+        permanent: true,
+      },
+      {
+        source: '/creators',
+        destination: '/docs/community/community-intro ',
         permanent: true,
       },
       {

@@ -8,7 +8,7 @@ summary: >-
   branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-02-15T20:51:54.241Z'
+updatedOn: '2026-02-17T17:13:56.588Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -37,7 +37,7 @@ To create a Neon project:
 After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
+You can also use [neon.new](https://neon.new) to create a new Neon Postgres project. Simply visit [neon.new](https://neon.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
 ## View projects

@@ -7,7 +7,7 @@ summary: >-
   isolation without requiring user sign-up or setup.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.150Z'
+updatedOn: '2026-02-16T13:09:07.970Z'
 ---
 
 Neon makes it easy to embed Postgres into your platform with one-second provisioning, autoscaling, and scale-to-zero, so each user gets an isolated database without the overhead. Databases are provisioned via API and fully integrated into your product, with no Neon signup or setup required by your users.
@@ -212,7 +212,7 @@ Neon reserves certain names for roles and databases. See [Reserved role names](/
 - Rate limit: ~30 requests per minute per account
 - Polling does NOT wake suspended computes
 
-See the [consumption polling FAQ](/docs/guides/consumption-metrics#consumption-polling-faq) for more details.
+See [Consumption polling](/docs/guides/consumption-metrics#consumption-polling) for more details.
 
 ### Staying informed
 

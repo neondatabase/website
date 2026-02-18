@@ -1,10 +1,9 @@
 import Connections from 'components/pages/about/connections';
 import Developers from 'components/pages/about/developers';
 import Hero from 'components/pages/about/hero';
-import Leadership from 'components/pages/about/leadership';
 import Timeline from 'components/pages/about/timeline';
-import WhereHeaded from 'components/pages/about/where-headed';
-import CTANew from 'components/shared/cta-new';
+import Vision from 'components/pages/about/vision';
+import CtaNew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -16,8 +15,7 @@ const AboutUsPage = () => (
   <Layout>
     <Hero />
     <Timeline />
-    <WhereHeaded />
-    <Leadership />
+    <Vision />
     <Developers />
     <Connections />
     <CTANew

@@ -95,7 +95,7 @@ You will need the following packages for this project:
 - **Drizzle ORM:** [`drizzle-orm`](https://www.npmjs.com/package/drizzle-orm) and [`drizzle-kit`](https://www.npmjs.com/package/drizzle-kit) for database schema management and migrations.
 
 ```bash
-npm install @neondatabase/neon-js react-router drizzle-orm
+npm install @neondatabase/neon-js@latest react-router drizzle-orm
 npm install -D drizzle-kit dotenv
 ```
 
