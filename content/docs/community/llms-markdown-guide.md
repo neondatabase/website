@@ -21,8 +21,7 @@ You can get Markdown by requesting it explicitly: use the same docs URL with an 
    ```
 
 2. **Append `.md` to the path:** Request the URL with `.md` at the end. For example:
-
-   - HTML: <https://neon.com/docs/connect/choose-connection>  
+   - HTML: <https://neon.com/docs/connect/choose-connection>
    - Markdown: <https://neon.com/docs/connect/choose-connection.md>
 
 Whether you use the `Accept` header or the `.md` extension, you get the same Markdown output.
@@ -64,10 +63,10 @@ We set a number of headers on our doc responses. These are the ones relevant to 
 
 ## Summary for agents
 
-| Goal | What to do |
-| ------ | ------------ |
-| Get one page as Markdown | Request the HTML docs URL with `Accept: text/markdown` or append `.md` to the URL |
-| Get the full list of docs | <https://neon.com/docs/llms.txt> |
-| Understand page context | Read the short block at the top of each Markdown page (location + index link) |
-| Find related pages | Use the "Related docs" section at the bottom of each page |
+| Goal                        | What to do                                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------------------------- |
+| Get one page as Markdown    | Request the HTML docs URL with `Accept: text/markdown` or append `.md` to the URL                   |
+| Get the full list of docs   | <https://neon.com/docs/llms.txt>                                                                    |
+| Understand page context     | Read the short block at the top of each Markdown page (location + index link)                       |
+| Find related pages          | Use the "Related docs" section at the bottom of each page                                           |
 | Discover Markdown from HTML | Look for `<link rel="alternate" type="text/markdown">` in the page head, or the `X-LLMs-Txt` header |
