@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { decode } from 'he';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
@@ -57,10 +58,9 @@ const FeaturedCard = ({
           {quote && (
             <>
               <blockquote className="before:content-['“'] after:content-['”']">
-                <div
-                  className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base [&_p]:inline"
-                  dangerouslySetInnerHTML={{ __html: `${quote}` }}
-                />
+                <p className="inline text-pretty text-lg font-light leading-snug tracking-extra-tight text-white sm:text-base">
+                  {decode(quote.replace(/<[^>]*>/g, '')).trim()}
+                </p>
               </blockquote>
               {author && author.name && (
                 <figcaption className="mt-2 text-sm font-light leading-snug tracking-extra-tight text-gray-new-70">

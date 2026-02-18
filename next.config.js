@@ -154,6 +154,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/use-cases/:path*',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
         source: '/docs/get-started-with-neon/:path*',
         destination: '/docs/get-started/:path*',
         permanent: true,

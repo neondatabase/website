@@ -108,9 +108,9 @@ const UseCaseCard = ({
             <h3 className="text-[1.75rem] leading-snug tracking-tighter text-white lg:text-2xl md:text-xl">
               {title}
             </h3>
-            <p className="text-base leading-normal tracking-extra-tight text-gray-new-70 lg:text-[0.9375rem] lg:leading-snug md:text-[0.9375rem] md:leading-snug">
+            <div className="text-base leading-normal tracking-extra-tight text-gray-new-70 lg:text-[0.9375rem] lg:leading-snug md:text-[0.9375rem] md:leading-snug ">
               {description}
-            </p>
+            </div>
           </div>
 
           {/* Learn more link */}
@@ -169,7 +169,7 @@ const UseCaseCard = ({
         {testimonial && (
           <div className="mt-auto">
             <blockquote
-              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-[#1F805C] [&_mark]:text-inherit [&_p]:inline"
+              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-green-52/60 [&_mark]:px-1 [&_mark]:pb-px [&_mark]:text-white [&_p]:inline"
               dangerouslySetInnerHTML={{ __html: testimonial.quote }}
             />
             <p className="mt-3.5 text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 md:text-sm">
