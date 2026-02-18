@@ -108,9 +108,9 @@ const UseCaseCard = ({
             <h3 className="text-[1.75rem] leading-snug tracking-tighter text-white lg:text-2xl md:text-xl">
               {title}
             </h3>
-            <div className="text-base leading-normal tracking-extra-tight text-gray-new-70 lg:text-[0.9375rem] lg:leading-snug md:text-[0.9375rem] md:leading-snug ">
+            <p className="text-base leading-normal tracking-extra-tight text-gray-new-70 lg:text-[0.9375rem] lg:leading-snug md:text-[0.9375rem] md:leading-snug ">
               {description}
-            </div>
+            </p>
           </div>
 
           {/* Learn more link */}
