@@ -63,10 +63,10 @@ We set a number of headers on our doc responses. These are the ones relevant to 
 
 ## Summary for agents
 
-| Goal                        | What to do                                                                                          |
-| --------------------------- | --------------------------------------------------------------------------------------------------- |
-| Get one page as Markdown    | Request the HTML docs URL with `Accept: text/markdown` or append `.md` to the URL                   |
-| Get the full list of docs   | https://neon.com/docs/llms.txt                                                                      |
-| Understand page context     | Read the short block at the top of each Markdown page (location + index link)                       |
-| Find related pages          | Use the "Related docs" section at the bottom of each page                                           |
+| Goal                        | What to do                                                                                                     |
+| --------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Get one page as Markdown    | Request the HTML docs URL with `Accept: text/markdown` or append `.md` to the URL                              |
+| Get the full list of docs   | https://neon.com/docs/llms.txt                                                                                 |
+| Understand page context     | Read the short block at the top of each Markdown page (location + index link)                                  |
+| Find related pages          | Use the "Related docs" section at the bottom of each page                                                      |
 | Discover Markdown from HTML | Look for `<link rel="alternate" type="text/markdown" href="...">` in the page head, or the `X-LLMs-Txt` header |
