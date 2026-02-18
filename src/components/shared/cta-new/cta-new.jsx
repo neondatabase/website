@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 
 import ctaBackground from './images/cta-bg.jpg';
-import Label from './label';
 
 const CtaNew = ({
   className,
@@ -20,7 +20,7 @@ const CtaNew = ({
   <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
-        <Label className="sm:mb-4">{label}</Label>
+        <SectionLabel className="text-gray-new-80 sm:mb-4">{label}</SectionLabel>
         <div className="mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none">
           <h2 className="text-white sm:inline" dangerouslySetInnerHTML={{ __html: title }} />
           <p className="text-gray-new-50 sm:inline">{description}</p>
