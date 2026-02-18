@@ -219,7 +219,7 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 Data size is your logical data size.
 
 <Admonition type="note">
-Paid plans support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](/contact-sales).
+Paid plans support a logical data size of up to **16 TB per branch**. To increase this limit, 
 </Admonition>
 
 ## Branch types
