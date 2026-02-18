@@ -52,7 +52,7 @@ const DocCta = ({
     className={clsx(
       'doc-cta not-prose relative overflow-hidden rounded-none',
       isIntro ? 'my-12 px-6 py-5 md:my-8' : 'my-5 px-7 py-6',
-      'border border-gray-new-90',
+      'border border-gray-new-90 bg-[#F5FAF8]',
       'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
     )}
   >
@@ -107,10 +107,10 @@ const DocCta = ({
         </h2>
         <p
           className={clsx(
-            'text-gray-new-20 dark:text-gray-new-80',
+            '!text-[#494B50] dark:!text-gray-new-85',
             isIntro
               ? 'tracking-extra-tight'
-              : 'text-base font-normal leading-normal tracking-tight text-gray-new-20 dark:text-gray-new-85',
+              : 'text-base font-normal leading-normal tracking-tight !text-[#494B50] dark:!text-gray-new-85',
             '[&_a]:border-b [&_a]:border-transparent [&_a]:text-secondary-8 [&_a]:no-underline',
             '[&_a]:transition-[border-color] [&_a]:duration-200 [&_a]:ease-in-out hover:[&_a]:border-secondary-8',
             'dark:[&_a]:text-primary-1 dark:hover:[&_a]:border-primary-1'
@@ -134,14 +134,14 @@ const DocCta = ({
           <Button
             className="w-fit shrink-0 px-7 py-[14px] text-base font-medium leading-none tracking-tight dark:bg-white dark:text-black dark:hover:bg-gray-new-80"
             to={buttonUrl}
-            theme="primary"
+            theme="white-filled-multi"
             tagName="DocsCTA"
           >
             {buttonText}
           </Button>
           {secondaryButtonText && secondaryButtonUrl && (
             <Button
-              className="w-fit shrink-0 border border-[#61646B] bg-white/[0.02] px-7 py-[14px] text-base font-normal leading-none tracking-tight text-white hover:bg-white/[0.04] hover:text-white dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"
+              className="w-fit shrink-0 border border-gray-new-60 bg-black-new/[0.02] px-7 py-[14px] text-base font-normal leading-none tracking-tight text-black-new hover:bg-black-new/[0.04] hover:text-black-new dark:border-gray-new-40 dark:bg-white/[0.02] dark:text-white dark:hover:bg-white/[0.04] dark:hover:text-white"
               to={secondaryButtonUrl}
               theme="transparent"
               tagName="DocsCTASecondary"

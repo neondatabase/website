@@ -74,7 +74,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-dashed prose-a:border-gray-new-50 prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-gray-new-85 dark:hover:prose-a:border-solid dark:hover:prose-a:border-gray-new-85 prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-dashed prose-a:border-gray-new-50 prose-a:font-normal prose-a:text-gray-new-30 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-solid hover:prose-a:border-gray-new-30 dark:prose-a:text-gray-new-85 dark:hover:prose-a:border-gray-new-85 prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -112,7 +112,7 @@
     }
 
     .admonition h4 {
-      @apply m-0 inline-flex items-center;
+      @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
     }
 
     .anchor-heading {
@@ -200,7 +200,7 @@
 
       tbody {
         tr {
-          @apply border-b border-gray-new-90 dark:border-gray-new-20;
+          @apply border-b border-gray-new-90 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
         }
       }
     }
@@ -306,7 +306,7 @@
     }
 
     details > *:not(summary) {
-      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-60 dark:text-gray-new-85;
+      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
     }
 
     /* Ensure list items inside details have proper spacing */

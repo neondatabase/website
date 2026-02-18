@@ -226,6 +226,8 @@ const Content = ({
         components={getComponents(withoutAnchorHeading, isReleaseNote, isPostgres, isTemplate)}
         source={content}
         options={{
+          blockJS: false,
+          blockDangerousJS: true,
           mdxOptions: {
             remarkPlugins: [
               // Adds support for GitHub Flavored Markdown

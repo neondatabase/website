@@ -40,12 +40,12 @@ const MegaLink = ({ tag, title, date, url, isExternal, className }) => (
       {tag && (
         <div className="flex items-center gap-1.5">
           <Image src={triangleIcon} width={10} height={10} alt="" />
-          <span className="block font-mono text-xs font-medium uppercase leading-none text-gray-new-80">
+          <span className="block font-mono text-xs font-medium uppercase leading-none text-gray-new-30 dark:text-gray-new-80">
             {tag}
           </span>
         </div>
       )}
-      <h3 className="m-0 text-xl font-normal leading-snug tracking-extra-tight sm:line-clamp-3">
+      <h3 className="m-0 text-xl !font-normal leading-snug tracking-extra-tight sm:line-clamp-3">
         {title}
       </h3>
     </div>

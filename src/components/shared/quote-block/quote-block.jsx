@@ -29,9 +29,9 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
   const { avatar, name } = authorData;
 
   return (
-    <section className={clsx('quote border-l-2 border-green-45 pl-6', className)}>
+    <section className={clsx('quote border-l-2 border-green-44 pl-6', className)}>
       <figure className="my-10 lg:my-8 md:my-6">
-        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl !font-normal leading-snug tracking-tighter text-gray-9 sm:text-[18px] sm:leading-snug">
+        <blockquote className="max-w-[710px] border-none p-0 font-mono text-xl !font-normal leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[18px] sm:leading-snug">
           &quot;{quote}&quot;
         </blockquote>
 
@@ -46,8 +46,8 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
             />
           </div>
           <div className="flex gap-1.5">
-            <p className="text-base font-medium leading-snug tracking-tighter !text-gray-9 sm:text-[13px]">
-              {name} <span className="text-[#A1A1AA]">— {role}</span>
+            <p className="text-base font-medium leading-snug tracking-tighter !text-black-new dark:!text-gray-9 sm:text-[13px]">
+              {name} <span className="text-gray-new-30 dark:text-[#A1A1AA]">— {role}</span>
             </p>
           </div>
         </figcaption>

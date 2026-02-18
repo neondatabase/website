@@ -10,23 +10,23 @@ import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#2982FF] dark:text-[#648DFF]',
-    borderClassName: 'border-[#2982FF] dark:border-[#648DFF]',
+    titleClassName: 'text-[#648DFF] dark:text-[#648DFF]',
+    borderClassName: 'border-[#648DFF] dark:border-[#648DFF]',
     icon: NoteIcon,
   },
   important: {
-    titleClassName: 'text-[#F9A806] dark:text-[#F99D51]',
-    borderClassName: 'border-[#F9A806] dark:border-[#F99D51]',
+    titleClassName: 'text-[#EB832D] dark:text-[#F99D51]',
+    borderClassName: 'border-[#EB832D] dark:border-[#F99D51]',
     icon: ImportantIcon,
   },
   tip: {
-    titleClassName: 'text-primary-2 dark:text-[#34D59A]',
-    borderClassName: 'border-primary-2 dark:border-[#34D59A]',
+    titleClassName: 'text-[#39A57D] dark:text-[#34D59A]',
+    borderClassName: 'border-[#39A57D] dark:border-[#34D59A]',
     icon: TipIcon,
   },
   warning: {
-    titleClassName: 'text-[#DA0A51] dark:text-[#FF5645]',
-    borderClassName: 'border-[#DA0A51] dark:border-[#FF5645]',
+    titleClassName: 'text-[#CA2716] dark:text-[#FF5645]',
+    borderClassName: 'border-[#CA2716] dark:border-[#FF5645]',
     icon: WarningIcon,
   },
   info: {
@@ -35,8 +35,8 @@ const themes = {
     icon: InfoIcon,
   },
   comingSoon: {
-    titleClassName: 'text-[#8873EF] dark:text-[#99D5FF]',
-    borderClassName: 'border-[#8873EF] dark:border-[#99D5FF]',
+    titleClassName: 'text-[#52A5E0] dark:text-[#99D5FF]',
+    borderClassName: 'border-[#52A5E0] dark:border-[#99D5FF]',
     icon: ComingSoonIcon,
   },
 };
@@ -58,9 +58,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
     >
       <div className={clsx('flex items-center gap-1', theme.titleClassName)}>
         <Icon width={16} height={16} className="shrink-0" />
-        <h4 className="m-0 font-mono text-[13px] font-medium uppercase leading-none tracking-extra-tight">
-          {title || typeText}
-        </h4>
+        <h4>{title || typeText}</h4>
       </div>
       {asHTML ? (
         <div className={textClassName} dangerouslySetInnerHTML={{ __html: children }} />

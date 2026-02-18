@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { Children, useState, useEffect, useContext, useMemo } from 'react';
+import { Children, useState, useEffect, useContext } from 'react';
 
 import { TabsContext } from 'contexts/tabs-context';
 import sendGtagEvent from 'utils/send-gtag-event';
@@ -10,30 +10,29 @@ import sendGtagEvent from 'utils/send-gtag-event';
 const Tabs = ({ labels = [], children }) => {
   const { activeTab, setActiveTab } = useContext(TabsContext);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const safeLabels = useMemo(() => (Array.isArray(labels) ? labels : []), [labels]);
 
   useEffect(() => {
-    const tmp = safeLabels.indexOf(activeTab);
+    const tmp = labels.indexOf(activeTab);
     if (tmp !== -1) setCurrentIndex(tmp);
-  }, [activeTab, safeLabels]);
+  }, [activeTab, labels]);
 
   const handleTabClick = (index) => {
-    const label = safeLabels[index];
+    const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
     sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'ContentTab' });
   };
 
   return (
-    <figure className="my-5 max-w-full overflow-hidden border border-gray-new-80 dark:border-gray-new-20">
+    <figure className="my-5 max-w-full overflow-hidden border border-gray-new-90 dark:border-gray-new-20">
       <div className="no-scrollbars bg-grey-15 relative flex w-full flex-nowrap gap-5 overflow-auto pl-5 after:absolute after:bottom-0 after:left-0 after:right-0 after:h-px after:bg-gray-new-90 dark:bg-gray-new-8 dark:after:bg-gray-new-20">
-        {safeLabels.map((label, index) => (
+        {labels.map((label, index) => (
           <button
             className={clsx(
-              'relative z-10 cursor-pointer whitespace-nowrap border-b pb-3.5 pt-2.5 text-sm font-medium leading-none transition-colors duration-200 hover:text-secondary-8 dark:hover:text-gray-new-80',
+              'relative z-10 cursor-pointer whitespace-nowrap border-b pb-3.5 pt-2.5 text-sm font-medium leading-none transition-colors duration-200 hover:text-black-new dark:hover:text-gray-new-80',
               index === currentIndex
-                ? 'border-secondary-8 text-secondary-8 after:opacity-100 dark:border-white dark:text-white'
-                : 'dark:text-gray-60 border-transparent text-gray-new-40'
+                ? 'border-black-new text-black-new after:opacity-100 dark:border-white dark:text-white'
+                : 'border-transparent text-gray-new-60'
             )}
             key={`lb-${index}`}
             type="button"
