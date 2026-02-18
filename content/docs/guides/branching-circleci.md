@@ -52,19 +52,28 @@ version: 2.1
 
 orbs:
   neon: neon/neon@1.0
+  node: circleci/node@7.2.1
 
 workflows:
   test_workflow:
     jobs:
       - neon/run_tests:
-          parent_branch: production
-          # Command to prepare the DB (e.g., migrations, seeding)
-          migrate_command: "npm run db:migrate"
-          # Command to run your test suite
-          test_command: "npm test"
-          # Optional: Define a custom TTL (e.g., 30 minutes)
-          ttl_seconds: 1800
+          name: e2e_tests
+          executor:
+            name: node/default
+            tag: "24.12"
+          # Migrate command can be any setup command that prepares the database. It runs after the branch is ready but before tests start. You can chain multiple commands here if needed.
+          migrate_command: npm ci && npm run db:migrate && npx playwright install --with-deps chromium
+          # Run any test command that relies on DATABASE_URL for the connection string. (e.g., unit tests, integration tests, or end-to-end tests with Playwright)
+          test_command: npm test
 ```
+
+In this example:
+
+- **`orbs`**: Imports the `neon` orb (to manage database branches) and the `circleci/node` orb (to set up the Node.js environment).
+- **`executor`**: Specifies the execution environment. We use the `node/default` executor from the Node orb with tag `24.12`.
+- **`migrate_command`**: A chained command that installs dependencies (`npm ci`), runs database migrations (`npm run db:migrate`), and sets up browser binaries for Playwright (`npx playwright install ...`). This runs _after_ the database branch is created but _before_ tests start.
+- **`test_command`**: The actual test runner command. You can configure `npm test` in your `package.json` to run any test suite, unit tests, integration tests, or end-to-end tests with tools like Playwright against the isolated Neon branch.
 
 ### Parameters
 
