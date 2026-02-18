@@ -38,6 +38,13 @@ const Hero = () => (
         </div>
       </div>
     </Container>
+
+    {/*
+      Video optimization parameters:
+      mp4: ffmpeg -i input.mov -c:v libx265 -crf 25 -vf scale=1920:-2 -pix_fmt yuv420p -preset veryslow -tag:v hvc1 -movflags faststart -an output.mp4
+      webm: ffmpeg -i input.mov -c:v libsvtav1 -crf 35 -b:v 0 -vf scale=1920:-2 -pix_fmt yuv420p -preset 6 -an output.webm
+    */}
+
     <div className="absolute inset-0 -z-10">
       <PauseableVideo
         className="h-full w-full"
