@@ -79,7 +79,7 @@
     "lottie-web": "^5.12.2",
     "markdownlint-cli": "^0.47.0",
     "mermaid": "^11.12.2",
-    "next": "^14.2.35",
+    "next": "^16.1.6",
     "next-mdx-remote": "^6.0.0",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
