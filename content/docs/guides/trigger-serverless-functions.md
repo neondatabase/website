@@ -79,7 +79,7 @@ The Inngest Integration requires Postgres admin credentials to complete its setu
 
 You can find the connection string for your database by clicking the **Connect** button on your **Project Dashboard**.
 
-![Connection modal](/docs/connect/connection-details.png)
+![Connection modal](/docs/connect/connection_details.png)
 
 ## Triggering Serverless functions from database changes
 

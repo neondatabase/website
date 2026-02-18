@@ -20,7 +20,7 @@ Services you integrate with Neon may also have startup times, which can add to c
 
 You can check the current status of a compute on the **Branches** page in the Neon Console. A compute will report either an **Active** or **Idle** status.
 
-![Compute status](/docs/connect/compute_state.png)
+![Compute status](/docs/connect/compute_endpoint_state.png)
 
 You can also view compute state transitions in the **Branches** widget on the Neon **Dashboard**.
 
