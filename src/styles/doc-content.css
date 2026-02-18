@@ -74,7 +74,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-dashed prose-a:border-gray-new-50 prose-a:font-normal prose-a:text-gray-new-30 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-solid hover:prose-a:border-gray-new-30 dark:prose-a:text-gray-new-85 dark:hover:prose-a:border-gray-new-85 prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] hover:prose-a:decoration-solid dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -289,15 +289,7 @@
       }
 
       &::before {
-        content: '';
-        width: 14px;
-        height: 14px;
-        flex-shrink: 0;
-        background: currentColor;
-        clip-path: polygon(30% 22%, 30% 78%, 78% 50%);
-        transform: rotate(0deg);
-        transform-origin: 50% 50%;
-        transition: transform 200ms ease;
+        @apply size-3.5 shrink-0 origin-center rotate-0 bg-current transition-transform duration-200 ease-linear content-[''] [clip-path:polygon(30%_22%,30%_78%,78%_50%)];
       }
     }
 

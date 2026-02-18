@@ -35,7 +35,7 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
           &quot;{quote}&quot;
         </blockquote>
 
-        <figcaption className="mt-4 flex items-center gap-3 md:mt-4">
+        <figcaption className="mt-5 flex items-center gap-3 md:mt-4">
           <div className="relative size-9 overflow-hidden rounded-full sm:size-7">
             <Image
               src={avatar}
@@ -46,9 +46,10 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
             />
           </div>
           <div className="flex gap-1.5">
-            <p className="text-base font-medium leading-snug tracking-tighter !text-black-new dark:!text-gray-9 sm:text-[13px]">
-              {name} <span className="text-gray-new-30 dark:text-[#A1A1AA]">— {role}</span>
-            </p>
+            <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
+              {name}{' '}
+              <span className="font-normal text-gray-new-30 dark:text-[#A1A1AA]">— {role}</span>
+            </div>
           </div>
         </figcaption>
       </figure>

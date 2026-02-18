@@ -16,13 +16,11 @@ const CodeTabs = ({ labels = [], reverse = false, children }) => {
     if (tmp !== -1) setCurrentIndex(tmp);
   }, [activeTab, labels]);
 
-  const safeLabels = Array.isArray(labels) ? labels : [];
-  const childrenArray = React.Children.toArray(children);
-  const displayedLabels = reverse ? [...safeLabels].reverse() : safeLabels;
-  const displayedChildren = reverse ? [...childrenArray].reverse() : childrenArray;
+  const displayedLabels = reverse ? [...labels].reverse() : labels;
+  const displayedChildren = reverse ? [...children].reverse() : children;
 
   const handleTabClick = (index) => {
-    const label = safeLabels[index];
+    const label = labels[index];
     setCurrentIndex(index);
     setActiveTab(label);
     sendGtagEvent('Tab Clicked', { tab_label: label, tag_name: 'CodeTab' });

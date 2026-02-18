@@ -117,7 +117,7 @@ const Item = ({
             {items.map((item, subIndex) => (
               <li
                 className={clsx(
-                  'relative before:absolute before:bottom-0 before:left-[-16px] before:top-0 before:w-px before:bg-gray-new-15/70 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-white',
+                  'relative before:absolute before:-left-4 before:bottom-0 before:top-0 before:w-px before:bg-gray-new-15/70 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-white',
                   item.id === currentAnchor && 'before:opacity-100'
                 )}
                 key={subIndex}

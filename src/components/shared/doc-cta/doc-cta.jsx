@@ -17,24 +17,8 @@ const DEFAULT_DATA = {
 };
 
 const ELLIPSES = [
-  {
-    color: 'rgba(255, 228, 130, 0.90)',
-    width: 176,
-    height: 137,
-    rotate: 66,
-    blur: 40,
-    left: 86,
-    top: 60,
-  },
-  {
-    color: '#1C7154',
-    width: 606,
-    height: 176,
-    rotate: -110,
-    blur: 80,
-    top: 250,
-    left: -100,
-  },
+  'right-[8%] top-[22%] h-[137px] w-44 rotate-[66deg] bg-[rgba(255,228,130,0.90)] blur-[40px] md:right-[2%] sm:right-[-6%]',
+  'bottom-[-48%] right-[-38%] h-44 w-[606px] -rotate-[110deg] bg-[#1C7154] blur-[80px] md:bottom-[-52%] md:right-[-55%] sm:bottom-[-58%] sm:right-[-72%]',
 ];
 
 const DocCta = ({
@@ -56,33 +40,12 @@ const DocCta = ({
       'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
     )}
   >
-    <div
-      className="pointer-events-none absolute bottom-0 right-0 h-full w-full overflow-hidden"
-      style={{
-        maskImage: "url('/images/background-dots-cta.png')",
-        WebkitMaskImage: "url('/images/background-dots-cta.png')",
-        maskRepeat: 'no-repeat',
-        maskSize: '136.364% 490.547%',
-        maskPosition: '-256px -327px',
-        WebkitMaskRepeat: 'no-repeat',
-        WebkitMaskSize: '136.364% 490.547%',
-        WebkitMaskPosition: '-256px -327px',
-      }}
-    >
-      <div className="absolute left-[493px] top-[44px]">
-        {ELLIPSES.map((ellipse, i) => (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden [-webkit-mask-image:url('/images/background-dots-cta.png')] [-webkit-mask-position:right_center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:980px_980px] [mask-image:url('/images/background-dots-cta.png')] [mask-position:right_center] [mask-repeat:no-repeat] [mask-size:980px_980px]">
+      <div className="absolute inset-0">
+        {ELLIPSES.map((ellipseClassName, i) => (
           <div
             key={i}
-            className="absolute rounded-full mix-blend-color-dodge"
-            style={{
-              width: ellipse.width,
-              height: ellipse.height,
-              background: ellipse.color,
-              filter: `blur(${ellipse.blur}px)`,
-              transform: `rotate(${ellipse.rotate}deg)`,
-              top: ellipse.top,
-              left: ellipse.left,
-            }}
+            className={clsx('absolute rounded-full mix-blend-color-dodge', ellipseClassName)}
           />
         ))}
       </div>

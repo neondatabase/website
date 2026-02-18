@@ -93,8 +93,6 @@ const Aside = ({
           </div>
         )}
       </div>
-
-      {isTemplate && <ChangelogForm className="mt-12" isSidebar />}
     </div>
   );
 };

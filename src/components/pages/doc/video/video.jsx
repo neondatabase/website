@@ -9,7 +9,7 @@ import PauseableVideo from 'components/shared/pauseable-video';
 */
 const Video = ({ sources = [], width, height }) => (
   <PauseableVideo width={width} height={height}>
-    {(Array.isArray(sources) ? sources : []).map(({ src, type }) => (
+    {sources.map(({ src, type }) => (
       <source key={src} src={src} type={type} />
     ))}
   </PauseableVideo>
