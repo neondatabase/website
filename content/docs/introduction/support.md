@@ -16,7 +16,7 @@ Neon's support plans are mapped to [Neon Pricing Plans](/docs/introduction/plans
 | Neon pricing plan | Support plan options                                                                                 |
 | :---------------- | :--------------------------------------------------------------------------------------------------- |
 | Free plan         | Community support                                                                                    |
-| Launch plan       | Standard support (billing issues only)                                                               |
+| Launch plan       | Billing support                                                                                      |
 | Scale plan        | • Standard support<br/>• Business support (additional fee)<br/>• Production support (additional fee) |
 
 Scale plan customers can upgrade to **Business** or **Production** support plans for an additional fee. In addition to all Standard support plan options, these plans offer a [response time SLA](#response-time-sla).
@@ -25,14 +25,14 @@ Scale plan customers can upgrade to **Business** or **Production** support plans
 
 The support channels you can access differ according to your [Support Plan](#support-plans).
 
-| Support channels                                                              | Community support | Standard support (billing issues only) | Standard support | Business support | Production support |
-| :---------------------------------------------------------------------------- | :---------------: | :------------------------------------: | :--------------: | :--------------: | :----------------: |
-| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |                &check;                 |     &check;      |     &check;      |      &check;       |
-| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |                &check;                 |     &check;      |     &check;      |      &check;       |
-| [Support tickets](#support-tickets)                                           |         -         |                   \*                   |     &check;      |     &check;      |      &check;       |
-| [Slack channel](#slack-channel)                                               |         -         |                   -                    |       \*\*       |       \*\*       |        \*\*        |
-| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |                   -                    |       \*\*       |       \*\*       |        \*\*        |
-| [SLA](#response-time-sla)                                                     |         -         |                   -                    |        -         |     &check;      |      &check;       |
+| Support channels                                                              | Community support | Billing support | Standard support | Business support | Production support |
+| :---------------------------------------------------------------------------- | :---------------: | :-------------: | :--------------: | :--------------: | :----------------: |
+| [Neon Discord Server](#neon-discord-server) (not an official channel)         |      &check;      |     &check;     |     &check;      |     &check;      |      &check;       |
+| [Neon AI Chat Assistance](#neon-ai-chat-assistance) (not an official channel) |      &check;      |     &check;     |     &check;      |     &check;      |      &check;       |
+| [Support tickets](#support-tickets)                                           |         -         |       \*        |     &check;      |     &check;      |      &check;       |
+| [Slack channel](#slack-channel)                                               |         -         |        -        |       \*\*       |       \*\*       |        \*\*        |
+| [Dedicated Support Engineer](#dedicated-support-engineer)                     |         -         |        -        |       \*\*       |       \*\*       |        \*\*        |
+| [SLA](#response-time-sla)                                                     |         -         |        -        |        -         |     &check;      |      &check;       |
 
 <div style={{margin: '-30px 0 30px 0'}}>
 <small><sup>\*</sup> [Support tickets](#support-tickets) are only supported for billing-related issues under this support plan, which means Neon Launch plan users can only create support tickets if the issue is related to billing.</small><br/>

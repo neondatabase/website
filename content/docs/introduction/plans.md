@@ -346,7 +346,7 @@ Guaranteed service availability is offered on the **Scale** plan. Contact [Sales
 Support level by plan:
 
 - **Free**: Community support
-- **Launch**: Standard support (billing issues only)
+- **Launch**: Billing support
 - **Scale**: Standard support, with Business or Production support plans available for an additional fee
 
 See [Support](/docs/introduction/support) for details.
