@@ -4,9 +4,8 @@ import Hero from 'components/pages/security/hero';
 import Privacy from 'components/pages/security/privacy';
 import SubProcessors from 'components/pages/security/sub-processors';
 import TrustCenter from 'components/pages/security/trust-center';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -20,12 +19,12 @@ const SecurityPage = () => (
     <TrustCenter />
     <SubProcessors />
     <Features />
-    <CTA
-      className="pb-[290px] pt-[348px] xl:pb-[242px] xl:pt-[278px] lg:pb-[200px] lg:pt-[260px] sm:pb-[100px] sm:pt-40"
-      title="Ready to get started?"
-      titleClassName="max-w-[745px] lg:max-w-[600px] md:max-w-[400px] md:leading-none"
-      buttonText="Sign up with $100 credits"
-      buttonUrl={LINKS.signupCredits}
+    <CTANew
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
+      buttonType="aiHelper"
     />
   </Layout>
 );

@@ -1,3 +1,3 @@
-import CtaNew from './cta-new';
+import CTANew from './cta-new';
 
-export default CtaNew;
+export default CTANew;

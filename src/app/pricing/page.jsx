@@ -230,11 +230,11 @@ const PricingPage = () => (
     <Features />
     <Faq items={faqItems} />
     <CTANew
-      className="mt-[183px] xl:mt-[168px] lg:mt-[145px] md:mt-[90px]"
-      title="Still have questions? Get in touch."
-      description="Get personalized guidance from our team — we'll help you quickly find the right solution."
-      buttonText="Talk to Sales"
-      buttonUrl={LINKS.contactSales}
+      label="ASK AI"
+      title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+      description="It knows Neon inside and out."
+      buttonText="Get Answers"
+      buttonType="aiHelper"
     />
   </Layout>
 );

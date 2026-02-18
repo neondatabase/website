@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import HeadingLabel from 'components/pages/home/heading-label';
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import Logos from 'components/shared/logos';
 import PauseableVideo from 'components/shared/pauseable-video';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import mobileBgIllustration from 'images/pages/home/hero/bg-illustration.jpg';
 
@@ -19,9 +19,9 @@ const Hero = () => (
       size="1600"
     >
       <Link href="#backed-by-giants">
-        <HeadingLabel size="large" databricks>
+        <SectionLabel theme="white" size="large" databricks>
           A DATABRICKS COMPANY
-        </HeadingLabel>
+        </SectionLabel>
       </Link>
 
       <h1 className="mt-5 max-w-[890px] text-[60px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[52px] lg:max-w-[640px] lg:text-[44px] md:mt-4 sm:text-[28px]">
