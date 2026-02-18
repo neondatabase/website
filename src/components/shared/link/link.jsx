@@ -57,6 +57,11 @@ const icons = {
   glossary: GlossaryIcon,
 };
 
+const iconStyles = {
+  external: '!size-3.5 ml-1 inline-block align-[-0.125em] shrink-0',
+  glossary: 'ml-1 inline-block align-[-0.125em] shrink-0',
+};
+
 const Link = forwardRef(
   (
     {
@@ -80,7 +85,8 @@ const Link = forwardRef(
       styles.size[size],
       styles.theme[theme],
       additionalClassName,
-      (withArrow || icon) && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere'
+      withArrow && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere',
+      icon && !withArrow && 'group inline'
     );
 
     const Icon = icons[icon];
@@ -99,9 +105,13 @@ const Link = forwardRef(
       <>
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
-          <ArrowRightIcon className="-mb-px shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          <ArrowRightIcon className="-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
         )}
-        {Icon && <Icon className="-mb-px shrink-0" />}
+        {Icon && (
+          <span className="whitespace-nowrap no-underline">
+            <Icon className={iconStyles[icon]} />
+          </span>
+        )}
       </>
     );
 

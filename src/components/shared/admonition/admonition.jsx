@@ -10,8 +10,8 @@ import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#648DFF] dark:text-[#648DFF]',
-    borderClassName: 'border-[#648DFF] dark:border-[#648DFF]',
+    titleClassName: 'text-[#648DFF]',
+    borderClassName: 'border-[#648DFF]',
     icon: NoteIcon,
   },
   important: {
@@ -51,7 +51,7 @@ const Admonition = ({ children = null, type = 'note', title = null, asHTML = fal
   return (
     <div
       className={clsx(
-        'admonition not-prose mt-5 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
+        'admonition not-prose mt-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
         theme.borderClassName,
         '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
       )}

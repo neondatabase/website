@@ -17,8 +17,8 @@ const DEFAULT_DATA = {
 };
 
 const ELLIPSES = [
-  'right-[8%] top-[22%] h-[137px] w-44 rotate-[66deg] bg-[rgba(255,228,130,0.90)] blur-[40px] md:right-[2%] sm:right-[-6%]',
-  'bottom-[-48%] right-[-38%] h-44 w-[606px] -rotate-[110deg] bg-[#1C7154] blur-[80px] md:bottom-[-52%] md:right-[-55%] sm:bottom-[-58%] sm:right-[-72%]',
+  'right-[-6%] top-[62%] h-[137px] w-44 rotate-[65.57deg] bg-[rgba(255,228,130,0.90)] blur-[40px] xl:right-[-8%] xl:top-[63%] lg:right-[-10%] lg:top-[64%] md:right-[-15%] md:top-[66%] sm:right-[-18%] sm:top-[68%]',
+  'right-[-40%] top-[140%] h-44 w-[606px] -rotate-[118.36deg] bg-[#1D9662] blur-[80px] xl:right-[-48%] xl:top-[142%] lg:right-[-56%] lg:top-[145%] md:right-[-66%] md:top-[150%] sm:right-[-76%] sm:top-[156%]',
 ];
 
 const DocCta = ({
@@ -35,7 +35,7 @@ const DocCta = ({
   <figure
     className={clsx(
       'doc-cta not-prose relative overflow-hidden rounded-none',
-      isIntro ? 'my-12 px-6 py-5 md:my-8' : 'my-5 px-7 py-6',
+      isIntro ? 'my-12 px-6 py-5 md:my-8' : 'mt-11 px-7 py-6',
       'border border-gray-new-90 bg-[#F5FAF8]',
       'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
     )}
@@ -58,22 +58,20 @@ const DocCta = ({
       )}
     >
       <div className="flex flex-col gap-2">
-        <h2
+        <div
           className={clsx(
-            '!my-0',
+            'text-gray-new-8 dark:text-white',
             isIntro
               ? 'text-xl font-semibold leading-tight tracking-extra-tight'
-              : 'text-2xl font-medium leading-snug tracking-tighter text-gray-new-8 dark:text-white'
+              : 'text-2xl font-medium leading-snug tracking-tighter'
           )}
         >
           {title}
-        </h2>
+        </div>
         <p
           className={clsx(
-            '!text-[#494B50] dark:!text-gray-new-85',
-            isIntro
-              ? 'tracking-extra-tight'
-              : 'text-base font-normal leading-normal tracking-tight !text-[#494B50] dark:!text-gray-new-85',
+            '!m-0 !text-[#494B50] dark:!text-gray-new-85',
+            isIntro ? '!tracking-extra-tight' : '!text-base !tracking-tight',
             '[&_a]:border-b [&_a]:border-transparent [&_a]:text-secondary-8 [&_a]:no-underline',
             '[&_a]:transition-[border-color] [&_a]:duration-200 [&_a]:ease-in-out hover:[&_a]:border-secondary-8',
             'dark:[&_a]:text-primary-1 dark:hover:[&_a]:border-primary-1'
