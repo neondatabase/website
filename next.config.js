@@ -154,6 +154,11 @@ const defaultConfig = {
 
     return [
       {
+        source: '/docs/use-cases/:path*',
+        destination: '/use-cases',
+        permanent: true,
+      },
+      {
         source: '/docs/get-started-with-neon/:path*',
         destination: '/docs/get-started/:path*',
         permanent: true,
@@ -368,36 +373,6 @@ const defaultConfig = {
       {
         source: '/baa/signed',
         destination: 'https://ironcladapp.com/public-launch/6884048e9f9f2acee1cf6353',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/saas-apps',
-        destination: '/use-cases/postgres-for-saas',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/variable-traffic',
-        destination: '/use-cases/serverless-apps',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/database-per-user',
-        destination: '/docs/guides/multitenancy',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/ai-agents',
-        destination: '/use-cases/ai-agents',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/platforms',
-        destination: '/use-cases/database-per-tenant',
-        permanent: true,
-      },
-      {
-        source: '/docs/use-cases/dev-test',
-        destination: '/use-cases/dev-test',
         permanent: true,
       },
       {

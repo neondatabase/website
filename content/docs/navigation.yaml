@@ -12,8 +12,6 @@
           slug: get-started/dev-experience
         - title: Built to scale
           slug: get-started/built-to-scale
-        - title: Use cases
-          slug: use-cases/use-cases-overview
 
     - section: Start with Neon
       icon: start
