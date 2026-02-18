@@ -84,10 +84,8 @@ export async function middleware(req) {
       }
     }
 
-    // Apply doc headers to all content route responses (.md URLs and HTML pages)
-    // Note: Vary: Accept is set in next.config.js for this path because Next.js's
-    // renderer overwrites middleware Vary values. The AI agent path above uses
-    // applyDocHeaders() which includes Vary since that response bypasses rendering.
+    // Apply doc headers to all content route responses (.md URLs and HTML pages).
+    // Vary: Accept is only set on markdown-negotiated responses (applyDocHeaders above).
     if (isContentRoute(pathname)) {
       const response = NextResponse.next();
       response.headers.set('X-LLMs-Txt', '/docs/llms.txt');
