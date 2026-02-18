@@ -3,7 +3,7 @@ import Developers from 'components/pages/about/developers';
 import Hero from 'components/pages/about/hero';
 import Timeline from 'components/pages/about/timeline';
 import Vision from 'components/pages/about/vision';
-import CtaNew from 'components/shared/cta-new';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
@@ -18,11 +18,11 @@ const AboutUsPage = () => (
     <Vision />
     <Developers />
     <Connections />
-    <CtaNew
-      title="Still have questions? Get in touch."
-      description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
-      buttonText="Talk to Sales"
-      buttonUrl={LINKS.contactSales}
+    <CTANew
+      title="Become a part of our&nbsp;team"
+      description="We're looking for people who care deeply about quality to build with us."
+      buttonText="View Open Roles"
+      buttonUrl={LINKS.careers}
     />
   </Layout>
 );
