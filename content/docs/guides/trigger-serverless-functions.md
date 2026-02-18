@@ -6,7 +6,7 @@ summary: >-
   Cloudflare Worker in response to changes in a Neon database using Inngest
   integration.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.061Z'
+updatedOn: '2026-02-18T14:31:43.934Z'
 ---
 
 Combining your serverless Neon database with [Inngest](https://www.inngest.com/?utm_source=neon&utm_medium=trigger-serverless-functions-guide) enables you to **trigger serverless functions** running on Vercel, AWS, and Cloudflare Worker **based on database changes.**
