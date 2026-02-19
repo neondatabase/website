@@ -7,7 +7,7 @@ summary: >-
   migrating to the Neon platform.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.065Z'
+updatedOn: '2026-02-19T02:27:13.543Z'
 ---
 
 <InfoBlock>
@@ -77,7 +77,7 @@ Pro Plan users can stay on legacy limits or upgrade to a Neon plan to access bra
 
 ### Enterprise customers
 
-Neon is working with the Vercel team to transition Enterprise customers. If you want to speak to us about an Enterprise-level Neon plan, you can [get in touch with our sales team](/contact-sales).
+Neon is working with the Vercel team to transition Enterprise customers.
 
 ---
 
@@ -172,7 +172,6 @@ Try database branching for development environments
 ## Questions or issues?
 
 - **General questions**: Visit our [Discord #vercel-postgres-transition](https://discord.com/channels/1176467419317940276/1306544611157868544) channel
-- **Enterprise customers**: [Contact our sales team](/contact-sales) for transition support
 - **Technical support**: Use the standard Neon support channels
 
 <NeedHelp/>

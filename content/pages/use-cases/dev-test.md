@@ -206,7 +206,7 @@ text: 'With scale to zero',
 textSize="md"
 />
 
-<CTA title="Reach out to us for an exact quote" description="Tell us more about your use case and we’ll send you back detailed information on how much you could save with Neon." buttonText="Contact us" buttonUrl="/contact-sales" />
+<CTA title="Get $100 to get started" description="Sign up here to get started free, and you'll have $100 credits ready when it's time to scale." buttonText="Contact us" buttonUrl="https://fyi.neon.tech/credits" />
 
 ### Can Neon also help lower the costs of my production database?
 
@@ -243,7 +243,3 @@ url="/blog/how-dispatch-speeds-up-development-with-neon"
 <Admonition type="note" title="Get $100 in credits">
 Neon offers a Free Plan, and we’ll give you $100 in credits when you first upgrade. Claim the offer by signing up through [this link](https://fyi.neon.tech/credits).
 </Admonition>
-
----
-
-<CTA title="Got Questions? Reach out" description="There's no one size fits all with ephemeral environments - but we're here to help you set things up. We can also discuss pricing options and annual contracts." buttonText="Book a meeting with a Solutions Engineer" buttonUrl="/contact-sales" buttonClassName="xs:text-xs xs:whitespace-normal" theme="column" />

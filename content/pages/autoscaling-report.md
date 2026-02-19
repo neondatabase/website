@@ -119,7 +119,7 @@ The average production database running on Neon adjusts its compute size 32,016 
 
 Here is a detailed price comparison for a real Neon customer with a production workload.
 
-<AutoscalingChart title="Production. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" width="window" autoscalingRate={0.222} />
+<AutoscalingChart title="Production. Autoscaling vs Provisioned (RDS)" datasetKey="predictable_fluctuation" autoscalingRate={0.222} />
 
 The results: <span className="bg-secondary-1/20 text-secondary-1 p-1">Provisioned uses 3.5x more compute</span> to serve the same workload, because much of the time only a fraction of allocated resources are being used. Translating that to costs, this workload incurs <span className="bg-green-45/20 text-green-45 p-1">60% lower cost on Neon</span> thanks to autoscaling. We're using the `$0.222/CU-hour` rate from the Neon Scale plan _recommended for businesses_ and a conservative `$0.1/CU-hour` rate for provisioned instances like RDS.
 
@@ -225,7 +225,7 @@ Scale to zero changes the equation on what types of database usage patterns are 
 
 Here is an actual autoscaling history from a scale-to-zero database on Neon:
 
-<AutoscalingChart title="Fig. 3a: Scale-to-Zero workload. Neon vs Provisioned" datasetKey="scale_to_zero" width="window" autoscalingRate={0.106} overprovision={0} compact={true} fixedRate={0.065}  />
+<AutoscalingChart title="Fig. 3a: Scale-to-Zero workload. Neon vs Provisioned" datasetKey="scale_to_zero" autoscalingRate={0.106} overprovision={0} compact={true} fixedRate={0.065}  />
 
 Because of how often this database goes idle and scales to zero, this exact workload only uses 25 CU-hours/month on Neon.
 (Because it is running at 0.25 CU when it's on, that means it's active for 100 hours per month.)

@@ -6,7 +6,7 @@ summary: >-
   integrates with your Neon database, allowing for branch-aware authentication
   and seamless testing of authentication workflows in isolated environments.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.045Z'
+updatedOn: '2026-02-19T02:27:13.539Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/auth/migrate/from-stack-auth
@@ -162,7 +162,7 @@ Neon Auth is included in all Neon plans based on Monthly Active Users (MAU):
 - **Launch**: Up to 1M MAU
 - **Scale**: Up to 1M MAU
 
-An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, [contact Sales](/contact-sales).
+An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period. If you need more than 1M MAU, request an increase in the [console feedback form](https://console.neon.tech/?feedbackMessage=Neon%20auth%20limit%20increase).
 
 See [Neon plans](/docs/introduction/plans#auth) for more details.
 

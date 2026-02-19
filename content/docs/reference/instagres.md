@@ -8,14 +8,14 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2026-02-06T22:07:33.144Z'
+updatedOn: '2026-02-17T17:13:56.589Z'
 ---
 
 Instagres gives you an instant Postgres database with a single API call. No account required.
 
 Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running Postgres 17.
 
-Access it at [instagres.com](https://instagres.com/) or [neon.new](https://neon.new/).
+Access it at [instagres.com](https://instagres.com/) or [pg.new](https://pg.new/).
 
 ## Quick start
 

@@ -107,17 +107,6 @@ const defaultConfig = {
           },
         ],
       },
-      // Prevent search engines from indexing raw markdown files
-      // (these are for AI agents, not human search results)
-      ...Object.keys(CONTENT_ROUTES).map((route) => ({
-        source: `/${route}/:path*.md`,
-        headers: [
-          {
-            key: 'X-Robots-Tag',
-            value: 'noindex',
-          },
-        ],
-      })),
     ];
   },
   async redirects() {
@@ -377,12 +366,12 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://neon.new',
+        destination: 'https://pg.new',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://neon.new',
+        destination: 'https://pg.new',
         permanent: false,
       },
       {
@@ -448,12 +437,17 @@ const defaultConfig = {
       },
       {
         source: '/creators',
-        destination: '/programs/creators',
+        destination: '/docs/community/community-intro',
         permanent: true,
       },
       {
         source: '/blog/join-the-neon-creator-program',
-        destination: '/programs/creators',
+        destination: '/docs/community/community-intro',
+        permanent: true,
+      },
+      {
+        source: '/creators',
+        destination: '/docs/community/community-intro ',
         permanent: true,
       },
       {

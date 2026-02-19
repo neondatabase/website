@@ -9,27 +9,20 @@ const themeClassName = {
   white: 'text-gray-new-80',
   black: 'text-gray-new-20',
 };
-const sizes = {
+
+const sizeClassName = {
   regular: 'text-xs sm:text-[10px]',
   large: 'text-[13px] sm:text-[10px]',
 };
 
-const HeadingLabel = ({
+const SectionLabel = ({
   className,
-  theme = 'white',
-  databricks = false,
+  theme = 'black',
   size = 'regular',
+  databricks = false,
   children,
 }) => (
-  <span
-    className={clsx(
-      'flex w-fit items-center gap-2 font-mono font-medium uppercase leading-none',
-      'sm:gap-1.5',
-      themeClassName[theme],
-      className,
-      sizes[size]
-    )}
-  >
+  <div className={clsx('flex items-end gap-2 sm:gap-1.5', themeClassName[theme], className)}>
     {databricks ? (
       <Image
         className="sm:size-2.5"
@@ -39,18 +32,27 @@ const HeadingLabel = ({
         alt="Databricks logo"
       />
     ) : (
-      <Image className="sm:size-2.5" src={triangleIcon} width={12} height={14} alt="" />
+      <Image
+        src={triangleIcon}
+        alt=""
+        width={12}
+        height={14}
+        aria-hidden="true"
+        className="sm:h-2.5 sm:w-2.5"
+      />
     )}
-    {children}
-  </span>
+    <span className={clsx('font-mono font-medium uppercase leading-none', sizeClassName[size])}>
+      {children}
+    </span>
+  </div>
 );
 
-HeadingLabel.propTypes = {
+SectionLabel.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(Object.keys(themeClassName)),
+  size: PropTypes.oneOf(Object.keys(sizeClassName)),
   databricks: PropTypes.bool,
-  size: PropTypes.oneOf(Object.keys(sizes)),
   children: PropTypes.node.isRequired,
 };
 
-export default HeadingLabel;
+export default SectionLabel;

@@ -5,7 +5,7 @@ summary: >-
   How to integrate Uploadcare with Neon for storing file metadata while
   utilizing Uploadcare's cloud platform for file uploads and storage management.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.201Z'
+updatedOn: '2026-02-17T17:13:56.586Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -18,7 +18,7 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 
 ## Create a Neon project
 
-1. Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1. Navigate to [neon.new](https://neon.new) to create a new Neon project.
 2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Uploadcare account and project

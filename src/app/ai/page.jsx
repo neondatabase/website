@@ -1,7 +1,7 @@
 import Bento from 'components/pages/ai/bento';
 import Hero from 'components/pages/ai/hero';
 import Usage from 'components/pages/ai/usage';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import FeaturesCards from 'components/shared/features-cards';
 import GridFeatures from 'components/shared/grid-features';
 import Layout from 'components/shared/layout';
@@ -170,7 +170,7 @@ const AiPage = () => (
       link={LINKS.docsAi}
       linkText="Learn more"
     />
-    <CTA title="The Postgres of tomorrow,<br /> available today" />
+    <CTANew title="The Postgres of tomorrow,<br /> available today" />
   </Layout>
 );
 

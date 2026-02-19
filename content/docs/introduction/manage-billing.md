@@ -7,7 +7,7 @@ summary: >-
   page, updating payment methods, downloading invoices, changing plans, and
   account deletion.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.215Z'
+updatedOn: '2026-02-19T02:27:13.545Z'
 ---
 
 <InfoBlock>
@@ -117,7 +117,7 @@ Changing your plan to one with lower usage allowances may affect the performance
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
-To downgrade from a **legacy Enterprise plan**, please contact [Sales](/contact-sales). Cancellation of a legacy Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the Customer Agreement.
+To downgrade from a **legacy Enterprise plan**, please open a support ticket. Cancellation of a legacy Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the Customer Agreement.
 
 ## How to prevent further monthly charges to your account
 
