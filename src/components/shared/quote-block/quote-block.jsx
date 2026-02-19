@@ -2,9 +2,25 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 
+import alexCoAvatar from 'images/authors/alex-co.jpg';
+import benHalpernAvatar from 'images/authors/ben-halpern.jpg';
+import benVinegarAvatar from 'images/authors/ben-vinegar.jpg';
+import codyJenkinsAvatar from 'images/authors/cody-jenkins.jpg';
 import dhruvAminAvatar from 'images/authors/dhruv-amin2.jpg';
+import dominicWhyteAvatar from 'images/authors/dominic-whyte.jpg';
+import himanshuBhandohAvatar from 'images/authors/himanshu-bhandoh.jpg';
+import jamesRossAvatar from 'images/authors/james-ross.jpg';
+import jeremyBermanAvatar from 'images/authors/jeremy-berman.jpg';
+import joeHorsnellAvatar from 'images/authors/joe-horsnell.jpg';
+import jonathanReyesAvatar from 'images/authors/jonathan-reyes.jpg';
+import jorgeFerreiroAvatar from 'images/authors/jorge-ferreiro.jpg';
+import julianBenegasAvatar from 'images/authors/julian-benegas.jpg';
 import lincolnBergesonAvatar from 'images/authors/lincoln-bergeson.jpg';
 import martinSkowAvatar from 'images/authors/martin-skow.jpg';
+import oliverStenbomAvatar from 'images/authors/oliver-stenbom.jpg';
+import pierreBurgyAvatar from 'images/authors/pierre-burgy.jpg';
+import rickBlalockAvatar from 'images/authors/rick-blalock.jpg';
+import thorstenRiessAvatar from 'images/authors/thorsten-riess.jpg';
 
 const quotes = {
   'dhruv-amin': {
@@ -18,6 +34,70 @@ const quotes = {
   'martin-skow-røed': {
     name: 'Martin Skow Røed',
     avatar: martinSkowAvatar,
+  },
+  'alex-co': {
+    name: 'Alex Co',
+    avatar: alexCoAvatar,
+  },
+  'ben-halpern': {
+    name: 'Ben Halpern',
+    avatar: benHalpernAvatar,
+  },
+  'ben-vinegar': {
+    name: 'Ben Vinegar',
+    avatar: benVinegarAvatar,
+  },
+  'cody-jenkins': {
+    name: 'Cody Jenkins',
+    avatar: codyJenkinsAvatar,
+  },
+  'dominic-whyte': {
+    name: 'Dominic Whyte',
+    avatar: dominicWhyteAvatar,
+  },
+  'joe-horsnell': {
+    name: 'Joe Horsnell',
+    avatar: joeHorsnellAvatar,
+  },
+  'himanshu-bhandoh': {
+    name: 'Himanshu Bhandoh',
+    avatar: himanshuBhandohAvatar,
+  },
+  'james-ross': {
+    name: 'James Ross',
+    avatar: jamesRossAvatar,
+  },
+  'jeremy-berman': {
+    name: 'Jeremy Berman',
+    avatar: jeremyBermanAvatar,
+  },
+  'jonathan-reyes': {
+    name: 'Jonathan Reyes',
+    avatar: jonathanReyesAvatar,
+  },
+  'jorge-ferreiro': {
+    name: 'Jorge Ferreiro',
+    avatar: jorgeFerreiroAvatar,
+  },
+  'julian-benegas': {
+    name: 'Julian Benegas',
+    avatar: julianBenegasAvatar,
+  },
+  'oliver-stenbom': {
+    name: 'Oliver Stenbom',
+    avatar: oliverStenbomAvatar,
+  },
+  'pierre-burgy': {
+    name: 'Pierre Burgy',
+    avatar: pierreBurgyAvatar,
+  },
+  'rick-blalock': {
+    name: 'Rick Blalock',
+    avatar: rickBlalockAvatar,
+  },
+  'thorsten-riess': {
+    name: 'Thorsten Rieß',
+    avatar: thorstenRiessAvatar,
   },
 };
 
