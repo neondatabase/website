@@ -48,4 +48,3 @@ To learn more about how we protect your data and uphold the highest standards of
 
 - For security inquiries, contact us at [security@neon.tech](mailto:security@neon.tech).
 - For privacy-related questions, reach out to [privacy@databricks.com](mailto:privacy@databricks.com).
-- For sales information, please [contact our sales team](/contact-sales).
