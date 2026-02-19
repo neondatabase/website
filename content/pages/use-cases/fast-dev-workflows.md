@@ -68,7 +68,7 @@ In Neon, a new branch is an isolated environment - one that already contains you
 
 ### Staging that resyncs with production in one API call
 
-In Neon, staging is just a branch derived from production. When production changes, you do not need to rebuild staging from scratch or run complex sync jobs. You can reset your staging branch from production in a single API call, instantly bringing schema and data back in sync. 
+In Neon, staging is just a branch derived from production. When production changes, you do not need to rebuild staging from scratch or run complex sync jobs. You can reset your staging branch from production in a single API call, instantly bringing schema and data back in sync.
 
 This makes staging a reliable checkpoint instead of a slowly drifting approximation, and removes a whole class of "works in staging but not in prod" issues.
 
@@ -86,7 +86,7 @@ Branches make it practical to give every developer - and every PR - its own data
 
 ### Promote from dev to prod safely, even with many parallel environments
 
-As teams scale, promotion becomes harder. Multiple developers, multiple branches, multiple schema changes - all converging on production. 
+As teams scale, promotion becomes harder. Multiple developers, multiple branches, multiple schema changes - all converging on production.
 
 Neon supports promotion workflows built on branching and snapshots. Teams can validate changes in isolated branches, promote them intentionally, and keep a rollback point ready in case something goes wrong.
 

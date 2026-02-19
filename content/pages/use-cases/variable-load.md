@@ -15,7 +15,7 @@ Most production workloads aren’t steady: they vary hour by hour, they drop at 
 
 ![Typical load pattern of a production database over 24 hours](/use-cases/variable-load/typical-daily-load-pattern.png)
 
-**There’s nothing fixed about this compute usage, yet most managed Postgres platforms still run on fixed-size instances.** 
+**There’s nothing fixed about this compute usage, yet most managed Postgres platforms still run on fixed-size instances.**
 
 You’re forced to choose how much CPU and memory to buy up front, and end up locked into a structural tradeoff:
 
@@ -162,6 +162,7 @@ When you’re focused on scaling your startup, you shouldn’t spend time in cap
 <QuoteBlock quote="There's zero reason to use RDS in 2025. Neon is the most disruptive Postgres database platform out there, and every startup should be using it." author="jorge-ferreiro" role="Founder of SMASHSEND" />
 
 To get started,
+
 - [Sing up](https://console.neon.tech/signup) to Neon's Free Plan and start building right awY
 - Explore [our usage-based paid plans](https://neon.com/pricing)
 - Learn about [how we take care of security and compliance](https://neon.com/security)
