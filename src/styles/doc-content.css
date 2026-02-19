@@ -391,21 +391,6 @@
     }
   }
 
-  .prose-flow {
-    > p {
-      @apply my-6;
-    }
-
-    > ul,
-    > ol {
-      @apply my-6;
-
-      > li {
-        @apply my-4;
-      }
-    }
-  }
-
   /* Split layout for SDK reference pages (2-column grid) */
   .split-layout {
     @apply grid grid-cols-2 gap-x-10 xl:grid-cols-1 xl:gap-x-0;

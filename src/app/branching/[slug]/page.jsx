@@ -3,8 +3,9 @@
 import { notFound } from 'next/navigation';
 
 import Breadcrumbs from 'components/pages/branching/breadcrumbs';
+import Container from 'components/shared/container';
 import Content from 'components/shared/content';
-import DocFooter from 'components/shared/doc-footer';
+// import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import VERCEL_URL from 'constants/base';
 import { BRANCHING_BASE_PATH } from 'constants/branching';
@@ -50,39 +51,47 @@ const BranchingPage = ({ params }) => {
   const { slug } = params;
 
   const {
-    data: { title, updatedOn },
+    // data: { title, updatedOn },
+    data: { title },
     content,
   } = getPostBySlug(slug, BRANCHING_DIR_PATH);
 
   const { previousLink, nextLink } = getNavigationLinks(slug);
 
   return (
-    <>
+    <Container
+      className="w-full pb-[120px] pt-[88px] xl:pb-24 xl:pt-16 lg:pb-20 lg:pt-11 md:pb-[72px] md:pt-8"
+      size="xxs"
+    >
       <Breadcrumbs />
       <article>
-        <h1 className="t-5xl text-balance font-semibold leading-tight tracking-tight">{title}</h1>
-        <Content
-          className="prose-flow mt-12 text-lg text-gray-new-98 lg:mt-10 md:mt-8 md:text-base [&_h4]:!font-medium [&_p]:opacity-90"
-          content={content}
-        />
+        <h1 className="text-balance font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-5xl lg:text-[36px] md:text-[32px]">
+          {title}
+        </h1>
+        <Content className="mt-16 lg:mt-12 md:mt-10" content={content} />
       </article>
-      <div className="mt-12 lg:mt-10 md:mt-8">
-        <p className="text-2xl font-medium leading-none tracking-tight">Keep reading</p>
+      <div className="mt-14 md:mt-10">
+        <p className="font-regular text-[28px] leading-tight tracking-[-0.05em] md:text-2xl">
+          Keep reading
+        </p>
         <NavigationLinks
-          className="mt-7 lg:mt-6 md:mt-5"
+          className="mt-7 md:mt-5"
           previousLink={previousLink}
           nextLink={nextLink}
           basePath={BRANCHING_BASE_PATH}
-          showLabel={false}
+          branchingVariant
+          showLabel
         />
       </div>
+      {/* TO:DO bring back updated DocFooter for branching layout
       <DocFooter
         className="mt-0"
         updatedOn={updatedOn}
         withFeedback={false}
         tocLink={LINKS.branching}
       />
-    </>
+      */}
+    </Container>
   );
 };
 
