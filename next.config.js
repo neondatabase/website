@@ -470,6 +470,11 @@ const defaultConfig = {
         destination: '/',
         permanent: true,
       },
+      {
+        source: '/partners',
+        destination: 'https://neon.com/docs/guides/platform-integration-overview',
+        permanent: true,
+      },
       // Homepage variants redirects
       {
         source: '/all-things-open-2023',

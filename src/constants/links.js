@@ -16,7 +16,7 @@ export default {
   guides: '/guides',
   generateTicket: '/generate-ticket',
   migration: '/migration',
-  partners: '/partners',
+  partners: '/docs/guides/platform-integration-overview',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   programsAgents: '/programs/agents',
