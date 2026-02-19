@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS), and execute your first query, including optional
   authentication and schema access configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.072Z'
+updatedOn: '2026-02-19T16:15:04.971Z'
 ---
 
 In this guide, you'll learn how to enable the Neon Data API for your database, create a table with Row-Level Security (RLS), and run your first query.
@@ -204,9 +204,22 @@ export const posts = pgTable(
 
 The Data API caches your database schema for performance. When you modify your schema (adding tables, modifying columns, or changing structure, etc.), you need to refresh this cache for the changes to take effect.
 
-To refresh the cache, go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
+**Option 1: Neon Console**
+
+Go to the **Data API** page in the Neon Console and click **Refresh schema cache**.
 
 ![Data API refresh schema cache button](/docs/data-api/data_api_schema_refresh.png)
+
+**Option 2: Neon API**
+
+You can also refresh the schema cache programmatically. The `PATCH /projects/{project_id}/branches/{branch_id}/data-api/{database_name}` endpoint always refreshes the schema cache as part of the operation. Send an empty body to trigger a refresh:
+
+```bash shouldWrap
+curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
+  -H 'Authorization: Bearer YOUR_NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{}'
+```
 
 ## Connect and Query
 
@@ -344,15 +357,21 @@ curl -X POST 'https://your-data-api-endpoint/rest/v1/posts' \
 
 ## Testing with Postman or cURL
 
-If you're using Neon Auth and want to test the Data API without building an application first, you can use the Auth API reference UI to create test users and obtain JWT tokens.
+If you're using Neon Auth and want to test the Data API without building an application first, you can obtain a JWT token using the interactive Auth API reference UI or any HTTP client (the examples below use cURL).
 
 <Admonition type="note" title="Neon Auth only">
 This workflow applies when using Neon Auth as your authentication provider. If you're using a different provider, obtain JWT tokens through your provider's authentication flow.
 </Admonition>
 
-1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). This interactive UI lets you explore and test all auth endpoints. It's powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage). You can find your **Auth URL** on the **Auth** page on the **Configuration** tab in the Neon Console.
+<Tabs labels={["Auth API reference UI", "cURL"]}>
 
-2. **Create a test user:** In the API reference, call `POST /api/auth/sign-up/email` with a JSON body:
+<TabItem>
+
+The Auth API reference UI is an interactive browser-based tool for exploring and testing all Neon Auth endpoints. It is powered by [Better Auth's OpenAPI plugin](https://www.better-auth.com/docs/plugins/open-api#usage).
+
+1. **Open the Auth API reference:** Navigate to your Auth URL with `/reference` appended, for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`. You can find your **Auth URL** on the **Auth** page, **Configuration** tab in the Neon Console.
+
+2. **Create a test user:** Use the UI to call `POST /sign-up/email` with a JSON body:
 
    ```json
    {
@@ -362,7 +381,7 @@ This workflow applies when using Neon Auth as your authentication provider. If y
    }
    ```
 
-3. **Or sign in with an existing user:** Call `POST /api/auth/sign-in/email` with:
+3. **Or sign in with an existing user:** Call `POST /sign-in/email` with:
 
    ```json
    {
@@ -371,14 +390,67 @@ This workflow applies when using Neon Auth as your authentication provider. If y
    }
    ```
 
-4. **Get the JWT token:** Call `GET /api/auth/get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
+4. **Get the JWT token:** Call `GET /get-session` and copy the JWT from the `Set-Auth-Jwt` response header.
 
 5. **Query the Data API:** Use the JWT in your requests:
+
    ```bash
    curl -X GET 'https://your-data-api-endpoint/rest/v1/posts' \
      -H 'Authorization: Bearer YOUR_JWT_TOKEN' \
      -H 'Content-Type: application/json'
    ```
+
+</TabItem>
+
+<TabItem>
+
+The following steps walk through signing up, obtaining a JWT, and querying the Data API from the terminal. You can find your **Auth URL** on the **Auth** page and your **Data API URL** on the **Data API** page in the Neon Console.
+
+**1. Sign up (or sign in)**
+
+Create a test user. The `-c` flag saves the session cookie returned by Neon Auth:
+
+```bash shouldWrap
+curl -X POST 'https://ep-example-auth.neonauth.us-east-1.aws.neon.tech/neondb/auth/sign-up/email' \
+  -c cookies.txt \
+  -H 'Content-Type: application/json' \
+  -H 'Origin: http://localhost:3000' \
+  -d '{"email":"test@example.com","password":"your-password","name":"Test User","callbackURL":"http://localhost:3000"}'
+```
+
+To sign in with an existing user instead, replace `/sign-up/email` with `/sign-in/email` and omit the `name` and `callbackURL` fields.
+
+**2. Get the JWT token**
+
+Call `get-session` using the saved cookie (`-b`). The `-D -` flag prints response headers to your terminal. Look for the `set-auth-jwt` header and copy its value:
+
+```bash shouldWrap
+curl 'https://ep-example-auth.neonauth.us-east-1.aws.neon.tech/neondb/auth/get-session' \
+  -b cookies.txt \
+  -H 'Origin: http://localhost:3000' \
+  -D - -o /dev/null
+```
+
+The output will include a line like:
+
+```
+set-auth-jwt: eyJhbGci...
+```
+
+Copy the full token value.
+
+**3. Query the Data API**
+
+Use the JWT as a bearer token to query your table:
+
+```bash shouldWrap
+curl 'https://ep-example.apirest.us-east-1.aws.neon.tech/neondb/rest/v1/posts?select=*' \
+  -H 'Authorization: Bearer YOUR_JWT_TOKEN'
+```
+
+</TabItem>
+
+</Tabs>
 
 <Admonition type="tip" title="Token expiration">
 JWTs expire after approximately 15 minutes. If you receive a `"JWT token has expired"` error, sign in again to get a fresh token.

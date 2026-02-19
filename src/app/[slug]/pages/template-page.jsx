@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { notFound } from 'next/navigation';
 
+import Aside from 'components/pages/doc/aside';
 import Post from 'components/pages/template/post';
 import Container from 'components/shared/container';
 import Layout from 'components/shared/layout';
@@ -46,15 +47,15 @@ const TemplatePage = ({ params }) => {
     <Layout isHeaderSticky>
       <div className="safe-paddings flex flex-1 flex-col dark:bg-black-pure dark:text-white lg:block">
         <Container
-          className="grid w-full flex-1 grid-cols-12 gap-x-10 pb-20 pt-[88px] xl:gap-x-7 lg:block lg:gap-x-5 lg:pt-4"
-          size="1344"
+          className="grid w-full flex-1 grid-cols-12 gap-x-8 pb-[116px] pt-[88px] 2xl:gap-x-7 xl:pb-24 xl:pt-[62px] lg:block lg:gap-x-5 lg:pb-20 lg:pt-12 md:pb-[72px]"
+          size="1600"
         >
-          <Post
-            content={content}
-            data={data}
-            currentSlug={slug}
-            gitHubPath={gitHubPath}
+          <Post content={content} data={data} currentSlug={slug} />
+          <Aside
             tableOfContents={tableOfContents}
+            gitHubPath={gitHubPath}
+            isTemplate
+            enableTableOfContents
           />
         </Container>
       </div>

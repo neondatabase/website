@@ -285,7 +285,6 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
         icon={GitHubIcon}
         text="Suggest edits"
         url={gitHubLink}
-        iconClassName="size-[18px] text-white"
         tooltip="Propose changes to this page"
         onClick={() =>
           sendGtagEvent('Action Clicked', { text: 'Suggest edits', tag_name: 'DocsSidebar' })
@@ -294,7 +293,6 @@ const Actions = ({ gitHubPath, withBorder = false, isTemplate = false }) => {
       <ActionItem
         icon={ArrowBackToTopIcon}
         text="Back to top"
-        iconClassName="size-5"
         tooltip="Scroll to the top of the page"
         onClick={backToTop}
       />

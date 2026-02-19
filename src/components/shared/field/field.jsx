@@ -10,7 +10,7 @@ export const FIELD_TAGS = {
 
 const themes = {
   default:
-    'mt-2.5 w-full border-[3px] border-transparent px-4 text-lg text-white outline-none focus:bg-black h-14 md:h-12',
+    'mt-2.5 w-full border-[3px] border-transparent px-4 text-lg text-white outline-none focus:bg-black h-12',
   transparent:
     'w-full h-10 border border-gray-new-15 outline-none !bg-transparent mt-2 px-[15px] placeholder:text-gray-new-40 placeholder:text-base',
   checkbox:

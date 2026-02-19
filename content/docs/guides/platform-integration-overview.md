@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-02-17T17:13:56.583Z'
+updatedOn: '2026-02-19T15:51:43.468Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
@@ -50,7 +50,7 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 ---
 
-## Claimable database flow (Instagres)
+## Claimable database flow
 
 **Best for:** Plugins and platforms that want to offer instant database provisioning as part of their developer experience without requiring user signup
 
@@ -77,13 +77,13 @@ Use this approach when you want to create databases for your users without requi
 
 - [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
 - [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Instagres](https://pg.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [pg.new](https://pg.new/)
+- [Claimable Postgres by Neon](https://pg.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [pg.new](https://pg.new/)
 
 <DetailIconCards>
 
 <a href="/docs/workflows/claimable-database-integration" description="Learn how to implement claimable databases" icon="import">Claimable database guide</a>
 
-<a href="/docs/reference/instagres" description="See Instagres implementation details" icon="transactions">Instagres documentation</a>
+<a href="/docs/reference/claimable-postgres" description="See Claimable Postgres implementation details" icon="transactions">Claimable Postgres documentation</a>
 
 </DetailIconCards>
 
