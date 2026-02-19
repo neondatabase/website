@@ -11,10 +11,10 @@ updatedOn: '2026-02-15T20:51:54.039Z'
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/). The Organization plugin is the way to add multi-tenancy in Better Auth. You do not need to manually install or configure the Better Auth Organization plugin.
+Neon Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Sending invitation emails and supporting JWT token claims are currently in progress.
+The Organization plugin is currently in **Beta**. Support for invitation emails and JWT token claims is under development.
 </Admonition>
 
 ## Why use this plugin?
@@ -35,7 +35,7 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 ## Configure the organization plugin
 
-The Organization plugin is on by default for each branch; you can turn it off or change settings in the Console or via the API. If the plugin is disabled for a branch, your app users cannot call organization APIs (create org, invite members, and so on).
+The Organization plugin is enabled by default for each branch; you can disable it or change settings in the Console or via the API. If the plugin is disabled, your application users and admins cannot create or manage organizations, and any organization-related API calls will return an error.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -48,7 +48,7 @@ Open your project in the Neon Console, then go to **Auth** > **Configuration** >
 - **Enable Organizations** (toggle): Turn the plugin on or off for the branch.
 - **Limit:** Maximum number of organizations a user can create or belong to (e.g., 1 per user).
 - **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
-- **Allow user to create organization:** When on, any user can create organizations (up to the limit). When off, only users who already have Owner or Admin (the role you set in **Creator role** above) can create organizations.
+- **Allow user to create organization:** When on, any user can create organizations (up to the limit). When off, users cannot create organizations from the client. Server-side creation is still possible.
 
 </TabItem>
 
@@ -116,7 +116,7 @@ Example response:
 | `enabled`                           | boolean                     | Turn the organization plugin on or off for the branch.                                                                                   |
 | `organization_limit`                | number (≥ 1)                | Max organizations a user can create or belong to.                                                                                        |
 | `creator_role`                      | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner).                          |
-| `allow_user_to_create_organization` | boolean                     | When true, any user can create orgs (within the limit). When false, only users who already have Owner or Admin can create organizations. |
+| `allow_user_to_create_organization` | boolean                     | When true, any user can create orgs (within the limit). When false, users cannot create organizations from the client. Server-side creation is still possible. |
 
 **API Documentation**
 
