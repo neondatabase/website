@@ -111,12 +111,12 @@ Example response:
 
 **API fields reference**
 
-| Field | Type | Description |
-| :------ | :--- | :---------- |
-| `enabled` | boolean | Turn the organization plugin on or off for the branch. |
-| `organization_limit` | number (≥ 1) | Max organizations a user can create or belong to. |
-| `creator_role` | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner). |
-| `allow_user_to_create_organization` | boolean | When true, any user can create orgs (within the limit). When false, only users who already have Owner or Admin can create organizations. |
+| Field                               | Type                        | Description                                                                                                                              |
+| :---------------------------------- | :-------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                           | boolean                     | Turn the organization plugin on or off for the branch.                                                                                   |
+| `organization_limit`                | number (≥ 1)                | Max organizations a user can create or belong to.                                                                                        |
+| `creator_role`                      | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner).                          |
+| `allow_user_to_create_organization` | boolean                     | When true, any user can create orgs (within the limit). When false, only users who already have Owner or Admin can create organizations. |
 
 **API Documentation**
 
