@@ -11,18 +11,121 @@ updatedOn: '2026-02-15T20:51:54.039Z'
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
 
-Neon Auth is built on [Better Auth](https://www.better-auth.com/) and provides support for Organization plugin APIs through the Neon SDK. You do not need to manually install or configure the Better Auth Organization plugin.
-
-The Organization plugin allows you to build multi-tenant applications where users can create workspaces, invite other members, and manage permissions using roles.
+Neon Auth is built on [Better Auth](https://www.better-auth.com/). The Organization plugin is the way to add multi-tenancy in Better Auth. You do not need to manually install or configure the Better Auth Organization plugin.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for invitation emails and JWT token claims is currently in progress.
+The Organization plugin is currently in **Beta**. Sending invitation emails and supporting JWT token claims are currently in progress.
 </Admonition>
+
+## Why use this plugin?
+
+Use the Organization plugin when you need multi-tenancy in your app. It supports:
+
+- Multi-tenant apps where each tenant is an organization
+- Workspaces or groups that share a Neon branch (same database)
+- Inviting users and assigning roles: owner, admin, or member
+- Role-based access: owners and admins can manage the org; the member role has read-only access
+
+Better Auth also has a **Teams** feature (sub-groups within an org); that feature is not currently enabled in Neon Auth.
 
 ## Prerequisites
 
 - A Neon project with **Auth enabled**
 - A signed-in user (organizations are associated with users)
+
+## Configure the organization plugin
+
+The Organization plugin is on by default for each branch; you can turn it off or change settings in the Console or via the API. If the plugin is disabled for a branch, your app users cannot call organization APIs (create org, invite members, and so on).
+
+<Tabs labels={["Console", "API"]}>
+
+<TabItem>
+
+Open your project in the Neon Console, then go to **Auth** > **Configuration** > **Organizations** (per branch). From there you can customize:
+
+![Auth Configuration > Organizations in the Neon Console](/docs/auth/console-auth-organizations-config.png)
+
+- **Enable Organizations** (toggle): Turn the plugin on or off for the branch.
+- **Limit:** Maximum number of organizations a user can create or belong to (e.g., 1 per user).
+- **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
+- **Allow user to create organization:** When on, any user can create organizations (up to the limit). When off, only users who already have Owner or Admin (the role you set in **Creator role** above) can create organizations.
+
+</TabItem>
+
+<TabItem>
+
+You can also configure the plugin via the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api). Use your API key in the `Authorization` header.
+
+**Get current plugin config (including organization):**
+
+```bash
+curl -X GET \
+  'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY'
+```
+
+Example response (excerpt showing the `organization` object):
+
+```json
+{
+  "organization": {
+    "enabled": true,
+    "organization_limit": 5,
+    "allow_user_to_create_organization": true,
+    "creator_role": "owner"
+  }
+}
+```
+
+The full response includes other plugin configs (email provider, OAuth, etc.). `creator_role` is either `owner` or `admin`.
+
+**Update the organization plugin:**
+
+Send only the fields you want to change; all request body fields are optional.
+
+```bash
+curl -X PATCH \
+  'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/plugins/organization' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer $NEON_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "enabled": true,
+    "organization_limit": 5,
+    "creator_role": "owner",
+    "allow_user_to_create_organization": true
+  }'
+```
+
+Example response:
+
+```json
+{
+  "enabled": true,
+  "organization_limit": 5,
+  "allow_user_to_create_organization": true,
+  "creator_role": "owner"
+}
+```
+
+**API fields reference**
+
+| Field | Type | Description |
+| :------ | :--- | :---------- |
+| `enabled` | boolean | Turn the organization plugin on or off for the branch. |
+| `organization_limit` | number (≥ 1) | Max organizations a user can create or belong to. |
+| `creator_role` | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner). |
+| `allow_user_to_create_organization` | boolean | When true, any user can create orgs (within the limit). When false, only users who already have Owner or Admin can create organizations. |
+
+**API Documentation**
+
+- [Get all plugin configurations](https://api-docs.neon.tech/reference/getneonauthpluginconfigs)
+- [Update organization plugin configuration](https://api-docs.neon.tech/reference/updateneonauthorganizationplugin)
+
+</TabItem>
+
+</Tabs>
 
 ## Organizations
 
