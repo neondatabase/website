@@ -6,7 +6,7 @@ summary: >-
   community guides, code contributions, and engagement on platforms like Discord
   and YouTube.
 enableTableOfContents: true
-updatedOn: '2026-02-18T14:36:47.695Z'
+updatedOn: '2026-02-19T02:17:53.299Z'
 ---
 
 Neon is [open source](/docs/get-started/why-neon#neon-is-open-source) and has an enthusiastic user community worldwide. Here's how you can get involved:

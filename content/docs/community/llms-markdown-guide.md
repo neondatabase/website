@@ -1,11 +1,12 @@
 ---
 title: Getting Neon docs as Markdown
-subtitle: How to get our documentation as plain Markdown for LLMs, tools, and scripts
+subtitle: 'How to get our documentation as plain Markdown for LLMs, tools, and scripts'
 summary: >-
-  Describes how to request Neon documentation as Markdown (including for LLMs), how to discover
-  content via the llms.txt index, how it's generated, and what we add to each page.
+  Describes how to request Neon documentation as Markdown (including for LLMs),
+  how to discover content via the llms.txt index, how it's generated, and what
+  we add to each page.
 enableTableOfContents: true
-updatedOn: '2026-02-17T22:07:33.079Z'
+updatedOn: '2026-02-19T02:17:53.302Z'
 ---
 
 Neon provides its documentation in plain Markdown so that LLMs, API clients, and scripts can consume it easily. We follow the [llms.txt](https://llmstxt.org/) approach: same URLs as the website, with Markdown available when requested.
