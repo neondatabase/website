@@ -214,10 +214,6 @@ export default {
           to: LINKS.contactSales,
         },
         {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
           text: 'Security',
           to: LINKS.security,
         },
