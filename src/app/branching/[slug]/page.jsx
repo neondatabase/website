@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from 'components/pages/branching/breadcrumbs';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
-import DocFooter from 'components/shared/doc-footer';
+// import DocFooter from 'components/shared/doc-footer';
 import NavigationLinks from 'components/shared/navigation-links';
 import VERCEL_URL from 'constants/base';
 import { BRANCHING_BASE_PATH } from 'constants/branching';
@@ -51,7 +51,8 @@ const BranchingPage = ({ params }) => {
   const { slug } = params;
 
   const {
-    data: { title, updatedOn },
+    // data: { title, updatedOn },
+    data: { title },
     content,
   } = getPostBySlug(slug, BRANCHING_DIR_PATH);
 
@@ -82,12 +83,14 @@ const BranchingPage = ({ params }) => {
           showLabel
         />
       </div>
+      {/* TO:DO bring back updated DocFooter for branching layout
       <DocFooter
         className="mt-0"
         updatedOn={updatedOn}
         withFeedback={false}
         tocLink={LINKS.branching}
       />
+      */}
     </Container>
   );
 };
