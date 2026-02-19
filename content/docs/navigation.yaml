@@ -1401,6 +1401,8 @@
           slug: community/component-architecture
         - title: AI tools for documentation
           slug: community/ai-tools
+        - title: Using docs as Markdown (LLMs)
+          slug: community/llms-markdown-guide
     - title: Glossary
       slug: reference/glossary
       icon: glossary
