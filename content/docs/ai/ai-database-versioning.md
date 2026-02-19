@@ -8,7 +8,7 @@ summary: >-
   and stable connection strings for applications in AI agent and code generation
   contexts.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.718Z'
+updatedOn: '2026-02-15T20:51:54.031Z'
 ---
 
 <Admonition type="note" title="Beta">
@@ -60,7 +60,7 @@ Every agent project maps to one Neon project with a designated [root branch](/do
 **The active branch:**
 
 - Gets its data replaced during finalized rollbacks
-- Maintains a consistent database connection string through Neon's restore mechanism — see [How restore works](#how-restore-works) for details
+- Maintains a consistent database connection string through Neon's restore mechanism; see [How restore works](#how-restore-works) for details
 - Must be a root branch for snapshot creation
 
 **The snapshots:**
@@ -147,10 +147,10 @@ Understanding the restore mechanism explains why the connection string remains s
 
 3. **Settings migration**: All branch settings, including its name, are copied to the new active branch, making it appear identical to the old one. Only the branch ID is different.
 
-4. **Branch orphan**: Your original branch becomes "orphaned." It is disconnected from the compute endpoint and renamed by adding an "(old)" suffix (e.g., `main (old)`) to the branch name.
+4. **Branch orphan**: Your original branch becomes "orphaned." It is disconnected from the compute endpoint and renamed by adding an "(old)" suffix (for example, `main (old)`) to the branch name.
 
 <Admonition type="info" title="Branch ID changes after restore">
-The connection string remains stable, but the branch ID changes with every `finalize_restore: true` operation. If you store the branch ID for use in subsequent API calls (e.g., to create the next snapshot), you must retrieve and store the new branch ID after the restore operation completes.
+The connection string remains stable, but the branch ID changes with every `finalize_restore: true` operation. If you store the branch ID for use in subsequent API calls (for example, to create the next snapshot), you must retrieve and store the new branch ID after the restore operation completes.
 </Admonition>
 
 #### Rollback workflow
@@ -170,7 +170,7 @@ Restore any snapshot to your active branch, preserving the connection string:
 1. Extract the array of operation IDs from the API response.
 2. For each operation ID, poll the operations endpoint until its status reaches a terminal state (finished, failed, cancelled, or skipped).
 3. Do not attempt to connect to the database until all operations are complete. Connections made before completion will point to the old, pre-restore database state.
-4. After verifying a successful restore, delete the orphaned branch (e.g., `main (old)`) to avoid incurring storage costs.
+4. After verifying a successful restore, delete the orphaned branch (for example, `main (old)`) to avoid incurring storage costs.
 
 > See the [poll operation status](/docs/manage/operations#poll-operation-status) documentation for related information.
 > **Polling operations example:**
@@ -218,7 +218,7 @@ for (const id of operationIds) {
 - **Connection to old state**: Ensure all operations completed
 - **Target branch not found**: Verify branch exists
 - **Operation timeout**: Retry with longer timeout
-- **Accumulating orphaned branches**: Delete orphaned branches (e.g., `production (old)`) after successful restore verification
+- **Accumulating orphaned branches**: Delete orphaned branches (for example, `production (old)`) after successful restore verification
 
 #### Preview environments
 
@@ -344,8 +344,8 @@ Proper cleanup reduces costs and keeps your project manageable:
 - **Snapshot production before promotion**: Take a snapshot of your production branch before promoting changes to provide a rollback point if needed.
 - **Differential retention**: Keep production snapshots longer for potential rollback, and development snapshots briefly (hours max) for promotion cycles only.
 - **Implement connection retry logic**: Design application code to retry queries automatically, as restore operations briefly drop active connections (typically milliseconds, occasionally up to a second).
-- **Keep backup branches briefly**: After restore, keep the automatically-created backup branch (e.g., `prod (old)`) for sanity checks before deletion, or assign a [time to live](/docs/guides/branch-expiration) for automatic cleanup.
-- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (e.g., `production (old)`) created during restores.
+- **Keep backup branches briefly**: After restore, keep the automatically-created backup branch (for example, `prod (old)`) for sanity checks before deletion, or assign a [time to live](/docs/guides/branch-expiration) for automatic cleanup.
+- **Cleanup strategy**: Set `expires_at` on temporary snapshots and preview branches. Delete orphaned branches (for example, `production (old)`) created during restores.
 - **Version metadata**: Keep version metadata separate to preserve audit trail across restores.
 
 ## FAQ

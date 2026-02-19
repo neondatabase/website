@@ -107,6 +107,17 @@ const defaultConfig = {
           },
         ],
       },
+      // Prevent search engines from indexing raw markdown files
+      // (these are for AI agents, not human search results)
+      ...Object.keys(CONTENT_ROUTES).map((route) => ({
+        source: `/${route}/:path*.md`,
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex',
+          },
+        ],
+      })),
     ];
   },
   async redirects() {
@@ -579,14 +590,6 @@ const defaultConfig = {
         {
           source: '/demos/ping-thing/:path*',
           destination: 'https://ping-thing.vercel.app/demos/ping-thing/:path*',
-        },
-        {
-          source: '/demos/playground',
-          destination: 'https://postgres-ai-playground.vercel.app/demos/playground',
-        },
-        {
-          source: '/demos/playground/:path*',
-          destination: 'https://postgres-ai-playground.vercel.app/demos/playground/:path*',
         },
         {
           source: '/developer-days/:path*',

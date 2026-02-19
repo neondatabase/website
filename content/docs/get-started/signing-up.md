@@ -11,7 +11,7 @@ redirectFrom:
   - /docs/cloud/getting-started/
   - /docs/cloud/getting_started/
   - /docs/get-started-with-neon/signing-up
-updatedOn: '2026-02-06T22:07:32.899Z'
+updatedOn: '2026-02-15T20:51:54.110Z'
 ---
 
 <InfoBlock>
@@ -372,7 +372,7 @@ Make sure that your development team is always working from the latest schema an
 
 <Admonition type="tip" title="Additional branching features">
 - **Working with sensitive data?** Neon supports [schema-only branching](/docs/guides/branching-schema-only) to create branches with just the database structure, without copying production data.
-- **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period—perfect for temporary test branches or time-limited preview environments.
+- **Need automatic cleanup?** Set branches to automatically [expire and be deleted](/docs/guides/branch-expiration) after a specified time period, perfect for temporary test branches or time-limited preview environments.
 </Admonition>
 
 <NeedHelp/>

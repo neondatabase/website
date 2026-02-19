@@ -275,7 +275,6 @@ const getWpPostBySlug = cache(async (slug) => {
         modifiedGmt
         title(format: RENDERED)
         content(format: RENDERED)
-        readingTime
         pageBlogPost {
           largeCover {
             altText
@@ -311,7 +310,6 @@ const getWpPostBySlug = cache(async (slug) => {
           slug
           title(format: RENDERED)
           date
-          readingTime
           pageBlogPost {
             largeCover {
               altText
@@ -342,7 +340,8 @@ const getWpPostBySlug = cache(async (slug) => {
 
   const data = await fetchGraphQL(graphQLClient).request(postBySlugQuery, { id: slug });
 
-  const sortedPosts = data?.posts?.nodes
+  const nodes = data?.posts?.nodes ?? [];
+  const sortedPosts = nodes
     .filter((post) => post.slug !== slug || isEmpty(post.pageBlogPost?.largeCover))
     .slice(0, 3);
 
@@ -647,6 +646,64 @@ const getAllWpCaseStudiesCategories = cache(async () => {
   return [{ name: 'All', slug: 'all' }, ...updatedCategories];
 });
 
+const getAllWpUseCases = cache(async () => {
+  const useCasesQuery = gql`
+    query UseCases {
+      useCases(where: { orderby: { field: MENU_ORDER, order: ASC } }, first: 100) {
+        nodes {
+          id
+          title(format: RENDERED)
+          useCase {
+            icon
+            description
+            link {
+              url
+              title
+              target
+            }
+            linkedCaseStudy {
+              ... on CaseStudy {
+                title
+                slug
+                caseStudyPost {
+                  logo {
+                    mediaItemUrl
+                    mediaDetails {
+                      width
+                      height
+                    }
+                  }
+                  quote
+                  author {
+                    name
+                    post
+                  }
+                  isInternal
+                  externalUrl
+                  post {
+                    ... on Post {
+                      slug
+                    }
+                  }
+                }
+              }
+            }
+          }
+          useCaseTags {
+            nodes {
+              slug
+              name
+            }
+          }
+        }
+      }
+    }
+  `;
+  const data = await fetchGraphQL(graphQLClient).request(useCasesQuery);
+
+  return data?.useCases?.nodes;
+});
+
 export {
   fetchAllWpPosts,
   getAllWpBlogCategories,
@@ -656,6 +713,7 @@ export {
   getAllWpPosts,
   getAllPosts,
   getCategoryBySlug,
+  getAllWpUseCases,
   getWpPostBySlug,
   getPostsByCategorySlug,
   getWpPreviewPost,

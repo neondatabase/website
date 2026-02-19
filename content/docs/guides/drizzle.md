@@ -6,7 +6,7 @@ summary: >-
   using Drizzle ORM, including configuration for migrations and driver
   connections.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.957Z'
+updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
 <CopyPrompt src="/prompts/drizzle-prompt.md" 
@@ -82,7 +82,7 @@ Install Drizzle ORM, Drizzle Kit for migrations, and your preferred database dri
 
 <TabItem>
 
-Use the Neon serverless HTTP driver for serverless environments (e.g., Vercel, Netlify).
+Use the Neon serverless HTTP driver for serverless environments (for example, Vercel, Netlify).
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless dotenv
@@ -93,7 +93,7 @@ npm install -D drizzle-kit
 
 <TabItem>
 
-Use the Neon WebSocket driver for long-running applications that require a persistent connection (e.g., a standard Node.js server).
+Use the Neon WebSocket driver for long-running applications that require a persistent connection (for example, a standard Node.js server).
 
 ```bash
 npm install drizzle-orm @neondatabase/serverless ws dotenv

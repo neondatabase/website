@@ -6,7 +6,7 @@ summary: >-
   application, including setting up dependencies and configuring the Postgres
   client for database access.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.985Z'
+updatedOn: '2026-02-15T20:51:54.164Z'
 ---
 
 <CopyPrompt src="/prompts/hono-prompt.md"
@@ -58,7 +58,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-In your Hono application (e.g., in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
+In your Hono application (for example, in `src/index.ts` or a specific route file), import the driver and use it within your route handlers.
 
 Here's how you can set up a simple route to query the database:
 

@@ -6,7 +6,7 @@ summary: >-
   data transfer and transformation.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.078Z'
+updatedOn: '2026-02-15T20:51:54.211Z'
 ---
 
 This guide describes how to migrate your SQLite database to Neon Postgres using [pgloader](https://pgloader.readthedocs.io/en/latest/intro.html)
@@ -238,7 +238,7 @@ Connect to your Neon database using [`psql`](/docs/connect/query-with-psql-edito
 SELECT nextval(pg_get_serial_sequence('books', 'id'));
 ```
 
-This should return a value one higher than the max `id` in the `books` table (e.g., `6` for our sample data). If it doesn't, you can reset it manually with this command:
+This should return a value one higher than the max `id` in the `books` table (for example, `6` for our sample data). If it doesn't, you can reset it manually with this command:
 
 ```sql
 SELECT setval(

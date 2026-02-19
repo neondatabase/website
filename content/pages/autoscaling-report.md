@@ -6,7 +6,7 @@ updatedOn: '2025-06-17T09:00:00.000Z'
 
 ### Summary
 
-- Production databases on Neon use <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> and <span className="bg-green-45/20 text-green-45 p-1">50% less cost</span> than if it were running on a provisioned platform.
+- Production databases on Neon use <span className="bg-green-45/20 text-green-45 p-1">2.4x less compute</span> and <span className="bg-green-45/20 text-green-45 p-1">50% less cost</span> than if they were running on a provisioned platform.
 - Putting the same Neon production workloads on a provisioned platform would result in <span className="bg-secondary-1/20 text-secondary-1 p-1">55 performance degradations</span> per db per month because even provisioning at P99.5 + 20% doesn't account for the most extreme load spikes.
 - Read replicas on Neon use <span className="bg-green-45/20 text-green-45 p-1">4x less compute</span> than if they were running on a provisioned platform because of how well autoscaling aligns with their use cases.
 - Running the same small scale-to-zero workloads on <span className="bg-secondary-1/20 text-secondary-1 p-1">provisioned would cost 7.5x more</span> than Neon.
@@ -113,7 +113,7 @@ Autoscaling helps turn load spikes that would cause late-night on-call pages and
 
 #### Autoscaling Events per Database
 
-The average production database running on Neon adjusts its compute size 11,354 times per month. To understand how it works, the documentation on [Neon Autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is the best place to start.
+The average production database running on Neon adjusts its compute size 32,016 times per month, or about once every 81 seconds. To understand how it works, the documentation on [Neon Autoscaling algorithm](https://neon.com/docs/guides/autoscaling-algorithm) is the best place to start.
 
 ### Production Example
 

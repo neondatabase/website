@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/auto-suspend-guide
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.050Z'
+updatedOn: '2026-02-15T20:51:54.196Z'
 ---
 
 Neon's [Scale to Zero](/docs/introduction/scale-to-zero) feature controls whether a Neon compute transitions to an idle state due to inactivity. For example, if scale to zero is enabled, your compute will transition to an idle state after it's been inactive for 5 minutes. Neon's paid plans allow you to disable scale to zero to keep your compute active. On the Scale plan, you can configure the scale to zero threshold.
@@ -48,7 +48,7 @@ To enable or disable scale to zero:
 
 On the Scale plan, you can configure "Scale to zero after" time to increase or decrease the amount of time after which a compute scales to zero. For example, decreasing the time to 1 minute means that your compute will scale to zero faster (after the compute is inactive for 1 minute), or increasing the value to an hour means that your compute will only scale to zero after being inactive for an hour.
 
-Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) or [Update project](https://api-docs.neon.tech/reference/updateproject#/) API call. Use the `Update compute endpoint` API to change the setting for an existing compute. The `Update project` API sets a default for all compute endpoints created in the future — it does not change the configuration of existing computes.
+Initial configuration of the scale to zero time is only supported via an [Update compute endpoint](https://api-docs.neon.tech/reference/updateprojectendpoint#/) or [Update project](https://api-docs.neon.tech/reference/updateproject#/) API call. Use the `Update compute endpoint` API to change the setting for an existing compute. The `Update project` API sets a default for all compute endpoints created in the future; it does not change the configuration of existing computes.
 
 <CodeTabs labels={["Update compute endpoint", "Update project"]}>
 

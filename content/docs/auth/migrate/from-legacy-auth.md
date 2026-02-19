@@ -6,7 +6,7 @@ summary: >-
   Neon Auth (Stack Auth) to Neon Auth with Better Auth, including environment
   variable changes and benefits of the new system.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.758Z'
+updatedOn: '2026-02-15T20:51:54.044Z'
 redirectFrom:
   - /docs/neon-auth/quick-start/nextjs
   - /docs/neon-auth/quick-start/react
@@ -30,7 +30,7 @@ If you're using legacy Neon Auth with Stack Auth, you can continue using it. We'
 
 - **Native Branching Support**
 
-  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration—perfect for preview environments and testing.
+  Authentication branches automatically with your database. Each branch gets isolated users, sessions, and auth configuration, perfect for preview environments and testing.
 
 - **Database as Source of Truth**
 

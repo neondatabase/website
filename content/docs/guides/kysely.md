@@ -6,7 +6,7 @@ summary: >-
   using Kysely, including setup, TypeScript schema definitions, and executing
   migrations and queries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.997Z'
+updatedOn: '2026-02-15T20:51:54.167Z'
 ---
 
 <CopyPrompt src="/prompts/kysely-prompt.md" 
@@ -106,7 +106,7 @@ Install the Kysely core package and the necessary driver dependencies. Choose on
 
 <TabItem>
 
-Use the Neon serverless HTTP driver for serverless/edge environments (e.g., Vercel Edge, Cloudflare Workers). This requires the `kysely-neon` dialect.
+Use the Neon serverless HTTP driver for serverless/edge environments (for example, Vercel Edge, Cloudflare Workers). This requires the `kysely-neon` dialect.
 
 <Admonition type="note" title="Note">
 The Neon serverless driver over HTTP is stateless and does not support persistent connections or interactive transactions. If your application requires transactions, we recommend using the Neon WebSocket driver or `node-postgres`.

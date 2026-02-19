@@ -6,7 +6,7 @@ summary: >-
   applications connecting to a Neon Postgres database, including options for
   serverless environments and TCP-based connections.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.785Z'
+updatedOn: '2026-02-15T20:51:54.064Z'
 ---
 
 When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
@@ -110,7 +110,7 @@ neon connection-string --pooled true [branch_name]
 postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
 ```
 
-Notice the `-pooler` in the connection string — that's what differentiates a direct connection string from a pooled one.
+Notice the `-pooler` in the connection string; that's what differentiates a direct connection string from a pooled one.
 
 Here's an example of getting a direct connection string from the Neon CLI:
 

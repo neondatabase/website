@@ -11,12 +11,12 @@ redirectFrom:
   - /docs/guides/partner-intro
   - /docs/guides/platform-integration-intro
   - /docs/guides/platform-integration-get-started
-updatedOn: '2026-02-06T22:07:33.031Z'
+updatedOn: '2026-02-15T20:51:54.186Z'
 ---
 
 Neon provides multiple options for integrating Postgres into your platform, application, or service. Choose the integration approach that best matches your use case.
 
-## ☑ AI Agents integration
+## AI Agents integration
 
 **Best for:** AI agent and codegen platforms that need database versioning and isolated environments
 
@@ -50,7 +50,7 @@ Use this approach if you're building an AI agent platform or code generation ser
 
 ---
 
-## ☑ Claimable database flow (Instagres)
+## Claimable database flow (Instagres)
 
 **Best for:** Plugins and platforms that want to offer instant database provisioning as part of their developer experience without requiring user signup
 
@@ -75,9 +75,9 @@ Use this approach when you want to create databases for your users without requi
 
 **Example implementations:**
 
-- [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development) — Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
-- [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/) — One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Instagres](https://neon.new/) — Try instant Postgres provisioning without signup using `npx get-db` or at [neon.new](https://neon.new/)
+- [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
+- [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
+- [Instagres](https://neon.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [neon.new](https://neon.new/)
 
 <DetailIconCards>
 
@@ -89,7 +89,7 @@ Use this approach when you want to create databases for your users without requi
 
 ---
 
-## ☑ Embedded Postgres integration
+## Embedded Postgres integration
 
 **Best for:** SaaS platforms and services that offer Postgres databases to their users
 
@@ -121,7 +121,7 @@ Use the embedded Postgres approach when you want to provision and manage Postgre
 
 ---
 
-## ☑ OAuth integration
+## OAuth integration
 
 **Best for:** Tools and applications that need to interact with existing Neon user accounts
 
@@ -142,7 +142,7 @@ Use OAuth when you're building a tool or service that connects to existing Neon 
 
 **Example implementation:**
 
-- [Hasura Cloud](https://hasura.io/) — Uses OAuth to seamlessly authenticate users and provision Neon databases from Hasura projects
+- [Hasura Cloud](https://hasura.io/): Uses OAuth to seamlessly authenticate users and provision Neon databases from Hasura projects
 
 <DetailIconCards>
 

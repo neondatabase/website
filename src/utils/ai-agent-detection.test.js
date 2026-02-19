@@ -242,5 +242,15 @@ describe('getMarkdownPath', () => {
       const result = getMarkdownPath('/docs/api-reference');
       expect(result).toBe('/md/docs/api-reference.md');
     });
+
+    it('should not double .md when path already ends with .md', () => {
+      const result = getMarkdownPath('/docs/introduction.md');
+      expect(result).toBe('/md/docs/introduction.md');
+    });
+
+    it('should not double .md for nested paths ending with .md', () => {
+      const result = getMarkdownPath('/docs/guides/logical-replication.md');
+      expect(result).toBe('/md/docs/guides/logical-replication.md');
+    });
   });
 });

@@ -7,7 +7,7 @@ summary: >-
   database, including project creation, dependency installation, and enabling
   on-demand rendering for real-time queries.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.912Z'
+updatedOn: '2026-02-15T20:51:54.115Z'
 ---
 
 <CopyPrompt src="/prompts/astro-serverless-prompt.md" 
@@ -108,7 +108,7 @@ There are multiple ways to make server side requests with Astro. See below for t
 
 ### Page Components (.astro files)
 
-In your `.astro` page components (e.g., `src/pages/index.astro`), you can query the database in the frontmatter section (between the `---` fences). Import the database client from your utility file:
+In your `.astro` page components (for example, `src/pages/index.astro`), you can query the database in the frontmatter section (between the `---` fences). Import the database client from your utility file:
 
 <CodeTabs reverse={true} labels={["node-postgres", "postgres.js", "Neon serverless driver"]}>
 

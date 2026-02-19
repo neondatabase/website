@@ -7,7 +7,7 @@ summary: >-
   application using Okta, including project setup, database connection, schema
   definition, and user data management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.919Z'
+updatedOn: '2026-02-15T20:51:54.120Z'
 ---
 
 <Admonition type="note">
@@ -90,13 +90,13 @@ DATABASE_URL=NEON_DB_CONNECTION_STRING
 1. Log in to your Okta developer account and navigate to the **Applications** section. Click the **Create App Integration** button.
 2. Select **OIDC - OpenID Connect** as the sign-in method.
 3. Select **Web Application** as the application type and click **Next**.
-4. Provide a name for your application, e.g., "Neon Next Guide".
+4. Provide a name for your application, for example, "Neon Next Guide".
 5. Set **Sign-in redirect URIs** to `http://localhost:3000/api/auth/callback/okta` and **Sign-out redirect URIs** to `http://localhost:3000`.
 6. Click **Save** to create the application.
 
 ### Retrieve your Okta configuration
 
-From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note your Okta **Issuer URI**, which is the first part of your Okta account's URL, e.g., `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
+From the application's **General** tab, find the **Client ID** and **Client SECRET**. Also note your Okta **Issuer URI**, which is the first part of your Okta account's URL, for example, `https://dev-12345.okta.com`. If it isn't clear, visit the **Security > API** section from the sidebar in the console to find the **Issuer URI** and remove `/oauth2/default` from the end.
 
 Add these as environment variables to the `.env.local` file in your Next.js project:
 

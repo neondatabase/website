@@ -6,7 +6,7 @@ summary: >-
   Npgsql library, including steps for creating a Neon project and performing
   CRUD operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.954Z'
+updatedOn: '2026-02-15T20:51:54.148Z'
 ---
 
 <CopyPrompt src="/prompts/dotnet-prompt.md" 
@@ -49,7 +49,7 @@ For your .NET project, you will create a project directory and add the required 
     cd NeonLibraryExample
     ```
 
-    > Open this directory in your preferred code editor (e.g., VS Code, Visual Studio).
+    > Open this directory in your preferred code editor (for example, VS Code, Visual Studio).
 
 2.  Add the required NuGet packages using `dotnet add package`.
     - `Npgsql`: The .NET data provider for PostgreSQL.

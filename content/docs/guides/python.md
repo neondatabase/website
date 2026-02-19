@@ -7,7 +7,7 @@ summary: >-
   psycopg2, or asyncpg, including steps for project creation and performing CRUD
   operations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.034Z'
+updatedOn: '2026-02-15T20:51:54.190Z'
 ---
 
 <CopyPrompt src="/prompts/python-prompt.md" 
@@ -45,7 +45,7 @@ For your Python project, create a project directory, set up a virtual environmen
     cd neon-python-quickstart
     ```
 
-    > Open the directory in your preferred code editor (e.g., VS Code, PyCharm).
+    > Open the directory in your preferred code editor (for example, VS Code, PyCharm).
 
 2.  Create and activate a Python virtual environment. This isolates your project's dependencies from your system's Python environment.
 

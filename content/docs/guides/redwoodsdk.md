@@ -6,7 +6,7 @@ summary: >-
   RedwoodSDK application, including setting up dependencies and storing
   connection credentials.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.041Z'
+updatedOn: '2026-02-15T20:51:54.192Z'
 ---
 
 <CopyPrompt src="/prompts/redwood-sdk-prompt.md"
@@ -61,7 +61,7 @@ DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port
 
 ## Configure the Postgres client
 
-In your RedwoodSDK application (e.g., in `src/app/pages/Home.tsx`), import the driver and use it within your route handlers.
+In your RedwoodSDK application (for example, in `src/app/pages/Home.tsx`), import the driver and use it within your route handlers.
 
 Here's how you can set up a simple route to query the database:
 

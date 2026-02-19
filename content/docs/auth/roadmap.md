@@ -5,7 +5,7 @@ summary: >-
   Covers the current support status and future roadmap for Neon Auth, detailing
   supported frameworks and upcoming features as it transitions out of beta.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.773Z'
+updatedOn: '2026-02-15T20:51:54.052Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -35,7 +35,7 @@ Neon Auth is targeting general availability this quarter. We're actively working
 | Other frameworks              | Based on demand |
 
 <Admonition type="note" title="Standalone architectures">
-Architectures where frontend and backend are separate deployments (e.g., Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
+Architectures where frontend and backend are separate deployments (for example, Create-React-App with a separate Node/Express backend) are not yet supported. Neon Auth uses HTTP-only cookies for secure session management, and these cookies cannot be securely shared between frontend and backend applications on different domains. We're actively working on this.
 </Admonition>
 
 ## Better Auth plugins

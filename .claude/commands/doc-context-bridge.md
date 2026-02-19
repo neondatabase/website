@@ -12,7 +12,7 @@ If the user asks "what doc AI tools are available", "what AI tools for docs", "w
 
 ## When to load which file
 
-- **Changelog generation:** Read `.cursor/rules/neon-changelog.rules` for next-Friday changelog creation, override date, and template (placeholder content, Fixes & improvements collapsible, timezone America/New_York).
+- **Changelog generation:** Read `.cursor/rules/neon-changelog.mdc` for next-Friday changelog creation, override date, and template (placeholder content, titled dropdown sections, timezone America/New_York).
 - **Doc editing standards:** Read `.cursor/rules/docs-editing.mdc` for Neon voice, shared content, cross-doc consistency, glossary linking, and redirect workflow when editing `content/docs/`, `content/guides/`, or `content/changelog/`.
 - **Components and icons (documentation definition):** When creating or editing docs and you need the full component and icon catalog, read the same community docs the Cursor docs-editing rule uses: `content/docs/community/component-guide.md` (component catalog), `content/docs/community/component-icon-guide.md` (icons), `content/docs/community/component-specialized.md` (specialized components), and `content/docs/community/mermaid-diagrams.md` (diagrams). This keeps Claude aligned with Cursor's documentation definition.
 - **Cursor skills (on-demand checks):** When the user asks for these tasks, follow the instructions in the corresponding skill file:
@@ -21,4 +21,4 @@ If the user asks "what doc AI tools are available", "what AI tools for docs", "w
   - **Version/SDK check:** Read `.cursor/skills/version-sdk-check.md` — find package/version mentions in the guide, compare to latest (or tell user to check), report "doc says X, latest Y."
   - **Redirect and links:** Read `.cursor/skills/redirect-and-links.md` — ensure `redirectFrom` on destination, search content and nav for old path, suggest link and nav updates. Full workflow and examples: `.claude/commands/redirect-update.md`.
 
-Use the Read tool on the relevant path (e.g. `Read(".cursor/rules/neon-changelog.rules")` or `Read(".cursor/rules/docs-editing.mdc")`) when the task involves changelog generation, doc edits, or the above checks.
+Use the Read tool on the relevant path (e.g. `Read(".cursor/rules/neon-changelog.mdc")` or `Read(".cursor/rules/docs-editing.mdc")`) when the task involves changelog generation, doc edits, or the above checks.

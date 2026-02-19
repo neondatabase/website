@@ -8,7 +8,7 @@ summary: >-
 redirectFrom:
   - /docs/guides/vercel-previews-integration
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.023Z'
+updatedOn: '2026-02-15T20:51:54.176Z'
 ---
 
 <InfoBlock>
@@ -184,7 +184,7 @@ The integration sets both modern (`DATABASE_URL`, `DATABASE_URL_UNPOOLED`) and l
 **To customize which variables are used:**
 
 1. Go to **Neon Console → Integrations → Manage → Settings**
-2. Select the variables you want (e.g., `PGHOST`, `PGUSER`, etc.)
+2. Select the variables you want (for example, `PGHOST`, `PGUSER`, etc.)
 3. Click **Save changes**
 
 ![Select Vercel variables](/docs/guides/vercel_select_variables.png)

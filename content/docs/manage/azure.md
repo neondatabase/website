@@ -7,7 +7,7 @@ summary: >-
   workflows.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.112Z'
+updatedOn: '2026-02-15T20:51:54.224Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -19,7 +19,7 @@ The Neon Azure Native Integration is deprecated and reaches end of life on **Jan
 Deploying Neon natively on Azure lets you manage your Neon organization alongside the rest of your Azure infrastructure. Key benefits include:
 
 - **Azure-native management**: Provision and manage Neon organizations directly from the Azure portal.
-- **Single sign-on (SSO)**: Access Neon using your Azure credentials—no separate logins required.
+- **Single sign-on (SSO)**: Access Neon using your Azure credentials; no separate logins required.
 - **Consolidated billing**: Simplify cost management with unified billing through the Azure Marketplace.
 - **Integrated workflows**: Use the Azure CLI and SDKs to manage Neon as part of your regular workflows, integrated with your existing Azure resources.
 

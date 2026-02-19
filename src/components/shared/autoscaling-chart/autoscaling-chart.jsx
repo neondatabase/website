@@ -699,7 +699,7 @@ const AutoscalingChart = ({
               {displayTitle}
             </h1>
             {!autoscalingOnly && showOverprovisionSelector && (
-              <div className="absolute right-0 top-0 flex items-center gap-2.5">
+              <div className="absolute right-0 top-0 flex items-center gap-2.5 sm:relative">
                 <select
                   value={provisioningStrategy}
                   className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-none"
@@ -723,7 +723,7 @@ const AutoscalingChart = ({
 
       {/* Stats */}
       {showStats && (
-        <div className="flex flex-wrap items-start justify-center gap-0">
+        <div className="flex flex-wrap items-start justify-center gap-0 sm:flex-col sm:items-stretch">
           {/* Autoscaling Stats - Combined Panel */}
           <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
             <h3 className="mb-3 mt-0 font-mono text-xs font-medium uppercase tracking-wide text-[#73bf69]">
@@ -767,7 +767,7 @@ const AutoscalingChart = ({
           {/* Provisioned Stats - Combined Panel */}
           {!autoscalingOnly && (
             <>
-              <div className="-ml-[1px] -mt-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6">
+              <div className="-ml-[1px] -mt-[1px] max-w-[328px] border border-gray-new-30 bg-gray-new-8 p-6 sm:max-w-full">
                 <h3 className="mb-3 mt-0 text-xs font-medium uppercase tracking-wide text-[#e8912d]">
                   Provisioned Equivalent
                 </h3>
@@ -817,7 +817,7 @@ const AutoscalingChart = ({
 
               {/* Comparison Summary - Redesigned */}
               <div className="-ml-[1px] -mt-[1px] border border-gray-new-30 bg-gray-new-8 p-6">
-                <div className="grid grid-cols-3 gap-0 font-mono">
+                <div className="grid grid-cols-3 gap-0 font-mono sm:grid-cols-1">
                   {/* Compute Winner */}
                   <div className="px-4 text-center">
                     <div className="text-gray-400 mb-2 text-xs uppercase tracking-wide">

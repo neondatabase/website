@@ -6,7 +6,7 @@ summary: >-
   Covers the setup of the Neon serverless driver for JavaScript and TypeScript,
   enabling low-latency Postgres queries over HTTP or WebSockets in serverless
   environments.
-updatedOn: '2026-02-06T22:07:33.151Z'
+updatedOn: '2026-02-15T20:51:54.272Z'
 ---
 
 <CopyPrompt src="/prompts/serverless-driver-prompt.md" 
@@ -288,7 +288,7 @@ const [authors, tags] = await neon(process.env.DATABASE_URL).transaction((txn) =
 ]);
 ```
 
-The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function — `arrayMode`, `fullResults` and `fetchOptions` — plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
+The optional second argument to `transaction()`, `options`, has the same keys as the options to the ordinary query function (`arrayMode`, `fullResults` and `fetchOptions`) plus three additional keys that concern the transaction configuration. These transaction-related keys are: `isolationMode`, `readOnly` and `deferrable`.
 
 Note that options **cannot** be supplied for individual queries within a transaction. Query and transaction options must instead be passed as the second argument of the `transaction()` function. For example, this `arrayMode` setting is ineffective (and TypeScript won't compile it): `await sql.transaction([sql('SELECT now()', [], { arrayMode: true })])`. Instead, use `await sql.transaction([sql('SELECT now()')], { arrayMode: true })`.
 

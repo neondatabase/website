@@ -6,7 +6,7 @@ summary: >-
   configuration for log forwarding and the transmission of metrics related to
   database performance and resource utilization.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.975Z'
+updatedOn: '2026-02-15T20:51:54.161Z'
 ---
 
 <InfoBlock>
@@ -65,7 +65,7 @@ In your Grafana Cloud instance:
 2. Search for and select **Neon**.
 3. Follow the **Neon Integration** wizard to generate a token with the required permissions.
 4. Copy these three values for the next step:
-   - **OTLP Endpoint** (e.g., `https://otlp-gateway-prod-us-central-0.grafana.net/otlp`)
+   - **OTLP Endpoint** (for example, `https://otlp-gateway-prod-us-central-0.grafana.net/otlp`)
    - **Instance ID** (will be used as the username)
    - **API Key** (the generated token, will be used as the password)
 
@@ -84,7 +84,7 @@ In the Neon Console:
    - **Authentication**: Basic.
      - **Username**: Your OpenTelemetry Instance ID.
      - **Password**: Your Grafana Cloud API Key.
-   - **Service name**: A descriptive name (e.g., "neon-postgres-production").
+   - **Service name**: A descriptive name (for example, "neon-postgres-production").
    - **Export options**: Select **Metrics** and/or **Postgres logs** as needed.
 
 Click **Add** to enable the integration.
