@@ -7,7 +7,9 @@ updatedOn: '2026-02-13T00:00:00.000Z'
 
 ## Turn Postgres around: from bottleneck to accelerator
 
-Startup teams today are not counting on hiring dedicated DBAs. Every engineer is busy building features and shipping quickly. They do not expect to manually babysit databases, double-check migrations, or figure out capacity planning and resizing. They expect databases to adapt to their workflows, not the other way around.
+<QuoteBlock quote="Neon fundamentally accelerates our developer experience. It's a huge reason we are able to ship faster without worrying about breaking things" author="ben-vinegar" role="Co-founder at Modem" />
+
+**Startup teams today are not hiring dedicated DBAs.** Every engineer is busy building features and shipping quickly - they expect databases to adapt to their workflows, not the other way around.
 
 Most managed Postgres offerings on the market do not fit this model - except [Neon](https://neon.com/).
 
@@ -15,77 +17,84 @@ Most managed Postgres offerings on the market do not fit this model - except [Ne
 
 - **Branching workflows that match how you ship.** Instead of [forcing all developers into expensive, heavy shared dev instances](https://neon.com/branching/introduction), Neon lets you create [ephemeral, lightweight branches](https://neon.com/branching/rethinking-the-database) in seconds for development, testing, and CI/CD - just like you do with code. When you are done, you (or a script, automation, or API call) delete them. All environments stay in sync with production without manual work or coordination.
 
-<QuoteBlock quote="Neon fundamentally accelerates our developer experience. It's a huge reason we are able to ship faster without worrying about breaking things" author="ben-vinegar" role="Co-founder at Modem" />
-
 ## Neon does the boring DBA work so you do not have to
+
+![Neon autoscaling adjusts compute based on workload demand](/use-cases/fast-dev-workflows/autoscaling-based-on-demand.png)
 
 Neon's serverless architecture takes care of the database tasks that typically eat up time on small teams:
 
-**Automatic provisioning vs. manual capacity planning**
+### Automatic provisioning vs. manual capacity planning
 
 With Neon, there is no need to provision instances, size disks, or plan for future growth. Compute and storage are managed automatically. You do not have to think about which instance size you need today or how you will scale it six months from now.
 
-**Autoscaling vs. overprovisioning for "just in case" traffic**
+### Autoscaling vs. overprovisioning for "just in case" traffic
 
 Instead of forcing you to overprovision compute instances to cover sporadic traffic spikes, [Neon automatically scales compute between a minimum and maximum based on demand](https://neon.com/docs/introduction/autoscaling). You get protection against unexpectedly high load without manually resizing databases or pre-provisioning excess capacity, and you only pay when your database actually needs it. When demand drops, compute scales back down quickly.
-
-![Neon autoscaling adjusts compute based on workload demand](/use-cases/fast-dev-workflows/autoscaling-based-on-demand.png)
 
 <Admonition type="tip">
 Read our [Autoscaling Report](https://neon.com/autoscaling-report) for data on the effects of Neon's autoscaling across thousands of production workloads.
 </Admonition>
 
-**Scale to zero vs. paying for inactive environments**
+### Scale to zero vs. paying for inactive environments
 
 Development, preview, and test databases do not need to run 24/7 - and you should not be paying for them either. In Neon, [non-production databases scale to zero when idle](https://neon.com/docs/introduction/scale-to-zero). Teams do not pay for environments that are not actively in use, and they do not need to manually pause, resume, or clean them up.
 
-**APIs and automation vs. manual database ops**
+### APIs and automation vs. manual database ops
 
-All of this is exposed through a simple, intuitive API that works with the tools developers already use. Neon is compatible with all major frameworks and ORMs, and because it is still Postgres, there is no new database model to learn - and no vendor-specific abstractions to work around.
-
-<QuoteBlock quote="With Neon, we found a way to scale our setup more efficiently, using branching instead of duplicating instances and autoscaling to match our actual load." author="thorsten-riess" role="Software Architect at traconiq" />
+All of this is exposed through a simple, intuitive API that works with the tools developers already use. Neon is compatible with all major frameworks and ORMs, and because it is still Postgres, there is no new database model to learn.
 
 ## Remove friction with branching workflows
+
+<QuoteBlock quote="With Neon, we found a way to scale our setup more efficiently, using branching instead of duplicating instances and autoscaling to match our actual load." author="thorsten-riess" role="Software Architect at traconiq" />
 
 If Neon's serverless architecture is the foundation that enables speed, Neon branches are the magic trick that takes it to the next level. Built on Neon's copy-on-write architecture, branches are:
 
 - **Created instantly** - no matter how much data you have
-- **Exact copies of production schema and data**
+- **Exact copies of production** - schema and data
 - **Fully API-friendly** - built for automation
 - **Affordable by default** - they do not duplicate storage and do not consume compute while inactive
-- **Made for PRs and previews** - then deleted when the work is done
 
-Branches turn the database into something you can create, use, and throw away as part of your normal development flow.
+Branches turn the database into a resource you can create, use, and throw away as part of your normal development flow.
 
 ![Neon branching workflow for isolated environments](/use-cases/fast-dev-workflows/neon-branching-workflow-overview.png)
 
-**Using branches as environments**
+### Using branches as environments
 
-In most managed Postgres setups, achieving this means running separate database instances for staging, dev, and testing, then manually configuring them and constantly trying to keep them "close enough" to production. That work never really ends.
+In traditional managed Postgres setups, you'd be running separate database instances for staging, dev, and testing, then manually configuring them and constantly trying to keep them "close enough" to production. That work never really ends.
 
 In Neon, a new branch is an isolated environment - one that already contains your full production history, schema, and configuration. You start from production, deploy a branch instantly, and move on.
 
 <QuoteBlock quote="The services that touched schema changes or write-heavy paths could never share a database safely. Now every sandbox gets its own isolated Postgres DB whenever required" author="joe-horsnell" role="Principal Platform Engineer at Bitso" />
 
-**Staging that resyncs with production in one API call**
+### Staging that resyncs with production in one API call
 
-In Neon, staging is just a branch derived from production. When production changes, you do not need to rebuild staging from scratch or run complex sync jobs. You can reset your staging branch from production in a single API call, instantly bringing schema and data back in sync. This makes staging a reliable checkpoint instead of a slowly drifting approximation and removes a whole class of "works in staging but not in prod" issues. [Keep reading](https://neon.com/branching/production-staging-workflows)
+In Neon, staging is just a branch derived from production. When production changes, you do not need to rebuild staging from scratch or run complex sync jobs. You can reset your staging branch from production in a single API call, instantly bringing schema and data back in sync. 
+
+This makes staging a reliable checkpoint instead of a slowly drifting approximation, and removes a whole class of "works in staging but not in prod" issues.
 
 ![Reset staging from production with a single API call](/use-cases/fast-dev-workflows/staging-resync-from-production-api.png)
 
-**Dev environments for every developer, PR, or experiment**
+[Read more about using branches for staging](https://neon.com/branching/production-staging-workflows)
 
-Branches make it practical to give every developer - and every PR - its own database environment. Each environment is isolated, production-like, and safe to break. Developers can test migrations, schema changes, and data-heavy features without coordinating with each other or worrying about corrupting shared state. [Keep reading](https://neon.com/branching/branching-workflows-for-development)
+### Dev environments for every developer, PR, or experiment
+
+Branches make it practical to give every developer - and every PR - its own database environment. Each environment is isolated, production-like, and safe to break. Developers can test migrations, schema changes, and data-heavy features without coordinating with each other or worrying about corrupting shared state.
 
 ![Per-developer and per-PR isolated database branches](/use-cases/fast-dev-workflows/per-developer-and-pr-database-branches.png)
 
-**Promote from dev to prod safely, even with many parallel environments**
+[Read more about using branches for development](https://neon.com/branching/branching-workflows-for-development)
 
-As teams scale, promotion becomes harder. Multiple developers, multiple branches, multiple schema changes - all converging on production. Neon supports promotion workflows built on branching and snapshots. Teams can validate changes in isolated branches, promote them intentionally, and keep a rollback point ready in case something goes wrong. [Keep reading](https://neon.com/branching/advanced-branching-workflows)
+### Promote from dev to prod safely, even with many parallel environments
+
+As teams scale, promotion becomes harder. Multiple developers, multiple branches, multiple schema changes - all converging on production. 
+
+Neon supports promotion workflows built on branching and snapshots. Teams can validate changes in isolated branches, promote them intentionally, and keep a rollback point ready in case something goes wrong.
 
 ![Promote validated changes from development to production safely](/use-cases/fast-dev-workflows/instant-recovery-with-branches-and-snapshots.png)
 
-**Let automation take over**
+[Read more about building promotion workflows with Neon](https://neon.com/branching/advanced-branching-workflows)
+
+### Let automation take over
 
 All of these workflows are designed to be automated from day one:
 
@@ -103,7 +112,7 @@ Moving fast means mistakes happen - a bad migration, a dropped column. Neon is b
 
 ![Instant recovery using Neon branches and snapshots](/use-cases/fast-dev-workflows/safe-promotion-workflow-dev-to-prod.png)
 
-- **Branching and snapshots instead of dump-and-restore panic.** Traditional recovery means finding the right backup, restoring it somewhere, repointing apps, hoping nothing else breaks in the process. With Neon, recovery is built on the same primitives you already use for development: branches and snapshots. You can create a snapshot of a branch at any point in time, and restore from it instantly. [Keep reading](https://neon.com/docs/guides/backup-restore)
+- **Branching and snapshots instead of dump-and-restore panic.** Traditional recovery means finding the right backup, restoring it somewhere, repointing apps, hoping nothing else breaks in the process. With Neon, recovery is built on the same primitives you already use for development: branches and snapshots. You can create a snapshot of a branch at any point in time, and restore from it instantly.
 - **Fix mistakes in seconds, not hours.** Because restores are instant, teams do not have to choose between speed and safety.
 - **Everything is API-driven.** Restores can be scripted, automated, or integrated into existing workflows just like branching and CI.
 
@@ -111,13 +120,15 @@ Moving fast means mistakes happen - a bad migration, a dropped column. Neon is b
 
 ## Fast dev workflows for agents, too
 
-The same things that help small teams move fast also make Neon a natural fit for agentic platforms. Agents do not want long-lived infrastructure - they want databases they can spin up instantly, use while a task is running, and shut down when they are done.
+AI agents do not want long-lived infrastructure - they want databases they can spin up instantly, use while a task is running, and shut down when they are done.
 
-Neon's model maps cleanly to that way of working. That is why Neon powers many [agentic platforms](https://neon.com/case-studies#ai) and offers a [dedicated Agent Plan](https://neon.com/programs/agents#agent-plan-pricing) designed for these workloads.
+Neon's model maps cleanly to that way of working. That is why Neon is the Postgres of choice for [agentic platforms](https://neon.com/case-studies#ai) and why we're even offering a [dedicated Agent Plan](https://neon.com/programs/agents#agent-plan-pricing) designed for these workloads.
 
 ![Agent-friendly database lifecycle with Neon](/use-cases/fast-dev-workflows/agent-database-lifecycle-workflow.png)
 
 <QuoteBlock quote="Neon turns a database into something an agent can actually use. Spin it up, load data, reason over it, shut it down when the task is done. That is exactly how agents want to work" author="rick-blalock" role="Co-founder at Agentuity" />
+
+What makes Neon so fitting for agents:
 
 - **Postgres that agents can deploy and manage.** With Neon, agents can provision Postgres databases programmatically via API, without manual sizing, capacity planning, or configuration work.
 - **Large fleets != large costs.** Those same databases scale down to zero when inactive, so deploying thousands of rarely used databases does not become a cost concern.
@@ -136,4 +147,6 @@ Fast teams should not be slowed down by heavyweight database workflows. Neon rem
 - **Meets your standards for security and compliance.** [Backed by Databricks](https://neon.com/security)
 - **Trusted by teams deploying tens of thousands of databases every day.** [Explore case studies](https://neon.com/case-studies)
 
-[**Sign up in seconds and start building.**](https://console.neon.tech/signup) If you are just getting started, check out the [Neon Startup Program](https://neon.com/startups) for extra support as you grow.
+[**Sign up in seconds and start building.**](https://console.neon.tech/signup)
+
+If you are just getting started, check out the [Neon Startup Program](https://neon.com/startups) for extra support as you grow.
