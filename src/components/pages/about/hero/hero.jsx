@@ -38,7 +38,7 @@ const Hero = () => (
             className="min-w-[230px] shrink-0 font-normal xl:min-w-0"
             to={LINKS.careers}
           >
-            View open positions
+            View Open Roles on Databricks Careers Site
           </Button>
         </div>
       </div>

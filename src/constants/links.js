@@ -4,7 +4,8 @@ export default {
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
-  careers: '/careers',
+  careers:
+    'https://www.databricks.com/company/careers/open-positions?department=engineering&location=all&itm_source=www&itm_category=company&itm_page=engineering-at-databricks&itm_location=body&itm_component=hero&itm_offer=open-positions',
   caseStudies: '/case-studies',
   cli: '/cli',
   contactSales: '/contact-sales',
