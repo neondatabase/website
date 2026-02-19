@@ -6,7 +6,7 @@ summary: >-
   including authentication, configuring the Neon MCP Server, and installing
   necessary extensions and agent skills for supported editors.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.134Z'
+updatedOn: '2026-02-15T20:51:54.256Z'
 ---
 
 ## Before you begin
@@ -105,9 +105,9 @@ npx neonctl@latest init
 
 The `init` command supports:
 
-- **Cursor** — Ask: "Get started with Neon"
-- **VS Code with GitHub Copilot** — Ask: "Get started with Neon"
-- **Claude Code** — Ask: "Get started with Neon"
+- **Cursor**: Ask: "Get started with Neon"
+- **VS Code with GitHub Copilot**: Ask: "Get started with Neon"
+- **Claude Code**: Ask: "Get started with Neon"
 
 The command automatically detects which editors are installed and lets you select which to configure.
 

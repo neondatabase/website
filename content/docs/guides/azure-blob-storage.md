@@ -5,7 +5,7 @@ summary: >-
   Step-by-step guide for integrating Azure Blob Storage with Neon to store files
   and track their metadata in the Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.922Z'
+updatedOn: '2026-02-17T17:13:56.576Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -18,18 +18,18 @@ This guide demonstrates how to integrate Azure Blob Storage with Neon by storing
 
 ## Create a Neon project
 
-1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Azure account, storage account, and container
 
 1.  Sign up for or log in to your [Azure Account](https://azure.microsoft.com/free/).
 2.  Navigate to [Storage accounts](https://portal.azure.com/#create/Microsoft.StorageAccount) in the Azure portal.
-3.  Click **+ Create**. Fill in the required details: select a Subscription, create or select a Resource group, provide a unique Storage account name (e.g., `myneonappblobstorage`), choose a Region (e.g., `East US`), and select performance/redundancy options (Standard/LRS is fine for this example). Click **Review + create**, then **Create**.
+3.  Click **+ Create**. Fill in the required details: select a Subscription, create or select a Resource group, provide a unique Storage account name (for example, `myneonappblobstorage`), choose a Region (for example, `East US`), and select performance/redundancy options (Standard/LRS is fine for this example). Click **Review + create**, then **Create**.
     ![Azure Storage Account Creation](/docs/guides/azure-blob-storage-creation.png)
 4.  Once the storage account is deployed, go to the resource.
 5.  In the storage account menu, under **Data storage**, click **Containers**.
-6.  Click **+ Container**. Provide a name for your container (e.g., `uploads`), set the **Public access level** to **Private (no anonymous access)**. This is the recommended setting for security; we will use SAS tokens for controlled access. Click **Create**.
+6.  Click **+ Container**. Provide a name for your container (for example, `uploads`), set the **Public access level** to **Private (no anonymous access)**. This is the recommended setting for security; we will use SAS tokens for controlled access. Click **Create**.
     ![Azure Storage Container Creation](/docs/guides/azure-blob-storage-container-creation.png)
 
     <Admonition type="note" title="Public access vs. SAS tokens">
@@ -51,7 +51,7 @@ Here’s an example CORS configuration allowing `PUT` uploads and `GET` requests
 
 - **Allowed origins:** `https://your-production-app.com`, `http://localhost:3000` (Replace with your actual domains/ports)
 - **Allowed methods:** `PUT`, `GET`
-- **Allowed headers:** `*` (Or be more specific, e.g., `Content-Type`, `x-ms-blob-type`)
+- **Allowed headers:** `*` (Or be more specific, for example, `Content-Type`, `x-ms-blob-type`)
 - **Exposed headers:** `*`
 - **Max age (seconds):** `3600` (Example: 1 hour)
 
@@ -73,7 +73,7 @@ We need a table in Neon to store metadata about the blobs uploaded to Azure Stor
     );
     ```
 
-2.  Run the SQL statement. Add other relevant columns as needed (e.g., `content_type`, `size`).
+2.  Run the SQL statement. Add other relevant columns as needed (for example, `content_type`, `size`).
 
 <Admonition type="note" title="Securing metadata with RLS">
 If you use [Neon's Row Level Security (RLS)](/blog/introducing-neon-authorize), remember to apply appropriate access policies to the `azure_files` table. This controls who can view or modify the object references stored in Neon based on your RLS rules.
@@ -107,7 +107,7 @@ Create a `.env` file:
 ```env
 # Azure Blob Storage Config
 AZURE_STORAGE_CONNECTION_STRING="your_storage_account_connection_string"
-AZURE_STORAGE_CONTAINER_NAME=your_container_name # e.g., uploads
+AZURE_STORAGE_CONTAINER_NAME=your_container_name # for example, uploads
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string
@@ -225,7 +225,7 @@ Create a `.env` file:
 ```env
 # Azure Blob Storage Config
 AZURE_STORAGE_CONNECTION_STRING="your_storage_account_connection_string"
-AZURE_STORAGE_CONTAINER_NAME=your_container_name # e.g., uploads
+AZURE_STORAGE_CONTAINER_NAME=your_container_name # for example, uploads
 
 # Neon Connection String
 DATABASE_URL=your_neon_database_connection_string
@@ -429,7 +429,7 @@ Testing the SAS URL flow involves multiple steps:
 - The file appears in your Azure Blob Storage container (check the Azure Portal).
 - A new row appears in your `azure_files` table in Neon.
 
-You can now integrate API calls to these endpoints from various parts of your application (e.g., web clients using JavaScript `fetch` API, mobile apps, backend services) to handle file uploads.
+You can now integrate API calls to these endpoints from various parts of your application (for example, web clients using JavaScript `fetch` API, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
@@ -461,7 +461,7 @@ WHERE
 - **Accessing the file:**
   - If your container allows public `Blob` access, this `file_url` might be directly usable.
   - If your container is **private** (recommended), you need to generate a **read-only SAS token** for the specific `blob_name` on demand using your backend (similar to the upload SAS generation, but with `BlobSASPermissions.parse("r")` or `BlobSasPermissions(read=True)`) and append it to the `file_url`. This provides secure, temporary read access.
-  - Use the resulting URL (base URL or URL with read SAS token) in your application (e.g., `<img>` tags, download links).
+  - Use the resulting URL (base URL or URL with read SAS token) in your application (for example, `<img>` tags, download links).
 
   For example here's how to generate a read SAS URL:
   <CodeTabs labels={["JavaScript", "Python"]}>

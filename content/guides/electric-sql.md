@@ -30,7 +30,7 @@ Before you begin, ensure you have the following prerequisites installed and conf
 
 ElectricSQL requires a Postgres database with logical replication enabled. You'll configure your Neon project accordingly.
 
-1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the Neon Console or [pg.new](https://pg.new).
+1.  **Create a Neon Project:** If you haven't already, create a new Neon project. You can use the Neon Console or [neon.new](https://neon.new).
 2.  **Enable Logical Replication:** ElectricSQL uses Postgres logical replication (`wal_level = logical`) to receive changes from your database.
     - Navigate to your Neon Project in the [Neon Console](https://console.neon.tech/).
     - Open the **Settings** menu.

@@ -12,7 +12,7 @@ const RssButton = ({ className, basePath, title }) => (
     href={`${basePath}rss.xml`}
     aria-label={`${title} RSS Feed`}
   >
-    <RSSLogo className="size-5" />
+    <RSSLogo className="size-4" />
   </a>
 );
 

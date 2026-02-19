@@ -10,23 +10,23 @@ import WarningIcon from 'icons/docs/admonition/warning.inline.svg';
 
 const themes = {
   note: {
-    titleClassName: 'text-[#2982FF] dark:text-[#4C97FF]',
-    borderClassName: 'border-[#2982FF] dark:border-[#4C97FF]',
+    titleClassName: 'text-[#648DFF]',
+    borderClassName: 'border-[#648DFF]',
     icon: NoteIcon,
   },
   important: {
-    titleClassName: 'text-[#F9A806] dark:text-[#FFBB33]',
-    borderClassName: 'border-[#F9A806] dark:border-[#FFBB33]',
+    titleClassName: 'text-[#EB832D] dark:text-[#F99D51]',
+    borderClassName: 'border-[#EB832D] dark:border-[#F99D51]',
     icon: ImportantIcon,
   },
   tip: {
-    titleClassName: 'text-primary-2',
-    borderClassName: 'border-primary-2',
+    titleClassName: 'text-[#39A57D] dark:text-[#34D59A]',
+    borderClassName: 'border-[#39A57D] dark:border-[#34D59A]',
     icon: TipIcon,
   },
   warning: {
-    titleClassName: 'text-[#DA0A51] dark:text-secondary-1',
-    borderClassName: 'border-[#DA0A51] dark:border-secondary-1',
+    titleClassName: 'text-[#CA2716] dark:text-[#FF5645]',
+    borderClassName: 'border-[#CA2716] dark:border-[#FF5645]',
     icon: WarningIcon,
   },
   info: {
@@ -35,8 +35,8 @@ const themes = {
     icon: InfoIcon,
   },
   comingSoon: {
-    titleClassName: 'text-[#8873EF] dark:text-secondary-5',
-    borderClassName: 'border-[#8873EF] dark:border-secondary-5',
+    titleClassName: 'text-[#52A5E0] dark:text-[#99D5FF]',
+    borderClassName: 'border-[#52A5E0] dark:border-[#99D5FF]',
     icon: ComingSoonIcon,
   },
 };
@@ -44,23 +44,21 @@ const themes = {
 const textClassName = 'admonition-text mt-2.5 text-base [&_a]:rounded-sm';
 
 const Admonition = ({ children = null, type = 'note', title = null, asHTML = false }) => {
-  const typeText = type == 'comingSoon' ? 'Coming soon' : type;
+  const typeText = type === 'comingSoon' ? 'Coming soon' : type;
   const theme = themes[type] || themes.note;
   const Icon = theme.icon;
 
   return (
     <div
       className={clsx(
-        'admonition not-prose mt-5 rounded-[1px] border-l-4 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
+        'admonition not-prose my-9 rounded-none border-l-2 bg-gray-new-98 px-5 py-4 dark:bg-gray-new-8',
         theme.borderClassName,
         '[&_pre[data-language]]:!bg-white [&_pre[data-language]]:dark:!bg-gray-new-8 [&_pre]:px-4 [&_pre]:py-3 [&_pre_code]:!text-sm'
       )}
     >
-      <div className={clsx('flex items-center gap-1.5', theme.titleClassName)}>
-        <Icon width={14} height={14} />
-        <h4 className="text-[13px] font-semibold uppercase leading-none tracking-normal">
-          {title || typeText}
-        </h4>
+      <div className={clsx('flex items-center gap-1', theme.titleClassName)}>
+        <Icon width={16} height={16} className="shrink-0" />
+        <h4>{title || typeText}</h4>
       </div>
       {asHTML ? (
         <div className={textClassName} dangerouslySetInnerHTML={{ __html: children }} />

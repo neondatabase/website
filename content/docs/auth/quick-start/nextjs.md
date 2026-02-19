@@ -6,7 +6,7 @@ summary: >-
   components, including enabling authentication, installing the SDK, configuring
   environment variables, and creating an auth server instance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.768Z'
+updatedOn: '2026-02-16T13:08:22.370Z'
 layout: wide
 ---
 
@@ -50,7 +50,7 @@ cd my-app
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-npm install @neondatabase/auth
+npm install @neondatabase/auth@latest
 ```
 
 </TwoColumnLayout.Block>

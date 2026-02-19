@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/hasura
   - /docs/integrations/hasura
-updatedOn: '2026-02-06T22:07:32.981Z'
+updatedOn: '2026-02-15T20:51:54.163Z'
 ---
 
 Hasura Cloud is an open source GraphQL engine that provides a scalable, highly available, globally distributed, secure GraphQL API for your data sources.
@@ -65,7 +65,7 @@ The following steps describe how to navigate to Hasura Cloud and connect to your
 5. Paste your connection string into the **Database URL** field.
 
    <Admonition type="tip">
-   To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (e.g., `NEON_DATABASE_URL`) with your connection string as its value.
+   To enhance security and manageability, consider using environment variables in Hasura instead of hardcoding the connection string. To do this, navigate to **Hasura Project settings** > **Env vars** > **New env var** and create a new variable (for example, `NEON_DATABASE_URL`) with your connection string as its value.
      
      ![Create Environment Variable](/docs/guides/hasura/create-env-var.png)
 

@@ -7,7 +7,7 @@ summary: >-
   to implement `crudPolicy`, utilize custom Postgres roles, and integrate RLS
   with the Data API and serverless driver.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.043Z'
+updatedOn: '2026-02-15T20:51:54.193Z'
 redirectFrom:
   - /docs/guides/neon-rls-authorize-drizzle
   - /docs/guides/neon-authorize-drizzle
@@ -103,7 +103,7 @@ export const todos = pgTable(
 ```
 
 <Admonition type="note">
-**About Drizzle's role:** Drizzle is used here to **declare your RLS policies** in TypeScript. When you run migrations, these policies are created in your Postgres database. After that, the policies are enforced regardless of how you query your data—via the Data API, the serverless driver, or any other connection method.
+**About Drizzle's role:** Drizzle is used here to **declare your RLS policies** in TypeScript. When you run migrations, these policies are created in your Postgres database. After that, the policies are enforced regardless of how you query your data (via the Data API, the serverless driver, or any other connection method).
 </Admonition>
 
 ### Configuration parameters
@@ -114,12 +114,12 @@ The `crudPolicy` function from `drizzle-orm/neon` is a high-level helper that de
 - **`read`**: Controls access to `SELECT` operations. Accepts:
   - `true` to allow all reads for the role
   - `false` to deny all reads
-  - a custom SQL expression for fine-grained access (e.g., `authUid(table.userId)`)
+  - a custom SQL expression for fine-grained access (for example, `authUid(table.userId)`)
   - `null` to skip generating a `SELECT` policy
 - **`modify`**: Controls access to `INSERT`, `UPDATE`, and `DELETE` operations. Accepts:
   - `true` to allow all modifications
   - `false` to deny all modifications
-  - a custom SQL expression for conditional access (e.g., `authUid(table.userId)`)
+  - a custom SQL expression for conditional access (for example, `authUid(table.userId)`)
   - `null` to skip generating policies for these operations
 
 The `crudPolicy` helper generates an array of RLS policy definitions for all CRUD operations (select, insert, update, delete) based on these parameters. For most use cases, this lets you express common access patterns with minimal boilerplate.

@@ -22,7 +22,7 @@ Before you begin, ensure you have the following:
 
 - **Zapier Account:** A Zapier account is required to create and manage Zaps. Please note that the PostgreSQL integration is a Pro feature on Zapier and requires a [paid plan](https://zapier.com/pricing).
 
-* **Neon Account and Project:** A Neon account and a project with a running Postgres database. You can create a free Neon account and project at [pg.new](https://pg.new).
+* **Neon Account and Project:** A Neon account and a project with a running Postgres database. You can create a free Neon account and project at [neon.new](https://neon.new).
 * **Database tables (for examples):** For the examples in this guide, we'll be using the following tables to demonstrate the functionality. Create these tables in your Neon database if you intend to follow along:
   - A table named `users` to demonstrate triggering actions from new rows.
   - A table named `form_submissions` to demonstrate adding data from an external source.

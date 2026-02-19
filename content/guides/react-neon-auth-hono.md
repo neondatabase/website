@@ -32,7 +32,7 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `journal-app`.
+1.  **Create a Neon project:** Navigate to [neon.new](https://neon.new) to create a new Neon project. Give your project a name, such as `journal-app`.
 2.  **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
@@ -402,7 +402,7 @@ Navigate into the project directory and install the required dependencies:
 
 ```bash
 cd journal-frontend && npm install
-npm install @neondatabase/neon-js react-router
+npm install @neondatabase/neon-js@latest react-router
 ```
 
 ### Configure Tailwind CSS

@@ -6,7 +6,7 @@ summary: >-
   website repo for documentation work, so you can use the same standards in
   either environment.
 enableTableOfContents: true
-updatedOn: '2026-02-13T20:09:53.500Z'
+updatedOn: '2026-02-15T20:51:54.061Z'
 ---
 
 The Neon website repo includes rules and commands for **Claude** and **Cursor** so that documentation work follows the same standards no matter which tool you use. All changes are reviewed by humans via pull requests.
@@ -38,7 +38,7 @@ The Neon website repo includes rules and commands for **Claude** and **Cursor** 
 | **improve-intro**         | Improve the first paragraph of a doc page.                                                                                                  |
 | **navigation-principles** | How `navigation.yaml` works (nav, subnav, items).                                                                                           |
 | **doc-context-bridge**    | Points to `.cursor/` rules and skills so Claude can use Consistency check, Docs glossary updater, Redirect and links, Docs Roadmap updater. |
-| **list-doc-ai-tools**     | Prints the list of doc AI tools when run or when asked (e.g. "what doc AI tools are available?").                                           |
+| **list-doc-ai-tools**     | Prints the list of doc AI tools when run or when asked (for example "what doc AI tools are available?").                                    |
 | **Agents**                | content-drafter, content-planner, content-refiner, ia-specialist, syntax-validator, supervisor; extract-analyze-\* for changelog.           |
 
 For full details and when to use each tool, see the files under `.cursor/` and `.claude/commands/` or `.claude/agents/` in the [website repository](https://github.com/neondatabase/website).

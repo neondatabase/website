@@ -49,9 +49,12 @@ const BlogSearch = ({ children, posts, searchInputClassName }) => {
       }, 100),
     [pathname, router]
   );
-  useEffect(() => () => {
+  useEffect(
+    () => () => {
       debouncedUpdateURL.cancel?.();
-    }, [debouncedUpdateURL]);
+    },
+    [debouncedUpdateURL]
+  );
 
   // Filter posts based on query
   const filteredPosts = useMemo(() => {

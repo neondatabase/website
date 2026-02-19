@@ -7,7 +7,7 @@ createdAt: '2025-03-23T00:00:00.000Z'
 updatedOn: '2025-03-23T00:00:00.000Z'
 ---
 
-Neon, like Fauna, offers a **serverless architecture**—but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
+Neon, like Fauna, offers a **serverless architecture**, but it’s built on **Postgres**. That means you get the scalability of serverless along with the reliability and familiarity of a proven SQL database.
 
 This guide is designed to help FaunaDB users understand how to transition to Neon Postgres.
 

@@ -6,7 +6,7 @@ summary: >-
   Covers the setup of Neon Local, a proxy service that enables connection to
   existing or ephemeral Neon database branches using Docker, simplifying branch
   management and eliminating the need for manual connection string updates.
-updatedOn: '2026-02-06T22:07:33.109Z'
+updatedOn: '2026-02-15T20:51:54.220Z'
 ---
 
 [Neon Local](https://github.com/neondatabase-labs/neon_local) is a proxy service that creates a local interface to your Neon cloud database. It supports two main use cases:
@@ -47,7 +47,7 @@ db:
 
 ## Ephemeral database branches for development and testing
 
-To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database — without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
+To create ephemeral branches (default behavior), provide the `PARENT_BRANCH_ID` environment variable instead of `BRANCH_ID`. The Neon Local container automatically creates a new ephemeral branch of your database when the container starts, and deletes it when the container stops. This ensures that each time you deploy your app via Docker Compose, you have a fresh copy of your database, without needing manual cleanup or orchestration scripts. Your database branch lifecycle is tied directly to your Docker environment.
 
 ### Docker run
 

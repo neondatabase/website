@@ -7,7 +7,7 @@ summary: >-
   automated backups for data recovery.
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-02-11T21:09:53.005Z'
+updatedOn: '2026-02-15T20:51:54.134Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
@@ -151,7 +151,7 @@ To create a snapshot manually, click **Create snapshot**. This captures the curr
 
 <TabItem>
 
-You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (e.g. 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive — you can use one or the other, not both.
+You can create a snapshot from a branch using the [Create snapshot](https://api-docs.neon.tech/reference/createsnapshot) endpoint. A snapshot can be created from a specific timestamp (RFC 3339 format) or LSN (for example 16/B3733C50) within the branch's [restore window](/docs/introduction/restore-window). The `timestamp` and `lsn` parameters are mutually exclusive; you can use one or the other, not both.
 
 ```bash
 curl -X POST "https://console.neon.tech/api/v2/projects/project_id/branches/branch_id/snapshot" \
@@ -183,7 +183,7 @@ The parameters used in the example above:
 
 ## Create backup schedules
 
-Schedule automated snapshots to run at regular intervals — daily, weekly, or monthly — to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
+Schedule automated snapshots to run at regular intervals (daily, weekly, or monthly) to ensure consistent backups without manual intervention. Backup schedules are configured per branch and only apply to root branches.
 
 <Tabs labels={["Console", "API"]}>
 
@@ -200,10 +200,10 @@ To create a backup schedule:
 2. **Select a schedule frequency**
 
    Choose from the following options:
-   - **No schedule** — Disables automated snapshots (default)
-   - **Daily** — Creates a snapshot every day at a specified time
-   - **Weekly** — Creates a snapshot on a specific day of the week
-   - **Monthly** — Creates a snapshot on a specific day of the month
+   - **No schedule**: Disables automated snapshots (default)
+   - **Daily**: Creates a snapshot every day at a specified time
+   - **Weekly**: Creates a snapshot on a specific day of the week
+   - **Monthly**: Creates a snapshot on a specific day of the month
 
    ![Schedule frequency options dropdown](/docs/guides/snapshot_schedule_menu.png)
 
@@ -380,7 +380,7 @@ curl -X POST "https://console.neon.tech/api/v2/projects/project_id/snapshots/sna
 Parameters:
 
 - `name`: (Optional) Name of the new branch with the restored snapshot data. If not provided, a default branch name will be generated.
-- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation — no need to change the connection details in your application.
+- `finalize_restore`: Set to `true` to finalize the restore immediately. Finalizing the restore moves computes from your current branch to the new branch with the restored snapshot data for a seamless restore operation; no need to change the connection details in your application.
 - `target_branch_id`: (Optional but recommended) The ID of the branch you want to replace when finalizing the restore. If omitted, subsequent snapshot restores may target the branch renamed to `<branch_name> (old)` from a previous restore, not your intended production branch.
 
 <Admonition type="note">

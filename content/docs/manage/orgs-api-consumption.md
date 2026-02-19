@@ -5,7 +5,7 @@ summary: >-
   for organizations using the Neon API, including how to find organization IDs
   necessary for querying.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.118Z'
+updatedOn: '2026-02-15T20:51:54.232Z'
 ---
 
 You can use the Neon API to retrieve two types of consumption history metrics for your organization:
@@ -222,9 +222,9 @@ See more details about using this endpoint on the [Manage billing with consumpti
 
 ## Metric definitions
 
-- **active_time_seconds** — The number of seconds the project’s computes have been active during the period.
-- **compute_time_seconds** — The number of CPU seconds used by the project's computes, including computes that have been deleted; for example:
+- **active_time_seconds**: The number of seconds the project’s computes have been active during the period.
+- **compute_time_seconds**: The number of CPU seconds used by the project's computes, including computes that have been deleted; for example:
   - A compute that uses 1 CPU for 1 second is equal to `compute_time=1`.
   - A compute that uses 2 CPUs simultaneously for 1 second is equal to `compute_time=2`.
-- **written_data_bytes** — The total amount of data written to all of a project's branches.
-- **synthetic_storage_size_bytes** — The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.
+- **written_data_bytes**: The total amount of data written to all of a project's branches.
+- **synthetic_storage_size_bytes**: The total space occupied in storage. Synthetic storage size combines the logical data size and Write-Ahead Log (WAL) size for all branches.

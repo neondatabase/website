@@ -55,8 +55,8 @@ export default {
             },
 
             {
-              title: 'Instagres',
-              to: LINKS.instagres,
+              title: 'Claimable Postgres',
+              to: LINKS.claimablePostgres,
               description: 'No-signup flow',
               isExternal: true,
             },
@@ -214,10 +214,6 @@ export default {
           to: LINKS.contactSales,
         },
         {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
           text: 'Security',
           to: LINKS.security,
         },
@@ -282,10 +278,6 @@ export default {
         {
           text: 'Startups',
           to: LINKS.startups,
-        },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
         },
       ],
     },

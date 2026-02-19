@@ -6,7 +6,7 @@ summary: >-
   Row-Level Security (RLS) and authentication, demonstrating how to write
   queries from frontend code securely.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.807Z'
+updatedOn: '2026-02-17T17:13:56.570Z'
 ---
 
 In this tutorial, we'll walk through our note-taking app to show how Neon's Data API works with the `@neondatabase/neon-js` client library to write queries from your frontend code, with proper authentication and Row-Level Security (RLS) policies ensuring your data stays secure. The Data API is compatible with PostgREST, so you can use any PostgREST client library.
@@ -32,7 +32,7 @@ Before you begin, ensure you have:
 
 ### Create a Neon project with Auth and Data API
 
-1. Go to [pg.new](https://pg.new) to create a new Neon project
+1. Go to [neon.new](https://neon.new) to create a new Neon project
 2. In the Neon Console, navigate to your project and go to the **Data API** page in the left sidebar
 3. Select **Neon Auth** as your authentication option (the default), then click **Enable**
 
@@ -114,7 +114,7 @@ This single client provides:
 - **Authentication methods** via `client.auth` (sign up, sign in, sign out, get session)
 - **Database query methods** via `client.from()` (select, insert, update, delete)
 
-The client automatically handles JWT token management — when a user is signed in, the token is included in all Data API requests, enabling RLS policies to work correctly.
+The client automatically handles JWT token management; when a user is signed in, the token is included in all Data API requests, enabling RLS policies to work correctly.
 
 ### Database schema
 
@@ -230,7 +230,7 @@ const { data, error } = await client
   .single();
 ```
 
-The `.select()` chained after `.insert()` lets you insert a record and immediately fetch it back — along with related data from other tables — in a single query. This is a useful pattern provided by the PostgREST-compatible API.
+The `.select()` chained after `.insert()` lets you insert a record and immediately fetch it back (along with related data from other tables) in a single query. This is a useful pattern provided by the PostgREST-compatible API.
 
 That's why you'll see codename-style labels like "tender fuchsia" in your notes list:
 
@@ -287,7 +287,7 @@ const { data, error } = await client
 
 ## Try it yourself: Adding delete functionality
 
-If you've explored the app, you may have noticed there's no way to delete a note. This is intentional — it's a hands-on exercise to help you understand the Data API patterns.
+If you've explored the app, you may have noticed there's no way to delete a note. This is intentional; it's a hands-on exercise to help you understand the Data API patterns.
 
 ### Step 1: Add a delete button to the note card component
 
@@ -417,7 +417,7 @@ SELECT conname FROM pg_constraint WHERE conrelid = 'paragraphs'::regclass;
 
 Then use the name you find in the `DROP CONSTRAINT` and `ADD CONSTRAINT` commands above.
 
-Now test deleting a note that has paragraphs — both the note and its paragraphs should be removed from the database.
+Now test deleting a note that has paragraphs; both the note and its paragraphs should be removed from the database.
 
 ## Learn more
 

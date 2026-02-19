@@ -71,7 +71,7 @@ This name will appear in the **Actions** section of the GitHub UI. Regardless of
 
 This section of the workflow determines when the Action will run. The `schedule` field includes a `cron` expression, which uses [POSIX cron syntax](https://pubs.opengroup.org/onlinepubs/9699919799/utilities/crontab.html#tag_20_25_07) to specify how often the Action should execute.
 
-I've also included the `workflow_dispatch` field, which lets you manually trigger this Action from the GitHub UI—a useful feature while developing and testing the workflow.
+I've also included the `workflow_dispatch` field, which lets you manually trigger this Action from the GitHub UI, a useful feature while developing and testing the workflow.
 
 ### env
 
@@ -81,7 +81,7 @@ To do this, navigate to **Settings** > **Settings and variables** > **Actions** 
 
 ![Screenshot of GitHub repository secrets](/guides/images/reliable-testing-dataset-with-pg-dump-and-pg-restore/screenshot-of-github-respository-secrets.jpg)
 
-The last variable defines the Postgres version to install in the Action environment. Since `pg_dump`, `pg_restore`, and `psql` depend on Postgres, you'll need to install it within the Action—I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](/blog/postgres-17).
+The last variable defines the Postgres version to install in the Action environment. Since `pg_dump`, `pg_restore`, and `psql` depend on Postgres, you'll need to install it within the Action. I’ll cover this in more detail later. It’s also worth noting the version of Postgres you install here should be the same version used by both your source and target database. In my example, all use [Postgres 17](/blog/postgres-17).
 
 ### jobs/steps
 
@@ -203,7 +203,7 @@ jobs:
           $POSTGRES/psql "${{ env.DEV_DATABASE_URL }}" -c "\copy public.transactions FROM '${{ github.workspace }}/transactions-subset.csv' WITH CSV HEADER"
 ```
 
-The above code snippet might look a bit complicated at first, but it’s actually not that bad—let me break it down for you.
+The above code snippet might look a bit complicated at first, but it’s actually not that bad; let me break it down for you.
 
 ### Dump schema
 
@@ -287,4 +287,4 @@ Once the Action completes successfully, your target database will have a fresh t
 
 This Action is part of our [Dev/Test use case](/use-cases/dev-test), widely used by Neon customers who face limitations with traditional databases for testing. By leveraging a dedicated Neon database, while leaving production environments where they are, developers gain access to Neon's full suite of features, including the [built-in SQL editor](/docs/get-started/query-with-neon-sql-editor), [table explorer](/docs/guides/tables), and [branching](/docs/introduction/branching).
 
-If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test) or contact our [sales team](/contact-sales).
+If you'd like to learn more about using Neon for testing, check out our [dev/test use case](/use-cases/dev-test).

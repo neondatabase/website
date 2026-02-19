@@ -1,5 +1,5 @@
 ---
-updatedOn: '2025-07-12T14:19:52.054Z'
+updatedOn: '2026-02-17T17:13:56.590Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth" />
@@ -10,7 +10,7 @@ Neon Auth lets you add authentication to your app in seconds — user data is sy
 
 ## Add Neon Auth to a project
 
-Go to [pg.new](https://pg.new) to create a new Neon project.
+Go to [neon.new](https://neon.new) to create a new Neon project.
 
 Once your project is ready, open your project's **Auth** page and click **Enable Neon Auth** to get started.
 

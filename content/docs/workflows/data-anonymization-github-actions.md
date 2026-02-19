@@ -6,7 +6,7 @@ summary: >-
   Actions with the Neon Create Branch Action, allowing for the definition of
   masking rules directly in your workflow.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.153Z'
+updatedOn: '2026-02-15T20:51:54.279Z'
 ---
 
 This page shows how to automate data anonymization with GitHub Actions. For conceptual overview and usage instructions, see [Data Anonymization](/docs/workflows/data-anonymization).
@@ -85,7 +85,7 @@ The `masking_rules` input accepts a JSON array where each rule specifies:
 
 | Field              | Description                             |
 | ------------------ | --------------------------------------- |
-| `database_name`    | Target database (e.g., `neondb`)        |
+| `database_name`    | Target database (for example, `neondb`) |
 | `schema_name`      | Target schema (typically `public`)      |
 | `table_name`       | Table containing sensitive data         |
 | `column_name`      | Column to mask                          |

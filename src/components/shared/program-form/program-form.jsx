@@ -27,8 +27,9 @@ const createSchema = () =>
 
 const fieldProps = {
   theme: 'transparent',
-  inputClassName: 'h-12 mt-2.5',
-  labelClassName: 'text-base',
+  inputClassName:
+    'mt-3 rounded-none border-gray-new-90 dark:border-gray-new-20 dark:placeholder:text-gray-new-50',
+  labelClassName: 'text-sm !text-gray-new-10 dark:!text-gray-new-90',
 };
 
 const ProgramForm = ({ type }) => {
@@ -74,16 +75,14 @@ const ProgramForm = ({ type }) => {
 
   return (
     <figure
-      className="doc-cta not-prose relative my-5 scroll-mt-20 rounded-[10px] border border-gray-new-94 bg-gray-new-98 p-8 dark:border-gray-new-15 dark:bg-program-form-bg dark:shadow-contact lg:scroll-mt-5 sm:p-6"
+      className="doc-cta not-prose relative mb-[22px] mt-9 scroll-mt-20 border border-gray-new-90 px-7 py-6 dark:border-gray-new-20 dark:shadow-contact lg:scroll-mt-5 sm:p-6"
       id={`${type}-form`}
     >
-      <h2 className="!my-0 text-2xl font-semibold leading-none tracking-extra-tight">{title}</h2>
-      <p className="mt-3.5 max-w-[356px] tracking-tight text-gray-new-30 dark:text-[#A1A1AA]">
-        {description}
-      </p>
+      <h2 className="!p-0 !text-2xl !leading-snug">{title}</h2>
+      <p className="!mb-0 !mt-2 !text-lg text-gray-new-30 dark:text-gray-new-70">{description}</p>
       {formState !== FORM_STATES.SUCCESS ? (
-        <form className="mt-8" onSubmit={handleSubmit(onSubmit)}>
-          <div className="flex flex-col gap-7">
+        <form className="mt-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="flex flex-col gap-6">
             <Field
               {...fieldProps}
               name="url"
@@ -107,9 +106,9 @@ const ProgramForm = ({ type }) => {
           </div>
 
           <Button
-            className="mt-8 h-12 w-full px-6 font-semibold leading-none"
+            className="mt-8 h-12 w-full px-6 text-base font-medium leading-none"
             type="submit"
-            theme="primary"
+            theme="white-filled-multi"
             disabled={formState === FORM_STATES.LOADING}
           >
             {formState === FORM_STATES.LOADING ? 'Submitting...' : buttonText}

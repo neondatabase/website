@@ -1,97 +1,109 @@
-import Image from 'next/image';
 import PropTypes from 'prop-types';
 
-import Heading from 'components/shared/heading';
-import Link from 'components/shared/link';
+import SecondarySection from 'components/shared/secondary-section';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
-import discordLogo from 'icons/discord-colored.svg';
-import linkedinLogo from 'icons/linkedin-colored.svg';
-import xLogo from 'icons/x-colored.svg';
+import DotsPattern from 'images/dots-pattern.inline.svg';
 
-const SOCIALS = [
+import ArrowIcon from './images/arrow-right.inline.svg';
+import DiscordIcon from './images/discord-icon.inline.svg';
+import LinkedInIcon from './images/linkedin-icon.inline.svg';
+import XTwitterIcon from './images/x-twitter-icon.inline.svg';
+
+const CONNECTIONS_DATA = [
   {
-    icon: xLogo,
-    title: 'x.com',
-    description: 'Follow for updates and insights.',
-    link: {
-      text: 'Engage with us',
-      href: LINKS.twitter,
-    },
+    platform: 'X (Twitter)',
+    description: 'Stay up to date with the latest news, updates, and insights from our team.',
+    linkText: 'Engage with us',
+    href: LINKS.twitter,
+    icon: XTwitterIcon,
   },
   {
-    icon: linkedinLogo,
-    title: 'LinkedIn',
-    description: 'Network and discover opportunities.',
-    link: {
-      text: 'Follow and learn',
-      href: LINKS.linkedin,
-    },
+    platform: 'LinkedIn',
+    description: 'Connect, collaborate, and discover opportunities to build and grow.',
+    linkText: 'Follow and learn',
+    href: LINKS.linkedin,
+    icon: LinkedInIcon,
   },
   {
-    icon: discordLogo,
-    title: 'Discord',
-    description: 'Engage in real-time conversations.',
-    link: {
-      text: 'Talk to us',
-      href: LINKS.discord,
-    },
+    platform: 'Discord',
+    description: "Join real-time discussions, ask questions, and share what you're building.",
+    linkText: 'Talk to us',
+    href: LINKS.discord,
+    icon: DiscordIcon,
   },
 ];
 
-const Card = ({ icon, title, description, link }) => (
-  <article className="group relative flex w-[216px] flex-col items-center justify-center rounded-lg border border-gray-new-15 bg-[#0A0A0A] p-6 lg:w-[200px] md:w-[320px]">
-    <a
-      className="absolute left-0 top-0 h-full w-full"
-      href={link.href}
-      aria-label={link.text}
-      target="_blank"
-      rel="noreferrer noopener"
+const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) => (
+  <article className="group relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6 md:py-6">
+    <Icon
+      className="relative z-10 h-[52px] w-[52px] text-black-pure lg:h-11 lg:w-11"
+      aria-hidden="true"
     />
-    <Image src={icon} alt={title} width={32} height={32} quality={100} className="mb-[14px]" />
-    <h3 className="mb-2 text-xl leading-snug tracking-tight text-white">{title}</h3>
-    <p className="mb-[18px] text-center text-sm font-normal leading-snug tracking-tight text-gray-new-60">
-      {description}
-    </p>
-    <Link
-      theme="white"
-      to={link.href}
+
+    <div className="relative z-10 mb-6 mt-[87px] flex flex-col gap-3 xl:mt-16 xl:gap-3 lg:mt-12 lg:gap-2.5 md:mb-5 md:mt-10">
+      <h4 className="text-2xl font-medium leading-tight tracking-extra-tight text-black-pure lg:text-xl">
+        {platform}
+      </h4>
+      <p className="text-lg font-normal leading-snug tracking-tight text-gray-new-20 lg:text-base">
+        {description}
+      </p>
+    </div>
+
+    <a
+      href={href}
       target="_blank"
-      className="text-[13px] font-medium leading-none tracking-extra-tight transition-[color] duration-300 group-hover:text-primary-2"
-      aria-label={link.text}
-      withArrow
+      rel="noopener noreferrer"
+      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40 lg:text-sm"
+      aria-label={`${linkText} - ${platform}`}
     >
-      {link.text}
-    </Link>
+      <span>{linkText}</span>
+      <ArrowIcon className="h-3 w-3 text-gray-new-40" aria-hidden="true" />
+    </a>
+
+    <div
+      className="pointer-events-none absolute right-0 top-0 h-full w-[320px] xl:w-[280px] lg:w-[240px] md:w-[220px]"
+      aria-hidden="true"
+      style={{
+        maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
+        WebkitMaskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
+      }}
+    >
+      <DotsPattern className="h-full w-full" fill="#A7C6B8" />
+    </div>
   </article>
 );
 
-Card.propTypes = {
-  icon: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+ConnectionCard.propTypes = {
+  platform: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  link: PropTypes.object.isRequired,
+  linkText: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+  icon: PropTypes.elementType.isRequired,
 };
 
 const Connections = () => (
-  <section className="connections safe-paddings mt-[216px] xl:mt-[152px] lg:mt-[112px] md:mt-[96px]">
-    <div className="relative mx-auto flex max-w-[1088px] flex-col items-center xl:max-w-[704px] md:px-5">
-      <Heading
-        className="max-w-[625px] text-center text-5xl font-medium leading-none tracking-extra-tight xl:text-4xl xl:tracking-tight lg:text-[32px]"
-        tag="h2"
-      >
-        Connect with us wherever you
-        <br />
-        work, build, and share
-      </Heading>
-      <ul className="mt-12 flex gap-7 text-2xl text-gray-new-50 xl:mt-11 lg:mt-10 md:mt-8 md:flex-col">
-        {SOCIALS.map((item, index) => (
-          <li key={index}>
-            <Card {...item} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <SecondarySection title="Community" className="pb-60 lg:pb-40 lg:pt-28 md:pb-[104px] md:pt-20">
+    <header className="mb-16 lg:mb-14 md:mb-12">
+      <SectionLabel icon="arrow">Community</SectionLabel>
+
+      <h3 className="mt-5 max-w-[813px] text-5xl font-normal leading-dense tracking-tighter text-black-pure xl:mt-[18px] xl:max-w-[700px] xl:text-[40px] lg:max-w-[580px] lg:text-[36px] md:max-w-full md:text-[28px]">
+        Connect with us{' '}
+        <span className="text-gray-new-40">wherever you work, build, and share your journey.</span>
+      </h3>
+
+      <div className="mt-6 h-px w-full bg-gray-new-50 lg:mt-5 md:mt-[18px]" aria-hidden="true" />
+    </header>
+
+    {/* Cards Grid */}
+    <ul className="grid grid-cols-3 gap-[31px] xl:gap-8 lg:gap-7 md:grid-cols-1 md:gap-6">
+      {CONNECTIONS_DATA.map((card) => (
+        <li key={card.platform}>
+          <ConnectionCard {...card} />
+        </li>
+      ))}
+    </ul>
+  </SecondarySection>
 );
 
 export default Connections;

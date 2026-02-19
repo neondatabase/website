@@ -23,7 +23,7 @@
  * - CTA -> blockquote with title, description, command, link
  * - CopyPrompt, NeedHelp, Comment -> removed (UI-only)
  *
- * Dependencies: Uses existing transitive deps (no new installs needed)
+ * Dependencies: unified, remark-parse, remark-gfm, unist-util-visit, gray-matter, js-yaml (direct); remark-mdx and mdast-util-* (transitive). We pin the direct ones so version conflicts (e.g. remark-gfm v4 needing unified v11 while another dep had v10) don’t break the build.
  */
 
 const fs = require('fs').promises;

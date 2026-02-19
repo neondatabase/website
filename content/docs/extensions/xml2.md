@@ -6,7 +6,7 @@ summary: >-
   enabling XML parsing, XPath querying, and XSLT transformations for XML data
   management within Neon databases.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.852Z'
+updatedOn: '2026-02-15T20:51:54.098Z'
 ---
 
 The `xml2` extension for Postgres provides functions to parse XML data, evaluate XPath queries against it, and perform XSLT transformations. This can be useful for applications that need to process or extract information from XML documents stored within the database.
@@ -176,14 +176,14 @@ SELECT * FROM
 | TOOL-005    | Mega Wrench  | 75            | Tools            |
 
 **Data type conversion:**
-`xpath_table` internally deals with string representations of XPath results. When you specify a data type (e.g., `INTEGER`) in the `AS` clause, Postgres attempts to convert the string to that type. If conversion fails (e.g., an empty string or non-numeric text to `INTEGER`), an error occurs. It might be safer to extract as `TEXT` and then cast explicitly if data quality is uncertain.
+`xpath_table` internally deals with string representations of XPath results. When you specify a data type (for example, `INTEGER`) in the `AS` clause, Postgres attempts to convert the string to that type. If conversion fails (for example, an empty string or non-numeric text to `INTEGER`), an error occurs. It might be safer to extract as `TEXT` and then cast explicitly if data quality is uncertain.
 
 ### XSLT functions
 
 The `xml2` extension provides functions for XSLT (Extensible Stylesheet Language Transformations).
 
 - **`xslt_process(document text, stylesheet text, paramlist text) returns text`**
-  Applies the XSL `stylesheet` to the XML `document` and returns the transformed text. The `paramlist` argument accepts a string containing parameter assignments for the transformation, formatted as key-value pairs separated by commas (e.g., `'name=value,debug=1'`). It's important to note that due to the straightforward parsing mechanism, individual parameter values within this list cannot themselves contain commas.
+  Applies the XSL `stylesheet` to the XML `document` and returns the transformed text. The `paramlist` argument accepts a string containing parameter assignments for the transformation, formatted as key-value pairs separated by commas (for example, `'name=value,debug=1'`). It's important to note that due to the straightforward parsing mechanism, individual parameter values within this list cannot themselves contain commas.
 
 - **`xslt_process(document text, stylesheet text) returns text`**
   A two-parameter version that applies the stylesheet without passing any external parameters.

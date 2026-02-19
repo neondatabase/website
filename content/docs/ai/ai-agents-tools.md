@@ -4,9 +4,9 @@ subtitle: AI-powered tools for development and database management
 summary: >-
   Covers the integration of AI tools with Neon for database management,
   including setup instructions, Model Context Protocol (MCP) usage, and plugins
-  for Claude Code and GitHub Copilot.
+  for Cursor, Claude Code, and GitHub Copilot.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.712Z'
+updatedOn: '2026-02-16T23:25:57.644Z'
 ---
 
 Neon provides several ways to integrate with AI tools and agents, from natural language database control to autonomous agent frameworks. Choose the tools that fit your workflow.
@@ -38,6 +38,14 @@ If you're using Claude Code, install the Neon plugin to get Skills, MCP integrat
 <a href="/docs/ai/ai-claude-code-plugin" description="Includes Claude Code Skills for Neon, Neon MCP integration, and context rules" icon="github">Claude Code plugin for Neon</a>
 </DetailIconCards>
 
+## Cursor plugin
+
+If you're using Cursor, install the Neon plugin to get Neon Skills and MCP integration in one package.
+
+<DetailIconCards>
+<a href="/docs/ai/ai-cursor-plugin" description="Install the Neon Cursor plugin to use Neon Skills and Neon MCP integration directly in Cursor" icon="github">Cursor plugin for Neon</a>
+</DetailIconCards>
+
 ## GitHub Copilot agents
 
 Custom agents for GitHub Copilot that bring Neon's branching workflow directly into VS Code for safe migrations and query optimization.
@@ -48,7 +56,7 @@ Custom agents for GitHub Copilot that bring Neon's branching workflow directly i
 
 ## AI rules
 
-For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
+For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory; the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 <a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth</a>

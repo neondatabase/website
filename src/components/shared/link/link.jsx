@@ -80,7 +80,8 @@ const Link = forwardRef(
       styles.size[size],
       styles.theme[theme],
       additionalClassName,
-      (withArrow || icon) && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere'
+      withArrow && 'group inline-flex w-fit items-center gap-1 sm:wrap-anywhere',
+      icon && !withArrow && 'group inline'
     );
 
     const Icon = icons[icon];
@@ -99,9 +100,13 @@ const Link = forwardRef(
       <>
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
-          <ArrowRightIcon className="-mb-px shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          <ArrowRightIcon className="-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
         )}
-        {Icon && <Icon className="-mb-px shrink-0" />}
+        {Icon && (
+          <span className="whitespace-nowrap no-underline">
+            <Icon className="ml-1 inline-block !size-3.5 shrink-0 align-[-0.125em]" />
+          </span>
+        )}
       </>
     );
 

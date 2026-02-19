@@ -8,7 +8,7 @@ summary: >-
   branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-02-06T22:07:33.122Z'
+updatedOn: '2026-02-19T02:27:13.547Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -21,7 +21,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based—you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
 
 ## Create a project
 
@@ -37,7 +37,7 @@ To create a Neon project:
 After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
+You can also use [neon.new](https://neon.new) to create a new Neon Postgres project. Simply visit [neon.new](https://neon.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
 ## View projects
@@ -56,16 +56,16 @@ Once you open a project, you can use the **Settings** page to manage your projec
 
 The **Settings** page includes these sub-pages:
 
-- **General** — Change the name of your project or copy the project ID.
-- **Compute** — Set the scale to zero and sizing defaults for any new computes you create when branching.
-- **Instant restore** — Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
-- **Updates** — Schedule a time for Postgres and Neon updates.
-- **Collaborators** — Invite external collaborators to join your Neon project.
-- **Network security** — Configure Neon's IP and Private Networking features for secure access.
-- **RLS** — Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
-- **Logical replication** — Enable logical replication to replicate data from your Neon project to external data services and platforms.
-- **Transfer** — Transfer your project from the current organization to another organization you are a member of.
-- **Delete** — Use with care! This action deletes your entire project and all its objects, and is irreversible.
+- **General**: Change the name of your project or copy the project ID.
+- **Compute**: Set the scale to zero and sizing defaults for any new computes you create when branching.
+- **Instant restore**: Set the [restore window](/docs/introduction/restore-window) to enable instant restore, time travel queries, and branching from past states.
+- **Updates**: Schedule a time for Postgres and Neon updates.
+- **Collaborators**: Invite external collaborators to join your Neon project.
+- **Network security**: Configure Neon's IP and Private Networking features for secure access.
+- **RLS**: Configure Neon Row-Level Security (RLS) to apply row-level security policies to your Neon project.
+- **Logical replication**: Enable logical replication to replicate data from your Neon project to external data services and platforms.
+- **Transfer**: Transfer your project from the current organization to another organization you are a member of.
+- **Delete**: Use with care! This action deletes your entire project and all its objects, and is irreversible.
 
 ### General project settings
 
@@ -90,7 +90,7 @@ A Compute Unit (CU) represents approximately 4 GB of RAM, along with associated 
 Neon supports two compute configurations:
 
 - **Fixed size:** Select a fixed compute size ranging from .25 CUs to 56 CUs
-- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (e.g., if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
+- **Autoscaling:** Specify minimum and maximum compute sizes (from .25 CU to 16 CUs) to automatically scale based on workload. Note: The maximum permitted autoscaling range is 8 CU, meaning the difference between max and min cannot exceed 8 CU (for example, if min = 1 CU, max can be at most 9 CU). For more information, see [Autoscaling](/docs/introduction/autoscaling)
 
 ### Configure your restore window
 

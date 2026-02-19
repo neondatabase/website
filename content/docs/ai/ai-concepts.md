@@ -6,7 +6,7 @@ summary: >-
   applications, detailing how to transform unstructured data into structured
   formats and measure text similarity through vector distance calculations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.717Z'
+updatedOn: '2026-02-15T20:51:54.030Z'
 ---
 
 Embeddings are an essential component in building AI applications. This topic describes embeddings and how they are used, generated, and stored in Postgres.
@@ -43,7 +43,7 @@ Transforming data into embeddings and computing similarities between one or more
 - **Information retrieval:** By representing user queries as vectors, we can perform more accurate searches based on the meaning behind the queries, allowing us to retrieve more relevant information.
 - **Natural language processing:** Embeddings capture the essence of the text, making them excellent tools for tasks such as text classification and sentiment analysis.
 - **Recommendation systems:** Using vector similarity, we can recommend items similar to a given item, whether they be movies, products, books, or otherwise. This technique allows us to create more personalized and relevant recommendations.
-- **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies—items that don't quite fit the pattern. This can be crucial in many fields, from cybersecurity to quality control.
+- **Anomaly detection:** By determining the similarity between items within a dataset, we can identify outliers or anomalies (items that don't quite fit the pattern). This can be crucial in many fields, from cybersecurity to quality control.
 
 ### Distance metrics
 

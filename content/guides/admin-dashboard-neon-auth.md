@@ -28,7 +28,7 @@ Before you begin, ensure you have the following:
 
 You'll need to create a Neon project and enable Neon Auth.
 
-1.  **Create a Neon project:** Navigate to [pg.new](https://pg.new) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
+1.  **Create a Neon project:** Navigate to [neon.new](https://neon.new) to create a new Neon project. Give your project a name, such as `admin-dashboard-demo`.
 2.  **Enable Neon Auth:**
     - In your project's dashboard, go to the **Neon Auth** tab.
     - Click on the **Enable Neon Auth** button to set up authentication for your project.
@@ -95,7 +95,7 @@ You will need the following packages for this project:
 - **React Router:** [`react-router`](https://www.npmjs.com/package/react-router) for routing between pages.
 
 ```bash
-npm install @neondatabase/neon-js react-router
+npm install @neondatabase/neon-js@latest react-router
 ```
 
 ### Setup Tailwind CSS

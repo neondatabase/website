@@ -6,7 +6,7 @@ summary: >-
   providers, and controlling API access to customize its behavior and security
   settings.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.812Z'
+updatedOn: '2026-02-15T20:51:54.072Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Data API" />
@@ -35,7 +35,7 @@ When you enable the Data API with Neon Auth, it appears as the configured provid
 
 You can add, replace, or remove authentication providers. Note that only one provider can be configured at a time.
 
-- **Add a provider:** If no provider is currently configured, click **Add provider** and enter the JWKS URL supplied by your auth service (e.g., Auth0, Clerk, or Firebase). For help finding your provider's JWKS URL, see [Custom authentication providers](/docs/data-api/custom-authentication-providers#supported-providers). Some providers also require a [JWT Audience](/docs/data-api/custom-authentication-providers#what-is-jwt-audience) value.
+- **Add a provider:** If no provider is currently configured, click **Add provider** and enter the JWKS URL supplied by your auth service (for example, Auth0, Clerk, or Firebase). For help finding your provider's JWKS URL, see [Custom authentication providers](/docs/data-api/custom-authentication-providers#supported-providers). Some providers also require a [JWT Audience](/docs/data-api/custom-authentication-providers#what-is-jwt-audience) value.
 - **Replace a provider:** To switch to a different provider, remove the current one first, then add the new one using **Add provider**.
 - **Remove a provider:** Use the provider dropdown menu to remove the current provider.
 
@@ -51,7 +51,7 @@ The **Advanced settings** section on the Settings tab controls the security, per
 
 **Default:** `public`
 
-Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, only the `public` schema is accessible. If you use other schemas (e.g., `api`, `v1`), select them from the drop-down list to add them.
+Defines which PostgreSQL schemas are exposed as REST API endpoints. By default, only the `public` schema is accessible. If you use other schemas (for example, `api`, `v1`), select them from the drop-down list to add them.
 
 <Admonition type="note">
 **Permissions apply:** Adding a schema here exposes the *endpoints*, but the database role used by the API must still have `USAGE` privileges on the schema and `SELECT` privileges on the tables. Refer to [Access control for Data API](/docs/data-api/access-control) for more details.
@@ -76,7 +76,7 @@ Enforces a hard limit on the number of rows returned in a single API response. T
 Controls which web domains are permitted to fetch data from your API via the browser.
 
 - **Empty:** Allows `*` (any domain). Useful for development.
-- **Production:** List your specific domains (e.g., `https://myapp.com`) to prevent unauthorized websites from querying your API.
+- **Production:** List your specific domains (for example, `https://myapp.com`) to prevent unauthorized websites from querying your API.
 
 ### OpenAPI specification
 
@@ -106,7 +106,7 @@ You can use the OpenAPI schema to:
 - Integrate with API gateways and other OpenAPI-based tools
 
 <Admonition type="tip" title="Auth API reference">
-If you're using Neon Auth, there's also an interactive API reference for authentication endpoints. Navigate to your Auth URL with `/reference` appended (e.g., `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can use this to create test users, sign in, and obtain JWT tokens for testing. See [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl) for details.
+If you're using Neon Auth, there's also an interactive API reference for authentication endpoints. Navigate to your Auth URL with `/reference` appended (for example, `https://ep-example.neonauth.us-east-1.aws.neon.tech/neondb/auth/reference`). You can use this to create test users, sign in, and obtain JWT tokens for testing. See [Testing with Postman or cURL](/docs/data-api/get-started#testing-with-postman-or-curl) for details.
 </Admonition>
 
 ### Server timing headers

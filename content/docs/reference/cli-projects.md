@@ -6,7 +6,7 @@ summary: >-
   projects, including listing, creating, updating, deleting, and retrieving
   project information directly from the terminal.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.140Z'
+updatedOn: '2026-02-15T20:51:54.257Z'
 ---
 
 ## Before you begin
@@ -134,7 +134,7 @@ In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-opt
 | `--database`                 | The database name. If not specified, the default database name will be used.                                                                                                                                      | string  |          |
 | `--role`                     | The role name. If not specified, the default role name will be used.                                                                                                                                              | string  |          |
 | `--set-context`              | Set the current context to the new project.                                                                                                                                                                       | boolean |          |
-| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3").                                                                      | string  |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (for example, "2") or a range delimited by a dash (for example, "0.5-3").                                                        | string  |          |
 
 <Admonition type="note">
 Neon projects created using the CLI use the default Postgres version, which is Postgres 17. To create a project with a different Postgres version, you can use the [Neon Console](/docs/manage/projects#create-a-project) or [Neon API](https://api-docs.neon.tech/reference/createproject). 
@@ -259,14 +259,14 @@ The `id` is the project ID, which you can obtain by listing your projects or fro
 
 In addition to the Neon CLI [global options](/docs/reference/neon-cli#global-options), the `update` subcommand supports this option:
 
-| Option                       | Description                                                                                                                                  | Type    | Required |
-| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
-| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                | string  |          |
-| `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                     | boolean |          |
-| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.             | boolean |          |
-| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                  | boolean |          |
-| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (e.g., "2") or a range delimited by a dash (e.g., "0.5-3"). | string  |          |
-| `--name`                     | The project name. The value cannot be empty.                                                                                                 | string  | &check;  |
+| Option                       | Description                                                                                                                                                | Type    | Required |
+| ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | :------: |
+| `--context-file`             | [Context file](/docs/reference/cli-set-context#using-a-named-context-file) path and file name                                                              | string  |          |
+| `--block-vpc-connections`    | When set, connections using VPC endpoints are disallowed. Use `--block-vpc-connections=false` to set the value to false.                                   | boolean |          |
+| `--block-public-connections` | When set, connections from the public internet are disallowed. Use `--block-public-connections=false` to set the value to false.                           | boolean |          |
+| `--hipaa`                    | Enable the project for HIPAA. See [HIPAA Compliance](/docs/security/hipaa).                                                                                | boolean |          |
+| `--cu`                       | The compute size for the default branch's primary compute. Could be a fixed size (for example, "2") or a range delimited by a dash (for example, "0.5-3"). | string  |          |
+| `--name`                     | The project name. The value cannot be empty.                                                                                                               | string  | &check;  |
 
 #### Examples
 

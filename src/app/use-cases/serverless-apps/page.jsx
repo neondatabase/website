@@ -1,7 +1,7 @@
 import Autoscaling from 'components/pages/serverless-apps/autoscaling';
 import Features from 'components/pages/serverless-apps/features';
 import Hero from 'components/pages/serverless-apps/hero';
-import CTA from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import TestimonialNew from 'components/shared/testimonial-new';
 import LINKS from 'constants/links';
@@ -35,14 +35,11 @@ const ServerlessAppsPage = () => (
         avatar: authorJulianBenegas,
       }}
     />
-    <CTA
-      className="pb-[260px] pt-[386px] xl:pb-[222px] xl:pt-[282px] lg:pb-[270px] lg:pt-[288px] md:pb-20 md:pt-[160px]"
+    <CTANew
       title="Sign up and<br> get $100 credits"
-      titleClassName="leading-dense !text-6xl xl:!text-5xl lg:!text-4xl md:!text-[32px]"
       description="Start saving with Neon."
       buttonText="Sign up"
       buttonUrl={LINKS.signupCredits}
-      buttonClassName="mt-9 h-12 min-w-48 lg:h-11 xl:mt-6 lg:mt-5 md:mt-4 md:h-10"
     />
   </Layout>
 );

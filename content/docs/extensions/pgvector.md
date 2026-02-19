@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/extensions/pg_embedding
-updatedOn: '2026-02-06T22:07:32.845Z'
+updatedOn: '2026-02-15T20:51:54.095Z'
 ---
 
 The `pgvector` extension enables you to store vector embeddings and perform vector similarity search in Postgres. It is particularly useful for applications involving natural language processing, such as those built on top of OpenAI's GPT models.
@@ -45,7 +45,7 @@ CREATE EXTENSION vector VERSION '0.7.4';
 
 To check the latest supported `pgvector` version on Neon, visit our [Postgres extensions page](/docs/extensions/pg-extensions). You can install one version back from that version.
 
-For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential — for example, version 0.7.4 was followed by 0.8.0.
+For a full version history, see the [pgvector changelog](https://github.com/pgvector/pgvector/blob/master/CHANGELOG.md). Note that `pgvector` versions are not always sequential; for example, version 0.7.4 was followed by 0.8.0.
 
 ## Create a table to store vectors
 
