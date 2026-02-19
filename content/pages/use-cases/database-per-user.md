@@ -6,15 +6,13 @@ enableTableOfContents: true
 updatedOn: '2026-02-13T00:00:00.000Z'
 ---
 
+<QuoteBlock quote="We've been able to manage 300k+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort" author="himanshu-bhandoh" role="Software Engineer at Retool" />
+
 ## Your users need a database
 
-Many platforms need persistent data to fully shine, but still force their users to go elsewhere to deploy a database.
+Many platforms need persistent data to fully shine, but still force their users to go elsewhere to deploy a database. If that is you, we do not blame you. You probably do not want to get into the business of hosting Postgres on top of building and scaling your existing product. **Here is the good news: with Neon, you can have it both ways.**
 
-If that is you, we do not blame you. You probably do not want to get into the business of hosting Postgres on top of building and scaling your existing product.
-
-**Here is the good news: with Neon, you can have it both ways.**
-
-Traditionally, provisioning thousands of Postgres databases means:
+Traditionally, provisioning thousands of Postgres databases meant:
 
 - Managing large fleets of instances
 - Paying for idle capacity
@@ -25,9 +23,9 @@ Neon changes the economics and the operational burden. **Because Neon is built o
 
 ## Importantly: your users need their own isolated database
 
-You may agree that your end-user experience would be better if users could store their data directly inside your platform, but still think that giving them space on a shared table in a single large Postgres instance (RDS or elsewhere) might be good enough.
+You may agree that your end-user experience would be better if users could store their data directly inside your platform, but still think that giving them space on a shared table in a single large Postgres instance (RDS or elsewhere) might be good enough. At platform scale, this becomes complicated quickly.
 
-At platform scale, this becomes complicated quickly.
+<QuoteBlock quote="We were getting ready to hire dedicated engineers just to manage and scale Zite Database. With Neon, we didn't need to do that. We were able to give every end user their own database, including on the free plan" author="dominic-whyte" role="Co-founder at Zite" />
 
 ### Why shared databases break at scale
 
@@ -47,7 +45,7 @@ In a shared setup, heavy workloads compete for the same compute and memory resou
 
 In shared systems, enforcing per-user limits by pricing tier is non-trivial. You need custom metering, limits, and guardrails across shared resources.
 
-### One isolated database per user solves this
+### The solution: one isolated database per user
 
 The cleaner architecture is simple: **give each end user their own isolated Postgres database with dedicated resources.**
 
@@ -60,9 +58,7 @@ This model solves the core issues:
 - Billing limits can be enforced at the infrastructure level
 - Performance issues are contained to a single tenant
 
-The natural follow-up question is: _Do I need to run and manage thousands of RDS instances?_
-
-No. That is exactly what Neon removes.
+The natural follow-up question is: _So you're telling me I need to run and manage thousands of RDS instances?_ No - this is exactly why you need Neon.
 
 ## Neon makes database-per-user simple and sustainable
 
@@ -70,7 +66,7 @@ No. That is exactly what Neon removes.
 
 ### API-first control, built for platforms
 
-The first key characteristic is straightforward: Neon is designed to be managed programmatically. **Provisioning a new Postgres database is one API call.**
+Neon is designed to be managed programmatically. **Provisioning a new Postgres database is one API call.** 
 
 From your backend, you can:
 
@@ -81,11 +77,23 @@ From your backend, you can:
 - Monitor usage across thousands of projects
 - Enforce limits without downtime
 
-<QuoteBlock quote="We've been able to manage 300k+ Postgres databases via the Neon API. It saved us a tremendous amount of time and engineering effort" author="himanshu-bhandoh" role="Software Engineer at Retool" />
+| Use case                         | API endpoint                                                | What it enables                                                   |
+| -------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| Provision a new user database    | `POST /api/v2/projects`                                       | Instantly create a new Postgres project per user (about 1 second) |
+| Configure compute scaling        | `default_endpoint_settings.autoscaling_limit_min_cu / max_cu` | Define min/max compute per pricing tier                           |
+| Configure suspend behavior       | `suspend_timeout_seconds`                                     | Control how aggressively inactive databases scale to zero         |
+| Set consumption limits           | `project.settings.quota`                                      | Enforce compute, storage, write, and data transfer caps           |
+| Monitor fleet usage              | `GET /api/v2/consumption_history/projects`                    | Track usage per project for billing dashboards                    |
+| Adjust limits dynamically        | `PATCH /api/v2/projects/\{id\}`                               | Upgrade/downgrade users without downtime                          |
+| Create branches programmatically | `POST /api/v2/projects/\{id\}/branches`                       | Enable per-user dev environments or safe migrations               |
+
+_Sample API operations platforms use to implement database-per-user workflows with Neon._
+
+[Explore our API documentation](https://neon.com/docs/reference/api-reference)
 
 ### Serverless economics: the key enabler
 
-Neon databases:
+Neon databases,
 
 - Provision in approximately 1 second
 - Scale to zero when inactive
@@ -93,9 +101,7 @@ Neon databases:
 
 This changes the economics of large fleets. Most end users are not active 24/7, and you should not pay continuously for inactive capacity.
 
-On Neon, idle databases consume zero compute, making one-database-per-user economically sustainable even with many rarely active users.
-
-<QuoteBlock quote="We were getting ready to hire dedicated engineers just to manage and scale Zite Database. With Neon, we didn't need to do that. We were able to give every end user their own database, including on the free plan" author="dominic-whyte" role="Co-founder at Zite" />
+On Neon, **idle databases consume zero compute, making one-database-per-user economically sustainable even with many rarely active users.**
 
 ### Independent scaling per user
 
@@ -108,18 +114,6 @@ Isolation is built in technically and economically. You pay only for the compute
 **Neon does not need to surface in your product.** You can provision databases via API and manage credentials internally, without asking users to create Neon accounts.
 
 From your users' perspective, the database feels fully native to your product: your onboarding, your UI, and your billing.
-
-| Use case                         | API endpoint                                                | What it enables                                                   |
-| -------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------- |
-| Provision a new user database    | POST /api/v2/projects                                       | Instantly create a new Postgres project per user (about 1 second) |
-| Configure compute scaling        | default_endpoint_settings.autoscaling_limit_min_cu / max_cu | Define min/max compute per pricing tier                           |
-| Configure suspend behavior       | suspend_timeout_seconds                                     | Control how aggressively inactive databases scale to zero         |
-| Set consumption limits           | project.settings.quota                                      | Enforce compute, storage, write, and data transfer caps           |
-| Monitor fleet usage              | GET /api/v2/consumption_history/projects                    | Track usage per project for billing dashboards                    |
-| Adjust limits dynamically        | PATCH /api/v2/projects/\{id\}                               | Upgrade/downgrade users without downtime                          |
-| Create branches programmatically | POST /api/v2/projects/\{id\}/branches                       | Enable per-user dev environments or safe migrations               |
-
-_Sample API operations platforms use to implement database-per-user workflows with Neon._
 
 ### Your users get real Postgres
 
@@ -139,12 +133,12 @@ Because quotas are enforced at the project level, your pricing plans become API-
 
 | User-facing plan limit     | Free _example_ | Pro _example_ | Enterprise _example_ | Configured in Neon via                                                                |
 | -------------------------- | -------------- | ------------- | -------------------- | ------------------------------------------------------------------------------------- |
-| Compute (min/max CU)       | 0.25 / 0.25    | 0.25 / 2      | 1 / 8                | default_endpoint_settings.autoscaling_limit_min_cu / max_cu (Create or PATCH project) |
-| Active time (compute time) | 100 hrs/month  | 750 hrs/month | Unlimited            | project.settings.quota.compute_time_seconds                                           |
-| Storage                    | 512 MB         | 10 GB         | 100 GB+              | project.settings.quota.logical_size_bytes                                             |
-| Data transfer              | 5 GB           | 50 GB         | Custom               | project.settings.quota.data_transfer_bytes                                            |
-| Written data               | 1 GB           | 50 GB         | Custom               | project.settings.quota.written_data_bytes                                             |
-| Suspend timeout            | 5 min          | 10 min        | Custom               | default_endpoint_settings.suspend_timeout_seconds                                     |
+| Compute (min/max CU)       | 0.25 / 0.25    | 0.25 / 2      | 1 / 8                | `default_endpoint_settings.autoscaling_limit_min_cu` / `max_cu` (Create or PATCH project) |
+| Active time (compute time) | 100 hrs/month  | 750 hrs/month | Unlimited            | `project.settings.quota.compute_time_seconds`                                           |
+| Storage                    | 512 MB         | 10 GB         | 100 GB+              | `project.settings.quota.logical_size_bytes`                                             |
+| Data transfer              | 5 GB           | 50 GB         | Custom               | `project.settings.quota.data_transfer_bytes`                                            |
+| Written data               | 1 GB           | 50 GB         | Custom               | `project.settings.quota.written_data_bytes`                                             |
+| Suspend timeout            | 5 min          | 10 min        | Custom               | `default_endpoint_settings.suspend_timeout_seconds`                                     |
 
 _Example of pricing plans you can implement by configuring Neon quotas._
 
