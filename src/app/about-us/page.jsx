@@ -21,7 +21,7 @@ const AboutUsPage = () => (
     <CTANew
       title="Become a part of our&nbsp;team"
       description="We're looking for people who care deeply about quality to build with us."
-      buttonText="View Open Roles"
+      buttonText="View Open Roles on Databricks Careers Site"
       buttonUrl={LINKS.careers}
     />
   </Layout>
