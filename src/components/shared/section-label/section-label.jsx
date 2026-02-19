@@ -20,10 +20,12 @@ const SectionLabel = ({
   className = '',
   theme = 'black',
   size = 'regular',
+  variant = 'default',
   icon = 'triangle',
   databricks = false,
   children,
 }) => {
+  const isDenseVariant = variant === 'dense';
   let iconNode;
 
   if (databricks) {
@@ -41,7 +43,10 @@ const SectionLabel = ({
       <LabelArrow
         aria-hidden="true"
         focusable="false"
-        className="block h-3.5 w-3 flex-none text-[#FF3621] sm:h-2.5 sm:w-2.5"
+        className={clsx(
+          'block h-3.5 w-3 flex-none text-[#FF3621]',
+          isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'
+        )}
       />
     );
   } else {
@@ -52,15 +57,27 @@ const SectionLabel = ({
         width={12}
         height={14}
         aria-hidden="true"
-        className="sm:h-2.5 sm:w-2.5"
+        className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'}
       />
     );
   }
 
   return (
-    <div className={clsx('flex items-end gap-2 sm:gap-1.5', themeClassName[theme], className)}>
+    <div
+      className={clsx(
+        'flex',
+        isDenseVariant ? 'h-3.5 items-end gap-2 md:h-2.5 md:gap-1.5' : 'items-end gap-2 sm:gap-1.5',
+        !isDenseVariant && themeClassName[theme],
+        className
+      )}
+    >
       {iconNode}
-      <span className={clsx('font-mono font-medium uppercase leading-none', sizeClassName[size])}>
+      <span
+        className={clsx(
+          'font-mono font-medium uppercase leading-none',
+          isDenseVariant ? 'text-xs text-gray-new-80 md:text-[10px]' : sizeClassName[size]
+        )}
+      >
         {children}
       </span>
     </div>
@@ -71,6 +88,7 @@ SectionLabel.propTypes = {
   className: PropTypes.string,
   theme: PropTypes.oneOf(Object.keys(themeClassName)),
   size: PropTypes.oneOf(Object.keys(sizeClassName)),
+  variant: PropTypes.oneOf(['default', 'dense']),
   icon: PropTypes.oneOf(['triangle', 'arrow']),
   databricks: PropTypes.bool,
   children: PropTypes.node.isRequired,

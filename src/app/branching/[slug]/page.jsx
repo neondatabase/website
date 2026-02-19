@@ -67,7 +67,7 @@ const BranchingPage = ({ params }) => {
         <h1 className="text-balance font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-5xl lg:text-[36px] md:text-[32px]">
           {title}
         </h1>
-        <Content className="prose-branching mt-16 lg:mt-12 md:mt-10" content={content} />
+        <Content className="mt-16 lg:mt-12 md:mt-10" content={content} />
       </article>
       <div className="mt-14 md:mt-10">
         <p className="font-regular text-[28px] leading-tight tracking-[-0.05em] md:text-2xl">
