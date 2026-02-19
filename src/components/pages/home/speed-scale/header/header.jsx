@@ -4,7 +4,6 @@ import Button from 'components/shared/button';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 
-
 const Header = () => (
   <div className="pt-60 xl:pt-40 lg:pt-[116px] md:pt-[102px]">
     <div className="max-w-[832px] xl:max-w-[704px] lg:max-w-[480px]">

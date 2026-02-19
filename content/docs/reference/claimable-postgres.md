@@ -1,5 +1,5 @@
 ---
-title: Instagres
+title: Claimable Postgres by Neon
 subtitle: Launch an instant Neon Postgres database with zero configuration
 summary: >-
   How to launch an instant Neon Postgres database with a single API call, which
@@ -8,14 +8,15 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
-updatedOn: '2026-02-17T17:13:56.589Z'
+  - /docs/reference/instagres
+updatedOn: '2026-02-19T15:51:43.477Z'
 ---
 
-Instagres gives you an instant Postgres database with a single API call. No account required.
+Claimable Postgres gives you an instant Postgres database with a single API call. No account required.
 
 Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running Postgres 17.
 
-Access it at [instagres.com](https://instagres.com/) or [pg.new](https://pg.new/).
+Access it at [pg.new](https://pg.new/).
 
 ## Quick start
 
@@ -24,7 +25,7 @@ Access it at [instagres.com](https://instagres.com/) or [pg.new](https://pg.new/
 <TabItem>
 
 ```bash
-curl -X POST https://instagres.com/api/v1/database \
+curl -X POST https://pg.new/api/v1/database \
   -H 'Content-Type: application/json' \
   -d '{"ref": "your-app-name"}'
 ```
@@ -37,7 +38,7 @@ Example response:
   "status": "UNCLAIMED",
   "neon_project_id": "cool-breeze-12345678",
   "connection_string": "postgresql://neondb_owner:npg_xxxx@ep-cool-breeze-pooler...",
-  "claim_url": "https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678",
+  "claim_url": "https://pg.new/claim/01abc123-def4-5678-9abc-def012345678",
   "expires_at": "2026-02-01T12:00:00.000Z",
   "created_at": "2026-01-29T12:00:00.000Z",
   "updated_at": "2026-01-29T12:00:00.000Z"
@@ -92,9 +93,9 @@ After claiming, the database appears in your Neon console with expiration remove
 
 ## API
 
-The Instagres API provides programmatic database provisioning. No authentication required.
+The Claimable Postgres API provides programmatic database provisioning. No authentication required.
 
-**Base URL:** `https://instagres.com/api/v1`
+**Base URL:** `https://pg.new/api/v1`
 
 ### Create database
 
@@ -189,11 +190,11 @@ deno run -A get-db
 **Example output in `.env`:**
 
 ```txt
-# Claimable DB expires at: Sat, 01 Feb 2026 12:00:00 GMT
-# Claim it now to your account: https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678
 DATABASE_URL=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4-pooler.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
 DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
-PUBLIC_INSTAGRES_CLAIM_URL=https://instagres.com/claim/01abc123-def4-5678-9abc-def012345678
+# Claimable DB expires at: Sat, 01 Feb 2026 12:00:00 GMT
+# Claim it now to your account using the link below:
+PUBLIC_POSTGRES_CLAIM_URL=https://pg.new/claim/01abc123-def4-5678-9abc-def012345678
 ```
 
 To claim, visit the URL in the comments above or run `npx get-db claim` to open it in your browser.
@@ -237,7 +238,7 @@ postgres({
 
 ## Resources
 
-- [Instagres website](https://instagres.com/)
+- [Claimable Postgres website](https://pg.new/)
 - [get-db CLI on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db)
 - [Vite Plugin on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
-- [Claimable database integration](/docs/workflows/claimable-database-integration) (build your own Instagres-like experience)
+- [Claimable database integration](/docs/workflows/claimable-database-integration) (build your own claimable Postgres experience)

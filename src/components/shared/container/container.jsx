@@ -25,6 +25,9 @@ const styles = {
     768: 'max-w-3xl',
     640: 'max-w-[640px]',
     576: 'max-w-[576px]',
+
+    // Semantic alias for branching pages.
+    branching: 'max-w-[1216px] 3xl:max-w-[1216px] xl:max-w-full xl:px-8 md:px-8 sm:px-5',
   },
 };
 

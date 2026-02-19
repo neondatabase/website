@@ -59,46 +59,52 @@ const Timeline = () => (
       <div className="no-scrollbars w-full sm:-mx-5 sm:-mt-2 sm:w-screen sm:overflow-x-auto sm:pb-2">
         <div className="relative h-[284px] w-full xl:h-[264px] lg:h-64 md:h-[189px] md:min-w-[545px] sm:mx-5">
           <ol className="grid h-full w-full grid-cols-[repeat(5,minmax(0,243fr))_320fr] xl:grid-cols-[repeat(5,minmax(0,152fr))_200fr] lg:grid-cols-[repeat(5,minmax(0,112fr))_147fr] md:grid-cols-[repeat(5,minmax(0,86fr))_114fr]">
-            {ITEMS.map((item, index) => {
-              const Wrapper = item.link ? Link : 'div';
-              const wrapperProps = item.link ? { to: item.link, isExternal: item.isExternal } : {};
-
-              return (
-                <li
-                  key={index}
+            {ITEMS.map((item, index) => (
+              <li
+                key={index}
+                className={clsx(
+                  '-ml-px border-l border-gray-new-30',
+                  index % 2 === 0 ? 'self-end' : 'self-start'
+                )}
+              >
+                <div
                   className={clsx(
-                    '-ml-px border-l border-gray-new-30',
-                    index % 2 === 0 ? 'self-end' : 'self-start'
+                    'relative flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
+                    index % 2 === 0 && 'justify-end'
                   )}
                 >
-                  <Wrapper
-                    className={clsx(
-                      'flex h-[170px] flex-col gap-y-2.5 pl-[18px] xl:h-40 xl:gap-y-2 xl:pl-4 lg:h-[150px] md:h-[110px] md:gap-y-1.5 md:pl-3.5',
-                      index % 2 === 0 && 'justify-end',
-                      item.link && 'group'
-                    )}
-                    {...wrapperProps}
+                  <time
+                    dateTime={item.dateTime}
+                    className="whitespace-nowrap font-mono text-base font-normal leading-none tracking-extra-tight text-gray-new-50 xl:text-sm md:text-xs"
                   >
-                    <time
-                      dateTime={item.dateTime}
-                      className="whitespace-nowrap font-mono text-base font-normal leading-none tracking-extra-tight text-gray-new-50 no-underline xl:text-sm md:text-xs"
+                    {item.date}
+                  </time>
+                  {item.link ? (
+                    <Link
+                      className={clsx(
+                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                        'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white md:hover:decoration-white/40',
+                        'md:after:absolute md:after:inset-0',
+                        index !== ITEMS.length - 1 && 'whitespace-nowrap'
+                      )}
+                      to={item.link}
+                      isExternal={item.isExternal}
                     >
-                      {item.date}
-                    </time>
+                      {item.title}
+                    </Link>
+                  ) : (
                     <p
                       className={clsx(
                         'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
-                        item.link &&
-                          'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-colors duration-200 group-hover:decoration-white',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}
                     >
                       {item.title}
                     </p>
-                  </Wrapper>
-                </li>
-              );
-            })}
+                  )}
+                </div>
+              </li>
+            ))}
           </ol>
           <Image
             className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8"

@@ -4,7 +4,8 @@ export default {
   blog: '/blog',
   branching: '/branching',
   brand: '/brand',
-  careers: '/careers',
+  careers:
+    'https://www.databricks.com/company/careers/open-positions?department=engineering&location=all&itm_source=www&itm_category=company&itm_page=engineering-at-databricks&itm_location=body&itm_component=hero&itm_offer=open-positions',
   caseStudies: '/case-studies',
   cli: '/cli',
   contactSales: '/contact-sales',
@@ -15,7 +16,7 @@ export default {
   guides: '/guides',
   generateTicket: '/generate-ticket',
   migration: '/migration',
-  partners: '/partners',
+  partners: '/docs/guides/platform-integration-overview',
   postgresqltutorial: '/postgresql/tutorial',
   pricing: '/pricing',
   programsAgents: '/programs/agents',
@@ -111,5 +112,5 @@ export default {
   apiReference: 'https://api-docs.neon.tech/reference/getting-started-with-neon-api',
   bugBounty: 'https://hackerone.com/neon_bbp',
   bookMeeting: 'https://calendly.com/d/cm8j-8yw-fq8',
-  instagres: 'https://pg.new/',
+  claimablePostgres: 'https://pg.new/',
 };
