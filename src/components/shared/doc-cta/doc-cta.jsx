@@ -35,12 +35,12 @@ const DocCta = ({
   <figure
     className={clsx(
       'doc-cta not-prose relative overflow-hidden rounded-none',
-      isIntro ? 'my-12 px-6 py-5 md:my-8' : 'mt-11 px-7 py-6',
+      isIntro ? 'my-12 px-6 py-5 md:my-8' : 'my-9 px-7 py-6',
       'border border-gray-new-90 bg-[#F5FAF8]',
       'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
     )}
   >
-    <div className="pointer-events-none absolute inset-0 overflow-hidden [-webkit-mask-image:url('/images/background-dots-cta.png')] [-webkit-mask-position:right_center] [-webkit-mask-repeat:no-repeat] [-webkit-mask-size:980px_980px] [mask-image:url('/images/background-dots-cta.png')] [mask-position:right_center] [mask-repeat:no-repeat] [mask-size:980px_980px]">
+    <div className="doc-cta-dots-mask mask-[url(/images/background-dots-cta.png)] mask-position-right mask-no-repeat mask-size-[980px_980px] pointer-events-none absolute inset-0 overflow-hidden">
       <div className="absolute inset-0">
         {ELLIPSES.map((ellipseClassName, i) => (
           <div

@@ -57,11 +57,6 @@ const icons = {
   glossary: GlossaryIcon,
 };
 
-const iconStyles = {
-  external: '!size-3.5 ml-1 inline-block align-[-0.125em] shrink-0',
-  glossary: 'ml-1 inline-block align-[-0.125em] shrink-0',
-};
-
 const Link = forwardRef(
   (
     {
@@ -109,7 +104,7 @@ const Link = forwardRef(
         )}
         {Icon && (
           <span className="whitespace-nowrap no-underline">
-            <Icon className={iconStyles[icon]} />
+            <Icon className="ml-1 inline-block !size-3.5 shrink-0 align-[-0.125em]" />
           </span>
         )}
       </>

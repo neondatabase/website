@@ -96,7 +96,7 @@
     }
 
     h2 {
-      @apply text-[28px] font-medium leading-tight tracking-tighter;
+      @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter;
     }
 
     h3 {
@@ -108,7 +108,7 @@
     }
 
     p {
-      @apply my-8 text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
+      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
     }
 
     .admonition h4 {
@@ -141,11 +141,12 @@
     }
 
     ul {
-      @apply pl-[34px] md:pl-4;
+      @apply my-6 pl-[34px] md:pl-4;
 
       > li {
+        @apply text-[18px] font-normal leading-normal text-gray-new-30 dark:text-gray-new-85;
         &::before {
-          @apply absolute -left-4 top-0 text-base font-normal leading-snug text-gray-new-30 content-['-'] dark:text-gray-new-90 md:-left-3.5;
+          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
         }
       }
     }

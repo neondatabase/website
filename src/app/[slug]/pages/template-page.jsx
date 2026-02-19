@@ -52,7 +52,6 @@ const TemplatePage = ({ params }) => {
         >
           <Post content={content} data={data} currentSlug={slug} />
           <Aside
-            className="mt-4"
             tableOfContents={tableOfContents}
             gitHubPath={gitHubPath}
             isTemplate

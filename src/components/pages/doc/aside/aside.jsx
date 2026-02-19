@@ -23,7 +23,7 @@ const Aside = ({
       className={clsx(
         'relative -ml-6 w-full max-w-64 xl:hidden',
         isTemplate
-          ? 'col-span-2 col-start-11 -ml-6 max-w-64 justify-self-end 2xl:col-start-10 2xl:ml-auto'
+          ? 'col-span-2 col-start-11 mt-4 min-w-64 justify-self-end 2xl:col-span-3 2xl:col-start-10 2xl:ml-auto'
           : '',
         className
       )}

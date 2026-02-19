@@ -9,13 +9,13 @@ const LogosSection = ({ logos, logosTitle = 'Powered by Neon.', containerClassNa
   return (
     <div
       className={clsx(
-        'mx-auto my-3.5 flex max-w-3xl items-center gap-10 md:flex-col md:gap-6',
+        'mx-auto flex max-w-3xl items-center gap-4 md:flex-col md:gap-6',
         containerClassName
       )}
     >
-      <p className="w-[206px] text-lg font-medium leading-none tracking-extra-tight text-gray-new-70 lg:text-base md:max-w-full md:text-center">
+      <div className="min-w-[144px] text-base font-normal leading-snug tracking-tight text-black-new dark:text-[#C9CBCF] md:max-w-full md:text-center">
         {logosTitle}
-      </p>
+      </div>
       <LogosWall logos={logos} size="sm" />
     </div>
   );
