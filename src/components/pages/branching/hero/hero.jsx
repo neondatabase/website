@@ -22,7 +22,7 @@ const Hero = () => (
      webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 2 -an -y hero.webm
     */}
 
-    <div className="absolute inset-0 -z-10 mx-auto h-full w-full max-w-[1920px]">
+    <div className="absolute inset-0 -z-10 mx-auto h-full w-full max-w-[1920px] [@media(min-width:1921px)]:[mask-image:linear-gradient(to_right,black_85%,transparent_100%)]">
       <PauseableVideo
         className="relative h-full w-full"
         width={1920}
