@@ -5,9 +5,9 @@ enableTableOfContents: true
 updatedOn: '2026-02-13T00:00:00.000Z'
 ---
 
-## Turn Postgres around: from bottleneck to accelerator
-
 <QuoteBlock quote="Neon fundamentally accelerates our developer experience. It's a huge reason we are able to ship faster without worrying about breaking things" author="ben-vinegar" role="Co-founder at Modem" />
+
+## Turn Postgres around: from bottleneck to accelerator
 
 **Startup teams today are not hiring dedicated DBAs.** Every engineer is busy building features and shipping quickly - they expect databases to adapt to their workflows, not the other way around.
 
