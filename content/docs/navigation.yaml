@@ -887,7 +887,7 @@
 
         - title: Workflows & CI/CD
           icon: branching
-          slug: reference/instagres
+          slug: reference/claimable-postgres
           items:
             - title: Branching with the CLI
               slug: guides/branching-neon-cli
@@ -895,8 +895,8 @@
               slug: guides/branching-neon-api
             - title: Branching with GitHub Actions
               slug: guides/branching-github-actions
-            - title: Instagres
-              slug: reference/instagres
+            - title: Claimable Postgres
+              slug: reference/claimable-postgres
             - title: Terraform
               slug: reference/terraform
             - title: Neon Twin

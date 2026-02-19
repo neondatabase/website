@@ -16,7 +16,7 @@ This guide shows how to deploy a simple Node.js application connected to a Neon 
 
 ## Quick start alternative
 
-If you want to get started quickly with Next.js and Neon Postgres on Railway, you can use the [Next.js with Neon Postgres template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon). This template uses [Instagres](/docs/guides/instagres) to provision a Neon database instantly without signup, perfect for rapid prototyping. The database is claimable for 72 hours, giving you time to develop before claiming it to your Neon account.
+If you want to get started quickly with Next.js and Neon Postgres on Railway, you can use the [Next.js with Neon Postgres template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon). This template uses [Claimable Postgres by Neon](/docs/reference/claimable-postgres) to provision a Neon database instantly without signup, perfect for rapid prototyping. The database is claimable for 72 hours, giving you time to develop before claiming it to your Neon account.
 
 For a more detailed walkthrough using Node.js/Express with manual Neon setup, continue with this guide below.
 
@@ -179,6 +179,6 @@ You can find the source code for the application described in this guide on GitH
 
 - [Railway platform](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon)
 - [Next.js with Neon Postgres Railway template](https://railway.com/deploy/nextjs-with-neon-postgres?utm_medium=integration&utm_source=button&utm_campaign=neon)
-- [Instagres](/docs/guides/instagres)
+- [Claimable Postgres](/docs/reference/claimable-postgres)
 
 <NeedHelp/>
