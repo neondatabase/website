@@ -238,7 +238,7 @@ Without the `org_id` parameter, the project transfers to the user's personal acc
 - **Demo environments** - Create ready-to-use demo databases that prospects can claim
 - **Team environments** - Provision project databases for team members to claim into their organization
 
-For a working implementation of claimable databases, try [Instagres](https://pg.new/). This service demonstrates the complete flow: users receive a Postgres connection string immediately without creating an account, and databases remain active for 72 hours. To retain the database beyond this period, users claim it by creating a Neon account using the provided transfer URL. See the [Instagres documentation](/docs/reference/instagres) for implementation details. This same pattern enables SaaS providers to offer instant database provisioning while allowing users to take ownership when ready.
+For a working implementation of claimable databases, try [Claimable Postgres by Neon](https://pg.new/). This service demonstrates the complete flow: users receive a Postgres connection string immediately without creating an account, and databases remain active for 72 hours. To retain the database beyond this period, users claim it by creating a Neon account using the provided transfer URL. See the [Claimable Postgres documentation](/docs/reference/claimable-postgres) for implementation details. This same pattern enables SaaS providers to offer instant database provisioning while allowing users to take ownership when ready.
 
 ## Troubleshooting
 
