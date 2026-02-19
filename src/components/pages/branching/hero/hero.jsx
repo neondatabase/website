@@ -1,9 +1,7 @@
-// import Image from 'next/image';
-
 import Container from 'components/shared/container';
 import PauseableVideo from 'components/shared/pauseable-video';
 import SectionLabel from 'components/shared/section-label';
-// import background from 'images/pages/branching/bg.png';
+import LINKS from 'constants/links';
 
 const Hero = () => (
   <section className="hero relative min-h-[848px] w-full overflow-hidden border-b border-gray-new-20 pb-20 pt-[104px] xl:min-h-[650px] xl:pb-[136px] xl:pt-20 lg:min-h-[525px] lg:pb-[88px] lg:pt-16 md:min-h-[509px] md:pb-20 md:pt-12">
@@ -18,6 +16,12 @@ const Hero = () => (
       </p>
     </Container>
 
+    {/*
+     Video optimization parameters:
+     mp4: ffmpeg -i input.mov -c:v libx265 -crf 32 -pix_fmt yuv420p10le -vf "scale=2560:-2,unsharp=3:3:2.5:3:3:0.8" -preset veryslow -x265-params "tune=animation:deblock=-1,-1" -tag:v hvc1 -movflags faststart -an hero.mp4
+     webm: ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 1 -an -f null /dev/null && ffmpeg -i input.mov -c:v libsvtav1 -pix_fmt yuv420p10le -b:v 1140k -vf scale=2560:-2:flags=lanczos,unsharp=3:3:2.5:3:3:0.8 -svtav1-params preset=4:lookahead=120:keyint=80:tune=0:sharpness=7:film-grain-denoise=0 -pass 2 -an -y hero.webm
+    */}
+
     <div className="absolute inset-0 -z-10 mx-auto h-full w-full max-w-[1920px]">
       <PauseableVideo
         className="relative h-full w-full"
@@ -25,8 +29,14 @@ const Hero = () => (
         height={848}
         videoClassName="h-full w-full object-cover"
       >
-        <source src="/videos/pages/branching/branching.mp4" type="video/mp4" />
-        <source src="/videos/pages/branching/branching.webm" type="video/webm" />
+        <source
+          src={`${LINKS.cdn}/public/pages/branching/hero/branching-anim.mp4`}
+          type="video/mp4"
+        />
+        <source
+          src={`${LINKS.cdn}/public/pages/branching/hero/branching-anim.webm`}
+          type="video/webm"
+        />
       </PauseableVideo>
     </div>
   </section>
