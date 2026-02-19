@@ -8,6 +8,7 @@ const styles = {
     md: 'max-w-[1760px] 3xl:max-w-[1472px] 2xl:max-w-[1216px] xl:max-w-[936px]',
     medium: 'max-w-[1472px] 2xl:px-10',
     sm: 'max-w-[1460px] 2xl:max-w-[1216px] xl:max-w-[936px]',
+    small: 'max-w-[1344px] px-8',
     xs: 'max-w-[860px]',
     xxs: 'max-w-[704px] md:px-5',
     1920: 'max-w-[1856px] px-8',

@@ -6,11 +6,10 @@ import Hero from 'components/pages/variable/hero';
 import Load from 'components/pages/variable/load';
 import Unique from 'components/pages/variable/unique';
 import Container from 'components/shared/container';
-import Cta from 'components/shared/cta';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SidebarCta from 'components/shared/sidebar-cta';
 import TableOfContents from 'components/shared/table-of-contents';
-import LINKS from 'constants/links';
 import SEO_DATA from 'constants/seo-data';
 import getMetadata from 'utils/get-metadata';
 
@@ -61,13 +60,12 @@ const VariableLoadPage = async () => {
             </div>
           </div>
         </Container>
-        <Cta
-          className="pb-[240px] pt-[340px] lg:pb-32 lg:pt-52 sm:pb-[110px]"
-          title="Ask us for a<br> price estimation"
-          description="Start saving with Neon"
-          buttonClassName="mt-9 h-12 w-[201px] lg:mt-7 lg:h-11 lg:w-[186px] lg:text-sm md:mt-4.5 md:h-10 md:w-[183px]"
-          buttonText="Contact us"
-          buttonUrl={LINKS.contactSales}
+        <CTANew
+          label="ASK AI"
+          title="Still have questions? Ask our AI. <br class='xs:hidden' />"
+          description="It knows Neon inside and out."
+          buttonText="Get Answers"
+          buttonType="aiHelper"
         />
       </div>
     </Layout>

@@ -7,7 +7,7 @@ summary: >-
   Covers the setup of Neon as an Azure Native Service, detailing pricing plans,
   billing through Azure Marketplace, and the transition from deprecated
   Azure-managed organizations to Neon-managed organizations.
-updatedOn: '2026-02-15T20:51:54.212Z'
+updatedOn: '2026-02-19T02:27:13.544Z'
 ---
 
 <Admonition type="important" title="deprecated">
@@ -39,10 +39,6 @@ Neon pricing plans include allowances for compute, storage, and projects. If you
 Azure Marketplace users are currently on legacy Neon plans. Neon's latest [pricing plans](/docs/introduction/plans) will be introduced on Azure at a later date.
 </Admonition>
 
-## Enterprise plan support on Azure
-
-Neon's **Enterprise Plan** is designed for large teams with unique requirements that aren't covered by Neon's self-serve plans. For details, see the [Enterprise Plan](/docs/introduction/plans#enterprise). To explore this option, contact our [Sales](/contact-sales) team to discuss a custom private offer available through the Azure Marketplace.
-
 ## Microsoft Azure Consumption Commitment (MACC)
 
 As an Azure Benefit Eligible partner on Azure Marketplace, Neon Postgres purchases made through the Azure Marketplace contribute towards your Microsoft Azure Consumption Commitment (MACC). This means that any spending on Neon Postgres through Azure Marketplace will help fulfill your organization's committed Azure spend.
@@ -71,7 +67,3 @@ Changing the Neon pricing plan for an Azure subscription involves the following 
 ## Stop billing on Azure
 
 To stop billing for Neon on Azure, you can remove your Neon resource. For instructions, see [Deleting a Neon resource in Azure](/docs/azure/azure-manage#deleting-a-neon-resource-in-azure).
-
-## Questions?
-
-If you have questions or need further guidance regarding billing through Azure Marketplace, please [reach out to us](/contact-sales).

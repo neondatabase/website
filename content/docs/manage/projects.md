@@ -8,7 +8,7 @@ summary: >-
   branches, databases, roles, and computes within each project workspace.
 redirectFrom:
   - /docs/get-started/projects
-updatedOn: '2026-02-15T20:51:54.241Z'
+updatedOn: '2026-02-19T02:27:13.547Z'
 ---
 
 In Neon, the project is your main workspace. Within a project, you create branches for different workflows, like environments, features, or previews. Each branch contains its own databases, roles, computes, and replicas. Your [Neon Plan](/docs/introduction/plans) determines how many projects you can create and the resource limits within those projects.
@@ -21,7 +21,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [contact the Neon Sales team](/contact-sales).
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
 
 ## Create a project
 
@@ -37,7 +37,7 @@ To create a Neon project:
 After creating a project, you are directed to the **Project Dashboard**.
 
 <Admonition type="tip">
-You can also use [pg.new](https://pg.new) to create a new Neon Postgres project. Simply visit [pg.new](https://pg.new) and you'll be taken directly to the **Create project** page where you can create your new project.
+You can also use [neon.new](https://neon.new) to create a new Neon Postgres project. Simply visit [neon.new](https://neon.new) and you'll be taken directly to the **Create project** page where you can create your new project.
 </Admonition>
 
 ## View projects

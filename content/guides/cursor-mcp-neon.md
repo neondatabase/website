@@ -42,7 +42,7 @@ You have two options for connecting Cursor to the Neon MCP Server:
 Before you begin, ensure you have the following:
 
 1. **Cursor Editor:** Download and install Cursor from [cursor.com](https://cursor.com).
-2. **A Neon Account and Project:** You'll need a Neon account and a project. You can quickly create a new Neon project here [pg.new](https://pg.new)
+2. **A Neon Account and Project:** You'll need a Neon account and a project. You can quickly create a new Neon project here [neon.new](https://neon.new)
 3. **Neon API Key (for Local MCP server):** After signing up, get your Neon API Key from the [Neon console](https://console.neon.tech/app/settings/api-keys). This API key is needed to authenticate your application with Neon. For instructions, see [Manage API keys](/docs/manage/api-keys).
 
    <Admonition type="important" title="Neon API Key Security">

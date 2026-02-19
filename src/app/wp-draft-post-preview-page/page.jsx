@@ -9,8 +9,8 @@ import Benefits from 'components/pages/landing/benefits';
 import Hero from 'components/pages/landing/hero';
 import Container from 'components/shared/container';
 import Content from 'components/shared/content';
-import SharedCTA from 'components/shared/cta';
 import CTAGasStation from 'components/shared/cta-gas-station';
+import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SplitViewGrid from 'components/shared/split-view-grid';
 import benefitsCommunityIcon from 'icons/landing/benefits/community.svg';
@@ -130,9 +130,9 @@ const WpPageDraft = async ({ searchParams }) => {
       landingcta: ({ ...props }) => {
         if (isAzurePage) {
           return (
-            <SharedCTA
+            <CTANew
               className="mt-[70px] py-[250px] xl:mt-14 xl:py-[184px] lg:mt-12 lg:py-[130px] md:mt-8 md:py-[105px]"
-              descriptionClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
+              copyWrapperClassName="xl:max-w-[704px] lg:max-w-lg md:max-w-md"
               {...props}
             />
           );

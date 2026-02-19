@@ -12,8 +12,6 @@
           slug: get-started/dev-experience
         - title: Built to scale
           slug: get-started/built-to-scale
-        - title: Use cases
-          slug: use-cases/use-cases-overview
 
     - section: Start with Neon
       icon: start
@@ -539,6 +537,8 @@
                   slug: ai/ai-rules
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
+                - title: Cursor plugin
+                  slug: ai/ai-cursor-plugin
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
                 - title: Neon Auth
@@ -1401,6 +1401,8 @@
           slug: community/component-architecture
         - title: AI tools for documentation
           slug: community/ai-tools
+        - title: Using docs as Markdown (LLMs)
+          slug: community/llms-markdown-guide
     - title: Glossary
       slug: reference/glossary
       icon: glossary
@@ -1434,6 +1436,8 @@
           slug: guides/consumption-limits
         - title: Query consumption metrics
           slug: guides/consumption-metrics
+        - title: Query consumption metrics (legacy)
+          slug: guides/consumption-metrics-legacy
 
     - section: Neon for AI Agents
       icon: ai-agent

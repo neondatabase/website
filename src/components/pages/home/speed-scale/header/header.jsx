@@ -1,14 +1,15 @@
 import clsx from 'clsx';
 
 import Button from 'components/shared/button';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
-
-import HeadingLabel from '../../heading-label';
 
 const Header = () => (
   <div className="pt-60 xl:pt-40 lg:pt-[116px] md:pt-[102px]">
     <div className="max-w-[832px] xl:max-w-[704px] lg:max-w-[480px]">
-      <HeadingLabel className="mb-5 lg:mb-[18px] md:mb-4">Agent platform</HeadingLabel>
+      <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4">
+        Agent platform
+      </SectionLabel>
       <h2 className="text-[80px] leading-none tracking-tighter xl:text-[72px] lg:text-[52px] md:text-[36px]">
         Speed and scale for agents. And devs.
       </h2>

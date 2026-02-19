@@ -23,7 +23,7 @@ By the end of this guide, you'll have a fully functional Metabase setup connecte
 
 To follow along with this guide, you'll need the following:
 
-- **Neon account and project:** A Neon account with a project containing a running Postgres database. You can create one at [pg.new](https://pg.new).
+- **Neon account and project:** A Neon account with a project containing a running Postgres database. You can create one at [neon.new](https://neon.new).
 - **Metabase instance:** You can use [Metabase Cloud](https://www.metabase.com/cloud/), run Metabase locally via [Docker](/docs/guides/metabase-neon#option-2-run-metabase-locally), or deploy to your preferred hosting platform. This guide covers both Metabase Cloud and local Docker setups.
 
 <Admonition type="important" title="Latency Considerations">

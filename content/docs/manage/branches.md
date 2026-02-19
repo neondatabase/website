@@ -8,7 +8,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/get-started/get-started-branching
-updatedOn: '2026-02-15T20:51:54.227Z'
+updatedOn: '2026-02-19T02:27:13.546Z'
 ---
 
 Data resides in a branch. Each Neon project is created with a [root branch](#root-branch), which is also designated as your [default branch](#default-branch). Projects created in the Neon Console have a root branch named `production`, while projects created via the API or CLI have a root branch named `main`. You can create child branches from your root branch or from previously created branches. A branch can contain multiple databases and roles. Neon's [plan allowances](/docs/introduction/plans) define the number of branches you can create.
@@ -219,7 +219,7 @@ The query value may differ slightly from the **Data size** reported in the Neon 
 Data size is your logical data size.
 
 <Admonition type="note">
-Paid plans support a logical data size of up to **16 TB per branch**. To increase this limit, [contact Sales](/contact-sales).
+Paid plans support a logical data size of up to **16 TB per branch**. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
 </Admonition>
 
 ## Branch types

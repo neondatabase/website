@@ -678,17 +678,11 @@ const AutoscalingChart = ({
   };
 
   return (
-    <div
-      ref={containerRef}
-      className={clsx(
-        'text-gray-200 not-prose',
-        width === 'window' ? 'relative left-[50%] z-10 w-[90vw] -translate-x-1/2' : 'w-full'
-      )}
-    >
+    <div ref={containerRef} className={clsx('text-gray-200 not-prose w-full')}>
       <div className="border border-gray-new-30 bg-gray-new-8">
         <div className={clsx(compact ? 'p-6' : 'p-8')}>
           {/* Header with controls */}
-          <div className="relative mb-4">
+          <div className="mb-4 flex flex-col gap-3">
             <h1
               className={clsx(
                 'text-center font-mono font-medium text-white',
@@ -699,7 +693,7 @@ const AutoscalingChart = ({
               {displayTitle}
             </h1>
             {!autoscalingOnly && showOverprovisionSelector && (
-              <div className="absolute right-0 top-0 flex items-center gap-2.5 sm:relative">
+              <div className="flex items-center justify-center gap-2.5">
                 <select
                   value={provisioningStrategy}
                   className="border-gray-700 bg-gray-800 text-gray-200 hover:border-gray-600 hover:bg-gray-700 border px-4 py-2 font-mono text-sm transition-all focus:border-[#73bf69] focus:outline-none"

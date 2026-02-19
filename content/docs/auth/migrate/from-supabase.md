@@ -6,7 +6,7 @@ summary: >-
   transition of authentication and database access using Neon Auth and Data API,
   including necessary SDK installations and environment variable updates.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.760Z'
+updatedOn: '2026-02-16T13:08:22.365Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -33,7 +33,7 @@ Replace the Supabase SDK with Neon's:
 
 ```bash filename="Terminal"
 npm uninstall @supabase/supabase-js
-npm install @neondatabase/neon-js
+npm install @neondatabase/neon-js@latest
 ```
 
 ## Update environment variables

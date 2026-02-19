@@ -5,7 +5,7 @@ summary: >-
   Step-by-step guide for integrating Azure Blob Storage with Neon to store files
   and track their metadata in the Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.127Z'
+updatedOn: '2026-02-17T17:13:56.576Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
@@ -18,7 +18,7 @@ This guide demonstrates how to integrate Azure Blob Storage with Neon by storing
 
 ## Create a Neon project
 
-1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Azure account, storage account, and container

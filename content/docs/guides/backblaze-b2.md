@@ -6,7 +6,7 @@ summary: >-
   track metadata in your Neon database, enabling efficient management of
   unstructured data.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.128Z'
+updatedOn: '2026-02-17T17:13:56.578Z'
 ---
 
 [Backblaze B2 Cloud Storage](https://www.backblaze.com/cloud-storage) is an S3-compatible object storage service known for its affordability and ease of use. It's suitable for storing large amounts of unstructured data like backups, archives, images, videos, and application assets.
@@ -19,7 +19,7 @@ This guide demonstrates how to integrate Backblaze B2 with Neon by storing file 
 
 ## Create a Neon project
 
-1.  Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1.  Navigate to [neon.new](https://neon.new) to create a new Neon project.
 2.  Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create a Backblaze account and B2 bucket

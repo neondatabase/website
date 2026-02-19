@@ -246,7 +246,7 @@ export default {
         title: 'Support Plans',
       },
       free: 'Community (Discord)',
-      launch: 'Standard (Billing issues)',
+      launch: 'Billing Support',
       scale: "<a href='/docs/introduction/support'>Multiple options</a>",
     },
   ],

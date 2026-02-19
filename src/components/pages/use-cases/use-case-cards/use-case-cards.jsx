@@ -79,7 +79,7 @@ const UseCaseCard = ({
     >
       {/* Decorative dots pattern (right side) */}
       <div
-        className="pointer-events-none absolute right-2 top-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:bottom-2 md:top-auto md:h-[296px] md:w-[312px]"
+        className="pointer-events-none absolute right-2 top-2 aspect-square h-full lg:h-[328px] lg:w-[312px] md:top-2 md:h-[296px] md:w-[312px]"
         style={{
           maskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
           WebkitMaskImage: 'linear-gradient(224deg, #000 0%, rgba(0, 0, 0, 0) 41.2%)',
@@ -169,7 +169,7 @@ const UseCaseCard = ({
         {testimonial && (
           <div className="mt-auto">
             <blockquote
-              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-[#1F805C] [&_mark]:text-inherit [&_p]:inline"
+              className="font-mono text-lg leading-snug tracking-extra-tight text-gray-new-80 before:content-['“'] after:content-['”'] lg:text-base md:text-[0.9375rem] [&_mark]:bg-green-52/60 [&_mark]:px-1 [&_mark]:pb-px [&_mark]:text-white [&_p]:inline"
               dangerouslySetInnerHTML={{ __html: testimonial.quote }}
             />
             <p className="mt-3.5 text-[0.9375rem] leading-snug tracking-extra-tight text-gray-new-70 md:mt-3 md:text-sm">
