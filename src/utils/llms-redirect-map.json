@@ -461,7 +461,7 @@
   "reference-compatibility.txt": "/docs/reference/compatibility.md",
   "reference-feeds.txt": "/docs/reference/feeds.md",
   "reference-glossary.txt": "/docs/reference/glossary.md",
-  "reference-instagres.txt": "/docs/reference/instagres.md",
+  "reference-instagres.txt": "/docs/reference/claimable-postgres.md",
   "reference-javascript-sdk.txt": "/docs/reference/javascript-sdk.md",
   "reference-metrics-logs.txt": "/docs/reference/metrics-logs.md",
   "reference-neon-cli.txt": "/docs/reference/neon-cli.md",
