@@ -92,7 +92,7 @@ export default {
             },
             {
               title: 'Database per user',
-              to: `${LINKS.useCases}/db-per-user`,
+              to: `${LINKS.useCases}/database-per-user`,
               description: 'Provision isolated Postgres at massive scale',
             },
           ],

@@ -83,7 +83,7 @@ Branches make it practical to give every developer - and every PR - its own data
 
 As teams scale, promotion becomes harder. Multiple developers, multiple branches, multiple schema changes - all converging on production. Neon supports promotion workflows built on branching and snapshots. Teams can validate changes in isolated branches, promote them intentionally, and keep a rollback point ready in case something goes wrong. [Keep reading](https://neon.com/branching/advanced-branching-workflows)
 
-![Promote validated changes from development to production safely](/use-cases/fast-dev-workflows/safe-promotion-workflow-dev-to-prod.png)
+![Promote validated changes from development to production safely](/use-cases/fast-dev-workflows/instant-recovery-with-branches-and-snapshots.png)
 
 **Let automation take over**
 
@@ -101,7 +101,7 @@ All of these workflows are designed to be automated from day one:
 
 Moving fast means mistakes happen - a bad migration, a dropped column. Neon is built so recovery is not an emergency procedure but part of the normal workflow.
 
-![Instant recovery using Neon branches and snapshots](/use-cases/fast-dev-workflows/instant-recovery-with-branches-and-snapshots.png)
+![Instant recovery using Neon branches and snapshots](/use-cases/fast-dev-workflows/safe-promotion-workflow-dev-to-prod.png)
 
 - **Branching and snapshots instead of dump-and-restore panic.** Traditional recovery means finding the right backup, restoring it somewhere, repointing apps, hoping nothing else breaks in the process. With Neon, recovery is built on the same primitives you already use for development: branches and snapshots. You can create a snapshot of a branch at any point in time, and restore from it instantly. [Keep reading](https://neon.com/docs/guides/backup-restore)
 - **Fix mistakes in seconds, not hours.** Because restores are instant, teams do not have to choose between speed and safety.
