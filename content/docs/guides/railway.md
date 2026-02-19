@@ -7,7 +7,7 @@ summary: >-
   Postgres database on Railway, including prerequisites and setup instructions
   for both quick start and manual configurations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.035Z'
+updatedOn: '2026-02-19T15:51:43.472Z'
 ---
 
 [Railway](https://railway.com?utm_medium=integration&utm_source=button&utm_campaign=neon) is a cloud deployment platform that allows users to deploy anything, anywhere, seamlessly. On Railway, develop locally, connect to a repository or image, and have infrastructure provisioned automatically. Railway integrates with GitHub for continuous deployment and supports a variety of programming languages and frameworks.
