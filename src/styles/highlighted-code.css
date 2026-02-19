@@ -18,13 +18,13 @@
   .dark {
     --shiki-color-text: #ffffff;
     --shiki-color-background: transparent;
-    --shiki-token-constant: #f6558c;
+    --shiki-token-constant: #94b5f7;
     --shiki-token-string: #47d18c;
     --shiki-token-comment: #b3b3b3;
-    --shiki-token-keyword: #66a3ff;
+    --shiki-token-keyword: #34d59a;
     --shiki-token-parameter: #ff990a;
-    --shiki-token-function: #47d18c;
-    --shiki-token-string-expression: #47d18c;
+    --shiki-token-function: #f7b983;
+    --shiki-token-string-expression: #ffed9c;
     --shiki-token-punctuation: #ffffff;
     --shiki-token-link: #47d18c;
     --shiki-token-operator: #ba8c5e;

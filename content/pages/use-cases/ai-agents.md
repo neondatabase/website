@@ -19,7 +19,7 @@ image: '/images/social-previews/use-cases/ai-agents.jpg'
 
 <ProgramForm type="agent" />
 
-**[Learn more about the Neon Agent Plan](https://neon.com/programs/agents#agent-plan-pricing) >**
+**[Learn more about the Neon Agent Plan](https://neon.com/programs/agents#agent-plan-pricing)**
 
 <QuoteBlock quote="The combination of flexible resource limits and nearly instant database provisioning made Neon a no-brainer." author="lincoln-bergeson" role="Infrastructure Engineer at Replit" />
 

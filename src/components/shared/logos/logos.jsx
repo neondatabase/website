@@ -125,7 +125,7 @@ const LogosWall = ({ className, logoClassName, logos, size = 'lg', staticDesktop
           const Logo = allLogos[logo];
           if (!Logo) return null;
           return (
-            <li key={index} className="before:!content-none">
+            <li key={index} className="!m-0 before:!content-none">
               <Logo className={clsx('w-auto', sizes[size], logoClassName)} />
             </li>
           );

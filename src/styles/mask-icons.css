@@ -119,4 +119,12 @@
     -webkit-mask-size: 12px 12px;
     @apply mask-styles;
   }
+
+  /* Used in /src/components/shared/doc-cta/doc-cta.jsx */
+  .doc-cta-dots-mask {
+    -webkit-mask-image: url('/images/background-dots-cta.png');
+    -webkit-mask-position: right center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 980px 980px;
+  }
 }

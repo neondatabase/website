@@ -216,7 +216,6 @@ const Content = ({
   <div
     className={clsx(
       'prose-doc post-content prose dark:prose-invert xs:prose-code:break-words',
-      isTemplate && 'prose-template',
       className
     )}
   >
