@@ -1,8 +1,9 @@
 ---
 title: Automate branching with CircleCI
-subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres branches for every CI pipeline run
+subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres
+  branches for every CI pipeline run
 enableTableOfContents: true
-updatedOn: '2026-02-15T00:00:00.000Z'
+updatedOn: '2026-02-20T13:57:07.031Z'
 ---
 
 Managing database state in CI pipelines is a common source of flakiness. When multiple builds share a single database, tests can collide, and failures become difficult to reproduce. Ideally, every pipeline run should get a fresh, isolated database provisioned automatically and cleaned up when it's done.
