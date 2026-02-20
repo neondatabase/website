@@ -897,8 +897,6 @@
               slug: guides/branching-github-actions
             - title: Branching with CircleCI
               slug: guides/branching-circleci
-            - title: Instagres
-              slug: reference/instagres
             - title: Claimable Postgres
               slug: reference/claimable-postgres
             - title: Terraform
