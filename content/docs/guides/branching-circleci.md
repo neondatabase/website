@@ -22,20 +22,21 @@ To allow CircleCI to communicate with Neon, configure your Neon credentials as e
 
 1. In CircleCI, navigate to **Project Settings** > **Environment Variables**.
 2. Add the following variables:
- - `NEON_API_KEY`: Your Neon API key.
- - `NEON_PROJECT_ID`: The ID of your Neon project.
- ![CircleCI environment variable configuration](/docs/guides/circleci-env-vars.png)
+
+- `NEON_API_KEY`: Your Neon API key.
+- `NEON_PROJECT_ID`: The ID of your Neon project.
+  ![CircleCI environment variable configuration](/docs/guides/circleci-env-vars.png)
 
 ## Available jobs and commands
 
 The Neon orb provides the following pre-configured jobs and commands to manage Neon branches in your CircleCI pipelines:
 
-| Component | Type | Description |
+| Component            | Type    | Description                                                                                              |
 | :------------------- | :------ | :------------------------------------------------------------------------------------------------------- |
-| `neon/run_tests` | Job | Creates (or reuses) a branch, runs migrations/tests, and deletes the branch. Best for standard CI flows. |
-| `neon/create_branch` | Command | Creates a branch and exports connection variables. |
-| `neon/delete_branch` | Command | Deletes a branch. |
-| `neon/reset_branch` | Command | Resets a branch to the parent's latest state. Useful for persistent staging environments. |
+| `neon/run_tests`     | Job     | Creates (or reuses) a branch, runs migrations/tests, and deletes the branch. Best for standard CI flows. |
+| `neon/create_branch` | Command | Creates a branch and exports connection variables.                                                       |
+| `neon/delete_branch` | Command | Deletes a branch.                                                                                        |
+| `neon/reset_branch`  | Command | Resets a branch to the parent's latest state. Useful for persistent staging environments.                |
 
 ## The `neon/run_tests` job
 
@@ -155,19 +156,19 @@ The Orb provides the following commands for building custom workflows.
 
 Creates a new database branch. This command waits for the branch to be active ("ready") and exports the connection details to the environment.
 
-| Input | Type | Default | Description |
+| Input              | Type         | Default             | Description                                                                                                          |
 | :----------------- | :----------- | :------------------ | :------------------------------------------------------------------------------------------------------------------- |
-| `api_key` | env_var_name | `NEON_API_KEY` | Environment variable name containing the Neon API key. |
-| `project_id` | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID. |
-| `parent_branch` | string | _project default_ | The parent branch name or ID to fork from. |
-| `branch_name` | string | _generated_ | Custom branch name. If empty, defaults to `CIRCLE_PIPELINE_NUM` (and includes `CIRCLE_NODE_INDEX` in parallel jobs). |
-| `role` | string | `neondb_owner` | The role to use for the connection. |
-| `database` | string | `neondb` | Database name in connection strings. |
-| `password` | string | _retrieved via API_ | Password for the role. Required if role passwords are not stored in Neon. |
-| `ttl_seconds` | integer | `3600` | Branch lifespan in seconds. Set `0` to disable auto-expiry. |
-| `schema_only` | boolean | `false` | Creates a schema-only branch when enabled. |
-| `get_auth_url` | boolean | `false` | Exports `NEON_AUTH_URL` when Neon Auth is enabled for the branch. |
-| `get_data_api_url` | boolean | `false` | Exports `NEON_DATA_API_URL` when Data API is enabled for the branch/database. |
+| `api_key`          | env_var_name | `NEON_API_KEY`      | Environment variable name containing the Neon API key.                                                               |
+| `project_id`       | env_var_name | `NEON_PROJECT_ID`   | Environment variable name containing the Neon project ID.                                                            |
+| `parent_branch`    | string       | _project default_   | The parent branch name or ID to fork from.                                                                           |
+| `branch_name`      | string       | _generated_         | Custom branch name. If empty, defaults to `CIRCLE_PIPELINE_NUM` (and includes `CIRCLE_NODE_INDEX` in parallel jobs). |
+| `role`             | string       | `neondb_owner`      | The role to use for the connection.                                                                                  |
+| `database`         | string       | `neondb`            | Database name in connection strings.                                                                                 |
+| `password`         | string       | _retrieved via API_ | Password for the role. Required if role passwords are not stored in Neon.                                            |
+| `ttl_seconds`      | integer      | `3600`              | Branch lifespan in seconds. Set `0` to disable auto-expiry.                                                          |
+| `schema_only`      | boolean      | `false`             | Creates a schema-only branch when enabled.                                                                           |
+| `get_auth_url`     | boolean      | `false`             | Exports `NEON_AUTH_URL` when Neon Auth is enabled for the branch.                                                    |
+| `get_data_api_url` | boolean      | `false`             | Exports `NEON_DATA_API_URL` when Data API is enabled for the branch/database.                                        |
 
 **Outputs:**
 
@@ -184,11 +185,11 @@ Creates a new database branch. This command waits for the branch to be active ("
 
 Deletes a Neon branch. This is typically used in the final step of a job to clean up resources.
 
-| Input | Type | Default | Description |
+| Input        | Type         | Default           | Description                                                                                  |
 | :----------- | :----------- | :---------------- | :------------------------------------------------------------------------------------------- |
-| `api_key` | env_var_name | `NEON_API_KEY` | Environment variable name containing the Neon API key. |
-| `project_id` | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID. |
-| `branch_id` | string | `$NEON_BRANCH_ID` | The branch ID to delete. If omitted, the command uses `NEON_BRANCH_ID` from `create_branch`. |
+| `api_key`    | env_var_name | `NEON_API_KEY`    | Environment variable name containing the Neon API key.                                       |
+| `project_id` | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID.                                    |
+| `branch_id`  | string       | `$NEON_BRANCH_ID` | The branch ID to delete. If omitted, the command uses `NEON_BRANCH_ID` from `create_branch`. |
 
 If the branch is already gone (for example, expired via TTL), delete returns a safe no-op instead of failing.
 
@@ -198,12 +199,12 @@ Resets a branch to the latest state of its parent. This is useful for long-lived
 
 Unlike `neon/create_branch`, this command does not export a `DATABASE_URL`. It also does not support options like `role`, `database`, `password`, `schema_only`, `get_auth_url`, or `get_data_api_url`. You must ensure your job has access to the connection details for the target branch (e.g., via CircleCI context or project environment variables).
 
-| Input | Type | Default | Description |
+| Input           | Type         | Default           | Description                                               |
 | :-------------- | :----------- | :---------------- | :-------------------------------------------------------- |
-| `api_key` | env_var_name | `NEON_API_KEY` | Environment variable name containing the Neon API key. |
-| `project_id` | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID. |
-| `branch_id` | string | - | Required. Branch ID or branch name to reset. |
-| `parent_branch` | string | _original parent_ | Optional parent branch name or ID to reset from. |
+| `api_key`       | env_var_name | `NEON_API_KEY`    | Environment variable name containing the Neon API key.    |
+| `project_id`    | env_var_name | `NEON_PROJECT_ID` | Environment variable name containing the Neon project ID. |
+| `branch_id`     | string       | -                 | Required. Branch ID or branch name to reset.              |
+| `parent_branch` | string       | _original parent_ | Optional parent branch name or ID to reset from.          |
 
 ### Example: Custom job configuration
 
