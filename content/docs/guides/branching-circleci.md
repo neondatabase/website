@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T00:00:00.000Z'
 ---
 
-The **Neon CircleCI Orb** provisions a real Neon Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues. 
+The **Neon CircleCI Orb** provisions a real Neon Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
 
 Each run gets an isolated, ephemeral branch; you can branch from a pre-migrated parent to skip running migrations from scratch, and the orb handles cleanup and TTL so tests stay deterministic and parallel jobs never share state. This guide covers the `neon/run_tests` job and the `neon/create_branch`, `neon/delete_branch`, and `neon/reset_branch` commands.
 
