@@ -42,7 +42,7 @@ To allow CircleCI to communicate with Neon, you must configure your Neon credent
 
 ## Configuring pipeline triggers
 
-To ensure your CircleCI pipeline runs only for pull requests and not for direct pushes to the main branch, configure the pipeline trigger settings:
+To configure when your CircleCI pipeline runs, set the pipeline trigger settings:
 
 1. In CircleCI, navigate to **Project Settings** > **Pipelines**.
 2. Under the **Triggers** section, select the trigger condition.
@@ -50,7 +50,13 @@ To ensure your CircleCI pipeline runs only for pull requests and not for direct 
 
 ![CircleCI pipeline trigger configuration](/docs/guides/circleci-pipeline-trigger-settings.png)
 
-This configuration ensures Neon branches are created only for PR workflows, reducing unnecessary pipeline runs and optimizing costs. Each pull request gets a fresh branch for migrations and tests without affecting the main branch or other PRs.
+This configuration triggers the pipeline for:
+
+- Pull requests (when opened or pushed to)
+- Direct pushes to the default branch
+- Tag pushes
+
+Each pipeline run creates a fresh Neon branch, ensuring isolated database environments for tests. PR workflows get dedicated branches without affecting the main branch or other PRs.
 
 ## Available jobs and commands
 
