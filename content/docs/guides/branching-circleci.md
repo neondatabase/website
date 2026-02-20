@@ -35,9 +35,22 @@ To allow CircleCI to communicate with Neon, you must configure your Neon credent
 
 1. In CircleCI, navigate to **Project Settings** > **Environment Variables**.
 2. Add the following variables:
-   - `NEON_API_KEY`: Your Neon API key.
-   - `NEON_PROJECT_ID`: The ID of your Neon project.
-     ![CircleCI environment variable configuration](/docs/guides/circleci-env-vars.png)
+
+- `NEON_API_KEY`: Your Neon API key.
+- `NEON_PROJECT_ID`: The ID of your Neon project.
+  ![CircleCI environment variable configuration](/docs/guides/circleci-env-vars.png)
+
+## Configuring pipeline triggers
+
+To ensure your CircleCI pipeline runs only for pull requests and not for direct pushes to the main branch, configure the pipeline trigger settings:
+
+1. In CircleCI, navigate to **Project Settings** > **Pipelines**.
+2. Under the **Triggers** section, select the trigger condition.
+3. Set it to **"PR opened or pushed to, default branch and tag pushes"**.
+
+![CircleCI pipeline trigger configuration](/docs/guides/circleci-pipeline-trigger-settings.png)
+
+This configuration ensures Neon branches are created only for PR workflows, reducing unnecessary pipeline runs and optimizing costs. Each pull request gets a fresh branch for migrations and tests without affecting the main branch or other PRs.
 
 ## Available jobs and commands
 
@@ -224,7 +237,8 @@ jobs:
           name: Run Tests
           command: npm test
 
-      - neon/delete_branch
+      - neon/delete_branch:
+          when: always  # Ensure branch is deleted even if tests fail
 
 workflows:
   main:
