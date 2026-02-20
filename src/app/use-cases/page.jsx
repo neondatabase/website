@@ -28,7 +28,7 @@ const transformUseCasesData = (items) =>
       link: item.useCase?.link?.url,
       logo: caseStudyPost?.logo,
       testimonial: {
-        quote: caseStudyPost?.quote?.trim() || '',
+        quote: caseStudyPost?.quote.trim() || '',
         author: `${caseStudyPost.author?.name}${caseStudyPost.author?.post ? ` – ${caseStudyPost.author.post}` : ''}`,
         caseStudyLink: getCaseStudyLink(caseStudyPost),
       },
