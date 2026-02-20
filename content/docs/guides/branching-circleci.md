@@ -11,6 +11,15 @@ The Neon CircleCI Orb solves this problem by leveraging Neon’s branching capab
 
 This approach replaces slow, flaky shared testing databases with instant, copy-on-write branches that scale to zero when not in use.
 
+<Admonition type="note">
+This orb is not maintained or officially supported by Neon. Use at your own discretion. If you have questions or face any issues, please contact the maintainer by raising an issue in the GitHub repository linked below.
+</Admonition>
+
+**Neon CircleCI Orb**
+
+- [GitHub repository](https://github.com/dhanushreddy291/neon-circle-ci-orb)
+- [CircleCI Orb Registry](https://circleci.com/developer/orbs/orb/dhanushreddy291/neon)
+
 ## Prerequisites
 
 To use the Neon CircleCI Orb, you need:
@@ -51,7 +60,7 @@ A typical CircleCI configuration using the `neon/run_tests` job looks like this:
 version: 2.1
 
 orbs:
-  neon: neon/neon@1.0
+  neon: dhanushreddy291/neon@1.0
   node: circleci/node@7.2.1
 
 workflows:
@@ -221,7 +230,7 @@ Here is how to compose these commands manually:
 version: 2.1
 
 orbs:
-  neon: neon/neon@1.0
+  neon: dhanushreddy291/neon@1.0
 
 jobs:
   custom-test:
