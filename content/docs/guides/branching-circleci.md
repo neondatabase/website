@@ -6,11 +6,9 @@ enableTableOfContents: true
 updatedOn: '2026-02-20T13:57:07.031Z'
 ---
 
-Managing database state in CI pipelines is a common source of flakiness. When multiple builds share a single database, tests can collide, and failures become difficult to reproduce. Ideally, every pipeline run should get a fresh, isolated database provisioned automatically and cleaned up when it's done.
+The **Neon CircleCI Orb** provisions a real Neon Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
 
-The Neon CircleCI Orb solves this problem by leveraging Neon’s branching capabilities. By integrating Neon into CircleCI, you can provision a fresh, isolated Postgres database for every build or pull request, run your tests, and automatically clean up resources when finished.
-
-This approach replaces slow, flaky shared testing databases with instant, copy-on-write branches that scale to zero when not in use.
+Each run gets an isolated, ephemeral branch; you can branch from a pre-migrated parent to skip running migrations from scratch, and the orb handles cleanup and TTL so tests stay deterministic and parallel jobs never share state. This guide covers the `neon/run_tests` job and the `neon/create_branch`, `neon/delete_branch`, and `neon/reset_branch` commands.
 
 <Admonition type="note">
 This orb is not maintained or officially supported by Neon. Use at your own discretion. If you have questions or face any issues, please contact the maintainer by raising an issue in the GitHub repository linked below.
@@ -32,7 +30,7 @@ To use the Neon CircleCI Orb, you need:
 
 ## Getting started
 
-To allow CircleCI to communicate with Neon, you must configure your Neon credentials as environment variables in your CircleCI project.
+To allow CircleCI to communicate with Neon, configure your Neon credentials as environment variables in your CircleCI project.
 
 1. In CircleCI, navigate to **Project Settings** > **Environment Variables**.
 2. Add the following variables:
@@ -289,5 +287,3 @@ To optimize costs don't set the TTL too high for ephemeral branches. For long-li
 The Neon Orb is designed for concurrency. If you run parallel tests (e.g., CircleCI `parallelism: 4`), the Orb creates a unique branch for every parallel executor. This ensures that tests running at the same time never read or write to the same database, eliminating race conditions and "flaky" tests caused by shared state.
 
 The default branch names are generated from `CIRCLE_PIPELINE_NUM` and include a suffix for parallel executors (for example, `1234-1`, `1234-2`). This allows you to identify which branch corresponds to which test executor in your CircleCI dashboard.
-
-<NeedHelp/>
