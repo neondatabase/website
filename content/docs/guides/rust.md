@@ -10,7 +10,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/quickstart/rust
   - /docs/integrations/rust
-updatedOn: '2026-02-06T22:07:33.049Z'
+updatedOn: '2026-02-15T20:51:54.194Z'
 ---
 
 <CopyPrompt src="/prompts/rust-prompt.md" 
@@ -48,7 +48,7 @@ For your Rust project, use `cargo` to create a new project and add the required 
 
     This command creates a new directory named `neon-rust-quickstart` containing a `src/main.rs` file for your code and a `Cargo.toml` file for your project's configuration and dependencies.
 
-    > Open the directory in your preferred code editor (e.g., VS Code, RustRover, etc.) to edit the files.
+    > Open the directory in your preferred code editor (for example, VS Code, RustRover, etc.) to edit the files.
 
 2.  Add the required crates using `cargo add`. Choose the set of commands for either a synchronous or asynchronous setup.
 

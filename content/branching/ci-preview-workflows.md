@@ -1,5 +1,5 @@
 ---
-title: 'Branching workflows for CI and previews'
+title: 'Create one branch per preview and per test run'
 subtitle: 'Build branching workflows for CI and previews: spin up isolated branches per preview or test run, automate cleanup, and avoid shared test databases'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---

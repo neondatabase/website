@@ -1013,11 +1013,7 @@ This will show you a breakdown of job counts by queue and status:
 
 ### Bull Board Dashboard
 
-If you've set up Bull Board as described earlier, you can visit `http://localhost:3000/admin/queues` in your browser to see a visual dashboard of all your queues and jobs.
-
-![Bull Board Dashboard](/guides/images/job-queue-system/bull-board.png)
-
-This dashboard provides a real-time view of your queues, including active, waiting, and completed jobs.
+If you've set up Bull Board as described earlier, you can visit `http://localhost:3000/admin/queues` in your browser to see a visual dashboard of all your queues and jobs. This dashboard provides a real-time view of your queues, including active, waiting, and completed jobs.
 
 ## Verifying Database Records
 

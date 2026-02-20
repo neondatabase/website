@@ -6,7 +6,7 @@ summary: >-
   Auth, detailing the SDK integration, session creation, and database
   interactions.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.735Z'
+updatedOn: '2026-02-15T20:51:54.036Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -19,7 +19,7 @@ Anyone can sign up for your application by default. Support for restricted signu
 
 ## Architecture overview
 
-Neon Auth is a managed REST API service built on Better Auth that connects directly to your Neon database. You use the SDK in your application and configure settings in the Console—no servers to manage.
+Neon Auth is a managed REST API service built on Better Auth that connects directly to your Neon database. You use the SDK in your application and configure settings in the Console; no servers to manage.
 
 ```
 Your App (SDK)
@@ -29,7 +29,7 @@ Neon Auth Service (REST API)
 Your Neon Database (neon_auth schema)
 ```
 
-All authentication data—users, sessions, OAuth configurations—lives in your database's `neon_auth` schema. You can query these tables directly with SQL for debugging, analytics, or custom logic.
+All authentication data (users, sessions, OAuth configurations) lives in your database's `neon_auth` schema. You can query these tables directly with SQL for debugging, analytics, or custom logic.
 
 ## Complete sign-in flow
 
@@ -77,13 +77,13 @@ The Auth service sets an HTTP-only cookie (`__Secure-neonauth.session_token`) in
 - Contains an opaque session token (not a JWT)
 - Is automatically sent with every request to the Auth API
 - Is secure (HTTPS only, HttpOnly, SameSite=None)
-- Is managed entirely by the SDK—you never touch it
+- Is managed entirely by the SDK; you never touch it
 
 **Where to see it:** Open DevTools → Application → Cookies → look for `__Secure-neonauth.session_token`
 
 ## JWT token is retrieved
 
-The SDK automatically retrieves a JWT token and stores it in `session.access_token`. You don't need to call `/auth/token` separately—the SDK handles this behind the scenes.
+The SDK automatically retrieves a JWT token and stores it in `session.access_token`. You don't need to call `/auth/token` separately; the SDK handles this behind the scenes.
 
 **What's in the JWT:**
 

@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/concepts/anonymized-data
 tag: new
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.153Z'
+updatedOn: '2026-02-15T20:51:54.280Z'
 ---
 
 <FeatureBeta />
@@ -110,7 +110,7 @@ You can create and manage masking rules via the Console, API, or SQL. All three 
 From the **Data Masking** page:
 
 1. Select the schema, table, and column you want to mask.
-2. Choose a masking function from the dropdown list (e.g., **Dummy Free Email** to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API or SQL.
+2. Choose a masking function from the dropdown list (for example, **Dummy Free Email** to execute `anon.dummy_free_email()`). The Console provides a curated list of common functions. For the full set of PostgreSQL Anonymizer functions, you must use the API or SQL.
 
 <Admonition type="tip">
 For email columns with unique constraints, use **Random Unique Email**, which generates UUID-based emails that maintain uniqueness while preserving the email format.
@@ -134,7 +134,7 @@ Rerunning the anonymization process on the anonymized branch applies rules to pr
 
 <TabItem>
 
-For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (e.g., **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (e.g., `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
+For complete API documentation with request/response examples, see the [Data anonymization API reference](/docs/workflows/data-anonymization-api). Note that the Console uses friendly labels for masking functions (for example, **Random Unique Email**), but the API returns and accepts the underlying PostgreSQL expressions (for example, `pg_catalog.concat(anon.dummy_uuidv4(), '@example.com')`).
 
 **Update masking rules**
 

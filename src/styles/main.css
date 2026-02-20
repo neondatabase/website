@@ -26,7 +26,7 @@
   input,
   pre,
   select {
-    @apply outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-2;
+    @apply outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#38A57D];
   }
 }
 

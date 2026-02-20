@@ -5,7 +5,7 @@ summary: >-
   How to integrate Uploadcare with Neon for storing file metadata while
   utilizing Uploadcare's cloud platform for file uploads and storage management.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.062Z'
+updatedOn: '2026-02-17T17:13:56.586Z'
 ---
 
 [Uploadcare](https://uploadcare.com/) provides an cloud platform designed to simplify file uploading, processing, storage, and delivery via a fast CDN. It offers tools that manage and optimize media like images, videos, and documents for your applications.
@@ -18,7 +18,7 @@ This guide demonstrates how to integrate Uploadcare with Neon by storing file me
 
 ## Create a Neon project
 
-1. Navigate to [pg.new](https://pg.new) to create a new Neon project.
+1. Navigate to [neon.new](https://neon.new) to create a new Neon project.
 2. Copy the connection string by clicking the **Connect** button on your **Project Dashboard**. For more information, see [Connect from any application](/docs/connect/connect-from-any-app).
 
 ## Create an Uploadcare account and project
@@ -279,7 +279,7 @@ curl -X POST http://localhost:3000/upload \
   }
   ```
 
-You can now integrate calls to this `/upload` endpoint from various parts of your application (e.g., web clients, mobile apps, backend services) to handle file uploads.
+You can now integrate calls to this `/upload` endpoint from various parts of your application (for example, web clients, mobile apps, backend services) to handle file uploads.
 
 ## Accessing file metadata and files
 
@@ -308,7 +308,7 @@ WHERE
 
 - The query returns rows containing the file metadata stored in Neon.
 - The crucial piece of information is the `file_url`. This is the direct link (CDN URL) to the file stored on Uploadcare.
-- You can use this `file_url` in your application (e.g., in frontend `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
+- You can use this `file_url` in your application (for example, in frontend `<img>` tags, API responses, download links) wherever you need to display or provide access to the file.
 
 This pattern separates file storage and delivery (handled by Uploadcare) from structured metadata management (handled by Neon).
 

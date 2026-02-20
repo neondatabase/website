@@ -6,10 +6,10 @@ summary: >-
   extracting text values from JSON objects at specified paths, facilitating
   easier text manipulation and comparison.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.865Z'
+updatedOn: '2026-02-15T20:51:54.098Z'
 ---
 
-The `json_extract_path_text` function is designed to simplify extracting text from `JSON` data in Postgres. This function is similar to `json_extract_path` — it also produces the value at the specified path from a `JSON` object but casts it to plain text before returning. This makes it more straightforward for text manipulation and comparison operations.
+The `json_extract_path_text` function is designed to simplify extracting text from `JSON` data in Postgres. This function is similar to `json_extract_path`; it also produces the value at the specified path from a `JSON` object but casts it to plain text before returning. This makes it more straightforward for text manipulation and comparison operations.
 
 <CTA />
 

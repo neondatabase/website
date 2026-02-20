@@ -6,7 +6,7 @@ summary: >-
   to enable it and utilize its cryptographic functions for encryption,
   decryption, and hashing within Postgres.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.842Z'
+updatedOn: '2026-02-15T20:51:54.093Z'
 ---
 
 The `pgcrypto` extension offers a range of cryptographic functions within Postgres. These functions enable encryption, decryption, and hashing operations through standard SQL queries. This can reduce reliance on external cryptographic tools for data security tasks in a Postgres environment.
@@ -68,7 +68,7 @@ The `pgcrypto` extension provides a wide range of cryptographic functions that c
 
 - **`gen_salt(type text [, iter_count integer ])`**:
 
-  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (e.g., `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
+  The `gen_salt` function generates new, random salt values for use with the `crypt()` function. The `type` parameter specifies the hashing algorithm (for example, `bf` for Blowfish, `md5`, `xdes`, `des`). For algorithms like [Blowfish](<https://en.wikipedia.org/wiki/Blowfish_(cipher)>) and [Extended DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard) (`xdes`), you can specify `iter_count` to control the number of iterations, increasing the computational cost and security.
 
   ```sql
   SELECT gen_salt('bf'); -- Generate a Blowfish salt
@@ -179,7 +179,7 @@ Let's walk through a practical example of using `pgcrypto` to securely store and
 
 3. Verify a password during login:
 
-   When a user attempts to log in, you'll receive the password they entered (e.g., `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
+   When a user attempts to log in, you'll receive the password they entered (for example, `"mypassword"` again). To verify it, you'll use `crypt()` again, passing the entered password and the stored `password_hash` from the database.
 
    ```sql
    SELECT password_hash = crypt('mypassword', password_hash) AS password_match
@@ -195,7 +195,7 @@ Let's walk through a practical example of using `pgcrypto` to securely store and
 
 4. Incorrect password attempt:
 
-   If the user enters an incorrect password (e.g., `"wrongpassword"`), the verification will fail:
+   If the user enters an incorrect password (for example, `"wrongpassword"`), the verification will fail:
 
    ```sql
    SELECT password_hash = crypt('wrongpassword', password_hash) AS password_match

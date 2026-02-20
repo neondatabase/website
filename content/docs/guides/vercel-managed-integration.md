@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/vercel-native-integration
   - /docs/guides/vercel-native-integration-previews
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.063Z'
+updatedOn: '2026-02-15T20:51:54.203Z'
 ---
 
 <InfoBlock>
@@ -85,7 +85,7 @@ From the **Storage** tab, click **Open in Neon** to jump straight to your new Ne
 
 3. Click **Connect**.
 
-<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, e.g. `PRIMARY_`.</Admonition>
+<Admonition type="tip" title="Environment variable prefix">You can add a prefix if you have multiple databases in the same project, for example `PRIMARY_`.</Admonition>
 
 ---
 

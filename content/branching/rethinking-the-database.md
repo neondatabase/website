@@ -1,5 +1,5 @@
 ---
-title: 'Rethinking the database DX with branches'
+title: 'Use database branches as environments'
 subtitle: "Rethink the database developer experience: database branching replaces instance copying with fast, isolated environments built on copy-on-write storage"
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---

@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/get-started/tutorials
-updatedOn: '2026-02-06T22:07:32.896Z'
+updatedOn: '2026-02-15T20:51:54.110Z'
 ---
 
 The Neon SQL Editor allows you to run queries on your Neon databases directly from the Neon Console. In addition, the editor keeps a query history, permits saving queries, and provides [**Explain**](https://www.postgresql.org/docs/current/sql-explain.html) and [**Analyze**](https://www.postgresql.org/docs/current/using-explain.html#USING-EXPLAIN-ANALYZE) features.
@@ -106,9 +106,9 @@ Meta-commands can significantly speed up your workflow by providing quick access
 
 Here are some of the meta-commands that you can use within the Neon SQL Editor:
 
-- `\dt` — List all tables in the current database.
-- `\d [table_name]` — Describe a table's structure.
-- `\l` — List all databases.
+- `\dt`: List all tables in the current database.
+- `\d [table_name]`: Describe a table's structure.
+- `\l`: List all databases.
 - `\?` - A cheat sheet of available meta-commands
 - `\h [NAME]` - Get help for any Postgres command. For example, try `\h SELECT`.
 

@@ -6,7 +6,7 @@ summary: >-
   array into individual rows, facilitating efficient data extraction from JSON
   arrays in PostgreSQL.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.872Z'
+updatedOn: '2026-02-15T20:51:54.104Z'
 ---
 
 You can use the `jsonb_array_elements` function to expand a `JSONB` array into a set of rows, each containing one element of the array. It is a simpler option compared to complex looping logic. It is also more efficient than executing the same operation on the application side by reducing data transfer and processing overhead.
@@ -378,7 +378,7 @@ GROUP BY name;
 
 If your query involves navigating through multiple levels of nesting, complex filtering conditions, or updates to `JSONB` data, `jsonb_path_query` is often the preferred choice.
 
-Consider a simple example — to extract the first skill of each developer in the `developers` table:
+Consider a simple example: to extract the first skill of each developer in the `developers` table:
 
 ```sql
 SELECT jsonb_path_query(skills, '$[0]') AS first_skill

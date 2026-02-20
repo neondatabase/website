@@ -6,7 +6,7 @@ summary: >-
   prerequisites, connection steps using environment variables, and scenarios for
   choosing manual connections over integrations.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.064Z'
+updatedOn: '2026-02-15T20:51:54.203Z'
 ---
 
 <InfoBlock>
@@ -30,7 +30,7 @@ updatedOn: '2026-02-06T22:07:33.064Z'
 Choose manual connection if you prefer not to install a Marketplace integration. This approach is ideal when you:
 
 - Deploy via a custom pipeline (self-hosted CI, monorepo, etc.)
-- Need non-Vercel hosting (e.g. Cloudflare Workers + Vercel Functions hybrid)
+- Need non-Vercel hosting (for example Cloudflare Workers + Vercel Functions hybrid)
 - Want full control over branch naming, seeding, migration, or teardown
 
 If you simply want Neon and Vercel with minimal setup, stick to the managed integrations. They're simpler and include UI support.

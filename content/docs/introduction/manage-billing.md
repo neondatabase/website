@@ -7,7 +7,7 @@ summary: >-
   page, updating payment methods, downloading invoices, changing plans, and
   account deletion.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.091Z'
+updatedOn: '2026-02-19T02:27:13.545Z'
 ---
 
 <InfoBlock>
@@ -58,7 +58,7 @@ If an auto-debit payment transaction fails, Neon sends a request to update your 
 
 ### Failing payments for Indian customers
 
-Neon’s billing system uses **Stripe Checkout**, which does not currently support **e-Mandates** — a requirement from the Reserve Bank of India (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
+Neon’s billing system uses **Stripe Checkout**, which does not currently support **e-Mandates** (a requirement from the Reserve Bank of India) (RBI) for automatic recurring payments. Because of this, customers in India cannot set up automatic monthly payments. In the event of a payment failure, please [contact support](/docs/introduction/support) to request a link to your invoice to complete the payment manually.
 
 ## Update your billing email
 
@@ -117,7 +117,7 @@ Changing your plan to one with lower usage allowances may affect the performance
 
 If you are downgrading your plan, you will be required to remove any projects, branches, or data that exceed your new plan allowances.
 
-To downgrade from a **legacy Enterprise plan**, please contact [Sales](/contact-sales). Cancellation of a legacy Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the Customer Agreement.
+To downgrade from a **legacy Enterprise plan**, please open a support ticket. Cancellation of a legacy Enterprise plan is handled according to the Master Subscription Agreement (MSA) outlined in the Customer Agreement.
 
 ## How to prevent further monthly charges to your account
 

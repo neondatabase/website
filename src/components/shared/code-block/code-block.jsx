@@ -42,7 +42,7 @@ const CodeBlock = async ({
   return (
     <CodeBlockWrapper
       className={clsx(
-        'rounded-lg border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10',
+        'rounded-none border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:rounded-none [&>pre]:!bg-gray-new-98 [&>pre]:py-4 [&>pre]:dark:!bg-transparent',
         className,
         { 'code-wrap': meta?.includes('shouldWrap') }
       )}

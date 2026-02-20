@@ -10,7 +10,7 @@ redirectFrom:
   - /docs/guides/partner-billing
   - /docs/guides/partner-consumption-limits
 isDraft: false
-updatedOn: '2026-02-06T22:07:32.943Z'
+updatedOn: '2026-02-16T13:09:07.964Z'
 ---
 
 When setting up your integration's billing solution with Neon, you may want to impose some hard limits on how much storage or compute resources a given project can consume. For example, you may want to cap how much usage your free plan users can consume versus pro or enterprise users. With the Neon API, you can use the `quota` key to set usage limits for a variety of consumption metrics. These limits act as thresholds after which all active computes for a project are [suspended](#suspending-active-computes).
@@ -162,10 +162,10 @@ curl --request PATCH \
 
 You can use the Neon API to retrieve consumption metrics for your organization and projects using these endpoints:
 
-| Endpoint                                                                                             | Description                                                                                                              | Plan Availability | Docs                                                                                                          |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------- | ------------------------------------------------------------------------------------------------------------- |
-| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                   | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics#get-account-level-aggregated-metrics-legacy-plans) |
-| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (e.g., hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics](consumption-metrics#get-project-level-metrics-legacy-plans)              |
+| Endpoint                                                                                             | Description                                                                                                                     | Plan Availability | Docs                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| [Aggregated account metrics](https://api-docs.neon.tech/reference/getconsumptionhistoryperaccount)   | Aggregates the metrics from all projects in an account into a single cumulative number for each metric                          | Scale plan only   | [Get account-level aggregated metrics](consumption-metrics-legacy#get-account-level-aggregated-metrics-legacy-plans) |
+| [Granular metrics per project](https://api-docs.neon.tech/reference/getconsumptionhistoryperproject) | Provides detailed metrics for each project in an account at a specified granularity level (for example, hourly, daily, monthly) | Scale plan only   | [Get granular project-level metrics](consumption-metrics-legacy#get-project-level-metrics-legacy-plans)              |
 
 ## Resetting a project after suspend
 
@@ -175,7 +175,7 @@ Alternatively, you can actively reset a suspended compute by changing the impact
 
 ### Using quotas to actively suspend a user
 
-If you want to suspend a user for any reason &#8212; for example, suspicious activity or payment issues &#8212; you can use these quotas to actively suspend a given user. For example, setting `active_time_limit` to a very low threshold (e.g., `1`) will force a suspension if the user has 1 second of active compute for that month. To remove this suspension, you can set the threshold temporarily to `0` (infinite) or some value larger than their currently consumed usage.
+If you want to suspend a user for any reason &#8212; for example, suspicious activity or payment issues &#8212; you can use these quotas to actively suspend a given user. For example, setting `active_time_limit` to a very low threshold (for example, `1`) will force a suspension if the user has 1 second of active compute for that month. To remove this suspension, you can set the threshold temporarily to `0` (infinite) or some value larger than their currently consumed usage.
 
 ## Other consumption related settings
 

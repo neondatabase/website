@@ -7,14 +7,14 @@ summary: >-
 description: >-
   Install the Neon Claude Code plugin to give Claude access to Neon’s APIs,
   Postgres workflows, and built-in Skills.
-updatedOn: '2026-02-15T02:49:43.937Z'
+updatedOn: '2026-02-15T20:51:54.029Z'
 ---
 
 The **Neon Claude Code plugin** adds Neon-specific Skills and API access to Claude Code, Anthropic’s AI development environment. It’s part of the [Neon AI Rules toolkit](https://github.com/neondatabase-labs/ai-rules), and it bundles four guided Skills plus an MCP (Model Context Protocol) server integration.
 
 ## Overview
 
-Claude Skills are Markdown-based workflows that tell Claude how to complete specific tasks — like setting up a database connection, editing a file, or running a script. The Neon plugin packages several of these Skills into a reusable bundle, so Claude Code can interact directly with Neon Postgres.
+Claude Skills are Markdown-based workflows that tell Claude how to complete specific tasks (like setting up a database connection, editing a file, or running a script). The Neon plugin packages several of these Skills into a reusable bundle, so Claude Code can interact directly with Neon Postgres.
 
 Once installed, the plugin gives Claude the ability to:
 
@@ -38,7 +38,7 @@ The plugin contains:
 | **neon-drizzle**       | Guides Claude through setting up [Drizzle ORM](https://orm.drizzle.team) with Neon. Handles schema creation, connection setup, and project scaffolding.                             |
 | **neon-serverless**    | Teaches Claude how to configure [Neon's serverless Postgres driver](https://neon.com/docs/serverless/serverless-driver) and test connections.                                       |
 | **neon-toolkit**       | Provides workflows for using the [Neon Management API](https://api-docs.neon.tech/reference/getting-started-with-neon-api) to create databases, projects, and branches dynamically. |
-| **add-neon-knowledge** | Gives Claude access to [Neon documentation](https://neon.com/docs/introduction) snippets and usage examples — the "Neon brain."                                                     |
+| **add-neon-knowledge** | Gives Claude access to [Neon documentation](https://neon.com/docs/introduction) snippets and usage examples: the "Neon brain."                                                      |
 
 ## How it works
 

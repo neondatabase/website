@@ -72,10 +72,6 @@ For organizations requiring enterprise-grade features, the Business Plan provide
 - Priority support for quick issue resolution
 - Private Link support for secure connectivity
 
-<Admonition type="note" title="Note">
-For custom enterprise requirements beyond the Business Plan, [you can reach out to Neon's sales team](/contact-sales).
-</Admonition>
-
 ## Configuring your resource
 
 For this guide, we'll use the Free Tier, but you can easily upgrade later as your needs grow. We will proceed to the resource configuration stage by clicking on **Subscribe** with the Free Plan selected.
@@ -86,7 +82,7 @@ After selecting your plan, you'll need to configure your Neon resource within Az
 
 ![Neon Resource Configuration on Azure](/docs/guides/neon-resource-configuration-on-azure.png)
 
-You can create a Neon resource in the `East US 2`, `Germany West Central`, and `West US 3` regions, but keep in mind that this is the region for the Azure resource, not your Neon database — you'll select a region for your actual database in a later step. Finally, create a distinctive organization name that reflects your company or project. This organization name will be visible in both Azure and the Neon Console.
+You can create a Neon resource in the `East US 2`, `Germany West Central`, and `West US 3` regions, but keep in mind that this is the region for the Azure resource, not your Neon database; you'll select a region for your actual database in a later step. Finally, create a distinctive organization name that reflects your company or project. This organization name will be visible in both Azure and the Neon Console.
 
 Click **Review + Create** to proceed to the final stage of the deployment process. The Azure portal will validate your configuration settings, ensuring that all required fields are correctly filled. Once the validation is successful, click **Create** to deploy your Neon resource. Azure will begin provisioning your resource, which typically takes a few minutes. You should see a notification indicating that your Neon resource has been successfully deployed.
 

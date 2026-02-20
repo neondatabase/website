@@ -10,7 +10,7 @@ The processor converts MDX documentation files into clean markdown that AI agent
 - Preserves standard HTML elements like `<details>`
 - Converts relative URLs to absolute
 - Adds a page header (location + index pointer) and navigation footer to every page
-- Uses zero new dependencies (leverages existing transitive deps: `unified`, `remark-parse`, `remark-mdx`, `remark-gfm`, `unist-util-visit`, `mdast-util-to-markdown`, `mdast-util-mdx`, `mdast-util-gfm`, plus direct deps `gray-matter` and `js-yaml`)
+- Pins several unified/remark deps as direct dependencies (`unified`, `remark-parse`, `remark-gfm`, `unist-util-visit`, plus `gray-matter` and `js-yaml`) so transitive upgrades don't break the build (e.g. remark-gfm v4 required unified v11 while another dep pinned v10); the rest (`remark-mdx`, `mdast-util-to-markdown`, etc.) remain transitive
 
 This is an **isolated post-build script** -- no changes to React components. A more integrated approach (Markdown as a first-class render target in the component layer) is a potential next step as AI agent traffic grows.
 
@@ -23,6 +23,8 @@ This is an **isolated post-build script** -- no changes to React components. A m
 - `compare-md-conversion.js` - Dev tool for comparing single file conversions
 - `generate-legacy-llms-output.js` - Dev tool: generates `public/llms/` in old flat `.txt` format for comparison
 - `../utils/llms-redirect-map.json` - Static redirect map (committed, maps 493 old `.txt` filenames to canonical `.md` URLs). Generated once by a now-deleted one-time script
+
+To add or change LLM docs, edit source in `content/docs/`; see `docs/internal/llms-directory-guide.md` for the current approach.
 
 ## Architecture
 
@@ -62,7 +64,7 @@ All paths serve from the same source: `public/md/`.
 - **User-Agent detection**: `GET /docs/guides/prisma` with AI User-Agent -> `middleware.js` -> `isAIAgentRequest()` -> fetch from `/md/docs/guides/prisma.md`
 - **Legacy redirect**: `GET /llms/guides-prisma.txt` -> middleware -> `llms-redirect-map.json` lookup -> 301 to `/docs/guides/prisma.md`
 - **Discoverability**: HTML pages include `<link rel="alternate" type="text/markdown" href="...">` via `markdownPath` in `getMetadata()` (`src/utils/get-metadata.js`)
-- **llms.txt**: Served at both `/docs/llms.txt` (canonical, `public/docs/llms.txt`) and `/llms.txt` (via rewrite)
+- **llms.txt**: The docs index is generated at build time and written to `public/docs/llms.txt`. We serve it at both `https://neon.com/docs/llms.txt` (canonical) and `https://neon.com/llms.txt` for backwards compatibility; they may diverge in the future, and we may add other indexes (e.g. `llms-full.txt`) later.
 
 ## Page Structure
 
@@ -88,7 +90,7 @@ Subtitle (from frontmatter, if present)
 
 Navigation context is added by `addNavigationContext()`, which calls `buildPageHeader()` and `buildNavigationFooter()`. The **page header** always includes the documentation index URL. For pages in the navigation map, it also includes the page location (breadcrumb trail). The location includes section nodes (non-linkable groupings) that the HTML site's breadcrumbs skip, giving LLMs richer hierarchical context. Consecutive duplicate ancestors are deduplicated, and the trailing page title is omitted when it matches the last breadcrumb (e.g. "Connect to Neon" instead of "Connect to Neon > Connect to Neon"). The **footer** lists sibling pages (current page omitted), with standard URLs (no `.md`). Pages not in `navigation.yaml` get only the index line (no location, no footer).
 
-**Cross-references:** Some pages appear in multiple `navigation.yaml` locations (e.g. `extensions/pgvector` is listed under both AI and Extensions). To pick the canonical location, `processNavItems` scores each occurrence by how many siblings share the same slug prefix. For pgvector, the Extensions section siblings all share `extensions/` while the AI section siblings have `ai/` — so Extensions wins. Ties keep the first occurrence.
+**Cross-references:** Some pages appear in multiple `navigation.yaml` locations (e.g. `extensions/pgvector` is listed under both AI and Extensions). To pick the canonical location, `processNavItems` scores each occurrence by how many siblings share the same slug prefix. For pgvector, the Extensions section siblings all share `extensions/` while the AI section siblings have `ai/`, so Extensions wins. Ties keep the first occurrence.
 
 ## Component Handlers
 
@@ -160,7 +162,7 @@ Some routes serve HTML even to agents (`EXCLUDED_ROUTES` in `src/constants/conte
 
 ## Legacy /llms/*.txt Redirects
 
-`src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. No new `.txt` files will ever be created. The map was generated once by a now-deleted one-time script.
+The old system used `public/llms/` for hand-maintained `.txt` files; that's deprecated and the dir is no longer used. `src/utils/llms-redirect-map.json` is a static, committed map of 493 old flat filenames to canonical `.md` URLs. Middleware performs 301 redirects for matches; non-matches 404. Do not add new entries to the map; it is static and will be removed in the future. New docs get their `.md` URLs from the build. The map was generated once by a now-deleted one-time script.
 
 ## Build & Verification
 

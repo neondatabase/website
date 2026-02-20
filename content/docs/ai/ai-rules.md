@@ -3,33 +3,34 @@ title: AI rules and prompts
 subtitle: Enhance your AI development experience with Neon-specific context rules
 summary: >-
   Covers the setup of AI context rules for Neon, including installation
-  instructions for the Claude Code plugin and individual context rule files for
-  other AI tools, enhancing code suggestions and reducing errors.
+  instructions for Claude Code and Cursor plugins plus individual context rule
+  files for other AI tools, enhancing code suggestions and reducing errors.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.726Z'
+updatedOn: '2026-02-16T23:25:57.648Z'
 ---
 
 Boost your productivity with AI context rules for Neon. These rules help AI assistants understand Neon's features, leading to more accurate code suggestions and fewer common mistakes.
 
-If you're using **Claude Code**, install the comprehensive Neon plugin that bundles Skills, MCP integration, and all context rules in one package. For other AI tools like **Cursor**, use the individual `.mdc` context rule files.
+If you're using **Claude Code** or **Cursor**, install the Neon plugin to bundle Skills and MCP integration in one package. For other AI tools, use the individual `.mdc` context rule files.
 
 <Admonition type="note" title="AI Rules are in Beta">
 AI Rules are currently in beta. We're actively improving them and would love to hear your feedback. Join us on [Discord](https://discord.gg/92vNTzKDGp) to share your experience and suggestions.
 </Admonition>
 
-## For Claude Code
+## Plugin install
 
-If you're using Claude Code, install the Neon plugin to get Skills, MCP integration, and all the context rules in one package:
+If you're using Claude Code or Cursor, install a Neon plugin to get Skills and MCP integration:
 
 <DetailIconCards>
 
 <a href="/docs/ai/ai-claude-code-plugin" description="Install the Neon Claude Code plugin to give Claude access to Neon's APIs, Postgres workflows, and built-in Skills" icon="github">Claude Code plugin for Neon</a>
+<a href="/docs/ai/ai-cursor-plugin" description="Install the Neon Cursor plugin to use Neon Skills and Neon MCP integration directly in Cursor" icon="github">Cursor plugin for Neon</a>
 
 </DetailIconCards>
 
 ## Individual AI rules
 
-For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory — the format is tool-agnostic and works with any AI assistant that supports context rules.
+For other AI tools like Cursor, you can use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory; the format is tool-agnostic and works with any AI assistant that supports context rules.
 
 <DetailIconCards>
 

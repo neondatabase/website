@@ -6,7 +6,7 @@ summary: >-
   project creation, SDK installation, environment variable configuration, and
   style integration.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.771Z'
+updatedOn: '2026-02-16T13:08:22.377Z'
 layout: wide
 ---
 
@@ -55,7 +55,7 @@ Install the Neon Auth SDK and UI library:
 <TwoColumnLayout.Block label="Terminal">
 
 ```bash
-cd my-app && npm install @neondatabase/neon-js
+cd my-app && npm install @neondatabase/neon-js@latest
 ```
 
 </TwoColumnLayout.Block>

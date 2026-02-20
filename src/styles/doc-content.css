@@ -1,13 +1,15 @@
 @layer components {
   .code-block[data-has-filename='true'] {
     > pre {
-      @apply rounded-b-lg rounded-t-none;
+      @apply rounded-none;
     }
   }
 
   .admonition-text {
+    @apply text-base font-normal leading-normal tracking-tight dark:text-[#D7D8DB];
+
     a {
-      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color] duration-200 ease-in-out hover:border-secondary-8 dark:text-primary-1 dark:hover:border-primary-1 sm:break-words;
+      @apply border-b border-transparent font-normal text-secondary-8 no-underline transition-[border-color,opacity] duration-200 ease-in-out hover:border-secondary-8 dark:border-b-0 dark:text-white dark:underline dark:decoration-dotted dark:underline-offset-[3px] dark:hover:opacity-80 sm:break-words;
     }
     p:first-child {
       @apply mt-0;
@@ -72,7 +74,7 @@
   .prose-doc {
     @apply max-w-none leading-normal tracking-extra-tight text-gray-new-8 prose-strong:text-gray-new-8 dark:text-gray-new-90 dark:prose-strong:text-gray-new-90;
     @apply prose-headings:font-sans prose-headings:font-semibold prose-headings:leading-tight prose-headings:text-black-new prose-p:my-3 prose-p:leading-normal dark:prose-headings:text-white;
-    @apply prose-a:rounded-sm prose-a:border-b prose-a:border-transparent prose-a:font-normal prose-a:text-secondary-8 prose-a:no-underline prose-a:transition-[border-color] prose-a:duration-200 prose-a:ease-in-out hover:prose-a:border-secondary-8 dark:prose-a:text-primary-1 dark:hover:prose-a:border-primary-1 prose-a:sm:break-words;
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-gray-new-20 prose-a:underline prose-a:decoration-[rgba(0,0,0,0.40)] prose-a:decoration-dashed prose-a:decoration-[1px] prose-a:underline-offset-4 prose-a:transition-all prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-[rgba(0,0,0,0.70)] dark:prose-a:text-white dark:prose-a:decoration-[rgba(255,255,255,0.40)] dark:hover:prose-a:decoration-[rgba(255,255,255,0.70)] prose-a:sm:break-words;
     @apply prose-pre:px-0;
 
     > * {
@@ -94,7 +96,23 @@
     }
 
     h2 {
-      @apply mb-3 mt-10;
+      @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter;
+    }
+
+    h3 {
+      @apply text-xl font-medium leading-snug tracking-extra-tight;
+    }
+
+    h4 {
+      @apply text-lg font-medium leading-snug tracking-extra-tight;
+    }
+
+    p {
+      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
+    }
+
+    .admonition h4 {
+      @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
     }
 
     .anchor-heading {
@@ -114,7 +132,7 @@
       @apply my-3 list-none;
 
       > li {
-        @apply relative my-1.5 pl-0;
+        @apply relative my-2.5 pl-0;
 
         ol {
           @apply md:pl-4;
@@ -123,11 +141,12 @@
     }
 
     ul {
-      @apply pl-[34px] md:pl-4;
+      @apply my-6 pl-[34px] md:pl-4;
 
       > li {
+        @apply text-[18px] font-normal leading-normal text-gray-new-30 dark:text-gray-new-85;
         &::before {
-          @apply absolute -left-3.5 top-2.5 h-1 w-1 rounded-full bg-black-new content-[''] dark:bg-gray-new-90 md:-left-3;
+          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-30 content-['-'] dark:text-gray-new-85 md:-left-3.5;
         }
       }
     }
@@ -176,13 +195,13 @@
 
       thead {
         tr {
-          @apply border-b border-gray-new-70;
+          @apply border-b border-gray-new-90 dark:border-gray-new-20;
         }
       }
 
       tbody {
         tr {
-          @apply border-b border-gray-new-90 last:border-gray-new-70 dark:border-gray-new-20 dark:last:border-gray-new-70;
+          @apply border-b border-gray-new-90 text-gray-new-30 dark:border-gray-new-20 dark:text-white;
         }
       }
     }
@@ -210,7 +229,7 @@
     }
 
     :not(pre) > code {
-      @apply break-words !rounded-sm bg-gray-new-94 !px-1.5 !py-0.5 !font-mono !font-normal !text-black-new dark:bg-gray-new-15 dark:!text-white;
+      @apply break-words border border-gray-new-90 bg-gray-new-94 !px-1 !py-px !font-mono !font-normal !text-black-new dark:border-gray-new-30 dark:bg-black dark:!text-white;
 
       &::before,
       &::after {
@@ -236,31 +255,32 @@
     }
 
     blockquote {
-      @apply border-secondary-8 font-normal not-italic;
+      @apply font-normal not-italic;
 
       p {
+        @apply my-0 text-lg font-normal leading-normal tracking-tight text-gray-new-8 dark:text-gray-new-85;
+
         &::before,
         &::after {
           @apply hidden;
         }
       }
+
+      cite,
+      footer {
+        @apply mt-5 flex items-center gap-2.5 text-sm font-medium leading-tight tracking-tight text-gray-new-8 dark:text-gray-new-90;
+      }
     }
 
     /* Details/Summary dropdown styling */
     details {
-      @apply py-5;
-    }
-
-    /* Only add top border between consecutive dropdowns */
-    details + details {
-      @apply border-t border-gray-new-90 dark:border-gray-new-15;
+      @apply relative -mb-px border border-gray-new-90 bg-transparent p-4 dark:border-gray-new-20;
     }
 
     details summary {
-      @apply flex cursor-pointer items-center justify-between font-semibold text-black-new transition-colors hover:text-secondary-8 dark:text-white dark:hover:text-primary-1;
+      @apply flex cursor-pointer items-center gap-2 text-base font-normal leading-normal tracking-tight text-black-new dark:text-white;
       list-style: none;
 
-      /* Hide default marker */
       &::-webkit-details-marker {
         @apply hidden;
       }
@@ -269,22 +289,17 @@
         @apply hidden;
       }
 
-      /* Custom arrow on the right side - points right when closed */
-      &::after {
-        content: '';
-        @apply ml-auto h-2 w-2 shrink-0 border-r-2 border-t-2 border-current transition-transform duration-200;
-        transform: rotate(45deg);
+      &::before {
+        @apply size-3.5 shrink-0 origin-center rotate-0 bg-current transition-transform duration-200 ease-linear content-[''] [clip-path:polygon(30%_22%,30%_78%,78%_50%)];
       }
     }
 
-    /* Rotate arrow to point down when open */
-    details[open] summary::after {
-      transform: rotate(135deg);
+    details[open] > summary::before {
+      transform: rotate(90deg);
     }
 
-    /* Content area styling */
     details > *:not(summary) {
-      @apply mt-3;
+      @apply mt-6 pl-[26px] text-base font-normal leading-normal tracking-tight text-gray-new-30 dark:text-gray-new-85;
     }
 
     /* Ensure list items inside details have proper spacing */
@@ -373,44 +388,6 @@
 
     a {
       @apply text-green-45 transition-colors duration-200 hover:text-[#47ffc2];
-    }
-  }
-
-  .prose-template {
-    @apply text-lg md:text-base;
-    @apply dark:prose-strong:text-white;
-
-    .anchor-heading {
-      @apply scroll-mt-20 lg:scroll-mt-5;
-    }
-
-    > h2 {
-      @apply mt-[72px] text-[30px] lg:mt-[62px] md:mt-[50px] md:text-2xl;
-
-      & + p {
-        @apply mt-4;
-      }
-    }
-
-    > h3 {
-      @apply text-xl;
-    }
-
-    .anchor-heading {
-      @apply scroll-mt-20 lg:scroll-mt-5;
-    }
-
-    > p {
-      @apply my-6 text-gray-new-98 lg:my-5;
-    }
-
-    > ul,
-    > ol {
-      @apply my-6 text-gray-new-98;
-
-      > li {
-        @apply text-gray-new-98;
-      }
     }
   }
 

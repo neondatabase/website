@@ -1,5 +1,5 @@
 ---
-title: 'Branching workflows for recovery'
+title: 'Use branches to restore instantly'
 subtitle: 'Learn how to use branching for recovery: use database branches to go back in time, recover lost data, debug migrations, and audit historical states safely'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---
@@ -38,6 +38,6 @@ For auditing or compliance purposes, teams often need to inspect historical data
 
 ## Restore-window and cost considerations
 
-Time travel in Neon relies on retained history. By default, Neon retains history for a limited window ([shorter windows on Free plans, longer windows on paid plans](https://neon.com/docs/introduction/restore-window#defaults-and-plan-limits)). This retained history contributes to overall storage usage: teams can tune the restore window to [balance recovery capability and cos](https://neon.com/docs/introduction/restore-window#storage-and-billing)t, depending on how frequently they need to look back in time.
+Time travel in Neon relies on retained history. By default, Neon retains history for a limited window ([shorter windows on Free plans, longer windows on paid plans](https://neon.com/docs/introduction/restore-window#defaults-and-plan-limits)). This retained history contributes to overall storage usage: teams can tune the restore window to [balance recovery capability and cost](https://neon.com/docs/introduction/restore-window#storage-and-billing), depending on how frequently they need to look back in time.
 
 Also, once you’re done investigating or recovering data, it’s best to delete restored branches to avoid clutter and unnecessary storage usage.

@@ -55,8 +55,8 @@ export default {
             },
 
             {
-              title: 'Instagres',
-              to: LINKS.instagres,
+              title: 'Claimable Postgres',
+              to: LINKS.claimablePostgres,
               description: 'No-signup flow',
               isExternal: true,
             },
@@ -76,34 +76,24 @@ export default {
           title: 'Use cases',
           items: [
             {
-              title: 'Serverless apps',
-              to: `${LINKS.useCases}/serverless-apps`,
-              description: 'Autoscale with traffic',
+              title: 'Fast dev workflows',
+              to: `${LINKS.useCases}/fast-dev-workflows`,
+              description: 'Ship quickly & safely with less manual work',
             },
             {
-              title: 'Multi-TB',
-              to: `${LINKS.useCases}/multi-tb`,
-              description: 'Scale & restore instantly',
-            },
-            {
-              title: 'Database per tenant',
-              to: `${LINKS.useCases}/database-per-tenant`,
-              description: 'Data isolation without overhead',
-            },
-            {
-              title: 'Platforms',
-              to: LINKS.platforms,
-              description: 'Offer Postgres to your users',
-            },
-            {
-              title: 'Dev/Test',
-              to: `${LINKS.useCases}/dev-test`,
-              description: 'Production-like environments',
+              title: 'Variable traffic',
+              to: `${LINKS.useCases}/variable-load`,
+              description: 'Optimize compute performance & cost',
             },
             {
               title: 'Agents',
               to: `${LINKS.useCases}/ai-agents`,
-              description: 'Build full-stack AI agents',
+              description: 'Build AI platforms that deploy full-stack apps',
+            },
+            {
+              title: 'Database per user',
+              to: `${LINKS.useCases}/database-per-user`,
+              description: 'Provision isolated Postgres at massive scale',
             },
           ],
         },
@@ -214,10 +204,6 @@ export default {
           to: LINKS.contactSales,
         },
         {
-          text: 'Partners',
-          to: LINKS.partners,
-        },
-        {
           text: 'Security',
           to: LINKS.security,
         },
@@ -282,10 +268,6 @@ export default {
         {
           text: 'Startups',
           to: LINKS.startups,
-        },
-        {
-          text: 'Creators',
-          to: LINKS.creators,
         },
       ],
     },

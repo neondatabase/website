@@ -1,5 +1,5 @@
 ---
-title: 'Branching workflows for development'
+title: 'Create one branch per PR and per developer'
 subtitle: 'Build branching workflows for development: create one branch per developer, shared dev branches, or per-PR databases for safe, isolated, production-like testing'
 updatedOn: '2026-01-22T00:00:00.000Z'
 ---

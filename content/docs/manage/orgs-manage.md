@@ -4,7 +4,7 @@ summary: >-
   Covers the management of Neon organizations, including creating organizations,
   inviting members, and setting permissions based on assigned roles.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.119Z'
+updatedOn: '2026-02-15T20:51:54.238Z'
 ---
 
 Learn how to manage your organization's projects, invite Members, revise permissions, and oversee billing details. This section explains which specific actions each Member can take based on their assigned roles and permissions.
@@ -73,8 +73,8 @@ If invite emails aren't received, they may be in spam or quarantined. Recipients
 
 Click the More Options menu next to the row in the **Collaborators** table to manage Collaborator access. You have two options:
 
-- **Convert to member** — Admins can promote an external Collaborator to a full Member. When promoted, their collaborator permissions will be automatically removed since they'll have access to all projects as a Member.
-- **Remove from project** — All members can revoke the Collaborator's access to the shared project.
+- **Convert to member**: Admins can promote an external Collaborator to a full Member. When promoted, their collaborator permissions will be automatically removed since they'll have access to all projects as a Member.
+- **Remove from project**: All members can revoke the Collaborator's access to the shared project.
 
   ![collaborators more options menu](/docs/manage/orgs_collaborators_kebab.png 'no-border')
 
@@ -99,7 +99,7 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free plan
 
-You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free—you'll see an error if you try.
+You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
 
 To downgrade, your org must:
 
@@ -154,7 +154,7 @@ alexlopez=>
 
 ### Rename an organization
 
-Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally—the new name will appear for everyone in the organization.
+Only Admins can rename an organization. Go to the **Settings** page under **General information**. Changing the organization name applies globally; the new name will appear for everyone in the organization.
 
 ![organization settings](/docs/manage/orgs_id.png 'no-border')
 

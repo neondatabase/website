@@ -7,7 +7,7 @@ summary: >-
   enabling efficient multicolumn GIN indexing for both complex and simple data
   types to optimize query performance.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.823Z'
+updatedOn: '2026-02-15T20:51:54.074Z'
 ---
 
 The `btree_gin` extension for Postgres provides a specialized set of **GIN operator classes** that allow common, "B-tree-like" data types to be included in **GIN indexes**. This is particularly useful for scenarios where you need to create **multicolumn GIN indexes** that combine complex data types (like arrays or JSONB) with simpler types such as integers, timestamps, or text. Ultimately, `btree_gin` helps you leverage the power of GIN for a broader range of indexing needs, optimizing queries across diverse data structures.
@@ -30,7 +30,7 @@ Please refer to the [list of all extensions](/docs/extensions/pg-extensions) ava
 
 ## `btree_gin`: Bridging index types
 
-A common challenge arises when queries require filtering on both B-tree friendly columns (e.g., `status TEXT`, `created_at TIMESTAMP`) and GIN-friendly columns (e.g., `attributes JSONB`, `tags TEXT[]`). While Postgres can use separate B-tree and GIN indexes and combine their results, this is not always the most performant approach.
+A common challenge arises when queries require filtering on both B-tree friendly columns (for example, `status TEXT`, `created_at TIMESTAMP`) and GIN-friendly columns (for example, `attributes JSONB`, `tags TEXT[]`). While Postgres can use separate B-tree and GIN indexes and combine their results, this is not always the most performant approach.
 
 The `btree_gin` extension addresses this by providing GIN **operator classes** for many standard B-tree-indexable data types. These operator classes instruct the GIN indexing mechanism on how to handle these scalar types as if they were native GIN-indexable items.
 
@@ -110,7 +110,7 @@ The `idx_posts_tags_published` index enables Postgres to efficiently process bot
 
 ### E-commerce product filtering by attributes and price
 
-In an e-commerce context, users often filter products based on dynamic attributes (e.g., stored in `JSONB`) and price ranges.
+In an e-commerce context, users often filter products based on dynamic attributes (for example, stored in `JSONB`) and price ranges.
 
 #### Table schema
 
@@ -118,7 +118,7 @@ In an e-commerce context, users often filter products based on dynamic attribute
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
     name TEXT,
-    attributes JSONB,       -- GIN-friendly JSONB (e.g., {"color": "red", "material": "cotton"})
+    attributes JSONB,       -- GIN-friendly JSONB (for example, {"color": "red", "material": "cotton"})
     price NUMERIC(10, 2)    -- B-tree friendly numeric
 );
 

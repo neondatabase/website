@@ -6,7 +6,7 @@ summary: >-
   enabling integration with existing systems that issue JSON Web Tokens (JWTs)
   like Auth0, Clerk, and AWS Cognito.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.806Z'
+updatedOn: '2026-02-15T20:51:54.070Z'
 redirectFrom:
   - /docs/guides/neon-authorize
 ---
@@ -85,10 +85,10 @@ When you configure a JWT Audience value in the Data API:
 
 **When is it required?**
 
-- **Firebase/GCP**: Required — use your Firebase Project ID
-- **Google Identity**: Required — use your OAuth 2.0 Client ID
+- **Firebase/GCP**: Required; use your Firebase Project ID
+- **Google Identity**: Required; use your OAuth 2.0 Client ID
 - **Azure AD, Keycloak**: May be required depending on your configuration
-- **Most other providers**: Optional — only configure if your provider includes an `aud` claim in tokens
+- **Most other providers**: Optional; only configure if your provider includes an `aud` claim in tokens
 
 If you're unsure whether your provider requires it, you can decode a sample JWT from your provider at [jwt.io](https://jwt.io) and check if it includes an `aud` claim.
 

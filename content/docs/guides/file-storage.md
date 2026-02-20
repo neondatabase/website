@@ -7,7 +7,7 @@ summary: >-
   file uploads and management, detailing how to store file references and
   metadata in a Neon Postgres database.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.965Z'
+updatedOn: '2026-02-15T20:51:54.155Z'
 ---
 
 Applications often need to handle file uploads and storage, from user avatars and documents to images and other media. Neon does not yet provide a native file storage solution. Instead, we recommend combining Neon with a specialized storage service.
@@ -15,7 +15,7 @@ Applications often need to handle file uploads and storage, from user avatars an
 The typical pattern looks like this:
 
 1. Upload files from your application (client or backend) to an object storage provider or file management service.
-2. Store references—such as the file URL, unique key, or identifier—and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.
+2. Store references (such as the file URL, unique key, or identifier) and related metadata like user ID, upload timestamp, file type, size, and permissions in your Neon Postgres database.
 
 This pattern separates file storage from relational data management, with purpose-built services like S3 or R2 handling file storage and Neon managing your data.
 

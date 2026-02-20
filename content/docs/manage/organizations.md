@@ -6,10 +6,10 @@ summary: >-
   roles, permissions, and the process for creating and overseeing organizations
   and their associated projects.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.117Z'
+updatedOn: '2026-02-15T20:51:54.232Z'
 ---
 
-In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects, collaborate with team members, and — for paid plans — handle your billing.
+In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects, collaborate with team members, and (for paid plans) handle your billing.
 
 ## About Neon Organizations
 
@@ -21,8 +21,8 @@ In the Neon Console, the Organizations page gives you a centralized view of all 
 
 Organizations have two main member roles:
 
-- **Admin** — Full control over the organization and all its projects.
-- **Member** — Access to all organization projects, but cannot modify org settings or delete projects.
+- **Admin**: Full control over the organization and all its projects.
+- **Member**: Access to all organization projects, but cannot modify org settings or delete projects.
 
 For a full breakdown of what each role can do, see the [User Permissions](/docs/manage/user-permissions) page.
 
@@ -36,8 +36,8 @@ You can create additional organizations at any time. [See how to create an organ
 
 As we continue to refine our organization features, here are some temporary limitations you should be aware of:
 
-- **Branch management** — All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
-- **Permissions and roles** — The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
+- **Branch management**: All users are currently able to manage [protected branches](/docs/guides/protected-branches), regardless of their role or permission level. Granular permissions for this feature are not yet implemented.
+- **Permissions and roles**: The current permissions system may not meet all needs for granular control. Users are encouraged to share their feedback and requirements for more detailed permissions settings.
 
 ## Feedback
 

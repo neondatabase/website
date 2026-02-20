@@ -9,7 +9,7 @@ redirectFrom:
   - /docs/guides/vercel-postgres
   - /docs/guides/vercel
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.064Z'
+updatedOn: '2026-02-15T20:51:54.206Z'
 ---
 
 ## Overview
@@ -40,7 +40,7 @@ Choose the **Neon-Managed Integration** if you already have a Neon account or pr
 ## Choose your integration path
 
 <Admonition type="important" title="Do you need custom CI/CD control?">
-**If you want to build preview branching into your own CI/CD pipelines (e.g., via GitHub Actions)**, use a **[manual connection](/docs/guides/vercel-manual)** instead of the automated integrations below.
+**If you want to build preview branching into your own CI/CD pipelines (for example, via GitHub Actions)**, use a **[manual connection](/docs/guides/vercel-manual)** instead of the automated integrations below.
 </Admonition>
 
 For automated integrations, follow this simple flow:

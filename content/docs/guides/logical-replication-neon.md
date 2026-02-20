@@ -7,7 +7,7 @@ summary: >-
   management of replication slots and implications for scaling.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.014Z'
+updatedOn: '2026-02-15T20:51:54.172Z'
 ---
 
 This topic outlines information about logical replication specific to Neon, including important notices.
@@ -27,7 +27,7 @@ These notices apply when replicating data from Neon:
 ### Neon as a subscriber
 
 - Before dropping a database in response to a user issued `DROP DATABASE` command or operation, Neon will drop any logical replication subscriptions defined in the database.
-- To prevent issues due to unintended duplication of logical replication subscriptions, subscriptions defined on a parent branch are not duplicated on child branches — they are dropped from child branches before the compute associated with the child branch starts. This applies to all branching contexts where logical replication subscriptions could be duplicated on a child branch, including creating a child branch, resetting a child branch, and restoring a child branch.
+- To prevent issues due to unintended duplication of logical replication subscriptions, subscriptions defined on a parent branch are not duplicated on child branches; they are dropped from child branches before the compute associated with the child branch starts. This applies to all branching contexts where logical replication subscriptions could be duplicated on a child branch, including creating a child branch, resetting a child branch, and restoring a child branch.
 
 ## Logical replication and scale to zero
 

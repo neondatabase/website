@@ -62,7 +62,7 @@ These rules are meant to cover most of the common scenarios you might face, but 
 
 Internal tools inherently require business logic and data storage. Neon provides a free serverless Postgres database, along with all the most popular Postgres extensions, and offers a serverless database driver that’s perfect for single-shot queries in Next.js serverless functions.
 
-For business logic, you can use Next’s server actions and API routes without the overhead of managing and deploying a separate API—ideal for simple internal tools. Vercel makes hosting your Next.js app painless, even allowing you to attach a custom domain so that you can host it at something like `yourtool.yourcompany.tld`.
+For business logic, you can use Next’s server actions and API routes without the overhead of managing and deploying a separate API, ideal for simple internal tools. Vercel makes hosting your Next.js app painless, even allowing you to attach a custom domain so that you can host it at something like `yourtool.yourcompany.tld`.
 
 ## Customize the App for Your Team
 

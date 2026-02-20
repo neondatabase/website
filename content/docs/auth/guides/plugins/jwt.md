@@ -7,7 +7,7 @@ summary: >-
   domains, while emphasizing that it does not replace session management for
   standard web applications.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:32.746Z'
+updatedOn: '2026-02-15T20:51:54.038Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
@@ -46,7 +46,7 @@ export async function getJwtToken() {
 
   if (error) throw error;
 
-  // The token string (e.g., "eyJhbGciOiJFZ...")
+  // The token string (for example, "eyJhbGciOiJFZ...")
   return data.token;
 }
 ```
@@ -322,7 +322,7 @@ Because Neon Auth is a managed service, certain server-side configurations avail
 
 If a token is rejected during verification, check the following:
 
-1. Verify that you are using the correct JWKS endpoint for your Neon Auth instance. The issuer of the token must match the origin of your Neon Auth URL. (e.g., if your Neon Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, the issuer should be `https://ep-xx.aws.neon.tech`).
+1. Verify that you are using the correct JWKS endpoint for your Neon Auth instance. The issuer of the token must match the origin of your Neon Auth URL. (for example, if your Neon Auth URL is `https://ep-xx.aws.neon.tech/neondb/auth`, the issuer should be `https://ep-xx.aws.neon.tech`).
 2. Confirm that your verification library supports **EdDSA** (Ed25519).
 3. Make sure the token has not expired.
 4. Check that the `kid` in the JWT header matches one of the keys in the JWKS response. If not, fetch the latest keys from the JWKS endpoint.

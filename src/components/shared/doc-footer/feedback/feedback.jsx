@@ -32,22 +32,24 @@ const Feedback = ({ slug }) => {
           isFeedbackSent ? 'invisible opacity-0' : 'visible opacity-100'
         )}
       >
-        <span className="text-sm leading-tight">Was this page helpful?</span>
-        <div className="flex space-x-3">
+        <span className="text-sm leading-snug tracking-extra-tight text-gray-new-40 dark:text-gray-new-70">
+          Was this page helpful?
+        </span>
+        <div className="flex space-x-2.5">
           <button
-            className="group flex items-center space-x-1 rounded border border-gray-new-90 px-2.5 py-1.5 text-xs leading-none dark:border-gray-new-20 dark:text-gray-7"
+            className="group flex items-center space-x-1 border border-gray-new-80 px-3 py-2 text-sm leading-none tracking-tight text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-85"
             type="button"
             onClick={() => handleFeedbackClick(true, slug)}
           >
-            <ThumbsUpIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-primary-1 group-active:text-primary-1 dark:text-gray-4" />
+            <ThumbsUpIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-[#38A57D] group-active:text-[#38A57D] dark:text-gray-new-85" />
             <span>Yes</span>
           </button>
           <button
-            className="group flex items-center space-x-1 rounded border border-gray-new-90 px-2.5 py-1.5 text-xs leading-none dark:border-gray-new-20 dark:text-gray-7"
+            className="group flex items-center space-x-1 border border-gray-new-80 px-3 py-2 text-sm leading-none tracking-tight text-gray-new-30 dark:border-gray-new-20 dark:text-gray-new-85"
             type="button"
             onClick={() => handleFeedbackClick(false, slug)}
           >
-            <ThumbsDownIcon className="h-2.5 w-2.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-4" />
+            <ThumbsDownIcon className="h-3.5 w-3.5 shrink transition-colors duration-200 group-hover:text-secondary-1 group-active:text-secondary-1 dark:text-gray-new-85" />
             <span>No</span>
           </button>
         </div>

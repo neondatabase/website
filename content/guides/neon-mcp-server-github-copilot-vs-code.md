@@ -15,7 +15,7 @@ In this guide, you'll learn how to use the [**Neon Serverless Postgres MCP serve
 
 ## From Code Generation to Database Management with GitHub Copilot
 
-AI agents are no longer just helping write code—they’re creating and managing databases. When a chatbot logs a customer conversation, or a new region spins up in the Azure cloud, or a new user signs up, an AI agent can automatically create a database in seconds. No need to open a dashboard or call an API. This is the next evolution of software development: **infrastructure as intent**. With tools like database MCP servers, agents can now generate real backend services as easily as they generate code.
+AI agents are no longer just helping write code, they’re creating and managing databases. When a chatbot logs a customer conversation, or a new region spins up in the Azure cloud, or a new user signs up, an AI agent can automatically create a database in seconds. No need to open a dashboard or call an API. This is the next evolution of software development: **infrastructure as intent**. With tools like database MCP servers, agents can now generate real backend services as easily as they generate code.
 
 GitHub Copilot becomes your full-stack teammate. It can answer database-related questions, fetch your database connection string, update environment variables in your Azure Function, generate SQL queries to populate tables with mock data, and even help you create new databases or tables on the fly. All directly from your editor, with natural language prompts. Neon has a dedicated [MCP server](https://github.com/neondatabase-labs/mcp-server-neon) that makes it possible for Copilot to directly understand the structure of your Postgres database.
 
@@ -113,7 +113,7 @@ Copilot will generate a REST API using Azure Functions in JavaScript with a basi
 
 ## Combine the Azure MCP Server
 
-Neon MCP gives GitHub Copilot full access to your database schema, so it can help you write SQL queries, connect to the database, and build API endpoints. But when you add **[Azure MCP](https://github.com/Azure/azure-mcp?tab=readme-ov-file)** into the mix, Copilot can also understand your Azure services—like Blob Storage, Queues, and Azure AI.
+Neon MCP gives GitHub Copilot full access to your database schema, so it can help you write SQL queries, connect to the database, and build API endpoints. But when you add **[Azure MCP](https://github.com/Azure/azure-mcp?tab=readme-ov-file)** into the mix, Copilot can also understand your Azure services (like Blob Storage, Queues, and Azure AI).
 
 You can run both **Neon MCP** and **Azure MCP** at the same time to create a full cloud-native developer experience. For example:
 
@@ -126,7 +126,7 @@ Copilot pulls context from both MCP servers, which means smarter code suggestion
 
 ## Final Thoughts
 
-With GitHub Copilot, Neon MCP server, and Azure Functions, you're no longer writing backend code line by line. It is so fast to build APIs. You're _orchestrating_ services with intent. This is not the future—it’s something you can use today.
+With GitHub Copilot, Neon MCP server, and Azure Functions, you're no longer writing backend code line by line. It is so fast to build APIs. You're _orchestrating_ services with intent. This is not the future, it’s something you can use today.
 
 ## Resources
 

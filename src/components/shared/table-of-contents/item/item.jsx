@@ -67,11 +67,11 @@ const Item = ({
     <LazyMotion features={domAnimation}>
       <a
         className={clsx(
-          'flex items-start gap-2.5 rounded-sm py-1.5 text-sm leading-tight',
+          'flex items-start gap-2 rounded-sm py-0 text-sm font-normal leading-snug tracking-extra-tight',
           'transition-colors duration-200',
           isActive
-            ? 'font-medium text-secondary-8 dark:text-primary-1'
-            : 'text-gray-new-40 hover:text-black-new dark:text-[#A1A1AA] dark:hover:text-white',
+            ? 'font-medium text-secondary-8 dark:text-white'
+            : 'text-gray-new-40 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
           '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
         )}
         href={href}
@@ -81,7 +81,7 @@ const Item = ({
           <>
             <span
               className={clsx(
-                'z-10 flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-[10px] font-medium leading-none tracking-extra-tight outline outline-[3px] outline-white transition-colors duration-200 dark:outline-black-new',
+                'z-10 flex size-4 shrink-0 items-center justify-center rounded-full bg-gray-new-15 text-[10px] font-normal leading-none tracking-extra-tight outline outline-[3px] outline-white transition-colors duration-200 dark:outline-black-new',
                 currentAnchor === id || index < currentIndex
                   ? 'bg-gray-new-15 text-white dark:bg-gray-new-94 dark:text-black-new'
                   : 'bg-gray-new-90 text-black-new dark:bg-gray-new-20 dark:text-gray-new-98'
@@ -104,14 +104,24 @@ const Item = ({
       <AnimatePresence initial={false}>
         {shouldRenderSubItems && (
           <m.ul
-            className={clsx(numberedStep ? 'ml-[34px]' : 'ml-2')}
+            className={clsx(
+              numberedStep
+                ? 'ml-[34px]'
+                : 'relative mt-3 flex flex-col gap-3 pl-4 before:absolute before:bottom-0 before:left-0 before:top-0 before:w-px before:bg-gray-new-80 dark:before:bg-gray-new-15/70'
+            )}
             initial={{ opacity: 0, maxHeight: 0 }}
             animate={{ opacity: 1, maxHeight: 1000 }}
             exit={{ opacity: 0, maxHeight: 0 }}
             transition={{ duration: 0.2 }}
           >
             {items.map((item, subIndex) => (
-              <li className="relative" key={subIndex}>
+              <li
+                className={clsx(
+                  'relative before:absolute before:-left-4 before:bottom-0 before:top-0 before:w-px before:bg-gray-new-15/70 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-white',
+                  item.id === currentAnchor && 'before:opacity-100'
+                )}
+                key={subIndex}
+              >
                 <Item
                   index={item.index}
                   currentIndex={currentIndex}
