@@ -66,7 +66,7 @@ The natural follow-up question is: _So you're telling me I need to run and manag
 
 ### API-first control, built for platforms
 
-Neon is designed to be managed programmatically. **Provisioning a new Postgres database is one API call.** 
+Neon is designed to be managed programmatically. **Provisioning a new Postgres database is one API call.**
 
 From your backend, you can:
 
@@ -77,8 +77,8 @@ From your backend, you can:
 - Monitor usage across thousands of projects
 - Enforce limits without downtime
 
-| Use case                         | API endpoint                                                | What it enables                                                   |
-| -------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------- |
+| Use case                         | API endpoint                                                  | What it enables                                                   |
+| -------------------------------- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
 | Provision a new user database    | `POST /api/v2/projects`                                       | Instantly create a new Postgres project per user (about 1 second) |
 | Configure compute scaling        | `default_endpoint_settings.autoscaling_limit_min_cu / max_cu` | Define min/max compute per pricing tier                           |
 | Configure suspend behavior       | `suspend_timeout_seconds`                                     | Control how aggressively inactive databases scale to zero         |
@@ -131,14 +131,14 @@ With Neon's [project-per-user model](https://neon.com/docs/guides/embedded-postg
 
 Because quotas are enforced at the project level, your pricing plans become API-configured infrastructure definitions.
 
-| User-facing plan limit     | Free _example_ | Pro _example_ | Enterprise _example_ | Configured in Neon via                                                                |
-| -------------------------- | -------------- | ------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| User-facing plan limit     | Free _example_ | Pro _example_ | Enterprise _example_ | Configured in Neon via                                                                    |
+| -------------------------- | -------------- | ------------- | -------------------- | ----------------------------------------------------------------------------------------- |
 | Compute (min/max CU)       | 0.25 / 0.25    | 0.25 / 2      | 1 / 8                | `default_endpoint_settings.autoscaling_limit_min_cu` / `max_cu` (Create or PATCH project) |
-| Active time (compute time) | 100 hrs/month  | 750 hrs/month | Unlimited            | `project.settings.quota.compute_time_seconds`                                           |
-| Storage                    | 512 MB         | 10 GB         | 100 GB+              | `project.settings.quota.logical_size_bytes`                                             |
-| Data transfer              | 5 GB           | 50 GB         | Custom               | `project.settings.quota.data_transfer_bytes`                                            |
-| Written data               | 1 GB           | 50 GB         | Custom               | `project.settings.quota.written_data_bytes`                                             |
-| Suspend timeout            | 5 min          | 10 min        | Custom               | `default_endpoint_settings.suspend_timeout_seconds`                                     |
+| Active time (compute time) | 100 hrs/month  | 750 hrs/month | Unlimited            | `project.settings.quota.compute_time_seconds`                                             |
+| Storage                    | 512 MB         | 10 GB         | 100 GB+              | `project.settings.quota.logical_size_bytes`                                               |
+| Data transfer              | 5 GB           | 50 GB         | Custom               | `project.settings.quota.data_transfer_bytes`                                              |
+| Written data               | 1 GB           | 50 GB         | Custom               | `project.settings.quota.written_data_bytes`                                               |
+| Suspend timeout            | 5 min          | 10 min        | Custom               | `default_endpoint_settings.suspend_timeout_seconds`                                       |
 
 _Example of pricing plans you can implement by configuring Neon quotas._
 
