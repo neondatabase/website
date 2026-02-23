@@ -82,7 +82,7 @@ SELECT * FROM players;
 
 Output:
 
-```
+```text
  id | team_id | player | role
 ----+---------+--------+-------
   1 |       1 | Ava    | Guard
@@ -97,7 +97,7 @@ Output:
 
 The following statement joins the first table (`teams`) with the second table (`players`) by matching the values in the `id` and `team_id` columns:
 
-```
+```sql
 SELECT
     teams.id AS team_id,
     team,
@@ -132,7 +132,7 @@ The following diagram illustrates the inner join:
 
 The following statement uses the left join clause to join the `teams` table with the `players` table. In the left join context, the first table is called the left table and the second table is called the right table.
 
-```
+```sql
 SELECT
     teams.id AS team_id,
     team,
@@ -330,7 +330,7 @@ WHERE teams.id IS NULL OR players.id IS NULL;
 
 Here is the result:
 
-```
+```text
  team_id |  team  | city | player_id | player | role
 ---------+--------+------+-----------+--------+-------
        3 | Bears  | Bern |      null | null   | null
