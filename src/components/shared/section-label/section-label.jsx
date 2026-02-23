@@ -31,7 +31,7 @@ const SectionLabel = ({
   if (databricks) {
     iconNode = (
       <Image
-        className="sm:size-2.5"
+        className="relative translate-y-[3px] sm:size-2.5"
         src={databricksIcon}
         width={20}
         height={20}
