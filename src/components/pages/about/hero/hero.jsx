@@ -5,9 +5,9 @@ import PauseableVideo from 'components/shared/pauseable-video';
 import LINKS from 'constants/links';
 
 const Hero = () => (
-  <section className="hero safe-paddings relative h-[820px] border-b border-gray-new-20 xl:h-[904px] lg:h-[665px] md:h-[587px]">
+  <section className="hero safe-paddings relative h-[820px] border-b border-gray-new-20 xl:h-[854px] lg:h-[665px] md:h-[587px]">
     <Container
-      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[402px] lg:pb-10 lg:pt-[210px] md:justify-end md:gap-y-36 md:pt-0"
+      className="flex h-full w-full flex-col items-center justify-between pb-12 pt-[360px] xl:pt-[353px] lg:pb-10 lg:pt-[210px] md:justify-end md:gap-y-36 md:pt-0"
       size="1600"
     >
       <Heading
@@ -53,7 +53,7 @@ const Hero = () => (
     <div className="absolute inset-0 -z-10 mx-auto max-w-[1920px]">
       <PauseableVideo
         className="h-full w-full"
-        videoClassName="h-full w-full object-cover top-12 xl:top-0 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-24"
+        videoClassName="h-full w-full object-cover top-0 xl:-top-6 lg:scale-[1.2] lg:-top-12 md:scale-100 md:-top-24"
         width={2880}
         height={1328}
       >
