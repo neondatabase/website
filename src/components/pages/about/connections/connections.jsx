@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
+import Link from 'components/shared/link';
 import SecondarySection from 'components/shared/secondary-section';
 import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
 import DotsPattern from 'images/dots-pattern.inline.svg';
 
-import ArrowIcon from './images/arrow-right.inline.svg';
 import DiscordIcon from './images/discord-icon.inline.svg';
 import LinkedInIcon from './images/linkedin-icon.inline.svg';
 import XTwitterIcon from './images/x-twitter-icon.inline.svg';
@@ -35,7 +35,7 @@ const CONNECTIONS_DATA = [
 ];
 
 const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) => (
-  <article className="group relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6 md:py-6">
+  <article className="relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6 md:py-6">
     <Icon
       className="relative z-10 h-[52px] w-[52px] text-black-pure lg:h-11 lg:w-11"
       aria-hidden="true"
@@ -50,16 +50,15 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
       </p>
     </div>
 
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+    <Link
+      to={href}
       className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40 lg:text-sm"
       aria-label={`${linkText} - ${platform}`}
+      isExternal
+      withArrow
     >
-      <span>{linkText}</span>
-      <ArrowIcon className="h-3 w-3 text-gray-new-40" aria-hidden="true" />
-    </a>
+      {linkText}
+    </Link>
 
     <div
       className="pointer-events-none absolute right-0 top-0 h-full w-[320px] xl:w-[280px] lg:w-[240px] md:w-[220px]"

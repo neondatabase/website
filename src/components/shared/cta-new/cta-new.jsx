@@ -29,6 +29,7 @@ const CTANew = ({
   title = "The world's most advanced <br /> Postgres platform.",
   description = null,
   label = 'Get started',
+  labelIcon = 'triangle',
   buttonText = 'Get started',
   buttonUrl = LINKS.signup,
   buttonType = null,
@@ -36,7 +37,9 @@ const CTANew = ({
   <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
-        <SectionLabel className="text-gray-new-80 sm:mb-4">{label}</SectionLabel>
+        <SectionLabel className="text-gray-new-80 sm:mb-4" icon={labelIcon}>
+          {label}
+        </SectionLabel>
         <div
           className={clsx(
             'mt-6 max-w-[800px] text-[48px] leading-dense tracking-tighter xl:max-w-[760px] xl:text-[44px] lg:text-[40px] md:mt-4 md:text-[28px] sm:max-w-none',
@@ -77,6 +80,7 @@ CTANew.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   label: PropTypes.string,
+  labelIcon: PropTypes.string,
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
   buttonType: PropTypes.oneOf(['aiHelper', null]),

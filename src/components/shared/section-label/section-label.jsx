@@ -16,62 +16,60 @@ const sizeClassName = {
   large: 'text-[13px] sm:text-[10px]',
 };
 
+const iconMap = {
+  triangle: ({ isDenseVariant }) => (
+    <Image
+      src={triangleIcon}
+      alt=""
+      width={12}
+      height={14}
+      aria-hidden="true"
+      className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'}
+    />
+  ),
+  arrow: ({ isDenseVariant }) => (
+    <LabelArrow
+      aria-hidden="true"
+      focusable="false"
+      className={clsx(
+        'block h-3.5 w-3 flex-none text-[#FF3621]',
+        isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'
+      )}
+    />
+  ),
+  databricks: () => (
+    <Image
+      className="size-4 sm:size-2.5"
+      src={databricksIcon}
+      width={20}
+      height={20}
+      alt="Databricks logo"
+    />
+  ),
+};
+
 const SectionLabel = ({
   className = '',
   theme = 'black',
   size = 'regular',
   variant = 'default',
   icon = 'triangle',
-  databricks = false,
   children,
 }) => {
   const isDenseVariant = variant === 'dense';
-  let iconNode;
-
-  if (databricks) {
-    iconNode = (
-      <Image
-        className="sm:size-2.5"
-        src={databricksIcon}
-        width={20}
-        height={20}
-        alt="Databricks logo"
-      />
-    );
-  } else if (icon === 'arrow') {
-    iconNode = (
-      <LabelArrow
-        aria-hidden="true"
-        focusable="false"
-        className={clsx(
-          'block h-3.5 w-3 flex-none text-[#FF3621]',
-          isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'
-        )}
-      />
-    );
-  } else {
-    iconNode = (
-      <Image
-        src={triangleIcon}
-        alt=""
-        width={12}
-        height={14}
-        aria-hidden="true"
-        className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'}
-      />
-    );
-  }
+  const IconRenderer = iconMap[icon];
 
   return (
     <div
       className={clsx(
         'flex',
-        isDenseVariant ? 'h-3.5 items-end gap-2 md:h-2.5 md:gap-1.5' : 'items-end gap-2 sm:gap-1.5',
+        isDenseVariant ? 'h-3.5 gap-2 md:h-2.5 md:gap-1.5' : 'gap-2 sm:gap-1.5',
+        icon === 'databricks' ? 'items-center' : 'items-end',
         !isDenseVariant && themeClassName[theme],
         className
       )}
     >
-      {iconNode}
+      <IconRenderer isDenseVariant={isDenseVariant} />
       <span
         className={clsx(
           'font-mono font-medium uppercase leading-none',
@@ -89,8 +87,7 @@ SectionLabel.propTypes = {
   theme: PropTypes.oneOf(Object.keys(themeClassName)),
   size: PropTypes.oneOf(Object.keys(sizeClassName)),
   variant: PropTypes.oneOf(['default', 'dense']),
-  icon: PropTypes.oneOf(['triangle', 'arrow']),
-  databricks: PropTypes.bool,
+  icon: PropTypes.oneOf(Object.keys(iconMap)),
   children: PropTypes.node.isRequired,
 };
 
