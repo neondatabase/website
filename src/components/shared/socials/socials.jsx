@@ -1,3 +1,6 @@
+import clsx from 'clsx';
+import PropTypes from 'prop-types';
+
 import LINKS from 'constants/links';
 import DiscordIcon from 'icons/discord-sm.inline.svg';
 import LinkedInIcon from 'icons/linkedin-sm.inline.svg';
@@ -27,25 +30,33 @@ const socialLinks = [
   },
 ];
 
-const Socials = () => (
+const Socials = ({ withTitle = true }) => (
   <>
-    <span className="text-[15px] font-medium tracking-extra-tight text-gray-new-70">Follow us</span>
-    <ul className="mt-3 flex flex-wrap gap-4">
+    {withTitle && (
+      <span className="text-[15px] font-medium tracking-extra-tight text-gray-new-70">
+        Follow us
+      </span>
+    )}
+    <ul className={clsx('flex flex-wrap gap-4', withTitle && 'mt-3')}>
       {socialLinks.map(({ name, url, icon: Icon }, index) => (
         <li className="flex items-center" key={index}>
           <a
-            className="group flex items-center justify-center rounded-full"
+            className="group flex items-center justify-center"
             aria-label={name}
             href={url}
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon className="h-4 w-auto text-gray-new-70 transition-colors duration-200 group-hover:text-green-45" />
+            <Icon className="h-4 w-auto text-gray-new-60 transition-colors duration-200 group-hover:text-green-45" />
           </a>
         </li>
       ))}
     </ul>
   </>
 );
+
+Socials.propTypes = {
+  withTitle: PropTypes.bool,
+};
 
 export default Socials;

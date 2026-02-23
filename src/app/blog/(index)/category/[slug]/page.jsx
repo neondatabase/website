@@ -4,7 +4,6 @@ import { Suspense } from 'react';
 import BlogGridItem from 'components/pages/blog/blog-grid-item';
 import BlogHeader from 'components/pages/blog/blog-header';
 import BlogSearch from 'components/shared/blog-search';
-import ChangelogForm from 'components/shared/changelog-form';
 import ScrollLoader from 'components/shared/scroll-loader';
 import { BLOG_BASE_PATH, BLOG_CATEGORY_BASE_PATH } from 'constants/blog';
 import { getBlogCategoryDescription } from 'constants/seo-data';
@@ -21,13 +20,17 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
   return (
     <>
       <BlogHeader
-        className="lg:-top-[68px] md:-top-[62px] md:pb-16"
-        title="Blog"
+        className="border-b border-gray-new-20 pb-12 lg:-top-[68px] md:-top-[62px] md:pb-16"
+        title="What we’re shipping. What you’re building."
         category={category.name}
         basePath={BLOG_BASE_PATH}
+        withLabel
       />
       <Suspense fallback={null}>
-        <BlogSearch posts={posts} searchInputClassName="lg:-top-[68px] md:top-0">
+        <BlogSearch
+          searchInputClassName="right-full mr-16 top-[256px] lg:-top-[68px] md:top-0"
+          posts={posts}
+        >
           <div className="grid grid-cols-2 gap-x-6 xl:gap-x-5 md:grid-cols-1">
             {posts.slice(0, 10).map((post, index) => (
               <BlogGridItem
@@ -45,7 +48,6 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
                 ))}
               </ScrollLoader>
             )}
-            <ChangelogForm className="-order-1 col-span-2 md:col-span-1" />
           </div>
         </BlogSearch>
       </Suspense>

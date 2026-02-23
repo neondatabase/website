@@ -1,6 +1,6 @@
 .ais-SearchBox {
   &-input {
-    @apply flex h-8 w-96 shrink-0 grow cursor-text items-center rounded pb-px pl-[30px] pr-36 search-cancel:appearance-none;
+    @apply flex h-10 w-[288px] shrink-0 grow cursor-text items-center pb-px pl-[30px] pr-36 search-cancel:appearance-none;
     @apply border border-gray-new-90 bg-white bg-[url('/images/icons/search-light.svg')] bg-[left_10px_center] bg-no-repeat outline-none;
     @apply text-left text-sm leading-none tracking-extra-tight;
     @apply transition-colors duration-200 hover:border-gray-new-70 hover:shadow-none focus:border-gray-new-70;
