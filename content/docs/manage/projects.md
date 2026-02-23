@@ -21,7 +21,7 @@ When you add a new project, Neon creates the following resources by default:
 - A single primary read-write compute. This is the compute associated with the branch. For more information, see [Manage computes](/docs/manage/computes).
 - A Postgres database that resides on the project's default branch. If you did not specify your own database name when creating the project, the database created is named `neondb`.
 - A Postgres role that is named for your database. For example, if your database is named `neondb`, the project is created with a default role named `neondb_owner`.
-- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
+- Storage depends on your [Neon plan](/docs/introduction/plans): the Free plan includes 0.5 GB per project (shared across all branches), while paid plans (Launch and Scale) are usage-based: you pay only for what you use. Each branch on paid plans supports a logical data size of up to 16 TB. To increase this limit, [request a storage increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 ## Create a project
 
