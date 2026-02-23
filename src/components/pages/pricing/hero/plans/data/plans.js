@@ -17,7 +17,7 @@ export default [
             moreLink: { text: 'Read more', href: '#what-is-a-project' },
           },
           {
-            title: '100 CU-hrs per project',
+            title: '100 CU-hrs monthly per project',
             info: '<p>CU-hour = CU x active hours</p><p>1 CU ≈ 4 GB RAM</p>',
             moreLink: { text: 'Read more', href: '#compute-usage' },
           },
