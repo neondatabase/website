@@ -65,6 +65,7 @@ const Link = forwardRef(
       theme = null,
       to = null,
       withArrow = false,
+      arrowClassName = null,
       icon = null,
       tagName = null,
       tagText = null,
@@ -100,7 +101,12 @@ const Link = forwardRef(
       <>
         {withArrow ? <span>{children}</span> : children}
         {withArrow && (
-          <ArrowRightIcon className="-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]" />
+          <ArrowRightIcon
+            className={clsx(
+              '-mb-px size-3.5 shrink-0 transition-transform duration-200 group-hover:translate-x-[3px]',
+              arrowClassName
+            )}
+          />
         )}
         {Icon && (
           <span className="whitespace-nowrap no-underline">
@@ -156,6 +162,7 @@ Link.propTypes = {
   theme: PropTypes.oneOf(Object.keys(styles.theme)),
   children: PropTypes.node.isRequired,
   withArrow: PropTypes.bool,
+  arrowClassName: PropTypes.string,
   icon: PropTypes.oneOf(Object.keys(icons)),
   prefetch: PropTypes.bool,
   tagName: PropTypes.string,

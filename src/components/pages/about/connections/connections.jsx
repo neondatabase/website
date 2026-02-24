@@ -52,7 +52,8 @@ const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) =
 
     <Link
       to={href}
-      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure transition-colors duration-200 hover:text-gray-new-40 lg:text-sm"
+      className="relative z-10 mt-auto flex items-center gap-2 text-base font-medium leading-none tracking-extra-tight text-black-pure lg:text-sm"
+      arrowClassName="text-gray-new-40 transition-colors duration-200 group-hover:text-black"
       aria-label={`${linkText} - ${platform}`}
       isExternal
       withArrow

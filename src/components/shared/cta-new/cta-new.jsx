@@ -37,7 +37,7 @@ const CTANew = ({
   <section className={clsx('cta safe-paddings relative bg-[#151617]', className)}>
     <div className="absolute inset-0 z-10">
       <Container className="top-1/2 -translate-y-1/2" size="1920">
-        <SectionLabel className="text-gray-new-80 sm:mb-4" icon={labelIcon}>
+        <SectionLabel className="sm:mb-4" theme="white" icon={labelIcon}>
           {label}
         </SectionLabel>
         <div
