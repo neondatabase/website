@@ -62,7 +62,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
           <span
             className={clsx(
               'post-author',
-              'text-[15px] font-semibold leading-dense tracking-extra-tight transition-colors duration-200'
+              'text-[15px] font-medium leading-dense tracking-extra-tight transition-colors duration-200'
             )}
           >
             {authors.length === 1

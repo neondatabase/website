@@ -150,13 +150,19 @@
 
     .admonition {
       @apply border-l-2;
+
+      a {
+        @apply text-white underline decoration-white/40 decoration-dashed underline-offset-4 hover:decoration-white;
+      }
     }
 
     .wp-block-quote {
-      @apply border-l-2 border-green-44 pl-4 font-mono font-normal not-italic;
+      @apply border-l-2 border-green-44 pl-6 font-mono font-normal not-italic;
 
+      strong,
+      b,
       p {
-        @apply my-0 text-xl;
+        @apply my-0 text-xl font-normal leading-snug tracking-tighter;
 
         &::before,
         &::after {

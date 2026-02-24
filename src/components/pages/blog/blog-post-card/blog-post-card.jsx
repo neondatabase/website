@@ -62,7 +62,7 @@ const BlogPostCard = ({
         'blog-post-card flex',
         fullSize ? 'flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
-          '!flex-row gap-x-6 border-t border-gray-new-20 py-5 first-of-type:border-0 first-of-type:pt-0',
+          '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0',
         className
       )}
     >
@@ -91,15 +91,14 @@ const BlogPostCard = ({
       )}
       <div
         className={clsx(
-          'flex flex-col',
-          fullSize && largeCover ? 'w-[684px] shrink-0 pr-20 md:w-full' : 'w-full',
+          'flex w-[684px] shrink-0 flex-col pr-20 md:w-full',
+          fullSize && largeCover ? '' : 'mr-auto',
           isSmart && '!w-[424px] shrink-0 flex-col-reverse'
         )}
       >
         <div
           className={clsx(
-            'flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
-            fullSize ? 'mb-4' : 'mb-8',
+            'mb-8 flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
             isSmart && '!mb-0 mt-auto'
           )}
         >
@@ -135,7 +134,7 @@ const BlogPostCard = ({
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
                 ? 'text-2xl leading-tight md:text-lg'
-                : 'text-[28px] font-medium leading-snug md:text-lg'
+                : 'text-[28px] font-normal leading-snug md:text-lg'
             )}
           >
             {title}

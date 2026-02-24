@@ -31,7 +31,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
           searchInputClassName="right-full mr-16 top-[256px] lg:-top-[68px] md:top-0"
           posts={posts}
         >
-          <div className="grid grid-cols-2 gap-x-16 gap-y-4 xl:gap-x-5 md:grid-cols-1">
+          <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1">
             {posts.slice(0, 10).map((post, index) => (
               <BlogGridItem
                 key={post.slug}

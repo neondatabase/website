@@ -72,7 +72,7 @@ const fetchWpPostsByCategorySlug = async (slug, first, after) => {
           slug
           date
           title(format: RENDERED)
-          content(format: RENDERED)
+          excerpt(format: RENDERED)
           pageBlogPost {
             largeCover {
               altText

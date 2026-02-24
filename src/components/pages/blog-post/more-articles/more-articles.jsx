@@ -13,7 +13,7 @@ const MoreArticles = ({ className = null, posts }) => (
       <span className="ml-2.5 h-px grow bg-gray-new-20" />
     </h2>
 
-    <div className="mt-10 flex flex-col">
+    <div className="mt-8 flex flex-col">
       {posts.map((post, index) => (
         <BlogPostCard key={index} {...post} imageWidth={260} imageHeight={146} isSmart />
       ))}
