@@ -212,9 +212,9 @@ function getSectionOrder(organized) {
   const allSections = Object.keys(organized);
   const ordered = [];
 
-  // Configured sections in order (if they have entries or are collapsed)
+  // Configured sections in order (if they have entries, are collapsed, or have a sub-index)
   for (const sectionConf of config.sections) {
-    if (organized[sectionConf.name] || sectionConf.collapse) {
+    if (organized[sectionConf.name] || sectionConf.collapse || sectionConf.subIndex) {
       ordered.push(sectionConf.name);
     }
   }
@@ -234,15 +234,36 @@ function getSectionConfig(sectionName) {
 }
 
 /**
+ * Order subsection names: explicit order from config first, then remaining alphabetically
+ */
+function orderSubsections(sectionName, subsectionNames) {
+  const explicit = getSectionConfig(sectionName)?.subsectionOrder || [];
+  const named = new Set(subsectionNames);
+  const rest = subsectionNames.filter((n) => !explicit.includes(n)).sort();
+  return [...explicit.filter((n) => named.has(n)), ...rest];
+}
+
+/**
+ * Flatten all docs from a section (direct files + subsection files), sorted by title
+ */
+function getAllDocsForSection(sectionData) {
+  const all = [...sectionData._files];
+  for (const subDocs of Object.values(sectionData._subsections)) {
+    all.push(...subDocs);
+  }
+  return all.sort((a, b) => a.title.localeCompare(b.title));
+}
+
+/**
  * Generate the index text
  */
-function generateIndexText(organized, tagline, collapsedEntries = []) {
+function generateIndexText(organized, collapsedEntries = []) {
   const lines = [];
 
   lines.push('# Neon Postgres');
   lines.push('');
-  if (tagline) {
-    lines.push(`> ${tagline}`);
+  if (config.tagline) {
+    lines.push(`> ${config.tagline}`);
     lines.push('');
   }
   if (config.intro) {
@@ -280,19 +301,45 @@ function generateIndexText(organized, tagline, collapsedEntries = []) {
       lines.push('');
     }
 
+    // Sub-indexed sections: show only highlights + link to full sub-index
+    if (sectionConf && sectionConf.subIndex) {
+      const allDocs = getAllDocsForSection(sectionData);
+      lines.push(`All ${allDocs.length} pages: ${sectionConf.subIndex.url} — key pages below`);
+      lines.push('');
+      const highlightSet = new Set(sectionConf.subIndex.highlights || []);
+      const highlighted = allDocs.filter((d) => highlightSet.has(d.path));
+      for (const doc of highlighted) {
+        const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+        lines.push(`- [${doc.title}](${doc.url})${description}`);
+      }
+      lines.push('');
+      continue;
+    }
+
     const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
     for (const doc of directFiles) {
       const description = doc.subtitle ? `: ${doc.subtitle}` : '';
       lines.push(`- [${doc.title}](${doc.url})${description}`);
     }
 
-    const subsections = Object.keys(sectionData._subsections).sort();
+    const extras = sectionConf?.extraEntries || [];
+    for (const entry of extras) {
+      const desc = entry.description ? `: ${entry.description}` : '';
+      lines.push(`- [${entry.title}](${entry.url})${desc}`);
+    }
+
+    const subsections = orderSubsections(section, Object.keys(sectionData._subsections));
+    const subDescs = sectionConf?.subsectionDescriptions || {};
     for (const subsection of subsections) {
-      if (directFiles.length > 0 || subsections.indexOf(subsection) > 0) {
+      if (directFiles.length > 0 || extras.length > 0 || subsections.indexOf(subsection) > 0) {
         lines.push('');
       }
       lines.push(`### ${subsection}`);
       lines.push('');
+      if (subDescs[subsection]) {
+        lines.push(subDescs[subsection]);
+        lines.push('');
+      }
 
       const subDocs = sectionData._subsections[subsection].sort((a, b) =>
         a.title.localeCompare(b.title)
@@ -321,25 +368,52 @@ function generateIndexText(organized, tagline, collapsedEntries = []) {
 }
 
 /**
- * Extract intro paragraph from introduction.md (used as the > tagline)
+ * Generate content for a sub-index file
  */
-async function getIntroText(contentPath) {
-  try {
-    const introPath = path.join(contentPath, 'docs/introduction.md');
-    const content = await fs.readFile(introPath, 'utf-8');
-    const { content: body } = matter(content);
+function generateSubIndexText(sectionName, sectionConf, sectionData) {
+  const lines = [];
 
-    const paragraphs = body.split('\n\n');
-    for (const p of paragraphs) {
-      const trimmed = p.trim();
-      if (trimmed && !trimmed.startsWith('<') && !trimmed.startsWith('#')) {
-        return trimmed.replace(/<[^>]+>/g, '').trim();
-      }
-    }
-  } catch (err) {
-    console.warn('Could not read introduction.md for intro text');
+  lines.push(`# Neon ${sectionName}`);
+  lines.push('');
+
+  if (sectionConf.description) {
+    lines.push(sectionConf.description);
+    lines.push('');
   }
-  return null;
+
+  lines.push(`Parent index: ${BASE_URL}/docs/llms.txt`);
+  lines.push('');
+
+  const directFiles = sectionData._files.sort((a, b) => a.title.localeCompare(b.title));
+  for (const doc of directFiles) {
+    const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+    lines.push(`- [${doc.title}](${doc.url})${description}`);
+  }
+
+  const subsections = orderSubsections(sectionName, Object.keys(sectionData._subsections));
+  const subDescs = getSectionConfig(sectionName)?.subsectionDescriptions || {};
+  for (const subsection of subsections) {
+    if (directFiles.length > 0 || subsections.indexOf(subsection) > 0) {
+      lines.push('');
+    }
+    lines.push(`## ${subsection}`);
+    lines.push('');
+    if (subDescs[subsection]) {
+      lines.push(subDescs[subsection]);
+      lines.push('');
+    }
+
+    const subDocs = sectionData._subsections[subsection].sort((a, b) =>
+      a.title.localeCompare(b.title)
+    );
+    for (const doc of subDocs) {
+      const description = doc.subtitle ? `: ${doc.subtitle}` : '';
+      lines.push(`- [${doc.title}](${doc.url})${description}`);
+    }
+  }
+
+  lines.push('');
+  return `${lines.join('\n').trim()}\n`;
 }
 
 /**
@@ -358,6 +432,20 @@ function validateConfig(organized, allExcludeMatchCounts) {
     if (sectionConf.collapse) continue;
     if (!organized[sectionConf.name]) {
       console.warn(`Warning: configured section "${sectionConf.name}" has no entries`);
+    }
+  }
+
+  // Warn about subIndex highlights that don't match any scanned doc
+  for (const sectionConf of config.sections) {
+    if (!sectionConf.subIndex || !organized[sectionConf.name]) continue;
+    const allDocs = getAllDocsForSection(organized[sectionConf.name]);
+    const docPaths = new Set(allDocs.map((d) => d.path));
+    for (const highlight of sectionConf.subIndex.highlights || []) {
+      if (!docPaths.has(highlight)) {
+        console.warn(
+          `Warning: subIndex highlight "${highlight}" in "${sectionConf.name}" not found in scanned docs`
+        );
+      }
     }
   }
 }
@@ -379,14 +467,18 @@ async function main() {
   }
 
   for (const [route, srcPath] of Object.entries(CONTENT_ROUTES)) {
-    if (COLLAPSED_ROUTES[route]) {
+    if (route in COLLAPSED_ROUTES) {
       const collapsed = COLLAPSED_ROUTES[route];
-      collapsedEntries.push({
-        title: collapsed.title,
-        description: collapsed.description,
-        url: collapsed.url,
-      });
-      console.log(`  ${route}: (collapsed to single entry)`);
+      if (collapsed) {
+        collapsedEntries.push({
+          title: collapsed.title,
+          description: collapsed.description,
+          url: collapsed.url,
+        });
+        console.log(`  ${route}: (collapsed to single entry)`);
+      } else {
+        console.log(`  ${route}: (excluded)`);
+      }
       continue;
     }
 
@@ -409,18 +501,44 @@ async function main() {
   applyReclassifications(allDocs);
 
   const organized = organizeDocs(allDocs);
-  const tagline = await getIntroText(contentPath);
-  const indexContent = generateIndexText(organized, tagline, collapsedEntries);
+  const indexContent = generateIndexText(organized, collapsedEntries);
 
   validateConfig(organized, allExcludeMatchCounts);
+
+  // Collect sub-index files to write
+  const subIndexFiles = [];
+  for (const sectionConf of config.sections) {
+    if (!sectionConf.subIndex || !organized[sectionConf.name]) continue;
+    const content = generateSubIndexText(
+      sectionConf.name,
+      sectionConf,
+      organized[sectionConf.name]
+    );
+    subIndexFiles.push({
+      name: sectionConf.name,
+      outputPath: sectionConf.subIndex.outputPath,
+      content,
+    });
+  }
 
   if (dryRun) {
     console.log('--- Generated llms.txt ---\n');
     console.log(indexContent);
+    for (const sub of subIndexFiles) {
+      console.log(`--- Generated ${sub.outputPath} ---\n`);
+      console.log(sub.content);
+    }
   } else {
     const outputPath = path.join(projectRoot, OUTPUT_PATH);
     await fs.writeFile(outputPath, indexContent);
     console.log(`Written to ${outputPath}`);
+
+    for (const sub of subIndexFiles) {
+      const subPath = path.join(projectRoot, sub.outputPath);
+      await fs.mkdir(path.dirname(subPath), { recursive: true });
+      await fs.writeFile(subPath, sub.content);
+      console.log(`Written to ${subPath}`);
+    }
   }
 }
 
