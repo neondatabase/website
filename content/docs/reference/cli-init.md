@@ -23,17 +23,17 @@ This command will:
 
 ### What gets created
 
-| Artifact | Location | Scope |
-|----------|----------|-------|
-| Neon API key | Neon account (named `neonctl-init-{timestamp}`) | Account |
-| OAuth credentials (created on first auth) | `~/.config/neonctl/credentials.json` | Global |
-| MCP config (Cursor) | `~/.cursor/mcp.json` (written by extension) | Global |
-| MCP config (VS Code) | VS Code global `mcp.json` (written by extension) | Global |
-| MCP config (Claude Code) | `~/.claude.json` (written by init) | Global |
-| [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) | Cursor / VS Code | Global |
-| Agent skills | `.agents/skills/` | Project |
-| Skills symlink (Claude Code only) | `.claude/skills/neon-postgres` | Project |
-| `skills-lock.json` | Project root | Project |
+| Artifact                                                                                                          | Location                                         | Scope   |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------ | ------- |
+| Neon API key                                                                                                      | Neon account (named `neonctl-init-{timestamp}`)  | Account |
+| OAuth credentials (created on first auth)                                                                         | `~/.config/neonctl/credentials.json`             | Global  |
+| MCP config (Cursor)                                                                                               | `~/.cursor/mcp.json` (written by extension)      | Global  |
+| MCP config (VS Code)                                                                                              | VS Code global `mcp.json` (written by extension) | Global  |
+| MCP config (Claude Code)                                                                                          | `~/.claude.json` (written by init)               | Global  |
+| [Neon Local Connect extension](https://marketplace.visualstudio.com/items?itemName=databricks.neon-local-connect) | Cursor / VS Code                                 | Global  |
+| Agent skills                                                                                                      | `.agents/skills/`                                | Project |
+| Skills symlink (Claude Code only)                                                                                 | `.claude/skills/neon-postgres`                   | Project |
+| `skills-lock.json`                                                                                                | Project root                                     | Project |
 
 ### Credentials and API keys
 
@@ -67,8 +67,8 @@ Skills are installed at the project level in the current working directory. Run 
 
 ### Options
 
-| Option | Description |
-|--------|-------------|
+| Option               | Description                                                                                                                        |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `-a, --agent <name>` | Configure a specific editor, skipping the interactive selection prompt. Supported values: `cursor`, `copilot` (VS Code), `claude`. |
 
 When no `--agent` is specified, `init` is an interactive wizard that detects installed editors and lets you choose which to configure.
