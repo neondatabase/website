@@ -30,15 +30,7 @@ const iconMap = {
 };
 
 const SectionLabel = ({ className, theme = 'black', icon = 'arrow', children }) => {
-  const IconRenderer = iconMap[icon];
-
-  if (process.env.NODE_ENV !== 'production' && !IconRenderer) {
-    throw new Error(
-      `SectionLabel: unknown icon "${icon}". Valid values: ${Object.keys(iconMap).join(', ')}`
-    );
-  }
-
-  if (!IconRenderer) return null;
+  const IconRenderer = iconMap[icon] ?? iconMap.arrow;
 
   return (
     <div
