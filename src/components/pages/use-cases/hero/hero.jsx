@@ -1,26 +1,14 @@
-import Image from 'next/image';
-
 import Button from 'components/shared/button';
 import Container from 'components/shared/container';
+import SectionLabel from 'components/shared/section-label';
 import LINKS from 'constants/links';
-import triangleIcon from 'icons/triangle.svg';
 
 const Hero = () => (
   <section className="hero safe-paddings relative mt-40 xl:mt-[144px] lg:mt-20 md:mt-12">
     <Container size="960">
-      <div className="flex items-end gap-2 md:gap-1.5">
-        <Image
-          src={triangleIcon}
-          alt=""
-          width={12}
-          height={14}
-          aria-hidden="true"
-          className="md:h-2.5 md:w-2.5"
-        />
-        <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 md:text-[0.625rem]">
-          Use cases
-        </span>
-      </div>
+      <SectionLabel theme="white" icon="arrow">
+        Use cases
+      </SectionLabel>
       <h1 className="mt-5 max-w-3xl text-[3.75rem] font-normal leading-dense tracking-tighter xl:text-[3.25rem] lg:max-w-[490px] lg:text-[2.75rem] md:mt-4 md:max-w-full md:text-[2rem]">
         Postgres for modern development workflows
       </h1>
