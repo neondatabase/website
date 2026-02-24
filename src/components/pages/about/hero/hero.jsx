@@ -27,7 +27,7 @@ const Hero = () => (
           <Button
             size="lg-new"
             theme="white-filled"
-            className="shrink-0 font-medium xl:min-w-0 md:w-full"
+            className="shrink-0 font-medium md:w-full"
             to={LINKS.signup}
           >
             Create an account
@@ -35,7 +35,7 @@ const Hero = () => (
           <Button
             size="lg-new"
             theme="outlined"
-            className="shrink-0 font-normal xl:min-w-0 md:w-full"
+            className="shrink-0 font-normal md:w-full"
             to={LINKS.careers}
           >
             View open roles at Databricks

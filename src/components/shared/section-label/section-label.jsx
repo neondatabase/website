@@ -19,22 +19,22 @@ const sizeClassName = {
 const iconMap = {
   triangle: ({ isDenseVariant }) => (
     <Image
+      className={isDenseVariant ? 'md:size-2.5' : 'sm:size-2.5'}
       src={triangleIcon}
       alt=""
       width={12}
       height={14}
       aria-hidden="true"
-      className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'}
     />
   ),
   arrow: ({ isDenseVariant }) => (
     <LabelArrow
-      aria-hidden="true"
-      focusable="false"
       className={clsx(
         'block h-3.5 w-3 flex-none text-[#FF3621]',
-        isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'
+        isDenseVariant ? 'md:size-2.5' : 'sm:size-2.5'
       )}
+      aria-hidden="true"
+      focusable="false"
     />
   ),
   databricks: () => (
@@ -63,7 +63,7 @@ const SectionLabel = ({
     <div
       className={clsx(
         'flex',
-        isDenseVariant ? 'h-3.5 gap-2 md:h-2.5 md:gap-1.5' : 'gap-2 sm:gap-1.5',
+        isDenseVariant ? 'h-3.5 gap-2 md:h-2.5 md:gap-1.5' : 'sm:gap-1.5',
         icon === 'databricks' ? 'items-center' : 'items-end',
         !isDenseVariant && themeClassName[theme],
         className
