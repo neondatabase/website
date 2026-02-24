@@ -19,7 +19,7 @@ const AboutUsPage = () => (
     <Developers />
     <Connections />
     <CTANew
-      className=""
+      className="mt-0"
       title="Become a part of our&nbsp;team."
       description="We're looking for people who care deeply about quality to build with us."
       label="Join Databricks"
