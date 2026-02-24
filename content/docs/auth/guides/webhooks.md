@@ -16,12 +16,12 @@ By default, Neon Auth handles OTP and magic link delivery through its built-in e
 
 ## Supported events
 
-| Event | Type | Trigger | Use case |
-| --- | --- | --- | --- |
-| `send.otp` | Blocking | OTP code needs delivery | Custom OTP delivery via SMS or email service |
-| `send.magic_link` | Blocking | Magic link needs delivery | Custom link delivery via any channel |
-| `user.before_create` | Blocking | User attempts to sign up (before database write) | Signup validation, allowlists, user data enrichment |
-| `user.created` | Non-blocking | User created in the database | Sync to CRM, analytics, post-signup workflows |
+| Event                | Type         | Trigger                                          | Use case                                            |
+| -------------------- | ------------ | ------------------------------------------------ | --------------------------------------------------- |
+| `send.otp`           | Blocking     | OTP code needs delivery                          | Custom OTP delivery via SMS or email service        |
+| `send.magic_link`    | Blocking     | Magic link needs delivery                        | Custom link delivery via any channel                |
+| `user.before_create` | Blocking     | User attempts to sign up (before database write) | Signup validation, allowlists, user data enrichment |
+| `user.created`       | Non-blocking | User created in the database                     | Sync to CRM, analytics, post-signup workflows       |
 
 **Blocking** events pause the auth flow until your server responds (or the timeout expires). **Non-blocking** events are fire-and-forget; failures do not affect the user.
 
@@ -38,12 +38,12 @@ GET /projects/{project_id}/branches/{branch_id}/auth/webhooks
 
 Both endpoints use the following fields:
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `enabled` | boolean (required) | Enable or disable webhook delivery |
-| `webhook_url` | string | HTTPS endpoint to receive webhook POST requests |
-| `enabled_events` | string[] | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created` |
-| `timeout_seconds` | integer (1-10) | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior). |
+| Field             | Type               | Description                                                                                                                                         |
+| ----------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`         | boolean (required) | Enable or disable webhook delivery                                                                                                                  |
+| `webhook_url`     | string             | HTTPS endpoint to receive webhook POST requests                                                                                                     |
+| `enabled_events`  | string[]           | Event types to subscribe to: `send.otp`, `send.magic_link`, `user.before_create`, `user.created`                                                    |
+| `timeout_seconds` | integer (1-10)     | Per-attempt timeout in seconds. Default: 5. Total delivery time across all attempts is capped at 15 seconds. See [Retry behavior](#retry-behavior). |
 
 ### Set or update configuration
 
@@ -116,25 +116,25 @@ The `user` object fields are all optional and vary by event. Available fields: `
 
 ### `send.otp` event data
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `otp_code` | string | 6-digit OTP code |
-| `otp_type` | string | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
-| `delivery_preference` | string (optional) | `"email"` or `"sms"` |
-| `expires_at` | ISO datetime | Expiry time |
-| `ip_address` | string | Requester's IP address |
-| `user_agent` | string | Requester's user agent |
+| Field                 | Type              | Description                                                |
+| --------------------- | ----------------- | ---------------------------------------------------------- |
+| `otp_code`            | string            | 6-digit OTP code                                           |
+| `otp_type`            | string            | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
+| `delivery_preference` | string (optional) | `"email"` or `"sms"`                                       |
+| `expires_at`          | ISO datetime      | Expiry time                                                |
+| `ip_address`          | string            | Requester's IP address                                     |
+| `user_agent`          | string            | Requester's user agent                                     |
 
 ### `send.magic_link` event data
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `link_type` | string | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
-| `link_url` | string | Full verification URL with embedded token |
-| `token` | string | Raw token for building custom redirect URLs |
-| `expires_at` | ISO datetime | Expiry time |
-| `ip_address` | string | Requester's IP address |
-| `user_agent` | string | Requester's user agent |
+| Field        | Type         | Description                                                |
+| ------------ | ------------ | ---------------------------------------------------------- |
+| `link_type`  | string       | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
+| `link_url`   | string       | Full verification URL with embedded token                  |
+| `token`      | string       | Raw token for building custom redirect URLs                |
+| `expires_at` | ISO datetime | Expiry time                                                |
+| `ip_address` | string       | Requester's IP address                                     |
+| `user_agent` | string       | Requester's user agent                                     |
 
 Magic links do not include a `delivery_preference` field. Your webhook handler determines the delivery channel.
 
@@ -142,13 +142,13 @@ Magic links do not include a `delivery_preference` field. Your webhook handler d
 
 These events fire only when a new user record is created in the database. They do not fire on subsequent sign-ins, including returning OAuth users.
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
-| `referral_code` | string (optional) | Referral code from the signup URL |
-| `signup_metadata` | object (optional) | Custom metadata passed during signup |
-| `ip_address` | string | Requester's IP address |
-| `user_agent` | string | Requester's user agent |
+| Field             | Type              | Description                                           |
+| ----------------- | ----------------- | ----------------------------------------------------- |
+| `auth_provider`   | string            | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
+| `referral_code`   | string (optional) | Referral code from the signup URL                     |
+| `signup_metadata` | object (optional) | Custom metadata passed during signup                  |
+| `ip_address`      | string            | Requester's IP address                                |
+| `user_agent`      | string            | Requester's user agent                                |
 
 ## Signature verification
 
@@ -158,14 +158,14 @@ Neon Auth uses asymmetric EdDSA (Ed25519) signatures with detached JWS, so key r
 
 Each webhook request includes the following headers:
 
-| Header | Description |
-| --- | --- |
-| `X-Neon-Signature` | Detached JWS signature (`header..signature`) |
-| `X-Neon-Signature-Kid` | Key ID for looking up the public key from JWKS |
-| `X-Neon-Timestamp` | Unix timestamp in milliseconds |
-| `X-Neon-Event-Type` | Event type (for example, `user.created`) |
-| `X-Neon-Event-Id` | Unique event UUID |
-| `X-Neon-Delivery-Attempt` | Attempt number: 1, 2, or 3 |
+| Header                    | Description                                    |
+| ------------------------- | ---------------------------------------------- |
+| `X-Neon-Signature`        | Detached JWS signature (`header..signature`)   |
+| `X-Neon-Signature-Kid`    | Key ID for looking up the public key from JWKS |
+| `X-Neon-Timestamp`        | Unix timestamp in milliseconds                 |
+| `X-Neon-Event-Type`       | Event type (for example, `user.created`)       |
+| `X-Neon-Event-Id`         | Unique event UUID                              |
+| `X-Neon-Delivery-Attempt` | Attempt number: 1, 2, or 3                     |
 
 Example incoming webhook request:
 
@@ -305,13 +305,13 @@ Return a 2xx status code with a JSON body.
 }
 ```
 
-| Field | Type | Description |
-| --- | --- | --- |
-| `allowed` | boolean (required) | Whether to permit user creation |
-| `user_metadata` | object (optional) | Merged into the user record if allowed |
-| `error_message` | string (optional) | User-facing rejection message (max 500 characters) |
-| `error_code` | string (optional) | Machine-readable code for client-side handling |
-| `reason` | string (optional) | Internal reason for logging only, not shown to users (max 500 characters) |
+| Field           | Type               | Description                                                               |
+| --------------- | ------------------ | ------------------------------------------------------------------------- |
+| `allowed`       | boolean (required) | Whether to permit user creation                                           |
+| `user_metadata` | object (optional)  | Merged into the user record if allowed                                    |
+| `error_message` | string (optional)  | User-facing rejection message (max 500 characters)                        |
+| `error_code`    | string (optional)  | Machine-readable code for client-side handling                            |
+| `reason`        | string (optional)  | Internal reason for logging only, not shown to users (max 500 characters) |
 
 If the webhook fails or returns an invalid response, signup is rejected. This fail-closed behavior prevents bypassing your validation logic.
 
@@ -331,12 +331,12 @@ Because blocking events pause the user's auth flow, retries happen immediately r
 
 The 15-second global timeout runs from the start of the first attempt. Each attempt uses the lesser of `timeout_seconds` or the remaining global time. If earlier attempts consume the budget, later attempts get reduced timeouts or are skipped.
 
-| Property | Value |
-| --- | --- |
-| Max attempts | 3 (1 initial + 2 retries, no backoff) |
-| Global timeout | 15 seconds across all attempts |
-| Retryable | 5xx, 429, 408, network errors (ECONNREFUSED, ETIMEDOUT, ECONNRESET, ENOTFOUND, ECONNABORTED) |
-| Non-retryable | 4xx (except 408 and 429) |
+| Property       | Value                                                                                        |
+| -------------- | -------------------------------------------------------------------------------------------- |
+| Max attempts   | 3 (1 initial + 2 retries, no backoff)                                                        |
+| Global timeout | 15 seconds across all attempts                                                               |
+| Retryable      | 5xx, 429, 408, network errors (ECONNREFUSED, ETIMEDOUT, ECONNRESET, ENOTFOUND, ECONNABORTED) |
+| Non-retryable  | 4xx (except 408 and 429)                                                                     |
 
 ## Testing and debugging
 
