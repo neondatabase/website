@@ -215,7 +215,7 @@ const Cards = ({ items, categories }) => {
                 return (
                   <li
                     key={item.id}
-                    className="h-[180px] border-l border-t border-gray-new-20 bg-[#080808]"
+                    className="h-[170px] border-l border-t border-gray-new-20 bg-[#080808]"
                     aria-hidden
                   />
                 );
