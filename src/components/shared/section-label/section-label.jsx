@@ -62,8 +62,8 @@ const SectionLabel = ({
   return (
     <div
       className={clsx(
-        'flex',
-        isDenseVariant ? 'h-3.5 gap-2 md:h-2.5 md:gap-1.5' : 'sm:gap-1.5',
+        'flex gap-2',
+        isDenseVariant ? 'h-3.5 md:h-2.5 md:gap-1.5' : 'sm:gap-1.5',
         icon === 'databricks' ? 'items-center' : 'items-end',
         !isDenseVariant && themeClassName[theme],
         className
