@@ -19,7 +19,7 @@ const Hero = () => (
       size="1600"
     >
       <Link href="#backed-by-giants">
-        <SectionLabel theme="white" size="large" databricks>
+        <SectionLabel theme="white" icon="databricks">
           A DATABRICKS COMPANY
         </SectionLabel>
       </Link>

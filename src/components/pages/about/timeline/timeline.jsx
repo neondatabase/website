@@ -50,10 +50,10 @@ const Timeline = () => (
   <section className="timeline safe-paddings overflow-hidden pb-[200px] pt-40 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[88px] md:pb-[104px] md:pt-[72px]">
     <Container size="1600">
       <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
-        Our mission{' '}
-        <span className="text-gray-new-60">
-          is to deliver Postgres as a cloud service designed to help teams build scalable,
-          dependable applications faster than ever.
+        Our mission is to deliver Postgres{' '}
+        <span className="text-gray-new-50">
+          as a cloud service designed to help teams build scalable, dependable applications faster
+          than ever.
         </span>
       </h2>
       <div className="no-scrollbars w-full sm:-mx-5 sm:-mt-2 sm:w-screen sm:overflow-x-auto sm:pb-2">
