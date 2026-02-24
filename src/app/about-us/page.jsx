@@ -19,7 +19,8 @@ const AboutUsPage = () => (
     <Developers />
     <Connections />
     <CTANew
-      className="mt-0"
+      className="mt-0 max-h-[558px] overflow-hidden 3xl:max-w-none"
+      imageClassName="-translate-y-12 3xl:-translate-y-0"
       title="Become a part of our&nbsp;team."
       description="We're looking for people who care deeply about quality to build with us."
       label="Join Databricks"

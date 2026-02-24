@@ -13,7 +13,7 @@ const themeClassName = {
 const iconMap = {
   arrow: () => (
     <LabelArrow
-      className={clsx('block h-3.5 w-3 flex-none text-[#FF3621] md:size-2.5')}
+      className="block h-3.5 w-3 flex-none text-[#FF3621] md:size-2.5"
       aria-hidden="true"
       focusable="false"
     />
@@ -29,8 +29,16 @@ const iconMap = {
   ),
 };
 
-const SectionLabel = ({ className = '', theme = 'black', icon = 'arrow', children }) => {
+const SectionLabel = ({ className, theme = 'black', icon = 'arrow', children }) => {
   const IconRenderer = iconMap[icon];
+
+  if (process.env.NODE_ENV !== 'production' && !IconRenderer) {
+    throw new Error(
+      `SectionLabel: unknown icon "${icon}". Valid values: ${Object.keys(iconMap).join(', ')}`
+    );
+  }
+
+  if (!IconRenderer) return null;
 
   return (
     <div
@@ -42,7 +50,7 @@ const SectionLabel = ({ className = '', theme = 'black', icon = 'arrow', childre
       )}
     >
       <IconRenderer />
-      <span className={clsx('font-mono text-xs font-medium uppercase leading-none md:text-[10px]')}>
+      <span className="font-mono text-xs font-medium uppercase leading-none md:text-[10px]">
         {children}
       </span>
     </div>

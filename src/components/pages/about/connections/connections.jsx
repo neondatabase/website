@@ -35,7 +35,7 @@ const CONNECTIONS_DATA = [
 ];
 
 const ConnectionCard = ({ platform, description, linkText, href, icon: Icon }) => (
-  <article className="relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6 md:py-6">
+  <article className="relative flex h-full flex-col overflow-hidden bg-[#CDDFD7] px-8 py-7 lg:px-7 lg:py-6 md:px-6">
     <Icon
       className="relative z-10 h-[52px] w-[52px] text-black-pure lg:h-11 lg:w-11"
       aria-hidden="true"

@@ -26,6 +26,7 @@ const CONTACT_SALES_AI_SETTINGS = {
 const CTANew = ({
   className = 'mt-[183px] xl:mt-[168px] lg:mt-[145px] md:mt-[90px]',
   copyWrapperClassName = null,
+  imageClassName = null,
   title = "The world's most advanced <br /> Postgres platform.",
   description = null,
   label = 'Get started',
@@ -63,7 +64,10 @@ const CTANew = ({
 
     <div className="pointer-events-none relative overflow-hidden">
       <Image
-        className="min-h-[550px] w-full object-cover lg:min-h-[486px] md:min-h-[446px]"
+        className={clsx(
+          'min-h-[550px] w-full object-cover lg:min-h-[486px] md:min-h-[446px]',
+          imageClassName
+        )}
         src={ctaBackground}
         width={1920}
         height={610}
@@ -77,10 +81,11 @@ const CTANew = ({
 CTANew.propTypes = {
   className: PropTypes.string,
   copyWrapperClassName: PropTypes.string,
+  imageClassName: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.string,
   label: PropTypes.string,
-  labelIcon: PropTypes.string,
+  labelIcon: PropTypes.oneOf(['arrow', 'databricks']),
   buttonText: PropTypes.string,
   buttonUrl: PropTypes.string,
   buttonType: PropTypes.oneOf(['aiHelper', null]),
