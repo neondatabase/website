@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { AnimatePresence, LazyMotion, domAnimation, m } from 'framer-motion';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
@@ -9,6 +10,7 @@ import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
+import formBg from 'images/pages/blog/form-bg.png';
 import { doNowOrAfterSomeTime, emailRegexp } from 'utils/forms';
 import sendGtagEvent from 'utils/send-gtag-event';
 
@@ -43,7 +45,7 @@ const themeClassNames = {
   },
 };
 
-const ChangelogForm = ({ isSidebar = false, className }) => {
+const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
@@ -107,17 +109,38 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
         classNames.block,
         className,
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
-        'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]'
+        'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
+        isBlog &&
+          '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none'
       )}
       id="changelog-form"
     >
-      <h2
-        className={clsx(classNames.title, 'font-medium leading-snug tracking-tighter xs:text-base')}
+      {isBlog ? (
+        <div className="relative z-20">
+          <h2 className="text-base font-medium leading-snug tracking-tighter text-white">
+            Subscribe to our changelog
+          </h2>
+          <p className="mt-2.5 text-[15px] leading-snug text-gray-new-70/90">
+            Receive only our latest updates. No spam, guaranteed.
+          </p>
+        </div>
+      ) : (
+        <h2
+          className={clsx(
+            classNames.title,
+            'font-medium leading-snug tracking-tighter xs:text-base'
+          )}
+        >
+          Subscribe to our changelog.
+          <br /> No spam, guaranteed.
+        </h2>
+      )}
+      <form
+        className={clsx('relative z-20 w-full flex-1', isBlog && 'mt-8')}
+        method="POST"
+        noValidate
+        onSubmit={handleSubmit}
       >
-        Subscribe to our changelog.
-        <br /> No spam, guaranteed.
-      </h2>
-      <form className="relative w-full flex-1" method="POST" noValidate onSubmit={handleSubmit}>
         <input
           className={clsx(
             'remove-autocomplete-styles h-[38px] w-full appearance-none pl-4 tracking-extra-tight',
@@ -128,7 +151,9 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
               ? 'border-secondary-1'
               : 'border-gray-new-90 dark:border-gray-new-15',
             formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
-            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60'
+            'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
+            isBlog &&
+              '!border-gray-new-20 !bg-gray-new-8/60 !pr-12 backdrop-blur-lg transition-all duration-200 focus:!border-gray-new-50'
           )}
           type="email"
           name="email"
@@ -147,7 +172,8 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
                   'text-black-new transition-colors duration-200',
                   formState === FORM_STATES.ERROR
                     ? 'bg-secondary-1/50'
-                    : 'bg-green-45 hover:bg-[#00FFAA]'
+                    : 'bg-green-45 hover:bg-[#00FFAA]',
+                  isBlog && '!size-[30px] !min-w-[30px] bg-white !p-1.5 hover:!bg-gray-new-80'
                 )}
                 type="submit"
                 initial="initial"
@@ -225,13 +251,24 @@ const ChangelogForm = ({ isSidebar = false, className }) => {
           </span>
         )}
       </form>
-      <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />
+      {!isBlog && <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />}
+      {isBlog && (
+        <Image
+          className="absolute bottom-0 left-0 z-10 w-full"
+          src={formBg}
+          width={256}
+          height={120}
+          alt=""
+          priority
+        />
+      )}
     </div>
   );
 };
 
 ChangelogForm.propTypes = {
   isSidebar: PropTypes.bool,
+  isBlog: PropTypes.bool,
   className: PropTypes.string,
 };
 

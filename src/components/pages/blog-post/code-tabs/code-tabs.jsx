@@ -8,7 +8,7 @@ const CodeTabs = async ({ items }) => {
   const highlightedItems = await getHighlightedCodeArray(items);
 
   return (
-    <figure className="my-5 max-w-full overflow-hidden rounded-md bg-black-new">
+    <figure className="my-5 max-w-full overflow-hidden bg-black-pure">
       <CodeTabsNavigation items={items} highlightedItems={highlightedItems} />
     </figure>
   );

@@ -1,11 +1,11 @@
 @layer components {
   .prose-blog {
     @apply max-w-none leading-normal text-gray-new-90 prose-p:my-4 prose-p:text-gray-new-90 prose-strong:text-gray-new-90 prose-ol:my-5 prose-ul:my-5 prose-li:my-4;
-    @apply prose-headings:font-semibold prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
-    @apply prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[36px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[28px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-2xl prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-xl md:prose-h2:text-[32px] sm:prose-h2:text-[26px] sm:prose-h3:text-[20px];
-    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-green-45 prose-a:no-underline prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:text-[#47FFC2] sm:prose-a:break-words;
+    @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
+    @apply prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[28px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[20px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-lg prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-lg md:prose-h2:text-[28px] sm:prose-h2:text-[20px] sm:prose-h3:text-[18px];
+    @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-white sm:prose-a:break-words;
     @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
-    @apply prose-figcaption:mt-2.5 prose-figcaption:text-sm prose-figcaption:leading-none prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
+    @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
     @apply prose-pre:my-0 prose-pre:px-2;
 
     *[id] {
@@ -32,7 +32,7 @@
 
     a {
       > code {
-        @apply !text-green-45 transition-colors duration-200 hover:!text-[#47FFC2];
+        @apply !text-white transition-colors duration-200;
       }
     }
 
@@ -87,7 +87,7 @@
     }
 
     pre {
-      @apply !bg-black-new px-0;
+      @apply rounded-none border border-gray-new-20 !bg-black-pure px-0;
 
       &.highlight {
         @apply px-0;
@@ -102,10 +102,14 @@
 
         @apply !font-mono !text-sm !text-white;
       }
+
+      + button {
+        @apply !border-gray-new-20 !bg-black-pure !text-gray-new-60 hover:!text-white;
+      }
     }
 
     :not(pre) > code {
-      @apply !rounded border border-[#494B50] bg-[#242628] !px-1 !py-0.5 !font-mono text-base !font-normal leading-none text-white;
+      @apply !rounded border border-gray-new-30 bg-black-new !px-1 !py-0.5 !font-mono text-base !font-normal leading-none text-white;
 
       &::before,
       &::after {
@@ -123,7 +127,7 @@
 
     iframe,
     video {
-      @apply mx-auto rounded-md;
+      @apply mx-auto;
     }
 
     .twitter-tweet iframe {
@@ -144,11 +148,15 @@
       @apply mx-auto;
     }
 
+    .admonition {
+      @apply border-l-2;
+    }
+
     .wp-block-quote {
-      @apply border-l-[3px] border-yellow-70 pl-4 font-normal not-italic;
+      @apply border-l-2 border-green-44 pl-4 font-mono font-normal not-italic;
 
       p {
-        @apply my-0 text-lg;
+        @apply my-0 text-xl;
 
         &::before,
         &::after {
@@ -167,7 +175,7 @@
 
     .wp-block-pullquote {
       blockquote {
-        @apply relative border-l-[3px] border-green-45 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat;
+        @apply relative border-l-2 border-green-44 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat;
       }
 
       p {
@@ -186,6 +194,10 @@
           @apply not-italic;
         }
       }
+    }
+
+    .wp-block-separator {
+      @apply border-gray-new-20;
     }
   }
 }

@@ -19,6 +19,8 @@ const BlogPostCard = ({
   category,
   categories,
   pageBlogPost,
+  isFeatured = false,
+  isSmart = false,
   fullSize = false,
   withImageHover = true,
   imageWidth = null,
@@ -59,6 +61,8 @@ const BlogPostCard = ({
       className={clsx(
         'blog-post-card flex',
         fullSize ? 'flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
+        isSmart &&
+          '!flex-row gap-x-6 border-t border-gray-new-20 py-5 first-of-type:border-0 first-of-type:pt-0',
         className
       )}
     >
@@ -88,19 +92,24 @@ const BlogPostCard = ({
       <div
         className={clsx(
           'flex flex-col',
-          fullSize && largeCover ? 'w-[684px] shrink-0 pr-20 md:w-full' : 'w-full'
+          fullSize && largeCover ? 'w-[684px] shrink-0 pr-20 md:w-full' : 'w-full',
+          isSmart && '!w-[424px] shrink-0 flex-col-reverse'
         )}
       >
         <div
           className={clsx(
             'flex gap-2 font-mono text-[13px] leading-none tracking-extra-tight',
-            fullSize ? 'mb-4' : 'mb-8'
+            fullSize ? 'mb-4' : 'mb-8',
+            isSmart && '!mb-0 mt-auto'
           )}
         >
           {/* category */}
           {cat && (
             <Link
-              className={clsx('font-medium uppercase', fullSize ? 'text-green-45' : 'text-blue-70')}
+              className={clsx(
+                'font-medium uppercase',
+                isFeatured ? 'text-green-45' : 'text-blue-70'
+              )}
               to={cat.slug}
             >
               {cat.name}
@@ -119,11 +128,14 @@ const BlogPostCard = ({
             {formattedDate}
           </time>
         </div>
-        <Link className="group mt-auto flex flex-col" to={link}>
+        <Link className={clsx('group flex flex-col', isSmart ? 'mt-0' : 'mt-auto')} to={link}>
           {/* title */}
           <h1
             className={clsx(
-              'text-[28px] font-medium leading-snug tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80 md:text-lg'
+              'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
+              isSmart
+                ? 'text-2xl leading-tight md:text-lg'
+                : 'text-[28px] font-medium leading-snug md:text-lg'
             )}
           >
             {title}
@@ -179,6 +191,8 @@ BlogPostCard.propTypes = {
       })
     ),
   }),
+  isFeatured: PropTypes.bool,
+  isSmart: PropTypes.bool,
   fullSize: PropTypes.bool,
   withImageHover: PropTypes.bool,
   imageWidth: PropTypes.number.isRequired,

@@ -47,7 +47,7 @@ const Socials = ({ withTitle = true }) => (
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon className="h-4 w-auto text-gray-new-60 transition-colors duration-200 group-hover:text-green-45" />
+            <Icon className="h-4 w-auto text-gray-new-60 transition-colors duration-200 group-hover:text-white" />
           </a>
         </li>
       ))}

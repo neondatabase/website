@@ -13,6 +13,7 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
       className
     )}
     category={category}
+    isFeatured={isFeatured}
     fullSize={!isFeatured}
     imageWidth={isFeatured ? 560 : 336}
     imageHeight={isFeatured ? 315 : 189}

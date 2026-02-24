@@ -73,7 +73,7 @@ const sharedComponents = {
     return (
       <ImageZoom src={urlWithoutSize} isDark>
         <Image
-          className={clsx('rounded-md', className)}
+          className={clsx('', className)}
           src={urlWithoutSize}
           width={width || 975}
           height={height || 512}
