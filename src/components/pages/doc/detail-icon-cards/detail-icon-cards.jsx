@@ -182,8 +182,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
           <li className="!m-0 flex before:hidden" key={index}>
             <Link
               className={clsx(
-                'relative flex w-full rounded-[10px] border border-gray-new-94 transition-colors duration-200',
-                withNumbers ? 'items-baseline' : 'items-start',
+                'relative flex w-full items-baseline rounded-[10px] border border-gray-new-94 transition-colors duration-200',
                 compact
                   ? withNumbers
                     ? 'gap-x-0.5 px-4 py-3'
