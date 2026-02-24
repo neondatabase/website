@@ -1,5 +1,6 @@
 import Cards from 'components/pages/case-studies/cards';
 import Hero from 'components/pages/case-studies/hero';
+import Testimonials from 'components/pages/case-studies/testimonials';
 import CTANew from 'components/shared/cta-new';
 import Layout from 'components/shared/layout';
 import SEO_DATA from 'constants/seo-data';
@@ -14,13 +15,14 @@ const CaseStudiesPage = async () => {
 
   return (
     <Layout>
-      <Hero items={caseStudies} />
+      <Hero />
+      <Testimonials />
       <Cards items={caseStudies} categories={categories} />
       <CTANew
-        label="ASK AI"
-        title="Still have questions? Ask our AI. <br class='xs:hidden' />"
-        description="It knows Neon inside and out."
-        buttonText="Get Answers"
+        label="Get started"
+        title="Ready to get started with Neon?"
+        description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
+        buttonText="Talk to sales"
         buttonType="aiHelper"
       />
     </Layout>
