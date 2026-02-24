@@ -531,6 +531,11 @@ const defaultConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/student',
+        destination: 'https://get.neon.com/student-25',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
