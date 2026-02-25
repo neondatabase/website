@@ -1,5 +1,5 @@
 ---
-title: Scaling AI Agents in Parallel with Git Worktrees and Neon Branching
+title: 'Git worktrees and Neon Branching: Running Multiple AI Coding Agents in Parallel'
 subtitle: Learn how to run multiple AI coding agents in parallel with isolated Git worktrees and Neon database branches.
 author: dhanush-reddy
 enableTableOfContents: true
