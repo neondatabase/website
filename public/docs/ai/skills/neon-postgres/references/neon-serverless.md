@@ -190,7 +190,7 @@ export const config = {
 
 ## ORM Integration
 
-For Drizzle ORM integration with the serverless driver, see `neon-drizzle.md`.
+For Drizzle ORM integration with the serverless driver, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-drizzle.md`.
 
 ### Prisma
 

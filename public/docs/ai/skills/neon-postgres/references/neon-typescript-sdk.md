@@ -2,7 +2,7 @@
 
 The `@neondatabase/api-client` TypeScript SDK is a typed wrapper around the Neon REST API for managing Neon resources programmatically.
 
-For core concepts (Organization, Project, Branch, Endpoint, etc.), see `what-is-neon.md`.
+For core concepts (Organization, Project, Branch, Endpoint, etc.), see `https://neon.com/docs/ai/skills/neon-postgres/references/what-is-neon.md`.
 
 See the [official TypeScript SDK docs](https://neon.com/docs/reference/typescript-sdk.md) for complete details.
 

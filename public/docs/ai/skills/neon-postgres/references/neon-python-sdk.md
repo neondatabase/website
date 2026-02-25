@@ -2,7 +2,7 @@
 
 The `neon-api` Python SDK is a Pythonic wrapper around the Neon REST API for managing Neon resources programmatically.
 
-For core concepts (Organization, Project, Branch, Endpoint, etc.), see `what-is-neon.md`.
+For core concepts (Organization, Project, Branch, Endpoint, etc.), see `https://neon.com/docs/ai/skills/neon-postgres/references/what-is-neon.md`.
 
 See the [official Python SDK docs](https://neon.com/docs/reference/python-sdk.md) for complete details.
 
