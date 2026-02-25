@@ -22,99 +22,107 @@ PostgreSQL supports [inner join](postgresql-inner-join), [left join](postgresql-
 
 ## Setting up sample tables
 
-Suppose you have two tables called `basket_a` and `basket_b` that store fruits:
-
-```sqlsql
-CREATE TABLE basket_a (
-    a INT PRIMARY KEY,
-    fruit_a VARCHAR (100) NOT NULL
-);
-
-CREATE TABLE basket_b (
-    b INT PRIMARY KEY,
-    fruit_b VARCHAR (100) NOT NULL
-);
-
-INSERT INTO basket_a (a, fruit_a)
-VALUES
-    (1, 'Apple'),
-    (2, 'Orange'),
-    (3, 'Banana'),
-    (4, 'Cucumber');
-
-INSERT INTO basket_b (b, fruit_b)
-VALUES
-    (1, 'Orange'),
-    (2, 'Apple'),
-    (3, 'Watermelon'),
-    (4, 'Pear');
-```
-
-The tables have some common fruits such as `apple` and `orange`.
-
-The following statement returns data from the `basket_a` table:
+Suppose you have two tables called `teams` and `players`:
 
 ```sql
-SELECT * FROM basket_a;
+CREATE TABLE teams (
+    id INT PRIMARY KEY,
+    team VARCHAR (100) NOT NULL,
+    city VARCHAR (100) NOT NULL
+);
+
+CREATE TABLE players (
+    id INT PRIMARY KEY,
+    team_id INT REFERENCES teams (id),
+    player VARCHAR (100) NOT NULL,
+    role VARCHAR (100) NOT NULL
+);
+
+INSERT INTO teams (id, team, city)
+VALUES
+    (1, 'Lions', 'Rome'),
+    (2, 'Owls', 'Oslo'),
+    (3, 'Bears', 'Bern'),
+    (4, 'Sharks', 'Lima');
+
+INSERT INTO players (id, team_id, player, role)
+VALUES
+    (1, 1, 'Ava', 'Guard'),
+    (2, 1, 'Noah', 'Wing'),
+    (3, 2, 'Emma', 'Back'),
+    (4, NULL, 'Liam', 'Guard'),
+    (5, NULL, 'Mia', 'Wing');
+```
+
+A team can have many players. Some players may not belong to a team yet, so their `team_id` is `NULL`.
+
+The following statement returns data from the `teams` table:
+
+```sql
+SELECT * FROM teams;
 ```
 
 Output:
 
 ```text
- a | fruit_a
----+----------
- 1 | Apple
- 2 | Orange
- 3 | Banana
- 4 | Cucumber
+ id |  team  | city
+----+--------+------
+  1 | Lions  | Rome
+  2 | Owls   | Oslo
+  3 | Bears  | Bern
+  4 | Sharks | Lima
 (4 rows)
 ```
 
-The following statement returns data from the `basket_b` table:
+The following statement returns data from the `players` table:
 
 ```sql
-SELECT * FROM basket_b;
+SELECT * FROM players;
 ```
 
 Output:
 
-```
- b |  fruit_b
----+------------
- 1 | Orange
- 2 | Apple
- 3 | Watermelon
- 4 | Pear
-(4 rows)
+```text
+ id | team_id | player | role
+----+---------+--------+-------
+  1 |       1 | Ava    | Guard
+  2 |       1 | Noah   | Wing
+  3 |       2 | Emma   | Back
+  4 |    null | Liam   | Guard
+  5 |    null | Mia    | Wing
+(5 rows)
 ```
 
 ## PostgreSQL inner join
 
-The following statement joins the first table (`basket_a`) with the second table (`basket_b`) by matching the values in the `fruit_a` and `fruit_b` columns:
+The following statement joins the first table (`teams`) with the second table (`players`) by matching the values in the `id` and `team_id` columns:
 
-```
+```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-INNER JOIN basket_b
-    ON fruit_a = fruit_b;
+    teams
+INNER JOIN players
+    ON teams.id = players.team_id;
 ```
-
+**Note:** It is common practice to use `JOIN` as shorthand for `INNER JOIN`.
 Output:
 
 ```text
- a | fruit_a | b | fruit_b
----+---------+---+---------
- 1 | Apple   | 2 | Apple
- 2 | Orange  | 1 | Orange
-(2 rows)
+ team_id | team  | city | player_id | player | role
+---------+-------+------+-----------+--------+-------
+       1 | Lions | Rome |         1 | Ava    | Guard
+       1 | Lions | Rome |         2 | Noah   | Wing
+       2 | Owls  | Oslo |         3 | Emma   | Back
+(3 rows)
 ```
 
-The inner join examines each row in the first table (`basket_a`). It compares the value in the `fruit_a` column with the value in the `fruit_b` column of each row in the second table (`basket_b`). If these values are equal, the inner join creates a new row that contains columns from both tables and adds this new row to the result set.
+The inner join examines each row in the first table (`teams`). It compares the value in the `id` column with the value in the `team_id` column of each row in the second table (`players`). If these values are equal, the inner join creates a new row that contains columns from both tables and adds this new row to the result set.
 
 The following diagram illustrates the inner join:
 
@@ -122,37 +130,40 @@ The following diagram illustrates the inner join:
 
 ## PostgreSQL left join
 
-The following statement uses the left join clause to join the `basket_a` table with the `basket_b` table. In the left join context, the first table is called the left table and the second table is called the right table.
+The following statement uses the left join clause to join the `teams` table with the `players` table. In the left join context, the first table is called the left table and the second table is called the right table.
 
-```
+```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-LEFT JOIN basket_b
-   ON fruit_a = fruit_b;
+    teams
+LEFT JOIN players
+   ON teams.id = players.team_id;
 ```
 
 Output:
 
 ```text
- a | fruit_a  |  b   | fruit_b
----+----------+------+---------
- 1 | Apple    |    2 | Apple
- 2 | Orange   |    1 | Orange
- 3 | Banana   | null | null
- 4 | Cucumber | null | null
-(4 rows)
+ team_id |  team  | city | player_id | player | role
+---------+--------+------+-----------+--------+-------
+       1 | Lions  | Rome |         1 | Ava    | Guard
+       1 | Lions  | Rome |         2 | Noah   | Wing
+       2 | Owls   | Oslo |         3 | Emma   | Back
+       3 | Bears  | Bern |      null | null   | null
+       4 | Sharks | Lima |      null | null   | null
+(5 rows)
 ```
 
-The left join starts selecting data from the left table. It compares values in the fruit_a column with the values in the fruit_b column in the basket_b table.
+The left join starts selecting data from the left table. It compares values in the `id` column with the values in the `team_id` column in the `players` table.
 
-If these values are equal, the left join creates a new row that contains columns of both tables and adds this new row to the result set. (see the row \#1 and \#2 in the result set).
+If these values are equal, the left join creates a new row that contains columns of both tables and adds this new row to the result set. (see the first three rows in the result set).
 
-In case the values do not equal, the left join also creates a new row that contains columns from both tables and adds it to the result set. However, it fills the columns of the right table (`basket_b`) with null. (see the row \#3 and \#4 in the result set).
+In case the values do not equal, the left join also creates a new row that contains columns from both tables and adds it to the result set. However, it fills the columns of the right table (`players`) with null. (see the last two rows in the result set).
 
 The following diagram illustrates the left join:
 
@@ -161,24 +172,26 @@ To select rows from the left table that do not have matching rows in the right t
 
 ```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-LEFT JOIN basket_b
-    ON fruit_a = fruit_b
-WHERE b IS NULL;
+    teams
+LEFT JOIN players
+    ON teams.id = players.team_id
+WHERE players.id IS NULL;
 ```
 
 The output is:
 
 ```text
- a | fruit_a  |  b   | fruit_b
----+----------+------+---------
- 3 | Banana   | null | null
- 4 | Cucumber | null | null
+ team_id |  team  | city | player_id | player | role
+---------+--------+------+-----------+--------+------
+       3 | Bears  | Bern |      null | null   | null
+       4 | Sharks | Lima |      null | null   | null
 (2 rows)
 
 ```
@@ -191,35 +204,38 @@ Note that the `LEFT JOIN` is the same as the `LEFT OUTER JOIN` so you can use th
 
 ## PostgreSQL right join
 
-The [right join](postgresql-right-join) is a reversed version of the left join. The right join starts selecting data from the right table. It compares each value in the fruit_b column of every row in the right table with each value in the fruit_a column of every row in the fruit_a table.
+The [right join](postgresql-right-join) is a reversed version of the left join. The right join starts selecting data from the right table. It compares each value in the `team_id` column of every row in the right table with each value in the `id` column of every row in the `teams` table.
 
 If these values are equal, the right join creates a new row that contains columns from both tables.
 
 In case these values are not equal, the right join also creates a new row that contains columns from both tables. However, it fills the columns in the left table with NULL.
 
-The following statement uses the right join to join the `basket_a` table with the `basket_b` table:
+The following statement uses the right join to join the `teams` table with the `players` table:
 
 ```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-RIGHT JOIN basket_b ON fruit_a = fruit_b;
+    teams
+RIGHT JOIN players ON teams.id = players.team_id;
 ```
 
 Here is the output:
 
 ```text
-  a   | fruit_a | b |  fruit_b
-------+---------+---+------------
-    2 | Orange  | 1 | Orange
-    1 | Apple   | 2 | Apple
- null | null    | 3 | Watermelon
- null | null    | 4 | Pear
-(4 rows)
+ team_id | team  | city | player_id | player | role
+---------+-------+------+-----------+--------+-------
+       1 | Lions | Rome |         1 | Ava    | Guard
+       1 | Lions | Rome |         2 | Noah   | Wing
+       2 | Owls  | Oslo |         3 | Emma   | Back
+    null | null  | null |         4 | Liam   | Guard
+    null | null  | null |         5 | Mia    | Wing
+(5 rows)
 ```
 
 The following Venn diagram illustrates the right join:
@@ -229,24 +245,26 @@ Similarly, you can get rows from the right table that do not have matching rows 
 
 ```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-RIGHT JOIN basket_b
-   ON fruit_a = fruit_b
-WHERE a IS NULL;
+    teams
+RIGHT JOIN players
+   ON teams.id = players.team_id
+WHERE teams.id IS NULL;
 ```
 
 Output:
 
 ```text
-  a   | fruit_a | b |  fruit_b
-------+---------+---+------------
- null | null    | 3 | Watermelon
- null | null    | 4 | Pear
+ team_id | team | city | player_id | player | role
+---------+------+------+-----------+--------+-------
+    null | null | null |         4 | Liam   | Guard
+    null | null | null |         5 | Mia    | Wing
 (2 rows)
 ```
 
@@ -262,28 +280,31 @@ The [full outer join](postgresql-full-outer-join) or full join returns a result 
 
 ```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-FULL OUTER JOIN basket_b
-    ON fruit_a = fruit_b;
+    teams
+FULL OUTER JOIN players
+    ON teams.id = players.team_id;
 ```
 
 Output:
 
 ```text
-  a   | fruit_a  |  b   |  fruit_b
-------+----------+------+------------
-    1 | Apple    |    2 | Apple
-    2 | Orange   |    1 | Orange
-    3 | Banana   | null | null
-    4 | Cucumber | null | null
- null | null     |    3 | Watermelon
- null | null     |    4 | Pear
-(6 rows)
+ team_id |  team  | city | player_id | player | role
+---------+--------+------+-----------+--------+-------
+       1 | Lions  | Rome |         1 | Ava    | Guard
+       1 | Lions  | Rome |         2 | Noah   | Wing
+       2 | Owls   | Oslo |         3 | Emma   | Back
+       3 | Bears  | Bern |      null | null   | null
+       4 | Sharks | Lima |      null | null   | null
+    null | null   | null |         4 | Liam   | Guard
+    null | null   | null |         5 | Mia    | Wing
+(7 rows)
 
 ```
 
@@ -294,26 +315,28 @@ To return rows in a table that do not have matching rows in the other, you use t
 
 ```sql
 SELECT
-    a,
-    fruit_a,
-    b,
-    fruit_b
+    teams.id AS team_id,
+    team,
+    city,
+    players.id AS player_id,
+    player,
+    role
 FROM
-    basket_a
-FULL JOIN basket_b
-   ON fruit_a = fruit_b
-WHERE a IS NULL OR b IS NULL;
+    teams
+FULL JOIN players
+   ON teams.id = players.team_id
+WHERE teams.id IS NULL OR players.id IS NULL;
 ```
 
 Here is the result:
 
-```
-  a   | fruit_a  |  b   |  fruit_b
-------+----------+------+------------
-    3 | Banana   | null | null
-    4 | Cucumber | null | null
- null | null     |    3 | Watermelon
- null | null     |    4 | Pear
+```text
+ team_id |  team  | city | player_id | player | role
+---------+--------+------+-----------+--------+-------
+       3 | Bears  | Bern |      null | null   | null
+       4 | Sharks | Lima |      null | null   | null
+    null | null   | null |         4 | Liam   | Guard
+    null | null   | null |         5 | Mia    | Wing
 (4 rows)
 ```
 
