@@ -120,7 +120,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           <h2 className="text-base font-medium leading-snug tracking-tighter text-white">
             Subscribe to our changelog
           </h2>
-          <p className="mt-2.5 text-[15px] leading-snug text-gray-new-70/90">
+          <p className="mt-2.5 text-[15px] leading-snug tracking-tight text-gray-new-70/90">
             Receive only our latest updates. No spam, guaranteed.
           </p>
         </div>

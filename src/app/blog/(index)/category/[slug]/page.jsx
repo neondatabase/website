@@ -28,7 +28,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
       />
       <Suspense fallback={null}>
         <BlogSearch
-          searchInputClassName="right-full mr-16 top-[256px] lg:-top-[68px] md:top-0"
+          searchInputClassName="right-full mr-16 top-[208px] lg:-top-[68px] md:top-0"
           posts={posts}
         >
           <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1">

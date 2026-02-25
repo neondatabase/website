@@ -39,7 +39,7 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
       }
     )}
   >
-    <span className="leading-none text-gray-new-70">Share:</span>
+    <span className="text-sm leading-none text-gray-new-70">Share:</span>
     <div className="flex shrink-0 space-x-5">
       {links.map(({ icon: Icon, tag: Tag, via, eventName }, index) => (
         <Tag
