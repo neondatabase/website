@@ -34,43 +34,43 @@ Common doc URLs are organized in the topic links below. If you need a page not l
 
 Use this for architecture explanations and terminology (organizations, projects, branches, endpoints) before giving implementation advice.
 
-Link: `references/what-is-neon.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/what-is-neon.md`
 
 ## Getting Started
 
 Use this for first-time setup: org/project selection, connection strings, driver installation, optional auth, and initial schema setup.
 
-Link: `references/getting-started.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/getting-started.md`
 
 ## Connection Methods & Drivers
 
 Use this when you need to pick the correct transport and driver based on runtime constraints (TCP, HTTP, WebSocket, edge, serverless, long-running).
 
-Link: `references/connection-methods.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md`
 
 ### Serverless Driver
 
 Use this for `@neondatabase/serverless` patterns, including HTTP queries, WebSocket transactions, and runtime-specific optimizations.
 
-Link: `references/neon-serverless.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md`
 
 ### Neon JS SDK
 
 Use this for combined Neon Auth + Data API workflows with PostgREST-style querying and typed client setup.
 
-Link: `references/neon-js.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md`
 
 ## Developer Tools
 
 Use this for local development enablement with `npx neonctl@latest init`, VSCode extension setup, and Neon MCP server configuration.
 
-Link: `references/devtools.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md`
 
 ### Neon CLI
 
 Use this for terminal-first workflows, scripts, and CI/CD automation with `neonctl`.
 
-Link: `references/neon-cli.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md`
 
 ## Neon Admin API
 
@@ -80,27 +80,27 @@ The Neon Admin API can be used to manage Neon resources programmatically. It is 
 
 Use this for direct HTTP automation, endpoint-level control, API key auth, rate-limit handling, and operation polling.
 
-Link: `references/neon-rest-api.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md`
 
 ### Neon TypeScript SDK
 
 Use this when implementing typed programmatic control of Neon resources in TypeScript via `@neondatabase/api-client`.
 
-Link: `references/neon-typescript-sdk.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md`
 
 ### Neon Python SDK
 
 Use this when implementing programmatic Neon management in Python with the `neon-api` package.
 
-Link: `references/neon-python-sdk.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md`
 
 ## Neon Auth
 
 Use this for managed user authentication setup, UI components, auth methods, and Neon Auth integration pitfalls in Next.js and React apps.
 
-Link: `references/neon-auth.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md`
 
-Neon Auth is also embedded in the Neon JS SDK - so depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth. See `references/connection-methods.md` for more details.
+Neon Auth is also embedded in the Neon JS SDK - so depending on your use case, you may want to use the Neon JS SDK instead of Neon Auth. See `https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md` for more details.
 
 ## Branching
 
@@ -112,7 +112,7 @@ Key points:
 - Each branch has its own compute endpoint.
 - Use the neonctl CLI or MCP server to create, inspect, and compare branches.
 
-Link: `references/branching.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/branching.md`
 
 ## Autoscaling
 
