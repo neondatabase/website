@@ -255,7 +255,7 @@ When you checkout a new branch in a worktree, this script copies your main `.env
 ## In Action: Running AI Agents in Parallel
 
 <Admonition type="note" title="Works with any AI agent">
-This workflow is not specific to Claude Code. Since the Git hook operates at the file system level, it will work with any AI coding agent that can use a Git worktree as its workspace.
+This workflow is not specific to Claude Code. Since the Git hook operates at the file system level, it will work with any AI coding agent that can use a Git worktree as its workspace. See [Manual worktree creation](#manual-worktree-creation) below for how to set up worktrees manually if your agent doesn't have built-in support.
 </Admonition>
 
 Modern AI tools like [Claude Code](https://code.claude.com/docs/en/common-workflows#run-parallel-claude-code-sessions-with-git-worktrees) already have built-in support for Git worktrees, making this workflow incredibly seamless.
@@ -291,11 +291,33 @@ Claude Code provides custom hooks for Git worktree creation and removal. If you 
 
 You can now run as many agents as your coding plan allows, all in parallel without interfering with one another. Each agent operates in its own workspace with its own database branch, so you’re free to run destructive tests and migrations without worrying about breaking other agents’ work.
 
-## Merging Changes and Resolving Conflicts
+### Manual worktree creation
+
+If you prefer to create worktrees manually or your agent doesn't have built-in support, you can use Git commands directly. For example, if you want to create a new worktree for a branch named `feature-search`, you would run:
+
+```bash
+git worktree add -b feature-search ../feature-search
+```
+
+This command creates a new directory `../feature-search` (sibling to your current folder) and checks out a new branch named `feature-search`. The `post-checkout` hook will immediately trigger:
+
+1.  It detects the new worktree.
+2.  It copies your `.env` file to `../feature-search/.env`.
+3.  It creates a Neon branch `worktree-feature-search`.
+4.  It updates the `DATABASE_URL` in the new `.env` file.
+
+You can now navigate to that directory and start your agent or run your code:
+
+```bash
+cd ../feature-search
+# claude, codex, gemini, or any agent can now run here with its own database
+```
+
+## Merging changes and resolving conflicts
 
 Once an agent finishes its task, you’ll have a feature branch (e.g., `feature-auth`) with new commits and a corresponding Neon database branch. The next step is to merge that work back into `main`.
 
-### Merging Manualy
+### Merging manualy
 
 You can merge the worktree's branch just like any standard Git branch. From your main terminal:
 
