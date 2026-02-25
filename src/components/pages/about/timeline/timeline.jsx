@@ -82,8 +82,9 @@ const Timeline = () => (
                   {item.link ? (
                     <Link
                       className={clsx(
-                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                        'relative text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
                         'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white',
+                        'after:absolute after:-inset-1.5',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}
                       to={item.link}

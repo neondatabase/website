@@ -83,7 +83,7 @@ const BranchingPage = ({ params }) => {
         />
       </div>
       <DocFooter
-        className="mt-0"
+        className="!mt-10 border-t border-gray-new-20 !pt-6"
         updatedOn={updatedOn}
         withFeedback={false}
         tocLink={LINKS.branching}
