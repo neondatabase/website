@@ -11,7 +11,7 @@ const Hero = () => (
       <h1 className="text-center text-[60px] font-normal leading-dense tracking-tighter text-white xl:text-[52px] lg:text-[44px] md:text-[32px]">
         Neon pricing
       </h1>
-      <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-normal leading-snug tracking-extra-tight text-gray-new-60 xl:mt-[14px] xl:max-w-[560px] xl:text-[18px] lg:mt-3 lg:text-[16px] md:mt-[10px] md:text-[14px]">
+      <p className="mx-auto mt-4 max-w-[680px] text-center text-xl font-normal leading-normal -tracking-wide text-gray-new-60 xl:mt-[14px] xl:max-w-[560px] xl:text-[18px] lg:mt-3 lg:text-[16px] md:mt-[10px] md:text-[14px]">
         Get started for free. Pay per usage as you grow.
       </p>
       <Plans />

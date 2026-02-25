@@ -9,19 +9,19 @@ import bgPattern from './images/bg-pattern.jpg';
 const PROGRAMS = [
   {
     type: 'Agent Plan',
-    title: 'App Generation Platforms',
+    title: 'App generation platforms',
     description: 'Custom rates and limits for thousands of databases.',
     url: '/programs/agents',
   },
   {
     type: 'Startup Program',
-    title: 'Early-stage Startups',
+    title: 'Early-stage startups',
     description: 'Launch faster with up to $100k in credits.',
     url: '/startups',
   },
   {
     type: 'Open Source Program',
-    title: 'Open Source on Neon',
+    title: 'Open source on Neon',
     description: 'Credits and funding for building on Neon.',
     url: '/programs/open-source',
   },
@@ -29,9 +29,9 @@ const PROGRAMS = [
 
 const Programs = () => (
   <div className="relative mt-6 w-full overflow-hidden border border-gray-new-30 lg:mt-4">
-    <div className="relative overflow-hidden p-5">
+    <div className="relative overflow-hidden px-6 py-5">
       <h2 className="relative z-10 text-2xl font-normal leading-snug tracking-extra-tight text-white md:text-xl">
-        Special Programs
+        Special programs
       </h2>
       <Image
         className="pointer-events-none absolute right-0 top-0 h-full w-auto max-w-none md:hidden"
@@ -50,9 +50,9 @@ const Programs = () => (
         <div
           key={index}
           className={clsx(
-            'relative flex flex-col p-5',
+            'relative flex flex-col px-[18px] py-5',
             'border-l border-r border-gray-new-20',
-            'first:border-l-0 last:border-r-0',
+            'first:border-l-0 first:pl-6 last:border-r-0 last:pr-6',
             'lg:border-r-0 lg:first:border-l-0 lg:first:border-r',
             'lg:last:col-span-2 lg:last:border-l-0 lg:last:border-t',
             'md:border-l-0 md:border-r-0 md:border-t md:first:border-t-0 md:last:col-span-1'
@@ -61,7 +61,7 @@ const Programs = () => (
           <span className="font-mono text-sm font-medium uppercase leading-none text-gray-new-60">
             {type}
           </span>
-          <div className="mt-12 flex flex-col gap-0.5">
+          <div className="mt-10 flex flex-col gap-1.5">
             <h3 className="text-xl font-normal leading-snug tracking-extra-tight text-white">
               {title}
             </h3>

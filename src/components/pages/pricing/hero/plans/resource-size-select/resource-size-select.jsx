@@ -24,11 +24,11 @@ export const SCALE_RESOURCE_SIZES = [
 ];
 
 const getLoadType = (cuHours) => {
-  if (cuHours < 187.5) return 'Intermittent Load';
-  if (cuHours < 375) return 'Low Load';
-  if (cuHours <= 750) return 'Medium Load';
-  if (cuHours <= 3000) return 'High Load';
-  return 'XL Load';
+  if (cuHours < 187.5) return 'Intermittent load';
+  if (cuHours < 375) return 'Low load';
+  if (cuHours <= 750) return 'Medium load';
+  if (cuHours <= 3000) return 'High load';
+  return 'XL load';
 };
 
 const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, planId = '' }) => {
@@ -65,11 +65,11 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
 
   return (
     <div ref={containerRef} className="relative">
-      <div className="flex flex-nowrap items-center gap-1 text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
-        <span className="flex-shrink-0 whitespace-nowrap">Based on:</span>
+      <div className="flex flex-nowrap items-center gap-1 text-[15px] leading-snug text-gray-new-60">
+        <span className="flex-shrink-0 whitespace-nowrap tracking-extra-tight">Based on:</span>
         <button
           type="button"
-          className="group flex flex-1 items-center justify-between gap-1 rounded border border-gray-new-20 bg-gray-new-8 px-1.5 py-0.5 transition-colors hover:border-gray-new-30"
+          className="group flex flex-1 items-center gap-1 pr-1.5 tracking-extra-tight text-gray-new-80 transition-colors"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
@@ -79,14 +79,14 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
           </span>
           <ChevronIcon
             className={clsx(
-              'h-3 w-3 flex-shrink-0 text-gray-new-60 transition-transform duration-200',
+              'h-3.5 w-3.5 flex-shrink-0 text-gray-new-60 transition-transform duration-200',
               isOpen && 'rotate-180'
             )}
             aria-hidden
           />
         </button>
         <InfoIcon
-          className="relative top-0.5 flex-shrink-0"
+          className="relative flex-shrink-0"
           tooltip={tooltipText}
           tooltipId={`resource-size-${planId}`}
           link={{
@@ -112,7 +112,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
                   <button
                     type="button"
                     className={clsx(
-                      'w-full px-6 py-4 text-left font-mono text-sm leading-none tracking-extra-tight transition-colors md:px-5',
+                      'w-full px-6 py-4 text-left text-sm leading-none tracking-extra-tight transition-colors md:px-5',
                       isSelected ? 'text-white' : 'text-gray-new-70 group-hover:text-white'
                     )}
                     role="option"
