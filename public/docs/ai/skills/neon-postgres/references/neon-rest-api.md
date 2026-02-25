@@ -74,4 +74,4 @@ Authorization: Bearer $NEON_API_KEY
 | 429    | Rate Limited | Retry with backoff       |
 | 500    | Server Error | Retry or contact support |
 
-For TypeScript SDK usage, see `neon-typescript-sdk.md`. For Python SDK, see `neon-python-sdk.md`.
+For TypeScript SDK usage, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-typescript-sdk.md`. For Python SDK, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-python-sdk.md`.

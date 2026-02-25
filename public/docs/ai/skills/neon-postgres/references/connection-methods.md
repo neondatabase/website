@@ -33,7 +33,7 @@ For non-TypeScript languages, connect from a secure backend server using your la
 
 **Yes** → Use **Neon Data API** via `@neondatabase/neon-js`
 
-This is the only option for client-side apps since browsers cannot make direct TCP connections to Postgres. See `neon-js.md` for setup and the [JavaScript SDK docs](https://neon.com/docs/reference/javascript-sdk.md) for the full reference.
+This is the only option for client-side apps since browsers cannot make direct TCP connections to Postgres. See `https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md` for setup and the [JavaScript SDK docs](https://neon.com/docs/reference/javascript-sdk.md) for the full reference.
 
 **No** → Continue to step 3.
 
@@ -63,11 +63,11 @@ Some edge runtimes don't support TCP connections. Rarely the case anymore.
 
 **Yes** → Use **WebSocket transport** via `@neondatabase/serverless` with `Pool`
 
-WebSocket maintains connection state needed for transactions. See `neon-serverless.md` for setup.
+WebSocket maintains connection state needed for transactions. See `https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md` for setup.
 
 **No** → Use **HTTP transport** via `@neondatabase/serverless`
 
-HTTP is faster for single queries (~3 roundtrips vs ~8 for TCP). See `neon-serverless.md` for setup and the [serverless driver docs](https://neon.com/docs/serverless/serverless-driver.md) for the full reference.
+HTTP is faster for single queries (~3 roundtrips vs ~8 for TCP). See `https://neon.com/docs/ai/skills/neon-postgres/references/neon-serverless.md` for setup and the [serverless driver docs](https://neon.com/docs/serverless/serverless-driver.md) for the full reference.
 
 ---
 
@@ -118,13 +118,13 @@ Popular TypeScript/JavaScript ORMs all work with Neon:
 
 All ORMs support both TCP drivers and Neon's serverless driver depending on your platform.
 
-For Drizzle ORM integration with Neon, see `neon-drizzle.md`.
+For Drizzle ORM integration with Neon, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-drizzle.md`.
 
 ---
 
 ## Vercel Fluid + Drizzle Example
 
-Complete database client setup for Vercel with Drizzle ORM and connection pooling. See `neon-drizzle.md` for more examples.
+Complete database client setup for Vercel with Drizzle ORM and connection pooling. See `https://neon.com/docs/ai/skills/neon-postgres/references/neon-drizzle.md` for more examples.
 
 ```typescript
 // src/lib/db/client.ts

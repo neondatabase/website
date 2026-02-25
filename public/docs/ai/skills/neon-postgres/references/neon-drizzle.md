@@ -6,7 +6,7 @@ See the [official Drizzle guide](https://neon.com/docs/guides/drizzle.md) for co
 
 ## Choosing the Right Driver
 
-Drizzle ORM works with multiple Postgres drivers. See `connection-methods.md` for the full decision tree.
+Drizzle ORM works with multiple Postgres drivers. See `https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md` for the full decision tree.
 
 | Platform                | TCP Support | Pooling             | Recommended Driver         |
 | ----------------------- | ----------- | ------------------- | -------------------------- |
@@ -235,7 +235,7 @@ export async function safeNeonOperation<T>(
 
 ## Best Practices
 
-1. **Connection Management** - See `connection-methods.md` for platform-specific guidance
+1. **Connection Management** - See `https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md` for platform-specific guidance
 2. **Neon Features** - Utilize branching for development/testing
 3. **Query Optimization** - Batch operations, use prepared statements
 4. **Schema Design** - Leverage Postgres-specific features, use appropriate indexes

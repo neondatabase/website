@@ -25,7 +25,7 @@ npx neonctl@latest init
 
 This will install the Neon VSCode extension (if applicable) and the Neon MCP server and `neon-postgres` agent skill. Alternatively, you can offer to install the Neon CLI. Install instructions here: https://neon.com/docs/reference/cli-install.md
 
-Either CLI or MCP server can be used to manage Neon projects and databases on the user's behalf. If the user prefers to manually get started with Neon, then you can guide them through the setup process instead of using the CLI or MCP server directly. See `devtools.md` for details.
+Either CLI or MCP server can be used to manage Neon projects and databases on the user's behalf. If the user prefers to manually get started with Neon, then you can guide them through the setup process instead of using the CLI or MCP server directly. See `https://neon.com/docs/ai/skills/neon-postgres/references/devtools.md` for details.
 
 Since the Neon CLI and MCP server do interact with database resources, it's important to verify the user is comfortable with the security implications of running these tools.
 
@@ -59,17 +59,17 @@ DATABASE_URL=postgresql://user:password@host/database
 
 ### 3. Pick Connection Method & Pick Driver
 
-Refer to `connection-methods.md` to pick the correct connection method and driver based on your deployment platform.
+Refer to `https://neon.com/docs/ai/skills/neon-postgres/references/connection-methods.md` to pick the correct connection method and driver based on your deployment platform.
 
 #### 3.1. User Authentication with Neon Auth (if needed)
 
 Skip for CLI tools, scripts, or apps without user accounts.
 
-If the app needs auth: use MCP server `provision_neon_auth` tool, then see `neon-auth.md` for setup. For auth + database queries, see `neon-js.md`.
+If the app needs auth: use MCP server `provision_neon_auth` tool, then see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md` for setup. For auth + database queries, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-js.md`.
 
 #### 3.2. ORM Setup (optional)
 
-Check for existing ORM (Prisma, Drizzle, TypeORM). If none, ask if they want one. For Drizzle integration, see `neon-drizzle.md`.
+Check for existing ORM (Prisma, Drizzle, TypeORM). If none, ask if they want one. For Drizzle integration, see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-drizzle.md`.
 
 ### 6. Schema Setup
 

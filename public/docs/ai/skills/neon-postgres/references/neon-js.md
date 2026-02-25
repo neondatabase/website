@@ -2,7 +2,7 @@
 
 The `@neondatabase/neon-js` SDK provides a unified client for Neon Auth and Data API. It combines authentication handling with PostgREST-compatible database queries.
 
-**Auth only?** Use `@neondatabase/auth` instead (see `neon-auth.md`) for smaller bundle size.
+**Auth only?** Use `@neondatabase/auth` instead (see `https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md`) for smaller bundle size.
 
 See the [official JavaScript SDK docs](https://neon.com/docs/reference/javascript-sdk.md) for complete details.
 
@@ -394,7 +394,7 @@ const { data } = await client.from("items").select();
 
 ### Using old v0.1 server APIs
 
-Use `createNeonAuth()` + `auth.handler()`, not standalone `authApiHandler()`. See `neon-auth.md` for the v0.2 pattern.
+Use `createNeonAuth()` + `auth.handler()`, not standalone `authApiHandler()`. See `https://neon.com/docs/ai/skills/neon-postgres/references/neon-auth.md` for the v0.2 pattern.
 
 ### Missing NEON_AUTH_COOKIE_SECRET
 

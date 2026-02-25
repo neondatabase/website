@@ -12,13 +12,13 @@ Link: https://neon.com/docs/introduction/branching.md
 
 Use this when automating branch creation, listing, or deletion through direct HTTP integration.
 
-Link: `references/neon-rest-api.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-rest-api.md`
 
 ## Branch Operations via CLI
 
 Use this for terminal workflows and CI jobs that create and clean up temporary branches.
 
-Link: `references/neon-cli.md`
+Link: `https://neon.com/docs/ai/skills/neon-postgres/references/neon-cli.md`
 
 ## Branch Operations via MCP Server
 
