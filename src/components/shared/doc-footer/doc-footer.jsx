@@ -21,7 +21,12 @@ const DocFooter = ({ updatedOn, slug, className, withFeedback = true, tocLink = 
         Start from the beginning
       </Link>
     )}
-    <div className="flex w-full items-center justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
+    <div
+      className={clsx(
+        'flex items-center justify-between gap-6 sm:flex-col sm:items-start sm:gap-4',
+        !tocLink && 'w-full'
+      )}
+    >
       {updatedOn && <LastUpdatedDate updatedOn={updatedOn} />}
       {withFeedback && <Feedback slug={slug} />}
     </div>

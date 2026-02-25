@@ -14,7 +14,7 @@ const Contents = ({ contents }) => (
       <ul className="w-full">
         {contents.map(({ section, id, items }) => (
           <li
-            className="flex flex-col gap-8 py-8 first:pt-0 last:pb-0 lg:gap-6 lg:py-7 md:gap-5"
+            className="flex flex-col gap-8 py-5 first:pt-0 last:pb-0 lg:gap-6 lg:py-[19px] md:gap-5 md:py-[21px]"
             key={id}
             id={id}
           >
@@ -25,7 +25,7 @@ const Contents = ({ contents }) => (
               {items.map(({ title, description, slug }) => (
                 <li className="group/item -mt-px border-t border-gray-new-20" key={slug}>
                   <Link
-                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base group-last/item:pb-0 lg:py-[18px] md:py-[14px]"
+                    className="group flex w-full items-center gap-x-16 py-6 font-sans text-base lg:py-[18px] md:py-[14px]"
                     to={`${BRANCHING_BASE_PATH}${slug}`}
                   >
                     <span className="flex flex-row items-center gap-x-16 lg:flex-col lg:items-baseline lg:gap-y-1">
