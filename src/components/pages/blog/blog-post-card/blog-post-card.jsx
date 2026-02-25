@@ -91,8 +91,9 @@ const BlogPostCard = ({
       )}
       <div
         className={clsx(
-          'flex w-[684px] shrink-0 flex-col pr-20 md:w-full',
+          'flex shrink-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
+          !isFeatured && 'w-[684px] pr-20',
           isSmart && '!w-[424px] shrink-0 flex-col-reverse'
         )}
       >

@@ -10,6 +10,7 @@ import CTA from 'components/pages/blog-post/cta';
 import Hero from 'components/pages/blog-post/hero';
 import MoreArticles from 'components/pages/blog-post/more-articles';
 import SocialShare from 'components/pages/blog-post/social-share';
+import Testimonial from 'components/pages/blog-post/testimonial';
 import Admonition from 'components/shared/admonition';
 import LINKS from 'constants/links';
 import { getAllWpPosts, getWpPostBySlug } from 'utils/api-wp';
@@ -39,6 +40,7 @@ const BlogPage = async ({ params }) => {
       blogpostcode: CodeBlock,
       blogpostcodetabs: CodeTabs,
       blogpostcta: CTA,
+      blogposttestimonial: Testimonial,
       blogpostadmonition: (props) => <Admonition {...props} asHTML />,
     },
     true
