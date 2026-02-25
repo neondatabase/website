@@ -307,7 +307,9 @@ If the agent’s work is perfect, the merge will be fast-forward or a clean merg
 
 ```bash
 git worktree remove feature-auth
-neon branches delete feature-auth
+
+source .env  # Load NEON_PROJECT_ID and NEON_API_KEY from .env
+neon branches delete feature-auth --project-id $NEON_PROJECT_ID
 ```
 
 > You can also automate this cleanup with a similar Git hook that triggers on branch deletion or after a successful merge. Just ask your AI agent to write a similar Git hook that listens for branch deletions and automatically removes the corresponding Neon branch.
