@@ -24,10 +24,10 @@ Install pgfence globally or as a project dependency:
 
 ```bash
 # Global install
-npm install -g @flvmnt/pgfence
+npm install -g @flvmnt/pgfence@0.2.1
 
 # Or as a dev dependency
-npm install -D @flvmnt/pgfence
+npm install -D @flvmnt/pgfence@0.2.1
 ```
 
 ## Analyze migrations locally
@@ -88,7 +88,7 @@ For a full list of checks and safe rewrite recipes, see the [pgfence documentati
 
 ## Add pgfence to CI with GitHub Actions
 
-You can integrate pgfence into your CI pipeline so that every pull request is checked for dangerous migration patterns before merging. The following example uses [Neon branching](/docs/introduction/branching) to create a preview branch and run pgfence against the migration files in the PR:
+You can integrate pgfence into your CI pipeline so that every pull request is checked for dangerous migration patterns before merging. The following GitHub Actions workflow runs pgfence against the migration files changed in the PR:
 
 ```yaml
 name: Migration safety check
@@ -109,7 +109,7 @@ jobs:
           node-version: '20'
 
       - name: Install pgfence
-        run: npm install -g @flvmnt/pgfence
+        run: npm install -g @flvmnt/pgfence@0.2.1
 
       - name: Analyze migrations
         run: pgfence analyze --ci --max-risk medium --output github migrations/*.sql
