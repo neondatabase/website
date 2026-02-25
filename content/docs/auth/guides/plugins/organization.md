@@ -112,11 +112,11 @@ Example response:
 
 **API fields reference**
 
-| Field                               | Type                        | Description                                                                                                                                                    |
-| :---------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled`                           | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls are disabled and return an error.                                 |
-| `organization_limit`                | number (≥ 1)                | Max organizations a user can create or belong to.                                                                                                              |
-| `creator_role`                      | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner).                                                |
+| Field                               | Type                        | Description                                                                                                                                                                |
+| :---------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `enabled`                           | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls are disabled and return an error.                                            |
+| `organization_limit`                | number (≥ 1)                | Max organizations a user can create or belong to.                                                                                                                          |
+| `creator_role`                      | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner).                                                            |
 | `allow_user_to_create_organization` | boolean                     | When true, any user can create orgs (within the limit). When false, no one can create new organizations. Existing organizations and all other operations are not affected. |
 
 **API Documentation**
