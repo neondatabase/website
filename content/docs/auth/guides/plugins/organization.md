@@ -32,7 +32,7 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 - A Neon project with **Auth enabled**
 - A signed-in user (organizations are associated with users)
-- Currently available only on new Neon projects
+- Organization configuration is available only on new Neon projects
 
 ## Configure the organization plugin
 
