@@ -60,7 +60,7 @@ const Features = () => (
     <Container size="1152" className="px-8">
       <h2
         className={clsx(
-          'text-pretty indent-24 text-5xl leading-dense tracking-tighter text-gray-new-50',
+          'text-pretty indent-24 text-5xl leading-dense tracking-tighter text-gray-new-50 lg:indent-16 md:indent-0',
           'xl:px-8 xl:text-[40px] lg:text-wrap lg:px-5 lg:text-[28px] md:text-[24px] sm:px-0',
           '[&>strong]:font-normal [&>strong]:text-white'
         )}

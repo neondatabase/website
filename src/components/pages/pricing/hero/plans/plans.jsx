@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
+import InfoIcon from 'components/shared/info-icon';
 
 import plans from './data/plans';
 import Features from './features';
@@ -77,6 +78,14 @@ const Plans = () => {
               displayPrice = price !== undefined ? price : 0;
             }
 
+            const selectedResource =
+              hasDynamicPricing && resourceSizes && currentSize
+                ? resourceSizes.find((size) => size.id === currentSize)
+                : null;
+            const tooltipText =
+              selectedResource &&
+              `Estimated cost of a ${selectedResource.cu} CU-hour,<br/> ${selectedResource.storage} GB database workload.`;
+
             return (
               <li
                 className={clsx(
@@ -101,12 +110,28 @@ const Plans = () => {
                     </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
-                        <div className="leading-snug">
-                          <span className="text-[15px] -tracking-wide text-gray-new-60">
-                            Typical spend:
-                          </span>{' '}
-                          <span className="text-xl -tracking-wide text-white">${displayPrice}</span>{' '}
-                          <span className="text-[15px] -tracking-wide text-gray-new-80">/mo</span>
+                        <div className="flex items-center gap-1.5">
+                          <div className="leading-snug">
+                            <span className="text-[15px] -tracking-wide text-gray-new-60">
+                              Typical spend:
+                            </span>{' '}
+                            <span className="text-xl -tracking-wide text-white">
+                              ${displayPrice}
+                            </span>{' '}
+                            <span className="text-[15px] -tracking-wide text-gray-new-80">/mo</span>
+                          </div>
+                          {tooltipText && (
+                            <InfoIcon
+                              className="relative mt-0.5 inline-flex flex-shrink-0 align-baseline"
+                              tooltip={tooltipText}
+                              tooltipId={`resource-size-${planId}`}
+                              link={{
+                                text: 'Read more.',
+                                href: '#workload-cost-estimates',
+                              }}
+                              clickable
+                            />
+                          )}
                         </div>
                         {currentSize && setCurrentSize && resourceSizes && (
                           <ResourceSizeSelect

@@ -4,7 +4,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useEffect, useRef, useState } from 'react';
 
-import InfoIcon from 'components/shared/info-icon';
 import useClickOutside from 'hooks/use-click-outside';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
@@ -31,14 +30,11 @@ const getLoadType = (cuHours) => {
   return 'XL load';
 };
 
-const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, planId = '' }) => {
+const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef(null);
 
   const selectedOption = sizes?.find((size) => size.id === value) || sizes?.[1] || sizes?.[0];
-
-  // Generate dynamic tooltip text
-  const tooltipText = `Estimated cost of a ${selectedOption.cu} CU-hour,<br/> ${selectedOption.storage} GB database workload.`;
 
   useClickOutside([containerRef], () => setIsOpen(false));
 
@@ -85,16 +81,6 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES, pl
             aria-hidden
           />
         </button>
-        <InfoIcon
-          className="relative flex-shrink-0"
-          tooltip={tooltipText}
-          tooltipId={`resource-size-${planId}`}
-          link={{
-            text: 'Read more.',
-            href: '#workload-cost-estimates',
-          }}
-          clickable
-        />
       </div>
 
       {isOpen && (
@@ -142,7 +128,6 @@ ResourceSizeSelect.propTypes = {
       storage: PropTypes.number.isRequired,
     })
   ),
-  planId: PropTypes.string,
 };
 
 export default ResourceSizeSelect;
