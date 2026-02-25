@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
-const Testimonial = ({ text, author, authorPosition, authorPhoto }) => (
+const Quote = ({ text, author, authorPosition, authorPhoto }) => (
   <figure className="not-prose relative my-7 w-full border-l-2 border-green-44 pl-6 [&_a]:text-white [&_a]:underline [&_a]:decoration-white/40 [&_a]:decoration-dashed [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:decoration-white">
     <blockquote className="font-mono text-xl font-normal leading-snug tracking-tighter text-white">
       <span
@@ -32,7 +32,7 @@ const Testimonial = ({ text, author, authorPosition, authorPhoto }) => (
   </figure>
 );
 
-Testimonial.propTypes = {
+Quote.propTypes = {
   text: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
   authorPosition: PropTypes.string,
@@ -41,4 +41,4 @@ Testimonial.propTypes = {
   }),
 };
 
-export default Testimonial;
+export default Quote;
