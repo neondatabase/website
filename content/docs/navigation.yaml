@@ -395,7 +395,7 @@
                   slug: guides/rls-tutorial
                 - title: Custom authentication providers
                   slug: data-api/custom-authentication-providers
-                - title: Data API Advisor
+                - title: Data API Advisors
                   slug: data-api/database-advisor
 
             - section: Tools

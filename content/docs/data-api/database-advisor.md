@@ -1,32 +1,34 @@
 ---
-title: Data API Advisor
+title: Data API Advisors
 subtitle: Identify security and performance issues in your API-exposed database
 enableTableOfContents: true
-updatedOn: '2026-02-16T00:00:00.000Z'
+updatedOn: '2026-02-25T00:00:00.000Z'
 ---
 
-The Data API Advisor analyzes your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. It runs a set of checks against your database and reports issues with severity levels and recommended fixes.
+The Data API Advisors analyze your database schema and configuration to detect security and performance issues for tables and objects exposed by the [Data API](/docs/data-api/overview) feature. They run a set of checks against your database and report issues with severity levels and recommended fixes.
 
-Because the Data API exposes your database schema directly over HTTP, security misconfigurations that would normally be hidden behind an application server become directly exploitable. Missing RLS policies and overly permissive views are especially dangerous in this context. The advisor also checks for common performance issues like unindexed foreign keys and table bloat. It helps you catch both types of issues before they reach production.
+Because the Data API exposes your database schema directly over HTTP, security misconfigurations that would normally be hidden behind an application server become directly exploitable. Missing RLS policies and overly permissive views are especially dangerous in this context. The advisors also check for common performance issues like unindexed foreign keys and table bloat, helping you catch issues before they reach production.
 
 ## Prerequisites
 
-- The [Data API](/docs/data-api/get-started) must be enabled on your project.
 - Your compute must be active (not suspended) when running a scan.
+- If the Data API is not yet enabled, the Advisors screen will show a "Data API not enabled" message. Enable the [Data API](/docs/data-api/get-started) to run scans.
 
 ## How to access
 
 ### Neon Console
 
-In the Neon Console, navigate to **Monitoring > Advisors** for your project. The advisor scans your database and displays any issues found, grouped by category.
+In the Neon Console, go to **Monitoring > Data API Advisors** for your branch. The advisor scans your database and displays any issues found, grouped by category.
 
 ![Data API advisor](/docs/data-api/data-api-database-advisor-monitor.png)
 
-Each issue includes a severity level, a description, and a recommended fix. You can use the **Resolve** button on any issue to get an AI-generated analysis that explains the risk, provides SQL to fix it, and offers additional recommendations tailored to your specific schema. This is especially useful for complex issues where the fix depends on your application's access patterns.
+Each issue includes a severity level, a description, and a recommended fix. Clicking an issue opens a detail view with an **Ask Assistant** option that analyzes the risk and suggests a specific fix (such as a SQL query tailored to your schema), along with a **Read our docs** link for general guidance on that type of issue.
+
+![Data API advisor solution](/docs/data-api/data-api-database-advisor-resolve.png)
 
 ### API
 
-You can also retrieve advisor issues via the Neon API:
+You can also retrieve advisor issues via the [Neon API](https://api-docs.neon.tech/reference/getprojectadvisorsecurityissues):
 
 ```
 GET /projects/{project_id}/advisors
