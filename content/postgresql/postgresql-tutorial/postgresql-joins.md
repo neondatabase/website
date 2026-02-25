@@ -110,7 +110,7 @@ FROM
 INNER JOIN players
     ON teams.id = players.team_id;
 ```
-
+**Note:** It is common practice to use `JOIN` as shorthand for `INNER JOIN`.
 Output:
 
 ```text
