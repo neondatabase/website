@@ -6,7 +6,7 @@ summary: >-
   Postgres connection string for databases in Neon projects, including options
   for specifying branches and historical states.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.131Z'
+updatedOn: '2026-02-26T16:28:03.961Z'
 ---
 
 ## Before you begin

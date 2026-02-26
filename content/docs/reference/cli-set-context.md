@@ -6,7 +6,7 @@ summary: >-
   background context for CLI sessions, enabling project-specific actions without
   repeatedly specifying project IDs.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.142Z'
+updatedOn: '2026-02-26T16:28:03.969Z'
 ---
 
 ## Before you begin

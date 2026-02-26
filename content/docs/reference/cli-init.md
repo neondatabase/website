@@ -1,12 +1,13 @@
 ---
 title: 'Neon CLI command: init'
-subtitle: 'Initialize an app project with Neon: auth, MCP server, extensions, and agent skills'
+subtitle: Initialize an app project with Neon: auth, MCP server, extensions, and agent
+  skills
 summary: >-
   Step-by-step guide for initializing an app project with Neon using the CLI,
   including authentication, configuring the Neon MCP Server, and installing
   necessary extensions and agent skills for supported editors.
 enableTableOfContents: true
-updatedOn: '2026-02-24T15:28:05.880Z'
+updatedOn: '2026-02-26T16:28:03.962Z'
 ---
 
 ## The `init` command

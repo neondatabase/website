@@ -1,11 +1,11 @@
 ---
 title: 'Neon CLI command: databases'
-subtitle: List, create, and delete databases in a Neon project
+subtitle: 'List, create, and delete databases in a Neon project'
 summary: >-
   Covers the usage of the Neon CLI `databases` command for managing databases,
   including listing, creating, and deleting databases within a Neon project.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.132Z'
+updatedOn: '2026-02-26T16:28:03.961Z'
 ---
 
 ## Before you begin

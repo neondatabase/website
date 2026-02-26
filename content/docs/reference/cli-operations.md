@@ -6,7 +6,7 @@ summary: >-
   Neon project, including subcommands and options for effective management from
   the terminal.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.138Z'
+updatedOn: '2026-02-26T16:28:03.965Z'
 ---
 
 ## Before you begin

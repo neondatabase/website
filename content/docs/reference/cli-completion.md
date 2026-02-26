@@ -6,7 +6,7 @@ summary: >-
   script that enhances command-line efficiency by providing auto-completion for
   `neonctl` commands and options.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.131Z'
+updatedOn: '2026-02-26T16:28:03.960Z'
 ---
 
 ## Before you begin

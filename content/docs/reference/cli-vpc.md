@@ -5,7 +5,7 @@ summary: >-
   Covers the usage of the Neon CLI `vpc` command for managing Private Networking
   configurations, including VPC endpoints and project-level restrictions.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.142Z'
+updatedOn: '2026-02-26T16:28:03.969Z'
 ---
 
 ## Before you begin

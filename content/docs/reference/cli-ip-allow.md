@@ -6,7 +6,7 @@ summary: >-
   allowlist for a Neon project, including actions to list, add, remove, and
   reset IP addresses.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.136Z'
+updatedOn: '2026-02-26T16:28:03.963Z'
 ---
 
 ## Before you begin

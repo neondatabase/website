@@ -6,7 +6,7 @@ summary: >-
   authentication, detailing the process of authorizing access to a Neon account
   and managing credentials.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.129Z'
+updatedOn: '2026-02-26T16:28:03.954Z'
 ---
 
 ## Before you begin
