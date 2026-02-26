@@ -38,15 +38,9 @@ const TESTIMONIALS = [
 const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
   <article className="flex h-[274px] max-w-[384px] flex-col justify-between pl-8 first:max-w-[352px] first:pl-0 lg:pl-6 md:pl-0">
     <div className="flex flex-col gap-9">
-      <Image
-        src={logo}
-        alt=""
-        width={logoWidth}
-        height={32}
-        className="h-8 w-auto object-contain object-left"
-      />
+      <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit" />
       <blockquote
-        className="font-mono text-[20px] font-normal leading-snug -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/80"
+        className="font-mono text-[20px] font-normal leading-snug -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>

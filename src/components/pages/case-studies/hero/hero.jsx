@@ -65,9 +65,9 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
             />
           </div>
 
-          <span className="inline-flex w-fit items-center gap-2 text-base font-medium leading-none tracking-tighter text-white transition-colors group-hover:text-green-52">
+          <span className="inline-flex w-fit items-center gap-2 text-base font-medium leading-none tracking-tighter text-white">
             {linkText}
-            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-colors duration-200 group-hover:text-green-52" />
+            <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-transform duration-200 group-hover:translate-x-[3px]" />
           </span>
         </div>
       </div>

@@ -7,7 +7,6 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
-import useWindowSize from 'hooks/use-window-size';
 import SearchIcon from 'icons/search.inline.svg';
 import getLinkProps from 'utils/get-link-props';
 
@@ -15,10 +14,10 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className="h-[170px]">
+    <li className="h-[170px] border-gray-new-20 last:border-r">
       <Link
         className={clsx(
-          'group relative block size-full border-l border-t border-gray-new-20 bg-[#080808]'
+          'group relative block size-full border-l border-t border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
         )}
         {...linkProps}
       >
@@ -36,11 +35,6 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
             height={logo.mediaDetails.height}
           />
         </div>
-        <span className="pointer-events-none absolute inset-0 overflow-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="absolute -left-4 -top-20 h-[235px] w-[165%] rounded-full bg-[#166B70] opacity-20 blur-3xl" />
-          <span className="absolute -right-3 -top-40 h-[250px] w-[60%] rotate-45 rounded-full bg-[#48C2CB] opacity-30 blur-3xl" />
-        </span>
-        <span className="pointer-events-none absolute inset-0 border border-white opacity-0 mix-blend-overlay transition-opacity duration-300 group-hover:opacity-100" />
       </Link>
     </li>
   );
@@ -74,14 +68,9 @@ Card.propTypes = CardPropTypes;
 
 const getCategoryLabel = (slug) => (slug === 'all' ? 'All Stories' : null);
 
-const GRID_COLS = { desktop: 3, lg: 2, md: 1 };
-const LG_BREAKPOINT = 1024;
-const MD_BREAKPOINT = 768;
-
 const Cards = ({ items, categories }) => {
   const [activeCategory, setActiveCategory] = useState({ slug: 'all' });
   const [searchQuery, setSearchQuery] = useState('');
-  const { width } = useWindowSize();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -124,32 +113,6 @@ const Cards = ({ items, categories }) => {
     return filteredByCategory.filter((item) => item.title?.toLowerCase().includes(q));
   }, [filteredByCategory, searchQuery]);
 
-  const gridCols = useMemo(() => {
-    if (width == null) return GRID_COLS.desktop;
-    if (width >= LG_BREAKPOINT) return GRID_COLS.desktop;
-    if (width >= MD_BREAKPOINT) return GRID_COLS.lg;
-    return GRID_COLS.md;
-  }, [width]);
-
-  const itemsToRender = useMemo(() => {
-    const len = filteredItems.length;
-    if (len === 0) return filteredItems;
-    const cols = gridCols;
-    let placeholderCount = 0;
-    if (cols === 3) {
-      if (len % 3 === 1) placeholderCount = 2;
-      else if (len % 3 === 2) placeholderCount = 1;
-    } else if (cols === 2) {
-      if (len % 2 === 1) placeholderCount = 1;
-    }
-    if (placeholderCount === 0) return filteredItems;
-    const placeholders = Array.from({ length: placeholderCount }, (_, i) => ({
-      id: `empty-${cols}-${i}`,
-      isPlaceholder: true,
-    }));
-    return [...filteredItems, ...placeholders];
-  }, [filteredItems, gridCols]);
-
   const handleCategoryClick = useCallback((slug, featuredCaseStudy) => {
     setActiveCategory({ slug, featuredCaseStudy });
   }, []);
@@ -182,9 +145,6 @@ const Cards = ({ items, categories }) => {
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </div>
-              <kbd className="inline-flex h-6 items-center rounded border border-gray-new-20 bg-transparent px-1.5 py-1 font-sans text-sm font-medium leading-none tracking-tight text-gray-new-50">
-                ⌘K
-              </kbd>
             </div>
 
             <nav className="flex flex-col gap-2" aria-label="Case study categories">
@@ -209,17 +169,13 @@ const Cards = ({ items, categories }) => {
             </nav>
           </aside>
 
-          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 self-start border-b border-r border-gray-new-20 lg:grid-cols-2 md:grid-cols-1">
-            {itemsToRender.map((item) => {
-              if (item.isPlaceholder) {
-                return (
-                  <li
-                    key={item.id}
-                    className="h-[170px] border-l border-t border-gray-new-20 bg-[#080808]"
-                    aria-hidden
-                  />
-                );
-              }
+          <ul
+            className={clsx(
+              'grid min-w-0 flex-1 grid-cols-3 gap-0 self-start lg:grid-cols-2 md:grid-cols-1 [&>li:nth-child(3n)>a]:border-r',
+              filteredItems.length % 3 !== 0 && '[&>li:nth-last-child(-n+3)>a]:border-b'
+            )}
+          >
+            {filteredItems.map((item) => {
               const { id, title, caseStudyPost } = item;
               return <Card key={id} title={title} {...caseStudyPost} />;
             })}
