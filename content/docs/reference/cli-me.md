@@ -1,6 +1,6 @@
 ---
-title: Neon CLI commands — me
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: me'
+subtitle: View current user info, login details, and project limits
 summary: >-
   Covers the usage of the `me` command in the Neon CLI to display information
   about the current user, including login details and project limits.

@@ -1,6 +1,6 @@
 ---
-title: Neon CLI commands — projects
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: projects'
+subtitle: List, create, update, delete, and get Neon projects
 summary: >-
   Covers the usage of the Neon CLI `projects` command for managing Neon
   projects, including listing, creating, updating, deleting, and retrieving

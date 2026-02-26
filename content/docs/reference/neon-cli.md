@@ -1,6 +1,6 @@
 ---
-title: Neon CLI
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: Neon CLI overview
+subtitle: 'Overview of the Neon CLI: installation, commands, and options'
 summary: >-
   How to manage Neon using the command-line interface (CLI), including
   installation instructions for macOS, Windows, and Linux, along with available

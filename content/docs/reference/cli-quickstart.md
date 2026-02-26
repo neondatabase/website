@@ -1,5 +1,5 @@
 ---
-title: Neon CLI Quickstart
+title: Neon CLI quickstart
 subtitle: Get set up with the Neon CLI in just a few steps
 summary: >-
   How to quickly set up and authenticate the Neon CLI, including installation

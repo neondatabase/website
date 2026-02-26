@@ -1,6 +1,6 @@
 ---
-title: Neon CLI commands — auth
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: auth'
+subtitle: Authenticate to Neon via browser or API key and manage credentials
 summary: >-
   Covers the usage of the `auth` command in the Neon CLI for user
   authentication, detailing the process of authorizing access to a Neon account

@@ -1,6 +1,6 @@
 ---
-title: Neon CLI commands — set-context
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: set-context'
+subtitle: Set default project context for CLI sessions to avoid repeating project ID
 summary: >-
   Covers the usage of the `set-context` command in the Neon CLI to establish a
   background context for CLI sessions, enabling project-specific actions without
