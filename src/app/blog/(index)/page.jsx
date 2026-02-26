@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
 import BlogGridItem from 'components/pages/blog/blog-grid-item';

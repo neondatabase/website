@@ -8,7 +8,7 @@ const BlogPageLayout = async ({ children }) => {
 
   try {
     categories = await getAllCategories();
-  } catch (error) {
+  } catch {
     // Prevent full page crash when categories API is temporarily unavailable.
     categories = [];
   }
