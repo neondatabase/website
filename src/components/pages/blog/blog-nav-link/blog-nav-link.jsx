@@ -18,12 +18,11 @@ const BlogNavLink = ({ name, slug }) => {
       className={clsx(
         'flex w-full items-center whitespace-nowrap py-[3px] font-mono text-[14px] font-medium uppercase tracking-extra-tight text-gray-new-60 transition-colors duration-200',
         'lg:border-b-2 lg:text-sm',
-        isActive ? 'text-white lg:border-green-45' : 'hover:text-white lg:border-transparent'
+        isActive ? 'text-gray-new-90 lg:border-green-45' : 'hover:text-white lg:border-transparent'
       )}
       to={url}
     >
       {name}
-      {isActive && <span className="ml-auto block size-2 bg-green-52" />}
     </Link>
   );
 };

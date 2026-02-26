@@ -91,3 +91,4 @@ package-lock.json
 
 # Evals directory (test validation for documentation)
 .evals/
+.env*.local

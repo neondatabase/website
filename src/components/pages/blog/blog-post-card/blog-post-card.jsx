@@ -60,7 +60,7 @@ const BlogPostCard = ({
     <article
       className={clsx(
         'blog-post-card flex',
-        fullSize ? 'flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
+        fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
           '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0',
         className
@@ -70,14 +70,15 @@ const BlogPostCard = ({
         <Link
           className={clsx(
             'group aspect-[16/9] w-full overflow-hidden bg-[#181818]',
-            fullSize && 'col-span-6 xl:col-span-5'
+            fullSize && 'min-w-0 flex-1 basis-[42%]'
           )}
           to={link}
         >
           <Image
             className={clsx(
-              'size-full object-cover transition-transform duration-200',
-              withImageHover && 'group-hover:scale-110'
+              'size-full transition-transform duration-200',
+              fullSize ? 'object-contain' : 'object-cover',
+              withImageHover && !fullSize && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
             alt={largeCover?.altText || title}
@@ -91,9 +92,10 @@ const BlogPostCard = ({
       )}
       <div
         className={clsx(
-          'flex shrink-0 flex-col md:w-full',
+          'flex min-w-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
-          !isFeatured && 'w-[684px] pr-20',
+          !isFeatured &&
+            'basis-[58%] max-w-[684px] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
           isSmart && '!w-[424px] shrink-0 flex-col-reverse'
         )}
       >
@@ -144,7 +146,7 @@ const BlogPostCard = ({
           {excerpt && (
             <div
               className={clsx(
-                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-[15px]',
+                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-base',
                 largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}
             >
