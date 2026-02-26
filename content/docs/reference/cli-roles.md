@@ -1,6 +1,6 @@
 ---
-title: Neon CLI commands — roles
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: roles'
+subtitle: List, create, and delete database roles in a Neon project
 summary: >-
   Covers the usage of the `roles` command in the Neon CLI for managing roles
   within a Neon project, including listing, creating, and deleting roles.
