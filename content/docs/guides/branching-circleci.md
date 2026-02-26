@@ -4,6 +4,7 @@ subtitle: Learn how to use the Neon CircleCI Orb to provision ephemeral Postgres
   branches for every CI pipeline run
 enableTableOfContents: true
 updatedOn: '2026-02-20T20:20:07.750Z'
+tag: community
 ---
 
 The **Neon CircleCI Orb** provisions a real Neon Postgres branch per pipeline run (or per parallel node), instead of a generic Postgres-in-Docker service container. That means your CI database behaves like production - same managed Postgres, network, and extensions, so you get fewer "works in CI, breaks in prod" issues.
