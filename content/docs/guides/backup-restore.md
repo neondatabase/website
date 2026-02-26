@@ -11,7 +11,7 @@ updatedOn: '2026-02-15T20:51:54.134Z'
 ---
 
 <Admonition type="note" title="Snapshots in Beta">
-The **Snapshots** feature is now in Beta and available to all users. Snapshot limits: 1 on the Free plan and 10 on paid plans. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+The **Snapshots** feature is now in Beta and available to all users. Manual snapshot limits: 1 on the Free plan and 10 on paid plans. On paid plans, snapshots created by backup schedules do not count toward this limit. Automated backup schedules are available on paid plans except for the Agent plan. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 
 **Pricing:** Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 </Admonition>
@@ -289,7 +289,7 @@ This example creates a daily snapshot at 23:00 (11:00 PM) UTC and keeps it for 7
 
 Snapshots are automatically deleted after their retention period expires. You can adjust retention settings at any time by editing the schedule. Note that:
 
-- Shorter retention periods help manage snapshot limits on your plan
+- Shorter retention periods help manage storage; on paid plans, the per-plan snapshot limit applies only to manual snapshots (scheduled backup snapshots do not count)
 - Deleted snapshots cannot be recovered
 - Manual snapshots are not affected by backup schedule retention settings
 

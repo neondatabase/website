@@ -14,7 +14,7 @@ updatedOn: '2026-02-15T20:51:54.031Z'
 <Admonition type="note" title="Beta">
 Snapshots are available in Beta. Please give us [Feedback](https://console.neon.tech/app/projects?modal=feedback) from the Neon Console or by connecting with us on [Discord](https://discord.gg/92vNTzKDGp).
 
-**Limits and pricing:** The Free plan includes 1 snapshot, and paid plans (including the [Agent plan](https://neon.com/use-cases/ai-agents)) include 10 snapshots. Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
+**Limits and pricing:** The Free plan includes 1 manual snapshot, and paid plans (including the [Agent plan](https://neon.com/use-cases/ai-agents)) include 10 manual snapshots. On paid plans, snapshots created by backup schedules do not count toward this limit. Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA. If you need higher limits, please reach out to [Neon support](/docs/introduction/support).
 </Admonition>
 
 ## Overview
