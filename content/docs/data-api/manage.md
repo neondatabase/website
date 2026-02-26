@@ -110,12 +110,6 @@ Specifies the database role used for **unauthenticated requests** (requests sent
 
 Enforces a hard limit on the number of rows returned in a single API response. This prevents accidental performance degradation from large queries. Clients should use pagination limits to retrieve data within this threshold. This also prevents unexpected egress costs from large data transfers.
 
-### Aggregates
-
-**Default:** `Enabled`
-
-Controls whether aggregate functions (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`) are available in Data API queries. Corresponds to the `db_aggregates_enabled` field in the API settings object.
-
 ### JWT role claim key
 
 **Default:** `.role`
@@ -188,13 +182,13 @@ Response (201 Created):
 
 The empty body enables the Data API without an authentication provider. To configure authentication at enable time, change the request body:
 
-- **Neon Auth:** `-d '{"auth_provider": "neon_auth"}'` 
-   
-   If Neon Auth is not already enabled on the branch, this automatically provisions it. See [Neon Auth](/docs/auth/overview) to learn more.
+- **Neon Auth:** `-d '{"auth_provider": "neon_auth"}'`
 
-- **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'` 
+  If Neon Auth is not already enabled on the branch, this automatically provisions it. See [Neon Auth](/docs/auth/overview) to learn more.
 
-   See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for supported providers and how to find your JWKS URL.
+- **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'`
+
+  See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for supported providers and how to find your JWKS URL.
 
 ### Get Data API details
 
