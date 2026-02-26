@@ -31,7 +31,7 @@ You can find your `project_id` and `branch_id` on the **Project settings** and *
 
 Send a `POST` request to enable Neon Auth on a branch:
 
-```bash 
+```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -55,16 +55,16 @@ Response (201 Created):
 
 The response includes:
 
-| Field | Description |
-|---|---|
-| `auth_provider` | The configured provider (`better_auth`) |
-| `auth_provider_project_id` | Unique ID for the auth provider instance |
-| `pub_client_key` | Public client key (shown once at creation, may be empty for `better_auth`) |
-| `secret_server_key` | Secret server key (shown once at creation, may be empty for `better_auth`) |
-| `jwks_url` | JWKS endpoint for JWT verification |
-| `schema_name` | Database schema created for auth tables (`neon_auth`) |
-| `table_name` | Table name for synced user data (`users_sync`) |
-| `base_url` | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
+| Field                      | Description                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `auth_provider`            | The configured provider (`better_auth`)                                                                   |
+| `auth_provider_project_id` | Unique ID for the auth provider instance                                                                  |
+| `pub_client_key`           | Public client key (shown once at creation, may be empty for `better_auth`)                                |
+| `secret_server_key`        | Secret server key (shown once at creation, may be empty for `better_auth`)                                |
+| `jwks_url`                 | JWKS endpoint for JWT verification                                                                        |
+| `schema_name`              | Database schema created for auth tables (`neon_auth`)                                                     |
+| `table_name`               | Table name for synced user data (`users_sync`)                                                            |
+| `base_url`                 | Base URL of the auth service, used for SDK configuration and the interactive API reference (`/reference`) |
 
 <Admonition type="important">
 The enable response is the only time the API returns `pub_client_key` and `secret_server_key`. Store them securely. Subsequent `GET` requests do not include these fields.
@@ -80,7 +80,7 @@ By default, Neon Auth uses the branch's default database. To target a different 
 
 Retrieve the current Neon Auth configuration for a branch:
 
-```bash 
+```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
@@ -104,7 +104,7 @@ Response (200 OK):
 
 Send a `DELETE` request to disable Neon Auth on a branch:
 
-```bash 
+```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth' \
   -H 'Authorization: Bearer $NEON_API_KEY' \
   -H 'Content-Type: application/json' \
@@ -126,17 +126,17 @@ Setting `delete_data` to `true` permanently removes all auth data from the datab
 
 The Neon API also provides endpoints for managing auth configuration at the branch level. These are available at `https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/auth/...`:
 
-| Endpoint | Methods | Description |
-|---|---|---|
-| `/domains` | GET, POST, DELETE | Manage trusted redirect domains |
-| `/oauth_providers` | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.) |
-| `/email_provider` | GET, PATCH | Configure the email provider |
-| `/email_and_password` | GET, PATCH | Configure email/password authentication |
-| `/users` | POST, DELETE, PUT | Create, delete, and manage user roles |
-| `/plugins` | GET, PATCH | View and configure [auth plugins](/docs/auth/guides/plugins) |
-| `/webhooks` | GET, PUT | Configure webhook notifications |
-| `/allow_localhost` | GET, PATCH | Toggle localhost access for development |
-| `/send_test_email` | POST | Send a test email to verify email configuration |
+| Endpoint              | Methods                  | Description                                                  |
+| --------------------- | ------------------------ | ------------------------------------------------------------ |
+| `/domains`            | GET, POST, DELETE        | Manage trusted redirect domains                              |
+| `/oauth_providers`    | GET, POST, PATCH, DELETE | Configure OAuth providers (Google, GitHub, etc.)             |
+| `/email_provider`     | GET, PATCH               | Configure the email provider                                 |
+| `/email_and_password` | GET, PATCH               | Configure email/password authentication                      |
+| `/users`              | POST, DELETE, PUT        | Create, delete, and manage user roles                        |
+| `/plugins`            | GET, PATCH               | View and configure [auth plugins](/docs/auth/guides/plugins) |
+| `/webhooks`           | GET, PUT                 | Configure webhook notifications                              |
+| `/allow_localhost`    | GET, PATCH               | Toggle localhost access for development                      |
+| `/send_test_email`    | POST                     | Send a test email to verify email configuration              |
 
 For full request/response details on these endpoints, see the [interactive API reference](https://api-docs.neon.tech/reference/getting-started).
 
