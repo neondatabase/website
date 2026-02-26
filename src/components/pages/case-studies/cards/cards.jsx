@@ -28,7 +28,7 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
           )}
         >
           <Image
-            className="h-8 w-fit transition-[filter,opacity] duration-200 [filter:brightness(0)_invert(1)_brightness(1.08)] group-hover:[filter:brightness(0)_invert(1)_brightness(1.15)]"
+            className="h-8 w-fit"
             src={logo.mediaItemUrl}
             alt={title}
             width={logo.mediaDetails.width}
