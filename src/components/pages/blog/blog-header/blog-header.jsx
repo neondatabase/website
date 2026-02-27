@@ -14,7 +14,7 @@ const BlogHeader = ({ className, title, category, basePath, withLabel = false })
   >
     <div>
       {withLabel && (
-        <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4">Blog</SectionLabel>
+        <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4 sm:!gap-2 [&>img]:sm:!h-[14px] [&>img]:sm:!w-3 [&>span]:sm:!text-xs">Blog</SectionLabel>
       )}
       <h1 className="max-w-[540px] text-[56px] leading-dense tracking-tighter lt:text-[48px] lg:text-[40px] md:text-[32px] sm:text-[28px]">
         {title === "What we\u2019re shipping. What you\u2019re building." ? (

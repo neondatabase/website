@@ -4,14 +4,7 @@ import { getAllCategories } from 'utils/api-wp';
 
 // eslint-disable-next-line react/prop-types
 const BlogPageLayout = async ({ children }) => {
-  let categories = [];
-
-  try {
-    categories = await getAllCategories();
-  } catch {
-    // Prevent full page crash when categories API is temporarily unavailable.
-    categories = [];
-  }
+  const categories = await getAllCategories();
 
   return (
     <div className="safe-paddings pb-24 pt-20 lg:pb-20 lg:pt-12 sm:pb-16 sm:pt-10">
