@@ -45,7 +45,7 @@ const themeClassNames = {
   },
 };
 
-const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
+const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
@@ -111,13 +111,20 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         isBlog &&
-          '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none'
+          (isInline
+            ? 'overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !shadow-none dark:!bg-none sm:!flex-col sm:!items-start sm:!gap-5'
+            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none')
       )}
       id="changelog-form"
     >
       {isBlog ? (
         <div className="relative z-20">
-          <h2 className="text-base font-medium leading-snug tracking-tighter text-white">
+          <h2
+            className={clsx(
+              'font-medium leading-snug tracking-tighter text-white',
+              isInline ? 'text-xl sm:text-lg' : 'text-base'
+            )}
+          >
             Subscribe to our changelog
           </h2>
           <p className="mt-2.5 text-[15px] leading-snug tracking-tight text-gray-new-70/90">
@@ -136,7 +143,11 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         </h2>
       )}
       <form
-        className={clsx('relative z-20 w-full flex-1', isBlog && 'mt-8')}
+        className={clsx(
+          'relative z-20 w-full flex-1',
+          isBlog && !isInline && 'mt-8',
+          isInline && 'min-w-[292px] sm:min-w-0'
+        )}
         method="POST"
         noValidate
         onSubmit={handleSubmit}
@@ -186,12 +197,15 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                 <span
                   className={clsx(
                     classNames.sendText,
-                    'text-[13px] font-semibold tracking-extra-tight xs:hidden'
+                    'text-[13px] font-semibold tracking-extra-tight xs:hidden',
+                    isBlog && '!hidden'
                   )}
                 >
                   Subscribe
                 </span>
-                <SendIcon className={clsx(classNames.sendIcon, 'lg:hidden xs:block')} />
+                <SendIcon
+                  className={clsx(classNames.sendIcon, 'lg:hidden xs:block', isBlog && '!block')}
+                />
               </m.button>
             )}
             {formState === FORM_STATES.LOADING && (
@@ -254,7 +268,10 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
       {!isBlog && <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />}
       {isBlog && (
         <Image
-          className="absolute bottom-0 left-0 z-10 w-full"
+          className={clsx(
+            'absolute bottom-0 z-10',
+            isInline ? 'right-0' : 'left-0 w-full'
+          )}
           src={formBg}
           width={256}
           height={120}
@@ -269,6 +286,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
 ChangelogForm.propTypes = {
   isSidebar: PropTypes.bool,
   isBlog: PropTypes.bool,
+  isInline: PropTypes.bool,
   className: PropTypes.string,
 };
 
