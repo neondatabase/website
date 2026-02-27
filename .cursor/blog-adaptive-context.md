@@ -255,3 +255,267 @@ No impact on md and below (`flex-col` layout) — `self-start` has no visible ef
 1. **WASM Build Error** (`next.config.js`): `filePath.split('/')` → `filePath.split(/[\\/]/)` for Windows path compatibility
 2. **TypeError: Cannot read properties of undefined (reading 'slug')** (`page.jsx`): `.filter(Boolean)` on the posts array
 3. **504 API crash** (`layout.jsx`): `try/catch` around `getAllCategories()` to gracefully degrade when the API is unavailable
+
+---
+---
+
+# Blog Post (Inner Page) Adaptive Layout
+
+## Overview
+
+Responsive adaptations for blog article pages (`/blog/[slug]`). The reference for responsive behavior is the template page used by `use-cases/ai-agents` (`src/app/[slug]/pages/template-page.jsx`), which uses the `prose-doc` content styles from `src/styles/doc-content.css`.
+
+**Key design principle**: Desktop layout is preserved. All changes are additive responsive overrides at `lg` and below.
+
+### Reference page architecture
+
+The template page (`template-page.jsx`) uses:
+- `Container` with `size="1600"` → `max-w-[1600px] px-8`
+- Grid: `grid-cols-12 ... lg:block` — switches from 12-column grid to block at lg
+- Post content: `xl:col-span-12 xl:mx-auto xl:max-w-[704px] lg:ml-0 lg:max-w-none`
+- Aside (sidebar): `xl:hidden` — completely hidden at xl and below
+- Content typography: `prose-doc` with explicit element selectors (h2, h3, p, ul, ol)
+
+### Key Architectural Decision (lg and below)
+
+At `lg` (≤1023px), the blog article layout switches from `grid-cols-12` to `block` (matching the template page's `lg:block`). The sidebar (TOC + social share + newsletter form) is completely hidden via `lg:hidden`. A separate `SocialShare` component appears below the content at `lg` (already existed: `hidden lg:flex`).
+
+---
+
+## Files Changed
+
+### 1. `src/app/blog/[slug]/page.jsx`
+
+**Article container (line 70)**:
+```
+'dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:block lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:px-4 md:pb-20 md:pt-8'
+```
+- `lg:max-w-3xl` → `lg:max-w-none` — full width on tablet (was capped at 768px)
+- Added `lg:block` — switches from 12-column grid to block layout (like template-page)
+- Removed `md:gap-x-0` — not needed in block layout
+
+**Hero className (line 72)**:
+```
+'col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:mx-0'
+```
+- `lg:col-span-full` → `lg:mx-0` — grid classes irrelevant in block; resets `mx-5` margins
+
+**Content className (line 80)**:
+```
+'post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:mx-0'
+```
+- `lg:col-span-full lg:row-start-3` → `lg:mx-0` — same reasoning
+
+**SocialShare className (line 85)**:
+```
+'col-span-full hidden lg:mt-14 lg:flex md:mt-10 sm:mt-8'
+```
+- Added `md:mt-10 sm:mt-8` — reduced top margins on smaller screens
+
+**MoreArticles className (line 91)**:
+```
+'col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mx-0 lg:mt-12 md:mt-10'
+```
+- Added `lg:mx-0` — resets margins for block layout
+
+---
+
+### 2. `src/components/pages/blog-post/aside/aside.jsx`
+
+**aside element (line 10)**:
+```
+'aside col-span-2 col-end-13 row-start-1 row-end-3 -ml-8 mt-6 max-w-[298px] xl:col-start-9 xl:col-end-13 xl:!-ml-0 lg:hidden'
+```
+- `lg:col-span-full lg:ml-0 lg:mt-5 lg:max-w-full` → `lg:hidden` — sidebar completely hidden at lg (like template's `xl:hidden`)
+
+**Inner div (line 11)**:
+```
+'no-scrollbars sticky top-24 -m-1 max-h-[calc(100vh-100px)] overflow-y-auto p-1 pb-5'
+```
+- Removed `lg:relative lg:top-0 lg:overflow-hidden` — no longer needed since aside is hidden at lg
+
+---
+
+### 3. `src/components/pages/blog-post/hero/hero.jsx`
+
+**Title h1 (line 30)**:
+```
+'post-title mt-4 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[36px] sm:text-[32px] xs:text-[28px]'
+```
+
+| Breakpoint | Size | Change |
+|------------|------|--------|
+| default    | 48px (text-5xl) | unchanged |
+| xl         | 44px | unchanged |
+| lg         | 40px | **added** |
+| md         | 36px | was `text-4xl` (36px), now explicit |
+| sm         | 32px | unchanged |
+| xs         | 28px | was `text-3xl` (30px), now 28px |
+
+**Description (line 33)**:
+```
+'mt-5 text-xl leading-snug tracking-tight text-gray-new-70 md:text-lg sm:text-base'
+```
+- Removed redundant `xl:text-xl`
+- Added `sm:text-base` (16px on small screens)
+
+**Author bar (line 36)**:
+```
+'mt-4 flex items-center justify-between gap-x-4 border-t border-[#303236] py-4 sm:flex-col sm:items-start sm:gap-y-3'
+```
+- Added `gap-x-4` for reliable separation
+- Added `sm:flex-col sm:items-start sm:gap-y-3` — author info and date stack vertically on sm
+
+---
+
+### 4. `src/components/pages/blog-post/quote/quote.jsx`
+
+**figure (line 5)**:
+- `my-7` → `my-8` — 32px top/bottom (matches `QuoteBlock` on reference page which uses `my-8`)
+
+**blockquote (line 6)**:
+- Added `md:text-lg sm:text-base` — responsive text scaling
+
+---
+
+### 5. `src/components/pages/blog-post/more-articles/more-articles.jsx`
+
+**Card list container (line 16)**:
+- Added `md:mt-6` — reduced spacing on md
+
+---
+
+### 6. `src/styles/blog-content.css` — **major rework**
+
+#### Approach change
+
+Replaced Tailwind `prose-*` modifier overrides with direct CSS element selectors (matching `prose-doc` in `doc-content.css`). This gives precise control over the spacing rhythm.
+
+**Removed** from `@apply` lines:
+- `prose-p:my-4 prose-p:tracking-tight prose-p:text-gray-new-90` — replaced by `p {}` selector
+- `prose-ol:my-5 prose-ul:my-5 prose-li:my-4` — replaced by `ul, ol {}` selectors
+- `prose-h1:... prose-h2:... prose-h3:... prose-h4:... prose-h5:...` — replaced by `h2 {}`, `h3 {}`, etc.
+
+#### New element selectors (matching prose-doc rhythm)
+
+**h2**:
+```css
+@apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
+```
+- `m-0 pt-8` — zero margins, 32px padding-top (was `mt-10 mb-5`). Matches prose-doc exactly.
+- `md:pt-6 md:text-[24px]` — 24px padding, 24px font on tablet
+- `sm:text-[20px]` — 20px on mobile
+
+**h3**:
+```css
+@apply mt-7 text-xl font-medium leading-snug tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
+```
+
+**h4**:
+```css
+@apply mt-6 text-lg font-medium leading-snug tracking-extra-tight md:mt-4 md:text-base;
+```
+
+**h5**:
+```css
+@apply mt-5 text-lg md:mt-4 md:text-base;
+```
+
+**p** (key change — sets the 24px rhythm):
+```css
+@apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-gray-new-90 md:mb-5 md:mt-4 md:text-base;
+```
+- Desktop: 18px top, 24px bottom (effective gap = 24px between paragraphs)
+- md: 16px top, 20px bottom, text 16px
+
+#### Responsive typography summary
+
+| Element | Desktop | md (≤767px) | sm (≤639px) |
+|---------|---------|-------------|-------------|
+| p       | 18px, mb-6/mt-[18px] | 16px, mb-5/mt-4 | 16px |
+| h2      | 28px, pt-8 | 24px, pt-6 | 20px |
+| h3      | 20px, mt-7 | 18px, mt-5 | 18px |
+| h4      | 18px, mt-6 | 16px, mt-4 | 16px |
+| h5      | 18px, mt-5 | 16px, mt-4 | 16px |
+| li      | 18px | 16px | 16px |
+| figure/img | my-10 | my-8 | my-6 |
+| hr      | my-8 | my-6 | my-6 |
+
+#### Lists (ul / ol)
+
+**Shared (`ul, ol`)**:
+```css
+@apply my-6 list-none md:my-5;
+> li { @apply relative my-2.5 pl-0 text-[18px] font-normal leading-normal md:text-base; }
+```
+
+**Unordered (`ul`)**:
+```css
+@apply pl-[34px] md:pl-5 sm:pl-4;
+> li::before { @apply absolute -left-4 top-0 text-[18px] ... content-['–'] md:-left-3.5 md:text-base; }
+```
+- En-dash `–` marker (blog style), positioned `absolute -left-4 top-0` (prose-doc pattern)
+
+**Ordered (`ol`)**:
+```css
+@apply list-decimal pl-[38px] md:pl-5;
+> li { @apply pl-1.5; }
+ol { list-style-type: lower-alpha; }
+```
+- Added `ol ol { list-style-type: lower-alpha }` — nested ordered lists use a, b, c (matches prose-doc)
+
+#### Other elements
+
+**hr**: `@apply my-8 md:my-6;`
+
+**table**: Added `my-10` (was missing).
+
+**figure/img**: `prose-figure:my-10 ... md:prose-figure:my-8 ... sm:prose-figure:my-6` — progressive spacing reduction (matches QuoteBlock pattern `my-10 lg:my-8 md:my-6`).
+
+**wp-block-quote**: `my-8` (32px) — matches `QuoteBlock` component on reference page. Was `my-7`.
+
+**wp-block-pullquote**: `my-8` (32px) — same.
+
+**wp-block-quote text**: Already had `md:text-lg sm:text-base`.
+
+**wp-block-pullquote text**: Already had `md:text-xl sm:text-lg`.
+
+**Admonition h4 reset**:
+```css
+.admonition h4 { @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none; }
+```
+Prevents the generic `h4 { mt-6 text-lg }` rule from affecting admonition titles (matches prose-doc).
+
+---
+
+## Visual Hierarchy by Breakpoint (Blog Post Inner Page)
+
+### Desktop (>1279px) — unchanged
+12-column grid. Content in columns 4–10. Sidebar (TOC + social share + newsletter) in columns 11–12, sticky.
+
+### xl (1024–1279px)
+Content shifts to columns 1–9. Sidebar narrows to columns 9–13. Gap reduced to 24px.
+
+### lg (768–1023px)
+- **Block layout** (no grid) — sidebar hidden
+- Content full width with 32px side padding
+- SocialShare appears below content (`hidden lg:flex`)
+- Title 40px, body text 18px
+- Spacing rhythm unchanged from desktop
+
+### md (640–767px)
+- Side padding reduced to 16px (`md:px-4`)
+- **Body text 16px** (`md:text-base`)
+- h2: 24px (was 28px), pt-6 (was pt-8)
+- h3: 18px (was 20px)
+- Paragraph margins: mb-5 mt-4 (was mb-6 mt-[18px])
+- Lists: my-5, li text 16px
+- Author bar still inline
+
+### sm (≤639px)
+- h2: 20px, h3: 18px
+- Title: 32px, description: 16px
+- Author bar stacks vertically
+- Figure/img margins: my-6
+- Quote padding: pl-4 (was pl-6)
+- Pullquote padding: pl-6 (was pl-9)

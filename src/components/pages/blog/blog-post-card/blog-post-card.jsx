@@ -62,7 +62,7 @@ const BlogPostCard = ({
         'blog-post-card flex',
         fullSize ? 'min-w-0 flex-row-reverse gap-5 xl:gap-5 md:flex-col' : 'flex-col gap-5',
         isSmart &&
-          '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0',
+          '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:!flex-col md:gap-x-0 md:gap-y-5',
         className
       )}
     >
@@ -96,7 +96,7 @@ const BlogPostCard = ({
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
             'basis-[58%] max-w-[684px] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
-          isSmart && '!w-[424px] shrink-0 flex-col-reverse'
+          isSmart && '!w-[424px] shrink-0 flex-col-reverse md:!w-full md:gap-y-3'
         )}
       >
         <div

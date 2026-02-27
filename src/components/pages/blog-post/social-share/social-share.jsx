@@ -52,7 +52,7 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
             sendGtagEvent(eventName);
           }}
         >
-          <Icon className="h-4 w-4 text-gray-new-60 transition-colors duration-200 group-hover:text-white lg:h-6 lg:w-6" />
+          <Icon className="h-4 w-4 text-gray-new-60 transition-colors duration-200 group-hover:text-white" />
         </Tag>
       ))}
     </div>

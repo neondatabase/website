@@ -67,9 +67,9 @@ const BlogPage = async ({ params }) => {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="safe-paddings">
-        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:max-w-3xl lg:px-8 lg:pb-28 lg:pt-10 md:gap-x-0 md:px-4 md:pb-20 md:pt-8">
+        <article className="dark relative mx-auto grid max-w-[1536px] grid-cols-12 gap-x-10 pb-40 pt-20 2xl:px-10 xl:gap-x-6 xl:pb-32 xl:pt-12 lg:block lg:max-w-none lg:px-8 lg:pb-28 lg:pt-10 md:px-4 md:pb-20 md:pt-8">
           <Hero
-            className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:col-span-full"
+            className="col-start-4 col-end-10 mx-5 xl:col-start-1 xl:col-end-9 lg:mx-0"
             title={title}
             date={formattedDate}
             category={categories.nodes[0]}
@@ -77,18 +77,18 @@ const BlogPage = async ({ params }) => {
             {...pageBlogPost}
           />
           <Content
-            className="post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:col-span-full lg:row-start-3"
+            className="post-content col-start-4 col-end-10 mx-5 mt-4 xl:col-start-1 xl:col-end-9 lg:mx-0"
             html={contentWithLazyBlocks}
           />
           <Aside title={title} slug={shareUrl} tableOfContents={tableOfContents} />
           <SocialShare
-            className="col-span-full hidden lg:mt-14 lg:flex md:mt-12"
+            className="col-span-full hidden lg:mt-14 lg:flex md:mt-10 sm:mt-8"
             title={title}
             slug={shareUrl}
           />
           {relatedPosts.length > 0 && (
             <MoreArticles
-              className="col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mt-12 md:mt-11"
+              className="col-start-4 col-end-10 mx-5 mt-16 xl:col-start-1 xl:col-end-9 xl:mt-14 lg:mx-0 lg:mt-12 md:mt-10"
               posts={relatedPosts}
             />
           )}
