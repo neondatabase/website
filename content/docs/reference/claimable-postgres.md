@@ -216,12 +216,12 @@ const { databaseUrl, databaseUrlDirect, claimUrl, claimExpiresAt } = await insta
 
 The `referrer` parameter is required. The function returns:
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| `databaseUrl` | string | Pooled connection URL (use for application queries) |
-| `databaseUrlDirect` | string | Direct connection URL (use for migrations) |
-| `claimUrl` | string | URL to claim the database to a Neon account |
-| `claimExpiresAt` | Date | Expiration timestamp as a JavaScript Date object |
+| Field               | Type   | Description                                         |
+| ------------------- | ------ | --------------------------------------------------- |
+| `databaseUrl`       | string | Pooled connection URL (use for application queries) |
+| `databaseUrlDirect` | string | Direct connection URL (use for migrations)          |
+| `claimUrl`          | string | URL to claim the database to a Neon account         |
+| `claimExpiresAt`    | Date   | Expiration timestamp as a JavaScript Date object    |
 
 You can also pass a seed option to run SQL on creation:
 
