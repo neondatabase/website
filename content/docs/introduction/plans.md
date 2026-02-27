@@ -55,7 +55,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Metrics/logs export](#metricslogs-export)            | —                            | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                            | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month    | Up to 7 days                         | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 snapshot                   | 10 snapshots                         | 10 snapshots                                                                                      |
+| [Snapshots](#snapshots)                               | 1 manual snapshot            | 10 manual snapshots                  | 10 manual snapshots                                                                               |
 | [Auth](#auth)                                         | Up to 60k MAU                | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                            | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                            | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
@@ -287,11 +287,13 @@ The restore window is configurable. Shortening it can reduce [instant restore](#
 
 Snapshots capture the state of your branch at a point in time. You can create snapshots manually or schedule automated backups.
 
-Snapshot limits per plan:
+The per-plan snapshot limit applies to **manual snapshots only**. On paid plans, snapshots created by backup schedules do not count toward this limit (scheduled backups are not available on the Free plan).
 
-- **Free**: 1 snapshot
-- **Launch**: 10 snapshots
-- **Scale**: 10 snapshots
+Manual snapshot limits per plan:
+
+- **Free**: 1 manual snapshot
+- **Launch**: 10 manual snapshots
+- **Scale**: 10 manual snapshots
 
 **Pricing**: Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 

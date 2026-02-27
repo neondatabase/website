@@ -47,7 +47,7 @@ Neon Auth is in active development. Check the [roadmap](/docs/auth/roadmap) to s
 
 Neon Auth is powered by [Better Auth](https://www.better-auth.com/), which means you get familiar APIs. You can use Better Auth UI components or call auth methods directly to build your own UI.
 
-Neon Auth currently supports Better Auth version **1.4.6**.
+Neon Auth currently supports Better Auth version **1.4.18**.
 
 ### When to use Neon Auth vs. self-hosting Better Auth
 

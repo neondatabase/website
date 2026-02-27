@@ -90,7 +90,7 @@
     },
     {
       "name": "mcp-server-neon",
-      "path": "~/mcp-server-neon",
+      "path": "~/Documents/GitHub/mcp-server-neon",
       "github_url": "git@github.com:neondatabase-labs/mcp-server-neon.git",
       "github_org": "neondatabase-labs",
       "github_repo": "mcp-server-neon",
@@ -150,7 +150,7 @@
     },
     {
       "name": "instagres-web",
-      "path": "~/instagres-web",
+      "path": "~/Documents/GitHub/instagres-web",
       "github_url": "git@github.com:neondatabase/instagres-web.git",
       "github_org": "neondatabase",
       "github_repo": "instagres-web",
