@@ -6,10 +6,10 @@ import BlogPostCard from 'components/pages/blog/blog-post-card';
 const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => (
   <BlogPostCard
     className={clsx(
-      'py-10 last:pb-0 md:py-6',
+      'last:pb-0',
       isFeatured
-        ? '!pt-0'
-        : 'col-span-full border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0',
+        ? 'pb-10 !pt-0'
+        : 'col-span-full border-t border-gray-new-20 py-8 md:py-6 first-of-type:border-0 first-of-type:pt-0',
       className
     )}
     category={category}
