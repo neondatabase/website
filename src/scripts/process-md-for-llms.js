@@ -1496,7 +1496,9 @@ async function prefetchExternalCode(content) {
           }
 
           let data = '';
-          res.on('data', (chunk) => (data += chunk));
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
           res.on('end', () => resolve({ url, content: data }));
           res.on('error', () => resolve({ url, error: 'Network error' }));
         })

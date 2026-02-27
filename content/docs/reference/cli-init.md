@@ -1,12 +1,13 @@
 ---
-title: Neon CLI commands — init
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI command: init'
+subtitle: Initialize an app project with Neon, including auth, MCP server, extensions,
+  and agent skills
 summary: >-
   Step-by-step guide for initializing an app project with Neon using the CLI,
   including authentication, configuring the Neon MCP Server, and installing
   necessary extensions and agent skills for supported editors.
 enableTableOfContents: true
-updatedOn: '2026-02-24T15:28:05.880Z'
+updatedOn: '2026-02-27T16:24:41.387Z'
 ---
 
 ## The `init` command

@@ -40,7 +40,7 @@ import Button from 'components/shared/button';
 import CodeBlock from 'components/shared/code-block';
 import ComputeCalculator from 'components/shared/compute-calculator';
 import CopyPrompt from 'components/shared/copy-prompt/copy-prompt';
-import CtaBlock from 'components/shared/cta-block';
+// import CtaBlock from 'components/shared/cta-block';
 import DeployPostgresButton from 'components/shared/deploy-postgres-button';
 import DocCta from 'components/shared/doc-cta';
 import ExternalCode from 'components/shared/external-code';
@@ -181,7 +181,8 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   SubprocessorsForm,
   ProgramForm,
   LatencyCalculator,
-  CTA: isTemplate ? CtaBlock : DocCta,
+  // TODO: revert to CTA: isTemplate ? CtaBlock : DocCta when design is ready
+  CTA: (props) => <DocCta isTemplate={isTemplate} {...props} />,
   Testimonial,
   TestimonialsWrapper,
   UseCaseList,
