@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-02-19T15:51:43.477Z'
+updatedOn: '2026-02-27T13:31:28.209Z'
 ---
 
 Claimable Postgres gives you an instant Postgres database with a single API call. No account required.
@@ -197,7 +197,40 @@ DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1
 PUBLIC_POSTGRES_CLAIM_URL=https://pg.new/claim/01abc123-def4-5678-9abc-def012345678
 ```
 
+- `DATABASE_URL` is a pooled connection (hostname contains `-pooler`). Use this for application queries.
+- `DATABASE_URL_DIRECT` is a direct connection (no pooler). Use this for migrations (e.g. Prisma).
+
 To claim, visit the URL in the comments above or run `npx get-db claim` to open it in your browser.
+
+## SDK
+
+The `get-db` package also exports an SDK for programmatic provisioning in Node.js scripts:
+
+```javascript
+import { instantPostgres } from 'get-db';
+
+const { databaseUrl, databaseUrlDirect, claimUrl, claimExpiresAt } = await instantPostgres({
+  referrer: 'your-app-name',
+});
+```
+
+The `referrer` parameter is required. The function returns:
+
+| Field               | Type   | Description                                         |
+| ------------------- | ------ | --------------------------------------------------- |
+| `databaseUrl`       | string | Pooled connection URL (use for application queries) |
+| `databaseUrlDirect` | string | Direct connection URL (use for migrations)          |
+| `claimUrl`          | string | URL to claim the database to a Neon account         |
+| `claimExpiresAt`    | Date   | Expiration timestamp as a JavaScript Date object    |
+
+You can also pass a seed option to run SQL on creation:
+
+```javascript
+const result = await instantPostgres({
+  referrer: 'your-app-name',
+  seed: { type: 'sql-script', path: './schema.sql' },
+});
+```
 
 ## Vite plugin
 
