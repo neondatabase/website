@@ -20,8 +20,8 @@ In this guide, you'll learn how to enable the Neon Data API for your database, c
 
 ## Enable the Data API
 
-<Admonition type="tip">
-You can also enable the Data API programmatically using the Neon MCP Server. The `provision_neon_data_api` tool enables LLMs to provision HTTP-based Data API access for Neon databases with optional JWT authentication. See the [Neon MCP Server documentation](/docs/ai/neon-mcp-server#supported-actions-tools) for more information.
+<Admonition type="tip" title="Enable programmatically">
+You can also enable the Data API using the [Neon API](/docs/data-api/manage#manage-via-the-neon-api) or the [Neon MCP Server](/docs/ai/neon-mcp-server#supported-actions-tools) (`provision_neon_data_api` tool).
 </Admonition>
 
 ### 1. Navigate to the Data API page
