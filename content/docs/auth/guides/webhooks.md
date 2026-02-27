@@ -29,7 +29,7 @@ When you subscribe to `send.otp` or `send.magic_link`, Neon Auth skips its built
 
 ## Configure webhooks
 
-Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS. See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
+Configure webhooks per project and branch using the Neon API. Your webhook URL must use HTTPS protocol. See the API reference for [Get webhook configuration](https://api-docs.neon.tech/reference/getneonauthwebhookconfig) and [Update webhook configuration](https://api-docs.neon.tech/reference/updateneonauthwebhookconfig).
 
 ```bash
 PUT /projects/{project_id}/branches/{branch_id}/auth/webhooks
@@ -96,7 +96,7 @@ All events share a common JSON envelope:
     "project_name": "My SaaS App"
   },
   "user": {
-    "user_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
     "email": "user@example.com",
     "name": "Jane Smith",
     "email_verified": false,
@@ -112,14 +112,14 @@ All events share a common JSON envelope:
 }
 ```
 
-The `user` object fields are all optional and vary by event. Available fields: `user_id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_verified`, `created_at`, `metadata`.
+The `user` object fields are all optional and vary by event. Available fields: `id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_verified`, `created_at`.
 
 ### `send.otp` event data
 
 | Field                 | Type              | Description                                                |
 | --------------------- | ----------------- | ---------------------------------------------------------- |
 | `otp_code`            | string            | 6-digit OTP code                                           |
-| `otp_type`            | string            | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
+| `otp_type`            | string            | `"sign-in"`, `"email-verification"`, or `"forget-password"` |
 | `delivery_preference` | string (optional) | `"email"` or `"sms"`                                       |
 | `expires_at`          | ISO datetime      | Expiry time                                                |
 | `ip_address`          | string            | Requester's IP address                                     |
@@ -127,14 +127,14 @@ The `user` object fields are all optional and vary by event. Available fields: `
 
 ### `send.magic_link` event data
 
-| Field        | Type         | Description                                                |
-| ------------ | ------------ | ---------------------------------------------------------- |
-| `link_type`  | string       | `"sign-in"`, `"email-verification"`, or `"reset-password"` |
-| `link_url`   | string       | Full verification URL with embedded token                  |
-| `token`      | string       | Raw token for building custom redirect URLs                |
-| `expires_at` | ISO datetime | Expiry time                                                |
-| `ip_address` | string       | Requester's IP address                                     |
-| `user_agent` | string       | Requester's user agent                                     |
+| Field        | Type         | Description                                   |
+| ------------ | ------------ | --------------------------------------------- |
+| `link_type`  | string       | `"email-verification"` or `"forget-password"` |
+| `link_url`   | string       | Full verification URL with embedded token     |
+| `token`      | string       | Raw token for building custom redirect URLs   |
+| `expires_at` | ISO datetime | Expiry time                                   |
+| `ip_address` | string       | Requester's IP address                        |
+| `user_agent` | string       | Requester's user agent                        |
 
 Magic links do not include a `delivery_preference` field. Your webhook handler determines the delivery channel.
 
@@ -145,8 +145,6 @@ These events fire only when a new user record is created in the database. They d
 | Field             | Type              | Description                                           |
 | ----------------- | ----------------- | ----------------------------------------------------- |
 | `auth_provider`   | string            | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
-| `referral_code`   | string (optional) | Referral code from the signup URL                     |
-| `signup_metadata` | object (optional) | Custom metadata passed during signup                  |
 | `ip_address`      | string            | Requester's IP address                                |
 | `user_agent`      | string            | Requester's user agent                                |
 
@@ -285,12 +283,11 @@ If all 3 delivery attempts fail or the 15-second global timeout expires, the aut
 
 Return a 2xx status code with a JSON body.
 
-**Allow signup** (optionally attach metadata to the user record):
+**Allow signup:**
 
 ```json
 {
-  "allowed": true,
-  "user_metadata": { "plan": "free" }
+  "allowed": true
 }
 ```
 
@@ -300,18 +297,15 @@ Return a 2xx status code with a JSON body.
 {
   "allowed": false,
   "error_message": "Signups from this domain are not allowed.",
-  "error_code": "DOMAIN_BLOCKED",
-  "reason": "Internal: blocked domain acme.com"
+  "error_code": "DOMAIN_BLOCKED"
 }
 ```
 
-| Field           | Type               | Description                                                               |
-| --------------- | ------------------ | ------------------------------------------------------------------------- |
-| `allowed`       | boolean (required) | Whether to permit user creation                                           |
-| `user_metadata` | object (optional)  | Merged into the user record if allowed                                    |
-| `error_message` | string (optional)  | User-facing rejection message (max 500 characters)                        |
-| `error_code`    | string (optional)  | Machine-readable code for client-side handling                            |
-| `reason`        | string (optional)  | Internal reason for logging only, not shown to users (max 500 characters) |
+| Field           | Type               | Description                                        |
+| --------------- | ------------------ | -------------------------------------------------- |
+| `allowed`       | boolean (required) | Whether to permit user creation                    |
+| `error_message` | string (optional)  | User-facing rejection message (max 500 characters) |
+| `error_code`    | string (optional)  | Machine-readable code for client-side handling     |
 
 If the webhook fails or returns an invalid response, signup is rejected. This fail-closed behavior prevents bypassing your validation logic.
 
@@ -323,7 +317,7 @@ If your webhook endpoint is unreachable, all signups fail. Monitor your endpoint
 
 Return any 2xx status code. The response body is ignored.
 
-This event is non-blocking. Failures are logged but do not affect the user. Return 200 immediately and process the event asynchronously (for example, via a job queue). This prevents timeouts under load.
+This event is non-blocking. Failures are logged but do not affect the user creation. Return 200 immediately and process the event asynchronously (for example, via a job queue). This prevents timeouts under load.
 
 ## Retry behavior
 
