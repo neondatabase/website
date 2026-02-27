@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { useState } from 'react';
 
 import Button from 'components/shared/button';
+import InfoIcon from 'components/shared/info-icon';
 
 import plans from './data/plans';
 import Features from './features';
@@ -77,6 +78,14 @@ const Plans = () => {
               displayPrice = price !== undefined ? price : 0;
             }
 
+            const selectedResource =
+              hasDynamicPricing && resourceSizes && currentSize
+                ? resourceSizes.find((size) => size.id === currentSize)
+                : null;
+            const tooltipText =
+              selectedResource &&
+              `Estimated cost of a ${selectedResource.cu} CU-hour,<br/> ${selectedResource.storage} GB database workload.`;
+
             return (
               <li
                 className={clsx(
@@ -95,16 +104,34 @@ const Plans = () => {
                   >
                     {type}
                   </h3>
-                  <div className="mt-14 flex flex-col gap-3">
-                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-extra-tight lg:text-2xl lg:tracking-tighter">
+                  <div className="mt-14 flex flex-col gap-4">
+                    <h4 className="whitespace-nowrap text-[28px] font-normal leading-none tracking-tighter lg:text-2xl">
                       {title}
                     </h4>
                     {hasDynamicPricing ? (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-baseline gap-1.5 leading-snug tracking-extra-tight">
-                          <span className="text-2xl text-white">${displayPrice}</span>
-                          <span className="text-base text-white">/mo</span>
-                          <span className="text-[15px] text-gray-new-60">typical spend</span>
+                        <div className="flex items-center gap-1.5">
+                          <div className="leading-snug">
+                            <span className="text-[15px] -tracking-wide text-gray-new-60">
+                              Typical spend:
+                            </span>{' '}
+                            <span className="text-xl -tracking-wide text-white">
+                              ${displayPrice}
+                            </span>{' '}
+                            <span className="text-[15px] -tracking-wide text-gray-new-80">/mo</span>
+                          </div>
+                          {tooltipText && (
+                            <InfoIcon
+                              className="relative mt-0.5 inline-flex flex-shrink-0 align-baseline"
+                              tooltip={tooltipText}
+                              tooltipId={`resource-size-${planId}`}
+                              link={{
+                                text: 'Read more.',
+                                href: '#workload-cost-estimates',
+                              }}
+                              clickable
+                            />
+                          )}
                         </div>
                         {currentSize && setCurrentSize && resourceSizes && (
                           <ResourceSizeSelect
@@ -116,12 +143,12 @@ const Plans = () => {
                       </div>
                     ) : (
                       <div className="flex flex-col gap-1.5">
-                        <div className="flex items-baseline gap-1 leading-snug tracking-extra-tight">
-                          <span className="text-2xl text-white">${displayPrice}</span>
-                          <span className="text-base text-white">/mo</span>
+                        <div className="leading-snug">
+                          <span className="text-xl -tracking-wide text-white">${displayPrice}</span>{' '}
+                          <span className="text-[15px] -tracking-wide text-gray-new-80">/mo</span>
                         </div>
                         {subtitle && (
-                          <p className="text-[15px] leading-snug tracking-extra-tight text-gray-new-60">
+                          <p className="text-[15px] leading-snug -tracking-wide text-gray-new-60">
                             {subtitle}
                           </p>
                         )}
@@ -130,7 +157,7 @@ const Plans = () => {
                   </div>
 
                   <Button
-                    className="mt-6 w-full"
+                    className="mt-5 w-full"
                     theme={highlighted ? 'white-filled' : 'outlined'}
                     to={button.url}
                     size="sm-new"
@@ -139,7 +166,7 @@ const Plans = () => {
                     {button.text || 'Get started'}
                   </Button>
                 </div>
-                <div className="flex flex-col divide-y divide-dashed divide-gray-new-20 pb-2 lg:mt-1 md:pb-1">
+                <div className="flex flex-col divide-y divide-dashed divide-gray-new-20 pb-1 lg:mt-1">
                   {Object.entries(features).map(([key, section]) => (
                     <Features
                       key={key}
