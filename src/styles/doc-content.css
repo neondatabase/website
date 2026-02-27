@@ -273,6 +273,10 @@
     }
 
     /* Details/Summary dropdown styling */
+    h2 + details {
+      @apply mt-6;
+    }
+
     details {
       @apply relative -mb-px border border-gray-new-90 bg-transparent p-4 dark:border-gray-new-20;
     }
