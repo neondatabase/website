@@ -142,11 +142,7 @@ const Plans = () => {
                         )}
                       </div>
                     ) : (
-                      <div className="flex flex-col gap-1.5">
-                        <div className="leading-snug">
-                          <span className="text-xl -tracking-wide text-white">${displayPrice}</span>{' '}
-                          <span className="text-[15px] -tracking-wide text-gray-new-80">/mo</span>
-                        </div>
+                      <div className="flex flex-col gap-1.5 pb-px pt-3 md:pt-0">
                         {subtitle && (
                           <p className="text-[15px] leading-snug -tracking-wide text-gray-new-60">
                             {subtitle}
