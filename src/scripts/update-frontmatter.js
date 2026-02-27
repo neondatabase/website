@@ -55,11 +55,7 @@ const updateFrontmatter = async () => {
 
     file.data = updatedFrontmatter;
 
-    const updatedFileContentRaw = matter.stringify(file);
-    const updatedFileContent = updatedFileContentRaw.replace(
-      /\nsubtitle: >-\n\s+/g,
-      '\nsubtitle: '
-    );
+    const updatedFileContent = matter.stringify(file, {}, { lineWidth: 120 });
 
     await fs.writeFile(path, updatedFileContent);
   });
