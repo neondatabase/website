@@ -53,13 +53,13 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | [Organization](/docs/auth/guides/plugins/organization)                                                                                            | ⚠️ Partial (invitation emails, JWT token claims in progress) |
 | [JWT](/docs/auth/guides/plugins/jwt)                                                                                                              | ✅ Supported                                                 |
 | [Open API](/docs/auth/guides/plugins/openapi)                                                                                                     | ✅ Supported                                                 |
+| [Webhooks](/docs/auth/guides/webhooks)                                                                                                            | ✅ Supported                                                 |
 
 ### On the roadmap
 
 | Plugin                                                            | Status          |
 | ----------------------------------------------------------------- | --------------- |
 | [Magic link](https://www.better-auth.com/docs/plugins/magic-link) | 🔜 Coming soon  |
-| Webhook support (hook into different auth events)                 | 🔜 Coming soon  |
 | Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
 | MFA support                                                       | 🔜 Coming soon  |
 | Plugin customization (Organization, Admin)                        | 🔜 Coming soon  |

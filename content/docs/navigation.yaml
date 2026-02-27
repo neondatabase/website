@@ -461,6 +461,8 @@
                   slug: auth/guides/user-management
                 - title: Configure domains
                   slug: auth/guides/configure-domains
+                - title: Webhooks
+                  slug: auth/guides/webhooks
                 - title: Production checklist
                   slug: auth/production-checklist
 
