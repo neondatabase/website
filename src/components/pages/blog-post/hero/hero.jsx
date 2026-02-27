@@ -11,7 +11,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
     <div className="flex items-center gap-x-1.5">
       <Link
         className={clsx(
-          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-gray-new-50 sm:text-[10px]'
+          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-gray-new-50'
         )}
         to={BLOG_BASE_PATH}
       >
@@ -21,7 +21,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
       </Link>
       <span className="text-sm leading-none text-gray-new-50">/</span>
       <Link
-        className="py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-blue-70 sm:text-[10px]"
+        className="py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-blue-70"
         to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
       >
         {category.name}

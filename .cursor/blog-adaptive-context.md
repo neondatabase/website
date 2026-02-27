@@ -519,3 +519,116 @@ Content shifts to columns 1–9. Sidebar narrows to columns 9–13. Gap reduced 
 - Figure/img margins: my-6
 - Quote padding: pl-4 (was pl-6)
 - Pullquote padding: pl-6 (was pl-9)
+
+---
+---
+
+# Blog Post Inner Page — Refinements (Session 2)
+
+## Overview
+
+Follow-up fixes for the blog post inner page (`/blog/[slug]`). Focused on:
+1. "More from Neon" card layout on md and below
+2. Social share icon sizing consistency
+3. Body text color alignment with the reference page (`prose-doc`)
+4. Breadcrumb nav font size stability
+
+**Principle**: Minimal, targeted changes. No desktop breakage.
+
+---
+
+## Files Changed
+
+### 1. `src/components/pages/blog/blog-post-card/blog-post-card.jsx` — isSmart card responsive layout
+
+**Problem**: isSmart cards (used in "More from Neon" section) forced `!flex-row` at all breakpoints, keeping the horizontal image+text layout even on small screens where there isn't enough room.
+
+**Fix — article element (line 64–65)**:
+```
+isSmart &&
+  '!flex-row gap-x-6 border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:!flex-col md:gap-x-0 md:gap-y-5'
+```
+- Added `md:!flex-col` — switches from horizontal to vertical card layout on md and below
+- Added `md:gap-x-0 md:gap-y-5` — zeroes horizontal gap, sets 20px vertical gap between image and text
+
+**Fix — text container (line 99)**:
+```
+isSmart && '!w-[424px] shrink-0 flex-col-reverse md:!w-full md:gap-y-3'
+```
+- Added `md:!w-full` — text takes full width in column layout (overrides the fixed `!w-[424px]`)
+- Added `md:gap-y-3` — 12px gap between title and category/date line in `flex-col-reverse` (prevents title from sticking to the category)
+
+**Desktop behavior**: Unchanged. `!flex-row` and `!w-[424px]` remain active above md.
+
+---
+
+### 2. `src/components/pages/blog-post/social-share/social-share.jsx` — icon size fix
+
+**Problem**: Share icons (X, Facebook, LinkedIn) changed size from 16×16px to 24×24px when the bottom `SocialShare` component appeared at lg. The sidebar version (hidden at lg) was unaffected, so the size jump only occurred in the mobile/tablet bottom layout.
+
+**Fix — Icon className (line 55)**:
+```
+Before: 'h-4 w-4 text-gray-new-60 transition-colors duration-200 group-hover:text-white lg:h-6 lg:w-6'
+After:  'h-4 w-4 text-gray-new-60 transition-colors duration-200 group-hover:text-white'
+```
+- Removed `lg:h-6 lg:w-6` — icons stay at 16×16px (`h-4 w-4`) on all breakpoints
+
+---
+
+### 3. `src/styles/blog-content.css` — text color sync with prose-doc
+
+**Problem**: Blog body text used `text-gray-new-90` for paragraphs and list items, while the reference page (`prose-doc`) uses `dark:text-gray-new-85` — a slightly softer/dimmer shade. This created a subtle but visible inconsistency between blog posts and template pages like `use-cases/ai-agents`.
+
+**Fix — paragraph (line 55)**:
+```
+Before: text-gray-new-90
+After:  text-gray-new-85
+```
+
+**Fix — list items (line 63)**:
+```
+Before: (no explicit color — inherited gray-new-90 from .prose-blog container)
+After:  text-gray-new-85
+```
+
+**Color comparison after fix**:
+
+| Element | prose-blog (blog) | prose-doc (dark) | Match? |
+|---------|------------------|-----------------|--------|
+| Container | `text-gray-new-90` | `dark:text-gray-new-90` | ✅ |
+| Headings | `text-white` | `dark:text-white` | ✅ |
+| p | `text-gray-new-85` | `dark:text-gray-new-85` | ✅ |
+| ul/ol > li | `text-gray-new-85` | `dark:text-gray-new-85` | ✅ |
+| ul marker (::before) | `text-gray-new-85` | `dark:text-gray-new-85` | ✅ |
+| Links | `text-white` | `dark:text-white` | ✅ |
+
+---
+
+### 4. `src/components/pages/blog-post/hero/hero.jsx` — breadcrumb nav font size
+
+**Problem**: The breadcrumb navigation (← BLOG / PRODUCT) had `sm:text-[10px]` which reduced the 13px font to 10px on small screens. This size change was undesirable.
+
+**Fix — Blog link (line 14)**:
+```
+Before: '... text-[13px] ... sm:text-[10px]'
+After:  '... text-[13px] ...'
+```
+
+**Fix — Category link (line 24)**:
+```
+Before: '... text-[13px] ... sm:text-[10px]'
+After:  '... text-[13px] ...'
+```
+
+Breadcrumb nav stays at 13px on all breakpoints.
+
+---
+
+## Summary of Changes by File
+
+| File | What changed | Breakpoints affected |
+|------|-------------|---------------------|
+| `blog-post-card.jsx` | isSmart cards → single column | md and below |
+| `social-share.jsx` | Icons fixed at 16×16px | lg and below |
+| `blog-content.css` | Text color gray-new-90 → gray-new-85 | all |
+| `hero.jsx` | Breadcrumb stays 13px | sm (removed override) |
