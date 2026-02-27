@@ -1,3 +1,4 @@
+import { verifySignatureAppRouter } from '@upstash/qstash/dist/nextjs';
 import { NextResponse } from 'next/server';
 import * as yup from 'yup';
 
@@ -62,19 +63,4 @@ async function handler(request) {
   }
 }
 
-// Lazy-wrap with QStash verification when keys are configured so build succeeds without QSTASH_* env (e.g. CI)
-let wrappedPOST = null;
-async function getPOST() {
-  if (wrappedPOST) return wrappedPOST;
-  if (process.env.QSTASH_CURRENT_SIGNING_KEY) {
-    const { verifySignatureAppRouter } = await import('@upstash/qstash/dist/nextjs');
-    wrappedPOST = verifySignatureAppRouter(handler);
-  } else {
-    wrappedPOST = handler;
-  }
-  return wrappedPOST;
-}
-export async function POST(request) {
-  const postHandler = await getPOST();
-  return postHandler(request);
-}
+export const POST = verifySignatureAppRouter(handler);
