@@ -23,9 +23,7 @@ Neon Auth operates at the **branch level**. Each branch can have its own indepen
 - A [Neon API key](/docs/manage/api-keys)
 - A Neon project with at least one branch
 
-All requests use the base URL `https://console.neon.tech/api/v2` and require the `Authorization: Bearer $NEON_API_KEY` header.
-
-You can find your `project_id` and `branch_id` on the **Project settings** and **Branches** pages in the Neon Console.
+All requests use the base URL `https://console.neon.tech/api/v2` and require the `Authorization: Bearer $NEON_API_KEY` header. The `project_id` and `branch_id` values are returned when you [create a project](/docs/manage/projects#create-a-project-with-the-api) or [list branches](/docs/manage/branches#list-branches-with-the-api) via the API.
 
 ## Enable Neon Auth
 
