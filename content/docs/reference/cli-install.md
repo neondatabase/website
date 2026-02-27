@@ -1,11 +1,11 @@
 ---
-title: Neon CLI — Install and connect
-subtitle: Use the Neon CLI to manage Neon directly from the terminal
+title: 'Neon CLI: Install and connect'
+subtitle: Install the Neon CLI and connect with web auth or API key
 summary: >-
   How to install the Neon CLI on macOS, Windows, and Linux, and connect using
   web authentication or API key for terminal management of Neon.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.136Z'
+updatedOn: '2026-02-26T16:28:03.963Z'
 ---
 
 This section describes how to install the Neon CLI and connect via web authentication or API key.

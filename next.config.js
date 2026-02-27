@@ -549,6 +549,9 @@ const defaultConfig = {
     }));
 
     return {
+      // beforeFiles: resolve sub-index llms.txt files from public/ before the
+      // docs/[...slug] catch-all intercepts them (known Next.js behavior)
+      beforeFiles: [{ source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' }],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
       afterFiles: [

@@ -41,7 +41,7 @@ const CtaBlock = ({
 }) => (
   <div
     className={clsx(
-      'not-prose relative w-full overflow-hidden rounded-lg',
+      'cta-on-template not-prose relative w-full overflow-hidden rounded-lg',
       sizeClassNames[size].block,
       hasDecor ? 'bg-[#09090B] bg-template-cta' : 'bg-black-new',
       className
