@@ -70,7 +70,7 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/jwks/{jwk
   -H 'Authorization: Bearer $NEON_API_KEY'
 ```
 
-For the full JWKS specification, see the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+For the full JWKS specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectjwks).
 
 </TabItem>
 
@@ -163,7 +163,7 @@ You can find your `project_id` and `branch_id` on the [Project settings](/docs/m
 
 ### Enable
 
-Send a POST request to enable the Data API for a database on a branch. If the Data API is already enabled, this call returns an error.
+Send a POST request to [enable the Data API](https://api-docs.neon.tech/reference/createprojectbranchdataapi) for a database on a branch. If the Data API is already enabled, this call returns an error.
 
 ```bash
 curl -X POST 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -182,17 +182,22 @@ Response (201 Created):
 
 The empty body enables the Data API without an authentication provider. To configure authentication at enable time, change the request body:
 
-- **Neon Auth:** `-d '{"auth_provider": "neon_auth"}'`
+- **Neon Auth:** `-d '{"auth_provider": "neon_auth", "add_default_grants": true}'`
 
-  If Neon Auth is not already enabled on the branch, this automatically provisions it. See [Neon Auth](/docs/auth/overview) to learn more.
+  If Neon Auth is not already enabled on the branch, this automatically provisions it. The optional `add_default_grants` option grants authenticated users permissions on tables in the `public` schema, matching the default Console behavior. See [Neon Auth](/docs/auth/overview) to learn more.
 
 - **External provider:** `-d '{"auth_provider": "external", "jwks_url": "https://your-provider/.well-known/jwks.json"}'`
 
   See [Custom authentication providers](/docs/data-api/custom-authentication-providers) for supported providers and how to find your JWKS URL.
 
+Optional fields in the enable request body:
+
+- **`add_default_grants`** (boolean, default `false`): When `true`, grants all permissions on tables in the `public` schema to authenticated users.
+- **`settings`**: Include a [settings object](#update-configuration) to configure the Data API in a single request instead of making a separate PATCH call.
+
 ### Get Data API details
 
-Retrieve the current status and configuration of the Data API for a branch.
+[Retrieve the current status and configuration](https://api-docs.neon.tech/reference/getprojectbranchdataapi) of the Data API for a branch.
 
 ```bash
 curl -X GET 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -224,7 +229,7 @@ The `settings` object reflects the current configuration (see [Advanced settings
 
 ### Update configuration
 
-Send a PATCH request to update the configuration. This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
+Send a PATCH request to [update the configuration](https://api-docs.neon.tech/reference/updateprojectbranchdataapi). This also refreshes the schema cache. The response is always an empty object (`{}`), with status 201.
 
 ```bash
 curl -X PATCH 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -243,7 +248,7 @@ The `settings` object replaces the existing settings entirely. It is not merged.
 
 ### Disable
 
-Remove the Data API from a branch. The response is an empty object (`{}`), with status 200.
+[Remove the Data API](https://api-docs.neon.tech/reference/deleteprojectbranchdataapi) from a branch. The response is an empty object (`{}`), with status 200.
 
 ```bash
 curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/{branch_id}/data-api/{database_name}' \
@@ -254,4 +259,4 @@ curl -X DELETE 'https://console.neon.tech/api/v2/projects/{project_id}/branches/
 Disabling the Data API immediately terminates all active connections and blocks all incoming HTTP requests. Any applications, edge functions, or websites relying on the API will stop working instantly. Re-enabling the Data API creates a fresh instance with default settings; the previous configuration is not restored.
 </Admonition>
 
-For the full Data API specification, see the [Neon API reference](https://api-docs.neon.tech/reference/getting-started-with-neon-api).
+For the full Data API specification, see the [Neon API reference](https://api-docs.neon.tech/reference/createprojectbranchdataapi).
