@@ -70,7 +70,7 @@ const BlogPostCard = ({
         <Link
           className={clsx(
             'group aspect-[16/9] w-full overflow-hidden bg-[#181818]',
-            fullSize && 'min-w-0 flex-1 basis-[42%]'
+            fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
         >
@@ -136,8 +136,8 @@ const BlogPostCard = ({
             className={clsx(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
-                ? 'text-2xl leading-tight md:text-lg'
-                : 'text-[28px] font-normal leading-snug md:text-lg'
+                ? 'text-2xl leading-tight md:text-[20px] sm:text-lg'
+                : 'text-[28px] font-normal leading-snug lt:text-2xl md:text-[20px] sm:text-lg'
             )}
           >
             {title}
@@ -146,7 +146,7 @@ const BlogPostCard = ({
           {excerpt && (
             <div
               className={clsx(
-                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-base',
+                'mt-2 font-light leading-snug tracking-extra-tight text-gray-new-70 lg:text-base md:text-base sm:text-[15px]',
                 largeCover ? 'line-clamp-3' : 'line-clamp-2'
               )}
             >

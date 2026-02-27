@@ -23,6 +23,7 @@ const BlogNavLink = ({ name, slug }) => {
       to={url}
     >
       {name}
+      {isActive && <span className="ml-auto block size-2 bg-green-52 lg:hidden" />}
     </Link>
   );
 };
