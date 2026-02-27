@@ -229,7 +229,7 @@
     }
 
     :not(pre) > code {
-      @apply break-words border border-gray-new-90 bg-gray-new-94 !px-1 !py-px !font-mono !font-normal !text-black-new dark:border-gray-new-30 dark:bg-black dark:!text-white;
+      @apply break-words rounded border border-gray-new-90 bg-gray-new-94 !px-1 !py-px !font-mono text-sm !font-normal leading-tight tracking-extra-tight !text-black-new dark:border-gray-new-30 dark:bg-black dark:!text-white;
 
       &::before,
       &::after {
