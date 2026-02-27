@@ -7,8 +7,8 @@ ogImage: ''
 updatedOn: '2024-03-20T09:23:01+00:00'
 enableTableOfContents: true
 previousLink:
-  title: 'PostgreSQL DATE_TRUNC() Function'
-  slug: 'postgresql-date-functions/postgresql-date_trunc'
+  title: 'PostgreSQL DATE_BIN() Function'
+  slug: 'postgresql-date-functions/postgresql-date_bin'
 nextLink:
   title: 'PostgreSQL TIMEOFDAY() Function'
   slug: 'postgresql-date-functions/postgresql-timeofday'
