@@ -68,6 +68,26 @@ For other AI tools like Cursor, use these individual `.mdc` context rule files. 
 <a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the Neon Toolkit" icon="github">Neon Toolkit</a>
 </DetailIconCards>
 
+## Natural language guides
+
+Copy-paste prompts for Cursor and Claude Code. With the Neon MCP Server connected, your AI assistant can create projects, list branches, run SQL, and compare schema using natural language.
+
+<DetailIconCards>
+<a href="/docs/ai/natural-language-guides" description="Overview and prerequisites for natural language guides" icon="setup">Overview</a>
+<a href="/docs/ai/natural-language-guide-get-started" description="Create a project and get a connection string via natural language" icon="gamepad">Get started with Neon</a>
+<a href="/docs/ai/natural-language-guide-get-started-again" description="Reconnect, see your account, and choose your next step" icon="gamepad">Welcome back to Neon</a>
+<a href="/docs/ai/natural-language-guide-learn-concepts" description="Learn Neon's core concepts; answers from our documentation" icon="setup">Learn Neon concepts</a>
+<a href="/docs/ai/natural-language-guide-learn-plans-billing" description="Learn Neon plans and billing; answers from our Plans and billing docs" icon="setup">Learn Neon plans and billing</a>
+<a href="/docs/ai/natural-language-guide-explore-sql" description="List projects, branches, tables, and run SQL" icon="transactions">Explore projects and run SQL</a>
+<a href="/docs/ai/natural-language-guide-branches-schema" description="Create branches, change schema, and compare diffs" icon="branching">Branches and schema changes</a>
+<a href="/docs/ai/natural-language-guide-connect-app" description="Set up a Neon project and app connection (Next.js, Drizzle, Neon Auth)" icon="gamepad">Connect your app</a>
+<a href="/docs/ai/natural-language-guide-query-performance" description="Find slow queries, explain plans, and tune on a branch" icon="performance">Query performance</a>
+<a href="/docs/ai/natural-language-guide-branching-workflow" description="Feature branch from production, develop, migrate back, and reset" icon="branching">Branching development workflow</a>
+<a href="/docs/ai/natural-language-guide-branching-test-queries" description="Create a branch, test a query safely, then delete the branch" icon="branching">Test queries on a branch</a>
+<a href="/docs/ai/natural-language-guide-time-travel" description="Query data at a point in time: create a branch at a timestamp, run read-only queries, then delete" icon="branching">Time Travel</a>
+<a href="/docs/ai/natural-language-guide-cost-optimization" description="Assess compute, branches, storage, restore window, and connections for cost" icon="performance">Assess cost optimization</a>
+</DetailIconCards>
+
 ## Build AI agents
 
 Create autonomous agents that can manage and interact with your Neon databases programmatically. Build with our terse JavaScript client or the Neon API.

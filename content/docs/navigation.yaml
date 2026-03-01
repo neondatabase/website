@@ -557,6 +557,35 @@
                   slug: ai/ai-rules-neon-api
                 - title: Neon Toolkit
                   slug: ai/ai-rules-neon-toolkit
+            - section: Natural language guides
+              icon: docs
+              items:
+                - title: Overview
+                  slug: ai/natural-language-guides
+                - title: Get started with Neon
+                  slug: ai/natural-language-guide-get-started
+                - title: Welcome back to Neon
+                  slug: ai/natural-language-guide-get-started-again
+                - title: Learn Neon concepts
+                  slug: ai/natural-language-guide-learn-concepts
+                - title: Learn Neon plans and billing
+                  slug: ai/natural-language-guide-learn-plans-billing
+                - title: Explore projects and run SQL
+                  slug: ai/natural-language-guide-explore-sql
+                - title: Branches and schema changes
+                  slug: ai/natural-language-guide-branches-schema
+                - title: Connect your app
+                  slug: ai/natural-language-guide-connect-app
+                - title: Query performance
+                  slug: ai/natural-language-guide-query-performance
+                - title: Branching development workflow
+                  slug: ai/natural-language-guide-branching-workflow
+                - title: Test queries on a branch
+                  slug: ai/natural-language-guide-branching-test-queries
+                - title: Time Travel
+                  slug: ai/natural-language-guide-time-travel
+                - title: Assess cost optimization
+                  slug: ai/natural-language-guide-cost-optimization
             - section: Build AI agents
               icon: openai
               items:
