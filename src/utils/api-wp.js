@@ -378,7 +378,6 @@ const getWpPreviewPostData = async (id, status) => {
           modifiedGmt
           title(format: RENDERED)
           content(format: RENDERED)
-          readingTime
           pageBlogPost {
             largeCover {
               altText
@@ -415,7 +414,6 @@ const getWpPreviewPostData = async (id, status) => {
             slug
             title(format: RENDERED)
             date
-            readingTime
             pageBlogPost {
               largeCover {
                 altText
@@ -474,7 +472,6 @@ const getWpPreviewPostData = async (id, status) => {
                 date
                 title(format: RENDERED)
                 content(format: RENDERED)
-                readingTime
                 pageBlogPost {
                   largeCover {
                     mediaItemUrl
@@ -512,7 +509,6 @@ const getWpPreviewPostData = async (id, status) => {
             slug
             title(format: RENDERED)
             date
-            readingTime
             pageBlogPost {
               largeCover {
                 altText
