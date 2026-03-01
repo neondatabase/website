@@ -463,6 +463,8 @@
                   slug: auth/guides/configure-domains
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Manage Auth via the API
+                  slug: auth/guides/manage-auth-api
 
             - section: Plugins
               items:
