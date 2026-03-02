@@ -24,18 +24,18 @@ PostgreSQL provides a rich set of functions and operators for working with [arra
 
 The following table shows the most commonly used PostgreSQL array functions:
 
-| Function | Description |
-|---|---|
-| [`unnest()`](postgresql-array-functions/postgresql-unnest) | Expands an array into a set of rows |
-| [`array_length()`](postgresql-array-functions/postgresql-array_length) | Returns the length of a specific array dimension |
-| [`cardinality()`](postgresql-array-functions/postgresql-cardinality) | Returns the total number of elements in an array |
-| [`array_append()`](postgresql-array-functions/postgresql-array_append) | Appends an element to the end of an array |
-| [`array_prepend()`](postgresql-array-functions/postgresql-array_prepend) | Prepends an element to the beginning of an array |
-| [`array_cat()`](postgresql-array-functions/postgresql-array_cat) | Concatenates two arrays |
-| [`array_to_string()`](postgresql-array-functions/postgresql-array_to_string) | Converts an array to a delimited string |
-| [`string_to_array()`](postgresql-array-functions/postgresql-string_to_array) | Splits a string into an array |
-| [`array_position()`](postgresql-array-functions/postgresql-array_position) | Returns the position of the first occurrence of an element |
-| [`array_remove()`](postgresql-array-functions/postgresql-array_remove) | Removes all occurrences of an element from an array |
+| Function                                                                     | Description                                                |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| [`unnest()`](postgresql-array-functions/postgresql-unnest)                   | Expands an array into a set of rows                        |
+| [`array_length()`](postgresql-array-functions/postgresql-array_length)       | Returns the length of a specific array dimension           |
+| [`cardinality()`](postgresql-array-functions/postgresql-cardinality)         | Returns the total number of elements in an array           |
+| [`array_append()`](postgresql-array-functions/postgresql-array_append)       | Appends an element to the end of an array                  |
+| [`array_prepend()`](postgresql-array-functions/postgresql-array_prepend)     | Prepends an element to the beginning of an array           |
+| [`array_cat()`](postgresql-array-functions/postgresql-array_cat)             | Concatenates two arrays                                    |
+| [`array_to_string()`](postgresql-array-functions/postgresql-array_to_string) | Converts an array to a delimited string                    |
+| [`string_to_array()`](postgresql-array-functions/postgresql-string_to_array) | Splits a string into an array                              |
+| [`array_position()`](postgresql-array-functions/postgresql-array_position)   | Returns the position of the first occurrence of an element |
+| [`array_remove()`](postgresql-array-functions/postgresql-array_remove)       | Removes all occurrences of an element from an array        |
 
 ## Quick examples
 
@@ -107,13 +107,13 @@ Output:
 
 In addition to functions, PostgreSQL provides several array operators:
 
-| Operator | Description | Example |
-|---|---|---|
-| `\|\|` | Concatenation | `ARRAY[1,2] \|\| ARRAY[3,4]` → `{1,2,3,4}` |
-| `@>` | Contains | `ARRAY[1,2,3] @> ARRAY[1,2]` → `true` |
-| `<@` | Is contained by | `ARRAY[1,2] <@ ARRAY[1,2,3]` → `true` |
-| `&&` | Overlaps | `ARRAY[1,2] && ARRAY[2,3]` → `true` |
-| `[]` | Subscript | `ARRAY[1,2,3][2]` → `2` |
+| Operator | Description     | Example                                    |
+| -------- | --------------- | ------------------------------------------ |
+| `\|\|`   | Concatenation   | `ARRAY[1,2] \|\| ARRAY[3,4]` → `{1,2,3,4}` |
+| `@>`     | Contains        | `ARRAY[1,2,3] @> ARRAY[1,2]` → `true`      |
+| `<@`     | Is contained by | `ARRAY[1,2] <@ ARRAY[1,2,3]` → `true`      |
+| `&&`     | Overlaps        | `ARRAY[1,2] && ARRAY[2,3]` → `true`        |
+| `[]`     | Subscript       | `ARRAY[1,2,3][2]` → `2`                    |
 
 ## See also
 

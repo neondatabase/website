@@ -125,15 +125,16 @@ Output:
 
 `SERIAL` generates sequential integer IDs, while `gen_random_uuid()` generates random UUIDs. Here's when to prefer each:
 
-| Feature | SERIAL | gen_random_uuid() |
-|---|---|---|
-| Type | Integer | UUID |
-| Sequential | Yes | No |
-| Globally unique | No (per-table) | Yes |
-| Exposes row count | Yes | No |
+| Feature           | SERIAL             | gen_random_uuid()          |
+| ----------------- | ------------------ | -------------------------- |
+| Type              | Integer            | UUID                       |
+| Sequential        | Yes                | No                         |
+| Globally unique   | No (per-table)     | Yes                        |
+| Exposes row count | Yes                | No                         |
 | Index performance | Better for inserts | Slightly worse for inserts |
 
 UUIDs are preferred when:
+
 - IDs must be unique across multiple databases or services
 - You want to avoid exposing the number of rows in a table
 - You generate IDs on the client before inserting into the database

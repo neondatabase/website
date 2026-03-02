@@ -28,10 +28,10 @@ The function returns an integer. It returns `0` for an empty array and `NULL` if
 
 The key difference between `cardinality()` and [`array_length()`](postgresql-array_length):
 
-| Function | Empty array | One-dimensional | Multidimensional |
-|---|---|---|---|
-| `cardinality(arr)` | `0` | length of array | total element count |
-| `array_length(arr, 1)` | `NULL` | length of array | length of first dimension |
+| Function               | Empty array | One-dimensional | Multidimensional          |
+| ---------------------- | ----------- | --------------- | ------------------------- |
+| `cardinality(arr)`     | `0`         | length of array | total element count       |
+| `array_length(arr, 1)` | `NULL`      | length of array | length of first dimension |
 
 For one-dimensional arrays, both functions return the same result except for empty arrays.
 
