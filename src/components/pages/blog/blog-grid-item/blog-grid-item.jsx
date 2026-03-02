@@ -9,7 +9,6 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
 
   return (
     <BlogPostCard
-      {...postProps}
       className={clsx(
         'last:pb-0',
         isFeatured
@@ -24,6 +23,7 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
       imageHeight={isFeatured ? 315 : 189}
       isPriority={isPriority}
       withAuthorPhoto
+      {...postProps}
     />
   );
 };
