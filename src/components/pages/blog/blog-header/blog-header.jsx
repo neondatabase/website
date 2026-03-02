@@ -21,7 +21,7 @@ const BlogHeader = ({ className, title, rssTitle, category, basePath, withLabel 
         {category && <span className="sr-only">{category}</span>}
       </h1>
     </div>
-    <div className="mb-2.5 flex items-center gap-x-4 lg:mb-[60px] md:mb-0 sm:mb-0">
+    <div className="mb-2.5 flex items-center gap-x-4 lg:mb-[60px] lg:gap-x-6 [&_ul]:lg:gap-6 [&_svg]:lg:size-4 md:mb-0 sm:mb-0">
       <Socials withTitle={false} />
       <RssButton className="" basePath={basePath} title={rssTitle} />
     </div>
