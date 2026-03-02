@@ -103,6 +103,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   };
 
   return (
+    <>
     <div
       className={clsx(
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
@@ -252,12 +253,13 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           </AnimatePresence>
         </LazyMotion>
 
-        {!isBlog && formState === FORM_STATES.ERROR && errorMessage && (
+        {!(isBlog && isSidebar) && formState === FORM_STATES.ERROR && errorMessage && (
           <span
             className={clsx(
-              'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
-              'text-xs leading-none tracking-extra-tight text-secondary-1',
-              classNames.errorMessage
+              'absolute top-full whitespace-nowrap text-xs leading-none tracking-extra-tight text-secondary-1',
+              isBlog
+                ? 'left-0 z-20 mt-1.5'
+                : clsx('left-1/2 -translate-x-1/2', classNames.errorMessage)
             )}
             data-test="error-message"
           >
@@ -280,6 +282,15 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         />
       )}
     </div>
+    {isBlog && isSidebar && formState === FORM_STATES.ERROR && errorMessage && (
+      <span
+        className="mt-2 block text-center text-xs leading-none tracking-extra-tight text-secondary-1"
+        data-test="error-message"
+      >
+        {errorMessage}
+      </span>
+    )}
+    </>
   );
 };
 
