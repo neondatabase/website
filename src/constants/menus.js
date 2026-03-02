@@ -227,10 +227,6 @@ export default {
               to: LINKS.subprocessors,
             },
             {
-              text: 'Privacy Guide',
-              to: LINKS.privacyGuide,
-            },
-            {
               text: 'Cookie Policy',
               to: LINKS.cookiePolicy,
             },
@@ -341,10 +337,6 @@ export default {
             {
               text: 'Neon’s Sub Contractors',
               to: LINKS.hipaaContractors,
-            },
-            {
-              text: 'Sensitive Data Terms',
-              to: LINKS.sensitiveDataTerms,
             },
           ],
         },

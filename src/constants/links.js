@@ -68,12 +68,10 @@ export default {
   dpa: '/dpa',
   terms: '/terms-of-service',
   privacy: '/privacy-policy',
-  privacyGuide: '/privacy-guide',
   privacyPolicy: '/privacy-policy',
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
-  sensitiveDataTerms: '/sensitive-data-terms',
   hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
 
