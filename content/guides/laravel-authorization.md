@@ -608,7 +608,7 @@ Here are some tips to optimize performance when using Spatie Laravel Permission 
    $users = User::with('roles', 'permissions')->get();
    ```
 
-3. **Indexing**: Ensure that the `model_id` and `model_type` columns in the `model_has_roles` and `model_has_permissions` tables are properly indexed. For more information on indexing, refer to the [Neon Postgres documentation](/docs/postgres/indexes).
+3. **Indexing**: Ensure that the `model_id` and `model_type` columns in the `model_has_roles` and `model_has_permissions` tables are properly indexed. For more information on indexing, refer to the [Neon Postgres documentation](/docs/postgresql/index-types).
 
 4. **Minimize Permission Checks**: Instead of checking individual permissions, consider using roles or permission groups to reduce the number of checks you do on each request.
 
