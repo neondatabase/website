@@ -28,6 +28,37 @@ function applyDocHeaders(response) {
   return response;
 }
 
+function trackLLMPageview(req) {
+  const url = req.nextUrl.href;
+  const userAgent = req.headers.get('user-agent') || '';
+
+  const anonymousId = req.cookies.get('ajs_anonymous_id')?.value;
+  const userId = req.cookies.get('ajs_user_id')?.value;
+
+  const client = { __zarazTrack: 'Pageview' };
+  if (anonymousId) client.anonymousId = anonymousId;
+  if (userId) client.userId = userId;
+
+  const payload = {
+    events: [
+      {
+        client,
+        system: {
+          page: { url },
+          device: { 'user-agent': userAgent },
+        },
+      },
+    ],
+  };
+
+  // Fire and forget — do not await to avoid blocking the response
+  fetch('https://neonapi.io/t.js', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  }).catch(() => {});
+}
+
 export async function middleware(req) {
   try {
     const { pathname } = req.nextUrl;
@@ -43,6 +74,7 @@ export async function middleware(req) {
     }
 
     if (isAIAgentRequest(req)) {
+      trackLLMPageview(req);
       const markdownPath = getMarkdownPath(pathname);
 
       if (markdownPath) {
