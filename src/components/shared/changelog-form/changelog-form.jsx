@@ -48,6 +48,7 @@ const themeClassNames = {
 const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
+  const isInArticle = isBlog && !isSidebar;
 
   const isRecognized = !!getCookie('ajs_user_id');
   const [email, setEmail] = useState('');
@@ -114,7 +115,8 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         isBlog &&
           (!isSidebar
             ? 'overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !shadow-none dark:!bg-none sm:!flex-col sm:!items-start sm:!gap-5'
-            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none')
+            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none'),
+        isInArticle && formState === FORM_STATES.ERROR && errorMessage && '!mb-0'
       )}
       id="changelog-form"
     >
@@ -253,13 +255,12 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           </AnimatePresence>
         </LazyMotion>
 
-        {!(isBlog && isSidebar) && formState === FORM_STATES.ERROR && errorMessage && (
+        {!isBlog && formState === FORM_STATES.ERROR && errorMessage && (
           <span
             className={clsx(
-              'absolute top-full whitespace-nowrap text-xs leading-none tracking-extra-tight text-secondary-1',
-              isBlog
-                ? 'left-0 z-20 mt-1.5'
-                : clsx('left-1/2 -translate-x-1/2', classNames.errorMessage)
+              'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
+              'text-xs leading-none tracking-extra-tight text-secondary-1',
+              classNames.errorMessage
             )}
             data-test="error-message"
           >
@@ -282,9 +283,12 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         />
       )}
     </div>
-    {isBlog && isSidebar && formState === FORM_STATES.ERROR && errorMessage && (
+    {isBlog && formState === FORM_STATES.ERROR && errorMessage && (
       <span
-        className="mt-2 block text-center text-xs leading-none tracking-extra-tight text-secondary-1"
+        className={clsx(
+          'mt-2 block text-center text-xs leading-none tracking-extra-tight text-secondary-1',
+          isInArticle && 'mb-8'
+        )}
         data-test="error-message"
       >
         {errorMessage}
