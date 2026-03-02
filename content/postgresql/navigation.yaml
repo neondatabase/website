@@ -253,6 +253,10 @@
           title: ISNULL
         - slug: postgresql-tutorial/postgresql-nullif
           title: NULLIF
+        - slug: postgresql-tutorial/postgresql-greatest
+          title: GREATEST
+        - slug: postgresql-tutorial/postgresql-least
+          title: LEAST
         - slug: postgresql-tutorial/postgresql-cast
           title: CAST
     - section: Performance
@@ -267,6 +271,8 @@
           title: Compare Two Tables
         - slug: postgresql-tutorial/postgresql-generate_series
           title: generate_series() Function
+        - slug: postgresql-tutorial/postgresql-gen_random_uuid
+          title: gen_random_uuid() Function
         - slug: postgresql-tutorial/postgresql-random-range
           title: Random Number in Range
         - slug: postgresql-tutorial/postgresql-vs-mysql
@@ -831,6 +837,29 @@
           title: RANK
         - slug: postgresql-window-function/postgresql-row_number
           title: ROW_NUMBER
+    - title: Array Functions
+      slug: postgresql-array-functions
+      items:
+        - slug: postgresql-array-functions/postgresql-unnest
+          title: unnest
+        - slug: postgresql-array-functions/postgresql-array_length
+          title: array_length
+        - slug: postgresql-array-functions/postgresql-cardinality
+          title: cardinality
+        - slug: postgresql-array-functions/postgresql-array_append
+          title: array_append
+        - slug: postgresql-array-functions/postgresql-array_prepend
+          title: array_prepend
+        - slug: postgresql-array-functions/postgresql-array_cat
+          title: array_cat
+        - slug: postgresql-array-functions/postgresql-array_to_string
+          title: array_to_string
+        - slug: postgresql-array-functions/postgresql-string_to_array
+          title: string_to_array
+        - slug: postgresql-array-functions/postgresql-array_position
+          title: array_position
+        - slug: postgresql-array-functions/postgresql-array_remove
+          title: array_remove
 - nav: API
   title: API
   slug: postgresql-api
