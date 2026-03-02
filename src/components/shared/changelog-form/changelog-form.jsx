@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
+import InputWarningIcon from 'icons/input-warning.inline.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
@@ -104,7 +105,6 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   };
 
   return (
-    <>
     <div
       className={clsx(
         'changelog-form safe-paddings relative flex scroll-mt-20 rounded-lg bg-gray-new-94',
@@ -115,8 +115,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         isBlog &&
           (!isSidebar
             ? 'overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !shadow-none dark:!bg-none sm:!flex-col sm:!items-start sm:!gap-5'
-            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none'),
-        isInArticle && formState === FORM_STATES.ERROR && errorMessage && '!mb-0'
+            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none')
       )}
       id="changelog-form"
     >
@@ -167,7 +166,13 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
             formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
             'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
             isBlog &&
-              '!border-gray-new-20 !bg-gray-new-8/60 !pr-12 backdrop-blur-lg transition-all duration-200 focus:!border-gray-new-50'
+              '!bg-gray-new-8/60 backdrop-blur-lg transition-all duration-200',
+            isBlog &&
+              (formState === FORM_STATES.ERROR
+                ? '!border-[rgba(255,54,33,0.5)]'
+                : '!border-gray-new-20 focus:!border-gray-new-50'),
+            isBlog && isSidebar && '!pr-12',
+            isInArticle && '!pr-[100px]'
           )}
           type="email"
           name="email"
@@ -176,6 +181,14 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
           onChange={handleInputChange}
         />
+        {isBlog && formState === FORM_STATES.ERROR && (
+          <InputWarningIcon
+            className={clsx(
+              'absolute top-[11px] size-4',
+              isSidebar ? 'right-[42px]' : 'right-[101px]'
+            )}
+          />
+        )}
         <LazyMotion features={domAnimation}>
           <AnimatePresence>
             {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
@@ -184,10 +197,13 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                   'absolute inset-y-1 right-1 rounded-full outline-none',
                   'h-[30px] min-w-16 px-6',
                   'text-black-new transition-colors duration-200',
-                  formState === FORM_STATES.ERROR
-                    ? 'bg-secondary-1/50'
-                    : 'bg-green-45 hover:bg-[#00FFAA]',
-                  isBlog && '!size-[30px] !min-w-[30px] bg-white !p-1.5 hover:!bg-gray-new-80'
+                  isBlog
+                    ? 'bg-white hover:bg-gray-new-80'
+                    : formState === FORM_STATES.ERROR
+                      ? 'bg-secondary-1/50'
+                      : 'bg-green-45 hover:bg-[#00FFAA]',
+                  isBlog && isSidebar && '!size-[30px] !min-w-[30px] !p-1.5',
+                  isInArticle && '!min-w-0 !px-3.5'
                 )}
                 type="submit"
                 initial="initial"
@@ -201,13 +217,14 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                   className={clsx(
                     classNames.sendText,
                     'text-[13px] font-semibold tracking-extra-tight xs:hidden',
-                    isBlog && '!hidden'
+                    isBlog && isSidebar && '!hidden',
+                    isInArticle && '!block !font-medium xs:!block'
                   )}
                 >
                   Subscribe
                 </span>
                 <SendIcon
-                  className={clsx(classNames.sendIcon, 'lg:hidden xs:block', isBlog && '!block')}
+                  className={clsx(classNames.sendIcon, 'lg:hidden xs:block', isBlog && isSidebar && '!block', isInArticle && '!hidden')}
                 />
               </m.button>
             )}
@@ -283,18 +300,6 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         />
       )}
     </div>
-    {isBlog && formState === FORM_STATES.ERROR && errorMessage && (
-      <span
-        className={clsx(
-          'mt-2 block text-center text-xs leading-none tracking-extra-tight text-secondary-1',
-          isInArticle && 'mb-8'
-        )}
-        data-test="error-message"
-      >
-        {errorMessage}
-      </span>
-    )}
-    </>
   );
 };
 
