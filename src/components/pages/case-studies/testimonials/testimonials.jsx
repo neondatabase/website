@@ -36,7 +36,7 @@ const TESTIMONIALS = [
 ];
 
 const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
-  <article className="flex h-[274px] max-w-[384px] flex-col justify-between pl-8 first:max-w-[352px] first:pl-0 lg:pl-6 md:pl-0">
+  <article className="flex h-[274px] max-w-[384px] flex-col justify-between pl-8 first:max-w-[352px] first:pl-0 lg:pl-6 md:h-auto md:max-w-none md:pl-0 md:first:max-w-none">
     <div className="flex flex-col gap-9">
       <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit" />
       <blockquote
@@ -44,7 +44,7 @@ const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
         dangerouslySetInnerHTML={{ __html: quote }}
       />
     </div>
-    <div className="mt-auto flex flex-col gap-1">
+    <div className="mt-auto flex flex-col gap-1 md:mt-6">
       <span className="font-mono text-[15px] font-medium leading-snug -tracking-wide text-[#242628]">
         {author}
       </span>
@@ -77,12 +77,12 @@ const Testimonials = () => (
       alt=""
       width={1175}
       height={896}
-      className="absolute right-0 top-0"
+      className="absolute right-0 top-0 md:hidden"
       aria-hidden
     />
     <Container
       size="1280"
-      className="relative z-10 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-gray-new-50"
+      className="relative z-10 before:absolute before:left-0 before:top-0 before:h-full before:w-px before:bg-gray-new-50 md:before:hidden"
     >
       <div className="flex flex-col">
         <div className="flex items-end gap-2 md:gap-1.5">
@@ -98,11 +98,11 @@ const Testimonials = () => (
             backed by giants
           </span>
         </div>
-        <h2 className="mt-5 max-w-[800px] text-[48px] font-normal leading-dense tracking-tighter text-black xl:text-[40px] lg:text-[32px] md:text-2xl">
+        <h2 className="mt-5 max-w-[800px] text-[48px] font-normal leading-dense tracking-tighter text-black xl:text-[40px] lt:text-[36px] lg:text-[32px] md:text-2xl">
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
-        <div className="mt-40 flex gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:gap-8 md:mt-14 md:gap-10">
+        <div className="mt-40 flex gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:gap-8 md:mt-14 md:flex-col md:gap-8">
           {TESTIMONIALS.map((item, index) => (
             <TestimonialCard key={index} {...item} />
           ))}

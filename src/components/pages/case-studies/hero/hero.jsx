@@ -42,7 +42,7 @@ const CARDS = [
 
 const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, background }) => (
   <Link className="group" to={linkUrl}>
-    <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30">
+    <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30 sm:h-[340px]">
       <Image
         className="absolute right-0 top-0"
         src={background.src}
@@ -51,7 +51,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
         alt=""
         priority
       />
-      <div className="relative z-10 flex flex-1 flex-col justify-between p-8">
+      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 sm:p-6">
         <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white" />
         <div className="mt-auto flex flex-col gap-6">
           <div className="flex flex-col gap-4">
@@ -60,7 +60,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
             </span>
 
             <h2
-              className="text-[28px] font-normal leading-tight tracking-tighter text-white [&_span]:text-gray-new-60"
+              className="text-[28px] font-normal leading-tight tracking-tighter text-white sm:text-2xl [&_span]:text-gray-new-60"
               dangerouslySetInnerHTML={{ __html: title }}
             />
           </div>
@@ -89,9 +89,9 @@ FeaturedCard.propTypes = {
 };
 
 const Hero = () => (
-  <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-12">
+  <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
     <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
-      <div className="flex max-w-[896px] flex-col gap-5">
+      <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[760px]">
         <div className="flex items-end gap-2 md:gap-1.5">
           <Image
             src={triangleIcon}
@@ -105,7 +105,7 @@ const Hero = () => (
             Case studies
           </span>
         </div>
-        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white xl:text-[3.25rem] lg:text-[2.75rem] md:text-[2rem]">
+        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white xl:text-[3.25rem] lt:text-[3rem] lg:text-[2.75rem] md:text-[2rem] sm:text-[1.75rem]">
           Real-world stories from teams running serverless Postgres at scale.
         </h1>
       </div>
