@@ -6,7 +6,7 @@ summary: >-
   information, changing your email and password, two-factor authentication, and
   switching login methods.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.223Z'
+updatedOn: '2026-03-02T20:53:06.220Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
