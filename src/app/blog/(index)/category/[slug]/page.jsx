@@ -29,7 +29,7 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
             <span className="whitespace-nowrap">What you&rsquo;re building.</span>
           </>
         }
-        rssTitle="Blog"
+        rssTitle="What we're shipping. What you're building."
         category={category.name}
         basePath={BLOG_BASE_PATH}
         withLabel

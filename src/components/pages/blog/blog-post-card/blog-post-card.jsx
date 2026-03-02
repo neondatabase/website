@@ -69,15 +69,17 @@ const BlogPostCard = ({
       {largeCover && (
         <Link
           className={clsx(
-            'group aspect-[16/9] w-full overflow-hidden bg-[#181818]',
+            'group overflow-hidden bg-[#181818]',
+            isSmart ? 'shrink-0' : 'aspect-[16/9] w-full',
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
         >
           <Image
             className={clsx(
-              'size-full transition-transform duration-200',
-              fullSize ? 'object-contain' : 'object-cover',
+              'transition-transform duration-200',
+              !isSmart && 'size-full',
+              fullSize ? 'object-contain' : !isSmart && 'object-cover',
               withImageHover && !fullSize && 'group-hover:scale-110'
             )}
             src={largeCover?.mediaItemUrl}
@@ -96,7 +98,8 @@ const BlogPostCard = ({
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
             'basis-[58%] max-w-[684px] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
-          isSmart && '!w-[424px] shrink-0 flex-col-reverse md:!w-full md:gap-y-3'
+          isSmart &&
+            '!w-[424px] shrink-0 2xl:!w-auto 2xl:shrink 2xl:min-w-0 flex-col-reverse 2xl:!pr-0 md:!w-full md:gap-y-3'
         )}
       >
         <div
@@ -136,7 +139,7 @@ const BlogPostCard = ({
             className={clsx(
               'tracking-tighter transition-colors duration-200 group-hover:text-gray-new-80',
               isSmart
-                ? 'text-2xl leading-tight md:text-[20px] sm:text-lg'
+                ? 'line-clamp-3 text-2xl leading-tight md:text-[20px] sm:text-lg'
                 : 'text-[28px] font-normal leading-snug lt:text-2xl md:text-[20px] sm:text-lg'
             )}
           >

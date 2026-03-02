@@ -26,7 +26,7 @@ const BlogPage = async () => {
             <span className="whitespace-nowrap">What you&rsquo;re building.</span>
           </>
         }
-        rssTitle="Blog"
+        rssTitle="What we're shipping. What you're building."
         basePath={BLOG_BASE_PATH}
         withLabel
       />

@@ -23,7 +23,7 @@ const BlogHeader = ({ className, title, rssTitle, category, basePath, withLabel 
     </div>
     <div className="mb-2.5 flex items-center gap-x-4 lg:mb-[60px] md:mb-0 sm:mb-0">
       <Socials withTitle={false} />
-      <RssButton className="" basePath={basePath} title={rssTitle || title} />
+      <RssButton className="" basePath={basePath} title={rssTitle} />
     </div>
   </div>
 );

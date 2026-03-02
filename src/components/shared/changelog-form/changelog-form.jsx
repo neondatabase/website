@@ -45,7 +45,7 @@ const themeClassNames = {
   },
 };
 
-const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, className }) => {
+const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
 
@@ -111,7 +111,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         isBlog &&
-          (isInline
+          (!isSidebar
             ? 'overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !shadow-none dark:!bg-none sm:!flex-col sm:!items-start sm:!gap-5'
             : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none')
       )}
@@ -122,7 +122,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
           <h2
             className={clsx(
               'font-medium leading-snug tracking-tighter text-white',
-              isInline ? 'text-xl sm:text-lg' : 'text-base'
+              !isSidebar ? 'text-xl sm:text-lg' : 'text-base'
             )}
           >
             Subscribe to our changelog
@@ -145,8 +145,8 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
       <form
         className={clsx(
           'relative z-20 w-full flex-1',
-          isBlog && !isInline && 'mt-8',
-          isInline && 'min-w-[292px] sm:min-w-0'
+          isBlog && isSidebar && 'mt-8',
+          isBlog && !isSidebar && 'min-w-[292px] sm:min-w-0'
         )}
         method="POST"
         noValidate
@@ -252,7 +252,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
           </AnimatePresence>
         </LazyMotion>
 
-        {formState === FORM_STATES.ERROR && errorMessage && (
+        {!isBlog && formState === FORM_STATES.ERROR && errorMessage && (
           <span
             className={clsx(
               'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
@@ -270,7 +270,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
         <Image
           className={clsx(
             'absolute bottom-0 z-10',
-            isInline ? 'right-0' : 'left-0 w-full'
+            !isSidebar ? 'right-0' : 'left-0 w-full'
           )}
           src={formBg}
           width={256}
@@ -286,7 +286,6 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, isInline = false, cl
 ChangelogForm.propTypes = {
   isSidebar: PropTypes.bool,
   isBlog: PropTypes.bool,
-  isInline: PropTypes.bool,
   className: PropTypes.string,
 };
 
