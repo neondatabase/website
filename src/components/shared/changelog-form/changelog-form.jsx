@@ -171,8 +171,8 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
               (formState === FORM_STATES.ERROR
                 ? '!border-[rgba(255,54,33,0.5)]'
                 : '!border-gray-new-20 focus:!border-gray-new-50'),
-            isBlog && isSidebar && '!pr-12',
-            isInArticle && '!pr-[100px]'
+            isBlog && isSidebar && (formState === FORM_STATES.ERROR ? '!pr-[76px]' : '!pr-12'),
+            isInArticle && (formState === FORM_STATES.ERROR ? '!pr-[135px]' : '!pr-[100px]')
           )}
           type="email"
           name="email"
