@@ -5,6 +5,7 @@ import Container from 'components/shared/container';
 import ThemeSelect from 'components/shared/footer/theme-select';
 import Link from 'components/shared/link';
 import Logo from 'components/shared/logo';
+import LINKS from 'constants/links';
 import MENUS from 'constants/menus.js';
 import ChevronIcon from 'icons/chevron-down.inline.svg';
 
@@ -31,15 +32,48 @@ const Footer = ({ hasThemesSupport = false }) => (
 
         <div className="flex flex-col items-start justify-between gap-y-5 lg:w-full lg:flex-row sm:flex-col">
           <StatusBadge />
-          <p
+          <div
             className={clsx(
-              'flex gap-x-1 gap-y-1.5 text-[13px] leading-none tracking-extra-tight text-gray-new-40',
-              '2xl:flex-col lg:flex-row sm:flex-col'
+              'flex max-w-2xl flex-col gap-y-2 text-[13px] leading-tight tracking-extra-tight text-gray-new-50'
             )}
           >
-            <span>Made in SF and the World.</span>
-            <span>Copyright Ⓒ 2022 – {new Date().getFullYear()} Neon, LLC</span>
-          </p>
+            <p>
+              © Neon 2026. All rights reserved. Apache, Apache Spark, Spark, the Spark Logo, Apache
+              Iceberg, Iceberg, and the Apache Iceberg logo are trademarks of the{' '}
+              <a
+                href="https://www.apache.org"
+                rel="nofollow noopener noreferrer"
+                target="_blank"
+                className="underline hover:text-gray-new-20 dark:hover:text-gray-new-80"
+              >
+                Apache Software Foundation
+              </a>
+              .
+            </p>
+            <p className="flex flex-wrap gap-x-3 gap-y-1">
+              <Link
+                className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
+                to={LINKS.privacy}
+              >
+                Privacy Notice
+              </Link>
+              <Link className="hover:text-gray-new-20 dark:hover:text-gray-new-80" to={LINKS.terms}>
+                Terms of Use
+              </Link>
+              <Link
+                className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
+                to={LINKS.modernSlaveryStatement}
+              >
+                Modern Slavery Statement
+              </Link>
+              <Link
+                className="hover:text-gray-new-20 dark:hover:text-gray-new-80"
+                to={LINKS.californiaPolicy}
+              >
+                California Privacy
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
 

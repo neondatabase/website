@@ -215,7 +215,7 @@ export default {
               to: LINKS.privacy,
             },
             {
-              text: 'Terms of Service',
+              text: 'Terms of Use',
               to: LINKS.terms,
             },
             {
