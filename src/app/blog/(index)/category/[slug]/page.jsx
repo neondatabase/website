@@ -22,14 +22,21 @@ const BlogCategoryPage = async ({ params: { slug } }) => {
     <>
       <BlogHeader
         className="border-b border-gray-new-20 pb-12 lg:-top-[68px] md:top-0 md:border-b-0 md:pb-0"
-        title="What we’re shipping. What you’re building."
+        title={
+          <>
+            <span className="whitespace-nowrap">What we&rsquo;re shipping.</span>
+            <br />
+            <span className="whitespace-nowrap">What you&rsquo;re building.</span>
+          </>
+        }
+        rssTitle="Blog"
         category={category.name}
         basePath={BLOG_BASE_PATH}
         withLabel
       />
       <Suspense fallback={null}>
         <BlogSearch
-          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-[12px] md:!static md:!right-auto md:!top-auto md:mt-4"
+          searchInputClassName="right-full mr-16 top-[208px] lt:top-[192px] xl:mr-3.5 lg:right-0 lg:mr-0 lg:top-3 md:!static md:!right-auto md:!top-auto md:mt-4"
           posts={validPosts}
         >
           <div className="grid grid-cols-2 gap-x-16 xl:gap-x-5 md:grid-cols-1 md:pt-[96px]">
