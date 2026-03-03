@@ -35,9 +35,6 @@ From the **Projects** page (Organization → **Projects**) you see an org-level 
 
 When you open a project, the **Project dashboard** (Project → **Dashboard**) shows the same four metrics for that project only: **Compute**, **Storage**, **History**, and **Network transfer**.
 
-- **History** is instant restore storage (the same as on your invoice).
-- **Network transfer** combines public and private transfer; private network transfer only applies if you use [Private Networking](/docs/guides/neon-private-networking).
-
 Usage is shown since the start of the current billing period. Metrics may be delayed by about an hour and are not updated for inactive projects.
 
 <Admonition type="note" title="Billing metrics for pre-2025 custom contract customers">
