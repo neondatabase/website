@@ -3,8 +3,8 @@ title: 'AI Driven Incident response with Vercel and Neon MCP servers'
 subtitle: 'Leverage Vercel logs and Neon branching to give AI agents the context to diagnose production errors, validate fixes safely, and remediate issues with confidence.'
 author: dhanush-reddy
 enableTableOfContents: true
-createdAt: '2026-02-25T00:00:00.000Z'
-updatedOn: '2026-02-25T00:00:00.000Z'
+createdAt: '2026-03-02T00:00:00.000Z'
+updatedOn: '2026-03-02T00:00:00.000Z'
 ---
 
 AI agents are evolving from simple task executors into integral parts of modern development workflows. As their role expands, giving them the right context and safeguards becomes essential especially when they’re trusted to diagnose and debug issues in production environments.
