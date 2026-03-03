@@ -212,7 +212,12 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
                 <Icon className="mb-[29px] size-7 text-green-44" />
               )}
               <div className="mt-auto flex flex-col gap-1.5">
-                <h3 className="text-lg font-medium leading-snug tracking-extra-tight">
+                <h3
+                  className={clsx(
+                    'text-lg font-medium leading-snug tracking-extra-tight',
+                    !withNumbers && 'dark:text-white'
+                  )}
+                >
                   {children}
                 </h3>
                 <p
