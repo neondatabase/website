@@ -6,13 +6,13 @@ import RSSLogo from 'icons/rss.inline.svg';
 const RssButton = ({ className, basePath, title }) => (
   <a
     className={clsx(
-      'rounded-sm text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-primary-1',
+      'text-gray-new-60 transition-colors duration-200 hover:text-secondary-8 dark:hover:text-white',
       className
     )}
     href={`${basePath}rss.xml`}
     aria-label={`${title} RSS Feed`}
   >
-    <RSSLogo className="size-4" />
+    <RSSLogo className="size-5" />
   </a>
 );
 

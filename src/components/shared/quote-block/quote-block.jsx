@@ -115,21 +115,22 @@ const QuoteBlock = ({ author, className = '', quote, role }) => {
           &quot;{quote}&quot;
         </blockquote>
 
-        <figcaption className="mt-5 flex items-center gap-3 md:mt-4">
-          <div className="relative size-9 overflow-hidden rounded-full sm:size-7">
+        <figcaption className="mt-5 flex items-center gap-2.5 md:mt-4">
+          <div className="relative overflow-hidden rounded-full">
             <Image
+              className="pointer-events-none m-0 size-8 rounded-full object-cover sm:h-7 sm:w-7"
               src={avatar}
               alt={name}
               width={32}
               height={32}
-              className="m-0 rounded-full object-cover sm:h-7 sm:w-7"
             />
           </div>
-          <div className="flex gap-1.5">
-            <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
-              {name}{' '}
-              <span className="font-normal text-gray-new-30 dark:text-[#A1A1AA]">— {role}</span>
-            </div>
+          <div className="text-base font-medium leading-snug tracking-tighter text-black-new dark:text-gray-9 sm:text-[13px]">
+            {name}
+            <span className="font-normal text-gray-new-70 dark:text-[#A1A1AA]">
+              <span className="mx-1.5">—</span>
+              <cite className="not-italic">{role}</cite>
+            </span>
           </div>
         </figcaption>
       </figure>

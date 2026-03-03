@@ -647,7 +647,7 @@ const defaultConfig = {
 
     config.module.rules.push({
       test: (filePath) => {
-        const fileName = filePath.split('/').pop();
+        const fileName = filePath.split(/[\\/]/).pop();
 
         return fileName === 'rive.wasm';
       },

@@ -31,7 +31,7 @@ const GuidesPage = async () => {
           },
         ]}
       />
-      <BlogHeader title="Guides" basePath={GUIDES_BASE_PATH} />
+      <BlogHeader title="Guides" rssTitle="Guides" basePath={GUIDES_BASE_PATH} />
       <div className="guides">
         {posts.map((post) => (
           <GuideCard key={post.slug} {...post} />

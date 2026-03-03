@@ -52,7 +52,7 @@ const GuidesPage = async ({ params }) => {
           },
         ]}
       />
-      <BlogHeader title={`Guides by ${author.name}`} basePath={GUIDES_BASE_PATH} />
+      <BlogHeader title={`Guides by ${author.name}`} rssTitle={`Guides by ${author.name}`} basePath={GUIDES_BASE_PATH} />
       <div className="guides">
         {posts.map((post) => (
           <GuideCard key={post.slug} {...post} />

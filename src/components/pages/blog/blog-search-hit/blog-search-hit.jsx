@@ -9,7 +9,6 @@ const BlogSearchHit = ({ post }) => (
     imageWidth={336}
     imageHeight={189}
     fullSize
-    withAuthorPhoto
     {...post}
   />
 );
