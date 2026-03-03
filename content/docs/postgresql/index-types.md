@@ -8,7 +8,7 @@ summary: >-
 enableTableOfContents: true
 redirectFrom:
   - /docs/postgres/indexes
-updatedOn: '2026-02-15T20:51:54.245Z'
+updatedOn: '2026-03-03T03:22:12.749Z'
 ---
 
 Indexes are a powerful tool to optimize query performance in relational databases like Neon Postgres. They allow the database engine to quickly locate and retrieve specific rows, significantly speeding up data access. In the absence of an index, Postgres must scan the entire table to find the rows that satisfy the query conditions.
