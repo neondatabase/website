@@ -5,7 +5,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-26T00:00:00.000Z'
 ---
 
-[pgfence](https://pgfence.dev) is a Postgres migration safety CLI that analyzes SQL migration files and reports lock modes, risk levels, and safe rewrite recipes. It uses PostgreSQL's actual parser (`libpg-query`) to detect dangerous DDL patterns — like `ACCESS EXCLUSIVE` locks, missing `lock_timeout`, or non-concurrent index creation — before they reach your Neon database.
+[pgfence](https://pgfence.com) is a Postgres migration safety CLI that analyzes SQL migration files and reports lock modes, risk levels, and safe rewrite recipes. It uses PostgreSQL's actual parser (`libpg-query`) to detect dangerous DDL patterns — like `ACCESS EXCLUSIVE` locks, missing `lock_timeout`, or non-concurrent index creation — before they reach your Neon database.
 
 pgfence supports raw SQL files and ORM migration formats including TypeORM, Prisma, Knex, and Drizzle.
 
@@ -24,10 +24,10 @@ Install pgfence globally or as a project dependency:
 
 ```bash
 # Global install
-npm install -g @flvmnt/pgfence@0.2.1
+npm install -g @flvmnt/pgfence@0.2.3
 
 # Or as a dev dependency
-npm install -D @flvmnt/pgfence@0.2.1
+npm install -D @flvmnt/pgfence@0.2.3
 ```
 
 ## Analyze migrations locally
@@ -109,7 +109,7 @@ jobs:
           node-version: '20'
 
       - name: Install pgfence
-        run: npm install -g @flvmnt/pgfence@0.2.1
+        run: npm install -g @flvmnt/pgfence@0.2.3
 
       - name: Analyze migrations
         run: pgfence analyze --ci --max-risk medium --output github migrations/*.sql
@@ -180,7 +180,7 @@ pgfence analyze --output github migrations/*.sql
 
 - [pgfence on GitHub](https://github.com/flvmnt/pgfence)
 - [pgfence on npm](https://www.npmjs.com/package/@flvmnt/pgfence)
-- [pgfence documentation](https://pgfence.dev)
+- [pgfence documentation](https://pgfence.com)
 - [Neon branching](/docs/introduction/branching)
 - [Connection pooling](/docs/connect/connection-pooling)
 
