@@ -38,7 +38,7 @@ const TESTIMONIALS = [
 const TestimonialCard = ({ quote, author, role, logo, logoWidth }) => (
   <article className="flex h-[274px] flex-col justify-between lg:h-auto">
     <div className="flex flex-col gap-9 lg:gap-6 md:gap-5">
-      <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit" />
+      <Image src={logo} alt="" width={logoWidth} height={32} className="h-8 w-fit sm:h-6" />
       <blockquote
         className="font-mono text-[20px] font-normal leading-snug -tracking-wide text-black xl:text-lg md:text-base [&_span]:bg-green-44/70"
         dangerouslySetInnerHTML={{ __html: quote }}
@@ -101,7 +101,7 @@ const Testimonials = () => (
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
-        <div className="mt-40 grid grid-cols-3 gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 md:mt-14 sm:grid-cols-1 sm:gap-y-10">
+        <div className="mt-40 grid grid-cols-3 gap-12 xl:mt-36 xl:gap-10 lg:mt-16 lg:grid-cols-2 lg:gap-x-8 lg:gap-y-12 md:mt-14 sm:grid-cols-1 sm:gap-y-14">
           {TESTIMONIALS.map((item, index) => (
             <TestimonialCard key={index} {...item} />
           ))}

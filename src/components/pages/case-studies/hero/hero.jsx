@@ -42,17 +42,17 @@ const CARDS = [
 
 const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, background }) => (
   <Link className="group" to={linkUrl}>
-    <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30 sm:h-[340px]">
+    <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-auto">
       <Image
-        className="absolute right-0 top-0 lg:max-w-[50%] lg:h-auto xs:hidden"
+        className="absolute right-0 top-0 lt:max-w-[55%] lt:h-auto lg:max-w-[50%] sm:max-w-[40%]"
         src={background.src}
         width={background.width}
         height={background.height}
         alt=""
         priority
       />
-      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 sm:p-6">
-        <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white" />
+      <div className="relative z-10 flex flex-1 flex-col justify-between p-8 sm:p-6 xs:gap-6">
+        <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white sm:h-6 sm:max-w-[89px]" />
         <div className="mt-auto flex flex-col gap-6">
           <div className="flex flex-col gap-4">
             <span className="font-mono text-[13px] font-medium uppercase leading-none text-green-52">
@@ -60,12 +60,12 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
             </span>
 
             <h2
-              className="text-[28px] font-normal leading-tight tracking-tighter text-white sm:text-2xl [&_span]:text-gray-new-60"
+              className="text-[28px] font-normal leading-tight tracking-tighter text-white lg:text-2xl md:text-[28px] sm:text-2xl [&_span]:text-gray-new-60"
               dangerouslySetInnerHTML={{ __html: title }}
             />
           </div>
 
-          <span className="inline-flex w-fit items-center gap-2 text-base font-medium leading-none tracking-tighter text-white">
+          <span className="inline-flex w-fit items-center gap-2 text-base font-medium leading-none tracking-tighter text-white sm:text-[15px]">
             {linkText}
             <ArrowRightIcon className="size-4 shrink-0 text-gray-new-70 transition-transform duration-200 group-hover:translate-x-[3px]" />
           </span>

@@ -123,7 +123,7 @@ const Cards = ({ items, categories }) => {
       id={activeCategory.slug}
     >
       <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
-        <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-5">
+        <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-8">
           <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] md:leading-tight sm:max-w-[430px] sm:text-[28px]">
             See how teams are building the next era of Postgres on Neon.
           </h2>
@@ -143,7 +143,7 @@ const Cards = ({ items, categories }) => {
         </div>
 
         {/* Two-column: sidebar (256px) + cards grid */}
-        <div className="mt-14 flex gap-16 lt:gap-12 lg:mt-12 lg:flex-col lg:gap-10 md:mt-9">
+        <div className="mt-14 flex gap-16 lt:gap-12 lg:mt-12 lg:flex-col lg:gap-10 md:mt-9 md:gap-8 sm:mt-5 sm:gap-6">
           {/* Sidebar: search + vertical categories */}
           <aside className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
             {/* Search bar */}
