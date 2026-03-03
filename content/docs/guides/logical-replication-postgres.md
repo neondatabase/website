@@ -28,6 +28,10 @@ Neon's logical replication feature allows you to replicate data from Neon to ext
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
 - Review our [logical replication tips](/docs/guides/logical-replication-tips), based on real-world customer data migration experiences.
 
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
+
 ## Prepare your source Neon database
 
 This section describes how to prepare your source Neon database (the publisher) for replicating data to your destination Neon database (the subscriber).

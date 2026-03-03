@@ -25,3 +25,5 @@ Scale to zero is only available for computes up to 16 CU in size. Computes large
 </Admonition>
 
 You can enable or disable the scale-to-zero setting by editing your compute settings. For detailed instructions, see [Configuring scale to zero for Neon computes](/docs/guides/scale-to-zero-guide).
+
+[Logical replication](/docs/guides/logical-replication-guide) **from** Neon keeps compute active while subscribers are connected, so the database does not scale to zero. See [Logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) for details.

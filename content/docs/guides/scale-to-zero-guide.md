@@ -130,6 +130,10 @@ The Neon API includes a [Start endpoint](https://api-docs.neon.tech/reference/st
 
 You can try any of these methods and watch the status of your compute as it transitions from an **Idle** to an **Active** state.
 
+## Logical replication and scale to zero
+
+When you [replicate data from Neon](/docs/guides/logical-replication-guide#replicate-data-from-neon) (Neon as the publisher), a connected logical replication subscriber keeps the database active, so the compute will not scale to zero and you will have ongoing compute usage. This applies only when Neon is the publisher, not when replicating data into Neon from an external source. For details and other replication notices, see [Logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+
 ## Session context considerations
 
 When a compute suspends and later restarts, the [session context](/docs/reference/compatibility#session-context) resets. This includes in-memory statistics, temporary tables, prepared statements, and autovacuum thresholds, among other session-specific data. If your workflow requires persistent session data, consider disabling scale to zero on a paid plan to keep your compute active continuously. On the Free plan, scale to zero is always enabled and automatically suspends your compute after 5 minutes of inactivity.
