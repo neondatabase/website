@@ -7,7 +7,7 @@ summary: >-
   replication in Neon.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.003Z'
+updatedOn: '2026-03-03T14:18:20.100Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations. In this guide, you will learn how to define your Neon Postgres database as a data source in Airbyte so that you can stream data to Snowflake.

@@ -7,7 +7,7 @@ summary: >-
   and preparing the source database.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.004Z'
+updatedOn: '2026-03-03T14:18:20.101Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.

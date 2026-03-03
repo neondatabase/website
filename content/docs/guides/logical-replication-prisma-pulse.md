@@ -8,7 +8,7 @@ summary: >-
   features.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.016Z'
+updatedOn: '2026-03-03T14:18:20.106Z'
 ---
 
 Neon's Logical Replication feature enables you to subscribe to changes in your database, supporting things like replication or creating event-driven functionality.

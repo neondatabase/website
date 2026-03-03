@@ -6,7 +6,7 @@ summary: >-
   usage, including right-sizing, effective autoscaling, enabling scale to zero,
   and managing persistent connections.
 enableTableOfContents: true
-updatedOn: '2026-02-11T23:20:21.257Z'
+updatedOn: '2026-03-03T14:18:20.109Z'
 ---
 
 Managing your Neon costs effectively requires understanding how each billing factor works and implementing strategies to control usage. This guide provides actionable recommendations for optimizing costs across all billing metrics.

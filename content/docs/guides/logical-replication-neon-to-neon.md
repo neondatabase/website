@@ -8,7 +8,7 @@ summary: >-
   migration, and region migration scenarios.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.014Z'
+updatedOn: '2026-03-03T14:18:20.105Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
