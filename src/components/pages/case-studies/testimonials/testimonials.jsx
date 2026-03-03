@@ -97,7 +97,7 @@ const Testimonials = () => (
             backed by giants
           </span>
         </div>
-        <h2 className="mt-5 max-w-[800px] text-[48px] font-normal leading-dense tracking-tighter text-black xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px] lg:max-w-[533px] lg:text-[32px] md:max-w-[400px] md:text-2xl sm:max-w-none">
+        <h2 className="mt-5 max-w-[800px] text-[48px] font-normal leading-dense tracking-tighter text-black xl:max-w-[667px] xl:text-[40px] lt:max-w-[600px] lt:text-[36px] lg:max-w-[533px] lg:text-[32px] md:max-w-[400px] md:text-2xl sm:max-w-none sm:text-[28px]">
           Powering ambitious product teams{' '}
           <span className="text-gray-new-40">of all shapes and sizes with Postgres.</span>
         </h2>
