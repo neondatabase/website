@@ -6,7 +6,7 @@ export default {
       text: 'Product',
       sections: [
         {
-          title: 'Database',
+          title: 'Database Features',
           items: [
             {
               title: 'Autoscaling',
@@ -18,52 +18,20 @@ export default {
               to: LINKS.branching,
               description: 'Faster Postgres workflows',
             },
-            {
-              title: 'Bottomless storage',
-              to: LINKS.storage,
-              description: 'With copy-on-write',
-            },
-            {
-              title: 'Instant restores',
-              to: LINKS.branchRestore,
-              description: 'Recover TBs in seconds',
-            },
-            {
-              title: 'Connection pooler',
-              to: LINKS.connectionPooling,
-              description: 'Built-in with pgBouncer',
-            },
           ],
         },
         {
-          title: 'Ecosystem',
+          title: 'Add-On Features',
           items: [
             {
-              title: 'Neon API',
-              to: LINKS.api,
-              description: 'Manage infra, billing, quotas',
-            },
-            {
-              title: 'Auth',
+              title: 'Authentication',
               to: LINKS.auth,
-              description: 'Add authentication',
+              description: 'Managed authentication that branches with your database',
             },
             {
               title: 'Data API',
               to: LINKS.dataApi,
-              description: 'PostgREST-compatible',
-            },
-
-            {
-              title: 'Claimable Postgres',
-              to: LINKS.claimablePostgres,
-              description: 'No-signup flow',
-              isExternal: true,
-            },
-            {
-              title: 'Migration guides',
-              to: LINKS.migrationIntro,
-              description: 'Step-by-step',
+              description: 'REST HTTP API for your database',
             },
           ],
         },
