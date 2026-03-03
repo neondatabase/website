@@ -27,7 +27,7 @@ Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
 <Admonition type="important" title="Compute and billing">
-Replicating data from Neon keeps your compute active while subscribers are connected, so your database will not [scale to zero](/docs/introduction/scale-to-zero) and you will have ongoing compute usage. This can significantly affect your monthly bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) for details.
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
 </Admonition>
 
 ## Enable logical replication in Neon
