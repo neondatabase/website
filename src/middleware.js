@@ -30,31 +30,30 @@ function applyDocHeaders(response) {
 
 function trackLLMPageview(req) {
   const url = req.nextUrl.href;
+  const referrer = req.headers.get('referer') || '';
+  const cookies = req.headers.get('cookie') || '';
   const userAgent = req.headers.get('user-agent') || '';
 
-  const anonymousId = req.cookies.get('ajs_anonymous_id')?.value;
-  const userId = req.cookies.get('ajs_user_id')?.value;
-
-  const client = { __zarazTrack: 'Pageview' };
-  if (anonymousId) client.anonymousId = anonymousId;
-  if (userId) client.userId = userId;
-
+  // Match the payload shape the Zaraz JS tag sends to this endpoint
   const payload = {
-    events: [
-      {
-        client,
-        system: {
-          page: { url },
-          device: { 'user-agent': userAgent },
-        },
+    name: 'Pageview',
+    data: { llm_agent: true },
+    zarazData: {
+      c: cookies, // raw cookie string — Zaraz extracts ajs_anonymous_id / ajs_user_id from here
+      l: url,
+      r: referrer,
+    },
+    system: {
+      device: {
+        ip: '192.168.0.1',
       },
-    ],
+    },
   };
 
   // Fire and forget — do not await to avoid blocking the response
   fetch('https://neonapi.io/t.js', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'User-Agent': `LLMAGENT: ${  userAgent}` },
     body: JSON.stringify(payload),
   }).catch(() => {});
 }
