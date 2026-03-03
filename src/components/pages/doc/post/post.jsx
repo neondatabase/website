@@ -103,17 +103,16 @@ const Post = ({
               />
             </article>
           )}
+          {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
 
           {!isChangelog && (
             <NavigationLinks
-              className="mt-12 md:mt-10"
+              className="mt-6"
               previousLink={previousLink}
               nextLink={nextLink}
               basePath={navigationLinksBasePath}
             />
           )}
-
-          {!isDocsIndex && <DocFooter updatedOn={updatedOn} slug={currentSlug} />}
         </div>
       </div>
 

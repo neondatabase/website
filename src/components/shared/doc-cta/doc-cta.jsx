@@ -5,10 +5,13 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
+import useCopyToClipboard from 'hooks/use-copy-to-clipboard';
 import patternImage from 'images/pages/docs/cta/pattern.png';
+import sendGtagEvent from 'utils/send-gtag-event';
 
 import Button from '../button';
-import CodeBlockWrapper from '../code-block-wrapper';
+import CheckIcon from '../code-block-wrapper/images/check.inline.svg';
+import CopyIcon from '../code-block-wrapper/images/copy.inline.svg';
 
 const DEFAULT_DATA = {
   title: 'Try it on Neon!',
@@ -22,6 +25,51 @@ const ELLIPSES = [
   'right-[-6%] top-[62%] h-[137px] w-44 rotate-[65.57deg] bg-[rgba(255,228,130,0.90)] blur-[40px] xl:right-[-8%] xl:top-[63%] lg:right-[-10%] lg:top-[64%] md:right-[-15%] md:top-[66%] sm:right-[-18%] sm:top-[68%]',
   'right-[-40%] top-[140%] h-44 w-[606px] -rotate-[118.36deg] bg-[#1D9662] blur-[80px] xl:right-[-48%] xl:top-[142%] lg:right-[-56%] lg:top-[145%] md:right-[-66%] md:top-[150%] sm:right-[-76%] sm:top-[156%]',
 ];
+
+const CodeCommandBlock = ({ command, trackingLabel = null, className = '' }) => {
+  const { isCopied, handleCopy } = useCopyToClipboard(3000);
+
+  const handleCopyWithTracking = () => {
+    if (!command) return;
+
+    handleCopy(command);
+
+    if (trackingLabel) {
+      sendGtagEvent('Button Clicked', { text: trackingLabel });
+    }
+  };
+
+  return (
+    <button
+      type="button"
+      className={clsx(
+        'group relative mt-4 w-full bg-gray-new-15 text-left text-white transition-colors duration-200 hover:bg-gray-new-30 dark:bg-[#E4F1EB] dark:text-gray-new-8 dark:hover:bg-white [&>pre]:!bg-transparent [&>pre]:p-3',
+        className
+      )}
+      onClick={handleCopyWithTracking}
+    >
+      <pre className="!my-0">
+        <code className="language-bash text-white dark:text-gray-new-8">
+          <span className="ml-1 mr-1.5 text-gray-new-60 dark:text-gray-new-30">$</span>
+          {command}
+        </code>
+      </pre>
+      <span className="pointer-events-none absolute right-3 top-1/2 flex -translate-y-1/2 items-center text-gray-new-60 transition-colors duration-200 group-hover:text-gray-new-80 dark:text-gray-new-40 dark:group-hover:text-gray-new-50">
+        {isCopied ? (
+          <CheckIcon className="h-3.5 w-3.5 text-current" />
+        ) : (
+          <CopyIcon className="h-3.5 w-3.5 text-current" />
+        )}
+      </span>
+    </button>
+  );
+};
+
+CodeCommandBlock.propTypes = {
+  command: PropTypes.string.isRequired,
+  trackingLabel: PropTypes.string,
+  className: PropTypes.string,
+};
 
 const DocCta = ({
   title = DEFAULT_DATA.title,
@@ -93,20 +141,7 @@ const DocCta = ({
           )}
           dangerouslySetInnerHTML={{ __html: description }}
         />
-        {command && (
-          <CodeBlockWrapper
-            className="mt-4 bg-gray-new-15 text-white dark:bg-[#E4F1EB] dark:text-gray-new-8 [&>pre]:!bg-transparent [&>pre]:p-3"
-            trackingLabel={trackingLabel}
-            copyButtonClassName="!top-3 !right-2.5 dark:!bg-[#E4F1EB] !bg-gray-new-15 border-none dark:border-none dark:text-gray-new-40 text-gray-new-60 duration-200 transition-colors dark:group-hover:bg-[#E4F1EB] hover:text-white group-hover:bg-gray-new-15 dark:hover:text-black-pure"
-          >
-            <pre className="!my-0">
-              <code className="language-bash text-white dark:text-gray-new-8">
-                <span className="ml-1 mr-1.5 text-gray-new-60 dark:text-gray-new-30">$</span>
-                {command}
-              </code>
-            </pre>
-          </CodeBlockWrapper>
-        )}
+        {command && <CodeCommandBlock command={command} trackingLabel={trackingLabel} />}
       </div>
 
       {!isIntro && (
