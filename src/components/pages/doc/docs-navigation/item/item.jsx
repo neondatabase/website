@@ -81,7 +81,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
       <LinkTag
         className={clsx(
           'relative flex h-full items-center gap-1',
-          'whitespace-nowrap rounded-sm text-sm font-medium tracking-tight',
+          'whitespace-nowrap rounded-sm text-sm leading-snug tracking-extra-tight',
           'transition-colors duration-200',
           'hover:text-black-new group-hover:text-black-new',
           'after:absolute after:inset-x-0 after:-bottom-px after:h-0.5 after:w-full after:bg-gray-new-40 after:opacity-0 after:transition-opacity after:duration-300',

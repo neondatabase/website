@@ -1,9 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import LINKS from 'constants/links';
+import patternImage from 'images/pages/docs/cta/pattern.png';
 
 import Button from '../button';
 import CodeBlockWrapper from '../code-block-wrapper';
@@ -36,10 +38,9 @@ const DocCta = ({
   <figure
     className={clsx(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
-      isTemplate ? 'rounded-none' : 'rounded-[10px]',
-      isIntro ? 'my-12 px-6 py-5 md:my-8' : 'my-9 px-7 py-6',
-      'border border-gray-new-90 bg-[#F5FAF8]',
-      'dark:border-[#303236] dark:bg-[rgba(19,20,21,0.6)]'
+      isIntro ? 'my-12 p-5 md:my-8' : 'my-9 px-7 py-6',
+      'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
+      'dark:border-gray-new-30 dark:bg-gray-new-10'
     )}
   >
     {isTemplate && (
@@ -54,6 +55,15 @@ const DocCta = ({
         </div>
       </div>
     )}
+    {isIntro && (
+      <Image
+        className="absolute bottom-0 right-0 top-0 h-full w-auto object-cover"
+        src={patternImage}
+        alt=""
+        width={188}
+        height={163}
+      />
+    )}
 
     <div
       className={clsx(
@@ -61,7 +71,7 @@ const DocCta = ({
         secondaryButtonText ? 'flex-col' : 'flex-row justify-between'
       )}
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2.5">
         <div
           className={clsx(
             'text-gray-new-8 dark:text-white',
@@ -74,21 +84,26 @@ const DocCta = ({
         </div>
         <p
           className={clsx(
-            '!m-0 !text-[#494B50] dark:!text-gray-new-85',
+            '!m-0 !text-base !text-gray-new-20/90 dark:!text-gray-new-85',
             isIntro ? '!tracking-extra-tight' : '!text-base !tracking-tight',
-            '[&_a]:border-b [&_a]:border-transparent [&_a]:text-secondary-8 [&_a]:no-underline',
-            '[&_a]:transition-[border-color] [&_a]:duration-200 [&_a]:ease-in-out hover:[&_a]:border-secondary-8',
-            'dark:[&_a]:text-primary-1 dark:hover:[&_a]:border-primary-1'
+            '[&_a]:inline-flex [&_a]:items-center [&_a]:font-medium [&_a]:text-black-pure [&_a]:no-underline',
+            'duration-200 ease-in-out [&_svg]:shrink-0 [&_svg]:text-gray-new-30 [&_svg]:transition-transform',
+            '[&>a:hover_svg]:translate-x-[3px]', // p > a:hover svg
+            'dark:[&_a]:text-white dark:[&_svg]:text-gray-new-70'
           )}
           dangerouslySetInnerHTML={{ __html: description }}
         />
         {command && (
           <CodeBlockWrapper
-            className="mt-4 border border-gray-new-90 bg-white dark:border-gray-new-20 dark:bg-gray-new-10 [&>pre]:!bg-transparent [&>pre]:p-3"
+            className="mt-4 bg-gray-new-15 text-white dark:bg-[#E4F1EB] dark:text-gray-new-8 [&>pre]:!bg-transparent [&>pre]:p-3"
             trackingLabel={trackingLabel}
+            copyButtonClassName="!top-3 !right-2.5 dark:!bg-[#E4F1EB] !bg-gray-new-15 border-none dark:border-none dark:text-gray-new-40 text-gray-new-60 duration-200 transition-colors dark:group-hover:bg-[#E4F1EB] hover:text-white group-hover:bg-gray-new-15 dark:hover:text-black-pure"
           >
             <pre className="!my-0">
-              <code className="language-bash">{command}</code>
+              <code className="language-bash text-white dark:text-gray-new-8">
+                <span className="ml-1 mr-1.5 text-gray-new-60 dark:text-gray-new-30">$</span>
+                {command}
+              </code>
             </pre>
           </CodeBlockWrapper>
         )}

@@ -74,7 +74,7 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
           )}
         >
           <nav
-            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll px-1 pb-16 pt-11"
+            className="no-scrollbars z-10 -mx-1 h-[calc(100vh-7rem)] overflow-y-scroll border-r border-gray-new-90 pb-16 pl-1 pr-8 pt-11 dark:border-gray-new-20"
             ref={navRef}
           >
             {renderContent}

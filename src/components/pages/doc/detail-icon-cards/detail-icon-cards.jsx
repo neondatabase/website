@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -20,6 +21,7 @@ import Cards from './images/cards.inline.svg';
 import ChartBar from './images/chart-bar.inline.svg';
 import Check from './images/check.inline.svg';
 import Cheque from './images/cheque.inline.svg';
+import chevronIcon from './images/chevron.svg';
 import CliCursor from './images/cli-cursor.inline.svg';
 import CLI from './images/cli.inline.svg';
 import Code from './images/code.inline.svg';
@@ -53,6 +55,8 @@ import Neon from './images/neon.inline.svg';
 import Network from './images/network.inline.svg';
 import Ollama from './images/ollama.inline.svg';
 import OpenAI from './images/openai.inline.svg';
+import patternNumbersSvg from './images/pattern-numbers.svg';
+import patternSvg from './images/pattern.svg';
 import Performance from './images/performance.inline.svg';
 import Postgres from './images/postgres.inline.svg';
 import Prisma from './images/prisma.inline.svg';
@@ -162,7 +166,7 @@ const icons = {
   x: X,
 };
 
-const monochromeIcons = ['github'];
+// const monochromeIcons = ['github'];
 
 const DetailIconCards = ({ children = null, withNumbers = false, compact = false }) => {
   const ListComponent = withNumbers ? 'ol' : 'ul';
@@ -179,75 +183,46 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
         const Icon = icons[icon];
 
         return (
-          <li className="!m-0 flex before:hidden" key={index}>
+          <li className="!m-0 flex min-h-[169px] !pl-0 before:hidden" key={index}>
             <Link
               className={clsx(
-                'relative flex w-full items-baseline rounded-[10px] border border-gray-new-94 transition-colors duration-200',
-                compact
-                  ? withNumbers
-                    ? 'gap-x-0.5 px-4 py-3'
-                    : 'gap-x-2.5 px-4 py-3'
-                  : withNumbers
-                    ? 'gap-x-0.5 px-5 py-5'
-                    : 'gap-x-3.5 px-6 py-5',
-                'before:absolute before:inset-0 before:rounded-[10px] before:bg-[linear-gradient(275.74deg,#FAFAFA,rgba(250,250,250,0)100%)] before:opacity-0 before:transition-opacity before:duration-200',
-                'hover:border-gray-new-80 hover:before:opacity-100',
-                'dark:border-gray-new-20 dark:before:bg-[linear-gradient(275.74deg,rgba(36,38,40,0.8),rgba(36,38,40,0))] dark:hover:border-gray-new-30 sm:p-3'
+                'relative flex w-full flex-col p-5 transition-colors duration-200',
+                withNumbers
+                  ? 'bg-[#479A79] text-white hover:bg-[#2F7B5D] dark:bg-[#2F7B5D] dark:hover:bg-[#479A79]'
+                  : 'border border-gray-new-80 bg-[#E4F1EB]/40 text-black-pure hover:border-gray-new-70 hover:bg-[#E4F1EB] dark:border-gray-new-30 dark:bg-gray-new-8 dark:text-white dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10'
               )}
               to={href}
               tagName="DocsNavCard"
               tagText={children}
               {...(target && { target })}
             >
-              <div
-                className={clsx(
-                  'relative z-10 shrink-0',
-                  monochromeIcons.includes(icon)
-                    ? 'text-black-new dark:text-white'
-                    : 'text-secondary-8 dark:text-green-45',
-                  withNumbers
-                    ? compact
-                      ? 'w-5 text-base font-medium leading-tight tracking-extra-tight'
-                      : 'w-6 text-lg font-medium leading-tight tracking-extra-tight'
-                    : compact
-                      ? 'mt-0.5 h-3.5 w-3.5'
-                      : 'mt-0.5 h-4 w-4'
-                )}
-              >
-                {withNumbers ? (
-                  <span>{index + 1}.</span>
-                ) : (
-                  <div
-                    className={clsx(
-                      'h-full w-full',
-                      withNumbers &&
-                        'dark:rounded dark:bg-gradient-to-b dark:from-gray-new-15 dark:from-30% dark:to-[#1D1E20] dark:p-[5px]'
-                    )}
-                  >
-                    <Icon className="h-full w-full" />
-                  </div>
-                )}
-              </div>
-              <div className="relative z-10 flex flex-col gap-x-2.5">
-                <h3
-                  className={clsx(
-                    'text-balance font-semibold leading-tight text-black-new dark:text-white',
-                    compact ? 'text-base' : 'text-lg'
-                  )}
-                >
+              <Image
+                src={withNumbers ? patternNumbersSvg : patternSvg}
+                alt=""
+                width={342}
+                height={172}
+                className="absolute right-0 top-0 z-0"
+              />
+              {withNumbers ? (
+                <span className="mb-[43px] inline-flex items-center gap-2 font-mono text-sm font-medium uppercase leading-none">
+                  <Image src={chevronIcon} alt="" width={12} height={14} />
+                  Step {index + 1}
+                </span>
+              ) : (
+                <Icon className="mb-[29px] size-7 text-green-44" />
+              )}
+              <div className="mt-auto flex flex-col gap-1.5">
+                <h3 className="text-lg font-medium leading-snug tracking-extra-tight">
                   {children}
                 </h3>
-                {description && (
-                  <p
-                    className={clsx(
-                      'text-balance leading-normal text-gray-new-50 dark:text-gray-new-80',
-                      compact ? 'mt-1 text-xs' : 'text-sm',
-                      withNumbers ? 'mt-1' : compact ? 'mt-1' : 'mt-2.5'
-                    )}
-                  >
-                    {description}
-                  </p>
-                )}
+                <p
+                  className={clsx(
+                    'text-base leading-snug tracking-extra-tight',
+                    !withNumbers && 'text-gray-new-50 dark:text-gray-new-60'
+                  )}
+                >
+                  {description}
+                </p>
               </div>
             </Link>
           </li>
@@ -261,6 +236,7 @@ DetailIconCards.propTypes = {
   children: PropTypes.node,
   withNumbers: PropTypes.bool,
   compact: PropTypes.bool,
+  highlightIndex: PropTypes.number,
 };
 
 export default DetailIconCards;

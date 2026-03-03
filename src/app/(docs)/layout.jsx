@@ -25,7 +25,7 @@ const NeonDocsLayout = async ({ children }) => {
           size="1600"
         >
           <Sidebar
-            className="w-64 shrink-0 lg:hidden"
+            className="w-[316px] shrink-0 lg:hidden"
             navigation={navigation}
             basePath={DOCS_BASE_PATH}
             sdkNavigation={sdkNavigation}

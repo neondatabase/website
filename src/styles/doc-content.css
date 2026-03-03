@@ -99,17 +99,9 @@
       @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter;
     }
 
-    h3 {
-      @apply text-xl font-medium leading-snug tracking-extra-tight;
-    }
-
-    h4 {
-      @apply text-lg font-medium leading-snug tracking-extra-tight;
-    }
-
-    p {
-      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-black-new dark:text-gray-new-85;
-    }
+    @apply prose-h3:text-xl prose-h3:font-medium prose-h3:leading-snug prose-h3:tracking-extra-tight;
+    @apply prose-h4:text-lg prose-h4:font-medium prose-h4:leading-snug prose-h4:tracking-extra-tight;
+    @apply prose-p:mb-6 prose-p:mt-[18px] prose-p:text-lg prose-p:font-normal prose-p:leading-normal prose-p:tracking-tight prose-p:text-black-new dark:prose-p:text-gray-new-85;
 
     .admonition h4 {
       @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
@@ -224,8 +216,10 @@
       > code {
         text-shadow: unset;
 
-        @apply !font-mono text-sm !leading-[1.75] !text-black-new dark:!text-white dark:![text-shadow:unset];
+        @apply !font-mono text-sm !leading-[1.75] dark:![text-shadow:unset];
       }
+
+      @apply prose-code:text-black-new dark:prose-code:text-white;
     }
 
     :not(pre) > code {
