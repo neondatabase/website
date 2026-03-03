@@ -1,10 +1,9 @@
 @layer components {
   .prose-blog {
-    @apply max-w-none leading-normal text-gray-new-90 prose-p:my-4 prose-p:tracking-tight prose-p:text-gray-new-90 prose-strong:text-gray-new-90 prose-ol:my-5 prose-ul:my-5 prose-li:my-4;
+    @apply max-w-none leading-normal text-gray-new-90 prose-strong:text-gray-new-90;
     @apply prose-headings:font-medium prose-headings:leading-tight prose-headings:tracking-tighter prose-headings:text-white;
-    @apply prose-h1:mb-5 prose-h1:mt-10 prose-h1:text-[28px] prose-h2:mb-5 prose-h2:mt-10 prose-h2:text-[28px] prose-h3:mb-4 prose-h3:mt-7 prose-h3:text-[20px] prose-h4:mb-4 prose-h4:mt-6 prose-h4:text-lg prose-h5:mb-4 prose-h5:mt-5 prose-h5:text-lg md:prose-h2:text-[28px] sm:prose-h2:text-[20px] sm:prose-h3:text-[18px];
     @apply prose-a:rounded-sm prose-a:font-normal prose-a:text-white prose-a:underline prose-a:decoration-white/40 prose-a:decoration-dashed prose-a:underline-offset-4 prose-a:transition-colors prose-a:duration-200 prose-a:ease-in-out hover:prose-a:decoration-white sm:prose-a:break-words;
-    @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8;
+    @apply prose-figure:my-10 prose-img:my-10 md:prose-figure:my-8 md:prose-img:my-8 sm:prose-figure:my-6 sm:prose-img:my-6;
     @apply prose-figcaption:mt-2.5 prose-figcaption:text-base prose-figcaption:leading-snug prose-figcaption:tracking-tight prose-figcaption:text-gray-new-50;
     @apply prose-pre:my-0 prose-pre:px-2;
 
@@ -36,15 +35,32 @@
       }
     }
 
-    ul {
-      @apply list-none pl-5;
+    h2 {
+      @apply m-0 pt-8 text-[28px] font-medium leading-tight tracking-tighter md:pt-6 md:text-[24px] sm:text-[20px];
+    }
+
+    h3 {
+      @apply mt-7 text-xl font-medium leading-snug tracking-extra-tight md:mt-5 md:text-lg sm:text-[18px];
+    }
+
+    h4 {
+      @apply mt-6 text-lg font-medium leading-snug tracking-extra-tight md:mt-4 md:text-base;
+    }
+
+    h5 {
+      @apply mt-5 text-lg md:mt-4 md:text-base;
+    }
+
+    p {
+      @apply mb-6 mt-[18px] text-lg font-normal leading-normal tracking-tight text-gray-new-85 md:mb-5 md:mt-4 md:text-base;
+    }
+
+    ul,
+    ol {
+      @apply my-6 list-none md:my-5;
 
       > li {
-        @apply relative my-3 pl-7;
-
-        &::before {
-          @apply absolute left-0.5 top-1 block text-lg leading-none text-gray-new-85 content-['–'];
-        }
+        @apply relative my-2.5 pl-0 text-[18px] font-normal leading-normal text-gray-new-85 md:text-base;
 
         ol {
           @apply md:pl-4;
@@ -52,15 +68,21 @@
       }
     }
 
-    ol {
-      @apply pl-10 md:pl-5;
+    ul {
+      @apply pl-[34px] md:pl-5 sm:pl-4;
 
       > li {
-        @apply pl-0;
-
-        ol {
-          @apply md:pl-4;
+        &::before {
+          @apply absolute -left-4 top-0 text-[18px] font-normal leading-normal text-gray-new-85 content-['–'] md:-left-3.5 md:text-base;
         }
+      }
+    }
+
+    ol {
+      @apply list-decimal pl-[38px] md:pl-5;
+
+      > li {
+        @apply pl-1.5;
       }
 
       li {
@@ -68,6 +90,14 @@
           @apply text-white;
         }
       }
+
+      ol {
+        list-style-type: lower-alpha;
+      }
+    }
+
+    hr {
+      @apply my-8 md:my-6;
     }
 
     .wp-block-table {
@@ -75,7 +105,7 @@
     }
 
     table {
-      @apply w-full border-hidden md:min-w-[500px];
+      @apply my-10 w-full border-hidden md:min-w-[500px];
 
       th {
         @apply border border-gray-new-20 p-3.5 md:px-2;
@@ -161,18 +191,22 @@
     .admonition {
       @apply border-l-2;
 
+      h4 {
+        @apply m-0 inline-flex items-center font-mono text-[13px] uppercase leading-none;
+      }
+
       a {
         @apply text-white underline decoration-white/40 decoration-dashed underline-offset-4 transition-none hover:!text-white hover:decoration-white hover:!opacity-100;
       }
     }
 
     .wp-block-quote {
-      @apply border-l-2 border-green-44 pl-6 font-mono font-normal not-italic;
+      @apply my-8 border-l-2 border-green-44 pl-6 font-mono font-normal not-italic sm:pl-4;
 
       strong,
       b,
       p {
-        @apply my-0 text-xl font-normal leading-snug tracking-tighter;
+        @apply my-0 text-xl font-normal leading-snug tracking-tighter md:text-lg sm:text-base;
 
         &::before,
         &::after {
@@ -190,12 +224,14 @@
     }
 
     .wp-block-pullquote {
+      @apply my-8;
+
       blockquote {
-        @apply relative border-l-2 border-green-44 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat;
+        @apply relative border-l-2 border-green-44 pl-9 before:absolute before:top-0 before:h-8 before:w-8 before:bg-[url('/images/blockquote.svg')] before:bg-[length:32px_32px] before:bg-no-repeat sm:pl-6;
       }
 
       p {
-        @apply my-0 pt-11 text-2xl font-normal not-italic leading-snug;
+        @apply my-0 pt-11 text-2xl font-normal not-italic leading-snug md:text-xl sm:text-lg;
 
         &::before,
         &::after {

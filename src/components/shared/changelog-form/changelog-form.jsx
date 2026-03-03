@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 import GradientBorder from 'components/shared/gradient-border';
 import { FORM_STATES } from 'constants/forms';
+import InputWarningIcon from 'icons/input-warning.inline.svg';
 import SendIcon from 'icons/send.inline.svg';
 import CheckIcon from 'icons/subscription-form-check.inline.svg';
 import formBg from 'images/pages/blog/form-bg.png';
@@ -48,6 +49,7 @@ const themeClassNames = {
 const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
   const theme = isSidebar ? 'sidebar' : 'default';
   const classNames = themeClassNames[theme];
+  const isInArticle = isBlog && !isSidebar;
 
   const isRecognized = !!getCookie('ajs_user_id');
   const [email, setEmail] = useState('');
@@ -111,13 +113,20 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         'lg:scroll-mt-10 lg:p-[18px] lg:pt-[14px] md:gap-10 sm:flex-col sm:items-start sm:gap-2.5',
         'dark:bg-transparent dark:bg-subscribe-form-dark dark:shadow-[0px_2px_10px_0px_rgba(0,0,0,.4),0px_2px_30px_0px_rgba(0,0,0,.5)]',
         isBlog &&
-          '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none'
+          (!isSidebar
+            ? 'overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !shadow-none dark:!bg-none sm:!flex-col sm:!items-start sm:!gap-5'
+            : '!gap-0 overflow-hidden !rounded-none border border-gray-new-20 !bg-[rgba(19,20,21,0.60)] !p-3 !shadow-none dark:!bg-none')
       )}
       id="changelog-form"
     >
       {isBlog ? (
         <div className="relative z-20">
-          <h2 className="text-base font-medium leading-snug tracking-tighter text-white">
+          <h2
+            className={clsx(
+              'font-medium leading-snug tracking-tighter text-white',
+              !isSidebar ? 'text-xl sm:text-lg' : 'text-base'
+            )}
+          >
             Subscribe to our changelog
           </h2>
           <p className="mt-2.5 text-[15px] leading-snug tracking-tight text-gray-new-70/90">
@@ -136,7 +145,11 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
         </h2>
       )}
       <form
-        className={clsx('relative z-20 w-full flex-1', isBlog && 'mt-8')}
+        className={clsx(
+          'relative z-20 w-full flex-1',
+          isBlog && isSidebar && 'mt-8',
+          isBlog && !isSidebar && 'min-w-[292px] sm:min-w-0'
+        )}
         method="POST"
         noValidate
         onSubmit={handleSubmit}
@@ -153,7 +166,13 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
             formState === FORM_STATES.SUCCESS && 'dark:text-green-45',
             'placeholder:text-gray-new-50/60 dark:placeholder:text-gray-new-70/60',
             isBlog &&
-              '!border-gray-new-20 !bg-gray-new-8/60 !pr-12 backdrop-blur-lg transition-all duration-200 focus:!border-gray-new-50'
+              '!bg-gray-new-8/60 backdrop-blur-lg transition-all duration-200',
+            isBlog &&
+              (formState === FORM_STATES.ERROR
+                ? '!border-[rgba(255,54,33,0.5)]'
+                : '!border-gray-new-20 focus:!border-gray-new-50'),
+            isBlog && isSidebar && (formState === FORM_STATES.ERROR ? '!pr-[76px]' : '!pr-12'),
+            isInArticle && (formState === FORM_STATES.ERROR ? '!pr-[135px]' : '!pr-[100px]')
           )}
           type="email"
           name="email"
@@ -162,6 +181,14 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           disabled={formState === FORM_STATES.LOADING || formState === FORM_STATES.SUCCESS}
           onChange={handleInputChange}
         />
+        {isBlog && formState === FORM_STATES.ERROR && (
+          <InputWarningIcon
+            className={clsx(
+              'absolute top-[11px] size-4',
+              isSidebar ? 'right-[42px]' : 'right-[101px]'
+            )}
+          />
+        )}
         <LazyMotion features={domAnimation}>
           <AnimatePresence>
             {(formState === FORM_STATES.DEFAULT || formState === FORM_STATES.ERROR) && (
@@ -170,10 +197,13 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                   'absolute inset-y-1 right-1 rounded-full outline-none',
                   'h-[30px] min-w-16 px-6',
                   'text-black-new transition-colors duration-200',
-                  formState === FORM_STATES.ERROR
-                    ? 'bg-secondary-1/50'
-                    : 'bg-green-45 hover:bg-[#00FFAA]',
-                  isBlog && '!size-[30px] !min-w-[30px] bg-white !p-1.5 hover:!bg-gray-new-80'
+                  isBlog
+                    ? 'bg-white hover:bg-gray-new-80'
+                    : formState === FORM_STATES.ERROR
+                      ? 'bg-secondary-1/50'
+                      : 'bg-green-45 hover:bg-[#00FFAA]',
+                  isBlog && isSidebar && '!size-[30px] !min-w-[30px] !p-1.5',
+                  isInArticle && '!min-w-0 !px-3.5'
                 )}
                 type="submit"
                 initial="initial"
@@ -186,12 +216,16 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
                 <span
                   className={clsx(
                     classNames.sendText,
-                    'text-[13px] font-semibold tracking-extra-tight xs:hidden'
+                    'text-[13px] font-semibold tracking-extra-tight xs:hidden',
+                    isBlog && isSidebar && '!hidden',
+                    isInArticle && '!block !font-medium xs:!block'
                   )}
                 >
                   Subscribe
                 </span>
-                <SendIcon className={clsx(classNames.sendIcon, 'lg:hidden xs:block')} />
+                <SendIcon
+                  className={clsx(classNames.sendIcon, 'lg:hidden xs:block', isBlog && isSidebar && '!block', isInArticle && '!hidden')}
+                />
               </m.button>
             )}
             {formState === FORM_STATES.LOADING && (
@@ -238,7 +272,7 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
           </AnimatePresence>
         </LazyMotion>
 
-        {formState === FORM_STATES.ERROR && errorMessage && (
+        {!isBlog && formState === FORM_STATES.ERROR && errorMessage && (
           <span
             className={clsx(
               'absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap',
@@ -254,7 +288,10 @@ const ChangelogForm = ({ isSidebar = false, isBlog = false, className }) => {
       {!isBlog && <GradientBorder className="hidden !rounded-[10px] dark:block" withBlend />}
       {isBlog && (
         <Image
-          className="absolute bottom-0 left-0 z-10 w-full"
+          className={clsx(
+            'absolute bottom-0 z-10',
+            !isSidebar ? 'right-0' : 'left-0 w-full'
+          )}
           src={formBg}
           width={256}
           height={120}

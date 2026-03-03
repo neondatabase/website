@@ -9,7 +9,7 @@ const BlogPageLayout = async ({ children }) => {
   return (
     <div className="safe-paddings pb-24 pt-20 lg:pb-20 lg:pt-12 sm:pb-16 sm:pt-10">
       <Container className="flex flex-col" size="1600">
-        <div className="flex gap-16 xl:gap-3.5 xl:pl-0 lg:flex-col lg:gap-0">
+        <div className="flex gap-16 xl:gap-3.5 xl:pl-0 lg:flex-col lg:gap-0 md:relative">
           <Sidebar categories={categories} />
           <div className="relative w-full max-w-[1184px] lg:max-w-full">{children}</div>
         </div>

@@ -11,7 +11,7 @@ const Hero = ({ title, description, date, category, authors, className = null })
     <div className="flex items-center gap-x-1.5">
       <Link
         className={clsx(
-          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-gray-new-50 sm:text-[10px]'
+          'flex items-center gap-x-1.5 py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-gray-new-50'
         )}
         to={BLOG_BASE_PATH}
       >
@@ -21,19 +21,19 @@ const Hero = ({ title, description, date, category, authors, className = null })
       </Link>
       <span className="text-sm leading-none text-gray-new-50">/</span>
       <Link
-        className="py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-blue-70 sm:text-[10px]"
+        className="py-2 font-mono text-[13px] font-medium uppercase leading-none -tracking-extra-tight text-blue-70"
         to={`${BLOG_CATEGORY_BASE_PATH}${category.slug}`}
       >
         {category.name}
       </Link>
     </div>
-    <h1 className="post-title mt-4 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] md:text-4xl sm:text-[32px] xs:text-3xl">
+    <h1 className="post-title mt-4 text-5xl font-medium leading-dense tracking-tighter xl:text-[44px] lg:text-[40px] md:text-[36px] sm:text-[32px] xs:text-[28px]">
       {title}
     </h1>
-    <p className="mt-5 text-xl leading-snug tracking-tight text-gray-new-70 xl:text-xl md:text-lg">
+    <p className="mt-5 text-xl leading-snug tracking-tight text-gray-new-70 md:text-lg sm:text-base">
       {description}
     </p>
-    <div className="mt-4 flex items-center justify-between border-t border-[#303236] py-4">
+    <div className="mt-4 flex items-center justify-between gap-x-4 border-t border-[#303236] py-4 sm:flex-col sm:items-start sm:gap-y-3">
       <div className="group flex items-center gap-x-2.5">
         {authors.length === 1 ? (
           <Image

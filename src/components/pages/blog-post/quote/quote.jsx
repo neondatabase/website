@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { PropTypes } from 'prop-types';
 
 const Quote = ({ text, author, authorPosition, authorPhoto }) => (
-  <figure className="not-prose relative my-7 w-full border-l-2 border-green-44 pl-6 [&_a]:text-white [&_a]:underline [&_a]:decoration-white/40 [&_a]:decoration-dashed [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:decoration-white">
-    <blockquote className="font-mono text-xl font-normal leading-snug tracking-tighter text-white">
+  <figure className="not-prose relative my-8 w-full border-l-2 border-green-44 pl-6 [&_a]:text-white [&_a]:underline [&_a]:decoration-white/40 [&_a]:decoration-dashed [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:decoration-white">
+    <blockquote className="font-mono text-xl font-normal leading-snug tracking-tighter text-white md:text-lg sm:text-base">
       <span
         className="box-decoration-clone p-0.5 [&>strong]:bg-green-52/60 [&>strong]:font-normal"
         dangerouslySetInnerHTML={{ __html: text }}
