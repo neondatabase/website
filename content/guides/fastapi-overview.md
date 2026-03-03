@@ -378,7 +378,7 @@ You need to make sure that your `.env` file is not included in the Docker image.
 
 ## Performance Considerations
 
-1. **Database Indexing**: We've added indexes to frequently queried fields (`id`, `name`, `title`) in our models. This improves query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgres/indexes).
+1. **Database Indexing**: We've added indexes to frequently queried fields (`id`, `name`, `title`) in our models. This improves query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgresql/index-types).
 
 2. **Pagination**: The `read_speakers` and `read_talks` endpoints include `skip` and `limit` parameters for pagination, preventing the retrieval of unnecessarily large datasets.
 

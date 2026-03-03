@@ -6,6 +6,8 @@ summary: >-
   GiST, GIN, and BRIN, and provides guidance on creating and effectively using
   these indexes to optimize query performance.
 enableTableOfContents: true
+redirectFrom:
+  - /docs/postgres/indexes
 updatedOn: '2026-02-15T20:51:54.245Z'
 ---
 

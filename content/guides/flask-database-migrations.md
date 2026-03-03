@@ -271,7 +271,7 @@ The `age` column should now be renamed to `years_old` in your database. Remember
 
 ## Working with Indexes
 
-Adding indexes can improve query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgres/indexes).
+Adding indexes can improve query performance. To learn more about indexing, refer to the [Neon documentation](/docs/postgresql/index-types).
 
 Let's add an index to the `email` column.
 
