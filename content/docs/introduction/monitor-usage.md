@@ -2,9 +2,9 @@
 title: Monitor billing and usage
 subtitle: Where to see usage and costs in the Console and via the API
 summary: >-
-  Learn where to monitor usage and costs for your Neon account: the Billing and
-  Projects pages in the Console, and the consumption metrics API for
-  usage-based plans.
+  Learn where to monitor usage and costs for your Neon account: the Billing
+  page (account-level), Projects page (org-level), Project dashboard
+  (project-level), and the consumption metrics API for usage-based plans.
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
@@ -15,11 +15,11 @@ You can monitor usage and costs in the Neon Console or programmatically with the
 
 ## View usage in the Neon Console
 
-Neon exposes usage in two places: the **Billing** page (charges and plan summary) and the **Projects** page (org-level usage metrics).
+Neon exposes usage in three places in the Console: the **Billing** page (account-level charges and plan summary), the **Projects** page (org-level usage metrics), and the **Project dashboard** (project-level usage metrics when you are inside a project).
 
 ### Billing page
 
-From the **Billing** page (Organization → **Billing** in the Neon Console) you see this month's summary: current plan, included features, usage-based pricing, and **charges to date**. Invoice line items appear only when there is a charge for that metric.
+From the **Billing** page (Organization → **Billing** in the Neon Console) you see account-level information: this month's summary including current plan, included features, usage-based pricing, and **charges to date**. Invoice line items appear only when there is a charge for that metric.
 
 To open the Billing page:
 
@@ -29,7 +29,11 @@ To open the Billing page:
 
 ### Projects page
 
-From the **Projects** page (Organization → **Projects**) you see an org-level summary of four metrics: **Compute**, **Storage**, **History**, and **Network transfer**.
+From the **Projects** page (Organization → **Projects**) you see an org-level summary of four metrics across all projects: **Compute**, **Storage**, **History**, and **Network transfer**.
+
+### Project dashboard
+
+When you open a project, the **Project dashboard** (Project → **Dashboard**) shows the same four metrics for that project only: **Compute**, **Storage**, **History**, and **Network transfer**.
 
 - **History** is instant restore storage (the same as on your invoice).
 - **Network transfer** combines public and private transfer; private network transfer only applies if you use [Private Networking](/docs/guides/neon-private-networking).
