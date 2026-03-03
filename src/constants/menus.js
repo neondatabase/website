@@ -76,44 +76,39 @@ export default {
           title: 'Use cases',
           items: [
             {
-              title: 'Fast dev workflows',
-              to: `${LINKS.useCases}/fast-dev-workflows`,
-              description: 'Ship quickly & safely with less manual work',
+              title: 'Serverless App',
+              to: `${LINKS.useCases}/serverless-apps`,
+              description: 'Autoscale with traffic',
             },
             {
-              title: 'Variable traffic',
-              to: `${LINKS.useCases}/variable-load`,
-              description: 'Optimize compute performance & cost',
+              title: 'Multi-TB',
+              to: `${LINKS.useCases}/multi-tb`,
+              description: 'Scale and restore instantly',
             },
             {
-              title: 'Agents',
-              to: `${LINKS.useCases}/ai-agents`,
-              description: 'Build AI platforms that deploy full-stack apps',
-            },
-            {
-              title: 'Database per user',
-              to: `${LINKS.useCases}/database-per-user`,
-              description: 'Provision isolated Postgres at massive scale',
+              title: 'Database per tenant',
+              to: `${LINKS.useCases}/database-per-tenant`,
+              description: 'Data isolation without overhead',
             },
           ],
         },
         {
-          title: 'For teams',
+          title: 'Build & operate',
           items: [
             {
-              title: 'Startups',
-              to: LINKS.startups,
-              description: 'Build with Neon',
+              title: 'Platforms',
+              to: LINKS.platforms,
+              description: 'Offer Postgres for your users',
             },
             {
-              title: 'Security',
-              to: LINKS.security,
-              description: 'Compliance & privacy',
+              title: 'Dev/Tests',
+              to: `${LINKS.useCases}/dev-test`,
+              description: 'Production-like environment',
             },
             {
-              title: 'Case studies',
-              to: LINKS.caseStudies,
-              description: 'Explore customer stories',
+              title: 'Agents',
+              to: `${LINKS.useCases}/ai-agents`,
+              description: 'Build full-stack AI agents',
             },
           ],
         },
@@ -128,16 +123,41 @@ export default {
       to: LINKS.pricing,
     },
     {
-      text: 'Company',
+      text: 'Resources',
       sections: [
         {
-          title: 'Company',
+          title: 'Learn',
           items: [
             {
               title: 'Blog',
               to: LINKS.blog,
               description: 'Technical posts & product updates',
             },
+            {
+              title: 'Case studies',
+              to: LINKS.caseStudies,
+              description: 'Explore customer stories',
+            },
+            {
+              title: 'Changelog',
+              to: LINKS.changelog,
+              description: 'Product updates',
+            },
+            {
+              title: 'Community',
+              to: LINKS.discord,
+              description: 'Connect on Discord',
+            },
+            {
+              title: 'Startups',
+              to: LINKS.startups,
+              description: 'Build with Neon',
+            },
+          ],
+        },
+        {
+          title: 'Company',
+          items: [
             {
               title: 'About us',
               to: LINKS.aboutUs,
@@ -149,34 +169,19 @@ export default {
               description: 'Join the team',
             },
             {
-              title: 'Contact',
+              title: 'Contact sales',
               to: LINKS.contactSales,
-              description: 'Get in touch',
+              description: 'Contact sales team',
             },
-          ],
-        },
-        {
-          title: 'Resources',
-          items: [
             {
               title: 'Security',
               to: LINKS.security,
-              description: 'Security & compliance portal',
+              description: 'Compliance & privacy',
             },
             {
               title: 'Status',
               to: LINKS.status,
               description: 'Service status',
-            },
-            {
-              title: 'Changelog',
-              to: LINKS.changelog,
-              description: 'Product updates',
-            },
-            {
-              title: 'Community',
-              to: LINKS.discord,
-              description: 'Connect on Discord',
             },
           ],
         },
