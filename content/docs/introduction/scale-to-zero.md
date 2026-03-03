@@ -20,6 +20,8 @@ The diagram below illustrates the _Scale to Zero_ behavior alongside Neon's _Aut
 
 Neon compute scales to zero after an _inactive_ period of 5 minutes. For Neon Free plan users, this setting is fixed. Paid plan users can disable the scale-to-zero setting to maintain an always-active compute.
 
+When you use [logical replication](/docs/guides/logical-replication-guide) to replicate data **from** Neon (Neon as the publisher), a connected subscriber keeps your database in use, so the compute never becomes idle and will not scale to zero. This can lead to ongoing compute usage and higher costs. For details, see [Logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+
 <Admonition type="note">
 Scale to zero is only available for computes up to 16 CU in size. Computes larger than 16 CU remain always active to ensure best performance.
 </Admonition>

@@ -23,6 +23,10 @@ In this guide, we'll show you how to connect your Neon database to Bemi to creat
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
 
+<Admonition type="important" title="Compute and billing">
+Replicating data from Neon keeps your compute active while subscribers are connected, so your database will not [scale to zero](/docs/introduction/scale-to-zero) and you will have ongoing compute usage. This can significantly affect your monthly bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) for details.
+</Admonition>
+
 ## Enable logical replication in Neon
 
 Bemi tracks changes made in a Postgres database through Change Data Capture (CDC), which is a process of identifying and capturing changes made to your database tables in real-time. In Postgres, CDC is supported by the Postgres logical replication feature. In this step, we'll enable logical replication for your Neon Postgres project.
@@ -38,7 +42,7 @@ To enable logical replication in Neon:
 3. Select **Logical Replication**.
 4. Click **Enable** to enable logical replication.
 
-You can verify that logical replication is enabled by running the following query from the [[Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
+You can verify that logical replication is enabled by running the following query from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor):
 
 ```sql
 SHOW wal_level;
