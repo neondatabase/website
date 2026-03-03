@@ -14,10 +14,10 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className="h-[170px]">
+    <li className="relative h-[170px]">
       <Link
         className={clsx(
-          'group relative block size-full border-l border-t border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
+          'group absolute -left-px -top-px bottom-0 right-0 border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
         )}
         {...linkProps}
       >
@@ -124,7 +124,7 @@ const Cards = ({ items, categories }) => {
     >
       <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
         <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-5">
-          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] md:leading-tight sm:text-[28px]">
+          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] md:leading-tight sm:max-w-[430px] sm:text-[28px]">
             See how teams are building the next era of Postgres on Neon.
           </h2>
           <div className="hidden items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
@@ -187,7 +187,7 @@ const Cards = ({ items, categories }) => {
             </nav>
           </aside>
 
-          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 border-r border-b border-gray-new-20 lt:grid-cols-2 sm:grid-cols-1">
+          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 pl-px pt-px lt:grid-cols-2 sm:grid-cols-1">
             {filteredItems.map((item) => {
               const { id, title, caseStudyPost } = item;
               return <Card key={id} title={title} {...caseStudyPost} />;

@@ -92,16 +92,15 @@ const Hero = () => (
   <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
     <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
       <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[760px]">
-        <div className="flex items-end gap-2 md:gap-1.5">
+        <div className="flex items-end gap-2">
           <Image
             src={triangleIcon}
             alt=""
             width={12}
             height={14}
             aria-hidden="true"
-            className="md:h-2.5 md:w-2.5"
           />
-          <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 md:text-[0.625rem]">
+          <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80">
             Case studies
           </span>
         </div>
