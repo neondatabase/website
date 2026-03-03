@@ -9,7 +9,7 @@ enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.232Z'
 ---
 
-In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects, collaborate with team members, and (for paid plans) handle your billing.
+In Neon, all projects live within organizations. When you sign up, you automatically get a free organization for your first project. Organizations provide a central place to manage your projects and collaborate with team members. Paid plans also include billing management for your organization.
 
 ## About Neon Organizations
 
