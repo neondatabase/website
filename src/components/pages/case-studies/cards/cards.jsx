@@ -14,7 +14,7 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className="h-[170px] border-gray-new-20 last:border-r">
+    <li className="h-[170px]">
       <Link
         className={clsx(
           'group relative block size-full border-l border-t border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
@@ -123,17 +123,31 @@ const Cards = ({ items, categories }) => {
       id={activeCategory.slug}
     >
       <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
-        <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lt:text-[44px] lg:text-[40px] md:text-4xl md:leading-tight sm:text-3xl">
-          See how teams are building
-          <br className="sm:hidden" /> the next era of Postgres on Neon.
-        </h2>
+        <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-5">
+          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] md:leading-tight sm:text-[28px]">
+            See how teams are building the next era of Postgres on Neon.
+          </h2>
+          <div className="hidden items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
+            <div className="flex min-w-0 flex-1 items-center gap-2">
+              <SearchIcon className="h-[15px] w-[15px] shrink-0 text-gray-new-60" aria-hidden />
+              <input
+                type="search"
+                placeholder="Search stories..."
+                value={searchQuery}
+                className="min-w-0 flex-1 bg-transparent text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                aria-label="Search case studies"
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
 
         {/* Two-column: sidebar (256px) + cards grid */}
         <div className="mt-14 flex gap-16 lt:gap-12 lg:mt-12 lg:flex-col lg:gap-10 md:mt-9">
           {/* Sidebar: search + vertical categories */}
           <aside className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
             {/* Search bar */}
-            <div className="flex flex-wrap items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:w-full">
+            <div className="flex flex-wrap items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:hidden">
               <div className="flex min-w-0 flex-1 items-center gap-2">
                 <SearchIcon className="h-[15px] w-[15px] shrink-0 text-gray-new-60" aria-hidden />
                 <input
@@ -173,12 +187,7 @@ const Cards = ({ items, categories }) => {
             </nav>
           </aside>
 
-          <ul
-            className={clsx(
-              'grid min-w-0 flex-1 grid-cols-3 gap-0 lt:grid-cols-2 sm:grid-cols-1 [&>li:nth-child(3n)>a]:border-r [&>li:last-child>a]:border-b lt:[&>li:nth-child(odd)>a]:border-r-0 lt:[&>li:nth-child(even)>a]:border-r sm:[&>li>a]:border-r',
-              filteredItems.length % 3 !== 0 && '[&>li:nth-last-child(-n+3)>a]:border-b'
-            )}
-          >
+          <ul className="grid min-w-0 flex-1 grid-cols-3 gap-0 border-r border-b border-gray-new-20 lt:grid-cols-2 sm:grid-cols-1">
             {filteredItems.map((item) => {
               const { id, title, caseStudyPost } = item;
               return <Card key={id} title={title} {...caseStudyPost} />;

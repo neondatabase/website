@@ -105,7 +105,7 @@ const Hero = () => (
             Case studies
           </span>
         </div>
-        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white xl:text-[3.25rem] lt:text-[3rem] lg:text-[2.75rem] md:text-[2rem] sm:text-[1.75rem]">
+        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white lg:text-[48px] md:text-[40px] sm:text-[32px]">
           Real-world stories from teams running serverless Postgres at scale.
         </h1>
       </div>
