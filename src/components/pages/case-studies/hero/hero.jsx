@@ -44,7 +44,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
   <Link className="group" to={linkUrl}>
     <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30 sm:h-[340px]">
       <Image
-        className="absolute right-0 top-0"
+        className="absolute right-0 top-0 lg:max-w-[50%] lg:h-auto xs:hidden"
         src={background.src}
         width={background.width}
         height={background.height}
@@ -91,7 +91,7 @@ FeaturedCard.propTypes = {
 const Hero = () => (
   <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
     <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
-      <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[760px]">
+      <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[864px] lg:max-w-[640px] md:max-w-none">
         <div className="flex items-end gap-2">
           <Image
             src={triangleIcon}
@@ -104,7 +104,7 @@ const Hero = () => (
             Case studies
           </span>
         </div>
-        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white lg:text-[48px] md:text-[40px] sm:text-[32px]">
+        <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white lt:text-[54px] lg:text-[40px] md:text-[32px]">
           Real-world stories from teams running serverless Postgres at scale.
         </h1>
       </div>

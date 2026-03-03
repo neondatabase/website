@@ -24,6 +24,7 @@ const CaseStudiesPage = async () => {
         description="Get personalized guidance from our team — we’ll help you quickly find the right solution."
         buttonText="Talk to sales"
         buttonType="aiHelper"
+        copyWrapperClassName="lg:max-w-[667px] md:max-w-none"
       />
     </Layout>
   );
