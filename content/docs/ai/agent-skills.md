@@ -95,4 +95,3 @@ For example, ask your assistant to "set up Neon Auth in my Next.js app" and it w
 ## How it works
 
 Your AI assistant reads the `SKILL.md` file to understand what Neon guidance is available. When you ask about a specific topic, the skill fetches the relevant documentation from online, so your assistant always has up-to-date context without bundling everything locally. For the complete source, see the [Agent Skills repository](https://github.com/neondatabase/agent-skills).
-
