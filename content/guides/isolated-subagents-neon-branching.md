@@ -205,7 +205,7 @@ First, ensure the agents directory exists in your workspace:
 mkdir -p .claude/agents
 ```
 
-### Subagent 1: The feature developer
+### Subagent 1: The Feature developer
 
 This agent is designed to handle end-to-end feature creation. Create a new file at `.claude/agents/feature-developer.md` and add the following content:
 
@@ -234,7 +234,7 @@ Additionally, the `permissionMode` parameter specifies how the subagent handles 
 
 You can learn more about the different supported parameters in the [Claude Code subagents documentation](https://code.claude.com/docs/en/sub-agents#supported-frontmatter-fields).
 
-### Subagent 2: The data optimizer
+### Subagent 2: The Data optimizer
 
 This agent acts as a database specialist. You can reuse it anytime you encounter slow queries or technical debt that needs addressing. Create another file at `.claude/agents/data-optimizer.md`:
 
@@ -274,7 +274,7 @@ I have two tickets to build:
 Use subagents to complete the work in parallel.
 ```
 
-Hit enter. Claude Code evaluates the prompt, delegates the tasks to your reusable subagents based on their descriptions, and dispatches them to run in the background.
+Hit enter. Claude Code evaluates the prompt, delegates the tasks to your subagents based on their descriptions, and dispatches them to run in the background.
 
 ![Claude Code parallel subagents](/docs/guides/claude-code-parallel-subagents-example.png)
 
@@ -287,13 +287,13 @@ While your main terminal remains free for you to continue working, a sequence of
 | **Workspace**  | Git creates `.claude/worktrees/api-keys`    | Git creates `.claude/worktrees/optimize-feed`      |
 | **Hook Fires** | `post-checkout` hook runs                   | `post-checkout` hook runs                          |
 | **DB Branch**  | Neon creates branch `worktree-api-keys`     | Neon creates branch `worktree-optimize-feed`       |
-| **Config**     | Writes `.env` with new branch URL           | Writes `.env` with new branch URL                  |
+| **Config**     | Writes `.env` with new database branch URL  | Writes `.env` with new database branch URL         |
 | **Migration**  | Agent creates tables necessary for API keys | Agent identifies missing indexes on `UserActivity` |
 | **Testing**    | Agent seeds test keys & queries             | Agent tests refactored feed query                  |
 
 **Zero collisions:** Because Neon separates compute and storage using copy-on-write technology, branching takes less than a second. The `feature-developer` adding a new table does not conflict with the `data-optimizer` locking the `UserActivity` table to build an index. They operate in completely independent sandboxes, safely isolated from one another.
 
-You can verify this live by logging into your [Neon Console](https://console.neon.tech). You will instantly see your newly provisioned branches corresponding to each subagent's worktree.
+You can verify this live by logging into your [Neon Console](https://console.neon.tech). You will see your newly provisioned branches corresponding to each subagent's worktree.
 
 ![Neon Console branches](/docs/guides/claude-code-parallel-subagents-neon-branches.png)
 
@@ -339,7 +339,7 @@ In cases where changes overlap, Claude may prompt you to resolve merge conflicts
 
 You now have a workflow where AI agents can truly operate in parallel, breaking free from the bottlenecks of sequential development.
 
-The root problem of stateful isolation has been solved. By combining **Claude Code Subagents** with **Neon's instant Database Branching**, you eliminate the friction of shared infrastructure entirely. Instead of waiting for one agent to finish a task before starting the next, you can dispatch multiple agents simultaneously.
+The root problem of stateful isolation has been solved. By combining **Claude Code subagents** with **Neon's instant Database Branching**, you eliminate the friction of shared infrastructure entirely. Instead of waiting for one agent to finish a task before starting the next, you can dispatch multiple agents simultaneously.
 
 Every agent gets a safe, isolated sandbox where it can run migrations, drop tables, or refactor queries with zero risk of data corruption or code collisions. You simply define the roles, assign the tasks, and let your AI agents build in parallel, freeing you to focus on high-level architecture, strategy, and review.
 
