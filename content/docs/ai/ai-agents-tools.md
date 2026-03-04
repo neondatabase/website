@@ -54,18 +54,12 @@ Custom agents for GitHub Copilot that bring Neon's branching workflow directly i
 <a href="/docs/ai/ai-github-copilot-agents" description="Safe database migrations and query optimization using Neon branching" icon="github">Neon agents for GitHub Copilot</a>
 </DetailIconCards>
 
-## AI rules
+## Agent Skills
 
-For other AI tools like Cursor, use these individual `.mdc` context rule files. Copy them to your AI tool's custom rules directory; the format is tool-agnostic and works with any AI assistant that supports context rules.
+Give your AI assistant structured context about Neon's features, APIs, and best practices.
 
 <DetailIconCards>
-<a href="/docs/ai/ai-rules-neon-auth" description="AI rules for implementing authentication with Neon" icon="github">Neon Auth</a>
-<a href="/docs/ai/ai-rules-neon-drizzle" description="AI rules for using Drizzle ORM with Neon" icon="github">Neon Drizzle</a>
-<a href="/docs/ai/ai-rules-neon-serverless" description="AI rules for serverless database connections" icon="github">Neon Serverless Driver</a>
-<a href="/docs/ai/ai-rules-neon-typescript-sdk" description="AI rules for using the Neon API TypeScript SDK" icon="github">Neon API TypeScript SDK</a>
-<a href="/docs/ai/ai-rules-neon-python-sdk" description="AI rules for using the Neon Python SDK" icon="github">Neon Python SDK</a>
-<a href="/docs/ai/ai-rules-neon-api" description="AI rules for using the Neon API" icon="github">Neon API</a>
-<a href="/docs/ai/ai-rules-neon-toolkit" description="AI rules for using the Neon Toolkit" icon="github">Neon Toolkit</a>
+<a href="/docs/ai/agent-skills" description="Install Neon Agent Skills for accurate code suggestions covering Auth, Drizzle, serverless connections, APIs, and more" icon="github">Agent Skills</a>
 </DetailIconCards>
 
 ## Build AI agents

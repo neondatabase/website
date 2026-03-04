@@ -136,7 +136,7 @@ See existing handlers in the code for examples of each pattern.
 | ProgramForm | Hardcoded text for form types |
 
 **Shared content components** (load templates from `content/docs/shared-content/`):
-FeatureBeta, FeatureBetaProps (`{feature_name}`), AIRule (`{name}`), EarlyAccess, EarlyAccessProps, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing
+FeatureBeta, FeatureBetaProps (`{feature_name}`), EarlyAccess, EarlyAccessProps, AgentSkillsTip, MCPTools, LinkAPIKey, LRNotice, ComingSoon, PrivatePreview, PrivatePreviewEnquire, PublicPreview, LRBeta, MigrationAssistant, NextSteps, NewPricing
 
 **HTML elements**: `<a>` -> markdown link (wrapped in paragraph when block-level), `<details>/<summary>` -> preserved as HTML, `<p>` -> paragraph, `<br/>` -> preserved
 

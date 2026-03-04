@@ -222,17 +222,17 @@ Chat interface options component with a specific use case in the sidebar navigat
 
 Complex components for specialized functionality and workflows.
 
-### AIRule
+### AgentSkillsTip
 
-AI-powered rule component for automated documentation features.
+Shared tip admonition that links to the Agent Skills page with a customizable topic.
 
 ```mdx
-<AIRule name="Example Tool" />
+<AgentSkillsTip skill_topic="the Neon Serverless Driver, general connection advice," />
 ```
 
 **Live preview:**
 
-<AIRule name="Example Tool" />
+<AgentSkillsTip skill_topic="the Neon Serverless Driver, general connection advice," />
 
 ---
 
@@ -333,7 +333,7 @@ This guide covers specialized MDX components used in specific scenarios. Each co
 | **[Specialized Shared Components](#specialized-shared-components)** | [Feature Announcements](#feature-announcements), [EarlyAccessProps](#earlyaccessprops) | Feature status indicators             |
 | **[SDK Components](#sdk-components)**                               | [Getting Started](#getting-started), [SDK Type Components](#sdk-type-components)       | Auto-generated SDK documentation      |
 | **[Utility Components](#utility-components)**                       | [RequestForm](#requestform), [ChatOptions](#chatoptions)                               | Specialized UI elements               |
-| **[Specialized Components](#specialized-components)**               | [AIRule](#airule), [MCPTools](#mcptools), [NextSteps](#nextsteps)                      | Complex and specialized functionality |
+| **[Specialized Components](#specialized-components)**               | [AgentSkillsTip](#agentskillstip), [MCPTools](#mcptools), [NextSteps](#nextsteps)      | Complex and specialized functionality |
 | **[Community Components](#community-components)**                   | [CommunityBanner](#communitybanner)                                                    | Community engagement                  |
 
 For commonly used components, see the [Component Guide](/docs/community/component-guide).
