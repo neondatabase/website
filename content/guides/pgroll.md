@@ -119,7 +119,7 @@ Now that you understand the basics, let's dive into using `pgroll` for schema mi
 ### Prerequisites
 
 - **`pgroll` CLI installed**: Follow the [installation instructions](#step-1-installation) below.
-- **Neon Account and Project**: A Neon account and a project with a running Postgres database. You can create a free Neon account and project at [neon.new](https://neon.new).
+- **Neon Account and Project**: A Neon account and a project with a running Postgres database. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 
 ### Step 1: Installation
 
