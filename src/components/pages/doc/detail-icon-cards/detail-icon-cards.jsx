@@ -174,7 +174,7 @@ const DetailIconCards = ({ children = null, withNumbers = false, compact = false
   return (
     <ListComponent
       className={clsx(
-        'not-prose grid !p-0 sm:grid-cols-1',
+        'detail-icon-cards not-prose grid !p-0 sm:grid-cols-1',
         compact ? '!my-7 grid-cols-2 gap-3' : '!my-10 grid-cols-2 gap-5'
       )}
     >

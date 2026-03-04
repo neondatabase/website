@@ -70,8 +70,8 @@ const Item = ({
           'flex items-start gap-2 rounded-sm py-0 text-sm font-normal leading-snug tracking-extra-tight',
           'transition-colors duration-200',
           isActive
-            ? 'font-medium text-secondary-8 dark:text-white'
-            : 'text-gray-new-40 hover:text-black-new dark:text-gray-new-70 dark:hover:text-white',
+            ? 'text-black-pure dark:text-white'
+            : 'text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white',
           '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
         )}
         href={href}

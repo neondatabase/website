@@ -86,7 +86,7 @@ const DocCta = ({
   <figure
     className={clsx(
       'cta-on-doc doc-cta not-prose relative overflow-hidden',
-      isIntro ? 'my-12 p-5 md:my-8' : 'my-9 px-7 py-6',
+      isIntro ? 'my-11 p-5 md:my-8' : 'my-9 px-7 py-6',
       'border border-gray-new-80 bg-[rgba(228,241,235)]/40',
       'dark:border-gray-new-30 dark:bg-gray-new-10'
     )}

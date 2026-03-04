@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from 'components/shared/button';
 
 const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
-  <section className="not-prose relative my-10">
+  <section className="community-banner not-prose relative my-7">
     <div
       className={clsx(
         'relative flex min-h-[194px] items-center overflow-hidden border px-8 pb-7 pt-7 sm:px-6 sm:pb-6 sm:pt-6',

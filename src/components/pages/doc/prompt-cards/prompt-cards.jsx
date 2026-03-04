@@ -26,8 +26,8 @@ const PromptCards = ({ children = null, withToggler = false }) => {
     withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
 
   return (
-    <>
-      <ul className="not-prose !my-7 grid grid-cols-4 gap-5 !p-0 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
+    <div className="prompt-cards not-prose my-7">
+      <ul className="!my-0 grid grid-cols-4 gap-5 !p-0 lg:gap-3 md:grid-cols-3 sm:grid-cols-2">
         {displayedChildren.map((child, index) => {
           if (!child) return null;
 
@@ -71,7 +71,7 @@ const PromptCards = ({ children = null, withToggler = false }) => {
           </span>
         </button>
       )}
-    </>
+    </div>
   );
 };
 

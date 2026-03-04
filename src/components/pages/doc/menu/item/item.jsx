@@ -54,10 +54,10 @@ const Item = ({
         className={clsx(
           'group relative flex w-full gap-2 rounded-sm py-2 pr-1 text-left text-sm leading-tight tracking-extra-tight transition-colors duration-200',
           isActive && !items?.length
-            ? 'font-medium text-secondary-8 dark:text-primary-1'
-            : 'font-normal text-gray-new-40 hover:text-black-new dark:text-gray-new-80 dark:hover:text-white',
+            ? 'font-medium text-green-44 dark:text-green-52'
+            : 'font-normal text-gray-new-40 hover:text-black-pure dark:text-gray-new-70 dark:hover:text-white',
           isSubmenu &&
-            'before:absolute before:inset-y-0 before:-left-[13px] before:w-px before:bg-secondary-8 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-primary-1',
+            'before:absolute before:inset-y-0 before:-left-[13px] before:w-px before:bg-green-44 before:opacity-0 before:transition-opacity before:duration-200 dark:before:bg-green-52',
           isActive && isSubmenu && !items?.length && 'before:opacity-100'
         )}
         type={slug ? undefined : 'button'}
