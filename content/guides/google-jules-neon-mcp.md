@@ -24,7 +24,7 @@ To demonstrate, we’ll walk through a real example: asking Jules to implement a
 Before you begin, ensure you have the following:
 
 - **Google Jules account:** An active Google Jules account linked to your GitHub workspace. You can create one at [jules.google](https://jules.google).
-- **Neon account and project:** A Neon account with at least one active project. Sign up for a free account at [neon.new](https://neon.new).
+- **Neon account and project:** A Neon account with at least one active project. Sign up for a free [Neon account](https://console.neon.tech/signup) if you don't have one.
 - **Application repository using Neon:** A GitHub repository containing an application that uses your Neon project as its database. This is required because Google Jules integrates with your codebase through GitHub and needs access to your code to implement changes. Jules analyzes the repository and opens Pull requests directly. In this guide, we’ll use an example app called **SnippetHub**, but you can follow along with any of your own Neon-backed projects.
 - **Vercel account (optional):** Required for [automatic preview deployments](#optional-enable-automatic-preview-deployments). This allows you to instantly verify changes end-to-end in a live, production-like environment, providing zero-risk verification of Jules' work before merging.
 
