@@ -26,17 +26,17 @@ In the Console, these appear as **Public network transfer** and **Private networ
 
 ## What causes high network transfer?
 
-The following are common causes of increased network transfer in Neon.
+The following are common causes of increased network transfer in Neon. See [How to monitor](#how-to-monitor-network-transfer) to identify these patterns and [How to reduce](#how-to-reduce-network-transfer) for solutions.
 
-**Large query result sets.** Using `SELECT *`, fetching entire tables without `LIMIT`, or missing pagination sends more data than your application needs. ORM defaults can also pull more rows or columns than necessary. This includes queries against [read replicas](/docs/introduction/read-replicas), which pass through the same proxy and count toward network transfer.
+**Large query result sets.** Using `SELECT *`, fetching entire tables without `LIMIT`, missing pagination, or joins that unintentionally multiply rows sends more data than your application needs. ORM defaults can also pull more rows or columns than necessary. This includes queries against [read replicas](/docs/introduction/read-replicas), which pass through the same proxy and count toward network transfer.
 
 **High-frequency repeated queries.** Querying the database on every page render or API request without caching transfers the same data repeatedly. This is common in serverless environments where each invocation starts fresh. Check the `calls` column in `pg_stat_statements` to spot these patterns (see [Diagnosing a spike](#diagnosing-a-spike)).
 
-**Database exports (pg_dump).** Full database dumps transfer the entire database over the network. Running frequent scheduled dumps multiplies the total.
+**Database exports (pg_dump).** Full database dumps transfer the entire database over the network. Running frequent scheduled dumps multiplies the total. Compression flags like `-Fc` do not reduce the data sent from Neon because compression happens client-side after transfer.
 
 **Logical replication.** Replicating data to external destinations produces a continuous outbound stream. Initial table syncs can create large one-time spikes.
 
-**Log export.** Sending Postgres logs to [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), or [OpenTelemetry](/docs/guides/opentelemetry) collectors counts toward network transfer. Logs contain metadata about operations rather than row data itself, so log export typically contributes less than query results, database exports, or replication.
+**Log export.** Sending Postgres logs to [Datadog](/docs/guides/datadog), [Grafana Cloud](/docs/guides/grafana-cloud), or [OpenTelemetry](/docs/guides/opentelemetry) collectors counts toward network transfer. Logs contain metadata rather than row data, so the volume is typically small relative to other causes.
 
 ## How to monitor network transfer
 
@@ -44,9 +44,11 @@ The following are common causes of increased network transfer in Neon.
 The Billing page only displays network transfer when usage exceeds the included allowance. To track usage before it results in charges, check the usage panel on the Organization or Project dashboard, or use the Consumption API.
 </Admonition>
 
+Paid plans receive a weekly usage report by email that includes network transfer usage and cost.
+
 ### Console organization page
 
-The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Individual project dashboards also show network transfer for that project.
+The usage panel on the organization **Projects** page always displays current network transfer usage across all projects. Individual project dashboards show network transfer for that project.
 
 ![Organization page usage panel showing network transfer](/docs/introduction/dashboard_org_usage.png)
 
@@ -184,7 +186,7 @@ The response includes `data_transfer_bytes` in the branch object:
 
 ### Diagnosing a spike
 
-Neon does not provide per-query or per-connection network transfer breakdowns. To identify the source of a spike, use `hourly` granularity from the Consumption API to narrow down the time window, then correlate it with known operations: scheduled `pg_dump` jobs, logical replication initial syncs, application deployments, or changes to query patterns. If you have multiple projects, compare per-project hourly data to isolate which project is responsible. On the Free plan, compare `data_transfer_bytes` across branches using the branch detail API to identify which branch contributes the most.
+Neon does not provide per-query or per-connection network transfer breakdowns. To identify the source of a spike, use `hourly` granularity from the Consumption API to narrow down the time window, then correlate it with known operations: scheduled `pg_dump` jobs, logical replication initial syncs, application deployments, or changes to query patterns. If you have multiple projects, compare per-project hourly data to isolate which project is responsible. On the Free plan, compare `data_transfer_bytes` across branches using the branch detail API to identify which branch contributes the most. Once you identify the branch, connect to it and run the `pg_stat_statements` query above to find the top queries.
 
 To find which queries return the most rows, use the [`pg_stat_statements`](/docs/extensions/pg_stat_statements) extension. The `rows` column is not an exact byte count, but queries returning many rows or wide rows (TEXT, JSONB, BYTEA columns) are the most likely contributors to high network transfer.
 
@@ -205,7 +207,7 @@ For wire-level analysis of exact message sizes, see [Elephantshark](https://neon
 
 For broader cost reduction strategies across all billing metrics, see [Cost optimization](/docs/introduction/cost-optimization).
 
-**Optimize query results.** Select only the columns you need. Use pagination (`LIMIT`/`OFFSET` or cursor-based) instead of fetching all rows at once. Use server-side aggregations to reduce the volume of data returned to your application.
+**Optimize query results.** Select only the columns you need. Use pagination (`LIMIT`/`OFFSET` or cursor-based) instead of fetching all rows at once. Use SQL aggregations (`SUM`, `COUNT`, `GROUP BY`) to summarize data in the database rather than returning raw rows to your application.
 
 **Reduce pg_dump frequency.** Use [Neon snapshots](/docs/guides/backup-restore) with [scheduled backups](/docs/guides/backup-restore#create-backup-schedules) as a backup alternative that keeps data within Neon. Reserve `pg_dump` for migrations or situations that require an external copy. When you do run `pg_dump`, use `-t` to dump only specific tables, `--exclude-table` to skip large ones, or `--schema-only` if you only need the schema. Note that compression flags (`-Fc`, `-Z`) compress the output file on the client after the data has already been sent from Neon, so they do not reduce your billed network transfer.
 
@@ -219,10 +221,6 @@ Building a platform on Neon? You can cap per-project network transfer with [cons
 
 ## References
 
-- [Cost optimization](/docs/introduction/cost-optimization): Broader cost reduction strategies
-- [Monitor billing and usage](/docs/introduction/monitor-usage): Console billing metrics
-- [Querying consumption metrics](/docs/guides/consumption-metrics): Consumption API details and examples
-- [Backup and restore](/docs/guides/backup-restore): Neon snapshots as a pg_dump alternative
-- [Private Networking](/docs/guides/neon-private-networking): AWS PrivateLink setup
-- [Metrics and logs](/docs/reference/metrics-logs): Log export and its network transfer impact
-- [Building a Usage Dashboard with Neon's Consumption API](/guides/usage-dashboard-consumption-api): Full example app using the Consumption API
+- [Cost optimization](/docs/introduction/cost-optimization): Broader cost reduction strategies across all billing metrics
+- [Querying consumption metrics](/docs/guides/consumption-metrics): Full API reference with pagination, polling, and error handling
+- [Building a Usage Dashboard with Neon's Consumption API](/guides/usage-dashboard-consumption-api): Example app for visualizing usage metrics
