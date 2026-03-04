@@ -153,6 +153,11 @@
       }
     }
 
+    kbd {
+      @apply inline-block rounded border border-gray-new-30 bg-gray-new-15 px-1.5 py-0.5 font-mono text-sm font-normal leading-none text-gray-new-80;
+      box-shadow: 0 2px 0 theme('colors.gray-new.20');
+    }
+
     .code-wrap {
       code {
         white-space: break-spaces !important;
