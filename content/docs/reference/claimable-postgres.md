@@ -9,7 +9,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/neon-launchpad
   - /docs/reference/instagres
-updatedOn: '2026-03-04T17:19:56.561Z'
+updatedOn: '2026-03-04T20:15:14.444Z'
 ---
 
 Claimable Postgres gives you an instant Postgres database with a single API call. No account required.
