@@ -59,28 +59,28 @@ Add a `.env` file to your project directory and add your Neon connection string 
 DATABASE_URL="postgresql://<user>:<password>@<endpoint_hostname>.neon.tech:<port>/<dbname>?sslmode=require&channel_binding=require"
 ```
 
-If you haven't created a database yet, run the following command to generate a [Claimable Postgres by Neon database](https://neon.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
+If you haven't created a database yet, run the following command to generate a [Claimable Postgres by Neon database](https://pg.new/). It will spin up a database instance that you can use for 72 hours, or claim to keep forever.
 
 <CodeTabs labels={["npm", "yarn", "pnpm", "bun", "deno"]}>
 
 ```bash
-  npm neon-new
+  npm get-db
 ```
 
 ```bash
-  yarn dlx neon-new
+  yarn dlx get-db
 ```
 
 ```bash
-  pnpm neon-new
+  pnpm get-db
 ```
 
 ```bash
-  bunx neon-new
+  bunx get-db
 ```
 
 ```bash
-  deno run -A neon-new
+  deno run -A get-db
 ```
 
 </CodeTabs>

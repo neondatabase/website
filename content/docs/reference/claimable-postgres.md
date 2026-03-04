@@ -16,7 +16,7 @@ Claimable Postgres gives you an instant Postgres database with a single API call
 
 Your database expires after 72 hours unless you claim it to your Neon account. Databases are provisioned on AWS us-east-2 running Postgres 17.
 
-Access it at [neon.new](https://neon.new/).
+Access it at [pg.new](https://pg.new/).
 
 ## Quick start
 
@@ -25,7 +25,7 @@ Access it at [neon.new](https://neon.new/).
 <TabItem>
 
 ```bash
-curl -X POST https://neon.new/api/v1/database \
+curl -X POST https://pg.new/api/v1/database \
   -H 'Content-Type: application/json' \
   -d '{"ref": "your-app-name"}'
 ```
@@ -38,7 +38,7 @@ Example response:
   "status": "UNCLAIMED",
   "neon_project_id": "cool-breeze-12345678",
   "connection_string": "postgresql://neondb_owner:npg_xxxx@ep-cool-breeze-pooler...",
-  "claim_url": "https://neon.new/claim/01abc123-def4-5678-9abc-def012345678",
+  "claim_url": "https://pg.new/claim/01abc123-def4-5678-9abc-def012345678",
   "expires_at": "2026-02-01T12:00:00.000Z",
   "created_at": "2026-01-29T12:00:00.000Z",
   "updated_at": "2026-01-29T12:00:00.000Z"
@@ -52,7 +52,7 @@ See [API reference](#api) for details.
 <TabItem>
 
 ```bash
-npx neon-new --yes
+npx get-db --yes
 ```
 
 Writes to your `.env` file (partial output):
@@ -95,7 +95,7 @@ After claiming, the database appears in your Neon console with expiration remove
 
 The Claimable Postgres API provides programmatic database provisioning. No authentication required.
 
-**Base URL:** `https://neon.new/api/v1`
+**Base URL:** `https://pg.new/api/v1`
 
 ### Create database
 
@@ -143,33 +143,33 @@ Returns the same response schema.
 
 ## Command-line interface
 
-The `neon-new` CLI creates a database and writes credentials to your `.env` file:
+The `get-db` CLI creates a database and writes credentials to your `.env` file:
 
 <Tabs labels={["npx", "yarn", "pnpm", "bunx", "deno"]}>
 
 <TabItem>
 ```bash
-npx neon-new
+npx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-yarn dlx neon-new
+yarn dlx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-pnpm dlx neon-new
+pnpm dlx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-bunx neon-new
+bunx get-db
 ```
 </TabItem>
 <TabItem>
 ```bash
-deno run -A neon-new
+deno run -A get-db
 ```
 </TabItem>
 </Tabs>
@@ -194,20 +194,20 @@ DATABASE_URL=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4-
 DATABASE_URL_DIRECT=postgresql://neondb_owner:npg_xxxxxxxxxxxx@ep-cool-breeze-a1b2c3d4.c-2.us-east-2.aws.neon.tech/neondb?channel_binding=require&sslmode=require
 # Claimable DB expires at: Sat, 01 Feb 2026 12:00:00 GMT
 # Claim it now to your account using the link below:
-PUBLIC_POSTGRES_CLAIM_URL=https://neon.new/claim/01abc123-def4-5678-9abc-def012345678
+PUBLIC_POSTGRES_CLAIM_URL=https://pg.new/claim/01abc123-def4-5678-9abc-def012345678
 ```
 
 - `DATABASE_URL` is a pooled connection (hostname contains `-pooler`). Use this for application queries.
 - `DATABASE_URL_DIRECT` is a direct connection (no pooler). Use this for migrations (e.g. Prisma).
 
-To claim, visit the URL in the comments above or run `npx neon-new claim` to open it in your browser.
+To claim, visit the URL in the comments above or run `npx get-db claim` to open it in your browser.
 
 ## SDK
 
-The `neon-new` package also exports an SDK for programmatic provisioning in Node.js scripts:
+The `get-db` package also exports an SDK for programmatic provisioning in Node.js scripts:
 
 ```javascript
-import { instantPostgres } from 'neon-new';
+import { instantPostgres } from 'get-db';
 
 const { databaseUrl, databaseUrlDirect, claimUrl, claimExpiresAt } = await instantPostgres({
   referrer: 'your-app-name',
@@ -234,14 +234,14 @@ const result = await instantPostgres({
 
 ## Vite plugin
 
-Add automatic database provisioning to Vite projects with `vite-plugin-neon-new`:
+Add automatic database provisioning to Vite projects with `vite-plugin-db`:
 
 ```bash
-npm install -D vite-plugin-neon-new
+npm install -D vite-plugin-db
 ```
 
 ```js
-import { postgres } from 'vite-plugin-neon-new';
+import { postgres } from 'vite-plugin-db';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -271,7 +271,7 @@ postgres({
 
 ## Resources
 
-- [Claimable Postgres website](https://neon.new/)
-- [neon-new CLI on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/neon-new)
-- [Vite Plugin on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-neon-new)
+- [Claimable Postgres website](https://pg.new/)
+- [get-db CLI on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/get-db)
+- [Vite Plugin on GitHub](https://github.com/neondatabase/neondb-cli/tree/main/packages/vite-plugin-db)
 - [Claimable database integration](/docs/workflows/claimable-database-integration) (build your own claimable Postgres experience)
