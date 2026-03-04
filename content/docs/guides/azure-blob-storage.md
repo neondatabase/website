@@ -5,7 +5,7 @@ summary: >-
   Step-by-step guide for integrating Azure Blob Storage with Neon to store files
   and track their metadata in the Neon database.
 enableTableOfContents: true
-updatedOn: '2026-02-17T17:13:56.576Z'
+updatedOn: '2026-03-04T15:52:43.559Z'
 ---
 
 [Azure Blob Storage](https://azure.microsoft.com/en-us/services/storage/blobs/) is Microsoft's object storage solution for the cloud. It's optimized for storing massive amounts of unstructured data, such as text or binary data, including images, documents, streaming media, and archive data.
