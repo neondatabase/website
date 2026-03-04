@@ -1,31 +1,26 @@
-import Image from 'next/image';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import Button from 'components/shared/button';
 
-import discordLogo from './images/discord.png';
-import discourseLogo from './images/discourse.png';
-import ellipse from './images/ellipse.svg';
-
-const logos = {
-  discourse: discourseLogo,
-  discord: discordLogo,
-};
-
-const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
+const CommunityBanner = ({ buttonText, buttonUrl, children = null }) => (
   <section className="not-prose relative my-10">
-    <span className="absolute -inset-px block rounded-[10px] bg-[linear-gradient(90deg,rgba(48,50,54,1)50%,rgba(0,229,153,0.4)100%)]" />
-    <span className="absolute -top-px right-1.5 h-px w-[28%] bg-[radial-gradient(circle,rgba(0,229,153,0.7)0%,rgba(0,229,153,0.05)100%)] sm:hidden" />
-    <div className="relative flex items-center overflow-hidden rounded-[10px] bg-[#0A0A0A] p-8 sm:p-6">
-      <div>
-        <h2 className="!my-0 max-w-[334px] text-[26px] font-semibold leading-dense tracking-extra-tight text-white xs:text-2xl">
+    <div
+      className={clsx(
+        'relative flex min-h-[194px] items-center overflow-hidden border px-8 pb-7 pt-7 sm:px-6 sm:pb-6 sm:pt-6',
+        'border-gray-new-80 bg-[rgba(228,241,235,0.4)]',
+        'dark:border-gray-new-30 dark:bg-gray-new-10'
+      )}
+    >
+      <div className="relative z-10 flex max-w-[287px] flex-col gap-6">
+        <h2 className="text-[28px] font-normal leading-tight tracking-tighter text-black-pure dark:text-white xs:text-2xl">
           {children}
         </h2>
         <Button
-          className="mt-5 !px-5 !py-2.5 !font-semibold !text-black-new hover:bg-[#00e5bf]"
+          className="max-w-[166px] !rounded-[33px] !px-7 !py-3.5 !text-base !font-medium !leading-none !tracking-tighter"
           to={buttonUrl}
           size="xs"
-          theme="primary"
+          theme="white-filled-multi"
           target="_blank"
           rel="noopener noreferrer"
           tagName="CommunityBanner"
@@ -33,22 +28,24 @@ const CommunityBanner = ({ buttonText, buttonUrl, children = null, logo }) => (
           {buttonText}
         </Button>
       </div>
-      <img
-        className="absolute right-0 top-0 !my-0 h-full md:hidden"
-        src={ellipse}
-        alt=""
-        width={324}
-        height={180}
-        loading="lazy"
+      {/* Blurred ellipse glow — Figma: dark rgba(79,232,176,0.3) blur 120px, light rgba(57,165,125,0.5) blur 120px */}
+      <div
+        className="pointer-events-none absolute right-0 top-1/2 h-[307px] w-[272px] -translate-y-1/2 rounded-full dark:hidden"
+        style={{
+          background: 'rgba(57, 165, 125, 0.5)',
+          filter: 'blur(120px)',
+        }}
+        aria-hidden
       />
-      <Image
-        className="absolute right-0 top-0 !my-0 h-full w-auto [@media(max-width:500px)]:hidden"
-        src={logos[logo]}
-        alt=""
-        width={280}
-        height={180}
-        quality={90}
+      <div
+        className="pointer-events-none absolute right-0 top-1/2 hidden h-[307px] w-[272px] -translate-y-1/2 rounded-full dark:block"
+        style={{
+          background: 'rgba(79, 232, 176, 0.3)',
+          filter: 'blur(120px)',
+        }}
+        aria-hidden
       />
+      <span className="absolute inset-0 h-full bg-[url('/docs/community-banner/discord-light.png')] bg-contain bg-right bg-no-repeat dark:bg-[url('/docs/community-banner/discord-dark.png')] 2xl:[background-position:calc(100%+40px)_50%] xl:bg-right md:[background-position:calc(100%+80px)_50%] sm:hidden" />
     </div>
   </section>
 );
@@ -57,7 +54,6 @@ CommunityBanner.propTypes = {
   children: PropTypes.node,
   buttonText: PropTypes.string.isRequired,
   buttonUrl: PropTypes.string.isRequired,
-  logo: PropTypes.oneOf(Object.keys(logos)).isRequired,
 };
 
 export default CommunityBanner;

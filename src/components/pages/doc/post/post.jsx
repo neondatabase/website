@@ -107,7 +107,7 @@ const Post = ({
 
           {!isChangelog && (
             <NavigationLinks
-              className="mt-6"
+              className={clsx(isDocsIndex ? 'mt-14' : 'mt-6')}
               previousLink={previousLink}
               nextLink={nextLink}
               basePath={navigationLinksBasePath}
