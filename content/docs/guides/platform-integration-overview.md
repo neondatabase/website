@@ -77,7 +77,7 @@ Use this approach when you want to create databases for your users without requi
 
 - [TanStack](https://neon.com/blog/neon-joins-tanstack-instant-postgres-integration-for-faster-javascript-development): Official database partner offering instant Postgres through their Vite plugin and create-tanstack CLI
 - [Netlify DB](https://www.netlify.com/blog/netlify-db-database-for-ai-native-development/): One-click Postgres databases for Netlify projects, built on the claimable database flow
-- [Claimable Postgres by Neon](https://neon.new/): Try instant Postgres provisioning without signup using `npx neon-new` or at [neon.new](https://neon.new/)
+- [Claimable Postgres by Neon](https://pg.new/): Try instant Postgres provisioning without signup using `npx get-db` or at [pg.new](https://pg.new/)
 
 <DetailIconCards>
 

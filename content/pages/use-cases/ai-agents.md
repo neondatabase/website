@@ -104,4 +104,4 @@ For instructions on using the Neon API to provision and manage backends on behal
 
 To learn more about the Agent Plan, [see the details on this page](https://neon.com/programs/agents#agent-plan-pricing) or [fill out the application form directly, at the top of this page](#agent-form).
 
-<CTA title="Prefer a claimable flow?" description="You can also allow your end-users to deploy a Neon database in seconds, use it immediately via connection string, claim it later." theme="column" buttonText="Explore this route" buttonUrl="https://neon.new/" linkText="See a case study" linkUrl="https://neon.com/blog/netlify-db-powered-by-neon" />
+<CTA title="Prefer a claimable flow?" description="You can also allow your end-users to deploy a Neon database in seconds, use it immediately via connection string, claim it later." theme="column" buttonText="Explore this route" buttonUrl="https://pg.new/" linkText="See a case study" linkUrl="https://neon.com/blog/netlify-db-powered-by-neon" />
