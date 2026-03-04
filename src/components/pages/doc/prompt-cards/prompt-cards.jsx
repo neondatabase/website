@@ -12,6 +12,8 @@ import ChevronRight from 'icons/chevron-right-sm.inline.svg';
 import CopyIcon from 'icons/home/copy.inline.svg';
 import sendGtagEvent from 'utils/send-gtag-event';
 
+const CARDS_TO_SHOW = 12;
+
 const PromptCards = ({ children = null, withToggler = false }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +22,8 @@ const PromptCards = ({ children = null, withToggler = false }) => {
   };
 
   const childrenArray = React.Children.toArray(children).filter(Boolean);
-  const displayedChildren = withToggler && !isOpen ? childrenArray.slice(0, 10) : childrenArray;
+  const displayedChildren =
+    withToggler && !isOpen ? childrenArray.slice(0, CARDS_TO_SHOW) : childrenArray;
 
   return (
     <>
