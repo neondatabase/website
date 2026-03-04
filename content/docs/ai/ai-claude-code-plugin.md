@@ -27,15 +27,8 @@ Once installed, the plugin gives Claude the ability to:
 
 The plugin contains:
 
-- **Claude Skills** for guided Neon workflows
+- **The `neon-postgres` skill** for guided Neon workflows, covering getting started, connections, Neon Auth, the Data API, platform SDKs, and developer tools
 - **An MCP server integration** that connects Claude to Neon's APIs
-
-### Included Skills
-
-| Skill                  | Description                                                                                                                                                                         |
-| :--------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **neon-postgres**       | The main Neon development skill. Covers getting started, connections, Drizzle ORM, Neon Auth, the Data API, platform SDKs, and developer tools like the CLI and MCP server.        |
-| **claimable-postgres**  | Provides workflows for creating disposable, temporary Postgres databases for prototyping, testing, and demos.                                                                      |
 
 ## How it works
 
