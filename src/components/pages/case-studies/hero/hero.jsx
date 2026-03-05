@@ -91,7 +91,7 @@ FeaturedCard.propTypes = {
 const Hero = () => (
   <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
     <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
-      <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[864px] lg:max-w-[640px] md:max-w-none">
+      <div className="flex max-w-[960px] flex-col gap-5 lt:max-w-[864px] lg:max-w-[640px] md:max-w-none">
         <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
