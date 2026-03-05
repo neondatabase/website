@@ -106,7 +106,7 @@ const Hero = () => (
           </span>
         </div>
         <h1 className="text-[3.5rem] font-normal leading-[1.125] tracking-[-0.04em] text-white lt:text-[54px] lg:text-[40px] md:text-[32px]">
-          Real-world stories from teams running serverless Postgres at scale.
+          Real-world stories from teams shipping world-class products on Neon.
         </h1>
       </div>
 
