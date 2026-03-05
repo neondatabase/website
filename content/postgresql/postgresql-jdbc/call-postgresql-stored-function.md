@@ -18,7 +18,7 @@ nextLink:
 
 ## Calling a built\-in stored function example
 
-We will call a built\-in string function [`initcap()`](../postgresql-string-functions/postgresql-letter-case-functions) that capitalizes the first letter of each word in a string.
+We will call a built\-in string function [`initcap()`](../postgresql-string-functions/postgresql-initcap) that capitalizes the first letter of each word in a string.
 
 To call the `initcap()` function, you follow these steps:
 
