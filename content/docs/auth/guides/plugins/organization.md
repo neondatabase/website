@@ -46,7 +46,7 @@ Open your project in the Neon Console, then go to **Auth** > **Configuration** >
 ![Auth Configuration > Organizations in the Neon Console](/docs/auth/console-auth-organizations-config.png)
 
 - **Enable Organizations** (toggle): Turn the Organization plugin on or off for the branch. When off, all organization API calls are disabled and return an error.
-- **Limit:** Maximum number of organizations a user can create (default: 10 per user).
+- **Limit:** Maximum total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10.
 - **Membership Limit:** Maximum number of members per organization (default: 100).
 - **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
 - **Send Invitation Email** (toggle): When on, invited users receive an email with an accept link. This requires **Verify email at signup** to be enabled in the Authentication configuration. Accepting the invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route that handles `/auth/accept-invitation?invitationId=<INV_ID>` in your application. When off, no email is sent and you handle invitations in your app (for example, via the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations)).
@@ -118,7 +118,7 @@ Example response:
 | Field                   | Type                        | Description                                                                                                       |
 | :---------------------- | :-------------------------- | :---------------------------------------------------------------------------------------------------------------- |
 | `enabled`               | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error.    |
-| `organization_limit`    | number (≥ 1)                | Max organizations a user can create. Default: 10.                                                                 |
+| `organization_limit`    | number (≥ 1)                | Max total organization memberships (created + joined) per user. Once reached, the user cannot create new organizations. Default: 10. |
 | `membership_limit`      | number (≥ 1)                | Max members per organization. Default: 100.                                                                       |
 | `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.    |
 | `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false. |
