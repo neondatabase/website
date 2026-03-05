@@ -1,13 +1,14 @@
 ---
 title: Manage Neon Auth via the API
-subtitle: Enable, configure, and disable Neon Auth using the Neon API
+subtitle: 'Enable, configure, and disable Neon Auth using the Neon API'
 summary: >-
-  How to enable, retrieve, and disable Neon Auth on a branch using the Neon
-  REST API, including curl examples and response reference.
+  How to enable, retrieve, and disable Neon Auth on a branch using the Neon REST
+  API, including curl examples and response reference.
 enableTableOfContents: true
 redirectFrom:
   - /docs/neon-auth/api
   - /docs/guides/neon-auth-api
+updatedOn: '2026-03-05T14:07:19.743Z'
 ---
 
 <FeatureBetaProps feature_name="Neon Auth with Better Auth" />
