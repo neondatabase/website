@@ -63,8 +63,8 @@ const CodeBlockWrapper = ({
       {...otherProps}
     >
       {filename && (
-        <div className="bg-grey-15 flex items-center justify-between gap-3 border-b border-gray-new-90 px-4 py-3.5 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
-          <span className="truncate">{filename}</span>
+        <div className="bg-grey-15 flex h-11 items-center justify-between gap-3 truncate border-b border-gray-new-90 px-4 text-[13px] font-medium leading-none tracking-tight text-gray-new-40 dark:border-gray-new-20 dark:bg-gray-new-8 dark:text-gray-new-60">
+          {filename}
         </div>
       )}
       {children}

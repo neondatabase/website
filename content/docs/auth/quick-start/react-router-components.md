@@ -37,9 +37,9 @@ You can then find your Auth URL on the Configuration tab. Copy this URL - you'll
 Create a React app using Vite with TypeScript.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm create vite@latest my-app -- --template react-ts
 ```
 
@@ -52,9 +52,9 @@ npm create vite@latest my-app -- --template react-ts
 Install the Neon SDK, UI components, and React Router:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 cd my-app
 npm install @neondatabase/neon-js@latest react-router-dom
 ```
@@ -72,9 +72,9 @@ Replace the URL with your actual Auth URL from the Neon Console.
 </Admonition>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label=".env">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename=".env"
 VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 ```
 
@@ -87,9 +87,9 @@ VITE_NEON_AUTH_URL=https://ep-xxx.neonauth.us-east-1.aws.neon.tech/neondb/auth
 Create a `src/auth.ts` file to configure your auth client:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/auth.ts">
+<TwoColumnLayout.Block>
 
-```typescript
+```typescript filename="src/auth.ts"
 import { createAuthClient } from '@neondatabase/neon-js/auth';
 
 export const authClient = createAuthClient(import.meta.env.VITE_NEON_AUTH_URL);
@@ -126,9 +126,9 @@ To learn more about applying styles to the Auth UI components, including plain C
 </details>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/main.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="src/main.tsx"
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
@@ -162,9 +162,9 @@ Replace the contents of `src/App.tsx` with routes for authentication and account
 </ul>
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="src/App.tsx">
+<TwoColumnLayout.Block>
 
-```tsx
+```tsx filename="src/App.tsx"
 import { Routes, Route, useParams } from 'react-router-dom';
 import {
   AuthView,
@@ -254,9 +254,9 @@ export default function App() {
 Start the development server, then open [http://localhost:5173](http://localhost:5173). You'll be redirected to the sign-in page where you can sign up or sign in.
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="Terminal">
+<TwoColumnLayout.Block>
 
-```bash
+```bash filename="Terminal"
 npm run dev
 ```
 
@@ -271,9 +271,9 @@ As users sign up, their profiles are synced to your Neon database in the `neon_a
 Query your users table in the SQL Editor to see your new users:
 
 </TwoColumnLayout.Block>
-<TwoColumnLayout.Block label="SQL Editor">
+<TwoColumnLayout.Block>
 
-```sql
+```sql filename="SQL Editor"
 SELECT * FROM neon_auth.user;
 ```
 
