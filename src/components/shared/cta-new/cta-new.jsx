@@ -43,8 +43,13 @@ const CTANew = ({
             copyWrapperClassName
           )}
         >
-          <h2 className="text-white sm:inline" dangerouslySetInnerHTML={{ __html: title }} />
-          {description && <p className="text-gray-new-50 sm:inline">{description}</p>}
+          <h2 className="text-white md:inline" dangerouslySetInnerHTML={{ __html: title }} />
+          {description && (
+            <>
+              {' '}
+              <p className="text-gray-new-50 md:inline">{description}</p>
+            </>
+          )}
         </div>
         {buttonType === 'aiHelper' ? (
           <ButtonAiHelper className="mt-10 lg:mt-8" {...CONTACT_SALES_AI_SETTINGS}>

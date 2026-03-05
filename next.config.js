@@ -638,11 +638,7 @@ const defaultConfig = {
     fileLoaderRule.exclude = /\.svg$/i;
 
     config.module.rules.push({
-      test: (filePath) => {
-        const fileName = filePath.split('/').pop();
-
-        return fileName === 'rive.wasm';
-      },
+      test: /rive\.wasm$/,
       type: 'asset/resource',
       generator: {
         filename: 'static/[name].[hash][ext]',
