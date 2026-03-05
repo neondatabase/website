@@ -6,7 +6,7 @@ export default {
       text: 'Product',
       sections: [
         {
-          title: 'Database Features',
+          title: 'Database',
           items: [
             {
               title: 'Autoscaling',
