@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Link from 'components/shared/link/link';
+import chevronIcon from 'icons/chevron-red.svg';
 
 import AChart from './images/a-chart.inline.svg';
 import AppStore from './images/app-store.inline.svg';
@@ -21,7 +22,6 @@ import Cards from './images/cards.inline.svg';
 import ChartBar from './images/chart-bar.inline.svg';
 import Check from './images/check.inline.svg';
 import Cheque from './images/cheque.inline.svg';
-import chevronIcon from './images/chevron.svg';
 import CliCursor from './images/cli-cursor.inline.svg';
 import CLI from './images/cli.inline.svg';
 import Code from './images/code.inline.svg';

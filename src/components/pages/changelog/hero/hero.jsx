@@ -12,23 +12,23 @@ const Hero = ({ className = null, withContainer = false }) => {
   const Tag = withContainer ? Container : 'div';
 
   return (
-    <div className={className}>
+    <div className={clsx('changelog-hero mt-10 text-black-pure dark:text-white', className)}>
       <Tag
         className={clsx('mb-6 sm:mb-7', {
           'flex flex-col justify-center text-center': withContainer,
         })}
         size="sm"
       >
-        <h1 className="text-[36px] font-semibold xl:text-3xl">{TITLE}</h1>
-        <div className="flex items-center justify-between sm:flex-col sm:items-start sm:gap-y-4">
-          <p>{DESCRIPTION}</p>
+        <h1 className="text-[48px] leading-dense tracking-tighter xl:text-4xl">{TITLE}</h1>
+        <div className="mt-3.5 flex items-center justify-between text-gray-new-40 dark:text-gray-new-70 sm:flex-col sm:items-start sm:gap-y-4">
+          <p className="text-xl leading-snug tracking-extra-tight">{DESCRIPTION}</p>
           {!withContainer && (
             <a
-              className="ml-3 flex items-center text-secondary-8 transition-colors duration-200 hover:text-secondary-7 dark:text-primary-1 dark:hover:text-primary-2 sm:ml-0"
+              className="ml-3 flex items-center  transition-colors duration-200 hover:text-black-pure dark:hover:text-white sm:ml-0"
               href={`${CHANGELOG_BASE_PATH}rss.xml`}
             >
-              <RSSLogo className="mr-1.5" />
-              <span className="leading-none">RSS feed</span>
+              <RSSLogo className="size-4" />
+              <span className="sr-only">RSS feed</span>
             </a>
           )}
         </div>
@@ -40,7 +40,6 @@ const Hero = ({ className = null, withContainer = false }) => {
 Hero.propTypes = {
   className: PropTypes.string,
   withContainer: PropTypes.bool,
-  isReleaseNotePost: PropTypes.bool,
 };
 
 export default Hero;

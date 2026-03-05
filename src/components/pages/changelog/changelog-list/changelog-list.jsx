@@ -1,9 +1,11 @@
 import clsx from 'clsx';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 
 import Content from 'components/shared/content';
 import Link from 'components/shared/link';
 import ScrollLoader from 'components/shared/scroll-loader';
+import chevronIcon from 'icons/chevron-red.svg';
 import generateChangelogPath from 'utils/generate-changelog-path';
 import getFormattedDate from 'utils/get-formatted-date';
 
@@ -16,20 +18,24 @@ const ChangelogPost = (post) => {
     <article className="group flex first:mt-0 lg:flex-col lg:space-y-3">
       <div
         className={clsx(
-          'relative ml-1.5 w-full pb-10 pl-7 before:absolute before:-left-1 before:top-2.5 before:z-10 before:h-[9px] before:w-[9px] before:rounded-full before:bg-primary-1 after:absolute after:bottom-0 after:left-0 after:top-0 after:h-auto after:w-px after:bg-gray-7 group-first:after:top-2.5 group-last:pb-0 group-last:after:bottom-4 dark:before:bg-secondary-2 dark:after:bg-gray-2 md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
+          'relative w-full pb-24 pt-10',
+          'before:absolute before:-left-40 before:right-0 before:top-0 before:h-px before:w-[calc(100%+160px)] before:bg-gray-new-90 dark:before:bg-gray-new-20',
+          'group-last:pb-0 dark:before:bg-gray-new-20',
+          'md:pb-7 sm:ml-0 sm:max-w-full sm:pb-0 sm:pl-0 sm:before:hidden sm:after:hidden'
         )}
       >
         <Link
-          className="transition-colors duration-200 hover:text-secondary-8 dark:hover:text-green-45"
+          className="absolute -left-40 right-0 top-10 shrink-0 whitespace-nowrap font-mono text-[13px] leading-none text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
           to={changelogPath}
         >
-          <h2 className="whitespace-nowrap font-title text-xl font-medium leading-normal">
+          <div className="flex w-32 items-center gap-1.5 py-3">
+            <Image className="h-3.5 w-3 shrink-0" src={chevronIcon} alt="" width={12} height={14} />
             <time dateTime={date}>{dateLabel}</time>
-          </h2>
+          </div>
         </Link>
 
         <Content
-          className="mt-5 prose-h3:mt-[18px] prose-h3:text-lg"
+          className="-mt-7 prose-h3:mt-[18px] prose-h3:text-lg"
           content={content}
           withoutAnchorHeading
           isReleaseNote
@@ -40,7 +46,7 @@ const ChangelogPost = (post) => {
 };
 
 const ChangelogList = ({ className, posts }) => (
-  <div className={clsx('sm:space-y-7', className)}>
+  <div className={clsx('changelog-list sm:space-y-7', className)}>
     {posts.slice(0, 3).map((item) => (
       <ChangelogPost key={item.slug} {...item} />
     ))}

@@ -120,7 +120,7 @@ const Item = ({ nav: title, slug, subnav, items, basePath, activeItems, setActiv
             )}
           >
             {subnav.map((item, index) => (
-              <li className={item.section && 'mt-2 first:mt-0'} key={index}>
+              <li className={clsx(item.section && 'mt-2 first:mt-0')} key={index}>
                 {item.section ? (
                   <>
                     <span className="mb-3.5 block text-xs uppercase leading-none tracking-tight text-gray-new-50">

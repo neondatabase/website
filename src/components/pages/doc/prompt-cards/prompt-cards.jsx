@@ -107,7 +107,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
       <button
         type="button"
         className={clsx(
-          'group relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 py-2.5 transition-all duration-200',
+          'group/card relative flex h-full w-full items-center gap-2.5 overflow-hidden border px-3.5 py-2.5 transition-all duration-200',
           'border-gray-new-90 bg-[#E4F1EB]/40 hover:border-gray-new-70 hover:bg-[#E4F1EB]',
           'dark:border-gray-new-30 dark:bg-gray-new-8 dark:hover:border-gray-new-40 dark:hover:bg-gray-new-10',
           'focus:outline-none focus:ring-2 focus:ring-green-45 focus:ring-offset-2 dark:focus:ring-offset-gray-new-8',
@@ -146,7 +146,7 @@ const PromptCard = ({ title, icon, lightIconPath, darkIconPath, promptSrc, index
         <div
           className={clsx(
             'absolute right-2 top-1/2 -translate-y-1/2 text-gray-new-60 transition-opacity duration-200',
-            isCopied ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+            isCopied ? 'opacity-100' : 'opacity-0 group-hover/card:opacity-100'
           )}
         >
           {isCopied ? (

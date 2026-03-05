@@ -10,8 +10,13 @@ import HomeIcon from 'icons/docs/home.inline.svg';
 const linkClassName =
   'transition-colors duration-200 hover:text-black dark:hover:text-white rounded-sm';
 
-const Breadcrumbs = ({ breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
-  <div className="mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-normal text-gray-new-40 dark:text-gray-new-60">
+const Breadcrumbs = ({ className, breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
+  <div
+    className={clsx(
+      'mb-4 flex flex-wrap items-center gap-x-2 text-sm leading-none tracking-extra-tight text-gray-new-40 dark:text-gray-new-60',
+      className
+    )}
+  >
     <Link className={linkClassName} to={baseUrl}>
       <HomeIcon />
     </Link>
@@ -43,6 +48,7 @@ const Breadcrumbs = ({ breadcrumbs, baseUrl = DOCS_BASE_PATH }) => (
 );
 
 Breadcrumbs.propTypes = {
+  className: PropTypes.string,
   breadcrumbs: PropTypes.arrayOf(
     PropTypes.exact({
       title: PropTypes.string.isRequired,

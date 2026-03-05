@@ -31,7 +31,7 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
       </span>
       <span
         className={clsx(
-          'w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium leading-snug tracking-extra-tight text-green-44 transition-colors duration-200 dark:text-green-52',
+          'w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-medium leading-snug tracking-extra-tight text-green-44 transition-colors duration-200 group-hover:text-green-52 dark:text-green-44 dark:group-hover:text-green-52',
           isNext && 'text-right',
           '[&_code]:rounded-sm [&_code]:bg-gray-new-94 [&_code]:px-1.5 [&_code]:py-px [&_code]:font-mono [&_code]:font-normal [&_code]:leading-none dark:[&_code]:bg-gray-new-15'
         )}

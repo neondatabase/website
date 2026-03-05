@@ -53,6 +53,12 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
     }
   }, [menu]);
 
+  const isChangelogIndex = !!currentSlug.match('changelog')?.length;
+
+  if (isChangelogIndex) {
+    return null;
+  }
+
   const renderContent = sdkTOC ? (
     <SDKTableOfContents
       title={sdkTOC.title}

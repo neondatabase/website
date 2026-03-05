@@ -19,7 +19,7 @@ const Changelog = ({ posts }) => (
   <>
     <Hero />
     <ChangelogForm className="mb-5 hidden xl:flex" />
-    <ChangelogList className="mt-4" posts={posts} />
+    <ChangelogList className="mt-16" posts={posts} />
   </>
 );
 
@@ -75,7 +75,11 @@ const Post = ({
           )}
         >
           {breadcrumbs?.length > 0 && (
-            <Breadcrumbs breadcrumbs={breadcrumbs} baseUrl={breadcrumbsBaseUrl} />
+            <Breadcrumbs
+              className={clsx(isChangelog && 'pt-1')}
+              breadcrumbs={breadcrumbs}
+              baseUrl={breadcrumbsBaseUrl}
+            />
           )}
 
           {isChangelog ? (
@@ -116,10 +120,10 @@ const Post = ({
         </div>
       </div>
 
-      {/* Regular pages: Show standard right sidebar */}
-      {!isWideLayout && (
+      {/* Regular pages: Show standard right sidebar (hide for wide layout and changelog) */}
+      {!isWideLayout && !isChangelog && (
         <Aside
-          className="!ml-0 w-64 shrink-0 xl:hidden"
+          className="!ml-0 w-[312px] shrink-0 xl:hidden"
           isDocsIndex={isDocsIndex}
           isChangelog={isChangelog}
           enableTableOfContents={enableTableOfContents}
