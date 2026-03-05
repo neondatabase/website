@@ -73,4 +73,4 @@ Want to learn more or go deeper?
 - [How Neon Auth works](/docs/guides/neon-auth-how-it-works) — See a before and after showing the benefits of having your user data right in your database
 - [Neon Auth tutorial](/docs/guides/neon-auth-demo) — Walk through our demo app for more examples of how Neon Auth can simplify your code
 - [Best Practices & FAQ](/docs/guides/neon-auth-best-practices) — Tips, patterns, and troubleshooting
-- [Neon Auth API Reference](/docs/guides/neon-auth-api) — Automate and manage Neon Auth via the API
+- [Manage Neon Auth via the API](/docs/auth/guides/manage-auth-api) — Automate and manage Neon Auth via the API
