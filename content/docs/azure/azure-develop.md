@@ -112,4 +112,3 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Building a robust JSON API with TypeScript](/guides/azure-functions-hono-api) - Build APIs with TypeScript, Postgres, and Azure Functions
 - [Azure Static Web Apps with Neon](/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
 - [Azure Logic Apps with Neon](/guides/azure-logic-apps): Integrate Neon with Azure Logic Apps
-
