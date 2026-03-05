@@ -25,12 +25,14 @@ const ChangelogPost = (post) => {
         )}
       >
         <Link
-          className="absolute -left-40 right-0 top-10 shrink-0 whitespace-nowrap font-mono text-[13px] leading-none text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
+          className="absolute -left-40 right-0 top-10 shrink-0 whitespace-nowrap font-mono text-[13px] font-medium leading-none text-gray-new-20 transition-colors duration-200 hover:text-black-pure dark:text-gray-new-80 dark:hover:text-white"
           to={changelogPath}
         >
-          <div className="flex w-32 items-center gap-1.5 py-3">
+          <div className="flex w-32 items-center gap-1.5 py-[15px]">
             <Image className="h-3.5 w-3 shrink-0" src={chevronIcon} alt="" width={12} height={14} />
-            <time dateTime={date}>{dateLabel}</time>
+            <time className="uppercase" dateTime={date}>
+              {dateLabel}
+            </time>
           </div>
         </Link>
 
