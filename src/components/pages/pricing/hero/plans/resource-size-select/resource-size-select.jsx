@@ -65,7 +65,7 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
         <span className="flex-shrink-0 whitespace-nowrap tracking-extra-tight">Based on:</span>
         <button
           type="button"
-          className="group flex flex-1 items-center justify-between truncate border border-gray-new-30 bg-gray-new-8 py-1 pl-2.5 pr-1 text-left tracking-extra-tight text-gray-new-80 transition-colors hover:bg-gray-new-15 focus-visible:bg-gray-new-15 focus-visible:outline-none"
+          className="flex flex-1 items-center justify-between truncate border border-gray-new-30 bg-gray-new-8 py-1 pl-2.5 pr-1 text-left tracking-extra-tight text-gray-new-80 transition-colors hover:bg-gray-new-15 focus-visible:bg-gray-new-15 focus-visible:outline-none"
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           onClick={() => setIsOpen(!isOpen)}
@@ -92,14 +92,12 @@ const ResourceSizeSelect = ({ value, onChange, sizes = LAUNCH_RESOURCE_SIZES }) 
 
               return (
                 <li
-                  className="group border-x-0 border-b border-t-0 border-gray-new-20 bg-gray-new-8 text-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-15"
+                  className="border-x-0 border-b border-t-0 border-gray-new-30 bg-gray-new-8 text-gray-new-80 transition-colors last:border-b-0 hover:bg-gray-new-15"
                   key={option.id}
                 >
                   <button
                     type="button"
-                    className={clsx(
-                      'w-full px-2.5 py-2 text-left text-[15px] leading-snug tracking-extra-tight transition-colors'
-                    )}
+                    className="w-full px-3.5 py-2 text-left text-[15px] leading-snug tracking-extra-tight transition-colors"
                     role="option"
                     aria-selected={isSelected}
                     onClick={() => handleSelect(option.id)}
