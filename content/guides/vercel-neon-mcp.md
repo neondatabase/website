@@ -36,7 +36,7 @@ Before you begin, ensure you have the following ready:
   <Admonition type="tip" title="Using Cursor, VSCode or other agents?">
   While this guide demonstrates the workflow with Claude Code, the same principles apply to any AI agent capable of integrating with MCP servers and executing tools through natural language prompts. When adding Vercel and Neon MCP servers, you can choose whichever agent best fits your environment.
   </Admonition>
-- **Neon account and project:** A Neon account with an active project. Sign up at [neon.new](https://neon.new).
+- **Neon account and project:** A Neon account with at least one project. Create one in the [Neon Console](https://console.neon.tech) if needed.
 - **Vercel account and project:** A Vercel account with your application deployed.
 
 In this demo, we use an example project called `ecommerce-web`, which has a production deployment named `ecommerce-web-prod` on Vercel and is connected to a Neon database. Analytics events are recorded in the `analytics_events` table within the Neon database.
