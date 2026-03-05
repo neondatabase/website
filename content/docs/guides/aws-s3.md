@@ -6,7 +6,7 @@ summary: >-
   metadata, including setup instructions for creating a Neon project and
   configuring an S3 bucket.
 enableTableOfContents: true
-updatedOn: '2026-03-04T15:52:43.558Z'
+updatedOn: '2026-03-05T04:12:51.007Z'
 ---
 
 [Amazon Simple Storage Service (AWS S3)](https://aws.amazon.com/s3/) is an object storage service widely used for storing and retrieving large amounts of data, such as images, videos, backups, and application assets.

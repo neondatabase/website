@@ -5,7 +5,7 @@ summary: >-
   Step-by-step guide for integrating ImageKit.io with Neon to upload media files
   directly from the client-side and store their metadata in a Neon database.
 enableTableOfContents: true
-updatedOn: '2026-03-04T15:52:43.561Z'
+updatedOn: '2026-03-05T04:12:51.011Z'
 ---
 
 [ImageKit.io](https://imagekit.io/) is a cloud-based image and video optimization and delivery platform. It provides real-time manipulation, storage, and delivery via a global CDN, simplifying media management for web and mobile applications.
