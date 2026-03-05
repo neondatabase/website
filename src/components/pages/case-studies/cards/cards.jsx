@@ -14,10 +14,10 @@ const Card = ({ title, logo, externalUrl = '', isInternal, post = null }) => {
   const linkProps = getLinkProps({ externalUrl, isInternal, post });
 
   return (
-    <li className="relative h-[170px]">
+    <li className="-ml-px -mt-px h-[170px]">
       <Link
         className={clsx(
-          'group absolute -left-px -top-px bottom-0 right-0 border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
+          'group relative block h-full border border-gray-new-20 bg-[#080808] transition-colors duration-200 hover:bg-gray-new-8'
         )}
         {...linkProps}
       >
@@ -124,12 +124,12 @@ const Cards = ({ items, categories }) => {
     >
       <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
         <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-8">
-          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] md:leading-tight sm:max-w-[430px] sm:text-[28px]">
+          <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] sm:max-w-[430px] sm:text-[28px]">
             See how teams are building the next era of Postgres on Neon.
           </h2>
-          <div className="hidden items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
+          <div className="hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
             <div className="flex min-w-0 flex-1 items-center gap-2">
-              <SearchIcon className="h-[15px] w-[15px] shrink-0 text-gray-new-60" aria-hidden />
+              <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
               <input
                 type="search"
                 placeholder="Search stories..."
@@ -147,9 +147,9 @@ const Cards = ({ items, categories }) => {
           {/* Sidebar: search + vertical categories */}
           <aside className="flex w-64 shrink-0 flex-col gap-8 lg:w-full lg:flex-row-reverse lg:items-center lg:gap-6 md:flex-col md:items-stretch md:gap-5">
             {/* Search bar */}
-            <div className="flex flex-wrap items-center gap-3 border border-gray-new-20 bg-[#0C0D0D] px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:hidden">
+            <div className="flex flex-wrap items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 lg:w-[220px] lg:shrink-0 md:hidden">
               <div className="flex min-w-0 flex-1 items-center gap-2">
-                <SearchIcon className="h-[15px] w-[15px] shrink-0 text-gray-new-60" aria-hidden />
+                <SearchIcon className="size-[15px] shrink-0 text-gray-new-60" aria-hidden />
                 <input
                   type="search"
                   placeholder="Search stories..."
@@ -161,7 +161,7 @@ const Cards = ({ items, categories }) => {
               </div>
             </div>
 
-            <nav className="flex flex-col gap-2 lg:min-w-0 lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto lg:no-scrollbars md:flex-none md:-mx-5 md:px-5" aria-label="Case study categories">
+            <nav className="sticky top-24 flex flex-col gap-2 lg:static lg:flex-1 lg:flex-row lg:gap-x-5 lg:overflow-x-auto lg:no-scrollbars md:flex-none md:-mx-5 md:px-5" aria-label="Case study categories">
               {categories.map(({ name, slug, featuredCaseStudy }) => {
                 const isActive = slug === activeCategory.slug;
                 const label = getCategoryLabel(slug) ?? name;
@@ -170,7 +170,7 @@ const Cards = ({ items, categories }) => {
                     key={slug}
                     href={`#${slug}`}
                     className={clsx(
-                      'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm uppercase leading-[1.375] tracking-tight transition-colors hover:text-white lg:shrink-0 lg:whitespace-nowrap lg:border-b-2 lg:py-[3px]',
+                      'flex items-center justify-between gap-2.5 py-[7px] font-mono text-sm uppercase leading-snug tracking-tight transition-colors hover:text-white lg:shrink-0 lg:whitespace-nowrap lg:border-b-2 lg:py-[3px]',
                       isActive
                         ? 'text-white lg:border-green-45'
                         : 'text-gray-new-60 lg:border-transparent'

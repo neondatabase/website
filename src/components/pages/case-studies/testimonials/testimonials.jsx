@@ -85,15 +85,16 @@ const Testimonials = () => (
       className="relative z-10"
     >
       <div className="flex flex-col border-l border-gray-new-50 pl-8 xl:pl-6 lg:pl-[18px] sm:border-l-0 sm:pl-0">
-        <div className="flex items-end gap-2">
+        <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
             alt=""
             width={12}
             height={14}
             aria-hidden
+            className="sm:h-2.5 sm:w-2.5"
           />
-          <span className="font-mono text-xs font-medium uppercase leading-none text-[#303236]">
+          <span className="font-mono text-xs font-medium uppercase leading-none text-[#303236] sm:text-[10px]">
             backed by giants
           </span>
         </div>

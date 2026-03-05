@@ -12,8 +12,8 @@ const themeClassName = {
 };
 
 const sizeClassName = {
-  regular: 'text-xs',
-  large: 'text-[13px]',
+  regular: 'text-xs sm:text-[10px]',
+  large: 'text-[13px] sm:text-[10px]',
 };
 
 const SectionLabel = ({
@@ -31,6 +31,7 @@ const SectionLabel = ({
   if (databricks) {
     iconNode = (
       <Image
+        className="sm:size-2.5"
         src={databricksIcon}
         width={20}
         height={20}
@@ -44,7 +45,7 @@ const SectionLabel = ({
         focusable="false"
         className={clsx(
           'block h-3.5 w-3 flex-none text-[#FF3621]',
-          isDenseVariant ? 'md:h-2.5 md:w-2.5' : ''
+          isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'
         )}
       />
     );
@@ -56,7 +57,7 @@ const SectionLabel = ({
         width={12}
         height={14}
         aria-hidden="true"
-        className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : undefined}
+        className={isDenseVariant ? 'md:h-2.5 md:w-2.5' : 'sm:h-2.5 sm:w-2.5'}
       />
     );
   }
@@ -65,7 +66,7 @@ const SectionLabel = ({
     <div
       className={clsx(
         'flex',
-        isDenseVariant ? 'h-3.5 items-end gap-2 md:h-2.5 md:gap-1.5' : 'items-end gap-2',
+        isDenseVariant ? 'h-3.5 items-end gap-2 md:h-2.5 md:gap-1.5' : 'items-end gap-2 sm:gap-1.5',
         !isDenseVariant && themeClassName[theme],
         className
       )}

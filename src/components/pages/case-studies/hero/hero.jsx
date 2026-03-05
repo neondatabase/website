@@ -42,7 +42,7 @@ const CARDS = [
 
 const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, background }) => (
   <Link className="group" to={linkUrl}>
-    <article className="relative flex h-[408px] w-full min-w-0 flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-[320px]">
+    <article className="relative flex h-[408px] w-full flex-col overflow-hidden border border-gray-new-30 sm:h-[340px] xs:h-[320px]">
       <Image
         className="absolute right-0 top-0 lt:max-w-[55%] lt:h-auto lg:max-w-[50%] sm:max-w-[40%]"
         src={background.src}
@@ -55,7 +55,7 @@ const FeaturedCard = ({ logo: Logo, category, title, linkText, linkUrl, backgrou
         <Logo className="h-8 w-auto max-w-[119px] fill-white object-contain object-left text-white sm:h-6 sm:max-w-[89px]" />
         <div className="mt-auto flex flex-col gap-6">
           <div className="flex flex-col gap-4">
-            <span className="font-mono text-[13px] font-medium uppercase leading-none text-green-52 xs:text-xs">
+            <span className="font-mono text-[13px] font-medium uppercase leading-none text-green-52 sm:text-[10px]">
               {category}
             </span>
 
@@ -92,15 +92,16 @@ const Hero = () => (
   <section className="safe-paddings relative py-40 xl:py-36 lg:py-20 md:py-14 sm:py-10">
     <Container size="branching" className="flex flex-col gap-16 lg:gap-14 md:gap-10">
       <div className="flex max-w-[896px] flex-col gap-5 lt:max-w-[864px] lg:max-w-[640px] md:max-w-none">
-        <div className="flex items-end gap-2">
+        <div className="flex items-end gap-2 sm:gap-1.5">
           <Image
             src={triangleIcon}
             alt=""
             width={12}
             height={14}
             aria-hidden="true"
+            className="sm:h-2.5 sm:w-2.5"
           />
-          <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80">
+          <span className="font-mono text-xs font-medium uppercase leading-none text-gray-new-80 sm:text-[10px]">
             Case studies
           </span>
         </div>
