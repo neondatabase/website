@@ -59,7 +59,7 @@ const AnchorHeading = (Tag) => {
       <Tag
         id={id}
         className={clsx(
-          'anchor-heading group relative w-fit scroll-mt-20 font-semibold tracking-extra-tight lg:scroll-mt-5',
+          'anchor-heading group relative w-fit scroll-mt-20 font-medium leading-tight tracking-tighter lg:scroll-mt-5',
           className
         )}
       >
@@ -70,7 +70,7 @@ const AnchorHeading = (Tag) => {
           aria-label={`Link to ${extractText(children)}`}
         >
           <HashIcon
-            className={clsx('inline text-green-45', {
+            className={clsx('inline text-green-44 dark:text-green-52', {
               'w-3.5': Tag === 'h2',
               'w-3': Tag === 'h3',
             })}

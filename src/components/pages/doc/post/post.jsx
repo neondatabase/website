@@ -88,7 +88,7 @@ const Post = ({
             <article>
               <h1
                 className={clsx(
-                  'text-balance text-[36px] font-semibold leading-tight tracking-extra-tight md:text-[28px]',
+                  'text-balance text-[36px] font-medium leading-tight tracking-tighter md:text-[28px]',
                   tag && 'inline'
                 )}
               >
