@@ -21,7 +21,7 @@ export default {
           ],
         },
         {
-          title: 'Add-On Features',
+          title: 'Backend',
           items: [
             {
               title: 'Authentication',
