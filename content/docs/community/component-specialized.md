@@ -250,20 +250,6 @@ Model Context Protocol tools integration component.
 
 ---
 
-### NextSteps
-
-Component for suggesting next steps in documentation workflows.
-
-```mdx
-<NextSteps />
-```
-
-**Live preview:**
-
-<NextSteps />
-
----
-
 ## Community components
 
 Components for community engagement and interaction.
@@ -333,7 +319,7 @@ This guide covers specialized MDX components used in specific scenarios. Each co
 | **[Specialized Shared Components](#specialized-shared-components)** | [Feature Announcements](#feature-announcements), [EarlyAccessProps](#earlyaccessprops) | Feature status indicators             |
 | **[SDK Components](#sdk-components)**                               | [Getting Started](#getting-started), [SDK Type Components](#sdk-type-components)       | Auto-generated SDK documentation      |
 | **[Utility Components](#utility-components)**                       | [RequestForm](#requestform), [ChatOptions](#chatoptions)                               | Specialized UI elements               |
-| **[Specialized Components](#specialized-components)**               | [AgentSkillsTip](#agentskillstip), [MCPTools](#mcptools), [NextSteps](#nextsteps)      | Complex and specialized functionality |
+| **[Specialized Components](#specialized-components)**               | [AgentSkillsTip](#agentskillstip), [MCPTools](#mcptools)      | Complex and specialized functionality |
 | **[Community Components](#community-components)**                   | [CommunityBanner](#communitybanner)                                                    | Community engagement                  |
 
 For commonly used components, see the [Component Guide](/docs/community/component-guide).

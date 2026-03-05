@@ -113,6 +113,3 @@ Azure provides an Azure-native CLI and SDKs for working with the Neon platform. 
 - [Azure Static Web Apps with Neon](/guides/azure-todo-static-web-app) - Building Azure Static Web Apps with Neon
 - [Azure Logic Apps with Neon](/guides/azure-logic-apps): Integrate Neon with Azure Logic Apps
 
-## Security & access control
-
-- [Row-level security with Azure AD](/docs/guides/neon-rls-azure-ad) - Implement row-level security with Azure Active Directory

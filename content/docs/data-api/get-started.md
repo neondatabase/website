@@ -328,7 +328,7 @@ Query the Data API directly using any HTTP client. Include the `Authorization` h
 
 **About the `sub` claim:**
 
-For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/neon-rls) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
+For RLS policies to work correctly, the JWT token must include a `sub` (subject) claim, which contains the user's unique identifier. The Data API uses this claim to enforce [Row-Level Security](/docs/guides/row-level-security) policies via the `auth.user_id()` function. Most authentication providers include this claim by default.
 
 **Example: SELECT (GET)**
 

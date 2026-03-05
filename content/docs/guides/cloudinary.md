@@ -461,6 +461,5 @@ This pattern separates media storage, processing, and delivery (handled by Cloud
 - [Cloudinary documentation](https://cloudinary.com/documentation)
 - [Cloudinary Upload API reference](https://cloudinary.com/documentation/image_upload_api_reference)
 - [Neon Documentation](/docs/introduction)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

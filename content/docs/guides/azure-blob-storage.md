@@ -564,6 +564,5 @@ This pattern effectively separates file storage and delivery concerns (handled b
 - [Azure Blob Storage documentation](https://learn.microsoft.com/en-us/azure/storage/blobs/)
 - [Azure Storage Shared Access Signatures (SAS)](https://learn.microsoft.com/en-us/azure/storage/common/storage-sas-overview)
 - [Neon Documentation](/docs/introduction)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

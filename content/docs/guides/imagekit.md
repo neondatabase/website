@@ -424,6 +424,5 @@ This pattern separates media storage, optimization, and delivery (handled by Ima
 
 - [ImageKit.io documentation](https://imagekit.io/docs)
 - [ImageKit.io Upload API](https://imagekit.io/docs/api-reference/upload-file/upload-file)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

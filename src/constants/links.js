@@ -56,8 +56,6 @@ export default {
   docsExtensionsPgVector: '/docs/extensions/pgvector',
   docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
   docsExtensionsTimescaledb: '/docs/extensions/timescaledb',
-
-  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   scaleToZero: '/docs/guides/scale-to-zero-guide',
