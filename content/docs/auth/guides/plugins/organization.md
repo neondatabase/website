@@ -115,13 +115,13 @@ Example response:
 
 **API fields reference**
 
-| Field                    | Type                        | Description                                                                                                    |
-| :----------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------- |
-| `enabled`                | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error. |
-| `organization_limit`     | number (≥ 1)                | Max organizations a user can create. Default: 10.                                                              |
-| `membership_limit`       | number (≥ 1)                | Max members per organization. Default: 100.                                                                    |
-| `creator_role`           | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.  |
-| `send_invitation_email`  | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false. |
+| Field                   | Type                        | Description                                                                                                       |
+| :---------------------- | :-------------------------- | :---------------------------------------------------------------------------------------------------------------- |
+| `enabled`               | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error.    |
+| `organization_limit`    | number (≥ 1)                | Max organizations a user can create. Default: 10.                                                                 |
+| `membership_limit`      | number (≥ 1)                | Max members per organization. Default: 100.                                                                       |
+| `creator_role`          | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.    |
+| `send_invitation_email` | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false. |
 
 **API Documentation**
 
@@ -324,7 +324,7 @@ const { data, error } = await authClient.organization.delete({
 Manage invitations to join an organization.
 
 <Admonition type="note" title="Invitation Emails">
-Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app. 
+Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app.
 
 When the email toggle is off, handle invitations in your app using the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations).
 </Admonition>
