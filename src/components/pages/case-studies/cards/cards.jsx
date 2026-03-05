@@ -125,7 +125,7 @@ const Cards = ({ items, categories }) => {
       <Container className="flex flex-col lg:!max-w-[1216px] md:px-5" size="1280">
         <div className="md:flex md:items-end md:gap-6 sm:flex-col sm:items-stretch sm:gap-8">
           <h2 className="max-w-[736px] text-[48px] font-normal leading-dense tracking-tighter text-white lg:max-w-[614px] lg:text-[40px] md:max-w-none md:flex-1 md:text-[32px] sm:max-w-[430px] sm:text-[28px]">
-            See how teams are building the next era of Postgres on Neon.
+            See how teams are building and scaling their applications on Neon.
           </h2>
           <div className="hidden items-center gap-3 border border-gray-new-20 bg-black-new px-3 py-1.5 pr-2.5 md:flex md:w-[280px] md:shrink-0 sm:w-full">
             <div className="flex min-w-0 flex-1 items-center gap-2">
