@@ -134,7 +134,7 @@ const Cards = ({ items, categories }) => {
                 type="search"
                 placeholder="Search stories..."
                 value={searchQuery}
-                className="min-w-0 flex-1 bg-transparent text-base md:text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
                 aria-label="Search case studies"
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -154,7 +154,7 @@ const Cards = ({ items, categories }) => {
                   type="search"
                   placeholder="Search stories..."
                   value={searchQuery}
-                  className="min-w-0 flex-1 bg-transparent text-base md:text-[15px] leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
+                  className="min-w-0 flex-1 bg-transparent text-[15px] md:text-base leading-snug tracking-tighter text-white placeholder:text-gray-new-60 focus:outline-none"
                   aria-label="Search case studies"
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
