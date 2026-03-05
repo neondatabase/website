@@ -12,7 +12,16 @@ export default {
               title: 'Autoscaling',
               to: LINKS.autoscaling,
               description: 'Automatic instance sizing',
-            },
+{
+title: 'Serverless Architecture',
+to: 'https://neon.com/docs/introduction/architecture-overview',
+description: 'Storage and compute separation',
+},
+{
+title: 'Autoscaling',
+to: LINKS.autoscaling,
+description: 'Automatic instance sizing',
+},
             {
               title: 'Branching',
               to: LINKS.branching,
