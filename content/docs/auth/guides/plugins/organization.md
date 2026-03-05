@@ -14,7 +14,7 @@ updatedOn: '2026-02-15T20:51:54.039Z'
 Neon Auth is built on [Better Auth](https://www.better-auth.com/) and comes with a pre-configured Organization plugin, so your app can support multi-tenancy without additional setup.
 
 <Admonition type="note" title="Preview Feature">
-The Organization plugin is currently in **Beta**. Support for invitation emails and JWT token claims is under development.
+The Organization plugin is currently in **Beta**. Support for JWT token claims is under development.
 </Admonition>
 
 ## Why use this plugin?
@@ -32,7 +32,6 @@ Better Auth also has a **Teams** feature (sub-groups within an org); that featur
 
 - A Neon project with **Auth enabled**
 - A signed-in user (organizations are associated with users)
-- Organization configuration is available only on new Neon projects
 
 ## Configure the organization plugin
 
@@ -47,9 +46,10 @@ Open your project in the Neon Console, then go to **Auth** > **Configuration** >
 ![Auth Configuration > Organizations in the Neon Console](/docs/auth/console-auth-organizations-config.png)
 
 - **Enable Organizations** (toggle): Turn the Organization plugin on or off for the branch. When off, all organization API calls are disabled and return an error.
-- **Limit:** Maximum number of organizations a user can create or belong to (e.g., 1 per user).
+- **Limit:** Maximum number of organizations a user can create (default: 10 per user).
+- **Membership Limit:** Maximum number of members per organization (default: 100).
 - **Creator role:** Role assigned to the user who creates an organization: **Owner** or **Admin**. Choose Admin if you want the org creator to have fewer privileges than Owner (for example, they cannot delete the org or change the owner).
-- **Allow user to create organization:** When on, any user can create organizations (up to the limit). When off, no one can create new organizations. Existing organizations and all other operations (invitations, members, roles) are not affected.
+- **Send Invitation Email** (toggle): When on, invited users receive an email with an accept link. This requires **Verify email at signup** to be enabled in the Authentication configuration. Accepting the invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route that handles `/auth/accept-invitation?invitationId=<INV_ID>` in your application. When off, no email is sent and you handle invitations in your app (for example, via the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations)).
 
 </TabItem>
 
@@ -72,9 +72,10 @@ Example response (excerpt showing the `organization` object):
 {
   "organization": {
     "enabled": true,
-    "organization_limit": 5,
-    "allow_user_to_create_organization": true,
-    "creator_role": "owner"
+    "organization_limit": 10,
+    "membership_limit": 100,
+    "creator_role": "owner",
+    "send_invitation_email": false
   }
 }
 ```
@@ -93,9 +94,10 @@ curl -X PATCH \
   -H 'Content-Type: application/json' \
   -d '{
     "enabled": true,
-    "organization_limit": 5,
+    "organization_limit": 10,
+    "membership_limit": 100,
     "creator_role": "owner",
-    "allow_user_to_create_organization": true
+    "send_invitation_email": false
   }'
 ```
 
@@ -104,20 +106,22 @@ Example response:
 ```json
 {
   "enabled": true,
-  "organization_limit": 5,
-  "allow_user_to_create_organization": true,
-  "creator_role": "owner"
+  "organization_limit": 10,
+  "membership_limit": 100,
+  "creator_role": "owner",
+  "send_invitation_email": false
 }
 ```
 
 **API fields reference**
 
-| Field                               | Type                        | Description                                                                                                                                                                |
-| :---------------------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `enabled`                           | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls are disabled and return an error.                                            |
-| `organization_limit`                | number (≥ 1)                | Max organizations a user can create or belong to.                                                                                                                          |
-| `creator_role`                      | string (`owner` \| `admin`) | Role for the user who creates an org (Owner has full control; Admin cannot delete the org or change the owner).                                                            |
-| `allow_user_to_create_organization` | boolean                     | When true, any user can create orgs (within the limit). When false, no one can create new organizations. Existing organizations and all other operations are not affected. |
+| Field                    | Type                        | Description                                                                                                    |
+| :----------------------- | :-------------------------- | :------------------------------------------------------------------------------------------------------------- |
+| `enabled`                | boolean                     | Turn the Organization plugin on or off for the branch. When false, all organization API calls return an error. |
+| `organization_limit`     | number (≥ 1)                | Max organizations a user can create. Default: 10.                                                              |
+| `membership_limit`       | number (≥ 1)                | Max members per organization. Default: 100.                                                                    |
+| `creator_role`           | string (`owner` \| `admin`) | Role for the user who creates an org. Owner has full control; Admin cannot delete the org or change the owner.  |
+| `send_invitation_email`  | boolean                     | When true, invited users receive an email with an accept link. Requires verified email at signup. Default: false. |
 
 **API Documentation**
 
@@ -320,7 +324,9 @@ const { data, error } = await authClient.organization.delete({
 Manage invitations to join an organization.
 
 <Admonition type="note" title="Invitation Emails">
-Invitation emails are not sent during the Beta phase. They will be supported in a future release. In the meantime, users can accept invitations using the [invitation ID](/docs/auth/guides/plugins/organization#accept-invitation) or by viewing them in their [invitation list](/docs/auth/guides/plugins/organization#list-user-invitations).
+Invitation emails are supported when [**Send Invitation Email**](#configure-the-organization-plugin) is enabled in the organization config. This also requires **Verify email at signup** in the Authentication configuration. Accepting an email invitation requires the [`AuthView` component](/docs/auth/reference/ui-components#core-components) or a custom route handling `/auth/accept-invitation?invitationId=<INV_ID>` in your app. 
+
+When the email toggle is off, handle invitations in your app using the [invitation ID](#accept-invitation) or the [user invitation list](#list-user-invitations).
 </Admonition>
 
 ### Invite member
