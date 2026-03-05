@@ -19,6 +19,7 @@ import DocsList from 'components/pages/doc/docs-list';
 import IncludeBlock from 'components/pages/doc/include-block';
 import InfoBlock from 'components/pages/doc/info-block';
 import LinkPreview from 'components/pages/doc/link-preview';
+import McpSetupConfigurator from 'components/pages/doc/mcp-setup-configurator';
 import PromptCards from 'components/pages/doc/prompt-cards';
 import Steps from 'components/pages/doc/steps';
 import Tabs from 'components/pages/doc/tabs';
@@ -200,6 +201,7 @@ const getComponents = (withoutAnchorHeading, isReleaseNote, isPostgres, isTempla
   ExternalCode: (props) => <ExternalCode {...props} />,
   MegaLink,
   CopyPrompt,
+  McpSetupConfigurator,
   SqlToRestConverter,
   ...sharedComponents,
 });
