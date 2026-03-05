@@ -733,7 +733,7 @@
             - title: Develop
               items:
                 - title: Convex
-                  slug: guides/convex-neon
+                  slug: https://neon.com/guides/convex-neon
                 - title: GitHub integration
                   slug: guides/neon-github-integration
                 - title: Knex
@@ -867,7 +867,7 @@
                 - title: AWS Lambda
                   slug: guides/aws-lambda
                 - title: Azure Functions
-                  slug: guides/query-postgres-azure-functions
+                  slug: https://neon.com/guides/query-postgres-azure-functions
                 - title: Neon serverless driver
                   slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest

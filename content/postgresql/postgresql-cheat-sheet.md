@@ -426,7 +426,7 @@ UNION
 SELECT * FROM table2;
 ```
 
-Minus a result set using [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-tutorial/postgresql-except/) operator:
+Minus a result set using [`EXCEPT`](/postgresql/postgresql-tutorial/postgresql-except/) operator:
 
 ```sql
 SELECT * FROM table1
