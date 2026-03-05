@@ -8,7 +8,7 @@ updatedOn: '2024-04-19T08:26:26+00:00'
 enableTableOfContents: true
 previousLink:
   title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-letter-case-functions'
+  slug: 'postgresql-string-functions/postgresql-initcap'
 nextLink:
   title: 'PostgreSQL SUBSTRING() Function'
   slug: 'postgresql-string-functions/postgresql-substring'

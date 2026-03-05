@@ -13,13 +13,14 @@ const getUrl = (slug, basePath) => {
   }
   return `${basePath}${slug}`;
 };
+
 const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = true }) => {
   const linkUrl = link?.slug && getUrl(link.slug, basePath);
   return (
     <Link
       to={linkUrl}
       className={clsx(
-        'group flex w-1/2 min-w-0 flex-col gap-3 rounded border border-gray-new-20 px-4 py-5 sm:w-full',
+        'group flex w-1/2 min-w-0 flex-col gap-3 rounded border border-gray-new-90 px-4 py-5 dark:border-gray-new-20 sm:w-full',
         isNext ? 'ml-auto items-end' : 'items-start sm:hidden'
       )}
       tagName="DocsPagination"
@@ -46,6 +47,7 @@ const DefaultNavigationLink = ({ link, basePath, isNext = false, showLabel = tru
     </Link>
   );
 };
+
 const BranchingNavigationLink = ({ link, basePath, isNext = false, showLabel = true }) => {
   const linkUrl = link?.slug && getUrl(link.slug, basePath);
   return (

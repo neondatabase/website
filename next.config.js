@@ -188,6 +188,21 @@ const defaultConfig = {
         permanent: true,
       },
       {
+        source: '/privacy-guide',
+        destination: '/privacy-policy',
+        permanent: true,
+      },
+      {
+        source: '/sensitive-data-terms',
+        destination: '/terms-of-service',
+        permanent: true,
+      },
+      {
+        source: '/programs/creators',
+        destination: '/programs/open-source',
+        permanent: true,
+      },
+      {
         source: '/team',
         destination: '/about-us',
         permanent: true,
@@ -531,6 +546,11 @@ const defaultConfig = {
         destination: '/',
         permanent: false,
       },
+      {
+        source: '/student',
+        destination: 'https://get.neon.com/student-25',
+        permanent: false,
+      },
       ...docsRedirects,
       ...changelogRedirects,
     ];
@@ -544,6 +564,9 @@ const defaultConfig = {
     }));
 
     return {
+      // beforeFiles: resolve sub-index llms.txt files from public/ before the
+      // docs/[...slug] catch-all intercepts them (known Next.js behavior)
+      beforeFiles: [{ source: '/docs/:path*/llms.txt', destination: '/docs/:path*/llms.txt' }],
       // afterFiles: runs after checking pages/public files but before dynamic routes
       // This ensures physical .md files are served first, with fallback to public/md/
       afterFiles: [

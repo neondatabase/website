@@ -648,14 +648,14 @@ const componentHandlers = {
     return loadSharedContent('feature-beta-props', { feature_name: featureName });
   },
 
-  AIRule(node) {
-    const name = getAttr(node, 'name') || '';
-    return loadSharedContent('ai-rule-usage', { name });
-  },
-
   EarlyAccessProps(node) {
     const featureName = getAttr(node, 'feature_name') || '';
     return loadSharedContent('early-access-props', { feature_name: featureName });
+  },
+
+  AgentSkillsTip(node) {
+    const skillTopic = getAttr(node, 'skill_topic') || '';
+    return loadSharedContent('agent-skills-tip', { skill_topic: skillTopic });
   },
 
   /**
@@ -1496,7 +1496,9 @@ async function prefetchExternalCode(content) {
           }
 
           let data = '';
-          res.on('data', (chunk) => (data += chunk));
+          res.on('data', (chunk) => {
+            data += chunk;
+          });
           res.on('end', () => resolve({ url, content: data }));
           res.on('error', () => resolve({ url, error: 'Network error' }));
         })

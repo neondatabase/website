@@ -608,7 +608,7 @@ Schema::table('subscriptions', function (Blueprint $table) {
 
 These indexes will optimize queries related to filtering or grouping by `user_id`, `used_at`, `started_at`, and `ended_at`, which are common in analytics.
 
-To learn more about indexing in Neon Postgres, check out the [Neon documentation](/docs/postgres/indexes) on indexes.
+To learn more about indexing in Neon Postgres, check out the [Neon documentation](/docs/postgresql/index-types) on indexes.
 
 ### 2. Implement Caching for Expensive Queries
 

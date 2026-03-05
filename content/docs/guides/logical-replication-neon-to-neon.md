@@ -8,7 +8,7 @@ summary: >-
   migration, and region migration scenarios.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.014Z'
+updatedOn: '2026-03-03T14:18:20.105Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from one Neon project to another. This enables different usage scenarios, including:
@@ -35,6 +35,10 @@ These are some common Neon-to-Neon replication scenarios. There may be others. Y
 
 - A destination Neon project.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 For information about creating a Neon project, see [Create a project](/docs/manage/projects#create-a-project).
 

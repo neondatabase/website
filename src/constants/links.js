@@ -56,8 +56,6 @@ export default {
   docsExtensionsPgVector: '/docs/extensions/pgvector',
   docsExtensionsPostgisRelatedExtensions: '/docs/extensions/postgis-related-extensions',
   docsExtensionsTimescaledb: '/docs/extensions/timescaledb',
-
-  rlsAuthorize: '/docs/guides/neon-rls',
   serverless: '/docs/introduction/serverless',
   support: '/docs/introduction/support',
   scaleToZero: '/docs/guides/scale-to-zero-guide',
@@ -68,12 +66,10 @@ export default {
   dpa: '/dpa',
   terms: '/terms-of-service',
   privacy: '/privacy-policy',
-  privacyGuide: '/privacy-guide',
   privacyPolicy: '/privacy-policy',
   cookiePolicy: '/cookie-policy',
   subprocessors: '/subprocessors',
   businessInformation: '/business-info',
-  sensitiveDataTerms: '/sensitive-data-terms',
   hipaaCompliance: '/docs/security/hipaa',
   hipaaContractors: '/hipaa-contractors',
 

@@ -4,7 +4,7 @@ enableTableOfContents: true
 isDraft: false
 redirectFrom:
   - /docs/introduction/extra-usage
-updatedOn: '2026-02-19T02:27:13.544Z'
+updatedOn: '2026-02-23T11:56:42.933Z'
 ---
 
 This page describes Neon's **legacy plans**. These plans are no longer offered to new signups.
@@ -394,7 +394,7 @@ In short, `VACUUM FULL` can help reduce your data size and future storage costs,
 <details>
 <summary>**What is the maximum data size that Neon supports?**</summary>
 
-Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
+Each [Neon plan](/docs/introduction/plans) comes with a specific storage allowance. Beyond this allowance on paid plans, extra usage costs apply. Billing-related allowances aside, paid plans support a logical data size of up to 16 TB per branch. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 </details>
 
@@ -574,7 +574,7 @@ Each of [Neon's plans](/docs/introduction/plans) includes a certain number of co
 <details>
 <summary>**Where can I monitor compute hour usage?**</summary>
 
-You can monitor compute hour usage for a Neon project on the [Project Dashboard](/docs/introduction/monitor-usage#project-dashboard). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage metrics in the Neon Console](/docs/introduction/monitor-usage#view-usage-metrics-in-the-neon-console).
+You can monitor compute hour usage for a Neon project on the [Projects page](/docs/introduction/monitor-usage#projects-page). To monitor compute usage for your Neon account (all compute usage across all projects), refer to your **Billing** page. See [View usage in the Neon Console](/docs/introduction/monitor-usage#view-usage-in-the-neon-console).
 
 </details>
 

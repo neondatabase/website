@@ -177,7 +177,7 @@ We've [doubled/increased] [what] from [old value] to [new value]. [Benefit state
 
 We've doubled our default storage quota from 8TB to 16TB. This means you can now
 run databases up to 16TB without contacting us to increase your limit. If you need
-to run larger databases, please [request an increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
+to run larger databases, please [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 ```
 
 **What makes this exemplary:**

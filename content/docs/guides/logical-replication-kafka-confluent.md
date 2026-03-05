@@ -7,7 +7,7 @@ summary: >-
   Capture (CDC) events.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.011Z'
+updatedOn: '2026-03-03T14:18:20.103Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -25,6 +25,10 @@ Confluent Cloud Connectors can be set up using the [Confluent Cloud UI](https://
 - A [Confluent Cloud](https://www.confluent.io/confluent-cloud) account
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication in Neon
 

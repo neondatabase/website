@@ -6,7 +6,7 @@ summary: >-
   Fivetran to enable data replication to supported destinations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-06T22:07:33.009Z'
+updatedOn: '2026-03-03T14:18:20.103Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -20,6 +20,10 @@ In this guide, you will learn how to define a Neon Postgres database as a data s
 - A [Fivetran account](https://fivetran.com/)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication in Neon
 

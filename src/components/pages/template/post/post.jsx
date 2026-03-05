@@ -18,7 +18,7 @@ const Post = ({ data: { title, subtitle, updatedOn = null }, content, currentSlu
       </p>
     )}
     <div className="mt-[76px] md:pb-[70px] sm:mt-10 sm:pb-8">
-      <Content content={content} isTemplate={false} />
+      <Content content={content} isTemplate />
       <DocFooter updatedOn={updatedOn} slug={currentSlug} />
     </div>
   </div>

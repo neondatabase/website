@@ -617,7 +617,7 @@ As your task board grows, you might need to optimize it for better performance:
 
 2. **Caching**: Use Laravel's caching features to cache frequently accessed data, reducing database queries.
 
-3. **Database Indexing**: Add indexes to frequently queried columns in your Neon Postgres database to speed up queries. For more information, check out the Neon Postgres documentation on [Indexes](/docs/postgres/indexes).
+3. **Database Indexing**: Add indexes to frequently queried columns in your Neon Postgres database to speed up queries. For more information, check out the Neon Postgres documentation on [Indexes](/docs/postgresql/index-types).
 
 4. **Queue Workers**: Use multiple queue workers to process broadcast events concurrently, especially in high-traffic applications. Also, consider using Laravel Horizon for monitoring and managing your queue workers.
 

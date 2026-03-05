@@ -3,9 +3,10 @@ title: Accounts
 subtitle: Manage your Neon account
 summary: >-
   Covers the management of your Neon account, including updating personal
-  information, changing your email and password, and switching login methods.
+  information, changing your email and password, two-factor authentication, and
+  switching login methods.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.223Z'
+updatedOn: '2026-03-02T20:53:06.220Z'
 ---
 
 Your **Neon account** is your personal identity for logging in, managing your profile, and authenticating actions across all organizations you belong to.
@@ -50,9 +51,40 @@ If you change your email (whether you started with email or social login), you'l
 
 No surprises here: just enter your current password, then your new one (twice). We'll enforce our current password rules for your security.
 
+## Two-factor authentication
+
+Protect your account with two-factor authentication (2FA). Once enabled, you'll enter a 6-digit code from your authenticator app each time you log in.
+
+### Enable 2FA
+
+1. Go to **Account settings** and click **Set up two-factor authentication**.
+2. Scan the QR code with your authenticator app (for example, Google Authenticator, Authy, or 1Password).
+3. Enter the 6-digit code from your app to verify and activate 2FA.
+
+After setup, Neon will prompt you for a code from your authenticator app every time you log in.
+
+<Admonition type="tip" title="iPhone users">
+Scanning the QR code with an iPhone camera opens Apple's **Passwords** app, which requires a username and password alongside each authenticator setup. If you sign in with an OAuth provider like Google or GitHub and don't have a Neon password, you'll need to create a placeholder entry in Passwords. Dedicated authenticator apps handle standalone codes without this limitation.
+</Admonition>
+
+### Remove 2FA
+
+1. Click **Remove two-factor authentication** in your account settings.
+2. Enter a 6-digit code from your authenticator app to confirm.
+
+For security, removal is **delayed by 24 hours**. During the cooldown:
+
+- You'll receive an email notification with a link to cancel the removal.
+- You can also cancel from your account settings.
+- 2FA remains active until the cooldown expires.
+
+<Admonition type="note">
+Recovery codes are not currently supported. Keep your authenticator app backed up or synced across devices. If you lose access to your authenticator, [contact Support](/docs/introduction/support).
+</Admonition>
+
 ## Create personal API keys
 
-Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API.. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
+Personal API keys let you securely interact with the [Neon API](https://api-docs.neon.tech/reference/getting-started-with-neon-api), including through command-line tools, scripts, or third-party integrations that use the API. Your personal API key works for any organization you belong to, so you can manage projects, automate tasks, or use integrations across all your orgs with a single key. The actions you can perform with your key depend on your role in each org (admin, member, or collaborator). You can create, view, and revoke your personal API keys here in your account settings.
 
 [Learn more about API keys](/docs/manage/api-keys)
 

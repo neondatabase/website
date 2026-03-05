@@ -11,7 +11,7 @@ previousLink:
   slug: 'postgresql-string-functions/postgresql-ascii'
 nextLink:
   title: 'PostgreSQL INITCAP() Function'
-  slug: 'postgresql-string-functions/postgresql-letter-case-functions'
+  slug: 'postgresql-string-functions/postgresql-initcap'
 ---
 
 The PostgreSQL `CHR()` function converts an integer ASCII code to a character or a Unicode code point to a UTF8 character.

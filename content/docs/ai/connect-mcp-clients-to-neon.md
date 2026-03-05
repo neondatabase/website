@@ -7,7 +7,7 @@ summary: >-
   Code to the Neon Postgres database, including quick setup, OAuth
   authentication, and local server options.
 enableTableOfContents: true
-updatedOn: '2026-02-15T20:51:54.034Z'
+updatedOn: '2026-02-24T15:28:05.876Z'
 ---
 
 This guide covers connecting MCP clients to the Neon MCP Server for natural language interaction with your Neon Postgres databases.
@@ -25,6 +25,10 @@ npx neonctl@latest init
 ```
 
 This installs the MCP server for all your projects with API key-based authentication so you can skip OAuth windows. It also adds the VS Code extension for editors that support it and adds Neon's [agent skills](https://github.com/neondatabase/agent-skills) to help agents use Neon the right way. Then restart and ask your AI assistant **"Get started with Neon"**.
+
+<Admonition type="note">
+Each run of `npx neonctl@latest init` creates a new Neon API key. If you run it multiple times, review your [API keys](https://console.neon.tech/app/settings/api-keys) and revoke any you no longer need.
+</Admonition>
 
 If you only want the MCP server and nothing else, use:
 

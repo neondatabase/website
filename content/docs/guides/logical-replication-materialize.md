@@ -7,7 +7,7 @@ summary: >-
   for operational workloads.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.169Z'
+updatedOn: '2026-03-03T14:18:20.104Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -22,6 +22,10 @@ In this guide, you will learn how to stream data from your Neon Postgres databas
 - A [Neon account](https://console.neon.tech/).
 - Optionally, you can install the [psql](https://www.postgresql.org/docs/current/logical-replication.html) command line utility for running commands in both Neon and Materialize. Alternatively, you can run commands from the [Neon SQL Editor](/docs/get-started/query-with-neon-sql-editor) and Materialize **SQL Shell**, which require no installation or setup.
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin.
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable logical replication
 

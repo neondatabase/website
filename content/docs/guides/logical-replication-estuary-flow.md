@@ -7,7 +7,7 @@ summary: >-
   data streaming and optional transformations.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-02-15T20:51:54.168Z'
+updatedOn: '2026-03-03T14:18:20.102Z'
 ---
 
 Neon's logical replication feature allows you to replicate data from your Neon Postgres database to external destinations.
@@ -21,6 +21,10 @@ In this guide, you will learn how to configure a Postgres source connector in Es
 - An [Estuary Flow account](https://dashboard.estuary.dev/register) (start free, no credit card required)
 - A [Neon account](https://console.neon.tech/)
 - Read the [important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices) before you begin
+
+<Admonition type="important" title="Compute and billing">
+Replication keeps compute active (no [scale to zero](/docs/introduction/scale-to-zero)) while subscribers are connected, which can increase your bill. See [Important notices about logical replication in Neon](/docs/guides/logical-replication-neon#important-notices).
+</Admonition>
 
 ## Enable Logical Replication in Neon
 

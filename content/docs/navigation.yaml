@@ -395,6 +395,8 @@
                   slug: guides/rls-tutorial
                 - title: Custom authentication providers
                   slug: data-api/custom-authentication-providers
+                - title: Data API Advisors
+                  slug: data-api/database-advisor
 
             - section: Tools
               items:
@@ -530,31 +532,17 @@
                   slug: ai/neon-mcp-server
                 - title: Connect MCP clients
                   slug: ai/connect-mcp-clients-to-neon
-            - section: AI rules & prompts
+            - section: Agent Skills
               icon: docs
               items:
-                - title: AI rules
-                  slug: ai/ai-rules
+                - title: Agent Skills
+                  slug: ai/agent-skills
                 - title: Claude Code plugin
                   slug: ai/ai-claude-code-plugin
                 - title: Cursor plugin
                   slug: ai/ai-cursor-plugin
                 - title: GitHub Copilot agents
                   slug: ai/ai-github-copilot-agents
-                - title: Neon Auth
-                  slug: ai/ai-rules-neon-auth
-                - title: Drizzle
-                  slug: ai/ai-rules-neon-drizzle
-                - title: Neon Serverless
-                  slug: ai/ai-rules-neon-serverless
-                - title: Neon TypeScript SDK
-                  slug: ai/ai-rules-neon-typescript-sdk
-                - title: Neon Python SDK
-                  slug: ai/ai-rules-neon-python-sdk
-                - title: Neon API
-                  slug: ai/ai-rules-neon-api
-                - title: Neon Toolkit
-                  slug: ai/ai-rules-neon-toolkit
             - section: Build AI agents
               icon: openai
               items:
@@ -745,7 +733,7 @@
             - title: Develop
               items:
                 - title: Convex
-                  slug: guides/convex-neon
+                  slug: https://neon.com/guides/convex-neon
                 - title: GitHub integration
                   slug: guides/neon-github-integration
                 - title: Knex
@@ -879,7 +867,7 @@
                 - title: AWS Lambda
                   slug: guides/aws-lambda
                 - title: Azure Functions
-                  slug: guides/query-postgres-azure-functions
+                  slug: https://neon.com/guides/query-postgres-azure-functions
                 - title: Neon serverless driver
                   slug: serverless/serverless-driver
                 - title: Trigger serverless functions with Inngest

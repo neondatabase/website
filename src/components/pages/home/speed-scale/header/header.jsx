@@ -7,7 +7,7 @@ import LINKS from 'constants/links';
 const Header = () => (
   <div className="pt-60 xl:pt-40 lg:pt-[116px] md:pt-[102px]">
     <div className="max-w-[832px] xl:max-w-[704px] lg:max-w-[480px]">
-      <SectionLabel className="mb-5 text-gray-new-80 lg:mb-[18px] md:mb-4">
+      <SectionLabel className="mb-5 lg:mb-[18px] md:mb-4" theme="white">
         Agent platform
       </SectionLabel>
       <h2 className="text-[80px] leading-none tracking-tighter xl:text-[72px] lg:text-[52px] md:text-[36px]">

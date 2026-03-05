@@ -1,12 +1,12 @@
 ---
-title: Neon CLI commands — orgs
-subtitle: Use the Neon CLI to manage Neon organizations directly from the terminal
+title: 'Neon CLI command: orgs'
+subtitle: List and manage Neon organizations
 summary: >-
   How to manage organizations within the Neon CLI using the `orgs` command,
   including listing all associated organizations and utilizing various output
   formats.
 enableTableOfContents: true
-updatedOn: '2026-02-06T22:07:33.139Z'
+updatedOn: '2026-02-26T16:28:03.965Z'
 ---
 
 ## Before you begin

@@ -19,7 +19,7 @@ redirectFrom:
   - /docs/reference/billing-sample
   - /docs/introduction/legacy-plans
   - /docs/introduction/extra-usage
-updatedOn: '2026-02-19T02:27:13.546Z'
+updatedOn: '2026-02-27T19:55:46.378Z'
 ---
 
 Neon offers plans to support you at every stage, from your first prototype to production at scale.
@@ -55,7 +55,7 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | [Metrics/logs export](#metricslogs-export)            | —                            | —                                    | ✅                                                                                                |
 | [Instant restore](#instant-restore)                   | —                            | $0.20/GB-month                       | $0.20/GB-month                                                                                    |
 | [Restore window](#restore-window)                     | 6 hours, up to 1 GB-month    | Up to 7 days                         | Up to 30 days                                                                                     |
-| [Snapshots](#snapshots)                               | 1 snapshot                   | 10 snapshots                         | 10 snapshots                                                                                      |
+| [Snapshots](#snapshots)                               | 1 manual snapshot            | 10 manual snapshots                  | 10 manual snapshots                                                                               |
 | [Auth](#auth)                                         | Up to 60k MAU                | Up to 1M MAU                         | Up to 1M MAU                                                                                      |
 | [Private network transfer](#private-network-transfer) | —                            | —                                    | $0.01/GB                                                                                          |
 | [Compliance and security](#compliance-and-security)   | —                            | Protected branches                   | SOC 2, ISO, GDPR, [HIPAA](/docs/security/hipaa), Protected branches, IP Allow, Private Networking |
@@ -132,7 +132,7 @@ The maximum number of branches you can have per project:
 - **Launch**: 5,000 branches/project
 - **Scale**: 5,000 branches/project
 
-If you need more, [request an increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Branch%20limit%20increase).
+If you need more, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Branch%20limit%20increase%22).
 
 ### Compute
 
@@ -226,7 +226,7 @@ Even though child branch storage is capped at your logical data size, it's still
 
 **Storage per branch:**
 
-Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/?feedbackMessage=Storage%20limit%20increase).
+Paid plans (Launch and Scale) support a logical data size of up to **16 TB per branch**. To increase this limit, [request an increase in the feedback form in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Storage%20limit%20increase%22).
 
 ### Public network transfer
 
@@ -287,11 +287,13 @@ The restore window is configurable. Shortening it can reduce [instant restore](#
 
 Snapshots capture the state of your branch at a point in time. You can create snapshots manually or schedule automated backups.
 
-Snapshot limits per plan:
+The per-plan snapshot limit applies to **manual snapshots only**. On paid plans, snapshots created by backup schedules do not count toward this limit (scheduled backups are not available on the Free plan).
 
-- **Free**: 1 snapshot
-- **Launch**: 10 snapshots
-- **Scale**: 10 snapshots
+Manual snapshot limits per plan:
+
+- **Free**: 1 manual snapshot
+- **Launch**: 10 manual snapshots
+- **Scale**: 10 manual snapshots
 
 **Pricing**: Snapshots are provided free of charge during beta, and will be charged based on GB-month storage at a rate lower than standard project storage after GA.
 
@@ -304,8 +306,8 @@ Neon Auth is a managed authentication service built on [Better Auth](https://www
 Monthly Active User (MAU) limits per plan:
 
 - **Free**: Up to 60,000 MAU
-- **Launch**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/?feedbackMessage=MAU%20limit%20increase) if you need more)
-- **Scale**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/?feedbackMessage=MAU%20limit%20increase) if you need more)
+- **Launch**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
+- **Scale**: Up to 1M MAU ([request an increase in console](https://console.neon.tech/app/settings?modal=feedback&modalparams=%22Neon%20auth%20limit%20increase%22) if you need more)
 
 > An MAU (Monthly Active User) is a unique user who authenticates at least once during a monthly billing period.
 

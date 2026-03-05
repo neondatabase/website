@@ -1,11 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
-import Image from 'next/image';
 
 import Container from 'components/shared/container';
 import Link from 'components/shared/link';
 import LINKS from 'constants/links';
+import TimelineSvg from 'images/pages/about/timeline/timeline.inline.svg';
 
 const ITEMS = [
   {
@@ -50,10 +50,10 @@ const Timeline = () => (
   <section className="timeline safe-paddings overflow-hidden pb-[200px] pt-40 xl:pb-[184px] xl:pt-[136px] lg:pb-[136px] lg:pt-[88px] md:pb-[104px] md:pt-[72px]">
     <Container size="1600">
       <h2 className="mb-20 max-w-5xl indent-24 font-sans text-5xl font-normal leading-dense tracking-tighter xl:text-4xl lg:mb-14 lg:indent-16 lg:text-[28px] md:mb-11 md:indent-0 md:text-2xl">
-        Our mission{' '}
-        <span className="text-gray-new-60">
-          is to deliver Postgres as a cloud service designed to help teams build scalable,
-          dependable applications faster than ever.
+        Our mission is to deliver Postgres{' '}
+        <span className="text-gray-new-50">
+          as a cloud service designed to help teams build scalable, dependable applications faster
+          than ever.
         </span>
       </h2>
       <div className="no-scrollbars w-full sm:-mx-5 sm:-mt-2 sm:w-screen sm:overflow-x-auto sm:pb-2">
@@ -82,9 +82,9 @@ const Timeline = () => (
                   {item.link ? (
                     <Link
                       className={clsx(
-                        'text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
-                        'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white md:hover:decoration-white/40',
-                        'md:after:absolute md:after:inset-0',
+                        'relative text-xl font-normal leading-snug tracking-extra-tight text-white xl:text-lg md:text-[15px]',
+                        'underline decoration-white/40 decoration-dashed decoration-1 underline-offset-[6px] transition-[text-decoration-color] duration-200 hover:decoration-white',
+                        'after:absolute after:-inset-1.5',
                         index !== ITEMS.length - 1 && 'whitespace-nowrap'
                       )}
                       to={item.link}
@@ -106,14 +106,7 @@ const Timeline = () => (
               </li>
             ))}
           </ol>
-          <Image
-            className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8"
-            width={1536}
-            height={56}
-            src="/images/pages/about/timeline.svg"
-            aria-hidden="true"
-            alt=""
-          />
+          <TimelineSvg className="absolute bottom-[114px] -z-10 h-14 w-full object-fill xl:bottom-[104px] lg:bottom-[106px] lg:h-11 md:bottom-[79px] md:h-8" />
         </div>
       </div>
     </Container>

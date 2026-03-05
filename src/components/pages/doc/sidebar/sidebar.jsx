@@ -59,9 +59,9 @@ const Sidebar = ({ className = null, navigation, basePath, customType, sdkNaviga
       url={`${basePath}${currentSlug}`}
       sections={sdkTOC.sections}
     />
-  ) : (
+  ) : menu ? (
     <Menu basePath={basePath} {...menu} customType={customType} />
-  );
+  ) : null;
 
   return (
     <aside className={clsx('relative -mt-10', className)}>

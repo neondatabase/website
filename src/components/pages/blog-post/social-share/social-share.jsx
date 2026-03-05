@@ -35,11 +35,11 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
       'safe-paddings flex items-center justify-between lg:justify-start lg:space-x-5',
       className,
       {
-        'border-t border-white border-opacity-[0.06] pt-6': withTopBorder,
+        'border-t border-gray-new-15/70 pt-4': withTopBorder,
       }
     )}
   >
-    <span className="leading-none text-gray-new-80">Share:</span>
+    <span className="text-sm leading-none text-gray-new-70">Share:</span>
     <div className="flex shrink-0 space-x-5">
       {links.map(({ icon: Icon, tag: Tag, via, eventName }, index) => (
         <Tag
@@ -52,7 +52,7 @@ const SocialShare = ({ className = null, slug, title, withTopBorder = false }) =
             sendGtagEvent(eventName);
           }}
         >
-          <Icon className="h-4 w-4 text-white transition-colors duration-200 group-hover:text-[#47FFC2] lg:h-6 lg:w-6" />
+          <Icon className="h-4 w-4 text-gray-new-60 transition-colors duration-200 group-hover:text-white" />
         </Tag>
       ))}
     </div>

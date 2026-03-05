@@ -89,6 +89,25 @@ module.exports = {
         'import/prefer-default-export': 'off',
       },
     },
+    // Relaxes browser-oriented Airbnb rules for Node CLI scripts
+    {
+      files: ['src/scripts/**/*.js'],
+      rules: {
+        'no-console': 'off',
+        'no-restricted-syntax': 'off',
+        'no-use-before-define': 'off',
+        'no-await-in-loop': 'off',
+        'no-continue': 'off',
+        'no-underscore-dangle': 'off',
+        'no-param-reassign': 'off',
+        'no-plusplus': 'off',
+        'global-require': 'off',
+        'func-names': 'off',
+        'import/extensions': 'off',
+        'prefer-destructuring': 'off',
+        'no-cond-assign': ['error', 'except-parens'],
+      },
+    },
   ],
   settings: {
     'import/resolver': {

@@ -348,15 +348,18 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
             rm -f "$TEMP_BY_COMPONENT"
 
         else
-            # Standard tag-based releases (other repos)
-            for tag in $(git tag --sort=-creatordate | head -5); do
-                # Check if tag itself was created recently (using UTC dates)
-                tag_date=$(git log -1 --format=%aI "$tag" 2>/dev/null | cut -d'T' -f1)
-
-                if [[ "$tag_date" > "$SINCE_DATE_COMPARE" ]] || [[ "$tag_date" == "$SINCE_DATE_COMPARE" ]]; then
-                    prev=$(git describe --abbrev=0 "$tag^" 2>/dev/null || echo "")
-                    range="${prev:+$prev..}$tag"
-                    git log --oneline --no-merges "$range" --format="%s" | head -20 | \
+            # Standard tag-based releases (neonctl, neon-js, neon-api-python, serverless, etc.)
+            # No release PRs: only show merged PRs in the time window. Use tag creatordate (when the
+            # release was cut) and only the single most recent tag in the window so we don't aggregate
+            # multiple releases.
+            {
+                while read -r tag_date tag_name; do
+                    [[ -z "$tag_date" || -z "$tag_name" ]] && continue
+                    # Tag creatordate must be on or after the since date (YYYY-MM-DD comparison)
+                    [[ "$tag_date" < "$SINCE_DATE_COMPARE" ]] && continue
+                    prev=$(git describe --abbrev=0 "$tag_name^" 2>/dev/null || echo "")
+                    range="${prev:+$prev..}$tag_name"
+                    git log --since="$SINCE_DATE" --oneline --no-merges "$range" --format="%s" 2>/dev/null | head -30 | \
                     while read -r line; do
                         echo "$line" | grep -qE "^(chore\(release\)|Release)" && continue
                         pr=$(echo "$line" | grep -oE '#[0-9]+' | head -1 | tr -d '#' || echo "")
@@ -364,8 +367,9 @@ for i in $(seq 0 $((REPO_COUNT - 1))); do
                         echo "Uncategorized|$line"
                     done
                     FOUND_RELEASES=$((FOUND_RELEASES + 1))
-                fi
-            done | sort -u > "$TEMP_OUT"
+                    break
+                done < <(git for-each-ref refs/tags --sort=-creatordate --format='%(creatordate:short) %(refname:short)' 2>/dev/null | head -20)
+            } | sort -u > "$TEMP_OUT"
         fi
     fi
 
