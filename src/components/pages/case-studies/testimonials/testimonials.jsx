@@ -91,8 +91,8 @@ const Testimonials = () => (
             alt=""
             width={12}
             height={14}
-            aria-hidden
             className="sm:h-2.5 sm:w-2.5"
+            aria-hidden
           />
           <span className="font-mono text-xs font-medium uppercase leading-none text-[#303236] sm:text-[10px]">
             backed by giants
