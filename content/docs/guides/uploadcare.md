@@ -318,6 +318,5 @@ This pattern separates file storage and delivery (handled by Uploadcare) from st
 
 - [Uploadcare documentation](https://uploadcare.com/docs/)
 - [Uploadcare access control with signed URLs](https://uploadcare.com/docs/security/secure-delivery/)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>

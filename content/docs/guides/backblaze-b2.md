@@ -457,6 +457,5 @@ This pattern effectively separates file storage and delivery concerns (handled b
 - [Backblaze B2 S3 Compatible API](https://www.backblaze.com/docs/cloud-storage-s3-compatible-api)
 - [Backblaze B2 Application Keys](https://www.backblaze.com/docs/cloud-storage-application-keys)
 - [Neon documentation](/docs/introduction)
-- [Neon RLS](/docs/guides/neon-rls)
 
 <NeedHelp/>
