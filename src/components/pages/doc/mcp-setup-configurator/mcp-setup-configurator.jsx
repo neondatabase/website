@@ -33,7 +33,6 @@ const SCOPE_CATEGORIES = [
   'branches',
   'schema',
   'querying',
-  'performance',
   'neon_auth',
   'data_api',
   'docs',
