@@ -10,20 +10,7 @@ import highlight from 'lib/shiki';
 
 const SERVER_BASE = 'https://mcp.neon.tech';
 const PROD_LIST_TOOLS_URL = 'https://mcp.neon.tech/api/list-tools';
-const TRANSPORTS = [
-  {
-    id: 'mcp',
-    label: 'Streamable HTTP (/mcp)',
-    url: `${SERVER_BASE}/mcp`,
-    deprecated: false,
-  },
-  {
-    id: 'sse',
-    label: 'SSE (/sse)',
-    url: `${SERVER_BASE}/sse`,
-    deprecated: true,
-  },
-];
+const STREAMABLE_HTTP_URL = `${SERVER_BASE}/mcp`;
 const AUTH_MODES = [
   { id: 'oauth', label: 'OAuth' },
   { id: 'apiKey', label: 'API Key' },
@@ -151,7 +138,6 @@ HighlightedCode.propTypes = {
 
 const McpSetupConfigurator = () => {
   const [authMode, setAuthMode] = useState('oauth');
-  const [transport, setTransport] = useState('mcp');
   const [apiKey, setApiKey] = useState('');
   const [readOnly, setReadOnly] = useState(false);
   const [projectId, setProjectId] = useState('');
@@ -165,10 +151,6 @@ const McpSetupConfigurator = () => {
   const [lastSuccessfulAllTools, setLastSuccessfulAllTools] = useState(null);
   const [toolsReloadNonce, setToolsReloadNonce] = useState(0);
 
-  const currentTransport = useMemo(
-    () => TRANSPORTS.find((item) => item.id === transport) ?? TRANSPORTS[0],
-    [transport]
-  );
   const scopeSet = useMemo(() => new Set(SCOPE_CATEGORIES), []);
   const unknownScopes = useMemo(
     () => scopes.filter((scope) => !scopeSet.has(scope)),
@@ -203,16 +185,16 @@ const McpSetupConfigurator = () => {
       mcpServers: {
         Neon: {
           type: 'http',
-          url: currentTransport.url,
+          url: STREAMABLE_HTTP_URL,
           headers: generatedHeaders,
         },
       },
     };
     return JSON.stringify(config, null, 2);
-  }, [currentTransport.url, generatedHeaders]);
+  }, [generatedHeaders]);
 
   const addMcpCommand = useMemo(() => {
-    const commandParts = [`npx add-mcp@latest ${currentTransport.url}`, '--name Neon'];
+    const commandParts = [`npx add-mcp@latest ${STREAMABLE_HTTP_URL}`, '--name Neon'];
     if (generatedHeaders['X-Neon-Read-Only']) {
       commandParts.push(`--header "X-Neon-Read-Only: ${generatedHeaders['X-Neon-Read-Only']}"`);
     }
@@ -228,7 +210,7 @@ const McpSetupConfigurator = () => {
       commandParts.push(`--header "X-Neon-Project-Id: ${generatedHeaders['X-Neon-Project-Id']}"`);
     }
     return commandParts.join(' \\\n  ');
-  }, [authMode, currentTransport.url, generatedHeaders]);
+  }, [authMode, generatedHeaders]);
 
   const effectiveToolsPreview = useMemo(() => {
     if (toolsPreviewError && lastSuccessfulToolsPreview) return lastSuccessfulToolsPreview;
@@ -297,13 +279,7 @@ const McpSetupConfigurator = () => {
     return () => {
       cancelled = true;
     };
-  }, [
-    currentTransport.url,
-    generatedHeaders,
-    invalidHeaderNames.length,
-    unknownScopes.length,
-    toolsReloadNonce,
-  ]);
+  }, [generatedHeaders, invalidHeaderNames.length, unknownScopes.length, toolsReloadNonce]);
 
   return (
     <div className="my-5 rounded-xl border border-gray-new-90 dark:border-gray-new-20">
@@ -330,27 +306,6 @@ const McpSetupConfigurator = () => {
               OAuth is best when your client supports browser authorization. API key mode is better
               for headless or remote agent setups.
             </p>
-          </fieldset>
-
-          <fieldset className={OPTION_BLOCK_CLASS}>
-            <legend className="mb-2 text-xs font-semibold uppercase tracking-wide text-gray-new-40 dark:text-gray-new-60">
-              Transport
-            </legend>
-            <ToggleGroup
-              name="transport-mode"
-              options={TRANSPORTS.map((item) => ({ id: item.id, label: item.label }))}
-              value={transport}
-              onChange={setTransport}
-            />
-            <p className="mt-2 text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-60">
-              Use Streamable HTTP whenever available. Use SSE only for clients that do not support
-              Streamable HTTP yet.
-            </p>
-            {currentTransport.deprecated && (
-              <p className="mt-2 rounded-lg border border-secondary-3/40 bg-secondary-3/10 px-3 py-2 text-[13px] text-gray-new-20 dark:border-secondary-3/30 dark:bg-secondary-3/10 dark:text-gray-new-90">
-                SSE is deprecated by the MCP spec and is intended only as a fallback solution.
-              </p>
-            )}
           </fieldset>
 
           {authMode === 'apiKey' && (
@@ -549,6 +504,7 @@ const McpSetupConfigurator = () => {
           <CodeBlockWrapper
             className="rounded-lg border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10"
             as="div"
+            copyText={addMcpCommand}
           >
             <HighlightedCode code={addMcpCommand} language="bash" />
           </CodeBlockWrapper>
@@ -561,6 +517,7 @@ const McpSetupConfigurator = () => {
           <CodeBlockWrapper
             className="rounded-lg border border-gray-new-90 dark:border-gray-new-20 [&>pre]:my-0 [&>pre]:!bg-gray-new-98 [&>pre]:dark:!bg-gray-new-10"
             as="div"
+            copyText={generatedConfig}
           >
             <HighlightedCode code={generatedConfig} language="json" />
           </CodeBlockWrapper>
