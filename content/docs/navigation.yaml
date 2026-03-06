@@ -855,6 +855,8 @@
                       slug: guides/liquibase
                     - title: Developer workflow
                       slug: guides/liquibase-workflow
+                - title: pgfence
+                  slug: guides/pgfence
                 - title: Prisma
                   slug: guides/prisma-migrations
                 - title: Rails
