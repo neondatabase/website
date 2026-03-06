@@ -8,7 +8,7 @@ enableTableOfContents: true
 redirectFrom:
   - /docs/reference/about
   - /docs/api/about
-updatedOn: '2026-02-16T13:09:07.971Z'
+updatedOn: '2026-03-06T18:28:34.023Z'
 ---
 
 <CopyPrompt src="/prompts/neon-api-prompt.md" title="AI prompt: Get started with the Neon API"
