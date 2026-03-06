@@ -44,15 +44,15 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 
 ### Supported
 
-| Plugin                                                                                                                                            | Status                                                       |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [Email & password](https://www.better-auth.com/docs/authentication/email-password)                                                                | ✅ Supported                                                 |
-| Social OAuth ([Google](https://www.better-auth.com/docs/authentication/google), [GitHub](https://www.better-auth.com/docs/authentication/github)) | ✅ Supported                                                 |
-| [Email OTP](/docs/auth/guides/plugins/email-otp)                                                                                                  | ✅ Supported                                                 |
-| [Admin](/docs/auth/guides/plugins/admin)                                                                                                          | ✅ Supported                                                 |
-| [Organization](/docs/auth/guides/plugins/organization)                                                                                            | ⚠️ Partial (invitation emails, JWT token claims in progress) |
-| [JWT](/docs/auth/guides/plugins/jwt)                                                                                                              | ✅ Supported                                                 |
-| [Open API](/docs/auth/guides/plugins/openapi)                                                                                                     | ✅ Supported                                                 |
+| Plugin                                                                                                                                            | Status                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [Email & password](https://www.better-auth.com/docs/authentication/email-password)                                                                | ✅ Supported                                    |
+| Social OAuth ([Google](https://www.better-auth.com/docs/authentication/google), [GitHub](https://www.better-auth.com/docs/authentication/github)) | ✅ Supported                                    |
+| [Email OTP](/docs/auth/guides/plugins/email-otp)                                                                                                  | ✅ Supported                                    |
+| [Admin](/docs/auth/guides/plugins/admin)                                                                                                          | ✅ Supported                                    |
+| [Organization](/docs/auth/guides/plugins/organization)                                                                                            | ⚠️ Partial (JWT token claims under development) |
+| [JWT](/docs/auth/guides/plugins/jwt)                                                                                                              | ✅ Supported                                    |
+| [Open API](/docs/auth/guides/plugins/openapi)                                                                                                     | ✅ Supported                                    |
 
 ### On the roadmap
 
@@ -62,7 +62,7 @@ Neon Auth is built on [Better Auth](https://www.better-auth.com/). Not all Bette
 | Webhook support (hook into different auth events)                 | 🔜 Coming soon  |
 | Phone number (bring your own SMS provider)                        | 🔜 Coming soon  |
 | MFA support                                                       | 🔜 Coming soon  |
-| Plugin customization (Organization, Admin)                        | 🔜 Coming soon  |
+| [Admin](/docs/auth/guides/plugins/admin) plugin customization     | 🔜 Coming soon  |
 | Other plugins                                                     | Based on demand |
 
 ## Let us know
