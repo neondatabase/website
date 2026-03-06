@@ -463,6 +463,8 @@
                   slug: auth/guides/configure-domains
                 - title: Production checklist
                   slug: auth/production-checklist
+                - title: Manage Auth via the API
+                  slug: auth/guides/manage-auth-api
 
             - section: Plugins
               items:
@@ -1059,6 +1061,8 @@
           slug: introduction/monitor-usage
         - title: Cost optimization
           slug: introduction/cost-optimization
+        - title: Network transfer costs
+          slug: introduction/network-transfer
         - title: AWS Marketplace
           slug: introduction/billing-aws-marketplace
         - title: Azure Marketplace

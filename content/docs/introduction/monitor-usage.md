@@ -2,13 +2,13 @@
 title: Monitor billing and usage
 subtitle: Where to see usage and costs in the Console and via the API
 summary: >-
-  Learn where to monitor usage and costs for your Neon account: the Billing
-  page (account-level), Projects page (org-level), Project dashboard
-  (project-level), and the consumption metrics API for usage-based plans.
+  Learn where to monitor usage and costs for your Neon account: the Billing page
+  (account-level), Projects page (org-level), Project dashboard (project-level),
+  and the consumption metrics API for usage-based plans.
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2026-02-06T22:07:33.094Z'
+updatedOn: '2026-03-06T00:10:04.324Z'
 ---
 
 You can monitor usage and costs in the Neon Console or programmatically with the Neon API. For what each metric means and how it maps to your invoice, see [Usage metrics](/docs/introduction/plans#usage-metrics) and [Invoice metrics](/docs/introduction/plans#invoice-metrics) on the Plans page.
@@ -36,6 +36,10 @@ From the **Projects** page (Organization → **Projects**) you see an org-level 
 When you open a project, the **Project dashboard** (Project → **Dashboard**) shows the same four metrics for that project only: **Compute**, **Storage**, **History**, and **Network transfer**.
 
 Usage is shown since the start of the current billing period. Metrics may be delayed by about an hour and are not updated for inactive projects.
+
+<Admonition type="note">
+Network transfer metrics only appear on the Billing page when your usage exceeds the included allowance for your plan. To track network transfer before it results in charges, check the account usage panel on the **Projects** page, which always displays current usage. You can also monitor programmatically with the [Consumption API](/docs/guides/consumption-metrics). For more on network transfer, see [Network transfer](/docs/introduction/network-transfer).
+</Admonition>
 
 <Admonition type="note" title="Billing metrics for pre-2025 custom contract customers">
 If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply:
