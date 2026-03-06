@@ -6,6 +6,8 @@ summary: >-
   transformation processes.
 enableTableOfContents: true
 isDraft: false
+redirectFrom:
+  - /docs/import/import-from-mysql
 updatedOn: '2026-02-15T20:51:54.210Z'
 ---
 
