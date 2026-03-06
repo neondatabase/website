@@ -2,13 +2,13 @@
 title: Monitor billing and usage
 subtitle: Where to see usage and costs in the Console and via the API
 summary: >-
-  Learn where to monitor usage and costs for your Neon account: the Billing
-  page (account-level), Projects page (org-level), Project dashboard
-  (project-level), and the consumption metrics API for usage-based plans.
+  Learn where to monitor usage and costs for your Neon account: the Billing page
+  (account-level), Projects page (org-level), Project dashboard (project-level),
+  and the consumption metrics API for usage-based plans.
 enableTableOfContents: true
 redirectFrom:
   - /docs/introduction/billing
-updatedOn: '2026-02-06T22:07:33.094Z'
+updatedOn: '2026-03-06T00:10:04.324Z'
 ---
 
 You can monitor usage and costs in the Neon Console or programmatically with the Neon API. For what each metric means and how it maps to your invoice, see [Usage metrics](/docs/introduction/plans#usage-metrics) and [Invoice metrics](/docs/introduction/plans#invoice-metrics) on the Plans page.

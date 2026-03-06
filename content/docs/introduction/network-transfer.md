@@ -3,10 +3,10 @@ title: Reduce network transfer costs
 subtitle: Monitor and reduce data egress costs
 enableTableOfContents: true
 summary: >-
-  Covers the monitoring and reduction of network transfer (egress) costs in Neon,
-  detailing public and private transfer types, common causes of high usage,
-  Console and API monitoring options, and strategies to reduce transfer.
-updatedOn: '2026-02-02T00:00:00.000Z'
+  Covers the monitoring and reduction of network transfer (egress) costs in
+  Neon, detailing public and private transfer types, common causes of high
+  usage, Console and API monitoring options, and strategies to reduce transfer.
+updatedOn: '2026-03-06T00:10:04.325Z'
 ---
 
 Network transfer is one of the usage metrics that affects your Neon bill. This guide explains what network transfer is, what causes it to increase, how to monitor it, and how to reduce it. For broader cost guidance, see [Cost optimization](/docs/introduction/cost-optimization). For plan allowances and pricing, see [Plans](/docs/introduction/plans).
