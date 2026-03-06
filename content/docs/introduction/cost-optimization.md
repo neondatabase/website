@@ -163,7 +163,7 @@ Extra branches beyond your plan's allowance are billed at $1.50/branch-month, pr
 
 ## Public data transfer
 
-Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer.
+Public network transfer (egress) is the data sent from your databases over the public internet. Free plans include 5 GB/month. On paid plans, the first 100 GB/month is included, then $0.10/GB. You see no data transfer cost until you exceed that allowance, so the charge might show up unexpectedly if you're not monitoring data transfer. For a deeper look at what causes high network transfer and how to monitor it, see [Network transfer](/docs/introduction/network-transfer).
 
 **Optimization strategies:**
 

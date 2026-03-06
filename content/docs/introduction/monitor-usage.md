@@ -37,6 +37,10 @@ When you open a project, the **Project dashboard** (Project → **Dashboard**) s
 
 Usage is shown since the start of the current billing period. Metrics may be delayed by about an hour and are not updated for inactive projects.
 
+<Admonition type="note">
+Network transfer metrics only appear on the Billing page when your usage exceeds the included allowance for your plan. To track network transfer before it results in charges, check the account usage panel on the **Projects** page, which always displays current usage. You can also monitor programmatically with the [Consumption API](/docs/guides/consumption-metrics). For more on network transfer, see [Network transfer](/docs/introduction/network-transfer).
+</Admonition>
+
 <Admonition type="note" title="Billing metrics for pre-2025 custom contract customers">
 If you signed a contract with Neon prior to 01/01/2025, different billing metrics apply:
 - **Storage** is measured in GiBs instead of [GB-month](/docs/reference/glossary#gb-month), and if you exceed your contract's monthly storage allowance, extra storage units are automatically allocated and billed. Extra storage charges are applied based on the number of additional storage units needed to cover peak storage usage during the current billing period, prorated from the date the extra storage was allocated. Peak usage resets at the beginning of the next billing period.
