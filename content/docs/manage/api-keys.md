@@ -92,7 +92,7 @@ Navigate to your organization's **Settings** > **API keys** to view a list of ex
 
 <TabItem>
 
-To create an organization API key via the API, you need to use your personal API key. You also need to have admin-level permissions in the specified organization.
+To create an organization API key via the API, you need to use your personal API key. You also need to have admin-level permissions in the specified organization. This endpoint is rate limited to 10 requests per second; if you create many keys, throttle your requests or use retries with backoff.
 
 ```bash shouldWrap
 curl --request POST \

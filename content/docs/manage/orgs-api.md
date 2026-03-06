@@ -70,6 +70,8 @@ There are two types of organization API keys:
 
 The key token is only displayed once at creation time. Copy it immediately and store it securely. If lost, you’ll need to revoke the key and create a new one. For detailed instructions, see [Manage API Keys](/docs/manage/api-keys#create-an-organization-api-key).
 
+Organization API key creation (`POST /organizations/{org_id}/api_keys`) is rate limited to 10 requests per second. If you create keys in bulk, throttle your requests or use retries with backoff.
+
 [Try in API Reference](https://api-docs.neon.tech/reference/createorgapikey)
 
 ## List API keys
