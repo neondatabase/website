@@ -112,7 +112,7 @@ All events share a common JSON envelope:
 }
 ```
 
-The `user` object fields are all optional and vary by event. Available fields: `id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_verified`, `created_at`.
+The `user` object fields are all optional and vary by event. Available fields: `id`, `email`, `name`, `phone_number`, `image`, `email_verified`, `phone_number_verified`, `created_at`.
 
 ### `send.otp` event data
 
