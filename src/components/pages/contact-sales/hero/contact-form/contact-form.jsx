@@ -305,6 +305,7 @@ const ContactForm = () => {
         alt=""
         width={576}
         height={228}
+        priority
       />
       {isBroken && <ErrorMessage onClose={() => setIsBroken(false)} />}
     </form>
