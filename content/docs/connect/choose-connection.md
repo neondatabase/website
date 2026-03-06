@@ -1,135 +1,135 @@
 ---
-title: Choosing your driver and connection type
-subtitle: How to select the right driver and connection type for your application
+title: Choosing your connection method
+subtitle: Find the right driver and connection type for your deployment platform
 summary: >-
-  Covers the selection of the appropriate driver and connection type for
-  applications connecting to a Neon Postgres database, including options for
-  serverless environments and TCP-based connections.
+  Guides you to the right Postgres driver, connection type, and pooling strategy
+  based on your language, deployment platform, and runtime environment.
 enableTableOfContents: true
 updatedOn: '2026-02-15T20:51:54.064Z'
 ---
 
-When setting up your application’s connection to your Neon Postgres database, you need to make two main choices:
+Your connection method depends on where your code runs. Use the table below for a quick lookup, or read the scenario sections for detailed guidance.
 
-- **The right driver for your deployment** &#8212; Neon Serverless driver or a TCP-based driver
-- **The right connection type for your traffic** &#8212; pooled connections or direct connections
+## Quick reference by environment
 
-This flowchart will guide you through these selections.
+Each scenario is [described in detail](#find-your-scenario) further down the page.
 
-## Choosing your connection type: flowchart
+| Environment                                                                         | Recommended driver         | Pooling                                                                | Guide                                                   |
+| ----------------------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Any platform (non-JS/TS)](#not-using-javascript-or-typescript)                     | Native Postgres driver     | [Neon pooled connection](/docs/connect/connection-pooling)             | [Language guides](/docs/get-started/languages)          |
+| [Railway / Render / VPS / Docker](#running-on-a-long-lived-server-jsts)             | `pg` or `postgres.js`      | Client-side or [Neon pooling](/docs/connect/connection-pooling)        | [Framework guides](/docs/get-started/frameworks)        |
+| [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling)          | `pg` (node-postgres)       | [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods)  |
+| [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)            | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
+| [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
 
-![choose your connection type](/docs/connect/choose_connection.png)
+## Find your scenario
 
-## Choosing your connection type: drivers and pooling
+### Not using JavaScript or TypeScript?
 
-### Your first choice is which driver to use
+Use a standard TCP-based Postgres driver with a [pooled connection](/docs/connect/connection-pooling). Connect from a secure backend server using your language's native driver.
 
-- **Serverless**
+| Language/Framework  | Guide                                       |
+| ------------------- | ------------------------------------------- |
+| Django (Python)     | [Django](/docs/guides/django)               |
+| SQLAlchemy (Python) | [SQLAlchemy](/docs/guides/sqlalchemy)       |
+| Elixir Ecto         | [Elixir Ecto](/docs/guides/elixir-ecto)     |
+| Laravel (PHP)       | [Laravel](/docs/guides/laravel)             |
+| Ruby on Rails       | [Ruby on Rails](/docs/guides/ruby-on-rails) |
+| Go                  | [Go](/docs/guides/go)                       |
+| Rust                | [Rust](/docs/guides/rust)                   |
+| Java                | [Java](/docs/guides/java)                   |
 
-  If working in a serverless environment and connecting from a JavaScript or TypeScript application, we recommend using the [Neon Serverless Driver](/docs/serverless/serverless-driver). It handles dynamic workloads with high variability in traffic &#8212; for example, Vercel Edge Functions or Cloudflare Workers.
+For the full list, see [Language quickstarts](/docs/get-started/languages).
 
-- **TCP-based driver**
+### Running on a long-lived server (JS/TS)?
 
-  If you're not connecting from a JavaScript or TypeScript application or you are not developing a serverless application, use a traditional TCP-based Postgres driver. For example, if you’re using Node.js with a framework like Next.js, you can add the `pg` client to your dependencies, which serves as the Postgres driver for TCP connections.
+If you deploy a JavaScript or TypeScript app to Railway, Render, a VPS, Docker, or any self-hosted environment with persistent processes, use a standard TCP driver with [connection pooling](/docs/connect/connection-pooling). Your server can maintain a connection pool across requests, making TCP the fastest and most efficient option.
 
-#### HTTP or WebSockets
+Recommended drivers: [`pg` (node-postgres)](https://node-postgres.com/), [`postgres.js`](https://github.com/porsager/postgres), or [`Bun.SQL`](https://bun.com/docs/runtime/sql#postgresql).
 
-If you are using the serverless driver, you also need to choose whether to query over HTTP or WebSockets:
+### Deploying to Vercel or Cloudflare with platform pooling?
 
-- **HTTP**
+These platforms provide their own connection pooling, which makes standard TCP the best choice.
 
-  Querying over an HTTP [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) request is faster for single, non-interactive transactions, also referred to as "one-shot queries". Issuing [multiple queries](/docs/serverless/serverless-driver#issue-multiple-queries-with-the-transaction-function) via a single, non-interactive transaction is also supported. See [Use the driver over HTTP](/docs/serverless/serverless-driver#use-the-driver-over-http).
+**Vercel (Fluid compute):** Use `pg` (node-postgres) with [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions). Vercel Fluid keeps functions warm long enough to reuse TCP connections, so you skip the connection setup cost on subsequent requests. See the [Vercel connection methods guide](/docs/guides/vercel-connection-methods) for details.
 
-- **WebSockets**
+**Cloudflare (Hyperdrive):** Use `pg` (node-postgres) with [Hyperdrive](https://developers.cloudflare.com/hyperdrive/), which provides connection pooling for Workers. See the [Cloudflare Hyperdrive guide](/docs/guides/cloudflare-hyperdrive) for setup.
 
-  If you require session or interactive transaction support or compatibility with [node-postgres](https://node-postgres.com/) (the popular **npm** `pg` package), use WebSockets. See [Use the driver over WebSockets](/docs/serverless/serverless-driver#use-the-driver-over-websockets).
+### Deploying to another serverless or edge platform?
 
-### Next, choose your connection type: direct or pooled
+For platforms like Netlify Functions, Deno Deploy, or Cloudflare Workers (without Hyperdrive), use the [Neon serverless driver](/docs/serverless/serverless-driver) (`@neondatabase/serverless`). It connects over HTTP or WebSockets instead of TCP, reducing connection setup latency.
 
-You then need to decide whether to use direct connections or pooled connections (using PgBouncer for Neon-side pooling):
+Choose your transport based on your query pattern: use **HTTP** for single queries and non-interactive transactions, or **WebSocket** for interactive transactions and `node-postgres` compatibility. See [HTTP vs. WebSocket](#http-vs-websocket-serverless-driver) for details.
 
-- **In general, use pooled connections whenever you can**
+### Building a client-side app without a backend?
 
-  Pooled connections can efficiently manage high numbers of concurrent client connections, up to 10,000. This 10K ceiling works best for serverless applications and Neon-side connection pools that have many open connections, but infrequent and/or short transactions.
-
-- **Use direct (unpooled) connections if you need persistent connections**
-
-  If your application is focused mainly on tasks like migrations or administrative operations that require stable and long-lived connections, use an unpooled connection. Note that direct connections have limits based on your compute size (ranging from around 100 to 4,000 connections). For details on how this limit is calculated, see [Parameter settings that differ by compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
+Use the [Neon Data API](/docs/data-api/overview) via [`@neondatabase/neon-js`](https://www.npmjs.com/package/@neondatabase/neon-js). Browsers cannot open TCP connections to Postgres, so the Data API provides a secure HTTP interface with Row-Level Security support.
 
 <Admonition type="note">
-PgBouncer can keep many application connections open (up to 10,000) concurrently, but only a certain number of these can be actively querying the Postgres server at any given time. This number is defined by the PgBouncer `default_pool_size` setting. See [Neon PgBouncer configuration settings](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) for details.
+The Data API is currently in beta.
 </Admonition>
 
-For more information on these choices, see:
+See the [JavaScript SDK reference](/docs/reference/javascript-sdk) for full documentation.
 
-- [Neon Serverless Driver](/docs/serverless/serverless-driver)
-- [Connection pooling](/docs/connect/connection-pooling)
+## Understanding the options
 
-## Common Pitfalls
+### Pooled vs. direct connections
 
-Here are some key points to help you navigate potential issues.
-| Issue | Description |
-|----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Double pooling | **Neon-side pooling** uses PgBouncer to manage connections between your application and Postgres.<br /><br /> **Client-side pooling** occurs within the client library before connections are passed to PgBouncer.<br /><br />If you're using a pooled Neon connection (supported by PgBouncer), it's best to avoid client-side pooling. Let Neon handle the pooling to prevent retaining unused connections on the client side. If you must use client-side pooling, make sure that connections are released back to the pool promptly to avoid conflicts with PgBouncer. |
-| Understanding limits | Don't confuse `max_connections` with `default_pool_size`.<br /><br />`max_connections` is the maximum number of concurrent connections allowed by Postgres, determined by your [Neon compute size configuration](/docs/connect/connection-pooling#connection-limits-without-connection-pooling).<br /><br />`default_pool_size` is the maximum number of backend connections or transactions that PgBouncer supports per user/database pair, also determined by compute size <br /><br />Simply increasing your compute to get more `max_connections` may not improve performance if the bottleneck is actually on your `default_pool_size`. To increase your `default_pool_size`, contact [Support](/docs/introduction/support). |
-| Use request handlers | In serverless environments such as Vercel Edge Functions or Cloudflare Workers, WebSocket connections can't outlive a single request. That means Pool or Client objects must be connected, used and closed within a single request handler. Don't create them outside a request handler; don't create them in one handler and try to reuse them in another; and to avoid exhausting available connections, don't forget to close them. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.|
+A **pooled connection** routes traffic through PgBouncer, which manages a pool of reusable Postgres connections. Use pooled connections by default. They handle up to 10,000 concurrent client connections and work well for serverless apps and high-concurrency workloads.
 
-## Configuration
+A **direct connection** connects straight to Postgres without PgBouncer. Use direct connections for operations that require stable, long-lived connections or features PgBouncer does not support, such as:
 
-### Installing the Neon Serverless Driver
+- Schema migrations (Prisma Migrate, Drizzle Kit, django-admin migrate)
+- `CREATE INDEX CONCURRENTLY`
+- `LISTEN` / `NOTIFY`
+- Temporary tables or prepared statements across multiple queries
 
-You can install the driver with your preferred JavaScript package manager. For example:
+Direct connections are limited by `max_connections`, which ranges from about 100 to 4,000 depending on your [compute size](/docs/reference/compatibility#parameter-settings-that-differ-by-compute-size).
 
-```bash
-npm install @neondatabase/serverless
+You select pooled or direct by choosing the right connection string. Pooled strings include `-pooler` in the hostname:
+
+```text
+# Pooled
+postgresql://user:pass@ep-cool-rain-123456-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+# Direct
+postgresql://user:pass@ep-cool-rain-123456.us-east-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
 ```
 
-Find details on configuring the Neon Serverless Driver for querying over HTTP or WebSockets here:
+See [Connection pooling](/docs/connect/connection-pooling) for details.
 
-- [Use the driver over HTTP](/docs/serverless/serverless-driver#use-the-driver-over-http)
-- [Use the driver over WebSockets](/docs/serverless/serverless-driver#use-the-driver-over-websockets)
+### HTTP vs. WebSocket (serverless driver)
 
-### Installing traditional TCP-based drivers
+The [Neon serverless driver](/docs/serverless/serverless-driver) supports two transports:
 
-You can use standard Postgres client libraries or drivers. Neon is fully compatible with Postgres, so any application or utility that works with Postgres should work with Neon. Consult the integration guide for your particular language or framework for the right client for your needs:
+- **HTTP** uses `fetch` requests. It is faster for single queries (~3 round trips vs. ~8 for TCP) and supports non-interactive transactions. Choose HTTP when your queries are independent, one-shot operations.
+- **WebSocket** maintains a persistent connection within a request. It supports interactive transactions and is compatible with the `node-postgres` API (`Pool`, `Client`). Choose WebSocket when you need multi-step transactions or `pg` compatibility.
 
-- [Framework Quickstarts](/docs/get-started/frameworks)
-- [Language Quickstarts](/docs/get-started/languages)
+### Data API
 
-### Configuring the connection
+The [Data API](/docs/data-api/overview) provides a REST interface to your database over HTTP. It works in browsers, edge runtimes, and anywhere you can make HTTP requests. It integrates with Neon Auth and enforces PostgreSQL [Row-Level Security](/docs/guides/row-level-security), making it suitable for client-side apps that query the database directly.
 
-Setting up a direct or pooled connection is usually a matter of choosing the appropriate connection string and adding it to your application's `.env` file.
+## ORM compatibility
 
-You can get your connection string from the [Neon Console](/docs/connect/connect-from-any-app) or via CLI.
+Popular JavaScript and TypeScript ORMs work with Neon across all connection methods. For non-JS/TS ORMs (Django, SQLAlchemy, ActiveRecord, Ecto), use your language's native Postgres driver with a [pooled connection](#pooled-vs-direct-connections).
 
-For example, to get a pooled connection string via CLI:
+| ORM     | Supported drivers                               | Guide                                 |
+| ------- | ----------------------------------------------- | ------------------------------------- |
+| Drizzle | `pg`, `postgres.js`, `@neondatabase/serverless` | [Drizzle guide](/docs/guides/drizzle) |
+| Kysely  | `pg`, `postgres.js`, `@neondatabase/serverless` | [Kysely guide](/docs/guides/kysely)   |
+| Prisma  | `pg`, `@neondatabase/serverless`                | [Prisma guide](/docs/guides/prisma)   |
+| TypeORM | `pg`                                            | [TypeORM guide](/docs/guides/typeorm) |
 
-```bash shouldWrap
-neon connection-string --pooled true [branch_name]
+Choose the driver based on your platform (see the scenarios above), then configure your ORM to use it.
 
-postgres://alex:AbC123dEf@ep-cool-darkness-123456-pooler.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
+## Common pitfalls
 
-Notice the `-pooler` in the connection string; that's what differentiates a direct connection string from a pooled one.
-
-Here's an example of getting a direct connection string from the Neon CLI:
-
-```bash shouldWrap
-neon connection-string [branch_name]
-
-postgres://alex:AbC123dEf@ep-cool-darkness-123456.us-east-2.aws.neon.tech/dbname?sslmode=require&channel_binding=require
-```
-
-For more details, see [How to use connection pooling](/docs/connect/connection-pooling#how-to-use-connection-pooling).
-
-## Table summarizing your options
-
-Here is a table summarizing the options we've walked through on this page:
-
-|                 | Direct Connections                                                                                  | Pooled Connections                                                                                                                                                                                                                                                                                                                                | Serverless Driver (HTTP)                 | Serverless Driver (WebSocket)                 |
-| --------------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- | --------------------------------------------- |
-| **Use Case**    | Migrations, admin tasks requiring stable connections                                                | High number of concurrent client connections, efficient resource management                                                                                                                                                                                                                                                                       | One-shot queries, short-lived operations | Transactions requiring persistent connections |
-| **Scalability** | Limited by `max_connections` tied to [compute size](/docs/manage/computes#how-to-size-your-compute) | Up to 10,000 application connections (between your application and PgBouncer); however, only [`default_pool_size`](/docs/connect/connection-pooling#neon-pgbouncer-configuration-settings) backend connections (active transactions between PgBouncer and Postgres) are allowed per user/database pair. This limit can be increased upon request. | Automatically scales                     | Automatically scales                          |
-| **Performance** | Low overhead                                                                                        | Efficient for stable, high-concurrency workloads                                                                                                                                                                                                                                                                                                  | Optimized for serverless                 | Optimized for serverless                      |
+| Issue                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Double pooling       | **Neon-side pooling** uses PgBouncer to manage connections between your app and Postgres. **Client-side pooling** occurs within your driver before connections reach PgBouncer.<br /><br />If you use a pooled Neon connection, avoid adding client-side pooling on top. Let Neon handle it. If you must use client-side pooling, release connections back to the pool promptly to avoid conflicts with PgBouncer.                                                                                              |
+| Understanding limits | `max_connections` is the maximum number of concurrent Postgres connections, determined by your [compute size](/docs/connect/connection-pooling#connection-limits-without-connection-pooling). `default_pool_size` is the maximum number of backend connections PgBouncer maintains per user/database pair.<br /><br />Increasing your compute to raise `max_connections` may not help if `default_pool_size` is the bottleneck. To increase `default_pool_size`, contact [Support](/docs/introduction/support). |
+| Use request handlers | In serverless environments (Vercel Edge Functions, Cloudflare Workers), WebSocket connections cannot outlive a single request. Create, use, and close `Pool` or `Client` objects **within the same request handler**. Do not create them outside a handler or reuse them across handlers. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.                                                                                                     |
 
 <NeedHelp/>
