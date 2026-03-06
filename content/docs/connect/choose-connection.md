@@ -14,15 +14,15 @@ Your connection method depends on where your code runs. Use the table below for 
 
 Each scenario is [described in detail](#find-your-scenario) further down the page.
 
-| Environment | Recommended driver | Pooling | Guide |
-| --- | --- | --- | --- |
-| [Any platform (non-JS/TS)](#not-using-javascript-or-typescript) | Native Postgres driver | [Neon pooled connection](/docs/connect/connection-pooling) | [Language guides](/docs/get-started/languages) |
-| [Railway / Render / VPS / Docker](#running-on-a-long-lived-server-jsts) | `pg` or `postgres.js` | Client-side or [Neon pooling](/docs/connect/connection-pooling) | [Framework guides](/docs/get-started/frameworks) |
-| [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres) | [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods) |
-| [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres) | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/) | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive) |
-| [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform) | `@neondatabase/serverless` | N/A | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform) | `@neondatabase/serverless` | N/A | [Serverless driver](/docs/serverless/serverless-driver) |
-| [Client-side (browser)](#building-a-client-side-app-without-a-backend) | `@neondatabase/neon-js` | N/A | [Data API](/docs/data-api/overview) |
+| Environment                                                                         | Recommended driver         | Pooling                                                                | Guide                                                   |
+| ----------------------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- |
+| [Any platform (non-JS/TS)](#not-using-javascript-or-typescript)                     | Native Postgres driver     | [Neon pooled connection](/docs/connect/connection-pooling)             | [Language guides](/docs/get-started/languages)          |
+| [Railway / Render / VPS / Docker](#running-on-a-long-lived-server-jsts)             | `pg` or `postgres.js`      | Client-side or [Neon pooling](/docs/connect/connection-pooling)        | [Framework guides](/docs/get-started/frameworks)        |
+| [Vercel (Fluid)](#deploying-to-vercel-or-cloudflare-with-platform-pooling)          | `pg` (node-postgres)       | [`@vercel/functions`](https://www.npmjs.com/package/@vercel/functions) | [Vercel guide](/docs/guides/vercel-connection-methods)  |
+| [Cloudflare + Hyperdrive](#deploying-to-vercel-or-cloudflare-with-platform-pooling) | `pg` (node-postgres)       | [Hyperdrive](https://developers.cloudflare.com/hyperdrive/)            | [Hyperdrive guide](/docs/guides/cloudflare-hyperdrive)  |
+| [Cloudflare Workers](#deploying-to-another-serverless-or-edge-platform)             | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Netlify / Deno Deploy](#deploying-to-another-serverless-or-edge-platform)          | `@neondatabase/serverless` | N/A                                                                    | [Serverless driver](/docs/serverless/serverless-driver) |
+| [Client-side (browser)](#building-a-client-side-app-without-a-backend)              | `@neondatabase/neon-js`    | N/A                                                                    | [Data API](/docs/data-api/overview)                     |
 
 ## Find your scenario
 
@@ -30,16 +30,16 @@ Each scenario is [described in detail](#find-your-scenario) further down the pag
 
 Use a standard TCP-based Postgres driver with a [pooled connection](/docs/connect/connection-pooling). Connect from a secure backend server using your language's native driver.
 
-| Language/Framework  | Guide                                        |
-| ------------------- | -------------------------------------------- |
-| Django (Python)     | [Django](/docs/guides/django)                |
-| SQLAlchemy (Python) | [SQLAlchemy](/docs/guides/sqlalchemy)        |
+| Language/Framework  | Guide                                       |
+| ------------------- | ------------------------------------------- |
+| Django (Python)     | [Django](/docs/guides/django)               |
+| SQLAlchemy (Python) | [SQLAlchemy](/docs/guides/sqlalchemy)       |
 | Elixir Ecto         | [Elixir Ecto](/docs/guides/elixir-ecto)     |
-| Laravel (PHP)       | [Laravel](/docs/guides/laravel)              |
+| Laravel (PHP)       | [Laravel](/docs/guides/laravel)             |
 | Ruby on Rails       | [Ruby on Rails](/docs/guides/ruby-on-rails) |
-| Go                  | [Go](/docs/guides/go)                        |
-| Rust                | [Rust](/docs/guides/rust)                    |
-| Java                | [Java](/docs/guides/java)                    |
+| Go                  | [Go](/docs/guides/go)                       |
+| Rust                | [Rust](/docs/guides/rust)                   |
+| Java                | [Java](/docs/guides/java)                   |
 
 For the full list, see [Language quickstarts](/docs/get-started/languages).
 
@@ -115,21 +115,21 @@ The [Data API](/docs/data-api/overview) provides a REST interface to your databa
 
 Popular JavaScript and TypeScript ORMs work with Neon across all connection methods. For non-JS/TS ORMs (Django, SQLAlchemy, ActiveRecord, Ecto), use your language's native Postgres driver with a [pooled connection](#pooled-vs-direct-connections).
 
-| ORM | Supported drivers | Guide |
-| --- | --- | --- |
+| ORM     | Supported drivers                               | Guide                                 |
+| ------- | ----------------------------------------------- | ------------------------------------- |
 | Drizzle | `pg`, `postgres.js`, `@neondatabase/serverless` | [Drizzle guide](/docs/guides/drizzle) |
-| Kysely | `pg`, `postgres.js`, `@neondatabase/serverless` | [Kysely guide](/docs/guides/kysely) |
-| Prisma | `pg`, `@neondatabase/serverless` | [Prisma guide](/docs/guides/prisma) |
-| TypeORM | `pg` | [TypeORM guide](/docs/guides/typeorm) |
+| Kysely  | `pg`, `postgres.js`, `@neondatabase/serverless` | [Kysely guide](/docs/guides/kysely)   |
+| Prisma  | `pg`, `@neondatabase/serverless`                | [Prisma guide](/docs/guides/prisma)   |
+| TypeORM | `pg`                                            | [TypeORM guide](/docs/guides/typeorm) |
 
 Choose the driver based on your platform (see the scenarios above), then configure your ORM to use it.
 
 ## Common pitfalls
 
-| Issue | Description |
-| --- | --- |
-| Double pooling | **Neon-side pooling** uses PgBouncer to manage connections between your app and Postgres. **Client-side pooling** occurs within your driver before connections reach PgBouncer.<br /><br />If you use a pooled Neon connection, avoid adding client-side pooling on top. Let Neon handle it. If you must use client-side pooling, release connections back to the pool promptly to avoid conflicts with PgBouncer. |
+| Issue                | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Double pooling       | **Neon-side pooling** uses PgBouncer to manage connections between your app and Postgres. **Client-side pooling** occurs within your driver before connections reach PgBouncer.<br /><br />If you use a pooled Neon connection, avoid adding client-side pooling on top. Let Neon handle it. If you must use client-side pooling, release connections back to the pool promptly to avoid conflicts with PgBouncer.                                                                                              |
 | Understanding limits | `max_connections` is the maximum number of concurrent Postgres connections, determined by your [compute size](/docs/connect/connection-pooling#connection-limits-without-connection-pooling). `default_pool_size` is the maximum number of backend connections PgBouncer maintains per user/database pair.<br /><br />Increasing your compute to raise `max_connections` may not help if `default_pool_size` is the bottleneck. To increase `default_pool_size`, contact [Support](/docs/introduction/support). |
-| Use request handlers | In serverless environments (Vercel Edge Functions, Cloudflare Workers), WebSocket connections cannot outlive a single request. Create, use, and close `Pool` or `Client` objects **within the same request handler**. Do not create them outside a handler or reuse them across handlers. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details. |
+| Use request handlers | In serverless environments (Vercel Edge Functions, Cloudflare Workers), WebSocket connections cannot outlive a single request. Create, use, and close `Pool` or `Client` objects **within the same request handler**. Do not create them outside a handler or reuse them across handlers. See [Pool and Client](https://github.com/neondatabase/serverless?tab=readme-ov-file#pool-and-client) for details.                                                                                                     |
 
 <NeedHelp/>
