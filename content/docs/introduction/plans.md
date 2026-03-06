@@ -42,7 +42,8 @@ For AI agent platforms that provision thousands of databases, Neon offers an **A
 | Plan feature                                          | **Free**                     | **Launch**                           | **Scale**                                                                                         |
 | ----------------------------------------------------- | ---------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------- |
 | [Price](#price)                                       | $0/month                     | Pay for what you use                 | Pay for what you use                                                                              |
-| [Who it's for](#who-its-for)                          | Prototypes and side projects | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
+| [Who it's for](#who-its-for)                          | Prototypes, side projects, and small teams | Startups and growing teams           | Production-grade workloads and larger companies                                                   |
+| [Organization members](#organization-members)         | Unlimited                    | Unlimited                            | Unlimited                                                                                         |
 | [Projects](#projects)                                 | 100                          | 100                                  | 1,000 (can be increased on request)                                                               |
 | [Branches](#branches)                                 | 10/project                   | 10/project                           | 25/project                                                                                        |
 | [Extra branches](#extra-branches)                     | —                            | $1.50/branch-month (prorated hourly) | $1.50/branch-month (prorated hourly)                                                              |
@@ -82,9 +83,13 @@ On the **Free** plan, there is no monthly cost. You get usage allowances for pro
 
 ### Who it's for
 
-- **Free**: Prototypes, side projects, and quick experiments. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
+- **Free**: Prototypes, side projects, and small teams. Includes 100 projects, 100 CU-hours/project, 0.5 GB storage per branch, and 5 GB of egress. Upgrade if you need more resources or features.
 - **Launch**: Startups and growing teams needing more resources, features, and flexibility. Pay only for what you use.
 - **Scale**: Production-grade workloads and large teams. Higher limits, advanced features, full support, compliance, additional security, and SLAs. Pay only for what you use.
+
+### Organization members
+
+You can invite teammates to your organization and they'll have access to all projects within it. To invite members, go to the **People** page in your organization and click **Invite member**. See [Invite members](/docs/manage/orgs-manage#invite-members) for details.
 
 ### Projects
 
