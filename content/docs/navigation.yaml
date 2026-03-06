@@ -234,7 +234,7 @@
       items:
         - title: Connect to Neon
           slug: connect/connect-intro
-        - title: Drivers and connection types
+        - title: Choosing your connection method
           slug: connect/choose-connection
         - title: Connect from any app
           slug: connect/connect-from-any-app
