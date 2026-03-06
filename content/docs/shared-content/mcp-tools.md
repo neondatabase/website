@@ -57,6 +57,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `search`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
 - `fetch`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
 
+In project-scoped mode, `search` and `fetch` are not available.
+
 **Documentation and resources:**
 
 - `list_docs_resources`: Lists all available Neon documentation pages by fetching the docs index. Returns page URLs and titles that can be fetched individually using the `get_doc_resource` tool.

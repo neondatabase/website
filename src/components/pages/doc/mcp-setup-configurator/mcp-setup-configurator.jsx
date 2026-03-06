@@ -400,7 +400,7 @@ const McpSetupConfigurator = () => {
             />
             <span className="mt-2 block text-[13px] leading-relaxed text-gray-new-40 dark:text-gray-new-60">
               Restricts project-scoped tools to a single Neon project and hides project-wide
-              management actions.
+              management actions, plus `search` and `fetch`.
             </span>
           </label>
 
