@@ -67,7 +67,7 @@ List all schemas:
 \dn
 ```
 
-List all [stored procedures](/postgresql/postgresql-stored-procedures/) and functions:
+List all [stored procedures](/postgresql/postgresql-plpgsql/introduction-to-postgresql-stored-procedures) and functions:
 
 ```text
 \df
