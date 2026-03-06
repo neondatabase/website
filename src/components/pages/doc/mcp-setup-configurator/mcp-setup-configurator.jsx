@@ -48,9 +48,29 @@ const SUPPORTED_HEADER_NAMES = new Set([
 const OPTION_BLOCK_CLASS =
   'rounded-lg border border-gray-new-90 bg-white/70 p-4 dark:border-gray-new-20 dark:bg-gray-new-10/40';
 
+function normalizeListToolsUrl(rawUrl) {
+  if (!rawUrl) return null;
+
+  try {
+    const parsed = new URL(rawUrl);
+    if (parsed.pathname.endsWith('/api/list-tools')) {
+      return parsed.toString();
+    }
+    if (parsed.pathname.endsWith('/mcp') || parsed.pathname.endsWith('/sse')) {
+      parsed.pathname = '/api/list-tools';
+      return parsed.toString();
+    }
+    parsed.pathname = '/api/list-tools';
+    return parsed.toString();
+  } catch {
+    return rawUrl;
+  }
+}
+
 function getListToolsUrl(transportUrl) {
-  if (process.env.NEXT_PUBLIC_MCP_API_URL) {
-    return process.env.NEXT_PUBLIC_MCP_API_URL;
+  const envResolved = normalizeListToolsUrl(process.env.NEXT_PUBLIC_MCP_API_URL);
+  if (envResolved) {
+    return envResolved;
   }
   void transportUrl;
   return PREVIEW_LIST_TOOLS_URL;
