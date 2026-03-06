@@ -218,7 +218,9 @@ const McpSetupConfigurator = () => {
       commandParts.push(`--header "X-Neon-Read-Only: ${generatedHeaders['X-Neon-Read-Only']}"`);
     }
     if (authMode === 'apiKey') {
-      commandParts.push('--header "Authorization: Bearer $NEON_API_KEY"');
+      commandParts.push(
+        `--header "Authorization: ${generatedHeaders.Authorization || 'Bearer <NEON_API_KEY>'}"`
+      );
     }
     if (generatedHeaders['X-Neon-Scopes']) {
       commandParts.push(`--header "X-Neon-Scopes: ${generatedHeaders['X-Neon-Scopes']}"`);
@@ -358,7 +360,7 @@ const McpSetupConfigurator = () => {
                 API key
               </span>
               <input
-                type="password"
+                type="text"
                 value={apiKey}
                 placeholder="<NEON_API_KEY>"
                 className="w-full rounded-lg border border-gray-new-90 bg-white px-3 py-2 text-sm text-gray-new-20 outline-none transition-colors focus:border-secondary-8 dark:border-gray-new-20 dark:bg-gray-new-10 dark:text-gray-new-90 dark:focus:border-primary-1"
