@@ -381,12 +381,12 @@ const defaultConfig = {
       },
       {
         source: '/launchpad',
-        destination: 'https://pg.new',
+        destination: 'https://neon.new',
         permanent: false,
       },
       {
         source: '/instagres',
-        destination: 'https://pg.new',
+        destination: 'https://neon.new',
         permanent: false,
       },
       {
