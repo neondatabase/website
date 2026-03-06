@@ -67,7 +67,7 @@ const schema = yup
 const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90';
 const inputClassName =
   '!mt-0 !h-11 !rounded-none !border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-gray-new-50 placeholder:!text-gray-new-50 focus:!border-gray-new-90';
-const selectClassName = `${inputClassName} bg-[length:16px] bg-[center_right_12px] !pr-10`;
+const selectClassName = `${inputClassName} !pr-10`;
 const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px]`;
 
 const AZURE_MIGRATION_MESSAGE = "I'd like to migrate my Azure managed account.";
@@ -222,7 +222,7 @@ const ContactForm = () => {
         theme="transparent"
         labelClassName={labelClassName}
         inputClassName={clsx(
-          inputClassName,
+          selectClassName,
           errors.reasonForContact?.message && '!border-[#FF3621]/50'
         )}
         isDisabled={isDisabled}
@@ -300,7 +300,7 @@ const ContactForm = () => {
         </Button>
       </div>
       <Image
-        className="absolute bottom-0 right-0 -z-10"
+        className="absolute -bottom-px -right-px -z-10"
         src={formPattern}
         alt=""
         width={576}
