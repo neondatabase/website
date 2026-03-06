@@ -116,14 +116,14 @@ The `user` object fields are all optional and vary by event. Available fields: `
 
 ### `send.otp` event data
 
-| Field                 | Type              | Description                                                |
-| --------------------- | ----------------- | ---------------------------------------------------------- |
-| `otp_code`            | string            | 6-digit OTP code                                           |
+| Field                 | Type              | Description                                                 |
+| --------------------- | ----------------- | ----------------------------------------------------------- |
+| `otp_code`            | string            | 6-digit OTP code                                            |
 | `otp_type`            | string            | `"sign-in"`, `"email-verification"`, or `"forget-password"` |
-| `delivery_preference` | string (optional) | `"email"` or `"sms"`                                       |
-| `expires_at`          | ISO datetime      | Expiry time                                                |
-| `ip_address`          | string            | Requester's IP address                                     |
-| `user_agent`          | string            | Requester's user agent                                     |
+| `delivery_preference` | string (optional) | `"email"` or `"sms"`                                        |
+| `expires_at`          | ISO datetime      | Expiry time                                                 |
+| `ip_address`          | string            | Requester's IP address                                      |
+| `user_agent`          | string            | Requester's user agent                                      |
 
 ### `send.magic_link` event data
 
@@ -142,11 +142,11 @@ Magic links do not include a `delivery_preference` field. Your webhook handler d
 
 These events fire only when a new user record is created in the database. They do not fire on subsequent sign-ins, including returning OAuth users.
 
-| Field             | Type              | Description                                           |
-| ----------------- | ----------------- | ----------------------------------------------------- |
-| `auth_provider`   | string            | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
-| `ip_address`      | string            | Requester's IP address                                |
-| `user_agent`      | string            | Requester's user agent                                |
+| Field           | Type   | Description                                           |
+| --------------- | ------ | ----------------------------------------------------- |
+| `auth_provider` | string | `"credential"`, `"google"`, `"github"`, or `"vercel"` |
+| `ip_address`    | string | Requester's IP address                                |
+| `user_agent`    | string | Requester's user agent                                |
 
 ## Signature verification
 
