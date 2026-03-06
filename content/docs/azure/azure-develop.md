@@ -7,7 +7,7 @@ summary: >-
   Neon resources.
 enableTableOfContents: true
 isDraft: false
-updatedOn: '2026-03-05T04:12:51.001Z'
+updatedOn: '2026-03-06T22:26:50.810Z'
 ---
 
 <Admonition type="important" title="deprecated">
