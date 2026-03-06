@@ -35,6 +35,7 @@ function extractTextFromNode(node) {
 const CodeBlockWrapper = ({
   className = '',
   copyButtonClassName = '',
+  copyText = null,
   filename = null,
   trackingLabel = null,
   children,
@@ -43,7 +44,8 @@ const CodeBlockWrapper = ({
 }) => {
   const { isCopied, handleCopy } = useCopyToClipboard(3000);
 
-  const code = extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
+  const code =
+    copyText ?? extractTextFromNode(children).replace(/(\n)?__line_removed_in_code__(\n)?/g, '');
 
   const handleCopyWithTracking = () => {
     handleCopy(code);
@@ -95,6 +97,7 @@ export default CodeBlockWrapper;
 CodeBlockWrapper.propTypes = {
   className: PropTypes.string,
   copyButtonClassName: PropTypes.string,
+  copyText: PropTypes.string,
   filename: PropTypes.string,
   trackingLabel: PropTypes.string,
   children: PropTypes.node,

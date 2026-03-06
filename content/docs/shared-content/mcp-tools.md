@@ -37,7 +37,7 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 - `prepare_database_migration`: Initiates a database migration process. Critically, it creates a temporary branch to apply and test the migration safely before affecting the main branch.
 - `complete_database_migration`: Finalizes and applies a prepared database migration to the main branch. This action merges changes from the temporary migration branch and cleans up temporary resources.
 
-**Query performance optimization:**
+**SQL querying and optimization:**
 
 - `list_slow_queries`: Identifies performance bottlenecks by finding the slowest queries in a database. Requires the pg_stat_statements extension.
 - `explain_sql_statement`: Provides detailed execution plans for SQL queries to help identify performance bottlenecks.
@@ -56,6 +56,8 @@ The Neon MCP Server provides the following actions, which are exposed as "tools"
 
 - `search`: Searches across organizations, projects, and branches matching a query. Returns IDs, titles, and direct links to the Neon Console.
 - `fetch`: Fetches detailed information about a specific organization, project, or branch using an ID (typically from the search tool).
+
+In project-scoped mode, `search` and `fetch` are not available.
 
 **Documentation and resources:**
 
