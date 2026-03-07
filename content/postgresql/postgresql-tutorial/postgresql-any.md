@@ -120,11 +120,11 @@ SELECT * FROM managers;
 Output:
 
 ```text
- id | first_name | last_name |  type   |  salary
+ id | first_name | last_name |  salary
 ----+------------+-----------+---------+----------
-  1 | John       | Doe       | manager | 60000.00
-  2 | Jane       | Smith     | manager | 55000.00
-  3 | Alice      | Johnson   | manager | 58000.00
+  1 | John       | Doe       |  60000.00
+  2 | Jane       | Smith     |  55000.00
+  3 | Alice      | Johnson   |  58000.00
 (3 rows)
 ```
 
