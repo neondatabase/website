@@ -99,12 +99,9 @@ For detailed information on pricing and plans, refer to [Neon plans](/docs/intro
 
 ### Downgrade to Free plan
 
-You can only have one Free organization per account, and Free orgs are just for personal use (no team members). If you already have a Free org, you can't downgrade another org to Free; you'll see an error if you try.
+You can have multiple free organizations (up to 1,000 per account), and each free organization can have up to 1,000 members. You can downgrade an organization to the Free plan even if it has multiple members.
 
-To downgrade, your org must:
-
-- Have only one member (just you)
-- Stay within Free plan limits (storage, projects, branches, etc.)
+To downgrade, your org must stay within [Free plan limits](/docs/introduction/plans) (storage, projects, branches, and so on). If you have already reached the maximum number of free organizations for your account, you'll see an error and cannot downgrade another org to Free until you delete or leave a free org.
 
 If you need help or think you should be able to downgrade, use the **Request support** option during the downgrade process.
 

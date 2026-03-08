@@ -46,7 +46,7 @@ To transfer your projects to a Neon-managed organization:
 
 If you have multiple admins, coordinate to decide which Neon-managed organization will be your shared destination:
 
-- **Free plan** users can use their existing Neon-managed organization, or upgrade to a paid plan to create an additional organization (you can only have one free organization).
+- **Free plan** users can use their existing Neon-managed organization, or upgrade to a paid plan to create an additional organization. You can have multiple free organizations (up to 1,000 per account).
 - **Paid plan** users can upgrade their existing Neon-managed organization, or create a new paid organization.
 
 ## Upgrade your Neon plan (paid users only)
