@@ -268,7 +268,7 @@ LIMIT 10;
 </Tabs>
 
 <Admonition type="tip">
-Statistics in `pg_stat_statements` accumulate until the compute restarts. In Neon, scaling to zero clears all statistics, so computes that recently woke up already have fresh data. For long-running computes, you can run `SELECT pg_stat_statements_reset();` to clear statistics before a specific time window you want to measure. This resets stats for all roles, so coordinate with anyone else who relies on them.
+In Neon, [scaling to zero](/docs/introduction/scale-to-zero) clears [`pg_stat_statements`](/docs/extensions/pg_stat_statements) data, so computes that recently woke up already have fresh statistics. For long-running computes, run `SELECT pg_stat_statements_reset();` to start a clean measurement window. This cannot be undone and resets stats for all database roles.
 </Admonition>
 
 For wire-level analysis of exact message sizes, see [Elephantshark](https://neon.com/blog/elephantshark-monitor-postgres-network-traffic), an open-source Postgres traffic monitor from Neon.
