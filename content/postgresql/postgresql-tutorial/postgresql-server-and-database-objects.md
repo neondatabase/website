@@ -26,7 +26,7 @@ When you install a PostgreSQL instance, you will have a corresponding PostgreSQL
 
 ## Databases
 
-A database is a container of other objects such as tables, [views](../postgresql-views), [functions](/postgresql/postgresql-stored-procedures/), and [indexes](../postgresql-indexes). You can create as many databases as you want inside a PostgreSQL server.
+A database is a container of other objects such as tables, [views](../postgresql-views), [functions](/postgresql/postgresql-plpgsql/postgresql-create-function), [stored procedures](/postgresql/postgresql-plpgsql/postgresql-create-procedure), and [indexes](../postgresql-indexes). You can create as many databases as you want inside a PostgreSQL server.
 
 ![](/postgresqltutorial/postgresql-databases.png)
 
