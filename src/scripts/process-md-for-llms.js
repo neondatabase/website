@@ -1487,11 +1487,60 @@ async function buildAggregatedChangelogMarkdown(rootDir) {
     const changelogPath = path.join(changelogDir, fileName);
     const slug = fileName.replace(/\.md$/, '');
     const raw = await fs.readFile(changelogPath, 'utf-8');
-    const { content } = matter(raw);
-    sections.push(`\n---\n\n### ${slug}\n\n${content.trim()}\n`);
+    const previousFile = currentFile;
+    let markdown = '';
+    currentFile = changelogPath;
+
+    try {
+      const entryPageUrl = `${BASE_URL}/docs/changelog/${slug}`;
+      ({ markdown } = await processRawMdx(raw, entryPageUrl));
+    } finally {
+      currentFile = previousFile;
+    }
+
+    sections.push(`\n---\n\n### ${slug}\n\n${markdown}\n`);
   }
 
   return `${sections.join('')}\n`;
+}
+
+/**
+ * Run the shared MDX -> markdown pipeline on raw file contents.
+ * Used by both single-file processing and aggregated changelog generation.
+ */
+async function processRawMdx(raw, pageUrl) {
+  await loadDependencies();
+
+  // Pre-fetch any external code URLs before MDX transformation.
+  await prefetchExternalCode(raw);
+
+  const { data: frontmatter, content } = matter(raw);
+
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkMdx)
+    .use(remarkTransformMdxComponents)
+    .use(remarkCleanCodeBlocks)
+    .use(remarkAbsoluteUrls, pageUrl);
+
+  const tree = processor.parse(content);
+  processor.runSync(tree);
+
+  let markdown = toMarkdown(tree, getMarkdownOptions());
+
+  // Convert any remaining relative URLs to absolute (catches URLs in serialized content)
+  markdown = markdown.replace(/\]\(\/([^)]+)\)/g, `](${BASE_URL}/$1)`);
+
+  // Also convert anchor-only links in serialized content
+  if (pageUrl) {
+    markdown = markdown.replace(/\]\(#([^)]+)\)/g, `](${pageUrl}#$1)`);
+  }
+
+  return {
+    frontmatter,
+    markdown: markdown.trim(),
+  };
 }
 
 /**
@@ -1567,8 +1616,6 @@ async function prefetchExternalCode(content) {
  * @param {string} [rootDir] - Project root directory (for shared content)
  */
 async function processFile(inputPath, pageUrl, rootDir) {
-  await loadDependencies();
-
   // Set current file for error reporting
   currentFile = inputPath;
 
@@ -1578,35 +1625,7 @@ async function processFile(inputPath, pageUrl, rootDir) {
   }
 
   const raw = await fs.readFile(inputPath, 'utf-8');
-
-  // Pre-fetch any external code URLs
-  await prefetchExternalCode(raw);
-
-  // Extract frontmatter
-  const { data: frontmatter, content } = matter(raw);
-
-  // Parse MDX into AST
-  const processor = unified()
-    .use(remarkParse)
-    .use(remarkGfm)
-    .use(remarkMdx)
-    .use(remarkTransformMdxComponents)
-    .use(remarkCleanCodeBlocks)
-    .use(remarkAbsoluteUrls, pageUrl);
-
-  const tree = processor.parse(content);
-  processor.runSync(tree);
-
-  // Serialize back to markdown with shared options (includes custom text handler)
-  let markdown = toMarkdown(tree, getMarkdownOptions());
-
-  // Convert any remaining relative URLs to absolute (catches URLs in serialized content)
-  markdown = markdown.replace(/\]\(\/([^)]+)\)/g, `](${BASE_URL}/$1)`);
-
-  // Also convert anchor-only links in serialized content
-  if (pageUrl) {
-    markdown = markdown.replace(/\]\(#([^)]+)\)/g, `](${pageUrl}#$1)`);
-  }
+  const { frontmatter, markdown } = await processRawMdx(raw, pageUrl);
 
   // Build output with frontmatter-based header
   let output = '';
