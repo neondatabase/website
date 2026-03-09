@@ -64,7 +64,9 @@ const Sidebar = ({ isClient, isDocs, className }) => (
         <Icon
           width={18}
           height={18}
-          className={!isDocs && 'text-gray-new-90 transition-colors group-hover:text-gray-new-80'}
+          className={
+            !isDocs ? 'text-gray-new-90 transition-colors group-hover:text-gray-new-80' : undefined
+          }
         />
         {!isDocs && (
           <span className="text-sm leading-none tracking-extra-tight">

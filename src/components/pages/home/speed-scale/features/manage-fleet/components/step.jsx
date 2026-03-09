@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-const Step = ({ index, title, children, lineAnimation }) => (
+const Step = ({ index, title, children, lineAnimation = undefined }) => (
   <div className="relative pl-16 2xl:pl-[50px] xl:pl-11 lg:pl-[56px] sm:pl-7">
     <span className="absolute left-0 top-0 h-full w-10 xl:w-7 lg:w-8 sm:w-4">
       <span
@@ -45,10 +45,6 @@ Step.propTypes = {
     animate: PropTypes.object,
     transition: PropTypes.object,
   }),
-};
-
-Step.defaultProps = {
-  lineAnimation: undefined,
 };
 
 export default Step;
