@@ -2,7 +2,6 @@
 
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { yupResolver } from '@hookform/resolvers/yup';
-import clsx from 'clsx';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -66,7 +65,7 @@ const schema = yup
 
 const labelClassName = 'text-[15px] leading-snug tracking-tight text-gray-new-90';
 const inputClassName =
-  '!mt-0 !h-11 !rounded-none !border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-gray-new-50 placeholder:!text-gray-new-50 focus:!border-gray-new-90';
+  '!mt-0 !h-11 !rounded-none border-gray-new-20 !bg-black-pure !px-4 !text-base !leading-snug !tracking-tight text-gray-new-50 placeholder:!text-gray-new-50 focus:border-gray-new-90';
 const selectClassName = `${inputClassName} !pr-10`;
 const textareaClassName = `${inputClassName} !min-h-[132px] !items-start !py-[11px] xl:!min-h-[120px]`;
 
@@ -150,7 +149,7 @@ const ContactForm = () => {
 
   return (
     <form
-      className="relative z-10 grid grid-cols-2 gap-6 gap-y-6 border border-gray-new-20 bg-black-pure/80 px-8 py-7 xl:gap-5 xl:px-7 xl:py-6 lg:max-w-full md:grid-cols-1 md:px-5 md:py-5"
+      className="relative z-10 grid grid-cols-2 gap-6 gap-y-6 overflow-hidden border border-gray-new-20 bg-black-pure/80 px-8 py-7 xl:gap-5 xl:px-7 xl:py-6 lg:max-w-full md:grid-cols-1 md:px-5 md:py-5"
       method="POST"
       id="contact-sales-form"
       onSubmit={handleSubmit(onSubmit)}
@@ -164,7 +163,7 @@ const ContactForm = () => {
         placeholder="Marques"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(inputClassName, errors.firstname?.message && '!border-[#FF3621]/50')}
+        inputClassName={inputClassName}
         error={errors.firstname?.message}
         isDisabled={isDisabled}
         {...register('firstname')}
@@ -178,7 +177,7 @@ const ContactForm = () => {
         placeholder="Hansen"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(inputClassName, errors.lastname?.message && '!border-[#FF3621]/50')}
+        inputClassName={inputClassName}
         error={errors.lastname?.message}
         isDisabled={isDisabled}
         {...register('lastname')}
@@ -193,7 +192,7 @@ const ContactForm = () => {
         placeholder="info@acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(inputClassName, errors.email?.message && '!border-[#FF3621]/50')}
+        inputClassName={inputClassName}
         isDisabled={isDisabled}
         error={errors.email?.message}
         {...register('email')}
@@ -206,10 +205,7 @@ const ContactForm = () => {
         placeholder="acme.com"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(
-          inputClassName,
-          errors.companyWebsite?.message && '!border-[#FF3621]/50'
-        )}
+        inputClassName={inputClassName}
         isDisabled={isDisabled}
         {...register('companyWebsite')}
       />
@@ -221,10 +217,7 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(
-          selectClassName,
-          errors.reasonForContact?.message && '!border-[#FF3621]/50'
-        )}
+        inputClassName={selectClassName}
         isDisabled={isDisabled}
         error={errors.reasonForContact?.message}
         {...register('reasonForContact')}
@@ -242,10 +235,7 @@ const ContactForm = () => {
         tag="select"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(
-          selectClassName,
-          errors.companySize?.message && '!border-[#FF3621]/50'
-        )}
+        inputClassName={selectClassName}
         isDisabled={isDisabled}
         error={errors.companySize?.message}
         {...register('companySize')}
@@ -266,15 +256,15 @@ const ContactForm = () => {
         tag="textarea"
         theme="transparent"
         labelClassName={labelClassName}
-        inputClassName={clsx(textareaClassName, errors.message?.message && '!border-[#FF3621]/50')}
+        inputClassName={textareaClassName}
         isDisabled={isDisabled}
         error={errors.message?.message}
         placeholder="Your message..."
         {...register('message')}
       />
 
-      <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 md:flex-col md:items-start md:gap-4">
-        <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 md:max-w-full">
+      <div className="relative z-0 col-span-full mt-1 flex items-end justify-between gap-6 sm:flex-col sm:items-start sm:gap-4">
+        <p className="max-w-[300px] text-sm leading-[1.5] tracking-tight text-gray-new-60 sm:max-w-full">
           By submitting you agree to the{' '}
           <Link className="decoration-dashed" to={LINKS.terms} theme="grey-85-underlined">
             Terms Service
@@ -286,7 +276,7 @@ const ContactForm = () => {
           .
         </p>
         <Button
-          className="!h-10 min-w-[152px] px-10 text-base font-medium tracking-tight md:w-full md:min-w-0"
+          className="!h-10 min-w-[152px] px-10 text-base font-medium tracking-tight sm:w-full sm:min-w-0"
           type="submit"
           theme="white-filled"
           size="new"
@@ -300,7 +290,7 @@ const ContactForm = () => {
         </Button>
       </div>
       <Image
-        className="absolute -bottom-px -right-px -z-10"
+        className="absolute -bottom-px -right-px -z-10 max-w-none"
         src={formPattern}
         alt=""
         width={576}

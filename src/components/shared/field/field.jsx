@@ -74,9 +74,11 @@ const Field = forwardRef(
                 Tag === FIELD_TAGS.SELECT,
             },
             Tag === FIELD_TAGS.TEXTAREA && textareaClassName,
-            error ? '!border-secondary-1' : 'focus:border-primary-1',
+            !error && 'focus:border-primary-1',
             isDisabled && '!cursor-default',
-            inputClassName
+            inputClassName,
+            error &&
+              (errorTheme === 'tooltip' ? '!border-[#FF3621]/50' : '!border-secondary-1')
           )}
           ref={ref}
           id={theme === 'checkbox' ? value : name}
