@@ -70,7 +70,7 @@ const BlogPostCard = ({
         <Link
           className={clsx(
             'group overflow-hidden bg-[#181818]',
-            isSmart ? 'shrink-0' : 'aspect-[16/9] w-full',
+            isSmart ? 'shrink-0' : 'aspect-[40/21] w-full',
             fullSize && 'min-w-0 flex-1 basis-[42%] self-start'
           )}
           to={link}
@@ -97,9 +97,9 @@ const BlogPostCard = ({
           'flex min-w-0 flex-col md:w-full',
           fullSize && largeCover ? '' : 'mr-auto',
           !isFeatured &&
-            'basis-[58%] max-w-[684px] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
+            'max-w-[684px] basis-[58%] pr-20 lt:max-w-none lt:pr-8 lg:pr-0 md:w-full md:basis-auto',
           isSmart &&
-            '!w-[424px] shrink-0 2xl:!w-auto 2xl:shrink 2xl:min-w-0 flex-col-reverse 2xl:!pr-0 md:!w-full md:gap-y-3'
+            '!w-[424px] shrink-0 flex-col-reverse 2xl:!w-auto 2xl:min-w-0 2xl:shrink 2xl:!pr-0 md:!w-full md:gap-y-3'
         )}
       >
         <div

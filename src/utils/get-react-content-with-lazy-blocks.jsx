@@ -213,7 +213,12 @@ export default function getReactContentWithLazyBlocks(content, pageComponents, i
           const props = transformProps(attributesToProps(domNode.attribs));
           const children = domToReact(domNode.children);
           return (
-            <video {...props} crossOrigin="anonymous">
+            <video
+              {...props}
+              playsInline={props.playsInline ?? true}
+              webkit-playsinline={props['webkit-playsinline'] ?? 'true'}
+              crossOrigin="anonymous"
+            >
               {children}
             </video>
           );

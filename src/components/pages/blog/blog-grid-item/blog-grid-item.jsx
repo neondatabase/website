@@ -12,15 +12,15 @@ const BlogGridItem = ({ className, post, category, isPriority, isFeatured }) => 
       className={clsx(
         'last:pb-0',
         isFeatured
-          ? 'pb-10 !pt-0'
-          : 'col-span-full border-t border-gray-new-20 py-8 md:py-6 first-of-type:border-0 first-of-type:pt-0',
+          ? '!pt-0 pb-10'
+          : 'col-span-full border-t border-gray-new-20 py-8 first-of-type:border-0 first-of-type:pt-0 md:py-6',
         className
       )}
       category={category}
       isFeatured={isFeatured}
       fullSize={!isFeatured}
       imageWidth={isFeatured ? 560 : 336}
-      imageHeight={isFeatured ? 315 : 189}
+      imageHeight={isFeatured ? 294 : 176}
       isPriority={isPriority}
       withAuthorPhoto
       {...postProps}
